@@ -35,6 +35,7 @@ Directory: Folder
 Delete: Trash
 DeliveryBox: MailShare
 DnsZone: Network
+DnsSubZone: Subtask
 Domain: World
 Download: Download
 Edit: Edit

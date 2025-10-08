@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ClearPropsContext,
   type ClearPropsContextProps,
-} from "@/components/ClearPropsContext";
+} from "@/components/ClearPropsContext/ClearPropsContext";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ClearPropsContextView: FC<ClearPropsContextProps> = memo((props) => {

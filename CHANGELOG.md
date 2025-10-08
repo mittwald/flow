@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.509](https://github.com/mittwald/flow/compare/0.2.0-alpha.508...0.2.0-alpha.509) (2025-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.508](https://github.com/mittwald/flow/compare/0.2.0-alpha.507...0.2.0-alpha.508) (2025-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.507](https://github.com/mittwald/flow/compare/0.2.0-alpha.506...0.2.0-alpha.507) (2025-10-07)
+
+### Bug Fixes
+
+* **Ext-Bridge:** fix validation issue in session token ([b288441](https://github.com/mittwald/flow/commit/b2884417048e0f1be1b22da48b4e2c14404f28d2))
+
+# [0.2.0-alpha.506](https://github.com/mittwald/flow/compare/0.2.0-alpha.505...0.2.0-alpha.506) (2025-10-07)
+
+### Bug Fixes
+
+* **Action:** fix confirmation modal not working ([09edaf9](https://github.com/mittwald/flow/commit/09edaf9a885446bf1a90db37611f29b154dc2f23))
+
+# [0.2.0-alpha.505](https://github.com/mittwald/flow/compare/0.2.0-alpha.504...0.2.0-alpha.505) (2025-10-07)
+
+### Features
+
+* **Icon:** add IconDnsSubZone ([#2058](https://github.com/mittwald/flow/issues/2058)) ([38e0198](https://github.com/mittwald/flow/commit/38e0198df9886dca9e961f604d3d881bd8c19415))
+
+# [0.2.0-alpha.504](https://github.com/mittwald/flow/compare/0.2.0-alpha.503...0.2.0-alpha.504) (2025-10-01)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.503](https://github.com/mittwald/flow/compare/0.2.0-alpha.502...0.2.0-alpha.503) (2025-10-01)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.502](https://github.com/mittwald/flow/compare/0.2.0-alpha.501...0.2.0-alpha.502) (2025-10-01)
+
+### Bug Fixes
+
+* **InlineCode:** fix overflow ([#2047](https://github.com/mittwald/flow/issues/2047)) ([27e2863](https://github.com/mittwald/flow/commit/27e286364808eac83f4e3e0e0533eb8dda0745e6))
+
+# [0.2.0-alpha.501](https://github.com/mittwald/flow/compare/0.2.0-alpha.500...0.2.0-alpha.501) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.500](https://github.com/mittwald/flow/compare/0.2.0-alpha.499...0.2.0-alpha.500) (2025-09-30)
+
+### Bug Fixes
+
+* **List:** fix missing max width in tile remote view ([15a04b3](https://github.com/mittwald/flow/commit/15a04b3b63e1f9e1c12eb1bb802e00cb20153e9f))
+
+# [0.2.0-alpha.499](https://github.com/mittwald/flow/compare/0.2.0-alpha.498...0.2.0-alpha.499) (2025-09-30)
+
+### Bug Fixes
+
+* **FormControls:** make control fields focusable ([#2036](https://github.com/mittwald/flow/issues/2036)) ([a4d6be3](https://github.com/mittwald/flow/commit/a4d6be346c2c91c85d8a92aeab33d51c5c677f9e))
+
+# [0.2.0-alpha.498](https://github.com/mittwald/flow/compare/0.2.0-alpha.497...0.2.0-alpha.498) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.497](https://github.com/mittwald/flow/compare/0.2.0-alpha.496...0.2.0-alpha.497) (2025-09-30)
+
+### Features
+
+* **Ext-Bridge:** add variant key to session token ([#1987](https://github.com/mittwald/flow/issues/1987)) ([42afb06](https://github.com/mittwald/flow/commit/42afb06d21cff2c85c1017d420908e1ee5b67979))
+
+# [0.2.0-alpha.496](https://github.com/mittwald/flow/compare/0.2.0-alpha.495...0.2.0-alpha.496) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.495](https://github.com/mittwald/flow/compare/0.2.0-alpha.494...0.2.0-alpha.495) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.494](https://github.com/mittwald/flow/compare/0.2.0-alpha.493...0.2.0-alpha.494) (2025-09-29)
 
 **Note:** Version bump only for package @mittwald/flow-project

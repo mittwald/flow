@@ -1,4 +1,5 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
+import React from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
@@ -10,11 +11,14 @@ import { Button } from "@/components/Button";
 import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { TunnelExit } from "@mittwald/react-tunnel";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SliderProps
-  extends FlowComponentProps<HTMLDivElement>,
+  extends FlowComponentProps,
     PropsWithChildren<Aria.SliderProps>,
-    Pick<Aria.SliderThumbProps, "name"> {
+    Pick<Aria.SliderThumbProps, "inputRef" | "name"> {
   showInitialMarker?: boolean;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
@@ -30,6 +34,8 @@ export const Slider = flowComponent("Slider", (props) => {
     defaultValue,
     showInitialMarker,
     isReadOnly,
+    ref,
+    inputRef,
     ...rest
   } = props;
 
@@ -41,81 +47,94 @@ export const Slider = flowComponent("Slider", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
+  const localSliderRef = useObjectRef(ref);
+  const localInputRef = useObjectRef(inputRef);
+
+  useMakeFocusable(localSliderRef, () => {
+    localInputRef.current?.focus();
+  });
+
   const propsContext: PropsContext = {
     Label: {
       unstyled: true,
+      tunnelId: "label",
     },
   };
 
   return (
-    <Aria.Slider
-      className={rootClassName}
-      isDisabled={isDisabled}
-      defaultValue={defaultValue}
-      {...rest}
-    >
-      <div className={styles.text}>
-        <Aria.SliderOutput className={styles.value} />
+    <PropsContextProvider props={propsContext}>
+      <Aria.Slider
+        {...rest}
+        ref={localSliderRef}
+        className={rootClassName}
+        isDisabled={isDisabled}
+        defaultValue={defaultValue}
+      >
+        <div className={styles.text}>
+          <Aria.SliderOutput className={styles.value} />
+          <TunnelExit id="label" />
+        </div>
 
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </div>
-
-      <Aria.SliderTrack className={styles.track}>
-        {({ state }) => (
-          <>
-            <Button
-              onPress={() => state.decrementThumb(0)}
-              aria-label={stringFormatter.format("slider.decrement")}
-              variant="plain"
-              color="secondary"
-              className={styles.decrement}
-              isDisabled={isDisabled}
-              excludeFromTabOrder
-              isReadOnly={isReadOnly}
+        <Aria.SliderTrack className={styles.track}>
+          {({ state }) => (
+            <PropsContextProvider
+              props={{
+                Button: {
+                  isPending: false,
+                  isFailed: false,
+                  isSucceeded: false,
+                  isReadOnly: isReadOnly,
+                  excludeFromTabOrder: true,
+                  isDisabled,
+                  variant: "plain",
+                  color: "secondary",
+                },
+              }}
             >
-              <IconMinus />
-            </Button>
+              <Button
+                onPress={() => state.decrementThumb(0)}
+                aria-label={stringFormatter.format("slider.decrement")}
+                className={styles.decrement}
+              >
+                <IconMinus />
+              </Button>
 
-            <Button
-              onPress={() => state.incrementThumb(0)}
-              aria-label={stringFormatter.format("slider.increment")}
-              variant="plain"
-              color="secondary"
-              className={styles.increment}
-              isDisabled={isDisabled}
-              excludeFromTabOrder
-              isReadOnly={isReadOnly}
-            >
-              <IconPlus />
-            </Button>
+              <Button
+                onPress={() => state.incrementThumb(0)}
+                aria-label={stringFormatter.format("slider.increment")}
+                className={styles.increment}
+              >
+                <IconPlus />
+              </Button>
 
-            <div
-              className={styles.fill}
-              style={{ width: state.getThumbPercent(0) * 100 + "%" }}
-            />
+              <div
+                className={styles.fill}
+                style={{ width: state.getThumbPercent(0) * 100 + "%" }}
+              />
 
-            {showInitialMarker &&
-              defaultValue &&
-              typeof defaultValue === "number" && (
-                <div
-                  className={styles.initialMarker}
-                  style={{
-                    left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
-                  }}
-                />
-              )}
+              {showInitialMarker &&
+                defaultValue &&
+                typeof defaultValue === "number" && (
+                  <div
+                    className={styles.initialMarker}
+                    style={{
+                      left: `calc(${state.getValuePercent(defaultValue) * 100}% - 2px)`,
+                    }}
+                  />
+                )}
 
-            <Aria.SliderThumb
-              name={name}
-              className={styles.handle}
-              isDisabled={isReadOnly}
-            />
-          </>
-        )}
-      </Aria.SliderTrack>
-    </Aria.Slider>
+              <Aria.SliderThumb
+                inputRef={localInputRef}
+                name={name}
+                className={styles.handle}
+                isDisabled={isReadOnly}
+              />
+            </PropsContextProvider>
+          )}
+        </Aria.SliderTrack>
+        {children}
+      </Aria.Slider>
+    </PropsContextProvider>
   );
 });
 

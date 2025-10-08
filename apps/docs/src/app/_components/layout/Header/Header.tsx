@@ -14,7 +14,7 @@ const Header: FC<Props> = async (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
 
   return (
-    <header className={styles.header}>
+    <header>
       <div className={styles.headerContent}>
         <Link href="/">
           <Image

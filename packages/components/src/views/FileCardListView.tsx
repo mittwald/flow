@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   FileCardList,
   type FileCardListProps,
-} from "@/components/FileCardList";
+} from "@/components/FileCardList/FileCardList";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FileCardListView: FC<FileCardListProps> = memo((props) => {

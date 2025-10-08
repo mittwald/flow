@@ -6,14 +6,14 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Row>
-  <TextField value="Suche" />
-  <Button variant="plain">
+  <TextField value="Suche" aria-label="Suche" />
+  <Button variant="plain" aria-label="Sortierung">
     <IconSorting />
   </Button>
-  <Button variant="plain">
+  <Button variant="plain" aria-label="Filter">
     <IconFilter />
   </Button>
-  <Button variant="outline">
+  <Button variant="outline" aria-label="Filter">
     <IconFilter />
   </Button>
 </Row>;

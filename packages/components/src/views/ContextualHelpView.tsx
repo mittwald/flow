@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ContextualHelp,
   type ContextualHelpProps,
-} from "@/components/ContextualHelp";
+} from "@/components/ContextualHelp/ContextualHelp";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ContextualHelpView: FC<ContextualHelpProps> = memo((props) => {

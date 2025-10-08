@@ -2,17 +2,18 @@
 
 ## Best practices
 
-Achte bei Verwendung eines Links darauf, dass...
+Achte bei Verwendung eines Links darauf, dass ...
 
 - je nach Umgebung der richtige Link gewählt wird. Ein Inline Link wird
   automatisch in einem Textblock gesetzt. Bei farbigem Hintergrund muss die
   Color Light oder Dark selbst ausgewählt werden.
-- Links standardmäßig im gleichen Tab geöffnet werden. User haben dann immer noch die Möglichkeit, die Links selbstgesteuert in einem neuen Tab zu öffnen. 
+- Links standardmäßig im gleichen Tab geöffnet werden. User haben dann immer
+  noch die Möglichkeit, die Links selbstgesteuert in einem neuen Tab zu öffnen.
 - Externe Links sich immer in einem neuen Tab öffnen.
-- Links nur als Navigationselement gedacht sind. Links können z. B. keine
-  [Modals](/03-components/overlays/modal) öffnen, keine Aktionen bestätigen und
+- Links nur als Navigationselement gedacht sind. Links können z. B. keine
+  [Modals](/03-components/overlays/modal/overview) öffnen, keine Aktionen bestätigen und
   keine weiteren Informationen aufklappen lassen
-  ([Accordion](/03-components/structure/accordion)).
+  ([Accordion](/03-components/structure/accordion/overview)).
 - nicht zu viele Links verwendet werden, um den User nicht durch die Anzahl zu
   verwirren.
 - Links entweder einzeln stehen oder in einen Textblock integriert werden
@@ -21,7 +22,7 @@ Achte bei Verwendung eines Links darauf, dass...
 
 ## Verwendung
 
-Verwende einen Link, um...
+Verwende einen Link, um ...
 
 - den User zu einer neuen Seite zu navigieren.
 - auf einen Ankerpunkt auf der Seite für eine Information zu scrollen.
@@ -30,12 +31,12 @@ Verwende einen Link, um...
 
 ## Link vs. Button
 
-Links und [Buttons](/03-components/actions/button) werden häufig verwechselt. Um
+Links und [Buttons](/03-components/actions/button/overview) werden häufig verwechselt. Um
 die beiden besser unterscheiden zu können, hier ein paar hilfreiche
 Anhaltspunkte.
 
 <DoAndDont>
-  <Info heading="Verwende Links, um z.B. ...">
+  <Info heading="Verwende Links, um z. B. ...">
     - zu einer anderen Seite zu navigieren.
 
     - zu einem Anker auf der Seite zu scrollen.
@@ -45,7 +46,7 @@ Anhaltspunkte.
     - einen Download zu starten.
 
   </Info>
-  <Info heading="Verwende Buttons, um z.B. ...">
+  <Info heading="Verwende Buttons, um z. B. ...">
     - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu
     verlassen.
 
@@ -66,15 +67,15 @@ Anhaltspunkte.
 Links sind ein zentrales Navigationselement für die User. Daher sollte deren
 Platzierung sorgfältig überlegt werden. Beispiele für geeignete Stellen sind:
 
-- In einer [Section](/03-components/structure/section) können Links in der
-  oberen rechten Ecke neben der [Heading](/03-components/content/heading)
+- In einer [Section](/03-components/structure/section/overview) können Links in der
+  oberen rechten Ecke neben der [Heading](/03-components/content/heading/overview)
   platziert werden. Diese Position eignet sich besonders für Links, die
   inhaltlich stark mit der Section verbunden sind, und wenn nur ein einzelner
   Link benötigt wird.
 - Im unteren Bereich einer Section oder eines
-  [Textblocks](/03-components/content/text) können ein oder mehrere Links
+  [Textblocks](/03-components/content/text/overview) können ein oder mehrere Links
   angezeigt werden. Diese sollten sich auf den vorangehenden Text beziehen.
-- Inline Links werden direkt im [Text](/03-components/content/text) eingefügt.
+- Inline Links werden direkt im [Text](/03-components/content/text/overview) eingefügt.
 
 <DoAndDont>
   <Do example="position1">
@@ -94,7 +95,10 @@ Platzierung sorgfältig überlegt werden. Beispiele für geeignete Stellen sind:
 
 Interne Links öffnen sich immer im dem Tab, in dem der User sich gerade
 befindet. Der User kann jedoch selbst entscheiden, ob er den Link lieber in
-einem neuen Tab öffnen möchte. Externe Links – also Verweise auf eine andere Domain – öffnen sich hingegen immer in einem neuen Tab. Um das Verhalten dem User zu verdeutlichen, wird automatisch das `IconExternalLink` angezeigt werden, wenn `target="_blank"` gesetzt ist.
+einem neuen Tab öffnen möchte. Externe Links – also Verweise auf eine andere
+Domain – öffnen sich hingegen immer in einem neuen Tab. Um das Verhalten dem
+User zu verdeutlichen, wird automatisch das `IconExternalLink` angezeigt werden,
+wenn `target="_blank"` gesetzt ist.
 
 ---
 
@@ -111,7 +115,7 @@ folgendes zu achten:
 - Formuliere Linktexte so präzise wie möglich, damit sofort erkennbar ist, wohin
   der Link führt. Allgemeine Formulierungen wie „Erfahre mehr“ sollten vermieden
   werden, da diese oft überflüssig sind. Falls nötig, ergänze „Erfahre mehr“ mit
-  spezifischen Informationen, z. B. „Erfahre mehr über Flow“.
+  spezifischen Informationen, z. B. „Erfahre mehr über Flow“.
 - Wenn ein Link in einem Satz vorkommt, verlinke nur den Teil des Satzes, der
   direkt auf das Ziel hinweist. Der gesamte Satz sollte nicht als Link markiert
   werden. Vermeide es, den Link in mehrere kleinere Teile innerhalb des Satzes
@@ -124,11 +128,11 @@ folgendes zu achten:
 
 <DoAndDont>
   <Do example="writingExtraDo">
-    Der Link "Erfahre mehr über Links" kann auch alleine stehend vom User
+    Der Link „Erfahre mehr über Links“ kann auch alleine stehend vom User
     verstanden werden.
   </Do>
   <Dont example="writingExtraDont">
-    Links müssen einzeln verstanden werden. "Erfahre mehr" oder "Klick hier"
+    Links müssen einzeln verstanden werden. „Erfahre mehr“ oder „Klick hier“
     sind nicht alleine verständlich.
   </Dont>
 </DoAndDont>
@@ -151,7 +155,7 @@ der Linktext nur „hier klicken“ oder „mehr Informationen“ lautet. Bei Be
 sollte ein ARIA-Label hinzugefügt werden, um sicherzustellen, dass der Link
 korrekt interpretiert wird, falls der Text allein nicht ausreicht.
 
-# Color Light und Dark
+# Color
 
 Achte bei den Colors Light und Dark auf genügend Kontrast zum Hintergrund. Es
 wird empfohlen, die Color in Light zu verwenden, wenn der HSL Lightness-Wert des

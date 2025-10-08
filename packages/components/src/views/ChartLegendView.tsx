@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ChartLegend,
   type ChartLegendProps,
-} from "@/components/CartesianChart";
+} from "@/components/CartesianChart/components/ChartLegend/ChartLegend";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ChartLegendView: FC<ChartLegendProps> = memo((props) => {
