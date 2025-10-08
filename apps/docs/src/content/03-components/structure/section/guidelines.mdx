@@ -9,12 +9,12 @@ Baustein, um Oberflächen aufzubauen (siehe
 
 Achte bei der Verwendung einer Section darauf, dass ...
 
-- sie eine kurze, aussagekräftige [Heading](/03-components/content/heading)
-  erhält.
-- bei Bedarf ein [Switch](/03-components/form-controls/switch), ein
-  [Link](/03-components/navigations/link) oder bis zu zwei
-  [Buttons](/03-components/actions/button) oben in die SectionAction integriert
-  werden können.
+- sie eine kurze, aussagekräftige
+  [Heading](/03-components/content/heading/overview) erhält.
+- bei Bedarf ein [Switch](/03-components/form-controls/switch/overview), ein
+  [Link](/03-components/navigations/link/overview) oder bis zu zwei
+  [Buttons](/03-components/actions/button/overview) oben in die SectionAction
+  integriert werden können.
 - bei mehreren Sections die wichtigste ganz oben steht.
 
 ## Verwendung
@@ -24,11 +24,11 @@ Verwende eine Section, um...
 - Content in kleinere Teilbereiche zu gliedern und so die Übersichtlichkeit zu
   erhöhen.
 - einzelne Teilbereiche automatisch durch einen
-  [Separator](/03-components/structure/separator) zu trennen, wenn mehrere
-  Sections eingesetzt werden.
+  [Separator](/03-components/structure/separator/overview) zu trennen, wenn
+  mehrere Sections eingesetzt werden.
 - Elemente vertikal zu positionieren und die korrekten Abstände sicherzustellen.
   Für horizontale Positionierungen eignet sich ein
-  [ColumnLayout](/03-components/structure/column-layout).
+  [ColumnLayout](/03-components/structure/column-layout/overview).
 
 ---
 
@@ -38,13 +38,14 @@ Verwende eine Section, um...
 
 Die Section sorgt automatisch für Abstände zwischen den darin platzierten
 Elementen. Aufeinanderfolgende Sections werden zusätzlich durch einen
-[Separator](/03-components/structure/separator) getrennt. Dadurch entsteht eine
-klare visuelle Struktur und Hierarchie für den Content.
+[Separator](/03-components/structure/separator/overview) getrennt. Dadurch
+entsteht eine klare visuelle Struktur und Hierarchie für den Content.
 
-Innerhalb einer Section mit einer [H2-Heading](/03-components/content/heading)
-kann durch weitere H3-Headings eine Sub-Heading-Struktur aufgebaut werden.
-Zwischen diesen Sub-Inhalten erscheint kein Separator, sondern sie werden durch
-einen größeren Abstand optisch voneinander getrennt.
+Innerhalb einer Section mit einer
+[H2-Heading](/03-components/content/heading/overview) kann durch weitere
+H3-Headings eine Sub-Heading-Struktur aufgebaut werden. Zwischen diesen
+Sub-Inhalten erscheint kein Separator, sondern sie werden durch einen größeren
+Abstand optisch voneinander getrennt.
 
 ## Position
 
@@ -53,23 +54,24 @@ Breite aus. Wenn mehrere Sections untereinander verwendet werden, achte auf
 folgende Punkte:
 
 - Die Section mit dem wichtigsten Inhalt sollte ganz oben stehen, insbesondere
-  Sections mit [AlertBadge](/03-components/status/alert-badge),
-  [Badges](/03-components/status/badge) oder Actions (z. B.
-  [Buttons](/03-components/actions/button)).
+  Sections mit [AlertBadge](/03-components/status/alert-badge/overview),
+  [Badges](/03-components/status/badge/overview) oder Actions (z. B.
+  [Buttons](/03-components/actions/button/overview)).
 - Vermeide zu viele Sections, um den User nicht zu überladen. Überlege, ob der
   Content in solchen Fällen auf mehrere Seiten oder
-  [Tabs](/03-components/navigation/tabs) verteilt werden sollte.
+  [Tabs](/03-components/navigation/tabs/overview) verteilt werden sollte.
 
 ## Hierarchie
 
-Eine Section beginnt immer mit einer [Heading](/03-components/content/heading).
-Darauf folgt der eigentliche Content – also Informationen in Form von
-beispielsweise [LabeledValues](/03-components/content/labeled-value) oder
-einfachem Text. Im unteren Bereich der Section bilden häufig
-[Links](/03-components/navigation/link) und
-[Buttons](/03-components/actions/button) den Abschluss. Im Header-Bereich, in
-der sogenannten SectionAction, können prominentere Buttons und Links platziert
-werden.
+Eine Section beginnt immer mit einer
+[Heading](/03-components/content/heading/overview). Darauf folgt der eigentliche
+Content – also Informationen in Form von beispielsweise
+[LabeledValues](/03-components/content/labeled-value/overview) oder einfachem
+Text. Im unteren Bereich der Section bilden häufig
+[Links](/03-components/navigation/link/overview) und
+[Buttons](/03-components/actions/button/overview) den Abschluss. Im
+Header-Bereich, in der sogenannten SectionAction, können prominentere Buttons
+und Links platziert werden.
 
 <Do example="hierarchy-do">
   Erzeuge eine klare und sinnvolle Struktur innerhalb der Section.
@@ -85,9 +87,9 @@ Durch den SectionAction-Bereich im Header sowie den AlertBadge bzw. Badge lassen
 sich Informationen und Interaktionen kompakt darstellen. Achte bei der
 Verwendung dieser Elemente darauf, dass ...
 
-- [AlertBadge](/03-components/status/alert-badge),
-  [Badges](/03-components/status/badge) und Actions sich immer unmittelbar auf
-  die Section beziehen, der sie zugeordnet sind.
+- [AlertBadge](/03-components/status/alert-badge/overview),
+  [Badges](/03-components/status/badge/overview) und Actions sich immer
+  unmittelbar auf die Section beziehen, der sie zugeordnet sind.
 - Die Hauptaktion der Section sich deutlich von anderen Aktionen abhebt. Dies
   gilt insbesondere, wenn 2 oder mehr Aktionen verwendet werden.
 
@@ -110,11 +112,12 @@ Verwendung dieser Elemente darauf, dass ...
 
 - Die Section passt sich der Breite des umgebenden Containers an.
 - Reicht die Breite der Section nicht aus, um alle Inhalte des Header-Bereichs
-  darzustellen, bricht der [Switch](/03-components/form-controls/switch) oder
-  brechen die [Buttons](/03-components/actions/button) in die nächste Zeile um.
+  darzustellen, bricht der
+  [Switch](/03-components/form-controls/switch/overview) oder brechen die
+  [Buttons](/03-components/actions/button/overview) in die nächste Zeile um.
   Dort ordnen sie sich weiterhin an der rechten Seite an.
-- Der [AlertBadge](/03-components/status/alert-badge) bleibt immer auf einer
-  Höhe mit dem Titel. Ist der Titel zu lang, wird er zweizeilig.
+- Der [AlertBadge](/03-components/status/alert-badge/overview) bleibt immer auf
+  einer Höhe mit dem Titel. Ist der Titel zu lang, wird er zweizeilig.
 
 <DoAndDont>
   <Info mobile heading="Mobile" example="alert-badge">
