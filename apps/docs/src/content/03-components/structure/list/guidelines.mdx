@@ -44,8 +44,8 @@ Verwende eine List, um ...
 
 ## Sortierung
 
-- Der [Button](/03-components/actions/button) zur Sortierung steht immer links
-  neben allen Filtern.
+- Der [Button](/03-components/actions/button/overview) zur Sortierung steht
+  immer links neben allen Filtern.
 - Wähle die Standardsortierung nach dem häufigsten Anwendungsfall, z. B.
   „Neueste zuerst“ bei einer Änderungshistorie.
 - Die aktive Sortierung steht im Sortierungs-Button, z. B. „Sortierung: Neueste
@@ -54,14 +54,15 @@ Verwende eine List, um ...
 ## Filter
 
 - Ein Klick auf den Filter-Button öffnet ein
-  [ContextMenu](/03-components/actions/context-menu), in dem Filter an- und
-  abgewählt werden können. Ermöglicht der Filter eine Mehrfachauswahl, werden
-  die Optionen als [Checkbox](/03-components/form-controls/checkbox)
-  dargestellt. Verlangt der Filter eine Einfachauswahl, werden die Optionen als
-  [RadioGroup](/03-components/form-controls/radio-group) dargestellt.
-- Jeder aktive Filter setzt einen [Badge](/03-components/status/badge), der per
-  Klick einzeln wieder abgewählt werden kann. Sind mindestens zwei Filter aktiv,
-  erscheint ein „Filter zurücksetzen“-Button.
+  [ContextMenu](/03-components/actions/context-menu/overview), in dem Filter an-
+  und abgewählt werden können. Ermöglicht der Filter eine Mehrfachauswahl,
+  werden die Optionen als
+  [Checkbox](/03-components/form-controls/checkbox/overview) dargestellt.
+  Verlangt der Filter eine Einfachauswahl, werden die Optionen als
+  [RadioGroup](/03-components/form-controls/radio-group/overview) dargestellt.
+- Jeder aktive Filter setzt einen [Badge](/03-components/status/badge/overview),
+  der per Klick einzeln wieder abgewählt werden kann. Sind mindestens zwei
+  Filter aktiv, erscheint ein „Filter zurücksetzen“-Button.
 - Lassen sich mehrere Filter zu einer Gruppe zusammenfassen (z. B. Status, Art,
   Größe, Abteilung, ...), platziere diese in einem eigenen Filter-Button.
   Filter, die keiner Kategorie zugewiesen werden können, können unter einem
@@ -82,12 +83,12 @@ Verwende eine List, um ...
 
 - Wenn keine Such- oder Filterergebnisse vorliegen, zeigt die List an Stelle der
   ListItems eine
-  [IllustratedMessage](/03-components/content/illustrated-message) an, die
-  verdeutlicht, dass es keine Ergebnisse gibt.
+  [IllustratedMessage](/03-components/content/illustrated-message/overview) an,
+  die verdeutlicht, dass es keine Ergebnisse gibt.
 - Sind noch gar keine Einträge vorhanden, wird die List durch eine
-  [IllustratedMessage](/03-components/content/illustrated-message) ersetzt.
-  Diese lädt den User mit einem Call-to-Action dazu ein, das erste Element zu
-  erstellen.
+  [IllustratedMessage](/03-components/content/illustrated-message/overview)
+  ersetzt. Diese lädt den User mit einem Call-to-Action dazu ein, das erste
+  Element zu erstellen.
 
 ## Pagination
 
@@ -129,11 +130,11 @@ ersichtlich ist, wonach und in welcher Reihenfolge sie sortiert.
 
 ## Filterung
 
-Gesetzte Filter werden als [Badges](/03-components/status/badge) dargestellt.
-Diese müssen aus sich selbst heraus verständlich sein. Daher ist es ratsam, bei
-Begriffen, die mehrdeutig sein können, zusätzlichen Kontext zu liefern. Bei
-Filtern, die der User intuitiv einer bestimmten Kategorie zuordnen kann, ist
-dies nicht notwendig.
+Gesetzte Filter werden als [Badges](/03-components/status/badge/overview)
+dargestellt. Diese müssen aus sich selbst heraus verständlich sein. Daher ist es
+ratsam, bei Begriffen, die mehrdeutig sein können, zusätzlichen Kontext zu
+liefern. Bei Filtern, die der User intuitiv einer bestimmten Kategorie zuordnen
+kann, ist dies nicht notwendig.
 
 <Do example="namingDo">
   Intuitiv verständliche Filter benötigen keinen zusätzlichen Kontext.
@@ -168,7 +169,7 @@ Umbruchverhalten des ListItems.
 # Accessibility
 
 Häufig wird eine List als alleiniges Element einer Seite verwendet und besitzt
-somit keine [Heading](/03-components/content/heading). In diesen Fällen muss sie
-mit einem `aria-label` beschrieben werden. Ist die List mit einer eigenen
-[Heading](/03-components/content/heading) versehen, so muss die Heading mit
-`aria-labelledby` der List zugeordnet werden.
+somit keine [Heading](/03-components/content/heading/overview). In diesen Fällen
+muss sie mit einem `aria-label` beschrieben werden. Ist die List mit einer
+eigenen [Heading](/03-components/content/heading/overview) versehen, so muss die
+Heading mit `aria-labelledby` der List zugeordnet werden.
