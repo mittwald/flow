@@ -1,19 +1,19 @@
 Die List Component erlaubt das Rendern und Verwalten von Daten in einer
 strukturierten Liste. Daten können entweder **statisch** oder **asynchron**,
-z.B. über eine API geladen werden.
+z. B. über eine API, geladen werden.
 
 # Möglichkeiten zum Laden von Daten
 
 ## 1. Statische Daten
 
-Für die Anzeige statischer Daten kann die Komponente `<StaticData />` verwendet
+Für die Anzeige statischer Daten kann die Component `<StaticData />` verwendet
 werden:
 
 ```tsx
 <List.StaticData data={dataArray} />
 ```
 
-- `dataArray`: Ein Array mit den Daten, die direkt in der Liste gerendert
+- `dataArray`: Ein Array mit den Daten, die direkt in der List gerendert
   werden.
 - Diese Variante ist einfach und benötigt keine zusätzliche Logik für das
   Nachladen oder Filtern.
@@ -48,7 +48,7 @@ asynchronen Quellen nachgeladen werden:
 
 ## Optionen für die Async Loader Function
 
-Die `<LoaderAsync>`-Komponente benötigt eine **Async Loader Function**, die die
+Die `<LoaderAsync>`-Component benötigt eine **Async Loader Function**, die die
 Daten anhand von Steuerungsoptionen lädt. Diese Funktion erhält ein
 `options`-Objekt mit den folgenden Parametern:
 
@@ -83,13 +83,13 @@ return {
 
 # Filter
 
-In der Regel werden Filter für ein Property der Liste gesetzt:
+In der Regel werden Filter für ein Property der List gesetzt:
 
 ```tsx
 <List.Filter mode="some" name="Status" property="status" />
 ```
 
-Die Anzeige des Filter-Values kann angepasst werden um z. B. Übersetzungen zu
+Die Anzeige des Filter-Values kann angepasst werden, um z. B. Übersetzungen zu
 ermöglichen:
 
 ```tsx
@@ -98,8 +98,7 @@ ermöglichen:
 </List.Filter>
 ```
 
-Es gibt die Möglichkeit eigene Properties, die nicht in der Liste vorkommen, zu
-verwenden. Hierfür muss dem `property` ein "$" vorangestellt werden:
+Es gibt die Möglichkeit, eigene Properties zu verwenden, die nicht in der List vorkommen . Hierfür muss dem `property` ein "$" vorangestellt werden:
 
 ```tsx
 <List.Filter
@@ -126,13 +125,13 @@ verwenden. Hierfür muss dem `property` ein "$" vorangestellt werden:
 
 # Sorting
 
-Die Liste unterstützt eine Sortierung nach Properties:
+Die List unterstützt eine Sortierung nach Properties:
 
 ```tsx
 <List.Sorting defaultEnabled direction="asc" name="Name" property="name" />
 ```
 
-Es gibt außerdem die Möglichkeit eine eigene Sortierung zu benutzen:
+Es gibt außerdem die Möglichkeit, eine eigene Sortierung zu benutzen:
 
 ```tsx
 <List.Sorting
