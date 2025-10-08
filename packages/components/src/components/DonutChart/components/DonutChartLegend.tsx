@@ -25,6 +25,7 @@ export const DonutChartLegend: FC<Props> = (props) => {
 
         return (
           <LegendItem
+            key={s.title}
             color={s.color ?? getCategoricalColorByIndex(i)}
           >{`${s.title} (${s.valueText ?? formattedValue})`}</LegendItem>
         );

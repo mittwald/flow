@@ -83,3 +83,41 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={() => action("submitted")}>
+        <Field name={"text"} rules={{ required: true }}>
+          <RadioGroup m={[1, 1]} l={[1, 1, 1]}>
+            <Label>Options</Label>
+            <Radio value="1">Option 1</Radio>
+            <Radio value="2">Option 2</Radio>
+            <Radio value="3">Option 3</Radio>
+            <Radio value="4">Option 4</Radio>
+            <Radio value="5">Option 5</Radio>
+            <Radio value="6">Option 6</Radio>
+          </RadioGroup>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

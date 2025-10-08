@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ColumnLayout,
   type ColumnLayoutProps,
-} from "@/components/ColumnLayout";
+} from "@/components/ColumnLayout/ColumnLayout";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ColumnLayoutView: FC<ColumnLayoutProps> = memo((props) => {

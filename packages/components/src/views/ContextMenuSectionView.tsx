@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ContextMenuSection,
   type ContextMenuSectionProps,
-} from "@/components/ContextMenu";
+} from "@/components/ContextMenu/components/ContextMenuSection/ContextMenuSection";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ContextMenuSectionView: FC<ContextMenuSectionProps> = memo((props) => {

@@ -1,5 +1,5 @@
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext/types";
+import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
 import { memo, type FC, type PropsWithChildren } from "react";
 import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
 

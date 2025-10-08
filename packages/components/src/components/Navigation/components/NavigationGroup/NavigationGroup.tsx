@@ -33,7 +33,6 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     Label: {
       id: generatedId,
       className: styles.label,
-      "aria-hidden": true,
     },
     Link: {
       tunnelId: "groupLinks",

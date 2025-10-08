@@ -12,6 +12,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface FileFieldProps
   extends PropsWithChildren,
@@ -52,7 +53,6 @@ export const FileField = flowComponent("FileField", (props) => {
 
   const inputProps = {
     ...restInputProps,
-    ref: inputRef,
     "aria-invalid": formValidationState.displayValidation.isInvalid,
     value: undefined,
   };
@@ -78,6 +78,8 @@ export const FileField = flowComponent("FileField", (props) => {
     }
   };
 
+  useMakeFocusable(inputRef);
+
   return (
     <InputContext.Provider value={inputProps}>
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
@@ -91,7 +93,7 @@ export const FileField = flowComponent("FileField", (props) => {
             className={formFieldStyles.formField}
           >
             <FileInput
-              ref={ref}
+              ref={inputRef}
               isReadOnly={isReadOnly}
               onChange={isReadOnly ? undefined : handleOnChange}
               isDisabled={isDisabled}

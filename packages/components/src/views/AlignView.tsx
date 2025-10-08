@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Align, type AlignProps } from "@/components/Align";
+import { Align, type AlignProps } from "@/components/Align/Align";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AlignView: FC<AlignProps> = memo((props) => {
