@@ -10,7 +10,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface CheckboxButtonProps
   extends CheckboxProps,
     FlowComponentProps<HTMLLabelElement> {
-  /** @internal */ inCheckboxGroup?: boolean;
+  /** @internal */
+  inCheckboxGroup?: boolean;
 }
 
 /** @flr-generate all */
