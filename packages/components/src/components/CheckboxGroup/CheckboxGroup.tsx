@@ -21,7 +21,7 @@ export interface CheckboxGroupProps
 
 /** @flr-generate all */
 export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
-  const { children, className, s, m, l, ref, value, ...rest } = props;
+  const { children, className, s, m, l, ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -55,7 +55,6 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       {...rest}
       className={rootClassName}
       ref={localCheckboxGroupRef}
-      value={Array.isArray(value) ? value : undefined}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
