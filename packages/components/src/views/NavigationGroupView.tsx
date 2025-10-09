@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   NavigationGroup,
   type NavigationGroupProps,
-} from "@/components/Navigation";
+} from "@/components/Navigation/components/NavigationGroup/NavigationGroup";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const NavigationGroupView: FC<NavigationGroupProps> = memo((props) => {

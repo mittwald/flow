@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Markdown, type MarkdownProps } from "@/components/Markdown";
+import { Markdown, type MarkdownProps } from "@/components/Markdown/Markdown";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MarkdownView: FC<MarkdownProps> = memo((props) => {

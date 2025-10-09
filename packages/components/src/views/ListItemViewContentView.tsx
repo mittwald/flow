@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ListItemViewContent,
   type ListItemViewContentProps,
-} from "@/components/List";
+} from "@/components/List/components/ListItemView/components/ListItemViewContent/ListItemViewContent";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ListItemViewContentView: FC<ListItemViewContentProps> = memo((props) => {

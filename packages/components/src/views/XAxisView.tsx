@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { XAxis, type XAxisProps } from "@/components/CartesianChart";
+import {
+  XAxis,
+  type XAxisProps,
+} from "@/components/CartesianChart/components/XAxis/XAxis";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const XAxisView: FC<XAxisProps> = memo((props) => {

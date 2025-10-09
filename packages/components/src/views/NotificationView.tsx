@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   Notification,
   type NotificationProps,
-} from "@/components/Notification";
+} from "@/components/Notification/Notification";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const NotificationView: FC<NotificationProps> = memo((props) => {

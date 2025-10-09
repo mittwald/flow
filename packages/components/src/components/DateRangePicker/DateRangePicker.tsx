@@ -13,6 +13,8 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useObjectRef } from "@react-aria/utils";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">>,
@@ -42,9 +44,12 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
 
   const popoverController = useOverlayController("Popover");
 
+  const localDateRangePickerRef = useObjectRef(ref);
+  useMakeFocusable(localDateRangePickerRef);
+
   return (
     <Aria.DateRangePicker
-      ref={ref}
+      ref={localDateRangePickerRef}
       {...rest}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}

@@ -25,9 +25,14 @@ export const Rating: FC<RatingProps> = (props) => {
     .fill("")
     .map((_, index) =>
       index < value ? (
-        <IconStarFilled aria-hidden size={size} className={styles.starFilled} />
+        <IconStarFilled
+          key={index}
+          aria-hidden
+          size={size}
+          className={styles.starFilled}
+        />
       ) : (
-        <IconStar aria-hidden size={size} className={styles.star} />
+        <IconStar key={index} aria-hidden size={size} className={styles.star} />
       ),
     );
 

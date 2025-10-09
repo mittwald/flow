@@ -10,7 +10,9 @@ export class RemoteClearPropsContextElement extends FlowRemoteElement<RemoteClea
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      keep: {},
+    };
   }
 
   static override get remoteEvents() {

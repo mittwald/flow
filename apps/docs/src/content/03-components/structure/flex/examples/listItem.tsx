@@ -12,7 +12,10 @@ export default () => {
   const List = typedList<{ text: string }>();
 
   return (
-    <List.List defaultViewMode="tiles">
+    <List.List
+      defaultViewMode="tiles"
+      aria-label="Extensions"
+    >
       <List.StaticData
         data={[
           { text: "Meine Extension" },

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
-import type { Field } from "@/integrations/react-hook-form";
+import { Field } from "@/integrations/react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
@@ -11,6 +11,7 @@ import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { TextField } from "@/components/TextField";
 import Option from "@/components/Option";
+import { SearchField } from "@/components/SearchField";
 
 const submitAction = action("submit");
 
@@ -72,3 +73,40 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"text"} rules={{ required: true }}>
+          <Autocomplete>
+            <SearchField>
+              <Label>Test</Label>
+            </SearchField>
+            <Option value="example.com">example.com</Option>
+            <Option value="domain.de">domain.de</Option>
+            <Option value="test.org">test.org</Option>
+          </Autocomplete>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

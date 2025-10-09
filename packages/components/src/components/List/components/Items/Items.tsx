@@ -34,10 +34,8 @@ export const Items: FC = () => {
         className={rootClassName}
         {...list.componentProps}
         renderEmptyState={() => <EmptyView />}
-        style={{
-          gridTemplateColumns: `repeat(auto-fill, minmax(${list.itemView.tileMaxWidth}px, 1fr))`,
-        }}
         layout={list.viewMode === "tiles" ? "grid" : "stack"}
+        tileMaxWidth={list.itemView.tileMaxWidth}
       >
         {items.length === 0 && isInitiallyLoading ? <FallbackItems /> : items}
       </ItemsGridListView>

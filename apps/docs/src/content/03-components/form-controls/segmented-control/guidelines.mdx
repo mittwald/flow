@@ -7,7 +7,7 @@ Achte bei der Verwendung eines SegmentedControl darauf, dass...
 - maximal 5 Optionen angezeigt werden.
 - die Optionen so kurz wie möglich benannt werden. 1 bis 3 Wörter sollten
   ausreichen.
-- ein [Label](/03-components/content/label) verwendet wird, falls die Optionen
+- ein [Label](/03-components/content/label/overview) verwendet wird, falls die Optionen
   im Zusammenhang nicht verstanden werden. Falls kein Label verwendet wird, muss
   ein AriaLabel gesetzt werden.
 - eine logische Reihenfolge gewählt wird. Häufig sollte die wichtigste Option an
@@ -15,28 +15,28 @@ Achte bei der Verwendung eines SegmentedControl darauf, dass...
 
 ## Verwendung
 
-Verwende einen SegmentedControl, um...
+Verwende einen SegmentedControl, um ...
 
 - eine platzsparende Einfachauswahlmöglichkeit anzubieten.
 - einen Teil des Contents unterhalb zu ändern oder zu filtern. Ein
-  SegmentedControl ist kein Ersatz für [Tabs](/03-components/navigation/tabs),
+  SegmentedControl ist kein Ersatz für [Tabs](/03-components/navigation/tabs/overview),
   welche den gesamten Content einer Seite ändern.
 
 ## SegmentedControl vs. RadioGroup
 
 Flow bietet verschiedene Auswahl-Components an. Das SegmentedControl und die
-[RadioGroup](/03-components/form-controls/radio-group) haben viele
+[RadioGroup](/03-components/form-controls/radio-group/overview) haben viele
 Gemeinsamkeiten. Die Cards unter dem Text geben hilfreiche Anhaltspunkte zur
 Unterscheidung.
 
 <DoAndDont>
-  <Info heading="Verwende ein SegmentedControl, um z. B. ...">
+  <Info heading="Verwende ein SegmentedControl, um z. B. ...">
     - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen. - Optionen anzuzeigen,
     die aus 1 bis 2 Wörtern bestehen.
     - Optionen anzuzeigen, die den darunterliegenden Inhalt verändern.
   </Info>
 
-  <Info heading="Verwende eine RadioGroup, um z. B. ...">
+  <Info heading="Verwende eine RadioGroup, um z. B. ...">
     - eine Einfachauswahl von 2 bis ungefähr 7 Optionen anzuzeigen.
     - Optionen mit unterschiedlicher Textlänge darzustellen.
   </Info>
@@ -53,7 +53,7 @@ verwendet. Bei der Positionierung ist Folgendes zu beachten:
 
 - In der Regel nimmt das SegmentedControl die gesamte Breite des
   Content-Bereiches ein. In Ausnahmefällen kann das SegmentedControl auch
-  schmaler dargestellt werden, z. B. wenn es nicht in Formularen, sondern nur
+  schmaler dargestellt werden, z. B. wenn es nicht in Formularen, sondern nur
   als Ansichtsfilter über Diagrammen verwendet wird.
 - Wenn Inhalte mithilfe des SegmentedControls geändert werden sollen, muss das
   SegmentedControl direkt über dem zu ändernden Inhaltsbereich stehen.
@@ -65,7 +65,7 @@ verwendet. Bei der Positionierung ist Folgendes zu beachten:
 ## Hierarchie
 
 Ein SegmentedControl darf maximal 5 Optionen enthalten. Bei der Reihenfolge der
-Optionen ist folgendes zu beachten:
+Optionen ist Folgendes zu beachten:
 
 - Die wichtigste Option sollte an erster Stelle stehen und wird automatisch
   vorselektiert.
@@ -88,7 +88,7 @@ oder alleinstehenden Icons vorgesehen.
 ## Text
 
 Das SegmentedControl hat Text in den Optionen und im
-[Label](/03-components/content/label). Dabei ist Folgendes zu beachten:
+[Label](/03-components/content/label/overview). Dabei ist Folgendes zu beachten:
 
 - Wenn ein Label verwendet wird, sollte es so kurz wie möglich ausformuliert
   sein. Der Text des Labels sollte nie mehr als 1-3 Wörter umfassen. Ein Label
@@ -127,5 +127,5 @@ ist.
 
 # Accessibility
 
-Falls SegmentedControl ohne [Label](/03-components/content/label) verwendet
+Falls SegmentedControl ohne [Label](/03-components/content/label/overview) verwendet
 wird, muss ein AriaLabel gepflegt werden.

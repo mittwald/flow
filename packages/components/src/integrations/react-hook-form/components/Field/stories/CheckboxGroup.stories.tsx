@@ -115,3 +115,41 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"text"} rules={{ required: true }}>
+          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]}>
+            <Label>Options</Label>
+            <Checkbox value="1">Option 1</Checkbox>
+            <Checkbox value="2">Option 2</Checkbox>
+            <Checkbox value="3">Option 3</Checkbox>
+            <Checkbox value="4">Option 4</Checkbox>
+            <Checkbox value="5">Option 5</Checkbox>
+            <Checkbox value="6">Option 6</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

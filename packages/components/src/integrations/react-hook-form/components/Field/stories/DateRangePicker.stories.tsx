@@ -11,6 +11,7 @@ import { sleep } from "@/lib/promises/sleep";
 import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import type { DateRange } from "react-aria-components";
 import { DateRangePicker } from "@/components/DateRangePicker";
+import { FieldDescription } from "@/components/FieldDescription";
 
 const submitAction = action("submit");
 
@@ -84,3 +85,36 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"text"} rules={{ required: true }}>
+          <DateRangePicker>
+            <Label>Future Date</Label>
+            <FieldDescription>Select a future date</FieldDescription>
+          </DateRangePicker>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

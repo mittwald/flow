@@ -12,7 +12,7 @@ import {
 
 <Section style={{ height: "100%" }}>
   <HeaderNavigation
-    aria-label="Header navigation"
+    aria-label="Header Navigation"
     color="light"
     style={{ alignSelf: "flex-end" }}
   >

@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   LoadingSpinner,
   type LoadingSpinnerProps,
-} from "@/components/LoadingSpinner";
+} from "@/components/LoadingSpinner/LoadingSpinner";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LoadingSpinnerView: FC<LoadingSpinnerProps> = memo((props) => {

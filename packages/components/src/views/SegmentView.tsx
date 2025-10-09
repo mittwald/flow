@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Segment, type SegmentProps } from "@/components/SegmentedControl";
+import {
+  Segment,
+  type SegmentProps,
+} from "@/components/SegmentedControl/components/Segment/Segment";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SegmentView: FC<SegmentProps> = memo((props) => {

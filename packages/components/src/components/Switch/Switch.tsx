@@ -1,11 +1,14 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
-import { Label } from "@/components/Label";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { TunnelExit } from "@mittwald/react-tunnel";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
@@ -24,6 +27,7 @@ export const Switch = flowComponent("Switch", (props) => {
     className,
     labelPosition = "trailing",
     ref,
+    inputRef,
     ...rest
   } = props;
 
@@ -33,19 +37,41 @@ export const Switch = flowComponent("Switch", (props) => {
     className,
   );
 
+  const localSwitchRef = useObjectRef(ref);
+  const localInputRef = useObjectRef(inputRef);
+
+  useMakeFocusable(localSwitchRef, () => {
+    localInputRef.current?.focus();
+  });
+
   return (
-    <Aria.Switch {...rest} className={rootClassName} ref={ref}>
-      {({ isSelected }) => (
-        <>
-          <div className={styles.track}>
-            <div className={styles.handle}>
-              {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+    <PropsContextProvider
+      props={{
+        Label: {
+          tunnelId: "label",
+          className: styles.label,
+        },
+      }}
+    >
+      <Aria.Switch
+        {...rest}
+        className={rootClassName}
+        ref={localSwitchRef}
+        inputRef={localInputRef}
+      >
+        {({ isSelected }) => (
+          <>
+            <div className={styles.track}>
+              <div className={styles.handle}>
+                {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+              </div>
             </div>
-          </div>
-          {children && <Label className={styles.label}>{children}</Label>}
-        </>
-      )}
-    </Aria.Switch>
+            <TunnelExit id="label" />
+          </>
+        )}
+      </Aria.Switch>
+      {children}
+    </PropsContextProvider>
   );
 });
 
