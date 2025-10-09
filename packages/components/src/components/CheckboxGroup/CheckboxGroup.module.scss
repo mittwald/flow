@@ -19,6 +19,9 @@
         color: var(--form-control--border-color--default);
       }
     }
+    :global(.flow--field-error) {
+      display: none;
+    }
   }
 
   &:empty {

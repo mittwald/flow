@@ -40,10 +40,12 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     Checkbox: {
       tunnelId: "checkboxes",
       className: styles.checkbox,
+      inCheckboxGroup: true,
     },
     CheckboxButton: {
       tunnelId: "checkboxButtons",
       className: styles.checkboxButton,
+      inCheckboxGroup: true,
     },
   };
 

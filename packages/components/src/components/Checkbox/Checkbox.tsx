@@ -12,16 +12,35 @@ import styles from "./Checkbox.module.scss";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
-    FlowComponentProps<HTMLLabelElement> {}
+    FlowComponentProps<HTMLLabelElement> {
+  /** @internal */
+  inCheckboxGroup?: boolean;
+}
 
 /** @flr-generate all */
 export const Checkbox = flowComponent("Checkbox", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const {
+    children,
+    className,
+    ref,
+    inCheckboxGroup,
+    value,
+    isDisabled,
+    ...rest
+  } = props;
+
+  console.log(rest);
 
   const rootClassName = clsx(styles.checkbox, className);
 
   return (
-    <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
+    <Aria.Checkbox
+      {...(inCheckboxGroup ? {} : rest)}
+      isDisabled={isDisabled}
+      className={rootClassName}
+      ref={ref}
+      value={value}
+    >
       {({ isSelected, isIndeterminate }) => (
         <>
           {isSelected ? (
