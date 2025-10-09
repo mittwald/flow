@@ -1,22 +1,28 @@
 import { useState } from "react";
 
-interface MangedValueProps<V> {
-  value?: V;
-  defaultValue?: V;
-  onChange?: (value: V) => void;
+interface ManagedValuePropNames<K extends string> {
+  value: K;
+  defaultValue: K;
 }
 
-export const useManagedValue = <T extends string>(
-  props: MangedValueProps<T>,
+export const useManagedValue = <P extends object, T = unknown>(
+  props: P & { onChange?: (value: T) => void },
   onChange = props.onChange,
+  managedValuePropName: ManagedValuePropNames<
+    Extract<keyof Omit<P, "onChange">, string>
+  > = {
+    value: "value" as Extract<keyof Omit<P, "onChange">, string>,
+    defaultValue: "defaultValue" as Extract<keyof Omit<P, "onChange">, string>,
+  },
 ) => {
-  const { value: valueFromProps, defaultValue: defaultValueFromProps } = props;
+  const valueFromProps = props[managedValuePropName.value] as T;
+  const defaultValueFromProps = props[managedValuePropName.defaultValue] as T;
 
   const isControlled = typeof valueFromProps !== "undefined";
   const hasDefaultValue = typeof defaultValueFromProps !== "undefined";
 
   const [internalValue, setInternalValue] = useState(
-    hasDefaultValue ? defaultValueFromProps : "",
+    hasDefaultValue ? defaultValueFromProps : valueFromProps,
   );
   const value = isControlled ? valueFromProps : internalValue;
 

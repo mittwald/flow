@@ -8,6 +8,8 @@ import { sleep } from "@/lib/promises/sleep";
 import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -146,21 +148,47 @@ export const WithTransformedValue: Story = {
   },
 };
 
-export const WithFocusAndError: Story = {
+export const WithFieldError: Story = {
+  render: () => {
+    const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <TextField>
+            <Label>Field</Label>
+          </TextField>
+        </Field>
+        <TextField isInvalid>
+          <Label>Field</Label>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </TextField>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
   render: (props) => {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"email"}>
+        <Field name={"field"}>
           <TextField {...props} type="email" inputMode="email">
-            <Label>Email</Label>
+            <Label>Field</Label>
           </TextField>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button
           onPress={() =>
             form.setError(
-              "email",
+              "field",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -168,7 +196,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("email")}>
+        <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -10,6 +10,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Time } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -74,7 +75,33 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
+export const WithFieldError: Story = {
+  render: () => {
+    const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <TimeField>
+            <Label>Time</Label>
+          </TimeField>
+        </Field>
+        <TimeField isInvalid>
+          <Label>Time</Label>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </TimeField>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
   render: () => {
     const form = useForm();
     return (
@@ -89,7 +116,7 @@ export const WithFocusAndError: Story = {
           onPress={() =>
             form.setError(
               "text",
-              { type: "required", message: "oh no" },
+              { type: "required", message: "ErrorFromForm" },
               { shouldFocus: true },
             )
           }

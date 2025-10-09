@@ -9,7 +9,6 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
-import FieldErrorView from "@/views/FieldErrorView";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { inheritProps } from "@/lib/propsContext/inherit/types";
@@ -65,6 +64,8 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       name,
     }) ?? controller.field.value;
 
+  const isFieldInvalid = controller.fieldState.invalid;
+
   const fieldProps = {
     ...inheritProps,
     ...controller.field,
@@ -74,26 +75,22 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     isRequired: !!rest.rules?.required,
     validationBehavior: "aria" as const,
     defaultValue,
-    isInvalid: controller.fieldState.invalid,
-    children: dynamic((p) => {
-      if (controller.fieldState.invalid) {
-        return (
-          <>
-            {p.children}
-            <FieldErrorView>
-              {controller.fieldState.error?.message}
-            </FieldErrorView>
-          </>
-        );
-      }
-
-      return p.children;
-    }),
+    isInvalid: isFieldInvalid,
   };
 
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
 
   const propsContext: PropsContext = {
+    FieldError: {
+      ___inherit: true,
+      children: dynamic((localProps) => {
+        if (isFieldInvalid) {
+          return controller.fieldState.error?.message;
+        }
+
+        return localProps.children;
+      }),
+    },
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,
