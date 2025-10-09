@@ -10,6 +10,12 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Option } from "@/components/Option";
 import { ComboBox } from "@/components/ComboBox";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
+import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const submitAction = action("submit");
 
@@ -81,3 +87,51 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"text"} rules={{ required: true }}>
+          <ComboBox>
+            <Label>
+              Domain
+              <ContextualHelpTrigger>
+                <Button />
+                <ContextualHelp>
+                  <Text>{dummyText.short}</Text>
+                </ContextualHelp>
+              </ContextualHelpTrigger>
+            </Label>
+            <Option>mydomain.de</Option>
+            <Option>shop.mydomain.de</Option>
+            <Option>anotherdomain.com</Option>
+            <Option>www.anotherdomain.com</Option>
+            <Option>anotherdomain.com/shop</Option>
+            <Option>anotherdomain.com/blog</Option>
+            <Option>onemoredomain.de</Option>
+            <Option>www.onemoredomain.de</Option>
+          </ComboBox>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

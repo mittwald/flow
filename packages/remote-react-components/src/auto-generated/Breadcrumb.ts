@@ -8,9 +8,6 @@ export { type RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
 export const Breadcrumb = createFlowRemoteComponent(
   "flr-breadcrumb",
   "Breadcrumb",
-  {
-    clearPropsContext: true,
-  },
   RemoteBreadcrumbElement,
   {
     slotProps: {

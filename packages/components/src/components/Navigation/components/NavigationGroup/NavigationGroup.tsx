@@ -1,5 +1,5 @@
 import type { ComponentProps, PropsWithChildren } from "react";
-import React, { useId } from "react";
+import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -33,20 +33,22 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     Label: {
       id: generatedId,
       className: styles.label,
-      "aria-hidden": true,
     },
     Link: {
       tunnelId: "groupLinks",
+      unstyled: false,
+      color: "light",
+      className: "peter",
     },
   };
 
   if (collapsable) {
     return (
-      <PropsContextProvider mergeInParentContext props={propsContext}>
+      <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <Accordion defaultExpanded className={rootClassName}>
             {children}
-            <Content clearPropsContext={false}>
+            <Content>
               <ul>
                 <TunnelExit id="groupLinks" />
               </ul>
@@ -58,20 +60,18 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   }
 
   return (
-    <PropsContextProvider mergeInParentContext props={propsContext}>
+    <PropsContextProvider props={propsContext}>
       <TunnelProvider>
         <section
           aria-labelledby={generatedId}
           className={rootClassName}
           {...rest}
         >
-          <PropsContextProvider mergeInParentContext props={propsContext}>
-            {children}
-            <TunnelExit id="Label" />
-            <ul>
-              <TunnelExit id="groupLinks" />
-            </ul>
-          </PropsContextProvider>
+          {children}
+          <TunnelExit id="Label" />
+          <ul>
+            <TunnelExit id="groupLinks" />
+          </ul>
         </section>
       </TunnelProvider>
     </PropsContextProvider>

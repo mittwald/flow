@@ -17,6 +17,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       "aria-label": {},
       "aria-labelledby": {},
       arrowBoundaryOffset: {},
+      arrowRef: {},
       boundaryElement: {},
       className: {},
       containerPadding: {},

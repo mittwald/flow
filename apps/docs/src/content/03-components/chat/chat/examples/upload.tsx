@@ -1,18 +1,18 @@
 import {
-  FileCard,
-  FileCardList,
   Align,
   Avatar,
   Button,
   Chat,
   Content,
+  FileCard,
+  FileCardList,
+  FileField,
   Header,
   Initials,
   Message,
   MessageThread,
   Text,
   TextArea,
-  IconAttachment,
 } from "@mittwald/flow-react-components";
 
 <Chat>
@@ -38,18 +38,18 @@ import {
       </Content>
     </Message>
   </MessageThread>
-  <Button
-    color="secondary"
-    variant="plain"
-    aria-label="Datei anhängen"
-  >
-    <IconAttachment />
-  </Button>
+
   <TextArea
     aria-label="Nachricht"
-    rows={1}
+    rows={3}
     autoResizeMaxRows={10}
   />
+
+  <FileField>
+    <Button variant="outline" color="secondary">
+      Datei anhängen
+    </Button>
+  </FileField>
   <Button color="accent">Senden</Button>
   <FileCardList>
     <FileCard name="Hochgeladene Datei 1" />

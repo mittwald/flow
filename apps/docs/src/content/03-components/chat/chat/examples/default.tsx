@@ -68,7 +68,7 @@ import {
   </MessageThread>
   <TextArea
     aria-label="Nachricht"
-    rows={1}
+    rows={3}
     autoResizeMaxRows={10}
   />
   <Button color="accent">Senden</Button>

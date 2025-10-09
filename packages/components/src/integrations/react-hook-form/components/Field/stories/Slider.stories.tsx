@@ -62,3 +62,35 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFocusAndError: Story = {
+  render: () => {
+    const form = useForm();
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"text"} rules={{ required: true }}>
+          <Slider>
+            <Label>Text</Label>
+          </Slider>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "text",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("text")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};

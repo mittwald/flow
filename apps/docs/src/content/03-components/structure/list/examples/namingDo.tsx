@@ -39,7 +39,9 @@ export default () => {
         defaultSelected={["Unverifiziert"]}
         values={["Verifiziert", "Unverifiziert"]}
       />
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

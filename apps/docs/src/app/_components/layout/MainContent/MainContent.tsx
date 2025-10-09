@@ -1,44 +1,21 @@
-import type { FC } from "react";
-import React from "react";
+import React, { type FC } from "react";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
-import { Tab, TabTitle } from "@mittwald/flow-react-components";
 import styles from "../../../layout.module.scss";
-import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import * as path from "path";
+import { LayoutCard } from "@mittwald/flow-react-components";
 
 interface Props {
   mdxFile: MdxFile;
-  tabTitle?: string;
-  showTabs?: boolean;
 }
 
 export const MainContent: FC<Props> = async (props) => {
-  const { mdxFile, tabTitle, showTabs } = props;
+  const { mdxFile } = props;
 
-  const indexFile = await MdxFileFactory.fromFile(
-    "src/content/" + path.dirname(mdxFile.filename) + "/index.mdx",
+  return (
+    <LayoutCard className={styles.mainContent}>
+      <MdxFileView mdxFile={mdxFile.serialize()} />
+    </LayoutCard>
   );
-
-  const content = (
-    <div className={styles.tabContent}>
-      <MdxFileView
-        mdxFile={mdxFile.serialize()}
-        indexFile={indexFile.serialize()}
-      />
-    </div>
-  );
-
-  if (showTabs) {
-    return (
-      <Tab>
-        <TabTitle>{tabTitle}</TabTitle>
-        {content}
-      </Tab>
-    );
-  }
-
-  return <> {content} </>;
 };
 
 export default MainContent;

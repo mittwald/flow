@@ -6,7 +6,6 @@ import {
   ContextMenu,
   Heading,
   IconDomain,
-  IconDownload,
   IconSubdomain,
   MenuItem,
   Text,
@@ -21,16 +20,13 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={5} aria-label="Domains">
+    <DomainList.List
+      batchSize={4}
+      aria-label="Domains"
+      defaultViewMode="list"
+    >
       <DomainList.StaticData data={domains} />
       <ActionGroup>
-        <Button
-          color="secondary"
-          variant="soft"
-          slot="secondary"
-        >
-          <IconDownload />
-        </Button>
         <Button color="accent">Anlegen</Button>
       </ActionGroup>
       <DomainList.Search />
@@ -47,16 +43,6 @@ export default () => {
       <DomainList.Sorting
         property="hostname"
         name="Domain Z bis A"
-        direction="desc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type Z bis A"
         direction="desc"
       />
       <DomainList.Table>
@@ -92,7 +78,10 @@ export default () => {
           </DomainList.TableRow>
         </DomainList.TableBody>
       </DomainList.Table>
-      <DomainList.Item showTiles>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+        showTiles
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

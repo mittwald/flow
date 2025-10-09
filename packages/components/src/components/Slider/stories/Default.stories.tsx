@@ -22,6 +22,10 @@ type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {};
 
+export const ReadOnly: Story = {
+  args: { isReadOnly: true },
+};
+
 export const WithUnit: Story = {
   render: (props) => (
     <Slider

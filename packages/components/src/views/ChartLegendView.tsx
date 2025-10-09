@@ -1,15 +1,16 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
+import React, { memo, type FC, useContext } from "react";
 import {
   ChartLegend,
   type ChartLegendProps,
-} from "@/components/CartesianChart";
+} from "@/components/CartesianChart/components/ChartLegend/ChartLegend";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
-const ChartLegendView: FC<ChartLegendProps> = (props) => {
+const ChartLegendView: FC<ChartLegendProps> = memo((props) => {
   const View = useContext(viewComponentContext)["ChartLegend"] ?? ChartLegend;
   return <View {...props} />;
-};
+});
+ChartLegendView.displayName = "ChartLegendView";
 
 export default ChartLegendView;

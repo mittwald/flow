@@ -1,11 +1,10 @@
-import type { PropsWithChildren } from "react";
-import React, { useMemo } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { useMemo } from "react";
 import type { ListBoxProps } from "react-aria-components";
-import { Option } from "@/components/Option";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
+import OptionView from "@/views/OptionView";
 
 export interface Country {
   code: string;
@@ -31,38 +30,33 @@ const defaultSortBy: CountrySortFn = (left, right) =>
 const voidSortBy: CountrySortFn = () => 0;
 const defaultFilterBy: CountryFilterFn = () => true;
 
-/** @flr-generate all */
-export const CountryOptions = flowComponent(
-  "CountryOptions",
-  ({
-    filterBy = defaultFilterBy,
-    sortBy = voidSortBy,
-  }: CountryOptionsProps) => {
-    const stringFormatter = useLocalizedStringFormatter(locales);
+export const CountryOptions: FC<CountryOptionsProps> = (props) => {
+  const { filterBy = defaultFilterBy, sortBy = voidSortBy } = props;
 
-    const countries = useMemo(
-      () =>
-        countryCodes
-          .map((code) => ({
-            code,
-            name: stringFormatter.format(`countries.${code}`),
-          }))
-          .filter(filterBy)
-          .sort(defaultSortBy)
-          .sort(sortBy),
-      [stringFormatter, filterBy, sortBy],
-    );
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-    return (
-      <>
-        {countries.map((country) => (
-          <Option key={country.code} value={country.code}>
-            {country.name}
-          </Option>
-        ))}
-      </>
-    );
-  },
-);
+  const countries = useMemo(
+    () =>
+      countryCodes
+        .map((code) => ({
+          code,
+          name: stringFormatter.format(`countries.${code}`),
+        }))
+        .filter(filterBy)
+        .sort(defaultSortBy)
+        .sort(sortBy),
+    [stringFormatter, filterBy, sortBy],
+  );
+
+  return (
+    <>
+      {countries.map((country) => (
+        <OptionView key={country.code} value={country.code}>
+          {country.name}
+        </OptionView>
+      ))}
+    </>
+  );
+};
 
 export default CountryOptions;

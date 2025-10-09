@@ -1,12 +1,12 @@
 import type { ComponentProps, PropsWithChildren } from "react";
-import React, { useId } from "react";
+import { useId } from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ContextMenuSection } from "@/components/ContextMenu/components/ContextMenuSection";
+import ContextMenuSectionView from "@/views/ContextMenuSectionView";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,
@@ -34,7 +34,9 @@ export const Section = flowComponent("Section", (props) => {
 
   if (renderContextMenuSection) {
     return (
-      <ContextMenuSection ref={ref as never}>{children}</ContextMenuSection>
+      <ContextMenuSectionView ref={ref as never}>
+        {children}
+      </ContextMenuSectionView>
     );
   }
 
@@ -62,7 +64,7 @@ export const Section = flowComponent("Section", (props) => {
 
   return (
     <section {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext} mergeInParentContext>
+      <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
     </section>

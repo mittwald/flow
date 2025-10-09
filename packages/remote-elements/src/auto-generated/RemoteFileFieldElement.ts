@@ -14,6 +14,7 @@ export class RemoteFileFieldElement extends FlowRemoteElement<RemoteFileFieldEle
       accept: {},
       isDisabled: {},
       isInvalid: {},
+      isReadOnly: {},
       isRequired: {},
       multiple: {},
       name: {},

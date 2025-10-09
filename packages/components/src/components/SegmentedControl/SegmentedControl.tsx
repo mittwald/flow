@@ -3,17 +3,18 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
-import type { PropsWithChildren } from "react";
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
-import type { PropsContext } from "@/lib/propsContext";
+import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { FieldError } from "@/components/FieldError";
 import clsx from "clsx";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SegmentedControlProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -55,14 +56,13 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     },
   };
 
+  const localRadioRef = useObjectRef(ref);
+  useMakeFocusable(localRadioRef);
+
   return (
-    <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
-      <TunnelProvider>
-        <PropsContextProvider
-          dependencies={["segment"]}
-          props={propsContext}
-          mergeInParentContext
-        >
+    <Aria.RadioGroup {...rest} className={rootClassName} ref={localRadioRef}>
+      <PropsContextProvider dependencies={["segment"]} props={propsContext}>
+        <TunnelProvider>
           {children}
 
           <div className={styles.segmentedControl}>
@@ -73,8 +73,8 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
-        </PropsContextProvider>
-      </TunnelProvider>
+        </TunnelProvider>
+      </PropsContextProvider>
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );

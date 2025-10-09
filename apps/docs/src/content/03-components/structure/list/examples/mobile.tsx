@@ -92,7 +92,9 @@ export default () => {
           </DomainList.TableRow>
         </DomainList.TableBody>
       </DomainList.Table>
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

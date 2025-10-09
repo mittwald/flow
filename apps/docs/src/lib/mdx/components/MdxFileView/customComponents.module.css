@@ -13,7 +13,7 @@
 }
 
 .preCopyButton {
-  position: absolute;
+  position: absolute !important;
   top: var(--size-px--s);
   right: var(--size-px--s);
 }
@@ -25,6 +25,29 @@
 
 .separator {
   margin-block: var(--size-px--m);
+}
+
+.anchorLinkHeading {
+  width: fit-content;
+  > span {
+    display: flex;
+    align-items: center;
+    column-gap: var(--size-rem--s);
+  }
+  .anchorButton {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition--duration--fast);
+  }
+  &:hover {
+    .anchorButton {
+      opacity: 1;
+    }
+  }
+
+  .anchorButton[data-focused] {
+    opacity: 1;
+  }
 }
 
 .doAndDontCode {

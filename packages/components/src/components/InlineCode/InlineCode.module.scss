@@ -1,15 +1,15 @@
 .inlineCode {
   font-family: FiraCode, "monospace";
   font-size: var(--code--font-size);
-  line-height: var(--code--line-height);
   word-wrap: break-word;
-  background-color: var(--code--background-color);
+  background-color: var(--code--default-background-color);
   padding-inline: var(--code--padding-x);
   padding-block: var(--code--padding-y);
   border-radius: var(--code--corner-radius);
   display: inline;
   width: fit-content;
   max-width: 100%;
+  min-width: 0;
 
   @mixin variant($color) {
     &:where(.#{$color}) {

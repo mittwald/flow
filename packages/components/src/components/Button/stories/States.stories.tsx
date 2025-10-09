@@ -20,6 +20,13 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+export const ReadOnly: Story = {
+  args: {
+    isReadOnly: true,
+    onPress: () => console.log("pressed"),
+  },
+};
+
 export const DisabledSolid: Story = {
   args: {
     isDisabled: true,

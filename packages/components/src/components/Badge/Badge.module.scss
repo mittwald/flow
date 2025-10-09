@@ -23,6 +23,8 @@
     height: var(--badge-size);
     line-height: var(--content-size);
     padding-inline: var(--badge--padding-x);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     @include ellipsis.ellipsis();
   }

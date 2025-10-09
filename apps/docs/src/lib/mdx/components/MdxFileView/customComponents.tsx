@@ -1,27 +1,28 @@
 import styles from "./customComponents.module.css";
-import { Heading } from "@mittwald/flow-react-components";
-import { Alert } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import type { PropsWithChildren } from "react";
-import { CopyButton } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
-import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
-import { Separator } from "@mittwald/flow-react-components";
-import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 import {
+  Alert,
+  ColumnLayout,
+  Content,
+  CopyButton,
+  Heading,
+  InlineCode,
+  Label,
+  Link,
+  Separator,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
+  Text,
 } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
+import type { PropsWithChildren } from "react";
+import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
+import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 import { onlyText } from "react-children-utilities";
+import { AnchorLinkHeading } from "@/lib/mdx/components/MdxFileView/AnchorLinkHeading";
 
 export const customComponents = {
   Content: Content,
@@ -50,41 +51,29 @@ export const customComponents = {
   ),
 
   p: ({ children }: PropsWithChildren) => (
-    <Text className={styles.p} elementType="p">
-      {children}
-    </Text>
+    <Text elementType="p">{children}</Text>
   ),
 
   ul: ({ children }: PropsWithChildren) => (
     <ul className={styles.ul}>{children}</ul>
   ),
 
-  li: ({ children }: PropsWithChildren) => (
-    <li className={styles.li}>{children}</li>
-  ),
+  li: ({ children }: PropsWithChildren) => <li>{children}</li>,
 
   h1: ({ children }: PropsWithChildren) => (
-    <Heading level={2} size="l" className={styles.heading2}>
-      {children}
-    </Heading>
+    <AnchorLinkHeading>{children}</AnchorLinkHeading>
   ),
 
   h2: ({ children }: PropsWithChildren) => (
-    <Heading level={3} size="m" className={styles.heading}>
-      {children}
-    </Heading>
+    <Heading level={3}>{children}</Heading>
   ),
 
   h3: ({ children }: PropsWithChildren) => (
-    <Heading level={4} size="s" className={styles.heading}>
-      {children}
-    </Heading>
+    <Heading level={4}>{children}</Heading>
   ),
 
   h4: ({ children }: PropsWithChildren) => (
-    <Heading level={5} className={styles.heading}>
-      {children}
-    </Heading>
+    <Heading level={5}>{children}</Heading>
   ),
 
   a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {

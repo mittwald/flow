@@ -1,16 +1,23 @@
+import { mergeRefs as mergeRefsFn } from "@react-aria/utils";
 import { mergeProps as ariaMergeProps } from "@react-aria/utils";
 import { isObjectType } from "remeda";
 import { setProperty } from "dot-prop";
+import type { Ref } from "react";
 
 interface MergePropsOptions {
   mergeClassNames?: boolean;
   mergeEventHandler?: boolean;
+  mergeRefs?: boolean;
 }
 
 export const getPropsMerger =
   (options: MergePropsOptions = {}): typeof ariaMergeProps =>
   (...propsList) => {
-    const { mergeClassNames = true, mergeEventHandler = true } = options;
+    const {
+      mergeClassNames = true,
+      mergeEventHandler = true,
+      mergeRefs = true,
+    } = options;
     const mergedProps = ariaMergeProps(...propsList);
 
     if (isObjectType(mergedProps)) {
@@ -38,6 +45,24 @@ export const getPropsMerger =
               }
             }
           }
+        }
+      }
+
+      if (mergeRefs) {
+        const refProps = Object.keys(mergedProps).filter(
+          (p) => p === "ref" || p.endsWith("Ref"),
+        );
+
+        for (const refProp of refProps) {
+          const collectedRefObjects = propsList
+            .map((p) => (isObjectType(p) && refProp in p ? p[refProp] : null))
+            .filter((r): r is Ref<unknown> => r !== null);
+
+          setProperty(
+            mergedProps,
+            refProp,
+            mergeRefsFn(...collectedRefObjects),
+          );
         }
       }
     }

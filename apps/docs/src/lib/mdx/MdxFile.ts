@@ -9,9 +9,9 @@ export interface MdxFileMeta {
   gitHubComponentPath?: string;
 }
 
-export interface StaticParams {
-  slug: string[];
-}
+export type StaticParams =
+  | { slug: string[] }
+  | { group: string; component: string };
 
 export type MdxFileExamples = Record<string, string>;
 
@@ -20,6 +20,7 @@ export interface SerializedMdxFile {
   slugs: string[];
   mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   examples: MdxFileExamples;
+  anchors: string[];
 }
 
 export class MdxFile {
@@ -29,12 +30,14 @@ export class MdxFile {
   public readonly pathname: string;
   public readonly mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   private readonly examples: MdxFileExamples;
+  public readonly anchors: string[];
 
   public constructor(
     filename: string,
     slugs: string[],
     mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>,
     examples: MdxFileExamples,
+    anchors: string[],
   ) {
     this.filename = filename;
     this.slugs = slugs;
@@ -42,6 +45,7 @@ export class MdxFile {
     this.id = filename;
     this.mdxSource = mdxSource;
     this.examples = examples;
+    this.anchors = anchors;
   }
 
   public getTitle(): string {
@@ -88,11 +92,12 @@ export class MdxFile {
       examples: this.examples,
       slugs: this.slugs,
       filename: this.filename,
+      anchors: this.anchors,
     };
   }
 
   public static deserialize(serialized: SerializedMdxFile): MdxFile {
-    const { filename, mdxSource, examples, slugs } = serialized;
-    return new MdxFile(filename, slugs, mdxSource, examples);
+    const { filename, mdxSource, examples, slugs, anchors } = serialized;
+    return new MdxFile(filename, slugs, mdxSource, examples, anchors);
   }
 }

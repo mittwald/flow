@@ -6,6 +6,9 @@
 }
 
 .row {
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
+
   &.isSelected {
     background-color: var(--list-item--background-color--pressed);
   }

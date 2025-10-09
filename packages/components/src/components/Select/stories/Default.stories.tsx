@@ -41,6 +41,10 @@ export const Required: Story = {
   args: { isRequired: true },
 };
 
+export const ReadOnly: Story = {
+  args: { isReadOnly: true },
+};
+
 export const WithFieldDescription: Story = {
   render: (props) => (
     <Select {...props}>

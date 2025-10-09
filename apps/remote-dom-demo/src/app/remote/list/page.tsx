@@ -38,7 +38,7 @@ export default function Page() {
               });
             }}
           </DemoList.LoaderAsync>
-          <DemoList.Item textValue={(d) => d.name}>
+          <DemoList.Item textValue={(d) => d.name} showTiles>
             {(d) => (
               <ListItemView>
                 <Avatar>

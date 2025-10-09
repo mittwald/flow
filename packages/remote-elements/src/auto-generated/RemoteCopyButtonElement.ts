@@ -38,6 +38,7 @@ export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonE
       isDisabled: {},
       isFailed: {},
       isPending: {},
+      isReadOnly: {},
       isSucceeded: {},
       lang: {},
       name: {},

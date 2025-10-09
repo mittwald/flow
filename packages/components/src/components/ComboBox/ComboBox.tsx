@@ -16,6 +16,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
@@ -27,10 +29,7 @@ export interface ComboBoxProps
   controller?: OverlayController;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     children,
@@ -88,12 +87,15 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   const controller = controllerFromProps ?? controllerFromContext;
 
+  const localComboBoxRef = useObjectRef(ref);
+  useMakeFocusable(localComboBoxRef);
+
   return (
     <Aria.ComboBox
-      ref={ref}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
+      ref={localComboBoxRef}
       onSelectionChange={handleOnSelectionChange}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
     >
