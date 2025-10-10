@@ -23,7 +23,8 @@ export const getNestingLevel = (props: PropsContext) => {
 
 export const increaseNestingLevel = (propsContext: PropsContext) => {
   const currentNestingLevel = getNestingLevel(propsContext);
-  Object.assign(propsContext, {
+  return {
+    ...propsContext,
     [nestingLevelKey]: currentNestingLevel + 1,
-  });
+  };
 };
