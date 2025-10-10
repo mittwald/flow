@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.516](https://github.com/mittwald/flow/compare/0.2.0-alpha.515...0.2.0-alpha.516) (2025-10-10)
+
+### Bug Fixes
+
+* **Checkbox:** fix issue with RHF ([a8951e4](https://github.com/mittwald/flow/commit/a8951e49a7cae87abce0d5ea2e0522f8563b9599))
+* **PropsContext:** fix nesting level changes during re-render ([#2068](https://github.com/mittwald/flow/issues/2068)) ([31773e3](https://github.com/mittwald/flow/commit/31773e335bbb6b76a2d192d461c248c3a331b48b))
+
 # [0.2.0-alpha.515](https://github.com/mittwald/flow/compare/0.2.0-alpha.514...0.2.0-alpha.515) (2025-10-09)
 
 **Note:** Version bump only for package @mittwald/flow-project
