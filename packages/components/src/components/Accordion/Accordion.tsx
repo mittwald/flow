@@ -1,5 +1,5 @@
 import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -27,6 +27,21 @@ export const Accordion: FC<AccordionProps> = (props) => {
     ...rest
   } = props;
   const [expanded, setExpanded] = useState(defaultExpanded);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const prevExpanded = useRef(defaultExpanded);
+
+  useEffect(() => {
+    prevExpanded.current = expanded;
+    setIsAnimating(true);
+
+    const timeout = setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [expanded]);
+
+  const isContentActive = isAnimating ? true : prevExpanded.current;
 
   const rootClassName = clsx(
     styles.accordion,
@@ -71,7 +86,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   return (
     <div {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext} dependencies={[expanded]}>
+      <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           {children}
           <div
@@ -81,7 +96,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
             hidden={!expanded}
             className={styles.content}
           >
-            <Activity isActive={expanded} inactiveDelay={1000}>
+            <Activity isActive={isContentActive}>
               <TunnelExit id="content" />
             </Activity>
           </div>
