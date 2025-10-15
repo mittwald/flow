@@ -22,7 +22,7 @@ export interface SelectProps
     FlowComponentProps,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
-  onChange?: (value: string | number) => void;
+  onChange?: (value: Key | null) => void;
   /** An overlay controller to control the select option popover state. */
   controller?: OverlayController;
   /** Whether the component is read only. */
@@ -69,7 +69,7 @@ export const Select = flowComponent("Select", (props) => {
   };
 
   const handleOnSelectionChange = (id: Key | null) => {
-    onChange(String(id));
+    onChange(id);
     onSelectionChange(id);
   };
 

@@ -12,6 +12,6 @@
     "invariant": "^2.2.4"
   },
   "devDependencies": {
-    "vite-plugin-node-polyfills": "^0.23.0"
+    "vite-plugin-node-polyfills": "^0.24.0"
   }
 }
