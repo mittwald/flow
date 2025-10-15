@@ -56,7 +56,7 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       className={rootClassName}
       ref={localCheckboxGroupRef}
     >
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} clear>
         <TunnelProvider>
           {children}
 

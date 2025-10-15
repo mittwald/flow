@@ -23,6 +23,7 @@ export const PropsContextProvider: FC<Props> = memo((props) => {
     dependencies = [],
     levelMode = "reset",
     children,
+    clear = false,
   } = props;
 
   const parentPropsContext = usePropsContext();
@@ -34,11 +35,11 @@ export const PropsContextProvider: FC<Props> = memo((props) => {
   const propsWithParentPropsContext = useMemo(
     () =>
       mergePropsContext(
-        parentPropsContext,
+        clear ? undefined : parentPropsContext,
         providedProps,
         readPropsContextLevel,
       ),
-    [parentPropsContext, readPropsContextLevel, ...dependencies],
+    [parentPropsContext, clear, readPropsContextLevel, ...dependencies],
   );
 
   return (

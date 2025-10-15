@@ -75,10 +75,11 @@ export function flowComponent<C extends FlowComponentName>(
       typeof ImplementationComponentType
     >;
 
-    const emptyProps = useMemo(() => ({}), []);
-    const componentProps =
-      useComponentPropsContext(componentName) ?? emptyProps;
-    increaseNestingLevel(componentProps);
+    const componentProps = useComponentPropsContext(componentName);
+    const componentPropsToUse = useMemo(
+      () => increaseNestingLevel(componentProps ?? {}),
+      [componentProps],
+    );
 
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
@@ -89,7 +90,7 @@ export function flowComponent<C extends FlowComponentName>(
     if (isRemoteComponent) {
       element = (
         <ComponentPropsContextProvider
-          componentProps={componentProps}
+          componentProps={componentPropsToUse}
           levelModel={propsContextLevelMode}
         >
           {element}
@@ -103,7 +104,7 @@ export function flowComponent<C extends FlowComponentName>(
        */
       element = (
         <ComponentPropsContextProviderView
-          componentProps={componentProps}
+          componentProps={componentPropsToUse}
           levelModel={propsContextLevelMode}
         >
           {element}
