@@ -8,9 +8,11 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface TextFieldProps
-  extends Omit<TextFieldBaseProps, "input" | "className">,
+  extends Omit<TextFieldBaseProps, "FieldErrorView" | "input" | "className">,
     Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
     FlowComponentProps<HTMLInputElement> {}
@@ -30,9 +32,19 @@ export const TextField = flowComponent("TextField", (props) => {
     </ReactAriaControlledValueFix>
   );
 
+  const { FieldErrorView, propsContext, mergedRootClassName } =
+    useFieldComponent(props);
+
   return (
-    <TextFieldBase {...rest} input={input}>
-      {children}
+    <TextFieldBase
+      {...rest}
+      FieldErrorView={FieldErrorView}
+      className={mergedRootClassName}
+      input={input}
+    >
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </TextFieldBase>
   );
 });
