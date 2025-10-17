@@ -21,8 +21,6 @@ jobs:
       url: https://mittwald.github.io${{ env.NEXT_BASE_PATH }}
 
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
