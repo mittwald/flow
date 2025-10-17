@@ -45,6 +45,6 @@
   },
   "peerDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
-    "react": "^19"
+    "react": "^19.2"
   }
 }
