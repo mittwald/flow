@@ -31,8 +31,8 @@ export const useFieldComponent = (
   const fieldPropsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
-      optional: !!props.isRequired,
-      isDisabled: !!props.isDisabled,
+      optional: !props.isRequired,
+      isDisabled: props.isDisabled,
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
