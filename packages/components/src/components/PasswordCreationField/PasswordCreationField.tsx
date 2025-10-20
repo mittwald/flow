@@ -16,14 +16,12 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import styles from "./PasswordCreationField.module.scss";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
-import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
@@ -45,6 +43,7 @@ import {
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 import { useManagedValue } from "@/lib/hooks/useManagedValue";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -82,8 +81,16 @@ export const PasswordCreationField = flowComponent(
       ...rest
     } = props;
 
+    const {
+      FieldErrorView,
+      FieldErrorResetContext,
+      fieldProps,
+      fieldPropsContext,
+    } = useFieldComponent(props);
+
     const [isLoading, setIsLoading] = useState(false);
     const translate = useLocalizedContextStringFormatter(locales);
+
     const validationPolicy = useMemo(
       () => Policy.fromDeclaration(validationPolicyFromProps),
       [validationPolicyFromProps],
@@ -185,6 +192,7 @@ export const PasswordCreationField = flowComponent(
     };
 
     const propsContext: PropsContext = {
+      ...fieldPropsContext,
       Button: {
         tunnelId: "button",
         size: "m",
@@ -203,10 +211,8 @@ export const PasswordCreationField = flowComponent(
         text: value,
       },
       Label: {
-        className: formFieldStyles.label,
+        ...fieldPropsContext.Label,
         tunnelId: "label",
-        optional: !isRequired,
-        isDisabled: isDisabled,
         children: dynamic((localProps) => {
           return (
             <>
@@ -224,96 +230,95 @@ export const PasswordCreationField = flowComponent(
           );
         }),
       },
-      FieldDescription: {
-        className: formFieldStyles.fieldDescription,
-      },
-      FieldError: {
-        className: formFieldStyles.customFieldError,
-        children: dynamic(() => {
-          if (latestValidationErrorText) {
-            return latestValidationErrorText;
-          }
-        }),
-      },
     };
 
     return (
-      <PropsContextProvider
-        props={propsContext}
-        dependencies={[isDisabled, isRequired, value, policyValidationResult]}
+      <Aria.TextField
+        {...rest}
+        value={value}
+        type={isPasswordRevealed ? "text" : "password"}
+        onChange={handleOnChange}
+        onPaste={onPasswordPasteHandler}
+        className={clsx(className, fieldProps.className)}
+        isDisabled={isDisabled}
+        isInvalid={isInvalid}
+        isRequired={isRequired}
       >
         <TunnelProvider>
-          <Aria.TextField
-            {...rest}
-            value={value}
-            type={isPasswordRevealed ? "text" : "password"}
-            onChange={handleOnChange}
-            onPaste={onPasswordPasteHandler}
-            className={clsx(className, formFieldStyles.formField)}
-            isDisabled={isDisabled}
-            isInvalid={isInvalid}
-            isRequired={isRequired}
-          >
-            <TunnelExit id="label" />
-            <Aria.Group
-              isDisabled={isDisabled}
-              className={clsx(styles.inputGroup)}
+          <FieldErrorResetContext>
+            <PropsContextProvider
+              props={propsContext}
+              dependencies={[
+                isDisabled,
+                isRequired,
+                value,
+                policyValidationResult,
+              ]}
             >
-              <ReactAriaControlledValueFix
-                inputContext={Aria.InputContext}
-                props={{ ...props, value }}
+              <TunnelExit id="label" />
+              <Aria.Group
+                isDisabled={isDisabled}
+                className={clsx(styles.inputGroup)}
               >
-                <Aria.Input ref={ref} className={styles.input} />
-              </ReactAriaControlledValueFix>
-              <Aria.Group className={styles.buttonContainer}>
-                <TogglePasswordVisibilityButton
-                  className={styles.button}
-                  isVisible={isPasswordRevealed}
-                  isDisabled={isDisabled}
-                  onPress={togglePasswordVisibilityHandler}
+                <ReactAriaControlledValueFix
+                  inputContext={Aria.InputContext}
+                  props={{ ...props, value }}
+                >
+                  <Aria.Input ref={ref} className={styles.input} />
+                </ReactAriaControlledValueFix>
+                <Aria.Group className={styles.buttonContainer}>
+                  <TogglePasswordVisibilityButton
+                    className={styles.button}
+                    isVisible={isPasswordRevealed}
+                    isDisabled={isDisabled}
+                    onPress={togglePasswordVisibilityHandler}
+                  />
+                  <TunnelExit id="button" />
+                </Aria.Group>
+                <ComplexityIndicator
+                  isEmptyValue={isEmptyValue}
+                  isLoading={isLoading}
+                  policyValidationResult={policyValidationResult}
+                  validationResultState={stateFromValidationResult}
                 />
-                <TunnelExit id="button" />
               </Aria.Group>
-              <ComplexityIndicator
-                isEmptyValue={isEmptyValue}
-                isLoading={isLoading}
-                policyValidationResult={policyValidationResult}
-                validationResultState={stateFromValidationResult}
-              />
-            </Aria.Group>
-            {isValidFromValidationResult && (
-              <FieldDescription>{latestValidationErrorText}</FieldDescription>
-            )}
-            {isInvalidFromValidationResult &&
-              policyValidationResult.isValid !== "indeterminate" && (
-                <FieldError>{latestValidationErrorText}</FieldError>
+              {children}
+              {isValidFromValidationResult && (
+                <FieldDescription>{latestValidationErrorText}</FieldDescription>
               )}
-            <Wrap if={isInvalidFromValidationResult}>
-              <FieldErrorContext.Provider
-                value={{
-                  isInvalid: false,
-                  validationErrors: [],
-                  validationDetails: {
-                    customError: false,
-                    valid: true,
-                    typeMismatch: false,
-                    stepMismatch: false,
-                    valueMissing: false,
-                    tooShort: false,
-                    tooLong: false,
-                    rangeUnderflow: false,
-                    patternMismatch: false,
-                    badInput: false,
-                    rangeOverflow: false,
-                  },
-                }}
-              >
-                {children}
-              </FieldErrorContext.Provider>
-            </Wrap>
-          </Aria.TextField>
+            </PropsContextProvider>
+          </FieldErrorResetContext>
+          <Wrap
+            if={
+              isInvalidFromValidationResult &&
+              policyValidationResult.isValid !== "indeterminate" &&
+              latestValidationErrorText
+            }
+          >
+            <FieldErrorContext.Provider
+              value={{
+                isInvalid: true,
+                validationErrors: [latestValidationErrorText ?? ""],
+                validationDetails: {
+                  customError: true,
+                  valid: false,
+                  typeMismatch: false,
+                  stepMismatch: false,
+                  valueMissing: false,
+                  tooShort: false,
+                  tooLong: false,
+                  rangeUnderflow: false,
+                  patternMismatch: false,
+                  badInput: false,
+                  rangeOverflow: false,
+                },
+              }}
+            >
+              <FieldErrorView />
+            </FieldErrorContext.Provider>
+          </Wrap>
         </TunnelProvider>
-      </PropsContextProvider>
+      </Aria.TextField>
     );
   },
 );

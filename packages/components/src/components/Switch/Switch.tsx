@@ -9,6 +9,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import labelStyles from "../Label/Label.module.scss";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
@@ -40,11 +41,15 @@ export const Switch = flowComponent("Switch", (props) => {
   const localSwitchRef = useObjectRef(ref);
   const localInputRef = useObjectRef(inputRef);
 
-  const { FieldErrorView, propsContext, mergedRootClassName } =
+  useMakeFocusable(localSwitchRef, () => {
+    localInputRef.current?.focus();
+  });
+
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
     useFieldComponent(props);
 
   return (
-    <div className={mergedRootClassName}>
+    <div {...fieldProps}>
       <Aria.Switch
         {...rest}
         className={rootClassName}
@@ -52,7 +57,7 @@ export const Switch = flowComponent("Switch", (props) => {
         inputRef={localInputRef}
       >
         {({ isSelected }) => (
-          <PropsContextProvider props={propsContext}>
+          <PropsContextProvider props={fieldPropsContext}>
             <div className={styles.track}>
               <div className={styles.handle}>
                 {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}

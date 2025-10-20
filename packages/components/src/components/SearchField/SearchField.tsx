@@ -3,9 +3,7 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./SearchField.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Button } from "@/components/Button";
@@ -13,6 +11,7 @@ import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
@@ -22,6 +21,13 @@ export interface SearchFieldProps
 export const SearchField = flowComponent("SearchField", (props) => {
   const { children, className, ref, ...rest } = props;
 
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
+
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.searchField,
@@ -29,30 +35,17 @@ export const SearchField = flowComponent("SearchField", (props) => {
   );
 
   const stringFormatter = useLocalizedStringFormatter(locales);
-
   const searchText = stringFormatter.format(`searchField.search`);
-
-  const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
-  };
 
   return (
     <Aria.SearchField
-      aria-label={searchText}
       {...rest}
-      className={rootClassName}
+      {...fieldProps}
+      aria-label={searchText}
+      className={clsx(rootClassName, fieldProps.className)}
     >
-      <PropsContextProvider props={propsContext}>
-        {children}
+      <PropsContextProvider props={fieldPropsContext}>
+        <FieldErrorResetContext>{children}</FieldErrorResetContext>
       </PropsContextProvider>
       <div className={styles.inputContainer}>
         <IconSearch className={styles.searchIcon} />
@@ -74,7 +67,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
           <IconClose />
         </Button>
       </div>
-      <FieldError className={formFieldStyles.fieldError} />
+      <FieldErrorView />
     </Aria.SearchField>
   );
 });

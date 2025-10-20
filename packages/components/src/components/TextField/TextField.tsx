@@ -32,17 +32,17 @@ export const TextField = flowComponent("TextField", (props) => {
     </ReactAriaControlledValueFix>
   );
 
-  const { FieldErrorView, propsContext, mergedRootClassName } =
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
     useFieldComponent(props);
 
   return (
     <TextFieldBase
       {...rest}
+      {...fieldProps}
       FieldErrorView={FieldErrorView}
-      className={mergedRootClassName}
       input={input}
     >
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={fieldPropsContext}>
         {children}
       </PropsContextProvider>
     </TextFieldBase>

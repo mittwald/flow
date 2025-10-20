@@ -1,5 +1,5 @@
-import type React from "react";
-import { useMemo } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
@@ -12,56 +12,48 @@ interface FieldComponentProps {
 }
 
 export interface UseFieldComponent {
-  FieldErrorView: React.FC;
-  propsContext: PropsContext;
-  mergedRootClassName: string;
+  FieldErrorResetContext: FC<PropsWithChildren>;
+  FieldErrorView: FC;
+  fieldPropsContext: PropsContext;
+  fieldProps: {
+    className?: ReturnType<typeof clsx>;
+  };
 }
 
 export const useFieldComponent = (
   props: FieldComponentProps,
-  mergeClassName?: ClassValue,
 ): UseFieldComponent => {
-  const { FieldErrorView, fieldErrorViewPropsContext } = useFieldError();
+  const { FieldErrorView, fieldErrorViewPropsContext, FieldErrorResetContext } =
+    useFieldError();
 
   // setting up the props context for all components that
   // are part of a form control
-  const propsContext: PropsContext = useMemo(
-    () => ({
-      Label: {
-        className: formFieldStyles.label,
-        optional: !!props.isRequired,
-        isDisabled: !!props.isDisabled,
-      },
-      FieldDescription: {
-        className: formFieldStyles.fieldDescription,
-      },
-      ...fieldErrorViewPropsContext,
-    }),
-    [
-      props.isDisabled,
-      props.isRequired,
-      formFieldStyles.label,
-      fieldErrorViewPropsContext,
-    ],
-  );
-
-  // we can't set the correct className for the root element
-  // via props context - so define it here
-  const mergedRootClassName = useMemo(() => {
-    return clsx(formFieldStyles.formField, mergeClassName);
-  }, [formFieldStyles.formField, mergeClassName]);
+  const fieldPropsContext: PropsContext = {
+    Label: {
+      className: formFieldStyles.label,
+      optional: !!props.isRequired,
+      isDisabled: !!props.isDisabled,
+    },
+    FieldDescription: {
+      className: formFieldStyles.fieldDescription,
+    },
+    ...fieldErrorViewPropsContext,
+  };
 
   // wrapping the FieldErrorView in a PropsContextProvider to ensure
   // it's always in the correct props context
   const FieldErrorViewWithPropsContext = () => (
-    <PropsContextProvider props={fieldErrorViewPropsContext} clear>
+    <PropsContextProvider props={fieldErrorViewPropsContext}>
       <FieldErrorView />
     </PropsContextProvider>
   );
 
   return {
+    FieldErrorResetContext,
     FieldErrorView: FieldErrorViewWithPropsContext,
-    propsContext,
-    mergedRootClassName,
+    fieldPropsContext,
+    fieldProps: {
+      className: clsx(formFieldStyles.formField),
+    },
   } as const;
 };

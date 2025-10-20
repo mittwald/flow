@@ -1,13 +1,26 @@
-import React, { useId } from "react";
-import type { PropsContext } from "@/lib/propsContext";
+import React, {
+  type FC,
+  type PropsWithChildren,
+  memo,
+  useContext,
+  useId,
+  type ReactNode,
+} from "react";
+import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { FieldErrorContext } from "react-aria-components";
 import { FieldError } from "@/components/FieldError";
 import { TunnelExit } from "@mittwald/react-tunnel";
+import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
+
+const FieldErrorResetContext: FC<PropsWithChildren> = memo((props) => (
+  <FieldErrorContext value={null}>{props.children}</FieldErrorContext>
+));
 
 export const useFieldError = () => {
   const id = useId();
   const tunnelId = `${id}.fieldError`;
+  const currentOuterErrorContext = useContext(FieldErrorContext);
 
   const fieldErrorViewPropsContext: PropsContext = {
     FieldError: {
@@ -17,16 +30,30 @@ export const useFieldError = () => {
   };
 
   const FieldErrorView = () => (
-    <>
-      <FieldErrorContext value={null}>
-        <TunnelExit id={tunnelId} />
-      </FieldErrorContext>
-      <FieldError className={formFieldStyles.fieldError} />
-    </>
+    <TunnelExit id={tunnelId}>
+      {(children: ReactNode) => {
+        const currentInnerErrorContext = useContext(FieldErrorContext);
+
+        if (React.Children.count(children) >= 1) {
+          return <ClearPropsContext>{children}</ClearPropsContext>;
+        }
+
+        return (
+          <ClearPropsContext>
+            <FieldErrorContext
+              value={currentOuterErrorContext ?? currentInnerErrorContext}
+            >
+              <FieldError className={formFieldStyles.fieldError} />
+            </FieldErrorContext>
+          </ClearPropsContext>
+        );
+      }}
+    </TunnelExit>
   );
 
   return {
     fieldErrorViewPropsContext,
     FieldErrorView,
+    FieldErrorResetContext,
   } as const;
 };

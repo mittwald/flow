@@ -22,14 +22,14 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
 
   const rootClassName = clsx(styles.checkbox, className);
 
-  const { FieldErrorView, propsContext, mergedRootClassName } =
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
     useFieldComponent(props);
 
   return (
-    <div className={mergedRootClassName}>
+    <div {...fieldProps}>
       <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
         {({ isSelected, isIndeterminate }) => (
-          <PropsContextProvider props={propsContext}>
+          <PropsContextProvider props={fieldPropsContext}>
             {isSelected ? (
               <IconCheckboxChecked className={styles.icon} />
             ) : isIndeterminate ? (

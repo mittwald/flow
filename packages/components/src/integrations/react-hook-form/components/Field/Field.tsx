@@ -1,6 +1,6 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithChildren } from "react";
 import {
   type ControllerProps,
@@ -12,6 +12,8 @@ import {
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { inheritProps } from "@/lib/propsContext/inherit/types";
+import { FieldErrorContext } from "react-aria-components";
+import { Wrap } from "@/components/Wrap";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -81,16 +83,6 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
 
   const propsContext: PropsContext = {
-    FieldError: {
-      ___inherit: true,
-      children: dynamic((localProps) => {
-        if (isFieldInvalid) {
-          return controller.fieldState.error?.message;
-        }
-
-        return localProps.children;
-      }),
-    },
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,
@@ -133,7 +125,31 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       props={propsContext}
       dependencies={[controller.fieldState, controller.field, value]}
     >
-      {children}
+      <Wrap if={isFieldInvalid}>
+        <FieldErrorContext
+          value={{
+            isInvalid: true,
+            validationErrors: [
+              controller.fieldState.error?.message ?? "noMessage",
+            ],
+            validationDetails: {
+              valid: false,
+              badInput: false,
+              customError: true,
+              patternMismatch: false,
+              rangeOverflow: false,
+              rangeUnderflow: false,
+              stepMismatch: false,
+              tooLong: false,
+              tooShort: false,
+              valueMissing: false,
+              typeMismatch: false,
+            },
+          }}
+        >
+          {children}
+        </FieldErrorContext>
+      </Wrap>
     </PropsContextProvider>
   );
 }

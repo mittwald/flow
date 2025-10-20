@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -8,15 +8,14 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
-import { SearchField } from "@/components/SearchField";
 import { PasswordCreationField } from "@/components/PasswordCreationField";
-import { Policy } from "@mittwald/password-tools-js/policy";
 import {
   generatePasswordCreationFieldValidation,
   type PolicyDeclaration,
   RuleType,
   SequenceType,
 } from "@/integrations/@mittwald/password-tools-js";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -93,10 +92,11 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field name="user">
-            <SearchField>
-              <Label>Suche</Label>
-            </SearchField>
+          <Field name="user" rules={{ required: true }}>
+            <PasswordCreationField>
+              <Label>Password</Label>
+              <Button>asd</Button>
+            </PasswordCreationField>
           </Field>
 
           <ActionGroup>
@@ -113,42 +113,8 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
-  render: () => {
-    const form = useForm();
-
-    return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"text"} rules={{ required: true }}>
-          <PasswordCreationField validationPolicy={policyDecl}>
-            <Label>Password</Label>
-            <Button>asd</Button>
-          </PasswordCreationField>
-        </Field>
-        <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "text",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("text")}>
-          focus through form
-        </Button>
-        <Button type="submit">Submit</Button>
-      </Form>
-    );
-  },
-};
-
 export const WithForm: Story = {
   render: () => {
-    const customPolicy = Policy.fromDeclaration(policyDecl);
     const form = useForm({
       defaultValues: {
         password: "",
@@ -166,17 +132,89 @@ export const WithForm: Story = {
         <Field
           rules={{
             required: true,
-            validate: generatePasswordCreationFieldValidation(customPolicy),
+            validate: generatePasswordCreationFieldValidation(policyDecl),
           }}
           name="password"
         >
-          <PasswordCreationField validationPolicy={customPolicy}>
+          <PasswordCreationField validationPolicy={policyDecl}>
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>
         </Field>
         <br />
         <Button onPress={() => form.reset()}>Reset</Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};
+
+export const WithFieldError: Story = {
+  render: () => {
+    const form = useForm({
+      defaultValues: {
+        field: "",
+      },
+    });
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name="field">
+          <PasswordCreationField>
+            <Label>Password</Label>
+            <Button>asd</Button>
+          </PasswordCreationField>
+        </Field>
+        <PasswordCreationField defaultValue={""} isInvalid>
+          <Label>Password</Label>
+          <Button>asd</Button>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </PasswordCreationField>
+        <PasswordCreationField defaultValue={""}>
+          <Label>Password</Label>
+          <Button>asd</Button>
+        </PasswordCreationField>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: () => {
+    const form = useForm({
+      defaultValues: {
+        field: "",
+      },
+    });
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <PasswordCreationField>
+            <Label>Password</Label>
+            <Button>asd</Button>
+          </PasswordCreationField>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "field",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("field")}>
+          focus through form
+        </Button>
         <Button type="submit">Submit</Button>
       </Form>
     );

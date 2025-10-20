@@ -17,10 +17,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkboxButton, className);
-  const { propsContext, mergedRootClassName } = useFieldComponent(
-    props,
-    rootClassName,
-  );
+  const { fieldPropsContext, fieldProps } = useFieldComponent(props);
 
   const mergedPropsContext: PropsContext = {
     Text: {
@@ -29,11 +26,16 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     Content: {
       className: styles.content,
     },
-    ...propsContext,
+    ...fieldPropsContext,
   };
 
   return (
-    <Checkbox {...rest} className={mergedRootClassName} ref={ref}>
+    <Checkbox
+      {...rest}
+      {...fieldProps}
+      className={clsx(rootClassName, fieldProps.className)}
+      ref={ref}
+    >
       <PropsContextProvider props={mergedPropsContext}>
         {children}
       </PropsContextProvider>
