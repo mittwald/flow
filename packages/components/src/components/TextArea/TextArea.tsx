@@ -8,6 +8,7 @@ import { useObjectRef } from "@react-aria/utils";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
+import clsx from "clsx";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "FieldErrorView" | "input" | "ref">,
@@ -72,6 +73,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     <TextFieldBase
       {...rest}
       {...fieldProps}
+      className={clsx(rest.className, fieldProps.className)}
       FieldErrorView={FieldErrorView}
       input={input}
     >

@@ -34,15 +34,23 @@ export const useFieldError = () => {
       {(children: ReactNode) => {
         const currentInnerErrorContext = useContext(FieldErrorContext);
 
+        const errorContext =
+          currentOuterErrorContext ?? currentInnerErrorContext;
+
         if (React.Children.count(children) >= 1) {
           return <ClearPropsContext>{children}</ClearPropsContext>;
         }
 
+        if (
+          errorContext?.isInvalid &&
+          errorContext.validationErrors.length === 0
+        ) {
+          return null;
+        }
+
         return (
           <ClearPropsContext>
-            <FieldErrorContext
-              value={currentOuterErrorContext ?? currentInnerErrorContext}
-            >
+            <FieldErrorContext value={errorContext}>
               <FieldError className={formFieldStyles.fieldError} />
             </FieldErrorContext>
           </ClearPropsContext>

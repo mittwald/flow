@@ -128,7 +128,7 @@ export class RemoteDatePickerElement extends FlowRemoteElement<RemoteDatePickerE
   }
 
   static override get remoteSlots() {
-    return ["errorMessage"];
+    return [];
   }
 }
 
