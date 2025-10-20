@@ -13,7 +13,7 @@
     .starFilled {
       grid-area: star;
       transition-property: opacity, transform;
-      transition-duration: var(--transition--duration--default);
+      transition-duration: var(--transition--duration--fast);
     }
 
     .star {
