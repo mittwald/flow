@@ -39,7 +39,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
   const rootClassName = clsx(styles.overlay, className);
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContextView keep={overlayType}>
       <OverlayContentView
         onOpenChange={(isOpen) => controller.setOpen(isOpen)}
         isOpen={isOpen}

@@ -9,12 +9,6 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { useForm } from "react-hook-form";
-import { Form } from "@/integrations/react-hook-form";
-import { sleep } from "@/lib/promises/sleep";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { Button } from "@/components/Button";
 
 export interface RatingProps
   extends FlowComponentProps,
