@@ -52,7 +52,7 @@ export default () => {
                   data={[
                     {
                       title:
-                        "Projekteinladung: “Mein Projekt”",
+                        "Projekteinladung: „Mein Projekt“",
                       date: "10.03.2025, 09:42 Uhr",
                       isInvite: true,
                     },

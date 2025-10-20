@@ -3,10 +3,7 @@ import React, { useRef } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
-import { useForm } from "react-hook-form";
-import { Field, Form } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
-import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
 
 const meta: Meta<typeof MarkdownEditor> = {
@@ -45,32 +42,6 @@ export const WithFieldError: Story = {
 
 export const Resizeable: Story = {
   args: { rows: 1, autoResizeMaxRows: 5 },
-};
-
-export const WithForm: Story = {
-  render: (props) => {
-    const form = useForm({
-      defaultValues: { message: "" },
-    });
-    return (
-      <Form
-        form={form}
-        onSubmit={async (v) => {
-          action(v.message);
-          form.reset();
-        }}
-      >
-        <Field name="message" rules={{ required: "Please enter a message" }}>
-          <MarkdownEditor {...props}>
-            <Label>Message</Label>
-          </MarkdownEditor>
-        </Field>
-        <br />
-        <Button type="submit">Submit</Button>
-        <Button onPress={() => form.reset()}>Reset</Button>
-      </Form>
-    );
-  },
 };
 
 export const WithOnChange: Story = {

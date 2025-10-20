@@ -11,6 +11,8 @@ import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./CheckboxGroup.module.scss";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
@@ -45,9 +47,16 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     },
   };
 
+  const localCheckboxGroupRef = useObjectRef(ref);
+  useMakeFocusable(localCheckboxGroupRef);
+
   return (
-    <Aria.CheckboxGroup {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext}>
+    <Aria.CheckboxGroup
+      {...rest}
+      className={rootClassName}
+      ref={localCheckboxGroupRef}
+    >
+      <PropsContextProvider props={propsContext} clear>
         <TunnelProvider>
           {children}
 

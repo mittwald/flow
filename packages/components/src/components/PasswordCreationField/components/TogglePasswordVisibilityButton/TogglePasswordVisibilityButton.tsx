@@ -37,6 +37,7 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
           color="secondary"
           isDisabled={isDisabled}
           data-component="toggleRevealPassword"
+          aria-label={tooltipText}
         >
           {icon}
           <Tooltip>{tooltipText}</Tooltip>

@@ -1,13 +1,47 @@
-# Detailseite
+# Code-Beispiel
 
-Detailseiten zeigen dem User die Inhalte eines bestimmten Elements. Diese können
-über eine [Tab](/03-components/navigation/tabs)-Navigation in verschiedene
-Bereiche aufgeteilt werden. Innerhalb des Content-Bereichs wird der Inhalt
-vertikal durch [Sections](/03-components/structure/section) gegliedert.
-Horizontal sorgt das [ColumnLayout](/03-components/structure/column-layout) für
-eine übersichtliche Anordnung. Wichtig ist, dass die wichtigsten Informationen
-möglichst oben im Content-Bereich stehen. Eine gut strukturierte
-[Heading](/03-components/content/heading)-Hierarchie hilft zudem, den Inhalt
-klar und logisch zu ordnen.
+Das folgende Code-Beispiel zeigt den Aufbau einer typischen Detailseite in mStudio. Es veranschaulicht, wie Inhalte strukturiert und dargestellt werden.
 
 <LiveCodeEditor example="detail-page" editorCollapsed bgColor="dark" />
+
+---
+
+# ContentHeader
+
+Der ContentHeader enthält Orientierungselemente wie PageTitle und Breadcrumb sowie Schnellzugriffe im ActionMenu.
+
+
+## PageTitle
+
+Der PageTitle wird als [Heading](/03-components/content/heading) mit H1 dargestellt. Er gibt den Usern eine klare Orientierung darüber, in welchem Bereich sie sich befinden. Der Titel steht in direktem Bezug zum Inhalt der Detailseite.
+
+## Breadcrumb
+
+Die [Breadcrumb](/03-components/navigation/breadcrumb) ergänzt die Orientierung. Sie ermöglicht die Navigation innerhalb des Seitenbaums und bietet eine schnelle Rückkehr zu übergeordneten Ebenen. Die Bezeichnungen der Einträge sind möglichst generisch gehalten, um Platz zu sparen und unterschiedlich lange Namen konsistent abzubilden.
+
+## ActionMenu
+
+Das ActionMenu besteht aus einem [Button](/03-components/actions/button) als Trigger und einem [ContextMenu](/03-components/actions/context-menu). Es bietet zentrale Aktionen, sogenannte QuickActions, an. QuickActions spiegeln wichtige Funktionen wider, die zwar innerhalb des Contents vorhanden sind und hier zusätzlich als Schnellzugriff zur Verfügung stehen. Außerdem werden die Funktionen „Umbenennen“ oder „Löschen“ hier platziert.
+
+---
+
+# Content
+
+Im Content-Bereich werden die für den User relevanten Informationen dargestellt und Bearbeitungs- sowie Anlageprozesse ermöglicht. Damit Seiten einheitlich wirken, sollten die Inhalte nach einem wiederkehrenden Muster aufgebaut werden. Grundlage ist die LayoutCard als Container für Sections, die bei Bedarf mit Tabs ergänzt werden können.
+
+## LayoutCard
+
+Die [LayoutCard](/03-components/structure/layout-card) ist die Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt und stellt Hintergrund und Padding bereit. 
+
+## Tabs
+
+[Tabs](/03-components/navigation/tabs) schaffen Übersicht bei komplexen Inhalten. Sie teilen den Content in kleinere thematische Einheiten auf. Wenn sich mehrere Sections sinnvoll gruppieren lassen, können sie in einem Tab ausgelagert werden. User können so zwischen verschiedenen Ansichten wechseln, ohne den Kontext zu verlieren.
+
+## Sections
+
+[Sections](/03-components/structure/section) strukturieren die Inhalte in Themenblöcke. Jede Section beginnt dabei mit einer H2-Überschrift. Weitere Unterteilungen erfolgen über verschachtelte Sections mit den Überschriften H3 bis H5 (siehe [Heading](/03-components/content/heading)).
+Neben der Heading können auch Actions platziert werden. Die sogenannten SectionAction im Section-Header bietet Platz für Elemente wie [Buttons](/03-components/actions/button), [Links](/03-components/navigation/link) oder [Switches](/03-components/form-controls/switch). Diese stehen in direktem Zusammenhang mit der jeweiligen Section. Über Buttons können beispielsweise Bearbeitungs- und Anlegeprozesse gestartet werden. 
+
+## ColumnLayout
+
+Das [ColumnLayout](/03-components/structure/column-layout) organisiert Inhalte in Spalten. Anzahl und Breite der Spalten sind flexibel und passen sich an unterschiedliche Breakpoints an.

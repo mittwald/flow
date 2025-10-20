@@ -49,7 +49,10 @@ export default () => {
       }}
     >
       <List.StaticData data={domains} />
-      <List.Item showTiles>
+      <List.Item
+        showTiles
+        textValue={(domain) => domain.hostname}
+      >
         {(domain) => (
           <List.ItemView>
             <Checkbox

@@ -6,7 +6,7 @@ import {
 <RadioGroup
   defaultValue="selected"
   l={[1, 1]}
-  aria-label="states"
+  aria-label="States"
 >
   <RadioButton value="default">Domain buchen</RadioButton>
   <RadioButton value="selected">Domain buchen</RadioButton>

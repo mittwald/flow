@@ -20,6 +20,7 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       className: {},
       defaultOpen: {},
       defaultSelectedKey: {},
+      defaultValue: {},
       dir: {},
       disabledKeys: {},
       excludeFromTabOrder: {},
@@ -36,10 +37,12 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       name: {},
       placeholder: {},
       selectedKey: {},
+      selectionMode: {},
       slot: {},
       translate: {},
       validate: {},
       validationBehavior: {},
+      value: {},
     };
   }
 

@@ -17,6 +17,7 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       "aria-label": {},
       "aria-labelledby": {},
       arrowBoundaryOffset: {},
+      arrowRef: {},
       boundaryElement: {},
       className: {},
       containerPadding: {},

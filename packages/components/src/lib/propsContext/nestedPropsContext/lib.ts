@@ -1,4 +1,4 @@
-import type { PropsContext } from "@/index/internal";
+import type { PropsContext } from "@/lib/propsContext/types";
 import {
   nestingLevelKey,
   type NestingLevelProps,
@@ -23,7 +23,8 @@ export const getNestingLevel = (props: PropsContext) => {
 
 export const increaseNestingLevel = (propsContext: PropsContext) => {
   const currentNestingLevel = getNestingLevel(propsContext);
-  Object.assign(propsContext, {
+  return {
+    ...propsContext,
     [nestingLevelKey]: currentNestingLevel + 1,
-  });
+  };
 };

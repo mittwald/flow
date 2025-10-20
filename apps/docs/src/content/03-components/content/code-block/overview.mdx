@@ -1,8 +1,9 @@
 # Playground
 
-Verwende `<CodeBlock />`, um einen CodeBlock anzuzeigen. Gib den anzuzeigenden 
-Inhalt im `code` Property an. Nutze das `language` Property, um die Programmiersprache 
-(siehe [unterstütze language imports](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_HLJS.MD)) 
+Verwende `<CodeBlock />`, um einen CodeBlock anzuzeigen. Gib den anzuzeigenden
+Inhalt im `code` Property an. Nutze das `language` Property, um die
+Programmiersprache (siehe
+[unterstütze language imports](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_HLJS.MD))
 zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
 
 <LiveCodeEditor />
@@ -19,23 +20,27 @@ Wird das `showLineNumbers` Property gesetzt, werden Zeilennummern angezeigt.
 
 # Mit Kopierfunktion
 
-Ergänzt man das Property `copyable`, so bekommt der CodeBlock eine Kopierfunktion.
-Dadurch kann der User den gesamte Inhalt des CodeBlocks in die Zwischenablage kopieren.
-Eventuelle Zeilennummern werden nicht mit kopiert.
+Ergänzt man das Property `copyable`, so bekommt der CodeBlock eine
+Kopierfunktion. Dadurch kann der User den gesamten Inhalt des CodeBlocks in die
+Zwischenablage kopieren. Eventuelle Zeilennummern werden nicht mit kopiert.
 
 <LiveCodeEditor example="copyable" editorCollapsed />
 
 ---
 
-# Colors Light und Dark
+# Color
 
-Zusätzlich zur Standard-Color kann der CodeBlock auch in den Colors **Light** und **Dark** dargestellt werden.
-Beide Colors sind Alternativen zur Standard-Color, falls diese nicht auf farbigen oder dekorativen Hintergründen funktioniert.
+Zusätzlich zur Standard-Color kann der CodeBlock auch in den Colors **Light**
+und **Dark** dargestellt werden. Beide Colors sind Alternativen zur
+Standard-Color, falls diese nicht auf farbigen oder dekorativen Hintergründen
+funktioniert.
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
-**Light**: Verwende die Light-Color bei dunklen Hintergründen mit einem HSL Lightness-Wert von weniger als 50.
+**Light:** Verwende die Light-Color bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50.
 
-**Dark**: Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
+**Dark:** Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
+HSL Lightness-Wert von größer als 50.

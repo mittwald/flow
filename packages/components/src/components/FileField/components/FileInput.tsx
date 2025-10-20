@@ -46,7 +46,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
     <PropsContextProvider props={propsContext}>
       {children}
       <Aria.Input
-        style={{ display: "none" }}
+        className={styles.FileInput}
         type="file"
         ref={inputRef}
         onChange={handleChange}

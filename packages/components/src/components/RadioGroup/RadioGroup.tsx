@@ -11,6 +11,8 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -43,8 +45,11 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     },
   };
 
+  const localRadioRef = useObjectRef(ref);
+  useMakeFocusable(localRadioRef);
+
   return (
-    <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
+    <Aria.RadioGroup {...rest} className={rootClassName} ref={localRadioRef}>
       <PropsContextProvider dependencies={["radio"]} props={propsContext}>
         <TunnelProvider>
           {children}

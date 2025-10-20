@@ -33,7 +33,7 @@ test("onSubmitHandler is triggered with FormData", async () => {
 
   const select = dom.getByTestId("form-select");
   await userEvent.click(select);
-  await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
+  await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
   await dom
     .getByTestId("form-filefield")
@@ -74,7 +74,7 @@ test("actionHandler is triggered with FormData", async () => {
 
   const select = dom.getByTestId("form-select");
   await userEvent.click(select);
-  await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
+  await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
   await dom
     .getByTestId("form-filefield")
