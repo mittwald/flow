@@ -4,6 +4,9 @@ import Action from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
+import Modal from "@/components/Modal";
+import Content from "@/components/Content";
+import ActionGroup from "@/components/ActionGroup";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -48,10 +51,10 @@ const TestButton: FC<ButtonProps> = (p) => (
   <Button data-testid="button" {...p} />
 );
 
-const getButton = () => screen.getByTestId("button");
+const getButton = (testId = "button") => screen.getByTestId(testId);
 
-const clickTrigger = async () => {
-  await act(() => userEvent.click(getButton()));
+const clickTrigger = async (testId = "button") => {
+  await act(() => userEvent.click(getButton(testId)));
 };
 
 const advanceTime = async (ms: number) => {
@@ -207,6 +210,54 @@ const expectNoIconInDom = () => {
     }),
   ).toBeNull();
 };
+
+describe("Confirmation modal", () => {
+  const renderTestModal = () =>
+    render(
+      <Action action={asyncAction1} showFeedback={false}>
+        <Modal slot="actionConfirm">
+          <Content data-testid="modal">Modal content</Content>
+          <ActionGroup>
+            <Button color="danger" data-testid="confirm-button">
+              Confirm
+            </Button>
+            <Button color="secondary" variant="soft" data-testid="abort-button">
+              Abort
+            </Button>
+          </ActionGroup>
+        </Modal>
+        <TestButton />
+      </Action>,
+    );
+
+  test("just closes on abort", async () => {
+    renderTestModal();
+
+    await clickTrigger();
+    expect(screen.getByTestId("modal")).toBeInTheDocument();
+    expect(actionHistory).toEqual([]);
+
+    await clickTrigger("abort-button");
+    await advanceTime(asyncActionDuration * 2);
+
+    expect(actionHistory).toEqual([]);
+    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+  });
+
+  test("calls action and then closes", async () => {
+    renderTestModal();
+
+    await clickTrigger();
+    expect(screen.getByTestId("modal")).toBeInTheDocument();
+    expect(actionHistory).toEqual([]);
+
+    await clickTrigger("confirm-button");
+    await advanceTime(asyncActionDuration * 2);
+
+    expect(actionHistory).toEqual(["async1/start", "async1/end"]);
+    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+  });
+});
 
 describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {

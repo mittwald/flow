@@ -39,7 +39,6 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       lang: {},
       maxValue: {},
       minValue: {},
-      name: {},
       pageBehavior: {},
       placeholderValue: {},
       shouldCloseOnSelect: {},

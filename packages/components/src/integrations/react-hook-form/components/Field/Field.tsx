@@ -91,7 +91,9 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       ...fieldProps,
       isSelected: value,
     },
-    CheckboxGroup: fieldProps,
+    CheckboxGroup: {
+      ...fieldProps,
+    },
     CheckboxButton: {
       ...fieldProps,
       isSelected: value,

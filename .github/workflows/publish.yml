@@ -8,13 +8,15 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
@@ -29,10 +31,9 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Setup Node 🎛️
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
       - name: Git Identity 🪪
