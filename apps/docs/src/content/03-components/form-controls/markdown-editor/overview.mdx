@@ -24,12 +24,22 @@ angegeben – die maximale Zeichenanzahl anzeigt.
 
 ---
 
-# Resizeable
+# Resize
+
+## Automatisch
 
 Verwende die Property `autoResizeMaxRows`, um eine maximale Höhe festzulegen,
 bis zu der sich der MarkdownEditor automatisch an seinen Inhalt anpasst.
 
-<LiveCodeEditor example="resizeable" editorCollapsed />
+<LiveCodeEditor example="autoResizeMaxRows" editorCollapsed />
+
+# Manuell
+
+Alternativ kann dem User über das Property `allowResize`, bzw
+`allowVerticalResize` oder `allowHorizontalResize` die Möglichkeit gegeben
+werden die Größe des MarkdownEditors manuell anzupassen.
+
+<LiveCodeEditor example="allowResize" editorCollapsed />
 
 ---
 
@@ -38,8 +48,8 @@ bis zu der sich der MarkdownEditor automatisch an seinen Inhalt anpasst.
 ## React Hook Form
 
 Weitere Details zur Formularlogik und -validierung sind in der Component
-[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview) zu
-finden.
+[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview)
+zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
 

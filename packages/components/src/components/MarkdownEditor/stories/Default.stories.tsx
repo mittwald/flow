@@ -40,8 +40,20 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const Resizeable: Story = {
+export const AutoResizeable: Story = {
   args: { rows: 1, autoResizeMaxRows: 5 },
+};
+
+export const Resizeable: Story = {
+  args: { allowResize: true },
+};
+
+export const HorizontallyResizeable: Story = {
+  args: { allowHorizontalResize: true },
+};
+
+export const VerticallyResizeable: Story = {
+  args: { allowVerticalResize: true },
 };
 
 export const WithOnChange: Story = {
