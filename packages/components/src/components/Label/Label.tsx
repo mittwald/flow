@@ -4,7 +4,7 @@ import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter, useVisuallyHidden } from "react-aria";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -30,9 +30,11 @@ export const Label = flowComponent("Label", (props) => {
     isDisabled,
     ref,
     unstyled = false,
+    hidden,
     ...rest
   } = props;
 
+  const { visuallyHiddenProps } = useVisuallyHidden();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const rootClassName = unstyled
@@ -67,7 +69,13 @@ export const Label = flowComponent("Label", (props) => {
   return (
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
-        <Aria.Label {...rest} className={rootClassName} ref={ref}>
+        <Aria.Label
+          {...rest}
+          {...(hidden ? visuallyHiddenProps : {})}
+          className={rootClassName}
+          ref={ref}
+          hidden={hidden}
+        >
           {children}
           {optional && optionalMarker}
           <TunnelExit id="contextualHelp">
