@@ -6,6 +6,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import type { UseFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "../FormField/FormField.module.scss";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
@@ -70,7 +71,9 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
       {children}
       {input}
       {showCharacterCount && (
-        <FieldDescription>{charactersCountDescription}</FieldDescription>
+        <FieldDescription className={styles.fieldDescription}>
+          {charactersCountDescription}
+        </FieldDescription>
       )}
       <FieldErrorView />
     </Aria.TextField>

@@ -10,7 +10,6 @@ import { sleep } from "@/lib/promises/sleep";
 import Select from "@/components/Select";
 import { Option } from "@/components/Option";
 import React, { useEffect } from "react";
-import { Slider } from "@/components/Slider";
 import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
@@ -134,16 +133,12 @@ export const WithFocus: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name={"field"}>
-          <Slider
-            formatOptions={{
-              style: "unit",
-              unit: "gigabyte",
-            }}
-            minValue={10}
-            maxValue={100}
-          >
-            <Label>Storage</Label>
-          </Slider>
+          <Select>
+            <Label>Field</Label>
+            <Option value="wordpress">WordPress</Option>
+            <Option value="typo3">TYPO3</Option>
+            <Option value="magento">Magento</Option>
+          </Select>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button

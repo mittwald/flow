@@ -38,6 +38,7 @@ const meta: Meta<typeof Field> = {
         nameRequired: "",
         nameMaxLength: "",
         controlledName: "",
+        nameMinLength: "",
       },
     });
 

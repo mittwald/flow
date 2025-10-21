@@ -92,7 +92,10 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field name="user" rules={{ required: true }}>
+          <Field
+            name="user"
+            rules={{ required: "Jo dwag a password is required!" }}
+          >
             <PasswordCreationField>
               <Label>Password</Label>
               <Button>asd</Button>

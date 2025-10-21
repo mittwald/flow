@@ -13,7 +13,6 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { inheritProps } from "@/lib/propsContext/inherit/types";
 import { FieldErrorContext } from "react-aria-components";
-import { Wrap } from "@/components/Wrap";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -127,31 +126,29 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       props={propsContext}
       dependencies={[controller.fieldState, controller.field, value]}
     >
-      <Wrap if={isFieldInvalid}>
-        <FieldErrorContext
-          value={{
-            isInvalid: true,
-            validationErrors: [
-              controller.fieldState.error?.message ?? "noMessage",
-            ],
-            validationDetails: {
-              valid: false,
-              badInput: false,
-              customError: true,
-              patternMismatch: false,
-              rangeOverflow: false,
-              rangeUnderflow: false,
-              stepMismatch: false,
-              tooLong: false,
-              tooShort: false,
-              valueMissing: false,
-              typeMismatch: false,
-            },
-          }}
-        >
-          {children}
-        </FieldErrorContext>
-      </Wrap>
+      <FieldErrorContext
+        value={{
+          isInvalid: isFieldInvalid,
+          validationErrors: [
+            controller.fieldState.error?.message ?? "noMessage",
+          ],
+          validationDetails: {
+            valid: !isFieldInvalid,
+            badInput: false,
+            customError: isFieldInvalid,
+            patternMismatch: false,
+            rangeOverflow: false,
+            rangeUnderflow: false,
+            stepMismatch: false,
+            tooLong: false,
+            tooShort: false,
+            valueMissing: false,
+            typeMismatch: false,
+          },
+        }}
+      >
+        {children}
+      </FieldErrorContext>
     </PropsContextProvider>
   );
 }
