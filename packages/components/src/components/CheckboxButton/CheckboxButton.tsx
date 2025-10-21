@@ -16,7 +16,7 @@ export interface CheckboxButtonProps
 
 /** @flr-generate all */
 export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, ref, inputClassName, ...rest } = props;
 
   const {
     fieldPropsContext,
@@ -45,7 +45,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
       ref={localCheckboxButtonRef}
     >
       <FieldErrorResetContext>
-        <Checkbox {...rest} inputClassName={styles.input}>
+        <Checkbox {...rest} inputClassName={clsx(inputClassName, styles.input)}>
           <PropsContextProvider props={mergedPropsContext} clear>
             {children}
           </PropsContextProvider>
