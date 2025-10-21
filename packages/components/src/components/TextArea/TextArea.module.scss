@@ -2,6 +2,19 @@
 
 .textArea {
   resize: none;
+  min-width: 100%;
+
+  &.horizontalResize {
+    resize: horizontal;
+  }
+
+  &.verticalResize {
+    resize: vertical;
+  }
+
+  &.resize {
+    resize: both;
+  }
 
   @include formControl.formControl();
 }

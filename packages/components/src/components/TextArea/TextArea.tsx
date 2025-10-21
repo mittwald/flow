@@ -6,6 +6,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import clsx from "clsx";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input" | "ref">,
@@ -16,6 +17,15 @@ export interface TextAreaProps
    * initial height.
    */
   autoResizeMaxRows?: number;
+  /** Allows the user to manually resize the textArea horizontally. */
+  allowHorizontalResize?: boolean;
+  /** Allows the user to manually resize the textArea vertically. */
+  allowVerticalResize?: boolean;
+  /**
+   * Allows the user to manually resize the textArea horizontally and
+   * vertically.
+   */
+  allowResize?: boolean;
 }
 
 /** @flr-generate all */
@@ -26,8 +36,18 @@ export const TextArea = flowComponent("TextArea", (props) => {
     rows = 5,
     autoResizeMaxRows = rows,
     ref,
+    allowResize,
+    allowVerticalResize,
+    allowHorizontalResize,
     ...rest
   } = props;
+
+  const rootClassName = clsx(
+    styles.textArea,
+    allowResize && styles.resize,
+    allowVerticalResize && styles.verticalResize,
+    allowHorizontalResize && styles.horizontalResize,
+  );
 
   const localRef = useObjectRef(ref);
 
@@ -35,12 +55,19 @@ export const TextArea = flowComponent("TextArea", (props) => {
     return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
   };
 
+  const verticallyResizable = allowResize || allowVerticalResize;
+
   const updateHeight = () => {
-    if (localRef.current && rows !== autoResizeMaxRows) {
+    if (
+      localRef.current &&
+      rows !== autoResizeMaxRows &&
+      !verticallyResizable
+    ) {
       // https://stackoverflow.com/a/60795884
       localRef.current.style.height = "0px";
       const scrollHeight = localRef.current.scrollHeight;
-      localRef.current.style.height = scrollHeight + "px";
+      // + 2 to add border height
+      localRef.current.style.height = scrollHeight + 2 + "px";
     }
   };
 
@@ -52,12 +79,14 @@ export const TextArea = flowComponent("TextArea", (props) => {
       <Aria.TextArea
         rows={rows}
         placeholder={placeholder}
-        className={styles.textArea}
+        className={rootClassName}
         ref={localRef}
         onChange={updateHeight}
         style={{
           minHeight: getHeight(rows),
-          maxHeight: getHeight(autoResizeMaxRows),
+          maxHeight: verticallyResizable
+            ? undefined
+            : getHeight(autoResizeMaxRows),
         }}
       />
     </ReactAriaControlledValueFix>
