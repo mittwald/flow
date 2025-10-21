@@ -122,20 +122,17 @@ export class IncrementalLoader<T> {
         });
       }
 
-      if ("staticData" in dataSource) {
-        return useMemo(
-          () => ({
-            data: dataSource.staticData,
-            itemTotalCount: dataSource.staticData.length,
-          }),
-          [dataSource.staticData],
-        );
+      if ("asyncResourceFactory" in dataSource) {
+        return dataSource.asyncResourceFactory(options).use();
       }
 
-      return {
-        data: [],
-        itemTotalCount: 0,
-      };
+      return useMemo(
+        () => ({
+          data: [],
+          itemTotalCount: 0,
+        }),
+        [],
+      );
     };
   }
 
