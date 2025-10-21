@@ -106,6 +106,16 @@ export class IncrementalLoader<T> {
     const dataSource = this.dataSource;
 
     return (options: DataLoaderOptions<T>) => {
+      if ("staticData" in dataSource) {
+        return useMemo(
+          () => ({
+            data: dataSource.staticData,
+            itemTotalCount: dataSource.staticData.length,
+          }),
+          [dataSource.staticData],
+        );
+      }
+
       if ("useData" in dataSource) {
         return dataSource.useData(options);
       }
