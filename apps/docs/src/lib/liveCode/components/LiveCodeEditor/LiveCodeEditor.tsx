@@ -84,14 +84,13 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>
-            <LiveEditor
-              tabMode="focus"
-              theme={themes.vsLight}
-              className={clsx(
-                styles.editor,
-                editorCollapsed && styles.collapsed,
-              )}
-            />
+            {!editorCollapsed && (
+              <LiveEditor
+                tabMode="focus"
+                theme={themes.vsLight}
+                className={styles.editor}
+              />
+            )}
           </div>
         )}
 
