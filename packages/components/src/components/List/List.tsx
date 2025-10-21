@@ -31,6 +31,7 @@ import type { PropsWithChildren } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
+import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -58,6 +59,10 @@ export const List = flowComponent("List", (props) => {
     children,
     ListLoaderAsync<never>,
   )?.props;
+  const listLoaderHooks = deepFindOfType(
+    children,
+    ListLoaderHooks<never>,
+  )?.props;
   const listLoaderAsyncResource = deepFindOfType(
     children,
     ListLoaderAsyncResource<never>,
@@ -79,7 +84,12 @@ export const List = flowComponent("List", (props) => {
           ? {
               staticData: listStaticData.data,
             }
-          : undefined,
+          : listLoaderHooks
+            ? {
+                ...listLoaderHooks,
+                useData: listLoaderHooks.children,
+              }
+            : undefined,
   };
 
   const searchProps = deepFindOfType(children, ListSearch)?.props;

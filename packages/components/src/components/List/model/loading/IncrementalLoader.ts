@@ -4,16 +4,16 @@ import type {
   DataLoaderResult,
   DataSource,
   IncrementalLoaderShape,
+  LoaderInvocationHook,
 } from "@/components/List/model/loading/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
-import { getAsyncResource } from "@mittwald/react-use-promise";
+import { getAsyncResource, usePromise } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 import { hash } from "object-code";
 import type { PropertyName } from "@/components/List/model/types";
-
-type AsyncResourceLoadingState = AsyncResource["state"]["value"];
+import { useMemo } from "react";
 
 const emptyData: never[] = [];
 
@@ -102,65 +102,70 @@ export class IncrementalLoader<T> {
     return this.loaderState.useMergedData();
   }
 
-  public getLoaderInvocationHooks(): (() => void)[] {
+  private getUseData(): (options: DataLoaderOptions<T>) => DataLoaderResult<T> {
+    const dataSource = this.dataSource;
+
+    return (options: DataLoaderOptions<T>) => {
+      if ("useData" in dataSource) {
+        return dataSource.useData(options);
+      }
+
+      if ("asyncLoader" in dataSource) {
+        const asyncLoader = dataSource.asyncLoader;
+        const dependencies = dataSource.dependencies;
+        const loaderId = dependencies
+          ? hash(dependencies).toString()
+          : undefined;
+
+        return usePromise(asyncLoader, [options], {
+          loaderId,
+        });
+      }
+
+      if ("staticData" in dataSource) {
+        return useMemo(
+          () => ({
+            data: dataSource.staticData,
+            itemTotalCount: dataSource.staticData.length,
+          }),
+          [dataSource.staticData],
+        );
+      }
+
+      return {
+        data: [],
+        itemTotalCount: 0,
+      };
+    };
+  }
+
+  public getLoaderInvocationHooks(): LoaderInvocationHook[] {
     const batchesCount = times(this.list.batches.getBatchIndex() + 1, (i) => i);
-    return batchesCount.map((i) => () => {
-      this.useLoadBatch(i);
-    });
-  }
+    const useData = this.getUseData();
 
-  private useLoadBatch(batchIndex: number): void {
-    const asyncResource = this.getBatchDataAsyncResource(batchIndex);
+    return batchesCount.map((batchIndex) => ({
+      useLoadBatch: () => {
+        const loaderOptions = this.getDataLoaderOptions(batchIndex);
+        const loaderResult = useData(loaderOptions);
+        const { data, itemTotalCount } = loaderResult;
 
-    asyncResource.use({
-      useSuspense: false,
-    });
+        useEffect(() => {
+          this.loaderState.setDataBatch(batchIndex, data);
 
-    this.useObserveBatchData(asyncResource, batchIndex);
-    this.useObserveBatchLoadingState(asyncResource, batchIndex);
-  }
+          if (itemTotalCount !== undefined) {
+            this.list.batches.updateItemTotalCount(itemTotalCount);
+          }
 
-  private useObserveBatchLoadingState(
-    asyncResource: AsyncResource<DataLoaderResult<T>>,
-    batchIndex: number,
-  ): void {
-    const setNewState = (newState: AsyncResourceLoadingState) => {
-      this.loaderState.setBatchLoadingState(
-        batchIndex,
-        this.loaderState.isBatchLoaded(batchIndex) ? "loaded" : newState,
-      );
-    };
+          this.loaderState.setBatchLoadingState(batchIndex, "loaded");
+        }, [loaderResult]);
+      },
 
-    useEffect(() => {
-      setNewState(asyncResource.state.value);
-      return asyncResource.state.observe(setNewState);
-    }, [asyncResource, batchIndex]);
-  }
-
-  private useObserveBatchData(
-    asyncResource: AsyncResource<DataLoaderResult<T>>,
-    batchIndex: number,
-  ): void {
-    const setData = (loaderResult: DataLoaderResult<T>): void => {
-      const { data, itemTotalCount } = loaderResult;
-      this.loaderState.setDataBatch(batchIndex, data);
-
-      if (itemTotalCount !== undefined) {
-        this.list.batches.updateItemTotalCount(itemTotalCount);
-      }
-    };
-
-    useEffect(() => {
-      if (asyncResource.value.value.isSet) {
-        setData(asyncResource.value.value.value);
-      }
-
-      return asyncResource.value.observe((asyncData) => {
-        if (asyncData.isSet) {
-          setData(asyncData.value);
-        }
-      });
-    }, [asyncResource, batchIndex]);
+      useRenderSuspense: () => {
+        useEffect(() => {
+          this.loaderState.setBatchLoadingState(batchIndex, "loading");
+        }, [batchIndex]);
+      },
+    }));
   }
 
   private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
