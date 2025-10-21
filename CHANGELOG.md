@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.529](https://github.com/mittwald/flow/compare/0.2.0-alpha.528...0.2.0-alpha.529) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix not loading with LoaderStaticData ([e78ae9c](https://github.com/mittwald/flow/commit/e78ae9c892680deafed0379c9829b852c1f842e2))
+
 # [0.2.0-alpha.528](https://github.com/mittwald/flow/compare/0.2.0-alpha.527...0.2.0-alpha.528) (2025-10-21)
 
 ### Bug Fixes
