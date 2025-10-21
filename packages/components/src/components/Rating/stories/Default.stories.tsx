@@ -8,7 +8,7 @@ import { Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 
 const meta: Meta<typeof Rating> = {
-  title: "Content/Rating",
+  title: "Form Controls/Rating",
   component: Rating,
   args: { defaultValue: 2 },
   render: (props) => <Rating aria-label="Rating" {...props} />,

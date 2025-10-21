@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .rating {
   .ratingSegments {
     display: flex;
@@ -8,6 +10,17 @@
   .ratingSegment {
     display: grid;
     grid-template-areas: "star";
+    border-radius: var(--corner-radius--default);
+
+    @include focus.focus;
+
+    & {
+      outline-offset: calc(var(--size-px--xxs) * -1);
+    }
+
+    &[data-focus-visible] {
+      transform: scale(1.2);
+    }
 
     .star,
     .starFilled {
