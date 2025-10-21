@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.528](https://github.com/mittwald/flow/compare/0.2.0-alpha.527...0.2.0-alpha.528) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix MaxUpdateDepth error with LoaderAsyncResource ([8ead588](https://github.com/mittwald/flow/commit/8ead588901878889e55e2409c1ba2fe4f6dc7323))
+
 # [0.2.0-alpha.527](https://github.com/mittwald/flow/compare/0.2.0-alpha.526...0.2.0-alpha.527) (2025-10-21)
 
 ### Features
