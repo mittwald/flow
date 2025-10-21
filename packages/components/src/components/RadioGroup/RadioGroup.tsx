@@ -4,7 +4,6 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -13,6 +12,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -23,56 +23,55 @@ export interface RadioGroupProps
 export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const { children, className, s, m, l, ref, ...rest } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
 
+  const rootClassName = clsx(formFieldStyles.formField, className);
   const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-      tunnelId: "fieldDescription",
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-      tunnelId: "fieldError",
-    },
     RadioButton: {
       tunnelId: "radioButtons",
     },
     Radio: {
       tunnelId: "radios",
     },
+    ...fieldPropsContext,
   };
 
   const localRadioRef = useObjectRef(ref);
   useMakeFocusable(localRadioRef);
 
   return (
-    <Aria.RadioGroup {...rest} className={rootClassName} ref={localRadioRef}>
-      <PropsContextProvider dependencies={["radio"]} props={propsContext}>
-        <TunnelProvider>
-          {children}
+    <Aria.RadioGroup
+      {...rest}
+      className={clsx(rootClassName, fieldProps.className)}
+      ref={localRadioRef}
+    >
+      <TunnelProvider>
+        <FieldErrorResetContext>
+          <PropsContextProvider dependencies={["radio"]} props={propsContext}>
+            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+              <TunnelExit id="radioButtons" />
+            </ColumnLayout>
 
-          <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-            <TunnelExit id="radioButtons" />
-          </ColumnLayout>
+            <ColumnLayout
+              s={s ?? [1]}
+              m={m ?? [1]}
+              l={l ?? [1]}
+              rowGap="s"
+              className={styles.radioGroup}
+            >
+              <TunnelExit id="radios" />
+            </ColumnLayout>
 
-          <ColumnLayout
-            s={s ?? [1]}
-            m={m ?? [1]}
-            l={l ?? [1]}
-            rowGap="s"
-            className={styles.radioGroup}
-          >
-            <TunnelExit id="radios" />
-          </ColumnLayout>
-
-          <TunnelExit id="fieldDescription" />
-          <TunnelExit id="fieldError" />
-        </TunnelProvider>
-      </PropsContextProvider>
-      <FieldError className={formFieldStyles.fieldError} />
+            {children}
+          </PropsContextProvider>
+        </FieldErrorResetContext>
+        <FieldErrorView />
+      </TunnelProvider>
     </Aria.RadioGroup>
   );
 });

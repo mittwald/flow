@@ -5,9 +5,10 @@ import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit } from "@mittwald/react-tunnel";
 import { useObjectRef } from "@react-aria/utils";
+import labelStyles from "../Label/Label.module.scss";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SwitchProps
@@ -33,8 +34,8 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    styles[`label-${labelPosition}`],
     className,
+    styles[`label-${labelPosition}`],
   );
 
   const localSwitchRef = useObjectRef(ref);
@@ -44,15 +45,11 @@ export const Switch = flowComponent("Switch", (props) => {
     localInputRef.current?.focus();
   });
 
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
+    useFieldComponent(props);
+
   return (
-    <PropsContextProvider
-      props={{
-        Label: {
-          tunnelId: "label",
-          className: styles.label,
-        },
-      }}
-    >
+    <div {...fieldProps}>
       <Aria.Switch
         {...rest}
         className={rootClassName}
@@ -60,18 +57,18 @@ export const Switch = flowComponent("Switch", (props) => {
         inputRef={localInputRef}
       >
         {({ isSelected }) => (
-          <>
+          <PropsContextProvider props={fieldPropsContext}>
             <div className={styles.track}>
               <div className={styles.handle}>
                 {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
               </div>
             </div>
-            <TunnelExit id="label" />
-          </>
+            <div className={labelStyles.label}>{children}</div>
+          </PropsContextProvider>
         )}
       </Aria.Switch>
-      {children}
-    </PropsContextProvider>
+      <FieldErrorView />
+    </div>
   );
 });
 

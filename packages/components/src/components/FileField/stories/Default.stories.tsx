@@ -75,7 +75,7 @@ export const WithHandler: Story = {
 
     return (
       <Section>
-        <FileField {...props} isInvalid onChange={setFiles}>
+        <FileField {...props} onChange={setFiles}>
           <Label>Certificate</Label>
           <Button variant="outline" color="secondary">
             Select

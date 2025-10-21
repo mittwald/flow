@@ -1,6 +1,6 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithChildren } from "react";
 import {
   type ControllerProps,
@@ -9,10 +9,10 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
-import FieldErrorView from "@/views/FieldErrorView";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { inheritProps } from "@/lib/propsContext/inherit/types";
+import { FieldErrorContext } from "react-aria-components";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -65,6 +65,8 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       name,
     }) ?? controller.field.value;
 
+  const isFieldInvalid = controller.fieldState.invalid;
+
   const fieldProps = {
     ...inheritProps,
     ...controller.field,
@@ -74,21 +76,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     isRequired: !!rest.rules?.required,
     validationBehavior: "aria" as const,
     defaultValue,
-    isInvalid: controller.fieldState.invalid,
-    children: dynamic((p) => {
-      if (controller.fieldState.invalid) {
-        return (
-          <>
-            {p.children}
-            <FieldErrorView>
-              {controller.fieldState.error?.message}
-            </FieldErrorView>
-          </>
-        );
-      }
-
-      return p.children;
-    }),
+    isInvalid: isFieldInvalid,
   };
 
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
@@ -138,7 +126,29 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       props={propsContext}
       dependencies={[controller.fieldState, controller.field, value]}
     >
-      {children}
+      <FieldErrorContext
+        value={{
+          isInvalid: isFieldInvalid,
+          validationErrors: [
+            controller.fieldState.error?.message ?? "noMessage",
+          ],
+          validationDetails: {
+            valid: !isFieldInvalid,
+            badInput: false,
+            customError: isFieldInvalid,
+            patternMismatch: false,
+            rangeOverflow: false,
+            rangeUnderflow: false,
+            stepMismatch: false,
+            tooLong: false,
+            tooShort: false,
+            valueMissing: false,
+            typeMismatch: false,
+          },
+        }}
+      >
+        {children}
+      </FieldErrorContext>
     </PropsContextProvider>
   );
 }

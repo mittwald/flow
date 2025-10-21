@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -16,6 +16,7 @@ import {
 } from "@/components/ContextualHelp";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -88,13 +89,78 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
+export const WithFieldError: Story = {
   render: () => {
-    const form = useForm();
+    const form = useForm({
+      defaultValues: {
+        field: "",
+      },
+    });
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"text"} rules={{ required: true }}>
+        <Field name="field">
+          <ComboBox>
+            <Label>
+              Domain
+              <ContextualHelpTrigger>
+                <Button />
+                <ContextualHelp>
+                  <Text>{dummyText.short}</Text>
+                </ContextualHelp>
+              </ContextualHelpTrigger>
+            </Label>
+            <Option>mydomain.de</Option>
+            <Option>shop.mydomain.de</Option>
+            <Option>anotherdomain.com</Option>
+            <Option>www.anotherdomain.com</Option>
+            <Option>anotherdomain.com/shop</Option>
+            <Option>anotherdomain.com/blog</Option>
+            <Option>onemoredomain.de</Option>
+            <Option>www.onemoredomain.de</Option>
+          </ComboBox>
+        </Field>
+        <ComboBox isInvalid>
+          <Label>
+            Domain
+            <ContextualHelpTrigger>
+              <Button />
+              <ContextualHelp>
+                <Text>{dummyText.short}</Text>
+              </ContextualHelp>
+            </ContextualHelpTrigger>
+          </Label>
+          <Option>mydomain.de</Option>
+          <Option>shop.mydomain.de</Option>
+          <Option>anotherdomain.com</Option>
+          <Option>www.anotherdomain.com</Option>
+          <Option>anotherdomain.com/shop</Option>
+          <Option>anotherdomain.com/blog</Option>
+          <Option>onemoredomain.de</Option>
+          <Option>www.onemoredomain.de</Option>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </ComboBox>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: () => {
+    const form = useForm({
+      defaultValues: {
+        field: "",
+      },
+    });
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
           <ComboBox>
             <Label>
               Domain
@@ -119,7 +185,7 @@ export const WithFocusAndError: Story = {
         <Button
           onPress={() =>
             form.setError(
-              "text",
+              "field",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -127,7 +193,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("text")}>
+        <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>

@@ -1,10 +1,8 @@
-import { type PropsWithChildren, type ReactNode } from "react";
+import { type PropsWithChildren } from "react";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { DateInput } from "./components/DateInput";
-import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover/Popover";
 import { useOverlayController } from "@/lib/controller";
@@ -15,32 +13,20 @@ import {
 import { Calendar } from "@/components/Calendar";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">>,
-    FlowComponentProps {
-  /** The error message that is displayed below the input. */
-  errorMessage?: ReactNode;
-}
+    FlowComponentProps {}
 
 /** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
-  const { children, className, errorMessage, onChange, ref, ...rest } = props;
+  const { children, className, onChange, ref, ...rest } = props;
+
+  const { FieldErrorView, fieldProps, fieldPropsContext } =
+    useFieldComponent(props);
 
   const rootClassName = clsx(styles.formField, className);
-
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: styles.fieldDescription,
-    },
-    FieldError: {
-      className: styles.customFieldError,
-    },
-  };
 
   const localRef = useObjectRef(ref);
   useMakeFocusable(localRef);
@@ -51,7 +37,8 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
     <Aria.DatePicker
       ref={localRef}
       {...rest}
-      className={rootClassName}
+      {...fieldProps}
+      className={clsx(fieldProps.className, rootClassName)}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
       onChange={(value) => {
@@ -62,10 +49,9 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
       }}
     >
       <DateInput isDisabled={props.isDisabled} />
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={fieldPropsContext}>
         {children}
       </PropsContextProvider>
-      <FieldError className={styles.fieldError}>{errorMessage}</FieldError>
       <Popover
         placement="bottom end"
         isDialogContent
@@ -73,6 +59,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
       >
         <Calendar />
       </Popover>
+      <FieldErrorView />
     </Aria.DatePicker>
   );
 });

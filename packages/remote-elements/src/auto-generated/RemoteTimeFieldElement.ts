@@ -120,7 +120,7 @@ export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldEle
   }
 
   static override get remoteSlots() {
-    return ["errorMessage"];
+    return [];
   }
 }
 

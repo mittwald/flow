@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -9,6 +9,7 @@ import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Radio, RadioGroup } from "@/components/RadioGroup";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -84,28 +85,56 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
+export const WithFieldError: Story = {
   render: () => {
     const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
 
     return (
-      <Form form={form} onSubmit={() => action("submitted")}>
-        <Field name={"text"} rules={{ required: true }}>
-          <RadioGroup m={[1, 1]} l={[1, 1, 1]}>
-            <Label>Options</Label>
-            <Radio value="1">Option 1</Radio>
-            <Radio value="2">Option 2</Radio>
-            <Radio value="3">Option 3</Radio>
-            <Radio value="4">Option 4</Radio>
-            <Radio value="5">Option 5</Radio>
-            <Radio value="6">Option 6</Radio>
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <RadioGroup>
+            <Label>Gender</Label>
+            <Radio value="male">Male</Radio>
+            <Radio value="female">Female</Radio>
+            <Radio value="diverse">Diverse</Radio>
+          </RadioGroup>
+        </Field>
+        <RadioGroup isInvalid>
+          <Label>Gender</Label>
+          <Radio value="male">Male</Radio>
+          <Radio value="female">Female</Radio>
+          <Radio value="diverse">Diverse</Radio>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </RadioGroup>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: () => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <RadioGroup>
+            <Label>Gender</Label>
+            <Radio value="male">Male</Radio>
+            <Radio value="female">Female</Radio>
+            <Radio value="diverse">Diverse</Radio>
           </RadioGroup>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button
           onPress={() =>
             form.setError(
-              "text",
+              "field",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -113,7 +142,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("text")}>
+        <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>

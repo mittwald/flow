@@ -6,9 +6,12 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import clsx from "clsx";
 
 export interface TextAreaProps
-  extends Omit<TextFieldBaseProps, "input" | "ref">,
+  extends Omit<TextFieldBaseProps, "FieldErrorView" | "input" | "ref">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
     FlowComponentProps<HTMLTextAreaElement> {
   /**
@@ -63,9 +66,20 @@ export const TextArea = flowComponent("TextArea", (props) => {
     </ReactAriaControlledValueFix>
   );
 
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
+    useFieldComponent(props);
+
   return (
-    <TextFieldBase {...rest} input={input}>
-      {children}
+    <TextFieldBase
+      {...rest}
+      {...fieldProps}
+      className={clsx(rest.className, fieldProps.className)}
+      FieldErrorView={FieldErrorView}
+      input={input}
+    >
+      <PropsContextProvider props={fieldPropsContext}>
+        {children}
+      </PropsContextProvider>
     </TextFieldBase>
   );
 });
