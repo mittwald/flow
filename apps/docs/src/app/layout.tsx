@@ -11,6 +11,7 @@ import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import wave from "../../assets/flow-wave.svg";
 import Header from "@/app/_components/layout/Header";
+import ScrollToHash from "@/app/_components/ScrollToHash";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -25,6 +26,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
     <html lang="de">
       <body className={bodyClassName}>
         <RouterProvider>
+          <ScrollToHash />
           <Matomo />
           <NotificationProvider>
             <Image src={wave.src} className={styles.wave} />
