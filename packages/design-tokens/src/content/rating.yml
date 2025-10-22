@@ -1,9 +1,9 @@
 rating:
   spacing:
     s:
-      value: "{size-rem.xs}"
+      value: "{size-rem.xxs}"
     m:
-      value: "{size-rem.s}"
+      value: "{size-rem.xs}"
   star-color:
     value: "{neutral.color.700}"
   star-filled-color:
