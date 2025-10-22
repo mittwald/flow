@@ -159,8 +159,8 @@
     "@internationalized/date": "^3.10.0",
     "@mittwald/react-use-promise": "^4.2.2",
     "next": "*",
-    "react": "^19",
-    "react-dom": "^19",
+    "react": "^19.2",
+    "react-dom": "^19.2",
     "react-hook-form": "^7.65.0"
   },
   "peerDependenciesMeta": {

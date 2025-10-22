@@ -1,7 +1,7 @@
 import { beforeEach, expect, vitest } from "vitest";
 import { render } from "@testing-library/react";
-import React, { act, useEffect } from "react";
-import Activity from "@/components/Activity/index";
+import { useEffect } from "react";
+import { CustomActivity } from "@/components/Activity/index";
 
 const rendering = vitest.fn();
 
@@ -24,74 +24,36 @@ test("Does render children without any Activity", () => {
 
 test("Does render children when wrapped in active Activity", () => {
   render(
-    <Activity isActive={true}>
+    <CustomActivity isActive={true}>
       <TestComponent />
-    </Activity>,
+    </CustomActivity>,
   );
   expect(rendering).toHaveBeenCalledTimes(1);
 });
 
 test("Does NOT render children when wrapped in inactive Activity", () => {
   render(
-    <Activity isActive={false}>
+    <CustomActivity isActive={false}>
       <TestComponent />
-    </Activity>,
+    </CustomActivity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(0);
-});
-
-test("Does NOT render children when wrapped in delayed inactive Activity", () => {
-  const node = (
-    <Activity isActive={false} inactiveDelay={1000}>
-      <TestComponent />
-    </Activity>
-  );
-
-  render(node);
   expect(rendering).toHaveBeenCalledTimes(0);
 });
 
 test("Does NOT render children when switching from active to inactive", () => {
   // initial render as active
   const r = render(
-    <Activity isActive={true}>
+    <CustomActivity isActive={true}>
       <TestComponent />
-    </Activity>,
+    </CustomActivity>,
   );
   expect(rendering).toHaveBeenCalledTimes(1);
 
   // re-render as inactive
   r.rerender(
-    <Activity isActive={false}>
+    <CustomActivity isActive={false}>
       <TestComponent />
-    </Activity>,
+    </CustomActivity>,
   );
   expect(rendering).toHaveBeenCalledTimes(1);
-});
-
-test("Does NOT render children after delay when wrapped in delayed inactive Activity", () => {
-  // initial render as active
-  const r = render(
-    <Activity isActive={true} inactiveDelay={1000}>
-      <TestComponent />
-    </Activity>,
-  );
-  expect(rendering).toHaveBeenCalledTimes(1);
-
-  // re-render as inactive
-  r.rerender(
-    <Activity isActive={false} inactiveDelay={1000}>
-      <TestComponent />
-    </Activity>,
-  );
-  expect(rendering).toHaveBeenCalledTimes(2);
-
-  // re-render after elapsed timer
-  act(() => vitest.advanceTimersToNextTimer());
-  r.rerender(
-    <Activity isActive={false} inactiveDelay={1000}>
-      <TestComponent />
-    </Activity>,
-  );
-  expect(rendering).toHaveBeenCalledTimes(2);
 });

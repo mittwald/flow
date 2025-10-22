@@ -59,8 +59,8 @@
   },
   "peerDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
-    "react": "^19",
-    "react-dom": "^19",
+    "react": "^19.2",
+    "react-dom": "^19.2",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
