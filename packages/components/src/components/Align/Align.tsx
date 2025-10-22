@@ -14,7 +14,7 @@ export interface AlignProps
 
 /** @flr-generate all */
 export const Align = flowComponent("Align", (props) => {
-  const { children, className } = props;
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.align, className);
 
@@ -33,7 +33,9 @@ export const Align = flowComponent("Align", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>{children}</div>
+      <div className={rootClassName} {...rest}>
+        {children}
+      </div>
     </PropsContextProvider>
   );
 });
