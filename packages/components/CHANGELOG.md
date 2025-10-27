@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.531](https://github.com/mittwald/flow/compare/0.2.0-alpha.530...0.2.0-alpha.531) (2025-10-27)
+
+### Bug Fixes
+
+* **Switch:** hide optional text in switch label ([e5a0175](https://github.com/mittwald/flow/commit/e5a0175f6c6265be32c6189e91c8ed62ce8c6904))
+
 # [0.2.0-alpha.530](https://github.com/mittwald/flow/compare/0.2.0-alpha.529...0.2.0-alpha.530) (2025-10-27)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
