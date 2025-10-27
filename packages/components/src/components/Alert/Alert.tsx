@@ -33,8 +33,11 @@ export const Alert = flowComponent("Alert", (props) => {
     },
     Content: {
       className: styles.content,
-      Button: {
-        size: "s",
+
+      ActionGroup: {
+        Button: {
+          size: "s",
+        },
       },
     },
   };
