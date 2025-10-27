@@ -28,18 +28,40 @@ export const AnchorNavigation: FC<Props> = (props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveAnchor(entry.target.id);
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActiveAnchor(visible[0]!.target.id);
+        } else {
+          const aboveViewport = anchors
+            .map((a) => slugify(a, { lower: true, strict: true }))
+            .map((id) => document.getElementById(id))
+            .filter((el): el is HTMLElement => el !== null)
+            .filter(
+              (el) =>
+                el.getBoundingClientRect().top < window.innerHeight * 0.25,
+            )
+            .pop();
+
+          if (aboveViewport) {
+            setActiveAnchor(aboveViewport.id);
+          } else if (!activeAnchor && anchors.length > 0) {
+            const firstSlug = slugify(anchors[0]!, {
+              lower: true,
+              strict: true,
+            });
+            setActiveAnchor(firstSlug);
           }
-        });
+        }
       },
       {
-        rootMargin: "0px 0px -60% 0px",
-        threshold: 0.1,
+        root: null,
+        rootMargin: "-20% 0px -70% 0px",
+        threshold: [0, 0.25, 0.5],
       },
     );
-
     anchors.forEach((a) => {
       const slug = slugify(a, { lower: true, strict: true });
       const el = document.getElementById(slug);
