@@ -4,6 +4,7 @@ import { DateRangePicker } from "../index";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
 import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof DateRangePicker> = {
   title: "Form Controls/DateRangePicker",
@@ -13,9 +14,6 @@ const meta: Meta<typeof DateRangePicker> = {
       <Label>Date</Label>
     </DateRangePicker>
   ),
-  parameters: {
-    controls: { exclude: ["errorMessage"] },
-  },
 };
 
 export default meta;
@@ -37,9 +35,9 @@ export const Invalid: Story = {
       }}
       {...props}
       isInvalid
-      errorMessage="Date is in the past"
     >
       <Label>Future Date</Label>
+      <FieldError>Date is in the past</FieldError>
     </DateRangePicker>
   ),
 };

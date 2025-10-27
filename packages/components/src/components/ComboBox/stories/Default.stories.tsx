@@ -138,7 +138,6 @@ export const WithPlaceholder: Story = {
       <Option>anotherdomain.com/blog</Option>
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
-      <FieldError>Select a domain to continue</FieldError>
     </ComboBox>
   ),
 };

@@ -14,6 +14,10 @@
 
   .checkbox,
   .checkboxButton {
+    :global(.flow--form-field) {
+      display: block;
+    }
+
     &[data-invalid]:not([data-selected]) {
       svg {
         color: var(--form-control--border-color--default);

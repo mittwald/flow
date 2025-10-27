@@ -2,18 +2,22 @@ import type { PolicyGenericDeclaration } from "@mittwald/password-tools-js/polic
 import { Policy } from "@mittwald/password-tools-js/policy";
 import { defaultPasswordCreationPolicy } from "./";
 import { isPromise } from "remeda";
+import { useMemo } from "react";
 
-export const generatePasswordCreationFieldValidation =
-  (
-    genericValidationPolicy: PolicyGenericDeclaration = defaultPasswordCreationPolicy,
-  ) =>
-  async (value: string) => {
+export const generatePasswordCreationFieldValidation = (
+  genericValidationPolicy: PolicyGenericDeclaration = defaultPasswordCreationPolicy,
+) => {
+  const validationPolicy = useMemo(
+    () => Policy.fromDeclaration(genericValidationPolicy),
+    [genericValidationPolicy],
+  );
+
+  return async (value: string) => {
     if (!value) {
       return true;
     }
 
     try {
-      const validationPolicy = Policy.fromDeclaration(genericValidationPolicy);
       const validationResult = await validationPolicy.validate(value);
 
       if (isPromise(validationResult.isValid)) {
@@ -25,3 +29,4 @@ export const generatePasswordCreationFieldValidation =
       return false;
     }
   };
+};

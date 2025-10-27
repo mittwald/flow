@@ -7,27 +7,29 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
-import { Switch } from "@/components/Switch";
+import { Text } from "@/components/Text";
+import { CheckboxButton } from "@/components/CheckboxButton";
+import Content from "@/components/Content";
 import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
 const meta: Meta<typeof Field> = {
-  title: "Integrations/React Hook Form/Switch",
+  title: "Integrations/React Hook Form/CheckboxButton",
   component: Field,
   render: () => {
     interface Values {
-      isEnabled: boolean;
+      acceptTerms: boolean;
     }
 
     const handleOnSubmit = async (values: Values) => {
-      await sleep(5000);
+      await sleep(1500);
       submitAction(values);
     };
 
     const form = useForm<Values>({
       defaultValues: {
-        isEnabled: false,
+        acceptTerms: false,
       },
     });
 
@@ -36,8 +38,11 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field name="isEnabled">
-            <Switch>Text</Switch>
+          <Field name="acceptTerms">
+            <CheckboxButton>
+              <Text>Terms and Conditions</Text>
+              <Content>Consent to terms and conditions</Content>
+            </CheckboxButton>
           </Field>
 
           <ActionGroup>
@@ -67,12 +72,16 @@ export const WithFieldError: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name={"field"}>
-          <Switch {...props}>Field1</Switch>
+          <CheckboxButton {...props}>
+            <Text>Terms and Conditions</Text>
+            <Content>Consent to terms and conditions</Content>
+          </CheckboxButton>
         </Field>
-        <Switch>
-          Field2
+        <CheckboxButton {...props} isInvalid>
+          <Text>Terms and Conditions</Text>
+          <Content>Consent to terms and conditions</Content>
           <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </Switch>
+        </CheckboxButton>
       </Form>
     );
   },
@@ -84,7 +93,10 @@ export const WithFocus: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name={"field"}>
-          <Switch {...props}>Field</Switch>
+          <CheckboxButton {...props}>
+            <Text>Terms and Conditions</Text>
+            <Content>Consent to terms and conditions</Content>
+          </CheckboxButton>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button

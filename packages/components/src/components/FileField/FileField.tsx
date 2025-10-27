@@ -1,4 +1,3 @@
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
@@ -8,11 +7,11 @@ import type { FileInputOnChangeHandler } from "@/components/FileField/components
 import { FileInput } from "@/components/FileField/components/FileInput";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileFieldProps
   extends PropsWithChildren,
@@ -41,6 +40,14 @@ export const FileField = flowComponent("FileField", (props) => {
     isReadOnly,
     ...restInputProps
   } = props;
+
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
+
   const inputRef = useObjectRef(ref);
 
   const formValidationState = useFormValidationState({
@@ -57,19 +64,6 @@ export const FileField = flowComponent("FileField", (props) => {
     value: undefined,
   };
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
-  };
-
   const handleOnChange: FileInputOnChangeHandler = (fileList) => {
     if (fileList && onChange) {
       Promise.all(Array.from(fileList).map(addAwaitedArrayBuffer)).then(() =>
@@ -81,29 +75,35 @@ export const FileField = flowComponent("FileField", (props) => {
   useMakeFocusable(inputRef);
 
   return (
-    <InputContext.Provider value={inputProps}>
-      <FieldErrorContext.Provider value={formValidationState.displayValidation}>
-        <PropsContextProvider props={propsContext}>
-          <div
-            data-readonly={isReadOnly}
-            data-required={!!isRequired || undefined}
-            data-invalid={
-              formValidationState.displayValidation.isInvalid || undefined
-            }
-            className={formFieldStyles.formField}
-          >
-            <FileInput
-              ref={inputRef}
-              isReadOnly={isReadOnly}
-              onChange={isReadOnly ? undefined : handleOnChange}
-              isDisabled={isDisabled}
-            >
-              {children}
-            </FileInput>
-          </div>
-        </PropsContextProvider>
-      </FieldErrorContext.Provider>
-    </InputContext.Provider>
+    <div {...fieldProps}>
+      <InputContext.Provider value={inputProps}>
+        <FieldErrorContext.Provider
+          value={formValidationState.displayValidation}
+        >
+          <FieldErrorResetContext>
+            <PropsContextProvider props={fieldPropsContext}>
+              <div
+                data-readonly={isReadOnly}
+                data-required={!!isRequired || undefined}
+                data-invalid={
+                  formValidationState.displayValidation.isInvalid || undefined
+                }
+              >
+                <FileInput
+                  ref={inputRef}
+                  isReadOnly={isReadOnly}
+                  onChange={isReadOnly ? undefined : handleOnChange}
+                  isDisabled={isDisabled}
+                >
+                  {children}
+                </FileInput>
+              </div>
+            </PropsContextProvider>
+          </FieldErrorResetContext>
+          <FieldErrorView />
+        </FieldErrorContext.Provider>
+      </InputContext.Provider>
+    </div>
   );
 });
 export default FileField;

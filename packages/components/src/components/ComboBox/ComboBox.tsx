@@ -9,7 +9,6 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./ComboBox.module.scss";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -18,6 +17,7 @@ import { type OverlayController, useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
@@ -49,28 +49,22 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     ...rest
   } = props;
 
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
+
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const rootClassName = clsx(
-    styles.comboBox,
-    formFieldStyles.formField,
-    className,
-  );
+  const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
 
   const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
     Option: {
       tunnelId: "options",
     },
+    ...fieldPropsContext,
   };
 
   const handleOnSelectionChange = (key: Key | null) => {
@@ -92,6 +86,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   return (
     <Aria.ComboBox
+      {...fieldProps}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
@@ -101,23 +96,29 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <div className={styles.input}>
-            <Aria.Input placeholder={placeholder} />
-            <Button
-              className={styles.toggle}
-              aria-label={stringFormatter.format("comboBox.showOptions")}
-              variant="plain"
-              color="secondary"
+          <FieldErrorResetContext>
+            <div className={styles.input}>
+              <Aria.Input placeholder={placeholder} />
+              <Button
+                className={styles.toggle}
+                aria-label={stringFormatter.format("comboBox.showOptions")}
+                variant="plain"
+                color="secondary"
+              >
+                <IconChevronDown />
+              </Button>
+            </div>
+
+            {children}
+
+            <Options
+              controller={controller}
+              renderEmptyState={renderEmptyState}
             >
-              <IconChevronDown />
-            </Button>
-          </div>
-
-          {children}
-
-          <Options controller={controller} renderEmptyState={renderEmptyState}>
-            <TunnelExit id="options" />
-          </Options>
+              <TunnelExit id="options" />
+            </Options>
+          </FieldErrorResetContext>
+          <FieldErrorView />
         </TunnelProvider>
       </PropsContextProvider>
     </Aria.ComboBox>

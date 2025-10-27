@@ -4,7 +4,6 @@ import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
@@ -16,6 +15,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SelectProps
   extends PropsWithChildren<Omit<Aria.SelectProps, "children" | "className">>,
@@ -46,6 +46,13 @@ export const Select = flowComponent("Select", (props) => {
     ...rest
   } = props;
 
+  const {
+    FieldErrorView,
+    fieldPropsContext,
+    fieldProps,
+    FieldErrorResetContext,
+  } = useFieldComponent(props);
+
   const rootClassName = clsx(
     styles.select,
     formFieldStyles.formField,
@@ -53,19 +60,10 @@ export const Select = flowComponent("Select", (props) => {
   );
 
   const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
     Option: {
       tunnelId: "options",
     },
+    ...fieldPropsContext,
   };
 
   const handleOnSelectionChange = (id: Key | null) => {
@@ -90,32 +88,34 @@ export const Select = flowComponent("Select", (props) => {
   return (
     <Aria.Select
       {...rest}
-      className={rootClassName}
+      {...fieldProps}
+      className={clsx(rootClassName, fieldProps.className)}
       ref={localSelectRef}
       onSelectionChange={isReadOnly ? undefined : handleOnSelectionChange}
       onOpenChange={(isOpen) => !isReadOnly && controller.setOpen(isOpen)}
       isOpen={isOpen}
       data-readonly={isReadOnly}
     >
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <Aria.Button
-            ref={localButtonRef}
-            data-readonly={isReadOnly}
-            className={styles.toggle}
-          >
-            <Aria.SelectValue />
-            <IconChevronDown />
-          </Aria.Button>
+      <TunnelProvider>
+        <FieldErrorResetContext>
+          <PropsContextProvider props={propsContext}>
+            <Aria.Button
+              ref={localButtonRef}
+              data-readonly={isReadOnly}
+              className={styles.toggle}
+            >
+              <Aria.SelectValue />
+              <IconChevronDown />
+            </Aria.Button>
 
-          {children}
-          <Options controller={controller}>
-            <TunnelExit id="options" />
-          </Options>
-
-          <FieldError className={formFieldStyles.fieldError} />
-        </TunnelProvider>
-      </PropsContextProvider>
+            {children}
+            <Options controller={controller}>
+              <TunnelExit id="options" />
+            </Options>
+          </PropsContextProvider>
+        </FieldErrorResetContext>
+        <FieldErrorView />
+      </TunnelProvider>
     </Aria.Select>
   );
 });

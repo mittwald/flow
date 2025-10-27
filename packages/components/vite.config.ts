@@ -30,5 +30,10 @@ export default defineConfig({
     modules: {
       generateScopedName: cssModuleClassNameGenerator,
     },
+    preprocessorOptions: {
+      scss: {
+        loadPaths: ["./src"],
+      },
+    },
   },
 });

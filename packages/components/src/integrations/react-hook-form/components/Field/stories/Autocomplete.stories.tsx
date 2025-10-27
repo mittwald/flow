@@ -11,11 +11,12 @@ import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { TextField } from "@/components/TextField";
 import Option from "@/components/Option";
-import { SearchField } from "@/components/SearchField";
+import React, { useEffect } from "react";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
-const generateFromString = (value: string) => {
+const generateFromString = (value: string | undefined = "") => {
   return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
     const email = `${value.split("@")[0]}@${d}`;
     return (
@@ -74,27 +75,60 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
-  render: () => {
+export const WithFieldError: Story = {
+  render: (props) => {
     const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    const fieldValue = form.watch("field");
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"text"} rules={{ required: true }}>
-          <Autocomplete>
-            <SearchField>
+        <Field name={"field"}>
+          <Autocomplete {...props}>
+            <TextField>
               <Label>Test</Label>
-            </SearchField>
-            <Option value="example.com">example.com</Option>
-            <Option value="domain.de">domain.de</Option>
-            <Option value="test.org">test.org</Option>
+            </TextField>
+            {generateFromString(fieldValue)}
+          </Autocomplete>
+        </Field>
+        <Autocomplete {...props} isInvalid>
+          <TextField>
+            <Label>Test</Label>
+          </TextField>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+          {generateFromString(fieldValue)}
+        </Autocomplete>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: (props) => {
+    const form = useForm();
+    const fieldValue = form.watch("field");
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <Autocomplete {...props}>
+            <TextField>
+              <Label>Test</Label>
+            </TextField>
+            {generateFromString(fieldValue)}
           </Autocomplete>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button
           onPress={() =>
             form.setError(
-              "text",
+              "field",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -102,7 +136,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("text")}>
+        <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>
