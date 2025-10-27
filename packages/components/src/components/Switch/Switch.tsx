@@ -6,7 +6,7 @@ import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import labelStyles from "../Label/Label.module.scss";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
@@ -48,6 +48,14 @@ export const Switch = flowComponent("Switch", (props) => {
   const { FieldErrorView, fieldPropsContext, fieldProps } =
     useFieldComponent(props);
 
+  const propsContext: PropsContext = {
+    ...fieldPropsContext,
+    Label: {
+      ...fieldPropsContext.Label,
+      optional: false,
+    },
+  };
+
   return (
     <div {...fieldProps}>
       <Aria.Switch
@@ -57,7 +65,7 @@ export const Switch = flowComponent("Switch", (props) => {
         inputRef={localInputRef}
       >
         {({ isSelected }) => (
-          <PropsContextProvider props={fieldPropsContext}>
+          <PropsContextProvider props={propsContext}>
             <div className={styles.track}>
               <div className={styles.handle}>
                 {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
