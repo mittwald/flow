@@ -2,11 +2,11 @@ import React, { type FC } from "react";
 import styles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
 import { Icon } from "@/components/Icon";
 import {
+  IconBlockquote,
   IconBold,
   IconItalic,
   IconList,
   IconListNumbers,
-  IconQuoteFilled,
   IconStrikethrough,
 } from "@tabler/icons-react";
 import { IconCode, IconLink } from "@/components/Icon/components/icons";
@@ -55,7 +55,7 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
 
         <ToolbarButton {...sharedToolButtonProps} type="quote">
           <Icon>
-            <IconQuoteFilled />
+            <IconBlockquote />
           </Icon>
         </ToolbarButton>
 

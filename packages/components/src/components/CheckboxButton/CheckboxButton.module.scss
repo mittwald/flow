@@ -1,49 +1,50 @@
 @use "../../styles/mixins/formControl";
 
 .checkboxButton {
-  display: grid;
-  row-gap: var(--form-control--spacing-y);
-  column-gap: var(--form-control--spacing-x);
-  grid-template-areas: "icon label";
-  grid-template-columns: auto 1fr;
   width: fit-content;
-  align-self: start;
 
-  @include formControl.formControl();
+  .input {
+    @include formControl.formControl();
 
-  & {
-    order: unset;
+    display: grid;
+    row-gap: var(--form-control--spacing-y);
+    column-gap: var(--form-control--spacing-x);
+    grid-template-areas: "icon label";
+    grid-template-columns: auto 1fr;
+    align-self: start;
+
+    & {
+      order: unset;
+    }
+
+    /* With content */
+    &:focus-within:not([data-selected]):not([data-focus-visible]) {
+      border-color: var(--form-control--border-color--default);
+    }
+
+    &[data-invalid]:not([data-selected]) {
+      border-color: var(--form-control--border-color--invalid);
+      background-color: var(--form-control--background-color--invalid);
+    }
+
+    &:has(.content) {
+      grid-template-areas:
+        "icon label"
+        ".    content";
+      grid-template-rows: auto 1fr;
+
+      .label {
+        font-weight: var(--font-weight--bold);
+      }
+    }
   }
 
   /* Elements */
-
   .label {
     grid-area: label;
   }
 
   .content {
     grid-area: content;
-  }
-
-  /* With content */
-
-  &:has(.content) {
-    grid-template-areas:
-      "icon label"
-      ".    content";
-    grid-template-rows: auto 1fr;
-
-    .label {
-      font-weight: var(--font-weight--bold);
-    }
-  }
-
-  &:focus-within:not([data-selected]):not([data-focus-visible]) {
-    border-color: var(--form-control--border-color--default);
-  }
-
-  &[data-invalid]:not([data-selected]) {
-    border-color: var(--form-control--border-color--invalid);
-    background-color: var(--form-control--background-color--invalid);
   }
 }

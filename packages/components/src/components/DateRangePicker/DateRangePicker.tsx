@@ -1,13 +1,10 @@
-import type { PropsWithChildren, ReactNode } from "react";
-import styles from "../FormField/FormField.module.scss";
+import type { PropsWithChildren } from "react";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover/Popover";
 import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
-import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";
 import {
   flowComponent,
@@ -15,32 +12,20 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useObjectRef } from "@react-aria/utils";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">>,
-    FlowComponentProps {
-  /** The error message that is displayed below the input. */
-  errorMessage?: ReactNode;
-}
+    FlowComponentProps {}
 
 /** @flr-generate all */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
-  const { children, className, errorMessage, onChange, ref, ...rest } = props;
+  const { children, className, onChange, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.formField, className);
+  const { FieldErrorView, fieldProps, fieldPropsContext } =
+    useFieldComponent(props);
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: styles.fieldDescription,
-    },
-    FieldError: {
-      className: styles.customFieldError,
-    },
-  };
+  const rootClassName = clsx(fieldProps.className, className);
 
   const popoverController = useOverlayController("Popover");
 
@@ -62,10 +47,9 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
       }}
     >
       <DateRangeInput isDisabled={props.isDisabled} />
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={fieldPropsContext}>
         {children}
       </PropsContextProvider>
-      <FieldError className={styles.fieldError}>{errorMessage}</FieldError>
       <Popover
         placement="bottom end"
         isDialogContent
@@ -73,6 +57,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
       >
         <RangeCalendar />
       </Popover>
+      <FieldErrorView />
     </Aria.DateRangePicker>
   );
 });

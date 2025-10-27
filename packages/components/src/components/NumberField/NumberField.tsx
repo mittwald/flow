@@ -1,11 +1,9 @@
-import type { PropsWithChildren } from "react";
+import React, { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import {
   IconChevronDown,
@@ -16,6 +14,7 @@ import {
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
@@ -32,30 +31,21 @@ export const NumberField = flowComponent("NumberField", (props) => {
     ...rest
   } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const { FieldErrorView, fieldProps, fieldPropsContext } =
+    useFieldComponent(props);
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
-  };
+  const rootClassName = clsx(formFieldStyles.formField, className);
 
   return (
     <Aria.NumberField
       {...rest}
       isWheelDisabled={isWheelDisabled}
       defaultValue={defaultValue}
-      className={rootClassName}
+      className={clsx(rootClassName, fieldProps.className)}
     >
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={fieldPropsContext}>
         {children}
+        <FieldErrorView />
       </PropsContextProvider>
       <Aria.Group className={styles.group}>
         <Button
@@ -85,7 +75,6 @@ export const NumberField = flowComponent("NumberField", (props) => {
           <IconPlus className={styles.coarsePointerIcon} />
         </Button>
       </Aria.Group>
-      <FieldError className={formFieldStyles.fieldError} />
     </Aria.NumberField>
   );
 });

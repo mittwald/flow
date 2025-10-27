@@ -20,15 +20,18 @@ import {
   useLocalizedStringFormatter,
 } from "react-aria";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps,
-    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {}
+    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {
+  isInvalid?: boolean;
+}
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, ...rest } = props;
+  const { children, isInvalid, ...rest } = props;
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -49,6 +52,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
         e.preventDefault();
       }
     },
+    isInvalid,
     ref: triggerRef,
   };
 
@@ -57,17 +61,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       {stringFormatter.format("autocomplete.empty")}
     </Text>
   );
-
-  const propsContext: PropsContext = {
-    SearchField: inputProps,
-    TextField: inputProps,
-    Option: {
-      tunnelId: "options",
-    },
-    Popover: {
-      className: styles.popover,
-    },
-  };
 
   const handleOnInputChange = (value: string) => {
     if (!value) {
@@ -86,31 +79,55 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     controller.close();
   };
 
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
+
+  const propsContext: PropsContext = {
+    SearchField: inputProps,
+    TextField: inputProps,
+    Option: {
+      tunnelId: "options",
+    },
+    Popover: {
+      className: styles.popover,
+    },
+    ...fieldPropsContext,
+  };
+
   return (
-    <PropsContextProvider props={propsContext}>
-      <div {...focusWithin.focusWithinProps} ref={container}>
-        <UNSAFE_PortalProvider getContainer={() => container.current}>
-          <Aria.Autocomplete
-            onInputChange={handleOnInputChange}
-            filter={contains}
-            disableAutoFocusFirst
-            {...rest}
-          >
-            {children}
-            <Options
-              onAction={handleOptionAction}
-              triggerRef={triggerRef}
-              controller={controller}
-              renderEmptyState={renderEmptyState}
-              isNonModal
-              placement="bottom start"
-            >
-              <TunnelExit id="options" />
-            </Options>
-          </Aria.Autocomplete>
-        </UNSAFE_PortalProvider>
-      </div>
-    </PropsContextProvider>
+    <div {...fieldProps}>
+      <FieldErrorResetContext>
+        <PropsContextProvider props={propsContext}>
+          <div {...focusWithin.focusWithinProps} ref={container}>
+            <UNSAFE_PortalProvider getContainer={() => container.current}>
+              <Aria.Autocomplete
+                onInputChange={handleOnInputChange}
+                filter={contains}
+                disableAutoFocusFirst
+                {...rest}
+              >
+                {children}
+                <Options
+                  onAction={handleOptionAction}
+                  triggerRef={triggerRef}
+                  controller={controller}
+                  renderEmptyState={renderEmptyState}
+                  isNonModal
+                  placement="bottom start"
+                >
+                  <TunnelExit id="options" />
+                </Options>
+              </Aria.Autocomplete>
+            </UNSAFE_PortalProvider>
+          </div>
+        </PropsContextProvider>
+      </FieldErrorResetContext>
+      <FieldErrorView />
+    </div>
   );
 });
 

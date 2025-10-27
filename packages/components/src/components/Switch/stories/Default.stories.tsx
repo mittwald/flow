@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "../index";
 import React from "react";
 import { action } from "storybook/actions";
+import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Switch> = {
   title: "Form Controls/Switch",
@@ -19,7 +20,11 @@ const meta: Meta<typeof Switch> = {
       options: ["trailing", "leading"],
     },
   },
-  render: (props) => <Switch {...props}>Autoresponder</Switch>,
+  render: (props) => (
+    <Switch {...props}>
+      <Label>Autoresponder</Label>
+    </Switch>
+  ),
 };
 
 export default meta;

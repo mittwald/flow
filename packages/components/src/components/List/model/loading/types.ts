@@ -30,6 +30,10 @@ export interface DataLoaderResult<T> {
   itemTotalCount?: number;
 }
 
+export type HooksDataLoader<T> = (
+  options: DataLoaderOptions<T>,
+) => DataLoaderResult<T>;
+
 export type AsyncDataLoader<T> = (
   options: DataLoaderOptions<T>,
 ) => Promise<DataLoaderResult<T>>;
@@ -57,11 +61,21 @@ export type AsyncDataLoaderShape<T> = {
   dependencies?: DependencyList;
 } & DynamicLoaderShape;
 
+export type HooksDataLoaderShape<T> = {
+  useData: HooksDataLoader<T>;
+} & DynamicLoaderShape;
+
 export type DataSource<T> =
   | StaticDataLoaderShape<T>
+  | HooksDataLoaderShape<T>
   | AsyncResourceFactoryDataLoaderShape<T>
   | AsyncDataLoaderShape<T>;
 
 export interface IncrementalLoaderShape<T> {
   source?: DataSource<T>;
+}
+
+export interface LoaderInvocationHook {
+  useLoadBatch: () => void;
+  useRenderSuspense: () => void;
 }

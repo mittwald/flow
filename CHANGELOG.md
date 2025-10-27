@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.529](https://github.com/mittwald/flow/compare/0.2.0-alpha.528...0.2.0-alpha.529) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix not loading with LoaderStaticData ([e78ae9c](https://github.com/mittwald/flow/commit/e78ae9c892680deafed0379c9829b852c1f842e2))
+
+# [0.2.0-alpha.528](https://github.com/mittwald/flow/compare/0.2.0-alpha.527...0.2.0-alpha.528) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix MaxUpdateDepth error with LoaderAsyncResource ([8ead588](https://github.com/mittwald/flow/commit/8ead588901878889e55e2409c1ba2fe4f6dc7323))
+
+# [0.2.0-alpha.527](https://github.com/mittwald/flow/compare/0.2.0-alpha.526...0.2.0-alpha.527) (2025-10-21)
+
+### Features
+
+* **List:** support loading data by using any hooks ([0810c84](https://github.com/mittwald/flow/commit/0810c8457a7c7f95bf7328524867810ae839d159))
+
+# [0.2.0-alpha.526](https://github.com/mittwald/flow/compare/0.2.0-alpha.525...0.2.0-alpha.526) (2025-10-21)
+
+### Bug Fixes
+
+* **MarkdownEditor:** switch quote icon ([b55a57e](https://github.com/mittwald/flow/commit/b55a57e2cf373af1992092603bc22303292773bf))
+
+# [0.2.0-alpha.525](https://github.com/mittwald/flow/compare/0.2.0-alpha.524...0.2.0-alpha.525) (2025-10-21)
+
+### Bug Fixes
+
+* **CodeBlock:** auto overflow when outer content is small ([b5308bd](https://github.com/mittwald/flow/commit/b5308bdf5ff25dc51ddf99cd01a46bf345cc4598))
+
+# [0.2.0-alpha.524](https://github.com/mittwald/flow/compare/0.2.0-alpha.523...0.2.0-alpha.524) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.523](https://github.com/mittwald/flow/compare/0.2.0-alpha.522...0.2.0-alpha.523) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.522](https://github.com/mittwald/flow/compare/0.2.0-alpha.521...0.2.0-alpha.522) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.521](https://github.com/mittwald/flow/compare/0.2.0-alpha.520...0.2.0-alpha.521) (2025-10-17)
 
 **Note:** Version bump only for package @mittwald/flow-project

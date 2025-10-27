@@ -13,6 +13,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileDropZoneProps
   extends PropsWithClassName,
@@ -40,6 +41,13 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       isReadOnly,
     } = props;
 
+    const {
+      FieldErrorView,
+      FieldErrorResetContext,
+      fieldProps,
+      fieldPropsContext,
+    } = useFieldComponent(props);
+
     const fileFieldRef = useRef<HTMLInputElement>(null);
     const rootClassName = clsx(
       styles.fileDropZone,
@@ -48,6 +56,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     );
 
     const propsContext: PropsContext = {
+      ...fieldPropsContext,
       FileField: {
         name,
         onChange: onChangeDropZone,
@@ -99,18 +108,21 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <Aria.DropZone
-        className={rootClassName}
-        onDrop={onDropHandler}
-        isDisabled={isDisabled}
-        data-readonly={isReadOnly}
-      >
-        <IllustratedMessage color="dark">
+      <div {...fieldProps}>
+        <FieldErrorResetContext>
           <PropsContextProvider props={propsContext}>
-            {children}
+            <Aria.DropZone
+              className={rootClassName}
+              onDrop={onDropHandler}
+              isDisabled={isDisabled}
+              data-readonly={isReadOnly}
+            >
+              <IllustratedMessage color="dark">{children}</IllustratedMessage>
+            </Aria.DropZone>
           </PropsContextProvider>
-        </IllustratedMessage>
-      </Aria.DropZone>
+        </FieldErrorResetContext>
+        <FieldErrorView />
+      </div>
     );
   },
 );

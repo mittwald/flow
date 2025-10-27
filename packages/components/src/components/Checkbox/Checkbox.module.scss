@@ -1,34 +1,36 @@
 @use "@/styles/mixins/focus";
 
 .checkbox {
-  display: flex;
-  column-gap: var(--form-control--spacing-x);
-  width: fit-content;
+  .input {
+    display: flex;
+    flex-direction: row;
+    column-gap: var(--form-control--spacing-x);
 
-  @include focus.focus;
+    @include focus.focus;
+
+    &[data-selected],
+    &[data-indeterminate] {
+      .icon {
+        color: var(--choice--icon-color--selected);
+      }
+    }
+
+    &[data-disabled] {
+      color: var(--text--color--disabled);
+
+      .icon {
+        color: var(--choice--icon-color--disabled);
+      }
+    }
+
+    &[data-invalid]:not([data-selected]) {
+      .icon {
+        color: var(--form-control--border-color--invalid);
+      }
+    }
+  }
 
   .icon {
     color: var(--choice--icon-color--default);
-  }
-
-  &[data-selected],
-  &[data-indeterminate] {
-    .icon {
-      color: var(--choice--icon-color--selected);
-    }
-  }
-
-  &[data-disabled] {
-    color: var(--text--color--disabled);
-
-    .icon {
-      color: var(--choice--icon-color--disabled);
-    }
-  }
-
-  &[data-invalid]:not([data-selected]) {
-    .icon {
-      color: var(--form-control--border-color--invalid);
-    }
   }
 }
