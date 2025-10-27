@@ -56,6 +56,10 @@ export const VerticallyResizeable: Story = {
   args: { allowVerticalResize: true },
 };
 
+export const VerticallyAndAutoResizeable: Story = {
+  args: { allowVerticalResize: true, rows: 1, autoResizeMaxRows: 5 },
+};
+
 export const WithOnChange: Story = {
   render: (props) => {
     return (
