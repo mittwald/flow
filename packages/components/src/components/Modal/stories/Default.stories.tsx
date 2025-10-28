@@ -21,6 +21,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { RadioButton, RadioGroup } from "@/components/RadioGroup";
 import { DatePicker } from "@/components/DatePicker";
 import { FieldDescription } from "@/components/FieldDescription";
+import { Render } from "@/index/default";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -368,6 +369,27 @@ export const WithSubHeadings: Story = {
           </ActionGroup>
         </Modal>
       </ModalTrigger>
+    );
+  },
+};
+
+const loadingPromise = new Promise(() => {
+  // no resolve
+});
+
+export const WithSuspense: Story = {
+  render: (props) => {
+    return (
+      <Modal
+        {...props}
+        controller={useOverlayController("Modal", { isDefaultOpen: true })}
+      >
+        <Render>
+          {() => {
+            throw loadingPromise;
+          }}
+        </Render>
+      </Modal>
     );
   },
 };
