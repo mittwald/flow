@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.535](https://github.com/mittwald/flow/compare/0.2.0-alpha.534...0.2.0-alpha.535) (2025-10-28)
+
+### Features
+
+* optimize OffCanvas suspense fallback ([faf11d7](https://github.com/mittwald/flow/commit/faf11d7aff990bd9ddda6ea215bfc833886b3b00))
+
 # [0.2.0-alpha.534](https://github.com/mittwald/flow/compare/0.2.0-alpha.533...0.2.0-alpha.534) (2025-10-28)
 
 ### Features
