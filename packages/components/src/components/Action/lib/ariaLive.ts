@@ -14,12 +14,12 @@ export const useAriaAnnounceActionState = (
   actionState: ActionStateValue,
   options: Options = {},
 ): void => {
-  const formater = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales);
 
   const {
-    isPendingText = formater.format("action.isPending"),
-    isSucceededText = formater.format("action.isSucceeded"),
-    isFailedText = formater.format("action.isFailed"),
+    isPendingText = formatter.format("action.isPending"),
+    isSucceededText = formatter.format("action.isSucceeded"),
+    isFailedText = formatter.format("action.isFailed"),
   } = options;
 
   useEffect(() => {
@@ -31,4 +31,19 @@ export const useAriaAnnounceActionState = (
       announce(isFailedText, "polite");
     }
   }, [actionState]);
+};
+
+export const useAriaAnnounceSuspense = () => {
+  const formatter = useLocalizedStringFormatter(locales);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const isPendingText = formatter.format("suspense.isPending");
+      announce(isPendingText, "polite");
+    }, 750);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
 };
