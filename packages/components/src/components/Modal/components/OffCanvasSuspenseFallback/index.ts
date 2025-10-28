@@ -1,0 +1,1 @@
+export { OffCanvasSuspenseFallback } from "./OffCanvasSuspenseFallback";

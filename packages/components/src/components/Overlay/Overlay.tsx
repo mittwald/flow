@@ -16,6 +16,7 @@ export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   isDismissable?: boolean;
   /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
+  isOpen?: boolean;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
@@ -25,6 +26,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
     isDismissable = true,
     className,
     overlayType = "Modal",
+    isOpen: isOpenFromProps,
     ref,
   } = props;
 
@@ -34,7 +36,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
 
   const controller = controllerFromProps ?? controllerFromContext;
 
-  const isOpen = controller.useIsOpen();
+  const isOpen = isOpenFromProps ?? controller.useIsOpen();
 
   const rootClassName = clsx(styles.overlay, className);
 
