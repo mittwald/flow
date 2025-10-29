@@ -1,5 +1,6 @@
 {
   "action.isFailed": "Failed",
   "action.isPending": "Pending...",
-  "action.isSucceeded": "Succeeded"
+  "action.isSucceeded": "Succeeded",
+  "suspense.isPending": "Loading..."
 }
