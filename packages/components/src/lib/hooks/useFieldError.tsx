@@ -1,4 +1,4 @@
-import React, { type FC, type PropsWithChildren, useId } from "react";
+import React, { type FC, type PropsWithChildren, useId, useMemo } from "react";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
@@ -18,17 +18,20 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
     },
   };
 
-  const FieldErrorCaptureContext: FC<PropsWithChildren> = (props) => {
-    return (
-      <PropsContextProvider
-        levelMode="keep"
-        props={fieldErrorCapturePropsContext}
-        dependencies={[tunnelId]}
-      >
-        {props.children}
-      </PropsContextProvider>
-    );
-  };
+  const FieldErrorCaptureContext: FC<PropsWithChildren> = useMemo(
+    () => (props) => {
+      return (
+        <PropsContextProvider
+          levelMode="keep"
+          props={fieldErrorCapturePropsContext}
+          dependencies={[tunnelId]}
+        >
+          {props.children}
+        </PropsContextProvider>
+      );
+    },
+    [tunnelId],
+  );
 
   const FieldErrorView = () => {
     if (currentTunnelId) {
