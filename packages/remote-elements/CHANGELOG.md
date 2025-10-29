@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.537](https://github.com/mittwald/flow/compare/0.2.0-alpha.536...0.2.0-alpha.537) (2025-10-29)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.536](https://github.com/mittwald/flow/compare/0.2.0-alpha.535...0.2.0-alpha.536) (2025-10-29)
+
+### Features
+
+* **TextArea:** allow resize ([#2075](https://github.com/mittwald/flow/issues/2075)) ([9bb9846](https://github.com/mittwald/flow/commit/9bb9846e21d432bd963b6113f8319bc551dd81b5))
+
 # [0.2.0-alpha.535](https://github.com/mittwald/flow/compare/0.2.0-alpha.534...0.2.0-alpha.535) (2025-10-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
