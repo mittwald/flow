@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import { Suspense, type PropsWithChildren, type ReactNode } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -14,6 +14,8 @@ import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
 import ButtonView from "@/views/ButtonView";
+import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
+import Wrap from "@/components/Wrap";
 
 export interface ModalProps
   extends PropsWithChildren,
@@ -114,7 +116,11 @@ export const Modal = flowComponent(
         {...rest}
       >
         <PropsContextProvider props={propsContext}>
-          {children}
+          <Wrap if={offCanvas}>
+            <Suspense fallback={<OffCanvasSuspenseFallback />}>
+              {children}
+            </Suspense>
+          </Wrap>
         </PropsContextProvider>
       </Overlay>
     );

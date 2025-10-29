@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.535](https://github.com/mittwald/flow/compare/0.2.0-alpha.534...0.2.0-alpha.535) (2025-10-28)
+
+### Features
+
+* optimize OffCanvas suspense fallback ([faf11d7](https://github.com/mittwald/flow/commit/faf11d7aff990bd9ddda6ea215bfc833886b3b00))
+
+# [0.2.0-alpha.534](https://github.com/mittwald/flow/compare/0.2.0-alpha.533...0.2.0-alpha.534) (2025-10-28)
+
+### Features
+
+* support Suspense in Overlays ([fb593d9](https://github.com/mittwald/flow/commit/fb593d97dca8fc4c3c3773d8eacee562959af6ba))
+
+# [0.2.0-alpha.533](https://github.com/mittwald/flow/compare/0.2.0-alpha.532...0.2.0-alpha.533) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.532](https://github.com/mittwald/flow/compare/0.2.0-alpha.531...0.2.0-alpha.532) (2025-10-27)
+
+### Features
+
+* **Alert:** support action group ([#2092](https://github.com/mittwald/flow/issues/2092)) ([d9cfda1](https://github.com/mittwald/flow/commit/d9cfda1e38673d724ac98da31c8b9e8f344e24d6))
+
+# [0.2.0-alpha.531](https://github.com/mittwald/flow/compare/0.2.0-alpha.530...0.2.0-alpha.531) (2025-10-27)
+
+### Bug Fixes
+
+* **Switch:** hide optional text in switch label ([e5a0175](https://github.com/mittwald/flow/commit/e5a0175f6c6265be32c6189e91c8ed62ce8c6904))
+
+# [0.2.0-alpha.530](https://github.com/mittwald/flow/compare/0.2.0-alpha.529...0.2.0-alpha.530) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.529](https://github.com/mittwald/flow/compare/0.2.0-alpha.528...0.2.0-alpha.529) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix not loading with LoaderStaticData ([e78ae9c](https://github.com/mittwald/flow/commit/e78ae9c892680deafed0379c9829b852c1f842e2))
+
+# [0.2.0-alpha.528](https://github.com/mittwald/flow/compare/0.2.0-alpha.527...0.2.0-alpha.528) (2025-10-21)
+
+### Bug Fixes
+
+* **List:** fix MaxUpdateDepth error with LoaderAsyncResource ([8ead588](https://github.com/mittwald/flow/commit/8ead588901878889e55e2409c1ba2fe4f6dc7323))
+
+# [0.2.0-alpha.527](https://github.com/mittwald/flow/compare/0.2.0-alpha.526...0.2.0-alpha.527) (2025-10-21)
+
+### Features
+
+* **List:** support loading data by using any hooks ([0810c84](https://github.com/mittwald/flow/commit/0810c8457a7c7f95bf7328524867810ae839d159))
+
+# [0.2.0-alpha.526](https://github.com/mittwald/flow/compare/0.2.0-alpha.525...0.2.0-alpha.526) (2025-10-21)
+
+### Bug Fixes
+
+* **MarkdownEditor:** switch quote icon ([b55a57e](https://github.com/mittwald/flow/commit/b55a57e2cf373af1992092603bc22303292773bf))
+
+# [0.2.0-alpha.525](https://github.com/mittwald/flow/compare/0.2.0-alpha.524...0.2.0-alpha.525) (2025-10-21)
+
+### Bug Fixes
+
+* **CodeBlock:** auto overflow when outer content is small ([b5308bd](https://github.com/mittwald/flow/commit/b5308bdf5ff25dc51ddf99cd01a46bf345cc4598))
+
+# [0.2.0-alpha.524](https://github.com/mittwald/flow/compare/0.2.0-alpha.523...0.2.0-alpha.524) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.523](https://github.com/mittwald/flow/compare/0.2.0-alpha.522...0.2.0-alpha.523) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.522](https://github.com/mittwald/flow/compare/0.2.0-alpha.521...0.2.0-alpha.522) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.521](https://github.com/mittwald/flow/compare/0.2.0-alpha.520...0.2.0-alpha.521) (2025-10-17)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

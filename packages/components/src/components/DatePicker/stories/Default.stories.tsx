@@ -9,6 +9,7 @@ import {
   parseDate,
   today,
 } from "@internationalized/date";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof DatePicker> = {
   title: "Form Controls/DatePicker",
@@ -39,9 +40,9 @@ export const Invalid: Story = {
       defaultValue={parseDate("2012-07-03")}
       {...props}
       isInvalid
-      errorMessage="Date is in the past"
     >
       <Label>Future Date</Label>
+      <FieldError>Date is in the past</FieldError>
     </DatePicker>
   ),
 };

@@ -24,6 +24,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       inert: {},
       inputRef: {},
       isDisabled: {},
+      isInvalid: {},
       isReadOnly: {},
       lang: {},
       maxValue: {},

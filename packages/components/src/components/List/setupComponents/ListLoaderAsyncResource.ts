@@ -8,6 +8,7 @@ type Props<T> = Omit<
   children: AsyncResourceFactoryDataLoaderShape<T>["asyncResourceFactory"];
 };
 
+/** @deprecated Use ListLoaderHooks instead */
 export const ListLoaderAsyncResource = <T>(ignoredProps: Props<T>) => null;
 
 export const TypedListLoaderAsyncResource = <T>() =>

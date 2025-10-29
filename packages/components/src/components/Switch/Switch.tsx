@@ -5,9 +5,10 @@ import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
+import labelStyles from "../Label/Label.module.scss";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface SwitchProps
@@ -33,8 +34,8 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    styles[`label-${labelPosition}`],
     className,
+    styles[`label-${labelPosition}`],
   );
 
   const localSwitchRef = useObjectRef(ref);
@@ -44,15 +45,19 @@ export const Switch = flowComponent("Switch", (props) => {
     localInputRef.current?.focus();
   });
 
+  const { FieldErrorView, fieldPropsContext, fieldProps } =
+    useFieldComponent(props);
+
+  const propsContext: PropsContext = {
+    ...fieldPropsContext,
+    Label: {
+      ...fieldPropsContext.Label,
+      optional: false,
+    },
+  };
+
   return (
-    <PropsContextProvider
-      props={{
-        Label: {
-          tunnelId: "label",
-          className: styles.label,
-        },
-      }}
-    >
+    <div {...fieldProps}>
       <Aria.Switch
         {...rest}
         className={rootClassName}
@@ -60,18 +65,18 @@ export const Switch = flowComponent("Switch", (props) => {
         inputRef={localInputRef}
       >
         {({ isSelected }) => (
-          <>
+          <PropsContextProvider props={propsContext}>
             <div className={styles.track}>
               <div className={styles.handle}>
                 {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
               </div>
             </div>
-            <TunnelExit id="label" />
-          </>
+            <div className={labelStyles.label}>{children}</div>
+          </PropsContextProvider>
         )}
       </Aria.Switch>
-      {children}
-    </PropsContextProvider>
+      <FieldErrorView />
+    </div>
   );
 });
 

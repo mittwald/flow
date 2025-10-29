@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Field, Form, typedField } from "@/integrations/react-hook-form";
@@ -8,7 +8,7 @@ import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Checkbox } from "@/components/Checkbox";
-import { Text } from "@/components/Text";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -66,22 +66,43 @@ type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
 
-export const WithFocusAndError: Story = {
-  render: () => {
+export const WithFieldError: Story = {
+  render: (props) => {
     const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"text"} rules={{ required: true }}>
-          <Checkbox>
-            <Text>Text</Text>
-          </Checkbox>
+        <Field name={"field"}>
+          <Checkbox {...props}>Accept terms</Checkbox>
+        </Field>
+        <Checkbox isInvalid>
+          Accept terms
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </Checkbox>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <Checkbox {...props}>Accept terms</Checkbox>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button
           onPress={() =>
             form.setError(
-              "text",
+              "field",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -89,7 +110,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("text")}>
+        <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>

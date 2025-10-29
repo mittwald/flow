@@ -21,12 +21,14 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { RadioButton, RadioGroup } from "@/components/RadioGroup";
 import { DatePicker } from "@/components/DatePicker";
 import { FieldDescription } from "@/components/FieldDescription";
+import { useState } from "react";
+import { useTimeout } from "usehooks-ts";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
   component: Modal,
   parameters: {
-    controls: { exclude: ["controller", "offCanvas"] },
+    controls: { exclude: ["controller"] },
   },
   argTypes: {
     size: {
@@ -36,6 +38,7 @@ const meta: Meta<typeof Modal> = {
   },
   args: {
     size: "s",
+    offCanvas: false,
   },
   render: (props) => {
     return (
@@ -368,6 +371,29 @@ export const WithSubHeadings: Story = {
           </ActionGroup>
         </Modal>
       </ModalTrigger>
+    );
+  },
+};
+
+const loadingPromise = new Promise(() => {
+  // no resolve
+});
+
+const Loader = () => {
+  throw loadingPromise;
+};
+
+export const WithSuspense: Story = {
+  render: (props) => {
+    const [isLoading, setIsLoading] = useState(true);
+    useTimeout(() => setIsLoading(false), 3000);
+    return (
+      <Modal
+        {...props}
+        controller={useOverlayController("Modal", { isDefaultOpen: true })}
+      >
+        {isLoading ? <Loader /> : <Content>Loaded content!</Content>}
+      </Modal>
     );
   },
 };
