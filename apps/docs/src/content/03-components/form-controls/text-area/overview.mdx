@@ -2,8 +2,9 @@
 
 Verwende `<TextArea />`, um eine TextArea darzustellen. Platziere innerhalb
 davon ein `<Label />`, um die Eingabeanforderung kurz in einem
-[Label](/03-components/content/label/overview) zu beschreiben. Zusätzliche Hinweise, etwa
-zur Formatierung, können über die `<FieldDescription />` ergänzt werden.
+[Label](/03-components/content/label/overview) zu beschreiben. Zusätzliche
+Hinweise, etwa zur Formatierung, können über die `<FieldDescription />` ergänzt
+werden.
 
 <LiveCodeEditor />
 
@@ -49,12 +50,29 @@ angegeben – die maximale Zeichenanzahl anzeigt.
 
 ---
 
-# Resizeable
+# Resize
 
-Verwende die Property `autoResizeMaxRows`, um eine maximale Höhe festzulegen,
-bis zu der sich die TextArea automatisch an ihren Inhalt anpasst.
+## Automatisch
 
-<LiveCodeEditor example="resizeable" editorCollapsed />
+Mit der Property `autoResizeMaxRows` lässt sich eine maximale Höhe definieren,
+bis zu der sich die TextArea automatisch an den Inhalt anpasst.
+
+<LiveCodeEditor example="autoResizeMaxRows" editorCollapsed />
+
+## Manuell
+
+Über die Properties `allowResize`, `allowVerticalResize` oder
+`allowHorizontalResize` kann die Größe der TextArea manuell verändert werden.
+
+<LiveCodeEditor example="allowResize" editorCollapsed />
+
+## Kombiniert
+
+Beide Resize-Varianten lassen sich auch miteinander kombinieren. In diesem Fall
+passt sich die TextArea zunächst automatisch an, bis die Größe einmal manuell
+geändert wird. Danach bleibt er in der eingestellten Größe bestehen.
+
+<LiveCodeEditor example="combinedResize" editorCollapsed />
 
 ---
 
@@ -62,9 +80,9 @@ bis zu der sich die TextArea automatisch an ihren Inhalt anpasst.
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align/overview)-Component, um andere
-Components, wie einen [Button](/03-components/actions/button/overview), neben der
-TextArea auszurichten.
+Benutze die [Align](/03-components/structure/align/overview)-Component, um
+andere Components, wie einen [Button](/03-components/actions/button/overview),
+neben der TextArea auszurichten.
 
 <LiveCodeEditor example="align" editorCollapsed />
 

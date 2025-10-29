@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from "react";
+import type { HTMLAttributeAnchorTarget, ReactElement, ReactNode } from "react";
 import { createElement } from "react";
 import type { RenderItemFn } from "@/components/List/model/item/types";
 import type List from "@/components/List/model/List";
@@ -6,6 +6,7 @@ import type List from "@/components/List/model/List";
 export interface ItemViewShape<T> {
   textValue?: (data: T) => string;
   href?: (data: T) => string;
+  target?: HTMLAttributeAnchorTarget;
   defaultExpanded?: (data: T) => boolean;
   renderFn?: RenderItemFn<T>;
   fallback?: ReactElement;
@@ -18,6 +19,7 @@ export class ItemView<T> {
   public readonly list: List<T>;
   public readonly textValue?: (data: T) => string;
   public readonly href?: (data: T) => string;
+  public readonly target?: HTMLAttributeAnchorTarget;
   public readonly defaultExpanded?: (data: T) => boolean;
   public readonly fallback?: ReactElement;
   public readonly showTiles?: boolean;
@@ -30,6 +32,7 @@ export class ItemView<T> {
       fallback,
       textValue,
       href,
+      target,
       defaultExpanded,
       renderFn,
       showTiles,
@@ -40,6 +43,7 @@ export class ItemView<T> {
     this.textValue = textValue;
     this.renderFn = renderFn;
     this.href = href;
+    this.target = target;
     this.defaultExpanded = defaultExpanded;
     this.fallback = fallback;
     this.showTiles = showTiles;
