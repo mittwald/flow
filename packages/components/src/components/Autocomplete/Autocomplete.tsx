@@ -81,7 +81,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
   } = useFieldComponent(props);
@@ -100,7 +100,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   return (
     <div {...fieldProps}>
-      <FieldErrorResetContext>
+      <FieldErrorCaptureContext>
         <PropsContextProvider props={propsContext}>
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
@@ -125,7 +125,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
             </UNSAFE_PortalProvider>
           </div>
         </PropsContextProvider>
-      </FieldErrorResetContext>
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </div>
   );

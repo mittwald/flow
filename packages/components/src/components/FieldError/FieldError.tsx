@@ -1,4 +1,9 @@
-import { type PropsWithChildren, useContext, useMemo } from "react";
+import {
+  type PropsWithChildren,
+  type ReactNode,
+  useContext,
+  useMemo,
+} from "react";
 import React from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
@@ -7,7 +12,6 @@ import { IconDanger } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { FieldErrorContext } from "react-aria-components";
-import { onlyText } from "react-children-utilities";
 
 export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
@@ -19,44 +23,51 @@ export const FieldError = flowComponent("FieldError", (props) => {
 
   const rootClassName = clsx(styles.fieldError, className);
   const fieldErrorFromAriaContext = useContext(FieldErrorContext);
+  const isInvalidFromChildren = React.Children.count(children) >= 1;
 
   const mergedErrorState = useMemo(() => {
-    if (React.Children.count(children) >= 1) {
-      const textChildren = onlyText(children);
-      if (!textChildren) {
-        return fieldErrorFromAriaContext;
-      }
+    const errors: (string | ReactNode)[] =
+      fieldErrorFromAriaContext?.validationErrors ?? [];
 
-      return {
-        isInvalid: true,
-        validationErrors: [textChildren],
-        validationDetails: {
-          valid: false,
-          badInput: false,
-          customError: true,
-          patternMismatch: false,
-          rangeOverflow: false,
-          rangeUnderflow: false,
-          stepMismatch: false,
-          tooLong: false,
-          tooShort: false,
-          valueMissing: false,
-          typeMismatch: false,
-        },
-      };
+    if (isInvalidFromChildren) {
+      errors.push(children);
     }
 
-    return fieldErrorFromAriaContext;
+    const isInvalid = !!(
+      isInvalidFromChildren || fieldErrorFromAriaContext?.isInvalid
+    );
+    const lastError =
+      errors.length >= 1 ? errors[errors.length - 1] : undefined;
+
+    return {
+      isInvalid: isInvalid,
+      validationDetails: {
+        valid: !isInvalid,
+        badInput: false,
+        customError: isInvalid,
+        patternMismatch: false,
+        rangeOverflow: false,
+        rangeUnderflow: false,
+        stepMismatch: false,
+        tooLong: false,
+        tooShort: false,
+        valueMissing: false,
+        typeMismatch: false,
+        ...fieldErrorFromAriaContext?.validationDetails,
+      },
+      ...fieldErrorFromAriaContext,
+      validationErrors: lastError ? [lastError] : [],
+    };
   }, [fieldErrorFromAriaContext, children]);
 
   return (
-    <FieldErrorContext value={mergedErrorState}>
+    <FieldErrorContext value={mergedErrorState as never}>
       <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
         {({ validationErrors }) => {
           return (
             <>
               <IconDanger size="s" />
-              <span>{validationErrors.join(" ")}</span>
+              <span>{validationErrors}</span>
             </>
           );
         }}

@@ -43,7 +43,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
 
     const {
       FieldErrorView,
-      FieldErrorResetContext,
+      FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
     } = useFieldComponent(props);
@@ -109,7 +109,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
 
     return (
       <div {...fieldProps}>
-        <FieldErrorResetContext>
+        <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <Aria.DropZone
               className={rootClassName}
@@ -120,7 +120,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
               <IllustratedMessage color="dark">{children}</IllustratedMessage>
             </Aria.DropZone>
           </PropsContextProvider>
-        </FieldErrorResetContext>
+        </FieldErrorCaptureContext>
         <FieldErrorView />
       </div>
     );

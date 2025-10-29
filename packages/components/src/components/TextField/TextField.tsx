@@ -12,7 +12,10 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface TextFieldProps
-  extends Omit<TextFieldBaseProps, "FieldErrorView" | "input" | "className">,
+  extends Omit<
+      TextFieldBaseProps,
+      "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "className"
+    >,
     Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
     FlowComponentProps<HTMLInputElement> {}
@@ -32,14 +35,19 @@ export const TextField = flowComponent("TextField", (props) => {
     </ReactAriaControlledValueFix>
   );
 
-  const { FieldErrorView, fieldPropsContext, fieldProps } =
-    useFieldComponent(props);
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   return (
     <TextFieldBase
       {...rest}
       {...fieldProps}
       FieldErrorView={FieldErrorView}
+      FieldErrorCaptureContext={FieldErrorCaptureContext}
       input={input}
     >
       <PropsContextProvider props={fieldPropsContext}>

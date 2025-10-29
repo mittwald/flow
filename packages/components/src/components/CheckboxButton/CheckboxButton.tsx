@@ -22,7 +22,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
   } = useFieldComponent(props);
 
   const mergedPropsContext: PropsContext = {
@@ -44,13 +44,13 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
       className={clsx(fieldProps.className, styles.checkboxButton, className)}
       ref={localCheckboxButtonRef}
     >
-      <FieldErrorResetContext>
+      <FieldErrorCaptureContext>
         <Checkbox {...rest} inputClassName={clsx(inputClassName, styles.input)}>
-          <PropsContextProvider props={mergedPropsContext} clear>
+          <PropsContextProvider props={mergedPropsContext}>
             {children}
           </PropsContextProvider>
         </Checkbox>
-      </FieldErrorResetContext>
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </div>
   );

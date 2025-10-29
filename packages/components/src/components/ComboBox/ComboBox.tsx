@@ -51,7 +51,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
   } = useFieldComponent(props);
@@ -96,7 +96,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <FieldErrorResetContext>
+          <FieldErrorCaptureContext>
             <div className={styles.input}>
               <Aria.Input placeholder={placeholder} />
               <Button
@@ -117,7 +117,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
             >
               <TunnelExit id="options" />
             </Options>
-          </FieldErrorResetContext>
+          </FieldErrorCaptureContext>
           <FieldErrorView />
         </TunnelProvider>
       </PropsContextProvider>

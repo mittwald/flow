@@ -94,7 +94,10 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field
             name="user"
-            rules={{ required: "Jo dwag a password is required!" }}
+            rules={{
+              required: true,
+              validate: generatePasswordCreationFieldValidation(),
+            }}
           >
             <PasswordCreationField>
               <Label>Password</Label>

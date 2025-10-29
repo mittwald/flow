@@ -3,6 +3,8 @@ import {
   type InheritPropsContextSettings,
   type PropsContextLevelMode,
 } from "@/lib/propsContext/inherit/types";
+import type { PropsContext as PropsContextShape } from "@/lib/propsContext";
+import type { FlowComponentName } from "@/components/propTypes";
 
 export function isMaxRecursionLevelProp(
   something: unknown,
@@ -16,7 +18,7 @@ export function isMaxRecursionLevelProp(
 
 export const getMaxRecursionLevel = (props: unknown) => {
   if (isMaxRecursionLevelProp(props)) {
-    return props[inheritPropsContextKey] === true ? Infinity : 0;
+    return props[inheritPropsContextKey] ? Infinity : 0;
   }
   return 0;
 };
@@ -39,4 +41,24 @@ export const getLevelAfterModeApplied = (
     default:
       return currentLevel;
   }
+};
+
+export const filterPreservedInheritEntries = (
+  currentPropsContext: PropsContextShape,
+): Partial<PropsContextShape> => {
+  const resultPropsContext: Partial<PropsContextShape> = {};
+
+  for (const [key, value] of Object.entries(currentPropsContext)) {
+    if (
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      value.___inherit &&
+      value.___inherit === "preserve"
+    ) {
+      resultPropsContext[key as FlowComponentName] = value;
+    }
+  }
+
+  return resultPropsContext;
 };
