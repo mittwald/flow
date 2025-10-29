@@ -29,8 +29,7 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
 
   const fieldErrorCapturePropsContext: PropsContext = {
     FieldError: {
-      ___inherit: true,
-      ___persistent: true,
+      ___inherit: "persistent",
       tunnelId,
       className: formFieldStyles.fieldError,
     },

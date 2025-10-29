@@ -43,7 +43,7 @@ export const getLevelAfterModeApplied = (
   }
 };
 
-export const filterPersistentContextEntries = (
+export const filterPersistentInheritEntries = (
   currentPropsContext: PropsContextShape,
 ): Partial<PropsContextShape> => {
   const resultPropsContext: Partial<PropsContextShape> = {};
@@ -53,7 +53,8 @@ export const filterPersistentContextEntries = (
       value &&
       typeof value === "object" &&
       !Array.isArray(value) &&
-      value.___persistent
+      value.___inherit &&
+      value.___inherit === "persistent"
     ) {
       resultPropsContext[key as FlowComponentName] = value;
     }

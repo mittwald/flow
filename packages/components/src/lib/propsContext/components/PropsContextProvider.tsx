@@ -6,7 +6,7 @@ import { propsContext, usePropsContext } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import { memo, useMemo } from "react";
-import { filterPersistentContextEntries } from "@/lib/propsContext/inherit/lib";
+import { filterPersistentInheritEntries } from "@/lib/propsContext/inherit/lib";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -37,7 +37,7 @@ export const PropsContextProvider: FC<Props> = memo((props) => {
     () =>
       mergePropsContext(
         clear
-          ? filterPersistentContextEntries(parentPropsContext)
+          ? filterPersistentInheritEntries(parentPropsContext)
           : parentPropsContext,
         providedProps,
         readPropsContextLevel,
