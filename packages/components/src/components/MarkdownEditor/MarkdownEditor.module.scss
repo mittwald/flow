@@ -46,7 +46,9 @@
   textarea,
   .markdown {
     grid-area: content;
-    padding-block: var(--form-control--padding-y);
+    padding-block: calc(
+      var(--form-control--padding-y) - var(--form-control--border-width)
+    );
     padding-inline: var(--form-control--padding-x);
     border-top-left-radius: 0;
     border-top-right-radius: 0;

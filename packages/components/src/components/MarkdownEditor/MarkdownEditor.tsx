@@ -22,7 +22,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     isReadOnly,
     children,
     className,
-    rows,
+    rows = 5,
     autoResizeMaxRows,
     headingOffset,
     ref,
@@ -67,7 +67,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
         headingOffset={headingOffset}
         className={styles.markdown}
         style={{
-          maxHeight: `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
+          height: textAreaRef.current?.offsetHeight,
         }}
       >
         {value}
