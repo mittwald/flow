@@ -39,8 +39,6 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
-  const verticallyResizable = props.allowResize || props.allowVerticalResize;
-
   return (
     <TextArea
       {...rest}
@@ -69,9 +67,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
         headingOffset={headingOffset}
         className={styles.markdown}
         style={{
-          maxHeight: verticallyResizable
-            ? undefined
-            : `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
+          height: textAreaRef.current?.offsetHeight,
         }}
       >
         {value}
