@@ -35,7 +35,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     FieldErrorView,
     fieldPropsContext,
     fieldProps,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
   } = useFieldComponent(props);
 
   const rootClassName = clsx(
@@ -63,7 +63,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
       ref={localRadioRef}
     >
       <TunnelProvider>
-        <FieldErrorResetContext>
+        <FieldErrorCaptureContext>
           <PropsContextProvider dependencies={["segment"]} props={propsContext}>
             <div className={styles.segmentedControl}>
               <div className={styles.segments}>
@@ -72,7 +72,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
             </div>
             {children}
           </PropsContextProvider>
-        </FieldErrorResetContext>
+        </FieldErrorCaptureContext>
         <FieldErrorView />
       </TunnelProvider>
     </Aria.RadioGroup>

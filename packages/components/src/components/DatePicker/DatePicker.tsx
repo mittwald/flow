@@ -23,8 +23,12 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, onChange, ref, ...rest } = props;
 
-  const { FieldErrorView, fieldProps, fieldPropsContext } =
-    useFieldComponent(props);
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -48,17 +52,19 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
         popoverController.close();
       }}
     >
-      <DateInput isDisabled={props.isDisabled} />
-      <PropsContextProvider props={fieldPropsContext}>
-        {children}
-      </PropsContextProvider>
-      <Popover
-        placement="bottom end"
-        isDialogContent
-        controller={popoverController}
-      >
-        <Calendar />
-      </Popover>
+      <FieldErrorCaptureContext>
+        <DateInput isDisabled={props.isDisabled} />
+        <PropsContextProvider props={fieldPropsContext}>
+          {children}
+        </PropsContextProvider>
+        <Popover
+          placement="bottom end"
+          isDialogContent
+          controller={popoverController}
+        >
+          <Calendar />
+        </Popover>
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </Aria.DatePicker>
   );

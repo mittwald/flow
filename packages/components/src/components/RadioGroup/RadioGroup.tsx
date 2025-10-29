@@ -25,7 +25,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
   } = useFieldComponent(props);
@@ -51,7 +51,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       ref={localRadioRef}
     >
       <TunnelProvider>
-        <FieldErrorResetContext>
+        <FieldErrorCaptureContext>
           <PropsContextProvider dependencies={["radio"]} props={propsContext}>
             <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
               <TunnelExit id="radioButtons" />
@@ -69,7 +69,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
             {children}
           </PropsContextProvider>
-        </FieldErrorResetContext>
+        </FieldErrorCaptureContext>
         <FieldErrorView />
       </TunnelProvider>
     </Aria.RadioGroup>

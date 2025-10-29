@@ -43,7 +43,7 @@ export const FileField = flowComponent("FileField", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
   } = useFieldComponent(props);
@@ -80,7 +80,7 @@ export const FileField = flowComponent("FileField", (props) => {
         <FieldErrorContext.Provider
           value={formValidationState.displayValidation}
         >
-          <FieldErrorResetContext>
+          <FieldErrorCaptureContext>
             <PropsContextProvider props={fieldPropsContext}>
               <div
                 data-readonly={isReadOnly}
@@ -99,7 +99,7 @@ export const FileField = flowComponent("FileField", (props) => {
                 </FileInput>
               </div>
             </PropsContextProvider>
-          </FieldErrorResetContext>
+          </FieldErrorCaptureContext>
           <FieldErrorView />
         </FieldErrorContext.Provider>
       </InputContext.Provider>

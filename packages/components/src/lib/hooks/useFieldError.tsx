@@ -5,11 +5,11 @@ import React, {
   useContext,
   useId,
   type ReactNode,
+  useMemo,
 } from "react";
-import { type PropsContext } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { FieldErrorContext } from "react-aria-components";
-import { FieldError } from "@/components/FieldError";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 
@@ -17,50 +17,59 @@ const FieldErrorResetContext: FC<PropsWithChildren> = memo((props) => (
   <FieldErrorContext value={null}>{props.children}</FieldErrorContext>
 ));
 
-export const useFieldError = () => {
-  const id = useId();
-  const tunnelId = `${id}.fieldError`;
-  const currentOuterErrorContext = useContext(FieldErrorContext);
+export const FieldErrorsStateContext = React.createContext<{
+  currentTunnelId?: string;
+}>({});
 
-  const fieldErrorViewPropsContext: PropsContext = {
+export const useFieldError = (tunnelIdFromProps?: string) => {
+  const id = useId();
+  const { currentTunnelId } = useContext(FieldErrorsStateContext);
+
+  const tunnelId = tunnelIdFromProps ?? currentTunnelId ?? `${id}.fieldError`;
+
+  const fieldErrorCapturePropsContext: PropsContext = {
     FieldError: {
+      ___inherit: true,
+      ___persistent: true,
       tunnelId,
       className: formFieldStyles.fieldError,
     },
   };
 
-  const FieldErrorView = () => (
-    <TunnelExit id={tunnelId}>
-      {(children: ReactNode) => {
-        const currentInnerErrorContext = useContext(FieldErrorContext);
-
-        const errorContext =
-          currentOuterErrorContext ?? currentInnerErrorContext;
-
-        if (React.Children.count(children) >= 1) {
-          return <ClearPropsContext>{children}</ClearPropsContext>;
-        }
-
-        if (
-          errorContext?.isInvalid &&
-          errorContext.validationErrors.length === 0
-        ) {
-          return null;
-        }
-
-        return (
-          <ClearPropsContext>
-            <FieldErrorContext value={errorContext}>
-              <FieldError className={formFieldStyles.fieldError} />
-            </FieldErrorContext>
-          </ClearPropsContext>
-        );
-      }}
-    </TunnelExit>
+  const FieldErrorCaptureContext: FC<PropsWithChildren> = useMemo(
+    () => (props) => {
+      return (
+        <PropsContextProvider
+          levelMode={"keep"}
+          props={fieldErrorCapturePropsContext}
+        >
+          <FieldErrorsStateContext value={{ currentTunnelId: tunnelId }}>
+            {props.children}
+          </FieldErrorsStateContext>
+        </PropsContextProvider>
+      );
+    },
+    [id],
   );
 
+  const FieldErrorView = () =>
+    useMemo(() => {
+      if (currentTunnelId) {
+        return null;
+      }
+
+      return (
+        <TunnelExit id={tunnelId}>
+          {(children: ReactNode) => {
+            const childrenArray = React.Children.toArray(children);
+            return <ClearPropsContext>{childrenArray[0]}</ClearPropsContext>;
+          }}
+        </TunnelExit>
+      );
+    }, [currentTunnelId, tunnelId]);
+
   return {
-    fieldErrorViewPropsContext,
+    FieldErrorCaptureContext,
     FieldErrorView,
     FieldErrorResetContext,
   } as const;

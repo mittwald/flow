@@ -50,7 +50,7 @@ export const Select = flowComponent("Select", (props) => {
     FieldErrorView,
     fieldPropsContext,
     fieldProps,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
   } = useFieldComponent(props);
 
   const rootClassName = clsx(
@@ -97,7 +97,7 @@ export const Select = flowComponent("Select", (props) => {
       data-readonly={isReadOnly}
     >
       <TunnelProvider>
-        <FieldErrorResetContext>
+        <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <Aria.Button
               ref={localButtonRef}
@@ -113,7 +113,7 @@ export const Select = flowComponent("Select", (props) => {
               <TunnelExit id="options" />
             </Options>
           </PropsContextProvider>
-        </FieldErrorResetContext>
+        </FieldErrorCaptureContext>
         <FieldErrorView />
       </TunnelProvider>
     </Aria.Select>
