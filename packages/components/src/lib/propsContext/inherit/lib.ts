@@ -18,7 +18,7 @@ export function isMaxRecursionLevelProp(
 
 export const getMaxRecursionLevel = (props: unknown) => {
   if (isMaxRecursionLevelProp(props)) {
-    return props[inheritPropsContextKey] === true ? Infinity : 0;
+    return props[inheritPropsContextKey] ? Infinity : 0;
   }
   return 0;
 };
