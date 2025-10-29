@@ -1,9 +1,4 @@
-import React, {
-  type FC,
-  type PropsWithChildren,
-  useId,
-  type ReactNode,
-} from "react";
+import React, { type FC, type PropsWithChildren, useId } from "react";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
@@ -42,7 +37,7 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
 
     return (
       <TunnelExit id={tunnelId}>
-        {(children: ReactNode) => {
+        {(children) => {
           const childrenArray = React.Children.toArray(children);
           return <ClearPropsContext>{childrenArray[0]}</ClearPropsContext>;
         }}
