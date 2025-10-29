@@ -7,8 +7,10 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface RatingProps
   extends FlowComponentProps,
@@ -30,53 +32,58 @@ export const Rating = flowComponent("Rating", (props) => {
     size = "m",
     className,
     children,
+    ref,
     ...rest
   } = props;
 
+  const {
+    FieldErrorView,
+    FieldErrorResetContext,
+    fieldProps,
+    fieldPropsContext,
+  } = useFieldComponent(props);
+
   const rootClassName = clsx(
     styles.rating,
-    formFieldStyles.formField,
     styles[`size-${size}`],
+    fieldProps.className,
     className,
   );
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
-  };
+  const localRef = useObjectRef(ref);
+  useMakeFocusable(localRef);
 
   return (
     <Aria.RadioGroup
+      {...rest}
       className={rootClassName}
       defaultValue={defaultValue.toString()}
       value={value || value === 0 ? value.toString() : undefined}
-      {...rest}
+      ref={localRef}
     >
       {(renderProps) => (
-        <PropsContextProvider props={propsContext}>
-          {children}
-          <div className={styles.ratingSegments}>
-            {Array(5)
-              .fill("")
-              .map((_, index) => (
-                <RatingSegment
-                  key={index}
-                  index={index}
-                  selectedValue={parseInt(
-                    renderProps.state.selectedValue ?? "0",
-                  )}
-                  size={size}
-                />
-              ))}
-          </div>
-        </PropsContextProvider>
+        <>
+          <FieldErrorResetContext>
+            <PropsContextProvider props={fieldPropsContext}>
+              {children}
+              <div className={styles.ratingSegments}>
+                {Array(5)
+                  .fill("")
+                  .map((_, index) => (
+                    <RatingSegment
+                      key={index}
+                      index={index}
+                      selectedValue={parseInt(
+                        renderProps.state.selectedValue ?? "0",
+                      )}
+                      size={size}
+                    />
+                  ))}
+              </div>
+            </PropsContextProvider>
+          </FieldErrorResetContext>
+          <FieldErrorView />
+        </>
       )}
     </Aria.RadioGroup>
   );
