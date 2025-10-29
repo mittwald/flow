@@ -63,14 +63,13 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const autoResizable = rows !== autoResizeMaxRows;
 
   const verticallyResizable =
-    allowResize ||
-    (allowVerticalResize && (!autoResizable || (autoResizable && resized)));
+    (allowResize || allowVerticalResize) &&
+    (!autoResizable || (autoResizable && resized));
 
   useEffect(() => {
     const textarea = localRef.current;
     if (!textarea) return;
 
-    const startWidth = textarea.offsetWidth;
     const startHeight = textarea.offsetHeight;
     let tracking = false;
 
@@ -81,10 +80,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
     const handleMouseMove = () => {
       if (!tracking || resized) return;
 
-      const currentWidth = textarea.offsetWidth;
       const currentHeight = textarea.offsetHeight;
 
-      if (currentWidth !== startWidth || currentHeight !== startHeight) {
+      if (currentHeight !== startHeight) {
         setResized(true);
         tracking = false;
       }
