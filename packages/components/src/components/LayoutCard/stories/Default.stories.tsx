@@ -2,13 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import LayoutCard from "../LayoutCard";
 import React from "react";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
-import { AlertIcon } from "@/components/AlertIcon";
 import { Section } from "@/components/Section";
-import { Heading } from "@/components/Heading";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { LabeledValue } from "@/components/LabeledValue";
 import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof LayoutCard> = {
   title: "Structure/Layout Card",
@@ -37,25 +33,15 @@ export const WithTabs: Story = {
     <LayoutCard {...props}>
       <Tabs>
         <Tab id="general">
-          <TabTitle>
-            General
-            <AlertIcon status="info" />
-          </TabTitle>
+          <TabTitle>General</TabTitle>
           <Section>
-            <Heading>General</Heading>
-            <TextField defaultValue="example@mittwald.de">
-              <Label>Mail address</Label>
-            </TextField>
+            <Text>{dummyText.long}</Text>
           </Section>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage settings</TabTitle>
+          <TabTitle>Storage</TabTitle>
           <Section>
-            <Heading>Storage</Heading>
-            <LabeledValue>
-              <Label>Available storage</Label>
-              <Text>2.4 GB</Text>
-            </LabeledValue>
+            <Text>{dummyText.long}</Text>
           </Section>
         </Tab>
       </Tabs>
