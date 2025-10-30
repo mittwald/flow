@@ -17,6 +17,7 @@ import { FormProvider as RhfFormContextProvider } from "react-hook-form";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { Action } from "@/components/Action";
 import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
+import { inheritProps } from "@/lib/propsContext/inherit/types";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -72,7 +73,8 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   };
 
   const readonlyPropsContext = {
-    isReadOnly: true,
+    ...inheritProps,
+    isReadOnly,
   } as const;
 
   const propsContext: PropsContext = {
@@ -100,7 +102,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   };
 
   return (
-    <PropsContextProvider props={isReadOnly ? propsContext : {}}>
+    <PropsContextProvider props={propsContext} dependencies={[isReadOnly]}>
       <RhfFormContextProvider {...form}>
         <FormContextProvider value={{ form, id: formId }}>
           <Action actionModel={action}>
