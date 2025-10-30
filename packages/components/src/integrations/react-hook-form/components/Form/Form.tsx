@@ -7,6 +7,7 @@ import {
   type PropsWithChildren,
   useId,
   useMemo,
+  useState,
 } from "react";
 import type {
   FieldValues,
@@ -45,9 +46,14 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     children,
     onSubmit,
     formComponent: FormView = DefaultFormComponent,
-    isReadOnly,
+    isReadOnly: isReadOnlyFromProps,
     ...formProps
   } = props;
+
+  const [readonlyContextState, setReadonlyContextState] =
+    useState(!!isReadOnlyFromProps);
+
+  const isReadOnly = isReadOnlyFromProps || readonlyContextState;
 
   const formId = useId();
   const FormViewComponent = useMemo(() => FormView, [formId]);
@@ -104,7 +110,9 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   return (
     <PropsContextProvider props={propsContext} dependencies={[isReadOnly]}>
       <RhfFormContextProvider {...form}>
-        <FormContextProvider value={{ form, id: formId }}>
+        <FormContextProvider
+          value={{ form, id: formId, setReadonly: setReadonlyContextState }}
+        >
           <Action actionModel={action}>
             <FormViewComponent
               {...formProps}

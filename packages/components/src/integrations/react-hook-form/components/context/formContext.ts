@@ -1,10 +1,11 @@
 import type { FieldValues, UseFormReturn } from "react-hook-form";
-import { createContext, useContext } from "react";
+import { createContext, useContext, type Dispatch } from "react";
 import invariant from "invariant";
 
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
   id: string;
+  setReadonly: Dispatch<React.SetStateAction<boolean>>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,3 +23,6 @@ export const useFormContext = <F extends FieldValues>(): FormContext<F> => {
   );
   return ctx;
 };
+
+export const useOptionalFormContext = <F extends FieldValues>() =>
+  useContext(formContext) as FormContext<F> | undefined;
