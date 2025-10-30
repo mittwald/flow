@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.539](https://github.com/mittwald/flow/compare/0.2.0-alpha.538...0.2.0-alpha.539) (2025-10-30)
+
+### Bug Fixes
+
+* **LayoutCard:** fix border radius of tabs ([#2100](https://github.com/mittwald/flow/issues/2100)) ([3655f56](https://github.com/mittwald/flow/commit/3655f5605dcd41594827d605b3edf646ef68b8a0))
+
 # [0.2.0-alpha.538](https://github.com/mittwald/flow/compare/0.2.0-alpha.537...0.2.0-alpha.538) (2025-10-29)
 
 ### Bug Fixes
