@@ -13,3 +13,7 @@ message:
     value: "{color.gray.400}"
   background-color-sender:
     value: "{color.hosting-blue.200}"
+  tip-size-x:
+    value: "{size-px.s}"
+  tip-size-y:
+    value: 12px
