@@ -151,14 +151,16 @@
     }
 
     .avatarContainer {
-      width: 100%;
+      width: calc(100% + var(--size-px--xxs));
       overflow: hidden;
-      border-bottom-color: var(--list-item--border-color);
-      border-bottom-width: var(--list-item--border-width);
-      border-bottom-style: var(--list-item--border-style);
+      border-color: var(--list-item--border-color);
+      border-width: var(--list-item--border-width);
+      border-style: var(--list-item--border-style);
       border-top-left-radius: var(--corner-radius--default);
       border-top-right-radius: var(--corner-radius--default);
       aspect-ratio: 16 / 9;
+      margin-inline-start: calc(var(--size-px--xxxs) * -1);
+      margin-block-start: calc(var(--size-px--xxxs) * -1);
       img {
         overflow-clip-margin: unset;
       }
