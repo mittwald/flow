@@ -9,6 +9,13 @@
 
   > .tabs {
     margin: calc(var(--layout-card--padding) * -1);
+    :global(.flow--tabs--tab-list) {
+      border-top-right-radius: var(--layout-card--corner-radius);
+      border-top-left-radius: var(--layout-card--corner-radius);
+    }
+    :global(.flow--tabs--tab-title):first-child {
+      border-top-left-radius: var(--layout-card--corner-radius);
+    }
   }
 
   &:has(> .accentBox:only-child) {

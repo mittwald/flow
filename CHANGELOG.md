@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.541](https://github.com/mittwald/flow/compare/0.2.0-alpha.540...0.2.0-alpha.541) (2025-11-03)
+
+### Bug Fixes
+
+* **Form:** fix correct readonly prop propagation ([#2101](https://github.com/mittwald/flow/issues/2101)) ([271e052](https://github.com/mittwald/flow/commit/271e052119b8f99e2415d24cb0372c42a642e610))
+
+# [0.2.0-alpha.540](https://github.com/mittwald/flow/compare/0.2.0-alpha.539...0.2.0-alpha.540) (2025-11-03)
+
+### Bug Fixes
+
+* **ColumnLayout:** do not stretch children vertically ([#2102](https://github.com/mittwald/flow/issues/2102)) ([6d04a99](https://github.com/mittwald/flow/commit/6d04a99422b7fd46c5e53b1465798bbbc5871d31))
+
+# [0.2.0-alpha.539](https://github.com/mittwald/flow/compare/0.2.0-alpha.538...0.2.0-alpha.539) (2025-10-30)
+
+### Bug Fixes
+
+* **LayoutCard:** fix border radius of tabs ([#2100](https://github.com/mittwald/flow/issues/2100)) ([3655f56](https://github.com/mittwald/flow/commit/3655f5605dcd41594827d605b3edf646ef68b8a0))
+
 # [0.2.0-alpha.538](https://github.com/mittwald/flow/compare/0.2.0-alpha.537...0.2.0-alpha.538) (2025-10-29)
 
 ### Bug Fixes

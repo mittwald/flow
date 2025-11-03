@@ -12,6 +12,7 @@
 
 .columnLayout {
   display: grid;
+  align-items: start;
   gap: var(--column-layout--row-gap) var(--column-layout--column-gap);
 
   @mixin hide($size) {
