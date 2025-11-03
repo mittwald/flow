@@ -6,7 +6,9 @@ import {
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
-  useLayoutEffect,
+  useRef,
+  useEffect,
+  useDeferredValue,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -47,17 +49,47 @@ export const ReactAriaControlledValueFix: FC<
     context,
   );
 
-  useLayoutEffect(() => {
-    const element = contextRef.current;
+  const elementRef = contextRef.current;
+  const shouldIntercept =
+    elementRef &&
+    (elementRef instanceof HTMLInputElement ||
+      elementRef instanceof HTMLTextAreaElement);
 
-    if (
-      element instanceof HTMLInputElement ||
-      element instanceof HTMLTextAreaElement
-    ) {
-      const newValue = String(contextProps.value ?? "");
-      emitElementValueChange(element, newValue);
+  const deferredValueFromContext = useDeferredValue(String(contextProps.value));
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => {
+    if (!shouldIntercept) {
+      return;
     }
-  }, [contextProps.value]);
+
+    const onKeyDown = () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+
+      timerRef.current = setTimeout(() => {
+        timerRef.current = null;
+      }, 100);
+    };
+
+    elementRef?.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      elementRef?.removeEventListener("keydown", onKeyDown);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [elementRef]);
+
+  useEffect(() => {
+    if (!shouldIntercept || timerRef.current) {
+      return;
+    }
+
+    emitElementValueChange(elementRef, deferredValueFromContext);
+  }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {
     ...contextProps,
