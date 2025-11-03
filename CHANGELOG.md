@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.541](https://github.com/mittwald/flow/compare/0.2.0-alpha.540...0.2.0-alpha.541) (2025-11-03)
+
+### Bug Fixes
+
+* **Form:** fix correct readonly prop propagation ([#2101](https://github.com/mittwald/flow/issues/2101)) ([271e052](https://github.com/mittwald/flow/commit/271e052119b8f99e2415d24cb0372c42a642e610))
+
 # [0.2.0-alpha.540](https://github.com/mittwald/flow/compare/0.2.0-alpha.539...0.2.0-alpha.540) (2025-11-03)
 
 ### Bug Fixes
