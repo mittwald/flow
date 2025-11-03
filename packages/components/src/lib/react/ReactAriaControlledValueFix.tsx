@@ -63,9 +63,16 @@ export const ReactAriaControlledValueFix: FC<
       return;
     }
 
-    const onKeyDown = () => {
+    // sync the last known value when the elementRef is available
+    emitElementValueChange(elementRef, deferredValueFromContext);
+
+    const onKeyDown = (event: Event) => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+      }
+
+      if (!event.isTrusted) {
+        return;
       }
 
       timerRef.current = setTimeout(() => {
