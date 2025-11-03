@@ -6,9 +6,8 @@ import {
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
-  useRef,
-  useEffect,
   useDeferredValue,
+  useLayoutEffect,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -50,48 +49,23 @@ export const ReactAriaControlledValueFix: FC<
   );
 
   const elementRef = contextRef.current;
-  const shouldIntercept =
-    elementRef &&
-    (elementRef instanceof HTMLInputElement ||
-      elementRef instanceof HTMLTextAreaElement);
+  const isValidElementType =
+    elementRef instanceof HTMLInputElement ||
+    elementRef instanceof HTMLTextAreaElement;
 
   const deferredValueFromContext = useDeferredValue(String(contextProps.value));
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
-  useEffect(() => {
-    if (!shouldIntercept) {
+  useLayoutEffect(() => {
+    if (!isValidElementType) {
       return;
     }
 
-    // sync the last known value when the elementRef is available
+    // sync the last known value when element reference is available
     emitElementValueChange(elementRef, deferredValueFromContext);
-
-    const onKeyDown = (event: Event) => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-
-      if (!event.isTrusted) {
-        return;
-      }
-
-      timerRef.current = setTimeout(() => {
-        timerRef.current = null;
-      }, 100);
-    };
-
-    elementRef?.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      elementRef?.removeEventListener("keydown", onKeyDown);
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
   }, [elementRef]);
 
-  useEffect(() => {
-    if (!shouldIntercept || timerRef.current) {
+  useLayoutEffect(() => {
+    if (!isValidElementType || document.activeElement === elementRef) {
       return;
     }
 
