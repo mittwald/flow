@@ -8,6 +8,7 @@ import {
   type PropsWithChildren,
   useDeferredValue,
   useLayoutEffect,
+  useRef,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -49,6 +50,8 @@ export const ReactAriaControlledValueFix: FC<
   );
 
   const elementRef = contextRef.current;
+  const isInFocus = useRef(false);
+
   const isValidElementType =
     elementRef instanceof HTMLInputElement ||
     elementRef instanceof HTMLTextAreaElement;
@@ -62,10 +65,25 @@ export const ReactAriaControlledValueFix: FC<
 
     // sync the last known value when element reference is available
     emitElementValueChange(elementRef, deferredValueFromContext);
+
+    const onFocus = (event: Event) => {
+      isInFocus.current = !!event?.isTrusted;
+    };
+    const onBlur = () => {
+      isInFocus.current = false;
+    };
+
+    elementRef?.addEventListener("focus", onFocus);
+    elementRef?.addEventListener("blur", onBlur);
+
+    return () => {
+      elementRef?.removeEventListener("focus", onFocus);
+      elementRef?.removeEventListener("blur", onBlur);
+    };
   }, [elementRef]);
 
   useLayoutEffect(() => {
-    if (!isValidElementType || document.activeElement === elementRef) {
+    if (!isValidElementType || isInFocus.current) {
       return;
     }
 
