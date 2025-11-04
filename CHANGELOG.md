@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.543](https://github.com/mittwald/flow/compare/0.2.0-alpha.542...0.2.0-alpha.543) (2025-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.542](https://github.com/mittwald/flow/compare/0.2.0-alpha.541...0.2.0-alpha.542) (2025-11-04)
+
+### Bug Fixes
+
+* **List:** fix tile corners ([#2104](https://github.com/mittwald/flow/issues/2104)) ([77f9bbb](https://github.com/mittwald/flow/commit/77f9bbb842b21002225df322c311dc192c480d34))
+
+### Features
+
+* **Chat:** improve styling ([#2097](https://github.com/mittwald/flow/issues/2097)) ([fe1603e](https://github.com/mittwald/flow/commit/fe1603e756afb0679cb0ad32742919c5356547d7))
+
 # [0.2.0-alpha.541](https://github.com/mittwald/flow/compare/0.2.0-alpha.540...0.2.0-alpha.541) (2025-11-03)
 
 ### Bug Fixes

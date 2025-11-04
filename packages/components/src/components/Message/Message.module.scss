@@ -11,6 +11,23 @@
     padding-inline: var(--message--padding-x);
     padding-block: var(--message--padding-y);
     background-color: var(--message--background-color-responder);
+    position: relative;
+
+    .tip {
+      position: absolute;
+      top: 0;
+      width: var(--message--tip-size-x);
+      height: var(--message--tip-size-y);
+      overflow: hidden;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--message--tip-size-x);
+        height: var(--message--tip-size-y);
+      }
+    }
   }
 
   &.sender {
@@ -30,12 +47,32 @@
     .content {
       background-color: var(--message--background-color-sender);
       border-top-right-radius: 0;
+      margin-inline-end: var(--message--tip-size-x);
+
+      .tip {
+        right: calc(var(--message--tip-size-x) * -1);
+        &:before {
+          border-top-left-radius: 100%;
+          box-shadow: 0 0 0 var(--message--tip-size-x)
+            var(--message--background-color-sender);
+        }
+      }
     }
   }
 
   &.responder {
     .content {
       border-top-left-radius: 0;
+      margin-inline-start: var(--message--tip-size-x);
+
+      .tip {
+        left: calc(var(--message--tip-size-x) * -1);
+        &:before {
+          border-top-right-radius: 100%;
+          box-shadow: var(--message--tip-size-x) 0 0 var(--message--tip-size-x)
+            var(--message--background-color-responder);
+        }
+      }
     }
   }
 
