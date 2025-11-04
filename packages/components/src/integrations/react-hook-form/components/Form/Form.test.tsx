@@ -129,7 +129,7 @@ describe("readonly", () => {
             return (
               <Button
                 data-testid="toggle-readonly"
-                onPress={() => ctx.setReadonly((prev) => !prev)}
+                onPress={() => ctx.setReadOnly((prev) => !prev)}
               >
                 Toggle readonly
               </Button>

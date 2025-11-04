@@ -74,6 +74,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     name,
     form: formContext.id,
     isRequired: !!rest.rules?.required,
+    isReadOnly: formContext.isReadOnly,
     validationBehavior: "aria" as const,
     defaultValue,
     isInvalid: isFieldInvalid,
@@ -134,7 +135,12 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   return (
     <PropsContextProvider
       props={propsContext}
-      dependencies={[controller.fieldState, controller.field, value]}
+      dependencies={[
+        controller.fieldState,
+        controller.field,
+        value,
+        formContext.isReadOnly,
+      ]}
     >
       {children}
     </PropsContextProvider>
