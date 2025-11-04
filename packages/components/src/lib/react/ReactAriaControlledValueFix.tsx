@@ -6,7 +6,9 @@ import {
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
+  useDeferredValue,
   useLayoutEffect,
+  useRef,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -47,17 +49,47 @@ export const ReactAriaControlledValueFix: FC<
     context,
   );
 
-  useLayoutEffect(() => {
-    const element = contextRef.current;
+  const elementRef = contextRef.current;
+  const isInFocus = useRef(false);
 
-    if (
-      element instanceof HTMLInputElement ||
-      element instanceof HTMLTextAreaElement
-    ) {
-      const newValue = String(contextProps.value ?? "");
-      emitElementValueChange(element, newValue);
+  const isValidElementType =
+    elementRef &&
+    (elementRef instanceof HTMLInputElement ||
+      elementRef instanceof HTMLTextAreaElement);
+
+  const deferredValueFromContext = useDeferredValue(String(contextProps.value));
+
+  useLayoutEffect(() => {
+    if (!isValidElementType) {
+      return;
     }
-  }, [contextProps.value]);
+
+    // sync the last known value when element reference is available
+    emitElementValueChange(elementRef, deferredValueFromContext);
+
+    const onFocus = (event: Event) => {
+      isInFocus.current = !!event?.isTrusted;
+    };
+    const onBlur = () => {
+      isInFocus.current = false;
+    };
+
+    elementRef?.addEventListener("focus", onFocus);
+    elementRef?.addEventListener("blur", onBlur);
+
+    return () => {
+      elementRef?.removeEventListener("focus", onFocus);
+      elementRef?.removeEventListener("blur", onBlur);
+    };
+  }, [elementRef]);
+
+  useLayoutEffect(() => {
+    if (!isValidElementType || isInFocus.current) {
+      return;
+    }
+
+    emitElementValueChange(elementRef, deferredValueFromContext);
+  }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {
     ...contextProps,

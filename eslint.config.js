@@ -9,6 +9,7 @@ export default tseslint.config(
       "**/out",
       "**/.next",
       "**/next.config.js",
+      "**/next-env.d.ts",
       "**/*.cjs",
       ".next/**/*",
       ".nx",

@@ -5,7 +5,8 @@ import invariant from "invariant";
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
   id: string;
-  setReadonly: Dispatch<React.SetStateAction<boolean>>;
+  isReadOnly: boolean;
+  setReadOnly: Dispatch<React.SetStateAction<boolean>>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

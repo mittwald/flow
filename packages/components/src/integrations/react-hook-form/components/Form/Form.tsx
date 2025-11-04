@@ -15,10 +15,8 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { Action } from "@/components/Action";
 import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
-import { inheritProps } from "@/lib/propsContext/inherit/types";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -50,7 +48,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     ...formProps
   } = props;
 
-  const [readonlyContextState, setReadonlyContextState] =
+  const [readonlyContextState, setReadOnlyContextState] =
     useState(!!isReadOnlyFromProps);
 
   const isReadOnly = isReadOnlyFromProps || readonlyContextState;
@@ -78,53 +76,27 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     })(formEvent);
   };
 
-  const readonlyPropsContext = {
-    ...inheritProps,
-    isReadOnly,
-  } as const;
-
-  const propsContext: PropsContext = {
-    SearchField: readonlyPropsContext,
-    TextField: readonlyPropsContext,
-    TextArea: readonlyPropsContext,
-    MarkdownEditor: readonlyPropsContext,
-    Checkbox: readonlyPropsContext,
-    CheckboxGroup: readonlyPropsContext,
-    CheckboxButton: readonlyPropsContext,
-    FileField: readonlyPropsContext,
-    FileDropZone: readonlyPropsContext,
-    NumberField: readonlyPropsContext,
-    RadioGroup: readonlyPropsContext,
-    Switch: readonlyPropsContext,
-    Slider: readonlyPropsContext,
-    PasswordCreationField: readonlyPropsContext,
-    DatePicker: readonlyPropsContext,
-    DateRangePicker: readonlyPropsContext,
-    TimeField: readonlyPropsContext,
-    SegmentedControl: readonlyPropsContext,
-    Select: readonlyPropsContext,
-    ComboBox: readonlyPropsContext,
-    Button: readonlyPropsContext,
-  };
-
   return (
-    <PropsContextProvider props={propsContext} dependencies={[isReadOnly]}>
-      <RhfFormContextProvider {...form}>
-        <FormContextProvider
-          value={{ form, id: formId, setReadonly: setReadonlyContextState }}
-        >
-          <Action actionModel={action}>
-            <FormViewComponent
-              {...formProps}
-              id={formId}
-              onSubmit={handleOnSubmit}
-            >
-              {children}
-            </FormViewComponent>
-          </Action>
-        </FormContextProvider>
-      </RhfFormContextProvider>
-    </PropsContextProvider>
+    <RhfFormContextProvider {...form}>
+      <FormContextProvider
+        value={{
+          form,
+          id: formId,
+          isReadOnly,
+          setReadOnly: setReadOnlyContextState,
+        }}
+      >
+        <Action actionModel={action}>
+          <FormViewComponent
+            {...formProps}
+            id={formId}
+            onSubmit={handleOnSubmit}
+          >
+            {children}
+          </FormViewComponent>
+        </Action>
+      </FormContextProvider>
+    </RhfFormContextProvider>
   );
 }
 
