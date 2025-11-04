@@ -53,8 +53,9 @@ export const ReactAriaControlledValueFix: FC<
   const isInFocus = useRef(false);
 
   const isValidElementType =
-    elementRef instanceof HTMLInputElement ||
-    elementRef instanceof HTMLTextAreaElement;
+    elementRef &&
+    (elementRef instanceof HTMLInputElement ||
+      elementRef instanceof HTMLTextAreaElement);
 
   const deferredValueFromContext = useDeferredValue(String(contextProps.value));
 
