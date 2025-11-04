@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { IconFile } from "@/components/Icon/components/icons";
 import { Avatar as AvatarComponent } from "@/components/Avatar";
 import { Image } from "@/components/Image";
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export const Avatar: FC<Props> = (props) => {
-  const { type, imageSrc, isFailed } = props;
+  const { type, imageSrc, isFailed, ...rest } = props;
 
   if (isFailed) {
     return <AvatarComponent status="danger" />;
@@ -28,7 +27,7 @@ export const Avatar: FC<Props> = (props) => {
   }
 
   return (
-    <AvatarComponent color="blue">
+    <AvatarComponent color="blue" {...rest}>
       {type?.startsWith("image") ? (
         <Icon>
           <IconPhoto />
