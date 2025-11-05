@@ -46,7 +46,7 @@ export const Alert = flowComponent("Alert", (props) => {
 
   return (
     <aside {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} dependencies={[status]}>
         {children}
       </PropsContextProvider>
     </aside>
