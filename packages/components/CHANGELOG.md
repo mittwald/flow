@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.546](https://github.com/mittwald/flow/compare/0.2.0-alpha.545...0.2.0-alpha.546) (2025-11-05)
+
+### Bug Fixes
+
+* **Modal:** fix size of heading in sections in header within modals ([#2115](https://github.com/mittwald/flow/issues/2115)) ([986935e](https://github.com/mittwald/flow/commit/986935e8284fde7b73346eeb4ad1ced4b8c59c06))
+
 # [0.2.0-alpha.545](https://github.com/mittwald/flow/compare/0.2.0-alpha.544...0.2.0-alpha.545) (2025-11-05)
 
 ### Bug Fixes
