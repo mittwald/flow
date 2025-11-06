@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.548](https://github.com/mittwald/flow/compare/0.2.0-alpha.547...0.2.0-alpha.548) (2025-11-06)
+
+### Bug Fixes
+
+* **List:** avoid duplicate IDs triggered by parallel batch invalidation ([90bfe27](https://github.com/mittwald/flow/commit/90bfe276f0231a9e51b4180e7bf31218a9be0807))
+
 # [0.2.0-alpha.547](https://github.com/mittwald/flow/compare/0.2.0-alpha.546...0.2.0-alpha.547) (2025-11-06)
 
 ### Bug Fixes
