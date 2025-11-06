@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.547](https://github.com/mittwald/flow/compare/0.2.0-alpha.546...0.2.0-alpha.547) (2025-11-06)
+
+### Bug Fixes
+
+* **IllustratedMessage:** fix heading margin for illustrated messages in sections ([#2116](https://github.com/mittwald/flow/issues/2116)) ([88b3f73](https://github.com/mittwald/flow/commit/88b3f73e68586b3bd036c04e5404b1694bde2afc))
+
 # [0.2.0-alpha.546](https://github.com/mittwald/flow/compare/0.2.0-alpha.545...0.2.0-alpha.546) (2025-11-05)
 
 ### Bug Fixes
