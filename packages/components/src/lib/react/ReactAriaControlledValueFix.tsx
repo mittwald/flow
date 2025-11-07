@@ -8,7 +8,8 @@ import {
   type PropsWithChildren,
   useDeferredValue,
   useLayoutEffect,
-  useRef,
+  useState,
+  startTransition,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -21,6 +22,7 @@ export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
 interface ChildProps {
   [key: string]: unknown;
   ref: ForwardedRef<Element>;
+  inputRef: ForwardedRef<Element>;
 }
 
 /**
@@ -42,22 +44,24 @@ export const ReactAriaControlledValueFix: FC<
     throw new Error("Expected valid element");
   }
 
-  const { ref, ...inputProps } = child.props;
+  const { ref, inputRef, ...inputProps } = child.props;
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
-    ref,
+    inputRef ?? ref,
     context,
   );
 
   const elementRef = contextRef.current;
-  const isInFocus = useRef(false);
+  const [isInFocus, setIsInFocus] = useState(false);
 
   const isValidElementType =
     elementRef &&
     (elementRef instanceof HTMLInputElement ||
       elementRef instanceof HTMLTextAreaElement);
 
-  const deferredValueFromContext = useDeferredValue(String(contextProps.value));
+  const deferredValueFromContext = useDeferredValue(
+    String(contextProps.value ?? ""),
+  );
 
   useLayoutEffect(() => {
     if (!isValidElementType) {
@@ -68,10 +72,14 @@ export const ReactAriaControlledValueFix: FC<
     emitElementValueChange(elementRef, deferredValueFromContext);
 
     const onFocus = (event: Event) => {
-      isInFocus.current = !!event?.isTrusted;
+      startTransition(() => {
+        setIsInFocus(!!event?.isTrusted);
+      });
     };
     const onBlur = () => {
-      isInFocus.current = false;
+      startTransition(() => {
+        setIsInFocus(false);
+      });
     };
 
     elementRef?.addEventListener("focus", onFocus);
@@ -84,7 +92,7 @@ export const ReactAriaControlledValueFix: FC<
   }, [elementRef]);
 
   useLayoutEffect(() => {
-    if (!isValidElementType || isInFocus.current) {
+    if (!isValidElementType || isInFocus) {
       return;
     }
 

@@ -86,6 +86,7 @@
     "react-aria": "^3.44.0",
     "react-aria-components": "^1.13.0",
     "react-children-utilities": "^2.10.0",
+    "react-hotkeys-hook": "^5.2.1",
     "react-markdown": "^10.1.0",
     "react-stately": "^3.42.0",
     "react-syntax-highlighter": "^15.6.6",

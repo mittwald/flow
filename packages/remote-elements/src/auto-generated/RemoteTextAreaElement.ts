@@ -11,9 +11,7 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
 
   static override get remoteProperties() {
     return {
-      allowHorizontalResize: {},
       allowResize: {},
-      allowVerticalResize: {},
       "aria-activedescendant": {},
       "aria-autocomplete": {},
       "aria-controls": {},
@@ -21,6 +19,7 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       "aria-details": {},
       "aria-errormessage": {},
       "aria-haspopup": {},
+      "aria-hidden": {},
       "aria-label": {},
       "aria-labelledby": {},
       autoComplete: {},
