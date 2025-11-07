@@ -1,4 +1,10 @@
-import React, { type RefObject, useEffect, useRef, useState } from "react";
+import React, {
+  type KeyboardEventHandler,
+  type RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -7,13 +13,16 @@ import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useManagedValue } from "@/lib/hooks/useManagedValue";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelProvider, TunnelExit } from "@mittwald/react-tunnel";
 import {
   modifyValueByMarkdownSyntax,
   scrollToCursor,
 } from "@/components/MarkdownEditor/lib/modifyValueByMarkdownSyntax";
-import { modifyValueByType } from "@/components/MarkdownEditor/lib/modifyValueByType";
+import {
+  type InsertType,
+  modifyValueByType,
+} from "@/components/MarkdownEditor/lib/modifyValueByType";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -80,6 +89,53 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
+  const handleKeyDown: KeyboardEventHandler = (event) => {
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    const modifyParams = modifyValueByMarkdownSyntax(value, localInputRef);
+
+    if (!modifyParams) {
+      return;
+    }
+
+    const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
+
+    event.preventDefault();
+    localInputRef.current?.blur();
+
+    selectionPresent.current = {
+      shouldScrollToCursor: true,
+      selectionStart: newSelectionStart,
+      selectionEnd: newSelectionEnd,
+    };
+
+    handleOnChange(newValue);
+  };
+
+  const handleToolButtonPressed = (type: InsertType) => {
+    const { newValue, newSelectionStart, newSelectionEnd } = modifyValueByType(
+      value,
+      type,
+      localInputRef,
+    );
+
+    selectionPresent.current = {
+      shouldScrollToCursor: false,
+      selectionStart: newSelectionStart,
+      selectionEnd: newSelectionEnd,
+    };
+
+    handleOnChange(newValue);
+  };
+
+  const propsContext: PropsContext = {
+    Label: {
+      tunnelId: "label",
+    },
+  };
+
   return (
     <div ref={localRef} className={rootClassName}>
       <TunnelProvider>
@@ -94,51 +150,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           rows={rows}
           autoResizeMaxRows={autoResizeMaxRows}
           onChange={handleOnChange}
-          onKeyDown={(event) => {
-            if (event.key !== "Enter") {
-              return;
-            }
-
-            const modifyParams = modifyValueByMarkdownSyntax(
-              value,
-              localInputRef,
-            );
-
-            if (!modifyParams) {
-              return;
-            }
-
-            const { newValue, newSelectionStart, newSelectionEnd } =
-              modifyParams;
-
-            event.preventDefault();
-            localInputRef.current?.blur();
-
-            selectionPresent.current = {
-              shouldScrollToCursor: true,
-              selectionStart: newSelectionStart,
-              selectionEnd: newSelectionEnd,
-            };
-
-            handleOnChange(newValue);
-          }}
+          onKeyDown={handleKeyDown}
         >
           <Toolbar
             currentMode={mode}
             isDisabled={isDisabled}
             onModeChange={setMode}
-            onToolPressed={(type) => {
-              const { newValue, newSelectionStart, newSelectionEnd } =
-                modifyValueByType(value, type, localInputRef);
-
-              selectionPresent.current = {
-                shouldScrollToCursor: false,
-                selectionStart: newSelectionStart,
-                selectionEnd: newSelectionEnd,
-              };
-
-              handleOnChange(newValue);
-            }}
+            onToolPressed={handleToolButtonPressed}
           />
           <Markdown
             headingOffset={headingOffset}
@@ -149,13 +167,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           >
             {value}
           </Markdown>
-          <PropsContextProvider
-            props={{
-              Label: {
-                tunnelId: "label",
-              },
-            }}
-          >
+          <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </TextArea>

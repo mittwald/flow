@@ -19,7 +19,6 @@ import {
   type ModeButtonProps,
 } from "@/components/MarkdownEditor/components/ModeButton";
 import type { ButtonProps } from "@/components/Button";
-import clsx from "clsx";
 
 interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: ModeButtonProps["currentMode"];
@@ -35,12 +34,7 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
 
   return (
     <header className={styles.toolbar} role="toolbar">
-      <div
-        className={clsx(
-          styles.toolbarButtons,
-          styles[`mode-${props.currentMode}`],
-        )}
-      >
+      <div className={styles.toolbarButtons}>
         <ToolbarButton {...sharedToolButtonProps} type="bold">
           <Icon>
             <IconBold />

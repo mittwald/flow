@@ -9,7 +9,6 @@ import {
   useDeferredValue,
   useLayoutEffect,
   useState,
-  startTransition,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -72,14 +71,10 @@ export const ReactAriaControlledValueFix: FC<
     emitElementValueChange(elementRef, deferredValueFromContext);
 
     const onFocus = (event: Event) => {
-      startTransition(() => {
-        setIsInFocus(!!event?.isTrusted);
-      });
+      setIsInFocus(!!event?.isTrusted);
     };
     const onBlur = () => {
-      startTransition(() => {
-        setIsInFocus(false);
-      });
+      setIsInFocus(false);
     };
 
     elementRef?.addEventListener("focus", onFocus);

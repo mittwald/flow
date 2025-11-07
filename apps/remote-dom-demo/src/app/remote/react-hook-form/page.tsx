@@ -142,7 +142,7 @@ export default function Page() {
           </FileField>
         </Field>
         <ActionGroup>
-          <SubmitButton>asd</SubmitButton>
+          <SubmitButton>Submit</SubmitButton>
           <Button
             onPress={() => {
               form.setValue("email", "demo@test.de");

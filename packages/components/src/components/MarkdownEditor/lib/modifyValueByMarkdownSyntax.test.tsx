@@ -65,9 +65,3 @@ describe("will format a give string to markdown", () => {
     expect(newSelectionEnd).toBe(expectedEnd);
   });
 });
-//
-//   test("does nothing on Enter outside of list", () => {
-//     const result = triggerEnter("Just some text");
-//     expect(result).toBe("Just some text");
-//   });
-// });
