@@ -49,15 +49,15 @@ export const Resizeable: Story = {
 };
 
 export const HorizontallyResizeable: Story = {
-  args: { allowHorizontalResize: true },
+  args: { allowResize: "horizontal" },
 };
 
 export const VerticallyResizeable: Story = {
-  args: { allowVerticalResize: true },
+  args: { allowResize: "vertical" },
 };
 
 export const VerticallyAndAutoResizeable: Story = {
-  args: { allowVerticalResize: true, rows: 1, autoResizeMaxRows: 5 },
+  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
 };
 
 export const WithOnChange: Story = {
@@ -82,7 +82,7 @@ export const WithRef: StoryObj = {
 
     return (
       <Section>
-        <MarkdownEditor {...props} ref={editorRef}>
+        <MarkdownEditor {...props} inputRef={editorRef}>
           <Label>Message</Label>
         </MarkdownEditor>
         <Button type="button" onClick={handleFocus}>

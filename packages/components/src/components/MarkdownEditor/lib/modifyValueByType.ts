@@ -1,4 +1,4 @@
-import type { RefObject } from "react";
+import { type RefObject } from "react";
 
 export type InsertType =
   | "bold"
@@ -34,17 +34,20 @@ const getLineEnd = (text: string, pos: number) => {
   return nextNewline === -1 ? text.length : nextNewline;
 };
 
-export const insertAtCursor = (
+export const modifyValueByType = (
   markdown: string,
-  setMarkdown: (markdown: string) => void,
-  textAreaRef: RefObject<HTMLTextAreaElement | null>,
   type: InsertType,
+  textAreaRef: RefObject<HTMLTextAreaElement | null>,
 ) => {
-  const textarea = textAreaRef.current;
-  if (!textarea) {
-    return;
+  if (!textAreaRef.current) {
+    return {
+      newValue: markdown,
+      newSelectionStart: null,
+      newSelectionEnd: null,
+    } as const;
   }
 
+  const textarea = textAreaRef.current;
   const { before, after = "", toggleable = false } = markdownSyntax[type];
   const start = textarea.selectionStart;
   const end = textarea.selectionEnd;
@@ -209,9 +212,9 @@ export const insertAtCursor = (
     }
   }
 
-  setMarkdown(newText);
-  requestAnimationFrame(() => {
-    textarea.setSelectionRange(selectionStart, selectionEnd);
-    textarea.focus();
-  });
+  return {
+    newValue: newText,
+    newSelectionStart: selectionStart,
+    newSelectionEnd: selectionEnd,
+  } as const;
 };

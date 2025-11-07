@@ -53,7 +53,7 @@ export const Popover = flowComponent("Popover", (props) => {
         {...contentProps}
         className={rootClassName}
         isOpen={isOpen}
-        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+        onOpenChange={() => controller.setOpen(isOpen)}
         ref={ref}
       >
         <OverlayContextProvider type="Popover" controller={controller}>

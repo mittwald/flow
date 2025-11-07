@@ -16,7 +16,7 @@ export interface TextAreaProps
       TextFieldBaseProps,
       "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "ref"
     >,
-    Pick<Aria.TextAreaProps, "placeholder" | "rows">,
+    Pick<Aria.TextAreaProps, "placeholder" | "rows" | "aria-hidden">,
     FlowComponentProps<HTMLTextAreaElement> {
   /**
    * Whether the text area should grow if its content gets longer than its
@@ -24,14 +24,7 @@ export interface TextAreaProps
    */
   autoResizeMaxRows?: number;
   /** Allows the user to manually resize the textArea horizontally. */
-  allowHorizontalResize?: boolean;
-  /** Allows the user to manually resize the textArea vertically. */
-  allowVerticalResize?: boolean;
-  /**
-   * Allows the user to manually resize the textArea horizontally and
-   * vertically.
-   */
-  allowResize?: boolean;
+  allowResize?: boolean | "horizontal" | "vertical";
 }
 
 /** @flr-generate all */
@@ -43,16 +36,17 @@ export const TextArea = flowComponent("TextArea", (props) => {
     autoResizeMaxRows = rows,
     ref,
     allowResize,
-    allowVerticalResize,
-    allowHorizontalResize,
     ...rest
   } = props;
 
   const rootClassName = clsx(
     styles.textArea,
-    allowResize && styles.resize,
-    allowVerticalResize && styles.verticalResize,
-    allowHorizontalResize && styles.horizontalResize,
+    typeof allowResize === "boolean" && allowResize ? styles.resize : null,
+    allowResize === "horizontal"
+      ? styles.horizontalResize
+      : allowResize === "vertical"
+        ? styles.verticalResize
+        : null,
   );
 
   const localRef = useObjectRef(ref);
@@ -66,8 +60,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const autoResizable = rows !== autoResizeMaxRows;
 
   const verticallyResizable =
-    (allowResize || allowVerticalResize) &&
-    (!autoResizable || (autoResizable && resized));
+    allowResize && (!autoResizable || (autoResizable && resized));
 
   useEffect(() => {
     const textarea = localRef.current;
@@ -123,6 +116,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     >
       <Aria.TextArea
         rows={rows}
+        aria-hidden={props["aria-hidden"]}
         placeholder={placeholder}
         className={rootClassName}
         ref={localRef}

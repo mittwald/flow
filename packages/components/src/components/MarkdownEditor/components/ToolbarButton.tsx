@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { type InsertType } from "@/components/MarkdownEditor/lib/insertAtCursor";
+import { type InsertType } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { Button, type ButtonProps } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
