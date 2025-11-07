@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, type RefObject } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -18,6 +18,7 @@ import type { OptionsProps } from "@/components/Options/Options";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
@@ -27,6 +28,7 @@ export interface ComboBoxProps
     FlowComponentProps {
   onChange?: (value: string) => void;
   controller?: OverlayController;
+  inputRef?: RefObject<HTMLInputElement | null>;
 }
 
 /** @flr-generate all */
@@ -44,6 +46,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     controller: controllerFromProps,
     placeholder,
     ref,
+    inputRef,
     renderEmptyState,
 
     ...rest
@@ -82,7 +85,12 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   const controller = controllerFromProps ?? controllerFromContext;
 
   const localComboBoxRef = useObjectRef(ref);
-  useMakeFocusable(localComboBoxRef);
+  const localInputComboBoxRef = useObjectRef(inputRef);
+
+  useMakeFocusable(localComboBoxRef, () => {
+    localInputComboBoxRef.current?.focus();
+    controller.setOpen(true);
+  });
 
   return (
     <Aria.ComboBox
@@ -92,13 +100,23 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       {...rest}
       ref={localComboBoxRef}
       onSelectionChange={handleOnSelectionChange}
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      onOpenChange={(isOpen) => {
+        controller.setOpen(isOpen);
+      }}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <FieldErrorCaptureContext>
             <div className={styles.input}>
-              <Aria.Input placeholder={placeholder} />
+              <ReactAriaControlledValueFix
+                inputContext={Aria.ComboBoxContext}
+                props={props}
+              >
+                <Aria.Input
+                  placeholder={placeholder}
+                  ref={localInputComboBoxRef}
+                />
+              </ReactAriaControlledValueFix>
               <Button
                 className={styles.toggle}
                 aria-label={stringFormatter.format("comboBox.showOptions")}

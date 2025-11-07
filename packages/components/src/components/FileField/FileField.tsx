@@ -1,6 +1,6 @@
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, RefObject } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
@@ -25,6 +25,7 @@ export interface FileFieldProps
   onChange?: FileInputOnChangeHandler;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
+  inputRef?: RefObject<HTMLInputElement>;
 }
 
 /** @flr-generate all */
@@ -72,10 +73,15 @@ export const FileField = flowComponent("FileField", (props) => {
     }
   };
 
-  useMakeFocusable(inputRef);
+  const localRef = useObjectRef(ref);
+  const localInputRef = useObjectRef(inputRef);
+
+  useMakeFocusable(localRef, () => {
+    localInputRef.current?.focus();
+  });
 
   return (
-    <div {...fieldProps}>
+    <div {...fieldProps} ref={localRef}>
       <InputContext.Provider value={inputProps}>
         <FieldErrorContext.Provider
           value={formValidationState.displayValidation}
@@ -90,7 +96,7 @@ export const FileField = flowComponent("FileField", (props) => {
                 }
               >
                 <FileInput
-                  ref={inputRef}
+                  ref={localInputRef}
                   isReadOnly={isReadOnly}
                   onChange={isReadOnly ? undefined : handleOnChange}
                   isDisabled={isDisabled}
