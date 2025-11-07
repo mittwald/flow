@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.549](https://github.com/mittwald/flow/compare/0.2.0-alpha.548...0.2.0-alpha.549) (2025-11-07)
+
+### Bug Fixes
+
+* **ColumnLayout:** fix box elements not stretching vertically ([#2117](https://github.com/mittwald/flow/issues/2117)) ([3684b5c](https://github.com/mittwald/flow/commit/3684b5c9e52f9e6dc47c8a34804277a0289778ef))
+
+# [0.2.0-alpha.548](https://github.com/mittwald/flow/compare/0.2.0-alpha.547...0.2.0-alpha.548) (2025-11-06)
+
+### Bug Fixes
+
+* **List:** avoid duplicate IDs triggered by parallel batch invalidation ([90bfe27](https://github.com/mittwald/flow/commit/90bfe276f0231a9e51b4180e7bf31218a9be0807))
+
+# [0.2.0-alpha.547](https://github.com/mittwald/flow/compare/0.2.0-alpha.546...0.2.0-alpha.547) (2025-11-06)
+
+### Bug Fixes
+
+* **IllustratedMessage:** fix heading margin for illustrated messages in sections ([#2116](https://github.com/mittwald/flow/issues/2116)) ([88b3f73](https://github.com/mittwald/flow/commit/88b3f73e68586b3bd036c04e5404b1694bde2afc))
+
+# [0.2.0-alpha.546](https://github.com/mittwald/flow/compare/0.2.0-alpha.545...0.2.0-alpha.546) (2025-11-05)
+
+### Bug Fixes
+
+* **Modal:** fix size of heading in sections in header within modals ([#2115](https://github.com/mittwald/flow/issues/2115)) ([986935e](https://github.com/mittwald/flow/commit/986935e8284fde7b73346eeb4ad1ced4b8c59c06))
+
+# [0.2.0-alpha.545](https://github.com/mittwald/flow/compare/0.2.0-alpha.544...0.2.0-alpha.545) (2025-11-05)
+
+### Bug Fixes
+
+* **Alert:** fix icon does not update when status changes ([#2114](https://github.com/mittwald/flow/issues/2114)) ([8d93763](https://github.com/mittwald/flow/commit/8d9376306a9030e52372c67858070a3ac13fa802))
+
 # [0.2.0-alpha.544](https://github.com/mittwald/flow/compare/0.2.0-alpha.543...0.2.0-alpha.544) (2025-11-04)
 
 ### Bug Fixes

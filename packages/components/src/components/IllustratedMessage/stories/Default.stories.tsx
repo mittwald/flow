@@ -8,6 +8,7 @@ import { IconApp, IconDanger } from "@/components/Icon/components/icons";
 import { ActionGroup } from "@/components/ActionGroup";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -90,5 +91,17 @@ export const WithProgressBar: Story = {
         <Label>Storage</Label>
       </ProgressBar>
     </IllustratedMessage>
+  ),
+};
+
+export const InSection: Story = {
+  render: (props) => (
+    <Section>
+      <IllustratedMessage {...props}>
+        <IconApp />
+        <Heading>No apps installed</Heading>
+        <Text>Create your first app to start working on your website.</Text>
+      </IllustratedMessage>
+    </Section>
   ),
 };

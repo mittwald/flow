@@ -81,7 +81,10 @@ export const Modal = flowComponent(
 
     const nestedHeadingProps: PropsContext = {
       Heading: { level: nestedHeadingLevel },
-      Section: { Heading: { level: nestedHeadingLevel } },
+      Section: {
+        Header: { Heading: { level: nestedHeadingLevel } },
+        Heading: { level: nestedHeadingLevel },
+      },
       Header: { Heading: { level: nestedHeadingLevel } },
     };
 
