@@ -18,6 +18,7 @@ export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
   return (
     <Button
       {...rest}
+      data-button-type={type}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"
