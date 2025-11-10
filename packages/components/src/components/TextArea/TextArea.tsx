@@ -25,6 +25,11 @@ export interface TextAreaProps
   autoResizeMaxRows?: number;
   /** Allows the user to manually resize the textArea horizontally. */
   allowResize?: boolean | "horizontal" | "vertical";
+
+  /** @deprecated Use `allowResize` instead. */
+  allowHorizontalResize?: boolean;
+  /** @deprecated Use `allowResize` instead. */
+  allowVerticalResize?: boolean;
 }
 
 /** @flr-generate all */
@@ -35,9 +40,17 @@ export const TextArea = flowComponent("TextArea", (props) => {
     rows = 5,
     autoResizeMaxRows = rows,
     ref,
-    allowResize,
+    allowVerticalResize,
+    allowHorizontalResize,
     ...rest
   } = props;
+
+  let { allowResize } = props;
+  if (allowVerticalResize) {
+    allowResize = "vertical";
+  } else if (allowHorizontalResize) {
+    allowResize = "horizontal";
+  }
 
   const rootClassName = clsx(
     styles.textArea,
