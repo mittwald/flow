@@ -70,7 +70,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const isFieldInvalid = controller.fieldState.invalid;
 
   const hotkeyRef = useHotkeys<never>(
-    "meta+enter, ctl+enter",
+    "meta+enter, ctrl+enter",
     () => {
       formContext.submit();
     },
