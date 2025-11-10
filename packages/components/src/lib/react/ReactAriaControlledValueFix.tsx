@@ -94,7 +94,10 @@ export const ReactAriaControlledValueFix: FC<
 
     emitElementValueChange(elementRef, deferredValueFromContext);
     if (elementRef) {
+      const { selectionStart, selectionEnd } = elementRef;
       elementRef.focus();
+      elementRef.selectionStart = selectionStart;
+      elementRef.selectionEnd = selectionEnd;
     }
   }, [deferredValueFromContext]);
 
