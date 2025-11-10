@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.550](https://github.com/mittwald/flow/compare/0.2.0-alpha.549...0.2.0-alpha.550) (2025-11-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
 # [0.2.0-alpha.549](https://github.com/mittwald/flow/compare/0.2.0-alpha.548...0.2.0-alpha.549) (2025-11-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
