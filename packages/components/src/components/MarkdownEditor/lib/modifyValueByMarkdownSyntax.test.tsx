@@ -1,5 +1,50 @@
 import { modifyValueByMarkdownSyntax } from "@/components/MarkdownEditor/lib/modifyValueByMarkdownSyntax";
-import { FormatInlineTestCases } from "@/components/MarkdownEditor/MarkdownEditor.test";
+
+const FormatInlineTestCases = [
+  [
+    "continues ordered list",
+    "1. First item\n2. Second item",
+    "1. First item\n2. Second item\n3. ",
+    32,
+    32,
+  ],
+  [
+    "continues unordered list (-)",
+    "- First item\n- Second item",
+    "- First item\n- Second item\n- ",
+    29,
+    29,
+  ],
+  [
+    "continues unordered list (*)",
+    "* First item\n* Second item",
+    "* First item\n* Second item\n* ",
+    29,
+    29,
+  ],
+  [
+    "continues unordered list (+)",
+    "+ First item\n+ Second item",
+    "+ First item\n+ Second item\n+ ",
+    29,
+    29,
+  ],
+  [
+    "exits list if current line is empty (ordered)",
+    "1. First item\n2. ",
+    "1. First item\n\n",
+    15,
+    15,
+  ],
+  [
+    "exits list if current line is empty (unordered)",
+    "- First item\n- ",
+    "- First item\n\n",
+    14,
+    14,
+  ],
+  ["does nothing outside of list", "Just some text", "Just some text", 15, 15],
+];
 
 describe("will format a give string to markdown", () => {
   test.each(FormatInlineTestCases)(

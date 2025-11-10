@@ -11,7 +11,7 @@ const expandSteps = (value: string) => {
   return result;
 };
 
-export const FormatInlineTestCases = [
+const FormatInlineTestCases = [
   [
     "continues ordered list",
     "1. First item\n2. Second item",
@@ -57,7 +57,7 @@ export const FormatInlineTestCases = [
   ["does nothing outside of list", "Just some text", "Just some text", 15, 15],
 ];
 
-export const FormatButtonTestCases = [
+const FormatButtonTestCases = [
   ["bold", "Hello world", "**Hello world**", 2, 13],
   ["bold", "**Hello world**", "Hello world", 0, 11],
   ["italic", "Hello world", "_Hello world_", 1, 12],
