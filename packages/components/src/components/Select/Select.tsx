@@ -105,12 +105,7 @@ export const Select = flowComponent("Select", (props) => {
               <IconChevronDown />
             </Aria.Button>
             {children}
-            <Options
-              onOpenChange={(isOpen) => {
-                controller.setOpen(isOpen);
-              }}
-              controller={controller}
-            >
+            <Options controller={controller}>
               <TunnelExit id="options" />
             </Options>
           </PropsContextProvider>

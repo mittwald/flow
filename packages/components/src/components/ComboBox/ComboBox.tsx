@@ -130,6 +130,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
             <Options
               controller={controller}
+              onOpenChange={() => null}
               renderEmptyState={renderEmptyState}
             >
               <TunnelExit id="options" />
