@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.551](https://github.com/mittwald/flow/compare/0.2.0-alpha.550...0.2.0-alpha.551) (2025-11-10)
+
+### Bug Fixes
+
+* **ComboBox:** fix combo box with long texts ([#2124](https://github.com/mittwald/flow/issues/2124)) ([9ea8a53](https://github.com/mittwald/flow/commit/9ea8a5362b6d6f7848048b000137f8320cee29d4))
+
+# [0.2.0-alpha.550](https://github.com/mittwald/flow/compare/0.2.0-alpha.549...0.2.0-alpha.550) (2025-11-10)
+
+### Bug Fixes
+
+* **List:** vertically center top content ([#2123](https://github.com/mittwald/flow/issues/2123)) ([113cd6c](https://github.com/mittwald/flow/commit/113cd6c4dd139f68d04efa2bf7b5c0abeb2fa53b))
+
 # [0.2.0-alpha.549](https://github.com/mittwald/flow/compare/0.2.0-alpha.548...0.2.0-alpha.549) (2025-11-07)
 
 ### Bug Fixes
