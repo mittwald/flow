@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
@@ -32,6 +32,7 @@ export const Popover = flowComponent("Popover", (props) => {
     children,
     className,
     controller: controllerFromProps,
+    onOpenChange = () => null,
     defaultOpen = false,
     ref,
     ...contentProps
@@ -53,7 +54,7 @@ export const Popover = flowComponent("Popover", (props) => {
         {...contentProps}
         className={rootClassName}
         isOpen={isOpen}
-        onOpenChange={() => controller.setOpen(!isOpen)}
+        onOpenChange={onOpenChange}
         ref={ref}
       >
         <OverlayContextProvider type="Popover" controller={controller}>

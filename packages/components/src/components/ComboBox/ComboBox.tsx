@@ -89,7 +89,6 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   useMakeFocusable(localComboBoxRef, () => {
     localInputComboBoxRef.current?.focus();
-    controller.setOpen(true);
   });
 
   return (

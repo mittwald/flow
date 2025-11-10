@@ -34,12 +34,8 @@ export const Select = flowComponent("Select", (props) => {
   const {
     children,
     className,
-    onChange = () => {
-      // default: do nothing
-    },
-    onSelectionChange = () => {
-      // default: do nothing
-    },
+    onChange,
+    onSelectionChange,
     controller: controllerFromProps,
     ref,
     isReadOnly,
@@ -66,11 +62,6 @@ export const Select = flowComponent("Select", (props) => {
     ...fieldPropsContext,
   };
 
-  const handleOnSelectionChange = (id: Key | null) => {
-    onChange(id);
-    onSelectionChange(id);
-  };
-
   const controllerFromContext = useOverlayController("Select", {
     reuseControllerFromContext: true,
   });
@@ -80,6 +71,7 @@ export const Select = flowComponent("Select", (props) => {
 
   useMakeFocusable(localSelectRef, () => {
     localButtonRef.current?.focus();
+    controller.setOpen(true);
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
@@ -91,7 +83,12 @@ export const Select = flowComponent("Select", (props) => {
       {...fieldProps}
       className={clsx(rootClassName, fieldProps.className)}
       ref={localSelectRef}
-      onSelectionChange={isReadOnly ? undefined : handleOnSelectionChange}
+      onChange={(value) => {
+        if (!isReadOnly) {
+          onChange?.(value);
+          onSelectionChange?.(value);
+        }
+      }}
       onOpenChange={(isOpen) => !isReadOnly && controller.setOpen(isOpen)}
       isOpen={isOpen}
       data-readonly={isReadOnly}
@@ -107,9 +104,13 @@ export const Select = flowComponent("Select", (props) => {
               <Aria.SelectValue />
               <IconChevronDown />
             </Aria.Button>
-
             {children}
-            <Options controller={controller}>
+            <Options
+              onOpenChange={(isOpen) => {
+                controller.setOpen(isOpen);
+              }}
+              controller={controller}
+            >
               <TunnelExit id="options" />
             </Options>
           </PropsContextProvider>
