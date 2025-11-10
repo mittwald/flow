@@ -68,15 +68,16 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
     setTimeout(() => {
       requestAnimationFrame(() => {
-        inputRef.setSelectionRange(
-          present.selectionStart,
-          present.selectionEnd,
-        );
-        inputRef.focus();
+        requestAnimationFrame(() => {
+          inputRef.setSelectionRange(
+            present.selectionStart,
+            present.selectionEnd,
+          );
 
-        if (present.shouldScrollToCursor) {
-          scrollToCursor(value, inputRef);
-        }
+          if (present.shouldScrollToCursor) {
+            scrollToCursor(value, inputRef);
+          }
+        });
       });
 
       selectionPresent.current = null;
@@ -140,6 +141,12 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     <div ref={localRef} className={rootClassName}>
       <TunnelProvider>
         <TunnelExit id="label" />
+        <Toolbar
+          currentMode={mode}
+          isDisabled={isDisabled}
+          onModeChange={setMode}
+          onToolPressed={handleToolButtonPressed}
+        />
         <TextArea
           {...rest}
           aria-hidden={mode === "preview"}
@@ -152,12 +159,6 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           onChange={handleOnChange}
           onKeyDown={handleKeyDown}
         >
-          <Toolbar
-            currentMode={mode}
-            isDisabled={isDisabled}
-            onModeChange={setMode}
-            onToolPressed={handleToolButtonPressed}
-          />
           <Markdown
             headingOffset={headingOffset}
             className={styles.markdown}

@@ -92,6 +92,9 @@ export const ReactAriaControlledValueFix: FC<
     }
 
     emitElementValueChange(elementRef, deferredValueFromContext);
+    if (elementRef) {
+      elementRef.focus();
+    }
   }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {
