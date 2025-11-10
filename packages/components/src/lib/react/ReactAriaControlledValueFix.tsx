@@ -8,7 +8,8 @@ import {
   type PropsWithChildren,
   useDeferredValue,
   useLayoutEffect,
-  useState,
+  useEffect,
+  useRef,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -51,7 +52,7 @@ export const ReactAriaControlledValueFix: FC<
   );
 
   const elementRef = contextRef.current;
-  const [isInFocus, setIsInFocus] = useState(false);
+  const isInFocus = useRef(false);
 
   const isValidElementType =
     elementRef &&
@@ -62,8 +63,8 @@ export const ReactAriaControlledValueFix: FC<
     String(contextProps.value ?? ""),
   );
 
-  useLayoutEffect(() => {
-    if (!isValidElementType) {
+  useEffect(() => {
+    if (!isValidElementType || !elementRef) {
       return;
     }
 
@@ -71,23 +72,23 @@ export const ReactAriaControlledValueFix: FC<
     emitElementValueChange(elementRef, deferredValueFromContext);
 
     const onFocus = (event: Event) => {
-      setIsInFocus(!!event?.isTrusted);
+      isInFocus.current = !!event?.isTrusted;
     };
     const onBlur = () => {
-      setIsInFocus(false);
+      isInFocus.current = false;
     };
 
-    elementRef?.addEventListener("focus", onFocus);
-    elementRef?.addEventListener("blur", onBlur);
+    elementRef.addEventListener("focus", onFocus);
+    elementRef.addEventListener("blur", onBlur);
 
     return () => {
-      elementRef?.removeEventListener("focus", onFocus);
-      elementRef?.removeEventListener("blur", onBlur);
+      elementRef.removeEventListener("focus", onFocus);
+      elementRef.removeEventListener("blur", onBlur);
     };
   }, [elementRef]);
 
   useLayoutEffect(() => {
-    if (!isValidElementType || isInFocus) {
+    if (!isValidElementType || isInFocus.current) {
       return;
     }
 
