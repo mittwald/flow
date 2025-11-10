@@ -1,6 +1,7 @@
 @use "../../../../styles/mixins/formControl";
 
 .radioButton {
+  align-self: normal;
   display: grid;
   row-gap: var(--form-control--spacing-y);
   column-gap: var(--form-control--spacing-x);

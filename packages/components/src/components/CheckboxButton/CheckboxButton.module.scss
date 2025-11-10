@@ -1,6 +1,7 @@
 @use "../../styles/mixins/formControl";
 
 .checkboxButton {
+  align-self: normal;
   width: fit-content;
 
   .input {

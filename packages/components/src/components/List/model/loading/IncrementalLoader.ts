@@ -47,7 +47,7 @@ export class IncrementalLoader<T> {
         : undefined;
 
     this.list = list;
-    this.loaderState = IncrementalLoaderState.useNew<T>();
+    this.loaderState = IncrementalLoaderState.useNew<T>(list);
 
     this.manualPagination = manualPagination ?? false;
     this.manualFiltering = manualFiltering ?? this.manualPagination;
