@@ -9,6 +9,10 @@
     input {
       @include formControl.formControl();
       grid-area: input;
+      padding-right: calc(
+        var(--button--padding-icon-only) * 2 + var(--form-control--padding-x) +
+          var(--icon--size--s)
+      );
     }
 
     .toggle {
