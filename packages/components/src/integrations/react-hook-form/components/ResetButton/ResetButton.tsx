@@ -10,13 +10,11 @@ export type ResetButtonProps = Omit<
   buttonComponent?: FC<Omit<ButtonProps, "ref">>;
 };
 
-const DefaultButtonComponent: typeof Button = (p) => <Button {...p} />;
-
 export const ResetButton = flowComponent("ResetButton", (props) => {
   const {
     children,
     ref,
-    buttonComponent: ButtonComponent = DefaultButtonComponent,
+    buttonComponent: ButtonComponent = Button,
     ...rest
   } = props;
 

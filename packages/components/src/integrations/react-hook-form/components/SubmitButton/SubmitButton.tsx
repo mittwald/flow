@@ -13,13 +13,11 @@ export type SubmitButtonProps = Omit<
   buttonComponent?: FC<Omit<ButtonProps, "ref">>;
 };
 
-const DefaultButtonComponent: typeof Button = (p) => <Button {...p} />;
-
 export const SubmitButton = flowComponent("SubmitButton", (props) => {
   const {
     children,
     ref,
-    buttonComponent: ButtonComponent = DefaultButtonComponent,
+    buttonComponent: ButtonComponent = Button,
     ...rest
   } = props;
 
