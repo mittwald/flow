@@ -2,6 +2,7 @@
 import {
   ColumnLayout,
   Image,
+  LayoutCard,
   Link,
   Text,
 } from "@mittwald/flow-react-components";
@@ -12,7 +13,7 @@ import styles from "./footer.module.scss";
 
 const Footer: FC = () => {
   return (
-    <footer className={styles.footer}>
+    <LayoutCard elementType="footer" className={styles.footer}>
       <ColumnLayout gap="xl" m={[1, 1, 2]} l={[1, 1, 2]} s={[1]}>
         <FooterSection title="Ressourcen">
           <Link
@@ -63,7 +64,7 @@ const Footer: FC = () => {
         <Image src={logoMittwald.src} alt="mittwald Logo" />
         <Text>© 2024 Mittwald CM Service GmbH & Co. KG</Text>
       </div>
-    </footer>
+    </LayoutCard>
   );
 };
 
