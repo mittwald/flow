@@ -1,5 +1,10 @@
 "use client";
-import { ColumnLayout, Image, Link } from "@mittwald/flow-react-components";
+import {
+  ColumnLayout,
+  Image,
+  Link,
+  Text,
+} from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import { FooterSection } from "./components/FooterSection";
@@ -55,8 +60,8 @@ const Footer: FC = () => {
         </FooterSection>
       </ColumnLayout>
       <div className={styles.mittwaldLogo}>
-        <Image src={logoMittwald.src} alt="mittwald Logo" />© 2024 Mittwald CM
-        Service GmbH & Co. KG
+        <Image src={logoMittwald.src} alt="mittwald Logo" />
+        <Text>© 2024 Mittwald CM Service GmbH & Co. KG</Text>
       </div>
     </footer>
   );
