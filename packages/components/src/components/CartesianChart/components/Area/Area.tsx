@@ -19,35 +19,21 @@ export interface AreaProps
   > {
   /** The color of the area. @default "sea-green" */
   color?: CategoricalColor;
-  /** @internal */
-  onlyDots?: boolean;
 }
 
 /** @flr-generate all */
 export const Area: FC<AreaProps> = (props) => {
-  const {
-    color = "sea-green",
-    stackId = 1,
-    fillOpacity = 1,
-    onlyDots = true,
-    ...rest
-  } = props;
+  const { color = "sea-green", stackId = 1, fillOpacity = 1, ...rest } = props;
 
   return (
     <Recharts.Area
       stackId={stackId}
       fillOpacity={fillOpacity}
       {...rest}
-      activeDot={
-        onlyDots ? (
-          <AreaDot color={`var(--color--categorical--${color})`} />
-        ) : (
-          false
-        )
-      }
-      fill={onlyDots ? "none" : `var(--color--categorical--${color})`}
-      stroke={onlyDots ? "none" : tokens.area["border-color"].value}
-      strokeWidth={onlyDots ? undefined : tokens.area["border-width"].value}
+      activeDot={<AreaDot color={`var(--color--categorical--${color})`} />}
+      fill={`var(--color--categorical--${color})`}
+      stroke={tokens.area["border-color"].value}
+      strokeWidth={tokens.area["border-width"].value}
     />
   );
 };
