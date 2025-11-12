@@ -14,6 +14,7 @@ export class IncrementalLoaderState<T> {
   public dataBatches: DataBatches<T> = [];
   public prevDataBatches: DataBatches<T> = [];
   public batchLoadingStates: BatchesLoadingState = ["void"];
+  public metadata?: Record<string, unknown> = undefined;
   public readonly list: List<T>;
 
   private constructor(list: List<T>) {
@@ -24,11 +25,13 @@ export class IncrementalLoaderState<T> {
       useIsLoading: false,
       dataBatches: observable.shallow,
       batchLoadingStates: observable.shallow,
+      metadata: observable,
       mergedData: computed,
       isLoading: computed,
       reset: action.bound,
       setDataBatch: action.bound,
       setBatchLoadingState: action.bound,
+      setMetadata: action.bound,
     });
   }
 
@@ -59,6 +62,10 @@ export class IncrementalLoaderState<T> {
     if (this.batchLoadingStates[index] !== state) {
       this.batchLoadingStates[index] = state;
     }
+  }
+
+  public setMetadata(metadata?: Record<string, unknown>): void {
+    this.metadata = metadata;
   }
 
   public get mergedData(): T[] {

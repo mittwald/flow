@@ -28,6 +28,7 @@ export type ListData<T> = readonly T[];
 export interface DataLoaderResult<T> {
   data: ListData<T>;
   itemTotalCount?: number;
+  metadata?: Record<string, unknown>;
 }
 
 export type HooksDataLoader<T> = (

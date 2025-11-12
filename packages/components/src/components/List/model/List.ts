@@ -41,6 +41,7 @@ export class List<T> {
   public readonly setViewMode: (viewMode: ListViewMode) => void;
   public readonly supportsSettingsStorage: boolean;
   public readonly settingStorageKey?: string;
+  public metadata?: Record<string, unknown>;
   private readonly settingsStore?: SettingsStore;
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
