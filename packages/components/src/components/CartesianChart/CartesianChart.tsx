@@ -1,29 +1,27 @@
 import * as Recharts from "recharts";
-import type { CategoricalChartProps } from "recharts/types/chart/generateCategoricalChart";
 import React, {
   Children,
-  cloneElement,
   useEffect,
   useRef,
   useState,
+  type ComponentProps,
   type FC,
   type PropsWithChildren,
   type ReactElement,
   type SVGProps,
 } from "react";
-import { Area, type AreaProps } from "./components/Area";
 import clsx from "clsx";
 import styles from "./CartesianChart.module.scss";
 import Wrap from "../Wrap";
-import { CartesianGrid } from "@/components/CartesianChart/components/CartesianGrid";
+import { CartesianGrid } from "../public";
 
 export interface CartesianChartEmptyViewProps {
-  data?: CategoricalChartProps["data"];
+  data?: ComponentProps<typeof Recharts.ComposedChart>["data"];
 }
 
 export interface CartesianChartProps
   extends Pick<
-      CategoricalChartProps,
+      ComponentProps<typeof Recharts.ComposedChart>,
       "data" | "className" | "syncId" | "syncMethod"
     >,
     PropsWithChildren {
@@ -50,32 +48,15 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
   } = props;
   const rootClassName = clsx(styles.cartesianChart, className);
 
-  // render order: grid, areas without dots, other children, areas with dots
-  // this is needed to ensure that the dots will always overlay the areas
-  const areasWithoutDots: ReactElement[] = [];
-  const areasWithDots: ReactElement[] = [];
   const otherChildren: ReactElement[] = [];
   const gridChildren: ReactElement[] = [];
 
-  Children.forEach(children, (child, index) => {
+  Children.forEach(children, (child) => {
     if (!child) return;
     const element = child as ReactElement;
 
     if (element.type === CartesianGrid) {
       gridChildren.push(element);
-    } else if (element.type === Area) {
-      areasWithoutDots.push(
-        cloneElement(element as ReactElement<AreaProps>, {
-          onlyDots: false,
-          key: `area-${index}`,
-        }),
-      );
-      areasWithDots.push(
-        cloneElement(element as ReactElement<AreaProps>, {
-          onlyDots: true,
-          key: `area-dots-${index}`,
-        }),
-      );
     } else {
       otherChildren.push(element);
     }
@@ -126,11 +107,13 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
         ref={chartContainerRef}
       >
         <Recharts.ResponsiveContainer>
-          <Recharts.AreaChart data={data} className={rootClassName} {...rest}>
+          <Recharts.ComposedChart
+            data={data}
+            className={rootClassName}
+            {...rest}
+          >
             {!showEmptyView && gridChildren}
-            {areasWithoutDots}
             {otherChildren}
-            {areasWithDots}
             {showEmptyView && viewDimensions && (
               <foreignObject {...viewDimensions}>
                 <div className={styles.emptyViewContainer}>
@@ -138,7 +121,7 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
                 </div>
               </foreignObject>
             )}
-          </Recharts.AreaChart>
+          </Recharts.ComposedChart>
         </Recharts.ResponsiveContainer>
       </div>
     </Wrap>
