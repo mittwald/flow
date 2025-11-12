@@ -15,7 +15,7 @@ export type ActionStateValue =
   | "isExecuting"
   | "isFailed";
 
-const duration = {
+export const duration = {
   pending: 1000,
   succeeded: 1500,
   failed: 2000,
