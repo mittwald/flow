@@ -10,8 +10,11 @@ import type { FC } from "react";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import { FooterSection } from "./components/FooterSection";
 import styles from "./footer.module.scss";
+import { DateTime } from "luxon";
 
 const Footer: FC = () => {
+  const year = DateTime.now().year;
+
   return (
     <LayoutCard elementType="footer" className={styles.footer}>
       <ColumnLayout gap="xl" m={[1, 1, 2]} l={[1, 1, 2]} s={[1]}>
@@ -62,7 +65,7 @@ const Footer: FC = () => {
       </ColumnLayout>
       <div className={styles.mittwaldLogo}>
         <Image src={logoMittwald.src} alt="mittwald Logo" />
-        <Text>© 2024 Mittwald CM Service GmbH & Co. KG</Text>
+        <Text>© {year} Mittwald CM Service GmbH & Co. KG</Text>
       </div>
     </LayoutCard>
   );
