@@ -84,13 +84,14 @@ describe("MarkdownEditor Tests", () => {
       const user = UserEvent;
       const onChangeEvent = vi.fn();
 
-      const renderResult = render(
+      const editor = (
         <MarkdownEditor
           data-testid="markdown"
           defaultValue="dummyDefault"
           onChange={onChangeEvent}
-        />,
+        />
       );
+      const renderResult = render(editor);
 
       const markdownEditor = renderResult
         .getByTestId("markdown")
@@ -115,6 +116,9 @@ describe("MarkdownEditor Tests", () => {
       await user.click(markdownEditor);
       await user.keyboard("{Control>}A{/Control}");
       await user.click(modifierButton);
+
+      // wait a render circle to let the editor update its value
+      renderResult.rerender(editor);
 
       expect(markdownEditor).toHaveDisplayValue(expectedResult);
       expect(markdownEditor.selectionStart).toBe(expectedStart);
