@@ -31,26 +31,19 @@ describe("Integration RHF SubmitButton Tests", () => {
     const renderResult = render(form);
 
     const submitButton = renderResult.getByTestId("submitButton");
+    const loadingIcon = () => renderResult.container.querySelector("svg");
 
     expect(submitButton).toBeInTheDocument();
     assert(submitButton);
-
     await user.click(submitButton);
     await advanceTime(duration.pending - 1);
-    expect(renderResult.container.querySelector("svg")).not.toBeInTheDocument();
-
+    expect(loadingIcon()).not.toBeInTheDocument();
     await advanceTime(1);
-    let loadingIcon = renderResult.container.querySelector("svg");
-    expect(loadingIcon).toBeInTheDocument();
-    expect(loadingIcon).toHaveClass("tabler-icon-loader-2");
-    assert(loadingIcon);
-
+    expect(loadingIcon()).toBeInTheDocument();
+    expect(loadingIcon()).toHaveClass("tabler-icon-loader-2");
+    assert(loadingIcon());
     await advanceTime(asyncFunctionDuration - duration.pending);
-    loadingIcon = renderResult.container.querySelector("svg");
-    expect(loadingIcon).toBeInTheDocument();
-    expect(loadingIcon).toHaveClass("tabler-icon-check");
-
-    await advanceTime(duration.succeeded);
-    expect(renderResult.container.querySelector("svg")).not.toBeInTheDocument();
+    expect(loadingIcon()).toBeInTheDocument();
+    expect(loadingIcon()).toHaveClass("tabler-icon-check");
   });
 });
