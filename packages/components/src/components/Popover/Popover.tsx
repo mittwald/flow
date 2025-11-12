@@ -32,7 +32,7 @@ export const Popover = flowComponent("Popover", (props) => {
     children,
     className,
     controller: controllerFromProps,
-    onOpenChange,
+    onOpenChange: onOpenChangeFromProps,
     defaultOpen = false,
     ref,
     ...contentProps
@@ -55,8 +55,10 @@ export const Popover = flowComponent("Popover", (props) => {
         className={rootClassName}
         isOpen={isOpen}
         onOpenChange={(isOpen) => {
-          if (!onOpenChange) {
+          if (!onOpenChangeFromProps) {
             controller.setOpen(isOpen);
+          } else {
+            onOpenChangeFromProps(isOpen);
           }
         }}
         ref={ref}
