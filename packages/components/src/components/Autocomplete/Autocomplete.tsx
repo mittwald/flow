@@ -88,7 +88,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
-    TextField: inputProps,
+    TextField: { ...inputProps, inputContext: Aria.AutocompleteContext },
     Option: {
       tunnelId: "options",
     },
