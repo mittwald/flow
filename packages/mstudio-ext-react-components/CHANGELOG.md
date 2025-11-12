@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.554](https://github.com/mittwald/flow/compare/0.2.0-alpha.553...0.2.0-alpha.554) (2025-11-12)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
 # [0.2.0-alpha.553](https://github.com/mittwald/flow/compare/0.2.0-alpha.552...0.2.0-alpha.553) (2025-11-12)
 
 **Note:** Version bump only for package @mittwald/mstudio-ext-react-components
