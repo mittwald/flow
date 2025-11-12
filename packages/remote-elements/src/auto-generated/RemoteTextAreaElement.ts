@@ -21,6 +21,7 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       "aria-details": {},
       "aria-errormessage": {},
       "aria-haspopup": {},
+      "aria-hidden": {},
       "aria-label": {},
       "aria-labelledby": {},
       autoComplete: {},

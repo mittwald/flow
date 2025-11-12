@@ -8,6 +8,7 @@ import {
   type PropsWithChildren,
   useDeferredValue,
   useLayoutEffect,
+  useEffect,
   useRef,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
@@ -21,6 +22,7 @@ export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
 interface ChildProps {
   [key: string]: unknown;
   ref: ForwardedRef<Element>;
+  inputRef: ForwardedRef<Element>;
 }
 
 /**
@@ -42,10 +44,10 @@ export const ReactAriaControlledValueFix: FC<
     throw new Error("Expected valid element");
   }
 
-  const { ref, ...inputProps } = child.props;
+  const { ref, inputRef, ...inputProps } = child.props;
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
-    ref,
+    inputRef ?? ref,
     context,
   );
 
@@ -57,10 +59,12 @@ export const ReactAriaControlledValueFix: FC<
     (elementRef instanceof HTMLInputElement ||
       elementRef instanceof HTMLTextAreaElement);
 
-  const deferredValueFromContext = useDeferredValue(String(contextProps.value));
+  const deferredValueFromContext = useDeferredValue(
+    String(contextProps.value ?? ""),
+  );
 
-  useLayoutEffect(() => {
-    if (!isValidElementType) {
+  useEffect(() => {
+    if (!isValidElementType || !elementRef) {
       return;
     }
 
@@ -74,12 +78,12 @@ export const ReactAriaControlledValueFix: FC<
       isInFocus.current = false;
     };
 
-    elementRef?.addEventListener("focus", onFocus);
-    elementRef?.addEventListener("blur", onBlur);
+    elementRef.addEventListener("focus", onFocus);
+    elementRef.addEventListener("blur", onBlur);
 
     return () => {
-      elementRef?.removeEventListener("focus", onFocus);
-      elementRef?.removeEventListener("blur", onBlur);
+      elementRef.removeEventListener("focus", onFocus);
+      elementRef.removeEventListener("blur", onBlur);
     };
   }, [elementRef]);
 
@@ -89,6 +93,12 @@ export const ReactAriaControlledValueFix: FC<
     }
 
     emitElementValueChange(elementRef, deferredValueFromContext);
+    if (elementRef) {
+      const { selectionStart, selectionEnd } = elementRef;
+      elementRef.focus();
+      elementRef.selectionStart = selectionStart;
+      elementRef.selectionEnd = selectionEnd;
+    }
   }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {

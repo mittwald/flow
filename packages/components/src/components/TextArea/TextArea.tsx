@@ -16,7 +16,7 @@ export interface TextAreaProps
       TextFieldBaseProps,
       "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "ref"
     >,
-    Pick<Aria.TextAreaProps, "placeholder" | "rows">,
+    Pick<Aria.TextAreaProps, "placeholder" | "rows" | "aria-hidden">,
     FlowComponentProps<HTMLTextAreaElement> {
   /**
    * Whether the text area should grow if its content gets longer than its
@@ -24,14 +24,12 @@ export interface TextAreaProps
    */
   autoResizeMaxRows?: number;
   /** Allows the user to manually resize the textArea horizontally. */
+  allowResize?: boolean | "horizontal" | "vertical";
+
+  /** @deprecated Use `allowResize` instead. */
   allowHorizontalResize?: boolean;
-  /** Allows the user to manually resize the textArea vertically. */
+  /** @deprecated Use `allowResize` instead. */
   allowVerticalResize?: boolean;
-  /**
-   * Allows the user to manually resize the textArea horizontally and
-   * vertically.
-   */
-  allowResize?: boolean;
 }
 
 /** @flr-generate all */
@@ -42,17 +40,26 @@ export const TextArea = flowComponent("TextArea", (props) => {
     rows = 5,
     autoResizeMaxRows = rows,
     ref,
-    allowResize,
     allowVerticalResize,
     allowHorizontalResize,
     ...rest
   } = props;
 
+  let { allowResize } = props;
+  if (allowVerticalResize) {
+    allowResize = "vertical";
+  } else if (allowHorizontalResize) {
+    allowResize = "horizontal";
+  }
+
   const rootClassName = clsx(
     styles.textArea,
-    allowResize && styles.resize,
-    allowVerticalResize && styles.verticalResize,
-    allowHorizontalResize && styles.horizontalResize,
+    typeof allowResize === "boolean" && allowResize ? styles.resize : null,
+    allowResize === "horizontal"
+      ? styles.horizontalResize
+      : allowResize === "vertical"
+        ? styles.verticalResize
+        : null,
   );
 
   const localRef = useObjectRef(ref);
@@ -66,8 +73,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const autoResizable = rows !== autoResizeMaxRows;
 
   const verticallyResizable =
-    (allowResize || allowVerticalResize) &&
-    (!autoResizable || (autoResizable && resized));
+    allowResize && (!autoResizable || (autoResizable && resized));
 
   useEffect(() => {
     const textarea = localRef.current;
@@ -123,6 +129,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     >
       <Aria.TextArea
         rows={rows}
+        aria-hidden={props["aria-hidden"]}
         placeholder={placeholder}
         className={rootClassName}
         ref={localRef}

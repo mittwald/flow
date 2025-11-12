@@ -3,7 +3,13 @@ import { Button } from "@/components/Button";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
 import { TextField } from "@/components/TextField";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -95,8 +101,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="reset">Reset</Button>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -141,7 +147,8 @@ export const WithTransformedValue: Story = {
             </TextField>
           </Field>
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -200,7 +207,8 @@ export const WithFocus: Story = {
         <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

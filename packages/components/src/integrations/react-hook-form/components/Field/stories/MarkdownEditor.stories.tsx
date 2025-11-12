@@ -10,6 +10,8 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { FieldError } from "@/components/FieldError";
+import { SubmitButton } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
+import { ResetButton } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
 
 const submitAction = action("submit");
 
@@ -44,7 +46,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -116,7 +119,8 @@ export const WithFocus: Story = {
         <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

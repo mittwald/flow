@@ -13,6 +13,8 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { inheritProps } from "@/lib/propsContext/inherit/types";
 import FieldErrorView from "@/views/FieldErrorView";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useMergeRefs } from "use-callback-ref";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -67,9 +69,22 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
 
+  const hotkeyRef = useHotkeys<never>(
+    "meta+enter, ctrl+enter",
+    () => {
+      formContext.submit();
+    },
+    {
+      enableOnFormTags: true,
+      enableOnContentEditable: true,
+    },
+  );
+  const fieldRef = useMergeRefs([controller.field.ref, hotkeyRef]);
+
   const fieldProps = {
     ...inheritProps,
     ...controller.field,
+    ref: fieldRef,
     value,
     name,
     form: formContext.id,

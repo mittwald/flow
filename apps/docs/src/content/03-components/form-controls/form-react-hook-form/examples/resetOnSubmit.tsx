@@ -1,7 +1,6 @@
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import {
   ActionGroup,
-  Button,
   FieldDescription,
   Label,
   TextField,
@@ -9,6 +8,8 @@ import {
 import {
   Field,
   Form,
+  SubmitButton,
+  ResetButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -47,7 +48,8 @@ export default () => {
         </TextField>
       </Field>
       <ActionGroup>
-        <Button type="submit">Save</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Save</SubmitButton>
       </ActionGroup>
     </Form>
   );

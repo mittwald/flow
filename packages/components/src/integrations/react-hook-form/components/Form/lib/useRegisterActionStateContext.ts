@@ -80,5 +80,6 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   return {
     action,
     registerSubmitResult,
+    callAfterSubmitFunction,
   } as const;
 };

@@ -9,14 +9,15 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import type { RefObject } from "react";
 
-export interface CheckboxButtonProps
-  extends CheckboxProps,
-    FlowComponentProps {}
+export interface CheckboxButtonProps extends CheckboxProps, FlowComponentProps {
+  inputRef?: RefObject<HTMLInputElement | null>;
+}
 
 /** @flr-generate all */
 export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
-  const { children, className, ref, inputClassName, ...rest } = props;
+  const { children, className, ref, inputRef, inputClassName, ...rest } = props;
 
   const {
     fieldPropsContext,
@@ -36,7 +37,11 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   };
 
   const localCheckboxButtonRef = useObjectRef(ref);
-  useMakeFocusable(localCheckboxButtonRef);
+  const localInputCheckboxRef = useObjectRef(inputRef);
+
+  useMakeFocusable(localCheckboxButtonRef, () =>
+    localInputCheckboxRef.current?.focus(),
+  );
 
   return (
     <div
@@ -45,7 +50,11 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
       ref={localCheckboxButtonRef}
     >
       <FieldErrorCaptureContext>
-        <Checkbox {...rest} inputClassName={clsx(inputClassName, styles.input)}>
+        <Checkbox
+          {...rest}
+          inputRef={localInputCheckboxRef}
+          inputClassName={clsx(inputClassName, styles.input)}
+        >
           <PropsContextProvider props={mergedPropsContext}>
             {children}
           </PropsContextProvider>

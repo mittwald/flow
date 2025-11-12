@@ -3,10 +3,10 @@ import { act, type FC } from "react";
 import Action from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
-import userEvent from "@/lib/dev/vitestUserEvent";
 import Modal from "@/components/Modal";
 import Content from "@/components/Content";
 import ActionGroup from "@/components/ActionGroup";
+import { advanceTime, userEventFakeTimer } from "@/lib/dev/vitest";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -54,11 +54,7 @@ const TestButton: FC<ButtonProps> = (p) => (
 const getButton = (testId = "button") => screen.getByTestId(testId);
 
 const clickTrigger = async (testId = "button") => {
-  await act(() => userEvent.click(getButton(testId)));
-};
-
-const advanceTime = async (ms: number) => {
-  await act(() => vitest.advanceTimersByTimeAsync(ms));
+  await act(() => userEventFakeTimer.click(getButton(testId)));
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
