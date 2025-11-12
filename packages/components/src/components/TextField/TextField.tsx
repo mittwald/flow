@@ -22,6 +22,7 @@ export interface TextFieldProps
     Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
     FlowComponentProps<HTMLInputElement> {
+  /** @internal */
   inputContext?: ReactAriaControlledValueFixProps["inputContext"];
 }
 
