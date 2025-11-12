@@ -101,7 +101,7 @@ describe("PasswordCreationField Tests", () => {
   });
 
   test("shows correct password hint for max rule", async () => {
-    const user = userEvent.setup();
+    const user = userEvent;
     const maxNumberPolicy = Policy.fromDeclaration({
       minComplexity: 0,
       rules: [

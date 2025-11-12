@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor";
+import UserEvent from "@testing-library/user-event";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -81,7 +81,7 @@ describe("MarkdownEditor Tests", () => {
   test.each(FormatButtonTestCases)(
     "test formatted message with button type '%s'",
     async (type, text, expectedResult, expectedStart, expectedEnd) => {
-      const user = userEvent.setup();
+      const user = UserEvent;
       const onChangeEvent = vi.fn();
 
       const renderResult = render(
@@ -113,7 +113,7 @@ describe("MarkdownEditor Tests", () => {
       await user.clear(markdownEditor);
       await user.type(markdownEditor, text);
       await user.click(markdownEditor);
-      await userEvent.keyboard("{Control>}A{/Control}");
+      await user.keyboard("{Control>}A{/Control}");
       await user.click(modifierButton);
 
       expect(markdownEditor).toHaveDisplayValue(expectedResult);
@@ -140,7 +140,7 @@ describe("MarkdownEditor Tests", () => {
       expectedStart,
       expectedEnd,
     ) => {
-      const user = userEvent.setup();
+      const user = UserEvent;
       const onChangeEvent = vi.fn();
 
       defaultValue = String(defaultValue ?? "");
