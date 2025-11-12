@@ -19,7 +19,9 @@ export const ResetButton = flowComponent("ResetButton", (props) => {
   } = props;
 
   const { id: formId = props.form, form, formActionModel } = useFormContext();
+
   const ButtonViewComponent = useMemo(() => ButtonComponent, [formId]);
+  const actionState = formActionModel.state.useValue();
 
   return (
     <ButtonViewComponent
@@ -27,7 +29,7 @@ export const ResetButton = flowComponent("ResetButton", (props) => {
       variant="soft"
       {...rest}
       ref={ref}
-      isDisabled={formActionModel.state.state === "isExecuting"}
+      isReadOnly={actionState === "isExecuting" || actionState === "isPending"}
       type="reset"
       onPress={() => form.reset()}
       form={formId}
