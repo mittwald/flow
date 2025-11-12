@@ -16,6 +16,7 @@ import {
 import homeImage from "../../assets/Styleguide_Startseite.svg";
 import styles from "./layout.module.scss";
 import { AlertBadge } from "@mittwald/flow-react-components";
+import Footer from "@/app/_components/layout/Footer";
 
 const Home: FC = () => {
   return (
@@ -102,6 +103,7 @@ const Home: FC = () => {
           </Section>
         </LayoutCard>
       </ColumnLayout>
+      <Footer />
     </ColumnLayout>
   );
 };
