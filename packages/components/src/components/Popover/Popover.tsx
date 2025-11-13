@@ -9,7 +9,7 @@ import {
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
+import { ClearPropsContext } from "@/index/default";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
@@ -49,7 +49,7 @@ export const Popover = flowComponent("Popover", (props) => {
   const rootClassName = clsx(styles.popover, className);
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <PopoverContentView
         {...contentProps}
         className={rootClassName}
@@ -67,7 +67,7 @@ export const Popover = flowComponent("Popover", (props) => {
           {children}
         </OverlayContextProvider>
       </PopoverContentView>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 
