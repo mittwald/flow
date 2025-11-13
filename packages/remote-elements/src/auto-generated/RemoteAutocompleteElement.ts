@@ -12,17 +12,20 @@ export class RemoteAutocompleteElement extends FlowRemoteElement<RemoteAutocompl
   static override get remoteProperties() {
     return {
       className: {},
-      defaultInputValue: {},
+      defaultValue: {},
       disableAutoFocusFirst: {},
       disableVirtualFocus: {},
       filter: {},
       isInvalid: {},
       slot: {},
+      value: {},
     };
   }
 
   static override get remoteEvents() {
-    return {};
+    return {
+      change: {},
+    };
   }
 
   static override get remoteSlots() {

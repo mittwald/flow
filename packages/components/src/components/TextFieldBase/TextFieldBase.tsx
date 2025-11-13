@@ -31,7 +31,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
   } = props;
 
   const [charactersCount, setCharactersCount] = useState(
-    props.value?.length ?? 0,
+    props.defaultValue?.length ?? props.value?.length ?? 0,
   );
 
   const translation = useLocalizedStringFormatter(locales);
