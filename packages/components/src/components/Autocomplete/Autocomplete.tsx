@@ -21,17 +21,27 @@ import {
 } from "react-aria";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { useManagedValue } from "@/lib/hooks/useManagedValue";
+
 export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps,
-    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {
+    Omit<
+      Aria.AutocompleteProps,
+      "children" | "onInputChange" | "inputValue" | "defaultInputValue"
+    > {
   isInvalid?: boolean;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
 }
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const { children, isInvalid, ...rest } = props;
+
+  const { value, handleOnChange } = useManagedValue(props);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -68,6 +78,8 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     } else if (!controller.isOpen) {
       controller.open();
     }
+
+    handleOnChange?.(value);
   };
 
   const handleOptionAction = (key: Aria.Key) => {
@@ -101,13 +113,14 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   return (
     <div {...fieldProps}>
       <FieldErrorCaptureContext>
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider props={propsContext} clear>
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
               <Aria.Autocomplete
                 onInputChange={handleOnInputChange}
                 filter={contains}
                 disableAutoFocusFirst
+                inputValue={value}
                 {...rest}
               >
                 {children}

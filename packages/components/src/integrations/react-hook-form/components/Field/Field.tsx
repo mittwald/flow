@@ -11,7 +11,6 @@ import {
 } from "react-hook-form";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
-import { inheritProps } from "@/lib/propsContext/inherit/types";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useMergeRefs } from "use-callback-ref";
@@ -82,7 +81,6 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const fieldRef = useMergeRefs([controller.field.ref, hotkeyRef]);
 
   const fieldProps = {
-    ...inheritProps,
     ...controller.field,
     ref: fieldRef,
     value,
@@ -108,6 +106,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
 
   const propsContext: PropsContext = {
+    Autocomplete: fieldProps,
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,

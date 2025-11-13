@@ -15,6 +15,8 @@ import {
   TextField,
   PasswordCreationField,
   Autocomplete,
+  CheckboxGroup,
+  Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
@@ -46,7 +48,7 @@ export default function Page() {
   const form = useForm({
     defaultValues: {
       name: "",
-      email: "foo",
+      account: "p1122",
       confirm: false,
       age: 20,
       comment: "",
@@ -55,6 +57,8 @@ export default function Page() {
       city2: "Minden",
       file: [],
       password: "",
+      permissions: [],
+      agreeTerms: false,
     },
   });
 
@@ -84,17 +88,18 @@ export default function Page() {
           </TextField>
         </Field>
         <Field
-          name="email"
+          name="account"
           rules={{
             required: "Required!",
           }}
         >
           <Autocomplete>
-            <TextField>
-              <Label>Email</Label>
+            <TextField showCharacterCount>
+              <Label>Account</Label>
             </TextField>
-            <Option>Foo</Option>
-            <Option>Bar</Option>
+            <Option>p1234</Option>
+            <Option>p1122</Option>
+            <Option>p4567</Option>
           </Autocomplete>
         </Field>
         <Field name="comment">
@@ -140,6 +145,17 @@ export default function Page() {
               Auswählen
             </Button>
           </FileField>
+        </Field>
+        <Field name="permissions">
+          <CheckboxGroup>
+            <Label>Berechtigungen</Label>
+            <Checkbox value="read">Lesen</Checkbox>
+            <Checkbox value="write">Schreiben</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        <Field name="agreeTerms">
+          <Label>Terms</Label>
+          <Checkbox value="true">Verstanden!</Checkbox>
         </Field>
         <ActionGroup>
           <SubmitButton>Submit</SubmitButton>
