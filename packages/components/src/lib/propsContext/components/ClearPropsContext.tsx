@@ -11,7 +11,6 @@ export interface ClearPropsContextProps extends PropsWithChildren {
   keep?: FlowComponentName;
 }
 
-/** @flr-generate all */
 export const ClearPropsContext: FC<ClearPropsContextProps> = (props) => {
   const { children, keep } = props;
 
