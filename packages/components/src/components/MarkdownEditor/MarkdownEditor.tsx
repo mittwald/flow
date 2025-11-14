@@ -1,8 +1,4 @@
-import React, {
-  type KeyboardEventHandler,
-  type RefObject,
-  useState,
-} from "react";
+import React, { type KeyboardEvent, type RefObject, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -56,23 +52,35 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
-  const handleKeyDown: KeyboardEventHandler = (event) => {
+  const forceApplyValue = (
+    newValue: string,
+    newSelectionStart: number,
+    newSelectionEnd: number,
+  ) => {
+    if (localTextAreaRef.current) {
+      // we have to apply the value here by ref
+      // otherwise the calcucation of the scroll position
+      // would be off because the onChange must bubble trough
+      localTextAreaRef.current.value = newValue;
+      localTextAreaRef.current.selectionStart = newSelectionStart;
+      localTextAreaRef.current.selectionEnd = newSelectionEnd;
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key !== "Enter") {
       return;
     }
 
     const modifyParams = modifyValueByMarkdownSyntax(value, localTextAreaRef);
-
     if (!modifyParams) {
       return;
     }
 
     const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
-    if (localTextAreaRef.current) {
-      localTextAreaRef.current.selectionStart = newSelectionStart;
-      localTextAreaRef.current.selectionEnd = newSelectionEnd;
-      scrollToCursor(value, localTextAreaRef.current);
-    }
+
+    forceApplyValue(newValue, newSelectionStart, newSelectionEnd);
+    scrollToCursor(newValue, localTextAreaRef.current);
 
     event.preventDefault();
     handleOnChange(newValue);
@@ -85,12 +93,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       localTextAreaRef,
     );
 
-    if (localTextAreaRef.current) {
-      localTextAreaRef.current.selectionStart = newSelectionStart;
-      localTextAreaRef.current.selectionEnd = newSelectionEnd;
-      localTextAreaRef.current.focus();
-    }
-
+    forceApplyValue(newValue, newSelectionStart, newSelectionEnd);
     handleOnChange(newValue);
   };
 

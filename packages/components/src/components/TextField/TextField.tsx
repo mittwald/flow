@@ -26,7 +26,7 @@ export const TextField = flowComponent("TextField", (props) => {
     placeholder,
     ref,
     form,
-    inputContext = Aria.TextFieldContext,
+    inputContext = Aria.InputContext,
     ...rest
   } = props;
 

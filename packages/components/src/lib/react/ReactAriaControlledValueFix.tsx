@@ -10,13 +10,13 @@ import {
   useLayoutEffect,
   useEffect,
   useRef,
-  useState,
+  useMemo,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
 export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  inputContext: Context<any>;
+  inputContext: Context<Aria.ContextValue<any, any>>;
   props: unknown;
 }
 
@@ -46,6 +46,49 @@ export const ReactAriaControlledValueFix: FC<
   }
 
   const { ref, inputRef, ...inputProps } = child.props;
+  const isInteractingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const isInteracting = useRef<"idle" | "interacting">("idle");
+
+  const originalBlurFunction = inputProps.onBlur;
+  inputProps.onBlur = useMemo(
+    () => (event: Event) => {
+      isInteracting.current = "idle";
+
+      if (originalBlurFunction && typeof originalBlurFunction === "function") {
+        originalBlurFunction(event);
+      }
+    },
+    [originalBlurFunction],
+  );
+  const originalKeyDownFunction = inputProps.onKeyDown;
+  inputProps.onKeyDown = useMemo(
+    () => (event: KeyboardEvent) => {
+      if (!event.isTrusted || event.defaultPrevented) {
+        return;
+      }
+
+      isInteracting.current = "interacting";
+
+      if (isInteractingTimeoutRef.current) {
+        clearTimeout(isInteractingTimeoutRef.current);
+      }
+
+      isInteractingTimeoutRef.current = setTimeout(() => {
+        isInteracting.current = "idle";
+      }, 100);
+
+      if (
+        originalKeyDownFunction &&
+        typeof originalKeyDownFunction === "function"
+      ) {
+        originalKeyDownFunction(event);
+      }
+    },
+    [originalKeyDownFunction],
+  );
+
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
     inputRef ?? ref,
@@ -53,10 +96,6 @@ export const ReactAriaControlledValueFix: FC<
   );
 
   const elementRef = contextRef.current;
-  const isInteractingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
-  const [isInteracting, setIsInteracting] = useState(false);
 
   const isValidElementType =
     elementRef &&
@@ -74,56 +113,19 @@ export const ReactAriaControlledValueFix: FC<
 
     // sync the last known value when element reference is available
     emitElementValueChange(elementRef, deferredValueFromContext);
-
-    const onKeyDown = (event: Event) => {
-      if (!event.isTrusted) {
-        return;
-      }
-      setIsInteracting(() => true);
-
-      if (isInteractingTimeoutRef.current) {
-        clearTimeout(isInteractingTimeoutRef.current);
-      }
-      isInteractingTimeoutRef.current = setTimeout(() => {
-        setIsInteracting(() => false);
-      }, 100);
-    };
-    const onBlur = () => {
-      setIsInteracting(() => false);
-    };
-
-    elementRef.addEventListener("keydown", onKeyDown);
-    elementRef.addEventListener("blur", onBlur);
-
-    return () => {
-      elementRef.removeEventListener("keydown", onKeyDown);
-      elementRef.removeEventListener("blur", onBlur);
-
-      if (isInteractingTimeoutRef.current) {
-        clearTimeout(isInteractingTimeoutRef.current);
-      }
-    };
   }, [elementRef]);
 
   useLayoutEffect(() => {
-    if (!isValidElementType || isInteracting) {
+    if (!isValidElementType) {
       return;
     }
-    const {
-      selectionStart: originalSelectionStart,
-      selectionEnd: originalSelectionEnd,
-    } = elementRef;
+
+    if (isInteracting.current === "interacting") {
+      return;
+    }
 
     emitElementValueChange(elementRef, deferredValueFromContext);
-
-    const { selectionStart, selectionEnd } = elementRef;
-    if (selectionStart !== originalSelectionStart) {
-      elementRef.selectionStart = originalSelectionStart;
-    }
-    if (selectionEnd !== originalSelectionEnd) {
-      elementRef.selectionEnd = originalSelectionEnd;
-    }
-  }, [deferredValueFromContext, isInteracting]);
+  }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {
     ...contextProps,

@@ -2,15 +2,20 @@ import type { RefObject } from "react";
 
 export const scrollToCursor = (
   value: string,
-  textarea: HTMLTextAreaElement,
+  textarea: HTMLTextAreaElement | null,
 ) => {
+  if (!textarea) {
+    return;
+  }
+
   const { selectionStart } = textarea;
   const lineHeight = parseInt(
     getComputedStyle(textarea).lineHeight || "20",
     10,
   );
   const lines = value.slice(0, selectionStart).split("\n").length;
-  textarea.scrollTop = (lines - 1) * lineHeight;
+  // textarea.scrollTop = (lines - 1) * lineHeight;
+  textarea.scrollTo({ top: (lines - 1) * lineHeight, behavior: "smooth" });
 };
 
 export const modifyValueByMarkdownSyntax = (
