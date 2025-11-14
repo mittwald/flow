@@ -58,6 +58,7 @@ export const ContextMenuSection = flowComponent(
       </Aria.MenuSection>
     );
   },
+  { type: "layout" },
 );
 
 export default ContextMenuSection;
