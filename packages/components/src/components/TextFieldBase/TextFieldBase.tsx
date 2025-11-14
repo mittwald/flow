@@ -7,6 +7,10 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import type { UseFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "../FormField/FormField.module.scss";
+import {
+  ReactAriaControlledValueFix,
+  type ReactAriaControlledValueFixProps,
+} from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
@@ -16,6 +20,8 @@ export interface TextFieldBaseProps
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */
   showCharacterCount?: boolean;
+  /** @internal */
+  inputContext?: ReactAriaControlledValueFixProps["inputContext"];
 }
 
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
@@ -27,6 +33,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     ref,
     FieldErrorView,
     FieldErrorCaptureContext,
+    inputContext = Aria.InputContext,
     ...rest
   } = props;
 
@@ -71,7 +78,9 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     >
       <FieldErrorCaptureContext>
         {children}
-        {input}
+        <ReactAriaControlledValueFix inputContext={inputContext} props={props}>
+          {input}
+        </ReactAriaControlledValueFix>
         {showCharacterCount && (
           <FieldDescription className={styles.fieldDescription}>
             {charactersCountDescription}

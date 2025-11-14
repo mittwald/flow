@@ -38,6 +38,7 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
       hidden: {},
       id: {},
       inert: {},
+      inputContext: {},
       inputMode: {},
       inputRef: {},
       isDisabled: {},

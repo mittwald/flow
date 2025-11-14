@@ -10,6 +10,7 @@ import {
   useLayoutEffect,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -52,7 +53,10 @@ export const ReactAriaControlledValueFix: FC<
   );
 
   const elementRef = contextRef.current;
-  const isInFocus = useRef(false);
+  const isInteractingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const [isInteracting, setIsInteracting] = useState(false);
 
   const isValidElementType =
     elementRef &&
@@ -71,35 +75,55 @@ export const ReactAriaControlledValueFix: FC<
     // sync the last known value when element reference is available
     emitElementValueChange(elementRef, deferredValueFromContext);
 
-    const onFocus = (event: Event) => {
-      isInFocus.current = !!event?.isTrusted;
+    const onKeyDown = (event: Event) => {
+      if (!event.isTrusted) {
+        return;
+      }
+      setIsInteracting(() => true);
+
+      if (isInteractingTimeoutRef.current) {
+        clearTimeout(isInteractingTimeoutRef.current);
+      }
+      isInteractingTimeoutRef.current = setTimeout(() => {
+        setIsInteracting(() => false);
+      }, 100);
     };
     const onBlur = () => {
-      isInFocus.current = false;
+      setIsInteracting(() => false);
     };
 
-    elementRef.addEventListener("focus", onFocus);
+    elementRef.addEventListener("keydown", onKeyDown);
     elementRef.addEventListener("blur", onBlur);
 
     return () => {
-      elementRef.removeEventListener("focus", onFocus);
+      elementRef.removeEventListener("keydown", onKeyDown);
       elementRef.removeEventListener("blur", onBlur);
+
+      if (isInteractingTimeoutRef.current) {
+        clearTimeout(isInteractingTimeoutRef.current);
+      }
     };
   }, [elementRef]);
 
   useLayoutEffect(() => {
-    if (!isValidElementType || isInFocus.current) {
+    if (!isValidElementType || isInteracting) {
       return;
     }
+    const {
+      selectionStart: originalSelectionStart,
+      selectionEnd: originalSelectionEnd,
+    } = elementRef;
 
     emitElementValueChange(elementRef, deferredValueFromContext);
-    if (elementRef) {
-      const { selectionStart, selectionEnd } = elementRef;
-      elementRef.focus();
-      elementRef.selectionStart = selectionStart;
-      elementRef.selectionEnd = selectionEnd;
+
+    const { selectionStart, selectionEnd } = elementRef;
+    if (selectionStart !== originalSelectionStart) {
+      elementRef.selectionStart = originalSelectionStart;
     }
-  }, [deferredValueFromContext]);
+    if (selectionEnd !== originalSelectionEnd) {
+      elementRef.selectionEnd = originalSelectionEnd;
+    }
+  }, [deferredValueFromContext, isInteracting]);
 
   const uncontrolledContextProps = {
     ...contextProps,

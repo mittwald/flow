@@ -9,6 +9,7 @@ import {
   Label,
   Option,
   MarkdownEditor,
+  NumberField,
   Section,
   Select,
   TextArea,
@@ -106,6 +107,11 @@ export default function Page() {
           <TextArea maxLength={100}>
             <Label>Comment</Label>
           </TextArea>
+        </Field>
+        <Field name="age">
+          <NumberField>
+            <Label>Age</Label>
+          </NumberField>
         </Field>
         <Field name="city">
           <ComboBox>

@@ -1,8 +1,6 @@
 import React, {
   type KeyboardEventHandler,
   type RefObject,
-  useEffect,
-  useRef,
   useState,
 } from "react";
 import styles from "./MarkdownEditor.module.scss";
@@ -26,7 +24,7 @@ import {
 
 export type MarkdownEditorMode = "editor" | "preview";
 
-export type MarkdownEditorProps = Omit<TextAreaProps, "ref"> &
+export type MarkdownEditorProps = Omit<TextAreaProps, "ref" | "inputContext"> &
   Pick<MarkdownProps, "headingOffset" | "ref"> & {
     inputRef?: RefObject<HTMLTextAreaElement | null>;
   };
@@ -47,42 +45,10 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   } = props;
 
   const localRef = useObjectRef(ref);
-  const localInputRef = useObjectRef(inputRef);
+  const localTextAreaRef = useObjectRef(inputRef);
 
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
   const { value, handleOnChange } = useManagedValue(props);
-
-  const selectionPresent = useRef<{
-    shouldScrollToCursor: boolean;
-    selectionStart: number | null;
-    selectionEnd: number | null;
-  } | null>(null);
-
-  useEffect(() => {
-    const inputRef = localInputRef.current;
-    const present = selectionPresent.current;
-
-    if (!present || !inputRef) {
-      return;
-    }
-
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          inputRef.setSelectionRange(
-            present.selectionStart,
-            present.selectionEnd,
-          );
-
-          if (present.shouldScrollToCursor) {
-            scrollToCursor(value, inputRef);
-          }
-        });
-      });
-
-      selectionPresent.current = null;
-    }, 0);
-  }, [selectionPresent.current, localInputRef.current, value]);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -95,23 +61,20 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       return;
     }
 
-    const modifyParams = modifyValueByMarkdownSyntax(value, localInputRef);
+    const modifyParams = modifyValueByMarkdownSyntax(value, localTextAreaRef);
 
     if (!modifyParams) {
       return;
     }
 
     const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
+    if (localTextAreaRef.current) {
+      localTextAreaRef.current.selectionStart = newSelectionStart;
+      localTextAreaRef.current.selectionEnd = newSelectionEnd;
+      scrollToCursor(value, localTextAreaRef.current);
+    }
 
     event.preventDefault();
-    localInputRef.current?.blur();
-
-    selectionPresent.current = {
-      shouldScrollToCursor: true,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
-
     handleOnChange(newValue);
   };
 
@@ -119,14 +82,14 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     const { newValue, newSelectionStart, newSelectionEnd } = modifyValueByType(
       value,
       type,
-      localInputRef,
+      localTextAreaRef,
     );
 
-    selectionPresent.current = {
-      shouldScrollToCursor: false,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
+    if (localTextAreaRef.current) {
+      localTextAreaRef.current.selectionStart = newSelectionStart;
+      localTextAreaRef.current.selectionEnd = newSelectionEnd;
+      localTextAreaRef.current.focus();
+    }
 
     handleOnChange(newValue);
   };
@@ -152,7 +115,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           aria-hidden={mode === "preview"}
           isReadOnly={isReadOnly || mode === "preview"}
           isDisabled={isDisabled}
-          ref={localInputRef}
+          ref={localTextAreaRef}
           value={value}
           rows={rows}
           autoResizeMaxRows={autoResizeMaxRows}
@@ -163,7 +126,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
             headingOffset={headingOffset}
             className={styles.markdown}
             style={{
-              height: localInputRef.current?.offsetHeight,
+              height: localTextAreaRef.current?.offsetHeight,
             }}
           >
             {value}
