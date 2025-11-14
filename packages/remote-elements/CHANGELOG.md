@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.557](https://github.com/mittwald/flow/compare/0.2.0-alpha.556...0.2.0-alpha.557) (2025-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.556](https://github.com/mittwald/flow/compare/0.2.0-alpha.555...0.2.0-alpha.556) (2025-11-13)
+
+### Bug Fixes
+
+* **Remote:** do not use Remote-ClearPropsContext ([#2129](https://github.com/mittwald/flow/issues/2129)) ([5128fc1](https://github.com/mittwald/flow/commit/5128fc1526a89e8588b9dea17d2ce100a758c4d0))
+
 # [0.2.0-alpha.555](https://github.com/mittwald/flow/compare/0.2.0-alpha.554...0.2.0-alpha.555) (2025-11-12)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
