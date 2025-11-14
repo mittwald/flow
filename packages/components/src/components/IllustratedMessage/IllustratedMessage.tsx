@@ -47,7 +47,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
 
   return (
     <div {...rest} className={rootClassName}>
-      <PropsContextProvider clear props={propsContext}>
+      <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
     </div>

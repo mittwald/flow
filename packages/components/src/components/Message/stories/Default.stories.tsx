@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Message } from "@/components/Message";
 import { Header } from "@/components/Header";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";

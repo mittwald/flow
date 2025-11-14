@@ -13,29 +13,35 @@ export interface AlignProps
     FlowComponentProps {}
 
 /** @flr-generate all */
-export const Align = flowComponent("Align", (props) => {
-  const { children, className } = props;
+export const Align = flowComponent(
+  "Align",
+  (props) => {
+    const { children, className } = props;
 
-  const rootClassName = clsx(styles.align, className);
+    const rootClassName = clsx(styles.align, className);
 
-  const propsContext: PropsContext = {
-    Text: { className: styles.text },
-    Button: { className: styles.button },
-    Avatar: { className: styles.avatar, size: "m" },
-    CopyButton: { size: "s", className: styles.copyButton },
-    Icon: { size: "s", className: styles.icon },
-    ContextualHelpTrigger: {
-      Button: {
-        className: styles.contextualHelpTriggerButton,
+    const propsContext: PropsContext = {
+      Text: { className: styles.text },
+      Button: { className: styles.button },
+      Avatar: { className: styles.avatar, size: "m" },
+      CopyButton: { size: "s", className: styles.copyButton },
+      Icon: { size: "s", className: styles.icon },
+      ContextualHelpTrigger: {
+        Button: {
+          className: styles.contextualHelpTriggerButton,
+        },
       },
-    },
-  };
+    };
 
-  return (
-    <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>{children}</div>
-    </PropsContextProvider>
-  );
-});
+    return (
+      <PropsContextProvider props={propsContext}>
+        <div className={rootClassName}>{children}</div>
+      </PropsContextProvider>
+    );
+  },
+  {
+    type: "layout",
+  },
+);
 
 export default Align;
