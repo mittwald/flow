@@ -38,7 +38,7 @@ export const Rating = flowComponent("Rating", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
   } = useFieldComponent(props);
@@ -63,7 +63,7 @@ export const Rating = flowComponent("Rating", (props) => {
     >
       {(renderProps) => (
         <>
-          <FieldErrorResetContext>
+          <FieldErrorCaptureContext>
             <PropsContextProvider props={fieldPropsContext}>
               {children}
               <div className={styles.ratingSegments}>
@@ -81,7 +81,7 @@ export const Rating = flowComponent("Rating", (props) => {
                   ))}
               </div>
             </PropsContextProvider>
-          </FieldErrorResetContext>
+          </FieldErrorCaptureContext>
           <FieldErrorView />
         </>
       )}
