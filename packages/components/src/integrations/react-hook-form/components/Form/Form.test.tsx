@@ -1,8 +1,16 @@
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
-import { Form, typedField } from "@/integrations/react-hook-form";
+import { Render } from "@/index/default";
+import {
+  Field,
+  Form,
+  typedField,
+  useFormContext,
+  type FormProps,
+} from "@/integrations/react-hook-form";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import type { FC } from "react";
 import { useForm } from "react-hook-form";
 
 const handleSubmit = vitest.fn();
@@ -24,13 +32,17 @@ describe("resetting", () => {
     initialValue = undefined;
   });
 
-  const TestForm = (props: { textField?: TextFieldProps }) => {
+  const TestForm = (props: {
+    textField?: TextFieldProps;
+    form?: FormProps<Values>;
+  }) => {
     const form = useForm<Values>({
       defaultValues: initialValue
         ? {
             test: initialValue,
           }
         : undefined,
+      ...props.form,
     });
     const Field = typedField(form);
 
@@ -95,4 +107,52 @@ describe("resetting", () => {
       expect(field).toHaveDisplayValue(expected);
     },
   );
+});
+
+describe("readonly", () => {
+  const TestForm: FC<Partial<FormProps<object>>> = (props) => {
+    const form = useForm<object>();
+    return (
+      <Form
+        {...props}
+        form={form}
+        onSubmit={() => {
+          // void
+        }}
+      >
+        <Field name="test">
+          <TextField placeholder="textfield" />
+        </Field>
+        <Render>
+          {() => {
+            const ctx = useFormContext();
+            return (
+              <Button
+                data-testid="toggle-readonly"
+                onPress={() => ctx.setReadOnly((prev) => !prev)}
+              >
+                Toggle readonly
+              </Button>
+            );
+          }}
+        </Render>
+      </Form>
+    );
+  };
+
+  test("readonly prop cascades to fields", () => {
+    render(<TestForm isReadOnly />);
+    const textfield = screen.getByPlaceholderText("textfield");
+    expect(textfield.hasAttribute("readonly")).toBe(true);
+  });
+
+  test("toggling readonly via context works", async () => {
+    render(<TestForm />);
+    const toggleButton = screen.getByTestId("toggle-readonly");
+    const textfield = screen.getByPlaceholderText("textfield");
+
+    expect(textfield.hasAttribute("readonly")).toBe(false);
+    await userEvent.click(toggleButton);
+    expect(textfield.hasAttribute("readonly")).toBe(true);
+  });
 });

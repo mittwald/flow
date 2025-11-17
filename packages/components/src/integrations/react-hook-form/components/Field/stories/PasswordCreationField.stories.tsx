@@ -3,7 +3,13 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -94,7 +100,10 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field
             name="user"
-            rules={{ required: "Jo dwag a password is required!" }}
+            rules={{
+              required: true,
+              validate: generatePasswordCreationFieldValidation(),
+            }}
           >
             <PasswordCreationField>
               <Label>Password</Label>
@@ -103,7 +112,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -145,8 +155,8 @@ export const WithForm: Story = {
           </PasswordCreationField>
         </Field>
         <br />
-        <Button onPress={() => form.reset()}>Reset</Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },
@@ -218,7 +228,8 @@ export const WithFocus: Story = {
         <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

@@ -2,7 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -41,7 +47,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -101,7 +108,8 @@ export const WithFocus: Story = {
         <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

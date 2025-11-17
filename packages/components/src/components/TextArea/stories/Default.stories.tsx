@@ -78,13 +78,13 @@ export const Resizeable: Story = {
 };
 
 export const HorizontallyResizeable: Story = {
-  args: { allowHorizontalResize: true },
+  args: { allowResize: "horizontal" },
 };
 
 export const VerticallyResizeable: Story = {
-  args: { allowVerticalResize: true },
+  args: { allowResize: "vertical" },
 };
 
 export const VerticallyAndAutoResizeable: Story = {
-  args: { allowVerticalResize: true, rows: 1, autoResizeMaxRows: 5 },
+  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
 };

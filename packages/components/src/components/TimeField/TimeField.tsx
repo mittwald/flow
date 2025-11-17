@@ -17,20 +17,26 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
 export const TimeField = flowComponent("TimeField", (props) => {
   const { children, ref, ...rest } = props;
 
-  const { FieldErrorView, fieldPropsContext, fieldProps } =
-    useFieldComponent(props);
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   const localRef = useObjectRef(ref);
   useMakeFocusable(localRef);
 
   return (
     <Aria.TimeField ref={localRef} hourCycle={24} {...rest} {...fieldProps}>
-      <Aria.DateInput className={styles.dateInput}>
-        {(segment) => <Aria.DateSegment segment={segment} />}
-      </Aria.DateInput>
-      <PropsContextProvider props={fieldPropsContext}>
-        {children}
-      </PropsContextProvider>
+      <FieldErrorCaptureContext>
+        <Aria.DateInput className={styles.dateInput}>
+          {(segment) => <Aria.DateSegment segment={segment} />}
+        </Aria.DateInput>
+        <PropsContextProvider props={fieldPropsContext}>
+          {children}
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </Aria.TimeField>
   );

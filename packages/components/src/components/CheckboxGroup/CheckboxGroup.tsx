@@ -26,7 +26,7 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     FieldErrorView,
     fieldPropsContext,
     fieldProps,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
   } = useFieldComponent(props);
 
   const propsContext: PropsContext = {
@@ -55,7 +55,7 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       ref={localCheckboxGroupRef}
     >
       <TunnelProvider>
-        <FieldErrorResetContext>
+        <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext} clear>
             {children}
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
@@ -72,7 +72,7 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
               <TunnelExit id="checkboxes" />
             </ColumnLayout>
           </PropsContextProvider>
-        </FieldErrorResetContext>
+        </FieldErrorCaptureContext>
         <FieldErrorView />
       </TunnelProvider>
     </Aria.CheckboxGroup>

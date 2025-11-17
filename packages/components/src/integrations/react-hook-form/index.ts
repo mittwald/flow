@@ -1,3 +1,8 @@
 export * from "./components/Field";
 export * from "./components/Form";
-export { useFormContext } from "./components/context/formContext";
+export * from "./components/SubmitButton";
+export * from "./components/ResetButton";
+export {
+  useFormContext,
+  useOptionalFormContext,
+} from "./components/context/formContext";

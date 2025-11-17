@@ -3,6 +3,8 @@ import useSelector from "@/lib/mobx/useSelector";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
 import { useStatic } from "@/lib/hooks/useStatic";
+import type List from "@/components/List/model/List";
+import { uniqueBy } from "remeda";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 type DataBatches<T> = ListData<T>[];
@@ -12,8 +14,10 @@ export class IncrementalLoaderState<T> {
   public dataBatches: DataBatches<T> = [];
   public prevDataBatches: DataBatches<T> = [];
   public batchLoadingStates: BatchesLoadingState = ["void"];
+  public readonly list: List<T>;
 
-  private constructor() {
+  private constructor(list: List<T>) {
+    this.list = list;
     makeObservable(this, {
       prevDataBatches: false,
       useMergedData: false,
@@ -28,8 +32,8 @@ export class IncrementalLoaderState<T> {
     });
   }
 
-  public static useNew<T>(): IncrementalLoaderState<T> {
-    return useStatic(() => new IncrementalLoaderState<T>());
+  public static useNew<T>(list: List<T>): IncrementalLoaderState<T> {
+    return useStatic(() => new IncrementalLoaderState<T>(list));
   }
 
   public reset(): void {
@@ -61,7 +65,12 @@ export class IncrementalLoaderState<T> {
     const dataBatches =
       this.dataBatches.length === 0 ? this.prevDataBatches : this.dataBatches;
 
-    return dataBatches.flatMap((d) => d);
+    const merged = dataBatches.flatMap((d) => d);
+    if (this.list.getItemId) {
+      return uniqueBy(merged, this.list.getItemId);
+    } else {
+      return merged;
+    }
   }
 
   public useMergedData(): T[] {

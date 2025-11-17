@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { type InsertType } from "@/components/MarkdownEditor/lib/insertAtCursor";
+import { type InsertType } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { Button, type ButtonProps } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
@@ -18,6 +18,7 @@ export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
   return (
     <Button
       {...rest}
+      data-button-type={type}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"

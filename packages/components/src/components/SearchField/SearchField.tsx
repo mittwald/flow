@@ -23,7 +23,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
 
   const {
     FieldErrorView,
-    FieldErrorResetContext,
+    FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
   } = useFieldComponent(props);
@@ -45,12 +45,12 @@ export const SearchField = flowComponent("SearchField", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
     >
       <PropsContextProvider props={fieldPropsContext}>
-        <FieldErrorResetContext>{children}</FieldErrorResetContext>
+        <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
       </PropsContextProvider>
       <div className={styles.inputContainer}>
         <IconSearch className={styles.searchIcon} />
         <ReactAriaControlledValueFix
-          inputContext={Aria.InputContext}
+          inputContext={Aria.SearchFieldContext}
           props={props}
         >
           <Aria.Input

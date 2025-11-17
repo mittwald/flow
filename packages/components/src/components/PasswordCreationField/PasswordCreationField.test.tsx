@@ -13,6 +13,7 @@ import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
 import { sleep } from "@/lib/promises/sleep";
+import userEvent from "@testing-library/user-event";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -100,8 +101,9 @@ describe("PasswordCreationField Tests", () => {
   });
 
   test("shows correct password hint for max rule", async () => {
+    const user = userEvent;
     const maxNumberPolicy = Policy.fromDeclaration({
-      minComplexity: 3,
+      minComplexity: 0,
       rules: [
         {
           identifier: "numbers",
@@ -112,52 +114,43 @@ describe("PasswordCreationField Tests", () => {
       ],
     });
 
-    const renderResult = await act(() =>
-      render(
-        <I18nProvider locale="de">
-          <PasswordCreationFieldTestComponent
-            validationPolicy={maxNumberPolicy}
-          >
-            <Label>Password</Label>
-          </PasswordCreationFieldTestComponent>
-        </I18nProvider>,
-      ),
+    const renderResult = render(
+      <I18nProvider locale="de">
+        <PasswordCreationFieldTestComponent validationPolicy={maxNumberPolicy}>
+          <Label>Password</Label>
+        </PasswordCreationFieldTestComponent>
+      </I18nProvider>,
     );
 
     const inputElement = renderResult.container.querySelector("input");
+    expect(inputElement).toHaveDisplayValue("");
     assert(inputElement);
-    expect(inputElement).toHaveValue("");
 
-    await act(async () => {
-      fireEvent.change(inputElement, {
-        target: { value: "12" },
-      });
-      await sleep(250);
-    });
+    await user.type(inputElement, "12");
+    expect(inputElement).toHaveDisplayValue("12");
 
     const infoButton = renderResult.container.querySelector(
       'button[data-component="showPasswordRules"]',
     );
     assert(infoButton);
-
-    await act(() => fireEvent.click(infoButton));
+    await user.click(infoButton);
 
     const rules = renderResult.baseElement.querySelectorAll("[data-rule]");
     expect(rules).toHaveLength(1);
     expect(rules[0]).toHaveAttribute("data-rule-valid", "true");
     expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
 
-    await act(async () => {
-      fireEvent.change(inputElement, {
-        target: { value: "123" },
-      });
-      await sleep(250);
-    });
+    await user.click(inputElement);
+    await user.type(inputElement, "3");
+    expect(inputElement).toHaveDisplayValue("123");
 
-    await waitFor(() =>
-      expect(rules[0]).toHaveAttribute("data-rule-valid", "false"),
-    );
-    expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+    await user.click(infoButton);
+    await waitFor(() => {
+      const rules = renderResult.baseElement.querySelectorAll("[data-rule]");
+      expect(rules).toHaveLength(1);
+      expect(rules[0]).toHaveAttribute("data-rule-valid", "false");
+      expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+    });
   });
 
   test("shows password hints when clicking on info", async () => {

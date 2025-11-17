@@ -6,7 +6,10 @@ import {
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
+  useDeferredValue,
   useLayoutEffect,
+  useEffect,
+  useRef,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
@@ -19,6 +22,7 @@ export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
 interface ChildProps {
   [key: string]: unknown;
   ref: ForwardedRef<Element>;
+  inputRef: ForwardedRef<Element>;
 }
 
 /**
@@ -40,24 +44,62 @@ export const ReactAriaControlledValueFix: FC<
     throw new Error("Expected valid element");
   }
 
-  const { ref, ...inputProps } = child.props;
+  const { ref, inputRef, ...inputProps } = child.props;
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
-    ref,
+    inputRef ?? ref,
     context,
   );
 
-  useLayoutEffect(() => {
-    const element = contextRef.current;
+  const elementRef = contextRef.current;
+  const isInFocus = useRef(false);
 
-    if (
-      element instanceof HTMLInputElement ||
-      element instanceof HTMLTextAreaElement
-    ) {
-      const newValue = String(contextProps.value ?? "");
-      emitElementValueChange(element, newValue);
+  const isValidElementType =
+    elementRef &&
+    (elementRef instanceof HTMLInputElement ||
+      elementRef instanceof HTMLTextAreaElement);
+
+  const deferredValueFromContext = useDeferredValue(
+    String(contextProps.value ?? ""),
+  );
+
+  useEffect(() => {
+    if (!isValidElementType || !elementRef) {
+      return;
     }
-  }, [contextProps.value]);
+
+    // sync the last known value when element reference is available
+    emitElementValueChange(elementRef, deferredValueFromContext);
+
+    const onFocus = (event: Event) => {
+      isInFocus.current = !!event?.isTrusted;
+    };
+    const onBlur = () => {
+      isInFocus.current = false;
+    };
+
+    elementRef.addEventListener("focus", onFocus);
+    elementRef.addEventListener("blur", onBlur);
+
+    return () => {
+      elementRef.removeEventListener("focus", onFocus);
+      elementRef.removeEventListener("blur", onBlur);
+    };
+  }, [elementRef]);
+
+  useLayoutEffect(() => {
+    if (!isValidElementType || isInFocus.current) {
+      return;
+    }
+
+    emitElementValueChange(elementRef, deferredValueFromContext);
+    if (elementRef) {
+      const { selectionStart, selectionEnd } = elementRef;
+      elementRef.focus();
+      elementRef.selectionStart = selectionStart;
+      elementRef.selectionEnd = selectionEnd;
+    }
+  }, [deferredValueFromContext]);
 
   const uncontrolledContextProps = {
     ...contextProps,

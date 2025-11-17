@@ -1,16 +1,13 @@
 @use "@/styles/mixins/formControl";
 
 .markdownEditor {
+  display: grid;
+
   grid-template-areas:
     "label"
     "toolbar"
     "content"
     "fieldDescription";
-
-  &.mode-editor,
-  &.mode-preview {
-    display: grid;
-  }
 
   .toolbar {
     grid-area: toolbar;
@@ -43,6 +40,10 @@
     @include formControl.formColor;
   }
 
+  :global(.flow--form-field) {
+    display: contents;
+  }
+
   textarea,
   .markdown {
     grid-area: content;
@@ -62,8 +63,12 @@
 
   &.mode-preview {
     textarea {
+      position: absolute;
       opacity: 0;
       pointer-events: none;
+      width: 1px;
+      height: 1px;
+      left: 0;
     }
   }
 

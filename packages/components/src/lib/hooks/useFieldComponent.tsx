@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
 import clsx, { type ClassValue } from "clsx";
@@ -12,7 +11,7 @@ interface FieldComponentProps {
 }
 
 export interface UseFieldComponent {
-  FieldErrorResetContext: FC<PropsWithChildren>;
+  FieldErrorCaptureContext: FC<PropsWithChildren>;
   FieldErrorView: FC;
   fieldPropsContext: PropsContext;
   fieldProps: {
@@ -23,8 +22,7 @@ export interface UseFieldComponent {
 export const useFieldComponent = (
   props: FieldComponentProps,
 ): UseFieldComponent => {
-  const { FieldErrorView, fieldErrorViewPropsContext, FieldErrorResetContext } =
-    useFieldError();
+  const { FieldErrorView, FieldErrorCaptureContext } = useFieldError();
 
   // setting up the props context for all components that
   // are part of a form control
@@ -37,20 +35,11 @@ export const useFieldComponent = (
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
     },
-    ...fieldErrorViewPropsContext,
   };
 
-  // wrapping the FieldErrorView in a PropsContextProvider to ensure
-  // it's always in the correct props context
-  const FieldErrorViewWithPropsContext = () => (
-    <PropsContextProvider props={fieldErrorViewPropsContext}>
-      <FieldErrorView />
-    </PropsContextProvider>
-  );
-
   return {
-    FieldErrorResetContext,
-    FieldErrorView: FieldErrorViewWithPropsContext,
+    FieldErrorView,
+    FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps: {
       className: clsx(formFieldStyles.formField),

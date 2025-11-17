@@ -45,8 +45,12 @@ export const Switch = flowComponent("Switch", (props) => {
     localInputRef.current?.focus();
   });
 
-  const { FieldErrorView, fieldPropsContext, fieldProps } =
-    useFieldComponent(props);
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   const propsContext: PropsContext = {
     ...fieldPropsContext,
@@ -58,23 +62,25 @@ export const Switch = flowComponent("Switch", (props) => {
 
   return (
     <div {...fieldProps}>
-      <Aria.Switch
-        {...rest}
-        className={rootClassName}
-        ref={localSwitchRef}
-        inputRef={localInputRef}
-      >
-        {({ isSelected }) => (
-          <PropsContextProvider props={propsContext}>
-            <div className={styles.track}>
-              <div className={styles.handle}>
-                {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+      <FieldErrorCaptureContext>
+        <Aria.Switch
+          {...rest}
+          className={rootClassName}
+          ref={localSwitchRef}
+          inputRef={localInputRef}
+        >
+          {({ isSelected }) => (
+            <PropsContextProvider props={propsContext}>
+              <div className={styles.track}>
+                <div className={styles.handle}>
+                  {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+                </div>
               </div>
-            </div>
-            <div className={labelStyles.label}>{children}</div>
-          </PropsContextProvider>
-        )}
-      </Aria.Switch>
+              <div className={labelStyles.label}>{children}</div>
+            </PropsContextProvider>
+          )}
+        </Aria.Switch>
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </div>
   );

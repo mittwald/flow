@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
@@ -9,7 +9,7 @@ import {
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
+import { ClearPropsContext } from "@/index/default";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
@@ -32,6 +32,7 @@ export const Popover = flowComponent("Popover", (props) => {
     children,
     className,
     controller: controllerFromProps,
+    onOpenChange: onOpenChangeFromProps,
     defaultOpen = false,
     ref,
     ...contentProps
@@ -48,19 +49,25 @@ export const Popover = flowComponent("Popover", (props) => {
   const rootClassName = clsx(styles.popover, className);
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <PopoverContentView
         {...contentProps}
         className={rootClassName}
         isOpen={isOpen}
-        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+        onOpenChange={(isOpen) => {
+          if (!onOpenChangeFromProps) {
+            controller.setOpen(isOpen);
+          } else {
+            onOpenChangeFromProps(isOpen);
+          }
+        }}
         ref={ref}
       >
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>
       </PopoverContentView>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

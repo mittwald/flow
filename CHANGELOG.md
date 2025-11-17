@@ -3,6 +3,126 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.558](https://github.com/mittwald/flow/compare/0.2.0-alpha.557...0.2.0-alpha.558) (2025-11-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.557](https://github.com/mittwald/flow/compare/0.2.0-alpha.556...0.2.0-alpha.557) (2025-11-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.556](https://github.com/mittwald/flow/compare/0.2.0-alpha.555...0.2.0-alpha.556) (2025-11-13)
+
+### Bug Fixes
+
+* **Remote:** do not use Remote-ClearPropsContext ([#2129](https://github.com/mittwald/flow/issues/2129)) ([5128fc1](https://github.com/mittwald/flow/commit/5128fc1526a89e8588b9dea17d2ce100a758c4d0))
+
+# [0.2.0-alpha.555](https://github.com/mittwald/flow/compare/0.2.0-alpha.554...0.2.0-alpha.555) (2025-11-12)
+
+### Bug Fixes
+
+* **NumberFiled:** fix disabled style ([#2127](https://github.com/mittwald/flow/issues/2127)) ([abec576](https://github.com/mittwald/flow/commit/abec5760c1f071bb516026f78259446b5a58f29d))
+
+# [0.2.0-alpha.554](https://github.com/mittwald/flow/compare/0.2.0-alpha.553...0.2.0-alpha.554) (2025-11-12)
+
+### Bug Fixes
+
+* **footer:** text styling ([#2126](https://github.com/mittwald/flow/issues/2126)) ([3ece7df](https://github.com/mittwald/flow/commit/3ece7df89faf06b64a583d060c02e36407620165))
+
+# [0.2.0-alpha.553](https://github.com/mittwald/flow/compare/0.2.0-alpha.552...0.2.0-alpha.553) (2025-11-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.552](https://github.com/mittwald/flow/compare/0.2.0-alpha.551...0.2.0-alpha.552) (2025-11-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.551](https://github.com/mittwald/flow/compare/0.2.0-alpha.550...0.2.0-alpha.551) (2025-11-10)
+
+### Bug Fixes
+
+* **ComboBox:** fix combo box with long texts ([#2124](https://github.com/mittwald/flow/issues/2124)) ([9ea8a53](https://github.com/mittwald/flow/commit/9ea8a5362b6d6f7848048b000137f8320cee29d4))
+
+# [0.2.0-alpha.550](https://github.com/mittwald/flow/compare/0.2.0-alpha.549...0.2.0-alpha.550) (2025-11-10)
+
+### Bug Fixes
+
+* **List:** vertically center top content ([#2123](https://github.com/mittwald/flow/issues/2123)) ([113cd6c](https://github.com/mittwald/flow/commit/113cd6c4dd139f68d04efa2bf7b5c0abeb2fa53b))
+
+# [0.2.0-alpha.549](https://github.com/mittwald/flow/compare/0.2.0-alpha.548...0.2.0-alpha.549) (2025-11-07)
+
+### Bug Fixes
+
+* **ColumnLayout:** fix box elements not stretching vertically ([#2117](https://github.com/mittwald/flow/issues/2117)) ([3684b5c](https://github.com/mittwald/flow/commit/3684b5c9e52f9e6dc47c8a34804277a0289778ef))
+
+# [0.2.0-alpha.548](https://github.com/mittwald/flow/compare/0.2.0-alpha.547...0.2.0-alpha.548) (2025-11-06)
+
+### Bug Fixes
+
+* **List:** avoid duplicate IDs triggered by parallel batch invalidation ([90bfe27](https://github.com/mittwald/flow/commit/90bfe276f0231a9e51b4180e7bf31218a9be0807))
+
+# [0.2.0-alpha.547](https://github.com/mittwald/flow/compare/0.2.0-alpha.546...0.2.0-alpha.547) (2025-11-06)
+
+### Bug Fixes
+
+* **IllustratedMessage:** fix heading margin for illustrated messages in sections ([#2116](https://github.com/mittwald/flow/issues/2116)) ([88b3f73](https://github.com/mittwald/flow/commit/88b3f73e68586b3bd036c04e5404b1694bde2afc))
+
+# [0.2.0-alpha.546](https://github.com/mittwald/flow/compare/0.2.0-alpha.545...0.2.0-alpha.546) (2025-11-05)
+
+### Bug Fixes
+
+* **Modal:** fix size of heading in sections in header within modals ([#2115](https://github.com/mittwald/flow/issues/2115)) ([986935e](https://github.com/mittwald/flow/commit/986935e8284fde7b73346eeb4ad1ced4b8c59c06))
+
+# [0.2.0-alpha.545](https://github.com/mittwald/flow/compare/0.2.0-alpha.544...0.2.0-alpha.545) (2025-11-05)
+
+### Bug Fixes
+
+* **Alert:** fix icon does not update when status changes ([#2114](https://github.com/mittwald/flow/issues/2114)) ([8d93763](https://github.com/mittwald/flow/commit/8d9376306a9030e52372c67858070a3ac13fa802))
+
+# [0.2.0-alpha.544](https://github.com/mittwald/flow/compare/0.2.0-alpha.543...0.2.0-alpha.544) (2025-11-04)
+
+### Bug Fixes
+
+* **Remote:** value for input and textareas stutter ([#2106](https://github.com/mittwald/flow/issues/2106)) ([5566c6c](https://github.com/mittwald/flow/commit/5566c6c2fa77a5c44aee5b1be3b8044d8defd26e))
+
+# [0.2.0-alpha.543](https://github.com/mittwald/flow/compare/0.2.0-alpha.542...0.2.0-alpha.543) (2025-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.542](https://github.com/mittwald/flow/compare/0.2.0-alpha.541...0.2.0-alpha.542) (2025-11-04)
+
+### Bug Fixes
+
+* **List:** fix tile corners ([#2104](https://github.com/mittwald/flow/issues/2104)) ([77f9bbb](https://github.com/mittwald/flow/commit/77f9bbb842b21002225df322c311dc192c480d34))
+
+### Features
+
+* **Chat:** improve styling ([#2097](https://github.com/mittwald/flow/issues/2097)) ([fe1603e](https://github.com/mittwald/flow/commit/fe1603e756afb0679cb0ad32742919c5356547d7))
+
+# [0.2.0-alpha.541](https://github.com/mittwald/flow/compare/0.2.0-alpha.540...0.2.0-alpha.541) (2025-11-03)
+
+### Bug Fixes
+
+* **Form:** fix correct readonly prop propagation ([#2101](https://github.com/mittwald/flow/issues/2101)) ([271e052](https://github.com/mittwald/flow/commit/271e052119b8f99e2415d24cb0372c42a642e610))
+
+# [0.2.0-alpha.540](https://github.com/mittwald/flow/compare/0.2.0-alpha.539...0.2.0-alpha.540) (2025-11-03)
+
+### Bug Fixes
+
+* **ColumnLayout:** do not stretch children vertically ([#2102](https://github.com/mittwald/flow/issues/2102)) ([6d04a99](https://github.com/mittwald/flow/commit/6d04a99422b7fd46c5e53b1465798bbbc5871d31))
+
+# [0.2.0-alpha.539](https://github.com/mittwald/flow/compare/0.2.0-alpha.538...0.2.0-alpha.539) (2025-10-30)
+
+### Bug Fixes
+
+* **LayoutCard:** fix border radius of tabs ([#2100](https://github.com/mittwald/flow/issues/2100)) ([3655f56](https://github.com/mittwald/flow/commit/3655f5605dcd41594827d605b3edf646ef68b8a0))
+
+# [0.2.0-alpha.538](https://github.com/mittwald/flow/compare/0.2.0-alpha.537...0.2.0-alpha.538) (2025-10-29)
+
+### Bug Fixes
+
+* **FieldErrors:** rework field errors and fix remote context ([#2098](https://github.com/mittwald/flow/issues/2098)) ([e65b6de](https://github.com/mittwald/flow/commit/e65b6de18d422aa3881f87207b55df21371d88b8))
+
 # [0.2.0-alpha.537](https://github.com/mittwald/flow/compare/0.2.0-alpha.536...0.2.0-alpha.537) (2025-10-29)
 
 ### Features

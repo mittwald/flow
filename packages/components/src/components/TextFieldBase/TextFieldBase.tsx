@@ -11,7 +11,7 @@ import styles from "../FormField/FormField.module.scss";
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
     Pick<FlowComponentProps<HTMLInputElement>, "ref">,
-    Pick<UseFieldComponent, "FieldErrorView"> {
+    Pick<UseFieldComponent, "FieldErrorView" | "FieldErrorCaptureContext"> {
   /** The input element */
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */
@@ -26,11 +26,12 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     showCharacterCount,
     ref,
     FieldErrorView,
+    FieldErrorCaptureContext,
     ...rest
   } = props;
 
   const [charactersCount, setCharactersCount] = useState(
-    props.value?.length ?? 0,
+    props.defaultValue?.length ?? props.value?.length ?? 0,
   );
 
   const translation = useLocalizedStringFormatter(locales);
@@ -68,13 +69,15 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
       onChange={handleOnChange}
       {...propsWithOptionalStringValue}
     >
-      {children}
-      {input}
-      {showCharacterCount && (
-        <FieldDescription className={styles.fieldDescription}>
-          {charactersCountDescription}
-        </FieldDescription>
-      )}
+      <FieldErrorCaptureContext>
+        {children}
+        {input}
+        {showCharacterCount && (
+          <FieldDescription className={styles.fieldDescription}>
+            {charactersCountDescription}
+          </FieldDescription>
+        )}
+      </FieldErrorCaptureContext>
       <FieldErrorView />
     </Aria.TextField>
   );

@@ -1,7 +1,7 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
-import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import {
   type ControllerProps,
   type FieldValues,
@@ -11,8 +11,9 @@ import {
 } from "react-hook-form";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
-import { inheritProps } from "@/lib/propsContext/inherit/types";
-import { FieldErrorContext } from "react-aria-components";
+import FieldErrorView from "@/views/FieldErrorView";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useMergeRefs } from "use-callback-ref";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -67,21 +68,45 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
 
+  const hotkeyRef = useHotkeys<never>(
+    "meta+enter, ctrl+enter",
+    () => {
+      formContext.submit();
+    },
+    {
+      enableOnFormTags: true,
+      enableOnContentEditable: true,
+    },
+  );
+  const fieldRef = useMergeRefs([controller.field.ref, hotkeyRef]);
+
   const fieldProps = {
-    ...inheritProps,
     ...controller.field,
+    ref: fieldRef,
     value,
     name,
     form: formContext.id,
     isRequired: !!rest.rules?.required,
+    isReadOnly: formContext.isReadOnly,
     validationBehavior: "aria" as const,
     defaultValue,
     isInvalid: isFieldInvalid,
+    children: dynamic((p) => {
+      return (
+        <>
+          {p.children}
+          <FieldErrorView>
+            {controller.fieldState.error?.message}
+          </FieldErrorView>
+        </>
+      );
+    }),
   };
 
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
 
   const propsContext: PropsContext = {
+    Autocomplete: fieldProps,
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,
@@ -125,31 +150,14 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   return (
     <PropsContextProvider
       props={propsContext}
-      dependencies={[controller.fieldState, controller.field, value]}
+      dependencies={[
+        controller.fieldState,
+        controller.field,
+        value,
+        formContext.isReadOnly,
+      ]}
     >
-      <FieldErrorContext
-        value={{
-          isInvalid: isFieldInvalid,
-          validationErrors: [
-            controller.fieldState.error?.message ?? "noMessage",
-          ],
-          validationDetails: {
-            valid: !isFieldInvalid,
-            badInput: false,
-            customError: isFieldInvalid,
-            patternMismatch: false,
-            rangeOverflow: false,
-            rangeUnderflow: false,
-            stepMismatch: false,
-            tooLong: false,
-            tooShort: false,
-            valueMissing: false,
-            typeMismatch: false,
-          },
-        }}
-      >
-        {children}
-      </FieldErrorContext>
+      {children}
     </PropsContextProvider>
   );
 }

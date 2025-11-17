@@ -1,24 +1,22 @@
-import type { KeyboardEvent, RefObject } from "react";
+import type { RefObject } from "react";
 
-const scrollToCursor = (textarea: HTMLTextAreaElement) => {
+export const scrollToCursor = (
+  value: string,
+  textarea: HTMLTextAreaElement,
+) => {
   const { selectionStart } = textarea;
   const lineHeight = parseInt(
     getComputedStyle(textarea).lineHeight || "20",
     10,
   );
-  const lines = textarea.value.slice(0, selectionStart).split("\n").length;
+  const lines = value.slice(0, selectionStart).split("\n").length;
   textarea.scrollTop = (lines - 1) * lineHeight;
 };
 
-export const handleKeyDown = (
-  e: KeyboardEvent,
+export const modifyValueByMarkdownSyntax = (
+  value: string,
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
-  setMarkdown: (markdown: string) => void,
 ) => {
-  if (e.key !== "Enter") {
-    return;
-  }
-
   const textarea = textAreaRef.current;
   if (!textarea) {
     return;
@@ -26,7 +24,6 @@ export const handleKeyDown = (
 
   const start = textarea.selectionStart;
   const end = textarea.selectionEnd;
-  const value = textarea.value;
 
   const before = value.slice(0, start);
   const after = value.slice(end);
@@ -40,46 +37,35 @@ export const handleKeyDown = (
     (orderedMatch || unorderedMatch) &&
     currentLine.trim().match(/^([-*+]|\d+\.)$/)
   ) {
-    e.preventDefault();
-
     const newText = value.slice(0, lineStart) + "\n" + after;
-    setMarkdown(newText);
 
-    requestAnimationFrame(() => {
-      textarea.selectionStart = textarea.selectionEnd = lineStart + 1;
-      scrollToCursor(textarea);
-    });
-
-    return;
+    return {
+      newValue: newText,
+      newSelectionStart: lineStart + 1,
+      newSelectionEnd: lineStart + 1,
+    } as const;
   }
 
   if (orderedMatch) {
-    e.preventDefault();
-
     const indent = orderedMatch[1];
     const nextNum = parseInt(orderedMatch[2] ?? "", 10) + 1;
     const insert = `\n${indent}${nextNum}. `;
 
-    const newText = before + insert + after;
-    setMarkdown(newText);
-
-    requestAnimationFrame(() => {
-      textarea.selectionStart = textarea.selectionEnd = start + insert.length;
-      scrollToCursor(textarea);
-    });
+    return {
+      newValue: before + insert + after,
+      newSelectionStart: start + insert.length,
+      newSelectionEnd: start + insert.length,
+    } as const;
   } else if (unorderedMatch) {
-    e.preventDefault();
-
     const indent = unorderedMatch[1];
     const bullet = unorderedMatch[2];
     const insert = `\n${indent}${bullet} `;
 
     const newText = before + insert + after;
-    setMarkdown(newText);
-
-    requestAnimationFrame(() => {
-      textarea.selectionStart = textarea.selectionEnd = start + insert.length;
-      scrollToCursor(textarea);
-    });
+    return {
+      newValue: newText,
+      newSelectionStart: start + insert.length,
+      newSelectionEnd: start + insert.length,
+    } as const;
   }
 };

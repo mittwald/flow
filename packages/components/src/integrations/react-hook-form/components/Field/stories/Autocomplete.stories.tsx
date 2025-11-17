@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
-import { Field } from "@/integrations/react-hook-form";
+import {
+  Field,
+  ResetButton,
+  SubmitButton,
+} from "@/integrations/react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
@@ -42,7 +46,7 @@ const meta: Meta<typeof Autocomplete> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        email: "",
+        email: "asd@example.com",
       },
     });
 
@@ -61,8 +65,8 @@ const meta: Meta<typeof Autocomplete> = {
             </Autocomplete>
           </Field>
           <ActionGroup>
-            <Button onPress={() => form.reset()}>Reset</Button>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -139,7 +143,8 @@ export const WithFocus: Story = {
         <Button onPress={() => form.setFocus("field")}>
           focus through form
         </Button>
-        <Button type="submit">Submit</Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

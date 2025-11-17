@@ -1,10 +1,23 @@
 import type { FieldValues, UseFormReturn } from "react-hook-form";
-import { createContext, useContext } from "react";
+import {
+  createContext,
+  useContext,
+  type Dispatch,
+  type FormEvent,
+  type RefObject,
+  type SetStateAction,
+} from "react";
 import invariant from "invariant";
+import type { ActionModel } from "@/components/Action/models/ActionModel";
 
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
   id: string;
+  isReadOnly: boolean;
+  setReadOnly: Dispatch<SetStateAction<boolean>>;
+  submitButtonRef: RefObject<HTMLButtonElement | null>;
+  submit: (e?: FormEvent<HTMLFormElement> | F) => void;
+  formActionModel: ActionModel;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,3 +35,6 @@ export const useFormContext = <F extends FieldValues>(): FormContext<F> => {
   );
   return ctx;
 };
+
+export const useOptionalFormContext = <F extends FieldValues>() =>
+  useContext(formContext) as FormContext<F> | undefined;

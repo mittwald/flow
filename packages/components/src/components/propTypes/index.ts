@@ -80,6 +80,8 @@ import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { RatingProps } from "@/components/Rating";
+import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
+import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
 
 export * from "./types";
 
@@ -147,12 +149,14 @@ export interface FlowComponentPropsTypes {
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   Rating: RatingProps;
+  ResetButton: ResetButtonProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
   Segment: SegmentProps;
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
+  SubmitButton: SubmitButtonProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
@@ -229,12 +233,14 @@ const propsContextSupportingComponentsMap: Record<
   RadioButton: true,
   RadioGroup: true,
   Rating: true,
+  ResetButton: true,
   SearchField: true,
   Section: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,
   Slider: true,
+  SubmitButton: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,

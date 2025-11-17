@@ -8,16 +8,21 @@ import {
   FileField,
   Label,
   Option,
+  MarkdownEditor,
   Section,
   Select,
   TextArea,
   TextField,
   PasswordCreationField,
   Autocomplete,
+  CheckboxGroup,
+  Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
   Field,
+  SubmitButton,
+  ResetButton,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
   Policy,
@@ -37,18 +42,23 @@ const customPolicy = Policy.fromDeclaration({
   ],
 });
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export default function Page() {
   const form = useForm({
     defaultValues: {
       name: "",
-      email: "foo",
+      account: "p1122",
       confirm: false,
       age: 20,
       comment: "",
+      message: "",
       city: "Minden",
       city2: "Minden",
       file: [],
       password: "",
+      permissions: [],
+      agreeTerms: false,
     },
   });
 
@@ -57,6 +67,7 @@ export default function Page() {
       <Form
         form={form}
         onSubmit={async (data) => {
+          await sleep(5000);
           const files = await Promise.all(
             Array.from(data.file).map(async (f: File) => ({
               name: f.name,
@@ -77,17 +88,18 @@ export default function Page() {
           </TextField>
         </Field>
         <Field
-          name="email"
+          name="account"
           rules={{
             required: "Required!",
           }}
         >
           <Autocomplete>
-            <TextField>
-              <Label>Email</Label>
+            <TextField showCharacterCount>
+              <Label>Account</Label>
             </TextField>
-            <Option>Foo</Option>
-            <Option>Bar</Option>
+            <Option>p1234</Option>
+            <Option>p1122</Option>
+            <Option>p4567</Option>
           </Autocomplete>
         </Field>
         <Field name="comment">
@@ -121,6 +133,11 @@ export default function Page() {
             <CopyButton />
           </PasswordCreationField>
         </Field>
+        <Field name="message">
+          <MarkdownEditor>
+            <Label>Message</Label>
+          </MarkdownEditor>
+        </Field>
         <Field name="file">
           <FileField>
             <Label>Zertifikat</Label>
@@ -129,8 +146,19 @@ export default function Page() {
             </Button>
           </FileField>
         </Field>
+        <Field name="permissions">
+          <CheckboxGroup>
+            <Label>Berechtigungen</Label>
+            <Checkbox value="read">Lesen</Checkbox>
+            <Checkbox value="write">Schreiben</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        <Field name="agreeTerms">
+          <Label>Terms</Label>
+          <Checkbox value="true">Verstanden!</Checkbox>
+        </Field>
         <ActionGroup>
-          <Button type="submit">Login</Button>
+          <SubmitButton>Submit</SubmitButton>
           <Button
             onPress={() => {
               form.setValue("email", "demo@test.de");
@@ -138,13 +166,7 @@ export default function Page() {
           >
             Set value
           </Button>
-          <Button
-            onPress={() => {
-              form.reset();
-            }}
-          >
-            Reset
-          </Button>
+          <ResetButton>Reset</ResetButton>
           <Button
             onPress={() => {
               form.reset({

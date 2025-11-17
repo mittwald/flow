@@ -26,8 +26,6 @@ import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
-import { FieldErrorContext } from "react-aria-components";
-import { Wrap } from "@/components/Wrap";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
@@ -44,6 +42,7 @@ import {
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 import { useManagedValue } from "@/lib/hooks/useManagedValue";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { FieldError } from "@/components/FieldError";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -83,7 +82,7 @@ export const PasswordCreationField = flowComponent(
 
     const {
       FieldErrorView,
-      FieldErrorResetContext,
+      FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
     } = useFieldComponent(props);
@@ -245,7 +244,8 @@ export const PasswordCreationField = flowComponent(
         isRequired={isRequired}
       >
         <TunnelProvider>
-          <FieldErrorResetContext>
+          <FieldErrorCaptureContext>
+            <FieldError>{latestValidationErrorText}</FieldError>
             <PropsContextProvider
               props={propsContext}
               dependencies={[
@@ -287,36 +287,8 @@ export const PasswordCreationField = flowComponent(
                 <FieldDescription>{latestValidationErrorText}</FieldDescription>
               )}
             </PropsContextProvider>
-          </FieldErrorResetContext>
-          <Wrap
-            if={
-              isInvalidFromValidationResult &&
-              policyValidationResult.isValid !== "indeterminate" &&
-              latestValidationErrorText
-            }
-          >
-            <FieldErrorContext.Provider
-              value={{
-                isInvalid: true,
-                validationErrors: [latestValidationErrorText ?? ""],
-                validationDetails: {
-                  customError: true,
-                  valid: false,
-                  typeMismatch: false,
-                  stepMismatch: false,
-                  valueMissing: false,
-                  tooShort: false,
-                  tooLong: false,
-                  rangeUnderflow: false,
-                  patternMismatch: false,
-                  badInput: false,
-                  rangeOverflow: false,
-                },
-              }}
-            >
-              <FieldErrorView />
-            </FieldErrorContext.Provider>
-          </Wrap>
+          </FieldErrorCaptureContext>
+          <FieldErrorView />
         </TunnelProvider>
       </Aria.TextField>
     );
