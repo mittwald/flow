@@ -21,7 +21,7 @@ import { useListMetadata } from "@/components/List/hooks/useListMetadata";
 export const TypedList = <T>() =>
   List as unknown as ComponentType<ListProps<T>>;
 
-export const typedList = <T, TMeta>() => ({
+export const typedList = <T>() => ({
   List: TypedList<T>(),
   Filter: TypedListFilter<T>(),
   Search: TypedListSearch<T>(),
@@ -38,5 +38,5 @@ export const typedList = <T, TMeta>() => ({
   LoaderAsync: TypedListLoaderAsync<T>(),
   LoaderHooks: TypedListLoaderHooks<T>(),
   LoaderAsyncResource: TypedListLoaderAsyncResource<T>(),
-  useMetadata: () => useListMetadata<TMeta>(),
+  useMetadata: useListMetadata,
 });
