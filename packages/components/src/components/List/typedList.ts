@@ -16,11 +16,12 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
 import { Table } from "@/components/List/setupComponents/Table";
 import { TypedListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
+import { useListMetadata } from "@/components/List/hooks/useListMetadata";
 
 export const TypedList = <T>() =>
   List as unknown as ComponentType<ListProps<T>>;
 
-export const typedList = <T>() => ({
+export const typedList = <T, TMeta>() => ({
   List: TypedList<T>(),
   Filter: TypedListFilter<T>(),
   Search: TypedListSearch<T>(),
@@ -37,4 +38,5 @@ export const typedList = <T>() => ({
   LoaderAsync: TypedListLoaderAsync<T>(),
   LoaderHooks: TypedListLoaderHooks<T>(),
   LoaderAsyncResource: TypedListLoaderAsyncResource<T>(),
+  useMetadata: () => useListMetadata<TMeta>(),
 });

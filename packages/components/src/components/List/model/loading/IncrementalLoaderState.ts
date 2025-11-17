@@ -14,7 +14,7 @@ export class IncrementalLoaderState<T> {
   public dataBatches: DataBatches<T> = [];
   public prevDataBatches: DataBatches<T> = [];
   public batchLoadingStates: BatchesLoadingState = ["void"];
-  public metadata?: Record<string, unknown> = undefined;
+  public metadata?: unknown = undefined;
   public readonly list: List<T>;
 
   private constructor(list: List<T>) {
@@ -64,7 +64,7 @@ export class IncrementalLoaderState<T> {
     }
   }
 
-  public setMetadata(metadata?: Record<string, unknown>): void {
+  public setMetadata(metadata?: unknown): void {
     this.metadata = metadata;
   }
 
