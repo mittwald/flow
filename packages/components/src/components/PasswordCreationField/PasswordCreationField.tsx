@@ -95,7 +95,7 @@ export const PasswordCreationField = flowComponent(
       [validationPolicyFromProps],
     );
 
-    const { value, handleOnChange } = useManagedValue(props);
+    const { value = "", handleOnChange } = useManagedValue(props);
     const deferredValue = useDeferredValue(value);
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
