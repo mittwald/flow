@@ -21,7 +21,6 @@ export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElement
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
       isDisabled: {},
       lang: {},
       slot: {},
