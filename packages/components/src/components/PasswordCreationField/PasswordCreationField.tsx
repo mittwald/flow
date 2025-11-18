@@ -260,10 +260,7 @@ export const PasswordCreationField = flowComponent(
                 isDisabled={isDisabled}
                 className={clsx(styles.inputGroup)}
               >
-                <ReactAriaControlledValueFix
-                  inputContext={Aria.InputContext}
-                  props={{ ...props, value }}
-                >
+                <ReactAriaControlledValueFix inputContext={Aria.InputContext}>
                   <Aria.Input ref={ref} className={styles.input} />
                 </ReactAriaControlledValueFix>
                 <Aria.Group className={styles.buttonContainer}>

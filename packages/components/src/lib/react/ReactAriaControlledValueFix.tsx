@@ -4,27 +4,53 @@ import {
   isValidElement,
   type Context,
   type FC,
-  type ForwardedRef,
   type PropsWithChildren,
   useDeferredValue,
   useLayoutEffect,
   useEffect,
   useRef,
-  useMemo,
+  createContext,
+  useContext,
+  useState,
+  type RefObject,
 } from "react";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
-
-export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  inputContext: Context<Aria.ContextValue<any, any>>;
-  props: unknown;
-}
+import { useOptionalFormContext } from "@/integrations/react-hook-form";
 
 interface ChildProps {
   [key: string]: unknown;
-  ref: ForwardedRef<Element>;
-  inputRef: ForwardedRef<Element>;
+  id?: string;
+  ref?: RefObject<never>;
+  inputRef?: RefObject<never>;
 }
+
+export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inputContext?: Context<Aria.ContextValue<any, any>>;
+}
+
+export const ReactAriaControlledValueContext = createContext<
+  Pick<ReactAriaControlledValueFixProps, "inputContext">
+>({});
+
+export const ReactAriaControlledValueProvider: FC<
+  PropsWithChildren & Pick<ReactAriaControlledValueFixProps, "inputContext">
+> = (props) => {
+  const { children, inputContext } = props;
+  const context = useContext(ReactAriaControlledValueContext);
+
+  return (
+    <ReactAriaControlledValueContext
+      value={{
+        inputContext: context.inputContext
+          ? context.inputContext
+          : inputContext,
+      }}
+    >
+      {children}
+    </ReactAriaControlledValueContext>
+  );
+};
 
 /**
  * React Aria (accidentally?!) enforces controlled inputs by always setting the
@@ -38,34 +64,54 @@ interface ChildProps {
 export const ReactAriaControlledValueFix: FC<
   ReactAriaControlledValueFixProps
 > = (props) => {
-  const { inputContext: context, children } = props;
+  const { inputContext: inputContextFromProps = undefined, children } = props;
+
+  const { inputContext: inputContextFromContext = inputContextFromProps } =
+    useContext(ReactAriaControlledValueContext);
 
   const child = Children.only(children);
   if (!isValidElement<ChildProps>(child)) {
     throw new Error("Expected valid element");
   }
 
-  const { ref, inputRef, ...inputProps } = child.props;
   const isInteractingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
   const isInteracting = useRef<"idle" | "interacting">("idle");
+  const [forceUpdate, setForceUpdate] = useState<boolean>(false);
 
-  const originalBlurFunction = inputProps.onBlur;
-  inputProps.onBlur = useMemo(
-    () => (event: Event) => {
-      isInteracting.current = "idle";
+  const { ref, inputRef, ...childProps } = child.props;
 
-      if (originalBlurFunction && typeof originalBlurFunction === "function") {
-        originalBlurFunction(event);
-      }
-    },
-    [originalBlurFunction],
+  const [ariaInputContextProps, ariaInputContextRef] = Aria.useContextProps(
+    childProps,
+    null,
+    Aria.InputContext as never,
   );
-  const originalKeyDownFunction = inputProps.onKeyDown;
-  inputProps.onKeyDown = useMemo(
-    () => (event: KeyboardEvent) => {
-      if (!event.isTrusted || event.defaultPrevented) {
+
+  const elementRef =
+    inputRef?.current ?? ref?.current ?? ariaInputContextRef.current;
+
+  const deferredValueFromContext = useDeferredValue(
+    ariaInputContextProps.value !== undefined
+      ? String(ariaInputContextProps.value)
+      : "",
+  );
+
+  const isValidElementType =
+    elementRef &&
+    (elementRef instanceof HTMLInputElement ||
+      elementRef instanceof HTMLTextAreaElement);
+
+  useEffect(() => {
+    if (!isValidElementType || !elementRef) {
+      return;
+    }
+
+    // sync the last known value when element reference is available
+    emitElementValueChange(elementRef, deferredValueFromContext);
+
+    const onKeyDown = (event: Event) => {
+      if (!event.isTrusted) {
         return;
       }
 
@@ -78,41 +124,18 @@ export const ReactAriaControlledValueFix: FC<
       isInteractingTimeoutRef.current = setTimeout(() => {
         isInteracting.current = "idle";
       }, 100);
+    };
+    const onBlur = () => {
+      isInteracting.current = "idle";
+    };
 
-      if (
-        originalKeyDownFunction &&
-        typeof originalKeyDownFunction === "function"
-      ) {
-        originalKeyDownFunction(event);
-      }
-    },
-    [originalKeyDownFunction],
-  );
+    elementRef.addEventListener("keypress", onKeyDown);
+    elementRef.addEventListener("blur", onBlur);
 
-  const [contextProps, contextRef] = Aria.useContextProps(
-    inputProps,
-    inputRef ?? ref,
-    context,
-  );
-
-  const elementRef = contextRef.current;
-
-  const isValidElementType =
-    elementRef &&
-    (elementRef instanceof HTMLInputElement ||
-      elementRef instanceof HTMLTextAreaElement);
-
-  const deferredValueFromContext = useDeferredValue(
-    String(contextProps.value ?? ""),
-  );
-
-  useEffect(() => {
-    if (!isValidElementType || !elementRef) {
-      return;
-    }
-
-    // sync the last known value when element reference is available
-    emitElementValueChange(elementRef, deferredValueFromContext);
+    return () => {
+      elementRef.removeEventListener("keypress", onKeyDown);
+      elementRef.removeEventListener("blur", onBlur);
+    };
   }, [elementRef]);
 
   useLayoutEffect(() => {
@@ -125,17 +148,41 @@ export const ReactAriaControlledValueFix: FC<
     }
 
     emitElementValueChange(elementRef, deferredValueFromContext);
-  }, [deferredValueFromContext]);
+  }, [deferredValueFromContext, forceUpdate]);
+
+  const optionalFormContext = useOptionalFormContext();
+  useEffect(() => {
+    if (!optionalFormContext?.ref) {
+      return;
+    }
+
+    const onReset = (event: Event) => {
+      event.preventDefault();
+      setForceUpdate((o) => !o);
+    };
+
+    optionalFormContext.ref.current?.addEventListener("reset", onReset);
+
+    return () => {
+      optionalFormContext.ref.current?.removeEventListener("reset", onReset);
+    };
+  }, [optionalFormContext?.ref]);
 
   const uncontrolledContextProps = {
-    ...contextProps,
+    ...ariaInputContextProps,
     value: undefined,
-    ref: contextRef,
+    ref: ariaInputContextRef,
   };
 
+  const providerValues: unknown[] = [
+    [Aria.InputContext, uncontrolledContextProps],
+  ];
+
+  if (inputContextFromContext) {
+    providerValues.push([inputContextFromContext, uncontrolledContextProps]);
+  }
+
   return (
-    <Aria.Provider values={[[context, uncontrolledContextProps]]}>
-      {child}
-    </Aria.Provider>
+    <Aria.Provider values={providerValues as never}>{children}</Aria.Provider>
   );
 };

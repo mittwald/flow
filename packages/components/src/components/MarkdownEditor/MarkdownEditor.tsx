@@ -95,6 +95,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
     forceApplyValue(newValue, newSelectionStart, newSelectionEnd);
     handleOnChange(newValue);
+    localTextAreaRef.current?.focus();
   };
 
   const propsContext: PropsContext = {

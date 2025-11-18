@@ -16,6 +16,7 @@ export class RemoteAutocompleteElement extends FlowRemoteElement<RemoteAutocompl
       disableAutoFocusFirst: {},
       disableVirtualFocus: {},
       filter: {},
+      inputRef: {},
       isInvalid: {},
       slot: {},
       value: {},

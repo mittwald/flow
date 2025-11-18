@@ -107,10 +107,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
         <TunnelProvider>
           <FieldErrorCaptureContext>
             <div className={styles.input}>
-              <ReactAriaControlledValueFix
-                inputContext={Aria.ComboBoxContext}
-                props={props}
-              >
+              <ReactAriaControlledValueFix inputContext={Aria.ComboBoxContext}>
                 <Aria.Input
                   placeholder={placeholder}
                   ref={localInputComboBoxRef}

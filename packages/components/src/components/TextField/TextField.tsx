@@ -21,14 +21,7 @@ export interface TextFieldProps
 
 /** @flr-generate all */
 export const TextField = flowComponent("TextField", (props) => {
-  const {
-    children,
-    placeholder,
-    ref,
-    form,
-    inputContext = Aria.InputContext,
-    ...rest
-  } = props;
+  const { children, placeholder, ref, form, ...rest } = props;
 
   const input = (
     <Aria.Input
@@ -53,7 +46,6 @@ export const TextField = flowComponent("TextField", (props) => {
       FieldErrorView={FieldErrorView}
       FieldErrorCaptureContext={FieldErrorCaptureContext}
       input={input}
-      inputContext={inputContext}
     >
       <PropsContextProvider props={fieldPropsContext}>
         {children}

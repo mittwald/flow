@@ -1,4 +1,4 @@
-import { useRef, type PropsWithChildren } from "react";
+import React, { useRef, type PropsWithChildren, type RefObject } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
@@ -19,9 +19,10 @@ import {
   useFocusWithin,
   useLocalizedStringFormatter,
 } from "react-aria";
-import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useManagedValue } from "@/lib/hooks/useManagedValue";
+import { useObjectRef } from "@react-aria/utils";
+import { ReactAriaControlledValueProvider } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
@@ -35,18 +36,19 @@ export interface AutocompleteProps
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  inputRef?: RefObject<HTMLInputElement | null>;
 }
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, isInvalid, ...rest } = props;
+  const { children, isInvalid, ref, inputRef, ...rest } = props;
 
   const { value, handleOnChange } = useManagedValue(props);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
   const stringFormatter = useLocalizedStringFormatter(locales);
   const container = useRef(null);
-  const triggerRef = useRef<HTMLInputElement>(null);
+  const localInputRef = useObjectRef<HTMLInputElement>(inputRef);
 
   const controller = useOverlayController("Popover", {
     reuseControllerFromContext: false,
@@ -63,7 +65,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       }
     },
     isInvalid,
-    ref: triggerRef,
+    ref: localInputRef,
   };
 
   const renderEmptyState = () => (
@@ -83,11 +85,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   const handleOptionAction = (key: Aria.Key) => {
-    const inputElement = triggerRef.current;
-    if (inputElement) {
-      // Set value on input element and trigger change event
-      emitElementValueChange(inputElement, String(key));
-    }
+    handleOnChange(String(key));
     controller.close();
   };
 
@@ -100,7 +98,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
-    TextField: { ...inputProps, inputContext: Aria.AutocompleteContext },
+    TextField: inputProps,
     Option: {
       tunnelId: "options",
     },
@@ -111,7 +109,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div {...fieldProps}>
+    <div {...fieldProps} ref={ref}>
       <FieldErrorCaptureContext>
         <PropsContextProvider props={propsContext} clear>
           <div {...focusWithin.focusWithinProps} ref={container}>
@@ -123,10 +121,14 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                 inputValue={value}
                 {...rest}
               >
-                {children}
+                <ReactAriaControlledValueProvider
+                  inputContext={Aria.AutocompleteContext}
+                >
+                  {children}
+                </ReactAriaControlledValueProvider>
                 <Options
                   onAction={handleOptionAction}
-                  triggerRef={triggerRef}
+                  triggerRef={localInputRef}
                   controller={controller}
                   renderEmptyState={renderEmptyState}
                   isNonModal

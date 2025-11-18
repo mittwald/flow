@@ -9,6 +9,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { ReactAriaControlledValueProvider } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextAreaProps
   extends Omit<
@@ -150,19 +151,20 @@ export const TextArea = flowComponent("TextArea", (props) => {
   } = useFieldComponent(props);
 
   return (
-    <TextFieldBase
-      {...rest}
-      {...fieldProps}
-      className={clsx(rest.className, fieldProps.className)}
-      FieldErrorView={FieldErrorView}
-      FieldErrorCaptureContext={FieldErrorCaptureContext}
-      input={input}
-      inputContext={Aria.TextAreaContext}
-    >
-      <PropsContextProvider props={fieldPropsContext}>
-        {children}
-      </PropsContextProvider>
-    </TextFieldBase>
+    <ReactAriaControlledValueProvider inputContext={Aria.TextAreaContext}>
+      <TextFieldBase
+        {...rest}
+        {...fieldProps}
+        className={clsx(rest.className, fieldProps.className)}
+        FieldErrorView={FieldErrorView}
+        FieldErrorCaptureContext={FieldErrorCaptureContext}
+        input={input}
+      >
+        <PropsContextProvider props={fieldPropsContext}>
+          {children}
+        </PropsContextProvider>
+      </TextFieldBase>
+    </ReactAriaControlledValueProvider>
   );
 });
 
