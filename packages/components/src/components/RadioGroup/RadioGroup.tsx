@@ -52,7 +52,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     >
       <TunnelProvider>
         <FieldErrorCaptureContext>
-          <PropsContextProvider dependencies={["radio"]} props={propsContext}>
+          <PropsContextProvider props={propsContext}>
             <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
               <TunnelExit id="radioButtons" />
             </ColumnLayout>

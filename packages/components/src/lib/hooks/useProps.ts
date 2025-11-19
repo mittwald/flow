@@ -7,7 +7,6 @@ import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { omitBy } from "remeda";
 import isDynamicProp from "@/lib/propsContext/dynamicProps/lib";
 import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
-import { isInheritedPropsContextKey } from "@/lib/propsContext/inherit/lib";
 import { areChildrenEmpty } from "@/lib/react/areChildrenEmpty";
 import { isNestingLevelKey } from "@/lib/propsContext/nestedPropsContext/lib";
 import { getPropsMerger } from "@/lib/react/getPropsMerger";
@@ -45,7 +44,6 @@ export const useProps = <C extends FlowComponentName>(
         componentPropsContext,
         (value, key) =>
           isFlowComponentName(key) ||
-          isInheritedPropsContextKey(key) ||
           isNestingLevelKey(key) ||
           isDynamicProp(value),
       )

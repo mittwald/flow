@@ -113,7 +113,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   return (
     <div {...fieldProps}>
       <FieldErrorCaptureContext>
-        <PropsContextProvider props={propsContext} clear>
+        <PropsContextProvider props={propsContext}>
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
               <Aria.Autocomplete

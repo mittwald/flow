@@ -13,27 +13,31 @@ export interface LayoutCardProps
     FlowComponentProps {}
 
 /** @flr-generate all */
-export const LayoutCard = flowComponent("LayoutCard", (props) => {
-  const { children, className, elementType = "div", ref, ...rest } = props;
+export const LayoutCard = flowComponent(
+  "LayoutCard",
+  (props) => {
+    const { children, className, elementType = "div", ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.layoutCard, className);
+    const rootClassName = clsx(styles.layoutCard, className);
 
-  const Element = elementType;
+    const Element = elementType;
 
-  const propsContext: PropsContext = {
-    Tabs: {
-      className: styles.tabs,
-    },
-    AccentBox: { className: styles.accentBox },
-  };
+    const propsContext: PropsContext = {
+      Tabs: {
+        className: styles.tabs,
+      },
+      AccentBox: { className: styles.accentBox },
+    };
 
-  return (
-    <Element className={rootClassName} {...rest} ref={ref}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Element>
-  );
-});
+    return (
+      <Element className={rootClassName} {...rest} ref={ref}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Element>
+    );
+  },
+  { type: "layout" },
+);
 
 export default LayoutCard;

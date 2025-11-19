@@ -33,7 +33,6 @@ test.each<{
   parentContext: PropsContext;
   context: PropsContext;
   merged: PropsContext;
-  currentLevel?: number;
 }>([
   { parentContext: {}, context: {}, merged: {} },
   {
@@ -51,7 +50,6 @@ test.each<{
   },
   // Inheritance
   {
-    currentLevel: 0,
     parentContext: {
       Button: {
         type: "submit",
@@ -65,44 +63,15 @@ test.each<{
     },
   },
   {
-    currentLevel: 1,
     parentContext: {
       Button: {
         type: "submit",
-      },
-    },
-    context: {},
-    merged: {},
-  },
-  {
-    currentLevel: 1,
-    parentContext: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
       },
     },
     context: {},
     merged: {
       Button: {
         type: "submit",
-        ___inherit: true,
-      },
-    },
-  },
-  {
-    currentLevel: 2,
-    parentContext: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
-      },
-    },
-    context: {},
-    merged: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
       },
     },
   },
@@ -124,7 +93,6 @@ test.each<{
     },
   },
   {
-    currentLevel: 1,
     parentContext: {
       Button: {
         type: "submit",
@@ -188,8 +156,8 @@ test.each<{
     parentContext: {
       Button: {
         type: "submit",
+        ___nestingLevel: 1,
       },
-      ___nestingLevel: 1,
     },
     context: {
       Button: {
@@ -199,6 +167,7 @@ test.each<{
     merged: {
       Button: {
         type: "submit",
+        ___nestingLevel: 1,
       },
     },
   },
@@ -206,8 +175,8 @@ test.each<{
     parentContext: {
       Button: {
         type: "submit",
+        ___nestingLevel: 2,
       },
-      ___nestingLevel: 2,
     },
     context: {
       Button: {
@@ -216,6 +185,7 @@ test.each<{
     },
     merged: {
       Button: {
+        ___nestingLevel: 2,
         type: "submit",
       },
     },
@@ -292,13 +262,8 @@ test.each<{
   },
 ])(
   "Expect merged result is correct for test case: %o",
-  ({
-    parentContext: first,
-    context: second,
-    merged: expected,
-    currentLevel,
-  }) => {
-    const merged = mergePropsContext(first, second, currentLevel);
+  ({ parentContext: first, context: second, merged: expected }) => {
+    const merged = mergePropsContext(first, second);
     delete merged[nestingLevelKey];
     expect(merged).toEqual(expected);
   },

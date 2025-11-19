@@ -253,6 +253,7 @@ export const PasswordCreationField = flowComponent(
                 isRequired,
                 value,
                 policyValidationResult,
+                isEmptyValue,
               ]}
             >
               <TunnelExit id="label" />
