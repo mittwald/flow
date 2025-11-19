@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.560](https://github.com/mittwald/flow/compare/0.2.0-alpha.559...0.2.0-alpha.560) (2025-11-19)
+
+### Features
+
+* **Alert:** Add spacing between alerts and sections ([#2138](https://github.com/mittwald/flow/issues/2138)) ([4bac980](https://github.com/mittwald/flow/commit/4bac980c15e94e99cde695ad466639fe557963ca))
+
 # [0.2.0-alpha.559](https://github.com/mittwald/flow/compare/0.2.0-alpha.558...0.2.0-alpha.559) (2025-11-18)
 
 **Note:** Version bump only for package @mittwald/flow-project
