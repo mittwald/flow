@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.561](https://github.com/mittwald/flow/compare/0.2.0-alpha.560...0.2.0-alpha.561) (2025-11-19)
+
+### Bug Fixes
+
+* **Chat:** update spacing ([#2140](https://github.com/mittwald/flow/issues/2140)) ([5fa4203](https://github.com/mittwald/flow/commit/5fa420319d77c14ac1a2cfda8919bafb32333113))
+
 # [0.2.0-alpha.560](https://github.com/mittwald/flow/compare/0.2.0-alpha.559...0.2.0-alpha.560) (2025-11-19)
 
 ### Features
