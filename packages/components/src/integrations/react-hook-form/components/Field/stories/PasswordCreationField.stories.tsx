@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -16,10 +16,10 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { PasswordCreationField } from "@/components/PasswordCreationField";
 import {
-  generatePasswordCreationFieldValidation,
   type PolicyDeclaration,
   RuleType,
   SequenceType,
+  usePasswordCreationFieldValidation,
 } from "@/integrations/@mittwald/password-tools-js";
 import { FieldError } from "@/components/FieldError";
 
@@ -102,7 +102,7 @@ const meta: Meta<typeof Field> = {
             name="user"
             rules={{
               required: true,
-              validate: generatePasswordCreationFieldValidation(),
+              validate: usePasswordCreationFieldValidation(),
             }}
           >
             <PasswordCreationField>
@@ -145,7 +145,7 @@ export const WithForm: Story = {
         <Field
           rules={{
             required: true,
-            validate: generatePasswordCreationFieldValidation(policyDecl),
+            validate: usePasswordCreationFieldValidation(policyDecl),
           }}
           name="password"
         >
