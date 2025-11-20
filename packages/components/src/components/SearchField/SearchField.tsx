@@ -49,10 +49,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
       </PropsContextProvider>
       <div className={styles.inputContainer}>
         <IconSearch className={styles.searchIcon} />
-        <ReactAriaControlledValueFix
-          inputContext={Aria.SearchFieldContext}
-          props={props}
-        >
+        <ReactAriaControlledValueFix inputContext={Aria.SearchFieldContext}>
           <Aria.Input
             placeholder={searchText}
             className={styles.input}

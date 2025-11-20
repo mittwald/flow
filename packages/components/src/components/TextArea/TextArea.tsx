@@ -5,16 +5,20 @@ import styles from "./TextArea.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { ReactAriaControlledValueProvider } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextAreaProps
   extends Omit<
       TextFieldBaseProps,
-      "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "ref"
+      | "FieldErrorView"
+      | "FieldErrorCaptureContext"
+      | "input"
+      | "ref"
+      | "inputContext"
     >,
     Pick<Aria.TextAreaProps, "placeholder" | "rows" | "aria-hidden">,
     FlowComponentProps<HTMLTextAreaElement> {
@@ -123,25 +127,20 @@ export const TextArea = flowComponent("TextArea", (props) => {
   };
 
   const input = (
-    <ReactAriaControlledValueFix
-      inputContext={Aria.TextAreaContext}
-      props={props}
-    >
-      <Aria.TextArea
-        rows={rows}
-        aria-hidden={props["aria-hidden"]}
-        placeholder={placeholder}
-        className={rootClassName}
-        ref={localRef}
-        onChange={updateHeight}
-        style={{
-          minHeight: getHeight(rows),
-          maxHeight: verticallyResizable
-            ? undefined
-            : getHeight(autoResizeMaxRows),
-        }}
-      />
-    </ReactAriaControlledValueFix>
+    <Aria.TextArea
+      rows={rows}
+      aria-hidden={props["aria-hidden"]}
+      placeholder={placeholder}
+      className={rootClassName}
+      ref={localRef}
+      onChange={updateHeight}
+      style={{
+        minHeight: getHeight(rows),
+        maxHeight: verticallyResizable
+          ? undefined
+          : getHeight(autoResizeMaxRows),
+      }}
+    />
   );
 
   const {
@@ -152,18 +151,20 @@ export const TextArea = flowComponent("TextArea", (props) => {
   } = useFieldComponent(props);
 
   return (
-    <TextFieldBase
-      {...rest}
-      {...fieldProps}
-      className={clsx(rest.className, fieldProps.className)}
-      FieldErrorView={FieldErrorView}
-      FieldErrorCaptureContext={FieldErrorCaptureContext}
-      input={input}
-    >
-      <PropsContextProvider props={fieldPropsContext}>
-        {children}
-      </PropsContextProvider>
-    </TextFieldBase>
+    <ReactAriaControlledValueProvider inputContext={Aria.TextAreaContext}>
+      <TextFieldBase
+        {...rest}
+        {...fieldProps}
+        className={clsx(rest.className, fieldProps.className)}
+        FieldErrorView={FieldErrorView}
+        FieldErrorCaptureContext={FieldErrorCaptureContext}
+        input={input}
+      >
+        <PropsContextProvider props={fieldPropsContext}>
+          {children}
+        </PropsContextProvider>
+      </TextFieldBase>
+    </ReactAriaControlledValueProvider>
   );
 });
 

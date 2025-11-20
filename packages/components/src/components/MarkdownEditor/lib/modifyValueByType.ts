@@ -42,8 +42,8 @@ export const modifyValueByType = (
   if (!textAreaRef.current) {
     return {
       newValue: markdown,
-      newSelectionStart: null,
-      newSelectionEnd: null,
+      newSelectionStart: 0,
+      newSelectionEnd: 0,
     } as const;
   }
 

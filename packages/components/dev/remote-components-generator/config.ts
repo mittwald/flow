@@ -3,6 +3,7 @@ export const config = {
     "controller",
     "tunnelId",
     "ref",
+    "inputRef",
     "key",
     "children",
     "dangerouslySetInnerHTML",

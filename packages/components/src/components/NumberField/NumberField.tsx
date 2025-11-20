@@ -75,10 +75,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
           <IconChevronDown />
           <IconMinus className={styles.coarsePointerIcon} />
         </Button>
-        <ReactAriaControlledValueFix
-          inputContext={Aria.NumberFieldContext}
-          props={props}
-        >
+        <ReactAriaControlledValueFix inputContext={Aria.NumberFieldContext}>
           <Aria.Input className={styles.input} ref={localNumberFieldInputRef} />
         </ReactAriaControlledValueFix>
         <Button

@@ -1,10 +1,4 @@
-import React, {
-  type KeyboardEventHandler,
-  type RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { type KeyboardEvent, type RefObject, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -26,7 +20,7 @@ import {
 
 export type MarkdownEditorMode = "editor" | "preview";
 
-export type MarkdownEditorProps = Omit<TextAreaProps, "ref"> &
+export type MarkdownEditorProps = Omit<TextAreaProps, "ref" | "inputContext"> &
   Pick<MarkdownProps, "headingOffset" | "ref"> & {
     inputRef?: RefObject<HTMLTextAreaElement | null>;
   };
@@ -47,42 +41,10 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   } = props;
 
   const localRef = useObjectRef(ref);
-  const localInputRef = useObjectRef(inputRef);
+  const localTextAreaRef = useObjectRef(inputRef);
 
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
   const { value, handleOnChange } = useManagedValue(props);
-
-  const selectionPresent = useRef<{
-    shouldScrollToCursor: boolean;
-    selectionStart: number | null;
-    selectionEnd: number | null;
-  } | null>(null);
-
-  useEffect(() => {
-    const inputRef = localInputRef.current;
-    const present = selectionPresent.current;
-
-    if (!present || !inputRef) {
-      return;
-    }
-
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          inputRef.setSelectionRange(
-            present.selectionStart,
-            present.selectionEnd,
-          );
-
-          if (present.shouldScrollToCursor) {
-            scrollToCursor(value, inputRef);
-          }
-        });
-      });
-
-      selectionPresent.current = null;
-    }, 0);
-  }, [selectionPresent.current, localInputRef.current, value]);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -90,28 +52,37 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
-  const handleKeyDown: KeyboardEventHandler = (event) => {
+  const forceApplyValue = (
+    newValue: string,
+    newSelectionStart: number,
+    newSelectionEnd: number,
+  ) => {
+    if (localTextAreaRef.current) {
+      // we have to apply the value here by ref
+      // otherwise the calcucation of the scroll position
+      // would be off because the onChange must bubble trough
+      localTextAreaRef.current.value = newValue;
+      localTextAreaRef.current.selectionStart = newSelectionStart;
+      localTextAreaRef.current.selectionEnd = newSelectionEnd;
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key !== "Enter") {
       return;
     }
 
-    const modifyParams = modifyValueByMarkdownSyntax(value, localInputRef);
-
+    const modifyParams = modifyValueByMarkdownSyntax(value, localTextAreaRef);
     if (!modifyParams) {
       return;
     }
 
     const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
 
+    forceApplyValue(newValue, newSelectionStart, newSelectionEnd);
+    scrollToCursor(newValue, localTextAreaRef.current);
+
     event.preventDefault();
-    localInputRef.current?.blur();
-
-    selectionPresent.current = {
-      shouldScrollToCursor: true,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
-
     handleOnChange(newValue);
   };
 
@@ -119,16 +90,12 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     const { newValue, newSelectionStart, newSelectionEnd } = modifyValueByType(
       value,
       type,
-      localInputRef,
+      localTextAreaRef,
     );
 
-    selectionPresent.current = {
-      shouldScrollToCursor: false,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
-
+    forceApplyValue(newValue, newSelectionStart, newSelectionEnd);
     handleOnChange(newValue);
+    localTextAreaRef.current?.focus();
   };
 
   const propsContext: PropsContext = {
@@ -152,7 +119,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           aria-hidden={mode === "preview"}
           isReadOnly={isReadOnly || mode === "preview"}
           isDisabled={isDisabled}
-          ref={localInputRef}
+          ref={localTextAreaRef}
           value={value}
           rows={rows}
           autoResizeMaxRows={autoResizeMaxRows}
@@ -163,7 +130,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
             headingOffset={headingOffset}
             className={styles.markdown}
             style={{
-              height: localInputRef.current?.offsetHeight,
+              height: localTextAreaRef.current?.offsetHeight,
             }}
           >
             {value}

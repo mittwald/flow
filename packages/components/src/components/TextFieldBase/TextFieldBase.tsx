@@ -7,6 +7,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import type { UseFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "../FormField/FormField.module.scss";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
@@ -71,7 +72,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     >
       <FieldErrorCaptureContext>
         {children}
-        {input}
+        <ReactAriaControlledValueFix>{input}</ReactAriaControlledValueFix>
         {showCharacterCount && (
           <FieldDescription className={styles.fieldDescription}>
             {charactersCountDescription}

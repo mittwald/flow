@@ -97,6 +97,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       <FormContextProvider
         value={{
           form,
+          ref: formRef,
           id: formId,
           isReadOnly,
           setReadOnly: setReadOnlyContextState,

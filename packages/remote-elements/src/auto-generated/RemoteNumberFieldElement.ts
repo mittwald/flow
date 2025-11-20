@@ -26,7 +26,6 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       id: {},
       incrementAriaLabel: {},
       inert: {},
-      inputRef: {},
       isDisabled: {},
       isInvalid: {},
       isReadOnly: {},

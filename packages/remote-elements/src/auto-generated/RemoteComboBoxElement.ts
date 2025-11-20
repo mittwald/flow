@@ -30,7 +30,6 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
       inputValue: {},
       isDisabled: {},
       isInvalid: {},

@@ -13,6 +13,7 @@ import type { ActionModel } from "@/components/Action/models/ActionModel";
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
   id: string;
+  ref: RefObject<HTMLFormElement | null>;
   isReadOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
   submitButtonRef: RefObject<HTMLButtonElement | null>;
