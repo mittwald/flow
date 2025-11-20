@@ -1,0 +1,64 @@
+# Status
+
+Das Informationskonzept unterscheidet vier Status die verschiedenen Elementen gegeben werden können: **Info, Warning, Error** und **Success**. Jeder Status – und die dazugehörigen Components – folgt einem definierten [Color](/02-foundations/01-design/02-colors)- und [Icon-System](/03-components/content/icon/overview#icon-bibliothek), um eine eindeutige und schnelle Erkennung zu ermöglichen.
+
+## Info
+
+|                    |                                                              |
+| -------------------| ------------------------------------------------------------ |
+| **Einsatz**        | Sachliche Hinweise/Informationen ohne akuten Handlungsbedarf |
+| **Icon und Color** | <AlertBadge status="info">Info</AlertBadge>                 |
+| **Beispiele**      | - Update verfügbar<br>- Download wird vorbereitet<br>- Kündigung vorgemerkt<br>- Neue Nachricht im Ticket<br>- Aktive Anlegeprozesse |
+    
+## Warning
+
+|                    |                                                     |
+| -------------------| --------------------------------------------------- |
+| **Einsatz**        | Handlungsempfehlung oder Hinweis möglicher Konflikt |
+| **Icon und Color** | <AlertBadge status="warning">Warinng</AlertBadge>   |
+| **Beispiele**      | - Speicherplatz fast voll<br>- E-Mail Versand gesperrt<br>- Domain unverifiziert<br>- Zertifikat konnte nicht ausgestellt werden |
+
+## Danger
+
+|                    |                                                                                          |
+| -------------------| ---------------------------------------------------------------------------------------- |
+| **Einsatz**        | Kritisches Problem, das sofortiges Handeln erfordert                                     |
+| **Icon und Color** | <AlertBadge status="danger">Danger</AlertBadge>                                          |
+| **Beispiele**      | - Speicherplatz voll<br>- E-Mail Empfang deaktiviert<br>- Webserver/Cronjobs deaktiviert |
+
+## Success
+
+|                    |                                                   |
+| -------------------| ------------------------------------------------- |
+| **Einsatz**        | Erfolgreich abgeschlossene Ereignisse             |
+| **Icon und Color** | <AlertBadge status="success">Success</AlertBadge> |
+| **Beispiele**      | - Erfolgreich installiert<br>- Erfolgreich angelegt<br>- Erfolgreich erstellt<br>- Domain verifiziert |
+
+---
+
+# Alert
+
+Ein [Alert](/03-components/status/alert/overview) wird dort eingesetzt, wo unmittelbare Aufmerksamkeit erforderlich ist – etwa bei Systemfehlern oder wichtigen Systeminformationen. Er vermittelt in wenigen Sätzen auf der Detailseite den Status eines Elements und bietet bei Bedarf eine Handlungsempfehlung. Diese Handlungsempfehlung kann zusätzlich einen [Button](/03-components/actions/button/overview) oder [Link](/03-components/navigation/link/overview) enthalten, der direkt zur entsprechenden Aktion führt.
+Alerts werden in der Nähe des Contents platziert, der vom jeweiligen Status betroffen ist (s. Alert: Position).
+
+---
+
+# AlertBadge
+
+Ein [AlertBadge](/03-components/status/alert-badge/overview) ist ein kleines Markierungselement, das den Status eines Elements schnell sichtbar macht. Es erscheint zum Beispiel beim entsprechenden ListItem eines Elements in einer [List](/03-components/structure/list/overview) oder neben der [Heading](/03-components/content/heading/overview) in einer [Section](/03-components/structure/section/overview).
+Ist in einer List ein AlertBadge sichtbar, sollten auf der [Detailseite](/02-foundations/04-ui-patterns/03-struktur) weiterführende Informationen zum jeweiligen Status bereitgestellt werden – dies kann zum Beispiel über die Component [Alert](/03-components/status/alert/overview) erfolgen.
+Handelt es sich bei den zu vermittelnden Informationen hingegen um Metadaten oder eine Kategorisierung, sollte stattdessen ein [Badge](/03-components/status/badge/overview) verwendet werden.
+
+---
+
+# Notifications
+
+[Notifications](/03-components/status/notification/overview) informieren über wichtige System- oder Statusmeldungen und erscheinen kurz im Bildschirm des Users. So stellen sie sicher, dass User über einen Status informiert werden, auch wenn sie sich gerade nicht auf der betroffenen [Detailseite](/02-foundations/04-ui-patterns/03-struktur) befinden.
+Notifications werden durch den [NotificationsProvider](03-components/status/notification-provider/overview) ausgelöst. Sie werden kurz oben rechts angezeigt und wandern anschließend in ein Benachrichtigungscenter, in dem alle ungelesene Notifications aufgelistet werden.
+Alle User mit einer relevanten Rolle für das jeweilige Element im mStudio erhalten die entsprechende Notification. Es wird empfohlen, bei Error-Notifications zusätzlich eine E-Mail zu versenden, damit der User kritische Informationen zuverlässig erhält.
+
+---
+
+# Status-Icon
+
+Einzelne [Status-Icon](/03-components/content/icon/overview#icon-bibliothek) können den User auf versteckte Status-Informtionen aufmerksam machen. Zum Beispiel zeigt ein Status-Icon innerhalb von einem [Tab](/03-components/navigation/tabs/overview) an, dass in diesem ein relevanter Status vorliegt. Der Status kann dann im Tab z. B. mit Hilfe eines [Alerts](/03-components/status/alert/overview) erläutert werden.
