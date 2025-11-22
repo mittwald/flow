@@ -18,6 +18,7 @@ export * from "./components/ListSummary";
 export * from "./views/EmptyView";
 
 export * from "./hooks/useList";
+export * from "./hooks/useListMetadata";
 export * from "./List";
 export * from "./typedList";
 
