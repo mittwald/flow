@@ -31,7 +31,7 @@ const Footer: FC = () => {
               gap="s"
               className={styles.resources}
             >
-              <Heading>Ressourcen</Heading>
+              <Heading size="s">Ressourcen</Heading>
               <Link
                 whiteSpace="nowrap"
                 color="dark"
@@ -55,7 +55,7 @@ const Footer: FC = () => {
               gap="s"
               className={styles.legal}
             >
-              <Heading>Rechtliches</Heading>
+              <Heading size="s">Rechtliches</Heading>
               <Link
                 whiteSpace="nowrap"
                 color="dark"
@@ -84,7 +84,7 @@ const Footer: FC = () => {
 
         <Flex className={styles.feedback} gap="xl">
           <Flex elementType="section" direction="column" gap="s">
-            <Heading>Hilf uns, Flow noch besser zu machen!</Heading>
+            <Heading size="s">Hilf uns, Flow noch besser zu machen!</Heading>
             <Text>
               Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
               Feedback? Dann teile es uns gerne auf GitHub mit.
