@@ -6,7 +6,7 @@ import { render } from "vitest-browser-react";
 
 export const remoteTestServerPort = 6022;
 
-export const renderRemoteTest = (testName: string) => {
+export const renderRemoteTest = async (testName: string) => {
   const testFilePath = expect.getState().snapshotState.testFilePath;
 
   const url = new URL("http://localhost");
@@ -14,13 +14,24 @@ export const renderRemoteTest = (testName: string) => {
   url.searchParams.set("test", testName ?? "");
   url.searchParams.set("file", testFilePath.replace(".test.", ".test.remote."));
 
-  return render(
+  const isReady = Promise.withResolvers<void>();
+
+  const renderResult = render(
     <ErrorBoundary fallbackRender={({ error }) => "Error: " + String(error)}>
       <Suspense
         fallback={<div data-testid="root-loading-view">Loading...</div>}
       >
-        <RemoteRenderer src={url.toString()} />
+        <RemoteRenderer src={url.toString()} timeoutMs={100_000} />
+        <div
+          ref={() => {
+            isReady.resolve();
+          }}
+        />
       </Suspense>
     </ErrorBoundary>,
   );
+
+  await isReady.promise;
+
+  return renderResult;
 };

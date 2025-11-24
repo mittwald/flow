@@ -4,8 +4,8 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode, RefObject } from "react";
-import React, { Children, isValidElement } from "react";
+import type { CSSProperties, FC, ReactNode, Ref } from "react";
+import { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
@@ -24,7 +24,7 @@ export interface MarkdownProps
   headingOffset?: number;
   /** @internal */
   style?: CSSProperties;
-  ref?: RefObject<HTMLDivElement>;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /** @flr-generate all */

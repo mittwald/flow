@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
@@ -29,7 +29,7 @@ const meta: Meta<typeof Field> = {
       genderRequired: string;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -45,7 +45,7 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="gender">
             <RadioGroup>

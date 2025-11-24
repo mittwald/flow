@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type RefObject } from "react";
+import { type PropsWithChildren } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -13,22 +13,17 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
-import { useObjectRef } from "@react-aria/utils";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
     Pick<Aria.InputProps, "placeholder">,
     Pick<OptionsProps, "renderEmptyState">,
     PropsWithChildren,
-    FlowComponentProps {
+    FlowComponentProps<HTMLInputElement> {
   onChange?: (value: string) => void;
-  controller?: OverlayController;
-  inputRef?: RefObject<HTMLInputElement | null>;
 }
 
 /** @flr-generate all */
@@ -37,18 +32,11 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     children,
     className,
     menuTrigger = "focus",
-    onChange = () => {
-      // default: do nothing
-    },
-    onSelectionChange = () => {
-      // default: do nothing
-    },
-    controller: controllerFromProps,
+    onChange,
+    onSelectionChange,
     placeholder,
     ref,
-    inputRef,
     renderEmptyState,
-
     ...rest
   } = props;
 
@@ -70,25 +58,16 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     ...fieldPropsContext,
   };
 
-  const handleOnSelectionChange = (key: Key | null) => {
+  const handleSelectionChange = (key: Key | null) => {
     if (key === null) {
       return;
     }
-    onChange(String(key));
-    onSelectionChange(key);
+    onChange?.(String(key));
+    onSelectionChange?.(key);
   };
 
-  const controllerFromContext = useOverlayController("ComboBox", {
-    reuseControllerFromContext: true,
-  });
-
-  const controller = controllerFromProps ?? controllerFromContext;
-
-  const localComboBoxRef = useObjectRef(ref);
-  const localInputComboBoxRef = useObjectRef(inputRef);
-
-  useMakeFocusable(localComboBoxRef, () => {
-    localInputComboBoxRef.current?.focus();
+  const controller = useOverlayController("ComboBox", {
+    reuseControllerFromContext: false,
   });
 
   return (
@@ -97,8 +76,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
-      ref={localComboBoxRef}
-      onSelectionChange={handleOnSelectionChange}
+      onSelectionChange={handleSelectionChange}
       onOpenChange={(isOpen) => {
         controller.setOpen(isOpen);
       }}
@@ -107,15 +85,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
         <TunnelProvider>
           <FieldErrorCaptureContext>
             <div className={styles.input}>
-              <ReactAriaControlledValueFix
-                inputContext={Aria.ComboBoxContext}
-                props={props}
-              >
-                <Aria.Input
-                  placeholder={placeholder}
-                  ref={localInputComboBoxRef}
-                />
-              </ReactAriaControlledValueFix>
+              <Aria.Input placeholder={placeholder} ref={ref} />
               <Button
                 className={styles.toggle}
                 aria-label={stringFormatter.format("comboBox.showOptions")}
@@ -130,7 +100,9 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
             <Options
               controller={controller}
-              onOpenChange={() => null}
+              onOpenChange={() => {
+                // cut-off to avoid double controller state changes
+              }}
               renderEmptyState={renderEmptyState}
             >
               <TunnelExit id="options" />

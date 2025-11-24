@@ -2,13 +2,13 @@ import { renderRemoteTest } from "@/tests/renderRemoteTest";
 import { expect, test } from "vitest";
 
 test("DateRangePicker is rendered", async () => {
-  const dom = renderRemoteTest("standard");
+  const dom = await renderRemoteTest("standard");
   const element = dom.getByTestId("element");
   await expect.element(element).toBeInTheDocument();
 });
 
 test("DateRangePicker with value is rendered", async () => {
-  const dom = renderRemoteTest("withValue");
+  const dom = await renderRemoteTest("withValue");
   const element = dom.getByTestId("element");
   await expect.element(element).toBeInTheDocument();
 

@@ -3,7 +3,7 @@ import { expect, test } from "vitest";
 import { userEvent } from "@vitest/browser/context";
 
 test("SimpleForm is rendered", async () => {
-  const dom = renderRemoteTest("standard");
+  const dom = await renderRemoteTest("standard");
   const form = dom.getByTestId("rendered-form");
   await expect.element(form).toBeInTheDocument();
 
@@ -14,7 +14,7 @@ test("SimpleForm is rendered", async () => {
 });
 
 test("ActionForm is rendered", async () => {
-  const dom = renderRemoteTest("action");
+  const dom = await renderRemoteTest("action");
   const form = dom.getByTestId("rendered-form");
   await expect.element(form).toBeInTheDocument();
 
@@ -25,13 +25,13 @@ test("ActionForm is rendered", async () => {
 });
 
 test("onSubmitHandler is triggered with FormData", async () => {
-  const dom = renderRemoteTest("onSubmit");
+  const dom = await renderRemoteTest("onSubmit");
 
   await dom.getByTestId("form-checkbox-group-option1").click();
   await dom.getByTestId("form-checkbox-group-option2").click();
   await dom.getByPlaceholder("testInput").fill("textfieldExampleText");
 
-  const select = dom.getByTestId("form-select");
+  const select = dom.getByText("Element wählen");
   await userEvent.click(select);
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
@@ -66,13 +66,13 @@ test("onSubmitHandler is triggered with FormData", async () => {
 });
 
 test("actionHandler is triggered with FormData", async () => {
-  const dom = renderRemoteTest("onAction");
+  const dom = await renderRemoteTest("onAction");
 
   await dom.getByTestId("form-checkbox-group-option1").click();
   await dom.getByTestId("form-checkbox-group-option2").click();
   await dom.getByPlaceholder("testInput").fill("textfieldExampleText");
 
-  const select = dom.getByTestId("form-select");
+  const select = dom.getByText("Element wählen");
   await userEvent.click(select);
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 

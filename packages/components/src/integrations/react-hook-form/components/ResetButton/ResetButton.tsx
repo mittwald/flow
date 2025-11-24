@@ -30,7 +30,6 @@ export const ResetButton = flowComponent("ResetButton", (props) => {
       {...rest}
       ref={ref}
       isReadOnly={actionState === "isExecuting" || actionState === "isPending"}
-      type="reset"
       onPress={() => form.reset()}
       form={formId}
     >

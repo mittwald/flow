@@ -35,7 +35,7 @@ const getLineEnd = (text: string, pos: number) => {
 };
 
 export const modifyValueByType = (
-  markdown: string,
+  markdown = "",
   type: InsertType,
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
 ) => {

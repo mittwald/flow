@@ -82,10 +82,10 @@ describe("resetting", () => {
       undefined,
       "initialProp",
     ],
-    [undefined, {}, "changed", undefined, ""],
+    [undefined, {}, "changed", undefined, "changed"],
     [undefined, {}, "changed", "resetted", "resetted"],
   ])(
-    "when field with form default value '%s' and props '%s' changes to '%s' has the value '%s' after reset",
+    "when field with form default value '%s' and props '%s' changes to '%s' and resets to '%s' has the value '%s' after reset",
     async (initial, fieldProps = {}, changedTo, resetsTo, expected) => {
       const defaultValue = fieldProps.defaultValue;
       initialValue = initial;
