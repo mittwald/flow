@@ -21,7 +21,7 @@ type Story = StoryObj<typeof Color>;
 
 export const Default: Story = {};
 
-export const violet: Story = { args: { color: "lilac" } };
+export const violet: Story = { args: { color: "violet" } };
 
 export const Lilac: Story = { args: { color: "lilac" } };
 
