@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.566](https://github.com/mittwald/flow/compare/0.2.0-alpha.565...0.2.0-alpha.566) (2025-11-25)
+
+### Features
+
+* **List:** add metadata prop to DataLoaderResult for passing custom loader data ([#2128](https://github.com/mittwald/flow/issues/2128)) ([6b2d57d](https://github.com/mittwald/flow/commit/6b2d57d5cfcc82b7cd130e59e61944003e0bfe0e))
+
 # [0.2.0-alpha.565](https://github.com/mittwald/flow/compare/0.2.0-alpha.564...0.2.0-alpha.565) (2025-11-25)
 
 ### Bug Fixes
