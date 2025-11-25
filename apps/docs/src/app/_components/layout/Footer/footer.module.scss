@@ -20,7 +20,12 @@
 }
 
 @media (max-width: 1400px) {
-  .feedbackImage {
-    display: none;
+  .footer.footer {
+    .feedbackImage {
+      display: none;
+    }
+    .footerContent {
+      padding-inline: var(--size-px--xl);
+    }
   }
 }

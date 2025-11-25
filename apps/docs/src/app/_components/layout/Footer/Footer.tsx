@@ -74,12 +74,12 @@ const Footer: FC = () => {
               </Link>
             </Flex>
           </Flex>
-          <div className={styles.mittwaldLogo}>
-            <Image src={logoMittwald.src} alt="mittwald Logo" />
+          <Flex direction="column" gap="xs" className={styles.mittwaldLogo}>
+            <Image src={logoMittwald.src} alt="mittwald Logo" width={300} />
             <Text whiteSpace="nowrap">
-              © {year} Mittwald CM Service GmbH & Co. KG
+              <small>© {year} Mittwald CM Service GmbH & Co. KG</small>
             </Text>
-          </div>
+          </Flex>
         </Flex>
 
         <Flex className={styles.feedback} gap="xl">
