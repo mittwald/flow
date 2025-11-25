@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.565](https://github.com/mittwald/flow/compare/0.2.0-alpha.564...0.2.0-alpha.565) (2025-11-25)
+
+### Bug Fixes
+
+* **PasswordCreationField:** cache password validation result ([#2137](https://github.com/mittwald/flow/issues/2137)) ([cfedea2](https://github.com/mittwald/flow/commit/cfedea283727386c35ce200a9130d4d22b7dfd95))
+* **ReactHookForm:** call result callback after action state update ([#2152](https://github.com/mittwald/flow/issues/2152)) ([95e3a1d](https://github.com/mittwald/flow/commit/95e3a1dd3492942cf9b5d727b90a5b3038fb2498))
+
 # [0.2.0-alpha.564](https://github.com/mittwald/flow/compare/0.2.0-alpha.563...0.2.0-alpha.564) (2025-11-25)
 
 **Note:** Version bump only for package @mittwald/flow-project
