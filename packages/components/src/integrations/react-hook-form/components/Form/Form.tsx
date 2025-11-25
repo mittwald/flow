@@ -87,7 +87,9 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       return result;
     });
 
-    return submit(formEvent);
+    return submit(formEvent).finally(() => {
+      setReadOnlyContextState(false);
+    });
   };
 
   const lastActionState = useRef<string>(currentActionState);
