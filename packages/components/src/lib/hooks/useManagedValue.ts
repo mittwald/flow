@@ -24,7 +24,9 @@ export function useManagedValue<V, P = object>(props: ManagedValueProps<V, P>) {
 
   const handleOnChange = (newValue: V) => {
     onChange?.(newValue);
-    if (!isControlled) setInternalValue(newValue);
+    if (!isControlled) {
+      setInternalValue(newValue);
+    }
   };
 
   return { value, handleOnChange, ...restProps } as const;
