@@ -24,6 +24,19 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   const trackedSubmitCount = useRef(0);
   const submitHandlerResultRef = useRef<unknown>(null);
 
+  const currentActionState = action.state.useValue();
+  const lastActionState = useRef<string>(currentActionState);
+
+  useEffect(() => {
+    if (
+      currentActionState === "isIdle" &&
+      lastActionState.current === "isSucceeded"
+    ) {
+      callAfterSubmitFunction(submitHandlerResultRef.current);
+    }
+    lastActionState.current = currentActionState;
+  }, [currentActionState]);
+
   useEffect(() => {
     return form.subscribe({
       formState: {
@@ -74,7 +87,5 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   return {
     action,
     registerSubmitResult,
-    callAfterSubmit: () =>
-      callAfterSubmitFunction(submitHandlerResultRef.current),
   } as const;
 };
