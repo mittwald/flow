@@ -19,7 +19,6 @@ import {
   useFocusWithin,
   useLocalizedStringFormatter,
 } from "react-aria";
-import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useManagedValue } from "@/lib/hooks/useManagedValue";
 import { useObjectRef } from "@react-aria/utils";
@@ -89,11 +88,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   const handleOptionAction = (key: Aria.Key) => {
-    const inputElement = localInputRef.current;
-    if (inputElement) {
-      // Set value on input element and trigger change event
-      emitElementValueChange(inputElement, String(key));
-    }
+    handleOnChange(String(key));
     controller.close();
   };
 
