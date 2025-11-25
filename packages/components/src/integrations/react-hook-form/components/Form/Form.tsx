@@ -1,15 +1,16 @@
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import {
   type ComponentProps,
+  type FC,
   type FormEvent,
   type FormEventHandler,
   type PropsWithChildren,
   type RefObject,
+  useEffect,
   useId,
   useMemo,
-  useState,
   useRef,
-  type FC,
+  useState,
 } from "react";
 import type {
   FieldValues,
@@ -60,12 +61,12 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const formRef = useObjectRef(ref);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
-  const submitHandlerResultRef = useRef<unknown>(null);
 
   const isReadOnly = isReadOnlyFromProps || readonlyContextState;
 
-  const { action, registerSubmitResult, callAfterSubmitFunction } =
+  const { action, registerSubmitResult, callAfterSubmit } =
     useRegisterActionStateContext(form);
+  const currentActionState = action.state.useValue();
 
   const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
@@ -86,11 +87,19 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       return result;
     });
 
-    return submit(formEvent).finally(() => {
-      callAfterSubmitFunction(submitHandlerResultRef.current);
-      setReadOnlyContextState(false);
-    });
+    return submit(formEvent);
   };
+
+  const lastActionState = useRef<string>(currentActionState);
+  useEffect(() => {
+    if (
+      currentActionState === "isIdle" &&
+      lastActionState.current === "isSucceeded"
+    ) {
+      callAfterSubmit();
+    }
+    lastActionState.current = currentActionState;
+  }, [currentActionState]);
 
   return (
     <RhfFormContextProvider {...form}>

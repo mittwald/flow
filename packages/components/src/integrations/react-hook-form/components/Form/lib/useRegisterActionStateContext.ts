@@ -28,10 +28,8 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
     return form.subscribe({
       formState: {
         errors: true,
-        isValid: true,
       },
       callback: ({
-        isValid,
         isSubmitted = false,
         isSubmitSuccessful = false,
         submitCount = 0,
@@ -49,10 +47,6 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
         if (isSubmitted) {
           if (isSubmitSuccessful) {
             void action.state.onSucceeded();
-
-            if (isValid) {
-              callAfterSubmitFunction(submitHandlerResultRef.current);
-            }
           } else {
             const hasFailedWithError =
               isSubmitted && errors && Object.entries(errors).length > 0
@@ -80,6 +74,7 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   return {
     action,
     registerSubmitResult,
-    callAfterSubmitFunction,
+    callAfterSubmit: () =>
+      callAfterSubmitFunction(submitHandlerResultRef.current),
   } as const;
 };
