@@ -14,7 +14,7 @@ const flowColors = [
 
 type FlowColor = (typeof flowColors)[number];
 
-interface ColorProps extends PropsWithChildren {
+export interface ColorProps extends PropsWithChildren {
   /** The color of the element. @default "blue" */
   color?: FlowColor | (string & {});
 }
