@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import styles from "./Color.module.scss";
 
-const colors = [
+const flowColors = [
   "blue",
   "violet",
   "teal",
@@ -12,11 +12,9 @@ const colors = [
   "success",
 ] as const;
 
-export type FlowColor = (typeof colors)[number];
+type FlowColor = (typeof flowColors)[number];
 
-export const flowColors: FlowColor[] = [...colors];
-
-export interface ColorProps extends PropsWithChildren {
+interface ColorProps extends PropsWithChildren {
   /** The color of the element. @default "blue" */
   color?: FlowColor | (string & {});
 }
