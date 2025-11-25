@@ -71,7 +71,7 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
         }
       },
     });
-  }, [form.subscribe, action.state]);
+  }, [form.subscribe]);
 
   const registerSubmitResult = (result: unknown) => {
     if (isPromise(result)) {
