@@ -1,6 +1,9 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
-import { dynamic, type PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { type PropsWithChildren } from "react";
 import {
   type ControllerProps,
@@ -104,9 +107,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   };
 
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
+  const { ref: ignoredRef, ...fieldPropsWithoutRef } = fieldProps;
 
   const propsContext: PropsContext = {
-    Autocomplete: fieldProps,
+    Autocomplete: { ...fieldPropsWithoutRef, inputRef: fieldProps.ref },
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,

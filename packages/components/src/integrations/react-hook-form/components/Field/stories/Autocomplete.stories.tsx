@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import {
   Field,
+  Form,
   ResetButton,
   SubmitButton,
+  typedField,
 } from "@/integrations/react-hook-form";
-import { Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -56,7 +57,7 @@ const meta: Meta<typeof Autocomplete> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field name="email">
+          <Field name="email" rules={{ required: "This field is required" }}>
             <Autocomplete>
               <TextField>
                 <Label>Test</Label>

@@ -1,45 +1,31 @@
 import { useState } from "react";
 
-interface ManagedValuePropNames<K extends string> {
-  value: K;
-  defaultValue: K;
-}
+type ManagedValueProps<V, P = object> = {
+  value?: V;
+  defaultValue?: V;
+  onChange?: (value: V) => void;
+} & P;
 
-type PossibleValueProps<P> = Extract<
-  keyof Omit<P, "onChange">,
-  string | boolean
->;
+export function useManagedValue<V, P = object>(props: ManagedValueProps<V, P>) {
+  const {
+    value: valueFromProps,
+    defaultValue: defaultValueFromProps,
+    onChange,
+    ...restProps
+  } = props;
 
-export const useManagedValue = <
-  P extends object,
-  V = unknown,
-  PDV extends PossibleValueProps<P> = PossibleValueProps<P>,
->(
-  props: P & { onChange?: (value: V) => void },
-  onChange = props.onChange,
-  managedValuePropName: ManagedValuePropNames<PDV> = {
-    value: "value" as PDV,
-    defaultValue: "defaultValue" as PDV,
-  },
-) => {
-  const valueFromProps = props[managedValuePropName.value] as V;
-  const defaultValueFromProps = props[managedValuePropName.defaultValue] as V;
+  const isControlled = valueFromProps !== undefined;
+  const hasDefaultValue = defaultValueFromProps !== undefined;
 
-  const isControlled = typeof valueFromProps !== "undefined";
-  const hasDefaultValue = typeof defaultValueFromProps !== "undefined";
-
-  const [internalValue, setInternalValue] = useState(
-    hasDefaultValue ? defaultValueFromProps : valueFromProps,
+  const [internalValue, setInternalValue] = useState<V>(
+    hasDefaultValue ? defaultValueFromProps! : valueFromProps!,
   );
   const value = isControlled ? valueFromProps : internalValue;
 
-  const handleOnChange = (value: V) => {
-    onChange?.(value);
-
-    if (!isControlled) {
-      setInternalValue(() => value);
-    }
+  const handleOnChange = (newValue: V) => {
+    onChange?.(newValue);
+    if (!isControlled) setInternalValue(newValue);
   };
 
-  return { value, handleOnChange } as const;
-};
+  return { value, handleOnChange, ...restProps } as const;
+}
