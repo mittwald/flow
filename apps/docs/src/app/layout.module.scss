@@ -28,6 +28,9 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  &.scrolled {
+    box-shadow: var(--shadow--content);
+  }
 }
 
 .headerContent {
@@ -55,6 +58,7 @@
   display: flex;
   position: relative;
   padding-inline: var(--size-px--xl);
+  padding-top: var(--size-px--m);
   column-gap: var(--size-px--l);
   max-width: 1800px;
   margin: 0 auto;
@@ -63,11 +67,13 @@
 .mainNavigation,
 .anchorNavigation {
   position: sticky;
-  top: var(--header-height);
+  top: calc(var(--header-height) + var(--size-px--m));
   width: 280px;
   flex-shrink: 0;
   overflow: auto !important;
-  max-height: calc(100dvh - (var(--size-px--l)) - var(--header-height));
+  max-height: calc(
+    100dvh - var(--size-px--l) - var(--header-height) - var(--size-px--m)
+  );
 }
 
 .anchorNavigation {
