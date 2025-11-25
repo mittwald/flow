@@ -3,7 +3,6 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import MainContent from "@/app/_components/layout/MainContent";
 import type { Metadata } from "next";
-import Footer from "@/app/_components/layout/Footer";
 
 const contentFolder = "src/content/02-foundations";
 export const generateStaticParams = async () => {
@@ -39,8 +38,6 @@ export default async function Page(props: Props) {
       {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
       {overviewMdxFile && <MainContent mdxFile={overviewMdxFile} />}
-
-      <Footer />
     </>
   );
 }

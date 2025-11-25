@@ -46,7 +46,7 @@ const meta: Meta<typeof Autocomplete> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        email: "",
+        email: "asd@example.com",
       },
     });
 

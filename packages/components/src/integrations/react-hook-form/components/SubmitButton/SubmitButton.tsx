@@ -13,39 +13,45 @@ export type SubmitButtonProps = Omit<
   buttonComponent?: FC<Omit<ButtonProps, "ref">>;
 };
 
-export const SubmitButton = flowComponent("SubmitButton", (props) => {
-  const {
-    children,
-    ref,
-    buttonComponent: ButtonComponent = Button,
-    ...rest
-  } = props;
+export const SubmitButton = flowComponent(
+  "SubmitButton",
+  (props) => {
+    const {
+      children,
+      ref,
+      buttonComponent: ButtonComponent = Button,
+      ...rest
+    } = props;
 
-  const {
-    id: formId = props.form,
-    formActionModel,
-    submitButtonRef: submitButtonRefFromFormContext,
-  } = useFormContext();
-  const ButtonViewComponent = useMemo(() => ButtonComponent, [formId]);
+    const {
+      id: formId = props.form,
+      formActionModel,
+      submitButtonRef: submitButtonRefFromFormContext,
+    } = useFormContext();
+    const ButtonViewComponent = useMemo(() => ButtonComponent, [formId]);
 
-  const submitButtonRefFromProps = useObjectRef(ref);
-  const submitButtonRef = useMergeRefs([
-    submitButtonRefFromProps,
-    submitButtonRefFromFormContext,
-  ]);
+    const submitButtonRefFromProps = useObjectRef(ref);
+    const submitButtonRef = useMergeRefs([
+      submitButtonRefFromProps,
+      submitButtonRefFromFormContext,
+    ]);
 
-  return (
-    <Action actionModel={formActionModel}>
-      <ButtonViewComponent
-        {...rest}
-        ref={submitButtonRef}
-        type="submit"
-        form={formId}
-      >
-        {children}
-      </ButtonViewComponent>
-    </Action>
-  );
-});
+    return (
+      <Action actionModel={formActionModel}>
+        <ButtonViewComponent
+          {...rest}
+          ref={submitButtonRef}
+          type="submit"
+          form={formId}
+        >
+          {children}
+        </ButtonViewComponent>
+      </Action>
+    );
+  },
+  {
+    type: "provider",
+  },
+);
 
 export default SubmitButton;

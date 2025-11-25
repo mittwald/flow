@@ -2,7 +2,7 @@ import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import styles from "./Tooltip.module.scss";
 import clsx from "clsx";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
+import { ClearPropsContext } from "@/index/default";
 
 export type TooltipProps = PropsWithChildren<
   Omit<Aria.TooltipProps, "children">
@@ -15,7 +15,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
   const rootClassName = clsx(styles.tooltip, className);
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <Aria.Tooltip {...rest} className={rootClassName}>
         <Aria.OverlayArrow className={styles.tip}>
           <svg viewBox="0 0 8 8">
@@ -24,7 +24,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
         </Aria.OverlayArrow>
         {children}
       </Aria.Tooltip>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 };
 

@@ -1,13 +1,16 @@
-import { LayoutCard } from "@mittwald/flow-react-components";
+import {
+  AlertBadge,
+  ColumnLayout,
+  Heading,
+  Icon,
+  Image,
+  LayoutCard,
+  Link,
+  Section,
+  Text,
+} from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import React from "react";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { Image } from "@mittwald/flow-react-components";
-import { Icon } from "@mittwald/flow-react-components";
 import {
   IconBooks,
   IconComponents,
@@ -15,8 +18,6 @@ import {
 } from "@tabler/icons-react";
 import homeImage from "../../assets/Styleguide_Startseite.svg";
 import styles from "./layout.module.scss";
-import { AlertBadge } from "@mittwald/flow-react-components";
-import Footer from "@/app/_components/layout/Footer";
 
 const Home: FC = () => {
   return (
@@ -103,7 +104,6 @@ const Home: FC = () => {
           </Section>
         </LayoutCard>
       </ColumnLayout>
-      <Footer />
     </ColumnLayout>
   );
 };

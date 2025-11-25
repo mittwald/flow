@@ -4,7 +4,7 @@
 
   .messageThreadContainer {
     overflow: auto;
-
+    padding-bottom: var(--chat--spacing);
     padding-right: var(--size-px--m);
     margin-right: calc(var(--size-px--m) * -1);
     flex-grow: 1;

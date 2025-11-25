@@ -1,15 +1,15 @@
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import {
   type ComponentProps,
+  type FC,
   type FormEvent,
   type FormEventHandler,
   type PropsWithChildren,
   type RefObject,
   useId,
   useMemo,
-  useState,
   useRef,
-  type FC,
+  useState,
 } from "react";
 import type {
   FieldValues,
@@ -60,12 +60,9 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const formRef = useObjectRef(ref);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
-  const submitHandlerResultRef = useRef<unknown>(null);
 
   const isReadOnly = isReadOnlyFromProps || readonlyContextState;
-
-  const { action, registerSubmitResult, callAfterSubmitFunction } =
-    useRegisterActionStateContext(form);
+  const { action, registerSubmitResult } = useRegisterActionStateContext(form);
 
   const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
@@ -87,7 +84,6 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     });
 
     return submit(formEvent).finally(() => {
-      callAfterSubmitFunction(submitHandlerResultRef.current);
       setReadOnlyContextState(false);
     });
   };

@@ -6,7 +6,7 @@ import { useOverlayController } from "@/lib/controller";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { PropsWithClassName } from "@/lib/types/props";
 import OverlayContentView from "@/views/OverlayContentView";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
+import { ClearPropsContext } from "@/index/default";
 
 export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   ref?: Ref<HTMLDivElement>;
@@ -41,7 +41,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
   const rootClassName = clsx(styles.overlay, className);
 
   return (
-    <ClearPropsContextView keep={overlayType}>
+    <ClearPropsContext keep={overlayType}>
       <OverlayContentView
         onOpenChange={(isOpen) => controller.setOpen(isOpen)}
         isOpen={isOpen}
@@ -53,7 +53,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
           {isOpen && children}
         </OverlayContextProvider>
       </OverlayContentView>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 };
 
