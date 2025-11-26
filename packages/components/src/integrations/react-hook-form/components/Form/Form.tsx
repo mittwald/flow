@@ -5,7 +5,7 @@ import {
   type FormEvent,
   type FormEventHandler,
   type PropsWithChildren,
-  type RefObject,
+  type Ref,
   useId,
   useMemo,
   useRef,
@@ -17,7 +17,6 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { useObjectRef } from "@react-aria/utils";
 import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
@@ -26,7 +25,7 @@ type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
     onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
-    ref?: RefObject<HTMLFormElement | null>;
+    ref?: Ref<HTMLFormElement>;
   }>
 >;
 
@@ -58,13 +57,12 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = useId();
   const FormViewComponent = useMemo(() => FormView, [formId]);
 
-  const formRef = useObjectRef(ref);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const isReadOnly = isReadOnlyFromProps || readonlyContextState;
   const { action, registerSubmitResult } = useRegisterActionStateContext(form);
 
-  const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
+  const handleSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
     const formEvent =
       e && "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
@@ -96,16 +94,16 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
           id: formId,
           isReadOnly,
           setReadOnly: setReadOnlyContextState,
-          submit: handleOnSubmit,
+          submit: handleSubmit,
           submitButtonRef: submitButtonRef,
           formActionModel: action,
         }}
       >
         <FormViewComponent
           {...formProps}
-          ref={formRef}
+          ref={ref}
           id={formId}
-          onSubmit={handleOnSubmit}
+          onSubmit={handleSubmit}
         >
           {children}
         </FormViewComponent>

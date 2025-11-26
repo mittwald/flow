@@ -1,6 +1,6 @@
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
-import type { PropsWithChildren, RefObject } from "react";
+import type { PropsWithChildren } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
@@ -10,7 +10,6 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileFieldProps
@@ -25,7 +24,6 @@ export interface FileFieldProps
   onChange?: FileInputOnChangeHandler;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
-  inputRef?: RefObject<HTMLInputElement>;
 }
 
 /** @flr-generate all */
@@ -65,7 +63,7 @@ export const FileField = flowComponent("FileField", (props) => {
     value: undefined,
   };
 
-  const handleOnChange: FileInputOnChangeHandler = (fileList) => {
+  const handleChange: FileInputOnChangeHandler = (fileList) => {
     if (fileList && onChange) {
       Promise.all(Array.from(fileList).map(addAwaitedArrayBuffer)).then(() =>
         onChange(fileList),
@@ -73,15 +71,8 @@ export const FileField = flowComponent("FileField", (props) => {
     }
   };
 
-  const localRef = useObjectRef(ref);
-  const localInputRef = useObjectRef(inputRef);
-
-  useMakeFocusable(localRef, () => {
-    localInputRef.current?.focus();
-  });
-
   return (
-    <div {...fieldProps} ref={localRef}>
+    <div {...fieldProps}>
       <InputContext.Provider value={inputProps}>
         <FieldErrorContext.Provider
           value={formValidationState.displayValidation}
@@ -96,9 +87,9 @@ export const FileField = flowComponent("FileField", (props) => {
                 }
               >
                 <FileInput
-                  ref={localInputRef}
+                  ref={inputRef}
                   isReadOnly={isReadOnly}
-                  onChange={isReadOnly ? undefined : handleOnChange}
+                  onChange={isReadOnly ? undefined : handleChange}
                   isDisabled={isDisabled}
                 >
                   {children}

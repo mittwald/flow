@@ -82,7 +82,7 @@ const meta: Meta<typeof Field> = {
       user: string;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1000);
       submitAction(values);
     };
@@ -96,7 +96,7 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field
             name="user"

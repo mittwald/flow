@@ -11,13 +11,11 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";
-import { useObjectRef } from "@react-aria/utils";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
-  extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">>,
-    FlowComponentProps {}
+  extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children" | "ref">>,
+    FlowComponentProps<HTMLSpanElement> {}
 
 /** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
@@ -32,14 +30,10 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
 
   const rootClassName = clsx(styles.formField, className);
 
-  const localRef = useObjectRef(ref);
-  useMakeFocusable(localRef);
-
   const popoverController = useOverlayController("Popover");
 
   return (
     <Aria.DatePicker
-      ref={localRef}
       {...rest}
       {...fieldProps}
       className={clsx(fieldProps.className, rootClassName)}
@@ -53,7 +47,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
       }}
     >
       <FieldErrorCaptureContext>
-        <DateInput isDisabled={props.isDisabled} />
+        <DateInput isDisabled={props.isDisabled} ref={ref} />
         <PropsContextProvider props={fieldPropsContext}>
           {children}
         </PropsContextProvider>

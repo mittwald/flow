@@ -12,8 +12,8 @@ import PopoverContentView from "@/views/PopoverContentView";
 import { ClearPropsContext } from "@/index/default";
 
 export interface PopoverProps
-  extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
-    FlowComponentProps {
+  extends PropsWithChildren<Omit<Aria.PopoverProps, "children" | "ref">>,
+    FlowComponentProps<HTMLDivElement> {
   /**
    * Whether the popover should display a tip, pointing towards the trigger
    * element.
@@ -34,7 +34,6 @@ export const Popover = flowComponent("Popover", (props) => {
     controller: controllerFromProps,
     onOpenChange: onOpenChangeFromProps,
     defaultOpen = false,
-    ref,
     ...contentProps
   } = props;
 
@@ -61,7 +60,6 @@ export const Popover = flowComponent("Popover", (props) => {
             onOpenChangeFromProps(isOpen);
           }
         }}
-        ref={ref}
       >
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
