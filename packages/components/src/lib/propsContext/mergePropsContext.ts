@@ -4,7 +4,7 @@ import { getPropsMerger } from "@/lib/react/getPropsMerger";
 
 const merger = getPropsMerger({
   mergeClassNames: false,
-  mergeEventHandler: false,
+  mergeEventHandler: true,
 });
 
 export const mergePropsContext = (
