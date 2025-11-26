@@ -34,14 +34,13 @@ Verwende einen Alert, um ...
 
 ## Alert vs AccentBox
 
-Alerts und
-[AccentBoxen](/03-components/structure/accent-box/overview)
-dienen beide dazu, dem User zusätzliche Informationen bereitzustellen. Eine
-einfache Faustregel hilft bei der Entscheidung: Kann die Information ignoriert
-werden, ohne negative Folgen? Dann ist eine AccentBox die richtige Wahl. Wenn
-das Ignorieren hingegen zu Problemen führen könnte – etwa bei
-sicherheitsrelevanten Hinweisen oder wichtigen Systemmeldungen – sollte ein
-Alert mit entsprechendem Status verwendet werden.
+Alerts und [AccentBoxen](/03-components/structure/accent-box/overview) dienen
+beide dazu, dem User zusätzliche Informationen bereitzustellen. Eine einfache
+Faustregel hilft bei der Entscheidung: Kann die Information ignoriert werden,
+ohne negative Folgen? Dann ist eine AccentBox die richtige Wahl. Wenn das
+Ignorieren hingegen zu Problemen führen könnte – etwa bei sicherheitsrelevanten
+Hinweisen oder wichtigen Systemmeldungen – sollte ein Alert mit entsprechendem
+Status verwendet werden.
 
 <DoAndDont>
   <Plain heading="Verwende Alerts, um z. B. ...">
@@ -58,3 +57,28 @@ Alert mit entsprechendem Status verwendet werden.
   
   </Plain>
 </DoAndDont>
+
+# Anwendung
+
+## Position
+
+Ein Alert sollte immer in unmittelbarem Zusammenhang mit dem betroffenen Inhalt
+platziert werden. Er wird in der passenden
+[Section](/03-components/structure/section/overview) untergebracht oder, wenn
+sein Hinweis für die gesamte Seite gilt, in der
+[LayoutCard](/03-components/structure/layout-card/overview) oberhalb aller
+Sections.
+
+<Do example="section" bgColor="dark">
+
+Bezieht sich der Alert auf eine bestimmte Section, wird er zwischen der Heading
+und dem restlichen Content dieser Section eingefügt.
+
+</Do>
+
+<Do example="page" bgColor="dark">
+
+Bezieht sich der Alert auf den gesamten Inhalt, wird er prominent oberhalb der
+ersten Section innerhalb der LayoutCard platziert.
+
+</Do>

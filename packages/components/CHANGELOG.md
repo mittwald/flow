@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.566](https://github.com/mittwald/flow/compare/0.2.0-alpha.565...0.2.0-alpha.566) (2025-11-25)
+
+### Features
+
+* **List:** add metadata prop to DataLoaderResult for passing custom loader data ([#2128](https://github.com/mittwald/flow/issues/2128)) ([6b2d57d](https://github.com/mittwald/flow/commit/6b2d57d5cfcc82b7cd130e59e61944003e0bfe0e))
+
+# [0.2.0-alpha.565](https://github.com/mittwald/flow/compare/0.2.0-alpha.564...0.2.0-alpha.565) (2025-11-25)
+
+### Bug Fixes
+
+* **PasswordCreationField:** cache password validation result ([#2137](https://github.com/mittwald/flow/issues/2137)) ([cfedea2](https://github.com/mittwald/flow/commit/cfedea283727386c35ce200a9130d4d22b7dfd95))
+* **ReactHookForm:** call result callback after action state update ([#2152](https://github.com/mittwald/flow/issues/2152)) ([95e3a1d](https://github.com/mittwald/flow/commit/95e3a1dd3492942cf9b5d727b90a5b3038fb2498))
+
+# [0.2.0-alpha.564](https://github.com/mittwald/flow/compare/0.2.0-alpha.563...0.2.0-alpha.564) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.563](https://github.com/mittwald/flow/compare/0.2.0-alpha.562...0.2.0-alpha.563) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.562](https://github.com/mittwald/flow/compare/0.2.0-alpha.561...0.2.0-alpha.562) (2025-11-25)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

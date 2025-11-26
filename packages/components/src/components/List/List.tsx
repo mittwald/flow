@@ -33,11 +33,11 @@ import styles from "./List.module.css";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 
-export interface ListProps<T>
+export interface ListProps<T, TMeta = unknown>
   extends PropsWithChildren,
     FlowComponentProps,
     Omit<
-      ListShape<T>,
+      ListShape<T, TMeta>,
       | "search"
       | "loader"
       | "itemView"

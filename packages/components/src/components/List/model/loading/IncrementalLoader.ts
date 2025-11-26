@@ -154,7 +154,7 @@ export class IncrementalLoader<T> {
       useLoadBatch: () => {
         const loaderOptions = this.getDataLoaderOptions(batchIndex);
         const loaderResult = useData(loaderOptions);
-        const { data, itemTotalCount } = loaderResult;
+        const { data, itemTotalCount, metadata } = loaderResult;
 
         useEffect(() => {
           this.loaderState.setDataBatch(batchIndex, data);
@@ -162,6 +162,8 @@ export class IncrementalLoader<T> {
           if (itemTotalCount !== undefined) {
             this.list.batches.updateItemTotalCount(itemTotalCount);
           }
+
+          this.loaderState.setMetadata(metadata);
 
           this.loaderState.setBatchLoadingState(batchIndex, "loaded");
         }, [loaderResult]);

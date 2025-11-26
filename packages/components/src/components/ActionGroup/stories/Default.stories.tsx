@@ -7,7 +7,7 @@ import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
 import { Link } from "@/components/Link";
 import { useForm } from "react-hook-form";
-import { Form } from "@/integrations/react-hook-form";
+import { Form, SubmitButton } from "@/integrations/react-hook-form";
 
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
@@ -114,8 +114,9 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <ActionGroup {...props}>
-          <Button color="accent" type="submit">
-            Login
+          <SubmitButton color="accent">Submit</SubmitButton>
+          <Button color="secondary" variant="soft">
+            Abort
           </Button>
         </ActionGroup>
       </Form>
