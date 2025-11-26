@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.571](https://github.com/mittwald/flow/compare/0.2.0-alpha.570...0.2.0-alpha.571) (2025-11-26)
+
+### Bug Fixes
+
+* **MarkdownEditor:** remove effect handler ([#2157](https://github.com/mittwald/flow/issues/2157)) ([ad5049c](https://github.com/mittwald/flow/commit/ad5049c302ac95230eefdeb5755f19298a2974f7))
+
 # [0.2.0-alpha.570](https://github.com/mittwald/flow/compare/0.2.0-alpha.569...0.2.0-alpha.570) (2025-11-26)
 
 ### Bug Fixes
