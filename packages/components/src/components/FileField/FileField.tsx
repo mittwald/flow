@@ -2,7 +2,7 @@ import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
 import type * as Aria from "react-aria-components";
-import { FieldErrorContext, InputContext } from "react-aria-components";
+import { FieldErrorContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
 import { FileInput } from "@/components/FileField/components/FileInput";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -73,33 +73,30 @@ export const FileField = flowComponent("FileField", (props) => {
 
   return (
     <div {...fieldProps}>
-      <InputContext.Provider value={inputProps}>
-        <FieldErrorContext.Provider
-          value={formValidationState.displayValidation}
-        >
-          <FieldErrorCaptureContext>
-            <PropsContextProvider props={fieldPropsContext}>
-              <div
-                data-readonly={isReadOnly}
-                data-required={!!isRequired || undefined}
-                data-invalid={
-                  formValidationState.displayValidation.isInvalid || undefined
-                }
+      <FieldErrorContext.Provider value={formValidationState.displayValidation}>
+        <FieldErrorCaptureContext>
+          <PropsContextProvider props={fieldPropsContext}>
+            <div
+              data-readonly={isReadOnly}
+              data-required={!!isRequired || undefined}
+              data-invalid={
+                formValidationState.displayValidation.isInvalid || undefined
+              }
+            >
+              <FileInput
+                ref={inputRef}
+                isReadOnly={isReadOnly}
+                onChange={isReadOnly ? undefined : handleChange}
+                isDisabled={isDisabled}
+                {...inputProps}
               >
-                <FileInput
-                  ref={inputRef}
-                  isReadOnly={isReadOnly}
-                  onChange={isReadOnly ? undefined : handleChange}
-                  isDisabled={isDisabled}
-                >
-                  {children}
-                </FileInput>
-              </div>
-            </PropsContextProvider>
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </FieldErrorContext.Provider>
-      </InputContext.Provider>
+                {children}
+              </FileInput>
+            </div>
+          </PropsContextProvider>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
+      </FieldErrorContext.Provider>
     </div>
   );
 });
