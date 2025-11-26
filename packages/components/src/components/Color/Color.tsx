@@ -14,6 +14,11 @@ const flowColors = [
 
 type FlowColor = (typeof flowColors)[number];
 
+function isFlowColor(something: unknown): something is FlowColor {
+  const anyFlowColors = flowColors as readonly string[];
+  return typeof something === "string" && anyFlowColors.includes(something);
+}
+
 export interface ColorProps extends PropsWithChildren {
   /** The color of the element. @default "blue" */
   color?: FlowColor | (string & {});
@@ -23,10 +28,9 @@ export interface ColorProps extends PropsWithChildren {
 export const Color: FC<ColorProps> = (props) => {
   const { children, color = "blue" } = props;
 
-  const isFlowColor = flowColors.includes(color as FlowColor);
-
-  const className = isFlowColor ? styles[color as FlowColor] : undefined;
-  const style = !isFlowColor ? { color } : undefined;
+  const isAFlowColor = isFlowColor(color);
+  const className = isAFlowColor ? styles[color] : undefined;
+  const style = !isAFlowColor ? { color } : undefined;
 
   return (
     <span className={className} style={style}>
