@@ -32,11 +32,11 @@ const runOpenCloseTest = async (dom: RenderResult) => {
 };
 
 test("Test open and close", async () => {
-  const dom = renderRemoteTest("standard");
+  const dom = await renderRemoteTest("standard");
   await runOpenCloseTest(dom);
 });
 
 test("Test open and close in List", async () => {
-  const dom = renderRemoteTest("inList");
+  const dom = await renderRemoteTest("inList");
   await runOpenCloseTest(dom);
 });

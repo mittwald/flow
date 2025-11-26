@@ -43,8 +43,8 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     ...fieldPropsContext,
   };
 
-  const localCheckboxGroupRef = useObjectRef(ref);
-  useMakeFocusable(localCheckboxGroupRef);
+  const objectRef = useObjectRef(ref);
+  useMakeFocusable(objectRef);
 
   return (
     <Aria.CheckboxGroup
@@ -52,11 +52,11 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       {...fieldProps}
       isInvalid={isInvalid}
       className={clsx(fieldProps.className, className)}
-      ref={localCheckboxGroupRef}
+      ref={objectRef}
     >
       <TunnelProvider>
         <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext} clear>
+          <PropsContextProvider props={propsContext}>
             {children}
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
               <TunnelExit id="checkboxButtons" />

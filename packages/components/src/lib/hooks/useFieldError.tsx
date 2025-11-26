@@ -12,7 +12,6 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
 
   const fieldErrorCapturePropsContext: PropsContext = {
     FieldError: {
-      ___inherit: "preserve",
       tunnelId,
       className: formFieldStyles.fieldError,
     },
@@ -22,7 +21,6 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
     () => (props) => {
       return (
         <PropsContextProvider
-          levelMode="keep"
           props={fieldErrorCapturePropsContext}
           dependencies={[tunnelId]}
         >

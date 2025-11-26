@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, type RefObject } from "react";
+import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
@@ -13,28 +13,22 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
-import { useObjectRef } from "@react-aria/utils";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
-    FlowComponentProps {
-  inputRef?: RefObject<HTMLInputElement | null>;
-}
+    FlowComponentProps<HTMLInputElement> {}
 
 /** @flr-generate all */
 export const NumberField = flowComponent("NumberField", (props) => {
   const {
     children,
     className,
-    ref,
-    inputRef,
-    defaultValue,
     isWheelDisabled = true,
+    ref,
     ...rest
-  } = props;
+  } = useControlledHostValueProps(props);
 
   const {
     FieldErrorView,
@@ -45,19 +39,10 @@ export const NumberField = flowComponent("NumberField", (props) => {
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
-  const localNumberFieldRef = useObjectRef(ref);
-  const localNumberFieldInputRef = useObjectRef(inputRef);
-
-  useMakeFocusable(localNumberFieldRef, () => {
-    localNumberFieldInputRef?.current?.focus();
-  });
-
   return (
     <Aria.NumberField
       {...rest}
-      ref={localNumberFieldRef}
       isWheelDisabled={isWheelDisabled}
-      defaultValue={defaultValue}
       className={clsx(rootClassName, fieldProps.className)}
     >
       <PropsContextProvider props={fieldPropsContext}>
@@ -75,12 +60,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
           <IconChevronDown />
           <IconMinus className={styles.coarsePointerIcon} />
         </Button>
-        <ReactAriaControlledValueFix
-          inputContext={Aria.NumberFieldContext}
-          props={props}
-        >
-          <Aria.Input className={styles.input} ref={localNumberFieldInputRef} />
-        </ReactAriaControlledValueFix>
+        <Aria.Input className={styles.input} ref={ref} />
         <Button
           ariaSlot="increment"
           className={styles.incrementButton}

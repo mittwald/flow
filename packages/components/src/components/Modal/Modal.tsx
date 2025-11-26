@@ -41,97 +41,91 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-export const Modal = flowComponent(
-  "Modal",
-  (props) => {
-    const {
-      size = "s",
-      offCanvas,
-      controller,
-      children,
-      ref,
-      className,
-      offCanvasOrientation = "right",
-      ...rest
-    } = props;
+export const Modal = flowComponent("Modal", (props) => {
+  const {
+    size = "s",
+    offCanvas,
+    controller,
+    children,
+    ref,
+    className,
+    offCanvasOrientation = "right",
+    ...rest
+  } = props;
 
-    const rootClassName = clsx(
-      offCanvas ? styles.offCanvas : styles.modal,
-      styles[`size-${size}`],
-      offCanvasOrientation === "left" && styles["left"],
-      className,
-    );
+  const rootClassName = clsx(
+    offCanvas ? styles.offCanvas : styles.modal,
+    styles[`size-${size}`],
+    offCanvasOrientation === "left" && styles["left"],
+    className,
+  );
 
-    const header = (children: ReactNode) => (
-      <>
-        {children}
-        <Action closeOverlay="Modal">
-          <ButtonView
-            variant="plain"
-            color="secondary"
-            onPress={controller?.close}
-          >
-            <IconClose />
-          </ButtonView>
-        </Action>
-      </>
-    );
+  const header = (children: ReactNode) => (
+    <>
+      {children}
+      <Action closeOverlay="Modal">
+        <ButtonView
+          variant="plain"
+          color="secondary"
+          onPress={controller?.close}
+        >
+          <IconClose />
+        </ButtonView>
+      </Action>
+    </>
+  );
 
-    const nestedHeadingLevel = 3;
+  const nestedHeadingLevel = 3;
 
-    const nestedHeadingProps: PropsContext = {
-      Heading: { level: nestedHeadingLevel },
-      Section: {
-        Header: { Heading: { level: nestedHeadingLevel } },
-        Heading: { level: nestedHeadingLevel },
-      },
+  const nestedHeadingProps: PropsContext = {
+    Heading: { level: nestedHeadingLevel },
+    Section: {
       Header: { Heading: { level: nestedHeadingLevel } },
-    };
+      Heading: { level: nestedHeadingLevel },
+    },
+    Header: { Heading: { level: nestedHeadingLevel } },
+  };
 
-    const propsContext: PropsContext = {
-      Content: {
-        ...nestedHeadingProps,
-        className: styles.content,
-      },
-      ColumnLayout: {
-        ...nestedHeadingProps,
-        l: [2, 1],
-        m: [1],
-        className: styles.columnLayout,
-        AccentBox: { className: styles.accentBox, color: "neutral" },
-      },
-      Heading: {
-        className: styles.header,
-        level: 2,
-        slot: "title",
-        children: dynamic((props) => header(props.children)),
-      },
-      ActionGroup: {
-        className: styles.actionGroup,
-        spacing: "m",
-      },
-    };
+  const propsContext: PropsContext = {
+    Content: {
+      ...nestedHeadingProps,
+      className: styles.content,
+    },
+    ColumnLayout: {
+      ...nestedHeadingProps,
+      l: [2, 1],
+      m: [1],
+      className: styles.columnLayout,
+      AccentBox: { className: styles.accentBox, color: "neutral" },
+    },
+    Heading: {
+      className: styles.header,
+      level: 2,
+      slot: "title",
+      children: dynamic((props) => header(props.children)),
+    },
+    ActionGroup: {
+      className: styles.actionGroup,
+      spacing: "m",
+    },
+  };
 
-    return (
-      <Overlay
-        className={rootClassName}
-        controller={controller}
-        ref={ref}
-        {...rest}
-      >
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={offCanvas}>
-            <Suspense fallback={<OffCanvasSuspenseFallback />}>
-              {children}
-            </Suspense>
-          </Wrap>
-        </PropsContextProvider>
-      </Overlay>
-    );
-  },
-  {
-    type: "provider",
-  },
-);
+  return (
+    <Overlay
+      className={rootClassName}
+      controller={controller}
+      ref={ref}
+      {...rest}
+    >
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={offCanvas}>
+          <Suspense fallback={<OffCanvasSuspenseFallback />}>
+            {children}
+          </Suspense>
+        </Wrap>
+      </PropsContextProvider>
+    </Overlay>
+  );
+});
 
 export default Modal;

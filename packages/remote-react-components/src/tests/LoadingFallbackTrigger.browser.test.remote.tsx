@@ -8,7 +8,7 @@ export const standard = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsReady((r) => !r);
-    }, 500);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [isReady]);

@@ -2,15 +2,14 @@ import {
   type FC,
   type FormEvent,
   type PropsWithChildren,
-  type RefObject,
+  type Ref,
 } from "react";
-import React from "react";
 import { prepareFormData } from "@/components/lib/prepareFormData";
 
 type FormProps = {
   action?: (data: FormData) => void | Promise<void>;
   onSubmit?: (data: FormData) => void | Promise<void>;
-  ref?: RefObject<HTMLFormElement>;
+  ref?: Ref<HTMLFormElement>;
 } & PropsWithChildren;
 
 export const Form: FC<FormProps> = (props) => {
