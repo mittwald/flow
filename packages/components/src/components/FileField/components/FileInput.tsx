@@ -18,7 +18,8 @@ export interface FileInputProps extends PropsWithChildren {
 
 /** @internal */
 export const FileInput: FC<FileInputProps> = (props) => {
-  const { children, isDisabled, onChange, isReadOnly, ref } = props;
+  const { children, isDisabled, onChange, isReadOnly, ref, ...restInputProps } =
+    props;
   const inputRef = useObjectRef(ref);
 
   const handlePress = () => {
@@ -46,6 +47,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
     <PropsContextProvider props={propsContext}>
       {children}
       <Aria.Input
+        {...restInputProps}
         className={styles.FileInput}
         type="file"
         ref={inputRef}

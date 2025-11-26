@@ -10,16 +10,15 @@ import type {
   RefAttributes,
   FunctionComponent,
 } from "react";
-import { cloneElement, memo, useMemo } from "react";
+import { cloneElement, memo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
-import { increaseNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
-import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
 import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -43,7 +42,7 @@ type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>
 >;
 
-type FlowComponentProvisionType = "provider" | "ui";
+export type FlowComponentProvisionType = "provider" | "ui" | "layout";
 
 interface Options {
   type?: FlowComponentProvisionType;
@@ -60,9 +59,6 @@ export function flowComponent<C extends FlowComponentName>(
 
   const { type = "ui", isRemoteComponent = false } = options;
 
-  const propsContextLevelMode: PropsContextLevelMode =
-    type === "ui" ? "increment" : "keep";
-
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
@@ -76,10 +72,6 @@ export function flowComponent<C extends FlowComponentName>(
     >;
 
     const componentProps = useComponentPropsContext(componentName);
-    const componentPropsToUse = useMemo(
-      () => increaseNestingLevel(componentProps ?? {}),
-      [componentProps],
-    );
 
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
@@ -89,10 +81,7 @@ export function flowComponent<C extends FlowComponentName>(
 
     if (isRemoteComponent) {
       element = (
-        <ComponentPropsContextProvider
-          componentProps={componentPropsToUse}
-          levelModel={propsContextLevelMode}
-        >
+        <ComponentPropsContextProvider componentProps={componentProps}>
           {element}
         </ComponentPropsContextProvider>
       );
@@ -103,13 +92,14 @@ export function flowComponent<C extends FlowComponentName>(
        * the host side, so that nesting and inheritance is working correctly.
        */
       element = (
-        <ComponentPropsContextProviderView
-          componentProps={componentPropsToUse}
-          levelModel={propsContextLevelMode}
-        >
+        <ComponentPropsContextProviderView componentProps={componentProps}>
           {element}
         </ComponentPropsContextProviderView>
       );
+    }
+
+    if (type === "ui") {
+      element = <ClearPropsContext>{element}</ClearPropsContext>;
     }
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {
