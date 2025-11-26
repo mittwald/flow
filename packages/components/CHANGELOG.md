@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.570](https://github.com/mittwald/flow/compare/0.2.0-alpha.569...0.2.0-alpha.570) (2025-11-26)
+
+### Bug Fixes
+
+* **Autocomplete:** fix label always marked as optional ([#2155](https://github.com/mittwald/flow/issues/2155)) ([3973659](https://github.com/mittwald/flow/commit/3973659068b7a86ab577c795a0439e67ca3640c7))
+* **FileField:** fix flaky props settings ([#2156](https://github.com/mittwald/flow/issues/2156)) ([a332b42](https://github.com/mittwald/flow/commit/a332b427f41e304cc35a15eb76f573a61367511c))
+
 # [0.2.0-alpha.569](https://github.com/mittwald/flow/compare/0.2.0-alpha.568...0.2.0-alpha.569) (2025-11-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
