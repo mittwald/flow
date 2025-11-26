@@ -1,4 +1,4 @@
-import { type KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import { type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { TunnelProvider, TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import {
   modifyValueByMarkdownSyntax,
   scrollToCursor,
@@ -41,37 +41,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   } = useControlledHostValueProps(props);
 
   const inputRef = useObjectRef(ref);
-
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
-
-  const selectionPresent = useRef<{
-    shouldScrollToCursor: boolean;
-    selectionStart: number | null;
-    selectionEnd: number | null;
-  } | null>(null);
-
-  useEffect(() => {
-    const ref = inputRef.current;
-    const present = selectionPresent.current;
-
-    if (!present || !ref) {
-      return;
-    }
-
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          ref.setSelectionRange(present.selectionStart, present.selectionEnd);
-
-          if (present.shouldScrollToCursor) {
-            scrollToCursor(value ?? "", ref);
-          }
-        });
-      });
-
-      selectionPresent.current = null;
-    }, 0);
-  }, [value]);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -91,11 +61,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
     const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
 
-    selectionPresent.current = {
-      shouldScrollToCursor: true,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.value = newValue;
+        inputRef.current?.setSelectionRange(newSelectionStart, newSelectionEnd);
+        scrollToCursor(newValue, inputRef.current);
+      }
+    });
 
     event.preventDefault();
     onChange(newValue);
@@ -108,11 +80,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       inputRef,
     );
 
-    selectionPresent.current = {
-      shouldScrollToCursor: false,
-      selectionStart: newSelectionStart,
-      selectionEnd: newSelectionEnd,
-    };
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.value = newValue;
+        inputRef.current.setSelectionRange(newSelectionStart, newSelectionEnd);
+        inputRef.current.focus();
+      }
+    });
 
     onChange(newValue);
   };
