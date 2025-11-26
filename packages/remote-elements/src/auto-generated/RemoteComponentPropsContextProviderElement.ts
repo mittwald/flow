@@ -10,9 +10,7 @@ export class RemoteComponentPropsContextProviderElement extends FlowRemoteElemen
   }
 
   static override get remoteProperties() {
-    return {
-      levelModel: {},
-    };
+    return {};
   }
 
   static override get remoteEvents() {

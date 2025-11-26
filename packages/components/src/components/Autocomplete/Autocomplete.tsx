@@ -115,7 +115,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}
-          clear
           dependencies={[
             value,
             isInvalid,
