@@ -9,11 +9,10 @@ import {
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
-import { ClearPropsContext } from "@/index/default";
 
 export interface PopoverProps
-  extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
-    FlowComponentProps {
+  extends PropsWithChildren<Omit<Aria.PopoverProps, "children" | "ref">>,
+    FlowComponentProps<HTMLDivElement> {
   /**
    * Whether the popover should display a tip, pointing towards the trigger
    * element.
@@ -34,7 +33,6 @@ export const Popover = flowComponent("Popover", (props) => {
     controller: controllerFromProps,
     onOpenChange: onOpenChangeFromProps,
     defaultOpen = false,
-    ref,
     ...contentProps
   } = props;
 
@@ -49,25 +47,22 @@ export const Popover = flowComponent("Popover", (props) => {
   const rootClassName = clsx(styles.popover, className);
 
   return (
-    <ClearPropsContext>
-      <PopoverContentView
-        {...contentProps}
-        className={rootClassName}
-        isOpen={isOpen}
-        onOpenChange={(isOpen) => {
-          if (!onOpenChangeFromProps) {
-            controller.setOpen(isOpen);
-          } else {
-            onOpenChangeFromProps(isOpen);
-          }
-        }}
-        ref={ref}
-      >
-        <OverlayContextProvider type="Popover" controller={controller}>
-          {children}
-        </OverlayContextProvider>
-      </PopoverContentView>
-    </ClearPropsContext>
+    <PopoverContentView
+      {...contentProps}
+      className={rootClassName}
+      isOpen={isOpen}
+      onOpenChange={(isOpen) => {
+        if (!onOpenChangeFromProps) {
+          controller.setOpen(isOpen);
+        } else {
+          onOpenChangeFromProps(isOpen);
+        }
+      }}
+    >
+      <OverlayContextProvider type="Popover" controller={controller}>
+        {children}
+      </OverlayContextProvider>
+    </PopoverContentView>
   );
 });
 

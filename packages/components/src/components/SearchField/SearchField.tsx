@@ -10,8 +10,8 @@ import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
@@ -19,7 +19,8 @@ export interface SearchFieldProps
 
 /** @flr-generate all */
 export const SearchField = flowComponent("SearchField", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, ref, ...rest } =
+    useControlledHostValueProps(props);
 
   const {
     FieldErrorView,
@@ -49,16 +50,11 @@ export const SearchField = flowComponent("SearchField", (props) => {
       </PropsContextProvider>
       <div className={styles.inputContainer}>
         <IconSearch className={styles.searchIcon} />
-        <ReactAriaControlledValueFix
-          inputContext={Aria.SearchFieldContext}
-          props={props}
-        >
-          <Aria.Input
-            placeholder={searchText}
-            className={styles.input}
-            ref={ref}
-          />
-        </ReactAriaControlledValueFix>
+        <Aria.Input
+          placeholder={searchText}
+          className={styles.input}
+          ref={ref}
+        />
         <Button
           className={styles.clearButton}
           variant="plain"

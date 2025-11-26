@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -14,31 +13,37 @@ export interface HeaderProps
 }
 
 /** @flr-generate all */
-export const Header = flowComponent("Header", (props) => {
-  const {
-    children,
-    ref,
-    elementType = "header",
-    renderSectionHeader,
-    className,
-    ...rest
-  } = props;
+export const Header = flowComponent(
+  "Header",
+  (props) => {
+    const {
+      children,
+      ref,
+      elementType = "header",
+      renderSectionHeader,
+      className,
+      ...rest
+    } = props;
 
-  if (renderSectionHeader) {
+    if (renderSectionHeader) {
+      return (
+        <SectionHeader ref={ref as never} className={className}>
+          {children}
+        </SectionHeader>
+      );
+    }
+
+    const Element = elementType;
+
     return (
-      <SectionHeader ref={ref as never} className={className}>
+      <Element {...rest} className={className} ref={ref as never}>
         {children}
-      </SectionHeader>
+      </Element>
     );
-  }
-
-  const Element = elementType;
-
-  return (
-    <Element {...rest} className={className} ref={ref as never}>
-      {children}
-    </Element>
-  );
-});
+  },
+  {
+    type: "layout",
+  },
+);
 
 export default Header;

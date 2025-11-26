@@ -4,9 +4,10 @@
  */
 export const emitElementValueChange = (
   element: HTMLElement,
-  value: string,
-  event: Event = new Event("change", { bubbles: true }),
+  value: unknown,
 ) => {
+  const event = new Event("change", { bubbles: true });
+
   try {
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       Object.getPrototypeOf(element),

@@ -9,11 +9,11 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
+import { useHotkeys } from "react-hotkeys-hook";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
-import { useHotkeys } from "react-hotkeys-hook";
-import { useMergeRefs } from "use-callback-ref";
+import { mergeRefs } from "@react-aria/utils";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -69,7 +69,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const isFieldInvalid = controller.fieldState.invalid;
 
   const hotkeyRef = useHotkeys<never>(
-    "meta+enter, ctrl+enter",
+    "mod+enter",
     () => {
       formContext.submit();
     },
@@ -78,11 +78,12 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       enableOnContentEditable: true,
     },
   );
-  const fieldRef = useMergeRefs([controller.field.ref, hotkeyRef]);
+
+  const refWithHotkey = mergeRefs(controller.field.ref, hotkeyRef);
 
   const fieldProps = {
     ...controller.field,
-    ref: fieldRef,
+    ref: refWithHotkey,
     value,
     name,
     form: formContext.id,
@@ -103,10 +104,11 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     }),
   };
 
-  const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
-
   const propsContext: PropsContext = {
-    Autocomplete: fieldProps,
+    Autocomplete: {
+      SearchField: fieldProps,
+      TextField: fieldProps,
+    },
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,
@@ -141,7 +143,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       selectedKey: value,
     },
     ComboBox: {
-      ...fieldPropsWithoutValue,
+      ...fieldProps,
       selectedKey: value,
     },
     Rating: fieldProps,

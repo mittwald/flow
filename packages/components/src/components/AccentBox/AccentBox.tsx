@@ -20,35 +20,36 @@ export interface AccentBoxProps
 }
 
 /** @flr-generate all */
-export const AccentBox = flowComponent("AccentBox", (props) => {
-  const { color = "blue", children, elementType = "div", className } = props;
+export const AccentBox = flowComponent(
+  "AccentBox",
+  (props) => {
+    const { color = "blue", children, elementType = "div", className } = props;
 
-  const rootClassName = clsx(styles.accentBox, className, styles[color]);
+    const rootClassName = clsx(styles.accentBox, className, styles[color]);
 
-  const Element = elementType;
+    const Element = elementType;
 
-  const contentColor = color === "green" ? "dark" : undefined;
+    const contentColor = color === "green" ? "dark" : undefined;
 
-  const propsContext: PropsContext = {
-    Link: {
-      color: contentColor,
-      ___inherit: true,
-    },
-    Text: {
-      color: contentColor,
-      ___inherit: true,
-    },
-    Heading: {
-      color: contentColor,
-      ___inherit: true,
-    },
-  };
+    const propsContext: PropsContext = {
+      Link: {
+        color: contentColor,
+      },
+      Text: {
+        color: contentColor,
+      },
+      Heading: {
+        color: contentColor,
+      },
+    };
 
-  return (
-    <PropsContextProvider props={propsContext}>
-      <Element className={rootClassName}>{children}</Element>
-    </PropsContextProvider>
-  );
-});
+    return (
+      <PropsContextProvider props={propsContext}>
+        <Element className={rootClassName}>{children}</Element>
+      </PropsContextProvider>
+    );
+  },
+  { type: "layout" },
+);
 
 export default AccentBox;

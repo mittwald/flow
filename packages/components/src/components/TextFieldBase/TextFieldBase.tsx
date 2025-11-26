@@ -24,7 +24,6 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     className,
     input,
     showCharacterCount,
-    ref,
     FieldErrorView,
     FieldErrorCaptureContext,
     ...rest
@@ -36,7 +35,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
 
   const translation = useLocalizedStringFormatter(locales);
 
-  const handleOnChange = (v: string) => {
+  const handleChange = (v: string) => {
     if (showCharacterCount) {
       setCharactersCount(v.length);
     }
@@ -53,22 +52,8 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     },
   );
 
-  /** Prevent weird reset behavior when value is 'undefined' */
-  const propsWithOptionalStringValue =
-    "value" in props
-      ? {
-          value: props.value ?? "",
-        }
-      : {};
-
   return (
-    <Aria.TextField
-      ref={ref}
-      {...rest}
-      className={className}
-      onChange={handleOnChange}
-      {...propsWithOptionalStringValue}
-    >
+    <Aria.TextField {...rest} className={className} onChange={handleChange}>
       <FieldErrorCaptureContext>
         {children}
         {input}

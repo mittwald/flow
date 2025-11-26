@@ -10,7 +10,6 @@ import {
   TabTitle,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
-import Footer from "@/app/_components/layout/Footer";
 
 interface Props {
   mdxFile: MdxFile;
@@ -47,7 +46,6 @@ export const TabContent: FC<Props> = (props) => {
             </Tab>
           </Tabs>
         </LayoutCard>
-        <Footer />
       </Flex>
 
       <AnchorNavigation

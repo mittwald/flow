@@ -1,9 +1,6 @@
 import type { RefObject } from "react";
 
-export const scrollToCursor = (
-  value: string,
-  textarea: HTMLTextAreaElement,
-) => {
+export const scrollToCursor = (value = "", textarea: HTMLTextAreaElement) => {
   const { selectionStart } = textarea;
   const lineHeight = parseInt(
     getComputedStyle(textarea).lineHeight || "20",
@@ -14,7 +11,7 @@ export const scrollToCursor = (
 };
 
 export const modifyValueByMarkdownSyntax = (
-  value: string,
+  value = "",
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
 ) => {
   const textarea = textAreaRef.current;

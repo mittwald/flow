@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.571](https://github.com/mittwald/flow/compare/0.2.0-alpha.570...0.2.0-alpha.571) (2025-11-26)
+
+### Bug Fixes
+
+* **MarkdownEditor:** remove effect handler ([#2157](https://github.com/mittwald/flow/issues/2157)) ([ad5049c](https://github.com/mittwald/flow/commit/ad5049c302ac95230eefdeb5755f19298a2974f7))
+
+# [0.2.0-alpha.570](https://github.com/mittwald/flow/compare/0.2.0-alpha.569...0.2.0-alpha.570) (2025-11-26)
+
+### Bug Fixes
+
+* **Autocomplete:** fix label always marked as optional ([#2155](https://github.com/mittwald/flow/issues/2155)) ([3973659](https://github.com/mittwald/flow/commit/3973659068b7a86ab577c795a0439e67ca3640c7))
+* **FileField:** fix flaky props settings ([#2156](https://github.com/mittwald/flow/issues/2156)) ([a332b42](https://github.com/mittwald/flow/commit/a332b427f41e304cc35a15eb76f573a61367511c))
+
+# [0.2.0-alpha.569](https://github.com/mittwald/flow/compare/0.2.0-alpha.568...0.2.0-alpha.569) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.568](https://github.com/mittwald/flow/compare/0.2.0-alpha.567...0.2.0-alpha.568) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.567](https://github.com/mittwald/flow/compare/0.2.0-alpha.566...0.2.0-alpha.567) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.566](https://github.com/mittwald/flow/compare/0.2.0-alpha.565...0.2.0-alpha.566) (2025-11-25)
+
+### Features
+
+* **List:** add metadata prop to DataLoaderResult for passing custom loader data ([#2128](https://github.com/mittwald/flow/issues/2128)) ([6b2d57d](https://github.com/mittwald/flow/commit/6b2d57d5cfcc82b7cd130e59e61944003e0bfe0e))
+
+# [0.2.0-alpha.565](https://github.com/mittwald/flow/compare/0.2.0-alpha.564...0.2.0-alpha.565) (2025-11-25)
+
+### Bug Fixes
+
+* **PasswordCreationField:** cache password validation result ([#2137](https://github.com/mittwald/flow/issues/2137)) ([cfedea2](https://github.com/mittwald/flow/commit/cfedea283727386c35ce200a9130d4d22b7dfd95))
+* **ReactHookForm:** call result callback after action state update ([#2152](https://github.com/mittwald/flow/issues/2152)) ([95e3a1d](https://github.com/mittwald/flow/commit/95e3a1dd3492942cf9b5d727b90a5b3038fb2498))
+
+# [0.2.0-alpha.564](https://github.com/mittwald/flow/compare/0.2.0-alpha.563...0.2.0-alpha.564) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.563](https://github.com/mittwald/flow/compare/0.2.0-alpha.562...0.2.0-alpha.563) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.562](https://github.com/mittwald/flow/compare/0.2.0-alpha.561...0.2.0-alpha.562) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.561](https://github.com/mittwald/flow/compare/0.2.0-alpha.560...0.2.0-alpha.561) (2025-11-19)
+
+### Bug Fixes
+
+* **Chat:** update spacing ([#2140](https://github.com/mittwald/flow/issues/2140)) ([5fa4203](https://github.com/mittwald/flow/commit/5fa420319d77c14ac1a2cfda8919bafb32333113))
+
+# [0.2.0-alpha.560](https://github.com/mittwald/flow/compare/0.2.0-alpha.559...0.2.0-alpha.560) (2025-11-19)
+
+### Features
+
+* **Alert:** Add spacing between alerts and sections ([#2138](https://github.com/mittwald/flow/issues/2138)) ([4bac980](https://github.com/mittwald/flow/commit/4bac980c15e94e99cde695ad466639fe557963ca))
+
+# [0.2.0-alpha.559](https://github.com/mittwald/flow/compare/0.2.0-alpha.558...0.2.0-alpha.559) (2025-11-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.558](https://github.com/mittwald/flow/compare/0.2.0-alpha.557...0.2.0-alpha.558) (2025-11-17)
 
 **Note:** Version bump only for package @mittwald/flow-project

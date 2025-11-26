@@ -15,7 +15,7 @@ import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { TextField } from "@/components/TextField";
 import Option from "@/components/Option";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
@@ -39,7 +39,7 @@ const meta: Meta<typeof Autocomplete> = {
       email: string;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -54,9 +54,9 @@ const meta: Meta<typeof Autocomplete> = {
     const email = form.watch("email");
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
-          <Field name="email">
+          <Field name="email" rules={{ required: "Is required" }}>
             <Autocomplete>
               <TextField>
                 <Label>Test</Label>
@@ -101,8 +101,8 @@ export const WithFieldError: Story = {
             {generateFromString(fieldValue)}
           </Autocomplete>
         </Field>
-        <Autocomplete {...props} isInvalid>
-          <TextField>
+        <Autocomplete {...props}>
+          <TextField isInvalid>
             <Label>Test</Label>
           </TextField>
           <FieldError>ErrorFromOuterFieldError!</FieldError>

@@ -6,24 +6,24 @@ import {
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import clsx from "clsx";
-import type { PropsWithChildren, RefObject } from "react";
+import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Checkbox.module.scss";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { useObjectRef } from "@react-aria/utils";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useObjectRef } from "react-aria";
 
 export interface CheckboxProps
-  extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
-    FlowComponentProps {
+  extends PropsWithChildren<
+      Omit<Aria.CheckboxProps, "children" | "ref" | "inputRef">
+    >,
+    FlowComponentProps<HTMLInputElement> {
   inputClassName?: string;
-  inputRef?: RefObject<HTMLInputElement | null>;
 }
 
 /** @flr-generate all */
 export const Checkbox = flowComponent("Checkbox", (props) => {
-  const { children, className, ref, inputClassName, inputRef, ...rest } = props;
+  const { children, className, ref, inputClassName, ...rest } = props;
 
   const {
     FieldErrorView,
@@ -32,22 +32,17 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
     fieldProps,
   } = useFieldComponent(props);
 
-  const localCheckboxRef = useObjectRef(ref);
-  const localInputCheckboxRef = useObjectRef(inputRef);
-  useMakeFocusable(localCheckboxRef, () =>
-    localInputCheckboxRef.current?.focus(),
-  );
+  const inputRef = useObjectRef(ref);
 
   return (
     <div
       {...fieldProps}
       className={clsx(styles.checkbox, className, fieldProps.className)}
-      ref={localCheckboxRef}
     >
       <FieldErrorCaptureContext>
         <Aria.Checkbox
           {...rest}
-          inputRef={localInputCheckboxRef}
+          inputRef={inputRef}
           className={clsx(inputClassName, styles.input)}
         >
           {({ isSelected, isIndeterminate }) => (

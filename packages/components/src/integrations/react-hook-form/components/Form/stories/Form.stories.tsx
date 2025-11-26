@@ -30,7 +30,7 @@ const meta: Meta<typeof Form> = {
       },
     });
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -41,7 +41,7 @@ const meta: Meta<typeof Form> = {
       <ModalTrigger>
         <Button>Open modal</Button>
         <Modal>
-          <Form {...props} form={form} onSubmit={handleOnSubmit}>
+          <Form {...props} form={form} onSubmit={handleSubmit}>
             <Heading>Modal</Heading>
             <Content>
               <Section>

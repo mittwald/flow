@@ -15,7 +15,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import Select from "@/components/Select";
 import { Option } from "@/components/Option";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
@@ -30,7 +30,7 @@ const meta: Meta<typeof Field> = {
       appRequired: string;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -46,7 +46,7 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="app">
             <Select>
