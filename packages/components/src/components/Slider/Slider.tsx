@@ -1,5 +1,4 @@
 import { type PropsWithChildren } from "react";
-import React from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
@@ -13,13 +12,12 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import { useObjectRef } from "@react-aria/utils";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SliderProps
-  extends FlowComponentProps,
+  extends FlowComponentProps<HTMLInputElement>,
     PropsWithChildren<Aria.SliderProps>,
-    Pick<Aria.SliderThumbProps, "inputRef" | "name"> {
+    Pick<Aria.SliderThumbProps, "name"> {
   showInitialMarker?: boolean;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
@@ -37,7 +35,6 @@ export const Slider = flowComponent("Slider", (props) => {
     showInitialMarker,
     isReadOnly,
     ref,
-    inputRef,
     ...rest
   } = props;
 
@@ -52,12 +49,7 @@ export const Slider = flowComponent("Slider", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const localSliderRef = useObjectRef(ref);
-  const localInputRef = useObjectRef(inputRef);
-
-  useMakeFocusable(localSliderRef, () => {
-    localInputRef.current?.focus();
-  });
+  const objectRef = useObjectRef(ref);
 
   const propsContext: PropsContext = {
     ...fieldPropsContext,
@@ -72,7 +64,6 @@ export const Slider = flowComponent("Slider", (props) => {
     <div {...fieldProps}>
       <Aria.Slider
         {...rest}
-        ref={localSliderRef}
         className={rootClassName}
         isDisabled={isDisabled}
         defaultValue={defaultValue}
@@ -131,7 +122,7 @@ export const Slider = flowComponent("Slider", (props) => {
                     />
                   )}
                 <Aria.SliderThumb
-                  inputRef={localInputRef}
+                  inputRef={objectRef}
                   name={name}
                   className={styles.handle}
                   isDisabled={isReadOnly}

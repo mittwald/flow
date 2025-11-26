@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useRef } from "react";
+import { type PropsWithChildren } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
@@ -12,19 +12,17 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
-import { useObjectRef } from "@react-aria/utils";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SelectProps
-  extends PropsWithChildren<Omit<Aria.SelectProps, "children" | "className">>,
-    FlowComponentProps,
+  extends PropsWithChildren<
+      Omit<Aria.SelectProps, "children" | "className" | "ref">
+    >,
+    FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
   onChange?: (value: Key | null) => void;
-  /** An overlay controller to control the select option popover state. */
-  controller?: OverlayController;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
 }
@@ -36,9 +34,8 @@ export const Select = flowComponent("Select", (props) => {
     className,
     onChange,
     onSelectionChange,
-    controller: controllerFromProps,
-    ref,
     isReadOnly,
+    ref,
     ...rest
   } = props;
 
@@ -62,19 +59,9 @@ export const Select = flowComponent("Select", (props) => {
     ...fieldPropsContext,
   };
 
-  const controllerFromContext = useOverlayController("Select", {
-    reuseControllerFromContext: true,
+  const controller = useOverlayController("Select", {
+    reuseControllerFromContext: false,
   });
-
-  const localSelectRef = useObjectRef(ref);
-  const localButtonRef = useRef<HTMLButtonElement>(null);
-
-  useMakeFocusable(localSelectRef, () => {
-    localButtonRef.current?.focus();
-    controller.setOpen(true);
-  });
-
-  const controller = controllerFromProps ?? controllerFromContext;
   const isOpen = controller.useIsOpen();
 
   return (
@@ -82,7 +69,6 @@ export const Select = flowComponent("Select", (props) => {
       {...rest}
       {...fieldProps}
       className={clsx(rootClassName, fieldProps.className)}
-      ref={localSelectRef}
       onChange={(value) => {
         if (!isReadOnly) {
           onChange?.(value);
@@ -97,9 +83,9 @@ export const Select = flowComponent("Select", (props) => {
         <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <Aria.Button
-              ref={localButtonRef}
               data-readonly={isReadOnly}
               className={styles.toggle}
+              ref={ref}
             >
               <Aria.SelectValue />
               <IconChevronDown />

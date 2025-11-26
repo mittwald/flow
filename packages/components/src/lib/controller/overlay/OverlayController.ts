@@ -61,11 +61,17 @@ export class OverlayController {
   }
 
   public open(): void {
+    if (this.isOpen) {
+      return;
+    }
     this.isOpen = true;
     this.executeOnOpen();
   }
 
   public close(): void {
+    if (!this.isOpen) {
+      return;
+    }
     this.isOpen = false;
     this.executeOnClose();
   }

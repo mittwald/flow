@@ -22,7 +22,7 @@ export default () => {
 
   const Field = typedField(form);
 
-  const handleOnSubmit = async () => {
+  const handleSubmit = async () => {
     // submit form
 
     controller.close();
@@ -35,7 +35,7 @@ export default () => {
       </Button>
 
       <Modal controller={controller}>
-        <Form form={form} onSubmit={handleOnSubmit}>
+        <Form form={form} onSubmit={handleSubmit}>
           <Heading>Organisation anlegen</Heading>
 
           <Content>

@@ -1,11 +1,9 @@
 import type { PropsContext } from "@/lib/propsContext/types";
 import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
 import { memo, type FC, type PropsWithChildren } from "react";
-import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
 
 export interface ComponentPropsContextProviderProps extends PropsWithChildren {
   componentProps?: PropsContext;
-  levelModel?: PropsContextLevelMode;
 }
 
 /**
@@ -14,9 +12,9 @@ export interface ComponentPropsContextProviderProps extends PropsWithChildren {
  */
 export const ComponentPropsContextProvider: FC<ComponentPropsContextProviderProps> =
   memo((props) => {
-    const { children, componentProps = {}, levelModel = "increment" } = props;
+    const { children, componentProps = {} } = props;
     return (
-      <PropsContextProvider props={componentProps} levelMode={levelModel}>
+      <PropsContextProvider props={componentProps}>
         {children}
       </PropsContextProvider>
     );

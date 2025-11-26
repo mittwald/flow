@@ -1,8 +1,9 @@
 import { mergeRefs as mergeRefsFn } from "@react-aria/utils";
 import { mergeProps as ariaMergeProps } from "@react-aria/utils";
-import { isObjectType } from "remeda";
+import { isObjectType, sortBy } from "remeda";
 import { setProperty } from "dot-prop";
 import type { Ref } from "react";
+import { getNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 
 interface MergePropsOptions {
   mergeClassNames?: boolean;
@@ -18,7 +19,13 @@ export const getPropsMerger =
       mergeEventHandler = true,
       mergeRefs = true,
     } = options;
-    const mergedProps = ariaMergeProps(...propsList);
+
+    const sortedByLevel = sortBy(
+      propsList,
+      getNestingLevel,
+    ) as typeof propsList;
+
+    const mergedProps = ariaMergeProps(...sortedByLevel);
 
     if (isObjectType(mergedProps)) {
       if (!mergeClassNames) {

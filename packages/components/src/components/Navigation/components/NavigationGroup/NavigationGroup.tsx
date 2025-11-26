@@ -36,9 +36,6 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     },
     Link: {
       tunnelId: "groupLinks",
-      unstyled: false,
-      color: "light",
-      className: "peter",
     },
   };
 

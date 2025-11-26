@@ -19,11 +19,11 @@ export default () => {
   }
   const form = useForm<Values>();
 
-  const handleOnSubmit = (values: Values) =>
+  const handleSubmit = (values: Values) =>
     alert(JSON.stringify(values));
 
   return (
-    <Form form={form} onSubmit={handleOnSubmit}>
+    <Form form={form} onSubmit={handleSubmit}>
       <Section>
         <Field
           name="name"

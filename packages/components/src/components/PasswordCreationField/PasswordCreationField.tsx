@@ -26,7 +26,6 @@ import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
@@ -40,9 +39,9 @@ import {
   Policy,
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
-import { useManagedValue } from "@/lib/hooks/useManagedValue";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -77,8 +76,10 @@ export const PasswordCreationField = flowComponent(
       validationPolicy:
         validationPolicyFromProps = defaultPasswordCreationPolicy,
       isRequired,
+      value,
+      onChange,
       ...rest
-    } = props;
+    } = useControlledHostValueProps(props);
 
     const {
       FieldErrorView,
@@ -95,8 +96,7 @@ export const PasswordCreationField = flowComponent(
       [validationPolicyFromProps],
     );
 
-    const { value, handleOnChange } = useManagedValue(props);
-    const deferredValue = useDeferredValue(value);
+    const deferredValue = useDeferredValue(value ?? "");
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
@@ -174,7 +174,7 @@ export const PasswordCreationField = flowComponent(
       const generatedPassword = await generatePassword(validationPolicy);
       setOptimisticPolicyValidationResult();
       setIsPasswordRevealed(true);
-      handleOnChange(generatedPassword);
+      onChange(generatedPassword);
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
@@ -236,7 +236,7 @@ export const PasswordCreationField = flowComponent(
         {...rest}
         value={value}
         type={isPasswordRevealed ? "text" : "password"}
-        onChange={handleOnChange}
+        onChange={onChange}
         onPaste={onPasswordPasteHandler}
         className={clsx(className, fieldProps.className)}
         isDisabled={isDisabled}
@@ -253,6 +253,7 @@ export const PasswordCreationField = flowComponent(
                 isRequired,
                 value,
                 policyValidationResult,
+                isEmptyValue,
               ]}
             >
               <TunnelExit id="label" />
@@ -260,12 +261,7 @@ export const PasswordCreationField = flowComponent(
                 isDisabled={isDisabled}
                 className={clsx(styles.inputGroup)}
               >
-                <ReactAriaControlledValueFix
-                  inputContext={Aria.InputContext}
-                  props={{ ...props, value }}
-                >
-                  <Aria.Input ref={ref} className={styles.input} />
-                </ReactAriaControlledValueFix>
+                <Aria.Input ref={ref} className={styles.input} />
                 <Aria.Group className={styles.buttonContainer}>
                   <TogglePasswordVisibilityButton
                     className={styles.button}

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
@@ -82,7 +82,7 @@ export const WithRef: StoryObj = {
 
     return (
       <Section>
-        <MarkdownEditor {...props} inputRef={editorRef}>
+        <MarkdownEditor {...props} ref={editorRef}>
           <Label>Message</Label>
         </MarkdownEditor>
         <Button type="button" onClick={handleFocus}>

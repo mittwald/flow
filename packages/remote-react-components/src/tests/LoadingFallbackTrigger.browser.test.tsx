@@ -3,18 +3,22 @@ import { renderRemoteTest } from "@/tests/renderRemoteTest";
 import { expect, test } from "vitest";
 
 test("LoadingFallbackTrigger triggers suspense on host", async () => {
-  const dom = renderRemoteTest("standard");
+  const dom = await renderRemoteTest("standard");
   const content = dom.getByTestId("content");
   const loadingView = dom.getByTestId("root-loading-view");
 
   const testIt = async () => {
     // Is loading
     await expect.element(loadingView).toBeVisible();
-    await expectNotVisibleFor(content, 100);
+    await expectNotVisibleFor(content, 1000);
 
     // Loading is done
-    await expect.element(content).toBeVisible();
-    await expectNotVisibleFor(loadingView, 100);
+    await expect
+      .element(content, {
+        timeout: 5000,
+      })
+      .toBeVisible();
+    await expectNotVisibleFor(loadingView, 1000);
   };
 
   await testIt();

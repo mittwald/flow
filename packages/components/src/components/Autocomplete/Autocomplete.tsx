@@ -18,53 +18,38 @@ import {
   UNSAFE_PortalProvider,
   useFocusWithin,
   useLocalizedStringFormatter,
+  useObjectRef,
 } from "react-aria";
-import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { useManagedValue } from "@/lib/hooks/useManagedValue";
+import { isFocused } from "@/lib/form/isFocused";
+import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps,
+    FlowComponentProps<HTMLInputElement>,
     Omit<
       Aria.AutocompleteProps,
-      "children" | "onInputChange" | "inputValue" | "defaultInputValue"
-    > {
-  isInvalid?: boolean;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-}
+      "children" | "onInputChange" | "inputValue" | "defaultInputValue" | "ref"
+    > {}
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, isInvalid, ...rest } = props;
+  const { children, ref, ...rest } = props;
 
-  const { value, handleOnChange } = useManagedValue(props);
+  const inputRef = useObjectRef(ref);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
   const stringFormatter = useLocalizedStringFormatter(locales);
   const container = useRef(null);
-  const triggerRef = useRef<HTMLInputElement>(null);
 
-  const controller = useOverlayController("Popover", {
+  const optionsOverlayController = useOverlayController("Popover", {
     reuseControllerFromContext: false,
   });
 
   const focusWithin = useFocusWithin({
-    onBlurWithin: controller.close,
+    onBlurWithin: optionsOverlayController.close,
   });
-
-  const inputProps: SearchFieldProps & TextFieldProps = {
-    onKeyDown: (e) => {
-      if (e.key === "Enter" && controller.isOpen) {
-        e.preventDefault();
-      }
-    },
-    isInvalid,
-    ref: triggerRef,
-  };
 
   const renderEmptyState = () => (
     <Text className={styles.empty}>
@@ -72,23 +57,30 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     </Text>
   );
 
-  const handleOnInputChange = (value: string) => {
-    if (!value) {
-      controller.close();
-    } else if (!controller.isOpen) {
-      controller.open();
+  const handleInputChange = (value: string) => {
+    if (value === "") {
+      optionsOverlayController.close();
+    } else if (isFocused(inputRef.current)) {
+      optionsOverlayController.open();
     }
-
-    handleOnChange?.(value);
   };
 
   const handleOptionAction = (key: Aria.Key) => {
-    const inputElement = triggerRef.current;
-    if (inputElement) {
-      // Set value on input element and trigger change event
-      emitElementValueChange(inputElement, String(key));
+    const value = String(key);
+    if (inputRef.current) {
+      emitElementValueChange(inputRef.current, value);
     }
-    controller.close();
+    optionsOverlayController.close();
+  };
+
+  const inputProps: SearchFieldProps & TextFieldProps = {
+    onKeyDown: (e) => {
+      if (e.key === "Enter" && optionsOverlayController.isOpen) {
+        e.preventDefault();
+      }
+    },
+    ref: inputRef,
+    onChange: handleInputChange,
   };
 
   const {
@@ -100,7 +92,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
-    TextField: { ...inputProps, inputContext: Aria.AutocompleteContext },
+    TextField: inputProps,
     Option: {
       tunnelId: "options",
     },
@@ -113,21 +105,22 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   return (
     <div {...fieldProps}>
       <FieldErrorCaptureContext>
-        <PropsContextProvider props={propsContext} clear>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[optionsOverlayController]}
+        >
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
               <Aria.Autocomplete
-                onInputChange={handleOnInputChange}
                 filter={contains}
                 disableAutoFocusFirst
-                inputValue={value}
                 {...rest}
               >
                 {children}
                 <Options
                   onAction={handleOptionAction}
-                  triggerRef={triggerRef}
-                  controller={controller}
+                  triggerRef={inputRef}
+                  controller={optionsOverlayController}
                   renderEmptyState={renderEmptyState}
                   isNonModal
                   placement="bottom start"

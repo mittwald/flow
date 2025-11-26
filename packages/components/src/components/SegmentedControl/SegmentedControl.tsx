@@ -3,7 +3,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
-import React, { type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
@@ -17,8 +17,8 @@ import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SegmentedControlProps
-  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
-    FlowComponentProps,
+  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children" | "ref">>,
+    FlowComponentProps<HTMLDivElement>,
     PropsWithContainerBreakpointSize {}
 
 /** @flr-generate all */
@@ -53,14 +53,14 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     ...fieldPropsContext,
   };
 
-  const localRadioRef = useObjectRef(ref);
-  useMakeFocusable(localRadioRef);
+  const objectRef = useObjectRef(ref);
+  useMakeFocusable(objectRef);
 
   return (
     <Aria.RadioGroup
       {...rest}
       className={clsx(rootClassName, fieldProps.className)}
-      ref={localRadioRef}
+      ref={objectRef}
     >
       <TunnelProvider>
         <FieldErrorCaptureContext>
