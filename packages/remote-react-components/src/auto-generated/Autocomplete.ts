@@ -13,8 +13,6 @@ export const Autocomplete = createFlowRemoteComponent(
     slotProps: {
       wrapper: "flr-slot-root-wrapper",
     },
-    eventProps: {
-      onChange: { event: "change" } as never,
-    },
+    eventProps: {},
   },
 );

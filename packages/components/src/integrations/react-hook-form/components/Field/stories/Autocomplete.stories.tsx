@@ -56,7 +56,7 @@ const meta: Meta<typeof Autocomplete> = {
     return (
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
-          <Field name="email">
+          <Field name="email" rules={{ required: "Is required" }}>
             <Autocomplete>
               <TextField>
                 <Label>Test</Label>
@@ -101,8 +101,8 @@ export const WithFieldError: Story = {
             {generateFromString(fieldValue)}
           </Autocomplete>
         </Field>
-        <Autocomplete {...props} isInvalid>
-          <TextField>
+        <Autocomplete {...props}>
+          <TextField isInvalid>
             <Label>Test</Label>
           </TextField>
           <FieldError>ErrorFromOuterFieldError!</FieldError>

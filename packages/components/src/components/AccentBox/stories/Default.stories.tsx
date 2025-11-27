@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
@@ -9,6 +8,14 @@ import { Section } from "@/components/Section";
 import { Flex } from "@/components/Flex";
 import { IconStar } from "@/components/Icon/components/icons";
 import { LayoutCard } from "@/components/LayoutCard";
+import {
+  Alert,
+  Align,
+  Button,
+  ContextualHelp,
+  ContextualHelpTrigger,
+  CopyButton,
+} from "@/index/default";
 
 const meta: Meta<typeof AccentBox> = {
   title: "Structure/AccentBox",
@@ -90,5 +97,37 @@ export const InLayoutCard: Story = {
         </Section>
       </AccentBox>
     </LayoutCard>
+  ),
+};
+
+export const WithVariousContent: Story = {
+  args: { color: "green" },
+  render: (props) => (
+    <AccentBox {...props}>
+      <IconStar />
+      <Section>
+        <Heading>Heading</Heading>
+        <Text>{dummyText.long}</Text>
+        <Button>Button</Button>
+        <Align>
+          <Text>{dummyText.short}</Text>
+          <ContextualHelpTrigger>
+            <Button />
+            <ContextualHelp>
+              <Heading>Contextual Help</Heading>
+              <Text>{dummyText.short}</Text>
+            </ContextualHelp>
+          </ContextualHelpTrigger>
+        </Align>
+        <Alert status="warning">
+          <Heading>Alert Heading</Heading>
+          <Text>This is an alert inside an AccentBox.</Text>
+        </Alert>
+        <Align>
+          <Text>{dummyText.short}</Text>
+          <CopyButton />
+        </Align>
+      </Section>
+    </AccentBox>
   ),
 };

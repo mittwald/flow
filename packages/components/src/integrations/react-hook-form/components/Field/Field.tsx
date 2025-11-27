@@ -105,7 +105,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   };
 
   const propsContext: PropsContext = {
-    Autocomplete: fieldProps,
+    Autocomplete: {
+      SearchField: fieldProps,
+      TextField: fieldProps,
+    },
     SearchField: fieldProps,
     TextField: fieldProps,
     TextArea: fieldProps,

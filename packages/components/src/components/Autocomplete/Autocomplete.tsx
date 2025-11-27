@@ -21,8 +21,8 @@ import {
   useObjectRef,
 } from "react-aria";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { isFocused } from "@/lib/form/isFocused";
+import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
@@ -31,17 +31,11 @@ export interface AutocompleteProps
     Omit<
       Aria.AutocompleteProps,
       "children" | "onInputChange" | "inputValue" | "defaultInputValue" | "ref"
-    > {
-  isInvalid?: boolean;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-}
+    > {}
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, isInvalid, value, defaultValue, ref, onChange, ...rest } =
-    useControlledHostValueProps(props);
+  const { children, ref, ...rest } = props;
 
   const inputRef = useObjectRef(ref);
 
@@ -69,12 +63,13 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     } else if (isFocused(inputRef.current)) {
       optionsOverlayController.open();
     }
-    onChange?.(value);
   };
 
   const handleOptionAction = (key: Aria.Key) => {
     const value = String(key);
-    onChange(value);
+    if (inputRef.current) {
+      emitElementValueChange(inputRef.current, value);
+    }
     optionsOverlayController.close();
   };
 
@@ -84,11 +79,8 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
         e.preventDefault();
       }
     },
-    isInvalid,
     ref: inputRef,
     onChange: handleInputChange,
-    value,
-    defaultValue,
   };
 
   const {
@@ -115,14 +107,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}
-          clear
-          dependencies={[
-            value,
-            isInvalid,
-            defaultValue,
-            optionsOverlayController,
-            onChange,
-          ]}
+          dependencies={[optionsOverlayController]}
         >
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>

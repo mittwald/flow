@@ -3,13 +3,13 @@ import { expect, test } from "vitest";
 
 test("FileField is rendered", async () => {
   const dom = await renderRemoteTest("standard");
-  const field = dom.getByTestId("field");
+  const field = dom.getByRole("button");
   await expect.element(field).toBeInTheDocument();
 });
 
 test("onChangeHandler is triggered with file", async () => {
   const dom = await renderRemoteTest("onChange");
-  const field = dom.getByTestId("field");
+  const field = dom.getByRole("button");
   await field.upload("src/tests/test.png");
   const bytes = dom.getByTestId("uploaded-bytes");
   await expect.element(bytes).toBeInTheDocument();
@@ -18,7 +18,7 @@ test("onChangeHandler is triggered with file", async () => {
 
 test("onChangeHandler is triggered with multiple files", async () => {
   const dom = await renderRemoteTest("onChangeMultiple");
-  const field = dom.getByTestId("field");
+  const field = dom.getByRole("button");
   await field.upload(["src/tests/test.png", "src/tests/test2.png"]);
   const bytes = dom.getByTestId("uploaded-bytes");
   await expect.element(bytes).toBeInTheDocument();
