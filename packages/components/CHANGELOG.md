@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.573](https://github.com/mittwald/flow/compare/0.2.0-alpha.572...0.2.0-alpha.573) (2025-11-27)
+
+### Bug Fixes
+
+* **PasswordCreationField:** add validation cache ([#2159](https://github.com/mittwald/flow/issues/2159)) ([7489673](https://github.com/mittwald/flow/commit/7489673c5dd75daf6a06573756df7690501a286c))
+
 # [0.2.0-alpha.572](https://github.com/mittwald/flow/compare/0.2.0-alpha.571...0.2.0-alpha.572) (2025-11-27)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
