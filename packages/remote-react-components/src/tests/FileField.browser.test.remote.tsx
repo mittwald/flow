@@ -27,7 +27,7 @@ export const onChangeMultiple = () => {
   const [uploadedBytes, setUploadedBytes] = useState<number[]>([]);
   return (
     <>
-      {uploadedBytes.length >= 1 && (
+      {uploadedBytes.length > 0 && (
         <Text data-testid="uploaded-bytes">{uploadedBytes.join(",")}</Text>
       )}
       <FileField

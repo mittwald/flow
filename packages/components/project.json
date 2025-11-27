@@ -13,8 +13,21 @@
   "projectType": "library",
   "sourceRoot": "packages/components/src",
   "targets": {
-    "build:icons": {
+    "build": {
       "cache": true,
+      "dependsOn": ["build:icons", "build:remote-components", "^build"],
+      "inputs": ["components-src"]
+    },
+    "build:docs-properties": {
+      "cache": true,
+      "inputs": [
+        "components-src",
+        "!{projectRoot}/src/components/Icon/components/icons/*",
+        "{projectRoot}/dev/createDocPropertiesJson.ts"
+      ],
+      "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
+    },
+    "build:icons": {
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
         "{projectRoot}/src/components/Icon/icons.yaml"
@@ -36,19 +49,22 @@
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
       ]
     },
-    "build": {
-      "cache": true,
-      "dependsOn": ["build:icons", "build:remote-components", "^build"],
-      "inputs": ["components-src"]
+    "test:browser": {
+      "dependsOn": [
+        {
+          "projects": ["stylesheet"],
+          "target": "build"
+        }
+      ]
     },
-    "build:docs-properties": {
+    "test:browser:dev": {
       "cache": true,
-      "inputs": [
-        "components-src",
-        "!{projectRoot}/src/components/Icon/components/icons/*",
-        "{projectRoot}/dev/createDocPropertiesJson.ts"
-      ],
-      "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
+      "dependsOn": [
+        {
+          "projects": ["stylesheet"],
+          "target": "build"
+        }
+      ]
     }
   }
 }

@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
-import { render } from "@testing-library/react";
+import { render } from "vitest-browser-react";
 import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor";
-import UserEvent from "@testing-library/user-event";
+import { page, userEvent } from "vitest/browser";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -79,64 +79,51 @@ const FormatButtonTestCases = [
 
 describe("MarkdownEditor Tests", () => {
   test.each(FormatButtonTestCases)(
-    "test formatted message with button type '%s'",
-    async (
-      type,
-      text,
-      expectedResult,
-      ignoredExpectedStart,
-      ignoredExpectedEnd,
-    ) => {
-      const user = UserEvent;
+    "test formatted message with button type '%s' (%$)",
+    async (type, text, expectedResult, expectedStart, expectedEnd) => {
+      const user = userEvent;
       const onChangeEvent = vi.fn();
 
       const editor = (
         <MarkdownEditor
+          aria-label="test"
           data-testid="markdown"
           defaultValue="dummyDefault"
           onChange={onChangeEvent}
         />
       );
-      const renderResult = render(editor);
+      const { rerender } = await render(editor);
 
-      const markdownEditor = renderResult
-        .getByTestId("markdown")
-        .querySelector("textarea");
+      const textArea = page.getByRole("textbox");
 
-      expect(markdownEditor).toBeInTheDocument();
-      expect(markdownEditor).toHaveDisplayValue("dummyDefault");
+      expect(textArea).toBeInTheDocument();
+      expect(textArea).toHaveDisplayValue("dummyDefault");
 
-      assert(markdownEditor);
-
-      const modifierButton = renderResult.container.querySelector(
-        `[data-button-type="${type}"]`,
-      );
+      const modifierButton = page.getByLocator(`[data-button-type="${type}"]`);
       expect(modifierButton).toBeInTheDocument();
-      assert(modifierButton);
 
       text = String(text ?? "");
       expectedResult = String(expectedResult ?? "");
 
-      await user.clear(markdownEditor);
-      await user.type(markdownEditor, text);
-      await user.click(markdownEditor);
-      await user.keyboard("{Control>}A{/Control}");
+      await user.clear(textArea);
+      await user.type(textArea, text);
+      await user.keyboard("{selectall}");
       await user.click(modifierButton);
 
       // wait a render circle to let the editor update its value
-      renderResult.rerender(editor);
+      await rerender(editor);
 
-      expect(markdownEditor).toHaveDisplayValue(expectedResult);
-      // @todo: fix flaky test assertions
-      // expect(markdownEditor.selectionStart).toBe(expectedStart);
-      // expect(markdownEditor.selectionEnd).toBe(expectedEnd);
+      expect(textArea).toHaveDisplayValue(expectedResult);
+      expect(textArea.element()).toSatisfy(
+        (e) =>
+          e.selectionStart === expectedStart && e.selectionEnd === expectedEnd,
+      );
 
       const expectedChangeEvents = [
         "", // clear
         ...expandSteps(text), // user type
         expectedResult, // expected result
       ];
-
       expectedChangeEvents.forEach((value, index) => {
         expect(onChangeEvent).toHaveBeenNthCalledWith(index + 1, value);
       });
@@ -148,43 +135,41 @@ describe("MarkdownEditor Tests", () => {
       testName,
       defaultValue,
       expectedResult,
-      ignoredExpectedStart,
-      ignoredExpectedEnd,
+      expectedStart,
+      expectedEnd,
     ) => {
-      const user = UserEvent;
       const onChangeEvent = vi.fn();
 
       defaultValue = String(defaultValue ?? "");
       expectedResult = String(expectedResult ?? "");
 
-      const renderResult = render(
+      await render(
         <MarkdownEditor
+          aria-label="test"
           data-testid="markdown"
-          defaultValue={defaultValue}
           onChange={onChangeEvent}
+          defaultValue={defaultValue}
         />,
       );
 
-      const markdownEditor = renderResult
-        .getByTestId("markdown")
-        .querySelector("textarea");
-
+      const markdownEditor = page.getByRole("textbox");
       expect(markdownEditor).toBeInTheDocument();
-      expect(markdownEditor).toHaveDisplayValue(defaultValue);
 
-      assert(markdownEditor);
-
-      await user.type(markdownEditor, "{enter}");
+      await userEvent.type(
+        markdownEditor,
+        "{ArrowDown}{ArrowDown}{ArrowDown}{End}",
+      );
+      await userEvent.type(markdownEditor, "{Enter}");
 
       if (testName === "does nothing outside of list") {
         expectedResult = expectedResult + "\n";
       }
 
       expect(markdownEditor).toHaveDisplayValue(expectedResult);
-      // @todo: fix flaky test assertions
-      // expect(markdownEditor.selectionStart).toBe(expectedStart);
-      // expect(markdownEditor.selectionEnd).toBe(expectedEnd);
-
+      expect(markdownEditor.element()).toSatisfy(
+        (e) =>
+          e.selectionStart === expectedStart && e.selectionEnd === expectedEnd,
+      );
       expect(onChangeEvent).toHaveBeenLastCalledWith(expectedResult);
     },
   );
