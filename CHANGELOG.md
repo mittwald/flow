@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.575](https://github.com/mittwald/flow/compare/0.2.0-alpha.574...0.2.0-alpha.575) (2025-11-27)
+
+### Bug Fixes
+
+* **Modal:** fix issues with headings when <ColumnLayout> is used inside a Modal ([#2160](https://github.com/mittwald/flow/issues/2160)) ([7cdd3ed](https://github.com/mittwald/flow/commit/7cdd3ed882b3946662d34a0143b07de5e357db97))
+
 # [0.2.0-alpha.574](https://github.com/mittwald/flow/compare/0.2.0-alpha.573...0.2.0-alpha.574) (2025-11-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
