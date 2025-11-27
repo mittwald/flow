@@ -1,7 +1,9 @@
-import { startTransition, useEffect } from "react";
-import type { PolicyValidationResult } from "@/integrations/@mittwald/password-tools-js";
+import { startTransition, useEffect, useRef } from "react";
+import type {
+  Policy,
+  PolicyValidationResult,
+} from "@/integrations/@mittwald/password-tools-js";
 import { isPromise } from "remeda";
-import type { Policy } from "@/integrations/@mittwald/password-tools-js";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export const usePolicyValidationResult = (
@@ -14,14 +16,33 @@ export const usePolicyValidationResult = (
     results: ResolvedPolicyValidationResult;
   }) => void,
 ) => {
+  const cache = useRef<{
+    password: string;
+    results: ResolvedPolicyValidationResult;
+  } | null>(null);
+
   useEffect(() => {
     onValidationStart?.();
+
+    if (cache.current?.password === password) {
+      onValidationResult?.({
+        password: cache.current.password,
+        isValid: Boolean(cache.current.results.isValid),
+        results: cache.current.results,
+      });
+      return;
+    }
+
     validationPolicy.validate(password).then((validationResult) => {
       const setValidationResult = (
         password: string,
         policyValidationResult: PolicyValidationResult,
       ) => {
+        const results =
+          policyValidationResult as ResolvedPolicyValidationResult;
         const isValid = Boolean(policyValidationResult.isValid);
+
+        cache.current = { password, results };
         onValidationResult?.({
           password,
           isValid,
