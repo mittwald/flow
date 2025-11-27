@@ -23,21 +23,21 @@
     "next": "~15.5.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "^7.65.0",
+    "react-hook-form": "^7.66.1",
     "remeda": "^2.32.0",
-    "sass": "^1.93.2",
+    "sass": "^1.94.1",
     "usehooks-ts": "^3.1.1",
-    "webpack": "^5.102.1"
+    "webpack": "^5.103.0"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@next/eslint-plugin-next": "^15.5.6",
-    "@types/node": "^24.9.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "eslint": "^9.38.0",
-    "nx": "^21.6.5",
-    "rimraf": "^6.0.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.1",
+    "nx": "^21.6.9",
+    "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
   },
   "overrides": {
