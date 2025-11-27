@@ -4,7 +4,7 @@ import { FileDropZone } from "@/components/FileDropZone";
 import { Section } from "@/components/Section";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
-import { Form, typedField } from "@/integrations/react-hook-form";
+import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
@@ -131,7 +131,7 @@ export const WithReactHookForm: Story = {
           </FileCardList>
         </Section>
         <ActionGroup>
-          <Button type="submit">Upload</Button>
+          <SubmitButton>Upload</SubmitButton>
         </ActionGroup>
       </Form>
     );

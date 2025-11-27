@@ -24,7 +24,7 @@ import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuT
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { FileField } from "@/components/FileField";
-import { Field, Form } from "@/integrations/react-hook-form";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import Content from "@/components/Content";
@@ -254,6 +254,9 @@ export const WithForm: Story = {
             our newsletter and stay up to date.
           </Text>
           <Link href="#">Subscribe</Link>
+          <ActionGroup>
+            <SubmitButton color="accent">Submit</SubmitButton>
+          </ActionGroup>
         </Form>
       </Section>
     );
