@@ -10,7 +10,7 @@ import { useOverlayController } from "@/lib/controller/overlay/useOverlayControl
 import { Action } from "@/components/Action";
 import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
-import { Field, Form } from "@/integrations/react-hook-form";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
@@ -176,9 +176,7 @@ export const WithForm: Story = {
               </Field>
             </Content>
             <ActionGroup>
-              <Button type="submit" color="accent">
-                Submit
-              </Button>
+              <SubmitButton color="accent">Submit</SubmitButton>
               <Action closeOverlay="Modal">
                 <Button variant="soft" color="secondary">
                   Abort
@@ -214,9 +212,7 @@ export const OffCanvasWithForm: Story = {
               </Field>
             </Content>
             <ActionGroup>
-              <Button type="submit" color="accent">
-                Submit
-              </Button>
+              <SubmitButton color="accent">Submit</SubmitButton>
               <Action closeOverlay="Modal">
                 <Button variant="soft" color="secondary">
                   Abort
@@ -251,7 +247,7 @@ export const WithFormInside: Story = {
                     <Label>Nameservers</Label>
                   </TextField>
                 </Field>
-                <Button type="submit">Add</Button>
+                <SubmitButton>Add</SubmitButton>
               </Align>
             </Form>
           </Content>
@@ -295,7 +291,7 @@ export const LargeOffCanvas: Story = {
           </ColumnLayout>
 
           <ActionGroup>
-            <Button color="accent">Submit</Button>
+            <SubmitButton color="accent">Submit</SubmitButton>
             <Action closeOverlay="Modal">
               <Button variant="soft" color="secondary">
                 Abort
