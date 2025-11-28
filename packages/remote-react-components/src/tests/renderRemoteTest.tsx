@@ -6,7 +6,17 @@ import { render } from "vitest-browser-react";
 
 export const remoteTestServerPort = 6022;
 
-export const renderRemoteTest = async (testName: string) => {
+interface Options {
+  skipLoadingViewCheck?: boolean;
+}
+
+const loadingTimeout = 30_000;
+
+export const renderRemoteTest = async (
+  testName: string,
+  options: Options = {},
+) => {
+  const { skipLoadingViewCheck = false } = options;
   const testFilePath = expect.getState().snapshotState.testFilePath;
 
   const url = new URL("http://localhost");
@@ -14,24 +24,27 @@ export const renderRemoteTest = async (testName: string) => {
   url.searchParams.set("test", testName ?? "");
   url.searchParams.set("file", testFilePath.replace(".test.", ".test.remote."));
 
-  const isReady = Promise.withResolvers<void>();
-
-  const renderResult = render(
+  const renderResult = await render(
     <ErrorBoundary fallbackRender={({ error }) => "Error: " + String(error)}>
       <Suspense
         fallback={<div data-testid="root-loading-view">Loading...</div>}
       >
-        <RemoteRenderer src={url.toString()} timeoutMs={100_000} />
-        <div
-          ref={() => {
-            isReady.resolve();
-          }}
-        />
+        <RemoteRenderer src={url.toString()} timeoutMs={loadingTimeout} />
       </Suspense>
     </ErrorBoundary>,
   );
 
-  await isReady.promise;
+  if (!skipLoadingViewCheck) {
+    await expect
+      .poll(
+        () =>
+          expect(
+            renderResult.getByTestId("root-loading-view"),
+          ).not.toBeInTheDocument(),
+        { timeout: loadingTimeout },
+      )
+      .toBeTruthy();
+  }
 
   return renderResult;
 };

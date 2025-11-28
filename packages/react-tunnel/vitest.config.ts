@@ -1,20 +1,27 @@
 import defaultConfig from "./vite.config";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
 
 export default mergeConfig(
   defaultConfig,
   defineConfig({
     test: {
-      globals: true,
-      environmentMatchGlobs: [
-        ["dev/**", "node"],
-        ["src/**", "happy-dom"],
+      projects: [
+        {
+          extends: true,
+          test: {
+            name: "browser",
+            include: ["src/**/*.browser.test.{ts,tsx}"],
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: playwright(),
+              instances: [{ browser: "chromium" }],
+            },
+          },
+        },
       ],
-      coverage: {
-        reporter: ["json-summary", "json"],
-        reportOnFailure: true,
-      },
     },
   }),
 );
