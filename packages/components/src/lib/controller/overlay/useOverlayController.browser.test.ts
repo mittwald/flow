@@ -1,15 +1,15 @@
-import { renderHook, act } from "@testing-library/react";
 import { useOverlayController } from "@/lib/controller";
 import { useOverlayContext } from "@/lib/controller/overlay/context";
 import { OverlayController } from "@/lib/controller";
 import type { Mock } from "vitest";
 import { vitest, describe, test, expect, beforeEach } from "vitest";
+import { renderHook } from "vitest-browser-react";
 
 vitest.mock("@/lib/controller/overlay/context", () => ({
   useOverlayContext: vitest.fn(),
 }));
 
-describe("useOverlayController", () => {
+describe("useOverlayController", async () => {
   let mockOnOpen: Mock;
   let mockOnClose: Mock;
   let contextController: OverlayController;
@@ -24,8 +24,8 @@ describe("useOverlayController", () => {
     });
   });
 
-  test("should use controller from context when reuseControllerFromContext is true", () => {
-    const { result } = renderHook(() =>
+  test("should use controller from context when reuseControllerFromContext is true", async () => {
+    const { result } = await renderHook(() =>
       useOverlayController("Modal", {
         reuseControllerFromContext: true,
         onOpen: mockOnOpen,
@@ -36,8 +36,8 @@ describe("useOverlayController", () => {
     expect(result.current).toBe(contextController);
   });
 
-  test("should create new controller when reuseControllerFromContext is false", () => {
-    const { result } = renderHook(() =>
+  test("should create new controller when reuseControllerFromContext is false", async () => {
+    const { result } = await renderHook(() =>
       useOverlayController("Modal", {
         reuseControllerFromContext: false,
         onOpen: mockOnOpen,
@@ -48,38 +48,34 @@ describe("useOverlayController", () => {
     expect(result.current).not.toBe(contextController);
   });
 
-  test("should add onOpen handler when controller is closed", () => {
-    const { result } = renderHook(() =>
+  test("should add onOpen handler when controller is closed", async () => {
+    const { result } = await renderHook(() =>
       useOverlayController("Modal", {
         onOpen: mockOnOpen,
       }),
     );
 
-    act(() => {
-      result.current.open();
-    });
+    result.current.open();
 
     expect(mockOnOpen).toHaveBeenCalledTimes(1);
   });
 
-  test("should add onClose handler when controller is open", () => {
+  test("should add onClose handler when controller is open", async () => {
     contextController.open();
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useOverlayController("Modal", {
         onClose: mockOnClose,
       }),
     );
 
-    act(() => {
-      result.current.close();
-    });
+    result.current.close();
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  test("should cleanup handlers on unmount", () => {
-    const { unmount } = renderHook(() =>
+  test("should cleanup handlers on unmount", async () => {
+    const { unmount } = await renderHook(() =>
       useOverlayController("Modal", {
         onOpen: mockOnOpen,
         onClose: mockOnClose,
@@ -88,56 +84,54 @@ describe("useOverlayController", () => {
 
     unmount();
 
-    act(() => {
-      contextController.open();
-      contextController.close();
-    });
+    contextController.open();
+    contextController.close();
 
     expect(mockOnOpen).not.toHaveBeenCalled();
     expect(mockOnClose).not.toHaveBeenCalled();
   });
 
-  test("should update handlers when options change", () => {
+  test("should update handlers when options change", async () => {
     const newMockOnOpen = vitest.fn();
-    const { rerender } = renderHook(
+    const { rerender } = await renderHook(
       (props) => useOverlayController("Modal", props),
       {
         initialProps: { onOpen: mockOnOpen },
       },
     );
 
-    rerender({ onOpen: newMockOnOpen });
+    await rerender({ onOpen: newMockOnOpen });
 
-    act(() => {
-      contextController.open();
-    });
+    contextController.open();
 
     expect(mockOnOpen).not.toHaveBeenCalled();
     expect(newMockOnOpen).toHaveBeenCalledTimes(1);
   });
 
-  test("should handle multiple handlers correctly", () => {
+  test("should handle multiple handlers correctly", async () => {
     const secondOnOpen = vitest.fn();
 
-    renderHook(() => useOverlayController("Modal", { onOpen: mockOnOpen }));
-    renderHook(() => useOverlayController("Modal", { onOpen: secondOnOpen }));
+    await renderHook(() =>
+      useOverlayController("Modal", { onOpen: mockOnOpen }),
+    );
+    await renderHook(() =>
+      useOverlayController("Modal", { onOpen: secondOnOpen }),
+    );
 
-    act(() => {
-      contextController.open();
-    });
+    contextController.open();
 
     expect(mockOnOpen).toHaveBeenCalledTimes(1);
     expect(secondOnOpen).toHaveBeenCalledTimes(1);
   });
 
-  test("should handle undefined handlers gracefully", () => {
-    const { result } = renderHook(() => useOverlayController("Modal", {}));
+  test("should handle undefined handlers gracefully", async () => {
+    const { result } = await renderHook(() =>
+      useOverlayController("Modal", {}),
+    );
 
     expect(() => {
-      act(() => {
-        result.current.open();
-        result.current.close();
-      });
+      result.current.open();
+      result.current.close();
     }).not.toThrow();
   });
 });

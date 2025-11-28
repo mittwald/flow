@@ -2,11 +2,11 @@ import TunnelEntry from "./components/TunnelEntry";
 import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
 import { expect, test } from "vitest";
-import { render } from "@testing-library/react";
+import { render } from "vitest-browser-react";
 import type { FC, PropsWithChildren } from "react";
 
 test("Exit is empty when no entry is set", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -14,11 +14,11 @@ test("Exit is empty when no entry is set", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("");
+  expect(dom.getByTestId("exit")).toHaveTextContent("");
 });
 
 test("Exit is empty when using other tunnel ids", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit id="foo" />
@@ -27,11 +27,11 @@ test("Exit is empty when using other tunnel ids", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("");
+  expect(dom.getByTestId("exit")).toHaveTextContent("");
 });
 
 test("Content from entry is rendered in exit", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -42,12 +42,12 @@ test("Content from entry is rendered in exit", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-  expect(dom.getByTestId("entry").innerText).toBe("");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  expect(dom.getByTestId("entry")).toHaveTextContent("");
 });
 
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit id="foo" />
@@ -58,12 +58,12 @@ test("Content from entry is rendered in exit when using same tunnel ids", async 
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-  expect(dom.getByTestId("entry").innerText).toBe("");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  expect(dom.getByTestId("entry")).toHaveTextContent("");
 });
 
 test("Exit children are rendered as fallback when entry is empty", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>Exit fallback</TunnelExit>
@@ -71,11 +71,11 @@ test("Exit children are rendered as fallback when entry is empty", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Exit fallback");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Exit fallback");
 });
 
 test("Exit children are NOT rendered as fallback when entry is set", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>Exit fallback</TunnelExit>
@@ -84,11 +84,11 @@ test("Exit children are NOT rendered as fallback when entry is set", async () =>
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 });
 
 test("Content from entry is updated in exit", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -99,7 +99,7 @@ test("Content from entry is updated in exit", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
   dom.rerender(
     <TunnelProvider>
@@ -110,11 +110,11 @@ test("Content from entry is updated in exit", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hi!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hi!");
 });
 
 test("Content in exit is removed when not rendering entry", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -123,7 +123,7 @@ test("Content in exit is removed when not rendering entry", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
   dom.rerender(
     <TunnelProvider>
@@ -133,11 +133,11 @@ test("Content in exit is removed when not rendering entry", async () => {
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("");
+  expect(dom.getByTestId("exit")).toHaveTextContent("");
 });
 
 test("Fallback content in exit is rendered again when not rendering entry", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>Fallback!</TunnelExit>
@@ -154,11 +154,11 @@ test("Fallback content in exit is rendered again when not rendering entry", asyn
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Fallback!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Fallback!");
 });
 
 test("Render function in TunnelExit gets children from TunnelEntry", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
@@ -167,11 +167,11 @@ test("Render function in TunnelExit gets children from TunnelEntry", async () =>
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello Tunnel!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello Tunnel!");
 });
 
 test("Render function in TunnelExit gets updated children from TunnelEntry", async () => {
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
@@ -188,7 +188,7 @@ test("Render function in TunnelExit gets updated children from TunnelEntry", asy
       <TunnelEntry>Hi</TunnelEntry>
     </TunnelProvider>,
   );
-  expect(dom.getByTestId("exit").innerText).toBe("Hi Tunnel!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hi Tunnel!");
 });
 
 test("Order of multiple children is preserved when entry is updated", async () => {
@@ -196,7 +196,7 @@ test("Order of multiple children is preserved when entry is updated", async () =
     <TunnelEntry>{props.children}</TunnelEntry>
   );
 
-  const dom = render(
+  const dom = await render(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -206,7 +206,7 @@ test("Order of multiple children is preserved when entry is updated", async () =
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Hello Tunnel!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Hello Tunnel!");
 
   dom.rerender(
     <TunnelProvider>
@@ -218,5 +218,5 @@ test("Order of multiple children is preserved when entry is updated", async () =
     </TunnelProvider>,
   );
 
-  expect(dom.getByTestId("exit").innerText).toBe("Bye Tunnel!");
+  expect(dom.getByTestId("exit")).toHaveTextContent("Bye Tunnel!");
 });

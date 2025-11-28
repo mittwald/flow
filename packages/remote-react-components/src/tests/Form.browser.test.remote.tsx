@@ -38,7 +38,7 @@ const TestForm: FC<{
       data-testid="rendered-form"
     >
       <Section>
-        <CheckboxGroup name="check">
+        <CheckboxGroup name="check" aria-label="Checkbox Group">
           <Checkbox data-testid="form-checkbox-group-option1" value="read">
             read
           </Checkbox>
@@ -63,7 +63,12 @@ const TestForm: FC<{
             Baz
           </Option>
         </Select>
-        <FileField data-testid="form-filefield" multiple name="certificates" />
+        <FileField
+          data-testid="form-filefield"
+          multiple
+          name="certificates"
+          aria-label="Certificates"
+        />
         <Button data-testid="form-submit" type="submit">
           Submit
         </Button>
