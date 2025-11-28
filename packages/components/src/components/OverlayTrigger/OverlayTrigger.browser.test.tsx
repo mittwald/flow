@@ -1,16 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "vitest-browser-react";
 import { Modal, ModalTrigger } from "@/components/Modal";
-import React, { act } from "react";
 import { Content } from "@/components/Content";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
-import { vitest } from "vitest";
-import { userEventFakeTimer } from "@/lib/dev/vitest";
-
-beforeEach(() => {
-  vitest.useFakeTimers();
-});
+import { page } from "vitest/browser";
 
 test("Nested overlays are not opened by parent overlay trigger", async () => {
   render(
@@ -30,8 +24,8 @@ test("Nested overlays are not opened by parent overlay trigger", async () => {
     </ModalTrigger>,
   );
 
-  await act(() => userEventFakeTimer.click(screen.getByText("Open modal")));
+  await page.getByText("Open modal").click();
 
-  await screen.findByText("Modal content");
-  expect(screen.queryByText("Menu item")).not.toBeInTheDocument();
+  expect(page.getByText("Modal content")).toBeInTheDocument();
+  expect(page.getByText("Menu item")).not.toBeInTheDocument();
 });

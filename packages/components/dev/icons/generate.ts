@@ -13,10 +13,15 @@ const getIndexFilename = (): string =>
   fs.path(`${componentPath}/components/icons/index.ts`);
 
 const definitions = getIconDefinitions(`${componentPath}/icons.yaml`);
+const filenames = Object.keys(definitions).map(getIconComponentFilename);
 
 fs.find(iconsOutputFolder, {
   matching: "*.tsx",
-}).forEach((file) => fs.remove(file));
+}).forEach((file) => {
+  if (!filenames.includes(file)) {
+    fs.remove(file);
+  }
+});
 
 for (const [iconName, iconDefinition] of Object.entries(definitions)) {
   fs.write(

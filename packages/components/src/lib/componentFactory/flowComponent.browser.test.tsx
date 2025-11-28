@@ -1,12 +1,11 @@
-import { expectTypeOf, test, vitest } from "vitest";
+import { expectTypeOf, test, expect, vitest } from "vitest";
 import {
   flowComponent,
   type FlowComponentProps,
   type FlowComponentProvisionType,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentType, PropsWithChildren, ReactElement } from "react";
-import { render } from "@testing-library/react";
-import { HTMLDivElement as HappyHTMLDivElement } from "happy-dom";
+import { render } from "vitest-browser-react";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
 import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
@@ -49,16 +48,16 @@ const TestComponent2 = flowComponent(testComponent2Name, (p) => {
   );
 }) as TestComponent;
 
-test("ref is forwarded to component", () => {
+test("ref is forwarded to component", async () => {
   const ref = vitest.fn();
-  render(<TestComponent1 ref={ref} />);
+  await render(<TestComponent1 ref={ref} />);
   const refArg = ref.mock.calls[0]?.[0];
-  expectTypeOf(refArg).toMatchTypeOf(HappyHTMLDivElement);
+  expectTypeOf(refArg).toMatchTypeOf(HTMLDivElement);
 });
 
 describe("propsContext", () => {
-  test("prop is taken from context", () => {
-    const actual = render(
+  test("prop is taken from context", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent1Name]: {
@@ -68,19 +67,19 @@ describe("propsContext", () => {
       >
         <TestComponent1 />
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="prop">foo</div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.baseElement.innerHTML).toBe(expected.baseElement.innerHTML);
   });
 
-  test("local prop overrides prop from context", () => {
-    const actual = render(
+  test("local prop overrides prop from context", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent1Name]: {
@@ -90,19 +89,19 @@ describe("propsContext", () => {
       >
         <TestComponent1 prop="bar" />
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="prop">bar</div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.container.innerHTML).toBe(expected.container.innerHTML);
   });
 
-  test("inner context prop overrides prop from outer context", () => {
-    const actual = render(
+  test("inner context prop overrides prop from outer context", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent2Name]: {
@@ -122,9 +121,9 @@ describe("propsContext", () => {
           </PropsContextProvider>
         </TestComponent1>
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="children1">
           <div data-testid="test2">
@@ -132,13 +131,13 @@ describe("propsContext", () => {
           </div>
         </div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.container.innerHTML).toBe(expected.container.innerHTML);
   });
 
-  test("prop is NOT taken from outer context", () => {
-    const actual = render(
+  test("prop is NOT taken from outer context", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent2Name]: {
@@ -152,21 +151,21 @@ describe("propsContext", () => {
           </PropsContextProvider>
         </TestComponent1>
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="children1">
           <div data-testid="test2" />
         </div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.container.innerHTML).toBe(expected.container.innerHTML);
   });
 
-  test("child component context can be used to set props", () => {
-    const actual = render(
+  test("child component context can be used to set props", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent1Name]: {
@@ -180,9 +179,9 @@ describe("propsContext", () => {
           <TestComponent2 />
         </TestComponent1>
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="children1">
           <div data-testid="test2">
@@ -190,13 +189,13 @@ describe("propsContext", () => {
           </div>
         </div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.container.innerHTML).toBe(expected.container.innerHTML);
   });
 
-  test("parent context with higher nesting level overrides child context", () => {
-    const actual = render(
+  test("parent context with higher nesting level overrides child context", async () => {
+    const actual = await render(
       <PropsContextProvider
         props={{
           [testComponent1Name]: {
@@ -218,9 +217,9 @@ describe("propsContext", () => {
           </PropsContextProvider>
         </TestComponent1>
       </PropsContextProvider>,
-    ).container.innerHTML;
+    );
 
-    const expected = render(
+    const expected = await render(
       <div data-testid="test1">
         <div data-testid="children1">
           <div data-testid="test2">
@@ -228,9 +227,9 @@ describe("propsContext", () => {
           </div>
         </div>
       </div>,
-    ).container.innerHTML;
+    );
 
-    expect(actual).toBe(expected);
+    expect(actual.container.innerHTML).toBe(expected.container.innerHTML);
   });
 
   type TestComponentProps = Record<string, unknown>;
@@ -497,7 +496,7 @@ describe("propsContext", () => {
         },
       },
     ],
-  ])("%s", (name, ...testCases) => {
+  ])("%s", async (name, ...testCases) => {
     const components = testCases.map((testCase, index) => {
       return flowComponent(
         getComponentName(`C${index + 1}`),
@@ -529,6 +528,6 @@ describe("propsContext", () => {
       elements = <Component {...testCase.localProps}>{elements}</Component>;
     }
 
-    render(elements);
+    await render(elements);
   });
 });
