@@ -1,49 +1,77 @@
 import { renderRemoteTest } from "@/tests/renderRemoteTest";
-import { expect, test } from "vitest";
-import { userEvent } from "@vitest/browser/context";
+import { afterEach, expect, test } from "vitest";
+import { page, userEvent } from "@vitest/browser/context";
+import { cleanup } from "vitest-browser-react";
+
+const ui = () => ({
+  submitButton: page.getByTestId("form-submit"),
+  result: page.getByTestId("form-result"),
+  select: page.getByText("Element wählen"),
+  checkboxGroupOption1: page.getByTestId("form-checkbox-group-option1"),
+  checkboxGroupOption2: page.getByTestId("form-checkbox-group-option2"),
+  fileField: page.getByTestId("form-filefield"),
+  input: page.getByPlaceholder("testInput"),
+  form: page.getByTestId("rendered-form"),
+  expectResult: async (data: unknown) => {
+    const result = page.getByTestId("form-result");
+    await expect.poll(() => expect(result).toBeInTheDocument()).toBeTruthy();
+    expect(JSON.parse(result.element().textContent ?? "")).toEqual(data);
+  },
+});
+
+afterEach(() => {
+  cleanup();
+});
 
 test("SimpleForm is rendered", async () => {
-  const dom = await renderRemoteTest("standard");
-  const form = dom.getByTestId("rendered-form");
-  await expect.element(form).toBeInTheDocument();
+  await renderRemoteTest("standard");
+  const { form } = ui();
+  expect(form).toBeInTheDocument();
 
-  await dom.getByTestId("form-submit").click();
-  const result = dom.getByTestId("form-result");
+  const { submitButton, result } = ui();
+  await userEvent.click(submitButton);
   await expect.element(result).toBeInTheDocument();
   expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
 test("ActionForm is rendered", async () => {
-  const dom = await renderRemoteTest("action");
-  const form = dom.getByTestId("rendered-form");
-  await expect.element(form).toBeInTheDocument();
+  await renderRemoteTest("action");
+  const { form } = ui();
+  expect(form).toBeInTheDocument();
 
-  await dom.getByTestId("form-submit").click();
-  const result = dom.getByTestId("form-result");
+  const { submitButton, result } = ui();
+  await userEvent.click(submitButton);
   await expect.element(result).toBeInTheDocument();
   expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
 test("onSubmitHandler is triggered with FormData", async () => {
-  const dom = await renderRemoteTest("onSubmit");
+  await renderRemoteTest("onSubmit");
 
-  await dom.getByTestId("form-checkbox-group-option1").click();
-  await dom.getByTestId("form-checkbox-group-option2").click();
-  await dom.getByPlaceholder("testInput").fill("textfieldExampleText");
+  const {
+    checkboxGroupOption1,
+    checkboxGroupOption2,
+    select,
+    fileField,
+    submitButton,
+    input,
+    expectResult,
+  } = ui();
 
-  const select = dom.getByText("Element wählen");
+  await userEvent.click(checkboxGroupOption1);
+  await userEvent.click(checkboxGroupOption2);
+  await userEvent.fill(input, "textfieldExampleText");
+
   await userEvent.click(select);
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
-  await dom
-    .getByTestId("form-filefield")
-    .upload(["src/tests/test.png", "src/tests/test2.png"]);
-  await dom.getByTestId("form-submit").click();
+  await userEvent.upload(fileField, [
+    "src/tests/test.png",
+    "src/tests/test2.png",
+  ]);
+  await userEvent.click(submitButton);
 
-  const result = dom.getByTestId("form-result");
-  await expect.element(result).toBeInTheDocument();
-
-  expect(JSON.parse(result.element().textContent ?? "")).toEqual({
+  await expectResult({
     data: [
       ["check", "read"],
       ["check", "write"],
@@ -66,25 +94,32 @@ test("onSubmitHandler is triggered with FormData", async () => {
 });
 
 test("actionHandler is triggered with FormData", async () => {
-  const dom = await renderRemoteTest("onAction");
+  await renderRemoteTest("onAction");
 
-  await dom.getByTestId("form-checkbox-group-option1").click();
-  await dom.getByTestId("form-checkbox-group-option2").click();
-  await dom.getByPlaceholder("testInput").fill("textfieldExampleText");
+  const {
+    checkboxGroupOption1,
+    submitButton,
+    checkboxGroupOption2,
+    input,
+    select,
+    fileField,
+    expectResult,
+  } = ui();
 
-  const select = dom.getByText("Element wählen");
+  await checkboxGroupOption1.click();
+  await checkboxGroupOption2.click();
+  await input.fill("textfieldExampleText");
+
   await userEvent.click(select);
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
-  await dom
-    .getByTestId("form-filefield")
-    .upload(["src/tests/test.png", "src/tests/test2.png"]);
-  await dom.getByTestId("form-submit").click();
+  await userEvent.upload(fileField, [
+    "src/tests/test.png",
+    "src/tests/test2.png",
+  ]);
+  await userEvent.click(submitButton);
 
-  const result = dom.getByTestId("form-result");
-  await expect.element(result).toBeInTheDocument();
-
-  expect(JSON.parse(result.element().textContent ?? "")).toEqual({
+  await expectResult({
     data: [
       ["check", "read"],
       ["check", "write"],
