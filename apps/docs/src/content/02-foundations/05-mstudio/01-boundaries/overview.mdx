@@ -1,0 +1,262 @@
+# Boundaries
+
+| Typ                  | Verwendung                                                     | Element     | Fehlerfall                        | Loading                                            |
+| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------- | -------------------------------------------------- |
+| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                | Sections mit mehrzeiligen Skeletons                |
+| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                    | Mehrzeilige Skeletons                              |
+| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons             | Mehrzeilige Skeletons                              |
+| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                            | Nichts                                             |
+| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Item mit Fehlertext                           |
+| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                | LoadingView der Flow Component                     |
+| `Text`               | Für Texte                                                      | Text        | Fehlertext                        | Einzeiliges Skeleton                               |
+| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehlertext                        | Einzeiliges Skeleton                               |
+| `Link`               | Für Links                                                      | Link        | Fehlertext                        | Einzeiliges Skeleton                               |
+| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Avatar                     | Avatar Skeleton                                    |
+| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
+
+## Listenseite
+
+- `WithBoundaries.Sections` mit sectionsCount 1
+
+- Count der Liste wird direkt hier geladen, damit im Fehlerfall die ganze Seite
+  eine Fehlermeldung zeigt (Liste ist Hauptelement der Seite)
+
+```
+export const CronjobsPage: FC = () => (
+  <WithBoundaries.Sections suspenseFallbackProps={{ sectionsCount: 1 }}>
+    {() => {
+      const { projectId } = usePathParams("projectId");
+      const projectGhost = ProjectGhost.ofId(projectId);
+      const cronjobCount = projectGhost.cronjobs.getTotalCount().use();
+
+      return (
+        <>
+          <ProjectDeactivatedAlert project={projectGhost} />
+          <WithBoundaries.Section>
+            {backupCount === 0 ? <CronjobIllustratedMessage project={projectGhost} /> : <CronjobList project={projectGhost} />}
+          </WithBoundaries.Section>
+        </>
+      );
+    }}
+  </WithBoundaries.Sections>
+);
+```
+
+## Detailseite / Tab
+
+- `WithBoundaries.LayoutCard` / `WithBoundaries.Sections` mit SectionCount, je
+  nach Anzahl der auf jeden Fall geladenen Sections
+
+- Cronjob wird als Hauptelement der Seite hier geladen, damit im Fehlerfall die
+  ganze Seite eine Fehlermeldung zeigt
+
+```
+export const CronjobPage: FC = () => (
+  <WithBoundaries.Sections suspenseFallbackProps={{ sectionsCount: 3 }}>
+    {() => {
+      const { cronjobId } = usePathParams("cronjobId");
+      const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
+
+      return (
+        <>
+          <ProjectDeactivatedAlert project={cronjob.project} />
+          <GeneralSection cronjob={cronjob} />
+          <IntervalSection cronjob={cronjob} />
+          <ErrorHandlingSection cronjob={cronjob} />
+        </>
+      );
+    }}
+  </WithBoundaries.Sections>
+);
+```
+
+## Sections
+
+- Sections werden durch `WithBoundaries.Sections` ersetzt
+
+- Nachgeladene Elemente erhalten eigene Boundaries
+  - Für Link und Titel eines Models gibt es eigene Komponenten die bereits
+    Boundaries enthalten
+  - Andere Elemente erhalten die passende Boundary, z.B. `WithBoundaries.Text`
+    oder `WithBoundaries.Fragment`
+
+```
+export const GeneralSection: FC<Props> = (props) => (
+  <WithBoundaries.Section>
+    {() => {
+      const { cronjobGhost } = asGhostProps(props);
+      const cronjob = cronjobGhost.getCommon().use();
+      const t = useTCronjob();
+
+      return (
+        <>
+          <Heading>{t("cronjob")}</Heading>
+
+          <LabeledValue>
+            <Label>{t("linkedAppInstallation")}</Label>
+            <ModelLink model={cronjob.linkedAppInstallation}>
+              <ModelTitle model={cronjob.linkedAppInstallation} />
+            </ModelLink>
+          </LabeledValue>
+
+          <LabeledValue>
+            <Label>{t("projectShortId")}</Label>
+            <WithBoundaries.Text>
+              {() =>  projectGhost.getCommon().use().shortId }
+            </WithBoundaries.Text>
+          </LabeledValue>
+
+          <LabeledValue>
+            <Label>{t("type")}</Label>
+            <Text>{t(`type.${cronjob.type}`)}</Text>
+          </LabeledValue>
+        </>
+      );
+    }}
+  </WithBoundaries.Section>
+);
+```
+
+- Sections die nur unter bestimmten Bedingungen angezeigt werden erhalten statt
+  der `WithBoundaries.Section` ein `WithBoundaries.Fragment`
+
+```
+export const AppInstallationSection: FC<Props> = (props) => (
+  <WithBoundaries.Fragment>
+    {() => {
+      const { cronjobGhost } = asGhostProps(props);
+      const cronjob = cronjobGhost.getCommon().use();
+      const t = useTCronjob();
+
+      if(!cronjob.linkedAppInstallation){
+        return null;
+      }
+
+      return (
+        <Section>...</Section>
+      );
+    }}
+  </WithBoundaries.Fragment>
+);
+```
+
+## ContextMenu
+
+```
+export const ActionsContextMenu: FC<Props> = (props) => {
+  const { cronjobProxy } = asProxyProps(props);
+  const deleteModalController = useOverlayController("Modal");
+
+  return (
+    <>
+      <WithBoundaries.ContextMenu placement="bottom end">
+        {() => {
+          const cronjob = cronjobProxy.getCommon().use();
+          return <DeleteMenuItem onAction={() => deleteModalController.open()} />;
+        }}
+      </WithBoundaries.ContextMenu>
+
+      <DeleteCronjobModal
+        controller={deleteModalController}
+        cronjob={cronjobProxy}
+      />
+    </>
+  );
+};
+```
+
+## Modals
+
+- Modals werden durch `WithBoundaries.Modal` ersetzt
+
+- Default Values müssen bei onOpen nicht mehr gesetzt werden, das passiert jetzt
+  automatisch
+
+- Modal-Inhalt muss nicht mehr ausgelagert werden
+
+- Wenn innerhalb einer Form ein Error auftritt, fällt automatisch das ganze
+  Modal in den Error State, auch wenn es darin noch Boundaries gibt, da keine
+  fehlerhaften Forms verwendet werden sollen
+
+```
+interface Props {
+  cronjob:CronjobProxy;
+  controller?: OverlayController;
+}
+
+export const RenameCronjobModal: FC<Props> = (props) => (
+  <WithBoundaries.Modal controller={props.controller}>
+    {() => {
+      const { cronjobProxy } = asProxyProps(props, ["cronjob"]);
+      const controller = useOverlayController("Modal");
+      const form = useForm();
+      const handleOnSubmit = async () => {
+        ...
+        controller.close();
+      };
+
+      return (
+        <Form form={form} onSubmit={handleOnSubmit}>
+          ...
+        </Form>
+      );
+    }}
+  </WithBoundaries.Modal>
+);
+```
+
+## Alerts / Badges
+
+- Alerts und Badges werden in ein `WithBoundaries.Fragment` verpackt
+
+```
+export const CustomerBankruptAlert: FC<Props> = (props) => (
+  <WithBoundaries.Fragment>
+    {() => {
+      const { customerProxy, asBadge } = asProxyProps(props, ["customer"]);
+      const isBankrupt = customerProxy.getDetailed().isBankrupt().use();
+
+      if (!isBankrupt) {
+        return null;
+      }
+
+      if (asBadge) {
+        return <AlertBadge>...</AlertBadge>
+      }
+
+      return <Alert>...</Alert>;
+    }}
+  </WithBoundaries.Fragment>
+);
+```
+
+## Field
+
+```
+export const AppInstallationSelectField: FC<Props> = (props) => {
+  const { name, label, projectGhost } = asGhostProps(props, ["project"]);
+
+  return (
+    <WithBoundaries.FieldFragment suspenseFallbackProps={{ label }}>
+      {() => {
+        const appInstallations = projectGhost.appInstallations.execute().use().items;
+
+        return (
+          <Field name={name}>
+            <Select isDisabled={appInstallations.length === 0}>
+              <Label>{label}</Label>
+              {sortedAppInstallations.map((i) => (
+                <Option key={i.id} value={i.id}>
+                  {i.description}
+                </Option>
+              ))}
+            </Select>
+          </Field>
+        );
+      }}
+    </WithBoundaries.FieldFragment>
+  );
+};
+```
