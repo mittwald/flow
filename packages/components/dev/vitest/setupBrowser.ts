@@ -1,8 +1,5 @@
+import "../../../stylesheet/dist/styles.css";
 import { locators } from "vitest/browser";
-
-export const setup = () => {
-  process.env.LC_ALL = "de.DE";
-};
 
 locators.extend({
   getByLocator(locator: string) {

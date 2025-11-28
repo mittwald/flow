@@ -1,10 +1,11 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render } from "vitest-browser-react";
 import { List, ListFilter, ListItem, ListStaticData } from "@/components/List";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { test } from "vitest";
+import { page } from "vitest/browser";
 
 test("renders empty list without errors", async () => {
-  render(<List />);
+  await render(<List />);
 });
 interface Data {
   num: number;
@@ -20,30 +21,26 @@ const getTestElement = (items: number[], children: ReactNode = null) => (
   </List>
 );
 
-beforeEach(() => {
-  cleanup();
-});
-
 describe("Static data", () => {
   test("Items are updated when data changes", async () => {
-    const dom = render(getTestElement([42]));
-    await screen.findByText(42);
+    const { rerender } = await render(getTestElement([42]));
+    expect(page.getByText("42")).toBeInTheDocument();
 
-    dom.rerender(getTestElement([42, 43]));
-    await screen.findByText(42);
-    await screen.findByText(43);
+    await rerender(getTestElement([42, 43]));
+    expect(page.getByText("42")).toBeInTheDocument();
+    expect(page.getByText("43")).toBeInTheDocument();
   });
 });
 
 describe("Filter", () => {
   test("Items are initially filtered", async () => {
-    render(
+    await render(
       getTestElement(
         [42, 43],
         <ListFilter<Data> property="num" mode="one" defaultSelected={[42]} />,
       ),
     );
-    expect(screen.queryAllByText(42)).toHaveLength(1);
-    expect(screen.queryAllByText(43)).toHaveLength(0);
+    expect(page.getByText("42").all()).toHaveLength(1);
+    expect(page.getByText("43").all()).toHaveLength(0);
   });
 });

@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { renderHook } from "@testing-library/react";
+import { renderHook } from "vitest-browser-react";
 import type { ActionStateValue } from "@/components/Action/models/ActionState";
 import type { ActionProps } from "@/components/Action";
 import { ActionModel } from "@/components/Action/models/ActionModel";
@@ -13,18 +13,19 @@ const runTest = async (
   actionProps: ActionProps,
   expectedStates: ActionStateValue[],
 ): Promise<void> => {
-  const action = renderHook(() => ActionModel.useNew(actionProps)).result
-    .current;
+  const { result: action } = await renderHook(() =>
+    ActionModel.useNew(actionProps),
+  );
 
-  const execution = new ActionExecutionBatch(action);
-  const actionState = action.state;
+  const execution = new ActionExecutionBatch(action.current);
+  const actionState = action.current.state;
 
   const states: ActionStateValue[] = [];
   autorun(() => {
     states.push(actionState.state);
   });
 
-  execution.addAction(action);
+  execution.addAction(action.current);
   void execution.executeBatch([]).catch(() => {
     // do nothing
   });

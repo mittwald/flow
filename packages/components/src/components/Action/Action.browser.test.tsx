@@ -1,12 +1,13 @@
-import { render, screen } from "@testing-library/react";
-import { act, type FC } from "react";
+import { render } from "vitest-browser-react";
+import { page, userEvent } from "vitest/browser";
+import { type FC } from "react";
 import Action from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
-import Modal from "@/components/Modal";
-import Content from "@/components/Content";
-import ActionGroup from "@/components/ActionGroup";
-import { advanceTime, userEventFakeTimer } from "@/lib/dev/vitest";
+import { Modal } from "@/index/flr-universal";
+import Content from "@/components/Content/Content";
+import ActionGroup from "@/components/ActionGroup/ActionGroup";
+import Heading from "@/components/Heading/Heading";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -19,9 +20,7 @@ let asyncAction2: Mock;
 let actionHistory: string[];
 
 beforeEach(() => {
-  vitest.useFakeTimers({
-    shouldAdvanceTime: true,
-  });
+  vitest.useFakeTimers();
   vitest.resetAllMocks();
   actionHistory = [];
   syncAction1 = vitest.fn(() => {
@@ -48,17 +47,19 @@ afterEach(() => {
 });
 
 const TestButton: FC<ButtonProps> = (p) => (
-  <Button data-testid="button" {...p} />
+  <Button data-testid="button" {...p}>
+    Test
+  </Button>
 );
 
-const getButton = (testId = "button") => screen.getByTestId(testId);
+const getButton = (testId = "button") => page.getByTestId(testId);
 
 const clickTrigger = async (testId = "button") => {
-  await act(() => userEventFakeTimer.click(getButton(testId)));
+  await userEvent.click(getButton(testId));
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
-  render(
+  await render(
     <Action action={syncAction1}>
       <TestButton />
     </Action>,
@@ -68,7 +69,7 @@ test("Sync Action is called when trigger is clicked", async () => {
 });
 
 test("Action function is updated when action prop changes", async () => {
-  const r = render(
+  const { rerender } = await render(
     <Action action={syncAction1}>
       <TestButton />
     </Action>,
@@ -77,7 +78,7 @@ test("Action function is updated when action prop changes", async () => {
   expect(syncAction1).toHaveBeenCalledOnce();
   expect(syncAction2).not.toHaveBeenCalledOnce();
 
-  r.rerender(
+  await rerender(
     <Action action={syncAction2}>
       <TestButton />
     </Action>,
@@ -88,7 +89,7 @@ test("Action function is updated when action prop changes", async () => {
 });
 
 test("Nested sync actions are called when trigger is clicked", async () => {
-  render(
+  await render(
     <Action action={syncAction2}>
       <Action action={syncAction1}>
         <TestButton />
@@ -101,7 +102,7 @@ test("Nested sync actions are called when trigger is clicked", async () => {
 });
 
 test("Nested sync actions are not called when break action is used", async () => {
-  render(
+  await render(
     <Action action={syncAction2}>
       <Action break>
         <Action action={syncAction1}>
@@ -116,7 +117,7 @@ test("Nested sync actions are not called when break action is used", async () =>
 });
 
 test("Nested sync actions are not called when skipped", async () => {
-  render(
+  await render(
     <Action action={syncAction2}>
       <Action action={syncAction2}>
         <Action skip>
@@ -133,7 +134,7 @@ test("Nested sync actions are not called when skipped", async () => {
 });
 
 test("Nested sync actions are not called when multiple skipped", async () => {
-  render(
+  await render(
     <Action action={syncAction2}>
       <Action action={syncAction2}>
         <Action skip={2}>
@@ -150,7 +151,7 @@ test("Nested sync actions are not called when multiple skipped", async () => {
 });
 
 test("When nested sync actions, the inner action is called first", async () => {
-  render(
+  await render(
     <Action action={syncAction2}>
       <Action action={syncAction1}>
         <TestButton />
@@ -163,26 +164,30 @@ test("When nested sync actions, the inner action is called first", async () => {
 });
 
 test("Button is enabled again when async action has completed", async () => {
-  render(
+  const ui = () => (
     <Action action={asyncAction1}>
       <TestButton />
-    </Action>,
+    </Action>
   );
+  const { rerender } = await render(ui());
   await clickTrigger();
-  await advanceTime(asyncActionDuration);
+  await vitest.advanceTimersByTimeAsync(asyncActionDuration);
+  await rerender(ui());
   expect(getButton()).not.toBeDisabled();
 });
 
 test("When nested async actions, the outer action is called after the first has completed", async () => {
-  render(
+  const ui = () => (
     <Action action={asyncAction2}>
       <Action action={asyncAction1}>
         <TestButton />
       </Action>
-    </Action>,
+    </Action>
   );
+  const { rerender } = await render(ui());
   await clickTrigger();
-  await advanceTime(asyncActionDuration * 2);
+  await vitest.advanceTimersByTimeAsync(asyncActionDuration * 2);
+  await rerender(ui());
   expect(actionHistory).toEqual([
     "async1/start",
     "async1/end",
@@ -193,71 +198,82 @@ test("When nested async actions, the outer action is called after the first has 
 
 const expectIconInDom = (iconName: string) => {
   expect(
-    screen.getByRole("img", {
-      hidden: true,
-    }).className,
-  ).includes(`icon-${iconName}`);
+    page.getByRole("img", {
+      includeHidden: true,
+    }),
+  ).toHaveClass(`tabler-icon-${iconName}`);
 };
 
 const expectNoIconInDom = () => {
   expect(
-    screen.queryByRole("img", {
-      hidden: true,
+    page.getByRole("img", {
+      includeHidden: true,
     }),
-  ).toBeNull();
+  ).not.toBeInTheDocument();
 };
 
 describe("Confirmation modal", () => {
-  const renderTestModal = () =>
-    render(
-      <Action action={asyncAction1} showFeedback={false}>
-        <Modal slot="actionConfirm">
-          <Content data-testid="modal">Modal content</Content>
-          <ActionGroup>
-            <Button color="danger" data-testid="confirm-button">
-              Confirm
-            </Button>
-            <Button color="secondary" variant="soft" data-testid="abort-button">
-              Abort
-            </Button>
-          </ActionGroup>
-        </Modal>
-        <TestButton />
-      </Action>,
-    );
+  const testModal = () => (
+    <Action action={asyncAction1} showFeedback={false}>
+      <Modal slot="actionConfirm">
+        <Heading>Heading</Heading>
+        <Content data-testid="modal">Modal content</Content>
+        <ActionGroup>
+          <Button color="danger" data-testid="confirm-button">
+            Confirm
+          </Button>
+          <Button color="secondary" variant="soft" data-testid="abort-button">
+            Abort
+          </Button>
+        </ActionGroup>
+      </Modal>
+      <TestButton />
+    </Action>
+  );
+
+  const ui = () => ({
+    modal: page.getByTestId("modal"),
+    confirmButton: page.getByTestId("confirm-button"),
+    abortButton: page.getByTestId("abort-button"),
+    actionButton: page.getByTestId("button"),
+  });
 
   test("just closes on abort", async () => {
-    renderTestModal();
+    const { rerender } = await render(testModal());
+    const { abortButton, actionButton, modal } = ui();
 
-    await clickTrigger();
-    expect(screen.getByTestId("modal")).toBeInTheDocument();
+    await userEvent.click(actionButton);
+    expect(modal).toBeInTheDocument();
     expect(actionHistory).toEqual([]);
 
-    await clickTrigger("abort-button");
-    await advanceTime(asyncActionDuration * 2);
+    await userEvent.click(abortButton);
+    await vitest.advanceTimersByTimeAsync(asyncActionDuration * 2);
+    await rerender(testModal());
 
     expect(actionHistory).toEqual([]);
-    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+    expect(modal).not.toBeInTheDocument();
   });
 
   test("calls action and then closes", async () => {
-    renderTestModal();
+    const { rerender } = await render(testModal());
+    const { confirmButton, actionButton, modal } = ui();
 
-    await clickTrigger();
-    expect(screen.getByTestId("modal")).toBeInTheDocument();
+    await userEvent.click(actionButton);
+    expect(modal).toBeInTheDocument();
     expect(actionHistory).toEqual([]);
 
-    await clickTrigger("confirm-button");
-    await advanceTime(asyncActionDuration * 2);
+    await userEvent.click(confirmButton);
+    await vitest.advanceTimersByTimeAsync(asyncActionDuration * 2);
+    await rerender(testModal());
 
+    expect(modal).not.toBeInTheDocument();
     expect(actionHistory).toEqual(["async1/start", "async1/end"]);
-    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
   });
 });
 
 describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {
-    render(
+    await render(
       <Action action={syncAction1} showFeedback>
         <TestButton />
       </Action>,
@@ -267,13 +283,13 @@ describe("Feedback", () => {
   });
 
   test("is shown when set in props", async () => {
-    const dom = render(
+    const { rerender } = await render(
       <Action action={syncAction1} showFeedback>
         <TestButton isSucceeded />
       </Action>,
     );
     expectIconInDom("check");
-    dom.rerender(
+    await rerender(
       <Action action={syncAction1} showFeedback>
         <TestButton isFailed />
       </Action>,
@@ -285,7 +301,7 @@ describe("Feedback", () => {
     syncAction1.mockImplementation(() => {
       throw new Error("Whoops");
     });
-    render(
+    await render(
       <Action action={syncAction1} showFeedback>
         <TestButton />
       </Action>,
@@ -295,13 +311,15 @@ describe("Feedback", () => {
   });
 
   test("is hidden after some time", async () => {
-    render(
+    const ui = () => (
       <Action action={syncAction1} showFeedback>
         <TestButton />
-      </Action>,
+      </Action>
     );
+    const { rerender } = await render(ui());
     await clickTrigger();
-    await advanceTime(2000);
+    await vitest.advanceTimersByTimeAsync(2000);
+    await rerender(ui());
     expectNoIconInDom();
   });
 });
@@ -315,18 +333,20 @@ describe("Pending state", () => {
   });
 
   test("is shown when async action is pending", async () => {
-    render(
+    const ui = () => (
       <Action action={asyncAction1}>
         <TestButton />
-      </Action>,
+      </Action>
     );
+    const { rerender } = await render(ui());
     await clickTrigger();
-    await advanceTime(1000);
+    await vitest.advanceTimersByTimeAsync(1000);
+    await rerender(ui());
     expectIconInDom("loader-2");
   });
 
   test("is shown when set in props", async () => {
-    render(
+    await render(
       <Action action={asyncAction1}>
         <TestButton isPending />
       </Action>,
@@ -335,24 +355,29 @@ describe("Pending state", () => {
   });
 
   test("is not shown when sync action is executed", async () => {
-    render(
+    const ui = () => (
       <Action action={syncAction1}>
         <TestButton />
-      </Action>,
+      </Action>
     );
+    const { rerender } = await render(ui());
     await clickTrigger();
-    await advanceTime(1000);
+    await vitest.advanceTimersByTimeAsync(1000);
+    await rerender(ui());
     expectNoIconInDom();
   });
 
   test("is hidden after some time", async () => {
-    render(
+    const ui = () => (
       <Action action={asyncAction1} showFeedback>
         <TestButton />
-      </Action>,
+      </Action>
     );
+
+    const { rerender } = await render(ui());
     await clickTrigger();
-    await advanceTime(3000);
+    await vitest.advanceTimersByTimeAsync(3000);
+    await rerender(ui());
     expectNoIconInDom();
   });
 });

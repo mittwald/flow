@@ -24,7 +24,7 @@
       "cache": true
     },
     "test:browser": {
-      "dependsOn": ["^build", "test:browser:prepare"],
+      "dependsOn": ["^build", "test:browser:prepare", "^test:browser"],
       "cache": true
     },
     "test:browser:dev": {
@@ -33,7 +33,7 @@
     },
 
     "test:compile": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
     "test:unit": {

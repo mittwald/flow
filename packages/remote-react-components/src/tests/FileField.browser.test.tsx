@@ -1,26 +1,31 @@
 import { renderRemoteTest } from "@/tests/renderRemoteTest";
 import { expect, test } from "vitest";
+import { page } from "vitest/browser";
+import { userEvent } from "vitest/browser";
 
 test("FileField is rendered", async () => {
-  const dom = await renderRemoteTest("standard");
-  const field = dom.getByRole("button");
-  await expect.element(field).toBeInTheDocument();
+  await renderRemoteTest("standard");
+  const field = page.getByTestId("field");
+  expect(field).toBeInTheDocument();
 });
 
 test("onChangeHandler is triggered with file", async () => {
-  const dom = await renderRemoteTest("onChange");
-  const field = dom.getByRole("button");
-  await field.upload("src/tests/test.png");
-  const bytes = dom.getByTestId("uploaded-bytes");
-  await expect.element(bytes).toBeInTheDocument();
-  expect(bytes.element().textContent).toBe("86634");
+  await renderRemoteTest("onChange");
+  const field = page.getByTestId("field");
+  await userEvent.upload(field, "src/tests/test.png");
+  const bytes = page.getByTestId("uploaded-bytes");
+  await expect
+    .poll(() => expect(bytes).toHaveTextContent("86634"))
+    .toBeTruthy();
 });
 
 test("onChangeHandler is triggered with multiple files", async () => {
-  const dom = await renderRemoteTest("onChangeMultiple");
-  const field = dom.getByRole("button");
-  await field.upload(["src/tests/test.png", "src/tests/test2.png"]);
-  const bytes = dom.getByTestId("uploaded-bytes");
-  await expect.element(bytes).toBeInTheDocument();
-  expect(bytes.element().textContent).toBe("86634,145461");
+  await renderRemoteTest("onChangeMultiple");
+  const field = page.getByTestId("field");
+
+  await userEvent.upload(field, ["src/tests/test.png", "src/tests/test2.png"]);
+  const bytes = page.getByTestId("uploaded-bytes");
+  await expect
+    .poll(() => expect(bytes).toHaveTextContent("86634,145461"))
+    .toBeTruthy();
 });

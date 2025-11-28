@@ -3,7 +3,9 @@ import { renderRemoteTest } from "@/tests/renderRemoteTest";
 import { expect, test } from "vitest";
 
 test("LoadingFallbackTrigger triggers suspense on host", async () => {
-  const dom = await renderRemoteTest("standard");
+  const dom = await renderRemoteTest("standard", {
+    skipLoadingViewCheck: true,
+  });
   const content = dom.getByTestId("content");
   const loadingView = dom.getByTestId("root-loading-view");
 

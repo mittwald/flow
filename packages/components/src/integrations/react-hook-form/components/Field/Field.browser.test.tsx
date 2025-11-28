@@ -6,10 +6,10 @@ import { Select } from "@/components/Select";
 import { Switch } from "@/components/Switch";
 import TextField from "@/components/TextField";
 import { Form, typedField } from "@/integrations/react-hook-form";
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { useForm } from "react-hook-form";
 import { beforeEach, expect, vitest } from "vitest";
+import { render } from "vitest-browser-react";
+import { page, userEvent } from "vitest/browser";
 
 const handleSubmit = vitest.fn();
 
@@ -44,18 +44,23 @@ describe("Select field", () => {
     );
   };
 
+  const ui = {
+    setSelect: () => userEvent.click(page.getByText("Set select")),
+    expectValueToBe: (val: string) =>
+      expect(page.getByTestId("select")).toHaveTextContent(val),
+    submit: () => userEvent.click(page.getByText("Submit")),
+  };
+
   test("set value is displayed in button", async () => {
-    render(<TestForm />);
-    await act(() => fireEvent.click(screen.getByText("Set select")));
-    expect(screen.getByTestId("select")).toHaveTextContent("Bar");
+    await render(<TestForm />);
+    await ui.setSelect();
+    ui.expectValueToBe("Bar");
   });
 
   test("set value is used in submit handler", async () => {
-    render(<TestForm />);
-
-    await act(() => fireEvent.click(screen.getByText("Set select")));
-    await act(() => fireEvent.submit(screen.getByText("Submit")));
-
+    await render(<TestForm />);
+    await ui.setSelect();
+    await ui.submit();
     expect(handleSubmit).toHaveBeenCalledWith({
       select: "bar",
     });
@@ -79,7 +84,7 @@ describe("Switch field", () => {
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
         <Field name="switchedField">
-          <Switch data-testid="switch" />
+          <Switch data-testid="switch" aria-label="test" />
         </Field>
         <Button type="submit">Submit</Button>
       </Form>
@@ -87,11 +92,8 @@ describe("Switch field", () => {
   };
 
   test("switch uses default value", async () => {
-    render(<TestForm />);
-
-    expect(screen.getByTestId("switch").getAttribute("data-selected")).toBe(
-      "true",
-    );
+    await render(<TestForm />);
+    expect(page.getByTestId("switch")).toHaveAttribute("data-selected", "true");
   });
 });
 
@@ -112,7 +114,7 @@ describe("Checkbox field", () => {
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
         <Field name="isActive">
-          <Checkbox data-testid="checkbox" />
+          <Checkbox data-testid="checkbox" aria-label="test" />
         </Field>
         <Button type="submit">Submit</Button>
       </Form>
@@ -120,9 +122,10 @@ describe("Checkbox field", () => {
   };
 
   test("switch uses default value", async () => {
-    render(<TestForm />);
+    await render(<TestForm />);
 
-    expect(screen.getByTestId("checkbox").getAttribute("data-selected")).toBe(
+    expect(page.getByTestId("checkbox")).toHaveAttribute(
+      "data-selected",
       "true",
     );
   });
@@ -172,24 +175,22 @@ describe("Text field", () => {
   };
 
   test("default value works", async () => {
-    render(<TestForm />);
-    const field = screen.getByLabelText("testDefaultValue");
+    await render(<TestForm />);
+    const field = page.getByLabelText("testDefaultValue");
     expect(field).toHaveDisplayValue("default-value");
   });
 
   test("updates its value (by ref), even if not controlled", async () => {
-    const user = userEvent.setup();
-    render(<TestForm />);
-    const field = screen.getByLabelText("testUncontrolled");
-    await user.type(field, "new name");
+    await render(<TestForm />);
+    const field = page.getByLabelText("testUncontrolled");
+    await userEvent.type(field, "new name");
     expect(field).toHaveDisplayValue("NEW NAME");
   });
 
   test("can be used as controlled input", async () => {
-    const user = userEvent.setup();
-    render(<TestForm />);
-    const field = screen.getByLabelText("testControlled");
-    await user.type(field, "new name");
+    await render(<TestForm />);
+    const field = page.getByLabelText("testControlled");
+    await userEvent.type(field, "new name");
     expect(field).toHaveDisplayValue("NEW NAME");
   });
 
@@ -207,11 +208,11 @@ describe("Text field", () => {
       );
     };
 
-    render(<TestForm />);
-    await act(() => fireEvent.submit(screen.getByText("Submit")));
+    await render(<TestForm />);
+    await userEvent.click(page.getByText("Submit"));
 
-    screen.getByText("Is required!");
-    expect(screen.getByLabelText("Test field")).toHaveAttribute(
+    expect(page.getByText("Is required!")).toBeInTheDocument();
+    expect(page.getByLabelText("Test field")).toHaveAttribute(
       "aria-invalid",
       "true",
     );
