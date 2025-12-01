@@ -69,13 +69,8 @@ export const CronjobPage: FC = () => (
 );
 ```
 
-# Forms in Modals
-Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Fomr ein Fehler aufftritt, fällt das automatisch das ganze Modal in den Error State, auch wenn es darin noch Boundaries gibt. 
-
-- Default Values müssen bei onOpen nicht mehr gesetzt werden, das passiert jetzt
-  automatisch
-
-- Modal-Inhalt muss nicht mehr ausgelagert werden
+## Forms in Modals
+Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal in den Error State, auch wenn es darin noch Boundaries gibt. Default Values müssen dabei `onOpen` nicht mehr gesetzt werden, da dieses jetzt automatisch passiert. Der Modal-Inhalt muss auch nicht mehr ausgelagert werden. 
 
 ```
 interface Props {
@@ -103,7 +98,8 @@ export const RenameCronjobModal: FC<Props> = (props) => (
   </WithBoundaries.Modal>
 );
 ```
-# Einzelne Section
+
+## Einzelne Section
 
 Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken. In solchen Fällen lohnt sich eine Abgrenzung über `WithBoundaries.Section`. So bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu gefährden.
 
@@ -173,15 +169,16 @@ export const AppInstallationSection: FC<Props> = (props) => (
   </WithBoundaries.Fragment>
 );
 ```
-# Diagramme (WIP)
+
+## Diagramme (WIP)
 Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden. Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene ErrorView. Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer Boundary abgesichert werden.
 
 [Code-Beispiele??]
 
-# Einzelne kleinere Elemente
+## Einzelne kleinere Elemente
 Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene ErrorView besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand. Um Verwirrung zu vermeiden, sollte ein Banner eingesetzt werden, der dem Nutzer über den fehlgeschlagenen Ladevorgang aufklärt.
 
-## ContextMenu
+### ContextMenu
 
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
@@ -206,7 +203,7 @@ export const ActionsContextMenu: FC<Props> = (props) => {
 };
 ```
 
-## Alerts / Badges
+### Alerts / Badges
 
 - Alerts und Badges werden in ein `WithBoundaries.Fragment` verpackt
 
@@ -231,7 +228,7 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 );
 ```
 
-## Field
+### Field
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {
