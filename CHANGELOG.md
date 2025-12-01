@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.579](https://github.com/mittwald/flow/compare/0.2.0-alpha.578...0.2.0-alpha.579) (2025-12-01)
+
+### Bug Fixes
+
+* **Badge:** fix Badge styling due to wrong merged class names ([#2166](https://github.com/mittwald/flow/issues/2166)) ([dad0746](https://github.com/mittwald/flow/commit/dad074688baf75ca96ec38f997ce75623abee17c))
+
 # [0.2.0-alpha.578](https://github.com/mittwald/flow/compare/0.2.0-alpha.577...0.2.0-alpha.578) (2025-11-28)
 
 **Note:** Version bump only for package @mittwald/flow-project
