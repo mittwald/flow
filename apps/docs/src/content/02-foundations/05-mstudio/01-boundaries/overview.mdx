@@ -1,22 +1,12 @@
-# Boundaries
+# Technische Umsetzung 
 
-| Typ                  | Verwendung                                                     | Element     | Fehlerfall                        | Loading                                            |
-| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------- | -------------------------------------------------- |
-| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                | Sections mit mehrzeiligen Skeletons                |
-| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                    | Mehrzeilige Skeletons                              |
-| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons             | Mehrzeilige Skeletons                              |
-| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                            | Nichts                                             |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Item mit Fehlertext                           |
-| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                | LoadingView der Flow Component                     |
-| `Text`               | Für Texte                                                      | Text        | Fehlertext                        | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehlertext                        | Einzeiliges Skeleton                               |
-| `Link`               | Für Links                                                      | Link        | Fehlertext                        | Einzeiliges Skeleton                               |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Avatar                     | Avatar Skeleton                                    |
-| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
+Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer Teile der Anwendung.
 
-## Listenseite
+## Inhalt der gesamten Seite
+
+Sind Funktionen oder Informationen einer Seite essenziell für die Nutzung der Seite, sollte die gesamte Seite durch eine Boundary geschützt sein. In der Regel betrifft das Seiten in denen eine Liste geladen wird oder eine Detailseite. Nutze die Komponente `WithBoundaries.Page` sie besteht aus einer LayoutCard für den Hintergrund und einer IllustratedMessage in der color `danger`, die dem Nutzer mehr Informationen anzeigt.
+
+### Listenseite
 
 - `WithBoundaries.Sections` mit sectionsCount 1
 
@@ -44,7 +34,7 @@ export const CronjobsPage: FC = () => (
 );
 ```
 
-## Detailseite / Tab
+### Detailseite / Tab
 
 - `WithBoundaries.LayoutCard` / `WithBoundaries.Sections` mit SectionCount, je
   nach Anzahl der auf jeden Fall geladenen Sections
@@ -72,7 +62,43 @@ export const CronjobPage: FC = () => (
 );
 ```
 
-## Sections
+# Forms in Modals
+Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Fomr ein Fehler aufftritt, fällt das automatisch das ganze Modal in den Error State, auch wenn es darin noch Boundaries gibt. 
+
+- Default Values müssen bei onOpen nicht mehr gesetzt werden, das passiert jetzt
+  automatisch
+
+- Modal-Inhalt muss nicht mehr ausgelagert werden
+
+```
+interface Props {
+  cronjob:CronjobProxy;
+  controller?: OverlayController;
+}
+
+export const RenameCronjobModal: FC<Props> = (props) => (
+  <WithBoundaries.Modal controller={props.controller}>
+    {() => {
+      const { cronjobProxy } = asProxyProps(props, ["cronjob"]);
+      const controller = useOverlayController("Modal");
+      const form = useForm();
+      const handleOnSubmit = async () => {
+        ...
+        controller.close();
+      };
+
+      return (
+        <Form form={form} onSubmit={handleOnSubmit}>
+          ...
+        </Form>
+      );
+    }}
+  </WithBoundaries.Modal>
+);
+```
+# Einzelne Section
+
+Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken. In solchen Fällen lohnt sich eine Abgrenzung über `WithBoundaries.Section`. So bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu gefährden.
 
 - Sections werden durch `WithBoundaries.Sections` ersetzt
 
@@ -118,7 +144,6 @@ export const GeneralSection: FC<Props> = (props) => (
   </WithBoundaries.Section>
 );
 ```
-
 - Sections die nur unter bestimmten Bedingungen angezeigt werden erhalten statt
   der `WithBoundaries.Section` ein `WithBoundaries.Fragment`
 
@@ -141,6 +166,13 @@ export const AppInstallationSection: FC<Props> = (props) => (
   </WithBoundaries.Fragment>
 );
 ```
+# Diagramme (WIP)
+Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden. Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene ErrorView. Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer Boundary abgesichert werden.
+
+[Code-Beispiele??]
+
+# Einzelne kleinere Elemente
+Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene ErrorView besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand. Um Verwirrung zu vermeiden, sollte ein Banner eingesetzt werden, der dem Nutzer über den fehlgeschlagenen Ladevorgang aufklärt.
 
 ## ContextMenu
 
@@ -165,46 +197,6 @@ export const ActionsContextMenu: FC<Props> = (props) => {
     </>
   );
 };
-```
-
-## Modals
-
-- Modals werden durch `WithBoundaries.Modal` ersetzt
-
-- Default Values müssen bei onOpen nicht mehr gesetzt werden, das passiert jetzt
-  automatisch
-
-- Modal-Inhalt muss nicht mehr ausgelagert werden
-
-- Wenn innerhalb einer Form ein Error auftritt, fällt automatisch das ganze
-  Modal in den Error State, auch wenn es darin noch Boundaries gibt, da keine
-  fehlerhaften Forms verwendet werden sollen
-
-```
-interface Props {
-  cronjob:CronjobProxy;
-  controller?: OverlayController;
-}
-
-export const RenameCronjobModal: FC<Props> = (props) => (
-  <WithBoundaries.Modal controller={props.controller}>
-    {() => {
-      const { cronjobProxy } = asProxyProps(props, ["cronjob"]);
-      const controller = useOverlayController("Modal");
-      const form = useForm();
-      const handleOnSubmit = async () => {
-        ...
-        controller.close();
-      };
-
-      return (
-        <Form form={form} onSubmit={handleOnSubmit}>
-          ...
-        </Form>
-      );
-    }}
-  </WithBoundaries.Modal>
-);
 ```
 
 ## Alerts / Badges
@@ -260,3 +252,30 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
   );
 };
 ```
+
+# Überblick
+
+| Typ                  | Verwendung                                                     | Element     | Fehlerfall                        | Loading                                            |
+| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------- | -------------------------------------------------- |
+| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                | Sections mit mehrzeiligen Skeletons                |
+| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                    | Mehrzeilige Skeletons                              |
+| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons             | Mehrzeilige Skeletons                              |
+| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                            | Nichts                                             |
+| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Item mit Fehlertext                           |
+| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                | LoadingView der Flow Component                     |
+| `Text`               | Für Texte                                                      | Text        | Fehlertext                        | Einzeiliges Skeleton                               |
+| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehlertext                        | Einzeiliges Skeleton                               |
+| `Link`               | Für Links                                                      | Link        | Fehlertext                        | Einzeiliges Skeleton                               |
+| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Avatar                     | Avatar Skeleton                                    |
+| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
+
+# Weitere Empfehlungen
+
+Ein durchdachtes Loading und Error-Boundary Konzept endet nicht bei der technischen Umsetzung. Fehler sollten zuverlässig erfasst und an Monitoring Systeme, Sentry oder Datadog weitergegeben werden, damit Probleme früh sichtbar werden. Manuelle und automatisierte Tests helfen dabei, die eigenen Fallbacks regelmäßig zu überprüfen und sicherzustellen, dass sie in allen relevanten Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die Guideline [Writing for Errors](/02-foundations/03-content-guidelines/02-fehlermeldungen) weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten, das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
+
+
+
+
+
