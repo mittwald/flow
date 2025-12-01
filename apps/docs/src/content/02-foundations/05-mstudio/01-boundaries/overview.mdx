@@ -1,10 +1,17 @@
+<Alert>
+  <Heading>Guideline für interne Teams</Heading>
+  <Content>
+    Diese Guideline richtet sich in erster Linie an die internen Entwickler von mittwald und setzt entsprechendes Vorwissen voraus.
+  </Content>
+</Alert>
+
 # Technische Umsetzung 
 
 Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer Teile der Anwendung.
 
 ## Inhalt der gesamten Seite
 
-Sind Funktionen oder Informationen einer Seite essenziell für die Nutzung der Seite, sollte die gesamte Seite durch eine Boundary geschützt sein. In der Regel betrifft das Seiten in denen eine Liste geladen wird oder eine Detailseite. Nutze die Komponente `WithBoundaries.Page` sie besteht aus einer LayoutCard für den Hintergrund und einer IllustratedMessage in der color `danger`, die dem Nutzer mehr Informationen anzeigt.
+Sind Funktionen oder Informationen einer Seite essenziell für die Nutzung der Seite, sollte die gesamte Seite durch eine Boundary umschlossen sein. In der Regel betrifft das Seiten in denen eine Liste geladen wird oder eine Detailseite. Nutze die Komponente `WithBoundaries.Page` sie besteht aus einer LayoutCard für den Hintergrund und einer IllustratedMessage in der color `danger`, die dem Nutzer mehr Informationen anzeigt.
 
 ### Listenseite
 
