@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.580](https://github.com/mittwald/flow/compare/0.2.0-alpha.579...0.2.0-alpha.580) (2025-12-01)
+
+### Bug Fixes
+
+* **List:** fix issue with loading list settings ([80f7b9f](https://github.com/mittwald/flow/commit/80f7b9f942eee428fdd8740e40d30c60b4736084))
+
 # [0.2.0-alpha.579](https://github.com/mittwald/flow/compare/0.2.0-alpha.578...0.2.0-alpha.579) (2025-12-01)
 
 ### Bug Fixes
