@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.582](https://github.com/mittwald/flow/compare/0.2.0-alpha.581...0.2.0-alpha.582) (2025-12-01)
+
+### Bug Fixes
+
+* **SkeletonText:** render as span element ([#2167](https://github.com/mittwald/flow/issues/2167)) ([c3a6d02](https://github.com/mittwald/flow/commit/c3a6d0200a84210fb0818dabcf9ff75938da34a5))
+
+# [0.2.0-alpha.581](https://github.com/mittwald/flow/compare/0.2.0-alpha.580...0.2.0-alpha.581) (2025-12-01)
+
+### Bug Fixes
+
+* **Message:** clear props context for align children ([caba179](https://github.com/mittwald/flow/commit/caba1795cf84b1d569d264e8f063832f316ca382))
+
 # [0.2.0-alpha.580](https://github.com/mittwald/flow/compare/0.2.0-alpha.579...0.2.0-alpha.580) (2025-12-01)
 
 ### Bug Fixes
