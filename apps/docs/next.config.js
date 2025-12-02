@@ -8,9 +8,6 @@ const nextConfig = {
   output: "export",
   basePath: process.env.NEXT_BASE_PATH ?? "",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  webpack: (config, _) => {
-    return config;
-  },
   transpilePackages: ["next-mdx-remote"],
 };
 

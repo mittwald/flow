@@ -1,4 +1,9 @@
 {
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
   "extends": "@mittwald/typescript-config/nextjs.json",
   "include": [
     "${configDir}/src/**/*.tsx",

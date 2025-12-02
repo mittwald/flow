@@ -4,10 +4,10 @@
   "version": "0.2.0-alpha.1",
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "next build --webpack",
     "build:deps": "",
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
-    "@next/mdx": "^15.5.6",
+    "@next/mdx": "~16.0.4",
     "@tabler/icons-react": "^3.35.0",
     "@types/luxon": "^3.7.1",
     "@types/mdx": "^2.0.13",
@@ -28,7 +28,7 @@
     "fs-jetpack": "^5.1.0",
     "humanize-string": "^3.1.0",
     "luxon": "^3.7.2",
-    "next": "^15.5.6",
+    "next": "~16.0.4",
     "next-mdx-remote": "^5.0.0",
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "^15.5.6",
+    "@next/eslint-plugin-next": "~16.0.4",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
