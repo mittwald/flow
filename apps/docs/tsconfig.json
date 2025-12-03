@@ -12,5 +12,6 @@
     "${configDir}/.next/types/**/*.ts",
     ".next/types/**/*.ts",
     "./types.d.ts"
-  ]
+  ],
+  "moduleResolution": "bundler"
 }
