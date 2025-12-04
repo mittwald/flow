@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.583](https://github.com/mittwald/flow/compare/0.2.0-alpha.582...0.2.0-alpha.583) (2025-12-04)
+
+### Bug Fixes
+
+* **gitignore:** add macOS system files to .gitignore ([#2170](https://github.com/mittwald/flow/issues/2170)) ([8c16e12](https://github.com/mittwald/flow/commit/8c16e12d834c73b6d75fe109f0bbdfade968cb52))
+* **Remote:** fix modal has no buttons when opened from header ([#2172](https://github.com/mittwald/flow/issues/2172)) ([5e2404f](https://github.com/mittwald/flow/commit/5e2404fe7bb192e98c19af703624be3b208e0a28))
+
 # [0.2.0-alpha.582](https://github.com/mittwald/flow/compare/0.2.0-alpha.581...0.2.0-alpha.582) (2025-12-01)
 
 ### Bug Fixes

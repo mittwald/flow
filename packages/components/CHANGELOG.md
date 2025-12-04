@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.583](https://github.com/mittwald/flow/compare/0.2.0-alpha.582...0.2.0-alpha.583) (2025-12-04)
+
+### Bug Fixes
+
+* **Remote:** fix modal has no buttons when opened from header ([#2172](https://github.com/mittwald/flow/issues/2172)) ([5e2404f](https://github.com/mittwald/flow/commit/5e2404fe7bb192e98c19af703624be3b208e0a28))
+
 # [0.2.0-alpha.582](https://github.com/mittwald/flow/compare/0.2.0-alpha.581...0.2.0-alpha.582) (2025-12-01)
 
 ### Bug Fixes
