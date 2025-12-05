@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.585](https://github.com/mittwald/flow/compare/0.2.0-alpha.584...0.2.0-alpha.585) (2025-12-05)
+
+### Bug Fixes
+
+* **Remote:** fix Action with confirmation can not be confirmed ([#2175](https://github.com/mittwald/flow/issues/2175)) ([a70f0b0](https://github.com/mittwald/flow/commit/a70f0b06022cf445293fc68274149e9befb9cecd))
+
 # [0.2.0-alpha.584](https://github.com/mittwald/flow/compare/0.2.0-alpha.583...0.2.0-alpha.584) (2025-12-04)
 
 **Note:** Version bump only for package @mittwald/flow-project
