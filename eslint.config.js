@@ -14,6 +14,7 @@ export default tseslint.config(
       ".next/**/*",
       ".nx",
       "**/.vitest",
+      "**/.source",
     ],
   },
   {

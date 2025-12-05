@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
     "rootDir": "${configDir}",
@@ -17,7 +17,10 @@
   "include": [
     "${configDir}",
     "${configDir}/**/*.json",
+    "${configDir}/**/*.ts",
+    "${configDir}/**/*.tsx",
     "${configDir}/next-env.d.ts",
-    "${configDir}/.next/types/**/*.ts"
+    "${configDir}/.next/types/**/*.ts",
+    "${configDir}/.next/dev/types/**/*.ts"
   ]
 }

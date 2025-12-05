@@ -20,7 +20,7 @@
     "@mittwald/react-use-promise": "^4.2.2",
     "@tabler/icons-react": "^3.35.0",
     "clsx": "^2.1.1",
-    "next": "~15.5.6",
+    "next": "~16.0.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.1",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "^15.5.6",
+    "@next/eslint-plugin-next": "~16.0.4",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
