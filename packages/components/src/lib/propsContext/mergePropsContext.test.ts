@@ -210,6 +210,26 @@ test.each<{
     },
   },
   {
+    // works for classNames, which are not merged
+    parentContext: {
+      Button: {
+        className: "parent",
+        ___nestingLevel: 1,
+      },
+    },
+    context: {
+      Button: {
+        className: "context",
+        ___nestingLevel: 0,
+      },
+    },
+    merged: {
+      Button: {
+        className: "parent",
+      },
+    },
+  },
+  {
     parentContext: {
       Button: {
         ref: ref1Callback,
@@ -264,7 +284,25 @@ test.each<{
   "Expect merged result is correct for test case: %o",
   ({ parentContext: first, context: second, merged: expected }) => {
     const merged = mergePropsContext(first, second);
-    delete merged[nestingLevelKey];
+
+    const removeNestingLevelKeyDeep = (something: unknown) => {
+      if (Array.isArray(something)) {
+        something.map(removeNestingLevelKeyDeep);
+      } else if (typeof something === "object" && something !== null) {
+        if (nestingLevelKey in something) {
+          delete something[nestingLevelKey];
+        }
+        Object.values(something).forEach((value) => {
+          removeNestingLevelKeyDeep(value);
+        });
+      } else {
+        return something;
+      }
+    };
+
+    removeNestingLevelKeyDeep(expected);
+    removeNestingLevelKeyDeep(merged);
+
     expect(merged).toEqual(expected);
   },
 );

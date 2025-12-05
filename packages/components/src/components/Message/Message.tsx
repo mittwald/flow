@@ -12,6 +12,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 
 export interface MessageProps
   extends PropsWithChildren,
@@ -58,6 +59,7 @@ export const Message = flowComponent("Message", (props) => {
       },
       Text: { className: styles.date },
       Align: {
+        wrapWith: <ClearPropsContext />,
         className: styles.user,
       },
     },

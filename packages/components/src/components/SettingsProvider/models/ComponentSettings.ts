@@ -23,7 +23,7 @@ export class ComponentSettings {
   }
 
   public get<T extends ZodSchema>(settingKey: string, schema: T): z.infer<T> {
-    return schema.parse(this.settings.get(settingKey));
+    return schema.parse(toJS(this.settings.get(settingKey)));
   }
 
   public clear(settingKey: string) {

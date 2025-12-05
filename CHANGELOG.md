@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.584](https://github.com/mittwald/flow/compare/0.2.0-alpha.583...0.2.0-alpha.584) (2025-12-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.583](https://github.com/mittwald/flow/compare/0.2.0-alpha.582...0.2.0-alpha.583) (2025-12-04)
+
+### Bug Fixes
+
+* **gitignore:** add macOS system files to .gitignore ([#2170](https://github.com/mittwald/flow/issues/2170)) ([8c16e12](https://github.com/mittwald/flow/commit/8c16e12d834c73b6d75fe109f0bbdfade968cb52))
+* **Remote:** fix modal has no buttons when opened from header ([#2172](https://github.com/mittwald/flow/issues/2172)) ([5e2404f](https://github.com/mittwald/flow/commit/5e2404fe7bb192e98c19af703624be3b208e0a28))
+
+# [0.2.0-alpha.582](https://github.com/mittwald/flow/compare/0.2.0-alpha.581...0.2.0-alpha.582) (2025-12-01)
+
+### Bug Fixes
+
+* **SkeletonText:** render as span element ([#2167](https://github.com/mittwald/flow/issues/2167)) ([c3a6d02](https://github.com/mittwald/flow/commit/c3a6d0200a84210fb0818dabcf9ff75938da34a5))
+
+# [0.2.0-alpha.581](https://github.com/mittwald/flow/compare/0.2.0-alpha.580...0.2.0-alpha.581) (2025-12-01)
+
+### Bug Fixes
+
+* **Message:** clear props context for align children ([caba179](https://github.com/mittwald/flow/commit/caba1795cf84b1d569d264e8f063832f316ca382))
+
+# [0.2.0-alpha.580](https://github.com/mittwald/flow/compare/0.2.0-alpha.579...0.2.0-alpha.580) (2025-12-01)
+
+### Bug Fixes
+
+* **List:** fix issue with loading list settings ([80f7b9f](https://github.com/mittwald/flow/commit/80f7b9f942eee428fdd8740e40d30c60b4736084))
+
+# [0.2.0-alpha.579](https://github.com/mittwald/flow/compare/0.2.0-alpha.578...0.2.0-alpha.579) (2025-12-01)
+
+### Bug Fixes
+
+* **Badge:** fix Badge styling due to wrong merged class names ([#2166](https://github.com/mittwald/flow/issues/2166)) ([dad0746](https://github.com/mittwald/flow/commit/dad074688baf75ca96ec38f997ce75623abee17c))
+
+# [0.2.0-alpha.578](https://github.com/mittwald/flow/compare/0.2.0-alpha.577...0.2.0-alpha.578) (2025-11-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.577](https://github.com/mittwald/flow/compare/0.2.0-alpha.576...0.2.0-alpha.577) (2025-11-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.576](https://github.com/mittwald/flow/compare/0.2.0-alpha.575...0.2.0-alpha.576) (2025-11-28)
 
 **Note:** Version bump only for package @mittwald/flow-project

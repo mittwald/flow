@@ -30,7 +30,7 @@ export const getPropsMerger =
     if (isObjectType(mergedProps)) {
       if (!mergeClassNames) {
         // "Unmerge" className
-        for (const props of propsList) {
+        for (const props of sortedByLevel) {
           if (
             isObjectType(props) &&
             "className" in mergedProps &&
@@ -43,7 +43,7 @@ export const getPropsMerger =
 
       if (!mergeEventHandler) {
         // "Unmerge" eventHandler
-        for (const props of propsList) {
+        for (const props of sortedByLevel) {
           if (isObjectType(props)) {
             for (const [propName, propValue] of Object.entries(props)) {
               const isEventHandlerProp = /^on[A-Z]/.test(propName);
@@ -61,7 +61,7 @@ export const getPropsMerger =
         );
 
         for (const refProp of refProps) {
-          const collectedRefObjects = propsList
+          const collectedRefObjects = sortedByLevel
             .map((p) => (isObjectType(p) && refProp in p ? p[refProp] : null))
             .filter((r): r is Ref<unknown> => r !== null);
 
