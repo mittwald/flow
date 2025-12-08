@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.590](https://github.com/mittwald/flow/compare/0.2.0-alpha.589...0.2.0-alpha.590) (2025-12-08)
+
+### Features
+
+* **Remote:** support "local" remote connection ([#2180](https://github.com/mittwald/flow/issues/2180)) ([15e72d3](https://github.com/mittwald/flow/commit/15e72d3c3315c65dc7c4444658776c78dc18ec6c))
+
 # [0.2.0-alpha.589](https://github.com/mittwald/flow/compare/0.2.0-alpha.588...0.2.0-alpha.589) (2025-12-08)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
