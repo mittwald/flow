@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.591](https://github.com/mittwald/flow/compare/0.2.0-alpha.590...0.2.0-alpha.591) (2025-12-08)
+
+### Bug Fixes
+
+* **Options:** add max height ([#2182](https://github.com/mittwald/flow/issues/2182)) ([3661794](https://github.com/mittwald/flow/commit/36617941798f6344308bb7131fe192cf9ac6d9a5))
+
 # [0.2.0-alpha.590](https://github.com/mittwald/flow/compare/0.2.0-alpha.589...0.2.0-alpha.590) (2025-12-08)
 
 ### Features
