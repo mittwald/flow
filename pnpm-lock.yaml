@@ -249,6 +249,9 @@ importers:
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@mittwald/flow-remote-core':
+        specifier: workspace:*
+        version: link:../../packages/remote-core
       '@mittwald/flow-remote-react-components':
         specifier: workspace:*
         version: link:../../packages/remote-react-components

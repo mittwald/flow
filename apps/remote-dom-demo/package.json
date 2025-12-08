@@ -12,6 +12,7 @@
     "@internationalized/date": "^3.10.0",
     "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
+    "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
