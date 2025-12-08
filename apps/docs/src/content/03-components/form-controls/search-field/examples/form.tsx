@@ -1,11 +1,11 @@
 import {
-  Button,
   SearchField,
   Section,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -25,7 +25,7 @@ export default () => {
         >
           <SearchField />
         </Field>
-        <Button type="submit">Suchen</Button>
+        <SubmitButton>Suchen</SubmitButton>
       </Form>
     </Section>
   );

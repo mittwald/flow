@@ -1,7 +1,6 @@
 import {
   Label,
   MarkdownEditor,
-  Button,
   Section,
   ActionGroup,
 } from "@mittwald/flow-react-components";
@@ -9,6 +8,7 @@ import { useForm } from "react-hook-form";
 import {
   Field,
   Form,
+  SubmitButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 
 export default () => {
@@ -32,9 +32,7 @@ export default () => {
           </MarkdownEditor>
         </Field>
         <ActionGroup>
-          <Button type="submit" color="accent">
-            Senden
-          </Button>
+          <SubmitButton color="accent">Senden</SubmitButton>
         </ActionGroup>
       </Form>
     </Section>
