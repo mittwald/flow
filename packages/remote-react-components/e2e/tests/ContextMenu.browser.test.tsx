@@ -1,4 +1,4 @@
-import { renderRemoteTest } from "@/tests/renderRemoteTest";
+import { renderRemoteTest } from "./renderRemoteTest";
 import { expect, test } from "vitest";
 
 test("ContexMenu opens with trigger", async () => {

@@ -1,4 +1,4 @@
-import { CopyButton, TextField } from "@/auto-generated";
+import { CopyButton, TextField } from "../../src/auto-generated";
 
 export const standard = () => (
   <CopyButton data-testid="button" text="copy-me" />

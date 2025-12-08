@@ -1,4 +1,4 @@
-import { FileField, Text } from "@/auto-generated";
+import { FileField, Text } from "../../src/auto-generated";
 import { useState } from "react";
 
 export const standard = () => <FileField data-testid="field" />;

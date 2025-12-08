@@ -29,10 +29,11 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "exit 0",
-    "test:browser": "vitest run --config=dev/vitest/remote-test-server/vitest.config.ts --browser.headless",
-    "test:browser:dev": "vitest dev --config=dev/vitest/remote-test-server/vitest.config.ts",
-    "test:browser:prepare": "pnpm playwright install chromium && pnpm rimraf dev/vitest/remote-test-server/.vitest",
+    "test:browser:prepare": "pnpm playwright install chromium firefox webkit",
     "test:compile": "tsc --noEmit",
+    "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
+    "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
+    "test:e2e:prepare": "pnpm test:browser:prepare && pnpm rimraf e2e/remote-test-server/.vitest",
     "test:unit": "exit 0"
   },
   "dependencies": {

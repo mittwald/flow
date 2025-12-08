@@ -1,4 +1,4 @@
-import { renderRemoteTest } from "@/tests/renderRemoteTest";
+import { renderRemoteTest } from "./renderRemoteTest";
 import { afterEach, expect, test } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 import { cleanup } from "vitest-browser-react";
@@ -66,8 +66,8 @@ test("onSubmitHandler is triggered with FormData", async () => {
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
   await userEvent.upload(fileField, [
-    "src/tests/test.png",
-    "src/tests/test2.png",
+    "e2e/tests/test.png",
+    "e2e/tests/test2.png",
   ]);
   await userEvent.click(submitButton);
 
@@ -114,8 +114,8 @@ test("actionHandler is triggered with FormData", async () => {
   await userEvent.keyboard("[ArrowDown][ArrowDown][Enter]");
 
   await userEvent.upload(fileField, [
-    "src/tests/test.png",
-    "src/tests/test2.png",
+    "e2e/tests/test.png",
+    "e2e/tests/test2.png",
   ]);
   await userEvent.click(submitButton);
 

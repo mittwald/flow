@@ -1,4 +1,4 @@
-import { renderRemoteTest } from "@/tests/renderRemoteTest";
+import { renderRemoteTest } from "./renderRemoteTest";
 import { userEvent } from "@vitest/browser/context";
 import { expect, test } from "vitest";
 

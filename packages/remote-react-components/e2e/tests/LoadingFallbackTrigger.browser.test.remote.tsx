@@ -1,5 +1,5 @@
-import { Section, Text } from "@/auto-generated";
-import { LoadingFallbackTrigger } from "@/components";
+import { Section, Text } from "../../src/auto-generated";
+import { LoadingFallbackTrigger } from "../../src/components";
 import { useEffect, useState } from "react";
 
 export const standard = () => {

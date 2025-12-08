@@ -20,15 +20,23 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["test:unit", "test:compile", "test:browser"],
+      "dependsOn": ["test:unit", "test:compile", "test:browser", "test:e2e"],
       "cache": true
     },
     "test:browser": {
-      "dependsOn": ["^build", "test:browser:prepare", "^test:browser"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
     },
     "test:browser:dev": {
       "dependsOn": ["^build", "test:browser:prepare"],
+      "cache": true
+    },
+    "test:e2e": {
+      "dependsOn": ["^build", "test:e2e:prepare"],
+      "cache": true
+    },
+    "test:e2e:dev": {
+      "dependsOn": ["^build", "test:e2e:prepare"],
       "cache": true
     },
 
@@ -36,11 +44,11 @@
       "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
-    "test:unit": {
+    "test:dev": {
       "dependsOn": ["^build"],
       "cache": true
     },
-    "test:dev": {
+    "test:unit": {
       "dependsOn": ["^build"],
       "cache": true
     }

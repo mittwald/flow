@@ -1,4 +1,4 @@
-import RemoteRoot from "@/components/RemoteRoot";
+import RemoteRoot from "../../src/components/RemoteRoot";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -8,8 +8,8 @@ if (!container) {
   throw new Error("No container");
 }
 
-const basePath = "../../../src/";
-const modules = import.meta.glob("../../../src/**/*.browser.test.remote.tsx", {
+const basePath = "../tests";
+const modules = import.meta.glob("../tests/**/*.browser.test.remote.tsx", {
   eager: true,
 });
 

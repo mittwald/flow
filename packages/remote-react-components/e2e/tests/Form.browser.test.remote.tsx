@@ -8,8 +8,8 @@ import {
   Select,
   Button,
   CodeBlock,
-} from "@/auto-generated";
-import { Form } from "@/components/Form";
+} from "../../src/auto-generated";
+import { Form } from "../../src/components/Form";
 import { type FC, useState } from "react";
 
 const TestForm: FC<{

@@ -1,4 +1,4 @@
-import { DateRangePicker } from "@/auto-generated";
+import { DateRangePicker } from "../../src/auto-generated";
 import { CalendarDate } from "@internationalized/date";
 
 export const standard = () => <DateRangePicker data-testid="element" />;

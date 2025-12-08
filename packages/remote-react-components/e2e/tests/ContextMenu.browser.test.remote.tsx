@@ -3,7 +3,7 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   MenuItem,
-} from "@/auto-generated";
+} from "../../src/auto-generated";
 
 export const standard = () => (
   <ContextMenuTrigger>

@@ -3,11 +3,11 @@ import { mergeConfig } from "vitest/config";
 import defaultConfig from "./vite.config";
 
 export default mergeConfig(defaultConfig, {
-  cacheDir: "dev/vitest/remote-test-server/.vitest/cache/test-browser",
+  cacheDir: "e2e/remote-test-server/.vitest/cache/test-browser",
   test: {
     globals: true,
-    globalSetup: "dev/vitest/remote-test-server/setupGlobal.ts",
-    include: ["src/**/*.browser.test.{ts,tsx}"],
+    globalSetup: "e2e/remote-test-server/setupGlobal.ts",
+    include: ["e2e/tests/*.browser.test.{ts,tsx}"],
     browser: {
       fileParallelism: false,
       enabled: true,

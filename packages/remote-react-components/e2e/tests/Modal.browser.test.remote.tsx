@@ -1,6 +1,6 @@
-import { ActionGroup, Button, Content, Heading, Text } from "@/index";
-import { Action, Modal, ModalTrigger } from "@/index";
-import { typedList } from "@/index";
+import { ActionGroup, Button, Content, Heading, Text } from "../../src/index";
+import { Action, Modal, ModalTrigger } from "../../src/index";
+import { typedList } from "../../src/index";
 
 const TestModal = (
   <Modal>

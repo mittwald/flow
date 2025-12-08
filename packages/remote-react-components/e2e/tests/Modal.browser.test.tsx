@@ -1,5 +1,5 @@
-import { expectNotToBeInTheDocumentFor, sleep } from "@/tests/helpers";
-import { renderRemoteTest } from "@/tests/renderRemoteTest";
+import { expectNotToBeInTheDocumentFor, sleep } from "./helpers";
+import { renderRemoteTest } from "./renderRemoteTest";
 import { expect, test } from "vitest";
 import type { RenderResult } from "vitest-browser-react";
 

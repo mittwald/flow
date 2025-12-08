@@ -1,5 +1,5 @@
-import { Text, TextField } from "@/auto-generated";
-import { Form, Field } from "@/integrations/react-hook-form";
+import { Text, TextField } from "../../src/auto-generated";
+import { Form, Field } from "../../src/integrations/react-hook-form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 

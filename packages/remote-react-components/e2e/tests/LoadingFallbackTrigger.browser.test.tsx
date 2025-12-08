@@ -1,5 +1,5 @@
-import { expectNotVisibleFor } from "@/tests/helpers";
-import { renderRemoteTest } from "@/tests/renderRemoteTest";
+import { expectNotVisibleFor } from "./helpers";
+import { renderRemoteTest } from "./renderRemoteTest";
 import { expect, test } from "vitest";
 
 test("LoadingFallbackTrigger triggers suspense on host", async () => {
