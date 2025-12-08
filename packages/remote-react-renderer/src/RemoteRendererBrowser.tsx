@@ -20,11 +20,13 @@ import { type CSSProperties, type FC, useMemo, useRef, useState } from "react";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
-  src: string;
+  src?: string;
   timeoutMs?: number;
   onNavigationStateChanged?: (state: NavigationState) => void;
   hostPathname?: string;
   extBridgeImplementation?: ExtBridgeConnectionApi;
+  /** Internal use only */
+  __remoteReceiver?: RemoteReceiver;
 }
 
 const hiddenIframeStyle: CSSProperties = {
@@ -46,7 +48,23 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     extBridgeImplementation,
     onNavigationStateChanged,
     hostPathname,
+    __remoteReceiver: remoteReceiverFromProps,
   } = props;
+
+  const remoteComponents = useMergedComponents(integrations);
+
+  if (remoteReceiverFromProps) {
+    return (
+      <RemoteRootRenderer
+        components={remoteComponents}
+        receiver={remoteReceiverFromProps}
+      />
+    );
+  }
+
+  if (!src) {
+    throw new RemoteError("'src' prop is required");
+  }
 
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
@@ -60,8 +78,6 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   if (remoteError) {
     throw new RemoteError(`Remote rendering failed: ${remoteError}`);
   }
-
-  const remoteComponents = useMergedComponents(integrations);
 
   const [receiver, rendererSubscriber] = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
