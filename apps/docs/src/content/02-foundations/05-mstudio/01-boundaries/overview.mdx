@@ -25,9 +25,15 @@ Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail vorz
 | `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Avatar                     | Avatar Skeleton                                    |
 | `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
 
-## Inhalt der gesamten LayoutCard
+## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 
-Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung der Seite, sollte die gesamte LayouCard durch eine Boundary umschlossen sein. In der Regel betrifft das Seiten in denen eine Liste geladen wird oder eine Detailseite. Nutze die Komponente `WithBoundaries.LayoutCard`.
+Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard` umschlossen sein.
+
+[Beispiel LayoutCard]
+
+## Inhalte eines Tabs (WithBoundaries.Sections)
+
+Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, so dass es sich lohnen kann einen Tab seperat zu schützen. Nutze dafür `WithBoundaries.Sections` und gebe eine Anzahl der geladenen Sections als SectionsCount mit um entprechende LodaingView zu steuern. Wird in dem Tab eine Liste geladen sollte sie mit dem SectionsCount 1 geladen werden.
 
 ### Listenseite
 
@@ -85,8 +91,9 @@ export const CronjobPage: FC = () => (
 );
 ```
 
-## Forms in Modals
-Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal in den Error State, auch wenn es darin noch Boundaries gibt.
+## Inhalte von Forms in Modals (WithBoundaries.Modal)
+
+Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal in eine Error-View, auch wenn es darin noch Boundaries gibt.
 
 ```
 interface Props {
@@ -115,17 +122,9 @@ export const RenameCronjobModal: FC<Props> = (props) => (
 );
 ```
 
-## Einzelne Section
+## Inhalte einzelner Sections (WithBoundaries.Section)
 
 Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken. In solchen Fällen lohnt sich eine Abgrenzung über `WithBoundaries.Section`. So bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu gefährden.
-
-- Sections werden durch `WithBoundaries.Sections` ersetzt
-
-- Nachgeladene Elemente erhalten eigene Boundaries
-  - Für Link und Titel eines Models gibt es eigene Komponenten die bereits
-    Boundaries enthalten
-  - Andere Elemente erhalten die passende Boundary, z.B. `WithBoundaries.Text`
-    oder `WithBoundaries.Fragment`
 
 ```
 export const GeneralSection: FC<Props> = (props) => (
@@ -186,12 +185,13 @@ export const AppInstallationSection: FC<Props> = (props) => (
 );
 ```
 
-## Diagramme (WIP)
+## Inhalte eines Diagramms (WIP)
 Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden. Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene Error-View. Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer Boundary abgesichert werden.
 
 [Code-Beispiele??]
 
-## Einzelne kleinere Elemente
+## Inhalte einzelner kleinerer Elemente 
+
 Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene Error-View besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand. 
 
 ### ContextMenu
