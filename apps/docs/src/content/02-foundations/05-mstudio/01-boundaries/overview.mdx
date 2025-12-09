@@ -39,7 +39,7 @@ umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
 
 ### Listenseite
 
-Eine Liste gilt als einzelne Section. Der `sectionsCount` beträgt daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte Liste im Fehlerfall in die ErrorView wechseln kann.
+Eine Listenseite enthält in der Regel eine einzelne Section. Der `sectionsCount` beträgt hier daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte Liste im Fehlerfall in die ErrorView wechseln kann.
 
 ```
 export const CronjobsPage: FC = () => (
@@ -64,7 +64,7 @@ export const CronjobsPage: FC = () => (
 
 ### Detailseite
 
-Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView anngezeigt werden kann.
+Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView angezeigt werden kann.
 
 ```
 export const CronjobPage: FC = () => (
@@ -115,11 +115,14 @@ export const CronjobTabs: FC = () => (
 );
 ```
 
-## Inhalte von Forms in Modals (WithBoundaries.Modal)
+## Modals (WithBoundaries.Modal)
+
+Für Modals sollte immer in ein WithBoundaries.Modal verwendet werden. Dies verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal geöffnet wurde.
+
+### Inhalte von Forms in Modals
 
 Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User
-und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine
-Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald
+und kann zu unvollständigen oder inkonsistenten Daten führen. Sobald
 innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal
 in eine ErrorView, auch wenn es darin noch Boundaries gibt.
 
