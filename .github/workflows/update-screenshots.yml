@@ -17,7 +17,7 @@ jobs:
   update-screenshots:
     runs-on: ubuntu-latest
     if: |
-      ${{ (github.event.label.name == 'update-screenshots') && (github.ref_name != github.event.repository.default_branch) }}
+      ${{ (github.event.label.name == 'update-screenshots') && (github.head_ref != github.event.repository.default_branch) }}
 
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
@@ -25,7 +25,7 @@ jobs:
 
     # one at a time per branch
     concurrency:
-      group: visual-regression-screenshots@${{ github.ref_name }}
+      group: visual-regression-screenshots@${{ github.head_ref }}
       cancel-in-progress: true
 
     permissions:
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout selected branch
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
           token: ${{ secrets.PUBLISH_PAT }}
 
@@ -85,14 +85,14 @@ jobs:
 
       - name: Push changes
         if: steps.check_changes.outputs.changes == 'true'
-        run: git push origin ${{ github.ref_name }}
+        run: git push origin ${{ github.head_ref }}
 
       - name: Summary
         run: |
           if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
             echo "### 📸 Visual Regression Screenshots Updated" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Successfully updated **${{ steps.check_changes.outputs.changed_count }}** screenshot(s) on \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "Successfully updated **${{ steps.check_changes.outputs.changed_count }}** screenshot(s) on \`${{ github.head_ref }}\`" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "#### Changed Files:" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
