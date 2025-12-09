@@ -63,7 +63,9 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
           }
         }}
       >
-        {children}
+        <ViewComponentContextProvider components={viewComponents}>
+          {children}
+        </ViewComponentContextProvider>
       </div>
     );
   }
