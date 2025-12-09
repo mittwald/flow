@@ -1,6 +1,5 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
-import { LayoutCard } from "@/auto-generated";
 
 type AccentBoxColor = "blue" | "green" | "gradient" | "neutral";
 
@@ -42,7 +41,7 @@ test.each(testEnvironments)(
   async ({
     container,
     render,
-    components: { AccentBox, Section, Heading, Text, Link },
+    components: { AccentBox, Section, Heading, Text, Link, LayoutCard },
   }) => {
     await render(
       <LayoutCard>
