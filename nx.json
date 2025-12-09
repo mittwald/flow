@@ -49,12 +49,21 @@
       "dependsOn": ["^build"],
       "cache": true
     },
+    "test:browser:prepare": {
+      "dependsOn": [
+        {
+          "projects": ["root"],
+          "target": "test:browser:system-prepare"
+        }
+      ],
+      "cache": true
+    },
     "test:e2e": {
-      "dependsOn": ["^build", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
       "cache": true
     },
     "test:e2e:dev": {
-      "dependsOn": ["^build", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
       "cache": true
     },
 

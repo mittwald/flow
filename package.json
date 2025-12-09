@@ -9,14 +9,15 @@
     "node": ">=20.19"
   },
   "scripts": {
-    "build": "nx run-many --targets=build --exclude docs",
+    "build": "nx run-many --targets=build --exclude docs,root",
     "clean": "nx reset",
-    "postclean": "nx run-many --targets=clean",
+    "postclean": "nx run-many --targets=clean --exclude root",
     "dev": "nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
     "dev:init-githooks": "pnpm dlx simple-git-hooks",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "test": "nx run-many --targets=test",
+    "test": "nx run-many --targets=test --exclude root",
+    "test:browser:system-prepare": "pnpx playwright install-deps chromium firefox webkit",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {
