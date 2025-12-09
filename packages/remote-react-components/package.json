@@ -31,11 +31,10 @@
     "test": "exit 0",
     "test:browser": "vitest run --project=browser --browser.headless --passWithNoTests",
     "test:browser:dev": "vitest dev --project=browser",
-    "test:browser:prepare": "pnpm playwright install --with-deps chromium firefox webkit",
     "test:compile": "tsc --noEmit",
     "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
     "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
-    "test:e2e:prepare": "pnpm test:browser:prepare && pnpm rimraf e2e/remote-test-server/.vitest",
+    "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",
     "test:unit": "vitest run --project=unit --passWithNoTests",
     "test:unit:dev": "vitest dev --project=unit --passWithNoTests",
     "test:visual": "vitest run --project=visual --browser.headless"

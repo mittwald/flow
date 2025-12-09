@@ -51,7 +51,6 @@
     },
     "test:browser": {
       "dependsOn": [
-        "test:browser:prepare",
         {
           "projects": ["stylesheet"],
           "target": "build"
@@ -61,7 +60,6 @@
     "test:browser:dev": {
       "cache": true,
       "dependsOn": [
-        "test:browser:prepare",
         {
           "projects": ["stylesheet"],
           "target": "build"

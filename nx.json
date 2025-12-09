@@ -30,15 +30,15 @@
       "cache": true
     },
     "test:visual": {
-      "dependsOn": ["^build", "test:browser:prepare"],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "test:browser": {
-      "dependsOn": ["^build", "test:browser:prepare"],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "test:browser:dev": {
-      "dependsOn": ["^build", "test:browser:prepare"],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "test:compile": {
@@ -49,21 +49,12 @@
       "dependsOn": ["^build"],
       "cache": true
     },
-    "test:browser:prepare": {
-      "dependsOn": [
-        {
-          "projects": ["root"],
-          "target": "test:browser:system-prepare"
-        }
-      ],
-      "cache": true
-    },
     "test:e2e": {
-      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:e2e:prepare"],
       "cache": true
     },
     "test:e2e:dev": {
-      "dependsOn": ["^build", "test:browser:prepare", "test:e2e:prepare"],
+      "dependsOn": ["^build", "test:e2e:prepare"],
       "cache": true
     },
 

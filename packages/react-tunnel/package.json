@@ -28,7 +28,6 @@
     "test": "exit 0",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
-    "test:browser:prepare": "pnpm playwright install chromium",
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
