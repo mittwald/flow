@@ -18,6 +18,7 @@
     "lint": "eslint .",
     "test": "nx run-many --targets=test --exclude root",
     "test:browser:system-prepare": "pnpx playwright install-deps chromium firefox webkit",
+    "test:visual": "nx run-many --targets=test:visual --exclude root",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {

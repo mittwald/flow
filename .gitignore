@@ -19,7 +19,6 @@ packages/components/out
 coverage/*.json
 packages/remote-react-components/src/tests/__screenshots__
 .vitest
-__screenshots__
 # macOS system files
 .DS_Store
 **/.DS_Store
