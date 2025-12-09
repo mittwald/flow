@@ -32,6 +32,28 @@ jobs:
       contents: write # needs to push changes
 
     steps:
+      - name: Remove label if exists
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PUBLISH_PAT }}
+          script: |
+            const label = "update-screenshots";
+            try {
+                await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    name: label,
+                });
+                console.log(`Label '${label}' removed.`);
+            } catch (e) {
+                if (e.status === 404) {
+                   console.log(`Label '${label}' not present, skipping.`);
+                } else {
+                    throw e;
+                }
+            }
+
       - name: Checkout selected branch
         uses: actions/checkout@v5
         with:
@@ -57,7 +79,6 @@ jobs:
 
       - name: Update Visual Regression Screenshots
         run: pnpm test:visual --update
-
       # check what changed
       - name: Check for changes
         id: check_changes
