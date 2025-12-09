@@ -164,8 +164,12 @@ test.each(testEnvironments)(
     await render(<Button data-testid="pressed">Pressed</Button>);
 
     const pressedButton = page.getByTestId("pressed");
-    await pressedButton.click();
 
-    await expect(container).toMatchScreenshot("Button pressed");
+    await Promise.all([
+      pressedButton.click({ delay: 500 }),
+      new Promise((res) => setTimeout(res, 100)).then(() =>
+        expect(container).toMatchScreenshot("Button pressed"),
+      ),
+    ]);
   },
 );

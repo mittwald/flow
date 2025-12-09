@@ -46,7 +46,7 @@ test.each(testEnvironments)(
     await userEvent.tab();
     await userEvent.tab();
 
-    await expect(container).toMatchScreenshot("Accordion states - default");
+    await expect(container).toMatchScreenshot("Accordion states");
   },
 );
 
