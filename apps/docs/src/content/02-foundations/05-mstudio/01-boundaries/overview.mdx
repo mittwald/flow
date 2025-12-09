@@ -1,13 +1,18 @@
 <Alert>
   <Heading>Guideline für interne Teams</Heading>
   <Content>
-    Diese Guideline richtet sich in erster Linie an das interne Team von mittwald und setzt entsprechendes Vorwissen voraus. Die darin genannten Komponenten beziehen sich auf interne mStudio-Komponenten.
+    Diese Guideline richtet sich in erster Linie an das interne Team von
+    mittwald und setzt entsprechendes Vorwissen voraus. Die darin genannten
+    Komponenten beziehen sich auf interne mStudio-Komponenten.
   </Content>
 </Alert>
 
-# Technische Umsetzung 
+# Technische Umsetzung
 
-Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer Teile der Anwendung.
+Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail
+vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries
+erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer
+Teile der Anwendung.
 
 | Typ                  | Verwendung                                                     | Element     | Fehlerfall                        | Loading                                            |
 | -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------- | -------------------------------------------------- |
@@ -27,24 +32,30 @@ Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail vorz
 
 ## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 
-Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard` umschlossen sein.
+Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
+der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
+umschlossen sein.
 
 [Beispiel LayoutCard]
 
-## Inhalte eines Tabs (WithBoundaries.Sections)
+## Inhalte eines Tabs (WithBoundaries.SectionsFragment)
 
-Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, so dass es sich lohnen kann einen Tab seperat zu schützen. Nutze dafür `WithBoundaries.Sections` und gebe eine Anzahl der geladenen Sections als SectionsCount mit um entprechende LodaingView zu steuern. Wird in dem Tab eine Liste geladen sollte sie mit dem SectionsCount 1 geladen werden.
+Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, sodass es sich
+lohnen kann einen Tab seperat zu schützen. Nutze dafür
+`WithBoundaries.SectionsFragment` und gebe eine Anzahl der geladenen Sections
+als SectionsCount mit um entsprechende LoadingView zu steuern. Wird in dem Tab
+eine Liste geladen, sollte sie mit dem SectionsCount 1 geladen werden.
 
 ### Listenseite
 
-- `WithBoundaries.Sections` mit sectionsCount 1
+- `WithBoundaries.LayoutCard` mit sectionsCount 1
 
 - Count der Liste wird direkt hier geladen, damit im Fehlerfall die ganze Seite
   eine Fehlermeldung zeigt (Liste ist Hauptelement der Seite)
 
 ```
 export const CronjobsPage: FC = () => (
-  <WithBoundaries.Sections suspenseFallbackProps={{ sectionsCount: 1 }}>
+  <WithBoundaries.LayoutCard suspenseFallbackProps={{ sectionsCount: 1 }}>
     {() => {
       const { projectId } = usePathParams("projectId");
       const projectGhost = ProjectGhost.ofId(projectId);
@@ -59,21 +70,21 @@ export const CronjobsPage: FC = () => (
         </>
       );
     }}
-  </WithBoundaries.Sections>
+  </WithBoundaries.LayoutCard>
 );
 ```
 
 ### Detailseite / Tab
 
-- `WithBoundaries.LayoutCard` / `WithBoundaries.Sections` mit SectionCount, je
-  nach Anzahl der auf jeden Fall geladenen Sections
+- `WithBoundaries.LayoutCard` / `WithBoundaries.SectionsFragment` mit
+  SectionCount, je nach Anzahl der auf jeden Fall geladenen Sections
 
 - Cronjob wird als Hauptelement der Seite hier geladen, damit im Fehlerfall die
   ganze Seite eine Fehlermeldung zeigt
 
 ```
 export const CronjobPage: FC = () => (
-  <WithBoundaries.Sections suspenseFallbackProps={{ sectionsCount: 3 }}>
+  <WithBoundaries.LayoutCard suspenseFallbackProps={{ sectionsCount: 3 }}>
     {() => {
       const { cronjobId } = usePathParams("cronjobId");
       const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
@@ -83,17 +94,46 @@ export const CronjobPage: FC = () => (
           <ProjectDeactivatedAlert project={cronjob.project} />
           <GeneralSection cronjob={cronjob} />
           <IntervalSection cronjob={cronjob} />
-          <ErrorHandlingSection cronjob={cronjob} />
         </>
       );
     }}
-  </WithBoundaries.Sections>
+  </WithBoundaries.LayoutCard>
+);
+```
+
+```
+export const CronjobTabs: FC = () => (
+  <LayoutCard>
+    <Tabs>
+      <Tab>
+        <TabTitle>Allgemein</TabTitle>
+        <WithBoundaries.SectionsFragment suspenseFallbackProps={{ sectionsCount: 3 }}>
+          {() => {
+            const { cronjobId } = usePathParams("cronjobId");
+            const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
+
+            return (
+              <>
+                <ProjectDeactivatedAlert project={cronjob.project} />
+                <GeneralSection cronjob={cronjob} />
+                <IntervalSection cronjob={cronjob} />
+              </>
+            );
+          }}
+        </WithBoundaries.SectionsFragment>
+      </Tab>
+    </Tabs>
+  </LayoutCard>
 );
 ```
 
 ## Inhalte von Forms in Modals (WithBoundaries.Modal)
 
-Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal in eine Error-View, auch wenn es darin noch Boundaries gibt.
+Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User
+und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine
+Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald
+innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal
+in eine Error-View, auch wenn es darin noch Boundaries gibt.
 
 ```
 interface Props {
@@ -124,7 +164,11 @@ export const RenameCronjobModal: FC<Props> = (props) => (
 
 ## Inhalte einzelner Sections (WithBoundaries.Section)
 
-Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken. In solchen Fällen lohnt sich eine Abgrenzung über `WithBoundaries.Section`. So bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu gefährden.
+Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen
+Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken.
+In solchen Fällen lohnt sich eine Abgrenzung über `WithBoundaries.Section`. So
+bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu
+gefährden.
 
 ```
 export const GeneralSection: FC<Props> = (props) => (
@@ -137,25 +181,7 @@ export const GeneralSection: FC<Props> = (props) => (
       return (
         <>
           <Heading>{t("cronjob")}</Heading>
-
-          <LabeledValue>
-            <Label>{t("linkedAppInstallation")}</Label>
-            <ModelLink model={cronjob.linkedAppInstallation}>
-              <ModelTitle model={cronjob.linkedAppInstallation} />
-            </ModelLink>
-          </LabeledValue>
-
-          <LabeledValue>
-            <Label>{t("projectShortId")}</Label>
-            <WithBoundaries.Text>
-              {() =>  projectGhost.getCommon().use().shortId }
-            </WithBoundaries.Text>
-          </LabeledValue>
-
-          <LabeledValue>
-            <Label>{t("type")}</Label>
-            <Text>{t(`type.${cronjob.type}`)}</Text>
-          </LabeledValue>
+          ...
         </>
       );
     }}
@@ -163,7 +189,11 @@ export const GeneralSection: FC<Props> = (props) => (
 );
 ```
 
-**Sonderfall:** Manche Sections werden nur unter bestimmten Bedingungen angezeigt. In diesen Situationen soll keine eigene Loading-View erzeugt werden, damit Nutzer kein Ladeverhalten sehen, das später nicht zu einem sichtbaren Ergebnis führt. Für solche Fälle eignet sich `WithBoundaries.Fragment`, da es die Section schützt, ohne einen sichtbaren Ladezustand zu erzeugen.
+**Sonderfall:** Manche Sections werden nur unter bestimmten Bedingungen
+angezeigt. In diesen Situationen soll keine eigene Loading-View erzeugt werden,
+damit Nutzer kein Ladeverhalten sehen, das später nicht zu einem sichtbaren
+Ergebnis führt. Für solche Fälle eignet sich `WithBoundaries.Fragment`, da es
+die Section schützt, ohne einen sichtbaren Ladezustand zu erzeugen.
 
 ```
 export const AppInstallationSection: FC<Props> = (props) => (
@@ -186,13 +216,43 @@ export const AppInstallationSection: FC<Props> = (props) => (
 ```
 
 ## Inhalte eines Diagramms (WIP)
-Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden. Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene Error-View. Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer Boundary abgesichert werden.
+
+Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher
+fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden.
+Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene Error-View.
+Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer
+Boundary abgesichert werden.
 
 [Code-Beispiele??]
 
-## Inhalte einzelner kleinerer Elemente 
+## Inhalte einzelner kleinerer Elemente
 
-Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene Error-View besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand. 
+Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden
+oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um
+nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene Error-View
+besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand.
+
+### Texte
+
+```
+<LabeledValue>
+  <Label>{t("projectShortId")}</Label>
+  <WithBoundaries.Text>
+    {() =>  projectGhost.getCommon().use().shortId }
+  </WithBoundaries.Text>
+</LabeledValue>
+```
+
+Zusätzlich gibt es Components die direkt auf ein Model angewendet werden können
+und eine eingebaute Boundary besitzen.
+
+```
+<ModelLink model={cronjob}>
+  <ModelTitle model={cronjob} />
+</ModelLink>
+
+<ModelLabeledValue model={cronjob}/>
+```
 
 ### ContextMenu
 
@@ -277,9 +337,19 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 
 # Weitere Empfehlungen
 
-Ein durchdachtes Loading und Error-Boundary Konzept endet nicht bei der technischen Umsetzung. Fehler sollten zuverlässig erfasst und an Monitoring Systeme, Sentry oder Datadog weitergegeben werden, damit Probleme früh sichtbar werden. Manuelle und automatisierte Tests helfen dabei, die eigenen Fallbacks regelmäßig zu überprüfen und sicherzustellen, dass sie in allen relevanten Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die Guideline [Writing for Errors](/02-foundations/03-content-guidelines/02-fehlermeldungen) weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten, das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
+Ein durchdachtes Loading und Error-Boundary Konzept endet nicht bei der
+technischen Umsetzung. Fehler sollten zuverlässig erfasst und an Monitoring
+Systeme, Sentry oder Datadog weitergegeben werden, damit Probleme früh sichtbar
+werden. Manuelle und automatisierte Tests helfen dabei, die eigenen Fallbacks
+regelmäßig zu überprüfen und sicherzustellen, dass sie in allen relevanten
+Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung
+der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen
+können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die
+Guideline
+[Writing for Errors](/02-foundations/03-content-guidelines/02-fehlermeldungen)
+weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
+das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
 
+```
 
-
-
-
+```
