@@ -22,29 +22,20 @@ Teile der Anwendung.
 | `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                    | Mehrzeilige Skeletons                              |
 | `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons             | Mehrzeilige Skeletons                              |
 | `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                            | Nichts                                             |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Item mit Fehlertext                           |
+| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Items mit Skeleton                            |
 | `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                | LoadingView der Flow Component                     |
-| `Text`               | Für Texte                                                      | Text        | Fehlertext                        | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehlertext                        | Einzeiliges Skeleton                               |
-| `Link`               | Für Links                                                      | Link        | Fehlertext                        | Einzeiliges Skeleton                               |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Avatar                     | Avatar Skeleton                                    |
+| `Text`               | Für Texte                                                      | Text        | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
+| `String`             | Für einzeilige Inhalte                                         | Fragment    | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
+| `Link`               | Für Links                                                      | Link        | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
+| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Skeleton                   | Avatar Skeleton                                    |
 | `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
 
 ## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 
 Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
 der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
-umschlossen sein.
-
-[Beispiel LayoutCard]
-
-## Inhalte eines Tabs (WithBoundaries.SectionsFragment)
-
-Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, sodass es sich
-lohnen kann einen Tab seperat zu schützen. Nutze dafür
-`WithBoundaries.SectionsFragment` und gebe eine Anzahl der geladenen Sections
-als SectionsCount mit um entsprechende LoadingView zu steuern. Wird in dem Tab
-eine Liste geladen, sollte sie mit dem SectionsCount 1 geladen werden.
+umschlossen sein. Dieser sollte die Anzahl der geladenen Sections als
+SectionsCount mitgegeben werden, um die LoadingView entsprechend anzuzeigen.
 
 ### Listenseite
 
@@ -74,17 +65,16 @@ export const CronjobsPage: FC = () => (
 );
 ```
 
-### Detailseite / Tab
+### Detailseite
 
-- `WithBoundaries.LayoutCard` / `WithBoundaries.SectionsFragment` mit
-  SectionCount, je nach Anzahl der auf jeden Fall geladenen Sections
+- `WithBoundaries.LayoutCard` mit SectionCount, je nach Anzahl der Sections
 
 - Cronjob wird als Hauptelement der Seite hier geladen, damit im Fehlerfall die
   ganze Seite eine Fehlermeldung zeigt
 
 ```
 export const CronjobPage: FC = () => (
-  <WithBoundaries.LayoutCard suspenseFallbackProps={{ sectionsCount: 3 }}>
+  <WithBoundaries.LayoutCard suspenseFallbackProps={{ sectionsCount: 2 }}>
     {() => {
       const { cronjobId } = usePathParams("cronjobId");
       const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
@@ -100,6 +90,12 @@ export const CronjobPage: FC = () => (
   </WithBoundaries.LayoutCard>
 );
 ```
+
+### Tab (WithBoundaries.SectionsFragment)
+
+Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, sodass es sich
+lohnen kann einen Tab seperat zu schützen. Nutze dafür
+`WithBoundaries.SectionsFragment`.
 
 ```
 export const CronjobTabs: FC = () => (
@@ -171,18 +167,15 @@ bleiben Fehler auf einen kleinen Bereich beschränkt, ohne die gesamte Seite zu
 gefährden.
 
 ```
-export const GeneralSection: FC<Props> = (props) => (
+export const AppInstallationSection: FC<Props> = (props) => (
   <WithBoundaries.Section>
     {() => {
       const { cronjobGhost } = asGhostProps(props);
-      const cronjob = cronjobGhost.getCommon().use();
+      const appInstallation = cronjobGhost.getCommon().linkedAppInstallation.getCommon().use();
       const t = useTCronjob();
 
       return (
-        <>
-          <Heading>{t("cronjob")}</Heading>
-          ...
-        </>
+        <>...</>
       );
     }}
   </WithBoundaries.Section>
@@ -254,31 +247,6 @@ und eine eingebaute Boundary besitzen.
 <ModelLabeledValue model={cronjob}/>
 ```
 
-### ContextMenu
-
-```
-export const ActionsContextMenu: FC<Props> = (props) => {
-  const { cronjobProxy } = asProxyProps(props);
-  const deleteModalController = useOverlayController("Modal");
-
-  return (
-    <>
-      <WithBoundaries.ContextMenu placement="bottom end">
-        {() => {
-          const cronjob = cronjobProxy.getCommon().use();
-          return <DeleteMenuItem onAction={() => deleteModalController.open()} />;
-        }}
-      </WithBoundaries.ContextMenu>
-
-      <DeleteCronjobModal
-        controller={deleteModalController}
-        cronjob={cronjobProxy}
-      />
-    </>
-  );
-};
-```
-
 ### Alerts / Badges
 
 - Alerts und Badges werden in ein `WithBoundaries.Fragment` verpackt
@@ -333,6 +301,31 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 };
 ```
 
+### ContextMenu
+
+```
+export const ActionsContextMenu: FC<Props> = (props) => {
+  const { cronjobProxy } = asProxyProps(props);
+  const deleteModalController = useOverlayController("Modal");
+
+  return (
+    <>
+      <WithBoundaries.ContextMenu placement="bottom end">
+        {() => {
+          const cronjob = cronjobProxy.getCommon().use();
+          return <DeleteMenuItem onAction={() => deleteModalController.open()} />;
+        }}
+      </WithBoundaries.ContextMenu>
+
+      <DeleteCronjobModal
+        controller={deleteModalController}
+        cronjob={cronjobProxy}
+      />
+    </>
+  );
+};
+```
+
 ---
 
 # Weitere Empfehlungen
@@ -349,7 +342,3 @@ Guideline
 [Writing for Errors](/02-foundations/03-content-guidelines/02-fehlermeldungen)
 weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
 das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
-
-```
-
-```
