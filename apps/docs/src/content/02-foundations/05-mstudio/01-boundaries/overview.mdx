@@ -34,15 +34,12 @@ Teile der Anwendung.
 
 Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
 der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
-umschlossen sein. Dieser sollte die Anzahl der geladenen Sections als
-SectionsCount mitgegeben werden, um die LoadingView entsprechend anzuzeigen.
+umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
+`sectionsCount` mitgegeben, um die LoadingView passend darzustellen.
 
 ### Listenseite
 
-- `WithBoundaries.LayoutCard` mit sectionsCount 1
-
-- Count der Liste wird direkt hier geladen, damit im Fehlerfall die ganze Seite
-  eine Fehlermeldung zeigt (Liste ist Hauptelement der Seite)
+Eine Liste gilt als einzelne Section. Der `sectionsCount` beträgt daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte Liste im Fehlerfall in die ErrorView wechseln kann.
 
 ```
 export const CronjobsPage: FC = () => (
@@ -67,10 +64,7 @@ export const CronjobsPage: FC = () => (
 
 ### Detailseite
 
-- `WithBoundaries.LayoutCard` mit SectionCount, je nach Anzahl der Sections
-
-- Cronjob wird als Hauptelement der Seite hier geladen, damit im Fehlerfall die
-  ganze Seite eine Fehlermeldung zeigt
+Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView anngezeigt werden kann.
 
 ```
 export const CronjobPage: FC = () => (
@@ -93,9 +87,7 @@ export const CronjobPage: FC = () => (
 
 ### Tab (WithBoundaries.SectionsFragment)
 
-Manchmal sind Inhalte einer Seite auf mehrere Tabs verteilt, sodass es sich
-lohnen kann einen Tab seperat zu schützen. Nutze dafür
-`WithBoundaries.SectionsFragment`.
+Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich `WithBoundaries.SectionsFragment`.
 
 ```
 export const CronjobTabs: FC = () => (
@@ -129,7 +121,7 @@ Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User
 und kann zu unvollständigen oder inkonsistenten Daten führen. Daher sollte eine
 Form immer mithilfe von `WithBoundaries.Modal` geschützt werden. Sobald
 innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal
-in eine Error-View, auch wenn es darin noch Boundaries gibt.
+in eine ErrorView, auch wenn es darin noch Boundaries gibt.
 
 ```
 interface Props {
@@ -183,7 +175,7 @@ export const AppInstallationSection: FC<Props> = (props) => (
 ```
 
 **Sonderfall:** Manche Sections werden nur unter bestimmten Bedingungen
-angezeigt. In diesen Situationen soll keine eigene Loading-View erzeugt werden,
+angezeigt. In diesen Situationen soll keine eigene LoadingView erzeugt werden,
 damit Nutzer kein Ladeverhalten sehen, das später nicht zu einem sichtbaren
 Ergebnis führt. Für solche Fälle eignet sich `WithBoundaries.Fragment`, da es
 die Section schützt, ohne einen sichtbaren Ladezustand zu erzeugen.
@@ -220,12 +212,11 @@ Boundary abgesichert werden.
 
 ## Inhalte einzelner kleinerer Elemente
 
-Kleine Ergänzungen wie Texte, Links, ContextMenus, Badges oder Actions werden
-oft dynamisch geladen. Diese sollten ebenfalls seperat geschützt werden, um
-nicht die gesamte Seite zu blockieren. Da diese Elemente keine eigene Error-View
-besitzen, erscheinen sie im Fehlerfall nicht oder verbleiben im Ladezustand.
+Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden
+oft dynamisch geladen, da sie das Nutzungserlebnis der Seite jediglich ergänzen. Diese sollten daher seperat geschützt werden, um
+nicht die gesamte Seite zu blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
-### Texte
+### Texte (WithBoundaries.Text)
 
 ```
 <LabeledValue>
@@ -247,9 +238,9 @@ und eine eingebaute Boundary besitzen.
 <ModelLabeledValue model={cronjob}/>
 ```
 
-### Alerts / Badges
+### Alerts / Badges (WithBoundaries.Fragment)
 
-- Alerts und Badges werden in ein `WithBoundaries.Fragment` verpackt
+Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
@@ -272,7 +263,7 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 );
 ```
 
-### Field
+### Field (WithBoundaries.FieldFragement)
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {
@@ -301,7 +292,7 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 };
 ```
 
-### ContextMenu
+### ContextMenu (WithBoundaries.ContextMenu)
 
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
@@ -339,6 +330,6 @@ Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung
 der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen
 können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die
 Guideline
-[Writing for Errors](/02-foundations/03-content-guidelines/02-fehlermeldungen)
+[fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)
 weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
 das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
