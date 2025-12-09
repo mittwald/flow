@@ -45,10 +45,6 @@ const flowComponentsMap = {
     "ClearPropsContextContent",
     SlotRootWrapper,
   ),
-  "flr-clear-props-context": createFlowRemoteComponentRenderer(
-    "ClearPropsContext",
-    SlotRootWrapper,
-  ),
 };
 
 export const components = {

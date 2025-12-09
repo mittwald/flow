@@ -1,5 +1,4 @@
 import {
-  Button,
   Label,
   Section,
   TextArea,
@@ -7,6 +6,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -28,7 +28,7 @@ export default () => {
             <Label>Nachricht</Label>
           </TextArea>
         </Field>
-        <Button type="submit">Senden</Button>
+        <SubmitButton>Senden</SubmitButton>
       </Form>
     </Section>
   );

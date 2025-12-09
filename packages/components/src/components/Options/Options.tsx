@@ -29,6 +29,7 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
     <Popover
       className={styles.popover}
       controller={controller}
+      maxHeight={324}
       {...restPopoverProps}
     >
       <Aria.ListBox

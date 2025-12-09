@@ -1,5 +1,4 @@
 import {
-  Button,
   DateRangePicker,
   Label,
   Section,
@@ -7,6 +6,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import type { CalendarDate } from "@internationalized/date";
@@ -31,7 +31,7 @@ export default () => {
             <Label>Zeitraum</Label>
           </DateRangePicker>
         </Field>
-        <Button type="submit">Speichern</Button>
+        <SubmitButton>Speichern</SubmitButton>
       </Form>
     </Section>
   );

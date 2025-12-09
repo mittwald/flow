@@ -1,5 +1,7 @@
 "use client";
 import {
+  Action,
+  ActionGroup,
   Button,
   Content,
   ContextMenu,
@@ -8,6 +10,8 @@ import {
   Heading,
   IconApp,
   MenuItem,
+  Modal,
+  ModalTrigger,
   Section,
   Text,
 } from "@mittwald/flow-remote-react-components";
@@ -17,6 +21,19 @@ export default function Page() {
     <Section>
       <Header>
         <Heading>Heading</Heading>
+        <ModalTrigger>
+          <Button>Open modal</Button>
+          <Modal>
+            <Heading>Modal Heading</Heading>
+            <Content>Modal Content</Content>
+            <ActionGroup>
+              <Action closeOverlay="Modal">
+                <Button>Close</Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
         <ContextMenuTrigger>
           <Button>Open menu</Button>
           <ContextMenu onAction={(item) => console.log(item)}>
