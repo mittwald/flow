@@ -35,6 +35,7 @@ jobs:
       - name: Remove label if exists
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.PUBLISH_PAT }}
           script: |
             const label = "update-screenshots";
             try {
