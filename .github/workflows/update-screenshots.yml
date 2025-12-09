@@ -13,7 +13,7 @@ env:
 
 jobs:
   update-screenshots:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
