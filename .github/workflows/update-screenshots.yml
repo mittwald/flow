@@ -51,7 +51,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm test:browser:prepare
+      - run: pnpm test:browser:prepare --only-shell
 
       - name: Update Visual Regression Screenshots
         run: pnpm test:visual --update

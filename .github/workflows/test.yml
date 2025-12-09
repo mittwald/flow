@@ -22,7 +22,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm test:browser:prepare
+      - run: pnpm test:browser:prepare --only-shell
 
       - uses: nrwl/nx-set-shas@v4
 
