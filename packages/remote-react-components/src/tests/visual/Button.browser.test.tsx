@@ -86,7 +86,7 @@ test.each(testEnvironments)(
     await userEvent.tab();
     await userEvent.tab();
 
-    await expect(container).toMatchScreenshot("Button states - default");
+    await expect(container).toMatchScreenshot("Button states");
   },
 );
 
@@ -116,7 +116,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await expect(container).toMatchScreenshot("Button colors - default");
+    await expect(container).toMatchScreenshot("Button colors");
   },
 );
 
@@ -154,7 +154,7 @@ test.each(testEnvironments)(
     await userEvent.tab();
     await userEvent.tab();
 
-    await expect(container).toMatchScreenshot("Button with avatar - default");
+    await expect(container).toMatchScreenshot("Button with avatar");
   },
 );
 
@@ -166,6 +166,6 @@ test.each(testEnvironments)(
     const pressedButton = page.getByTestId("pressed");
     await pressedButton.click();
 
-    await expect(container).toMatchScreenshot("Button pressed - default");
+    await expect(container).toMatchScreenshot("Button pressed");
   },
 );

@@ -33,7 +33,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await expect(container).toMatchScreenshot("AccentBox colors - default");
+    await expect(container).toMatchScreenshot("AccentBox colors");
   },
 );
 
@@ -56,8 +56,6 @@ test.each(testEnvironments)(
       </LayoutCard>,
     );
 
-    await expect(container).toMatchScreenshot(
-      "AccentBox in LayoutCard - default",
-    );
+    await expect(container).toMatchScreenshot("AccentBox in LayoutCard");
   },
 );
