@@ -173,3 +173,36 @@ test.each(testEnvironments)(
     ]);
   },
 );
+
+test.each(testEnvironments)(
+  "Button edge cases (%s)",
+  async ({
+    container,
+    render,
+    components: { Flex, Button, Text, IconInfo },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <Button>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+          dolore voluptas. Earum pariatur, similique corrupti id officia
+          perferendis. Labore, similique.
+        </Button>
+        <Button>
+          <IconInfo />
+          <Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+            dolore voluptas. Earum pariatur, similique corrupti id officia
+            perferendis. Labore, similique.
+          </Text>
+        </Button>
+      </Flex>,
+    );
+
+    await expect(container).toMatchScreenshot("Button edge cases");
+  },
+);

@@ -74,3 +74,27 @@ test.each(testEnvironments)(
     await expect(container).toMatchScreenshot("Accordion collapsed");
   },
 );
+
+test.each(testEnvironments)(
+  "Accordion edge cases (%s)",
+  async ({
+    container,
+    render,
+    components: { Accordion, Heading, Content },
+  }) => {
+    await render(
+      <Accordion>
+        <Heading>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+          dolore voluptas. Earum pariatur, similique corrupti id officia
+          perferendis. Labore, similique.
+        </Heading>
+        <Content>Content</Content>
+      </Accordion>,
+    );
+
+    await expect(container).toMatchScreenshot("Accordion edge cases");
+  },
+);
