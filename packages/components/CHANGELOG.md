@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.593](https://github.com/mittwald/flow/compare/0.2.0-alpha.592...0.2.0-alpha.593) (2025-12-10)
+
+### Bug Fixes
+
+* **MarkdownEditor:** don't render markdown in editor mode ([#2190](https://github.com/mittwald/flow/issues/2190)) ([465a98e](https://github.com/mittwald/flow/commit/465a98e9b2a4e19d911c74b8f861fcf1ec4c720d))
+
 # [0.2.0-alpha.592](https://github.com/mittwald/flow/compare/0.2.0-alpha.591...0.2.0-alpha.592) (2025-12-09)
 
 ### Bug Fixes
