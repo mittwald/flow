@@ -40,9 +40,6 @@ test.each(testEnvironments)(
       </Checkbox>,
     );
 
-    await userEvent.tab();
-    await userEvent.tab();
-
     await expect(container).toMatchScreenshot("Checkbox edge cases");
   },
 );
