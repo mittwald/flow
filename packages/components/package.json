@@ -49,7 +49,6 @@
     "build:storybook": "storybook build",
     "clean": "rimraf dist",
     "dev": "storybook dev --port 6006",
-    "test": "exit 0",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
     "test:compile": "tsc --noEmit",

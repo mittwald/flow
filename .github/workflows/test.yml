@@ -22,8 +22,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm test:browser:prepare --only-shell
-
       - uses: nrwl/nx-set-shas@v4
 
       - if: github.ref != 'refs/heads/main'
@@ -32,6 +30,10 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - run: pnpm test --parallel=1
+      - run: pnpm affected:test --nxBail
+
+      - run: pnpm test:browser:prepare --only-shell
+
+      - run: pnpm affected:test:browser --parallel=1 --nxBail
 
       - run: git diff --exit-code
