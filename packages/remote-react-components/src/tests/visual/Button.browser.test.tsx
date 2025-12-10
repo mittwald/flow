@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
@@ -12,10 +13,6 @@ const buttonColors = [
 ] as const;
 
 const buttonVariants = ["solid", "outline", "soft", "plain"] as const;
-
-const firstLetterToUppercase = (text: string) => {
-  return text[0]!.toUpperCase() + text.slice(1).toLowerCase();
-};
 
 test.each(testEnvironments)(
   "Button states (%s)",

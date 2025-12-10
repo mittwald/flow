@@ -6,32 +6,14 @@ import { userEvent } from "vitest/browser";
 const avatarSizes = ["xs", "s", "m", "l"] as const;
 
 test.each(testEnvironments)(
-  "AvatarStack (%s)",
+  "AvatarStack sizes (%s)",
   async ({
     container,
     render,
-    components: { Avatar, Flex, Initials, AvatarStack, Button },
+    components: { Avatar, Flex, Initials, AvatarStack },
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        <AvatarStack>
-          <Button>
-            <Avatar>
-              <Initials>A</Initials>
-            </Avatar>
-          </Button>
-          <Button>
-            <Avatar>
-              <Initials>B</Initials>
-            </Avatar>
-          </Button>
-          <Button>
-            <Avatar>
-              <Initials>C</Initials>
-            </Avatar>
-          </Button>
-        </AvatarStack>
-
         {avatarSizes.map((size) => (
           <>
             <AvatarStack size={size} totalCount={10}>
@@ -53,6 +35,40 @@ test.each(testEnvironments)(
     await userEvent.tab();
     await userEvent.tab();
 
-    await expect(container).toMatchScreenshot("AvatarStack");
+    await expect(container).toMatchScreenshot("AvatarStack sizes");
+  },
+);
+
+test.each(testEnvironments)(
+  "AvatarStack with Buttons (%s)",
+  async ({
+    container,
+    render,
+    components: { Avatar, Initials, AvatarStack, Button },
+  }) => {
+    await render(
+      <AvatarStack>
+        <Button>
+          <Avatar>
+            <Initials>A</Initials>
+          </Avatar>
+        </Button>
+        <Button>
+          <Avatar>
+            <Initials>B</Initials>
+          </Avatar>
+        </Button>
+        <Button>
+          <Avatar>
+            <Initials>C</Initials>
+          </Avatar>
+        </Button>
+      </AvatarStack>,
+    );
+
+    await userEvent.tab();
+    await userEvent.tab();
+
+    await expect(container).toMatchScreenshot("AvatarStack with Buttons");
   },
 );

@@ -1,11 +1,9 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
+
 import { expect, test } from "vitest";
 
 const alertBadgeStates = ["info", "success", "warning", "danger"] as const;
-
-const firstLetterToUppercase = (text: string) => {
-  return text[0]!.toUpperCase() + text.slice(1).toLowerCase();
-};
 
 test.each(testEnvironments)(
   "AlertBadge states (%s)",
