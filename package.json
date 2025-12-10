@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "eslint-scope": "^9.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -76,8 +76,8 @@
     ]
   },
   "resolutions": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19",
+    "react-dom": "^19",
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2"
   },

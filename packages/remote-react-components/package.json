@@ -61,8 +61,8 @@
     "nx": "^22.1.0",
     "playwright": "^1.57.0",
     "prettier": "^3.6.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19",
+    "react-dom": "^19",
     "react-hook-form": "^7.66.1",
     "rimraf": "^6.1.2",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
@@ -79,7 +79,7 @@
   "peerDependencies": {
     "@internationalized/date": "^3.10.0",
     "@mittwald/ext-bridge": "workspace:*",
-    "react": "^19.2.0",
+    "react": "^19",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {

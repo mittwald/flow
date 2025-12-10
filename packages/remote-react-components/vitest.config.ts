@@ -16,6 +16,7 @@ const browserTest: ProjectConfig = {
       actionTimeout: 5000,
       contextOptions: {
         reducedMotion: "reduce",
+        locale: "en-US",
       },
     }),
     instances: [
