@@ -89,7 +89,7 @@ test.each(testEnvironments)(
         {buttonColors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
-              <Flex gap="s" key={color}>
+              <Flex gap="s">
                 {buttonVariants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
                     {firstLetterToUppercase(color)}{" "}

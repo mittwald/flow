@@ -15,19 +15,17 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {avatarSizes.map((size) => (
-          <>
-            <AvatarStack size={size} totalCount={10}>
-              <Avatar>
-                <Initials>A</Initials>
-              </Avatar>
-              <Avatar>
-                <Initials>B</Initials>
-              </Avatar>
-              <Avatar>
-                <Initials>C</Initials>
-              </Avatar>
-            </AvatarStack>
-          </>
+          <AvatarStack size={size} totalCount={10} key={size}>
+            <Avatar>
+              <Initials>A</Initials>
+            </Avatar>
+            <Avatar>
+              <Initials>B</Initials>
+            </Avatar>
+            <Avatar>
+              <Initials>C</Initials>
+            </Avatar>
+          </AvatarStack>
         ))}
       </Flex>,
     );

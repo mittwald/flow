@@ -18,7 +18,7 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {avatarSizes.map((size) => (
-          <Flex gap="s">
+          <Flex gap="s" key={size}>
             <Avatar size={size}>
               <Image alt="Gopher" src={gopher} />
             </Avatar>
@@ -32,12 +32,12 @@ test.each(testEnvironments)(
         ))}
         <Flex gap="s">
           {avatarStates.map((status) => (
-            <Avatar status={status} />
+            <Avatar key={status} status={status} />
           ))}
         </Flex>
         <Flex gap="s">
           {avatarColors.map((color) => (
-            <Avatar color={color}>
+            <Avatar color={color} key={color}>
               <Initials>Max Mustermann</Initials>
             </Avatar>
           ))}
