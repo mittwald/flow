@@ -32,6 +32,6 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - run: pnpm test
+      - run: pnpm test --parallel=1
 
       - run: git diff --exit-code
