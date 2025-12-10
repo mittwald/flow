@@ -1,14 +1,7 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
 
-type AccentBoxColor = "blue" | "green" | "gradient" | "neutral";
-
-const accentBoxColors: AccentBoxColor[] = [
-  "blue",
-  "green",
-  "gradient",
-  "neutral",
-];
+const accentBoxColors = ["blue", "green", "gradient", "neutral"] as const;
 
 test.each(testEnvironments)(
   "AccentBox colors (%s)",

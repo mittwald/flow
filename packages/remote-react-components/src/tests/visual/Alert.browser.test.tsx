@@ -1,9 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-type AlertStatus = "info" | "success" | "warning" | "danger";
-
-const alertStates: AlertStatus[] = ["info", "success", "warning", "danger"];
+const alertStates = ["info", "success", "warning", "danger"] as const;
 
 const firstLetterToUppercase = (text: string) => {
   return text[0]!.toUpperCase() + text.slice(1).toLowerCase();

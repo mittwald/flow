@@ -2,26 +2,16 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
-type ButtonColor =
-  | "primary"
-  | "accent"
-  | "danger"
-  | "secondary"
-  | "dark"
-  | "light";
-
-const buttonColors: ButtonColor[] = [
+const buttonColors = [
   "primary",
   "accent",
   "danger",
   "secondary",
   "dark",
   "light",
-];
+] as const;
 
-type ButtonVariant = "solid" | "outline" | "soft" | "plain";
-
-const buttonVariants: ButtonVariant[] = ["solid", "outline", "soft", "plain"];
+const buttonVariants = ["solid", "outline", "soft", "plain"] as const;
 
 const firstLetterToUppercase = (text: string) => {
   return text[0]!.toUpperCase() + text.slice(1).toLowerCase();

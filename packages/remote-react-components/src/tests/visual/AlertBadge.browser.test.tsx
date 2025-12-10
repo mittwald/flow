@@ -1,14 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-type AlertBadgeStatus = "info" | "success" | "warning" | "danger";
-
-const alertBadgeStates: AlertBadgeStatus[] = [
-  "info",
-  "success",
-  "warning",
-  "danger",
-];
+const alertBadgeStates = ["info", "success", "warning", "danger"] as const;
 
 const firstLetterToUppercase = (text: string) => {
   return text[0]!.toUpperCase() + text.slice(1).toLowerCase();

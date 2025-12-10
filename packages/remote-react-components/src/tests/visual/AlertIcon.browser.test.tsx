@@ -1,14 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-type AlertIconStatus = "info" | "success" | "warning" | "danger";
-
-const alertIconStates: AlertIconStatus[] = [
-  "info",
-  "success",
-  "warning",
-  "danger",
-];
+const alertIconStates = ["info", "success", "warning", "danger"] as const;
 
 test.each(testEnvironments)(
   "AlertIcon states (%s)",
