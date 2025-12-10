@@ -1,0 +1,44 @@
+import { testEnvironments } from "@/tests/lib/environments";
+import { expect, test } from "vitest";
+import { page } from "vitest/browser";
+import React from "react";
+
+test.each(testEnvironments)(
+  "ContextualHelp (%s)",
+  async ({
+    container,
+    render,
+    components: {
+      ContextualHelpTrigger,
+      ContextualHelp,
+      Button,
+      Heading,
+      Text,
+      Link,
+    },
+  }) => {
+    await render(
+      <ContextualHelpTrigger>
+        <Button data-testid="trigger" />
+        <ContextualHelp>
+          <Heading>Heading</Heading>
+          <Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+            dolore voluptas.
+          </Text>
+          <Link>Link</Link>
+        </ContextualHelp>
+      </ContextualHelpTrigger>,
+    );
+
+    const trigger = page.getByTestId("trigger");
+
+    await expect(container).toMatchScreenshot("ContextualHelp - closed");
+
+    await trigger.click();
+
+    await expect(container).toMatchScreenshot("ContextualHelp - opened");
+  },
+);
