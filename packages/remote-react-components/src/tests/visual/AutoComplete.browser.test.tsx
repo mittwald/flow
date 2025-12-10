@@ -1,8 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import React from "react";
-import { userEvent } from "vitest/browser";
-import { page } from "vitest/browser";
+import { userEvent, page } from "vitest/browser";
 
 test.each(testEnvironments)(
   "AutoComplete (%s)",

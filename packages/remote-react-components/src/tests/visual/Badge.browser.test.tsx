@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import React from "react";
 import { userEvent } from "vitest/browser";
 
 export const badgeColors = [

@@ -1,6 +1,5 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
-import React from "react";
 
 test.each(testEnvironments)(
   "ActionGroup (%s)",

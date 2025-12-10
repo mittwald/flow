@@ -1,7 +1,5 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
-import React from "react";
-import { FieldDescription } from "@/auto-generated";
 
 test.each(testEnvironments)(
   "Align Avatar and Text (%s)",
@@ -77,6 +75,7 @@ test.each(testEnvironments)(
       NumberField,
       TextArea,
       Select,
+      FieldDescription,
     },
   }) => {
     await render(
