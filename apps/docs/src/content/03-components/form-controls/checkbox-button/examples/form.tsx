@@ -1,11 +1,11 @@
 import {
-  Button,
   CheckboxButton,
   Section,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -27,7 +27,7 @@ export default () => {
             habe.
           </CheckboxButton>
         </Field>
-        <Button type="submit">Speichern</Button>
+        <SubmitButton>Speichern</SubmitButton>
       </Form>
     </Section>
   );

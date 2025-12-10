@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.594](https://github.com/mittwald/flow/compare/0.2.0-alpha.593...0.2.0-alpha.594) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.593](https://github.com/mittwald/flow/compare/0.2.0-alpha.592...0.2.0-alpha.593) (2025-12-10)
+
+### Bug Fixes
+
+* **MarkdownEditor:** don't render markdown in editor mode ([#2190](https://github.com/mittwald/flow/issues/2190)) ([465a98e](https://github.com/mittwald/flow/commit/465a98e9b2a4e19d911c74b8f861fcf1ec4c720d))
+
+# [0.2.0-alpha.592](https://github.com/mittwald/flow/compare/0.2.0-alpha.591...0.2.0-alpha.592) (2025-12-09)
+
+### Bug Fixes
+
+* **FieldError:** fix error when used inside items ([#2185](https://github.com/mittwald/flow/issues/2185)) ([b669e02](https://github.com/mittwald/flow/commit/b669e02b0056844c59a68c270bb022eb78933e38))
+
+# [0.2.0-alpha.591](https://github.com/mittwald/flow/compare/0.2.0-alpha.590...0.2.0-alpha.591) (2025-12-08)
+
+### Bug Fixes
+
+* **Options:** add max height ([#2182](https://github.com/mittwald/flow/issues/2182)) ([3661794](https://github.com/mittwald/flow/commit/36617941798f6344308bb7131fe192cf9ac6d9a5))
+
+# [0.2.0-alpha.590](https://github.com/mittwald/flow/compare/0.2.0-alpha.589...0.2.0-alpha.590) (2025-12-08)
+
+### Features
+
+* **Remote:** support "local" remote connection ([#2180](https://github.com/mittwald/flow/issues/2180)) ([15e72d3](https://github.com/mittwald/flow/commit/15e72d3c3315c65dc7c4444658776c78dc18ec6c))
+
+# [0.2.0-alpha.589](https://github.com/mittwald/flow/compare/0.2.0-alpha.588...0.2.0-alpha.589) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.588](https://github.com/mittwald/flow/compare/0.2.0-alpha.587...0.2.0-alpha.588) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.587](https://github.com/mittwald/flow/compare/0.2.0-alpha.586...0.2.0-alpha.587) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.586](https://github.com/mittwald/flow/compare/0.2.0-alpha.585...0.2.0-alpha.586) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.585](https://github.com/mittwald/flow/compare/0.2.0-alpha.584...0.2.0-alpha.585) (2025-12-05)
+
+### Bug Fixes
+
+* **Remote:** fix Action with confirmation can not be confirmed ([#2175](https://github.com/mittwald/flow/issues/2175)) ([a70f0b0](https://github.com/mittwald/flow/commit/a70f0b06022cf445293fc68274149e9befb9cecd))
+
 # [0.2.0-alpha.584](https://github.com/mittwald/flow/compare/0.2.0-alpha.583...0.2.0-alpha.584) (2025-12-04)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -17,7 +17,6 @@ import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
-import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 
@@ -80,24 +79,11 @@ export function flowComponent<C extends FlowComponentName>(
       <MemoizedImplementationComponentType {...implementationTypeProps} />
     );
 
-    if (isRemoteComponent) {
-      element = (
-        <ComponentPropsContextProvider componentProps={componentProps}>
-          {element}
-        </ComponentPropsContextProvider>
-      );
-    } else {
-      /**
-       * In case of a Flow component that does not have a remote counterpart
-       * (like the List component), the ComponentPropsContext must be applied on
-       * the host side, so that nesting and inheritance is working correctly.
-       */
-      element = (
-        <ComponentPropsContextProviderView componentProps={componentProps}>
-          {element}
-        </ComponentPropsContextProviderView>
-      );
-    }
+    element = (
+      <ComponentPropsContextProvider componentProps={componentProps}>
+        {element}
+      </ComponentPropsContextProvider>
+    );
 
     if (type === "ui") {
       /**

@@ -1,17 +1,16 @@
-import {
+import React, {
   type PropsWithChildren,
   type ReactNode,
   useContext,
   useMemo,
 } from "react";
-import React from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
+import { FieldErrorContext, TextContext } from "react-aria-components";
 import clsx from "clsx";
 import { IconDanger } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { FieldErrorContext } from "react-aria-components";
 
 export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
@@ -60,19 +59,25 @@ export const FieldError = flowComponent("FieldError", (props) => {
     };
   }, [fieldErrorFromAriaContext, children]);
 
+  if (!mergedErrorState.isInvalid) {
+    return undefined;
+  }
+
   return (
-    <FieldErrorContext value={mergedErrorState as never}>
-      <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
-        {({ validationErrors }) => {
-          return (
-            <>
-              <IconDanger size="s" />
-              <span>{validationErrors}</span>
-            </>
-          );
-        }}
-      </Aria.FieldError>
-    </FieldErrorContext>
+    <Aria.Provider values={[[TextContext, { slot: undefined }]]}>
+      <FieldErrorContext value={mergedErrorState as never}>
+        <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
+          {({ validationErrors }) => {
+            return (
+              <>
+                <IconDanger size="s" />
+                <span>{validationErrors}</span>
+              </>
+            );
+          }}
+        </Aria.FieldError>
+      </FieldErrorContext>
+    </Aria.Provider>
   );
 });
 
