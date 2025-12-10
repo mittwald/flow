@@ -1,7 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import { userEvent, page } from "vitest/browser";
-import React from "react";
 
 test.each(testEnvironments)(
   "ComboBox states (%s)",
