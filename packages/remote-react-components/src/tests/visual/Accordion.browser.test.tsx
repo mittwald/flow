@@ -59,19 +59,22 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Accordion>
-        <Heading data-testid="click">Clicked</Heading>
+        <Heading data-testid="click">Heading</Heading>
         <Content>Content</Content>
       </Accordion>,
     );
 
     const click = page.getByTestId("click");
+
+    await expect(container).toMatchScreenshot("Accordion - default");
+
     await click.click();
 
-    await expect(container).toMatchScreenshot("Accordion expanded");
+    await expect(container).toMatchScreenshot("Accordion - expanded");
 
     await click.click();
 
-    await expect(container).toMatchScreenshot("Accordion collapsed");
+    await expect(container).toMatchScreenshot("Accordion - collapsed");
   },
 );
 
