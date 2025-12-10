@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import gopher from "@/tests/assets/gopher.webp";
 import { expect, test } from "vitest";
 
-const avatarSizes = ["s", "m", "l"] as const;
+const avatarSizes = ["xs", "s", "m", "l"] as const;
 
 const avatarStates = ["info", "success", "warning", "danger"] as const;
 
