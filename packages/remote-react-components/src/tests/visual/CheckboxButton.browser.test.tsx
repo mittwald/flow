@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import { userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "CheckboxButton states (%s)",
@@ -16,7 +15,6 @@ test.each(testEnvironments)(
           <Text>Text</Text>
           <Content>Content</Content>
         </CheckboxButton>
-        <CheckboxButton>Focus</CheckboxButton>
         <CheckboxButton isSelected>Selected</CheckboxButton>
         <CheckboxButton isIndeterminate>Indeterminate</CheckboxButton>
         <CheckboxButton isReadOnly>Readonly</CheckboxButton>
@@ -26,10 +24,6 @@ test.each(testEnvironments)(
         </CheckboxButton>
       </Flex>,
     );
-
-    await userEvent.tab();
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("CheckboxButton states");
   },

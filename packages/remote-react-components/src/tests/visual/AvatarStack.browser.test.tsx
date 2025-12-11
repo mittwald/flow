@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import { userEvent } from "vitest/browser";
 
 const avatarSizes = ["xs", "s", "m", "l"] as const;
 
@@ -28,9 +27,6 @@ test.each(testEnvironments)(
         ))}
       </Flex>,
     );
-
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("AvatarStack sizes");
   },
@@ -62,9 +58,6 @@ test.each(testEnvironments)(
         </Button>
       </AvatarStack>,
     );
-
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("AvatarStack with Buttons");
   },

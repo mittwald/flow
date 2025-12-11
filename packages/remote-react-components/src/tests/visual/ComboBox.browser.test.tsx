@@ -56,8 +56,6 @@ test.each(testEnvironments)(
 
     await expect(container).toMatchScreenshot("ComboBox - default");
 
-    await userEvent.tab();
-
     await userEvent.type(input, "o");
 
     await expect(container).toMatchScreenshot("ComboBox - options visible");

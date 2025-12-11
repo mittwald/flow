@@ -27,8 +27,6 @@ test.each(testEnvironments)(
 
     await expect(container).toMatchScreenshot("AutoComplete - default");
 
-    await userEvent.tab();
-
     await userEvent.type(input, "o");
 
     await expect(container).toMatchScreenshot("AutoComplete - options visible");

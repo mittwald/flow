@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { expect, test } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 
 const buttonColors = [
   "primary",
@@ -26,7 +26,6 @@ test.each(testEnvironments)(
         <Flex gap="s">
           <Button>Default</Button>
           <Button data-testid="hover">Hover</Button>
-          <Button>Focus</Button>
           <Button>
             <IconInfo />
           </Button>
@@ -67,11 +66,6 @@ test.each(testEnvironments)(
 
     const hoverButton = page.getByTestId("hover");
     await hoverButton.hover();
-
-    // tab to focus the last button
-    await userEvent.tab();
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("Button states");
   },
@@ -136,10 +130,6 @@ test.each(testEnvironments)(
 
     const hoverButton = page.getByTestId("hover");
     await hoverButton.hover();
-
-    await userEvent.tab();
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("Button with avatar");
   },

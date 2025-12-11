@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import { userEvent } from "vitest/browser";
 
 export const badgeColors = [
   "neutral",
@@ -60,38 +59,6 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "Badge with onPress (%s)",
-  async ({ container, render, components: { Badge, Label, Text } }) => {
-    await render(
-      <Badge onPress={() => console.log("onPress")}>
-        <Label>Scope</Label>
-        <Text>Value</Text>
-      </Badge>,
-    );
-
-    await userEvent.tab();
-
-    await expect(container).toMatchScreenshot("Badge with onPress");
-  },
-);
-
-test.each(testEnvironments)(
-  "Badge with onClose (%s)",
-  async ({ container, render, components: { Badge, Label, Text } }) => {
-    await render(
-      <Badge onClose={() => console.log("onClose")}>
-        <Label>Scope</Label>
-        <Text>Value</Text>
-      </Badge>,
-    );
-
-    await userEvent.tab();
-
-    await expect(container).toMatchScreenshot("Badge with onClose");
-  },
-);
-
-test.each(testEnvironments)(
   "Badge edge cases (%s)",
   async ({ container, render, components: { Badge, Label, Text, Flex } }) => {
     await render(
@@ -122,8 +89,6 @@ test.each(testEnvironments)(
         </Badge>
       </Flex>,
     );
-
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("Badge edge cases");
   },

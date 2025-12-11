@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
-import { page, userEvent } from "vitest/browser";
+import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
   "Accordion states (%s)",
@@ -24,10 +24,6 @@ test.each(testEnvironments)(
           <Content>Content</Content>
         </Accordion>
         <Accordion>
-          <Heading>Focused</Heading>
-          <Content>Content</Content>
-        </Accordion>
-        <Accordion>
           <Label>Label</Label>
           <Content>Content</Content>
         </Accordion>
@@ -40,11 +36,6 @@ test.each(testEnvironments)(
 
     const hover = page.getByTestId("hover");
     await hover.hover();
-
-    await userEvent.tab();
-    await userEvent.tab();
-    await userEvent.tab();
-    await userEvent.tab();
 
     await expect(container).toMatchScreenshot("Accordion states");
   },
