@@ -22,11 +22,13 @@ const RemoteTestUi: FC<PropsWithChildren> = (props) => {
 
 export const renderRemote: typeof render = async (ui, options) => {
   const result = await render(<RemoteTestUi>{ui}</RemoteTestUi>, options);
+  await rootContainerLocator.unhover();
   return result;
 };
 
 export const renderLocal: typeof render = async (ui, options) => {
   const result = await render(<RootContainer>{ui}</RootContainer>, options);
+  await rootContainerLocator.unhover();
   return result;
 };
 
