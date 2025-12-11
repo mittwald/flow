@@ -13,10 +13,12 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {headingLevels.map((level) => (
-          <Heading level={level}>Level {level}</Heading>
+          <Heading level={level} key={level}>
+            Level {level}
+          </Heading>
         ))}
         {headingSizes.map((size) => (
-          <Heading size={size}>
+          <Heading size={size} key={size}>
             <IconStar />
             Size {size}
           </Heading>

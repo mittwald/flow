@@ -12,7 +12,12 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Flex gap="s">
           {donutChartStates.map((status) => (
-            <DonutChart aria-label="label" value={30} status={status} />
+            <DonutChart
+              aria-label="label"
+              value={30}
+              status={status}
+              key={status}
+            />
           ))}
         </Flex>
         <DonutChart
@@ -37,6 +42,7 @@ test.each(testEnvironments)(
       <Flex gap="s">
         {legendPositions.map((position) => (
           <DonutChart
+            key={position}
             aria-label="label"
             segments={[
               { title: "Segment 1", value: 50 },

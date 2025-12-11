@@ -11,12 +11,12 @@ test.each(testEnvironments)(
       <Flex gap="m" direction="column">
         <Flex gap="s" align="center">
           {iconSizes.map((size) => (
-            <IconStar size={size} />
+            <IconStar size={size} key={size} />
           ))}
         </Flex>
         <Flex gap="s">
           {iconStates.map((status) => (
-            <IconStar status={status} />
+            <IconStar status={status} key={status} />
           ))}
         </Flex>
         <Icon>
