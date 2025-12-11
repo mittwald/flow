@@ -160,7 +160,7 @@ export const WithSummary: Story = {
           <ListSummary>
             <Flex justify="end">
               <Text>
-                <b>Gesamt: 41,00 €</b>
+                <strong>Gesamt: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -202,7 +202,7 @@ export const WithSummaryBottom: Story = {
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
-                <b>Gesamt: 41,00 €</b>
+                <strong>Gesamt: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>

@@ -25,7 +25,8 @@ const meta: Meta<typeof Notification> = {
     <Notification {...props}>
       <Heading>Email address archived</Heading>
       <Text>
-        Your email address <b>example@mittwald.de</b> has been archived.
+        Your email address <strong>example@mittwald.de</strong> has been
+        archived.
       </Text>
     </Notification>
   ),

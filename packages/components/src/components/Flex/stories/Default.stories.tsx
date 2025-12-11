@@ -86,12 +86,12 @@ export const WithPadding: Story = {
             paddingRight="xl"
           >
             <Text align="center">
-              <b>Shared Webhosting</b>
+              <strong>Shared Webhosting</strong>
               <br />
               proSpace lite
             </Text>
             <Text>
-              Ab <b>10 €</b>
+              Ab <strong>10 €</strong>
             </Text>
             <Separator />
             <Text>{dummyText.short}</Text>
@@ -112,12 +112,12 @@ export const WithPadding: Story = {
             paddingRight="xl"
           >
             <Text align="center">
-              <b>Managed Cloud Hosting</b>
+              <strong>Managed Cloud Hosting</strong>
               <br />
               proSpace
             </Text>
             <Text>
-              Ab <b>32 €</b>
+              Ab <strong>32 €</strong>
             </Text>
             <Separator />
             <Text>{dummyText.medium}</Text>

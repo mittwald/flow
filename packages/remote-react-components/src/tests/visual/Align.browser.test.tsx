@@ -14,15 +14,16 @@ test.each(testEnvironments)(
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
-          <Text>Text</Text>
+          <Text>
+            <strong>Text</strong>
+          </Text>
         </Align>
         <Align>
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
-            Text
-            <br />
+            <strong>Text</strong>
             Text
           </Text>
         </Align>
@@ -31,8 +32,7 @@ test.each(testEnvironments)(
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
-            Text
-            <br />
+            <strong>Text</strong>
             Text
             <br />
             Text

@@ -20,7 +20,7 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   return (
     <span className={styles.value}>
-      <b>{formattedValue}</b>
+      <strong>{formattedValue}</strong>
     </span>
   );
 };

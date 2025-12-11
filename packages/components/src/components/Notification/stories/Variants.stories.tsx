@@ -22,7 +22,8 @@ export const Warning: Story = {
     <Notification {...props}>
       <Heading>Storage almost exceeded</Heading>
       <Text>
-        The storage in your project <b>My Project</b> is over 80% utilized.
+        The storage in your project <strong>My Project</strong> is over 80%
+        utilized.
       </Text>
     </Notification>
   ),
@@ -34,7 +35,7 @@ export const Danger: Story = {
     <Notification {...props}>
       <Heading>No SSL certificate</Heading>
       <Text>
-        No SSL certificate could be issued for <b>example.de</b>.
+        No SSL certificate could be issued for <strong>example.de</strong>.
       </Text>
     </Notification>
   ),
@@ -46,7 +47,7 @@ export const Success: Story = {
     <Notification {...props}>
       <Heading>App installation finished</Heading>
       <Text>
-        Your app <b>My WordPress</b> has been installed.
+        Your app <strong>My WordPress</strong> has been installed.
       </Text>
     </Notification>
   ),
