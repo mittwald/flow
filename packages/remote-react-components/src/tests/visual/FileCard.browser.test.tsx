@@ -1,7 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
-import React from "react";
 
 test.each(testEnvironments)(
   "FileCard variants (%s)",
