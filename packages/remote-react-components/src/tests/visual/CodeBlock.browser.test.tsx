@@ -13,7 +13,7 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"}>
+          <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <CodeBlock
                 color={color}

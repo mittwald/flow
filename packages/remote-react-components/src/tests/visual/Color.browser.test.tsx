@@ -22,7 +22,7 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Flex gap="s">
+          <Flex gap="s" key={color}>
             <Text>
               <Color color={color}>Text</Color>
             </Text>
