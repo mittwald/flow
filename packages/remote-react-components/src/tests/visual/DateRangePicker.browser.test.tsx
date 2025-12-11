@@ -1,6 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test, vi } from "vitest";
-import { userEvent, page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "DateRangePicker states (%s)",
