@@ -39,7 +39,9 @@ umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
 
 ### Listenseite
 
-Eine Listenseite enthält in der Regel eine einzelne Section. Der `sectionsCount` beträgt hier daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte Liste im Fehlerfall in die ErrorView wechseln kann.
+Eine Listenseite enthält in der Regel eine einzelne Section. Der `sectionsCount`
+beträgt hier daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte
+Liste im Fehlerfall in die ErrorView wechseln kann.
 
 ```
 export const CronjobsPage: FC = () => (
@@ -64,7 +66,10 @@ export const CronjobsPage: FC = () => (
 
 ### Detailseite
 
-Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView angezeigt werden kann.
+Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So
+bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite
+wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView
+angezeigt werden kann.
 
 ```
 export const CronjobPage: FC = () => (
@@ -87,7 +92,9 @@ export const CronjobPage: FC = () => (
 
 ### Tab (WithBoundaries.SectionsFragment)
 
-Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich `WithBoundaries.SectionsFragment`.
+Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es
+sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich
+`WithBoundaries.SectionsFragment`.
 
 ```
 export const CronjobTabs: FC = () => (
@@ -117,14 +124,16 @@ export const CronjobTabs: FC = () => (
 
 ## Modals (WithBoundaries.Modal)
 
-Für Modals sollte immer in ein `WithBoundaries.Modal` verwendet werden. Dies verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal geöffnet wurde.
+Für Modals sollte immer in ein `WithBoundaries.Modal` verwendet werden. Dies
+verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal
+geöffnet wurde.
 
 ### Inhalte von Forms in Modals
 
 Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User
-und kann zu unvollständigen oder inkonsistenten Daten führen. Sobald
-innerhalb der Form ein Fehler aufftritt, fällt das automatisch das ganze Modal
-in eine ErrorView, auch wenn es darin noch Boundaries gibt.
+und kann zu unvollständigen oder inkonsistenten Daten führen. Sobald innerhalb
+der Form ein Fehler auftritt, fällt automatisch das ganze Modal in eine
+ErrorView, auch wenn es darin noch Boundaries gibt.
 
 ```
 interface Props {
@@ -215,9 +224,11 @@ Boundary abgesichert werden.
 
 ## Inhalte einzelner kleinerer Elemente
 
-Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden
-oft dynamisch geladen, da sie das Nutzungserlebnis der Seite jediglich ergänzen. Diese sollten daher seperat geschützt werden, um
-nicht die gesamte Seite zu blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
+Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden oft
+dynamisch geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen.
+Diese sollten daher seperat geschützt werden, um nicht die gesamte Seite zu
+blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im
+Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
 ### Texte (WithBoundaries.Text)
 
@@ -243,7 +254,9 @@ und eine eingebaute Boundary besitzen.
 
 ### Alerts / Badges (WithBoundaries.Fragment)
 
-Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
+Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder
+Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So
+bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
@@ -333,6 +346,6 @@ Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung
 der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen
 können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die
 Guideline
-[fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)
+[Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)
 weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
 das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
