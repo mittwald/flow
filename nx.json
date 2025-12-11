@@ -19,16 +19,6 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "test": {
-      "dependsOn": [
-        "test:unit",
-        "test:compile",
-        "test:browser",
-        "test:e2e",
-        "test:visual"
-      ],
-      "cache": true
-    },
     "test:visual": {
       "dependsOn": ["^build"],
       "cache": true

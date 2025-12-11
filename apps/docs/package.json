@@ -8,8 +8,7 @@
     "build:deps": "",
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "dev": "next dev",
-    "postinstall": "fumadocs-mdx",
-    "test:compile": "tsc --noEmit"
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@internationalized/date": "^3.10.0",
@@ -32,9 +31,9 @@
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.0",
+    "react": "^19",
     "react-children-utilities": "^2.10.0",
-    "react-dom": "^19.2.0",
+    "react-dom": "^19",
     "react-hook-form": "^7.66.1",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",

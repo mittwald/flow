@@ -25,7 +25,6 @@
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
-    "test": "exit 0",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
     "test:compile": "tsc --noEmit"
@@ -45,8 +44,8 @@
     "nx": "^22.1.0",
     "playwright": "^1.57.0",
     "prettier": "^3.6.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19",
+    "react-dom": "^19",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
     "vite": "^7.2.6",
@@ -58,7 +57,7 @@
     "vitest-browser-react": "^2.0.2"
   },
   "peerDependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19",
+    "react-dom": "^19"
   }
 }
