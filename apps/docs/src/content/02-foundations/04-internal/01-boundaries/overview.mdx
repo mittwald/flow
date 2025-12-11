@@ -68,7 +68,7 @@ export const CronjobsPage: FC = () => (
 
 Der `sectionsCount` sollte der erwarteten Anzahl an Sections entsprechen. So
 bleibt das Layout während des Ladevorgangs stabil. Das Hauptelement der Seite
-wir zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView
+wird zuerst geladen, damit im Fehlerfall für die gesamte Seite eine ErrorView
 angezeigt werden kann.
 
 ```
@@ -124,9 +124,9 @@ export const CronjobTabs: FC = () => (
 
 ## Modals (WithBoundaries.Modal)
 
-Für Modals sollte immer in ein `WithBoundaries.Modal` verwendet werden. Dies
+Für Modals sollte immer ein `WithBoundaries.Modal` verwendet werden. Dies
 verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal
-geöffnet wurde.
+geöffnet wird.
 
 ### Inhalte von Forms in Modals
 
@@ -214,9 +214,9 @@ export const AppInstallationSection: FC<Props> = (props) => (
 
 ## Inhalte eines Diagramms (WIP)
 
-Diagramme beziehen in der Regel viele Daten aus externen Service und sind daher
+Diagramme beziehen in der Regel viele Daten aus externen Services und sind daher
 fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden.
-Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene Error-View.
+Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene ErrorView.
 Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer
 Boundary abgesichert werden.
 
@@ -226,7 +226,7 @@ Boundary abgesichert werden.
 
 Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden oft
 dynamisch geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen.
-Diese sollten daher seperat geschützt werden, um nicht die gesamte Seite zu
+Diese sollten daher separat geschützt werden, um nicht die gesamte Seite zu
 blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im
 Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
@@ -256,7 +256,7 @@ und eine eingebaute Boundary besitzen.
 
 Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder
 Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So
-bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
+bleiben sie geschützt, ohne eine eigene LoadingView auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
@@ -279,7 +279,7 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 );
 ```
 
-### Field (WithBoundaries.FieldFragement)
+### Field (WithBoundaries.FieldFragment)
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {
@@ -337,15 +337,15 @@ export const ActionsContextMenu: FC<Props> = (props) => {
 
 # Weitere Empfehlungen
 
-Ein durchdachtes Loading und Error-Boundary Konzept endet nicht bei der
-technischen Umsetzung. Fehler sollten zuverlässig erfasst und an Monitoring
-Systeme, Sentry oder Datadog weitergegeben werden, damit Probleme früh sichtbar
-werden. Manuelle und automatisierte Tests helfen dabei, die eigenen Fallbacks
-regelmäßig zu überprüfen und sicherzustellen, dass sie in allen relevanten
-Situationen greifen. Ebenso wichtig ist eine klare und konsistente Formulierung
-der Fehlermeldungen, damit User verstehen, was passiert und wie sie weitermachen
-können. Für konkrete Hinweise zur sprachlichen Ausgestaltung bietet die
-Guideline
+Ein durchdachtes Loading und ErrorBoundary Konzept endet nicht bei der
+technischen Umsetzung. Fehler sollten zuverlässig erfasst und an
+Monitoring-Systeme, Sentry oder Datadog weitergegeben werden, damit Probleme
+früh sichtbar werden. Manuelle und automatisierte Tests helfen dabei, die
+eigenen Fallbacks regelmäßig zu überprüfen und sicherzustellen, dass sie in
+allen relevanten Situationen greifen. Ebenso wichtig ist eine klare und
+konsistente Formulierung der Fehlermeldungen, damit User verstehen, was passiert
+und wie sie weitermachen können. Für konkrete Hinweise zur sprachlichen
+Ausgestaltung bietet die Guideline
 [Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)
 weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
 das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.
