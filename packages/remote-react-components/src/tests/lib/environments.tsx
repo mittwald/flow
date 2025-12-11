@@ -33,6 +33,7 @@ export const renderLocal: typeof render = async (ui, options) => {
 };
 
 const prepareScreenshot = async (): Promise<void> => {
+  // Move the mouse to somewhere neutral to avoid hover effects
   await rootContainerLocator.unhover();
   await sleep(50);
 };
