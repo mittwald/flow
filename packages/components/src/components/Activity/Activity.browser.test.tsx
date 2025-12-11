@@ -1,97 +1,101 @@
-import { beforeEach, expect, vitest } from "vitest";
+import { beforeEach, expect } from "vitest";
 import { render } from "vitest-browser-react";
-import { useEffect } from "react";
-import Activity from "@/components/Activity/index";
-
-const rendering = vitest.fn();
+import { Activity } from "@/components/Activity/index";
+import { page } from "vitest/browser";
 
 const TestComponent = () => {
-  useEffect(() => {
-    rendering();
-  }, [{}]);
-  return null;
+  return <span role="status">Active</span>;
 };
 
+const testComponent = () =>
+  page.getByRole("status", {
+    includeHidden: false,
+  });
+
 beforeEach(() => {
-  vitest.resetAllMocks();
-  vitest.useFakeTimers();
+  vi.useFakeTimers({
+    shouldAdvanceTime: false,
+  });
+});
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 test("Does render children without any Activity", async () => {
   await render(<TestComponent />);
-  expect(rendering).toHaveBeenCalledTimes(1);
+  expect(testComponent()).toBeInTheDocument();
 });
 
 test("Does render children when wrapped in active Activity", async () => {
   await render(
-    <Activity isActive={true}>
+    <Activity isActive={true} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(1);
+  expect(testComponent()).toBeInTheDocument();
 });
 
 test("Does NOT render children when wrapped in inactive Activity", async () => {
   await render(
-    <Activity isActive={false}>
+    <Activity isActive={false} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(0);
+  expect(testComponent()).not.toBeInTheDocument();
 });
 
 test("Does NOT render children when wrapped in delayed inactive Activity", async () => {
-  const node = (
-    <Activity isActive={false} inactiveDelay={1000}>
+  await render(
+    <Activity isActive={false} inactiveDelay={1000} forceCustomActivity>
       <TestComponent />
-    </Activity>
+    </Activity>,
   );
-
-  await render(node);
-  expect(rendering).toHaveBeenCalledTimes(0);
+  expect(testComponent()).not.toBeInTheDocument();
 });
 
 test("Does NOT render children when switching from active to inactive", async () => {
   // initial render as active
   const { rerender } = await render(
-    <Activity isActive={true}>
+    <Activity isActive={true} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(1);
+  expect(testComponent()).toBeInTheDocument();
 
   // re-render as inactive
   await rerender(
-    <Activity isActive={false}>
+    <Activity isActive={false} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(1);
+  expect(testComponent()).not.toBeInTheDocument();
 });
 
 test("Does NOT render children after delay when wrapped in delayed inactive Activity", async () => {
+  const delay = 5000;
+
   // initial render as active
   const { rerender } = await render(
-    <Activity isActive={true} inactiveDelay={1000}>
+    <Activity isActive={true} inactiveDelay={delay} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(1);
+  expect(testComponent()).toBeInTheDocument();
 
   // re-render as inactive
   await rerender(
-    <Activity isActive={false} inactiveDelay={1000}>
+    <Activity isActive={false} inactiveDelay={delay} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(2);
+  expect(testComponent()).toBeInTheDocument();
 
+  await vitest.advanceTimersByTimeAsync(delay);
   // re-render after elapsed timer
-  await vitest.advanceTimersToNextTimerAsync();
   await rerender(
-    <Activity isActive={false} inactiveDelay={1000}>
+    <Activity isActive={false} inactiveDelay={delay} forceCustomActivity>
       <TestComponent />
     </Activity>,
   );
-  expect(rendering).toHaveBeenCalledTimes(2);
+  expect(testComponent()).not.toBeInTheDocument();
 });
