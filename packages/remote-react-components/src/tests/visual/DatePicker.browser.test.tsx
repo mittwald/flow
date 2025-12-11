@@ -34,26 +34,33 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "DatePicker interaction (%s)",
-  async ({ container, render, components: { DatePicker, Label } }) => {
+  async ({
+    container,
+    prepareScreenshot,
+    render,
+    components: { DatePicker, Label },
+  }) => {
     await render(
       <DatePicker>
         <Label>Label</Label>
       </DatePicker>,
     );
 
-    vi.useFakeTimers();
     vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
 
     const button = page.getByLocator("button");
 
+    await prepareScreenshot();
     await expect(container).toMatchScreenshot("DatePicker - default");
 
     await button.click();
 
+    await prepareScreenshot();
     await expect(container).toMatchScreenshot("DatePicker - calendar visible");
 
     await userEvent.keyboard("{enter}");
 
+    await prepareScreenshot();
     await expect(container).toMatchScreenshot("DatePicker - date selected");
   },
 );

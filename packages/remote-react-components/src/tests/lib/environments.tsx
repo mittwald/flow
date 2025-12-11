@@ -7,6 +7,7 @@ import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
+import { sleep } from "@/tests/lib/sleep";
 
 const RemoteTestUi: FC<PropsWithChildren> = (props) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
@@ -21,14 +22,17 @@ const RemoteTestUi: FC<PropsWithChildren> = (props) => {
 
 export const renderRemote: typeof render = async (ui, options) => {
   const result = await render(<RemoteTestUi>{ui}</RemoteTestUi>, options);
-  await rootContainerLocator.unhover();
   return result;
 };
 
 export const renderLocal: typeof render = async (ui, options) => {
   const result = await render(<RootContainer>{ui}</RootContainer>, options);
-  await rootContainerLocator.unhover();
   return result;
+};
+
+const prepareScreenshot = async (): Promise<void> => {
+  await rootContainerLocator.unhover();
+  await sleep(50);
 };
 
 interface TestEnvironement {
@@ -36,6 +40,7 @@ interface TestEnvironement {
   components: typeof Components | typeof RemoteComponents;
   render: typeof render;
   container: Locator;
+  prepareScreenshot: () => Promise<void>;
 }
 
 const remoteTestEnvironement: TestEnvironement = {
@@ -43,6 +48,7 @@ const remoteTestEnvironement: TestEnvironement = {
   components: RemoteComponents,
   render: renderRemote,
   container: rootContainerLocator,
+  prepareScreenshot,
 };
 
 const localTestEnvironement: TestEnvironement = {
@@ -50,6 +56,7 @@ const localTestEnvironement: TestEnvironement = {
   components: Components,
   render: renderLocal,
   container: rootContainerLocator,
+  prepareScreenshot,
 };
 
 export const testEnvironments = [
