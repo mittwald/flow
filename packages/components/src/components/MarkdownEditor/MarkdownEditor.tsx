@@ -119,15 +119,17 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           onChange={onChange}
           onKeyDown={handleKeyDown}
         >
-          <Markdown
-            headingOffset={headingOffset}
-            className={styles.markdown}
-            style={{
-              height: inputRef.current?.offsetHeight,
-            }}
-          >
-            {value}
-          </Markdown>
+          {mode === "preview" && (
+            <Markdown
+              headingOffset={headingOffset}
+              className={styles.markdown}
+              style={{
+                height: inputRef.current?.offsetHeight,
+              }}
+            >
+              {value}
+            </Markdown>
+          )}
           <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
