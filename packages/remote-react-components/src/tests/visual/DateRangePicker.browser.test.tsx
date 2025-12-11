@@ -1,6 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test, vi } from "vitest";
-import { userEvent, page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "DateRangePicker states (%s)",
@@ -41,7 +41,6 @@ test.each(testEnvironments)(
       </DateRangePicker>,
     );
 
-    vi.useFakeTimers();
     vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
 
     const button = page.getByLocator("button");

@@ -9,7 +9,7 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s">
         {alertIconStates.map((status) => (
-          <AlertIcon status={status} />
+          <AlertIcon key={status} status={status} />
         ))}
       </Flex>,
     );

@@ -11,7 +11,7 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s">
         {alertBadgeStates.map((status) => (
-          <AlertBadge status={status}>
+          <AlertBadge key={status} status={status}>
             {firstLetterToUppercase(status)}
           </AlertBadge>
         ))}
