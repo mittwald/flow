@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { expect, test } from "vitest";
 
-const alertStates = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger"] as const;
 
 test.each(testEnvironments)(
   "Alert states (%s)",
@@ -13,8 +13,8 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {alertStates.map((status) => (
-          <Alert status={status}>
+        {states.map((status) => (
+          <Alert status={status} key={status}>
             <Heading>{firstLetterToUppercase(status)}</Heading>
             <Content>Content</Content>
           </Alert>

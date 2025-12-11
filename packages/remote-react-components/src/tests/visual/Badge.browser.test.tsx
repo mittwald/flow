@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-export const badgeColors = [
+export const colors = [
   "neutral",
   "blue",
   "navy",
@@ -24,7 +24,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {badgeColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <Flex gap="s">

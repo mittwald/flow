@@ -3,14 +3,14 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 import { expect, test } from "vitest";
 
-const alertBadgeStates = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger"] as const;
 
 test.each(testEnvironments)(
   "AlertBadge states (%s)",
   async ({ container, render, components: { AlertBadge, Flex } }) => {
     await render(
       <Flex gap="s">
-        {alertBadgeStates.map((status) => (
+        {states.map((status) => (
           <AlertBadge key={status} status={status}>
             {firstLetterToUppercase(status)}
           </AlertBadge>

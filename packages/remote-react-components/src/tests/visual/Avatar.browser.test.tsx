@@ -2,11 +2,9 @@ import { testEnvironments } from "@/tests/lib/environments";
 import gopher from "@/tests/assets/gopher.webp";
 import { expect, test } from "vitest";
 
-const avatarSizes = ["xs", "s", "m", "l"] as const;
-
-const avatarStates = ["info", "success", "warning", "danger"] as const;
-
-const avatarColors = ["blue", "teal", "green", "violet", "lilac"] as const;
+const sizes = ["xs", "s", "m", "l"] as const;
+const states = ["info", "success", "warning", "danger"] as const;
+const colors = ["blue", "teal", "green", "violet", "lilac"] as const;
 
 test.each(testEnvironments)(
   "Avatar (%s)",
@@ -17,7 +15,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        {avatarSizes.map((size) => (
+        {sizes.map((size) => (
           <Flex gap="s" key={size}>
             <Avatar size={size}>
               <Image alt="Gopher" src={gopher} />
@@ -31,12 +29,12 @@ test.each(testEnvironments)(
           </Flex>
         ))}
         <Flex gap="s">
-          {avatarStates.map((status) => (
+          {states.map((status) => (
             <Avatar key={status} status={status} />
           ))}
         </Flex>
         <Flex gap="s">
-          {avatarColors.map((color) => (
+          {colors.map((color) => (
             <Avatar color={color} key={color}>
               <Initials>Max Mustermann</Initials>
             </Avatar>

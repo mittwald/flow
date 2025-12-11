@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
 
-const headerNavigationColors = ["primary", "dark", "light"] as const;
+const colors = ["primary", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",
@@ -23,7 +23,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        {headerNavigationColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <HeaderNavigation color={color}>

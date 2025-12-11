@@ -1,23 +1,22 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
-import React from "react";
 
-const headingLevels = [1, 2, 3, 4, 5, 6] as const;
-const headingSizes = ["xs", "s", "m", "l", "xl", "xxl"] as const;
-const headingColors = ["primary", "dark", "light"] as const;
+const levels = [1, 2, 3, 4, 5, 6] as const;
+const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as const;
+const colors = ["primary", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "Heading sizes (%s)",
   async ({ container, render, components: { Heading, Flex, IconStar } }) => {
     await render(
       <Flex gap="m" direction="column">
-        {headingLevels.map((level) => (
+        {levels.map((level) => (
           <Heading level={level} key={level}>
             Level {level}
           </Heading>
         ))}
-        {headingSizes.map((size) => (
+        {sizes.map((size) => (
           <Heading size={size} key={size}>
             <IconStar />
             Size {size}
@@ -39,7 +38,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        {headingColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <Heading color={color}>

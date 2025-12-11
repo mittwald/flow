@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
 
-const accentBoxColors = ["blue", "green", "gradient", "neutral"] as const;
+const colors = ["blue", "green", "gradient", "neutral"] as const;
 
 test.each(testEnvironments)(
   "AccentBox colors (%s)",
@@ -12,7 +12,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {accentBoxColors.map((color) => (
+        {colors.map((color) => (
           <AccentBox key={color} color={color}>
             <IconStar />
             <Section>

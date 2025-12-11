@@ -3,7 +3,7 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { expect, test } from "vitest";
 import { page } from "vitest/browser";
 
-const buttonColors = [
+const colors = [
   "primary",
   "accent",
   "danger",
@@ -11,8 +11,7 @@ const buttonColors = [
   "dark",
   "light",
 ] as const;
-
-const buttonVariants = ["solid", "outline", "soft", "plain"] as const;
+const variants = ["solid", "outline", "soft", "plain"] as const;
 
 test.each(testEnvironments)(
   "Button states (%s)",
@@ -45,7 +44,7 @@ test.each(testEnvironments)(
           </Button>
         </Flex>
 
-        {buttonVariants.map((variant) => (
+        {variants.map((variant) => (
           <Flex gap="s" key={variant}>
             <Button variant={variant} isPending>
               {firstLetterToUppercase(variant)} Pending
@@ -80,11 +79,11 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {buttonColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <Flex gap="s">
-                {buttonVariants.map((variant) => (
+                {variants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
                     {firstLetterToUppercase(color)}{" "}
                     {firstLetterToUppercase(variant)}

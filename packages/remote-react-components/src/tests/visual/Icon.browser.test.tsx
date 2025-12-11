@@ -1,8 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-const iconSizes = ["s", "m", "l"] as const;
-const iconStates = ["info", "success", "warning", "danger"] as const;
+const sizes = ["s", "m", "l"] as const;
+const states = ["info", "success", "warning", "danger"] as const;
 
 test.each(testEnvironments)(
   "Icon (%s)",
@@ -10,12 +10,12 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         <Flex gap="s" align="center">
-          {iconSizes.map((size) => (
+          {sizes.map((size) => (
             <IconStar size={size} key={size} />
           ))}
         </Flex>
         <Flex gap="s">
-          {iconStates.map((status) => (
+          {states.map((status) => (
             <IconStar status={status} key={status} />
           ))}
         </Flex>

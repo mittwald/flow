@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import React, { useState } from "react";
 import { page, userEvent } from "vitest/browser";
+import { useState } from "react";
 
 test.each(testEnvironments)(
   "FileField states (%s)",

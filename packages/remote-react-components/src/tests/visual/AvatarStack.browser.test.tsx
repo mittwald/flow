@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-const avatarSizes = ["xs", "s", "m", "l"] as const;
+const sizes = ["xs", "s", "m", "l"] as const;
 
 test.each(testEnvironments)(
   "AvatarStack sizes (%s)",
@@ -12,7 +12,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        {avatarSizes.map((size) => (
+        {sizes.map((size) => (
           <AvatarStack size={size} totalCount={10} key={size}>
             <Avatar>
               <Initials>A</Initials>

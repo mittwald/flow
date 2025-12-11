@@ -1,13 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import React from "react";
 
-const illustratedMessageColors = [
-  "primary",
-  "danger",
-  "dark",
-  "light",
-] as const;
+const colors = ["primary", "danger", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "IllustratedMessage colors (%s)",
@@ -30,7 +24,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="s" align="center">
-        {illustratedMessageColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <IllustratedMessage color={color}>

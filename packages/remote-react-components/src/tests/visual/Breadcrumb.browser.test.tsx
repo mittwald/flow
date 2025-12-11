@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-const breadcrumbColors = ["primary", "dark", "light"] as const;
+const colors = ["primary", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "Breadcrumb colors (%s)",
@@ -12,7 +12,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {breadcrumbColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
               <Breadcrumb color={color}>

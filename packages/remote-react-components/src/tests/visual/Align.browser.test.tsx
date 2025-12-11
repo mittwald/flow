@@ -81,7 +81,7 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         <Align>
-          <TextField />
+          <TextField aria-label="TextField" />
           <Button>Button</Button>
         </Align>
         <Align>

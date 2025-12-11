@@ -1,8 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
-import React from "react";
 
-const donutChartStates = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger"] as const;
 const legendPositions = ["top", "right", "bottom", "left"] as const;
 
 test.each(testEnvironments)(
@@ -11,7 +10,7 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         <Flex gap="s">
-          {donutChartStates.map((status) => (
+          {states.map((status) => (
             <DonutChart
               aria-label="label"
               value={30}
@@ -27,7 +26,9 @@ test.each(testEnvironments)(
           value={300}
           size="l"
         />
-        <DonutChart value={3}>Custom content</DonutChart>
+        <DonutChart aria-label="label" value={3}>
+          Custom content
+        </DonutChart>
       </Flex>,
     );
 
@@ -64,8 +65,12 @@ test.each(testEnvironments)(
   async ({ container, render, components: { Flex, DonutChart } }) => {
     await render(
       <Flex direction="column" gap="m">
-        <DonutChart value={1000000000000} maxValue={1000000000000} />
-        <DonutChart value={10}>
+        <DonutChart
+          aria-label="label"
+          value={1000000000000}
+          maxValue={1000000000000}
+        />
+        <DonutChart aria-label="label" value={10}>
           Lorem ipsum dolor sit amet consectetur.
         </DonutChart>
       </Flex>,

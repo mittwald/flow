@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { expect, test } from "vitest";
 
-const codeBlockColors = ["default", "dark", "light"] as const;
+const colors = ["default", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "CodeBlock (%s)",
@@ -12,7 +12,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {codeBlockColors.map((color) => (
+        {colors.map((color) => (
           <Wrap if={color === "light"}>
             <AccentBox>
               <CodeBlock
