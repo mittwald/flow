@@ -22,17 +22,18 @@ const RemoteTestUi: FC<PropsWithChildren> = (props) => {
 
 export const renderRemote: typeof render = async (ui, options) => {
   const result = await render(<RemoteTestUi>{ui}</RemoteTestUi>, options);
-  await rootContainerLocator.unhover();
+  await prepareScreenshot();
   return result;
 };
 
 export const renderLocal: typeof render = async (ui, options) => {
   const result = await render(<RootContainer>{ui}</RootContainer>, options);
-  await rootContainerLocator.unhover();
+  await prepareScreenshot();
   return result;
 };
 
 const prepareScreenshot = async (): Promise<void> => {
+  // Move the mouse to somewhere neutral to avoid hover effects
   await rootContainerLocator.unhover();
   await sleep(50);
 };
