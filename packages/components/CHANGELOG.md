@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.600](https://github.com/mittwald/flow/compare/0.2.0-alpha.599...0.2.0-alpha.600) (2025-12-12)
+
+### Features
+
+* **List:** allow setting custom loading items count ([d17fe3e](https://github.com/mittwald/flow/commit/d17fe3eab254968f26823c1f804e204f1a2a811e))
+
 # [0.2.0-alpha.599](https://github.com/mittwald/flow/compare/0.2.0-alpha.598...0.2.0-alpha.599) (2025-12-12)
 
 ### Features
