@@ -3,13 +3,13 @@ import { expect, test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "TextArea states (%s)",
+  "TextField states (%s)",
   async ({
     container,
     render,
     components: {
       Flex,
-      TextArea,
+      TextField,
       Label,
       FieldError,
       FieldDescription,
@@ -20,7 +20,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        <TextArea rows={1} isRequired>
+        <TextField isRequired>
           <Label>
             Default
             <ContextualHelpTrigger>
@@ -29,42 +29,42 @@ test.each(testEnvironments)(
             </ContextualHelpTrigger>
           </Label>
           <FieldDescription>FieldDescription</FieldDescription>
-        </TextArea>
-        <TextArea rows={1} showCharacterCount>
+        </TextField>
+        <TextField showCharacterCount>
           <Label>With character count</Label>
-        </TextArea>
-        <TextArea rows={1} isInvalid>
+        </TextField>
+        <TextField isInvalid>
           <Label>Invalid</Label>
           <FieldError>FieldError</FieldError>
-        </TextArea>
-        <TextArea rows={1} isReadOnly>
+        </TextField>
+        <TextField isReadOnly>
           <Label>Readonly</Label>
-        </TextArea>
-        <TextArea rows={1} isDisabled>
+        </TextField>
+        <TextField isDisabled>
           <Label>Disabled</Label>
-        </TextArea>
+        </TextField>
       </Flex>,
     );
 
-    await expect(container).toMatchScreenshot("TextArea states");
+    await expect(container).toMatchScreenshot("TextField states");
   },
 );
 
 test.each(testEnvironments)(
-  "TextArea interaction (%s)",
-  async ({ container, render, components: { TextArea, Label } }) => {
+  "TextField interaction (%s)",
+  async ({ container, render, components: { TextField, Label } }) => {
     await render(
-      <TextArea autoResizeMaxRows={3} rows={2}>
+      <TextField>
         <Label>Label</Label>
-      </TextArea>,
+      </TextField>,
     );
 
-    const input = page.getByLocator("textarea");
+    const input = page.getByLocator("input");
 
-    await expect(container).toMatchScreenshot("TextArea - default");
+    await expect(container).toMatchScreenshot("TextField - default");
 
-    await userEvent.type(input, "A\nB\nC\nD");
+    await userEvent.type(input, "asdf");
 
-    await expect(container).toMatchScreenshot("TextArea - text entered");
+    await expect(container).toMatchScreenshot("TextField - text entered");
   },
 );
