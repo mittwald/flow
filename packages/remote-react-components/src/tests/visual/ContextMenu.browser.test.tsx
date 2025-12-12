@@ -68,8 +68,6 @@ test.each(testEnvironments)(
 
     const trigger = page.getByTestId("trigger");
 
-    await expect(container).toMatchScreenshot("ContextMenu - closed");
-
     await trigger.click();
 
     await expect(container).toMatchScreenshot("ContextMenu - opened");

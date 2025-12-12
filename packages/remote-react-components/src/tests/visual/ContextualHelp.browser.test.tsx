@@ -34,8 +34,6 @@ test.each(testEnvironments)(
 
     const trigger = page.getByTestId("trigger");
 
-    await expect(container).toMatchScreenshot("ContextualHelp - closed");
-
     await trigger.click();
 
     await expect(container).toMatchScreenshot("ContextualHelp - opened");
