@@ -46,6 +46,7 @@ export class List<T, TMeta = unknown> {
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
   private readonly sortingStorageKey?: string;
+  public readonly loadingItemsCount = 5;
 
   public constructor(shape: ListShape<T, TMeta>) {
     const {
