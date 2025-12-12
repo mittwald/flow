@@ -1,5 +1,6 @@
 import { page } from "vitest/browser";
 import { type FC, type PropsWithChildren } from "react";
+import { NotificationProvider } from "@mittwald/flow-react-components";
 
 export const RootContainer: FC<PropsWithChildren> = (props) => (
   <div
@@ -11,7 +12,7 @@ export const RootContainer: FC<PropsWithChildren> = (props) => (
     }}
     data-testid="root-container"
   >
-    {props.children}
+    <NotificationProvider>{props.children}</NotificationProvider>
   </div>
 );
 

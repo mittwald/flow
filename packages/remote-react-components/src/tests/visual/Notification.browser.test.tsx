@@ -10,29 +10,46 @@ test.each(testEnvironments)(
   async ({
     container,
     render,
-    components: { Notification, Flex, Heading, Text },
+    components: {
+      Notification,
+      Heading,
+      Text,
+      Button,
+      useNotificationController,
+    },
   }) => {
-    await render(
-      <Flex direction="column" gap="m">
-        {states.map((status) => (
-          <Notification status={status} key={status}>
-            <Heading>{firstLetterToUppercase(status)}</Heading>
-            <Text>Text</Text>
-          </Notification>
-        ))}
-        <Notification
-          data-testid="notification"
-          onClose={() => console.log("onClose")}
-          onClick={() => console.log("onClick")}
-        >
-          <Heading>Heading</Heading>
-          <Text>Text</Text>
-        </Notification>
-      </Flex>,
-    );
+    const TestComponent = () => {
+      const notificationController = useNotificationController();
 
-    const notification = page.getByTestId("notification");
-    await notification.click();
+      const triggerNotifications = () => {
+        states.forEach((status) =>
+          notificationController.add(
+            <Notification status={status} key={status}>
+              <Heading>{firstLetterToUppercase(status)}</Heading>
+              <Text>Text</Text>
+            </Notification>,
+          ),
+        );
+
+        notificationController.add(
+          <Notification data-testid="notification">
+            <Heading>Heading</Heading>
+            <Text>Text</Text>
+          </Notification>,
+        );
+      };
+
+      return (
+        <Button data-testid="trigger" onPress={triggerNotifications}>
+          Trigger
+        </Button>
+      );
+    };
+
+    await render(<TestComponent />);
+
+    const triggerButton = page.getByTestId("trigger");
+    await triggerButton.click();
 
     await expect(container).toMatchScreenshot("Notification");
   },
