@@ -26,7 +26,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
             <Initials>{name}</Initials>
           </Avatar>
           <Text>
-            <b>{name}</b>
+            <strong>{name}</strong>
           </Text>
         </Align>
       </Header>

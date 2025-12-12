@@ -99,7 +99,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
               <span className={styles.text}>
                 {name && (
                   <Text className={styles.title}>
-                    <b>{name}</b>
+                    <strong>{name}</strong>
                   </Text>
                 )}
                 {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}

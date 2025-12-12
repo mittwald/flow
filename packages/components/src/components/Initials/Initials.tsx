@@ -1,12 +1,12 @@
-import { useMemo, type PropsWithChildren } from "react";
+import { type PropsWithChildren, useMemo } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { getColorFromInitials } from "@/components/Initials/lib/getColorFromInitials";
+import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface InitialsProps
   extends PropsWithChildren,
@@ -27,7 +27,7 @@ export const Initials = flowComponent("Initials", (props) => {
     ref,
   } = props;
 
-  const textContent = onlyText(children);
+  const textContent = extractTextFromFirstChild(children) ?? "";
   const initials = getInitialsFromString(textContent);
   const dynamicColor = useMemo(
     () => (useDynamicColor ? getColorFromInitials(textContent) : undefined),

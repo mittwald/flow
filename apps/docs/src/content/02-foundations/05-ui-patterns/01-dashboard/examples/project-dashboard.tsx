@@ -60,7 +60,7 @@ export default () => {
                 status="success"
                 value={43}
               >
-                <b>43 %</b>
+                <strong>43 %</strong>
               </DonutChart>
               <Flex direction="column" grow rowGap="m">
                 <LabeledValue>
@@ -93,7 +93,7 @@ export default () => {
                 status="success"
                 value={12}
               >
-                <b>12 %</b>
+                <strong>12 %</strong>
               </DonutChart>
               <Flex direction="column" grow rowGap="m">
                 <LabeledValue>

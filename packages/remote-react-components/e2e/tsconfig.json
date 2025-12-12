@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "types": ["@vitest/browser/providers/playwright", "node"]
+  },
+  "extends": "../tsconfig.json",
+  "include": ["./vitest.*.ts"]
+}

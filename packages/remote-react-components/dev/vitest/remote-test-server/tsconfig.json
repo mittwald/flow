@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "types": ["@vitest/browser/providers/playwright", "node"],
-    "rootDir": "./"
-  },
-  "extends": "../../../tsconfig.json",
-  "include": ["./vitest.*.ts"]
-}

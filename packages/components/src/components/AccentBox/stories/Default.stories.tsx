@@ -45,7 +45,7 @@ export const Gradient: Story = {
         <Flex direction="column" grow>
           <Heading size="l">Heading</Heading>
           <Text color="dark">
-            <b>{dummyText.short}</b>
+            <strong>{dummyText.short}</strong>
           </Text>
         </Flex>
         <Link target="_blank" href="#" color="dark">

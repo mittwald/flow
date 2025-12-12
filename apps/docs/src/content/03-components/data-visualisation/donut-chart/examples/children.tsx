@@ -5,6 +5,6 @@ import { DonutChart } from "@mittwald/flow-react-components";
   maxValue={600}
   aria-label="Speicherplatz"
 >
-  <b>300</b>
+  <strong>300</strong>
   <small>GB</small>
 </DonutChart>;

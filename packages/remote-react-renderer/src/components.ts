@@ -17,6 +17,7 @@ const htmlComponentsMap = {
   ol: createRemoteComponentRenderer(elementFactory("ol")),
   li: createRemoteComponentRenderer(elementFactory("li")),
   small: createRemoteComponentRenderer(elementFactory("small")),
+  i: createRemoteComponentRenderer(elementFactory("i")),
   br: createRemoteComponentRenderer(
     elementFactory("br", { isVoidElement: true }),
   ),

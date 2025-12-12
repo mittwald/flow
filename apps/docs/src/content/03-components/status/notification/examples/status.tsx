@@ -8,32 +8,32 @@ import {
   <Notification status="info">
     <Heading>E-Mail-Adresse archiviert</Heading>
     <Text>
-      Die E-Mail-Adresse <b>example@mittwald.de</b> wurde
-      archiviert.
+      Die E-Mail-Adresse{" "}
+      <strong>example@mittwald.de</strong> wurde archiviert.
     </Text>
   </Notification>
 
   <Notification status="warning">
     <Heading>Speicher fast voll</Heading>
     <Text>
-      Der Speicherplatz im Projekt <b>My Project</b> ist zu
-      80% voll.
+      Der Speicherplatz im Projekt{" "}
+      <strong>My Project</strong> ist zu 80% voll.
     </Text>
   </Notification>
 
   <Notification status="danger">
     <Heading>Kein SSL-Zertifikat</Heading>
     <Text>
-      Für <b>example.de</b> konnte kein SSL-Zertifikat
-      ausgestellt werden.
+      Für <strong>example.de</strong> konnte kein
+      SSL-Zertifikat ausgestellt werden.
     </Text>
   </Notification>
 
   <Notification status="success">
     <Heading>App installiert</Heading>
     <Text>
-      Deine App <b>My WordPress</b> wurde erfolgreich
-      installiert.
+      Deine App <strong>My WordPress</strong> wurde
+      erfolgreich installiert.
     </Text>
   </Notification>
 </Row>;

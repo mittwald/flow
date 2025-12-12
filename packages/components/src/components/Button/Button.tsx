@@ -11,6 +11,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
+import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
@@ -147,7 +148,7 @@ export const Button = flowComponent("Button", (props) => {
     />
   );
 
-  const isStringContent = typeof children === "string";
+  const isStringContent = extractTextFromFirstChild(children) !== undefined;
 
   return (
     <Aria.Button

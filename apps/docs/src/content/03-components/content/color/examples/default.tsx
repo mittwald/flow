@@ -4,8 +4,8 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Text>
-  <b>
+  <strong>
     Veröffentliche{" "}
     <Color color="violet">eigene Features</Color> im mStudio
-  </b>
+  </strong>
 </Text>;

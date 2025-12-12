@@ -24,7 +24,7 @@ import {
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
-            <b>Max Mustermann</b>
+            <strong>Max Mustermann</strong>
           </Text>
         </Align>
       </Header>

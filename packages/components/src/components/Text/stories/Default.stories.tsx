@@ -13,7 +13,6 @@ const meta: Meta<typeof Text> = {
     elementType: {
       control: "inline-radio",
       options: ["span", "p"],
-      defaultValue: "span",
     },
   },
   args: {

@@ -5,8 +5,7 @@
   "scripts": {
     "build:deps": "",
     "clean": "rimraf .next",
-    "dev": "next dev",
-    "test:compile": "tsc --noEmit"
+    "dev": "next dev"
   },
   "dependencies": {
     "@internationalized/date": "^3.10.0",
@@ -32,12 +31,12 @@
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "~16.0.4",
+    "@next/eslint-plugin-next": "~16.0.7",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.6",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2",
     "eslint": "^9.39.1",
-    "nx": "^21.6.9",
+    "nx": "^21.6.10",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
   },

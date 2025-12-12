@@ -1,5 +1,5 @@
 import styles from "../DonutChart.module.scss";
-import React, { type FC } from "react";
+import React, { Children, type FC } from "react";
 import { useNumberFormatter } from "react-aria";
 import type { DonutChartProps } from "@/components/DonutChart";
 
@@ -12,7 +12,7 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   const formatter = useNumberFormatter(formatOptions);
 
-  if (children) {
+  if (Children.count(children) > 0) {
     return <span className={styles.value}>{children}</span>;
   }
 
@@ -20,7 +20,7 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   return (
     <span className={styles.value}>
-      <b>{formattedValue}</b>
+      <strong>{formattedValue}</strong>
     </span>
   );
 };

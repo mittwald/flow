@@ -69,6 +69,7 @@ export const Flex: FC<FlexProps> = (props) => {
     paddingLeft,
     paddingRight,
     elementType = "div",
+    ...restProps
   } = props;
 
   const rootClassName = clsx(styles.flex, className);
@@ -77,6 +78,7 @@ export const Flex: FC<FlexProps> = (props) => {
 
   return (
     <Element
+      {...restProps}
       className={rootClassName}
       style={{
         flexDirection: direction,
