@@ -2,9 +2,10 @@ import RemoteRoot from "@/components/RemoteRoot";
 import { RemoteReceiver } from "@mittwald/flow-remote-core";
 import { render } from "vitest-browser-react";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
-import { type Locator } from "vitest/browser";
+import type { Locator } from "vitest/browser";
 import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
+import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
 import { sleep } from "@/tests/lib/sleep";
@@ -15,7 +16,9 @@ const RemoteTestUi: FC<PropsWithChildren> = (props) => {
   return (
     <RootContainer>
       <RemoteRenderer __remoteReceiver={receiver} />
-      <RemoteRoot __remoteReceiver={receiver}>{props.children}</RemoteRoot>
+      <RemoteRoot __remoteReceiver={receiver}>
+        <NotificationProvider>{props.children}</NotificationProvider>
+      </RemoteRoot>
     </RootContainer>
   );
 };

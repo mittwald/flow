@@ -9,7 +9,9 @@ export interface ItemViewShape<T> {
   target?: HTMLAttributeAnchorTarget;
   defaultExpanded?: (data: T) => boolean;
   renderFn?: RenderItemFn<T>;
+  /** @deprecated Use loadingView instead */
   fallback?: ReactElement;
+  loadingView?: ReactElement;
   showList?: boolean;
   showTiles?: boolean;
   tileMaxWidth?: number;
@@ -21,7 +23,7 @@ export class ItemView<T> {
   public readonly href?: (data: T) => string;
   public readonly target?: HTMLAttributeAnchorTarget;
   public readonly defaultExpanded?: (data: T) => boolean;
-  public readonly fallback?: ReactElement;
+  public readonly loadingView?: ReactElement;
   public readonly showTiles?: boolean;
   public readonly showList?: boolean;
   public readonly tileMaxWidth: number;
@@ -30,6 +32,7 @@ export class ItemView<T> {
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
     const {
       fallback,
+      loadingView = fallback,
       textValue,
       href,
       target,
@@ -45,7 +48,7 @@ export class ItemView<T> {
     this.href = href;
     this.target = target;
     this.defaultExpanded = defaultExpanded;
-    this.fallback = fallback;
+    this.loadingView = loadingView;
     this.showTiles = showTiles;
     this.showList = showList;
     this.tileMaxWidth = tileMaxWidth;
