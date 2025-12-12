@@ -56,7 +56,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await expect(container).toMatchScreenshot("MarkdownEditor states");
+    await expect(container).toMatchScreenshot("NumberField states");
   },
 );
 
@@ -78,14 +78,14 @@ test.each(testEnvironments)(
     await userEvent.type(input, "3");
 
     await expect(container).toMatchScreenshot(
-      "MarkdownEditor interaction - number entered",
+      "NumberField interaction - number entered",
     );
 
     const increment = page.getByLocator('[slot="increment"]');
     await increment.click();
 
     await expect(container).toMatchScreenshot(
-      "MarkdownEditor interaction - increment clicked",
+      "NumberField interaction - increment clicked",
     );
   },
 );
