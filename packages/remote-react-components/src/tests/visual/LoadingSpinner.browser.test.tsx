@@ -18,7 +18,7 @@ test.each(testEnvironments)(
             <AccentBox>
               <Flex gap="s">
                 {sizes.map((size) => (
-                  <LoadingSpinner size={size} color={color} />
+                  <LoadingSpinner key={size} size={size} color={color} />
                 ))}
               </Flex>
             </AccentBox>
