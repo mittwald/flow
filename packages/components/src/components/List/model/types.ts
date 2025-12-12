@@ -44,6 +44,7 @@ export interface ListShape<T, TMeta = unknown>
 
   onAction?: ItemActionFn<T>;
   accordion?: boolean;
+  loadingItemsCount?: number;
   getItemId?: GetItemId<T>;
   onChange?: OnListChanged<T, TMeta>;
   defaultViewMode?: ListViewMode;
