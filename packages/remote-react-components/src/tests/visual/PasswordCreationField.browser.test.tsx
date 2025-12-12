@@ -67,8 +67,8 @@ test.each(testEnvironments)(
       "PasswordCreationField interaction - password entered",
     );
 
-    const show = page.getByLocator('[aria-label="Show password"]');
-    await show.click();
+    const showPassword = page.getByLocator('[aria-label="Show password"]');
+    await showPassword.click();
 
     await expect(container).toMatchScreenshot(
       "PasswordCreationField interaction - show password clicked",
@@ -76,6 +76,8 @@ test.each(testEnvironments)(
 
     const generate = page.getByText("Generate");
     await generate.click();
+    const hidePassword = page.getByLocator('[aria-label="Hide password"]');
+    await hidePassword.click();
 
     await expect(container).toMatchScreenshot(
       "PasswordCreationField interaction - password generated",
