@@ -52,8 +52,15 @@ export interface ListProps<T, TMeta = unknown>
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, ref, hidePagination, ...restProps } =
-    props;
+  const {
+    children,
+    batchSize,
+    loadingItemsCount = batchSize,
+    onChange,
+    ref,
+    hidePagination,
+    ...restProps
+  } = props;
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -159,6 +166,7 @@ export const List = flowComponent("List", (props) => {
     batchesController: {
       batchSize,
     },
+    loadingItemsCount,
     ...restProps,
   });
 
