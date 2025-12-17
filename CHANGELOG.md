@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.602](https://github.com/mittwald/flow/compare/0.2.0-alpha.601...0.2.0-alpha.602) (2025-12-17)
+
+### Bug Fixes
+
+* **List:** fix vertical alignment in tiles-view ([#2169](https://github.com/mittwald/flow/issues/2169)) ([294cc73](https://github.com/mittwald/flow/commit/294cc73d7ccb66f6de7fab456a4fe693148b2daa))
+
 # [0.2.0-alpha.601](https://github.com/mittwald/flow/compare/0.2.0-alpha.600...0.2.0-alpha.601) (2025-12-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
