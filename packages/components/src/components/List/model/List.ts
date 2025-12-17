@@ -46,6 +46,7 @@ export class List<T, TMeta = unknown> {
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
   private readonly sortingStorageKey?: string;
+  public readonly loadingItemsCount;
 
   public constructor(shape: ListShape<T, TMeta>) {
     const {
@@ -62,6 +63,7 @@ export class List<T, TMeta = unknown> {
       getItemId,
       defaultViewMode,
       accordion = false,
+      loadingItemsCount = 5,
       ...componentProps
     } = shape;
 
@@ -90,6 +92,7 @@ export class List<T, TMeta = unknown> {
     this.loader = IncrementalLoader.useNew<T>(this, loader);
     this.onAction = onAction;
     this.getItemId = getItemId;
+    this.loadingItemsCount = loadingItemsCount;
     this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,

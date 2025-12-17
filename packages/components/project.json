@@ -22,12 +22,12 @@
       "cache": true,
       "inputs": [
         "components-src",
-        "!{projectRoot}/src/components/Icon/components/icons/*",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
       "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
     },
     "build:icons": {
+      "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
         "{projectRoot}/src/components/Icon/icons.yaml"

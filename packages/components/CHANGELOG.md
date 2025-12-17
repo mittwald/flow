@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.601](https://github.com/mittwald/flow/compare/0.2.0-alpha.600...0.2.0-alpha.601) (2025-12-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.600](https://github.com/mittwald/flow/compare/0.2.0-alpha.599...0.2.0-alpha.600) (2025-12-12)
+
+### Features
+
+* **List:** allow setting custom loading items count ([d17fe3e](https://github.com/mittwald/flow/commit/d17fe3eab254968f26823c1f804e204f1a2a811e))
+
+# [0.2.0-alpha.599](https://github.com/mittwald/flow/compare/0.2.0-alpha.598...0.2.0-alpha.599) (2025-12-12)
+
+### Features
+
+* **List:** Support custom loading views for items ([bc1509e](https://github.com/mittwald/flow/commit/bc1509e43528a819e0edb226ce8f612bd6fe1329))
+
+# [0.2.0-alpha.598](https://github.com/mittwald/flow/compare/0.2.0-alpha.597...0.2.0-alpha.598) (2025-12-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.597](https://github.com/mittwald/flow/compare/0.2.0-alpha.596...0.2.0-alpha.597) (2025-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.596](https://github.com/mittwald/flow/compare/0.2.0-alpha.595...0.2.0-alpha.596) (2025-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.595](https://github.com/mittwald/flow/compare/0.2.0-alpha.594...0.2.0-alpha.595) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.594](https://github.com/mittwald/flow/compare/0.2.0-alpha.593...0.2.0-alpha.594) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.593](https://github.com/mittwald/flow/compare/0.2.0-alpha.592...0.2.0-alpha.593) (2025-12-10)
+
+### Bug Fixes
+
+* **MarkdownEditor:** don't render markdown in editor mode ([#2190](https://github.com/mittwald/flow/issues/2190)) ([465a98e](https://github.com/mittwald/flow/commit/465a98e9b2a4e19d911c74b8f861fcf1ec4c720d))
+
+# [0.2.0-alpha.592](https://github.com/mittwald/flow/compare/0.2.0-alpha.591...0.2.0-alpha.592) (2025-12-09)
+
+### Bug Fixes
+
+* **FieldError:** fix error when used inside items ([#2185](https://github.com/mittwald/flow/issues/2185)) ([b669e02](https://github.com/mittwald/flow/commit/b669e02b0056844c59a68c270bb022eb78933e38))
+
 # [0.2.0-alpha.591](https://github.com/mittwald/flow/compare/0.2.0-alpha.590...0.2.0-alpha.591) (2025-12-08)
 
 ### Bug Fixes

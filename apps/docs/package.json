@@ -27,7 +27,7 @@
     "fumadocs-mdx": "^14.0.3",
     "humanize-string": "^3.1.0",
     "luxon": "^3.7.2",
-    "next": "~16.0.4",
+    "next": "~16.0.10",
     "next-mdx-remote": "^5.0.0",
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",

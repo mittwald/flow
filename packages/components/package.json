@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.591",
+  "version": "0.2.0-alpha.601",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -125,7 +125,7 @@
     "fs-jetpack": "^5.1.0",
     "glob": "^13.0.0",
     "happy-dom": "^20.0.10",
-    "next": "~16.0.4",
+    "next": "~16.0.10",
     "nx": "^22.1.0",
     "playwright": "^1.56.1",
     "postcss": "^8.5.6",
