@@ -14,21 +14,22 @@ vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries
 erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer
 Teile der Anwendung.
 
-| Typ                  | Verwendung                                                     | Element     | Fehlerfall                        | Loading                                            |
-| -------------------- | -------------------------------------------------------------- | ----------- | --------------------------------- | -------------------------------------------------- |
-| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                | Sections mit mehrzeiligen Skeletons                |
-| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                    | Mehrzeilige Skeletons                              |
-| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons             | Mehrzeilige Skeletons                              |
-| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                            | Nichts                                             |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton           | Menu Items mit Skeleton                            |
-| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                | LoadingView der Flow Component                     |
-| `Text`               | Für Texte                                                      | Text        | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
-| `Link`               | Für Links                                                      | Link        | Einzeiliges Skeleton              | Einzeiliges Skeleton                               |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Skeleton                   | Avatar Skeleton                                    |
-| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                            | Text Field                                         |
+| Typ                  | Verwendung                                                     | Element     | Fehlerfall                            | Loading                                            |
+| -------------------- | -------------------------------------------------------------- | ----------- | ------------------------------------- | -------------------------------------------------- |
+| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
+| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                    | Sections mit mehrzeiligen Skeletons                |
+| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                        | Mehrzeilige Skeletons                              |
+| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons                 | Mehrzeilige Skeletons                              |
+| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                                | Nichts                                             |
+| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton               | Menu Items mit Skeleton                            |
+| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                    | LoadingView der Flow Component                     |
+| `Text`               | Für Texte                                                      | Text        | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
+| `String`             | Für einzeilige Inhalte                                         | Fragment    | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
+| `Link`               | Für Links                                                      | Link        | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
+| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Skeleton                       | Avatar Skeleton                                    |
+| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                                | Text Field                                         |
+| `ChartFragment`      | Für CartesianCharts                                            | Fragment    | CartesianChart mit IllustratedMessage | CartesianChart mit LoadingSpinner                  |
 
 ## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 
@@ -212,15 +213,17 @@ export const AppInstallationSection: FC<Props> = (props) => (
 );
 ```
 
-## Inhalte eines Diagramms (WIP)
+## Inhalte eines Diagramms
 
 Diagramme beziehen in der Regel viele Daten aus externen Services und sind daher
-fehleranfällig. Sie sollten immer separat von einer Boundary umschlossen werden.
-Diagramm-Komponenten wie das `CartesianChart` besitzen eine eigene ErrorView.
-Ist das nicht der Fall, sollte mindestens die Section des Diagramms mit einer
-Boundary abgesichert werden.
+fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für das
+`CartesianChart` gibt es hierfür das `WithBoundaries.ChartFragment`.
 
-[Code-Beispiele??]
+```
+<WithBoundaries.ChartFragment>
+  <CartesianChart>...</CartesianChart>
+</WithBoundaries.ChartFragment>
+```
 
 ## Inhalte einzelner kleinerer Elemente
 
