@@ -61,3 +61,11 @@ export const MessageOnly: Story = {
     </Message>
   ),
 };
+
+export const CustomColor: Story = {
+  args: { color: "#ffeedd" },
+};
+
+export const SenderCustomColor: Story = {
+  args: { type: "sender", color: "#ffeedd" },
+};
