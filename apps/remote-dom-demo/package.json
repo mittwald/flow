@@ -5,8 +5,7 @@
   "scripts": {
     "build:deps": "",
     "clean": "rimraf .next",
-    "dev": "next dev",
-    "test:compile": "tsc --noEmit"
+    "dev": "next dev"
   },
   "dependencies": {
     "@internationalized/date": "^3.10.0",
