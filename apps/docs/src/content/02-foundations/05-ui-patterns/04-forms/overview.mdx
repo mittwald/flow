@@ -1,63 +1,109 @@
 # Aufbau einer Form
 
-(Code-Beispiel)
+<LiveCodeEditor example="form" editorCollapsed />
 
-Formularfelder sollten in einer vorhersehbaren und intuitiven Reihenfolge angeordnet sein.
-Für eine intuitive Bedienung:
+Formularfelder sollten in einer vorhersehbaren und intuitiven Reihenfolge
+angeordnet sein. Für eine intuitive Bedienung:
+
 - Ordne die Felder nach ihrer Wichtigkeit.
 - Platziere zusammengehörige Felder nah beieinander.
-- Platziere nach Möglichkeit Eingabefelder mit Tastatureingabe nah beieinander, damit Mausnutzer nicht zwischen Klicken und Tippen wechseln müssen.
+- Platziere nach Möglichkeit Eingabefelder mit Tastatureingabe nah beieinander,
+  damit Mausnutzer nicht zwischen Klicken und Tippen wechseln müssen.
 
-Zur Strukturierung von Formularen können Form Controls mithilfe von [Sections](/03-components/structure/section/overview) gruppiert und mit [ColumnLayouts](/03-components/structure/column-layout/overview) in Spalten aufgeteilt werden. Forms werden im mStudio in der Regel in einem [Modal](/03-components/overlays/modal/overview) platziert. Weitere Informationen findest du im Pattern [Anlegen und Bearbeiten](/02-foundations/05-ui-patterns/02-anlegeprozess).
+Zur Strukturierung von Formularen können Form Controls mithilfe von
+[Sections](/03-components/structure/section/overview) gruppiert und mit
+[ColumnLayouts](/03-components/structure/column-layout/overview) in Spalten
+aufgeteilt werden. Forms werden im mStudio in der Regel in einem
+[Modal](/03-components/overlays/modal/overview) platziert. Weitere Informationen
+findest du im Pattern
+[Anlegen und Bearbeiten](/02-foundations/05-ui-patterns/02-anlegeprozess).
 
-## Progressively disclosed Form Controls 
+## Progressively disclosed Form Controls
 
-In manchen Fällen können Form Controls schrittweise eingeblendet werden. Sie sind dabei visuell unter einem übergeordneten Controls verschachtelt. Ein gängiges Muster ist die Nutzung des "aktivierten" Zustands einer Checkbox oder RadioGroup. Dieser Zustand entscheidet, ob ein zugehöriges Form Control angezeigt wird.
+In manchen Fällen können Form Controls schrittweise eingeblendet werden. Sie
+sind dabei visuell unter einem übergeordneten Controls verschachtelt. Ein
+gängiges Muster ist die Nutzung des "aktivierten" Zustands einer Checkbox oder
+RadioGroup. Dieser Zustand entscheidet, ob ein zugehöriges Form Control
+angezeigt wird.
 
-(CodeBeispiel Evtl. Ablaufdatum hinzufügen)
+<LiveCodeEditor example="progressive" editorCollapsed />
 
 ---
 
-# Aufbau eines Form Controls 
+# Aufbau eines Form Controls
 
-Forms können verschiedene Elemente enthalten. Standardmäßig sind alle Angaben Pflichtfelder. Eine Ausnahme bilden Felder mit dem Zusatz „(optional)“ am Label oder der Heading.
+Forms können verschiedene Elemente enthalten. Standardmäßig sind alle Angaben
+Pflichtfelder. Eine Ausnahme bilden Felder mit dem Zusatz „(optional)“ am Label
+oder der Heading.
 
 ## Label
 
-Ein gutes [Label](/03-components/content/label/overview) vermittelt alle notwendigen Informationen klar und prägnant (max. 2 Wörter). Ist ein Form Control optional, füge den Zusatz „(optional)“ hinzu. Können die Eingabeanforderungen aus dem Kontext erschlossen werden, kann auf ein sichtbares Label verzichtet werden. In diesem Fall muss das Form Control über `aria-labelledby` verknüpft oder mit `aria-label` beschrieben werden.
+Ein gutes [Label](/03-components/content/label/overview) vermittelt alle
+notwendigen Informationen klar und prägnant (max. 2 Wörter). Ist ein Form
+Control optional, füge den Zusatz „(optional)“ hinzu. Können die
+Eingabeanforderungen aus dem Kontext erschlossen werden, kann auf ein sichtbares
+Label verzichtet werden. In diesem Fall muss das Form Control über
+`aria-labelledby` verknüpft oder mit `aria-label` beschrieben werden.
 
 ## Fields / Controls
 
-Das Design System bietet eine große Auswahl an wiederverwendbaren Form Contorls. Dazu gehören verschiedene Fields wie zum Beispiel [TextField](/03-components/form-controls/text-field/overview), [NumberField](/03-components/form-controls/number-field/overview) oder [PasswordCreationField](/03-components/form-controls/password-creation-field/overview) sowie Controls wie [Checkboxen](/03-components/form-controls/checkbox/overview), [Selects](/03-components/form-controls/select/overview) oder[RadioGroups]()/03-components/form-controls/radio-group/overview. Alle Components sind im Bereich Components unter dem Menüpunkt Form Controls zu finden.
+Das Design System bietet eine große Auswahl an wiederverwendbaren Form Contorls.
+Dazu gehören verschiedene Fields wie zum Beispiel
+[TextField](/03-components/form-controls/text-field/overview),
+[NumberField](/03-components/form-controls/number-field/overview) oder
+[PasswordCreationField](/03-components/form-controls/password-creation-field/overview)
+sowie Controls wie [Checkboxen](/03-components/form-controls/checkbox/overview),
+[Selects](/03-components/form-controls/select/overview)
+oder[RadioGroups]()/03-components/form-controls/radio-group/overview. Alle
+Components sind im Bereich Components unter dem Menüpunkt Form Controls zu
+finden.
 
 ## FieldDescription
 
-Die `<FieldDescription />` ist ein optionaler Hilfstext unterhalb des Form Controls. Sie liefert zusätzliche Informationen oder Anweisungen. Verwende sie sparsam. Sie kann Beispiele oder Hinweise zur Formatierung enthalten.
+Die `<FieldDescription />` ist ein optionaler Hilfstext unterhalb des Form
+Controls. Sie liefert zusätzliche Informationen oder Anweisungen. Verwende sie
+sparsam. Sie kann Beispiele oder Hinweise zur Formatierung enthalten.
 
 ## FieldError
 
-Ein ungültiges Field muss immer eine Fehlermeldung anzeigen. Diese erklärt, warum der Wert die Validierung nicht besteht. Nutze den `<FieldError />` für diese Meldung. Beschreibe klar, warum die Eingabe ungültig ist, und hilf dem User bei der Korrektur. Hinweise zur Formulierung findest du in der Guideline zu [Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen).
-
+Ein ungültiges Field muss immer eine Fehlermeldung anzeigen. Diese erklärt,
+warum der Wert die Validierung nicht besteht. Nutze den `<FieldError />` für
+diese Meldung. Beschreibe klar, warum die Eingabe ungültig ist, und hilf dem
+User bei der Korrektur. Hinweise zur Formulierung findest du in der Guideline zu
+[Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen).
 
 ## Placeholder
 
-Placeholder sind nicht barrierefrei. Sie dürfen keine Informationen enthalten, die für das korrekte Ausfüllen eines Fields notwendig sind. Placeholder verschwinden bei der Eingabe von Text. Zudem werden sie von Assistenztechnologien oft nicht zuverlässig erkannt und sind schwerer zu verarbeiten als eine FieldDescription.
-Statt eines Placeholders:
-* Nutze ein Label für essenzielle Informationen zu den Eingabeanforderungen.
-* Nutze eine FieldDescription für Beispiele oder Formatierungshinweise.
+Placeholder sind nicht barrierefrei. Sie dürfen keine Informationen enthalten,
+die für das korrekte Ausfüllen eines Fields notwendig sind. Placeholder
+verschwinden bei der Eingabe von Text. Zudem werden sie von
+Assistenztechnologien oft nicht zuverlässig erkannt und sind schwerer zu
+verarbeiten als eine FieldDescription. Statt eines Placeholders:
 
-Eine Ausnahme ist das [SearchField](/03-components/form-controls/search-field/overview). Es besitzt ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
+- Nutze ein Label für essenzielle Informationen zu den Eingabeanforderungen.
+- Nutze eine FieldDescription für Beispiele oder Formatierungshinweise.
+
+Eine Ausnahme ist das
+[SearchField](/03-components/form-controls/search-field/overview). Es besitzt
+ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
 
 —--
 
 # Validation
 
-Standardmäßig erfolgt die Validierung erst beim Absenden des Forms. Zum Absenden wird der `<SubmitButton/>` verwendet. So kann der User das Formular ohne Unterbrechung ausfüllen. Nutze die Components [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview) oder [Field (React Hook Form)](/03-components/form-controls/field-react-hook-form/overview), um die Form Controls von Flow nahtlos in das Formular-Management von React Hook Form zu integrieren.
+Standardmäßig erfolgt die Validierung erst beim Absenden des Forms. Zum Absenden
+wird der `<SubmitButton/>` verwendet. So kann der User das Formular ohne
+Unterbrechung ausfüllen. Nutze die Components
+[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview)
+oder
+[Field (React Hook Form)](/03-components/form-controls/field-react-hook-form/overview),
+um die Form Controls von Flow nahtlos in das Formular-Management von React Hook
+Form zu integrieren.
 
-(Code-Beispiel)
+<LiveCodeEditor example="validation" editorCollapsed />
 
 Je nach Field stehen unterschiedliche Properties zur Verfügung, zum Beispiel:
 
-* `isRequired` für Pflichtfelder.
-* `validate` für eigene Validierungen.
-* HTML Input Properties wie `type="email“`, `minLength`.
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+- HTML Input Properties wie `type="email“`, `minLength`.
