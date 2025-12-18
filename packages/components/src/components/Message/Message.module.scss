@@ -31,6 +31,13 @@
     }
   }
 
+  .actionGroup {
+    justify-content: start;
+    .actionGroupAction {
+      margin: 0;
+    }
+  }
+
   &.sender {
     align-self: flex-end;
     --message-background: var(--message--background-color-sender);
@@ -60,6 +67,12 @@
         }
       }
     }
+
+    .action,
+    .actionGroup {
+      margin-inline-end: var(--message--tip-size-x);
+      align-self: end;
+    }
   }
 
   &.responder {
@@ -75,6 +88,11 @@
             var(--message-background);
         }
       }
+    }
+
+    .action,
+    .actionGroup {
+      margin-inline-start: var(--message--tip-size-x);
     }
   }
 
@@ -95,7 +113,7 @@
       order: 2;
     }
 
-    .action {
+    .headerAction {
       order: 3;
     }
   }
