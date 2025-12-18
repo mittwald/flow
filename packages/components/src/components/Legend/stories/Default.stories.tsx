@@ -14,6 +14,7 @@ const meta: Meta<typeof Legend> = {
       <LegendItem color="magenta">Item 4</LegendItem>
       <LegendItem color="tropical-indigo">Item 5</LegendItem>
       <LegendItem color="malachite">Item 6</LegendItem>
+      <LegendItem color="#555">Item 7</LegendItem>
     </Legend>
   ),
 };

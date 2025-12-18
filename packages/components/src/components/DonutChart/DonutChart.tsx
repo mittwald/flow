@@ -12,7 +12,7 @@ import { DonutChartLegend } from "@/components/DonutChart/components/DonutChartL
 export interface DonutChartSegment {
   value: number;
   title: string;
-  color?: CategoricalColor;
+  color?: CategoricalColor | (string & {});
   valueText?: string;
 }
 
