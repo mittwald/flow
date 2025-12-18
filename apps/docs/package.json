@@ -8,8 +8,7 @@
     "build:deps": "",
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "dev": "next dev",
-    "postinstall": "fumadocs-mdx",
-    "test:compile": "tsc --noEmit"
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@internationalized/date": "^3.10.0",
