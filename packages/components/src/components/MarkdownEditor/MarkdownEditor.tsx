@@ -6,8 +6,7 @@ import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { TunnelProvider } from "@mittwald/react-tunnel";
 import {
   modifyValueByMarkdownSyntax,
   scrollToCursor,
@@ -91,22 +90,9 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     onChange(newValue);
   };
 
-  const propsContext: PropsContext = {
-    Label: {
-      tunnelId: "label",
-    },
-  };
-
   return (
     <div className={rootClassName}>
       <TunnelProvider>
-        <TunnelExit id="label" />
-        <Toolbar
-          currentMode={mode}
-          isDisabled={isDisabled}
-          onModeChange={setMode}
-          onToolPressed={handleToolButtonPressed}
-        />
         <TextArea
           {...rest}
           aria-hidden={mode === "preview"}
@@ -130,9 +116,13 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
               {value}
             </Markdown>
           )}
-          <PropsContextProvider props={propsContext}>
-            {children}
-          </PropsContextProvider>
+          {children}
+          <Toolbar
+            currentMode={mode}
+            isDisabled={isDisabled}
+            onModeChange={setMode}
+            onToolPressed={handleToolButtonPressed}
+          />
         </TextArea>
       </TunnelProvider>
     </div>
