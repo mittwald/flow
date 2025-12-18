@@ -5,25 +5,17 @@ illustrated-message:
     value: "{size-rem.m}"
 
   # Primary
-  primary-icon-color:
-    value: "{primary.color.900}"
-  primary-heading-color:
-    value: "{heading.color}"
+  primary-content-color:
+    value: "{primary.color.1000}"
 
   # Danger
-  danger-icon-color:
+  danger-content-color:
     value: "{danger.color.900}"
-  danger-heading-color:
-    value: "{danger.color.1000}"
 
   # Dark
-  dark-icon-color:
+  dark-content-color:
     value: "{dark-plain-content-color}"
-  dark-heading-color:
-    value: "{heading.color-dark}"
 
   # Dark
-  light-icon-color:
+  light-content-color:
     value: "{light-plain-content-color}"
-  light-heading-color:
-    value: "{heading.color-light}"
