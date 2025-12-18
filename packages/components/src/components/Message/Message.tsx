@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -20,13 +20,18 @@ export interface MessageProps
     FlowComponentProps {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
+  color?: string;
 }
 
 /** @flr-generate all */
 export const Message = flowComponent("Message", (props) => {
-  const { type = "responder", children, className } = props;
+  const { type = "responder", children, className, color } = props;
 
   const rootClassName = clsx(styles.message, styles[type], className);
+
+  const style = color
+    ? ({ "--message-background": color } as CSSProperties)
+    : undefined;
 
   const propsContext: PropsContext = {
     Content: {
@@ -67,7 +72,9 @@ export const Message = flowComponent("Message", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <article className={rootClassName}>{children}</article>
+      <article className={rootClassName} style={style}>
+        {children}
+      </article>
     </PropsContextProvider>
   );
 });
