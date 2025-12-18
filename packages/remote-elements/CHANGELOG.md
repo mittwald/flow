@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.606](https://github.com/mittwald/flow/compare/0.2.0-alpha.605...0.2.0-alpha.606) (2025-12-18)
+
+### Features
+
+* **Message:** support custom color in message ([#2214](https://github.com/mittwald/flow/issues/2214)) ([47c6690](https://github.com/mittwald/flow/commit/47c669042282f43eff4c10f9f9b29ca4cd2e3aca))
+
 # [0.2.0-alpha.605](https://github.com/mittwald/flow/compare/0.2.0-alpha.604...0.2.0-alpha.605) (2025-12-18)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
