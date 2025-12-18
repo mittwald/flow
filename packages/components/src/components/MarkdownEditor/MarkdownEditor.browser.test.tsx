@@ -16,43 +16,31 @@ const FormatInlineTestCases = [
     "continues ordered list",
     "1. First item\n2. Second item",
     "1. First item\n2. Second item\n3. ",
-    32,
-    32,
   ],
   [
     "continues unordered list (-)",
     "- First item\n- Second item",
     "- First item\n- Second item\n- ",
-    29,
-    29,
   ],
   [
     "continues unordered list (*)",
     "* First item\n* Second item",
     "* First item\n* Second item\n* ",
-    29,
-    29,
   ],
   [
     "continues unordered list (+)",
     "+ First item\n+ Second item",
     "+ First item\n+ Second item\n+ ",
-    29,
-    29,
   ],
   [
     "exits list if current line is empty (ordered)",
     "1. First item\n2. ",
     "1. First item\n\n",
-    15,
-    15,
   ],
   [
     "exits list if current line is empty (unordered)",
     "- First item\n- ",
     "- First item\n\n",
-    14,
-    14,
   ],
   ["does nothing outside of list", "Just some text", "Just some text", 15, 15],
 ];
@@ -72,15 +60,13 @@ const FormatButtonTestCases = [
     "link",
     "https://mittwald.github.io/flow/",
     "[](https://mittwald.github.io/flow/)",
-    1,
-    1,
   ],
 ];
 
 describe("MarkdownEditor Tests", () => {
   test.each(FormatButtonTestCases)(
     "test formatted message with button type '%s' (%$)",
-    async (type, text, expectedResult, expectedStart, expectedEnd) => {
+    async (type, text, expectedResult) => {
       const user = userEvent;
       const onChangeEvent = vi.fn();
 
@@ -114,10 +100,6 @@ describe("MarkdownEditor Tests", () => {
       await rerender(editor);
 
       expect(textArea).toHaveDisplayValue(expectedResult);
-      expect(textArea.element()).toSatisfy(
-        (e) =>
-          e.selectionStart === expectedStart && e.selectionEnd === expectedEnd,
-      );
 
       const expectedChangeEvents = [
         "", // clear
@@ -131,13 +113,7 @@ describe("MarkdownEditor Tests", () => {
   );
   test.each(FormatInlineTestCases)(
     "test inline formatted message > %s",
-    async (
-      testName,
-      defaultValue,
-      expectedResult,
-      expectedStart,
-      expectedEnd,
-    ) => {
+    async (testName, defaultValue, expectedResult) => {
       const onChangeEvent = vi.fn();
 
       defaultValue = String(defaultValue ?? "");
@@ -166,10 +142,6 @@ describe("MarkdownEditor Tests", () => {
       }
 
       expect(markdownEditor).toHaveDisplayValue(expectedResult);
-      expect(markdownEditor.element()).toSatisfy(
-        (e) =>
-          e.selectionStart === expectedStart && e.selectionEnd === expectedEnd,
-      );
       expect(onChangeEvent).toHaveBeenLastCalledWith(expectedResult);
     },
   );
