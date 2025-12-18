@@ -3,7 +3,7 @@ import {
   nestingLevelKey,
   type NestingLevelProps,
 } from "@/lib/propsContext/nestedPropsContext/types";
-import { isFlowComponentName } from "@/index/internal";
+import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 
 export function isNestingProps(
   propsContext: unknown,
