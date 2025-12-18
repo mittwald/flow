@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.603](https://github.com/mittwald/flow/compare/0.2.0-alpha.602...0.2.0-alpha.603) (2025-12-18)
+
+### Bug Fixes
+
+* **List:** fix table hover color ([#2210](https://github.com/mittwald/flow/issues/2210)) ([f8efc33](https://github.com/mittwald/flow/commit/f8efc337fb4d544a356ddd182ff3db6cb364c5d8))
+
 # [0.2.0-alpha.602](https://github.com/mittwald/flow/compare/0.2.0-alpha.601...0.2.0-alpha.602) (2025-12-17)
 
 ### Bug Fixes
