@@ -20,6 +20,7 @@ export default () => {
       batchSize={2}
       hidePagination
       aria-label="Domains"
+      getItemId={(domain) => domain.id}
     >
       <List.StaticData data={domains} />
       <List.Item
