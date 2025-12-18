@@ -8,14 +8,13 @@ import { Section } from "@/components/Section";
 import { Flex } from "@/components/Flex";
 import { IconStar } from "@/components/Icon/components/icons";
 import { LayoutCard } from "@/components/LayoutCard";
-import {
-  Alert,
-  Align,
-  Button,
-  ContextualHelp,
+import Button from "@/components/Button";
+import Align from "@/components/Align";
+import ContextualHelp, {
   ContextualHelpTrigger,
-  CopyButton,
-} from "@/index/default";
+} from "@/components/ContextualHelp";
+import Alert from "@/components/Alert";
+import CopyButton from "@/components/CopyButton";
 
 const meta: Meta<typeof AccentBox> = {
   title: "Structure/AccentBox",

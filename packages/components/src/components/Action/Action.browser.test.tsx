@@ -4,10 +4,10 @@ import { type FC } from "react";
 import Action from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
-import { Modal } from "@/index/flr-universal";
 import Content from "@/components/Content/Content";
 import ActionGroup from "@/components/ActionGroup/ActionGroup";
 import Heading from "@/components/Heading/Heading";
+import Modal from "@/components/Modal";
 
 const asyncActionDuration = 700;
 const sleep = () =>
