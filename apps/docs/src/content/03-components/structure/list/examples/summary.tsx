@@ -23,7 +23,7 @@ export default () => {
       <ListSummary position="bottom">
         <Flex justify="end">
           <Text>
-            <b>Gesamt: 37,00 €</b>
+            <strong>Gesamt: 37,00 €</strong>
           </Text>
         </Flex>
       </ListSummary>
