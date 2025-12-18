@@ -37,7 +37,7 @@ const meta: Meta<typeof Chat> = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>
@@ -52,7 +52,7 @@ const meta: Meta<typeof Chat> = {
                 <Initials>John Doe</Initials>
               </Avatar>
               <Text>
-                <b>John Doe</b>
+                <strong>John Doe</strong>
               </Text>
             </Align>
           </Header>
@@ -83,7 +83,7 @@ export const WithUpload: Story = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>
@@ -120,7 +120,7 @@ export const WithForm: Story = {
                   <Initials>Max Mustermann</Initials>
                 </Avatar>
                 <Text>
-                  <b>Max Mustermann</b>
+                  <strong>Max Mustermann</strong>
                 </Text>
               </Align>
             </Header>
@@ -156,7 +156,7 @@ export const WithMarkdownEditor: Story = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>

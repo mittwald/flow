@@ -17,7 +17,12 @@ export function isRemoteComponentRendererProps(
 }
 
 export const extractTextFromFirstChild = (children: ReactNode) => {
+  if (Children.count(children) !== 1) {
+    return undefined;
+  }
+
   const firstChild = Children.toArray(children)[0];
+
   return typeof firstChild === "string"
     ? firstChild
     : isValidElement(firstChild) && isRemoteTextRenderProps(firstChild.props)

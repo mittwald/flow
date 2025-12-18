@@ -7,7 +7,7 @@ import {
 <Notification>
   <Heading>E-Mail-Adresse archiviert</Heading>
   <Text>
-    Die E-Mail-Adresse <b>example@mittwald.de</b> wurde
-    archiviert.
+    Die E-Mail-Adresse <strong>example@mittwald.de</strong>{" "}
+    wurde archiviert.
   </Text>
 </Notification>;

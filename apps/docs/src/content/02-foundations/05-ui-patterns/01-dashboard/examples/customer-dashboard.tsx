@@ -65,7 +65,7 @@ export default () => {
               </Button>
             </Header>
             <Text>
-              <b>Rechnung</b>
+              <strong>Rechnung</strong>
             </Text>
             <Text>
               Max Mustermann

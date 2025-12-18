@@ -18,7 +18,7 @@ import {
           <Initials>Max Mustermann</Initials>
         </Avatar>
         <Text>
-          <b>Max Mustermann</b>
+          <strong>Max Mustermann</strong>
         </Text>
       </Align>
     </Header>
@@ -39,7 +39,7 @@ import {
           <Initials>John Doe</Initials>
         </Avatar>
         <Text>
-          <b>John Doe</b>
+          <strong>John Doe</strong>
         </Text>
       </Align>
     </Header>
@@ -67,7 +67,7 @@ import {
           <Initials>Max Mustermann</Initials>
         </Avatar>
         <Text>
-          <b>Max Mustermann</b>
+          <strong>Max Mustermann</strong>
         </Text>
       </Align>
     </Header>
