@@ -98,7 +98,7 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
         observer.disconnect();
       };
     }
-  }, []);
+  }, [showEmptyView]);
 
   return (
     <Wrap if={height}>
@@ -106,7 +106,13 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
         style={{ height, flex: flexGrow ? 1 : undefined }}
         ref={chartContainerRef}
       >
-        <Recharts.ResponsiveContainer>
+        <Recharts.ResponsiveContainer
+          initialDimension={{
+            // fix warning on initial render
+            width: 1,
+            height: 1,
+          }}
+        >
           <Recharts.ComposedChart
             data={data}
             className={rootClassName}
