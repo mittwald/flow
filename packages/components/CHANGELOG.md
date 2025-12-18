@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.604](https://github.com/mittwald/flow/compare/0.2.0-alpha.603...0.2.0-alpha.604) (2025-12-18)
+
+### Bug Fixes
+
+* **Select:** update padding to match combo box ([#2212](https://github.com/mittwald/flow/issues/2212)) ([47d10b4](https://github.com/mittwald/flow/commit/47d10b45380e70d84a13e7c989a5758360823fcf))
+
 # [0.2.0-alpha.603](https://github.com/mittwald/flow/compare/0.2.0-alpha.602...0.2.0-alpha.603) (2025-12-18)
 
 ### Bug Fixes
