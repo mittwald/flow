@@ -47,6 +47,7 @@ export default () => {
       onAction={(domain) => {
         onSelected(domain, !isSelected(domain));
       }}
+      getItemId={(domain) => domain.id}
     >
       <List.StaticData data={domains} />
       <List.Item

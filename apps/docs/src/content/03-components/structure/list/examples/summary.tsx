@@ -18,6 +18,7 @@ export default () => {
       batchSize={2}
       hidePagination
       aria-label="Rechnungen"
+      getItemId={(invoice) => invoice.id}
     >
       <ListSummary position="bottom">
         <Flex justify="end">

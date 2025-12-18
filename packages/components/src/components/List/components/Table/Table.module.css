@@ -13,7 +13,7 @@
     background-color: var(--list-item--background-color--pressed);
   }
 
-  &:where(.hasAction) {
+  &.hasAction {
     cursor: default;
 
     &:where(:not(.isSelected)) {
