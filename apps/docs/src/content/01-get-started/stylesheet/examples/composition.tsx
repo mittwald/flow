@@ -4,7 +4,7 @@ import ExampleSvg from "@/content/01-get-started/stylesheet/examples/components/
   <h3 className="flow--heading flow--heading--s flow--alert--heading">
     <span className="flow--heading--heading-text">
       <ExampleSvg className="flow--icon flow--alert-icon flow--heading--icon " />
-      E-Mail Adresse wurde archiviert
+      E-Mail-Adresse wurde archiviert
     </span>
   </h3>
   <div className="flow--alert--content">
