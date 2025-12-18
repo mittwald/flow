@@ -1,7 +1,17 @@
 import path from "path";
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  plugins: [react()],
+  optimizeDeps: {
+    include: [
+      "react/jsx-dev-runtime",
+      "react-error-boundary",
+      "react-dom/client",
+      "@mittwald/**/*",
+    ],
+  },
   resolve: {
     alias: [
       {
