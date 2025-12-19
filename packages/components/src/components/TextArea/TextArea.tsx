@@ -5,11 +5,11 @@ import styles from "./TextArea.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface TextAreaProps
   extends Omit<
@@ -43,7 +43,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     allowVerticalResize,
     allowHorizontalResize,
     ...rest
-  } = props;
+  } = useControlledHostValueProps(props);
 
   let { allowResize } = props;
   if (allowVerticalResize) {
@@ -123,25 +123,20 @@ export const TextArea = flowComponent("TextArea", (props) => {
   };
 
   const input = (
-    <ReactAriaControlledValueFix
-      inputContext={Aria.TextAreaContext}
-      props={props}
-    >
-      <Aria.TextArea
-        rows={rows}
-        aria-hidden={props["aria-hidden"]}
-        placeholder={placeholder}
-        className={rootClassName}
-        ref={localRef}
-        onChange={updateHeight}
-        style={{
-          minHeight: getHeight(rows),
-          maxHeight: verticallyResizable
-            ? undefined
-            : getHeight(autoResizeMaxRows),
-        }}
-      />
-    </ReactAriaControlledValueFix>
+    <Aria.TextArea
+      rows={rows}
+      aria-hidden={props["aria-hidden"]}
+      placeholder={placeholder}
+      className={rootClassName}
+      ref={localRef}
+      onChange={updateHeight}
+      style={{
+        minHeight: getHeight(rows),
+        maxHeight: verticallyResizable
+          ? undefined
+          : getHeight(autoResizeMaxRows),
+      }}
+    />
   );
 
   const {

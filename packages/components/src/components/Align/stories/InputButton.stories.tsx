@@ -10,7 +10,7 @@ import { TextArea } from "@/components/TextArea";
 import { Select } from "@/components/Select";
 import { Option } from "@/components/Option";
 import { useForm } from "react-hook-form";
-import { Form } from "@/integrations/react-hook-form";
+import { Form, SubmitButton } from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 
 const meta: Meta<typeof Align> = {
@@ -85,7 +85,7 @@ export const WithForm: Story = {
           <TextField>
             <Label>Mail address</Label>
           </TextField>
-          <Button type="submit">Hinzufügen</Button>
+          <SubmitButton>Hinzufügen</SubmitButton>
         </Align>
       </Form>
     );

@@ -25,15 +25,15 @@ import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 
-export class ReactTable<T> {
-  public readonly list: List<T>;
+export class ReactTable<T, TMeta = unknown> {
+  public readonly list: List<T, TMeta>;
   public readonly table: Table<T>;
   public readonly sortingState: ColumnSort[];
   public readonly updateSortingState: Dispatch<SetStateAction<ColumnSort[]>>;
 
   private constructor(
-    list: List<T>,
-    onChange?: OnListChanged<T>,
+    list: List<T, TMeta>,
+    onChange?: OnListChanged<T, TMeta>,
     tableOptions: Partial<TableOptions<T>> = {},
   ) {
     this.list = list;
@@ -54,12 +54,12 @@ export class ReactTable<T> {
     return this.table.getState().globalFilter;
   }
 
-  public static useNew<T>(
-    list: List<T>,
-    onChange?: OnListChanged<T>,
+  public static useNew<T, TMeta = unknown>(
+    list: List<T, TMeta>,
+    onChange?: OnListChanged<T, TMeta>,
     tableOptions: Partial<TableOptions<T>> = {},
-  ): ReactTable<T> {
-    return new ReactTable<T>(list, onChange, tableOptions);
+  ): ReactTable<T, TMeta> {
+    return new ReactTable<T, TMeta>(list, onChange, tableOptions);
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {
@@ -69,7 +69,7 @@ export class ReactTable<T> {
   }
 
   private useReactTable(
-    onChange?: OnListChanged<T>,
+    onChange?: OnListChanged<T, TMeta>,
     tableOptions: Partial<TableOptions<T>> = {},
   ): Table<T> {
     const data = this.list.loader.useData();

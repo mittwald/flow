@@ -1,33 +1,12 @@
-import {
-  PropsContextProvider,
-  usePropsContext,
-} from "@/lib/propsContext/propsContext";
-import { PropsContextLevelProvider } from "@/lib/propsContext/inherit/PropsContextLevelProvider";
-import { useMemo, type FC, type PropsWithChildren } from "react";
-import type { FlowComponentName } from "@/components/propTypes";
-import type { PropsContext } from "@/index/internal";
+import { PropsContextProvider } from "@/lib/propsContext/propsContext";
+import { type FC, type PropsWithChildren } from "react";
 
-export interface ClearPropsContextProps extends PropsWithChildren {
-  keep?: FlowComponentName;
-}
+export type ClearPropsContextProps = PropsWithChildren;
 
-export const ClearPropsContext: FC<ClearPropsContextProps> = (props) => {
-  const { children, keep } = props;
-
-  const parentPropsContext = usePropsContext();
-
-  const withKeptComponentProps: PropsContext = useMemo(
-    () => (keep ? parentPropsContext[keep] : undefined) ?? {},
-    [keep, parentPropsContext],
-  );
-
-  return (
-    <PropsContextLevelProvider mode="reset">
-      <PropsContextProvider value={withKeptComponentProps}>
-        {children}
-      </PropsContextProvider>
-    </PropsContextLevelProvider>
-  );
+/** @flr-generate all */
+export const ClearPropsContext: FC<PropsWithChildren> = (props) => {
+  const { children } = props;
+  return <PropsContextProvider value={{}}>{children}</PropsContextProvider>;
 };
 
 export default ClearPropsContext;

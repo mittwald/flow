@@ -3,7 +3,7 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
-import { useProps } from "@/index/default";
+import { useProps } from "@/lib/hooks/useProps";
 
 export const useFieldError = (tunnelIdFromProps?: string) => {
   const id = useId();
@@ -12,7 +12,6 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
 
   const fieldErrorCapturePropsContext: PropsContext = {
     FieldError: {
-      ___inherit: "preserve",
       tunnelId,
       className: formFieldStyles.fieldError,
     },
@@ -22,7 +21,6 @@ export const useFieldError = (tunnelIdFromProps?: string) => {
     () => (props) => {
       return (
         <PropsContextProvider
-          levelMode="keep"
           props={fieldErrorCapturePropsContext}
           dependencies={[tunnelId]}
         >

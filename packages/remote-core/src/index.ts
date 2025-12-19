@@ -1,3 +1,4 @@
+export { RemoteReceiver } from "@mittwald/remote-dom-core/receivers";
 export {
   RemoteElement,
   RemoteEvent,

@@ -25,7 +25,6 @@ export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementPr
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
       isDisabled: {},
       isReadOnly: {},
       isSelected: {},

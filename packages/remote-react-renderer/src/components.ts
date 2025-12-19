@@ -17,6 +17,7 @@ const htmlComponentsMap = {
   ol: createRemoteComponentRenderer(elementFactory("ol")),
   li: createRemoteComponentRenderer(elementFactory("li")),
   small: createRemoteComponentRenderer(elementFactory("small")),
+  i: createRemoteComponentRenderer(elementFactory("i")),
   br: createRemoteComponentRenderer(
     elementFactory("br", { isVoidElement: true }),
   ),
@@ -43,10 +44,6 @@ const flowComponentsMap = {
   ),
   "flr-clear-props-context-content": createFlowRemoteComponentRenderer(
     "ClearPropsContextContent",
-    SlotRootWrapper,
-  ),
-  "flr-clear-props-context": createFlowRemoteComponentRenderer(
-    "ClearPropsContext",
     SlotRootWrapper,
   ),
 };

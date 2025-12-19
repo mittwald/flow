@@ -10,16 +10,15 @@ import type {
   RefAttributes,
   FunctionComponent,
 } from "react";
-import { cloneElement, memo, useMemo } from "react";
+import { cloneElement, memo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
-import { increaseNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
-import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
-import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -43,7 +42,7 @@ type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>
 >;
 
-type FlowComponentProvisionType = "provider" | "ui";
+export type FlowComponentProvisionType = "provider" | "ui" | "layout";
 
 interface Options {
   type?: FlowComponentProvisionType;
@@ -60,9 +59,6 @@ export function flowComponent<C extends FlowComponentName>(
 
   const { type = "ui", isRemoteComponent = false } = options;
 
-  const propsContextLevelMode: PropsContextLevelMode =
-    type === "ui" ? "increment" : "keep";
-
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
@@ -76,10 +72,6 @@ export function flowComponent<C extends FlowComponentName>(
     >;
 
     const componentProps = useComponentPropsContext(componentName);
-    const componentPropsToUse = useMemo(
-      () => increaseNestingLevel(componentProps ?? {}),
-      [componentProps],
-    );
 
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
@@ -87,29 +79,35 @@ export function flowComponent<C extends FlowComponentName>(
       <MemoizedImplementationComponentType {...implementationTypeProps} />
     );
 
-    if (isRemoteComponent) {
-      element = (
-        <ComponentPropsContextProvider
-          componentProps={componentPropsToUse}
-          levelModel={propsContextLevelMode}
-        >
-          {element}
-        </ComponentPropsContextProvider>
-      );
-    } else {
+    element = (
+      <ComponentPropsContextProvider componentProps={componentProps}>
+        {element}
+      </ComponentPropsContextProvider>
+    );
+
+    if (type === "ui") {
       /**
-       * In case of a Flow component that does not have a remote counterpart
-       * (like the List component), the ComponentPropsContext must be applied on
-       * the host side, so that nesting and inheritance is working correctly.
+       * Protect the inside of UI components for accidental prop changes through
+       * the Props Context.
        */
-      element = (
-        <ComponentPropsContextProviderView
-          componentProps={componentPropsToUse}
-          levelModel={propsContextLevelMode}
-        >
-          {element}
-        </ComponentPropsContextProviderView>
-      );
+      if (isRemoteComponent) {
+        element = <ClearPropsContext>{element}</ClearPropsContext>;
+      } else {
+        /**
+         * In case of a UI component that does not have a remote counterpart
+         * (like the Modal component), the <ClearPropsContext> must be
+         * additionally applied on the host side by using the
+         * <ClearPropsContextView>.
+         *
+         * This prevents Props Contexts created by parent components on the host
+         * side affecting the children of this UI component.
+         */
+        element = (
+          <ClearPropsContext>
+            <ClearPropsContextView>{element}</ClearPropsContextView>
+          </ClearPropsContext>
+        );
+      }
     }
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {

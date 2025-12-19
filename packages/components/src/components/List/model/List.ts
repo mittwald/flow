@@ -20,7 +20,7 @@ import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
 import z from "zod";
 
-export class List<T> {
+export class List<T, TMeta = unknown> {
   public static readonly viewModeSettingsStorageSchema = z
     .enum(["list", "table", "tiles"])
     .optional();
@@ -41,12 +41,14 @@ export class List<T> {
   public readonly setViewMode: (viewMode: ListViewMode) => void;
   public readonly supportsSettingsStorage: boolean;
   public readonly settingStorageKey?: string;
+  public metadata?: TMeta;
   private readonly settingsStore?: SettingsStore;
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
   private readonly sortingStorageKey?: string;
+  public readonly loadingItemsCount;
 
-  public constructor(shape: ListShape<T>) {
+  public constructor(shape: ListShape<T, TMeta>) {
     const {
       settingStorageKey,
       itemView,
@@ -61,6 +63,7 @@ export class List<T> {
       getItemId,
       defaultViewMode,
       accordion = false,
+      loadingItemsCount = 5,
       ...componentProps
     } = shape;
 
@@ -89,6 +92,7 @@ export class List<T> {
     this.loader = IncrementalLoader.useNew<T>(this, loader);
     this.onAction = onAction;
     this.getItemId = getItemId;
+    this.loadingItemsCount = loadingItemsCount;
     this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,
@@ -128,8 +132,10 @@ export class List<T> {
     return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
   }
 
-  public static useNew<T>(shape: ListShape<T>): List<T> {
-    return new List<T>(shape);
+  public static useNew<T, TMeta = unknown>(
+    shape: ListShape<T, TMeta>,
+  ): List<T, TMeta> {
+    return new List<T, TMeta>(shape);
   }
 
   public storeFilterDefaultSettings() {

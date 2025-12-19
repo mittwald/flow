@@ -24,14 +24,25 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   const trackedSubmitCount = useRef(0);
   const submitHandlerResultRef = useRef<unknown>(null);
 
+  const currentActionState = action.state.useValue();
+  const lastActionState = useRef<string>(currentActionState);
+
+  useEffect(() => {
+    if (
+      currentActionState === "isIdle" &&
+      lastActionState.current === "isSucceeded"
+    ) {
+      callAfterSubmitFunction(submitHandlerResultRef.current);
+    }
+    lastActionState.current = currentActionState;
+  }, [currentActionState]);
+
   useEffect(() => {
     return form.subscribe({
       formState: {
         errors: true,
-        isValid: true,
       },
       callback: ({
-        isValid,
         isSubmitted = false,
         isSubmitSuccessful = false,
         submitCount = 0,
@@ -49,10 +60,6 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
         if (isSubmitted) {
           if (isSubmitSuccessful) {
             void action.state.onSucceeded();
-
-            if (isValid) {
-              callAfterSubmitFunction(submitHandlerResultRef.current);
-            }
           } else {
             const hasFailedWithError =
               isSubmitted && errors && Object.entries(errors).length > 0
@@ -64,7 +71,7 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
         }
       },
     });
-  }, [form.subscribe, action.state]);
+  }, [form.subscribe]);
 
   const registerSubmitResult = (result: unknown) => {
     if (isPromise(result)) {
@@ -80,6 +87,5 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   return {
     action,
     registerSubmitResult,
-    callAfterSubmitFunction,
   } as const;
 };

@@ -21,6 +21,7 @@ export const ListItemView = (props: ListItemViewProps) => {
   const propsContext: PropsContext = {
     ContextMenu: {
       tunnelId: "button",
+      placement: "bottom right",
       wrapWith: <OptionsButton className={styles.action} />,
     },
     Button: {

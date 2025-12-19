@@ -1,4 +1,9 @@
 {
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
   "extends": "@mittwald/typescript-config/nextjs.json",
   "include": [
     "${configDir}/src/**/*.tsx",
@@ -7,5 +12,6 @@
     "${configDir}/.next/types/**/*.ts",
     ".next/types/**/*.ts",
     "./types.d.ts"
-  ]
+  ],
+  "moduleResolution": "bundler"
 }

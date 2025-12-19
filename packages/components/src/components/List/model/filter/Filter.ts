@@ -31,7 +31,7 @@ const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public static readonly settingsStorageSchema = z
-    .record(z.array(z.string()))
+    .record(z.string().or(z.symbol()), z.array(z.string()))
     .optional();
 
   private _values?: FilterValue[] | undefined;

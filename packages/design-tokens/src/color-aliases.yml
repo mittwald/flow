@@ -425,11 +425,11 @@ warning-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{info.color.100}"
+    value: "{warning.color.100}"
   pressed:
-    value: "{info.color.200}"
+    value: "{warning.color.200}"
 warning-plain-content-color:
-  value: "{info.color.800}"
+  value: "{warning.color.800}"
 
 # Neutral Solid
 neutral-solid-background-color:

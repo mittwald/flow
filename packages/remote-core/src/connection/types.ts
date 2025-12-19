@@ -1,6 +1,7 @@
 import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
+export type { RemoteConnection } from "@mittwald/remote-dom-core";
 
 export interface NavigationState {
   pathname: string;

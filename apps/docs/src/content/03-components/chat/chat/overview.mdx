@@ -4,9 +4,6 @@ Verwende `<Chat />`, um einen Chat darzustellen.
 
 Der Chat kombiniert dabei den
 [MessageThread](/03-components/chat/message-thread/overview) mit einem Textinput.
-Letzterer ordnet mithilfe von [Align](/03-components/structure/align/overview) einen
-[Button](/03-components/actions/button/overview) und eine
-[TextArea](/03-components/form-controls/text-area/overview) horizontal zueinander an.
 Mit der `height` Property lässt sich die Höhe des Chats festlegen. Gleichzeitig
 sorgt sie dafür, dass die Texteingabe am unteren Rand platziert wird.
 
@@ -18,11 +15,7 @@ sorgt sie dafür, dass die Texteingabe am unteren Rand platziert wird.
 
 ## Upload
 
-Der Chat lässt sich durch einen Upload erweitern. Dazu kann ein
-[Button](/03-components/actions/button/overview) mit einem
-[Icon](/03-components/content/icon/overview) in der Variante **Plain** ergänzt werden.
-Die hochgeladenen Files lassen sich mit der
-[FileCard](/03-components/upload/file-card/overview) darstellen.
+Ein Chat kann um eine Uploadfunktion erweitert werden. Dafür sollte ein [FileField](/03-components/form-controls/file-field/overview) genutzt werden, über das User Dateien auswählen können. Die hochgeladenen Dateien können dann in einer [FileCardList](/03-components/upload/file-card-list/overview) dargestellt werden.
 
 <LiveCodeEditor example="upload" editorCollapsed />
 

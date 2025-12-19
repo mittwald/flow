@@ -33,7 +33,6 @@ test.each<{
   parentContext: PropsContext;
   context: PropsContext;
   merged: PropsContext;
-  currentLevel?: number;
 }>([
   { parentContext: {}, context: {}, merged: {} },
   {
@@ -51,7 +50,6 @@ test.each<{
   },
   // Inheritance
   {
-    currentLevel: 0,
     parentContext: {
       Button: {
         type: "submit",
@@ -65,44 +63,15 @@ test.each<{
     },
   },
   {
-    currentLevel: 1,
     parentContext: {
       Button: {
         type: "submit",
-      },
-    },
-    context: {},
-    merged: {},
-  },
-  {
-    currentLevel: 1,
-    parentContext: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
       },
     },
     context: {},
     merged: {
       Button: {
         type: "submit",
-        ___inherit: true,
-      },
-    },
-  },
-  {
-    currentLevel: 2,
-    parentContext: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
-      },
-    },
-    context: {},
-    merged: {
-      Button: {
-        type: "submit",
-        ___inherit: true,
       },
     },
   },
@@ -124,7 +93,6 @@ test.each<{
     },
   },
   {
-    currentLevel: 1,
     parentContext: {
       Button: {
         type: "submit",
@@ -188,8 +156,8 @@ test.each<{
     parentContext: {
       Button: {
         type: "submit",
+        ___nestingLevel: 1,
       },
-      ___nestingLevel: 1,
     },
     context: {
       Button: {
@@ -198,6 +166,26 @@ test.each<{
     },
     merged: {
       Button: {
+        type: "submit",
+        ___nestingLevel: 1,
+      },
+    },
+  },
+  {
+    parentContext: {
+      Button: {
+        type: "submit",
+        ___nestingLevel: 2,
+      },
+    },
+    context: {
+      Button: {
+        type: "reset",
+      },
+    },
+    merged: {
+      Button: {
+        ___nestingLevel: 2,
         type: "submit",
       },
     },
@@ -207,35 +195,37 @@ test.each<{
       Button: {
         type: "submit",
       },
-      ___nestingLevel: 2,
+      ___nestingLevel: 1,
     },
     context: {
       Button: {
         type: "reset",
       },
+      ___nestingLevel: 1,
     },
     merged: {
       Button: {
-        type: "submit",
+        type: "reset",
       },
     },
   },
   {
+    // works for classNames, which are not merged
     parentContext: {
       Button: {
-        type: "submit",
+        className: "parent",
+        ___nestingLevel: 1,
       },
-      ___nestingLevel: 1,
     },
     context: {
       Button: {
-        type: "reset",
+        className: "context",
+        ___nestingLevel: 0,
       },
-      ___nestingLevel: 1,
     },
     merged: {
       Button: {
-        type: "reset",
+        className: "parent",
       },
     },
   },
@@ -292,14 +282,27 @@ test.each<{
   },
 ])(
   "Expect merged result is correct for test case: %o",
-  ({
-    parentContext: first,
-    context: second,
-    merged: expected,
-    currentLevel,
-  }) => {
-    const merged = mergePropsContext(first, second, currentLevel);
-    delete merged[nestingLevelKey];
+  ({ parentContext: first, context: second, merged: expected }) => {
+    const merged = mergePropsContext(first, second);
+
+    const removeNestingLevelKeyDeep = (something: unknown) => {
+      if (Array.isArray(something)) {
+        something.map(removeNestingLevelKeyDeep);
+      } else if (typeof something === "object" && something !== null) {
+        if (nestingLevelKey in something) {
+          delete something[nestingLevelKey];
+        }
+        Object.values(something).forEach((value) => {
+          removeNestingLevelKeyDeep(value);
+        });
+      } else {
+        return something;
+      }
+    };
+
+    removeNestingLevelKeyDeep(expected);
+    removeNestingLevelKeyDeep(merged);
+
     expect(merged).toEqual(expected);
   },
 );

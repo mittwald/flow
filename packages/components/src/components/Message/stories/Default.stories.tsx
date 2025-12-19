@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Message } from "@/components/Message";
 import { Header } from "@/components/Header";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
@@ -32,7 +31,7 @@ const meta: Meta<typeof Message> = {
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
-            <b>Max Mustermann</b>
+            <strong>Max Mustermann</strong>
             Organisationsinhaber
           </Text>
         </Align>
@@ -61,4 +60,12 @@ export const MessageOnly: Story = {
       </Content>
     </Message>
   ),
+};
+
+export const CustomColor: Story = {
+  args: { color: "#ffeedd" },
+};
+
+export const SenderCustomColor: Story = {
+  args: { type: "sender", color: "#ffeedd" },
 };

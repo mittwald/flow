@@ -22,7 +22,7 @@ export type PropertyValueRenderMethod<TMatcherValue> = (
   prop: NonNullable<ItemType<TMatcherValue>>,
 ) => ReactNode;
 
-export type OnListChanged<T> = (list: List<T>) => void;
+export type OnListChanged<T, TMeta = unknown> = (list: List<T, TMeta>) => void;
 
 export interface ListSupportedComponentProps extends MultipleSelection {
   "aria-labelledby"?: string;
@@ -30,7 +30,8 @@ export interface ListSupportedComponentProps extends MultipleSelection {
   selectionBehavior?: SelectionBehavior;
 }
 
-export interface ListShape<T> extends ListSupportedComponentProps {
+export interface ListShape<T, TMeta = unknown>
+  extends ListSupportedComponentProps {
   settingStorageKey?: string;
 
   loader?: IncrementalLoaderShape<T>;
@@ -43,8 +44,9 @@ export interface ListShape<T> extends ListSupportedComponentProps {
 
   onAction?: ItemActionFn<T>;
   accordion?: boolean;
+  loadingItemsCount?: number;
   getItemId?: GetItemId<T>;
-  onChange?: OnListChanged<T>;
+  onChange?: OnListChanged<T, TMeta>;
   defaultViewMode?: ListViewMode;
 }
 

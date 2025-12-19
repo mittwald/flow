@@ -14,8 +14,12 @@ nx-cloud.env
 apps/docs/src/lib/liveCode/dynamicImports.ts
 .idea/material_theme_project_new.xml
 coverage
+.vitest-attachments
 packages/components/out
 .nx/workspace-data
 coverage/*.json
-packages/remote-react-components/src/tests/__screenshots__
 .vitest
+# macOS system files
+.DS_Store
+**/.DS_Store
+packages/remote-react-components/.vitest-attachments

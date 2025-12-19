@@ -1,7 +1,7 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
-import { type FC, type PropsWithChildren } from "react";
+import React, { type FC, type PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
@@ -12,6 +12,7 @@ import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import wave from "../../assets/flow-wave.svg";
 import Header from "@/app/_components/layout/Header";
 import ScrollToHash from "@/app/_components/ScrollToHash";
+import Footer from "@/app/_components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -30,12 +31,14 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
           <Matomo />
           <NotificationProvider>
             <Image src={wave.src} className={styles.wave} />
-
-            <Header docs={docs.map((mdx) => mdx.serialize())} />
             <div className={styles.wrapper}>
-              <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
+              <Header docs={docs.map((mdx) => mdx.serialize())} />
+              <div className={styles.mainWrapper}>
+                <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
 
-              <main className={styles.main}>{props.children}</main>
+                <main className={styles.main}>{props.children}</main>
+              </div>
+              <Footer />
             </div>
           </NotificationProvider>
         </RouterProvider>

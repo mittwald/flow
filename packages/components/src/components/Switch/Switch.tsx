@@ -7,13 +7,12 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useObjectRef } from "@react-aria/utils";
 import labelStyles from "../Label/Label.module.scss";
-import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { useObjectRef } from "react-aria";
 
 export interface SwitchProps
-  extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
-    FlowComponentProps<HTMLLabelElement> {
+  extends PropsWithChildren<Omit<Aria.SwitchProps, "children" | "inputRef">>,
+    FlowComponentProps<HTMLInputElement> {
   /**
    * Whether the label should appear before or after the switch. @default
    * "trailing"
@@ -28,7 +27,6 @@ export const Switch = flowComponent("Switch", (props) => {
     className,
     labelPosition = "trailing",
     ref,
-    inputRef,
     ...rest
   } = props;
 
@@ -38,12 +36,7 @@ export const Switch = flowComponent("Switch", (props) => {
     styles[`label-${labelPosition}`],
   );
 
-  const localSwitchRef = useObjectRef(ref);
-  const localInputRef = useObjectRef(inputRef);
-
-  useMakeFocusable(localSwitchRef, () => {
-    localInputRef.current?.focus();
-  });
+  const objectRef = useObjectRef(ref);
 
   const {
     FieldErrorView,
@@ -63,12 +56,7 @@ export const Switch = flowComponent("Switch", (props) => {
   return (
     <div {...fieldProps}>
       <FieldErrorCaptureContext>
-        <Aria.Switch
-          {...rest}
-          className={rootClassName}
-          ref={localSwitchRef}
-          inputRef={localInputRef}
-        >
+        <Aria.Switch {...rest} className={rootClassName} inputRef={objectRef}>
           {({ isSelected }) => (
             <PropsContextProvider props={propsContext}>
               <div className={styles.track}>

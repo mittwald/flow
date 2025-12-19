@@ -23,6 +23,7 @@ export default () => {
       aria-label="Domains"
       hidePagination
       defaultViewMode="tiles"
+      getItemId={(domain) => domain.id}
     >
       <DomainList.StaticData data={domains} />
       <DomainList.Item

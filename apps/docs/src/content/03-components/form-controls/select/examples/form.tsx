@@ -1,5 +1,4 @@
 import {
-  Button,
   Label,
   Option,
   Section,
@@ -8,6 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -31,7 +31,7 @@ export default () => {
             <Option value="typo3">TYPO3</Option>
           </Select>
         </Field>
-        <Button type="submit">Speichern</Button>
+        <SubmitButton>Speichern</SubmitButton>
       </Form>
     </Section>
   );

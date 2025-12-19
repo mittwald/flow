@@ -2,7 +2,7 @@ import type { ComponentProps, FC } from "react";
 import React from "react";
 import styles from "./SkeletonText.module.scss";
 
-export interface SkeletonTextProps extends ComponentProps<"div"> {
+export interface SkeletonTextProps extends ComponentProps<"span"> {
   /** The width of the skeleton text. */
   width?: string;
 }
@@ -11,7 +11,7 @@ export interface SkeletonTextProps extends ComponentProps<"div"> {
 export const SkeletonText: FC<SkeletonTextProps> = (props) => {
   const { width, style = {}, ...rest } = props;
   return (
-    <div
+    <span
       aria-hidden
       className={styles.skeletonText}
       style={{ width, ...style }}
