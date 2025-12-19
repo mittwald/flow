@@ -19,6 +19,7 @@
       "inputs": ["components-src"]
     },
     "build:docs-properties": {
+      "dependsOn": ["^build"],
       "cache": true,
       "inputs": [
         "components-src",

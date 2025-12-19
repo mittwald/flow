@@ -211,7 +211,6 @@ export const PasswordCreationField = flowComponent(
       },
       Label: {
         ...fieldPropsContext.Label,
-        tunnelId: "label",
         children: dynamic((localProps) => {
           return (
             <>
@@ -256,7 +255,7 @@ export const PasswordCreationField = flowComponent(
                 isEmptyValue,
               ]}
             >
-              <TunnelExit id="label" />
+              {children}
               <Aria.Group
                 isDisabled={isDisabled}
                 className={clsx(styles.inputGroup)}
@@ -278,7 +277,6 @@ export const PasswordCreationField = flowComponent(
                   validationResultState={stateFromValidationResult}
                 />
               </Aria.Group>
-              {children}
               {isValidFromValidationResult && (
                 <FieldDescription>{latestValidationErrorText}</FieldDescription>
               )}

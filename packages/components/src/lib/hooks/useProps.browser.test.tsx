@@ -16,7 +16,7 @@ import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
 import type { PropsContext } from "@/lib/propsContext/types";
 import type { TestComponentProps } from "@/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
-import { flowComponent } from "@/index/internal";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 

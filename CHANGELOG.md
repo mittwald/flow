@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.607](https://github.com/mittwald/flow/compare/0.2.0-alpha.606...0.2.0-alpha.607) (2025-12-18)
+
+### Bug Fixes
+
+* **Badge:** also use light color in close button when set ([5fd4a93](https://github.com/mittwald/flow/commit/5fd4a93fb459fd3a26b412be0c78b27275c1aba2))
+* **Button:** fix wrapped text alignment in Remote Button ([c025abe](https://github.com/mittwald/flow/commit/c025abe299212563b74a8fef7239a31282097867))
+* **CartesianChart:** fix warning on initial render ([809fd8e](https://github.com/mittwald/flow/commit/809fd8e9f8319a2ade07a6e39e65df1e454285c7))
+* **Donut:** fix Donut shows no text content in remote ([b7ff214](https://github.com/mittwald/flow/commit/b7ff2142836884ef8866fc22e32eac82da3ef893))
+* **Initials:** fix initials not showing content in remote ([6b54f03](https://github.com/mittwald/flow/commit/6b54f035508c07a65460b4c71d6a611158142ab5))
+* **LabeledValue:** do not enforce plain variant in child Buttons ([714d1d8](https://github.com/mittwald/flow/commit/714d1d8d3155879933629e72a8bc301864c963d7))
+* **MarkdownEditor:** fix margins of Label and error message ([eaf4859](https://github.com/mittwald/flow/commit/eaf48595db47eb3b37510057faee58c8b1802bff))
+* **Markdown:** use correct color in CodeBlocks ([829bcad](https://github.com/mittwald/flow/commit/829bcad78a807b8a076890e4b6c1e54b75502c6d))
+* **Modal:** fix heading is not correctly associated when using controller ([f3a2bb8](https://github.com/mittwald/flow/commit/f3a2bb848b265cb68a9827b05564d1e637fbaf8b))
+* **PasswordCreationField:** fix label not correctly associated to field ([28eec52](https://github.com/mittwald/flow/commit/28eec52500230c9a5b391e9081c128d02b403c52))
+* **Slider:** fix Sliders collecting all labels from parents using TunnelProvider ([0eee2fb](https://github.com/mittwald/flow/commit/0eee2fbe5004c086adb3d0a7ae6ea684ab0954e7))
+
+### Features
+
+* **Flex:** by-pass div props ([7399fb3](https://github.com/mittwald/flow/commit/7399fb33899f370a4381bac5fb8c4907a6765351))
+* **Remote:** support <i> in remote context ([a8bea54](https://github.com/mittwald/flow/commit/a8bea54def91c59cdcf39e6fde2c0be68d90c71b))
+
 # [0.2.0-alpha.606](https://github.com/mittwald/flow/compare/0.2.0-alpha.605...0.2.0-alpha.606) (2025-12-18)
 
 ### Features

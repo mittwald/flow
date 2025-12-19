@@ -26,7 +26,6 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      variant: "plain",
       size: "s",
     },
     Link: {

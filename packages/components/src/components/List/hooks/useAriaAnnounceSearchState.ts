@@ -1,9 +1,9 @@
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import { announce } from "@react-aria/live-announcer";
-import { useList } from "@/index/default";
 import { useDebounceCallback } from "usehooks-ts";
 import { useEffect } from "react";
+import { useList } from "@/components/List/hooks/useList";
 
 const announceDebounceMs = 600;
 

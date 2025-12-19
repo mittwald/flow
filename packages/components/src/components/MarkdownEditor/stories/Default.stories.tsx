@@ -10,7 +10,7 @@ const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
   component: MarkdownEditor,
   args: { placeholder: "Write a message..." },
-  render: (props) => <MarkdownEditor {...props} />,
+  render: (props) => <MarkdownEditor aria-label="Message" {...props} />,
 };
 export default meta;
 

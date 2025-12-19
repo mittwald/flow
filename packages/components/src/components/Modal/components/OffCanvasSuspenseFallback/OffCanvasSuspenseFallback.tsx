@@ -1,4 +1,4 @@
-import { useAriaAnnounceSuspense } from "@/index/default";
+import { useAriaAnnounceSuspense } from "@/components/Action";
 import FlexView from "@/views/FlexView";
 import LoadingSpinnerView from "@/views/LoadingSpinnerView";
 import type { FC } from "react";
