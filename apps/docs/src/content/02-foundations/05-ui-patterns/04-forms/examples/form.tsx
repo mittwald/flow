@@ -5,14 +5,17 @@ import {
   Heading,
   Label,
   Section,
+  Segment,
+  SegmentedControl,
   TextField,
+  Text,
 } from "@mittwald/flow-react-components";
 import {
   Form,
   SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
 export default () => {
   const form = useForm<{
@@ -23,6 +26,9 @@ export default () => {
     zip: string;
     city: string;
     phone?: string;
+    paymentMethod: "invoice" | "debit";
+    accountHolder: string;
+    iban: string;
   }>({
     defaultValues: {
       firstName: "",
@@ -30,10 +36,18 @@ export default () => {
       street: "",
       houseNumber: "",
       phone: "",
+      paymentMethod: "invoice",
+      accountHolder: "",
+      iban: "",
     },
   });
 
   const Field = typedField(form);
+
+  const watchedPaymentMethod = useWatch({
+    control: form.control,
+    name: "paymentMethod",
+  });
 
   return (
     <Form
@@ -41,7 +55,51 @@ export default () => {
       onSubmit={() => console.log("submitted")}
     >
       <Section>
-        <Heading>Name</Heading>
+        <Heading>Zahlungsart</Heading>
+        <Field name="paymentMethod">
+          <SegmentedControl aria-label="Zahlungsart">
+            <Segment value="invoice">Rechnung</Segment>
+            <Segment value="debit">Lastschrift</Segment>
+          </SegmentedControl>
+        </Field>
+
+        {watchedPaymentMethod === "invoice" && (
+          <Text>
+            Bitte bezahle deine Rechnungen innerhalb von 14
+            Tagen.
+          </Text>
+        )}
+
+        {watchedPaymentMethod === "debit" && (
+          <>
+            <ColumnLayout m={[1, 1]}>
+              <Field
+                name="accountHolder"
+                rules={{
+                  required:
+                    "Bitte gib einen Kontoinhaber ein",
+                }}
+              >
+                <TextField>
+                  <Label>Kontoinhaber</Label>
+                </TextField>
+              </Field>
+
+              <Field
+                name="iban"
+                rules={{
+                  required: "Bitte gib eine IBAN ein",
+                }}
+              >
+                <TextField>
+                  <Label>IBAN</Label>
+                </TextField>
+              </Field>
+            </ColumnLayout>
+          </>
+        )}
+
+        <Heading>Adresse</Heading>
         <ColumnLayout l={[1, 1]}>
           <Field
             name="firstName"
@@ -63,9 +121,6 @@ export default () => {
               <Label>Nachname</Label>
             </TextField>
           </Field>
-        </ColumnLayout>
-        <Heading>Anschrift</Heading>
-        <ColumnLayout l={[1, 1]}>
           <ColumnLayout m={[2, 1]} s={[2, 1]}>
             <Field
               name="street"
@@ -88,7 +143,7 @@ export default () => {
               </TextField>
             </Field>
           </ColumnLayout>
-          <ColumnLayout m={[2, 1]} s={[2, 1]}>
+          <ColumnLayout m={[1, 2]} s={[1, 2]}>
             <Field
               name="zip"
               rules={{
@@ -120,7 +175,9 @@ export default () => {
           </Field>
         </ColumnLayout>
         <ActionGroup>
-          <SubmitButton>Speichern</SubmitButton>
+          <SubmitButton color="accent">
+            Speichern
+          </SubmitButton>
         </ActionGroup>
       </Section>
     </Form>
