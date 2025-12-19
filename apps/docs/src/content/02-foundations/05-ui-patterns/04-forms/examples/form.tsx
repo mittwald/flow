@@ -1,14 +1,13 @@
 import {
   ActionGroup,
   ColumnLayout,
-  FieldDescription,
   Heading,
   Label,
   Section,
   Segment,
   SegmentedControl,
-  TextField,
   Text,
+  TextField,
 } from "@mittwald/flow-react-components";
 import {
   Form,
@@ -168,9 +167,6 @@ export default () => {
           <Field name="phone">
             <TextField>
               <Label>Telefonnummer</Label>
-              <FieldDescription>
-                Format: +49 5772 293 100
-              </FieldDescription>
             </TextField>
           </Field>
         </ColumnLayout>
