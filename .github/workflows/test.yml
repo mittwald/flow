@@ -40,8 +40,9 @@ jobs:
         run: pnpm test:browser:prepare --only-shell
 
       # Should be changed to Chromium when flakiness is resolved, because of Chromium wider usage
-      - name: Run browser tests in Firefox
-        run: pnpm affected:test:browser --parallel=1 --browser.name=firefox
+      # BTW: Using Webkit for now, because Firefox has issues with parallel visual tests
+      - name: Run browser tests in Webkit
+        run: pnpm affected:test:browser --parallel=1 --browser.name=webkit
 
       - name: Check all generated code is committed
         run: git diff --exit-code
