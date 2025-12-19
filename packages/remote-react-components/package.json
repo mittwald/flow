@@ -36,7 +36,8 @@
     "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",
     "test:unit": "vitest run --project=unit --passWithNoTests",
     "test:unit:dev": "vitest dev --project=unit --passWithNoTests",
-    "test:visual": "vitest run --project=visual --browser.headless"
+    "test:visual": "vitest run --project=visual --browser.headless",
+    "test:visual:dev": "vitest dev --project=visual"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",
