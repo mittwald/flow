@@ -58,7 +58,9 @@ test.each(testEnvironments)(
                 </Heading>
                 <Text>{i.role}</Text>
                 <Content>Content</Content>
-                <Content slot="bottom">Bottom content</Content>
+                <Content slot="bottom" data-testid="bottomContent">
+                  Bottomcontent
+                </Content>
                 <ContextMenu data-testid="contextMenu">
                   <MenuItem>Show details</MenuItem>
                   <MenuItem>Delete</MenuItem>
@@ -72,16 +74,20 @@ test.each(testEnvironments)(
 
     await render(<Wrapper />);
 
+    const search = page.getByTestId("search");
+    const bottomContent = page.getByTestId("bottomContent");
+    const sorting = page.getByRole("button", { name: "A-Z" });
+    const filter = page.getByRole("button", { name: "Role" });
+    const contextMenu = page.getByLocator('[aria-label="Options"]');
+
     await testScreenshot("List items - default");
 
-    const sorting = page.getByRole("button", { name: "A-Z" });
     await sorting.click();
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List items - sorted");
 
-    const filter = page.getByRole("button", { name: "Role" });
     await filter.click();
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{enter}");
@@ -91,16 +97,16 @@ test.each(testEnvironments)(
     await userEvent.keyboard("{arrowDown}");
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{escape}");
-    const search = page.getByTestId("search");
     await search.click();
     await userEvent.keyboard("Max");
     await sleep(1000);
 
     await testScreenshot("List items - searched");
 
-    const contextMenu = page.getByLocator('[aria-label="Options"]');
-    await contextMenu.click();
+    await userEvent.dblClick(bottomContent);
+    await testScreenshot("List items - Bottom content text selected");
 
+    await contextMenu.click();
     await testScreenshot("List items - ContextMenu opened");
   },
 );
