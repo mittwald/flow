@@ -1,11 +1,11 @@
 import { AlertBadge } from "@mittwald/flow-react-components";
 
 <Row>
-  <AlertBadge>Info</AlertBadge>
+  <AlertBadge>Update verfügbar</AlertBadge>
 
-  <AlertBadge status="warning">Warning</AlertBadge>
+  <AlertBadge status="warning">Speicherplatz fast voll</AlertBadge>
 
-  <AlertBadge status="danger">Danger</AlertBadge>
+  <AlertBadge status="danger">Speicherplatz voll</AlertBadge>
 
-  <AlertBadge status="success">Success</AlertBadge>
+  <AlertBadge status="success">Verifiziert</AlertBadge>
 </Row>;
