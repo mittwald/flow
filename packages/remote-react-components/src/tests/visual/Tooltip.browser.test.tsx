@@ -1,5 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test, vitest } from "vitest";
+import { sleep } from "@/tests/lib/sleep";
+import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
@@ -9,11 +10,6 @@ test.each(testEnvironments)(
     render,
     components: { Tooltip, TooltipTrigger, Button },
   }) => {
-    vitest.useFakeTimers({
-      advanceTimeDelta: 100,
-      shouldAdvanceTime: true,
-    });
-
     await render(
       <TooltipTrigger>
         <Button datat-testid="button">Button</Button>
@@ -24,7 +20,7 @@ test.each(testEnvironments)(
     const button = page.getByLocator("button");
 
     await button.hover();
-    await vitest.advanceTimersByTimeAsync(5000);
+    await sleep(1500);
 
     await testScreenshot("Tooltip - visible");
   },

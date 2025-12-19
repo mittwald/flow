@@ -1,7 +1,6 @@
 import { renderRemoteTest } from "./renderRemoteTest";
-import { afterEach, expect, test } from "vitest";
+import { expect, test } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
-import { cleanup } from "vitest-browser-react";
 
 const ui = () => ({
   submitButton: page.getByTestId("form-submit"),
@@ -17,10 +16,6 @@ const ui = () => ({
     await expect.poll(() => expect(result).toBeInTheDocument()).toBeTruthy();
     expect(JSON.parse(result.element().textContent ?? "")).toEqual(data);
   },
-});
-
-afterEach(() => {
-  cleanup();
 });
 
 test("SimpleForm is rendered", async () => {

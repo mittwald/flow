@@ -33,11 +33,11 @@ pnpm test:browser:prepare
 You can then run the tests using the following command:
 
 ```sh
-pnpm nx run remote-react-components:test:visual --browser.name=firefox
+pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
-The tests run **headless** and only in Firefox by default. WebKit is also
-available as a browser option.
+The tests run **headless** and only in Webkit. Firefox is also available as a
+browser option, but it has issues with parallelized testing.
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
@@ -88,8 +88,8 @@ the screenshots used in CI (Linux) are updated as well.
 2. **Test states and properties** Test different properties and states of
    components. Example:
    - different variants and colors
-   - states such as `hovered`, `disabled`, etc. (preferably combined in a single
-     screenshot)
+   - states such as `hovered` (not recommended by now due to flakiness),
+     `disabled`, etc. (preferably combined in a single screenshot)
 
 3. **Test component combinations** One of Flow’s strengths is that components
    can be combined and adapt to each other dynamically. **Make sure to test
