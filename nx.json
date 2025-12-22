@@ -19,28 +19,40 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "test": {
-      "dependsOn": ["test:unit", "test:compile", "test:browser"],
-      "cache": true
-    },
     "test:browser": {
-      "dependsOn": ["^build", "test:browser:prepare", "^test:browser"],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "test:browser:dev": {
-      "dependsOn": ["^build", "test:browser:prepare"],
+      "dependsOn": ["^build"],
       "cache": true
     },
-
     "test:compile": {
       "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
+    "test:dev": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:e2e": {
+      "dependsOn": ["^build", "test:e2e:prepare"],
+      "cache": true
+    },
+    "test:e2e:dev": {
+      "dependsOn": ["^build", "test:e2e:prepare"],
+      "cache": true
+    },
+
     "test:unit": {
       "dependsOn": ["^build"],
       "cache": true
     },
-    "test:dev": {
+    "test:visual:update": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:visual": {
       "dependsOn": ["^build"],
       "cache": true
     }

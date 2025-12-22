@@ -1,4 +1,4 @@
-import { isFlowComponentName } from "@/index/internal";
+import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import type { PropsContext, WorkaroundType } from "@/lib/propsContext/types";
 import { getPropsMerger } from "@/lib/react/getPropsMerger";
 

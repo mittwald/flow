@@ -27,7 +27,7 @@ import {
         <Initials>Max Mustermann</Initials>
       </Avatar>
       <Text>
-        <b>Max Mustermann</b>
+        <strong>Max Mustermann</strong>
         Organisationsinhaber
       </Text>
     </Align>

@@ -2,7 +2,7 @@ import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import styles from "./Tooltip.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/index/default";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 export type TooltipProps = PropsWithChildren<
   Omit<Aria.TooltipProps, "children">

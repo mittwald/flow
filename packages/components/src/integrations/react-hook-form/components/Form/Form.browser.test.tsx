@@ -1,6 +1,5 @@
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
-import { Render } from "@/index/default";
 import {
   Field,
   Form,
@@ -8,6 +7,7 @@ import {
   useFormContext,
   type FormProps,
 } from "@/integrations/react-hook-form";
+import { Render } from "@/lib/react/components/Render";
 import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";

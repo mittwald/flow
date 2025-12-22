@@ -105,7 +105,6 @@ export const WithFieldError: Story = {
           isInvalid
         >
           <Label>Storage</Label>
-          <Label>Field</Label>
           <FieldError>ErrorFromOuterFieldError!</FieldError>
         </Slider>
       </Form>

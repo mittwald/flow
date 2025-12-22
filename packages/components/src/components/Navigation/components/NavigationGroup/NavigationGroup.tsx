@@ -65,7 +65,6 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
           {...rest}
         >
           {children}
-          <TunnelExit id="Label" />
           <ul>
             <TunnelExit id="groupLinks" />
           </ul>

@@ -9,6 +9,8 @@
     "node": ">=20.19"
   },
   "scripts": {
+    "affected:test": "nx affected --targets=test:unit,test:compile",
+    "affected:test:browser": "nx affected --targets=test:browser,test:e2e,test:visual",
     "build": "nx run-many --targets=build --exclude docs",
     "clean": "nx reset",
     "postclean": "nx run-many --targets=clean",
@@ -16,7 +18,10 @@
     "dev:init-githooks": "pnpm dlx simple-git-hooks",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "test": "nx run-many --targets=test",
+    "test": "nx run-many --targets=test:unit,test:compile",
+    "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
+    "test:browser:prepare": "pnpx playwright install --with-deps firefox webkit",
+    "test:visual": "nx run-many --targets=test:visual",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {

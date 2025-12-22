@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "0.2.0-alpha.606",
+  "version": "0.2.0-alpha.609",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
@@ -25,10 +25,8 @@
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
-    "test": "exit 0",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
-    "test:browser:prepare": "pnpm playwright install chromium",
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
@@ -38,28 +36,28 @@
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.6",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "^4.0.12",
-    "@vitest/coverage-v8": "^4.0.12",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/browser-playwright": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.15",
     "nx": "^22.1.0",
-    "playwright": "^1.56.1",
+    "playwright": "^1.57.0",
     "prettier": "^3.6.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
-    "vite": "^7.2.4",
+    "vite": "^7.2.7",
     "vite-plugin-banner": "^0.8.1",
     "vite-plugin-checker": "^0.11.0",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.10.0",
-    "vitest": "^4.0.12",
+    "vitest": "^4.0.15",
     "vitest-browser-react": "^2.0.2"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }

@@ -15,13 +15,13 @@ import {
         selber entwickeln
       </Heading>
       <Text>
-        <b>
+        <strong>
           <Color>
             Veröffentliche{" "}
             <Color color="violet">eigene Features</Color> im
             mStudio
           </Color>
-        </b>
+        </strong>
       </Text>
     </Flex>
     <Link target="_blank" href="#" color="dark">
