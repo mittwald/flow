@@ -1,6 +1,7 @@
 name: Update Visual Regression Screenshots
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - labeled
@@ -78,7 +79,7 @@ jobs:
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Update Visual Regression Screenshots
-        run: pnpm test:visual --update
+        run: pnpm test:visual --update --browser.fileParallelism=false
       # check what changed
       - name: Check for changes
         id: check_changes

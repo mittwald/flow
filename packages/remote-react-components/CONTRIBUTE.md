@@ -46,7 +46,7 @@ In **dev mode**, a “real” browser is opened, allowing you to interact direct
 with the test:
 
 ```sh
-pnpm nx run remote-react-components:test:visual:dev --browser.name=firefox
+pnpm nx run remote-react-components:test:visual:dev --browser.name=webkit
 ```
 
 #### Remote ≠ Local
@@ -68,7 +68,13 @@ If you make changes to existing components or develop new components or
 features, you can update the screenshots as follows:
 
 ```sh
-pnpm nx run remote-react-components:test:visual --update
+pnpm nx run remote-react-components:test:visual:update
+```
+
+You can also filter the tests, to only run relevant tests.
+
+```sh
+pnpm nx run remote-react-components:test:visual:update NewComponent
 ```
 
 Carefully review all new or updated screenshots afterward. If everything looks
@@ -121,7 +127,7 @@ The current solution is to wait for an update of **Playwright**.
 ### CI
 
 For pull requests, visual tests are executed **with a single browser only**
-(currently **Firefox**), to reduce the pipeline execution time.
+(currently **Webkit**), to reduce the pipeline execution time.
 
 In addition, visual tests are run **with all supported browsers** twice a day to
 detect potential issues early.
