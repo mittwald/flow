@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.612](https://github.com/mittwald/flow/compare/0.2.0-alpha.611...0.2.0-alpha.612) (2025-12-22)
+
+### Features
+
+* **Message:** support action group and button ([#2216](https://github.com/mittwald/flow/issues/2216)) ([d0c75c1](https://github.com/mittwald/flow/commit/d0c75c155726aefe2ef2f4a2b56112bf6a5a3646))
+
 # [0.2.0-alpha.611](https://github.com/mittwald/flow/compare/0.2.0-alpha.610...0.2.0-alpha.611) (2025-12-22)
 
 ### Features
