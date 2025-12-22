@@ -7,12 +7,12 @@ eindeutige und schnelle Erkennung zu ermöglichen.
 
 Wenn zwei Status inhaltlich miteinander konkurrieren, wird immer der handlungsentscheidende angezeigt. Zum Beispiel überschreibt ein Danger stets Warning und Info.
 
-| Status      | Icon und Color                                    | Einsatz                                                      | Beispiel                                                                                                                                     |
-| ----------- |-------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Info**    | <AlertBadge status="info">Info</AlertBadge>       | Sachliche Hinweise/Informationen ohne akuten Handlungsbedarf | - Update verfügbar<br />- Download wird vorbereitet<br />- Kündigung vorgemerkt<br />- Neue Nachricht im Ticket<br />- Aktive Anlegeprozesse |
-| **Warning   | <AlertBadge status="warning">Warinng</AlertBadge> | Handlungsempfehlung oder Hinweis möglicher Konflikt          | - Speicherplatz fast voll<br />- E-Mail Versand gesperrt<br />- Domain unverifiziert<br />- Zertifikat konnte nicht ausgestellt werden       |
-| **Danger**  | <AlertBadge status="danger">Danger</AlertBadge>   | Kritisches Problem, das sofortiges Handeln erfordert         | - Speicherplatz voll<br />- E-Mail Empfang deaktiviert<br />- Webserver/Cronjobs deaktiviert                                                 |
-| **Success** | <AlertBadge status="success">Success</AlertBadge> | Erfolgreich abgeschlossene Ereignisse | 24 lh                | - Erfolgreich installiert<br />- Erfolgreich angelegt<br />- Erfolgreich erstellt<br />- Domain verifiziert                                  |
+| Status                                            | Einsatz                                                      | Beispiel                                                                                                                                     |
+| ------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| <AlertBadge status="info">Info</AlertBadge>       | Sachliche Hinweise/Informationen ohne akuten Handlungsbedarf | - Update verfügbar<br />- Download wird vorbereitet<br />- Kündigung vorgemerkt<br />- Neue Nachricht im Ticket<br />- Aktive Anlegeprozesse |
+| <AlertBadge status="warning">Warning</AlertBadge> | Handlungsempfehlung oder Hinweis möglicher Konflikt           | - Speicherplatz fast voll<br />- E-Mail Versand gesperrt<br />- Domain unverifiziert<br />- Zertifikat konnte nicht ausgestellt werden       |
+| <AlertBadge status="danger">Danger</AlertBadge>   | Kritisches Problem, das sofortiges Handeln erfordert         | - Speicherplatz voll<br />- E-Mail Empfang deaktiviert<br />- Webserver/Cronjobs deaktiviert                                                 |
+| <AlertBadge status="success">Success</AlertBadge> | Erfolgreich abgeschlossene Ereignisse | 24 lh                | - Erfolgreich installiert<br />- Erfolgreich angelegt<br />- Erfolgreich erstellt<br />- Domain verifiziert                                  |
 
 ---
 
@@ -40,12 +40,11 @@ Eine [AlertBadge](/03-components/status/alert-badge/overview) dient dazu, den St
 wichtige System- oder Statusmeldungen und erscheinen kurz im Bildschirm des
 Users. So stellen sie sicher, dass User über einen Status informiert werden,
 auch wenn sie sich gerade nicht auf der betroffenen
-[Detailseite](/02-foundations/04-ui-patterns/03-struktur) befinden. Um die User jedoch nicht mit unnötigen Informationen zu überhäufen, muss nicht jede Statusmeldung einer Detailsseite (z. B. in Form eines [Alerts](/03-components/status/alert/overview)) eine Notification auslösen.
+[Detailseite](/02-foundations/04-ui-patterns/03-struktur) befinden. Notifications sollten bewusst und sparsam eingesetzt werden. Denn zu viele Notifications überfluten den User und lenken von wirklich wichtigen Informationen ab.
 
 Notifications werden durch den
 [NotificationsProvider](03-components/status/notification-provider/overview)
-ausgelöst. Da Notifications in der Regel nur kurz sichtbar sind, sollten sie an einem zentralen Ort gesammelt werden, damit ungelesene Notifications auch zu einem späteren Zeitpunkt eingesehen werden können. Alle User mit einer relevanten Rolle für das jeweilige Element im
-mStudio erhalten die entsprechende Notification. Kritische Probleme sollten zusätzlich zur Notification per E-Mail kommuniziert werden. So wird sichergestellt, dass der User die Informationen zuverlässig erhält.
+ausgelöst. Da Notifications in der Regel nur kurz sichtbar sind, sollten sie an einem zentralen Ort gesammelt werden, damit ungelesene Notifications auch zu einem späteren Zeitpunkt eingesehen werden können. Kritische Probleme sollten zusätzlich zur Notification per E-Mail kommuniziert werden. So wird sichergestellt, dass der User die Informationen zuverlässig erhält.
 
 <LiveCodeEditor example="notification" editorCollapsed />
 
