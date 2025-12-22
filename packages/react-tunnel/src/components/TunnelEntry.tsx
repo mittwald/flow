@@ -19,17 +19,18 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const tunnel = useContext(tunnelContext);
   const usedId = useId();
   const entryId = staticEntryId ?? usedId;
+  const index = tunnel.getIndex();
 
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.prepareChildren(id, entryId, children);
+    tunnel.prepareChildren(id, entryId, index, children);
   }
 
   useEffect(() => {
     mounted.current = true;
-    tunnel.setChildren(id, entryId, children);
-  }, [children, id, entryId]);
+    tunnel.setChildren(id, entryId, index, children);
+  }, [children, id, entryId, index]);
 
   useEffect(() => {
     /**

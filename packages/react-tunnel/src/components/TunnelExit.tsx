@@ -17,11 +17,11 @@ const ChildrenRenderer: FC<{ children: TunnelExitChildren }> = (props) => {
 
 export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
   const { children, id } = props;
-  const tunnelChildren = useContext(tunnelContext).getChildren(id);
+  const tunnelChildren = useContext(tunnelContext).getEntries(id);
 
   const renderedTunnelChildren = tunnelChildren
-    ? tunnelChildren.map(([entryId, children]) => (
-        <ChildrenRenderer key={entryId}>{children}</ChildrenRenderer>
+    ? tunnelChildren.map((entry) => (
+        <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>
       ))
     : null;
 

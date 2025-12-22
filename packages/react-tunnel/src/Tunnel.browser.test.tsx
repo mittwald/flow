@@ -1,9 +1,10 @@
-import TunnelEntry from "./components/TunnelEntry";
+import TunnelEntry, { type TunnelEntryProps } from "./components/TunnelEntry";
 import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
-import type { FC, PropsWithChildren } from "react";
+import { useState, type FC, type PropsWithChildren } from "react";
+import { userEvent } from "vitest/browser";
 
 test("Exit is empty when no entry is set", async () => {
   const dom = await render(
@@ -219,4 +220,42 @@ test("Order of multiple children is preserved when entry is updated", async () =
   );
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Bye Tunnel!");
+});
+
+test("Order of multiple children is preserved when entry is added dynamically", async () => {
+  const ComponentWithEntry: FC<TunnelEntryProps> = (props) => (
+    <TunnelEntry {...props} />
+  );
+
+  const Test: FC = () => {
+    const [showFirstEntry, setShowFirstEntry] = useState(false);
+
+    return (
+      <>
+        <button
+          onClick={() => setShowFirstEntry((s) => !s)}
+          data-testid="toggle"
+        >
+          Toggle
+        </button>
+        <TunnelProvider>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+          <ComponentWithEntry>0</ComponentWithEntry>
+          {showFirstEntry && <ComponentWithEntry>1</ComponentWithEntry>}
+          <ComponentWithEntry>2</ComponentWithEntry>
+        </TunnelProvider>
+      </>
+    );
+  };
+
+  const dom = await render(<Test />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("02");
+
+  await userEvent.click(dom.getByTestId("toggle"));
+  expect(dom.getByTestId("exit")).toHaveTextContent("012");
+
+  await userEvent.click(dom.getByTestId("toggle"));
+  expect(dom.getByTestId("exit")).toHaveTextContent("02");
 });
