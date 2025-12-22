@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.611](https://github.com/mittwald/flow/compare/0.2.0-alpha.610...0.2.0-alpha.611) (2025-12-22)
+
+### Features
+
+* **Navigation:** support badge and counter badge ([#2218](https://github.com/mittwald/flow/issues/2218)) ([d6c63f4](https://github.com/mittwald/flow/commit/d6c63f45ce7fd64298301481cedc00249723e928))
+
 # [0.2.0-alpha.610](https://github.com/mittwald/flow/compare/0.2.0-alpha.609...0.2.0-alpha.610) (2025-12-22)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
