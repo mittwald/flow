@@ -73,6 +73,11 @@ test.each(testEnvironments)(
 
           <Button>Button</Button>
         </Message>
+        <Message color="#ffeedd">
+          <Content>
+            <Text>Custom color</Text>
+          </Content>
+        </Message>
       </Flex>,
     );
 
