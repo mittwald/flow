@@ -2,7 +2,7 @@ import { type FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 import { AreaDot } from "../AreaDot";
-import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
 export interface LineProps
@@ -11,7 +11,7 @@ export interface LineProps
     "className" | "dataKey" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
   > {
   /** The color of the line. @default "sea-green" */
-  color?: CategoricalColor | (string & {});
+  color?: CategoricalWithCustomColor;
 }
 
 /** @flr-generate all */
