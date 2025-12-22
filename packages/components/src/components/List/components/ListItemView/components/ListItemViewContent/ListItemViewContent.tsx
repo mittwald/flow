@@ -108,52 +108,61 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
   );
 
   const innerListContent = (
-    <PropsContextProvider props={propsContext}>
+    <>
       {header}
       {children}
-    </PropsContextProvider>
+    </>
+  );
+
+  const listColumnsContentView = (
+    <ColumnLayout
+      s={s}
+      m={m}
+      l={l}
+      className={clsx(styles.content, styles.columnLayout)}
+    >
+      {innerListContent}
+    </ColumnLayout>
+  );
+
+  const listDefaultContentView = (
+    <div className={styles.content}>{innerListContent}</div>
+  );
+
+  const listView = (
+    <>
+      <div className={styles.contentWrapper}>
+        {s || m || l ? listColumnsContentView : listDefaultContentView}
+        {button}
+      </div>
+      {bottom}
+    </>
+  );
+
+  const tilesViews = (
+    <>
+      <div className={styles.avatarContainer}>{avatar}</div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <div className={styles.checkboxContainer}>{checkbox}</div>
+          <div className={styles.title}>
+            {title}
+            <div className={styles.subTitle}>{subTitle}</div>
+          </div>
+          {button}
+        </div>
+        {children}
+        {bottom}
+      </div>
+    </>
   );
 
   return (
     <div className={className}>
-      {viewMode === "list" && (
-        <>
-          <div className={styles.contentWrapper}>
-            {s || m || l ? (
-              <ColumnLayout
-                s={s}
-                m={m}
-                l={l}
-                className={clsx(styles.content, styles.columnLayout)}
-              >
-                {innerListContent}
-              </ColumnLayout>
-            ) : (
-              <div className={styles.content}>{innerListContent}</div>
-            )}
-            {button}
-          </div>
-          {bottom}
-        </>
-      )}
-
-      {viewMode === "tiles" && (
-        <PropsContextProvider props={propsContext}>
-          <div className={styles.avatarContainer}>{avatar}</div>
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <div className={styles.checkboxContainer}>{checkbox}</div>
-              <div className={styles.title}>
-                {title}
-                <div className={styles.subTitle}>{subTitle}</div>
-              </div>
-              {button}
-            </div>
-            {children}
-            {bottom}
-          </div>
-        </PropsContextProvider>
-      )}
+      <PropsContextProvider props={propsContext}>
+        {viewMode === "list" && listView}
+        {viewMode === "tiles" && tilesViews}
+      </PropsContextProvider>
     </div>
   );
 };

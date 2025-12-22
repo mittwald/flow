@@ -51,7 +51,7 @@ describe("Integration RHF ResetButton Tests", () => {
   test("will reset form when pressed", async () => {
     const asyncFunctionDuration = 10000;
     const form = <TestForm onSubmit={() => sleep(asyncFunctionDuration)} />;
-    await render(form);
+    const { rerender } = await render(form);
 
     const { textField, resetButton, submitButton } = ui();
 
@@ -65,8 +65,10 @@ describe("Integration RHF ResetButton Tests", () => {
     expect(resetButton).not.toHaveAttribute("data-readonly");
     await userEvent.click(submitButton);
     await vitest.advanceTimersByTimeAsync(asyncFunctionDuration / 2);
+    await rerender(form);
     expect(resetButton).toHaveAttribute("data-readonly");
-    await vitest.runAllTimersAsync();
+    await vitest.advanceTimersByTimeAsync(asyncFunctionDuration);
+    await rerender(form);
     expect(resetButton).not.toHaveAttribute("data-readonly");
 
     await userEvent.click(resetButton);

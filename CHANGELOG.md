@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.609](https://github.com/mittwald/flow/compare/0.2.0-alpha.608...0.2.0-alpha.609) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.608](https://github.com/mittwald/flow/compare/0.2.0-alpha.607...0.2.0-alpha.608) (2025-12-19)
+
+### Bug Fixes
+
+* **ListItemView:** fix bottom Content remote issues ([f24f009](https://github.com/mittwald/flow/commit/f24f0096e4e036d5988e22c3f94ecd5f3c90665d))
+
 # [0.2.0-alpha.607](https://github.com/mittwald/flow/compare/0.2.0-alpha.606...0.2.0-alpha.607) (2025-12-18)
 
 ### Bug Fixes
