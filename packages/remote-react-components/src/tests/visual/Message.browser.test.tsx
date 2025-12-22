@@ -20,6 +20,7 @@ test.each(testEnvironments)(
       Text,
       FileCard,
       FileCardList,
+      ActionGroup,
     },
   }) => {
     await render(
@@ -53,6 +54,12 @@ test.each(testEnvironments)(
               </FileCardList>
             </Flex>
           </Content>
+          <ActionGroup>
+            <Button variant="soft" color="secondary">
+              Secondary
+            </Button>
+            <Button>Primary</Button>
+          </ActionGroup>
         </Message>
         <Message type="sender">
           <Content>
@@ -63,6 +70,8 @@ test.each(testEnvironments)(
               dolore voluptas.
             </Text>
           </Content>
+
+          <Button>Button</Button>
         </Message>
       </Flex>,
     );
