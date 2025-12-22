@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.615](https://github.com/mittwald/flow/compare/0.2.0-alpha.614...0.2.0-alpha.615) (2025-12-22)
+
+### Bug Fixes
+
+* **ComboBox:** fix ComboBox menu width when used in Modal ([#2228](https://github.com/mittwald/flow/issues/2228)) ([4d3f1ba](https://github.com/mittwald/flow/commit/4d3f1ba9259e22053a434709af0b84f92affc251))
+
 # [0.2.0-alpha.614](https://github.com/mittwald/flow/compare/0.2.0-alpha.613...0.2.0-alpha.614) (2025-12-22)
 
 ### Bug Fixes
