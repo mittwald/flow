@@ -85,6 +85,7 @@
   &[data-exiting] {
     animation: popover-slide var(--transition--duration--default) reverse
       ease-in;
+    pointer-events: none;
   }
 
   &:has(:global(.flow--options):empty) {
