@@ -77,7 +77,7 @@ export const Default: Story = {
       <CartesianGrid />
       <Area dataKey="firstKey" />
       <Area dataKey="secondKey" color="palatinate-blue" />
-      <Area dataKey="thirdKey" color="tangerine" />
+      <Area dataKey="thirdKey" color="#555" />
       <XAxis dataKey="name" />
       <YAxis interval="equidistantPreserveStart" />
       <ChartTooltip />
