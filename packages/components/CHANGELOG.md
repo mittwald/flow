@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.613](https://github.com/mittwald/flow/compare/0.2.0-alpha.612...0.2.0-alpha.613) (2025-12-22)
+
+### Features
+
+* **CartesianChart:** support custom colors ([#2209](https://github.com/mittwald/flow/issues/2209)) ([f007748](https://github.com/mittwald/flow/commit/f0077482c48461f2b4e1971adf20d5bfca72d6ef))
+
 # [0.2.0-alpha.612](https://github.com/mittwald/flow/compare/0.2.0-alpha.611...0.2.0-alpha.612) (2025-12-22)
 
 ### Features
