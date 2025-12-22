@@ -21,9 +21,9 @@ findest du im Pattern
 ## Progressively disclosed Form Controls
 
 In manchen Fällen können Form Controls schrittweise eingeblendet werden. Sie
-sind dabei visuell unter einem übergeordneten Controls verschachtelt. Ein
-gängiges Muster ist die Nutzung des "aktivierten" Zustands einer Checkbox oder
-RadioGroup. Dieser Zustand entscheidet, ob ein zugehöriges Form Control
+sind dabei visuell unter einem übergeordneten Control verschachtelt. Ein
+gängiges Muster ist die Nutzung des "aktivierten" Zustands einer [Checkbox](https://mittwald.github.io/flow/03-components/form-controls/checkbox/overview) oder
+[RadioGroup](https://mittwald.github.io/flow/03-components/form-controls/radio-group/overview). Dieser Zustand entscheidet, ob ein zugehöriges Form Control
 angezeigt wird.
 
 ---
@@ -45,12 +45,12 @@ Label verzichtet werden. In diesem Fall muss das Form Control über
 
 ## Fields / Controls
 
-Das Design System bietet eine große Auswahl an wiederverwendbaren Form Contorls.
-Dazu gehören verschiedene Fields wie zum Beispiel
+Das Design System bietet eine große Auswahl an wiederverwendbaren Form Controls.
+Dazu gehören verschiedene **Fields** wie zum Beispiel
 [TextField](/03-components/form-controls/text-field/overview),
 [NumberField](/03-components/form-controls/number-field/overview) oder
 [PasswordCreationField](/03-components/form-controls/password-creation-field/overview)
-sowie Controls wie [Checkboxen](/03-components/form-controls/checkbox/overview),
+sowie **Controls** wie [Checkboxen](/03-components/form-controls/checkbox/overview),
 [Selects](/03-components/form-controls/select/overview)
 oder [RadioGroups](/03-components/form-controls/radio-group/overview). Alle
 Components sind im Bereich Components unter dem Menüpunkt Form Controls zu
@@ -65,7 +65,7 @@ sparsam. Sie kann Beispiele oder Hinweise zur Formatierung enthalten.
 ## FieldError
 
 Ein ungültiges Field muss immer eine Fehlermeldung anzeigen. Diese erklärt,
-warum der Wert die Validierung nicht besteht. Nutze den `<FieldError />` für
+warum der eingegebene Wert die Validierung nicht besteht. Nutze den `<FieldError />` für
 diese Meldung. Beschreibe klar, warum die Eingabe ungültig ist, und hilf dem
 User bei der Korrektur. Hinweise zur Formulierung findest du in der Guideline zu
 [Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen).
@@ -73,12 +73,9 @@ User bei der Korrektur. Hinweise zur Formulierung findest du in der Guideline zu
 ## Placeholder
 
 Placeholder sind nicht barrierefrei. Sie dürfen keine Informationen enthalten,
-die für das korrekte Ausfüllen eines Fields notwendig sind. Placeholder
-verschwinden bei der Eingabe von Text. Zudem werden sie von
-Assistenztechnologien oft nicht zuverlässig erkannt und sind schwerer zu
-verarbeiten als eine FieldDescription. Statt eines Placeholders:
+die für das korrekte Ausfüllen eines Fields notwendig sind. Zum einen verschwinden Placeholder bei der Eingabe von Text. Zum anderen werden sie von Assistenztechnologien oft nicht zuverlässig erkannt und sind schwieriger zu verarbeiten als eine FieldDescription. Statt eines Placeholders:
 
-- Nutze ein Label für essenzielle Informationen zu den Eingabeanforderungen.
+- Nutze ein [Label](https://mittwald.github.io/flow/03-components/content/label/overview) für essenzielle Informationen zu den Eingabeanforderungen.
 - Nutze eine FieldDescription für Beispiele oder Formatierungshinweise.
 
 Eine Ausnahme ist das
@@ -89,9 +86,8 @@ ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
 
 # Validation
 
-Standardmäßig erfolgt die Validierung erst beim Absenden des Forms. Zum Absenden
-wird der `<SubmitButton/>` verwendet. So kann der User das Formular ohne
-Unterbrechung ausfüllen. Nutze die Components
+Standardmäßig erfolgt die Validierung erst beim Absenden des Forms, damit der User es ohne Unterbrechung ausfüllen kann. Zum Absenden
+wird der `<SubmitButton/>` verwendet. Nutze die Components
 [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview)
 oder
 [Field (React Hook Form)](/03-components/form-controls/field-react-hook-form/overview),
@@ -104,8 +100,8 @@ Je nach Field stehen unterschiedliche Properties zur Verfügung, zum Beispiel:
 
 - `isRequired` für Pflichtfelder.
 - `validate` für eigene Validierungen.
-- HTML Input Properties wie `type="email“`, `minLength`.
+- HTML Input Properties wie `type="email"`, `minLength`.
 
 ## Quick submit
 
-Ein Formular sollte die Funktion „Quick submit“ unterstützen, die es ermöglicht, es aus jedem Form Control (einschließlich MarkdownEditor und TextArea) mit `⌘ + Enter` oder `Strg + Enter` abzuschicken.
+Ein Formular sollte die Funktion „Quick submit“ unterstützen. Sie ermöglicht das Absenden über `⌘ + Enter` oder `Strg + Enter` aus jedem Form Control, insbesondere aus einem TextArea oder einem MarkdownEditor.
