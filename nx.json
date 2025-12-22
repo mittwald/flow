@@ -19,10 +19,6 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "test:visual": {
-      "dependsOn": ["^build"],
-      "cache": true
-    },
     "test:browser": {
       "dependsOn": ["^build"],
       "cache": true
@@ -49,6 +45,14 @@
     },
 
     "test:unit": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:visual:update": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:visual": {
       "dependsOn": ["^build"],
       "cache": true
     }

@@ -27,7 +27,9 @@ jobs:
         run: pnpm test:browser:prepare --only-shell
 
       - name: Run visual tests
-        run: pnpm nx run-many -t test:visual --parallel=1
+        # run without file parallelism, because firefox has issues with parallel visual tests
+        run: |
+          pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false
 
       - name: Send alerting message to Slack
         if: failure()

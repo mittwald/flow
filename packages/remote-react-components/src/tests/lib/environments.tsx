@@ -1,6 +1,6 @@
 import RemoteRoot from "@/components/RemoteRoot";
 import { RemoteReceiver } from "@mittwald/flow-remote-core";
-import { render } from "vitest-browser-react";
+import { cleanup, render } from "vitest-browser-react";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import type { Locator, ScreenshotMatcherOptions } from "vitest/browser";
 import * as RemoteComponents from "@/index";
@@ -8,7 +8,6 @@ import * as Components from "@mittwald/flow-react-components";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
-import { sleep } from "@/tests/lib/sleep";
 import { expect } from "vitest";
 
 const RemoteTestUi: FC<PropsWithChildren> = (props) => {
@@ -25,32 +24,29 @@ const RemoteTestUi: FC<PropsWithChildren> = (props) => {
 };
 
 export const renderRemote: typeof render = async (ui, options) => {
+  await cleanup();
   const result = await render(<RemoteTestUi>{ui}</RemoteTestUi>, options);
-  await prepareTesting();
+  await setNeutralPointerPosition();
   return result;
 };
 
 export const renderLocal: typeof render = async (ui, options) => {
+  await cleanup();
   const result = await render(<RootContainer>{ui}</RootContainer>, options);
-  await prepareTesting();
+  await setNeutralPointerPosition();
   return result;
 };
 
-const prepareTesting = async () => {
-  // Move the mouse to somewhere neutral to avoid hover effects
+const setNeutralPointerPosition = async () => {
   await rootContainerLocator.unhover();
-  await prepareScreenshot();
-};
-
-const prepareScreenshot = async (): Promise<void> => {
-  await sleep(25);
+  rootContainerLocator.element().focus();
 };
 
 const testScreenshot = async (
   description: string,
-  options?: ScreenshotMatcherOptions,
+  options: ScreenshotMatcherOptions = {},
 ): Promise<void> => {
-  await prepareScreenshot();
+  await setNeutralPointerPosition();
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 

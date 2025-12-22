@@ -19,7 +19,7 @@ export default mergeConfig(defaultConfig, {
       instances: [
         {
           // Should be changed to Chromium when flakiness is resolved
-          browser: "firefox",
+          browser: "webkit",
         },
       ],
     },

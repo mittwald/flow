@@ -41,7 +41,7 @@ export const renderRemoteTest = async (
           expect(
             renderResult.getByTestId("root-loading-view"),
           ).not.toBeInTheDocument(),
-        { timeout: loadingTimeout },
+        { timeout: loadingTimeout, interval: 100 },
       )
       .toBeTruthy();
   }

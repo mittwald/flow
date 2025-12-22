@@ -4,7 +4,6 @@ import type { ProjectConfig } from "vitest/node";
 const viewport = { width: 1280, height: 720 };
 
 export const vitestBrowserTestConfig: ProjectConfig = {
-  fileParallelism: false,
   css: {
     include: /.+/,
   },
