@@ -7,7 +7,16 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Navigation, Link, IconStar, Text, NavigationGroup, Label },
+    components: {
+      Navigation,
+      Link,
+      IconStar,
+      Text,
+      NavigationGroup,
+      Label,
+      Badge,
+      CounterBadge,
+    },
   }) => {
     await render(
       <Navigation>
@@ -21,8 +30,13 @@ test.each(testEnvironments)(
         </Link>
         <NavigationGroup>
           <Label>NavigationGroup</Label>
-          <Link>Link</Link>
-          <Link>Link</Link>
+          <Link>
+            Link<Badge>Badge</Badge>
+          </Link>
+          <Link>
+            Link
+            <CounterBadge count={2} />
+          </Link>
         </NavigationGroup>
         <NavigationGroup collapsable>
           <Label data-testid="trigger">Collapsable</Label>

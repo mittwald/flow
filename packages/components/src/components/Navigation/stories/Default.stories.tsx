@@ -9,6 +9,8 @@ import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
 import Label from "@/components/Label";
+import { Badge } from "@/components/Badge";
+import { CounterBadge } from "@/components/CounterBadge";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -118,6 +120,22 @@ export const MixedGroups: Story = {
         <Link href="#">Testsite</Link>
         <Link href="#">Testsite</Link>
       </NavigationGroup>
+    </Navigation>
+  ),
+};
+
+export const WithBadges: Story = {
+  render: (props) => (
+    <Navigation aria-label="Navigation" {...props}>
+      <Link href="#">Apps</Link>
+      <Link href="#">Databases</Link>
+      <Link href="#">
+        Domains<Badge>New</Badge>
+      </Link>
+      <Link href="#">
+        Notifications
+        <CounterBadge count={3} />
+      </Link>
     </Navigation>
   ),
 };

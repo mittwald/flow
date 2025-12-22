@@ -28,6 +28,8 @@ export const Navigation = flowComponent("Navigation", (props) => {
     Icon: {
       className: styles.icon,
     },
+    Badge: { className: styles.badge },
+    CounterBadge: { className: styles.badge },
   };
 
   return (

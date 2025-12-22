@@ -1,6 +1,7 @@
 import styles from "./customComponents.module.css";
 import {
   Alert,
+  AlertBadge,
   ColumnLayout,
   Content,
   CopyButton,
@@ -25,14 +26,15 @@ import { onlyText } from "react-children-utilities";
 import { AnchorLinkHeading } from "@/lib/mdx/components/MdxFileView/AnchorLinkHeading";
 
 export const customComponents = {
-  Content: Content,
-  Heading: Heading,
-  Alert: Alert,
+  Content,
+  Heading,
+  Alert,
+  AlertBadge,
   DoAndDont: ExamplesContainer,
-  ColumnLayout: ColumnLayout,
-  DesignTokenTable: DesignTokenTable,
-  Label: Label,
-  Link: Link,
+  ColumnLayout,
+  DesignTokenTable,
+  Label,
+  Link,
 
   pre: ({ children }: PropsWithChildren) => (
     <div className={styles.preContainer}>
