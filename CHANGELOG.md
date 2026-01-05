@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.616](https://github.com/mittwald/flow/compare/0.2.0-alpha.615...0.2.0-alpha.616) (2026-01-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix rendering order when using multiple Tunnel Entries ([a088504](https://github.com/mittwald/flow/commit/a0885047c38123e4fc5fe24314411715816982b1))
+
 # [0.2.0-alpha.615](https://github.com/mittwald/flow/compare/0.2.0-alpha.614...0.2.0-alpha.615) (2025-12-22)
 
 ### Bug Fixes
