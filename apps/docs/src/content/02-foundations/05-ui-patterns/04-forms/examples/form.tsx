@@ -54,7 +54,8 @@ export default () => {
       onSubmit={() => console.log("submitted")}
     >
       <Section>
-        <Heading>Zahlungsart</Heading>
+        <Heading>Zahlungsinformationen</Heading>
+        <Heading level={3}>Zahlungsart</Heading>
         <Field name="paymentMethod">
           <SegmentedControl aria-label="Zahlungsart">
             <Segment value="invoice">Rechnung</Segment>
@@ -98,7 +99,7 @@ export default () => {
           </>
         )}
 
-        <Heading>Adresse</Heading>
+        <Heading level={3}>Rechnungsadresse</Heading>
         <ColumnLayout l={[1, 1]}>
           <Field
             name="firstName"
