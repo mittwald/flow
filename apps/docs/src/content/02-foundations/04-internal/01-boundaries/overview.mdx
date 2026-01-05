@@ -20,16 +20,16 @@ Teile der Anwendung.
 | `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
 | `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                    | Sections mit mehrzeiligen Skeletons                |
 | `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                        | Mehrzeilige Skeletons                              |
-| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Mehrzeilige Skeletons                 | Mehrzeilige Skeletons                              |
+| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Fehler Section                        | Mehrzeilige Skeletons                              |
 | `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                                | Nichts                                             |
 | `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                    | LoadingView der Flow Component                     |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | Menu Items mit Skeleton               | Menu Items mit Skeleton                            |
+| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | MenuItems mit Fehler Text             | MenuItems mit Skeleton                             |
 | `ChartFragment`      | Für CartesianCharts                                            | Fragment    | CartesianChart mit IllustratedMessage | CartesianChart mit LoadingSpinner                  |
-| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Nichts                                | Text Field                                         |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Leerer Skeleton                       | Avatar Skeleton                                    |
-| `Link`               | Für Links                                                      | Link        | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
-| `Text`               | Für Texte                                                      | Text        | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Einzeiliges Skeleton                  | Einzeiliges Skeleton                               |
+| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Fehler Text                           | TextField                                          |
+| `Avatar`             | Für Avatare                                                    | Avatar      | Avatar mit Fehler Icon                | Avatar mit Skeleton                                |
+| `Link`               | Für Links                                                      | Link        | Fehler Text                           | Einzeiliges Skeleton                               |
+| `Text`               | Für Texte                                                      | Text        | Fehler Text                           | Einzeiliges Skeleton                               |
+| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehler Text                           | Einzeiliges Skeleton                               |
 
 ## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 
