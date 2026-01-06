@@ -1,28 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AlertIcon from "../AlertIcon";
+import { InlineAlert } from "@/components/InlineAlert/InlineAlert";
+import { dummyText } from "@/lib/dev/dummyText";
 
-const meta: Meta<typeof AlertIcon> = {
-  title: "Status/AlertIcon",
-  component: AlertIcon,
+const meta: Meta<typeof InlineAlert> = {
+  title: "Status/InlineAlert",
+  component: InlineAlert,
   argTypes: {
-    size: {
-      control: "inline-radio",
-      options: ["s", "m", "l"],
-    },
     status: {
       control: "inline-radio",
       options: ["info", "success", "warning", "danger", "unavailable"],
     },
   },
   args: {
-    size: "m",
     status: "info",
+    children: dummyText.short,
   },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof AlertIcon>;
+type Story = StoryObj<typeof InlineAlert>;
 
 export const Info: Story = {
   args: { status: "info" },

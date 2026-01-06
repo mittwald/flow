@@ -2,7 +2,7 @@ import * as Aria from "react-aria-components";
 import type { PropsWithChildren } from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
-import type { PropsWithStatus } from "@/lib/types/props";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBarValue";
@@ -16,7 +16,7 @@ import {
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
-    PropsWithStatus,
+    PropsWithStatus<Exclude<Status, "unavailable">>,
     FlowComponentProps {
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;

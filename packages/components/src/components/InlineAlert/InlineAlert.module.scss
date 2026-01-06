@@ -1,0 +1,19 @@
+.inlineAlert {
+  display: inline-flex;
+  align-items: center;
+  column-gap: var(--inline-alert--spacing);
+  vertical-align: bottom;
+
+  /* Colors */
+  @mixin status($status) {
+    &:where(.#{$status}) {
+      color: var(--inline-alert--#{$status}-color);
+    }
+  }
+
+  @include status(danger);
+  @include status(success);
+  @include status(warning);
+  @include status(info);
+  @include status(unavailable);
+}

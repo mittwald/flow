@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./DonutChart.module.scss";
-import type { PropsWithStatus } from "@/lib/types/props";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { DonutChartValue } from "@/components/DonutChart/components/DonutChartValue";
 import { Donut } from "@/components/DonutChart/components/Donut";
@@ -18,7 +18,7 @@ export interface DonutChartSegment {
 
 export interface DonutChartProps
   extends Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
-    PropsWithStatus,
+    PropsWithStatus<Exclude<Status, "unavailable">>,
     PropsWithChildren {
   /** The size variant of the donut chart. @default "m" */
   size?: "m" | "l";

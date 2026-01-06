@@ -1,13 +1,6 @@
-icon:
-  size:
-    s:
-      value: 1rem
-    m:
-      value: 1.5rem
-    l:
-      value: 4rem
-  color:
-    value: "{neutral.color.800}"
+inline-alert:
+  spacing:
+    value: "{size-rem.xs}"
   info-color:
     value: "{info-outline-content-color}"
   warning-color:

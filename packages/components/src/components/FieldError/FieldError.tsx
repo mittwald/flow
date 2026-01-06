@@ -8,9 +8,9 @@ import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import { FieldErrorContext, TextContext } from "react-aria-components";
 import clsx from "clsx";
-import { IconDanger } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { InlineAlert } from "@/components/InlineAlert";
 
 export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
@@ -69,10 +69,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
         <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
             return (
-              <>
-                <IconDanger size="s" />
-                <span>{validationErrors}</span>
-              </>
+              <InlineAlert status="danger">{validationErrors}</InlineAlert>
             );
           }}
         </Aria.FieldError>

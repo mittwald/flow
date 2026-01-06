@@ -1,7 +1,0 @@
-field-error:
-  font-size:
-    value: "{font-size-text.s}"
-  color:
-    value: "{danger.color.800}"
-  spacing:
-    value: "{size-rem.xs}"

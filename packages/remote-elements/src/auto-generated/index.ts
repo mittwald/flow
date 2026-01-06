@@ -57,6 +57,7 @@ export * from "./RemoteIconElement";
 export * from "./RemoteIllustratedMessageElement";
 export * from "./RemoteImageElement";
 export * from "./RemoteInitialsElement";
+export * from "./RemoteInlineAlertElement";
 export * from "./RemoteInlineCodeElement";
 export * from "./RemoteItemsGridListElement";
 export * from "./RemoteItemsGridListItemElement";

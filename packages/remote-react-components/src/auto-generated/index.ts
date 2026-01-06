@@ -57,6 +57,7 @@ export * from "./Icon";
 export * from "./IllustratedMessage";
 export * from "./Image";
 export * from "./Initials";
+export * from "./InlineAlert";
 export * from "./InlineCode";
 export * from "./ItemsGridList";
 export * from "./ItemsGridListItem";
