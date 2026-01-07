@@ -4,19 +4,17 @@
   background-color: rgba(120, 120, 120, 0.2);
   border-radius: var(--corner-radius--default);
   width: 100%;
-  height: 1em;
   display: inline-block;
   max-width: 100%;
   vertical-align: middle;
+  height: 1em;
 
   &::before {
-    height: 1em;
     content: "-";
     visibility: hidden;
   }
 
   &::after {
-    height: 1em;
     position: absolute;
     top: 0;
     right: 0;

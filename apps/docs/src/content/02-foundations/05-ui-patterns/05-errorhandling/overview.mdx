@@ -1,22 +1,42 @@
-# Allgemein 
+# Allgemein
 
-Fehlermeldungen sollten immer verständlich formuliert sein und auf technische Fachbegriffe verzichten. Sie beschreiben das Problem aus Sicht des Users und nicht aus Sicht des Systems mehr dazu findest du in der Guideline [Fehlermeldung](/02-foundations/03-content-guidelines/03-fehlermeldungen). 
+Fehlermeldungen sollten immer verständlich formuliert sein und auf technische
+Fachbegriffe verzichten. Sie beschreiben das Problem aus Sicht des Users und
+nicht aus Sicht des Systems mehr dazu findest du in der Guideline
+[Fehlermeldung](/02-foundations/03-content-guidelines/03-fehlermeldungen).
 
 ---
 
 # Fehler beim Laden von Inhalten
 
-Beim Laden von Inhalten können Fehler auftreten, zum Beispiel wenn ein Service nicht erreichbar ist, ein Timeout entsteht oder ein technischer Fehler vorliegt. In diesen Fällen sollte der Ladezustand beendet werden, damit User sehen, dass ein Fehler passiert ist und nicht weiter warten.
+Beim Laden von Inhalten können Fehler auftreten, zum Beispiel wenn ein Service
+nicht erreichbar ist, ein Timeout entsteht oder ein technischer Fehler vorliegt.
+In diesen Fällen sollte der Ladezustand beendet werden, damit User sehen, dass
+ein Fehler passiert ist und nicht weiter warten.
 
-Die Fehlermeldung sollte immer dort erscheinen, wo der erwartete Inhalt wäre. Für größere Bereiche wie [LayoutCards](/03-components/structure/layout-card/overview) oder [Sections](/03-components/structure/section/overview) eignet sich eine [IllustratedMessage](/03-components/content/illustrated-message/overview) mit dem Status Danger. Sie signalisiert deutlich, dass der Inhalt aktuell nicht verfügbar ist, und bietet idealerweise eine Handlung an, zum Beispiel einen Button mit erneut laden.
+Die Fehlermeldung sollte immer dort erscheinen, wo der erwartete Inhalt wäre.
+Für größere Bereiche wie
+[LayoutCards](/03-components/structure/layout-card/overview) oder
+[Sections](/03-components/structure/section/overview) eignet sich eine
+[IllustratedMessage](/03-components/content/illustrated-message/overview) mit
+dem Status Danger. Sie signalisiert deutlich, dass der Inhalt aktuell nicht
+verfügbar ist, und bietet idealerweise eine Handlung an, zum Beispiel einen
+Button mit erneut laden.
 
-[Example IllstratedMessage]
+<LiveCodeEditor example="illustrated-message" editorCollapsed bgColor="dark" />
 
-Für kleinere, abgegrenzte UI Elemente wie Tabellen- oder Listenzeilen sollte ein [InlineAlert](LINK) verwendet werden. So bleibt der Kontext erhalten und der Fehler wirkt sich nicht auf die ganze [Table](/03-components/structure/table/overview) oder [List](/03-components/structure/list/overview) aus.
+Für kleinere, abgegrenzte UI Elemente wie Tabellen- oder Listenzeilen sollte ein
+[InlineAlert](LINK) verwendet werden. So bleibt der Kontext erhalten und der
+Fehler wirkt sich nicht auf die ganze
+[Table](/03-components/structure/table/overview) oder
+[List](/03-components/structure/list/overview) aus.
 
-[Example InlineAlert]
+<LiveCodeEditor example="inline-alert" editorCollapsed bgColor="dark" />
 
-Um Errors auf kleine Breiche zu begrenzen nutzen wir im  mStudio Loading und Error Boundaries. Diese kapseln technische Fehler ab und sorgen für konsistentes Feedback. Details dazu sind in der Guideline zu [Boundaries (Internal)](/02-foundations/04-internal/01-boundaries) beschrieben.
+Um Errors auf kleine Breiche zu begrenzen nutzen wir im mStudio Loading und
+Error Boundaries. Diese kapseln technische Fehler ab und sorgen für konsistentes
+Feedback. Details dazu sind in der Guideline zu
+[Boundaries (Internal)](/02-foundations/04-internal/01-boundaries) beschrieben.
 
 ---
 
@@ -24,15 +44,32 @@ Um Errors auf kleine Breiche zu begrenzen nutzen wir im  mStudio Loading und Err
 
 ## Fehler durch ungültige Eingaben
 
-Ungültige Eingaben treten häufig in Forms auf, zum Beispiel bei fehlenden Pflichtfeldern oder falsch formatierten Werten. In diesen Fällen sollte das Feedback direkt am Form Control erfolgen. User müssen sofort erkennen können, was angepasst werden muss, ohne die Seite oder den Kontext zu verlassen. Weitere Details dazu sind unter [Forms (Validation)](LINK) beschrieben.
+Ungültige Eingaben treten häufig in Forms auf, zum Beispiel bei fehlenden
+Pflichtfeldern oder falsch formatierten Werten. In diesen Fällen sollte das
+Feedback direkt am Form Control erfolgen. User müssen sofort erkennen können,
+was angepasst werden muss, ohne die Seite oder den Kontext zu verlassen. Weitere
+Details dazu sind unter [Forms (Validation)](LINK) beschrieben.
 
 ## Fehler bei serverseitigen Aktionen
 
-Aktionen, die einen Request an das Backend senden, können aus unterschiedlichen Gründen fehlschlagen. Dazu zählen technische Fehler im System, Probleme bei der Kommunikation mit dem Backend oder fehlende Berechtigungen.
+Aktionen, die einen Request an das Backend senden, können aus unterschiedlichen
+Gründen fehlschlagen. Dazu zählen technische Fehler im System, Probleme bei der
+Kommunikation mit dem Backend oder fehlende Berechtigungen.
 
-Wenn eine Aktion fehlschlägt, sollte dies deutlich kommuniziert werden, dafür eigenet sich ein [Modal](/03-components/overlays/modal/overview) mit einer [IllustratedMessage](/03-components/content/illustrated-message/overview) im Status Danger. Diese informiert darüber, dass die Aktion nicht durchgeführt werden konnte, und erklärt kurz den Grund, sofern dieser für den User relevant ist. Zusätzlich sollte immer ein Ausweg angeboten werden, zum Beispiel die Aktion erneut auszuführen. 
+Wenn eine Aktion fehlschlägt, sollte dies deutlich kommuniziert werden, dafür
+eigenet sich ein [Modal](/03-components/overlays/modal/overview) mit einer
+[IllustratedMessage](/03-components/content/illustrated-message/overview) im
+Status Danger. Diese informiert darüber, dass die Aktion nicht durchgeführt
+werden konnte, und erklärt kurz den Grund, sofern dieser für den User relevant
+ist. Zusätzlich sollte immer ein Ausweg angeboten werden, zum Beispiel die
+Aktion erneut auszuführen.
 
-[Example Modal]
+<LiveCodeEditor example="modal" editorCollapsed bgColor="dark" />
 
-Für Aktionen, die über einen längeren Zeitraum laufen und zunächst erfolgreich an das Backend übermittelt werden, aber erst später fehlschlagen, eignet sich besser [Notifications](/03-components/status/notification/overview). Ein typisches Beispiel ist das Registrieren einer Domain. Weitere Details dazu sind im [Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept) beschrieben.
-
+Für Aktionen, die über einen längeren Zeitraum laufen und zunächst erfolgreich
+an das Backend übermittelt werden, aber erst später fehlschlagen, eignet sich
+besser [Notifications](/03-components/status/notification/overview). Ein
+typisches Beispiel ist das Registrieren einer Domain. Weitere Details dazu sind
+im
+[Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept)
+beschrieben.
