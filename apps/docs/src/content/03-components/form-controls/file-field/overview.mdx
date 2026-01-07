@@ -38,6 +38,15 @@ ausgegeben werden.
 
 ---
 
+# Mehere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien ermöglicht. Beim erneuten Hochladen werden bestehende Dateien standardmäßig ersetzt. Wenn Dateien nacheinander hochgeladen werden sollen, kombiniere das FileField mit der [FileCardList](/03-components/upload/file-card-list/overview).
+
+(Example Multiple)
+
+
+---
+
 # Kombiniere mit ...
 
 ## ContextualHelp
@@ -46,6 +55,12 @@ Verwende [ContextualHelp](/03-components/overlays/contextual-help/overview), um
 zusätzliche Informationen bereitzustellen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## FileCardList
+
+Wenn User Dateien nach dem Hochladen hinzufügen und auch wieder entfernen sollen, kombiniere das FileField mit der FileCardList. Die FileCardList zeigt die im State zwischengespeicherten Dateien.
+
+(Example FileCardList)
 
 ## React Hook Form
 
