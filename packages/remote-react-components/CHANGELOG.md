@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.621](https://github.com/mittwald/flow/compare/0.2.0-alpha.620...0.2.0-alpha.621) (2026-01-08)
+
+### Bug Fixes
+
+* **List:** update bottom content position ([#2236](https://github.com/mittwald/flow/issues/2236)) ([e75f762](https://github.com/mittwald/flow/commit/e75f7628391a11c6555a3da93751a038cb2b3df4))
+
 # [0.2.0-alpha.620](https://github.com/mittwald/flow/compare/0.2.0-alpha.619...0.2.0-alpha.620) (2026-01-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
