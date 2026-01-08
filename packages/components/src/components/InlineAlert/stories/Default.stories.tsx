@@ -52,7 +52,7 @@ export const InList: Story = {
 
     return (
       <Section>
-        <List.List>
+        <List.List aria-label="Mitglieder">
           <List.StaticData data={[{ name: "John Doe" }]} />
           <List.Item showTiles textValue={(user) => user.name}>
             {(user) => (
@@ -61,9 +61,7 @@ export const InList: Story = {
                   <Image alt={user.name} src={dummyText.imageSrc} />
                 </Avatar>
                 <Heading>{user.name}</Heading>
-                <Text>
-                  <InlineAlert>{dummyText.short}</InlineAlert>
-                </Text>
+                <Text>{dummyText.medium}</Text>
                 <Text>
                   <InlineAlert>{dummyText.medium}</InlineAlert>
                 </Text>

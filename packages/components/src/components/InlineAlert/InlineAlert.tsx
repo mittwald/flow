@@ -23,7 +23,7 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
 
   return (
     <span className={rootClassName}>
-      <AlertIcon size="s" status={status} />
+      <AlertIcon size="s" status={status} className={styles.icon} />
       <Text>
         <small>{children}</small>
       </Text>

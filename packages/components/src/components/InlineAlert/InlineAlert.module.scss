@@ -1,8 +1,10 @@
 .inlineAlert {
-  display: inline-flex;
-  align-items: center;
-  column-gap: var(--inline-alert--spacing);
-  vertical-align: bottom;
+  display: inline;
+
+  .icon {
+    vertical-align: text-bottom;
+    margin-inline-end: var(--inline-alert--spacing);
+  }
 
   /* Colors */
   @mixin status($status) {
