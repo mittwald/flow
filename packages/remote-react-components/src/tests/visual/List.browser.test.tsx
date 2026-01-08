@@ -135,6 +135,8 @@ test.each(testEnvironments)(
         name: string;
         role: string;
         active: boolean;
+        content: string;
+        bottomContent: string;
       }>();
 
       return (
@@ -145,8 +147,24 @@ test.each(testEnvironments)(
         >
           <List.StaticData
             data={[
-              { id: "1", name: "Max Mustermann", role: "Admin", active: true },
-              { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "1",
+                name: "Max Mustermann",
+                role: "Admin",
+                active: true,
+                content: "Content",
+                bottomContent: "Bottom Content",
+              },
+              {
+                id: "2",
+                name: "John Doe",
+                role: "Developer",
+                active: false,
+                content:
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                bottomContent:
+                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+              },
             ]}
           />
           <List.Item showTiles textValue={(i) => i.name}>
@@ -160,8 +178,8 @@ test.each(testEnvironments)(
                   {i.active && <Badge>Active</Badge>}
                 </Heading>
                 <Text>{i.role}</Text>
-                <Content>Content</Content>
-                <Content slot="bottom">Bottom content</Content>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
                 <ContextMenu data-testid="contextMenu">
                   <MenuItem>Show details</MenuItem>
                   <MenuItem>Delete</MenuItem>
