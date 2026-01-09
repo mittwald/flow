@@ -3,6 +3,7 @@ import styles from "./IllustratedMessage.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -47,9 +48,11 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
 
   return (
     <div {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+      <ClearPropsContext>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </ClearPropsContext>
     </div>
   );
 };
