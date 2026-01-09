@@ -23,13 +23,30 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "InlineAlert edge cases (%s)",
-  async ({ testScreenshot, render, components: { InlineAlert } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { InlineAlert, Flex, Text },
+  }) => {
     await render(
-      <InlineAlert>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-        quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium
-        rerum ullam modi blanditiis vitae, laborum ea tempore, dolore voluptas.
-      </InlineAlert>,
+      <Flex direction="column">
+        <InlineAlert>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+          dolore voluptas.
+        </InlineAlert>
+        <Text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
+          quam quas vel voluptas
+          <InlineAlert>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
+            quam quas vel voluptas
+          </InlineAlert>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
+          quam quas vel voluptas
+        </Text>
+      </Flex>,
     );
 
     await testScreenshot("InlineAlert edge cases");
