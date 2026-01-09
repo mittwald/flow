@@ -24,12 +24,9 @@ jeweiligen Elementen ausführen.
 Die Listenansicht ist besonders geeignet, wenn viele Elemente übersichtlich,
 platzsparend und gleichzeitig ansprechend dargestellt werden sollen. Sie
 repräsentiert häufig größere Elemente, bei denen es sich lohnt, einen
-[Avatar](/03-components/content/avatar/overview), ein
-[Image](/03-components/content/image/overview) oder ein
-[Icon](/03-components/content/icon/overview) anzuzeigen.
+[Avatar](/03-components/content/avatar/overview) anzuzeigen.
 
-Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie
-im mStudio als Standardansicht der Liste verwendet. Um User weitere
+Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie oft als erste Ansicht einer List im mStudio verwendet. Um Usern weitere
 Informationen bereitzustellen, führen die sogenannten **ListItems**
 beispielsweise zu [Detailseiten](/02-foundations/05-ui-patterns/03-struktur).
 
@@ -39,7 +36,7 @@ beispielsweise zu [Detailseiten](/02-foundations/05-ui-patterns/03-struktur).
 
 Die Rasteransicht ist sinnvoll, wenn die visuelle Darstellung im Vordergrund
 steht. Das ListItem in Form einer **Tile** enthält hier bewusst nur wenige
-Informationen, damit das [Image](/03-components/content/image/overview) bzw. die
+Informationen, damit der [Avatar](/03-components/content/avatar/overview) bzw. die
 visuelle Repräsentation des Elements ins Auge fällt. Sie eignet sich besonders
 für Elemente, bei denen der User selbst ein Image hochgeladen hat oder hochladen
 kann. Da nur wenige inhaltliche Informationen vermittelt werden, eignet sich die
@@ -69,10 +66,10 @@ Elemente. Die Tabellenansicht verwendet die Component
 Aufzählung von Elementen verwendet – häufig als Einstiegsseiten zu
 [Detailansichten](/02-foundations/05-ui-patterns/03-struktur).
 
-Wenn die List oder Table auch ohne sichtbares
+Wenn die List oder Table auch ohne sichtbare
 [Heading](/03-components/content/heading/overview) (z. B. durch den Seitentitel)
 eindeutig ist, sollte eine versteckte Heading darüber platziert werden. In
-diesem Fall sollte zusätzlich ein passendes aria-label gesetzt werden.
+diesem Fall sollte das passendes aria-label nicht vergessen werden.
 
 Eine typische **List** ist wie folgt aufgebaut:
 
@@ -114,9 +111,7 @@ Filter sind in der Regel UND-verknüpft.
 
 **Suche:** Die Suchfunktion erleichtert das schnelle Auffinden einzelner
 Elemente innerhalb der List. Sie ergänzt die Sortier- und Filterfunktionen, um
-die Navigation besonders bei umfangreichen Listen effizient zu gestalten. Die
-Suche sollte stets direkt zugänglich sein und relevante Ergebnisse klar
-hervorheben.
+die Navigation besonders bei umfangreichen Listen effizient zu gestalten. 
 
 **Actions:** Die [List](/03-components/structure/list/overview) kann eine
 [ActionGroup](/03-components/actions/action-group/overview) mit verschiedenen
@@ -129,7 +124,7 @@ sollten hier über einen Button gestartet werden.
 
 ---
 
-# Empty State
+# Erstes Anlegen
 
 Wenn eine [List](/03-components/structure/list/overview) oder
 [Table](/03-components/structure/table/overview) noch keine Elemente enthält,
