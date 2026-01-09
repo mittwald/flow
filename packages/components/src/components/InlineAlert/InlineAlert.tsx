@@ -8,6 +8,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface InlineAlertProps
   extends PropsWithStatus,
@@ -23,10 +24,10 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
 
   return (
     <span className={rootClassName}>
-      <AlertIcon size="s" status={status} className={styles.icon} />
-      <Text>
-        <small>{children}</small>
-      </Text>
+      <PropsContextProvider props={{ Icon: { size: "s" } }}>
+        <AlertIcon status={status} className={styles.icon} />
+      </PropsContextProvider>
+      <Text>{children}</Text>
     </span>
   );
 });

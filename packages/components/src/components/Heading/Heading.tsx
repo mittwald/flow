@@ -55,6 +55,11 @@ export const Heading = flowComponent("Heading", (props) => {
         tunnelId: null,
       },
     },
+    InlineAlert: {
+      Icon: {
+        size: "m",
+      },
+    },
   };
 
   return (

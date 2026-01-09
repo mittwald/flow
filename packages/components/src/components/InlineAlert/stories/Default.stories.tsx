@@ -46,8 +46,9 @@ export const Danger: Story = {
 export const Unavailable: Story = {
   args: { status: "unavailable" },
 };
+
 export const InList: Story = {
-  render: () => {
+  render: (props) => {
     const List = typedList<{ name: string }>();
 
     return (
@@ -63,13 +64,24 @@ export const InList: Story = {
                 <Heading>{user.name}</Heading>
                 <Text>{dummyText.medium}</Text>
                 <Text>
-                  <InlineAlert>{dummyText.medium}</InlineAlert>
+                  <InlineAlert {...props}>{dummyText.medium}</InlineAlert>
                 </Text>
               </List.ItemView>
             )}
           </List.Item>
         </List.List>
       </Section>
+    );
+  },
+};
+
+export const InHeading: Story = {
+  render: (props) => {
+    return (
+      <Heading>
+        {dummyText.short}{" "}
+        <InlineAlert {...props}>{dummyText.short}</InlineAlert>
+      </Heading>
     );
   },
 };
