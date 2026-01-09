@@ -16,6 +16,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
+import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface ModalProps
   extends PropsWithChildren,
@@ -97,6 +98,7 @@ export const Modal = flowComponent("Modal", (props) => {
       m: [1],
       className: styles.columnLayout,
       AccentBox: { className: styles.accentBox, color: "neutral" },
+      wrapWith: <ClearPropsContext />,
     },
     Heading: {
       className: styles.header,

@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -12,6 +12,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 
 export interface MessageProps
   extends PropsWithChildren,
@@ -19,13 +20,18 @@ export interface MessageProps
     FlowComponentProps {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
+  color?: string;
 }
 
 /** @flr-generate all */
 export const Message = flowComponent("Message", (props) => {
-  const { type = "responder", children, className } = props;
+  const { type = "responder", children, className, color } = props;
 
   const rootClassName = clsx(styles.message, styles[type], className);
+
+  const style = color
+    ? ({ "--message-background": color } as CSSProperties)
+    : undefined;
 
   const propsContext: PropsContext = {
     Content: {
@@ -42,14 +48,14 @@ export const Message = flowComponent("Message", (props) => {
     Header: {
       className: styles.header,
       Button: {
-        className: styles.action,
+        className: styles.headerAction,
         size: "s",
         variant: "plain",
         color: "secondary",
       },
       ContextMenuTrigger: {
         Button: {
-          className: styles.action,
+          className: styles.headerAction,
           size: "s",
           variant: "plain",
           color: "secondary",
@@ -58,14 +64,29 @@ export const Message = flowComponent("Message", (props) => {
       },
       Text: { className: styles.date },
       Align: {
+        wrapWith: <ClearPropsContext />,
         className: styles.user,
+      },
+    },
+
+    Button: {
+      size: "s",
+      className: styles.action,
+    },
+    ActionGroup: {
+      className: styles.actionGroup,
+      Button: {
+        size: "s",
+        className: styles.actionGroupAction,
       },
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <article className={rootClassName}>{children}</article>
+      <article className={rootClassName} style={style}>
+        {children}
+      </article>
     </PropsContextProvider>
   );
 });

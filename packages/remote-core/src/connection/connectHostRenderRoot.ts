@@ -17,6 +17,17 @@ interface Options {
 const incompatibleParentFrameError = () =>
   new RemoteError("Could not find any compatible parent frame");
 
+export const connectRemoteReceiver = (
+  root: HTMLDivElement,
+  receiverConnection: RemoteConnection,
+) =>
+  import("@mittwald/remote-dom-core/elements").then(
+    ({ RemoteMutationObserver }) => {
+      const observer = new RemoteMutationObserver(receiverConnection);
+      observer.observe(root);
+    },
+  );
+
 export const connectHostRenderRoot = async (
   options: Options,
 ): Promise<RemoteToHostConnection> => {
@@ -26,12 +37,7 @@ export const connectHostRenderRoot = async (
     serialization: new FlowThreadSerialization(),
     exports: {
       render: (connection: RemoteConnection) =>
-        import("@mittwald/remote-dom-core/elements").then(
-          ({ RemoteMutationObserver }) => {
-            const observer = new RemoteMutationObserver(connection);
-            observer.observe(root);
-          },
-        ),
+        connectRemoteReceiver(root, connection),
       setPathname: async (pathname) => {
         onPathnameChanged?.(pathname);
       },

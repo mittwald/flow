@@ -144,7 +144,7 @@
 
     .content {
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: flex-start;
       padding-inline: var(--list-item--padding);
       padding-bottom: var(--list-item--padding);
@@ -205,6 +205,10 @@
 
     .action {
       align-self: start;
+    }
+
+    .bottomContent {
+      margin-top: auto;
     }
   }
 }

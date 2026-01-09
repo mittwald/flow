@@ -8,10 +8,33 @@ Verwende `<Message />`, um eine Message darzustellen.
 
 # Type
 
-Eine Message hat im Default den Type `responder`. Stellt man diese Property
-auf `sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
+Eine Message hat im Default den Type `responder`. Stellt man diese Property auf
+`sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
 
 <LiveCodeEditor example="sender" editorCollapsed />
+
+---
+
+# Mit Action
+
+Eine Message kann um einen [Button ](/03-components/actions/button/overview)
+oder eine [ActionGroup](/03-components/actions/action-group/overview) erweitert
+werden. Die Actions sollten dabei immer in direktem Bezug zum Inhalt der Message
+stehen und passende Interaktion ermöglichen.
+
+<LiveCodeEditor example="action" editorCollapsed />
+
+---
+
+# Custom Color
+
+Im Default sind `sender` blau und `responder` grau hinterlegt. Wenn eine
+Nachricht gezielt hervorgehoben werden soll, zum Beispiel als System-Nachricht
+oder als interne Notiz, kann der Message eine customColor mitgegeben werden.
+Dabei muss der Entwickler selbst auf einen ausreichenden Kontrast zur Textfarbe
+achten.
+
+<LiveCodeEditor example="color" editorCollapsed />
 
 ---
 
@@ -19,7 +42,8 @@ auf `sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
 
 ## Markdown
 
-Um eine Texteingabe innerhalb der Message als [Markdown](/03-components/content/markdown/overview)
-zu rendern, kann die `<Markdown />`-Component verwendet werden.
+Um eine Texteingabe innerhalb der Message als
+[Markdown](/03-components/content/markdown/overview) zu rendern, kann die
+`<Markdown />`-Component verwendet werden.
 
 <LiveCodeEditor example="markdown" editorCollapsed />

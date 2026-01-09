@@ -53,7 +53,10 @@ const Home: FC = () => {
               </li>
               <li>
                 Open-Source: Flow ist 100 % öffentlich auf{" "}
-                <Link href="https://github.com/mittwald/flow">GitHub</Link>.
+                <Link href="https://github.com/mittwald/flow" target="_blank">
+                  GitHub
+                </Link>
+                .
               </li>
               <li>Accessibility: Alle Components sind barrierefrei.</li>
             </ul>
@@ -70,7 +73,7 @@ const Home: FC = () => {
               Get Started
             </Heading>
             <Text>Installiere Flow und starte in wenigen Schritten.</Text>
-            <Link href="01-get-started/installation">Get started</Link>
+            <Link href="/01-get-started/installation">Get started</Link>
           </Section>
         </LayoutCard>
         <LayoutCard>
@@ -84,7 +87,7 @@ const Home: FC = () => {
             <Text>
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
-            <Link href="02-foundations/01-design/01-design-tokens">
+            <Link href="/02-foundations/01-design/01-design-tokens">
               Foundations
             </Link>
           </Section>
@@ -100,7 +103,7 @@ const Home: FC = () => {
             <Text>
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
-            <Link href="03-components/actions/action-group">Components</Link>
+            <Link href="/03-components/actions/action-group">Components</Link>
           </Section>
         </LayoutCard>
       </ColumnLayout>

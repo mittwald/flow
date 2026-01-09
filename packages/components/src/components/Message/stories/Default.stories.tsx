@@ -9,6 +9,7 @@ import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof Message> = {
   title: "Chat/Message",
@@ -31,7 +32,7 @@ const meta: Meta<typeof Message> = {
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
-            <b>Max Mustermann</b>
+            <strong>Max Mustermann</strong>
             Organisationsinhaber
           </Text>
         </Align>
@@ -41,6 +42,7 @@ const meta: Meta<typeof Message> = {
       <Content>
         <Text>Das ist eine Nachricht</Text>
       </Content>
+      <Button>Button</Button>
     </Message>
   ),
 };
@@ -58,6 +60,30 @@ export const MessageOnly: Story = {
       <Content>
         <Text>Das ist eine Nachricht</Text>
       </Content>
+    </Message>
+  ),
+};
+
+export const CustomColor: Story = {
+  args: { color: "#ffeedd" },
+};
+
+export const SenderCustomColor: Story = {
+  args: { type: "sender", color: "#ffeedd" },
+};
+
+export const WithActionGroup: Story = {
+  render: (props) => (
+    <Message {...props}>
+      <Content>
+        <Text>Das ist eine Nachricht</Text>
+      </Content>
+      <ActionGroup>
+        <Button slot="secondary" variant="soft" color="secondary">
+          Secondary
+        </Button>
+        <Button>Primary</Button>
+      </ActionGroup>
     </Message>
   ),
 };

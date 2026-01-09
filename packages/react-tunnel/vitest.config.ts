@@ -1,20 +1,22 @@
 import defaultConfig from "./vite.config";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
+import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
 
 export default mergeConfig(
   defaultConfig,
   defineConfig({
     test: {
-      globals: true,
-      environmentMatchGlobs: [
-        ["dev/**", "node"],
-        ["src/**", "happy-dom"],
+      projects: [
+        {
+          extends: true,
+          test: {
+            ...vitestBrowserTestConfig,
+            name: "browser",
+            include: ["src/**/*.browser.test.{ts,tsx}"],
+          },
+        },
       ],
-      coverage: {
-        reporter: ["json-summary", "json"],
-        reportOnFailure: true,
-      },
     },
   }),
 );

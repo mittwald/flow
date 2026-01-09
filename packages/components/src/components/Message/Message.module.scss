@@ -4,13 +4,14 @@
   row-gap: var(--message--spacing-y);
   width: max-content;
   max-width: min(100%, var(--text--max-width));
+  --message-background: var(--message--background-color-responder);
 
   .content {
     grid-area: content;
     border-radius: var(--message--corner-radius);
     padding-inline: var(--message--padding-x);
     padding-block: var(--message--padding-y);
-    background-color: var(--message--background-color-responder);
+    background-color: var(--message-background);
     position: relative;
 
     .tip {
@@ -30,8 +31,17 @@
     }
   }
 
+  .actionGroup {
+    justify-content: start;
+    .actionGroupAction {
+      margin: 0;
+    }
+  }
+
   &.sender {
     align-self: flex-end;
+    --message-background: var(--message--background-color-sender);
+
     .header {
       flex-direction: row-reverse;
 
@@ -45,7 +55,7 @@
     }
 
     .content {
-      background-color: var(--message--background-color-sender);
+      background-color: var(--message-background);
       border-top-right-radius: 0;
       margin-inline-end: var(--message--tip-size-x);
 
@@ -53,10 +63,15 @@
         right: calc(var(--message--tip-size-x) * -1);
         &:before {
           border-top-left-radius: 100%;
-          box-shadow: 0 0 0 var(--message--tip-size-x)
-            var(--message--background-color-sender);
+          box-shadow: 0 0 0 var(--message--tip-size-x) var(--message-background);
         }
       }
+    }
+
+    .action,
+    .actionGroup {
+      margin-inline-end: var(--message--tip-size-x);
+      align-self: end;
     }
   }
 
@@ -70,9 +85,14 @@
         &:before {
           border-top-right-radius: 100%;
           box-shadow: var(--message--tip-size-x) 0 0 var(--message--tip-size-x)
-            var(--message--background-color-responder);
+            var(--message-background);
         }
       }
+    }
+
+    .action,
+    .actionGroup {
+      margin-inline-start: var(--message--tip-size-x);
     }
   }
 
@@ -93,7 +113,7 @@
       order: 2;
     }
 
-    .action {
+    .headerAction {
       order: 3;
     }
   }

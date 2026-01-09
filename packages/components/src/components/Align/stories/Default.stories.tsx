@@ -14,7 +14,7 @@ const meta: Meta<typeof Align> = {
         <Initials>Max Mustermann</Initials>
       </Avatar>
       <Text>
-        <b>Max Mustermann</b>
+        <strong>Max Mustermann</strong>
         Organisationsinhaber
       </Text>
     </Align>
@@ -33,7 +33,7 @@ export const Multiline: Story = {
         <Initials>Max Mustermann</Initials>
       </Avatar>
       <Text>
-        <b>Max Mustermann</b>
+        <strong>Max Mustermann</strong>
         Organisationsinhaber
         <br />
         max@mustermann.de
@@ -51,7 +51,7 @@ export const Singleline: Story = {
         <Initials>Max Mustermann</Initials>
       </Avatar>
       <Text>
-        <b>Max Mustermann</b>
+        <strong>Max Mustermann</strong>
       </Text>
     </Align>
   ),

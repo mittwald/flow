@@ -16,20 +16,33 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - uses: nrwl/nx-set-shas@v4
 
-      - if: github.ref != 'refs/heads/main'
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
       - name: Lint
         run: pnpm lint
 
-      - run: pnpm test
+      - name: Run unit tests
+        run: pnpm affected:test
 
-      - run: git diff --exit-code
+      - name: Prepare browser tests
+        run: pnpm test:browser:prepare --only-shell
+
+      # Should be changed to Chromium when flakiness is resolved, because of Chromium wider usage
+      # BTW: Using Webkit for now, because Firefox has issues with parallel visual tests
+      - name: Run browser tests in Webkit
+        run: pnpm affected:test:browser --parallel=1 --browser.name=webkit
+
+      - name: Check all generated code is committed
+        run: git diff --exit-code

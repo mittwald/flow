@@ -14,7 +14,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { TextArea } from "@/components/TextArea";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
-import { Field, Form } from "@/integrations/react-hook-form";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { action } from "storybook/actions";
 import { useForm } from "react-hook-form";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
@@ -37,7 +37,7 @@ const meta: Meta<typeof Chat> = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>
@@ -52,7 +52,7 @@ const meta: Meta<typeof Chat> = {
                 <Initials>John Doe</Initials>
               </Avatar>
               <Text>
-                <b>John Doe</b>
+                <strong>John Doe</strong>
               </Text>
             </Align>
           </Header>
@@ -83,7 +83,7 @@ export const WithUpload: Story = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>
@@ -120,7 +120,7 @@ export const WithForm: Story = {
                   <Initials>Max Mustermann</Initials>
                 </Avatar>
                 <Text>
-                  <b>Max Mustermann</b>
+                  <strong>Max Mustermann</strong>
                 </Text>
               </Align>
             </Header>
@@ -138,7 +138,7 @@ export const WithForm: Story = {
           <Field name="message">
             <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
           </Field>
-          <Button color="accent">Submit</Button>
+          <SubmitButton color="accent">Submit</SubmitButton>
         </Form>
       </Chat>
     );
@@ -156,7 +156,7 @@ export const WithMarkdownEditor: Story = {
                 <Initials>Max Mustermann</Initials>
               </Avatar>
               <Text>
-                <b>Max Mustermann</b>
+                <strong>Max Mustermann</strong>
               </Text>
             </Align>
           </Header>

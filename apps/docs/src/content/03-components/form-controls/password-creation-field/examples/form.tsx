@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
 import {
-  Button,
   Label,
   Section,
   PasswordCreationField,
@@ -54,7 +54,7 @@ export default () => {
             <Label>Passwort</Label>
           </PasswordCreationField>
         </Field>
-        <Button type="submit">Speichern</Button>
+        <SubmitButton>Speichern</SubmitButton>
       </Form>
     </Section>
   );

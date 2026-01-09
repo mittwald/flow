@@ -17,8 +17,8 @@ import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
-import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -79,27 +79,35 @@ export function flowComponent<C extends FlowComponentName>(
       <MemoizedImplementationComponentType {...implementationTypeProps} />
     );
 
-    if (isRemoteComponent) {
-      element = (
-        <ComponentPropsContextProvider componentProps={componentProps}>
-          {element}
-        </ComponentPropsContextProvider>
-      );
-    } else {
-      /**
-       * In case of a Flow component that does not have a remote counterpart
-       * (like the List component), the ComponentPropsContext must be applied on
-       * the host side, so that nesting and inheritance is working correctly.
-       */
-      element = (
-        <ComponentPropsContextProviderView componentProps={componentProps}>
-          {element}
-        </ComponentPropsContextProviderView>
-      );
-    }
+    element = (
+      <ComponentPropsContextProvider componentProps={componentProps}>
+        {element}
+      </ComponentPropsContextProvider>
+    );
 
     if (type === "ui") {
-      element = <ClearPropsContext>{element}</ClearPropsContext>;
+      /**
+       * Protect the inside of UI components for accidental prop changes through
+       * the Props Context.
+       */
+      if (isRemoteComponent) {
+        element = <ClearPropsContext>{element}</ClearPropsContext>;
+      } else {
+        /**
+         * In case of a UI component that does not have a remote counterpart
+         * (like the Modal component), the <ClearPropsContext> must be
+         * additionally applied on the host side by using the
+         * <ClearPropsContextView>.
+         *
+         * This prevents Props Contexts created by parent components on the host
+         * side affecting the children of this UI component.
+         */
+        element = (
+          <ClearPropsContext>
+            <ClearPropsContextView>{element}</ClearPropsContextView>
+          </ClearPropsContext>
+        );
+      }
     }
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {

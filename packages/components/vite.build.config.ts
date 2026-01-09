@@ -3,7 +3,6 @@ import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
-import { nodePolyfills as viteNodePolyfills } from "vite-plugin-node-polyfills";
 
 export default mergeConfig(
   baseConfig,
@@ -47,9 +46,6 @@ export default mergeConfig(
       },
     },
     plugins: [
-      viteNodePolyfills({
-        protocolImports: true,
-      }),
       banner((filename) =>
         filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
           ? '"use client"\r\n/* */'
