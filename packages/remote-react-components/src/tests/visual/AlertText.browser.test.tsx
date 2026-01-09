@@ -23,7 +23,11 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "AlertText edge cases (%s)",
-  async ({ testScreenshot, render, components: { AlertText, Flex, Text } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { AlertText, Flex, Text, Heading },
+  }) => {
     await render(
       <Flex direction="column">
         <AlertText>
@@ -42,6 +46,11 @@ test.each(testEnvironments)(
           Lorem ipsum dolor sit amet consectetur adipisicing elit Cumque eius
           quam quas vel voluptas
         </Text>
+        <Heading>
+          <AlertText>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit
+          </AlertText>
+        </Heading>
       </Flex>,
     );
 
