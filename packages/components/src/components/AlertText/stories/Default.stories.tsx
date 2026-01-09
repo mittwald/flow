@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { InlineAlert } from "@/components/InlineAlert";
+import { AlertText } from "@/components/AlertText";
 import { dummyText } from "@/lib/dev/dummyText";
 import { typedList } from "@/components/List";
 import Section from "@/components/Section";
@@ -8,9 +8,9 @@ import Image from "@/components/Image";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 
-const meta: Meta<typeof InlineAlert> = {
-  title: "Status/InlineAlert",
-  component: InlineAlert,
+const meta: Meta<typeof AlertText> = {
+  title: "Status/AlertText",
+  component: AlertText,
   argTypes: {
     status: {
       control: "inline-radio",
@@ -25,7 +25,7 @@ const meta: Meta<typeof InlineAlert> = {
 
 export default meta;
 
-type Story = StoryObj<typeof InlineAlert>;
+type Story = StoryObj<typeof AlertText>;
 
 export const Info: Story = {
   args: { status: "info" },
@@ -63,7 +63,7 @@ export const InList: Story = {
                 <Heading>{user.name}</Heading>
                 <Text>{dummyText.medium}</Text>
                 <Text>
-                  <InlineAlert>{dummyText.medium}</InlineAlert>
+                  <AlertText>{dummyText.medium}</AlertText>
                 </Text>
               </List.ItemView>
             )}

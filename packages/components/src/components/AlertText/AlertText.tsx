@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
-import styles from "./InlineAlert.module.scss";
+import styles from "./AlertText.module.scss";
 import { AlertIcon } from "@/components/AlertIcon";
 import { Text } from "@/components/Text";
 import {
@@ -9,17 +9,17 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 
-export interface InlineAlertProps
+export interface AlertTextProps
   extends PropsWithStatus,
     PropsWithClassName,
     PropsWithChildren,
     FlowComponentProps {}
 
 /** @flr-generate all */
-export const InlineAlert = flowComponent("InlineAlert", (props) => {
+export const AlertText = flowComponent("AlertText", (props) => {
   const { className, children, status = "info" } = props;
 
-  const rootClassName = clsx(styles.inlineAlert, styles[status], className);
+  const rootClassName = clsx(styles.alertText, styles[status], className);
 
   return (
     <span className={rootClassName}>
@@ -31,4 +31,4 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
   );
 });
 
-export default InlineAlert;
+export default AlertText;

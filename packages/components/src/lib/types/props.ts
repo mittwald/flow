@@ -7,6 +7,16 @@ export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
   status?: T;
 };
 
+export type AlertStatus = Exclude<Status, "unavailable">;
+
+export type PropsWithAlertStatus<
+  T extends AlertStatus = AlertStatus,
+  P = unknown,
+> = P & {
+  /** The elements status */
+  status?: T;
+};
+
 export interface PropsWithTunnel {
   /** @internal */
   tunnelId?: string | null;

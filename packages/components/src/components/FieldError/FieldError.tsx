@@ -10,7 +10,7 @@ import { FieldErrorContext, TextContext } from "react-aria-components";
 import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { InlineAlert } from "@/components/InlineAlert";
+import { AlertText } from "@/components/AlertText";
 
 export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
@@ -68,9 +68,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
       <FieldErrorContext value={mergedErrorState as never}>
         <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
-            return (
-              <InlineAlert status="danger">{validationErrors}</InlineAlert>
-            );
+            return <AlertText status="danger">{validationErrors}</AlertText>;
           }}
         </Aria.FieldError>
       </FieldErrorContext>

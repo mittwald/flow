@@ -4,16 +4,15 @@ import clsx from "clsx";
 import { AlertIcon } from "@/components/AlertIcon";
 import { Text } from "@/components/Text";
 import type {
+  PropsWithAlertStatus,
   PropsWithClassName,
-  PropsWithStatus,
-  Status,
 } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlertBadgeProps
   extends PropsWithChildren,
-    PropsWithStatus<Exclude<Status, "unavailable">>,
+    PropsWithAlertStatus,
     FlowComponentProps<HTMLDivElement>,
     PropsWithClassName {}
 

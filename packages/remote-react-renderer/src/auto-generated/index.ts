@@ -7,6 +7,7 @@ import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components";
 import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
 import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
+import { AlertText as AlertText } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
 import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
@@ -58,7 +59,6 @@ import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
-import { InlineAlert as InlineAlert } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
 import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
@@ -135,6 +135,7 @@ export const flowComponents = {
     AlertBadge,
   ),
   "flr-alert-icon": createFlowRemoteComponentRenderer("AlertIcon", AlertIcon),
+  "flr-alert-text": createFlowRemoteComponentRenderer("AlertText", AlertText),
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
   "flr-autocomplete": createFlowRemoteComponentRenderer(
@@ -273,10 +274,6 @@ export const flowComponents = {
   ),
   "flr-image": createFlowRemoteComponentRenderer("Image", Image),
   "flr-initials": createFlowRemoteComponentRenderer("Initials", Initials),
-  "flr-inline-alert": createFlowRemoteComponentRenderer(
-    "InlineAlert",
-    InlineAlert,
-  ),
   "flr-inline-code": createFlowRemoteComponentRenderer(
     "InlineCode",
     InlineCode,

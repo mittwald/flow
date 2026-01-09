@@ -81,7 +81,7 @@ import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
 import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
-import type { InlineAlertProps } from "@/components/InlineAlert";
+import type { AlertTextProps } from "@/components/AlertText";
 
 export * from "./types";
 
@@ -124,7 +124,7 @@ export interface FlowComponentPropsTypes {
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
-  InlineAlert: InlineAlertProps;
+  AlertText: AlertTextProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
@@ -208,7 +208,7 @@ const propsContextSupportingComponentsMap: Record<
   Icon: true,
   Image: true,
   Initials: true,
-  InlineAlert: true,
+  AlertText: true,
   Label: true,
   LayoutCard: true,
   LightBox: true,
