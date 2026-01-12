@@ -1,8 +1,8 @@
 # Playground
 
 Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des
-FileFields kommen die Components [Label](/03-components/content/label/overview) und
-[Button](/03-components/actions/button/overview) zum Einsatz.
+FileFields kommen die Components [Label](/03-components/content/label/overview)
+und [Button](/03-components/actions/button/overview) zum Einsatz.
 
 <LiveCodeEditor />
 
@@ -40,10 +40,12 @@ ausgegeben werden.
 
 # Mehere Dateien
 
-Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien ermöglicht. Beim erneuten Hochladen werden bestehende Dateien standardmäßig ersetzt. Wenn Dateien nacheinander hochgeladen werden sollen, kombiniere das FileField mit der [FileCardList](/03-components/upload/file-card-list/overview).
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneutem Hochladen werden bestehende Dateien standardmäßig
+ersetzt. Wenn Dateien nacheinander hochgeladen werden sollen, kombiniere das
+FileField mit der [FileCardList](/03-components/upload/file-card-list/overview).
 
-(Example Multiple)
-
+<LiveCodeEditor example="multiple" editorCollapsed />
 
 ---
 
@@ -58,14 +60,16 @@ zusätzliche Informationen bereitzustellen.
 
 ## FileCardList
 
-Wenn User Dateien nach dem Hochladen hinzufügen und auch wieder entfernen sollen, kombiniere das FileField mit der FileCardList. Die FileCardList zeigt die im State zwischengespeicherten Dateien.
+Wenn User Dateien nach dem Hochladen hinzufügen und auch wieder entfernen
+sollen, kombiniere das FileField mit der FileCardList. Die FileCardList zeigt
+die zwischengespeicherten Dateien.
 
-(Example FileCardList)
+<LiveCodeEditor example="fileCardList" editorCollapsed />
 
 ## React Hook Form
 
 Weitere Details zur Formularlogik und -validierung ist in der Component
-[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview) zu
-finden.
+[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview)
+zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
