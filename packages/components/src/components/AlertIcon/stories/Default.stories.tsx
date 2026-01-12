@@ -4,9 +4,6 @@ import AlertIcon from "../AlertIcon";
 const meta: Meta<typeof AlertIcon> = {
   title: "Status/AlertIcon",
   component: AlertIcon,
-  parameters: {
-    controls: { exclude: ["render", "tunnelId"] },
-  },
   argTypes: {
     size: {
       control: "inline-radio",
@@ -14,7 +11,7 @@ const meta: Meta<typeof AlertIcon> = {
     },
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: ["info", "success", "warning", "danger", "unavailable"],
     },
   },
   args: {
@@ -41,4 +38,8 @@ export const Warning: Story = {
 
 export const Danger: Story = {
   args: { status: "danger" },
+};
+
+export const Unavailable: Story = {
+  args: { status: "unavailable" },
 };

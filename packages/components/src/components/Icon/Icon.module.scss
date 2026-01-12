@@ -17,6 +17,7 @@
   @include size(s);
   @include size(l);
 
+  /* Colors */
   @mixin status($status) {
     &:where(.#{$status}) {
       color: var(--icon--#{$status}-color);
@@ -27,4 +28,5 @@
   @include status(success);
   @include status(warning);
   @include status(info);
+  @include status(unavailable);
 }

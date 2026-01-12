@@ -81,6 +81,7 @@ import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
 import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
+import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 
 export * from "./types";
@@ -92,6 +93,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
+  AlertText: AlertTextProps;
   Align: AlignProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
@@ -178,6 +180,7 @@ const propsContextSupportingComponentsMap: Record<
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
+  AlertText: true,
   Align: true,
   Badge: true,
   Button: true,

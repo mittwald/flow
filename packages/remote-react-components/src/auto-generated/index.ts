@@ -6,6 +6,7 @@ export * from "./ActionGroup";
 export * from "./Alert";
 export * from "./AlertBadge";
 export * from "./AlertIcon";
+export * from "./AlertText";
 export * from "./Align";
 export * from "./Area";
 export * from "./Autocomplete";
