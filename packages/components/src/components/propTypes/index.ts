@@ -81,6 +81,7 @@ import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
 import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
+import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 
 export * from "./types";
 
@@ -121,6 +122,7 @@ export interface FlowComponentPropsTypes {
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
+  IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
   Initials: InitialsProps;
   Label: LabelProps;
@@ -204,6 +206,7 @@ const propsContextSupportingComponentsMap: Record<
   Header: true,
   Heading: true,
   Icon: true,
+  IllustratedMessage: true,
   Image: true,
   Initials: true,
   Label: true,
