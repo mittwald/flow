@@ -4,14 +4,14 @@ import { IconClose } from "@/components/Icon/components/icons";
 import { Link } from "@/components/Link";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithStatus } from "@/lib/types/props";
+import type { PropsWithAlertStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
-    PropsWithStatus {
+    PropsWithAlertStatus {
   /** A link that is triggered when clicking the notification. */
   href?: string;
   /** Whether the notification should disappear automatically after some time. */
