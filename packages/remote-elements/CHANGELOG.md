@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.625](https://github.com/mittwald/flow/compare/0.2.0-alpha.624...0.2.0-alpha.625) (2026-01-12)
+
+### Features
+
+* **InlineAlert:** add inline alert component ([#2233](https://github.com/mittwald/flow/issues/2233)) ([ee58fcf](https://github.com/mittwald/flow/commit/ee58fcf4d8ed83eb0a68664765bd30f2c33b2784))
+
 # [0.2.0-alpha.624](https://github.com/mittwald/flow/compare/0.2.0-alpha.623...0.2.0-alpha.624) (2026-01-12)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
