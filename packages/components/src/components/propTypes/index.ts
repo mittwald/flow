@@ -82,6 +82,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
 import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
 import type { AlertTextProps } from "@/components/AlertText";
+import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 
 export * from "./types";
 
@@ -92,6 +93,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
+  AlertText: AlertTextProps;
   Align: AlignProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
@@ -122,9 +124,9 @@ export interface FlowComponentPropsTypes {
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
+  IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
   Initials: InitialsProps;
-  AlertText: AlertTextProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
@@ -178,6 +180,7 @@ const propsContextSupportingComponentsMap: Record<
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
+  AlertText: true,
   Align: true,
   Badge: true,
   Button: true,
@@ -206,9 +209,9 @@ const propsContextSupportingComponentsMap: Record<
   Header: true,
   Heading: true,
   Icon: true,
+  IllustratedMessage: true,
   Image: true,
   Initials: true,
-  AlertText: true,
   Label: true,
   LayoutCard: true,
   LightBox: true,
