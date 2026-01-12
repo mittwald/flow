@@ -1,18 +1,8 @@
 import type { ExoticComponent, HTMLAttributes } from "react";
 
-export type Status = "info" | "success" | "warning" | "danger" | "unavailable";
+export type Status = "info" | "success" | "warning" | "danger";
 
 export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
-  /** The elements status */
-  status?: T;
-};
-
-export type AlertStatus = Exclude<Status, "unavailable">;
-
-export type PropsWithAlertStatus<
-  T extends AlertStatus = AlertStatus,
-  P = unknown,
-> = P & {
   /** The elements status */
   status?: T;
 };

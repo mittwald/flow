@@ -3,14 +3,14 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithAlertStatus } from "@/lib/types/props";
+import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Alert.module.scss";
 
 export interface AlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    PropsWithAlertStatus,
+    PropsWithStatus,
     FlowComponentProps<HTMLElement> {}
 
 /** @flr-generate all */
