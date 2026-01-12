@@ -5,3 +5,4 @@ export const categoricalColors = Object.keys(
 ) as (keyof typeof tokens.color.categorical)[];
 
 export type CategoricalColor = (typeof categoricalColors)[number];
+export type CategoricalWithCustomColor = CategoricalColor | (string & {});

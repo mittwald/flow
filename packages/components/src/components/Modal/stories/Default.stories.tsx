@@ -291,7 +291,7 @@ export const LargeOffCanvas: Story = {
           </ColumnLayout>
 
           <ActionGroup>
-            <SubmitButton color="accent">Submit</SubmitButton>
+            <Button color="accent">Submit</Button>
             <Action closeOverlay="Modal">
               <Button variant="soft" color="secondary">
                 Abort

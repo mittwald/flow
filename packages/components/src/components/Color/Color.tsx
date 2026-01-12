@@ -13,6 +13,7 @@ const flowColors = [
 ] as const;
 
 type FlowColor = (typeof flowColors)[number];
+type FlowWithCustomColor = FlowColor | (string & {});
 
 function isFlowColor(something: unknown): something is FlowColor {
   const anyFlowColors = flowColors as readonly string[];
@@ -21,7 +22,7 @@ function isFlowColor(something: unknown): something is FlowColor {
 
 export interface ColorProps extends PropsWithChildren {
   /** The color of the element. @default "blue" */
-  color?: FlowColor | (string & {});
+  color?: FlowWithCustomColor;
 }
 
 /** @flr-generate all */

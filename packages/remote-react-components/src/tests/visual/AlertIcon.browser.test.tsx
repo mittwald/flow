@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-const states = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger", "unavailable"] as const;
 
 test.each(testEnvironments)(
   "AlertIcon states (%s)",

@@ -16,6 +16,10 @@
 
   .item {
     @include menuItem.menuItem();
+
+    .badge {
+      margin-inline-start: auto;
+    }
   }
 
   hr {

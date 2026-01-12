@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.626](https://github.com/mittwald/flow/compare/0.2.0-alpha.625...0.2.0-alpha.626) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.625](https://github.com/mittwald/flow/compare/0.2.0-alpha.624...0.2.0-alpha.625) (2026-01-12)
+
+### Features
+
+* **InlineAlert:** add inline alert component ([#2233](https://github.com/mittwald/flow/issues/2233)) ([ee58fcf](https://github.com/mittwald/flow/commit/ee58fcf4d8ed83eb0a68664765bd30f2c33b2784))
+
+# [0.2.0-alpha.624](https://github.com/mittwald/flow/compare/0.2.0-alpha.623...0.2.0-alpha.624) (2026-01-12)
+
+### Bug Fixes
+
+* **IllustratedMessage:** add flow component ([#2238](https://github.com/mittwald/flow/issues/2238)) ([a61bad9](https://github.com/mittwald/flow/commit/a61bad937f66b7ee7cd4499fe51a6bdad7d1cd3b))
+
+# [0.2.0-alpha.623](https://github.com/mittwald/flow/compare/0.2.0-alpha.622...0.2.0-alpha.623) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.622](https://github.com/mittwald/flow/compare/0.2.0-alpha.621...0.2.0-alpha.622) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.621](https://github.com/mittwald/flow/compare/0.2.0-alpha.620...0.2.0-alpha.621) (2026-01-08)
+
+### Bug Fixes
+
+* **List:** update bottom content position ([#2236](https://github.com/mittwald/flow/issues/2236)) ([e75f762](https://github.com/mittwald/flow/commit/e75f7628391a11c6555a3da93751a038cb2b3df4))
+
+# [0.2.0-alpha.620](https://github.com/mittwald/flow/compare/0.2.0-alpha.619...0.2.0-alpha.620) (2026-01-07)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.619](https://github.com/mittwald/flow/compare/0.2.0-alpha.618...0.2.0-alpha.619) (2026-01-06)
+
+### Features
+
+* **Modal:** improve open and close animations ([#2231](https://github.com/mittwald/flow/issues/2231)) ([6f20d0d](https://github.com/mittwald/flow/commit/6f20d0d4de20b9028b4a9f8401c847d0fd8e1960))
+
+# [0.2.0-alpha.618](https://github.com/mittwald/flow/compare/0.2.0-alpha.617...0.2.0-alpha.618) (2026-01-05)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.617](https://github.com/mittwald/flow/compare/0.2.0-alpha.616...0.2.0-alpha.617) (2026-01-05)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.616](https://github.com/mittwald/flow/compare/0.2.0-alpha.615...0.2.0-alpha.616) (2026-01-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix rendering order when using multiple Tunnel Entries ([a088504](https://github.com/mittwald/flow/commit/a0885047c38123e4fc5fe24314411715816982b1))
+
+# [0.2.0-alpha.615](https://github.com/mittwald/flow/compare/0.2.0-alpha.614...0.2.0-alpha.615) (2025-12-22)
+
+### Bug Fixes
+
+* **ComboBox:** fix ComboBox menu width when used in Modal ([#2228](https://github.com/mittwald/flow/issues/2228)) ([4d3f1ba](https://github.com/mittwald/flow/commit/4d3f1ba9259e22053a434709af0b84f92affc251))
+
+# [0.2.0-alpha.614](https://github.com/mittwald/flow/compare/0.2.0-alpha.613...0.2.0-alpha.614) (2025-12-22)
+
+### Bug Fixes
+
+* **Popover:** fix Modal closing issue on double clicks ([c341bdb](https://github.com/mittwald/flow/commit/c341bdb8813b2e5eb8fbe9097a1d3426cf59dea7))
+
+# [0.2.0-alpha.613](https://github.com/mittwald/flow/compare/0.2.0-alpha.612...0.2.0-alpha.613) (2025-12-22)
+
+### Features
+
+* **CartesianChart:** support custom colors ([#2209](https://github.com/mittwald/flow/issues/2209)) ([f007748](https://github.com/mittwald/flow/commit/f0077482c48461f2b4e1971adf20d5bfca72d6ef))
+
+# [0.2.0-alpha.612](https://github.com/mittwald/flow/compare/0.2.0-alpha.611...0.2.0-alpha.612) (2025-12-22)
+
+### Features
+
+* **Message:** support action group and button ([#2216](https://github.com/mittwald/flow/issues/2216)) ([d0c75c1](https://github.com/mittwald/flow/commit/d0c75c155726aefe2ef2f4a2b56112bf6a5a3646))
+
+# [0.2.0-alpha.611](https://github.com/mittwald/flow/compare/0.2.0-alpha.610...0.2.0-alpha.611) (2025-12-22)
+
+### Features
+
+* **Navigation:** support badge and counter badge ([#2218](https://github.com/mittwald/flow/issues/2218)) ([d6c63f4](https://github.com/mittwald/flow/commit/d6c63f45ce7fd64298301481cedc00249723e928))
+
+# [0.2.0-alpha.610](https://github.com/mittwald/flow/compare/0.2.0-alpha.609...0.2.0-alpha.610) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.609](https://github.com/mittwald/flow/compare/0.2.0-alpha.608...0.2.0-alpha.609) (2025-12-22)
 
 **Note:** Version bump only for package @mittwald/flow-project

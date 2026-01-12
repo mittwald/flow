@@ -6,6 +6,7 @@ import {
   IconPending,
   IconSucceeded,
   IconSuccess,
+  IconUnavailable,
   IconWarning,
   Label,
   LabeledValue,
@@ -27,6 +28,10 @@ import {
   <LabeledValue>
     <Label>Info</Label>
     <IconInfo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Unavailable</Label>
+    <IconUnavailable />
   </LabeledValue>
   <LabeledValue>
     <Label>Pending</Label>

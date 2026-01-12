@@ -3,8 +3,6 @@
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
-    transition-property: width;
-    transition-duration: var(--transition--duration--fast);
   }
 
   [role="dialog"],
@@ -98,6 +96,10 @@
         animation: modal-zoom var(--transition--duration--slow)
           cubic-bezier(0.1, 0.8, 0.3, 1.2);
       }
+      &[data-exiting] {
+        animation: modal-zoom var(--transition--duration--default)
+          cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
+      }
     }
   }
 }
@@ -156,6 +158,9 @@
       &[data-entering] {
         animation: modal-slide-up var(--transition--duration--slow);
       }
+      &[data-exiting] {
+        animation: modal-slide-up var(--transition--duration--default) reverse;
+      }
     }
   }
 }
@@ -177,11 +182,18 @@
 /* Animations */
 
 @keyframes modal-zoom {
-  from {
+  /* Start with scale(1) to let ResizeObservers take the correct width on mount. */
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  0.1% {
+    opacity: 1;
     transform: scale(0.8);
   }
 
-  to {
+  100% {
     transform: scale(1);
   }
 }
@@ -198,7 +210,7 @@
 
 @keyframes modal-slide-in-from-right {
   from {
-    margin-right: -100px;
+    margin-right: -200px;
   }
 
   to {
@@ -208,7 +220,7 @@
 
 @keyframes modal-slide-in-from-left {
   from {
-    margin-left: -100px;
+    margin-left: -200px;
   }
 
   to {

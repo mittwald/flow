@@ -57,21 +57,23 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
 
     const propsContext: PropsContext = {
       ...fieldPropsContext,
-      FileField: {
-        name,
-        onChange: onChangeDropZone,
-        ref: fileFieldRef,
-        accept: accept,
-        multiple: multiple,
-        Button: { variant: "outline", color: "dark" },
-        isDisabled,
-        isReadOnly,
+      IllustratedMessage: {
+        FileField: {
+          name,
+          onChange: onChangeDropZone,
+          ref: fileFieldRef,
+          accept: accept,
+          multiple: multiple,
+          Button: { variant: "outline", color: "dark" },
+          isDisabled,
+          isReadOnly,
+        },
+        Heading: {
+          className: styles.heading,
+        },
+        Icon: { className: styles.icon },
+        Text: { className: styles.text },
       },
-      Heading: {
-        className: styles.heading,
-      },
-      Icon: { className: styles.icon },
-      Text: { className: styles.text },
     };
 
     const onDropHandler = async (event: DropEvent) => {

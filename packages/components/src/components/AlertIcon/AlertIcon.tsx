@@ -3,20 +3,22 @@ import {
   IconDanger,
   IconInfo,
   IconSuccess,
+  IconUnavailable,
   IconWarning,
 } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { PropsWithStatus, Status } from "@/lib/types/props";
+import type { Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 
-export interface AlertIconProps extends PropsWithStatus, IconProps {}
+export type AlertIconProps = IconProps;
 
-const icons: Record<Status, ComponentType> = {
+const icons: Record<Status | "unavailable", ComponentType> = {
   danger: IconDanger,
   info: IconInfo,
   success: IconSuccess,
   warning: IconWarning,
+  unavailable: IconUnavailable,
 };
 
 /** @flr-generate all */

@@ -48,14 +48,14 @@ export const Message = flowComponent("Message", (props) => {
     Header: {
       className: styles.header,
       Button: {
-        className: styles.action,
+        className: styles.headerAction,
         size: "s",
         variant: "plain",
         color: "secondary",
       },
       ContextMenuTrigger: {
         Button: {
-          className: styles.action,
+          className: styles.headerAction,
           size: "s",
           variant: "plain",
           color: "secondary",
@@ -66,6 +66,18 @@ export const Message = flowComponent("Message", (props) => {
       Align: {
         wrapWith: <ClearPropsContext />,
         className: styles.user,
+      },
+    },
+
+    Button: {
+      size: "s",
+      className: styles.action,
+    },
+    ActionGroup: {
+      className: styles.actionGroup,
+      Button: {
+        size: "s",
+        className: styles.actionGroupAction,
       },
     },
   };

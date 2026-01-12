@@ -42,7 +42,7 @@ test.each(testEnvironments)(
       >
         <CartesianGrid />
         <Area dataKey="first" />
-        <Area dataKey="second" color="palatinate-blue" />
+        <Area dataKey="second" color="#555" />
         <Line dataKey="third" color="magenta" />
         <XAxis dataKey="name" />
         <YAxis />

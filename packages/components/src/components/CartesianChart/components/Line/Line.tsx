@@ -2,7 +2,8 @@ import { type FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 import { AreaDot } from "../AreaDot";
-import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
+import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
 export interface LineProps
   extends Pick<
@@ -10,20 +11,24 @@ export interface LineProps
     "className" | "dataKey" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
   > {
   /** The color of the line. @default "sea-green" */
-  color?: CategoricalColor;
+  color?: CategoricalWithCustomColor;
 }
 
 /** @flr-generate all */
 export const Line: FC<LineProps> = (props) => {
-  const { color = "sea-green", ...rest } = props;
+  const { color: colorFromProps = "sea-green", ...rest } = props;
+
+  const color = isCategoricalColor(colorFromProps)
+    ? `var(--color--categorical--${colorFromProps})`
+    : colorFromProps;
 
   return (
     <Recharts.Line
       {...rest}
-      fill={`var(--color--categorical--${color})`}
-      activeDot={<AreaDot color={`var(--color--categorical--${color})`} />}
+      fill={color}
+      activeDot={<AreaDot color={color} />}
       dot={false}
-      stroke={`var(--color--categorical--${color})`}
+      stroke={color}
       strokeWidth={tokens.line["border-width"].value}
     />
   );
