@@ -47,15 +47,17 @@ export const TabContent: FC<Props> = async (props) => {
         ? developMdxFile
         : guidelinesMdxFile;
 
+  if (!currentMdxFile) {
+    throw new Error(`Could not find ${activeTab}.mdx`);
+  }
+
   const tabContent = (
     <div className={styles.mainContent}>
-      {currentMdxFile && <MdxFileView mdxFile={currentMdxFile.serialize()} />}
+      <MdxFileView mdxFile={currentMdxFile.serialize()} />
     </div>
   );
 
-  const path = currentMdxFile
-    ? `/03-components/${currentMdxFile.slugs[0]}/${currentMdxFile.slugs[1]}`
-    : "";
+  const path = `/03-components/${currentMdxFile.slugs[0]}/${currentMdxFile.slugs[1]}`;
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
@@ -86,7 +88,7 @@ export const TabContent: FC<Props> = async (props) => {
 
       <AnchorNavigation
         currentPath={`${path}/${activeTab}`}
-        anchors={currentMdxFile?.anchors ?? []}
+        anchors={currentMdxFile.anchors}
         title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
       />
     </Flex>
