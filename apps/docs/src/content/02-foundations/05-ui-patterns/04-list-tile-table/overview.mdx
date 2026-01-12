@@ -1,15 +1,13 @@
 # Zentrale Merkmale
 
-In flow gibt es zwei relevante Components zur kompakten Auflistung von
-Elementen: [List](/03-components/structure/list/overview) und
-[Table](/03-components/structure/table/overview).
+Die zwei Components [List](/03-components/structure/list/overview) und [Table](/03-components/structure/table/overview) dienen der kompakten Auflistung von Elementen. In der Verwendung ist die List jedoch häufiger relevanter. 
 
 Die **Table** stellt eine einzelne, eigenständige Tabelle dar, die einer
 klassischen Zeilen- und Spaltenstruktur folgt.
 
 Die **List** besitzt einen komplexeren Aufbau. Sie umfasst drei
 Ansichtsvarianten: **Listen-, Raster-** und **Tabellenansicht** – wobei die
-Tabellenansicht die Component Table in die List integriert. Sofern verfügbar,
+Tabellenansicht die Component Table in die List integriert. Sofern technisch eingefügt,
 können User selbst entscheiden, welche Ansicht angezeigt wird. Darüber hinaus
 unterstützt die List mehrere Funktionen wie Sortierung, Filterung und Suche, um
 die Inhalte interaktiv zu steuern.
@@ -26,7 +24,7 @@ platzsparend und gleichzeitig ansprechend dargestellt werden sollen. Sie
 repräsentiert häufig größere Elemente, bei denen es sich lohnt, einen
 [Avatar](/03-components/content/avatar/overview) anzuzeigen.
 
-Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie oft als erste Ansicht einer List im mStudio verwendet. Um Usern weitere
+Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie oft als Standardansicht einer List im mStudio verwendet. Um Usern weitere
 Informationen bereitzustellen, führen die sogenannten **ListItems**
 beispielsweise zu [Detailseiten](/02-foundations/05-ui-patterns/03-struktur).
 
@@ -68,15 +66,14 @@ Aufzählung von Elementen verwendet – häufig als Einstiegsseiten zu
 
 Wenn die List oder Table auch ohne sichtbare
 [Heading](/03-components/content/heading/overview) (z. B. durch den Seitentitel)
-eindeutig ist, sollte eine versteckte Heading darüber platziert werden. In
+verständlich ist, muss eine versteckte Heading darüber platziert werden. In
 diesem Fall sollte das passendes aria-label nicht vergessen werden.
 
 Eine typische **List** ist wie folgt aufgebaut:
 
-**Header:** Der Header enthält
-Steuerelemente/[Buttons](/03-components/actions/button/overview) für den Wechsel
+**Header:** Der Header kann Steuerelemente/[Buttons](/03-components/actions/button/overview) für den Wechsel
 der Ansicht (Listen-, Raster- oder Tabellenansicht) sowie für Sortierung und
-Filterung, wobei auch mehrere Filter gleichzeitig angewendet werden können.
+Filterung beinhalten, wobei auch mehrere Filter gleichzeitig angewendet werden können.
 Zusätzlich bietet der Header einen Action-Bereich, über den beispielsweise
 Anlegeprozesse gestartet werden können.
 
@@ -85,7 +82,7 @@ Anlegeprozesse gestartet werden können.
 [Table](/03-components/structure/table/overview)-Component angezeigt.
 
 **Footer:** Unterhalb der Inhalte zeigt der Footer an, wie viele Einträge
-bereits geladen wurden (Pagination). Um lange Ladezeiten zu vermeiden, sollten
+bereits geladen sind und ermöglicht ein Nachladen weiterer Elemente. Um lange Ladezeiten zu vermeiden, sollten
 nicht alle Einträge auf einmal geladen werden. Standardmäßig empfiehlt sich eine
 Pagination mit 10 Elementen pro Seite.
 
