@@ -29,19 +29,11 @@ export default async function Page(props: Props) {
     "index",
   );
 
-  const overviewMdxFile = await MdxFileFactory.fromParams(
-    contentFolder,
-    params,
-    "overview",
-  );
-
   return (
     <>
       {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
-      {overviewMdxFile && (
-        <TabContent mdxFile={overviewMdxFile} activeTab="overview" />
-      )}
+      <TabContent params={params} activeTab="overview" />
     </>
   );
 }
