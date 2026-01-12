@@ -48,7 +48,7 @@ export const TabContent: FC<Props> = async (props) => {
         : guidelinesMdxFile;
 
   if (!currentMdxFile) {
-    throw new Error(`Could not find ${activeTab}.mdx`);
+    return null;
   }
 
   const tabContent = (
