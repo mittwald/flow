@@ -29,19 +29,11 @@ export default async function Page(props: Props) {
     "index",
   );
 
-  const guidelinesMdxFile = await MdxFileFactory.fromParams(
-    contentFolder,
-    params,
-    "guidelines",
-  );
-
   return (
     <>
       {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
-      {guidelinesMdxFile && (
-        <TabContent mdxFile={guidelinesMdxFile} activeTab="guidelines" />
-      )}
+      <TabContent params={params} activeTab="guidelines" />
     </>
   );
 }
