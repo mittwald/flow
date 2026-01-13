@@ -72,7 +72,7 @@ export const ActiveFilters: FC = observer(() => {
   ) : undefined;
 
   const removeAllFiltersButton =
-    activeFilters.length > 0 ? (
+    activeFilters.length > 1 ? (
       <TooltipTrigger>
         <TooltipView>
           <Translate locales={locales}>list.filters.clear</Translate>
