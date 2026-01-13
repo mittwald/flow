@@ -1,6 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
+import { userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "ImageCropper variants (%s)",
@@ -20,5 +21,31 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("ImageCropper variants");
+  },
+);
+
+test.each(testEnvironments)(
+  "ImageCropper interaction (%s)",
+  async ({ testScreenshot, render, components: { ImageCropper } }) => {
+    await render(<ImageCropper image={gopher} />);
+
+    await testScreenshot("ImageCropper interaction - default");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{arrowDown}");
+
+    await testScreenshot("ImageCropper interaction - position changed");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{arrowRight}");
+    await userEvent.keyboard("{arrowRight}");
+    await userEvent.keyboard("{arrowRight}");
+
+    await testScreenshot("ImageCropper interaction - zoom changed");
   },
 );
