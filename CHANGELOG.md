@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.629](https://github.com/mittwald/flow/compare/0.2.0-alpha.628...0.2.0-alpha.629) (2026-01-13)
+
+### Bug Fixes
+
+* **CartesianChart:** fix focus outline ([#2246](https://github.com/mittwald/flow/issues/2246)) ([24e8684](https://github.com/mittwald/flow/commit/24e8684e17a5b916a274af173349dde4e89b62dd))
+
 # [0.2.0-alpha.628](https://github.com/mittwald/flow/compare/0.2.0-alpha.627...0.2.0-alpha.628) (2026-01-13)
 
 ### Bug Fixes
