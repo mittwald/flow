@@ -8,9 +8,6 @@ export { type RemoteImageCropperElement } from "@mittwald/flow-remote-elements";
 export const ImageCropper = createFlowRemoteComponent(
   "flr-image-cropper",
   "ImageCropper",
-  {
-    clearPropsContext: true,
-  },
   RemoteImageCropperElement,
   {
     slotProps: {

@@ -5,10 +5,9 @@ import clsx from "clsx";
 import styles from "./ImageCropper.module.scss";
 import { Slider } from "@/components/Slider";
 import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
-import { Label } from "react-aria-components";
-import { ClearPropsContext } from "@/components/ClearPropsContext";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
+import { Label } from "@/components/Label";
 
 export interface ImageCropperProps
   extends PropsWithClassName,
@@ -77,33 +76,31 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   }, [croppedAreaPixels]);
 
   return (
-    <ClearPropsContext>
-      <div className={rootClassName} style={{ maxWidth: width }}>
-        <div className={styles.cropperContainer} style={{ height }}>
-          <Cropper
-            crop={crop}
-            image={imageSrc}
-            onCropChange={setCrop}
-            zoom={zoom}
-            onZoomChange={setZoom}
-            onCropComplete={(_, croppedAreaPixels) =>
-              setCroppedAreaPixels(croppedAreaPixels)
-            }
-            {...rest}
-          />
-        </div>
-        <Slider
-          minValue={1}
-          maxValue={3}
-          step={0.1}
-          value={zoom}
-          unit="×"
-          onChange={(zoom) => setZoom(zoom as number)}
-        >
-          <Label>{stringFormatter.format("zoom")}</Label>
-        </Slider>
+    <div className={rootClassName} style={{ maxWidth: width }}>
+      <div className={styles.cropperContainer} style={{ height }}>
+        <Cropper
+          crop={crop}
+          image={imageSrc}
+          onCropChange={setCrop}
+          zoom={zoom}
+          onZoomChange={setZoom}
+          onCropComplete={(_, croppedAreaPixels) =>
+            setCroppedAreaPixels(croppedAreaPixels)
+          }
+          {...rest}
+        />
       </div>
-    </ClearPropsContext>
+      <Slider
+        minValue={1}
+        maxValue={3}
+        step={0.1}
+        value={zoom}
+        unit="×"
+        onChange={(zoom) => setZoom(zoom as number)}
+      >
+        <Label optional={false}>{stringFormatter.format("zoom")}</Label>
+      </Slider>
+    </div>
   );
 };
 

@@ -14,6 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -78,7 +79,7 @@ export default () => {
             </Action>
           </Flex>
         )}
-        <Button type="submit">Hochladen</Button>
+        <SubmitButton>Hochladen</SubmitButton>
       </Form>
     </Section>
   );

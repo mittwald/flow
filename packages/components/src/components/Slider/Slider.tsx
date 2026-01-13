@@ -77,6 +77,7 @@ export const Slider = flowComponent("Slider", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         defaultValue={defaultValue}
+        step={step}
       >
         <TunnelProvider>
           <PropsContextProvider props={propsContext}>
@@ -111,8 +112,6 @@ export const Slider = flowComponent("Slider", (props) => {
                     aria-label={stringFormatter.format("slider.decrement")}
                     className={styles.decrement}
                     isDisabled={isDisabled}
-                    variant="plain"
-                    color="secondary"
                   >
                     <IconMinus />
                   </Button>
@@ -122,8 +121,6 @@ export const Slider = flowComponent("Slider", (props) => {
                     aria-label={stringFormatter.format("slider.increment")}
                     className={styles.increment}
                     isDisabled={isDisabled}
-                    variant="plain"
-                    color="secondary"
                   >
                     <IconPlus />
                   </Button>

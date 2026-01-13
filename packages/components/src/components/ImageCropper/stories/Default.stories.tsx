@@ -5,9 +5,8 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { Section } from "@/components/Section";
 import { FileField } from "@/components/FileField";
 import { Button } from "@/components/Button";
-import { Form, typedField } from "@/integrations/react-hook-form";
+import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
-import { action } from "storybook/actions";
 
 const meta: Meta<typeof ImageCropper> = {
   title: "Upload/ImageCropper",
@@ -26,6 +25,49 @@ export const CustomDimensions: Story = { args: { width: 400, height: 200 } };
 
 export const RoundShape: Story = { args: { aspect: 1, cropShape: "round" } };
 
+export const WithDownload: Story = {
+  render: (props) => {
+    const [croppedImage, setCroppedImage] = useState<File>();
+    const [file, setFile] = useState<FileList | null>(null);
+
+    const downloadCroppedImage = () => {
+      if (!croppedImage) {
+        return;
+      }
+      const url = URL.createObjectURL(croppedImage);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = croppedImage.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+    return (
+      <Section>
+        <FileField accept="image/png, image/jpeg, image/svg" onChange={setFile}>
+          <Button variant="outline" color="secondary">
+            Select an image
+          </Button>
+        </FileField>
+
+        {file && (
+          <ImageCropper
+            {...props}
+            image={file?.[0]}
+            onCropComplete={(croppedImage) => setCroppedImage(croppedImage)}
+          />
+        )}
+
+        {croppedImage && (
+          <Button onPress={downloadCroppedImage}>Download</Button>
+        )}
+      </Section>
+    );
+  },
+};
+
 export const WithForm: Story = {
   render: (props) => {
     const [croppedImage, setCroppedImage] = useState<File>();
@@ -39,7 +81,7 @@ export const WithForm: Story = {
     const file = form.watch("file")?.[0];
 
     return (
-      <Form form={form} onSubmit={() => action(croppedImage?.name ?? "")}>
+      <Form form={form} onSubmit={() => console.log(croppedImage?.name ?? "")}>
         <Section>
           <Field name="file">
             <FileField accept="image/png, image/jpeg, image/svg">
@@ -55,7 +97,7 @@ export const WithForm: Story = {
                 image={form.watch("file")?.[0]}
                 onCropComplete={(croppedImage) => setCroppedImage(croppedImage)}
               />
-              <Button type="submit">Save</Button>
+              <SubmitButton>Save</SubmitButton>
             </>
           )}
         </Section>
