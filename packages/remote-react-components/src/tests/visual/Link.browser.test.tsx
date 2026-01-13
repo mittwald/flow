@@ -1,5 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import { Flex } from "@/auto-generated";
+import React from "react";
 
 const colors = ["primary", "dark", "light"] as const;
 
@@ -42,14 +44,23 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Link edge cases (%s)",
-  async ({ testScreenshot, render, components: { Link, IconStar } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Link, IconStar, AlertText },
+  }) => {
     await render(
-      <Link>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-        quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium
-        rerum ullam modi blanditiis vitae, laborum ea tempore, dolore voluptas.{" "}
-        <IconStar />
-      </Link>,
+      <Flex direction="column" gap="m">
+        <Link>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+          dolore voluptas. <IconStar />
+        </Link>
+        <Link inline>
+          <AlertText status="danger">Loading failed</AlertText>
+        </Link>
+      </Flex>,
     );
 
     await testScreenshot("Link edge cases");
