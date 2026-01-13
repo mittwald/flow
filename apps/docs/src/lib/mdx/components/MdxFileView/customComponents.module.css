@@ -29,6 +29,7 @@
 
 .anchorLinkHeading {
   width: fit-content;
+  scroll-margin-top: 6rem;
   > span {
     display: flex;
     align-items: center;

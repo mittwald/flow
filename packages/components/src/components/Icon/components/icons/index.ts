@@ -107,6 +107,7 @@ export { IconSupport } from "./IconSupport";
 export { IconTerminate } from "./IconTerminate";
 export { IconTicket } from "./IconTicket";
 export { IconTime } from "./IconTime";
+export { IconUnavailable } from "./IconUnavailable";
 export { IconUndo } from "./IconUndo";
 export { IconUpload } from "./IconUpload";
 export { IconUser } from "./IconUser";

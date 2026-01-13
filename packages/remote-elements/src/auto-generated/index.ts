@@ -6,6 +6,7 @@ export * from "./RemoteActionGroupElement";
 export * from "./RemoteAlertElement";
 export * from "./RemoteAlertBadgeElement";
 export * from "./RemoteAlertIconElement";
+export * from "./RemoteAlertTextElement";
 export * from "./RemoteAlignElement";
 export * from "./RemoteAreaElement";
 export * from "./RemoteAutocompleteElement";

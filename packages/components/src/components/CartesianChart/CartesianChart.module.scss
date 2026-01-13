@@ -1,6 +1,10 @@
 .cartesianChart {
   font-family: "Inter", sans-serif;
 
+  *:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+
   :global(.flow--illustrated-message--illustrated-message-container) {
     container-type: normal;
     display: flex;

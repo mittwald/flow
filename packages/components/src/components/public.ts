@@ -6,6 +6,7 @@ export * from "@/components/Activity";
 export * from "@/components/Alert";
 export * from "@/components/AlertBadge";
 export * from "@/components/AlertIcon";
+export * from "@/components/AlertText";
 export * from "@/components/Align";
 export * from "@/components/Autocomplete";
 export * from "@/components/Avatar";

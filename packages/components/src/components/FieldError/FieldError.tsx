@@ -8,9 +8,9 @@ import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import { FieldErrorContext, TextContext } from "react-aria-components";
 import clsx from "clsx";
-import { IconDanger } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { AlertText } from "@/components/AlertText";
 
 export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
@@ -68,12 +68,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
       <FieldErrorContext value={mergedErrorState as never}>
         <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
-            return (
-              <>
-                <IconDanger size="s" />
-                <span>{validationErrors}</span>
-              </>
-            );
+            return <AlertText status="danger">{validationErrors}</AlertText>;
           }}
         </Aria.FieldError>
       </FieldErrorContext>

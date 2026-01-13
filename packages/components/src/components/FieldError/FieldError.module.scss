@@ -1,8 +1,6 @@
 .fieldError {
-  color: var(--field-error--color);
-  font-size: var(--field-error--font-size);
   display: flex;
   align-items: center;
-  column-gap: var(--field-error--spacing);
   align-self: start;
+  font-size: var(--field-error--font-size);
 }

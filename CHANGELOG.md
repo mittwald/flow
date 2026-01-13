@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.629](https://github.com/mittwald/flow/compare/0.2.0-alpha.628...0.2.0-alpha.629) (2026-01-13)
+
+### Bug Fixes
+
+* **CartesianChart:** fix focus outline ([#2246](https://github.com/mittwald/flow/issues/2246)) ([24e8684](https://github.com/mittwald/flow/commit/24e8684e17a5b916a274af173349dde4e89b62dd))
+
+# [0.2.0-alpha.628](https://github.com/mittwald/flow/compare/0.2.0-alpha.627...0.2.0-alpha.628) (2026-01-13)
+
+### Bug Fixes
+
+* **List:** hide clear all if only one filter is selected ([#2244](https://github.com/mittwald/flow/issues/2244)) ([7f0dc68](https://github.com/mittwald/flow/commit/7f0dc6899abcdc591c72ea50e95bc74f40ccd8c2))
+
+# [0.2.0-alpha.627](https://github.com/mittwald/flow/compare/0.2.0-alpha.626...0.2.0-alpha.627) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.626](https://github.com/mittwald/flow/compare/0.2.0-alpha.625...0.2.0-alpha.626) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.625](https://github.com/mittwald/flow/compare/0.2.0-alpha.624...0.2.0-alpha.625) (2026-01-12)
+
+### Features
+
+* **InlineAlert:** add inline alert component ([#2233](https://github.com/mittwald/flow/issues/2233)) ([ee58fcf](https://github.com/mittwald/flow/commit/ee58fcf4d8ed83eb0a68664765bd30f2c33b2784))
+
+# [0.2.0-alpha.624](https://github.com/mittwald/flow/compare/0.2.0-alpha.623...0.2.0-alpha.624) (2026-01-12)
+
+### Bug Fixes
+
+* **IllustratedMessage:** add flow component ([#2238](https://github.com/mittwald/flow/issues/2238)) ([a61bad9](https://github.com/mittwald/flow/commit/a61bad937f66b7ee7cd4499fe51a6bdad7d1cd3b))
+
+# [0.2.0-alpha.623](https://github.com/mittwald/flow/compare/0.2.0-alpha.622...0.2.0-alpha.623) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.622](https://github.com/mittwald/flow/compare/0.2.0-alpha.621...0.2.0-alpha.622) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.621](https://github.com/mittwald/flow/compare/0.2.0-alpha.620...0.2.0-alpha.621) (2026-01-08)
+
+### Bug Fixes
+
+* **List:** update bottom content position ([#2236](https://github.com/mittwald/flow/issues/2236)) ([e75f762](https://github.com/mittwald/flow/commit/e75f7628391a11c6555a3da93751a038cb2b3df4))
+
+# [0.2.0-alpha.620](https://github.com/mittwald/flow/compare/0.2.0-alpha.619...0.2.0-alpha.620) (2026-01-07)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.619](https://github.com/mittwald/flow/compare/0.2.0-alpha.618...0.2.0-alpha.619) (2026-01-06)
 
 ### Features

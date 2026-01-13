@@ -106,6 +106,7 @@ Support: Headset
 Terminate: FileX
 Ticket: Ticket
 Time: Clock
+Unavailable: CircleMinus
 Undo: ArrowBackUp
 Upload: Upload
 User: User
