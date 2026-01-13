@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import { Flex } from "@/auto-generated";
 import React from "react";
 
 const colors = ["primary", "dark", "light"] as const;
@@ -47,7 +46,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Link, IconStar, AlertText },
+    components: { Link, IconStar, AlertText, Text, Flex },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -57,9 +56,11 @@ test.each(testEnvironments)(
           accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
           dolore voluptas. <IconStar />
         </Link>
-        <Link inline>
-          <AlertText status="danger">Loading failed</AlertText>
-        </Link>
+        <Text>
+          <Link>
+            <AlertText status="danger">Loading failed</AlertText>
+          </Link>
+        </Text>
       </Flex>,
     );
 
