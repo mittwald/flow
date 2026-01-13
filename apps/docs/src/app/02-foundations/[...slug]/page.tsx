@@ -3,6 +3,9 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import MainContent from "@/app/_components/layout/MainContent";
 import type { Metadata } from "next";
+import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
+import React from "react";
+import { Flex } from "@mittwald/flow-react-components";
 
 const contentFolder = "src/content/02-foundations";
 export const generateStaticParams = async () => {
@@ -33,11 +36,22 @@ export default async function Page(props: Props) {
     "overview",
   );
 
+  const path = `/02-foundations/${overviewMdxFile?.slugs[0]}/${overviewMdxFile?.slugs[1]}`;
+
   return (
     <>
       {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
+      {overviewMdxFile && (
+        <Flex columnGap="m">
+          <MainContent mdxFile={overviewMdxFile} />
 
-      {overviewMdxFile && <MainContent mdxFile={overviewMdxFile} />}
+          <AnchorNavigation
+            currentPath={`${path}`}
+            anchors={overviewMdxFile.anchors}
+            title={indexMdxFile?.getTitle() ?? ""}
+          />
+        </Flex>
+      )}
     </>
   );
 }

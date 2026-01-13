@@ -10,8 +10,12 @@ import styles from "@/lib/mdx/components/MdxFileView/customComponents.module.css
 import { onlyText } from "react-children-utilities";
 import slugify from "slugify";
 
-export const AnchorLinkHeading: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+interface Props extends PropsWithChildren {
+  level: number;
+}
+
+export const AnchorLinkHeading: FC<Props> = (props) => {
+  const { children, level } = props;
 
   const [url, setUrl] = useState<string>("");
 
@@ -26,7 +30,7 @@ export const AnchorLinkHeading: FC<PropsWithChildren> = (props) => {
   };
 
   return (
-    <Heading level={2} className={styles.anchorLinkHeading} id={slug}>
+    <Heading level={level} className={styles.anchorLinkHeading} id={slug}>
       {children}
       <Action onAction={copyValue} showFeedback>
         <Button
