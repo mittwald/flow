@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.628](https://github.com/mittwald/flow/compare/0.2.0-alpha.627...0.2.0-alpha.628) (2026-01-13)
+
+### Bug Fixes
+
+* **List:** hide clear all if only one filter is selected ([#2244](https://github.com/mittwald/flow/issues/2244)) ([7f0dc68](https://github.com/mittwald/flow/commit/7f0dc6899abcdc591c72ea50e95bc74f40ccd8c2))
+
+# [0.2.0-alpha.627](https://github.com/mittwald/flow/compare/0.2.0-alpha.626...0.2.0-alpha.627) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.626](https://github.com/mittwald/flow/compare/0.2.0-alpha.625...0.2.0-alpha.626) (2026-01-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
