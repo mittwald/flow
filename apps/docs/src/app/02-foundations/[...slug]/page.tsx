@@ -38,9 +38,13 @@ export default async function Page(props: Props) {
 
   const path = `/02-foundations/${overviewMdxFile?.slugs[0]}/${overviewMdxFile?.slugs[1]}`;
 
+  if (!indexMdxFile) {
+    throw new Error("Could not find index.mdx");
+  }
+
   return (
     <>
-      {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
+      <TopContent mdxFile={indexMdxFile} />
       {overviewMdxFile && (
         <Flex columnGap="m">
           <MainContent mdxFile={overviewMdxFile} />
@@ -48,7 +52,7 @@ export default async function Page(props: Props) {
           <AnchorNavigation
             currentPath={`${path}`}
             anchors={overviewMdxFile.anchors}
-            title={indexMdxFile?.getTitle() ?? ""}
+            title={indexMdxFile.getTitle()}
           />
         </Flex>
       )}
