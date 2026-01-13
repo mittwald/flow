@@ -35,7 +35,6 @@ export default () => {
           <Action
             onAction={() => {
               controller.open();
-              throw "failed";
             }}
           >
             <Button color="accent">Projekt anlegen</Button>

@@ -1,4 +1,5 @@
 import {
+  AlertText,
   Avatar,
   Content,
   Flex,
@@ -11,8 +12,6 @@ import {
   typedList,
 } from "@mittwald/flow-react-components";
 import { Suspense } from "react";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import { AsyncContent } from "@/content/02-foundations/05-ui-patterns/05-errorhandling/examples/components/AsyncContent";
 
 export default () => {
   const DomainList = typedList<{
@@ -63,13 +62,9 @@ export default () => {
                     domain.target
                   ) : (
                     <Suspense fallback={<SkeletonText />}>
-                      <ErrorBoundary
-                        errorComponent={() => (
-                          <>Fehler beim Laden</>
-                        )}
-                      >
-                        <AsyncContent />
-                      </ErrorBoundary>
+                      <AlertText status="danger">
+                        Fehler beim Laden
+                      </AlertText>
                     </Suspense>
                   )}
                 </Text>
