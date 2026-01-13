@@ -9,10 +9,16 @@ export type TunnelChildren =
   | undefined
   | ((tunnelChildren?: ReactNode | undefined) => ReactNode | undefined);
 
+interface TunnelEntryState {
+  index: number;
+  id: string;
+  children: TunnelChildren;
+}
+
 export class TunnelState {
   public readonly children = observable.map<
     string,
-    ObservableMap<string, TunnelChildren>
+    ObservableMap<string, TunnelEntryState>
   >(
     {},
     {
@@ -22,8 +28,10 @@ export class TunnelState {
 
   private readonly preparedChildren = new Map<
     string,
-    Map<string, TunnelChildren>
+    Map<string, TunnelEntryState>
   >();
+
+  private nextIndex = 0;
 
   public constructor() {
     makeObservable(this, {
@@ -33,19 +41,36 @@ export class TunnelState {
   }
 
   public static useNew(): TunnelState {
-    return useState(() => new TunnelState())[0];
+    const tunnelState = useState(() => new TunnelState())[0];
+    tunnelState.resetIndex();
+    return tunnelState;
+  }
+
+  public resetIndex() {
+    this.nextIndex = 0;
+  }
+
+  public getIndex() {
+    return this.nextIndex++;
   }
 
   public setChildren(
     tunnelId: string = defaultId,
     entryId: string,
+    index: number,
     children: TunnelChildren,
   ): void {
+    const entryState: TunnelEntryState = {
+      id: entryId,
+      index,
+      children,
+    };
+
     const tunnelEntries =
       this.children.get(tunnelId) ??
-      observable.map<string, TunnelChildren>({}, { deep: false });
+      observable.map<string, TunnelEntryState>({}, { deep: false });
 
-    tunnelEntries.set(entryId, children);
+    tunnelEntries.set(entryId, entryState);
 
     this.preparedChildren.get(tunnelId)?.delete(entryId);
     this.children.set(tunnelId, tunnelEntries);
@@ -54,18 +79,26 @@ export class TunnelState {
   public prepareChildren(
     tunnelId: string = defaultId,
     entryId: string,
+    index: number,
     children: TunnelChildren,
   ): void {
-    const tunnelEntries =
-      this.preparedChildren.get(tunnelId) ?? new Map<string, TunnelChildren>();
+    const entryState: TunnelEntryState = {
+      id: entryId,
+      index,
+      children,
+    };
 
-    tunnelEntries.set(entryId, children);
+    const tunnelEntries =
+      this.preparedChildren.get(tunnelId) ??
+      new Map<string, TunnelEntryState>();
+
+    tunnelEntries.set(entryId, entryState);
 
     this.preparedChildren.set(tunnelId, tunnelEntries);
   }
 
   private deleteChildrenFromMap(
-    map: Map<string, Map<string, TunnelChildren>>,
+    map: Map<string, Map<string, TunnelEntryState>>,
     tunnelId: string,
     entryId: string,
   ): void {
@@ -81,14 +114,16 @@ export class TunnelState {
     this.deleteChildrenFromMap(this.preparedChildren, tunnelId, entryId);
   }
 
-  public getChildren(
+  public getEntries(
     tunnelId: string = defaultId,
-  ): [string, TunnelChildren][] | undefined {
+  ): TunnelEntryState[] | undefined {
     const tunnelEntries =
-      this.children.get(tunnelId)?.entries() ??
-      this.preparedChildren.get(tunnelId)?.entries();
+      this.children.get(tunnelId)?.values() ??
+      this.preparedChildren.get(tunnelId)?.values();
     if (tunnelEntries) {
-      return Array.from(tunnelEntries);
+      return Array.from(tunnelEntries).sort(
+        (first, second) => first.index - second.index,
+      );
     }
   }
 }

@@ -1,13 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Checkbox } from "@/components/Checkbox";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -21,7 +28,7 @@ const meta: Meta<typeof Field> = {
       acceptTermsRequired: boolean;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -37,7 +44,7 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="acceptTerms">
             <Checkbox>Accept terms</Checkbox>
@@ -52,7 +59,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -64,3 +72,57 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFieldError: Story = {
+  render: (props) => {
+    const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <Checkbox {...props}>Accept terms</Checkbox>
+        </Field>
+        <Checkbox isInvalid>
+          Accept terms
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </Checkbox>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <Checkbox {...props}>Accept terms</Checkbox>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "field",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("field")}>
+          focus through form
+        </Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
+      </Form>
+    );
+  },
+};

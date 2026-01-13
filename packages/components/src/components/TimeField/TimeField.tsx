@@ -1,63 +1,38 @@
-import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
+import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { FieldError } from "@/components/FieldError";
-import clsx from "clsx";
 import styles from "./TimeField.module.scss";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import DateInput from "@/components/DateInput";
 
 export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">>,
-    FlowComponentProps<HTMLInputElement> {
-  /** An error message to be displayed below the field */
-  errorMessage?: ReactNode;
-}
+    FlowComponentProps<HTMLSpanElement> {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
-  const { children, errorMessage, className, ref, ...rest } = props;
+  const { children, ref, ...rest } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
-
-  const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-      isDisabled: rest.isDisabled,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
-  };
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   return (
-    <Aria.TimeField
-      ref={ref}
-      hourCycle={24}
-      className={rootClassName}
-      {...rest}
-    >
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-      <FieldError className={formFieldStyles.fieldError}>
-        {errorMessage}
-      </FieldError>
-      <Aria.DateInput className={styles.dateInput}>
-        {(segment) => <Aria.DateSegment segment={segment} />}
-      </Aria.DateInput>
+    <Aria.TimeField hourCycle={24} {...rest} {...fieldProps}>
+      <FieldErrorCaptureContext>
+        <DateInput className={styles.dateInput} ref={ref} />
+        <PropsContextProvider props={fieldPropsContext}>
+          {children}
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.TimeField>
   );
 });

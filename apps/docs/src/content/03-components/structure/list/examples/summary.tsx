@@ -17,12 +17,13 @@ export default () => {
     <InvoiceList.List
       batchSize={2}
       hidePagination
-      aria-label="Invoices"
+      aria-label="Rechnungen"
+      getItemId={(invoice) => invoice.id}
     >
       <ListSummary position="bottom">
         <Flex justify="end">
           <Text>
-            <b>Gesamt: 37,00 €</b>
+            <strong>Gesamt: 37,00 €</strong>
           </Text>
         </Flex>
       </ListSummary>

@@ -1,6 +1,9 @@
 # Playground
 
-Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte dabei, dass zum Rendern entweder das übergeordnete Parent eine feste Höhe vorgeben muss oder das Chart selbst über die Property `height` eine eigene Höhe erhalten muss.
+Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte
+dabei, dass zum Rendern entweder das übergeordnete Parent eine feste Höhe
+vorgeben muss oder das Chart selbst über die Property `height` eine eigene Höhe
+erhalten muss.
 
 <LiveCodeEditor editorCollapsed />
 
@@ -8,15 +11,29 @@ Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte dabei
 
 # Darstellungstypen
 
-Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`, `<Line />` oder eine Kombination aus beiden verwendet werden.
+Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
+`<Line />` oder eine Kombination aus beiden verwendet werden.
 
 <LiveCodeEditor example="types" editorCollapsed />
 
 ---
 
+# Color
+
+Für die Farbgebung der Daten können
+[Categorical Colors](/02-foundations/01-design/02-colors#categorical-color) oder
+eigene Farben verwendet werden. Es sollte sichergestellt sein, dass Farben, die
+direkt nebeneinander liegen, einen ausreichenden Kontrast zueinander haben.
+
+<LiveCodeEditor example="colors" editorCollapsed />
+
+---
+
 # Synchronisierte Charts
 
-Zwei CartesianCharts können synchronisiert werden, um den gleichen Zeitraum darzustellen. Dadurch lassen sich verschiedene Metriken zeitlich exakt vergleichen.
+Zwei CartesianCharts können synchronisiert werden, um den gleichen Zeitraum
+darzustellen. Dadurch lassen sich verschiedene Metriken zeitlich exakt
+vergleichen.
 
 <LiveCodeEditor example="synced" editorCollapsed />
 
@@ -24,6 +41,9 @@ Zwei CartesianCharts können synchronisiert werden, um den gleichen Zeitraum dar
 
 ## Mit EmptyView
 
-Der EmptyView wird angezeigt, sobald die Property `data` des Charts entweder ein leeres Array enthält oder `undefined` ist. Er dient dazu, leere Zustände visuell zu kennzeichnen und bietet Orientierung bei Ausnahmefällen wie Ladefehlern, fehlgeschlagenen Datenabfragen oder nicht vorhandenen Ergebnissen.
+Der EmptyView wird angezeigt, sobald die Property `data` des Charts entweder ein
+leeres Array enthält oder `undefined` ist. Er dient dazu, leere Zustände visuell
+zu kennzeichnen und bietet Orientierung bei Ausnahmefällen wie Ladefehlern,
+fehlgeschlagenen Datenabfragen oder nicht vorhandenen Ergebnissen.
 
 <LiveCodeEditor example="emptyView" editorCollapsed />

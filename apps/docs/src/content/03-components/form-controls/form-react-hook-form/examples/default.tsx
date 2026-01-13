@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import {
   Field,
   Form,
+  SubmitButton,
+  ResetButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
   ActionGroup,
-  Button,
   FieldDescription,
   Label,
   Section,
@@ -18,11 +19,11 @@ export default () => {
   }
   const form = useForm<Values>();
 
-  const handleOnSubmit = (values: Values) =>
+  const handleSubmit = (values: Values) =>
     alert(JSON.stringify(values));
 
   return (
-    <Form form={form} onSubmit={handleOnSubmit}>
+    <Form form={form} onSubmit={handleSubmit}>
       <Section>
         <Field
           name="name"
@@ -38,7 +39,8 @@ export default () => {
           </TextField>
         </Field>
         <ActionGroup>
-          <Button type="submit">Save</Button>
+          <ResetButton>Reset</ResetButton>
+          <SubmitButton>Save</SubmitButton>
         </ActionGroup>
       </Section>
     </Form>

@@ -1,17 +1,18 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
+import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
-import { Label } from "@/components/Label";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import labelStyles from "../Label/Label.module.scss";
+import { useObjectRef } from "react-aria";
 
 export interface SwitchProps
-  extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
-    FlowComponentProps<HTMLLabelElement> {
+  extends PropsWithChildren<Omit<Aria.SwitchProps, "children" | "inputRef">>,
+    FlowComponentProps<HTMLInputElement> {
   /**
    * Whether the label should appear before or after the switch. @default
    * "trailing"
@@ -19,10 +20,7 @@ export interface SwitchProps
   labelPosition?: "leading" | "trailing";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Switch = flowComponent("Switch", (props) => {
   const {
     children,
@@ -34,25 +32,45 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    styles[`label-${labelPosition}`],
     className,
+    styles[`label-${labelPosition}`],
   );
 
+  const objectRef = useObjectRef(ref);
+
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
+
+  const propsContext: PropsContext = {
+    ...fieldPropsContext,
+    Label: {
+      ...fieldPropsContext.Label,
+      optional: false,
+    },
+  };
+
   return (
-    <ClearPropsContext>
-      <Aria.Switch {...rest} className={rootClassName} ref={ref}>
-        {({ isSelected }) => (
-          <>
-            <div className={styles.track}>
-              <div className={styles.handle}>
-                {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+    <div {...fieldProps}>
+      <FieldErrorCaptureContext>
+        <Aria.Switch {...rest} className={rootClassName} inputRef={objectRef}>
+          {({ isSelected }) => (
+            <PropsContextProvider props={propsContext}>
+              <div className={styles.track}>
+                <div className={styles.handle}>
+                  {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+                </div>
               </div>
-            </div>
-            {children && <Label className={styles.label}>{children}</Label>}
-          </>
-        )}
-      </Aria.Switch>
-    </ClearPropsContext>
+              <div className={labelStyles.label}>{children}</div>
+            </PropsContextProvider>
+          )}
+        </Aria.Switch>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
+    </div>
   );
 });
 

@@ -8,16 +8,11 @@ export { type RemoteAreaElement } from "@mittwald/flow-remote-elements";
 export const Area = createFlowRemoteComponent(
   "flr-area",
   "Area",
-  {
-    clearPropsContext: false,
-  },
   RemoteAreaElement,
   {
     slotProps: {
       wrapper: "flr-slot-root-wrapper",
     },
-    eventProps: {
-      onlyDots: { event: "lyDots" } as never,
-    },
+    eventProps: {},
   },
 );

@@ -1,5 +1,4 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import {
   IconChevronDown,
   IconChevronUp,
@@ -7,6 +6,7 @@ import {
 import locales from "../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import ButtonView from "@/views/ButtonView";
+import styles from "../../../../ListItemView/ListItemView.module.scss";
 
 interface Props extends PropsWithChildren {
   isExpanded: boolean;
@@ -21,6 +21,8 @@ export const AccordionButton: FC<Props> = (props) => {
   return (
     <>
       <ButtonView
+        className={styles.action}
+        tunnelId="button"
         variant="plain"
         color="secondary"
         onPress={toggle}

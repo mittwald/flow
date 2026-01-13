@@ -1,3 +1,4 @@
+import { eventHandlerContext } from "@mittwald/flow-react-components";
 import {
   RemoteElement,
   RemoteEvent,
@@ -44,22 +45,24 @@ export class FlowRemoteElement<
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions,
   ): void {
-    const finalListener = listener
+    const handleEvent: EventListener = listener
       ? "handleEvent" in listener
         ? listener.handleEvent
         : listener
-      : null;
+      : () => undefined;
 
-    const wrappedEventListener: EventListener = (event) => {
-      if (!finalListener) {
-        return;
-      }
-      return finalListener(event instanceof RemoteEvent ? event.detail : event);
-    };
+    const handleRemoteEvent: EventListener = (event) =>
+      eventHandlerContext.run(
+        {
+          remoteEvent: {
+            type: event.type,
+          },
+        },
+        () => handleEvent(event instanceof RemoteEvent ? event.detail : event),
+      );
 
-    this.eventListenerMap.set(listener, wrappedEventListener);
-
-    return super.addEventListener(type, wrappedEventListener, options);
+    this.eventListenerMap.set(listener, handleRemoteEvent);
+    return super.addEventListener(type, handleRemoteEvent, options);
   }
 
   public override removeEventListener(

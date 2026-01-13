@@ -1,26 +1,31 @@
-import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import {
   type ComponentProps,
-  type ComponentType,
+  type FC,
   type FormEvent,
   type FormEventHandler,
   type PropsWithChildren,
+  type Ref,
+  useId,
   useMemo,
+  useRef,
+  useState,
 } from "react";
-import { useId, useRef } from "react";
-import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type {
+  FieldValues,
+  SubmitHandler,
+  UseFormReturn,
+} from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { AfterFormSubmitEffect } from "../AfterFormSubmitEffect/AfterFormSubmitEffect";
+import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
 
-export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
-  UseFormReturn<F>["handleSubmit"]
->[0];
+export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
-type FormComponentType = ComponentType<
+type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
     onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
+    ref?: Ref<HTMLFormElement>;
   }>
 >;
 
@@ -29,7 +34,8 @@ export interface FormProps<F extends FieldValues>
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
-  formComponent?: FormComponentType;
+  formComponent?: FC<Omit<FormComponentType, "ref">>;
+  isReadOnly?: boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
@@ -40,15 +46,23 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     children,
     onSubmit,
     formComponent: FormView = DefaultFormComponent,
+    isReadOnly: isReadOnlyFromProps,
+    ref,
     ...formProps
   } = props;
 
+  const [readonlyContextState, setReadOnlyContextState] =
+    useState(!!isReadOnlyFromProps);
+
   const formId = useId();
-  const isAsyncSubmit = useRef(false);
-  const submitHandlerResultRef = useRef<unknown>(null);
   const FormViewComponent = useMemo(() => FormView, [formId]);
 
-  const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+
+  const isReadOnly = isReadOnlyFromProps || readonlyContextState;
+  const { action, registerSubmitResult } = useRegisterActionStateContext(form);
+
+  const handleSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
     const formEvent =
       e && "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
@@ -60,31 +74,39 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       return;
     }
 
-    submitHandlerResultRef.current = undefined;
-
-    form.handleSubmit((values) => {
+    const submit = form.handleSubmit((values) => {
+      setReadOnlyContextState(true);
       const result = onSubmit(values, formEvent);
-      isAsyncSubmit.current = result instanceof Promise;
-      submitHandlerResultRef.current = result;
+      registerSubmitResult(result);
       return result;
-    })(formEvent);
+    });
+
+    return submit(formEvent).finally(() => {
+      setReadOnlyContextState(false);
+    });
   };
 
   return (
     <RhfFormContextProvider {...form}>
-      <FormContextProvider value={{ form, id: formId }}>
-        <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-          <FormViewComponent
-            {...formProps}
-            id={formId}
-            onSubmit={handleOnSubmit}
-          >
-            {children}
-          </FormViewComponent>
-        </SubmitButtonStateProvider>
-        <AfterFormSubmitEffect
-          submitHandlerResultRef={submitHandlerResultRef}
-        />
+      <FormContextProvider
+        value={{
+          form,
+          id: formId,
+          isReadOnly,
+          setReadOnly: setReadOnlyContextState,
+          submit: handleSubmit,
+          submitButtonRef: submitButtonRef,
+          formActionModel: action,
+        }}
+      >
+        <FormViewComponent
+          {...formProps}
+          ref={ref}
+          id={formId}
+          onSubmit={handleSubmit}
+        >
+          {children}
+        </FormViewComponent>
       </FormContextProvider>
     </RhfFormContextProvider>
   );

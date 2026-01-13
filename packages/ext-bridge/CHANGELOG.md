@@ -3,6 +3,674 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.629](https://github.com/mittwald/flow/compare/0.2.0-alpha.628...0.2.0-alpha.629) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.628](https://github.com/mittwald/flow/compare/0.2.0-alpha.627...0.2.0-alpha.628) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.627](https://github.com/mittwald/flow/compare/0.2.0-alpha.626...0.2.0-alpha.627) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.626](https://github.com/mittwald/flow/compare/0.2.0-alpha.625...0.2.0-alpha.626) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.625](https://github.com/mittwald/flow/compare/0.2.0-alpha.624...0.2.0-alpha.625) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.624](https://github.com/mittwald/flow/compare/0.2.0-alpha.623...0.2.0-alpha.624) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.623](https://github.com/mittwald/flow/compare/0.2.0-alpha.622...0.2.0-alpha.623) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.622](https://github.com/mittwald/flow/compare/0.2.0-alpha.621...0.2.0-alpha.622) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.621](https://github.com/mittwald/flow/compare/0.2.0-alpha.620...0.2.0-alpha.621) (2026-01-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.620](https://github.com/mittwald/flow/compare/0.2.0-alpha.619...0.2.0-alpha.620) (2026-01-07)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.619](https://github.com/mittwald/flow/compare/0.2.0-alpha.618...0.2.0-alpha.619) (2026-01-06)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.618](https://github.com/mittwald/flow/compare/0.2.0-alpha.617...0.2.0-alpha.618) (2026-01-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.617](https://github.com/mittwald/flow/compare/0.2.0-alpha.616...0.2.0-alpha.617) (2026-01-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.616](https://github.com/mittwald/flow/compare/0.2.0-alpha.615...0.2.0-alpha.616) (2026-01-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.615](https://github.com/mittwald/flow/compare/0.2.0-alpha.614...0.2.0-alpha.615) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.614](https://github.com/mittwald/flow/compare/0.2.0-alpha.613...0.2.0-alpha.614) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.613](https://github.com/mittwald/flow/compare/0.2.0-alpha.612...0.2.0-alpha.613) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.612](https://github.com/mittwald/flow/compare/0.2.0-alpha.611...0.2.0-alpha.612) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.611](https://github.com/mittwald/flow/compare/0.2.0-alpha.610...0.2.0-alpha.611) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.610](https://github.com/mittwald/flow/compare/0.2.0-alpha.609...0.2.0-alpha.610) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.609](https://github.com/mittwald/flow/compare/0.2.0-alpha.608...0.2.0-alpha.609) (2025-12-22)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.608](https://github.com/mittwald/flow/compare/0.2.0-alpha.607...0.2.0-alpha.608) (2025-12-19)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.607](https://github.com/mittwald/flow/compare/0.2.0-alpha.606...0.2.0-alpha.607) (2025-12-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.606](https://github.com/mittwald/flow/compare/0.2.0-alpha.605...0.2.0-alpha.606) (2025-12-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.605](https://github.com/mittwald/flow/compare/0.2.0-alpha.604...0.2.0-alpha.605) (2025-12-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.604](https://github.com/mittwald/flow/compare/0.2.0-alpha.603...0.2.0-alpha.604) (2025-12-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.603](https://github.com/mittwald/flow/compare/0.2.0-alpha.602...0.2.0-alpha.603) (2025-12-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.602](https://github.com/mittwald/flow/compare/0.2.0-alpha.601...0.2.0-alpha.602) (2025-12-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.601](https://github.com/mittwald/flow/compare/0.2.0-alpha.600...0.2.0-alpha.601) (2025-12-15)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.600](https://github.com/mittwald/flow/compare/0.2.0-alpha.599...0.2.0-alpha.600) (2025-12-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.599](https://github.com/mittwald/flow/compare/0.2.0-alpha.598...0.2.0-alpha.599) (2025-12-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.598](https://github.com/mittwald/flow/compare/0.2.0-alpha.597...0.2.0-alpha.598) (2025-12-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.597](https://github.com/mittwald/flow/compare/0.2.0-alpha.596...0.2.0-alpha.597) (2025-12-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.596](https://github.com/mittwald/flow/compare/0.2.0-alpha.595...0.2.0-alpha.596) (2025-12-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.595](https://github.com/mittwald/flow/compare/0.2.0-alpha.594...0.2.0-alpha.595) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.594](https://github.com/mittwald/flow/compare/0.2.0-alpha.593...0.2.0-alpha.594) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.593](https://github.com/mittwald/flow/compare/0.2.0-alpha.592...0.2.0-alpha.593) (2025-12-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.592](https://github.com/mittwald/flow/compare/0.2.0-alpha.591...0.2.0-alpha.592) (2025-12-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.591](https://github.com/mittwald/flow/compare/0.2.0-alpha.590...0.2.0-alpha.591) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.590](https://github.com/mittwald/flow/compare/0.2.0-alpha.589...0.2.0-alpha.590) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.589](https://github.com/mittwald/flow/compare/0.2.0-alpha.588...0.2.0-alpha.589) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.588](https://github.com/mittwald/flow/compare/0.2.0-alpha.587...0.2.0-alpha.588) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.587](https://github.com/mittwald/flow/compare/0.2.0-alpha.586...0.2.0-alpha.587) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.586](https://github.com/mittwald/flow/compare/0.2.0-alpha.585...0.2.0-alpha.586) (2025-12-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.585](https://github.com/mittwald/flow/compare/0.2.0-alpha.584...0.2.0-alpha.585) (2025-12-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.584](https://github.com/mittwald/flow/compare/0.2.0-alpha.583...0.2.0-alpha.584) (2025-12-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.583](https://github.com/mittwald/flow/compare/0.2.0-alpha.582...0.2.0-alpha.583) (2025-12-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.582](https://github.com/mittwald/flow/compare/0.2.0-alpha.581...0.2.0-alpha.582) (2025-12-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.581](https://github.com/mittwald/flow/compare/0.2.0-alpha.580...0.2.0-alpha.581) (2025-12-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.580](https://github.com/mittwald/flow/compare/0.2.0-alpha.579...0.2.0-alpha.580) (2025-12-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.579](https://github.com/mittwald/flow/compare/0.2.0-alpha.578...0.2.0-alpha.579) (2025-12-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.578](https://github.com/mittwald/flow/compare/0.2.0-alpha.577...0.2.0-alpha.578) (2025-11-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.577](https://github.com/mittwald/flow/compare/0.2.0-alpha.576...0.2.0-alpha.577) (2025-11-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.576](https://github.com/mittwald/flow/compare/0.2.0-alpha.575...0.2.0-alpha.576) (2025-11-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.575](https://github.com/mittwald/flow/compare/0.2.0-alpha.574...0.2.0-alpha.575) (2025-11-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.574](https://github.com/mittwald/flow/compare/0.2.0-alpha.573...0.2.0-alpha.574) (2025-11-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.573](https://github.com/mittwald/flow/compare/0.2.0-alpha.572...0.2.0-alpha.573) (2025-11-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.572](https://github.com/mittwald/flow/compare/0.2.0-alpha.571...0.2.0-alpha.572) (2025-11-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.571](https://github.com/mittwald/flow/compare/0.2.0-alpha.570...0.2.0-alpha.571) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.570](https://github.com/mittwald/flow/compare/0.2.0-alpha.569...0.2.0-alpha.570) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.569](https://github.com/mittwald/flow/compare/0.2.0-alpha.568...0.2.0-alpha.569) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.568](https://github.com/mittwald/flow/compare/0.2.0-alpha.567...0.2.0-alpha.568) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.567](https://github.com/mittwald/flow/compare/0.2.0-alpha.566...0.2.0-alpha.567) (2025-11-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.566](https://github.com/mittwald/flow/compare/0.2.0-alpha.565...0.2.0-alpha.566) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.565](https://github.com/mittwald/flow/compare/0.2.0-alpha.564...0.2.0-alpha.565) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.564](https://github.com/mittwald/flow/compare/0.2.0-alpha.563...0.2.0-alpha.564) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.563](https://github.com/mittwald/flow/compare/0.2.0-alpha.562...0.2.0-alpha.563) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.562](https://github.com/mittwald/flow/compare/0.2.0-alpha.561...0.2.0-alpha.562) (2025-11-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.561](https://github.com/mittwald/flow/compare/0.2.0-alpha.560...0.2.0-alpha.561) (2025-11-19)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.560](https://github.com/mittwald/flow/compare/0.2.0-alpha.559...0.2.0-alpha.560) (2025-11-19)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.559](https://github.com/mittwald/flow/compare/0.2.0-alpha.558...0.2.0-alpha.559) (2025-11-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.558](https://github.com/mittwald/flow/compare/0.2.0-alpha.557...0.2.0-alpha.558) (2025-11-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.557](https://github.com/mittwald/flow/compare/0.2.0-alpha.556...0.2.0-alpha.557) (2025-11-13)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.556](https://github.com/mittwald/flow/compare/0.2.0-alpha.555...0.2.0-alpha.556) (2025-11-13)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.555](https://github.com/mittwald/flow/compare/0.2.0-alpha.554...0.2.0-alpha.555) (2025-11-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.554](https://github.com/mittwald/flow/compare/0.2.0-alpha.553...0.2.0-alpha.554) (2025-11-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.553](https://github.com/mittwald/flow/compare/0.2.0-alpha.552...0.2.0-alpha.553) (2025-11-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.552](https://github.com/mittwald/flow/compare/0.2.0-alpha.551...0.2.0-alpha.552) (2025-11-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.551](https://github.com/mittwald/flow/compare/0.2.0-alpha.550...0.2.0-alpha.551) (2025-11-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.550](https://github.com/mittwald/flow/compare/0.2.0-alpha.549...0.2.0-alpha.550) (2025-11-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.549](https://github.com/mittwald/flow/compare/0.2.0-alpha.548...0.2.0-alpha.549) (2025-11-07)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.548](https://github.com/mittwald/flow/compare/0.2.0-alpha.547...0.2.0-alpha.548) (2025-11-06)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.547](https://github.com/mittwald/flow/compare/0.2.0-alpha.546...0.2.0-alpha.547) (2025-11-06)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.546](https://github.com/mittwald/flow/compare/0.2.0-alpha.545...0.2.0-alpha.546) (2025-11-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.545](https://github.com/mittwald/flow/compare/0.2.0-alpha.544...0.2.0-alpha.545) (2025-11-05)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.544](https://github.com/mittwald/flow/compare/0.2.0-alpha.543...0.2.0-alpha.544) (2025-11-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.543](https://github.com/mittwald/flow/compare/0.2.0-alpha.542...0.2.0-alpha.543) (2025-11-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.542](https://github.com/mittwald/flow/compare/0.2.0-alpha.541...0.2.0-alpha.542) (2025-11-04)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.541](https://github.com/mittwald/flow/compare/0.2.0-alpha.540...0.2.0-alpha.541) (2025-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.540](https://github.com/mittwald/flow/compare/0.2.0-alpha.539...0.2.0-alpha.540) (2025-11-03)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.539](https://github.com/mittwald/flow/compare/0.2.0-alpha.538...0.2.0-alpha.539) (2025-10-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.538](https://github.com/mittwald/flow/compare/0.2.0-alpha.537...0.2.0-alpha.538) (2025-10-29)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.537](https://github.com/mittwald/flow/compare/0.2.0-alpha.536...0.2.0-alpha.537) (2025-10-29)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.536](https://github.com/mittwald/flow/compare/0.2.0-alpha.535...0.2.0-alpha.536) (2025-10-29)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.535](https://github.com/mittwald/flow/compare/0.2.0-alpha.534...0.2.0-alpha.535) (2025-10-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.534](https://github.com/mittwald/flow/compare/0.2.0-alpha.533...0.2.0-alpha.534) (2025-10-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.533](https://github.com/mittwald/flow/compare/0.2.0-alpha.532...0.2.0-alpha.533) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.532](https://github.com/mittwald/flow/compare/0.2.0-alpha.531...0.2.0-alpha.532) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.531](https://github.com/mittwald/flow/compare/0.2.0-alpha.530...0.2.0-alpha.531) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.530](https://github.com/mittwald/flow/compare/0.2.0-alpha.529...0.2.0-alpha.530) (2025-10-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.529](https://github.com/mittwald/flow/compare/0.2.0-alpha.528...0.2.0-alpha.529) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.528](https://github.com/mittwald/flow/compare/0.2.0-alpha.527...0.2.0-alpha.528) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.527](https://github.com/mittwald/flow/compare/0.2.0-alpha.526...0.2.0-alpha.527) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.526](https://github.com/mittwald/flow/compare/0.2.0-alpha.525...0.2.0-alpha.526) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.525](https://github.com/mittwald/flow/compare/0.2.0-alpha.524...0.2.0-alpha.525) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.524](https://github.com/mittwald/flow/compare/0.2.0-alpha.523...0.2.0-alpha.524) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.523](https://github.com/mittwald/flow/compare/0.2.0-alpha.522...0.2.0-alpha.523) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.522](https://github.com/mittwald/flow/compare/0.2.0-alpha.521...0.2.0-alpha.522) (2025-10-21)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.521](https://github.com/mittwald/flow/compare/0.2.0-alpha.520...0.2.0-alpha.521) (2025-10-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.520](https://github.com/mittwald/flow/compare/0.2.0-alpha.519...0.2.0-alpha.520) (2025-10-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.519](https://github.com/mittwald/flow/compare/0.2.0-alpha.518...0.2.0-alpha.519) (2025-10-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.518](https://github.com/mittwald/flow/compare/0.2.0-alpha.517...0.2.0-alpha.518) (2025-10-16)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.517](https://github.com/mittwald/flow/compare/0.2.0-alpha.516...0.2.0-alpha.517) (2025-10-15)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.516](https://github.com/mittwald/flow/compare/0.2.0-alpha.515...0.2.0-alpha.516) (2025-10-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.515](https://github.com/mittwald/flow/compare/0.2.0-alpha.514...0.2.0-alpha.515) (2025-10-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.514](https://github.com/mittwald/flow/compare/0.2.0-alpha.513...0.2.0-alpha.514) (2025-10-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.513](https://github.com/mittwald/flow/compare/0.2.0-alpha.512...0.2.0-alpha.513) (2025-10-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.512](https://github.com/mittwald/flow/compare/0.2.0-alpha.511...0.2.0-alpha.512) (2025-10-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.511](https://github.com/mittwald/flow/compare/0.2.0-alpha.510...0.2.0-alpha.511) (2025-10-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.510](https://github.com/mittwald/flow/compare/0.2.0-alpha.509...0.2.0-alpha.510) (2025-10-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.509](https://github.com/mittwald/flow/compare/0.2.0-alpha.508...0.2.0-alpha.509) (2025-10-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.508](https://github.com/mittwald/flow/compare/0.2.0-alpha.507...0.2.0-alpha.508) (2025-10-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.507](https://github.com/mittwald/flow/compare/0.2.0-alpha.506...0.2.0-alpha.507) (2025-10-07)
+
+### Bug Fixes
+
+* **Ext-Bridge:** fix validation issue in session token ([b288441](https://github.com/mittwald/flow/commit/b2884417048e0f1be1b22da48b4e2c14404f28d2))
+
+# [0.2.0-alpha.506](https://github.com/mittwald/flow/compare/0.2.0-alpha.505...0.2.0-alpha.506) (2025-10-07)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.505](https://github.com/mittwald/flow/compare/0.2.0-alpha.504...0.2.0-alpha.505) (2025-10-07)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.504](https://github.com/mittwald/flow/compare/0.2.0-alpha.503...0.2.0-alpha.504) (2025-10-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.503](https://github.com/mittwald/flow/compare/0.2.0-alpha.502...0.2.0-alpha.503) (2025-10-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.502](https://github.com/mittwald/flow/compare/0.2.0-alpha.501...0.2.0-alpha.502) (2025-10-01)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.501](https://github.com/mittwald/flow/compare/0.2.0-alpha.500...0.2.0-alpha.501) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.500](https://github.com/mittwald/flow/compare/0.2.0-alpha.499...0.2.0-alpha.500) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.499](https://github.com/mittwald/flow/compare/0.2.0-alpha.498...0.2.0-alpha.499) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.498](https://github.com/mittwald/flow/compare/0.2.0-alpha.497...0.2.0-alpha.498) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.497](https://github.com/mittwald/flow/compare/0.2.0-alpha.496...0.2.0-alpha.497) (2025-09-30)
+
+### Features
+
+* **Ext-Bridge:** add variant key to session token ([#1987](https://github.com/mittwald/flow/issues/1987)) ([42afb06](https://github.com/mittwald/flow/commit/42afb06d21cff2c85c1017d420908e1ee5b67979))
+
+# [0.2.0-alpha.496](https://github.com/mittwald/flow/compare/0.2.0-alpha.495...0.2.0-alpha.496) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.495](https://github.com/mittwald/flow/compare/0.2.0-alpha.494...0.2.0-alpha.495) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.494](https://github.com/mittwald/flow/compare/0.2.0-alpha.493...0.2.0-alpha.494) (2025-09-29)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.493](https://github.com/mittwald/flow/compare/0.2.0-alpha.492...0.2.0-alpha.493) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.492](https://github.com/mittwald/flow/compare/0.2.0-alpha.491...0.2.0-alpha.492) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.491](https://github.com/mittwald/flow/compare/0.2.0-alpha.490...0.2.0-alpha.491) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.490](https://github.com/mittwald/flow/compare/0.2.0-alpha.489...0.2.0-alpha.490) (2025-09-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.489](https://github.com/mittwald/flow/compare/0.2.0-alpha.488...0.2.0-alpha.489) (2025-09-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.488](https://github.com/mittwald/flow/compare/0.2.0-alpha.487...0.2.0-alpha.488) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.487](https://github.com/mittwald/flow/compare/0.2.0-alpha.486...0.2.0-alpha.487) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.486](https://github.com/mittwald/flow/compare/0.2.0-alpha.485...0.2.0-alpha.486) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.485](https://github.com/mittwald/flow/compare/0.2.0-alpha.484...0.2.0-alpha.485) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.484](https://github.com/mittwald/flow/compare/0.2.0-alpha.483...0.2.0-alpha.484) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.483](https://github.com/mittwald/flow/compare/0.2.0-alpha.482...0.2.0-alpha.483) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.482](https://github.com/mittwald/flow/compare/0.2.0-alpha.481...0.2.0-alpha.482) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.481](https://github.com/mittwald/flow/compare/0.2.0-alpha.480...0.2.0-alpha.481) (2025-09-18)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.480](https://github.com/mittwald/flow/compare/0.2.0-alpha.479...0.2.0-alpha.480) (2025-09-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.479](https://github.com/mittwald/flow/compare/0.2.0-alpha.478...0.2.0-alpha.479) (2025-09-17)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.478](https://github.com/mittwald/flow/compare/0.2.0-alpha.477...0.2.0-alpha.478) (2025-09-16)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.477](https://github.com/mittwald/flow/compare/0.2.0-alpha.476...0.2.0-alpha.477) (2025-09-16)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.476](https://github.com/mittwald/flow/compare/0.2.0-alpha.475...0.2.0-alpha.476) (2025-09-15)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.475](https://github.com/mittwald/flow/compare/0.2.0-alpha.474...0.2.0-alpha.475) (2025-09-15)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.474](https://github.com/mittwald/flow/compare/0.2.0-alpha.473...0.2.0-alpha.474) (2025-09-15)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.473](https://github.com/mittwald/flow/compare/0.2.0-alpha.472...0.2.0-alpha.473) (2025-09-12)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.472](https://github.com/mittwald/flow/compare/0.2.0-alpha.471...0.2.0-alpha.472) (2025-09-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.471](https://github.com/mittwald/flow/compare/0.2.0-alpha.470...0.2.0-alpha.471) (2025-09-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.470](https://github.com/mittwald/flow/compare/0.2.0-alpha.469...0.2.0-alpha.470) (2025-09-11)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.469](https://github.com/mittwald/flow/compare/0.2.0-alpha.468...0.2.0-alpha.469) (2025-09-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.468](https://github.com/mittwald/flow/compare/0.2.0-alpha.467...0.2.0-alpha.468) (2025-09-10)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.467](https://github.com/mittwald/flow/compare/0.2.0-alpha.466...0.2.0-alpha.467) (2025-09-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.466](https://github.com/mittwald/flow/compare/0.2.0-alpha.465...0.2.0-alpha.466) (2025-09-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.465](https://github.com/mittwald/flow/compare/0.2.0-alpha.464...0.2.0-alpha.465) (2025-09-09)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.464](https://github.com/mittwald/flow/compare/0.2.0-alpha.463...0.2.0-alpha.464) (2025-09-08)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
 # [0.2.0-alpha.463](https://github.com/mittwald/flow/compare/0.2.0-alpha.462...0.2.0-alpha.463) (2025-09-08)
 
 **Note:** Version bump only for package @mittwald/ext-bridge

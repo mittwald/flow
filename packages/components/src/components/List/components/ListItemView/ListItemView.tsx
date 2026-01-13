@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./ListItemView.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
@@ -22,6 +21,7 @@ export const ListItemView = (props: ListItemViewProps) => {
   const propsContext: PropsContext = {
     ContextMenu: {
       tunnelId: "button",
+      placement: "bottom right",
       wrapWith: <OptionsButton className={styles.action} />,
     },
     Button: {
@@ -52,24 +52,24 @@ export const ListItemView = (props: ListItemViewProps) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
-      <TunnelProvider>
-        <ListItemViewContentView
-          viewMode={list.viewMode}
-          title={<TunnelExit id="title" />}
-          avatar={<TunnelExit id="avatar" />}
-          button={<TunnelExit id="button" />}
-          subTitle={<TunnelExit id="text" />}
-          bottom={<TunnelExit id="bottom" />}
-          checkbox={<TunnelExit id="checkbox" />}
-          s={s}
-          m={m}
-          l={l}
-        >
+    <TunnelProvider>
+      <ListItemViewContentView
+        viewMode={list.viewMode}
+        title={<TunnelExit id="title" />}
+        avatar={<TunnelExit id="avatar" />}
+        button={<TunnelExit id="button" />}
+        subTitle={<TunnelExit id="text" />}
+        bottom={<TunnelExit id="bottom" />}
+        checkbox={<TunnelExit id="checkbox" />}
+        s={s}
+        m={m}
+        l={l}
+      >
+        <PropsContextProvider props={propsContext}>
           {children}
-        </ListItemViewContentView>
-      </TunnelProvider>
-    </PropsContextProvider>
+        </PropsContextProvider>
+      </ListItemViewContentView>
+    </TunnelProvider>
   );
 };
 

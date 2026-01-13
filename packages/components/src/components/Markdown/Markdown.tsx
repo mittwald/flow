@@ -4,8 +4,8 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { CSSProperties, FC, ReactNode } from "react";
-import React, { Children, isValidElement } from "react";
+import type { CSSProperties, FC, ReactNode, Ref } from "react";
+import { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
@@ -24,6 +24,7 @@ export interface MarkdownProps
   headingOffset?: number;
   /** @internal */
   style?: CSSProperties;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /** @flr-generate all */
@@ -33,6 +34,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     color = "default",
     className,
     headingOffset = 0,
+    ref,
     ...rest
   } = props;
 
@@ -106,7 +108,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       return (
         <CodeBlock
           copyable={false}
-          color="dark"
+          color={color}
           language={
             isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className
@@ -141,7 +143,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const textContent = extractTextFromFirstChild(children);
 
   return (
-    <div className={clsx(styles.markdown, className)} {...rest}>
+    <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {textContent}
       </ReactMarkdown>

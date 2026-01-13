@@ -6,7 +6,7 @@
   column-gap: var(--switch--label-to-track-spacing);
 
   &.label-leading {
-    flex-direction: row-reverse;
+    direction: rtl;
   }
 
   /* Elements */
@@ -61,10 +61,6 @@
     .track {
       background-color: var(--switch--track-background-color--disabled);
       color: var(--switch--track-background-color--disabled);
-    }
-
-    .label {
-      color: var(--label--color--disabled);
     }
 
     .handle {

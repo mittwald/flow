@@ -48,7 +48,7 @@ export const ContextMenuSection = flowComponent(
         selectionMode={getAriaSelectionMode(selectionMode)}
         className={styles.section}
       >
-        <PropsContextProvider props={propsContext} mergeInParentContext>
+        <PropsContextProvider props={propsContext}>
           <Action skip>
             <Action closeOverlay={getCloseOverlayType(selectionMode)}>
               {children}
@@ -58,6 +58,7 @@ export const ContextMenuSection = flowComponent(
       </Aria.MenuSection>
     );
   },
+  { type: "layout" },
 );
 
 export default ContextMenuSection;

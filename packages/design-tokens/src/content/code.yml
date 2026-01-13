@@ -1,8 +1,6 @@
 code:
   font-size:
     value: "{font-size-text.s}"
-  line-height:
-    value: "{line-height.m}"
   padding-x:
     value: "{size-px.xs}"
   padding-y:

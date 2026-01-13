@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
@@ -16,7 +15,7 @@ import {
 import { Button } from "@/components/Button";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Action } from "@/components/Action";
-import { Modal } from "@/components/Modal";
+import { Modal, ModalTrigger } from "@/components/Modal";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
@@ -25,9 +24,11 @@ import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuT
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { FileField } from "@/components/FileField";
-import { Field, Form } from "@/integrations/react-hook-form";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
+import Content from "@/components/Content";
+import ActionGroup from "@/components/ActionGroup";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -110,20 +111,26 @@ export const WithHeaderContent: Story = {
             My Project with a looooooooooong name
             <AlertBadge status="danger">Deactivated</AlertBadge>
           </Heading>
-          <Action>
-            <Modal slot="actionConfirm">
-              <Heading>Confirmation Modal</Heading>
+          <Button variant="soft" color="secondary">
+            Start database migration
+          </Button>
+          <ModalTrigger>
+            <Button color="danger">Delete project</Button>
+            <Modal>
+              <Heading>Delete project</Heading>
+              <Content>
+                <Text>Are you sure you want to delete this project?</Text>
+              </Content>
+              <ActionGroup>
+                <Action closeOverlay="Modal">
+                  <Button color="danger">Delete project</Button>
+                  <Button variant="soft" color="secondary">
+                    Abort
+                  </Button>
+                </Action>
+              </ActionGroup>
             </Modal>
-            <Button variant="soft" color="secondary">
-              Start database migration
-            </Button>
-          </Action>
-          <Action>
-            <Modal slot="actionConfirm">
-              <Heading>Confirmation Modal</Heading>
-            </Modal>
-            <Button color="accent">Activate</Button>
-          </Action>
+          </ModalTrigger>
         </Header>
         <Text>{dummyText.medium}</Text>
       </Section>
@@ -247,6 +254,9 @@ export const WithForm: Story = {
             our newsletter and stay up to date.
           </Text>
           <Link href="#">Subscribe</Link>
+          <ActionGroup>
+            <SubmitButton color="accent">Submit</SubmitButton>
+          </ActionGroup>
         </Form>
       </Section>
     );

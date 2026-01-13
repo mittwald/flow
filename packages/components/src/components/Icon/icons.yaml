@@ -35,6 +35,7 @@ Directory: Folder
 Delete: Trash
 DeliveryBox: MailShare
 DnsZone: Network
+DnsSubZone: Subtask
 Domain: World
 Download: Download
 Edit: Edit
@@ -50,6 +51,7 @@ Hide: EyeOff
 Home: Home
 Image: Photo
 Info: InfoCircle
+Invite: MailOpened
 KnowledgeHint: Bulb
 LeadFyndr: Radar2
 Link: Link
@@ -104,6 +106,7 @@ Support: Headset
 Terminate: FileX
 Ticket: Ticket
 Time: Clock
+Unavailable: CircleMinus
 Undo: ArrowBackUp
 Upload: Upload
 User: User

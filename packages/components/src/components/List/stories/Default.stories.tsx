@@ -11,12 +11,26 @@ import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
-import { ListItemView, ListSummary, typedList } from "@/components/List";
+import {
+  ListItem,
+  ListItemView,
+  ListSummary,
+  typedList,
+} from "@/components/List";
 import { Button } from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
 import { Flex } from "@/components/Flex";
 import { SettingsProvider } from "@/components/SettingsProvider";
+import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
+import { TableHeader } from "@/components/List/setupComponents/TableHeader";
+import { Table } from "@/components/List/setupComponents/Table";
+import { TableColumn } from "@/components/List/setupComponents/TableColumn";
+import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { TableRow } from "@/components/List/setupComponents/TableRow";
+import { TableCell } from "@/components/List/setupComponents/TableCell";
+import SkeletonText from "@/components/SkeletonText";
+import Skeleton from "@/components/Skeleton";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -75,7 +89,7 @@ const meta: Meta<typeof List> = {
               defaultSelected={["Domain"]}
             />
 
-            <DomainList.Search autoFocus autoSubmit />
+            <DomainList.Search autoFocus />
             <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
             <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
             <DomainList.Sorting property="type" name="Typ" />
@@ -160,7 +174,7 @@ export const WithSummary: Story = {
           <ListSummary>
             <Flex justify="end">
               <Text>
-                <b>Gesamt: 41,00 €</b>
+                <strong>Gesamt: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -202,7 +216,7 @@ export const WithSummaryBottom: Story = {
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
-                <b>Gesamt: 41,00 €</b>
+                <strong>Gesamt: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -266,6 +280,58 @@ export const WithAccordion: Story = {
           </InvoiceList.Item>
           <InvoiceList.Search />
         </InvoiceList.List>
+      </Section>
+    );
+  },
+};
+
+const endlessPromise = new Promise(() => {
+  // never resolve
+});
+
+export const LoadingView: Story = {
+  render: () => {
+    return (
+      <Section>
+        <Heading>Invoices</Heading>
+        <List aria-label="Invoices">
+          <ListLoaderHooks>
+            {() => {
+              throw endlessPromise;
+            }}
+          </ListLoaderHooks>
+          <ListItem
+            loadingView={
+              <ListItemView>
+                <Avatar>
+                  <Skeleton height="600px" width="600px" />
+                </Avatar>
+                <Heading>
+                  <SkeletonText width="10em" />
+                </Heading>
+              </ListItemView>
+            }
+            showTiles
+          >
+            {() => <ListItemView />}
+          </ListItem>
+          <Table>
+            <TableHeader>
+              <TableColumn>ID</TableColumn>
+              <TableColumn>Name</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
+                  {() => <Avatar />}
+                </TableCell>
+                <TableCell loadingView={<SkeletonText width="10em" />}>
+                  {() => <Text>Static text</Text>}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </List>
       </Section>
     );
   },

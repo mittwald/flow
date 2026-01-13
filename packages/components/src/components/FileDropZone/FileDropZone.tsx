@@ -1,5 +1,4 @@
 import { type FC, type PropsWithChildren, useRef } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -14,6 +13,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileDropZoneProps
   extends PropsWithClassName,
@@ -22,6 +22,8 @@ export interface FileDropZoneProps
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,
     Pick<Aria.DropZoneProps, "isDisabled"> {
   onChange?: FileInputOnChangeHandler;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -36,7 +38,15 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       children,
       name,
       isDisabled,
+      isReadOnly,
     } = props;
+
+    const {
+      FieldErrorView,
+      FieldErrorCaptureContext,
+      fieldProps,
+      fieldPropsContext,
+    } = useFieldComponent(props);
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
     const rootClassName = clsx(
@@ -46,23 +56,31 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     );
 
     const propsContext: PropsContext = {
-      FileField: {
-        name,
-        onChange: onChangeDropZone,
-        ref: fileFieldRef,
-        accept: accept,
-        multiple: multiple,
-        Button: { variant: "outline", color: "dark" },
-        isDisabled,
+      ...fieldPropsContext,
+      IllustratedMessage: {
+        FileField: {
+          name,
+          onChange: onChangeDropZone,
+          ref: fileFieldRef,
+          accept: accept,
+          multiple: multiple,
+          Button: { variant: "outline", color: "dark" },
+          isDisabled,
+          isReadOnly,
+        },
+        Heading: {
+          className: styles.heading,
+        },
+        Icon: { className: styles.icon },
+        Text: { className: styles.text },
       },
-      Heading: {
-        className: styles.heading,
-      },
-      Icon: { className: styles.icon },
-      Text: { className: styles.text },
     };
 
     const onDropHandler = async (event: DropEvent) => {
+      if (isReadOnly) {
+        return;
+      }
+
       const fileDropItems = event.items.filter(
         (file) => file.kind === "file",
       ) as Aria.FileDropItem[];
@@ -92,17 +110,21 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <Aria.DropZone
-        className={rootClassName}
-        onDrop={onDropHandler}
-        isDisabled={isDisabled}
-      >
-        <IllustratedMessage color="dark">
-          <PropsContextProvider props={propsContext} mergeInParentContext>
-            {children}
+      <div {...fieldProps}>
+        <FieldErrorCaptureContext>
+          <PropsContextProvider props={propsContext}>
+            <Aria.DropZone
+              className={rootClassName}
+              onDrop={onDropHandler}
+              isDisabled={isDisabled}
+              data-readonly={isReadOnly}
+            >
+              <IllustratedMessage color="dark">{children}</IllustratedMessage>
+            </Aria.DropZone>
           </PropsContextProvider>
-        </IllustratedMessage>
-      </Aria.DropZone>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
+      </div>
     );
   },
 );

@@ -37,7 +37,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
+import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
@@ -79,6 +79,10 @@ import type { NavigationGroupProps } from "@/components/Navigation/components/Na
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
+import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
+import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
+import type { AlertTextProps } from "@/components/AlertText";
+import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 
 export * from "./types";
 
@@ -89,6 +93,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
+  AlertText: AlertTextProps;
   Align: AlignProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
@@ -119,6 +124,7 @@ export interface FlowComponentPropsTypes {
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
+  IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
   Initials: InitialsProps;
   Label: LabelProps;
@@ -133,7 +139,6 @@ export interface FlowComponentPropsTypes {
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
-  ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -152,6 +157,8 @@ export interface FlowComponentPropsTypes {
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
+  SubmitButton: SubmitButtonProps;
+  ResetButton: ResetButtonProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
@@ -173,6 +180,7 @@ const propsContextSupportingComponentsMap: Record<
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
+  AlertText: true,
   Align: true,
   Badge: true,
   Button: true,
@@ -201,6 +209,7 @@ const propsContextSupportingComponentsMap: Record<
   Header: true,
   Heading: true,
   Icon: true,
+  IllustratedMessage: true,
   Image: true,
   Initials: true,
   Label: true,
@@ -215,7 +224,6 @@ const propsContextSupportingComponentsMap: Record<
   Message: true,
   MessageThread: true,
   Modal: true,
-  ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,
@@ -234,6 +242,8 @@ const propsContextSupportingComponentsMap: Record<
   SegmentedControl: true,
   Select: true,
   Slider: true,
+  SubmitButton: true,
+  ResetButton: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,

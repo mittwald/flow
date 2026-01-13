@@ -21,6 +21,7 @@ export default () => {
       hidePagination
       accordion
       aria-label="Domains"
+      getItemId={(domain) => domain.id}
     >
       <List.StaticData data={domains} />
       <List.Item textValue={(domain) => domain.domain}>

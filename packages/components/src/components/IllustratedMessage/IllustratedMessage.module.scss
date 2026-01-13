@@ -34,12 +34,9 @@
 
   @mixin status($color) {
     &.#{$color} {
-      :where(.icon) {
-        color: var(--illustrated-message--#{$color}-icon-color);
-      }
-
+      :where(.icon),
       .heading {
-        color: var(--illustrated-message--#{$color}-heading-color);
+        color: var(--illustrated-message--#{$color}-content-color);
       }
     }
   }

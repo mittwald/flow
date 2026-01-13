@@ -1,18 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import { useRef } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
-import { useForm } from "react-hook-form";
-import { Field, Form } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
-import { action } from "storybook/actions";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
   component: MarkdownEditor,
   args: { placeholder: "Write a message..." },
-  render: (props) => <MarkdownEditor {...props} />,
+  render: (props) => <MarkdownEditor aria-label="Message" {...props} />,
 };
 export default meta;
 
@@ -42,33 +40,24 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const Resizeable: Story = {
+export const AutoResizeable: Story = {
   args: { rows: 1, autoResizeMaxRows: 5 },
 };
 
-export const WithForm: Story = {
-  render: (props) => {
-    const form = useForm({
-      defaultValues: { message: "" },
-    });
-    return (
-      <Form
-        form={form}
-        onSubmit={async (v) => {
-          action(v.message);
-          form.reset();
-        }}
-      >
-        <Field name="message" rules={{ required: "Please enter a message" }}>
-          <MarkdownEditor {...props}>
-            <Label>Message</Label>
-          </MarkdownEditor>
-        </Field>
-        <br />
-        <Button type="submit">Submit</Button>
-      </Form>
-    );
-  },
+export const Resizeable: Story = {
+  args: { allowResize: true },
+};
+
+export const HorizontallyResizeable: Story = {
+  args: { allowResize: "horizontal" },
+};
+
+export const VerticallyResizeable: Story = {
+  args: { allowResize: "vertical" },
+};
+
+export const VerticallyAndAutoResizeable: Story = {
+  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
 };
 
 export const WithOnChange: Story = {
@@ -77,6 +66,29 @@ export const WithOnChange: Story = {
       <MarkdownEditor {...props} onChange={(v) => console.log(v)}>
         <Label>Message</Label>
       </MarkdownEditor>
+    );
+  },
+};
+
+export const WithRef: StoryObj = {
+  render: (props) => {
+    const editorRef = useRef<HTMLTextAreaElement | null>(null);
+
+    const handleFocus = () => {
+      if (editorRef.current) {
+        editorRef.current.focus();
+      }
+    };
+
+    return (
+      <Section>
+        <MarkdownEditor {...props} ref={editorRef}>
+          <Label>Message</Label>
+        </MarkdownEditor>
+        <Button type="button" onClick={handleFocus}>
+          Set focus
+        </Button>
+      </Section>
     );
   },
 };

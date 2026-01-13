@@ -1,5 +1,4 @@
 import {
-  Button,
   Label,
   Section,
   Slider,
@@ -7,6 +6,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { sleep } from "@/content/03-components/actions/action/examples/lib";
@@ -39,7 +39,7 @@ export default () => {
             <Label>Speicherplatz</Label>
           </Slider>
         </Field>
-        <Button type="submit">Speichern</Button>
+        <SubmitButton>Speichern</SubmitButton>
       </Form>
     </Section>
   );

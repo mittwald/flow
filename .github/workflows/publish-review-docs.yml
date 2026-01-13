@@ -21,8 +21,6 @@ jobs:
       url: https://mittwald.github.io${{ env.NEXT_BASE_PATH }}
 
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
@@ -35,14 +33,11 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Setup Node 🎛️
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
-          cache: "pnpm"
+          node-version: 24
           registry-url: "https://registry.npmjs.org"
 
       - name: Git Identity 🪪

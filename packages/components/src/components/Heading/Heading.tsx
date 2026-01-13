@@ -1,9 +1,7 @@
 export * from "./view";
-import React from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -19,10 +17,7 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   wrap?: "wrap" | "balance";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Heading = flowComponent("Heading", (props) => {
   const {
     children,
@@ -60,10 +55,15 @@ export const Heading = flowComponent("Heading", (props) => {
         tunnelId: null,
       },
     },
+    AlertText: {
+      Icon: {
+        className: styles.icon,
+      },
+    },
   };
 
   return (
-    <ClearPropsContext>
+    <PropsContextProvider props={propsContext}>
       <TunnelProvider>
         <Aria.Heading
           level={level}
@@ -71,17 +71,13 @@ export const Heading = flowComponent("Heading", (props) => {
           {...rest}
           ref={ref}
         >
-          <span className={styles.headingText}>
-            <PropsContextProvider props={propsContext}>
-              {children}
-            </PropsContextProvider>
-          </span>
+          <span className={styles.headingText}>{children}</span>
           <span className={styles.headingContent}>
             <TunnelExit id="headingContent" />
           </span>
         </Aria.Heading>
       </TunnelProvider>
-    </ClearPropsContext>
+    </PropsContextProvider>
   );
 });
 

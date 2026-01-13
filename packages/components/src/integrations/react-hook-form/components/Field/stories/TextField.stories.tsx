@@ -3,11 +3,19 @@ import { Button } from "@/components/Button";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
 import { TextField } from "@/components/TextField";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -20,10 +28,11 @@ const meta: Meta<typeof Field> = {
       nameDefaultValue: string;
       nameRequired: string;
       nameMaxLength: string;
+      nameMinLength: string;
       controlledName: string;
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -35,13 +44,14 @@ const meta: Meta<typeof Field> = {
         nameRequired: "",
         nameMaxLength: "",
         controlledName: "",
+        nameMinLength: "",
       },
     });
 
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="name">
             <TextField>
@@ -57,7 +67,9 @@ const meta: Meta<typeof Field> = {
 
           <Field
             name="nameRequired"
-            rules={{ required: "Please enter your name" }}
+            rules={{
+              required: "Please enter your name",
+            }}
           >
             <TextField>
               <Label>Name</Label>
@@ -76,9 +88,21 @@ const meta: Meta<typeof Field> = {
             </TextField>
           </Field>
 
+          <Field
+            name="nameMinLength"
+            rules={{
+              required: "Please enter your name",
+              minLength: 2,
+            }}
+          >
+            <TextField>
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+
           <ActionGroup>
-            <Button type="reset">Reset</Button>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -123,9 +147,68 @@ export const WithTransformedValue: Story = {
             </TextField>
           </Field>
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
+      </Form>
+    );
+  },
+};
+
+export const WithFieldError: Story = {
+  render: () => {
+    const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <TextField>
+            <Label>Field</Label>
+          </TextField>
+        </Field>
+        <TextField isInvalid>
+          <Label>Field</Label>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </TextField>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <TextField {...props} type="email" inputMode="email">
+            <Label>Field</Label>
+          </TextField>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "field",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("field")}>
+          focus through form
+        </Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },

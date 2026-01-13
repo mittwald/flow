@@ -42,7 +42,8 @@
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
-    background-color: var(--neutral--color--300) !important;
+    background-color: var(--code--default-background-color) !important;
+    font-size: var(--font-size-text--s);
   }
 
   .staticModal {
@@ -77,7 +78,8 @@
 }
 
 .toggleCode {
-  width: 100%;
+  width: 100% !important;
+  outline-offset: calc(var(--size-px--xxs) * -1) !important;
 }
 
 .editor {
@@ -86,25 +88,17 @@
   border-top: 1px solid var(--border-color);
   display: grid;
   grid-template-rows: 1fr;
-  visibility: visible;
-  transition-property: grid-template-rows, visibility, padding;
-  transition-duration: var(--transition--duration--slow);
   padding: var(--size-px--m);
-  background-color: var(--neutral--color--300) !important;
-
-  &.collapsed {
-    grid-template-rows: 0fr;
-    visibility: hidden;
-    padding-block: 0;
-    height: 0;
-  }
+  background-color: var(--code--default-background-color) !important;
 }
 
 .actions {
-  padding: var(--size-px--xs);
   margin-block-start: auto;
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--200);
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
+  button {
+    padding-block: var(--size-px--s);
+  }
 }

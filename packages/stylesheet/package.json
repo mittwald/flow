@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-stylesheet",
-  "version": "0.2.0-alpha.463",
+  "version": "0.2.0-alpha.629",
   "type": "module",
   "description": "A collection of CSS classes used in Flow, mittwald's design system.",
   "homepage": "https://mittwald.github.io/flow",
@@ -18,6 +18,6 @@
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "resolve-package-path": "^4.0.3",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.2"
   }
 }

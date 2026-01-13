@@ -4,42 +4,55 @@ import {
   type TextFieldBaseProps,
 } from "@/components/TextFieldBase";
 import styles from "./TextField.module.scss";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface TextFieldProps
-  extends Omit<TextFieldBaseProps, "input" | "className">,
+  extends Omit<
+      TextFieldBaseProps,
+      "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "className"
+    >,
     Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
     FlowComponentProps<HTMLInputElement> {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, placeholder, ref, form, ...rest } = props;
+  const { children, placeholder, form, ref, ...rest } =
+    useControlledHostValueProps(props);
 
   const input = (
-    <ReactAriaControlledValueFix inputContext={Aria.InputContext} props={props}>
-      <Aria.Input
-        form={form}
-        placeholder={placeholder}
-        className={styles.textField}
-        ref={ref}
-      />
-    </ReactAriaControlledValueFix>
+    <Aria.Input
+      form={form}
+      placeholder={placeholder}
+      className={styles.textField}
+      ref={ref}
+    />
   );
 
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
+
   return (
-    <ClearPropsContext>
-      <TextFieldBase {...rest} input={input}>
+    <TextFieldBase
+      {...rest}
+      {...fieldProps}
+      FieldErrorView={FieldErrorView}
+      FieldErrorCaptureContext={FieldErrorCaptureContext}
+      input={input}
+    >
+      <PropsContextProvider props={fieldPropsContext}>
         {children}
-      </TextFieldBase>
-    </ClearPropsContext>
+      </PropsContextProvider>
+    </TextFieldBase>
   );
 });
 

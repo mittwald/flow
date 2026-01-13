@@ -5,8 +5,8 @@
   .messageThreadContainer {
     overflow: auto;
     padding-bottom: var(--chat--spacing);
-    padding-right: var(--chat--spacing);
-    margin-right: calc(var(--chat--spacing) * -1);
+    padding-right: var(--size-px--m);
+    margin-right: calc(var(--size-px--m) * -1);
     flex-grow: 1;
     display: flex;
     flex-direction: column-reverse;
@@ -20,12 +20,9 @@
   .controls form {
     display: flex;
     align-items: flex-start;
-    border-top-width: var(--separator--height);
-    border-top-color: var(--separator--color);
-    border-top-style: var(--border-style--default);
     gap: var(--chat--spacing);
-    padding-top: var(--chat--spacing);
     flex-wrap: wrap;
+    padding-top: var(--chat--spacing);
 
     > :first-child {
       order: 0;

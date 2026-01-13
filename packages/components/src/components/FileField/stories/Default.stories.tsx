@@ -8,10 +8,6 @@ import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
 import { IconPaperclip } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
-import { useForm } from "react-hook-form";
-import { Form, typedField } from "@/integrations/react-hook-form";
-import { action } from "storybook/actions";
-import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",
@@ -30,9 +26,11 @@ export default meta;
 
 type Story = StoryObj<typeof FileField>;
 
-const submitAction = action("submit");
-
 export const Default: Story = {};
+
+export const ReadOnly: Story = {
+  args: { isReadOnly: true },
+};
 
 export const WithDescription: Story = {
   render: (props) => (
@@ -77,7 +75,7 @@ export const WithHandler: Story = {
 
     return (
       <Section>
-        <FileField {...props} isInvalid onChange={setFiles}>
+        <FileField {...props} onChange={setFiles}>
           <Label>Certificate</Label>
           <Button variant="outline" color="secondary">
             Select
@@ -85,35 +83,6 @@ export const WithHandler: Story = {
         </FileField>
         {file?.name}
       </Section>
-    );
-  },
-};
-
-export const WithReactHookForm: Story = {
-  render: () => {
-    const form = useForm<{
-      file: FileList | null;
-    }>();
-
-    const Field = typedField(form);
-
-    return (
-      <Form form={form} onSubmit={submitAction}>
-        <Section>
-          <Field name="file" rules={{ required: "Please choose a file" }}>
-            <FileField multiple>
-              <Label>Certificate</Label>
-              <Button variant="outline" color="secondary">
-                Select
-              </Button>
-            </FileField>
-          </Field>
-          {form.watch("file")?.[0]?.name}
-          <ActionGroup>
-            <Button type="submit">Upload</Button>
-          </ActionGroup>
-        </Section>
-      </Form>
     );
   },
 };

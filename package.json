@@ -2,12 +2,15 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@10.23.0",
   "type": "module",
   "license": "MIT",
   "engines": {
     "node": ">=20.19"
   },
   "scripts": {
+    "affected:test": "nx affected --targets=test:unit,test:compile",
+    "affected:test:browser": "nx affected --targets=test:browser,test:e2e,test:visual",
     "build": "nx run-many --targets=build --exclude docs",
     "clean": "nx reset",
     "postclean": "nx run-many --targets=clean",
@@ -15,7 +18,10 @@
     "dev:init-githooks": "pnpm dlx simple-git-hooks",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "test": "nx run-many --targets=test",
+    "test": "nx run-many --targets=test:unit,test:compile",
+    "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
+    "test:browser:prepare": "pnpx playwright install --with-deps firefox webkit",
+    "test:visual": "nx run-many --targets=test:visual",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {
@@ -24,36 +30,36 @@
     "pre-commit": "pnpm lint"
   },
   "dependencies": {
-    "eslint-scope": "^8.4.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "eslint-scope": "^9.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@lerna-lite/cli": "^3.12.3",
-    "@lerna-lite/publish": "^3.12.3",
-    "@nx/devkit": "20.8.1",
-    "@types/node": "^22.16.5",
+    "@eslint/js": "^9.39.1",
+    "@lerna-lite/cli": "^4.9.3",
+    "@lerna-lite/publish": "^4.9.3",
+    "@nx/devkit": "^22.1.0",
+    "@types/node": "^24.10.1",
     "@types/verror": "^1.10.11",
     "@types/yieldable-json": "^2.0.2",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "depcheck": "^1.4.7",
-    "dot-prop": "^9.0.0",
-    "eslint": "^9.32.0",
+    "dot-prop": "^10.1.0",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-json": "^4.0.1",
-    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-prettier": "^5.5.4",
     "fs-jetpack": "^5.1.0",
-    "nx": "20.8.1",
+    "nx": "^22.1.0",
     "prettier": "^3.6.2",
-    "prettier-plugin-jsdoc": "^1.3.3",
+    "prettier-plugin-jsdoc": "^1.5.0",
     "prettier-plugin-pkgsort": "^0.2.1",
     "prettier-plugin-sort-json": "^4.1.1",
     "react-docgen-typescript": "^2.4.0",
-    "simple-git-hooks": "^2.13.0",
-    "tsx": "^4.20.3",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0",
+    "simple-git-hooks": "^2.13.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0",
     "verror": "^1.10.1",
     "yieldable-json": "^2.1.0"
   },
@@ -62,6 +68,9 @@
       "acorn": "patches/acorn.patch"
     },
     "onlyBuiltDependencies": [
+      "@bundled-es-modules/glob",
+      "@parcel/watcher",
+      "esbuild",
       "msw",
       "nx",
       "sharp",
@@ -70,10 +79,10 @@
     ]
   },
   "resolutions": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2"
   },
   "workspaces": [
     "packages/*",

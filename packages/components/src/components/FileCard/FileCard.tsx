@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar } from "./components/Avatar";
 import { Text } from "@/components/Text";
 import type {
@@ -83,7 +82,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
   const Element = elementType;
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       <TunnelProvider>
         <Element ref={ref as never} className={rootClassName}>
           <Wrap if={(href || onPress) && !isFailed}>
@@ -100,7 +99,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
               <span className={styles.text}>
                 {name && (
                   <Text className={styles.title}>
-                    <b>{name}</b>
+                    <strong>{name}</strong>
                   </Text>
                 )}
                 {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}

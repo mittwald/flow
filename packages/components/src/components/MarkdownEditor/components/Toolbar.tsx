@@ -1,74 +1,79 @@
-import React, { type FC, type RefObject } from "react";
+import React, { type FC } from "react";
 import styles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
 import { Icon } from "@/components/Icon";
 import {
+  IconBlockquote,
   IconBold,
   IconItalic,
   IconList,
   IconListNumbers,
-  IconQuoteFilled,
   IconStrikethrough,
 } from "@tabler/icons-react";
 import { IconCode, IconLink } from "@/components/Icon/components/icons";
-import { ToolbarButton } from "@/components/MarkdownEditor/components/ToolbarButton";
-import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
-import { ModeButton } from "@/components/MarkdownEditor/components/ModeButton";
+import {
+  ToolbarButton,
+  type ToolBarButtonProps,
+} from "@/components/MarkdownEditor/components/ToolbarButton";
+import {
+  ModeButton,
+  type ModeButtonProps,
+} from "@/components/MarkdownEditor/components/ModeButton";
+import type { ButtonProps } from "@/components/Button";
 
-interface Props {
-  markdown: string;
-  setMarkdown: (markdown: string) => void;
-  textAreaRef: RefObject<HTMLTextAreaElement | null>;
-  setMode: (mode: MarkdownEditorMode) => void;
-  mode: MarkdownEditorMode;
-  isDisabled?: boolean;
-  onChange?: (markdown: string) => void;
+interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
+  currentMode: ModeButtonProps["currentMode"];
+  onModeChange: ModeButtonProps["onChange"];
+  onToolPressed: ToolBarButtonProps["onPress"];
 }
 
-export const Toolbar: FC<Props> = (props) => {
-  const { setMode, ...rest } = props;
+export const Toolbar: FC<ToolbarProps> = (props) => {
+  const sharedToolButtonProps: Partial<ToolBarButtonProps> = {
+    onPress: props.onToolPressed,
+    isDisabled: props.isDisabled || props.currentMode === "preview",
+  };
 
   return (
     <header className={styles.toolbar} role="toolbar">
       <div className={styles.toolbarButtons}>
-        <ToolbarButton {...rest} type="bold">
+        <ToolbarButton {...sharedToolButtonProps} type="bold">
           <Icon>
             <IconBold />
           </Icon>
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="italic">
+        <ToolbarButton {...sharedToolButtonProps} type="italic">
           <Icon>
             <IconItalic />
           </Icon>
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="strikeThrough">
+        <ToolbarButton {...sharedToolButtonProps} type="strikeThrough">
           <Icon>
             <IconStrikethrough />
           </Icon>
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="quote">
+        <ToolbarButton {...sharedToolButtonProps} type="quote">
           <Icon>
-            <IconQuoteFilled />
+            <IconBlockquote />
           </Icon>
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="code">
+        <ToolbarButton {...sharedToolButtonProps} type="code">
           <IconCode />
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="link">
+        <ToolbarButton {...sharedToolButtonProps} type="link">
           <IconLink />
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="unorderedList">
+        <ToolbarButton {...sharedToolButtonProps} type="unorderedList">
           <Icon>
             <IconList />
           </Icon>
         </ToolbarButton>
 
-        <ToolbarButton {...rest} type="orderedList">
+        <ToolbarButton {...sharedToolButtonProps} type="orderedList">
           <Icon>
             <IconListNumbers />
           </Icon>
@@ -76,8 +81,8 @@ export const Toolbar: FC<Props> = (props) => {
       </div>
 
       <ModeButton
-        setMode={setMode}
-        mode={props.mode}
+        onChange={props.onModeChange}
+        currentMode={props.currentMode}
         isDisabled={props.isDisabled}
       />
     </header>

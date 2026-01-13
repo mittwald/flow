@@ -21,10 +21,7 @@ export interface LabelProps
   unstyled?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Label = flowComponent("Label", (props) => {
   const {
     children,
@@ -43,9 +40,9 @@ export const Label = flowComponent("Label", (props) => {
     : clsx(styles.label, isDisabled && styles.disabled, className);
 
   const optionalMarker = (
-    <div className={styles.optional}>
+    <span className={styles.optional}>
       {stringFormatter.format("label.optional")}
-    </div>
+    </span>
   );
 
   const propsContext: PropsContext = {

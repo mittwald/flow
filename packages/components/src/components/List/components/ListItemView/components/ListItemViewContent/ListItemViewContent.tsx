@@ -1,5 +1,4 @@
 import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import styles from "../../ListItemView.module.scss";
 import {
   dynamic,
@@ -108,54 +107,63 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     </div>
   );
 
-  return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
-      <div className={className}>
-        {viewMode === "list" && (
-          <>
-            <div className={styles.contentWrapper}>
-              {s || m || l ? (
-                <ColumnLayout
-                  s={s}
-                  m={m}
-                  l={l}
-                  className={clsx(styles.content, styles.columnLayout)}
-                  mergeInParentContext
-                >
-                  {header}
-                  {children}
-                </ColumnLayout>
-              ) : (
-                <div className={styles.content}>
-                  {header}
-                  {children}
-                </div>
-              )}
-              {button}
-            </div>
-            {bottom}
-          </>
-        )}
+  const innerListContent = (
+    <>
+      {header}
+      {children}
+    </>
+  );
 
-        {viewMode === "tiles" && (
-          <>
-            <div className={styles.avatarContainer}>{avatar}</div>
-            <div className={styles.content}>
-              <div className={styles.header}>
-                <div className={styles.checkboxContainer}>{checkbox}</div>
-                <div className={styles.title}>
-                  {title}
-                  <div className={styles.subTitle}>{subTitle}</div>
-                </div>
-                {button}
-              </div>
-              {children}
-              {bottom}
-            </div>
-          </>
-        )}
+  const listColumnsContentView = (
+    <ColumnLayout
+      s={s}
+      m={m}
+      l={l}
+      className={clsx(styles.content, styles.columnLayout)}
+    >
+      {innerListContent}
+    </ColumnLayout>
+  );
+
+  const listDefaultContentView = (
+    <div className={styles.content}>{innerListContent}</div>
+  );
+
+  const listView = (
+    <>
+      <div className={styles.contentWrapper}>
+        {s || m || l ? listColumnsContentView : listDefaultContentView}
+        {button}
       </div>
-    </PropsContextProvider>
+      {bottom}
+    </>
+  );
+
+  const tilesViews = (
+    <>
+      <div className={styles.avatarContainer}>{avatar}</div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <div className={styles.checkboxContainer}>{checkbox}</div>
+          <div className={styles.title}>
+            {title}
+            <div className={styles.subTitle}>{subTitle}</div>
+          </div>
+          {button}
+        </div>
+        {children}
+        {bottom}
+      </div>
+    </>
+  );
+
+  return (
+    <div className={className}>
+      <PropsContextProvider props={propsContext}>
+        {viewMode === "list" && listView}
+        {viewMode === "tiles" && tilesViews}
+      </PropsContextProvider>
+    </div>
   );
 };
 

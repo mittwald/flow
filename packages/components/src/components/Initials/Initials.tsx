@@ -1,13 +1,12 @@
-import { useMemo, type PropsWithChildren } from "react";
+import { type PropsWithChildren, useMemo } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
-import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { getColorFromInitials } from "@/components/Initials/lib/getColorFromInitials";
+import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface InitialsProps
   extends PropsWithChildren,
@@ -18,10 +17,7 @@ export interface InitialsProps
   useDynamicColor?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Initials = flowComponent("Initials", (props) => {
   const {
     children,
@@ -31,7 +27,7 @@ export const Initials = flowComponent("Initials", (props) => {
     ref,
   } = props;
 
-  const textContent = onlyText(children);
+  const textContent = extractTextFromFirstChild(children) ?? "";
   const initials = getInitialsFromString(textContent);
   const dynamicColor = useMemo(
     () => (useDynamicColor ? getColorFromInitials(textContent) : undefined),
@@ -45,17 +41,15 @@ export const Initials = flowComponent("Initials", (props) => {
   ));
 
   return (
-    <ClearPropsContext>
-      <div
-        data-dynamic-color={dynamicColor}
-        aria-hidden={ariaHidden}
-        aria-label={textContent}
-        className={rootClassName}
-        ref={ref}
-      >
-        {initialsElements}
-      </div>
-    </ClearPropsContext>
+    <div
+      data-dynamic-color={dynamicColor}
+      aria-hidden={ariaHidden}
+      aria-label={textContent}
+      className={rootClassName}
+      ref={ref}
+    >
+      {initialsElements}
+    </div>
   );
 });
 

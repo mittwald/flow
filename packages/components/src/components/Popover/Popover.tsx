@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
@@ -11,8 +11,8 @@ import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
 
 export interface PopoverProps
-  extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
-    FlowComponentProps {
+  extends PropsWithChildren<Omit<Aria.PopoverProps, "children" | "ref">>,
+    FlowComponentProps<HTMLDivElement> {
   /**
    * Whether the popover should display a tip, pointing towards the trigger
    * element.
@@ -31,8 +31,8 @@ export const Popover = flowComponent("Popover", (props) => {
     children,
     className,
     controller: controllerFromProps,
+    onOpenChange: onOpenChangeFromProps,
     defaultOpen = false,
-    ref,
     ...contentProps
   } = props;
 
@@ -51,8 +51,13 @@ export const Popover = flowComponent("Popover", (props) => {
       {...contentProps}
       className={rootClassName}
       isOpen={isOpen}
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      ref={ref}
+      onOpenChange={(isOpen) => {
+        if (!onOpenChangeFromProps) {
+          controller.setOpen(isOpen);
+        } else {
+          onOpenChangeFromProps(isOpen);
+        }
+      }}
     >
       <OverlayContextProvider type="Popover" controller={controller}>
         {children}

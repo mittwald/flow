@@ -27,7 +27,7 @@ export interface FlexProps
   /** The alignItems value of the element. @default "start" */
   align?: "start" | "end" | "center" | "stretch" | "baseline";
   /** The justifyContent value of the element. @default "start" */
-  justify?: "start" | "end" | "center";
+  justify?: CSSProperties["justifyContent"];
   /** The gap size of the element. */
   gap?: "xs" | "s" | "m" | "l" | "xl";
   /** The columnGap size of the element. */
@@ -69,6 +69,7 @@ export const Flex: FC<FlexProps> = (props) => {
     paddingLeft,
     paddingRight,
     elementType = "div",
+    ...restProps
   } = props;
 
   const rootClassName = clsx(styles.flex, className);
@@ -77,6 +78,7 @@ export const Flex: FC<FlexProps> = (props) => {
 
   return (
     <Element
+      {...restProps}
       className={rootClassName}
       style={{
         flexDirection: direction,
@@ -86,13 +88,7 @@ export const Flex: FC<FlexProps> = (props) => {
             : align === "start"
               ? "flex-start"
               : align,
-        justifyContent:
-          justify === "end"
-            ? "flex-end"
-            : justify === "start"
-              ? "flex-start"
-              : justify,
-
+        justifyContent: justify,
         columnGap: columnGap
           ? `var(--size-px--${columnGap})`
           : gap

@@ -1,14 +1,22 @@
 .layoutCard {
+  align-self: normal;
   background-color: var(--layout-card--background-color);
   box-shadow: var(--layout-card--box-shadow);
   border-radius: var(--layout-card--corner-radius);
   padding: var(--layout-card--padding);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 
   > .tabs {
     margin: calc(var(--layout-card--padding) * -1);
+    :global(.flow--tabs--tab-list) {
+      border-top-right-radius: var(--layout-card--corner-radius);
+      border-top-left-radius: var(--layout-card--corner-radius);
+    }
+    :global(.flow--tabs--tab-title):first-child {
+      border-top-left-radius: var(--layout-card--corner-radius);
+    }
   }
 
   &:has(> .accentBox:only-child) {

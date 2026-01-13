@@ -1,3 +1,11 @@
+.FileInput {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
 .trigger {
   order: 2;
 }

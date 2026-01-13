@@ -20,7 +20,7 @@ export type YAxisProps = Pick<
 
 /** @flr-generate all */
 export const YAxis: FC<YAxisProps> = (props) => {
-  const { domain = [0, (dataMax) => dataMax / 2], ...rest } = props;
+  const { domain, ...rest } = props;
 
   return (
     <Recharts.YAxis

@@ -59,8 +59,8 @@ export const WithLegend: Story = {
       { title: "Item 2", value: 24 },
       { title: "Item 3", value: 20 },
       { title: "Item 4", value: 10 },
-      { title: "Item 5", value: 12 },
-      { title: "Item 6", value: 6 },
+      { title: "Item 5", value: 12, color: "yellow" },
+      { title: "Item 6", value: 6, color: "#555" },
     ],
     size: "l",
     showLegend: true,
@@ -78,7 +78,7 @@ export const WithTextValue: Story = {
 
     return (
       <DonutChart {...props} value={value}>
-        <b>{value}</b>
+        <strong>{value}</strong>
         <small>GB</small>
       </DonutChart>
     );

@@ -1,5 +1,4 @@
-import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
+import { Suspense, type PropsWithChildren, type ReactNode } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -15,6 +14,9 @@ import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
 import ButtonView from "@/views/ButtonView";
+import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
+import Wrap from "@/components/Wrap";
+import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface ModalProps
   extends PropsWithChildren,
@@ -74,30 +76,29 @@ export const Modal = flowComponent("Modal", (props) => {
     </>
   );
 
+  const nestedHeadingLevel = 3;
+
+  const nestedHeadingProps: PropsContext = {
+    Heading: { level: nestedHeadingLevel },
+    Section: {
+      Header: { Heading: { level: nestedHeadingLevel } },
+      Heading: { level: nestedHeadingLevel },
+    },
+    Header: { Heading: { level: nestedHeadingLevel } },
+  };
+
   const propsContext: PropsContext = {
     Content: {
+      ...nestedHeadingProps,
       className: styles.content,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-        Header: {
-          Heading: {
-            level: 3,
-          },
-        },
-      },
     },
     ColumnLayout: {
+      ...nestedHeadingProps,
       l: [2, 1],
       m: [1],
       className: styles.columnLayout,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-      },
       AccentBox: { className: styles.accentBox, color: "neutral" },
+      wrapWith: <ClearPropsContext />,
     },
     Heading: {
       className: styles.header,
@@ -119,7 +120,11 @@ export const Modal = flowComponent("Modal", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        {children}
+        <Wrap if={offCanvas}>
+          <Suspense fallback={<OffCanvasSuspenseFallback />}>
+            {children}
+          </Suspense>
+        </Wrap>
       </PropsContextProvider>
     </Overlay>
   );

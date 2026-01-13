@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -12,7 +11,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
@@ -33,6 +32,8 @@ export interface ButtonProps
   isSucceeded?: boolean;
   /** Whether the button is in a failed state. */
   isFailed?: boolean;
+  /** Whether the button is in a read only state. */
+  isReadOnly?: boolean;
   /** @internal */
   unstyled?: boolean;
   /** @internal */
@@ -44,7 +45,8 @@ const disablePendingProps = (props: ButtonProps) => {
     props.isPending ||
     props.isSucceeded ||
     props.isFailed ||
-    props["aria-disabled"]
+    props["aria-disabled"] ||
+    props.isReadOnly
   ) {
     props = { ...props };
     props.onPress = undefined;
@@ -54,15 +56,13 @@ const disablePendingProps = (props: ButtonProps) => {
     props.onPressUp = undefined;
     props.onKeyDown = undefined;
     props.onKeyUp = undefined;
+    props.type = "button";
   }
 
   return props;
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
@@ -80,6 +80,7 @@ export const Button = flowComponent("Button", (props) => {
     slot: ignoredSlotProp,
     ariaSlot: slot,
     unstyled,
+    isReadOnly,
     ...restProps
   } = props;
 
@@ -147,28 +148,27 @@ export const Button = flowComponent("Button", (props) => {
     />
   );
 
-  const isStringContent = typeof children === "string";
+  const isStringContent = extractTextFromFirstChild(children) !== undefined;
 
   return (
-    <ClearPropsContext>
-      <Aria.Button
-        className={rootClassName}
-        ref={ref}
-        slot={slot}
-        {...restProps}
-      >
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={!unstyled}>
-            <span className={styles.content}>
-              <Wrap if={isStringContent}>
-                <Text className={styles.text}>{children}</Text>
-              </Wrap>
-            </span>
-          </Wrap>
-        </PropsContextProvider>
-        {stateIcon}
-      </Aria.Button>
-    </ClearPropsContext>
+    <Aria.Button
+      className={rootClassName}
+      ref={ref}
+      slot={slot}
+      {...(isReadOnly === true ? { "data-readonly": true } : {})}
+      {...restProps}
+    >
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={!unstyled}>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text className={styles.text}>{children}</Text>
+            </Wrap>
+          </span>
+        </Wrap>
+      </PropsContextProvider>
+      {stateIcon}
+    </Aria.Button>
   );
 });
 

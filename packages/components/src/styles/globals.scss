@@ -4,6 +4,20 @@
   - are not SVGs (see https://stackoverflow.com/questions/46758871/css-reset-via-all-unset-breaks-inline-svg)
  */
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    &:where(:not([class*="flow--loading-spinner"])) {
+      animation-duration: 0s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0s !important;
+      animation-delay: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+}
+
 // CSS Specificity: 0-0-2
 html
   body

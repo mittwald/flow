@@ -26,7 +26,7 @@ export class RemoteCheckboxElement extends FlowRemoteElement<RemoteCheckboxEleme
       hidden: {},
       id: {},
       inert: {},
-      inputRef: {},
+      inputClassName: {},
       isDisabled: {},
       isIndeterminate: {},
       isInvalid: {},

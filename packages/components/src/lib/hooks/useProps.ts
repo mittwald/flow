@@ -1,56 +1,58 @@
-import type {
-  FlowComponentName,
-  FlowComponentProps,
+import {
+  type FlowComponentName,
+  type FlowComponentProps,
 } from "@/components/propTypes";
-import { propsContextSupportingComponents } from "@/components/propTypes";
-import { mergeProps } from "@react-aria/utils";
 import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
-import { useContextProps } from "@/lib/propsContext/propsContext";
-import wrapChildrenWithNestedPropsContext from "@/lib/propsContext/nestedPropsContext/wrapChildrenWithNestedPropsContext";
+import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { omitBy } from "remeda";
-import type { PropsContext } from "@/lib/propsContext/types";
-import isDynamicProp from "@/lib/propsContext/dynamicProps/isDynamicProp";
+import isDynamicProp from "@/lib/propsContext/dynamicProps/lib";
+import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import { areChildrenEmpty } from "@/lib/react/areChildrenEmpty";
+import { isNestingLevelKey } from "@/lib/propsContext/nestedPropsContext/lib";
+import { getPropsMerger } from "@/lib/react/getPropsMerger";
+
+const withoutChildren = <C extends FlowComponentName>(
+  props: FlowComponentProps<C>,
+) => {
+  if ("children" in props) {
+    if (areChildrenEmpty(props.children)) {
+      const { children: ignored, ...rest } = props;
+      return rest as FlowComponentProps<C>;
+    }
+  }
+  return props;
+};
+
+const merger = getPropsMerger({
+  mergeRefs: true,
+});
 
 export const useProps = <C extends FlowComponentName>(
   component: C,
   localProps: FlowComponentProps<C>,
 ): FlowComponentProps<C> => {
-  if ("children" in localProps) {
-    if (areChildrenEmpty(localProps.children)) {
-      localProps = { ...localProps };
-      delete localProps["children"];
-    }
-  }
+  localProps = withoutChildren(localProps);
 
-  const propsContext = useContextProps();
+  const componentPropsContext = useComponentPropsContext(component);
 
-  const contextProps = propsContext[component] as
-    | (FlowComponentProps<C> & PropsContext)
-    | undefined;
-
-  const withResolvedDynamicProps = contextProps
-    ? resolveDynamicProps(contextProps, localProps)
+  const withResolvedDynamicProps = componentPropsContext
+    ? resolveDynamicProps(componentPropsContext, localProps)
     : undefined;
 
-  const withNestedPropsContextProvider = contextProps
-    ? wrapChildrenWithNestedPropsContext(contextProps, localProps)
-    : undefined;
-
-  const withoutNestedAndDynamicProps = contextProps
-    ? omitBy<FlowComponentProps<C>>(
-        contextProps,
+  const withoutInternalProps = componentPropsContext
+    ? omitBy(
+        componentPropsContext,
         (value, key) =>
-          propsContextSupportingComponents.includes(key as FlowComponentName) ||
+          isFlowComponentName(key) ||
+          isNestingLevelKey(key) ||
           isDynamicProp(value),
       )
     : undefined;
 
-  return mergeProps(
-    withoutNestedAndDynamicProps,
+  return merger(
+    withoutInternalProps,
     localProps,
     withResolvedDynamicProps,
-    withNestedPropsContextProvider,
   ) as FlowComponentProps<C>;
 };
 

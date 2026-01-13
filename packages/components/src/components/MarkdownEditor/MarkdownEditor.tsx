@@ -1,34 +1,46 @@
-import React, { useRef, useState } from "react";
+import { type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
 import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { handleKeyDown } from "@/components/MarkdownEditor/lib/handleKeyDown";
+import { useObjectRef } from "@react-aria/utils";
+import { TunnelProvider } from "@mittwald/react-tunnel";
+import {
+  modifyValueByMarkdownSyntax,
+  scrollToCursor,
+} from "@/components/MarkdownEditor/lib/modifyValueByMarkdownSyntax";
+import {
+  type InsertType,
+  modifyValueByType,
+} from "@/components/MarkdownEditor/lib/modifyValueByType";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
-export type MarkdownEditorProps = TextAreaProps &
-  Pick<MarkdownProps, "headingOffset">;
+export interface MarkdownEditorProps
+  extends TextAreaProps,
+    Pick<MarkdownProps, "headingOffset"> {}
 
 /** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const {
     isDisabled,
+    isReadOnly,
     children,
     className,
-    value,
-    onChange,
-    rows,
+    rows = 5,
     autoResizeMaxRows,
     headingOffset,
+    value,
+    onChange,
+    ref,
     ...rest
-  } = props;
+  } = useControlledHostValueProps(props);
 
-  const [markdown, setMarkdown] = useState(value ?? "");
+  const inputRef = useObjectRef(ref);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -36,45 +48,84 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
+  const handleKeyDown: KeyboardEventHandler = (event) => {
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    const modifyParams = modifyValueByMarkdownSyntax(value, inputRef);
+    if (!modifyParams) {
+      return;
+    }
+
+    const { newValue, newSelectionStart, newSelectionEnd } = modifyParams;
+
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.value = newValue;
+        inputRef.current?.setSelectionRange(newSelectionStart, newSelectionEnd);
+        scrollToCursor(newValue, inputRef.current);
+      }
+    });
+
+    event.preventDefault();
+    onChange(newValue);
+  };
+
+  const handleToolButtonPressed = (type: InsertType) => {
+    const { newValue, newSelectionStart, newSelectionEnd } = modifyValueByType(
+      value,
+      type,
+      inputRef,
+    );
+
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.value = newValue;
+        inputRef.current.setSelectionRange(newSelectionStart, newSelectionEnd);
+        inputRef.current.focus();
+      }
+    });
+
+    onChange(newValue);
+  };
+
   return (
-    <TextArea
-      {...rest}
-      isDisabled={isDisabled || mode === "preview"}
-      className={rootClassName}
-      ref={textAreaRef}
-      value={value !== undefined ? value : markdown}
-      rows={rows}
-      autoResizeMaxRows={autoResizeMaxRows}
-      onChange={(v) => {
-        if (onChange) {
-          onChange(v);
-        }
-        setMarkdown(v);
-      }}
-      onKeyDown={(e) => handleKeyDown(e, textAreaRef, setMarkdown, onChange)}
-    >
-      <Toolbar
-        markdown={markdown}
-        setMarkdown={setMarkdown}
-        textAreaRef={textAreaRef}
-        setMode={setMode}
-        mode={mode}
-        isDisabled={isDisabled}
-        onChange={onChange}
-      />
-
-      <Markdown
-        headingOffset={headingOffset}
-        className={styles.markdown}
-        style={{
-          maxHeight: `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
-        }}
-      >
-        {markdown}
-      </Markdown>
-
-      {children}
-    </TextArea>
+    <div className={rootClassName}>
+      <TunnelProvider>
+        <TextArea
+          {...rest}
+          aria-hidden={mode === "preview"}
+          isReadOnly={isReadOnly || mode === "preview"}
+          isDisabled={isDisabled}
+          ref={inputRef}
+          value={value}
+          rows={rows}
+          autoResizeMaxRows={autoResizeMaxRows}
+          onChange={onChange}
+          onKeyDown={handleKeyDown}
+        >
+          {mode === "preview" && (
+            <Markdown
+              headingOffset={headingOffset}
+              className={styles.markdown}
+              style={{
+                height: inputRef.current?.offsetHeight,
+              }}
+            >
+              {value}
+            </Markdown>
+          )}
+          {children}
+          <Toolbar
+            currentMode={mode}
+            isDisabled={isDisabled}
+            onModeChange={setMode}
+            onToolPressed={handleToolButtonPressed}
+          />
+        </TextArea>
+      </TunnelProvider>
+    </div>
   );
 });
 

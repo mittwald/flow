@@ -1,14 +1,12 @@
 import {
   FieldDescription,
-  Heading,
+  Label,
   Radio,
   RadioGroup,
 } from "@mittwald/flow-react-components";
 
 <RadioGroup defaultValue="more">
-  <Heading level={4}>
-    Wie viele Pflanzen besitzt du?
-  </Heading>
+  <Label>Wie viele Pflanzen besitzt du?</Label>
   <Radio value="more">Mehr als 9 Pflanzen</Radio>
   <Radio value="6-8">6-8 Pflanzen</Radio>
   <Radio value="3-5">3-5 9 Pflanzen</Radio>

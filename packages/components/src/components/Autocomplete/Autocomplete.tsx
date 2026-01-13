@@ -18,45 +18,77 @@ import {
   UNSAFE_PortalProvider,
   useFocusWithin,
   useLocalizedStringFormatter,
+  useObjectRef,
 } from "react-aria";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
+
 export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps,
-    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {}
+    FlowComponentProps<HTMLInputElement>,
+    Omit<
+      Aria.AutocompleteProps,
+      "children" | "onInputChange" | "inputValue" | "defaultInputValue" | "ref"
+    > {}
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, ...rest } = props;
+  const { children, ref, ...rest } = props;
+
+  const inputRef = useObjectRef(ref);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
   const stringFormatter = useLocalizedStringFormatter(locales);
   const container = useRef(null);
-  const triggerRef = useRef<HTMLInputElement>(null);
 
-  const controller = useOverlayController("Popover", {
+  const optionsOverlayController = useOverlayController("Popover", {
     reuseControllerFromContext: false,
   });
 
   const focusWithin = useFocusWithin({
-    onBlurWithin: controller.close,
+    onBlurWithin: optionsOverlayController.close,
   });
-
-  const inputProps: SearchFieldProps & TextFieldProps = {
-    onKeyDown: (e) => {
-      if (e.key === "Enter" && controller.isOpen) {
-        e.preventDefault();
-      }
-    },
-    ref: triggerRef,
-  };
 
   const renderEmptyState = () => (
     <Text className={styles.empty}>
       {stringFormatter.format("autocomplete.empty")}
     </Text>
   );
+
+  const handleInputChange = (value: string) => {
+    if (value === "") {
+      optionsOverlayController.close();
+    } else if (isFocused(inputRef.current)) {
+      optionsOverlayController.open();
+    }
+  };
+
+  const handleOptionAction = (key: Aria.Key) => {
+    const value = String(key);
+    if (inputRef.current) {
+      emitElementValueChange(inputRef.current, value);
+    }
+    optionsOverlayController.close();
+  };
+
+  const inputProps: SearchFieldProps & TextFieldProps = {
+    onKeyDown: (e) => {
+      if (e.key === "Enter" && optionsOverlayController.isOpen) {
+        e.preventDefault();
+      }
+    },
+    ref: inputRef,
+    onChange: handleInputChange,
+  };
+
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
@@ -67,50 +99,41 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     Popover: {
       className: styles.popover,
     },
-  };
-
-  const handleOnInputChange = (value: string) => {
-    if (!value) {
-      controller.close();
-    } else if (!controller.isOpen) {
-      controller.open();
-    }
-  };
-
-  const handleOptionAction = (key: Aria.Key) => {
-    const inputElement = triggerRef.current;
-    if (inputElement) {
-      // Set value on input element and trigger change event
-      emitElementValueChange(inputElement, String(key));
-    }
-    controller.close();
+    ...fieldPropsContext,
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
-      <div {...focusWithin.focusWithinProps} ref={container}>
-        <UNSAFE_PortalProvider getContainer={() => container.current}>
-          <Aria.Autocomplete
-            onInputChange={handleOnInputChange}
-            filter={contains}
-            disableAutoFocusFirst
-            {...rest}
-          >
-            {children}
-            <Options
-              onAction={handleOptionAction}
-              triggerRef={triggerRef}
-              controller={controller}
-              renderEmptyState={renderEmptyState}
-              isNonModal
-              placement="bottom start"
-            >
-              <TunnelExit id="options" />
-            </Options>
-          </Aria.Autocomplete>
-        </UNSAFE_PortalProvider>
-      </div>
-    </PropsContextProvider>
+    <div {...fieldProps}>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[optionsOverlayController]}
+        >
+          <div {...focusWithin.focusWithinProps} ref={container}>
+            <UNSAFE_PortalProvider getContainer={() => container.current}>
+              <Aria.Autocomplete
+                filter={contains}
+                disableAutoFocusFirst
+                {...rest}
+              >
+                {children}
+                <Options
+                  onAction={handleOptionAction}
+                  triggerRef={inputRef}
+                  controller={optionsOverlayController}
+                  renderEmptyState={renderEmptyState}
+                  isNonModal
+                  placement="bottom start"
+                >
+                  <TunnelExit id="options" />
+                </Options>
+              </Aria.Autocomplete>
+            </UNSAFE_PortalProvider>
+          </div>
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
+    </div>
   );
 });
 

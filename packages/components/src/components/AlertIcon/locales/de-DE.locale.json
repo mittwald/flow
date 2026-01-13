@@ -1,6 +1,7 @@
 {
-  "alertIcon.danger": "Status Fehler",
-  "alertIcon.info": "Status Information",
-  "alertIcon.success": "Status Erfolg",
-  "alertIcon.warning": "Status Warnung"
+  "alertIcon.danger": "Status \"Fehler\"",
+  "alertIcon.info": "Status \"Information\"",
+  "alertIcon.success": "Status \"Erfolg\"",
+  "alertIcon.unavailable": "Status \"Nicht verfügbar\"",
+  "alertIcon.warning": "Status \"Warnung\""
 }

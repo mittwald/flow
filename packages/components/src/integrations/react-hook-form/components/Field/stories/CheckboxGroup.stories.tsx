@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Field,
+  Form,
+  ResetButton,
+  SubmitButton,
+  typedField,
+} from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -11,6 +17,7 @@ import { sleep } from "@/lib/promises/sleep";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
 import { FieldDescription } from "@/components/FieldDescription";
+import { FieldError } from "@/components/FieldError";
 
 const submitAction = action("submit");
 
@@ -25,7 +32,7 @@ const meta: Meta<typeof Field> = {
       interestsMaxValue: string[];
     }
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -42,7 +49,7 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="interests">
             <CheckboxGroup>
@@ -103,7 +110,8 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <Button type="submit">Submit</Button>
+            <ResetButton>Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
       </Form>
@@ -115,3 +123,79 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithFieldError: Story = {
+  render: (props) => {
+    const form = useForm();
+    useEffect(() => {
+      form.setError("field", {
+        type: "required",
+        message: "ErrorFromForm",
+      });
+    }, []);
+
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
+            <Label>Options</Label>
+            <Checkbox value="1">Option 1</Checkbox>
+            <Checkbox value="2">Option 2</Checkbox>
+            <Checkbox value="3">Option 3</Checkbox>
+            <Checkbox value="4">Option 4</Checkbox>
+            <Checkbox value="5">Option 5</Checkbox>
+            <Checkbox value="6">Option 6</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} isInvalid {...props}>
+          <Label>Options</Label>
+          <Checkbox value="1">Option 1</Checkbox>
+          <Checkbox value="2">Option 2</Checkbox>
+          <Checkbox value="3">Option 3</Checkbox>
+          <Checkbox value="4">Option 4</Checkbox>
+          <Checkbox value="5">Option 5</Checkbox>
+          <Checkbox value="6">Option 6</Checkbox>
+          <FieldError>ErrorFromOuterFieldError!</FieldError>
+        </CheckboxGroup>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"field"}>
+          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
+            <Label>Options</Label>
+            <Checkbox value="1">Option 1</Checkbox>
+            <Checkbox value="2">Option 2</Checkbox>
+            <Checkbox value="3">Option 3</Checkbox>
+            <Checkbox value="4">Option 4</Checkbox>
+            <Checkbox value="5">Option 5</Checkbox>
+            <Checkbox value="6">Option 6</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "field",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("field")}>
+          focus through form
+        </Button>
+        <ResetButton>Reset</ResetButton>
+        <SubmitButton>Submit</SubmitButton>
+      </Form>
+    );
+  },
+};

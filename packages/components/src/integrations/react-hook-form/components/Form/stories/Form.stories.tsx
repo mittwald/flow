@@ -19,7 +19,7 @@ const submitAction = action("submit");
 const meta: Meta<typeof Form> = {
   title: "Integrations/React Hook Form/Form",
   component: Form,
-  render: () => {
+  render: (props) => {
     interface Values {
       name: string;
     }
@@ -30,7 +30,7 @@ const meta: Meta<typeof Form> = {
       },
     });
 
-    const handleOnSubmit = async (values: Values) => {
+    const handleSubmit = async (values: Values) => {
       await sleep(1500);
       submitAction(values);
     };
@@ -41,7 +41,7 @@ const meta: Meta<typeof Form> = {
       <ModalTrigger>
         <Button>Open modal</Button>
         <Modal>
-          <Form form={form} onSubmit={handleOnSubmit}>
+          <Form {...props} form={form} onSubmit={handleSubmit}>
             <Heading>Modal</Heading>
             <Content>
               <Section>
@@ -70,3 +70,5 @@ export default meta;
 type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {};
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };

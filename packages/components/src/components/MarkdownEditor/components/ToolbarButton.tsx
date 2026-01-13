@@ -1,47 +1,29 @@
-import React, { type FC, type PropsWithChildren, type RefObject } from "react";
-import {
-  insertAtCursor,
-  type InsertType,
-} from "@/components/MarkdownEditor/lib/insertAtCursor";
-import { Button } from "@/components/Button";
+import React, { type FC } from "react";
+import { type InsertType } from "@/components/MarkdownEditor/lib/modifyValueByType";
+import { Button, type ButtonProps } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
-import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
 
-interface Props extends PropsWithChildren {
-  markdown: string;
-  setMarkdown: (markdown: string) => void;
-  textAreaRef: RefObject<HTMLTextAreaElement | null>;
-  isDisabled?: boolean;
+export interface ToolBarButtonProps
+  extends Pick<ButtonProps, "isDisabled" | "children"> {
   type: InsertType;
-  onChange?: (markdown: string) => void;
-  mode: MarkdownEditorMode;
+  onPress?: (type: InsertType) => void;
 }
 
-export const ToolbarButton: FC<Props> = (props) => {
-  const {
-    markdown,
-    setMarkdown,
-    textAreaRef,
-    children,
-    isDisabled,
-    type,
-    onChange,
-    mode,
-  } = props;
+export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
+  const { children, type, onPress, ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
     <Button
-      isDisabled={isDisabled || mode === "preview"}
+      {...rest}
+      data-button-type={type}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"
       color="dark"
-      onPress={() =>
-        insertAtCursor(markdown, setMarkdown, textAreaRef, type, onChange)
-      }
+      onPress={() => onPress?.(type)}
     >
       {children}
     </Button>

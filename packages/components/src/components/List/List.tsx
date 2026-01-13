@@ -31,12 +31,13 @@ import type { PropsWithChildren } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
+import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 
-export interface ListProps<T>
+export interface ListProps<T, TMeta = unknown>
   extends PropsWithChildren,
     FlowComponentProps,
     Omit<
-      ListShape<T>,
+      ListShape<T, TMeta>,
       | "search"
       | "loader"
       | "itemView"
@@ -51,12 +52,23 @@ export interface ListProps<T>
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, ref, hidePagination, ...restProps } =
-    props;
+  const {
+    children,
+    batchSize,
+    loadingItemsCount = batchSize,
+    onChange,
+    ref,
+    hidePagination,
+    ...restProps
+  } = props;
 
   const listLoaderAsync = deepFindOfType(
     children,
     ListLoaderAsync<never>,
+  )?.props;
+  const listLoaderHooks = deepFindOfType(
+    children,
+    ListLoaderHooks<never>,
   )?.props;
   const listLoaderAsyncResource = deepFindOfType(
     children,
@@ -79,7 +91,12 @@ export const List = flowComponent("List", (props) => {
           ? {
               staticData: listStaticData.data,
             }
-          : undefined,
+          : listLoaderHooks
+            ? {
+                ...listLoaderHooks,
+                useData: listLoaderHooks.children,
+              }
+            : undefined,
   };
 
   const searchProps = deepFindOfType(children, ListSearch)?.props;
@@ -149,6 +166,7 @@ export const List = flowComponent("List", (props) => {
     batchesController: {
       batchSize,
     },
+    loadingItemsCount,
     ...restProps,
   });
 

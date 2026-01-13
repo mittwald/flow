@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import React, { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useList } from "@/components/List";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";

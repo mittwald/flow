@@ -16,9 +16,9 @@
 
 ## Verwendung
 
-Verwende ein Modal, um...
+Verwende ein Modal, um ...
 
-- Dialoge zur Abfrage anzuzeigen, z.B. um zu bestätigen, ob etwas wirklich
+- Dialoge zur Abfrage anzuzeigen, z. B. um zu bestätigen, ob etwas wirklich
   gelöscht werden soll.
 - Erstellungsprozesse zu ermöglichen, ohne die aktuelle Seite zu verlassen.
 - Formulare zur Bearbeitung anzuzeigen.
@@ -32,7 +32,7 @@ Dennoch sollte je nach Anwendungsfall zwischen beiden unterschieden werden, da
 die unterschiedliche Darstellung verschiedene Vorteile mit sich bringt.
 
 <DoAndDont>
-  <Info heading="Verwende ein Modal, um z. B. ...">
+  <Info heading="Verwende ein Modal, um z. B. ...">
     - einfache Dialoge wie Abfragen oder kurze Anlege-Prozesse anzuzeigen.
 
     - kurze Bearbeitungsmöglichkeiten darzustellen.
@@ -40,7 +40,7 @@ die unterschiedliche Darstellung verschiedene Vorteile mit sich bringt.
     - Inhalte anzuzeigen, die kein Scrollen erfordern und für die die Breite des Modals ausreicht.
 
   </Info>
-  <Info heading="Verwende ein OffCanvas, um z. B. ...">
+  <Info heading="Verwende ein OffCanvas, um z. B. ...">
     - Inhalte anzuzeigen, die nicht gekürzt werden können und ein Scrollen
     erfordern.
 
@@ -54,7 +54,7 @@ die unterschiedliche Darstellung verschiedene Vorteile mit sich bringt.
 # Inhalt
 
 In den meisten Fällen ist eine
-[ActionGroup](/03-components/actions/action-group) im Footer des Modals
+[ActionGroup](/03-components/actions/action-group/overview) im Footer des Modals
 erforderlich, um Eingaben zu bestätigen oder das Modal zu verlassen.
 
 Beachte bei der Verwendung jedoch, dass manche Inhalte keine Bestätigung
@@ -62,16 +62,16 @@ erfordern, da ...
 
 - manche Modals rein informativen Inhalt enthalten.
 - einige Inhalte sich unmittelbar selber speichern und zu direkten Änderungen
-  führen (z.B. Einstellungen in einem OffCanvas mittels
-  [Switch](/03-components/form-controls/switch)).
-- bestimmte Eingaben sich automatisch selber validieren (z.B.
+  führen (z. B. Einstellungen in einem OffCanvas mittels
+  [Switch](/03-components/form-controls/switch/overview)).
+- bestimmte Eingaben sich automatisch selber validieren (z. B.
   2-FA-Authentifikation) und das Modal schließen.
 
 In diesen Fällen benötigt die ActionGroup keine Hauptaktion.
 
 <Info bgColor="light" example="noAction">
   Manche Eingaben erfordern keine explizite Bestätigung. An diesen Stellen ist
-  es ausreichend, nur einen “Schließen”-Button in der ActionGroup des Modal
+  es ausreichend, nur einen „Schließen“-Button in der ActionGroup des Modal
   Footers anzuzeigen.
 </Info>
 
@@ -81,7 +81,7 @@ In diesen Fällen benötigt die ActionGroup keine Hauptaktion.
 
 ## Heading
 
-Beachte bei der [Heading](/03-components/content/heading) folgende Punkte:
+Beachte bei der [Heading](/03-components/content/heading/overview) folgende Punkte:
 
 - Halte Überschriften kurz und verständlich.
 - Zeichne sie semantisch korrekt aus und halte die Reihenfolge (H2, H3, H4, ...)

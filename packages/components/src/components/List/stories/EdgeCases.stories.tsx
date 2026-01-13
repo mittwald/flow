@@ -7,7 +7,7 @@ import { Initials } from "@/components/Initials";
 import { ListItemView, SortingFunctions, typedList } from "@/components/List";
 import Section from "@/components/Section";
 import { Text } from "@/components/Text";
-import { IconDomain, IconSubdomain } from "@/index/flr-universal";
+import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";

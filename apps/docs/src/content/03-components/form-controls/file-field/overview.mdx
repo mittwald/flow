@@ -1,6 +1,8 @@
 # Playground
 
-Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des FileFields kommen die Components [Label](/03-components/content/label) und [Button](/03-components/actions/button) zum Einsatz.
+Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des
+FileFields kommen die Components [Label](/03-components/content/label/overview)
+und [Button](/03-components/actions/button/overview) zum Einsatz.
 
 <LiveCodeEditor />
 
@@ -8,7 +10,8 @@ Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des FileField
 
 # Disabled
 
-Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
+Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die
+Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
 
@@ -16,7 +19,9 @@ Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die Ursa
 
 # Mit FieldDescription
 
-Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine `<FieldDescription />` eingebaut werden. In vielen Fällen empfiehlt es sich, die erlaubten Dateitypen dort anzugeben.
+Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden. In vielen Fällen empfiehlt es sich, die
+erlaubten Dateitypen dort anzugeben.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed />
 
@@ -24,9 +29,23 @@ Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine `<Field
 
 # Invalid
 
-Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />` kann eine entsprechende [Fehlermeldung](/02-foundations/03-content-guidelines/02-fehlermeldungen) ausgegeben werden.
+Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />`
+kann eine entsprechende
+[Fehlermeldung](/02-foundations/03-content-guidelines/02-fehlermeldungen)
+ausgegeben werden.
 
 <LiveCodeEditor example="invalid" editorCollapsed />
+
+---
+
+# Mehere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneutem Hochladen werden bestehende Dateien ersetzt. Wenn
+Dateien nacheinander hochgeladen werden sollen, kombiniere das FileField mit der
+[FileCardList](/03-components/upload/file-card-list/overview).
+
+<LiveCodeEditor example="multiple" editorCollapsed />
 
 ---
 
@@ -34,12 +53,23 @@ Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />`�
 
 ## ContextualHelp
 
-Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen.
+Verwende [ContextualHelp](/03-components/overlays/contextual-help/overview), um
+zusätzliche Informationen bereitzustellen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
+## FileCardList
+
+Wenn User Dateien nach dem Hochladen hinzufügen und auch wieder entfernen
+sollen, kombiniere das FileField mit der FileCardList. Die FileCardList zeigt
+die zwischengespeicherten Dateien.
+
+<LiveCodeEditor example="fileCardList" editorCollapsed />
+
 ## React Hook Form
 
-Weitere Details zur Formularlogik und -validierung ist in der Component [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu finden.
+Weitere Details zur Formularlogik und -validierung ist in der Component
+[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview)
+zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />

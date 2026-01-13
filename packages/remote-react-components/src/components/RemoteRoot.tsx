@@ -6,6 +6,8 @@ import { stringifyError } from "@/lib/stringifyError";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
+  connectRemoteReceiver,
+  type RemoteReceiver,
   type RemoteToHostConnection,
 } from "@mittwald/flow-remote-core";
 import {
@@ -14,6 +16,7 @@ import {
   useRef,
   useState,
   useTransition,
+  type CSSProperties,
   type FC,
   type PropsWithChildren,
 } from "react";
@@ -29,14 +32,43 @@ const viewComponents = {
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
   isLoading?: boolean;
+  /** Internal use only */
+  __remoteReceiver?: RemoteReceiver;
 }
+
+const hiddenStyle: CSSProperties = {
+  visibility: "hidden",
+  height: 0,
+  width: 0,
+  border: "none",
+  position: "absolute",
+  marginLeft: "-9999px",
+};
 
 export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const {
     children,
     onHostPathnameChanged,
     isLoading: isLoadingFromProps,
+    __remoteReceiver: remoteReceiver,
   } = props;
+
+  if (remoteReceiver) {
+    return (
+      <div
+        style={hiddenStyle}
+        ref={(div) => {
+          if (div) {
+            connectRemoteReceiver(div, remoteReceiver.connection);
+          }
+        }}
+      >
+        <ViewComponentContextProvider components={viewComponents}>
+          {children}
+        </ViewComponentContextProvider>
+      </div>
+    );
+  }
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
   const isConnectionInitialized = useRef(false);

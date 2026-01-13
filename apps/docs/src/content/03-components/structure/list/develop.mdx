@@ -1,30 +1,29 @@
 Die List Component erlaubt das Rendern und Verwalten von Daten in einer
-strukturierten Liste. Daten können entweder **statisch** oder **asynchron**,
-z.B. über eine API geladen werden.
+strukturierten Liste. Daten können entweder **statisch** oder **asynchron**, z.
+B. über eine API, geladen werden.
 
-## Möglichkeiten zum Laden von Daten
+# Möglichkeiten zum Laden von Daten
 
-### 1. Statische Daten
+## 1. Statische Daten
 
-Für die Anzeige statischer Daten kann die Komponente `<StaticData />` verwendet
+Für die Anzeige statischer Daten kann die Component `<StaticData />` verwendet
 werden:
 
 ```tsx
-<StaticData data={dataArray} />
+<List.StaticData data={dataArray} />
 ```
 
-- `dataArray`: Ein Array mit den Daten, die direkt in der Liste gerendert
-  werden.
+- `dataArray`: Ein Array mit den Daten, die direkt in der List gerendert werden.
 - Diese Variante ist einfach und benötigt keine zusätzliche Logik für das
   Nachladen oder Filtern.
 
-### 2. Dynamische Daten (Asynchrones Laden)
+## 2. Dynamische Daten (Asynchrones Laden)
 
-Mit `<AsyncData>` können Daten dynamisch aus einer API oder anderen asynchronen
-Quellen nachgeladen werden:
+Mit `<LoaderAsync>` können Daten dynamisch aus einer API oder anderen
+asynchronen Quellen nachgeladen werden:
 
 ```tsx
-<AsyncData>
+<List.LoaderAsync>
   {async (options) => {
     const response = await fetchDataFromAPI(options);
     return {
@@ -32,23 +31,45 @@ Quellen nachgeladen werden:
       itemTotalCount: response.totalCount,
     };
   }}
-</AsyncData>
+</List.LoaderAsync>
 ```
 
-#### Verhalten & Features
+## 3. Laden über Hooks (z.B. TanStack Query oder SWR)
 
-- **Ladeanimation**: Während die Daten geladen werden, wird eine Ladeanimation
+Mit `<LoaderHooks>` können Daten dynamisch über React Hooks nachgeladen werden.
+Der Einsatz von Suspense ist hierbei erforderlich.
+
+```tsx
+import { useSuspenseQuery } from "@tanstack/react-query";
+
+<List.LoaderHooks>
+  {async (options) => {
+    const response = useSuspenseQuery({
+      queryKey: ["api", options],
+      queryFn: () => fetchDataFromAPI(options),
+    });
+    return {
+      data: response.items,
+      itemTotalCount: response.totalCount,
+    };
+  }}
+</List.LoaderHooks>;
+```
+
+### Verhalten & Features
+
+- **Ladeanimation:** Während die Daten geladen werden, wird eine Ladeanimation
   angezeigt.
-- **Server-seitige Funktionen**:
+- **Server-seitige Funktionen:**
   - **Pagination** (`manualPagination`): Aktiviert das serverseitige Paging.
   - **Sortierung** (`manualSorting`): Die Sortierung erfolgt auf dem Server.
   - **Filterung** (`manualFiltering`): Filter werden nicht client-seitig
     angewendet, sondern an den Server weitergeleitet.
-  - **Suche**: Kann ebenfalls serverseitig erfolgen.
+  - **Suche:** Kann ebenfalls serverseitig erfolgen.
 
 ## Optionen für die Async Loader Function
 
-Die `<AsyncData>`-Komponente benötigt eine **Async Loader Function**, die die
+Die `<LoaderAsync>`-Component benötigt eine **Async Loader Function**, die die
 Daten anhand von Steuerungsoptionen lädt. Diese Funktion erhält ein
 `options`-Objekt mit den folgenden Parametern:
 
@@ -78,6 +99,80 @@ return {
 | ---------------- | -------- | -------------------------------------------------------------- |
 | `data`           | `any[]`  | Array der geladenen Daten.                                     |
 | `itemTotalCount` | `number` | Gesamtanzahl der Datensätze (nur bei Pagination erforderlich). |
+
+---
+
+# Filter
+
+In der Regel werden Filter für ein Property der List gesetzt:
+
+```tsx
+<List.Filter mode="some" name="Status" property="status" />
+```
+
+Die Anzeige des Filter-Values kann angepasst werden, um z. B. Übersetzungen zu
+ermöglichen:
+
+```tsx
+<List.Filter mode="some" name="Status" property="status">
+  {(value) => translate(value)}
+</List.Filter>
+```
+
+Es gibt die Möglichkeit, eigene Properties zu verwenden, die nicht in der List
+vorkommen . Hierfür muss dem `property` ein "$" vorangestellt werden:
+
+```tsx
+<List.Filter
+  matcher={(filterValue, item) => filterValue === "disabled" ? !!item.disabled : item.status === filterValue}
+  mode="some"
+  name="Filter"
+  property="$filter"
+  values={["active", "inactive", "disabled"]}
+>
+```
+
+## Filter Properties
+
+| Property          | Typ                               | Beschreibung                                                                |
+| ----------------- | --------------------------------- | --------------------------------------------------------------------------- |
+| `defaultSelected` | `string[]`                        | Array der als default gesetzten Filter                                      |
+| `matcher`         | `FilterMatcher<T, TProp, string>` | Definiert eine eigene Filterlogik für die Listenelemente                    |
+| `mode`            | `"all" \| "some" \| "one"`        | Bestimmt, wie mehrere ausgewählte Filterwerte miteinander kombiniert werden |
+| `name`            | `string`                          | Der Anzeigename des Filters                                                 |
+| `property`        | `string`                          | Das für die Filterung verwendete Property                                   |
+| `values`          | `string[]`                        | Die Optionen für den Filter                                                 |
+
+---
+
+# Sorting
+
+Die List unterstützt eine Sortierung nach Properties:
+
+```tsx
+<List.Sorting defaultEnabled direction="asc" name="Name" property="name" />
+```
+
+Es gibt außerdem die Möglichkeit, eine eigene Sortierung zu benutzen:
+
+```tsx
+<List.Sorting
+  customSortingFn={(a, b) => sortHostnames(a.hostname, b.hostname)}
+  direction="asc"
+  name="Domain"
+  property="$domain"
+/>
+```
+
+## Sorting Properties
+
+| Property          | Typ                   | Beschreibung                                                                                                                                  |
+| ----------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `customSortingFn` | `SortingFn<T>`        | Möglichkeit eine eigene Sortierfunktion zu definieren                                                                                         |
+| `defaultEnabled`  | `boolean \| "hidden"` | Bestimmt, ob die Sortierung als default gesetzt wird, bei "hidden" ist die Sortier-Option nicht sichtbar, wird aber im Hintergrund angewendet |
+| `direction`       | `"asc" \| "desc"`     | Auf- oder absteigende Sortierung                                                                                                              |
+| `name`            | `string`              | Der Anzeigename der Sortier-Option                                                                                                            |
+| `property`        | `string`              | Das für die Sortierung verwendete Property                                                                                                    |
 
 ---
 

@@ -1,15 +1,36 @@
 import SuspenseTrigger from "@/components/SuspenseTrigger";
-import type { FC, PropsWithChildren } from "react";
-import { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { type FC, type PropsWithChildren } from "react";
+import { Suspense } from "react";
 import { useIsSSR } from "react-aria";
 
 export interface ActivityProps extends PropsWithChildren {
   isActive?: boolean;
   inactiveDelay?: number;
+  /** @internal */
+  forceCustomActivity?: boolean;
 }
 
+const isActivitySupported = React.version.startsWith("19.2");
+
+const CustomActivity: FC<ActivityProps> = (props) => {
+  const { children, isActive: isActive = true } = props;
+
+  return (
+    <Suspense fallback={null}>
+      <SuspenseTrigger show={!isActive} />
+      {children}
+    </Suspense>
+  );
+};
+
 export const Activity: FC<ActivityProps> = (props) => {
-  const { children, isActive: isActiveFromProps = true, inactiveDelay } = props;
+  const {
+    isActive: isActiveFromProps = true,
+    inactiveDelay,
+    forceCustomActivity = false,
+    children,
+  } = props;
 
   const [isActiveState, setIsActiveState] = useState(isActiveFromProps);
   const isSsr = useIsSSR();
@@ -38,11 +59,15 @@ export const Activity: FC<ActivityProps> = (props) => {
     return isActive ? children : null;
   }
 
-  return (
-    <Suspense fallback={null}>
-      <SuspenseTrigger show={!isActive} />
-      {children}
-    </Suspense>
-  );
+  if (isActivitySupported && !forceCustomActivity) {
+    return (
+      <React.Activity mode={isActive ? "visible" : "hidden"}>
+        {children}
+      </React.Activity>
+    );
+  }
+
+  return <CustomActivity isActive={isActive}>{children}</CustomActivity>;
 };
+
 export default Activity;

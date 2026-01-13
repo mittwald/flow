@@ -1,51 +1,31 @@
 .footer.footer {
-  container-type: inline-size;
   background-color: var(--color--hosting-blue--200);
-  margin: 0;
-  padding: var(--size-px--xxl);
-}
+  margin-top: var(--size-px--l);
 
-.footerColumnLayout {
-  width: 100%;
-}
+  .footerContent {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding-block: var(--size-px--xl);
+    padding-inline: var(--size-px--xxl);
+  }
 
-.footerWrapper {
-  display: flex;
-  gap: var(--size-px--xxl);
-  width: 1500px;
-  margin: 0 auto;
-  max-width: 100%;
-}
+  .feedback {
+    max-width: 900px;
+  }
 
-.mittwaldLogo {
-  display: grid;
-  grid-column: span 3 / span 3;
-  gap: var(--size-px--s);
-}
-
-@container (max-width: 850px) {
-  .footer {
-    .feedbackPicture {
-      display: none;
-    }
-
-    .mittwaldLogo {
-      grid-column: span 3 / span 3;
-    }
+  .legal,
+  .resources {
+    flex: 1;
   }
 }
 
-@container (max-width: 550px) {
-  .footer {
-    padding: var(--size-px--xl);
-
-    .footerWrapper {
-      flex-direction: column;
-      gap: var(--size-px--xl);
+@media (max-width: 1400px) {
+  .footer.footer {
+    .feedbackImage {
+      display: none;
     }
-
-    .mittwaldLogo {
-      grid-column: auto;
+    .footerContent {
+      padding-inline: var(--size-px--xl);
     }
   }
 }

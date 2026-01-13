@@ -1,5 +1,4 @@
 import type { FC, PropsWithChildren, Ref } from "react";
-import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
@@ -16,6 +15,7 @@ export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   isDismissable?: boolean;
   /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
+  isOpen?: boolean;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
@@ -25,6 +25,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
     isDismissable = true,
     className,
     overlayType = "Modal",
+    isOpen: isOpenFromProps,
     ref,
   } = props;
 
@@ -34,7 +35,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
 
   const controller = controllerFromProps ?? controllerFromContext;
 
-  const isOpen = controller.useIsOpen();
+  const isOpen = isOpenFromProps ?? controller.useIsOpen();
 
   const rootClassName = clsx(styles.overlay, className);
 
@@ -47,7 +48,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       className={rootClassName}
     >
       <OverlayContextProvider type="Modal" controller={controller}>
-        {isOpen && children}
+        {children}
       </OverlayContextProvider>
     </OverlayContentView>
   );

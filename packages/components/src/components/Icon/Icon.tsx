@@ -5,23 +5,19 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
-import type { PropsWithStatus } from "@/lib/types/props";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import type { Status } from "@/lib/types/props";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps
   extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
-    FlowComponentProps,
-    PropsWithStatus {
+    FlowComponentProps {
+  status?: Status | "unavailable";
   /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Icon = flowComponent("Icon", (props) => {
   const {
     className,
@@ -57,11 +53,7 @@ export const Icon = flowComponent("Icon", (props) => {
     );
   }
 
-  return (
-    <ClearPropsContext>
-      {cloneElement(iconElement, iconProps)}
-    </ClearPropsContext>
-  );
+  return cloneElement(iconElement, iconProps);
 });
 
 export default Icon;

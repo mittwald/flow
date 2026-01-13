@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, Ref } from "react";
-import React, { type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 import * as Aria from "react-aria-components";
 import { useObjectRef } from "@react-aria/utils";
 import type { PropsContext } from "@/lib/propsContext";
@@ -13,11 +13,13 @@ export interface FileInputProps extends PropsWithChildren {
   onChange?: FileInputOnChangeHandler;
   isDisabled?: boolean;
   ref?: Ref<HTMLInputElement>;
+  isReadOnly?: boolean;
 }
 
 /** @internal */
 export const FileInput: FC<FileInputProps> = (props) => {
-  const { children, isDisabled, onChange, ref } = props;
+  const { children, isDisabled, onChange, isReadOnly, ref, ...restInputProps } =
+    props;
   const inputRef = useObjectRef(ref);
 
   const handlePress = () => {
@@ -37,14 +39,16 @@ export const FileInput: FC<FileInputProps> = (props) => {
       onPress: handlePress,
       className: styles.trigger,
       isDisabled,
+      isReadOnly,
     },
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       {children}
       <Aria.Input
-        style={{ display: "none" }}
+        {...restInputProps}
+        className={styles.FileInput}
         type="file"
         ref={inputRef}
         onChange={handleChange}

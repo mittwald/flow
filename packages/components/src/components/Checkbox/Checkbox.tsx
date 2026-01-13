@@ -5,42 +5,62 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Checkbox.module.scss";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { useObjectRef } from "react-aria";
 
 export interface CheckboxProps
-  extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
-    FlowComponentProps<HTMLLabelElement> {}
+  extends PropsWithChildren<
+      Omit<Aria.CheckboxProps, "children" | "ref" | "inputRef">
+    >,
+    FlowComponentProps<HTMLInputElement> {
+  inputClassName?: string;
+}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Checkbox = flowComponent("Checkbox", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, ref, inputClassName, ...rest } = props;
 
-  const rootClassName = clsx(styles.checkbox, className);
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
+
+  const inputRef = useObjectRef(ref);
 
   return (
-    <ClearPropsContext>
-      <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
-        {({ isSelected, isIndeterminate }) => (
-          <>
-            {isSelected ? (
-              <IconCheckboxChecked className={styles.icon} />
-            ) : isIndeterminate ? (
-              <IconCheckboxIndeterminate className={styles.icon} />
-            ) : (
-              <IconCheckboxEmpty className={styles.icon} />
-            )}
-            {children}
-          </>
-        )}
-      </Aria.Checkbox>
-    </ClearPropsContext>
+    <div
+      {...fieldProps}
+      className={clsx(styles.checkbox, className, fieldProps.className)}
+    >
+      <FieldErrorCaptureContext>
+        <Aria.Checkbox
+          {...rest}
+          inputRef={inputRef}
+          className={clsx(inputClassName, styles.input)}
+        >
+          {({ isSelected, isIndeterminate }) => (
+            <PropsContextProvider props={fieldPropsContext}>
+              {isSelected ? (
+                <IconCheckboxChecked className={styles.icon} />
+              ) : isIndeterminate ? (
+                <IconCheckboxIndeterminate className={styles.icon} />
+              ) : (
+                <IconCheckboxEmpty className={styles.icon} />
+              )}
+              {children}
+            </PropsContextProvider>
+          )}
+        </Aria.Checkbox>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
+    </div>
   );
 });
 

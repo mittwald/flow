@@ -6,6 +6,8 @@ export {
   type ActionProps,
   BrowserOnly,
   type BrowserOnlyProps,
+  CountryOptions,
+  type CountryOptionsProps,
   LightBox,
   type LightBoxProps,
   LightBoxTrigger,

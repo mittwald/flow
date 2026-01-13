@@ -1,6 +1,9 @@
 import * as Aria from "react-aria-components";
 import type { ComponentProps, FC } from "react";
-import { flowComponent, type FlowComponentProps } from "@/index/internal";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export type MenuTriggerProps = ComponentProps<typeof Aria.MenuTrigger> &
   FlowComponentProps;
@@ -11,6 +14,7 @@ export const MenuTrigger: FC<MenuTriggerProps> = flowComponent(
   (props) => {
     return <Aria.MenuTrigger {...props} />;
   },
+  { type: "provider" },
 );
 
 export default MenuTrigger;

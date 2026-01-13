@@ -24,6 +24,7 @@ export default () => {
       batchSize={4}
       aria-label="Domains"
       defaultViewMode="list"
+      getItemId={(domain) => domain.id}
     >
       <DomainList.StaticData data={domains} />
       <ActionGroup>

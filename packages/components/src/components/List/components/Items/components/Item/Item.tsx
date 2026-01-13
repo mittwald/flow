@@ -33,6 +33,7 @@ export const Item = (props: Props) => {
       id={id}
       textValue={textValue}
       href={href}
+      target={itemView.target}
       hasAction={hasAction}
       isTile={list.viewMode === "tiles"}
       {...gridItemProps}

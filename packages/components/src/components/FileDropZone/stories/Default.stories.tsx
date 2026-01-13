@@ -4,7 +4,7 @@ import { FileDropZone } from "@/components/FileDropZone";
 import { Section } from "@/components/Section";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
-import { Form, typedField } from "@/integrations/react-hook-form";
+import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
@@ -50,6 +50,8 @@ const submitAction = action("submit");
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const WithAcceptedTypes: Story = {
   args: { accept: "image/png" },
@@ -111,18 +113,17 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={submitAction}>
         <Section>
-          <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
-            <IconUpload />
-            <Heading>Drop file</Heading>
-            <Field name="file" rules={{ required: "Please choose a file" }}>
+          <Field name="file" rules={{ required: "Please choose a file" }}>
+            <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
+              <IconUpload />
+              <Heading>Drop file</Heading>
               <FileField>
                 <Button variant="outline" color="dark">
                   Select file
                 </Button>
               </FileField>
-            </Field>
-          </FileDropZone>
-
+            </FileDropZone>
+          </Field>
           <FileCardList>
             {[...(form.watch("file") ?? [])].map((f) => (
               <FileCard name={f.name} key={f.name} />
@@ -130,7 +131,7 @@ export const WithReactHookForm: Story = {
           </FileCardList>
         </Section>
         <ActionGroup>
-          <Button type="submit">Upload</Button>
+          <SubmitButton>Upload</SubmitButton>
         </ActionGroup>
       </Form>
     );

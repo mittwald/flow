@@ -1,10 +1,9 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
@@ -13,38 +12,39 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SelectProps
   extends PropsWithChildren<
-      Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
+      Omit<Aria.SelectProps, "children" | "className" | "ref">
     >,
-    FlowComponentProps,
+    FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
-  onChange?: (value: string | number) => void;
-  /** An overlay controller to control the select option popover state. */
-  controller?: OverlayController;
+  onChange?: (value: Key | null) => void;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Select = flowComponent("Select", (props) => {
   const {
     children,
     className,
-    onChange = () => {
-      // default: do nothing
-    },
-    onSelectionChange = () => {
-      // default: do nothing
-    },
-    controller: controllerFromProps,
+    onChange,
+    onSelectionChange,
+    isReadOnly,
     ref,
     ...rest
   } = props;
+
+  const {
+    FieldErrorView,
+    fieldPropsContext,
+    fieldProps,
+    FieldErrorCaptureContext,
+  } = useFieldComponent(props);
 
   const rootClassName = clsx(
     styles.select,
@@ -53,58 +53,51 @@ export const Select = flowComponent("Select", (props) => {
   );
 
   const propsContext: PropsContext = {
-    Label: {
-      className: formFieldStyles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: formFieldStyles.fieldDescription,
-    },
-    FieldError: {
-      className: formFieldStyles.customFieldError,
-    },
     Option: {
       tunnelId: "options",
     },
+    ...fieldPropsContext,
   };
 
-  const handleOnSelectionChange = (id: Key | null) => {
-    onChange(String(id));
-    onSelectionChange(id);
-  };
-
-  const controllerFromContext = useOverlayController("Select", {
-    reuseControllerFromContext: true,
+  const controller = useOverlayController("Select", {
+    reuseControllerFromContext: false,
   });
-
-  const controller = controllerFromProps ?? controllerFromContext;
-
   const isOpen = controller.useIsOpen();
 
   return (
     <Aria.Select
       {...rest}
-      className={rootClassName}
-      ref={ref}
-      onSelectionChange={handleOnSelectionChange}
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      {...fieldProps}
+      className={clsx(rootClassName, fieldProps.className)}
+      onChange={(value) => {
+        if (!isReadOnly) {
+          onChange?.(value);
+          onSelectionChange?.(value);
+        }
+      }}
+      onOpenChange={(isOpen) => !isReadOnly && controller.setOpen(isOpen)}
       isOpen={isOpen}
+      data-readonly={isReadOnly}
     >
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <Aria.Button className={styles.toggle}>
-            <Aria.SelectValue />
-            <IconChevronDown />
-          </Aria.Button>
-
-          {children}
-          <Options controller={controller}>
-            <TunnelExit id="options" />
-          </Options>
-
-          <FieldError className={formFieldStyles.fieldError} />
-        </TunnelProvider>
-      </PropsContextProvider>
+      <TunnelProvider>
+        <FieldErrorCaptureContext>
+          <PropsContextProvider props={propsContext}>
+            <Aria.Button
+              data-readonly={isReadOnly}
+              className={styles.toggle}
+              ref={ref}
+            >
+              <Aria.SelectValue />
+              <IconChevronDown />
+            </Aria.Button>
+            {children}
+            <Options controller={controller}>
+              <TunnelExit id="options" />
+            </Options>
+          </PropsContextProvider>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
+      </TunnelProvider>
     </Aria.Select>
   );
 });

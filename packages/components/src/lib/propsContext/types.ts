@@ -4,10 +4,12 @@ import type {
   FlowComponentPropType,
 } from "@/components/propTypes/types";
 import type { DynamicProp } from "./dynamicProps/types";
+import type { NestingLevelProps } from "@/lib/propsContext/nestedPropsContext/types";
 
 export type PropsContext = Partial<{
   [C in FlowComponentName]: ComponentPropsContext<C>;
-}>;
+}> &
+  NestingLevelProps;
 
 export type ComponentPropsContext<C extends FlowComponentName> = Partial<{
   [P in FlowComponentPropName<C>]:

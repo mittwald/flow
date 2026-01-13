@@ -47,9 +47,13 @@ export default () => {
       onAction={(domain) => {
         onSelected(domain, !isSelected(domain));
       }}
+      getItemId={(domain) => domain.id}
     >
       <List.StaticData data={domains} />
-      <List.Item showTiles>
+      <List.Item
+        showTiles
+        textValue={(domain) => domain.hostname}
+      >
         {(domain) => (
           <List.ItemView>
             <Checkbox

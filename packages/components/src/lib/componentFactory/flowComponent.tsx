@@ -10,12 +10,15 @@ import type {
   RefAttributes,
   FunctionComponent,
 } from "react";
-import { cloneElement } from "react";
+import { cloneElement, memo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
-import { mergeRefs } from "@react-aria/utils";
+import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
+import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -39,22 +42,27 @@ type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>
 >;
 
+export type FlowComponentProvisionType = "provider" | "ui" | "layout";
+
+interface Options {
+  type?: FlowComponentProvisionType;
+  isRemoteComponent?: boolean;
+}
+
 export function flowComponent<C extends FlowComponentName>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C>,
+  options: Options = {},
 ): FlowComponentType<C> {
   type Props = FlowComponentPropsOfName<C> &
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
 
-  function Component(propsFromArgument: Props) {
-    const { ref: refFromProps = null, ...props } = propsFromArgument;
+  const { type = "ui", isRemoteComponent = false } = options;
 
-    const {
-      ref: refFromContext = null,
-      tunnelId,
-      wrapWith,
-      ...propsWithContext
-    } = useProps(
+  const MemoizedImplementationComponentType = memo(ImplementationComponentType);
+
+  function Component(props: Props) {
+    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
     ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
@@ -63,15 +71,44 @@ export function flowComponent<C extends FlowComponentName>(
       typeof ImplementationComponentType
     >;
 
-    const mergedRef = mergeRefs(refFromProps, refFromContext);
-    const propsWithRef = {
-      ...implementationTypeProps,
-      ref: mergedRef,
-    };
+    const componentProps = useComponentPropsContext(componentName);
 
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
-    let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
+    let element: ReactNode = (
+      <MemoizedImplementationComponentType {...implementationTypeProps} />
+    );
+
+    element = (
+      <ComponentPropsContextProvider componentProps={componentProps}>
+        {element}
+      </ComponentPropsContextProvider>
+    );
+
+    if (type === "ui") {
+      /**
+       * Protect the inside of UI components for accidental prop changes through
+       * the Props Context.
+       */
+      if (isRemoteComponent) {
+        element = <ClearPropsContext>{element}</ClearPropsContext>;
+      } else {
+        /**
+         * In case of a UI component that does not have a remote counterpart
+         * (like the Modal component), the <ClearPropsContext> must be
+         * additionally applied on the host side by using the
+         * <ClearPropsContextView>.
+         *
+         * This prevents Props Contexts created by parent components on the host
+         * side affecting the children of this UI component.
+         */
+        element = (
+          <ClearPropsContext>
+            <ClearPropsContextView>{element}</ClearPropsContextView>
+          </ClearPropsContext>
+        );
+      }
+    }
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {
       element = (
@@ -88,10 +125,9 @@ export function flowComponent<C extends FlowComponentName>(
     if (tunnelId) {
       element = <TunnelEntry id={tunnelId}>{element}</TunnelEntry>;
     }
-
     return element;
   }
 
   Component.displayName = `FlowComponent(${componentName})`;
-  return Component;
+  return memo(Component);
 }

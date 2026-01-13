@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import Button from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
@@ -33,10 +33,12 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
         <Button
           className={className}
           size="m"
+          tunnelId={null}
           variant="plain"
           color="secondary"
           isDisabled={isDisabled}
           data-component="toggleRevealPassword"
+          aria-label={tooltipText}
         >
           {icon}
           <Tooltip>{tooltipText}</Tooltip>

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
 import type { OptionProps } from "@/components/Option";
-import { flowComponent } from "@/index/internal";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface OptionsProps
   extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
@@ -29,6 +29,7 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
     <Popover
       className={styles.popover}
       controller={controller}
+      maxHeight={324}
       {...restPopoverProps}
     >
       <Aria.ListBox

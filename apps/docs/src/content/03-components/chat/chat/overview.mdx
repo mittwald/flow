@@ -3,10 +3,7 @@
 Verwende `<Chat />`, um einen Chat darzustellen.
 
 Der Chat kombiniert dabei den
-[MessageThread](/03-components/chat/message-thread) mit einem Textinput.
-Letzterer ordnet mithilfe von [Align](/03-components/structure/align) einen
-[Button](/03-components/actions/button) und eine
-[TextArea](/03-components/form-controls/text-area) horizontal zueinander an.  
+[MessageThread](/03-components/chat/message-thread/overview) mit einem Textinput.
 Mit der `height` Property lässt sich die Höhe des Chats festlegen. Gleichzeitig
 sorgt sie dafür, dass die Texteingabe am unteren Rand platziert wird.
 
@@ -18,11 +15,7 @@ sorgt sie dafür, dass die Texteingabe am unteren Rand platziert wird.
 
 ## Upload
 
-Der Chat lässt sich durch einen Upload erweitern. Dazu kann ein
-[Button](/03-components/actions/button) mit einem
-[Icon](/03-components/content/icon) in der Variante **Plain** ergänzt werden.
-Die hochgeladenen Files lassen sich mit der
-[FileCard](/03-components/upload/file-card) darstellen.
+Ein Chat kann um eine Uploadfunktion erweitert werden. Dafür sollte ein [FileField](/03-components/form-controls/file-field/overview) genutzt werden, über das User Dateien auswählen können. Die hochgeladenen Dateien können dann in einer [FileCardList](/03-components/upload/file-card-list/overview) dargestellt werden.
 
 <LiveCodeEditor example="upload" editorCollapsed />
 
@@ -31,7 +24,7 @@ Die hochgeladenen Files lassen sich mit der
 ## React Hook Form
 
 Weitere Details zur Formularlogik und -validierung sind in der Component
-[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu
+[Form (React Hook Form)](/03-components/form-controls/form-react-hook-form/overview) zu
 finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
@@ -39,6 +32,6 @@ finden.
 ## Markdown Editor
 
 Statt einer TextArea kann auch der
-[MarkdownEditor](/03-components/form-controls/markdown-editor) verwendet werden.
+[MarkdownEditor](/03-components/form-controls/markdown-editor/overview) verwendet werden.
 
 <LiveCodeEditor example="markdown-editor" editorCollapsed />

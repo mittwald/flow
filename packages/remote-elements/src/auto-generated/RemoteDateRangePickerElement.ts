@@ -39,7 +39,6 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       lang: {},
       maxValue: {},
       minValue: {},
-      name: {},
       pageBehavior: {},
       placeholderValue: {},
       shouldCloseOnSelect: {},
@@ -130,7 +129,7 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
   }
 
   static override get remoteSlots() {
-    return ["errorMessage"];
+    return [];
   }
 }
 

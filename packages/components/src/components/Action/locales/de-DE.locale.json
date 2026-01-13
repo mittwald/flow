@@ -1,5 +1,6 @@
 {
   "action.isFailed": "Fehlgeschlagen",
   "action.isPending": "Ausstehend...",
-  "action.isSucceeded": "Erfolgreich"
+  "action.isSucceeded": "Erfolgreich",
+  "suspense.isPending": "Lädt..."
 }

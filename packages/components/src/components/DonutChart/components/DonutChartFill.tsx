@@ -2,6 +2,7 @@ import type { FC } from "react";
 import styles from "@/components/DonutChart/DonutChart.module.scss";
 import type { DonutChartProps } from "@/components/DonutChart";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
+import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
 interface Props extends Pick<DonutChartProps, "segments"> {
   center: number;
@@ -40,8 +41,14 @@ export const DonutChartFill: FC<Props> = (props) => {
 
     rotationOffset = rotationOffset + (360 / 100) * segmentPercent;
 
+    const color =
+      !s.color || isCategoricalColor(s.color)
+        ? `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`
+        : s.color;
+
     return (
       <circle
+        key={i}
         cx={center}
         cy={center}
         r={radius}
@@ -49,7 +56,7 @@ export const DonutChartFill: FC<Props> = (props) => {
         strokeDashoffset={
           circumference - (segmentPercent / 100) * circumference
         }
-        stroke={`var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`}
+        stroke={color}
         transform={`rotate(${-90 + currentRotationOffset} ${center} ${center})`}
       />
     );

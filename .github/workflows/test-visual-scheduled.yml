@@ -1,0 +1,46 @@
+name: Run scheduled visual tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8,15 * * *"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare browser tests
+        run: pnpm test:browser:prepare --only-shell
+
+      - name: Run visual tests
+        # run without file parallelism, because firefox has issues with parallel visual tests
+        run: |
+          pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false
+
+      - name: Send alerting message to Slack
+        if: failure()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "Visual tests failed"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "Visual tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."

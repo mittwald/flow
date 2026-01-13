@@ -10,7 +10,7 @@ import { useOverlayController } from "@/lib/controller/overlay/useOverlayControl
 import { Action } from "@/components/Action";
 import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
-import { Field, Form } from "@/integrations/react-hook-form";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
@@ -18,12 +18,17 @@ import Align from "@/components/Align";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
+import { RadioButton, RadioGroup } from "@/components/RadioGroup";
+import { DatePicker } from "@/components/DatePicker";
+import { FieldDescription } from "@/components/FieldDescription";
+import { useState } from "react";
+import { useTimeout } from "usehooks-ts";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
   component: Modal,
   parameters: {
-    controls: { exclude: ["controller", "offCanvas"] },
+    controls: { exclude: ["controller"] },
   },
   argTypes: {
     size: {
@@ -33,6 +38,7 @@ const meta: Meta<typeof Modal> = {
   },
   args: {
     size: "s",
+    offCanvas: false,
   },
   render: (props) => {
     return (
@@ -170,9 +176,7 @@ export const WithForm: Story = {
               </Field>
             </Content>
             <ActionGroup>
-              <Button type="submit" color="accent">
-                Submit
-              </Button>
+              <SubmitButton color="accent">Submit</SubmitButton>
               <Action closeOverlay="Modal">
                 <Button variant="soft" color="secondary">
                   Abort
@@ -208,9 +212,7 @@ export const OffCanvasWithForm: Story = {
               </Field>
             </Content>
             <ActionGroup>
-              <Button type="submit" color="accent">
-                Submit
-              </Button>
+              <SubmitButton color="accent">Submit</SubmitButton>
               <Action closeOverlay="Modal">
                 <Button variant="soft" color="secondary">
                   Abort
@@ -245,7 +247,7 @@ export const WithFormInside: Story = {
                     <Label>Nameservers</Label>
                   </TextField>
                 </Field>
-                <Button type="submit">Add</Button>
+                <SubmitButton>Add</SubmitButton>
               </Align>
             </Form>
           </Content>
@@ -298,6 +300,96 @@ export const LargeOffCanvas: Story = {
           </ActionGroup>
         </Modal>
       </ModalTrigger>
+    );
+  },
+};
+
+export const WithSubHeadings: Story = {
+  args: { size: "l", offCanvas: true },
+  render: (props) => {
+    return (
+      <ModalTrigger {...props}>
+        <Button>Add SFTP user</Button>
+        <Modal size="m" offCanvas>
+          <Heading>Add SFTP user</Heading>
+          <Content>
+            <Section>
+              <Heading>Description</Heading>
+              <Text>
+                An SFTP user allows you to connect to your project, for example
+                to upload files.
+              </Text>
+              <ColumnLayout m={[1, 1]}>
+                <TextField isRequired>
+                  <Label>Name</Label>
+                </TextField>
+                <DatePicker>
+                  <Label>Expiration Date</Label>
+                  <FieldDescription>
+                    After this date, the SFTP user will be deleted.
+                  </FieldDescription>
+                </DatePicker>
+              </ColumnLayout>
+            </Section>
+            <Section>
+              <Heading>Permissions</Heading>
+              <Text>Select the permissions the SFTP user should have.</Text>
+              <RadioGroup s={[1, 1]} defaultValue="read&write">
+                <RadioButton value="write">
+                  <Text>Read Access</Text>
+                  <Content>The SFTP user can view and download files.</Content>
+                </RadioButton>
+                <RadioButton value="read&write">
+                  <Text>Read and Write Access</Text>
+                  <Content>
+                    The SFTP user can view, edit, upload, and download files.
+                  </Content>
+                </RadioButton>
+              </RadioGroup>
+            </Section>
+            <Section>
+              <Heading>Directory Selection</Heading>
+              <Text>
+                Specify the directory the SFTP user should have access to.
+              </Text>
+              <TextField isRequired>
+                <Label>Path</Label>
+              </TextField>
+            </Section>
+          </Content>
+          <ActionGroup>
+            <Action closeOverlay="Modal">
+              <Button color="accent">Create SFTP User</Button>
+              <Button variant="soft" color="secondary">
+                Cancel
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  },
+};
+
+const loadingPromise = new Promise(() => {
+  // no resolve
+});
+
+const Loader = () => {
+  throw loadingPromise;
+};
+
+export const WithSuspense: Story = {
+  render: (props) => {
+    const [isLoading, setIsLoading] = useState(true);
+    useTimeout(() => setIsLoading(false), 3000);
+    return (
+      <Modal
+        {...props}
+        controller={useOverlayController("Modal", { isDefaultOpen: true })}
+      >
+        {isLoading ? <Loader /> : <Content>Loaded content!</Content>}
+      </Modal>
     );
   },
 };

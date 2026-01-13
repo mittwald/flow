@@ -11,6 +11,9 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
 
   static override get remoteProperties() {
     return {
+      allowHorizontalResize: {},
+      allowResize: {},
+      allowVerticalResize: {},
       "aria-activedescendant": {},
       "aria-autocomplete": {},
       "aria-controls": {},
@@ -18,6 +21,7 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
       "aria-details": {},
       "aria-errormessage": {},
       "aria-haspopup": {},
+      "aria-hidden": {},
       "aria-label": {},
       "aria-labelledby": {},
       autoComplete: {},
