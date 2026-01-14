@@ -51,6 +51,9 @@ export const LightBox = flowComponent("LightBox", (props) => {
       Button: { variant: "solid", color: "light" },
       tunnelId: "actionGroup",
     },
+    Gallery: {
+      height: "var(--light-box--max-height)",
+    },
   };
 
   const controllerFromContext = useOverlayController("LightBox", {

@@ -1,0 +1,13 @@
+.galleryItem {
+  display: flex;
+  justify-content: center;
+  max-height: 100%;
+
+  .actionGroup {
+    flex-grow: 0;
+    margin-inline-start: 8px;
+    align-self: start;
+    flex-direction: column;
+    margin-right: -48px;
+  }
+}

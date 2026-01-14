@@ -83,6 +83,7 @@ import type { SubmitButtonProps } from "@/integrations/react-hook-form/component
 import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
+import type { GalleryItemProps, GalleryProps } from "@/components/Gallery";
 
 export * from "./types";
 
@@ -121,6 +122,8 @@ export interface FlowComponentPropsTypes {
   FileCardList: FileCardListProps;
   FileField: FileFieldProps;
   FileDropZone: FileDropZoneProps;
+  Gallery: GalleryProps;
+  GalleryItem: GalleryItemProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -206,6 +209,8 @@ const propsContextSupportingComponentsMap: Record<
   FileCardList: true,
   FileField: true,
   FileDropZone: true,
+  Gallery: true,
+  GalleryItem: true,
   Header: true,
   Heading: true,
   Icon: true,
