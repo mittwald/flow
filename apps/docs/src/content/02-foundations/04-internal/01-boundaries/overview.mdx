@@ -14,22 +14,24 @@ vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries
 erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer
 Teile der Anwendung.
 
-| Typ                  | Verwendung                                                     | Element     | Fehlerfall                            | Loading                                            |
-| -------------------- | -------------------------------------------------------------- | ----------- | ------------------------------------- | -------------------------------------------------- |
-| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                    | Sections mit mehrzeiligen Skeletons                |
-| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                        | Mehrzeilige Skeletons                              |
-| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Fehler Section                        | Mehrzeilige Skeletons                              |
-| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                                | Nichts                                             |
-| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                    | LoadingView der Flow Component                     |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | MenuItems mit Fehler Text             | MenuItems mit Skeleton                             |
-| `ChartFragment`      | Für CartesianCharts                                            | Fragment    | CartesianChart mit IllustratedMessage | CartesianChart mit LoadingSpinner                  |
-| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Fehler Text                           | TextField                                          |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Avatar mit Fehler Icon                | Avatar mit Skeleton                                |
-| `Link`               | Für Links                                                      | Link        | Fehler Text                           | Einzeiliges Skeleton                               |
-| `Text`               | Für Texte                                                      | Text        | Fehler Text                           | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehler Text                           | Einzeiliges Skeleton                               |
+Boundaries übernehmen das Rendering der jeweiligen Elemente. Spezielle
+„Fragment“-Boundaries kümmern sich ausschließlich um die Lade- und
+Fehlerzustände des Elements, ohne das vollständige Element zu rendern.
+
+| Typ                                 | Verwendung                                                     | Fehlerfall                                                                             | Loading                                                                                  |
+| ----------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `LayoutCard` / `LayoutCardFragment` | Äußerste Boundary einer Seite                                  | <LiveCodeEditor example="layout-card-error" editorDisabled zoom=".6" bgColor="dark" /> | <LiveCodeEditor example="layout-card-loading" editorDisabled zoom=".6" bgColor="dark" /> |
+| `SectionsFragment`                  | Äußerste Boundary in Tabs                                      | <LiveCodeEditor example="illustrated-message-error" editorDisabled zoom=".6" />        | <LiveCodeEditor example="illustrated-message-loading" editorDisabled zoom=".6" />        |
+| `Section`                           | Ersetzt normale Sections                                       | <LiveCodeEditor example="section-error" editorDisabled zoom=".6" />                    | <LiveCodeEditor example="section-loading" editorDisabled zoom=".6" />                    |
+| `ContentFragment`                   | Für mehrzeilige Inhalte                                        | <LiveCodeEditor example="content-fragment-error" editorDisabled zoom=".6" />           | <LiveCodeEditor example="content-fragment-loading" editorDisabled zoom=".6" />           |
+| `Fragment`                          | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Kein Fallback                                                                          | Kein Fallback                                                                            |
+| `Modal`                             | Ersetzt normale Modals                                         | <LiveCodeEditor example="modal-error" editorDisabled zoom=".6" />                      | LoadingView der Flow Component                                                           |
+| `ContextMenu`                       | Ersetzt normale ContextMenus                                   | <LiveCodeEditor example="context-menu-error" editorDisabled/>                          | <LiveCodeEditor example="context-menu-loading" editorDisabled/>                          |
+| `MenuItemFragment`                  | Für MenuItems                                                  | Kein Fallback                                                                          | Keine Loading Boundary                                                                   |
+| `ChartFragment`                     | Für CartesianCharts                                            | <LiveCodeEditor example="chart-error" editorDisabled  zoom=".6"/>                      | <LiveCodeEditor example="chart-loading" editorDisabled  zoom=".6"/>                      |
+| `FieldFragment`                     | Für Form Fields mit nachgeladenen Inhalten                     | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="field-fragment-loading" editorDisabled/>                        |
+| `Avatar`                            | Für Avatare                                                    | <LiveCodeEditor example="avatar-error" editorDisabled/>                                | <LiveCodeEditor example="avatar-loading" editorDisabled/>                                |
+| `Text` / `String`                   | Für Texte                                                      | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="text-loading" editorDisabled/>                                  |
 
 ## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
 

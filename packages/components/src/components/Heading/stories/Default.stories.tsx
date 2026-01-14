@@ -65,6 +65,10 @@ export const Light: Story = {
   },
 };
 
+export const Danger: Story = {
+  args: { color: "danger" },
+};
+
 export const Wrap: Story = {
   render: (props) => (
     <Section>
