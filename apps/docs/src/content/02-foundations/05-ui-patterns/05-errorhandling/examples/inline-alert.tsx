@@ -7,11 +7,9 @@ import {
   IconDomain,
   LayoutCard,
   ListItemView,
-  SkeletonText,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import { Suspense } from "react";
 
 export default () => {
   const DomainList = typedList<{
@@ -61,11 +59,9 @@ export default () => {
                   {domain.target ? (
                     domain.target
                   ) : (
-                    <Suspense fallback={<SkeletonText />}>
-                      <AlertText status="danger">
-                        Fehler beim Laden
-                      </AlertText>
-                    </Suspense>
+                    <AlertText status="danger">
+                      Fehler beim Laden
+                    </AlertText>
                   )}
                 </Text>
 
