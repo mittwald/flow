@@ -28,19 +28,19 @@ export default () => {
         <Field
           name="name"
           rules={{
-            required: "The project name is required",
+            required: "Bitte gib einen Namen ein",
           }}
         >
           <TextField>
             <Label>Name</Label>
             <FieldDescription>
-              The name of the project
+              TDer Name des Projekts
             </FieldDescription>
           </TextField>
         </Field>
         <ActionGroup>
-          <ResetButton>Reset</ResetButton>
-          <SubmitButton>Save</SubmitButton>
+          <ResetButton>Zurücksetzen</ResetButton>
+          <SubmitButton>Speichern</SubmitButton>
         </ActionGroup>
       </Section>
     </Form>

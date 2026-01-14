@@ -20,13 +20,13 @@ export default () => {
       <Field
         name="name"
         rules={{
-          required: "The project name is required",
+          required: "Bitte gib einen Namen ein",
         }}
       >
         <TextField>
           <Label>Name</Label>
           <FieldDescription>
-            The name of the project
+            Der Name des Projekts
           </FieldDescription>
         </TextField>
       </Field>
