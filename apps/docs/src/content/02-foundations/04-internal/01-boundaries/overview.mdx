@@ -315,6 +315,11 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 
 ### ContextMenu (WithBoundaries.ContextMenu)
 
+Um zu verhindern, dass der Inhalt des ContextMenus springt, werden Elemente die
+nachgeladene Inhalte benötigen in ein `WithBoundaries.MenuItem`gepackt, diese
+Boundary enthält kein Suspense, damit das ganze ContextMenu im Ladezustand
+verbleibt, solange Elemente laden
+
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
   const { appInstallationGhost } = asGhostProps(props);
