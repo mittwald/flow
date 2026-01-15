@@ -318,7 +318,7 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 Um zu verhindern, dass der Inhalt des ContextMenus springt, werden Elemente die
 nachgeladene Inhalte benötigen in ein `WithBoundaries.MenuItem`gepackt, diese
 Boundary enthält kein Suspense, damit das ganze ContextMenu im Ladezustand
-verbleibt, solange Elemente laden
+verbleibt.
 
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
