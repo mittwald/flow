@@ -2,12 +2,11 @@ import { useForm } from "react-hook-form";
 import {
   Field,
   Form,
-  SubmitButton,
   ResetButton,
+  SubmitButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
   ActionGroup,
-  FieldDescription,
   Label,
   Section,
   TextField,
@@ -33,9 +32,6 @@ export default () => {
         >
           <TextField>
             <Label>Name</Label>
-            <FieldDescription>
-              TDer Name des Projekts
-            </FieldDescription>
           </TextField>
         </Field>
         <ActionGroup>

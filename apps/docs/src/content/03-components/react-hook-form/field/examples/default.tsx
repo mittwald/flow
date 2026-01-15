@@ -4,7 +4,6 @@ import {
   Form,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
-  FieldDescription,
   Label,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -25,9 +24,6 @@ export default () => {
       >
         <TextField>
           <Label>Name</Label>
-          <FieldDescription>
-            Der Name des Projekts
-          </FieldDescription>
         </TextField>
       </Field>
     </Form>
