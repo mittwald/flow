@@ -1,15 +1,14 @@
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import {
   ActionGroup,
-  FieldDescription,
   Label,
   TextField,
 } from "@mittwald/flow-react-components";
 import {
   Field,
   Form,
-  SubmitButton,
   ResetButton,
+  SubmitButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -42,14 +41,11 @@ export default () => {
       >
         <TextField>
           <Label>Name</Label>
-          <FieldDescription>
-            The name of the project
-          </FieldDescription>
         </TextField>
       </Field>
       <ActionGroup>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Save</SubmitButton>
+        <ResetButton>Zurücksetzen</ResetButton>
+        <SubmitButton>Speichern</SubmitButton>
       </ActionGroup>
     </Form>
   );
