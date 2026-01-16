@@ -2,7 +2,7 @@
 
 Fehlermeldungen sollten immer verständlich formuliert sein und auf technische
 Fachbegriffe verzichten. Sie beschreiben das Problem aus Sicht des Users und
-nicht aus Sicht des Systems mehr dazu findest du in der Guideline
+nicht aus Sicht des Systems. Mehr dazu findest du in der Guideline
 [Fehlermeldung](/02-foundations/03-content-guidelines/03-fehlermeldungen).
 
 ---
@@ -12,7 +12,7 @@ nicht aus Sicht des Systems mehr dazu findest du in der Guideline
 Beim Laden von Inhalten können Fehler auftreten, zum Beispiel wenn ein Service
 nicht erreichbar ist, ein Timeout entsteht oder ein technischer Fehler vorliegt.
 In diesen Fällen sollte der Ladezustand beendet werden, damit User sehen, dass
-ein Fehler passiert ist und nicht weiter warten.
+ein Fehler eingetreten ist und sie nicht weiter warten müssen.
 
 Die Fehlermeldung sollte immer dort erscheinen, wo der erwartete Inhalt wäre.
 Für größere Bereiche wie
@@ -20,8 +20,7 @@ Für größere Bereiche wie
 [Sections](/03-components/structure/section/overview) eignet sich eine
 [IllustratedMessage](/03-components/content/illustrated-message/overview) mit
 dem Status Danger. Sie signalisiert deutlich, dass der Inhalt aktuell nicht
-verfügbar ist, und bietet idealerweise eine Handlung an, zum Beispiel einen
-Button mit erneut laden.
+verfügbar ist, und bietet idealerweise eine Handlung an, zum Beispiel einen Button mit der Beschriftung "Erneut laden".
 
 <LiveCodeEditor example="illustrated-message" editorCollapsed bgColor="dark" />
 
@@ -33,7 +32,7 @@ bleibt der Kontext erhalten und der Fehler wirkt sich nicht auf die ganze
 
 <LiveCodeEditor example="alert-text" editorCollapsed bgColor="dark" />
 
-Um Errors auf kleine Breiche zu begrenzen nutzen wir im mStudio Loading und
+Um Errors auf kleine Bereiche zu begrenzen, nutzen wir im mStudio Loading und
 Error Boundaries. Diese kapseln technische Fehler ab und sorgen für konsistentes
 Feedback. Details dazu sind in der Guideline zu
 [Boundaries (Internal)](/02-foundations/04-internal/01-boundaries) beschrieben.
@@ -58,8 +57,8 @@ Aktionen, die einen Request an das Backend senden, können aus unterschiedlichen
 Gründen fehlschlagen. Dazu zählen technische Fehler im System, Probleme bei der
 Kommunikation mit dem Backend oder fehlende Berechtigungen.
 
-Wenn eine Aktion fehlschlägt, sollte dies deutlich kommuniziert werden, dafür
-eigenet sich ein [Modal](/03-components/overlays/modal/overview) mit einer
+Wenn eine Aktion fehlschlägt, sollte dies deutlich kommuniziert werden. Dafür
+eignet sich ein [Modal](/03-components/overlays/modal/overview) mit einer
 [IllustratedMessage](/03-components/content/illustrated-message/overview) im
 Status Danger. Diese informiert darüber, dass die Aktion nicht durchgeführt
 werden konnte, und erklärt kurz den Grund, sofern dieser für den User relevant
@@ -69,7 +68,7 @@ Aktion erneut auszuführen.
 <LiveCodeEditor example="modal" editorCollapsed bgColor="dark" />
 
 Für Aktionen, die über einen längeren Zeitraum laufen und zunächst erfolgreich
-an das Backend übermittelt werden, aber erst später fehlschlagen, eignet sich
+an das Backend übermittelt werden, aber erst später fehlschlagen, eignen sich
 besser [Notifications](/03-components/status/notification/overview). Ein
 typisches Beispiel ist das Registrieren einer Domain. Weitere Details dazu sind
 im
