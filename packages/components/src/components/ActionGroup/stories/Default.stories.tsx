@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ActionGroup from "../ActionGroup";
-import React from "react";
 import { Button } from "@/components/Button";
 import { Action } from "@/components/Action";
 import { sleep } from "@/lib/promises/sleep";
@@ -14,7 +13,7 @@ const meta: Meta<typeof ActionGroup> = {
   component: ActionGroup,
   render: (props) => (
     <ActionGroup {...props}>
-      <Action action={() => sleep(1500)}>
+      <Action onAction={() => sleep(1500)}>
         <Button color="accent">Create customer</Button>
       </Action>
       <Action>

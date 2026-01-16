@@ -8,7 +8,7 @@ import {
 } from "@mittwald/flow-react-components";
 import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
 
-<Action action={sleepLong}>
+<Action onAction={sleepLong}>
   <Modal slot="actionConfirm">
     <Heading>Projekt löschen</Heading>
     <Content>

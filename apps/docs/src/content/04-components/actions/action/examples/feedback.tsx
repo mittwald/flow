@@ -4,7 +4,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Action
-  action={() => {
+  onAction={() => {
     // do nothing
   }}
   showFeedback

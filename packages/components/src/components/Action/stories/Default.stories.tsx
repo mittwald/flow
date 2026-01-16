@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   asyncFunction,
   asyncLongFunction,
@@ -45,46 +44,46 @@ export const Default: Story = {};
 
 export const Async: Story = {
   args: {
-    action: asyncFunction,
+    onAction: asyncFunction,
   },
 };
 
 export const AsyncLong: Story = {
   args: {
-    action: asyncLongFunction,
+    onAction: asyncLongFunction,
   },
 };
 
 export const AsyncWithFeedback: Story = {
   args: {
-    action: asyncFunction,
+    onAction: asyncFunction,
     showFeedback: true,
   },
 };
 
 export const AsyncLongWithFeedback: Story = {
   args: {
-    action: asyncLongFunction,
+    onAction: asyncLongFunction,
     showFeedback: true,
   },
 };
 
 export const Nested: Story = {
   args: {
-    children: <Action action={syncFunction}>{button}</Action>,
+    children: <Action onAction={syncFunction}>{button}</Action>,
   },
 };
 
 export const NestedAsync: Story = {
   args: {
-    action: asyncFunction,
-    children: <Action action={asyncFunction}>{button}</Action>,
+    onAction: asyncFunction,
+    children: <Action onAction={asyncFunction}>{button}</Action>,
   },
 };
 
 export const WithConfirmationModal: Story = {
   render: () => (
-    <Action action={asyncLongFunction}>
+    <Action onAction={asyncLongFunction}>
       <Modal slot="actionConfirm">
         <Heading>Delete customer</Heading>
         <Content>Do you really want to delete the customer?</Content>
