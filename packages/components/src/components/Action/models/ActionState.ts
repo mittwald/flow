@@ -57,6 +57,7 @@ export class ActionState {
   }
 
   public onAsyncStart(): void {
+    this.clearPendingTimeout();
     this.isAsync = true;
     this.updateState("isExecuting");
     this.setPendingTimeout = window.setTimeout(
@@ -97,10 +98,14 @@ export class ActionState {
     this.error = undefined;
   }
 
-  private async onDone(): Promise<void> {
+  private clearPendingTimeout(): void {
     if (this.setPendingTimeout) {
       window.clearTimeout(this.setPendingTimeout);
     }
+  }
+
+  private async onDone(): Promise<void> {
+    this.clearPendingTimeout();
     if (this.error) {
       await this.startFailedFeedback();
     } else if (
