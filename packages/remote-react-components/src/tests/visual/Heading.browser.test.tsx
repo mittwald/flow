@@ -4,7 +4,7 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 const levels = [1, 2, 3, 4, 5, 6] as const;
 const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as const;
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["primary", "dark", "light", "danger"] as const;
 
 test.each(testEnvironments)(
   "Heading sizes (%s)",

@@ -98,7 +98,7 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
         observer.disconnect();
       };
     }
-  }, [showEmptyView]);
+  }, [showEmptyView, chartContainerRef.current]);
 
   return (
     <Wrap if={height}>
