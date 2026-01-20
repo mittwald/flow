@@ -112,6 +112,10 @@ const MainNavigation: FC<Props> = (props) => {
 
   const [searchValue, setSearchValue] = useState<string>("");
 
+  useOnChange(currentPathname, () => {
+    setSearchValue("");
+  });
+
   const headingId = useId();
 
   if (mainPathSegment === undefined) {
@@ -132,6 +136,7 @@ const MainNavigation: FC<Props> = (props) => {
           </Heading>
 
           <SearchField
+            value={searchValue}
             onChange={(value) => setSearchValue(value.toLowerCase().trim())}
           />
           <Navigation aria-labelledby={headingId}>

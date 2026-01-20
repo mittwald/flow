@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.634](https://github.com/mittwald/flow/compare/0.2.0-alpha.633...0.2.0-alpha.634) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.633](https://github.com/mittwald/flow/compare/0.2.0-alpha.632...0.2.0-alpha.633) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.632](https://github.com/mittwald/flow/compare/0.2.0-alpha.631...0.2.0-alpha.632) (2026-01-15)
+
+### Features
+
+* **CodeBlock:** support children ([#2254](https://github.com/mittwald/flow/issues/2254)) ([7fe6d74](https://github.com/mittwald/flow/commit/7fe6d749a4b4df67a2007a63b9c1eea1a1d7dd35))
+
 # [0.2.0-alpha.631](https://github.com/mittwald/flow/compare/0.2.0-alpha.630...0.2.0-alpha.631) (2026-01-14)
 
 **Note:** Version bump only for package @mittwald/flow-project

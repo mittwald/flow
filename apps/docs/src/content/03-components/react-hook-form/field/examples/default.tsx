@@ -4,7 +4,6 @@ import {
   Form,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
-  FieldDescription,
   Label,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -20,14 +19,11 @@ export default () => {
       <Field
         name="name"
         rules={{
-          required: "The project name is required",
+          required: "Bitte gib einen Namen ein",
         }}
       >
         <TextField>
           <Label>Name</Label>
-          <FieldDescription>
-            The name of the project
-          </FieldDescription>
         </TextField>
       </Field>
     </Form>

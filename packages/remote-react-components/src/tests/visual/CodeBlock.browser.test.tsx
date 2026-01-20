@@ -8,7 +8,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { CodeBlock, Flex, Wrap, AccentBox },
+    components: { CodeBlock, Flex, Wrap, AccentBox, Color },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -27,6 +27,15 @@ test.each(testEnvironments)(
             </AccentBox>
           </Wrap>
         ))}
+        <CodeBlock>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <br />
+          <Color color="danger">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </Color>
+          <br />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </CodeBlock>
       </Flex>,
     );
 

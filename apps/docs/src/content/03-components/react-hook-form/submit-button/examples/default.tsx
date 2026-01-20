@@ -3,13 +3,10 @@ import {
   Field,
   Form,
   SubmitButton,
-  ResetButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
-  ActionGroup,
-  FieldDescription,
+  Align,
   Label,
-  Section,
   TextField,
 } from "@mittwald/flow-react-components";
 
@@ -24,25 +21,20 @@ export default () => {
 
   return (
     <Form form={form} onSubmit={handleSubmit}>
-      <Section>
+      <Align>
         <Field
           name="name"
           rules={{
-            required: "The project name is required",
+            required: "Bitte gib einen Namen ein",
           }}
         >
           <TextField>
             <Label>Name</Label>
-            <FieldDescription>
-              The name of the project
-            </FieldDescription>
           </TextField>
         </Field>
-        <ActionGroup>
-          <ResetButton>Reset</ResetButton>
-          <SubmitButton>Save</SubmitButton>
-        </ActionGroup>
-      </Section>
+
+        <SubmitButton>Speichern</SubmitButton>
+      </Align>
     </Form>
   );
 };
