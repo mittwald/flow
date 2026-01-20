@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   --button-width: calc(
     var(--icon--size--m) + 2 * var(--button--padding-icon-only)
   );
@@ -16,6 +17,7 @@
       var(--light-box--max-width) -
         ((var(--button-width) * 2) + var(--light-box--spacing))
     );
+    touch-action: pan-y;
   }
 
   .indicators {
@@ -36,6 +38,7 @@
       var(--light-box--max-height) -
         (var(--light-box--spacing) + var(--icon--size--m))
     );
+    user-select: none;
 
     .actions {
       display: flex;
@@ -44,6 +47,7 @@
       margin-inline-start: var(--light-box--spacing);
       row-gap: var(--light-box--spacing);
     }
+
     .actionGroup {
       flex-grow: 0;
       flex-direction: column;
@@ -54,6 +58,7 @@
       animation: fadeIn var(--transition--duration--default) ease-in forwards;
       max-height: 100%;
       max-width: 100%;
+      pointer-events: none;
     }
 
     @keyframes fadeIn {
@@ -63,6 +68,19 @@
       to {
         opacity: 1;
       }
+    }
+  }
+
+  @media (max-width: 850px) {
+    .content {
+      width: calc(
+        var(--light-box--max-width) - (var(--button-width) + var(--size-px--s))
+      );
+    }
+
+    .prev,
+    .next {
+      display: none;
     }
   }
 }

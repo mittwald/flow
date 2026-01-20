@@ -1,5 +1,5 @@
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import React, { type ReactNode, useState } from "react";
+import React, { type ReactNode, useRef, useState } from "react";
 import { Button } from "@/components/Button";
 import {
   IconChevronLeft,
@@ -27,10 +27,32 @@ export const Gallery = flowComponent("Gallery", (props) => {
 
   const count = React.Children.count(children);
 
-  const paginate = (newDirection: number) => {
-    setIndex((prevIndex) => {
-      return (prevIndex + newDirection + count) % count;
-    });
+  const paginate = (direction: number) => {
+    setIndex((prev) => (prev + direction + count) % count);
+  };
+
+  const pointerStartX = useRef<number | null>(null);
+  const SWIPE_THRESHOLD = 50;
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (!e.isPrimary) return;
+    pointerStartX.current = e.clientX;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (pointerStartX.current === null) return;
+
+    const distance = pointerStartX.current - e.clientX;
+
+    if (Math.abs(distance) > SWIPE_THRESHOLD) {
+      paginate(distance > 0 ? 1 : -1);
+    }
+
+    pointerStartX.current = null;
+  };
+
+  const handlePointerCancel = () => {
+    pointerStartX.current = null;
   };
 
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -38,8 +60,8 @@ export const Gallery = flowComponent("Gallery", (props) => {
   const indicators = Array(count)
     .fill("")
     .map((_, index) => (
-      <Color color="light">
-        <Icon className={styles.indicator} key={index} size="s" aria-hidden>
+      <Color color="light" key={index}>
+        <Icon className={styles.indicator} size="s" aria-hidden>
           {currentIndex === index ? <IconCircleFilled /> : <IconCircle />}
         </Icon>
       </Color>
@@ -51,14 +73,21 @@ export const Gallery = flowComponent("Gallery", (props) => {
         aria-label={stringFormatter.format("gallery.previous")}
         onPress={() => paginate(-1)}
         color="light"
+        className={styles.prev}
       >
         <IconChevronLeft />
       </ButtonView>
 
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
         <div className={styles.galleryItem} key={currentIndex}>
           {children[currentIndex]}
         </div>
+
         <div
           className={styles.indicators}
           aria-label={stringFormatter.format("gallery.indicator", {
@@ -74,6 +103,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
         aria-label={stringFormatter.format("gallery.next")}
         onPress={() => paginate(1)}
         color="light"
+        className={styles.next}
       >
         <IconChevronRight />
       </Button>
