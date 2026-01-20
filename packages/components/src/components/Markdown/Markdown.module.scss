@@ -6,4 +6,40 @@
   p {
     white-space: break-spaces;
   }
+
+  table {
+    border-radius: var(--table--corner-radius);
+    border-width: var(--table--border-width);
+    border-style: var(--table--border-style);
+    border-color: var(--table--border-color);
+    border-spacing: 0;
+    background-color: var(--table--background-color);
+
+    thead {
+      font-weight: var(--table--header-font-weight);
+    }
+
+    th,
+    td {
+      padding-inline: var(--table--padding-x);
+      padding-block: var(--table--padding-y);
+      text-align: start;
+      border-style: var(--table--border-style);
+      border-color: var(--table--border-color);
+      border-width: 0;
+    }
+
+    th {
+      border-block-end-width: var(--table--header-border-width);
+    }
+
+    tbody tr {
+      &:nth-of-type(odd) td {
+        background-color: var(--table--background-color-accent);
+      }
+      &:not(:last-child) td {
+        border-block-end-width: var(--table--border-width);
+      }
+    }
+  }
 }
