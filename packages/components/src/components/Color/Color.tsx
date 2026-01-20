@@ -10,8 +10,6 @@ const flowColors = [
   "warning",
   "info",
   "success",
-  "light",
-  "dark",
 ] as const;
 
 type FlowColor = (typeof flowColors)[number];

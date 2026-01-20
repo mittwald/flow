@@ -2,16 +2,16 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithChildren } from "react";
 import styles from "../Gallery.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import DivView from "@/views/DivView";
-import ButtonView from "@/views/ButtonView";
 import { IconClose } from "@/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useOverlayController } from "@/lib/hooks";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
+import { Button } from "@/components/Button";
 
 export type GalleryItemProps = PropsWithChildren;
 
+/** @flr-generate all */
 export const GalleryItem = flowComponent("GalleryItem", (props) => {
   const { children } = props;
 
@@ -32,16 +32,16 @@ export const GalleryItem = flowComponent("GalleryItem", (props) => {
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
         {children}
-        <DivView className={styles.actions}>
-          <ButtonView
+        <div className={styles.actions}>
+          <Button
             aria-label={stringFormatter.format("gallery.close")}
             color="light"
             onPress={controller.close}
           >
             <IconClose />
-          </ButtonView>
+          </Button>
           <TunnelExit id="actionGroup" />
-        </DivView>
+        </div>
       </TunnelProvider>
     </PropsContextProvider>
   );

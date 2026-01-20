@@ -52,6 +52,8 @@ import { FileCardList as FileCardList } from "@mittwald/flow-react-components";
 import { FileDropZone as FileDropZone } from "@mittwald/flow-react-components";
 import { FileField as FileField } from "@mittwald/flow-react-components";
 import { Flex as Flex } from "@mittwald/flow-react-components";
+import { Gallery as Gallery } from "@mittwald/flow-react-components";
+import { GalleryItem as GalleryItem } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
 import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components";
 import { Heading as Heading } from "@mittwald/flow-react-components";
@@ -261,6 +263,11 @@ export const flowComponents = {
   ),
   "flr-file-field": createFlowRemoteComponentRenderer("FileField", FileField),
   "flr-flex": createFlowRemoteComponentRenderer("Flex", Flex),
+  "flr-gallery": createFlowRemoteComponentRenderer("Gallery", Gallery),
+  "flr-gallery-item": createFlowRemoteComponentRenderer(
+    "GalleryItem",
+    GalleryItem,
+  ),
   "flr-header": createFlowRemoteComponentRenderer("Header", Header),
   "flr-header-navigation": createFlowRemoteComponentRenderer(
     "HeaderNavigation",

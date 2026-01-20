@@ -51,6 +51,8 @@ export * from "./RemoteFileCardListElement";
 export * from "./RemoteFileDropZoneElement";
 export * from "./RemoteFileFieldElement";
 export * from "./RemoteFlexElement";
+export * from "./RemoteGalleryElement";
+export * from "./RemoteGalleryItemElement";
 export * from "./RemoteHeaderElement";
 export * from "./RemoteHeaderNavigationElement";
 export * from "./RemoteHeadingElement";

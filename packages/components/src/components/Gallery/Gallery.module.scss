@@ -25,6 +25,7 @@
     justify-content: center;
     padding-top: var(--light-box--spacing);
     column-gap: var(--light-box--indicator-spacing);
+    color: var(--light-box--content-color);
   }
 
   .indicator {

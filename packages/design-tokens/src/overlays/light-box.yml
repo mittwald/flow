@@ -9,3 +9,5 @@ light-box:
     value: "{size-px.m}"
   indicator-spacing:
     value: "{size-px.xs}"
+  content-color:
+    value: "{light.color.800}"

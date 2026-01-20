@@ -1,6 +1,5 @@
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import React, { type ReactNode, useRef, useState } from "react";
-import { Button } from "@/components/Button";
 import {
   IconChevronLeft,
   IconChevronRight,
@@ -10,16 +9,16 @@ import { IconCircle, IconCircleFilled } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { Color } from "@/components/Color";
-import ButtonView from "@/views/ButtonView";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
+import Button from "@/components/Button";
 
 export interface GalleryProps extends PropsWithClassName {
   children: ReactNode[];
   defaultIndex?: number;
 }
 
+/** @flr-generate all */
 export const Gallery = flowComponent("Gallery", (props) => {
   const { children, className, defaultIndex = 0 } = props;
 
@@ -60,23 +59,21 @@ export const Gallery = flowComponent("Gallery", (props) => {
   const indicators = Array(count)
     .fill("")
     .map((_, index) => (
-      <Color color="light" key={index}>
-        <Icon className={styles.indicator} size="s" aria-hidden>
-          {currentIndex === index ? <IconCircleFilled /> : <IconCircle />}
-        </Icon>
-      </Color>
+      <Icon key={index} className={styles.indicator} size="s" aria-hidden>
+        {currentIndex === index ? <IconCircleFilled /> : <IconCircle />}
+      </Icon>
     ));
 
   return (
     <div className={clsx(styles.gallery, className)}>
-      <ButtonView
+      <Button
         aria-label={stringFormatter.format("gallery.previous")}
         onPress={() => paginate(-1)}
         color="light"
         className={styles.prev}
       >
         <IconChevronLeft />
-      </ButtonView>
+      </Button>
 
       <div
         className={styles.content}
