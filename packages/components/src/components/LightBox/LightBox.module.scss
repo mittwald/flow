@@ -40,7 +40,7 @@
 
   &:has(.gallery) {
     .actions {
-      margin-left: -56px;
+      display: none;
     }
   }
 }

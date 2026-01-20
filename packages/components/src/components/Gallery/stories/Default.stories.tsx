@@ -7,52 +7,37 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
 import { IconDelete, IconDownload } from "@/components/Icon/components/icons";
 import { LightBox, LightBoxTrigger } from "@/components/LightBox";
+import { Flex } from "@/components/Flex";
+
+const images = [
+  dummyText.imageSrc,
+  "https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg",
+];
 
 const meta: Meta<typeof Gallery> = {
   title: "Content/Gallery",
   component: Gallery,
   render: () => (
-    <Gallery>
-      <GalleryItem>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
-        <ActionGroup>
-          <Button>
-            <IconDownload />
-          </Button>
-          <Button>
-            <IconDelete />
-          </Button>
-        </ActionGroup>
-      </GalleryItem>
-      <GalleryItem>
-        <Image
-          alt="Gopher"
-          src="https://media.istockphoto.com/id/1985150440/de/foto/neuseeland-roadtrip-am-lake-hawea.jpg?s=1024x1024&w=is&k=20&c=QawaBh-Lt6shSjnZuZkbsEzvSfpozsXxk23DJdNFKKw="
-        />
-        <ActionGroup>
-          <Button>
-            <IconDownload />
-          </Button>
-          <Button>
-            <IconDelete />
-          </Button>
-        </ActionGroup>
-      </GalleryItem>{" "}
-      <GalleryItem>
-        <Image
-          alt="Gopher"
-          src="https://media.istockphoto.com/id/1040315976/de/foto/frau-betrachten-aus-einer-h%C3%B6hle-von-matera-basilikata-italien.jpg?s=1024x1024&w=is&k=20&c=Mno5w0gKMbZV7E3zjf0F5kkGRdBxf9XfwWzM_p8G0ZU="
-        />
-        <ActionGroup>
-          <Button>
-            <IconDownload />
-          </Button>
-          <Button>
-            <IconDelete />
-          </Button>
-        </ActionGroup>
-      </GalleryItem>
-    </Gallery>
+    <LightBoxTrigger>
+      <Button>Trigger LightBox</Button>
+      <LightBox>
+        <Gallery>
+          {images.map((src) => (
+            <GalleryItem>
+              <Image alt="" src={src} />
+              <ActionGroup>
+                <Button>
+                  <IconDownload />
+                </Button>
+                <Button>
+                  <IconDelete />
+                </Button>
+              </ActionGroup>
+            </GalleryItem>
+          ))}
+        </Gallery>
+      </LightBox>
+    </LightBoxTrigger>
   ),
 };
 
@@ -60,13 +45,9 @@ export default meta;
 
 type Story = StoryObj<typeof Gallery>;
 
-export const Default: Story = {
-  globals: {
-    backgrounds: "dark",
-  },
-};
+export const Default: Story = {};
 
-export const InLightBox: Story = {
+export const WithoutActions: Story = {
   render: () => (
     <LightBoxTrigger>
       <Button>Trigger LightBox</Button>
@@ -74,45 +55,37 @@ export const InLightBox: Story = {
         <Gallery>
           <GalleryItem>
             <Image alt="Gopher" src={dummyText.imageSrc} />
-            <ActionGroup>
-              <Button>
-                <IconDownload />
-              </Button>
-              <Button>
-                <IconDelete />
-              </Button>
-            </ActionGroup>
           </GalleryItem>
-          <GalleryItem>
-            <Image
-              alt="Gopher"
-              src="https://media.istockphoto.com/id/1985150440/de/foto/neuseeland-roadtrip-am-lake-hawea.jpg?s=1024x1024&w=is&k=20&c=QawaBh-Lt6shSjnZuZkbsEzvSfpozsXxk23DJdNFKKw="
-            />
-            <ActionGroup>
-              <Button>
-                <IconDownload />
-              </Button>
-              <Button>
-                <IconDelete />
-              </Button>
-            </ActionGroup>
-          </GalleryItem>
-          <GalleryItem>
-            <Image
-              alt="Gopher"
-              src="https://media.istockphoto.com/id/1040315976/de/foto/frau-betrachten-aus-einer-h%C3%B6hle-von-matera-basilikata-italien.jpg?s=1024x1024&w=is&k=20&c=Mno5w0gKMbZV7E3zjf0F5kkGRdBxf9XfwWzM_p8G0ZU="
-            />
-            <ActionGroup>
-              <Button>
-                <IconDownload />
-              </Button>
-              <Button>
-                <IconDelete />
-              </Button>
-            </ActionGroup>
-          </GalleryItem>
+          {images.map((src) => (
+            <GalleryItem>
+              <Image alt="" src={src} />
+            </GalleryItem>
+          ))}
         </Gallery>
       </LightBox>
     </LightBoxTrigger>
+  ),
+};
+
+export const WithImageTriggers: Story = {
+  render: () => (
+    <Flex gap="m">
+      {images.map((src, index) => (
+        <LightBoxTrigger key={index}>
+          <Button>
+            <Image alt="" src={src} height="100px" withBorder />
+          </Button>
+          <LightBox>
+            <Gallery defaultIndex={index}>
+              {images.map((src) => (
+                <GalleryItem>
+                  <Image src={src} />
+                </GalleryItem>
+              ))}
+            </Gallery>
+          </LightBox>
+        </LightBoxTrigger>
+      ))}
+    </Flex>
   ),
 };

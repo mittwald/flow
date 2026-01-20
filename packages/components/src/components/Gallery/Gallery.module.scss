@@ -3,15 +3,66 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  --button-width: calc(
+    var(--icon--size--m) + 2 * var(--button--padding-icon-only)
+  );
 
   .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: var(--light-box--max-height);
+    width: calc(
+      var(--light-box--max-width) -
+        ((var(--button-width) * 2) + var(--light-box--spacing))
+    );
   }
 
-  .paginationDots {
+  .indicators {
     display: flex;
     justify-content: center;
+    padding-top: var(--light-box--spacing);
+    column-gap: var(--light-box--indicator-spacing);
+  }
+
+  .indicator {
+    display: flex;
+  }
+
+  .galleryItem {
+    display: flex;
+    justify-content: center;
+    max-height: calc(
+      var(--light-box--max-height) -
+        (var(--light-box--spacing) + var(--icon--size--m))
+    );
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      margin-right: calc(var(--button-width) * -1);
+      margin-inline-start: var(--light-box--spacing);
+      row-gap: var(--light-box--spacing);
+    }
+    .actionGroup {
+      flex-grow: 0;
+      flex-direction: column;
+      row-gap: var(--light-box--spacing);
+    }
+
+    .image {
+      animation: fadeIn var(--transition--duration--default) ease-in forwards;
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 }

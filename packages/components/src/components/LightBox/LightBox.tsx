@@ -52,7 +52,6 @@ export const LightBox = flowComponent("LightBox", (props) => {
       tunnelId: "actionGroup",
     },
     Gallery: {
-      height: "var(--light-box--max-height)",
       className: styles.gallery,
     },
   };

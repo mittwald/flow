@@ -7,3 +7,5 @@ light-box:
     value: "calc(100dvh - {size-px.l})"
   spacing:
     value: "{size-px.m}"
+  indicator-spacing:
+    value: "{size-px.xs}"
