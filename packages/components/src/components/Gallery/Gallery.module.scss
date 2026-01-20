@@ -4,28 +4,14 @@
   justify-content: space-between;
   align-items: center;
 
-  .motion {
-    position: absolute;
-    inset: 0;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .paginationDots {
-    position: absolute;
-    bottom: 0;
     display: flex;
     justify-content: center;
-    left: 0;
-    right: 0;
-  }
-
-  .paginationDot {
-    display: block;
-    border: 2px solid #000;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    &.current {
-      background-color: #000;
-    }
   }
 }

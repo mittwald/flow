@@ -33,4 +33,14 @@
   .actions {
     padding-left: var(--light-box--spacing);
   }
+
+  .gallery {
+    width: var(--light-box--max-width);
+  }
+
+  &:has(.gallery) {
+    .actions {
+      margin-left: -56px;
+    }
+  }
 }

@@ -53,6 +53,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
     },
     Gallery: {
       height: "var(--light-box--max-height)",
+      className: styles.gallery,
     },
   };
 

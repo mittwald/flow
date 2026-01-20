@@ -25,7 +25,24 @@ const meta: Meta<typeof Gallery> = {
         </ActionGroup>
       </GalleryItem>
       <GalleryItem>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image
+          alt="Gopher"
+          src="https://media.istockphoto.com/id/1985150440/de/foto/neuseeland-roadtrip-am-lake-hawea.jpg?s=1024x1024&w=is&k=20&c=QawaBh-Lt6shSjnZuZkbsEzvSfpozsXxk23DJdNFKKw="
+        />
+        <ActionGroup>
+          <Button>
+            <IconDownload />
+          </Button>
+          <Button>
+            <IconDelete />
+          </Button>
+        </ActionGroup>
+      </GalleryItem>{" "}
+      <GalleryItem>
+        <Image
+          alt="Gopher"
+          src="https://media.istockphoto.com/id/1040315976/de/foto/frau-betrachten-aus-einer-h%C3%B6hle-von-matera-basilikata-italien.jpg?s=1024x1024&w=is&k=20&c=Mno5w0gKMbZV7E3zjf0F5kkGRdBxf9XfwWzM_p8G0ZU="
+        />
         <ActionGroup>
           <Button>
             <IconDownload />
@@ -43,7 +60,11 @@ export default meta;
 
 type Story = StoryObj<typeof Gallery>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  globals: {
+    backgrounds: "dark",
+  },
+};
 
 export const InLightBox: Story = {
   render: () => (
@@ -63,7 +84,24 @@ export const InLightBox: Story = {
             </ActionGroup>
           </GalleryItem>
           <GalleryItem>
-            <Image alt="Gopher" src={dummyText.imageSrc} />
+            <Image
+              alt="Gopher"
+              src="https://media.istockphoto.com/id/1985150440/de/foto/neuseeland-roadtrip-am-lake-hawea.jpg?s=1024x1024&w=is&k=20&c=QawaBh-Lt6shSjnZuZkbsEzvSfpozsXxk23DJdNFKKw="
+            />
+            <ActionGroup>
+              <Button>
+                <IconDownload />
+              </Button>
+              <Button>
+                <IconDelete />
+              </Button>
+            </ActionGroup>
+          </GalleryItem>
+          <GalleryItem>
+            <Image
+              alt="Gopher"
+              src="https://media.istockphoto.com/id/1040315976/de/foto/frau-betrachten-aus-einer-h%C3%B6hle-von-matera-basilikata-italien.jpg?s=1024x1024&w=is&k=20&c=Mno5w0gKMbZV7E3zjf0F5kkGRdBxf9XfwWzM_p8G0ZU="
+            />
             <ActionGroup>
               <Button>
                 <IconDownload />
