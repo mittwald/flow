@@ -58,11 +58,15 @@ class ReviewDeployer {
     ];
     const missing = required.filter((v) => !process.env[v]);
 
-    console.log("Environment Variables:");
     required.forEach((v) => {
-      console.log(
-        `  ${v}: ${process.env[v] ? "set: " + process.env[v] : "missing"}`,
-      );
+      const value = process.env[v] || "";
+      const display = value.includes("\n")
+        ? `multiline: ${value
+            .split("\n")
+            .map((l) => `"${l.trim()}"`)
+            .join(", ")}`
+        : `${value}`;
+      console.log(`  ${v}: ${value ? display : "missing"}`);
     });
 
     if (missing.length > 0) {
@@ -74,12 +78,18 @@ class ReviewDeployer {
   }
 
   private parseImages(): DockerImage[] {
-    const docsTag = process.env.DOCS_IMAGE_TAG || "";
-    const storybookTag = process.env.STORYBOOK_IMAGE_TAG || "";
+    const parseImageTag = (rawTag: string): string | null => {
+      const lines = rawTag.split("\n").map((line) => line.trim());
+      const prLine = lines.find((line) => line.includes("pr-"));
+      return prLine || null;
+    };
+
+    const docsTag = parseImageTag(process.env.DOCS_IMAGE_TAG || "");
+    const storybookTag = parseImageTag(process.env.STORYBOOK_IMAGE_TAG || "");
 
     const images: DockerImage[] = [];
 
-    if (docsTag && !docsTag.includes("sha-")) {
+    if (docsTag) {
       images.push({
         name: docsTag,
         tag: docsTag.split(":")[1] || "latest",
@@ -87,7 +97,7 @@ class ReviewDeployer {
       });
     }
 
-    if (storybookTag && !storybookTag.includes("sha-")) {
+    if (storybookTag) {
       images.push({
         name: storybookTag,
         tag: storybookTag.split(":")[1] || "latest",
@@ -349,6 +359,18 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
   async deploy(): Promise<void> {
     try {
       console.log("🚀 Starting preview deployment process...\n");
+
+      console.log(`📦 Parsed images (${this.images.length}):`);
+      this.images.forEach((img) => {
+        console.log(`   - ${img.imageType}: ${img.name}`);
+      });
+
+      if (this.images.length === 0) {
+        console.warn(
+          "⚠️  No images parsed from environment variables. Check DOCS_IMAGE_TAG and STORYBOOK_IMAGE_TAG.",
+        );
+        process.exit(1);
+      }
 
       const [existingServices, existingIngresses] = await Promise.all([
         this.getServices(),
