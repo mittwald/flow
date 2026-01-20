@@ -63,11 +63,11 @@ export const customComponents = {
   li: ({ children }: PropsWithChildren) => <li>{children}</li>,
 
   h1: ({ children }: PropsWithChildren) => (
-    <AnchorLinkHeading>{children}</AnchorLinkHeading>
+    <AnchorLinkHeading level={2}>{children}</AnchorLinkHeading>
   ),
 
   h2: ({ children }: PropsWithChildren) => (
-    <Heading level={3}>{children}</Heading>
+    <AnchorLinkHeading level={3}>{children}</AnchorLinkHeading>
   ),
 
   h3: ({ children }: PropsWithChildren) => (

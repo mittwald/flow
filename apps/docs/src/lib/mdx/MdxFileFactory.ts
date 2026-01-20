@@ -89,8 +89,11 @@ export class MdxFileFactory {
     }
     return fileContent
       .split("\n")
-      .filter((line) => line.startsWith("# "))
-      .map((line) => line.substring(2).trim());
+      .filter((line) => line.startsWith("# ") || line.startsWith("## "))
+      .map((line) => ({
+        text: line.substring(2).trim(),
+        level: line.startsWith("# ") ? 2 : 3,
+      }));
   }
 
   private static async getMdxSource(

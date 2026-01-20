@@ -1,6 +1,11 @@
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import humanizeString from "humanize-string";
 
+export interface Anchor {
+  text: string;
+  level: number;
+}
+
 export interface MdxFileMeta {
   title?: string;
   navTitle?: string;
@@ -20,7 +25,7 @@ export interface SerializedMdxFile {
   slugs: string[];
   mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   examples: MdxFileExamples;
-  anchors: string[];
+  anchors: Anchor[];
 }
 
 export class MdxFile {
@@ -30,14 +35,14 @@ export class MdxFile {
   public readonly pathname: string;
   public readonly mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   private readonly examples: MdxFileExamples;
-  public readonly anchors: string[];
+  public readonly anchors: Anchor[];
 
   public constructor(
     filename: string,
     slugs: string[],
     mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>,
     examples: MdxFileExamples,
-    anchors: string[],
+    anchors: Anchor[],
   ) {
     this.filename = filename;
     this.slugs = slugs;
