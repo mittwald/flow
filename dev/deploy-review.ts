@@ -70,18 +70,25 @@ class ReviewDeployer {
     const docsTag = process.env.DOCS_IMAGE_TAG || "";
     const storybookTag = process.env.STORYBOOK_IMAGE_TAG || "";
 
-    return [
-      {
+    const images: DockerImage[] = [];
+
+    if (docsTag && !docsTag.includes("sha-")) {
+      images.push({
         name: docsTag,
         tag: docsTag.split(":")[1] || "latest",
         imageType: "docs",
-      },
-      {
+      });
+    }
+
+    if (storybookTag && !storybookTag.includes("sha-")) {
+      images.push({
         name: storybookTag,
         tag: storybookTag.split(":")[1] || "latest",
         imageType: "storybook",
-      },
-    ];
+      });
+    }
+
+    return images;
   }
 
   private getServiceName(imageType: "docs" | "storybook"): string {
