@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.636](https://github.com/mittwald/flow/compare/0.2.0-alpha.635...0.2.0-alpha.636) (2026-01-20)
+
+### Bug Fixes
+
+* **FileCard:** fix file size format ([#2259](https://github.com/mittwald/flow/issues/2259)) ([f55c5cb](https://github.com/mittwald/flow/commit/f55c5cbab96254bd6325a5ee41c74cc07a156959))
+
 # [0.2.0-alpha.635](https://github.com/mittwald/flow/compare/0.2.0-alpha.634...0.2.0-alpha.635) (2026-01-20)
 
 **Note:** Version bump only for package @mittwald/flow-project
