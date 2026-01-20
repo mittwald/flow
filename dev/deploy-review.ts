@@ -58,6 +58,13 @@ class ReviewDeployer {
     ];
     const missing = required.filter((v) => !process.env[v]);
 
+    console.log("Environment Variables:");
+    required.forEach((v) => {
+      console.log(
+        `  ${v}: ${process.env[v] ? "set: " + process.env[v] : "missing"}`,
+      );
+    });
+
     if (missing.length > 0) {
       console.error(
         `Missing required environment variables: ${missing.join(", ")}`,
@@ -151,6 +158,8 @@ class ReviewDeployer {
 
   async updateServices(serviceUpdates: Record<string, unknown>): Promise<void> {
     console.log("🚀 Updating services...");
+
+    console.log(serviceUpdates);
 
     try {
       const response = await fetch(
