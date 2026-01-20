@@ -198,6 +198,32 @@ class ReviewDeployer {
     }
   }
 
+  async pullImage(serviceId: string): Promise<void> {
+    console.log("🔄 Pulling latest image...");
+
+    try {
+      const response = await fetch(
+        `https://api.mittwald.de/v2/stacks/${this.projectId}/services/${serviceId}/actions/pull`,
+        {
+          method: "POST",
+          headers: getApiHeaders(),
+        },
+      );
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(
+          `Failed to pull image: ${response.statusText} - ${error}`,
+        );
+      }
+
+      console.log("✅ Image pull triggered successfully");
+    } catch (error) {
+      console.error("❌ Failed to pull image:", error);
+      throw error;
+    }
+  }
+
   async createIngress(
     hostname: string,
     containerId: string,
@@ -256,20 +282,10 @@ class ReviewDeployer {
     let containerId = existingService?.id;
 
     if (existingService) {
-      console.log(`   Service ${serviceName} already exists, updating...`);
-
-      const serviceUpdates: Record<string, unknown> = {};
-      serviceUpdates[serviceName] = {
-        description,
-        image: image.name,
-        entrypoint: [],
-        command: [],
-        volumes: [],
-        ports: ["80/tcp"],
-        envs: {},
-      };
-
-      await this.updateServices(serviceUpdates);
+      console.log(
+        `   Service ${serviceName} already exists, pulling new image...`,
+      );
+      await this.pullImage(existingService.id);
       containerId = existingService.id;
     } else {
       console.log(`   Service ${serviceName} does not exist, creating...`);
