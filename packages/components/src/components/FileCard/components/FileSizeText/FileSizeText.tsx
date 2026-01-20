@@ -12,7 +12,7 @@ export const FileSizeText: FC<Props> = (props) => {
 
   return (
     <Text className={styles.subTitle}>
-      {new Intl.NumberFormat(undefined, {
+      {new Intl.NumberFormat("en-US", {
         notation: "compact",
         style: "unit",
         unit: "byte",
