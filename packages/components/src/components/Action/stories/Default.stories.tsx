@@ -12,6 +12,8 @@ import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { Action } from "@/components/Action";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
+import { MenuItem } from "@/components/MenuItem";
 
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
@@ -99,5 +101,26 @@ export const WithConfirmationModal: Story = {
         Delete customer
       </Button>
     </Action>
+  ),
+};
+
+export const InContextMenu: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <Action onAction={asyncFunction}>
+          <MenuItem>Async</MenuItem>
+        </Action>
+        <Action onAction={asyncLongFunction}>
+          <MenuItem>Async Long</MenuItem>
+        </Action>
+        <Action onAction={asyncFunction}>
+          <Action onAction={asyncFunction}>
+            <MenuItem>Nested Async</MenuItem>
+          </Action>
+        </Action>
+      </ContextMenu>
+    </ContextMenuTrigger>
   ),
 };
