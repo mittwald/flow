@@ -2,6 +2,7 @@ import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import humanizeString from "humanize-string";
 
 export interface Anchor {
+  slug: string;
   text: string;
   level: number;
 }
