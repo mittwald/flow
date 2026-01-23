@@ -7,15 +7,15 @@ import {
 } from "@mittwald/flow-react-components";
 import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import styles from "@/lib/mdx/components/MdxFileView/customComponents.module.css";
-import { onlyText } from "react-children-utilities";
 import slugify from "slugify";
 
 interface Props extends PropsWithChildren {
   level: number;
+  slugText: string;
 }
 
 export const AnchorLinkHeading: FC<Props> = (props) => {
-  const { children, level } = props;
+  const { children, level, slugText } = props;
 
   const [url, setUrl] = useState<string>("");
 
@@ -23,7 +23,7 @@ export const AnchorLinkHeading: FC<Props> = (props) => {
     setUrl(window.location.origin + window.location.pathname);
   }, []);
 
-  const slug = slugify(onlyText(children), { lower: true, strict: true });
+  const slug = slugify(slugText, { lower: true, strict: true });
 
   const copyValue = () => {
     navigator.clipboard.writeText(`${url}#${slug}`);

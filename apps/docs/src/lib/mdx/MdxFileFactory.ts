@@ -87,13 +87,32 @@ export class MdxFileFactory {
     if (!fileContent) {
       throw new Error(`Could not read file: ${filename}`);
     }
+
+    let currentH1: string;
+
     return fileContent
       .split("\n")
       .filter((line) => line.startsWith("# ") || line.startsWith("## "))
-      .map((line) => ({
-        text: line.substring(2).trim(),
-        level: line.startsWith("# ") ? 2 : 3,
-      }));
+      .map((line) => {
+        if (line.startsWith("# ")) {
+          const text = line.substring(2).trim().replaceAll(".", "");
+          currentH1 = text;
+
+          return {
+            anchor: text,
+            text,
+            level: 2,
+          };
+        }
+
+        const h2Text = line.substring(3).trim();
+
+        return {
+          anchor: currentH1 ? `${currentH1}-${h2Text}` : h2Text,
+          text: h2Text,
+          level: 3,
+        };
+      });
   }
 
   private static async getMdxSource(

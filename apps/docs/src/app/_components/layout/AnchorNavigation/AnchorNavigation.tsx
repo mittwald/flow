@@ -37,7 +37,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
           setActiveAnchor(visible[0]!.target.id);
         } else {
           const aboveViewport = anchors
-            .map((a) => slugify(a.text, { lower: true, strict: true }))
+            .map((a) => slugify(a.anchor, { lower: true, strict: true }))
             .map((id) => document.getElementById(id))
             .filter((el): el is HTMLElement => el !== null)
             .filter(
@@ -49,7 +49,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
           if (aboveViewport) {
             setActiveAnchor(aboveViewport.id);
           } else if (!activeAnchor && anchors.length > 0) {
-            const firstSlug = slugify(anchors[0]!.text, {
+            const firstSlug = slugify(anchors[0]!.anchor, {
               lower: true,
               strict: true,
             });
@@ -64,7 +64,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
       },
     );
     anchors.forEach((a) => {
-      const slug = slugify(a.text, { lower: true, strict: true });
+      const slug = slugify(a.anchor, { lower: true, strict: true });
       const el = document.getElementById(slug);
       if (el) observer.observe(el);
     });
@@ -78,13 +78,13 @@ export const AnchorNavigation: FC<Props> = (props) => {
         <Heading level={4}>{title}</Heading>
         <Navigation>
           {anchors.map((a) => {
-            const slug = slugify(a.text, { lower: true, strict: true });
+            const slug = slugify(a.anchor, { lower: true, strict: true });
 
             return (
               <Link
                 aria-current={slug === activeAnchor ? "page" : undefined}
                 href={`${currentPath}#${slug}`}
-                key={a.text}
+                key={a.anchor}
                 style={{
                   marginInlineStart: a.level !== 2 ? "16px" : undefined,
                 }}
