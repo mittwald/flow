@@ -6,6 +6,44 @@ import React from "react";
 const colors = ["primary", "danger", "unavailable", "dark", "light"] as const;
 
 test.each(testEnvironments)(
+  "IllustratedMessage content (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Heading,
+      IconStar,
+      IllustratedMessage,
+      Text,
+      Button,
+      ActionGroup,
+      ProgressBar,
+      Label,
+    },
+  }) => {
+    await render(
+      <IllustratedMessage>
+        <IconStar />
+        <Heading>Heading</Heading>
+        <Text>Text</Text>
+        <Button>Button</Button>
+        <ProgressBar value={75}>
+          <Label>Label</Label>
+        </ProgressBar>
+        <ActionGroup>
+          <Button variant="soft" color="secondary">
+            Secondary
+          </Button>
+          <Button>Primary</Button>
+        </ActionGroup>
+      </IllustratedMessage>,
+    );
+
+    await testScreenshot("IllustratedMessage content");
+  },
+);
+
+test.each(testEnvironments)(
   "IllustratedMessage colors (%s)",
   async ({
     testScreenshot,
@@ -19,9 +57,6 @@ test.each(testEnvironments)(
       Button,
       Wrap,
       AccentBox,
-      ActionGroup,
-      ProgressBar,
-      Label,
     },
   }) => {
     await render(
@@ -34,15 +69,6 @@ test.each(testEnvironments)(
                 <Heading>Heading</Heading>
                 <Text>Text</Text>
                 <Button>Button</Button>
-                <ProgressBar value={75}>
-                  <Label>Label</Label>
-                </ProgressBar>
-                <ActionGroup>
-                  <Button variant="soft" color="secondary">
-                    Secondary
-                  </Button>
-                  <Button>Primary</Button>
-                </ActionGroup>
               </IllustratedMessage>
             </AccentBox>
           </Wrap>
