@@ -10,6 +10,7 @@ import type {
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
+import slugify from "slugify";
 
 export class MdxFileFactory {
   public static async fromDir(
@@ -99,7 +100,7 @@ export class MdxFileFactory {
           currentH1 = text;
 
           return {
-            anchor: text,
+            slug: slugify(text, { lower: true, strict: true }),
             text,
             level: 2,
           };
@@ -108,7 +109,10 @@ export class MdxFileFactory {
         const h2Text = line.substring(3).trim();
 
         return {
-          anchor: currentH1 ? `${currentH1}-${h2Text}` : h2Text,
+          slug: slugify(currentH1 ? `${currentH1}-${h2Text}` : h2Text, {
+            lower: true,
+            strict: true,
+          }),
           text: h2Text,
           level: 3,
         };
