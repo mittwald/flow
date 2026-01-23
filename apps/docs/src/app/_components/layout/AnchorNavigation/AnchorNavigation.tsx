@@ -36,8 +36,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
           setActiveAnchor(visible[0]!.target.id);
         } else {
           const aboveViewport = anchors
-            .map((a) => a.slug)
-            .map((id) => document.getElementById(id))
+            .map((a) => document.getElementById(a.slug))
             .filter((el): el is HTMLElement => el !== null)
             .filter(
               (el) =>
