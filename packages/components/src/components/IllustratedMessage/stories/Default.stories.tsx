@@ -8,6 +8,7 @@ import {
   IconApp,
   IconDanger,
   IconInfo,
+  IconUnavailable,
 } from "@/components/Icon/components/icons";
 import { ActionGroup } from "@/components/ActionGroup";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -48,6 +49,18 @@ export const Danger: Story = {
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
       <Button>Go back</Button>
+    </IllustratedMessage>
+  ),
+};
+
+export const Unavialable: Story = {
+  render: (props) => (
+    <IllustratedMessage {...props} color="unavailable">
+      <IconUnavailable />
+      <Heading>Project not found</Heading>
+      <Text>
+        This project no longer exists or you don’t have permission to view it
+      </Text>
     </IllustratedMessage>
   ),
 };

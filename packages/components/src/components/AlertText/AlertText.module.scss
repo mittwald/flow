@@ -3,13 +3,13 @@
 
   .icon {
     vertical-align: -0.18em;
-    margin-inline-end: var(--inline-alert--spacing);
+    margin-inline-end: var(--alert-text--spacing);
   }
 
   /* Colors */
   @mixin status($status) {
     &:where(.#{$status}) {
-      color: var(--inline-alert--#{$status}-color);
+      color: var(--alert-text--#{$status}-color);
     }
   }
 
