@@ -19,6 +19,10 @@
     border: none;
   }
 
+  &:not(.tiles) {
+    overflow: hidden;
+  }
+
   &.tiles {
     display: grid;
     border: none;
