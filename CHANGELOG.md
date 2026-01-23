@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.641](https://github.com/mittwald/flow/compare/0.2.0-alpha.640...0.2.0-alpha.641) (2026-01-23)
+
+### Bug Fixes
+
+* **List:** fix borders and focus ([#2263](https://github.com/mittwald/flow/issues/2263)) ([ae88448](https://github.com/mittwald/flow/commit/ae88448e264cedbfdd1351570c40d46a2b20f555))
+
 # [0.2.0-alpha.640](https://github.com/mittwald/flow/compare/0.2.0-alpha.639...0.2.0-alpha.640) (2026-01-23)
 
 **Note:** Version bump only for package @mittwald/flow-project
