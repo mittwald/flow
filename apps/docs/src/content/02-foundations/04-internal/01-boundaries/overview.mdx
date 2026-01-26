@@ -14,9 +14,9 @@ vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries
 erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer
 Teile der Anwendung.
 
-Boundaries wie "LayoutCard", "Section" rendern das jeweilige Element, Boundaries
-mit dem Zusatz "Fragment" nutzen die Fehler und Ladezustände des jeweiligen
-Elements, rendern am Ende aber nur ein Fragment
+Boundaries wie "LayoutCard" und "Section" rendern das jeweilige Element,
+Boundaries mit dem Zusatz "Fragment" nutzen die Fehler und Ladezustände des
+jeweiligen Elements, rendern am Ende aber nur ein Fragment.
 
 | Typ                                 | Verwendung                                                     | Fehlerfall                                                                             | Loading                                                                                      |
 | ----------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -33,12 +33,12 @@ Elements, rendern am Ende aber nur ein Fragment
 | `Avatar`                            | Für Avatare                                                    | <LiveCodeEditor example="avatar-error" editorDisabled/>                                | <LiveCodeEditor example="avatar-loading" editorDisabled/>                                    |
 | `Text` / `String`                   | Für Texte                                                      | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="text-loading" editorDisabled/>                                      |
 
-## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
+## Inhalte einer LayoutCard
 
 Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
 der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
 umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
-`sectionsCount` mitgegeben, um die LoadingView passend darzustellen.
+`sectionsCount` mitgegeben, um die Loading View passend darzustellen.
 
 ### Listenseite
 
@@ -93,7 +93,7 @@ export const CronjobPage: FC = () => (
 );
 ```
 
-### Tab (WithBoundaries.SectionsFragment)
+### Tab
 
 Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es
 sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich
@@ -125,7 +125,7 @@ export const CronjobTabs: FC = () => (
 );
 ```
 
-## Modals (WithBoundaries.Modal)
+## Modals
 
 Für Modals sollte immer ein `WithBoundaries.Modal` verwendet werden. Dies
 verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal
@@ -165,7 +165,7 @@ export const RenameCronjobModal: FC<Props> = (props) => (
 );
 ```
 
-## Inhalte einzelner Sections (WithBoundaries.Section)
+## Inhalte einzelner Sections
 
 Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen
 Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken.
@@ -190,7 +190,7 @@ export const AppInstallationSection: FC<Props> = (props) => (
 ```
 
 **Sonderfall:** Manche Sections werden nur unter bestimmten Bedingungen
-angezeigt. In diesen Situationen soll keine eigene LoadingView erzeugt werden,
+angezeigt. In diesen Situationen soll keine eigene Loading View erzeugt werden,
 damit Nutzer kein Ladeverhalten sehen, das später nicht zu einem sichtbaren
 Ergebnis führt. Für solche Fälle eignet sich `WithBoundaries.Fragment`, da es
 die Section schützt, ohne einen sichtbaren Ladezustand zu erzeugen.
@@ -215,7 +215,7 @@ export const AppInstallationSection: FC<Props> = (props) => (
 );
 ```
 
-## Inhalte eines Diagramms (WithBoundaries.ChartFragment)
+## Inhalte eines Diagramms
 
 Diagramme beziehen in der Regel viele Daten aus externen Services und sind daher
 fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für das
@@ -227,7 +227,7 @@ fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für d
 </WithBoundaries.ChartFragment>
 ```
 
-## Inhalte einzelner kleinerer Elemente
+## Inhalte einzelner Elemente
 
 Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden oft
 dynamisch geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen.
@@ -235,7 +235,11 @@ Diese sollten daher separat geschützt werden, um nicht die gesamte Seite zu
 blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im
 Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
-### Texte (WithBoundaries.Text)
+### Texte
+
+Für Texte gibt es die `WithBoundaries.Text` Component, bzw die
+`WithBoundaries.String` Component, je nachdem ob am Ende eine `Text` Component
+oder nur ein String gerendert werden soll.
 
 ```
 <LabeledValue>
@@ -246,7 +250,7 @@ Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 </LabeledValue>
 ```
 
-Zusätzlich gibt es Components die direkt auf ein Model angewendet werden können
+Zusätzlich gibt es Components, die direkt auf ein Model angewendet werden können
 und eine eingebaute Boundary besitzen.
 
 ```
@@ -257,11 +261,11 @@ und eine eingebaute Boundary besitzen.
 <ModelLabeledValue model={cronjob}/>
 ```
 
-### Alerts / Badges (WithBoundaries.Fragment)
+### Alerts / Badges
 
 Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder
 Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So
-bleiben sie geschützt, ohne eine eigene LoadingView auszulösen.
+bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
@@ -284,7 +288,11 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 );
 ```
 
-### Field (WithBoundaries.FieldFragment)
+### Field
+
+Für Fields kann die `WithBoundaries.FieldFragment` Component verwendet werden.
+Sie zeigt im Loading State ein Textfeld, dem optional ein Label mitgegeben
+werden kann.
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {
@@ -313,12 +321,12 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 };
 ```
 
-### ContextMenu (WithBoundaries.ContextMenu)
+### ContextMenu
 
-Um zu verhindern, dass der Inhalt des ContextMenus springt, werden Elemente die
-nachgeladene Inhalte benötigen in ein `WithBoundaries.MenuItem`gepackt, diese
-Boundary enthält kein Suspense, damit das ganze ContextMenu im Ladezustand
-verbleibt.
+Für ContextMenus wird `WithBoundaries.ContextMenu` verwendet. Um zu verhindern,
+dass der Inhalt des ContextMenus springt, werden Elemente die nachgeladene
+Inhalte benötigen in ein `WithBoundaries.MenuItem` gepackt, diese Boundary
+enthält kein Suspense, damit das ganze ContextMenu im Ladezustand verbleibt.
 
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
