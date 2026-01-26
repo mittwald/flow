@@ -60,8 +60,6 @@ export const Action = flowComponent(
     const propsContext: PropsContext = {
       Button: actionButtonContext,
 
-      SubmitButton: actionButtonContext,
-
       Link: {
         onPress: dynamic(() => ActionModel.use().execute),
       },

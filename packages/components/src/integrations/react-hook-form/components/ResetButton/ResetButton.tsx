@@ -1,41 +1,33 @@
-import { Button, type ButtonProps } from "@/components/Button";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { useFormContext } from "@/integrations/react-hook-form";
-import { type FC, useMemo } from "react";
+import { type ButtonProps } from "@/components/Button";
+import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider";
+import ButtonView from "@/views/ButtonView";
+import type { FC } from "react";
+import type { PressEvent } from "react-aria";
 
-export type ResetButtonProps = Omit<
-  ButtonProps,
-  "isFailed" | "isSucceeded" | "isPending" | "isReadOnly" | "type"
-> & {
-  buttonComponent?: FC<Omit<ButtonProps, "ref">>;
-};
+export const ResetButton: FC<ButtonProps> = (props) => {
+  const { children, onPress, isReadOnly: isReadOnlyProp, ...rest } = props;
 
-export const ResetButton = flowComponent("ResetButton", (props) => {
-  const {
-    children,
-    ref,
-    buttonComponent: ButtonComponent = Button,
-    ...rest
-  } = props;
+  const formContext = useFormContext();
 
-  const { id: formId = props.form, form, formActionModel } = useFormContext();
+  const isReadOnly = isReadOnlyProp || formContext.isReadOnly;
 
-  const ButtonViewComponent = useMemo(() => ButtonComponent, [formId]);
-  const actionState = formActionModel.state.useValue();
+  const handleOnPress = (e: PressEvent) => {
+    formContext.form.reset();
+    onPress?.(e);
+  };
 
   return (
-    <ButtonViewComponent
+    <ButtonView
       color="secondary"
       variant="soft"
       {...rest}
-      ref={ref}
-      isReadOnly={actionState === "isExecuting" || actionState === "isPending"}
-      onPress={() => form.reset()}
-      form={formId}
+      type="button"
+      onPress={handleOnPress}
+      isReadOnly={isReadOnly}
     >
       {children}
-    </ButtonViewComponent>
+    </ButtonView>
   );
-});
+};
 
 export default ResetButton;
