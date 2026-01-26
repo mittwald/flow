@@ -1,0 +1,64 @@
+# Playground
+
+Verwende `<DatePicker />`, um einen DatePicker darzustellen. Nutze ein
+`<Label />`, um Informationen zu vermitteln, die das Verständnis der
+Eingabeanforderungen erleichtern.
+
+Die Values des DatePickers sind Objekte aus dem
+[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
+
+<LiveCodeEditor />
+
+---
+
+# Min- und Max-Values
+
+Das wählbare Datum lässt sich über `minValue` und `maxValue` begrenzen.
+
+<LiveCodeEditor example="future" editorCollapsed />
+
+---
+
+# Verfügbare Daten
+
+Über das `isDateUnavailable` Property kann die Datumsauswahl eingeschränkt
+werden.
+
+<LiveCodeEditor example="unavailable" editorCollapsed />
+
+---
+
+# Disabled
+
+Ist der DatePicker **disabled**, ist keine Interaktion möglich.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zum DatePicker bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Benutze das [ContextualHelp](/04-components/overlays/contextual-help/overview),
+wenn zusätzliche Informationen bereitgestellt werden sollen, die zu umfangreich
+für die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der Component
+[Form (React Hook Form)](/04-components/form-controls/form-react-hook-form/overview)
+zu finden.
+
+<LiveCodeEditor example="form" editorCollapsed />

@@ -17,7 +17,7 @@ interface Props {
   params: StaticParams;
 }
 
-const contentFolder = "src/content/03-components";
+const contentFolder = "src/content/04-components";
 
 export const TabContent: FC<Props> = async (props) => {
   const { activeTab, params } = props;
@@ -57,7 +57,7 @@ export const TabContent: FC<Props> = async (props) => {
     </div>
   );
 
-  const path = `/03-components/${currentMdxFile.slugs[0]}/${currentMdxFile.slugs[1]}`;
+  const path = `/04-components/${currentMdxFile.slugs[0]}/${currentMdxFile.slugs[1]}`;
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>

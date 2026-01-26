@@ -1,0 +1,154 @@
+---
+title: Listen, Raster und Tabellen
+---
+
+Mithilfe der List können komplexe Listen-, Raster- und Tabellenansichten
+erstellt werden. So erhalten User eine übersichtliche Darstellung verschiedener
+Elemente auf einen Blick und können schnell zu einer Detailseite navigieren.
+Außerdem verfügen alle drei Ansichtsarten über die Möglichkeit zu suchen, zu
+filtern und zu sortieren.
+
+---
+
+# Zentrale Merkmale
+
+Die zwei Components [List](/04-components/structure/list/overview) und
+[Table](/04-components/structure/table/overview) dienen der kompakten Auflistung
+von Elementen. In der Verwendung ist die List jedoch häufiger relevanter.
+
+Die **Table** stellt eine einzelne, eigenständige Tabelle dar, die einer
+klassischen Zeilen- und Spaltenstruktur folgt.
+
+Die **List** besitzt einen komplexeren Aufbau. Sie umfasst drei
+Ansichtsvarianten: **Listen-, Raster-** und **Tabellenansicht** – wobei die
+Tabellenansicht die Component Table in die List integriert. Sofern technisch
+eingefügt, können User selbst entscheiden, welche Ansicht angezeigt wird.
+Darüber hinaus unterstützt die List mehrere Funktionen wie Sortierung, Filterung
+und Suche, um die Inhalte interaktiv zu steuern.
+
+Häufig sind Elemente in List und Table verlinkt, sodass User schnell zu weiteren
+Seiten – wie z. B. [Detailseiten](/03-patterns/struktur) – navigieren können.
+Außerdem lassen sich häufige Aktionen direkt an den jeweiligen Elementen
+ausführen.
+
+## Listenansicht
+
+Die Listenansicht ist besonders geeignet, wenn viele Elemente übersichtlich,
+platzsparend und gleichzeitig ansprechend dargestellt werden sollen. Sie
+repräsentiert häufig größere Elemente, bei denen es sich lohnt, einen
+[Avatar](/04-components/content/avatar/overview) anzuzeigen.
+
+Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie
+oft als Standardansicht einer List im mStudio verwendet. Um Usern weitere
+Informationen bereitzustellen, führen die sogenannten **ListItems**
+beispielsweise zu [Detailseiten](/03-patterns/struktur).
+
+<LiveCodeEditor example="domain-list" editorCollapsed bgColor="dark" />
+
+## Rasteransicht
+
+Die Rasteransicht ist sinnvoll, wenn die visuelle Darstellung im Vordergrund
+steht. Das ListItem in Form einer **Tile** enthält hier bewusst nur wenige
+Informationen, damit der [Avatar](/04-components/content/avatar/overview) bzw.
+die visuelle Repräsentation des Elements ins Auge fällt. Sie eignet sich
+besonders für Elemente, bei denen der User selbst ein Image hochgeladen hat oder
+hochladen kann. Da nur wenige inhaltliche Informationen vermittelt werden,
+eignet sich die Rasteransicht besonders gut zur Navigation.
+
+<LiveCodeEditor example="project-list" editorCollapsed bgColor="dark" />
+
+## Tabellenansicht
+
+Die Tabellenansicht eignet sich besonders für große Datenmengen, die schnell
+erfasst werden müssen, während die optische Gestaltung eine untergeordnete Rolle
+spielt. Die Spaltenüberschriften ermöglichen eine schnelle Zuordnung der
+Informationen, wodurch die Darstellung eher technisch wirkt. Sie wird vor allem
+für Detailinformationen genutzt, nicht für größere visuell hervorgehobene
+Elemente. Die Tabellenansicht verwendet die Component
+[Table](/04-components/structure/table/overview) als Bestandteil der
+[List](/04-components/structure/list/overview).
+
+<LiveCodeEditor example="ticket-list" editorCollapsed bgColor="dark" />
+
+---
+
+# Position und Aufbau
+
+[Lists](/04-components/structure/list/overview) und
+[Tables](/04-components/structure/table/overview) werden vor allem für die
+Aufzählung von Elementen verwendet – häufig als Einstiegsseiten zu
+[Detailansichten](/03-patterns/struktur).
+
+Wenn die List oder Table auch ohne sichtbare
+[Heading](/04-components/content/heading/overview) (z. B. durch den Seitentitel)
+verständlich ist, muss eine versteckte Heading darüber platziert werden. In
+diesem Fall sollte das passendes aria-label nicht vergessen werden.
+
+Eine typische **List** ist wie folgt aufgebaut:
+
+**Header:** Der Header kann
+Steuerelemente/[Buttons](/04-components/actions/button/overview) für den Wechsel
+der Ansicht (Listen-, Raster- oder Tabellenansicht) sowie für Sortierung und
+Filterung beinhalten, wobei auch mehrere Filter gleichzeitig angewendet werden
+können. Zusätzlich bietet der Header einen Action-Bereich, über den
+beispielsweise Anlegeprozesse gestartet werden können.
+
+**Body:** Im Body werden – abhängig von der ausgewählten Ansicht – entweder
+**ListItems** (in der Listen- und Rasteransicht) oder die
+[Table](/04-components/structure/table/overview)-Component angezeigt.
+
+**Footer:** Unterhalb der Inhalte zeigt der Footer an, wie viele Einträge
+bereits geladen sind und ermöglicht ein Nachladen weiterer Elemente. Um lange
+Ladezeiten zu vermeiden, sollten nicht alle Einträge auf einmal geladen werden.
+Standardmäßig empfiehlt sich eine Pagination mit 10 Elementen pro Seite.
+
+## Suche, Filter, Sortierung und Actions
+
+**Sortierung:** Die Sortierfunktion hilft, **ListItems** nach relevanten
+Kriterien zu ordnen. Dabei sollte die Standardsortierung dem häufigsten
+Anwendungsfall entsprechen, um den Einstieg zu erleichtern. Es sollten nur
+Sortieroptionen angeboten werden, die dem User echten Mehrwert bringen. Außerdem
+muss die aktive Sortierung klar erkennbar sein, damit die Orientierung jederzeit
+einfach bleibt.
+
+**Filter:** Filter ermöglichen es, Listenelemente gezielt einzugrenzen. Dabei
+werden Mehrfachauswahlen als
+[Checkboxen](/04-components/form-controls/checkbox/overview) und Einzeloptionen
+als [RadioGroup](/04-components/form-controls/radio-group/overview) dargestellt.
+Alle aktiven Filter werden als [Badges](/04-components/status/badge/overview)
+angezeigt, sodass der User jederzeit sieht, welche Filter gerade aktiv sind.
+Filter derselben Kategorie sollten logisch gruppiert werden, während Filter ohne
+Kategorie unter einem gemeinsamen
+Filter-[Button](/04-components/actions/button/overview) zusammengefasst werden.
+Filter sind in der Regel UND-verknüpft.
+
+**Suche:** Die Suchfunktion erleichtert das schnelle Auffinden einzelner
+Elemente innerhalb der List. Sie ergänzt die Sortier- und Filterfunktionen, um
+die Navigation besonders bei umfangreichen Listen effizient zu gestalten.
+
+**Actions:** Die [List](/04-components/structure/list/overview) kann eine
+[ActionGroup](/04-components/actions/action-group/overview) mit verschiedenen
+[Buttons](/04-components/actions/button/overview) enthalten, die sich auf den
+Inhalt der List beziehen. Insbesondere Anlegeprozesse (Pattern:
+[Anlegen und Bearbeiten](/03-patterns/anlegeprozess)) sollten hier über einen
+Button gestartet werden.
+
+<LiveCodeEditor example="server-list" editorCollapsed bgColor="dark" />
+
+---
+
+# Erstes Anlegen
+
+Wenn eine [List](/04-components/structure/list/overview) oder
+[Table](/04-components/structure/table/overview) noch keine Elemente enthält,
+sollte dies durch eine
+[IllustratedMessage](/04-components/content/illustrated-message/overview) oder
+einen kurzen Hinweistext (wenn wenig Platz vorhanden) sichtbar gemacht werden.
+Die Nachricht sollte erklären, warum aktuell keine Einträge vorhanden sind.
+Außerdem sollte sie dem User aufzeigen, welche Inhalte angelegt werden können
+oder welche Schritte er unternehmen kann. Zusätzlich sollte, wenn möglich, ein
+[Button](/04-components/actions/button/overview) oder
+[Link](/04-components/navigation/link/overview) angeboten werden, damit der User
+beispielsweise den Anlege-Prozess starten kann.
+
+<LiveCodeEditor example="project-list-empty" editorCollapsed bgColor="dark" />

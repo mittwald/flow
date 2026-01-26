@@ -1,0 +1,61 @@
+# Playground
+
+Verwende `<ComboBox />`, um eine ComboBox darzustellen. Nutze ein `<Label />`,
+um Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen
+erleichtern.
+
+<LiveCodeEditor />
+
+---
+
+# Custom Value
+
+Standardmäßig setzt eine ComboBox beim Verlassen des Inputfelds den Eingabewert
+entweder auf den Wert der ausgewählten Option zurück oder leert das Feld, wenn
+noch keine Option ausgewählt wurde. Mit dem Property `allowsCustomValue` kann
+dieses Verhalten überschrieben werden, um auch freie Eingaben zu erlauben.
+
+<LiveCodeEditor example="allowsCustomValue" editorCollapsed />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zur ComboBox bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Align
+
+Benutze [Align](/04-components/structure/align/overview), um einem
+[Button](/04-components/actions/button/overview) neben deiner ComboBox zu
+platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />
+
+## ContextualHelp
+
+Verwende ein [ContextualHelp](/04-components/overlays/contextual-help/overview),
+wenn du weitere Informationen bereitstellen möchtest, und diese zu lang für die
+FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der
+Component [Form (React Hook Form)](/04-components/form-controls/form-react-hook-form/overview) zu
+finden.
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+## CountryOptions
+
+Verwende die `CountryOptions` um eine Länderauswahl anzubieten.
+
+<LiveCodeEditor example="countryOptions" editorCollapsed />
