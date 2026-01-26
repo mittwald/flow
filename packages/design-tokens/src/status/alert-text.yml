@@ -1,4 +1,4 @@
-inline-alert:
+alert-text:
   spacing:
     value: "{size-rem.xs}"
   info-color:
@@ -10,4 +10,4 @@ inline-alert:
   success-color:
     value: "{success-outline-content-color}"
   unavailable-color:
-    value: "{neutral-outline-content-color}"
+    value: "{neutral.color.900}"

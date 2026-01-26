@@ -7,6 +7,8 @@ heading:
     value: "{light-plain-content-color}"
   color-danger:
     value: "{danger.color.900}"
+  color-unavailable:
+    value: "{neutral.color.900}"
   icon-to-text-spacing:
     value: "{size-rem.s}"
   font-weight:

@@ -13,6 +13,7 @@
   @include color("dark");
   @include color("light");
   @include color("danger");
+  @include color("unavailable");
 
   .headingText {
     .icon {
