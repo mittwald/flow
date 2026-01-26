@@ -26,9 +26,16 @@ const runTest = async (
   });
 
   execution.addAction(action.current);
-  void execution.executeBatch([]).catch(() => {
-    // do nothing
-  });
+  try {
+    const result = execution.executeBatch();
+    if (result instanceof Promise) {
+      result.catch(() => {
+        // ignore during tests
+      });
+    }
+  } catch {
+    // ignore during tests
+  }
   await vi.runAllTimersAsync();
 
   expect(states).toEqual(expectedStates);
