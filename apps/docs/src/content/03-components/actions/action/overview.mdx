@@ -1,7 +1,7 @@
 # Playground
 
-Lege `<Action />`, um einen [Button](/03-components/actions/button/overview), um die
-States des Buttons zu steuern.
+Lege `<Action />`, um einen [Button](/03-components/actions/button/overview), um
+die States des Buttons zu steuern.
 
 <LiveCodeEditor />
 
@@ -29,8 +29,8 @@ kann das Property `showFeedback` genutzt werden.
 
 Um User vor unbeabsichtigten Aktionen zu schützen, kann ein Bestätigungsmodal
 angezeigt werden. Dafür muss innerhalb der Action ein
-[Modal](/03-components/overlays/modal/overview) mit dem Attribut `slot="actionConfirm"`
-platziert werden.
+[Modal](/03-components/overlays/modal/overview) mit dem Attribut
+`slot="actionConfirm"` platziert werden.
 
 <LiveCodeEditor example="confirmation" editorCollapsed />
 
@@ -42,3 +42,11 @@ Wenn mehrere Aktionen auf eine Userinteraktion folgen, können Actions auch
 ineinander verschachtelt werden.
 
 <LiveCodeEditor example="nested" editorCollapsed />
+
+---
+
+# In MenuItems
+
+Actions können auch um `MenuItems` gelegt werden, um deren State zu steuern.
+
+<LiveCodeEditor example="menuItem" editorCollapsed />
