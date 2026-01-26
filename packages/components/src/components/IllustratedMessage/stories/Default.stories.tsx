@@ -53,13 +53,13 @@ export const Danger: Story = {
   ),
 };
 
-export const Unavialable: Story = {
+export const Unavailable: Story = {
   render: (props) => (
     <IllustratedMessage {...props} color="unavailable">
       <IconUnavailable />
       <Heading>Project not found</Heading>
       <Text>
-        This project no longer exists or you don’t have permission to view it
+        This project no longer exists or you don’t have permission to view it.
       </Text>
     </IllustratedMessage>
   ),

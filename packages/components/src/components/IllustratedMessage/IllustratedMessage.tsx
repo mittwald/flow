@@ -37,7 +37,7 @@ export const IllustratedMessage = flowComponent(
       },
       Heading: {
         className: styles.heading,
-        color: color,
+        color,
       },
       Text: {
         className: styles.text,

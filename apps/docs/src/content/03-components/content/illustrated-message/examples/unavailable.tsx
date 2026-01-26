@@ -1,13 +1,13 @@
 import {
   Link,
   Heading,
-  IconDanger,
+  IconUnavailable,
   IllustratedMessage,
   Text,
 } from "@mittwald/flow-react-components";
 
-<IllustratedMessage color="danger">
-  <IconDanger />
+<IllustratedMessage color="unavailable">
+  <IconUnavailable />
   <Heading>Kein Zugriff</Heading>
   <Text>
     Du hast keine Berechtigung, um auf diese Seite
