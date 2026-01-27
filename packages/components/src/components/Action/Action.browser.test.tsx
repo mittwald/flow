@@ -60,7 +60,7 @@ const clickTrigger = async (testId = "button") => {
 
 test("Sync Action is called when trigger is clicked", async () => {
   await render(
-    <Action action={syncAction1}>
+    <Action onAction={syncAction1}>
       <TestButton />
     </Action>,
   );
@@ -70,7 +70,7 @@ test("Sync Action is called when trigger is clicked", async () => {
 
 test("Action function is updated when action prop changes", async () => {
   const { rerender } = await render(
-    <Action action={syncAction1}>
+    <Action onAction={syncAction1}>
       <TestButton />
     </Action>,
   );
@@ -79,7 +79,7 @@ test("Action function is updated when action prop changes", async () => {
   expect(syncAction2).not.toHaveBeenCalledOnce();
 
   await rerender(
-    <Action action={syncAction2}>
+    <Action onAction={syncAction2}>
       <TestButton />
     </Action>,
   );
@@ -90,8 +90,8 @@ test("Action function is updated when action prop changes", async () => {
 
 test("Nested sync actions are called when trigger is clicked", async () => {
   await render(
-    <Action action={syncAction2}>
-      <Action action={syncAction1}>
+    <Action onAction={syncAction2}>
+      <Action onAction={syncAction1}>
         <TestButton />
       </Action>
     </Action>,
@@ -103,9 +103,9 @@ test("Nested sync actions are called when trigger is clicked", async () => {
 
 test("Nested sync actions are not called when break action is used", async () => {
   await render(
-    <Action action={syncAction2}>
+    <Action onAction={syncAction2}>
       <Action break>
-        <Action action={syncAction1}>
+        <Action onAction={syncAction1}>
           <TestButton />
         </Action>
       </Action>
@@ -118,10 +118,10 @@ test("Nested sync actions are not called when break action is used", async () =>
 
 test("Nested sync actions are not called when skipped", async () => {
   await render(
-    <Action action={syncAction2}>
-      <Action action={syncAction2}>
+    <Action onAction={syncAction2}>
+      <Action onAction={syncAction2}>
         <Action skip>
-          <Action action={syncAction1}>
+          <Action onAction={syncAction1}>
             <TestButton />
           </Action>
         </Action>
@@ -135,10 +135,10 @@ test("Nested sync actions are not called when skipped", async () => {
 
 test("Nested sync actions are not called when multiple skipped", async () => {
   await render(
-    <Action action={syncAction2}>
-      <Action action={syncAction2}>
+    <Action onAction={syncAction2}>
+      <Action onAction={syncAction2}>
         <Action skip={2}>
-          <Action action={syncAction1}>
+          <Action onAction={syncAction1}>
             <TestButton />
           </Action>
         </Action>
@@ -152,8 +152,8 @@ test("Nested sync actions are not called when multiple skipped", async () => {
 
 test("When nested sync actions, the inner action is called first", async () => {
   await render(
-    <Action action={syncAction2}>
-      <Action action={syncAction1}>
+    <Action onAction={syncAction2}>
+      <Action onAction={syncAction1}>
         <TestButton />
       </Action>
     </Action>,
@@ -165,7 +165,7 @@ test("When nested sync actions, the inner action is called first", async () => {
 
 test("Button is enabled again when async action has completed", async () => {
   const ui = () => (
-    <Action action={asyncAction1}>
+    <Action onAction={asyncAction1}>
       <TestButton />
     </Action>
   );
@@ -178,8 +178,8 @@ test("Button is enabled again when async action has completed", async () => {
 
 test("When nested async actions, the outer action is called after the first has completed", async () => {
   const ui = () => (
-    <Action action={asyncAction2}>
-      <Action action={asyncAction1}>
+    <Action onAction={asyncAction2}>
+      <Action onAction={asyncAction1}>
         <TestButton />
       </Action>
     </Action>
@@ -214,7 +214,7 @@ const expectNoIconInDom = () => {
 
 describe("Confirmation modal", () => {
   const testModal = () => (
-    <Action action={asyncAction1} showFeedback={false}>
+    <Action onAction={asyncAction1} showFeedback={false}>
       <Modal slot="actionConfirm">
         <Heading>Heading</Heading>
         <Content data-testid="modal">Modal content</Content>
@@ -274,7 +274,7 @@ describe("Confirmation modal", () => {
 describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {
     await render(
-      <Action action={syncAction1} showFeedback>
+      <Action onAction={syncAction1} showFeedback>
         <TestButton />
       </Action>,
     );
@@ -284,13 +284,13 @@ describe("Feedback", () => {
 
   test("is shown when set in props", async () => {
     const { rerender } = await render(
-      <Action action={syncAction1} showFeedback>
+      <Action onAction={syncAction1} showFeedback>
         <TestButton isSucceeded />
       </Action>,
     );
     expectIconInDom("check");
     await rerender(
-      <Action action={syncAction1} showFeedback>
+      <Action onAction={syncAction1} showFeedback>
         <TestButton isFailed />
       </Action>,
     );
@@ -302,7 +302,7 @@ describe("Feedback", () => {
       throw new Error("Whoops");
     });
     await render(
-      <Action action={syncAction1} showFeedback>
+      <Action onAction={syncAction1} showFeedback>
         <TestButton />
       </Action>,
     );
@@ -312,7 +312,7 @@ describe("Feedback", () => {
 
   test("is hidden after some time", async () => {
     const ui = () => (
-      <Action action={syncAction1} showFeedback>
+      <Action onAction={syncAction1} showFeedback>
         <TestButton />
       </Action>
     );
@@ -334,7 +334,7 @@ describe("Pending state", () => {
 
   test("is shown when async action is pending", async () => {
     const ui = () => (
-      <Action action={asyncAction1}>
+      <Action onAction={asyncAction1}>
         <TestButton />
       </Action>
     );
@@ -347,7 +347,7 @@ describe("Pending state", () => {
 
   test("is shown when set in props", async () => {
     await render(
-      <Action action={asyncAction1}>
+      <Action onAction={asyncAction1}>
         <TestButton isPending />
       </Action>,
     );
@@ -356,7 +356,7 @@ describe("Pending state", () => {
 
   test("is not shown when sync action is executed", async () => {
     const ui = () => (
-      <Action action={syncAction1}>
+      <Action onAction={syncAction1}>
         <TestButton />
       </Action>
     );
@@ -369,7 +369,7 @@ describe("Pending state", () => {
 
   test("is hidden after some time", async () => {
     const ui = () => (
-      <Action action={asyncAction1} showFeedback>
+      <Action onAction={asyncAction1} showFeedback>
         <TestButton />
       </Action>
     );

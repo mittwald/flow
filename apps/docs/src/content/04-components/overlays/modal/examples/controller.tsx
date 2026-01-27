@@ -40,7 +40,7 @@ export default () => {
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Action action={sleepLong}>
+            <Action onAction={sleepLong}>
               <Button color="accent">
                 Organisation anlegen
               </Button>
