@@ -1,23 +1,26 @@
 "use client";
 import type { FC } from "react";
-import React, { useId, useMemo, useState } from "react";
-import { Navigation, NavigationGroup } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
+import React, { useId, useState } from "react";
+import {
+  Heading,
+  Label,
+  LayoutCard,
+  Link,
+  Navigation,
+  NavigationGroup,
+  SearchField,
+  Section,
+  useOnChange,
+  useOverlayController,
+  Wrap,
+} from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
-import { Link } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { useOverlayController } from "@mittwald/flow-react-components";
-import { useOnChange } from "@mittwald/flow-react-components";
-import { SearchField } from "@mittwald/flow-react-components";
 import styles from "@/app/layout.module.scss";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Wrap } from "@mittwald/flow-react-components";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -106,7 +109,7 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 
 const MainNavigation: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
-  const docsTree = useMemo(() => buildDirectoryTree(docs), [docs]);
+  const docsTree = buildDirectoryTree(docs);
   const currentPathname = usePathname();
   const mainPathSegment = currentPathname.split("/")[1];
 
