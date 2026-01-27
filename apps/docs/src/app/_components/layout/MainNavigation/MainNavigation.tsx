@@ -82,7 +82,10 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
     .filter((tree) => filterBySearchValue(searchValue, tree))
     .map(([group, treeItem]) =>
       treeItem instanceof MdxFile ? (
-        <NavigationLink key={group} treeItem={treeItem} />
+        <NavigationLink
+          key={`${group}/${treeItem.pathname}`}
+          treeItem={treeItem}
+        />
       ) : (
         <NavigationSection
           key={group}
