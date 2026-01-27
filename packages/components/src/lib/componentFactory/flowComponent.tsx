@@ -23,8 +23,7 @@ import ClearPropsContextView from "@/views/ClearPropsContextView";
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
 export interface FlowComponentProps<R = HTMLDivElement>
-  extends PropsWithTunnel,
-    RefAttributes<R> {
+  extends PropsWithTunnel, RefAttributes<R> {
   wrapWith?: ReactElement;
 }
 

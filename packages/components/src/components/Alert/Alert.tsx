@@ -9,7 +9,8 @@ import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Alert.module.scss";
 
 export interface AlertProps
-  extends PropsWithChildren<ComponentProps<"aside">>,
+  extends
+    PropsWithChildren<ComponentProps<"aside">>,
     PropsWithStatus,
     FlowComponentProps<HTMLElement> {}
 

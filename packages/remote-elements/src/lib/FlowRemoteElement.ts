@@ -11,10 +11,8 @@ type ExplicitAny = any;
 
 export class FlowRemoteElement<
   Properties extends Record<string, ExplicitAny> = EmptyObject,
-  Methods extends Record<
-    string,
-    (...args: ExplicitAny[]) => void
-  > = EmptyObject,
+  Methods extends Record<string, (...args: ExplicitAny[]) => void> =
+    EmptyObject,
   Slots extends Record<string, ExplicitAny> = EmptyObject,
   EventListeners extends Record<string, ExplicitAny> = EmptyObject,
 > extends RemoteElement<Properties, Methods, Slots, EventListeners> {

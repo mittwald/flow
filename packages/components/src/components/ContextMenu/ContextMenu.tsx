@@ -18,7 +18,8 @@ import type * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
 
 export interface ContextMenuProps
-  extends Omit<PopoverProps, "withTip">,
+  extends
+    Omit<PopoverProps, "withTip">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"

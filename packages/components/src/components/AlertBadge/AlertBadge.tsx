@@ -8,7 +8,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlertBadgeProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithStatus,
     FlowComponentProps<HTMLDivElement>,
     PropsWithClassName {}

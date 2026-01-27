@@ -11,7 +11,8 @@ import {
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 
 export interface NavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">>,
+  extends
+    PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName,
     FlowComponentProps<HTMLElement> {}
 

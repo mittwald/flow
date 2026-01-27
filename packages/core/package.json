@@ -12,9 +12,9 @@
     "invariant": "^2.2.4"
   },
   "devDependencies": {
-    "@vitest/browser-playwright": "^4.0.15",
+    "@vitest/browser-playwright": "^4.0.17",
     "vite-plugin-node-polyfills": "^0.24.0",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.17"
   },
   "peerDependencies": {
     "@vitest/browser-playwright": "^4",

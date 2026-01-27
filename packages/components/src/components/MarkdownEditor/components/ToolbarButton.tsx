@@ -4,8 +4,10 @@ import { Button, type ButtonProps } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 
-export interface ToolBarButtonProps
-  extends Pick<ButtonProps, "isDisabled" | "children"> {
+export interface ToolBarButtonProps extends Pick<
+  ButtonProps,
+  "isDisabled" | "children"
+> {
   type: InsertType;
   onPress?: (type: InsertType) => void;
 }

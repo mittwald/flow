@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface TextAreaProps
-  extends Omit<
+  extends
+    Omit<
       TextFieldBaseProps,
       "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "ref"
     >,

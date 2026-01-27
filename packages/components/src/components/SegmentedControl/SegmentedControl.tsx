@@ -17,7 +17,8 @@ import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SegmentedControlProps
-  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children" | "ref">>,
+  extends
+    PropsWithChildren<Omit<Aria.RadioGroupProps, "children" | "ref">>,
     FlowComponentProps<HTMLDivElement>,
     PropsWithContainerBreakpointSize {}
 

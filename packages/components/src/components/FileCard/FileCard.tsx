@@ -19,7 +19,8 @@ import { OptionsButton } from "@/components/List/components/Items/components/Ite
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface FileCardProps
-  extends FlowComponentProps<HTMLDivElement | HTMLLIElement>,
+  extends
+    FlowComponentProps<HTMLDivElement | HTMLLIElement>,
     PropsWithClassName,
     PropsWithElementType<"div" | "li">,
     Pick<LinkProps, "onPress" | "href" | "target" | "download"> {
