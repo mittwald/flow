@@ -134,7 +134,7 @@ export default function Page() {
         </LightBox>
       </LightBoxTrigger>
 
-      <Action action={() => console.log("Projekt löschen clicked")}>
+      <Action onAction={() => console.log("Projekt löschen clicked")}>
         <Modal slot="actionConfirm">
           <Heading>Projekt löschen</Heading>
           <Content>

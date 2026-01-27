@@ -10,7 +10,7 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
 <ContextMenuTrigger>
   <Button>Trigger</Button>
   <ContextMenu>
-    <Action action={sleepLong}>
+    <Action onAction={sleepLong}>
       <MenuItem>Herunterladen</MenuItem>
     </Action>
   </ContextMenu>
