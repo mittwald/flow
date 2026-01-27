@@ -13,7 +13,8 @@ import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface RatingProps
-  extends FlowComponentProps,
+  extends
+    FlowComponentProps,
     PropsWithChildren,
     Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
   /** The value sets the amount of filled stars. @default: 0 */
