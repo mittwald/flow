@@ -46,7 +46,7 @@ export class MdxFileFactory {
     const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
 
     return mdxFiles.map((mdx) =>
-      contentFolder.includes("03-components")
+      contentFolder.includes("04-components")
         ? {
             group: mdx.slugs[0],
             component: mdx.slugs[1],

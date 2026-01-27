@@ -1,0 +1,74 @@
+# Playground
+
+Der `<Avatar />` kann mit drei verschiedenen Components befüllt werden:
+`<Image />`, `<Icon />` oder `<Initials />`.
+
+<LiveCodeEditor />
+
+---
+
+# Color
+
+Die Color bei der Kombination mit [Icon](/04-components/content/icon/overview)
+oder Initials richtet sich jeweils nach dem übergebenen Child der Component. Für
+eine gezielte Wahl der Color kann das Property `color` verwendet werden.
+
+Folgende dekorative Colors stehen zur Verfügung: **Blue, Violet, Teal, Lilac**
+und **Green**.
+
+<LiveCodeEditor example="colors" editorCollapsed />
+
+---
+
+# Sizes
+
+Der Avatar unterstützt die Sizes **Extra Small**, **Small**, **Medium** oder
+**Large**.
+
+<LiveCodeEditor example="sizes" editorCollapsed />
+
+---
+
+# Status
+
+Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
+passende Icon und die passende Color. Dieses Property darf nur verwendet werden,
+wenn der Status zusätzlich durch ein benachbartes Element (z. B.
+[Text](/04-components/content/text/overview),
+[Label](/04-components/content/label/overview) oder
+[Legende](/04-components/content/legend/overview)) eindeutig kommuniziert wird.
+
+<LiveCodeEditor example="status" editorCollapsed />
+<LiveCodeEditor example="status-example" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Image
+
+Im folgenden Code-Beispiel wird ein Avatar mit einem
+[Image](/04-components/content/image/overview) kombiniert. Wenn kein Image
+vorhanden ist, sollten Initials angezeigt werden.
+
+<LiveCodeEditor example="image" editorCollapsed />
+
+Die Initials werden automatisch aus dem Text generiert, der innerhalb von
+`<Initials />` übergeben wird. Sie dienen ausschließlich als Platzhalter für ein
+[Image](/04-components/content/image/overview).
+
+<LiveCodeEditor example="initials" editorCollapsed />
+
+## Icon
+
+Ein Avatar lässt sich mit einem beliebigen
+[Icon](/04-components/content/icon/overview) kombinieren.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+## Align
+
+Benutze die [Align](/04-components/structure/align/overview)-Component, um Text
+neben dem Avatar zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />

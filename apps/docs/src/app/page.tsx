@@ -103,7 +103,7 @@ const Home: FC = () => {
             <Text>
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
-            <Link href="/03-components/actions/action-group">Components</Link>
+            <Link href="/04-components/actions/action-group">Components</Link>
           </Section>
         </LayoutCard>
       </ColumnLayout>

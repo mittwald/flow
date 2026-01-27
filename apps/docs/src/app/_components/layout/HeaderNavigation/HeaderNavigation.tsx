@@ -23,7 +23,7 @@ const HeaderNavigation: FC<Props> = (props) => {
 
   const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
     const pathname = mdxFiles[0].pathname;
-    const isComponent = pathname.includes("03-components");
+    const isComponent = pathname.includes("04-components");
 
     return (
       <Link
