@@ -1,5 +1,6 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import { ActionExecutionBatch } from "@/components/Action/models/ActionExecutionBatch";
+import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
 
 export class ActionExecution {
   private readonly action: ActionModel;
@@ -11,13 +12,11 @@ export class ActionExecution {
   public execute = (...args: unknown[]): void => {
     const batches = this.getBatchedActions();
 
-    const executeAllBatches = async () => {
-      for (const batch of batches) {
-        await batch.executeBatch(args);
-      }
-    };
+    const executeBatchedActions = callFunctionsInOrder(
+      batches.map((b) => b.executeBatch.bind(b)),
+    );
 
-    void executeAllBatches().catch((error) => console.error(error));
+    executeBatchedActions(...args);
   };
 
   private getBatchedActions = (): ActionExecutionBatch[] => {
