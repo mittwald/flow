@@ -8,6 +8,7 @@ import { useActionButtonState } from "@/components/Action/hooks/useActionButtonS
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { ActionFn } from "@/components/Action/types";
+import { useActionState } from "@/components/Action/hooks/useActionState";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {
