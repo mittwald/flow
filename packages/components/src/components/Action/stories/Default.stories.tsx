@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   asyncFunction,
+  asyncFunctionWithError,
   asyncLongFunction,
   button,
   syncFunction,
+  syncFunctionWithError,
 } from "@/components/Button/stories/lib";
 import { Modal } from "@/components/Modal";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -78,6 +80,18 @@ export const NestedAsync: Story = {
   args: {
     onAction: asyncFunction,
     children: <Action onAction={asyncFunction}>{button}</Action>,
+  },
+};
+
+export const SyncError: Story = {
+  args: {
+    onAction: syncFunctionWithError,
+  },
+};
+
+export const AsyncError: Story = {
+  args: {
+    onAction: asyncFunctionWithError,
   },
 };
 
