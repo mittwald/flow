@@ -16,4 +16,4 @@ const contextParameters = z
   })
   .catchall(z.string());
 
-export const config = baseConfig.extend(contextParameters);
+export const config = baseConfig.extend(contextParameters.shape);
