@@ -10,8 +10,7 @@ import { Avatar } from "@/components/Avatar";
 import { Wrap } from "@/components/Wrap";
 
 export interface AvatarStackProps
-  extends PropsWithClassName,
-    PropsWithChildren {
+  extends PropsWithClassName, PropsWithChildren {
   /**
    * The total count of items, as avatars should only be displayed for the first
    * view

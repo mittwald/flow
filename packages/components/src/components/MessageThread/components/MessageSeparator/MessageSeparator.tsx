@@ -7,8 +7,7 @@ import { Separator } from "@/components/Separator";
 import { Content } from "@/components/Content";
 
 export interface MessageSeparatorProps
-  extends PropsWithChildren,
-    PropsWithClassName {}
+  extends PropsWithChildren, PropsWithClassName {}
 
 /** @flr-generate all */
 export const MessageSeparator: FC<MessageSeparatorProps> = (props) => {

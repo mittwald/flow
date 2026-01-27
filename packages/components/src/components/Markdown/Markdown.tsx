@@ -16,8 +16,7 @@ import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
 
 export interface MarkdownProps
-  extends PropsWithClassName,
-    Omit<Options, "components"> {
+  extends PropsWithClassName, Omit<Options, "components"> {
   /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
   /** Shifts all heading levels by the given offset. @default 0 */

@@ -44,7 +44,8 @@ import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface PasswordCreationFieldProps
-  extends PropsWithChildren<
+  extends
+    PropsWithChildren<
       Omit<Aria.TextFieldProps, "children" | "value" | "defaultValue"> &
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
@@ -56,8 +57,10 @@ export interface PasswordCreationFieldProps
   validationPolicy?: PolicyGenericDeclaration;
 }
 
-export interface ResolvedPolicyValidationResult
-  extends Omit<PolicyValidationResult, "isValid"> {
+export interface ResolvedPolicyValidationResult extends Omit<
+  PolicyValidationResult,
+  "isValid"
+> {
   isValid: boolean | "indeterminate";
   ruleResults: RuleValidationResult[];
 }

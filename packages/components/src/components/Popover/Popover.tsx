@@ -11,7 +11,8 @@ import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
 
 export interface PopoverProps
-  extends PropsWithChildren<Omit<Aria.PopoverProps, "children" | "ref">>,
+  extends
+    PropsWithChildren<Omit<Aria.PopoverProps, "children" | "ref">>,
     FlowComponentProps<HTMLDivElement> {
   /**
    * Whether the popover should display a tip, pointing towards the trigger

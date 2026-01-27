@@ -10,8 +10,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { Text } from "@/components/Text";
 
 export interface HeaderNavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">>,
-    PropsWithClassName {
+  extends PropsWithChildren<ComponentProps<"nav">>, PropsWithClassName {
   /** The color of the header navigation. @default "primary" */
   color?: "primary" | "dark" | "light";
 }

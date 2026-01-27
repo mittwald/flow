@@ -9,8 +9,9 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Activity } from "@/components/Activity";
 
-export interface AccordionProps
-  extends PropsWithChildren<ComponentProps<"div">> {
+export interface AccordionProps extends PropsWithChildren<
+  ComponentProps<"div">
+> {
   /** Whether the accordion should be initially expanded. */
   defaultExpanded?: boolean;
   /** The visual variant of the accordion. @default "default" */

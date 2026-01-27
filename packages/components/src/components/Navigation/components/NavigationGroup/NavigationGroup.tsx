@@ -12,7 +12,8 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 
 export interface NavigationGroupProps
-  extends PropsWithChildren<ComponentProps<"section">>,
+  extends
+    PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps<HTMLElement> {
   collapsable?: boolean;
 }

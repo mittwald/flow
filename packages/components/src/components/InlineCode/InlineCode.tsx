@@ -2,8 +2,9 @@ import type { ComponentProps, FC, PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./InlineCode.module.scss";
 
-export interface InlineCodeProps
-  extends PropsWithChildren<ComponentProps<"code">> {
+export interface InlineCodeProps extends PropsWithChildren<
+  ComponentProps<"code">
+> {
   /** The color schema of the inline code component. */
   color?: "default" | "light" | "dark";
 }

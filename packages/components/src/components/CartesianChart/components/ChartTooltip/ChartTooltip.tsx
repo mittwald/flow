@@ -31,7 +31,8 @@ export interface WithTooltipFormatters {
 }
 
 export interface ChartTooltipProps
-  extends Pick<
+  extends
+    Pick<
       Recharts.TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,

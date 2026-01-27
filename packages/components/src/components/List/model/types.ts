@@ -30,8 +30,10 @@ export interface ListSupportedComponentProps extends MultipleSelection {
   selectionBehavior?: SelectionBehavior;
 }
 
-export interface ListShape<T, TMeta = unknown>
-  extends ListSupportedComponentProps {
+export interface ListShape<
+  T,
+  TMeta = unknown,
+> extends ListSupportedComponentProps {
   settingStorageKey?: string;
 
   loader?: IncrementalLoaderShape<T>;

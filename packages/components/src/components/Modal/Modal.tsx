@@ -19,9 +19,7 @@ import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface ModalProps
-  extends PropsWithChildren,
-    FlowComponentProps,
-    PropsWithClassName {
+  extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
   /** The size of the modal. @default "s" */
   size?: "s" | "m" | "l";
   /** Whether the modal should be displayed as an off canvas. */

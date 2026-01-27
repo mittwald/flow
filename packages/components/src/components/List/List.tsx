@@ -34,7 +34,8 @@ import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 
 export interface ListProps<T, TMeta = unknown>
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     FlowComponentProps,
     Omit<
       ListShape<T, TMeta>,

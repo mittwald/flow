@@ -7,7 +7,8 @@ import clsx from "clsx";
 import styles from "./Flex.module.scss";
 
 export interface FlexProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithClassName,
     PropsWithElementType<
       | "div"

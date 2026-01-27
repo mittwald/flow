@@ -9,7 +9,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import ContextMenuSectionView from "@/views/ContextMenuSectionView";
 
 export interface SectionProps
-  extends PropsWithChildren<ComponentProps<"section">>,
+  extends
+    PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps<HTMLElement> {
   /** @internal */
   renderContextMenuSection?: boolean;

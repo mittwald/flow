@@ -9,8 +9,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 
 export interface IllustratedMessageProps
-  extends PropsWithChildren<ComponentProps<"div">>,
-    FlowComponentProps {
+  extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
   /** The color of the illustrated message. @default "primary" */
   color?: "primary" | "danger" | "unavailable" | "light" | "dark";
 }

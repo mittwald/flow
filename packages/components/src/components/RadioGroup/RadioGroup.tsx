@@ -15,7 +15,8 @@ import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface RadioGroupProps
-  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
     FlowComponentProps,
     Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
 
