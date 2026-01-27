@@ -3,6 +3,7 @@ import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
   Field,
   Form,
+  SubmitButton,
   typedField,
   useFormContext,
   type FormProps,
@@ -153,5 +154,46 @@ describe("readonly", () => {
     expect(textfield).not.toHaveAttribute("readonly");
     await userEvent.click(toggleButton);
     expect(textfield).toHaveAttribute("readonly");
+  });
+});
+
+describe("error", () => {
+  const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
+    const form = useForm<object>();
+    return (
+      <Form {...props} form={form}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("form submission error leads to unhandledrejection event", async () => {
+    const errorHandler = vitest.fn();
+
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <TestForm
+        onSubmit={() => {
+          throw new Error("Submission failed");
+        }}
+      />,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).toHaveBeenCalledWith(
+      expect.objectContaining({
+        reason: expect.objectContaining({
+          message: "Submission failed",
+        }),
+      }),
+    );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
   });
 });

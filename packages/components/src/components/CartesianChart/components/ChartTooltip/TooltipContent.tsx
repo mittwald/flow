@@ -10,7 +10,8 @@ import type { WithTooltipFormatters } from "./ChartTooltip";
 import styles from "./ChartTooltip.module.scss";
 
 interface TooltipContentProps
-  extends Pick<
+  extends
+    Pick<
       Recharts.TooltipContentProps<ValueType, NameType>,
       "active" | "payload" | "label" | "wrapperClassName"
     >,

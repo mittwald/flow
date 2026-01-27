@@ -60,7 +60,7 @@ const meta: Meta<typeof Modal> = {
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
-            <Action action={asyncLongFunction}>
+            <Action onAction={asyncLongFunction}>
               <Button color="accent">Create customer</Button>
             </Action>
             <Button color="secondary" variant="soft">

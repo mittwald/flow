@@ -25,7 +25,8 @@ import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
 export interface AutocompleteProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps<HTMLInputElement>,
     Omit<

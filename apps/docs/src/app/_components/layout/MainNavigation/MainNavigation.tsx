@@ -45,7 +45,7 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   }, [overlay]);
 
   const pathname = treeItem.pathname;
-  const isComponent = pathname.includes("03-components");
+  const isComponent = pathname.includes("04-components");
   const lastSlashIndex = currentPathname.lastIndexOf("/");
   const currentPage = isComponent
     ? currentPathname.substring(0, lastSlashIndex)
@@ -144,7 +144,7 @@ const MainNavigation: FC<Props> = (props) => {
               .filter((tree) => filterBySearchValue(searchValue, tree))
               .map(([group, treeItem]) =>
                 treeItem instanceof MdxFile ? (
-                  <NavigationLink key={group} treeItem={treeItem} />
+                  <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
                 ) : (
                   <NavigationSection
                     key={group}

@@ -5,7 +5,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import SectionHeader from "@/components/Section/components/SectionHeader/SectionHeader";
 
 export interface HeaderProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithElementType<"div" | "header" | "span">,
     FlowComponentProps<HTMLDivElement | HTMLHeadElement | HTMLSpanElement> {
   /** @internal */

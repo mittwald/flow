@@ -9,7 +9,8 @@ import type { UseFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "../FormField/FormField.module.scss";
 
 export interface TextFieldBaseProps
-  extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
     Pick<FlowComponentProps<HTMLInputElement>, "ref">,
     Pick<UseFieldComponent, "FieldErrorView" | "FieldErrorCaptureContext"> {
   /** The input element */

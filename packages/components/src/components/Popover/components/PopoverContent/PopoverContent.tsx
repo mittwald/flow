@@ -4,8 +4,7 @@ import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface PopoverContentProps
-  extends PropsWithChildren,
-    PropsWithClassName {
+  extends PropsWithChildren, PropsWithClassName {
   withTip?: boolean;
   isDialogContent?: boolean;
   isOpen?: boolean;

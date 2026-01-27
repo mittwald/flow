@@ -1,0 +1,52 @@
+# Playground
+
+Lege `<Action />`, um einen [Button](/04-components/actions/button/overview), um
+die States des Buttons zu steuern.
+
+<LiveCodeEditor />
+
+---
+
+# Pending
+
+Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert, wird der
+**Pending** State angezeigt.
+
+<LiveCodeEditor example="longAction" editorCollapsed />
+
+---
+
+# Feedback
+
+Wenn ein visuelles Feedback nach einer Userinteraktion angezeigt werden soll,
+kann das Property `showFeedback` genutzt werden.
+
+<LiveCodeEditor example="feedback" editorCollapsed />
+
+---
+
+# Bestätigungsmodal
+
+Um User vor unbeabsichtigten Aktionen zu schützen, kann ein Bestätigungsmodal
+angezeigt werden. Dafür muss innerhalb der Action ein
+[Modal](/04-components/overlays/modal/overview) mit dem Attribut
+`slot="actionConfirm"` platziert werden.
+
+<LiveCodeEditor example="confirmation" editorCollapsed />
+
+---
+
+# Verschachtelte Actions
+
+Wenn mehrere Aktionen auf eine Userinteraktion folgen, können Actions auch
+ineinander verschachtelt werden.
+
+<LiveCodeEditor example="nested" editorCollapsed />
+
+---
+
+# In MenuItems
+
+Actions können auch um `MenuItems` gelegt werden, um deren State zu steuern.
+
+<LiveCodeEditor example="menuItem" editorCollapsed />

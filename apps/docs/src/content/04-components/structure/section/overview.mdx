@@ -1,0 +1,61 @@
+# Playground
+
+Verwende `<Section />`, um eine Section darzustellen. Sie sorgt automatisch für
+feste Abstände zwischen den darin platzierten Elementen.
+
+<LiveCodeEditor />
+
+---
+
+# Mehrere Sections
+
+Wenn mehrere Sections untereinander platziert werden, werden sie automatisch
+durch einen [Separator](/04-components/structure/separator/overview) getrennt.
+
+<LiveCodeEditor example="multiple" editorCollapsed />
+
+## Sub-Headings
+
+Sections beginnen in der Regel mit einer
+H2-[Heading](/04-components/content/heading/overview). Wenn eine feinere
+Unterteilung nötig ist, können Headings auf niedrigerem Level direkt in der
+Section platziert werden. Zur optischen Verdeutlichung erhalten Sub-Headings in
+der Größe H3 automatisch einen größeren Abstand zum darüberliegenden Content.
+
+<LiveCodeEditor example="sub-heading" editorCollapsed />
+
+---
+
+# SectionAction
+
+Die Section verfügt in der rechten oberen Ecke über einen Bereich für Actions –
+die sogenannte SectionAction. Dort können ein
+[Link](/04-components/navigation/link/overview), ein
+[Switch](/04-components/form-controls/switch/overview), ein oder zwei
+[Buttons](/04-components/actions/button/overview) oder eine Kombination dieser
+Components verwendet werden.
+
+<LiveCodeEditor example="link" editorCollapsed />
+
+<LiveCodeEditor example="switch" editorCollapsed />
+
+Es können maximal zwei [Buttons](/04-components/actions/button/overview)
+nebeneinander angezeigt werden. Werden mehr als zwei Aktionen benötigt, erhält
+die Hauptaktion einen eigenen Button, während alle weiteren in ein
+[ContextMenu](/04-components/actions/context-menu/overview) verschoben werden.
+
+<LiveCodeEditor example="context-menu" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## AlertBadge und Badge
+
+Die [Heading](/04-components/content/heading/overview) kann mit einem
+[AlertBadge](/04-components/status/alert-badge/overview) oder einem
+[Badge](/04-components/status/badge/overview) ergänzt werden. Dadurch wird der
+User schnell über den Status oder über Metadaten des Inhalts einer Section
+informiert.
+
+<LiveCodeEditor example="alert-badge" editorCollapsed />

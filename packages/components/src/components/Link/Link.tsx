@@ -17,9 +17,8 @@ import { linkContext } from "@/components/Link/context";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 
 export interface LinkProps
-  extends PropsWithChildren<
-      Omit<Aria.LinkProps, "children" | "slot" | "className">
-    >,
+  extends
+    PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot" | "className">>,
     FlowComponentProps<HTMLAnchorElement>,
     PropsWithClassName {
   /** Whether the link should be styled for being displayed inside a text. */

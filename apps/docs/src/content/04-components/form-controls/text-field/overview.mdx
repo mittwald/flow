@@ -1,0 +1,85 @@
+# Playground
+
+Verwende `<TextField />`, um ein TextField anzuzeigen. Nutze ein `<Label />`, um
+Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen
+erleichtern. Weiterführende Informationen (z. B. Formatierungshinweise) können
+über die `<FieldDescription />` ergänzt werden.
+
+<LiveCodeEditor />
+
+---
+
+# Disabled
+
+Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden. Sobald
+die Ursache für die Deaktivierung behoben ist, kann das TextField wieder normal
+verwendet werden.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Validierung
+
+Um das textField zu validieren, stehen folgende Properties zur Verfügung:
+
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+- HTML Input Properties wie `type="email"`, `minLength`.
+
+Wenn die Benutzereingabe nicht den Anforderungen entspricht, wird das TextField
+invalidiert. Mittels `<FieldError />` kann eine Fehlermeldung angezeigt werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed />
+
+---
+
+# Value
+
+Standardmäßig ist der Value eines TextFields leer. Es ist möglich dem TextField
+eine uncontrolled `defaultValue` mitzugeben. Es kann auch ein controlled `value`
+für das TextField gesetzt werden, um dieses über `onChange` zu updaten.
+
+<LiveCodeEditor example="defaultValue" editorCollapsed />
+
+---
+
+# Input Properties
+
+Das TextField unterstützt die Standard-Properties eines HTML `<input />` Feldes.
+(s. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input))
+
+<LiveCodeEditor example="inputProps" editorCollapsed />
+
+---
+
+# Character Count
+
+Über das `showCharacterCount` Property wird eine FieldDescription hinzugefügt,
+die aktuelle Anzahl der Zeichen und, falls angegeben, die maximale Zeichenanzahl
+anzeigt.
+
+<LiveCodeEditor example="characterCount" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Align
+
+Benutze die [Align](/04-components/structure/align/overview) Komponente, um
+einem Button neben deinem TextField zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />
+
+## ContextualHelp
+
+Benutze die [ContextualHelp](/04-components/overlays/contextual-help/overview)
+Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
+lang für die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## React Hook Form
+
+<LiveCodeEditor example="form" editorCollapsed />

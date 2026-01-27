@@ -21,16 +21,11 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
     return from;
   };
 
-  const {
-    action: actionProp,
-    onAction: actionFn = actionProp,
-    toggleOverlay,
-    closeOverlay,
-    openOverlay,
-  } = action.actionProps;
+  const { onAction, toggleOverlay, closeOverlay, openOverlay } =
+    action.actionProps;
 
-  const maybeAction = actionFn
-    ? actionFn
+  const maybeAction = onAction
+    ? onAction
     : openOverlay
       ? getOverlayController(openOverlay)?.open
       : closeOverlay

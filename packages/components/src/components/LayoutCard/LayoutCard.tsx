@@ -8,7 +8,8 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface LayoutCardProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithElementType<"div" | "main" | "footer" | "header">,
     FlowComponentProps {}
 

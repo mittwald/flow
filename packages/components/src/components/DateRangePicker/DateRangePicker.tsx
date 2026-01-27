@@ -13,9 +13,8 @@ import {
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
-  extends PropsWithChildren<
-      Omit<Aria.DateRangePickerProps<T>, "children" | "ref">
-    >,
+  extends
+    PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children" | "ref">>,
     FlowComponentProps<HTMLSpanElement> {}
 
 /** @flr-generate all */

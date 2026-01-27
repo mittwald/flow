@@ -10,7 +10,8 @@ import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 export interface MenuItemProps
-  extends Omit<Aria.MenuItemProps, "children">,
+  extends
+    Omit<Aria.MenuItemProps, "children">,
     PropsWithChildren,
     FlowComponentProps {
   selectionVariant?: "control" | "navigation" | "switch";

@@ -11,7 +11,8 @@ import labelStyles from "../Label/Label.module.scss";
 import { useObjectRef } from "react-aria";
 
 export interface SwitchProps
-  extends PropsWithChildren<Omit<Aria.SwitchProps, "children" | "inputRef">>,
+  extends
+    PropsWithChildren<Omit<Aria.SwitchProps, "children" | "inputRef">>,
     FlowComponentProps<HTMLInputElement> {
   /**
    * Whether the label should appear before or after the switch. @default

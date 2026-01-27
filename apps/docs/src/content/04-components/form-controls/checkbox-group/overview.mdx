@@ -1,0 +1,52 @@
+# Playground
+
+Verwende `<CheckboxGroup />` zusammen mit mehreren `<Checkbox />` oder
+`<CheckboxButtons />`, um eine CheckboxGroup darzustellen. Über der
+CheckboxGroup kann ein beschreibendes
+[Label](/04-components/content/label/overview) verwendet werden.
+
+<LiveCodeEditor />
+
+---
+
+# CheckboxButtons
+
+Eine CheckboxGroup kann entweder mit
+[CheckboxButtons](/04-components/form-controls/checkbox-button/overview) oder
+[Checkboxen](/04-components/form-controls/checkbox/overview) gefüllt werden.
+
+<LiveCodeEditor example="buttons" editorCollapsed />
+
+---
+
+# Spalten
+
+Die CheckboxGroup verwendet das
+[ColumnLayout](/04-components/structure/column-layout/overview), um eine
+Anpassung der Spalten zu ermöglichen. Bei der Verwendung von CheckboxButtons
+entspricht der Default dem des ColumnLayouts, während Checkboxen im Default
+untereinander angezeigt werden.
+
+<LiveCodeEditor example="customColumns" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## FieldDescription
+
+Um wichtige Hinweise zu den Auswahloptionen der CheckboxGroup bereitzustellen,
+kann unterhalb der Gruppe eine `<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed />
+
+## ContextualHelp
+
+Benutze das [ContextualHelp](/04-components/overlays/contextual-help/overview),
+um weitere Informationen bereitstellen zu können.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## React Hook Form
+
+<LiveCodeEditor example="form" editorCollapsed />

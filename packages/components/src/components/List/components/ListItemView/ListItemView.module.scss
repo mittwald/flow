@@ -141,6 +141,7 @@
     align-content: flex-start;
     height: 100%;
     position: relative;
+    overflow: hidden;
 
     .content {
       flex-direction: column;
@@ -152,16 +153,12 @@
     }
 
     .avatarContainer {
-      width: calc(100% + var(--size-px--xxs));
-      overflow: hidden;
-      border-color: var(--list-item--border-color);
-      border-width: var(--list-item--border-width);
-      border-style: var(--list-item--border-style);
-      border-top-left-radius: var(--corner-radius--default);
-      border-top-right-radius: var(--corner-radius--default);
+      width: 100%;
+
+      border-bottom-color: var(--list-item--border-color);
+      border-bottom-width: var(--list-item--border-width);
+      border-bottom-style: var(--list-item--border-style);
       aspect-ratio: 16 / 9;
-      margin-inline-start: calc(var(--size-px--xxxs) * -1);
-      margin-block-start: calc(var(--size-px--xxxs) * -1);
       img {
         overflow-clip-margin: unset;
       }

@@ -9,7 +9,8 @@ import { TunnelEntry } from "@mittwald/react-tunnel";
 import { MenuItem } from "@/components/MenuItem";
 
 export interface TabTitleProps
-  extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
+  extends
+    Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
     PropsWithChildren {}
 
 /** @flr-generate all */

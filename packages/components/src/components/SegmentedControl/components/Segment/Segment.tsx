@@ -7,7 +7,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface SegmentProps
-  extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps<HTMLLabelElement> {}
 
 /** @flr-generate all */

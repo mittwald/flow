@@ -3,8 +3,10 @@ import styles from "@/components/DonutChart/DonutChart.module.scss";
 import { DonutChartFill } from "@/components/DonutChart/components/DonutChartFill";
 import type { DonutChartProps } from "@/components/DonutChart";
 
-interface Props
-  extends Pick<DonutChartProps, "segments" | "size" | "maxValue"> {
+interface Props extends Pick<
+  DonutChartProps,
+  "segments" | "size" | "maxValue"
+> {
   value?: number;
 }
 

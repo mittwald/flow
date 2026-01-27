@@ -20,7 +20,8 @@ export interface CartesianChartEmptyViewProps {
 }
 
 export interface CartesianChartProps
-  extends Pick<
+  extends
+    Pick<
       ComponentProps<typeof Recharts.ComposedChart>,
       "data" | "className" | "syncId" | "syncMethod"
     >,

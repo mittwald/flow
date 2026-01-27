@@ -5,11 +5,10 @@ import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
-export interface LineProps
-  extends Pick<
-    Recharts.LineProps,
-    "className" | "dataKey" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
-  > {
+export interface LineProps extends Pick<
+  Recharts.LineProps,
+  "className" | "dataKey" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
+> {
   /** The color of the line. @default "sea-green" */
   color?: CategoricalWithCustomColor;
 }

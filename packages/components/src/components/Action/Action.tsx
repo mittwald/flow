@@ -7,7 +7,7 @@ import { useConfirmationModalButtonSlot } from "@/components/Action/hooks/useCon
 import { useActionButtonState } from "@/components/Action/hooks/useActionButtonState";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { useActionState } from "@/components/Action/hooks/useActionState";
+import type { ActionFn } from "@/components/Action/types";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {
@@ -55,13 +55,21 @@ export const Action = flowComponent(
       actionModel: actionModelFromProps,
       ...actionProps
     } = props;
+
+    if ("action" in actionProps && typeof actionProps.action === "function") {
+      console.warn(
+        "The 'action' prop is now deprecated. Use 'onAction' instead.",
+      );
+      if ("onAction" in actionProps === false) {
+        actionProps.onAction = actionProps.action as ActionFn;
+      }
+    }
+
     const newActionModel = ActionModel.useNew(actionProps);
     const actionModel = actionModelFromProps ?? newActionModel;
 
     const propsContext: PropsContext = {
       Button: actionButtonContext,
-
-      SubmitButton: actionButtonContext,
 
       Link: {
         onPress: dynamic(() => ActionModel.use().execute),
