@@ -17,9 +17,7 @@ import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
 
 export interface LightBoxProps
-  extends PropsWithChildren,
-    FlowComponentProps,
-    PropsWithClassName {
+  extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
   /** An overlay controller to control the light box state. */
   controller?: OverlayController;
   /**

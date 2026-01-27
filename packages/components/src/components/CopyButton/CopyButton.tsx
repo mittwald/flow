@@ -11,7 +11,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Action } from "@/components/Action";
 
 export interface CopyButtonProps
-  extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
+  extends
+    Omit<ButtonProps, "onPress" | "aria-label" | "render">,
     FlowComponentProps<HTMLButtonElement> {
   /** The text to copy. */
   text?: string;

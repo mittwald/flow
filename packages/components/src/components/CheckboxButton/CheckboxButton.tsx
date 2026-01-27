@@ -9,8 +9,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface CheckboxButtonProps
-  extends CheckboxProps,
-    FlowComponentProps<HTMLInputElement> {}
+  extends CheckboxProps, FlowComponentProps<HTMLInputElement> {}
 
 /** @flr-generate all */
 export const CheckboxButton = flowComponent("CheckboxButton", (props) => {

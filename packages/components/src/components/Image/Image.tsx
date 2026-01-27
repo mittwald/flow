@@ -5,7 +5,8 @@ import type { ComponentProps } from "react";
 import styles from "./Image.module.scss";
 
 export interface ImageProps
-  extends Omit<ComponentProps<"img">, "ref">,
+  extends
+    Omit<ComponentProps<"img">, "ref">,
     FlowComponentProps<HTMLImageElement> {
   /** Display the image with border and rounded edges. */
   withBorder?: boolean;

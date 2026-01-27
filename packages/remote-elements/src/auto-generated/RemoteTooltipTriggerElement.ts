@@ -16,6 +16,7 @@ export class RemoteTooltipTriggerElement extends FlowRemoteElement<RemoteTooltip
       delay: {},
       isDisabled: {},
       isOpen: {},
+      shouldCloseOnPress: {},
       trigger: {},
     };
   }

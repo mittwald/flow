@@ -13,7 +13,8 @@ import clsx from "clsx";
 import styles from "./Text.module.scss";
 
 export interface TextProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {

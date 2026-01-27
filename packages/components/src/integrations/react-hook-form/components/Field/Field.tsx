@@ -14,8 +14,7 @@ import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render">,
-    PropsWithChildren {}
+  extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;

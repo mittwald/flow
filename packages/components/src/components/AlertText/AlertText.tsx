@@ -10,9 +10,7 @@ import {
 import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface AlertTextProps
-  extends PropsWithClassName,
-    PropsWithChildren,
-    FlowComponentProps {
+  extends PropsWithClassName, PropsWithChildren, FlowComponentProps {
   status?: Status | "unavailable";
 }
 

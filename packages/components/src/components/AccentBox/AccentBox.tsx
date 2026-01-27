@@ -12,7 +12,8 @@ import {
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface AccentBoxProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {

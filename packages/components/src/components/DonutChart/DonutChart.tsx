@@ -17,7 +17,8 @@ export interface DonutChartSegment {
 }
 
 export interface DonutChartProps
-  extends Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
+  extends
+    Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
     PropsWithStatus,
     PropsWithChildren {
   /** The size variant of the donut chart. @default "m" */

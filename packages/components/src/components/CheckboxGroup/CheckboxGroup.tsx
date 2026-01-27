@@ -14,7 +14,8 @@ import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface CheckboxGroupProps
-  extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
     Pick<ColumnLayoutProps, "s" | "m" | "l">,
     FlowComponentProps {}
 

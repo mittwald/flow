@@ -11,6 +11,7 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
 
   static override get remoteProperties() {
     return {
+      allowsEmptyCollection: {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-label": {},

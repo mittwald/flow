@@ -28,8 +28,7 @@ type FormComponentType = FC<
 >;
 
 export interface FormProps<F extends FieldValues>
-  extends Omit<ComponentProps<"form">, "onSubmit">,
-    PropsWithChildren {
+  extends Omit<ComponentProps<"form">, "onSubmit">, PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
   formComponent?: FC<Omit<FormComponentType, "ref">>;

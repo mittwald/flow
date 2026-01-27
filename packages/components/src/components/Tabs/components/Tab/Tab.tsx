@@ -11,8 +11,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { Activity } from "@/components/Activity";
 
 export interface TabProps
-  extends Omit<Aria.TabPanelProps, "children">,
-    PropsWithChildren {}
+  extends Omit<Aria.TabPanelProps, "children">, PropsWithChildren {}
 
 /** @flr-generate all */
 export const Tab: FC<TabProps> = (props) => {

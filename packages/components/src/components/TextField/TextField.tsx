@@ -12,7 +12,8 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface TextFieldProps
-  extends Omit<
+  extends
+    Omit<
       TextFieldBaseProps,
       "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "className"
     >,

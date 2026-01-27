@@ -16,9 +16,8 @@ import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SelectProps
-  extends PropsWithChildren<
-      Omit<Aria.SelectProps, "children" | "className" | "ref">
-    >,
+  extends
+    PropsWithChildren<Omit<Aria.SelectProps, "children" | "className" | "ref">>,
     FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
