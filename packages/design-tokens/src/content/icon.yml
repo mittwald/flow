@@ -16,3 +16,5 @@ icon:
     value: "{danger-outline-content-color}"
   success-color:
     value: "{success-outline-content-color}"
+  unavailable-color:
+    value: "{neutral.color.900}"

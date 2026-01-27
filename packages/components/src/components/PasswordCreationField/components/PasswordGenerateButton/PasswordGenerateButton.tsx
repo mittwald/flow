@@ -14,7 +14,7 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
   const translate = useLocalizedStringFormatter(locales);
 
   return (
-    <Action action={onGeneratePasswordAction} showFeedback={false}>
+    <Action onAction={onGeneratePasswordAction} showFeedback={false}>
       <Button
         data-component="generatePassword"
         isDisabled={isDisabled}

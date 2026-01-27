@@ -71,4 +71,17 @@
       color: var(--link--color-light--disabled);
     }
   }
+
+  /* AlertText Colors */
+  @mixin status($status) {
+    &:has(.alertText[class*="#{$status}"]) {
+      color: var(--inline-alert--#{$status}-color);
+    }
+  }
+
+  @include status(danger);
+  @include status(success);
+  @include status(warning);
+  @include status(info);
+  @include status(unavailable);
 }

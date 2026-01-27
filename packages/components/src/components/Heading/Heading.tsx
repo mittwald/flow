@@ -12,7 +12,7 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
   /** The color of the heading. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  color?: "primary" | "danger" | "unavailable" | "dark" | "light";
   /** The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance";
 }
@@ -53,6 +53,11 @@ export const Heading = flowComponent("Heading", (props) => {
       tunnelId: "headingContent",
       Button: {
         tunnelId: null,
+      },
+    },
+    AlertText: {
+      Icon: {
+        className: styles.icon,
       },
     },
   };

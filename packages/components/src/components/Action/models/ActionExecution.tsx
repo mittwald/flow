@@ -31,7 +31,7 @@ export class ActionExecution {
     let skipCount = 0;
 
     while (currentAction) {
-      const { action, break: $break, skip } = currentAction.actionProps;
+      const { onAction, break: $break, skip } = currentAction.actionProps;
 
       if (currentAction.needsConfirmation) {
         currentBatch.addAction(currentAction);
@@ -54,7 +54,7 @@ export class ActionExecution {
         break;
       }
 
-      if (action) {
+      if (onAction) {
         currentBatch.addAction(currentAction);
       } else {
         batches.push(currentBatch);

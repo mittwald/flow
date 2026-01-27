@@ -4,11 +4,19 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { IconApp, IconDanger } from "@/components/Icon/components/icons";
+import {
+  IconApp,
+  IconDanger,
+  IconInfo,
+  IconUnavailable,
+} from "@/components/Icon/components/icons";
 import { ActionGroup } from "@/components/ActionGroup";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
+import { Modal, ModalTrigger } from "@/components/Modal";
+import { Content } from "@/components/Content";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -41,6 +49,18 @@ export const Danger: Story = {
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
       <Button>Go back</Button>
+    </IllustratedMessage>
+  ),
+};
+
+export const Unavailable: Story = {
+  render: (props) => (
+    <IllustratedMessage {...props} color="unavailable">
+      <IconUnavailable />
+      <Heading>Project not found</Heading>
+      <Text>
+        This project no longer exists or you don’t have permission to view it.
+      </Text>
     </IllustratedMessage>
   ),
 };
@@ -103,5 +123,25 @@ export const InSection: Story = {
         <Text>Create your first app to start working on your website.</Text>
       </IllustratedMessage>
     </Section>
+  ),
+};
+
+export const InModal: Story = {
+  render: (props) => (
+    <ModalTrigger>
+      <Button>Open modal</Button>
+      <Modal>
+        <Heading>Heading</Heading>
+        <Content>
+          <Section>
+            <IllustratedMessage {...props}>
+              <IconInfo />
+              <Heading>{dummyText.short}</Heading>
+              <Text>{dummyText.medium}</Text>
+            </IllustratedMessage>
+          </Section>
+        </Content>
+      </Modal>
+    </ModalTrigger>
   ),
 };

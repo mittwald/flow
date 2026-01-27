@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import defaultMeta from "./Default.stories";
 import {
   asyncFunction,
@@ -19,11 +18,11 @@ type Story = StoryObj<typeof Action>;
 
 export const MixedAsyncSyncNested: Story = {
   args: {
-    action: asyncFunction,
+    onAction: asyncFunction,
     children: (
-      <Action action={asyncFunction}>
-        <Action action={syncFunction}>
-          <Action action={asyncFunction}>{button}</Action>
+      <Action onAction={asyncFunction}>
+        <Action onAction={syncFunction}>
+          <Action onAction={asyncFunction}>{button}</Action>
         </Action>
       </Action>
     ),

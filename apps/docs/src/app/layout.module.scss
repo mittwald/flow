@@ -72,7 +72,7 @@
 .anchorNavigation {
   position: sticky;
   top: calc(var(--header-height) + var(--size-px--m));
-  width: 280px;
+  width: 290px;
   flex-shrink: 0;
   overflow: auto !important;
   max-height: calc(
@@ -107,9 +107,14 @@
   flex-direction: column;
   row-gap: var(--section--spacing);
 
-  > h3 {
+  > h3,
+  > h4 {
     margin-top: var(--size-px--m);
   }
+}
+
+.topContent {
+  width: 100%;
 }
 
 .homeTopLayoutCard.homeTopLayoutCard {

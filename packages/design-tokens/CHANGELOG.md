@@ -3,6 +3,110 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.646](https://github.com/mittwald/flow/compare/0.2.0-alpha.645...0.2.0-alpha.646) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.645](https://github.com/mittwald/flow/compare/0.2.0-alpha.644...0.2.0-alpha.645) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.644](https://github.com/mittwald/flow/compare/0.2.0-alpha.643...0.2.0-alpha.644) (2026-01-26)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.643](https://github.com/mittwald/flow/compare/0.2.0-alpha.642...0.2.0-alpha.643) (2026-01-26)
+
+### Features
+
+* **IllustratedMessage:** support unavailable state ([192fddf](https://github.com/mittwald/flow/commit/192fddf69fa93f23fa9ea13383d3a9d63837b1f1))
+
+# [0.2.0-alpha.642](https://github.com/mittwald/flow/compare/0.2.0-alpha.641...0.2.0-alpha.642) (2026-01-26)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.641](https://github.com/mittwald/flow/compare/0.2.0-alpha.640...0.2.0-alpha.641) (2026-01-23)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.640](https://github.com/mittwald/flow/compare/0.2.0-alpha.639...0.2.0-alpha.640) (2026-01-23)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.639](https://github.com/mittwald/flow/compare/0.2.0-alpha.638...0.2.0-alpha.639) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.638](https://github.com/mittwald/flow/compare/0.2.0-alpha.637...0.2.0-alpha.638) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.637](https://github.com/mittwald/flow/compare/0.2.0-alpha.636...0.2.0-alpha.637) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.636](https://github.com/mittwald/flow/compare/0.2.0-alpha.635...0.2.0-alpha.636) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.635](https://github.com/mittwald/flow/compare/0.2.0-alpha.634...0.2.0-alpha.635) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.634](https://github.com/mittwald/flow/compare/0.2.0-alpha.633...0.2.0-alpha.634) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.633](https://github.com/mittwald/flow/compare/0.2.0-alpha.632...0.2.0-alpha.633) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.632](https://github.com/mittwald/flow/compare/0.2.0-alpha.631...0.2.0-alpha.632) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.631](https://github.com/mittwald/flow/compare/0.2.0-alpha.630...0.2.0-alpha.631) (2026-01-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.630](https://github.com/mittwald/flow/compare/0.2.0-alpha.629...0.2.0-alpha.630) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.629](https://github.com/mittwald/flow/compare/0.2.0-alpha.628...0.2.0-alpha.629) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.628](https://github.com/mittwald/flow/compare/0.2.0-alpha.627...0.2.0-alpha.628) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.627](https://github.com/mittwald/flow/compare/0.2.0-alpha.626...0.2.0-alpha.627) (2026-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.626](https://github.com/mittwald/flow/compare/0.2.0-alpha.625...0.2.0-alpha.626) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.625](https://github.com/mittwald/flow/compare/0.2.0-alpha.624...0.2.0-alpha.625) (2026-01-12)
+
+### Features
+
+* **InlineAlert:** add inline alert component ([#2233](https://github.com/mittwald/flow/issues/2233)) ([ee58fcf](https://github.com/mittwald/flow/commit/ee58fcf4d8ed83eb0a68664765bd30f2c33b2784))
+
+# [0.2.0-alpha.624](https://github.com/mittwald/flow/compare/0.2.0-alpha.623...0.2.0-alpha.624) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.623](https://github.com/mittwald/flow/compare/0.2.0-alpha.622...0.2.0-alpha.623) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.622](https://github.com/mittwald/flow/compare/0.2.0-alpha.621...0.2.0-alpha.622) (2026-01-12)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
 # [0.2.0-alpha.621](https://github.com/mittwald/flow/compare/0.2.0-alpha.620...0.2.0-alpha.621) (2026-01-08)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

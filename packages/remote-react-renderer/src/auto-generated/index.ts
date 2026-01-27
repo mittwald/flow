@@ -7,6 +7,7 @@ import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components";
 import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
 import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
+import { AlertText as AlertText } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
 import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
@@ -134,6 +135,7 @@ export const flowComponents = {
     AlertBadge,
   ),
   "flr-alert-icon": createFlowRemoteComponentRenderer("AlertIcon", AlertIcon),
+  "flr-alert-text": createFlowRemoteComponentRenderer("AlertText", AlertText),
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
   "flr-autocomplete": createFlowRemoteComponentRenderer(

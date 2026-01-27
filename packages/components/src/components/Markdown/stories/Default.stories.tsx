@@ -19,7 +19,11 @@ const meta: Meta<typeof Markdown> = {
         "[link](#)\n" +
         "> Block quote" +
         "\n - Unordered list item 1 \n - Unordered list item 2 " +
-        "\n 1. Ordered list item 1 \n 2. Ordered list item 2"}
+        "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
+        "| Column 1       | Column 2      |\n" +
+        "|---------------|---------------|\n" +
+        "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
+        "| Row 2 Cell 1  | Row 2 Cell 2  |\n"}
     </Markdown>
   ),
 };

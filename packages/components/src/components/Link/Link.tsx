@@ -74,6 +74,9 @@ export const Link = flowComponent("Link", (props) => {
       className: styles.icon,
       size: "s",
     },
+    AlertText: {
+      className: styles.alertText,
+    },
   };
 
   const unsupportedTypingsLinkProps = ariaCurrent

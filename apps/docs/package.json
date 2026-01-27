@@ -15,6 +15,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
+    "@mittwald/react-use-promise": "^4.2.2",
     "@tabler/icons-react": "^3.35.0",
     "@types/luxon": "^3.7.1",
     "@types/mdx": "^2.0.13",
