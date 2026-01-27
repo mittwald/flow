@@ -8,12 +8,12 @@ const baseConfig = z.object({
   variantKey: z.string().optional().nullable(),
 });
 
-const contextParameters = z
-  .object({
-    appInstallationId: z.string().optional(),
-    projectId: z.string().optional(),
-    customerId: z.string().optional(),
-  })
-  .catchall(z.string());
+const contextParameters = z.object({
+  appInstallationId: z.string().optional(),
+  projectId: z.string().optional(),
+  customerId: z.string().optional(),
+});
 
-export const config = baseConfig.extend(contextParameters.shape);
+export const config = baseConfig
+  .extend(contextParameters.shape)
+  .catchall(z.string());
