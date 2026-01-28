@@ -64,34 +64,32 @@ export const Rating = flowComponent("Rating", (props) => {
       value={stringValue}
       ref={localRef}
     >
-      {(renderProps) => (
-        <>
-          <FieldErrorCaptureContext>
-            <PropsContextProvider props={fieldPropsContext}>
-              {children}
-              <div className={styles.ratingSegments}>
-                {Array(5)
-                  .fill("")
-                  .map((_, index) => {
-                    const selectedValue = parseInt(
-                      renderProps.state.selectedValue ?? "0",
-                    );
+      {(renderProps) => {
+        const selectedValue = parseInt(renderProps.state.selectedValue ?? "0");
 
-                    return (
+        return (
+          <>
+            <FieldErrorCaptureContext>
+              <PropsContextProvider props={fieldPropsContext}>
+                {children}
+                <div className={styles.ratingSegments}>
+                  {Array(5)
+                    .fill("")
+                    .map((_, index) => (
                       <RatingSegment
                         key={index}
                         index={index}
                         selectedValue={selectedValue}
                         size={size}
                       />
-                    );
-                  })}
-              </div>
-            </PropsContextProvider>
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </>
-      )}
+                    ))}
+                </div>
+              </PropsContextProvider>
+            </FieldErrorCaptureContext>
+            <FieldErrorView />
+          </>
+        );
+      }}
     </Aria.RadioGroup>
   );
 });
