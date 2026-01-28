@@ -1,6 +1,5 @@
 "use client";
-import type { FC } from "react";
-import React, { useId, useState } from "react";
+import React, { type FC, useId, useState } from "react";
 import {
   Heading,
   LayoutCard,
@@ -40,6 +39,8 @@ const MainNavigation: FC<Props> = (props) => {
   const docsTree = buildDirectoryTree(docs);
   const currentPathname = usePathname();
   const mainPathSegment = currentPathname.split("/")[1];
+
+  console.log(mainPathSegment);
 
   const [searchValue, setSearchValue] = useState<string>("");
 
