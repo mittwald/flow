@@ -54,12 +54,14 @@ export const Rating = flowComponent("Rating", (props) => {
   const localRef = useObjectRef(ref);
   useMakeFocusable(localRef);
 
+  const stringValue = value?.toString();
+
   return (
     <Aria.RadioGroup
       {...rest}
       className={rootClassName}
       defaultValue={defaultValue.toString()}
-      value={value || value === 0 ? value.toString() : undefined}
+      value={stringValue}
       ref={localRef}
     >
       {(renderProps) => (
@@ -70,16 +72,20 @@ export const Rating = flowComponent("Rating", (props) => {
               <div className={styles.ratingSegments}>
                 {Array(5)
                   .fill("")
-                  .map((_, index) => (
-                    <RatingSegment
-                      key={index}
-                      index={index}
-                      selectedValue={parseInt(
-                        renderProps.state.selectedValue ?? "0",
-                      )}
-                      size={size}
-                    />
-                  ))}
+                  .map((_, index) => {
+                    const selectedValue = parseInt(
+                      renderProps.state.selectedValue ?? "0",
+                    );
+
+                    return (
+                      <RatingSegment
+                        key={index}
+                        index={index}
+                        selectedValue={selectedValue}
+                        size={size}
+                      />
+                    );
+                  })}
               </div>
             </PropsContextProvider>
           </FieldErrorCaptureContext>
