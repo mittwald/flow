@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.654](https://github.com/mittwald/flow/compare/0.2.0-alpha.653...0.2.0-alpha.654) (2026-01-28)
+
+### Features
+
+* **List:** improve mobile list header ([#2283](https://github.com/mittwald/flow/issues/2283)) ([d4cd35e](https://github.com/mittwald/flow/commit/d4cd35ee53428d9d890df950a2a4d7aceb756d9b))
+
+# [0.2.0-alpha.653](https://github.com/mittwald/flow/compare/0.2.0-alpha.652...0.2.0-alpha.653) (2026-01-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.652](https://github.com/mittwald/flow/compare/0.2.0-alpha.651...0.2.0-alpha.652) (2026-01-28)
+
+### Bug Fixes
+
+* **ContextMenu:** fix max width ([#2281](https://github.com/mittwald/flow/issues/2281)) ([3fc1dc5](https://github.com/mittwald/flow/commit/3fc1dc526e43a0ee2e12fa8a27f5cf55618c4011))
+
+# [0.2.0-alpha.651](https://github.com/mittwald/flow/compare/0.2.0-alpha.650...0.2.0-alpha.651) (2026-01-27)
+
+### Bug Fixes
+
+* **Form:** add generics to useForm (regression bug) ([#2278](https://github.com/mittwald/flow/issues/2278)) ([5f28b8a](https://github.com/mittwald/flow/commit/5f28b8a3bc9e53c60b1b06121278882c8f499b11))
+
+# [0.2.0-alpha.650](https://github.com/mittwald/flow/compare/0.2.0-alpha.649...0.2.0-alpha.650) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.649](https://github.com/mittwald/flow/compare/0.2.0-alpha.648...0.2.0-alpha.649) (2026-01-27)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

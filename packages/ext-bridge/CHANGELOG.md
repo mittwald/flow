@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.654](https://github.com/mittwald/flow/compare/0.2.0-alpha.653...0.2.0-alpha.654) (2026-01-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.653](https://github.com/mittwald/flow/compare/0.2.0-alpha.652...0.2.0-alpha.653) (2026-01-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.652](https://github.com/mittwald/flow/compare/0.2.0-alpha.651...0.2.0-alpha.652) (2026-01-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.651](https://github.com/mittwald/flow/compare/0.2.0-alpha.650...0.2.0-alpha.651) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.650](https://github.com/mittwald/flow/compare/0.2.0-alpha.649...0.2.0-alpha.650) (2026-01-27)
+
+### Bug Fixes
+
+* **ExtBridge:** config catchall ([#2276](https://github.com/mittwald/flow/issues/2276)) ([d5d6a3b](https://github.com/mittwald/flow/commit/d5d6a3b147454b8d68e973a88379ee79a5660eec))
+
 # [0.2.0-alpha.649](https://github.com/mittwald/flow/compare/0.2.0-alpha.648...0.2.0-alpha.649) (2026-01-27)
 
 ### Features

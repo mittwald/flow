@@ -88,7 +88,12 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    <Popover {...rest} controller={overlayController} isDialogContent={false}>
+    <Popover
+      {...rest}
+      className={styles.popover}
+      controller={overlayController}
+      isDialogContent={false}
+    >
       <OverlayContextProvider type="ContextMenu" controller={overlayController}>
         <ContextMenuContentView
           className={styles.contextMenu}

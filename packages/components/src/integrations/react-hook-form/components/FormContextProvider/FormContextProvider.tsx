@@ -1,4 +1,4 @@
-import type { UseFormReturn } from "react-hook-form";
+import type { FieldValues, UseFormReturn } from "react-hook-form";
 import {
   createContext,
   useContext,
@@ -11,15 +11,17 @@ import type { ActionModel } from "@/components/Action/models/ActionModel";
 import invariant from "invariant";
 import { useFormSubmitAction } from "@/integrations/react-hook-form/components/FormContextProvider/useFormSubmitAction";
 
-interface FormContext {
-  form: UseFormReturn;
+interface FormContext<F extends FieldValues> {
+  form: UseFormReturn<F>;
   id: string;
   isReadOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
   formSubmitAction: ActionModel;
 }
 
-export const FormContext = createContext<FormContext | undefined>(undefined);
+export const FormContext = createContext<FormContext<FieldValues> | undefined>(
+  undefined,
+);
 
 export interface FormContextProviderProps extends PropsWithChildren {
   form: UseFormReturn;
@@ -53,8 +55,8 @@ export const FormContextProvider = (props: FormContextProviderProps) => {
   );
 };
 
-export const useFormContext = () => {
-  const ctx = useOptionalFormContext();
+export const useFormContext = <F extends FieldValues>() => {
+  const ctx = useOptionalFormContext<F>();
   invariant(
     !!ctx,
     "Could not useFormContext() outside a Form, or multiple versions of Flow installed.",
@@ -62,6 +64,7 @@ export const useFormContext = () => {
   return ctx;
 };
 
-export const useOptionalFormContext = () => useContext(FormContext);
+export const useOptionalFormContext = <F extends FieldValues>() =>
+  useContext(FormContext) as FormContext<F> | undefined;
 
 export default FormContextProvider;

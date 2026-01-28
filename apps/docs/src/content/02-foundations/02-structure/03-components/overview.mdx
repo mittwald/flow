@@ -1,0 +1,119 @@
+Die folgenden Codebeispiele werden in der Erklärung referenziert.
+
+```
+// Flow
+<Button aria-label="Notifications: 7">
+  <IconNotification />
+  <CounterBadge count={7} />
+</Button>
+```
+
+vs.
+
+```
+// Not Flow
+<IconButton label="Benachrichtigung" icon="Notification" counterBadge={7} />
+```
+
+---
+
+# Logik
+
+Component Libraries basieren in der Regel darauf, Komponenten zu verschachteln,
+um größere Komponenten zu bauen. Das ist ein weit verbreitetes und effektives
+Pattern, das außerdem leicht verständlich ist. Genau deshalb unterstützen wir
+dieses Modell auch in Flow. Wenn man zum Beispiel ein CounterBadge innerhalb
+eines Buttons platziert, wird dieses automatisch oben rechts positioniert – so,
+wie man es erwarten würde.
+
+---
+
+# Lesbarkeit
+
+Wir haben unsere Frontend-Entwickler gefragt, was am Ende besser lesbar ist:
+
+1. Unterkomponenten über Props zu übergeben, wie das Icon im Beispiel
+2. Das Icon als Child in die Komponente zu legen.
+
+Wir haben uns für Variante 2 entschieden, da sie besonders bei mehreren
+Unterkomponenten besser lesbar ist.
+
+---
+
+# Wiederverwendbarkeit
+
+Entwickler bauen häufig eigene Komponenten, um sie wiederzuverwenden oder um die
+Implementierung aufzuteilen. Wenn es zum Beispiel bereits eine
+`UnreadNotificationsCounter`-Komponente gibt, die den Zähler aus der API lädt
+und in einem CounterBadge darstellt, kann diese einfach als Child im Button
+verwendet werden.
+
+```
+<Button>
+  <IconNotification />
+  <UnreadNotificationsCounter />
+</Button>
+```
+
+---
+
+# Suspense- / ErrorBoundaries
+
+Nur mit dem „Components-Ansatz“ ist es möglich, Child-Komponenten in Loading-
+oder ErrorBoundaries zu kapseln.
+
+```
+<Button>
+  <IconNotification />
+  <Suspense>
+    <UnreadNotificationsCounter />
+  </Suspense>
+</Button>
+```
+
+---
+
+# Aufgeblähtes Props-Interface
+
+Wenn Komponenten anfangen, Features anderer Komponenten nativ zu unterstützen,
+wird ihr Props-Interface schnell aufgebläht. Beim Beispiel `counterBadge={7}`
+könnte man denken: „Hey, das ist doch nur ein Prop mehr und leicht
+verständlich!“ Aber was ist, wenn CounterBadge mehr Eigenschaften als nur count
+unterstützt? Jede unterstützte Eigenschaft müsste dann als
+`counter[CounterProp]` im Button (und möglicherweise weiteren
+Parent-Komponenten) vorhanden sein.
+
+Aufgeblähte Gesamtbibliothek vs. All-Mighty-Components
+
+Wenn Flow für jeden Anwendungsfall spezielle Komponenten anbieten würde, müsste
+es z. B. einen `IconButton`, einen `CounterBadgeButton` und streng genommen
+sogar einen `IconCounterBadgeButton` geben. Das würde schnell zu sehr vielen
+Komponenten führen.
+
+Und was wäre, wenn man stattdessen alles direkt im Button unterstützt? Das führt
+meist zu sehr großen „All-Mighty-Components“ ohne klaren Scope und mit
+überladener Implementierung.
+
+---
+
+# Children in Unterkomponenten
+
+Nur mit dem „Components-Ansatz“ ist es möglich, Children auch in
+Unterkomponenten zu verwenden.
+
+```
+<Button aria-label="Notifications: 7">
+  <Icon>
+    <IconStar />
+  </Icon>
+  <CounterBadge count={7} />
+</Button>
+```
+
+---
+
+# Baue deine eigenen Komponenten
+
+Wenn du bestimmte Kombinationen von Komponenten häufig in deiner UI verwendest,
+kannst du dir einfach eigene Komponenten mit genau den Props bauen, die du
+benötigst.

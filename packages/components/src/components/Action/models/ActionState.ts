@@ -104,15 +104,15 @@ export class ActionState {
     }
   }
 
-  private async onDone(): Promise<void> {
+  private onDone(): Promise<void> | void {
     this.clearPendingTimeout();
     if (this.error) {
-      await this.startFailedFeedback();
+      return this.startFailedFeedback();
     } else if (
       this.showFeedback !== false &&
       (this.showFeedback || this.isAsync)
     ) {
-      await this.startSucceededFeedback();
+      return this.startSucceededFeedback();
     } else {
       this.resetAfterDone();
     }

@@ -13,6 +13,6 @@ function config() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function testUnknownContextParameters() {
-    expectTypeOf<string | undefined>(testConfig.unknownProp);
+    expectTypeOf<string | null | undefined>(testConfig.unknownProp);
   }
 }
