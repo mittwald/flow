@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.652](https://github.com/mittwald/flow/compare/0.2.0-alpha.651...0.2.0-alpha.652) (2026-01-28)
+
+### Bug Fixes
+
+* **ContextMenu:** fix max width ([#2281](https://github.com/mittwald/flow/issues/2281)) ([3fc1dc5](https://github.com/mittwald/flow/commit/3fc1dc526e43a0ee2e12fa8a27f5cf55618c4011))
+
 # [0.2.0-alpha.651](https://github.com/mittwald/flow/compare/0.2.0-alpha.650...0.2.0-alpha.651) (2026-01-27)
 
 ### Bug Fixes
