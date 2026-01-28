@@ -18,48 +18,61 @@ import { SortingMenuItem } from "@/components/List/components/Header/components/
 
 export const CombinedFilterMenu: FC = () => {
   const list = useList();
-
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const filters = list.filters;
-  const filterItems = filters.map((f, i) => {
-    const activeFilterKeys = f.values
-      .filter((v) => v.isActive)
-      .map((v) => v.id);
-
+  const filterSections = list.filters.map((f) => {
+    const activeKeys = f.values.filter((v) => v.isActive).map((v) => v.id);
     return (
-      <React.Fragment key={f.property}>
-        <ContextMenuSectionView
-          selectionMode={f.mode === "one" ? "single" : "multiple"}
-          selectedKeys={activeFilterKeys}
-        >
-          <HeadingView>{f.name ?? f.property}</HeadingView>
-          {f.values.map((v) => (
-            <FilterMenuItem key={v.id} filterValue={v} />
-          ))}
-        </ContextMenuSectionView>
-        {i + 1 < filters.length && <SeparatorView />}
-      </React.Fragment>
+      <ContextMenuSectionView
+        key={f.property}
+        selectionMode={f.mode === "one" ? "single" : "multiple"}
+        selectedKeys={activeKeys}
+      >
+        <HeadingView>{f.name ?? f.property}</HeadingView>
+        {f.values.map((v) => (
+          <FilterMenuItem key={v.id} filterValue={v} />
+        ))}
+      </ContextMenuSectionView>
     );
   });
-  const showFilters = filters.length > 0;
 
-  const selectedViewMode = list.viewMode;
   const availableViewModes = useAvailableViewModes();
-  const viewModeItems = availableViewModes.map((viewMode) => (
-    <ViewModeMenuItem viewMode={viewMode} key={viewMode} />
-  ));
-  const showViewMode = viewModeItems.length > 1;
+  const selectedViewMode = list.viewMode;
+  const viewModeSection =
+    availableViewModes.length > 1 ? (
+      <ContextMenuSectionView
+        selectionMode="single"
+        selectedKeys={[selectedViewMode]}
+      >
+        <HeadingView>
+          {stringFormatter.format("list.settings.viewMode")}
+        </HeadingView>
+        {availableViewModes.map((vm) => (
+          <ViewModeMenuItem key={vm} viewMode={vm} />
+        ))}
+      </ContextMenuSectionView>
+    ) : null;
 
   const sortingItems = list.visibleSorting.map((s) => (
-    <SortingMenuItem sorting={s} key={s.id} />
+    <SortingMenuItem key={s.id} sorting={s} />
   ));
   const labelSorting = list.visibleSorting.find((s) => s.isSorted());
-  const showSorting = sortingItems.length > 0;
+  const sortingSection =
+    sortingItems.length > 0 ? (
+      <ContextMenuSectionView
+        selectionMode="single"
+        selectedKeys={labelSorting ? [labelSorting.id] : []}
+      >
+        <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
+        {sortingItems}
+      </ContextMenuSectionView>
+    ) : null;
 
-  if (!showSorting && !showViewMode && !showFilters) {
-    return null;
-  }
+  const sections = [viewModeSection, sortingSection, ...filterSections].filter(
+    Boolean,
+  );
+
+  if (sections.length === 0) return null;
 
   return (
     <ContextMenuTriggerView>
@@ -71,34 +84,14 @@ export const CombinedFilterMenu: FC = () => {
       >
         <IconFilter />
       </ButtonView>
+
       <ContextMenuView>
-        {showViewMode && (
-          <ContextMenuSectionView
-            selectionMode="single"
-            selectedKeys={[selectedViewMode]}
-          >
-            <HeadingView>
-              {stringFormatter.format("list.settings.viewMode")}
-            </HeadingView>
-            {viewModeItems}
-          </ContextMenuSectionView>
-        )}
-
-        {showViewMode && showSorting && <SeparatorView />}
-
-        {showSorting && (
-          <ContextMenuSectionView
-            selectionMode="single"
-            selectedKeys={labelSorting ? [labelSorting.id] : []}
-          >
-            <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
-            {sortingItems}
-          </ContextMenuSectionView>
-        )}
-
-        {(showSorting || showViewMode) && showFilters && <SeparatorView />}
-
-        {filterItems}
+        {sections.map((section, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && <SeparatorView />}
+            {section}
+          </React.Fragment>
+        ))}
       </ContextMenuView>
     </ContextMenuTriggerView>
   );
