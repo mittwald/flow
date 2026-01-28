@@ -63,7 +63,8 @@
     }
   }
 
-  &[aria-disabled] {
+  &[aria-disabled],
+  &.ariaDisabled {
     background-color: var(--menu-item--disabled-background-color);
     color: var(--menu-item--disabled-color);
 

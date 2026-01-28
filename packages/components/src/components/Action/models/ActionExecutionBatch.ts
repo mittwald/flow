@@ -35,8 +35,8 @@ export class ActionExecutionBatch {
       throw error;
     };
 
-    const onSucceeded = (): void => {
-      executionState.onSucceeded();
+    const onSucceeded = () => {
+      return executionState.onSucceeded();
     };
 
     try {

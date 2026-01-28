@@ -139,7 +139,7 @@ const MainNavigation: FC<Props> = (props) => {
             value={searchValue}
             onChange={(value) => setSearchValue(value.toLowerCase().trim())}
           />
-          <Navigation aria-labelledby={headingId}>
+          <Navigation aria-labelledby={headingId} key={mainPathSegment}>
             {Object.entries(selectedMainBranch)
               .filter((tree) => filterBySearchValue(searchValue, tree))
               .map(([group, treeItem]) =>

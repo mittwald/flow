@@ -16,4 +16,4 @@ const contextParameters = z.object({
 
 export const config = baseConfig
   .extend(contextParameters.shape)
-  .catchall(z.string());
+  .catchall(z.string().optional().nullable());

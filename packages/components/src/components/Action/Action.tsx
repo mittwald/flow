@@ -8,6 +8,7 @@ import { useActionButtonState } from "@/components/Action/hooks/useActionButtonS
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { ActionFn } from "@/components/Action/types";
+import { useActionState } from "@/components/Action/hooks/useActionState";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {
@@ -77,6 +78,26 @@ export const Action = flowComponent(
 
       MenuItem: {
         onAction: dynamic(() => ActionModel.use().execute),
+        isPending: dynamic((props) => {
+          const actionState = useActionState();
+          return props.isPending ?? actionState === "isPending";
+        }),
+        isSucceeded: dynamic((props) => {
+          const actionState = useActionState();
+          return props.isSucceeded ?? actionState === "isSucceeded";
+        }),
+        isFailed: dynamic((props) => {
+          const actionState = useActionState();
+          return props.isFailed ?? actionState === "isFailed";
+        }),
+        "aria-disabled": dynamic((props) => {
+          const state = useActionState();
+          const someActionInContextIsBusy = useActionStateContext().useIsBusy();
+          return (
+            props["aria-disabled"] ??
+            (state === "isExecuting" || someActionInContextIsBusy)
+          );
+        }),
       },
 
       Modal: {

@@ -1,6 +1,7 @@
 import {
   AlertBadge,
   ColumnLayout,
+  Flex,
   Heading,
   Icon,
   Image,
@@ -21,14 +22,14 @@ import styles from "./layout.module.scss";
 
 const Home: FC = () => {
   return (
-    <ColumnLayout l={[1]} m={[1]}>
+    <Flex direction="column" gap="m">
       <LayoutCard className={styles.homeTopLayoutCard}>
         <Image
           className={styles.homeImage}
           src={homeImage.src}
           alt="Flow Design System"
         />
-        <ColumnLayout l={[1]} className={styles.homeTopContent}>
+        <Section className={styles.homeTopContent}>
           <Heading level={1}>
             Flow Design System <AlertBadge>beta</AlertBadge>
           </Heading>
@@ -36,7 +37,7 @@ const Home: FC = () => {
             Entwickle performante und nutzerzentrierte Benutzeroberflächen, die
             die Markenidentität von mittwald konsistent widerspiegeln.
           </Text>
-        </ColumnLayout>
+        </Section>
       </LayoutCard>
       <LayoutCard>
         <Section>
@@ -107,7 +108,7 @@ const Home: FC = () => {
           </Section>
         </LayoutCard>
       </ColumnLayout>
-    </ColumnLayout>
+    </Flex>
   );
 };
 
