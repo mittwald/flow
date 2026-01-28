@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.656](https://github.com/mittwald/flow/compare/0.2.0-alpha.655...0.2.0-alpha.656) (2026-01-28)
+
+### Features
+
+* **MenuItem:** support action states ([dbf5337](https://github.com/mittwald/flow/commit/dbf53375da08b70084bf999ebd8f656ee95da3b7))
+
 # [0.2.0-alpha.655](https://github.com/mittwald/flow/compare/0.2.0-alpha.654...0.2.0-alpha.655) (2026-01-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
