@@ -12,6 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import {
   Form,
+  SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
 
@@ -52,9 +53,9 @@ export default () => {
           </Content>
 
           <ActionGroup>
-            <Button color="accent" type="submit">
+            <SubmitButton color="accent">
               Speichern
-            </Button>
+            </SubmitButton>
             <Action closeOverlay="Modal">
               <Button color="secondary" variant="soft">
                 Abbrechen

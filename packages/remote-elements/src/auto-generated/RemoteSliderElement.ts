@@ -34,6 +34,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       slot: {},
       step: {},
       translate: {},
+      unit: {},
       value: {},
     };
   }

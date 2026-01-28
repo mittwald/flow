@@ -58,6 +58,7 @@ import { Heading as Heading } from "@mittwald/flow-react-components";
 import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
+import { ImageCropper as ImageCropper } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
@@ -273,6 +274,10 @@ export const flowComponents = {
     IllustratedMessage,
   ),
   "flr-image": createFlowRemoteComponentRenderer("Image", Image),
+  "flr-image-cropper": createFlowRemoteComponentRenderer(
+    "ImageCropper",
+    ImageCropper,
+  ),
   "flr-initials": createFlowRemoteComponentRenderer("Initials", Initials),
   "flr-inline-code": createFlowRemoteComponentRenderer(
     "InlineCode",
