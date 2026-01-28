@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.655](https://github.com/mittwald/flow/compare/0.2.0-alpha.654...0.2.0-alpha.655) (2026-01-28)
+
+### Bug Fixes
+
+* **Action:** action should be done after feedback ([#2284](https://github.com/mittwald/flow/issues/2284)) ([485f444](https://github.com/mittwald/flow/commit/485f4444f170cf78f5f8b1ff3cb2a82ef36e8dcf))
+
 # [0.2.0-alpha.654](https://github.com/mittwald/flow/compare/0.2.0-alpha.653...0.2.0-alpha.654) (2026-01-28)
 
 ### Features
