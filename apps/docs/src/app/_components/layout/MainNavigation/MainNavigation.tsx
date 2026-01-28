@@ -1,5 +1,5 @@
 "use client";
-import React, { type FC, useId, useState } from "react";
+import React, { type FC, useEffect, useId, useState } from "react";
 import {
   Heading,
   LayoutCard,
@@ -35,8 +35,7 @@ export const filterBySearchValue = (
 };
 
 const MainNavigation: FC<Props> = (props) => {
-  const docs = props.docs.map(MdxFile.deserialize);
-  const docsTree = buildDirectoryTree(docs);
+  const [docsTree, setDocsTree] = useState<MdxDirectoryTree>();
   const currentPathname = usePathname();
   const mainPathSegment = currentPathname.split("/")[1];
 
@@ -48,9 +47,13 @@ const MainNavigation: FC<Props> = (props) => {
     setSearchValue("");
   });
 
+  useEffect(() => {
+    setDocsTree(buildDirectoryTree(props.docs.map(MdxFile.deserialize)));
+  }, [currentPathname]);
+
   const headingId = useId();
 
-  if (mainPathSegment === undefined) {
+  if (mainPathSegment === undefined || docsTree === undefined) {
     return null;
   }
 

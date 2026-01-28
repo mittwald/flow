@@ -82,8 +82,6 @@ interface NavigationSectionProps {
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
   const { tree, group, searchValue } = props;
 
-  console.log(tree);
-
   const navigationItems = Object.entries(tree)
     .filter((tree) => filterBySearchValue(searchValue, tree))
     .map(([group, treeItem]) =>
