@@ -17,7 +17,7 @@ import {
   SubmitButton,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
-import { sleep } from "@/content/03-components/actions/action/examples/lib";
+import { sleep } from "@/content/04-components/actions/action/examples/lib";
 
 export default () => {
   const form = useForm<{
