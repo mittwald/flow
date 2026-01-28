@@ -10,8 +10,7 @@ import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Notification.module.scss";
 
 export interface NotificationProps
-  extends PropsWithChildren<ComponentProps<"div">>,
-    PropsWithStatus {
+  extends PropsWithChildren<ComponentProps<"div">>, PropsWithStatus {
   /** A link that is triggered when clicking the notification. */
   href?: string;
   /** Whether the notification should disappear automatically after some time. */

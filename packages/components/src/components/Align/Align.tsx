@@ -8,9 +8,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlignProps
-  extends PropsWithChildren,
-    PropsWithClassName,
-    FlowComponentProps {}
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {}
 
 /** @flr-generate all */
 export const Align = flowComponent(

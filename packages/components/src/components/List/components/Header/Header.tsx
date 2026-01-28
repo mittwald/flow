@@ -9,7 +9,6 @@ import { SearchField } from "@/components/List/components/Header/components/Sear
 import { ViewModeMenu } from "@/components/List/components/Header/components/Settings/ViewModeMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
-import { SettingsMenu } from "@/components/List/components/Header/components/Settings/SettingsMenu";
 import { SortingMenu } from "@/components/List/components/Header/components/Settings/SortingMenu";
 import { FilterMenuList } from "@/components/List/components/Header/components/Filters/FilterMenuList";
 import { CombinedFilterMenu } from "@/components/List/components/Header/components/Filters/CombinedFilterMenu";
@@ -45,7 +44,6 @@ export const Header: FC<PropsWithClassName> = (props) => {
             <FilterMenuList />
 
             {/* Mobile */}
-            <SettingsMenu />
             <CombinedFilterMenu />
 
             {list.search && <SearchField search={list.search} />}

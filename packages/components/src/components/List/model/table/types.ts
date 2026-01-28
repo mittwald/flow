@@ -22,8 +22,7 @@ export type TableRowSupportedComponentProps = Omit<
   "onAction" | "children" | "footer"
 >;
 export interface TableRowShape<T>
-  extends TableRowSupportedComponentProps,
-    PropsWithChildren {
+  extends TableRowSupportedComponentProps, PropsWithChildren {
   cells?: TableCellShape<T>[];
 }
 

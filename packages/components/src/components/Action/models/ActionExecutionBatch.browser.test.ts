@@ -26,9 +26,16 @@ const runTest = async (
   });
 
   execution.addAction(action.current);
-  void execution.executeBatch([]).catch(() => {
-    // do nothing
-  });
+  try {
+    const result = execution.executeBatch();
+    if (result instanceof Promise) {
+      result.catch(() => {
+        // ignore during tests
+      });
+    }
+  } catch {
+    // ignore during tests
+  }
   await vi.runAllTimersAsync();
 
   expect(states).toEqual(expectedStates);
@@ -37,7 +44,7 @@ const runTest = async (
 test("State for async actions is correct", async () => {
   await runTest(
     {
-      action: () => sleep(500),
+      onAction: () => sleep(500),
     },
     ["isIdle", "isExecuting", "isSucceeded", "isIdle"],
   );
@@ -46,7 +53,7 @@ test("State for async actions is correct", async () => {
 test("State for async failing actions is correct", async () => {
   await runTest(
     {
-      action: async () => {
+      onAction: async () => {
         await sleep(500);
         throw new Error("Wuhaa");
       },
@@ -58,7 +65,7 @@ test("State for async failing actions is correct", async () => {
 test("Long running actions show pending state", async () => {
   await runTest(
     {
-      action: () => sleep(1500),
+      onAction: () => sleep(1500),
     },
     ["isIdle", "isExecuting", "isPending", "isSucceeded", "isIdle"],
   );
@@ -67,7 +74,7 @@ test("Long running actions show pending state", async () => {
 test("Sync action stays idle", async () => {
   await runTest(
     {
-      action: () => {
+      onAction: () => {
         // empty
       },
     },
@@ -78,7 +85,7 @@ test("Sync action stays idle", async () => {
 test("Sync action show feedback when activated", async () => {
   await runTest(
     {
-      action: () => {
+      onAction: () => {
         // empty
       },
       showFeedback: true,
@@ -90,7 +97,7 @@ test("Sync action show feedback when activated", async () => {
 test("Sync failing action show feedback when activated", async () => {
   await runTest(
     {
-      action: () => {
+      onAction: () => {
         throw new Error("Wuhaa");
       },
     },

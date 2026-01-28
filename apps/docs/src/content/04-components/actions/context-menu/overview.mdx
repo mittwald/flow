@@ -1,0 +1,105 @@
+# Playground
+
+Verwende `<ContextMenu />`, um ein ContextMenu darzustellen. Innerhalb von
+`<ContextMenuTrigger />` muss ein `<Button />` und ein `<ContextMenu />`
+kombiniert werden, um ein ContextMenu per
+[Button](/04-components/actions/button/overview)-Klick zu öffnen. Die einzelnen
+Aktionen werden über `<MenuItem />` definiert.
+
+<LiveCodeEditor />
+
+---
+
+# Einfach-Auswahl
+
+Durch `selectionMode="single"` verhalten sich die Menüeinträge des ContextMenu
+wie eine [RadioGroup](/04-components/form-controls/radio-group/overview), sodass
+nur ein Element ausgewählt werden kann.
+
+<LiveCodeEditor example="single-select" editorCollapsed />
+
+---
+
+# Mehrfach-Auswahl
+
+Durch `selectionMode="multiple"` verhalten sich die Menüeinträge des ContextMenu
+wie [Checkboxen](/04-components/form-controls/checkbox/overview), sodass mehrere
+Optionen ausgewählt werden können.
+
+<LiveCodeEditor example="multi-select" editorCollapsed />
+
+---
+
+# Mit Switch
+
+Ein [Switch](/04-components/form-controls/switch/overview) im ContextMenu
+ermöglicht es, Aktionen direkt zu aktivieren oder deaktivieren.
+
+<LiveCodeEditor example="switch" editorCollapsed />
+
+---
+
+# Mit Icon
+
+Verwende [Icons](/04-components/content/icon/overview) innerhalb vom
+`<MenuItem />`, um Aktionen schneller verständlich zu machen oder bekannte
+Funktionen klarer zu vermitteln.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+---
+
+# Mit Separator
+
+Ein [Separator](/04-components/structure/separator/overview) gruppiert logisch
+zusammengehörige Aktionen.
+
+<LiveCodeEditor example="separator" editorCollapsed />
+
+---
+
+# Mit ContextMenuSections
+
+Eine `ContextMenuSectionSection` sorgt im ContextMenu für klare Struktur, indem
+sie eine [Heading](/04-components/content/heading/overview) und definierte
+Abstände verwendet.
+
+<LiveCodeEditor example="section" editorCollapsed />
+
+---
+
+# Mit fester Breite
+
+Lege eine Breite für dein ContextMenu fest, um beispielsweise zu verhindern,
+dass das ContextMenu zu breit wird oder die Breite des ContextMenus beim
+Nachladen von Daten springt.
+
+<LiveCodeEditor example="width" editorCollapsed />
+
+---
+
+# Mit Selection Mode
+
+<LiveCodeEditor example="sectionSelectionMode" editorCollapsed />
+
+---
+
+# Mit Avatar
+
+Verwende das ContextMenu als Profilmenü, indem innerhalb ein
+[Avatar](/04-components/content/avatar/overview) und eine
+[Heading](/flow/04-components/content/heading/overview) platziert werden.
+
+<LiveCodeEditor example="avatar" editorCollapsed />
+
+---
+
+# Kombiniere mit
+
+## Modal
+
+Aktionen im ContextMenu können [Modals](/04-components/overlays/modal/overview)
+als Overlay öffnen, wenn zusätzliche Informationen erfasst, bestätigt oder
+bearbeitet werden müssen.
+
+<LiveCodeEditor example="modal" editorCollapsed />

@@ -2,7 +2,8 @@ import type { FC, PropsWithChildren, RefAttributes } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface DivProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithClassName,
     RefAttributes<HTMLDivElement> {}
 

@@ -6,8 +6,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface LabeledValueProps
-  extends PropsWithChildren,
-    PropsWithClassName {}
+  extends PropsWithChildren, PropsWithClassName {}
 
 /** @flr-generate all */
 export const LabeledValue: FC<LabeledValueProps> = (props) => {

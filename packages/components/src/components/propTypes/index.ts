@@ -79,8 +79,6 @@ import type { NavigationGroupProps } from "@/components/Navigation/components/Na
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
-import type { SubmitButtonProps } from "@/integrations/react-hook-form/components/SubmitButton/SubmitButton";
-import type { ResetButtonProps } from "@/integrations/react-hook-form/components/ResetButton/ResetButton";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 
@@ -157,8 +155,6 @@ export interface FlowComponentPropsTypes {
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
-  SubmitButton: SubmitButtonProps;
-  ResetButton: ResetButtonProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
@@ -242,8 +238,6 @@ const propsContextSupportingComponentsMap: Record<
   SegmentedControl: true,
   Select: true,
   Slider: true,
-  SubmitButton: true,
-  ResetButton: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,

@@ -6,10 +6,10 @@ import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEdi
 import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
+import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 
 interface Props {
   mdxFile: SerializedMdxFile;
@@ -151,25 +151,18 @@ export const MdxFileView: FC<Props> = (props) => {
     />
   );
 
-  return (
-    <NextMDXRemote
-      {...mdxFile.mdxSource}
-      components={
-        {
-          LiveCodeEditor: ExampleLiveCodeEditor,
-          PropertiesTables: ExamplePropertiesTables,
-          Do: ExampleDo,
-          Dont: ExampleDont,
-          Info: ExampleInfo,
-          MStudio: ExampleStudio,
-          Plain: ExamplePlain,
-          ...customComponents,
-          // @todo: remove when MDXRemote types are fixed
-          // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-        } as any
-      }
-    />
-  );
+  const mdxComponents = {
+    LiveCodeEditor: ExampleLiveCodeEditor,
+    PropertiesTables: ExamplePropertiesTables,
+    Do: ExampleDo,
+    Dont: ExampleDont,
+    Info: ExampleInfo,
+    MStudio: ExampleStudio,
+    Plain: ExamplePlain,
+    ...createCustomComponents(),
+  };
+
+  return <NextMDXRemote {...mdxFile.mdxSource} components={mdxComponents} />;
 };
 
 export default MdxFileView;

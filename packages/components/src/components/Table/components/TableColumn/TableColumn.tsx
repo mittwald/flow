@@ -6,8 +6,7 @@ import styles from "../../Table.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface TableColumnProps
-  extends Omit<Aria.ColumnProps, "children">,
-    PropsWithChildren {
+  extends Omit<Aria.ColumnProps, "children">, PropsWithChildren {
   /** Horizontal alignment of the cell content @default "start" */
   horizontalAlign?: "start" | "center" | "end";
 }

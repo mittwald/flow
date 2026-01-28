@@ -10,7 +10,8 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import DateInput from "@/components/DateInput";
 
 export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
-  extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">>,
     FlowComponentProps<HTMLSpanElement> {}
 
 /** @flr-generate all */

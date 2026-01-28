@@ -1,6 +1,5 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
-import { callAndReact } from "@/lib/promises/callAndReact";
 import { getExecutionFunction } from "@/components/Action/models/getExecutionFunction";
 
 export class ActionExecutionBatch {
@@ -15,7 +14,7 @@ export class ActionExecutionBatch {
     this.actions.push(action);
   }
 
-  public async executeBatch(args: unknown[]) {
+  public executeBatch(...args: unknown[]) {
     if (this.actions.length === 0) {
       return;
     }
@@ -31,19 +30,26 @@ export class ActionExecutionBatch {
 
     const executeBatch = callFunctionsInOrder(executionFunctions);
 
-    let caughtError: unknown;
+    const onError = (error: unknown): void => {
+      executionState.onFailed(error);
+      throw error;
+    };
 
-    await callAndReact(() => executeBatch(...args), {
-      onAsync: () => executionState.onAsyncStart(),
-      then: () => executionState.onSucceeded(),
-      catch: (error) => {
-        executionState.onFailed(error);
-        caughtError = error;
-      },
-    });
+    const onSucceeded = () => {
+      return executionState.onSucceeded();
+    };
 
-    if (caughtError) {
-      throw caughtError;
+    try {
+      const result = executeBatch(...args);
+      if (result instanceof Promise) {
+        executionState.onAsyncStart();
+        return result.then(onSucceeded).catch(onError);
+      } else {
+        onSucceeded();
+        return result;
+      }
+    } catch (error) {
+      onError(error);
     }
   }
 }

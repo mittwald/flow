@@ -14,7 +14,8 @@ import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface ButtonProps
-  extends PropsWithChildren<Aria.ButtonProps>,
+  extends
+    PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<HTMLButtonElement> {
   /** Slot for button placement in action groups. */
   slot?: string;

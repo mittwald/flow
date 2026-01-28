@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -6,13 +6,13 @@ import clsx from "clsx";
 import { CopyButton } from "@/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
 
-export interface CodeBlockProps extends PropsWithClassName {
+export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
   /** Adds a copy icon to the code block to copy its content. */
   copyable?: boolean;
   /** The color of the code block. @default "default" */
   color?: "default" | "light" | "dark";
   /** The code to display inside the code block. */
-  code: string | string[];
+  code?: string | string[];
 
   // ATTENTION
   // we reexport by copy the props here - react-typescript-docgen
@@ -50,9 +50,26 @@ export interface CodeBlockProps extends PropsWithClassName {
 
 /** @flr-generate all */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const { code, className, copyable, color = "default", ...rest } = props;
+  const {
+    code,
+    className,
+    copyable,
+    color = "default",
+    children,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.codeBlock, styles[color], className);
+
+  if (!code) {
+    return (
+      <div className={rootClassName}>
+        <pre>
+          <code>{children}</code>
+        </pre>
+      </div>
+    );
+  }
 
   return (
     <div className={rootClassName}>

@@ -10,7 +10,8 @@ import locales from "./locales/*.locale.json";
 import { Label } from "@/components/Label";
 
 export interface ImageCropperProps
-  extends PropsWithClassName,
+  extends
+    PropsWithClassName,
     Partial<Pick<CropperProps, "aspect" | "cropShape">> {
   image?: File | string;
   onCropComplete?: (croppedImage: File) => void;

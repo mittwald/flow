@@ -9,10 +9,9 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 
 export interface IllustratedMessageProps
-  extends PropsWithChildren<ComponentProps<"div">>,
-    FlowComponentProps {
+  extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
   /** The color of the illustrated message. @default "primary" */
-  color?: "primary" | "danger" | "light" | "dark";
+  color?: "primary" | "danger" | "unavailable" | "light" | "dark";
 }
 
 /** @flr-generate all */
@@ -37,7 +36,7 @@ export const IllustratedMessage = flowComponent(
       },
       Heading: {
         className: styles.heading,
-        color: lightOrDarkColor,
+        color,
       },
       Text: {
         className: styles.text,

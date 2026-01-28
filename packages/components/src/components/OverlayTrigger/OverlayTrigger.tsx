@@ -12,8 +12,7 @@ type AriaComponentType = ComponentType<{
 }>;
 
 export interface OverlayTriggerProps
-  extends FlowComponentProps,
-    PropsWithChildren {
+  extends FlowComponentProps, PropsWithChildren {
   /** Whether the overlay should be open initially. */
   isDefaultOpen?: boolean;
   /** A controller to control the state of the overlay. */

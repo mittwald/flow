@@ -2,6 +2,9 @@ import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent";
 import type { Metadata } from "next";
+import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
+import React from "react";
+import { Flex } from "@mittwald/flow-react-components";
 
 const contentFolder = "src/content/01-get-started";
 
@@ -31,9 +34,17 @@ export default async function Page(props: Props) {
     throw new Error("Could not find index.mdx");
   }
 
+  const path = `/01-get-started/${indexMdxFile.slugs[0]}`;
+
   return (
-    <>
+    <Flex columnGap="m">
       <TopContent mdxFile={indexMdxFile} />
-    </>
+
+      <AnchorNavigation
+        currentPath={`${path}`}
+        anchors={indexMdxFile.anchors}
+        title={indexMdxFile?.getTitle()}
+      />
+    </Flex>
   );
 }

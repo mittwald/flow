@@ -15,7 +15,8 @@ import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface SliderProps
-  extends FlowComponentProps<HTMLInputElement>,
+  extends
+    FlowComponentProps<HTMLInputElement>,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
   /** Whether the marker for the initial value should be visible */

@@ -8,7 +8,8 @@ import type { OptionProps } from "@/components/Option";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface OptionsProps
-  extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
+  extends
+    Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
     PopoverProps {
   controller: OverlayController;
 }

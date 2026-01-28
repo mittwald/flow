@@ -20,7 +20,8 @@ export interface CartesianChartEmptyViewProps {
 }
 
 export interface CartesianChartProps
-  extends Pick<
+  extends
+    Pick<
       ComponentProps<typeof Recharts.ComposedChart>,
       "data" | "className" | "syncId" | "syncMethod"
     >,
@@ -98,7 +99,7 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
         observer.disconnect();
       };
     }
-  }, [showEmptyView]);
+  }, [showEmptyView, chartContainerRef.current]);
 
   return (
     <Wrap if={height}>

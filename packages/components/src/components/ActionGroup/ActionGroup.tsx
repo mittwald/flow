@@ -11,7 +11,8 @@ import { ActionStateContextProvider } from "@/components/Action/models/ActionSta
 import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupSlot";
 
 export interface ActionGroupProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     FlowComponentProps<HTMLDivElement>,
     PropsWithClassName {
   /** The spacing between the buttons inside the action group. @default "m" */

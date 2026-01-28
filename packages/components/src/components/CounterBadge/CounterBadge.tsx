@@ -6,8 +6,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CounterBadgeProps
-  extends PropsWithElementType<"span">,
-    FlowComponentProps {
+  extends PropsWithElementType<"span">, FlowComponentProps {
   /** The number displayed inside the badge. */
   count?: number;
 }

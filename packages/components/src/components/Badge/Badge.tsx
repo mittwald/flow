@@ -25,9 +25,7 @@ export const badgeColors = [
 export type BadgeColors = (typeof badgeColors)[number];
 
 export interface BadgeProps
-  extends PropsWithChildren,
-    FlowComponentProps,
-    PropsWithClassName {
+  extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
   /** Handler that is called when the badge is pressed. */
   onPress?: (e: PressEvent) => void;
   /** Handler that is called when the badges close icon is pressed. */

@@ -17,4 +17,4 @@ icon:
   success-color:
     value: "{success-outline-content-color}"
   unavailable-color:
-    value: "{neutral-outline-content-color}"
+    value: "{neutral.color.900}"

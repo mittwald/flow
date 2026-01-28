@@ -14,7 +14,8 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface SearchFieldProps
-  extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
     FlowComponentProps<HTMLInputElement> {}
 
 /** @flr-generate all */

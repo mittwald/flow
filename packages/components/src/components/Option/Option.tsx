@@ -8,7 +8,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface OptionProps
-  extends Omit<Aria.ListBoxItemProps, "children" | "value" | "id">,
+  extends
+    Omit<Aria.ListBoxItemProps, "children" | "value" | "id">,
     PropsWithChildren,
     FlowComponentProps {
   value?: string | number;

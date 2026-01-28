@@ -17,7 +17,8 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 
 export interface NumberFieldProps
-  extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
     FlowComponentProps<HTMLInputElement> {}
 
 /** @flr-generate all */

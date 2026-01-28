@@ -9,7 +9,8 @@ import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
 
 export interface TabsProps
-  extends Omit<Aria.TabsProps, "children">,
+  extends
+    Omit<Aria.TabsProps, "children">,
     PropsWithChildren,
     FlowComponentProps {}
 
