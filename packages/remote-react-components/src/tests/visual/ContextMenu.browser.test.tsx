@@ -62,6 +62,12 @@ test.each(testEnvironments)(
             <MenuItem id="checkbox1">Checkbox 1</MenuItem>
             <MenuItem id="checkbox2">Checkbox 2</MenuItem>
           </ContextMenuSection>
+          <ContextMenuSection>
+            <MenuItem isDisabled>Disabled</MenuItem>
+            <MenuItem isPending>Pending</MenuItem>
+            <MenuItem isSucceeded>Succeeded</MenuItem>
+            <MenuItem isFailed>Failed</MenuItem>
+          </ContextMenuSection>
         </ContextMenu>
       </ContextMenuTrigger>,
     );

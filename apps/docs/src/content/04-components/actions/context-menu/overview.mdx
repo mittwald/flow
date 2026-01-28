@@ -94,6 +94,23 @@ Verwende das ContextMenu als Profilmenü, indem innerhalb ein
 
 ---
 
+# States
+
+Ein MenuItem kann unterschiedliche States annehmen, die anzeigen, dass aktuell
+keine Interaktion möglich ist.
+
+<LiveCodeEditor example="states" editorCollapsed />
+
+**Disabled:** Verwende den Disabled-State, wenn das MenuItem keine Aktion oder
+kein Ereignis auslösen soll.
+
+**Pending, Succeeded und Failed:** Pending, Succeeded und Failed sollen dem
+Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf ein
+MenuItem geklickt hat. Verwende das MenuItem zusammen mit der Komponente
+[Action](/04-components/actions/action/overview), um die States zu steuern.
+
+---
+
 # Kombiniere mit
 
 ## Modal

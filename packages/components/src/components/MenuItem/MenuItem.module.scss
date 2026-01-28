@@ -1,5 +1,15 @@
 @use "../../styles/mixins/menuItem";
 
 .menuItem {
+  position: relative;
+
   @include menuItem.menuItem();
+
+  .stateIcon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

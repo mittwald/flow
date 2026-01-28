@@ -209,3 +209,17 @@ export const WithSectionSelectionMode: Story = {
     defaultOpen: true,
   },
 };
+
+export const MenuItemStates: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <MenuItem isDisabled>Disabled</MenuItem>
+        <MenuItem isPending>Pending</MenuItem>
+        <MenuItem isSucceeded>Succeeded</MenuItem>
+        <MenuItem isFailed>Failed</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+};
