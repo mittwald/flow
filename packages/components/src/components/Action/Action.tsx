@@ -90,11 +90,11 @@ export const Action = flowComponent(
           const actionState = useActionState();
           return props.isFailed ?? actionState === "isFailed";
         }),
-        isDisabled: dynamic((props) => {
+        "aria-disabled": dynamic((props) => {
           const state = useActionState();
           const someActionInContextIsBusy = useActionStateContext().useIsBusy();
           return (
-            props.isDisabled ??
+            props["aria-disabled"] ??
             (state === "isExecuting" || someActionInContextIsBusy)
           );
         }),

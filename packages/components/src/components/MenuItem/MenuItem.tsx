@@ -21,24 +21,54 @@ export interface MenuItemProps
   isSucceeded?: boolean;
   /** Whether the button is in a failed state. */
   isFailed?: boolean;
+  /** Disables button but keeps it focusable. */
+  "aria-disabled"?: boolean;
 }
+
+const disablePendingProps = (props: MenuItemProps) => {
+  if (
+    props.isPending ||
+    props.isSucceeded ||
+    props.isFailed ||
+    props["aria-disabled"]
+  ) {
+    props = { ...props };
+    props.onPress = undefined;
+    props.onPressStart = undefined;
+    props.onPressEnd = undefined;
+    props.onPressChange = undefined;
+    props.onPressUp = undefined;
+  }
+
+  return props;
+};
 
 /** @flr-generate all */
 export const MenuItem = flowComponent("MenuItem", (props) => {
+  props = disablePendingProps(props);
+
   const {
     children,
     className,
     selectionVariant,
     id,
     ref,
-    isDisabled,
+    "aria-disabled": ariaDisabled,
     isPending,
     isSucceeded,
     isFailed,
     ...rest
   } = props;
 
-  const rootClassName = clsx(styles.menuItem, className);
+  const rootClassName = clsx(
+    styles.menuItem /**
+     * Workaround warning: The Aria.MenuItem does not support "aria-disabled" by
+     * now, so this MenuItem will be visually disabled via CSS.
+     */,
+    (ariaDisabled || isFailed || isSucceeded || isPending) &&
+      styles.ariaDisabled,
+    className,
+  );
 
   useAriaAnnounceActionState(
     isPending
@@ -73,7 +103,6 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
       id={id}
       className={rootClassName}
       ref={ref}
-      isDisabled={isDisabled || isPending || isSucceeded || isFailed}
     >
       {(props) => (
         <>
