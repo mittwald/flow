@@ -26,6 +26,7 @@ export default () => {
       </Heading>
       <LayoutCard>
         <ProjectList.List
+          aria-label="Projekte"
           loadingItemsCount={3}
           getItemId={(project) => project.id}
           defaultViewMode="tiles"
@@ -61,7 +62,11 @@ export default () => {
             direction="desc"
             property="description"
           />
-          <ProjectList.Item showTiles showList={false}>
+          <ProjectList.Item
+            textValue={(project) => project.description}
+            showTiles
+            showList={false}
+          >
             {(project) => (
               <ListItemView>
                 <Avatar>

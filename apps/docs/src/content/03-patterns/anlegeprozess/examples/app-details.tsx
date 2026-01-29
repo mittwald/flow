@@ -74,7 +74,7 @@ import {
         </Option>
       </Select>
     </ColumnLayout>
-    <Table>
+    <Table aria-label="SSH-Zugangsdaten">
       <TableHeader>
         <TableColumn />
         <TableColumn />
