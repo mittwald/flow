@@ -7,7 +7,7 @@ export const FilterContextMenuList: FC = () => {
   const list = useList();
 
   return list.filters
-    .filter((f) => f.visibility === "primary")
+    .filter((f) => f.priority === "primary")
     .map((filter) => (
       <FilterContextMenu key={filter.property} filter={filter} />
     ));

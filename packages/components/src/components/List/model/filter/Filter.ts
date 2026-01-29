@@ -44,7 +44,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
   private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
-  public readonly visibility: "primary" | "secondary";
+  public readonly priority: "primary" | "secondary";
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -54,7 +54,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
-    this.visibility = shape.visibility ?? "primary";
+    this.priority = shape.priority ?? "primary";
 
     this.defaultSelectedValues = shape.defaultSelected;
   }

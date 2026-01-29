@@ -369,9 +369,9 @@ export const WithSecondaryFilters: Story = {
             />
             <DomainList.Filter
               property="tld"
-              mode="all"
+              mode="one"
               name="TLD"
-              visibility="secondary"
+              priority="secondary"
             />
 
             <DomainList.Search autoFocus />

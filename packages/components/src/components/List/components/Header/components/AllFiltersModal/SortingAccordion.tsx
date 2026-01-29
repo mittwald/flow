@@ -13,7 +13,7 @@ export const SortingAccordion: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const sorting = list.visibleSorting;
-  const isSorted = sorting.find((s) => s.isSorted());
+  const activeSorting = sorting.find((s) => s.isSorted());
 
   if (sorting.length === 0) {
     return null;
@@ -23,7 +23,7 @@ export const SortingAccordion: FC = () => {
     <AccordionView>
       <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
       <ContentView>
-        <RadioGroupView value={isSorted?.id} m={[1, 1]}>
+        <RadioGroupView value={activeSorting?.id} m={[1, 1]}>
           {sorting.map((s) => (
             <RadioView
               value={s.id}

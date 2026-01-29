@@ -24,7 +24,7 @@ export const AllFiltersModal: FC = () => {
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const totalCount = list.items.entries.length;
+  const totalItemCount = list.items.entries.length;
 
   const filterAccordions = list.filters.map((f) => (
     <FilterAccordion filter={f} />
@@ -37,7 +37,7 @@ export const AllFiltersModal: FC = () => {
   ].filter(Boolean);
 
   const hasSecondaryFilters = list.filters.find(
-    (f) => f.visibility === "secondary",
+    (f) => f.priority === "secondary",
   );
 
   if (accordions.length === 0) {
@@ -78,7 +78,9 @@ export const AllFiltersModal: FC = () => {
             return (
               <ActionGroupView>
                 <ButtonView onPress={() => controller.close()}>
-                  {stringFormatter.format("list.results.show", { totalCount })}
+                  {stringFormatter.format("list.results.show", {
+                    totalItemCount,
+                  })}
                 </ButtonView>
                 <ButtonView
                   color="secondary"

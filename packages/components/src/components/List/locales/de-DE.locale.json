@@ -9,7 +9,7 @@
   "list.options": "Optionen",
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
   "list.reset": "Zurücksetzen",
-  "list.results.show": "{totalCount} Ergebnisse anzeigen",
+  "list.results.show": "{totalItemCount} Ergebnisse anzeigen",
   "list.search.announce.noResult": "Keine Treffer für \"{searchTerm}\"",
   "list.search.announce.result": "{resultCount} Treffer für \"{searchTerm}\"",
   "list.settings": "Einstellungen",
