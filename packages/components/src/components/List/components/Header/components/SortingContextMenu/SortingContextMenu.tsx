@@ -38,7 +38,7 @@ export const SortingContextMenu: FC = () => {
       <ButtonView
         variant="outline"
         color="secondary"
-        className={styles.desktop}
+        className={styles.hideOnMobile}
       >
         {text}
         <IconSorting />

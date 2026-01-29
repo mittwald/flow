@@ -1,35 +1,35 @@
 import React, { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
+import { useLocalizedStringFormatter } from "react-aria";
 import ContentView from "@/views/ContentView";
 import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
-import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 
-export const ViewModeAccordion: FC = () => {
+export const SortingAccordion: FC = () => {
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const availableViewModes = useAvailableViewModes();
-  const selectedViewMode = list.viewMode;
+  const sorting = list.visibleSorting;
+  const isSorted = sorting.find((s) => s.isSorted());
 
-  if (availableViewModes.length <= 1) {
+  if (sorting.length === 0) {
     return null;
   }
 
   return (
     <AccordionView>
-      <HeadingView>
-        {stringFormatter.format("list.settings.viewMode")}
-      </HeadingView>
+      <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
       <ContentView>
-        <RadioGroupView value={selectedViewMode} m={[1, 1]}>
-          {availableViewModes.map((v) => (
-            <RadioView value={v} onPress={() => list.setViewMode(v)}>
-              {stringFormatter.format(`list.settings.viewMode.${v}`)}
+        <RadioGroupView value={isSorted?.id} m={[1, 1]}>
+          {sorting.map((s) => (
+            <RadioView
+              value={s.id}
+              onPress={() => list.getSorting(s.id).enable()}
+            >
+              {s.name ?? s.property}
             </RadioView>
           ))}
         </RadioGroupView>

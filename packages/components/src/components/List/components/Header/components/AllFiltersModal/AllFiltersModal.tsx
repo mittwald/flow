@@ -13,36 +13,26 @@ import SectionView from "@/views/SectionView";
 import { FilterAccordion } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordion";
 import { ViewModeAccordion } from "@/components/List/components/Header/components/AllFiltersModal/ViewModeAccordion";
 import TextView from "@/views/TextView";
+import { SortingAccordion } from "@/components/List/components/Header/components/AllFiltersModal/SortingAccordion";
+import ActionGroupView from "@/views/ActionGroupView";
+import { Render } from "@/lib/react/components/Render";
+import { useOverlayController } from "@/lib/controller";
+import HeadingView from "@/views/HeadingView";
+import clsx from "clsx";
 
 export const AllFiltersModal: FC = () => {
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
+  const totalCount = list.items.entries.length;
+
   const filterAccordions = list.filters.map((f) => (
     <FilterAccordion filter={f} />
   ));
 
-  /*
-  const sortingItems = list.visibleSorting.map((s) => (
-    <SortingMenuItem key={s.id} sorting={s} />
-  ));
-  
- */
-  //const labelSorting = list.visibleSorting.find((s) => s.isSorted());
-  const sortingSection = /*
-    sortingItems.length > 0 ? (
-      <ContextMenuSectionView
-        selectionMode="single"
-        selectedKeys={labelSorting ? [labelSorting.id] : []}
-      >
-        <HeadingView>{stringFormatter.format("list.sorting")}</HeadingView>
-        {sortingItems}
-      </ContextMenuSectionView>
-    ) : */ null;
-
   const accordions = [
     <ViewModeAccordion />,
-    sortingSection,
+    <SortingAccordion />,
     ...filterAccordions,
   ].filter(Boolean);
 
@@ -50,26 +40,60 @@ export const AllFiltersModal: FC = () => {
     (f) => f.visibility === "secondary",
   );
 
-  if (accordions.length === 0) return null;
+  if (accordions.length === 0) {
+    return null;
+  }
 
   return (
     <ModalTriggerView>
       <ButtonView
-        className={hasSecondaryFilters ? undefined : styles.hideOnDesktop}
+        className={clsx(
+          styles.hideOnMobile,
+          hasSecondaryFilters ? undefined : styles.hideOnDesktop,
+        )}
         variant="outline"
         color="secondary"
-        aria-label={stringFormatter.format("list.filters")}
       >
-        <TextView className={styles.hideOnMobile}>
-          {stringFormatter.format("list.allFilters")}
-        </TextView>
+        <TextView>{stringFormatter.format("list.filters.all")}</TextView>
+        <IconFilter />
+      </ButtonView>
+
+      <ButtonView
+        className={styles.hideOnDesktop}
+        variant="outline"
+        color="secondary"
+        aria-label={stringFormatter.format("list.filters.all")}
+      >
         <IconFilter />
       </ButtonView>
 
       <ModalView offCanvas>
+        <HeadingView>{stringFormatter.format("list.filters.all")}</HeadingView>
         <ContentView>
           <SectionView>{...accordions}</SectionView>
         </ContentView>
+        <Render>
+          {() => {
+            const controller = useOverlayController("Modal");
+            return (
+              <ActionGroupView>
+                <ButtonView onPress={() => controller.close()}>
+                  {stringFormatter.format("list.results.show", { totalCount })}
+                </ButtonView>
+                <ButtonView
+                  color="secondary"
+                  variant="soft"
+                  onPress={() => {
+                    list.resetFilters();
+                    controller.close();
+                  }}
+                >
+                  {stringFormatter.format("list.reset")}
+                </ButtonView>
+              </ActionGroupView>
+            );
+          }}
+        </Render>
       </ModalView>
     </ModalTriggerView>
   );

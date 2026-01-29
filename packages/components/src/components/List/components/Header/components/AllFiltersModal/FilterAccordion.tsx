@@ -18,7 +18,7 @@ export const FilterAccordion: FC<Props> = (props) => {
   const activeKeys = filter.values.filter((v) => v.isActive).map((v) => v.id);
 
   return (
-    <AccordionView defaultExpanded>
+    <AccordionView>
       <HeadingView>{filter.name ?? filter.property}</HeadingView>
       <ContentView>
         {filter.mode === "one" && (

@@ -11,7 +11,7 @@ import styles from "@/components/List/components/Header/Header.module.css";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
-export const ViewModeMenu: FC = () => {
+export const ViewModeContextMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
   const selectedViewMode = list.viewMode;
@@ -28,7 +28,7 @@ export const ViewModeMenu: FC = () => {
         variant="outline"
         color="secondary"
         aria-label={stringFormatter.format("list.settings")}
-        className={styles.desktop}
+        className={styles.hideOnMobile}
       >
         <TextView>
           {stringFormatter.format(`list.settings.viewMode.${selectedViewMode}`)}

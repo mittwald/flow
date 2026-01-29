@@ -6,7 +6,7 @@ import { ActiveFilters } from "@/components/List/components/Header/components/Ac
 import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
-import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeMenu";
+import { ViewModeContextMenu } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeContextMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import { SortingContextMenu } from "@/components/List/components/Header/components/SortingContextMenu/SortingContextMenu";
@@ -38,7 +38,7 @@ export const Header: FC<PropsWithClassName> = (props) => {
         <TunnelExit id="actions" />
         {hasOptions && (
           <DivView className={styles.options}>
-            <ViewModeMenu />
+            <ViewModeContextMenu />
             <SortingContextMenu />
             <FilterContextMenuList />
             <AllFiltersModal />

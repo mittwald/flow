@@ -1,6 +1,6 @@
 {
-  "list.allFilters": "Alle Filter",
   "list.filters": "Filter",
+  "list.filters.all": "Alle Filter",
   "list.filters.clear": "Filter entfernen",
   "list.filters.reset": "Filter zurücksetzen",
   "list.filters.store": "Filter speichern",
@@ -8,6 +8,8 @@
   "list.noResult.text": "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
   "list.options": "Optionen",
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
+  "list.reset": "Zurücksetzen",
+  "list.results.show": "{totalCount} Ergebnisse anzeigen",
   "list.search.announce.noResult": "Keine Treffer für \"{searchTerm}\"",
   "list.search.announce.result": "{resultCount} Treffer für \"{searchTerm}\"",
   "list.settings": "Einstellungen",

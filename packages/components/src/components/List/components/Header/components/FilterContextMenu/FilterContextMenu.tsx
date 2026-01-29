@@ -26,7 +26,7 @@ export const FilterContextMenu: FC<Props> = (props) => {
   return (
     <ContextMenuTriggerView>
       <ButtonView
-        className={styles.desktop}
+        className={styles.hideOnMobile}
         variant="outline"
         color="secondary"
       >
