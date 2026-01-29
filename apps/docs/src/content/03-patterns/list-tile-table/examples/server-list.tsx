@@ -26,6 +26,7 @@ export default () => {
       </Heading>
       <LayoutCard>
         <ServerList.List
+          aria-label="Server"
           loadingItemsCount={3}
           getItemId={(server) => server.id}
           defaultViewMode="tiles"
@@ -69,7 +70,10 @@ export default () => {
             name="Filter"
             property="customer"
           />
-          <ServerList.Item showTiles>
+          <ServerList.Item
+            textValue={(server) => server.description}
+            showTiles
+          >
             {(server) => (
               <ListItemView>
                 <Avatar

@@ -36,6 +36,7 @@ export default () => {
       </Heading>
       <LayoutCard>
         <DomainList.List
+          aria-label="Domains"
           loadingItemsCount={3}
           getItemId={(domain) => domain.id}
         >
@@ -62,7 +63,9 @@ export default () => {
           />
           <DomainList.Search />
           <DomainList.Filter name="Typ" property="type" />
-          <DomainList.Item>
+          <DomainList.Item
+            textValue={(domain) => domain.domain}
+          >
             {(domain) => (
               <ListItemView>
                 <Avatar

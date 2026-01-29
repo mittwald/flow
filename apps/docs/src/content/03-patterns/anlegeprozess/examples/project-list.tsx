@@ -22,7 +22,10 @@ export default () => {
 
   return (
     <LayoutCard>
-      <ProjectList.List getItemId={(project) => project.id}>
+      <ProjectList.List
+        aria-label="Projekte"
+        getItemId={(project) => project.id}
+      >
         <ProjectList.StaticData
           data={[
             {
@@ -48,7 +51,10 @@ export default () => {
           ]}
         />
         <ProjectList.Search />
-        <ProjectList.Item showTiles>
+        <ProjectList.Item
+          textValue={(project) => project.name}
+          showTiles
+        >
           {(project) => (
             <ListItemView>
               <Avatar>
