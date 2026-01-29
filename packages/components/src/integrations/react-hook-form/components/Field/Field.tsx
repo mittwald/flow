@@ -129,6 +129,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       ...fieldProps,
       selectedKey: value,
     },
+    Rating: fieldProps,
   };
 
   return (

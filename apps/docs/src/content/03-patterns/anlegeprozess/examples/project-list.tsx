@@ -22,33 +22,39 @@ export default () => {
 
   return (
     <LayoutCard>
-      <ProjectList.List getItemId={(project) => project.id}>
+      <ProjectList.List
+        aria-label="Projekte"
+        getItemId={(project) => project.id}
+      >
         <ProjectList.StaticData
           data={[
             {
               id: "1",
               name: "Café-Gebäck-Haus",
-              type: "Space-Server: Mein Server",
+              type: "vServer: Mein Server",
             },
             {
               id: "2",
               name: "Steelwork",
-              type: "proSpace",
+              type: "Webhosting",
             },
             {
               id: "3",
               name: "UtopiaVRSchule",
-              type: "proSpace lite",
+              type: "Dedicated Server: Mein Server",
             },
             {
               id: "4",
               name: "IT-Profis-Website",
-              type: "Space-Server: Mein Server",
+              type: "vServer: Mein Server",
             },
           ]}
         />
         <ProjectList.Search />
-        <ProjectList.Item showTiles>
+        <ProjectList.Item
+          textValue={(project) => project.name}
+          showTiles
+        >
           {(project) => (
             <ListItemView>
               <Avatar>

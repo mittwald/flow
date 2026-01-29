@@ -123,7 +123,9 @@ export const createCustomComponents = () => {
 
     hr: () => <Separator className={styles.separator} />,
 
-    table: ({ children }: PropsWithChildren) => <Table>{children}</Table>,
+    table: ({ children }: PropsWithChildren) => (
+      <Table aria-label="Tabelle">{children}</Table>
+    ),
     thead: ({ children }: PropsWithChildren) => (
       <TableHeader>{children}</TableHeader>
     ),

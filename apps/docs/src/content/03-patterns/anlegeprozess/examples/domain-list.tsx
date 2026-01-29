@@ -30,7 +30,10 @@ export default () => {
 
   return (
     <LayoutCard>
-      <DomainList.List getItemId={(domain) => domain.id}>
+      <DomainList.List
+        aria-label="Domains"
+        getItemId={(domain) => domain.id}
+      >
         <DomainList.StaticData
           data={[
             {
@@ -59,7 +62,10 @@ export default () => {
           ]}
         />
         <DomainList.Search />
-        <DomainList.Item showTiles>
+        <DomainList.Item
+          textValue={(domain) => domain.domain}
+          showTiles
+        >
           {(domain) => (
             <ListItemView>
               <Avatar

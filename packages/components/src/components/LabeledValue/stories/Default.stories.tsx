@@ -23,7 +23,7 @@ const meta: Meta<typeof LabeledValue> = {
   render: (props) => (
     <LabeledValue {...props}>
       <Label>Project</Label>
-      <Content>My proSpace</Content>
+      <Content>My Webhosting</Content>
     </LabeledValue>
   ),
 };
@@ -37,8 +37,8 @@ export const WithCopyButton: Story = {
   render: (props) => (
     <LabeledValue {...props}>
       <Label>Project</Label>
-      <Content>My proSpace</Content>
-      <CopyButton text="My proSpace" />
+      <Content>My Webhosting</Content>
+      <CopyButton text="My Webhosting" />
     </LabeledValue>
   ),
 };
