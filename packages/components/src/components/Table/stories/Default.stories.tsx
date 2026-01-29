@@ -73,7 +73,7 @@ export const WithFooter: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
           <TableCell horizontalAlign="end">32,00 €</TableCell>
         </TableRow>
         <TableRow>
@@ -102,7 +102,7 @@ export const WithRowHeader: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell rowHeader>proSpace (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell rowHeader>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
           <TableCell>32,00 €</TableCell>
         </TableRow>
         <TableRow>
