@@ -10,7 +10,7 @@ import { ViewModeContextMenu } from "@/components/List/components/Header/compone
 import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import { SortingContextMenu } from "@/components/List/components/Header/components/SortingContextMenu/SortingContextMenu";
-import { FilterContextMenuList } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenuList";
+import { FilterContextMenus } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenus";
 import { AllFiltersModal } from "@/components/List/components/Header/components/AllFiltersModal/AllFiltersModal";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 
@@ -40,7 +40,7 @@ export const Header: FC<PropsWithClassName> = (props) => {
           <DivView className={styles.options}>
             <ViewModeContextMenu />
             <SortingContextMenu />
-            <FilterContextMenuList />
+            <FilterContextMenus />
             <AllFiltersModal />
 
             {list.search && <SearchField search={list.search} />}

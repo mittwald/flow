@@ -28,7 +28,7 @@ test.each(testEnvironments)(
         id: string;
         name: string;
         role: string;
-        active: boolean;
+        status: string;
       }>();
 
       return (
@@ -38,11 +38,22 @@ test.each(testEnvironments)(
           </ActionGroup>
           <List.StaticData
             data={[
-              { id: "1", name: "Max Mustermann", role: "Admin", active: true },
-              { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "1",
+                name: "Max Mustermann",
+                role: "Admin",
+                status: "active",
+              },
+              {
+                id: "2",
+                name: "John Doe",
+                role: "Developer",
+                status: "unavailable",
+              },
             ]}
           />
           <List.Filter property="role" name="Role" />
+          <List.Filter property="status" name="Status" priority="secondary" />
           <List.Search data-testid="search" />
           <List.Sorting property="name" name="A-Z" defaultEnabled />
           <List.Sorting property="name" name="Z-A" direction="desc" />
@@ -54,7 +65,7 @@ test.each(testEnvironments)(
                 </Avatar>
                 <Heading>
                   {i.name}
-                  {i.active && <Badge>Active</Badge>}
+                  {i.status === "active" && <Badge>Active</Badge>}
                 </Heading>
                 <Text>{i.role}</Text>
                 <Content>Content</Content>
@@ -79,6 +90,7 @@ test.each(testEnvironments)(
     const sorting = page.getByRole("button", { name: "A-Z" });
     const filter = page.getByRole("button", { name: "Role" });
     const contextMenu = page.getByLocator('[aria-label="Options"]');
+    const allFilters = page.getByRole("button", { name: "All Filters" });
 
     await testScreenshot("List items - default");
 
@@ -104,7 +116,11 @@ test.each(testEnvironments)(
     await testScreenshot("List items - searched");
 
     await userEvent.dblClick(bottomContent);
-    await testScreenshot("List items - Bottom content text selected");
+    await testScreenshot("List items - bottom content text selected");
+
+    await allFilters.click();
+    await testScreenshot("List items - all filters opened");
+    await userEvent.keyboard("{escape}");
 
     await contextMenu.click();
     await testScreenshot("List items - ContextMenu opened");

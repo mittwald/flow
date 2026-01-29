@@ -3,7 +3,7 @@ import React from "react";
 import { useList } from "@/components/List";
 import { FilterContextMenu } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenu";
 
-export const FilterContextMenuList: FC = () => {
+export const FilterContextMenus: FC = () => {
   const list = useList();
 
   return list.filters
