@@ -19,10 +19,7 @@ export interface ImageCropperProps
   height?: number;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
     image,
@@ -60,16 +57,12 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   useEffect(() => {
     async function crop() {
       if (croppedAreaPixels) {
-        try {
-          const croppedImageFile = await getCroppedImageFile(
-            imageSrc,
-            croppedAreaPixels,
-          );
-          if (onCropComplete) {
-            onCropComplete(croppedImageFile);
-          }
-        } catch (e) {
-          console.error(e);
+        const croppedImageFile = await getCroppedImageFile(
+          imageSrc,
+          croppedAreaPixels,
+        );
+        if (onCropComplete) {
+          onCropComplete(croppedImageFile);
         }
       }
     }
