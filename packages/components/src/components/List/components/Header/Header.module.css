@@ -27,25 +27,25 @@
   }
 
   @container (min-width: 850px) {
-    &.withSearch .mobile {
+    &.withSearch .hideOnDesktop {
       display: none;
     }
   }
 
   @container (max-width: 850px) {
-    &.withSearch .desktop {
+    &.withSearch .hideOnMobile {
       display: none;
     }
   }
 
   @container (min-width: 650px) {
-    &:not(.withSearch) .mobile {
+    &:not(.withSearch) .hideOnDesktop {
       display: none;
     }
   }
 
   @container (max-width: 650px) {
-    &:not(.withSearch) .desktop {
+    &:not(.withSearch) .hideOnMobile {
       display: none;
     }
   }

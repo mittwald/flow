@@ -40,6 +40,7 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
+/** @flr-generate all */
 export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",

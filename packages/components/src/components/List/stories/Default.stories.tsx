@@ -336,3 +336,64 @@ export const LoadingView: Story = {
     );
   },
 };
+
+export const WithSecondaryFilters: Story = {
+  render: () => {
+    const DomainList = typedList<Domain>();
+    const availableTypes = usePromise(getTypes, []);
+
+    return (
+      <SettingsProvider type="localStorage" storageKey="listStory">
+        <Section>
+          <Heading>Domains</Heading>
+          <DomainList.List
+            batchSize={5}
+            aria-label="Domains"
+            settingStorageKey="domains"
+          >
+            <ActionGroup>
+              <Button color="secondary" variant="soft" slot="secondary">
+                Herunterladen
+              </Button>
+              <Button color="accent">Anlegen</Button>
+            </ActionGroup>
+            <DomainList.LoaderAsync manualPagination manualSorting={false}>
+              {loadDomains}
+            </DomainList.LoaderAsync>
+            <DomainList.Filter
+              values={availableTypes}
+              property="type"
+              mode="all"
+              name="Typ"
+              defaultSelected={["Domain"]}
+            />
+            <DomainList.Filter
+              property="tld"
+              mode="all"
+              name="TLD"
+              visibility="secondary"
+            />
+
+            <DomainList.Search autoFocus />
+            <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
+            <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+            <DomainList.Sorting property="type" name="Typ" />
+            <DomainList.Sorting property="tld" name="TLD" />
+
+            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
+              {(domain) => (
+                <ListItemView>
+                  <Avatar>
+                    <IconDomain />
+                  </Avatar>
+                  <Heading>{domain.hostname}</Heading>
+                  <Text>{domain.type}</Text>
+                </ListItemView>
+              )}
+            </DomainList.Item>
+          </DomainList.List>
+        </Section>
+      </SettingsProvider>
+    );
+  },
+};

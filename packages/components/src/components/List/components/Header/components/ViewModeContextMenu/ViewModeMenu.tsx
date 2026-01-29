@@ -5,7 +5,7 @@ import { useList } from "@/components/List";
 import { IconView } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import TextView from "@/views/TextView";
-import { ViewModeMenuItem } from "@/components/List/components/Header/components/Settings/ViewModeMenuItem";
+import { ViewModeMenuItem } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeMenuItem";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import styles from "@/components/List/components/Header/Header.module.css";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";

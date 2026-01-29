@@ -8,6 +8,7 @@ export type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 
 export type ModalTriggerProps = Simplify<OverlayTriggerProps>;
 
+/** @flr-generate all */
 export const ModalTrigger: FC<ModalTriggerProps> = (props) => {
   const { children, ...triggerProps } = props;
   return (
