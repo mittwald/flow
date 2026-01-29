@@ -2,7 +2,7 @@
 
 Die List bildet den strukturierten Rahmen für sogenannte **ListItems**.
 Alternativ können in der List Elemente in einer
-[Table](/04-components/structure/table) dargestellt werden, wenn eine
+[Table](/04-components/structure/table/overview) dargestellt werden, wenn eine
 tabellarische Ansicht mit Spalten sinnvoll ist.
 
 Ein ListItem ist ein Eintrag in der List und repräsentiert ein spezifisches
@@ -12,8 +12,9 @@ jeweilige Element zu verstehen.
 
 Die List fasst alle ListItems bzw. Tabelleneinträge zusammen und stellt
 Funktionen wie **Sortierung**, **Filterung** und **Suche** bereit. Zusätzlich
-kann der User über einen „Mehr anzeigen“-[Button](/04-components/actions/button)
-steuern, wie viele ListItems gleichzeitig angezeigt werden.
+kann der User über einen „Mehr
+anzeigen“-[Button](/04-components/actions/button/overview) steuern, wie viele
+ListItems gleichzeitig angezeigt werden.
 
 ## Best practices
 
@@ -48,13 +49,13 @@ Verwende eine List, um ...
 
 - Die List wird häufig auf Übersichtsseiten eingesetzt, z. B. um alle Domains
   auf einen Blick darzustellen. Von dort aus können User in die zugehörigen
-  [Detailseiten](/03-patterns/struktur) navigieren.
+  [Detailseiten](/03-patterns/detail-page) navigieren.
 - Sie nimmt immer die volle Breite des Inhalts einer
-  [LayoutCard](/04-components/structure/layout-card) ein.
+  [LayoutCard](/04-components/structure/layout-card/overview) ein.
 - Wenn neben der List weiterer Inhalt auf der Seite vorhanden ist, sollte dieser
   oberhalb platziert werden. Auf diese Weise werden Layout-Verschiebungen durch
-  das Nachladen über den „Mehr anzeigen“-[Button](/04-components/actions/button)
-  vermieden.
+  das Nachladen über den „Mehr
+  anzeigen“-[Button](/04-components/actions/button/overview) vermieden.
 
 ## Ansichten
 
@@ -63,9 +64,10 @@ Die List unterstützt drei verschiedene Ansichten: **Liste, Raster** und
 
 In der Listen- und Rasteransicht werden unterschiedliche Varianten des ListItems
 dargestellt. In der Tabellenansicht verwendet die List die
-[Table](/04-components/structure/table)-Component. Sind mehrere Ansichten
-verfügbar, können User über den Ansichts-[Button](/04-components/actions/button)
-zwischen ihnen wechseln.
+[Table](/04-components/structure/table/overview)-Component. Sind mehrere
+Ansichten verfügbar, können User über den
+Ansichts-[Button](/04-components/actions/button/overview) zwischen ihnen
+wechseln.
 
 - **Liste:** Besonders geeignet, wenn viele Elemente übersichtlich, platzsparend
   und gleichzeitig ansprechend dargestellt werden sollen.
@@ -77,25 +79,26 @@ zwischen ihnen wechseln.
 
 ## Sortierung
 
-Der Sortierungs-[Button](/04-components/actions/button) wird stets links neben
-dem Filter-Button angezeigt. Die Standardsortierung sollte dem häufigsten
-Anwendungsfall entsprechen (z. B. „Neueste zuerst“ bei einer Änderungshistorie).
-Die aktive Sortierung wird im Sortierungs-Button angezeigt (siehe Abschnitt
-Writing guidelines).
+Der Sortierungs-[Button](/04-components/actions/button/overview) wird stets
+links neben dem Filter-Button angezeigt. Die Standardsortierung sollte dem
+häufigsten Anwendungsfall entsprechen (z. B. „Neueste zuerst“ bei einer
+Änderungshistorie). Die aktive Sortierung wird im Sortierungs-Button angezeigt
+(siehe Abschnitt Writing guidelines).
 
 ## Filter
 
 Ein Klick auf den Filter-Button öffnet ein
-[ContextMenu](/04-components/actions/context-menu), in dem Filter aktiviert oder
-deaktiviert werden können.
+[ContextMenu](/04-components/actions/context-menu/overview), in dem Filter
+aktiviert oder deaktiviert werden können.
 
 - Unterstützt der Filter eine **Mehrfachauswahl**, werden die Optionen als
-  [Checkbox](/04-components/form-controls/checkbox) dargestellt.
+  [Checkbox](/04-components/form-controls/checkbox/overview) dargestellt.
 - Erfordert ein Filter **Einzelauswahl**, werden die Optionen als
-  [RadioGroup](/04-components/form-controls/radio-group) angezeigt.
-- Jeder **aktive Filter** wird durch eine [Badge](/04-components/status/badge)
-  visualisiert, der per Klick einzeln entfernt werden kann. Sind mindestens zwei
-  Filter aktiv, erscheint zusätzlich ein “Filter zurücksetzen”-Button.
+  [RadioGroup](/04-components/form-controls/radio-group/overview) angezeigt.
+- Jeder **aktive Filter** wird durch eine
+  [Badge](/04-components/status/badge/overview) visualisiert, der per Klick
+  einzeln entfernt werden kann. Sind mindestens zwei Filter aktiv, erscheint
+  zusätzlich ein “Filter zurücksetzen”-Button.
 - Mehrere Filter **derselben Kategorie** (z. B. Status, Art, Größe, Abteilung …)
   sollten in einem eigenen Filter-Button zusammengefasst werden. Filter ohne
   Kategorie können unter einem allgemeinen „Filter“-Button gruppiert werden.
@@ -115,8 +118,8 @@ deaktiviert werden können.
 
 Standardmäßig werden maximal 10 ListItems angezeigt. Mit der Option `batchSize`
 kann die Anzahl der anfänglichen ListItems angepasst werden. Über den "Mehr
-anzeigen"-[Button](/04-components/actions/button) können bei Bedarf weitere
-ListItems nachgeladen werden.
+anzeigen"-[Button](/04-components/actions/button/overview) können bei Bedarf
+weitere ListItems nachgeladen werden.
 
 Beachte bei der Anpassung der Pagination, dass ...
 
@@ -139,12 +142,13 @@ dargestellt werden.
 
 In der **Listenansicht** besteht ein ListItem typischerweise aus:
 
-- **Avatar:** Der [Avatar](/04-components/content/avatar) steht am Anfang eines
-  ListItems. Wird ein [Icon](/04-components/content/icon) verwendet, sollte es
-  die Kategorie des dargestellten Elements widerspiegeln (z. B. ein Domain-Icon
-  bei der Kategorie Domain). Falls der User für das Element ein
-  [Image](/04-components/content/image) hochladen kann, wird dieses angezeigt.
-  Ist kein Image vorhanden, sollten stattdessen Initialen erscheinen.
+- **Avatar:** Der [Avatar](/04-components/content/avatar/overview) steht am
+  Anfang eines ListItems. Wird ein [Icon](/04-components/content/icon/overview)
+  verwendet, sollte es die Kategorie des dargestellten Elements widerspiegeln
+  (z. B. ein Domain-Icon bei der Kategorie Domain). Falls der User für das
+  Element ein [Image](/04-components/content/image/overview) hochladen kann,
+  wird dieses angezeigt. Ist kein Image vorhanden, sollten stattdessen Initialen
+  erscheinen.
 - **Titel:** Der Titel gibt den vergebenen Namen wieder.
 - **Untertitel:** Unterhalb der Benennung können weitere Informationen ergänzt
   werden. Der Aufbau folgt einem festen Muster: Beschreibender Untertitel – 1.
@@ -154,32 +158,32 @@ In der **Listenansicht** besteht ein ListItem typischerweise aus:
   Overview: Content Slots).
 - **Aktionen:** Für Interaktionen mit dem ListItem stehen zwei Varianten zur
   Verfügung. Entweder werden Aktionen über ein
-  [ContextMenu](/04-components/actions/context-menu) angeboten, oder sie
-  erscheinen direkt als [Buttons](/04-components/actions/button) innerhalb des
-  ListItems.
+  [ContextMenu](/04-components/actions/context-menu/overview) angeboten, oder
+  sie erscheinen direkt als [Buttons](/04-components/actions/button/overview)
+  innerhalb des ListItems.
 - **Accordion-Funktion:** Optional kann ein ListItem eine Accordion-Funktion
   besitzen.
 
 In der **Rasteransicht** ist die Darstellung kompakter und stärker visuell
-ausgerichtet. Der [Avatar](/04-components/content/avatar) wird hier größer und
-in eckiger Form angezeigt. Die grundlegenden Funktionen sind vergleichbar mit
-denen der Listenansicht, allerdings entfällt in diesem Modus der Top Content
-sowie die Accordion-Funktion.
+ausgerichtet. Der [Avatar](/04-components/content/avatar/overview) wird hier
+größer und in eckiger Form angezeigt. Die grundlegenden Funktionen sind
+vergleichbar mit denen der Listenansicht, allerdings entfällt in diesem Modus
+der Top Content sowie die Accordion-Funktion.
 
 ## Tabellenansicht
 
 Wird eine List mit einer Tabellenansicht verwendet, sind die Guidelines der
-[Table](/04-components/structure/table) zu beachten.
+[Table](/04-components/structure/table/overview) zu beachten.
 
 ## IllustratedMessage
 
-Die [IllustratedMessage](/04-components/content/illustrated-message) wird in
-zwei Anwendungsfällen verwendet:
+Die [IllustratedMessage](/04-components/content/illustrated-message/overview)
+wird in zwei Anwendungsfällen verwendet:
 
 - **Keine Einträge vorhanden:** Die List wird durch eine IllustratedMessage
   ersetzt. Diese lädt den User über einen
-  [Button](/04-components/actions/button) dazu ein, das erste Element zu
-  erstellen.
+  [Button](/04-components/actions/button/overview) dazu ein, das erste Element
+  zu erstellen.
 - **Keine Such- oder Filterergebnisse:** Anstelle der ListItems zeigt die List
   eine IllustratedMessage an, die verdeutlicht, dass keine Ergebnisse vorliegen.
 
@@ -190,11 +194,11 @@ zwei Anwendungsfällen verwendet:
 ## Sortierung
 
 Ist die Standardsortierung aktiv, zeigt der
-Sortierungs-[Button](/04-components/actions/button) lediglich “Sortierung” an.
-Wählt der User eine spezifische Sortierung aus, wird der Button-Text
-entsprechend angepasst. Die Sortiermethode sollte so benannt werden, dass sofort
-ersichtlich ist, nach welchem Kriterium und in welcher Reihenfolge sortiert
-wird.
+Sortierungs-[Button](/04-components/actions/button/overview) lediglich
+“Sortierung” an. Wählt der User eine spezifische Sortierung aus, wird der
+Button-Text entsprechend angepasst. Die Sortiermethode sollte so benannt werden,
+dass sofort ersichtlich ist, nach welchem Kriterium und in welcher Reihenfolge
+sortiert wird.
 
 <DoAndDont>
   <Do example="sortingDo">
@@ -209,9 +213,9 @@ wird.
 
 ## Filterung
 
-Aktive Filter werden als [Badges](/04-components/status/badge) dargestellt.
-Diese sollten selbsterklärend sein. Bei mehrdeutigen Begriffen empfiehlt es
-sich, zusätzlichen Kontext anzugeben.
+Aktive Filter werden als [Badges](/04-components/status/badge/overview)
+dargestellt. Diese sollten selbsterklärend sein. Bei mehrdeutigen Begriffen
+empfiehlt es sich, zusätzlichen Kontext anzugeben.
 
 <Do example="namingDo">
   Intuitiv verständliche Filter benötigen keinen zusätzlichen Kontext.
@@ -237,16 +241,16 @@ Suchfeld die Property `autoFocus`.
 ## Responsive layout
 
 Auf kleinen Bildschirmgrößen passt sich der Header der List an. Ansicht und
-Sortierung werden in einem Icon-[Button](/04-components/actions/button)
+Sortierung werden in einem Icon-[Button](/04-components/actions/button/overview)
 zusammengefasst, auch die Filter werden unter einem Icon-Button versteckt. Auf
 besonders kleinen Bildschirmen wandern diese Elemente zusammen mit der Suche
 eine Zeile nach unten.
 
 Der Inhalt der ListItems bricht in der Regel bei kleineren Bildschirmgrößen um.
 Der Top Content (siehe Content Slots im Overview) kann mithilfe von
-[ColumnLayouts](/04-components/structure/column-layout) auf kleinen Bildschirmen
-ausgeblendet werden. Dabei dürfen jedoch nur Informationen ausgeblendet werden,
-die der User nicht benötigt, um das ListItem zu verstehen.
+[ColumnLayouts](/04-components/structure/column-layout/overview) auf kleinen
+Bildschirmen ausgeblendet werden. Dabei dürfen jedoch nur Informationen
+ausgeblendet werden, die der User nicht benötigt, um das ListItem zu verstehen.
 
 <Info heading="Mobile Variante" mobile example="mobile" />
 
