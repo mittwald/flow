@@ -29,8 +29,8 @@ export const AllFiltersModal: FC = () => {
   ));
 
   const accordions = [
-    <ViewModeAccordion />,
-    <SortingAccordion />,
+    <ViewModeAccordion key="viewMode" />,
+    <SortingAccordion key="sorting" />,
     ...filterAccordions,
   ].filter(Boolean);
 
