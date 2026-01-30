@@ -1,6 +1,6 @@
 @use "@/styles/mixins/formControl";
 
-.textArea {
+.input {
   resize: none;
   min-width: 100%;
 
@@ -15,8 +15,5 @@
   &.resize {
     resize: both;
   }
-
-  .input {
-    @include formControl.formControl();
-  }
+  @include formControl.formControl();
 }

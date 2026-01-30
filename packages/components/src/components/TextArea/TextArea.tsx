@@ -67,7 +67,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
   }
 
   const rootClassName = clsx(
-    styles.textArea,
     typeof allowResize === "boolean" && allowResize ? styles.resize : null,
     allowResize === "horizontal"
       ? styles.horizontalResize
