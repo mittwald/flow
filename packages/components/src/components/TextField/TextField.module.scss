@@ -1,5 +1,20 @@
 @use "@/styles/mixins/formControl";
 
-.textField {
-  @include formControl.formControl();
+.inputContainer {
+  order: 2;
+  display: flex;
+  position: relative;
+
+  .input {
+    flex-grow: 1;
+    @include formControl.formControl();
+  }
+
+  .button {
+    position: absolute;
+    right: var(--size-rem--xxxs);
+    top: var(--size-rem--xxxs);
+    bottom: var(--size-rem--xxxs);
+    padding-block: initial;
+  }
 }

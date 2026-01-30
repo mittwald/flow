@@ -1,6 +1,4 @@
 import * as Aria from "react-aria-components";
-import type { TextFieldBaseProps } from "@/components/TextFieldBase";
-import { TextFieldBase } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -8,17 +6,19 @@ import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
+import { FieldDescription } from "@/components/FieldDescription";
 
 export interface TextAreaProps
   extends
-    Omit<
-      TextFieldBaseProps,
-      "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "ref"
-    >,
+    PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
     Pick<Aria.TextAreaProps, "placeholder" | "rows" | "aria-hidden">,
     FlowComponentProps<HTMLTextAreaElement> {
+  /** Whether a character count should be displayed inside the field description. */
+  showCharacterCount?: boolean;
   /**
    * Whether the text area should grow if its content gets longer than its
    * initial height.
@@ -43,8 +43,21 @@ export const TextArea = flowComponent("TextArea", (props) => {
     ref,
     allowVerticalResize,
     allowHorizontalResize,
+    showCharacterCount,
+    className,
     ...rest
   } = useControlledHostValueProps(props);
+
+  const [charactersCount, setCharactersCount] = useState(
+    props.defaultValue?.length ?? props.value?.length ?? 0,
+  );
+
+  const {
+    FieldErrorView,
+    FieldErrorCaptureContext,
+    fieldPropsContext,
+    fieldProps,
+  } = useFieldComponent(props);
 
   let { allowResize } = props;
   if (allowVerticalResize) {
@@ -61,7 +74,25 @@ export const TextArea = flowComponent("TextArea", (props) => {
       : allowResize === "vertical"
         ? styles.verticalResize
         : null,
+    fieldProps.className,
+    className,
   );
+
+  const handleChange = (v: string) => {
+    if (showCharacterCount) {
+      setCharactersCount(v.length);
+    }
+    if (props.onChange) {
+      props.onChange(v);
+    }
+  };
+
+  const translation = useLocalizedStringFormatter(locales);
+
+  const charactersCountDescription = translation.format("textArea.characters", {
+    count: charactersCount,
+    maxCount: props.maxLength ?? 0,
+  });
 
   const localRef = useObjectRef(ref);
 
@@ -123,43 +154,35 @@ export const TextArea = flowComponent("TextArea", (props) => {
     }
   };
 
-  const input = (
-    <Aria.TextArea
-      rows={rows}
-      aria-hidden={props["aria-hidden"]}
-      placeholder={placeholder}
-      className={rootClassName}
-      ref={localRef}
-      onChange={updateHeight}
-      style={{
-        minHeight: getHeight(rows),
-        maxHeight: verticallyResizable
-          ? undefined
-          : getHeight(autoResizeMaxRows),
-      }}
-    />
-  );
-
-  const {
-    FieldErrorView,
-    FieldErrorCaptureContext,
-    fieldPropsContext,
-    fieldProps,
-  } = useFieldComponent(props);
-
   return (
-    <TextFieldBase
+    <Aria.TextField
       {...rest}
       {...fieldProps}
-      className={clsx(rest.className, fieldProps.className)}
-      FieldErrorView={FieldErrorView}
-      FieldErrorCaptureContext={FieldErrorCaptureContext}
-      input={input}
+      className={rootClassName}
+      onChange={handleChange}
     >
       <PropsContextProvider props={fieldPropsContext}>
-        {children}
+        <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+        <Aria.TextArea
+          rows={rows}
+          aria-hidden={props["aria-hidden"]}
+          placeholder={placeholder}
+          className={styles.input}
+          ref={localRef}
+          onChange={updateHeight}
+          style={{
+            minHeight: getHeight(rows),
+            maxHeight: verticallyResizable
+              ? undefined
+              : getHeight(autoResizeMaxRows),
+          }}
+        />
+        {showCharacterCount && (
+          <FieldDescription>{charactersCountDescription}</FieldDescription>
+        )}
+        <FieldErrorView />
       </PropsContextProvider>
-    </TextFieldBase>
+    </Aria.TextField>
   );
 });
 

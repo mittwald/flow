@@ -1,5 +1,5 @@
 import TextArea from "@/components/TextArea";
-import TextField from "@/components/TextField";
+import TextField from "@/components/TextField/index";
 import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
 
