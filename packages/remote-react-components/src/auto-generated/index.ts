@@ -78,8 +78,6 @@ export * from "./MenuTrigger";
 export * from "./Message";
 export * from "./MessageSeparator";
 export * from "./MessageThread";
-export * from "./Modal";
-export * from "./ModalTrigger";
 export * from "./Navigation";
 export * from "./NavigationGroup";
 export * from "./Notification";

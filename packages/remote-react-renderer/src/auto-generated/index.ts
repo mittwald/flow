@@ -79,8 +79,6 @@ import { MenuTrigger as MenuTrigger } from "@mittwald/flow-react-components";
 import { Message as Message } from "@mittwald/flow-react-components";
 import { MessageSeparator as MessageSeparator } from "@mittwald/flow-react-components";
 import { MessageThread as MessageThread } from "@mittwald/flow-react-components";
-import { Modal as Modal } from "@mittwald/flow-react-components";
-import { ModalTrigger as ModalTrigger } from "@mittwald/flow-react-components";
 import { Navigation as Navigation } from "@mittwald/flow-react-components";
 import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components";
 import { Notification as Notification } from "@mittwald/flow-react-components";
@@ -334,11 +332,6 @@ export const flowComponents = {
   "flr-message-thread": createFlowRemoteComponentRenderer(
     "MessageThread",
     MessageThread,
-  ),
-  "flr-modal": createFlowRemoteComponentRenderer("Modal", Modal),
-  "flr-modal-trigger": createFlowRemoteComponentRenderer(
-    "ModalTrigger",
-    ModalTrigger,
   ),
   "flr-navigation": createFlowRemoteComponentRenderer("Navigation", Navigation),
   "flr-navigation-group": createFlowRemoteComponentRenderer(

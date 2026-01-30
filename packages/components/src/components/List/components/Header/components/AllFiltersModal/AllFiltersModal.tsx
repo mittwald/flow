@@ -6,8 +6,6 @@ import { useList } from "@/components/List";
 import styles from "@/components/List/components/Header/Header.module.css";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
-import ModalTriggerView from "@/views/ModalTriggerView";
-import ModalView from "@/views/ModalView";
 import ContentView from "@/views/ContentView";
 import SectionView from "@/views/SectionView";
 import { FilterAccordion } from "@/components/List/components/Header/components/AllFiltersModal/FilterAccordion";
@@ -19,6 +17,7 @@ import { Render } from "@/lib/react/components/Render";
 import { useOverlayController } from "@/lib/controller";
 import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
+import Modal, { ModalTrigger } from "@/components/Modal";
 
 export const AllFiltersModal: FC = () => {
   const list = useList();
@@ -45,7 +44,7 @@ export const AllFiltersModal: FC = () => {
   }
 
   return (
-    <ModalTriggerView>
+    <ModalTrigger>
       <ButtonView
         className={clsx(
           styles.hideOnMobile,
@@ -67,7 +66,7 @@ export const AllFiltersModal: FC = () => {
         <IconFilter />
       </ButtonView>
 
-      <ModalView offCanvas>
+      <Modal offCanvas>
         <HeadingView>{stringFormatter.format("list.filters.all")}</HeadingView>
         <ContentView>
           <SectionView>{...accordions}</SectionView>
@@ -96,7 +95,7 @@ export const AllFiltersModal: FC = () => {
             );
           }}
         </Render>
-      </ModalView>
-    </ModalTriggerView>
+      </Modal>
+    </ModalTrigger>
   );
 };
