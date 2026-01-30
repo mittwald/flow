@@ -92,36 +92,38 @@ export const TextField = flowComponent("TextField", (props) => {
     >
       <TunnelProvider>
         <PropsContextProvider props={propsContext}>
-          <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
-          <div className={styles.inputContainer}>
-            <Aria.Input
-              form={form}
-              placeholder={placeholder}
-              className={styles.input}
-              ref={ref}
-            />
-            <TunnelExit id="button" />
-            {typeFromProps === "password" && (
-              <Button
-                color="secondary"
-                variant="plain"
-                className={styles.button}
-                onPress={() =>
-                  setType(type === "password" ? "text" : "password")
-                }
-                aria-label={translation.format(
-                  `textField.password.${type === "password" ? "show" : "hide"}`,
-                )}
-              >
-                {type === "password" ? <IconShow /> : <IconHide />}
-              </Button>
+          <FieldErrorCaptureContext>
+            {children}
+            <div className={styles.inputContainer}>
+              <Aria.Input
+                form={form}
+                placeholder={placeholder}
+                className={styles.input}
+                ref={ref}
+              />
+              <TunnelExit id="button" />
+              {typeFromProps === "password" && (
+                <Button
+                  color="secondary"
+                  variant="plain"
+                  className={styles.button}
+                  onPress={() =>
+                    setType(type === "password" ? "text" : "password")
+                  }
+                  aria-label={translation.format(
+                    `textField.password.${type === "password" ? "show" : "hide"}`,
+                  )}
+                >
+                  {type === "password" ? <IconShow /> : <IconHide />}
+                </Button>
+              )}
+            </div>
+            {showCharacterCount && (
+              <FieldDescription>{charactersCountDescription}</FieldDescription>
             )}
-          </div>
+          </FieldErrorCaptureContext>
+          <FieldErrorView />
         </PropsContextProvider>
-        {showCharacterCount && (
-          <FieldDescription>{charactersCountDescription}</FieldDescription>
-        )}
-        <FieldErrorView />
       </TunnelProvider>
     </Aria.TextField>
   );
