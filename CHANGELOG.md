@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.661](https://github.com/mittwald/flow/compare/0.2.0-alpha.660...0.2.0-alpha.661) (2026-01-30)
+
+### Bug Fixes
+
+* **Form:** fix onAfterSubmit callback is not called ([#2290](https://github.com/mittwald/flow/issues/2290)) ([3241acc](https://github.com/mittwald/flow/commit/3241acc64b68d59934370ac043b563d1d8ab36eb))
+
 # [0.2.0-alpha.660](https://github.com/mittwald/flow/compare/0.2.0-alpha.659...0.2.0-alpha.660) (2026-01-29)
 
 ### Bug Fixes
