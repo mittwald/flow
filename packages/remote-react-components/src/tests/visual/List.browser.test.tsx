@@ -88,7 +88,6 @@ test.each(testEnvironments)(
     const search = page.getByTestId("search");
     const bottomContent = page.getByTestId("bottomContent");
     const sorting = page.getByRole("button", { name: "A-Z" });
-    const filter = page.getByRole("button", { name: "Role" });
     const contextMenu = page.getByLocator('[aria-label="Options"]');
     const allFilters = page.getByRole("button", { name: "All Filters" });
 
@@ -100,8 +99,8 @@ test.each(testEnvironments)(
 
     await testScreenshot("List items - sorted");
 
-    await filter.click();
-    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List items - filtered");
