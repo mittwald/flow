@@ -17,12 +17,15 @@ import { useOverlayController } from "@/lib/controller";
 import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
 import Modal, { ModalTrigger } from "@/components/Modal";
+import { SkeletonText } from "@/components/SkeletonText";
 
 export const AllFiltersModal: FC = () => {
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const totalItemCount = list.items.entries.length;
+  const isInitiallyLoading = list.loader.useIsInitiallyLoading();
+  const totalItemCount =
+    list.batches.getTotalItemsCount() ?? list.items.entries.length;
 
   const filterAccordions = list.filters.map((f) => (
     <FilterAccordion filter={f} key={f.name} />
@@ -75,9 +78,15 @@ export const AllFiltersModal: FC = () => {
 
         <ActionGroupView>
           <ButtonView onPress={() => controller.close()}>
-            {stringFormatter.format("list.results.show", {
-              totalItemCount,
-            })}
+            <TextView>
+              {isInitiallyLoading ? (
+                <SkeletonText width="16ch" />
+              ) : (
+                stringFormatter.format("list.results.show", {
+                  totalItemCount,
+                })
+              )}
+            </TextView>
           </ButtonView>
           <ButtonView
             color="secondary"
