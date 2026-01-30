@@ -9,6 +9,7 @@ import {
   type Ref,
   useId,
   useMemo,
+  useRef,
 } from "react";
 import type {
   FieldValues,
@@ -18,6 +19,8 @@ import type {
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
+
+export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
 type FormComponentType = FC<
   PropsWithChildren<{
@@ -52,11 +55,28 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const newFormId = useId();
   const formId = idProp ?? newFormId;
   const FormComponent = useMemo(() => formComponent, [formId]);
+  const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
+
+  const handleSubmitResult = (result: unknown) => {
+    if (typeof result === "function") {
+      afterSubmitCallback.current = result as AfterFormSubmitCallback;
+    }
+  };
 
   const handleSubmit = (e?: FormEvent | F) => {
     const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
     formEvent?.stopPropagation();
-    return form.handleSubmit(onSubmit)(formEvent);
+    return form.handleSubmit((e) => {
+      const submitResult = onSubmit(e);
+      if (submitResult instanceof Promise) {
+        return submitResult.then(handleSubmitResult);
+      }
+      handleSubmitResult(submitResult);
+    })(formEvent);
+  };
+
+  const onAfterSuccessFeedback = () => {
+    afterSubmitCallback.current?.();
   };
 
   const refWithHotkeySubmit = useHotkeySubmit({
@@ -70,6 +90,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
         form={form as UseFormReturn}
         isReadOnly={isReadOnly}
         id={formId}
+        onAfterSuccessFeedback={onAfterSuccessFeedback}
       >
         <FormComponent
           {...formProps}
