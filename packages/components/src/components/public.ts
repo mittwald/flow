@@ -51,6 +51,7 @@ export * from "@/components/Icon";
 export * from "@/components/Icon/components/icons";
 export * from "@/components/IllustratedMessage";
 export * from "@/components/Image";
+export * from "@/components/ImageCropper";
 export * from "@/components/Initials";
 export * from "@/components/InlineCode";
 export * from "@/components/Label";

@@ -8,15 +8,18 @@
   --button-size: calc(var(--line-height--m) + var(--button--padding-y) * 2);
 
   .text {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    column-gap: var(--slider--spacing-x);
-    padding: 0 calc(var(--button-size) + var(--slider--spacing-x));
+    text-align: center;
+    align-items: end;
+    padding-inline: calc(var(--button-size) + var(--slider--spacing-x));
+    padding-top: calc(var(--slider--spacing-y) / 2);
 
     .value {
       font-weight: var(--slider--value-font-weight);
+    }
+
+    .label {
+      display: inline-flex;
+      column-gap: var(--label--spacing);
     }
   }
 

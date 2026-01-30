@@ -19,10 +19,14 @@ export interface SliderProps
     FlowComponentProps<HTMLInputElement>,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
+  /** Whether the marker for the initial value should be visible */
   showInitialMarker?: boolean;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
+  /** Whether the component is invalid. */
   isInvalid?: boolean;
+  /** Unit suffix appended to the displayed value */
+  unit?: string;
 }
 
 /** @flr-generate all */
@@ -36,6 +40,8 @@ export const Slider = flowComponent("Slider", (props) => {
     showInitialMarker,
     isReadOnly,
     ref,
+    step,
+    unit,
     ...rest
   } = props;
 
@@ -62,6 +68,7 @@ export const Slider = flowComponent("Slider", (props) => {
       unstyled: true,
       tunnelId: "label",
       ...fieldPropsContext.Label,
+      className: styles.label,
     },
   };
 
@@ -72,13 +79,17 @@ export const Slider = flowComponent("Slider", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         defaultValue={defaultValue}
+        step={step}
       >
         <TunnelProvider>
           <PropsContextProvider props={propsContext}>
             <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
             <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value} />
+              <span>
+                <Aria.SliderOutput className={styles.value} />{" "}
+                {unit && <b>{unit}</b>}{" "}
+              </span>
               <TunnelExit id="label" />
             </div>
 
@@ -99,17 +110,19 @@ export const Slider = flowComponent("Slider", (props) => {
                   }}
                 >
                   <Button
-                    onPress={() => state.decrementThumb(0)}
+                    onPress={() => state.decrementThumb(0, step)}
                     aria-label={stringFormatter.format("slider.decrement")}
                     className={styles.decrement}
+                    isDisabled={isDisabled}
                   >
                     <IconMinus />
                   </Button>
 
                   <Button
-                    onPress={() => state.incrementThumb(0)}
+                    onPress={() => state.incrementThumb(0, step)}
                     aria-label={stringFormatter.format("slider.increment")}
                     className={styles.increment}
+                    isDisabled={isDisabled}
                   >
                     <IconPlus />
                   </Button>
