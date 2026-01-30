@@ -33,8 +33,8 @@ steuern.
 
 ## Tabellenansicht
 
-Nutze `<List.Table />`, um die List als [Table](/04-components/structure/table)
-darzustellen.
+Nutze `<List.Table />`, um die List als
+[Table](/04-components/structure/table/overview) darzustellen.
 
 <LiveCodeEditor example="mode-table" editorCollapsed />
 
@@ -61,11 +61,11 @@ wird in `<Content slot="bottom" />` platziert.
 
 ## Mit Checkboxen
 
-[Checkboxen](/04-components/form-controls/checkbox) in einem ListItem werden
-automatisch am Anfang der Zeile angeordnet. Die Funktionalität der Checkbox wird
-nicht von der List gesteuert und muss individuell implementiert werden. Achte
-bei der Implementierung jedoch darauf, dass die gesamte Zeile zur Auswahl des
-Elements genutzt werden kann. Nutze dafür `onAction` der List.
+[Checkboxen](/04-components/form-controls/checkbox/overview) in einem ListItem
+werden automatisch am Anfang der Zeile angeordnet. Die Funktionalität der
+Checkbox wird nicht von der List gesteuert und muss individuell implementiert
+werden. Achte bei der Implementierung jedoch darauf, dass die gesamte Zeile zur
+Auswahl des Elements genutzt werden kann. Nutze dafür `onAction` der List.
 
 <LiveCodeEditor example="item-checkbox" editorCollapsed />
 
@@ -78,8 +78,9 @@ platziert werden. Die Position wird über das `slot`-Property gesteuert.
 
 ## Mit ColumnLayout
 
-Dem ListItem können die [ColumnLayout](/04-components/structure/column-layout)
-Properties `s`, `m` und `l` mitgegeben werden, um das Seitenverhältnis sowie das
+Dem ListItem können die
+[ColumnLayout](/04-components/structure/column-layout/overview) Properties `s`,
+`m` und `l` mitgegeben werden, um das Seitenverhältnis sowie das
 Umbruchverhalten von Header und Content zu steuern.
 
 <LiveCodeEditor example="item-column-layout" editorCollapsed />
@@ -93,7 +94,7 @@ Fall werden auch die entsprechenden Content Slots nicht angezeigt.
 ## Mit ActionGroup
 
 Verwende eine ActionGroup innerhalb des `<Content />`, um
-[Buttons](/04-components/actions/button) in der List zu platzieren.
+[Buttons](/04-components/actions/button/overview) in der List zu platzieren.
 
 <LiveCodeEditor example="item-action-group" editorCollapsed />
 
@@ -121,7 +122,7 @@ Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
 ## Suche
 
 Verwende `<List.Search />` innerhalb der List, um ein
-[SearchField](/04-components/form-controls/search-field) anzuzeigen.
+[SearchField](/04-components/form-controls/search-field/overview) anzuzeigen.
 Standardmäßig wird die Suche automatisch gestartet. Soll die Suche nur beim
 Drücken auf Enter ausgelöst werden, kann das Property `autoSubmit` auf `false`
 gesetzt werden.
@@ -139,8 +140,9 @@ festgelegt werden, wie viele Einträge gleichzeitig angezeigt werden sollen.
 ## ActionGroup
 
 Verwende `<ActionGroup />` innerhalb der List, um eine
-[ActionGroup](/04-components/actions/action-group) anzuzeigen. Hier können eine
-oder mehrere Aktionen definiert werden, die sich direkt auf die Liste beziehen.
+[ActionGroup](/04-components/actions/action-group/overview) anzuzeigen. Hier
+können eine oder mehrere Aktionen definiert werden, die sich direkt auf die
+Liste beziehen.
 
 <LiveCodeEditor example="actionGroup" editorCollapsed />
 

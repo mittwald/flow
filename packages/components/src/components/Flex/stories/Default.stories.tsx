@@ -88,7 +88,7 @@ export const WithPadding: Story = {
             <Text align="center">
               <strong>Shared Webhosting</strong>
               <br />
-              proSpace lite
+              Webhosting
             </Text>
             <Text>
               Ab <strong>10 €</strong>
@@ -114,7 +114,7 @@ export const WithPadding: Story = {
             <Text align="center">
               <strong>Managed Cloud Hosting</strong>
               <br />
-              proSpace
+              vServer
             </Text>
             <Text>
               Ab <strong>32 €</strong>

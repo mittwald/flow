@@ -10,6 +10,7 @@ import {
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import invariant from "invariant";
 import { useFormSubmitAction } from "@/integrations/react-hook-form/components/FormContextProvider/useFormSubmitAction";
+import type { AfterFormSubmitCallback } from "@/integrations/react-hook-form/components/Form/Form";
 
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
@@ -27,17 +28,24 @@ export interface FormContextProviderProps extends PropsWithChildren {
   form: UseFormReturn;
   id: string;
   isReadOnly?: boolean;
+  onAfterSuccessFeedback?: AfterFormSubmitCallback;
 }
 
 export const FormContextProvider = (props: FormContextProviderProps) => {
-  const { form, id, isReadOnly: isReadOnlyProp = false, children } = props;
-
+  const {
+    form,
+    id,
+    isReadOnly: isReadOnlyProp = false,
+    onAfterSuccessFeedback,
+    children,
+  } = props;
   const [isReadOnlyState, setReadOnly] = useState(isReadOnlyProp);
   const isReadOnly = isReadOnlyProp || isReadOnlyState;
 
   const formSubmitAction = useFormSubmitAction({
     form,
     setReadOnly,
+    onAfterSuccessFeedback,
   });
 
   return (

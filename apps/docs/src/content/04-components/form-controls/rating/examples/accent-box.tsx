@@ -14,7 +14,7 @@ import {
         <Text>250 ms</Text>
         <Text>Dateioperationen</Text>
       </BigNumber>
-      <Rating value={4} />
+      <Rating aria-label="Bewertung" value={4} isReadOnly />
       <Text>
         <small>Geringer Optimierungsbedarf</small>
       </Text>
@@ -26,7 +26,7 @@ import {
         <Text>100 ms</Text>
         <Text>Serveroperationen</Text>
       </BigNumber>
-      <Rating value={2} />
+      <Rating aria-label="Bewertung" value={2} isReadOnly />
       <Text>
         <small>Optimierungsbedarf</small>
       </Text>

@@ -75,6 +75,9 @@ export default function Page() {
             })),
           );
           console.log("Submitted:", data, "Files:", files);
+          return () => {
+            console.log("After submit callback");
+          };
         }}
       >
         <Field

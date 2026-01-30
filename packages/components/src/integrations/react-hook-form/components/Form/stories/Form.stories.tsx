@@ -16,6 +16,7 @@ import SubmitButton from "@/integrations/react-hook-form/components/SubmitButton
 import ResetButton from "@/integrations/react-hook-form/components/ResetButton";
 
 const submitAction = action("submit");
+const afterSubmitAction = action("afterSubmit");
 
 interface Values {
   name: string;
@@ -24,6 +25,7 @@ interface Values {
 const handleSubmit = async (values: Values) => {
   await asyncLongFunction();
   submitAction(values);
+  return afterSubmitAction;
 };
 
 const meta: Meta<typeof Form> = {

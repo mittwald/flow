@@ -15,7 +15,7 @@ import {
   </TableHeader>
   <TableBody>
     <TableRow>
-      <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
+      <TableCell>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
       <TableCell horizontalAlign="end">32,00 €</TableCell>
     </TableRow>
     <TableRow>

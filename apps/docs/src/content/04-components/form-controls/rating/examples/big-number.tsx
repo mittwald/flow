@@ -10,5 +10,5 @@ import {
     <Text>80%</Text>
     <Text>Performance</Text>
   </BigNumber>
-  <Rating value={4} />
+  <Rating aria-label="Performance" value={4} isReadOnly />
 </Flex>;

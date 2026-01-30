@@ -24,6 +24,7 @@ export default () => {
       </Heading>
       <LayoutCard>
         <TicketList.List
+          aria-label="Tickets"
           loadingItemsCount={3}
           getItemId={(ticket) => ticket.id}
           defaultViewMode="table"

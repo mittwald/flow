@@ -15,9 +15,11 @@ import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
 const handleSubmit = vitest.fn();
+vitest.useFakeTimers();
 
 beforeEach(() => {
   vitest.resetAllMocks();
+  vitest.clearAllTimers();
 });
 
 describe("resetting", () => {
@@ -107,6 +109,43 @@ describe("resetting", () => {
       expect(field).toHaveDisplayValue(expected);
     },
   );
+});
+
+describe("submission", () => {
+  const onAfterSubmit = vitest.fn();
+  const onSubmit = vitest.fn(() => onAfterSubmit);
+
+  const TestForm: FC = () => {
+    const form = useForm<object>();
+    return (
+      <Form form={form} onSubmit={onSubmit}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("submit callback is called", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    const textField = page.getByPlaceholder("textfield");
+    await userEvent.type(textField, "hello");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalledWith({ test: "hello" });
+  });
+
+  test("afterSubmit callback is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(500);
+    expect(onAfterSubmit).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(1000);
+    expect(onAfterSubmit).toHaveBeenCalled();
+  });
 });
 
 describe("readonly", () => {
