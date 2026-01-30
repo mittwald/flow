@@ -90,8 +90,8 @@ export const TextField = flowComponent("TextField", (props) => {
       onChange={handleChange}
       type={type}
     >
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+      <TunnelProvider>
+        <PropsContextProvider props={propsContext}>
           <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
           <div className={styles.inputContainer}>
             <Aria.Input
@@ -117,12 +117,12 @@ export const TextField = flowComponent("TextField", (props) => {
               </Button>
             )}
           </div>
-        </TunnelProvider>
+        </PropsContextProvider>
         {showCharacterCount && (
           <FieldDescription>{charactersCountDescription}</FieldDescription>
         )}
         <FieldErrorView />
-      </PropsContextProvider>
+      </TunnelProvider>
     </Aria.TextField>
   );
 });
