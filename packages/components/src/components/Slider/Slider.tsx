@@ -68,6 +68,7 @@ export const Slider = flowComponent("Slider", (props) => {
       unstyled: true,
       tunnelId: "label",
       ...fieldPropsContext.Label,
+      className: styles.label,
     },
   };
 
@@ -86,8 +87,8 @@ export const Slider = flowComponent("Slider", (props) => {
 
             <div className={styles.text}>
               <span>
-                <Aria.SliderOutput className={styles.value} />
-                {unit && <b>{unit}</b>}
+                <Aria.SliderOutput className={styles.value} />{" "}
+                {unit && <b>{unit}</b>}{" "}
               </span>
               <TunnelExit id="label" />
             </div>

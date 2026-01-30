@@ -70,7 +70,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   }, [croppedAreaPixels]);
 
   return (
-    <div className={rootClassName} style={{ maxWidth: width }}>
+    <div className={rootClassName} style={{ width }}>
       <div className={styles.cropperContainer} style={{ height }}>
         <Cropper
           crop={crop}
