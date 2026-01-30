@@ -28,7 +28,7 @@ export const ViewModeAccordion: FC = () => {
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>
           {availableViewModes.map((v) => (
-            <RadioView value={v} onPress={() => list.setViewMode(v)}>
+            <RadioView key={v} value={v} onPress={() => list.setViewMode(v)}>
               {stringFormatter.format(`list.settings.viewMode.${v}`)}
             </RadioView>
           ))}

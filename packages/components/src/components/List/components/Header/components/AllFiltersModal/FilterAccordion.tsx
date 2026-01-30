@@ -24,7 +24,7 @@ export const FilterAccordion: FC<Props> = (props) => {
         {filter.mode === "one" && (
           <RadioGroupView value={activeKeys[0]} m={[1, 1]}>
             {filter.values.map((v) => (
-              <RadioView value={v.id} onPress={() => v.toggle()}>
+              <RadioView key={v.id} value={v.id} onPress={() => v.toggle()}>
                 {v.render()}
               </RadioView>
             ))}
@@ -33,7 +33,7 @@ export const FilterAccordion: FC<Props> = (props) => {
         {filter.mode !== "one" && (
           <CheckboxGroupView value={activeKeys} m={[1, 1]}>
             {filter.values.map((v) => (
-              <CheckboxView value={v.id} onPress={() => v.toggle()}>
+              <CheckboxView key={v.id} value={v.id} onPress={() => v.toggle()}>
                 {v.render()}
               </CheckboxView>
             ))}

@@ -26,6 +26,7 @@ export const SortingAccordion: FC = () => {
         <RadioGroupView value={activeSorting?.id} m={[1, 1]}>
           {sorting.map((s) => (
             <RadioView
+              key={s.id}
               value={s.id}
               onPress={() => list.getSorting(s.id).enable()}
             >

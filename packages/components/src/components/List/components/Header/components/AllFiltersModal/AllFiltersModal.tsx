@@ -13,7 +13,6 @@ import { ViewModeAccordion } from "@/components/List/components/Header/component
 import TextView from "@/views/TextView";
 import { SortingAccordion } from "@/components/List/components/Header/components/AllFiltersModal/SortingAccordion";
 import ActionGroupView from "@/views/ActionGroupView";
-import { Render } from "@/lib/react/components/Render";
 import { useOverlayController } from "@/lib/controller";
 import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
@@ -26,7 +25,7 @@ export const AllFiltersModal: FC = () => {
   const totalItemCount = list.items.entries.length;
 
   const filterAccordions = list.filters.map((f) => (
-    <FilterAccordion filter={f} />
+    <FilterAccordion filter={f} key={f.name} />
   ));
 
   const accordions = [
@@ -35,16 +34,18 @@ export const AllFiltersModal: FC = () => {
     ...filterAccordions,
   ].filter(Boolean);
 
-  const hasSecondaryFilters = list.filters.find(
+  const hasSecondaryFilters = list.filters.some(
     (f) => f.priority === "secondary",
   );
+
+  const controller = useOverlayController("Modal");
 
   if (accordions.length === 0) {
     return null;
   }
 
   return (
-    <ModalTrigger>
+    <ModalTrigger controller={controller}>
       <ButtonView
         className={clsx(
           styles.hideOnMobile,
@@ -66,35 +67,29 @@ export const AllFiltersModal: FC = () => {
         <IconFilter />
       </ButtonView>
 
-      <Modal offCanvas>
+      <Modal offCanvas controller={controller}>
         <HeadingView>{stringFormatter.format("list.filters.all")}</HeadingView>
         <ContentView>
           <SectionView>{...accordions}</SectionView>
         </ContentView>
-        <Render>
-          {() => {
-            const controller = useOverlayController("Modal");
-            return (
-              <ActionGroupView>
-                <ButtonView onPress={() => controller.close()}>
-                  {stringFormatter.format("list.results.show", {
-                    totalItemCount,
-                  })}
-                </ButtonView>
-                <ButtonView
-                  color="secondary"
-                  variant="soft"
-                  onPress={() => {
-                    list.resetFilters();
-                    controller.close();
-                  }}
-                >
-                  {stringFormatter.format("list.reset")}
-                </ButtonView>
-              </ActionGroupView>
-            );
-          }}
-        </Render>
+
+        <ActionGroupView>
+          <ButtonView onPress={() => controller.close()}>
+            {stringFormatter.format("list.results.show", {
+              totalItemCount,
+            })}
+          </ButtonView>
+          <ButtonView
+            color="secondary"
+            variant="soft"
+            onPress={() => {
+              list.resetFilters();
+              controller.close();
+            }}
+          >
+            {stringFormatter.format("list.reset")}
+          </ButtonView>
+        </ActionGroupView>
       </Modal>
     </ModalTrigger>
   );
