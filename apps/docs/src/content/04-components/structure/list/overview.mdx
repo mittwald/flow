@@ -106,7 +106,7 @@ Die List bietet **Sortierung, Filter, Suche** und **Pagination** an.
 Detaillierte Anleitungen zu den einzelnen Einstellmöglichkeiten stehen unter dem
 Develop-Tab der List zur Verfügung.
 
-<LiveCodeEditor editorCollapsed />
+<LiveCodeEditor editorCollapsed example="filter" />
 
 ## Sortierung
 
@@ -115,6 +115,9 @@ Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
 ## Filter
 
 Über `<List.Filter />` lassen sich Filtermöglichkeiten für die List anlegen.
+Über `priority` kann eingestellt werden, ob Filter immer sichtbar sein sollen
+(primary) oder nur in einem "Alle Filter" Modal angezeigt werden (secondary).
+"Alle Filter" wird automatisch angezeigt, sobald es secondary Filter gibt.
 
 ## Suche
 

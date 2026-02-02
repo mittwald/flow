@@ -1,5 +1,6 @@
 {
   "list.filters": "Filters",
+  "list.filters.all": "All filters",
   "list.filters.clear": "Clear filters",
   "list.filters.reset": "Reset filters",
   "list.filters.store": "Store filters",
@@ -7,6 +8,8 @@
   "list.noResult.text": "Your search did not return any results. Please adjust the search query or your filters.",
   "list.options": "Options",
   "list.paginationInfo": "Showing {visibleItemsCount} of {totalItemsCount}",
+  "list.reset": "Reset",
+  "list.results.show": "Show {totalItemCount, select, 1 {{totalItemCount} result} other {{totalItemCount} Results}}",
   "list.search.announce.noResult": "{resultCount} matches for \"{searchTerm}\"",
   "list.search.announce.result": "No matches for \"{searchTerm}\"",
   "list.settings": "Settings",

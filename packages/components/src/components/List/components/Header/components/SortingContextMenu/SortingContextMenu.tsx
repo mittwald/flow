@@ -6,11 +6,11 @@ import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
 import { IconSorting } from "@/components/Icon/components/icons";
 import styles from "@/components/List/components/Header/Header.module.css";
-import { SortingMenuItem } from "@/components/List/components/Header/components/Settings/SortingMenuItem";
+import { SortingMenuItem } from "@/components/List/components/Header/components/SortingContextMenu/SortingMenuItem";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
-export const SortingMenu: FC = () => {
+export const SortingContextMenu: FC = () => {
   const list = useList();
 
   const sortingItems = list.visibleSorting.map((s) => (
@@ -38,7 +38,7 @@ export const SortingMenu: FC = () => {
       <ButtonView
         variant="outline"
         color="secondary"
-        className={styles.desktop}
+        className={styles.hideOnMobile}
       >
         {text}
         <IconSorting />
