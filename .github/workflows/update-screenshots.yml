@@ -76,6 +76,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Update Visual Regression Screenshots
