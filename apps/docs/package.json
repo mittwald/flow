@@ -22,6 +22,8 @@
     "acorn": "8.15.0",
     "acorn-typescript": "^1.4.13",
     "clsx": "^2.1.1",
+    "cron-parser": "^5.5.0",
+    "cronstrue": "^3.9.0",
     "dot-prop": "^10.1.0",
     "fs-jetpack": "^5.1.0",
     "fumadocs-mdx": "^14.2.6",
