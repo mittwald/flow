@@ -1,4 +1,4 @@
-import { type ReactNode, Suspense } from "react";
+import { type FC, type ReactNode, Suspense } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -6,7 +6,6 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
@@ -17,12 +16,12 @@ import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsCont
 import type { OverlayController } from "@/lib/controller";
 import type { ModalProps } from "@/components/Modal/Modal";
 
-export interface ModalBaseProps extends ModalProps {
+interface ModalBaseProps extends ModalProps {
   /** The controller to show the unsaved changes confirmation modal. */
   unsavedChangesConfirmationController?: OverlayController;
 }
 
-export const ModalBase = flowComponent("ModalBase", (props) => {
+export const ModalBase: FC<ModalBaseProps> = (props) => {
   const {
     size = "s",
     offCanvas,
@@ -116,6 +115,6 @@ export const ModalBase = flowComponent("ModalBase", (props) => {
       </Overlay>
     </>
   );
-});
+};
 
 export default ModalBase;
