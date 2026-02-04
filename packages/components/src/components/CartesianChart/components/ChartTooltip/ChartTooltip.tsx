@@ -43,12 +43,12 @@ export interface ChartTooltipProps
     WithTooltipFormatters {}
 
 /** @flr-generate all */
-export const ChartTooltip: FC<ChartTooltipProps> = ({
-  headingFormatter,
-  formatter,
-}) => {
+export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
+  const { headingFormatter, formatter, ...rest } = props;
+
   return (
     <Tooltip
+      {...rest}
       cursor={false}
       content={(props) => {
         if (!props.active || !props.payload || props.payload.length === 0) {
