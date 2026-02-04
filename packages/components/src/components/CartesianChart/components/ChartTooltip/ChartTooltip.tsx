@@ -1,21 +1,29 @@
-import type { FC } from "react";
-import * as Recharts from "recharts";
+import React, { type FC } from "react";
+import type { TooltipProps } from "recharts";
+import { Tooltip } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { TooltipContent } from "./TooltipContent";
+import Heading from "@/components/Heading";
+import styles from "./ChartTooltip.module.scss";
+import clsx from "clsx";
+import { useResolvedLabel } from "@/components/CartesianChart/hooks/useResolvedLabel";
+import {
+  TooltipLegendItem,
+  type TooltipPayloadItem,
+} from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
 
 export type TooltipLineFormatter = (
-  value: ValueType,
-  name: NameType,
+  value: TooltipPayloadItem["value"],
+  name: TooltipPayloadItem["dataKey"],
   index: number,
-  unit?: string | number,
-) => string;
+  unit?: TooltipPayloadItem["unit"],
+) => Promise<string> | string;
 
 export type TooltipHeadingFormatter = (
   title: string | number | undefined,
-) => string;
+) => Promise<string> | string;
 
 export interface WithTooltipFormatters {
   /**
@@ -33,33 +41,49 @@ export interface WithTooltipFormatters {
 export interface ChartTooltipProps
   extends
     Pick<
-      Recharts.TooltipProps<ValueType, NameType>,
+      TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
     WithTooltipFormatters {}
 
 /** @flr-generate all */
-export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
-  const { formatter, headingFormatter, ...rest } = props;
+export const ChartTooltip: FC<ChartTooltipProps> = ({
+  headingFormatter = (label) => String(label),
+  formatter,
+}) => {
   return (
-    <Recharts.Tooltip
-      {...rest}
+    <Tooltip
+      cursor={false}
       content={(props) => {
-        const {
-          formatter: ignoredFormatter,
-          labelFormatter: ignoredLabelFormatter,
-          ...rest
-        } = props;
+        const { label, payload, active, wrapperClassName } = props;
+
+        const className = clsx(wrapperClassName, styles.tooltip);
+        const formattedLabel = useResolvedLabel(headingFormatter, [label]);
+
+        if (!active || !payload || payload.length === 0) {
+          return null;
+        }
+
+        const items = payload
+          .filter((item) => item.fill !== "none")
+          .map((item, index) => {
+            return (
+              <TooltipLegendItem
+                key={item.dataKey}
+                formatter={formatter}
+                item={item}
+                index={index}
+              />
+            );
+          });
 
         return (
-          <TooltipContent
-            formatter={formatter}
-            headingFormatter={headingFormatter}
-            {...rest}
-          />
+          <div className={className}>
+            <Heading level={4}>{formattedLabel}</Heading>
+            {items}
+          </div>
         );
       }}
-      cursor={false}
     />
   );
 };

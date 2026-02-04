@@ -172,11 +172,11 @@ export const WithLine: Story = {
   render: (props) => (
     <CartesianChart {...props} height="70vh">
       <CartesianGrid />
-      <Area dataKey="mean" />
-      <Line dataKey="max" color="magenta" />
+      <Area dataKey="mean" unit="ms" />
+      <Line dataKey="max" color="magenta" unit="ms" />
       <XAxis dataKey="time" />
       <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
-      <ChartTooltip />
+      <ChartTooltip headingFormatter={() => "asd2"} />
       <ChartLegend />
     </CartesianChart>
   ),
