@@ -16,6 +16,10 @@ export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
   isOpen?: boolean;
+  /** The controller to show the unsaved changes confirmation modal. */
+  unsavedChangesConfirmationController?: OverlayController;
+  /** Disables the confirmation dialog when there are unsaved changes. */
+  disableUnsavedChangesConfirmation?: boolean;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
@@ -27,6 +31,8 @@ export const Overlay: FC<OverlayProps> = (props) => {
     overlayType = "Modal",
     isOpen: isOpenFromProps,
     ref,
+    unsavedChangesConfirmationController,
+    disableUnsavedChangesConfirmation,
   } = props;
 
   const controllerFromContext = useOverlayController(overlayType, {
@@ -40,17 +46,29 @@ export const Overlay: FC<OverlayProps> = (props) => {
   const rootClassName = clsx(styles.overlay, className);
 
   return (
-    <OverlayContentView
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      isOpen={isOpen}
-      ref={ref}
-      isDismissable={isDismissable}
-      className={rootClassName}
-    >
-      <OverlayContextProvider type="Modal" controller={controller}>
-        {children}
-      </OverlayContextProvider>
-    </OverlayContentView>
+    <>
+      <OverlayContentView
+        onOpenChange={(isOpen) => {
+          if (
+            overlayType === "Modal" &&
+            controller.confirmUnsavedChanges &&
+            !disableUnsavedChangesConfirmation
+          ) {
+            unsavedChangesConfirmationController?.open();
+          } else {
+            controller.setOpen(isOpen);
+          }
+        }}
+        isOpen={isOpen}
+        ref={ref}
+        isDismissable={isDismissable}
+        className={rootClassName}
+      >
+        <OverlayContextProvider type="Modal" controller={controller}>
+          {children}
+        </OverlayContextProvider>
+      </OverlayContentView>
+    </>
   );
 };
 

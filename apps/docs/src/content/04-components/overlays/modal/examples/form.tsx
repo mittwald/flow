@@ -16,11 +16,15 @@ import {
 } from "@mittwald/flow-react-components/react-hook-form";
 
 export default () => {
-  const controller = useOverlayController("Modal");
+  const defaultValues = { name: "" };
 
-  const form = useForm<{ name: string }>();
+  const form = useForm<{ name: string }>({ defaultValues });
 
   const Field = typedField(form);
+
+  const controller = useOverlayController("Modal", {
+    onOpen: () => form.reset(defaultValues),
+  });
 
   const handleSubmit = async () => {
     // submit form

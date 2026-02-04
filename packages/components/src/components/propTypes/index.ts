@@ -82,6 +82,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { ModalBaseProps } from "@/components/Modal/ModalBase";
 
 export * from "./types";
 
@@ -138,6 +139,7 @@ export interface FlowComponentPropsTypes {
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
+  ModalBase: ModalBaseProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -222,6 +224,7 @@ const propsContextSupportingComponentsMap: Record<
   Message: true,
   MessageThread: true,
   Modal: true,
+  ModalBase: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,

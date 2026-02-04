@@ -7,6 +7,7 @@ import {
   type FormEventHandler,
   type PropsWithChildren,
   type Ref,
+  useEffect,
   useId,
   useMemo,
   useRef,
@@ -17,6 +18,7 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
+import { useOverlayController } from "@/lib/hooks";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -83,6 +85,12 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     ref,
     handleSubmit,
   });
+
+  const modalController = useOverlayController("Modal");
+
+  useEffect(() => {
+    modalController.setConfirmUnsavedChanges(form.formState.isDirty);
+  }, [form.formState.isDirty]);
 
   return (
     <RhfFormContextProvider {...form}>

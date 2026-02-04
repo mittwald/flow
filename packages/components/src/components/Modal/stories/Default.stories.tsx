@@ -393,3 +393,43 @@ export const WithSuspense: Story = {
     );
   },
 };
+
+export const DisableUnsavedChangesConfirmation: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal
+          {...props}
+          controller={modalController}
+          disableUnsavedChangesConfirmation
+        >
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <SubmitButton color="accent">Submit</SubmitButton>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
+};

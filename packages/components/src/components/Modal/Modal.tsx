@@ -1,22 +1,13 @@
-import { Suspense, type PropsWithChildren, type ReactNode } from "react";
-import styles from "./Modal.module.scss";
-import clsx from "clsx";
+import { type PropsWithChildren } from "react";
 import {
-  dynamic,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
-import type { OverlayController } from "@/lib/controller/overlay";
+  type OverlayController,
+  useOverlayController,
+} from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Overlay } from "@/components/Overlay/Overlay";
-import { Action } from "@/components/Action";
-import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
-import ButtonView from "@/views/ButtonView";
-import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
-import Wrap from "@/components/Wrap";
-import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import { UnsavedChangesConfirmationModal } from "@/components/Modal/components/UnsavedChangesConfirmationModal";
+import ModalBase from "@/components/Modal/ModalBase";
 
 export interface ModalProps
   extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
@@ -38,93 +29,38 @@ export interface ModalProps
   slot?: string;
   /** Whether the modal can be closed by clicking outside of it. */
   isDismissable?: boolean;
+  /** Disables the confirmation dialog when there are unsaved changes. */
+  disableUnsavedChangesConfirmation?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
-  const {
-    size = "s",
-    offCanvas,
-    controller,
-    children,
-    ref,
-    className,
-    offCanvasOrientation = "right",
-    ...rest
-  } = props;
+  const { controller: controllerFromProps, ...rest } = props;
 
-  const rootClassName = clsx(
-    offCanvas ? styles.offCanvas : styles.modal,
-    styles[`size-${size}`],
-    offCanvasOrientation === "left" && styles["left"],
-    className,
-  );
+  const controllerFromContext = useOverlayController("Modal");
 
-  const header = (children: ReactNode) => (
-    <>
-      {children}
-      <Action closeOverlay="Modal">
-        <ButtonView
-          variant="plain"
-          color="secondary"
-          onPress={controller?.close}
-        >
-          <IconClose />
-        </ButtonView>
-      </Action>
-    </>
-  );
+  const controller = controllerFromProps ?? controllerFromContext;
 
-  const nestedHeadingLevel = 3;
-
-  const nestedHeadingProps: PropsContext = {
-    Heading: { level: nestedHeadingLevel },
-    Section: {
-      Header: { Heading: { level: nestedHeadingLevel } },
-      Heading: { level: nestedHeadingLevel },
-    },
-    Header: { Heading: { level: nestedHeadingLevel } },
-  };
-
-  const propsContext: PropsContext = {
-    Content: {
-      ...nestedHeadingProps,
-      className: styles.content,
-    },
-    ColumnLayout: {
-      ...nestedHeadingProps,
-      l: [2, 1],
-      m: [1],
-      className: styles.columnLayout,
-      AccentBox: { className: styles.accentBox, color: "neutral" },
-      wrapWith: <ClearPropsContext />,
-    },
-    Heading: {
-      className: styles.header,
-      level: 2,
-      slot: "title",
-      children: dynamic((props) => header(props.children)),
-    },
-    ActionGroup: {
-      className: styles.actionGroup,
-      spacing: "m",
-    },
-  };
+  const unsavedChangesConfirmationController = useOverlayController("Modal", {
+    reuseControllerFromContext: false,
+  });
 
   return (
-    <Overlay
-      className={rootClassName}
-      controller={controller}
-      ref={ref}
-      {...rest}
-    >
-      <PropsContextProvider props={propsContext}>
-        <Wrap if={offCanvas}>
-          <Suspense fallback={<OffCanvasSuspenseFallback />}>
-            {children}
-          </Suspense>
-        </Wrap>
-      </PropsContextProvider>
-    </Overlay>
+    <>
+      <ModalBase
+        controller={controller}
+        unsavedChangesConfirmationController={
+          unsavedChangesConfirmationController
+        }
+        {...rest}
+      />
+
+      <UnsavedChangesConfirmationModal
+        controller={controller}
+        unsavedChangesConfirmationController={
+          unsavedChangesConfirmationController
+        }
+      />
+    </>
   );
 });
 

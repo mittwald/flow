@@ -15,6 +15,7 @@ export class OverlayController {
   public isOpen = false;
   private onOpenHandlers = new Set<OpenStateHandler>();
   private onCloseHandlers = new Set<OpenStateHandler>();
+  public confirmUnsavedChanges = false;
 
   public constructor(options?: OverlayControllerOptions) {
     makeObservable(this, {
@@ -23,6 +24,8 @@ export class OverlayController {
       close: action.bound,
       toggle: action.bound,
       setOpen: action.bound,
+      confirmUnsavedChanges: observable,
+      setConfirmUnsavedChanges: action.bound,
     });
     this.isOpen = options?.isDefaultOpen ?? false;
 
@@ -98,5 +101,9 @@ export class OverlayController {
 
   public useIsOpen(): boolean {
     return useSelector(() => this.isOpen);
+  }
+
+  public setConfirmUnsavedChanges(to: boolean): void {
+    this.confirmUnsavedChanges = to;
   }
 }
