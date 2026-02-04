@@ -10,6 +10,7 @@ import type { WithTooltipFormatters } from "@/components/CartesianChart";
 import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
 import SkeletonTextView from "@/views/SkeletonTextView";
 
+/** @internal */
 export const TooltipContent: FC<
   WithTooltipFormatters &
     Omit<TooltipContentProps<ValueType, NameType>, "formatter">
