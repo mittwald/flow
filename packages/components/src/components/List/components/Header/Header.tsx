@@ -6,12 +6,12 @@ import { ActiveFilters } from "@/components/List/components/Header/components/Ac
 import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
-import { ViewModeMenu } from "@/components/List/components/Header/components/Settings/ViewModeMenu";
+import { ViewModeContextMenu } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeContextMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
-import { SortingMenu } from "@/components/List/components/Header/components/Settings/SortingMenu";
-import { FilterMenuList } from "@/components/List/components/Header/components/Filters/FilterMenuList";
-import { CombinedFilterMenu } from "@/components/List/components/Header/components/Filters/CombinedFilterMenu";
+import { SortingContextMenu } from "@/components/List/components/Header/components/SortingContextMenu/SortingContextMenu";
+import { FilterContextMenus } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenus";
+import { AllFiltersModal } from "@/components/List/components/Header/components/AllFiltersModal/AllFiltersModal";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 
 export const Header: FC<PropsWithClassName> = (props) => {
@@ -38,13 +38,10 @@ export const Header: FC<PropsWithClassName> = (props) => {
         <TunnelExit id="actions" />
         {hasOptions && (
           <DivView className={styles.options}>
-            {/* Desktop */}
-            <ViewModeMenu />
-            <SortingMenu />
-            <FilterMenuList />
-
-            {/* Mobile */}
-            <CombinedFilterMenu />
+            <ViewModeContextMenu />
+            <SortingContextMenu />
+            <FilterContextMenus />
+            <AllFiltersModal />
 
             {list.search && <SearchField search={list.search} />}
           </DivView>
