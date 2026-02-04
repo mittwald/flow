@@ -1,12 +1,12 @@
 import { LegendItem } from "@/components/Legend/components/LegendItem";
 import type { WithTooltipFormatters } from "./ChartTooltip";
 import type { FC } from "react";
-import { useResolvedLabel } from "@/components/CartesianChart/hooks/useResolvedLabel";
 import type { DefaultTooltipContentProps } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import { usePromise } from "@mittwald/react-use-promise";
 
 /** @internal */
 export type TooltipPayloadItem = NonNullable<
@@ -24,19 +24,22 @@ interface LegendItemLabelProps extends Pick<
 
 /** @internal */
 export const TooltipLegendItem: FC<LegendItemLabelProps> = ({
-  formatter = (value, name, _index, unit) =>
-    `${name}: ${value}${unit ? ` ${unit}` : ""}`,
+  formatter,
   item,
   index,
 }) => {
   const { value, dataKey, unit, fill } = item;
 
-  const formattedLabel = useResolvedLabel(formatter, [
-    value,
-    dataKey,
-    index,
-    unit,
-  ]);
+  const formattedLabel = usePromise(
+    async (value, dataKey, index, unit, formatter) => {
+      if (!formatter) {
+        return `${dataKey}: ${value}${unit ? ` ${unit}` : ""}`;
+      }
+
+      return formatter(value, dataKey, index, unit);
+    },
+    [value, dataKey, index, unit, formatter] as const,
+  );
 
   return <LegendItem color={fill}>{formattedLabel}</LegendItem>;
 };

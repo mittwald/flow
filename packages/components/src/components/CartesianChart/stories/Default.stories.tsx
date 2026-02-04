@@ -9,6 +9,7 @@ import CartesianGrid from "@/components/CartesianChart/components/CartesianGrid/
 import YAxis from "@/components/CartesianChart/components/YAxis/YAxis";
 import XAxis from "@/components/CartesianChart/components/XAxis/XAxis";
 import ChartLegend from "@/components/CartesianChart/components/ChartLegend/ChartLegend";
+import { sleep } from "@/lib/promises/sleep";
 
 const chartData = [
   {
@@ -176,7 +177,15 @@ export const WithLine: Story = {
       <Line dataKey="max" color="magenta" unit="ms" />
       <XAxis dataKey="time" />
       <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
-      <ChartTooltip headingFormatter={() => "asd2"} />
+      <ChartTooltip
+        headingFormatter={(v) => {
+          return `Sync Format: ${v}`;
+        }}
+        formatter={async (value, name, index, unit) => {
+          await sleep(3000);
+          return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
+        }}
+      />
       <ChartLegend />
     </CartesianChart>
   ),

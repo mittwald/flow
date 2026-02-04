@@ -10,6 +10,10 @@ import {
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
+  const sleep = (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   return (
     <CartesianChart
       data={[
@@ -41,7 +45,15 @@ export default function Page() {
       <Area dataKey="Projekte" color="palatinate-blue" />
       <XAxis dataKey="Zeit" />
       <YAxis domain={[0, 100]} unit="%" />
-      <ChartTooltip headingFormatter={(v) => `HeadingFormatter: ${v}`} />
+      <ChartTooltip
+        headingFormatter={(v) => {
+          return `Sync Format: ${v}`;
+        }}
+        formatter={async (value, name, index, unit) => {
+          await sleep(3000);
+          return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
+        }}
+      />
     </CartesianChart>
   );
 }
