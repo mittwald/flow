@@ -52,7 +52,8 @@ export const Overlay: FC<OverlayProps> = (props) => {
           if (
             overlayType === "Modal" &&
             controller.confirmUnsavedChanges &&
-            !disableUnsavedChangesConfirmation
+            !disableUnsavedChangesConfirmation &&
+            !isOpen
           ) {
             unsavedChangesConfirmationController?.open();
           } else {
