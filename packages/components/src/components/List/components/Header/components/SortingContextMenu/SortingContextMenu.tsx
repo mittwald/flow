@@ -4,7 +4,11 @@ import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
-import { IconSorting } from "@/components/Icon/components/icons";
+import {
+  IconAscending,
+  IconDescending,
+  IconSorting,
+} from "@/components/Icon/components/icons";
 import styles from "@/components/List/components/Header/Header.module.css";
 import { SortingMenuItem } from "@/components/List/components/Header/components/SortingContextMenu/SortingMenuItem";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
@@ -33,6 +37,14 @@ export const SortingContextMenu: FC = () => {
     </TextView>
   );
 
+  const icon = !labelSorting ? (
+    <IconSorting />
+  ) : labelSorting?.direction === "asc" ? (
+    <IconAscending />
+  ) : (
+    <IconDescending />
+  );
+
   return (
     <ContextMenuTriggerView>
       <ButtonView
@@ -41,7 +53,7 @@ export const SortingContextMenu: FC = () => {
         className={styles.hideOnMobile}
       >
         {text}
-        <IconSorting />
+        {icon}
       </ButtonView>
       <ContextMenuView
         selectionMode="single"

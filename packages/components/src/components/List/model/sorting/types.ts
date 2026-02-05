@@ -11,6 +11,7 @@ export type SortingFn<T> = SortingFunction<T>;
 export interface SortingShape<T> {
   property: PropertyName<T>;
   name?: string;
+  directionName?: string;
   direction?: SortDirection;
   defaultEnabled?: SortingDefaultMode;
   customSortingFn?: SortingFn<T>;

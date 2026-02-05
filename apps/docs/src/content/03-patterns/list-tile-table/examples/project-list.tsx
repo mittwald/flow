@@ -51,16 +51,16 @@ export default () => {
           />
           <ProjectList.Search />
           <ProjectList.Sorting
-            name="Von A bis Z"
-            defaultEnabled
+            name="Alphabetisch"
             direction="asc"
             property="description"
+            directionName="aufsteigend"
           />
           <ProjectList.Sorting
-            name="Von Z bis A"
-            defaultEnabled
+            name="Alphabetisch"
             direction="desc"
             property="description"
+            directionName="absteigend"
           />
           <ProjectList.Item
             textValue={(project) => project.description}

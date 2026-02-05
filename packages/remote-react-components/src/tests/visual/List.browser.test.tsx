@@ -55,8 +55,18 @@ test.each(testEnvironments)(
           <List.Filter property="role" name="Role" />
           <List.Filter property="status" name="Status" priority="secondary" />
           <List.Search data-testid="search" />
-          <List.Sorting property="name" name="A-Z" defaultEnabled />
-          <List.Sorting property="name" name="Z-A" direction="desc" />
+          <List.Sorting
+            property="name"
+            name="Alphabetical"
+            defaultEnabled
+            directionName="ascending"
+          />
+          <List.Sorting
+            property="name"
+            name="Alphabetical"
+            direction="desc"
+            directionName="descending"
+          />
           <List.Item textValue={(i) => i.name}>
             {(i) => (
               <ListItemView>
@@ -87,7 +97,7 @@ test.each(testEnvironments)(
 
     const search = page.getByTestId("search");
     const bottomContent = page.getByTestId("bottomContent");
-    const sorting = page.getByRole("button", { name: "A-Z" });
+    const sorting = page.getByRole("button", { name: "Alphabetical" });
     const contextMenu = page.getByLocator('[aria-label="Options"]');
     const allFilters = page.getByRole("button", { name: "All Filters" });
 
