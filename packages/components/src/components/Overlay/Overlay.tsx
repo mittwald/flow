@@ -46,30 +46,28 @@ export const Overlay: FC<OverlayProps> = (props) => {
   const rootClassName = clsx(styles.overlay, className);
 
   return (
-    <>
-      <OverlayContentView
-        onOpenChange={(isOpen) => {
-          if (
-            overlayType === "Modal" &&
-            controller.confirmUnsavedChanges &&
-            !disableUnsavedChangesConfirmation &&
-            !isOpen
-          ) {
-            unsavedChangesConfirmationController?.open();
-          } else {
-            controller.setOpen(isOpen);
-          }
-        }}
-        isOpen={isOpen}
-        ref={ref}
-        isDismissable={isDismissable}
-        className={rootClassName}
-      >
-        <OverlayContextProvider type="Modal" controller={controller}>
-          {children}
-        </OverlayContextProvider>
-      </OverlayContentView>
-    </>
+    <OverlayContentView
+      onOpenChange={(isOpen) => {
+        if (
+          overlayType === "Modal" &&
+          controller.confirmUnsavedChanges &&
+          !disableUnsavedChangesConfirmation &&
+          !isOpen
+        ) {
+          unsavedChangesConfirmationController?.open();
+        } else {
+          controller.setOpen(isOpen);
+        }
+      }}
+      isOpen={isOpen}
+      ref={ref}
+      isDismissable={isDismissable}
+      className={rootClassName}
+    >
+      <OverlayContextProvider type="Modal" controller={controller}>
+        {children}
+      </OverlayContextProvider>
+    </OverlayContentView>
   );
 };
 
