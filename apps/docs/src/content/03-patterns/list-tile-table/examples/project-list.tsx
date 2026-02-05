@@ -55,6 +55,7 @@ export default () => {
             direction="asc"
             property="description"
             directionName="aufsteigend"
+            defaultEnabled
           />
           <ProjectList.Sorting
             name="Alphabetisch"
