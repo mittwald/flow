@@ -7,14 +7,23 @@
 
   .input {
     flex-grow: 1;
+
     @include formControl.formControl();
+
+    & {
+      --button-size: calc(
+        var(--icon--size--m) + var(--button--padding-icon-only) * 2
+      );
+      padding-inline-end: var(--button-size);
+    }
   }
 
   .button {
     position: absolute;
-    right: var(--size-rem--xxxs);
+    inset-inline-end: var(--size-rem--xxxs);
     top: var(--size-rem--xxxs);
     bottom: var(--size-rem--xxxs);
     padding-block: initial;
+    outline-offset: calc(var(--size-px--xxxs) * -1);
   }
 }
