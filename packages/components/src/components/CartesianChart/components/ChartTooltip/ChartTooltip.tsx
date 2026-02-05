@@ -1,21 +1,25 @@
-import type { FC } from "react";
-import * as Recharts from "recharts";
+import React, { type FC, Suspense } from "react";
+import { Tooltip, type TooltipProps } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { TooltipContent } from "./TooltipContent";
+import { type TooltipPayloadItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
+import { TooltipContent } from "@/components/CartesianChart/components/ChartTooltip/TooltipContent";
+import clsx from "clsx";
+import styles from "./ChartTooltip.module.scss";
+import LoadingSpinnerView from "@/views/LoadingSpinnerView";
 
 export type TooltipLineFormatter = (
-  value: ValueType,
-  name: NameType,
+  value: TooltipPayloadItem["value"],
+  name: TooltipPayloadItem["dataKey"],
   index: number,
-  unit?: string | number,
-) => string;
+  unit?: TooltipPayloadItem["unit"],
+) => Promise<string> | string;
 
 export type TooltipHeadingFormatter = (
   title: string | number | undefined,
-) => string;
+) => Promise<string> | string;
 
 export interface WithTooltipFormatters {
   /**
@@ -33,33 +37,37 @@ export interface WithTooltipFormatters {
 export interface ChartTooltipProps
   extends
     Pick<
-      Recharts.TooltipProps<ValueType, NameType>,
+      TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
     WithTooltipFormatters {}
 
 /** @flr-generate all */
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
-  const { formatter, headingFormatter, ...rest } = props;
-  return (
-    <Recharts.Tooltip
-      {...rest}
-      content={(props) => {
-        const {
-          formatter: ignoredFormatter,
-          labelFormatter: ignoredLabelFormatter,
-          ...rest
-        } = props;
+  const { headingFormatter, formatter, ...rest } = props;
 
+  return (
+    <Tooltip
+      {...rest}
+      cursor={false}
+      content={(props) => {
+        if (!props.active || !props.payload || props.payload.length === 0) {
+          return null;
+        }
+
+        const className = clsx(props.wrapperClassName, styles.tooltip);
         return (
-          <TooltipContent
-            formatter={formatter}
-            headingFormatter={headingFormatter}
-            {...rest}
-          />
+          <div className={className}>
+            <Suspense fallback={<LoadingSpinnerView />}>
+              <TooltipContent
+                {...props}
+                headingFormatter={headingFormatter}
+                formatter={formatter}
+              />
+            </Suspense>
+          </div>
         );
       }}
-      cursor={false}
     />
   );
 };
