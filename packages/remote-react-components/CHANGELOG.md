@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.662](https://github.com/mittwald/flow/compare/0.2.0-alpha.661...0.2.0-alpha.662) (2026-02-05)
+
+### Features
+
+* **List:** add all filters modal ([db51634](https://github.com/mittwald/flow/commit/db5163420077d56e3fa1d55d326313a23351053a))
+
 # [0.2.0-alpha.661](https://github.com/mittwald/flow/compare/0.2.0-alpha.660...0.2.0-alpha.661) (2026-01-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
