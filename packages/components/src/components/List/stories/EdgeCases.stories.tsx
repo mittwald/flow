@@ -259,7 +259,7 @@ export const CustomSortingList = () => {
           name="TLD length"
           direction="desc"
           customSortingFn={tldLengthSortingFn}
-          directionName="songest first"
+          directionName="longest first"
         />
 
         <DomainList.Sorting
