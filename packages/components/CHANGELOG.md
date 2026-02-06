@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.665](https://github.com/mittwald/flow/compare/0.2.0-alpha.664...0.2.0-alpha.665) (2026-02-06)
+
+### Bug Fixes
+
+* **TextField:** fix min width ([#2300](https://github.com/mittwald/flow/issues/2300)) ([2cacd7a](https://github.com/mittwald/flow/commit/2cacd7aab206e0b9cccd05543aa26c10fd55800b))
+
 # [0.2.0-alpha.664](https://github.com/mittwald/flow/compare/0.2.0-alpha.663...0.2.0-alpha.664) (2026-02-06)
 
 ### Features
