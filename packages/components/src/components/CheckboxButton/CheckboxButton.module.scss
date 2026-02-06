@@ -8,8 +8,7 @@
     @include formControl.formControl();
 
     display: grid;
-    row-gap: var(--form-control--spacing-y);
-    column-gap: var(--form-control--spacing-x);
+    gap: var(--form-control--spacing-y) var(--form-control--spacing-x);
     grid-template-areas: "icon label";
     grid-template-columns: auto 1fr;
     align-self: start;
@@ -19,7 +18,7 @@
     }
 
     /* With content */
-    &:focus-within:not([data-selected]):not([data-focus-visible]) {
+    &:focus-within:not([data-selected], [data-focus-visible]) {
       border-color: var(--form-control--border-color--default);
     }
 

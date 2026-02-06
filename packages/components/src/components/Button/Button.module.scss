@@ -4,7 +4,7 @@
 
 .button {
   position: relative;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   font-size: var(--font-size-text--default);
   font-weight: bold;
   line-height: var(--line-height--default);
@@ -147,7 +147,6 @@
       background-color: var(
         --button--#{$color}-#{$variant}-background-color--default
       );
-
       color: var(--button--#{$color}-#{$variant}-content-color--default);
 
       &.outline {
@@ -160,7 +159,6 @@
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--hover
         );
-
         color: var(--button--#{$color}-#{$variant}-content-color--hover);
       }
 
@@ -168,7 +166,6 @@
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--pressed
         );
-
         color: var(--button--#{$color}-#{$variant}-content-color--pressed);
       }
 
@@ -215,6 +212,5 @@
   @include variant(secondary, outline);
   @include variant(dark, outline);
   @include variant(light, outline);
-
   @include avatarButton.avatarButton();
 }

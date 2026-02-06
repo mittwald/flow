@@ -1,77 +1,79 @@
 @use "./focus";
 @use "./avatarButton";
 
-@mixin menuItem {
-  display: flex;
-  flex-direction: row;
-  border: none;
-  border-radius: var(--menu-item--corner-radius);
-  background-color: var(--menu-item--background-color--default);
-  padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
-  align-items: center;
-  column-gap: var(--menu-item--spacing);
-  transition-property: background-color;
-  transition-duration: var(--transition--duration--default);
-
-  &:not(a) {
-    cursor: default;
-  }
-
-  &:has(.switch) {
-    justify-content: space-between;
-    flex-direction: row-reverse;
-  }
-
-  @include focus.focus;
-
-  & {
-    outline-offset: calc(var(--size-px--xxs) * -1);
-  }
-
-  /* Elements */
-  .icon {
-    color: var(--menu-item--icon-color--default);
+@mixin menuItem($selector: &) {
+  #{$selector} {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: var(--menu-item--corner-radius);
+    background-color: var(--menu-item--background-color--default);
+    padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
+    align-items: center;
+    column-gap: var(--menu-item--spacing);
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
-  }
 
-  &:hover {
-    background-color: var(--menu-item--background-color--hover);
-  }
+    &:not(a) {
+      cursor: default;
+    }
 
-  &[data-focused] {
-    outline-style: none;
-  }
+    &:has(.switch) {
+      justify-content: space-between;
+      flex-direction: row-reverse;
+    }
 
-  &[data-focus-visible] {
-    outline-style: solid;
-  }
+    @include focus.focus;
 
-  &:not(:has(.controlIcon)) {
+    & {
+      outline-offset: calc(var(--size-px--xxs) * -1);
+    }
+
+    /* Elements */
+    .icon {
+      color: var(--menu-item--icon-color--default);
+      transition-property: background-color;
+      transition-duration: var(--transition--duration--default);
+    }
+
+    &:hover {
+      background-color: var(--menu-item--background-color--hover);
+    }
+
+    &[data-focused] {
+      outline-style: none;
+    }
+
+    &[data-focus-visible] {
+      outline-style: solid;
+    }
+
+    &:not(:has(.controlIcon)) {
+      &[aria-current],
+      &[data-selected] {
+        background-color: var(--menu-item--background-color--current);
+        font-weight: var(--menu-item--font-weight--current);
+        color: var(--menu-item--color--current);
+      }
+    }
+
     &[aria-current],
     &[data-selected] {
-      background-color: var(--menu-item--background-color--current);
-      font-weight: var(--menu-item--font-weight--current);
-      color: var(--menu-item--color--current);
+      .icon {
+        color: var(--menu-item--icon-color--current);
+      }
     }
-  }
 
-  &[aria-current],
-  &[data-selected] {
-    .icon {
-      color: var(--menu-item--icon-color--current);
+    &[aria-disabled],
+    &.ariaDisabled {
+      background-color: var(--menu-item--disabled-background-color);
+      color: var(--menu-item--disabled-color);
+
+      .icon {
+        color: var(--menu-item--icon-color--disabled);
+      }
     }
+
+    @include avatarButton.avatarButton();
   }
-
-  &[aria-disabled],
-  &.ariaDisabled {
-    background-color: var(--menu-item--disabled-background-color);
-    color: var(--menu-item--disabled-color);
-
-    .icon {
-      color: var(--menu-item--icon-color--disabled);
-    }
-  }
-
-  @include avatarButton.avatarButton();
 }

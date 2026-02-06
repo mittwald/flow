@@ -15,9 +15,8 @@
   }
 
   &:not(.hideSeparator) + .section {
-    border-block-start-width: var(--separator--height);
-    border-block-start-style: var(--border-style--default);
-    border-block-start-color: var(--separator--color);
+    border-block-start: var(--separator--height) var(--border-style--default)
+      var(--separator--color);
     padding-block-start: var(--section--section-to-section-spacing);
   }
 

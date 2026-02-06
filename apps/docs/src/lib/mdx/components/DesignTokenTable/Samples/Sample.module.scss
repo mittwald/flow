@@ -23,6 +23,7 @@
   width: fit-content;
   border-radius: 4px;
   border: solid 1px;
+
   &:where(.padding) {
     background: repeating-linear-gradient(
       45deg,
@@ -33,6 +34,7 @@
     );
     border-color: var(--color--soft-contrast-violet--700);
   }
+
   &:where(.margin) {
     background: repeating-linear-gradient(
       45deg,
@@ -50,10 +52,12 @@
   padding: 25px 20px;
   border: 1px solid;
   border-radius: 4px;
+
   &:where(.padding) {
     color: var(--color--soft-contrast-violet--800);
     border-color: var(--color--soft-contrast-violet--800);
   }
+
   &:where(.margin) {
     color: var(--color--super-teal--800);
     border-color: var(--color--super-teal--800);

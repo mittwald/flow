@@ -15,5 +15,6 @@
   &.resize {
     resize: both;
   }
+
   @include formControl.formControl();
 }

@@ -18,9 +18,8 @@
   }
 
   &:not(:last-child) {
-    border-bottom-color: var(--list-item--border-color);
-    border-bottom-width: var(--list-item--border-width);
-    border-bottom-style: var(--list-item--border-style);
+    border-bottom: var(--list-item--border-width) var(--list-item--border-style)
+      var(--list-item--border-color);
   }
 
   &[data-href] {

@@ -3,8 +3,8 @@
   grid-template-areas:
     "label"
     "value";
-  row-gap: var(--labeled-value--label-to-value-spacing);
-  column-gap: var(--labeled-value--value-to-action-spacing);
+  gap: var(--labeled-value--label-to-value-spacing)
+    var(--labeled-value--value-to-action-spacing);
   grid-template-rows: auto 1fr;
 
   &:has(.button:not(:nth-child(2))) {
@@ -23,7 +23,6 @@
 
   .button:not(:nth-child(2)) {
     grid-area: button;
-    align-self: start;
-    justify-self: start;
+    place-self: start;
   }
 }

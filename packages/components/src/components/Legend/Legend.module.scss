@@ -1,8 +1,7 @@
 .legend {
   list-style-type: none;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
   gap: var(--legend--spacing-y) var(--legend--spacing-x);
 }

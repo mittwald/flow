@@ -11,6 +11,7 @@
       border-top-right-radius: 0;
     }
   }
+
   :has(:global(.flow--list--list-summary--bottom)) {
     :global(.flow--list--items),
     :global(.flow--list--table) {
@@ -18,6 +19,7 @@
       border-bottom-right-radius: 0;
     }
   }
+
   .listWrapper {
     display: flex;
     flex-direction: column;
