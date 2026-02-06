@@ -15,5 +15,8 @@ export default {
     "block-no-redundant-nested-style-rules": null,
     "scss/at-extend-no-missing-placeholder": null,
     "property-no-vendor-prefix": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
   },
 };
