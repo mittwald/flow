@@ -1,24 +1,22 @@
-@mixin focus($selector: &) {
-  #{$selector} {
-    outline: var(--focus--outline-color) none var(--focus--outline-width);
-    outline-offset: var(--focus--outline-offset);
+@mixin focus {
+  outline: var(--focus--outline-color) none var(--focus--outline-width);
+  outline-offset: var(--focus--outline-offset);
 
-    &[data-focused],
-    &:focus {
-      outline-style: none;
-      box-shadow: none;
-    }
+  &[data-focused],
+  &:focus {
+    outline-style: none;
+    box-shadow: none;
+  }
 
-    &[data-focus-visible],
-    &:focus-visible {
-      outline-style: solid;
-      box-shadow: 0 0 0 var(--focus--outline-width)
-        var(--focus--secondary-outline-color);
-    }
+  &[data-focus-visible],
+  &:focus-visible {
+    outline-style: solid;
+    box-shadow: 0 0 0 var(--focus--outline-width)
+      var(--focus--secondary-outline-color);
+  }
 
-    &[data-focused]:not([data-focus-visible]):focus-visible {
-      outline-style: none;
-      box-shadow: none;
-    }
+  &[data-focused]:not([data-focus-visible]):focus-visible {
+    outline-style: none;
+    box-shadow: none;
   }
 }

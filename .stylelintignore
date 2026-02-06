@@ -1,2 +1,4 @@
 apps/docs/out/
 packages/design-tokens/dist/
+packages/stylesheet/dist/
+packages/components/dist/
