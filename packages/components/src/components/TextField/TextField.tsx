@@ -1,39 +1,48 @@
-import * as Aria from "react-aria-components";
 import {
-  TextFieldBase,
-  type TextFieldBaseProps,
-} from "@/components/TextFieldBase";
-import styles from "./TextField.module.scss";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { PropsContextProvider } from "@/lib/propsContext";
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import * as Aria from "react-aria-components";
+import { type PropsWithChildren, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "./TextField.module.scss";
+import { FieldDescription } from "@/components/FieldDescription";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
+import { Button } from "@/components/Button";
+import { IconHide, IconShow } from "@/components/Icon/components/icons";
+import clsx from "clsx";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface TextFieldProps
   extends
-    Omit<
-      TextFieldBaseProps,
-      "FieldErrorView" | "FieldErrorCaptureContext" | "input" | "className"
-    >,
-    Pick<Aria.InputProps, "placeholder" | "form">,
-    PropsWithClassName,
-    FlowComponentProps<HTMLInputElement> {}
+    PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
+    Pick<Aria.InputProps, "placeholder">,
+    FlowComponentProps<HTMLInputElement> {
+  /** Whether a character count should be displayed inside the field description. */
+  showCharacterCount?: boolean;
+}
 
 /** @flr-generate all */
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, placeholder, form, ref, ...rest } =
-    useControlledHostValueProps(props);
+  const {
+    className,
+    showCharacterCount,
+    form,
+    placeholder,
+    ref,
+    type: typeFromProps,
+    children,
+    ...rest
+  } = useControlledHostValueProps(props);
 
-  const input = (
-    <Aria.Input
-      form={form}
-      placeholder={placeholder}
-      className={styles.textField}
-      ref={ref}
-    />
+  const [charactersCount, setCharactersCount] = useState(
+    props.defaultValue?.length ?? props.value?.length ?? 0,
   );
+
+  const [type, setType] = useState(typeFromProps);
 
   const {
     FieldErrorView,
@@ -42,18 +51,81 @@ export const TextField = flowComponent("TextField", (props) => {
     fieldProps,
   } = useFieldComponent(props);
 
+  const rootClassName = clsx(fieldProps.className, className);
+
+  const propsContext: PropsContext = {
+    Button: {
+      className: styles.button,
+      variant: "plain",
+      color: "secondary",
+      tunnelId: "button",
+    },
+    ...fieldPropsContext,
+  };
+
+  const handleChange = (v: string) => {
+    if (showCharacterCount) {
+      setCharactersCount(v.length);
+    }
+    if (props.onChange) {
+      props.onChange(v);
+    }
+  };
+
+  const translation = useLocalizedStringFormatter(locales);
+
+  const charactersCountDescription = translation.format(
+    "textField.characters",
+    {
+      count: charactersCount,
+      maxCount: props.maxLength ?? 0,
+    },
+  );
+
   return (
-    <TextFieldBase
+    <Aria.TextField
       {...rest}
       {...fieldProps}
-      FieldErrorView={FieldErrorView}
-      FieldErrorCaptureContext={FieldErrorCaptureContext}
-      input={input}
+      className={rootClassName}
+      onChange={handleChange}
+      type={type}
     >
-      <PropsContextProvider props={fieldPropsContext}>
-        {children}
-      </PropsContextProvider>
-    </TextFieldBase>
+      <TunnelProvider>
+        <PropsContextProvider props={propsContext}>
+          <FieldErrorCaptureContext>
+            {children}
+            <div className={styles.inputContainer}>
+              <Aria.Input
+                form={form}
+                placeholder={placeholder}
+                className={styles.input}
+                ref={ref}
+              />
+              <TunnelExit id="button" />
+              {typeFromProps === "password" && (
+                <Button
+                  color="secondary"
+                  variant="plain"
+                  className={styles.button}
+                  onPress={() =>
+                    setType(type === "password" ? "text" : "password")
+                  }
+                  aria-label={translation.format(
+                    `textField.password.${type === "password" ? "show" : "hide"}`,
+                  )}
+                >
+                  {type === "password" ? <IconShow /> : <IconHide />}
+                </Button>
+              )}
+            </div>
+            {showCharacterCount && (
+              <FieldDescription>{charactersCountDescription}</FieldDescription>
+            )}
+          </FieldErrorCaptureContext>
+          <FieldErrorView />
+        </PropsContextProvider>
+      </TunnelProvider>
+    </Aria.TextField>
   );
 });
 
