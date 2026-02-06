@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.663](https://github.com/mittwald/flow/compare/0.2.0-alpha.662...0.2.0-alpha.663) (2026-02-06)
+
+### Features
+
+* **TextField:** support buttons and add show password button ([#2291](https://github.com/mittwald/flow/issues/2291)) ([abb2008](https://github.com/mittwald/flow/commit/abb2008717ced8427a9db65b87ffa6a160821136))
+
 # [0.2.0-alpha.662](https://github.com/mittwald/flow/compare/0.2.0-alpha.661...0.2.0-alpha.662) (2026-02-05)
 
 ### Features
