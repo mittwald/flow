@@ -11,38 +11,39 @@ import {
   Text,
   TextField,
   TimeField,
+  Content,
 } from "@mittwald/flow-react-components";
 import {
   Form,
   typedField,
 } from "@mittwald/flow-react-components/react-hook-form";
-import parser from "cron-parser";
-import cronstrue from "cronstrue";
-import "cronstrue/locales/de";
+import {
+  cronstrueToString,
+  parse,
+} from "@/content/03-patterns/02-codesnippets/zeitintervalle/examples/lib";
 
 export default () => {
-  type Interval =
-    | "1m"
-    | "5m"
-    | "30m"
-    | "1h"
-    | "1d"
-    | "7d"
-    | "14d"
-    | "30d"
-    | "custom";
+  enum Interval {
+    ONE_MINUTE = "1 Minute",
+    FIVE_MINUTES = "5 Minuten",
+    THIRTY_MINUTES = "30 Minuten",
+    ONE_HOUR = "1 Stunde",
+    ONE_DAY = "1 Tag",
+    SEVEN_DAYS = "7 Tage",
+    FOURTEEN_DAYS = "14 Tage",
+    THIRTY_DAYS = "30 Tage",
+    CUSTOM = "Benutzerdefiniert",
+  }
 
-  const intervals: Interval[] = [
-    "1m",
-    "5m",
-    "30m",
-    "1h",
-    "1d",
-    "7d",
-    "14d",
-    "30d",
-    "custom",
-  ];
+  const intervals = Object.values(Interval);
+  const getCronString = (cronSyntax: string) => {
+    try {
+      /* convert cron to string with cronstrue */
+      return cronstrueToString(cronSyntax);
+    } catch (ignoredError) {
+      return undefined;
+    }
+  };
 
   const isDigitString = (value?: string) => {
     if (!value) {
@@ -103,32 +104,32 @@ export default () => {
     );
 
     switch (interval) {
-      case "1m":
+      case Interval.ONE_MINUTE:
         return { cron: "* * * * *" };
-      case "5m":
+      case Interval.FIVE_MINUTES:
         return { cron: "*/5 * * * *" };
-      case "30m":
+      case Interval.THIRTY_MINUTES:
         return { cron: "*/30 * * * *" };
-      case "1h":
+      case Interval.ONE_HOUR:
         return {
           cron: `${minute} * * * *`,
         };
-      case "1d":
+      case Interval.ONE_DAY:
         return {
           cron: `${minute} ${hour} * * *`,
           time: newTime,
         };
-      case "7d":
+      case Interval.SEVEN_DAYS:
         return {
           cron: `${minute} ${hour} * * ${weekday}`,
           time: newTime,
         };
-      case "14d":
+      case Interval.FOURTEEN_DAYS:
         return {
           cron: `${minute} ${hour} 1,15 * *`,
           time: newTime,
         };
-      case "30d":
+      case Interval.THIRTY_DAYS:
         return {
           cron: `${minute} ${hour} ${day} * *`,
           time: newTime,
@@ -155,35 +156,35 @@ export default () => {
     }
   };
 
-  const getCronText = (cronSyntax: string) => {
-    try {
-      const cronText = cronstrue.toString(cronSyntax, {
-        locale: "de",
-        verbose: true,
-      });
-
-      return `${cronText} (UTC)`;
-    } catch (ignoredError) {
-      return undefined;
-    }
-  };
-
   const isValidCron = (cronSyntax: string) => {
-    return !!getCronText(cronSyntax);
+    return !!getCronString(cronSyntax);
   };
 
   const getExecutions = (cron: string) => {
     if (!isValidCron(cron)) {
-      return [];
+      return [
+        "Ungültige Cron-Syntax",
+        "Ungültige Cron-Syntax",
+        "Ungültige Cron-Syntax",
+      ];
     }
 
     try {
-      const interval = parser.parse(cron);
+      /* parse cron with cron-parser */
+      const interval = parse(cron);
 
-      const executions: Date[] = [];
+      const executions: string[] = [];
 
       while (executions.length < 3) {
-        executions.push(interval.next().toDate());
+        executions.push(
+          new Intl.DateTimeFormat("de-DE", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          }).format(interval.next().toDate()) + " Uhr",
+        );
       }
 
       return executions;
@@ -200,7 +201,7 @@ export default () => {
   }>({
     defaultValues: {
       cron: "0 * * * *",
-      interval: "custom",
+      interval: Interval.CUSTOM,
     },
   });
 
@@ -213,20 +214,25 @@ export default () => {
     });
 
   const showTimeField =
-    watchedInterval === "1d" ||
-    watchedInterval === "7d" ||
-    watchedInterval === "14d" ||
-    watchedInterval === "30d";
+    watchedInterval === Interval.ONE_MINUTE ||
+    watchedInterval === Interval.SEVEN_DAYS ||
+    watchedInterval === Interval.FOURTEEN_DAYS ||
+    watchedInterval === Interval.THIRTY_DAYS;
 
-  const showCronField = watchedInterval === "custom";
+  const showCronField = watchedInterval === Interval.CUSTOM;
 
   const executions = getExecutions(watchedCron);
 
   const nextExecutions = executions.map((date, i) => {
-    return <span key={i}>{`${date} (UTC)`}</span>;
+    return (
+      <Text key={i}>
+        {date}
+        <br />
+      </Text>
+    );
   });
 
-  const cronText = getCronText(watchedCron);
+  const cronText = getCronString(watchedCron);
 
   return (
     <Form form={form} onSubmit={(values) => alert(values)}>
@@ -299,7 +305,7 @@ export default () => {
               <TextField
                 onChange={(v) => {
                   const newValue =
-                    watchedInterval === "custom"
+                    watchedInterval === Interval.CUSTOM
                       ? getTimeFromCron(v)
                       : undefined;
                   if (newValue) {
@@ -320,19 +326,7 @@ export default () => {
 
         <LabeledValue>
           <Label>Nächste Ausführungen</Label>
-          <Text>
-            {nextExecutions && nextExecutions.length > 0 ? (
-              nextExecutions
-            ) : (
-              <>
-                {"Ungültige Cron-Syntax"}
-                <br />
-                {"Ungültige Cron-Syntax"}
-                <br />
-                {"Ungültige Cron-Syntax"}
-              </>
-            )}
-          </Text>
+          <Content>{nextExecutions}</Content>
         </LabeledValue>
       </Section>
     </Form>
