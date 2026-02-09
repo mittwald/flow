@@ -91,6 +91,7 @@
     "react-markdown": "^10.1.0",
     "react-stately": "^3.43.0",
     "react-syntax-highlighter": "^16.1.0",
+    "react-truncate-inside": "^1.0.3",
     "recharts": "3.7.0",
     "remark-gfm": "^4.0.1",
     "remeda": "^2.33.4",

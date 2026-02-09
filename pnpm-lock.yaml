@@ -454,6 +454,9 @@ importers:
       react-syntax-highlighter:
         specifier: ^16.1.0
         version: 16.1.0(react@19.2.3)
+      react-truncate-inside:
+        specifier: ^1.0.3
+        version: 1.0.3(react@19.2.3)
       recharts:
         specifier: 3.7.0
         version: 3.7.0(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react-is@19.2.0)(react@19.2.3)(redux@5.0.1)
@@ -7900,6 +7903,11 @@ packages:
   react-syntax-highlighter@16.1.0:
     resolution: {integrity: sha512-E40/hBiP5rCNwkeBN1vRP+xow1X0pndinO+z3h7HLsHyjztbyjfzNWNKuAsJj+7DLam9iT4AaaOZnueCU+Nplg==}
     engines: {node: '>= 16.20.2'}
+    peerDependencies:
+      react: ^19.2.0
+
+  react-truncate-inside@1.0.3:
+    resolution: {integrity: sha512-XwQ+9ayvygHI4WjJwaTDYFiYLrLMbHiBc5VdhWuDrCAm8MWFT6YR/+BCgq5JUwyuISYleJyZ0yCAGbXMhGr9hw==}
     peerDependencies:
       react: ^19.2.0
 
@@ -17753,6 +17761,10 @@ snapshots:
       prismjs: 1.30.0
       react: 19.2.3
       refractor: 5.0.0
+
+  react-truncate-inside@1.0.3(react@19.2.3):
+    dependencies:
+      react: 19.2.3
 
   react@19.2.3: {}
 
