@@ -36,9 +36,9 @@ const meta: Meta<typeof List> = {
                   <Image alt={user.name} src={dummyText.imageSrc} />
                 </Avatar>
                 <Heading>
-                  {user.name} <AlertBadge status="danger">Gesperrt</AlertBadge>
+                  {user.name} <AlertBadge status="danger">Blocked</AlertBadge>
                 </Heading>
-                <Text>Mittwald</Text>
+                <Text>mittwald</Text>
                 <ContextMenu>
                   <MenuItem>Show details</MenuItem>
                 </ContextMenu>
@@ -101,7 +101,7 @@ export const WithBottomContent: Story = {
                 <Initials>{user.name}</Initials>
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Text>mittwald</Text>
               <Content slot="bottom">
                 <Text>{dummyText.long}</Text>
               </Content>
@@ -130,7 +130,7 @@ export const WithActionGroup: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Text>mittwald</Text>
               <Content>
                 <ActionGroup>
                   <Button color="secondary" variant="soft" slot="secondary">
@@ -163,7 +163,7 @@ export const WithMultipleTexts: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Text>mittwald</Text>
               <Text>Development</Text>
             </List.ItemView>
           )}
@@ -187,7 +187,7 @@ export const WithCustomTileMaxWidth: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Text>mittwald</Text>
               <Text>Development</Text>
             </List.ItemView>
           )}
@@ -317,7 +317,7 @@ export const WithAccordion: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Text>mittwald</Text>
               <Content slot="bottom">
                 <Text>{dummyText.long}</Text>
               </Content>

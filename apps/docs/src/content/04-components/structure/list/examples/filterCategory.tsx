@@ -22,6 +22,7 @@ export default () => {
       batchSize={2}
       aria-label="Domains"
       getItemId={(domain) => domain.id}
+      hidePagination
     >
       <DomainList.StaticData data={domains} />
       <DomainList.Filter

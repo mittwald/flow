@@ -74,9 +74,9 @@ const meta: Meta<typeof List> = {
           >
             <ActionGroup>
               <Button color="secondary" variant="soft" slot="secondary">
-                Herunterladen
+                Download
               </Button>
-              <Button color="accent">Anlegen</Button>
+              <Button color="accent">Add</Button>
             </ActionGroup>
             <DomainList.LoaderAsync manualPagination manualSorting={false}>
               {loadDomains}
@@ -85,14 +85,24 @@ const meta: Meta<typeof List> = {
               values={availableTypes}
               property="type"
               mode="all"
-              name="Typ"
+              name="Type"
               defaultSelected={["Domain"]}
             />
 
             <DomainList.Search autoFocus />
-            <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
-            <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
-            <DomainList.Sorting property="type" name="Typ" />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              defaultEnabled
+              directionName="ascending"
+            />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              direction="desc"
+              directionName="descending"
+            />
+            <DomainList.Sorting property="type" name="Type" />
             <DomainList.Sorting property="tld" name="TLD" />
 
             <DomainList.Table>
@@ -174,7 +184,7 @@ export const WithSummary: Story = {
           <ListSummary>
             <Flex justify="end">
               <Text>
-                <strong>Gesamt: 41,00 €</strong>
+                <strong>Total: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -216,7 +226,7 @@ export const WithSummaryBottom: Story = {
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
-                <strong>Gesamt: 41,00 €</strong>
+                <strong>Total: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -353,9 +363,9 @@ export const WithSecondaryFilters: Story = {
           >
             <ActionGroup>
               <Button color="secondary" variant="soft" slot="secondary">
-                Herunterladen
+                Download
               </Button>
-              <Button color="accent">Anlegen</Button>
+              <Button color="accent">Add</Button>
             </ActionGroup>
             <DomainList.LoaderAsync manualPagination manualSorting={false}>
               {loadDomains}
@@ -364,7 +374,7 @@ export const WithSecondaryFilters: Story = {
               values={availableTypes}
               property="type"
               mode="all"
-              name="Typ"
+              name="Type"
               defaultSelected={["Domain"]}
             />
             <DomainList.Filter
@@ -375,8 +385,18 @@ export const WithSecondaryFilters: Story = {
             />
 
             <DomainList.Search autoFocus />
-            <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
-            <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              directionName="ascending"
+              defaultEnabled
+            />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              directionName="descending"
+              direction="desc"
+            />
             <DomainList.Sorting property="type" name="Typ" />
             <DomainList.Sorting property="tld" name="TLD" />
 

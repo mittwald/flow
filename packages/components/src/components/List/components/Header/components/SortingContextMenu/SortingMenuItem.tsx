@@ -20,7 +20,7 @@ export const SortingMenuItem: FC<Props> = (props) => {
         list.getSorting(sorting.id).enable();
       }}
     >
-      {sorting.name ?? sorting.property}
+      {`${sorting.name ?? sorting.property} ${sorting.directionName ?? ""}`.trim()}
     </MenuItemView>
   );
 };
