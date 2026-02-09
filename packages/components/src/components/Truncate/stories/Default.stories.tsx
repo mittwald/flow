@@ -4,6 +4,7 @@ import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
+import { ColumnLayout } from "@/components/ColumnLayout";
 
 const meta: Meta<typeof Truncate> = {
   title: "Content/Truncate",
@@ -28,5 +29,23 @@ export const InHeading: Story = {
     <Heading>
       <Truncate {...props}>{dummyText.long}</Truncate>
     </Heading>
+  ),
+};
+
+export const Offset: Story = {
+  args: { offset: 10 },
+  render: (props) => (
+    <Text>
+      <Truncate {...props}>{dummyText.long}</Truncate>
+    </Text>
+  ),
+};
+
+export const CustomEllipsis: Story = {
+  args: { ellipsis: "[...]" },
+  render: (props) => (
+    <ColumnLayout>
+      <Truncate {...props}>{dummyText.long}</Truncate>
+    </ColumnLayout>
   ),
 };
