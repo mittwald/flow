@@ -4,21 +4,25 @@
       @content;
     }
   }
+
   &.container-breakpoint-size-s {
     @container (max-width: #{$s}px) {
       @content;
     }
   }
+
   &.container-breakpoint-size-m {
     @container (max-width: #{$m}px) {
       @content;
     }
   }
+
   &.container-breakpoint-size-l {
     @container (max-width: #{$l}px) {
       @content;
     }
   }
+
   &.container-breakpoint-size-xl {
     @container (max-width: #{$xl}px) {
       @content;

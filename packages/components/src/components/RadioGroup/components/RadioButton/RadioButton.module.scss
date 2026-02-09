@@ -1,10 +1,17 @@
-@use "../../../../styles/mixins/formControl";
+@use "@/styles/mixins/formControl";
+
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+}
 
 .radioButton {
   align-self: normal;
   display: grid;
-  row-gap: var(--form-control--spacing-y);
-  column-gap: var(--form-control--spacing-x);
+  gap: var(--form-control--spacing-y) var(--form-control--spacing-x);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
 
@@ -25,13 +32,4 @@
       font-weight: var(--font-weight--bold);
     }
   }
-}
-
-/* Elements */
-.label {
-  grid-area: label;
-}
-
-.content {
-  grid-area: content;
 }

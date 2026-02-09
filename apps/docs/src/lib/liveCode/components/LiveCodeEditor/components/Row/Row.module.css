@@ -1,8 +1,6 @@
 .row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: var(--size-rem--m);
-  row-gap: var(--size-rem--m);
+  flex-flow: row wrap;
+  gap: var(--size-rem--m);
   align-items: center;
 }

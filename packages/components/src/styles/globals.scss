@@ -22,9 +22,7 @@
 html
   body
   *:where(
-    [class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg):not(
-        table
-      )
+    [class*="flow--"]:not([class*="flow--"] [class*="flow--"], svg, table)
   ) {
   all: initial;
 }
@@ -53,14 +51,13 @@ body table:where([class*="flow--"]) {
 
 // CSS Specificity: 0-0-2
 html body *:where([class*="flow--"] [class*="flow--"]) {
-  line-height: inherit;
   color: inherit;
   font: inherit;
 }
 
 // CSS Specificity: 0-0-2
 html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);

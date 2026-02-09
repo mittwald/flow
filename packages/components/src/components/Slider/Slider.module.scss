@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100%;
   row-gap: var(--slider--spacing-y);
+
   --button-size: calc(var(--line-height--m) + var(--button--padding-y) * 2);
 
   .text {
@@ -25,7 +26,7 @@
     position: relative;
     height: var(--slider--handle-size);
 
-    &:before {
+    &::before {
       content: "";
       display: block;
       position: absolute;
@@ -98,7 +99,7 @@
 
   &.disabled {
     .track {
-      &:before {
+      &::before {
         background-color: var(--slider--track-color--disabled);
       }
     }

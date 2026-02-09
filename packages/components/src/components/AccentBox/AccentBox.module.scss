@@ -22,6 +22,7 @@
   @mixin status($color) {
     &.#{$color} {
       background: var(--accent-box--background-color-#{$color});
+
       > svg {
         color: var(--accent-box--icon-color-#{$color});
       }

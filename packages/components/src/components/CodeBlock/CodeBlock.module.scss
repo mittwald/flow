@@ -5,7 +5,7 @@
   border-radius: var(--code--corner-radius);
   column-gap: var(--code--spacing);
   font-size: var(--code--font-size);
-  font-family: FiraCode, "monospace";
+  font-family: FiraCode, monospace;
   max-width: 100%;
   width: 100%;
   overflow-y: auto;
@@ -13,6 +13,7 @@
   > pre {
     overflow-x: auto;
     padding: var(--code--padding);
+
     > code {
       text-shadow: none;
     }

@@ -33,6 +33,7 @@
       opacity: 0;
       color: var(--rating--star-color);
     }
+
     .starFilled {
       opacity: 1;
       color: var(--rating--star-filled-color);
@@ -47,17 +48,20 @@
           .star {
             opacity: 1;
           }
+
           .starFilled {
             opacity: 0;
           }
         }
       }
     }
+
     &:not(:has(.current)) {
       .ratingSegment {
         .star {
           opacity: 1;
         }
+
         .starFilled {
           opacity: 0;
         }
@@ -77,6 +81,7 @@
         }
       }
     }
+
     .ratingSegment:hover {
       transform: scale(1.2);
       transform-origin: center;

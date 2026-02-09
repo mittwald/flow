@@ -11,8 +11,7 @@
   .headerContent {
     display: flex;
     gap: var(--list--spacing);
-    flex-wrap: wrap;
-    flex-direction: row-reverse;
+    flex-flow: row-reverse wrap;
   }
 
   .actions {
@@ -54,9 +53,11 @@
     .headerContent {
       flex-direction: column;
     }
+
     .actions {
       flex-grow: 1;
     }
+
     .action {
       flex: 1;
     }
