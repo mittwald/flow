@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.668](https://github.com/mittwald/flow/compare/0.2.0-alpha.667...0.2.0-alpha.668) (2026-02-09)
+
+### Features
+
+* **Truncate:** improve truncate ([#2305](https://github.com/mittwald/flow/issues/2305)) ([70237f9](https://github.com/mittwald/flow/commit/70237f9db31d892d597de932a24f5ccfcd9e1e41))
+
 # [0.2.0-alpha.667](https://github.com/mittwald/flow/compare/0.2.0-alpha.666...0.2.0-alpha.667) (2026-02-09)
 
 **Note:** Version bump only for package @mittwald/flow-project
