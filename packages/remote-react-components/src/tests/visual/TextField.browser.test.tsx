@@ -16,6 +16,7 @@ test.each(testEnvironments)(
       ContextualHelpTrigger,
       ContextualHelp,
       Button,
+      IconStar,
     },
   }) => {
     await render(
@@ -42,6 +43,15 @@ test.each(testEnvironments)(
         </TextField>
         <TextField isDisabled>
           <Label>Disabled</Label>
+        </TextField>
+        <TextField type="password">
+          <Label>Password</Label>
+        </TextField>
+        <TextField>
+          <Label>CustomButton</Label>
+          <Button aria-label="Custom">
+            <IconStar />
+          </Button>
         </TextField>
       </Flex>,
     );

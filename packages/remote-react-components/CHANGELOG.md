@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.666](https://github.com/mittwald/flow/compare/0.2.0-alpha.665...0.2.0-alpha.666) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.665](https://github.com/mittwald/flow/compare/0.2.0-alpha.664...0.2.0-alpha.665) (2026-02-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.664](https://github.com/mittwald/flow/compare/0.2.0-alpha.663...0.2.0-alpha.664) (2026-02-06)
+
+### Features
+
+* **Truncate:** add truncate component ([#2297](https://github.com/mittwald/flow/issues/2297)) ([c62f359](https://github.com/mittwald/flow/commit/c62f359cfc8e61ca560c75fd1c0b54d747f1cfb3))
+
+# [0.2.0-alpha.663](https://github.com/mittwald/flow/compare/0.2.0-alpha.662...0.2.0-alpha.663) (2026-02-06)
+
+### Features
+
+* **TextField:** support buttons and add show password button ([#2291](https://github.com/mittwald/flow/issues/2291)) ([abb2008](https://github.com/mittwald/flow/commit/abb2008717ced8427a9db65b87ffa6a160821136))
+
+# [0.2.0-alpha.662](https://github.com/mittwald/flow/compare/0.2.0-alpha.661...0.2.0-alpha.662) (2026-02-05)
+
+### Features
+
+* **List:** add all filters modal ([db51634](https://github.com/mittwald/flow/commit/db5163420077d56e3fa1d55d326313a23351053a))
+
 # [0.2.0-alpha.661](https://github.com/mittwald/flow/compare/0.2.0-alpha.660...0.2.0-alpha.661) (2026-01-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

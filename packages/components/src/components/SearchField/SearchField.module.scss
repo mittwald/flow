@@ -1,4 +1,4 @@
-@use "styles/mixins/formControl.scss";
+@use "@/styles/mixins/formControl";
 
 .searchField {
   &[data-empty] .clearButton {
