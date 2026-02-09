@@ -5,6 +5,7 @@ import styles from "./Truncate.module.scss";
 import type { TruncateProps as ReactTruncateProps } from "react-truncate-inside";
 import ReactTruncate from "react-truncate-inside";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import { useIsSSR } from "react-aria";
 
 export interface TruncateProps
   extends
@@ -20,7 +21,9 @@ export const Truncate: FC<TruncateProps> = (props) => {
 
   const rootClassName = clsx(styles.truncate, className);
 
-  if (offset || ellipsis) {
+  const isSsr = useIsSSR();
+
+  if (!isSsr && (offset || ellipsis)) {
     const text = extractTextFromFirstChild(children) ?? "";
 
     return (
