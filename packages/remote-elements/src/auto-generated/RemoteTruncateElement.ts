@@ -12,6 +12,8 @@ export class RemoteTruncateElement extends FlowRemoteElement<RemoteTruncateEleme
   static override get remoteProperties() {
     return {
       className: {},
+      ellipsis: {},
+      offset: {},
       title: {},
     };
   }
