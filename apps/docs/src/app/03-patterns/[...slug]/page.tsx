@@ -34,7 +34,7 @@ export default async function Page(props: Props) {
     throw new Error("Could not find index.mdx");
   }
 
-  const path = `/01-get-started/${indexMdxFile.slugs[0]}`;
+  const path = `/03-patterns/${indexMdxFile.slugs[0]}/${indexMdxFile.slugs[1]}`;
 
   return (
     <Flex columnGap="m">
