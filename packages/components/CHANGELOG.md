@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.667](https://github.com/mittwald/flow/compare/0.2.0-alpha.666...0.2.0-alpha.667) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.666](https://github.com/mittwald/flow/compare/0.2.0-alpha.665...0.2.0-alpha.666) (2026-02-09)
+
+### Bug Fixes
+
+* **Form:** fix missing submit event ([#2303](https://github.com/mittwald/flow/issues/2303)) ([a4f7048](https://github.com/mittwald/flow/commit/a4f704886f88538602a19cfd1254c5e2ed0dab08))
+
 # [0.2.0-alpha.665](https://github.com/mittwald/flow/compare/0.2.0-alpha.664...0.2.0-alpha.665) (2026-02-06)
 
 ### Bug Fixes
