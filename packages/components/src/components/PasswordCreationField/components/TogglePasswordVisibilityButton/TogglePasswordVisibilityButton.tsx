@@ -28,7 +28,7 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
   );
 
   return (
-    <Action action={onPress}>
+    <Action onAction={onPress}>
       <TooltipTrigger>
         <Button
           className={className}

@@ -12,9 +12,7 @@ import type { avatarColors } from "@/components/Avatar/avatarColors";
 export type AvatarColors = (typeof avatarColors)[number];
 
 export interface AvatarProps
-  extends PropsWithChildren,
-    PropsWithClassName,
-    FlowComponentProps {
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
   /** The size of the avatar. @default "m" */
   size?: "xs" | "s" | "m" | "l";
   /** The color of icons and initials inside the avatar. */

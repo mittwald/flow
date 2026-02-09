@@ -4,11 +4,10 @@ import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 
-interface Props
-  extends Pick<
-    ProgressBarProps,
-    "showMaxValue" | "maxValue" | "formatOptions"
-  > {
+interface Props extends Pick<
+  ProgressBarProps,
+  "showMaxValue" | "maxValue" | "formatOptions"
+> {
   value?: number;
   valueLabel?: ReactNode;
 }

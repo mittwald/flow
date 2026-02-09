@@ -20,8 +20,7 @@ import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValue
 export type MarkdownEditorMode = "editor" | "preview";
 
 export interface MarkdownEditorProps
-  extends TextAreaProps,
-    Pick<MarkdownProps, "headingOffset"> {}
+  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {}
 
 /** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {

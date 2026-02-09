@@ -1,0 +1,132 @@
+# Grundlagen
+
+## Best practices
+
+Achte bei der Verwendung eines SegmentedControl darauf, dass...
+
+- maximal 5 Optionen angezeigt werden.
+- die Optionen so kurz wie möglich benannt werden. 1 bis 3 Wörter sollten
+  ausreichen.
+- ein [Label](/04-components/content/label/overview) verwendet wird, falls die
+  Optionen im Zusammenhang nicht verstanden werden. Falls kein Label verwendet
+  wird, muss ein AriaLabel gesetzt werden.
+- eine logische Reihenfolge gewählt wird. Häufig sollte die wichtigste Option an
+  erster Stelle stehen.
+
+## Verwendung
+
+Verwende einen SegmentedControl, um ...
+
+- eine platzsparende Einfachauswahlmöglichkeit anzubieten.
+- einen Teil des Contents unterhalb zu ändern oder zu filtern. Ein
+  SegmentedControl ist kein Ersatz für
+  [Tabs](/04-components/navigation/tabs/overview), welche den gesamten Content
+  einer Seite ändern.
+
+## SegmentedControl vs. RadioGroup
+
+Flow bietet verschiedene Auswahl-Components an. Das SegmentedControl und die
+[RadioGroup](/04-components/form-controls/radio-group/overview) haben viele
+Gemeinsamkeiten. Die Cards unter dem Text geben hilfreiche Anhaltspunkte zur
+Unterscheidung.
+
+<DoAndDont>
+  <Info heading="Verwende ein SegmentedControl, um z. B. ...">
+    - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen. - Optionen anzuzeigen,
+    die aus 1 bis 2 Wörtern bestehen.
+    - Optionen anzuzeigen, die den darunterliegenden Inhalt verändern.
+  </Info>
+
+  <Info heading="Verwende eine RadioGroup, um z. B. ...">
+    - eine Einfachauswahl von 2 bis ungefähr 7 Optionen anzuzeigen.
+    - Optionen mit unterschiedlicher Textlänge darzustellen.
+  </Info>
+</DoAndDont>
+
+---
+
+# Anwendung
+
+## Position
+
+Das SegmentedControl wird häufig in Formularen oder als Ansichtsfilter
+verwendet. Bei der Positionierung ist Folgendes zu beachten:
+
+- In der Regel nimmt das SegmentedControl die gesamte Breite des
+  Content-Bereiches ein. In Ausnahmefällen kann das SegmentedControl auch
+  schmaler dargestellt werden, z. B. wenn es nicht in Formularen, sondern nur
+  als Ansichtsfilter über Diagrammen verwendet wird.
+- Wenn Inhalte mithilfe des SegmentedControls geändert werden sollen, muss das
+  SegmentedControl direkt über dem zu ändernden Inhaltsbereich stehen.
+
+<Do example="changeContent">
+  Das SegmentedControl steht über dem angepassten Inhalt.
+</Do>
+
+## Hierarchie
+
+Ein SegmentedControl darf maximal 5 Optionen enthalten. Bei der Reihenfolge der
+Optionen ist Folgendes zu beachten:
+
+- Die wichtigste Option sollte an erster Stelle stehen und wird automatisch
+  vorselektiert.
+- Nicht nur das gesamte SegmentedControl kann disabled sein, sondern auch
+  einzelne Optionen. Wenn eine Option **disabled** ist, sollte es von der
+  Ausgangssituation für den User logisch sein, warum er diese Option nicht
+  auswählen kann.
+
+## Feedback
+
+Der selektierte Zustand einer Option ist an der geänderten Farbe und dem
+Häkchensymbol zu erkennen. Aus diesem Grund sollte das Icon nicht verändert
+werden. In der aktuellen Version des SegmentedControls sind keine dekorativen
+oder alleinstehenden Icons vorgesehen.
+
+---
+
+# Writing guidelines
+
+## Text
+
+Das SegmentedControl hat Text in den Optionen und im
+[Label](/04-components/content/label/overview). Dabei ist Folgendes zu beachten:
+
+- Wenn ein Label verwendet wird, sollte es so kurz wie möglich ausformuliert
+  sein. Der Text des Labels sollte nie mehr als 1-3 Wörter umfassen. Ein Label
+  kann ausgelassen werden, wenn die Optionen auch ohne Label ausreichend
+  verständlich sind.
+- Im besten Fall sollte eine Option aus einem selbsterklärenden Wort bestehen.
+  Wenn nötig, können auch 2-3 Wörter verwendet werden. Es ist jedoch darauf zu
+  achten, dass der Text nicht zweizeilig wird und zusammen mit dem Icon genügend
+  Platz zur Verfügung steht.
+
+<DoAndDont>
+  <Do example="textDo">
+    Das Label und die Antwortmöglichkeiten sind prägnant und verständlich.
+  </Do>
+  <Dont example="textDont">
+    Kürzer ist oft besser. Versuche, so wenig Wörter wie möglich im Label und in
+    den Optionen zu verwenden.
+  </Dont>
+</DoAndDont>
+
+---
+
+# Behavior
+
+## Responsive layout
+
+Sobald die Breite des Containers kleiner als 551px ist, werden alle Optionen im
+SegmentedControl untereinander dargestellt. Dieser Wert kann mit
+`containerBreakpointSize` angepasst werden. Auch bei schmaleren Containerns
+sollte vermieden werden, dass der Text zweizeilig wird oder nicht mehr lesbar
+ist.
+
+<Info mobile heading="Mobile Variante" example="playground" />
+
+---
+
+# Accessibility
+
+Falls SegmentedControl ohne [Label](/04-components/content/label/overview)
+verwendet wird, muss ein AriaLabel gepflegt werden.

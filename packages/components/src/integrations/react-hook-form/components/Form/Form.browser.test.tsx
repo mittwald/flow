@@ -3,6 +3,7 @@ import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
   Field,
   Form,
+  SubmitButton,
   typedField,
   useFormContext,
   type FormProps,
@@ -14,9 +15,11 @@ import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
 const handleSubmit = vitest.fn();
+vitest.useFakeTimers();
 
 beforeEach(() => {
   vitest.resetAllMocks();
+  vitest.clearAllTimers();
 });
 
 describe("resetting", () => {
@@ -108,6 +111,46 @@ describe("resetting", () => {
   );
 });
 
+describe("submission", () => {
+  const onAfterSubmit = vitest.fn();
+  const onSubmit = vitest.fn(() => onAfterSubmit);
+
+  const TestForm: FC = () => {
+    const form = useForm<object>();
+    return (
+      <Form form={form} onSubmit={onSubmit}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("submit callback is called", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    const textField = page.getByPlaceholder("textfield");
+    await userEvent.type(textField, "hello");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalledWith(
+      { test: "hello" },
+      expect.objectContaining({ type: "submit" }),
+    );
+  });
+
+  test("afterSubmit callback is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(500);
+    expect(onAfterSubmit).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(1000);
+    expect(onAfterSubmit).toHaveBeenCalled();
+  });
+});
+
 describe("readonly", () => {
   const TestForm: FC<Partial<FormProps<object>>> = (props) => {
     const form = useForm<object>();
@@ -153,5 +196,46 @@ describe("readonly", () => {
     expect(textfield).not.toHaveAttribute("readonly");
     await userEvent.click(toggleButton);
     expect(textfield).toHaveAttribute("readonly");
+  });
+});
+
+describe("error", () => {
+  const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
+    const form = useForm<object>();
+    return (
+      <Form {...props} form={form}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("form submission error leads to unhandledrejection event", async () => {
+    const errorHandler = vitest.fn();
+
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <TestForm
+        onSubmit={() => {
+          throw new Error("Submission failed");
+        }}
+      />,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).toHaveBeenCalledWith(
+      expect.objectContaining({
+        reason: expect.objectContaining({
+          message: "Submission failed",
+        }),
+      }),
+    );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
   });
 });

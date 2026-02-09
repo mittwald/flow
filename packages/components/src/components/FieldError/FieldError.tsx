@@ -13,7 +13,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
 
 export interface FieldErrorProps
-  extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
     FlowComponentProps {}
 
 /** @flr-generate all */

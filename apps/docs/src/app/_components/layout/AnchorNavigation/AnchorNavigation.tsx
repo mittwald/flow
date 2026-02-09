@@ -8,10 +8,10 @@ import {
 } from "@mittwald/flow-react-components";
 import React, { type FC, useEffect } from "react";
 import styles from "../../../layout.module.scss";
-import slugify from "slugify";
+import type { Anchor } from "@/lib/mdx/MdxFile";
 
 interface Props {
-  anchors: string[];
+  anchors: Anchor[];
   title: string;
   currentPath: string;
 }
@@ -36,8 +36,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
           setActiveAnchor(visible[0]!.target.id);
         } else {
           const aboveViewport = anchors
-            .map((a) => slugify(a, { lower: true, strict: true }))
-            .map((id) => document.getElementById(id))
+            .map((a) => document.getElementById(a.slug))
             .filter((el): el is HTMLElement => el !== null)
             .filter(
               (el) =>
@@ -48,10 +47,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
           if (aboveViewport) {
             setActiveAnchor(aboveViewport.id);
           } else if (!activeAnchor && anchors.length > 0) {
-            const firstSlug = slugify(anchors[0]!, {
-              lower: true,
-              strict: true,
-            });
+            const firstSlug = anchors[0]!.slug;
             setActiveAnchor(firstSlug);
           }
         }
@@ -63,8 +59,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
       },
     );
     anchors.forEach((a) => {
-      const slug = slugify(a, { lower: true, strict: true });
-      const el = document.getElementById(slug);
+      const el = document.getElementById(a.slug);
       if (el) observer.observe(el);
     });
 
@@ -77,15 +72,16 @@ export const AnchorNavigation: FC<Props> = (props) => {
         <Heading level={4}>{title}</Heading>
         <Navigation>
           {anchors.map((a) => {
-            const slug = slugify(a, { lower: true, strict: true });
-
             return (
               <Link
-                aria-current={slug === activeAnchor ? "page" : undefined}
-                href={`${currentPath}#${slug}`}
-                key={a}
+                aria-current={a.slug === activeAnchor ? "page" : undefined}
+                href={`${currentPath}#${a.slug}`}
+                key={a.slug}
+                style={{
+                  marginInlineStart: a.level !== 2 ? "16px" : undefined,
+                }}
               >
-                {a}
+                {a.text}
               </Link>
             );
           })}

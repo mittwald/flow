@@ -4,13 +4,16 @@
   font-weight: var(--heading--font-weight);
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
 
-  &.dark {
-    color: var(--heading--color-dark);
+  @mixin color($color) {
+    &.#{$color} {
+      color: var(--heading--color-#{$color});
+    }
   }
 
-  &.light {
-    color: var(--heading--color-light);
-  }
+  @include color("dark");
+  @include color("light");
+  @include color("danger");
+  @include color("unavailable");
 
   .headingText {
     .icon {

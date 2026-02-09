@@ -13,7 +13,8 @@ import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileFieldProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     FlowComponentProps<HTMLInputElement>,
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,
     Pick<

@@ -16,7 +16,8 @@ import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface FileDropZoneProps
-  extends PropsWithClassName,
+  extends
+    PropsWithClassName,
     FlowComponentProps<FocusableElement>,
     PropsWithChildren,
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,

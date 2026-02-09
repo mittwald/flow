@@ -15,9 +15,7 @@ import {
 import ClearPropsContext from "@/lib/propsContext/components/ClearPropsContext";
 
 export interface MessageProps
-  extends PropsWithChildren,
-    PropsWithClassName,
-    FlowComponentProps {
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
   color?: string;

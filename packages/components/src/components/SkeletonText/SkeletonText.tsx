@@ -1,10 +1,10 @@
-import type { ComponentProps, FC } from "react";
+import type { ComponentProps, CSSProperties, FC } from "react";
 import React from "react";
 import styles from "./SkeletonText.module.scss";
 
 export interface SkeletonTextProps extends ComponentProps<"span"> {
   /** The width of the skeleton text. */
-  width?: string;
+  width?: CSSProperties["width"];
 }
 
 /** @flr-generate all */

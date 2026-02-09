@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   asyncFunction,
+  asyncFunctionWithError,
   asyncLongFunction,
   button,
   syncFunction,
+  syncFunctionWithError,
 } from "@/components/Button/stories/lib";
 import { Modal } from "@/components/Modal";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -12,6 +13,8 @@ import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { Action } from "@/components/Action";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
+import { MenuItem } from "@/components/MenuItem";
 
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
@@ -45,46 +48,58 @@ export const Default: Story = {};
 
 export const Async: Story = {
   args: {
-    action: asyncFunction,
+    onAction: asyncFunction,
   },
 };
 
 export const AsyncLong: Story = {
   args: {
-    action: asyncLongFunction,
+    onAction: asyncLongFunction,
   },
 };
 
 export const AsyncWithFeedback: Story = {
   args: {
-    action: asyncFunction,
+    onAction: asyncFunction,
     showFeedback: true,
   },
 };
 
 export const AsyncLongWithFeedback: Story = {
   args: {
-    action: asyncLongFunction,
+    onAction: asyncLongFunction,
     showFeedback: true,
   },
 };
 
 export const Nested: Story = {
   args: {
-    children: <Action action={syncFunction}>{button}</Action>,
+    children: <Action onAction={syncFunction}>{button}</Action>,
   },
 };
 
 export const NestedAsync: Story = {
   args: {
-    action: asyncFunction,
-    children: <Action action={asyncFunction}>{button}</Action>,
+    onAction: asyncFunction,
+    children: <Action onAction={asyncFunction}>{button}</Action>,
+  },
+};
+
+export const SyncError: Story = {
+  args: {
+    onAction: syncFunctionWithError,
+  },
+};
+
+export const AsyncError: Story = {
+  args: {
+    onAction: asyncFunctionWithError,
   },
 };
 
 export const WithConfirmationModal: Story = {
   render: () => (
-    <Action action={asyncLongFunction}>
+    <Action onAction={asyncLongFunction}>
       <Modal slot="actionConfirm">
         <Heading>Delete customer</Heading>
         <Content>Do you really want to delete the customer?</Content>
@@ -99,5 +114,26 @@ export const WithConfirmationModal: Story = {
         Delete customer
       </Button>
     </Action>
+  ),
+};
+
+export const InContextMenu: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <Action onAction={asyncFunction}>
+          <MenuItem>Async</MenuItem>
+        </Action>
+        <Action onAction={asyncLongFunction}>
+          <MenuItem>Async Long</MenuItem>
+        </Action>
+        <Action onAction={asyncFunction}>
+          <Action onAction={asyncFunction}>
+            <MenuItem>Nested Async</MenuItem>
+          </Action>
+        </Action>
+      </ContextMenu>
+    </ContextMenuTrigger>
   ),
 };

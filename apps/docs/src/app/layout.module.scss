@@ -107,9 +107,14 @@
   flex-direction: column;
   row-gap: var(--section--spacing);
 
-  > h3 {
+  > h3,
+  > h4 {
     margin-top: var(--size-px--m);
   }
+}
+
+.topContent {
+  width: 100%;
 }
 
 .homeTopLayoutCard.homeTopLayoutCard {

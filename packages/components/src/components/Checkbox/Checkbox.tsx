@@ -14,7 +14,8 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "react-aria";
 
 export interface CheckboxProps
-  extends PropsWithChildren<
+  extends
+    PropsWithChildren<
       Omit<Aria.CheckboxProps, "children" | "ref" | "inputRef">
     >,
     FlowComponentProps<HTMLInputElement> {

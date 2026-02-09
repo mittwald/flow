@@ -6,8 +6,7 @@ import { OverlaySuspenseFallback } from "@/components/Overlay/components/Overlay
 import styles from "../Overlay.module.scss";
 
 export interface OverlayContentProps
-  extends PropsWithChildren,
-    PropsWithClassName {
+  extends PropsWithChildren, PropsWithClassName {
   ref?: Ref<HTMLDivElement>;
   onOpenChange: (isOpen: boolean) => void;
   isDismissable?: boolean;

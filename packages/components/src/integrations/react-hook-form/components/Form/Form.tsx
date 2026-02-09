@@ -1,4 +1,5 @@
-import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
+import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/useHotkeySubmit";
+import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
 import {
   type ComponentProps,
   type FC,
@@ -9,7 +10,6 @@ import {
   useId,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import type {
   FieldValues,
@@ -17,9 +17,10 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
+
+export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
 type FormComponentType = FC<
   PropsWithChildren<{
@@ -30,8 +31,7 @@ type FormComponentType = FC<
 >;
 
 export interface FormProps<F extends FieldValues>
-  extends Omit<ComponentProps<"form">, "onSubmit">,
-    PropsWithChildren {
+  extends Omit<ComponentProps<"form">, "onSubmit">, PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
   formComponent?: FC<Omit<FormComponentType, "ref">>;
@@ -45,68 +45,61 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     form,
     children,
     onSubmit,
-    formComponent: FormView = DefaultFormComponent,
-    isReadOnly: isReadOnlyFromProps,
+    formComponent = DefaultFormComponent,
+    isReadOnly,
     ref,
+    id: idProp,
     ...formProps
   } = props;
 
-  const [readonlyContextState, setReadOnlyContextState] =
-    useState(!!isReadOnlyFromProps);
+  const newFormId = useId();
+  const formId = idProp ?? newFormId;
+  const FormComponent = useMemo(() => formComponent, [formId]);
+  const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
 
-  const formId = useId();
-  const FormViewComponent = useMemo(() => FormView, [formId]);
-
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
-
-  const isReadOnly = isReadOnlyFromProps || readonlyContextState;
-  const { action, registerSubmitResult } = useRegisterActionStateContext(form);
-
-  const handleSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
-    const { isSubmitting, isValidating } = form.control._formState;
-    const formEvent =
-      e && "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
-
-    formEvent?.stopPropagation();
-
-    if (isSubmitting || isValidating) {
-      formEvent?.preventDefault();
-      return;
+  const handleSubmitResult = (result: unknown) => {
+    if (typeof result === "function") {
+      afterSubmitCallback.current = result as AfterFormSubmitCallback;
     }
-
-    const submit = form.handleSubmit((values) => {
-      setReadOnlyContextState(true);
-      const result = onSubmit(values, formEvent);
-      registerSubmitResult(result);
-      return result;
-    });
-
-    return submit(formEvent).finally(() => {
-      setReadOnlyContextState(false);
-    });
   };
+
+  const handleSubmit = (e?: FormEvent | F) => {
+    const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
+    formEvent?.stopPropagation();
+    return form.handleSubmit((values, event) => {
+      const submitResult = onSubmit(values, event);
+      if (submitResult instanceof Promise) {
+        return submitResult.then(handleSubmitResult);
+      }
+      handleSubmitResult(submitResult);
+    })(formEvent);
+  };
+
+  const onAfterSuccessFeedback = () => {
+    afterSubmitCallback.current?.();
+  };
+
+  const refWithHotkeySubmit = useHotkeySubmit({
+    ref,
+    handleSubmit,
+  });
 
   return (
     <RhfFormContextProvider {...form}>
       <FormContextProvider
-        value={{
-          form,
-          id: formId,
-          isReadOnly,
-          setReadOnly: setReadOnlyContextState,
-          submit: handleSubmit,
-          submitButtonRef: submitButtonRef,
-          formActionModel: action,
-        }}
+        form={form as UseFormReturn}
+        isReadOnly={isReadOnly}
+        id={formId}
+        onAfterSuccessFeedback={onAfterSuccessFeedback}
       >
-        <FormViewComponent
+        <FormComponent
           {...formProps}
-          ref={ref}
+          ref={refWithHotkeySubmit}
           id={formId}
           onSubmit={handleSubmit}
         >
           {children}
-        </FormViewComponent>
+        </FormComponent>
       </FormContextProvider>
     </RhfFormContextProvider>
   );

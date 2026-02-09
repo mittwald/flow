@@ -9,9 +9,7 @@ import { getColorFromInitials } from "@/components/Initials/lib/getColorFromInit
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface InitialsProps
-  extends PropsWithChildren,
-    PropsWithClassName,
-    FlowComponentProps {
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
   "aria-hidden"?: boolean;
   /** @internal */
   useDynamicColor?: boolean;

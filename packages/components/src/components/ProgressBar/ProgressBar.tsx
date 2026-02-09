@@ -15,7 +15,8 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 
 export interface ProgressBarProps
-  extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
+  extends
+    PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
     PropsWithStatus,
     FlowComponentProps {
   /** Whether the max value should be displayed. */

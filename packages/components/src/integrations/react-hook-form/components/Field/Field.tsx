@@ -1,4 +1,4 @@
-import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
+import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
 import { dynamic, type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { type PropsWithChildren } from "react";
@@ -9,15 +9,12 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
-import { useHotkeys } from "react-hotkeys-hook";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
-import { mergeRefs } from "@react-aria/utils";
 
 export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render">,
-    PropsWithChildren {}
+  extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
@@ -48,7 +45,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           : rest.rules?.maxLength,
     },
   });
-  const formContext = useFormContext<T>();
+  const formContext = useFormContext();
   /**
    * We don't use controller.field.value here, because it doesn't update when
    * the form value is updated outside of this field (e.g. when setting values
@@ -68,22 +65,8 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const isFieldInvalid = controller.fieldState.invalid;
 
-  const hotkeyRef = useHotkeys<never>(
-    "mod+enter",
-    () => {
-      formContext.submit();
-    },
-    {
-      enableOnFormTags: true,
-      enableOnContentEditable: true,
-    },
-  );
-
-  const refWithHotkey = mergeRefs(controller.field.ref, hotkeyRef);
-
   const fieldProps = {
     ...controller.field,
-    ref: refWithHotkey,
     value,
     name,
     form: formContext.id,
@@ -146,6 +129,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       ...fieldProps,
       selectedKey: value,
     },
+    Rating: fieldProps,
   };
 
   return (

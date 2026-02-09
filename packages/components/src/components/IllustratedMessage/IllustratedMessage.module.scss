@@ -34,8 +34,7 @@
 
   @mixin status($color) {
     &.#{$color} {
-      :where(.icon),
-      .heading {
+      :where(.icon) {
         color: var(--illustrated-message--#{$color}-content-color);
       }
     }
@@ -43,6 +42,7 @@
 
   @include status(primary);
   @include status(danger);
+  @include status(unavailable);
   @include status(dark);
   @include status(light);
 }

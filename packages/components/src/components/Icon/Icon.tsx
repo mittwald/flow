@@ -10,7 +10,8 @@ import type { Status } from "@/lib/types/props";
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps
-  extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
+  extends
+    PropsWithChildren<Omit<SvgAttributeProps, "name">>,
     FlowComponentProps {
   status?: Status | "unavailable";
   /** The size of the icon. @default "m" */

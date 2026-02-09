@@ -17,7 +17,9 @@ type GapSize = "s" | "m" | "l" | "xl";
 
 export interface ColumnLayoutProps<
   T extends keyof HTMLElementTagNameMap = "div" | "ul",
-> extends PropsWithChildren,
+>
+  extends
+    PropsWithChildren,
     PropsWithElementType<T>,
     PropsWithClassName,
     FlowComponentProps<HTMLElementTagNameMap[T]> {

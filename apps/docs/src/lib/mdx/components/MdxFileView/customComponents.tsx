@@ -25,93 +25,117 @@ import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTo
 import { onlyText } from "react-children-utilities";
 import { AnchorLinkHeading } from "@/lib/mdx/components/MdxFileView/AnchorLinkHeading";
 
-export const customComponents = {
-  Content,
-  Heading,
-  Alert,
-  AlertBadge,
-  DoAndDont: ExamplesContainer,
-  ColumnLayout,
-  DesignTokenTable,
-  Label,
-  Link,
+export const createCustomComponents = () => {
+  let currentH1: string | null = null;
 
-  pre: ({ children }: PropsWithChildren) => (
-    <div className={styles.preContainer}>
-      <pre className={styles.pre}>{children}</pre>
-      <CopyButton
-        className={styles.preCopyButton}
-        text={onlyText(children)}
-        variant="plain"
-        size="s"
-      />
-    </div>
-  ),
+  return {
+    Content,
+    Heading,
+    Alert,
+    AlertBadge,
+    DoAndDont: ExamplesContainer,
+    ColumnLayout,
+    DesignTokenTable,
+    Label,
+    Link,
 
-  code: ({ children }: PropsWithChildren) => (
-    <InlineCode>{children}</InlineCode>
-  ),
+    pre: ({ children }: PropsWithChildren) => (
+      <div className={styles.preContainer}>
+        <pre className={styles.pre}>{children}</pre>
+        <CopyButton
+          className={styles.preCopyButton}
+          text={onlyText(children)}
+          variant="plain"
+          size="s"
+        />
+      </div>
+    ),
 
-  p: ({ children }: PropsWithChildren) => (
-    <Text elementType="p">{children}</Text>
-  ),
+    code: ({ children }: PropsWithChildren) => (
+      <InlineCode>{children}</InlineCode>
+    ),
 
-  ul: ({ children }: PropsWithChildren) => (
-    <ul className={styles.ul}>{children}</ul>
-  ),
+    p: ({ children }: PropsWithChildren) => (
+      <Text elementType="p">{children}</Text>
+    ),
 
-  li: ({ children }: PropsWithChildren) => <li>{children}</li>,
+    ul: ({ children }: PropsWithChildren) => (
+      <ul className={styles.ul}>{children}</ul>
+    ),
 
-  h1: ({ children }: PropsWithChildren) => (
-    <AnchorLinkHeading>{children}</AnchorLinkHeading>
-  ),
+    li: ({ children }: PropsWithChildren) => <li>{children}</li>,
 
-  h2: ({ children }: PropsWithChildren) => (
-    <Heading level={3}>{children}</Heading>
-  ),
-
-  h3: ({ children }: PropsWithChildren) => (
-    <Heading level={4}>{children}</Heading>
-  ),
-
-  h4: ({ children }: PropsWithChildren) => (
-    <Heading level={5}>{children}</Heading>
-  ),
-
-  a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {
-    if (href?.startsWith("http")) {
-      const url = new URL(href);
+    h1: ({ children }: PropsWithChildren) => {
+      const text = onlyText(children);
+      currentH1 = text;
 
       return (
-        <Link
-          href={href}
-          inline
-          target={url.hostname === "mittwald.github.io" ? undefined : "_blank"}
-        >
+        <AnchorLinkHeading level={2} slugText={text}>
           {children}
-        </Link>
+        </AnchorLinkHeading>
       );
-    }
+    },
 
-    return (
-      <RouterProvider>
-        <Link inline href={href}>
+    h2: ({ children }: PropsWithChildren) => {
+      const text = onlyText(children);
+      const slugText = currentH1 ? `${currentH1} ${text}` : text;
+
+      return (
+        <AnchorLinkHeading level={3} slugText={slugText}>
           {children}
-        </Link>
-      </RouterProvider>
-    );
-  },
+        </AnchorLinkHeading>
+      );
+    },
 
-  hr: () => <Separator className={styles.separator} />,
+    h3: ({ children }: PropsWithChildren) => (
+      <Heading level={4}>{children}</Heading>
+    ),
 
-  table: ({ children }: PropsWithChildren) => <Table>{children}</Table>,
-  thead: ({ children }: PropsWithChildren) => (
-    <TableHeader>{children}</TableHeader>
-  ),
-  tr: ({ children }: PropsWithChildren) => <TableRow>{children}</TableRow>,
-  th: ({ children }: PropsWithChildren) => (
-    <TableColumn>{children}</TableColumn>
-  ),
-  tbody: ({ children }: PropsWithChildren) => <TableBody>{children}</TableBody>,
-  td: ({ children }: PropsWithChildren) => <TableCell>{children}</TableCell>,
-} as const;
+    h4: ({ children }: PropsWithChildren) => (
+      <Heading level={5}>{children}</Heading>
+    ),
+
+    a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {
+      if (href?.startsWith("http")) {
+        const url = new URL(href);
+
+        return (
+          <Link
+            href={href}
+            inline
+            target={
+              url.hostname === "mittwald.github.io" ? undefined : "_blank"
+            }
+          >
+            {children}
+          </Link>
+        );
+      }
+
+      return (
+        <RouterProvider>
+          <Link inline href={href}>
+            {children}
+          </Link>
+        </RouterProvider>
+      );
+    },
+
+    hr: () => <Separator className={styles.separator} />,
+
+    table: ({ children }: PropsWithChildren) => (
+      <Table aria-label="Tabelle">{children}</Table>
+    ),
+    thead: ({ children }: PropsWithChildren) => (
+      <TableHeader>{children}</TableHeader>
+    ),
+    tr: ({ children }: PropsWithChildren) => <TableRow>{children}</TableRow>,
+    th: ({ children }: PropsWithChildren) => (
+      <TableColumn>{children}</TableColumn>
+    ),
+    tbody: ({ children }: PropsWithChildren) => (
+      <TableBody>{children}</TableBody>
+    ),
+    td: ({ children }: PropsWithChildren) => <TableCell>{children}</TableCell>,
+  } as const;
+};

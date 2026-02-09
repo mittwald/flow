@@ -5,19 +5,18 @@ import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
-export interface AreaProps
-  extends Pick<
-    Recharts.AreaProps,
-    | "className"
-    | "dataKey"
-    | "stackId"
-    | "fillOpacity"
-    | "key"
-    | "xAxisId"
-    | "yAxisId"
-    | "type"
-    | "unit"
-  > {
+export interface AreaProps extends Pick<
+  Recharts.AreaProps,
+  | "className"
+  | "dataKey"
+  | "stackId"
+  | "fillOpacity"
+  | "key"
+  | "xAxisId"
+  | "yAxisId"
+  | "type"
+  | "unit"
+> {
   /** The color of the area. @default "sea-green" */
   color?: CategoricalWithCustomColor;
 }

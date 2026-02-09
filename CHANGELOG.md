@@ -3,6 +3,184 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.666](https://github.com/mittwald/flow/compare/0.2.0-alpha.665...0.2.0-alpha.666) (2026-02-09)
+
+### Bug Fixes
+
+* **Form:** fix missing submit event ([#2303](https://github.com/mittwald/flow/issues/2303)) ([a4f7048](https://github.com/mittwald/flow/commit/a4f704886f88538602a19cfd1254c5e2ed0dab08))
+
+# [0.2.0-alpha.665](https://github.com/mittwald/flow/compare/0.2.0-alpha.664...0.2.0-alpha.665) (2026-02-06)
+
+### Bug Fixes
+
+* **TextField:** fix min width ([#2300](https://github.com/mittwald/flow/issues/2300)) ([2cacd7a](https://github.com/mittwald/flow/commit/2cacd7aab206e0b9cccd05543aa26c10fd55800b))
+
+# [0.2.0-alpha.664](https://github.com/mittwald/flow/compare/0.2.0-alpha.663...0.2.0-alpha.664) (2026-02-06)
+
+### Features
+
+* **Truncate:** add truncate component ([#2297](https://github.com/mittwald/flow/issues/2297)) ([c62f359](https://github.com/mittwald/flow/commit/c62f359cfc8e61ca560c75fd1c0b54d747f1cfb3))
+
+# [0.2.0-alpha.663](https://github.com/mittwald/flow/compare/0.2.0-alpha.662...0.2.0-alpha.663) (2026-02-06)
+
+### Features
+
+* **TextField:** support buttons and add show password button ([#2291](https://github.com/mittwald/flow/issues/2291)) ([abb2008](https://github.com/mittwald/flow/commit/abb2008717ced8427a9db65b87ffa6a160821136))
+
+# [0.2.0-alpha.662](https://github.com/mittwald/flow/compare/0.2.0-alpha.661...0.2.0-alpha.662) (2026-02-05)
+
+### Bug Fixes
+
+* **CartesianChart:** fix tooltip in remote context ([#2295](https://github.com/mittwald/flow/issues/2295)) ([d390c4b](https://github.com/mittwald/flow/commit/d390c4be2e1b61e6a3d23198b755dee10432051d))
+
+### Features
+
+* **List:** add all filters modal ([db51634](https://github.com/mittwald/flow/commit/db5163420077d56e3fa1d55d326313a23351053a))
+
+# [0.2.0-alpha.661](https://github.com/mittwald/flow/compare/0.2.0-alpha.660...0.2.0-alpha.661) (2026-01-30)
+
+### Bug Fixes
+
+* **Form:** fix onAfterSubmit callback is not called ([#2290](https://github.com/mittwald/flow/issues/2290)) ([3241acc](https://github.com/mittwald/flow/commit/3241acc64b68d59934370ac043b563d1d8ab36eb))
+
+# [0.2.0-alpha.660](https://github.com/mittwald/flow/compare/0.2.0-alpha.659...0.2.0-alpha.660) (2026-01-29)
+
+### Bug Fixes
+
+* **docs:** remove old plan names ([#2289](https://github.com/mittwald/flow/issues/2289)) ([e503668](https://github.com/mittwald/flow/commit/e503668f9bcdaa1c32406a395b592738da4867e9))
+
+# [0.2.0-alpha.659](https://github.com/mittwald/flow/compare/0.2.0-alpha.658...0.2.0-alpha.659) (2026-01-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.658](https://github.com/mittwald/flow/compare/0.2.0-alpha.657...0.2.0-alpha.658) (2026-01-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.657](https://github.com/mittwald/flow/compare/0.2.0-alpha.656...0.2.0-alpha.657) (2026-01-28)
+
+### Features
+
+* **Rating:** make rating component interactive ([#2280](https://github.com/mittwald/flow/issues/2280)) ([ed5e3d6](https://github.com/mittwald/flow/commit/ed5e3d6639d52972d27e5e214ff8da50d331c712))
+
+# [0.2.0-alpha.656](https://github.com/mittwald/flow/compare/0.2.0-alpha.655...0.2.0-alpha.656) (2026-01-28)
+
+### Features
+
+* **MenuItem:** support action states ([dbf5337](https://github.com/mittwald/flow/commit/dbf53375da08b70084bf999ebd8f656ee95da3b7))
+
+# [0.2.0-alpha.655](https://github.com/mittwald/flow/compare/0.2.0-alpha.654...0.2.0-alpha.655) (2026-01-28)
+
+### Bug Fixes
+
+* **Action:** action should be done after feedback ([#2284](https://github.com/mittwald/flow/issues/2284)) ([485f444](https://github.com/mittwald/flow/commit/485f4444f170cf78f5f8b1ff3cb2a82ef36e8dcf))
+
+# [0.2.0-alpha.654](https://github.com/mittwald/flow/compare/0.2.0-alpha.653...0.2.0-alpha.654) (2026-01-28)
+
+### Features
+
+* **List:** improve mobile list header ([#2283](https://github.com/mittwald/flow/issues/2283)) ([d4cd35e](https://github.com/mittwald/flow/commit/d4cd35ee53428d9d890df950a2a4d7aceb756d9b))
+
+# [0.2.0-alpha.653](https://github.com/mittwald/flow/compare/0.2.0-alpha.652...0.2.0-alpha.653) (2026-01-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.652](https://github.com/mittwald/flow/compare/0.2.0-alpha.651...0.2.0-alpha.652) (2026-01-28)
+
+### Bug Fixes
+
+* **ContextMenu:** fix max width ([#2281](https://github.com/mittwald/flow/issues/2281)) ([3fc1dc5](https://github.com/mittwald/flow/commit/3fc1dc526e43a0ee2e12fa8a27f5cf55618c4011))
+
+# [0.2.0-alpha.651](https://github.com/mittwald/flow/compare/0.2.0-alpha.650...0.2.0-alpha.651) (2026-01-27)
+
+### Bug Fixes
+
+* **Form:** add generics to useForm (regression bug) ([#2278](https://github.com/mittwald/flow/issues/2278)) ([5f28b8a](https://github.com/mittwald/flow/commit/5f28b8a3bc9e53c60b1b06121278882c8f499b11))
+
+# [0.2.0-alpha.650](https://github.com/mittwald/flow/compare/0.2.0-alpha.649...0.2.0-alpha.650) (2026-01-27)
+
+### Bug Fixes
+
+* **ExtBridge:** config catchall ([#2276](https://github.com/mittwald/flow/issues/2276)) ([d5d6a3b](https://github.com/mittwald/flow/commit/d5d6a3b147454b8d68e973a88379ee79a5660eec))
+
+# [0.2.0-alpha.649](https://github.com/mittwald/flow/compare/0.2.0-alpha.648...0.2.0-alpha.649) (2026-01-27)
+
+### Features
+
+* **ExtBridge:** expose variantKey in baseConfig ([#2274](https://github.com/mittwald/flow/issues/2274)) ([b540f7a](https://github.com/mittwald/flow/commit/b540f7aafecb3bc03a9e31d207f49402b978cf50))
+
+# [0.2.0-alpha.648](https://github.com/mittwald/flow/compare/0.2.0-alpha.647...0.2.0-alpha.648) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.647](https://github.com/mittwald/flow/compare/0.2.0-alpha.646...0.2.0-alpha.647) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.646](https://github.com/mittwald/flow/compare/0.2.0-alpha.645...0.2.0-alpha.646) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.645](https://github.com/mittwald/flow/compare/0.2.0-alpha.644...0.2.0-alpha.645) (2026-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.644](https://github.com/mittwald/flow/compare/0.2.0-alpha.643...0.2.0-alpha.644) (2026-01-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.643](https://github.com/mittwald/flow/compare/0.2.0-alpha.642...0.2.0-alpha.643) (2026-01-26)
+
+### Features
+
+* **IllustratedMessage:** support unavailable state ([192fddf](https://github.com/mittwald/flow/commit/192fddf69fa93f23fa9ea13383d3a9d63837b1f1))
+
+# [0.2.0-alpha.642](https://github.com/mittwald/flow/compare/0.2.0-alpha.641...0.2.0-alpha.642) (2026-01-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.641](https://github.com/mittwald/flow/compare/0.2.0-alpha.640...0.2.0-alpha.641) (2026-01-23)
+
+### Bug Fixes
+
+* **List:** fix borders and focus ([#2263](https://github.com/mittwald/flow/issues/2263)) ([ae88448](https://github.com/mittwald/flow/commit/ae88448e264cedbfdd1351570c40d46a2b20f555))
+
+# [0.2.0-alpha.640](https://github.com/mittwald/flow/compare/0.2.0-alpha.639...0.2.0-alpha.640) (2026-01-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.639](https://github.com/mittwald/flow/compare/0.2.0-alpha.638...0.2.0-alpha.639) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.638](https://github.com/mittwald/flow/compare/0.2.0-alpha.637...0.2.0-alpha.638) (2026-01-20)
+
+### Features
+
+* **Markdown:** Support table ([#2260](https://github.com/mittwald/flow/issues/2260)) ([939a6ec](https://github.com/mittwald/flow/commit/939a6ec4e5e8ce448bf033a6027a38200540fa2b))
+
+# [0.2.0-alpha.637](https://github.com/mittwald/flow/compare/0.2.0-alpha.636...0.2.0-alpha.637) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.636](https://github.com/mittwald/flow/compare/0.2.0-alpha.635...0.2.0-alpha.636) (2026-01-20)
+
+### Bug Fixes
+
+* **FileCard:** fix file size format ([#2259](https://github.com/mittwald/flow/issues/2259)) ([f55c5cb](https://github.com/mittwald/flow/commit/f55c5cbab96254bd6325a5ee41c74cc07a156959))
+
+# [0.2.0-alpha.635](https://github.com/mittwald/flow/compare/0.2.0-alpha.634...0.2.0-alpha.635) (2026-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.634](https://github.com/mittwald/flow/compare/0.2.0-alpha.633...0.2.0-alpha.634) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.633](https://github.com/mittwald/flow/compare/0.2.0-alpha.632...0.2.0-alpha.633) (2026-01-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.632](https://github.com/mittwald/flow/compare/0.2.0-alpha.631...0.2.0-alpha.632) (2026-01-15)
 
 ### Features

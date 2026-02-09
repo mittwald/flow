@@ -1,0 +1,53 @@
+# Grundlagen
+
+Eine Checkbox funktioniert in der Handhabung nahezu identisch wie ein
+[CheckboxButton](/04-components/form-controls/checkbox-button/overview). Der
+Unterschied liegt im Erscheinungsbild. Je nach Gestaltung der Benutzeroberfläche
+oder je nach Anwendungsfall sollte individuell entschieden werden, welche der
+beiden Components sinnvoller ist.
+
+## Best practices
+
+Achte bei der Verwendung einer Checkbox darauf, dass ...
+
+- sie immer eine Beschriftung hat.
+- die Beschriftung kurz und eindeutig ist. Sie sollte stets mit einem
+  Großbuchstaben beginnen.
+- die Beschriftung in der Regel ohne Punkt endet – es sei denn, sie ist ein
+  vollständiger Satz.
+- der initiale Zustand (ausgewählt/nicht ausgewählt) nachvollziehbar und
+  sinnvoll gewählt ist.
+- der Zwischenzustand „Indeterminate“ nur in Verbindung mit untergeordneten
+  Checkboxen verwendet wird.
+- das An- und Abhaken einer Checkbox keine anderen Checkboxen verändert – mit
+  Ausnahme einer übergeordneten Checkbox.
+- bei mehreren Checkboxen die Reihenfolge logisch und nachvollziehbar ist (siehe
+  [CheckboxGroup](/04-components/form-controls/checkbox-group/overview)).
+
+## Verwendung
+
+Verwende eine Checkbox, um ...
+
+- dem User die Auswahl einer oder mehrerer Optionen zu ermöglichen.
+- einzelne Zustimmungen (z. B. AGBs) vom User einzuholen.
+
+## Checkbox vs. Switch
+
+Mit den Components Checkbox und
+[Switch](/04-components/form-controls/switch/overview) können Optionen
+aktiviert/ausgewählt werden. Um die Unterschiede klarer zu machen, hier einige
+hilfreiche Anhaltspunkte.
+
+<DoAndDont>
+  <Plain heading="Verwende eine Checkbox, um z. B. ...">
+    - dem User eine Auswahloption zur Bestätigung zu geben.
+    - Auswahlmöglichkeiten in einem Formular anzubieten, die gespeichert werden müssen.
+
+  </Plain>
+
+  <Plain heading="Verwende einen Switch, um z. B. ...">
+    - eine Funktion direkt zu aktivieren oder zu deaktivieren.
+    - eine Einstellung sofort zu ändern, ohne sie separat speichern zu müssen.
+
+  </Plain>
+</DoAndDont>

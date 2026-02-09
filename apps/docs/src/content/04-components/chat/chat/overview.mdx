@@ -1,0 +1,43 @@
+# Playground
+
+Verwende `<Chat />`, um einen Chat darzustellen.
+
+Der Chat kombiniert dabei den
+[MessageThread](/04-components/chat/message-thread/overview) mit einem
+Textinput. Mit der `height` Property lässt sich die Höhe des Chats festlegen.
+Gleichzeitig sorgt sie dafür, dass die Texteingabe am unteren Rand platziert
+wird.
+
+<LiveCodeEditor />
+
+---
+
+# Kombiniere mit ...
+
+## Upload
+
+Ein Chat kann um eine Uploadfunktion erweitert werden. Dafür sollte ein
+[FileField](/04-components/form-controls/file-field/overview) genutzt werden,
+über das User Dateien auswählen können. Die hochgeladenen Dateien können dann in
+einer [FileCardList](/04-components/upload/file-card-list/overview) dargestellt
+werden.
+
+<LiveCodeEditor example="upload" editorCollapsed />
+
+---
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview) zu
+finden.
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+## Markdown Editor
+
+Statt einer TextArea kann auch der
+[MarkdownEditor](/04-components/form-controls/markdown-editor/overview)
+verwendet werden.
+
+<LiveCodeEditor example="markdown-editor" editorCollapsed />

@@ -1,0 +1,10 @@
+rating:
+  spacing:
+    s:
+      value: "{size-rem.xxs}"
+    m:
+      value: "{size-rem.xs}"
+  star-color:
+    value: "{neutral.color.700}"
+  star-filled-color:
+    value: "{primary.color.1000}"

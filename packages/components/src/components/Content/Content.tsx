@@ -4,7 +4,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface ContentProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     PropsWithElementType<"div" | "section" | "span">,
     FlowComponentProps {
   /** @internal */

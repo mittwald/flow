@@ -15,7 +15,8 @@ export type CountryFilterFn = (country: Country) => boolean;
 export type CountrySortFn = (left: Country, right: Country) => number;
 
 export interface CountryOptionsProps<T = object>
-  extends PropsWithChildren<Omit<ListBoxProps<T>, "children">>,
+  extends
+    PropsWithChildren<Omit<ListBoxProps<T>, "children">>,
     FlowComponentProps {
   filterBy?: CountryFilterFn;
   sortBy?: CountrySortFn;

@@ -10,6 +10,7 @@
 
   &.item {
     outline-offset: calc(var(--size-px--xs) * -1);
+    box-shadow: none;
   }
 
   &:where(.isSelected) {
@@ -47,6 +48,10 @@
 
   &.tile {
     border: none;
+
+    &.item {
+      outline-offset: var(--size-px--xxs);
+    }
 
     &:where(.hasAction) {
       &:not(.isSelected) {

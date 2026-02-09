@@ -1,0 +1,94 @@
+# Playground
+
+Verwende `<RadioGroup />` zusammen mit mehreren `<Radio />`, um eine RadioGroup
+darzustellen. Über der RadioGroup kann ein beschreibendes
+[Label](/04-components/content/label/overview) verwendet werden. Es kann
+weggelassen werden, wenn die RadioGroup ohne verstanden wird oder wenn ein
+anderes beschreibendes Element – wie eine
+[Heading](/04-components/content/heading/overview) – in der Nähe platziert wird.
+Wenn kein Label vorhanden ist, muss ein aria-label gesetzt werden.
+
+<LiveCodeEditor example="introduction" />
+
+---
+
+# RadioButtons
+
+RadioGroups können statt mit einfachen **Radios** auch mit **RadioButtons**
+gefüllt werden. Ersetze dafür `<Radio />` mit `<RadioButton />`. Anders als
+einfache Radios können RadioButtons mehr Inhalt – wie z. B. eine Überschrift mit
+Text und Subtext – darstellen und dürfen auch nebeneinander gesetzt werden.
+
+<LiveCodeEditor example="buttons" editorCollapsed />
+
+## Weiterer Inhalt
+
+Anstelle einer einfachen Bezeichnung kann der `<RadioButton />` auch mit
+zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
+`<RadioButtons />` [Text](/04-components/content/text/overview) für eine
+Überschrift und `<Content />` für Fließtext.
+
+<LiveCodeEditor example="content" editorCollapsed />
+
+## Benutzerdefinierte Spalten
+
+Die RadioGroup verwendet das
+[ColumnLayout](/04-components/structure/column-layout/overview), um eine
+Anpassung der Spalten zu ermöglichen. Bei der Verwendung von RadioButtons
+entspricht der Default dem des ColumnLayouts, während Radios im Default
+untereinander angezeigt werden.
+
+<LiveCodeEditor example="customColumns" editorCollapsed />
+
+---
+
+# Mit FieldDescription
+
+Unterhalb der `<Radio />` oder `<RadioButton />` kann eine hilfreiche
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed />
+
+---
+
+# States
+
+Eine RadioGroup hat 3 States: **Default**, **Disabled** und **Error**. Radios
+und RadioButtons verfügen über die States **Default**, **Hover**, **Pressed**,
+**Disabled**, **Focused** und **Selected**.
+
+<LiveCodeEditor example="states" editorCollapsed />
+
+**Selected:** Wenn ein Radio/RadioButton vom User ausgewählt wird, erhält er den
+State Selected. In einer RadioGroup kann sich immer nur ein Radio/RadioButton in
+diesem State befinden. In den meisten Fällen ist es sinnvoll, zu Beginn eine
+Option vorzuselektieren.
+
+**Disabled:** Wenn die RadioGroup den State Disabled hat, erhalten alle
+Radios/RadioButtons automatisch ebenfalls diesen State, sodass sie vom User
+nicht ausgewählt werden können. Es ist auch möglich, einzelne
+Radios/RadioButtons auf Disabled zu setzen.
+
+<LiveCodeEditor example="error" editorCollapsed />
+
+**Error:** Ein Error-State sollte angezeigt werden, wenn etwas schiefgelaufen
+ist (siehe
+[Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)). Da
+häufig eine Option in der RadioGroup vorselektiert ist, wird das obige Beispiel
+nur selten benötigt.
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Benutze die [ContextualHelp](/04-components/overlays/contextual-help/overview)
+Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
+lang für die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## React Hook Form
+
+<LiveCodeEditor example="form" editorCollapsed />

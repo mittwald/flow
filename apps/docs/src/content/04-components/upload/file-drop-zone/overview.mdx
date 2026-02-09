@@ -1,0 +1,39 @@
+# Playground
+
+Verwende `<FileDropZone />`, um Dateien per Drag-and-Drop hochzuladen. Biete
+zusätzlich mit `<Button />` eine alternative Möglichkeit an.
+
+<LiveCodeEditor />
+
+---
+
+# Vorgegebene Dateitypen
+
+Verwende `<Text />`, um den User über erlaubte Dateitypen und maximale
+Dateigrößen beim Hochladen zu informieren.
+
+<LiveCodeEditor example="type" editorCollapsed />
+
+---
+
+# Mehrere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneuten Hochladen werden bestehende Dateien ersetzt. Wenn
+Dateien nacheinander hochgeladen werden sollen, kombiniere die FileDropZone mit
+der [FileCardList](/04-components/upload/file-card-list/overview).
+
+<LiveCodeEditor example="multiple" editorCollapsed />
+
+---
+
+# Kombinieren mit...
+
+## FileCardList
+
+Wenn User Dateien nach dem Hochladen hinzufügen und auch wieder entfernen
+sollen, kombiniere die FileDropZone mit der FileCardList. Die
+[FileCardList](/04-components/upload/file-card-list/overview) zeigt die
+zwischengespeicherten Dateien.
+
+<LiveCodeEditor example="fileCardList" editorCollapsed />

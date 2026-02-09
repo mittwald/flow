@@ -14,29 +14,31 @@ vorzugehen. Entscheidend ist eine gute Balance: Zu viele kleine Boundaries
 erhöhen die Komplexität, zu wenige gefährden hingegen die Stabilität großer
 Teile der Anwendung.
 
-| Typ                  | Verwendung                                                     | Element     | Fehlerfall                            | Loading                                            |
-| -------------------- | -------------------------------------------------------------- | ----------- | ------------------------------------- | -------------------------------------------------- |
-| `LayoutCard`         | Äußerste Boundary einer Seite                                  | LayoutCard  | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `LayoutCardFragment` | Für Dashboards mit ungewisser Anzahl und Breite der Kacheln    | Fragment    | LayoutCard mit IllustratedMessage     | LayoutCard mit Sections mit mehrzeiligen Skeletons |
-| `SectionsFragment`   | Äußerste Boundary in Tabs                                      | Fragment    | IllustratedMessage                    | Sections mit mehrzeiligen Skeletons                |
-| `Section`            | Ersetzt normale Sections                                       | Section     | Fehler Section                        | Mehrzeilige Skeletons                              |
-| `ContentFragment`    | Für mehrzeilige Inhalte                                        | Fragment    | Fehler Section                        | Mehrzeilige Skeletons                              |
-| `Fragment`           | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Fragment    | Nichts                                | Nichts                                             |
-| `Modal`              | Ersetzt normale Modals                                         | Modal       | IllustratedMessage                    | LoadingView der Flow Component                     |
-| `ContextMenu`        | Ersetzt normale ContextMenus                                   | ContextMenu | MenuItems mit Fehler Text             | MenuItems mit Skeleton                             |
-| `ChartFragment`      | Für CartesianCharts                                            | Fragment    | CartesianChart mit IllustratedMessage | CartesianChart mit LoadingSpinner                  |
-| `FieldFragment`      | Für Form Fields mit nachgeladenen Inhalten                     | Fragment    | Fehler Text                           | TextField                                          |
-| `Avatar`             | Für Avatare                                                    | Avatar      | Avatar mit Fehler Icon                | Avatar mit Skeleton                                |
-| `Link`               | Für Links                                                      | Link        | Fehler Text                           | Einzeiliges Skeleton                               |
-| `Text`               | Für Texte                                                      | Text        | Fehler Text                           | Einzeiliges Skeleton                               |
-| `String`             | Für einzeilige Inhalte                                         | Fragment    | Fehler Text                           | Einzeiliges Skeleton                               |
+Boundaries wie "LayoutCard" und "Section" rendern das jeweilige Element,
+Boundaries mit dem Zusatz "Fragment" nutzen die Fehler und Ladezustände des
+jeweiligen Elements, rendern am Ende aber nur ein Fragment.
 
-## Inhalte einer LayoutCard (WithBoundaries.LayoutCard)
+| Typ                                 | Verwendung                                                     | Fehlerfall                                                                             | Loading                                                                                      |
+| ----------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `LayoutCard` / `LayoutCardFragment` | Äußerste Boundary einer Seite                                  | <LiveCodeEditor example="layout-card-error" editorDisabled zoom=".6" bgColor="dark" /> | <LiveCodeEditor example="layout-card-loading" editorDisabled zoom=".6" bgColor="dark" />     |
+| `SectionsFragment`                  | Äußerste Boundary in Tabs                                      | <LiveCodeEditor example="illustrated-message-error" editorDisabled zoom=".6" />        | <LiveCodeEditor example="illustrated-message-loading" editorDisabled zoom=".6" />            |
+| `Section`                           | Ersetzt normale Sections                                       | <LiveCodeEditor example="section-error" editorDisabled zoom=".6" />                    | <LiveCodeEditor example="section-loading" editorDisabled zoom=".6" />                        |
+| `ContentFragment`                   | Für mehrzeilige Inhalte                                        | <LiveCodeEditor example="content-fragment-error" editorDisabled zoom=".6" />           | <LiveCodeEditor example="content-fragment-loading" editorDisabled zoom=".6" />               |
+| `Fragment`                          | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Kein Fallback                                                                          | Kein Fallback                                                                                |
+| `Modal`                             | Ersetzt normale Modals                                         | <LiveCodeEditor example="modal-error" editorDisabled zoom=".6" />                      | <LiveCodeEditor example="modal-loading" editorDisabled  /> (Loading View der Flow Component) |
+| `ContextMenu`                       | Ersetzt normale ContextMenus                                   | <LiveCodeEditor example="context-menu-error" editorDisabled/>                          | <LiveCodeEditor example="context-menu-loading" editorDisabled/>                              |
+| `MenuItemFragment`                  | Für MenuItems                                                  | Kein Fallback                                                                          | Keine Loading Boundary                                                                       |
+| `ChartFragment`                     | Für CartesianCharts                                            | <LiveCodeEditor example="chart-error" editorDisabled  zoom=".6"/>                      | <LiveCodeEditor example="chart-loading" editorDisabled  zoom=".6"/>                          |
+| `FieldFragment`                     | Für Form Fields mit nachgeladenen Inhalten                     | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="field-fragment-loading" editorDisabled/>                            |
+| `Avatar`                            | Für Avatare                                                    | <LiveCodeEditor example="avatar-error" editorDisabled/>                                | <LiveCodeEditor example="avatar-loading" editorDisabled/>                                    |
+| `Text` / `String`                   | Für Texte                                                      | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="text-loading" editorDisabled/>                                      |
+
+## Inhalte einer LayoutCard
 
 Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
 der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
 umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
-`sectionsCount` mitgegeben, um die LoadingView passend darzustellen.
+`sectionsCount` mitgegeben, um die Loading View passend darzustellen.
 
 ### Listenseite
 
@@ -91,7 +93,7 @@ export const CronjobPage: FC = () => (
 );
 ```
 
-### Tab (WithBoundaries.SectionsFragment)
+### Tab
 
 Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es
 sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich
@@ -123,7 +125,7 @@ export const CronjobTabs: FC = () => (
 );
 ```
 
-## Modals (WithBoundaries.Modal)
+## Modals
 
 Für Modals sollte immer ein `WithBoundaries.Modal` verwendet werden. Dies
 verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal
@@ -138,14 +140,14 @@ ErrorView, auch wenn es darin noch Boundaries gibt.
 
 ```
 interface Props {
-  cronjob:CronjobProxy;
+  cronjob:CronjobGhost;
   controller?: OverlayController;
 }
 
 export const RenameCronjobModal: FC<Props> = (props) => (
   <WithBoundaries.Modal controller={props.controller}>
     {() => {
-      const { cronjobProxy } = asProxyProps(props, ["cronjob"]);
+      const { cronjobGhost } = asGhostProps(props, ["cronjob"]);
       const controller = useOverlayController("Modal");
       const form = useForm();
       const handleOnSubmit = async () => {
@@ -163,7 +165,7 @@ export const RenameCronjobModal: FC<Props> = (props) => (
 );
 ```
 
-## Inhalte einzelner Sections (WithBoundaries.Section)
+## Inhalte einzelner Sections
 
 Eine Section kann ergänzende Informationen oder Funktionen aus einem anderen
 Service enthalten, die das primäre Nutzererlebnis der Seite nicht einschränken.
@@ -188,7 +190,7 @@ export const AppInstallationSection: FC<Props> = (props) => (
 ```
 
 **Sonderfall:** Manche Sections werden nur unter bestimmten Bedingungen
-angezeigt. In diesen Situationen soll keine eigene LoadingView erzeugt werden,
+angezeigt. In diesen Situationen soll keine eigene Loading View erzeugt werden,
 damit Nutzer kein Ladeverhalten sehen, das später nicht zu einem sichtbaren
 Ergebnis führt. Für solche Fälle eignet sich `WithBoundaries.Fragment`, da es
 die Section schützt, ohne einen sichtbaren Ladezustand zu erzeugen.
@@ -213,7 +215,7 @@ export const AppInstallationSection: FC<Props> = (props) => (
 );
 ```
 
-## Inhalte eines Diagramms (WithBoundaries.ChartFragment)
+## Inhalte eines Diagramms
 
 Diagramme beziehen in der Regel viele Daten aus externen Services und sind daher
 fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für das
@@ -225,7 +227,7 @@ fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für d
 </WithBoundaries.ChartFragment>
 ```
 
-## Inhalte einzelner kleinerer Elemente
+## Inhalte einzelner Elemente
 
 Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden oft
 dynamisch geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen.
@@ -233,7 +235,11 @@ Diese sollten daher separat geschützt werden, um nicht die gesamte Seite zu
 blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im
 Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
-### Texte (WithBoundaries.Text)
+### Texte
+
+Für Texte gibt es die `WithBoundaries.Text` Component, bzw die
+`WithBoundaries.String` Component, je nachdem ob am Ende eine `Text` Component
+oder nur ein String gerendert werden soll.
 
 ```
 <LabeledValue>
@@ -244,7 +250,7 @@ Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 </LabeledValue>
 ```
 
-Zusätzlich gibt es Components die direkt auf ein Model angewendet werden können
+Zusätzlich gibt es Components, die direkt auf ein Model angewendet werden können
 und eine eingebaute Boundary besitzen.
 
 ```
@@ -255,18 +261,18 @@ und eine eingebaute Boundary besitzen.
 <ModelLabeledValue model={cronjob}/>
 ```
 
-### Alerts / Badges (WithBoundaries.Fragment)
+### Alerts / Badges
 
 Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder
 Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So
-bleiben sie geschützt, ohne eine eigene LoadingView auszulösen.
+bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
   <WithBoundaries.Fragment>
     {() => {
-      const { customerProxy, asBadge } = asProxyProps(props, ["customer"]);
-      const isBankrupt = customerProxy.getDetailed().isBankrupt().use();
+      const { customerGhost, asBadge } = asGhostProps(props, ["customer"]);
+      const isBankrupt = customerGhost.getCommon().isBankrupt().use();
 
       if (!isBankrupt) {
         return null;
@@ -282,7 +288,11 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 );
 ```
 
-### Field (WithBoundaries.FieldFragment)
+### Field
+
+Für Fields kann die `WithBoundaries.FieldFragment` Component verwendet werden.
+Sie zeigt im Loading State ein Textfeld, dem optional ein Label mitgegeben
+werden kann.
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {
@@ -311,26 +321,45 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 };
 ```
 
-### ContextMenu (WithBoundaries.ContextMenu)
+### ContextMenu
+
+Für ContextMenus wird `WithBoundaries.ContextMenu` verwendet. Um zu verhindern,
+dass der Inhalt des ContextMenus springt, werden Elemente die nachgeladene
+Inhalte benötigen in ein `WithBoundaries.MenuItem` gepackt, diese Boundary
+enthält kein Suspense, damit das ganze ContextMenu im Ladezustand verbleibt.
 
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
-  const { cronjobProxy } = asProxyProps(props);
+  const { appInstallationGhost } = asGhostProps(props);
   const deleteModalController = useOverlayController("Modal");
+  const updateModalController = useOverlayController("Modal");
 
   return (
     <>
       <WithBoundaries.ContextMenu placement="bottom end">
         {() => {
-          const cronjob = cronjobProxy.getCommon().use();
-          return <DeleteMenuItem onAction={() => deleteModalController.open()} />;
+          const { isBusy } = appInstallationGhost.getCommon().use();
+          return (
+            <>
+              <DeleteMenuItem onAction={() => deleteModalController.open()} isDisabled={isBusy} />
+              <WithBoundaries.MenuItemFragment>
+                {() => {
+                  const updateAvailable = appInstallationGhost.getCommon().appVersion.updateAvailable().use();
+                  if (!updateAvailable) {
+                    return null;
+                  }
+                  return (
+                    <UpdateMenuItem onAction={() => updateModalController.open()}/>
+                  );
+                }}
+              </WithBoundaries.MenuItemFragment>
+            <>
+          )
         }}
       </WithBoundaries.ContextMenu>
 
-      <DeleteCronjobModal
-        controller={deleteModalController}
-        cronjob={cronjobProxy}
-      />
+      <DeleteCronjobModal controller={deleteModalController} appInstallation={appInstallationGhost}/>
+      <UpdateCronjobModal controller={updateModalController} appInstallation={appInstallationGhost}/>
     </>
   );
 };
@@ -349,6 +378,6 @@ allen relevanten Situationen greifen. Ebenso wichtig ist eine klare und
 konsistente Formulierung der Fehlermeldungen, damit User verstehen, was passiert
 und wie sie weitermachen können. Für konkrete Hinweise zur sprachlichen
 Ausgestaltung bietet die Guideline
-[Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)
+[Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
 weitere Orientierung. So entsteht ein stabiles und nachvollziehbares Verhalten,
 das sowohl die Entwicklung als auch die Nutzung der Anwendung unterstützt.

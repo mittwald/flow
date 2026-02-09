@@ -1,11 +1,14 @@
 # Status
 
-Das Informationskonzept unterscheidet vier Status: **Info, Warning, Danger** und **Success**. Jeder Status folgt dabei einem definierten Kombination aus
+Das Informationskonzept unterscheidet vier Status: **Info, Warning, Danger** und
+**Success**. Jeder Status folgt dabei einem definierten Kombination aus
 [Color](/02-foundations/01-design/02-colors)- und
-[Icon](/03-components/content/icon/overview#icon-bibliothek), um eine
-eindeutige und schnelle Erkennung zu ermöglichen. 
+[Icon](/04-components/content/icon/overview#icon-bibliothek), um eine eindeutige
+und schnelle Erkennung zu ermöglichen.
 
-Wenn zwei Status inhaltlich miteinander konkurrieren, wird immer der handlungsentscheidende angezeigt. Zum Beispiel überschreibt ein Danger stets Warning und Info.
+Wenn zwei Status inhaltlich miteinander konkurrieren, wird immer der
+handlungsentscheidende angezeigt. Zum Beispiel überschreibt ein Danger stets
+Warning und Info.
 
 | Status                                            | Einsatz                                                      | Beispiel                                                                                                                                     |
 | ------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -18,9 +21,14 @@ Wenn zwei Status inhaltlich miteinander konkurrieren, wird immer der handlungsen
 
 # Alert
 
-Ein [Alert](/03-components/status/alert/overview) wird dort eingesetzt, wo
+Ein [Alert](/04-components/status/alert/overview) wird dort eingesetzt, wo
 unmittelbare Aufmerksamkeit erforderlich ist – etwa bei Systemfehlern oder
-wichtigen Systeminformationen. Er übermittelt die Information in wenigen Sätzen und gibt, wenn möglich, eine Handlungsempfehlung. Diese kann mithilfe eines [Links](/03-components/navigation/link/overview) oder eines [Buttons](/03-components/actions/button/overview) unterstützt werden. Alerts sollten stets in der Nähe des betroffenen Inhalts platziert werden (s. [Alert: Position](/03-components/status/alert/guidelines#anwendung)).
+wichtigen Systeminformationen. Er übermittelt die Information in wenigen Sätzen
+und gibt, wenn möglich, eine Handlungsempfehlung. Diese kann mithilfe eines
+[Links](/04-components/navigation/link/overview) oder eines
+[Buttons](/04-components/actions/button/overview) unterstützt werden. Alerts
+sollten stets in der Nähe des betroffenen Inhalts platziert werden (s.
+[Alert: Position](/04-components/status/alert/guidelines#anwendung)).
 
 <LiveCodeEditor example="alert" editorCollapsed />
 
@@ -28,7 +36,16 @@ wichtigen Systeminformationen. Er übermittelt die Information in wenigen Sätze
 
 # AlertBadge
 
-Eine [AlertBadge](/03-components/status/alert-badge/overview) dient dazu, den Status eines Elements schnell sichtbar zu machen, beispielsweise in [Section](/03-components/structure/section/overview) [Headings](/03-components/content/heading/overview) oder [List](/03-components/structure/list/overview)-Einträgen. In vielen Fällen wird sie durch einen [Alert](/03-components/status/alert/overview) ergänzt, etwa auf der [Detailseite](/02-foundations/04-ui-patterns/03-struktur), um zusätzliche Informationen bereitzustellen. Für Metadaten oder ergänzende Informationen ist hingegen die [Badge](/03-components/status/badge/overview) besser geeignet (siehe [AlertBadge vs. Badge](/03-components/status/alert-badge/guidelines#grundlagen)).
+Eine [AlertBadge](/04-components/status/alert-badge/overview) dient dazu, den
+Status eines Elements schnell sichtbar zu machen, beispielsweise in
+[Section](/04-components/structure/section/overview)
+[Headings](/04-components/content/heading/overview) oder
+[List](/04-components/structure/list/overview)-Einträgen. In vielen Fällen wird
+sie durch einen [Alert](/04-components/status/alert/overview) ergänzt, etwa auf
+der [Detailseite](/03-patterns/detail-page), um zusätzliche Informationen
+bereitzustellen. Für Metadaten oder ergänzende Informationen ist hingegen die
+[Badge](/04-components/status/badge/overview) besser geeignet (siehe
+[AlertBadge vs. Badge](/04-components/status/alert-badge/guidelines#grundlagen)).
 
 <LiveCodeEditor example="alertBadge" editorCollapsed />
 
@@ -36,15 +53,21 @@ Eine [AlertBadge](/03-components/status/alert-badge/overview) dient dazu, den St
 
 # Notifications
 
-[Notifications](/03-components/status/notification/overview) informieren über
+[Notifications](/04-components/status/notification/overview) informieren über
 wichtige System- oder Statusmeldungen und erscheinen kurz im Bildschirm des
 Users. So stellen sie sicher, dass User über einen Status informiert werden,
 auch wenn sie sich gerade nicht auf der betroffenen
-[Detailseite](/02-foundations/04-ui-patterns/03-struktur) befinden. Notifications sollten bewusst und sparsam eingesetzt werden. Denn zu viele Notifications überfluten den User und lenken von wirklich wichtigen Informationen ab.
+[Detailseite](/03-patterns/detail-page) befinden. Notifications sollten bewusst
+und sparsam eingesetzt werden. Denn zu viele Notifications überfluten den User
+und lenken von wirklich wichtigen Informationen ab.
 
 Notifications werden durch den
-[NotificationsProvider](03-components/status/notification-provider/overview)
-ausgelöst. Da Notifications in der Regel nur kurz sichtbar sind, sollten sie an einem zentralen Ort gesammelt werden, damit ungelesene Notifications auch zu einem späteren Zeitpunkt eingesehen werden können. Kritische Probleme sollten zusätzlich zur Notification per E-Mail kommuniziert werden. So wird sichergestellt, dass der User die Informationen zuverlässig erhält.
+[NotificationsProvider](04-components/status/notification-provider/overview)
+ausgelöst. Da Notifications in der Regel nur kurz sichtbar sind, sollten sie an
+einem zentralen Ort gesammelt werden, damit ungelesene Notifications auch zu
+einem späteren Zeitpunkt eingesehen werden können. Kritische Probleme sollten
+zusätzlich zur Notification per E-Mail kommuniziert werden. So wird
+sichergestellt, dass der User die Informationen zuverlässig erhält.
 
 <LiveCodeEditor example="notification" editorCollapsed />
 
@@ -52,11 +75,11 @@ ausgelöst. Da Notifications in der Regel nur kurz sichtbar sind, sollten sie an
 
 # Status-Icon
 
-Einzelne [Status-Icon](/03-components/content/icon/overview#icon-bibliothek)
+Einzelne [Status-Icon](/04-components/content/icon/overview#icon-bibliothek)
 können den User auf versteckte Status-Informtionen aufmerksam machen. Zum
 Beispiel zeigt ein Status-Icon innerhalb von einem
-[Tab](/03-components/navigation/tabs/overview) an, dass in diesem ein relevanter
+[Tab](/04-components/navigation/tabs/overview) an, dass in diesem ein relevanter
 Status vorliegt. Der Status kann dann im Tab z. B. mit Hilfe eines
-[Alerts](/03-components/status/alert/overview) erläutert werden.
+[Alerts](/04-components/status/alert/overview) erläutert werden.
 
 <LiveCodeEditor example="tabs" editorCollapsed />

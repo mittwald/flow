@@ -1,0 +1,179 @@
+# Grundlagen
+
+## Best practices
+
+Achte bei Verwendung eines Links darauf, dass ...
+
+- je nach Umgebung der richtige Link gewählt wird. Ein Inline Link wird
+  automatisch in einem Textblock gesetzt. Bei farbigem Hintergrund muss die
+  Color Light oder Dark selbst ausgewählt werden.
+- Links standardmäßig im gleichen Tab geöffnet werden. User haben dann immer
+  noch die Möglichkeit, die Links selbstgesteuert in einem neuen Tab zu öffnen.
+- Externe Links sich immer in einem neuen Tab öffnen.
+- Links nur als Navigationselement gedacht sind. Links können z. B. keine
+  [Modals](/04-components/overlays/modal/overview) öffnen, keine Aktionen
+  bestätigen und keine weiteren Informationen aufklappen lassen
+  ([Accordion](/04-components/structure/accordion/overview)).
+- nicht zu viele Links verwendet werden, um den User nicht durch die Anzahl zu
+  verwirren.
+- Links entweder einzeln stehen oder in einen Textblock integriert werden
+  (Inline Link). Andernfalls ist es für den User schwieriger, den Link zu
+  erkennen. Beispielsweise sollte ein Link nicht in der Überschrift stehen.
+
+## Verwendung
+
+Verwende einen Link, um ...
+
+- den User zu einer neuen Seite zu navigieren.
+- auf einen Ankerpunkt auf der Seite für eine Information zu scrollen.
+- einen Download zu starten.
+- eine externe Seite zu öffnen.
+
+## Link vs. Button
+
+Links und [Buttons](/04-components/actions/button/overview) werden häufig
+verwechselt. Um die beiden besser unterscheiden zu können, hier ein paar
+hilfreiche Anhaltspunkte.
+
+<DoAndDont>
+  <Info heading="Verwende Links, um z. B. ...">
+    - zu einer anderen Seite zu navigieren.
+
+    - zu einem Anker auf der Seite zu scrollen.
+
+    - eine externe Seite zu öffnen.
+
+    - einen Download zu starten.
+
+  </Info>
+  <Info heading="Verwende Buttons, um z. B. ...">
+    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu
+    verlassen.
+
+    - Formulare zu speichern oder zurückzusetzen.
+
+    - in einem [Modals](/04-components/overlays/modal) oder [OffCanvas](/04-components/overlays/modal) zu navigieren und
+    Aktionen auszuwählen.
+
+  </Info>
+</DoAndDont>
+
+---
+
+# Anwendung
+
+## Position
+
+Links sind ein zentrales Navigationselement für die User. Daher sollte deren
+Platzierung sorgfältig überlegt werden. Beispiele für geeignete Stellen sind:
+
+- In einer [Section](/04-components/structure/section/overview) können Links in
+  der oberen rechten Ecke neben der
+  [Heading](/04-components/content/heading/overview) platziert werden. Diese
+  Position eignet sich besonders für Links, die inhaltlich stark mit der Section
+  verbunden sind, und wenn nur ein einzelner Link benötigt wird.
+- Im unteren Bereich einer Section oder eines
+  [Textblocks](/04-components/content/text/overview) können ein oder mehrere
+  Links angezeigt werden. Diese sollten sich auf den vorangehenden Text
+  beziehen.
+- Inline Links werden direkt im [Text](/04-components/content/text/overview)
+  eingefügt.
+
+<DoAndDont>
+  <Do example="position1">
+    Die Section verfügt über einen speziellen Bereich in der Nähe der Heading,
+    in dem Links platziert werden können.
+  </Do>
+  <Do example="position2">
+    Links können am Ende einer Section oder eines Textblocks angezeigt werden.
+  </Do>
+</DoAndDont>
+
+---
+
+# Inhalt
+
+## Interne und externe Links
+
+Interne Links öffnen sich immer im dem Tab, in dem der User sich gerade
+befindet. Der User kann jedoch selbst entscheiden, ob er den Link lieber in
+einem neuen Tab öffnen möchte. Externe Links – also Verweise auf eine andere
+Domain – öffnen sich hingegen immer in einem neuen Tab. Um das Verhalten dem
+User zu verdeutlichen, wird automatisch das `IconExternalLink` angezeigt werden,
+wenn `target="_blank"` gesetzt ist.
+
+---
+
+# Writing guidelines
+
+Der **Linktext** ist der wichtigste Bestandteil eines Links. Versuche daher auf
+folgendes zu achten:
+
+- Verwende für Links, die auf dieselbe Seite verweisen, immer denselben Text.
+  Unterschiedliche Zielseiten sollten unterschiedliche Linktexte haben, um
+  Verwirrung zu vermeiden.
+- Vermeide generische Formulierungen wie „Klick hier“. Der Linktext sollte klar
+  vermitteln, wohin der Link führt oder was dort zu erwarten ist.
+- Formuliere Linktexte so präzise wie möglich, damit sofort erkennbar ist, wohin
+  der Link führt. Allgemeine Formulierungen wie „Erfahre mehr“ sollten vermieden
+  werden, da diese oft überflüssig sind. Falls nötig, ergänze „Erfahre mehr“ mit
+  spezifischen Informationen, z. B. „Erfahre mehr über Flow“.
+- Wenn ein Link in einem Satz vorkommt, verlinke nur den Teil des Satzes, der
+  direkt auf das Ziel hinweist. Der gesamte Satz sollte nicht als Link markiert
+  werden. Vermeide es, den Link in mehrere kleinere Teile innerhalb des Satzes
+  aufzuteilen; stattdessen sollte ein zusammenhängender Link innerhalb des
+  Satzes zu finden sein.
+- Halte Linktexte so kurz wie möglich, um Zeilenumbrüche zu vermeiden. Ein
+  einzelnes Wort oder eine kurze Phrase sind ideal.
+- Setze am Ende des Linktextes keinen Punkt. Eine Ausnahme bilden Fragezeichen,
+  falls sie dem Satzbau entsprechen.
+
+<DoAndDont>
+  <Do example="writingExtraDo">
+    Der Link „Erfahre mehr über Links“ kann auch alleine stehend vom User
+    verstanden werden.
+  </Do>
+  <Dont example="writingExtraDont">
+    Links müssen einzeln verstanden werden. „Erfahre mehr“ oder „Klick hier“
+    sind nicht alleine verständlich.
+  </Dont>
+</DoAndDont>
+
+<DoAndDont>
+  <Do example="writingInlineDo">
+    Inline Links sollten so kurz wie möglich, aber so lang sein, dass der User
+    versteht, wohin sie führen.
+  </Do>
+  <Dont example="writingInlineDont">
+    Markiere keine ganzen Sätze als Inline Link.
+  </Dont>
+</DoAndDont>
+
+# Accessibility
+
+Achte beim Link darauf, dass er gut von Screenreadern erfasst wird. Ein Link
+muss auch isoliert betrachtet verständlich sein. Das ist nicht der Fall, wenn
+der Linktext nur „hier klicken“ oder „mehr Informationen“ lautet. Bei Bedarf
+sollte ein ARIA-Label hinzugefügt werden, um sicherzustellen, dass der Link
+korrekt interpretiert wird, falls der Text allein nicht ausreicht.
+
+# Color
+
+Achte bei den Colors Light und Dark auf genügend Kontrast zum Hintergrund. Es
+wird empfohlen, die Color in Light zu verwenden, wenn der HSL Lightness-Wert des
+Hintergrunds weniger als 50 ist. Die Color Dark wird für Hintergründe empfohlen,
+die einen HSL Lightness-Wert von größer als 50 haben. Für beide Colors gilt: Je
+weiter der HSL Lightness-Wert von 50 entfernt ist, desto besser ist der
+Kontrast.
+
+<DoAndDont>
+  <Do example="light" bgColor="dark">
+    Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
+    Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
+    weniger als 50.
+  </Do>
+  <Do example="dark" bgColor="light">
+    Color Dark kommt besonders gut auf sehr hellen Hintergründen zur Geltung.
+    Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von über 50.
+  </Do>
+</DoAndDont>
