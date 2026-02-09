@@ -10,7 +10,7 @@ export interface TruncateProps
   extends
     PropsWithChildren,
     PropsWithClassName,
-    Omit<ReactTruncateProps, "text"> {
+    Omit<ReactTruncateProps, "text" | "width"> {
   title?: string;
 }
 

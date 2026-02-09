@@ -15,7 +15,6 @@ export class RemoteTruncateElement extends FlowRemoteElement<RemoteTruncateEleme
       ellipsis: {},
       offset: {},
       title: {},
-      width: {},
     };
   }
 
