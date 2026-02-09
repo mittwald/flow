@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.669](https://github.com/mittwald/flow/compare/0.2.0-alpha.668...0.2.0-alpha.669) (2026-02-09)
+
+### Bug Fixes
+
+* **CountryOptions:** add Canary Islands to country list ([#2306](https://github.com/mittwald/flow/issues/2306)) ([e6f7aa4](https://github.com/mittwald/flow/commit/e6f7aa40cc2348836f5b45034e9322f10a8da154))
+
 # [0.2.0-alpha.668](https://github.com/mittwald/flow/compare/0.2.0-alpha.667...0.2.0-alpha.668) (2026-02-09)
 
 ### Features
