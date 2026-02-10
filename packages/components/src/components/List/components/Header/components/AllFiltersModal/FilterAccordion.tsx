@@ -24,7 +24,15 @@ export const FilterAccordion: FC<Props> = (props) => {
         {filter.mode === "one" && (
           <RadioGroupView value={activeKeys[0]} m={[1, 1]}>
             {filter.values.map((v) => (
-              <RadioView key={v.id} value={v.id} onPress={() => v.toggle()}>
+              <RadioView
+                key={v.id}
+                value={v.id}
+                onPress={() => {
+                  if (!v.isActive) {
+                    v.toggle();
+                  }
+                }}
+              >
                 {v.render()}
               </RadioView>
             ))}
