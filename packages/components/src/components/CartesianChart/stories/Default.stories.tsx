@@ -116,7 +116,7 @@ export const MultipleSynced: Story = {
 
 export const WithEmptyView: Story = {
   render: () => {
-    const emptyView = () => (
+    const emptyView = (
       <IllustratedMessage>
         <IconMonitoring />
         <Heading>Keine Daten verfügbar</Heading>
