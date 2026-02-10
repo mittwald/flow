@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.673](https://github.com/mittwald/flow/compare/0.2.0-alpha.672...0.2.0-alpha.673) (2026-02-10)
+
+### Bug Fixes
+
+* **List:** fix radios in all filters modal ([#2308](https://github.com/mittwald/flow/issues/2308)) ([9cbca80](https://github.com/mittwald/flow/commit/9cbca80034e6a9025c65cba3eb5eae84b98245c8))
+
 # [0.2.0-alpha.672](https://github.com/mittwald/flow/compare/0.2.0-alpha.671...0.2.0-alpha.672) (2026-02-09)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
