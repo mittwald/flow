@@ -28,7 +28,7 @@ export interface CartesianChartProps
   height?: string;
 
   /** View that is provided when data is empty/undefined */
-  emptyView?: ReactNode | React.ComponentType<CartesianChartEmptyViewProps>;
+  emptyView?: ReactNode;
 
   /**
    * Allow the height controlling container to set flex-grow: 1. Can only be
