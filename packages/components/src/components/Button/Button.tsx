@@ -57,7 +57,6 @@ const disablePendingProps = (props: ButtonProps) => {
     props.onPressUp = undefined;
     props.onKeyDown = undefined;
     props.onKeyUp = undefined;
-    props.type = "button";
   }
 
   return props;

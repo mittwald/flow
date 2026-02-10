@@ -1,13 +1,14 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { type FC } from "react";
-import Action, { type ActionProps } from "@/components/Action";
+import Action, { ActionBatch, type ActionProps } from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
 import Content from "@/components/Content/Content";
 import ActionGroup from "@/components/ActionGroup/ActionGroup";
 import Heading from "@/components/Heading/Heading";
 import Modal from "@/components/Modal";
+import { duration } from "@/components/Action/models/ActionState";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -412,6 +413,59 @@ describe("Feedback", () => {
     await advanceTime(2000);
     await rerender();
     expectNoIconInDom();
+  });
+
+  test("can be splitted by batches", async () => {
+    asyncAction1.mockImplementation(async () => {
+      await sleep();
+      await sleep();
+    });
+
+    asyncAction2.mockImplementation(async () => {
+      await sleep();
+      await sleep();
+    });
+
+    const ui = () => (
+      <Action onAction={asyncAction2}>
+        <ActionBatch>
+          <Action onAction={asyncAction1}>
+            <TestButton />
+          </Action>
+        </ActionBatch>
+      </Action>
+    );
+
+    const { rerender } = await render(ui());
+    expectNoIconInDom();
+
+    await clickTrigger();
+
+    // First batch
+    await vitest.advanceTimersByTimeAsync(duration.pending);
+    await rerender(ui());
+    expectIconInDom("loader-2");
+
+    // First batch done
+    await vitest.advanceTimersByTimeAsync(
+      asyncActionDuration * 2 - duration.pending,
+    );
+    await rerender(ui());
+    expectIconInDom("check");
+
+    // Second batch
+    await vitest.advanceTimersByTimeAsync(
+      duration.succeeded + duration.pending,
+    );
+    await rerender(ui());
+    expectIconInDom("loader-2");
+
+    // Second batch done
+    await vitest.advanceTimersByTimeAsync(
+      asyncActionDuration * 2 - duration.pending,
+    );
+    await rerender(ui());
+    expectIconInDom("check");
   });
 });
 
