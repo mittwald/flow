@@ -15,6 +15,7 @@
 
   .column {
     font-weight: var(--table--header-font-weight);
+
     &:empty {
       display: none;
     }
@@ -29,12 +30,15 @@
     border-style: var(--table--border-style);
     border-color: var(--table--border-color);
     border-width: 0;
+
     > svg {
       vertical-align: bottom;
     }
+
     &.horizontal-align-center {
       text-align: center;
     }
+
     &.horizontal-align-end {
       text-align: end;
     }

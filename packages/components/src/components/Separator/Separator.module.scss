@@ -1,6 +1,5 @@
 .separator {
-  border-top-color: var(--separator--color);
-  border-top-width: var(--separator--height);
-  border-top-style: var(--separator--border-style);
+  border-top: var(--separator--height) var(--separator--border-style)
+    var(--separator--color);
   width: 100%;
 }

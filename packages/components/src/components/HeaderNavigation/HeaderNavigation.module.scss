@@ -3,8 +3,7 @@
 .headerNavigation {
   ul {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
     gap: var(--header-navigation--spacing);
   }
@@ -32,7 +31,7 @@
     &[aria-current] {
       font-weight: var(--header-navigation--font-weight-current);
 
-      &:after {
+      &::after {
         content: "";
         position: absolute;
         bottom: 0;
@@ -48,7 +47,7 @@
     border-radius: var(--header-navigation--corner-radius-round);
   }
 
-  &:not(.light):not(.dark) {
+  &:not(.light, .dark) {
     .button {
       color: var(--header-navigation--color);
 
@@ -76,7 +75,7 @@
       }
 
       &[aria-current] {
-        &:after {
+        &::after {
           background-color: var(--header-navigation--color-dark);
         }
       }
@@ -100,7 +99,7 @@
       }
 
       &[aria-current] {
-        &:after {
+        &::after {
           background-color: var(--header-navigation--color-light);
         }
       }

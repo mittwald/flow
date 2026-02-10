@@ -66,8 +66,8 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const handleSubmit = (e?: FormEvent | F) => {
     const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
     formEvent?.stopPropagation();
-    return form.handleSubmit((e) => {
-      const submitResult = onSubmit(e);
+    return form.handleSubmit((values, event) => {
+      const submitResult = onSubmit(values, event);
       if (submitResult instanceof Promise) {
         return submitResult.then(handleSubmitResult);
       }

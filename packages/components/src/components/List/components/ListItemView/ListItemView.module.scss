@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+
     &:empty {
       display: none;
     }
@@ -22,13 +23,13 @@
   }
 
   .topContent {
-    word-break: break-word;
+    overflow-wrap: anywhere;
     display: flex;
   }
 
   .bottomContent {
     width: 100%;
-    word-break: break-word;
+    overflow-wrap: break-word;
     display: flex;
     flex-direction: column;
   }
@@ -38,7 +39,7 @@
   }
 
   .header {
-    word-break: break-word;
+    overflow-wrap: break-word;
     display: flex;
     gap: var(--list-item--avatar-to-title-spacing);
     max-width: 100%;
@@ -47,7 +48,7 @@
   .subTitle {
     font-size: var(--list-item--subtitle-font-size);
 
-    .text:not(:last-child):after {
+    .text:not(:last-child)::after {
       content: "–";
       display: inline-block;
       margin: 0 var(--size-rem--s);
@@ -64,6 +65,7 @@
 
     .columnLayout {
       flex-grow: 1;
+
       > div {
         flex-grow: 1;
         align-items: center;
@@ -91,6 +93,7 @@
 
     .action {
       margin-left: auto;
+
       button {
         margin-right: 0;
       }
@@ -110,6 +113,7 @@
       .checkboxContainer {
         align-self: start;
       }
+
       .checkboxContainer {
         height: var(--avatar--size--m);
       }
@@ -154,11 +158,10 @@
 
     .avatarContainer {
       width: 100%;
-
-      border-bottom-color: var(--list-item--border-color);
-      border-bottom-width: var(--list-item--border-width);
-      border-bottom-style: var(--list-item--border-style);
+      border-bottom: var(--list-item--border-width)
+        var(--list-item--border-style) var(--list-item--border-color);
       aspect-ratio: 16 / 9;
+
       img {
         overflow-clip-margin: unset;
       }

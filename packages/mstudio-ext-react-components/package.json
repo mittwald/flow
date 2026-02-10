@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/mstudio-ext-react-components",
-  "version": "0.2.0-alpha.665",
+  "version": "0.2.0-alpha.672",
   "type": "module",
   "description": "React components that can be used by mStudio extension developers",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,8 +29,8 @@
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^24.10.9",
-    "nx": "^22.3.3",
-    "prettier": "^3.8.0",
+    "nx": "^22.4.4",
+    "prettier": "^3.8.1",
     "react": "^19.2.0",
     "rimraf": "^6.1.2",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
@@ -38,7 +38,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-banner": "^0.8.1",
-    "vite-plugin-checker": "^0.11.0",
+    "vite-plugin-checker": "^0.12.0",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.10.0"
   },

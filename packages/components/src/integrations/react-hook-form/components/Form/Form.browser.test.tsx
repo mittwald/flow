@@ -133,7 +133,10 @@ describe("submission", () => {
     const textField = page.getByPlaceholder("textfield");
     await userEvent.type(textField, "hello");
     await userEvent.click(submitButton);
-    expect(onSubmit).toHaveBeenCalledWith({ test: "hello" });
+    expect(onSubmit).toHaveBeenCalledWith(
+      { test: "hello" },
+      expect.objectContaining({ type: "submit" }),
+    );
   });
 
   test("afterSubmit callback is called after successful submission", async () => {
