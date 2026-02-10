@@ -61,32 +61,22 @@ export class OverlayController {
   }
 
   public open(): void {
-    if (this.isOpen) {
-      return;
-    }
-    this.isOpen = true;
-    this.executeOnOpen();
+    this.setOpen(true);
   }
 
   public close(): void {
-    if (!this.isOpen) {
-      return;
-    }
-    this.isOpen = false;
-    this.executeOnClose();
+    this.setOpen(false);
   }
 
   public toggle(): void {
-    this.isOpen = !this.isOpen;
-
-    if (this.isOpen) {
-      this.executeOnOpen();
-    } else {
-      this.executeOnClose();
-    }
+    this.setOpen(!this.isOpen);
   }
 
   public setOpen(to: boolean): void {
+    if (this.isOpen === to) {
+      return;
+    }
+
     this.isOpen = to;
 
     if (to) {
