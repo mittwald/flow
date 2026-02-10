@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.676](https://github.com/mittwald/flow/compare/0.2.0-alpha.675...0.2.0-alpha.676) (2026-02-10)
+
+### Bug Fixes
+
+* **TextField:** fix cursor position ([#2312](https://github.com/mittwald/flow/issues/2312)) ([3d564d0](https://github.com/mittwald/flow/commit/3d564d0fc5a91222a9fc4e10e8ab99804ddec4d3))
+
 # [0.2.0-alpha.675](https://github.com/mittwald/flow/compare/0.2.0-alpha.674...0.2.0-alpha.675) (2026-02-10)
 
 ### Bug Fixes
