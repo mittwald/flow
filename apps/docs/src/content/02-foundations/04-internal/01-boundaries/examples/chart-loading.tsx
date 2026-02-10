@@ -7,7 +7,7 @@ import {
 
 <CartesianChart
   height="300px"
-  emptyView={() => <LoadingSpinner />}
+  emptyView={<LoadingSpinner />}
 >
   <XAxis />
   <YAxis domain={[0, 100]} unit=" %" />

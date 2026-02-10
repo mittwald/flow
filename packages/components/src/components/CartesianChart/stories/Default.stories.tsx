@@ -74,7 +74,7 @@ export default meta;
 
 export const Default: Story = {
   render: (props) => (
-    <CartesianChart {...props} height="70vh">
+    <CartesianChart {...props}>
       <CartesianGrid />
       <Area dataKey="firstKey" />
       <Area dataKey="secondKey" color="palatinate-blue" />
@@ -90,7 +90,7 @@ export const Default: Story = {
 export const MultipleSynced: Story = {
   render: (props) => (
     <>
-      <CartesianChart {...props} height="250px" syncId="syncedCharts">
+      <CartesianChart {...props} syncId="syncedCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
@@ -100,7 +100,7 @@ export const MultipleSynced: Story = {
         <ChartTooltip />
         <ChartLegend />
       </CartesianChart>
-      <CartesianChart {...props} height="250px" syncId="syncedCharts">
+      <CartesianChart {...props} syncId="syncedCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" color="magenta" />
         <Area dataKey="secondKey" color="tropical-indigo" />
@@ -116,7 +116,7 @@ export const MultipleSynced: Story = {
 
 export const WithEmptyView: Story = {
   render: () => {
-    const emptyView = () => (
+    const emptyView = (
       <IllustratedMessage>
         <IconMonitoring />
         <Heading>Keine Daten verfügbar</Heading>
@@ -124,7 +124,7 @@ export const WithEmptyView: Story = {
     );
 
     return (
-      <CartesianChart emptyView={emptyView} height="70vh">
+      <CartesianChart emptyView={emptyView}>
         <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
@@ -171,7 +171,7 @@ export const WithLine: Story = {
     data: lineChartData,
   },
   render: (props) => (
-    <CartesianChart {...props} height="70vh">
+    <CartesianChart {...props}>
       <CartesianGrid />
       <Area dataKey="mean" unit="ms" />
       <Line dataKey="max" color="magenta" unit="ms" />
