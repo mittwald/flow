@@ -16,24 +16,16 @@ export default () => {
     </IllustratedMessage>
   );
 
-  const Chart = () => {
-    return (
+  return (
+    <Flex direction="row" grow>
       <CartesianChart
         emptyView={emptyView}
         height="300px"
         flexGrow
-        {...props}
       >
         <XAxis />
         <YAxis />
       </CartesianChart>
-    );
-  };
-
-  return (
-    <Flex direction="row" grow>
-      <Chart />
-      <Chart data={[]} />
     </Flex>
   );
 };
