@@ -1,8 +1,8 @@
 import {
   AlertIcon,
   CartesianChart,
-  IllustratedMessage,
   Heading,
+  IllustratedMessage,
   Text,
   XAxis,
   YAxis,
@@ -10,7 +10,7 @@ import {
 
 <CartesianChart
   height="300px"
-  emptyView={() => (
+  emptyView={
     <IllustratedMessage color="danger">
       <AlertIcon status="danger" />
       <Heading>Fehler beim Laden</Heading>
@@ -19,7 +19,7 @@ import {
         arbeiten daran das Problem zu beheben.
       </Text>
     </IllustratedMessage>
-  )}
+  }
 >
   <XAxis />
   <YAxis domain={[0, 100]} unit=" %" />
