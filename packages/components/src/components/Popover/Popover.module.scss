@@ -4,7 +4,9 @@
   border-radius: var(--popover--corner-radius);
   display: flex;
   flex-direction: column;
+
   --size-px--s--negative: calc(var(--size-px--s) * -1);
+
   min-width: var(--popover--min-width);
   border-width: var(--popover--border-width);
   border-style: var(--popover--border-style);

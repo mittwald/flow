@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.673](https://github.com/mittwald/flow/compare/0.2.0-alpha.672...0.2.0-alpha.673) (2026-02-10)
+
+### Bug Fixes
+
+* **List:** fix radios in all filters modal ([#2308](https://github.com/mittwald/flow/issues/2308)) ([9cbca80](https://github.com/mittwald/flow/commit/9cbca80034e6a9025c65cba3eb5eae84b98245c8))
+
+# [0.2.0-alpha.672](https://github.com/mittwald/flow/compare/0.2.0-alpha.671...0.2.0-alpha.672) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.671](https://github.com/mittwald/flow/compare/0.2.0-alpha.670...0.2.0-alpha.671) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.670](https://github.com/mittwald/flow/compare/0.2.0-alpha.669...0.2.0-alpha.670) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.669](https://github.com/mittwald/flow/compare/0.2.0-alpha.668...0.2.0-alpha.669) (2026-02-09)
+
+### Bug Fixes
+
+* **CountryOptions:** add Canary Islands to country list ([#2306](https://github.com/mittwald/flow/issues/2306)) ([e6f7aa4](https://github.com/mittwald/flow/commit/e6f7aa40cc2348836f5b45034e9322f10a8da154))
+
 # [0.2.0-alpha.668](https://github.com/mittwald/flow/compare/0.2.0-alpha.667...0.2.0-alpha.668) (2026-02-09)
 
 ### Features

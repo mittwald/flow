@@ -41,7 +41,9 @@ export const AllFiltersModal: FC = () => {
     (f) => f.priority === "secondary",
   );
 
-  const controller = useOverlayController("Modal");
+  const controller = useOverlayController("Modal", {
+    reuseControllerFromContext: false,
+  });
 
   if (accordions.length === 0) {
     return null;
