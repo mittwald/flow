@@ -18,11 +18,7 @@ export default () => {
 
   return (
     <Flex direction="row" grow>
-      <CartesianChart
-        emptyView={emptyView}
-        height="300px"
-        flexGrow
-      >
+      <CartesianChart emptyView={emptyView}>
         <XAxis />
         <YAxis />
       </CartesianChart>

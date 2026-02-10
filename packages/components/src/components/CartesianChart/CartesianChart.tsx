@@ -56,6 +56,10 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
       return emptyView;
     }
 
+    if (!emptyView) {
+      return;
+    }
+
     console.warn(
       "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
     );
@@ -72,7 +76,7 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
             height: 1,
           }}
           width={height ? undefined : "100%"}
-          aspect={height ? undefined : 1.618}
+          aspect={height ? undefined : 3}
           ref={containerRef}
         >
           <ComposedChart data={data} className={rootClassName} {...rest}>
