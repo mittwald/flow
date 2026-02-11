@@ -43,7 +43,7 @@ const meta: Meta<typeof Modal> = {
   },
   render: (props) => {
     return (
-      <Modal {...props} isOpen>
+      <Modal {...props} isDefaultOpen>
         <Heading>New Customer</Heading>
         <Content>
           <Section>
@@ -154,7 +154,9 @@ export const OffCanvasMobile: Story = {
 
 export const WithForm: Story = {
   render: (props) => {
-    const form = useForm<{ name: string }>();
+    const form = useForm<{ name: string }>({
+      defaultValues: { name: "" },
+    });
     const modalController = useModalController();
 
     return (
@@ -163,8 +165,14 @@ export const WithForm: Story = {
           Add customer
         </Button>
 
-        <Modal {...props} controller={modalController}>
-          <Form form={form} onSubmit={() => modalController.close()}>
+        <Modal
+          {...props}
+          controller={modalController}
+          onClose={() => {
+            form.reset();
+          }}
+        >
+          <Form form={form} onSubmit={() => () => modalController.close()}>
             <Heading>Add Customer</Heading>
             <Content>
               <Field name="name" rules={{ required: "Please enter a name" }}>

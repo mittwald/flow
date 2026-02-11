@@ -1,5 +1,7 @@
+import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
 import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/useHotkeySubmit";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
+import { useModalController } from "@/lib/controller";
 import {
   type ComponentProps,
   type FC,
@@ -56,7 +58,12 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = idProp ?? newFormId;
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
-  const { isSubmitting, isValidating } = form.formState;
+  const { isSubmitting, isValidating, isDirty } = form.formState;
+
+  const modalController = useModalController();
+  modalController.useUpdateOptions({
+    confirmOnClose: isDirty,
+  });
 
   const handleSubmitResult = (result: unknown) => {
     if (typeof result === "function") {
@@ -70,6 +77,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     if (isSubmitting || isValidating) {
       return;
     }
+    modalController.confirmClose();
     return form.handleSubmit((values, event) => {
       const submitResult = onSubmit(values, event);
       if (submitResult instanceof Promise) {
@@ -105,6 +113,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
           {children}
         </FormComponent>
       </FormContextProvider>
+      <ConfirmUnsavedChangesModal />
     </RhfFormContextProvider>
   );
 }

@@ -18,7 +18,7 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
       useConfirmationModalButtonSlot(props) === "primary";
     const isAbortButton = useConfirmationModalButtonSlot(props) === "abort";
     if (isAbortButton) {
-      return action.confirmationModalController.close;
+      return () => action.confirmationModalController.close();
     }
     return isConfirmationButton ? confirmAction.execute : action.execute;
   }),
