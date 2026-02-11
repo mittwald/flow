@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.678](https://github.com/mittwald/flow/compare/0.2.0-alpha.677...0.2.0-alpha.678) (2026-02-11)
+
+### Features
+
+* add various features to handle Overlays and Modals ([ea3ef25](https://github.com/mittwald/flow/commit/ea3ef256ed1eeb96d4a05a8c3f0def6d2eb936e4))
+
 # [0.2.0-alpha.677](https://github.com/mittwald/flow/compare/0.2.0-alpha.676...0.2.0-alpha.677) (2026-02-11)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
