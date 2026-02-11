@@ -1,3 +1,5 @@
+import Action from "@/components/Action";
+import { duration } from "@/components/Action/models/ActionState";
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
@@ -10,6 +12,7 @@ import {
 } from "@/integrations/react-hook-form";
 import { Render } from "@/lib/react/components/Render";
 import type { FC } from "react";
+import { TextArea } from "react-aria-components";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
@@ -113,7 +116,8 @@ describe("resetting", () => {
 
 describe("submission", () => {
   const onAfterSubmit = vitest.fn();
-  const onSubmit = vitest.fn(() => onAfterSubmit);
+  const onAfterSubmitAction = vitest.fn();
+  const onSubmit = vitest.fn(async () => onAfterSubmit);
 
   const TestForm: FC = () => {
     const form = useForm<object>();
@@ -122,7 +126,12 @@ describe("submission", () => {
         <Field name="test">
           <TextField placeholder="textfield" aria-label="test" />
         </Field>
-        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        <Field name="test2">
+          <TextArea placeholder="textarea" aria-label="test2" />
+        </Field>
+        <Action onAction={onAfterSubmitAction}>
+          <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        </Action>
       </Form>
     );
   };
@@ -144,10 +153,31 @@ describe("submission", () => {
     const submitButton = page.getByTestId("submit-button");
     await userEvent.click(submitButton);
     expect(onSubmit).toHaveBeenCalled();
-    await vitest.advanceTimersByTimeAsync(500);
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
     expect(onAfterSubmit).not.toHaveBeenCalled();
-    await vitest.advanceTimersByTimeAsync(1000);
+    await vitest.advanceTimersByTimeAsync(100);
     expect(onAfterSubmit).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission via hotkey", async () => {
+    await render(<TestForm />);
+    const textArea = page.getByPlaceholder("textarea");
+    await userEvent.click(textArea);
+    await userEvent.keyboard("{Meta>}{Enter}");
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
   });
 });
 
