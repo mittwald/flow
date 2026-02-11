@@ -50,14 +50,37 @@ const disablePendingProps = (props: ButtonProps) => {
     props.isReadOnly
   ) {
     props = { ...props };
-    props.onPress = undefined;
-    props.onPressStart = undefined;
-    props.onPressEnd = undefined;
-    props.onPressChange = undefined;
-    props.onPressUp = undefined;
-    props.onKeyDown = undefined;
-    props.onKeyUp = undefined;
-    props.type = "button";
+
+    const mutedActionHandler = (e: unknown) => {
+      if (e && typeof e === "object") {
+        // stopPropagation is the default behavior in React Aria
+        const isReactAriaEvent =
+          "continuePropagation" in e &&
+          typeof e.continuePropagation === "function";
+
+        if (
+          !isReactAriaEvent &&
+          "stopPropagation" in e &&
+          typeof e.stopPropagation === "function"
+        ) {
+          e.stopPropagation();
+        }
+        if ("preventDefault" in e && typeof e.preventDefault === "function") {
+          e.preventDefault();
+        }
+      }
+
+      return false;
+    };
+
+    props.onClick = mutedActionHandler;
+    props.onPress = mutedActionHandler;
+    props.onPressStart = mutedActionHandler;
+    props.onPressEnd = mutedActionHandler;
+    props.onPressChange = mutedActionHandler;
+    props.onPressUp = mutedActionHandler;
+    props.onKeyDown = mutedActionHandler;
+    props.onKeyUp = mutedActionHandler;
   }
 
   return props;
