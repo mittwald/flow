@@ -1,8 +1,5 @@
 .modal,
 .offCanvas {
-  align-items: center;
-  justify-content: center;
-
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
@@ -27,9 +24,8 @@
   .header {
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
-    border-bottom-width: var(--modal--border-width);
-    border-bottom-style: var(--modal--border-style);
-    border-bottom-color: var(--modal--border-color);
+    border-bottom: var(--modal--border-width) var(--modal--border-style)
+      var(--modal--border-color);
 
     > span {
       display: flex;
@@ -42,8 +38,7 @@
 
   .content,
   .columnLayout {
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     display: flex;
     flex-direction: column;
     padding: var(--modal--padding);
@@ -54,9 +49,8 @@
   .actionGroup {
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
-    border-top-width: var(--modal--border-width);
-    border-top-style: var(--modal--border-style);
-    border-top-color: var(--modal--border-color);
+    border-top: var(--modal--border-width) var(--modal--border-style)
+      var(--modal--border-color);
     flex-grow: 0;
   }
 
@@ -99,6 +93,7 @@
         animation: modal-zoom var(--transition--duration--slow)
           cubic-bezier(0.1, 0.8, 0.3, 1.2);
       }
+
       &[data-exiting] {
         animation: modal-zoom var(--transition--duration--default)
           cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
@@ -121,6 +116,7 @@
     &[data-entering] {
       animation: modal-slide-in-from-right var(--transition--duration--slow);
     }
+
     &[data-exiting] {
       animation: modal-slide-in-from-right var(--transition--duration--default)
         reverse;
@@ -131,9 +127,12 @@
     justify-content: flex-start;
 
     > div {
+      border-radius: 0 var(--modal--corner-radius) var(--modal--corner-radius) 0;
+
       &[data-entering] {
         animation: modal-slide-in-from-left var(--transition--duration--slow);
       }
+
       &[data-exiting] {
         animation: modal-slide-in-from-left var(--transition--duration--default)
           reverse;
@@ -151,15 +150,17 @@
 
     > div {
       align-self: flex-end;
-      margin-bottom: calc(var(--page-height) - var(--visual-viewport-height));
+      margin-bottom: calc(100dvh - var(--visual-viewport-height));
       max-height: var(--visual-viewport-height);
-
+      transition-property: all;
+      transition-duration: var(--transition--duration--default);
       border-top-right-radius: var(--modal--corner-radius);
       border-top-left-radius: var(--modal--corner-radius);
 
       &[data-entering] {
         animation: modal-slide-up var(--transition--duration--slow);
       }
+
       &[data-exiting] {
         animation: modal-slide-up var(--transition--duration--default) reverse;
       }
@@ -174,6 +175,7 @@
   .offCanvas {
     .actionGroup {
       flex-direction: column;
+
       button {
         width: 100%;
       }
