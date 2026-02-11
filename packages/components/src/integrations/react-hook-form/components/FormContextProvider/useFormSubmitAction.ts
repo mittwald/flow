@@ -1,18 +1,21 @@
 import { ActionModel } from "@/components/Action/models/ActionModel";
-import type { AfterFormSubmitCallback } from "@/integrations/react-hook-form/components/Form/Form";
+import { useStatic } from "@/lib/hooks/useStatic";
 import { useEffect, useRef } from "react";
 import type { UseFormReturn } from "react-hook-form";
 
 interface Options {
   form: UseFormReturn;
   setReadOnly: (isReadOnly: boolean) => void;
-  onAfterSuccessFeedback?: AfterFormSubmitCallback;
 }
 
 export const useFormSubmitAction = (options: Options) => {
-  const { form, setReadOnly, onAfterSuccessFeedback } = options;
+  const { form, setReadOnly } = options;
 
-  const formSubmitAction = ActionModel.useNew({});
+  const submitPromise = useStatic(() => Promise.withResolvers<void>());
+
+  const formSubmitAction = ActionModel.useNew({
+    onAction: () => submitPromise.promise,
+  });
 
   const { isSubmitting, isSubmitted, isSubmitSuccessful } = form.formState;
   const wasSubmitting = useRef(isSubmitting);
@@ -23,12 +26,11 @@ export const useFormSubmitAction = (options: Options) => {
 
     if (isSubmitting) {
       setReadOnly(true);
-      formSubmitAction.state.onAsyncStart();
     } else if (submittingDone) {
       if (isSubmitSuccessful) {
-        formSubmitAction.state.onSucceeded().then(onAfterSuccessFeedback);
+        submitPromise.resolve();
       } else {
-        formSubmitAction.state.onFailed(new Error("Form submission failed"));
+        submitPromise.reject(new Error("Form submission failed"));
       }
       setReadOnly(false);
     }
@@ -37,9 +39,8 @@ export const useFormSubmitAction = (options: Options) => {
     isSubmitting,
     isSubmitted,
     isSubmitSuccessful,
-    formSubmitAction,
     setReadOnly,
-    onAfterSuccessFeedback,
+    submitPromise,
   ]);
 
   return formSubmitAction;

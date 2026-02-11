@@ -1,3 +1,4 @@
+import Action from "@/components/Action";
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
@@ -113,7 +114,8 @@ describe("resetting", () => {
 
 describe("submission", () => {
   const onAfterSubmit = vitest.fn();
-  const onSubmit = vitest.fn(() => onAfterSubmit);
+  const onAfterSubmitAction = vitest.fn();
+  const onSubmit = vitest.fn(async () => onAfterSubmit);
 
   const TestForm: FC = () => {
     const form = useForm<object>();
@@ -122,7 +124,9 @@ describe("submission", () => {
         <Field name="test">
           <TextField placeholder="textfield" aria-label="test" />
         </Field>
-        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        <Action onAction={onAfterSubmitAction}>
+          <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        </Action>
       </Form>
     );
   };
@@ -148,6 +152,16 @@ describe("submission", () => {
     expect(onAfterSubmit).not.toHaveBeenCalled();
     await vitest.advanceTimersByTimeAsync(1000);
     expect(onAfterSubmit).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    await vitest.advanceTimersByTimeAsync(500);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(1000);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
   });
 });
 
