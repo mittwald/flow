@@ -1,20 +1,30 @@
 import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useStatic } from "@/lib/hooks/useStatic";
+import { useEffect } from "react";
 
-type OpenStateHandler = () => void;
+export type OverlayOpenHandler = () => unknown;
+export type OverlayCloseHandler = () => unknown;
+export type OverlayOpenStateHandler = (isOpen: boolean) => unknown;
+type AnyOverlayOpenStateHandler =
+  | OverlayOpenHandler
+  | OverlayCloseHandler
+  | OverlayOpenStateHandler;
+
 type DisposerFn = () => void;
 
 export interface OverlayControllerOptions {
   isDefaultOpen?: boolean;
-  onOpen?: OpenStateHandler;
-  onClose?: OpenStateHandler;
+  onOpen?: OverlayOpenHandler;
+  onClose?: OverlayCloseHandler;
+  onOpenChange?: OverlayOpenStateHandler;
 }
 
 export class OverlayController {
   public isOpen = false;
-  private onOpenHandlers = new Set<OpenStateHandler>();
-  private onCloseHandlers = new Set<OpenStateHandler>();
+  private onOpenHandlers = new Set<OverlayOpenHandler>();
+  private onCloseHandlers = new Set<OverlayCloseHandler>();
+  private onOpenChangeHandlers = new Set<OverlayOpenStateHandler>();
 
   public constructor(options?: OverlayControllerOptions) {
     makeObservable(this, {
@@ -32,71 +42,118 @@ export class OverlayController {
     if (options?.onClose) {
       this.onCloseHandlers.add(options.onClose);
     }
+    if (options?.onOpenChange) {
+      this.onOpenChangeHandlers.add(options.onOpenChange);
+    }
   }
 
-  public static useNew(options?: OverlayControllerOptions): OverlayController {
+  public static useNew(
+    options: OverlayControllerOptions = {},
+  ): OverlayController {
     return useStatic(() => new OverlayController(options));
   }
 
-  public addOnOpen(handler: OpenStateHandler): DisposerFn {
-    this.onOpenHandlers.add(handler);
+  private addOpenStateHandler<T extends AnyOverlayOpenStateHandler>(
+    handler: T,
+    handlersSet: Set<T>,
+  ): DisposerFn {
+    handlersSet.add(handler);
     return () => {
-      this.onOpenHandlers.delete(handler);
+      handlersSet.delete(handler);
     };
   }
 
-  public addOnClose(handler: OpenStateHandler): DisposerFn {
-    this.onCloseHandlers.add(handler);
-    return () => {
-      this.onCloseHandlers.delete(handler);
-    };
+  public addOnOpen(handler: OverlayOpenHandler): DisposerFn {
+    return this.addOpenStateHandler(handler, this.onOpenHandlers);
   }
 
-  private executeOnClose(): void {
-    this.onCloseHandlers.forEach((handler) => handler());
+  public addOnClose(handler: OverlayCloseHandler): DisposerFn {
+    return this.addOpenStateHandler(handler, this.onCloseHandlers);
   }
 
-  private executeOnOpen(): void {
-    this.onOpenHandlers.forEach((handler) => handler());
+  public addOnOpenChange(handler: OverlayOpenStateHandler): DisposerFn {
+    return this.addOpenStateHandler(handler, this.onOpenChangeHandlers);
+  }
+
+  private useOnHandler<T extends AnyOverlayOpenStateHandler>(
+    handler: T | undefined,
+    addHandlerFn: (handler: T) => DisposerFn,
+  ) {
+    useEffect(
+      () => (handler ? addHandlerFn(handler) : undefined),
+      [handler, this],
+    );
+  }
+
+  public useOnOpen(handler?: OverlayOpenHandler): void {
+    this.useOnHandler(handler, (h) => this.addOnOpen(h));
+  }
+
+  public useOnClose(handler?: OverlayCloseHandler): void {
+    this.useOnHandler(handler, (h) => this.addOnClose(h));
+  }
+
+  public useOnOpenChange(handler?: OverlayOpenStateHandler): void {
+    this.useOnHandler(handler, (h) => this.addOnOpenChange(h));
+  }
+
+  private executeHandlers(
+    isOpen: boolean,
+    handlers: Set<
+      OverlayOpenHandler | OverlayCloseHandler | OverlayOpenStateHandler
+    >,
+  ): boolean {
+    const handlerResult = Array.from(handlers).map((handler) =>
+      handler(isOpen),
+    );
+    return handlerResult.some((result) => result === false);
+  }
+
+  private executeOnClose(): boolean {
+    return this.executeHandlers(false, this.onCloseHandlers);
+  }
+
+  private executeOnOpen(): boolean {
+    return this.executeHandlers(true, this.onOpenHandlers);
+  }
+
+  private executeOnOpenChange(isOpen: boolean): boolean {
+    return this.executeHandlers(isOpen, this.onOpenChangeHandlers);
   }
 
   public open(): void {
-    if (this.isOpen) {
-      return;
-    }
-    this.isOpen = true;
-    this.executeOnOpen();
+    this.setOpen(true);
   }
 
   public close(): void {
-    if (!this.isOpen) {
-      return;
-    }
-    this.isOpen = false;
-    this.executeOnClose();
+    this.setOpen(false);
   }
 
   public toggle(): void {
-    this.isOpen = !this.isOpen;
-
-    if (this.isOpen) {
-      this.executeOnOpen();
-    } else {
-      this.executeOnClose();
-    }
+    this.setOpen(!this.isOpen);
   }
 
   public setOpen(to: boolean): void {
-    this.isOpen = to;
+    if (this.isOpen === to) {
+      return;
+    }
 
+    let aborted = false;
     if (to) {
-      this.executeOnOpen();
+      aborted = this.executeOnOpen();
     } else {
-      this.executeOnClose();
+      aborted = this.executeOnClose();
+    }
+    if (!aborted) {
+      aborted = this.executeOnOpenChange(to);
+    }
+
+    if (!aborted) {
+      this.isOpen = to;
     }
   }
 
-  public useIsOpen(): boolean {
+  public useIsOpen() {
     return useSelector(() => this.isOpen);
   }
 }

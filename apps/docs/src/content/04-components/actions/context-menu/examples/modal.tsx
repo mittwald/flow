@@ -11,13 +11,13 @@ import {
   MenuItem,
   Modal,
   TextField,
-  useOverlayController,
   Text,
   Action,
+  useModalController,
 } from "@mittwald/flow-react-components";
 
 export default () => {
-  const modalController = useOverlayController("Modal");
+  const modalController = useModalController();
 
   return (
     <>
@@ -44,7 +44,7 @@ export default () => {
           </TextField>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Button color="accent">Speichern</Button>
             <Button color="secondary" variant="soft">
               Abbrechen

@@ -12,6 +12,9 @@ export interface ActionProps extends PropsWithChildren, FlowComponentProps {
   closeOverlay?: FlowComponentName | OverlayController;
   openOverlay?: FlowComponentName | OverlayController;
   toggleOverlay?: FlowComponentName | OverlayController;
+  closeModal?: boolean;
+  openModal?: boolean;
+  toggleModal?: boolean;
   break?: boolean;
   skip?: number | boolean;
   showFeedback?: boolean;

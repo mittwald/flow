@@ -20,7 +20,7 @@ import {
     </Section>
   </div>
   <ActionGroup className="flow--modal--action-group">
-    <Action closeOverlay="Modal">
+    <Action closeModal>
       <Button variant="soft" color="secondary">
         Schließen
       </Button>
