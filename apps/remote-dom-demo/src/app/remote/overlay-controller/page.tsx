@@ -10,11 +10,11 @@ import {
   Section,
   Text,
   TextField,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
-  const controller = useOverlayController("Modal");
+  const controller = useModalController();
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function Page() {
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Button color="accent">Organisation anlegen</Button>
             <Button variant="soft" color="secondary">
               Abbrechen

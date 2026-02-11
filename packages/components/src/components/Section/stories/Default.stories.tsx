@@ -122,7 +122,7 @@ export const WithHeaderContent: Story = {
                 <Text>Are you sure you want to delete this project?</Text>
               </Content>
               <ActionGroup>
-                <Action closeOverlay="Modal">
+                <Action closeModal>
                   <Button color="danger">Delete project</Button>
                   <Button variant="soft" color="secondary">
                     Abort

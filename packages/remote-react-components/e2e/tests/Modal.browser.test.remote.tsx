@@ -9,7 +9,7 @@ const TestModal = (
       <Text data-testid="modal-content">Content</Text>
     </Content>
     <ActionGroup>
-      <Action closeOverlay="Modal">
+      <Action closeModal>
         <Button data-testid="close-button">Close</Button>
       </Action>
     </ActionGroup>

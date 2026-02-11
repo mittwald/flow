@@ -42,7 +42,7 @@ export default () => {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Action onAction={sleepLong}>
                 <Button color="danger">
                   Bestellung abbrechen
@@ -84,7 +84,7 @@ export default () => {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Action onAction={sleepLong}>
                 <Button color="accent">
                   Backup anlegen
@@ -174,7 +174,7 @@ export default () => {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button variant="soft" color="secondary">
                 Schließen
               </Button>
@@ -263,7 +263,7 @@ export default () => {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Action onAction={sleepLong}>
                 <Button color="accent">
                   SFTP-Benutzer anlegen

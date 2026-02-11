@@ -27,7 +27,7 @@ export default function Page() {
             <Heading>Modal Heading</Heading>
             <Content>Modal Content</Content>
             <ActionGroup>
-              <Action closeOverlay="Modal">
+              <Action closeModal>
                 <Button>Close</Button>
               </Action>
             </ActionGroup>

@@ -59,7 +59,7 @@ export default () => {
                 </AppList.List>
               </Content>
               <ActionGroup>
-                <Action closeOverlay="Modal">
+                <Action closeModal>
                   <Button color="secondary" variant="soft">
                     Abbrechen
                   </Button>
