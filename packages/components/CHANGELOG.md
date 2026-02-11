@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
+
+### Features
+
+* **ActionBatch:** add ActionBatch to explicitly create batches ([4137d5f](https://github.com/mittwald/flow/commit/4137d5f1165dbb857f11332d7123bdd1b43f9d88))
+
 # [0.2.0-alpha.678](https://github.com/mittwald/flow/compare/0.2.0-alpha.677...0.2.0-alpha.678) (2026-02-11)
 
 ### Features
