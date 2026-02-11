@@ -1,0 +1,32 @@
+name: Cleanup Preview Apps
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cleanup preview environment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+        run: |
+          pnpm tsx dev/cleanup-review.ts
