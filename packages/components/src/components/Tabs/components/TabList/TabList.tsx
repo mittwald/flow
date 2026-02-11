@@ -5,11 +5,10 @@ import styles from "./TabList.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
 import { Button } from "@/components/Button";
-import { IconContextMenu } from "@/components/Icon/components/icons";
 import clsx from "clsx";
-import TabTitleCollapsed from "@/components/Tabs/components/TabTitle/TabTitleCollapsed";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
+import { IconChevronDown } from "@/components/Icon/components/icons";
 
 interface Props {
   selection: Aria.Key | undefined;
@@ -35,19 +34,16 @@ export const TabList: FC<Props> = (props) => {
     </Aria.TabList>
   );
 
-  const singleTabTitleWhenCollapsed = isCollapsed && (
-    <TabTitleCollapsed id={titleCollapsedElementId} />
-  );
-
   const contextMenuWhenCollapsed = isCollapsed && (
     <ContextMenuTriggerView>
       <Button
-        variant="soft"
+        variant="solid"
         className={styles.contextMenuButton}
-        color="secondary"
+        color="light"
         aria-labelledby={titleCollapsedElementId}
       >
-        <IconContextMenu />
+        <TunnelExit id="ActiveTitle" />
+        <IconChevronDown />
       </Button>
 
       <ContextMenuView
@@ -64,7 +60,6 @@ export const TabList: FC<Props> = (props) => {
   return (
     <div className={rootClassName}>
       {regularTabTitles}
-      {singleTabTitleWhenCollapsed}
       {contextMenuWhenCollapsed}
     </div>
   );

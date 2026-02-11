@@ -19,7 +19,7 @@
 
   /* Colors */
   @mixin status($status) {
-    &:where(.#{$status}) {
+    &.#{$status} {
       color: var(--icon--#{$status}-color);
     }
   }
