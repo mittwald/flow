@@ -2,6 +2,7 @@ export * from "@/components/Icon/components/icons";
 
 export {
   Action,
+  ActionBatch,
   type ActionFn,
   type ActionProps,
   BrowserOnly,
