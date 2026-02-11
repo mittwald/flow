@@ -29,7 +29,7 @@
   }
 
   /* Elements */
-  .icon {
+  :where(.icon) {
     color: var(--menu-item--icon-color--default);
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
