@@ -9,22 +9,12 @@ export interface UseOverlayControllerOptions extends OverlayControllerOptions {
 
 export const useOverlayController = (
   overlayType: FlowComponentName,
-  opts: UseOverlayControllerOptions = {},
+  options: UseOverlayControllerOptions = {},
 ): OverlayController => {
-  const {
-    reuseControllerFromContext = true,
-    isDefaultOpen,
-    onOpen,
-    onClose,
-    onOpenChange,
-  } = opts;
+  const { reuseControllerFromContext = true, ...restControllerOptions } =
+    options;
 
-  const newController = OverlayController.useNew({
-    isDefaultOpen,
-    onOpen,
-    onClose,
-    onOpenChange,
-  });
+  const newController = OverlayController.useNew(restControllerOptions);
   const controllerFromContext = useOverlayContext()[overlayType];
 
   const controller =
@@ -32,9 +22,9 @@ export const useOverlayController = (
       ? controllerFromContext
       : newController;
 
-  controller.useOnOpen(onOpen);
-  controller.useOnClose(onClose);
-  controller.useOnOpenChange(onOpenChange);
+  if (controller === controllerFromContext) {
+    controller.useUpdateOptions(restControllerOptions);
+  }
 
   return controller;
 };

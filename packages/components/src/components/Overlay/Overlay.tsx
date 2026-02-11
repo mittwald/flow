@@ -36,21 +36,17 @@ export const Overlay: FC<OverlayProps> = (props) => {
     overlayType = "Modal",
     isDefaultOpen,
     isOpen: isOpenFromProps,
-    onOpen,
-    onClose,
-    onOpenChange,
     ref,
+    ...controllerOptions
   } = props;
 
   const controllerFromContext = useOverlayController(overlayType, {
     reuseControllerFromContext: true,
     isDefaultOpen,
-    onClose,
-    onOpen,
-    onOpenChange,
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
+  controller.useUpdateOptions(controllerOptions);
 
   const isOpen = isOpenFromProps ?? controller.useIsOpen();
 

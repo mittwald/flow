@@ -33,7 +33,10 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
             : toggleModal
               ? () => action.getOverlayController("Modal")?.toggle()
               : closeModal
-                ? () => action.getOverlayController("Modal")?.close()
+                ? () =>
+                    action
+                      .getOverlayController("Modal")
+                      ?.close(typeof closeModal === "boolean" ? {} : closeModal)
                 : voidAction;
 
   return maybeAction ?? voidAction;
