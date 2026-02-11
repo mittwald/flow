@@ -45,7 +45,10 @@ export class ActionExecutionBatch {
         executionState.onAsyncStart();
         return result.then(onSucceeded).catch(onError);
       } else {
-        onSucceeded();
+        const onSucceededResult = onSucceeded();
+        if (onSucceededResult instanceof Promise) {
+          return onSucceededResult.then(() => result);
+        }
         return result;
       }
     } catch (error) {

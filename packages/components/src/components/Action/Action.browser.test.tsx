@@ -1,7 +1,10 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { type FC } from "react";
-import Action, { type ActionProps } from "@/components/Action";
+import Action, {
+  MutedActionError,
+  type ActionProps,
+} from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
 import Content from "@/components/Content/Content";
@@ -324,6 +327,23 @@ describe("Global error handler", () => {
       }),
     );
   });
+
+  test("is not called when MutedActionError is thrown", async () => {
+    syncAction1.mockImplementation(() => {
+      throw new MutedActionError("Muted error");
+    });
+
+    const ui = () => (
+      <Action onAction={syncAction1}>
+        <TestButton />
+      </Action>
+    );
+
+    await render(ui());
+    await clickTrigger();
+
+    expect(unhandledErrorHandler).not.toHaveBeenCalled();
+  });
 });
 
 describe("Feedback", () => {
@@ -370,6 +390,17 @@ describe("Feedback", () => {
       props: {
         onAction: () => {
           throw new Error("Whoops");
+        },
+      },
+    });
+    expectIconInDom("x");
+  });
+
+  test("is shown when sync action fails with MutedActionError", async () => {
+    await runTest({
+      props: {
+        onAction: () => {
+          throw new MutedActionError("Muted error");
         },
       },
     });
