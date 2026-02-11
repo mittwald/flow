@@ -1,8 +1,5 @@
 .modal,
 .offCanvas {
-  align-items: center;
-  justify-content: center;
-
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
@@ -116,6 +113,7 @@
     border-bottom-left-radius: var(--modal--corner-radius);
     border-top-left-radius: var(--modal--corner-radius);
     height: 100%;
+    margin-left: auto;
     max-width: var(--modal--off-canvas-max-width);
 
     &[data-entering] {
@@ -128,9 +126,10 @@
   }
 
   &.left {
-    justify-content: flex-start;
-
     > div {
+      margin-left: unset;
+      margin-right: auto;
+
       &[data-entering] {
         animation: modal-slide-in-from-left var(--transition--duration--slow);
       }
@@ -150,12 +149,11 @@
     padding-top: var(--size-px--xxl);
 
     > div {
-      align-self: flex-end;
-      margin-bottom: calc(var(--page-height) - var(--visual-viewport-height));
-      max-height: var(--visual-viewport-height);
-
+      margin-top: auto;
+      width: 100%;
       border-top-right-radius: var(--modal--corner-radius);
       border-top-left-radius: var(--modal--corner-radius);
+      max-height: max-content;
 
       &[data-entering] {
         animation: modal-slide-up var(--transition--duration--slow);
