@@ -150,10 +150,11 @@
 
     > div {
       align-self: flex-end;
-      margin-bottom: calc(var(--page-height) - var(--visual-viewport-height));
+      margin-bottom: calc(100dvh - var(--visual-viewport-height));
       max-height: var(--visual-viewport-height);
-      transition-property: margin-bottom;
-      transition-duration: var(--transition--duration--fast);
+      transition-property: all;
+      transition-duration: var(--transition--duration--default);
+
       border-top-right-radius: var(--modal--corner-radius);
       border-top-left-radius: var(--modal--corner-radius);
 
