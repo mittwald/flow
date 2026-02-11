@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.677](https://github.com/mittwald/flow/compare/0.2.0-alpha.676...0.2.0-alpha.677) (2026-02-11)
+
+### Bug Fixes
+
+* **Form:** harden double-submission of forms ([eb96d6e](https://github.com/mittwald/flow/commit/eb96d6e356a5babef108fa75dab00109c00d7d38))
+
+### Features
+
+* **Action:** allow Action to fail without throwing error ([4b1cbcf](https://github.com/mittwald/flow/commit/4b1cbcf90cd45e5342507daeb5bc3fc8040722d1))
+
 # [0.2.0-alpha.676](https://github.com/mittwald/flow/compare/0.2.0-alpha.675...0.2.0-alpha.676) (2026-02-10)
 
 ### Bug Fixes
