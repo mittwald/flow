@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.680](https://github.com/mittwald/flow/compare/0.2.0-alpha.679...0.2.0-alpha.680) (2026-02-12)
+
+### Features
+
+* **Form:** make FormSubmit behave like normal async action ([2cf5f21](https://github.com/mittwald/flow/commit/2cf5f21e84deb20136ee38f7af5229918080f15d))
+
 # [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
 
 ### Features

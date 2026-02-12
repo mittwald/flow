@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-stylesheet",
-  "version": "0.2.0-alpha.679",
+  "version": "0.2.0-alpha.680",
   "type": "module",
   "description": "A collection of CSS classes used in Flow, mittwald's design system.",
   "homepage": "https://mittwald.github.io/flow",
