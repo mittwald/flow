@@ -1,6 +1,7 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import { ActionExecutionBatch } from "@/components/Action/models/ActionExecutionBatch";
 import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
+import { MutedActionError } from "@/components/Action/MutedActionError";
 
 export class ActionExecution {
   private readonly action: ActionModel;
@@ -16,7 +17,16 @@ export class ActionExecution {
       batches.map((b) => b.executeBatch.bind(b)),
     );
 
-    executeBatchedActions(...args);
+    try {
+      const maybePromise = executeBatchedActions(...args);
+      if (maybePromise instanceof Promise) {
+        maybePromise.catch((error) => {
+          MutedActionError.rethrowIfNotMuted(error);
+        });
+      }
+    } catch (error) {
+      MutedActionError.rethrowIfNotMuted(error);
+    }
   };
 
   private getBatchedActions = (): ActionExecutionBatch[] => {

@@ -23,6 +23,7 @@ export class Sorting<T> {
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly name?: string;
+  public readonly directionName?: string;
   public readonly direction: SortDirection;
   public readonly defaultEnabled: SortingDefaultMode;
   public readonly customSortingFn?: SortingFn<T>;
@@ -31,6 +32,7 @@ export class Sorting<T> {
     this.list = list;
     this.property = shape.property;
     this.name = shape.name;
+    this.directionName = shape.directionName;
     this.direction = shape.direction ?? "asc";
     const storedDefaultEnabled = this.getStoredDefaultEnabled();
     this.defaultEnabled =

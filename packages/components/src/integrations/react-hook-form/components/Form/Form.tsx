@@ -56,6 +56,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = idProp ?? newFormId;
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
+  const { isSubmitting, isValidating } = form.formState;
 
   const handleSubmitResult = (result: unknown) => {
     if (typeof result === "function") {
@@ -66,6 +67,9 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const handleSubmit = (e?: FormEvent | F) => {
     const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
     formEvent?.stopPropagation();
+    if (isSubmitting || isValidating) {
+      return;
+    }
     return form.handleSubmit((values, event) => {
       const submitResult = onSubmit(values, event);
       if (submitResult instanceof Promise) {

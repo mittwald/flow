@@ -44,13 +44,16 @@ export default () => {
       />
       <DomainList.Sorting
         property="hostname"
-        name="Domain A bis Z"
+        name="Alphabetisch"
         direction="asc"
+        defaultEnabled
+        directionName="aufsteigend"
       />
       <DomainList.Sorting
         property="hostname"
-        name="Domain Z bis A"
+        name="Alphabetisch"
         direction="desc"
+        directionName="absteigend"
       />
       <DomainList.Table>
         <DomainList.TableHeader>

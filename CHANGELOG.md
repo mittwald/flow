@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
+
+### Features
+
+* **ActionBatch:** add ActionBatch to explicitly create batches ([4137d5f](https://github.com/mittwald/flow/commit/4137d5f1165dbb857f11332d7123bdd1b43f9d88))
+
+# [0.2.0-alpha.678](https://github.com/mittwald/flow/compare/0.2.0-alpha.677...0.2.0-alpha.678) (2026-02-11)
+
+### Features
+
+* add various features to handle Overlays and Modals ([ea3ef25](https://github.com/mittwald/flow/commit/ea3ef256ed1eeb96d4a05a8c3f0def6d2eb936e4))
+
+# [0.2.0-alpha.677](https://github.com/mittwald/flow/compare/0.2.0-alpha.676...0.2.0-alpha.677) (2026-02-11)
+
+### Bug Fixes
+
+* **Form:** harden double-submission of forms ([eb96d6e](https://github.com/mittwald/flow/commit/eb96d6e356a5babef108fa75dab00109c00d7d38))
+
+### Features
+
+* **Action:** allow Action to fail without throwing error ([4b1cbcf](https://github.com/mittwald/flow/commit/4b1cbcf90cd45e5342507daeb5bc3fc8040722d1))
+
+# [0.2.0-alpha.676](https://github.com/mittwald/flow/compare/0.2.0-alpha.675...0.2.0-alpha.676) (2026-02-10)
+
+### Bug Fixes
+
+* **TextField:** fix cursor position ([#2312](https://github.com/mittwald/flow/issues/2312)) ([3d564d0](https://github.com/mittwald/flow/commit/3d564d0fc5a91222a9fc4e10e8ab99804ddec4d3))
+
+# [0.2.0-alpha.675](https://github.com/mittwald/flow/compare/0.2.0-alpha.674...0.2.0-alpha.675) (2026-02-10)
+
+### Bug Fixes
+
+* **CartesianChart:** refactor chart ([#2309](https://github.com/mittwald/flow/issues/2309)) ([dbf2adb](https://github.com/mittwald/flow/commit/dbf2adbc9f230af565e6603b9f2e2fae8bb715a6))
+
+# [0.2.0-alpha.674](https://github.com/mittwald/flow/compare/0.2.0-alpha.673...0.2.0-alpha.674) (2026-02-10)
+
+### Features
+
+* **List:** improve sorting ([#2307](https://github.com/mittwald/flow/issues/2307)) ([1e608fa](https://github.com/mittwald/flow/commit/1e608fa697a40931931f1d489bf8020d8fb25b8f))
+
 # [0.2.0-alpha.673](https://github.com/mittwald/flow/compare/0.2.0-alpha.672...0.2.0-alpha.673) (2026-02-10)
 
 ### Bug Fixes

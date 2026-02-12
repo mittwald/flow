@@ -44,6 +44,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     allowHorizontalResize,
     showCharacterCount,
     className,
+    onChange,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -81,8 +82,8 @@ export const TextArea = flowComponent("TextArea", (props) => {
     if (showCharacterCount) {
       setCharactersCount(v.length);
     }
-    if (props.onChange) {
-      props.onChange(v);
+    if (onChange) {
+      onChange(v);
     }
   };
 

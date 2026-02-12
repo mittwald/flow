@@ -55,16 +55,17 @@ export default () => {
           />
           <ServerList.Search />
           <ServerList.Sorting
-            name="Von A bis Z"
+            name="Alphabetisch"
             defaultEnabled
             direction="asc"
             property="description"
+            directionName="aufsteigend"
           />
           <ServerList.Sorting
-            name="Von Z bis A"
-            defaultEnabled
+            name="Alphabetisch"
             direction="desc"
             property="description"
+            directionName="absteigend"
           />
           <ServerList.Filter
             name="Filter"

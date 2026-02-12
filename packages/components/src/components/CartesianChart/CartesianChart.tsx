@@ -1,34 +1,35 @@
-import * as Recharts from "recharts";
+import { ComposedChart, ResponsiveContainer } from "recharts";
 import React, {
-  Children,
-  useEffect,
-  useRef,
-  useState,
   type ComponentProps,
   type FC,
+  isValidElement,
   type PropsWithChildren,
-  type ReactElement,
-  type SVGProps,
+  type ReactNode,
+  useMemo,
 } from "react";
 import clsx from "clsx";
 import styles from "./CartesianChart.module.scss";
-import Wrap from "../Wrap";
-import { CartesianGrid } from "../public";
+import { useChartClipRect } from "@/components/CartesianChart/hooks/useChartClipRect";
+import DivView from "@/views/DivView";
+import Wrap from "@/components/Wrap";
 
+/** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
-  data?: ComponentProps<typeof Recharts.ComposedChart>["data"];
+  data?: ComponentProps<typeof ComposedChart>["data"];
 }
 
 export interface CartesianChartProps
   extends
     Pick<
-      ComponentProps<typeof Recharts.ComposedChart>,
+      ComponentProps<typeof ComposedChart>,
       "data" | "className" | "syncId" | "syncMethod"
     >,
     PropsWithChildren {
   height?: string;
+
   /** View that is provided when data is empty/undefined */
-  emptyView?: React.ComponentType<CartesianChartEmptyViewProps>;
+  emptyView?: ReactNode;
+
   /**
    * Allow the height controlling container to set flex-grow: 1. Can only be
    * used in combination with `height`
@@ -38,98 +39,57 @@ export interface CartesianChartProps
 
 /** @flr-generate all */
 export const CartesianChart: FC<CartesianChartProps> = (props) => {
-  const {
-    children,
-    data,
+  const { children, data, className, height, flexGrow, emptyView, ...rest } =
+    props;
+
+  const { viewDimensions, ref: containerRef } = useChartClipRect();
+
+  const showEmptyView = !!((!data || data.length === 0) && emptyView);
+  const rootClassName = clsx(
+    styles.cartesianChart,
     className,
-    height,
-    flexGrow,
-    emptyView: EmptyView,
-    ...rest
-  } = props;
-  const rootClassName = clsx(styles.cartesianChart, className);
+    showEmptyView && styles.emptyView,
+  );
 
-  const otherChildren: ReactElement[] = [];
-  const gridChildren: ReactElement[] = [];
-
-  Children.forEach(children, (child) => {
-    if (!child) return;
-    const element = child as ReactElement;
-
-    if (element.type === CartesianGrid) {
-      gridChildren.push(element);
-    } else {
-      otherChildren.push(element);
+  const emptyElement = useMemo(() => {
+    if (isValidElement(emptyView)) {
+      return emptyView;
     }
-  });
 
-  const showEmptyView = (!data || data.length === 0) && EmptyView;
-
-  const chartContainerRef = useRef<HTMLDivElement>(null);
-  const [viewDimensions, setViewDimensions] = useState<Partial<
-    SVGProps<SVGForeignObjectElement>
-  > | null>(null);
-
-  // resizing the foreignObject for the EmptyView on size changes
-  useEffect(() => {
-    if (showEmptyView) {
-      const updateDimensions = () => {
-        const svg = chartContainerRef.current?.querySelector(
-          "svg",
-        ) as SVGSVGElement | null;
-        if (!svg) return;
-
-        const clip = svg.querySelector("clipPath rect");
-        if (clip) {
-          const x = parseFloat(clip.getAttribute("x") ?? "0");
-          const y = parseFloat(clip.getAttribute("y") ?? "0");
-          const width = parseFloat(clip.getAttribute("width") ?? "0");
-          const height = parseFloat(clip.getAttribute("height") ?? "0");
-          setViewDimensions({ x, y, width, height });
-        }
-      };
-
-      updateDimensions();
-
-      const container = chartContainerRef.current;
-      const observer = new ResizeObserver(updateDimensions);
-      if (container) observer.observe(container);
-
-      return () => {
-        observer.disconnect();
-      };
+    if (!emptyView) {
+      return;
     }
-  }, [showEmptyView, chartContainerRef.current]);
+
+    console.warn(
+      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
+    );
+    return null;
+  }, [emptyView]);
 
   return (
     <Wrap if={height}>
-      <div
-        style={{ height, flex: flexGrow ? 1 : undefined }}
-        ref={chartContainerRef}
-      >
-        <Recharts.ResponsiveContainer
+      <div style={{ height, flex: flexGrow ? 1 : undefined }}>
+        <ResponsiveContainer
           initialDimension={{
             // fix warning on initial render
             width: 1,
             height: 1,
           }}
+          width={height ? undefined : "100%"}
+          aspect={height ? undefined : 3}
+          ref={containerRef}
         >
-          <Recharts.ComposedChart
-            data={data}
-            className={rootClassName}
-            {...rest}
-          >
-            {!showEmptyView && gridChildren}
-            {otherChildren}
+          <ComposedChart data={data} className={rootClassName} {...rest}>
+            {children}
             {showEmptyView && viewDimensions && (
               <foreignObject {...viewDimensions}>
-                <div className={styles.emptyViewContainer}>
-                  <EmptyView data={data} />
-                </div>
+                <DivView className={styles.emptyViewContainer}>
+                  {emptyElement}
+                </DivView>
               </foreignObject>
             )}
-          </Recharts.ComposedChart>
-        </Recharts.ResponsiveContainer>
+          </ComposedChart>
+        </ResponsiveContainer>
       </div>
     </Wrap>
   );

@@ -21,6 +21,12 @@
     justify-content: center;
   }
 
+  &.emptyView {
+    :global(.recharts-cartesian-grid) {
+      display: none;
+    }
+  }
+
   svg {
     overflow: visible;
   }

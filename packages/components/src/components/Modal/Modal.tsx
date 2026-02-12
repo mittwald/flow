@@ -9,7 +9,7 @@ import {
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Overlay } from "@/components/Overlay/Overlay";
+import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -18,8 +18,17 @@ import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanv
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 
+type SupportedOverlayProps = Pick<
+  OverlayProps,
+  "isOpen" | "isDefaultOpen" | "onOpen" | "onClose" | "onOpenChange"
+>;
+
 export interface ModalProps
-  extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
+  extends
+    PropsWithChildren,
+    FlowComponentProps,
+    PropsWithClassName,
+    SupportedOverlayProps {
   /** The size of the modal. @default "s" */
   size?: "s" | "m" | "l";
   /** Whether the modal should be displayed as an off canvas. */
@@ -62,12 +71,8 @@ export const Modal = flowComponent("Modal", (props) => {
   const header = (children: ReactNode) => (
     <>
       {children}
-      <Action closeOverlay="Modal">
-        <ButtonView
-          variant="plain"
-          color="secondary"
-          onPress={controller?.close}
-        >
+      <Action closeModal>
+        <ButtonView variant="plain" color="secondary">
           <IconClose />
         </ButtonView>
       </Action>

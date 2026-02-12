@@ -24,8 +24,7 @@
   .header {
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
-    border-bottom: var(--modal--border-width) var(--modal--border-style)
-      var(--modal--border-color);
+    border-bottom: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
 
     > span {
       display: flex;
@@ -49,8 +48,7 @@
   .actionGroup {
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
-    border-top: var(--modal--border-width) var(--modal--border-style)
-      var(--modal--border-color);
+    border-top: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
     flex-grow: 0;
   }
 

@@ -17,7 +17,7 @@ import {
   Section,
   Text,
   typedList,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
@@ -45,7 +45,7 @@ export default function Page() {
           </DemoList.LoaderAsync>
           <DemoList.Item textValue={(d) => d.name} showTiles>
             {(d) => {
-              const c = useOverlayController("Modal");
+              const c = useModalController();
               return (
                 <>
                   <ListItemView>

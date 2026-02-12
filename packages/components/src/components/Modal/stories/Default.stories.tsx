@@ -23,6 +23,7 @@ import { DatePicker } from "@/components/DatePicker";
 import { FieldDescription } from "@/components/FieldDescription";
 import { useState } from "react";
 import { useTimeout } from "usehooks-ts";
+import { useModalController } from "@/lib/controller";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -42,10 +43,7 @@ const meta: Meta<typeof Modal> = {
   },
   render: (props) => {
     return (
-      <Modal
-        {...props}
-        controller={useOverlayController("Modal", { isDefaultOpen: true })}
-      >
+      <Modal {...props} isOpen>
         <Heading>New Customer</Heading>
         <Content>
           <Section>
@@ -59,7 +57,7 @@ const meta: Meta<typeof Modal> = {
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Action onAction={asyncLongFunction}>
               <Button color="accent">Create customer</Button>
             </Action>
@@ -102,7 +100,7 @@ export const WithController: Story = {
             </TextField>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="accent">Create customer</Button>
               <Button color="secondary" variant="soft">
                 Abort
@@ -125,7 +123,7 @@ export const WithTrigger: Story = {
           <Text>Are you sure you want to delete this project?</Text>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Button color="danger">Delete project</Button>
             <Button variant="soft" color="secondary">
               Abort
@@ -157,7 +155,7 @@ export const OffCanvasMobile: Story = {
 export const WithForm: Story = {
   render: (props) => {
     const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
+    const modalController = useModalController();
 
     return (
       <>
@@ -177,7 +175,7 @@ export const WithForm: Story = {
             </Content>
             <ActionGroup>
               <SubmitButton color="accent">Submit</SubmitButton>
-              <Action closeOverlay="Modal">
+              <Action closeModal>
                 <Button variant="soft" color="secondary">
                   Abort
                 </Button>
@@ -193,7 +191,7 @@ export const WithForm: Story = {
 export const OffCanvasWithForm: Story = {
   render: (props) => {
     const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
+    const modalController = useModalController();
 
     return (
       <>
@@ -213,7 +211,7 @@ export const OffCanvasWithForm: Story = {
             </Content>
             <ActionGroup>
               <SubmitButton color="accent">Submit</SubmitButton>
-              <Action closeOverlay="Modal">
+              <Action closeModal>
                 <Button variant="soft" color="secondary">
                   Abort
                 </Button>
@@ -229,7 +227,7 @@ export const OffCanvasWithForm: Story = {
 export const WithFormInside: Story = {
   render: (props) => {
     const form = useForm<{ name: string }>();
-    const modalController = useOverlayController("Modal");
+    const modalController = useModalController();
 
     return (
       <>
@@ -253,7 +251,7 @@ export const WithFormInside: Story = {
           </Content>
           <ActionGroup>
             <Button color="accent">Submit</Button>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button variant="soft" color="secondary">
                 Abort
               </Button>
@@ -292,7 +290,7 @@ export const LargeOffCanvas: Story = {
 
           <ActionGroup>
             <Button color="accent">Submit</Button>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button variant="soft" color="secondary">
                 Abort
               </Button>
@@ -358,7 +356,7 @@ export const WithSubHeadings: Story = {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="accent">Create SFTP User</Button>
               <Button variant="soft" color="secondary">
                 Cancel
@@ -384,10 +382,7 @@ export const WithSuspense: Story = {
     const [isLoading, setIsLoading] = useState(true);
     useTimeout(() => setIsLoading(false), 3000);
     return (
-      <Modal
-        {...props}
-        controller={useOverlayController("Modal", { isDefaultOpen: true })}
-      >
+      <Modal {...props} isOpen>
         {isLoading ? <Loader /> : <Content>Loaded content!</Content>}
       </Modal>
     );
