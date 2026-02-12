@@ -34,7 +34,6 @@ const meta: Meta<typeof IllustratedMessage> = {
       control: "inline-radio",
     },
   },
-  args: { color: "primary" },
 };
 export default meta;
 

@@ -15,6 +15,6 @@ accordion:
     value: "{size-px.xs}"
   background-color:
     hover:
-      value: "{primary.color.100}"
+      value: "{neutral-outline-background-color.hover}"
     pressed:
-      value: "{primary.color.100}"
+      value: "{neutral-outline-background-color.pressed}"

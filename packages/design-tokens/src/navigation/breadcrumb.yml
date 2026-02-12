@@ -1,11 +1,11 @@
 breadcrumb:
-  color-primary:
+  color:
     default:
-      value: "{primary.color.1000}"
+      value: "{neutral.color.1000}"
     hover:
-      value: "{primary.color.900}"
+      value: "{neutral.color.900}"
     pressed:
-      value: "{primary.color.800}"
+      value: "{neutral.color.800}"
   color-light:
     default:
       value: "{light.color.800}"

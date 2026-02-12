@@ -4,8 +4,8 @@ illustrated-message:
   spacing:
     value: "{size-rem.m}"
 
-  primary-content-color:
-    value: "{primary.color.1000}"
+  content-color:
+    value: "{neutral.color.1000}"
   danger-content-color:
     value: "{danger.color.900}"
   unavailable-content-color:

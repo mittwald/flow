@@ -11,19 +11,19 @@ import {
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
   /** The color of the illustrated message. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | "light" | "dark";
+  color?: "danger" | "unavailable" | "light" | "dark";
 }
 
 /** @flr-generate all */
 export const IllustratedMessage = flowComponent(
   "IllustratedMessage",
   (props) => {
-    const { className, children, color = "primary", ...rest } = props;
+    const { className, children, color, ...rest } = props;
 
     const rootClassName = clsx(
       styles.illustratedMessage,
       className,
-      styles[color],
+      color && styles[color],
     );
 
     const lightOrDarkColor =

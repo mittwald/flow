@@ -11,15 +11,19 @@ export interface BreadcrumbProps
   extends
     Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
-  /** The color of the breadcrumb. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  /** The color of the breadcrumb. */
+  color?: "dark" | "light";
 }
 
 /** @flr-generate all */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
-  const { children, className, color = "primary", ...rest } = props;
+  const { children, className, color, ...rest } = props;
 
-  const rootClassName = clsx(styles.breadcrumb, styles[color], className);
+  const rootClassName = clsx(
+    styles.breadcrumb,
+    color && styles[color],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {

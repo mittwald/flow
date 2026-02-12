@@ -17,24 +17,21 @@ menu-item:
   spacing:
     value: "{size-rem.s}"
 
-  color:
-    current:
-      value: "{primary.color.800}"
   icon-color:
     default:
-      value: "{neutral.color.800}"
+      value: "{icon.color}"
     disabled:
       value: "{disabled-plain-content-color}"
     current:
-      value: "{primary.color.800}"
+      value: "{text.color.default}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{primary-plain-background-color.hover}"
+      value: "{neutral-plain-background-color.hover}"
     current:
-      value: "{primary-plain-background-color.pressed}"
+      value: "{neutral-plain-background-color.pressed}"
 
   # Disabled
   disabled-background-color:
