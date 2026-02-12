@@ -4,7 +4,7 @@ axis:
   font-size:
     value: "{font-size-text.s}"
   color:
-    value: "{color.gray.700}"
+    value: "{neutral-outline-border-color}"
   text-color:
     value: "{neutral.color.1000}"
   stroke-width:

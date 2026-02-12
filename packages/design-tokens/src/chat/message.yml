@@ -10,7 +10,7 @@ message:
   spacing-x:
     value: "{size-rem.m}"
   background-color-responder:
-    value: "{color.gray.400}"
+    value: "{neutral.color.200}"
   background-color-sender:
     value: "{color.hosting-blue.200}"
   tip-size-x:

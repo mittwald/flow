@@ -2,7 +2,7 @@ donut-chart:
   border-color:
     value: "{neutral-outline-border-color}"
   background-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.200}"
   spacing-y:
     value: "{size-rem.s}"
   spacing-x:
