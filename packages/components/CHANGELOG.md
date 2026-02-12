@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.681](https://github.com/mittwald/flow/compare/0.2.0-alpha.680...0.2.0-alpha.681) (2026-02-12)
+
+### Features
+
+* **Form:** closing Modal with unsaved changes must be confirmed ([8c5a1a3](https://github.com/mittwald/flow/commit/8c5a1a3b07b55f49b26cee7cbb720097376571a9))
+
 # [0.2.0-alpha.680](https://github.com/mittwald/flow/compare/0.2.0-alpha.679...0.2.0-alpha.680) (2026-02-12)
 
 ### Features
