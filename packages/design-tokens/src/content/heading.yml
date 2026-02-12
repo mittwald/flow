@@ -1,6 +1,6 @@
 heading:
   color:
-    value: "{primary.color.1000}"
+    value: "{neutral.color.1000}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:

@@ -3,23 +3,23 @@ color:
     100:
       value: "#FFFFFF"
     200:
-      value: "#FDFDFD"
+      value: "#F4F8FC"
     300:
-      value: "#F8F8F8"
+      value: "#E5EFF8"
     400:
-      value: "#E6E6E6"
+      value: "#DCE9F7"
     500:
-      value: "#D5D5D5"
+      value: "#B7C9DB"
     600:
-      value: "#B1B1B1"
+      value: "#8FA1B4"
     700:
-      value: "#909090"
+      value: "#6A7987"
     800:
-      value: "#6D6D6D"
+      value: "#3A434E"
     900:
-      value: "#464646"
+      value: "#262C33"
     1000:
-      value: "#222222"
+      value: "#1C2128"
     1100:
       value: "#000000"
 

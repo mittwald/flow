@@ -447,9 +447,9 @@ neutral-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{neutral.color.400}"
+    value: "{neutral.color.300}"
   pressed:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
 neutral-plain-content-color:
   value: "{neutral.color.1000}"
 
@@ -458,11 +458,11 @@ neutral-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{neutral.color.400}"
+    value: "{neutral.color.300}"
   selected:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
   pressed:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
 neutral-outline-content-color:
   value: "{neutral.color.1000}"
 neutral-outline-border-color:
