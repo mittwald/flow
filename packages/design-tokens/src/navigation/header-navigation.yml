@@ -8,16 +8,16 @@ header-navigation:
   corner-radius-round:
     value: "{corner-radius.round}"
   color:
-    value: "{primary.color.1000}"
+    value: "{neutral.color.1000}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:
     value: "{light-plain-content-color}"
   background-color:
     hover:
-      value: "{primary-plain-background-color.hover}"
+      value: "{neutral-plain-background-color.hover}"
     pressed:
-      value: "{primary-plain-background-color.pressed}"
+      value: "{neutral-plain-background-color.pressed}"
   background-color-dark:
     hover:
       value: "{dark-plain-background-color.hover}"

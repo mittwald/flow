@@ -484,7 +484,7 @@ neutral-soft-content-color:
 
 # Disabled Solid
 disabled-solid-background-color:
-  value: "{neutral.color.400}"
+  value: "{neutral.color.300}"
 disabled-solid-content-color:
   value: "{neutral.color.600}"
 disabled-solid-dark-background-color:
