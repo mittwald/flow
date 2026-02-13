@@ -1,6 +1,7 @@
 import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
 import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/useHotkeySubmit";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
+import { flags } from "@/integrations/react-hook-form/flags";
 import { useModalController } from "@/lib/controller";
 import {
   type ComponentProps,
@@ -62,7 +63,8 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const modalController = useModalController();
   modalController.useUpdateOptions({
-    confirmOnClose: isDirty,
+    confirmOnClose:
+      flags.requireCloseModalConfirmationOnUnsavedChanges && isDirty,
   });
 
   const handleSubmitResult = (result: unknown) => {
