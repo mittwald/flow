@@ -20,7 +20,7 @@ export interface LiveCodeEditorProps {
   editorCollapsed?: boolean;
   editorDisabled?: boolean;
   zoom?: number;
-  bgColor?: "default" | "dark" | "light";
+  bgColor?: "mstudio" | "dark" | "light";
   mobile?: boolean;
 }
 
@@ -76,6 +76,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           styles.liveCodeEditor,
           bgColor === "dark" && styles.darkBackground,
           bgColor === "light" && styles.lightBackground,
+          bgColor === "mstudio" && styles.mstudioBackground,
           mobile && styles.mobile,
           className,
         )}

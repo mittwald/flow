@@ -13,12 +13,19 @@
   overflow: hidden;
   justify-content: center;
 
-  &.darkBackground {
+  &.darkBackground,
+  &.darkBackground.mobile .preview {
     background-color: var(--neutral--color--800);
   }
 
-  &.lightBackground {
-    background-color: var(--neutral--color--300);
+  &.lightBackground,
+  &.lightBackground.mobile .preview {
+    background-color: var(--neutral--color--400);
+  }
+
+  &.mstudioBackground,
+  &.mstudioBackground.mobile .preview {
+    background-color: var(--neutral--color--200);
   }
 
   &.mobile {
@@ -31,18 +38,6 @@
       width: 400px;
       max-width: 100%;
       height: 100%;
-    }
-
-    &.darkBackground {
-      .preview {
-        background-color: var(--neutral--color--800);
-      }
-    }
-
-    &.lightBackground {
-      .preview {
-        background-color: var(--neutral--color--300);
-      }
     }
   }
 
