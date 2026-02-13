@@ -1,6 +1,6 @@
 modal:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.l}"
   padding:
     value: "{size-px.l}"
   background-color:

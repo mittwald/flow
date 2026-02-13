@@ -3,7 +3,7 @@ date-picker:
     focused:
       value: "{primary-plain-background-color.pressed}"
   date-segment-corner-radius:
-    value: "{size-px.xs}"
+    value: "{corner-radius.m}"
 
 calendar:
   spacing:

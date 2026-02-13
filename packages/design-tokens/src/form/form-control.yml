@@ -12,7 +12,7 @@ form-control:
   padding-y:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-style:

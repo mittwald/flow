@@ -114,6 +114,8 @@
   .homeImage {
     border-bottom: var(--separator--height) var(--border-style--default)
       var(--separator--color);
+    border-top-left-radius: var(--corner-radius--l);
+    border-top-right-radius: var(--corner-radius--l);
   }
 
   .homeTopContent {

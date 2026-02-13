@@ -101,6 +101,7 @@
     padding-block: var(--button--padding-s-y);
     padding-inline: var(--button--padding-s-x);
     column-gap: var(--button--spacing-s);
+    border-radius: var(--button--corner-radius-s);
 
     &:where(.outline) {
       padding-block: calc(

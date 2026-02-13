@@ -8,7 +8,7 @@ list:
 
 list-item:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding:
     value: "{size-px.s}"
   border-width:

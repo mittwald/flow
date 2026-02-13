@@ -27,7 +27,7 @@ export default () => {
 
   return (
     <ColumnLayout l={[1]} m={[1]}>
-      <Heading color="light" level={1}>
+      <Heading color="dark" level={1}>
         Hey Max!
       </Heading>
       <ColumnLayout m={[1]} l={[3, 2]}>

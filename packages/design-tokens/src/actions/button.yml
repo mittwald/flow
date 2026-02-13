@@ -1,6 +1,6 @@
 button:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
@@ -29,6 +29,8 @@ button:
     value: "{font-size-text.s}"
   line-height-s:
     value: "{size-rem.m}"
+  corner-radius-s:
+    value: "{corner-radius.s}"
 
   # Accent Solid
   accent-solid-background-color:

@@ -1,6 +1,6 @@
 message:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding-y:
     value: "{size-px.s}"
   padding-x:

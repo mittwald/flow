@@ -2,7 +2,7 @@ layout-card:
   background-color:
     value: "{neutral.color.100}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.l}"
   padding:
     value: "{size-px.l}"
   padding-mobile:

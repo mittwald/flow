@@ -20,7 +20,7 @@ progress-bar:
     l:
       value: "{size-rem.l}"
   corner-radius:
-    value: "{size-rem.xs}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-color:

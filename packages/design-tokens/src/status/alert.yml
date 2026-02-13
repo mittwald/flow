@@ -2,7 +2,7 @@ alert:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-x-start-width:

@@ -10,7 +10,7 @@
   .ratingSegment {
     display: grid;
     grid-template-areas: "star";
-    border-radius: var(--corner-radius--default);
+    border-radius: var(--corner-radius--m);
 
     @include focus.focus;
 

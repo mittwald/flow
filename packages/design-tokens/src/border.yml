@@ -1,6 +1,10 @@
 corner-radius:
-  default:
+  s:
     value: "{size-px.xs}"
+  m:
+    value: "{size-px.s}"
+  l:
+    value: "{size-px.m}"
   round:
     value: 50%
 border-width:

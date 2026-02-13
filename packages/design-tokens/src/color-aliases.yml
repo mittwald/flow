@@ -508,7 +508,7 @@ disabled-plain-light-content-color:
 
 # Disabled Outline
 disabled-outline-background-color:
-  value: "{neutral.color.300}"
+  value: "{neutral.color.200}"
 disabled-outline-content-color:
   value: "{neutral.color.500}"
 disabled-outline-border-color:

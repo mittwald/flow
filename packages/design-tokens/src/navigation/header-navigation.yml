@@ -4,7 +4,7 @@ header-navigation:
   spacing:
     value: "{size-rem.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   corner-radius-round:
     value: "{corner-radius.round}"
   color:

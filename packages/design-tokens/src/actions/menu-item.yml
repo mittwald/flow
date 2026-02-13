@@ -9,7 +9,7 @@ menu-item:
     current:
       value: "{font-weight.bold}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding-x:
     value: "{size-px.s}"
   padding-y:
