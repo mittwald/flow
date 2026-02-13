@@ -9,6 +9,8 @@ code:
     value: "{size-px.m}"
   corner-radius:
     value: "{corner-radius.m}"
+  corner-radius-s:
+    value: "{corner-radius.s}"
   spacing:
     value: "{size-px.m}"
 
