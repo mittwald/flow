@@ -28,7 +28,6 @@
     outline-offset: calc(var(--size-px--xxs) * -1);
   }
 
-  /* Elements */
   .icon {
     color: var(--menu-item--icon-color--default);
     transition-property: background-color;
@@ -59,6 +58,10 @@
   &[data-selected] {
     .icon {
       color: var(--menu-item--icon-color--current);
+    }
+
+    .controlIcon {
+      color: var(--choice--icon-color--selected);
     }
   }
 
