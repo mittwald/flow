@@ -21,6 +21,9 @@ const meta: Meta<typeof LayoutCard> = {
       Layout Card is a structure element that can contain any content
     </LayoutCard>
   ),
+  globals: {
+    backgrounds: "light",
+  },
 };
 export default meta;
 
