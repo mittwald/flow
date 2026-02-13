@@ -5,11 +5,21 @@ import ModalTrigger from "@/components/Modal/components/ModalTrigger";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
-import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
+import {
+  Field,
+  flags,
+  Form,
+  SubmitButton,
+} from "@/integrations/react-hook-form";
+import { resetFlags } from "@/integrations/react-hook-form/flags";
 import { useModalController } from "@/lib/controller";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
+
+afterEach(() => {
+  resetFlags();
+});
 
 test("Modal is open when using props", async () => {
   const dom = await render(
@@ -65,6 +75,8 @@ test("Modal can be controlled with modal controller", async () => {
 });
 
 test("Modal with dirty form requires confirmation", async () => {
+  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
+
   const Test = () => {
     const form = useForm();
 
