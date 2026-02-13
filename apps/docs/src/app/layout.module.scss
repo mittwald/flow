@@ -1,7 +1,7 @@
 .body {
   --header-height: 72px;
 
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--200);
   isolation: isolate;
 
   * {
@@ -9,23 +9,12 @@
   }
 }
 
-.wave {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  min-height: 400px;
-  object-fit: cover;
-}
-
 .headerNavigation {
   padding-block: var(--layout-card--padding);
 }
 
 .header {
-  background-color: var(--color--hosting-blue--200);
+  background-color: var(--neutral--color--200);
   position: sticky;
   top: 0;
   z-index: 1;

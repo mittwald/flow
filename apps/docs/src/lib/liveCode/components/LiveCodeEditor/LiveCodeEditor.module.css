@@ -7,7 +7,7 @@
 
   border: 1px solid var(--border-color);
   border-radius: var(--corner-radius--default);
-  background-color: var(--neutral--color--200);
+  background-color: var(--neutral--color--100);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -19,7 +19,7 @@
 
   &.lightBackground,
   &.mobile {
-    background-color: var(--primary--color--200);
+    background-color: var(--neutral--color--100);
   }
 
   &.mobile {
@@ -60,7 +60,7 @@
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
-    background-color: var(--code--default-background-color) !important;
+    background-color: var(--neutral--color--200) !important;
     font-size: var(--font-size-text--s);
   }
 
@@ -93,12 +93,12 @@
   display: grid;
   grid-template-rows: 1fr;
   padding: var(--size-px--m);
-  background-color: var(--code--default-background-color) !important;
+  background-color: var(--neutral--color--200) !important;
 }
 
 .actions {
   margin-block-start: auto;
-  background-color: var(--neutral--color--200);
+  background-color: var(--neutral--color--100);
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
