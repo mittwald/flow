@@ -1,7 +1,11 @@
 "use client";
 import type { FC } from "react";
-import React, { useId, useMemo, useState } from "react";
-import { Navigation, NavigationGroup } from "@mittwald/flow-react-components";
+import { useId, useMemo, useState } from "react";
+import {
+  Navigation,
+  NavigationGroup,
+  useModalController,
+} from "@mittwald/flow-react-components";
 import { Heading } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
@@ -12,7 +16,6 @@ import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components";
 import { Label } from "@mittwald/flow-react-components";
 import { Section } from "@mittwald/flow-react-components";
-import { useOverlayController } from "@mittwald/flow-react-components";
 import { useOnChange } from "@mittwald/flow-react-components";
 import { SearchField } from "@mittwald/flow-react-components";
 import styles from "@/app/layout.module.scss";
@@ -38,7 +41,7 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   const { treeItem } = props;
   const currentPathname = usePathname();
 
-  const overlay = useOverlayController("Modal");
+  const overlay = useModalController();
 
   useOnChange(currentPathname, () => {
     overlay.close();

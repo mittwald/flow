@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal, { type ModalProps } from "../Modal";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/Button";
 import defaultMeta from "./Default.stories";
 import { Content } from "@/components/Content";
@@ -11,7 +11,6 @@ import { TextField } from "@/components/TextField";
 import { dummyText } from "@/lib/dev/dummyText";
 import Heading from "@/components/Heading";
 import { Action } from "@/components/Action";
-import { useOverlayController } from "@/lib/controller";
 import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Modal> = {
@@ -25,10 +24,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
   render: (props) => (
-    <Modal
-      {...props}
-      controller={useOverlayController("Modal", { isDefaultOpen: true })}
-    >
+    <Modal {...props} isOpen>
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -48,7 +44,7 @@ export const LongContent: Story = {
         </Section>
       </Content>
       <ActionGroup>
-        <Action closeOverlay="Modal">
+        <Action closeModal>
           <Button color="accent">Create customer</Button>
           <Button variant="soft" color="secondary">
             Abort
@@ -61,11 +57,7 @@ export const LongContent: Story = {
 
 export const LongContentOffCanvas: Story = {
   render: (props) => (
-    <Modal
-      offCanvas
-      {...props}
-      controller={useOverlayController("Modal", { isDefaultOpen: true })}
-    >
+    <Modal offCanvas {...props} isOpen>
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -85,7 +77,7 @@ export const LongContentOffCanvas: Story = {
         </Section>
       </Content>
       <ActionGroup>
-        <Action closeOverlay="Modal">
+        <Action closeModal>
           <Button color="accent">Create customer</Button>
           <Button variant="soft" color="secondary">
             Abort
@@ -100,12 +92,7 @@ export const SizeChange: Story = {
   render: (props) => {
     const [size, setSize] = useState<ModalProps["size"]>("s");
     return (
-      <Modal
-        {...props}
-        size={size}
-        offCanvas
-        controller={useOverlayController("Modal", { isDefaultOpen: true })}
-      >
+      <Modal {...props} size={size} offCanvas isOpen>
         <Heading>{dummyText.short}</Heading>
         <Content>
           <Section>
@@ -122,7 +109,7 @@ export const SizeChange: Story = {
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Button color="accent">Create customer</Button>
             <Button variant="soft" color="secondary">
               Abort

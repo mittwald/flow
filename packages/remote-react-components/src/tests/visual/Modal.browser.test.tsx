@@ -37,7 +37,7 @@ test.each(testEnvironments)(
           </Content>
           <ActionGroup>
             <Button>Ok</Button>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="secondary" variant="soft" data-testid="abort">
                 Abort
               </Button>
@@ -115,14 +115,14 @@ test.each(testEnvironments)(
       Button,
       ContextMenu,
       ContextMenuTrigger,
-      useOverlayController,
+      useModalController,
       Modal,
       Heading,
       Content,
     },
   }) => {
     function Wrapper() {
-      const controller = useOverlayController("Modal");
+      const controller = useModalController();
 
       return (
         <>

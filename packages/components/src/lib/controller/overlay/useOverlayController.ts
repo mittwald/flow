@@ -2,28 +2,19 @@ import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { OverlayControllerOptions } from "@/lib/controller/overlay/OverlayController";
 import { OverlayController } from "@/lib/controller/overlay/OverlayController";
 import type { FlowComponentName } from "@/components/propTypes";
-import { useEffect } from "react";
 
-interface Options extends OverlayControllerOptions {
+export interface UseOverlayControllerOptions extends OverlayControllerOptions {
   reuseControllerFromContext?: boolean;
 }
 
 export const useOverlayController = (
   overlayType: FlowComponentName,
-  opts: Options = {},
+  options: UseOverlayControllerOptions = {},
 ): OverlayController => {
-  const {
-    reuseControllerFromContext = true,
-    isDefaultOpen,
-    onOpen,
-    onClose,
-  } = opts;
+  const { reuseControllerFromContext = true, ...restControllerOptions } =
+    options;
 
-  const newController = OverlayController.useNew({
-    isDefaultOpen,
-    onOpen,
-    onClose,
-  });
+  const newController = OverlayController.useNew(restControllerOptions);
   const controllerFromContext = useOverlayContext()[overlayType];
 
   const controller =
@@ -31,21 +22,9 @@ export const useOverlayController = (
       ? controllerFromContext
       : newController;
 
-  useEffect(() => {
-    const disposers: (() => void)[] = [];
-
-    if (onOpen) {
-      disposers.push(controller.addOnOpen(onOpen));
-    }
-
-    if (onClose) {
-      disposers.push(controller.addOnClose(onClose));
-    }
-
-    return () => {
-      disposers.forEach((dispose) => dispose());
-    };
-  }, [onOpen, onClose]);
+  if (controller === controllerFromContext) {
+    controller.useUpdateOptions(restControllerOptions);
+  }
 
   return controller;
 };

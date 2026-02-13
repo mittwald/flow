@@ -7,17 +7,16 @@ import {
   type PropsWithChildren,
   type SetStateAction,
 } from "react";
-import type { ActionModel } from "@/components/Action/models/ActionModel";
 import invariant from "invariant";
-import { useFormSubmitAction } from "@/integrations/react-hook-form/components/FormContextProvider/useFormSubmitAction";
 import type { AfterFormSubmitCallback } from "@/integrations/react-hook-form/components/Form/Form";
+import { useUpdateReadOnly } from "@/integrations/react-hook-form/components/FormContextProvider/useUpdateReadOnly";
 
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
   id: string;
   isReadOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
-  formSubmitAction: ActionModel;
+  onAfterSuccessFeedback?: AfterFormSubmitCallback;
 }
 
 export const FormContext = createContext<FormContext<FieldValues> | undefined>(
@@ -42,10 +41,9 @@ export const FormContextProvider = (props: FormContextProviderProps) => {
   const [isReadOnlyState, setReadOnly] = useState(isReadOnlyProp);
   const isReadOnly = isReadOnlyProp || isReadOnlyState;
 
-  const formSubmitAction = useFormSubmitAction({
-    form,
+  useUpdateReadOnly({
+    formState: form.formState,
     setReadOnly,
-    onAfterSuccessFeedback,
   });
 
   return (
@@ -55,7 +53,7 @@ export const FormContextProvider = (props: FormContextProviderProps) => {
         setReadOnly,
         id,
         form,
-        formSubmitAction,
+        onAfterSuccessFeedback,
       }}
     >
       {children}

@@ -6,6 +6,11 @@ import { useOverlayController } from "@/lib/controller";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { PropsWithClassName } from "@/lib/types/props";
 import OverlayContentView from "@/views/OverlayContentView";
+import type {
+  OverlayCloseHandler,
+  OverlayOpenHandler,
+  OverlayOpenStateHandler,
+} from "@/lib/controller/overlay/OverlayController";
 
 export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   ref?: Ref<HTMLDivElement>;
@@ -16,6 +21,10 @@ export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
   isOpen?: boolean;
+  isDefaultOpen?: boolean;
+  onOpen?: OverlayOpenHandler;
+  onClose?: OverlayCloseHandler;
+  onOpenChange?: OverlayOpenStateHandler;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
@@ -25,15 +34,19 @@ export const Overlay: FC<OverlayProps> = (props) => {
     isDismissable = true,
     className,
     overlayType = "Modal",
+    isDefaultOpen,
     isOpen: isOpenFromProps,
     ref,
+    ...controllerOptions
   } = props;
 
   const controllerFromContext = useOverlayController(overlayType, {
     reuseControllerFromContext: true,
+    isDefaultOpen,
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
+  controller.useUpdateOptions(controllerOptions);
 
   const isOpen = isOpenFromProps ?? controller.useIsOpen();
 
@@ -41,7 +54,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
 
   return (
     <OverlayContentView
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      onOpenChange={controller.setOpen}
       isOpen={isOpen}
       ref={ref}
       isDismissable={isDismissable}

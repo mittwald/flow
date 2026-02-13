@@ -49,7 +49,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   });
 
   const focusWithin = useFocusWithin({
-    onBlurWithin: optionsOverlayController.close,
+    onBlurWithin: () => optionsOverlayController.close(),
   });
 
   const renderEmptyState = () => (

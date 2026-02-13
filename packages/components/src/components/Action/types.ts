@@ -3,6 +3,7 @@ import type { OverlayController } from "@/lib/controller";
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import type { FlowComponentName } from "@/components/propTypes";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import type { CloseOverlayOptions } from "@/lib/controller/overlay/OverlayController";
 
 export type ActionFn = (...args: unknown[]) => unknown;
 
@@ -12,6 +13,9 @@ export interface ActionProps extends PropsWithChildren, FlowComponentProps {
   closeOverlay?: FlowComponentName | OverlayController;
   openOverlay?: FlowComponentName | OverlayController;
   toggleOverlay?: FlowComponentName | OverlayController;
+  closeModal?: boolean | CloseOverlayOptions;
+  openModal?: boolean;
+  toggleModal?: boolean;
   break?: boolean;
   skip?: number | boolean;
   showFeedback?: boolean;

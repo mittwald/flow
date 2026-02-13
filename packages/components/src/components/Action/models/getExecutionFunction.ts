@@ -1,7 +1,5 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
-import type { ActionFn } from "@/components/Action";
-import type { OverlayController } from "@/lib/controller";
-import type { FlowComponentName } from "@/components/propTypes";
+import { type ActionFn } from "@/components/Action";
 
 const voidAction = () => {
   // do nothing
@@ -12,27 +10,34 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
     return action.confirmationModalController.open;
   }
 
-  const getOverlayController = (
-    from: OverlayController | FlowComponentName,
-  ): OverlayController | undefined => {
-    if (typeof from === "string") {
-      return action.getOverlayController(from);
-    }
-    return from;
-  };
-
-  const { onAction, toggleOverlay, closeOverlay, openOverlay } =
-    action.actionProps;
+  const {
+    onAction,
+    toggleOverlay,
+    closeOverlay,
+    openOverlay,
+    openModal,
+    closeModal,
+    toggleModal,
+  } = action.actionProps;
 
   const maybeAction = onAction
     ? onAction
     : openOverlay
-      ? getOverlayController(openOverlay)?.open
+      ? () => action.getOverlayController(openOverlay)?.open()
       : closeOverlay
-        ? getOverlayController(closeOverlay)?.close
+        ? () => action.getOverlayController(closeOverlay)?.close()
         : toggleOverlay
-          ? getOverlayController(toggleOverlay)?.toggle
-          : voidAction;
+          ? () => action.getOverlayController(toggleOverlay)?.toggle()
+          : openModal
+            ? () => action.getOverlayController("Modal")?.open()
+            : toggleModal
+              ? () => action.getOverlayController("Modal")?.toggle()
+              : closeModal
+                ? () =>
+                    action
+                      .getOverlayController("Modal")
+                      ?.close(typeof closeModal === "boolean" ? {} : closeModal)
+                : voidAction;
 
   return maybeAction ?? voidAction;
 }

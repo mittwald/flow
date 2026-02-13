@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { OverlayController } from "@/lib/controller";
 import invariant from "invariant";
-import type { ActionProps } from "@/components/Action/types";
+import { type ActionProps } from "@/components/Action/types";
 import { actionContext } from "@/components/Action/context";
 import { ActionState } from "@/components/Action/models/ActionState";
 import { ActionExecution } from "@/components/Action/models/ActionExecution";
@@ -93,22 +93,29 @@ export class ActionModel {
   }
 
   public getOverlayController(
-    component: FlowComponentName,
+    from: FlowComponentName | OverlayController,
   ): OverlayController | undefined {
     const getController = (
       controller?: OverlayController | FlowComponentName,
     ): OverlayController | undefined => {
-      return controller === undefined
-        ? undefined
-        : controller
-          ? this.overlayContext[component]
-          : undefined;
+      if (controller === undefined) {
+        return undefined;
+      }
+      if (from instanceof OverlayController) {
+        return from;
+      }
+      if (typeof from === "string") {
+        return this.overlayContext[from];
+      }
     };
 
     return (
       getController(this.actionProps.openOverlay) ??
       getController(this.actionProps.closeOverlay) ??
-      getController(this.actionProps.toggleOverlay)
+      getController(this.actionProps.toggleOverlay) ??
+      getController(this.actionProps.openModal ? "Modal" : undefined) ??
+      getController(this.actionProps.closeModal ? "Modal" : undefined) ??
+      getController(this.actionProps.toggleModal ? "Modal" : undefined)
     );
   }
 
