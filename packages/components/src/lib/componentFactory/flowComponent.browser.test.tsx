@@ -9,6 +9,7 @@ import { render } from "vitest-browser-react";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
 import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
+import { assertNoRenderFn } from "@/lib/react/components/Render";
 
 const getComponentName = (name: string): FlowComponentName => {
   propsContextSupportingComponents.push(name as FlowComponentName);
@@ -502,6 +503,8 @@ describe("propsContext", () => {
         getComponentName(`C${index + 1}`),
         (props) => {
           const { children, ...rest } = props;
+          assertNoRenderFn(children);
+
           if (testCase.expectedProps) {
             expect(rest).toEqual(testCase.expectedProps);
           }
