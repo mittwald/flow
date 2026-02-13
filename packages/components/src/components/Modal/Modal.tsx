@@ -1,4 +1,4 @@
-import { Suspense, type PropsWithChildren, type ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -17,6 +17,10 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import {
+  Render,
+  type PropsWithRenderChildren,
+} from "@/lib/react/components/Render";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -25,7 +29,7 @@ type SupportedOverlayProps = Pick<
 
 export interface ModalProps
   extends
-    PropsWithChildren,
+    PropsWithRenderChildren<{ controller: OverlayController }>,
     FlowComponentProps,
     PropsWithClassName,
     SupportedOverlayProps {
@@ -130,13 +134,15 @@ export const Modal = flowComponent("Modal", (props) => {
       ref={ref}
       {...overlayProps}
     >
-      <PropsContextProvider props={propsContext}>
-        <Wrap if={offCanvas}>
-          <Suspense fallback={<OffCanvasSuspenseFallback />}>
-            {children}
-          </Suspense>
-        </Wrap>
-      </PropsContextProvider>
+      {({ controller }) => (
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={offCanvas}>
+            <Suspense fallback={<OffCanvasSuspenseFallback />}>
+              <Render renderProps={{ controller }}>{children}</Render>
+            </Suspense>
+          </Wrap>
+        </PropsContextProvider>
+      )}
     </Overlay>
   );
 });

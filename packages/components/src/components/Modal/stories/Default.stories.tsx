@@ -396,3 +396,36 @@ export const WithSuspense: Story = {
     );
   },
 };
+
+export const WithRenderProp: Story = {
+  render: (props) => {
+    return (
+      <ModalTrigger isDefaultOpen>
+        <Button>Open Modal</Button>
+        <Modal {...props}>
+          {({ controller }) => (
+            <Content>
+              <Section>
+                <Text>
+                  Formstate resets on close, because Modal content is a render
+                  function.
+                </Text>
+                <Form
+                  form={useForm()}
+                  onSubmit={() => () => controller.close()}
+                >
+                  <Field name="test">
+                    <TextField>
+                      <Label>Test</Label>
+                    </TextField>
+                  </Field>
+                  <SubmitButton>Submit</SubmitButton>
+                </Form>
+              </Section>
+            </Content>
+          )}
+        </Modal>
+      </ModalTrigger>
+    );
+  },
+};
