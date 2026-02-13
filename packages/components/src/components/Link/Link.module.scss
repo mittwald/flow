@@ -75,7 +75,7 @@
   /* AlertText Colors */
   @mixin status($status) {
     &:has(.alertText[class*="#{$status}"]) {
-      color: var(--inline-alert--#{$status}-color);
+      color: var(--alert-text--#{$status}-color);
     }
   }
 
