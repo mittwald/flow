@@ -29,7 +29,7 @@
   }
 
   /* Elements */
-  .icon {
+  :where(.icon) {
     color: var(--menu-item--icon-color--default);
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
@@ -58,7 +58,7 @@
 
   &[aria-current],
   &[data-selected] {
-    .icon {
+    :where(.icon) {
       color: var(--menu-item--icon-color--current);
     }
   }
@@ -68,7 +68,7 @@
     background-color: var(--menu-item--disabled-background-color);
     color: var(--menu-item--disabled-color);
 
-    .icon {
+    :where(.icon) {
       color: var(--menu-item--icon-color--disabled);
     }
   }
