@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.684](https://github.com/mittwald/flow/compare/0.2.0-alpha.683...0.2.0-alpha.684) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.683](https://github.com/mittwald/flow/compare/0.2.0-alpha.682...0.2.0-alpha.683) (2026-02-13)
 
 **Note:** Version bump only for package @mittwald/flow-project
