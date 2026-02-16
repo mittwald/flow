@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
+
+### Bug Fixes
+
+* **Tunnel:** fix issue with disordered entries after re-render ([67eb660](https://github.com/mittwald/flow/commit/67eb66027ffcb408406819651d0832b55b3e4b46))
+
 # [0.2.0-alpha.685](https://github.com/mittwald/flow/compare/0.2.0-alpha.684...0.2.0-alpha.685) (2026-02-16)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
