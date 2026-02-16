@@ -181,8 +181,8 @@ export const PasswordCreationField = flowComponent(
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
-      const pastedValue = event.clipboardData.getData("text");
-      if (pastedValue !== value) {
+      const pastedValue = event.clipboardData?.getData("text");
+      if (typeof pastedValue === "string" && pastedValue !== value) {
         setOptimisticPolicyValidationResult({
           isValid: "indeterminate",
         });
