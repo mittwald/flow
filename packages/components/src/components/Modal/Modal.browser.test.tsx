@@ -1,4 +1,5 @@
 import Action from "@/components/Action";
+import ActionGroup from "@/components/ActionGroup";
 import Button from "@/components/Button";
 import Content from "@/components/Content";
 import ModalTrigger from "@/components/Modal/components/ModalTrigger";
@@ -138,4 +139,48 @@ test("Modal with dirty form requires confirmation", async () => {
   await userEvent.click(openModalButton);
   await userEvent.click(submitButton);
   expect(modalText).not.toBeInTheDocument();
+});
+
+test("Modal with dirty form does not require confirmation when using abort button", async () => {
+  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
+
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <Modal isDefaultOpen>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Form form={form} onSubmit={vitest.fn()}>
+            <Field name="testField">
+              <TextField />
+            </Field>
+          </Form>
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button>Abort</Button>
+          </Action>
+          <Action closeOverlay="Modal">
+            <Button>Abort #2</Button>
+          </Action>
+        </ActionGroup>
+      </Modal>
+    );
+  };
+
+  for (const buttonName of ["Abort", "Abort #2"]) {
+    const dom = await render(<Test />);
+
+    const modalText = dom.getByTestId("modal-text");
+    const abortButton = dom.getByRole("button", {
+      name: buttonName,
+      exact: true,
+    });
+    const input = dom.getByRole("textbox");
+
+    await userEvent.type(input, "Some changes");
+    await userEvent.click(abortButton);
+    expect(modalText).not.toBeInTheDocument();
+  }
 });
