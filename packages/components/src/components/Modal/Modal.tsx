@@ -6,7 +6,7 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import type { OverlayController } from "@/lib/controller/overlay";
+import { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -114,10 +114,34 @@ export const Modal = flowComponent("Modal", (props) => {
       spacing: "m",
       Action: {
         closeModal: dynamic((props) => {
+          if (props.closeModal === undefined) {
+            return;
+          }
           if (props.closeModal === true) {
             return { bypassConfirmation: true };
           }
-          return props.closeModal;
+          return {
+            bypassConfirmation: true,
+            ...props.closeModal,
+          };
+        }),
+        closeOverlay: dynamic((props) => {
+          if (props.closeOverlay === undefined) {
+            return;
+          }
+          if (
+            props.closeOverlay instanceof OverlayController ||
+            typeof props.closeOverlay === "string"
+          ) {
+            return {
+              bypassConfirmation: true,
+              overlay: props.closeOverlay,
+            };
+          }
+          return {
+            bypassConfirmation: true,
+            ...props.closeOverlay,
+          };
         }),
       },
     },
