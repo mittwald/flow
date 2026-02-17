@@ -125,6 +125,18 @@ export class OverlayController {
     return this.executeHandlers(isOpen, this.onOpenChangeHandlers);
   }
 
+  public addOnClose(handler: OverlayCloseHandler) {
+    return this.addOpenStateHandler(handler, this.onCloseHandlers);
+  }
+
+  public addOnOpen(handler: OverlayOpenHandler) {
+    return this.addOpenStateHandler(handler, this.onOpenHandlers);
+  }
+
+  public addOnOpenChange(handler: OverlayOpenStateHandler) {
+    return this.addOpenStateHandler(handler, this.onOpenChangeHandlers);
+  }
+
   public open(): void {
     this.setOpen(true);
   }
