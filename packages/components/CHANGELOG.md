@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
+
+### Bug Fixes
+
+* **Modal:** skip confirmation when using closeOverlay="Modal" ([9add76f](https://github.com/mittwald/flow/commit/9add76fbb9231d46ee971bcc3779740e5bc7fa7f))
+* **OverlayController:** add removed register handler function ([e9214fb](https://github.com/mittwald/flow/commit/e9214fbaaf44337ee4b3d31318f86569a130af91))
+
 # [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
