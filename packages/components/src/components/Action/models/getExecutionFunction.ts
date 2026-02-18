@@ -1,4 +1,4 @@
-import type { ActionModel } from "@/components/Action/models/ActionModel";
+import { ActionModel } from "@/components/Action/models/ActionModel";
 import { type ActionFn } from "@/components/Action";
 
 const voidAction = () => {
@@ -20,21 +20,35 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
     toggleModal,
   } = action.actionProps;
 
-  const maybeAction = onAction
-    ? onAction
-    : openOverlay
-      ? () => action.getOverlayController(openOverlay)?.open()
-      : closeOverlay
-        ? () => action.getOverlayController(closeOverlay)?.close()
-        : toggleOverlay
-          ? () => action.getOverlayController(toggleOverlay)?.toggle()
-          : openModal
-            ? () => action.getOverlayController("Modal")?.open()
-            : toggleModal
-              ? () => action.getOverlayController("Modal")?.toggle()
-              : closeModal
-                ? () => action.getOverlayController("Modal")?.close()
-                : voidAction;
+  if (onAction) {
+    return onAction;
+  }
 
-  return maybeAction ?? voidAction;
+  if (openOverlay) {
+    return () => action.getOverlayController(openOverlay)?.open();
+  }
+  if (closeOverlay) {
+    return () =>
+      action
+        .getOverlayController(closeOverlay)
+        ?.close(ActionModel.getCloseOverlayOptions(closeOverlay));
+  }
+  if (toggleOverlay) {
+    return () => action.getOverlayController(toggleOverlay)?.toggle();
+  }
+
+  if (openModal) {
+    return () => action.getOverlayController("Modal")?.open();
+  }
+  if (toggleModal) {
+    return () => action.getOverlayController("Modal")?.toggle();
+  }
+  if (closeModal) {
+    return () =>
+      action
+        .getOverlayController("Modal")
+        ?.close(ActionModel.getCloseOverlayOptions(closeModal));
+  }
+
+  return voidAction;
 }

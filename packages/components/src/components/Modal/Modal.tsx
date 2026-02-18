@@ -6,7 +6,7 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import type { OverlayController } from "@/lib/controller/overlay";
+import { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -58,7 +58,7 @@ export const Modal = flowComponent("Modal", (props) => {
     ref,
     className,
     offCanvasOrientation = "right",
-    ...rest
+    ...overlayProps
   } = props;
 
   const rootClassName = clsx(
@@ -71,7 +71,7 @@ export const Modal = flowComponent("Modal", (props) => {
   const header = (children: ReactNode) => (
     <>
       {children}
-      <Action closeModal>
+      <Action closeModal={{ bypassConfirmation: true }}>
         <ButtonView variant="plain" color="secondary">
           <IconClose />
         </ButtonView>
@@ -112,6 +112,38 @@ export const Modal = flowComponent("Modal", (props) => {
     ActionGroup: {
       className: styles.actionGroup,
       spacing: "m",
+      Action: {
+        closeModal: dynamic((props) => {
+          if (props.closeModal === undefined) {
+            return;
+          }
+          if (props.closeModal === true) {
+            return { bypassConfirmation: true };
+          }
+          return {
+            bypassConfirmation: true,
+            ...props.closeModal,
+          };
+        }),
+        closeOverlay: dynamic((props) => {
+          if (props.closeOverlay === undefined) {
+            return;
+          }
+          if (
+            props.closeOverlay instanceof OverlayController ||
+            typeof props.closeOverlay === "string"
+          ) {
+            return {
+              bypassConfirmation: true,
+              overlay: props.closeOverlay,
+            };
+          }
+          return {
+            bypassConfirmation: true,
+            ...props.closeOverlay,
+          };
+        }),
+      },
     },
   };
 
@@ -120,7 +152,7 @@ export const Modal = flowComponent("Modal", (props) => {
       className={rootClassName}
       controller={controller}
       ref={ref}
-      {...rest}
+      {...overlayProps}
     >
       <PropsContextProvider props={propsContext}>
         <Wrap if={offCanvas}>

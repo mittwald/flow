@@ -1,27 +1,19 @@
+import type { ActionProps } from "@/components/Action";
 import { type ButtonProps } from "@/components/Button";
-import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider";
-import FormSubmitAction from "@/integrations/react-hook-form/components/FormSubmitAction";
+import FormAction from "@/integrations/react-hook-form/components/FormAction";
 import ButtonView from "@/views/ButtonView";
 import type { FC } from "react";
 
-export const SubmitButton: FC<ButtonProps> = (props) => {
-  const { children, isReadOnly: isReadOnlyProp, ...rest } = props;
+type SupportedActionProps = Pick<ActionProps, "showFeedback">;
 
-  const formContext = useFormContext();
+export type SubmitButtonProps = ButtonProps & SupportedActionProps;
 
-  const isReadOnly = isReadOnlyProp || formContext.isReadOnly;
-
+export const SubmitButton: FC<SubmitButtonProps> = (props) => {
+  const { showFeedback, ...buttonProps } = props;
   return (
-    <FormSubmitAction>
-      <ButtonView
-        {...rest}
-        type="submit"
-        form={formContext.id}
-        isReadOnly={isReadOnly}
-      >
-        {children}
-      </ButtonView>
-    </FormSubmitAction>
+    <FormAction submit showFeedback={showFeedback}>
+      <ButtonView {...buttonProps} />
+    </FormAction>
   );
 };
 

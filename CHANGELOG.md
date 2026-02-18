@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
+
+### Bug Fixes
+
+* **Modal:** skip confirmation when using closeOverlay="Modal" ([9add76f](https://github.com/mittwald/flow/commit/9add76fbb9231d46ee971bcc3779740e5bc7fa7f))
+* **OverlayController:** add removed register handler function ([e9214fb](https://github.com/mittwald/flow/commit/e9214fbaaf44337ee4b3d31318f86569a130af91))
+
+# [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
+
+### Bug Fixes
+
+* **Tunnel:** fix issue with disordered entries after re-render ([67eb660](https://github.com/mittwald/flow/commit/67eb66027ffcb408406819651d0832b55b3e4b46))
+
+# [0.2.0-alpha.685](https://github.com/mittwald/flow/compare/0.2.0-alpha.684...0.2.0-alpha.685) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.684](https://github.com/mittwald/flow/compare/0.2.0-alpha.683...0.2.0-alpha.684) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.683](https://github.com/mittwald/flow/compare/0.2.0-alpha.682...0.2.0-alpha.683) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.682](https://github.com/mittwald/flow/compare/0.2.0-alpha.681...0.2.0-alpha.682) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.681](https://github.com/mittwald/flow/compare/0.2.0-alpha.680...0.2.0-alpha.681) (2026-02-12)
+
+### Features
+
+* **Form:** closing Modal with unsaved changes must be confirmed ([8c5a1a3](https://github.com/mittwald/flow/commit/8c5a1a3b07b55f49b26cee7cbb720097376571a9))
+
+# [0.2.0-alpha.680](https://github.com/mittwald/flow/compare/0.2.0-alpha.679...0.2.0-alpha.680) (2026-02-12)
+
+### Features
+
+* **Form:** make FormSubmit behave like normal async action ([2cf5f21](https://github.com/mittwald/flow/commit/2cf5f21e84deb20136ee38f7af5229918080f15d))
+
 # [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
 
 ### Features
