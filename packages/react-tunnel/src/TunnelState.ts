@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 
@@ -50,8 +50,14 @@ export class TunnelState {
     this.nextIndex = 0;
   }
 
-  public getIndex() {
-    return this.nextIndex++;
+  public useEntryIndex() {
+    const thisRef = useRef(this);
+    const thisIndex = useRef<number | null>(null);
+    if (thisIndex.current === null || thisRef.current !== this) {
+      thisRef.current = this;
+      thisIndex.current = this.nextIndex++;
+    }
+    return thisIndex.current;
   }
 
   public setChildren(

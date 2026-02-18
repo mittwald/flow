@@ -3,6 +3,7 @@ import useSelector from "@/lib/mobx/useSelector";
 import { useStatic } from "@/lib/hooks/useStatic";
 import { useEffect } from "react";
 import { useCloseOverlayConfirmationController } from "@/lib/controller/overlay/useCloseOverlayConfirmationController";
+import type { FlowComponentName } from "@/components/propTypes";
 
 export type OverlayOpenHandler = () => unknown;
 export type OverlayCloseHandler = () => unknown;
@@ -15,8 +16,13 @@ type AnyOverlayOpenStateHandler =
 type DisposerFn = () => void;
 
 export interface CloseOverlayOptions {
+  overlay: FlowComponentName | OverlayController;
   bypassConfirmation?: boolean;
 }
+
+export type CloseModalOptions = Omit<CloseOverlayOptions, "overlay">;
+
+type CloseOptions = CloseOverlayOptions | CloseModalOptions;
 
 export interface OverlayControllerOptions {
   isDefaultOpen?: boolean;
@@ -125,11 +131,23 @@ export class OverlayController {
     return this.executeHandlers(isOpen, this.onOpenChangeHandlers);
   }
 
+  public addOnClose(handler: OverlayCloseHandler) {
+    return this.addOpenStateHandler(handler, this.onCloseHandlers);
+  }
+
+  public addOnOpen(handler: OverlayOpenHandler) {
+    return this.addOpenStateHandler(handler, this.onOpenHandlers);
+  }
+
+  public addOnOpenChange(handler: OverlayOpenStateHandler) {
+    return this.addOpenStateHandler(handler, this.onOpenChangeHandlers);
+  }
+
   public open(): void {
     this.setOpen(true);
   }
 
-  public close(options?: CloseOverlayOptions): void {
+  public close(options?: CloseOptions): void {
     this.setOpen(false, options);
   }
 
@@ -137,7 +155,7 @@ export class OverlayController {
     this.setOpen(!this.isOpen);
   }
 
-  public setOpen(toOpen: boolean, options: CloseOverlayOptions = {}): void {
+  public setOpen(toOpen: boolean, options: CloseOptions = {}): void {
     if (this.isOpen === toOpen) {
       return;
     }

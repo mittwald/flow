@@ -9,6 +9,10 @@ import { ActionStateContext } from "@/components/Action/models/ActionStateContex
 import type { OverlayContext } from "@/lib/controller/overlay/context";
 import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { FlowComponentName } from "@/components/propTypes";
+import type {
+  CloseModalOptions,
+  CloseOverlayOptions,
+} from "@/lib/controller/overlay/OverlayController";
 
 interface InitObject {
   actionProps: ActionProps;
@@ -93,10 +97,18 @@ export class ActionModel {
   }
 
   public getOverlayController(
-    from: FlowComponentName | OverlayController,
+    from:
+      | FlowComponentName
+      | OverlayController
+      | CloseOverlayOptions
+      | CloseModalOptions,
   ): OverlayController | undefined {
     const getController = (
-      controller?: OverlayController | FlowComponentName,
+      controller?:
+        | OverlayController
+        | FlowComponentName
+        | CloseOverlayOptions
+        | CloseModalOptions,
     ): OverlayController | undefined => {
       if (controller === undefined) {
         return undefined;
@@ -107,6 +119,10 @@ export class ActionModel {
       if (typeof from === "string") {
         return this.overlayContext[from];
       }
+      if ("overlay" in from) {
+        return this.getOverlayController(from.overlay);
+      }
+      return this.getOverlayController("Modal");
     };
 
     return (
@@ -118,6 +134,25 @@ export class ActionModel {
       getController(this.actionProps.toggleModal ? "Modal" : undefined)
     );
   }
+
+  public static getCloseOverlayOptions = (
+    options?:
+      | OverlayController
+      | FlowComponentName
+      | CloseOverlayOptions
+      | CloseModalOptions
+      | true,
+  ) => {
+    if (
+      options === undefined ||
+      options instanceof OverlayController ||
+      typeof options === "string" ||
+      options === true
+    ) {
+      return undefined;
+    }
+    return options;
+  };
 
   public execute = (...args: unknown[]): void => {
     new ActionExecution(this).execute(...args);

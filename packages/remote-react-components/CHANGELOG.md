@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.689](https://github.com/mittwald/flow/compare/0.2.0-alpha.688...0.2.0-alpha.689) (2026-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.685](https://github.com/mittwald/flow/compare/0.2.0-alpha.684...0.2.0-alpha.685) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.684](https://github.com/mittwald/flow/compare/0.2.0-alpha.683...0.2.0-alpha.684) (2026-02-16)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

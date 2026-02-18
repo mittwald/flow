@@ -259,3 +259,88 @@ test("Order of multiple children is preserved when entry is added dynamically", 
   await userEvent.click(dom.getByTestId("toggle"));
   expect(dom.getByTestId("exit")).toHaveTextContent("02");
 });
+
+test("Order of multiple children is preserved when entry is rerendered", async () => {
+  const ComponentWithEntry: FC<TunnelEntryProps & { name: string }> = (
+    props,
+  ) => {
+    const { name, ...restProps } = props;
+    const [, setSomeState] = useState(0);
+
+    return (
+      <div data-testid={`entry-${props.name}`}>
+        <button
+          onClick={() => setSomeState((s) => s + 1)}
+          data-testid={`button-${props.name}`}
+        >
+          Rerender
+        </button>
+        <TunnelEntry {...restProps}>{name}</TunnelEntry>
+      </div>
+    );
+  };
+
+  const Test: FC = () => (
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      <ComponentWithEntry name="A" />
+      <ComponentWithEntry name="B" />
+      <ComponentWithEntry name="C" />
+    </TunnelProvider>
+  );
+
+  const dom = await render(<Test />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+
+  await userEvent.click(dom.getByTestId("button-A"));
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+
+  await userEvent.click(dom.getByTestId("button-B"));
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+
+  await userEvent.click(dom.getByTestId("button-C"));
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+});
+
+test("Order of multiple children is changed when entries are changing", async () => {
+  const ComponentWithEntry: FC<TunnelEntryProps & { name: string }> = (
+    props,
+  ) => {
+    const { name, ...restProps } = props;
+
+    return (
+      <div data-testid={`entry-${props.name}`}>
+        <TunnelEntry {...restProps}>{name}</TunnelEntry>
+      </div>
+    );
+  };
+
+  const Test: FC<PropsWithChildren> = (props) => (
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      {props.children}
+    </TunnelProvider>
+  );
+
+  const dom = await render(
+    <Test>
+      <ComponentWithEntry name="A" />
+      <ComponentWithEntry name="B" />
+      <ComponentWithEntry name="C" />
+    </Test>,
+  );
+  expect(dom.getByTestId("exit")).toHaveTextContent("ABC");
+
+  await dom.rerender(
+    <Test>
+      <ComponentWithEntry name="A" />
+      <ComponentWithEntry name="C" />
+      <ComponentWithEntry name="B" />
+    </Test>,
+  );
+  expect(dom.getByTestId("exit")).toHaveTextContent("ACB");
+});
