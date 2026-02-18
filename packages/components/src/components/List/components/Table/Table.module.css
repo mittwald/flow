@@ -1,4 +1,6 @@
 .table {
+  border-collapse: initial;
+
   &.isLoading {
     pointer-events: none;
     opacity: 0.5;
