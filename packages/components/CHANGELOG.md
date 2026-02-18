@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.689](https://github.com/mittwald/flow/compare/0.2.0-alpha.688...0.2.0-alpha.689) (2026-02-18)
+
+### Bug Fixes
+
+* **table:** set border collapse to initial ([#2330](https://github.com/mittwald/flow/issues/2330)) ([9b55a74](https://github.com/mittwald/flow/commit/9b55a740ee35e0ab4489ed94cfff525d2a592521))
+
 # [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
 
 ### Bug Fixes
