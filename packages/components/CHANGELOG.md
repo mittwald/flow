@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
+
+### Bug Fixes
+
+* **Form:** form should not be dirty after resetting ([d7eb0eb](https://github.com/mittwald/flow/commit/d7eb0eb995d6d9751feccb9ed6b51a7a8a605b4a))
+
 # [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
 
 ### Bug Fixes
