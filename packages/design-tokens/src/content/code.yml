@@ -18,7 +18,7 @@ code:
   default-background-color:
     value: "{neutral-soft-background-color.default}"
   default-content-color:
-    value: "{neutral-soft-content-color.default}"
+    value: "{neutral-soft-content-color}"
   default-syntax-color-addition:
     value: "#397300"
   default-syntax-color-built-in:

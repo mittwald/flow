@@ -84,11 +84,11 @@ button:
       value: "{disabled-soft-background-color}"
   accent-soft-content-color:
     default:
-      value: "{success-soft-content-color.default}"
+      value: "{success-soft-content-color}"
     hover:
-      value: "{success-soft-content-color.default}"
+      value: "{success-soft-content-color}"
     pressed:
-      value: "{success-soft-content-color.pressed}"
+      value: "{success-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
 
@@ -169,11 +169,11 @@ button:
       value: "{disabled-soft-background-color}"
   primary-soft-content-color:
     default:
-      value: "{primary-soft-content-color.default}"
+      value: "{primary-soft-content-color}"
     hover:
-      value: "{primary-soft-content-color.default}"
+      value: "{primary-soft-content-color}"
     pressed:
-      value: "{primary-soft-content-color.pressed}"
+      value: "{primary-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
 
@@ -254,11 +254,11 @@ button:
       value: "{disabled-soft-background-color}"
   secondary-soft-content-color:
     default:
-      value: "{neutral-soft-content-color.default}"
+      value: "{neutral-soft-content-color}"
     hover:
-      value: "{neutral-soft-content-color.default}"
+      value: "{neutral-soft-content-color}"
     pressed:
-      value: "{neutral-soft-content-color.pressed}"
+      value: "{neutral-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
 
@@ -339,11 +339,11 @@ button:
       value: "{disabled-soft-background-color}"
   danger-soft-content-color:
     default:
-      value: "{danger-soft-content-color.default}"
+      value: "{danger-soft-content-color}"
     hover:
-      value: "{danger-soft-content-color.default}"
+      value: "{danger-soft-content-color}"
     pressed:
-      value: "{danger-soft-content-color.pressed}"
+      value: "{danger-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
 
