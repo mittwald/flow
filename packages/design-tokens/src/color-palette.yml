@@ -13,14 +13,16 @@ color:
     600:
       value: "#8FA1B4"
     700:
-      value: "#6A7987"
+      value: "#5E6C7A"
     800:
       value: "#3A434E"
     900:
-      value: "#262C33"
+      value: "#292F37"
     1000:
-      value: "#1C2128"
+      value: "#1B1F24"
     1100:
+      value: "#121518"
+    1200:
       value: "#000000"
 
   hosting-blue:

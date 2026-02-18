@@ -1,7 +1,7 @@
 breadcrumb:
   color:
     default:
-      value: "{neutral.color.1000}"
+      value: "{text.color.default}"
     hover:
       value: "{neutral.color.900}"
     pressed:

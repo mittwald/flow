@@ -8,56 +8,24 @@ import { Avatar } from "@/components/Avatar";
 import { dummyText } from "@/lib/dev/dummyText";
 import Image from "@/components/Image";
 import { Content } from "@/components/Content";
-import { AlertBadge } from "@/components/AlertBadge";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
-import { IconClose, IconEmail } from "@/components/Icon/components/icons";
+import { IconEmail } from "@/components/Icon/components/icons";
 import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
-import { Initials } from "@/components/Initials";
 import { Checkbox } from "@/components/Checkbox";
-import Section from "@/components/Section";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <Section>
-        <List.List>
-          <List.StaticData data={[{ name: "John Doe" }]} />
-          <List.Item showTiles textValue={(user) => user.name}>
-            {(user) => (
-              <List.ItemView>
-                <Avatar>
-                  <Image alt={user.name} src={dummyText.imageSrc} />
-                </Avatar>
-                <Heading>
-                  {user.name} <AlertBadge status="danger">Blocked</AlertBadge>
-                </Heading>
-                <Text>mittwald</Text>
-                <ContextMenu>
-                  <MenuItem>Show details</MenuItem>
-                </ContextMenu>
-              </List.ItemView>
-            )}
-          </List.Item>
-        </List.List>
-      </Section>
-    );
-  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof List>;
 
-export const Default: Story = {};
-
-export const WithTopContent: Story = {
+export const WithContent: Story = {
   render: () => {
     const List = typedList<{ mail: string }>();
 
@@ -76,32 +44,6 @@ export const WithTopContent: Story = {
                   <Label>Storage</Label>
                 </ProgressBar>
               </Content>
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-              </ContextMenu>
-            </List.ItemView>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const WithBottomContent: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List>
-        <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item showTiles textValue={(user) => user.name}>
-          {(user) => (
-            <List.ItemView>
-              <Avatar>
-                <Initials>{user.name}</Initials>
-              </Avatar>
-              <Heading>{user.name}</Heading>
-              <Text>mittwald</Text>
               <Content slot="bottom">
                 <Text>{dummyText.long}</Text>
               </Content>
@@ -149,30 +91,6 @@ export const WithActionGroup: Story = {
   },
 };
 
-export const WithMultipleTexts: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List>
-        <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item showTiles textValue={(user) => user.name}>
-          {(user) => (
-            <List.ItemView>
-              <Avatar>
-                <Image alt={user.name} src={dummyText.imageSrc} />
-              </Avatar>
-              <Heading>{user.name}</Heading>
-              <Text>mittwald</Text>
-              <Text>Development</Text>
-            </List.ItemView>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
 export const WithCustomTileMaxWidth: Story = {
   render: () => {
     const List = typedList<{ name: string }>();
@@ -189,28 +107,6 @@ export const WithCustomTileMaxWidth: Story = {
               <Heading>{user.name}</Heading>
               <Text>mittwald</Text>
               <Text>Development</Text>
-            </List.ItemView>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const WithHeadingAndAction: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List>
-        <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item textValue={(user) => user.name}>
-          {(user) => (
-            <List.ItemView>
-              <Heading>{user.name}</Heading>
-              <Button color="secondary" variant="plain" slot="secondary">
-                <IconClose />
-              </Button>
             </List.ItemView>
           )}
         </List.Item>
@@ -250,11 +146,6 @@ export const WithCheckbox: Story = {
                 <IconEmail />
               </Avatar>
               <Heading>{mail.mail}</Heading>
-              <Content>
-                <ProgressBar value={50}>
-                  <Label>Storage</Label>
-                </ProgressBar>
-              </Content>
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>
@@ -295,32 +186,6 @@ export const WithColumnLayout: Story = {
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>
-            </List.ItemView>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const WithAccordion: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List accordion>
-        <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item showTiles textValue={(user) => user.name}>
-          {(user) => (
-            <List.ItemView>
-              <Avatar>
-                <Image alt={user.name} src={dummyText.imageSrc} />
-              </Avatar>
-              <Heading>{user.name}</Heading>
-              <Text>mittwald</Text>
-              <Content slot="bottom">
-                <Text>{dummyText.long}</Text>
-              </Content>
             </List.ItemView>
           )}
         </List.Item>

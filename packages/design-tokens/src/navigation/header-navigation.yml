@@ -8,7 +8,7 @@ header-navigation:
   corner-radius-round:
     value: "{corner-radius.round}"
   color:
-    value: "{neutral.color.1000}"
+    value: "{neutral.color.1100}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:

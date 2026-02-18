@@ -72,6 +72,17 @@
     }
   }
 
+  /* Size s */
+
+  &.size-s {
+    line-height: var(--link--line-height-s);
+    font-size: var(--font-size-text--s);
+
+    .icon {
+      height: var(--link--icon-height-s);
+    }
+  }
+
   /* AlertText Colors */
   @mixin status($status) {
     &:has(.alertText[class*="#{$status}"]) {

@@ -59,6 +59,15 @@
     }
   }
 
+  /* Size s */
+
+  &.size-s {
+    .link {
+      line-height: var(--link--line-height-s);
+      font-size: var(--font-size-text--s);
+    }
+  }
+
   /* Colors */
 
   @mixin variant($color) {

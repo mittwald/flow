@@ -5,8 +5,6 @@ axis:
     value: "{font-size-text.s}"
   color:
     value: "{neutral-outline-border-color}"
-  text-color:
-    value: "{neutral.color.1000}"
   stroke-width:
     value: "{border-width.100}"
   tick-size:

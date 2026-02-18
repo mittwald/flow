@@ -97,6 +97,8 @@ neutral:
       value: "{color.gray.1000}"
     1100:
       value: "{color.gray.1100}"
+    1200:
+      value: "{color.gray.1200}"
 
 danger:
   color:

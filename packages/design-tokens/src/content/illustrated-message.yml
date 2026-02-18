@@ -5,7 +5,7 @@ illustrated-message:
     value: "{size-rem.m}"
 
   content-color:
-    value: "{neutral.color.1000}"
+    value: "{heading.color}"
   danger-content-color:
     value: "{danger.color.900}"
   unavailable-content-color:

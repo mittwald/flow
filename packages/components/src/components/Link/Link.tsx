@@ -25,12 +25,14 @@ export interface LinkProps
   inline?: boolean;
   /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
-  /** The color of the link. @default "primary" */
-  color?: "dark" | "light";
+  /** The color of the link. */
+  color?: "default" | "dark" | "light";
   "aria-current"?: string;
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
   /** @internal */
   unstyled?: boolean;
 }
@@ -49,6 +51,7 @@ export const Link = flowComponent("Link", (props) => {
     slot: ignoredSlotProp,
     style,
     whiteSpace,
+    size = "m",
     ...rest
   } = props;
 
@@ -65,6 +68,7 @@ export const Link = flowComponent("Link", (props) => {
         styles.link,
         inline && styles.inline,
         color && styles[color],
+        size === "s" && styles["size-s"],
         className,
       );
 

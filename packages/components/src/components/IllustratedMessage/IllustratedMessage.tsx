@@ -10,8 +10,8 @@ import {
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
-  /** The color of the illustrated message. @default "primary" */
-  color?: "danger" | "unavailable" | "light" | "dark";
+  /** The color of the illustrated message. */
+  color?: "default" | "danger" | "unavailable" | "light" | "dark";
 }
 
 /** @flr-generate all */
