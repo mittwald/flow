@@ -41,7 +41,7 @@ const meta: Meta<typeof HeaderNavigation> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "dark", "light"],
     },
   },
 };

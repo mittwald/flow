@@ -20,7 +20,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "dark", "light"],
     },
     isDisabled: {
       control: "boolean",
