@@ -2,8 +2,8 @@ big-number:
   spacing:
     value: "{size-rem.xs}"
   top-font-size:
-    value: "{font-size-heading.xl}"
+    value: "{heading-size.xl}"
   bottom-font-size:
-    value: "{font-size-text.m}"
+    value: "{font-size.m}"
   font-weight:
     value: "{font-weight.bold}"

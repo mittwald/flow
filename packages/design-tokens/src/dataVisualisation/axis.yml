@@ -2,7 +2,7 @@ axis:
   spacing:
     value: "{size-px.s}"
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   color:
     value: "{neutral-outline-border-color}"
   stroke-width:

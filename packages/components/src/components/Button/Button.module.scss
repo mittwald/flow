@@ -5,9 +5,9 @@
 .button {
   position: relative;
   font-family: Inter, sans-serif;
-  font-size: var(--font-size-text--default);
+  font-size: var(--font-size--m);
   font-weight: bold;
-  line-height: var(--line-height--default);
+  line-height: var(--line-height);
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-y);

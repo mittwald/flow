@@ -9,7 +9,9 @@ import { dummyText } from "@/lib/dev/dummyText";
 const meta: Meta<typeof Notification> = {
   title: "Status/Notification",
   component: Notification,
-
+  parameters: {
+    controls: { exclude: ["href", "autoClose", "onClick", "onClose"] },
+  },
   argTypes: {
     status: {
       control: "inline-radio",

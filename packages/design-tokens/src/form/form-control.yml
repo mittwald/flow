@@ -1,6 +1,6 @@
 form-control:
   label-to-control-spacing:
-    value: "{size-rem.xxs}"
+    value: "{size-rem.xs}"
   control-to-info-spacing:
     value: "{size-rem.xs}"
   spacing-x:

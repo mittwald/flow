@@ -97,7 +97,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const localRef = useObjectRef(ref);
 
   const getHeight = (rows: number) => {
-    return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
+    return `calc((var(--font-size--m) * var(--line-height) * ${rows} + (var(--form-control--padding-y) * 2))`;
   };
 
   const [resized, setResized] = useState(false);

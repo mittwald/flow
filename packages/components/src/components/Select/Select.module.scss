@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     font-weight: normal;
-    font-size: var(--font-size-text--default);
+    font-size: var(--font-size--m);
     text-align: left;
 
     @include formControl.formControl();

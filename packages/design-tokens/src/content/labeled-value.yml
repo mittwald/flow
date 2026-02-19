@@ -1,5 +1,5 @@
 labeled-value:
   label-to-value-spacing:
-    value: "{size-rem.xxs}"
+    value: "{size-rem.xs}"
   value-to-action-spacing:
     value: "{size-rem.xs}"

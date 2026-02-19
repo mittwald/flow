@@ -24,7 +24,7 @@
 
   &.inline {
     font-weight: normal;
-    font-size: var(--font-size-text--default);
+    font-size: var(--font-size--m);
     text-decoration: underline;
   }
 
@@ -76,7 +76,7 @@
 
   &.size-s {
     line-height: var(--link--line-height-s);
-    font-size: var(--font-size-text--s);
+    font-size: var(--font-size--s);
 
     .icon {
       height: var(--link--icon-height-s);

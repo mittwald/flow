@@ -1,8 +1,8 @@
 progress-bar:
   font-size:
-    value: "{font-size-text.m}"
+    value: "{font-size.m}"
   font-size-s:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   value-font-weight:
     value: "{font-weight.bold}"
   spacing-y:

@@ -17,6 +17,9 @@ const meta: Meta<{ autoClose: boolean }> = {
       </NotificationProvider>
     ),
   ],
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => {
     const notificationController = useNotificationController();
 

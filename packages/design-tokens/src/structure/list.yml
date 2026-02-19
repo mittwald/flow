@@ -29,4 +29,4 @@ list-item:
   border-color:
     value: "{neutral-outline-border-color}"
   subtitle-font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"

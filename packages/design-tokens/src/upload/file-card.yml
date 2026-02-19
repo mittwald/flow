@@ -17,7 +17,7 @@ file-card:
     error:
       value: "{danger-outline-border-color}"
   sub-title-font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   background-color:
     default:
       value: "{neutral.color.100}"

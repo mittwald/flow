@@ -1,6 +1,6 @@
 badge:
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
   line-height:

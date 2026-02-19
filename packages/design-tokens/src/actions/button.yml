@@ -26,7 +26,7 @@ button:
   spacing-s:
     value: "{size-rem.xs}"
   font-size-s:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   line-height-s:
     value: "{size-rem.m}"
   corner-radius-s:
