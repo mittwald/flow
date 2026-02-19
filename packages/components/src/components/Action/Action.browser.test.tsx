@@ -2,7 +2,7 @@ import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { type FC } from "react";
 import Action, {
-  MutedActionError,
+  AbortActionError,
   type ActionProps,
 } from "@/components/Action";
 import { ActionBatch } from "@/components/Action";
@@ -330,9 +330,9 @@ describe("Global error handler", () => {
     );
   });
 
-  test("is not called when MutedActionError is thrown", async () => {
+  test("is not called when AbortActionError is thrown", async () => {
     syncAction1.mockImplementation(() => {
-      throw new MutedActionError("Muted error");
+      throw new AbortActionError("Aborted error");
     });
 
     const ui = () => (
@@ -398,11 +398,11 @@ describe("Feedback", () => {
     expectIconInDom("x");
   });
 
-  test("is shown when sync action fails with MutedActionError", async () => {
+  test("is shown when sync action fails with AbortActionError", async () => {
     await runTest({
       props: {
         onAction: () => {
-          throw new MutedActionError("Muted error");
+          throw new AbortActionError("Aborted error");
         },
       },
     });
