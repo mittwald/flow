@@ -1,6 +1,5 @@
-import type { ActionProps } from "@/components/Action";
+import { AbortActionError, type ActionProps } from "@/components/Action";
 import { ActionModel } from "@/components/Action/models/ActionModel";
-import { MutedActionError } from "@/components/Action/MutedActionError";
 import { useEffect, useRef } from "react";
 import type { FieldValues, FormState } from "react-hook-form";
 
@@ -40,7 +39,7 @@ export const useFormSubmitAction = (
     }
 
     submitPromise.current?.reject(
-      new MutedActionError("Form submission failed"),
+      new AbortActionError("Form submission failed"),
     );
   }, [isSubmitting, isSubmitSuccessful, submitPromise]);
 
