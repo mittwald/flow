@@ -160,14 +160,12 @@
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--hover
         );
-        color: var(--button--#{$color}-#{$variant}-content-color--hover);
       }
 
       &[data-pressed]:where(:not([data-readonly])) {
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--pressed
         );
-        color: var(--button--#{$color}-#{$variant}-content-color--pressed);
       }
 
       &[disabled],

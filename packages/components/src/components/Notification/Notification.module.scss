@@ -22,8 +22,20 @@
     cursor: default;
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
+    position: relative;
 
     @include focus.focus;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: var(--notification--border-x-start-width);
+      left: calc(var(--notification--border-x-start-width) * -1);
+      border-top-left-radius: var(--notification--corner-radius);
+      border-bottom-left-radius: var(--notification--corner-radius);
+    }
   }
 
   .heading {
@@ -59,10 +71,14 @@
   @mixin status($status) {
     &.#{$status} {
       .link {
-        border-color: var(--notification--#{$status}-border-color);
+        border-color: var(--notification--#{$status}-background-color--default);
         background-color: var(
           --notification--#{$status}-background-color--default
         );
+
+        &::before {
+          background-color: var(--notification--#{$status}-border-color);
+        }
       }
 
       &.hasLink {

@@ -50,7 +50,7 @@ export default () => {
           <Link>E-Mails</Link>
           <Link>E-Mail-Details</Link>
         </Breadcrumb>
-        <Flex justify="space-between">
+        <Flex justify="space-between" align="end">
           <Heading color="dark" level={1}>
             max@mustermann.de
           </Heading>
