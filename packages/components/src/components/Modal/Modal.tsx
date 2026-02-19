@@ -1,4 +1,9 @@
-import { Suspense, type PropsWithChildren, type ReactNode } from "react";
+import {
+  type PropsWithChildren,
+  type ReactNode,
+  Suspense,
+  useRef,
+} from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -6,7 +11,10 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { OverlayController } from "@/lib/controller/overlay";
+import {
+  OverlayController,
+  useOverlayController,
+} from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -17,6 +25,7 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import { useInteractOutside } from "react-aria";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -53,13 +62,17 @@ export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",
     offCanvas,
-    controller,
+    controller: controllerFromProps,
     children,
     ref,
     className,
     offCanvasOrientation = "right",
+    isDismissable = true,
     ...overlayProps
   } = props;
+
+  const controllerFromContext = useOverlayController("Modal", overlayProps);
+  const controller = controllerFromProps ?? controllerFromContext;
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
@@ -147,20 +160,36 @@ export const Modal = flowComponent("Modal", (props) => {
     },
   };
 
+  const modalContainer = useRef<HTMLDivElement>(null);
+  // we handle dismissable by our self since we use visual tricks inside the modal content
+  // to "be displayed outside the modal" - which is technically inside so it will not be
+  // handled by the overlay "Dismissable" function
+  useInteractOutside({
+    ref: modalContainer,
+    onInteractOutside: () => {
+      if (isDismissable) {
+        controller?.close();
+      }
+    },
+  });
+
   return (
     <Overlay
+      isDismissable={false}
       className={rootClassName}
       controller={controller}
       ref={ref}
       {...overlayProps}
     >
-      <PropsContextProvider props={propsContext}>
-        <Wrap if={offCanvas}>
-          <Suspense fallback={<OffCanvasSuspenseFallback />}>
-            {children}
-          </Suspense>
-        </Wrap>
-      </PropsContextProvider>
+      <div className={styles.modalContainer} ref={modalContainer}>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={offCanvas}>
+            <Suspense fallback={<OffCanvasSuspenseFallback />}>
+              {children}
+            </Suspense>
+          </Wrap>
+        </PropsContextProvider>
+      </div>
     </Overlay>
   );
 });

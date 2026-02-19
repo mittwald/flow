@@ -207,7 +207,7 @@ export const OffCanvasWithForm: Story = {
           Add customer
         </Button>
 
-        <Modal offCanvas {...props} controller={modalController}>
+        <Modal {...props} offCanvas controller={modalController}>
           <Form form={form} onSubmit={() => modalController.close()}>
             <Heading>Add customer</Heading>
             <Content>

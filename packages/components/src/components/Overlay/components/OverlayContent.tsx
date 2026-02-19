@@ -25,18 +25,28 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
       setIsSuspended(true);
       return () => setIsSuspended(false);
     }, [setIsSuspended]);
-    return <OverlaySuspenseFallback {...restProps} />;
+    return (
+      <div className={styles.suspense}>
+        <OverlaySuspenseFallback {...restProps} />
+      </div>
+    );
   };
 
   const rootClassName = isSuspended ? styles.overlay : className;
 
   return (
     <Aria.ModalOverlay {...restProps} className={rootClassName}>
-      <Aria.Modal>
-        <Suspense fallback={<Fallback />}>
+      <Suspense
+        fallback={
+          <Aria.Modal className={styles.suspense}>
+            <Fallback />
+          </Aria.Modal>
+        }
+      >
+        <Aria.Modal>
           <Aria.Dialog>{children}</Aria.Dialog>
-        </Suspense>
-      </Aria.Modal>
+        </Aria.Modal>
+      </Suspense>
     </Aria.ModalOverlay>
   );
 };
