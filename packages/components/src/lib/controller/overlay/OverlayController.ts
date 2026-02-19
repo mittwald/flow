@@ -39,11 +39,13 @@ type ConstructorOptions = Pick<
 
 export class OverlayController {
   public isOpen = false;
-  public showConfirmationModal = false;
-  public confirmOnCloseEnabled: boolean;
   private onOpenHandlers = new Set<OverlayOpenHandler>();
   private onCloseHandlers = new Set<OverlayCloseHandler>();
   private onOpenChangeHandlers = new Set<OverlayOpenStateHandler>();
+
+  public showConfirmationModal = false;
+  public closeIsConfirmed = false;
+  public confirmOnCloseEnabled: boolean;
 
   public constructor(options: ConstructorOptions = {}) {
     makeObservable(this, {
@@ -55,12 +57,18 @@ export class OverlayController {
       setOpen: action.bound,
       confirmClose: action.bound,
     });
-    this.isOpen = options?.isDefaultOpen ?? false;
-    this.confirmOnCloseEnabled = options?.confirmOnClose === true;
+    const { isDefaultOpen = false, confirmOnClose = false } = options;
+    this.isOpen = isDefaultOpen;
+    this.confirmOnCloseEnabled = confirmOnClose;
   }
 
   public useUpdateOptions(options: OverlayControllerOptions = {}): void {
-    const { onOpen, onClose, onOpenChange, confirmOnClose } = options;
+    const {
+      onOpen,
+      onClose,
+      onOpenChange,
+      confirmOnClose = this.confirmOnCloseEnabled,
+    } = options;
 
     this.useOnHandler(onOpen, (h) =>
       this.addOpenStateHandler(h, this.onOpenHandlers),
@@ -72,11 +80,7 @@ export class OverlayController {
       this.addOpenStateHandler(h, this.onOpenChangeHandlers),
     );
 
-    useEffect(() => {
-      if (confirmOnClose) {
-        this.confirmOnCloseEnabled = true;
-      }
-    }, [confirmOnClose, this]);
+    this.confirmOnCloseEnabled = confirmOnClose;
   }
 
   public static useNew(
@@ -163,9 +167,10 @@ export class OverlayController {
     const { bypassConfirmation = false } = options;
 
     if (
-      this.confirmOnCloseEnabled &&
       toOpen === false &&
-      bypassConfirmation === false
+      this.confirmOnCloseEnabled &&
+      !this.closeIsConfirmed &&
+      !bypassConfirmation
     ) {
       this.showConfirmationModal = true;
       return;
@@ -183,6 +188,7 @@ export class OverlayController {
 
     if (!aborted) {
       this.isOpen = toOpen;
+      this.closeIsConfirmed = false;
     }
   }
 
@@ -199,8 +205,8 @@ export class OverlayController {
   }
 
   public confirmClose(): void {
+    this.closeIsConfirmed = true;
     this.showConfirmationModal = false;
-    this.confirmOnCloseEnabled = false;
   }
 
   public cancelConfirmation(): void {
