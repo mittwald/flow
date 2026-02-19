@@ -14,8 +14,9 @@ import { ActionGroup } from "@/components/ActionGroup";
 const meta: Meta<typeof Message> = {
   title: "Chat/Message",
   component: Message,
-  parameters: {
-    controls: { exclude: ["className"] },
+  args: { type: "responder" },
+  argTypes: {
+    type: { control: "inline-radio", options: ["sender", "responder"] },
   },
   render: (props) => (
     <Message {...props}>
@@ -52,8 +53,6 @@ type Story = StoryObj<typeof Message>;
 
 export const Default: Story = {};
 
-export const Sender: Story = { args: { type: "sender" } };
-
 export const MessageOnly: Story = {
   render: (props) => (
     <Message {...props}>
@@ -66,10 +65,6 @@ export const MessageOnly: Story = {
 
 export const CustomColor: Story = {
   args: { color: "#ffeedd" },
-};
-
-export const SenderCustomColor: Story = {
-  args: { type: "sender", color: "#ffeedd" },
 };
 
 export const WithActionGroup: Story = {

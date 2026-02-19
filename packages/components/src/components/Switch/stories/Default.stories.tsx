@@ -10,6 +10,8 @@ const meta: Meta<typeof Switch> = {
   args: {
     onChange: action("onChange"),
     labelPosition: "trailing",
+    isDisabled: false,
+    isReadOnly: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
@@ -34,6 +36,3 @@ type Story = StoryObj<typeof Switch>;
 export const Default: Story = {};
 
 export const LabelLeading: Story = { args: { labelPosition: "leading" } };
-
-export const Disabled: Story = { args: { isDisabled: true } };
-export const ReadOnly: Story = { args: { isReadOnly: true } };

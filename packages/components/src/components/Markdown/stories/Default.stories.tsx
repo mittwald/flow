@@ -52,4 +52,11 @@ export const Light: Story = {
   },
 };
 
-export const WithOffset: Story = { args: { headingOffset: 2 } };
+export const WithOffset: Story = {
+  args: { headingOffset: 2 },
+  render: (props) => (
+    <Markdown {...props}>
+      {"# Heading 1 -> 3\n" + "## Heading 2 -> 4\n" + "### Heading 3 -> 5"}
+    </Markdown>
+  ),
+};

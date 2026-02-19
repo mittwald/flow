@@ -9,9 +9,14 @@ import { FieldError } from "@/components/FieldError";
 const meta: Meta<typeof DateRangePicker> = {
   title: "Form Controls/DateRangePicker",
   component: DateRangePicker,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <DateRangePicker {...props} isRequired>
-      <Label>Date</Label>
+      <Label>Date range</Label>
     </DateRangePicker>
   ),
 };
@@ -22,10 +27,8 @@ type Story = StoryObj<typeof DateRangePicker>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
 export const Invalid: Story = {
-  args: { minValue: today(getLocalTimeZone()) },
+  args: { isRequired: true },
   render: (props) => (
     <DateRangePicker
       isRequired
@@ -35,19 +38,19 @@ export const Invalid: Story = {
       }}
       {...props}
       isInvalid
+      minValue={today(getLocalTimeZone())}
     >
-      <Label>Future Date</Label>
+      <Label>Future date range</Label>
       <FieldError>Date is in the past</FieldError>
     </DateRangePicker>
   ),
 };
 
 export const FutureDatesOnly: Story = {
-  args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
-    <DateRangePicker isRequired {...props}>
-      <Label>Future Date</Label>
-      <FieldDescription>Select a future date</FieldDescription>
+    <DateRangePicker minValue={today(getLocalTimeZone())} {...props}>
+      <Label>Future date range</Label>
+      <FieldDescription>Select a future date range</FieldDescription>
     </DateRangePicker>
   ),
 };

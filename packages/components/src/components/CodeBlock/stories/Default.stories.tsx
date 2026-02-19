@@ -7,8 +7,36 @@ import { Color } from "@/components/Color";
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
   component: CodeBlock,
+  parameters: {
+    controls: {
+      exclude: [
+        "code",
+        "language",
+        "style",
+        "customStyle",
+        "codeTagProps",
+        "useInlineStyles",
+        "showInlineLineNumbers",
+        "startingLineNumber",
+        "lineNumberStyle",
+        "lineNumberContainerStyle",
+        "wrapLines",
+        "wrapLongLines",
+        "lineProps",
+        "renderer",
+        "PreTag",
+        "CodeTag",
+      ],
+    },
+  },
+  args: { copyable: false, showLineNumbers: false },
+  argTypes: {
+    color: { control: "inline-radio", options: ["default", "dark", "light"] },
+    showLineNumbers: { control: "boolean" },
+  },
   render: (props) => (
     <CodeBlock
+      language="json"
       {...props}
       code={`{
     "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
@@ -16,19 +44,12 @@ const meta: Meta<typeof CodeBlock> = {
 }`}
     />
   ),
-  args: {
-    language: "json",
-  },
 };
 export default meta;
 
 type Story = StoryObj<typeof CodeBlock>;
 
 export const Default: Story = {};
-
-export const WithLineNumbers: Story = { args: { showLineNumbers: true } };
-
-export const Copyable: Story = { args: { copyable: true } };
 
 export const Dark: Story = {
   args: {

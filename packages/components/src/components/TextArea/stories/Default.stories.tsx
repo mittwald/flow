@@ -9,6 +9,11 @@ import { FieldError } from "@/components/FieldError";
 const meta: Meta<typeof TextArea> = {
   title: "Form Controls/TextArea",
   component: TextArea,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
       <Label>Message</Label>
@@ -21,12 +26,6 @@ export default meta;
 type Story = StoryObj<typeof TextArea>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (

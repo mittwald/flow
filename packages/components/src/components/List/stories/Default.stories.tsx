@@ -57,6 +57,9 @@ const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
 const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const DomainList = typedList<Domain>();
     const availableTypes = usePromise(getTypes, []);

@@ -10,6 +10,11 @@ import { Time } from "@internationalized/date";
 const meta: Meta<typeof TimeField> = {
   title: "Form Controls/TimeField",
   component: TimeField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <TimeField onChange={action("onChange")} {...props}>
       <Label>Time</Label>
@@ -22,12 +27,6 @@ export default meta;
 type Story = StoryObj<typeof TimeField>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
 
 export const WithFieldDescription: Story = {
   render: (props) => (

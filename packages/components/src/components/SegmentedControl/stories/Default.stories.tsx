@@ -9,13 +9,16 @@ const meta: Meta<typeof SegmentedControl> = {
   title: "Form Controls/SegmentedControl",
   component: SegmentedControl,
   args: {
-    onChange: action("onChange"),
-  },
-  parameters: {
-    controls: { exclude: ["onChange"] },
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
   },
   render: (props) => (
-    <SegmentedControl {...props} defaultValue="admin">
+    <SegmentedControl
+      {...props}
+      onChange={action("onChange")}
+      defaultValue="admin"
+    >
       <Label>Role</Label>
       <Segment value="admin">Admin</Segment>
       <Segment value="member">Member</Segment>
@@ -29,8 +32,6 @@ export default meta;
 type Story = StoryObj<typeof SegmentedControl>;
 
 export const Default: Story = {};
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const CustomContainerBreakpoint: Story = {
   render: (props) => (
@@ -59,7 +60,7 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const DisabledSegments: Story = {
+export const DisabledSegment: Story = {
   render: (props) => (
     <SegmentedControl {...props}>
       <Label>Role</Label>

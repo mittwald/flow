@@ -7,6 +7,10 @@ import Section from "@/components/Section";
 const meta: Meta<typeof InlineCode> = {
   title: "Content/InlineCode",
   component: InlineCode,
+  args: { color: "default" },
+  argTypes: {
+    color: { control: "inline-radio", options: ["default", "dark", "light"] },
+  },
   render: (props) => (
     <Section>
       <Text

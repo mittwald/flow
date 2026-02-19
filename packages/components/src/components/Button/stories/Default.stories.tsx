@@ -20,6 +20,10 @@ const meta: Meta<typeof Button> = {
     color: "primary",
     size: "m",
     isDisabled: false,
+    isReadOnly: false,
+    isPending: false,
+    isSucceeded: false,
+    isFailed: false,
   },
   argTypes: {
     color: {
@@ -37,23 +41,29 @@ const meta: Meta<typeof Button> = {
     isDisabled: {
       control: "boolean",
     },
+    isReadOnly: {
+      control: "boolean",
+    },
+    isPending: {
+      control: "boolean",
+    },
+    isSucceeded: {
+      control: "boolean",
+    },
+    isFailed: {
+      control: "boolean",
+    },
   },
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => <Button {...props}>Continue/Action</Button>,
+  render: (props) => <Button {...props}>Button</Button>,
 };
 
 export default meta;
 
 type Story = StoryObj<typeof Button>;
 export const Default: Story = {};
-
-export const Small: Story = {
-  args: {
-    size: "s",
-  },
-};
 
 export const WithIcon: Story = {
   render: (props) => (
@@ -63,15 +73,6 @@ export const WithIcon: Story = {
   ),
 };
 
-export const SmallWithIcon: Story = {
-  render: (props) => (
-    <Button {...props} aria-label="Add to favorites">
-      <IconPlus />
-    </Button>
-  ),
-  args: { size: "s" },
-};
-
 export const WithTextAndIcon: Story = {
   render: (props) => (
     <Button {...props}>
@@ -79,18 +80,6 @@ export const WithTextAndIcon: Story = {
       <IconChevronDown />
     </Button>
   ),
-};
-
-export const SmallWithTextAndIcon: Story = {
-  render: (props) => (
-    <Button {...props}>
-      <Text>Add email address</Text>
-      <IconChevronDown />
-    </Button>
-  ),
-  args: {
-    size: "s",
-  },
 };
 
 export const WithAvatar: Story = {

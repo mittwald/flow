@@ -5,7 +5,6 @@ import {
   IconNotification,
   IconSearch,
   IconSettings,
-  IconSupport,
 } from "@/components/Icon/components/icons";
 import { Link } from "@/components/Link";
 import { HeaderNavigation } from "@/components/HeaderNavigation";
@@ -20,6 +19,7 @@ import ContextMenu, {
 } from "@/components/ContextMenu";
 import { Modal, ModalTrigger } from "@/components/Modal";
 import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -36,37 +36,13 @@ const meta: Meta<typeof HeaderNavigation> = {
       <Button>
         <IconSearch />
       </Button>
-    </HeaderNavigation>
-  ),
-  argTypes: {
-    color: {
-      control: "inline-radio",
-      options: ["default", "dark", "light"],
-    },
-  },
-};
-
-export default meta;
-
-type Story = StoryObj<typeof HeaderNavigation>;
-
-export const Default: Story = {};
-
-export const WithContextMenu: Story = {
-  render: (props) => (
-    <HeaderNavigation aria-label="Header navigation" {...props}>
-      <Button>
-        <IconSearch />
-      </Button>
-      <Button>
-        <IconSupport />
-      </Button>
       <ModalTrigger>
         <Button>
           <IconNotification />
         </Button>
         <Modal>
           <Heading>Notifications</Heading>
+          <Content>{dummyText.medium}</Content>
         </Modal>
       </ModalTrigger>
       <ContextMenuTrigger>
@@ -88,7 +64,20 @@ export const WithContextMenu: Story = {
       </ContextMenuTrigger>
     </HeaderNavigation>
   ),
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["default", "dark", "light"],
+    },
+  },
+  args: { color: "default" },
 };
+
+export default meta;
+
+type Story = StoryObj<typeof HeaderNavigation>;
+
+export const Default: Story = {};
 
 export const Dark: Story = {
   args: { color: "dark" },

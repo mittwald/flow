@@ -18,7 +18,7 @@ const meta: Meta<typeof Heading> = {
     },
     color: {
       control: "inline-radio",
-      options: ["default", "dark", "light"],
+      options: ["default", "danger", "unavailable", "dark", "light"],
     },
   },
   args: { level: 2 },
@@ -41,16 +41,6 @@ export const WithIcon: Story = {
   ),
 };
 
-export const WithCustomSize: Story = {
-  args: { level: 1, size: "xxl" },
-  render: (props) => (
-    <Heading level={1} size="xxl" {...props}>
-      <IconMember />
-      Personal Information
-    </Heading>
-  ),
-};
-
 export const Dark: Story = {
   args: { color: "dark" },
   globals: {
@@ -63,14 +53,6 @@ export const Light: Story = {
   globals: {
     backgrounds: "dark",
   },
-};
-
-export const Danger: Story = {
-  args: { color: "danger" },
-};
-
-export const Unavailable: Story = {
-  args: { color: "unavailable" },
 };
 
 export const Wrap: Story = {

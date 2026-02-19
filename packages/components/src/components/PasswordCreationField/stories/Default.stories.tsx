@@ -10,6 +10,11 @@ import { CopyButton } from "@/components/CopyButton";
 const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
   component: PasswordCreationField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => {
     const [value, setValue] = useState("");
 
@@ -33,12 +38,6 @@ export default meta;
 type Story = StoryObj<typeof PasswordCreationField>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
 
 export const WithPlaceholder: Story = {
   args: { placeholder: "helloMoto" },

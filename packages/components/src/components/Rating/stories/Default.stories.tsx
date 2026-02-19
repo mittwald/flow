@@ -10,8 +10,13 @@ import { Button } from "@/components/Button";
 const meta: Meta<typeof Rating> = {
   title: "Form Controls/Rating",
   component: Rating,
-  args: { defaultValue: 2 },
-  render: (props) => <Rating aria-label="Rating" {...props} />,
+  args: { size: "m", isDisabled: false, isReadOnly: false, isRequired: false },
+  argTypes: { size: { control: "inline-radio", options: ["s", "m"] } },
+  render: (props) => (
+    <Rating aria-label="Rating" defaultValue={2} {...props}>
+      <Label>Rating</Label>
+    </Rating>
+  ),
 };
 
 export default meta;
@@ -19,18 +24,6 @@ export default meta;
 type Story = StoryObj<typeof Rating>;
 
 export const Default: Story = {};
-
-export const Small: Story = { args: { size: "s" } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const WithLabel: Story = {
-  render: (props) => (
-    <Rating {...props}>
-      <Label>Rating</Label>
-    </Rating>
-  ),
-};
 
 export const WithFieldError: Story = {
   render: (props) => (

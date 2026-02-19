@@ -4,7 +4,6 @@ import { action } from "storybook/actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconDownload } from "@/components/Icon/components/icons";
-import { AlertText } from "@/components/AlertText";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -41,8 +40,6 @@ export const Inline: Story = {
   ),
 };
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
 export const WithIcon: Story = {
   render: (props) => (
     <Link {...props} href="https://mittwald.de">
@@ -74,13 +71,4 @@ export const ExternalLink: Story = {
 export const Download: Story = {
   args: { target: "_blank", download: true },
   render: (props) => <Link {...props}>Download file</Link>,
-};
-
-export const WithAlertText: Story = {
-  args: { inline: true },
-  render: (props) => (
-    <Link {...props}>
-      <AlertText status="danger">Loading failed</AlertText>
-    </Link>
-  ),
 };

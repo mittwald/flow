@@ -16,9 +16,14 @@ const meta: Meta<typeof Breadcrumb> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "dark", "light"],
+    },
+    size: {
+      control: "inline-radio",
+      options: ["s", "m"],
     },
   },
+  args: { size: "m", color: "default" },
 };
 
 export default meta;

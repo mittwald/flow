@@ -44,8 +44,28 @@ const meta: Meta<typeof Flex> = {
       control: "inline-radio",
       options: ["nowrap", "wrap", "wrap-reverse"],
     },
+    padding: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l", "xl"],
+    },
+    paddingTop: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l", "xl"],
+    },
+    paddingBottom: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l", "xl"],
+    },
+    paddingLeft: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l", "xl"],
+    },
+    paddingRight: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l", "xl"],
+    },
   },
-  args: { grow: false, direction: "row" },
+  args: { grow: false, direction: "row", gap: "xl" },
   render: (props) => (
     <Flex {...props}>
       <LayoutCard>

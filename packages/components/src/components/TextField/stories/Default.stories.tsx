@@ -11,6 +11,11 @@ import { IconStar } from "@/components/Icon/components/icons";
 const meta: Meta<typeof TextField> = {
   title: "Form Controls/TextField",
   component: TextField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <TextField onChange={action("onChange")} {...props}>
       <Label>First name</Label>
@@ -23,11 +28,6 @@ export default meta;
 type Story = StoryObj<typeof TextField>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (

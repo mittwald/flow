@@ -9,24 +9,22 @@ import { Section } from "@/components/Section";
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
   component: MarkdownEditor,
-  args: { placeholder: "Write a message..." },
-  render: (props) => <MarkdownEditor aria-label="Message" {...props} />,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
+  render: (props) => (
+    <MarkdownEditor placeholder="Write a message..." {...props}>
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
 };
 export default meta;
 
 type Story = StoryObj<typeof MarkdownEditor>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const WithLabel: Story = {
-  render: (props) => (
-    <MarkdownEditor {...props}>
-      <Label>Message</Label>
-    </MarkdownEditor>
-  ),
-};
 
 export const ShowCharacterCount: Story = {
   args: { showCharacterCount: true, maxLength: 100 },

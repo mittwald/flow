@@ -10,11 +10,6 @@ line-height:
     value: "calc({font-size-text.m} * 1.5)"
   s:
     value: "calc({font-size-text.s} * 1.5)"
-single-line-height:
-  m:
-    value: "{font-size-text.m}"
-  s:
-    value: "{font-size-text.s}"
 font-size-text:
   default:
     value: "{font-size-text.m}"

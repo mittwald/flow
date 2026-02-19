@@ -14,6 +14,10 @@ const meta: Meta<typeof LoadingSpinner> = {
       control: "inline-radio",
       options: ["s", "m", "l"],
     },
+    color: {
+      control: "inline-radio",
+      options: ["default", "dark", "light"],
+    },
   },
   args: {
     size: "m",
