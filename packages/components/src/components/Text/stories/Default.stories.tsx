@@ -3,11 +3,13 @@ import Text from "../Text";
 import React from "react";
 import { IconStar } from "../../Icon/components/icons";
 import { dummyText } from "@/lib/dev/dummyText";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",
   component: Text,
   argTypes: {
+    color: { control: "inline-radio", options: ["default", "dark", "light"] },
     align: { control: "inline-radio", options: ["start", "end", "center"] },
     wrap: { control: "inline-radio", options: ["wrap", "balance", "pretty"] },
     elementType: {
@@ -15,25 +17,27 @@ const meta: Meta<typeof Text> = {
       options: ["div", "span", "p"],
     },
   },
-  args: { align: "start", elementType: "div" },
+  args: { align: "start", elementType: "div", color: "default" },
   render: (props) => (
-    <Text {...props}>
-      {dummyText.long}
-      <br />
-      <br />
-      <small>{dummyText.medium}</small>
-      <br />
-      <br />
-      <ul>
-        <li>Unordered item</li>
-        <li>Unordered item</li>
-      </ul>
-      <br />
-      <ol>
-        <li>Ordered item</li>
-        <li>Ordered item</li>
-      </ol>
-    </Text>
+    <StoryBackground color={props.color}>
+      <Text {...props}>
+        {dummyText.long}
+        <br />
+        <br />
+        <small>{dummyText.medium}</small>
+        <br />
+        <br />
+        <ul>
+          <li>Unordered item</li>
+          <li>Unordered item</li>
+        </ul>
+        <br />
+        <ol>
+          <li>Ordered item</li>
+          <li>Ordered item</li>
+        </ol>
+      </Text>
+    </StoryBackground>
   ),
 };
 export default meta;
@@ -41,20 +45,6 @@ export default meta;
 type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {};
-
-export const Dark: Story = {
-  args: { color: "dark" },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  globals: {
-    backgrounds: "dark",
-  },
-};
 
 export const WithIcon: Story = {
   render: (props) => (

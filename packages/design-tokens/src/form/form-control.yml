@@ -20,7 +20,7 @@ form-control:
 
   placeholder-color:
     default:
-      value: "{neutral.color.900}"
+      value: "{neutral.color.700}"
     disabled:
       value: "{neutral.color.500}"
 

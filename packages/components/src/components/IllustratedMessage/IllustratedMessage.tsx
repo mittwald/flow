@@ -23,7 +23,7 @@ export const IllustratedMessage = flowComponent(
     const rootClassName = clsx(
       styles.illustratedMessage,
       className,
-      color && styles[color],
+      color && color !== "default" && styles[color],
     );
 
     const lightOrDarkColor =

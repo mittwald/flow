@@ -20,6 +20,6 @@ table:
   footer-border-width:
     value: "{border-width.200}"
   background-color:
-    value: "{neutral-outline-background-color.default}"
+    value: "{neutral.color.100}"
   background-color-accent:
     value: "{neutral.color.200}"

@@ -18,7 +18,7 @@ import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingL
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
   /** The color schema of the markdown component. */
-  color?: "dark" | "light";
+  color?: "default" | "dark" | "light";
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
   /** @internal */

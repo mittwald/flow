@@ -67,7 +67,7 @@ export const Link = flowComponent("Link", (props) => {
     : clsx(
         styles.link,
         inline && styles.inline,
-        color && styles[color],
+        (color === "light" || color === "dark") && styles[color],
         size === "s" && styles["size-s"],
         className,
       );
