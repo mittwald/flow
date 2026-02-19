@@ -4,7 +4,6 @@
     display: flex;
     position: absolute;
     overflow: hidden;
-    min-height: 50vh;
     max-height: calc(var(--visual-viewport-height) - var(--size-px--xxl));
     top: calc(var(--visual-viewport-height) / 2);
     background-color: var(--modal--background-color);
@@ -165,12 +164,15 @@
     }
 
     .modalContainer {
+      pointer-events: auto;
       margin-top: var(--size-px--xxl);
       background-color: var(--modal--background-color);
     }
 
     > div {
+      pointer-events: none;
       background-color: unset;
+      min-height: 50vh;
       max-height: calc(var(--visual-viewport-height));
       max-width: unset;
       position: sticky;

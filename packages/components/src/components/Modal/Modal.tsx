@@ -1,9 +1,4 @@
-import {
-  type PropsWithChildren,
-  type ReactNode,
-  Suspense,
-  useRef,
-} from "react";
+import { type PropsWithChildren, type ReactNode, Suspense } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -25,7 +20,7 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
-import { useInteractOutside } from "react-aria";
+import DivView from "@/views/DivView";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -67,7 +62,6 @@ export const Modal = flowComponent("Modal", (props) => {
     ref,
     className,
     offCanvasOrientation = "right",
-    isDismissable = true,
     ...overlayProps
   } = props;
 
@@ -160,28 +154,14 @@ export const Modal = flowComponent("Modal", (props) => {
     },
   };
 
-  const modalContainer = useRef<HTMLDivElement>(null);
-  // we handle dismissable by our self since we use visual tricks inside the modal content
-  // to "be displayed outside the modal" - which is technically inside so it will not be
-  // handled by the overlay "Dismissable" function
-  useInteractOutside({
-    ref: modalContainer,
-    onInteractOutside: () => {
-      if (isDismissable) {
-        controller?.close();
-      }
-    },
-  });
-
   return (
     <Overlay
-      isDismissable={false}
       className={rootClassName}
       controller={controller}
       ref={ref}
       {...overlayProps}
     >
-      <div className={styles.modalContainer} ref={modalContainer}>
+      <DivView className={styles.modalContainer}>
         <PropsContextProvider props={propsContext}>
           <Wrap if={offCanvas}>
             <Suspense fallback={<OffCanvasSuspenseFallback />}>
@@ -189,7 +169,7 @@ export const Modal = flowComponent("Modal", (props) => {
             </Suspense>
           </Wrap>
         </PropsContextProvider>
-      </div>
+      </DivView>
     </Overlay>
   );
 });
