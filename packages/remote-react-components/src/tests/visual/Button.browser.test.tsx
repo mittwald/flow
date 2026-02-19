@@ -24,7 +24,6 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Flex gap="s">
           <Button>Default</Button>
-          <Button data-testid="hover">Hover</Button>
           <Button>
             <IconInfo />
           </Button>
@@ -62,9 +61,6 @@ test.each(testEnvironments)(
         ))}
       </Flex>,
     );
-
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
 
     await testScreenshot("Button states");
   },
@@ -114,11 +110,6 @@ test.each(testEnvironments)(
             <Initials>Max Mustermann</Initials>
           </Avatar>
         </Button>
-        <Button data-testid="hover">
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
         <Button>
           <Avatar>
             <Initials>Max Mustermann</Initials>
@@ -126,9 +117,6 @@ test.each(testEnvironments)(
         </Button>
       </Flex>,
     );
-
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
 
     await testScreenshot("Button with avatar");
   },

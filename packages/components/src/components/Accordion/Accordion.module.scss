@@ -25,7 +25,7 @@
     background: none;
     width: 100%;
     transition-property: background-color;
-    transition-duration: var(--transition--duration--default);
+    transition-duration: var(--transition--duration--fast);
 
     @include focus.focus;
 
@@ -38,7 +38,7 @@
     display: grid;
     grid-template-rows: 0fr;
     transition-property: grid-template-rows, visibility;
-    transition-duration: var(--transition--duration--slow);
+    transition-duration: var(--transition--duration--default);
     visibility: hidden;
   }
 
@@ -46,12 +46,12 @@
     overflow: hidden;
     padding-inline: var(--accordion--padding-x);
     transition-property: padding;
-    transition-duration: var(--transition--duration--slow);
+    transition-duration: var(--transition--duration--default);
   }
 
   .chevron {
     transition-property: transform;
-    transition-duration: var(--transition--duration--default);
+    transition-duration: var(--transition--duration--fast);
   }
 
   &.outline {
