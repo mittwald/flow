@@ -1,7 +1,9 @@
-const isNullish = (children: React.ReactNode) =>
+import type { ReactNodeWithRenderFn } from "@/lib/react/components/Render";
+
+const isNullish = (children: ReactNodeWithRenderFn) =>
   children === null || children === undefined || children === false;
 
-export const areChildrenEmpty = (children: React.ReactNode): boolean => {
+export const areChildrenEmpty = (children: ReactNodeWithRenderFn): boolean => {
   if (isNullish(children)) {
     return true;
   }
