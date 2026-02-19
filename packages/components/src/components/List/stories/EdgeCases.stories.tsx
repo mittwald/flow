@@ -4,12 +4,10 @@ import { Content } from "@/components/Content";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { Heading } from "@/components/Heading";
 import { Initials } from "@/components/Initials";
-import { ListItemView, SortingFunctions, typedList } from "@/components/List";
+import { SortingFunctions, typedList } from "@/components/List";
 import Section from "@/components/Section";
 import { Text } from "@/components/Text";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
-import { Render } from "@/lib/react/components/Render";
-import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { SortingFn } from "@tanstack/react-table";
 import type List from "../List";
@@ -25,106 +23,6 @@ const meta: Meta<typeof List> = {
 export default meta;
 
 type Story = StoryObj<typeof List>;
-
-const apiSleep = (): Promise<void> =>
-  new Promise((res) => window.setTimeout(res, 2000));
-
-const getEmail = async (name: string) => {
-  await apiSleep();
-  return `${name}@info.de`;
-};
-
-export const LoadingListItem: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List batchSize={5} aria-label="List">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Item textValue={(item) => item.name}>
-          {(item) => (
-            <Render>
-              {() => {
-                const email = usePromise(getEmail, [item.name]);
-
-                return (
-                  <ListItemView>
-                    <Heading>{item.name}</Heading>
-                    <Text>{email}</Text>
-                  </ListItemView>
-                );
-              }}
-            </Render>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const LoadingTile: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List defaultViewMode="tiles" batchSize={5} aria-label="List">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Item showTiles showList={false} textValue={(item) => item.name}>
-          {(item) => (
-            <Render>
-              {() => {
-                const email = usePromise(getEmail, [item.name]);
-
-                return (
-                  <ListItemView>
-                    <Heading>{item.name}</Heading>
-                    <Text>{email}</Text>
-                  </ListItemView>
-                );
-              }}
-            </Render>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const LoadingTableCell: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List batchSize={5} aria-label="List" defaultViewMode="table">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Table>
-          <List.TableHeader>
-            <List.TableColumn>Name</List.TableColumn>
-            <List.TableColumn>Email</List.TableColumn>
-          </List.TableHeader>
-
-          <List.TableBody>
-            <List.TableRow>
-              <List.TableCell>{(item) => item.name}</List.TableCell>
-              <List.TableCell>
-                {(item) => (
-                  <Render>
-                    {() => {
-                      return usePromise(getEmail, [item.name]);
-                    }}
-                  </Render>
-                )}
-              </List.TableCell>
-            </List.TableRow>
-          </List.TableBody>
-        </List.Table>
-      </List.List>
-    );
-  },
-};
 
 export const VeryLongWords: Story = {
   render: () => {
@@ -198,7 +96,7 @@ const domainTypeSortingFn: SortingFn<DomainWithBigIntId> = (
   return String(valueA).localeCompare(String(valueB));
 };
 
-export const CustomSortingList = () => {
+export const CustomSorting = () => {
   const domainsWithBigInt = domains.map((domain, index) => {
     const bigIntId = BigInt(1000000000000 + index);
 

@@ -9,7 +9,7 @@ import { Notification } from "@/components/Notification";
 import { Heading } from "@/components/Heading";
 
 const meta: Meta<{ autoClose: boolean }> = {
-  title: "Status/Notifications",
+  title: "Status/Notification",
   decorators: [
     (Story) => (
       <NotificationProvider>
@@ -57,6 +57,6 @@ export default meta;
 
 type Story = StoryObj<{ autoClose: boolean }>;
 
-export const Default: Story = {};
+export const Incoming: Story = {};
 
 export const WithAutoClose: Story = { args: { autoClose: true } };

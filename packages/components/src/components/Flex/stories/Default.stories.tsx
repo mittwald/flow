@@ -79,6 +79,9 @@ const meta: Meta<typeof Flex> = {
       </LayoutCard>
     </Flex>
   ),
+  globals: {
+    backgrounds: "light",
+  },
 };
 export default meta;
 

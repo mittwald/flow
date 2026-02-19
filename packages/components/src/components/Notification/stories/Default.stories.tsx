@@ -4,9 +4,10 @@ import { Heading } from "@/components/Heading";
 import { Notification } from "@/components/Notification";
 import { Text } from "@/components/Text";
 import { action } from "storybook/actions";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Notification> = {
-  title: "Status/Notifications/Notification",
+  title: "Status/Notification",
   component: Notification,
 
   argTypes: {
@@ -15,19 +16,15 @@ const meta: Meta<typeof Notification> = {
       options: ["info", "success", "warning", "danger"],
     },
   },
-  args: {
-    status: "info",
-    onClick: action("onClick"),
-    onClose: action("onClose"),
-  },
 
   render: (props) => (
-    <Notification {...props}>
-      <Heading>Email address archived</Heading>
-      <Text>
-        Your email address <strong>example@mittwald.de</strong> has been
-        archived.
-      </Text>
+    <Notification
+      {...props}
+      onClick={action("onClick")}
+      onClose={action("onClose")}
+    >
+      <Heading>{dummyText.short}</Heading>
+      <Text>{dummyText.medium}</Text>
     </Notification>
   ),
 };
@@ -39,5 +36,10 @@ type Story = StoryObj<typeof Notification>;
 export const Default: Story = {};
 
 export const WithoutLink: Story = {
-  args: { onClick: undefined, onClose: undefined },
+  render: (props) => (
+    <Notification {...props}>
+      <Heading>{dummyText.short}</Heading>
+      <Text>{dummyText.medium}</Text>
+    </Notification>
+  ),
 };

@@ -63,10 +63,6 @@ export const WithMaxValue: Story = {
   args: { showMaxValue: true },
 };
 
-export const Small: Story = {
-  args: { size: "s" },
-};
-
 export const WithSegments: Story = {
   args: {
     segments: [
@@ -92,25 +88,6 @@ export const WithSegmentsAndUnit: Story = {
       { title: "Databases", value: 30 },
     ],
     size: "l",
-  },
-  render: (props) => (
-    <ProgressBar {...props}>
-      <Label>Storage</Label>
-    </ProgressBar>
-  ),
-};
-
-export const WithSegmentsAndWithoutLegend: Story = {
-  args: {
-    formatOptions: { style: "unit", unit: "gigabyte" },
-    showMaxValue: true,
-    maxValue: 60,
-    segments: [
-      { title: "Backups", value: 20 },
-      { title: "Databases", value: 30 },
-    ],
-    size: "s",
-    showLegend: false,
   },
   render: (props) => (
     <ProgressBar {...props}>

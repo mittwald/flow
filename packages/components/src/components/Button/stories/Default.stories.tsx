@@ -10,6 +10,7 @@ import { Tooltip } from "@/components/Tooltip";
 import TooltipTrigger from "@/components/Tooltip/components/TooltipTrigger";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Image } from "@/components/Image";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",
@@ -57,7 +58,11 @@ const meta: Meta<typeof Button> = {
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => <Button {...props}>Button</Button>,
+  render: (props) => (
+    <StoryBackground color={props.color}>
+      <Button {...props}>Button</Button>
+    </StoryBackground>
+  ),
 };
 
 export default meta;
@@ -67,22 +72,29 @@ export const Default: Story = {};
 
 export const WithIcon: Story = {
   render: (props) => (
-    <Button {...props} aria-label="Add to favorites">
-      <IconPlus />
-    </Button>
+    <StoryBackground color={props.color}>
+      <Button {...props} aria-label="Add to favorites">
+        <IconPlus />
+      </Button>
+    </StoryBackground>
   ),
 };
 
 export const WithTextAndIcon: Story = {
   render: (props) => (
-    <Button {...props}>
-      <Text>Add email address</Text>
-      <IconChevronDown />
-    </Button>
+    <StoryBackground color={props.color}>
+      <Button {...props}>
+        <Text>Add email address</Text>
+        <IconChevronDown />
+      </Button>
+    </StoryBackground>
   ),
 };
 
 export const WithAvatar: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <TooltipTrigger>
       <Button {...props}>
