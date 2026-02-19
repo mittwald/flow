@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.691](https://github.com/mittwald/flow/compare/0.2.0-alpha.690...0.2.0-alpha.691) (2026-02-19)
+
+### Bug Fixes
+
+* **PasswordCreationField:** remove HIBP rule from default password policy ([#2331](https://github.com/mittwald/flow/issues/2331)) ([ca7173d](https://github.com/mittwald/flow/commit/ca7173de09bea3c3e67bf9eb8c2ada6dee09ee58))
+
 # [0.2.0-alpha.690](https://github.com/mittwald/flow/compare/0.2.0-alpha.689...0.2.0-alpha.690) (2026-02-18)
 
 ### Bug Fixes
