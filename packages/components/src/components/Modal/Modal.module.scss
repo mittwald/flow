@@ -9,6 +9,11 @@
     align-items: center;
     inset: 0;
     padding: var(--size-px--xxl);
+    pointer-events: none;
+
+    > div {
+      pointer-events: auto;
+    }
   }
 
   [role="dialog"],
@@ -161,14 +166,19 @@
 @media (max-width: 550px) {
   .modal {
     > div {
-      position: sticky;
-      display: block;
+      display: flex;
+      width: 100%;
       overflow: hidden auto;
       inset: unset;
       padding: 0;
+      max-height: calc(var(--visual-viewport-height));
+      justify-content: flex-start;
 
       > div {
-        margin-top: var(--size-px--xxl);
+        overflow: auto;
+        width: 100%;
+        margin-top: auto;
+        pointer-events: none;
       }
 
       &[data-entering] {
@@ -180,10 +190,14 @@
       }
     }
 
+    [role="dialog"] {
+      margin-top: var(--size-px--xxl);
+    }
+
     [role="dialog"],
     [role="dialog"] > form {
       max-height: unset;
-      width: 100vw;
+      pointer-events: auto;
     }
   }
 }

@@ -6,7 +6,6 @@
   isolation: isolate;
   width: 100vw;
   height: var(--page-height);
-  pointer-events: none;
 
   &[data-entering] {
     animation: overlay-fade var(--transition--duration--slow);
@@ -21,10 +20,6 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-  }
-
-  .container {
-    pointer-events: all;
   }
 }
 
