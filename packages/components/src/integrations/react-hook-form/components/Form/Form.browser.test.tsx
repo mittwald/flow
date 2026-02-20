@@ -52,11 +52,14 @@ describe("resetting", () => {
     });
     const Field = typedField(form);
 
+    const isDirty = form.formState.isDirty;
+
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
         <Field {...props.textField} name="test">
           <TextField aria-label="test" />
         </Field>
+        {isDirty && <span data-testid="dirty">dirty</span>}
         <Button
           onPress={() => {
             if (resetValueTo) {
@@ -112,6 +115,41 @@ describe("resetting", () => {
       expect(field).toHaveDisplayValue(expected);
     },
   );
+
+  test("Form is not dirty after reset when field has default value", async () => {
+    await render(
+      <TestForm
+        textField={{
+          defaultValue: "default",
+        }}
+      />,
+    );
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
+
+  test("Form is not dirty after reset when form has default value", async () => {
+    initialValue = "default";
+    await render(<TestForm />);
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
 });
 
 describe("submission", () => {

@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.694](https://github.com/mittwald/flow/compare/0.2.0-alpha.693...0.2.0-alpha.694) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.693](https://github.com/mittwald/flow/compare/0.2.0-alpha.692...0.2.0-alpha.693) (2026-02-19)
+
+### Bug Fixes
+
+* **Modal:** do not show close confirmation when form is resetted ([46277ba](https://github.com/mittwald/flow/commit/46277ba7752a4e987d5b42c1f4ed42159ea3ad88))
+
+# [0.2.0-alpha.692](https://github.com/mittwald/flow/compare/0.2.0-alpha.691...0.2.0-alpha.692) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.691](https://github.com/mittwald/flow/compare/0.2.0-alpha.690...0.2.0-alpha.691) (2026-02-19)
+
+### Bug Fixes
+
+* **PasswordCreationField:** remove HIBP rule from default password policy ([#2331](https://github.com/mittwald/flow/issues/2331)) ([ca7173d](https://github.com/mittwald/flow/commit/ca7173de09bea3c3e67bf9eb8c2ada6dee09ee58))
+
+# [0.2.0-alpha.690](https://github.com/mittwald/flow/compare/0.2.0-alpha.689...0.2.0-alpha.690) (2026-02-18)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fixes clipboard data not present ([#2324](https://github.com/mittwald/flow/issues/2324)) ([89ab5b1](https://github.com/mittwald/flow/commit/89ab5b14b25ea2ddde782ea8a0a22d432d54f1f1))
+
+# [0.2.0-alpha.689](https://github.com/mittwald/flow/compare/0.2.0-alpha.688...0.2.0-alpha.689) (2026-02-18)
+
+### Bug Fixes
+
+* **table:** set border collapse to initial ([#2330](https://github.com/mittwald/flow/issues/2330)) ([9b55a74](https://github.com/mittwald/flow/commit/9b55a740ee35e0ab4489ed94cfff525d2a592521))
+
+# [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
+
+### Bug Fixes
+
+* **Form:** form should not be dirty after resetting ([d7eb0eb](https://github.com/mittwald/flow/commit/d7eb0eb995d6d9751feccb9ed6b51a7a8a605b4a))
+
 # [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
 
 ### Bug Fixes

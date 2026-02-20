@@ -25,6 +25,10 @@ export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
 export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
+export interface FormAutoResetOptions {
+  onAfterModalClose?: boolean;
+}
+
 type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
@@ -39,6 +43,7 @@ export interface FormProps<F extends FieldValues>
   onSubmit: FormOnSubmitHandler<F>;
   formComponent?: FC<Omit<FormComponentType, "ref">>;
   isReadOnly?: boolean;
+  autoReset?: FormAutoResetOptions | boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
@@ -52,6 +57,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     isReadOnly,
     ref,
     id: idProp,
+    autoReset = true,
     ...formProps
   } = props;
 
@@ -61,10 +67,20 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
   const { isSubmitting, isValidating, isDirty } = form.formState;
 
+  const autoResetOptions =
+    typeof autoReset === "boolean"
+      ? { onAfterModalClose: autoReset }
+      : autoReset;
+
   const modalController = useModalController();
   modalController.useUpdateOptions({
     confirmOnClose:
       flags.requireCloseModalConfirmationOnUnsavedChanges && isDirty,
+    onClose: () => {
+      if (autoResetOptions?.onAfterModalClose) {
+        form.reset();
+      }
+    },
   });
 
   const handleSubmitResult = (result: unknown) => {
