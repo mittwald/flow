@@ -9,6 +9,11 @@
     align-items: center;
     inset: 0;
     padding: var(--size-px--xxl);
+    pointer-events: none;
+
+    > div {
+      pointer-events: auto;
+    }
   }
 
   [role="dialog"],
