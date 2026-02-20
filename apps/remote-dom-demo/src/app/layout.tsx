@@ -1,22 +1,21 @@
 "use client";
 import {
-  HeaderNavigation,
-  Link,
-  Notification,
+  Flex,
+  Heading,
+  LayoutCard,
+  Navigation,
+  NavigationGroup,
   NotificationProvider,
-  Render,
-  Separator,
-  Text,
-  useNotificationController,
 } from "@mittwald/flow-react-components";
 import "@mittwald/flow-react-components/all.css";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import type { ErrorComponent } from "next/dist/client/components/error-boundary";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
-import styles from "./layout.module.css";
+import styles from "./layout.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
+import { NavigationItem } from "@/app/_components/NavigationItem";
 
 const Error: ErrorComponent = (props) => {
   return <>REMOTE RENDER ERROR: {props.error.message}</>;
@@ -25,63 +24,74 @@ const Error: ErrorComponent = (props) => {
 export default function Layout(props: PropsWithChildren) {
   return (
     <html lang="en">
-      <body>
+      <body className={styles.body}>
         <RouterProvider>
           <NotificationProvider>
             <div className={styles.rootContainer}>
-              <HeaderNavigation>
-                <Link href="/host/non-interactive">Non-interactive</Link>
-                <Link href="/host/event-handler">Event handler</Link>
-                <Link href="/host/context-menu">Context Menu</Link>
-                <Link href="/host/popover">Popover</Link>
-                <Link href="/host/markdown">Markdown</Link>
-                <Link href="/host/chart">Chart</Link>
-                <Link href="/host/modal">Modal</Link>
-                <Link href="/host/notification">Notifications</Link>
-                <Render>
-                  {() => {
-                    const notifications = useNotificationController();
-                    return (
-                      <Link
-                        onPress={() =>
-                          notifications.add(
-                            <Notification>
-                              <Text>Host notification</Text>
-                            </Notification>,
-                          )
-                        }
-                      >
-                        Host notification
-                      </Link>
-                    );
-                  }}
-                </Render>
-                <Link href="/host/overlay-controller">Overlay controller</Link>
-                <Link href="/host/simple-form">Simple Form</Link>
-                <Link href="/host/action-form">Action Form</Link>
-                <Link href="/host/react-hook-form">React Hook Form</Link>
-                <Link href="/host/files">Files</Link>
-                <Link href="/host/suspense">Suspense</Link>
-                <Link href="/host/mstudio-loading">mStudio loading</Link>
-                <Link href="/host/tunnel">Tunnel</Link>
-                <Link href="/host/ext-bridge">Ext Bridge</Link>
-                <Link href="/host/error">Error</Link>
-                <Link href="/host/svg">Icon/SVG</Link>
-                <Link href="/host/list">List</Link>
-                <Link href="/host/navigation">Navigation</Link>
-                <Link href="/host/performance">Performance</Link>
-                <TunnelExit id="remote-demo" />
-              </HeaderNavigation>
-              <Separator />
-              <main>
-                <div>
-                  <ErrorBoundary errorComponent={Error}>
-                    <Suspense fallback={<LoadingMessage />}>
-                      {props.children}
-                    </Suspense>
-                  </ErrorBoundary>
-                </div>
-              </main>
+              <Heading level={1}>Remote Dom Demo</Heading>
+              <Flex gap="m">
+                <LayoutCard className={styles.navigation}>
+                  <Navigation>
+                    <NavigationItem page="non-interactive">
+                      Non-interactive
+                    </NavigationItem>
+                    <NavigationItem page="event-handler">
+                      Event handler
+                    </NavigationItem>
+                    <NavigationItem page="simple-form">
+                      Simple Form
+                    </NavigationItem>
+                    <NavigationItem page="action-form">
+                      Action Form
+                    </NavigationItem>
+                    <NavigationItem page="react-hook-form">
+                      React Hook Form
+                    </NavigationItem>
+                    <NavigationItem page="files">Files</NavigationItem>
+                    <NavigationItem page="suspense">Suspense</NavigationItem>
+                    <NavigationItem page="mstudio-loading">
+                      mStudio loading
+                    </NavigationItem>
+                    <NavigationItem page="tunnel">Tunnel</NavigationItem>
+                    <NavigationItem page="ext-bridge">
+                      Ext Bridge
+                    </NavigationItem>
+                    <NavigationItem page="error">Error</NavigationItem>
+                    <NavigationItem page="navigation">
+                      Navigation
+                    </NavigationItem>
+                    <NavigationItem page="performance">
+                      Performance
+                    </NavigationItem>
+
+                    <NavigationGroup collapsable>
+                      <NavigationItem page="chart">Chart</NavigationItem>
+                      <Heading>Components</Heading>
+                      <NavigationItem page="context-menu">
+                        Context Menu
+                      </NavigationItem>
+                      <NavigationItem page="svg">Icon/SVG</NavigationItem>
+                      <NavigationItem page="list">List</NavigationItem>
+                      <NavigationItem page="markdown">Markdown</NavigationItem>
+                      <NavigationItem page="modal">Modal</NavigationItem>
+                      <NavigationItem page="notification">
+                        Notifications
+                      </NavigationItem>
+                      <NavigationItem page="popover">Popover</NavigationItem>
+                    </NavigationGroup>
+                    <TunnelExit id="remote-demo" />
+                  </Navigation>
+                </LayoutCard>
+                <LayoutCard elementType="main" className={styles.main}>
+                  <div>
+                    <ErrorBoundary errorComponent={Error}>
+                      <Suspense fallback={<LoadingMessage />}>
+                        {props.children}
+                      </Suspense>
+                    </ErrorBoundary>
+                  </div>
+                </LayoutCard>
+              </Flex>
             </div>
           </NotificationProvider>
         </RouterProvider>
