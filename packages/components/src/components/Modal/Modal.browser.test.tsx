@@ -141,6 +141,51 @@ test("Modal with dirty form requires confirmation", async () => {
   expect(modalText).not.toBeInTheDocument();
 });
 
+test("Modal with resetted form does not require confirmation", async () => {
+  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
+
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <Modal isDefaultOpen>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Form form={form} onSubmit={vitest.fn()}>
+            <Field name="testField" defaultValue="">
+              <TextField />
+            </Field>
+            <Action closeModal>
+              <Button>Try close</Button>
+            </Action>
+            <Action onAction={() => form.reset()}>
+              <Button>Reset form</Button>
+            </Action>
+          </Form>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const resetFormButton = dom.getByRole("button", {
+    name: "Reset form",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(resetFormButton);
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).not.toBeInTheDocument();
+});
+
 test("Modal with dirty form does not require confirmation when using abort button", async () => {
   flags.requireCloseModalConfirmationOnUnsavedChanges = true;
 
@@ -183,4 +228,102 @@ test("Modal with dirty form does not require confirmation when using abort butto
     await userEvent.click(abortButton);
     expect(modalText).not.toBeInTheDocument();
   }
+});
+
+test("Form in Modal is auto-resetted on close", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ModalTrigger>
+        <Button>Open Modal</Button>
+        <Modal>
+          <Content>
+            {form.formState.isDirty && (
+              <Text data-testid="is-dirty">is dirty</Text>
+            )}
+            <Form form={form} onSubmit={vitest.fn()}>
+              <Field name="testField" defaultValue="">
+                <TextField />
+              </Field>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button>Close</Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const isDirtyText = dom.getByTestId("is-dirty");
+  const closeButton = dom.getByRole("button", {
+    name: "Close",
+    exact: true,
+  });
+  const openModalButton = dom.getByRole("button", {
+    name: "Open Modal",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.click(openModalButton);
+  await userEvent.fill(input, "Some changes");
+  expect(isDirtyText).toBeInTheDocument();
+  await userEvent.click(closeButton);
+  await userEvent.click(openModalButton);
+  expect(isDirtyText).not.toBeInTheDocument();
+});
+
+test("Form in Modal is not auto-resetted on close when opted-out", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ModalTrigger>
+        <Button>Open Modal</Button>
+        <Modal>
+          <Content>
+            {form.formState.isDirty && (
+              <Text data-testid="is-dirty">is dirty</Text>
+            )}
+            <Form form={form} onSubmit={vitest.fn()} autoReset={false}>
+              <Field name="testField" defaultValue="">
+                <TextField />
+              </Field>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button>Close</Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const isDirtyText = dom.getByTestId("is-dirty");
+  const closeButton = dom.getByRole("button", {
+    name: "Close",
+    exact: true,
+  });
+  const openModalButton = dom.getByRole("button", {
+    name: "Open Modal",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.click(openModalButton);
+  await userEvent.fill(input, "Some changes");
+  expect(isDirtyText).toBeInTheDocument();
+  await userEvent.click(closeButton);
+  await userEvent.click(openModalButton);
+  expect(isDirtyText).toBeInTheDocument();
 });
