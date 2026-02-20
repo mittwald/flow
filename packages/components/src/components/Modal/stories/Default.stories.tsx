@@ -14,7 +14,6 @@ import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
-import Align from "@/components/Align";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
@@ -34,12 +33,17 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m"],
+      options: ["s", "m", "l"],
+    },
+    offCanvasOrientation: {
+      control: "inline-radio",
+      options: ["left", "right"],
     },
   },
   args: {
     size: "s",
     offCanvas: false,
+    offCanvasOrientation: "right",
   },
   render: (props) => {
     return (
@@ -85,23 +89,14 @@ export const WithController: Story = {
 
     return (
       <>
-        <Button color="primary" onPress={controller.open}>
-          Create customer
-        </Button>
+        <Button onPress={controller.open}>Open controller</Button>
         <Modal {...props} controller={controller}>
-          <Heading>New Customer</Heading>
+          <Heading>Heading</Heading>
           <Content>
-            <Text>
-              Create a new customer to manage your projects, members and
-              payments.
-            </Text>
-            <TextField>
-              <Label>Customer name</Label>
-            </TextField>
+            <Text>{dummyText.long}</Text>
           </Content>
           <ActionGroup>
             <Action closeModal>
-              <Button color="accent">Create customer</Button>
               <Button color="secondary" variant="soft">
                 Abort
               </Button>
@@ -116,16 +111,15 @@ export const WithController: Story = {
 export const WithTrigger: Story = {
   render: (props) => (
     <ModalTrigger>
-      <Button color="danger">Delete project</Button>
+      <Button>Trigger</Button>
       <Modal {...props}>
-        <Heading>Delete project</Heading>
+        <Heading>Heading</Heading>
         <Content>
-          <Text>Are you sure you want to delete this project?</Text>
+          <Text>{dummyText.long}</Text>
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button color="danger">Delete project</Button>
-            <Button variant="soft" color="secondary">
+            <Button color="secondary" variant="soft">
               Abort
             </Button>
           </Action>
@@ -135,44 +129,27 @@ export const WithTrigger: Story = {
   ),
 };
 
-export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
-};
-
-export const OffCanvas: Story = {
-  args: { offCanvas: true },
-};
-
-export const OffCanvasOrientationLeft: Story = {
-  args: { offCanvas: true, offCanvasOrientation: "left" },
-};
-
-export const OffCanvasMobile: Story = {
-  args: { offCanvas: true },
-  parameters: { viewport: { defaultViewport: "mobile1" } },
-};
-
 export const WithForm: Story = {
   render: (props) => {
     const form = useForm<{ name: string }>({
       defaultValues: { name: "" },
     });
-    const modalController = useModalController();
+    const controller = useModalController();
 
     return (
       <>
-        <Button color="accent" onPress={modalController.open}>
+        <Button color="accent" onPress={controller.open}>
           Add customer
         </Button>
 
         <Modal
           {...props}
-          controller={modalController}
+          controller={controller}
           onClose={() => {
             form.reset();
           }}
         >
-          <Form form={form} onSubmit={() => () => modalController.close()}>
+          <Form form={form} onSubmit={() => () => controller.close()}>
             <Heading>Add Customer</Heading>
             <Content>
               <Field name="name" rules={{ required: "Please enter a name" }}>
@@ -196,82 +173,7 @@ export const WithForm: Story = {
   },
 };
 
-export const OffCanvasWithForm: Story = {
-  render: (props) => {
-    const form = useForm<{ name: string }>();
-    const modalController = useModalController();
-
-    return (
-      <>
-        <Button color="accent" onPress={modalController.open}>
-          Add customer
-        </Button>
-
-        <Modal offCanvas {...props} controller={modalController}>
-          <Form form={form} onSubmit={() => modalController.close()}>
-            <Heading>Add customer</Heading>
-            <Content>
-              <Field name="name" rules={{ required: "Please enter a name" }}>
-                <TextField>
-                  <Label>Customer name</Label>
-                </TextField>
-              </Field>
-            </Content>
-            <ActionGroup>
-              <SubmitButton color="accent">Submit</SubmitButton>
-              <Action closeModal>
-                <Button variant="soft" color="secondary">
-                  Abort
-                </Button>
-              </Action>
-            </ActionGroup>
-          </Form>
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const WithFormInside: Story = {
-  render: (props) => {
-    const form = useForm<{ name: string }>();
-    const modalController = useModalController();
-
-    return (
-      <>
-        <Button color="accent" onPress={modalController.open}>
-          Add nameservers
-        </Button>
-
-        <Modal {...props} controller={modalController}>
-          <Heading>Add nameservers</Heading>
-          <Content>
-            <Form form={form} onSubmit={() => modalController.close()}>
-              <Align>
-                <Field name="name" rules={{ required: "Please enter a name" }}>
-                  <TextField>
-                    <Label>Nameservers</Label>
-                  </TextField>
-                </Field>
-                <SubmitButton>Add</SubmitButton>
-              </Align>
-            </Form>
-          </Content>
-          <ActionGroup>
-            <Button color="accent">Submit</Button>
-            <Action closeModal>
-              <Button variant="soft" color="secondary">
-                Abort
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const LargeOffCanvas: Story = {
+export const WithColumnLayout: Story = {
   args: { size: "l", offCanvas: true },
   render: (props) => {
     return (
@@ -310,73 +212,6 @@ export const LargeOffCanvas: Story = {
   },
 };
 
-export const WithSubHeadings: Story = {
-  args: { size: "l", offCanvas: true },
-  render: (props) => {
-    return (
-      <ModalTrigger {...props}>
-        <Button>Add SFTP user</Button>
-        <Modal size="m" offCanvas>
-          <Heading>Add SFTP user</Heading>
-          <Content>
-            <Section>
-              <Heading>Description</Heading>
-              <Text>
-                An SFTP user allows you to connect to your project, for example
-                to upload files.
-              </Text>
-              <ColumnLayout m={[1, 1]}>
-                <TextField isRequired>
-                  <Label>Name</Label>
-                </TextField>
-                <DatePicker>
-                  <Label>Expiration Date</Label>
-                  <FieldDescription>
-                    After this date, the SFTP user will be deleted.
-                  </FieldDescription>
-                </DatePicker>
-              </ColumnLayout>
-            </Section>
-            <Section>
-              <Heading>Permissions</Heading>
-              <Text>Select the permissions the SFTP user should have.</Text>
-              <RadioGroup s={[1, 1]} defaultValue="read&write">
-                <RadioButton value="write">
-                  <Text>Read Access</Text>
-                  <Content>The SFTP user can view and download files.</Content>
-                </RadioButton>
-                <RadioButton value="read&write">
-                  <Text>Read and Write Access</Text>
-                  <Content>
-                    The SFTP user can view, edit, upload, and download files.
-                  </Content>
-                </RadioButton>
-              </RadioGroup>
-            </Section>
-            <Section>
-              <Heading>Directory Selection</Heading>
-              <Text>
-                Specify the directory the SFTP user should have access to.
-              </Text>
-              <TextField isRequired>
-                <Label>Path</Label>
-              </TextField>
-            </Section>
-          </Content>
-          <ActionGroup>
-            <Action closeModal>
-              <Button color="accent">Create SFTP User</Button>
-              <Button variant="soft" color="secondary">
-                Cancel
-              </Button>
-            </Action>
-          </ActionGroup>
-        </Modal>
-      </ModalTrigger>
-    );
-  },
-};
-
 const loadingPromise = new Promise(() => {
   // no resolve
 });
@@ -395,4 +230,72 @@ export const WithSuspense: Story = {
       </Modal>
     );
   },
+};
+
+export const LongContent: Story = {
+  render: (props) => (
+    <Modal {...props} isOpen>
+      <Heading>{dummyText.short}</Heading>
+      <Content>
+        <Section>
+          <Heading>Description</Heading>
+          <Text>
+            An SFTP user allows you to connect to your project, for example to
+            upload files.
+          </Text>
+          <ColumnLayout m={[1, 1]}>
+            <TextField isRequired>
+              <Label>Name</Label>
+            </TextField>
+            <DatePicker>
+              <Label>Expiration Date</Label>
+              <FieldDescription>
+                After this date, the SFTP user will be deleted.
+              </FieldDescription>
+            </DatePicker>
+          </ColumnLayout>
+
+          <Heading>Permissions</Heading>
+          <Text>Select the permissions the SFTP user should have.</Text>
+          <RadioGroup s={[1, 1]} defaultValue="read&write">
+            <RadioButton value="write">
+              <Text>Read Access</Text>
+              <Content>The SFTP user can view and download files.</Content>
+            </RadioButton>
+            <RadioButton value="read&write">
+              <Text>Read and Write Access</Text>
+              <Content>
+                The SFTP user can view, edit, upload, and download files.
+              </Content>
+            </RadioButton>
+          </RadioGroup>
+
+          <Heading>Directory Selection</Heading>
+          <Text>
+            Specify the directory the SFTP user should have access to.
+          </Text>
+          <TextField isRequired>
+            <Label>Path</Label>
+          </TextField>
+
+          <Heading>{dummyText.short}</Heading>
+          <Text>{dummyText.long}</Text>
+          <Heading>{dummyText.short}</Heading>
+          <Text>{dummyText.long}</Text>
+          <Heading>{dummyText.short}</Heading>
+          <Text>{dummyText.long}</Text>
+          <Heading>{dummyText.short}</Heading>
+          <Text>{dummyText.long}</Text>
+        </Section>
+      </Content>
+      <ActionGroup>
+        <Action closeModal>
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+        </Action>
+      </ActionGroup>
+    </Modal>
+  ),
 };

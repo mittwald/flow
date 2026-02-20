@@ -82,7 +82,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -112,6 +112,63 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Section>
+          <Field name="field">
+            <ComboBox>
+              <Label>
+                Domain
+                <ContextualHelpTrigger>
+                  <Button />
+                  <ContextualHelp>
+                    <Text>{dummyText.short}</Text>
+                  </ContextualHelp>
+                </ContextualHelpTrigger>
+              </Label>
+              <Option>mydomain.de</Option>
+              <Option>shop.mydomain.de</Option>
+              <Option>anotherdomain.com</Option>
+              <Option>www.anotherdomain.com</Option>
+              <Option>anotherdomain.com/shop</Option>
+              <Option>anotherdomain.com/blog</Option>
+              <Option>onemoredomain.de</Option>
+              <Option>www.onemoredomain.de</Option>
+            </ComboBox>
+          </Field>
+          <ComboBox isInvalid>
+            <Label>
+              Domain
+              <ContextualHelpTrigger>
+                <Button />
+                <ContextualHelp>
+                  <Text>{dummyText.short}</Text>
+                </ContextualHelp>
+              </ContextualHelpTrigger>
+            </Label>
+            <Option>mydomain.de</Option>
+            <Option>shop.mydomain.de</Option>
+            <Option>anotherdomain.com</Option>
+            <Option>www.anotherdomain.com</Option>
+            <Option>anotherdomain.com/shop</Option>
+            <Option>anotherdomain.com/blog</Option>
+            <Option>onemoredomain.de</Option>
+            <Option>www.onemoredomain.de</Option>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
+          </ComboBox>
+        </Section>
+      </Form>
+    );
+  },
+};
+
+export const WithFocus: Story = {
+  render: () => {
+    const form = useForm({
+      defaultValues: {
+        field: "",
+      },
+    });
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <ComboBox>
             <Label>
@@ -133,78 +190,33 @@ export const WithFieldError: Story = {
             <Option>www.onemoredomain.de</Option>
           </ComboBox>
         </Field>
-        <ComboBox isInvalid>
-          <Label>
-            Domain
-            <ContextualHelpTrigger>
-              <Button />
-              <ContextualHelp>
-                <Text>{dummyText.short}</Text>
-              </ContextualHelp>
-            </ContextualHelpTrigger>
-          </Label>
-          <Option>mydomain.de</Option>
-          <Option>shop.mydomain.de</Option>
-          <Option>anotherdomain.com</Option>
-          <Option>www.anotherdomain.com</Option>
-          <Option>anotherdomain.com/shop</Option>
-          <Option>anotherdomain.com/blog</Option>
-          <Option>onemoredomain.de</Option>
-          <Option>www.onemoredomain.de</Option>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </ComboBox>
-      </Form>
-    );
-  },
-};
-
-export const WithFocus: Story = {
-  render: () => {
-    const form = useForm({
-      defaultValues: {
-        field: "",
-      },
-    });
-    return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <ComboBox>
-            <Label>
-              Domain
-              <ContextualHelpTrigger>
-                <Button />
-                <ContextualHelp>
-                  <Text>{dummyText.short}</Text>
-                </ContextualHelp>
-              </ContextualHelpTrigger>
-            </Label>
-            <Option>mydomain.de</Option>
-            <Option>shop.mydomain.de</Option>
-            <Option>anotherdomain.com</Option>
-            <Option>www.anotherdomain.com</Option>
-            <Option>anotherdomain.com/shop</Option>
-            <Option>anotherdomain.com/blog</Option>
-            <Option>onemoredomain.de</Option>
-            <Option>www.onemoredomain.de</Option>
-          </ComboBox>
-        </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

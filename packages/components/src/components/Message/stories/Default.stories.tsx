@@ -22,7 +22,7 @@ const meta: Meta<typeof Message> = {
     <Message {...props}>
       <Header>
         <ContextMenuTrigger>
-          <Button />
+          <Button aria-label="Aktionen" />
           <ContextMenu>
             <MenuItem>Bearbeiten</MenuItem>
             <MenuItem>Löschen</MenuItem>
