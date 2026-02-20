@@ -9,11 +9,6 @@
     align-items: center;
     inset: 0;
     padding: var(--size-px--xxl);
-    pointer-events: none;
-
-    > div {
-      pointer-events: auto;
-    }
   }
 
   [role="dialog"],
@@ -178,7 +173,6 @@
         overflow: auto;
         width: 100%;
         margin-top: auto;
-        pointer-events: none;
       }
 
       &[data-entering] {
@@ -190,14 +184,9 @@
       }
     }
 
-    [role="dialog"] {
-      margin-top: var(--size-px--xxl);
-    }
-
     [role="dialog"],
     [role="dialog"] > form {
       max-height: unset;
-      pointer-events: auto;
     }
   }
 }
