@@ -1,7 +1,7 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import { ActionExecutionBatch } from "@/components/Action/models/ActionExecutionBatch";
 import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
-import { MutedActionError } from "@/components/Action/MutedActionError";
+import { AbortActionError } from "@/components/Action/AbortActionError";
 
 export class ActionExecution {
   private readonly action: ActionModel;
@@ -21,11 +21,11 @@ export class ActionExecution {
       const maybePromise = executeBatchedActions(...args);
       if (maybePromise instanceof Promise) {
         maybePromise.catch((error) => {
-          MutedActionError.rethrowIfNotMuted(error);
+          AbortActionError.rethrowIfNotAborted(error);
         });
       }
     } catch (error) {
-      MutedActionError.rethrowIfNotMuted(error);
+      AbortActionError.rethrowIfNotAborted(error);
     }
   };
 
