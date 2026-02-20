@@ -38,7 +38,7 @@ const checkIsPath = (path: string) => path.endsWith("/");
 const checkIsFile = (path: string) => !checkIsPath(path);
 
 const meta: Meta<typeof ComboBox> = {
-  title: "Form Controls/ComboBox/Examples/FileComboBox",
+  title: "Form Controls/ComboBox/FileComboBox",
   component: ComboBox,
   render: (props) => {
     const [value, setValue] = useState("/");
