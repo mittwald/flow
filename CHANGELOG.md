@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.695](https://github.com/mittwald/flow/compare/0.2.0-alpha.694...0.2.0-alpha.695) (2026-02-20)
+
+### Bug Fixes
+
+* **Tab:** fix tab does not change in controlled-mode ([2d206d4](https://github.com/mittwald/flow/commit/2d206d4ea3f4a0bf68501ca8c27ded67b9919a07))
+
 # [0.2.0-alpha.694](https://github.com/mittwald/flow/compare/0.2.0-alpha.693...0.2.0-alpha.694) (2026-02-19)
 
 **Note:** Version bump only for package @mittwald/flow-project
