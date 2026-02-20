@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
@@ -10,6 +9,8 @@ import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
 import { AlertIcon } from "@/components/AlertIcon";
+import { useEffect, useState } from "react";
+import type { Key } from "react-aria";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
@@ -69,5 +70,46 @@ export const SmallSpace: Story = {
 };
 
 export const Controlled: Story = {
-  args: { selectedKey: "storage" },
+  render: (props) => {
+    const [selectedKey, setSelectedKey] = useState<Key>("general");
+
+    return (
+      <Tabs
+        {...props}
+        selectedKey={selectedKey}
+        onSelectionChange={(key) => setSelectedKey(key)}
+      >
+        <Tab id="general">
+          <TabTitle>General</TabTitle>
+        </Tab>
+        <Tab id="storage">
+          <TabTitle>Storage settings</TabTitle>
+        </Tab>
+      </Tabs>
+    );
+  },
+};
+
+export const WithLinks: Story = {
+  render: (props) => {
+    const [tab, setTab] = useState("general");
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setTab(window.location.hash.slice(1));
+      }, 100);
+      return () => clearInterval(interval);
+    }, [setTab]);
+
+    return (
+      <Tabs {...props} selectedKey={tab}>
+        <Tab id="general">
+          <TabTitle href="#general">General</TabTitle>
+        </Tab>
+        <Tab id="storage">
+          <TabTitle href="#storage">Storage settings</TabTitle>
+        </Tab>
+      </Tabs>
+    );
+  },
 };
