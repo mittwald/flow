@@ -38,6 +38,10 @@ const meta: Meta<typeof Chat> = {
 };
 export default meta;
 
+type Story = StoryObj<typeof Autocomplete>;
+
+export const Default: Story = {};
+
 export const FixedOptions: Story = {
   render: () => (
     <Autocomplete>
@@ -50,7 +54,3 @@ export const FixedOptions: Story = {
     </Autocomplete>
   ),
 };
-
-type Story = StoryObj<typeof Autocomplete>;
-
-export const Default: Story = {};

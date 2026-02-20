@@ -18,7 +18,7 @@ const meta: Meta<typeof Notification> = {
       options: ["info", "success", "warning", "danger"],
     },
   },
-
+  args: { status: "info" },
   render: (props) => (
     <Notification
       {...props}

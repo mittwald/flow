@@ -23,6 +23,7 @@ import Content from "@/components/Content";
 import ActionGroup from "@/components/ActionGroup";
 import { Badge } from "@/components/Badge";
 import React from "react";
+import Alert from "@/components/Alert";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -54,6 +55,9 @@ export const Default: Story = {
 export const MultipleSections: Story = {
   render: (props) => (
     <>
+      <Alert>
+        <Heading>Alert above sections</Heading>
+      </Alert>
       <Section {...props}>
         <Header>
           <Heading>
@@ -112,6 +116,9 @@ export const MultipleSections: Story = {
             </ContextMenu>
           </ContextMenuTrigger>
         </Header>
+        <Alert>
+          <Heading>Alert in section</Heading>
+        </Alert>
         <Text>{dummyText.long}</Text>
         <Heading level={3}>Sub-Heading</Heading>
         <Text>{dummyText.medium}</Text>

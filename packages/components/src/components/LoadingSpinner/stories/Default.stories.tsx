@@ -26,6 +26,7 @@ const meta: Meta<typeof LoadingSpinner> = {
   },
   args: {
     size: "m",
+    color: "default",
   },
 };
 export default meta;

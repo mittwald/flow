@@ -45,7 +45,6 @@ export const WithPercentage: Story = {
 };
 
 export const WithoutUnit: Story = {
-  args: { showMaxValue: true },
   render: (props) => (
     <ProgressBar
       value={500}
@@ -59,52 +58,42 @@ export const WithoutUnit: Story = {
   ),
 };
 
-export const WithMaxValue: Story = {
-  args: { showMaxValue: true },
-};
-
 export const WithSegments: Story = {
-  args: {
-    segments: [
-      { title: "Item 1", value: 20 },
-      { title: "Item 2", value: 30 },
-    ],
-    size: "l",
+  parameters: {
+    controls: { exclude: ["status"] },
   },
   render: (props) => (
-    <ProgressBar {...props}>
+    <ProgressBar
+      {...props}
+      segments={[
+        { title: "Item 1", value: 5 },
+        { title: "Item 2", value: 10 },
+        { title: "Item 3", value: 4 },
+        { title: "Item 4", value: 7 },
+        { title: "Item 5", value: 12 },
+        { title: "Item 6", value: 24 },
+        { title: "Item 7", value: 5 },
+        { title: "Item 8", value: 8 },
+      ]}
+    >
       <Label>Storage</Label>
     </ProgressBar>
   ),
 };
 
 export const WithSegmentsAndUnit: Story = {
-  args: {
-    formatOptions: { style: "unit", unit: "gigabyte" },
-    showMaxValue: true,
-    maxValue: 60,
-    segments: [
-      { title: "Backups", value: 20 },
-      { title: "Databases", value: 30 },
-    ],
-    size: "l",
+  parameters: {
+    controls: { exclude: ["status"] },
   },
   render: (props) => (
-    <ProgressBar {...props}>
-      <Label>Storage</Label>
-    </ProgressBar>
-  ),
-};
-
-export const WithValueHigherThanMaxValue: Story = {
-  args: { showMaxValue: true },
-  render: (props) => (
     <ProgressBar
-      value={2000}
-      maxValue={1000}
-      minValue={0}
-      formatOptions={{ style: "unit", unit: "gigabyte" }}
       {...props}
+      formatOptions={{ style: "unit", unit: "gigabyte" }}
+      maxValue={60}
+      segments={[
+        { title: "Backups", value: 20 },
+        { title: "Databases", value: 30 },
+      ]}
     >
       <Label>Storage</Label>
     </ProgressBar>
@@ -112,7 +101,6 @@ export const WithValueHigherThanMaxValue: Story = {
 };
 
 export const WithValueLabel: Story = {
-  args: { showMaxValue: true },
   render: (props) => {
     const value = 500;
     const maxValue = 1000;
