@@ -14,7 +14,6 @@
   [role="dialog"],
   [role="dialog"] > form {
     overflow: hidden;
-    pointer-events: auto;
     max-height: calc(var(--visual-viewport-height) - var(--size-px--xxl));
     background-color: var(--modal--background-color);
     border-radius: var(--modal--corner-radius);
