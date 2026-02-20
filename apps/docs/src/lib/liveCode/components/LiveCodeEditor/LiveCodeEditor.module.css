@@ -65,13 +65,17 @@
   }
 
   .staticModal {
-    padding: 0;
-
     --modal--size--s: auto;
     --modal--size--m: auto;
     --modal--size--l: auto;
 
     > div {
+      pointer-events: auto;
+      height: unset;
+      padding: unset;
+      justify-content: unset;
+      align-items: unset;
+      position: unset;
       box-shadow: var(--shadow--overlay);
     }
   }
