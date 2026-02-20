@@ -98,6 +98,17 @@
     }
   }
 
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .ratingSegment {
+      .star,
+      .starFilled {
+        color: var(--form-control--border-color--disabled);
+      }
+    }
+  }
+
   @mixin size($size) {
     &.size-#{$size} .ratingSegment {
       padding: var(--rating--spacing--#{$size});

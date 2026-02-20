@@ -92,7 +92,9 @@ export const RadioButtonsWithContent: Story = {
       <RadioButton value="subdomain">
         <Text>Add subdomain</Text>
         <Content>
-          Create a subdomain from an existing domain to use for your project.
+          <Text>
+            Create a subdomain from an existing domain to use for your project.
+          </Text>
         </Content>
       </RadioButton>
     </RadioGroup>
@@ -121,21 +123,6 @@ export const ColumnLayout: Story = {
       <Radio value="4">Option 4</Radio>
       <Radio value="5">Option 5</Radio>
       <Radio value="6">Option 6</Radio>
-    </RadioGroup>
-  ),
-};
-
-export const RadioButtonsWithTextInContent: Story = {
-  render: (props) => (
-    <RadioGroup {...props} defaultValue="domain" aria-label="Domain">
-      <RadioButton value="domain">
-        <Text>2 vCPU</Text>
-        <Content>
-          <Text>4 GiB RAM</Text>
-          <br />
-          <Text>Bis zu 10 Projekte</Text>
-        </Content>
-      </RadioButton>
     </RadioGroup>
   ),
 };

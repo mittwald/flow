@@ -13,6 +13,13 @@ const meta: Meta<typeof MarkdownEditor> = {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
+    allowResize: false,
+  },
+  argTypes: {
+    allowResize: {
+      control: "inline-radio",
+      options: [false, true, "horizontal", "vertical"],
+    },
   },
   render: (props) => (
     <MarkdownEditor placeholder="Write a message..." {...props}>
@@ -39,23 +46,11 @@ export const WithFieldError: Story = {
 };
 
 export const AutoResizeable: Story = {
-  args: { rows: 1, autoResizeMaxRows: 5 },
-};
-
-export const Resizeable: Story = {
-  args: { allowResize: true },
-};
-
-export const HorizontallyResizeable: Story = {
-  args: { allowResize: "horizontal" },
-};
-
-export const VerticallyResizeable: Story = {
-  args: { allowResize: "vertical" },
-};
-
-export const VerticallyAndAutoResizeable: Story = {
-  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
+  render: (props) => (
+    <MarkdownEditor {...props} autoResizeMaxRows={5} rows={3}>
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
 };
 
 export const WithOnChange: Story = {
