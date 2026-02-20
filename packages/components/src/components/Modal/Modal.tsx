@@ -1,4 +1,4 @@
-import { Suspense, type PropsWithChildren, type ReactNode } from "react";
+import { type PropsWithChildren, type ReactNode, Suspense } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -6,7 +6,10 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { OverlayController } from "@/lib/controller/overlay";
+import {
+  OverlayController,
+  useOverlayController,
+} from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Overlay, type OverlayProps } from "@/components/Overlay/Overlay";
@@ -53,13 +56,16 @@ export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",
     offCanvas,
-    controller,
+    controller: controllerFromProps,
     children,
     ref,
     className,
     offCanvasOrientation = "right",
     ...overlayProps
   } = props;
+
+  const controllerFromContext = useOverlayController("Modal", overlayProps);
+  const controller = controllerFromProps ?? controllerFromContext;
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,

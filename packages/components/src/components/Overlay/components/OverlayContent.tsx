@@ -4,6 +4,7 @@ import { Suspense, useLayoutEffect, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
 import styles from "../Overlay.module.scss";
+import DivView from "@/views/DivView";
 
 export interface OverlayContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -25,18 +26,30 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
       setIsSuspended(true);
       return () => setIsSuspended(false);
     }, [setIsSuspended]);
-    return <OverlaySuspenseFallback {...restProps} />;
+    return (
+      <DivView className={styles.suspense}>
+        <OverlaySuspenseFallback {...restProps} />
+      </DivView>
+    );
   };
 
   const rootClassName = isSuspended ? styles.overlay : className;
 
   return (
     <Aria.ModalOverlay {...restProps} className={rootClassName}>
-      <Aria.Modal>
-        <Suspense fallback={<Fallback />}>
-          <Aria.Dialog>{children}</Aria.Dialog>
-        </Suspense>
-      </Aria.Modal>
+      <Suspense
+        fallback={
+          <Aria.Modal className={styles.suspense}>
+            <Fallback />
+          </Aria.Modal>
+        }
+      >
+        <Aria.Modal>
+          <DivView>
+            <Aria.Dialog>{children}</Aria.Dialog>
+          </DivView>
+        </Aria.Modal>
+      </Suspense>
     </Aria.ModalOverlay>
   );
 };

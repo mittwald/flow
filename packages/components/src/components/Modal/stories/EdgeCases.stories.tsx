@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
   render: (props) => (
-    <Modal {...props} isOpen>
+    <Modal {...props} isDefaultOpen>
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -57,7 +57,7 @@ export const LongContent: Story = {
 
 export const LongContentOffCanvas: Story = {
   render: (props) => (
-    <Modal offCanvas {...props} isOpen>
+    <Modal {...props} offCanvas isDefaultOpen>
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -92,7 +92,7 @@ export const SizeChange: Story = {
   render: (props) => {
     const [size, setSize] = useState<ModalProps["size"]>("s");
     return (
-      <Modal {...props} size={size} offCanvas isOpen>
+      <Modal {...props} size={size} offCanvas isDefaultOpen>
         <Heading>{dummyText.short}</Heading>
         <Content>
           <Section>
