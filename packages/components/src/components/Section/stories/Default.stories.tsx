@@ -107,7 +107,7 @@ export const MultipleSections: Story = {
             </Button>
           </FileField>
           <ContextMenuTrigger>
-            <Button variant="soft" color="secondary">
+            <Button variant="soft" color="secondary" aria-label="More actions">
               <IconContextMenu />
             </Button>
             <ContextMenu>

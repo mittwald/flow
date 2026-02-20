@@ -5,6 +5,9 @@ font-weight:
     value: bold
 line-height:
   value: 1.5
+single-line-height:
+  s:
+    value: 1rem
 font-size:
   s:
     value: 0.875rem

@@ -4,7 +4,7 @@ badge:
   font-weight:
     value: "{font-weight.bold}"
   line-height:
-    value: "{size-rem.m}"
+    value: "{single-line-height.s}"
   corner-radius:
     value: "{corner-radius.l}"
   border-width:

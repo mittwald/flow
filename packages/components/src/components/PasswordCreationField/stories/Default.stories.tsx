@@ -43,12 +43,12 @@ export const WithPlaceholder: Story = {
   args: { placeholder: "helloMoto" },
 };
 
-export const WithCustomButtons: Story = {
+export const WithCustomButton: Story = {
   render: (props) => {
     return (
       <PasswordCreationField {...props}>
         <Label>Password</Label>
-        <Button>
+        <Button aria-label="Custom Button">
           <IconDanger />
         </Button>
       </PasswordCreationField>

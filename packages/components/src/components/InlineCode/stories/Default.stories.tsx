@@ -3,6 +3,7 @@ import InlineCode from "../InlineCode";
 import React from "react";
 import { Text } from "@/components/Text";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof InlineCode> = {
   title: "Content/InlineCode",
@@ -13,6 +14,8 @@ const meta: Meta<typeof InlineCode> = {
   },
   render: (props) => (
     <StoryBackground color={props.color}>
+      <InlineCode {...props}>{dummyText.short}</InlineCode>
+      <br />
       <Text color={props.color}>
         Enter <InlineCode {...props}>yarn start</InlineCode> to start your app.
       </Text>

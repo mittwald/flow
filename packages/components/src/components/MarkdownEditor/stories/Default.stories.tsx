@@ -40,6 +40,7 @@ export const ShowCharacterCount: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <MarkdownEditor {...props} isInvalid defaultValue="hello">
+      <Label>Message</Label>
       <FieldError>Invalid message</FieldError>
     </MarkdownEditor>
   ),

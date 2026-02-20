@@ -207,7 +207,7 @@ export const WithSummary: Story = {
           <InvoiceList.Item>
             {(invoice) => (
               <ListItemView>
-                <Heading>{invoice.id}</Heading>
+                <Heading level={3}>{invoice.id}</Heading>
                 <Text>
                   {invoice.date} - {invoice.amount}
                 </Text>
@@ -252,47 +252,44 @@ const endlessPromise = new Promise(() => {
 export const LoadingView: Story = {
   render: () => {
     return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <List aria-label="Invoices">
-          <ListLoaderHooks>
-            {() => {
-              throw endlessPromise;
-            }}
-          </ListLoaderHooks>
-          <ListItem
-            loadingView={
-              <ListItemView>
-                <Avatar>
-                  <Skeleton height="600px" width="600px" />
-                </Avatar>
-                <Heading>
-                  <SkeletonText width="10em" />
-                </Heading>
-              </ListItemView>
-            }
-            showTiles
-          >
-            {() => <ListItemView />}
-          </ListItem>
-          <Table>
-            <TableHeader>
-              <TableColumn>ID</TableColumn>
-              <TableColumn>Name</TableColumn>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
-                  {() => <Avatar />}
-                </TableCell>
-                <TableCell loadingView={<SkeletonText width="10em" />}>
-                  {() => <Text>Static text</Text>}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </List>
-      </Section>
+      <List aria-label="Invoices">
+        <ListLoaderHooks>
+          {() => {
+            throw endlessPromise;
+          }}
+        </ListLoaderHooks>
+        <ListItem
+          loadingView={
+            <ListItemView>
+              <Avatar>
+                <Skeleton height="600px" width="600px" />
+              </Avatar>
+              <Heading>
+                <SkeletonText width="10em" />
+              </Heading>
+            </ListItemView>
+          }
+          showTiles
+        >
+          {() => <ListItemView />}
+        </ListItem>
+        <Table>
+          <TableHeader>
+            <TableColumn>ID</TableColumn>
+            <TableColumn>Name</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
+                {() => <Avatar />}
+              </TableCell>
+              <TableCell loadingView={<SkeletonText width="10em" />}>
+                {() => <Text>Static text</Text>}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </List>
     );
   },
 };

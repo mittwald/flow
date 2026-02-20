@@ -36,7 +36,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      color: color === "light" || color === "dark" ? color : undefined,
+      color: color === "light" || color === "dark" ? color : "secondary",
       variant: "plain",
       wrapWith: <li />,
     },

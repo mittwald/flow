@@ -5,7 +5,6 @@ import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { Heading } from "@/components/Heading";
 import { Initials } from "@/components/Initials";
 import { SortingFunctions, typedList } from "@/components/List";
-import Section from "@/components/Section";
 import { Text } from "@/components/Text";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -29,7 +28,7 @@ export const VeryLongWords: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="List">
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
@@ -112,84 +111,82 @@ export const CustomSorting = () => {
     SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
 
   return (
-    <Section>
-      <DomainList.List batchSize={10}>
-        <DomainList.StaticData data={domainsWithBigInt} />
+    <DomainList.List batchSize={10} aria-label="Domains">
+      <DomainList.StaticData data={domainsWithBigInt} />
 
-        <DomainList.Sorting
-          property="hostname"
-          name="Hostname"
-          direction="asc"
-          directionName="ascending"
-        />
-        <DomainList.Sorting
-          property="hostname"
-          name="Hostname"
-          direction="desc"
-          directionName="descending"
-        />
+      <DomainList.Sorting
+        property="hostname"
+        name="Hostname"
+        direction="asc"
+        directionName="ascending"
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Hostname"
+        direction="desc"
+        directionName="descending"
+      />
 
-        <DomainList.Sorting
-          property="id"
-          name="ID"
-          direction="asc"
-          customSortingFn={bigIntSorting}
-          directionName="ascending"
-        />
-        <DomainList.Sorting
-          property="id"
-          name="ID"
-          direction="desc"
-          customSortingFn={bigIntSorting}
-          defaultEnabled
-          directionName="descending"
-        />
+      <DomainList.Sorting
+        property="id"
+        name="ID"
+        direction="asc"
+        customSortingFn={bigIntSorting}
+        directionName="ascending"
+      />
+      <DomainList.Sorting
+        property="id"
+        name="ID"
+        direction="desc"
+        customSortingFn={bigIntSorting}
+        defaultEnabled
+        directionName="descending"
+      />
 
-        <DomainList.Sorting
-          property="tld"
-          name="TLD length"
-          direction="asc"
-          customSortingFn={tldLengthSortingFn}
-          directionName="shortest first"
-        />
-        <DomainList.Sorting
-          property="tld"
-          name="TLD length"
-          direction="desc"
-          customSortingFn={tldLengthSortingFn}
-          directionName="longest first"
-        />
+      <DomainList.Sorting
+        property="tld"
+        name="TLD length"
+        direction="asc"
+        customSortingFn={tldLengthSortingFn}
+        directionName="shortest first"
+      />
+      <DomainList.Sorting
+        property="tld"
+        name="TLD length"
+        direction="desc"
+        customSortingFn={tldLengthSortingFn}
+        directionName="longest first"
+      />
 
-        <DomainList.Sorting
-          property="type"
-          name="Type"
-          direction="asc"
-          customSortingFn={domainTypeSortingFn}
-        />
+      <DomainList.Sorting
+        property="type"
+        name="Type"
+        direction="asc"
+        customSortingFn={domainTypeSortingFn}
+      />
 
-        <DomainList.Item>
-          {(domain) => (
-            <DomainList.ItemView>
-              <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>
-                {domain.hostname}
-                {!domain.verified && (
-                  <AlertBadge status="warning">Unverified</AlertBadge>
-                )}
-              </Heading>
-              <Text>{domain.type}</Text>
-              <Text>ID: {domain.id}</Text>
-              <Text>TLD: {domain.tld}</Text>
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </DomainList.ItemView>
-          )}
-        </DomainList.Item>
-      </DomainList.List>
-    </Section>
+      <DomainList.Item>
+        {(domain) => (
+          <DomainList.ItemView>
+            <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+              {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <AlertBadge status="warning">Unverified</AlertBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+            <Text>ID: {domain.id}</Text>
+            <Text>TLD: {domain.tld}</Text>
+            <ContextMenu>
+              <MenuItem>Show details</MenuItem>
+              <MenuItem>Delete</MenuItem>
+            </ContextMenu>
+          </DomainList.ItemView>
+        )}
+      </DomainList.Item>
+    </DomainList.List>
   );
 };

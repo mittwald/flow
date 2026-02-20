@@ -35,11 +35,11 @@ const meta: Meta<typeof HeaderNavigation> = {
         <Link href="#" aria-current="page">
           Components
         </Link>
-        <Button>
+        <Button aria-label="Search">
           <IconSearch />
         </Button>
         <ModalTrigger>
-          <Button>
+          <Button aria-label="Notifications">
             <IconNotification />
           </Button>
           <Modal>
