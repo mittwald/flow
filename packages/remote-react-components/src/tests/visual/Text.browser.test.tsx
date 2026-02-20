@@ -1,5 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import React from "react";
 
 test.each(testEnvironments)(
   "Text (%s)",
@@ -42,5 +43,32 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Text");
+  },
+);
+
+test.each(testEnvironments)(
+  "Text edge cases (%s)",
+  async ({ testScreenshot, render, components: { Text, Flex, IconStar } }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <Text>
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text wordBreak="break-word">
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text>
+          <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Text>
+        <Text>
+          <small>
+            <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing
+            elit.
+          </small>
+        </Text>
+      </Flex>,
+    );
+
+    await testScreenshot("Text edge cases");
   },
 );

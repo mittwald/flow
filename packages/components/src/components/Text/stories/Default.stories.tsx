@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
 import React from "react";
-import { IconStar } from "../../Icon/components/icons";
 import { dummyText } from "@/lib/dev/dummyText";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 
@@ -45,22 +44,3 @@ export default meta;
 type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {};
-
-export const WithIcon: Story = {
-  render: (props) => (
-    <Text {...props}>
-      <IconStar /> {dummyText.medium}
-      <small>
-        {dummyText.short} <IconStar /> {dummyText.short}
-      </small>
-    </Text>
-  ),
-};
-
-export const WithWordBreak: Story = {
-  render: (props) => (
-    <Text {...props} wordBreak="break-word">
-      {dummyText.long.replace(/[^\p{L}\p{N}]/gu, "")}
-    </Text>
-  ),
-};
