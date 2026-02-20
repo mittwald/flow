@@ -15,6 +15,11 @@ const meta: Meta<typeof TextField> = {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
+    showCharacterCount: false,
+    maxLength: 200,
+  },
+  parameters: {
+    controls: { exclude: ["maxLength"] },
   },
   render: (props) => (
     <TextField onChange={action("onChange")} {...props}>
@@ -76,15 +81,6 @@ export const WithFieldError: Story = {
       <Label>URL</Label>
       <FieldError>Invalid input</FieldError>
       <FieldDescription>Start with "https://"</FieldDescription>
-    </TextField>
-  ),
-};
-
-export const ShowCharacterCount: Story = {
-  args: { showCharacterCount: true, maxLength: 10 },
-  render: (props) => (
-    <TextField onChange={action("onChange")} {...props}>
-      <Label>User name</Label>
     </TextField>
   ),
 };

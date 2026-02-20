@@ -13,6 +13,13 @@ const meta: Meta<typeof TextArea> = {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
+    allowResize: false,
+  },
+  argTypes: {
+    allowResize: {
+      control: "inline-radio",
+      options: [false, true, "horizontal", "vertical"],
+    },
   },
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
@@ -69,21 +76,5 @@ export const ShowCharacterCount: Story = {
 };
 
 export const AutoResizeable: Story = {
-  args: { rows: 1, autoResizeMaxRows: 5 },
-};
-
-export const Resizeable: Story = {
-  args: { allowResize: true },
-};
-
-export const HorizontallyResizeable: Story = {
-  args: { allowResize: "horizontal" },
-};
-
-export const VerticallyResizeable: Story = {
-  args: { allowResize: "vertical" },
-};
-
-export const VerticallyAndAutoResizeable: Story = {
-  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
+  args: { rows: 3, autoResizeMaxRows: 5 },
 };

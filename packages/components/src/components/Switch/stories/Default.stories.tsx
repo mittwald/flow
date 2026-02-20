@@ -34,5 +34,3 @@ export default meta;
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {};
-
-export const LabelLeading: Story = { args: { labelPosition: "leading" } };

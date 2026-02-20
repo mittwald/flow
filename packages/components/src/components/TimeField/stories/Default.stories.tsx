@@ -15,6 +15,12 @@ const meta: Meta<typeof TimeField> = {
     isReadOnly: false,
     isRequired: false,
   },
+  argTypes: {
+    granularity: {
+      control: "inline-radio",
+      options: ["hour", "minute", "second"],
+    },
+  },
   render: (props) => (
     <TimeField onChange={action("onChange")} {...props}>
       <Label>Time</Label>
@@ -54,10 +60,10 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const Granularity: Story = {
-  args: { granularity: "hour" },
-};
-
 export const MinMaxValue: Story = {
-  args: { minValue: new Time(8, 0), maxValue: new Time(16, 0) },
+  render: (props) => (
+    <TimeField minValue={new Time(8, 0)} maxValue={new Time(16, 0)} {...props}>
+      <Label>Time</Label>
+    </TimeField>
+  ),
 };
