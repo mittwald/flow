@@ -62,7 +62,7 @@ export const WithFieldError: Story = {
 
 export const DisabledSegment: Story = {
   render: (props) => (
-    <SegmentedControl {...props}>
+    <SegmentedControl {...props} defaultValue="admin">
       <Label>Role</Label>
       <Segment value="admin">Admin</Segment>
       <Segment value="member" isDisabled>

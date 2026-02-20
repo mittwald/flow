@@ -18,6 +18,10 @@
     column-gap: var(--slider--spacing-x);
     padding: 0 calc(var(--button-size) + var(--slider--spacing-x));
 
+    label {
+      margin: 0;
+    }
+
     .value {
       font-weight: var(--slider--value-font-weight);
     }
