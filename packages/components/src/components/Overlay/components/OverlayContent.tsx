@@ -45,7 +45,9 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
         }
       >
         <Aria.Modal>
-          <Aria.Dialog>{children}</Aria.Dialog>
+          <DivView className={styles.container}>
+            <Aria.Dialog>{children}</Aria.Dialog>
+          </DivView>
         </Aria.Modal>
       </Suspense>
     </Aria.ModalOverlay>

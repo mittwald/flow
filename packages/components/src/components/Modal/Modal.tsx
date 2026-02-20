@@ -20,7 +20,6 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
-import DivView from "@/views/DivView";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -161,15 +160,13 @@ export const Modal = flowComponent("Modal", (props) => {
       ref={ref}
       {...overlayProps}
     >
-      <DivView className={styles.modalContainer}>
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={offCanvas}>
-            <Suspense fallback={<OffCanvasSuspenseFallback />}>
-              {children}
-            </Suspense>
-          </Wrap>
-        </PropsContextProvider>
-      </DivView>
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={offCanvas}>
+          <Suspense fallback={<OffCanvasSuspenseFallback />}>
+            {children}
+          </Suspense>
+        </Wrap>
+      </PropsContextProvider>
     </Overlay>
   );
 });

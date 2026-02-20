@@ -1,12 +1,12 @@
 .overlay {
   background: var(--overlay--background-color);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1px;
+  left: 1px;
   isolation: isolate;
-  width: 100%;
+  width: 100vw;
   height: var(--page-height);
-  overflow: hidden;
+  pointer-events: none;
 
   &[data-entering] {
     animation: overlay-fade var(--transition--duration--slow);
@@ -22,13 +22,17 @@
     align-items: center;
     justify-content: center;
   }
-}
 
-@media (max-width: 550px) {
-  .overlay {
-    height: var(--visual-viewport-height);
+  .container {
+    pointer-events: all;
   }
 }
+
+//@media (max-width: 550px) {
+//  .overlay {
+//    //overflow: hidden;
+//  }
+//}
 
 @keyframes overlay-fade {
   0% {

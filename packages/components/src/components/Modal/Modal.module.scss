@@ -1,25 +1,25 @@
 .modal,
 .offCanvas {
   > div {
+    position: fixed;
     display: flex;
-    position: absolute;
-    overflow: hidden;
-    max-height: calc(var(--visual-viewport-height) - var(--size-px--xxl));
-    top: calc(var(--visual-viewport-height) / 2);
-    background-color: var(--modal--background-color);
-    width: max-content;
-    max-width: max(90vw, var(--size-px--xxl));
-    margin-left: 50vw;
-    translate: -50% -50%;
+    flex-direction: column;
+    height: var(--visual-viewport-height);
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    padding: var(--size-px--xxl);
   }
 
   [role="dialog"],
-  [role="dialog"] > div > form,
-  .modalContainer {
+  [role="dialog"] > form {
+    overflow: hidden;
+    pointer-events: auto;
+    max-height: calc(var(--visual-viewport-height) - var(--size-px--xxl));
+    background-color: var(--modal--background-color);
+    border-radius: var(--modal--corner-radius);
     display: flex;
     flex-direction: column;
-    max-height: inherit;
-    flex-grow: 1;
     outline: none;
   }
 
@@ -73,7 +73,8 @@
 
 @mixin size($size) {
   &.size-#{$size} {
-    > div {
+    [role="dialog"],
+    [role="dialog"] > form {
       width: var(--modal--size--#{$size});
     }
   }
@@ -81,8 +82,7 @@
 
 /* Normal Modal Desktop */
 @media (min-width: 550px) {
-  .modal,
-  .offCanvas {
+  .modal {
     @include size(s);
     @include size(m);
     @include size(l);
@@ -90,8 +90,6 @@
 
   .modal {
     > div {
-      border-radius: var(--modal--corner-radius);
-
       &[data-entering] {
         animation: modal-zoom var(--transition--duration--slow)
           cubic-bezier(0.1, 0.8, 0.3, 1.2);
@@ -113,18 +111,9 @@
   @include size(l);
 
   > div {
-    margin-left: unset;
-    translate: unset;
-    height: var(--visual-viewport-height);
-    max-height: var(--visual-viewport-height);
-    top: 0;
-    right: 0;
-  }
-
-  > div {
-    border-bottom-left-radius: var(--modal--corner-radius);
-    border-top-left-radius: var(--modal--corner-radius);
-    max-width: var(--modal--off-canvas-max-width);
+    padding: 0;
+    align-items: flex-end;
+    justify-content: flex-start;
 
     &[data-entering] {
       animation: modal-slide-in-from-right var(--transition--duration--slow);
@@ -136,10 +125,19 @@
     }
   }
 
+  [role="dialog"],
+  [role="dialog"] > form {
+    border-top-left-radius: var(--modal--corner-radius);
+    border-bottom-left-radius: var(--modal--corner-radius);
+    flex-grow: 1;
+    max-height: var(--visual-viewport-height);
+    max-width: var(--modal--off-canvas-max-width);
+    height: 100vh;
+  }
+
   &.left {
     > div {
-      top: 0;
-      left: 0;
+      align-items: flex-start;
 
       &[data-entering] {
         animation: modal-slide-in-from-left var(--transition--duration--slow);
@@ -150,6 +148,12 @@
           reverse;
       }
     }
+
+    [role="dialog"],
+    [role="dialog"] > form {
+      border-top-right-radius: var(--modal--corner-radius);
+      border-bottom-right-radius: var(--modal--corner-radius);
+    }
   }
 }
 
@@ -157,30 +161,16 @@
 
 @media (max-width: 550px) {
   .modal {
-    [role="dialog"],
-    [role="dialog"] > div > form,
-    .modalContainer {
-      max-height: unset;
-    }
-
-    .modalContainer {
-      pointer-events: auto;
-      margin-top: var(--size-px--xxl);
-      background-color: var(--modal--background-color);
-    }
-
     > div {
-      pointer-events: none;
-      background-color: unset;
-      min-height: 50vh;
-      max-height: calc(var(--visual-viewport-height));
-      max-width: unset;
       position: sticky;
-      width: 100vw;
-      translate: -50% 0%;
+      display: block;
       overflow: hidden auto;
-      border-top-right-radius: var(--modal--corner-radius);
-      border-top-left-radius: var(--modal--corner-radius);
+      inset: unset;
+      padding: 0;
+
+      > div {
+        margin-top: var(--size-px--xxl);
+      }
 
       &[data-entering] {
         animation: modal-slide-up var(--transition--duration--slow);
@@ -189,6 +179,12 @@
       &[data-exiting] {
         animation: modal-slide-up var(--transition--duration--default) reverse;
       }
+    }
+
+    [role="dialog"],
+    [role="dialog"] > form {
+      max-height: unset;
+      width: 100vw;
     }
   }
 }
@@ -219,7 +215,7 @@
 
   0.1% {
     opacity: 1;
-    transform: scale(0.8);
+    transform: scale(0);
   }
 
   100% {
@@ -229,30 +225,30 @@
 
 @keyframes modal-slide-up {
   from {
-    margin-bottom: -100px;
+    translate: 0 100%;
   }
 
   to {
-    margin-bottom: 0;
+    translate: 0 0;
   }
 }
 
 @keyframes modal-slide-in-from-right {
   from {
-    margin-right: -200px;
+    translate: 100% 0;
   }
 
   to {
-    margin-right: 0;
+    translate: 0 0;
   }
 }
 
 @keyframes modal-slide-in-from-left {
   from {
-    margin-left: -200px;
+    translate: -100% 0;
   }
 
   to {
-    margin-left: 0;
+    translate: 0 0;
   }
 }
