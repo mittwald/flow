@@ -9,6 +9,9 @@ import { ColumnLayout } from "@/components/ColumnLayout";
 const meta: Meta<typeof Truncate> = {
   title: "Content/Truncate",
   component: Truncate,
+  parameters: {
+    controls: { exclude: ["title"] },
+  },
   render: (props) => <Truncate {...props}>{dummyText.long}</Truncate>,
 };
 export default meta;

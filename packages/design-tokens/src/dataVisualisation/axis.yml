@@ -2,11 +2,9 @@ axis:
   spacing:
     value: "{size-px.s}"
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   color:
-    value: "{color.gray.700}"
-  text-color:
-    value: "{neutral.color.1000}"
+    value: "{neutral-outline-border-color}"
   stroke-width:
     value: "{border-width.100}"
   tick-size:

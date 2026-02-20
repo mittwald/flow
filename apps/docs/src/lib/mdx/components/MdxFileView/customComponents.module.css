@@ -6,7 +6,7 @@
 
 .preContainer {
   background-color: var(--code--default-background-color);
-  border-radius: var(--corner-radius--default);
+  border-radius: var(--corner-radius--m);
   position: relative;
   min-width: 0;
   padding-right: var(--size-px--xl);
@@ -67,8 +67,8 @@
   border-width: var(--border-width--100);
   border-color: var(--neutral-outline-border-color);
   border-bottom: none;
-  border-top-left-radius: var(--corner-radius--default);
-  border-top-right-radius: var(--corner-radius--default);
+  border-top-left-radius: var(--corner-radius--m);
+  border-top-right-radius: var(--corner-radius--m);
   padding: var(--size-px--l);
   background: var(--info-soft-background-color--default);
   display: flex;
@@ -76,7 +76,7 @@
 }
 
 .doAndDontContent {
-  border-radius: var(--corner-radius--default);
+  border-radius: var(--corner-radius--m);
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
   border-color: var(--neutral-outline-border-color);

@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
 
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["default", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",

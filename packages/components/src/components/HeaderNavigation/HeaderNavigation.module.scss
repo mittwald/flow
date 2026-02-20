@@ -44,65 +44,44 @@
   }
 
   .button {
+    color: var(--header-navigation--color);
     border-radius: var(--header-navigation--corner-radius-round);
-  }
 
-  &:not(.light, .dark) {
-    .button {
+    &:hover,
+    &[data-pressed] {
       color: var(--header-navigation--color);
-
-      &:hover,
-      &[data-pressed] {
-        color: var(--header-navigation--color);
-      }
     }
   }
 
-  &.dark {
-    .link {
-      color: var(--header-navigation--color-dark);
+  /* Color */
 
-      &:hover:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-dark--hover
-        );
-      }
+  @mixin status($color) {
+    &.#{$color} {
+      .link,
+      .button {
+        color: var(--header-navigation--color-#{$color});
 
-      &[data-pressed]:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-dark--pressed
-        );
-      }
+        &:hover:not([aria-current]) {
+          background-color: var(
+            --header-navigation--background-color-#{$color}--hover
+          );
+        }
 
-      &[aria-current] {
-        &::after {
-          background-color: var(--header-navigation--color-dark);
+        &[data-pressed]:not([aria-current]) {
+          background-color: var(
+            --header-navigation--background-color-#{$color}--pressed
+          );
+        }
+
+        &[aria-current] {
+          &::after {
+            background-color: var(--header-navigation--color-#{$color});
+          }
         }
       }
     }
   }
 
-  &.light {
-    .link {
-      color: var(--header-navigation--color-light);
-
-      &:hover:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-light--hover
-        );
-      }
-
-      &[data-pressed]:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-light--pressed
-        );
-      }
-
-      &[aria-current] {
-        &::after {
-          background-color: var(--header-navigation--color-light);
-        }
-      }
-    }
-  }
+  @include status(dark);
+  @include status(light);
 }

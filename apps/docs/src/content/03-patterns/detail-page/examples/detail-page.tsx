@@ -45,17 +45,17 @@ export default () => {
   return (
     <Flex direction="column" gap="m">
       <Flex direction="column">
-        <Breadcrumb color="light">
+        <Breadcrumb color="dark">
           <Link>Projekt</Link>
           <Link>E-Mails</Link>
           <Link>E-Mail-Details</Link>
         </Breadcrumb>
-        <Flex justify="space-between">
-          <Heading color="light" level={1}>
+        <Flex justify="space-between" align="end">
+          <Heading color="dark" level={1}>
             max@mustermann.de
           </Heading>
           <ContextMenuTrigger>
-            <Button variant="outline" color="light">
+            <Button variant="outline" color="dark">
               <Text>Aktionen</Text>
               <IconChevronDown />
             </Button>

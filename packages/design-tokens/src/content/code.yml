@@ -1,6 +1,6 @@
 code:
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   padding-x:
     value: "{size-px.xs}"
   padding-y:
@@ -8,7 +8,9 @@ code:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
+  corner-radius-s:
+    value: "{corner-radius.s}"
   spacing:
     value: "{size-px.m}"
 
@@ -16,7 +18,7 @@ code:
   default-background-color:
     value: "{neutral-soft-background-color.default}"
   default-content-color:
-    value: "{neutral-soft-content-color.default}"
+    value: "{neutral-soft-content-color}"
   default-syntax-color-addition:
     value: "#397300"
   default-syntax-color-built-in:

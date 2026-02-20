@@ -6,62 +6,46 @@
   --border-color: var(--neutral-outline-border-color);
 
   border: 1px solid var(--border-color);
-  border-radius: var(--corner-radius--default);
-  background-color: var(--neutral--color--200);
+  border-radius: var(--corner-radius--m);
+  background-color: var(--neutral--color--100);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   justify-content: center;
 
-  &.darkBackground {
-    background-color: var(--primary--color--1000);
+  &.darkBackground,
+  &.darkBackground.mobile .preview {
+    background-color: var(--neutral--color--800);
   }
 
   &.lightBackground,
-  &.mobile {
-    background-color: var(--primary--color--200);
+  &.lightBackground.mobile .preview {
+    background-color: var(--neutral--color--400);
+  }
+
+  &.mstudioBackground,
+  &.mstudioBackground.mobile .preview {
+    background-color: var(--neutral--color--200);
   }
 
   &.mobile {
+    background-color: var(--neutral--color--100);
+
     .preview {
       border-inline: 4px solid var(--neutral--color--600);
       margin: 0 auto;
       padding: var(--size-px--l);
       width: 400px;
       max-width: 100%;
-      background-color: var(--neutral--color--100);
       height: 100%;
-
-      &:has(:global(.flow--modal)) {
-        padding: 0;
-      }
-    }
-
-    &.darkBackground {
-      .preview {
-        background-color: var(--primary--color--1000);
-      }
-
-      .mobile {
-        height: 100%;
-
-        .preview {
-          border-inline: 4px solid var(--neutral--color--500);
-          margin: 0 auto;
-          padding: var(--size-px--l);
-          max-width: 400px;
-          background-color: var(--neutral--color--100);
-          height: 100%;
-        }
-      }
     }
   }
 
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
-    background-color: var(--code--default-background-color) !important;
-    font-size: var(--font-size-text--s);
+    background-color: var(--neutral--color--200) !important;
+    font-size: var(--font-size--s);
   }
 
   .staticModal {
@@ -93,12 +77,12 @@
   display: grid;
   grid-template-rows: 1fr;
   padding: var(--size-px--m);
-  background-color: var(--code--default-background-color) !important;
+  background-color: var(--neutral--color--200) !important;
 }
 
 .actions {
   margin-block-start: auto;
-  background-color: var(--neutral--color--200);
+  background-color: var(--neutral--color--100);
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;

@@ -1,8 +1,8 @@
 link:
-  line-height:
-    value: "{line-height.m}"
   icon-height:
-    value: "calc({font-size-text.m} * 1.25)"
+    value: "calc({font-size.m} * 1.25)"
+  icon-height-s:
+    value: "calc({font-size.s} * 1.25)"
   font-weight:
     value: "{font-weight.bold}"
   spacing:

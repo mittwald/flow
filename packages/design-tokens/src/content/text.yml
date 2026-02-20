@@ -1,7 +1,7 @@
 text:
   color:
     default:
-      value: "{neutral.color.1000}"
+      value: "{neutral.color.1100}"
     light:
       value: "{light-plain-content-color}"
     dark:

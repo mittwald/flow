@@ -14,14 +14,16 @@ import { FieldError } from "@/components/FieldError";
 const meta: Meta<typeof DatePicker> = {
   title: "Form Controls/DatePicker",
   component: DatePicker,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <DatePicker {...props} isRequired>
       <Label>Date</Label>
     </DatePicker>
   ),
-  parameters: {
-    controls: { exclude: ["errorMessage"] },
-  },
 };
 
 export default meta;
@@ -30,16 +32,14 @@ type Story = StoryObj<typeof DatePicker>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Invalid: Story = {
-  args: { minValue: today(getLocalTimeZone()) },
+export const WithFieldError: Story = {
+  args: { isRequired: true },
   render: (props) => (
     <DatePicker
-      isRequired
-      defaultValue={parseDate("2012-07-03")}
       {...props}
       isInvalid
+      defaultValue={parseDate("2012-07-03")}
+      minValue={today(getLocalTimeZone())}
     >
       <Label>Future Date</Label>
       <FieldError>Date is in the past</FieldError>
@@ -48,9 +48,8 @@ export const Invalid: Story = {
 };
 
 export const FutureDatesOnly: Story = {
-  args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
-    <DatePicker isRequired {...props}>
+    <DatePicker {...props} minValue={today(getLocalTimeZone())}>
       <Label>Future Date</Label>
       <FieldDescription>Select a future date</FieldDescription>
     </DatePicker>

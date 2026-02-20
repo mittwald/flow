@@ -27,5 +27,6 @@
     padding: calc(
       var(--button--padding-icon-only) - var(--form-control--border-width)
     );
+    outline-offset: calc(var(--size-px--xxxs) * -1);
   }
 }

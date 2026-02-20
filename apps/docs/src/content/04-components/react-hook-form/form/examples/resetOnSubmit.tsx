@@ -2,6 +2,7 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
 import {
   ActionGroup,
   Label,
+  Section,
   TextField,
 } from "@mittwald/flow-react-components";
 import {
@@ -33,20 +34,22 @@ export default () => {
         };
       }}
     >
-      <Field
-        name="name"
-        rules={{
-          required: "The project name is required",
-        }}
-      >
-        <TextField>
-          <Label>Name</Label>
-        </TextField>
-      </Field>
-      <ActionGroup>
-        <ResetButton>Zurücksetzen</ResetButton>
-        <SubmitButton>Speichern</SubmitButton>
-      </ActionGroup>
+      <Section>
+        <Field
+          name="name"
+          rules={{
+            required: "The project name is required",
+          }}
+        >
+          <TextField>
+            <Label>Name</Label>
+          </TextField>
+        </Field>
+        <ActionGroup>
+          <ResetButton>Zurücksetzen</ResetButton>
+          <SubmitButton>Speichern</SubmitButton>
+        </ActionGroup>
+      </Section>
     </Form>
   );
 };

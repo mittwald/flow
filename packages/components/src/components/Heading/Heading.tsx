@@ -11,8 +11,8 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
-  /** The color of the heading. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | "dark" | "light";
+  /** The color of the heading. */
+  color?: "default" | "danger" | "unavailable" | "dark" | "light";
   /** The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance";
 }
@@ -23,7 +23,7 @@ export const Heading = flowComponent("Heading", (props) => {
     children,
     className,
     level = 2,
-    color = "primary",
+    color,
     wrap,
     size,
     ref,
@@ -33,7 +33,7 @@ export const Heading = flowComponent("Heading", (props) => {
   const rootClassName = clsx(
     styles.heading,
     size && styles[size],
-    styles[color],
+    color && styles[color],
     wrap && styles[`wrap-${wrap}`],
     className,
   );

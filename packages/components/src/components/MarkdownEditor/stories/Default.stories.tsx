@@ -9,24 +9,29 @@ import { Section } from "@/components/Section";
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
   component: MarkdownEditor,
-  args: { placeholder: "Write a message..." },
-  render: (props) => <MarkdownEditor aria-label="Message" {...props} />,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    allowResize: false,
+  },
+  argTypes: {
+    allowResize: {
+      control: "inline-radio",
+      options: [false, true, "horizontal", "vertical"],
+    },
+  },
+  render: (props) => (
+    <MarkdownEditor placeholder="Write a message..." {...props}>
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
 };
 export default meta;
 
 type Story = StoryObj<typeof MarkdownEditor>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const WithLabel: Story = {
-  render: (props) => (
-    <MarkdownEditor {...props}>
-      <Label>Message</Label>
-    </MarkdownEditor>
-  ),
-};
 
 export const ShowCharacterCount: Story = {
   args: { showCharacterCount: true, maxLength: 100 },
@@ -35,29 +40,18 @@ export const ShowCharacterCount: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <MarkdownEditor {...props} isInvalid defaultValue="hello">
+      <Label>Message</Label>
       <FieldError>Invalid message</FieldError>
     </MarkdownEditor>
   ),
 };
 
 export const AutoResizeable: Story = {
-  args: { rows: 1, autoResizeMaxRows: 5 },
-};
-
-export const Resizeable: Story = {
-  args: { allowResize: true },
-};
-
-export const HorizontallyResizeable: Story = {
-  args: { allowResize: "horizontal" },
-};
-
-export const VerticallyResizeable: Story = {
-  args: { allowResize: "vertical" },
-};
-
-export const VerticallyAndAutoResizeable: Story = {
-  args: { allowResize: "vertical", rows: 1, autoResizeMaxRows: 5 },
+  render: (props) => (
+    <MarkdownEditor {...props} autoResizeMaxRows={5} rows={3}>
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
 };
 
 export const WithOnChange: Story = {

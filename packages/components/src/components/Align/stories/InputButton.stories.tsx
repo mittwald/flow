@@ -70,7 +70,7 @@ export const WithSelect: Story = {
 export const WithoutLabel: Story = {
   render: (props) => (
     <Align {...props}>
-      <TextField />
+      <TextField aria-label="Label" />
       <Button>Hinzufügen</Button>
     </Align>
   ),

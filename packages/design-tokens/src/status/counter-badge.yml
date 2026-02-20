@@ -10,9 +10,9 @@ counter-badge:
   padding-inline:
     value: "{size-rem.xs}"
   background-color:
-    value: "{success-solid-background-color.default}"
+    value: "{primary-solid-background-color.default}"
   content-color:
-    value: "{success-solid-content-color}"
+    value: "{primary-solid-content-color}"
   border-width:
     value: "{border-width.200}"
   border-style:

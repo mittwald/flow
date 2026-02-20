@@ -1,8 +1,8 @@
 progress-bar:
   font-size:
-    value: "{font-size-text.m}"
+    value: "{font-size.m}"
   font-size-s:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   value-font-weight:
     value: "{font-weight.bold}"
   spacing-y:
@@ -20,13 +20,13 @@ progress-bar:
     l:
       value: "{size-rem.l}"
   corner-radius:
-    value: "{size-rem.xs}"
+    value: "{corner-radius.l}"
   border-width:
     value: "{border-width.100}"
   border-color:
     value: "{neutral-outline-border-color}"
   background-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.200}"
 
   # Info
   info-fill-background-color:

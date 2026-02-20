@@ -31,6 +31,7 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
 import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -57,6 +58,9 @@ const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
 const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const DomainList = typedList<Domain>();
     const availableTypes = usePromise(getTypes, []);
@@ -88,7 +92,12 @@ const meta: Meta<typeof List> = {
               name="Type"
               defaultSelected={["Domain"]}
             />
-
+            <DomainList.Filter
+              property="tld"
+              mode="one"
+              name="TLD"
+              priority="secondary"
+            />
             <DomainList.Search autoFocus />
             <DomainList.Sorting
               property="domain"
@@ -181,48 +190,6 @@ export const WithSummary: Story = {
       <Section>
         <Heading>Invoices</Heading>
         <InvoiceList.List batchSize={5} aria-label="Invoices">
-          <ListSummary>
-            <Flex justify="end">
-              <Text>
-                <strong>Total: 41,00 €</strong>
-              </Text>
-            </Flex>
-          </ListSummary>
-          <InvoiceList.StaticData
-            data={[
-              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
-            ]}
-          />
-          <InvoiceList.Item>
-            {(invoice) => (
-              <ListItemView>
-                <Heading>{invoice.id}</Heading>
-                <Text>
-                  {invoice.date} - {invoice.amount}
-                </Text>
-              </ListItemView>
-            )}
-          </InvoiceList.Item>
-        </InvoiceList.List>
-      </Section>
-    );
-  },
-};
-
-export const WithSummaryBottom: Story = {
-  render: () => {
-    const InvoiceList = typedList<{
-      id: string;
-      date: string;
-      amount: string;
-    }>();
-
-    return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={5} aria-label="Invoices">
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
@@ -240,7 +207,7 @@ export const WithSummaryBottom: Story = {
           <InvoiceList.Item>
             {(invoice) => (
               <ListItemView>
-                <Heading>{invoice.id}</Heading>
+                <Heading level={3}>{invoice.id}</Heading>
                 <Text>
                   {invoice.date} - {invoice.amount}
                 </Text>
@@ -254,43 +221,26 @@ export const WithSummaryBottom: Story = {
 };
 export const WithAccordion: Story = {
   render: () => {
-    const InvoiceList = typedList<{
+    const List = typedList<{
       id: string;
-      date: string;
-      amount: string;
     }>();
 
     return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={5} aria-label="Invoices" accordion>
-          <InvoiceList.StaticData
-            data={[
-              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
-              { id: "RD100000", date: "1.9.2024", amount: "25,00 €" },
-              { id: "RD100001", date: "12.9.2024", amount: "12,00 €" },
-              { id: "RD100002", date: "3.10.2024", amount: "4,00 €" },
-            ]}
-          />
-          <InvoiceList.Item
-            defaultExpanded={(invoice) => invoice.id === "RG100001"}
-          >
-            {(invoice) => (
-              <ListItemView>
-                <Heading>{invoice.id}</Heading>
-                <Content slot="bottom">
-                  <Text>
-                    {invoice.date} - {invoice.amount}
-                  </Text>
-                </Content>
-              </ListItemView>
-            )}
-          </InvoiceList.Item>
-          <InvoiceList.Search />
-        </InvoiceList.List>
-      </Section>
+      <List.List batchSize={5} aria-label="Invoices" accordion>
+        <List.StaticData
+          data={[{ id: "Item 1" }, { id: "Item 2" }, { id: "Item 3" }]}
+        />
+        <List.Item defaultExpanded={(invoice) => invoice.id === "Item 1"}>
+          {(invoice) => (
+            <ListItemView>
+              <Heading>{invoice.id}</Heading>
+              <Content slot="bottom">
+                <Text>{dummyText.long}</Text>
+              </Content>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
     );
   },
 };
@@ -302,118 +252,44 @@ const endlessPromise = new Promise(() => {
 export const LoadingView: Story = {
   render: () => {
     return (
-      <Section>
-        <Heading>Invoices</Heading>
-        <List aria-label="Invoices">
-          <ListLoaderHooks>
-            {() => {
-              throw endlessPromise;
-            }}
-          </ListLoaderHooks>
-          <ListItem
-            loadingView={
-              <ListItemView>
-                <Avatar>
-                  <Skeleton height="600px" width="600px" />
-                </Avatar>
-                <Heading>
-                  <SkeletonText width="10em" />
-                </Heading>
-              </ListItemView>
-            }
-            showTiles
-          >
-            {() => <ListItemView />}
-          </ListItem>
-          <Table>
-            <TableHeader>
-              <TableColumn>ID</TableColumn>
-              <TableColumn>Name</TableColumn>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
-                  {() => <Avatar />}
-                </TableCell>
-                <TableCell loadingView={<SkeletonText width="10em" />}>
-                  {() => <Text>Static text</Text>}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </List>
-      </Section>
-    );
-  },
-};
-
-export const WithSecondaryFilters: Story = {
-  render: () => {
-    const DomainList = typedList<Domain>();
-    const availableTypes = usePromise(getTypes, []);
-
-    return (
-      <SettingsProvider type="localStorage" storageKey="listStory">
-        <Section>
-          <Heading>Domains</Heading>
-          <DomainList.List
-            batchSize={5}
-            aria-label="Domains"
-            settingStorageKey="domains"
-          >
-            <ActionGroup>
-              <Button color="secondary" variant="soft" slot="secondary">
-                Download
-              </Button>
-              <Button color="accent">Add</Button>
-            </ActionGroup>
-            <DomainList.LoaderAsync manualPagination manualSorting={false}>
-              {loadDomains}
-            </DomainList.LoaderAsync>
-            <DomainList.Filter
-              values={availableTypes}
-              property="type"
-              mode="all"
-              name="Type"
-              defaultSelected={["Domain"]}
-            />
-            <DomainList.Filter
-              property="tld"
-              mode="one"
-              name="TLD"
-              priority="secondary"
-            />
-
-            <DomainList.Search autoFocus />
-            <DomainList.Sorting
-              property="domain"
-              name="Alphabetical"
-              directionName="ascending"
-              defaultEnabled
-            />
-            <DomainList.Sorting
-              property="domain"
-              name="Alphabetical"
-              directionName="descending"
-              direction="desc"
-            />
-            <DomainList.Sorting property="type" name="Typ" />
-            <DomainList.Sorting property="tld" name="TLD" />
-
-            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
-              {(domain) => (
-                <ListItemView>
-                  <Avatar>
-                    <IconDomain />
-                  </Avatar>
-                  <Heading>{domain.hostname}</Heading>
-                  <Text>{domain.type}</Text>
-                </ListItemView>
-              )}
-            </DomainList.Item>
-          </DomainList.List>
-        </Section>
-      </SettingsProvider>
+      <List aria-label="Invoices">
+        <ListLoaderHooks>
+          {() => {
+            throw endlessPromise;
+          }}
+        </ListLoaderHooks>
+        <ListItem
+          loadingView={
+            <ListItemView>
+              <Avatar>
+                <Skeleton height="600px" width="600px" />
+              </Avatar>
+              <Heading>
+                <SkeletonText width="10em" />
+              </Heading>
+            </ListItemView>
+          }
+          showTiles
+        >
+          {() => <ListItemView />}
+        </ListItem>
+        <Table>
+          <TableHeader>
+            <TableColumn>ID</TableColumn>
+            <TableColumn>Name</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell loadingView={<Skeleton width="5em" height="3em" />}>
+                {() => <Avatar />}
+              </TableCell>
+              <TableCell loadingView={<SkeletonText width="10em" />}>
+                {() => <Text>Static text</Text>}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </List>
     );
   },
 };

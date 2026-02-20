@@ -3,19 +3,19 @@ date-picker:
     focused:
       value: "{primary-plain-background-color.pressed}"
   date-segment-corner-radius:
-    value: "{size-px.xs}"
+    value: "{corner-radius.s}"
 
 calendar:
   spacing:
     value: "{size-rem.xs}"
   heading-font-size:
-    value: "{font-size-text.default}"
+    value: "{font-size.m}"
   cell-size:
     value: 2.25rem
   cell-corner-radius:
     value: "{corner-radius.round}"
   cell-font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   cell-background-color:
     disabled:
       value: "{disabled-plain-background-color}"

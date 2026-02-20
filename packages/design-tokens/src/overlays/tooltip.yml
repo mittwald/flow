@@ -8,7 +8,7 @@ tooltip:
   padding-y:
     value: "{size-px.xs}"
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   max-width:
     value: 300px
   tooltip-to-trigger-spacing:
@@ -17,5 +17,5 @@ tooltip:
     value: "{size-px.s}"
   box-shadow:
     value: "{shadow.overlay}"
-  header-corner-radius:
-    value: "{corner-radius.default}"
+  corner-radius:
+    value: "{corner-radius.m}"

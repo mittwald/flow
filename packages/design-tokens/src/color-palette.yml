@@ -3,24 +3,26 @@ color:
     100:
       value: "#FFFFFF"
     200:
-      value: "#FDFDFD"
+      value: "#F4F8FC"
     300:
-      value: "#F8F8F8"
+      value: "#E5EFF8"
     400:
-      value: "#E6E6E6"
+      value: "#DCE9F7"
     500:
-      value: "#D5D5D5"
+      value: "#B7C9DB"
     600:
-      value: "#B1B1B1"
+      value: "#8FA1B4"
     700:
-      value: "#909090"
+      value: "#5E6C7A"
     800:
-      value: "#6D6D6D"
+      value: "#3A434E"
     900:
-      value: "#464646"
+      value: "#292F37"
     1000:
-      value: "#222222"
+      value: "#1B1F24"
     1100:
+      value: "#121518"
+    1200:
       value: "#000000"
 
   hosting-blue:
@@ -255,3 +257,39 @@ color:
       26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
       55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
       100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+
+  black-alpha:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+  white-alpha:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"

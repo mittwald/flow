@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
-import { IconMember } from "@/components/Icon/components/icons";
+import { IconStar } from "@/components/Icon/components/icons";
 import { Section } from "@/components/Section";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -18,12 +21,14 @@ const meta: Meta<typeof Heading> = {
     },
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "danger", "unavailable", "dark", "light"],
     },
   },
   args: { level: 2 },
   render: (props) => (
-    <Heading {...props}>I am a H{props.level} Heading</Heading>
+    <StoryBackground color={props.color}>
+      <Heading {...props}>I am a H{props.level} Heading</Heading>
+    </StoryBackground>
   ),
 };
 export default meta;
@@ -32,55 +37,25 @@ type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
 
-export const WithIcon: Story = {
+export const AdditionalContent: Story = {
   render: (props) => (
-    <Heading {...props}>
-      <IconMember />
-      Personal Information
-    </Heading>
+    <StoryBackground color={props.color}>
+      <Heading {...props}>
+        <IconStar />
+        {dummyText.medium}
+        <Badge>Badge</Badge>
+      </Heading>
+    </StoryBackground>
   ),
-};
-
-export const WithCustomSize: Story = {
-  args: { level: 1, size: "xxl" },
-  render: (props) => (
-    <Heading level={1} size="xxl" {...props}>
-      <IconMember />
-      Personal Information
-    </Heading>
-  ),
-};
-
-export const Dark: Story = {
-  args: { color: "dark" },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  globals: {
-    backgrounds: "dark",
-  },
-};
-
-export const Danger: Story = {
-  args: { color: "danger" },
-};
-
-export const Unavailable: Story = {
-  args: { color: "unavailable" },
 };
 
 export const Wrap: Story = {
   render: (props) => (
     <Section>
-      <Heading {...props}>Personal Information of the current user</Heading>
+      <Heading {...props}>{dummyText.medium}</Heading>
       <Heading {...props} wrap="balance">
-        Personal Information of the current user
+        {dummyText.medium}
       </Heading>
     </Section>
   ),
-  parameters: { viewport: { defaultViewport: "mobile2" } },
 };

@@ -16,6 +16,10 @@ import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
   component: Table,
+  argTypes: {
+    verticalAlign: { control: "inline-radio", options: ["top", "middle"] },
+  },
+  args: { verticalAlign: "top" },
   render: (props) => (
     <Table aria-label="Button Props" {...props}>
       <TableHeader>
@@ -59,10 +63,6 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {};
-
-export const VerticallyCenteredRows: Story = {
-  args: { verticalAlign: "middle" },
-};
 
 export const WithFooter: Story = {
   render: (props) => (

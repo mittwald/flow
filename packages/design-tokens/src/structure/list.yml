@@ -8,7 +8,7 @@ list:
 
 list-item:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding:
     value: "{size-px.s}"
   border-width:
@@ -21,12 +21,12 @@ list-item:
     value: "{size-px.s}"
   background-color:
     default:
-      value: "{neutral.color.200}"
+      value: "{neutral-outline-background-color.default}"
     hover:
-      value: "{primary.color.100}"
+      value: "{neutral-outline-background-color.hover}"
     pressed:
-      value: "{primary.color.200}"
+      value: "{neutral-outline-background-color.pressed}"
   border-color:
     value: "{neutral-outline-border-color}"
   subtitle-font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"

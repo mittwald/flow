@@ -2,7 +2,7 @@ message-separator:
   background-color:
     value: "{neutral.color.100}"
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   padding:
     value: "{size-px.m}"
   color:

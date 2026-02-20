@@ -15,6 +15,11 @@ import { Text } from "@/components/Text";
 const meta: Meta<typeof NumberField> = {
   title: "Form Controls/NumberField",
   component: NumberField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <NumberField onChange={action("onChange")} {...props}>
       <Label>Age</Label>
@@ -27,14 +32,6 @@ export default meta;
 type Story = StoryObj<typeof NumberField>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
-
-export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (

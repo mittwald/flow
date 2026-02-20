@@ -10,7 +10,7 @@
   .ratingSegment {
     display: grid;
     grid-template-areas: "star";
-    border-radius: var(--corner-radius--default);
+    border-radius: var(--corner-radius--m);
 
     @include focus.focus;
 
@@ -94,6 +94,17 @@
         .starFilled {
           opacity: 0;
         }
+      }
+    }
+  }
+
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .ratingSegment {
+      .star,
+      .starFilled {
+        color: var(--form-control--border-color--disabled);
       }
     }
   }

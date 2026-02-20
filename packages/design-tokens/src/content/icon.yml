@@ -7,7 +7,7 @@ icon:
     l:
       value: 4rem
   color:
-    value: "{neutral.color.800}"
+    value: "{neutral.color.700}"
   info-color:
     value: "{info-outline-content-color}"
   warning-color:
@@ -17,4 +17,4 @@ icon:
   success-color:
     value: "{success-outline-content-color}"
   unavailable-color:
-    value: "{neutral.color.900}"
+    value: "{neutral.color.700}"

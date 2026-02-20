@@ -3,7 +3,7 @@
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
 
-  --heading-line-height: calc(var(--font-size) * var(--line-height--default));
+  --heading-line-height: calc(var(--font-size) * var(--line-height));
 
   @mixin color($color) {
     &.#{$color} {
@@ -44,26 +44,26 @@
   }
 
   &:where(h1) {
-    --font-size: var(--font-size-heading--xl);
+    --font-size: var(--heading-size--xl);
   }
 
   &:where(h2) {
-    --font-size: var(--font-size-heading--m);
+    --font-size: var(--heading-size--m);
   }
 
   &:where(h3) {
-    --font-size: var(--font-size-heading--s);
+    --font-size: var(--heading-size--s);
   }
 
   &:where(h4),
   &:where(h5),
   &:where(h6) {
-    --font-size: var(--font-size-heading--xs);
+    --font-size: var(--heading-size-heading--xs);
   }
 
   @mixin size($size) {
     &.#{$size} {
-      --font-size: var(--font-size-heading--#{$size});
+      --font-size: var(--heading-size--#{$size});
     }
   }
 
@@ -85,6 +85,6 @@
 
 @media (max-width: 550px) {
   .heading:where(h1) {
-    --font-size: var(--font-size-heading--l);
+    --font-size: var(--heading-size--l);
   }
 }

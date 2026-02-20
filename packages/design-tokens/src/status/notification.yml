@@ -2,7 +2,7 @@ notification:
   padding:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-x-start-width:
     value: "{border-width.300}"
   border-style:
@@ -16,7 +16,7 @@ notification:
   spacing:
     value: "{size-rem.s}"
   font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
 
   # Info
   info-border-color:

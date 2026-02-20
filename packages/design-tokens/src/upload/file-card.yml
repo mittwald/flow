@@ -6,7 +6,7 @@ file-card:
   spacing:
     value: "{size-rem.s}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-style:
@@ -17,7 +17,7 @@ file-card:
     error:
       value: "{danger-outline-border-color}"
   sub-title-font-size:
-    value: "{font-size-text.s}"
+    value: "{font-size.s}"
   background-color:
     default:
       value: "{neutral.color.100}"

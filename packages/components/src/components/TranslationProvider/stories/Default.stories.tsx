@@ -10,7 +10,7 @@ const meta: Meta = {
   title: "Content/TranslationProvider",
   render: (props) => {
     return (
-      <I18nProvider locale={"de-DE"}>
+      <I18nProvider locale="de-DE">
         <TranslationProvider
           translations={{
             "de-DE": {

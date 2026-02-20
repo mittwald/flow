@@ -4,7 +4,7 @@ import { action } from "storybook/actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconDownload } from "@/components/Icon/components/icons";
-import { AlertText } from "@/components/AlertText";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -12,19 +12,25 @@ const meta: Meta<typeof Link> = {
   args: {
     onPress: action("onPress"),
     isDisabled: false,
+    size: "m",
   },
-  render: (props) => <Link {...props}>Adjust project</Link>,
+  render: (props) => (
+    <StoryBackground color={props.color}>
+      <Link {...props}>Adjust project</Link>
+    </StoryBackground>
+  ),
   parameters: {
     controls: { exclude: ["onPress"] },
   },
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "dark", "light"],
     },
     isDisabled: {
       control: "boolean",
     },
+    size: { control: "inline-radio", options: ["s", "m"] },
   },
 };
 export default meta;
@@ -35,52 +41,41 @@ export const Default: Story = {};
 
 export const Inline: Story = {
   render: (props) => (
-    <Text>
-      Check our <Link {...props}>onboarding</Link> for more information.
-    </Text>
+    <StoryBackground color={props.color}>
+      <Text color={props.color}>
+        Check our <Link {...props}>onboarding</Link> for more information.
+      </Text>
+    </StoryBackground>
   ),
 };
-
-export const Disabled: Story = { args: { isDisabled: true } };
 
 export const WithIcon: Story = {
   render: (props) => (
-    <Link {...props} href="https://mittwald.de">
-      Download invoice
-      <IconDownload aria-label="download" />
-    </Link>
+    <StoryBackground color={props.color}>
+      <Link {...props} href="https://mittwald.de">
+        Download invoice
+        <IconDownload aria-label="download" />
+      </Link>
+    </StoryBackground>
   ),
 };
 
-export const Dark: Story = {
-  args: { color: "dark" },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  globals: {
-    backgrounds: "dark",
-  },
-};
-
 export const ExternalLink: Story = {
-  args: { target: "_blank" },
-  render: (props) => <Link {...props}>mittwald.de</Link>,
+  render: (props) => (
+    <StoryBackground color={props.color}>
+      <Link target="_blank" {...props}>
+        mittwald.de
+      </Link>
+    </StoryBackground>
+  ),
 };
 
 export const Download: Story = {
-  args: { target: "_blank", download: true },
-  render: (props) => <Link {...props}>Download file</Link>,
-};
-
-export const WithAlertText: Story = {
-  args: { inline: true },
   render: (props) => (
-    <Link {...props}>
-      <AlertText status="danger">Loading failed</AlertText>
-    </Link>
+    <StoryBackground color={props.color}>
+      <Link target="_blank" download {...props}>
+        Download file
+      </Link>
+    </StoryBackground>
   ),
 };

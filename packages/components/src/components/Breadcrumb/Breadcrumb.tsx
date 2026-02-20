@@ -4,22 +4,28 @@ import styles from "./Breadcrumb.module.scss";
 import clsx from "clsx";
 import type { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface BreadcrumbProps
   extends
     Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
-  /** The color of the breadcrumb. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  /** The color of the breadcrumb. */
+  color?: "default" | "dark" | "light";
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
 }
 
 /** @flr-generate all */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
-  const { children, className, color = "primary", ...rest } = props;
+  const { children, className, color, size = "m", ...rest } = props;
 
-  const rootClassName = clsx(styles.breadcrumb, styles[color], className);
+  const rootClassName = clsx(
+    styles.breadcrumb,
+    (color === "light" || color === "dark") && styles[color],
+    size === "s" && styles["size-s"],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {

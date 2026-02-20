@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     min-width: 0;
+    color: var(--breadcrumb--color--default);
 
     &:last-child {
       .icon {
@@ -43,6 +44,27 @@
       .link {
         cursor: unset;
       }
+    }
+
+    &:not([data-disabled="true"]) {
+      .link {
+        &:hover {
+          color: var(--breadcrumb--color--hover);
+        }
+
+        &[data-pressed] {
+          color: var(--breadcrumb--color--pressed);
+        }
+      }
+    }
+  }
+
+  /* Size s */
+
+  &.size-s {
+    .link {
+      line-height: var(--link--line-height-s);
+      font-size: var(--font-size--s);
     }
   }
 
@@ -68,7 +90,6 @@
     }
   }
 
-  @include variant(primary);
   @include variant(dark);
   @include variant(light);
 }

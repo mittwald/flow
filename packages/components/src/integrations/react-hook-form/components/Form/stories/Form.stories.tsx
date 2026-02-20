@@ -48,7 +48,7 @@ const meta: Meta<typeof Form> = {
             </TextField>
           </Field>
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>

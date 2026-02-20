@@ -2,6 +2,7 @@ import {
   Button,
   HeaderNavigation,
   Heading,
+  IconChevronDown,
   IconMenu,
   IconSearch,
   IconSupport,
@@ -13,7 +14,7 @@ import {
 <Section style={{ height: "100%" }}>
   <HeaderNavigation
     aria-label="Header Navigation"
-    color="light"
+    color="dark"
     style={{ alignSelf: "flex-end" }}
   >
     <Button>
@@ -26,7 +27,10 @@ import {
       <IconMenu />
     </Button>
   </HeaderNavigation>
-  <Button color="accent">Projekt anlegen</Button>
+  <Button color="dark" variant="outline">
+    <Text>Aktionen</Text>
+    <IconChevronDown />
+  </Button>
   <LayoutCard style={{ width: "100%", flexGrow: "1" }}>
     <Heading>Projekte</Heading>
     <Text>...</Text>

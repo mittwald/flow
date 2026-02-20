@@ -33,16 +33,6 @@ type Story = StoryObj<typeof LabeledValue>;
 
 export const Default: Story = {};
 
-export const WithCopyButton: Story = {
-  render: (props) => (
-    <LabeledValue {...props}>
-      <Label>Project</Label>
-      <Content>My Webhosting</Content>
-      <CopyButton text="My Webhosting" />
-    </LabeledValue>
-  ),
-};
-
 export const WithInlineCode: Story = {
   render: (props) => (
     <LabeledValue {...props}>

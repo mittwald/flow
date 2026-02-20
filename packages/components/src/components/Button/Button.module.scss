@@ -5,9 +5,9 @@
 .button {
   position: relative;
   font-family: Inter, sans-serif;
-  font-size: var(--font-size-text--default);
+  font-size: var(--font-size--m);
   font-weight: bold;
-  line-height: var(--line-height--default);
+  line-height: var(--line-height);
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-y);
@@ -101,6 +101,7 @@
     padding-block: var(--button--padding-s-y);
     padding-inline: var(--button--padding-s-x);
     column-gap: var(--button--spacing-s);
+    border-radius: var(--button--corner-radius-s);
 
     &:where(.outline) {
       padding-block: calc(
@@ -159,14 +160,12 @@
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--hover
         );
-        color: var(--button--#{$color}-#{$variant}-content-color--hover);
       }
 
       &[data-pressed]:where(:not([data-readonly])) {
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--pressed
         );
-        color: var(--button--#{$color}-#{$variant}-content-color--pressed);
       }
 
       &[disabled],

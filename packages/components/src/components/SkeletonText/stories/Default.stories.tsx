@@ -11,7 +11,7 @@ const meta: Meta<typeof SkeletonText> = {
   component: SkeletonText,
   render: (props) => <SkeletonText {...props} />,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { exclude: ["className", "width"] },
   },
 };
 
@@ -27,7 +27,7 @@ export const OnDarkBackground: Story = {
   },
 };
 
-export const WithWidth: Story = {
+export const CustomWidth: Story = {
   render: (props) => <SkeletonText {...props} width="200px" />,
 };
 

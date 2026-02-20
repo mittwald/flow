@@ -1,6 +1,6 @@
 modal:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.l}"
   padding:
     value: "{size-px.l}"
   background-color:
@@ -13,7 +13,7 @@ modal:
     l:
       value: 1300px
   footer-background-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.200}"
   border-color:
     value: "{neutral-outline-border-color}"
   border-width:

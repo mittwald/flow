@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import React from "react";
 
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["default", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "Link colors (%s)",

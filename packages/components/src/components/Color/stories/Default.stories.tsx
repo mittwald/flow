@@ -3,16 +3,37 @@ import React from "react";
 import { Text } from "@/components/Text";
 import { Color } from "@/components/Color";
 import Heading from "@/components/Heading";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Color> = {
   title: "Content/Color",
   component: Color,
   args: { color: "blue" },
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: [
+        "blue",
+        "violet",
+        "teal",
+        "lilac",
+        "danger",
+        "warning",
+        "info",
+        "success",
+      ],
+    },
+  },
   render: (props) => (
-    <Text>
-      Lorem ipsum dolor <Color {...props}>sit amet consectetur</Color>{" "}
-      adipisicing elit.
-    </Text>
+    <Section>
+      <Heading>
+        Lorem <Color {...props}>ipsum</Color> dolor sit amet
+      </Heading>
+      <Text>
+        Lorem ipsum dolor <Color {...props}>sit amet consectetur</Color>{" "}
+        adipisicing elit.
+      </Text>
+    </Section>
   ),
 };
 export default meta;
@@ -21,28 +42,11 @@ type Story = StoryObj<typeof Color>;
 
 export const Default: Story = {};
 
-export const violet: Story = { args: { color: "violet" } };
-
-export const Lilac: Story = { args: { color: "lilac" } };
-
-export const Teal: Story = { args: { color: "teal" } };
-
-export const Danger: Story = { args: { color: "danger" } };
-
-export const Warning: Story = { args: { color: "warning" } };
-
-export const Info: Story = { args: { color: "info" } };
-
-export const Success: Story = { args: { color: "success" } };
-
-export const Custom: Story = { args: { color: "#0fdf00" } };
-
-export const InHeading: Story = {
-  args: { color: "violet" },
-  render: (props) => (
-    <Heading>
-      Lorem ipsum dolor <Color {...props}>sit amet consectetur</Color>{" "}
-      adipisicing elit.
-    </Heading>
-  ),
+export const Custom: Story = {
+  args: { color: "#0fdf00" },
+  argTypes: {
+    color: {
+      control: "text",
+    },
+  },
 };

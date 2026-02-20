@@ -8,23 +8,22 @@ import { Section } from "@/components/Section";
 import { Flex } from "@/components/Flex";
 import { IconStar } from "@/components/Icon/components/icons";
 import { LayoutCard } from "@/components/LayoutCard";
-import Button from "@/components/Button";
-import Align from "@/components/Align";
-import ContextualHelp, {
-  ContextualHelpTrigger,
-} from "@/components/ContextualHelp";
-import Alert from "@/components/Alert";
-import CopyButton from "@/components/CopyButton";
 
 const meta: Meta<typeof AccentBox> = {
   title: "Structure/AccentBox",
   component: AccentBox,
   args: { color: "blue" },
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["blue", "green", "gradient", "neutral"],
+    },
+  },
   render: (props) => (
     <AccentBox {...props}>
       <Section>
         <Heading>Heading</Heading>
-        <Text>{dummyText.medium}</Text>
+        <Text>{dummyText.long}</Text>
         <Link>Link</Link>
       </Section>
     </AccentBox>
@@ -36,41 +35,7 @@ type Story = StoryObj<typeof AccentBox>;
 
 export const Default: Story = {};
 
-export const Gradient: Story = {
-  args: { color: "gradient" },
-  render: (props) => (
-    <AccentBox {...props}>
-      <Flex align="center">
-        <Flex direction="column" grow>
-          <Heading size="l">Heading</Heading>
-          <Text color="dark">
-            <strong>{dummyText.short}</strong>
-          </Text>
-        </Flex>
-        <Link target="_blank" href="#" color="dark">
-          Link
-        </Link>
-      </Flex>
-    </AccentBox>
-  ),
-};
-
 export const WithIcon: Story = {
-  args: { color: "blue" },
-  render: (props) => (
-    <AccentBox {...props}>
-      <IconStar />
-      <Section>
-        <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Link>Link</Link>
-      </Section>
-    </AccentBox>
-  ),
-};
-
-export const Green: Story = {
-  args: { color: "green" },
   render: (props) => (
     <AccentBox {...props}>
       <IconStar />
@@ -84,49 +49,21 @@ export const Green: Story = {
 };
 
 export const InLayoutCard: Story = {
-  args: { color: "blue" },
   render: (props) => (
     <LayoutCard>
       <AccentBox {...props}>
-        <IconStar />
-        <Section>
-          <Heading>Heading</Heading>
-          <Text>{dummyText.long}</Text>
-          <Link>Link</Link>
-        </Section>
+        <Flex align="center">
+          <Flex direction="column" grow>
+            <Heading size="l">Heading</Heading>
+            <Text color="dark">
+              <strong>{dummyText.short}</strong>
+            </Text>
+          </Flex>
+          <Link target="_blank" href="#" color="dark">
+            Link
+          </Link>
+        </Flex>
       </AccentBox>
     </LayoutCard>
-  ),
-};
-
-export const WithVariousContent: Story = {
-  args: { color: "green" },
-  render: (props) => (
-    <AccentBox {...props}>
-      <IconStar />
-      <Section>
-        <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Button>Button</Button>
-        <Align>
-          <Text>{dummyText.short}</Text>
-          <ContextualHelpTrigger>
-            <Button />
-            <ContextualHelp>
-              <Heading>Contextual Help</Heading>
-              <Text>{dummyText.short}</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Align>
-        <Alert status="warning">
-          <Heading>Alert Heading</Heading>
-          <Text>This is an alert inside an AccentBox.</Text>
-        </Alert>
-        <Align>
-          <Text>{dummyText.short}</Text>
-          <CopyButton />
-        </Align>
-      </Section>
-    </AccentBox>
   ),
 };
