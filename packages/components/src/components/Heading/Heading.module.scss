@@ -83,8 +83,18 @@
   }
 }
 
-@media (max-width: 550px) {
-  .heading:where(h1) {
-    --font-size: var(--heading-size--l);
+@media (max-width: 768px) {
+  .heading {
+    &:where(h1) {
+      --font-size: var(--heading-size--l);
+    }
+
+    &:where(h2) {
+      --font-size: var(--heading-size--s);
+    }
+
+    &:where(h3) {
+      --font-size: var(--heading-size--xs);
+    }
   }
 }
