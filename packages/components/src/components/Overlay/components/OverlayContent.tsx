@@ -1,6 +1,5 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren, Ref } from "react";
-import { Suspense, useLayoutEffect, useState } from "react";
+import { type FC, type PropsWithChildren, type Ref, Suspense } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
 import styles from "../Overlay.module.scss";
@@ -18,14 +17,7 @@ export interface OverlayContentProps
 export const OverlayContent: FC<OverlayContentProps> = (props) => {
   const { children, className, ...restProps } = props;
 
-  const [isSuspended, setIsSuspended] = useState(false);
-
   const Fallback = () => {
-    // Track suspense state to adjust styling
-    useLayoutEffect(() => {
-      setIsSuspended(true);
-      return () => setIsSuspended(false);
-    }, [setIsSuspended]);
     return (
       <DivView className={styles.suspense}>
         <OverlaySuspenseFallback {...restProps} />
@@ -33,23 +25,15 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
     );
   };
 
-  const rootClassName = isSuspended ? styles.overlay : className;
-
   return (
-    <Aria.ModalOverlay {...restProps} className={rootClassName}>
-      <Suspense
-        fallback={
-          <Aria.Modal className={styles.suspense}>
-            <Fallback />
-          </Aria.Modal>
-        }
-      >
+    <Aria.ModalOverlay {...restProps} className={className}>
+      <DivView>
         <Aria.Modal>
-          <DivView>
+          <Suspense fallback={<Fallback />}>
             <Aria.Dialog>{children}</Aria.Dialog>
-          </DivView>
+          </Suspense>
         </Aria.Modal>
-      </Suspense>
+      </DivView>
     </Aria.ModalOverlay>
   );
 };

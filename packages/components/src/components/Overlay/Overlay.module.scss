@@ -14,13 +14,16 @@
   &[data-exiting] {
     animation: overlay-fade var(--transition--duration--default) reverse ease-in;
   }
+}
 
-  .suspense {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
+.suspense {
+  padding: var(--size-px--xl);
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  justify-content: center;
 }
 
 @keyframes overlay-fade {

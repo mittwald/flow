@@ -1,26 +1,42 @@
+@mixin size($size) {
+  &.size-#{$size} {
+    > div > div {
+      width: var(--modal--size--#{$size});
+    }
+  }
+}
+
 .modal,
 .offCanvas {
   > div {
     position: fixed;
-    display: flex;
-    flex-direction: row;
     height: var(--visual-viewport-height);
-    justify-content: center;
-    align-items: center;
-    inset: 0;
-    padding: var(--size-px--xl);
-    pointer-events: none;
-  }
-
-  [role="dialog"],
-  [role="dialog"] > form {
-    pointer-events: auto;
-    overflow: hidden;
-    max-height: calc(var(--visual-viewport-height) - var(--size-px--xxl));
-    background-color: var(--modal--background-color);
     display: flex;
     flex-direction: column;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+
+    > div {
+      max-width: 100vw;
+      max-height: var(--visual-viewport-height);
+      padding: var(--size-px--xl);
+    }
+  }
+
+  [role="dialog"] {
+    > form {
+      display: contents;
+    }
+
+    pointer-events: all;
     outline: none;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    background-color: var(--modal--background-color);
+    overflow: hidden;
   }
 
   header {
@@ -47,11 +63,10 @@
   .content,
   .columnLayout {
     overflow: hidden auto;
-    display: flex;
-    flex-direction: column;
-    padding: var(--modal--padding);
     min-height: var(--modal--content-min-height);
+    padding: var(--modal--padding);
     flex-grow: 1;
+    background-color: var(--modal--background-color);
   }
 
   .actionGroup {
@@ -71,53 +86,30 @@
   }
 }
 
-@mixin size($size) {
-  &.size-#{$size} {
-    > div {
-      > div {
-        display: flex;
-        flex-grow: 1;
-        flex-shrink: 1;
-      }
-    }
-
-    [role="dialog"],
-    [role="dialog"] > form {
-      max-width: var(--modal--size--#{$size});
-      flex-grow: 1;
-    }
-  }
-}
-
 /* Normal Modal Desktop */
 @media (min-width: 550px) {
   .modal {
     @include size(s);
     @include size(m);
     @include size(l);
-  }
 
-  .modal {
+    [role="dialog"] {
+      border-radius: var(--modal--corner-radius);
+    }
+
     > div {
       > div {
-        justify-content: center;
-      }
+        &[data-entering] {
+          animation: modal-zoom var(--transition--duration--slow)
+            cubic-bezier(0.1, 0.8, 0.3, 1.2);
+        }
 
-      &[data-entering] {
-        animation: modal-zoom var(--transition--duration--slow)
-          cubic-bezier(0.1, 0.8, 0.3, 1.2);
-      }
-
-      &[data-exiting] {
-        animation: modal-zoom var(--transition--duration--default)
-          cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
+        &[data-exiting] {
+          animation: modal-zoom var(--transition--duration--default)
+            cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
+        }
       }
     }
-  }
-
-  [role="dialog"],
-  [role="dialog"] > form {
-    border-radius: var(--modal--corner-radius);
   }
 }
 
@@ -128,55 +120,50 @@
   @include size(m);
   @include size(l);
 
+  [role="dialog"] {
+    height: 100%;
+    border-top-left-radius: var(--modal--corner-radius);
+    border-bottom-left-radius: var(--modal--corner-radius);
+  }
+
   > div {
-    padding: 0;
-    align-items: flex-end;
-    justify-content: flex-start;
-
     > div {
-      justify-content: flex-end;
-    }
-
-    &[data-entering] {
-      animation: modal-slide-in-from-right var(--transition--duration--slow);
-    }
-
-    &[data-exiting] {
-      animation: modal-slide-in-from-right var(--transition--duration--default)
-        reverse;
-    }
-  }
-
-  [role="dialog"],
-  [role="dialog"] > form {
-    border-radius: var(--modal--corner-radius) 0 0 var(--modal--corner-radius);
-    flex-grow: 1;
-    max-height: var(--visual-viewport-height);
-    max-width: var(--modal--off-canvas-max-width);
-    height: 100vh;
-  }
-
-  &.left {
-    > div {
-      align-items: flex-start;
-
-      > div {
-        justify-content: flex-start;
-      }
+      height: inherit;
+      margin-right: unset;
+      margin-left: auto;
+      padding: unset;
 
       &[data-entering] {
-        animation: modal-slide-in-from-left var(--transition--duration--slow);
+        animation: modal-slide-in-from-right var(--transition--duration--slow);
       }
 
       &[data-exiting] {
-        animation: modal-slide-in-from-left var(--transition--duration--default)
-          reverse;
+        animation: modal-slide-in-from-right
+          var(--transition--duration--default) reverse;
       }
     }
+  }
 
-    [role="dialog"],
-    [role="dialog"] > form {
+  &.left {
+    [role="dialog"] {
       border-radius: 0 var(--modal--corner-radius) var(--modal--corner-radius) 0;
+    }
+
+    > div {
+      > div {
+        margin-right: auto;
+        margin-left: unset;
+        padding: unset;
+
+        &[data-entering] {
+          animation: modal-slide-in-from-left var(--transition--duration--slow);
+        }
+
+        &[data-exiting] {
+          animation: modal-slide-in-from-left
+            var(--transition--duration--default) reverse;
+        }
+      }
     }
   }
 }
@@ -186,34 +173,29 @@
 @media (max-width: 550px) {
   .modal {
     > div {
-      display: flex;
-      width: 100%;
-      overflow: hidden auto;
-      inset: unset;
-      padding: 0;
-      max-height: calc(var(--visual-viewport-height));
-      justify-content: flex-start;
-
       > div {
-        overflow: auto;
-        width: 100%;
         margin-top: auto;
-      }
+        padding: unset;
+        width: 100vw;
+        overflow: hidden auto;
+        border-top-left-radius: var(--modal--corner-radius);
+        border-top-right-radius: var(--modal--corner-radius);
+        pointer-events: all;
 
-      &[data-entering] {
-        animation: modal-slide-up var(--transition--duration--slow);
-      }
+        &[data-entering] {
+          animation: modal-slide-up var(--transition--duration--slow);
+        }
 
-      &[data-exiting] {
-        animation: modal-slide-up var(--transition--duration--default) reverse;
+        &[data-exiting] {
+          animation: modal-slide-up var(--transition--duration--default) reverse;
+        }
       }
     }
 
     [role="dialog"],
     [role="dialog"] > form {
+      overflow: hidden auto;
       max-height: unset;
-      border-top-right-radius: var(--modal--corner-radius);
-      border-top-left-radius: var(--modal--corner-radius);
     }
   }
 }
@@ -251,7 +233,7 @@
 
   0.1% {
     opacity: 1;
-    transform: scale(0);
+    transform: scale(0.8);
   }
 
   100% {
