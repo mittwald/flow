@@ -10,22 +10,19 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     env:
-      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
-      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout ⬇️
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          token: ${{ secrets.PUBLISH_PAT }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
