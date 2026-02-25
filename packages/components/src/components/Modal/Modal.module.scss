@@ -127,6 +127,8 @@
   }
 
   > div {
+    padding-left: var(--size-px--m);
+
     > div {
       height: inherit;
       margin-right: unset;
@@ -150,6 +152,8 @@
     }
 
     > div {
+      padding-right: var(--size-px--m);
+
       > div {
         margin-right: auto;
         margin-left: unset;
