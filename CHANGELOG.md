@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.698](https://github.com/mittwald/flow/compare/0.2.0-alpha.697...0.2.0-alpha.698) (2026-02-25)
+
+### Features
+
+* **List:** update auto submit delay ([#2341](https://github.com/mittwald/flow/issues/2341)) ([ff4efc2](https://github.com/mittwald/flow/commit/ff4efc220b2344571295190d9dd5123baba4e677))
+
 # [0.2.0-alpha.697](https://github.com/mittwald/flow/compare/0.2.0-alpha.696...0.2.0-alpha.697) (2026-02-25)
 
 ### Bug Fixes
