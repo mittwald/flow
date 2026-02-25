@@ -10,6 +10,7 @@ import {
   IconChangelog,
   IconContainer,
   IconContract,
+  IconContractPartner,
   IconContributor,
   IconCronjob,
   IconCustomer,
