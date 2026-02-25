@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.700](https://github.com/mittwald/flow/compare/0.2.0-alpha.699...0.2.0-alpha.700) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** avoid scroll bars on resize ([#2346](https://github.com/mittwald/flow/issues/2346)) ([5d84f8a](https://github.com/mittwald/flow/commit/5d84f8a92494928a4222496c52c7f3c05da9f453))
+
 # [0.2.0-alpha.699](https://github.com/mittwald/flow/compare/0.2.0-alpha.698...0.2.0-alpha.699) (2026-02-25)
 
 ### Bug Fixes
