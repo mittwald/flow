@@ -133,7 +133,7 @@
     padding-left: var(--size-px--m);
 
     > div {
-      justify-items: flex-end;
+      justify-content: flex-end;
       width: inherit;
       height: inherit;
       padding: unset;
@@ -159,7 +159,7 @@
       padding-right: var(--size-px--m);
 
       > div {
-        justify-items: flex-start;
+        justify-content: flex-start;
         padding: unset;
 
         &[data-entering] {
