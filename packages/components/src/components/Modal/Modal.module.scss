@@ -1,6 +1,6 @@
 @mixin size($size) {
   &.size-#{$size} {
-    > div > div {
+    [role="dialog"] {
       width: var(--modal--size--#{$size});
     }
   }
