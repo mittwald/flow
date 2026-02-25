@@ -1,7 +1,8 @@
 @mixin size($size) {
   &.size-#{$size} {
     [role="dialog"] {
-      width: var(--modal--size--#{$size});
+      width: inherit;
+      max-width: var(--modal--size--#{$size});
     }
   }
 }
@@ -19,7 +20,8 @@
     pointer-events: none;
 
     > div {
-      max-width: 100%;
+      justify-items: center;
+      width: inherit;
       max-height: var(--visual-viewport-height);
       padding: var(--size-px--xl);
     }
@@ -130,9 +132,9 @@
     padding-left: var(--size-px--m);
 
     > div {
+      justify-items: flex-end;
+      width: inherit;
       height: inherit;
-      margin-right: unset;
-      margin-left: auto;
       padding: unset;
 
       &[data-entering] {
@@ -152,11 +154,11 @@
     }
 
     > div {
+      padding-left: 0;
       padding-right: var(--size-px--m);
 
       > div {
-        margin-right: auto;
-        margin-left: unset;
+        justify-items: flex-start;
         padding: unset;
 
         &[data-entering] {
@@ -198,6 +200,7 @@
 
     [role="dialog"],
     [role="dialog"] > form {
+      width: inherit;
       overflow: hidden auto;
       max-height: unset;
     }
