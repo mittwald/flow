@@ -20,7 +20,8 @@
     pointer-events: none;
 
     > div {
-      justify-items: center;
+      display: flex;
+      justify-content: center;
       width: inherit;
       max-height: var(--visual-viewport-height);
       padding: var(--size-px--xl);
