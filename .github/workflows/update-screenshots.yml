@@ -27,7 +27,7 @@ jobs:
 
     permissions:
       contents: write # needs to push changes
-      issues: write # needs to remove the triggering label
+      pull-requests: write # needs to remove the triggering label
 
     steps:
       - name: Remove label if exists
