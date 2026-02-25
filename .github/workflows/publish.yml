@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
     steps:
       - name: Checkout ⬇️
