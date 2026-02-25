@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.699](https://github.com/mittwald/flow/compare/0.2.0-alpha.698...0.2.0-alpha.699) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** refactor modal technical placement ([#2332](https://github.com/mittwald/flow/issues/2332)) ([11ea4df](https://github.com/mittwald/flow/commit/11ea4df36939f85cbacffaf099e5be222b501ac4))
+
 # [0.2.0-alpha.698](https://github.com/mittwald/flow/compare/0.2.0-alpha.697...0.2.0-alpha.698) (2026-02-25)
 
 ### Features
