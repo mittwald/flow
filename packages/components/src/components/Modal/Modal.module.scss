@@ -1,18 +1,45 @@
+@mixin size($size) {
+  &.size-#{$size} {
+    [role="dialog"] {
+      width: inherit;
+      max-width: var(--modal--size--#{$size});
+    }
+  }
+}
+
 .modal,
 .offCanvas {
   > div {
-    background-color: var(--modal--background-color);
-    overflow: hidden;
+    position: fixed;
+    height: var(--visual-viewport-height);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      width: inherit;
+      max-height: var(--visual-viewport-height);
+      padding: var(--size-px--xl);
+    }
   }
 
-  [role="dialog"],
-  [role="dialog"] > form {
-    overflow: hidden;
+  [role="dialog"] {
+    > form {
+      display: contents;
+    }
+
+    pointer-events: all;
     outline: none;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-height: inherit;
+    max-height: 100%;
+    background-color: var(--modal--background-color);
+    overflow: hidden;
   }
 
   header {
@@ -24,7 +51,8 @@
   .header {
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
-    border-bottom: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
+    border-bottom: var(--modal--border-width) var(--modal--border-style)
+      var(--modal--border-color);
 
     > span {
       display: flex;
@@ -38,17 +66,17 @@
   .content,
   .columnLayout {
     overflow: hidden auto;
-    display: flex;
-    flex-direction: column;
-    padding: var(--modal--padding);
     min-height: var(--modal--content-min-height);
+    padding: var(--modal--padding);
     flex-grow: 1;
+    background-color: var(--modal--background-color);
   }
 
   .actionGroup {
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
-    border-top: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
+    border-top: var(--modal--border-width) var(--modal--border-style)
+      var(--modal--border-color);
     flex-grow: 0;
   }
 
@@ -61,40 +89,28 @@
   }
 }
 
-.modal,
-.offCanvas {
-  @extend .size-s;
-
-  @mixin size($size) {
-    &.size-#{$size} {
-      > div {
-        width: var(--modal--size--#{$size});
-      }
-    }
-  }
-
-  @include size(s);
-  @include size(m);
-  @include size(l);
-}
-
 /* Normal Modal Desktop */
-
 @media (min-width: 550px) {
   .modal {
-    > div {
+    @include size(s);
+    @include size(m);
+    @include size(l);
+
+    [role="dialog"] {
       border-radius: var(--modal--corner-radius);
-      max-height: calc(100dvh - var(--size-px--xxl));
-      max-width: calc(100dvw - var(--size-px--xxl));
+    }
 
-      &[data-entering] {
-        animation: modal-zoom var(--transition--duration--slow)
-          cubic-bezier(0.1, 0.8, 0.3, 1.2);
-      }
+    > div {
+      > div {
+        &[data-entering] {
+          animation: modal-zoom var(--transition--duration--slow)
+            cubic-bezier(0.1, 0.8, 0.3, 1.2);
+        }
 
-      &[data-exiting] {
-        animation: modal-zoom var(--transition--duration--default)
-          cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
+        &[data-exiting] {
+          animation: modal-zoom var(--transition--duration--default)
+            cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
+        }
       }
     }
   }
@@ -103,37 +119,57 @@
 /* OffCanvas Mobile & Desktop */
 
 .offCanvas {
-  justify-content: flex-end;
+  @include size(s);
+  @include size(m);
+  @include size(l);
+
+  [role="dialog"] {
+    height: 100%;
+    border-top-left-radius: var(--modal--corner-radius);
+    border-bottom-left-radius: var(--modal--corner-radius);
+  }
 
   > div {
-    border-bottom-left-radius: var(--modal--corner-radius);
-    border-top-left-radius: var(--modal--corner-radius);
-    height: 100%;
-    margin-left: auto;
-    max-width: var(--modal--off-canvas-max-width);
+    padding-left: var(--size-px--m);
 
-    &[data-entering] {
-      animation: modal-slide-in-from-right var(--transition--duration--slow);
-    }
+    > div {
+      justify-content: flex-end;
+      width: inherit;
+      height: inherit;
+      padding: unset;
 
-    &[data-exiting] {
-      animation: modal-slide-in-from-right var(--transition--duration--default)
-        reverse;
+      &[data-entering] {
+        animation: modal-slide-in-from-right var(--transition--duration--slow);
+      }
+
+      &[data-exiting] {
+        animation: modal-slide-in-from-right
+          var(--transition--duration--default) reverse;
+      }
     }
   }
 
   &.left {
+    [role="dialog"] {
+      border-radius: 0 var(--modal--corner-radius) var(--modal--corner-radius) 0;
+    }
+
     > div {
-      margin-left: unset;
-      margin-right: auto;
+      padding-left: 0;
+      padding-right: var(--size-px--m);
 
-      &[data-entering] {
-        animation: modal-slide-in-from-left var(--transition--duration--slow);
-      }
+      > div {
+        justify-content: flex-start;
+        padding: unset;
 
-      &[data-exiting] {
-        animation: modal-slide-in-from-left var(--transition--duration--default)
-          reverse;
+        &[data-entering] {
+          animation: modal-slide-in-from-left var(--transition--duration--slow);
+        }
+
+        &[data-exiting] {
+          animation: modal-slide-in-from-left
+            var(--transition--duration--default) reverse;
+        }
       }
     }
   }
@@ -143,23 +179,31 @@
 
 @media (max-width: 550px) {
   .modal {
-    overflow-y: auto;
-    padding-top: var(--size-px--xxl);
-
     > div {
-      margin-top: auto;
-      width: 100%;
-      border-top-right-radius: var(--modal--corner-radius);
-      border-top-left-radius: var(--modal--corner-radius);
-      max-height: max-content;
+      > div {
+        margin-top: auto;
+        padding: unset;
+        width: 100%;
+        overflow: hidden auto;
+        border-top-left-radius: var(--modal--corner-radius);
+        border-top-right-radius: var(--modal--corner-radius);
+        pointer-events: all;
 
-      &[data-entering] {
-        animation: modal-slide-up var(--transition--duration--slow);
-      }
+        &[data-entering] {
+          animation: modal-slide-up var(--transition--duration--slow);
+        }
 
-      &[data-exiting] {
-        animation: modal-slide-up var(--transition--duration--default) reverse;
+        &[data-exiting] {
+          animation: modal-slide-up var(--transition--duration--default) reverse;
+        }
       }
+    }
+
+    [role="dialog"],
+    [role="dialog"] > form {
+      width: inherit;
+      overflow: hidden auto;
+      max-height: unset;
     }
   }
 }
@@ -200,30 +244,30 @@
 
 @keyframes modal-slide-up {
   from {
-    margin-bottom: -100px;
+    translate: 0 30%;
   }
 
   to {
-    margin-bottom: 0;
+    translate: 0 0;
   }
 }
 
 @keyframes modal-slide-in-from-right {
   from {
-    margin-right: -200px;
+    translate: 30% 0;
   }
 
   to {
-    margin-right: 0;
+    translate: 0 0;
   }
 }
 
 @keyframes modal-slide-in-from-left {
   from {
-    margin-left: -200px;
+    translate: -30% 0;
   }
 
   to {
-    margin-left: 0;
+    translate: 0 0;
   }
 }
