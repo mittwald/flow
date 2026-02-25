@@ -3,3 +3,13 @@ shadow:
     value: "rgba(0, 0, 0, 0.1) 0 {size-px.xs} {size-px.s}"
   overlay:
     value: "rgba(0, 0, 0, 0.14) 0 {size-px.m} {size-px.l}"
+blur:
+  value: "3px"
+transition:
+  duration:
+    fast:
+      value: 200ms
+    default:
+      value: 300ms
+    slow:
+      value: 400ms

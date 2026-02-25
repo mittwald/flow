@@ -3,6 +3,8 @@
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
+    border: var(--modal--border-width) var(--modal--border-style)
+      var(--modal--border-color);
   }
 
   [role="dialog"],
@@ -24,7 +26,6 @@
   .header {
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
-    border-bottom: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
 
     > span {
       display: flex;
@@ -48,7 +49,6 @@
   .actionGroup {
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
-    border-top: var(--modal--border-width) var(--modal--border-style) var(--modal--border-color);
     flex-grow: 0;
   }
 

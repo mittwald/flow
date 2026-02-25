@@ -5,6 +5,8 @@
   width: var(--notification--width);
   box-shadow: var(--notification--box-shadow);
   position: relative;
+  border: var(--notification--border-width) var(--notification--border-style)
+    var(--notification--border-color);
 
   @extend .info;
 

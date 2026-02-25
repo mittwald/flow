@@ -7,6 +7,10 @@ notification:
     value: "{border-width.300}"
   border-style:
     value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral.color.300}"
   box-shadow:
     value: "{shadow.overlay}"
   width:

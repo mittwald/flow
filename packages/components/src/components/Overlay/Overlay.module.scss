@@ -1,5 +1,6 @@
 .overlay {
-  background: var(--overlay--background-color);
+  background: var(--overlay--backdrop-color);
+  backdrop-filter: blur(var(--blur));
   position: fixed;
   inset: 0;
   display: flex;

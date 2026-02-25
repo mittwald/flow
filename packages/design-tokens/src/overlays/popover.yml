@@ -17,7 +17,7 @@ popover:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{neutral.color.300}"
   spacing:
     value: "{size-px.s}"
   popover-to-trigger-spacing:

@@ -9,3 +9,9 @@ layout-card:
     value: "{size-px.m}"
   box-shadow:
     value: "{shadow.content}"
+  border-style:
+    value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral.color.300}"

@@ -15,7 +15,7 @@ modal:
   footer-background-color:
     value: "{neutral.color.200}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{neutral.color.300}"
   border-width:
     value: "{border-width.100}"
   border-style:
