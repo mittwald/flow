@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.697](https://github.com/mittwald/flow/compare/0.2.0-alpha.696...0.2.0-alpha.697) (2026-02-25)
+
+### Bug Fixes
+
+* **ci:** publish use PAT ([#2343](https://github.com/mittwald/flow/issues/2343)) ([53ead50](https://github.com/mittwald/flow/commit/53ead502421cf382a6583533f4da3b29130997ab))
+* **ci:** revert publish pat usage ([#2344](https://github.com/mittwald/flow/issues/2344)) ([9ec6e92](https://github.com/mittwald/flow/commit/9ec6e92a89e67d2173e0d9281ea508c7d91b2fd6))
+
 # [0.2.0-alpha.696](https://github.com/mittwald/flow/compare/0.2.0-alpha.695...0.2.0-alpha.696) (2026-02-23)
 
 **Note:** Version bump only for package @mittwald/flow-project

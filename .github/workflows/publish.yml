@@ -10,12 +10,11 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
