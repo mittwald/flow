@@ -30,6 +30,7 @@ import {
   IconForwardAddress,
   IconImage,
   IconInvite,
+  IconInvoice,
   IconKnowledgeHint,
   IconLanguage,
   IconLeadFyndr,
@@ -193,6 +194,10 @@ import {
   <LabeledValue>
     <Label>Invite</Label>
     <IconInvite />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Invoice</Label>
+    <IconInvoice />
   </LabeledValue>
   <LabeledValue>
     <Label>KnowledgeHint</Label>
