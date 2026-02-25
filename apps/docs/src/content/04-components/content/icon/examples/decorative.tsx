@@ -111,6 +111,10 @@ import {
     <IconContract />
   </LabeledValue>
   <LabeledValue>
+    <Label>ContractPartner</Label>
+    <IconContractPartner />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Contributor</Label>
     <IconContributor />
   </LabeledValue>

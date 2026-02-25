@@ -59,6 +59,7 @@ Changelog: ClipboardList
 Certificate: FileCertificate
 Container: Package
 Contract: FileDescription
+ContractPartner: Signature
 Contributor: HeartHandshake
 Cronjob: CalendarCheck
 Customer: Building

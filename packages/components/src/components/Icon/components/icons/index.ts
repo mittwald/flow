@@ -14,6 +14,7 @@ export { IconClose } from "./IconClose";
 export { IconCode } from "./IconCode";
 export { IconContextMenu } from "./IconContextMenu";
 export { IconContextMenuVertical } from "./IconContextMenuVertical";
+export { IconContractPartner } from "./IconContractPartner";
 export { IconCopy } from "./IconCopy";
 export { IconDescending } from "./IconDescending";
 export { IconDelete } from "./IconDelete";
