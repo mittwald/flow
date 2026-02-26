@@ -59,6 +59,7 @@ Changelog: ClipboardList
 Certificate: FileCertificate
 Container: Package
 Contract: FileDescription
+ContractPartner: Signature
 Contributor: HeartHandshake
 Cronjob: CalendarCheck
 Customer: Building
@@ -79,6 +80,7 @@ File: File
 ForwardAddress: ArrowRight
 Image: Photo
 Invite: MailOpened
+Invoice: FileEuro
 KnowledgeHint: Bulb
 Language: Language
 LeadFyndr: Radar2

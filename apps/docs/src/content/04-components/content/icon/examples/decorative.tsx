@@ -10,6 +10,7 @@ import {
   IconChangelog,
   IconContainer,
   IconContract,
+  IconContractPartner,
   IconContributor,
   IconCronjob,
   IconCustomer,
@@ -30,6 +31,7 @@ import {
   IconForwardAddress,
   IconImage,
   IconInvite,
+  IconInvoice,
   IconKnowledgeHint,
   IconLanguage,
   IconLeadFyndr,
@@ -111,6 +113,10 @@ import {
     <IconContract />
   </LabeledValue>
   <LabeledValue>
+    <Label>ContractPartner</Label>
+    <IconContractPartner />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Contributor</Label>
     <IconContributor />
   </LabeledValue>
@@ -189,6 +195,10 @@ import {
   <LabeledValue>
     <Label>Invite</Label>
     <IconInvite />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Invoice</Label>
+    <IconInvoice />
   </LabeledValue>
   <LabeledValue>
     <Label>KnowledgeHint</Label>
