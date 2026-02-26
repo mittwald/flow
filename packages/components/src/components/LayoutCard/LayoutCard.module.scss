@@ -18,7 +18,8 @@
       border-top-left-radius: var(--layout-card--corner-radius);
     }
 
-    :global(.flow--tabs--tab-title):first-child {
+    :global(.flow--tabs--tab-title):first-child,
+    :global(.flow--tabs--tab-list--context-menu-button) {
       border-top-left-radius: var(--layout-card--corner-radius);
     }
   }
