@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.701](https://github.com/mittwald/flow/compare/0.2.0-alpha.700...0.2.0-alpha.701) (2026-02-26)
+
+### Features
+
+* **Icon:** add contract partner icon ([#2345](https://github.com/mittwald/flow/issues/2345)) ([5bd3170](https://github.com/mittwald/flow/commit/5bd3170ec0d049662bdf6577e619558d1fb0c1da))
+
 # [0.2.0-alpha.700](https://github.com/mittwald/flow/compare/0.2.0-alpha.699...0.2.0-alpha.700) (2026-02-25)
 
 ### Bug Fixes
