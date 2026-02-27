@@ -1,6 +1,9 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { dynamic, type PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { type PropsWithChildren } from "react";
 import {
   type ControllerProps,
@@ -100,6 +103,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     TextField: fieldProps,
     TextArea: fieldProps,
     MarkdownEditor: fieldProps,
+    CodeEditor: fieldProps,
     Checkbox: {
       ...fieldProps,
       isSelected: value,
