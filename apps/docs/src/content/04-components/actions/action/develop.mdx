@@ -1,3 +1,21 @@
+# Actions abbrechen
+
+Wenn eine Action abgbrochen werden soll, ohne dass ein Fehler ausgelöst werden
+soll, kann die Funktion `abortAction` aus dem Action-Modul verwendet werden.
+Diese Funktion wirft einen speziellen Fehler, der von der Action-Komponente
+erkannt wird. Dadurch kann die Action sauber abgebrochen werden, ohne dass
+unerwünschte Fehlermeldungen oder Seiteneffekte auftreten.
+
+Alle nachfolgenden Funktionen in der Action-Execution-Logik, die nach dem Aufruf
+von `abortAction` definiert sind, werden nicht mehr ausgeführt. Das bedeutet,
+dass der gesamte Ablauf der Action sofort gestoppt wird, sobald `abortAction`
+aufgerufen wird.
+
+Umschließende Actions bei einer Verschachtelung von Actions werden ebenfalls
+abgebrochen, wenn `abortAction` in einer inneren Action aufgerufen wird.
+
+<LiveCodeEditor example="abort" />
+
 # Properties
 
 <PropertiesTables />

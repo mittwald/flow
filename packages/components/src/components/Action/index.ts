@@ -1,5 +1,6 @@
 export { Action } from "./Action";
-export { MutedActionError } from "./MutedActionError";
+export { AbortActionError } from "./AbortActionError";
+export { abortAction } from "./lib/abortAction";
 export { ActionBatch } from "./ActionBatch";
 export * from "./types";
 export { default } from "./Action";
