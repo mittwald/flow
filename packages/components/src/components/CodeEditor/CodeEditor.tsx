@@ -22,12 +22,25 @@ export interface CodeEditorProps
   isInvalid?: boolean;
   className?: string;
   language?: CodeEditorLanguage;
+
+  isRequired?: boolean;
+  validationBehavior?: unknown;
 }
 
 /** @flr-generate all */
 export const CodeEditor = flowComponent("CodeEditor", (props) => {
-  const { ref, children, className, language, extensions, ...rest } =
-    useControlledHostValueProps(props);
+  const {
+    ref,
+    children,
+    className,
+    language,
+    extensions,
+    isReadOnly,
+    isInvalid,
+    isRequired: _ignoredIsRequired,
+    validationBehavior: _ignoredValidationBehavior,
+    ...rest
+  } = useControlledHostValueProps(props);
 
   const {
     FieldErrorView,
@@ -53,6 +66,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
         <FieldErrorCaptureContext>
           <CodeMirror
             {...rest}
+            aria-invalid={isInvalid}
+            readOnly={isReadOnly}
             className={styles.codeMirror}
             ref={(codeMirrorRef) => {
               if (codeMirrorRef?.editor) {

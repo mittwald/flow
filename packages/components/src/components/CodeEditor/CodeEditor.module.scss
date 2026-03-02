@@ -1,5 +1,20 @@
 .codeEditor {
   .codeMirror {
     order: 2;
+
+    & :global(.cm-panel.cm-panel-lint ul [aria-selected]) {
+      background-color: unset;
+    }
+
+    & :global(.cm-tooltip) {
+      border: unset;
+      background-color: white;
+    }
+
+    & :global(.cm-diagnostic) {
+      padding: unset;
+      margin-left: unset;
+      border-left: unset;
+    }
   }
 }
