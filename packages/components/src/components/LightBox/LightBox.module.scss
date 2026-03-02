@@ -22,6 +22,10 @@
 
   .content {
     overflow: auto;
+
+    > img {
+      width: 100%;
+    }
   }
 
   &.fitScreen {
