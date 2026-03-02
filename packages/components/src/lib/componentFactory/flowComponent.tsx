@@ -5,10 +5,10 @@ import type {
 import type {
   ComponentProps,
   ComponentType,
+  FunctionComponent,
   ReactElement,
   ReactNode,
   RefAttributes,
-  FunctionComponent,
 } from "react";
 import { cloneElement, memo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
@@ -27,11 +27,9 @@ export interface FlowComponentProps<R = HTMLDivElement>
   wrapWith?: ReactElement;
 }
 
-type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
-  FlowComponentPropsOfName<C>,
-  keyof FlowComponentProps
-> &
-  RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
+export type FlowComponentImplementationProps<C extends FlowComponentName> =
+  Omit<FlowComponentPropsOfName<C>, keyof FlowComponentProps> &
+    RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
   ComponentType<FlowComponentImplementationProps<C>>;

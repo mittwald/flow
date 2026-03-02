@@ -2,8 +2,16 @@
 import type { JSX as Jsx } from "react/jsx-runtime";
 
 import "@vitest/browser/matchers.d.ts";
+import "vitest/globals";
+import "@testing-library/jest-dom";
 
 declare global {
+  declare module "*.grammar" {
+    import type { LRParser } from "@lezer/lr";
+    const classes: LRParser;
+    export default classes;
+  }
+
   declare module "*.locale.json" {
     import type { LocalizedStrings } from "react-aria";
     const langFile: LocalizedStrings;
@@ -31,6 +39,3 @@ declare global {
     type IntrinsicClassAttributes = Jsx.IntrinsicClassAttributes<never>;
   }
 }
-
-import "vitest/globals";
-import "@testing-library/jest-dom";

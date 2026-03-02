@@ -56,7 +56,10 @@
     "test:unit:dev": "vitest dev --project=unit*"
   },
   "dependencies": {
+    "@codemirror/language": "^6.12.1",
+    "@codemirror/lint": "^6.9.4",
     "@internationalized/string-compiler": "^3.2.6",
+    "@lezer/highlight": "^1.2.3",
     "@mittwald/password-tools-js": "3.0.0-alpha.18",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
@@ -73,6 +76,8 @@
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@uiw/codemirror-extensions-langs": "^4.25.4",
+    "@uiw/react-codemirror": "^4.25.4",
     "clsx": "^2.1.1",
     "context": "^3.0.33",
     "copy-to-clipboard": "^3.3.3",
@@ -103,6 +108,7 @@
   "devDependencies": {
     "@faker-js/faker": "^10.2.0",
     "@internationalized/date": "^3.10.1",
+    "@lezer/generator": "^1.8.0",
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
