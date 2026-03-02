@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.703](https://github.com/mittwald/flow/compare/0.2.0-alpha.702...0.2.0-alpha.703) (2026-03-02)
+
+### Bug Fixes
+
+* **LightBox:** fix light box for svgs without size ([#2349](https://github.com/mittwald/flow/issues/2349)) ([6cef787](https://github.com/mittwald/flow/commit/6cef787b3b993e30f0041557923b500de695217a))
+
 # [0.2.0-alpha.702](https://github.com/mittwald/flow/compare/0.2.0-alpha.701...0.2.0-alpha.702) (2026-02-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
