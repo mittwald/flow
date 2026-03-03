@@ -1,7 +1,3 @@
-import type {
-  SelectProps,
-  TimeFieldProps,
-} from "@mittwald/flow-react-components";
 import {
   Content,
   FieldError,
@@ -10,10 +6,12 @@ import {
   Option,
   Section,
   Select,
+  type SelectProps,
   Separator,
   Text,
   TextField,
   TimeField,
+  type TimeFieldProps,
 } from "@mittwald/flow-react-components";
 import CronTime from "cron-time-generator";
 import { type FC, useMemo, useState } from "react";
