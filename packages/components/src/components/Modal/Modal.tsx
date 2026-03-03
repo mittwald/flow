@@ -1,4 +1,4 @@
-import { Suspense, type PropsWithChildren, type ReactNode } from "react";
+import { type PropsWithChildren, type ReactNode, Suspense } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {

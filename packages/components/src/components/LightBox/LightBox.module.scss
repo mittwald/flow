@@ -1,4 +1,15 @@
 .lightBox {
+  > div {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    top: calc(var(--visual-viewport-height) / 2);
+    width: max-content;
+    max-width: max(90vw, var(--size-px--xxl));
+    margin-left: 50vw;
+    translate: -50% -50%;
+  }
+
   [role="dialog"] {
     outline: none;
     display: flex;
@@ -9,6 +20,10 @@
 
   .content {
     overflow: auto;
+
+    > img {
+      width: 100%;
+    }
   }
 
   &.fitScreen {

@@ -26,7 +26,7 @@ export const SizeChange: Story = {
   render: (props) => {
     const [size, setSize] = useState<ModalProps["size"]>("s");
     return (
-      <Modal {...props} size={size} offCanvas isOpen>
+      <Modal {...props} size={size} offCanvas isDefaultOpen>
         <Heading>{dummyText.short}</Heading>
         <Content>
           <Section>

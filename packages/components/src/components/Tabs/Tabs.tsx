@@ -20,7 +20,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     children,
     className,
     defaultSelectedKey,
-    selectedKey,
+    selectedKey: selectedKeyProps,
     disabledKeys,
     ref,
     onSelectionChange,
@@ -28,9 +28,11 @@ export const Tabs = flowComponent("Tabs", (props) => {
   } = props;
 
   const rootClassName = clsx(styles.tabs, className);
-  const [selection, setSelection] = useState<Aria.Key | undefined>(
-    selectedKey ?? defaultSelectedKey,
-  );
+  const [selectedKeyState, setSelectedKeyState] = useState<
+    Aria.Key | undefined
+  >(defaultSelectedKey);
+
+  const selectedKey = selectedKeyProps ?? selectedKeyState;
 
   return (
     <TunnelProvider>
@@ -39,9 +41,9 @@ export const Tabs = flowComponent("Tabs", (props) => {
         slot={null}
         className={rootClassName}
         {...rest}
-        selectedKey={selection}
+        selectedKey={selectedKey}
         onSelectionChange={(key) => {
-          setSelection(key);
+          setSelectedKeyState(key);
           if (onSelectionChange) {
             onSelectionChange(key);
           }
@@ -50,9 +52,9 @@ export const Tabs = flowComponent("Tabs", (props) => {
         ref={ref}
       >
         <TabList
-          selection={selection}
+          selection={selectedKey}
           onContextMenuSelectionChange={(key) => {
-            setSelection(key);
+            setSelectedKeyState(key);
             if (onSelectionChange) {
               onSelectionChange(key);
             }

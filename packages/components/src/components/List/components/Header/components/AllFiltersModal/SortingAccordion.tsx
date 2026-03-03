@@ -30,7 +30,7 @@ export const SortingAccordion: FC = () => {
               value={s.id}
               onPress={() => list.getSorting(s.id).enable()}
             >
-              {s.name ?? s.property}
+              {`${s.name ?? s.property} ${s.directionName ?? ""}`.trim()}
             </RadioView>
           ))}
         </RadioGroupView>
