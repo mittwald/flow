@@ -12,6 +12,7 @@ import {
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
+import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
@@ -45,7 +46,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           : rest.rules?.maxLength,
     },
   });
-  const formContext = useFormContext();
+  const formContext = useFormContext<T>();
+
+  useUpdateFormDefaultValue(props, formContext.form);
+
   /**
    * We don't use controller.field.value here, because it doesn't update when
    * the form value is updated outside of this field (e.g. when setting values

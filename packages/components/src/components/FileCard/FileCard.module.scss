@@ -50,6 +50,7 @@
   &:has(.link:hover) {
     background-color: var(--file-card--background-color--hover);
   }
+
   &:has(.link[data-pressed]) {
     background-color: var(--file-card--background-color--pressed);
   }

@@ -25,9 +25,8 @@
   }
 
   blockquote {
-    border-left-width: var(--text--blockquote-border-width);
-    border-left-style: var(--text--blockquote-border-style);
-    border-left-color: var(--text--blockquote-border-color);
+    border-left: var(--text--blockquote-border-width)
+      var(--text--blockquote-border-style) var(--text--blockquote-border-color);
     padding-left: var(--text--blockquote-padding);
   }
 
@@ -57,9 +56,11 @@
   &:where(.wrap-wrap) {
     text-wrap: wrap;
   }
+
   &:where(.wrap-balance) {
     text-wrap: balance;
   }
+
   &:where(.wrap-pretty) {
     text-wrap: pretty;
   }

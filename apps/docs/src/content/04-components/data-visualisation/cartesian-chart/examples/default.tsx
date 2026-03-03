@@ -2,8 +2,8 @@ import {
   Area,
   CartesianChart,
   CartesianGrid,
-  ChartTooltip,
   ChartLegend,
+  ChartTooltip,
   XAxis,
   YAxis,
 } from "@mittwald/flow-react-components";
@@ -31,7 +31,6 @@ import {
       Projekte: 39,
     },
   ]}
-  height="300px"
 >
   <CartesianGrid />
   <Area dataKey="Datenbanken" />

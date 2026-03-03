@@ -3,6 +3,250 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
+
+### Features
+
+* **Navigation:** update navigation item size ([#2351](https://github.com/mittwald/flow/issues/2351)) ([7461570](https://github.com/mittwald/flow/commit/7461570fb1c7453dc5f2910e6c6eb648156453fe))
+
+# [0.2.0-alpha.703](https://github.com/mittwald/flow/compare/0.2.0-alpha.702...0.2.0-alpha.703) (2026-03-02)
+
+### Bug Fixes
+
+* **LightBox:** fix light box for svgs without size ([#2349](https://github.com/mittwald/flow/issues/2349)) ([6cef787](https://github.com/mittwald/flow/commit/6cef787b3b993e30f0041557923b500de695217a))
+
+# [0.2.0-alpha.702](https://github.com/mittwald/flow/compare/0.2.0-alpha.701...0.2.0-alpha.702) (2026-02-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.701](https://github.com/mittwald/flow/compare/0.2.0-alpha.700...0.2.0-alpha.701) (2026-02-26)
+
+### Features
+
+* **Icon:** add contract partner icon ([#2345](https://github.com/mittwald/flow/issues/2345)) ([5bd3170](https://github.com/mittwald/flow/commit/5bd3170ec0d049662bdf6577e619558d1fb0c1da))
+
+# [0.2.0-alpha.700](https://github.com/mittwald/flow/compare/0.2.0-alpha.699...0.2.0-alpha.700) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** avoid scroll bars on resize ([#2346](https://github.com/mittwald/flow/issues/2346)) ([5d84f8a](https://github.com/mittwald/flow/commit/5d84f8a92494928a4222496c52c7f3c05da9f453))
+
+# [0.2.0-alpha.699](https://github.com/mittwald/flow/compare/0.2.0-alpha.698...0.2.0-alpha.699) (2026-02-25)
+
+### Bug Fixes
+
+* **Modal:** refactor modal technical placement ([#2332](https://github.com/mittwald/flow/issues/2332)) ([11ea4df](https://github.com/mittwald/flow/commit/11ea4df36939f85cbacffaf099e5be222b501ac4))
+
+# [0.2.0-alpha.698](https://github.com/mittwald/flow/compare/0.2.0-alpha.697...0.2.0-alpha.698) (2026-02-25)
+
+### Features
+
+* **List:** update auto submit delay ([#2341](https://github.com/mittwald/flow/issues/2341)) ([ff4efc2](https://github.com/mittwald/flow/commit/ff4efc220b2344571295190d9dd5123baba4e677))
+
+# [0.2.0-alpha.697](https://github.com/mittwald/flow/compare/0.2.0-alpha.696...0.2.0-alpha.697) (2026-02-25)
+
+### Bug Fixes
+
+* **ci:** publish use PAT ([#2343](https://github.com/mittwald/flow/issues/2343)) ([53ead50](https://github.com/mittwald/flow/commit/53ead502421cf382a6583533f4da3b29130997ab))
+* **ci:** revert publish pat usage ([#2344](https://github.com/mittwald/flow/issues/2344)) ([9ec6e92](https://github.com/mittwald/flow/commit/9ec6e92a89e67d2173e0d9281ea508c7d91b2fd6))
+
+# [0.2.0-alpha.696](https://github.com/mittwald/flow/compare/0.2.0-alpha.695...0.2.0-alpha.696) (2026-02-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.695](https://github.com/mittwald/flow/compare/0.2.0-alpha.694...0.2.0-alpha.695) (2026-02-20)
+
+### Bug Fixes
+
+* **Tab:** fix tab does not change in controlled-mode ([2d206d4](https://github.com/mittwald/flow/commit/2d206d4ea3f4a0bf68501ca8c27ded67b9919a07))
+
+# [0.2.0-alpha.694](https://github.com/mittwald/flow/compare/0.2.0-alpha.693...0.2.0-alpha.694) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.693](https://github.com/mittwald/flow/compare/0.2.0-alpha.692...0.2.0-alpha.693) (2026-02-19)
+
+### Bug Fixes
+
+* **Modal:** do not show close confirmation when form is resetted ([46277ba](https://github.com/mittwald/flow/commit/46277ba7752a4e987d5b42c1f4ed42159ea3ad88))
+
+# [0.2.0-alpha.692](https://github.com/mittwald/flow/compare/0.2.0-alpha.691...0.2.0-alpha.692) (2026-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.691](https://github.com/mittwald/flow/compare/0.2.0-alpha.690...0.2.0-alpha.691) (2026-02-19)
+
+### Bug Fixes
+
+* **PasswordCreationField:** remove HIBP rule from default password policy ([#2331](https://github.com/mittwald/flow/issues/2331)) ([ca7173d](https://github.com/mittwald/flow/commit/ca7173de09bea3c3e67bf9eb8c2ada6dee09ee58))
+
+# [0.2.0-alpha.690](https://github.com/mittwald/flow/compare/0.2.0-alpha.689...0.2.0-alpha.690) (2026-02-18)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fixes clipboard data not present ([#2324](https://github.com/mittwald/flow/issues/2324)) ([89ab5b1](https://github.com/mittwald/flow/commit/89ab5b14b25ea2ddde782ea8a0a22d432d54f1f1))
+
+# [0.2.0-alpha.689](https://github.com/mittwald/flow/compare/0.2.0-alpha.688...0.2.0-alpha.689) (2026-02-18)
+
+### Bug Fixes
+
+* **table:** set border collapse to initial ([#2330](https://github.com/mittwald/flow/issues/2330)) ([9b55a74](https://github.com/mittwald/flow/commit/9b55a740ee35e0ab4489ed94cfff525d2a592521))
+
+# [0.2.0-alpha.688](https://github.com/mittwald/flow/compare/0.2.0-alpha.687...0.2.0-alpha.688) (2026-02-18)
+
+### Bug Fixes
+
+* **Form:** form should not be dirty after resetting ([d7eb0eb](https://github.com/mittwald/flow/commit/d7eb0eb995d6d9751feccb9ed6b51a7a8a605b4a))
+
+# [0.2.0-alpha.687](https://github.com/mittwald/flow/compare/0.2.0-alpha.686...0.2.0-alpha.687) (2026-02-17)
+
+### Bug Fixes
+
+* **Modal:** skip confirmation when using closeOverlay="Modal" ([9add76f](https://github.com/mittwald/flow/commit/9add76fbb9231d46ee971bcc3779740e5bc7fa7f))
+* **OverlayController:** add removed register handler function ([e9214fb](https://github.com/mittwald/flow/commit/e9214fbaaf44337ee4b3d31318f86569a130af91))
+
+# [0.2.0-alpha.686](https://github.com/mittwald/flow/compare/0.2.0-alpha.685...0.2.0-alpha.686) (2026-02-16)
+
+### Bug Fixes
+
+* **Tunnel:** fix issue with disordered entries after re-render ([67eb660](https://github.com/mittwald/flow/commit/67eb66027ffcb408406819651d0832b55b3e4b46))
+
+# [0.2.0-alpha.685](https://github.com/mittwald/flow/compare/0.2.0-alpha.684...0.2.0-alpha.685) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.684](https://github.com/mittwald/flow/compare/0.2.0-alpha.683...0.2.0-alpha.684) (2026-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.683](https://github.com/mittwald/flow/compare/0.2.0-alpha.682...0.2.0-alpha.683) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.682](https://github.com/mittwald/flow/compare/0.2.0-alpha.681...0.2.0-alpha.682) (2026-02-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.681](https://github.com/mittwald/flow/compare/0.2.0-alpha.680...0.2.0-alpha.681) (2026-02-12)
+
+### Features
+
+* **Form:** closing Modal with unsaved changes must be confirmed ([8c5a1a3](https://github.com/mittwald/flow/commit/8c5a1a3b07b55f49b26cee7cbb720097376571a9))
+
+# [0.2.0-alpha.680](https://github.com/mittwald/flow/compare/0.2.0-alpha.679...0.2.0-alpha.680) (2026-02-12)
+
+### Features
+
+* **Form:** make FormSubmit behave like normal async action ([2cf5f21](https://github.com/mittwald/flow/commit/2cf5f21e84deb20136ee38f7af5229918080f15d))
+
+# [0.2.0-alpha.679](https://github.com/mittwald/flow/compare/0.2.0-alpha.678...0.2.0-alpha.679) (2026-02-11)
+
+### Features
+
+* **ActionBatch:** add ActionBatch to explicitly create batches ([4137d5f](https://github.com/mittwald/flow/commit/4137d5f1165dbb857f11332d7123bdd1b43f9d88))
+
+# [0.2.0-alpha.678](https://github.com/mittwald/flow/compare/0.2.0-alpha.677...0.2.0-alpha.678) (2026-02-11)
+
+### Features
+
+* add various features to handle Overlays and Modals ([ea3ef25](https://github.com/mittwald/flow/commit/ea3ef256ed1eeb96d4a05a8c3f0def6d2eb936e4))
+
+# [0.2.0-alpha.677](https://github.com/mittwald/flow/compare/0.2.0-alpha.676...0.2.0-alpha.677) (2026-02-11)
+
+### Bug Fixes
+
+* **Form:** harden double-submission of forms ([eb96d6e](https://github.com/mittwald/flow/commit/eb96d6e356a5babef108fa75dab00109c00d7d38))
+
+### Features
+
+* **Action:** allow Action to fail without throwing error ([4b1cbcf](https://github.com/mittwald/flow/commit/4b1cbcf90cd45e5342507daeb5bc3fc8040722d1))
+
+# [0.2.0-alpha.676](https://github.com/mittwald/flow/compare/0.2.0-alpha.675...0.2.0-alpha.676) (2026-02-10)
+
+### Bug Fixes
+
+* **TextField:** fix cursor position ([#2312](https://github.com/mittwald/flow/issues/2312)) ([3d564d0](https://github.com/mittwald/flow/commit/3d564d0fc5a91222a9fc4e10e8ab99804ddec4d3))
+
+# [0.2.0-alpha.675](https://github.com/mittwald/flow/compare/0.2.0-alpha.674...0.2.0-alpha.675) (2026-02-10)
+
+### Bug Fixes
+
+* **CartesianChart:** refactor chart ([#2309](https://github.com/mittwald/flow/issues/2309)) ([dbf2adb](https://github.com/mittwald/flow/commit/dbf2adbc9f230af565e6603b9f2e2fae8bb715a6))
+
+# [0.2.0-alpha.674](https://github.com/mittwald/flow/compare/0.2.0-alpha.673...0.2.0-alpha.674) (2026-02-10)
+
+### Features
+
+* **List:** improve sorting ([#2307](https://github.com/mittwald/flow/issues/2307)) ([1e608fa](https://github.com/mittwald/flow/commit/1e608fa697a40931931f1d489bf8020d8fb25b8f))
+
+# [0.2.0-alpha.673](https://github.com/mittwald/flow/compare/0.2.0-alpha.672...0.2.0-alpha.673) (2026-02-10)
+
+### Bug Fixes
+
+* **List:** fix radios in all filters modal ([#2308](https://github.com/mittwald/flow/issues/2308)) ([9cbca80](https://github.com/mittwald/flow/commit/9cbca80034e6a9025c65cba3eb5eae84b98245c8))
+
+# [0.2.0-alpha.672](https://github.com/mittwald/flow/compare/0.2.0-alpha.671...0.2.0-alpha.672) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.671](https://github.com/mittwald/flow/compare/0.2.0-alpha.670...0.2.0-alpha.671) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.670](https://github.com/mittwald/flow/compare/0.2.0-alpha.669...0.2.0-alpha.670) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.669](https://github.com/mittwald/flow/compare/0.2.0-alpha.668...0.2.0-alpha.669) (2026-02-09)
+
+### Bug Fixes
+
+* **CountryOptions:** add Canary Islands to country list ([#2306](https://github.com/mittwald/flow/issues/2306)) ([e6f7aa4](https://github.com/mittwald/flow/commit/e6f7aa40cc2348836f5b45034e9322f10a8da154))
+
+# [0.2.0-alpha.668](https://github.com/mittwald/flow/compare/0.2.0-alpha.667...0.2.0-alpha.668) (2026-02-09)
+
+### Features
+
+* **Truncate:** improve truncate ([#2305](https://github.com/mittwald/flow/issues/2305)) ([70237f9](https://github.com/mittwald/flow/commit/70237f9db31d892d597de932a24f5ccfcd9e1e41))
+
+# [0.2.0-alpha.667](https://github.com/mittwald/flow/compare/0.2.0-alpha.666...0.2.0-alpha.667) (2026-02-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.666](https://github.com/mittwald/flow/compare/0.2.0-alpha.665...0.2.0-alpha.666) (2026-02-09)
+
+### Bug Fixes
+
+* **Form:** fix missing submit event ([#2303](https://github.com/mittwald/flow/issues/2303)) ([a4f7048](https://github.com/mittwald/flow/commit/a4f704886f88538602a19cfd1254c5e2ed0dab08))
+
+# [0.2.0-alpha.665](https://github.com/mittwald/flow/compare/0.2.0-alpha.664...0.2.0-alpha.665) (2026-02-06)
+
+### Bug Fixes
+
+* **TextField:** fix min width ([#2300](https://github.com/mittwald/flow/issues/2300)) ([2cacd7a](https://github.com/mittwald/flow/commit/2cacd7aab206e0b9cccd05543aa26c10fd55800b))
+
+# [0.2.0-alpha.664](https://github.com/mittwald/flow/compare/0.2.0-alpha.663...0.2.0-alpha.664) (2026-02-06)
+
+### Features
+
+* **Truncate:** add truncate component ([#2297](https://github.com/mittwald/flow/issues/2297)) ([c62f359](https://github.com/mittwald/flow/commit/c62f359cfc8e61ca560c75fd1c0b54d747f1cfb3))
+
+# [0.2.0-alpha.663](https://github.com/mittwald/flow/compare/0.2.0-alpha.662...0.2.0-alpha.663) (2026-02-06)
+
+### Features
+
+* **TextField:** support buttons and add show password button ([#2291](https://github.com/mittwald/flow/issues/2291)) ([abb2008](https://github.com/mittwald/flow/commit/abb2008717ced8427a9db65b87ffa6a160821136))
+
+# [0.2.0-alpha.662](https://github.com/mittwald/flow/compare/0.2.0-alpha.661...0.2.0-alpha.662) (2026-02-05)
+
+### Bug Fixes
+
+* **CartesianChart:** fix tooltip in remote context ([#2295](https://github.com/mittwald/flow/issues/2295)) ([d390c4b](https://github.com/mittwald/flow/commit/d390c4be2e1b61e6a3d23198b755dee10432051d))
+
+### Features
+
+* **List:** add all filters modal ([db51634](https://github.com/mittwald/flow/commit/db5163420077d56e3fa1d55d326313a23351053a))
+
 # [0.2.0-alpha.661](https://github.com/mittwald/flow/compare/0.2.0-alpha.660...0.2.0-alpha.661) (2026-01-30)
 
 ### Bug Fixes

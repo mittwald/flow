@@ -8,6 +8,7 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import { IconDelete, IconDownload } from "@/components/Icon/components/icons";
 import { useOverlayController } from "@/lib/controller";
+import svg from "./test.svg";
 
 const meta: Meta<typeof LightBox> = {
   title: "Overlays/LightBox",
@@ -73,6 +74,19 @@ export const WithImageTrigger: Story = {
       </Button>
       <LightBox>
         <Image alt="Gopher" src={dummyText.imageSrc} />
+      </LightBox>
+    </LightBoxTrigger>
+  ),
+};
+
+export const WithSvg: Story = {
+  render: () => (
+    <LightBoxTrigger>
+      <Button>
+        <Image withBorder alt="Gopher" src={svg} />
+      </Button>
+      <LightBox>
+        <Image alt="Gopher" src={svg} />
       </LightBox>
     </LightBoxTrigger>
   ),

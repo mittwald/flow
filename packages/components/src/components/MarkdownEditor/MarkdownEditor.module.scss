@@ -2,7 +2,6 @@
 
 .markdownEditor {
   display: grid;
-
   grid-template-areas:
     "label"
     "toolbar"
@@ -15,9 +14,11 @@
     justify-content: space-between;
     padding: var(--form-control--padding-y);
     column-gap: var(--form-control--padding-y);
+
     @include formControl.formBorder;
     @include formControl.formColor;
     @include formControl.formAnimation;
+
     & {
       border-bottom: none;
       border-bottom-left-radius: 0;
@@ -36,6 +37,7 @@
 
   .markdown {
     overflow-y: auto;
+
     @include formControl.formBorder;
     @include formControl.formColor;
   }

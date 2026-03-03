@@ -71,7 +71,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
             <ButtonView
               color="light"
               variant="solid"
-              onPress={controller.close}
+              onPress={() => controller.close()}
             >
               <IconClose />
             </ButtonView>

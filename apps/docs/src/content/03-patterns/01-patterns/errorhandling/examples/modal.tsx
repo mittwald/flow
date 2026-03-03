@@ -11,11 +11,11 @@ import {
   LayoutCard,
   Modal,
   Text,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-react-components";
 
 export default () => {
-  const controller = useOverlayController("Modal");
+  const controller = useModalController();
 
   return (
     <Flex direction="column" gap="m">
@@ -56,7 +56,7 @@ export default () => {
             </IllustratedMessage>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button
                 slot="primary"
                 variant="soft"

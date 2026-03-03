@@ -1,10 +1,10 @@
 import {
   Area,
-  Line,
   CartesianChart,
   CartesianGrid,
-  YAxis,
+  Line,
   XAxis,
+  YAxis,
 } from "@mittwald/flow-react-components";
 
 export default () => {

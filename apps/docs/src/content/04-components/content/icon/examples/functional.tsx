@@ -1,5 +1,6 @@
 import {
   ColumnLayout,
+  IconAscending,
   IconAttachment,
   IconBackLink,
   IconCheck,
@@ -16,6 +17,7 @@ import {
   IconContextMenuVertical,
   IconCopy,
   IconDelete,
+  IconDescending,
   IconDownload,
   IconEdit,
   IconExternalLink,
@@ -52,84 +54,32 @@ import {
 
 <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
   <LabeledValue>
-    <Label>Home</Label>
-    <IconHome />
+    <Label>Ascending</Label>
+    <IconAscending />
   </LabeledValue>
   <LabeledValue>
-    <Label>Notification</Label>
-    <IconNotification />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Logout</Label>
-    <IconLogout />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Search</Label>
-    <IconSearch />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Menu</Label>
-    <IconMenu />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>View</Label>
-    <IconView />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Filter</Label>
-    <IconFilter />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Sorting</Label>
-    <IconSorting />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>ContextMenu</Label>
-    <IconContextMenu />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>ContextMenuVertical</Label>
-    <IconContextMenuVertical />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Maximize</Label>
-    <IconMaximize />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Minimize</Label>
-    <IconMinimize />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Edit</Label>
-    <IconEdit />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Share</Label>
-    <IconShare />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Save</Label>
-    <IconSave />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Settings</Label>
-    <IconSettings />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Delete</Label>
-    <IconDelete />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Copy</Label>
-    <IconCopy />
+    <Label>Attachment</Label>
+    <IconAttachment />
   </LabeledValue>
   <LabeledValue>
     <Label>Backlink</Label>
     <IconBackLink />
   </LabeledValue>
   <LabeledValue>
-    <Label>ExternalLink</Label>
-    <IconExternalLink />
+    <Label>Check</Label>
+    <IconCheck />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>CheckboxChecked</Label>
+    <IconCheckboxChecked />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>CheckboxEmpty</Label>
+    <IconCheckboxEmpty />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>CheckboxIndeterminate</Label>
+    <IconCheckboxIndeterminate />
   </LabeledValue>
   <LabeledValue>
     <Label>ChevronDown</Label>
@@ -152,36 +102,88 @@ import {
     <IconClose />
   </LabeledValue>
   <LabeledValue>
-    <Label>Show</Label>
-    <IconShow />
+    <Label>Code</Label>
+    <IconCode />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>ContextMenu</Label>
+    <IconContextMenu />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>ContextMenuVertical</Label>
+    <IconContextMenuVertical />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Copy</Label>
+    <IconCopy />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Descending</Label>
+    <IconDescending />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Delete</Label>
+    <IconDelete />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Download</Label>
+    <IconDownload />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Edit</Label>
+    <IconEdit />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>ExternalLink</Label>
+    <IconExternalLink />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Filter</Label>
+    <IconFilter />
   </LabeledValue>
   <LabeledValue>
     <Label>Hide</Label>
     <IconHide />
   </LabeledValue>
   <LabeledValue>
-    <Label>Plus</Label>
-    <IconPlus />
+    <Label>Home</Label>
+    <IconHome />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Logout</Label>
+    <IconLogout />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Maximize</Label>
+    <IconMaximize />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Menu</Label>
+    <IconMenu />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Minimize</Label>
+    <IconMinimize />
   </LabeledValue>
   <LabeledValue>
     <Label>Minus</Label>
     <IconMinus />
   </LabeledValue>
   <LabeledValue>
-    <Label>Code</Label>
-    <IconCode />
+    <Label>Notification</Label>
+    <IconNotification />
   </LabeledValue>
   <LabeledValue>
-    <Label>CheckboxChecked</Label>
-    <IconCheckboxChecked />
+    <Label>Pause</Label>
+    <IconPause />
   </LabeledValue>
   <LabeledValue>
-    <Label>CheckboxEmpty</Label>
-    <IconCheckboxEmpty />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>CheckboxIndeterminate</Label>
-    <IconCheckboxIndeterminate />
+    <Label>Plus</Label>
+    <IconPlus />
   </LabeledValue>
   <LabeledValue>
     <Label>RadioOff</Label>
@@ -192,20 +194,44 @@ import {
     <IconRadioOn />
   </LabeledValue>
   <LabeledValue>
+    <Label>Redo</Label>
+    <IconRedo />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Refresh</Label>
     <IconRefresh />
   </LabeledValue>
   <LabeledValue>
-    <Label>Check</Label>
-    <IconCheck />
+    <Label>Save</Label>
+    <IconSave />
   </LabeledValue>
   <LabeledValue>
-    <Label>Download</Label>
-    <IconDownload />
+    <Label>Search</Label>
+    <IconSearch />
   </LabeledValue>
   <LabeledValue>
-    <Label>Redo</Label>
-    <IconRedo />
+    <Label>Send</Label>
+    <IconSend />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Settings</Label>
+    <IconSettings />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Share</Label>
+    <IconShare />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Show</Label>
+    <IconShow />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Sorting</Label>
+    <IconSorting />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Start</Label>
+    <IconStart />
   </LabeledValue>
   <LabeledValue>
     <Label>Undo</Label>
@@ -216,23 +242,7 @@ import {
     <IconUpload />
   </LabeledValue>
   <LabeledValue>
-    <Label>Send</Label>
-    <IconSend />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Attachment</Label>
-    <IconAttachment />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Pause</Label>
-    <IconPause />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Start</Label>
-    <IconStart />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Link</Label>
-    <IconLink />
+    <Label>View</Label>
+    <IconView />
   </LabeledValue>
 </ColumnLayout>;

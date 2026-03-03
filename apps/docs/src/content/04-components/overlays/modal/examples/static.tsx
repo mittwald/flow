@@ -28,7 +28,7 @@ import {
     </Section>
   </div>
   <ActionGroup className="flow--modal--action-group">
-    <Action closeOverlay="Modal">
+    <Action closeModal>
       <Button color="accent">Organisation anlegen</Button>
       <Button variant="soft" color="secondary">
         Abbrechen

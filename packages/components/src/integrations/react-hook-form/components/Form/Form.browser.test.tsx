@@ -1,3 +1,5 @@
+import Action from "@/components/Action";
+import { duration } from "@/components/Action/models/ActionState";
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
@@ -10,6 +12,7 @@ import {
 } from "@/integrations/react-hook-form";
 import { Render } from "@/lib/react/components/Render";
 import type { FC } from "react";
+import { TextArea } from "react-aria-components";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
@@ -49,11 +52,14 @@ describe("resetting", () => {
     });
     const Field = typedField(form);
 
+    const isDirty = form.formState.isDirty;
+
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
         <Field {...props.textField} name="test">
           <TextField aria-label="test" />
         </Field>
+        {isDirty && <span data-testid="dirty">dirty</span>}
         <Button
           onPress={() => {
             if (resetValueTo) {
@@ -109,11 +115,47 @@ describe("resetting", () => {
       expect(field).toHaveDisplayValue(expected);
     },
   );
+
+  test("Form is not dirty after reset when field has default value", async () => {
+    await render(
+      <TestForm
+        textField={{
+          defaultValue: "default",
+        }}
+      />,
+    );
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
+
+  test("Form is not dirty after reset when form has default value", async () => {
+    initialValue = "default";
+    await render(<TestForm />);
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
 });
 
 describe("submission", () => {
   const onAfterSubmit = vitest.fn();
-  const onSubmit = vitest.fn(() => onAfterSubmit);
+  const onAfterSubmitAction = vitest.fn();
+  const onSubmit = vitest.fn(async () => onAfterSubmit);
 
   const TestForm: FC = () => {
     const form = useForm<object>();
@@ -122,7 +164,12 @@ describe("submission", () => {
         <Field name="test">
           <TextField placeholder="textfield" aria-label="test" />
         </Field>
-        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        <Field name="test2">
+          <TextArea placeholder="textarea" aria-label="test2" />
+        </Field>
+        <Action onAction={onAfterSubmitAction}>
+          <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        </Action>
       </Form>
     );
   };
@@ -133,7 +180,10 @@ describe("submission", () => {
     const textField = page.getByPlaceholder("textfield");
     await userEvent.type(textField, "hello");
     await userEvent.click(submitButton);
-    expect(onSubmit).toHaveBeenCalledWith({ test: "hello" });
+    expect(onSubmit).toHaveBeenCalledWith(
+      { test: "hello" },
+      expect.objectContaining({ type: "submit" }),
+    );
   });
 
   test("afterSubmit callback is called after successful submission", async () => {
@@ -141,10 +191,31 @@ describe("submission", () => {
     const submitButton = page.getByTestId("submit-button");
     await userEvent.click(submitButton);
     expect(onSubmit).toHaveBeenCalled();
-    await vitest.advanceTimersByTimeAsync(500);
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
     expect(onAfterSubmit).not.toHaveBeenCalled();
-    await vitest.advanceTimersByTimeAsync(1000);
+    await vitest.advanceTimersByTimeAsync(100);
     expect(onAfterSubmit).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission via hotkey", async () => {
+    await render(<TestForm />);
+    const textArea = page.getByPlaceholder("textarea");
+    await userEvent.click(textArea);
+    await userEvent.keyboard("{Meta>}{Enter}");
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
   });
 });
 

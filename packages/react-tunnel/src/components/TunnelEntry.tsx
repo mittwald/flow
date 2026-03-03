@@ -19,7 +19,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const tunnel = useContext(tunnelContext);
   const usedId = useId();
   const entryId = staticEntryId ?? usedId;
-  const index = tunnel.getIndex();
+  const index = tunnel.useEntryIndex();
 
   const mounted = useRef(false);
 

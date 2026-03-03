@@ -9,6 +9,7 @@
         var(--avatar-size) / 2 + var(--avatar-stack--border-width)
       );
       --mask-offset: calc(var(--avatar-size) * -0.25);
+
       mask: radial-gradient(
         circle at var(--mask-size) center,
         transparent var(--mask-cutout),
@@ -16,6 +17,7 @@
       );
       margin-right: var(--mask-offset);
     }
+
     outline-offset: calc(var(--size-px--xxs) * -1);
   }
 

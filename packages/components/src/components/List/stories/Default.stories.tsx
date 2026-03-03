@@ -74,9 +74,9 @@ const meta: Meta<typeof List> = {
           >
             <ActionGroup>
               <Button color="secondary" variant="soft" slot="secondary">
-                Herunterladen
+                Download
               </Button>
-              <Button color="accent">Anlegen</Button>
+              <Button color="accent">Add</Button>
             </ActionGroup>
             <DomainList.LoaderAsync manualPagination manualSorting={false}>
               {loadDomains}
@@ -85,14 +85,24 @@ const meta: Meta<typeof List> = {
               values={availableTypes}
               property="type"
               mode="all"
-              name="Typ"
+              name="Type"
               defaultSelected={["Domain"]}
             />
 
             <DomainList.Search autoFocus />
-            <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
-            <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
-            <DomainList.Sorting property="type" name="Typ" />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              defaultEnabled
+              directionName="ascending"
+            />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              direction="desc"
+              directionName="descending"
+            />
+            <DomainList.Sorting property="type" name="Type" />
             <DomainList.Sorting property="tld" name="TLD" />
 
             <DomainList.Table>
@@ -174,7 +184,7 @@ export const WithSummary: Story = {
           <ListSummary>
             <Flex justify="end">
               <Text>
-                <strong>Gesamt: 41,00 €</strong>
+                <strong>Total: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -216,7 +226,7 @@ export const WithSummaryBottom: Story = {
           <ListSummary position="bottom">
             <Flex justify="end">
               <Text>
-                <strong>Gesamt: 41,00 €</strong>
+                <strong>Total: 41,00 €</strong>
               </Text>
             </Flex>
           </ListSummary>
@@ -333,6 +343,77 @@ export const LoadingView: Story = {
           </Table>
         </List>
       </Section>
+    );
+  },
+};
+
+export const WithSecondaryFilters: Story = {
+  render: () => {
+    const DomainList = typedList<Domain>();
+    const availableTypes = usePromise(getTypes, []);
+
+    return (
+      <SettingsProvider type="localStorage" storageKey="listStory">
+        <Section>
+          <Heading>Domains</Heading>
+          <DomainList.List
+            batchSize={5}
+            aria-label="Domains"
+            settingStorageKey="domains"
+          >
+            <ActionGroup>
+              <Button color="secondary" variant="soft" slot="secondary">
+                Download
+              </Button>
+              <Button color="accent">Add</Button>
+            </ActionGroup>
+            <DomainList.LoaderAsync manualPagination manualSorting={false}>
+              {loadDomains}
+            </DomainList.LoaderAsync>
+            <DomainList.Filter
+              values={availableTypes}
+              property="type"
+              mode="all"
+              name="Type"
+              defaultSelected={["Domain"]}
+            />
+            <DomainList.Filter
+              property="tld"
+              mode="one"
+              name="TLD"
+              priority="secondary"
+            />
+
+            <DomainList.Search autoFocus />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              directionName="ascending"
+              defaultEnabled
+            />
+            <DomainList.Sorting
+              property="domain"
+              name="Alphabetical"
+              directionName="descending"
+              direction="desc"
+            />
+            <DomainList.Sorting property="type" name="Typ" />
+            <DomainList.Sorting property="tld" name="TLD" />
+
+            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
+              {(domain) => (
+                <ListItemView>
+                  <Avatar>
+                    <IconDomain />
+                  </Avatar>
+                  <Heading>{domain.hostname}</Heading>
+                  <Text>{domain.type}</Text>
+                </ListItemView>
+              )}
+            </DomainList.Item>
+          </DomainList.List>
+        </Section>
+      </SettingsProvider>
     );
   },
 };

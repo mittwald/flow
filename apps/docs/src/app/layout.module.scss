@@ -1,5 +1,6 @@
 .body {
   --header-height: 72px;
+
   background-color: var(--neutral--color--300);
   isolation: isolate;
 
@@ -28,6 +29,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
+
   &.scrolled {
     box-shadow: var(--shadow--content);
   }
@@ -121,9 +123,8 @@
   padding: 0;
 
   .homeImage {
-    border-bottom-color: var(--separator--color);
-    border-bottom-width: var(--separator--height);
-    border-bottom-style: var(--border-style--default);
+    border-bottom: var(--separator--height) var(--border-style--default)
+      var(--separator--color);
   }
 
   .homeTopContent {
@@ -143,6 +144,7 @@
     display: flex;
     padding-block: var(--size-px--m);
   }
+
   .mobileNavigationOffCanvas {
     h3 {
       display: none;

@@ -38,7 +38,7 @@
   }
 }
 
-// selected tab
+/* selected tab */
 .tabTitle[data-selected],
   /**
     The following selectors setting the selected style at the first (not disabled) tab,
@@ -46,10 +46,10 @@
     This prevents the initial CSS transition, which looks like flickering.
   */
 
-  // first tab disabled
+  /* first tab disabled */
 :global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])):has(.tabTitle[aria-disabled]) .tabTitle[aria-disabled]:first-of-type + .tabTitle,
 
-  // other/no tab disabled
+  /* other/no tab disabled */
 :global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])) .tabTitle:first-of-type:not([aria-disabled]) {
   background-color: var(--tabs--background-color--selected);
   font-weight: var(--tabs--font-weight--selected);

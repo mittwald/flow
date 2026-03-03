@@ -1,46 +1,48 @@
+import type { ActionProps } from "@/components/Action";
 import { ActionModel } from "@/components/Action/models/ActionModel";
-import type { AfterFormSubmitCallback } from "@/integrations/react-hook-form/components/Form/Form";
+import { MutedActionError } from "@/components/Action/MutedActionError";
 import { useEffect, useRef } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import type { FieldValues, FormState } from "react-hook-form";
 
-interface Options {
-  form: UseFormReturn;
-  setReadOnly: (isReadOnly: boolean) => void;
-  onAfterSuccessFeedback?: AfterFormSubmitCallback;
-}
+export const useFormSubmitAction = (
+  formState: FormState<FieldValues>,
+  actionProps?: ActionProps,
+) => {
+  const { isSubmitting, isSubmitSuccessful } = formState;
 
-export const useFormSubmitAction = (options: Options) => {
-  const { form, setReadOnly, onAfterSuccessFeedback } = options;
+  const submitPromise = useRef<PromiseWithResolvers<void>>(undefined);
 
-  const formSubmitAction = ActionModel.useNew({});
-
-  const { isSubmitting, isSubmitted, isSubmitSuccessful } = form.formState;
-  const wasSubmitting = useRef(isSubmitting);
+  const formSubmitAction = ActionModel.useNew({
+    ...actionProps,
+    onAction: () => {
+      submitPromise.current = Promise.withResolvers<void>();
+      actionProps?.onAction?.();
+      return submitPromise.current.promise;
+    },
+  });
 
   useEffect(() => {
-    const submittingDone = wasSubmitting.current && !isSubmitting;
-    wasSubmitting.current = isSubmitting;
-
     if (isSubmitting) {
-      setReadOnly(true);
-      formSubmitAction.state.onAsyncStart();
-    } else if (submittingDone) {
-      if (isSubmitSuccessful) {
-        formSubmitAction.state.onSucceeded().then(onAfterSuccessFeedback);
-      } else {
-        formSubmitAction.state.onFailed(new Error("Form submission failed"));
+      if (!formSubmitAction.state.isBusy) {
+        /**
+         * Manually start execution. This happens if the form submission was
+         * triggered by other means than the submit button, e.g. by pressing
+         * Enter in a text field.
+         */
+        formSubmitAction.execute();
       }
-      setReadOnly(false);
+      return;
     }
-  }, [
-    wasSubmitting,
-    isSubmitting,
-    isSubmitted,
-    isSubmitSuccessful,
-    formSubmitAction,
-    setReadOnly,
-    onAfterSuccessFeedback,
-  ]);
+
+    if (isSubmitSuccessful) {
+      submitPromise.current?.resolve();
+      return;
+    }
+
+    submitPromise.current?.reject(
+      new MutedActionError("Form submission failed"),
+    );
+  }, [isSubmitting, isSubmitSuccessful, submitPromise]);
 
   return formSubmitAction;
 };

@@ -1,4 +1,4 @@
-@use "styles/mixins/formControl.scss";
+@use "@/styles/mixins/formControl";
 
 .searchField {
   &[data-empty] .clearButton {
@@ -30,9 +30,11 @@
     & {
       flex-grow: 1;
       min-width: 0;
+
       --button-size: calc(
         var(--icon--size--m) + var(--button--padding-icon-only) * 2
       );
+
       padding-inline: var(--button-size);
     }
 

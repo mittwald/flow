@@ -50,13 +50,11 @@
     }
 
     .value {
-      padding-inline-start: var(--badge--spacing);
-      padding-inline-end: var(--badge--padding-x);
+      padding-inline: var(--badge--spacing) var(--badge--padding-x);
     }
 
     .scope {
-      padding-inline-start: var(--badge--padding-x);
-      padding-inline-end: var(--badge--spacing);
+      padding-inline: var(--badge--padding-x) var(--badge--spacing);
       height: 100%;
       flex-shrink: 0;
     }

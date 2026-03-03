@@ -19,31 +19,24 @@ export default () => {
 
   return (
     <DomainList.List
-      batchSize={5}
+      batchSize={2}
       aria-label="Domains"
       getItemId={(domain) => domain.id}
+      hidePagination
     >
       <DomainList.StaticData data={domains} />
       <DomainList.Sorting
         property="hostname"
-        name="Name A bis Z"
+        name="Alphabetisch"
         direction="asc"
-      />
-      <DomainList.Sorting
-        property="hostname"
-        name="Name Z bis A"
-        direction="desc"
+        directionName="aufsteigend"
         defaultEnabled
       />
       <DomainList.Sorting
-        property="tld"
-        name="TLD A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="tld"
-        name="TLD Z bis A"
+        property="hostname"
+        name="Alphabetisch"
         direction="desc"
+        directionName="absteigend"
       />
       <DomainList.Item
         textValue={(domain) => domain.domain}

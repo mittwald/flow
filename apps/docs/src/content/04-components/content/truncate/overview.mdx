@@ -1,0 +1,42 @@
+# Playground
+
+Verwende `<Truncate />`, um einzelne Textzeilen in platzbeschränkten Layouts
+darzustellen.
+
+<Alert status="warning">
+  <Heading>Accessibility-Warnung</Heading>
+  <Content>
+    Die Component verwendet das
+    [title-Attribut](https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute),
+    um den vollständigen Inhalt sichtbar zu machen. Für Tastatur-User ist dieses
+    jedoch nicht zugänglich, da Browser keine Möglichkeit bieten,
+    `title`-Tooltips per Tastatur anzuzeigen. Verwende `Truncate` daher nur in
+    Ausnahmefällen und stelle wichtige Inhalte an anderer Stelle vollständig
+    dar.
+  </Content>
+</Alert>
+
+<LiveCodeEditor />
+
+---
+
+# Mit Offset
+
+Um zum Beispiel bei Pfaden sowohl den Anfang als auch das Ende sichtbar zu halten, kann über
+die Property `offset` festgelegt werden, wie viele Zeichen vom Ende angezeigt
+werden sollen. Zusätzlich lässt sich mit `ellipsis` ein individueller
+Platzhalter definieren.
+
+<LiveCodeEditor example="offset" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Text
+
+<LiveCodeEditor example="text" editorCollapsed />
+
+## Heading
+
+<LiveCodeEditor example="heading" editorCollapsed />

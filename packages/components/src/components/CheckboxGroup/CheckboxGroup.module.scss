@@ -6,6 +6,7 @@
 
   .checkboxButton {
     width: auto;
+
     &[data-invalid]:not([data-selected]) {
       border-color: var(--form-control--border-color--default);
       background-color: var(--form-control--background-color--default);

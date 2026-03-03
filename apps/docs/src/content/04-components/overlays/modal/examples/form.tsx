@@ -7,7 +7,7 @@ import {
   Label,
   Modal,
   TextField,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@mittwald/flow-react-components/react-hook-form";
 
 export default () => {
-  const controller = useOverlayController("Modal");
+  const controller = useModalController();
 
   const form = useForm<{ name: string }>();
 
@@ -55,7 +55,7 @@ export default () => {
             <Button color="accent" type="submit">
               Speichern
             </Button>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="secondary" variant="soft">
                 Abbrechen
               </Button>

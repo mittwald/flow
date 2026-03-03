@@ -1,3 +1,0 @@
-{
-  "textFieldBase.characters": "{maxCount, select, 0 {{count}} other {{count}/{maxCount}}} characters"
-}

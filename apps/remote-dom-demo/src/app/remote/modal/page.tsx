@@ -39,7 +39,7 @@ export default function Page() {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="accent">Organisation anlegen</Button>
               <Button variant="soft" color="secondary">
                 Abbrechen
@@ -78,7 +78,7 @@ export default function Page() {
             </Section>
           </Content>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="accent">Organisation anlegen</Button>
               <Button variant="soft" color="secondary">
                 Abbrechen
@@ -117,7 +117,7 @@ export default function Page() {
             </Section>
           </ColumnLayout>
           <ActionGroup>
-            <Action closeOverlay="Modal">
+            <Action closeModal>
               <Button color="accent">Organisation anlegen</Button>
               <Button variant="soft" color="secondary">
                 Abbrechen

@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    word-break: break-word;
+    overflow-wrap: anywhere;
     padding: var(--donut-chart--padding--m);
   }
 
@@ -27,6 +27,7 @@
     .value {
       font-size: var(--font-size-heading--xl);
       padding: var(--donut-chart--padding--l);
+
       small {
         font-size: var(--font-size-heading--l);
       }
@@ -50,8 +51,7 @@
 
 .donutChartContainer {
   display: flex;
-  column-gap: var(--donut-chart--spacing-x);
-  row-gap: var(--donut-chart--spacing-y);
+  gap: var(--donut-chart--spacing-y) var(--donut-chart--spacing-x);
   align-items: center;
 
   &.bottom {
@@ -70,6 +70,7 @@
 
   &.left {
     flex-direction: row-reverse;
+
     .legend {
       justify-content: start;
     }

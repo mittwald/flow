@@ -1,9 +1,7 @@
 .activeFilters {
   display: flex;
-  flex-direction: row;
-  column-gap: var(--list--spacing);
-  row-gap: var(--list--spacing);
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  gap: var(--list--spacing);
   align-items: center;
 
   .clearButton {

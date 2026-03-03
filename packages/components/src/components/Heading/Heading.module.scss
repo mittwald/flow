@@ -2,6 +2,7 @@
   color: var(--heading--color);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
+
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
 
   @mixin color($color) {
@@ -76,6 +77,7 @@
   &:where(.wrap-wrap) {
     text-wrap: wrap;
   }
+
   &:where(.wrap-balance) {
     text-wrap: balance;
   }

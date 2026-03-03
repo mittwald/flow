@@ -126,7 +126,7 @@ import {
     </Content>
     <ActionGroup>
       <Button isDisabled>Zur Bestellübersicht</Button>
-      <Action closeOverlay="Modal">
+      <Action closeModal>
         <Button color="secondary" variant="soft">
           Abbrechen
         </Button>

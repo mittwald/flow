@@ -30,16 +30,19 @@
 .anchorLinkHeading {
   width: fit-content;
   scroll-margin-top: 6rem;
+
   > span {
     display: flex;
     align-items: center;
     column-gap: var(--size-rem--s);
   }
+
   .anchorButton {
     opacity: 0;
     transition-property: opacity;
     transition-duration: var(--transition--duration--fast);
   }
+
   &:hover {
     .anchorButton {
       opacity: 1;
@@ -107,14 +110,17 @@
     "firstContent secondContent";
   grid-template-columns: 1fr 1fr;
 
-  .doAndDontCode:first-of-type,
-  .doAndDontText:first-of-type {
-    grid-area: firstExample;
-  }
+  .doAndDontCode,
+  .doAndDontText {
+    margin-bottom: 0;
 
-  .doAndDontCode:last-of-type,
-  .doAndDontText:last-of-type {
-    grid-area: secondExample;
+    &:last-of-type {
+      grid-area: secondExample;
+    }
+
+    &:first-of-type {
+      grid-area: firstExample;
+    }
   }
 
   .doAndDontContent:first-of-type {
@@ -123,11 +129,6 @@
 
   .doAndDontContent:last-of-type {
     grid-area: secondContent;
-  }
-
-  .doAndDontCode,
-  .doAndDontText {
-    margin-bottom: 0;
   }
 }
 

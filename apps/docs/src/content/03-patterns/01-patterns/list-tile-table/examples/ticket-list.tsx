@@ -55,16 +55,17 @@ export default () => {
           />
           <TicketList.Search />
           <TicketList.Sorting
-            name="Alt zu neu"
+            name="Erstelldatum"
             defaultEnabled
             direction="asc"
             property="createdBy"
+            directionName="älteste zuerst"
           />
           <TicketList.Sorting
-            name="Neu zu alt"
-            defaultEnabled
+            name="Erstelldatum"
             direction="desc"
             property="createdBy"
+            directionName="neueste zuerst"
           />
           <TicketList.Filter
             name="Status"

@@ -3,6 +3,7 @@
   flex-direction: column;
   row-gap: var(--markdown--spacing);
   min-width: 0;
+
   p {
     white-space: break-spaces;
   }
@@ -37,6 +38,7 @@
       &:nth-of-type(odd) td {
         background-color: var(--table--background-color-accent);
       }
+
       &:not(:last-child) td {
         border-block-end-width: var(--table--border-width);
       }

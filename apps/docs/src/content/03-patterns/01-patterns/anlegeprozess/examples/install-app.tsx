@@ -76,7 +76,7 @@ import {
       >
         Zurück
       </Button>
-      <Action closeOverlay="Modal">
+      <Action closeModal>
         <Button color="secondary" variant="soft">
           Abbrechen
         </Button>

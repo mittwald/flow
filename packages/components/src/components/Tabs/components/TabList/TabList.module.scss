@@ -4,8 +4,10 @@
   overflow-x: clip;
 
   .contextMenuButton {
-    align-self: center;
-    margin: var(--size-px--s);
+    padding: var(--tabs--padding);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
 
   .titles {

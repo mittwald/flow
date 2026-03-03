@@ -220,45 +220,51 @@ export const CustomSortingList = () => {
 
         <DomainList.Sorting
           property="hostname"
-          name="Name A bis Z"
+          name="Hostname"
           direction="asc"
+          directionName="ascending"
         />
         <DomainList.Sorting
           property="hostname"
-          name="Name Z bis A"
+          name="Hostname"
           direction="desc"
+          directionName="descending"
         />
 
         <DomainList.Sorting
           property="id"
-          name="ID (aufsteigend)"
+          name="ID"
           direction="asc"
           customSortingFn={bigIntSorting}
+          directionName="ascending"
         />
         <DomainList.Sorting
           property="id"
-          name="ID (absteigend)"
+          name="ID"
           direction="desc"
           customSortingFn={bigIntSorting}
           defaultEnabled
+          directionName="descending"
         />
 
         <DomainList.Sorting
           property="tld"
-          name="TLD-Länge (kürzeste zuerst)"
+          name="TLD length"
           direction="asc"
           customSortingFn={tldLengthSortingFn}
+          directionName="shortest first"
         />
         <DomainList.Sorting
           property="tld"
-          name="TLD-Länge (längste zuerst)"
+          name="TLD length"
           direction="desc"
           customSortingFn={tldLengthSortingFn}
+          directionName="longest first"
         />
 
         <DomainList.Sorting
           property="type"
-          name="Typ (Domains zuerst)"
+          name="Type"
           direction="asc"
           customSortingFn={domainTypeSortingFn}
         />
@@ -272,15 +278,15 @@ export const CustomSortingList = () => {
               <Heading>
                 {domain.hostname}
                 {!domain.verified && (
-                  <AlertBadge status="warning">Unverifiziert</AlertBadge>
+                  <AlertBadge status="warning">Unverified</AlertBadge>
                 )}
               </Heading>
               <Text>{domain.type}</Text>
               <Text>ID: {domain.id}</Text>
               <Text>TLD: {domain.tld}</Text>
               <ContextMenu>
-                <MenuItem>Details anzeigen</MenuItem>
-                <MenuItem>Löschen</MenuItem>
+                <MenuItem>Show details</MenuItem>
+                <MenuItem>Delete</MenuItem>
               </ContextMenu>
             </DomainList.ItemView>
           )}
