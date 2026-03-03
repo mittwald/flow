@@ -23,6 +23,7 @@
     "acorn-typescript": "^1.4.13",
     "clsx": "^2.1.1",
     "cron-parser": "^5.5.0",
+    "cron-time-generator": "^2.0.3",
     "cronstrue": "^3.9.0",
     "dot-prop": "^10.1.0",
     "fs-jetpack": "^5.1.0",

@@ -1,334 +1,239 @@
-import { useForm, useWatch } from "react-hook-form";
-import { Time } from "@internationalized/date";
+import type {
+  SelectProps,
+  TimeFieldProps,
+} from "@mittwald/flow-react-components";
 import {
-  ColumnLayout,
-  FieldDescription,
+  Content,
+  FieldError,
   Label,
   LabeledValue,
   Option,
   Section,
   Select,
+  Separator,
   Text,
   TextField,
   TimeField,
-  Content,
 } from "@mittwald/flow-react-components";
+import CronTime from "cron-time-generator";
+import { type FC, useMemo, useState } from "react";
 import {
-  Form,
-  typedField,
-} from "@mittwald/flow-react-components/react-hook-form";
-import {
-  cronstrueToString,
-  parse,
-} from "@/content/03-patterns/02-codesnippets/zeitintervalle/examples/lib";
+  CronExpressionParser,
+  CronFieldCollection,
+  type HourRange,
+  type SixtyRange,
+} from "cron-parser";
 
 export default () => {
-  enum Interval {
-    ONE_MINUTE = "1 Minute",
-    FIVE_MINUTES = "5 Minuten",
-    THIRTY_MINUTES = "30 Minuten",
-    ONE_HOUR = "1 Stunde",
-    ONE_DAY = "1 Tag",
-    SEVEN_DAYS = "7 Tage",
-    FOURTEEN_DAYS = "14 Tage",
-    THIRTY_DAYS = "30 Tage",
-    CUSTOM = "Benutzerdefiniert",
-  }
+  type Interval =
+    | "ONE_MINUTE"
+    | "FIVE_MINUTES"
+    | "THIRTY_MINUTES"
+    | "ONE_HOUR"
+    | "ONE_DAY"
+    | "SEVEN_DAYS"
+    | "FOURTEEN_DAYS"
+    | "THIRTY_DAYS"
+    | "CUSTOM";
 
-  const intervals = Object.values(Interval);
-  const getCronString = (cronSyntax: string) => {
-    try {
-      /* convert cron to string with cronstrue */
-      return cronstrueToString(cronSyntax);
-    } catch (ignoredError) {
-      return undefined;
+  const Intervals: Record<
+    Interval,
+    {
+      label: string;
+      toCronString: (lastCronString: string) => string;
+      allowTimeEdit?: boolean;
+      allowCustomEdit?: boolean;
     }
+  > = {
+    ONE_MINUTE: {
+      label: "1 Minute",
+      toCronString: () => CronTime.everyMinute(),
+    },
+    FIVE_MINUTES: {
+      label: "5 Minuten",
+      toCronString: () => CronTime.every(5).minutes(),
+    },
+    THIRTY_MINUTES: {
+      label: "30 Minuten",
+      toCronString: () => CronTime.every(30).minutes(),
+    },
+    ONE_HOUR: {
+      label: "1 Stunde",
+      toCronString: () => CronTime.everyHour(),
+    },
+    ONE_DAY: {
+      label: "1 Tag",
+      toCronString: () => CronTime.everyDay(),
+      allowTimeEdit: true,
+    },
+    SEVEN_DAYS: {
+      label: "7 Tage",
+      toCronString: () => CronTime.every(7).days(),
+      allowTimeEdit: true,
+    },
+    FOURTEEN_DAYS: {
+      label: "14 Tage",
+      toCronString: () => CronTime.every(14).days(),
+      allowTimeEdit: true,
+    },
+    THIRTY_DAYS: {
+      label: "30 Tage",
+      toCronString: () => CronTime.every(30).days(),
+      allowTimeEdit: true,
+    },
+    CUSTOM: {
+      label: "Benutzerdefiniert",
+      allowCustomEdit: true,
+      toCronString: (lastCronString) => lastCronString,
+    },
   };
 
-  const isDigitString = (value?: string) => {
-    if (!value) {
-      return false;
-    }
-    return /^\d+$/.test(value);
-  };
+  const CronTimeSelector: FC<{
+    value?: string;
+    onChange: (cronValue: string) => void;
+  }> = ({ value = "", onChange }) => {
+    const [errorMessage, setErrorMessage] = useState<
+      string | null
+    >(null);
+    const [currentInterval, setInterval] =
+      useState<Interval>("CUSTOM");
 
-  const getCronFromTime = (cron: string, time?: Time) => {
-    if (!time) {
-      return cron;
-    }
-    const cronParts = cron.split(" ");
-    cronParts[1] = time.hour.toString();
-    cronParts[0] = time.minute.toString();
-    return cronParts.join(" ");
-  };
+    const parseCronExpression = (cron: string) => {
+      try {
+        const expression = CronExpressionParser.parse(cron);
+        setErrorMessage(null);
+        return expression;
+      } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage(`invalid cron: ${cron}`);
+        }
 
-  const getCronFromInterval = (
-    cron: string,
-    interval: Interval,
-    time?: Time,
-  ) => {
-    const minuteOfTime =
-      time && time.minute && !isNaN(time.minute)
-        ? time.minute
-        : undefined;
-    const hourOfTime =
-      time && time.hour && !isNaN(time.hour)
-        ? time.hour
-        : undefined;
-    const cronParts = cron.split(" ");
+        return false;
+      }
+    };
 
-    const minute = minuteOfTime
-      ? minuteOfTime
-      : cronParts[0] && isDigitString(cronParts[0])
-        ? cronParts[0]
-        : 0;
-    const hour = hourOfTime
-      ? hourOfTime
-      : cronParts[1] && isDigitString(cronParts[1])
-        ? cronParts[1]
-        : 0;
-    const day =
-      cronParts[2] && isDigitString(cronParts[2])
-        ? cronParts[2]
-        : 1;
-    const weekday =
-      cronParts[4] && isDigitString(cronParts[4])
-        ? cronParts[4]
-        : 0;
-
-    const newTime = new Time(
-      typeof hour === "number" ? hour : parseInt(hour),
-      typeof minute === "number"
-        ? minute
-        : parseInt(minute),
+    const currentCronExpression = useMemo(
+      () => parseCronExpression(value),
+      [value],
     );
 
-    switch (interval) {
-      case Interval.ONE_MINUTE:
-        return { cron: "* * * * *" };
-      case Interval.FIVE_MINUTES:
-        return { cron: "*/5 * * * *" };
-      case Interval.THIRTY_MINUTES:
-        return { cron: "*/30 * * * *" };
-      case Interval.ONE_HOUR:
-        return {
-          cron: `${minute} * * * *`,
-        };
-      case Interval.ONE_DAY:
-        return {
-          cron: `${minute} ${hour} * * *`,
-          time: newTime,
-        };
-      case Interval.SEVEN_DAYS:
-        return {
-          cron: `${minute} ${hour} * * ${weekday}`,
-          time: newTime,
-        };
-      case Interval.FOURTEEN_DAYS:
-        return {
-          cron: `${minute} ${hour} 1,15 * *`,
-          time: newTime,
-        };
-      case Interval.THIRTY_DAYS:
-        return {
-          cron: `${minute} ${hour} ${day} * *`,
-          time: newTime,
-        };
-
-      default:
-        return { cron };
-    }
-  };
-
-  const getTimeFromCron = (cron: string) => {
-    const cronParts = cron.split(" ");
-    const minute =
-      cronParts[0] && isDigitString(cronParts[0])
-        ? cronParts[0]
-        : undefined;
-    const hour =
-      cronParts[1] && isDigitString(cronParts[1])
-        ? cronParts[1]
-        : undefined;
-
-    if (hour && minute) {
-      return new Time(parseInt(hour), parseInt(minute));
-    }
-  };
-
-  const isValidCron = (cronSyntax: string) => {
-    return !!getCronString(cronSyntax);
-  };
-
-  const getExecutions = (cron: string) => {
-    if (!isValidCron(cron)) {
-      return [
-        "Ungültige Cron-Syntax",
-        "Ungültige Cron-Syntax",
-        "Ungültige Cron-Syntax",
-      ];
-    }
-
-    try {
-      /* parse cron with cron-parser */
-      const interval = parse(cron);
-
-      const executions: string[] = [];
-
-      while (executions.length < 3) {
-        executions.push(
-          new Intl.DateTimeFormat("de-DE", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          }).format(interval.next().toDate()) + " Uhr",
-        );
+    const nextIntervals = useMemo(() => {
+      if (!currentCronExpression) {
+        return;
       }
 
-      return executions;
-    } catch (ignoredError) {
-      return [];
-    }
-  };
+      return currentCronExpression.take(5).map((time) => (
+        <Text key={time.toISOString()}>
+          {time.toString()}
+          <br />
+        </Text>
+      ));
+    }, [currentCronExpression]);
 
-  const form = useForm<{
-    cron: string;
-    time: Time;
-    interval: Interval;
-    timeZone: string;
-  }>({
-    defaultValues: {
-      cron: "0 * * * *",
-      interval: Interval.CUSTOM,
-    },
-  });
+    const intervalSettings = Intervals[currentInterval];
+    const isValidCronExpression =
+      currentCronExpression && !errorMessage;
 
-  const Field = typedField(form);
+    const handleIntervalChange: SelectProps["onChange"] = (
+      selectValue,
+    ) => {
+      const newInterval = selectValue as Interval | null;
+      if (!newInterval) {
+        return;
+      }
 
-  const [watchedCron, watchedTime, watchedInterval] =
-    useWatch({
-      control: form.control,
-      name: ["cron", "time", "interval"],
-    });
+      setInterval(newInterval);
+      const intervalSettings = Intervals[newInterval];
 
-  const showTimeField =
-    watchedInterval === Interval.ONE_MINUTE ||
-    watchedInterval === Interval.SEVEN_DAYS ||
-    watchedInterval === Interval.FOURTEEN_DAYS ||
-    watchedInterval === Interval.THIRTY_DAYS;
+      if (onChange) {
+        onChange(intervalSettings.toCronString(value));
+      }
+    };
 
-  const showCronField = watchedInterval === Interval.CUSTOM;
+    const handleTimeChange: TimeFieldProps["onChange"] = (
+      v,
+    ) => {
+      if (onChange && currentCronExpression) {
+        const modified = CronFieldCollection.from(
+          currentCronExpression.fields,
+          {
+            hour: [(v ? v.hour : 0) as HourRange],
+            minute: [(v ? v.minute : 0) as SixtyRange],
+          },
+        );
 
-  const executions = getExecutions(watchedCron);
+        onChange(modified.stringify());
+      }
+    };
 
-  const nextExecutions = executions.map((date, i) => {
+    const handleCustomCronChange = (customCron: string) => {
+      const newExpression = parseCronExpression(customCron);
+      if (newExpression && onChange) {
+        onChange(customCron);
+      }
+    };
+
     return (
-      <Text key={i}>
-        {date}
-        <br />
-      </Text>
-    );
-  });
-
-  const cronText = getCronString(watchedCron);
-
-  return (
-    <Form form={form} onSubmit={(values) => alert(values)}>
       <Section>
-        <Field
-          name="interval"
-          rules={{
-            required: "Bitte wähle einen Interval aus",
-          }}
+        <Select
+          isRequired
+          value={currentInterval}
+          onChange={handleIntervalChange}
         >
-          <Select
-            onChange={(v) => {
-              const newValue = getCronFromInterval(
-                watchedCron,
-                v as Interval,
-                showTimeField ? watchedTime : undefined,
-              );
-              form.setValue("cron", newValue.cron);
-              if (newValue.time) {
-                form.setValue("time", newValue.time);
-              }
-            }}
+          <Label>Interval</Label>
+          {Object.keys(Intervals).map((i) => (
+            <Option key={i} value={i}>
+              {Intervals[i as Interval].label}
+            </Option>
+          ))}
+        </Select>
+        {intervalSettings.allowTimeEdit && (
+          <TimeField onChange={handleTimeChange}>
+            <Label>Uhrzeit</Label>
+          </TimeField>
+        )}
+        {intervalSettings.allowCustomEdit && (
+          <TextField
+            isRequired
+            isInvalid={!isValidCronExpression}
+            value={value}
+            onChange={handleCustomCronChange}
           >
-            <Label>Interval</Label>
-            {intervals.map((i) => (
-              <Option key={i} value={i}>
-                {i}
-              </Option>
-            ))}
-          </Select>
-        </Field>
-
-        {showTimeField && (
-          <ColumnLayout l={[1, 1]}>
-            <Field
-              name="time"
-              rules={{
-                required: "Bitte gib eine Uhrzeit ein",
-              }}
-            >
-              <TimeField
-                onChange={(v) => {
-                  const newValue = getCronFromTime(
-                    watchedCron,
-                    v as Time,
-                  );
-                  form.setValue("cron", newValue);
-                }}
-              >
-                <Label>Uhrzeit</Label>
-              </TimeField>
-            </Field>
-          </ColumnLayout>
+            <Label>Cron-Syntax</Label>
+            {errorMessage && (
+              <FieldError>{errorMessage}</FieldError>
+            )}
+          </TextField>
         )}
-
-        {showCronField && (
-          <ColumnLayout l={[1, 1]}>
-            <Field
-              name="cron"
-              rules={{
-                required: "Bitte gib eine Cron-Syntax ein",
-                validate: {
-                  invalidCron: (v) =>
-                    isValidCron(v as string)
-                      ? undefined
-                      : "Ungültige Cron-Syntax",
-                },
-              }}
-            >
-              <TextField
-                onChange={(v) => {
-                  const newValue =
-                    watchedInterval === Interval.CUSTOM
-                      ? getTimeFromCron(v)
-                      : undefined;
-                  if (newValue) {
-                    form.setValue("time", newValue);
-                  }
-                }}
-              >
-                <Label>Cron-Syntax</Label>
-                <FieldDescription>
-                  {cronText
-                    ? cronText
-                    : "Ungültige Cron-Syntax"}
-                </FieldDescription>
-              </TextField>
-            </Field>
-          </ColumnLayout>
-        )}
-
+        <Separator />
         <LabeledValue>
           <Label>Nächste Ausführungen</Label>
-          <Content>{nextExecutions}</Content>
+          <Content>
+            {isValidCronExpression && nextIntervals}
+          </Content>
         </LabeledValue>
       </Section>
-    </Form>
+    );
+  };
+
+  // only necessary because CronTimeSelector is an inline component
+  // which is a requirement in the demo page
+  const MemorizedCronTimeSelector = useMemo(
+    () => CronTimeSelector,
+    [],
+  );
+
+  const [currentCronString, setCronString] =
+    useState("0 0 * * *");
+
+  return (
+    <>
+      <MemorizedCronTimeSelector
+        value={currentCronString}
+        onChange={setCronString}
+      />
+    </>
   );
 };
