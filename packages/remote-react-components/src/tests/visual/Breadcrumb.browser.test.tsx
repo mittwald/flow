@@ -15,11 +15,18 @@ test.each(testEnvironments)(
         {colors.map((color) => (
           <Wrap if={color === "light"} key={color}>
             <AccentBox>
-              <Breadcrumb color={color}>
-                <Link>Link 1</Link>
-                <Link>Link 2</Link>
-                <Link>Link 3</Link>
-              </Breadcrumb>
+              <Flex direction="column" gap="m">
+                <Breadcrumb color={color}>
+                  <Link>Link 1</Link>
+                  <Link>Link 2</Link>
+                  <Link>Link 3</Link>
+                </Breadcrumb>
+                <Breadcrumb color={color} size="s">
+                  <Link>Link 1</Link>
+                  <Link>Link 2</Link>
+                  <Link>Link 3</Link>
+                </Breadcrumb>
+              </Flex>
             </AccentBox>
           </Wrap>
         ))}
