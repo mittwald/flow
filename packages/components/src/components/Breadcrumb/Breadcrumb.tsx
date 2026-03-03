@@ -13,13 +13,20 @@ export interface BreadcrumbProps
     PropsWithChildren {
   /** The color of the breadcrumb. @default "primary" */
   color?: "primary" | "dark" | "light";
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
 }
 
 /** @flr-generate all */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
-  const { children, className, color = "primary", ...rest } = props;
+  const { children, className, color = "primary", size = "m", ...rest } = props;
 
-  const rootClassName = clsx(styles.breadcrumb, styles[color], className);
+  const rootClassName = clsx(
+    styles.breadcrumb,
+    styles[color],
+    size === "s" && styles["size-s"],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {
