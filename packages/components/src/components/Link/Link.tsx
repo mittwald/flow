@@ -31,6 +31,8 @@ export interface LinkProps
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
   /** @internal */
   unstyled?: boolean;
 }
@@ -49,6 +51,7 @@ export const Link = flowComponent("Link", (props) => {
     slot: ignoredSlotProp,
     style,
     whiteSpace,
+    size = "m",
     ...rest
   } = props;
 
@@ -65,6 +68,7 @@ export const Link = flowComponent("Link", (props) => {
         styles.link,
         inline && styles.inline,
         styles[color as keyof typeof styles],
+        size === "s" && styles["size-s"],
         className,
       );
 

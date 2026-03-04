@@ -30,6 +30,9 @@ test.each(testEnvironments)(
                 <Link color={color} target="_blank" download>
                   Download
                 </Link>
+                <Link size="s" color={color} target="_blank">
+                  Small
+                </Link>
               </Flex>
             </AccentBox>
           </Wrap>
