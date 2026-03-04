@@ -63,21 +63,12 @@
 
   &.size-s {
     .link {
-      line-height: var(--link--line-height-s);
       font-size: var(--font-size--s);
-    }
-  }
-
-  /* Size s */
-
-  &.size-s {
-    .link {
-      font-size: var(--font-size-text--s);
     }
 
     .icon {
-      width: var(--font-size-text--s);
-      height: var(--font-size-text--s);
+      width: var(--font-size--s);
+      height: var(--font-size--s);
     }
   }
 
