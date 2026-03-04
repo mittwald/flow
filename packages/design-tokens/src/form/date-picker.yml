@@ -9,13 +9,13 @@ calendar:
   spacing:
     value: "{size-rem.xs}"
   heading-font-size:
-    value: "{font-size.m}"
+    value: "{font-size-text.m}"
   cell-size:
     value: 2.25rem
   cell-corner-radius:
     value: "{corner-radius.round}"
   cell-font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   cell-background-color:
     disabled:
       value: "{disabled-plain-background-color}"

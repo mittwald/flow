@@ -8,12 +8,12 @@ line-height:
 single-line-height:
   s:
     value: 1rem
-font-size:
+font-size-text:
   s:
     value: 0.875rem
   m:
     value: 1rem
-heading-size:
+font-size-heading:
   xs:
     value: 1rem
   s:
@@ -26,3 +26,5 @@ heading-size:
     value: 2rem
   xxl:
     value: 2.625rem
+max-text-width:
+  value: "960px"

@@ -20,7 +20,7 @@ notification:
   spacing:
     value: "{size-rem.s}"
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
 
   # Info
   info-border-color:

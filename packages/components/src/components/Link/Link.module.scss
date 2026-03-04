@@ -23,7 +23,7 @@
 
   &.inline {
     font-weight: normal;
-    font-size: var(--font-size--m);
+    font-size: var(--font-size-text--m);
     text-decoration: underline;
   }
 
@@ -74,7 +74,7 @@
   /* Size s */
 
   &.size-s {
-    font-size: var(--font-size--s);
+    font-size: var(--font-size-text--s);
 
     .icon {
       height: var(--link--icon-height-s);

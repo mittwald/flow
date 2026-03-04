@@ -1,6 +1,6 @@
 code:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   padding-x:
     value: "{size-px.xs}"
   padding-y:

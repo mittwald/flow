@@ -24,7 +24,7 @@ const meta: Meta<typeof Heading> = {
       options: ["default", "danger", "unavailable", "dark", "light"],
     },
   },
-  args: { level: 2 },
+  args: { level: 2, color: "default" },
   render: (props) => (
     <StoryBackground color={props.color}>
       <Heading {...props}>I am a H{props.level} Heading</Heading>

@@ -14,7 +14,7 @@ alert:
   spacing:
     value: "{size-rem.m}"
   heading-size:
-    value: "{heading-size.xs}"
+    value: "{font-size-heading.xs}"
 
   # Info
   info-border-color:

@@ -44,26 +44,26 @@
   }
 
   &:where(h1) {
-    --font-size: var(--heading-size--xl);
+    --font-size: var(--font-size-heading--xl);
   }
 
   &:where(h2) {
-    --font-size: var(--heading-size--m);
+    --font-size: var(--font-size-heading--m);
   }
 
   &:where(h3) {
-    --font-size: var(--heading-size--s);
+    --font-size: var(--font-size-heading--s);
   }
 
   &:where(h4),
   &:where(h5),
   &:where(h6) {
-    --font-size: var(--heading-size-heading--xs);
+    --font-size: var(--font-size-heading--xs);
   }
 
   @mixin size($size) {
-    &.#{$size} {
-      --font-size: var(--heading-size--#{$size});
+    &.size-#{$size} {
+      --font-size: var(--font-size-heading--#{$size});
     }
   }
 
@@ -85,16 +85,23 @@
 
 @media (max-width: 768px) {
   .heading {
-    &:where(h1) {
-      --font-size: var(--heading-size--l);
+    &:where(h1),
+    &.size-xl {
+      --font-size: var(--font-size-heading--l);
     }
 
-    &:where(h2) {
-      --font-size: var(--heading-size--s);
+    &.size-l {
+      --font-size: var(--font-size-heading--m);
     }
 
-    &:where(h3) {
-      --font-size: var(--heading-size--xs);
+    &:where(h2),
+    &.size-m {
+      --font-size: var(--font-size-heading--s);
+    }
+
+    &:where(h3),
+    &.size-s {
+      --font-size: var(--font-size-heading--xs);
     }
   }
 }

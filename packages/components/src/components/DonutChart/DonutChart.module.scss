@@ -25,11 +25,11 @@
 
   &.size-l {
     .value {
-      font-size: var(--heading-size--xl);
+      font-size: var(--font-size-heading--xl);
       padding: var(--donut-chart--padding--l);
 
       small {
-        font-size: var(--heading-size--l);
+        font-size: var(--font-size-heading--l);
       }
     }
   }
