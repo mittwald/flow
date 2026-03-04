@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.705](https://github.com/mittwald/flow/compare/0.2.0-alpha.704...0.2.0-alpha.705) (2026-03-03)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
 # [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

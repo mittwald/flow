@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
+
+### Features
+
+* **Link:** add size s ([#2352](https://github.com/mittwald/flow/issues/2352)) ([09bc68d](https://github.com/mittwald/flow/commit/09bc68d1de7bcda466c87cbe4561b01217c1035a))
+
+# [0.2.0-alpha.705](https://github.com/mittwald/flow/compare/0.2.0-alpha.704...0.2.0-alpha.705) (2026-03-03)
+
+### Features
+
+* **Modal:** add mobile padding ([#2353](https://github.com/mittwald/flow/issues/2353)) ([ca4d007](https://github.com/mittwald/flow/commit/ca4d0071db941092d518812ab6efd99bed201d16))
+
 # [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
 
 ### Features

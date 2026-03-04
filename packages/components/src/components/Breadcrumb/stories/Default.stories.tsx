@@ -21,10 +21,7 @@ const meta: Meta<typeof Breadcrumb> = {
       control: "inline-radio",
       options: ["default", "dark", "light"],
     },
-    size: {
-      control: "inline-radio",
-      options: ["s", "m"],
-    },
+    size: { control: "inline-radio", options: ["s", "m"] },
   },
   args: { size: "m", color: "default" },
 };

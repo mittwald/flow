@@ -1,7 +1,6 @@
 @use "@/styles/mixins/focus";
 
 .link {
-  line-height: var(--link--line-height);
   font-weight: var(--link--font-weight);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
@@ -75,7 +74,6 @@
   /* Size s */
 
   &.size-s {
-    line-height: var(--link--line-height-s);
     font-size: var(--font-size--s);
 
     .icon {

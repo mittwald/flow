@@ -88,7 +88,7 @@
 }
 
 /* Normal Modal Desktop */
-@media (min-width: 550px) {
+@media (min-width: 768px) {
   .modal {
     @include size(s);
     @include size(m);
@@ -175,7 +175,7 @@
 
 /* Mobile Tray */
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
   .modal {
     > div {
       > div {
@@ -208,9 +208,19 @@
 
 /* Mobile  */
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
   .modal,
   .offCanvas {
+    .header {
+      padding-inline: var(--modal--padding-mobile);
+    }
+
+    .content,
+    .columnLayout,
+    .actionGroup {
+      padding: var(--modal--padding-mobile);
+    }
+
     .actionGroup {
       flex-direction: column;
 
