@@ -27,6 +27,7 @@ import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-component
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
+import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
@@ -183,6 +184,10 @@ export const flowComponents = {
     ClearPropsContext,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
+  "flr-code-editor": createFlowRemoteComponentRenderer(
+    "CodeEditor",
+    CodeEditor,
+  ),
   "flr-color": createFlowRemoteComponentRenderer("Color", Color),
   "flr-column-layout": createFlowRemoteComponentRenderer(
     "ColumnLayout",
