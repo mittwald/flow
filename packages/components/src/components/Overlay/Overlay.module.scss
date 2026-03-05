@@ -34,3 +34,10 @@
     opacity: 1;
   }
 }
+
+@media (prefers-contrast: more), (prefers-reduced-transparency) {
+  .overlay {
+    backdrop-filter: none;
+    background-color: var(--dark--color--600);
+  }
+}

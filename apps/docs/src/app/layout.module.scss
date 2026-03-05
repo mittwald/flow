@@ -14,7 +14,8 @@
 }
 
 .header {
-  background-color: var(--neutral--color--200);
+  backdrop-filter: blur(5px);
+  background: rgba(244, 248, 252, 0.4);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -148,5 +149,12 @@
 
   .mainWrapper {
     padding-inline: var(--size-px--m);
+  }
+}
+
+@media (prefers-contrast: more), (prefers-reduced-transparency) {
+  .header {
+    backdrop-filter: none;
+    background-color: var(--neutral--color--200);
   }
 }
