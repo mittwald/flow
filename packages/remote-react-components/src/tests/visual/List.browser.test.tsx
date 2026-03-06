@@ -32,7 +32,12 @@ test.each(testEnvironments)(
       }>();
 
       return (
-        <List.List aria-label="list" getItemId={(i) => i.id}>
+        <List.List
+          aria-label="list"
+          getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
+        >
           <ActionGroup>
             <Button>Button</Button>
           </ActionGroup>
@@ -169,6 +174,8 @@ test.each(testEnvironments)(
           defaultViewMode="tiles"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
@@ -238,11 +245,20 @@ test.each(testEnvironments)(
           defaultViewMode="table"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["1", "2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
               { id: "1", name: "Max Mustermann", role: "Admin", active: true },
               { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "3",
+                name: "John Mustermann",
+                role: "Developer",
+                active: false,
+              },
+              { id: "4", name: "Max Doe", role: "Developer", active: false },
             ]}
           />
           <List.Table>
