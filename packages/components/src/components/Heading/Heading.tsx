@@ -32,7 +32,7 @@ export const Heading = flowComponent("Heading", (props) => {
 
   const rootClassName = clsx(
     styles.heading,
-    size && styles[size],
+    size && styles[`size-${size}`],
     styles[color],
     wrap && styles[`wrap-${wrap}`],
     className,
