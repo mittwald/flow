@@ -394,7 +394,6 @@ test.each(testEnvironments)(
     }
 
     await render(<Wrapper />);
-
     await testScreenshot("List edge cases - tile view");
   },
 );
