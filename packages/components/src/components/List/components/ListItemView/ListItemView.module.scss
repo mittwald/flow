@@ -191,6 +191,7 @@
 
     .title {
       width: 100%;
+      min-width: 0;
 
       :global(.flow--heading--heading-content) {
         position: absolute;

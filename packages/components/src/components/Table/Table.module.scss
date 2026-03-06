@@ -54,7 +54,7 @@
     }
   }
 
-  .body {
+  :where(.body) {
     :where(.row) {
       &:where(:nth-of-type(odd):not(.footer)) {
         background-color: var(--table--background-color-accent);
