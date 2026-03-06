@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.708](https://github.com/mittwald/flow/compare/0.2.0-alpha.707...0.2.0-alpha.708) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.707](https://github.com/mittwald/flow/compare/0.2.0-alpha.706...0.2.0-alpha.707) (2026-03-06)
+
+### Bug Fixes
+
+* **List:** fix tile heading overflow ([#2354](https://github.com/mittwald/flow/issues/2354)) ([6a293b3](https://github.com/mittwald/flow/commit/6a293b35a3e019a2aca006bfabf7f9b5640b9a59))
+
 # [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
 
 ### Features
