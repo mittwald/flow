@@ -1,6 +1,6 @@
 form-control:
   label-to-control-spacing:
-    value: "{size-rem.xxs}"
+    value: "{size-rem.xs}"
   control-to-info-spacing:
     value: "{size-rem.xs}"
   spacing-x:
@@ -12,7 +12,7 @@ form-control:
   padding-y:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-style:
@@ -20,7 +20,7 @@ form-control:
 
   placeholder-color:
     default:
-      value: "{neutral.color.900}"
+      value: "{neutral.color.700}"
     disabled:
       value: "{neutral.color.500}"
 
@@ -38,17 +38,17 @@ form-control:
 
   background-color:
     default:
-      value: "{neutral.color.300}"
+      value: "{neutral.color.200}"
     disabled:
       value: "{disabled-outline-background-color}"
     hover:
-      value: "{primary.color.100}"
+      value: "{neutral-outline-background-color.hover}"
     focused:
-      value: "{neutral.color.300}"
+      value: "{neutral.color.200}"
     invalid:
       value: "{danger.color.100}"
     selected:
-      value: "{primary.color.200}"
+      value: "{neutral-outline-background-color.pressed}"
 
   content-color:
     default:

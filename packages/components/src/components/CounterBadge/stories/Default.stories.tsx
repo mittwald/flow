@@ -29,9 +29,9 @@ export const WithHighNumber: Story = {
 
 export const WithButton: Story = {
   render: (props) => (
-    <Button aria-label="Notifications: 7">
+    <Button aria-label={`Notifications: ${props.count}`}>
       <IconNotification />
-      <CounterBadge {...props} count={7}></CounterBadge>
+      <CounterBadge {...props}></CounterBadge>
     </Button>
   ),
 };

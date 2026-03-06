@@ -17,7 +17,7 @@ switch:
     disabled:
       value: "{disabled-solid-background-color}"
     selected:
-      value: "{success-solid-background-color.default}"
+      value: "{primary-solid-background-color.default}"
 
   # Handle
   handle-color:

@@ -5,7 +5,6 @@ import {
   IconNotification,
   IconSearch,
   IconSettings,
-  IconSupport,
 } from "@/components/Icon/components/icons";
 import { Link } from "@/components/Link";
 import { HeaderNavigation } from "@/components/HeaderNavigation";
@@ -20,6 +19,8 @@ import ContextMenu, {
 } from "@/components/ContextMenu";
 import { Modal, ModalTrigger } from "@/components/Modal";
 import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -28,22 +29,51 @@ const meta: Meta<typeof HeaderNavigation> = {
     controls: { exclude: ["className"] },
   },
   render: (props) => (
-    <HeaderNavigation aria-label="Header navigation" {...props}>
-      <Link href="#">Getting startet</Link>
-      <Link href="#" aria-current="page">
-        Components
-      </Link>
-      <Button>
-        <IconSearch />
-      </Button>
-    </HeaderNavigation>
+    <StoryBackground color={props.color}>
+      <HeaderNavigation aria-label="Header navigation" {...props}>
+        <Link href="#">Getting startet</Link>
+        <Link href="#" aria-current="page">
+          Components
+        </Link>
+        <Button aria-label="Search">
+          <IconSearch />
+        </Button>
+        <ModalTrigger>
+          <Button aria-label="Notifications">
+            <IconNotification />
+          </Button>
+          <Modal>
+            <Heading>Notifications</Heading>
+            <Content>{dummyText.medium}</Content>
+          </Modal>
+        </ModalTrigger>
+        <ContextMenuTrigger>
+          <Button>
+            <Avatar>
+              <Image alt="Gopher" src={dummyText.imageSrc} />
+            </Avatar>
+          </Button>
+          <ContextMenu>
+            <MenuItem>
+              <IconSettings />
+              <Text>Profile</Text>
+            </MenuItem>
+            <MenuItem>
+              <IconLogout />
+              <Text>Logout</Text>
+            </MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
+      </HeaderNavigation>
+    </StoryBackground>
   ),
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "dark", "light"],
+      options: ["default", "dark", "light"],
     },
   },
+  args: { color: "default" },
 };
 
 export default meta;
@@ -51,55 +81,3 @@ export default meta;
 type Story = StoryObj<typeof HeaderNavigation>;
 
 export const Default: Story = {};
-
-export const WithContextMenu: Story = {
-  render: (props) => (
-    <HeaderNavigation aria-label="Header navigation" {...props}>
-      <Button>
-        <IconSearch />
-      </Button>
-      <Button>
-        <IconSupport />
-      </Button>
-      <ModalTrigger>
-        <Button>
-          <IconNotification />
-        </Button>
-        <Modal>
-          <Heading>Notifications</Heading>
-        </Modal>
-      </ModalTrigger>
-      <ContextMenuTrigger>
-        <Button>
-          <Avatar>
-            <Image alt="Gopher" src={dummyText.imageSrc} />
-          </Avatar>
-        </Button>
-        <ContextMenu>
-          <MenuItem>
-            <IconSettings />
-            <Text>Profile</Text>
-          </MenuItem>
-          <MenuItem>
-            <IconLogout />
-            <Text>Logout</Text>
-          </MenuItem>
-        </ContextMenu>
-      </ContextMenuTrigger>
-    </HeaderNavigation>
-  ),
-};
-
-export const Dark: Story = {
-  args: { color: "dark" },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  globals: {
-    backgrounds: "dark",
-  },
-};

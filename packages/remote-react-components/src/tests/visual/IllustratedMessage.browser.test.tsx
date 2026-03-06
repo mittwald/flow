@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 import React from "react";
 
-const colors = ["primary", "danger", "unavailable", "dark", "light"] as const;
+const colors = ["default", "danger", "unavailable", "dark", "light"] as const;
 
 test.each(testEnvironments)(
   "IllustratedMessage content (%s)",

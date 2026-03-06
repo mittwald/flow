@@ -11,4 +11,4 @@ legend-item:
     size:
       value: "{size-rem.m}"
     corner-radius:
-      value: "{corner-radius.default}"
+      value: "{corner-radius.s}"

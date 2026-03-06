@@ -8,7 +8,7 @@
   /* Elements */
 
   :where(.icon) {
-    color: var(--illustrated-message--info-icon-color);
+    color: var(--illustrated-message--content-color);
     margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
   }
 
@@ -40,7 +40,6 @@
     }
   }
 
-  @include status(primary);
   @include status(danger);
   @include status(unavailable);
   @include status(dark);

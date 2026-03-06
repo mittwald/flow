@@ -3,7 +3,7 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "SegmentedControl (%s)",
+  "SegmentedControl states (%s)",
   async ({
     testScreenshot,
     render,
@@ -54,7 +54,7 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("SegmentedControl with Segment");
+    await testScreenshot("SegmentedControl states");
   },
 );
 

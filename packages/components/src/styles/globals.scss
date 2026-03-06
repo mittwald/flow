@@ -59,7 +59,7 @@ html body *:where([class*="flow--"] [class*="flow--"]) {
 html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
-  line-height: var(--line-height--default);
+  line-height: var(--line-height);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
   color: var(--text--color--default);

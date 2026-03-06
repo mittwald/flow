@@ -9,7 +9,7 @@
   &[data-disabled],
   [aria-disabled] & {
     .searchIcon {
-      color: var(--form-control--content-color--disabled);
+      color: var(--form-control--placeholder-color--disabled);
     }
   }
 }
@@ -22,6 +22,7 @@
   .searchIcon {
     position: absolute;
     margin: var(--button--padding-icon-only);
+    color: (var(--form-control--placeholder-color--default));
   }
 
   .input {

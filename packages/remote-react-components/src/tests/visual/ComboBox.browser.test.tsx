@@ -1,6 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import { userEvent, page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 test.each(testEnvironments)(
   "ComboBox states (%s)",
@@ -67,5 +67,20 @@ test.each(testEnvironments)(
     await option.click();
 
     await testScreenshot("ComboBox - option selected");
+  },
+);
+
+test.each(testEnvironments)(
+  "ComboBox edge cases (%s)",
+  async ({ testScreenshot, render, components: { Flex, ComboBox, Label } }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <ComboBox defaultInputValue=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae, laborum ea tempore.">
+          <Label>Label</Label>
+        </ComboBox>
+      </Flex>,
+    );
+
+    await testScreenshot("ComboBox edge cases");
   },
 );

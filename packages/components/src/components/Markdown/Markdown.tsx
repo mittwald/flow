@@ -18,7 +18,7 @@ import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingL
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
   /** The color schema of the markdown component. */
-  color?: "dark" | "light" | "default";
+  color?: "default" | "dark" | "light";
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
   /** @internal */
@@ -28,26 +28,16 @@ export interface MarkdownProps
 
 /** @flr-generate all */
 export const Markdown: FC<MarkdownProps> = (props) => {
-  const {
-    children,
-    color = "default",
-    className,
-    headingOffset = 0,
-    ref,
-    ...rest
-  } = props;
-
-  const headingAndLinkColor = color === "default" ? "primary" : color;
-  const textColor = color === "default" ? undefined : color;
+  const { children, color, className, headingOffset = 0, ref, ...rest } = props;
 
   const components: Components = {
     a: (props) => (
-      <Link target="_blank" color={headingAndLinkColor} href={props.href}>
+      <Link target="_blank" color={color} href={props.href}>
         {props.children}
       </Link>
     ),
     p: (props) => (
-      <Text elementType="p" color={textColor}>
+      <Text elementType="p" color={color}>
         {props.children}
       </Text>
     ),
@@ -55,7 +45,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h1: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(1, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -63,7 +53,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h2: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(2, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -71,7 +61,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h3: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(3, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -79,7 +69,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h4: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(4, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -87,7 +77,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h5: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(5, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -95,7 +85,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h6: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(6, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -123,17 +113,17 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       );
     },
     ul: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <ul>{props.children as ReactNode}</ul>
       </Text>
     ),
     ol: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <ol>{props.children as ReactNode}</ol>
       </Text>
     ),
     blockquote: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <blockquote>{props.children}</blockquote>
       </Text>
     ),

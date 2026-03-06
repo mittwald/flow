@@ -3,7 +3,7 @@ alert-badge:
   info-background-color:
     value: "{info-soft-background-color.default}"
   info-content-color:
-    value: "{info-soft-content-color.default}"
+    value: "{info-soft-content-color}"
   info-border-color:
     value: "{info-outline-border-color}"
 
@@ -11,7 +11,7 @@ alert-badge:
   success-background-color:
     value: "{success-soft-background-color.default}"
   success-content-color:
-    value: "{success-soft-content-color.default}"
+    value: "{success-soft-content-color}"
   success-border-color:
     value: "{success-outline-border-color}"
 
@@ -19,7 +19,7 @@ alert-badge:
   warning-background-color:
     value: "{warning-soft-background-color.default}"
   warning-content-color:
-    value: "{warning-soft-content-color.default}"
+    value: "{warning-soft-content-color}"
   warning-border-color:
     value: "{warning-outline-border-color}"
 
@@ -27,6 +27,6 @@ alert-badge:
   danger-background-color:
     value: "{danger-soft-background-color.default}"
   danger-content-color:
-    value: "{danger-soft-content-color.default}"
+    value: "{danger-soft-content-color}"
   danger-border-color:
     value: "{danger-outline-border-color}"

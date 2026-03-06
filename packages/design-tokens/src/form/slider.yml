@@ -18,7 +18,7 @@ slider:
   border-style:
     value: "{border-style.default}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.s}"
   value-font-weight:
     value: "{font-weight.bold}"
   handle-corner-radius:

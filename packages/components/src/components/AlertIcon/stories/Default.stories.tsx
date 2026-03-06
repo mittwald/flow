@@ -24,22 +24,4 @@ export default meta;
 
 type Story = StoryObj<typeof AlertIcon>;
 
-export const Info: Story = {
-  args: { status: "info" },
-};
-
-export const Success: Story = {
-  args: { status: "success" },
-};
-
-export const Warning: Story = {
-  args: { status: "warning" },
-};
-
-export const Danger: Story = {
-  args: { status: "danger" },
-};
-
-export const Unavailable: Story = {
-  args: { status: "unavailable" },
-};
+export const Default: Story = {};

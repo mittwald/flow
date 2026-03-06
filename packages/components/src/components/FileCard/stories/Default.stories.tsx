@@ -18,6 +18,9 @@ const meta: Meta<typeof FileCard> = {
   title: "Upload/FileCard",
   component: FileCard,
   args: { name: "image.jpg" },
+  parameters: {
+    controls: { exclude: ["href", "onDelete", "onPress", "imageSrc"] },
+  },
   render: (props) => <FileCard {...props} />,
 };
 export default meta;
@@ -30,21 +33,7 @@ export const WithType: Story = { args: { type: "image/png" } };
 
 export const WithSize: Story = { args: { sizeInBytes: 47500 } };
 
-export const WithOnDelete: Story = {
-  args: {
-    onDelete: () => {
-      action("onDelete");
-    },
-  },
-};
-
-export const WithLink: Story = {
-  args: {
-    href: "#",
-  },
-};
-
-export const WithLinkAndOnDelete: Story = {
+export const WithActions: Story = {
   args: {
     href: "#",
     onDelete: () => {
@@ -76,6 +65,9 @@ export const WithProgressBar: Story = {
     href: "#",
     name: undefined,
   },
+  parameters: {
+    controls: { exclude: ["href", "onDelete", "name"] },
+  },
   render: (props) => (
     <FileCard {...props}>
       <ProgressBar
@@ -92,9 +84,8 @@ export const WithProgressBar: Story = {
 };
 
 export const Failed: Story = {
-  args: { isFailed: true },
   render: (props) => (
-    <FileCard {...props}>
+    <FileCard isFailed {...props}>
       <Text>Upload failed</Text>
     </FileCard>
   ),
@@ -107,10 +98,10 @@ export const WithButtons: Story = {
   },
   render: (props) => (
     <FileCard {...props}>
-      <Button>
+      <Button aria-label="Move up">
         <IconChevronUp />
       </Button>
-      <Button>
+      <Button aria-label="Move down">
         <IconChevronDown />
       </Button>
     </FileCard>

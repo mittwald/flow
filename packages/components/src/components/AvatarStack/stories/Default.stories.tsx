@@ -11,6 +11,15 @@ const meta: Meta<typeof AvatarStack> = {
   title: "Content/AvatarStack",
   component: AvatarStack,
   args: { totalCount: 20 },
+  argTypes: {
+    size: {
+      control: "inline-radio",
+      options: ["xs", "s", "m", "l"],
+    },
+  },
+  parameters: {
+    controls: { exclude: ["totalCount", "onCountPress"] },
+  },
   render: (props) => (
     <AvatarStack {...props}>
       <Avatar size={props.size}>
