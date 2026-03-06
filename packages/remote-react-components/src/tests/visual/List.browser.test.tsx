@@ -266,3 +266,135 @@ test.each(testEnvironments)(
     await testScreenshot("List table");
   },
 );
+
+test.each(testEnvironments)(
+  "List edge cases - list view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "MaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermann",
+                role: "AdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - list view");
+  },
+);
+
+test.each(testEnvironments)(
+  "List edge cases - tile view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="tiles"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "MaxMustermannMaxMustermann",
+                role: "AdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} showTiles textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - tile view");
+  },
+);
