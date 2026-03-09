@@ -43,7 +43,7 @@ export const IllustratedMessage = flowComponent(
         color: lightOrDarkColor,
       },
       Button: {
-        color: lightOrDarkColor ?? "accent",
+        color: lightOrDarkColor,
       },
       ActionGroup: {
         className: styles.actionGroup,
