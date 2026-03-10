@@ -11,11 +11,12 @@ import {
   type FormProps,
 } from "@/integrations/react-hook-form";
 import { Render } from "@/lib/react/components/Render";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { TextArea } from "react-aria-components";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
+import FormRootError from "../FormRootError";
 
 const handleSubmit = vitest.fn();
 vitest.useFakeTimers();
@@ -280,9 +281,30 @@ describe("error", () => {
     );
   };
 
+  const RootErrorTestForm: FC<PropsWithChildren> = (props) => {
+    const { children } = props;
+    const form = useForm<object>();
+    return (
+      <Form
+        {...props}
+        form={form}
+        onSubmit={() => {
+          form.setError("root", {
+            message: "Test error",
+          });
+        }}
+      >
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        {children}
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
   test("form submission error leads to unhandledrejection event", async () => {
     const errorHandler = vitest.fn();
-
     window.addEventListener("unhandledrejection", errorHandler);
 
     await render(
@@ -303,6 +325,46 @@ describe("error", () => {
         }),
       }),
     );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("form.setError('root') leads to unhandledrejection event when no FormRootError is mounted", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(<RootErrorTestForm />);
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).toHaveBeenCalledWith(
+      expect.objectContaining({
+        reason: expect.objectContaining({
+          message: "Test error",
+        }),
+      }),
+    );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("form.setError('root') leads not to unhandledrejection event when FormRootError is mounted", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <RootErrorTestForm>
+        <FormRootError />
+      </RootErrorTestForm>,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    const errorText = page.getByText("Test error");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    expect(errorText).toBeInTheDocument();
 
     window.removeEventListener("unhandledrejection", errorHandler);
   });
