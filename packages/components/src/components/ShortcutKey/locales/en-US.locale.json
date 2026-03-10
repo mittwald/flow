@@ -1,7 +1,4 @@
 {
-  "alertIcon.danger": "Status \"error\"",
-  "alertIcon.info": "Status \"information\"",
-  "alertIcon.success": "Status \"success\"",
-  "alertIcon.unavailable": "Status \"unavailable\"",
-  "alertIcon.warning": "Status \"warning\""
+  "shortcutKey.alt": "Alt",
+  "shortcutKey.mod": "Ctrl"
 }

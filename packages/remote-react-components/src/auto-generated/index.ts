@@ -97,6 +97,7 @@ export * from "./Segment";
 export * from "./SegmentedControl";
 export * from "./Select";
 export * from "./Separator";
+export * from "./ShortcutKey";
 export * from "./Skeleton";
 export * from "./SkeletonText";
 export * from "./Slider";

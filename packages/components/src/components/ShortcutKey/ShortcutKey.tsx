@@ -1,34 +1,52 @@
-import type { FC } from "react";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
+import styles from "./ShortcutKey.module.scss";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithChildren } from "react";
 
-export interface ShortcutKeyProps {
-  children: string;
+export interface ShortcutKeyProps
+  extends PropsWithClassName, FlowComponentProps, PropsWithChildren {
+  keys?: (string | "mod" | "alt" | "shift")[];
+  isDisabled?: boolean;
 }
 
-export const shortcutKeys: ("mod" | "alt" | "shift" | "control")[] = [
-  "mod",
-  "alt",
-  "shift",
-  "control",
-];
+/** @flr-generate all */
+export const ShortcutKey = flowComponent("ShortcutKey", (props) => {
+  const { keys, className, isDisabled, children, ...rest } = props;
 
-export const ShortcutKey: FC<ShortcutKeyProps> = ({ children }) => {
+  const rootClassName = clsx(
+    styles.shortcutKey,
+    isDisabled && styles.disabled,
+    className,
+  );
+
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const isMac = navigator.userAgent.includes("Mac");
 
-  const translatedChildren = children.replace(
-    /\b(mod|alt|shift|control)\b/gi,
-    (key) => {
-      const label = stringFormatter.format(`shortcutKey.${key}`);
+  const joinedKeys = keys
+    ?.map((key) => {
+      if (key === "mod") {
+        return isMac ? "⌘" : stringFormatter.format(`shortcutKey.mod`);
+      }
+      if (key === "alt") {
+        return isMac ? "⌥" : stringFormatter.format(`shortcutKey.alt`);
+      }
+      if (key === "shift") {
+        return "⇧";
+      }
+      return key;
+    })
+    .join("+");
 
-      if (key === "mod") return isMac ? "⌘" : label;
-      if (key === "control") return isMac ? "⌃" : label;
-      if (key === "alt") return isMac ? "⌥" : label;
-      return label;
-    },
+  return (
+    <span className={rootClassName} {...rest}>
+      {joinedKeys ?? children}
+    </span>
   );
-
-  return <>{translatedChildren}</>;
-};
+});

@@ -97,6 +97,7 @@ export * from "./RemoteSegmentElement";
 export * from "./RemoteSegmentedControlElement";
 export * from "./RemoteSelectElement";
 export * from "./RemoteSeparatorElement";
+export * from "./RemoteShortcutKeyElement";
 export * from "./RemoteSkeletonElement";
 export * from "./RemoteSkeletonTextElement";
 export * from "./RemoteSliderElement";

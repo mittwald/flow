@@ -1,0 +1,26 @@
+shortcut-key:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.xs}"
+  padding-y-start:
+    value: "{size-px.xxs}"
+  background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  content-color:
+    default:
+      value: "{neutral-soft-content-color.default}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+  inner-shadow-color:
+    default:
+      value: "{dark.color.200}"
+    disabled:
+      value: "{disabled-soft-dark-background-color}"
+  inner-shadow-size-x:
+    value: "{size-px.xxs}"
+  inner-shadow-size-y-end:
+    value: "{size-px.xs}"

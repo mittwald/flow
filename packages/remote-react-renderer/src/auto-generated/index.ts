@@ -98,6 +98,7 @@ import { Segment as Segment } from "@mittwald/flow-react-components";
 import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-components";
 import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
+import { ShortcutKey as ShortcutKey } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
@@ -386,6 +387,10 @@ export const flowComponents = {
   ),
   "flr-select": createFlowRemoteComponentRenderer("Select", Select),
   "flr-separator": createFlowRemoteComponentRenderer("Separator", Separator),
+  "flr-shortcut-key": createFlowRemoteComponentRenderer(
+    "ShortcutKey",
+    ShortcutKey,
+  ),
   "flr-skeleton": createFlowRemoteComponentRenderer("Skeleton", Skeleton),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(
     "SkeletonText",
