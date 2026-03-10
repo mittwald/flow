@@ -2,6 +2,7 @@ export * from "./components/Field";
 export * from "./components/Form";
 export * from "./components/SubmitButton";
 export * from "./components/ResetButton";
+export * from "./components/FormRootError";
 export {
   useFormContext,
   useOptionalFormContext,

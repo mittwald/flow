@@ -16,10 +16,13 @@ import {
 } from "react";
 import type {
   FieldValues,
+  Path,
   SubmitHandler,
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
+import { useFormRootErrorController } from "../FormRootError/useFormRootErrorController";
+import { FormRootError } from "../../lib/FormRootError";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -66,6 +69,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
   const { isSubmitting, isValidating, isDirty } = form.formState;
+  const rootErrorController = useFormRootErrorController();
 
   const autoResetOptions =
     typeof autoReset === "boolean"
@@ -86,6 +90,10 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const handleSubmitResult = (result: unknown) => {
     if (typeof result === "function") {
       afterSubmitCallback.current = result as AfterFormSubmitCallback;
+    }
+    const rootError = form.getFieldState("root" as Path<F>)?.error;
+    if (rootError && !rootErrorController.errorComponentMounted) {
+      throw new FormRootError(rootError);
     }
   };
 
@@ -121,6 +129,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
         isReadOnly={isReadOnly}
         id={formId}
         onAfterSuccessFeedback={onAfterSuccessFeedback}
+        rootErrorController={rootErrorController}
       >
         <FormComponent
           {...formProps}
