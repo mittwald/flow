@@ -1,6 +1,9 @@
-Die Component erkennt automatisch, ob ein User macOS oder Windows verwendet, und
-zeigt die entsprechenden Tastenbezeichnungen korrekt an. Dadurch muss keine
-zusätzliche Logik implementiert werden.
+Die Komponente unterstützt sowohl `children` als auch ein Array von `keys`. Die
+einzelnen keys werden als Strings übergeben. Wenn dabei die Werte "mod", "alt"
+oder "shift" verwendet werden, wird automatisch das passende Tastensymbol
+angezeigt – abhängig davon, ob der Nutzer macOS oder Windows verwendet. Dadurch
+werden die jeweiligen Tastenbezeichnungen plattformspezifisch korrekt
+dargestellt, ohne dass zusätzliche Logik implementiert werden muss.
 
 <LiveCodeEditor />
 
@@ -11,15 +14,17 @@ zusätzliche Logik implementiert werden.
 ## SearchField
 
 Wenn eine Suche durch einen Keyboard-Shortcut fokussiert werden kann, kann der
-ShortcutKey mit dem [SearchField](Link) kombiniert werden, um dem User das
-verfügbare Tastaturkürzel sichtbar zu machen.
+ShortcutKey mit dem
+[SearchField](/04-components/form-controls/search-field/overview) kombiniert
+werden, um dem User das verfügbare Tastaturkürzel sichtbar zu machen.
 
 <LiveCodeEditor editorCollapsed example="search-field" />
 
 ## ContextMenu
 
-In [ContextMenus](Link) werden häufig Aktionen angezeigt, die zusätzlich per
-Keyboard-Shortcut ausgelöst werden können. In diesem Fall kann der ShortcutKey
-mit dem jeweiligen Menu-Item kombiniert werden.
+In [ContextMenus](/04-components/actions/context-menu/overview) werden häufig
+Aktionen angezeigt, die zusätzlich per Keyboard-Shortcut ausgelöst werden
+können. In diesem Fall kann der ShortcutKey mit dem jeweiligen Menu-Item
+kombiniert werden.
 
 <LiveCodeEditor editorCollapsed example="context-menu" />
