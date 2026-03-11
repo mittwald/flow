@@ -5,6 +5,7 @@ import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
   Field,
   Form,
+  FormSettingsProvider,
   SubmitButton,
   typedField,
   useFormContext,
@@ -265,6 +266,54 @@ describe("readonly", () => {
     expect(textfield).not.toHaveAttribute("readonly");
     await userEvent.click(toggleButton);
     expect(textfield).toHaveAttribute("readonly");
+  });
+});
+
+describe("FormSettingsProvider", () => {
+  const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
+    const form = useForm<object>({
+      defaultValues: {
+        test: "value",
+      },
+    });
+    return (
+      <Form {...props} form={form}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("form submission can be intercepted with FormSettingsProvider", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <FormSettingsProvider
+        submitInterceptor={async (submit, values) => {
+          expect(values).toEqual({ test: "value" });
+          try {
+            return await submit(values);
+          } catch {
+            // swallow error
+          }
+        }}
+      >
+        <TestForm
+          onSubmit={() => {
+            throw new Error("Submission failed");
+          }}
+        />
+      </FormSettingsProvider>,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    window.removeEventListener("unhandledrejection", errorHandler);
   });
 });
 
