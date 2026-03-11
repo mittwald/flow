@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.714](https://github.com/mittwald/flow/compare/0.2.0-alpha.713...0.2.0-alpha.714) (2026-03-11)
+
+### Features
+
+* **FormSettingsProvider:** export types and support context ([6071d65](https://github.com/mittwald/flow/commit/6071d65bbab7c90668be48b2262c98f90d6fb97d))
+
 # [0.2.0-alpha.713](https://github.com/mittwald/flow/compare/0.2.0-alpha.712...0.2.0-alpha.713) (2026-03-11)
 
 ### Features
