@@ -7,9 +7,9 @@ import {
   type BaseSyntheticEvent,
   type ComponentProps,
   type FC,
-  type FormEventHandler,
   type PropsWithChildren,
   type Ref,
+  type SubmitEventHandler,
   useId,
   useMemo,
   useRef,
@@ -36,7 +36,7 @@ export interface FormAutoResetOptions {
 type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
-    onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
+    onSubmit?: SubmitEventHandler | FormOnSubmitHandler<never>;
     ref?: Ref<HTMLFormElement>;
   }>
 >;
@@ -90,7 +90,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const { submitInterceptor } = useFormSettings();
   const onSubmit = submitInterceptor
-    ? (values: F) => submitInterceptor<F>(onSubmitProp, values)
+    ? (values: F) => submitInterceptor<F>(onSubmitProp, values, { form })
     : onSubmitProp;
 
   const handleSubmitResult = (result: unknown) => {

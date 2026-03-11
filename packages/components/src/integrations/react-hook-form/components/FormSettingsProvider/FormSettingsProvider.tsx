@@ -1,10 +1,15 @@
 import { createContext, useContext, type PropsWithChildren } from "react";
-import type { FieldValues } from "react-hook-form";
+import type { FieldValues, UseFormReturn } from "react-hook-form";
 import type { FormOnSubmitHandler } from "../Form/Form";
 
-type SubmitInterceptor = <F extends FieldValues = FieldValues>(
+export interface SubmitInterceptorContext<F extends FieldValues = FieldValues> {
+  form: UseFormReturn<F>;
+}
+
+export type SubmitInterceptor = <F extends FieldValues = FieldValues>(
   submit: FormOnSubmitHandler<F>,
   values: F,
+  context: SubmitInterceptorContext<F>,
 ) => ReturnType<FormOnSubmitHandler<F>>;
 
 interface Context {

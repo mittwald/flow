@@ -4,6 +4,8 @@ export * from "./components/SubmitButton";
 export {
   FormSettingsProvider,
   type FormSettingsProviderProps,
+  type SubmitInterceptor,
+  type SubmitInterceptorContext,
 } from "./components/FormSettingsProvider";
 export * from "./components/ResetButton";
 export * from "./components/FormRootError";
