@@ -4,11 +4,11 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
 import clsx, { type ClassValue } from "clsx";
 
-interface FieldComponentProps {
+type FieldComponentProps<P = unknown> = P & {
   className?: ClassValue;
   isRequired?: boolean;
   isDisabled?: boolean;
-}
+};
 
 export interface UseFieldComponent {
   FieldErrorCaptureContext: FC<PropsWithChildren>;
