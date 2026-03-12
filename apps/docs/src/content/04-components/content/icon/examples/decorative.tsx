@@ -49,7 +49,6 @@ import {
   IconPassword,
   IconPath,
   IconPayment,
-  IconPicture,
   IconProject,
   IconRegistry,
   IconSecurity,
@@ -267,10 +266,6 @@ import {
   <LabeledValue>
     <Label>Payment</Label>
     <IconPayment />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Picture</Label>
-    <IconPicture />
   </LabeledValue>
   <LabeledValue>
     <Label>Project</Label>
