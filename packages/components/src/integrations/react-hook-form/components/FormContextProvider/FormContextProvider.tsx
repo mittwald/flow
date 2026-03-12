@@ -10,6 +10,7 @@ import {
 import invariant from "invariant";
 import type { AfterFormSubmitCallback } from "@/integrations/react-hook-form/components/Form/Form";
 import { useUpdateReadOnly } from "@/integrations/react-hook-form/components/FormContextProvider/useUpdateReadOnly";
+import { type FormRootErrorController } from "../FormRootError/useFormRootErrorController";
 
 interface FormContext<F extends FieldValues> {
   form: UseFormReturn<F>;
@@ -17,6 +18,7 @@ interface FormContext<F extends FieldValues> {
   isReadOnly: boolean;
   setReadOnly: Dispatch<SetStateAction<boolean>>;
   onAfterSuccessFeedback?: AfterFormSubmitCallback;
+  rootErrorController: FormRootErrorController;
 }
 
 export const FormContext = createContext<FormContext<FieldValues> | undefined>(
@@ -28,6 +30,7 @@ export interface FormContextProviderProps extends PropsWithChildren {
   id: string;
   isReadOnly?: boolean;
   onAfterSuccessFeedback?: AfterFormSubmitCallback;
+  rootErrorController: FormRootErrorController;
 }
 
 export const FormContextProvider = (props: FormContextProviderProps) => {
@@ -37,6 +40,7 @@ export const FormContextProvider = (props: FormContextProviderProps) => {
     isReadOnly: isReadOnlyProp = false,
     onAfterSuccessFeedback,
     children,
+    rootErrorController,
   } = props;
   const [isReadOnlyState, setReadOnly] = useState(isReadOnlyProp);
   const isReadOnly = isReadOnlyProp || isReadOnlyState;
@@ -54,6 +58,7 @@ export const FormContextProvider = (props: FormContextProviderProps) => {
         id,
         form,
         onAfterSuccessFeedback,
+        rootErrorController,
       }}
     >
       {children}

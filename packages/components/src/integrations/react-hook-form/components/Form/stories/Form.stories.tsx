@@ -14,6 +14,7 @@ import {
 } from "@/components/Button/stories/lib";
 import SubmitButton from "@/integrations/react-hook-form/components/SubmitButton";
 import ResetButton from "@/integrations/react-hook-form/components/ResetButton";
+import FormRootError from "../../FormRootError";
 
 const submitAction = action("submit");
 const afterSubmitAction = action("afterSubmit");
@@ -175,6 +176,43 @@ export const WithValidationError: Story = {
             <TextField>
               <Label>Name</Label>
             </TextField>
+          </Field>
+          <ActionGroup>
+            <SubmitButton>Submit</SubmitButton>
+          </ActionGroup>
+        </Section>
+      </Form>
+    );
+  },
+};
+
+export const WithRootError: Story = {
+  render: (props) => {
+    const form = useForm<Values>({
+      defaultValues: {
+        name: "error",
+      },
+    });
+    const Field = typedField(form);
+
+    return (
+      <Form
+        {...props}
+        form={form}
+        onSubmit={(values) => {
+          if (values.name === "error") {
+            form.setError("root", {
+              message: "A root error occurred during form submission.",
+            });
+          }
+        }}
+      >
+        <Section>
+          <Field name="name">
+            <TextField>
+              <Label>Name</Label>
+            </TextField>
+            <FormRootError />
           </Field>
           <ActionGroup>
             <SubmitButton>Submit</SubmitButton>

@@ -4,22 +4,26 @@ import { FormContextProvider } from "@/integrations/react-hook-form/components/F
 import { flags } from "@/integrations/react-hook-form/flags";
 import { useModalController } from "@/lib/controller";
 import {
+  type BaseSyntheticEvent,
   type ComponentProps,
   type FC,
-  type FormEvent,
-  type FormEventHandler,
   type PropsWithChildren,
   type Ref,
+  type SubmitEventHandler,
   useId,
   useMemo,
   useRef,
 } from "react";
 import type {
   FieldValues,
+  Path,
   SubmitHandler,
   UseFormReturn,
 } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
+import { useFormRootErrorController } from "../FormRootError/useFormRootErrorController";
+import { FormRootError } from "../../lib/FormRootError";
+import { useFormSettings } from "../FormSettingsProvider/FormSettingsProvider";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -32,7 +36,7 @@ export interface FormAutoResetOptions {
 type FormComponentType = FC<
   PropsWithChildren<{
     id: string;
-    onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
+    onSubmit?: SubmitEventHandler | FormOnSubmitHandler<never>;
     ref?: Ref<HTMLFormElement>;
   }>
 >;
@@ -52,7 +56,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
     form,
     children,
-    onSubmit,
+    onSubmit: onSubmitProp,
     formComponent = DefaultFormComponent,
     isReadOnly,
     ref,
@@ -66,6 +70,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
   const { isSubmitting, isValidating, isDirty } = form.formState;
+  const rootErrorController = useFormRootErrorController();
 
   const autoResetOptions =
     typeof autoReset === "boolean"
@@ -83,19 +88,33 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     },
   });
 
+  const { submitInterceptor } = useFormSettings();
+  const onSubmit = submitInterceptor
+    ? (values: F) => submitInterceptor<F>(onSubmitProp, values, { form })
+    : onSubmitProp;
+
   const handleSubmitResult = (result: unknown) => {
     if (typeof result === "function") {
       afterSubmitCallback.current = result as AfterFormSubmitCallback;
     }
+    const rootError = form.getFieldState("root" as Path<F>)?.error;
+    if (rootError && !rootErrorController.errorComponentMounted) {
+      throw new FormRootError(rootError);
+    }
   };
 
-  const handleSubmit = (e?: FormEvent | F) => {
-    const formEvent = e && "nativeEvent" in e ? (e as FormEvent) : undefined;
+  const handleSubmit = (e?: BaseSyntheticEvent | F) => {
+    const formEvent =
+      e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
+
     formEvent?.stopPropagation();
+
     if (isSubmitting || isValidating) {
       return;
     }
+
     modalController.confirmClose();
+
     return form.handleSubmit((values, event) => {
       const submitResult = onSubmit(values, event);
       if (submitResult instanceof Promise) {
@@ -121,6 +140,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
         isReadOnly={isReadOnly}
         id={formId}
         onAfterSuccessFeedback={onAfterSuccessFeedback}
+        rootErrorController={rootErrorController}
       >
         <FormComponent
           {...formProps}
