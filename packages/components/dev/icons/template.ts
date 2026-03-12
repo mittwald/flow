@@ -1,5 +1,4 @@
 import type {
-  CustomSvgIconDefinition,
   IconDefinition,
   IconDefinitions,
   TablerIconName,
@@ -9,10 +8,11 @@ export const getIconFileContent = (
   iconName: string,
   icon: IconDefinition,
 ): string => {
-  if (typeof icon === "string") {
-    return getTablerIconFileContent(iconName, icon);
+  if (icon.tb) {
+    return getTablerIconFileContent(iconName, icon.tb);
   }
-  return getCustomSvgFileContent(iconName, icon);
+
+  return getCustomSvgFileContent(iconName, icon.svg);
 };
 
 const getTablerIconFileContent = (
@@ -39,7 +39,7 @@ const getTablerIconFileContent = (
 
 const getCustomSvgFileContent = (
   iconName: string,
-  iconSvg: CustomSvgIconDefinition,
+  iconSvg: string,
 ): string => `\
   import React, { type ComponentProps, type FC } from "react";
   import { Icon } from "@/components/Icon";
@@ -48,7 +48,7 @@ const getCustomSvgFileContent = (
     props,
   ) => {
     return (
-      <Icon {...props}>${iconSvg.svg}</Icon>
+      <Icon {...props}>${iconSvg}</Icon>
     );
   };
   

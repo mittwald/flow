@@ -3,11 +3,10 @@ import { fs } from "./fs";
 
 export type TablerIconName = string;
 
-export interface CustomSvgIconDefinition {
+export interface IconDefinition {
   svg: string;
+  tb: TablerIconName;
 }
-
-export type IconDefinition = TablerIconName | CustomSvgIconDefinition;
 
 export type IconDefinitions = Record<string, IconDefinition>;
 
