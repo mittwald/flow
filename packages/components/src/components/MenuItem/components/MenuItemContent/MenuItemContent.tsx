@@ -31,8 +31,8 @@ export const MenuItemContent: FC<Props> = (props) => {
     Avatar: {
       className: styles.avatar,
     },
-    ShortcutKey: {
-      className: styles.shortcutKey,
+    Kbd: {
+      className: styles.kbd,
     },
   };
 

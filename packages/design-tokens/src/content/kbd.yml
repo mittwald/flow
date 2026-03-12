@@ -1,4 +1,4 @@
-shortcut-key:
+kbd:
   corner-radius:
     value: "{corner-radius.default}"
   padding:
@@ -15,6 +15,11 @@ shortcut-key:
       value: "{neutral-soft-content-color.default}"
     disabled:
       value: "{disabled-soft-content-color}"
+  content-color-plain:
+    default:
+      value: "{form-control.placeholder-color.default}"
+    disabled:
+      value: "{form-control.placeholder-color.disabled}"
   inner-shadow-color:
     default:
       value: "{dark.color.200}"

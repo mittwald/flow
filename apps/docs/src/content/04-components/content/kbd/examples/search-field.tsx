@@ -1,8 +1,8 @@
 import {
   SearchField,
-  ShortcutKey,
+  Kbd,
 } from "@mittwald/flow-react-components";
 
 <SearchField aria-label="Suche">
-  <ShortcutKey keys={["mod", "k"]} />
+  <Kbd keys={["mod", "k"]} />
 </SearchField>;

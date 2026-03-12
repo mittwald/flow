@@ -62,6 +62,7 @@ import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
 import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
+import { Kbd as Kbd } from "@mittwald/flow-react-components";
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
@@ -98,7 +99,6 @@ import { Segment as Segment } from "@mittwald/flow-react-components";
 import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-components";
 import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
-import { ShortcutKey as ShortcutKey } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
@@ -288,6 +288,7 @@ export const flowComponents = {
     "ItemsGridListItem",
     ItemsGridListItem,
   ),
+  "flr-kbd": createFlowRemoteComponentRenderer("Kbd", Kbd),
   "flr-label": createFlowRemoteComponentRenderer("Label", Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(
     "LabeledValue",
@@ -387,10 +388,6 @@ export const flowComponents = {
   ),
   "flr-select": createFlowRemoteComponentRenderer("Select", Select),
   "flr-separator": createFlowRemoteComponentRenderer("Separator", Separator),
-  "flr-shortcut-key": createFlowRemoteComponentRenderer(
-    "ShortcutKey",
-    ShortcutKey,
-  ),
   "flr-skeleton": createFlowRemoteComponentRenderer("Skeleton", Skeleton),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(
     "SkeletonText",

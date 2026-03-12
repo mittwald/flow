@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ShortcutKeyProps as RemoteShortcutKeyElementProps } from "@mittwald/flow-react-components";
-export type { ShortcutKeyProps as RemoteShortcutKeyElementProps } from "@mittwald/flow-react-components";
+import type { KbdProps as RemoteKbdElementProps } from "@mittwald/flow-react-components";
+export type { KbdProps as RemoteKbdElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteShortcutKeyElement extends FlowRemoteElement<RemoteShortcutKeyElementProps> {
+export class RemoteKbdElement extends FlowRemoteElement<RemoteKbdElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -14,6 +14,7 @@ export class RemoteShortcutKeyElement extends FlowRemoteElement<RemoteShortcutKe
       className: {},
       isDisabled: {},
       keys: {},
+      variant: {},
     };
   }
 
@@ -28,8 +29,8 @@ export class RemoteShortcutKeyElement extends FlowRemoteElement<RemoteShortcutKe
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-shortcut-key": InstanceType<typeof RemoteShortcutKeyElement>;
+    "flr-kbd": InstanceType<typeof RemoteKbdElement>;
   }
 }
 
-customElements.define("flr-shortcut-key", RemoteShortcutKeyElement);
+customElements.define("flr-kbd", RemoteKbdElement);

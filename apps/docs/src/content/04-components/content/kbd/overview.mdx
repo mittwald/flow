@@ -1,0 +1,55 @@
+Die Komponente unterstützt ein Array von `keys`. Die einzelnen keys werden als
+Strings übergeben. Wenn dabei die Werte "mod", "alt" oder "shift" verwendet
+werden, wird automatisch das passende Tastensymbol angezeigt – abhängig davon,
+ob der Nutzer macOS oder Windows verwendet. Dadurch werden die jeweiligen
+Tastenbezeichnungen plattformspezifisch korrekt dargestellt, ohne dass
+zusätzliche Logik implementiert werden muss.
+
+<LiveCodeEditor />
+
+Um flexiblere Shortcuts darzustellen, unterstützt die Komponente auch
+`children`. Hierbei ist darauf zu achten, dass `Kbd` Komponenten für die
+einzelnen Keys gesetzt werden müssen, um semantisch korrekte
+[kbd-HTML-Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd)
+zu erzeugen.
+
+<LiveCodeEditor editorCollapsed example="children" />
+
+Die Kbd-Komponente wird in den Varianten `plain` und `soft` angeboten. Für die
+Darstellung von Shortcuts direkt an Bedienelementen sollte die Variante plain
+verwendet werden, da sie sich dezent in die Oberfläche einfügt und nicht zu
+aufdringlich wirkt. Innerhalb von erklärenden Texten oder Beschreibungen sollte
+hingegen die Variante soft eingesetzt werden, um hervorzuheben, dass es sich um
+einen Tastatur-Shortcut handelt.
+
+<LiveCodeEditor editorCollapsed example="variants" />
+
+---
+
+# Kombiniere mit …
+
+## SearchField
+
+Wenn eine Suche durch einen Keyboard-Shortcut fokussiert werden kann, kann die
+Kbd Komponente mit dem
+[SearchField](/04-components/form-controls/search-field/overview) kombiniert
+werden, um dem User das verfügbare Tastaturkürzel sichtbar zu machen.
+
+<LiveCodeEditor editorCollapsed example="search-field" />
+
+## ContextMenu
+
+In [ContextMenus](/04-components/actions/context-menu/overview) werden häufig
+Aktionen angezeigt, die zusätzlich per Keyboard-Shortcut ausgelöst werden
+können. In diesem Fall kann Kbd mit dem jeweiligen MenuItem kombiniert werden.
+
+<LiveCodeEditor editorCollapsed example="context-menu" />
+
+## Text
+
+Wird die Kbd Komponente innerhalb eines
+[Texts](/04-components/content/text/overview) verwendet, wird sie automatisch in
+der `soft` Variante dargestellt. Dadurch hebt sie sich visuell vom Fließtext ab
+und macht deutlich, dass es sich um einen Tastatur-Shortcut handelt.
+
+<LiveCodeEditor editorCollapsed example="text" />

@@ -5,7 +5,7 @@ import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
-import { ShortcutKey } from "@/components/ShortcutKey";
+import { Kbd } from "@/components/Kbd";
 
 const meta: Meta<typeof SearchField> = {
   title: "Form Controls/SearchField",
@@ -47,10 +47,10 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const WithShortcutKey: Story = {
+export const WithKbd: Story = {
   render: (props) => (
     <SearchField {...props}>
-      <ShortcutKey keys={["mod", "k"]} />
+      <Kbd keys={["mod", "k"]} />
     </SearchField>
   ),
 };

@@ -19,7 +19,7 @@ test.each(testEnvironments)(
       Text,
       Avatar,
       Initials,
-      ShortcutKey,
+      Kbd,
     },
   }) => {
     await render(
@@ -46,7 +46,7 @@ test.each(testEnvironments)(
               <Text>Link 1</Text>
             </MenuItem>
             <MenuItem>
-              Link 2<ShortcutKey keys={["mod", "x"]} />
+              Link 2<Kbd keys={["mod", "x"]} />
             </MenuItem>
           </ContextMenuSection>
           <Separator />

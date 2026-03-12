@@ -41,10 +41,10 @@ export const SearchField = flowComponent("SearchField", (props) => {
   const searchText = stringFormatter.format(`searchField.search`);
 
   const propsContext: PropsContext = {
-    ShortcutKey: {
+    Kbd: {
       isDisabled: props.isDisabled,
-      tunnelId: "shortcutKey",
-      className: styles.shortcutKey,
+      tunnelId: "kbd",
+      className: styles.kbd,
     },
     ...fieldPropsContext,
   };
@@ -67,7 +67,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
               className={styles.input}
               ref={ref}
             />
-            <TunnelExit id="shortcutKey" />
+            <TunnelExit id="kbd" />
             <Button
               className={styles.clearButton}
               variant="plain"
