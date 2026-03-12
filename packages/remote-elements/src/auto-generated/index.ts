@@ -61,6 +61,7 @@ export * from "./RemoteInitialsElement";
 export * from "./RemoteInlineCodeElement";
 export * from "./RemoteItemsGridListElement";
 export * from "./RemoteItemsGridListItemElement";
+export * from "./RemoteKbdElement";
 export * from "./RemoteLabelElement";
 export * from "./RemoteLabeledValueElement";
 export * from "./RemoteLayoutCardElement";

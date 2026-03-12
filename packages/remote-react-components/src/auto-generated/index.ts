@@ -61,6 +61,7 @@ export * from "./Initials";
 export * from "./InlineCode";
 export * from "./ItemsGridList";
 export * from "./ItemsGridListItem";
+export * from "./Kbd";
 export * from "./Label";
 export * from "./LabeledValue";
 export * from "./LayoutCard";

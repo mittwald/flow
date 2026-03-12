@@ -62,6 +62,7 @@ import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
 import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
+import { Kbd as Kbd } from "@mittwald/flow-react-components";
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
@@ -287,6 +288,7 @@ export const flowComponents = {
     "ItemsGridListItem",
     ItemsGridListItem,
   ),
+  "flr-kbd": createFlowRemoteComponentRenderer("Kbd", Kbd),
   "flr-label": createFlowRemoteComponentRenderer("Label", Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(
     "LabeledValue",
