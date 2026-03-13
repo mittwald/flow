@@ -82,6 +82,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { KbdProps } from "@/components/Kbd/Kbd";
 
 export * from "./types";
 
@@ -156,6 +157,7 @@ export interface FlowComponentPropsTypes {
   Segment: SegmentProps;
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
+  Kbd: KbdProps;
   Slider: SliderProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -240,6 +242,7 @@ const propsContextSupportingComponentsMap: Record<
   Segment: true,
   SegmentedControl: true,
   Select: true,
+  Kbd: true,
   Slider: true,
   Switch: true,
   Tabs: true,

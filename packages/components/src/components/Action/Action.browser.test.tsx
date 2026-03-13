@@ -1,10 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import { type FC } from "react";
-import Action, {
-  MutedActionError,
-  type ActionProps,
-} from "@/components/Action";
+import Action, { abortAction, type ActionProps } from "@/components/Action";
 import { ActionBatch } from "@/components/Action";
 import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
@@ -121,6 +118,23 @@ test("Nested sync actions are not called when break action is used", async () =>
         <Action onAction={syncAction1}>
           <TestButton />
         </Action>
+      </Action>
+    </Action>,
+  );
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).not.toHaveBeenCalledOnce();
+});
+
+test("Nested sync actions are not called when action is aborted", async () => {
+  syncAction1.mockImplementation(() => {
+    abortAction("Aborted");
+  });
+
+  await render(
+    <Action onAction={syncAction2}>
+      <Action onAction={syncAction1}>
+        <TestButton />
       </Action>
     </Action>,
   );
@@ -330,9 +344,9 @@ describe("Global error handler", () => {
     );
   });
 
-  test("is not called when MutedActionError is thrown", async () => {
+  test("is not called when AbortActionError is thrown", async () => {
     syncAction1.mockImplementation(() => {
-      throw new MutedActionError("Muted error");
+      abortAction("Aborted error");
     });
 
     const ui = () => (
@@ -398,11 +412,11 @@ describe("Feedback", () => {
     expectIconInDom("x");
   });
 
-  test("is shown when sync action fails with MutedActionError", async () => {
+  test("is shown when sync action fails with AbortActionError", async () => {
     await runTest({
       props: {
         onAction: () => {
-          throw new MutedActionError("Muted error");
+          abortAction("Aborted error");
         },
       },
     });

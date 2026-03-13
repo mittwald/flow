@@ -31,6 +31,9 @@ export const MenuItemContent: FC<Props> = (props) => {
     Avatar: {
       className: styles.avatar,
     },
+    Kbd: {
+      className: styles.kbd,
+    },
   };
 
   const controlIconPropsContext: PropsContext = {

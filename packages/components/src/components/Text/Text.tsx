@@ -64,6 +64,7 @@ export const Text = flowComponent("Text", (props) => {
       inline: true,
     },
     Icon: { className: styles.icon },
+    Kbd: { variant: "soft" },
   };
 
   const style = { whiteSpace, wordBreak, ...styleFromProps };

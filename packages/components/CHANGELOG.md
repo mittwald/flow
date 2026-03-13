@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.715](https://github.com/mittwald/flow/compare/0.2.0-alpha.714...0.2.0-alpha.715) (2026-03-12)
+
+### Features
+
+* **ShortcutKey:** add component ([fd3012b](https://github.com/mittwald/flow/commit/fd3012b8caf4790ba5648dc1c33d8eb09cf9fc62))
+
+# [0.2.0-alpha.714](https://github.com/mittwald/flow/compare/0.2.0-alpha.713...0.2.0-alpha.714) (2026-03-11)
+
+### Features
+
+* **FormSettingsProvider:** export types and support context ([6071d65](https://github.com/mittwald/flow/commit/6071d65bbab7c90668be48b2262c98f90d6fb97d))
+
+# [0.2.0-alpha.713](https://github.com/mittwald/flow/compare/0.2.0-alpha.712...0.2.0-alpha.713) (2026-03-11)
+
+### Features
+
+* **Form:** add FormSettingsProvider for global settings ([545972a](https://github.com/mittwald/flow/commit/545972ab80cd75b05040cae94c532a84601d2d54))
+
+# [0.2.0-alpha.712](https://github.com/mittwald/flow/compare/0.2.0-alpha.711...0.2.0-alpha.712) (2026-03-10)
+
+### Features
+
+* add abortAction function to improve DX ([42db421](https://github.com/mittwald/flow/commit/42db42199482792820ac27f348cb8c417aeff7ee))
+
+# [0.2.0-alpha.711](https://github.com/mittwald/flow/compare/0.2.0-alpha.710...0.2.0-alpha.711) (2026-03-10)
+
+### Features
+
+* **Form:** add <FormRootError /> component ([0a27499](https://github.com/mittwald/flow/commit/0a2749944d51d873c089230f19130d9557cdd99b))
+
 # [0.2.0-alpha.710](https://github.com/mittwald/flow/compare/0.2.0-alpha.709...0.2.0-alpha.710) (2026-03-09)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
