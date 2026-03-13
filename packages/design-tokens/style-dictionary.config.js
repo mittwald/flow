@@ -20,7 +20,11 @@ StyleDictionary.registerTransform({
 
 export default {
   parsers: ["yml-parser"],
-  source: ["src/**/*.yml"],
+  source: [
+    "src/color-palette.light.yml",
+    "src/base/**/*.yml",
+    "src/components/**/*.yml",
+  ],
   log: {
     verbosity: "verbose",
   },
