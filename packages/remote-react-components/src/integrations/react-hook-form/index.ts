@@ -2,6 +2,8 @@ export * from "./Form/Form";
 export {
   useFormContext,
   Field,
+  type FieldPropsComponent,
+  useFieldProps,
   type FieldProps,
   typedField,
   SubmitButton,
