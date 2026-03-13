@@ -1,0 +1,30 @@
+font-weight:
+  normal:
+    value: normal
+  bold:
+    value: bold
+line-height:
+  value: 1.5
+single-line-height:
+  s:
+    value: 1rem
+font-size-text:
+  s:
+    value: 0.875rem
+  m:
+    value: 1rem
+font-size-heading:
+  xs:
+    value: 1rem
+  s:
+    value: 1.125rem
+  m:
+    value: 1.25rem
+  l:
+    value: 1.5rem
+  xl:
+    value: 2rem
+  xxl:
+    value: 2.625rem
+max-text-width:
+  value: "960px"

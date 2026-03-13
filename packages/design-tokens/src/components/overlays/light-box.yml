@@ -1,0 +1,7 @@
+light-box:
+  max-width:
+    value: "calc(100dvw - {size-px.l})"
+  max-height:
+    value: "calc(100dvh - {size-px.l})"
+  spacing:
+    value: "{size-px.m}"

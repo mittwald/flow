@@ -3,7 +3,7 @@
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
 
-  --heading-line-height: calc(var(--font-size) * var(--line-height--default));
+  --heading-line-height: calc(var(--font-size) * var(--line-height));
 
   @mixin color($color) {
     &.#{$color} {

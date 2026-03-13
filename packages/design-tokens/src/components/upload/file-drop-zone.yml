@@ -1,0 +1,29 @@
+file-drop-zone:
+  corner-radius:
+    value: "{corner-radius.m}"
+  padding:
+    value: "{size-px.m}"
+  content-color:
+    disabled:
+      value: "{disabled-outline-content-color}"
+  background-color:
+    default:
+      value: "{form-control.background-color.default}"
+    target:
+      value: "{form-control.background-color.hover}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    default:
+      value: "{border-style.dashed}"
+    target:
+      value: "{border-style.default}"
+  border-color:
+    default:
+      value: "{form-control.border-color.default}"
+    target:
+      value: "{primary.color.800}"
+    disabled:
+      value: "{disabled-outline-border-color}"

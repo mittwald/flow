@@ -1,0 +1,31 @@
+kbd:
+  corner-radius:
+    value: "{corner-radius.s}"
+  padding:
+    value: "{size-px.xs}"
+  padding-y-start:
+    value: "{size-px.xxs}"
+  background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  content-color:
+    default:
+      value: "{neutral-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+  content-color-plain:
+    default:
+      value: "{form-control.placeholder-color.default}"
+    disabled:
+      value: "{form-control.placeholder-color.disabled}"
+  inner-shadow-color:
+    default:
+      value: "{dark.color.200}"
+    disabled:
+      value: "{disabled-soft-dark-background-color}"
+  inner-shadow-size-x:
+    value: "{size-px.xxs}"
+  inner-shadow-size-y-end:
+    value: "{size-px.xs}"

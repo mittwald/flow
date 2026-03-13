@@ -1,0 +1,7 @@
+separator:
+  color:
+    value: "{neutral.color.500}"
+  height:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"

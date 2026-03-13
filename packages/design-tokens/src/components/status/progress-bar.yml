@@ -1,0 +1,49 @@
+progress-bar:
+  font-size:
+    value: "{font-size-text.m}"
+  font-size-s:
+    value: "{font-size-text.s}"
+  value-font-weight:
+    value: "{font-weight.bold}"
+  spacing-y:
+    value: "{size-rem.xs}"
+  spacing-x:
+    value: "{size-rem.m}"
+  spacing-bar-to-legend:
+    value: "{size-px.m}"
+
+  height:
+    m:
+      value: "{size-rem.m}"
+    s:
+      value: "{size-rem.s}"
+    l:
+      value: "{size-rem.l}"
+  corner-radius:
+    value: "{corner-radius.l}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  background-color:
+    value: "{neutral.color.200}"
+
+  # Info
+  info-fill-background-color:
+    value: "{info-solid-background-color.default}"
+
+  # Success
+  success-fill-background-color:
+    value: "{success-solid-background-color.default}"
+
+  # Warning
+  warning-fill-background-color:
+    value: "{warning-solid-background-color.default}"
+
+  # Danger
+  danger-fill-background-color:
+    value: "{danger-solid-background-color.default}"
+
+  # Indeterminate
+  indeterminate-fill-background-color:
+    value: "{neutral-solid-background-color.default}"

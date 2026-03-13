@@ -1,0 +1,23 @@
+corner-radius:
+  s:
+    value: "{size-px.xs}"
+  m:
+    value: "{size-px.s}"
+  l:
+    value: "{size-px.m}"
+  round:
+    value: 50%
+border-width:
+  100:
+    value: "{size-px.xxxs}"
+  200:
+    value: "{size-px.xxs}"
+  300:
+    value: "{size-px.xs}"
+  400:
+    value: "{size-px.s}"
+border-style:
+  default:
+    value: "solid"
+  dashed:
+    value: "dashed"

@@ -1,0 +1,16 @@
+illustrated-message:
+  padding:
+    value: "{size-px.m}"
+  spacing:
+    value: "{size-rem.m}"
+
+  content-color:
+    value: "{heading.color}"
+  danger-content-color:
+    value: "{danger.color.900}"
+  unavailable-content-color:
+    value: "{neutral.color.700}"
+  dark-content-color:
+    value: "{dark-plain-content-color}"
+  light-content-color:
+    value: "{light-plain-content-color}"

@@ -1,0 +1,40 @@
+menu:
+  item-to-item-spacing:
+    value: "{size-px.xs}"
+  group-to-group-spacing:
+    value: "{size-px.m}"
+
+menu-item:
+  font-weight:
+    current:
+      value: "{font-weight.bold}"
+  corner-radius:
+    value: "{corner-radius.m}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  spacing:
+    value: "{size-rem.s}"
+
+  icon-color:
+    default:
+      value: "{icon.color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+    current:
+      value: "{text.color.default}"
+
+  background-color:
+    default:
+      value: "{color.transparent}"
+    hover:
+      value: "{neutral-plain-background-color.hover}"
+    current:
+      value: "{neutral-plain-background-color.pressed}"
+
+  # Disabled
+  disabled-background-color:
+    value: "{disabled-plain-background-color}"
+  disabled-color:
+    value: "{disabled-plain-content-color}"

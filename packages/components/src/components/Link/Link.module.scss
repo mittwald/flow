@@ -23,7 +23,7 @@
 
   &.inline {
     font-weight: normal;
-    font-size: var(--font-size-text--default);
+    font-size: var(--font-size-text--m);
     text-decoration: underline;
   }
 
@@ -84,7 +84,7 @@
   /* AlertText Colors */
   @mixin status($status) {
     &:has(.alertText[class*="#{$status}"]) {
-      color: var(--inline-alert--#{$status}-color);
+      color: var(--alert-text--#{$status}-color);
     }
   }
 

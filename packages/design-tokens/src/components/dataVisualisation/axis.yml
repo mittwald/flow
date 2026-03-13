@@ -1,0 +1,11 @@
+axis:
+  spacing:
+    value: "{size-px.s}"
+  font-size:
+    value: "{font-size-text.s}"
+  color:
+    value: "{neutral-outline-border-color}"
+  stroke-width:
+    value: "{border-width.100}"
+  tick-size:
+    value: "{size-px.s}"

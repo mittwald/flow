@@ -31,7 +31,7 @@ export default () => {
 
   return (
     <Flex direction="column" gap="m">
-      <Heading level={1} color="light">
+      <Heading level={1} color="dark">
         Domains
       </Heading>
       <LayoutCard>
