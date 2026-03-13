@@ -1,335 +1,133 @@
 # Functional
-Ascending:
-  tb: SortAscending
-  fa: arrowUpShortWide
-Attachment:
-  tb: Paperclip
-  fa: paperclip
-BackLink:
-  tb: ArrowLeft
-  fa: arrowLeft
-Bold:
-  tb: Bold
-  fa: bold
-Check:
-  tb: Check
-  fa: check
-CheckboxChecked:
-  tb: SquareCheckFilled
-  fa: squareCheck
-CheckboxEmpty:
-  tb: Square
-  fa: square
-CheckboxIndeterminate:
-  tb: SquareMinusFilled
-  fa: squareMinus
-ChevronDown:
-  tb: ChevronDown
-  fa: chevronDown
-ChevronLeft:
-  tb: ChevronLeft
-  fa: chevronLeft
-ChevronRight:
-  tb: ChevronRight
-  fa: chevronRight
-ChevronUp:
-  tb: ChevronUp
-  fa: chevronUp
-Close:
-  tb: X
-  fa: xmark
-Code:
-  tb: Code
-  fa: code
-ContextMenu:
-  tb: Dots
-  fa: ellipsis
-ContextMenuVertical:
-  tb: DotsVertical
-  fa: ellipsisVertical
-Copy:
-  tb: Copy
-  fa: copy
-Descending:
-  tb: SortDescending
-  fa: arrowDownShortWide
-Delete:
-  tb: Trash
-  fa: trashCan
-Download:
-  tb: Download
-  fa: download
-DotEmpty:
-  tb: Circle
-  fa: circle
-DotFilled:
-  tb: CircleFilled
-  fa: CircleSolid
-Edit:
-  tb: Edit
-  fa: penToSquare
-ExternalLink:
-  tb: ExternalLink
-  fa: arrowUpRightFromSquare
-Filter:
-  tb: Filter
-  fa: filter
-ForwardLink:
-  tb: ArrowRight
-  fa: arrowRight
-Hide:
-  tb: EyeOff
-  fa: eyeSlash
-Home:
-  tb: Home
-  fa: home
-Italic:
-  tb: Italic
-  fa: italic
-Link:
-  tb: Link
-  fa: link
-Logout:
-  tb: Power
-  fa: powerOff
-Maximize:
-  tb: Maximize
-  fa: expand
-Menu:
-  tb: Menu2
-  fa: bars
-Minimize:
-  tb: Minimize
-  fa: compress
-Minus:
-  tb: Minus
-  fa: minus
-Notification:
-  tb: Bell
-  fa: bell
-OrderedList:
-  tb: ListNumbers
-  fa: listOl
-Pause:
-  tb: PlayerPause
-  fa: pause
-Plus:
-  tb: Plus
-  fa: plus
-Quote:
-  tb: Blockquote
-  fa: blockQuote
-RadioOff:
-  tb: Circle
-  fa: circle
-RadioOn:
-  tb: CircleDotFilled
-  fa: circleDot
-Redo:
-  tb: ArrowForwardUp
-  fa: arrowUTurnUpRight
-Refresh:
-  tb: Refresh
-  fa: arrowsRotate
-Save:
-  tb: DeviceFloppy
-  fa: floppyDisk
-Search:
-  tb: Search
-  fa: search
-Send:
-  tb: Send2
-  fa: paperPlaneTop
-Settings:
-  tb: Settings
-  fa: gear
-Share:
-  tb: Share3
-  fa: share
-Show:
-  tb: Eye
-  fa: eye
-Sorting:
-  tb: ArrowsUpDown
-  fa: arrowUpArrowDown
-Start:
-  tb: PlayerPlay
-  fa: play
-StrikeThrought:
-  tb: Strikethrough
-  fa: strikethrough
-Undo:
-  tb: ArrowBackUp
-  fa: arrowUTurnUpLeft
-UnorderedList:
-  tb: List
-  fa: listUl
-Upload:
-  tb: Upload
-  fa: upload
-View:
-  tb: List
-  fa: list
+Ascending: SortAscending
+Attachment: Paperclip
+BackLink: ArrowLeft
+Check: Check
+CheckboxChecked: SquareCheckFilled
+CheckboxEmpty: Square
+CheckboxIndeterminate: SquareMinusFilled
+ChevronDown: ChevronDown
+ChevronLeft: ChevronLeft
+ChevronRight: ChevronRight
+ChevronUp: ChevronUp
+Close: X
+Code: Code
+ContextMenu: Dots
+ContextMenuVertical: DotsVertical
+Copy: Copy
+Descending: SortDescending
+Delete: Trash
+Download: Download
+Edit: Edit
+ExternalLink: ExternalLink
+Filter: Filter
+Hide: EyeOff
+Home: Home
+Link: Link
+Logout: Power
+Maximize: Maximize
+Menu: Menu2
+Minimize: Minimize
+Minus: Minus
+Notification: Bell
+Pause: PlayerPause
+Plus: Plus
+RadioOff: Circle
+RadioOn: CircleDotFilled
+Redo: ArrowForwardUp
+Refresh: Refresh
+Save: DeviceFloppy
+Search: Search
+Send: Send2
+Settings: Settings
+Share: Share3
+Show: Eye
+Sorting: ArrowsUpDown
+Start: PlayerPlay
+Undo: ArrowBackUp
+Upload: Upload
+View: List
 
 # Decorative
-AI:
-  tb: Sparkles
-  ai: sparkles
-Analytics:
-  tb: BrandSpeedtest
-  ai: gaugeSimpleLow
-App:
-  tb: AppWindow
-  ai: windowFlip
-Autoresponder:
-  tb: ArrowBackUpDouble
-  fa: reply
-Backup:
-  tb: History
-  ai: clockRotateLeft
-Camera:
-  tb: Camera
-Changelog:
-  tb: ClipboardList
-Certificate:
-  tb: FileCertificate
-Container:
-  tb: Package
-Contract:
-  tb: FileDescription
-ContractPartner:
-  tb: Signature
-Contributor:
-  tb: HeartHandshake
-Cronjob:
-  tb: CalendarCheck
-Customer:
-  tb: Building
-Dashboard:
-  tb: BorderAll
-Database:
-  tb: Database
-Date:
-  tb: Calendar
-DeliveryBox:
-  tb: MailShare
-Desktop:
-  tb: DeviceImac
-Directory:
-  tb: Folder
-DnsSubZone:
-  tb: Subtask
-DnsZone:
-  tb: Network
-Domain:
-  tb: World
-Email:
-  tb: Mail
-EmailArchive:
-  tb: CloudLock
-Extension:
-  tb: Puzzle
-Feedback:
-  tb: MessageChatbot
-File:
-  tb: File
-ForwardAddress:
-  tb: ArrowRight
-Image:
-  tb: Photo
-Invite:
-  tb: MailOpened
-Invoice:
-  tb: FileEuro
-KnowledgeHint:
-  tb: Bulb
-Language:
-  tb: Language
-LeadFyndr:
-  tb: Radar2
-Lock:
-  tb: Lock
-LockOpen:
-  tb: LockOpen
-MainUser:
-  tb: UserStar
-Marketplace:
-  tb: BuildingStore
-Member:
-  tb: UsersGroup
+AI: Sparkles
+Analytics: BrandSpeedtest
+App: AppWindow
+Autoresponder: ArrowBackUpDouble
+Backup: History
+Camera: Camera
+Changelog: ClipboardList
+Certificate: FileCertificate
+Container: Package
+Contract: FileDescription
+ContractPartner: Signature
+Contributor: HeartHandshake
+Cronjob: CalendarCheck
+Customer: Building
+Dashboard: BorderAll
+Database: Database
+Date: Calendar
+DeliveryBox: MailShare
+Desktop: DeviceImac
+Directory: Folder
+DnsSubZone: Subtask
+DnsZone: Network
+Domain: World
+Email: Mail
+EmailArchive: CloudLock
+Extension: Puzzle
+Feedback: MessageChatbot
+File: File
+ForwardAddress: ArrowRight
+Image: Photo
+Invite: MailOpened
+Invoice: FileEuro
+KnowledgeHint: Bulb
+Language: Language
+LeadFyndr: Radar2
+Lock: Lock
+LockOpen: LockOpen
+MainUser: UserStar
+Marketplace: BuildingStore
+Member: UsersGroup
 Mittwald:
   svg: |
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1746.7 1232" focusable="false" role="img" aria-hidden="true">
       <path d="M1117.2,285.4c-102.5,0-226.5,52.1-291.3,160c-46.7-100.7-134.8-160-276.9-160 c-101.4,0-201.2,50.8-256.1,124.1l-29.8-151.3L17.4,306.3l29.9,152.2l0.1,2.4l-0.1,741.3h240.9V736.7 c0-118.7,61.1-222.9,183.4-222.9C601,513.8,628,601.9,628,720.6v481.8h240.9V727.7c0-118.7,64.7-213.9,183.4-213.9 c127.6,0,156.4,88.1,156.4,206.8v499.8l240.9-47.2V690C1449.8,459.8,1370.7,285.4,1117.2,285.4z"></path>
       <path  d="M1569.2,23.7c-83,0-152.4,69.5-152.4,154.3c0,83,69.5,152.4,152.4,152.4c84.9,0,154.4-69.5,154.4-152.4 C1723.5,93.1,1654.1,23.7,1569.2,23.7z"></path>
     </svg>
-Mobile:
-  tb: DeviceMobile
-Monitoring:
-  tb: ChartHistogram
-Move:
-  tb: TruckDelivery
-Number:
-  tb: Hash
-Order:
-  tb: ShoppingCart
-Password:
-  tb: Lock
-Path:
-  tb: Sitemap
-Payment:
-  tb: CreditCard
-Picture:
-  tb: Photo
-Project:
-  tb: Archive
-Registry:
-  tb: Packages
-Security:
-  tb: ShieldLock
-Server:
-  tb: Server
-Ssh:
-  tb: Terminal2
-SshKey:
-  tb: Key
-SshSftp:
-  tb: Door
-Star:
-  tb: Star
-StarFilled:
-  tb: StarFilled
-Subdomain:
-  tb: WorldWww
-Support:
-  tb: Headset
-Terminate:
-  tb: FileX
-Ticket:
-  tb: Ticket
-Time:
-  tb: Clock
-User:
-  tb: User
-Vhost:
-  tb: WorldShare
-Volume:
-  tb: CloudDataConnection
+Mobile: DeviceMobile
+Monitoring: ChartHistogram
+Move: TruckDelivery
+Number: Hash
+Order: ShoppingCart
+Password: Lock
+Path: Sitemap
+Payment: CreditCard
+Picture: Photo
+Project: Archive
+Registry: Packages
+Security: ShieldLock
+Server: Server
+Ssh: Terminal2
+SshKey: Key
+SshSftp: Door
+Star: Star
+StarFilled: StarFilled
+Subdomain: WorldWww
+Support: Headset
+Terminate: FileX
+Ticket: Ticket
+Time: Clock
+User: User
+Vhost: WorldShare
+Volume: CloudDataConnection
 
 # Status
-Danger:
-  tb: AlertTriangle
-Failed:
-  tb: X
-Info:
-  tb: InfoCircle
-Pending:
-  tb: Loader2
-Succeeded:
-  tb: Check
-Success:
-  tb: CircleCheck
-Unavailable:
-  tb: CircleMinus
-Warning:
-  tb: AlertCircle
+Danger: AlertTriangle
+Failed: X
+Info: InfoCircle
+Pending: Loader2
+Succeeded: Check
+Success: CircleCheck
+Unavailable: CircleMinus
+Warning: AlertCircle
