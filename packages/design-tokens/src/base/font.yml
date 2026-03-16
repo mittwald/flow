@@ -28,3 +28,9 @@ font-size-heading:
     value: 2.625rem
 max-text-width:
   value: "960px"
+
+placeholder-color:
+  default:
+    value: "{neutral.color.700}"
+  disabled:
+    value: "{neutral.color.500}"
