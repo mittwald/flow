@@ -255,3 +255,47 @@ color:
       26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
       55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
       100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+
+  code:
+    light:
+      keyword:
+        value: "#cf222e"
+      type:
+        value: "#6f42c1"
+      variable:
+        value: "#005cc5"
+      property:
+        value: "#6f42c1"
+      string:
+        value: "#032f62"
+      number:
+        value: "#005cc5"
+      comment:
+        value: "#6a737d"
+      function:
+        value: "#8250df"
+      operator:
+        value: "#d73a49"
+      invalid:
+        value: "#cb2431"
+    dark:
+      keyword:
+        value: "#ff7b72"
+      type:
+        value: "#d2a8ff"
+      variable:
+        value: "#79c0ff"
+      property:
+        value: "#d2a8ff"
+      string:
+        value: "#a5d6ff"
+      number:
+        value: "#79c0ff"
+      comment:
+        value: "#8b949e"
+      function:
+        value: "#d2a8ff"
+      operator:
+        value: "#ff7b72"
+      invalid:
+        value: "#f97583"

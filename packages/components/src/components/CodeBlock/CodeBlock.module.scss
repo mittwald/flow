@@ -32,110 +32,75 @@
       :global(.hljs-subst) {
         color: var(--code--#{$color}-content-color);
       }
-
-      :global(.hljs-addition) {
-        color: var(--code--#{$color}-syntax-color-addition);
-      }
-
-      :global(.hljs-built_in) {
-        color: var(--code--#{$color}-syntax-color-built-in);
-      }
-
-      :global(.hljs-bullet) {
-        color: var(--code--#{$color}-syntax-color-bullet);
-      }
-
-      :global(.hljs-code) {
-        color: var(--code--#{$color}-syntax-color-code);
-      }
-
-      :global(.hljs-comment) {
-        color: var(--code--#{$color}-syntax-color-comment);
-      }
-
-      :global(.hljs-deletion) {
-        color: var(--code--#{$color}-syntax-color-deletion);
-      }
-
-      :global(.hljs-link) {
-        color: var(--code--#{$color}-syntax-color-link);
-      }
-
-      :global(.hljs-literal) {
-        color: var(--code--#{$color}-syntax-color-literal);
-      }
-
-      :global(.hljs-meta) {
-        color: var(--code--#{$color}-syntax-color-meta);
-      }
-
-      :global(.hljs-meta-string) {
-        color: var(--code--#{$color}-syntax-color-meta-string);
-      }
-
-      :global(.hljs-number) {
-        color: var(--code--#{$color}-syntax-color-number);
-      }
-
-      :global(.hljs-quote) {
-        color: var(--code--#{$color}-syntax-color-quote);
-      }
-
-      :global(.hljs-regexp) {
-        color: var(--code--#{$color}-syntax-color-regexp);
-      }
-
-      :global(.hljs-section) {
-        color: var(--code--#{$color}-syntax-color-section);
-      }
-
-      :global(.hljs-selector-attr) {
-        color: var(--code--#{$color}-syntax-color-selector-attr);
-      }
-
-      :global(.hljs-selector-class) {
-        color: var(--code--#{$color}-syntax-color-selector-class);
-      }
-
-      :global(.hljs-selector-id) {
-        color: var(--code--#{$color}-syntax-color-selector-id);
-      }
-
-      :global(.hljs-selector-pseudo) {
-        color: var(--code--#{$color}-syntax-color-selector-pseudo);
-      }
-
-      :global(.hljs-string) {
-        color: var(--code--#{$color}-syntax-color-string);
-      }
-
-      :global(.hljs-symbol) {
-        color: var(--code--#{$color}-syntax-color-symbol);
-      }
-
-      :global(.hljs-template-tag) {
-        color: var(--code--#{$color}-syntax-color-template-tag);
-      }
-
-      :global(.hljs-template-variable) {
-        color: var(--code--#{$color}-syntax-color-template-variable);
-      }
-
-      :global(.hljs-title) {
-        color: var(--code--#{$color}-syntax-color-title);
-      }
-
-      :global(.hljs-type) {
-        color: var(--code--#{$color}-syntax-color-type);
-      }
-
-      :global(.hljs-variable) {
-        color: var(--code--#{$color}-syntax-color-variable);
-      }
     }
   }
 
   @include variant(default);
   @include variant(light);
   @include variant(dark);
+
+  @mixin syntax($color) {
+    &:where(.syntax-#{$color}) {
+      :global(.hljs-addition) {
+        color: var(--color--code--#{$color}--operator);
+      }
+
+      :global(.hljs-built_in),
+      :global(.hljs-type) {
+        color: var(--color--code--#{$color}--type);
+      }
+
+      :global(.hljs-bullet),
+      :global(.hljs-literal),
+      :global(.hljs-number) {
+        color: var(--color--code--#{$color}--number);
+      }
+
+      :global(.hljs-code),
+      :global(.hljs-symbol),
+      :global(.hljs-template-variable),
+      :global(.hljs-variable) {
+        color: var(--color--code--#{$color}--variable);
+      }
+
+      :global(.hljs-comment) {
+        color: var(--color--code--#{$color}--comment);
+      }
+
+      :global(.hljs-deletion) {
+        color: var(--color--code--#{$color}--invalid);
+      }
+
+      :global(.hljs-link),
+      :global(.hljs-meta-string),
+      :global(.hljs-quote),
+      :global(.hljs-regexp),
+      :global(.hljs-string) {
+        color: var(--color--code--#{$color}--string);
+      }
+
+      :global(.hljs-keyword),
+      :global(.hljs-meta),
+      :global(.hljs-selector-pseudo),
+      :global(.hljs-template-tag) {
+        color: var(--color--code--#{$color}--keyword);
+      }
+
+      :global(.hljs-section),
+      :global(.hljs-title) {
+        color: var(--color--code--#{$color}--function);
+      }
+
+      :global(.hljs-property),
+      :global(.hljs-attr),
+      :global(.hljs-selector-attr),
+      :global(.hljs-selector-class),
+      :global(.hljs-selector-id) {
+        color: var(--color--code--#{$color}--property);
+      }
+    }
+  }
+
+  @include syntax(light);
+  @include syntax(dark);
 }

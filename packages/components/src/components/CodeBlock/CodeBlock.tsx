@@ -59,7 +59,12 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     ...rest
   } = props;
 
-  const rootClassName = clsx(styles.codeBlock, styles[color], className);
+  const rootClassName = clsx(
+    styles.codeBlock,
+    styles[color],
+    styles[`syntax-${color === "light" ? "dark" : "light"}`],
+    className,
+  );
 
   if (!code) {
     return (
