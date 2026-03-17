@@ -2,17 +2,25 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border-radius: var(--code--corner-radius);
-  column-gap: var(--code--spacing);
-  font-size: var(--code--font-size);
+  border-radius: var(--code-block--corner-radius);
+  column-gap: var(--code-block--spacing);
+  font-size: var(--code-block--font-size);
   font-family: FiraCode, monospace;
   max-width: 100%;
   width: 100%;
   overflow-y: auto;
+  color: var(--code-block--content-color);
+  background-color: var(--code-block--background-color);
+  border: var(--code-block--border-width) var(--code-block--border-style)
+    var(--code-block--border-color);
+
+  :global(.hljs-subst) {
+    color: var(--code-block--content-color);
+  }
 
   > pre {
     overflow-x: auto;
-    padding: var(--code--padding);
+    padding: var(--code-block--padding);
 
     > code {
       text-shadow: none;
@@ -20,87 +28,65 @@
   }
 
   .copyButton {
-    margin-top: var(--code--padding);
-    margin-right: var(--code--padding);
+    margin-top: var(--code-block--padding);
+    margin-right: var(--code-block--padding);
   }
 
-  @mixin variant($color) {
-    &:where(.#{$color}) {
-      color: var(--code--#{$color}-content-color);
-      background-color: var(--code--#{$color}-background-color);
-
-      :global(.hljs-subst) {
-        color: var(--code--#{$color}-content-color);
-      }
-    }
+  :global(.hljs-addition) {
+    color: var(--color--code-syntax--operator);
   }
 
-  @include variant(default);
-  @include variant(light);
-  @include variant(dark);
-
-  @mixin syntax($color) {
-    &:where(.syntax-#{$color}) {
-      :global(.hljs-addition) {
-        color: var(--color--code--#{$color}--operator);
-      }
-
-      :global(.hljs-built_in),
-      :global(.hljs-type) {
-        color: var(--color--code--#{$color}--type);
-      }
-
-      :global(.hljs-bullet),
-      :global(.hljs-literal),
-      :global(.hljs-number) {
-        color: var(--color--code--#{$color}--number);
-      }
-
-      :global(.hljs-code),
-      :global(.hljs-symbol),
-      :global(.hljs-template-variable),
-      :global(.hljs-variable) {
-        color: var(--color--code--#{$color}--variable);
-      }
-
-      :global(.hljs-comment) {
-        color: var(--color--code--#{$color}--comment);
-      }
-
-      :global(.hljs-deletion) {
-        color: var(--color--code--#{$color}--invalid);
-      }
-
-      :global(.hljs-link),
-      :global(.hljs-meta-string),
-      :global(.hljs-quote),
-      :global(.hljs-regexp),
-      :global(.hljs-string) {
-        color: var(--color--code--#{$color}--string);
-      }
-
-      :global(.hljs-keyword),
-      :global(.hljs-meta),
-      :global(.hljs-selector-pseudo),
-      :global(.hljs-template-tag) {
-        color: var(--color--code--#{$color}--keyword);
-      }
-
-      :global(.hljs-section),
-      :global(.hljs-title) {
-        color: var(--color--code--#{$color}--function);
-      }
-
-      :global(.hljs-property),
-      :global(.hljs-attr),
-      :global(.hljs-selector-attr),
-      :global(.hljs-selector-class),
-      :global(.hljs-selector-id) {
-        color: var(--color--code--#{$color}--property);
-      }
-    }
+  :global(.hljs-built_in),
+  :global(.hljs-type) {
+    color: var(--color--code-syntax--type);
   }
 
-  @include syntax(light);
-  @include syntax(dark);
+  :global(.hljs-bullet),
+  :global(.hljs-literal),
+  :global(.hljs-number) {
+    color: var(--color--code-syntax--number);
+  }
+
+  :global(.hljs-code),
+  :global(.hljs-symbol),
+  :global(.hljs-template-variable),
+  :global(.hljs-variable) {
+    color: var(--color--code-syntax--variable);
+  }
+
+  :global(.hljs-comment) {
+    color: var(--color--code-syntax--comment);
+  }
+
+  :global(.hljs-deletion) {
+    color: var(--color--code-syntax--invalid);
+  }
+
+  :global(.hljs-link),
+  :global(.hljs-meta-string),
+  :global(.hljs-quote),
+  :global(.hljs-regexp),
+  :global(.hljs-string) {
+    color: var(--color--code-syntax--string);
+  }
+
+  :global(.hljs-keyword),
+  :global(.hljs-meta),
+  :global(.hljs-selector-pseudo),
+  :global(.hljs-template-tag) {
+    color: var(--color--code-syntax--keyword);
+  }
+
+  :global(.hljs-section),
+  :global(.hljs-title) {
+    color: var(--color--code-syntax--function);
+  }
+
+  :global(.hljs-property),
+  :global(.hljs-attr),
+  :global(.hljs-selector-attr),
+  :global(.hljs-selector-class),
+  :global(.hljs-selector-id) {
+    color: var(--color--code-syntax--property);
+  }
 }

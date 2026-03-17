@@ -1,16 +1,12 @@
-code:
+inline-code:
   font-size:
     value: "{font-size-text.s}"
   padding-x:
     value: "{size-px.xs}"
   padding-y:
     value: "{size-px.xxs}"
-  padding:
-    value: "{size-px.m}"
   corner-radius:
     value: "{corner-radius.default}"
-  spacing:
-    value: "{size-px.m}"
 
   default-background-color:
     value: "{neutral-soft-background-color.default}"

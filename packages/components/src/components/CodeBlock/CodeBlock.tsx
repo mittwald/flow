@@ -9,7 +9,7 @@ import styles from "./CodeBlock.module.scss";
 export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
   /** Adds a copy icon to the code block to copy its content. */
   copyable?: boolean;
-  /** The color of the code block. @default "default" */
+  /** @deprecated */
   color?: "default" | "light" | "dark";
   /** The code to display inside the code block. */
   code?: string | string[];
@@ -50,21 +50,9 @@ export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
 
 /** @flr-generate all */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const {
-    code,
-    className,
-    copyable,
-    color = "default",
-    children,
-    ...rest
-  } = props;
+  const { code, className, copyable, children, ...rest } = props;
 
-  const rootClassName = clsx(
-    styles.codeBlock,
-    styles[color],
-    styles[`syntax-${color === "light" ? "dark" : "light"}`],
-    className,
-  );
+  const rootClassName = clsx(styles.codeBlock, className);
 
   if (!code) {
     return (
@@ -85,6 +73,12 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           margin: "none",
         }}
         useInlineStyles={false}
+        lineNumberStyle={{
+          paddingInlineEnd: "var(--code-block--spacing)",
+          marginInlineEnd: "var(--code-block--spacing)",
+          borderInlineEnd:
+            "var(--code-block--border-width) var(--code-block--border-style) var(--code-block--border-color)",
+        }}
         {...rest}
       >
         {code}
@@ -93,7 +87,6 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         <CopyButton
           className={styles.copyButton}
           size="s"
-          color={color === "default" ? "dark" : color}
           text={Array.isArray(code) ? code.join("\r\n") : code}
         />
       )}
