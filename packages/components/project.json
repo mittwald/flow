@@ -31,7 +31,7 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
-        "{projectRoot}/src/components/Icon/icons.yaml"
+        "{workspaceRoot}/packages/icons-base/src"
       ],
       "outputs": ["{projectRoot}/src/components/Icon/components/icons/*"]
     },

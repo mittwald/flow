@@ -1,35 +1,24 @@
-import type {
-  IconDefinition,
-  IconDefinitions,
-  TablerIconName,
-} from "./definitions";
+import type { IconNames } from "./names";
 
-export const getIconFileContent = (
-  iconName: string,
-  icon: IconDefinition,
-): string => {
-  if (icon.tb) {
-    return getTablerIconFileContent(iconName, icon.tb);
-  }
-
-  return getCustomSvgFileContent(iconName, icon.svg);
+export const getIconFileContent = (iconName: string): string => {
+  return getTablerIconFileContent(iconName);
 };
 
-const getTablerIconFileContent = (
-  iconName: string,
-  iconTabler: TablerIconName,
-): string => `\
+const getTablerIconFileContent = (iconName: string): string => `\
   import React, { type ComponentProps, type FC } from "react";
-  import { Icon${iconTabler} as Tabler } from "@tabler/icons-react";
+  import { Icon${iconName} as IconImport } from "@mittwald/flow-icons";
   import { type Icon } from "@/components/Icon";
   import View from "@/views/IconView";
+  import { useContextIcon } from "../IconSetProvider";
   
   export const Icon${iconName}: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
     props,
   ) => {
+    const fromContext = useContextIcon("${iconName}");
+    const Icon = fromContext ?? IconImport;
     return (
       <View {...props}>
-        <Tabler />
+        <Icon />
       </View>
     );
   };
@@ -37,26 +26,8 @@ const getTablerIconFileContent = (
   export default Icon${iconName};
 `;
 
-const getCustomSvgFileContent = (
-  iconName: string,
-  iconSvg: string,
-): string => `\
-  import React, { type ComponentProps, type FC } from "react";
-  import { Icon } from "@/components/Icon";
-  
-  export const Icon${iconName}: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
-    props,
-  ) => {
-    return (
-      <Icon {...props}>${iconSvg}</Icon>
-    );
-  };
-  
-  export default Icon${iconName};
-`;
-
-export const getIndexFileContent = (icons: IconDefinitions) =>
-  Object.keys(icons)
+export const getIndexFileContent = (icons: IconNames) =>
+  icons
     .map(
       (icon) => `\
         export { Icon${icon} } from "./Icon${icon}";
