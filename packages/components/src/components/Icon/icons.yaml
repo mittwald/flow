@@ -344,9 +344,10 @@ SshSftp:
 Star:
   tb: Star
   fa: star
+# deprecated
 StarFilled:
   tb: StarFilled
-  fa: starSolid
+  fa: star
 Subdomain:
   tb: WorldWww
   fa: globeWww
