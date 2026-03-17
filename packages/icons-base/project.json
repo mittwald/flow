@@ -1,0 +1,5 @@
+{
+  "name": "icons-base",
+  "projectType": "library",
+  "sourceRoot": "packages/icons-base/src"
+}

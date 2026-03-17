@@ -1,0 +1,38 @@
+{
+  "name": "@mittwald/flow-icons-pro",
+  "version": "0.2.0-alpha.717",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/components/index.d.ts",
+      "import": "./dist/esm/components/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:icons": "tsx src/dev/generate.ts",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.2.0",
+    "@tabler/icons-react": "^3.40.0"
+  },
+  "devDependencies": {
+    "@fortawesome/sharp-regular-svg-icons": "npm:@fortawesome/free-regular-svg-icons",
+    "@mittwald/flow-icons-base": "workspace:*",
+    "@types/react": "^19.2",
+    "react": "^19.2.0",
+    "rimraf": "^6.1.2",
+    "tsx": "^4.21.0"
+  },
+  "peerDependencies": {
+    "@fortawesome/sharp-regular-svg-icons": "^7.2.0",
+    "react": "^19.2.0"
+  },
+  "peerDependenciesMeta": {}
+}

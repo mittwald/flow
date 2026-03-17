@@ -1,0 +1,11 @@
+{
+  "implicitDependencies": ["icons-base"],
+  "name": "icons",
+  "projectType": "library",
+  "sourceRoot": "packages/icons/src",
+  "targets": {
+    "build": {
+      "dependsOn": ["build:icons"]
+    }
+  }
+}
