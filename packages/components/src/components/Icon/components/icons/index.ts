@@ -19,8 +19,6 @@ export { IconCopy } from "./IconCopy";
 export { IconDescending } from "./IconDescending";
 export { IconDelete } from "./IconDelete";
 export { IconDownload } from "./IconDownload";
-export { IconDotEmpty } from "./IconDotEmpty";
-export { IconDotFilled } from "./IconDotFilled";
 export { IconEdit } from "./IconEdit";
 export { IconExternalLink } from "./IconExternalLink";
 export { IconFilter } from "./IconFilter";

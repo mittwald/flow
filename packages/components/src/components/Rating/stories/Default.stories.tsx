@@ -4,8 +4,7 @@ import { Rating } from "@/components/Rating";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { useForm } from "react-hook-form";
-import { Form, typedField } from "@/integrations/react-hook-form";
-import { Button } from "@/components/Button";
+import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 
 const meta: Meta<typeof Rating> = {
   title: "Form Controls/Rating",
@@ -67,7 +66,7 @@ export const WithForm: Story = {
           </Rating>
         </Field>
         <br />
-        <Button type="submit">Submit</Button>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     );
   },
