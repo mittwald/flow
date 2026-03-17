@@ -19,8 +19,6 @@ import {
   IconCopy,
   IconDelete,
   IconDescending,
-  IconDotEmpty,
-  IconDotFilled,
   IconDownload,
   IconEdit,
   IconExternalLink,
@@ -137,14 +135,6 @@ import {
   <LabeledValue>
     <Label>Delete</Label>
     <IconDelete />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>DotEmpty</Label>
-    <IconDotEmpty />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>DotFilled</Label>
-    <IconDotFilled />
   </LabeledValue>
   <LabeledValue>
     <Label>Download</Label>

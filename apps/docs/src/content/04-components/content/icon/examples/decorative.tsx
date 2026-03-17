@@ -57,7 +57,6 @@ import {
   IconSshKey,
   IconSshSftp,
   IconStar,
-  IconStarFilled,
   IconSubdomain,
   IconSupport,
   IconTerminate,
@@ -298,10 +297,6 @@ import {
   <LabeledValue>
     <Label>Star</Label>
     <IconStar />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>StarFilled</Label>
-    <IconStarFilled />
   </LabeledValue>
   <LabeledValue>
     <Label>Subdomain</Label>

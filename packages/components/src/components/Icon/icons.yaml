@@ -59,12 +59,6 @@ Delete:
 Download:
   tb: Download
   fa: download
-DotEmpty:
-  tb: Circle
-  fa: circle
-DotFilled:
-  tb: CircleFilled
-  fa: CircleSolid
 Edit:
   tb: Edit
   fa: penToSquare
@@ -350,9 +344,10 @@ SshSftp:
 Star:
   tb: Star
   fa: star
+# deprecated
 StarFilled:
   tb: StarFilled
-  fa: starSolid
+  fa: star
 Subdomain:
   tb: WorldWww
   fa: globeWww
