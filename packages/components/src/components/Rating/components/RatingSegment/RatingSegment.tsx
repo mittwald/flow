@@ -30,6 +30,7 @@ export const RatingSegment: FC<Props> = (props) => {
       )}
     >
       <RatingStarFilled size={size} />
+
       <RatingStar size={size} />
     </Aria.Radio>
   );
