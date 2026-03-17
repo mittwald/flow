@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.719](https://github.com/mittwald/flow/compare/0.2.0-alpha.718...0.2.0-alpha.719) (2026-03-17)
+
+### Bug Fixes
+
+* **Icon:** remove solid icons ([547cce7](https://github.com/mittwald/flow/commit/547cce77756ec408471d7f4632dcca07970c0e59))
+
 # [0.2.0-alpha.718](https://github.com/mittwald/flow/compare/0.2.0-alpha.717...0.2.0-alpha.718) (2026-03-17)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
