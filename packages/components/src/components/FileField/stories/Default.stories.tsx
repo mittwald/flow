@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/Label";
 import { FileField } from "@/components/FileField";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
-import { IconPaperclip } from "@tabler/icons-react";
-import { Icon } from "@/components/Icon";
+import { IconAttachment } from "../../Icon/components/icons";
 
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",
@@ -61,9 +60,7 @@ export const IconButton: Story = {
   render: (props) => (
     <FileField {...props}>
       <Button variant="soft" aria-label="Select certificate">
-        <Icon>
-          <IconPaperclip />
-        </Icon>
+        <IconAttachment />
       </Button>
     </FileField>
   ),

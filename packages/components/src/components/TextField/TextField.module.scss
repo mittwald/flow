@@ -10,14 +10,14 @@
     min-width: 0;
 
     @include formControl.formControl();
+  }
 
-    & {
-      --button-size: calc(
-        var(--icon--size--m) + var(--button--padding-icon-only) * 2
-      );
+  &:has(.button) .input {
+    --button-size: calc(
+      var(--icon--size--m) + var(--button--padding-icon-only) * 2
+    );
 
-      padding-inline-end: var(--button-size);
-    }
+    padding-inline-end: var(--button-size);
   }
 
   .button {

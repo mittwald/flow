@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.719",
+  "version": "0.2.0-alpha.737",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -47,7 +47,7 @@
     "build:icons": "tsx dev/icons/generate.ts",
     "build:remote-components": "tsx dev/remote-components-generator/generateRemoteComponents.ts",
     "build:storybook": "storybook build",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist src/components/Icon/components/icons/*",
     "dev": "storybook dev --port 6006",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
@@ -59,6 +59,7 @@
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.2.0",
     "@internationalized/string-compiler": "^3.2.6",
+    "@mittwald/flow-icons": "workspace:*",
     "@mittwald/password-tools-js": "3.0.0-alpha.18",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
@@ -67,7 +68,6 @@
     "@react-aria/utils": "^3.32.0",
     "@react-stately/form": "^3.2.2",
     "@react-types/shared": "^3.32.1",
-    "@tabler/icons-react": "^3.36.1",
     "@tanstack/react-table": "^8.21.3",
     "@types/invariant": "^2.2.37",
     "@types/luxon": "^3.7.1",
@@ -107,6 +107,7 @@
     "@internationalized/date": "^3.10.1",
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-design-tokens": "workspace:*",
+    "@mittwald/flow-icons-base": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.10",
     "@mittwald/typescript-config": "workspace:*",
@@ -116,6 +117,7 @@
     "@storybook/addon-links": "^10.2.3",
     "@storybook/react": "^10.2.3",
     "@storybook/react-vite": "^10.2.3",
+    "@tabler/icons-react": "^3.36.1",
     "@types/node": "24.10.1",
     "@vitejs/plugin-react": "^5.1.3",
     "@vitest/browser": "^4.0.18",
@@ -157,6 +159,7 @@
   },
   "peerDependencies": {
     "@internationalized/date": "^3.10.0",
+    "@mittwald/flow-icons-pro": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "next": "*",
     "react": "^19.2.0",
@@ -165,6 +168,9 @@
   },
   "peerDependenciesMeta": {
     "@internationalized/date": {
+      "optional": true
+    },
+    "@mittwald/flow-icons-pro": {
       "optional": true
     },
     "next": {
