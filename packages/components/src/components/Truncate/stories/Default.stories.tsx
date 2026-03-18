@@ -10,7 +10,7 @@ const meta: Meta<typeof Truncate> = {
   title: "Content/Truncate",
   component: Truncate,
   parameters: {
-    controls: { exclude: ["title"] },
+    controls: { disable: true },
   },
   render: (props) => <Truncate {...props}>{dummyText.long}</Truncate>,
 };

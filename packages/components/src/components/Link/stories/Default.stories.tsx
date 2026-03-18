@@ -13,6 +13,7 @@ const meta: Meta<typeof Link> = {
     onPress: action("onPress"),
     isDisabled: false,
     size: "m",
+    color: "default",
   },
   render: (props) => (
     <StoryBackground color={props.color}>

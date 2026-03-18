@@ -7,7 +7,7 @@ const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
   render: (props) => <Skeleton {...props} />,
   parameters: {
-    controls: { exclude: ["className", "width", "height"] },
+    controls: { disable: true },
   },
 };
 export default meta;

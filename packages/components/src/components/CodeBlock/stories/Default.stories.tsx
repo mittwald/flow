@@ -27,6 +27,7 @@ const meta: Meta<typeof CodeBlock> = {
         "renderer",
         "PreTag",
         "CodeTag",
+        "color",
       ],
     },
   },

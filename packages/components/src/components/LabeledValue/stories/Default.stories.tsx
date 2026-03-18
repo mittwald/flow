@@ -18,7 +18,7 @@ const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue",
   component: LabeledValue,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   render: (props) => (
     <LabeledValue {...props}>

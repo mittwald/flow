@@ -11,6 +11,9 @@ import { Form, SubmitButton } from "@/integrations/react-hook-form";
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
   component: ActionGroup,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>

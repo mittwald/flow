@@ -16,6 +16,9 @@ import { CopyButton } from "@/components/CopyButton";
 const meta: Meta<typeof Align> = {
   title: "Structure/Align",
   component: Align,
+  parameters: {
+    controls: { disable: true },
+  },
 };
 export default meta;
 

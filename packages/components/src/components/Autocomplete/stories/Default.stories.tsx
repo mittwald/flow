@@ -10,7 +10,7 @@ const meta: Meta<typeof Chat> = {
   title: "Form Controls/Autocomplete",
   component: Autocomplete,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   render: () => {
     const suggestEmail = (value: string) => {

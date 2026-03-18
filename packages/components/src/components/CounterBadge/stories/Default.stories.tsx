@@ -20,6 +20,9 @@ type Story = StoryObj<typeof CounterBadge>;
 export const Default: Story = {};
 
 export const WithoutContent: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   args: { count: undefined },
 };
 

@@ -6,6 +6,9 @@ import FileCard from "@/components/FileCard";
 const meta: Meta<typeof FileCardList> = {
   title: "Upload/FileCardList",
   component: FileCardList,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <FileCardList {...props}>
       <FileCard name="file1.txt" />

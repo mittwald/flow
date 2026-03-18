@@ -19,7 +19,7 @@ const meta: Meta<typeof FileCard> = {
   component: FileCard,
   args: { name: "image.jpg" },
   parameters: {
-    controls: { exclude: ["href", "onDelete", "onPress", "imageSrc"] },
+    controls: { disable: true },
   },
   render: (props) => <FileCard {...props} />,
 };

@@ -16,7 +16,7 @@ const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
   component: Navigation,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
 };
 

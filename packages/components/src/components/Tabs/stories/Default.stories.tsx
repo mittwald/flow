@@ -16,6 +16,9 @@ import type { Key } from "react-aria";
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
   component: Tabs,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>

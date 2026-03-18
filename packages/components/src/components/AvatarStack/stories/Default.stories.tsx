@@ -10,7 +10,7 @@ import { action } from "storybook/actions";
 const meta: Meta<typeof AvatarStack> = {
   title: "Content/AvatarStack",
   component: AvatarStack,
-  args: { totalCount: 20 },
+  args: { totalCount: 20, size: "m" },
   argTypes: {
     size: {
       control: "inline-radio",

@@ -11,7 +11,7 @@ const meta: Meta<typeof SkeletonText> = {
   component: SkeletonText,
   render: (props) => <SkeletonText {...props} />,
   parameters: {
-    controls: { exclude: ["className", "width"] },
+    controls: { disable: true },
   },
 };
 

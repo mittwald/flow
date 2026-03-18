@@ -58,7 +58,7 @@ export const InHeading: Story = {
   render: (props) => {
     return (
       <Heading>
-        {dummyText.short} <AlertText {...props}>{dummyText.short}</AlertText>
+        <AlertText {...props}>{dummyText.short}</AlertText>
       </Heading>
     );
   },
