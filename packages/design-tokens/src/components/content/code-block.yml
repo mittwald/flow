@@ -4,7 +4,7 @@ code-block:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   spacing:
     value: "{size-px.s}"
   border-width:
@@ -16,4 +16,4 @@ code-block:
   background-color:
     value: "{neutral.color.200}"
   content-color:
-    value: "{neutral-soft-content-color.default}"
+    value: "{neutral-soft-content-color}"
