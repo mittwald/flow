@@ -296,22 +296,22 @@ color:
 
   code-syntax:
     keyword:
-      value: "#cf222e"
+      value: "#ff7b72"
     type:
-      value: "#6f42c1"
+      value: "#d2a8ff"
     variable:
-      value: "#005cc5"
+      value: "#79c0ff"
     property:
-      value: "#6f42c1"
+      value: "#d2a8ff"
     string:
-      value: "#032f62"
+      value: "#a5d6ff"
     number:
-      value: "#005cc5"
+      value: "#79c0ff"
     comment:
-      value: "#6a737d"
+      value: "#a0a7b0"
     function:
-      value: "#8250df"
+      value: "#d2a8ff"
     operator:
-      value: "#C12F3F"
+      value: "#ff7b72"
     invalid:
-      value: "#cb2431"
+      value: "#f97583"
