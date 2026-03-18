@@ -30,26 +30,6 @@ export const WithLineNumbers: Story = { args: { showLineNumbers: true } };
 
 export const Copyable: Story = { args: { copyable: true } };
 
-export const Dark: Story = {
-  args: {
-    color: "dark",
-    copyable: true,
-  },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: {
-    color: "light",
-    copyable: true,
-  },
-  globals: {
-    backgrounds: "dark",
-  },
-};
-
 export const WithChildren: Story = {
   render: () => (
     <CodeBlock>
