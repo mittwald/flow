@@ -2,7 +2,9 @@ name: Publish packages to NPM
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - main
 
