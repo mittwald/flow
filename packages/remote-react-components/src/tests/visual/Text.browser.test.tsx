@@ -25,13 +25,15 @@ test.each(testEnvironments)(
             <li>Item</li>
           </ol>
         </Text>
-        <Text color="dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
-        </Text>
-        <AccentBox>
+        <AccentBox color="neutral">
+          <Text color="dark">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+            dolore voluptas.
+          </Text>
+        </AccentBox>
+        <AccentBox color="#3A434E">
           <Text color="light">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
             quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
