@@ -59,7 +59,7 @@ export const Kbd = flowComponent("Kbd", (props) => {
 
     return (
       <Fragment key={index}>
-        <kbd>{formattedKey}</kbd>
+        <kbd className={styles.kbd}>{formattedKey}</kbd>
         {index < keys.length - 1 && " + "}
       </Fragment>
     );
