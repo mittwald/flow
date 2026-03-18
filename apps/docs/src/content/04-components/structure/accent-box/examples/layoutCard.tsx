@@ -9,7 +9,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <LayoutCard>
-  <AccentBox color="gradient">
+  <AccentBox>
     <Flex align="center" wrap="wrap" gap="m">
       <Flex direction="column" grow>
         <Heading size="l">

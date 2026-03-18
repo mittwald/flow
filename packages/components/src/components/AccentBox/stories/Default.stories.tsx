@@ -16,7 +16,7 @@ const meta: Meta<typeof AccentBox> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["blue", "green", "gradient", "neutral"],
+      options: ["blue", "green", "neutral"],
     },
   },
   render: (props) => (

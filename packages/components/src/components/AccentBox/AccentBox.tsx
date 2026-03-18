@@ -17,7 +17,7 @@ export interface AccentBoxProps
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {
-  color?: "blue" | "green" | "gradient" | "neutral";
+  color?: "blue" | "green" | "neutral";
 }
 
 /** @flr-generate all */

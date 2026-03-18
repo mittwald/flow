@@ -6,8 +6,9 @@
   width: 100%;
   row-gap: var(--slider--spacing-y);
 
-  --line-height-m: calc(var(--font-size-text--m) * var(--line-height));
-  --button-size: calc(var(--line-height-m) + var(--button--padding-y) * 2);
+  --button-size: calc(
+    var(--button--line-height-s) + var(--button--padding-s-y) * 2
+  );
 
   .text {
     display: flex;
@@ -22,6 +23,7 @@
     }
 
     .value {
+      font-size: var(--font-size-text--s);
       font-weight: var(--slider--value-font-weight);
     }
   }
@@ -29,33 +31,26 @@
   .track {
     grid-area: track;
     position: relative;
-    height: var(--slider--handle-size);
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      background-color: var(--slider--track-color--default);
-      height: var(--slider--border-width);
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      border-radius: var(--slider--corner-radius);
-    }
+    height: var(--slider--track-height);
+    background-color: var(--slider--track-color--default);
+    width: 100%;
+    border-radius: var(--slider--corner-radius);
+    border: var(--slider--track-border-width) var(--slider--track-border-style)
+      var(--slider--track-border-color--default);
   }
 
   .fill {
     position: absolute;
-    height: var(--slider--border-width);
+    height: var(--slider--track-height);
     background-color: var(--slider--color--default);
-    top: calc(50% - var(--slider--border-width) / 2);
+    top: calc(50% - var(--slider--track-height) / 2);
     border-radius: var(--slider--corner-radius);
   }
 
   .initialMarker {
     position: absolute;
     height: var(--slider--initial-marker-height);
-    width: var(--slider--border-width);
+    width: var(--slider--initial-marker-border-width);
     background-color: var(--slider--color--default);
     top: calc(50% - var(--slider--initial-marker-height) / 2);
     border-radius: var(--slider--corner-radius);
@@ -66,9 +61,8 @@
     height: var(--slider--handle-size);
     border-radius: var(--slider--handle-corner-radius);
     background-color: var(--slider--handle-fill-color);
-    border-width: var(--slider--border-width);
-    border-style: var(--slider--border-style);
-    border-color: var(--slider--color--default);
+    border: var(--slider--handle-border-width) var(--slider--track-border-style)
+      var(--slider--color--default);
     forced-color-adjust: none;
     top: 50%;
     transition-property: background-color;
@@ -91,7 +85,7 @@
   .increment,
   .decrement {
     position: absolute;
-    top: calc((var(--slider--spacing-y) / 2 + var(--button-size)) * -1);
+    top: calc((var(--slider--spacing-y) + var(--button-size)) * -1);
   }
 
   .increment {
@@ -104,9 +98,8 @@
 
   &.disabled {
     .track {
-      &::before {
-        background-color: var(--slider--track-color--disabled);
-      }
+      background-color: var(--slider--track-color--disabled);
+      border-color: var(--slider--track-border-color--disabled);
     }
 
     .fill {
@@ -122,3 +115,17 @@
     }
   }
 }
+
+/*
+.slider {
+
+
+
+
+
+
+
+
+
+}
+*/

@@ -41,6 +41,10 @@
     left: var(--switch--track-padding);
   }
 
+  .label {
+    margin: 0;
+  }
+
   /* States */
 
   &[data-focus-visible] .track {

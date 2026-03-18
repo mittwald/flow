@@ -17,9 +17,9 @@ kbd:
       value: "{disabled-soft-content-color}"
   content-color-plain:
     default:
-      value: "{placeholder-color.default}"
+      value: "{form-control.placeholder-color.default}"
     disabled:
-      value: "{placeholder-color.disabled}"
+      value: "{form-control.placeholder-color.disabled}"
   inner-shadow-color:
     default:
       value: "{dark.color.200}"

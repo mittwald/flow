@@ -6,7 +6,7 @@
   }
 
   .searchIcon {
-    color: var(--placeholder-color--default);
+    color: var(--form-control--placeholder-color--default);
     margin-inline: var(--size-px--s);
   }
 
@@ -23,11 +23,11 @@
     }
 
     .searchIcon {
-      color: var(--placeholder-color--disabled);
+      color: var(--form-control--placeholder-color--disabled);
     }
 
     input::placeholder {
-      color: var(--placeholder-color--disabled);
+      color: var(--form-control--placeholder-color--disabled);
     }
   }
 }
@@ -59,7 +59,7 @@
     }
 
     &::placeholder {
-      color: var(--placeholder-color--default);
+      color: var(--form-control--placeholder-color--default);
     }
 
     &[data-focused] {
