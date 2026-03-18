@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.719](https://github.com/mittwald/flow/compare/0.2.0-alpha.718...0.2.0-alpha.719) (2026-03-17)
+
+### Bug Fixes
+
+* **Icon:** remove solid icons ([547cce7](https://github.com/mittwald/flow/commit/547cce77756ec408471d7f4632dcca07970c0e59))
+
+# [0.2.0-alpha.718](https://github.com/mittwald/flow/compare/0.2.0-alpha.717...0.2.0-alpha.718) (2026-03-17)
+
+### Bug Fixes
+
+* **SearchField:** fix growing search field in safari ([#2381](https://github.com/mittwald/flow/issues/2381)) ([f74f88d](https://github.com/mittwald/flow/commit/f74f88db205583f7adc05bc4535ac69acac0e19e))
+
+# [0.2.0-alpha.717](https://github.com/mittwald/flow/compare/0.2.0-alpha.716...0.2.0-alpha.717) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.716](https://github.com/mittwald/flow/compare/0.2.0-alpha.715...0.2.0-alpha.716) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.715](https://github.com/mittwald/flow/compare/0.2.0-alpha.714...0.2.0-alpha.715) (2026-03-12)
 
 ### Features

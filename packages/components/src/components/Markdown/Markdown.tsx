@@ -97,7 +97,6 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       return (
         <CodeBlock
           copyable={false}
-          color={color}
           language={
             isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className

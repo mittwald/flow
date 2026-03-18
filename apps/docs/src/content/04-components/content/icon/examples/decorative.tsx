@@ -49,7 +49,6 @@ import {
   IconPassword,
   IconPath,
   IconPayment,
-  IconPicture,
   IconProject,
   IconRegistry,
   IconSecurity,
@@ -58,7 +57,6 @@ import {
   IconSshKey,
   IconSshSftp,
   IconStar,
-  IconStarFilled,
   IconSubdomain,
   IconSupport,
   IconTerminate,
@@ -269,10 +267,6 @@ import {
     <IconPayment />
   </LabeledValue>
   <LabeledValue>
-    <Label>Picture</Label>
-    <IconPicture />
-  </LabeledValue>
-  <LabeledValue>
     <Label>Project</Label>
     <IconProject />
   </LabeledValue>
@@ -303,10 +297,6 @@ import {
   <LabeledValue>
     <Label>Star</Label>
     <IconStar />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>StarFilled</Label>
-    <IconStarFilled />
   </LabeledValue>
   <LabeledValue>
     <Label>Subdomain</Label>

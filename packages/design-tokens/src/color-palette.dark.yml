@@ -293,3 +293,25 @@ color:
       value: "rgb(255 255 255 / 87.5%)"
     800:
       value: "rgb(255 255 255 / 100%)"
+
+  code-syntax:
+    keyword:
+      value: "#cf222e"
+    type:
+      value: "#6f42c1"
+    variable:
+      value: "#005cc5"
+    property:
+      value: "#6f42c1"
+    string:
+      value: "#032f62"
+    number:
+      value: "#005cc5"
+    comment:
+      value: "#6a737d"
+    function:
+      value: "#8250df"
+    operator:
+      value: "#C12F3F"
+    invalid:
+      value: "#cb2431"

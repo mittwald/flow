@@ -32,20 +32,17 @@ const meta: Meta<typeof CodeBlock> = {
   },
   args: { copyable: false, showLineNumbers: false },
   argTypes: {
-    color: { control: "inline-radio", options: ["default", "dark", "light"] },
     showLineNumbers: { control: "boolean" },
   },
   render: (props) => (
-    <StoryBackground color={props.color}>
-      <CodeBlock
-        language="json"
-        {...props}
-        code={`{
+    <CodeBlock
+      language="json"
+      {...props}
+      code={`{
     "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
     "name": "My Project"
 }`}
-      />
-    </StoryBackground>
+    />
   ),
 };
 export default meta;
