@@ -18,7 +18,9 @@ const meta: Meta<typeof Breadcrumb> = {
       control: "inline-radio",
       options: ["primary", "dark", "light"],
     },
+    size: { control: "inline-radio", options: ["s", "m"] },
   },
+  args: { size: "m" },
 };
 
 export default meta;

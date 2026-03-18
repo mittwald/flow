@@ -62,7 +62,7 @@
   }
 
   @mixin size($size) {
-    &.#{$size} {
+    &.size-#{$size} {
       --font-size: var(--font-size-heading--#{$size});
     }
   }
@@ -83,8 +83,25 @@
   }
 }
 
-@media (max-width: 550px) {
-  .heading:where(h1) {
-    --font-size: var(--font-size-heading--l);
+@media (max-width: 768px) {
+  .heading {
+    &:where(h1),
+    &.size-xl {
+      --font-size: var(--font-size-heading--l);
+    }
+
+    &.size-l {
+      --font-size: var(--font-size-heading--m);
+    }
+
+    &:where(h2),
+    &.size-m {
+      --font-size: var(--font-size-heading--s);
+    }
+
+    &:where(h3),
+    &.size-s {
+      --font-size: var(--font-size-heading--xs);
+    }
   }
 }

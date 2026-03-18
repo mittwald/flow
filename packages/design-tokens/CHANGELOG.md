@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.720](https://github.com/mittwald/flow/compare/0.2.0-alpha.719...0.2.0-alpha.720) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.719](https://github.com/mittwald/flow/compare/0.2.0-alpha.718...0.2.0-alpha.719) (2026-03-17)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.718](https://github.com/mittwald/flow/compare/0.2.0-alpha.717...0.2.0-alpha.718) (2026-03-17)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.717](https://github.com/mittwald/flow/compare/0.2.0-alpha.716...0.2.0-alpha.717) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.716](https://github.com/mittwald/flow/compare/0.2.0-alpha.715...0.2.0-alpha.716) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.715](https://github.com/mittwald/flow/compare/0.2.0-alpha.714...0.2.0-alpha.715) (2026-03-12)
+
+### Features
+
+* **ShortcutKey:** add component ([fd3012b](https://github.com/mittwald/flow/commit/fd3012b8caf4790ba5648dc1c33d8eb09cf9fc62))
+
+# [0.2.0-alpha.714](https://github.com/mittwald/flow/compare/0.2.0-alpha.713...0.2.0-alpha.714) (2026-03-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.713](https://github.com/mittwald/flow/compare/0.2.0-alpha.712...0.2.0-alpha.713) (2026-03-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.712](https://github.com/mittwald/flow/compare/0.2.0-alpha.711...0.2.0-alpha.712) (2026-03-10)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.711](https://github.com/mittwald/flow/compare/0.2.0-alpha.710...0.2.0-alpha.711) (2026-03-10)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.710](https://github.com/mittwald/flow/compare/0.2.0-alpha.709...0.2.0-alpha.710) (2026-03-09)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.709](https://github.com/mittwald/flow/compare/0.2.0-alpha.708...0.2.0-alpha.709) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.708](https://github.com/mittwald/flow/compare/0.2.0-alpha.707...0.2.0-alpha.708) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.707](https://github.com/mittwald/flow/compare/0.2.0-alpha.706...0.2.0-alpha.707) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
+
+### Features
+
+* **Link:** add size s ([#2352](https://github.com/mittwald/flow/issues/2352)) ([09bc68d](https://github.com/mittwald/flow/commit/09bc68d1de7bcda466c87cbe4561b01217c1035a))
+
+# [0.2.0-alpha.705](https://github.com/mittwald/flow/compare/0.2.0-alpha.704...0.2.0-alpha.705) (2026-03-03)
+
+### Features
+
+* **Modal:** add mobile padding ([#2353](https://github.com/mittwald/flow/issues/2353)) ([ca4d007](https://github.com/mittwald/flow/commit/ca4d0071db941092d518812ab6efd99bed201d16))
+
+# [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.703](https://github.com/mittwald/flow/compare/0.2.0-alpha.702...0.2.0-alpha.703) (2026-03-02)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
 # [0.2.0-alpha.702](https://github.com/mittwald/flow/compare/0.2.0-alpha.701...0.2.0-alpha.702) (2026-02-26)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

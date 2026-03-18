@@ -87,6 +87,7 @@ export * from "@/components/SegmentedControl";
 export * from "@/components/Select";
 export * from "@/components/Separator";
 export * from "@/components/SettingsProvider";
+export * from "@/components/Kbd";
 export * from "@/components/Skeleton";
 export * from "@/components/SkeletonText";
 export * from "@/components/Slider";

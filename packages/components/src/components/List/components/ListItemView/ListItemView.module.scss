@@ -36,6 +36,7 @@
 
   .heading {
     color: var(--text--color--default);
+    overflow-wrap: break-word;
   }
 
   .header {
@@ -190,6 +191,7 @@
 
     .title {
       width: 100%;
+      min-width: 0;
 
       :global(.flow--heading--heading-content) {
         position: absolute;

@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.720](https://github.com/mittwald/flow/compare/0.2.0-alpha.719...0.2.0-alpha.720) (2026-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.719](https://github.com/mittwald/flow/compare/0.2.0-alpha.718...0.2.0-alpha.719) (2026-03-17)
+
+### Bug Fixes
+
+* **Icon:** remove solid icons ([547cce7](https://github.com/mittwald/flow/commit/547cce77756ec408471d7f4632dcca07970c0e59))
+
+# [0.2.0-alpha.718](https://github.com/mittwald/flow/compare/0.2.0-alpha.717...0.2.0-alpha.718) (2026-03-17)
+
+### Bug Fixes
+
+* **SearchField:** fix growing search field in safari ([#2381](https://github.com/mittwald/flow/issues/2381)) ([f74f88d](https://github.com/mittwald/flow/commit/f74f88db205583f7adc05bc4535ac69acac0e19e))
+
+# [0.2.0-alpha.717](https://github.com/mittwald/flow/compare/0.2.0-alpha.716...0.2.0-alpha.717) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.716](https://github.com/mittwald/flow/compare/0.2.0-alpha.715...0.2.0-alpha.716) (2026-03-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.715](https://github.com/mittwald/flow/compare/0.2.0-alpha.714...0.2.0-alpha.715) (2026-03-12)
+
+### Features
+
+* **ShortcutKey:** add component ([fd3012b](https://github.com/mittwald/flow/commit/fd3012b8caf4790ba5648dc1c33d8eb09cf9fc62))
+
+# [0.2.0-alpha.714](https://github.com/mittwald/flow/compare/0.2.0-alpha.713...0.2.0-alpha.714) (2026-03-11)
+
+### Features
+
+* **FormSettingsProvider:** export types and support context ([6071d65](https://github.com/mittwald/flow/commit/6071d65bbab7c90668be48b2262c98f90d6fb97d))
+
+# [0.2.0-alpha.713](https://github.com/mittwald/flow/compare/0.2.0-alpha.712...0.2.0-alpha.713) (2026-03-11)
+
+### Features
+
+* **Form:** add FormSettingsProvider for global settings ([545972a](https://github.com/mittwald/flow/commit/545972ab80cd75b05040cae94c532a84601d2d54))
+
+# [0.2.0-alpha.712](https://github.com/mittwald/flow/compare/0.2.0-alpha.711...0.2.0-alpha.712) (2026-03-10)
+
+### Features
+
+* add abortAction function to improve DX ([42db421](https://github.com/mittwald/flow/commit/42db42199482792820ac27f348cb8c417aeff7ee))
+
+# [0.2.0-alpha.711](https://github.com/mittwald/flow/compare/0.2.0-alpha.710...0.2.0-alpha.711) (2026-03-10)
+
+### Features
+
+* **Form:** add <FormRootError /> component ([0a27499](https://github.com/mittwald/flow/commit/0a2749944d51d873c089230f19130d9557cdd99b))
+
+# [0.2.0-alpha.710](https://github.com/mittwald/flow/compare/0.2.0-alpha.709...0.2.0-alpha.710) (2026-03-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.709](https://github.com/mittwald/flow/compare/0.2.0-alpha.708...0.2.0-alpha.709) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.708](https://github.com/mittwald/flow/compare/0.2.0-alpha.707...0.2.0-alpha.708) (2026-03-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.707](https://github.com/mittwald/flow/compare/0.2.0-alpha.706...0.2.0-alpha.707) (2026-03-06)
+
+### Bug Fixes
+
+* **List:** fix tile heading overflow ([#2354](https://github.com/mittwald/flow/issues/2354)) ([6a293b3](https://github.com/mittwald/flow/commit/6a293b35a3e019a2aca006bfabf7f9b5640b9a59))
+
+# [0.2.0-alpha.706](https://github.com/mittwald/flow/compare/0.2.0-alpha.705...0.2.0-alpha.706) (2026-03-04)
+
+### Features
+
+* **Link:** add size s ([#2352](https://github.com/mittwald/flow/issues/2352)) ([09bc68d](https://github.com/mittwald/flow/commit/09bc68d1de7bcda466c87cbe4561b01217c1035a))
+
+# [0.2.0-alpha.705](https://github.com/mittwald/flow/compare/0.2.0-alpha.704...0.2.0-alpha.705) (2026-03-03)
+
+### Features
+
+* **Modal:** add mobile padding ([#2353](https://github.com/mittwald/flow/issues/2353)) ([ca4d007](https://github.com/mittwald/flow/commit/ca4d0071db941092d518812ab6efd99bed201d16))
+
+# [0.2.0-alpha.704](https://github.com/mittwald/flow/compare/0.2.0-alpha.703...0.2.0-alpha.704) (2026-03-02)
+
+### Features
+
+* **Navigation:** update navigation item size ([#2351](https://github.com/mittwald/flow/issues/2351)) ([7461570](https://github.com/mittwald/flow/commit/7461570fb1c7453dc5f2910e6c6eb648156453fe))
+
+# [0.2.0-alpha.703](https://github.com/mittwald/flow/compare/0.2.0-alpha.702...0.2.0-alpha.703) (2026-03-02)
+
+### Bug Fixes
+
+* **LightBox:** fix light box for svgs without size ([#2349](https://github.com/mittwald/flow/issues/2349)) ([6cef787](https://github.com/mittwald/flow/commit/6cef787b3b993e30f0041557923b500de695217a))
+
 # [0.2.0-alpha.702](https://github.com/mittwald/flow/compare/0.2.0-alpha.701...0.2.0-alpha.702) (2026-02-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

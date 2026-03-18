@@ -126,20 +126,6 @@
     }
   }
 
-  &:has(.image) {
-    padding: 0;
-    background: none;
-    height: fit-content;
-
-    &:hover:where(:not([data-readonly])) .image {
-      filter: brightness(var(--image-button--brightness--hover));
-    }
-
-    &[data-pressed]:where(:not([data-readonly])) .image {
-      filter: brightness(var(--image-button--brightness--pressed));
-    }
-  }
-
   /* Variants */
 
   @mixin variant($color, $variant) {
@@ -213,4 +199,24 @@
   @include variant(dark, outline);
   @include variant(light, outline);
   @include avatarButton.avatarButton();
+
+  &:has(.image) {
+    padding: 0;
+    background: none;
+    height: fit-content;
+
+    &:hover:where(:not([data-readonly])) .image {
+      background: var(--button--dark-plain-background-color--hover);
+      filter: brightness(var(--image-button--brightness--hover));
+    }
+
+    &[data-pressed]:where(:not([data-readonly])) .image {
+      background: var(--button--dark-plain-background-color--pressed);
+      filter: brightness(var(--image-button--brightness--pressed));
+    }
+
+    .image {
+      width: 100%;
+    }
+  }
 }
