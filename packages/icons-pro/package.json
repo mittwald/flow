@@ -2,6 +2,9 @@
   "name": "@mittwald/flow-icons-pro",
   "version": "0.2.0-alpha.723",
   "type": "module",
+  "description": "Pro iconset for Flow, mittwald’s design system",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
       "types": "./dist/types/components/index.d.ts",
@@ -33,6 +36,5 @@
   "peerDependencies": {
     "@fortawesome/sharp-regular-svg-icons": "^7.2.0",
     "react": "^19.2.0"
-  },
-  "peerDependenciesMeta": {}
+  }
 }

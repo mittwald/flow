@@ -2,6 +2,9 @@
   "name": "@mittwald/flow-icons",
   "version": "0.2.0-alpha.723",
   "type": "module",
+  "description": "Default iconset for Flow, mittwald’s design system",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
       "types": "./dist/types/components/index.d.ts",
@@ -29,6 +32,5 @@
   },
   "peerDependencies": {
     "react": "^19.2.0"
-  },
-  "peerDependenciesMeta": {}
+  }
 }
