@@ -1,7 +1,6 @@
 import {
   Align,
   Avatar,
-  Button,
   Chat,
   Content,
   Header,
@@ -15,6 +14,7 @@ import { useForm } from "react-hook-form";
 import {
   Field,
   Form,
+  SubmitButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 
 export default () => {
@@ -64,9 +64,7 @@ export default () => {
             autoResizeMaxRows={10}
           />
         </Field>
-        <Button color="accent" type="submit">
-          Submit
-        </Button>
+        <SubmitButton color="accent">Submit</SubmitButton>
       </Form>
     </Chat>
   );

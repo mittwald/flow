@@ -3,6 +3,7 @@ import {
   IconAscending,
   IconAttachment,
   IconBackLink,
+  IconBold,
   IconCheck,
   IconCheckboxChecked,
   IconCheckboxEmpty,
@@ -22,8 +23,10 @@ import {
   IconEdit,
   IconExternalLink,
   IconFilter,
+  IconForwardLink,
   IconHide,
   IconHome,
+  IconItalic,
   IconLink,
   IconLogout,
   IconMaximize,
@@ -31,8 +34,10 @@ import {
   IconMinimize,
   IconMinus,
   IconNotification,
+  IconOrderedList,
   IconPause,
   IconPlus,
+  IconQuote,
   IconRadioOff,
   IconRadioOn,
   IconRedo,
@@ -45,7 +50,9 @@ import {
   IconShow,
   IconSorting,
   IconStart,
+  IconStrikeThrough,
   IconUndo,
+  IconUnorderedList,
   IconUpload,
   IconView,
   Label,
@@ -64,6 +71,10 @@ import {
   <LabeledValue>
     <Label>Backlink</Label>
     <IconBackLink />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Bold</Label>
+    <IconBold />
   </LabeledValue>
   <LabeledValue>
     <Label>Check</Label>
@@ -142,12 +153,20 @@ import {
     <IconFilter />
   </LabeledValue>
   <LabeledValue>
+    <Label>ForwardLink</Label>
+    <IconForwardLink />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Hide</Label>
     <IconHide />
   </LabeledValue>
   <LabeledValue>
     <Label>Home</Label>
     <IconHome />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Italic</Label>
+    <IconItalic />
   </LabeledValue>
   <LabeledValue>
     <Label>Link</Label>
@@ -178,12 +197,20 @@ import {
     <IconNotification />
   </LabeledValue>
   <LabeledValue>
+    <Label>OrderedList</Label>
+    <IconOrderedList />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Pause</Label>
     <IconPause />
   </LabeledValue>
   <LabeledValue>
     <Label>Plus</Label>
     <IconPlus />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Quote</Label>
+    <IconQuote />
   </LabeledValue>
   <LabeledValue>
     <Label>RadioOff</Label>
@@ -234,8 +261,16 @@ import {
     <IconStart />
   </LabeledValue>
   <LabeledValue>
+    <Label>StrikeThrough</Label>
+    <IconStrikeThrough />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Undo</Label>
     <IconUndo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>UnorderedList</Label>
+    <IconUnorderedList />
   </LabeledValue>
   <LabeledValue>
     <Label>Upload</Label>
