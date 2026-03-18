@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.724](https://github.com/mittwald/flow/compare/0.2.0-alpha.723...0.2.0-alpha.724) (2026-03-18)
+
+### Bug Fixes
+
+* **TextField:** fix padding ([#2391](https://github.com/mittwald/flow/issues/2391)) ([7d54850](https://github.com/mittwald/flow/commit/7d54850dc6f1a2e43f493f2518d33819bbaedea2))
+
 # [0.2.0-alpha.723](https://github.com/mittwald/flow/compare/0.2.0-alpha.722...0.2.0-alpha.723) (2026-03-18)
 
 **Note:** Version bump only for package @mittwald/flow-project
