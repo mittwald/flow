@@ -30,6 +30,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       minValue: {},
       name: {},
       orientation: {},
+      render: {},
       showInitialMarker: {},
       slot: {},
       step: {},

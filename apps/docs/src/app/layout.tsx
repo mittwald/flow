@@ -1,7 +1,7 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
-import React, { type FC, type PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
@@ -12,6 +12,7 @@ import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import Header from "@/app/_components/layout/Header";
 import ScrollToHash from "@/app/_components/ScrollToHash";
 import Footer from "@/app/_components/layout/Footer";
+import { ThemeInitializerScript } from "./_components/theming/ThemeInitializerScript";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -23,7 +24,10 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   const docs = await MdxFileFactory.fromDir("src/content");
 
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
+      <head>
+        <ThemeInitializerScript />
+      </head>
       <body className={bodyClassName}>
         <RouterProvider>
           <ScrollToHash />

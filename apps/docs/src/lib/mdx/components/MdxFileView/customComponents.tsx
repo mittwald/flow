@@ -2,11 +2,11 @@ import styles from "./customComponents.module.css";
 import {
   Alert,
   AlertBadge,
+  CodeBlock,
   ColumnLayout,
   Content,
   CopyButton,
   Heading,
-  InlineCode,
   Label,
   Link,
   Separator,
@@ -52,7 +52,7 @@ export const createCustomComponents = () => {
     ),
 
     code: ({ children }: PropsWithChildren) => (
-      <InlineCode>{children}</InlineCode>
+      <CodeBlock>{children}</CodeBlock>
     ),
 
     p: ({ children }: PropsWithChildren) => (
