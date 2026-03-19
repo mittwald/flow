@@ -48,6 +48,19 @@ export const WithIcon: Story = {
   ),
 };
 
+export const CustomColor: Story = {
+  args: { color: "#fde6ff" },
+  render: (props) => (
+    <AccentBox {...props}>
+      <Section>
+        <Heading>Heading</Heading>
+        <Text>{dummyText.long}</Text>
+        <Link>Link</Link>
+      </Section>
+    </AccentBox>
+  ),
+};
+
 export const InLayoutCard: Story = {
   render: (props) => (
     <LayoutCard>

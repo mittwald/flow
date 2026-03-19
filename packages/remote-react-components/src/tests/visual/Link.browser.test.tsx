@@ -14,8 +14,8 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={color === "light" || color === "dark"} key={color}>
+            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
               <Flex gap="s">
                 <Link color={color}>Default</Link>
                 <Link color={color} inline>
