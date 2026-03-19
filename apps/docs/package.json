@@ -33,6 +33,7 @@
     "luxon": "^3.7.2",
     "next": "~16.1.6",
     "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.4.6",
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",

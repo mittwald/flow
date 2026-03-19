@@ -1,37 +1,22 @@
 "use client";
 
-import { storeTheme } from "@/app/_lib/themeStorage";
-import {
-  Button,
-  Icon,
-  LoadingSpinner,
-  setTheme,
-  useIsMounted,
-  useStoredTheme,
-  type Theme,
-} from "@mittwald/flow-react-components";
+import { Button, Icon } from "@mittwald/flow-react-components";
 import { IconContrastFilled, IconMoon, IconSun } from "@tabler/icons-react";
+import { useTheme } from "next-themes";
 
 export const ThemeSwitcherButton = () => {
-  const storedTheme = useStoredTheme();
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    const nextTheme: Theme =
-      storedTheme === "light"
-        ? "dark"
-        : storedTheme === "dark"
-          ? "system"
-          : "light";
+    const nextTheme =
+      theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
     setTheme(nextTheme);
-    storeTheme(nextTheme);
   };
 
-  const isMounted = useIsMounted();
-
   const icon =
-    storedTheme === "light" ? (
+    theme === "light" ? (
       <IconSun />
-    ) : storedTheme === "dark" ? (
+    ) : theme === "dark" ? (
       <IconMoon />
     ) : (
       <IconContrastFilled />
@@ -39,7 +24,7 @@ export const ThemeSwitcherButton = () => {
 
   return (
     <Button onPress={toggleTheme} aria-hidden="true">
-      {isMounted ? <Icon>{icon}</Icon> : <LoadingSpinner />}
+      <Icon>{icon}</Icon>
     </Button>
   );
 };

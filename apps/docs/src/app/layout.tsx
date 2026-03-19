@@ -12,7 +12,7 @@ import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import Header from "@/app/_components/layout/Header";
 import ScrollToHash from "@/app/_components/ScrollToHash";
 import Footer from "@/app/_components/layout/Footer";
-import { ThemeInitializerScript } from "./_components/theming/ThemeInitializerScript";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -25,25 +25,24 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
 
   return (
     <html lang="de" suppressHydrationWarning>
-      <head>
-        <ThemeInitializerScript />
-      </head>
       <body className={bodyClassName}>
-        <RouterProvider>
-          <ScrollToHash />
-          <Matomo />
-          <NotificationProvider>
-            <div className={styles.wrapper}>
-              <Header docs={docs.map((mdx) => mdx.serialize())} />
-              <div className={styles.mainWrapper}>
-                <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
+        <ThemeProvider attribute="data-flow-theme" disableTransitionOnChange>
+          <RouterProvider>
+            <ScrollToHash />
+            <Matomo />
+            <NotificationProvider>
+              <div className={styles.wrapper}>
+                <Header docs={docs.map((mdx) => mdx.serialize())} />
+                <div className={styles.mainWrapper}>
+                  <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
 
-                <main className={styles.main}>{props.children}</main>
+                  <main className={styles.main}>{props.children}</main>
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-          </NotificationProvider>
-        </RouterProvider>
+            </NotificationProvider>
+          </RouterProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

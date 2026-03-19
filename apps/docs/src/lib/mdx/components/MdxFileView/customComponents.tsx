@@ -5,8 +5,8 @@ import {
   CodeBlock,
   ColumnLayout,
   Content,
-  CopyButton,
   Heading,
+  InlineCode,
   Label,
   Link,
   Separator,
@@ -40,19 +40,11 @@ export const createCustomComponents = () => {
     Link,
 
     pre: ({ children }: PropsWithChildren) => (
-      <div className={styles.preContainer}>
-        <pre className={styles.pre}>{children}</pre>
-        <CopyButton
-          className={styles.preCopyButton}
-          text={onlyText(children)}
-          variant="plain"
-          size="s"
-        />
-      </div>
+      <CodeBlock copyable>{children}</CodeBlock>
     ),
 
     code: ({ children }: PropsWithChildren) => (
-      <CodeBlock>{children}</CodeBlock>
+      <InlineCode>{children}</InlineCode>
     ),
 
     p: ({ children }: PropsWithChildren) => (
