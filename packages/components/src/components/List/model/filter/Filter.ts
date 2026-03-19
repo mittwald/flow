@@ -20,6 +20,9 @@ import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
 import z from "zod";
 import { toArray } from "@/lib/array/toArray";
+import type { RangeValue } from "react-aria-components";
+import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
+import type { DateValue } from "@internationalized/date";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -50,7 +53,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.list = list;
     this.property = shape.property;
     this.mode = shape.mode ?? "some";
-    this._values = shape.values?.map((v) => FilterValue.create(this, v));
+    this._values =
+      shape.mode === "dateRange"
+        ? undefined
+        : shape.values?.map((v) => FilterValue.create(this, v));
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
@@ -77,9 +83,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     }
   }
 
-  public updateTableColumnDef(def: ColumnDef<T>): void {
+  public updateTableColumnDef(def: ColumnDef<T>, mode?: FilterMode): void {
     def.enableColumnFilter = true;
-    def.filterFn = this.getReactTableFilterFn();
+    def.filterFn =
+      mode === "dateRange" ? dateRangeFilterFn : this.getReactTableFilterFn();
   }
 
   private getReactTableFilterFn(): ColumnDef<T>["filterFn"] {
@@ -118,7 +125,6 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     } else if (this.mode === "one") {
       return predicate(toFilterValue(filterValueInput));
     }
-
     throw new Error(`Unknown filter mode '${this.mode}'`);
   }
 
@@ -243,6 +249,11 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public clear(): void {
     this.list.reactTable.getTableColumn(this.property).setFilterValue(null);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public setDateRangeValue(range: RangeValue<DateValue>) {
+    this.list.reactTable.getTableColumn(this.property).setFilterValue(range);
     this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 

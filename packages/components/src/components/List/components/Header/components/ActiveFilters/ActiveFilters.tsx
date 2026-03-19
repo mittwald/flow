@@ -18,6 +18,7 @@ import DivView from "@/views/DivView";
 import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
+import type { DateRange } from "react-aria-components";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
@@ -27,6 +28,18 @@ export const ActiveFilters: FC = observer(() => {
     .flatMap((f) => f.values)
     .filter((v) => v.isActive);
 
+  const dateRangeFilter = list.filters.find((f) => f.mode === "dateRange");
+
+  const dateRangeValue = dateRangeFilter?.getValue() as DateRange;
+
+  const activeDateRangeFilter = dateRangeValue && dateRangeFilter && (
+    <BadgeView
+      key={dateRangeFilter.name}
+      onClose={() => dateRangeFilter?.clear()}
+    >
+      <TextView>{`${new Date(dateRangeValue.start.year, dateRangeValue.start.month - 1, dateRangeValue.start.day).toLocaleDateString("de-DE")} - ${new Date(dateRangeValue.end.year, dateRangeValue.end.month - 1, dateRangeValue.end.day).toLocaleDateString("de-DE")}`}</TextView>
+    </BadgeView>
+  );
   const activeFilters = activeFilterValues.map((v) => (
     <BadgeView key={v.id} onClose={() => v.deactivate()}>
       <TextView>{v.render()}</TextView>
@@ -99,6 +112,7 @@ export const ActiveFilters: FC = observer(() => {
   return (
     <DivView className={styles.activeFilters}>
       {activeFilters}
+      {activeDateRangeFilter}
       {storeFiltersButton}
       {resetFiltersButton}
       {removeAllFiltersButton}

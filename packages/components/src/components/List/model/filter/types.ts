@@ -5,7 +5,7 @@ import type {
 } from "@/components/List/model/types";
 import type { ItemType } from "@/lib/types/array";
 
-export type FilterMode = "all" | "some" | "one";
+export type FilterMode = "all" | "some" | "one" | "dateRange";
 
 export type FilterMatcher<T, P, TMatcherValue> = (
   filterBy: NonNullable<ItemType<TMatcherValue>>,

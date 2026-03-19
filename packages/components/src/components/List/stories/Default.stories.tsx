@@ -31,6 +31,7 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
 import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
+import { DateTime } from "luxon";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -414,6 +415,39 @@ export const WithSecondaryFilters: Story = {
           </DomainList.List>
         </Section>
       </SettingsProvider>
+    );
+  },
+};
+
+export const WithDateRangeFilter: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List batchSize={5} aria-label="Invoices">
+        <List.StaticData
+          data={[
+            { id: "RG100000", date: DateTime.now().toISO() },
+            { id: "RG100001", date: DateTime.now().minus({ day: 7 }).toISO() },
+            { id: "RG100002", date: DateTime.now().minus({ day: 14 }).toISO() },
+          ]}
+        />
+        <List.Filter property="date" name="Date" mode="dateRange" />
+        <List.Filter property="id" name="ID" />
+        <List.Item>
+          {(invoice) => (
+            <ListItemView>
+              <Heading>{invoice.id}</Heading>
+              <Text>
+                {DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")}
+              </Text>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
     );
   },
 };
