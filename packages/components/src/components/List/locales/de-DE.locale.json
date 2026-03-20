@@ -2,6 +2,7 @@
   "list.filters": "Filter",
   "list.filters.all": "Alle Filter",
   "list.filters.clear": "Filter entfernen",
+  "list.filters.clearSelection": "Auswahl aufheben",
   "list.filters.reset": "Filter zurücksetzen",
   "list.filters.store": "Filter speichern",
   "list.noResult.heading": "Keine Suchergebnisse gefunden",

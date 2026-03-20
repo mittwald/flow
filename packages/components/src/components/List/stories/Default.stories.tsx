@@ -84,7 +84,6 @@ const meta: Meta<typeof List> = {
             <DomainList.Filter
               values={availableTypes}
               property="type"
-              mode="all"
               name="Type"
               defaultSelected={["Domain"]}
             />
