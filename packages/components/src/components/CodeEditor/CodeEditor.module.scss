@@ -1,0 +1,39 @@
+@use "@/styles/mixins/formControl";
+
+.codeEditor {
+  outline: none;
+
+  .codeMirror {
+    @include formControl.formControl();
+
+    position: relative;
+    padding-left: unset;
+    padding-right: unset;
+    order: 2;
+
+    .copyButton {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 1;
+    }
+
+    & :global(.cm-editor) {
+      outline: none;
+
+      & :global(.cm-lineNumbers .cm-gutterElement) {
+        min-width: 30px;
+      }
+
+      & :global(.cm-foldGutter) {
+        display: block;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      & :global(.cm-panels) {
+        display: none;
+      }
+    }
+  }
+}
