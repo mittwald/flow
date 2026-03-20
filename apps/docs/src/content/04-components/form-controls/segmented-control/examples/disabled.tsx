@@ -6,16 +6,18 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Section>
-  <SegmentedControl defaultValue="dev">
+  <SegmentedControl defaultValue="entwickler">
     <Label>Rolle</Label>
     <Segment value="entwickler">Entwickler</Segment>
-    <Segment value="designer">Designer</Segment>
+    <Segment value="designer" isDisabled>
+      Designer
+    </Segment>
     <Segment value="geschäftsführer">
       Geschäftsführer
     </Segment>
     <Segment value="andere">Andere</Segment>
   </SegmentedControl>
-  <SegmentedControl defaultValue="dev" isDisabled>
+  <SegmentedControl defaultValue="entwickler" isDisabled>
     <Label>Rolle</Label>
     <Segment value="entwickler">Entwickler</Segment>
     <Segment value="designer">Designer</Segment>

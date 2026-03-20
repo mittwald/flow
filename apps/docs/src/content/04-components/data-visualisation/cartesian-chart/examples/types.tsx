@@ -2,6 +2,7 @@ import {
   Area,
   CartesianChart,
   CartesianGrid,
+  ColumnLayout,
   Line,
   XAxis,
   YAxis,
@@ -31,7 +32,7 @@ export default () => {
     },
   ];
   return (
-    <Row>
+    <ColumnLayout>
       <CartesianChart flexGrow data={data} height="300px">
         <CartesianGrid />
         <Area dataKey="A" />
@@ -53,6 +54,6 @@ export default () => {
         <XAxis dataKey="Zeit" />
         <YAxis domain={[0, 100]} unit=" %" />
       </CartesianChart>
-    </Row>
+    </ColumnLayout>
   );
 };

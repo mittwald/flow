@@ -24,11 +24,11 @@ switch:
     default:
       value: "{neutral-solid-content-color}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{neutral.color.400}"
   handle-background-color:
     default:
       value: "{neutral.color.100}"
     disabled:
-      value: "{neutral.color.300}"
+      value: "{neutral.color.200}"
   handle-size:
     value: 1.25rem
