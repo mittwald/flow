@@ -41,3 +41,9 @@
     background-color: var(--dark--color--600);
   }
 }
+
+@media (pointer: fine) {
+  .overlay {
+    position: fixed;
+  }
+}
