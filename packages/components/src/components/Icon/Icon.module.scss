@@ -6,16 +6,21 @@
   @extend .size-m;
 
   /* Sizes */
-  @mixin size($size) {
+  @mixin size($size, $faPadding) {
     &:where(.size-#{$size}) {
       width: var(--icon--size--#{$size});
       height: var(--icon--size--#{$size});
+
+      &.svg-inline--fa {
+        box-sizing: border-box;
+        padding: $faPadding;
+      }
     }
   }
 
-  @include size(m);
-  @include size(s);
-  @include size(l);
+  @include size(m, 2px);
+  @include size(s, 1px);
+  @include size(l, 4px);
 
   /* Colors */
   @mixin status($status) {

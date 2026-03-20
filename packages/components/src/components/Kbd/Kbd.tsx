@@ -46,9 +46,11 @@ export const Kbd = flowComponent("Kbd", (props) => {
     if (key === "mod") {
       formattedKey = isAppleDevice() ? "⌘" : stringFormatter.format("kbd.mod");
     }
+
     if (key === "alt") {
       formattedKey = isAppleDevice() ? "⌥" : stringFormatter.format("kbd.alt");
     }
+
     if (key === "shift") {
       formattedKey = "⇧";
     }
@@ -59,7 +61,7 @@ export const Kbd = flowComponent("Kbd", (props) => {
 
     return (
       <Fragment key={index}>
-        <kbd>{formattedKey}</kbd>
+        <kbd className={styles.kbd}>{formattedKey}</kbd>
         {index < keys.length - 1 && " + "}
       </Fragment>
     );

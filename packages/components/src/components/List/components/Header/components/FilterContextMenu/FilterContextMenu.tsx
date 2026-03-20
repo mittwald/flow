@@ -17,8 +17,10 @@ export const FilterContextMenu: FC<Props> = (props) => {
 
   const { values, mode, name, property } = filter;
 
+  const selectionMode = mode === "one" ? "single" : "multiple";
+
   const filterItems = values.map((v) => (
-    <FilterMenuItem filterValue={v} key={v.id} />
+    <FilterMenuItem filterValue={v} key={v.id} selectionMode={selectionMode} />
   ));
 
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
@@ -34,7 +36,7 @@ export const FilterContextMenu: FC<Props> = (props) => {
         <IconFilter />
       </ButtonView>
       <ContextMenuView
-        selectionMode={mode === "one" ? "single" : "multiple"}
+        selectionMode={selectionMode}
         selectedKeys={activeFilterKeys}
       >
         {filterItems}
