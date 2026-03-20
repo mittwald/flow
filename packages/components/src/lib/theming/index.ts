@@ -1,8 +1,8 @@
 export * from "./components/ThemedHtml";
 
 export * from "./lib/keys";
-export { getTheme as getStoredTheme } from "./lib/getTheme";
-export { getResolvedTheme as getTheme } from "./lib/getResolvedTheme";
+export { getTheme } from "./lib/getTheme";
+export { getResolvedTheme } from "./lib/getResolvedTheme";
 export { setTheme } from "./lib/setTheme";
 
 export { useTheme as useStoredTheme } from "./hooks/useTheme";
