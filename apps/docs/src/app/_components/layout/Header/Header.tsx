@@ -1,12 +1,12 @@
 "use client";
 import { type FC, useEffect, useState } from "react";
-import styles from "../../../layout.module.scss";
-import { Image, Link } from "@mittwald/flow-react-components";
-import logoMittwald from "../../../../../assets/flow-logo.svg";
+import styles from "./Header.module.scss";
+import { Link } from "@mittwald/flow-react-components";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation";
 import clsx from "clsx";
+import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -33,12 +33,8 @@ const Header: FC<Props> = (props) => {
   return (
     <header className={clsx(styles.header, hasScrolled && styles.scrolled)}>
       <div className={styles.headerContent}>
-        <Link href="/">
-          <Image
-            className={styles.logo}
-            src={logoMittwald.src}
-            alt="mittwald Flow Logo"
-          />
+        <Link href="/" aria-label="Flow">
+          <FlowLogo />
         </Link>
         <HeaderNavigation
           className={styles.headerNavigation}
