@@ -2,6 +2,7 @@
 import {
   Flex,
   Heading,
+  IconFeedback,
   Image,
   Link,
   Text,
@@ -10,7 +11,6 @@ import React, { type FC } from "react";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import styles from "./footer.module.scss";
 import { DateTime } from "luxon";
-import feedback from "../../../../../assets/Styleguide-Footer_Feedback.svg";
 
 const Footer: FC = () => {
   const year = DateTime.now().year;
@@ -98,12 +98,7 @@ const Footer: FC = () => {
               Feedback zu Flow geben
             </Link>
           </Flex>
-          <Image
-            src={feedback.src}
-            alt="Styleguide Feedback"
-            className={styles.feedbackImage}
-            width={200}
-          />
+          <IconFeedback size="l" className={styles.feedbackImage} />
         </Flex>
       </Flex>
     </footer>
