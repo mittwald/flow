@@ -1,27 +1,19 @@
 import { useEffect, useState } from "react";
 import type { ResolvedTheme } from "../types";
+import { ColorSchemeMediaQuery } from "../lib/ColorSchemeMediaQuery";
 
 export const useSystemTheme = (): ResolvedTheme => {
-  const media =
-    typeof window === "undefined"
-      ? null
-      : window.matchMedia("(prefers-color-scheme: light)");
+  const { preferred } = ColorSchemeMediaQuery.getPreference();
 
-  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(
-    media?.matches ? "light" : "dark",
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(preferred);
+
+  useEffect(
+    () =>
+      ColorSchemeMediaQuery.onPreferenceChange((newPreferred) => {
+        setSystemTheme(newPreferred.preferred);
+      }),
+    [],
   );
-
-  useEffect(() => {
-    const listener = (event: MediaQueryListEvent) => {
-      setSystemTheme(event.matches ? "light" : "dark");
-    };
-
-    media?.addEventListener("change", listener);
-
-    return () => {
-      media?.removeEventListener("change", listener);
-    };
-  }, []);
 
   return systemTheme;
 };

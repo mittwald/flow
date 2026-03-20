@@ -1,12 +1,9 @@
 import type { ResolvedTheme, Theme } from "../types";
-import { getSystemTheme } from "./getSystemTheme";
+import { ColorSchemeMediaQuery } from "./ColorSchemeMediaQuery";
 
-export const resolveTheme = (theme: Theme = "system"): ResolvedTheme => {
-  if (typeof window === "undefined") {
-    return "light";
-  }
+export const resolveTheme = (theme: Theme): ResolvedTheme => {
   if (theme === "system") {
-    return getSystemTheme();
+    return ColorSchemeMediaQuery.getPreference().preferred;
   }
   return theme;
 };

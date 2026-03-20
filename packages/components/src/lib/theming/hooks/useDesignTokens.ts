@@ -1,8 +1,8 @@
-import light from "@mittwald/flow-design-tokens/json/all-light.json";
-import dark from "@mittwald/flow-design-tokens/json/all-dark.json";
-import { useTheme } from "./useTheme";
+import lightTokens from "@mittwald/flow-design-tokens/json/all-light.json";
+import darkTokens from "@mittwald/flow-design-tokens/json/all-dark.json";
+import { useResolvedTheme } from "./useResolvedTheme";
 
 export const useDesignTokens = () => {
-  const theme = useTheme();
-  return theme === "dark" ? dark : light;
+  const theme = useResolvedTheme();
+  return theme === "light" ? lightTokens : darkTokens;
 };

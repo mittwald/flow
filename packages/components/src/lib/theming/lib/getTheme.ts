@@ -1,7 +1,7 @@
-import type { ResolvedTheme } from "../types";
-import { getStoredTheme } from "./getStoredTheme";
-import { resolveTheme } from "./resolveTheme";
+import type { Theme } from "../types";
+import { getFallbackTheme } from "./getFallbackTheme";
+import { getThemeHtmlAttribute } from "./getThemeHtmlAttribute";
 
-export const getTheme = (): ResolvedTheme => {
-  return resolveTheme(getStoredTheme());
+export const getTheme = (): Theme => {
+  return getThemeHtmlAttribute() ?? getFallbackTheme();
 };

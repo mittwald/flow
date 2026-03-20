@@ -1,13 +1,11 @@
 import { themeHtmlAttribute } from "./keys";
-import type { Theme } from "../types";
 import { sanitizeTheme } from "./sanitizeTheme";
+import { isClientSide } from "./isClientSide";
 
-export const getThemeHtmlAttribute = (): Theme => {
-  if (typeof window === "undefined") {
-    return "light";
+export const getThemeHtmlAttribute = () => {
+  if (isClientSide()) {
+    return sanitizeTheme(
+      document.documentElement.getAttribute(themeHtmlAttribute),
+    );
   }
-  return (
-    sanitizeTheme(document.documentElement.getAttribute(themeHtmlAttribute)) ??
-    "system"
-  );
 };
