@@ -44,8 +44,8 @@
   .editor pre {
     white-space: pre !important;
     padding: 0 !important;
-    background-color: var(--neutral--color--200) !important;
-    font-size: var(--font-size--s);
+    background-color: var(--code-block--background-color) !important;
+    font-size: var(--font-size-text--s);
   }
 
   .staticModal {
@@ -81,7 +81,7 @@
   display: grid;
   grid-template-rows: 1fr;
   padding: var(--size-px--m);
-  background-color: var(--neutral--color--200) !important;
+  background-color: var(--code-block--background-color) !important;
 }
 
 .actions {

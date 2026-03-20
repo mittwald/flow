@@ -18,7 +18,7 @@ import {
   TableRow,
   Text,
 } from "@mittwald/flow-react-components";
-import type { PropsWithChildren } from "react";
+import { Children, isValidElement, type PropsWithChildren } from "react";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
@@ -39,9 +39,26 @@ export const createCustomComponents = () => {
     Label,
     Link,
 
-    pre: ({ children }: PropsWithChildren) => (
-      <CodeBlock copyable>{children}</CodeBlock>
-    ),
+    pre: ({ children }: PropsWithChildren) => {
+      const preElementContent = Children.toArray(children)[0];
+
+      return (
+        <CodeBlock
+          copyable={true}
+          language={
+            isValidElement<{ className?: string }>(preElementContent) &&
+            preElementContent.props.className
+              ? preElementContent.props.className.replace("language-", "")
+              : "javascript"
+          }
+          code={String(
+            isValidElement<{ children: string }>(preElementContent)
+              ? preElementContent.props.children
+              : preElementContent,
+          )}
+        />
+      );
+    },
 
     code: ({ children }: PropsWithChildren) => (
       <InlineCode>{children}</InlineCode>
