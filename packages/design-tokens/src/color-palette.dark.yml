@@ -1,27 +1,27 @@
 color:
   gray:
     100:
-      value: "#000000"
-    200:
-      value: "#121518"
-    300:
       value: "#1B1F24"
-    400:
+    200:
       value: "#292F37"
-    500:
+    300:
       value: "#3A434E"
-    600:
+    400:
       value: "#5E6C7A"
-    700:
+    500:
       value: "#8FA1B4"
-    800:
+    600:
       value: "#B7C9DB"
-    900:
+    700:
       value: "#DCE9F7"
-    1000:
+    800:
       value: "#E5EFF8"
-    1100:
+    900:
       value: "#F4F8FC"
+    1000:
+      value: "#FFFFFF"
+    1100:
+      value: "#FFFFFF"
     1200:
       value: "#FFFFFF"
 
