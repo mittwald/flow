@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.740](https://github.com/mittwald/flow/compare/0.2.0-alpha.739...0.2.0-alpha.740) (2026-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.739](https://github.com/mittwald/flow/compare/0.2.0-alpha.738...0.2.0-alpha.739) (2026-03-20)
+
+### Features
+
+* **List:** add radio filter reset button ([#2376](https://github.com/mittwald/flow/issues/2376)) ([65c012c](https://github.com/mittwald/flow/commit/65c012ccca81ca57a639e660823d84230612d186))
+
 # [0.2.0-alpha.738](https://github.com/mittwald/flow/compare/0.2.0-alpha.737...0.2.0-alpha.738) (2026-03-20)
 
 **Note:** Version bump only for package @mittwald/flow-project
