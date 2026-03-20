@@ -26,7 +26,7 @@ const envHighlighting = styleTags({
   Hash: t.lineComment,
 });
 
-export const language = LRLanguage.define({
+const lrLanguage = LRLanguage.define({
   parser: parser.configure({
     props: [envHighlighting],
   }),
@@ -35,9 +35,22 @@ export const language = LRLanguage.define({
   },
 });
 
-const dotEnvLanguage: LanguageContainer = [
+export const validator = (input: string) => {
+  let isValid = true;
+  lrLanguage.parser.parse(input).iterate({
+    enter: (node) => {
+      if (node.type.isError) {
+        isValid = false;
+      }
+    },
+  });
+
+  return isValid;
+};
+
+const language: LanguageContainer = [
   () => syntaxHighlighting(definedStyle),
-  () => new LanguageSupport(language),
+  () => new LanguageSupport(lrLanguage),
   () =>
     linter((view) => {
       const diagnostics: Diagnostic[] = [];
@@ -95,7 +108,7 @@ const dotEnvLanguage: LanguageContainer = [
           diagnostics.push({
             from: docEnd,
             to: docEnd,
-            severity: "info",
+            severity: "error",
             message: "Must end with a newline.",
           });
         } else {
@@ -115,4 +128,4 @@ const dotEnvLanguage: LanguageContainer = [
     }),
 ];
 
-export default dotEnvLanguage;
+export default language;

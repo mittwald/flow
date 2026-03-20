@@ -5,7 +5,7 @@ import {
 } from "@codemirror/language";
 import type { linter } from "@codemirror/lint";
 import type { Extension } from "@uiw/react-codemirror";
-import dotEnvLanguage from "@/components/CodeEditor/languages/dotEnv/dotEnv";
+import DotEnvLanguage from "@/components/CodeEditor/languages/dotEnv";
 
 export type CodeEditorLanguage = LanguageName | "dotEnv";
 
@@ -32,6 +32,6 @@ Object.keys(langs).forEach((key) => {
   ];
 });
 
-supportedCodeEditorLanguages.dotEnv = dotEnvLanguage;
+supportedCodeEditorLanguages.dotEnv = DotEnvLanguage;
 
 export default supportedCodeEditorLanguages;

@@ -16,6 +16,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { FieldError } from "@/components/FieldError";
 import { CodeEditor } from "@/components/CodeEditor";
+import { validator as DotEnvValidator } from "@/components/CodeEditor/languages/dotEnv";
 
 const submitAction = action("submit");
 
@@ -43,7 +44,14 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
-          <Field name="code">
+          <Field
+            name="code"
+            rules={{
+              required: true,
+              validate: (value) =>
+                DotEnvValidator(value) ? true : "invalid dot env",
+            }}
+          >
             <CodeEditor language="dotEnv">
               <Label>DotEnv</Label>
             </CodeEditor>

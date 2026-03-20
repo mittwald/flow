@@ -2,21 +2,21 @@
 
 .codeEditor {
   outline: none;
-  position: relative;
-
-  .copyButton {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 1;
-  }
 
   .codeMirror {
     @include formControl.formControl();
 
+    position: relative;
     padding-left: unset;
     padding-right: unset;
     order: 2;
+
+    .copyButton {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 1;
+    }
 
     & :global(.cm-editor) {
       outline: none;
