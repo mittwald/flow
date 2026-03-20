@@ -22,8 +22,18 @@ export const ThemeSwitcherButton = () => {
       <IconContrastFilled />
     );
 
+  const ariaLabel =
+    theme === "light"
+      ? "Benutze hellen Farbmodus"
+      : theme === "dark"
+        ? "Benutze dunklen Farbmodus"
+        : "Benutze System-Farbmodus";
+
   return (
-    <Button onPress={toggleTheme} aria-hidden="true">
+    <Button
+      onPress={toggleTheme}
+      aria-label={`${ariaLabel} (drücken um zu wechseln)`}
+    >
       <Icon>{icon}</Icon>
     </Button>
   );
