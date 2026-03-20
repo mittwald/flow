@@ -1,15 +1,18 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconBrandSpeedtest as Tabler } from "@tabler/icons-react";
+import { IconAnalytics as IconImport } from "@mittwald/flow-icons";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
+import { useContextIcon } from "../IconSetProvider";
 
 export const IconAnalytics: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => {
+  const fromContext = useContextIcon("Analytics");
+  const Icon = fromContext ?? IconImport;
   return (
     <View {...props}>
-      <Tabler />
+      <Icon />
     </View>
   );
 };

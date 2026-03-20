@@ -1,11 +1,11 @@
 .inlineCode {
   font-family: FiraCode, monospace;
-  font-size: var(--code--font-size);
+  font-size: var(--inline-code--font-size);
   overflow-wrap: break-word;
-  background-color: var(--code--default-background-color);
-  padding-inline: var(--code--padding-x);
-  padding-block: var(--code--padding-y);
-  border-radius: var(--code--corner-radius);
+  background-color: var(--inline-code--default-background-color);
+  padding-inline: var(--inline-code--padding-x);
+  padding-block: var(--inline-code--padding-y);
+  border-radius: var(--inline-code--corner-radius);
   display: inline;
   width: fit-content;
   max-width: 100%;
@@ -13,8 +13,8 @@
 
   @mixin variant($color) {
     &:where(.#{$color}) {
-      color: var(--code--#{$color}-content-color);
-      background-color: var(--code--#{$color}-background-color);
+      color: var(--inline-code--#{$color}-content-color);
+      background-color: var(--inline-code--#{$color}-background-color);
     }
   }
 
