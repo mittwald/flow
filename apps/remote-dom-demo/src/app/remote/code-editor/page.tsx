@@ -26,8 +26,16 @@ export default function Page() {
           console.log("Submitted:", data);
         }}
       >
-        <Field name="code">
-          <CodeEditor language={"dotEnv"} />
+        <Field
+          name="code"
+          rules={{
+            validate: (val, ...asd) => {
+              console.log("val", val, asd);
+              return true;
+            },
+          }}
+        >
+          <CodeEditor language={"tsx"} />
         </Field>
         <ActionGroup>
           <SubmitButton>Send</SubmitButton>

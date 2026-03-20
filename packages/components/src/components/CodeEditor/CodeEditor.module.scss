@@ -1,20 +1,39 @@
+@use "@/styles/mixins/formControl";
+
 .codeEditor {
+  outline: none;
+  position: relative;
+
+  .copyButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+  }
+
   .codeMirror {
+    @include formControl.formControl();
+
+    padding-left: unset;
+    padding-right: unset;
     order: 2;
 
-    & :global(.cm-panel.cm-panel-lint ul [aria-selected]) {
-      background-color: unset;
-    }
+    & :global(.cm-editor) {
+      outline: none;
 
-    & :global(.cm-tooltip) {
-      border: unset;
-      background-color: white;
-    }
+      & :global(.cm-lineNumbers .cm-gutterElement) {
+        min-width: 30px;
+      }
 
-    & :global(.cm-diagnostic) {
-      padding: unset;
-      margin-left: unset;
-      border-left: unset;
+      & :global(.cm-foldGutter) {
+        display: block;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      & :global(.cm-panels) {
+        display: none;
+      }
     }
   }
 }

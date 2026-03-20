@@ -10,13 +10,15 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./CodeEditor.module.scss";
 import { type CodeEditorLanguage } from "@/components/CodeEditor/languages";
-import { useCodeEditorExtensions } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useObjectRef } from "react-aria";
+import { defaultLightTheme } from "@/components/CodeEditor/themes/defaultEditorTheme";
+import { useCodeEditorExtensions } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
+import { CopyButton } from "@/components/CopyButton";
+import React from "react";
 
 export interface CodeEditorProps
-  extends ReactCodeMirrorProps, FlowComponentProps {
-  onChange?: (value: string) => void;
+  extends Omit<ReactCodeMirrorProps, "theme" | "lang">, FlowComponentProps {
   defaultValue?: string;
   isReadOnly?: boolean;
   isInvalid?: boolean;
@@ -37,8 +39,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     extensions,
     isReadOnly,
     isInvalid,
-    isRequired: _ignoredIsRequired,
+    isRequired,
     validationBehavior: _ignoredValidationBehavior,
+    value,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -66,6 +69,15 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
         <FieldErrorCaptureContext>
           <CodeMirror
             {...rest}
+            value={value}
+            basicSetup={{
+              autocompletion: false,
+              lineNumbers: false,
+              foldGutter: false,
+              highlightSelectionMatches: false,
+            }}
+            theme={defaultLightTheme}
+            aria-required={isRequired}
             aria-invalid={isInvalid}
             readOnly={isReadOnly}
             className={styles.codeMirror}
@@ -75,7 +87,14 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
               }
             }}
             extensions={enabledExtensions}
-          />
+          >
+            <CopyButton
+              className={styles.copyButton}
+              size="s"
+              variant="solid"
+              text={value}
+            />
+          </CodeMirror>
           {children}
         </FieldErrorCaptureContext>
         <FieldErrorView />

@@ -34,7 +34,7 @@ const meta: Meta<typeof Field> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        code: "asd=asd",
+        code: "foo=bar\nfoo=baz",
       },
     });
 
@@ -43,9 +43,9 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
-          <Field name="code" rules={{ required: "Please enter code" }}>
-            <CodeEditor language="dotEnv" theme={"light"}>
-              <Label>Code</Label>
+          <Field name="code">
+            <CodeEditor language="dotEnv">
+              <Label>DotEnv</Label>
             </CodeEditor>
           </Field>
 

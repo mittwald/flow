@@ -10,20 +10,10 @@ import { linter } from "@codemirror/lint";
 import { styleTags, tags as t } from "@lezer/highlight";
 import parser from "./dotEnv.grammar";
 import type { LanguageContainer } from "@/components/CodeEditor/languages";
-import ReactDOM from "react-dom/client";
-import React from "react";
-import { Heading } from "@/components/Heading";
-import { Content } from "@/components/Content";
-import Button from "@/components/Button";
-import Alert from "@/components/Alert";
-import { Action } from "@/components/Action";
-import { Text } from "@/components/Text";
 
 const definedStyle = HighlightStyle.define([
-  { tag: t.variableName, color: "#0086b3", fontWeight: "bold" },
-  { tag: t.operator, color: "#333" },
-  { tag: t.string, color: "#50a14f" },
-  { tag: t.lineComment, color: "#999", fontStyle: "italic" },
+  { tag: t.variableName, fontWeight: "bold" },
+  { tag: t.lineComment, fontStyle: "italic" },
 ]);
 
 const envHighlighting = styleTags({
@@ -73,38 +63,6 @@ const dotEnvLanguage: LanguageContainer = [
                 from,
                 to: from + identifier.length,
                 severity: "error",
-                renderMessage: (view) => {
-                  const container = document.createElement("div");
-                  const root = ReactDOM.createRoot(container, {
-                    identifierPrefix: "codeEditor",
-                  });
-
-                  root.render(
-                    <Alert status={"danger"}>
-                      <Heading>Duplicate key error</Heading>
-                      <Content>
-                        <Text>
-                          Found the key "{identifier}" multiple times. Must be
-                          unique.
-                        </Text>
-                        <Action
-                          onAction={() =>
-                            view.dispatch({
-                              changes: {
-                                from,
-                                to,
-                                empty: true,
-                              },
-                            })
-                          }
-                        >
-                          <Button>Remove</Button>
-                        </Action>
-                      </Content>
-                    </Alert>,
-                  );
-                  return container;
-                },
                 message: `Duplicate key "${identifier}" found.`,
               });
             }
@@ -115,39 +73,8 @@ const dotEnvLanguage: LanguageContainer = [
                 from,
                 to,
                 severity: "warning",
-                renderMessage: (view) => {
-                  const container = document.createElement("div");
-                  const root = ReactDOM.createRoot(container, {
-                    identifierPrefix: "codeEditor",
-                  });
-
-                  root.render(
-                    <Alert status={"warning"}>
-                      <Heading>Syntax error</Heading>
-                      <Content>
-                        <Text>
-                          Variable names are usually uppercase (e.g.
-                          DATABASE_URL)
-                        </Text>
-                        <Action
-                          onAction={() =>
-                            view.dispatch({
-                              changes: {
-                                from,
-                                to,
-                                insert: identifier.toUpperCase(),
-                              },
-                            })
-                          }
-                        >
-                          <Button>Fix</Button>
-                        </Action>
-                      </Content>
-                    </Alert>,
-                  );
-                  return container;
-                },
-                message: "",
+                message:
+                  "Variable names are usually uppercase (e.g. DATABASE_URL)",
               });
             }
           }
