@@ -39,13 +39,13 @@ const configVariants = [
     source: "src/**/!(*.light).yml",
     destination: "colors-dark-system",
     filter: (token) => token.path[0] === "color",
-    cssSelector: `:not(:root[${htmlAttribute}]), :root[${htmlAttribute}='system']`,
+    cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.dark).yml",
     destination: "colors-light-system",
     filter: (token) => token.path[0] === "color",
-    cssSelector: `:not(:root[${htmlAttribute}]), :root[${htmlAttribute}='system']`,
+    cssSelector: `:root:not([${htmlAttribute}]), :root[${htmlAttribute}='system']`,
   },
   {
     source: "src/**/!(*.light).yml",
