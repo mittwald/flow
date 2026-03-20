@@ -24,16 +24,13 @@ export const ThemeSwitcherButton = () => {
 
   const ariaLabel =
     theme === "light"
-      ? "Benutze hellen Farbmodus"
+      ? "Zum dunklen Farbmodus wechseln, heller Farbmodus aktiv"
       : theme === "dark"
-        ? "Benutze dunklen Farbmodus"
-        : "Benutze System-Farbmodus";
+        ? "Zum System-Farbmodus wechseln, dunkler Farbmodus aktiv"
+        : "Zum hellen Farbmodus wechseln, System-Farbmodus aktiv";
 
   return (
-    <Button
-      onPress={toggleTheme}
-      aria-label={`${ariaLabel} (drücken um zu wechseln)`}
-    >
+    <Button onPress={toggleTheme} aria-label={ariaLabel}>
       <Icon>{icon}</Icon>
     </Button>
   );
