@@ -20,7 +20,7 @@
 
   &.lightBackground,
   &.lightBackground.mobile .preview {
-    background-color: var(--neutral--color--400);
+    background-color: var(--neutral--color--300);
   }
 
   &.mstudioBackground,

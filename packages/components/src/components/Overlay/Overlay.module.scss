@@ -1,7 +1,7 @@
 .overlay {
   background: var(--overlay--backdrop-color);
   backdrop-filter: blur(var(--blur));
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   isolation: isolate;
@@ -39,11 +39,5 @@
   .overlay {
     backdrop-filter: none;
     background-color: var(--dark--color--600);
-  }
-}
-
-@media (pointer: fine) {
-  .overlay {
-    position: fixed;
   }
 }
