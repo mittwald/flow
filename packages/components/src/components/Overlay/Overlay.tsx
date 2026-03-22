@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, Ref } from "react";
+import type { FC, Ref } from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
@@ -11,8 +11,15 @@ import type {
   OverlayOpenHandler,
   OverlayOpenStateHandler,
 } from "@/lib/controller/overlay/OverlayController";
+import {
+  Render,
+  type PropsWithRenderChildren,
+} from "@/lib/react/components/Render";
 
-export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
+export interface OverlayProps
+  extends
+    PropsWithRenderChildren<{ controller: OverlayController }>,
+    PropsWithClassName {
   ref?: Ref<HTMLDivElement>;
   /** The controller to control the overlay state. */
   controller?: OverlayController;
@@ -61,7 +68,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       className={rootClassName}
     >
       <OverlayContextProvider type="Modal" controller={controller}>
-        {children}
+        <Render renderProps={{ controller }}>{children}</Render>
       </OverlayContextProvider>
     </OverlayContentView>
   );

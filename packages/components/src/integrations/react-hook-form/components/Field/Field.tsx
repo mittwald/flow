@@ -1,7 +1,7 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
 import { dynamic, type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { type PropsWithChildren } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 import {
   type ControllerProps,
   type FieldValues,
@@ -13,6 +13,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
+import { assertNoRenderFn } from "@/lib/react/components/Render";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
@@ -80,6 +81,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     defaultValue,
     isInvalid: isFieldInvalid,
     children: dynamic((p) => {
+      assertNoRenderFn(p.children);
       return (
         <>
           {p.children}
@@ -88,7 +90,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           </FieldErrorView>
         </>
       );
-    }),
+    }) as unknown as ReactNode,
   };
 
   const propsContext: PropsContext = {

@@ -327,3 +327,37 @@ test("Form in Modal is not auto-resetted on close when opted-out", async () => {
   await userEvent.click(openModalButton);
   expect(isDirtyText).toBeInTheDocument();
 });
+
+test("Modal supports function as children", async () => {
+  const dom = await render(
+    <Modal isOpen>
+      {() => (
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+        </Content>
+      )}
+    </Modal>,
+  );
+
+  const modalText = dom.getByTestId("modal-text");
+  expect(modalText).toBeInTheDocument();
+});
+
+test("Modal can be closed with render props", async () => {
+  const dom = await render(
+    <Modal isDefaultOpen>
+      {({ controller }) => (
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Button onPress={() => controller.close()}>Close</Button>
+        </Content>
+      )}
+    </Modal>,
+  );
+
+  const modalText = dom.getByTestId("modal-text");
+  const closeButton = dom.getByRole("button", { name: "Close", exact: true });
+  expect(modalText).toBeInTheDocument();
+  await userEvent.click(closeButton);
+  expect(modalText).not.toBeInTheDocument();
+});
