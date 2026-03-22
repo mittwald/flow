@@ -1,9 +1,14 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { dynamic, type PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { type PropsWithChildren } from "react";
 import {
   type ControllerProps,
+  type ControllerRenderProps,
+  type FieldPath,
   type FieldValues,
   useController,
   type UseFormReturn,
@@ -13,11 +18,29 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
+import { FieldPropsContext } from "@/integrations/react-hook-form/components/Field/hooks/useFieldProps";
 
-export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
+export interface FieldProps<T extends FieldValues, TName extends FieldPath<T>>
+  extends Omit<ControllerProps<T, TName>, "render">, PropsWithChildren {}
 
-export function Field<T extends FieldValues>(props: FieldProps<T>) {
+export interface ForwardedFieldProps<
+  T extends FieldValues = FieldValues,
+  TName extends FieldPath<T> = FieldPath<T>,
+> extends Omit<ControllerRenderProps<T, TName>, "name"> {
+  form?: string;
+  name: string;
+  isRequired?: boolean;
+  defaultValue?: ControllerRenderProps<T, TName>["value"];
+  isReadOnly?: boolean;
+  isInvalid?: boolean;
+  validationBehavior: "aria";
+  children?: ReturnType<typeof dynamic> | undefined;
+}
+
+export function Field<
+  T extends FieldValues,
+  TName extends FieldPath<T> = FieldPath<T>,
+>(props: FieldProps<T, TName>) {
   const { children, name, defaultValue, ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -89,7 +112,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         </>
       );
     }),
-  };
+  } satisfies ForwardedFieldProps<T, TName>;
 
   const propsContext: PropsContext = {
     Autocomplete: {
@@ -146,7 +169,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         formContext.isReadOnly,
       ]}
     >
-      {children}
+      <FieldPropsContext value={fieldProps}>{children}</FieldPropsContext>
     </PropsContextProvider>
   );
 }
