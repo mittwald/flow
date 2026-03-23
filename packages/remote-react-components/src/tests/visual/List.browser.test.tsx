@@ -2,6 +2,11 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
+import {
+  type CalendarDate,
+  getLocalTimeZone,
+  today,
+} from "@internationalized/date";
 
 test.each(testEnvironments)(
   "List items (%s)",
@@ -412,5 +417,81 @@ test.each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List edge cases - tile view");
+  },
+);
+
+test.each(testEnvironments)(
+  "List date range filter (%s)",
+  async ({ testScreenshot, render, components: { typedList } }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        date: CalendarDate;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="table"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "RG100000",
+                date: today(getLocalTimeZone()),
+              },
+              {
+                id: "RG100001",
+                date: today(getLocalTimeZone()).subtract({
+                  days: 7,
+                }),
+              },
+              {
+                id: "RG100002",
+                date: today(getLocalTimeZone()).subtract({
+                  days: 14,
+                }),
+              },
+            ]}
+          />
+          <List.Filter
+            property="date"
+            mode="dateRange"
+            name="Date"
+            dateRangeOptions={{
+              maxValue: today(getLocalTimeZone()),
+            }}
+          />
+          <List.Table>
+            <List.TableHeader>
+              <List.TableColumn>Rechnung</List.TableColumn>
+              <List.TableColumn>Datum</List.TableColumn>
+            </List.TableHeader>
+
+            <List.TableBody>
+              <List.TableRow>
+                <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
+                <List.TableCell>
+                  {(invoice) =>
+                    `${invoice.date.day}.${invoice.date.month}.${invoice.date.year}`
+                  }
+                </List.TableCell>
+              </List.TableRow>
+            </List.TableBody>
+          </List.Table>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List date range filter - default");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filtered");
   },
 );
