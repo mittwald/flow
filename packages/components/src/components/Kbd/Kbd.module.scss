@@ -1,6 +1,9 @@
-:not(.kbd) > .kbd {
+.kbd {
+  font-family: Inter, sans-serif;
   font-size: var(--font-size-text--s);
+}
 
+:not(.kbd) > .kbd {
   &.soft {
     display: inline-block;
     line-height: var(--font-size-text--m);

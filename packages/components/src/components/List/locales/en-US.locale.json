@@ -3,6 +3,7 @@
   "list.filters": "Filters",
   "list.filters.all": "All filters",
   "list.filters.clear": "Clear filters",
+  "list.filters.clearSelection": "Clear selection",
   "list.filters.reset": "Reset filters",
   "list.filters.store": "Store filters",
   "list.noResult.heading": "No search results found",
