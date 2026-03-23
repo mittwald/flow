@@ -1,5 +1,9 @@
 .footer.footer {
-  background-color: var(--neutral--color--300);
+  background-color: color-mix(
+    in srgb,
+    var(--neutral--color--300) 80%,
+    transparent
+  );
   margin-top: var(--size-px--l);
 
   .footerContent {

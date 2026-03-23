@@ -31,7 +31,7 @@
     align-items: center;
     width: var(--switch--handle-size);
     height: var(--switch--handle-size);
-    background-color: var(--switch--handle-background-color--default);
+    background-color: var(--switch--handle-background-color);
     border-radius: var(--corner-radius--round);
     transition-property: transform;
     transition-duration: var(--transition--duration--default);
@@ -68,8 +68,7 @@
     }
 
     .handle {
-      color: var(--switch--handle-color--disabled);
-      background-color: var(--switch--handle-background-color--disabled);
+      color: var(--switch--handle-content-color--disabled);
     }
   }
 }

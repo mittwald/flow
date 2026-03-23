@@ -9,6 +9,21 @@
   }
 }
 
+.background {
+  background-position: -10vw 10vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  inset: 0;
+}
+
 .wrapper {
   isolation: isolate;
   min-height: 100dvh;
