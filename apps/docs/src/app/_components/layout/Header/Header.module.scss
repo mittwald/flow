@@ -2,16 +2,12 @@
   backdrop-filter: blur(5px);
   background-color: color-mix(
     in srgb,
-    var(--neutral-color--200) 40%,
+    var(--neutral--color--200) 40%,
     transparent
   );
   position: sticky;
   top: 0;
   z-index: 1;
-
-  &.scrolled {
-    box-shadow: var(--shadow--content);
-  }
 }
 
 .headerNavigation {

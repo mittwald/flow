@@ -1,11 +1,10 @@
 "use client";
-import { type FC, useEffect, useState } from "react";
+import { type FC } from "react";
 import styles from "./Header.module.scss";
 import { Link } from "@mittwald/flow-react-components";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation";
-import clsx from "clsx";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
 
 interface Props {
@@ -15,23 +14,8 @@ interface Props {
 const Header: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
 
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header className={clsx(styles.header, hasScrolled && styles.scrolled)}>
+    <header className={styles.header}>
       <div className={styles.headerContent}>
         <Link href="/" aria-label="Flow">
           <FlowLogo />
