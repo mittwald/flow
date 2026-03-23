@@ -11,6 +11,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "./DateRangePicker.module.scss";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
@@ -55,7 +56,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
           isDialogContent
           controller={popoverController}
         >
-          <RangeCalendar />
+          <RangeCalendar className={styles.calendar} />
         </Popover>
       </FieldErrorCaptureContext>
       <FieldErrorView />

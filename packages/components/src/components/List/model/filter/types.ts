@@ -4,6 +4,7 @@ import type {
   PropertyValueRenderMethod,
 } from "@/components/List/model/types";
 import type { ItemType } from "@/lib/types/array";
+import type { RangeCalendarProps } from "@/components/Calendar";
 
 export type FilterMode = "all" | "some" | "one" | "dateRange";
 
@@ -21,4 +22,5 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   name?: string;
   defaultSelected?: readonly NonNullable<TMatcherValue>[];
   priority?: "primary" | "secondary";
+  dateRangeOptions?: RangeCalendarProps;
 }

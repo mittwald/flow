@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import ButtonView from "@/views/ButtonView";
-import styles from "@/components/List/components/Header/Header.module.css";
+import headerStyles from "@/components/List/components/Header/Header.module.css";
 import TextView from "@/views/TextView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
@@ -9,6 +9,8 @@ import locales from "../../../../locales/*.locale.json";
 import { RangeCalendar } from "@/components/Calendar";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import type { DateRange } from "react-aria-components";
+import styles from "./FilterContextMenus.module.scss";
+import { useOverlayController } from "@/lib/controller";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -21,10 +23,12 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
+  const controller = useOverlayController("Popover");
+
   return (
-    <PopoverTrigger>
+    <PopoverTrigger controller={controller}>
       <ButtonView
-        className={styles.hideOnMobile}
+        className={headerStyles.hideOnMobile}
         variant="outline"
         color="secondary"
       >
@@ -37,10 +41,13 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
         aria-label={stringFormatter.format("list.dateRange")}
       >
         <RangeCalendar
+          {...filter.dateRangeOptions}
           value={filter.getValue() as DateRange}
           onChange={(range) => {
             filter.setDateRangeValue(range);
+            controller.close();
           }}
+          className={styles.calendar}
         />
       </Popover>
     </PopoverTrigger>

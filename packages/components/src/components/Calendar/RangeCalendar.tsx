@@ -5,14 +5,15 @@ import styles from "@/components/Calendar/Calendar.module.scss";
 import CalendarHeader from "./components/CalendarHeader";
 import clsx from "clsx";
 
-type Props = Aria.RangeCalendarProps<Aria.DateValue>;
+export type RangeCalendarProps = Aria.RangeCalendarProps<Aria.DateValue>;
 
-export const RangeCalendar: FC<Props> = (props) => {
+export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
+  const { className } = props;
+
+  const rootClassName = clsx(styles.calendar, styles.range, className);
+
   return (
-    <Aria.RangeCalendar
-      {...props}
-      className={clsx(styles.calendar, styles.range)}
-    >
+    <Aria.RangeCalendar {...props} className={rootClassName}>
       <CalendarHeader />
       <Aria.CalendarGrid>
         {(date) => <Aria.CalendarCell date={date} />}

@@ -32,6 +32,7 @@ import { TableCell } from "@/components/List/setupComponents/TableCell";
 import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
 import { DateTime } from "luxon";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -434,8 +435,12 @@ export const WithDateRangeFilter: Story = {
             { id: "RG100002", date: DateTime.now().minus({ day: 14 }).toISO() },
           ]}
         />
-        <List.Filter property="date" name="Date" mode="dateRange" />
-        <List.Filter property="id" name="ID" />
+        <List.Filter
+          property="date"
+          name="Date"
+          mode="dateRange"
+          dateRangeOptions={{ maxValue: today(getLocalTimeZone()) }}
+        />
         <List.Item>
           {(invoice) => (
             <ListItemView>

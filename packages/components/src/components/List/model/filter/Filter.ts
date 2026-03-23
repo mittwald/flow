@@ -23,6 +23,7 @@ import { toArray } from "@/lib/array/toArray";
 import type { RangeValue } from "react-aria-components";
 import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
 import type { DateValue } from "@internationalized/date";
+import type { RangeCalendarProps } from "@/components/Calendar";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -48,20 +49,18 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private onFilterUpdateCallbacks = new Set<() => unknown>();
   private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
   public readonly priority: "primary" | "secondary";
+  public readonly dateRangeOptions?: RangeCalendarProps;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
     this.property = shape.property;
     this.mode = shape.mode ?? "some";
-    this._values =
-      shape.mode === "dateRange"
-        ? undefined
-        : shape.values?.map((v) => FilterValue.create(this, v));
+    this._values = shape.values?.map((v) => FilterValue.create(this, v));
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
     this.priority = shape.priority ?? "primary";
-
+    this.dateRangeOptions = shape.dateRangeOptions;
     this.defaultSelectedValues = shape.defaultSelected;
   }
 
