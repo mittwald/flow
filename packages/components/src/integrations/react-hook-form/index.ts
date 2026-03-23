@@ -12,6 +12,7 @@ export * from "./components/FormRootError";
 export {
   useFormContext,
   useOptionalFormContext,
+  useFormSubmitAction,
 } from "./components/FormContextProvider";
 export * from "./components/FormAction";
 export { flags } from "./flags";
