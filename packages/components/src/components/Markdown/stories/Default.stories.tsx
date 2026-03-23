@@ -14,8 +14,8 @@ const meta: Meta<typeof Markdown> = {
   parameters: {
     controls: { exclude: ["style", "ref"] },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Markdown {...props}>
         {"# Heading 1\n" +
           "## Heading 2\n" +

@@ -28,8 +28,8 @@ const meta: Meta<typeof HeaderNavigation> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <HeaderNavigation aria-label="Header navigation" {...props}>
         <Link href="#">Getting startet</Link>
         <Link href="#" aria-current="page">

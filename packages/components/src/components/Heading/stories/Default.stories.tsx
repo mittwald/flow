@@ -25,8 +25,8 @@ const meta: Meta<typeof Heading> = {
     },
   },
   args: { level: 2, color: "default" },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Heading {...props}>I am a H{props.level} Heading</Heading>
     </StoryBackground>
   ),
@@ -38,8 +38,8 @@ type Story = StoryObj<typeof Heading>;
 export const Default: Story = {};
 
 export const AdditionalContent: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Heading {...props}>
         <IconStar />
         {dummyText.medium}

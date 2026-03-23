@@ -12,8 +12,8 @@ const meta: Meta<typeof InlineCode> = {
   argTypes: {
     color: { control: "inline-radio", options: ["default", "dark", "light"] },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <InlineCode {...props}>{dummyText.short}</InlineCode>
       <br />
       <Text color={props.color}>

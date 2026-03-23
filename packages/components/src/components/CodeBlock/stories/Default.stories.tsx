@@ -3,7 +3,6 @@ import React from "react";
 import { CodeBlock } from "@/components/CodeBlock";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Color } from "@/components/Color";
-import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
@@ -53,15 +52,13 @@ type Story = StoryObj<typeof CodeBlock>;
 export const Default: Story = {};
 
 export const WithChildren: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
-      <CodeBlock>
-        {dummyText.medium}
-        <br />
-        <Color color="danger">{dummyText.medium}</Color>
-        <br />
-        {dummyText.medium}
-      </CodeBlock>
-    </StoryBackground>
+  render: () => (
+    <CodeBlock>
+      {dummyText.medium}
+      <br />
+      <Color color="danger">{dummyText.medium}</Color>
+      <br />
+      {dummyText.medium}
+    </CodeBlock>
   ),
 };

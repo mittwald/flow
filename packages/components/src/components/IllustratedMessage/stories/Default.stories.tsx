@@ -14,8 +14,8 @@ import { StoryBackground } from "@/lib/dev/StoryBackground";
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
   component: IllustratedMessage,
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <IllustratedMessage {...props}>
         <IconStar />
         <Heading>{dummyText.short}</Heading>

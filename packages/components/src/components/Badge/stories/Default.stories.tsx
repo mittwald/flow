@@ -24,8 +24,8 @@ const meta: Meta<typeof Badge> = {
       options: badgeColors,
     },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Badge {...props}>Value</Badge>
     </StoryBackground>
   ),

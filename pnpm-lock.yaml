@@ -545,6 +545,9 @@ importers:
       '@storybook/addon-links':
         specifier: ^10.2.17
         version: 10.2.17(react@19.2.4)(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@storybook/addon-themes':
+        specifier: ^10.2.19
+        version: 10.2.19(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       '@storybook/react':
         specifier: ^10.2.17
         version: 10.2.17(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)
@@ -587,6 +590,9 @@ importers:
       next:
         specifier: ~16.1.6
         version: 16.1.6(@babel/core@7.29.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.97.3)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       nx:
         specifier: ^22.5.4
         version: 22.5.4
@@ -4237,6 +4243,11 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  '@storybook/addon-themes@10.2.19':
+    resolution: {integrity: sha512-TzcX/aqzZrQUypDATywLOenVoa1CTXBthODoY9odLsLLrxVaoeqsAdulkmOjeppKR1FigcERyIjIWPB8W48dag==}
+    peerDependencies:
+      storybook: ^10.2.19
 
   '@storybook/builder-vite@10.2.17':
     resolution: {integrity: sha512-m/OBveTLm5ds/tUgHmmbKzgSi/oeCpQwm5rZa49vP2BpAd41Q7ER6TzkOoISzPoNNMAcbVmVc5vn7k6hdbPSHw==}
@@ -14243,6 +14254,11 @@ snapshots:
     optionalDependencies:
       react: 19.2.4
 
+  '@storybook/addon-themes@10.2.19(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
+    dependencies:
+      storybook: 10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      ts-dedent: 2.2.0
+
   '@storybook/builder-vite@10.2.17(esbuild@0.27.3)(rollup@4.57.1)(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vite@7.3.1(@types/node@24.10.1)(less@4.5.1)(lightningcss@1.30.2)(sass@1.97.3)(stylus@0.62.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(webpack@5.105.4(esbuild@0.27.3))':
     dependencies:
       '@storybook/csf-plugin': 10.2.17(esbuild@0.27.3)(rollup@4.57.1)(storybook@10.2.17(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vite@7.3.1(@types/node@24.10.1)(less@4.5.1)(lightningcss@1.30.2)(sass@1.97.3)(stylus@0.62.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(webpack@5.105.4(esbuild@0.27.3))
@@ -15024,6 +15040,10 @@ snapshots:
   acorn-jsx@5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
     dependencies:
       acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+
+  acorn-jsx@5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+    dependencies:
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
 
   acorn-typescript@1.4.13(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
     dependencies:
@@ -16288,8 +16308,8 @@ snapshots:
 
   espree@10.4.0:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn-jsx: 5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       eslint-visitor-keys: 4.2.1
 
   esprima@4.0.1: {}
@@ -17239,7 +17259,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.12.0
+      '@types/node': 24.10.1
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -20132,7 +20152,7 @@ snapshots:
       supports-hyperlinks: 4.4.0
       svg-tags: 1.0.0
       table: 6.9.0
-      write-file-atomic: 7.0.0
+      write-file-atomic: 7.0.1
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -20239,7 +20259,7 @@ snapshots:
   terser@5.46.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       commander: 2.20.3
       source-map-support: 0.5.21
 

@@ -6,8 +6,8 @@ import { StoryBackground } from "@/lib/dev/StoryBackground";
 const meta: Meta<typeof LoadingSpinner> = {
   title: "Status/LoadingSpinner",
   component: LoadingSpinner,
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <LoadingSpinner {...props} />
     </StoryBackground>
   ),

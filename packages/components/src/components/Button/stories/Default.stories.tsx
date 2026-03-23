@@ -58,8 +58,8 @@ const meta: Meta<typeof Button> = {
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Button {...props}>Button</Button>
     </StoryBackground>
   ),
@@ -71,8 +71,8 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {};
 
 export const WithIcon: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Button {...props} aria-label="Add to favorites">
         <IconPlus />
       </Button>
@@ -81,8 +81,8 @@ export const WithIcon: Story = {
 };
 
 export const WithTextAndIcon: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Button {...props}>
         <Text>Add email address</Text>
         <IconChevronDown />
