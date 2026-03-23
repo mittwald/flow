@@ -1,6 +1,6 @@
 heading:
   color:
-    value: "{primary.color.1000}"
+    value: "{neutral.color.1100}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:
@@ -8,7 +8,7 @@ heading:
   color-danger:
     value: "{danger.color.900}"
   color-unavailable:
-    value: "{neutral.color.900}"
+    value: "{neutral.color.700}"
   icon-to-text-spacing:
     value: "{size-rem.s}"
   font-weight:

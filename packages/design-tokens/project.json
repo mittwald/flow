@@ -1,5 +1,12 @@
 {
   "name": "tokens",
   "projectType": "library",
-  "sourceRoot": "packages/design-tokens/src"
+  "sourceRoot": "packages/design-tokens/src",
+  "targets": {
+    "build": {
+      "cache": true,
+      "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/build-tokens.js"],
+      "outputs": ["{projectRoot}/dist/**/*"]
+    }
+  }
 }

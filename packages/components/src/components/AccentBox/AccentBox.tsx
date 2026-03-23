@@ -9,7 +9,18 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+
+const accentBoxColors = ["blue", "green", "neutral"] as const;
+
+type AccentBoxColor = (typeof accentBoxColors)[number];
+type AccentBoxWithCustomColor = AccentBoxColor | (string & {});
+
+function isAccentBoxColor(something: unknown): something is AccentBoxColor {
+  const anyAccentBoxColors = accentBoxColors as readonly string[];
+  return (
+    typeof something === "string" && anyAccentBoxColors.includes(something)
+  );
+}
 
 export interface AccentBoxProps
   extends
@@ -17,37 +28,38 @@ export interface AccentBoxProps
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {
-  color?: "blue" | "green" | "gradient" | "neutral";
+  /** The background color of the accent box. @default "neutral" */
+  color?: AccentBoxWithCustomColor;
 }
 
 /** @flr-generate all */
 export const AccentBox = flowComponent(
   "AccentBox",
   (props) => {
-    const { color = "blue", children, elementType = "div", className } = props;
+    const {
+      color = "neutral",
+      children,
+      elementType = "div",
+      className,
+    } = props;
 
-    const rootClassName = clsx(styles.accentBox, className, styles[color]);
+    const accentBoxColor = isAccentBoxColor(color);
+
+    const rootClassName = clsx(
+      styles.accentBox,
+      className,
+      accentBoxColor && styles[color],
+    );
 
     const Element = elementType;
 
-    const contentColor = color === "green" ? "dark" : undefined;
-
-    const propsContext: PropsContext = {
-      Link: {
-        color: contentColor,
-      },
-      Text: {
-        color: contentColor,
-      },
-      Heading: {
-        color: contentColor,
-      },
-    };
-
     return (
-      <PropsContextProvider props={propsContext}>
-        <Element className={rootClassName}>{children}</Element>
-      </PropsContextProvider>
+      <Element
+        className={rootClassName}
+        style={{ backgroundColor: accentBoxColor ? undefined : color }}
+      >
+        {children}
+      </Element>
     );
   },
   { type: "layout" },

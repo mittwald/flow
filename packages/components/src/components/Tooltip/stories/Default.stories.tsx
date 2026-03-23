@@ -11,7 +11,7 @@ const meta: Meta<typeof Tooltip> = {
     defaultOpen: true,
   },
   parameters: {
-    controls: { exclude: ["defaultOpen"] },
+    controls: { disable: true },
   },
   render: (props) => (
     <TooltipTrigger {...props}>

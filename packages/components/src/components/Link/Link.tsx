@@ -25,8 +25,8 @@ export interface LinkProps
   inline?: boolean;
   /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
-  /** The color of the link. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  /** The color of the link. */
+  color?: "default" | "dark" | "light";
   "aria-current"?: string;
   slot?: string;
   /** The whiteSpace css value of the element. */
@@ -44,7 +44,7 @@ export const Link = flowComponent("Link", (props) => {
     className,
     inline,
     linkComponent: linkComponentFromProps,
-    color = "primary",
+    color,
     unstyled = false,
     "aria-current": ariaCurrent,
     ref,
@@ -67,7 +67,7 @@ export const Link = flowComponent("Link", (props) => {
     : clsx(
         styles.link,
         inline && styles.inline,
-        styles[color as keyof typeof styles],
+        (color === "light" || color === "dark") && styles[color],
         size === "s" && styles["size-s"],
         className,
       );

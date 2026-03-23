@@ -19,7 +19,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface ComboBoxProps
   extends
-    Omit<Aria.ComboBoxProps<never>, "children">,
+    Omit<Aria.ComboBoxProps<never>, "children" | "onChange">,
     Pick<Aria.InputProps, "placeholder">,
     Pick<OptionsProps, "renderEmptyState">,
     PropsWithChildren,

@@ -1,0 +1,37 @@
+.footer.footer {
+  background-color: var(--neutral--color--300);
+  margin-top: var(--size-px--l);
+
+  .footerContent {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding-block: var(--size-px--xl);
+    padding-inline: var(--size-px--xxl);
+  }
+
+  .feedback {
+    max-width: 900px;
+  }
+
+  .legal,
+  .resources {
+    flex: 1;
+  }
+
+  .mittwaldLogo {
+    width: 240px !important;
+    height: 50px !important;
+  }
+}
+
+@media (max-width: 1400px) {
+  .footer.footer {
+    .feedbackImage {
+      display: none;
+    }
+
+    .footerContent {
+      padding-inline: var(--size-px--xl);
+    }
+  }
+}

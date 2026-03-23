@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
+import { useDesignTokens } from "../../../../lib/theming";
 
 export type YAxisProps = Pick<
   Recharts.YAxisProps,
@@ -22,17 +22,19 @@ export type YAxisProps = Pick<
 export const YAxis: FC<YAxisProps> = (props) => {
   const { domain, ...rest } = props;
 
+  const designTokens = useDesignTokens();
+
   return (
     <Recharts.YAxis
       {...rest}
       allowDataOverflow
       domain={domain}
-      fontSize={tokens.axis["font-size"].value}
+      fontSize={designTokens.axis["font-size"].value}
       tick={{
-        fill: tokens.axis["text-color"].value,
+        fill: designTokens.text.color.default.value,
       }}
-      tickMargin={parseInt(tokens.axis.spacing.value)}
-      tickSize={parseInt(tokens.axis["tick-size"].value)}
+      tickMargin={parseInt(designTokens.axis.spacing.value)}
+      tickSize={parseInt(designTokens.axis["tick-size"].value)}
     />
   );
 };

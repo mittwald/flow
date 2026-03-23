@@ -59,7 +59,6 @@ export const Slider = flowComponent("Slider", (props) => {
   const propsContext: PropsContext = {
     ...fieldPropsContext,
     Label: {
-      unstyled: true,
       tunnelId: "label",
       ...fieldPropsContext.Label,
     },
@@ -99,6 +98,7 @@ export const Slider = flowComponent("Slider", (props) => {
                   }}
                 >
                   <Button
+                    size="s"
                     onPress={() => state.decrementThumb(0)}
                     aria-label={stringFormatter.format("slider.decrement")}
                     className={styles.decrement}
@@ -107,6 +107,7 @@ export const Slider = flowComponent("Slider", (props) => {
                   </Button>
 
                   <Button
+                    size="s"
                     onPress={() => state.incrementThumb(0)}
                     aria-label={stringFormatter.format("slider.increment")}
                     className={styles.increment}

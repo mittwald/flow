@@ -21,7 +21,7 @@ export interface TextProps
   /* Whether the elements width should match the width it would have with mold text. */
   emulateBoldWidth?: boolean;
   /* The color of the text. */
-  color?: "light" | "dark";
+  color?: "default" | "light" | "dark";
   /* The alignment of the text. @default "start" */
   align?: "start" | "end" | "center";
   /* The text-wrap property of the text. @default undefined */
@@ -51,7 +51,7 @@ export const Text = flowComponent("Text", (props) => {
 
   const rootClassName = clsx(
     styles.text,
-    color && styles[color],
+    (color === "light" || color === "dark") && styles[color],
     align && styles[`align-${align}`],
     wrap && styles[`wrap-${wrap}`],
     className,

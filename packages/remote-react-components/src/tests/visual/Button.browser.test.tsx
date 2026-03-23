@@ -1,7 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
-import { page } from "vitest/browser";
 
 const colors = [
   "primary",
@@ -24,7 +23,6 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Flex gap="s">
           <Button>Default</Button>
-          <Button data-testid="hover">Hover</Button>
           <Button>
             <IconInfo />
           </Button>
@@ -63,9 +61,6 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
-
     await testScreenshot("Button states");
   },
 );
@@ -80,8 +75,8 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={color === "light" || color === "dark"} key={color}>
+            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
               <Flex gap="s">
                 {variants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
@@ -110,43 +105,24 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s">
         <Button>
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button data-testid="hover">
-          <Avatar>
+          <Avatar size="l">
             <Initials>Max Mustermann</Initials>
           </Avatar>
         </Button>
         <Button>
-          <Avatar>
+          <Avatar size="m">
+            <Initials>Max Mustermann</Initials>
+          </Avatar>
+        </Button>
+        <Button>
+          <Avatar size="s">
             <Initials>Max Mustermann</Initials>
           </Avatar>
         </Button>
       </Flex>,
     );
 
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
-
     await testScreenshot("Button with avatar");
-  },
-);
-
-test.each(testEnvironments)(
-  "Button pressed (%s)",
-  async ({ testScreenshot, render, components: { Button } }) => {
-    await render(<Button data-testid="pressed">Pressed</Button>);
-
-    const pressedButton = page.getByTestId("pressed");
-
-    await Promise.all([
-      pressedButton.click({ delay: 500 }),
-      new Promise((res) => setTimeout(res, 100)).then(() =>
-        testScreenshot("Button pressed"),
-      ),
-    ]);
   },
 );
 

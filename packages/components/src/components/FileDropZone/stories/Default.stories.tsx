@@ -18,8 +18,9 @@ const meta: Meta<typeof FileDropZone> = {
   title: "Upload/FileDropZone",
   component: FileDropZone,
   parameters: {
-    controls: { exclude: ["className", "controller", "onChange"] },
+    controls: { exclude: ["className", "controller", "onChange", "multiple"] },
   },
+  args: { isDisabled: false, isReadOnly: false },
   render: (props) => {
     const [files, setFiles] = useState<FileList | null>(null);
 
@@ -49,18 +50,13 @@ const submitAction = action("submit");
 
 export const Default: Story = {};
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
 export const WithAcceptedTypes: Story = {
-  args: { accept: "image/png" },
   render: (props) => {
     const [files, setFiles] = useState<FileList | null>(null);
 
     return (
       <Section>
-        <FileDropZone {...props} onChange={setFiles}>
+        <FileDropZone accept="image/png" {...props} onChange={setFiles}>
           <IconImage />
           <Heading>Drop image</Heading>
           <Text>Only image/png images are allowed.</Text>

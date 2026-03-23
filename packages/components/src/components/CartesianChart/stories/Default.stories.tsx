@@ -62,7 +62,9 @@ const meta: Meta<typeof CartesianChart> = {
   title: "Data Visualisation/CartesianChart",
   component: CartesianChart,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: {
+      disable: true,
+    },
   },
   args: {
     data: chartData,

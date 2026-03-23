@@ -27,6 +27,7 @@ export class RemoteTableFooterRowElement extends FlowRemoteElement<RemoteTableFo
       ping: {},
       referrerPolicy: {},
       rel: {},
+      render: {},
       routerOptions: {},
       target: {},
       textValue: {},

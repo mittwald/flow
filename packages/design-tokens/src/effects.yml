@@ -1,0 +1,15 @@
+shadow:
+  content:
+    value: "rgba(0, 0, 0, 0.1) 0 {size-px.xxs} {size-px.xs}"
+  overlay:
+    value: "rgba(0, 0, 0, 0.14) 0 {size-px.s} {size-px.m}"
+blur:
+  value: "3px"
+transition:
+  duration:
+    fast:
+      value: 200ms
+    default:
+      value: 300ms
+    slow:
+      value: 400ms

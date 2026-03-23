@@ -11,15 +11,19 @@ import { Text } from "@/components/Text";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>, PropsWithClassName {
-  /** The color of the header navigation. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  /** The color of the header navigation. */
+  color?: "default" | "dark" | "light";
 }
 
 /** @flr-generate all */
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, color = "primary", ...rest } = props;
+  const { children, className, color, ...rest } = props;
 
-  const rootClassName = clsx(styles.headerNavigation, styles[color], className);
+  const rootClassName = clsx(
+    styles.headerNavigation,
+    (color === "light" || color === "dark") && styles[color],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {
@@ -32,7 +36,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      color,
+      color: color === "light" || color === "dark" ? color : "secondary",
       variant: "plain",
       wrapWith: <li />,
     },

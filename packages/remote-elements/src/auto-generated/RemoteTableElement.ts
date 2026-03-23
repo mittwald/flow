@@ -26,6 +26,7 @@ export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProp
       hidden: {},
       inert: {},
       lang: {},
+      render: {},
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},

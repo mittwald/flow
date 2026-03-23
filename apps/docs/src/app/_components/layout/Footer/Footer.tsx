@@ -2,15 +2,14 @@
 import {
   Flex,
   Heading,
-  Image,
+  IconFeedback,
   Link,
   Text,
 } from "@mittwald/flow-react-components";
 import React, { type FC } from "react";
-import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
-import styles from "./footer.module.scss";
+import styles from "./Footer.module.scss";
 import { DateTime } from "luxon";
-import feedback from "../../../../../assets/Styleguide-Footer_Feedback.svg";
+import { MittwaldLogo } from "@/app/_components/layout/Footer/MittwaldLogo";
 
 const Footer: FC = () => {
   const year = DateTime.now().year;
@@ -74,8 +73,8 @@ const Footer: FC = () => {
               </Link>
             </Flex>
           </Flex>
-          <Flex direction="column" gap="xs" className={styles.mittwaldLogo}>
-            <Image src={logoMittwald.src} alt="mittwald Logo" width={300} />
+          <Flex direction="column" gap="xs">
+            <MittwaldLogo />
             <Text whiteSpace="nowrap">
               <small>© {year} Mittwald CM Service GmbH & Co. KG</small>
             </Text>
@@ -98,12 +97,7 @@ const Footer: FC = () => {
               Feedback zu Flow geben
             </Link>
           </Flex>
-          <Image
-            src={feedback.src}
-            alt="Styleguide Feedback"
-            className={styles.feedbackImage}
-            width={200}
-          />
+          <IconFeedback size="l" className={styles.feedbackImage} />
         </Flex>
       </Flex>
     </footer>
