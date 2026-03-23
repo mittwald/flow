@@ -27,7 +27,7 @@ export default () => {
       <DomainList.Filter
         property="type"
         mode="some"
-        name="Type"
+        name="Typ"
         values={["Domain", "Subdomain"]}
         defaultSelected={["Domain"]}
       />

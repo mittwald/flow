@@ -41,7 +41,7 @@ export default () => {
       <DomainList.Filter
         property="type"
         mode="some"
-        name="Type"
+        name="Typ"
       />
       <DomainList.Sorting
         property="hostname"

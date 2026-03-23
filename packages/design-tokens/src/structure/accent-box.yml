@@ -2,13 +2,13 @@ accent-box:
   background-color-neutral:
     value: "{neutral.color.300}"
   background-color-green:
-    value: "{color.espelkamp-green.100}"
-  background-color-blue:
-    value: "{color.hosting-blue.100}"
-  icon-color-blue:
-    value: "{color.hosting-blue.200}"
-  icon-color-green:
     value: "{color.espelkamp-green.200}"
+  background-color-blue:
+    value: "{color.hosting-blue.200}"
+  icon-color-blue:
+    value: "{color.hosting-blue.300}"
+  icon-color-green:
+    value: "{color.espelkamp-green.300}"
   icon-color-neutral:
     value: "{neutral.color.400}"
   padding:

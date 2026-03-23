@@ -27,7 +27,7 @@ export default () => {
       <DomainList.Filter
         property="type"
         mode="some"
-        name="Type"
+        name="Typ"
         matcher={(filterValue, propertyValue) =>
           filterValue === "Type Domain"
             ? propertyValue === "Domain"
