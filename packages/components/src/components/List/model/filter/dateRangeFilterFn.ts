@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { CalendarDate } from "@internationalized/date";
+import { CalendarDate } from "@internationalized/date";
 import type { Row } from "@tanstack/react-table";
 
 export function dateRangeFilterFn<T>(
@@ -9,18 +9,38 @@ export function dateRangeFilterFn<T>(
 ): boolean {
   const value = row.getValue(columnId);
 
-  if (typeof value !== "string" || !range) {
+  if (!range) {
     return true;
   }
 
-  const dateValue = DateTime.fromISO(value).startOf("day");
+  let dateValue;
+
+  if (value instanceof DateTime) {
+    dateValue = value;
+  }
+
+  if (value instanceof CalendarDate) {
+    dateValue = DateTime.fromObject({
+      year: value.year,
+      month: value.month,
+      day: value.day,
+    });
+  }
+
+  if (typeof value === "string") {
+    dateValue = DateTime.fromISO(value).startOf("day");
+  }
+
+  if (!dateValue) {
+    return true;
+  }
 
   const startDate = range.start
     ? DateTime.fromObject({
         year: range.start.year,
         month: range.start.month,
         day: range.start.day,
-      }).startOf("day")
+      })
     : undefined;
 
   const endDate = range.end
@@ -28,7 +48,7 @@ export function dateRangeFilterFn<T>(
         year: range.end.year,
         month: range.end.month,
         day: range.end.day,
-      }).startOf("day")
+      })
     : undefined;
 
   if (startDate && dateValue < startDate) return false;

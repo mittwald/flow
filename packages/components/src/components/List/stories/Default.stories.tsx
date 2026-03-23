@@ -451,6 +451,23 @@ export const WithDateRangeFilter: Story = {
             </ListItemView>
           )}
         </List.Item>
+        <List.Table>
+          <List.TableHeader>
+            <List.TableColumn>Rechnung</List.TableColumn>
+            <List.TableColumn>Datum</List.TableColumn>
+          </List.TableHeader>
+
+          <List.TableBody>
+            <List.TableRow>
+              <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
+              <List.TableCell>
+                {(invoice) =>
+                  DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")
+                }
+              </List.TableCell>
+            </List.TableRow>
+          </List.TableBody>
+        </List.Table>
       </List.List>
     );
   },
