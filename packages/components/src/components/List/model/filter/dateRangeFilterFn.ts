@@ -17,17 +17,13 @@ export function dateRangeFilterFn<T>(
 
   if (value instanceof DateTime) {
     dateValue = value;
-  }
-
-  if (value instanceof CalendarDate) {
+  } else if (value instanceof CalendarDate) {
     dateValue = DateTime.fromObject({
       year: value.year,
       month: value.month,
       day: value.day,
     });
-  }
-
-  if (typeof value === "string") {
+  } else if (typeof value === "string") {
     dateValue = DateTime.fromISO(value).startOf("day");
   }
 

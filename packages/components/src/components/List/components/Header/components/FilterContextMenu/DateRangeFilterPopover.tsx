@@ -8,7 +8,6 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 import { RangeCalendar } from "@/components/Calendar";
 import { Popover, PopoverTrigger } from "@/components/Popover";
-import type { DateRange } from "react-aria-components";
 import styles from "./FilterContextMenus.module.scss";
 import { useOverlayController } from "@/lib/controller";
 
@@ -42,7 +41,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
       >
         <RangeCalendar
           {...filter.dateRangeOptions}
-          value={filter.getValue() as DateRange}
+          value={filter.getDateRangeValue()}
           onChange={(range) => {
             filter.setDateRangeValue(range);
             controller.close();

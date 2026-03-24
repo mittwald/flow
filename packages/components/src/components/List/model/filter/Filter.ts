@@ -20,7 +20,7 @@ import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
 import z from "zod";
 import { toArray } from "@/lib/array/toArray";
-import type { RangeValue } from "react-aria-components";
+import type { DateRange, RangeValue } from "react-aria-components";
 import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
 import type { DateValue } from "@internationalized/date";
 import type { RangeCalendarProps } from "@/components/Calendar";
@@ -139,6 +139,20 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public getValue(): unknown {
     return this.getTableColumnFilter()?.value ?? null;
+  }
+
+  public getDateRangeValue() {
+    const value = this.getTableColumnFilter()?.value;
+
+    if (
+      value &&
+      typeof value === "object" &&
+      "start" in value &&
+      "end" in value
+    ) {
+      return value as DateRange;
+    }
+    return null;
   }
 
   private getValuesFromTableState() {

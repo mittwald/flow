@@ -18,33 +18,40 @@ import DivView from "@/views/DivView";
 import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
-import type { DateRange } from "react-aria-components";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales);
 
-  const activeFilterValues = list.filters
-    .flatMap((f) => f.values)
-    .filter((v) => v.isActive);
+  const activeFilters = list.filters.flatMap((f) => {
+    const dateRangeValue = f.getDateRangeValue();
 
-  const dateRangeFilter = list.filters.find((f) => f.mode === "dateRange");
+    if (f.mode === "dateRange" && dateRangeValue) {
+      return [
+        <BadgeView key={f.name} onClose={() => f.clear()}>
+          <TextView>
+            {`${new Date(
+              dateRangeValue.start.year,
+              dateRangeValue.start.month - 1,
+              dateRangeValue.start.day,
+            ).toLocaleDateString("de-DE")} - ${new Date(
+              dateRangeValue.end.year,
+              dateRangeValue.end.month - 1,
+              dateRangeValue.end.day,
+            ).toLocaleDateString("de-DE")}`}
+          </TextView>
+        </BadgeView>,
+      ];
+    }
 
-  const dateRangeValue = dateRangeFilter?.getValue() as DateRange;
-
-  const activeDateRangeFilter = dateRangeValue && dateRangeFilter && (
-    <BadgeView
-      key={dateRangeFilter.name}
-      onClose={() => dateRangeFilter?.clear()}
-    >
-      <TextView>{`${new Date(dateRangeValue.start.year, dateRangeValue.start.month - 1, dateRangeValue.start.day).toLocaleDateString("de-DE")} - ${new Date(dateRangeValue.end.year, dateRangeValue.end.month - 1, dateRangeValue.end.day).toLocaleDateString("de-DE")}`}</TextView>
-    </BadgeView>
-  );
-  const activeFilters = activeFilterValues.map((v) => (
-    <BadgeView key={v.id} onClose={() => v.deactivate()}>
-      <TextView>{v.render()}</TextView>
-    </BadgeView>
-  ));
+    return f.values
+      .filter((v) => v.isActive)
+      .map((v) => (
+        <BadgeView key={v.id} onClose={() => v.deactivate()}>
+          <TextView>{v.render()}</TextView>
+        </BadgeView>
+      ));
+  });
 
   const someFiltersChanged =
     list.filters.filter((f) => f.hasChanged()).length > 0;
@@ -84,6 +91,9 @@ export const ActiveFilters: FC = observer(() => {
     </TooltipTrigger>
   ) : undefined;
 
+  console.log(activeFilters);
+  console.log(activeFilters.length);
+
   const removeAllFiltersButton =
     activeFilters.length > 1 ? (
       <TooltipTrigger>
@@ -112,7 +122,6 @@ export const ActiveFilters: FC = observer(() => {
   return (
     <DivView className={styles.activeFilters}>
       {activeFilters}
-      {activeDateRangeFilter}
       {storeFiltersButton}
       {resetFiltersButton}
       {removeAllFiltersButton}

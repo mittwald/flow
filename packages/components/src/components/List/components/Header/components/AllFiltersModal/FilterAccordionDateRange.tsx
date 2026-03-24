@@ -4,7 +4,6 @@ import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
-import type { DateRange } from "react-aria-components";
 import { RangeCalendar } from "@/components/Calendar";
 
 interface Props {
@@ -14,7 +13,7 @@ interface Props {
 export const FilterAccordionDateRange: FC<Props> = (props) => {
   const { filter } = props;
 
-  const currentValue = filter.getValue() as DateRange;
+  const currentValue = filter.getDateRangeValue();
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
