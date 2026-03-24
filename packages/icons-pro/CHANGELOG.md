@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.746](https://github.com/mittwald/flow/compare/0.2.0-alpha.745...0.2.0-alpha.746) (2026-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-pro
+
 # [0.2.0-alpha.745](https://github.com/mittwald/flow/compare/0.2.0-alpha.744...0.2.0-alpha.745) (2026-03-24)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro
