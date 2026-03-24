@@ -441,7 +441,7 @@ export const WithDateRangeFilter: Story = {
           mode="dateRange"
           dateRangeOptions={{ maxValue: today(getLocalTimeZone()) }}
         />
-        <List.Item>
+        <List.Item textValue={(invoice) => invoice.id}>
           {(invoice) => (
             <ListItemView>
               <Heading>{invoice.id}</Heading>
@@ -451,23 +451,6 @@ export const WithDateRangeFilter: Story = {
             </ListItemView>
           )}
         </List.Item>
-        <List.Table>
-          <List.TableHeader>
-            <List.TableColumn>Rechnung</List.TableColumn>
-            <List.TableColumn>Datum</List.TableColumn>
-          </List.TableHeader>
-
-          <List.TableBody>
-            <List.TableRow>
-              <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
-              <List.TableCell>
-                {(invoice) =>
-                  DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")
-                }
-              </List.TableCell>
-            </List.TableRow>
-          </List.TableBody>
-        </List.Table>
       </List.List>
     );
   },

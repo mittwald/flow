@@ -83,6 +83,7 @@ import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
 import type { KbdProps } from "@/components/Kbd/Kbd";
+import { type RangeCalendarProps } from "@/components/Calendar/components/RangeCalendar/RangeCalendar";
 
 export * from "./types";
 
@@ -151,6 +152,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  RangeCalendar: RangeCalendarProps;
   Rating: RatingProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
@@ -212,6 +214,7 @@ const propsContextSupportingComponentsMap: Record<
   IllustratedMessage: true,
   Image: true,
   Initials: true,
+  Kbd: true,
   Label: true,
   LayoutCard: true,
   LightBox: true,
@@ -236,13 +239,13 @@ const propsContextSupportingComponentsMap: Record<
   ProgressBar: true,
   RadioButton: true,
   RadioGroup: true,
+  RangeCalendar: true,
   Rating: true,
   SearchField: true,
   Section: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,
-  Kbd: true,
   Slider: true,
   Switch: true,
   Tabs: true,

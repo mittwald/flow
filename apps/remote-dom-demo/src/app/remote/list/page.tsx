@@ -30,6 +30,11 @@ export default function Page() {
           <DemoList.Filter property="language" name="Language">
             {(val) => <>{val}</>}
           </DemoList.Filter>
+          <DemoList.Filter
+            property="birthdate"
+            mode="dateRange"
+            name="Birthday"
+          />
           <DemoList.Search autoSubmit />
           <DemoList.LoaderAsync>
             {() => {

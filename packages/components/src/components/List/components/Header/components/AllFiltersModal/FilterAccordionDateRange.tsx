@@ -4,7 +4,7 @@ import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
-import { RangeCalendar } from "@/components/Calendar";
+import RangeCalendarView from "@/views/RangeCalendarView";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -19,7 +19,7 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
 
   return (
     <Flex direction="column" gap="m">
-      <RangeCalendar
+      <RangeCalendarView
         {...filter.dateRangeOptions}
         value={currentValue}
         onChange={(range) => {

@@ -2,8 +2,8 @@ import type { PropsWithChildren } from "react";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Popover } from "@/components/Popover/Popover";
-import { RangeCalendar } from "../Calendar/RangeCalendar";
+import { Popover } from "@/components/Popover";
+import { RangeCalendar } from "@/components/Calendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { useOverlayController } from "@/lib/controller";
 import {

@@ -6,10 +6,10 @@ import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
-import { RangeCalendar } from "@/components/Calendar";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import styles from "./FilterContextMenus.module.scss";
 import { useOverlayController } from "@/lib/controller";
+import RangeCalendarView from "@/views/RangeCalendarView";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -39,7 +39,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
         isDialogContent
         aria-label={stringFormatter.format("list.dateRange")}
       >
-        <RangeCalendar
+        <RangeCalendarView
           {...filter.dateRangeOptions}
           value={filter.getDateRangeValue()}
           onChange={(range) => {
