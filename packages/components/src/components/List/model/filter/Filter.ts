@@ -49,7 +49,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   public readonly autosave: boolean;
-  private onFilterChangedCallbacks = new Set<FilterUpdatedCallback<T, TProp>>();
+  private onFilterChangeCallbacks = new Set<FilterUpdatedCallback>();
   private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
   private readonly initialSelectedValues?: readonly NonNullable<TMatchValue>[];
   public readonly priority: "primary" | "secondary";
@@ -68,8 +68,8 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.defaultSelectedValues = shape.defaultSelected;
     this.initialSelectedValues = shape.initialSelected;
     this.autosave = shape.autosave ?? false;
-    if (shape.onChanged) {
-      this.onFilterChangedCallbacks.add(shape.onChanged);
+    if (shape.onChange) {
+      this.onFilterChangeCallbacks.add(shape.onChange);
     }
   }
 
@@ -234,14 +234,8 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private callOnChangedHandlers(
     newValue: FilterValue[] | FilterValue | null,
   ): void {
-    this.onFilterChangedCallbacks.forEach((cb) =>
-      cb(
-        {
-          property: this.property,
-        },
-        toArray(newValue).map((v) => v?.value),
-      ),
-    );
+    const values = toArray(newValue).map((v) => v?.value);
+    this.onFilterChangeCallbacks.forEach((cb) => cb(values));
   }
 
   public hasChanged(): boolean {
@@ -323,6 +317,6 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   public onFilterUpdated(cb: () => unknown): void {
-    this.onFilterChangedCallbacks.add(cb);
+    this.onFilterChangeCallbacks.add(cb);
   }
 }

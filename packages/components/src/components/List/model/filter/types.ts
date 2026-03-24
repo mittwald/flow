@@ -26,12 +26,9 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
    * storage. It behaves like an initial user initiated selection.
    */
   initialSelected?: readonly NonNullable<TMatcherValue>[];
-  onChanged?: FilterUpdatedCallback<T, TProp>;
+  onChange?: FilterUpdatedCallback;
   priority?: "primary" | "secondary";
   autosave?: boolean;
 }
 
-export type FilterUpdatedCallback<T, TProp extends PropertyName<T>> = (
-  filter: { property: TProp },
-  values: unknown[],
-) => unknown;
+export type FilterUpdatedCallback = (values: unknown[]) => unknown;
