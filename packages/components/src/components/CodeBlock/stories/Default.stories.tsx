@@ -26,7 +26,7 @@ type Story = StoryObj<typeof CodeBlock>;
 
 export const Default: Story = {};
 
-export const WithLineNumbers: Story = { args: { withLineNumbers: true } };
+export const WithLineNumbers: Story = { args: { showLineNumbers: true } };
 
 export const Copyable: Story = { args: { copyable: true } };
 

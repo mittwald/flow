@@ -49,12 +49,12 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     isRequired,
     validationBehavior: _ignoredValidationBehavior,
     value,
-    withLineNumbers = true,
-    withCodeFolding = true,
-    withCodeIndentationMakers = true,
-    withLinterMarkers = true,
+    showLineNumbers = true,
+    showCodeFolding = true,
+    showCodeIndentationMakers = true,
+    showLinterMarkers = true,
+    showActiveLineMarker = true,
     copyable = true,
-    onChange,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -72,10 +72,10 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   );
 
   const enabledExtensions = useCodeEditorExtensions(language, extensions, {
-    withLineNumbers,
-    withCodeIndentationMakers,
-    withCodeFolding,
-    withLinterMarkers,
+    showLineNumbers: showLineNumbers,
+    showCodeIndentationMakers: showCodeIndentationMakers,
+    showCodeFolding: showCodeFolding,
+    showLinterMarkers: showLinterMarkers,
   });
 
   const localRef = useObjectRef(ref);
@@ -88,12 +88,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
           <CodeMirror
             {...rest}
             value={value}
-            onChange={(value) => {
-              if (!isReadOnly && onChange) {
-                onChange(value);
-              }
-            }}
             basicSetup={{
+              highlightActiveLine: showActiveLineMarker,
+              highlightActiveLineGutter: showActiveLineMarker,
               autocompletion: false,
               lineNumbers: false,
               foldGutter: false,

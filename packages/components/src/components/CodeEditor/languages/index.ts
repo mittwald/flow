@@ -6,8 +6,9 @@ import {
 import type { linter } from "@codemirror/lint";
 import type { Extension } from "@uiw/react-codemirror";
 import DotEnvLanguage from "@/components/CodeEditor/languages/dotEnv";
+import { ALL_LANGUAGES } from "@/components/CodeEditor/languages/all";
 
-export type CodeEditorLanguage = LanguageName | "dotEnv";
+export type CodeEditorLanguage = (typeof ALL_LANGUAGES)[number];
 
 export type LanguageFactory = Record<
   CodeEditorLanguage,
@@ -25,7 +26,7 @@ export type LanguageContainer = [
 ];
 
 const supportedCodeEditorLanguages: LanguageFactory = {} as never;
-Object.keys(langs).forEach((key) => {
+ALL_LANGUAGES.forEach((key) => {
   const languageKey = key as CodeEditorLanguage;
   supportedCodeEditorLanguages[languageKey] = [
     langs[languageKey as LanguageName],

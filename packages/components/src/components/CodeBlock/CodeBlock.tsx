@@ -8,7 +8,7 @@ export interface CodeBlockProps
   extends
     PropsWithClassName,
     PropsWithChildren,
-    Pick<CodeEditorProps, "language" | "withLineNumbers" | "copyable"> {
+    Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable"> {
   code?: string;
 }
 
@@ -18,7 +18,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     code,
     className,
     copyable = false,
-    withLineNumbers = false,
+    showLineNumbers = false,
     children,
     ...rest
   } = props;
@@ -38,12 +38,13 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   return (
     <div className={rootClassName}>
       <CodeEditor
+        {...rest}
         value={code}
         copyable={copyable}
-        withLineNumbers={withLineNumbers}
-        withLinterMarkers={false}
-        withCodeFolding={false}
-        {...rest}
+        showLineNumbers={showLineNumbers}
+        showLinterMarkers={false}
+        showCodeFolding={false}
+        showActiveLineMarker={false}
         isReadOnly
       />
     </div>

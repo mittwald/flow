@@ -9,10 +9,11 @@ import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
 
 /** @internal */
 export interface CodeEditorSetup {
-  withLineNumbers?: boolean;
-  withCodeFolding?: boolean;
-  withLinterMarkers?: boolean;
-  withCodeIndentationMakers?: boolean;
+  showActiveLineMarker?: boolean;
+  showCodeFolding?: boolean;
+  showCodeIndentationMakers?: boolean;
+  showLineNumbers?: boolean;
+  showLinterMarkers?: boolean;
 }
 
 /** @internal */
@@ -20,17 +21,17 @@ export const useCodeEditorExtensions = (
   language?: CodeEditorLanguage,
   extensions: Extension[] = [],
   options: CodeEditorSetup = {
-    withCodeFolding: true,
-    withCodeIndentationMakers: true,
-    withLineNumbers: true,
-    withLinterMarkers: true,
+    showCodeFolding: true,
+    showCodeIndentationMakers: true,
+    showLineNumbers: true,
+    showLinterMarkers: true,
   },
 ) => {
-  if (options.withLineNumbers) {
+  if (options.showLineNumbers) {
     extensions.push(lineNumbers());
   }
 
-  if (options.withCodeFolding) {
+  if (options.showCodeFolding) {
     extensions.push(
       foldGutter({
         markerDOM: (open) => {
@@ -46,18 +47,18 @@ export const useCodeEditorExtensions = (
     );
   }
 
-  if (options.withLinterMarkers) {
+  if (options.showLinterMarkers) {
     extensions.push(lintGutter());
   }
 
   if (
-    options.withLineNumbers &&
-    (!options.withCodeFolding || !options.withLinterMarkers)
+    options.showLineNumbers &&
+    (!options.showCodeFolding || !options.showLinterMarkers)
   ) {
     extensions.push(gutterSpacer());
   }
 
-  if (options.withCodeIndentationMakers) {
+  if (options.showCodeIndentationMakers) {
     extensions.push(indentationMarkers());
   }
 

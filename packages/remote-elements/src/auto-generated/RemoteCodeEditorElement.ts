@@ -124,6 +124,11 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       root: {},
       security: {},
       selection: {},
+      showActiveLineMarker: {},
+      showCodeFolding: {},
+      showCodeIndentationMakers: {},
+      showLineNumbers: {},
+      showLinterMarkers: {},
       slot: {},
       spellCheck: {},
       suppressContentEditableWarning: {},
@@ -137,10 +142,6 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       value: {},
       vocab: {},
       width: {},
-      withCodeFolding: {},
-      withCodeIndentationMakers: {},
-      withLineNumbers: {},
-      withLinterMarkers: {},
     };
   }
 
