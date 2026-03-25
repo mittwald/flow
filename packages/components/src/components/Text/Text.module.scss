@@ -10,8 +10,8 @@
 
   @include color(dark);
   @include color(light);
-  @include color(static-dark);
-  @include color(static-light);
+  @include color(dark-static);
+  @include color(light-static);
 
   ul,
   ol {

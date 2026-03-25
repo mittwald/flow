@@ -24,14 +24,14 @@ inline-code:
   light-content-color:
     value: "{light-soft-content-color}"
 
-  # Static Dark
-  static-dark-background-color:
-    value: "{static-dark-soft-background-color.default}"
-  static-dark-content-color:
-    value: "{static-dark-soft-content-color}"
+  # Dark Static
+  dark-static-background-color:
+    value: "{dark-static-soft-background-color.default}"
+  dark-static-content-color:
+    value: "{dark-static-soft-content-color}"
 
-  # Static Light
-  static-light-background-color:
-    value: "{static-light-soft-background-color.default}"
-  static-light-content-color:
-    value: "{static-light-soft-content-color}"
+  # Light Static
+  light-static-background-color:
+    value: "{light-static-soft-background-color.default}"
+  light-static-content-color:
+    value: "{light-static-soft-content-color}"

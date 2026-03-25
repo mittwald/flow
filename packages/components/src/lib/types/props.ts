@@ -32,8 +32,8 @@ export interface PropsWithContainerBreakpointSize {
 export const alphaColors = [
   "dark",
   "light",
-  "static-dark",
-  "static-light",
+  "dark-static",
+  "light-static",
 ] as const;
 
 export type AlphaColor = (typeof alphaColors)[number];

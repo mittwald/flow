@@ -37,20 +37,20 @@ header-navigation:
     pressed:
       value: "{light-plain-background-color.pressed}"
 
-  # Static Dark
-  color-static-dark:
-    value: "{static-dark-plain-content-color}"
-  background-color-static-dark:
+  # Dark Static
+  color-dark-static:
+    value: "{dark-static-plain-content-color}"
+  background-color-dark-static:
     hover:
-      value: "{static-dark-plain-background-color.hover}"
+      value: "{dark-static-plain-background-color.hover}"
     pressed:
-      value: "{static-dark-plain-background-color.pressed}"
+      value: "{dark-static-plain-background-color.pressed}"
 
-  # Static Light
-  color-static-light:
-    value: "{static-light-plain-content-color}"
-  background-color-static-light:
+  # Light Static
+  color-light-static:
+    value: "{light-static-plain-content-color}"
+  background-color-light-static:
     hover:
-      value: "{static-light-plain-background-color.hover}"
+      value: "{light-static-plain-background-color.hover}"
     pressed:
-      value: "{static-light-plain-background-color.pressed}"
+      value: "{light-static-plain-background-color.pressed}"

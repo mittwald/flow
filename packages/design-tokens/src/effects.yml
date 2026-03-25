@@ -1,8 +1,8 @@
 shadow:
   content:
-    value: "{static-dark.color.100} 0 {size-px.xxs} {size-px.xs}"
+    value: "{dark-static.color.100} 0 {size-px.xxs} {size-px.xs}"
   overlay:
-    value: "{static-dark.color.100} 0 {size-px.s} {size-px.m}"
+    value: "{dark-static.color.100} 0 {size-px.s} {size-px.m}"
 blur:
   value: "3px"
 transition:

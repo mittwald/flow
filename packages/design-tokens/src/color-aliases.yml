@@ -188,7 +188,7 @@ light:
     800:
       value: "{color.white-alpha.800}"
 
-static-dark:
+dark-static:
   color:
     100:
       value: "{color.static-black-alpha.100}"
@@ -207,7 +207,7 @@ static-dark:
     800:
       value: "{color.static-black-alpha.800}"
 
-static-light:
+light-static:
   color:
     100:
       value: "{color.static-white-alpha.100}"
@@ -517,14 +517,14 @@ disabled-solid-light-background-color:
   value: "{light.color.300}"
 disabled-solid-light-content-color:
   value: "{dark.color.300}"
-disabled-solid-static-dark-background-color:
-  value: "{static-dark.color.300}"
-disabled-solid-static-dark-content-color:
-  value: "{static-light.color.300}"
-disabled-solid-static-light-background-color:
-  value: "{static-light.color.300}"
-disabled-solid-static-light-content-color:
-  value: "{static-dark.color.300}"
+disabled-solid-dark-static-background-color:
+  value: "{dark-static.color.300}"
+disabled-solid-dark-static-content-color:
+  value: "{light-static.color.300}"
+disabled-solid-light-static-background-color:
+  value: "{light-static.color.300}"
+disabled-solid-light-static-content-color:
+  value: "{dark-static.color.300}"
 
 # Disabled Plain
 disabled-plain-background-color:
@@ -535,10 +535,10 @@ disabled-plain-dark-content-color:
   value: "{dark.color.200}"
 disabled-plain-light-content-color:
   value: "{light.color.200}"
-disabled-plain-static-dark-content-color:
-  value: "{static-dark.color.200}"
-disabled-plain-static-light-content-color:
-  value: "{static-light.color.200}"
+disabled-plain-dark-static-content-color:
+  value: "{dark-static.color.200}"
+disabled-plain-light-static-content-color:
+  value: "{light-static.color.200}"
 
 # Disabled Outline
 disabled-outline-background-color:
@@ -559,18 +559,18 @@ disabled-outline-light-border-color:
   value: "{light.color.200}"
 disabled-outline-light-content-color:
   value: "{light.color.200}"
-disabled-outline-static-dark-background-color:
+disabled-outline-dark-static-background-color:
   value: "{color.transparent}"
-disabled-outline-static-dark-border-color:
-  value: "{static-dark.color.200}"
-disabled-outline-static-dark-content-color:
-  value: "{static-dark.color.200}"
-disabled-outline-static-light-background-color:
+disabled-outline-dark-static-border-color:
+  value: "{dark-static.color.200}"
+disabled-outline-dark-static-content-color:
+  value: "{dark-static.color.200}"
+disabled-outline-light-static-background-color:
   value: "{color.transparent}"
-disabled-outline-static-light-border-color:
-  value: "{static-light.color.200}"
-disabled-outline-static-light-content-color:
-  value: "{static-light.color.200}"
+disabled-outline-light-static-border-color:
+  value: "{light-static.color.200}"
+disabled-outline-light-static-content-color:
+  value: "{light-static.color.200}"
 
 # Disabled Soft
 disabled-soft-background-color:
@@ -585,14 +585,14 @@ disabled-soft-light-background-color:
   value: "{light.color.100}"
 disabled-soft-light-content-color:
   value: "{light.color.200}"
-disabled-soft-static-dark-background-color:
-  value: "{static-dark.color.100}"
-disabled-soft-static-dark-content-color:
-  value: "{static-dark.color.200}"
-disabled-soft-static-light-background-color:
-  value: "{static-light.color.100}"
-disabled-soft-static-light-content-color:
-  value: "{static-light.color.200}"
+disabled-soft-dark-static-background-color:
+  value: "{dark-static.color.100}"
+disabled-soft-dark-static-content-color:
+  value: "{dark-static.color.200}"
+disabled-soft-light-static-background-color:
+  value: "{light-static.color.100}"
+disabled-soft-light-static-content-color:
+  value: "{light-static.color.200}"
 
 # Dark Solid
 dark-solid-background-color:
@@ -686,94 +686,94 @@ light-outline-border-color:
 light-outline-content-color:
   value: "{light.color.800}"
 
-# Static Dark Solid
-static-dark-solid-background-color:
+# Dark Static Solid
+dark-static-solid-background-color:
   default:
-    value: "{static-dark.color.800}"
+    value: "{dark-static.color.800}"
   hover:
-    value: "{static-dark.color.700}"
+    value: "{dark-static.color.700}"
   pressed:
-    value: "{static-dark.color.600}"
-static-dark-solid-content-color:
-  value: "{static-light.color.800}"
+    value: "{dark-static.color.600}"
+dark-static-solid-content-color:
+  value: "{light-static.color.800}"
 
-# Static Dark Soft
-static-dark-soft-background-color:
+# Dark Static Soft
+dark-static-soft-background-color:
   default:
-    value: "{static-dark.color.100}"
+    value: "{dark-static.color.100}"
   hover:
-    value: "{static-dark.color.200}"
+    value: "{dark-static.color.200}"
   pressed:
-    value: "{static-dark.color.300}"
-static-dark-soft-content-color:
-  value: "{static-dark.color.800}"
+    value: "{dark-static.color.300}"
+dark-static-soft-content-color:
+  value: "{dark-static.color.800}"
 
-# Static Dark Plain
-static-dark-plain-background-color:
+# Dark Static Plain
+dark-static-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{static-dark.color.100}"
+    value: "{dark-static.color.100}"
   pressed:
-    value: "{static-dark.color.200}"
-static-dark-plain-content-color:
-  value: "{static-dark.color.800}"
+    value: "{dark-static.color.200}"
+dark-static-plain-content-color:
+  value: "{dark-static.color.800}"
 
-# Static Dark Outline
-static-dark-outline-background-color:
+# Dark Static Outline
+dark-static-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{static-dark.color.100}"
+    value: "{dark-static.color.100}"
   pressed:
-    value: "{static-dark.color.200}"
-static-dark-outline-border-color:
-  value: "{static-dark.color.800}"
-static-dark-outline-content-color:
-  value: "{static-dark.color.800}"
+    value: "{dark-static.color.200}"
+dark-static-outline-border-color:
+  value: "{dark-static.color.800}"
+dark-static-outline-content-color:
+  value: "{dark-static.color.800}"
 
-# Static Light Solid
-static-light-solid-background-color:
+# Light Static Solid
+light-static-solid-background-color:
   default:
-    value: "{static-light.color.800}"
+    value: "{light-static.color.800}"
   hover:
-    value: "{static-light.color.700}"
+    value: "{light-static.color.700}"
   pressed:
-    value: "{static-light.color.600}"
-static-light-solid-content-color:
-  value: "{static-dark.color.800}"
+    value: "{light-static.color.600}"
+light-static-solid-content-color:
+  value: "{dark-static.color.800}"
 
-# Static Light Soft
-static-light-soft-background-color:
+# Light Static Soft
+light-static-soft-background-color:
   default:
-    value: "{static-light.color.100}"
+    value: "{light-static.color.100}"
   hover:
-    value: "{static-light.color.200}"
+    value: "{light-static.color.200}"
   pressed:
-    value: "{static-light.color.300}"
-static-light-soft-content-color:
-  value: "{static-light.color.800}"
+    value: "{light-static.color.300}"
+light-static-soft-content-color:
+  value: "{light-static.color.800}"
 
-# Static Light Plain
-static-light-plain-background-color:
-  default:
-    value: "{color.transparent}"
-  hover:
-    value: "{static-light.color.100}"
-  pressed:
-    value: "{static-light.color.200}"
-static-light-plain-content-color:
-  value: "{static-light.color.800}"
-
-# Static Light Outline
-static-light-outline-background-color:
+# Light Static Plain
+light-static-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{static-light.color.100}"
+    value: "{light-static.color.100}"
   pressed:
-    value: "{static-light.color.200}"
-static-light-outline-border-color:
-  value: "{static-light.color.800}"
-static-light-outline-content-color:
-  value: "{static-light.color.800}"
+    value: "{light-static.color.200}"
+light-static-plain-content-color:
+  value: "{light-static.color.800}"
+
+# Light Static Outline
+light-static-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{light-static.color.100}"
+  pressed:
+    value: "{light-static.color.200}"
+light-static-outline-border-color:
+  value: "{light-static.color.800}"
+light-static-outline-content-color:
+  value: "{light-static.color.800}"
