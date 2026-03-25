@@ -14,9 +14,9 @@ export const StoryBackground: FC<Props> = (props) => {
   }
 
   const showLightBackground =
-    color === "dark" ||
-    (color === "foreground-inverted" && theme === "dark") ||
-    (color === "foreground" && theme === "light");
+    color === "static-dark" ||
+    (color === "light" && theme === "dark") ||
+    (color === "dark" && theme === "light");
 
   return (
     <div

@@ -14,7 +14,7 @@ illustrated-message:
     value: "{dark-plain-content-color}"
   light-content-color:
     value: "{light-plain-content-color}"
-  foreground-content-color:
-    value: "{foreground-plain-content-color}"
-  foreground-inverted-content-color:
-    value: "{foreground-inverted-plain-content-color}"
+  static-dark-content-color:
+    value: "{static-dark-plain-content-color}"
+  static-light-content-color:
+    value: "{static-light-plain-content-color}"

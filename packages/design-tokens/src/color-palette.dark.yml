@@ -246,78 +246,6 @@ color:
   transparent:
     value: transparent
 
-  black-alpha:
-    100:
-      value: "rgb(0 0 0 / 12.5%)"
-    200:
-      value: "rgb(0 0 0 / 25%)"
-    300:
-      value: "rgb(0 0 0 / 37.5%)"
-    400:
-      value: "rgb(0 0 0 / 50%)"
-    500:
-      value: "rgb(0 0 0 / 62.5%)"
-    600:
-      value: "rgb(0 0 0 / 75%)"
-    700:
-      value: "rgb(0 0 0 / 87.5%)"
-    800:
-      value: "rgb(0 0 0 / 100%)"
-
-  white-alpha:
-    100:
-      value: "rgb(255 255 255 / 12.5%)"
-    200:
-      value: "rgb(255 255 255 / 25%)"
-    300:
-      value: "rgb(255 255 255 / 37.5%)"
-    400:
-      value: "rgb(255 255 255 / 50%)"
-    500:
-      value: "rgb(255 255 255 / 62.5%)"
-    600:
-      value: "rgb(255 255 255 / 75%)"
-    700:
-      value: "rgb(255 255 255 / 87.5%)"
-    800:
-      value: "rgb(255 255 255 / 100%)"
-
-  foreground-alpha:
-    100:
-      value: "rgb(255 255 255 / 12.5%)"
-    200:
-      value: "rgb(255 255 255 / 25%)"
-    300:
-      value: "rgb(255 255 255 / 37.5%)"
-    400:
-      value: "rgb(255 255 255 / 50%)"
-    500:
-      value: "rgb(255 255 255 / 62.5%)"
-    600:
-      value: "rgb(255 255 255 / 75%)"
-    700:
-      value: "rgb(255 255 255 / 87.5%)"
-    800:
-      value: "rgb(255 255 255 / 100%)"
-
-  foreground-inverted-alpha:
-    100:
-      value: "rgb(0 0 0 / 12.5%)"
-    200:
-      value: "rgb(0 0 0 / 25%)"
-    300:
-      value: "rgb(0 0 0 / 37.5%)"
-    400:
-      value: "rgb(0 0 0 / 50%)"
-    500:
-      value: "rgb(0 0 0 / 62.5%)"
-    600:
-      value: "rgb(0 0 0 / 75%)"
-    700:
-      value: "rgb(0 0 0 / 87.5%)"
-    800:
-      value: "rgb(0 0 0 / 100%)"
-
   code-syntax:
     keyword:
       value: "#ff7b72"
@@ -339,3 +267,75 @@ color:
       value: "#ff7b72"
     invalid:
       value: "#f97583"
+
+  black-alpha:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"
+
+  white-alpha:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+  static-black-alpha:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+  static-white-alpha:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"
