@@ -1,12 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
-import {
-  type CalendarDate,
-  getLocalTimeZone,
-  today,
-} from "@internationalized/date";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 test.each(testEnvironments)(
   "List items (%s)",
@@ -426,7 +422,7 @@ test.each(testEnvironments)(
     function Wrapper() {
       const List = typedList<{
         id: string;
-        date: CalendarDate;
+        date: string;
       }>();
 
       return (
@@ -439,19 +435,15 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "RG100000",
-                date: today(getLocalTimeZone()),
+                date: "2025-09-01T11:00:00Z",
               },
               {
                 id: "RG100001",
-                date: today(getLocalTimeZone()).subtract({
-                  days: 7,
-                }),
+                date: "2025-09-02T11:00:00Z",
               },
               {
                 id: "RG100002",
-                date: today(getLocalTimeZone()).subtract({
-                  days: 14,
-                }),
+                date: "2025-09-03T11:00:00Z",
               },
             ]}
           />
@@ -474,7 +466,7 @@ test.each(testEnvironments)(
                 <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
                 <List.TableCell>
                   {(invoice) =>
-                    `${invoice.date.day}.${invoice.date.month}.${invoice.date.year}`
+                    new Date(invoice.date).toLocaleDateString("de-DE")
                   }
                 </List.TableCell>
               </List.TableRow>
@@ -484,10 +476,18 @@ test.each(testEnvironments)(
       );
     }
 
+    vi.setSystemTime(new Date("2025-09-03T11:00:00Z"));
+
     await render(<Wrapper />);
 
     await testScreenshot("List date range filter - default");
 
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filter opened");
+
+    await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{enter}");

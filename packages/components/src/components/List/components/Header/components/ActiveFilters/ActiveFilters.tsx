@@ -91,9 +91,6 @@ export const ActiveFilters: FC = observer(() => {
     </TooltipTrigger>
   ) : undefined;
 
-  console.log(activeFilters);
-  console.log(activeFilters.length);
-
   const removeAllFiltersButton =
     activeFilters.length > 1 ? (
       <TooltipTrigger>
