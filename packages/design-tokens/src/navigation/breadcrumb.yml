@@ -1,11 +1,4 @@
 breadcrumb:
-  color:
-    default:
-      value: "{text.color.default}"
-    hover:
-      value: "{neutral.color.900}"
-    pressed:
-      value: "{neutral.color.800}"
   spacing:
     value: "{size-rem.s}"
   font-weight:
@@ -13,6 +6,14 @@ breadcrumb:
       value: "{font-weight.normal}"
     current:
       value: "{font-weight.bold}"
+
+  color:
+    default:
+      value: "{text.color.default}"
+    hover:
+      value: "{neutral.color.900}"
+    pressed:
+      value: "{neutral.color.800}"
 
   # Dark
   color-dark:
@@ -32,20 +33,20 @@ breadcrumb:
     pressed:
       value: "{light.color.600}"
 
-  # Foreground
-  color-foreground:
+  # Static Dark
+  color-static-dark:
     default:
-      value: "{foreground.color.800}"
+      value: "{static-dark.color.800}"
     hover:
-      value: "{foreground.color.700}"
+      value: "{static-dark.color.700}"
     pressed:
-      value: "{foreground.color.600}"
+      value: "{static-dark.color.600}"
 
-  # Foreground Inverted
-  color-foreground-inverted:
+  # Static Light
+  color-static-light:
     default:
-      value: "{foreground-inverted.color.800}"
+      value: "{static-light.color.800}"
     hover:
-      value: "{foreground-inverted.color.700}"
+      value: "{static-light.color.700}"
     pressed:
-      value: "{foreground-inverted.color.600}"
+      value: "{static-light.color.600}"

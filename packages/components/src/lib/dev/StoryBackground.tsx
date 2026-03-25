@@ -13,7 +13,7 @@ export const StoryBackground: FC<Props> = (props) => {
     return children;
   }
 
-  const showLight =
+  const showLightBackground =
     color === "dark" ||
     (color === "foreground-inverted" && theme === "dark") ||
     (color === "foreground" && theme === "light");
@@ -21,7 +21,7 @@ export const StoryBackground: FC<Props> = (props) => {
   return (
     <div
       style={{
-        backgroundColor: showLight ? "#E5EFF8" : "#3A434E",
+        backgroundColor: showLightBackground ? "#E5EFF8" : "#3A434E",
         padding: 16,
         borderRadius: 16,
       }}

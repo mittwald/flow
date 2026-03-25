@@ -104,7 +104,7 @@ export const Badge = flowComponent("Badge", (props) => {
           <Button
             className={styles.close}
             size="s"
-            color={isAlphaColor(color) ? color : "foreground"}
+            color={isAlphaColor(color) ? color : "dark"}
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}

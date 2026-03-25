@@ -70,8 +70,8 @@
 
   @include color(light);
   @include color(dark);
-  @include color(foreground);
-  @include color(foreground-inverted);
+  @include color(static-dark);
+  @include color(static-light);
 
   /* AlertText Colors */
   @mixin status($status) {

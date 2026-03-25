@@ -6,10 +6,10 @@ text:
       value: "{light-plain-content-color}"
     dark:
       value: "{dark-plain-content-color}"
-    foreground-inverted:
-      value: "{foreground-inverted-plain-content-color}"
-    foreground:
-      value: "{foreground-plain-content-color}"
+    static-light:
+      value: "{static-light-plain-content-color}"
+    static-dark:
+      value: "{static-dark-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
   max-width:

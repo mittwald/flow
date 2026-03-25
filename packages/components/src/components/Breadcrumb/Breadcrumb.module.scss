@@ -96,6 +96,6 @@
 
   @include variant(dark);
   @include variant(light);
-  @include variant(foreground);
-  @include variant(foreground-inverted);
+  @include variant(static-dark);
+  @include variant(static-light);
 }

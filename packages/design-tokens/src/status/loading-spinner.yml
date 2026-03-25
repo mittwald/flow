@@ -9,7 +9,7 @@ loading-spinner:
     value: "{dark-plain-content-color}"
   color-light:
     value: "{light-plain-content-color}"
-  color-foreground:
-    value: "{foreground-plain-content-color}"
-  color-foreground-inverted:
-    value: "{foreground-inverted-plain-content-color}"
+  color-static-dark:
+    value: "{static-dark-plain-content-color}"
+  color-static-light:
+    value: "{static-light-plain-content-color}"

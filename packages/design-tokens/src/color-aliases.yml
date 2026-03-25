@@ -188,43 +188,43 @@ light:
     800:
       value: "{color.white-alpha.800}"
 
-foreground:
+static-dark:
   color:
     100:
-      value: "{color.foreground-alpha.100}"
+      value: "{color.static-black-alpha.100}"
     200:
-      value: "{color.foreground-alpha.200}"
+      value: "{color.static-black-alpha.200}"
     300:
-      value: "{color.foreground-alpha.300}"
+      value: "{color.static-black-alpha.300}"
     400:
-      value: "{color.foreground-alpha.400}"
+      value: "{color.static-black-alpha.400}"
     500:
-      value: "{color.foreground-alpha.500}"
+      value: "{color.static-black-alpha.500}"
     600:
-      value: "{color.foreground-alpha.600}"
+      value: "{color.static-black-alpha.600}"
     700:
-      value: "{color.foreground-alpha.700}"
+      value: "{color.static-black-alpha.700}"
     800:
-      value: "{color.foreground-alpha.800}"
+      value: "{color.static-black-alpha.800}"
 
-foreground-inverted:
+static-light:
   color:
     100:
-      value: "{color.foreground-inverted-alpha.100}"
+      value: "{color.static-white-alpha.100}"
     200:
-      value: "{color.foreground-inverted-alpha.200}"
+      value: "{color.static-white-alpha.200}"
     300:
-      value: "{color.foreground-inverted-alpha.300}"
+      value: "{color.static-white-alpha.300}"
     400:
-      value: "{color.foreground-inverted-alpha.400}"
+      value: "{color.static-white-alpha.400}"
     500:
-      value: "{color.foreground-inverted-alpha.500}"
+      value: "{color.static-white-alpha.500}"
     600:
-      value: "{color.foreground-inverted-alpha.600}"
+      value: "{color.static-white-alpha.600}"
     700:
-      value: "{color.foreground-inverted-alpha.700}"
+      value: "{color.static-white-alpha.700}"
     800:
-      value: "{color.foreground-inverted-alpha.800}"
+      value: "{color.static-white-alpha.800}"
 
 # Primary Solid
 primary-solid-background-color:
@@ -517,14 +517,14 @@ disabled-solid-light-background-color:
   value: "{light.color.300}"
 disabled-solid-light-content-color:
   value: "{dark.color.300}"
-disabled-solid-foreground-background-color:
-  value: "{foreground.color.300}"
-disabled-solid-foreground-content-color:
-  value: "{foreground-inverted.color.300}"
-disabled-solid-foreground-inverted-background-color:
-  value: "{foreground-inverted.color.300}"
-disabled-solid-foreground-inverted-content-color:
-  value: "{foreground.color.300}"
+disabled-solid-static-dark-background-color:
+  value: "{static-dark.color.300}"
+disabled-solid-static-dark-content-color:
+  value: "{static-light.color.300}"
+disabled-solid-static-light-background-color:
+  value: "{static-light.color.300}"
+disabled-solid-static-light-content-color:
+  value: "{static-dark.color.300}"
 
 # Disabled Plain
 disabled-plain-background-color:
@@ -535,10 +535,10 @@ disabled-plain-dark-content-color:
   value: "{dark.color.200}"
 disabled-plain-light-content-color:
   value: "{light.color.200}"
-disabled-plain-foreground-content-color:
-  value: "{foreground.color.200}"
-disabled-plain-foreground-inverted-content-color:
-  value: "{foreground-inverted.color.200}"
+disabled-plain-static-dark-content-color:
+  value: "{static-dark.color.200}"
+disabled-plain-static-light-content-color:
+  value: "{static-light.color.200}"
 
 # Disabled Outline
 disabled-outline-background-color:
@@ -559,18 +559,18 @@ disabled-outline-light-border-color:
   value: "{light.color.200}"
 disabled-outline-light-content-color:
   value: "{light.color.200}"
-disabled-outline-foreground-background-color:
+disabled-outline-static-dark-background-color:
   value: "{color.transparent}"
-disabled-outline-foreground-border-color:
-  value: "{foreground.color.200}"
-disabled-outline-foreground-content-color:
-  value: "{foreground.color.200}"
-disabled-outline-foreground-inverted-background-color:
+disabled-outline-static-dark-border-color:
+  value: "{static-dark.color.200}"
+disabled-outline-static-dark-content-color:
+  value: "{static-dark.color.200}"
+disabled-outline-static-light-background-color:
   value: "{color.transparent}"
-disabled-outline-foreground-inverted-border-color:
-  value: "{foreground-inverted.color.200}"
-disabled-outline-foreground-inverted-content-color:
-  value: "{foreground-inverted.color.200}"
+disabled-outline-static-light-border-color:
+  value: "{static-light.color.200}"
+disabled-outline-static-light-content-color:
+  value: "{static-light.color.200}"
 
 # Disabled Soft
 disabled-soft-background-color:
@@ -585,14 +585,14 @@ disabled-soft-light-background-color:
   value: "{light.color.100}"
 disabled-soft-light-content-color:
   value: "{light.color.200}"
-disabled-soft-foreground-background-color:
-  value: "{foreground.color.100}"
-disabled-soft-foreground-content-color:
-  value: "{foreground.color.200}"
-disabled-soft-foreground-inverted-background-color:
-  value: "{foreground-inverted.color.100}"
-disabled-soft-foreground-inverted-content-color:
-  value: "{foreground-inverted.color.200}"
+disabled-soft-static-dark-background-color:
+  value: "{static-dark.color.100}"
+disabled-soft-static-dark-content-color:
+  value: "{static-dark.color.200}"
+disabled-soft-static-light-background-color:
+  value: "{static-light.color.100}"
+disabled-soft-static-light-content-color:
+  value: "{static-light.color.200}"
 
 # Dark Solid
 dark-solid-background-color:
@@ -686,94 +686,94 @@ light-outline-border-color:
 light-outline-content-color:
   value: "{light.color.800}"
 
-# Foreground Solid
-foreground-solid-background-color:
+# Static Dark Solid
+static-dark-solid-background-color:
   default:
-    value: "{foreground.color.800}"
+    value: "{static-dark.color.800}"
   hover:
-    value: "{foreground.color.700}"
+    value: "{static-dark.color.700}"
   pressed:
-    value: "{foreground.color.600}"
-foreground-solid-content-color:
-  value: "{foreground-inverted.color.800}"
+    value: "{static-dark.color.600}"
+static-dark-solid-content-color:
+  value: "{static-light.color.800}"
 
-# Foreground Soft
-foreground-soft-background-color:
+# Static Dark Soft
+static-dark-soft-background-color:
   default:
-    value: "{foreground.color.100}"
+    value: "{static-dark.color.100}"
   hover:
-    value: "{foreground.color.200}"
+    value: "{static-dark.color.200}"
   pressed:
-    value: "{foreground.color.300}"
-foreground-soft-content-color:
-  value: "{foreground.color.800}"
+    value: "{static-dark.color.300}"
+static-dark-soft-content-color:
+  value: "{static-dark.color.800}"
 
-# Foreground Plain
-foreground-plain-background-color:
+# Static Dark Plain
+static-dark-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{foreground.color.100}"
+    value: "{static-dark.color.100}"
   pressed:
-    value: "{foreground.color.200}"
-foreground-plain-content-color:
-  value: "{foreground.color.800}"
+    value: "{static-dark.color.200}"
+static-dark-plain-content-color:
+  value: "{static-dark.color.800}"
 
-# Foreground Outline
-foreground-outline-background-color:
+# Static Dark Outline
+static-dark-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{foreground.color.100}"
+    value: "{static-dark.color.100}"
   pressed:
-    value: "{foreground.color.200}"
-foreground-outline-border-color:
-  value: "{foreground.color.800}"
-foreground-outline-content-color:
-  value: "{foreground.color.800}"
+    value: "{static-dark.color.200}"
+static-dark-outline-border-color:
+  value: "{static-dark.color.800}"
+static-dark-outline-content-color:
+  value: "{static-dark.color.800}"
 
-# Foreground Inverse Solid
-foreground-inverted-solid-background-color:
+# Static Light Solid
+static-light-solid-background-color:
   default:
-    value: "{foreground-inverted.color.800}"
+    value: "{static-light.color.800}"
   hover:
-    value: "{foreground-inverted.color.700}"
+    value: "{static-light.color.700}"
   pressed:
-    value: "{foreground-inverted.color.600}"
-foreground-inverted-solid-content-color:
-  value: "{foreground.color.800}"
+    value: "{static-light.color.600}"
+static-light-solid-content-color:
+  value: "{static-dark.color.800}"
 
-# Foreground Inverted Soft
-foreground-inverted-soft-background-color:
+# Static Light Soft
+static-light-soft-background-color:
   default:
-    value: "{foreground-inverted.color.100}"
+    value: "{static-light.color.100}"
   hover:
-    value: "{foreground-inverted.color.200}"
+    value: "{static-light.color.200}"
   pressed:
-    value: "{foreground-inverted.color.300}"
-foreground-inverted-soft-content-color:
-  value: "{foreground-inverted.color.800}"
+    value: "{static-light.color.300}"
+static-light-soft-content-color:
+  value: "{static-light.color.800}"
 
-# Foreground Inverted Plain
-foreground-inverted-plain-background-color:
-  default:
-    value: "{color.transparent}"
-  hover:
-    value: "{foreground-inverted.color.100}"
-  pressed:
-    value: "{foreground-inverted.color.200}"
-foreground-inverted-plain-content-color:
-  value: "{foreground-inverted.color.800}"
-
-# Foreground Inverse Outline
-foreground-inverted-outline-background-color:
+# Static Light Plain
+static-light-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{foreground-inverted.color.100}"
+    value: "{static-light.color.100}"
   pressed:
-    value: "{foreground-inverted.color.200}"
-foreground-inverted-outline-border-color:
-  value: "{foreground-inverted.color.800}"
-foreground-inverted-outline-content-color:
-  value: "{foreground-inverted.color.800}"
+    value: "{static-light.color.200}"
+static-light-plain-content-color:
+  value: "{static-light.color.800}"
+
+# Static Light Outline
+static-light-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{static-light.color.100}"
+  pressed:
+    value: "{static-light.color.200}"
+static-light-outline-border-color:
+  value: "{static-light.color.800}"
+static-light-outline-content-color:
+  value: "{static-light.color.800}"

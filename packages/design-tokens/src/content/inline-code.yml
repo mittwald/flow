@@ -24,14 +24,14 @@ inline-code:
   light-content-color:
     value: "{light-soft-content-color}"
 
-  # Foreground
-  foreground-background-color:
-    value: "{foreground-soft-background-color.default}"
-  foreground-content-color:
-    value: "{foreground-soft-content-color}"
+  # Static Dark
+  static-dark-background-color:
+    value: "{static-dark-soft-background-color.default}"
+  static-dark-content-color:
+    value: "{static-dark-soft-content-color}"
 
-  # Foreground Inverted
-  foreground-inverted-background-color:
-    value: "{foreground-inverted-soft-background-color.default}"
-  foreground-inverted-content-color:
-    value: "{foreground-inverted-soft-content-color}"
+  # Static Light
+  static-light-background-color:
+    value: "{static-light-soft-background-color.default}"
+  static-light-content-color:
+    value: "{static-light-soft-content-color}"
