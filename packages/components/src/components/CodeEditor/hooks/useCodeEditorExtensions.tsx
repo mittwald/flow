@@ -63,7 +63,7 @@ export const useCodeEditorExtensions = (
   }
 
   if (language) {
-    supportedCodeEditorLanguages[language].map((loader) =>
+    supportedCodeEditorLanguages[language]?.map((loader) =>
       extensions.push(loader()),
     );
   }
