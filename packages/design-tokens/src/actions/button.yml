@@ -539,3 +539,173 @@ button:
       value: "{light-outline-border-color}"
     disabled:
       value: "{disabled-outline-light-border-color}"
+
+  # Static Dark Solid
+  static-dark-solid-background-color:
+    default:
+      value: "{static-dark-solid-background-color.default}"
+    hover:
+      value: "{static-dark-solid-background-color.hover}"
+    pressed:
+      value: "{static-dark-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-static-dark-background-color}"
+  static-dark-solid-content-color:
+    default:
+      value: "{static-dark-solid-content-color}"
+    hover:
+      value: "{static-dark-solid-content-color}"
+    pressed:
+      value: "{static-dark-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-static-dark-content-color}"
+
+  # Static Dark Plain
+  static-dark-plain-background-color:
+    default:
+      value: "{static-dark-plain-background-color.default}"
+    hover:
+      value: "{static-dark-plain-background-color.hover}"
+    pressed:
+      value: "{static-dark-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  static-dark-plain-content-color:
+    default:
+      value: "{static-dark-plain-content-color}"
+    hover:
+      value: "{static-dark-plain-content-color}"
+    pressed:
+      value: "{static-dark-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-static-dark-content-color}"
+
+  # Static Dark Soft
+  static-dark-soft-background-color:
+    default:
+      value: "{static-dark-soft-background-color.default}"
+    hover:
+      value: "{static-dark-soft-background-color.hover}"
+    pressed:
+      value: "{static-dark-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-static-dark-background-color}"
+  static-dark-soft-content-color:
+    default:
+      value: "{static-dark-soft-content-color}"
+    hover:
+      value: "{static-dark-soft-content-color}"
+    pressed:
+      value: "{static-dark-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-static-dark-content-color}"
+
+  # Static Dark Outline
+  static-dark-outline-background-color:
+    default:
+      value: "{static-dark-outline-background-color.default}"
+    hover:
+      value: "{static-dark-outline-background-color.hover}"
+    pressed:
+      value: "{static-dark-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-static-dark-background-color}"
+  static-dark-outline-content-color:
+    default:
+      value: "{static-dark-outline-content-color}"
+    hover:
+      value: "{static-dark-outline-content-color}"
+    pressed:
+      value: "{static-dark-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-static-dark-content-color}"
+  static-dark-outline-border-color:
+    default:
+      value: "{static-dark-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-static-dark-border-color}"
+
+  # Static Light Solid
+  static-light-solid-background-color:
+    default:
+      value: "{static-light-solid-background-color.default}"
+    hover:
+      value: "{static-light-solid-background-color.hover}"
+    pressed:
+      value: "{static-light-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-static-light-background-color}"
+  static-light-solid-content-color:
+    default:
+      value: "{static-light-solid-content-color}"
+    hover:
+      value: "{static-light-solid-content-color}"
+    pressed:
+      value: "{static-light-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-static-light-content-color}"
+
+  # Static Light Plain
+  static-light-plain-background-color:
+    default:
+      value: "{static-light-plain-background-color.default}"
+    hover:
+      value: "{static-light-plain-background-color.hover}"
+    pressed:
+      value: "{static-light-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  static-light-plain-content-color:
+    default:
+      value: "{static-light-plain-content-color}"
+    hover:
+      value: "{static-light-plain-content-color}"
+    pressed:
+      value: "{static-light-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-static-light-content-color}"
+
+  # Static Light Soft
+  static-light-soft-background-color:
+    default:
+      value: "{static-light-soft-background-color.default}"
+    hover:
+      value: "{static-light-soft-background-color.hover}"
+    pressed:
+      value: "{static-light-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-static-light-background-color}"
+  static-light-soft-content-color:
+    default:
+      value: "{static-light-soft-content-color}"
+    hover:
+      value: "{static-light-soft-content-color}"
+    pressed:
+      value: "{static-light-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-static-light-content-color}"
+
+  # Static Light Outline
+  static-light-outline-background-color:
+    default:
+      value: "{static-light-outline-background-color.default}"
+    hover:
+      value: "{static-light-outline-background-color.hover}"
+    pressed:
+      value: "{static-light-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-static-light-background-color}"
+  static-light-outline-content-color:
+    default:
+      value: "{static-light-outline-content-color}"
+    hover:
+      value: "{static-light-outline-content-color}"
+    pressed:
+      value: "{static-light-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-static-light-content-color}"
+  static-light-outline-border-color:
+    default:
+      value: "{static-light-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-static-light-border-color}"

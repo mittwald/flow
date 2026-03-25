@@ -9,3 +9,7 @@ loading-spinner:
     value: "{light-plain-content-color}"
   color-dark:
     value: "{dark-plain-content-color}"
+  color-static-light:
+    value: "{static-light-plain-content-color}"
+  color-static-dark:
+    value: "{static-dark-plain-content-color}"

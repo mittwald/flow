@@ -11,10 +11,12 @@
     }
   }
 
-  @include color("dark");
-  @include color("light");
   @include color("danger");
   @include color("unavailable");
+  @include color("dark");
+  @include color("light");
+  @include color("static-dark");
+  @include color("static-light");
 
   .headingText {
     .icon {

@@ -1,7 +1,11 @@
 import type { PropsWithChildren } from "react";
 import styles from "./Badge.module.scss";
 import clsx from "clsx";
-import type { PropsWithClassName } from "@/lib/types/props";
+import {
+  alphaColors,
+  isAlphaColor,
+  type PropsWithClassName,
+} from "@/lib/types/props";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -19,8 +23,7 @@ export const badgeColors = [
   "green",
   "orange",
   "red",
-  "dark",
-  "light",
+  ...alphaColors,
 ] as const;
 export type BadgeColors = (typeof badgeColors)[number];
 
@@ -97,7 +100,7 @@ export const Badge = flowComponent("Badge", (props) => {
           <Button
             className={styles.close}
             size="s"
-            color={color === "light" ? "light" : "dark"}
+            color={isAlphaColor(color) ? color : "dark"}
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}

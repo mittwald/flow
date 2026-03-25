@@ -151,40 +151,78 @@ warning:
 dark:
   color:
     100:
-      value: "rgb(0 0 0 / 12.5%)"
+      value: "{color.black-alpha.100}"
     200:
-      value: "rgb(0 0 0 / 25%)"
+      value: "{color.black-alpha.200}"
     300:
-      value: "rgb(0 0 0 / 37.5%)"
+      value: "{color.black-alpha.300}"
     400:
-      value: "rgb(0 0 0 / 50%)"
+      value: "{color.black-alpha.400}"
     500:
-      value: "rgb(0 0 0 / 62.5%)"
+      value: "{color.black-alpha.500}"
     600:
-      value: "rgb(0 0 0 / 75%)"
+      value: "{color.black-alpha.600}"
     700:
-      value: "rgb(0 0 0 / 87.5%)"
+      value: "{color.black-alpha.700}"
     800:
-      value: "rgb(0 0 0 / 100%)"
+      value: "{color.black-alpha.800}"
 
 light:
   color:
     100:
-      value: "rgb(255 255 255 / 12.5%)"
+      value: "{color.white-alpha.100}"
     200:
-      value: "rgb(255 255 255 / 25%)"
+      value: "{color.white-alpha.200}"
     300:
-      value: "rgb(255 255 255 / 37.5%)"
+      value: "{color.white-alpha.300}"
     400:
-      value: "rgb(255 255 255 / 50%)"
+      value: "{color.white-alpha.400}"
     500:
-      value: "rgb(255 255 255 / 62.5%)"
+      value: "{color.white-alpha.500}"
     600:
-      value: "rgb(255 255 255 / 75%)"
+      value: "{color.white-alpha.600}"
     700:
-      value: "rgb(255 255 255 / 87.5%)"
+      value: "{color.white-alpha.700}"
     800:
-      value: "rgb(255 255 255 / 100%)"
+      value: "{color.white-alpha.800}"
+
+static-dark:
+  color:
+    100:
+      value: "{color.static-black-alpha.100}"
+    200:
+      value: "{color.static-black-alpha.200}"
+    300:
+      value: "{color.static-black-alpha.300}"
+    400:
+      value: "{color.static-black-alpha.400}"
+    500:
+      value: "{color.static-black-alpha.500}"
+    600:
+      value: "{color.static-black-alpha.600}"
+    700:
+      value: "{color.static-black-alpha.700}"
+    800:
+      value: "{color.static-black-alpha.800}"
+
+static-light:
+  color:
+    100:
+      value: "{color.static-white-alpha.100}"
+    200:
+      value: "{color.static-white-alpha.200}"
+    300:
+      value: "{color.static-white-alpha.300}"
+    400:
+      value: "{color.static-white-alpha.400}"
+    500:
+      value: "{color.static-white-alpha.500}"
+    600:
+      value: "{color.static-white-alpha.600}"
+    700:
+      value: "{color.static-white-alpha.700}"
+    800:
+      value: "{color.static-white-alpha.800}"
 
 # Primary Solid
 primary-solid-background-color:
@@ -495,6 +533,14 @@ disabled-solid-light-background-color:
   value: "{light.color.300}"
 disabled-solid-light-content-color:
   value: "{dark.color.300}"
+disabled-solid-static-dark-background-color:
+  value: "{static-dark.color.300}"
+disabled-solid-static-dark-content-color:
+  value: "{static-light.color.300}"
+disabled-solid-static-light-background-color:
+  value: "{static-light.color.300}"
+disabled-solid-static-light-content-color:
+  value: "{static-dark.color.300}"
 
 # Disabled Plain
 disabled-plain-background-color:
@@ -505,6 +551,10 @@ disabled-plain-dark-content-color:
   value: "{dark.color.300}"
 disabled-plain-light-content-color:
   value: "{light.color.300}"
+disabled-plain-static-dark-content-color:
+  value: "{static-dark.color.300}"
+disabled-plain-static-light-content-color:
+  value: "{static-light.color.300}"
 
 # Disabled Outline
 disabled-outline-background-color:
@@ -525,6 +575,18 @@ disabled-outline-light-border-color:
   value: "{light.color.300}"
 disabled-outline-light-content-color:
   value: "{light.color.300}"
+disabled-outline-static-dark-background-color:
+  value: "{color.transparent}"
+disabled-outline-static-dark-border-color:
+  value: "{static-dark.color.300}"
+disabled-outline-static-dark-content-color:
+  value: "{static-dark.color.300}"
+disabled-outline-static-light-background-color:
+  value: "{color.transparent}"
+disabled-outline-static-light-border-color:
+  value: "{static-light.color.300}"
+disabled-outline-static-light-content-color:
+  value: "{static-light.color.300}"
 
 # Disabled Soft
 disabled-soft-background-color:
@@ -539,6 +601,14 @@ disabled-soft-light-background-color:
   value: "{light.color.100}"
 disabled-soft-light-content-color:
   value: "{light.color.200}"
+disabled-soft-static-dark-background-color:
+  value: "{static-dark.color.100}"
+disabled-soft-static-dark-content-color:
+  value: "{static-dark.color.200}"
+disabled-soft-static-light-background-color:
+  value: "{static-light.color.100}"
+disabled-soft-static-light-content-color:
+  value: "{static-light.color.200}"
 
 # Dark Solid
 dark-solid-background-color:
@@ -631,3 +701,95 @@ light-outline-border-color:
   value: "{light.color.800}"
 light-outline-content-color:
   value: "{light.color.800}"
+
+# Static Dark Solid
+static-dark-solid-background-color:
+  default:
+    value: "{static-dark.color.800}"
+  hover:
+    value: "{static-dark.color.700}"
+  pressed:
+    value: "{static-dark.color.600}"
+static-dark-solid-content-color:
+  value: "{static-light.color.800}"
+
+# Static Dark Soft
+static-dark-soft-background-color:
+  default:
+    value: "{static-dark.color.100}"
+  hover:
+    value: "{static-dark.color.200}"
+  pressed:
+    value: "{static-dark.color.300}"
+static-dark-soft-content-color:
+  value: "{static-dark.color.800}"
+
+# Static Dark Plain
+static-dark-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{static-dark.color.100}"
+  pressed:
+    value: "{static-dark.color.200}"
+static-dark-plain-content-color:
+  value: "{static-dark.color.800}"
+
+# Static Dark Outline
+static-dark-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{static-dark.color.100}"
+  pressed:
+    value: "{static-dark.color.200}"
+static-dark-outline-border-color:
+  value: "{static-dark.color.800}"
+static-dark-outline-content-color:
+  value: "{static-dark.color.800}"
+
+# Static Light Solid
+static-light-solid-background-color:
+  default:
+    value: "{static-light.color.800}"
+  hover:
+    value: "{static-light.color.700}"
+  pressed:
+    value: "{static-light.color.600}"
+static-light-solid-content-color:
+  value: "{static-dark.color.800}"
+
+# Static Light Soft
+static-light-soft-background-color:
+  default:
+    value: "{static-light.color.100}"
+  hover:
+    value: "{static-light.color.200}"
+  pressed:
+    value: "{static-light.color.300}"
+static-light-soft-content-color:
+  value: "{static-light.color.800}"
+
+# Static Light Plain
+static-light-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{static-light.color.100}"
+  pressed:
+    value: "{static-light.color.200}"
+static-light-plain-content-color:
+  value: "{static-light.color.800}"
+
+# Static Light Outline
+static-light-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{static-light.color.100}"
+  pressed:
+    value: "{static-light.color.200}"
+static-light-outline-border-color:
+  value: "{static-light.color.800}"
+static-light-outline-content-color:
+  value: "{static-light.color.800}"

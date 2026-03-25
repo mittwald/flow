@@ -238,6 +238,46 @@ badge:
   light-scope-content-color:
     value: "{text.color.dark}"
 
+  # Static Dark
+  static-dark-border-color:
+    value: "{static-dark.color.800}"
+  static-dark-background-color:
+    default:
+      value: "{static-dark.color.100}"
+    hover:
+      value: "{static-dark.color.200}"
+    pressed:
+      value: "{static-dark.color.300}"
+  static-dark-content-color:
+    default:
+      value: "{static-dark.color.800}"
+    pressed:
+      value: "{static-dark.color.800}"
+  static-dark-scope-background-color:
+    value: "{static-dark.color.800}"
+  static-dark-scope-content-color:
+    value: "{text.color.static-light}"
+
+  # Static Light
+  static-light-border-color:
+    value: "{static-light.color.800}"
+  static-light-background-color:
+    default:
+      value: "{static-light.color.100}"
+    hover:
+      value: "{static-light.color.200}"
+    pressed:
+      value: "{static-light.color.300}"
+  static-light-content-color:
+    default:
+      value: "{static-light.color.800}"
+    pressed:
+      value: "{static-light.color.800}"
+  static-light-scope-background-color:
+    value: "{static-light.color.800}"
+  static-light-scope-content-color:
+    value: "{text.color.static-dark}"
+
   # Disabled
   disabled-border-color:
     value: "{disabled-outline-border-color}"
@@ -273,3 +313,27 @@ badge:
     value: "{disabled-solid-light-background-color}"
   disabled-light-scope-content-color:
     value: "{disabled-solid-light-content-color}"
+
+  # Disabled Static Dark
+  disabled-static-dark-border-color:
+    value: "{disabled-outline-static-dark-border-color}"
+  disabled-static-dark-background-color:
+    value: "{disabled-soft-static-dark-background-color}"
+  disabled-static-dark-content-color:
+    value: "{disabled-soft-static-dark-content-color}"
+  disabled-static-dark-scope-background-color:
+    value: "{disabled-solid-static-dark-background-color}"
+  disabled-static-dark-scope-content-color:
+    value: "{disabled-solid-static-dark-content-color}"
+
+  # Disabled Static Light
+  disabled-static-light-border-color:
+    value: "{disabled-outline-static-light-border-color}"
+  disabled-static-light-background-color:
+    value: "{disabled-soft-static-light-background-color}"
+  disabled-static-light-content-color:
+    value: "{disabled-soft-static-light-content-color}"
+  disabled-static-light-scope-background-color:
+    value: "{disabled-solid-static-light-background-color}"
+  disabled-static-light-scope-content-color:
+    value: "{disabled-solid-static-light-content-color}"

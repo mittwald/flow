@@ -7,16 +7,31 @@ inline-code:
     value: "{size-px.xxs}"
   corner-radius:
     value: "{corner-radius.default}"
-
-  default-background-color:
+  background-color:
     value: "{neutral-soft-background-color.default}"
-  default-content-color:
+  content-color:
     value: "{neutral-soft-content-color.default}"
-  light-background-color:
-    value: "{light-soft-background-color.default}"
-  light-content-color:
-    value: "{light-soft-content-color}"
+
+  # Dark
   dark-background-color:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
     value: "{dark-soft-content-color}"
+
+  # Light
+  light-background-color:
+    value: "{light-soft-background-color.default}"
+  light-content-color:
+    value: "{light-soft-content-color}"
+
+  # Static Dark
+  static-dark-background-color:
+    value: "{static-dark-soft-background-color.default}"
+  static-dark-content-color:
+    value: "{static-dark-soft-content-color}"
+
+  # Static Light
+  static-light-background-color:
+    value: "{static-light-soft-background-color.default}"
+  static-light-content-color:
+    value: "{static-light-soft-content-color}"

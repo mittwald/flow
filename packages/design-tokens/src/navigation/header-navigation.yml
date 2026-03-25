@@ -7,28 +7,51 @@ header-navigation:
     value: "{corner-radius.default}"
   corner-radius-round:
     value: "{corner-radius.round}"
+  font-weight-current:
+    value: "{font-weight.bold}"
+  underline-width-current:
+    value: "{border-width.200}"
+
   color:
     value: "{primary.color.1000}"
-  color-dark:
-    value: "{dark-plain-content-color}"
-  color-light:
-    value: "{light-plain-content-color}"
   background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
     pressed:
       value: "{primary-plain-background-color.pressed}"
+
+  # Dark
+  color-dark:
+    value: "{dark-plain-content-color}"
   background-color-dark:
     hover:
       value: "{dark-plain-background-color.hover}"
     pressed:
       value: "{dark-plain-background-color.pressed}"
+
+  # Light
+  color-light:
+    value: "{light-plain-content-color}"
   background-color-light:
     hover:
       value: "{light-plain-background-color.hover}"
     pressed:
       value: "{light-plain-background-color.pressed}"
-  font-weight-current:
-    value: "{font-weight.bold}"
-  underline-width-current:
-    value: "{border-width.200}"
+
+  # Static Dark
+  color-static-dark:
+    value: "{static-dark-plain-content-color}"
+  background-color-static-dark:
+    hover:
+      value: "{static-dark-plain-background-color.hover}"
+    pressed:
+      value: "{static-dark-plain-background-color.pressed}"
+
+  # Static Light
+  color-static-light:
+    value: "{static-light-plain-content-color}"
+  background-color-static-light:
+    hover:
+      value: "{static-light-plain-background-color.hover}"
+    pressed:
+      value: "{static-light-plain-background-color.pressed}"
