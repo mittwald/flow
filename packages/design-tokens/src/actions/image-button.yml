@@ -5,4 +5,4 @@ image-button:
     pressed:
       value: 50%
   hover-icon-color:
-    value: "{color.gray.100}"
+    value: "{static-light-plain-content-color}"
