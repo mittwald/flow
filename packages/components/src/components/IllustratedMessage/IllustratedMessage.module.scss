@@ -45,6 +45,6 @@
   @include status(unavailable);
   @include status(dark);
   @include status(light);
-  @include status(static-dark);
-  @include status(static-light);
+  @include status(dark-static);
+  @include status(light-static);
 }

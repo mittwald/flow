@@ -21,6 +21,6 @@
 
   @include variant(dark);
   @include variant(light);
-  @include variant(static-dark);
-  @include variant(static-light);
+  @include variant(dark-static);
+  @include variant(light-static);
 }

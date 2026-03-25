@@ -5,10 +5,10 @@ heading:
     value: "{dark-plain-content-color}"
   color-light:
     value: "{light-plain-content-color}"
-  color-static-dark:
-    value: "{static-dark-plain-content-color}"
-  color-static-light:
-    value: "{static-light-plain-content-color}"
+  color-dark-static:
+    value: "{dark-static-plain-content-color}"
+  color-light-static:
+    value: "{light-static-plain-content-color}"
   color-danger:
     value: "{danger.color.900}"
   color-unavailable:

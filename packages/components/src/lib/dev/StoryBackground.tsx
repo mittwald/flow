@@ -16,7 +16,7 @@ export const StoryBackground: FC<Props> = (props) => {
     <div
       style={{
         backgroundColor:
-          color === "dark" || color === "static-dark" ? "#E5EFF8" : "#3A434E",
+          color === "dark" || color === "dark-static" ? "#E5EFF8" : "#3A434E",
         padding: 16,
         borderRadius: 16,
       }}

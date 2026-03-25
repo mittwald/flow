@@ -47,7 +47,7 @@
     border-radius: var(--header-navigation--corner-radius-round);
   }
 
-  &:not(.light, .dark, .static-dark, .static-light) {
+  &:not(.light, .dark, .dark-static, .light-static) {
     .button {
       color: var(--header-navigation--color);
 
@@ -89,6 +89,6 @@
 
   @include status(dark);
   @include status(light);
-  @include status(static-dark);
-  @include status(static-light);
+  @include status(dark-static);
+  @include status(light-static);
 }

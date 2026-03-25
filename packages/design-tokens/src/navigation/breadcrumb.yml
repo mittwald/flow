@@ -33,20 +33,20 @@ breadcrumb:
     pressed:
       value: "{light.color.600}"
 
-  # Static Dark
-  color-static-dark:
+  # Dark Static
+  color-dark-static:
     default:
-      value: "{static-dark.color.800}"
+      value: "{dark-static.color.800}"
     hover:
-      value: "{static-dark.color.700}"
+      value: "{dark-static.color.700}"
     pressed:
-      value: "{static-dark.color.600}"
+      value: "{dark-static.color.600}"
 
-  # Static Light
-  color-static-light:
+  # Light Static
+  color-light-static:
     default:
-      value: "{static-light.color.800}"
+      value: "{light-static.color.800}"
     hover:
-      value: "{static-light.color.700}"
+      value: "{light-static.color.700}"
     pressed:
-      value: "{static-light.color.600}"
+      value: "{light-static.color.600}"

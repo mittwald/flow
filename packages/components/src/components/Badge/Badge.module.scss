@@ -125,8 +125,8 @@
   @include color("red");
   @include color("dark");
   @include color("light");
-  @include color("static-dark");
-  @include color("static-light");
+  @include color("dark-static");
+  @include color("light-static");
 
   &.disabled {
     .content,
@@ -172,6 +172,6 @@
 
   @include alphaColor("dark");
   @include alphaColor("light");
-  @include alphaColor("static-dark");
-  @include alphaColor("static-light");
+  @include alphaColor("dark-static");
+  @include alphaColor("light-static");
 }
