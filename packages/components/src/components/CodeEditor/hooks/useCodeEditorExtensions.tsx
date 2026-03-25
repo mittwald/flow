@@ -1,18 +1,18 @@
-import type { Extension } from "@uiw/react-codemirror";
-import { lineNumbers } from "@uiw/react-codemirror";
+import { type Extension, lineNumbers } from "@uiw/react-codemirror";
 import { lintGutter } from "@codemirror/lint";
 import supportedCodeEditorLanguages, {
   type CodeEditorLanguage,
 } from "@/components/CodeEditor/languages";
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
+import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
 
 /** @internal */
 export interface CodeEditorSetup {
-  lineNumbers: boolean;
-  foldGutters: boolean;
-  lintGutters: boolean;
-  indentationMakers: boolean;
+  withLineNumbers?: boolean;
+  withCodeFolding?: boolean;
+  withLinterMarkers?: boolean;
+  withCodeIndentationMakers?: boolean;
 }
 
 /** @internal */
@@ -20,21 +20,17 @@ export const useCodeEditorExtensions = (
   language?: CodeEditorLanguage,
   extensions: Extension[] = [],
   options: CodeEditorSetup = {
-    foldGutters: true,
-    indentationMakers: true,
-    lineNumbers: true,
-    lintGutters: true,
+    withCodeFolding: true,
+    withCodeIndentationMakers: true,
+    withLineNumbers: true,
+    withLinterMarkers: true,
   },
 ) => {
-  if (options.lineNumbers) {
+  if (options.withLineNumbers) {
     extensions.push(lineNumbers());
   }
 
-  if (options.lintGutters) {
-    extensions.push(lintGutter());
-  }
-
-  if (options.foldGutters) {
+  if (options.withCodeFolding) {
     extensions.push(
       foldGutter({
         markerDOM: (open) => {
@@ -50,7 +46,18 @@ export const useCodeEditorExtensions = (
     );
   }
 
-  if (options.indentationMakers) {
+  if (options.withLinterMarkers) {
+    extensions.push(lintGutter());
+  }
+
+  if (
+    options.withLineNumbers &&
+    (!options.withCodeFolding || !options.withLinterMarkers)
+  ) {
+    extensions.push(gutterSpacer());
+  }
+
+  if (options.withCodeIndentationMakers) {
     extensions.push(indentationMarkers());
   }
 

@@ -13,17 +13,24 @@ import { type CodeEditorLanguage } from "@/components/CodeEditor/languages";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useObjectRef } from "react-aria";
 import { defaultLightTheme } from "@/components/CodeEditor/themes/defaultEditorTheme";
-import { useCodeEditorExtensions } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
+import {
+  type CodeEditorSetup,
+  useCodeEditorExtensions,
+} from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
 import React from "react";
 
 export interface CodeEditorProps
-  extends Omit<ReactCodeMirrorProps, "theme" | "lang">, FlowComponentProps {
+  extends
+    Omit<ReactCodeMirrorProps, "theme" | "lang" | "basicSetup" | "readOnly">,
+    CodeEditorSetup,
+    FlowComponentProps {
   defaultValue?: string;
   isReadOnly?: boolean;
   isInvalid?: boolean;
   className?: string;
   language?: CodeEditorLanguage;
+  copyable?: boolean;
 
   isRequired?: boolean;
   validationBehavior?: unknown;
@@ -42,6 +49,12 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     isRequired,
     validationBehavior: _ignoredValidationBehavior,
     value,
+    withLineNumbers = true,
+    withCodeFolding = true,
+    withCodeIndentationMakers = true,
+    withLinterMarkers = true,
+    copyable = true,
+    onChange,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -58,7 +71,12 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     className,
   );
 
-  const enabledExtensions = useCodeEditorExtensions(language, extensions);
+  const enabledExtensions = useCodeEditorExtensions(language, extensions, {
+    withLineNumbers,
+    withCodeIndentationMakers,
+    withCodeFolding,
+    withLinterMarkers,
+  });
 
   const localRef = useObjectRef(ref);
   useMakeFocusable(localRef);
@@ -70,6 +88,11 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
           <CodeMirror
             {...rest}
             value={value}
+            onChange={(value) => {
+              if (!isReadOnly && onChange) {
+                onChange(value);
+              }
+            }}
             basicSetup={{
               autocompletion: false,
               lineNumbers: false,
@@ -88,12 +111,14 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             }}
             extensions={enabledExtensions}
           >
-            <CopyButton
-              className={styles.copyButton}
-              size="s"
-              variant="solid"
-              text={value}
-            />
+            {copyable && (
+              <CopyButton
+                className={styles.copyButton}
+                size="s"
+                variant="soft"
+                text={value}
+              />
+            )}
           </CodeMirror>
           {children}
         </FieldErrorCaptureContext>

@@ -4,8 +4,8 @@ import { tags as t } from "@lezer/highlight";
 export const defaultLightTheme = githubLightInit({
   theme: "light",
   settings: {
-    fontSize: "var(--code-block--font-size);",
-    fontFamily: "FiraCode, monospace",
+    fontSize: "var(--code-editor--font-size);",
+    fontFamily: "var(--code-editor--font-family);",
     foreground: "var(--color--code-syntax--title)",
     background: "transparent",
     gutterBackground: "transparent",

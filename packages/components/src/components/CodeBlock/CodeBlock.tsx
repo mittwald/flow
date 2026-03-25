@@ -1,62 +1,33 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { CopyButton } from "@/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
+import { CodeEditor, type CodeEditorProps } from "@/components/CodeEditor";
 
-export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
-  /** Adds a copy icon to the code block to copy its content. */
-  copyable?: boolean;
-  /** @deprecated */
-  color?: "default" | "light" | "dark";
-  /** The code to display inside the code block. */
-  code?: string | string[];
-
-  // ATTENTION
-  // we reexport by copy the props here - react-typescript-docgen
-  // will not correctly export the props from react-syntax-highlighter
-  // when using OMIT duo some wired circumstances how react-syntax-highlighter
-  // exports his types - the following types are excluded
-  //
-  // children: string | string[];
-  //
-  language?: string | undefined;
-  style?: Record<string, React.CSSProperties> | undefined;
-  customStyle?: React.CSSProperties | undefined;
-  codeTagProps?: React.HTMLProps<HTMLElement> | undefined;
-  useInlineStyles?: boolean | undefined;
-  showLineNumbers?: boolean | undefined;
-  showInlineLineNumbers?: boolean | undefined;
-  startingLineNumber?: number | undefined;
-  lineNumberContainerStyle?: React.CSSProperties | undefined;
-  lineNumberStyle?: React.CSSProperties | lineNumberStyleFunction | undefined;
-  wrapLines?: boolean | undefined;
-  wrapLongLines?: boolean | undefined;
-  lineProps?: lineTagPropsFunction | React.HTMLProps<HTMLElement> | undefined;
-  renderer?: (props: rendererProps) => React.ReactNode;
-  PreTag?:
-    | keyof React.JSX.IntrinsicElements
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | React.ComponentType<any>
-    | undefined;
-  CodeTag?:
-    | keyof React.JSX.IntrinsicElements
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    | React.ComponentType<any>
-    | undefined;
+export interface CodeBlockProps
+  extends
+    PropsWithClassName,
+    PropsWithChildren,
+    Pick<CodeEditorProps, "language" | "withLineNumbers" | "copyable"> {
+  code?: string;
 }
 
 /** @flr-generate all */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const { code, className, copyable, children, ...rest } = props;
+  const {
+    code,
+    className,
+    copyable = false,
+    withLineNumbers = false,
+    children,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.codeBlock, className);
 
   if (!code) {
     return (
-      <div className={rootClassName}>
+      <div className={clsx(rootClassName, styles.withCodeContent)}>
         <pre>
           <code>{children}</code>
         </pre>
@@ -66,30 +37,15 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
   return (
     <div className={rootClassName}>
-      <SyntaxHighlighter
-        customStyle={{
-          background: "none",
-          padding: "none",
-          margin: "none",
-        }}
-        useInlineStyles={false}
-        lineNumberStyle={{
-          paddingInlineEnd: "var(--code-block--spacing)",
-          marginInlineEnd: "var(--code-block--spacing)",
-          borderInlineEnd:
-            "var(--code-block--border-width) var(--code-block--border-style) var(--code-block--border-color)",
-        }}
+      <CodeEditor
+        value={code}
+        copyable={copyable}
+        withLineNumbers={withLineNumbers}
+        withLinterMarkers={false}
+        withCodeFolding={false}
         {...rest}
-      >
-        {code}
-      </SyntaxHighlighter>
-      {copyable && (
-        <CopyButton
-          className={styles.copyButton}
-          size="s"
-          text={Array.isArray(code) ? code.join("\r\n") : code}
-        />
-      )}
+        isReadOnly
+      />
     </div>
   );
 };

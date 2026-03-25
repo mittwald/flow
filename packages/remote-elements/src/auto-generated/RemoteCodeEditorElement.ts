@@ -70,12 +70,12 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
-      basicSetup: {},
       className: {},
       color: {},
       content: {},
       contentEditable: {},
       contextMenu: {},
+      copyable: {},
       datatype: {},
       defaultChecked: {},
       defaultValue: {},
@@ -116,7 +116,6 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       prefix: {},
       property: {},
       radioGroup: {},
-      readOnly: {},
       rel: {},
       resource: {},
       results: {},
@@ -138,6 +137,10 @@ export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorE
       value: {},
       vocab: {},
       width: {},
+      withCodeFolding: {},
+      withCodeIndentationMakers: {},
+      withLineNumbers: {},
+      withLinterMarkers: {},
     };
   }
 

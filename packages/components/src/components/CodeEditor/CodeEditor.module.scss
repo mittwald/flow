@@ -13,8 +13,8 @@
 
     .copyButton {
       position: absolute;
-      right: 10px;
-      top: 10px;
+      inset-block-start: var(--form-control--padding-y);
+      inset-inline-end: var(--form-control--padding-x);
       z-index: 1;
     }
 
@@ -22,12 +22,11 @@
       outline: none;
 
       & :global(.cm-lineNumbers .cm-gutterElement) {
-        min-width: 30px;
+        min-width: var(--code-editor--gutter-element-min-width);
       }
 
       & :global(.cm-foldGutter) {
-        display: block;
-        min-width: 30px;
+        min-width: var(--code-editor--gutter-element-min-width);
         text-align: center;
       }
 
