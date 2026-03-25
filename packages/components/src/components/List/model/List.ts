@@ -138,35 +138,51 @@ export class List<T, TMeta = unknown> {
     return new List<T, TMeta>(shape);
   }
 
-  public storeFilterDefaultSettings() {
+  private storeFilterSettings(autosave = false) {
     if (this.settingsStore && this.filterSettingsStorageKey) {
       const data = Object.fromEntries(
         this.filters.map((f) => [
           f.property,
           f
             .getArrayValue()
-            .filter((v) => v.isActive)
+            .filter((v) => v.isActive && (autosave ? f.autosave : true))
             .map((v) => v.id),
         ]),
       );
 
       this.settingsStore.set(
         "List",
-        this.filterSettingsStorageKey,
+        this.filterSettingsStorageKey + (autosave ? ".autosave" : ""),
         Filter.settingsStorageSchema,
         data,
       );
     }
   }
 
-  public getStoredFilterDefaultSettings() {
+  public storeFilterDefaultSettings() {
+    this.storeFilterSettings();
+  }
+
+  public autosaveFilterSettings() {
+    this.storeFilterSettings(true);
+  }
+
+  private getStoredFilterSettings(autosaved = false) {
     if (this.settingsStore && this.filterSettingsStorageKey) {
       return this.settingsStore.get(
         "List",
-        this.filterSettingsStorageKey,
+        this.filterSettingsStorageKey + (autosaved ? ".autosave" : ""),
         Filter.settingsStorageSchema,
       );
     }
+  }
+
+  public getStoredFilterDefaultSettings() {
+    return this.getStoredFilterSettings();
+  }
+
+  public getAutosavedFilterSettings() {
+    return this.getStoredFilterSettings(true);
   }
 
   public getStoredViewModeDefaultSetting() {
