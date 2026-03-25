@@ -8,7 +8,7 @@ import { CodeEditor } from "@mittwald/flow-react-components";
     "const ExampleCodeComponent: FC = () => {\n" +
     "  \n" +
     "  useEffect(() => {\n" +
-    "    // some effect\n" +
+    "    // some effect \n" +
     "  }, []);\n" +
     "  \n" +
     "  return <>Example JSX</>;\n" +
