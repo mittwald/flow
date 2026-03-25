@@ -1,9 +1,12 @@
 import type { FieldProps } from "@/integrations/react-hook-form/components/Field/Field";
 import { useLayoutEffect } from "react";
-import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type { FieldPath, FieldValues, UseFormReturn } from "react-hook-form";
 
-export const useUpdateFormDefaultValue = <T extends FieldValues>(
-  fieldProps: FieldProps<T>,
+export const useUpdateFormDefaultValue = <
+  T extends FieldValues,
+  TName extends FieldPath<T> = FieldPath<T>,
+>(
+  fieldProps: FieldProps<T, TName>,
   form: UseFormReturn<T>,
 ) => {
   const { defaultValue, name } = fieldProps;

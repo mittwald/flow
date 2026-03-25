@@ -2,34 +2,37 @@
 
 import {
   ActionGroup,
+  Autocomplete,
   Button,
-  CopyButton,
+  Checkbox,
+  CheckboxGroup,
   ComboBox,
+  CopyButton,
   FileField,
   Label,
-  Option,
   MarkdownEditor,
+  Option,
+  PasswordCreationField,
   Section,
   Select,
   TextArea,
   TextField,
-  PasswordCreationField,
-  Autocomplete,
-  CheckboxGroup,
-  Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
-  Form,
   Field,
-  SubmitButton,
+  type FieldPropsComponent,
+  Form,
   ResetButton,
+  SubmitButton,
+  useFieldProps,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
-  Policy,
   generatePasswordCreationFieldValidation,
+  Policy,
   RuleType,
 } from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useForm } from "react-hook-form";
+import type { FC } from "react";
 
 const customPolicy = Policy.fromDeclaration({
   minComplexity: 1,
@@ -42,7 +45,37 @@ const customPolicy = Policy.fromDeclaration({
   ],
 });
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const CustomFieldComponent: FC<FieldPropsComponent> = (props) => {
+  const {
+    children,
+    value,
+    onBlur,
+    fieldComponents: {
+      FieldErrorView,
+      FieldComponentContainer,
+      FieldChildrenContainer,
+    },
+  } = useFieldProps(props);
+
+  return (
+    <FieldComponentContainer>
+      <FieldChildrenContainer>
+        <CheckboxGroup
+          value={value}
+          onBlur={onBlur}
+          onChange={(v) => console.log("change", v)}
+        >
+          <Checkbox value="read">Lesen</Checkbox>
+          <Checkbox value="write">Schreiben</Checkbox>
+        </CheckboxGroup>
+        {children}
+      </FieldChildrenContainer>
+      <FieldErrorView />
+    </FieldComponentContainer>
+  );
+};
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Page() {
   const form = useForm({
@@ -59,6 +92,7 @@ export default function Page() {
       password: "",
       permissions: [],
       agreeTerms: false,
+      email: "asd@asd.de",
     },
   });
 
@@ -149,12 +183,10 @@ export default function Page() {
             </Button>
           </FileField>
         </Field>
-        <Field name="permissions">
-          <CheckboxGroup>
+        <Field name="permissions" rules={{ required: "yes" }}>
+          <CustomFieldComponent>
             <Label>Berechtigungen</Label>
-            <Checkbox value="read">Lesen</Checkbox>
-            <Checkbox value="write">Schreiben</Checkbox>
-          </CheckboxGroup>
+          </CustomFieldComponent>
         </Field>
         <Field name="agreeTerms">
           <Label>Terms</Label>
