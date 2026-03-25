@@ -60,3 +60,9 @@
     background-color: var(--neutral--color--200);
   }
 }
+
+[data-flow-theme="dark"] {
+  .header.header {
+    background-color: color-mix(in srgb, #121518 40%, transparent);
+  }
+}

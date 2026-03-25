@@ -1,7 +1,7 @@
 .footer.footer {
   background-color: color-mix(
     in srgb,
-    var(--neutral--color--300) 80%,
+    var(--neutral--color--200) 60%,
     transparent
   );
   margin-top: var(--size-px--l);
@@ -37,5 +37,11 @@
     .footerContent {
       padding-inline: var(--size-px--xl);
     }
+  }
+}
+
+[data-flow-theme="dark"] {
+  .footer.footer {
+    background-color: color-mix(in srgb, #121518 40%, transparent);
   }
 }

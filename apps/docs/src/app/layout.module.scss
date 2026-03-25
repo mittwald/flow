@@ -101,3 +101,9 @@
     padding-inline: var(--size-px--m);
   }
 }
+
+[data-flow-theme="dark"] {
+  .body {
+    background-color: #121518;
+  }
+}
