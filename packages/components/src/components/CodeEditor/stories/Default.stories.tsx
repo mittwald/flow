@@ -32,7 +32,7 @@ const meta: Meta<typeof CodeEditor> = {
         "\n" +
         "export const Default: Story = {};\n"
       }
-      language={"tsx"}
+      language="tsx"
       {...props}
     />
   ),

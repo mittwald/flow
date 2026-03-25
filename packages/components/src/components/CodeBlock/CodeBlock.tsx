@@ -8,7 +8,9 @@ export interface CodeBlockProps
   extends
     PropsWithClassName,
     PropsWithChildren,
-    Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable"> {
+    Partial<
+      Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable">
+    > {
   code?: string;
 }
 
