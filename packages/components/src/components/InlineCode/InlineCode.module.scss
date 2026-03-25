@@ -12,15 +12,15 @@
   color: var(--inline-code--content-color);
   background-color: var(--inline-code--background-color);
 
-  @mixin variant($color) {
+  @mixin color($color) {
     &:where(.#{$color}) {
       color: var(--inline-code--#{$color}-content-color);
       background-color: var(--inline-code--#{$color}-background-color);
     }
   }
 
-  @include variant(dark);
-  @include variant(light);
-  @include variant(dark-static);
-  @include variant(light-static);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }

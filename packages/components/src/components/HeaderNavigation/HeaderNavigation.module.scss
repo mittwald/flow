@@ -60,7 +60,7 @@
 
   /* Color */
 
-  @mixin status($color) {
+  @mixin color($color) {
     &.#{$color} {
       .link,
       .button {
@@ -87,8 +87,8 @@
     }
   }
 
-  @include status(dark);
-  @include status(light);
-  @include status(dark-static);
-  @include status(light-static);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }
