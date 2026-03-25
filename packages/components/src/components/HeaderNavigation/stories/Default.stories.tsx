@@ -21,6 +21,7 @@ import { Modal, ModalTrigger } from "@/components/Modal";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -70,7 +71,7 @@ const meta: Meta<typeof HeaderNavigation> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["default", "dark", "light"],
+      options: ["default", ...alphaColors],
     },
   },
   args: { color: "default" },

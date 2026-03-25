@@ -37,51 +37,42 @@ type Story = StoryObj<typeof Badge>;
 export const Default: Story = {};
 
 export const WithScope: Story = {
-  render: (props) => (
-    <Badge {...props}>
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Badge {...props}>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    </StoryBackground>
   ),
 };
 
-export const WithOnPress: Story = {
-  render: (props) => (
-    <Badge
-      {...props}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      Value
-    </Badge>
-  ),
-};
-
-export const WithOnClose: Story = {
-  render: (props) => (
-    <Badge
-      {...props}
-      onClose={() => {
-        alert("closed!");
-      }}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
+export const WithActions: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Badge
+        {...props}
+        onClose={() => {
+          alert("closed!");
+        }}
+        onPress={() => {
+          alert("pressed!");
+        }}
+      >
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    </StoryBackground>
   ),
 };
 
 export const WithContextMenu: Story = {
-  render: (props) => {
+  render: (props, context) => {
     const controller = useOverlayController("ContextMenu");
     const triggerRef = React.useRef(null);
 
     return (
-      <>
+      <StoryBackground color={props.color} theme={context.globals.theme}>
         <Badge ref={triggerRef} onPress={controller.open} {...props}>
           <Label>Scope</Label>
           <Text>Value</Text>
@@ -90,7 +81,7 @@ export const WithContextMenu: Story = {
           <MenuItem>Item 1</MenuItem>
           <MenuItem>Item 2</MenuItem>
         </ContextMenu>
-      </>
+      </StoryBackground>
     );
   },
 };

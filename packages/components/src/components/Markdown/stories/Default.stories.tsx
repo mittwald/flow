@@ -2,12 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Markdown } from "@/components/Markdown";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Markdown> = {
   title: "Content/Markdown",
   component: Markdown,
   argTypes: {
-    color: { control: "inline-radio", options: ["default", "dark", "light"] },
+    color: { control: "inline-radio", options: ["default", ...alphaColors] },
     headingOffset: { control: "inline-radio", options: [0, 1, 2, 3] },
   },
   args: { color: "default", headingOffset: 0 },

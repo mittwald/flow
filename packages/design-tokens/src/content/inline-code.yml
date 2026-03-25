@@ -7,16 +7,31 @@ inline-code:
     value: "{size-px.xxs}"
   corner-radius:
     value: "{corner-radius.s}"
-
-  default-background-color:
+  background-color:
     value: "{neutral-soft-background-color.default}"
-  default-content-color:
+  content-color:
     value: "{neutral-soft-content-color}"
-  light-background-color:
-    value: "{light-soft-background-color.default}"
-  light-content-color:
-    value: "{light-soft-content-color}"
+
+  # Dark
   dark-background-color:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
     value: "{dark-soft-content-color}"
+
+  # Light
+  light-background-color:
+    value: "{light-soft-background-color.default}"
+  light-content-color:
+    value: "{light-soft-content-color}"
+
+  # Foreground
+  foreground-background-color:
+    value: "{foreground-soft-background-color.default}"
+  foreground-content-color:
+    value: "{foreground-soft-content-color}"
+
+  # Foreground Inverted
+  foreground-inverted-background-color:
+    value: "{foreground-inverted-soft-background-color.default}"
+  foreground-inverted-content-color:
+    value: "{foreground-inverted-soft-content-color}"

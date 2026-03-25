@@ -10,15 +10,15 @@ import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
-  /** The color schema of the markdown component. */
-  color?: "default" | "dark" | "light";
+  /** The color schema of the markdown component. @default "default" */
+  color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
   /** @internal */
@@ -28,7 +28,14 @@ export interface MarkdownProps
 
 /** @flr-generate all */
 export const Markdown: FC<MarkdownProps> = (props) => {
-  const { children, color, className, headingOffset = 0, ref, ...rest } = props;
+  const {
+    children,
+    color = "default",
+    className,
+    headingOffset = 0,
+    ref,
+    ...rest
+  } = props;
 
   const components: Components = {
     a: (props) => (

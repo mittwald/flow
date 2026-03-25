@@ -3,12 +3,13 @@ import Text from "../Text";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",
   component: Text,
   argTypes: {
-    color: { control: "inline-radio", options: ["default", "dark", "light"] },
+    color: { control: "inline-radio", options: ["default", ...alphaColors] },
     align: { control: "inline-radio", options: ["start", "end", "center"] },
     wrap: { control: "inline-radio", options: ["wrap", "balance", "pretty"] },
     elementType: {

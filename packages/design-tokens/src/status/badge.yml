@@ -205,6 +205,40 @@ badge:
   light-scope-content-color:
     value: "{text.color.dark}"
 
+  # Foreground
+  foreground-border-color:
+    value: "{foreground.color.800}"
+  foreground-background-color:
+    default:
+      value: "{foreground.color.100}"
+    hover:
+      value: "{foreground.color.200}"
+    pressed:
+      value: "{foreground.color.300}"
+  foreground-content-color:
+    value: "{foreground.color.800}"
+  foreground-scope-background-color:
+    value: "{foreground.color.800}"
+  foreground-scope-content-color:
+    value: "{text.color.foreground-inverted}"
+
+  # Foreground Inverted
+  foreground-inverted-border-color:
+    value: "{foreground-inverted.color.800}"
+  foreground-inverted-background-color:
+    default:
+      value: "{foreground-inverted.color.100}"
+    hover:
+      value: "{foreground-inverted.color.200}"
+    pressed:
+      value: "{foreground-inverted.color.300}"
+  foreground-inverted-content-color:
+    value: "{foreground-inverted.color.800}"
+  foreground-inverted-scope-background-color:
+    value: "{foreground-inverted.color.800}"
+  foreground-inverted-scope-content-color:
+    value: "{text.color.foreground}"
+
   # Disabled
   disabled-border-color:
     value: "{disabled-outline-border-color}"

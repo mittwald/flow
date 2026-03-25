@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "@/components/Link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
@@ -19,7 +20,7 @@ const meta: Meta<typeof Breadcrumb> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["default", "dark", "light"],
+      options: ["default", ...alphaColors],
     },
     size: { control: "inline-radio", options: ["s", "m"] },
   },

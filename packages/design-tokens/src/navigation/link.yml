@@ -37,3 +37,23 @@ link:
       value: "{light.color.600}"
     disabled:
       value: "{disabled-plain-light-content-color}"
+
+  color-foreground:
+    default:
+      value: "{foreground.color.800}"
+    hover:
+      value: "{foreground.color.700}"
+    pressed:
+      value: "{foreground.color.600}"
+    disabled:
+      value: "{disabled-plain-foreground-content-color}"
+
+  color-foreground-inverted:
+    default:
+      value: "{foreground-inverted.color.800}"
+    hover:
+      value: "{foreground-inverted.color.700}"
+    pressed:
+      value: "{foreground-inverted.color.600}"
+    disabled:
+      value: "{disabled-plain-foreground-inverted-content-color}"

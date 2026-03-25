@@ -11,6 +11,7 @@ import TooltipTrigger from "@/components/Tooltip/components/TooltipTrigger";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Image } from "@/components/Image";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",
@@ -29,7 +30,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "accent", "secondary", "danger", "dark", "light"],
+      options: ["primary", "accent", "secondary", "danger", ...alphaColors],
     },
     variant: {
       control: "inline-radio",

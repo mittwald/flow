@@ -4,13 +4,14 @@ import React from "react";
 import { Text } from "@/components/Text";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { dummyText } from "@/lib/dev/dummyText";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof InlineCode> = {
   title: "Content/InlineCode",
   component: InlineCode,
   args: { color: "default" },
   argTypes: {
-    color: { control: "inline-radio", options: ["default", "dark", "light"] },
+    color: { control: "inline-radio", options: ["default", ...alphaColors] },
   },
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>

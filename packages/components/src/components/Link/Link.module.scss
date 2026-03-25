@@ -39,38 +39,6 @@
     color: var(--link--color--disabled);
   }
 
-  &:where(.dark) {
-    color: var(--link--color-dark--default);
-
-    &:hover {
-      color: var(--link--color-dark--hover);
-    }
-
-    &[data-pressed] {
-      color: var(--link--color-dark--pressed);
-    }
-
-    &[aria-disabled] {
-      color: var(--link--color-dark--disabled);
-    }
-  }
-
-  &:where(.light) {
-    color: var(--link--color-light--default);
-
-    &:hover {
-      color: var(--link--color-light--hover);
-    }
-
-    &[data-pressed] {
-      color: var(--link--color-light--pressed);
-    }
-
-    &[aria-disabled] {
-      color: var(--link--color-light--disabled);
-    }
-  }
-
   /* Size s */
 
   &.size-s {
@@ -80,6 +48,30 @@
       height: var(--link--icon-height-s);
     }
   }
+
+  /* Alpha Colors */
+  @mixin color($color) {
+    &:where(.#{$color}) {
+      color: var(--link--color-#{$color}--default);
+
+      &:hover {
+        color: var(--link--color-#{$color}--hover);
+      }
+
+      &[data-pressed] {
+        color: var(--link--color-#{$color}--pressed);
+      }
+
+      &[aria-disabled] {
+        color: var(--link--color-#{$color}--disabled);
+      }
+    }
+  }
+
+  @include color(light);
+  @include color(dark);
+  @include color(foreground);
+  @include color(foreground-inverted);
 
   /* AlertText Colors */
   @mixin status($status) {

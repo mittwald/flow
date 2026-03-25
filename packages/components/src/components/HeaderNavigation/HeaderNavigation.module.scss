@@ -84,4 +84,6 @@
 
   @include status(dark);
   @include status(light);
+  @include status(foreground);
+  @include status(foreground-inverted);
 }

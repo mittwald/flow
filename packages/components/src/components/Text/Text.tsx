@@ -3,7 +3,11 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithElementType } from "@/lib/types/props";
+import {
+  type AlphaColor,
+  isAlphaColor,
+  type PropsWithElementType,
+} from "@/lib/types/props";
 import invariant from "invariant";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -20,8 +24,8 @@ export interface TextProps
     FlowComponentProps {
   /* Whether the elements width should match the width it would have with mold text. */
   emulateBoldWidth?: boolean;
-  /* The color of the text. */
-  color?: "default" | "light" | "dark";
+  /* The color of the text. @default "default" */
+  color?: "default" | AlphaColor;
   /* The alignment of the text. @default "start" */
   align?: "start" | "end" | "center";
   /* The text-wrap property of the text. @default undefined */
@@ -40,7 +44,7 @@ export const Text = flowComponent("Text", (props) => {
     elementType = "span",
     emulateBoldWidth,
     ref,
-    color,
+    color = "default",
     align = "start",
     wrap,
     style: styleFromProps,
@@ -51,7 +55,7 @@ export const Text = flowComponent("Text", (props) => {
 
   const rootClassName = clsx(
     styles.text,
-    (color === "light" || color === "dark") && styles[color],
+    isAlphaColor(color) && styles[color],
     align && styles[`align-${align}`],
     wrap && styles[`wrap-${wrap}`],
     className,

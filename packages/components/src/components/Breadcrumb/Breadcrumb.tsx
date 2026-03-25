@@ -6,24 +6,25 @@ import type { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
 
 export interface BreadcrumbProps
   extends
     Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
-  /** The color of the breadcrumb. */
-  color?: "default" | "dark" | "light";
+  /** The color of the breadcrumb. @default "default" */
+  color?: "default" | AlphaColor;
   /** The size of the element. @default "m" */
   size?: "s" | "m";
 }
 
 /** @flr-generate all */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
-  const { children, className, color, size = "m", ...rest } = props;
+  const { children, className, color = "default", size = "m", ...rest } = props;
 
   const rootClassName = clsx(
     styles.breadcrumb,
-    (color === "light" || color === "dark") && styles[color],
+    isAlphaColor(color) && styles[color],
     size === "s" && styles["size-s"],
     className,
   );

@@ -124,6 +124,8 @@
   @include variant("red");
   @include variant("dark");
   @include variant("light");
+  @include variant("foreground");
+  @include variant("foreground-inverted");
 
   &.disabled {
     .content,

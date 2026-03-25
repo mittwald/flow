@@ -188,6 +188,44 @@ light:
     800:
       value: "{color.white-alpha.800}"
 
+foreground:
+  color:
+    100:
+      value: "{color.foreground-alpha.100}"
+    200:
+      value: "{color.foreground-alpha.200}"
+    300:
+      value: "{color.foreground-alpha.300}"
+    400:
+      value: "{color.foreground-alpha.400}"
+    500:
+      value: "{color.foreground-alpha.500}"
+    600:
+      value: "{color.foreground-alpha.600}"
+    700:
+      value: "{color.foreground-alpha.700}"
+    800:
+      value: "{color.foreground-alpha.800}"
+
+foreground-inverted:
+  color:
+    100:
+      value: "{color.foreground-inverted-alpha.100}"
+    200:
+      value: "{color.foreground-inverted-alpha.200}"
+    300:
+      value: "{color.foreground-inverted-alpha.300}"
+    400:
+      value: "{color.foreground-inverted-alpha.400}"
+    500:
+      value: "{color.foreground-inverted-alpha.500}"
+    600:
+      value: "{color.foreground-inverted-alpha.600}"
+    700:
+      value: "{color.foreground-inverted-alpha.700}"
+    800:
+      value: "{color.foreground-inverted-alpha.800}"
+
 # Primary Solid
 primary-solid-background-color:
   default:
@@ -479,6 +517,14 @@ disabled-solid-light-background-color:
   value: "{light.color.300}"
 disabled-solid-light-content-color:
   value: "{dark.color.300}"
+disabled-solid-foreground-background-color:
+  value: "{foreground.color.300}"
+disabled-solid-foreground-content-color:
+  value: "{foreground-inverted.color.300}"
+disabled-solid-foreground-inverted-background-color:
+  value: "{foreground-inverted.color.300}"
+disabled-solid-foreground-inverted-content-color:
+  value: "{foreground.color.300}"
 
 # Disabled Plain
 disabled-plain-background-color:
@@ -489,6 +535,10 @@ disabled-plain-dark-content-color:
   value: "{dark.color.200}"
 disabled-plain-light-content-color:
   value: "{light.color.200}"
+disabled-plain-foreground-content-color:
+  value: "{foreground.color.200}"
+disabled-plain-foreground-inverted-content-color:
+  value: "{foreground-inverted.color.200}"
 
 # Disabled Outline
 disabled-outline-background-color:
@@ -509,6 +559,18 @@ disabled-outline-light-border-color:
   value: "{light.color.200}"
 disabled-outline-light-content-color:
   value: "{light.color.200}"
+disabled-outline-foreground-background-color:
+  value: "{color.transparent}"
+disabled-outline-foreground-border-color:
+  value: "{foreground.color.200}"
+disabled-outline-foreground-content-color:
+  value: "{foreground.color.200}"
+disabled-outline-foreground-inverted-background-color:
+  value: "{color.transparent}"
+disabled-outline-foreground-inverted-border-color:
+  value: "{foreground-inverted.color.200}"
+disabled-outline-foreground-inverted-content-color:
+  value: "{foreground-inverted.color.200}"
 
 # Disabled Soft
 disabled-soft-background-color:
@@ -523,6 +585,14 @@ disabled-soft-light-background-color:
   value: "{light.color.100}"
 disabled-soft-light-content-color:
   value: "{light.color.200}"
+disabled-soft-foreground-background-color:
+  value: "{foreground.color.100}"
+disabled-soft-foreground-content-color:
+  value: "{foreground.color.200}"
+disabled-soft-foreground-inverted-background-color:
+  value: "{foreground-inverted.color.100}"
+disabled-soft-foreground-inverted-content-color:
+  value: "{foreground-inverted.color.200}"
 
 # Dark Solid
 dark-solid-background-color:
@@ -615,3 +685,95 @@ light-outline-border-color:
   value: "{light.color.800}"
 light-outline-content-color:
   value: "{light.color.800}"
+
+# Foreground Solid
+foreground-solid-background-color:
+  default:
+    value: "{foreground.color.800}"
+  hover:
+    value: "{foreground.color.700}"
+  pressed:
+    value: "{foreground.color.600}"
+foreground-solid-content-color:
+  value: "{foreground-inverted.color.800}"
+
+# Foreground Soft
+foreground-soft-background-color:
+  default:
+    value: "{foreground.color.100}"
+  hover:
+    value: "{foreground.color.200}"
+  pressed:
+    value: "{foreground.color.300}"
+foreground-soft-content-color:
+  value: "{foreground.color.800}"
+
+# Foreground Plain
+foreground-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{foreground.color.100}"
+  pressed:
+    value: "{foreground.color.200}"
+foreground-plain-content-color:
+  value: "{foreground.color.800}"
+
+# Foreground Outline
+foreground-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{foreground.color.100}"
+  pressed:
+    value: "{foreground.color.200}"
+foreground-outline-border-color:
+  value: "{foreground.color.800}"
+foreground-outline-content-color:
+  value: "{foreground.color.800}"
+
+# Foreground Inverse Solid
+foreground-inverted-solid-background-color:
+  default:
+    value: "{foreground-inverted.color.800}"
+  hover:
+    value: "{foreground-inverted.color.700}"
+  pressed:
+    value: "{foreground-inverted.color.600}"
+foreground-inverted-solid-content-color:
+  value: "{foreground.color.800}"
+
+# Foreground Inverted Soft
+foreground-inverted-soft-background-color:
+  default:
+    value: "{foreground-inverted.color.100}"
+  hover:
+    value: "{foreground-inverted.color.200}"
+  pressed:
+    value: "{foreground-inverted.color.300}"
+foreground-inverted-soft-content-color:
+  value: "{foreground-inverted.color.800}"
+
+# Foreground Inverted Plain
+foreground-inverted-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{foreground-inverted.color.100}"
+  pressed:
+    value: "{foreground-inverted.color.200}"
+foreground-inverted-plain-content-color:
+  value: "{foreground-inverted.color.800}"
+
+# Foreground Inverse Outline
+foreground-inverted-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{foreground-inverted.color.100}"
+  pressed:
+    value: "{foreground-inverted.color.200}"
+foreground-inverted-outline-border-color:
+  value: "{foreground-inverted.color.800}"
+foreground-inverted-outline-content-color:
+  value: "{foreground-inverted.color.800}"

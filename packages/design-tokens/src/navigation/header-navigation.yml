@@ -9,26 +9,48 @@ header-navigation:
     value: "{corner-radius.round}"
   color:
     value: "{neutral.color.1100}"
-  color-dark:
-    value: "{dark-plain-content-color}"
-  color-light:
-    value: "{light-plain-content-color}"
   background-color:
     hover:
       value: "{neutral-plain-background-color.hover}"
     pressed:
       value: "{neutral-plain-background-color.pressed}"
+  font-weight-current:
+    value: "{font-weight.bold}"
+  underline-width-current:
+    value: "{border-width.200}"
+
+  # Dark
+  color-dark:
+    value: "{dark-plain-content-color}"
   background-color-dark:
     hover:
       value: "{dark-plain-background-color.hover}"
     pressed:
       value: "{dark-plain-background-color.pressed}"
+
+  # Light
+  color-light:
+    value: "{light-plain-content-color}"
   background-color-light:
     hover:
       value: "{light-plain-background-color.hover}"
     pressed:
       value: "{light-plain-background-color.pressed}"
-  font-weight-current:
-    value: "{font-weight.bold}"
-  underline-width-current:
-    value: "{border-width.200}"
+
+  # Foreground
+  color-foreground:
+    value: "{foreground-plain-content-color}"
+  background-color-foreground:
+    hover:
+      value: "{foreground-plain-background-color.hover}"
+    pressed:
+      value: "{foreground-plain-background-color.pressed}"
+
+  # Foreground Inverted
+  color-foreground-inverted:
+    value: "{foreground-inverted-plain-content-color}"
+  background-color-foreground-inverted:
+    hover:
+      value: "{foreground-inverted-plain-background-color.hover}"
+    pressed:
+      value: "{foreground-inverted-plain-background-color.pressed}"

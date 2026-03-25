@@ -10,7 +10,7 @@ export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
   /** Adds a copy icon to the code block to copy its content. */
   copyable?: boolean;
   /** @deprecated */
-  color?: "default" | "light" | "dark";
+  color?: string;
   /** The code to display inside the code block. */
   code?: string | string[];
 

@@ -10,6 +10,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { dummyText } from "@/lib/dev/dummyText";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -26,7 +27,7 @@ const meta: Meta<typeof IllustratedMessage> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["default", "danger", "unavailable", "light", "dark"],
+      options: ["default", "danger", "unavailable", ...alphaColors],
     },
   },
   args: { color: "default" },
@@ -38,6 +39,9 @@ type Story = StoryObj<typeof IllustratedMessage>;
 export const Default: Story = {};
 
 export const WithActionGroup: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />
@@ -54,6 +58,9 @@ export const WithActionGroup: Story = {
 };
 
 export const WithProgressBar: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />

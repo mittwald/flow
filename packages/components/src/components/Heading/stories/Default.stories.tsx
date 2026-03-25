@@ -6,6 +6,7 @@ import { Section } from "@/components/Section";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Badge } from "@/components/Badge";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -21,7 +22,7 @@ const meta: Meta<typeof Heading> = {
     },
     color: {
       control: "inline-radio",
-      options: ["default", "danger", "unavailable", "dark", "light"],
+      options: ["default", "danger", "unavailable", ...alphaColors],
     },
   },
   args: { level: 2, color: "default" },

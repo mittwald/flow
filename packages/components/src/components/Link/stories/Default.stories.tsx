@@ -5,6 +5,7 @@ import React from "react";
 import { Text } from "@/components/Text";
 import { IconDownload } from "@/components/Icon/components/icons";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -26,7 +27,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["default", "dark", "light"],
+      options: ["default", ...alphaColors],
     },
     isDisabled: {
       control: "boolean",

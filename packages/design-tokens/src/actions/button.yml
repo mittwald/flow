@@ -445,3 +445,141 @@ button:
       value: "{light-outline-border-color}"
     disabled:
       value: "{disabled-outline-light-border-color}"
+
+  # Foreground Solid
+  foreground-solid-background-color:
+    default:
+      value: "{foreground-solid-background-color.default}"
+    hover:
+      value: "{foreground-solid-background-color.hover}"
+    pressed:
+      value: "{foreground-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-foreground-background-color}"
+  foreground-solid-content-color:
+    default:
+      value: "{foreground-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-foreground-content-color}"
+
+  # Foreground Plain
+  foreground-plain-background-color:
+    default:
+      value: "{foreground-plain-background-color.default}"
+    hover:
+      value: "{foreground-plain-background-color.hover}"
+    pressed:
+      value: "{foreground-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  foreground-plain-content-color:
+    default:
+      value: "{foreground-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-foreground-content-color}"
+
+  # Foreground Soft
+  foreground-soft-background-color:
+    default:
+      value: "{foreground-soft-background-color.default}"
+    hover:
+      value: "{foreground-soft-background-color.hover}"
+    pressed:
+      value: "{foreground-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-foreground-background-color}"
+  foreground-soft-content-color:
+    default:
+      value: "{foreground-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-foreground-content-color}"
+
+  # Foreground Outline
+  foreground-outline-background-color:
+    default:
+      value: "{foreground-outline-background-color.default}"
+    hover:
+      value: "{foreground-outline-background-color.hover}"
+    pressed:
+      value: "{foreground-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-foreground-background-color}"
+  foreground-outline-content-color:
+    default:
+      value: "{foreground-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-foreground-content-color}"
+  foreground-outline-border-color:
+    default:
+      value: "{foreground-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-foreground-border-color}"
+
+  # Foreground Inverted Solid
+  foreground-inverted-solid-background-color:
+    default:
+      value: "{foreground-inverted-solid-background-color.default}"
+    hover:
+      value: "{foreground-inverted-solid-background-color.hover}"
+    pressed:
+      value: "{foreground-inverted-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-foreground-inverted-background-color}"
+  foreground-inverted-solid-content-color:
+    default:
+      value: "{foreground-inverted-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-foreground-inverted-content-color}"
+
+  # Foreground Inverted Plain
+  foreground-inverted-plain-background-color:
+    default:
+      value: "{foreground-inverted-plain-background-color.default}"
+    hover:
+      value: "{foreground-inverted-plain-background-color.hover}"
+    pressed:
+      value: "{foreground-inverted-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  foreground-inverted-plain-content-color:
+    default:
+      value: "{foreground-inverted-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-foreground-inverted-content-color}"
+
+  # Foreground Inverted Soft
+  foreground-inverted-soft-background-color:
+    default:
+      value: "{foreground-inverted-soft-background-color.default}"
+    hover:
+      value: "{foreground-inverted-soft-background-color.hover}"
+    pressed:
+      value: "{foreground-inverted-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-foreground-inverted-background-color}"
+  foreground-inverted-soft-content-color:
+    default:
+      value: "{foreground-inverted-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-foreground-inverted-content-color}"
+
+  # Foreground Inverted Outline
+  foreground-inverted-outline-background-color:
+    default:
+      value: "{foreground-inverted-outline-background-color.default}"
+    hover:
+      value: "{foreground-inverted-outline-background-color.hover}"
+    pressed:
+      value: "{foreground-inverted-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-foreground-inverted-background-color}"
+  foreground-inverted-outline-content-color:
+    default:
+      value: "{foreground-inverted-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-foreground-inverted-content-color}"
+  foreground-inverted-outline-border-color:
+    default:
+      value: "{foreground-inverted-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-foreground-inverted-border-color}"

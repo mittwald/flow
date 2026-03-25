@@ -179,24 +179,32 @@
   @include variant(secondary, solid);
   @include variant(dark, solid);
   @include variant(light, solid);
+  @include variant(foreground, solid);
+  @include variant(foreground-inverted, solid);
   @include variant(primary, plain);
   @include variant(accent, plain);
   @include variant(danger, plain);
   @include variant(secondary, plain);
   @include variant(dark, plain);
   @include variant(light, plain);
+  @include variant(foreground, plain);
+  @include variant(foreground-inverted, plain);
   @include variant(primary, soft);
   @include variant(accent, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
   @include variant(dark, soft);
   @include variant(light, soft);
+  @include variant(foreground, soft);
+  @include variant(foreground-inverted, soft);
   @include variant(primary, outline);
   @include variant(accent, outline);
   @include variant(danger, outline);
   @include variant(secondary, outline);
   @include variant(dark, outline);
   @include variant(light, outline);
+  @include variant(foreground, outline);
+  @include variant(foreground-inverted, outline);
   @include avatarButton.avatarButton();
 
   &:has(.image) {
