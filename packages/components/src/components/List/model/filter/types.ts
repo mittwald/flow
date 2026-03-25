@@ -21,6 +21,16 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   values?: readonly TMatcherValue[];
   name?: string;
   defaultSelected?: readonly NonNullable<TMatcherValue>[];
+  /**
+   * If provided, the filter will be initialized with these values instead of
+   * the defaultSelected and restored selections from any provided settings
+   * storage. It behaves like an initial user initiated selection.
+   */
+  initialSelected?: readonly NonNullable<TMatcherValue>[];
+  onChange?: FilterUpdatedCallback;
   priority?: "primary" | "secondary";
+  autosave?: boolean;
   dateRangeOptions?: RangeCalendarProps;
 }
+
+export type FilterUpdatedCallback = (values: unknown[]) => unknown;

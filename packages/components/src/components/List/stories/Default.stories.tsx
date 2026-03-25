@@ -87,7 +87,7 @@ const meta: Meta<typeof List> = {
               values={availableTypes}
               property="type"
               name="Type"
-              defaultSelected={["Domain"]}
+              initialSelected={["Subdomain"]}
             />
 
             <DomainList.Search autoFocus />

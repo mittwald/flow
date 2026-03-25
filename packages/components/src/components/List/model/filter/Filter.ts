@@ -10,6 +10,7 @@ import type {
   FilterMatcher,
   FilterMode,
   FilterShape,
+  FilterUpdatedCallback,
 } from "@/components/List/model/filter/types";
 import type {
   PropertyName,
@@ -33,6 +34,11 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
+interface InitialValuesOptions {
+  includeAutosaved?: boolean;
+  includeInitialProp?: boolean;
+}
+
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public static readonly settingsStorageSchema = z
     .record(z.string().or(z.symbol()), z.array(z.string()))
@@ -41,19 +47,23 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private _values?: FilterValue[] | undefined;
   private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
-  public readonly property: PropertyName<T>;
+  public readonly property: TProp;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher<T, never, never>;
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
-  private onFilterUpdateCallbacks = new Set<() => unknown>();
+  public readonly autosave: boolean;
+  private onFilterChangeCallbacks = new Set<FilterUpdatedCallback>();
   private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
+  private readonly initialSelectedValues?: readonly NonNullable<TMatchValue>[];
   public readonly priority: "primary" | "secondary";
+  private storageKey: string;
   public readonly dateRangeOptions?: RangeCalendarProps;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
     this.property = shape.property;
+    this.storageKey = String(shape.property);
     this.mode = shape.mode ?? "some";
     this._values = shape.values?.map((v) => FilterValue.create(this, v));
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
@@ -62,14 +72,28 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.priority = shape.priority ?? "primary";
     this.dateRangeOptions = shape.dateRangeOptions;
     this.defaultSelectedValues = shape.defaultSelected;
+    this.initialSelectedValues = shape.initialSelected;
+    this.autosave = shape.autosave ?? false;
+    if (shape.onChange) {
+      this.onFilterChangeCallbacks.add(shape.onChange);
+    }
   }
 
   private getStoredSelectedIds() {
-    return this.list.getStoredFilterDefaultSettings()?.[String(this.property)];
+    return this.list.getStoredFilterDefaultSettings()?.[this.storageKey];
+  }
+
+  private getAutosavedSelectedIds() {
+    if (this.autosave) {
+      return this.list.getAutosavedFilterSettings()?.[this.storageKey];
+    }
   }
 
   public updateInitialState(initialState: InitialTableState) {
-    const initialValues = this.getInitialValues();
+    const initialValues = this.getInitialValues({
+      includeAutosaved: true,
+      includeInitialProp: true,
+    });
 
     if (initialValues?.length) {
       initialState.columnFilters = [
@@ -122,8 +146,12 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
         filterArr.length === 0 || filterArr.map(toFilterValue).some(predicate)
       );
     } else if (this.mode === "one") {
-      return predicate(toFilterValue(filterValueInput));
+      const oneValue = Array.isArray(filterValueInput)
+        ? filterValueInput[0]
+        : filterValueInput;
+      return predicate(toFilterValue(oneValue));
     }
+
     throw new Error(`Unknown filter mode '${this.mode}'`);
   }
 
@@ -209,7 +237,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public deactivateValue(value: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
-    let updatedValue: unknown;
+    let updatedValue: FilterValue[] | FilterValue | null;
 
     if (this.mode === "all" || this.mode === "some") {
       updatedValue = currentValueAsArray.filter((v) => !v.equals(value));
@@ -220,34 +248,57 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.list.reactTable
       .getTableColumn(this.property)
       .setFilterValue(updatedValue);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+
+    this.callOnChangedHandlers(updatedValue);
+  }
+
+  private callOnChangedHandlers(
+    newValue: FilterValue[] | FilterValue | null,
+  ): void {
+    const values = toArray(newValue).map((v) => v?.value);
+    this.onFilterChangeCallbacks.forEach((cb) => cb(values));
   }
 
   public hasChanged(): boolean {
     const currentValues = this.getArrayValue().map((v) => v.value);
-    const initialValues =
+    const autosavedValues =
       this.getInitialFilterValues()?.map((v) => v.value) ?? [];
 
     return (
-      currentValues.length !== initialValues.length ||
-      difference(currentValues, initialValues).length > 0
+      currentValues.length !== autosavedValues.length ||
+      difference(currentValues, autosavedValues).length > 0
     );
   }
 
-  private getInitialValues() {
-    return this.getStoredSelectedIds() ?? this.defaultSelectedValues;
+  private getInitialValues(options: InitialValuesOptions = {}) {
+    const { includeAutosaved = false, includeInitialProp = false } = options;
+    return (
+      (includeInitialProp ? this.initialSelectedValues : undefined) ??
+      (includeAutosaved ? this.getAutosavedSelectedIds() : undefined) ??
+      this.getStoredSelectedIds() ??
+      this.defaultSelectedValues
+    );
   }
 
-  private getInitialFilterValues() {
-    return this.getInitialValues()?.map((v) => FilterValue.create(this, v));
+  private getInitialFilterValues(
+    options: InitialValuesOptions = {},
+  ): FilterValue[] {
+    return (
+      this.getInitialValues(options)?.map((v) => FilterValue.create(this, v)) ??
+      []
+    );
   }
 
   public resetValues(): void {
-    let resetTo: unknown;
-    const initialValues = this.getInitialValues();
+    let resetTo: FilterValue[] | FilterValue | null;
+
+    const initialValues = this.getInitialValues({
+      includeAutosaved: false,
+      includeInitialProp: false,
+    });
 
     if (initialValues) {
-      resetTo = initialValues;
+      resetTo = initialValues.map((v) => FilterValue.create(this, v));
     } else {
       if (this.mode === "all" || this.mode === "some") {
         resetTo = [];
@@ -257,23 +308,22 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     }
 
     this.list.reactTable.getTableColumn(this.property).setFilterValue(resetTo);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(resetTo);
   }
 
   public clear(): void {
     this.list.reactTable.getTableColumn(this.property).setFilterValue(null);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(null);
   }
 
   public setDateRangeValue(range: RangeValue<DateValue>) {
     this.list.reactTable.getTableColumn(this.property).setFilterValue(range);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 
   public toggleValue(newValue: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
-    let updatedValue: unknown;
+    let updatedValue: FilterValue[] | FilterValue | null;
 
     if (this.mode === "all" || this.mode === "some") {
       if (newValue.isActive) {
@@ -288,10 +338,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.list.reactTable
       .getTableColumn(this.property)
       .setFilterValue(updatedValue);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(updatedValue);
   }
 
   public onFilterUpdated(cb: () => unknown): void {
-    this.onFilterUpdateCallbacks.add(cb);
+    this.onFilterChangeCallbacks.add(cb);
   }
 }

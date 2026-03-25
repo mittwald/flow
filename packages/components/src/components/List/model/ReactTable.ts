@@ -111,6 +111,7 @@ export class ReactTable<T, TMeta = unknown> {
       if (onChange) {
         onChange(this.list);
       }
+      this.list.autosaveFilterSettings();
     }, [this.list, onChange, table]);
 
     return table;
