@@ -136,12 +136,6 @@
       );
       color: var(--button--#{$color}-#{$variant}-content-color--default);
 
-      &.outline {
-        border-color: var(
-          --button--#{$color}-#{$variant}-border-color--default
-        );
-      }
-
       &:hover:where(:not([data-readonly])) {
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--hover
@@ -163,12 +157,6 @@
           --button--#{$color}-#{$variant}-background-color--disabled
         );
         color: var(--button--#{$color}-#{$variant}-content-color--disabled);
-
-        &.outline {
-          border-color: var(
-            --button--#{$color}-#{$variant}-border-color--disabled
-          );
-        }
       }
     }
   }
@@ -205,6 +193,36 @@
   @include variant(light, outline);
   @include variant(dark-static, outline);
   @include variant(light-static, outline);
+
+  /* Outline */
+
+  @mixin outline($color, $variant) {
+    &:where(.#{$color}.#{$variant}) {
+      &.outline {
+        border-color: var(
+          --button--#{$color}-#{$variant}-border-color--default
+        );
+
+        &[disabled],
+        &.ariaDisabled,
+        &.isPending,
+        &.isFailed {
+          border-color: var(
+            --button--#{$color}-#{$variant}-border-color--disabled
+          );
+        }
+      }
+    }
+  }
+
+  @include outline(primary, outline);
+  @include outline(accent, outline);
+  @include outline(danger, outline);
+  @include outline(secondary, outline);
+  @include outline(dark, outline);
+  @include outline(light, outline);
+  @include outline(dark-static, outline);
+  @include outline(light-static, outline);
   @include avatarButton.avatarButton();
 
   &:has(.image) {

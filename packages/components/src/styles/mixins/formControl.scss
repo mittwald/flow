@@ -37,7 +37,7 @@
 
 @mixin formInteractionStates {
   &::placeholder {
-    color: var(--placeholder-color--default);
+    color: var(--form-control--placeholder-color--default);
   }
 
   /* Hovered */
@@ -88,7 +88,7 @@
     background-color: var(--form-control--background-color--disabled);
 
     &::placeholder {
-      color: var(--placeholder-color--disabled);
+      color: var(--form-control--placeholder-color--disabled);
     }
   }
 }
