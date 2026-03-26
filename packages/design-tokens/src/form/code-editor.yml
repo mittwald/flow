@@ -1,0 +1,7 @@
+code-editor:
+  font-size:
+    value: "{font-size-text.s}"
+  font-family:
+    value: "FiraCode, monospace"
+  gutter-element-min-width:
+    value: "{size-rem.l}"

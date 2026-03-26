@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "analytics": false,
   "defaultBase": "main",
   "namedInputs": {},
   "targetDefaults": {
@@ -43,7 +44,6 @@
       "dependsOn": ["^build", "test:e2e:prepare"],
       "cache": true
     },
-
     "test:unit": {
       "dependsOn": ["^build"],
       "cache": true

@@ -15,6 +15,8 @@ import {
 import SubmitButton from "@/integrations/react-hook-form/components/SubmitButton";
 import ResetButton from "@/integrations/react-hook-form/components/ResetButton";
 import FormRootError from "../../FormRootError";
+import { useFormSubmitController } from "@/integrations/react-hook-form/components/Form/hooks/useFormSubmitController";
+import { Button } from "@/components/Button";
 
 const submitAction = action("submit");
 const afterSubmitAction = action("afterSubmit");
@@ -33,6 +35,8 @@ const meta: Meta<typeof Form> = {
   title: "Integrations/React Hook Form/Form",
   component: Form,
   render: (props) => {
+    const submitController = useFormSubmitController();
+
     const form = useForm<Values>({
       defaultValues: {
         name: "",
@@ -41,7 +45,12 @@ const meta: Meta<typeof Form> = {
     const Field = typedField(form);
 
     return (
-      <Form {...props} form={form} onSubmit={handleSubmit}>
+      <Form
+        {...props}
+        form={form}
+        submitController={submitController}
+        onSubmit={handleSubmit}
+      >
         <Section>
           <Field name="name">
             <TextField>
@@ -51,6 +60,13 @@ const meta: Meta<typeof Form> = {
           <ActionGroup>
             <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
+            <Button
+              onPress={async () => {
+                await submitController.submit();
+              }}
+            >
+              SubmitController
+            </Button>
           </ActionGroup>
         </Section>
       </Form>

@@ -65,8 +65,11 @@ export default function Layout(props: PropsWithChildren) {
                     </NavigationItem>
 
                     <NavigationGroup collapsable>
-                      <NavigationItem page="chart">Chart</NavigationItem>
                       <Heading>Components</Heading>
+                      <NavigationItem page="chart">Chart</NavigationItem>
+                      <NavigationItem page="code-editor">
+                        CodeEditor
+                      </NavigationItem>
                       <NavigationItem page="context-menu">
                         Context Menu
                       </NavigationItem>

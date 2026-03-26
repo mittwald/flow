@@ -2,10 +2,19 @@ import { defineConfig } from "vite";
 import path from "path";
 import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
+import { lezer } from "@lezer/generator/rollup";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [viteI18nPlugin],
+  plugins: [
+    lezer({
+      // lezer don't provide a default export - this dirty workaround creates
+      // a default export - so it works with the default import within vite
+      exportName:
+        "defaultExportHackSeeDefinitionInViteConfigTs = null; export default LRParser.deserialize({ //",
+    }),
+    viteI18nPlugin,
+  ],
   resolve: {
     alias: [
       {

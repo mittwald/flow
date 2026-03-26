@@ -26,6 +26,7 @@ export * from "./CheckboxButton";
 export * from "./CheckboxGroup";
 export * from "./ClearPropsContext";
 export * from "./CodeBlock";
+export * from "./CodeEditor";
 export * from "./Color";
 export * from "./ColumnLayout";
 export * from "./ComboBox";

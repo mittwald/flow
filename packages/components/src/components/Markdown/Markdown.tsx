@@ -14,6 +14,7 @@ import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
+import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
@@ -107,14 +108,17 @@ export const Markdown: FC<MarkdownProps> = (props) => {
           language={
             isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className
-              ? preElementContent.props.className.replace("language-", "")
+              ? (preElementContent.props.className.replace(
+                  "language-",
+                  "",
+                ) as CodeEditorLanguage)
               : undefined
           }
           code={String(
             isValidElement<{ children: string }>(preElementContent)
               ? preElementContent.props.children
               : preElementContent,
-          )}
+          ).trim()}
         />
       );
     },
