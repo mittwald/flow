@@ -42,7 +42,5 @@ import {
   <XAxis dataKey="Zeit" />
   <YAxis domain={[0, 100]} unit=" %" />
   <ChartLegend />
-  <ChartTooltip
-    formatter={(v, k, i, u) => `${k} (${v} ${u})`}
-  />
+  <ChartTooltip />
 </CartesianChart>;
