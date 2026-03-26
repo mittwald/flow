@@ -2,6 +2,7 @@ import styles from "@/components/ProgressBar/ProgressBar.module.scss";
 import React, { type FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
+import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 
 interface Props extends Pick<ProgressBarProps, "segments"> {
   percentage?: number;
@@ -13,17 +14,23 @@ export const ProgressBarBar: FC<Props> = (props) => {
 
   const segmentFill =
     segmentsTotalValue && segments && segments?.length > 0
-      ? segments.map((s, i) => (
-          <div
-            key={s.title}
-            aria-hidden
-            style={{
-              backgroundColor: `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`,
-              width: (100 / segmentsTotalValue) * s.value + "%",
-              height: "100%",
-            }}
-          />
-        ))
+      ? segments.map((s, i) => {
+          const backgroundColor = isCategoricalColor(s.color)
+            ? `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`
+            : s.color;
+
+          return (
+            <div
+              key={s.title}
+              aria-hidden
+              style={{
+                backgroundColor,
+                width: (100 / segmentsTotalValue) * s.value + "%",
+                height: "100%",
+              }}
+            />
+          );
+        })
       : null;
 
   return (

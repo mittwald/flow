@@ -9,6 +9,7 @@ import Heading from "@/components/Heading";
 import type { WithTooltipFormatters } from "@/components/CartesianChart";
 import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
 import SkeletonTextView from "@/views/SkeletonTextView";
+import { TooltipProgressBar } from "@/components/CartesianChart/components/ChartTooltip/TooltipProgressBar";
 
 /** @internal */
 export const TooltipContent: FC<
@@ -28,6 +29,8 @@ export const TooltipContent: FC<
     [label, headingFormatter] as const,
   );
 
+  console.log(payload);
+
   const items = payload
     .filter((item) => item.fill !== "none")
     .map((item, index) => {
@@ -38,9 +41,14 @@ export const TooltipContent: FC<
       );
     });
 
+  const areaItems = payload.filter(
+    (item) => item.fill !== "none" && item.graphicalItemId.includes("area"),
+  );
+
   return (
     <>
       <Heading level={4}>{formattedHeading}</Heading>
+      {areaItems && <TooltipProgressBar items={areaItems} />}
       {items}
     </>
   );
