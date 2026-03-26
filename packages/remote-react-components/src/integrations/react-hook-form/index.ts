@@ -6,4 +6,6 @@ export {
   typedField,
   SubmitButton,
   ResetButton,
+  useFormSubmitController,
+  type WithFormSubmitControllerProps,
 } from "@mittwald/flow-react-components/react-hook-form";
