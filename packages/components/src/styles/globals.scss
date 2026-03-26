@@ -104,7 +104,8 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   h4,
   h5,
   h6 {
-    word-break: break-all;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   /*

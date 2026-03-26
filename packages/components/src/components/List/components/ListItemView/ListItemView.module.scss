@@ -23,24 +23,24 @@
   }
 
   .topContent {
-    word-break: break-all;
+    overflow-wrap: anywhere;
     display: flex;
   }
 
   .bottomContent {
     width: 100%;
-    word-break: break-all;
+    overflow-wrap: anywhere;
     display: flex;
     flex-direction: column;
   }
 
   .heading {
     color: var(--text--color--default);
-    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   .header {
-    word-break: break-all;
+    overflow-wrap: anywhere;
     display: flex;
     gap: var(--list-item--avatar-to-title-spacing);
     max-width: 100%;
