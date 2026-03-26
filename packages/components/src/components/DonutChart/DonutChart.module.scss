@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    word-break: break-all;
+    overflow-wrap: anywhere;
     padding: var(--donut-chart--padding--m);
   }
 

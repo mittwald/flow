@@ -105,7 +105,6 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   h5,
   h6 {
     overflow-wrap: anywhere;
-    word-break: normal;
   }
 
   /*
