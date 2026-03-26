@@ -33,10 +33,16 @@ import {
   ]}
 >
   <CartesianGrid />
-  <Area dataKey="Datenbanken" />
-  <Area dataKey="Projekte" color="palatinate-blue" />
+  <Area dataKey="Datenbanken" unit="%" />
+  <Area
+    dataKey="Projekte"
+    color="palatinate-blue"
+    unit="%"
+  />
   <XAxis dataKey="Zeit" />
   <YAxis domain={[0, 100]} unit=" %" />
-  <ChartTooltip formatter={(v, k) => `${k}: ${v} %`} />
   <ChartLegend />
+  <ChartTooltip
+    formatter={(v, k, i, u) => `${k} (${v} ${u})`}
+  />
 </CartesianChart>;

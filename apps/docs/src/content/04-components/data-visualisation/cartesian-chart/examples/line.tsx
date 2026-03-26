@@ -43,7 +43,9 @@ export default () => {
         <XAxis dataKey="Datum" />
         <YAxis />
         <ChartLegend />
-        <ChartTooltip />
+        <ChartTooltip
+          formatter={(v, k) => `${k} (${v} Besucher)`}
+        />
       </CartesianChart>
     </Section>
   );
