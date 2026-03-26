@@ -11,13 +11,17 @@ export class Search<T> {
   public readonly render?: SearchFieldRenderComponent;
   public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
-  private readonly defaultValue?: string;
+  private readonly initialValue?: string;
+  private readonly autosave: boolean;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
+    const { autosave = false, render, textFieldProps } = searchShape;
+
+    this.autosave = autosave;
     this.list = list;
-    this.render = searchShape.render;
-    this.textFieldProps = searchShape.textFieldProps;
-    this.defaultValue = searchShape.defaultValue;
+    this.render = render;
+    this.textFieldProps = textFieldProps;
+    this.initialValue = this.getInitialValue(searchShape);
   }
 
   public get value(): SearchValue {
@@ -32,8 +36,15 @@ export class Search<T> {
     this.onUpdateCallbacks.forEach((cb) => cb());
   }
 
+  private getInitialValue(shape: SearchShape<T>) {
+    return (
+      this.list.settingsStorage?.get("search", { autosave: shape.autosave })
+        ?.value ?? shape.defaultValue
+    );
+  }
+
   public updateInitialState(initialState: InitialTableState) {
-    initialState.globalFilter = this.defaultValue;
+    initialState.globalFilter = this.initialValue;
   }
 
   public setValue(value: SearchValue): void {
@@ -46,6 +57,12 @@ export class Search<T> {
       this.list.reactTable.table.setGlobalFilter(value);
       this.callOnUpdateCallbacks();
     }
+
+    this.list.settingsStorage?.store(
+      "search",
+      { value },
+      { autosave: this.autosave },
+    );
   }
 
   public clear(): void {

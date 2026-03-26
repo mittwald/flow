@@ -18,7 +18,7 @@ export const ViewModeMenuItem: FC<Props> = (props) => {
     <MenuItemView
       id={viewMode}
       onAction={() => {
-        list.setViewMode(viewMode);
+        list.viewMode.set(viewMode);
       }}
     >
       {stringFormatter.format(`list.settings.viewMode.${viewMode}`)}

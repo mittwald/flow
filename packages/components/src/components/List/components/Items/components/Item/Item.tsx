@@ -35,10 +35,12 @@ export const Item = (props: Props) => {
       href={href}
       target={itemView.target}
       hasAction={hasAction}
-      isTile={list.viewMode === "tiles"}
+      isTile={list.viewMode.isTiles}
       {...gridItemProps}
     >
-      <Suspense fallback={<ListItemSkeletonView viewMode={list.viewMode} />}>
+      <Suspense
+        fallback={<ListItemSkeletonView viewMode={list.viewMode.value} />}
+      >
         {children}
       </Suspense>
     </ItemsGridListItemView>
@@ -51,7 +53,7 @@ export const ItemContainer: FC<Props> = (props) => {
     <ItemsGridListItemView
       textValue="-"
       className={styles.item}
-      isTile={list.viewMode === "tiles"}
+      isTile={list.viewMode.isTiles}
     >
       {props.children}
     </ItemsGridListItemView>
