@@ -1,5 +1,4 @@
 import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
-import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/useHotkeySubmit";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
 import { flags } from "@/integrations/react-hook-form/flags";
 import { useModalController } from "@/lib/controller";
@@ -24,6 +23,11 @@ import { FormProvider as RhfFormContextProvider } from "react-hook-form";
 import { useFormRootErrorController } from "../FormRootError/useFormRootErrorController";
 import { FormRootError } from "../../lib/FormRootError";
 import { useFormSettings } from "../FormSettingsProvider/FormSettingsProvider";
+import {
+  useFormSubmitController,
+  type WithFormSubmitControllerProps,
+} from "@/integrations/react-hook-form/components/Form/hooks/useFormSubmitController";
+import { useHotkeySubmit } from "@/integrations/react-hook-form/components/Form/hooks/useHotkeySubmit";
 
 export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
@@ -42,7 +46,10 @@ type FormComponentType = FC<
 >;
 
 export interface FormProps<F extends FieldValues>
-  extends Omit<ComponentProps<"form">, "onSubmit">, PropsWithChildren {
+  extends
+    Omit<ComponentProps<"form">, "onSubmit">,
+    PropsWithChildren,
+    WithFormSubmitControllerProps {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
   formComponent?: FC<Omit<FormComponentType, "ref">>;
@@ -62,6 +69,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     ref,
     id: idProp,
     autoReset = true,
+    submitController: submitControllerFromProps,
     ...formProps
   } = props;
 
@@ -71,6 +79,11 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
   const { isSubmitting, isValidating, isDirty } = form.formState;
   const rootErrorController = useFormRootErrorController();
+
+  const defaultSubmitController = useFormSubmitController();
+  const submitController = submitControllerFromProps
+    ? submitControllerFromProps.submit.extend(defaultSubmitController)
+    : defaultSubmitController;
 
   const autoResetOptions =
     typeof autoReset === "boolean"
@@ -123,6 +136,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       handleSubmitResult(submitResult);
     })(formEvent);
   };
+  submitController.submit.set(handleSubmit);
 
   const onAfterSuccessFeedback = () => {
     afterSubmitCallback.current?.();
@@ -130,7 +144,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const refWithHotkeySubmit = useHotkeySubmit({
     ref,
-    handleSubmit,
+    submitController,
   });
 
   return (

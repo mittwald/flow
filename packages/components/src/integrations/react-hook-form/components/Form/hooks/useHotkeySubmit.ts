@@ -2,18 +2,18 @@ import type { Ref } from "react";
 import { useObjectRef } from "react-aria";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useMergeRefs } from "use-callback-ref";
+import type { WithFormSubmitControllerProps } from "@/integrations/react-hook-form";
 
-interface Options {
+interface Options extends Required<WithFormSubmitControllerProps> {
   ref: Ref<HTMLFormElement> | undefined;
-  handleSubmit: () => void;
 }
 
 export const useHotkeySubmit = (options: Options) => {
-  const { ref, handleSubmit } = options;
+  const { ref, submitController } = options;
 
   return useMergeRefs([
     useObjectRef(ref),
-    useHotkeys<never>("mod+enter", handleSubmit, {
+    useHotkeys<never>("mod+enter", submitController.submit, {
       enableOnFormTags: true,
       enableOnContentEditable: true,
     }),
