@@ -26,7 +26,7 @@ export const ListItemView = (props: ListItemViewProps) => {
     },
     Button: {
       tunnelId: "button",
-      size: dynamic(() => (useList().viewMode === "tiles" ? "s" : "m")),
+      size: dynamic(() => (useList().viewMode.isTiles ? "s" : "m")),
     },
     ActionGroup: {
       tunnelId: "button",
@@ -54,7 +54,7 @@ export const ListItemView = (props: ListItemViewProps) => {
   return (
     <TunnelProvider>
       <ListItemViewContentView
-        viewMode={list.viewMode}
+        viewMode={list.viewMode.value}
         title={<TunnelExit id="title" />}
         avatar={<TunnelExit id="avatar" />}
         button={<TunnelExit id="button" />}

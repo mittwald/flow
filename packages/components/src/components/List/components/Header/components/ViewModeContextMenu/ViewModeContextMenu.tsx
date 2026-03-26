@@ -14,7 +14,7 @@ import ContextMenuView from "@/views/ContextMenuView";
 export const ViewModeContextMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
-  const selectedViewMode = list.viewMode;
+  const selectedViewMode = list.viewMode.value;
 
   const availableViewModes = useAvailableViewModes();
 

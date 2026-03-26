@@ -19,8 +19,8 @@ import type {
 import { customPropertyPrefix } from "@/components/List/model/types";
 import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
-import z from "zod";
 import { toArray } from "@/lib/array/toArray";
+import type { ListSettingsStoreOperationOptions } from "../ListSettingsStore";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -30,16 +30,7 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
-interface InitialValuesOptions {
-  includeAutosaved?: boolean;
-  includeInitialProp?: boolean;
-}
-
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
-  public static readonly settingsStorageSchema = z
-    .record(z.string().or(z.symbol()), z.array(z.string()))
-    .optional();
-
   private _values?: FilterValue[] | undefined;
   private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
@@ -49,55 +40,93 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   public readonly autosave: boolean;
+  public readonly manualSave: boolean;
   private onFilterChangeCallbacks = new Set<FilterUpdatedCallback>();
-  private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
-  private readonly initialSelectedValues?: readonly NonNullable<TMatchValue>[];
+  private readonly defaultSelectedValues?: FilterValue[];
   public readonly priority: "primary" | "secondary";
-  private storageKey: string;
+  public readonly storageKey: string;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
+    const {
+      autosave = true,
+      manualSave = false,
+      property,
+      mode = "some",
+      values,
+      matcher = equalsPropertyMatcher,
+      renderItem = stringCastRenderMethod,
+      priority = "primary",
+      name,
+      defaultSelected,
+      onChange,
+    } = shape;
+
     this.list = list;
-    this.property = shape.property;
-    this.storageKey = String(shape.property);
-    this.mode = shape.mode ?? "some";
-    this._values = shape.values?.map((v) => FilterValue.create(this, v));
-    this.matcher = shape.matcher ?? equalsPropertyMatcher;
-    this.renderItem = shape.renderItem ?? stringCastRenderMethod;
-    this.name = shape.name;
-    this.priority = shape.priority ?? "primary";
-    this.defaultSelectedValues = shape.defaultSelected;
-    this.initialSelectedValues = shape.initialSelected;
-    this.autosave = shape.autosave ?? false;
-    if (shape.onChange) {
-      this.onFilterChangeCallbacks.add(shape.onChange);
-    }
-  }
-
-  private getStoredSelectedIds() {
-    return this.list.getStoredFilterDefaultSettings()?.[this.storageKey];
-  }
-
-  private getAutosavedSelectedIds() {
-    if (this.autosave) {
-      return this.list.getAutosavedFilterSettings()?.[this.storageKey];
+    this.autosave = autosave;
+    this.manualSave = manualSave;
+    this.property = property;
+    this.storageKey = String(property);
+    this.mode = mode;
+    this._values = values?.map((v) => FilterValue.create(this, v));
+    this.matcher = matcher;
+    this.renderItem = renderItem;
+    this.name = name;
+    this.priority = priority;
+    this.defaultSelectedValues = defaultSelected?.map((v) =>
+      FilterValue.create(this, v),
+    );
+    if (onChange) {
+      this.onFilterChangeCallbacks.add(onChange);
     }
   }
 
   public updateInitialState(initialState: InitialTableState) {
-    const initialValues = this.getInitialValues({
-      includeAutosaved: true,
-      includeInitialProp: true,
-    });
+    const initialIds = this.getInitialSelectedIds();
 
-    if (initialValues?.length) {
+    if (initialIds?.length) {
       initialState.columnFilters = [
         ...(initialState.columnFilters ?? []),
         {
           id: this.property as string,
-          value: initialValues,
+          value: initialIds,
         },
       ];
     }
+  }
+
+  private getInitialSelectedIds() {
+    return (
+      this.getStoredSelectedIds({
+        autosave: this.autosave,
+        manualSave: this.manualSave,
+      }) ?? this.defaultSelectedValues?.map((v) => v.id)
+    );
+  }
+
+  private getStoredSelectedIds(options: ListSettingsStoreOperationOptions) {
+    return this.list.settingsStorage?.get("activeFilters", options)?.[
+      this.storageKey
+    ];
+  }
+
+  private getStoredSelectedValues(options: ListSettingsStoreOperationOptions) {
+    return this.getStoredSelectedIds(options)
+      ?.map((id) => this.values.find((v) => v.id === id))
+      .filter((v): v is FilterValue => v !== undefined);
+  }
+
+  public static storeFilters<T>(
+    list: List<T>,
+    options: ListSettingsStoreOperationOptions,
+  ) {
+    const data = Object.fromEntries(
+      list.filters.map((filter) => [
+        filter.storageKey,
+        filter.getArrayValue().map((v) => v.id),
+      ]),
+    );
+
+    list.settingsStorage?.store("activeFilters", data, options);
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -238,46 +267,33 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.onFilterChangeCallbacks.forEach((cb) => cb(values));
   }
 
-  public hasChanged(): boolean {
-    const currentValues = this.getArrayValue().map((v) => v.value);
-    const autosavedValues =
-      this.getInitialFilterValues()?.map((v) => v.value) ?? [];
+  public hasChanges(): boolean {
+    const currentIds = this.getArrayValue().map((v) => v.id);
+
+    const defaultIds =
+      this.getStoredSelectedIds({ autosave: false }) ??
+      this.defaultSelectedValues?.map((v) => v.id) ??
+      [];
 
     return (
-      currentValues.length !== autosavedValues.length ||
-      difference(currentValues, autosavedValues).length > 0
+      currentIds.length !== defaultIds.length ||
+      difference(currentIds, defaultIds).length > 0
     );
   }
 
-  private getInitialValues(options: InitialValuesOptions = {}) {
-    const { includeAutosaved = false, includeInitialProp = false } = options;
-    return (
-      (includeInitialProp ? this.initialSelectedValues : undefined) ??
-      (includeAutosaved ? this.getAutosavedSelectedIds() : undefined) ??
-      this.getStoredSelectedIds() ??
-      this.defaultSelectedValues
-    );
-  }
-
-  private getInitialFilterValues(
-    options: InitialValuesOptions = {},
-  ): FilterValue[] {
-    return (
-      this.getInitialValues(options)?.map((v) => FilterValue.create(this, v)) ??
-      []
-    );
+  public isStoringAvailable(): boolean {
+    return !!this.list.settingsStorage && this.manualSave;
   }
 
   public resetValues(): void {
     let resetTo: FilterValue[] | FilterValue | null;
 
-    const initialValues = this.getInitialValues({
-      includeAutosaved: false,
-      includeInitialProp: false,
-    });
+    const storedValues =
+      this.getStoredSelectedValues({ autosave: false }) ??
+      this.defaultSelectedValues;
 
-    if (initialValues) {
-      resetTo = initialValues.map((v) => FilterValue.create(this, v));
+    if (storedValues) {
+      resetTo = storedValues;
     } else {
       if (this.mode === "all" || this.mode === "some") {
         resetTo = [];
