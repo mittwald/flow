@@ -4,8 +4,9 @@ import type {
   PropertyValueRenderMethod,
 } from "@/components/List/model/types";
 import type { ItemType } from "@/lib/types/array";
+import type { RangeCalendarProps } from "@/components/Calendar";
 
-export type FilterMode = "all" | "some" | "one";
+export type FilterMode = "all" | "some" | "one" | "dateRange";
 
 export type FilterMatcher<T, P, TMatcherValue> = (
   filterBy: NonNullable<ItemType<TMatcherValue>>,
@@ -29,6 +30,7 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   onChange?: FilterUpdatedCallback;
   priority?: "primary" | "secondary";
   autosave?: boolean;
+  dateRangeOptions?: RangeCalendarProps;
 }
 
 export type FilterUpdatedCallback = (values: unknown[]) => unknown;

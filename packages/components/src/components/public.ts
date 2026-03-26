@@ -16,6 +16,7 @@ export * from "@/components/BigNumber";
 export * from "@/components/Breadcrumb";
 export * from "@/components/BrowserOnly";
 export * from "@/components/Button";
+export * from "@/components/Calendar/components/RangeCalendar";
 export * from "@/components/CartesianChart";
 export * from "@/components/Chat";
 export * from "@/components/Checkbox";

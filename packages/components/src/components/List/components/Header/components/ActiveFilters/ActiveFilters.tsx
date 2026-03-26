@@ -23,15 +23,35 @@ export const ActiveFilters: FC = observer(() => {
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales);
 
-  const activeFilterValues = list.filters
-    .flatMap((f) => f.values)
-    .filter((v) => v.isActive);
+  const activeFilters = list.filters.flatMap((f) => {
+    const dateRangeValue = f.getDateRangeValue();
 
-  const activeFilters = activeFilterValues.map((v) => (
-    <BadgeView key={v.id} onClose={() => v.deactivate()}>
-      <TextView>{v.render()}</TextView>
-    </BadgeView>
-  ));
+    if (f.mode === "dateRange" && dateRangeValue) {
+      return [
+        <BadgeView key={f.name} onClose={() => f.clear()}>
+          <TextView>
+            {`${new Date(
+              dateRangeValue.start.year,
+              dateRangeValue.start.month - 1,
+              dateRangeValue.start.day,
+            ).toLocaleDateString("de-DE")} - ${new Date(
+              dateRangeValue.end.year,
+              dateRangeValue.end.month - 1,
+              dateRangeValue.end.day,
+            ).toLocaleDateString("de-DE")}`}
+          </TextView>
+        </BadgeView>,
+      ];
+    }
+
+    return f.values
+      .filter((v) => v.isActive)
+      .map((v) => (
+        <BadgeView key={v.id} onClose={() => v.deactivate()}>
+          <TextView>{v.render()}</TextView>
+        </BadgeView>
+      ));
+  });
 
   const someFiltersChanged =
     list.filters.filter((f) => f.hasChanged()).length > 0;

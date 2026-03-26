@@ -21,6 +21,10 @@ import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
 import z from "zod";
 import { toArray } from "@/lib/array/toArray";
+import type { DateRange, RangeValue } from "react-aria-components";
+import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
+import type { DateValue } from "@internationalized/date";
+import type { RangeCalendarProps } from "@/components/Calendar";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -54,6 +58,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private readonly initialSelectedValues?: readonly NonNullable<TMatchValue>[];
   public readonly priority: "primary" | "secondary";
   private storageKey: string;
+  public readonly dateRangeOptions?: RangeCalendarProps;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -65,6 +70,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
     this.priority = shape.priority ?? "primary";
+    this.dateRangeOptions = shape.dateRangeOptions;
     this.defaultSelectedValues = shape.defaultSelected;
     this.initialSelectedValues = shape.initialSelected;
     this.autosave = shape.autosave ?? false;
@@ -100,9 +106,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     }
   }
 
-  public updateTableColumnDef(def: ColumnDef<T>): void {
+  public updateTableColumnDef(def: ColumnDef<T>, mode?: FilterMode): void {
     def.enableColumnFilter = true;
-    def.filterFn = this.getReactTableFilterFn();
+    def.filterFn =
+      mode === "dateRange" ? dateRangeFilterFn : this.getReactTableFilterFn();
   }
 
   private getReactTableFilterFn(): ColumnDef<T>["filterFn"] {
@@ -160,6 +167,20 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public getValue(): unknown {
     return this.getTableColumnFilter()?.value ?? null;
+  }
+
+  public getDateRangeValue() {
+    const value = this.getTableColumnFilter()?.value;
+
+    if (
+      value &&
+      typeof value === "object" &&
+      "start" in value &&
+      "end" in value
+    ) {
+      return value as DateRange;
+    }
+    return null;
   }
 
   private getValuesFromTableState() {
@@ -293,6 +314,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public clear(): void {
     this.list.reactTable.getTableColumn(this.property).setFilterValue(null);
     this.callOnChangedHandlers(null);
+  }
+
+  public setDateRangeValue(range: RangeValue<DateValue>) {
+    this.list.reactTable.getTableColumn(this.property).setFilterValue(range);
   }
 
   public toggleValue(newValue: FilterValue): void {
