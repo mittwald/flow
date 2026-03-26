@@ -23,6 +23,7 @@ import {
   Field,
   SubmitButton,
   ResetButton,
+  useFormSubmitController,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
   Policy,
@@ -50,6 +51,7 @@ export default function Page() {
       name: "",
       account: "p1122",
       confirm: false,
+      email: "",
       age: 20,
       comment: "",
       message: "",
@@ -62,9 +64,12 @@ export default function Page() {
     },
   });
 
+  const submitController = useFormSubmitController();
+
   return (
     <Section>
       <Form
+        submitController={submitController}
         form={form}
         onSubmit={async (data) => {
           await sleep(5000);
@@ -88,6 +93,11 @@ export default function Page() {
         >
           <TextField>
             <Label>Name</Label>
+          </TextField>
+        </Field>
+        <Field name="email">
+          <TextField>
+            <Label>E-Mail</Label>
           </TextField>
         </Field>
         <Field
@@ -161,7 +171,10 @@ export default function Page() {
           <Checkbox value="true">Verstanden!</Checkbox>
         </Field>
         <ActionGroup>
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton>SubmitButton</SubmitButton>
+          <Button onPress={() => submitController.submit()}>
+            SubmitController
+          </Button>
           <Button
             onPress={() => {
               form.setValue("email", "demo@test.de");
