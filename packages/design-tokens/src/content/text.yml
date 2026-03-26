@@ -12,8 +12,6 @@ text:
       value: "{dark-static-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
-  max-width:
-    value: "780px"
 
   blockquote-border-width:
     value: "{border-width.300}"

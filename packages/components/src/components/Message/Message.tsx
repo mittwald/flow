@@ -37,6 +37,7 @@ export const Message = flowComponent("Message", (props) => {
       children: dynamic((props) => {
         return (
           <>
+            <div className={styles.tipBorder} />
             <div className={styles.tip} />
             {props.children}
           </>

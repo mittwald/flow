@@ -17,3 +17,9 @@ message:
     value: "{size-px.s}"
   tip-size-y:
     value: 12px
+  border-style:
+    value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral.color.300}"
