@@ -105,7 +105,7 @@ export const Badge = flowComponent("Badge", (props) => {
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}
-            aria-label={stringFormatter.format("badge.close")}
+            aria-label={stringFormatter.format("badge.remove")}
           >
             <IconClose />
           </Button>
