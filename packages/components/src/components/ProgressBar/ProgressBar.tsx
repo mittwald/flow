@@ -27,7 +27,7 @@ export interface ProgressBarProps
   segments?: {
     value: number;
     title: string;
-    color?: CategoricalColor;
+    color?: CategoricalColor | string;
     valueText?: string;
   }[];
   /**
