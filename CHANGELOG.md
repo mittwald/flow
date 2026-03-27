@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.758](https://github.com/mittwald/flow/compare/0.2.0-alpha.757...0.2.0-alpha.758) (2026-03-27)
+
+### Bug Fixes
+
+* **List:** fix overflow wrap ([#2407](https://github.com/mittwald/flow/issues/2407)) ([42d766c](https://github.com/mittwald/flow/commit/42d766cb888b400e8d838092bf36d41f6a64808b))
+
 # [0.2.0-alpha.757](https://github.com/mittwald/flow/compare/0.2.0-alpha.756...0.2.0-alpha.757) (2026-03-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
