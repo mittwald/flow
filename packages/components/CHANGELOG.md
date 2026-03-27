@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.754](https://github.com/mittwald/flow/compare/0.2.0-alpha.753...0.2.0-alpha.754) (2026-03-27)
+
+### Features
+
+* introduce static colors ([#2401](https://github.com/mittwald/flow/issues/2401)) ([807837e](https://github.com/mittwald/flow/commit/807837ec97185c3a34286d3de93512920d089edb))
+
 # [0.2.0-alpha.753](https://github.com/mittwald/flow/compare/0.2.0-alpha.752...0.2.0-alpha.753) (2026-03-27)
 
 ### Features
