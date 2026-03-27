@@ -6,15 +6,7 @@ import { lezer } from "@lezer/generator/rollup";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [
-    lezer({
-      // lezer don't provide a default export - this dirty workaround creates
-      // a default export - so it works with the default import within vite
-      exportName:
-        "defaultExportHackSeeDefinitionInViteConfigTs = null; export default LRParser.deserialize({ //",
-    }),
-    viteI18nPlugin,
-  ],
+  plugins: [lezer(), viteI18nPlugin],
   resolve: {
     alias: [
       {
@@ -28,6 +20,9 @@ export default defineConfig({
         replacement: "@tabler/icons-react/dist/esm/icons/index.mjs",
       },
     ],
+  },
+  optimizeDeps: {
+    exclude: ["@lezer/lr"],
   },
   css: {
     modules: {
