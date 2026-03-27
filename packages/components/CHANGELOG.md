@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.756](https://github.com/mittwald/flow/compare/0.2.0-alpha.755...0.2.0-alpha.756) (2026-03-27)
+
+### Bug Fixes
+
+* **LightBox:** lightbox is not correct vertical centered on large content ([#2415](https://github.com/mittwald/flow/issues/2415)) ([0b2b500](https://github.com/mittwald/flow/commit/0b2b500c41d98e4f8c9ae16d4b01c441f8e3d683))
+
 # [0.2.0-alpha.755](https://github.com/mittwald/flow/compare/0.2.0-alpha.754...0.2.0-alpha.755) (2026-03-27)
 
 ### Features
