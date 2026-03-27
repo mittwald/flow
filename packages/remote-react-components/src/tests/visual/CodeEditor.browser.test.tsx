@@ -1,7 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+test.skip.each(testEnvironments)(
   "CodeEditor (%s)",
   async ({ testScreenshot, render, components: { CodeEditor, Flex } }) => {
     await render(

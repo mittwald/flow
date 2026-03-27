@@ -6,6 +6,7 @@ import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
 export default mergeConfig(
   defaultConfig,
   defineConfig({
+    plugins: [],
     test: {
       globals: true,
       globalSetup: "./dev/vitest/setupGlobal.ts",
