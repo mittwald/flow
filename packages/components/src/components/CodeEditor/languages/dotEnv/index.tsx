@@ -8,7 +8,7 @@ import {
 import type { Diagnostic } from "@codemirror/lint";
 import { linter } from "@codemirror/lint";
 import { styleTags, tags as t } from "@lezer/highlight";
-import parser from "./dotEnv.grammar";
+import * as dotEnvGrammar from "./dotEnv.grammar";
 import type { LanguageContainer } from "@/components/CodeEditor/languages";
 
 const definedStyle = HighlightStyle.define([
@@ -27,7 +27,7 @@ const envHighlighting = styleTags({
 });
 
 const lrLanguage = LRLanguage.define({
-  parser: parser.configure({
+  parser: dotEnvGrammar.parser.configure({
     props: [envHighlighting],
   }),
   languageData: {
