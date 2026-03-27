@@ -10,7 +10,7 @@ import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
 import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
@@ -18,8 +18,8 @@ import type { CodeEditorLanguage } from "@/components/CodeEditor/languages";
 
 export interface MarkdownProps
   extends PropsWithClassName, Omit<Options, "components"> {
-  /** The color schema of the markdown component. */
-  color?: "dark" | "light" | "default";
+  /** The color schema of the markdown component. @default "default" */
+  color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
   /** @internal */
@@ -39,7 +39,6 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   } = props;
 
   const headingAndLinkColor = color === "default" ? "primary" : color;
-  const textColor = color === "default" ? undefined : color;
 
   const components: Components = {
     a: (props) => (
@@ -48,7 +47,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       </Link>
     ),
     p: (props) => (
-      <Text elementType="p" color={textColor}>
+      <Text elementType="p" color={color}>
         {props.children}
       </Text>
     ),
@@ -126,17 +125,17 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       );
     },
     ul: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <ul>{props.children as ReactNode}</ul>
       </Text>
     ),
     ol: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <ol>{props.children as ReactNode}</ol>
       </Text>
     ),
     blockquote: (props) => (
-      <Text color={textColor}>
+      <Text color={color}>
         <blockquote>{props.children}</blockquote>
       </Text>
     ),

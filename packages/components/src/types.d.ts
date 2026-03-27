@@ -8,8 +8,7 @@ import "@testing-library/jest-dom";
 declare global {
   declare module "*.grammar" {
     import type { LRParser } from "@lezer/lr";
-    const classes: LRParser;
-    export default classes;
+    export const parser: LRParser;
   }
 
   declare module "*.locale.json" {

@@ -7,7 +7,7 @@ export const FormRootError: FC = () => {
   const form = useFormContext().form;
   useMountedFormRootErrorComponent();
   const error = form.formState.errors.root;
-  return <FieldErrorView>{error?.message}</FieldErrorView>;
+  return <FieldErrorView renderAlert>{error?.message}</FieldErrorView>;
 };
 
 export default FormRootError;
