@@ -1,0 +1,92 @@
+@top DotenvFile {
+  Document
+}
+
+@tokens {
+  // Horizontal whitespace except newlines
+  space { $[\t ]+ }
+
+  // Newlines (line separators)
+  Newline { "\n" | "\r" "\n"? }
+
+  // Identifier for env var name: letters, digits, underscore, dot
+  Identifier { $[A-Za-z_] $[A-Za-z0-9_.]* }
+
+  // Assignment operator
+  Equal { "=" }
+
+  // Full-line comment token: "#" and the rest of the line (up to but not including newline)
+  CommentToken { "#" $[^\n\r]* }
+
+  // Single-quoted string: '...'
+  SQString {
+    "'" (
+      "\\\\" |             // escaped backslash
+      "\\'"  |             // escaped single quote
+      $[A-Za-z0-9_.\-\/ ]  // safe chars (no newline, no backslash, no quote)
+    )* "'"
+  }
+
+  // Double-quoted string: "..."
+  DQString {
+    "\"" (
+      "\\\\" |             // escaped backslash
+      "\\\"" |             // escaped double quote
+      "\\n"  |
+      "\\r"  |
+      "\\t"  |
+      $[A-Za-z0-9_.\-\/ ]  // safe chars
+    )* "\""
+  }
+
+  // Bare value: simple run of non-space, non-newline, non-`#`, non-`=`
+  BareValueToken { $[A-Za-z0-9_.\-\/:+@]+ }
+}
+
+// Skip spaces/tabs globally
+@skip { space }
+
+// ---------- Grammar ----------
+
+Document {
+  Line*
+}
+
+// Each logical line MUST end with a Newline
+Line {
+  ( EnvVarAssignment
+  | Comment
+  | BlankLine
+  ) Newline
+}
+
+// Blank or whitespace-only line: nothing but the Newline
+BlankLine {
+  // empty
+}
+
+// Full-line comment: a single CommentToken
+Comment {
+  CommentToken
+}
+
+// KEY= or KEY=VALUE
+EnvVarAssignment {
+  Identifier Equal Value?
+}
+
+Value {
+  StringValue
+| BareValue
+}
+
+// Quoted value
+StringValue {
+  SQString
+| DQString
+}
+
+// Bare (unquoted) value: just one bare token (no spaces)
+BareValue {
+  BareValueToken
+}

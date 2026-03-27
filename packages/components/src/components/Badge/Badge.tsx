@@ -8,6 +8,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PressEvent } from "@react-types/shared";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export const badgeColors = [
   "neutral",
@@ -48,6 +50,8 @@ export const Badge = flowComponent("Badge", (props) => {
     isDisabled,
     ...rest
   } = props;
+
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const rootClassName = clsx(
     styles.badge,
@@ -101,6 +105,7 @@ export const Badge = flowComponent("Badge", (props) => {
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}
+            aria-label={stringFormatter.format("badge.remove")}
           >
             <IconClose />
           </Button>
