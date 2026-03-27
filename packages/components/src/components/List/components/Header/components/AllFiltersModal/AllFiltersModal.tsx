@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import { useList } from "@/components/List";
@@ -18,6 +17,7 @@ import HeadingView from "@/views/HeadingView";
 import clsx from "clsx";
 import Modal, { ModalTrigger } from "@/components/Modal";
 import { SkeletonText } from "@/components/SkeletonText";
+import { useAvailableViewModes } from "../../lib";
 
 export const AllFiltersModal: FC = () => {
   const list = useList();
@@ -31,9 +31,11 @@ export const AllFiltersModal: FC = () => {
     <FilterAccordion filter={f} key={f.name} />
   ));
 
+  const availableViewModes = useAvailableViewModes();
+
   const accordions = [
-    <ViewModeAccordion key="viewMode" />,
-    <SortingAccordion key="sorting" />,
+    availableViewModes.length > 1 && <ViewModeAccordion key="viewMode" />,
+    list.sorting.length > 0 && <SortingAccordion key="sorting" />,
     ...filterAccordions,
   ].filter(Boolean);
 
