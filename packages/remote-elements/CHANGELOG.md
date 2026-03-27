@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.755](https://github.com/mittwald/flow/compare/0.2.0-alpha.754...0.2.0-alpha.755) (2026-03-27)
+
+### Features
+
+* **Separator:** allow vertical separator ([#2410](https://github.com/mittwald/flow/issues/2410)) ([e0a671a](https://github.com/mittwald/flow/commit/e0a671a8cc13d72617c3c721324205f1f13df1e0))
+
 # [0.2.0-alpha.754](https://github.com/mittwald/flow/compare/0.2.0-alpha.753...0.2.0-alpha.754) (2026-03-27)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
