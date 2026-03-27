@@ -1,0 +1,38 @@
+@use "@/styles/mixins/formControl";
+
+.codeEditor {
+  outline: none;
+
+  .codeMirror {
+    @include formControl.formControl();
+
+    position: relative;
+    padding-left: unset;
+    padding-right: unset;
+    order: 2;
+
+    .copyButton {
+      position: absolute;
+      inset-block-start: var(--form-control--padding-y);
+      inset-inline-end: var(--form-control--padding-x);
+      z-index: 1;
+    }
+
+    & :global(.cm-editor) {
+      outline: none;
+
+      & :global(.cm-lineNumbers .cm-gutterElement) {
+        min-width: var(--code-editor--gutter-element-min-width);
+      }
+
+      & :global(.cm-foldGutter) {
+        min-width: var(--code-editor--gutter-element-min-width);
+        text-align: center;
+      }
+
+      & :global(.cm-panels) {
+        display: none;
+      }
+    }
+  }
+}

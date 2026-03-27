@@ -82,6 +82,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
 
 export * from "./types";
@@ -99,6 +100,7 @@ export interface FlowComponentPropsTypes {
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   Button: ButtonProps;
+  CodeEditor: CodeEditorProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
@@ -184,6 +186,7 @@ const propsContextSupportingComponentsMap: Record<
   Align: true,
   Badge: true,
   Button: true,
+  CodeEditor: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
