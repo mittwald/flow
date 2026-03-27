@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.753](https://github.com/mittwald/flow/compare/0.2.0-alpha.752...0.2.0-alpha.753) (2026-03-27)
+
+### Features
+
+* **FormRootError:** render error message as alert ([#2404](https://github.com/mittwald/flow/issues/2404)) ([791c1a3](https://github.com/mittwald/flow/commit/791c1a330d4d5726d4521a3749b2f9b4c98b0bbb))
+
 # [0.2.0-alpha.752](https://github.com/mittwald/flow/compare/0.2.0-alpha.751...0.2.0-alpha.752) (2026-03-27)
 
 ### Bug Fixes
