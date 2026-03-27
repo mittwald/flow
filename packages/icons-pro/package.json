@@ -26,11 +26,11 @@
     "@tabler/icons-react": "^3.40.0"
   },
   "devDependencies": {
-    "@fortawesome/sharp-regular-svg-icons": "npm:@fortawesome/free-regular-svg-icons",
+    "@fortawesome/sharp-regular-svg-icons": "npm:@fortawesome/free-regular-svg-icons@^7.2.0",
     "@mittwald/flow-icons-base": "workspace:*",
-    "@types/react": "^19.2",
-    "react": "^19.2.0",
-    "rimraf": "^6.1.2",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "rimraf": "^6.1.3",
     "tsx": "^4.21.0"
   },
   "peerDependencies": {

@@ -18,7 +18,7 @@ const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue",
   component: LabeledValue,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   render: (props) => (
     <LabeledValue {...props}>
@@ -32,16 +32,6 @@ export default meta;
 type Story = StoryObj<typeof LabeledValue>;
 
 export const Default: Story = {};
-
-export const WithCopyButton: Story = {
-  render: (props) => (
-    <LabeledValue {...props}>
-      <Label>Project</Label>
-      <Content>My Webhosting</Content>
-      <CopyButton text="My Webhosting" />
-    </LabeledValue>
-  ),
-};
 
 export const WithInlineCode: Story = {
   render: (props) => (

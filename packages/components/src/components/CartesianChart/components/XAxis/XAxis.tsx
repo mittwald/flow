@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
+import { useDesignTokens } from "../../../../lib/theming";
 
 export type XAxisProps = Pick<
   Recharts.XAxisProps,
@@ -21,15 +21,17 @@ export type XAxisProps = Pick<
 
 /** @flr-generate all */
 export const XAxis: FC<XAxisProps> = (props) => {
+  const designTokens = useDesignTokens();
+
   return (
     <Recharts.XAxis
       {...props}
-      fontSize={tokens.axis["font-size"].value}
+      fontSize={designTokens.axis["font-size"].value}
       tick={{
-        fill: tokens.axis["text-color"].value,
+        fill: designTokens.text.color.default.value,
       }}
-      tickMargin={parseInt(tokens.axis.spacing.value)}
-      tickSize={parseInt(tokens.axis["tick-size"].value)}
+      tickMargin={parseInt(designTokens.axis.spacing.value)}
+      tickSize={parseInt(designTokens.axis["tick-size"].value)}
     />
   );
 };

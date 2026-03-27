@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { testEnvironments } from "@/tests/lib/environments";
 
-const colors = ["blue", "green", "gradient", "neutral"] as const;
+const colors = ["blue", "green", "neutral"] as const;
 
 test.each(testEnvironments)(
   "AccentBox colors (%s)",

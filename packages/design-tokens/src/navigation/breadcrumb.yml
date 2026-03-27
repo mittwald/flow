@@ -1,25 +1,4 @@
 breadcrumb:
-  color-primary:
-    default:
-      value: "{primary.color.1000}"
-    hover:
-      value: "{primary.color.900}"
-    pressed:
-      value: "{primary.color.800}"
-  color-light:
-    default:
-      value: "{light.color.800}"
-    hover:
-      value: "{light.color.700}"
-    pressed:
-      value: "{light.color.600}"
-  color-dark:
-    default:
-      value: "{dark.color.800}"
-    hover:
-      value: "{dark.color.700}"
-    pressed:
-      value: "{dark.color.600}"
   spacing:
     value: "{size-rem.s}"
   font-weight:
@@ -27,3 +6,47 @@ breadcrumb:
       value: "{font-weight.normal}"
     current:
       value: "{font-weight.bold}"
+
+  color:
+    default:
+      value: "{text.color.default}"
+    hover:
+      value: "{neutral.color.900}"
+    pressed:
+      value: "{neutral.color.800}"
+
+  # Dark
+  color-dark:
+    default:
+      value: "{link.color-dark.default}"
+    hover:
+      value: "{link.color-dark.hover}"
+    pressed:
+      value: "{link.color-dark.pressed}"
+
+  # Light
+  color-light:
+    default:
+      value: "{link.color-light.default}"
+    hover:
+      value: "{link.color-light.hover}"
+    pressed:
+      value: "{link.color-light.pressed}"
+
+  # Dark Static
+  color-dark-static:
+    default:
+      value: "{link.color-dark-static.default}"
+    hover:
+      value: "{link.color-dark-static.hover}"
+    pressed:
+      value: "{link.color-dark-static.pressed}"
+
+  # Light Static
+  color-light-static:
+    default:
+      value: "{link.color-light-static.default}"
+    hover:
+      value: "{link.color-light-static.hover}"
+    pressed:
+      value: "{link.color-light-static.pressed}"

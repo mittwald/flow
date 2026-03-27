@@ -52,7 +52,7 @@ export default mergeConfig(
           : "",
       ),
       externalizeDeps({
-        except: ["@mittwald/flow-design-tokens/css", "@mittwald/flow-core"],
+        except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
       }),
       dts({
         include: ["src"],

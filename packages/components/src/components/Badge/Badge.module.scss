@@ -83,15 +83,15 @@
     margin-top: var(--badge--border-width);
   }
 
-  /* Variants */
+  /* Colors */
 
-  @mixin variant($color) {
+  @mixin color($color) {
     &:where(.#{$color}) {
       .content,
       .button {
         border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
-        color: var(--badge--#{$color}-content-color--default);
+        color: var(--badge--#{$color}-content-color);
       }
 
       &:not(.disabled) {
@@ -102,7 +102,6 @@
 
           &[data-pressed] {
             background-color: var(--badge--#{$color}-background-color--pressed);
-            color: var(--badge--#{$color}-content-color--pressed);
           }
         }
       }
@@ -114,17 +113,19 @@
     }
   }
 
-  @include variant("neutral");
-  @include variant("blue");
-  @include variant("navy");
-  @include variant("violet");
-  @include variant("teal");
-  @include variant("lilac");
-  @include variant("green");
-  @include variant("orange");
-  @include variant("red");
-  @include variant("dark");
-  @include variant("light");
+  @include color("neutral");
+  @include color("blue");
+  @include color("navy");
+  @include color("violet");
+  @include color("teal");
+  @include color("lilac");
+  @include color("green");
+  @include color("orange");
+  @include color("red");
+  @include color("dark");
+  @include color("light");
+  @include color("dark-static");
+  @include color("light-static");
 
   &.disabled {
     .content,
@@ -144,39 +145,32 @@
     }
   }
 
-  &.light.disabled {
-    .content,
-    .button {
-      border-color: var(--badge--disabled-light-border-color);
-      background-color: var(--badge--disabled-light-background-color);
-      color: var(--badge--disabled-light-content-color);
-    }
+  /* Alpha Colors Disabled */
 
-    .close {
-      color: var(--badge--disabled-light-content-color);
-    }
+  @mixin alphaColor($color) {
+    &.#{$color}.disabled {
+      .content,
+      .button {
+        border-color: var(--badge--disabled-#{$color}-border-color);
+        background-color: var(--badge--disabled-#{$color}-background-color);
+        color: var(--badge--disabled-#{$color}-content-color);
+      }
 
-    .scope {
-      background-color: var(--badge--disabled-light-scope-background-color);
-      color: var(--badge--disabled-light-scope-content-color);
+      .close {
+        color: var(--badge--disabled-#{$color}-content-color);
+      }
+
+      .scope {
+        background-color: var(
+          --badge--disabled-#{$color}-scope-background-color
+        );
+        color: var(--badge--disabled-#{$color}-scope-content-color);
+      }
     }
   }
 
-  &.dark.disabled {
-    .content,
-    .button {
-      border-color: var(--badge--disabled-dark-border-color);
-      background-color: var(--badge--disabled-dark-background-color);
-      color: var(--badge--disabled-dark-content-color);
-    }
-
-    .close {
-      color: var(--badge--disabled-dark-content-color);
-    }
-
-    .scope {
-      background-color: var(--badge--disabled-dark-scope-background-color);
-      color: var(--badge--disabled-dark-scope-content-color);
-    }
-  }
+  @include alphaColor("dark");
+  @include alphaColor("light");
+  @include alphaColor("dark-static");
+  @include alphaColor("light-static");
 }

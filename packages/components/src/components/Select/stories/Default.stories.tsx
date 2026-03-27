@@ -17,6 +17,11 @@ import { Text } from "@/components/Text";
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
   component: Select,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <Select {...props}>
       <Label>App</Label>
@@ -34,16 +39,6 @@ export default meta;
 type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
 
 export const WithFieldDescription: Story = {
   render: (props) => (

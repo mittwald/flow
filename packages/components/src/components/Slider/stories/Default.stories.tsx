@@ -7,24 +7,20 @@ const meta: Meta<typeof Slider> = {
   title: "Form Controls/Slider",
   component: Slider,
   render: (props) => (
-    <Slider {...props}>
+    <Slider {...props} defaultValue={20}>
       <Label>Amount</Label>
     </Slider>
   ),
-  parameters: {
-    controls: { exclude: ["tunnelId", "render", "showInitialMarker"] },
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
   },
-  args: { defaultValue: 20 },
 };
 export default meta;
 
 type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {};
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
 
 export const WithUnit: Story = {
   render: (props) => (
@@ -44,11 +40,9 @@ export const WithUnit: Story = {
   ),
 };
 
-export const Disabled: Story = { args: { isDisabled: true } };
-
 export const WithInitialMarker: Story = {
   render: (props) => (
-    <Slider {...props} showInitialMarker>
+    <Slider {...props} showInitialMarker defaultValue={20}>
       <Label>Amount</Label>
     </Slider>
   ),

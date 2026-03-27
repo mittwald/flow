@@ -1,6 +1,6 @@
 kbd:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.s}"
   padding:
     value: "{size-px.xs}"
   padding-y-start:
@@ -12,7 +12,7 @@ kbd:
       value: "{disabled-soft-background-color}"
   content-color:
     default:
-      value: "{neutral-soft-content-color.default}"
+      value: "{neutral-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
   content-color-plain:

@@ -6,6 +6,8 @@ import {
   Heading,
   IconDomain,
   typedList,
+  IconEdit,
+  IconDelete,
 } from "@mittwald/flow-react-components";
 import {
   type Domain,
@@ -33,11 +35,19 @@ export default () => {
 
             <Content>
               <ActionGroup>
-                <Button variant="soft" color="secondary">
-                  Bearbeiten
+                <Button
+                  aria-label="Bearbeiten"
+                  variant="plain"
+                  color="secondary"
+                >
+                  <IconEdit />
                 </Button>
-                <Button variant="soft" color="danger">
-                  Löschen
+                <Button
+                  aria-label="Löschen"
+                  variant="plain"
+                  color="secondary"
+                >
+                  <IconDelete />
                 </Button>
               </ActionGroup>
             </Content>

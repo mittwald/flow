@@ -5,6 +5,9 @@ import { Separator } from "@/components/Separator";
 const meta: Meta<typeof Separator> = {
   title: "Structure/Separator",
   component: Separator,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => <Separator {...props} />,
 };
 export default meta;

@@ -11,6 +11,9 @@ import { Form, SubmitButton } from "@/integrations/react-hook-form";
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
   component: ActionGroup,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>
@@ -31,18 +34,7 @@ type Story = StoryObj<typeof ActionGroup>;
 
 export const Default: Story = {};
 
-export const Danger: Story = {
-  render: (props) => (
-    <ActionGroup {...props}>
-      <Button color="danger">Delete project</Button>
-      <Button slot="abort" variant="soft" color="secondary">
-        Abort
-      </Button>
-    </ActionGroup>
-  ),
-};
-
-export const Info: Story = {
+export const PrimaryActionOnly: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button>Ok</Button>
@@ -83,10 +75,6 @@ export const WithExtraSecondaryAction: Story = {
       </Button>
     </ActionGroup>
   ),
-};
-
-export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
 };
 
 export const WithSwitch: Story = {

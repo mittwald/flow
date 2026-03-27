@@ -51,6 +51,7 @@ export const Switch = flowComponent("Switch", (props) => {
     Label: {
       ...fieldPropsContext.Label,
       optional: false,
+      className: styles.label,
     },
   };
 

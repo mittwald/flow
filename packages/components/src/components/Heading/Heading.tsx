@@ -1,4 +1,4 @@
-export * from "./view";
+import type { AlphaColor } from "@/lib/types/props";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -11,8 +11,8 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
-  /** The color of the heading. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | "dark" | "light";
+  /** The color of the heading. @default "default" */
+  color?: "default" | "danger" | "unavailable" | AlphaColor;
   /** The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance";
 }
@@ -23,7 +23,7 @@ export const Heading = flowComponent("Heading", (props) => {
     children,
     className,
     level = 2,
-    color = "primary",
+    color = "default",
     wrap,
     size,
     ref,
@@ -33,7 +33,7 @@ export const Heading = flowComponent("Heading", (props) => {
   const rootClassName = clsx(
     styles.heading,
     size && styles[`size-${size}`],
-    styles[color],
+    color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
     className,
   );

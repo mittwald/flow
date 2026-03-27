@@ -6,13 +6,9 @@ import Section from "@/components/Section";
 const meta: Meta<typeof Content> = {
   title: "Content/Content",
   component: Content,
-  argTypes: {
-    elementType: {
-      control: "inline-radio",
-      options: ["div", "section"],
-    },
+  parameters: {
+    controls: { disable: true },
   },
-  args: { elementType: "div" },
   render: (props) => (
     <Section>
       <Content {...props}>

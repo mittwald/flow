@@ -7,27 +7,27 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">>, FlowComponentProps {
-  /** The color of the illustrated message. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | "light" | "dark";
+  /** The color of the illustrated message. @default "default" */
+  color?: "default" | "danger" | "unavailable" | AlphaColor;
 }
 
 /** @flr-generate all */
 export const IllustratedMessage = flowComponent(
   "IllustratedMessage",
   (props) => {
-    const { className, children, color = "primary", ...rest } = props;
+    const { className, children, color = "default", ...rest } = props;
 
     const rootClassName = clsx(
       styles.illustratedMessage,
       className,
-      styles[color],
+      color !== "default" && styles[color],
     );
 
-    const lightOrDarkColor =
-      color === "dark" || color === "light" ? color : undefined;
+    const alphaColor = isAlphaColor(color) ? color : undefined;
 
     const propsContext: PropsContext = {
       Icon: {
@@ -40,10 +40,10 @@ export const IllustratedMessage = flowComponent(
       },
       Text: {
         className: styles.text,
-        color: lightOrDarkColor,
+        color: alphaColor,
       },
       Button: {
-        color: lightOrDarkColor ?? "accent",
+        color: alphaColor,
       },
       ActionGroup: {
         className: styles.actionGroup,

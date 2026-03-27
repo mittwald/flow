@@ -4,7 +4,7 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 const levels = [1, 2, 3, 4, 5, 6] as const;
 const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as const;
-const colors = ["primary", "dark", "light", "danger", "unavailable"] as const;
+const colors = ["default", "dark", "light", "danger", "unavailable"] as const;
 
 test.each(testEnvironments)(
   "Heading sizes (%s)",
@@ -43,8 +43,8 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={color === "light" || color === "dark"} key={color}>
+            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
               <Heading color={color}>
                 <IconStar />
                 {firstLetterToUppercase(color)}

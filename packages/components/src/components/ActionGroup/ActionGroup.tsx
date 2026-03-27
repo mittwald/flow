@@ -15,7 +15,7 @@ export interface ActionGroupProps
     PropsWithChildren,
     FlowComponentProps<HTMLDivElement>,
     PropsWithClassName {
-  /** The spacing between the buttons inside the action group. @default "m" */
+  /** The spacing between the buttons inside the action group. @default "s" */
   spacing?: "s" | "m";
 }
 
@@ -23,14 +23,7 @@ export interface ActionGroupProps
 export const ActionGroup = flowComponent(
   "ActionGroup",
   (props) => {
-    const {
-      children,
-      className,
-      ref,
-
-      spacing = "s",
-      ...rest
-    } = props;
+    const { children, className, ref, spacing = "s", ...rest } = props;
 
     const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
 

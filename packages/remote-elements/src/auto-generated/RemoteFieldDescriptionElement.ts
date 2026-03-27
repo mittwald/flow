@@ -106,6 +106,7 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
       property: {},
       radioGroup: {},
       rel: {},
+      render: {},
       resource: {},
       results: {},
       rev: {},

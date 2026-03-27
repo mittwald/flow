@@ -4,10 +4,11 @@ import { IconPending } from "@/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
 import type { IconProps } from "@/components/Icon";
 import clsx from "clsx";
+import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
 
 export interface LoadingSpinnerProps extends IconProps {
   /** The color of the loading spinner. @default "default" */
-  color?: "default" | "dark" | "light";
+  color?: "default" | AlphaColor;
 }
 
 /** @flr-generate all */
@@ -16,7 +17,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
 
   const rootClassName = clsx(
     styles.loadingSpinner,
-    color !== "default" && styles[color],
+    isAlphaColor(color) && styles[color],
     className,
   );
 

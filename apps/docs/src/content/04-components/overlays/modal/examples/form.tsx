@@ -24,9 +24,11 @@ export default () => {
   const Field = typedField(form);
 
   const handleSubmit = async () => {
-    // submit form
-
-    controller.close();
+    /** ... submit logic */
+    return () => {
+      // Close after successful submission
+      controller.close();
+    };
   };
 
   return (

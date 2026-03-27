@@ -35,6 +35,7 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       maxValue: {},
       minValue: {},
       name: {},
+      render: {},
       slot: {},
       step: {},
       translate: {},

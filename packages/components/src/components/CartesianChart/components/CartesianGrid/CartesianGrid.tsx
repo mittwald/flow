@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
+import { useDesignTokens } from "../../../../lib/theming";
 
 export type CartesianGridProps = Pick<
   Recharts.CartesianGridProps,
@@ -10,13 +10,13 @@ export type CartesianGridProps = Pick<
 /** @flr-generate all */
 export const CartesianGrid: FC<CartesianGridProps> = (props) => {
   const { vertical = false, ...rest } = props;
-
+  const designTokens = useDesignTokens();
   return (
     <Recharts.CartesianGrid
       vertical={vertical}
       {...rest}
-      stroke={tokens["cartesian-grid"].color.value}
-      strokeWidth={tokens["cartesian-grid"]["stroke-width"].value}
+      stroke={designTokens["cartesian-grid"].color.value}
+      strokeWidth={designTokens["cartesian-grid"]["stroke-width"].value}
     />
   );
 };

@@ -9,7 +9,7 @@ const meta: Meta<typeof CopyButton> = {
     text: "Copied content",
   },
   parameters: {
-    controls: { exclude: ["text", "className"] },
+    controls: { disable: true },
   },
 };
 export default meta;

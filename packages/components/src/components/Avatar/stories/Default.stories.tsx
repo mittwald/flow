@@ -21,7 +21,7 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m", "l"],
+      options: ["xs", "s", "m", "l"],
     },
     color: {
       control: "inline-radio",
@@ -37,9 +37,16 @@ export default meta;
 
 type Story = StoryObj<typeof Avatar>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    controls: { exclude: ["color", "status"] },
+  },
+};
 
 export const WithInitials: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
   render: (props) => (
     <Avatar {...props}>
       <Initials>Max Mustermann</Initials>
@@ -48,6 +55,9 @@ export const WithInitials: Story = {
 };
 
 export const WithIcon: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
   render: (props) => (
     <Avatar {...props}>
       <IconApp />
@@ -57,6 +67,9 @@ export const WithIcon: Story = {
 };
 
 export const WithStatus: Story = {
+  parameters: {
+    controls: { exclude: ["color"] },
+  },
   render: (props) => <Avatar {...props} />,
   args: { status: "danger" },
 };

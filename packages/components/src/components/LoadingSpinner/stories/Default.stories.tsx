@@ -1,11 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof LoadingSpinner> = {
   title: "Status/LoadingSpinner",
   component: LoadingSpinner,
-  render: (props) => <LoadingSpinner {...props} />,
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <LoadingSpinner {...props} />
+    </StoryBackground>
+  ),
   parameters: {
     controls: { exclude: ["render", "tunnelId"] },
   },
@@ -14,9 +20,14 @@ const meta: Meta<typeof LoadingSpinner> = {
       control: "inline-radio",
       options: ["s", "m", "l"],
     },
+    color: {
+      control: "inline-radio",
+      options: ["default", ...alphaColors],
+    },
   },
   args: {
     size: "m",
+    color: "default",
   },
 };
 export default meta;
@@ -24,21 +35,3 @@ export default meta;
 type Story = StoryObj<typeof LoadingSpinner>;
 
 export const Default: Story = {};
-
-export const Dark: Story = {
-  args: {
-    color: "dark",
-  },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: {
-    color: "light",
-  },
-  globals: {
-    backgrounds: "dark",
-  },
-};

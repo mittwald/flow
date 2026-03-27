@@ -1,6 +1,7 @@
 .overlay {
-  background: var(--overlay--background-color);
-  position: absolute;
+  background: var(--overlay--backdrop-color);
+  backdrop-filter: blur(var(--blur));
+  position: fixed;
   top: 0;
   left: 0;
   isolation: isolate;
@@ -31,5 +32,12 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media (prefers-contrast: more), (prefers-reduced-transparency) {
+  .overlay {
+    backdrop-filter: none;
+    background-color: var(--dark--color--600);
   }
 }
