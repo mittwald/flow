@@ -21,6 +21,9 @@ export default defineConfig({
       },
     ],
   },
+  optimizeDeps: {
+    exclude: ["@lezer/lr"],
+  },
   css: {
     modules: {
       generateScopedName: cssModuleClassNameGenerator,
