@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.752](https://github.com/mittwald/flow/compare/0.2.0-alpha.751...0.2.0-alpha.752) (2026-03-27)
+
+### Bug Fixes
+
+* **Badge:** add aria label to close button ([9d7aff1](https://github.com/mittwald/flow/commit/9d7aff17338ffe03d3381b39d953d23b6f57e197))
+
 # [0.2.0-alpha.751](https://github.com/mittwald/flow/compare/0.2.0-alpha.750...0.2.0-alpha.751) (2026-03-27)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
