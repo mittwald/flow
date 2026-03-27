@@ -1,13 +1,17 @@
 .text {
   color: inherit;
 
-  &:where(.light) {
-    color: var(--text--color--light);
+  /* Alpha Colors */
+  @mixin color($color) {
+    &:where(.#{$color}) {
+      color: var(--text--color--#{$color});
+    }
   }
 
-  &:where(.dark) {
-    color: var(--text--color--dark);
-  }
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 
   ul,
   ol {

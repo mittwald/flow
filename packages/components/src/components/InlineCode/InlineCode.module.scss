@@ -2,7 +2,6 @@
   font-family: FiraCode, monospace;
   font-size: var(--inline-code--font-size);
   overflow-wrap: break-word;
-  background-color: var(--inline-code--default-background-color);
   padding-inline: var(--inline-code--padding-x);
   padding-block: var(--inline-code--padding-y);
   border-radius: var(--inline-code--corner-radius);
@@ -10,15 +9,18 @@
   width: fit-content;
   max-width: 100%;
   min-width: 0;
+  color: var(--inline-code--content-color);
+  background-color: var(--inline-code--background-color);
 
-  @mixin variant($color) {
+  @mixin color($color) {
     &:where(.#{$color}) {
       color: var(--inline-code--#{$color}-content-color);
       background-color: var(--inline-code--#{$color}-background-color);
     }
   }
 
-  @include variant(default);
-  @include variant(light);
-  @include variant(dark);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }

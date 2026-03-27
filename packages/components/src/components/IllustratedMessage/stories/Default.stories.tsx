@@ -4,34 +4,30 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import {
-  IconApp,
-  IconDanger,
-  IconInfo,
-  IconUnavailable,
-} from "@/components/Icon/components/icons";
+import { IconApp, IconStar } from "@/components/Icon/components/icons";
 import { ActionGroup } from "@/components/ActionGroup";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
-import { Section } from "@/components/Section";
-import { Modal, ModalTrigger } from "@/components/Modal";
-import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
+import { alphaColors } from "@/lib/types/props";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
   component: IllustratedMessage,
   render: (props) => (
-    <IllustratedMessage {...props}>
-      <IconApp />
-      <Heading>No apps installed</Heading>
-      <Text>Create your first app to start working on your website.</Text>
-      <Button>Create app</Button>
-    </IllustratedMessage>
+    <StoryBackground color={props.color}>
+      <IllustratedMessage {...props}>
+        <IconStar />
+        <Heading>{dummyText.short}</Heading>
+        <Text>{dummyText.medium}</Text>
+      </IllustratedMessage>
+    </StoryBackground>
   ),
   argTypes: {
     color: {
       control: "inline-radio",
+      options: ["primary", "danger", "unavailable", ...alphaColors],
     },
   },
   args: { color: "primary" },
@@ -42,44 +38,10 @@ type Story = StoryObj<typeof IllustratedMessage>;
 
 export const Default: Story = {};
 
-export const Danger: Story = {
-  render: (props) => (
-    <IllustratedMessage {...props} color="danger">
-      <IconDanger />
-      <Heading>No access</Heading>
-      <Text>You do not have the required permissions to access this page.</Text>
-      <Button>Go back</Button>
-    </IllustratedMessage>
-  ),
-};
-
-export const Unavailable: Story = {
-  render: (props) => (
-    <IllustratedMessage {...props} color="unavailable">
-      <IconUnavailable />
-      <Heading>Project not found</Heading>
-      <Text>
-        This project no longer exists or you don’t have permission to view it.
-      </Text>
-    </IllustratedMessage>
-  ),
-};
-
-export const Dark: Story = {
-  args: { color: "dark" },
-  globals: {
-    backgrounds: "light",
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  globals: {
-    backgrounds: "dark",
-  },
-};
-
 export const WithActionGroup: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />
@@ -96,6 +58,9 @@ export const WithActionGroup: Story = {
 };
 
 export const WithProgressBar: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />
@@ -111,37 +76,5 @@ export const WithProgressBar: Story = {
         <Label>Storage</Label>
       </ProgressBar>
     </IllustratedMessage>
-  ),
-};
-
-export const InSection: Story = {
-  render: (props) => (
-    <Section>
-      <IllustratedMessage {...props}>
-        <IconApp />
-        <Heading>No apps installed</Heading>
-        <Text>Create your first app to start working on your website.</Text>
-      </IllustratedMessage>
-    </Section>
-  ),
-};
-
-export const InModal: Story = {
-  render: (props) => (
-    <ModalTrigger>
-      <Button>Open modal</Button>
-      <Modal>
-        <Heading>Heading</Heading>
-        <Content>
-          <Section>
-            <IllustratedMessage {...props}>
-              <IconInfo />
-              <Heading>{dummyText.short}</Heading>
-              <Text>{dummyText.medium}</Text>
-            </IllustratedMessage>
-          </Section>
-        </Content>
-      </Modal>
-    </ModalTrigger>
   ),
 };

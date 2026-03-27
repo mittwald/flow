@@ -18,6 +18,7 @@ link:
     disabled:
       value: "{disabled-plain-content-color}"
 
+  # Dark
   color-dark:
     default:
       value: "{dark.color.800}"
@@ -28,6 +29,7 @@ link:
     disabled:
       value: "{disabled-plain-dark-content-color}"
 
+  # Light
   color-light:
     default:
       value: "{light.color.800}"
@@ -37,3 +39,25 @@ link:
       value: "{light.color.600}"
     disabled:
       value: "{disabled-plain-light-content-color}"
+
+  # Dark Static
+  color-dark-static:
+    default:
+      value: "{dark-static.color.800}"
+    hover:
+      value: "{dark-static.color.700}"
+    pressed:
+      value: "{dark-static.color.600}"
+    disabled:
+      value: "{disabled-plain-dark-static-content-color}"
+
+  # Light Static
+  color-light-static:
+    default:
+      value: "{light-static.color.800}"
+    hover:
+      value: "{light-static.color.700}"
+    pressed:
+      value: "{light-static.color.600}"
+    disabled:
+      value: "{disabled-plain-light-static-content-color}"

@@ -47,7 +47,7 @@
     border-radius: var(--header-navigation--corner-radius-round);
   }
 
-  &:not(.light, .dark) {
+  &:not(.light, .dark, .dark-static, .light-static) {
     .button {
       color: var(--header-navigation--color);
 
@@ -58,51 +58,37 @@
     }
   }
 
-  &.dark {
-    .link {
-      color: var(--header-navigation--color-dark);
+  /* Color */
 
-      &:hover:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-dark--hover
-        );
-      }
+  @mixin color($color) {
+    &.#{$color} {
+      .link,
+      .button {
+        color: var(--header-navigation--color-#{$color});
 
-      &[data-pressed]:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-dark--pressed
-        );
-      }
+        &:hover:not([aria-current]) {
+          background-color: var(
+            --header-navigation--background-color-#{$color}--hover
+          );
+        }
 
-      &[aria-current] {
-        &::after {
-          background-color: var(--header-navigation--color-dark);
+        &[data-pressed]:not([aria-current]) {
+          background-color: var(
+            --header-navigation--background-color-#{$color}--pressed
+          );
+        }
+
+        &[aria-current] {
+          &::after {
+            background-color: var(--header-navigation--color-#{$color});
+          }
         }
       }
     }
   }
 
-  &.light {
-    .link {
-      color: var(--header-navigation--color-light);
-
-      &:hover:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-light--hover
-        );
-      }
-
-      &[data-pressed]:not([aria-current]) {
-        background-color: var(
-          --header-navigation--background-color-light--pressed
-        );
-      }
-
-      &[aria-current] {
-        &::after {
-          background-color: var(--header-navigation--color-light);
-        }
-      }
-    }
-  }
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }
