@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.760](https://github.com/mittwald/flow/compare/0.2.0-alpha.759...0.2.0-alpha.760) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** only show filter modal button if needed ([#2416](https://github.com/mittwald/flow/issues/2416)) ([e2a638c](https://github.com/mittwald/flow/commit/e2a638c82277ab3542e7ca5eefe7dd14d6a4b48b))
+
 # [0.2.0-alpha.759](https://github.com/mittwald/flow/compare/0.2.0-alpha.758...0.2.0-alpha.759) (2026-03-30)
 
 ### Bug Fixes
