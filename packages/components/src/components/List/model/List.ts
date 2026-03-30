@@ -6,6 +6,7 @@ import ReactTable from "@/components/List/model/ReactTable";
 import type {
   GetItemId,
   ItemActionFn,
+  ListSettingsStorageDefaults,
   ListShape,
   ListSupportedComponentProps,
 } from "@/components/List/model/types";
@@ -37,6 +38,7 @@ export class List<T = unknown, TMeta = unknown> {
   public readonly settingsStorage?: ListSettingsStore<T>;
   public readonly loadingItemsCount;
   public readonly viewMode: ListViewMode<T>;
+  public readonly settingsStorageDefaults?: ListSettingsStorageDefaults;
 
   public constructor(shape: ListShape<T, TMeta>) {
     const {
@@ -54,6 +56,7 @@ export class List<T = unknown, TMeta = unknown> {
       defaultViewMode,
       accordion = false,
       loadingItemsCount = 5,
+      settingsStorageDefaults,
       ...componentProps
     } = shape;
 
@@ -85,6 +88,7 @@ export class List<T = unknown, TMeta = unknown> {
       manualSorting: this.loader.manualSorting,
     });
     this.viewMode = new ListViewMode(this, { defaultViewMode });
+    this.settingsStorageDefaults = settingsStorageDefaults;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());

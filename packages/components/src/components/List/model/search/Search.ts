@@ -15,7 +15,11 @@ export class Search<T> {
   private readonly autosave: boolean;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
-    const { autosave = false, render, textFieldProps } = searchShape;
+    const {
+      autosave = list.settingsStorageDefaults?.search?.autosave ?? false,
+      render,
+      textFieldProps,
+    } = searchShape;
 
     this.autosave = autosave;
     this.list = list;

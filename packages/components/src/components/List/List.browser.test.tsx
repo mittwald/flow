@@ -357,7 +357,12 @@ describe("Storage", async () => {
       >
         {getTestElement(
           [42, 43],
-          <ListFilter<Data> autosave property="num" mode="one" />,
+          <ListFilter<Data>
+            autosave
+            manualSave={false}
+            property="num"
+            mode="one"
+          />,
         )}
       </SettingsProvider>,
     );

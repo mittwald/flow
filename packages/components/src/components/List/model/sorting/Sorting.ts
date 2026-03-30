@@ -29,7 +29,7 @@ export class Sorting<T> {
       directionName,
       direction = "asc",
       customSortingFn,
-      autosave = true,
+      autosave = list.settingsStorageDefaults?.sorting?.autosave ?? true,
     } = shape;
 
     this.autosave = autosave;
