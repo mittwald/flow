@@ -2,16 +2,16 @@ import * as Aria from "react-aria-components";
 import type { FC } from "react";
 import { EmptyView } from "@/components/List/views/EmptyView";
 
-export type GridListProps = Aria.GridListProps<never> & {
+export type ListBoxProps = Aria.ListBoxProps<never> & {
   tileMaxWidth: number;
 };
 
 /** @flr-generate all */
-export const GridList: FC<GridListProps> = (props) => {
+export const ListBox: FC<ListBoxProps> = (props) => {
   const { tileMaxWidth, ...rest } = props;
 
   return (
-    <Aria.GridList
+    <Aria.ListBox
       {...rest}
       renderEmptyState={() => <EmptyView />}
       style={{
@@ -21,4 +21,4 @@ export const GridList: FC<GridListProps> = (props) => {
   );
 };
 
-export default GridList;
+export default ListBox;

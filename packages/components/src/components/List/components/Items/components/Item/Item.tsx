@@ -1,6 +1,6 @@
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 import { useList } from "@/components/List/hooks/useList";
-import ItemsGridListItemView from "@/views/ItemsGridListItemView";
+import ItemsListBoxItemView from "@/views/ItemsListBoxItemView";
 import type { FC, PropsWithChildren } from "react";
 import { Suspense } from "react";
 import type { Key } from "react-aria-components";
@@ -29,7 +29,7 @@ export const Item = (props: Props) => {
   const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
-    <ItemsGridListItemView
+    <ItemsListBoxItemView
       id={id}
       textValue={textValue}
       href={href}
@@ -43,20 +43,20 @@ export const Item = (props: Props) => {
       >
         {children}
       </Suspense>
-    </ItemsGridListItemView>
+    </ItemsListBoxItemView>
   );
 };
 
 export const ItemContainer: FC<Props> = (props) => {
   const list = useList();
   return (
-    <ItemsGridListItemView
+    <ItemsListBoxItemView
       textValue="-"
       className={styles.item}
       isTile={list.viewMode.isTiles}
     >
       {props.children}
-    </ItemsGridListItemView>
+    </ItemsListBoxItemView>
   );
 };
 
