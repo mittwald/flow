@@ -16,10 +16,6 @@ export const ViewModeAccordion: FC = () => {
   const availableViewModes = useAvailableViewModes();
   const selectedViewMode = list.viewMode.value;
 
-  if (availableViewModes.length <= 1) {
-    return null;
-  }
-
   return (
     <AccordionView>
       <HeadingView>
