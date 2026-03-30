@@ -60,6 +60,7 @@ export class List<T = unknown, TMeta = unknown> {
       ...componentProps
     } = shape;
 
+    this.settingsStorageDefaults = settingsStorageDefaults;
     const generalSettingsStore = useSettings();
 
     this.settingsStorage =
@@ -88,7 +89,6 @@ export class List<T = unknown, TMeta = unknown> {
       manualSorting: this.loader.manualSorting,
     });
     this.viewMode = new ListViewMode(this, { defaultViewMode });
-    this.settingsStorageDefaults = settingsStorageDefaults;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
