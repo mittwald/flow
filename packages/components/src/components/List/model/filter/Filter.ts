@@ -48,8 +48,8 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     const {
-      autosave = true,
-      manualSave = false,
+      autosave = list.settingsStorageDefaults?.filters?.autosave ?? false,
+      manualSave = list.settingsStorageDefaults?.filters?.manualSave ?? true,
       property,
       mode = "some",
       values,

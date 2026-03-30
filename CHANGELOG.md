@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.761](https://github.com/mittwald/flow/compare/0.2.0-alpha.760...0.2.0-alpha.761) (2026-03-30)
+
+### Features
+
+* support List-wide settings storage defaults ([db7b362](https://github.com/mittwald/flow/commit/db7b362ed6f0375c0e00ced1e769753a3a7bcc61))
+
 # [0.2.0-alpha.760](https://github.com/mittwald/flow/compare/0.2.0-alpha.759...0.2.0-alpha.760) (2026-03-30)
 
 ### Bug Fixes
