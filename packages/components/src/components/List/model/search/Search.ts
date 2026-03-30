@@ -66,8 +66,6 @@ export class Search<T> {
       this.callOnUpdateCallbacks();
     }
 
-    console.log("Storing search value:", value, this.autosave);
-
     this.list.settingsStorage?.store(
       "search",
       { value },
