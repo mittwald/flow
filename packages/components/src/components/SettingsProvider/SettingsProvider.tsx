@@ -39,6 +39,7 @@ export const SettingsProvider: FC<Props> = (props) => {
     const json = settingsStore.asJson;
     storingPromise.current = storingPromise.current.then(async () => {
       await backend.store(json);
+      settingsResource.refresh();
     });
   };
 

@@ -226,3 +226,44 @@ test.each<{
     );
   }
 });
+
+test("Settings are updated on rerender", async () => {
+  const backend = new InMemorySettingsBackend(testSettings1);
+
+  const testReact = (
+    <SettingsProvider type="custom" store={backend} id={`test-${testIndex}`}>
+      <Render>
+        {() => {
+          const settings = useSettings();
+          const settingsJson = settings?.get("List", "test", z.any());
+
+          const updateSettings = () => {
+            settings?.set("List", "test", z.any(), testSettings2);
+          };
+
+          return (
+            <>
+              <div data-testid="settings">{JSON.stringify(settingsJson)}</div>
+              <button data-testid="store" onClick={updateSettings}>
+                Store
+              </button>
+            </>
+          );
+        }}
+      </Render>
+    </SettingsProvider>
+  );
+
+  const ui = await render(testReact);
+  expect(ui.getByTestId("settings")).toHaveTextContent(
+    JSON.stringify(testSettings1),
+  );
+
+  await userEvent.click(ui.getByTestId("store"));
+
+  await ui.rerender(<></>);
+  await ui.rerender(testReact);
+  expect(ui.getByTestId("settings")).toHaveTextContent(
+    JSON.stringify(testSettings2),
+  );
+});
