@@ -30,6 +30,25 @@ export interface ListSupportedComponentProps extends MultipleSelection {
   selectionBehavior?: SelectionBehavior;
 }
 
+export interface ListSettingsStorageDefaults {
+  filters?: {
+    autosave?: boolean;
+    manualSave?: boolean;
+  };
+
+  sorting: {
+    autosave?: boolean;
+  };
+
+  viewMode: {
+    autosave?: boolean;
+  };
+
+  search: {
+    autosave?: boolean;
+  };
+}
+
 export interface ListShape<
   T,
   TMeta = unknown,
@@ -50,6 +69,7 @@ export interface ListShape<
   getItemId?: GetItemId<T>;
   onChange?: OnListChanged<T, TMeta>;
   defaultViewMode?: ListViewMode;
+  settingsStorageDefaults?: ListSettingsStorageDefaults;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
