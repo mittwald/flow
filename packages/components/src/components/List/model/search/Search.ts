@@ -12,6 +12,7 @@ export class Search<T> {
   public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
   private readonly initialValue?: string;
+  private readonly defaultValue?: string;
   private readonly autosave: boolean;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
@@ -19,13 +20,16 @@ export class Search<T> {
       autosave = list.settingsStorageDefaults?.search?.autosave ?? false,
       render,
       textFieldProps,
+      defaultValue,
     } = searchShape;
 
     this.autosave = autosave;
     this.list = list;
     this.render = render;
     this.textFieldProps = textFieldProps;
-    this.initialValue = this.getInitialValue(searchShape);
+    this.defaultValue = defaultValue;
+
+    this.initialValue = this.getInitialValue();
   }
 
   public get value(): SearchValue {
@@ -40,10 +44,10 @@ export class Search<T> {
     this.onUpdateCallbacks.forEach((cb) => cb());
   }
 
-  private getInitialValue(shape: SearchShape<T>) {
+  private getInitialValue() {
     return (
-      this.list.settingsStorage?.get("search", { autosave: shape.autosave })
-        ?.value ?? shape.defaultValue
+      this.list.settingsStorage?.get("search", { autosave: this.autosave })
+        ?.value ?? this.defaultValue
     );
   }
 
@@ -61,6 +65,8 @@ export class Search<T> {
       this.list.reactTable.table.setGlobalFilter(value);
       this.callOnUpdateCallbacks();
     }
+
+    console.log("Storing search value:", value, this.autosave);
 
     this.list.settingsStorage?.store(
       "search",

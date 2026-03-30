@@ -135,6 +135,7 @@ export const List = flowComponent("List", (props) => {
           render: searchProps.children,
           textFieldProps: searchProps,
           defaultValue: searchProps.defaultValue,
+          autosave: searchProps.autosave,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
