@@ -16,7 +16,10 @@ export class ListViewMode<T = unknown> {
   ];
 
   public constructor(list: List<T>, options: Options = {}) {
-    const { defaultViewMode, autosave = true } = options;
+    const {
+      defaultViewMode,
+      autosave = list.settingsStorageDefaults?.viewMode?.autosave ?? true,
+    } = options;
 
     this.list = list;
     this.autosave = autosave;
