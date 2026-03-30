@@ -47,9 +47,9 @@ const filterValueId43 = FilterValue.create(
   43,
 ).id;
 
-const selectFirstFilterOption = async () => {
+const selectFilterOption = async (num: number) => {
   await userEvent.click(filterButton);
-  await userEvent.keyboard("{ArrowDown}{Enter}");
+  await userEvent.click(page.getByRole("menuitemradio", { name: String(num) }));
 };
 
 let testIndex = 0;
@@ -302,7 +302,7 @@ describe("Storage", async () => {
     expect(listItem42).not.toBeInTheDocument();
     expect(listItem43).toBeInTheDocument();
 
-    await selectFirstFilterOption();
+    await selectFilterOption(42);
     expect(listItem42).toBeInTheDocument();
     expect(listItem43).not.toBeInTheDocument();
 
@@ -325,7 +325,7 @@ describe("Storage", async () => {
       </SettingsProvider>,
     );
 
-    await selectFirstFilterOption();
+    await selectFilterOption(42);
     expect(storeFilterButton).toBeInTheDocument();
   });
 
@@ -343,7 +343,7 @@ describe("Storage", async () => {
       </SettingsProvider>,
     );
 
-    await selectFirstFilterOption();
+    await selectFilterOption(42);
     await userEvent.click(storeFilterButton);
     expect(storeFilterButton).not.toBeInTheDocument();
   });
@@ -367,7 +367,7 @@ describe("Storage", async () => {
       </SettingsProvider>,
     );
 
-    await selectFirstFilterOption();
+    await selectFilterOption(42);
     expect(storeFilterButton).not.toBeInTheDocument();
   });
 });
