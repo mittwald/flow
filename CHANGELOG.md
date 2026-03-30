@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.762](https://github.com/mittwald/flow/compare/0.2.0-alpha.761...0.2.0-alpha.762) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix settings storage types ([e609727](https://github.com/mittwald/flow/commit/e609727633d1f5300fd1af6d6b02b3a0d39fbdc6))
+
 # [0.2.0-alpha.761](https://github.com/mittwald/flow/compare/0.2.0-alpha.760...0.2.0-alpha.761) (2026-03-30)
 
 ### Features
