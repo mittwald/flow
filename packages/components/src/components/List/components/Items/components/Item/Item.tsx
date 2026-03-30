@@ -1,4 +1,4 @@
-import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import { useBoxItemProps } from "@/components/List/components/Items/components/Item/hooks/useBoxItemProps";
 import { useList } from "@/components/List/hooks/useList";
 import ItemsListBoxItemView from "@/views/ItemsListBoxItemView";
 import type { FC, PropsWithChildren } from "react";
@@ -18,7 +18,7 @@ export const Item = (props: Props) => {
 
   const itemView = list.itemView;
 
-  const { gridItemProps, children } = useGridItemProps(props);
+  const { boxItemProps, children } = useBoxItemProps(props);
 
   if (!itemView) {
     return null;
@@ -27,7 +27,7 @@ export const Item = (props: Props) => {
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
 
-  const hasAction = !!gridItemProps.onAction || !!href;
+  const hasAction = !!boxItemProps.onAction || !!href;
 
   return (
     <ItemsListBoxItemView
@@ -37,7 +37,7 @@ export const Item = (props: Props) => {
       target={itemView.target}
       hasAction={hasAction}
       isTile={list.viewMode.isTiles}
-      {...gridItemProps}
+      {...boxItemProps}
     >
       <Suspense
         fallback={<ListItemSkeletonView viewMode={list.viewMode.value} />}

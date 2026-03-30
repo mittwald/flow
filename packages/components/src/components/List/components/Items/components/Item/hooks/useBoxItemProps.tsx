@@ -9,7 +9,7 @@ interface P extends PropsWithChildren {
   data: never;
 }
 
-export const useGridItemProps = (props: P) => {
+export const useBoxItemProps = (props: P) => {
   const { data, children: childrenFromProps } = props;
   const list = useList();
   const itemView = list.itemView;
@@ -33,7 +33,7 @@ export const useGridItemProps = (props: P) => {
 
   if (!accordion) {
     return {
-      gridItemProps: {
+      boxItemProps: {
         onAction: onAction
           ? () => {
               onAction?.(data);
@@ -65,7 +65,7 @@ export const useGridItemProps = (props: P) => {
   };
 
   return {
-    gridItemProps: {
+    boxItemProps: {
       ref: itemRef,
       onAction: toggleAccordion,
     },
