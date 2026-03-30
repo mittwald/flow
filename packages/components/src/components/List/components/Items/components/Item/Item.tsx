@@ -26,6 +26,7 @@ export const Item = (props: Props) => {
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
+
   const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
