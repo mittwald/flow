@@ -36,15 +36,15 @@ export interface ListSettingsStorageDefaults {
     manualSave?: boolean;
   };
 
-  sorting: {
+  sorting?: {
     autosave?: boolean;
   };
 
-  viewMode: {
+  viewMode?: {
     autosave?: boolean;
   };
 
-  search: {
+  search?: {
     autosave?: boolean;
   };
 }
