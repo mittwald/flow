@@ -70,6 +70,7 @@ export class RemoteAccentBoxElement extends FlowRemoteElement<RemoteAccentBoxEle
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      backgroundColor: {},
       className: {},
       color: {},
       content: {},
