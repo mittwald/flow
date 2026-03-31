@@ -1,19 +1,19 @@
 import React, { type FC } from "react";
-import type { Filter } from "@/components/List/model/filter/Filter";
 import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 import RangeCalendarView from "@/views/RangeCalendarView";
+import type { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: DateRangeFilter<never, never>;
 }
 
 export const FilterAccordionDateRange: FC<Props> = (props) => {
   const { filter } = props;
 
-  const currentValue = filter.getDateRangeValue();
+  const currentValue = filter.getValue();
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -23,7 +23,7 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
         {...filter.dateRangeOptions}
         value={currentValue}
         onChange={(range) => {
-          filter.setDateRangeValue(range);
+          filter.setValue(range);
         }}
       />
       {currentValue && (

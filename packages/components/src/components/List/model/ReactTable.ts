@@ -154,7 +154,7 @@ export class ReactTable<T, TMeta = unknown> {
     };
 
     this.list.filters.forEach((f) =>
-      f.updateTableColumnDef(getOrCreateColumnDef(f.property), f.mode),
+      f.updateTableColumnDef(getOrCreateColumnDef(f.property)),
     );
 
     this.list.sorting.forEach((s) =>

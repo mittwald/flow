@@ -2,7 +2,6 @@ import type { FC } from "react";
 import ButtonView from "@/views/ButtonView";
 import headerStyles from "@/components/List/components/Header/Header.module.css";
 import TextView from "@/views/TextView";
-import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
@@ -10,9 +9,10 @@ import { Popover, PopoverTrigger } from "@/components/Popover";
 import styles from "./FilterContextMenus.module.scss";
 import { useOverlayController } from "@/lib/controller";
 import RangeCalendarView from "@/views/RangeCalendarView";
+import type { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: DateRangeFilter<never, never>;
 }
 
 export const DateRangeFilterPopover: FC<Props> = (props) => {
@@ -41,9 +41,9 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
       >
         <RangeCalendarView
           {...filter.dateRangeOptions}
-          value={filter.getDateRangeValue()}
+          value={filter.getValue()}
           onChange={(range) => {
-            filter.setDateRangeValue(range);
+            filter.setValue(range);
             controller.close();
           }}
           className={styles.calendar}

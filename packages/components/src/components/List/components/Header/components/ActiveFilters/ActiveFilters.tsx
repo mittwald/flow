@@ -19,22 +19,24 @@ import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
 import { Filter } from "@/components/List/model/filter/Filter";
 import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales);
 
   const activeFilters = list.filters.flatMap((f) => {
-    const dateRangeValue = f.getDateRangeValue();
-
-    if (f.mode === "dateRange" && dateRangeValue) {
-      return [
-        <BadgeView key={f.name} onClose={() => f.clear()}>
-          <TextView>
-            {`${transformDateValueToFormattedDate(dateRangeValue.start)} - ${transformDateValueToFormattedDate(dateRangeValue.end)}`}
-          </TextView>
-        </BadgeView>,
-      ];
+    if (f instanceof DateRangeFilter) {
+      const value = f.getValue();
+      if (value) {
+        return [
+          <BadgeView key={f.name} onClose={() => f.clear()}>
+            <TextView>
+              {`${transformDateValueToFormattedDate(value.start)} - ${transformDateValueToFormattedDate(value.end)}`}
+            </TextView>
+          </BadgeView>,
+        ];
+      }
     }
 
     return f.values
