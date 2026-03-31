@@ -54,14 +54,14 @@ export const Badge = flowComponent("Badge", (props) => {
     ...rest
   } = props;
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
   const rootClassName = clsx(
     styles.badge,
     styles[color],
     isDisabled && styles.disabled,
     className,
   );
-
-  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const propsContext: PropsContext = {
     Label: {
@@ -108,7 +108,7 @@ export const Badge = flowComponent("Badge", (props) => {
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}
-            aria-label={stringFormatter.format("badge.close")}
+            aria-label={stringFormatter.format("badge.remove")}
           >
             <IconClose />
           </Button>

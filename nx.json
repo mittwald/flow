@@ -13,7 +13,7 @@
       "cache": false
     },
     "dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:icons"],
       "cache": false
     },
     "start": {

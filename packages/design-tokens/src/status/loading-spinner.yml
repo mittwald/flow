@@ -5,11 +5,11 @@ loading-spinner:
     value: 6000ms
   color:
     value: "{icon.color}"
-  color-dark:
-    value: "{dark-plain-content-color}"
   color-light:
     value: "{light-plain-content-color}"
-  color-dark-static:
-    value: "{dark-static-plain-content-color}"
+  color-dark:
+    value: "{dark-plain-content-color}"
   color-light-static:
     value: "{light-static-plain-content-color}"
+  color-dark-static:
+    value: "{dark-static-plain-content-color}"

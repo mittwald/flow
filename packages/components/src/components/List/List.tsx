@@ -135,6 +135,7 @@ export const List = flowComponent("List", (props) => {
           render: searchProps.children,
           textFieldProps: searchProps,
           defaultValue: searchProps.defaultValue,
+          autosave: searchProps.autosave,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
@@ -201,9 +202,10 @@ export const List = flowComponent("List", (props) => {
               {listModel.items.entries.length > 0 && (
                 <TunnelExit id="listSummary" />
               )}
-              {(listModel.viewMode === "list" ||
-                listModel.viewMode === "tiles") && <Items />}
-              {listModel.viewMode === "table" && <Table />}
+              {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
+                <Items />
+              )}
+              {listModel.viewMode.isTable && <Table />}
             </DivView>
             {!hidePagination && <Footer />}
           </DivView>

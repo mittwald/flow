@@ -7,6 +7,11 @@ header-navigation:
     value: "{corner-radius.m}"
   corner-radius-round:
     value: "{corner-radius.round}"
+  font-weight-current:
+    value: "{font-weight.bold}"
+  underline-width-current:
+    value: "{border-width.200}"
+
   color:
     value: "{neutral.color.1100}"
   background-color:
@@ -14,10 +19,6 @@ header-navigation:
       value: "{neutral-plain-background-color.hover}"
     pressed:
       value: "{neutral-plain-background-color.pressed}"
-  font-weight-current:
-    value: "{font-weight.bold}"
-  underline-width-current:
-    value: "{border-width.200}"
 
   # Dark
   color-dark:

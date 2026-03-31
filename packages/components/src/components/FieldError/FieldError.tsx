@@ -11,15 +11,20 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
+import { Alert } from "@/components/Alert";
+import { Heading } from "@/components/Heading";
 
 export interface FieldErrorProps
   extends
     PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
-    FlowComponentProps {}
+    FlowComponentProps {
+  /** @internal */
+  renderAlert?: boolean;
+}
 
 /** @flr-generate all */
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, ref, renderAlert, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
   const fieldErrorFromAriaContext = useContext(FieldErrorContext);
@@ -69,7 +74,13 @@ export const FieldError = flowComponent("FieldError", (props) => {
       <FieldErrorContext value={mergedErrorState as never}>
         <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
           {({ validationErrors }) => {
-            return <AlertText status="danger">{validationErrors}</AlertText>;
+            return renderAlert ? (
+              <Alert status="danger">
+                <Heading>{validationErrors}</Heading>
+              </Alert>
+            ) : (
+              <AlertText status="danger">{validationErrors}</AlertText>
+            );
           }}
         </Aria.FieldError>
       </FieldErrorContext>

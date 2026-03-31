@@ -61,8 +61,8 @@ import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-c
 import { Image as Image } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
-import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
-import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
+import { ListBox as ItemsListBox } from "@mittwald/flow-react-components";
+import { ListBoxItem as ItemsListBoxItem } from "@mittwald/flow-react-components";
 import { Kbd as Kbd } from "@mittwald/flow-react-components";
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
@@ -285,13 +285,13 @@ export const flowComponents = {
     "InlineCode",
     InlineCode,
   ),
-  "flr-items-grid-list": createFlowRemoteComponentRenderer(
-    "ItemsGridList",
-    ItemsGridList,
+  "flr-items-list-box": createFlowRemoteComponentRenderer(
+    "ItemsListBox",
+    ItemsListBox,
   ),
-  "flr-items-grid-list-item": createFlowRemoteComponentRenderer(
-    "ItemsGridListItem",
-    ItemsGridListItem,
+  "flr-items-list-box-item": createFlowRemoteComponentRenderer(
+    "ItemsListBoxItem",
+    ItemsListBoxItem,
   ),
   "flr-kbd": createFlowRemoteComponentRenderer("Kbd", Kbd),
   "flr-label": createFlowRemoteComponentRenderer("Label", Label),

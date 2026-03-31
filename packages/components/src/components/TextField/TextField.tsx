@@ -61,6 +61,7 @@ export const TextField = flowComponent("TextField", (props) => {
       color: "secondary",
       tunnelId: "button",
     },
+    CopyButton: { className: styles.button, tunnelId: "button" },
     ...fieldPropsContext,
   };
 

@@ -1,6 +1,15 @@
 .separator {
-  border-top: var(--separator--height) var(--separator--border-style)
-    var(--separator--color);
-  border-bottom: 0;
-  width: 100%;
+  border: 0;
+
+  &:where(:not(.vertical)) {
+    border-top: var(--separator--height) var(--separator--border-style)
+      var(--separator--color);
+    width: 100%;
+  }
+
+  &.vertical {
+    border-inline-end: var(--separator--height) var(--separator--border-style)
+      var(--separator--color);
+    height: auto;
+  }
 }
