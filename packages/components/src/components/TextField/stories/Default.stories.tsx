@@ -5,6 +5,8 @@ import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { TextField } from "../index";
+import { Button } from "@/components/Button";
+import { IconStar } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof TextField> = {
   title: "Form Controls/TextField",
@@ -83,6 +85,26 @@ export const ShowCharacterCount: Story = {
   render: (props) => (
     <TextField onChange={action("onChange")} {...props}>
       <Label>User name</Label>
+    </TextField>
+  ),
+};
+
+export const Password: Story = {
+  args: { type: "password" },
+  render: (props) => (
+    <TextField {...props}>
+      <Label>Password</Label>
+    </TextField>
+  ),
+};
+
+export const CustomButton: Story = {
+  render: (props) => (
+    <TextField {...props}>
+      <Label>Custom Button</Label>
+      <Button aria-label="Custom">
+        <IconStar />
+      </Button>
     </TextField>
   ),
 };

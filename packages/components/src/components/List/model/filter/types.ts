@@ -20,4 +20,10 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   values?: readonly TMatcherValue[];
   name?: string;
   defaultSelected?: readonly NonNullable<TMatcherValue>[];
+  onChange?: FilterUpdatedCallback;
+  priority?: "primary" | "secondary";
+  autosave?: boolean;
+  manualSave?: boolean;
 }
+
+export type FilterUpdatedCallback = (values: unknown[]) => unknown;

@@ -1,15 +1,18 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconClipboardList as Tabler } from "@tabler/icons-react";
+import { IconChangelog as IconImport } from "@mittwald/flow-icons";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
+import { useContextIcon } from "../IconSetProvider";
 
 export const IconChangelog: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => {
+  const fromContext = useContextIcon("Changelog");
+  const Icon = fromContext ?? IconImport;
   return (
     <View {...props}>
-      <Tabler />
+      <Icon />
     </View>
   );
 };

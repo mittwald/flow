@@ -27,6 +27,7 @@ import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-component
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
+import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
@@ -61,8 +62,9 @@ import { Image as Image } from "@mittwald/flow-react-components";
 import { ImageCropper as ImageCropper } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
-import { GridList as ItemsGridList } from "@mittwald/flow-react-components";
-import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components";
+import { ListBox as ItemsListBox } from "@mittwald/flow-react-components";
+import { ListBoxItem as ItemsListBoxItem } from "@mittwald/flow-react-components";
+import { Kbd as Kbd } from "@mittwald/flow-react-components";
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
@@ -119,6 +121,7 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { Truncate as Truncate } from "@mittwald/flow-react-components";
 import { TunnelEntry as TunnelEntry } from "@mittwald/flow-react-components";
 import { XAxis as XAxis } from "@mittwald/flow-react-components";
 import { YAxis as YAxis } from "@mittwald/flow-react-components";
@@ -183,6 +186,10 @@ export const flowComponents = {
     ClearPropsContext,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
+  "flr-code-editor": createFlowRemoteComponentRenderer(
+    "CodeEditor",
+    CodeEditor,
+  ),
   "flr-color": createFlowRemoteComponentRenderer("Color", Color),
   "flr-column-layout": createFlowRemoteComponentRenderer(
     "ColumnLayout",
@@ -283,14 +290,15 @@ export const flowComponents = {
     "InlineCode",
     InlineCode,
   ),
-  "flr-items-grid-list": createFlowRemoteComponentRenderer(
-    "ItemsGridList",
-    ItemsGridList,
+  "flr-items-list-box": createFlowRemoteComponentRenderer(
+    "ItemsListBox",
+    ItemsListBox,
   ),
-  "flr-items-grid-list-item": createFlowRemoteComponentRenderer(
-    "ItemsGridListItem",
-    ItemsGridListItem,
+  "flr-items-list-box-item": createFlowRemoteComponentRenderer(
+    "ItemsListBoxItem",
+    ItemsListBoxItem,
   ),
+  "flr-kbd": createFlowRemoteComponentRenderer("Kbd", Kbd),
   "flr-label": createFlowRemoteComponentRenderer("Label", Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(
     "LabeledValue",
@@ -425,6 +433,7 @@ export const flowComponents = {
     "TooltipTrigger",
     TooltipTrigger,
   ),
+  "flr-truncate": createFlowRemoteComponentRenderer("Truncate", Truncate),
   "flr-tunnel-entry": createFlowRemoteComponentRenderer(
     "TunnelEntry",
     TunnelEntry,

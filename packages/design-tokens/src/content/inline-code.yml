@@ -1,0 +1,37 @@
+inline-code:
+  font-size:
+    value: "{font-size-text.s}"
+  padding-x:
+    value: "{size-px.xs}"
+  padding-y:
+    value: "{size-px.xxs}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  background-color:
+    value: "{neutral-soft-background-color.default}"
+  content-color:
+    value: "{neutral-soft-content-color.default}"
+
+  # Dark
+  dark-background-color:
+    value: "{dark-soft-background-color.default}"
+  dark-content-color:
+    value: "{dark-soft-content-color}"
+
+  # Light
+  light-background-color:
+    value: "{light-soft-background-color.default}"
+  light-content-color:
+    value: "{light-soft-content-color}"
+
+  # Dark Static
+  dark-static-background-color:
+    value: "{dark-static-soft-background-color.default}"
+  dark-static-content-color:
+    value: "{dark-static-soft-content-color}"
+
+  # Light Static
+  light-static-background-color:
+    value: "{light-static-soft-background-color.default}"
+  light-static-content-color:
+    value: "{light-static-soft-content-color}"

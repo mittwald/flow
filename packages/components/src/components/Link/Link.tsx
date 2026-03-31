@@ -12,7 +12,7 @@ import styles from "./Link.module.scss";
 import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { AlphaColor, PropsWithClassName } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 
@@ -26,11 +26,13 @@ export interface LinkProps
   /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** The color of the link. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  color?: "primary" | AlphaColor;
   "aria-current"?: string;
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];
+  /** The size of the element. @default "m" */
+  size?: "s" | "m";
   /** @internal */
   unstyled?: boolean;
 }
@@ -49,6 +51,7 @@ export const Link = flowComponent("Link", (props) => {
     slot: ignoredSlotProp,
     style,
     whiteSpace,
+    size = "m",
     ...rest
   } = props;
 
@@ -65,6 +68,7 @@ export const Link = flowComponent("Link", (props) => {
         styles.link,
         inline && styles.inline,
         styles[color as keyof typeof styles],
+        size === "s" && styles["size-s"],
         className,
       );
 

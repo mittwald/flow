@@ -6,24 +6,21 @@ import ReactTable from "@/components/List/model/ReactTable";
 import type {
   GetItemId,
   ItemActionFn,
+  ListSettingsStorageDefaults,
   ListShape,
   ListSupportedComponentProps,
-  ListViewMode,
 } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { ListSettingsStore } from "./ListSettingsStore";
+import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
-import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
-import z from "zod";
 
-export class List<T, TMeta = unknown> {
-  public static readonly viewModeSettingsStorageSchema = z
-    .enum(["list", "table", "tiles"])
-    .optional();
+export class List<T = unknown, TMeta = unknown> {
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -37,16 +34,11 @@ export class List<T, TMeta = unknown> {
   public readonly accordion: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
-  public viewMode: ListViewMode;
-  public readonly setViewMode: (viewMode: ListViewMode) => void;
-  public readonly supportsSettingsStorage: boolean;
-  public readonly settingStorageKey?: string;
   public metadata?: TMeta;
-  private readonly settingsStore?: SettingsStore;
-  private readonly viewModeStorageKey?: string;
-  private readonly filterSettingsStorageKey?: string;
-  private readonly sortingStorageKey?: string;
+  public readonly settingsStorage?: ListSettingsStore<T>;
   public readonly loadingItemsCount;
+  public readonly viewMode: ListViewMode<T>;
+  public readonly settingsStorageDefaults?: ListSettingsStorageDefaults;
 
   public constructor(shape: ListShape<T, TMeta>) {
     const {
@@ -64,21 +56,19 @@ export class List<T, TMeta = unknown> {
       defaultViewMode,
       accordion = false,
       loadingItemsCount = 5,
+      settingsStorageDefaults,
       ...componentProps
     } = shape;
 
-    this.settingsStore = useSettings();
-    this.settingStorageKey = settingStorageKey;
-    this.filterSettingsStorageKey = settingStorageKey
-      ? `${settingStorageKey}.activeFilters`
-      : undefined;
-    this.viewModeStorageKey = settingStorageKey
-      ? `${settingStorageKey}.viewMode`
-      : undefined;
-    this.sortingStorageKey = settingStorageKey
-      ? `${settingStorageKey}.sorting`
-      : undefined;
-    this.supportsSettingsStorage = !!this.settingStorageKey;
+    this.settingsStorageDefaults = settingsStorageDefaults;
+    const generalSettingsStore = useSettings();
+
+    this.settingsStorage =
+      settingStorageKey && generalSettingsStore
+        ? new ListSettingsStore(this, generalSettingsStore, {
+            storageKey: settingStorageKey,
+          })
+        : undefined;
 
     this.items = new ItemCollection(this);
     this.filters = filters.map((shape) => new Filter(this, shape));
@@ -98,23 +88,7 @@ export class List<T, TMeta = unknown> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
-
-    const [viewMode, setViewMode] = useState(
-      this.getStoredViewModeDefaultSetting() ?? defaultViewMode ?? "list",
-    );
-    this.viewMode = viewMode;
-
-    this.setViewMode = (viewMode) => {
-      setViewMode(viewMode);
-      if (this.settingsStore && this.viewModeStorageKey) {
-        this.settingsStore.set(
-          "List",
-          this.viewModeStorageKey,
-          List.viewModeSettingsStorageSchema,
-          viewMode,
-        );
-      }
-    };
+    this.viewMode = new ListViewMode(this, { defaultViewMode });
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
@@ -129,75 +103,13 @@ export class List<T, TMeta = unknown> {
   }
 
   public get visibleSorting() {
-    return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
+    return this.sorting.filter((s) => s.initialEnabled !== "hidden");
   }
 
   public static useNew<T, TMeta = unknown>(
     shape: ListShape<T, TMeta>,
   ): List<T, TMeta> {
     return new List<T, TMeta>(shape);
-  }
-
-  public storeFilterDefaultSettings() {
-    if (this.settingsStore && this.filterSettingsStorageKey) {
-      const data = Object.fromEntries(
-        this.filters.map((f) => [
-          f.property,
-          f
-            .getArrayValue()
-            .filter((v) => v.isActive)
-            .map((v) => v.id),
-        ]),
-      );
-
-      this.settingsStore.set(
-        "List",
-        this.filterSettingsStorageKey,
-        Filter.settingsStorageSchema,
-        data,
-      );
-    }
-  }
-
-  public getStoredFilterDefaultSettings() {
-    if (this.settingsStore && this.filterSettingsStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.filterSettingsStorageKey,
-        Filter.settingsStorageSchema,
-      );
-    }
-  }
-
-  public getStoredViewModeDefaultSetting() {
-    if (this.settingsStore && this.viewModeStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.viewModeStorageKey,
-        List.viewModeSettingsStorageSchema,
-      );
-    }
-  }
-
-  public storeSortingSettings(sorting: Sorting<T>) {
-    if (this.settingsStore && this.sortingStorageKey) {
-      this.settingsStore.set(
-        "List",
-        this.sortingStorageKey,
-        Sorting.storageSchema,
-        { direction: sorting.direction, property: sorting.property },
-      );
-    }
-  }
-
-  public getStoredSortingDefaultSetting() {
-    if (this.settingsStore && this.sortingStorageKey) {
-      return this.settingsStore.get(
-        "List",
-        this.sortingStorageKey,
-        Sorting.storageSchema,
-      );
-    }
   }
 
   public getSorting(id: string): Sorting<T> {

@@ -43,6 +43,9 @@ test.each(testEnvironments)(
         <TextArea rows={1} isDisabled>
           <Label>Disabled</Label>
         </TextArea>
+        <TextArea rows={1} allowResize>
+          <Label>Resizeable</Label>
+        </TextArea>
       </Flex>,
     );
 

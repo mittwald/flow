@@ -16,6 +16,7 @@ test.each(testEnvironments)(
       ContextualHelpTrigger,
       ContextualHelp,
       Button,
+      IconStar,
     },
   }) => {
     await render(
@@ -43,6 +44,15 @@ test.each(testEnvironments)(
         <TextField isDisabled>
           <Label>Disabled</Label>
         </TextField>
+        <TextField type="password">
+          <Label>Password</Label>
+        </TextField>
+        <TextField>
+          <Label>CustomButton</Label>
+          <Button aria-label="Custom">
+            <IconStar />
+          </Button>
+        </TextField>
       </Flex>,
     );
 
@@ -66,5 +76,36 @@ test.each(testEnvironments)(
     await userEvent.type(input, "asdf");
 
     await testScreenshot("TextField - text entered");
+  },
+);
+
+test.each(testEnvironments)(
+  "TextField edge cases (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, TextField, Label, Button, IconStar },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <TextField value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae.">
+          <Label>Default</Label>
+        </TextField>
+        <TextField
+          type="password"
+          value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae."
+        >
+          <Label>Password</Label>
+        </TextField>
+        <TextField value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae.">
+          <Label>CustomButton</Label>
+          <Button aria-label="Custom">
+            <IconStar />
+          </Button>
+        </TextField>
+      </Flex>,
+    );
+
+    await testScreenshot("TextField edge cases");
   },
 );

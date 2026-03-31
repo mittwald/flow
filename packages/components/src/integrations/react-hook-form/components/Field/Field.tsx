@@ -1,6 +1,9 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { dynamic, type PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { type PropsWithChildren } from "react";
 import {
   type ControllerProps,
@@ -12,6 +15,7 @@ import {
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
+import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">, PropsWithChildren {}
@@ -45,7 +49,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           : rest.rules?.maxLength,
     },
   });
-  const formContext = useFormContext();
+  const formContext = useFormContext<T>();
+
+  useUpdateFormDefaultValue(props, formContext.form);
+
   /**
    * We don't use controller.field.value here, because it doesn't update when
    * the form value is updated outside of this field (e.g. when setting values
@@ -96,6 +103,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     TextField: fieldProps,
     TextArea: fieldProps,
     MarkdownEditor: fieldProps,
+    CodeEditor: fieldProps,
     Checkbox: {
       ...fieldProps,
       isSelected: value,

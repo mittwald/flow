@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import path from "path";
 import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
+import { lezer } from "@lezer/generator/rollup";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [viteI18nPlugin],
+  plugins: [lezer(), viteI18nPlugin],
   resolve: {
     alias: [
       {
@@ -19,6 +20,9 @@ export default defineConfig({
         replacement: "@tabler/icons-react/dist/esm/icons/index.mjs",
       },
     ],
+  },
+  optimizeDeps: {
+    exclude: ["@lezer/lr"],
   },
   css: {
     modules: {

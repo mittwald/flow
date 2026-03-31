@@ -12,7 +12,7 @@ import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components";
-import { themes } from "prism-react-renderer";
+import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 
 export interface LiveCodeEditorProps {
   code: string | JSX.Element;
@@ -87,7 +87,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
             {!editorCollapsed && (
               <LiveEditor
                 tabMode="focus"
-                theme={themes.vsLight}
+                theme={flowTheme}
                 className={styles.editor}
               />
             )}

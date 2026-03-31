@@ -28,24 +28,50 @@ test.each(testEnvironments)(
         id: string;
         name: string;
         role: string;
-        active: boolean;
+        status: string;
       }>();
 
       return (
-        <List.List aria-label="list" getItemId={(i) => i.id}>
+        <List.List
+          aria-label="list"
+          getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
+        >
           <ActionGroup>
             <Button>Button</Button>
           </ActionGroup>
           <List.StaticData
             data={[
-              { id: "1", name: "Max Mustermann", role: "Admin", active: true },
-              { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "1",
+                name: "Max Mustermann",
+                role: "Admin",
+                status: "active",
+              },
+              {
+                id: "2",
+                name: "John Doe",
+                role: "Developer",
+                status: "unavailable",
+              },
             ]}
           />
           <List.Filter property="role" name="Role" />
+          <List.Filter property="status" name="Status" priority="secondary" />
           <List.Search data-testid="search" />
-          <List.Sorting property="name" name="A-Z" defaultEnabled />
-          <List.Sorting property="name" name="Z-A" direction="desc" />
+          <List.Sorting
+            property="name"
+            name="Alphabetical"
+            defaultEnabled
+            directionName="ascending"
+          />
+          <List.Sorting
+            property="name"
+            name="Alphabetical"
+            direction="desc"
+            directionName="descending"
+          />
           <List.Item textValue={(i) => i.name}>
             {(i) => (
               <ListItemView>
@@ -54,7 +80,7 @@ test.each(testEnvironments)(
                 </Avatar>
                 <Heading>
                   {i.name}
-                  {i.active && <Badge>Active</Badge>}
+                  {i.status === "active" && <Badge>Active</Badge>}
                 </Heading>
                 <Text>{i.role}</Text>
                 <Content>Content</Content>
@@ -76,9 +102,9 @@ test.each(testEnvironments)(
 
     const search = page.getByTestId("search");
     const bottomContent = page.getByTestId("bottomContent");
-    const sorting = page.getByRole("button", { name: "A-Z" });
-    const filter = page.getByRole("button", { name: "Role" });
+    const sorting = page.getByRole("button", { name: "Alphabetical" });
     const contextMenu = page.getByLocator('[aria-label="Options"]');
+    const allFilters = page.getByRole("button", { name: "All Filters" });
 
     await testScreenshot("List items - default");
 
@@ -88,8 +114,8 @@ test.each(testEnvironments)(
 
     await testScreenshot("List items - sorted");
 
-    await filter.click();
-    await userEvent.keyboard("{arrowDown}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List items - filtered");
@@ -104,7 +130,11 @@ test.each(testEnvironments)(
     await testScreenshot("List items - searched");
 
     await userEvent.dblClick(bottomContent);
-    await testScreenshot("List items - Bottom content text selected");
+    await testScreenshot("List items - bottom content text selected");
+
+    await allFilters.click();
+    await testScreenshot("List items - all filters opened");
+    await userEvent.keyboard("{escape}");
 
     await contextMenu.click();
     await testScreenshot("List items - ContextMenu opened");
@@ -144,6 +174,8 @@ test.each(testEnvironments)(
           defaultViewMode="tiles"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
@@ -213,11 +245,20 @@ test.each(testEnvironments)(
           defaultViewMode="table"
           aria-label="list"
           getItemId={(i) => i.id}
+          selectedKeys={["1", "2"]}
+          selectionMode="multiple"
         >
           <List.StaticData
             data={[
               { id: "1", name: "Max Mustermann", role: "Admin", active: true },
               { id: "2", name: "John Doe", role: "Developer", active: false },
+              {
+                id: "3",
+                name: "John Mustermann",
+                role: "Developer",
+                active: false,
+              },
+              { id: "4", name: "Max Doe", role: "Developer", active: false },
             ]}
           />
           <List.Table>
@@ -239,5 +280,193 @@ test.each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List table");
+  },
+);
+
+test.each(testEnvironments)(
+  "List edge cases - list view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "MaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermann",
+                role: "AdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - list view");
+  },
+);
+
+test.each(testEnvironments)(
+  "List edge cases - tile view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Text,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        role: string;
+        content: string;
+        bottomContent: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="tiles"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "MaxMustermannMaxMustermann",
+                role: "AdminAdminAdminAdminAdminAdminAdmin",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+                bottomContent:
+                  "BottomContentBottomContentBottomContentBottomContentBottomContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} showTiles textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Text>{i.role}</Text>
+                <Content>{i.content}</Content>
+                <Content slot="bottom">{i.bottomContent}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - tile view");
+  },
+);
+
+test.each(testEnvironments)(
+  "List edge cases - column layout (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      typedList,
+      ListItemView,
+      Avatar,
+      Initials,
+      Heading,
+      ContextMenu,
+      Content,
+    },
+  }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        name: string;
+        content: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id}>
+          <List.StaticData
+            data={[
+              {
+                id: "1",
+                name: "MaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermann",
+                content:
+                  "ContentContentContentContentContentContentContentContentContentContent",
+              },
+            ]}
+          />
+          <List.Item showList={false} textValue={(i) => i.name}>
+            {(i) => (
+              <ListItemView m={[3, 1]}>
+                <Avatar>
+                  <Initials>{i.name}</Initials>
+                </Avatar>
+                <Heading>{i.name}</Heading>
+                <Content>{i.content}</Content>
+                <ContextMenu />
+              </ListItemView>
+            )}
+          </List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List edge cases - column layout");
   },
 );

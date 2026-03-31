@@ -1,23 +1,30 @@
+import Action from "@/components/Action";
+import { duration } from "@/components/Action/models/ActionState";
 import Button from "@/components/Button";
 import TextField, { type TextFieldProps } from "@/components/TextField";
 import {
   Field,
   Form,
+  FormSettingsProvider,
   SubmitButton,
   typedField,
   useFormContext,
   type FormProps,
 } from "@/integrations/react-hook-form";
 import { Render } from "@/lib/react/components/Render";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { TextArea } from "react-aria-components";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
+import FormRootError from "../FormRootError";
 
 const handleSubmit = vitest.fn();
+vitest.useFakeTimers();
 
 beforeEach(() => {
   vitest.resetAllMocks();
+  vitest.clearAllTimers();
 });
 
 describe("resetting", () => {
@@ -47,11 +54,14 @@ describe("resetting", () => {
     });
     const Field = typedField(form);
 
+    const isDirty = form.formState.isDirty;
+
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
         <Field {...props.textField} name="test">
           <TextField aria-label="test" />
         </Field>
+        {isDirty && <span data-testid="dirty">dirty</span>}
         <Button
           onPress={() => {
             if (resetValueTo) {
@@ -107,6 +117,108 @@ describe("resetting", () => {
       expect(field).toHaveDisplayValue(expected);
     },
   );
+
+  test("Form is not dirty after reset when field has default value", async () => {
+    await render(
+      <TestForm
+        textField={{
+          defaultValue: "default",
+        }}
+      />,
+    );
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
+
+  test("Form is not dirty after reset when form has default value", async () => {
+    initialValue = "default";
+    await render(<TestForm />);
+
+    const field = page.getByLabelText("test");
+    const resetButton = page.getByText("Reset");
+    const isDirty = page.getByTestId("dirty");
+
+    await userEvent.type(field, "changed");
+    expect(isDirty).toBeInTheDocument();
+
+    await userEvent.click(resetButton);
+    expect(isDirty).not.toBeInTheDocument();
+  });
+});
+
+describe("submission", () => {
+  const onAfterSubmit = vitest.fn();
+  const onAfterSubmitAction = vitest.fn();
+  const onSubmit = vitest.fn(async () => onAfterSubmit);
+
+  const TestForm: FC = () => {
+    const form = useForm<object>();
+    return (
+      <Form form={form} onSubmit={onSubmit}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <Field name="test2">
+          <TextArea placeholder="textarea" aria-label="test2" />
+        </Field>
+        <Action onAction={onAfterSubmitAction}>
+          <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+        </Action>
+      </Form>
+    );
+  };
+
+  test("submit callback is called", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    const textField = page.getByPlaceholder("textfield");
+    await userEvent.type(textField, "hello");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalledWith(
+      { test: "hello" },
+      expect.objectContaining({ type: "submit" }),
+    );
+  });
+
+  test("afterSubmit callback is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    expect(onSubmit).toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmit).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmit).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission", async () => {
+    await render(<TestForm />);
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
+  });
+
+  test("parent action of submit button is called after successful submission via hotkey", async () => {
+    await render(<TestForm />);
+    const textArea = page.getByPlaceholder("textarea");
+    await userEvent.click(textArea);
+    await userEvent.keyboard("{Meta>}{Enter}");
+    await vitest.advanceTimersByTimeAsync(duration.succeeded - 100);
+    expect(onAfterSubmitAction).not.toHaveBeenCalled();
+    await vitest.advanceTimersByTimeAsync(100);
+    expect(onAfterSubmitAction).toHaveBeenCalled();
+  });
 });
 
 describe("readonly", () => {
@@ -157,6 +269,54 @@ describe("readonly", () => {
   });
 });
 
+describe("FormSettingsProvider", () => {
+  const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
+    const form = useForm<object>({
+      defaultValues: {
+        test: "value",
+      },
+    });
+    return (
+      <Form {...props} form={form}>
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
+  test("form submission can be intercepted with FormSettingsProvider", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <FormSettingsProvider
+        submitInterceptor={async (submit, values) => {
+          expect(values).toEqual({ test: "value" });
+          try {
+            return await submit(values);
+          } catch {
+            // swallow error
+          }
+        }}
+      >
+        <TestForm
+          onSubmit={() => {
+            throw new Error("Submission failed");
+          }}
+        />
+      </FormSettingsProvider>,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+});
+
 describe("error", () => {
   const TestForm: FC<Omit<FormProps<object>, "form">> = (props) => {
     const form = useForm<object>();
@@ -170,9 +330,30 @@ describe("error", () => {
     );
   };
 
+  const RootErrorTestForm: FC<PropsWithChildren> = (props) => {
+    const { children } = props;
+    const form = useForm<object>();
+    return (
+      <Form
+        {...props}
+        form={form}
+        onSubmit={() => {
+          form.setError("root", {
+            message: "Test error",
+          });
+        }}
+      >
+        <Field name="test">
+          <TextField placeholder="textfield" aria-label="test" />
+        </Field>
+        {children}
+        <SubmitButton data-testid="submit-button">Submit</SubmitButton>
+      </Form>
+    );
+  };
+
   test("form submission error leads to unhandledrejection event", async () => {
     const errorHandler = vitest.fn();
-
     window.addEventListener("unhandledrejection", errorHandler);
 
     await render(
@@ -193,6 +374,46 @@ describe("error", () => {
         }),
       }),
     );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("form.setError('root') leads to unhandledrejection event when no FormRootError is mounted", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(<RootErrorTestForm />);
+
+    const submitButton = page.getByTestId("submit-button");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).toHaveBeenCalledWith(
+      expect.objectContaining({
+        reason: expect.objectContaining({
+          message: "Test error",
+        }),
+      }),
+    );
+
+    window.removeEventListener("unhandledrejection", errorHandler);
+  });
+
+  test("form.setError('root') leads not to unhandledrejection event when FormRootError is mounted", async () => {
+    const errorHandler = vitest.fn();
+    window.addEventListener("unhandledrejection", errorHandler);
+
+    await render(
+      <RootErrorTestForm>
+        <FormRootError />
+      </RootErrorTestForm>,
+    );
+
+    const submitButton = page.getByTestId("submit-button");
+    const errorText = page.getByText("Test error");
+    await userEvent.click(submitButton);
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    expect(errorText).toBeInTheDocument();
 
     window.removeEventListener("unhandledrejection", errorHandler);
   });

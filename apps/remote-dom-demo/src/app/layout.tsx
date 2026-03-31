@@ -33,8 +33,10 @@ export default function Layout(props: PropsWithChildren) {
                 <Link href="/host/non-interactive">Non-interactive</Link>
                 <Link href="/host/event-handler">Event handler</Link>
                 <Link href="/host/context-menu">Context Menu</Link>
+                <Link href="/host/code-editor">CodeEditor</Link>
                 <Link href="/host/popover">Popover</Link>
                 <Link href="/host/markdown">Markdown</Link>
+                <Link href="/host/chart">Chart</Link>
                 <Link href="/host/modal">Modal</Link>
                 <Link href="/host/notification">Notifications</Link>
                 <Render>

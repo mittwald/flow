@@ -12,6 +12,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import type { AlphaColor } from "@/lib/types/props";
 
 export interface ButtonProps
   extends
@@ -20,7 +21,7 @@ export interface ButtonProps
   /** Slot for button placement in action groups. */
   slot?: string;
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
+  color?: "primary" | "accent" | "secondary" | "danger" | AlphaColor;
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */
@@ -50,14 +51,37 @@ const disablePendingProps = (props: ButtonProps) => {
     props.isReadOnly
   ) {
     props = { ...props };
-    props.onPress = undefined;
-    props.onPressStart = undefined;
-    props.onPressEnd = undefined;
-    props.onPressChange = undefined;
-    props.onPressUp = undefined;
-    props.onKeyDown = undefined;
-    props.onKeyUp = undefined;
-    props.type = "button";
+
+    const mutedActionHandler = (e: unknown) => {
+      if (e && typeof e === "object") {
+        // stopPropagation is the default behavior in React Aria
+        const isReactAriaEvent =
+          "continuePropagation" in e &&
+          typeof e.continuePropagation === "function";
+
+        if (
+          !isReactAriaEvent &&
+          "stopPropagation" in e &&
+          typeof e.stopPropagation === "function"
+        ) {
+          e.stopPropagation();
+        }
+        if ("preventDefault" in e && typeof e.preventDefault === "function") {
+          e.preventDefault();
+        }
+      }
+
+      return false;
+    };
+
+    props.onClick = mutedActionHandler;
+    props.onPress = mutedActionHandler;
+    props.onPressStart = mutedActionHandler;
+    props.onPressEnd = mutedActionHandler;
+    props.onPressChange = mutedActionHandler;
+    props.onPressUp = mutedActionHandler;
+    props.onKeyDown = mutedActionHandler;
+    props.onKeyUp = mutedActionHandler;
   }
 
   return props;
@@ -92,7 +116,7 @@ export const Button = flowComponent("Button", (props) => {
         isPending && styles.isPending,
         isSucceeded && styles.isSucceeded,
         isFailed && styles.isFailed,
-        styles[`size-${size}`],
+        size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
         className,

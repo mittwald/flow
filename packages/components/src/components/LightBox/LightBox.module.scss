@@ -1,6 +1,23 @@
 .lightBox {
   background-color: var(--light-box--overlay-background-color);
 
+  > div {
+    position: fixed;
+    height: var(--visual-viewport-height);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      width: inherit;
+      max-height: var(--visual-viewport-height);
+    }
+  }
+
   [role="dialog"] {
     outline: none;
     display: flex;
@@ -11,6 +28,10 @@
 
   .content {
     overflow: auto;
+
+    > img {
+      width: 100%;
+    }
   }
 
   &.fitScreen {

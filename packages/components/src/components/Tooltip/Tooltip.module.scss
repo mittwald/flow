@@ -14,11 +14,13 @@
   /* Placement */
   &[data-placement="top"] {
     margin-bottom: var(--tooltip--tooltip-to-trigger-spacing);
+
     --translate-origin: translateY(var(--translate-origin-length));
   }
 
   &[data-placement="bottom"] {
     margin-top: var(--tooltip--tooltip-to-trigger-spacing);
+
     --translate-origin: translateY(var(--translate-origin-length) * -1);
 
     .tip svg {
@@ -28,6 +30,7 @@
 
   &[data-placement="right"] {
     margin-left: var(--tooltip--tooltip-to-trigger-spacing);
+
     --translate-origin: translateX(var(--translate-origin-length) * -1);
 
     .tip svg {
@@ -37,6 +40,7 @@
 
   &[data-placement="left"] {
     margin-right: var(--tooltip--tooltip-to-trigger-spacing);
+
     --translate-origin: translateX(var(--translate-origin-length));
 
     .tip svg {

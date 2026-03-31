@@ -1,51 +1,47 @@
-import clsx from "clsx";
-import Heading from "@/components/Heading";
-import { LegendItem } from "@/components/Legend/components/LegendItem";
-import type * as Recharts from "recharts";
+import React, { type FC, Suspense } from "react";
+import type { TooltipContentProps } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import type { WithTooltipFormatters } from "./ChartTooltip";
-import styles from "./ChartTooltip.module.scss";
+import { usePromise } from "@mittwald/react-use-promise";
+import Heading from "@/components/Heading";
+import type { WithTooltipFormatters } from "@/components/CartesianChart";
+import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
+import SkeletonTextView from "@/views/SkeletonTextView";
 
-interface TooltipContentProps
-  extends
-    Pick<
-      Recharts.TooltipContentProps<ValueType, NameType>,
-      "active" | "payload" | "label" | "wrapperClassName"
-    >,
-    WithTooltipFormatters {}
+/** @internal */
+export const TooltipContent: FC<
+  WithTooltipFormatters &
+    Omit<TooltipContentProps<ValueType, NameType>, "formatter">
+> = (props) => {
+  const { headingFormatter, formatter, label, payload } = props;
 
-export const TooltipContent = (props: TooltipContentProps) => {
-  const {
-    active,
-    payload,
-    formatter,
-    headingFormatter,
-    label,
-    wrapperClassName,
-  } = props;
-  const className = clsx(wrapperClassName, styles.tooltip);
+  const formattedHeading = usePromise(
+    async (label, formatter) => {
+      if (!formatter) {
+        return label;
+      }
 
-  if (active && payload && payload.length) {
-    return (
-      <div className={className}>
-        <Heading level={4}>
-          {headingFormatter ? headingFormatter(label) : label}
-        </Heading>
-        {payload
-          .filter((i) => i.fill !== "none")
-          .map((i, index) => (
-            <LegendItem color={i.fill} key={i.dataKey}>
-              {formatter
-                ? formatter(i.value, i.dataKey, index, i.unit)
-                : `${i.dataKey}: ${i.value} ${i.unit ? ` ${i.unit}` : ""}`}
-            </LegendItem>
-          ))}
-      </div>
-    );
-  }
+      return formatter(label);
+    },
+    [label, headingFormatter] as const,
+  );
 
-  return null;
+  const items = payload
+    .filter((item) => item.fill !== "none")
+    .map((item, index) => {
+      return (
+        <Suspense key={item.dataKey} fallback={<SkeletonTextView />}>
+          <TooltipLegendItem formatter={formatter} item={item} index={index} />
+        </Suspense>
+      );
+    });
+
+  return (
+    <>
+      <Heading level={4}>{formattedHeading}</Heading>
+      {items}
+    </>
+  );
 };

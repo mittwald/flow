@@ -2,6 +2,7 @@
   color: var(--heading--color);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
+
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
 
   @mixin color($color) {
@@ -10,10 +11,12 @@
     }
   }
 
-  @include color("dark");
-  @include color("light");
   @include color("danger");
   @include color("unavailable");
+  @include color("dark");
+  @include color("light");
+  @include color("dark-static");
+  @include color("light-static");
 
   .headingText {
     .icon {
@@ -61,7 +64,7 @@
   }
 
   @mixin size($size) {
-    &.#{$size} {
+    &.size-#{$size} {
       --font-size: var(--font-size-heading--#{$size});
     }
   }
@@ -76,13 +79,31 @@
   &:where(.wrap-wrap) {
     text-wrap: wrap;
   }
+
   &:where(.wrap-balance) {
     text-wrap: balance;
   }
 }
 
-@media (max-width: 550px) {
-  .heading:where(h1) {
-    --font-size: var(--font-size-heading--l);
+@media (max-width: 768px) {
+  .heading {
+    &:where(h1),
+    &.size-xl {
+      --font-size: var(--font-size-heading--l);
+    }
+
+    &.size-l {
+      --font-size: var(--font-size-heading--m);
+    }
+
+    &:where(h2),
+    &.size-m {
+      --font-size: var(--font-size-heading--s);
+    }
+
+    &:where(h3),
+    &.size-s {
+      --font-size: var(--font-size-heading--xs);
+    }
   }
 }

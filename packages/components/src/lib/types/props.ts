@@ -28,3 +28,16 @@ export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
 export interface PropsWithContainerBreakpointSize {
   containerBreakpointSize?: ContainerBreakpointSize;
 }
+
+export const alphaColors = [
+  "dark",
+  "light",
+  "dark-static",
+  "light-static",
+] as const;
+
+export type AlphaColor = (typeof alphaColors)[number];
+
+export function isAlphaColor(color: string): color is AlphaColor {
+  return alphaColors.includes(color as AlphaColor);
+}

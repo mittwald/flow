@@ -1,7 +1,6 @@
 @use "@/styles/mixins/focus";
 
 .link {
-  line-height: var(--link--line-height);
   font-weight: var(--link--font-weight);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
@@ -40,37 +39,39 @@
     color: var(--link--color--disabled);
   }
 
-  &:where(.dark) {
-    color: var(--link--color-dark--default);
+  /* Size s */
 
-    &:hover {
-      color: var(--link--color-dark--hover);
-    }
+  &.size-s {
+    font-size: var(--font-size-text--s);
 
-    &[data-pressed] {
-      color: var(--link--color-dark--pressed);
-    }
-
-    &[aria-disabled] {
-      color: var(--link--color-dark--disabled);
+    .icon {
+      height: var(--link--icon-height-s);
     }
   }
 
-  &:where(.light) {
-    color: var(--link--color-light--default);
+  /* Alpha Colors */
+  @mixin color($color) {
+    &:where(.#{$color}) {
+      color: var(--link--color-#{$color}--default);
 
-    &:hover {
-      color: var(--link--color-light--hover);
-    }
+      &:hover {
+        color: var(--link--color-#{$color}--hover);
+      }
 
-    &[data-pressed] {
-      color: var(--link--color-light--pressed);
-    }
+      &[data-pressed] {
+        color: var(--link--color-#{$color}--pressed);
+      }
 
-    &[aria-disabled] {
-      color: var(--link--color-light--disabled);
+      &[aria-disabled] {
+        color: var(--link--color-#{$color}--disabled);
+      }
     }
   }
+
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 
   /* AlertText Colors */
   @mixin status($status) {

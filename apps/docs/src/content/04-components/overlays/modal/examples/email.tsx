@@ -20,7 +20,7 @@ import {
     </TextField>
   </div>
   <ActionGroup className="flow--modal--action-group">
-    <Action closeOverlay="Modal">
+    <Action closeModal>
       <Button color="accent">E-Mail-Adresse anlegen</Button>
       <Button variant="soft" color="secondary">
         Abbrechen

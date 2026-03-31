@@ -2,12 +2,12 @@ import {
   Area,
   CartesianChart,
   CartesianGrid,
-  ChartTooltip,
   ChartLegend,
+  ChartTooltip,
+  Heading,
+  Section,
   XAxis,
   YAxis,
-  Section,
-  Heading,
 } from "@mittwald/flow-react-components";
 
 <Section>
@@ -69,7 +69,6 @@ import {
         Projekte: 40,
       },
     ]}
-    height="200px"
     syncId="syncedCharts"
   >
     <CartesianGrid />

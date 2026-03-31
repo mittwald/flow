@@ -1,5 +1,5 @@
 .cartesianChart {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
 
   *:focus:not(:focus-visible) {
     outline: none !important;
@@ -19,6 +19,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  &.emptyView {
+    :global(.recharts-cartesian-grid) {
+      display: none;
+    }
   }
 
   svg {

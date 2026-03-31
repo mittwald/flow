@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { OverlayController } from "@/lib/controller";
 import invariant from "invariant";
-import type { ActionProps } from "@/components/Action/types";
+import { type ActionProps } from "@/components/Action/types";
 import { actionContext } from "@/components/Action/context";
 import { ActionState } from "@/components/Action/models/ActionState";
 import { ActionExecution } from "@/components/Action/models/ActionExecution";
@@ -9,6 +9,10 @@ import { ActionStateContext } from "@/components/Action/models/ActionStateContex
 import type { OverlayContext } from "@/lib/controller/overlay/context";
 import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { FlowComponentName } from "@/components/propTypes";
+import type {
+  CloseModalOptions,
+  CloseOverlayOptions,
+} from "@/lib/controller/overlay/OverlayController";
 
 interface InitObject {
   actionProps: ActionProps;
@@ -93,24 +97,62 @@ export class ActionModel {
   }
 
   public getOverlayController(
-    component: FlowComponentName,
+    from:
+      | FlowComponentName
+      | OverlayController
+      | CloseOverlayOptions
+      | CloseModalOptions,
   ): OverlayController | undefined {
     const getController = (
-      controller?: OverlayController | FlowComponentName,
+      controller?:
+        | OverlayController
+        | FlowComponentName
+        | CloseOverlayOptions
+        | CloseModalOptions,
     ): OverlayController | undefined => {
-      return controller === undefined
-        ? undefined
-        : controller
-          ? this.overlayContext[component]
-          : undefined;
+      if (controller === undefined) {
+        return undefined;
+      }
+      if (from instanceof OverlayController) {
+        return from;
+      }
+      if (typeof from === "string") {
+        return this.overlayContext[from];
+      }
+      if ("overlay" in from) {
+        return this.getOverlayController(from.overlay);
+      }
+      return this.getOverlayController("Modal");
     };
 
     return (
       getController(this.actionProps.openOverlay) ??
       getController(this.actionProps.closeOverlay) ??
-      getController(this.actionProps.toggleOverlay)
+      getController(this.actionProps.toggleOverlay) ??
+      getController(this.actionProps.openModal ? "Modal" : undefined) ??
+      getController(this.actionProps.closeModal ? "Modal" : undefined) ??
+      getController(this.actionProps.toggleModal ? "Modal" : undefined)
     );
   }
+
+  public static getCloseOverlayOptions = (
+    options?:
+      | OverlayController
+      | FlowComponentName
+      | CloseOverlayOptions
+      | CloseModalOptions
+      | true,
+  ) => {
+    if (
+      options === undefined ||
+      options instanceof OverlayController ||
+      typeof options === "string" ||
+      options === true
+    ) {
+      return undefined;
+    }
+    return options;
+  };
 
   public execute = (...args: unknown[]): void => {
     new ActionExecution(this).execute(...args);

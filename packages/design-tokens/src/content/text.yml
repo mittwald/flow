@@ -6,6 +6,10 @@ text:
       value: "{light-plain-content-color}"
     dark:
       value: "{dark-plain-content-color}"
+    light-static:
+      value: "{light-static-plain-content-color}"
+    dark-static:
+      value: "{dark-static-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
   max-width:

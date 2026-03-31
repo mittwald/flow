@@ -12,7 +12,7 @@ interface Props extends PropsWithClassName {
   search: Search<never>;
 }
 
-const autoSubmitTimeout = 800;
+const autoSubmitTimeout = 500;
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   const { onChange, value, autoSubmit = true, ...searchFieldProps } = props;

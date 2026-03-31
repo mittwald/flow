@@ -3,6 +3,8 @@ modal:
     value: "{corner-radius.default}"
   padding:
     value: "{size-px.l}"
+  padding-mobile:
+    value: "{size-px.m}"
   background-color:
     value: "{neutral.color.100}"
   size:

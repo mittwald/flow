@@ -6,6 +6,7 @@ import { Label } from "@/components/Label";
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { useOverlayController } from "@/lib/controller";
+import { StoryBackground } from "@/lib/dev/StoryBackground";
 
 const meta: Meta<typeof Badge> = {
   title: "Status/Badge",
@@ -23,7 +24,11 @@ const meta: Meta<typeof Badge> = {
       options: badgeColors,
     },
   },
-  render: (props) => <Badge {...props}>Value</Badge>,
+  render: (props) => (
+    <StoryBackground color={props.color}>
+      <Badge {...props}>Value</Badge>
+    </StoryBackground>
+  ),
 };
 export default meta;
 
@@ -33,68 +38,31 @@ export const Default: Story = {};
 
 export const WithScope: Story = {
   render: (props) => (
-    <Badge {...props}>
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
+    <StoryBackground color={props.color}>
+      <Badge {...props}>
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    </StoryBackground>
   ),
 };
 
-export const WithOnPress: Story = {
+export const WithActions: Story = {
   render: (props) => (
-    <Badge
-      {...props}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
-  ),
-};
-
-export const WithOnClose: Story = {
-  render: (props) => (
-    <Badge
-      {...props}
-      onClose={() => {
-        alert("closed!");
-      }}
-    >
-      Value
-    </Badge>
-  ),
-};
-
-export const WithScopeAndOnClose: Story = {
-  render: (props) => (
-    <Badge
-      {...props}
-      onClose={() => {
-        alert("closed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
-  ),
-};
-
-export const WithOnPressAndOnClose: Story = {
-  render: (props) => (
-    <Badge
-      {...props}
-      onClose={() => {
-        alert("closed!");
-      }}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
+    <StoryBackground color={props.color}>
+      <Badge
+        {...props}
+        onClose={() => {
+          alert("closed!");
+        }}
+        onPress={() => {
+          alert("pressed!");
+        }}
+      >
+        <Label>Scope</Label>
+        <Text>Value</Text>
+      </Badge>
+    </StoryBackground>
   ),
 };
 
@@ -104,7 +72,7 @@ export const WithContextMenu: Story = {
     const triggerRef = React.useRef(null);
 
     return (
-      <>
+      <StoryBackground color={props.color}>
         <Badge ref={triggerRef} onPress={controller.open} {...props}>
           <Label>Scope</Label>
           <Text>Value</Text>
@@ -113,47 +81,7 @@ export const WithContextMenu: Story = {
           <MenuItem>Item 1</MenuItem>
           <MenuItem>Item 2</MenuItem>
         </ContextMenu>
-      </>
+      </StoryBackground>
     );
-  },
-};
-
-export const Light: Story = {
-  args: {
-    color: "light",
-  },
-  render: (props) => (
-    <Badge
-      {...props}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
-  ),
-  globals: {
-    backgrounds: "dark",
-  },
-};
-
-export const Dark: Story = {
-  args: {
-    color: "dark",
-  },
-  render: (props) => (
-    <Badge
-      {...props}
-      onPress={() => {
-        alert("pressed!");
-      }}
-    >
-      <Label>Scope</Label>
-      <Text>Value</Text>
-    </Badge>
-  ),
-  globals: {
-    backgrounds: "light",
   },
 };

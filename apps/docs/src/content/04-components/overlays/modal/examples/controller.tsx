@@ -9,12 +9,12 @@ import {
   Section,
   Text,
   TextField,
-  useOverlayController,
+  useModalController,
 } from "@mittwald/flow-react-components";
 import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
 
 export default () => {
-  const controller = useOverlayController("Modal");
+  const controller = useModalController();
 
   return (
     <>
@@ -39,7 +39,7 @@ export default () => {
           </Section>
         </Content>
         <ActionGroup>
-          <Action closeOverlay="Modal">
+          <Action closeModal>
             <Action onAction={sleepLong}>
               <Button color="accent">
                 Organisation anlegen

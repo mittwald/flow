@@ -1,13 +1,17 @@
 .text {
   color: inherit;
 
-  &:where(.light) {
-    color: var(--text--color--light);
+  /* Alpha Colors */
+  @mixin color($color) {
+    &:where(.#{$color}) {
+      color: var(--text--color--#{$color});
+    }
   }
 
-  &:where(.dark) {
-    color: var(--text--color--dark);
-  }
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 
   ul,
   ol {
@@ -25,9 +29,8 @@
   }
 
   blockquote {
-    border-left-width: var(--text--blockquote-border-width);
-    border-left-style: var(--text--blockquote-border-style);
-    border-left-color: var(--text--blockquote-border-color);
+    border-left: var(--text--blockquote-border-width)
+      var(--text--blockquote-border-style) var(--text--blockquote-border-color);
     padding-left: var(--text--blockquote-padding);
   }
 
@@ -57,9 +60,11 @@
   &:where(.wrap-wrap) {
     text-wrap: wrap;
   }
+
   &:where(.wrap-balance) {
     text-wrap: balance;
   }
+
   &:where(.wrap-pretty) {
     text-wrap: pretty;
   }

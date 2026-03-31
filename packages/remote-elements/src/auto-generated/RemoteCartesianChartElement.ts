@@ -13,7 +13,6 @@ export class RemoteCartesianChartElement extends FlowRemoteElement<RemoteCartesi
     return {
       className: {},
       data: {},
-      emptyView: {},
       flexGrow: {},
       height: {},
       syncId: {},
@@ -26,7 +25,7 @@ export class RemoteCartesianChartElement extends FlowRemoteElement<RemoteCartesi
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["emptyView"];
   }
 }
 

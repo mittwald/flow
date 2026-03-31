@@ -10,6 +10,7 @@ import type {
   FilterMatcher,
   FilterMode,
   FilterShape,
+  FilterUpdatedCallback,
 } from "@/components/List/model/filter/types";
 import type {
   PropertyName,
@@ -18,8 +19,8 @@ import type {
 import { customPropertyPrefix } from "@/components/List/model/types";
 import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
-import z from "zod";
 import { toArray } from "@/lib/array/toArray";
+import type { ListSettingsStoreOperationOptions } from "../ListSettingsStore";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -30,49 +31,102 @@ const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
-  public static readonly settingsStorageSchema = z
-    .record(z.string().or(z.symbol()), z.array(z.string()))
-    .optional();
-
   private _values?: FilterValue[] | undefined;
   private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
-  public readonly property: PropertyName<T>;
+  public readonly property: TProp;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher<T, never, never>;
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
-  private onFilterUpdateCallbacks = new Set<() => unknown>();
-  private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
+  public readonly autosave: boolean;
+  public readonly manualSave: boolean;
+  private onFilterChangeCallbacks = new Set<FilterUpdatedCallback>();
+  private readonly defaultSelectedValues?: FilterValue[];
+  public readonly priority: "primary" | "secondary";
+  public readonly storageKey: string;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
+    const {
+      autosave = list.settingsStorageDefaults?.filters?.autosave ?? false,
+      manualSave = list.settingsStorageDefaults?.filters?.manualSave ?? true,
+      property,
+      mode = "some",
+      values,
+      matcher = equalsPropertyMatcher,
+      renderItem = stringCastRenderMethod,
+      priority = "primary",
+      name,
+      defaultSelected,
+      onChange,
+    } = shape;
+
     this.list = list;
-    this.property = shape.property;
-    this.mode = shape.mode ?? "some";
-    this._values = shape.values?.map((v) => FilterValue.create(this, v));
-    this.matcher = shape.matcher ?? equalsPropertyMatcher;
-    this.renderItem = shape.renderItem ?? stringCastRenderMethod;
-    this.name = shape.name;
-
-    this.defaultSelectedValues = shape.defaultSelected;
-  }
-
-  private getStoredSelectedIds() {
-    return this.list.getStoredFilterDefaultSettings()?.[String(this.property)];
+    this.autosave = autosave;
+    this.manualSave = manualSave;
+    this.property = property;
+    this.storageKey = String(property);
+    this.mode = mode;
+    this._values = values?.map((v) => FilterValue.create(this, v));
+    this.matcher = matcher;
+    this.renderItem = renderItem;
+    this.name = name;
+    this.priority = priority;
+    this.defaultSelectedValues = defaultSelected?.map((v) =>
+      FilterValue.create(this, v),
+    );
+    if (onChange) {
+      this.onFilterChangeCallbacks.add(onChange);
+    }
   }
 
   public updateInitialState(initialState: InitialTableState) {
-    const initialValues = this.getInitialValues();
+    const initialIds = this.getInitialSelectedIds();
 
-    if (initialValues?.length) {
+    if (initialIds?.length) {
       initialState.columnFilters = [
         ...(initialState.columnFilters ?? []),
         {
           id: this.property as string,
-          value: initialValues,
+          value: initialIds,
         },
       ];
     }
+  }
+
+  private getInitialSelectedIds() {
+    return (
+      this.getStoredSelectedIds({
+        autosave: this.autosave,
+        manualSave: this.manualSave,
+      }) ?? this.defaultSelectedValues?.map((v) => v.id)
+    );
+  }
+
+  private getStoredSelectedIds(options: ListSettingsStoreOperationOptions) {
+    return this.list.settingsStorage?.get("activeFilters", options)?.[
+      this.storageKey
+    ];
+  }
+
+  private getStoredSelectedValues(options: ListSettingsStoreOperationOptions) {
+    return this.getStoredSelectedIds(options)
+      ?.map((id) => this.values.find((v) => v.id === id))
+      .filter((v): v is FilterValue => v !== undefined);
+  }
+
+  public static storeFilters<T>(
+    list: List<T>,
+    options: ListSettingsStoreOperationOptions,
+  ) {
+    const data = Object.fromEntries(
+      list.filters.map((filter) => [
+        filter.storageKey,
+        filter.getArrayValue().map((v) => v.id),
+      ]),
+    );
+
+    list.settingsStorage?.store("activeFilters", data, options);
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -114,7 +168,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
         filterArr.length === 0 || filterArr.map(toFilterValue).some(predicate)
       );
     } else if (this.mode === "one") {
-      return predicate(toFilterValue(filterValueInput));
+      const oneValue = Array.isArray(filterValueInput)
+        ? filterValueInput[0]
+        : filterValueInput;
+      return predicate(toFilterValue(oneValue));
     }
 
     throw new Error(`Unknown filter mode '${this.mode}'`);
@@ -188,7 +245,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public deactivateValue(value: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
-    let updatedValue: unknown;
+    let updatedValue: FilterValue[] | FilterValue | null;
 
     if (this.mode === "all" || this.mode === "some") {
       updatedValue = currentValueAsArray.filter((v) => !v.equals(value));
@@ -199,34 +256,44 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.list.reactTable
       .getTableColumn(this.property)
       .setFilterValue(updatedValue);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+
+    this.callOnChangedHandlers(updatedValue);
   }
 
-  public hasChanged(): boolean {
-    const currentValues = this.getArrayValue().map((v) => v.value);
-    const initialValues =
-      this.getInitialFilterValues()?.map((v) => v.value) ?? [];
+  private callOnChangedHandlers(
+    newValue: FilterValue[] | FilterValue | null,
+  ): void {
+    const values = toArray(newValue).map((v) => v?.value);
+    this.onFilterChangeCallbacks.forEach((cb) => cb(values));
+  }
+
+  public hasChanges(): boolean {
+    const currentIds = this.getArrayValue().map((v) => v.id);
+
+    const defaultIds =
+      this.getStoredSelectedIds({ autosave: false }) ??
+      this.defaultSelectedValues?.map((v) => v.id) ??
+      [];
 
     return (
-      currentValues.length !== initialValues.length ||
-      difference(currentValues, initialValues).length > 0
+      currentIds.length !== defaultIds.length ||
+      difference(currentIds, defaultIds).length > 0
     );
   }
 
-  private getInitialValues() {
-    return this.getStoredSelectedIds() ?? this.defaultSelectedValues;
-  }
-
-  private getInitialFilterValues() {
-    return this.getInitialValues()?.map((v) => FilterValue.create(this, v));
+  public isStoringAvailable(): boolean {
+    return !!this.list.settingsStorage && this.manualSave;
   }
 
   public resetValues(): void {
-    let resetTo: unknown;
-    const initialValues = this.getInitialValues();
+    let resetTo: FilterValue[] | FilterValue | null;
 
-    if (initialValues) {
-      resetTo = initialValues;
+    const storedValues =
+      this.getStoredSelectedValues({ autosave: false }) ??
+      this.defaultSelectedValues;
+
+    if (storedValues) {
+      resetTo = storedValues;
     } else {
       if (this.mode === "all" || this.mode === "some") {
         resetTo = [];
@@ -236,18 +303,18 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     }
 
     this.list.reactTable.getTableColumn(this.property).setFilterValue(resetTo);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(resetTo);
   }
 
   public clear(): void {
     this.list.reactTable.getTableColumn(this.property).setFilterValue(null);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(null);
   }
 
   public toggleValue(newValue: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
-    let updatedValue: unknown;
+    let updatedValue: FilterValue[] | FilterValue | null;
 
     if (this.mode === "all" || this.mode === "some") {
       if (newValue.isActive) {
@@ -262,10 +329,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.list.reactTable
       .getTableColumn(this.property)
       .setFilterValue(updatedValue);
-    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+    this.callOnChangedHandlers(updatedValue);
   }
 
   public onFilterUpdated(cb: () => unknown): void {
-    this.onFilterUpdateCallbacks.add(cb);
+    this.onFilterChangeCallbacks.add(cb);
   }
 }

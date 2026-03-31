@@ -148,7 +148,7 @@ export const RenameCronjobModal: FC<Props> = (props) => (
   <WithBoundaries.Modal controller={props.controller}>
     {() => {
       const { cronjobGhost } = asGhostProps(props, ["cronjob"]);
-      const controller = useOverlayController("Modal");
+      const controller = useModalController();
       const form = useForm();
       const handleOnSubmit = async () => {
         ...
@@ -331,8 +331,8 @@ enthält kein Suspense, damit das ganze ContextMenu im Ladezustand verbleibt.
 ```
 export const ActionsContextMenu: FC<Props> = (props) => {
   const { appInstallationGhost } = asGhostProps(props);
-  const deleteModalController = useOverlayController("Modal");
-  const updateModalController = useOverlayController("Modal");
+  const deleteModalController = useModalController();
+  const updateModalController = useModalController();
 
   return (
     <>
