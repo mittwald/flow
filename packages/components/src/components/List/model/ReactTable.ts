@@ -108,16 +108,25 @@ export class ReactTable<T, TMeta = unknown> {
       ...tableOptions,
     });
 
-    const onReactTableChanged = useEffectEvent(() => {
-      if (onChange) {
-        onChange(this.list);
-      }
+    const reactTableState = table.getState();
+
+    const onFiltersChanged = useEffectEvent(() => {
       Filter.storeFilters(this.list, { autosave: true });
     });
 
+    const onStateChanged = useEffectEvent(() => {
+      if (onChange) {
+        onChange(this.list);
+      }
+    });
+
     useEffect(() => {
-      onReactTableChanged();
-    }, [table]);
+      onStateChanged();
+    }, [reactTableState]);
+
+    useEffect(() => {
+      onFiltersChanged();
+    }, [reactTableState.columnFilters, reactTableState.globalFilter]);
 
     return table;
   }
