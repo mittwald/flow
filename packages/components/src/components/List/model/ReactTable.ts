@@ -126,7 +126,7 @@ export class ReactTable<T, TMeta = unknown> {
 
     useEffect(() => {
       onFiltersChanged();
-    }, [reactTableState.columnFilters, reactTableState.globalFilter]);
+    }, [reactTableState.columnFilters]);
 
     return table;
   }
