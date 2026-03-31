@@ -11,6 +11,13 @@ import { useForm } from "react-hook-form";
 const meta: Meta<typeof ImageCropper> = {
   title: "Upload/ImageCropper",
   component: ImageCropper,
+  args: { aspectRatio: 1.5, width: 300, height: 300, cropShape: "rect" },
+  argTypes: {
+    cropShape: { control: "inline-radio", options: ["rect", "round"] },
+    width: { control: "number" },
+    height: { control: "number" },
+  },
+  parameters: { controls: { exclude: ["image", "onCropComplete"] } },
   render: (props) => <ImageCropper {...props} image={dummyText.imageSrc} />,
 };
 export default meta;
@@ -18,12 +25,6 @@ export default meta;
 type Story = StoryObj<typeof ImageCropper>;
 
 export const Default: Story = {};
-
-export const CustomAspect: Story = { args: { aspect: 16 / 9 } };
-
-export const CustomDimensions: Story = { args: { width: 400, height: 200 } };
-
-export const RoundShape: Story = { args: { aspect: 1, cropShape: "round" } };
 
 export const WithDownload: Story = {
   render: (props) => {

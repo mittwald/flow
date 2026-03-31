@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from "react";
+import { type CSSProperties, type FC, useEffect, useState } from "react";
 import Cropper, { type Area, type CropperProps } from "react-easy-crop";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
@@ -10,13 +10,17 @@ import locales from "./locales/*.locale.json";
 import { Label } from "@/components/Label";
 
 export interface ImageCropperProps
-  extends
-    PropsWithClassName,
-    Partial<Pick<CropperProps, "aspect" | "cropShape">> {
+  extends PropsWithClassName, Partial<Pick<CropperProps, "cropShape">> {
+  /** The image file to crop. */
   image?: File | string;
+  /** Callback on crop complete. */
   onCropComplete?: (croppedImage: File) => void;
-  width?: number;
-  height?: number;
+  /** The width of the component. @default 300 */
+  width?: CSSProperties["width"];
+  /** The height of the component. @default 300 */
+  height?: CSSProperties["height"];
+  /** The aspect ratio of the crop shape. */
+  aspectRatio?: number;
 }
 
 /** @flr-generate all */
@@ -27,6 +31,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     onCropComplete,
     width = 300,
     height = 300,
+    aspectRatio,
     ...rest
   } = props;
   const [imageSrc, setImageSrc] = useState<string>("");
@@ -73,6 +78,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     <div className={rootClassName} style={{ width }}>
       <div className={styles.cropperContainer} style={{ height }}>
         <Cropper
+          aspect={aspectRatio}
           crop={crop}
           image={imageSrc}
           onCropChange={setCrop}

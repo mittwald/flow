@@ -9,10 +9,10 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m">
         <ImageCropper image={gopher} height={200} width={200} />
-        <ImageCropper image={gopher} aspect={16 / 9} height={200} />
+        <ImageCropper image={gopher} aspectRatio={16 / 9} height={200} />
         <ImageCropper
           image={gopher}
-          aspect={1}
+          aspectRatio={1}
           cropShape="round"
           height={200}
           width={200}

@@ -11,7 +11,7 @@ export class RemoteImageCropperElement extends FlowRemoteElement<RemoteImageCrop
 
   static override get remoteProperties() {
     return {
-      aspect: {},
+      aspectRatio: {},
       className: {},
       cropShape: {},
       height: {},
