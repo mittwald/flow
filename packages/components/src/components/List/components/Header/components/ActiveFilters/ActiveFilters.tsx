@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
@@ -18,6 +17,7 @@ import DivView from "@/views/DivView";
 import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
+import { Filter } from "@/components/List/model/filter/Filter";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
@@ -53,28 +53,29 @@ export const ActiveFilters: FC = observer(() => {
       ));
   });
 
-  const someFiltersChanged =
-    list.filters.filter((f) => f.hasChanged()).length > 0;
+  const storingAvailable = list.filters.some((f) => f.isStoringAvailable());
+  const hasChanges = list.filters.some((f) => f.hasChanges());
 
-  const storeFiltersButton = list.supportsSettingsStorage &&
-    someFiltersChanged && (
-      <TooltipTriggerView>
-        <TooltipView>
-          <Translate locales={locales}>list.filters.store</Translate>
-        </TooltipView>
-        <ButtonView
-          size="s"
-          variant="plain"
-          color="secondary"
-          onPress={() => list.storeFilterDefaultSettings()}
-          aria-label={formatter.format("list.filters.store")}
-        >
-          <IconSave />
-        </ButtonView>
-      </TooltipTriggerView>
-    );
+  const storeFiltersButton = storingAvailable && hasChanges && (
+    <TooltipTriggerView>
+      <TooltipView>
+        <Translate locales={locales}>list.filters.store</Translate>
+      </TooltipView>
+      <ButtonView
+        size="s"
+        variant="plain"
+        color="secondary"
+        onPress={() =>
+          Filter.storeFilters(list, { autosave: false, manualSave: true })
+        }
+        aria-label={formatter.format("list.filters.store")}
+      >
+        <IconSave />
+      </ButtonView>
+    </TooltipTriggerView>
+  );
 
-  const resetFiltersButton = someFiltersChanged ? (
+  const resetFiltersButton = hasChanges ? (
     <TooltipTrigger>
       <TooltipView>
         <Translate locales={locales}>list.filters.reset</Translate>

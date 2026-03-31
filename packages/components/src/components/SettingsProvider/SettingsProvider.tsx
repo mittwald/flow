@@ -1,38 +1,37 @@
 import type { FC, PropsWithChildren } from "react";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 import type { SupportedSettingsBackend } from "@/components/SettingsProvider/backends/types";
 import { autorun } from "mobx";
 import { getAsyncResource } from "@mittwald/react-use-promise";
-import { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import {
+  SettingsStore,
+  type SettingsStoreOptions,
+} from "@/components/SettingsProvider/models/SettingsStore";
 import { settingsBackendFactory } from "@/components/SettingsProvider/backends/settingsBackendFactory";
 
 type Props = PropsWithChildren &
   SupportedSettingsBackend & {
     id?: string;
-  };
+  } & Pick<SettingsStoreOptions, "middleware">;
 
 const context = createContext<SettingsStore | undefined>(undefined);
 
 export const useSettings = () => useContext(context);
 
 export const SettingsProvider: FC<Props> = (props) => {
-  const { children, id, ...storeShape } = props;
+  const { children, middleware, id = "static", ...storeShape } = props;
   const backend = settingsBackendFactory(storeShape);
 
-  const storedSettingsResource = getAsyncResource(() => backend.load(), [], {
+  const settingsResource = getAsyncResource(() => backend.load(), [], {
     loaderId: id,
   });
-  const storedSettings = storedSettingsResource.use();
+  const settings = settingsResource.use();
+
   const storingPromise = useRef(Promise.resolve());
+  const parentStore = useSettings();
 
   const settingsStore = useMemo(
-    () => SettingsStore.fromJson(storedSettings),
+    () => SettingsStore.fromJson(settings, { middleware, parentStore }),
     [id],
   );
 
@@ -40,7 +39,7 @@ export const SettingsProvider: FC<Props> = (props) => {
     const json = settingsStore.asJson;
     storingPromise.current = storingPromise.current.then(async () => {
       await backend.store(json);
-      storedSettingsResource.refresh();
+      settingsResource.refresh();
     });
   };
 

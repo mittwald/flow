@@ -9,7 +9,7 @@ export type FallbackItemsProps = unknown;
 export const FallbackItems: FC<FallbackItemsProps> = () => {
   const list = useList();
   const fallback = list.itemView?.loadingView ?? (
-    <ListItemSkeletonView viewMode={list.viewMode} />
+    <ListItemSkeletonView viewMode={list.viewMode.value} />
   );
 
   return Array.from(Array(list.loadingItemsCount)).map((_, i) => (

@@ -6,13 +6,17 @@
     animation-duration: var(--loading-spinner--transition-duration-slow);
   }
 
-  &.dark {
-    color: var(--loading-spinner--color-dark);
+  /* Alpha Colors */
+  @mixin color($color) {
+    &.#{$color} {
+      color: var(--loading-spinner--color-#{$color});
+    }
   }
 
-  &.light {
-    color: var(--loading-spinner--color-light);
-  }
+  @include color(light);
+  @include color(dark);
+  @include color(dark-static);
+  @include color(light-static);
 }
 
 @keyframes spin {

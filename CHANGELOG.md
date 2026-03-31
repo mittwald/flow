@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.766](https://github.com/mittwald/flow/compare/0.2.0-alpha.765...0.2.0-alpha.766) (2026-03-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.765](https://github.com/mittwald/flow/compare/0.2.0-alpha.764...0.2.0-alpha.765) (2026-03-30)
+
+### Bug Fixes
+
+* **Settings:** fix settings are not updated on rerender ([ec20056](https://github.com/mittwald/flow/commit/ec200564d9159f79c6eaf1b051d60dbf8595fa1d))
+
+# [0.2.0-alpha.764](https://github.com/mittwald/flow/compare/0.2.0-alpha.763...0.2.0-alpha.764) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix autosaving of search settings ([96b6e07](https://github.com/mittwald/flow/commit/96b6e07c4c8e601cec50e201f6d39a2f865438ee))
+
+# [0.2.0-alpha.763](https://github.com/mittwald/flow/compare/0.2.0-alpha.762...0.2.0-alpha.763) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix not working storage default settings ([032a7d7](https://github.com/mittwald/flow/commit/032a7d7abfebc563e4d6afd0baf7b81bc8a4e873))
+
+# [0.2.0-alpha.762](https://github.com/mittwald/flow/compare/0.2.0-alpha.761...0.2.0-alpha.762) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** fix settings storage types ([e609727](https://github.com/mittwald/flow/commit/e609727633d1f5300fd1af6d6b02b3a0d39fbdc6))
+
+# [0.2.0-alpha.761](https://github.com/mittwald/flow/compare/0.2.0-alpha.760...0.2.0-alpha.761) (2026-03-30)
+
+### Features
+
+* support List-wide settings storage defaults ([db7b362](https://github.com/mittwald/flow/commit/db7b362ed6f0375c0e00ced1e769753a3a7bcc61))
+
+# [0.2.0-alpha.760](https://github.com/mittwald/flow/compare/0.2.0-alpha.759...0.2.0-alpha.760) (2026-03-30)
+
+### Bug Fixes
+
+* **List:** only show filter modal button if needed ([#2416](https://github.com/mittwald/flow/issues/2416)) ([e2a638c](https://github.com/mittwald/flow/commit/e2a638c82277ab3542e7ca5eefe7dd14d6a4b48b))
+
+# [0.2.0-alpha.759](https://github.com/mittwald/flow/compare/0.2.0-alpha.758...0.2.0-alpha.759) (2026-03-30)
+
+### Bug Fixes
+
+* **TextField:** allow slotting CopyButton into TextField ([#2417](https://github.com/mittwald/flow/issues/2417)) ([ca66da1](https://github.com/mittwald/flow/commit/ca66da1cfc18993f78c2fd9833934b385c04ff8c))
+
+# [0.2.0-alpha.758](https://github.com/mittwald/flow/compare/0.2.0-alpha.757...0.2.0-alpha.758) (2026-03-27)
+
+### Bug Fixes
+
+* **List:** fix overflow wrap ([#2407](https://github.com/mittwald/flow/issues/2407)) ([42d766c](https://github.com/mittwald/flow/commit/42d766cb888b400e8d838092bf36d41f6a64808b))
+
+# [0.2.0-alpha.757](https://github.com/mittwald/flow/compare/0.2.0-alpha.756...0.2.0-alpha.757) (2026-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.756](https://github.com/mittwald/flow/compare/0.2.0-alpha.755...0.2.0-alpha.756) (2026-03-27)
+
+### Bug Fixes
+
+* **LightBox:** lightbox is not correct vertical centered on large content ([#2415](https://github.com/mittwald/flow/issues/2415)) ([0b2b500](https://github.com/mittwald/flow/commit/0b2b500c41d98e4f8c9ae16d4b01c441f8e3d683))
+
+# [0.2.0-alpha.755](https://github.com/mittwald/flow/compare/0.2.0-alpha.754...0.2.0-alpha.755) (2026-03-27)
+
+### Features
+
+* **Separator:** allow vertical separator ([#2410](https://github.com/mittwald/flow/issues/2410)) ([e0a671a](https://github.com/mittwald/flow/commit/e0a671a8cc13d72617c3c721324205f1f13df1e0))
+
+# [0.2.0-alpha.754](https://github.com/mittwald/flow/compare/0.2.0-alpha.753...0.2.0-alpha.754) (2026-03-27)
+
+### Features
+
+* introduce static colors ([#2401](https://github.com/mittwald/flow/issues/2401)) ([807837e](https://github.com/mittwald/flow/commit/807837ec97185c3a34286d3de93512920d089edb))
+
+# [0.2.0-alpha.753](https://github.com/mittwald/flow/compare/0.2.0-alpha.752...0.2.0-alpha.753) (2026-03-27)
+
+### Features
+
+* **FormRootError:** render error message as alert ([#2404](https://github.com/mittwald/flow/issues/2404)) ([791c1a3](https://github.com/mittwald/flow/commit/791c1a330d4d5726d4521a3749b2f9b4c98b0bbb))
+
+# [0.2.0-alpha.752](https://github.com/mittwald/flow/compare/0.2.0-alpha.751...0.2.0-alpha.752) (2026-03-27)
+
+### Bug Fixes
+
+* **Badge:** add aria label to close button ([9d7aff1](https://github.com/mittwald/flow/commit/9d7aff17338ffe03d3381b39d953d23b6f57e197))
+
+# [0.2.0-alpha.751](https://github.com/mittwald/flow/compare/0.2.0-alpha.750...0.2.0-alpha.751) (2026-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.750](https://github.com/mittwald/flow/compare/0.2.0-alpha.749...0.2.0-alpha.750) (2026-03-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.749](https://github.com/mittwald/flow/compare/0.2.0-alpha.748...0.2.0-alpha.749) (2026-03-26)
 
 ### Features

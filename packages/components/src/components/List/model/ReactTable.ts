@@ -24,6 +24,7 @@ import type {
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
+import { Filter } from "./filter/Filter";
 
 export class ReactTable<T, TMeta = unknown> {
   public readonly list: List<T, TMeta>;
@@ -39,7 +40,7 @@ export class ReactTable<T, TMeta = unknown> {
     this.list = list;
 
     const defaultSorting = this.list.sorting.filter(
-      (s) => s.defaultEnabled !== false,
+      (s) => s.initialEnabled !== false,
     );
 
     const [sortingState, updateSortingState] = useState<ColumnSort[]>(
@@ -111,7 +112,7 @@ export class ReactTable<T, TMeta = unknown> {
       if (onChange) {
         onChange(this.list);
       }
-      this.list.autosaveFilterSettings();
+      Filter.storeFilters(this.list, { autosave: true });
     }, [this.list, onChange, table]);
 
     return table;
@@ -124,7 +125,7 @@ export class ReactTable<T, TMeta = unknown> {
     const additionalHiddenSorting = this.list.sorting
       .filter(
         (s) =>
-          s.defaultEnabled === "hidden" &&
+          s.initialEnabled === "hidden" &&
           !newSortingState.some((existing) => existing.id === s.property),
       )
       .map((s) => s.getReactTableColumnSort());

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
 import ContentView from "@/views/ContentView";
@@ -14,11 +14,7 @@ export const ViewModeAccordion: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const availableViewModes = useAvailableViewModes();
-  const selectedViewMode = list.viewMode;
-
-  if (availableViewModes.length <= 1) {
-    return null;
-  }
+  const selectedViewMode = list.viewMode.value;
 
   return (
     <AccordionView>
@@ -28,7 +24,7 @@ export const ViewModeAccordion: FC = () => {
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>
           {availableViewModes.map((v) => (
-            <RadioView key={v} value={v} onPress={() => list.setViewMode(v)}>
+            <RadioView key={v} value={v} onPress={() => list.viewMode.set(v)}>
               {stringFormatter.format(`list.settings.viewMode.${v}`)}
             </RadioView>
           ))}

@@ -6,13 +6,14 @@ import type { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { AlphaColor } from "@/lib/types/props";
 
 export interface BreadcrumbProps
   extends
     Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
   /** The color of the breadcrumb. @default "primary" */
-  color?: "primary" | "dark" | "light";
+  color?: "primary" | AlphaColor;
   /** The size of the element. @default "m" */
   size?: "s" | "m";
 }

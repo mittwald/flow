@@ -17,4 +17,5 @@ export interface SearchShape<IgnoredT> {
   render?: SearchFieldRenderComponent;
   textFieldProps: SupportedSearchFieldProps;
   defaultValue?: string;
+  autosave?: boolean;
 }

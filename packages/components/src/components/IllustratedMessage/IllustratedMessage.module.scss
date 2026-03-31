@@ -32,7 +32,7 @@
 
   /* Color */
 
-  @mixin status($color) {
+  @mixin color($color) {
     &.#{$color} {
       :where(.icon) {
         color: var(--illustrated-message--#{$color}-content-color);
@@ -40,9 +40,11 @@
     }
   }
 
-  @include status(primary);
-  @include status(danger);
-  @include status(unavailable);
-  @include status(dark);
-  @include status(light);
+  @include color(primary);
+  @include color(danger);
+  @include color(unavailable);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }

@@ -1,12 +1,12 @@
 code-block:
   font-size:
     value: "{font-size-text.s}"
+  font-family:
+    value: "FiraCode, monospace"
   padding:
     value: "{size-px.m}"
   corner-radius:
     value: "{corner-radius.default}"
-  spacing:
-    value: "{size-px.s}"
   border-width:
     value: "{border-width.100}"
   border-style:
