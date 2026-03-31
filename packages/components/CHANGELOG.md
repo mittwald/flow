@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.768](https://github.com/mittwald/flow/compare/0.2.0-alpha.767...0.2.0-alpha.768) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** fix rerender loop ([bc15c3e](https://github.com/mittwald/flow/commit/bc15c3e48d07ac977bbe4166704029d37b508b64))
+
 # [0.2.0-alpha.767](https://github.com/mittwald/flow/compare/0.2.0-alpha.766...0.2.0-alpha.767) (2026-03-31)
 
 ### Bug Fixes
