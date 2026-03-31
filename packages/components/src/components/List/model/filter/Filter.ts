@@ -24,7 +24,10 @@ import type { ListSettingsStoreOperationOptions } from "../ListSettingsStore";
 import type { DateRange, RangeValue } from "react-aria-components";
 import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
 import type { DateValue } from "@internationalized/date";
-import type { RangeCalendarProps } from "@/components/Calendar";
+import {
+  isDateRangeValue,
+  type RangeCalendarProps,
+} from "@/components/Calendar";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
@@ -202,15 +205,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public getDateRangeValue() {
     const value = this.getTableColumnFilter()?.value;
 
-    if (
-      value &&
-      typeof value === "object" &&
-      "start" in value &&
-      "end" in value
-    ) {
-      return value as DateRange;
-    }
-    return null;
+    return isDateRangeValue(value) ? (value as DateRange) : null;
   }
 
   private getValuesFromTableState() {

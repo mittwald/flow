@@ -18,6 +18,7 @@ import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
 import { Filter } from "@/components/List/model/filter/Filter";
+import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
@@ -30,15 +31,7 @@ export const ActiveFilters: FC = observer(() => {
       return [
         <BadgeView key={f.name} onClose={() => f.clear()}>
           <TextView>
-            {`${new Date(
-              dateRangeValue.start.year,
-              dateRangeValue.start.month - 1,
-              dateRangeValue.start.day,
-            ).toLocaleDateString("de-DE")} - ${new Date(
-              dateRangeValue.end.year,
-              dateRangeValue.end.month - 1,
-              dateRangeValue.end.day,
-            ).toLocaleDateString("de-DE")}`}
+            {`${transformDateValueToFormattedDate(dateRangeValue.start)} - ${transformDateValueToFormattedDate(dateRangeValue.end)}`}
           </TextView>
         </BadgeView>,
       ];

@@ -1,28 +1,25 @@
 import { DateTime } from "luxon";
 import { CalendarDate } from "@internationalized/date";
 import type { Row } from "@tanstack/react-table";
+import { transformDateValueToDateTime } from "@/lib/date/transformDateValueToDateTime";
 
 export function dateRangeFilterFn<T>(
   row: Row<T>,
   columnId: string,
   range?: { start?: CalendarDate; end?: CalendarDate },
 ): boolean {
-  const value = row.getValue(columnId);
-
   if (!range) {
     return true;
   }
+
+  const value = row.getValue(columnId);
 
   let dateValue;
 
   if (value instanceof DateTime) {
     dateValue = value;
   } else if (value instanceof CalendarDate) {
-    dateValue = DateTime.fromObject({
-      year: value.year,
-      month: value.month,
-      day: value.day,
-    });
+    dateValue = transformDateValueToDateTime(value);
   } else if (typeof value === "string") {
     dateValue = DateTime.fromISO(value).startOf("day");
   }
@@ -32,23 +29,16 @@ export function dateRangeFilterFn<T>(
   }
 
   const startDate = range.start
-    ? DateTime.fromObject({
-        year: range.start.year,
-        month: range.start.month,
-        day: range.start.day,
-      })
+    ? transformDateValueToDateTime(range.start)
     : undefined;
 
   const endDate = range.end
-    ? DateTime.fromObject({
-        year: range.end.year,
-        month: range.end.month,
-        day: range.end.day,
-      })
+    ? transformDateValueToDateTime(range.end)
     : undefined;
 
-  if (startDate && dateValue < startDate) return false;
-  if (endDate && dateValue > endDate) return false;
+  if (startDate && dateValue < startDate) {
+    return false;
+  }
 
-  return true;
+  return !(endDate && dateValue > endDate);
 }
