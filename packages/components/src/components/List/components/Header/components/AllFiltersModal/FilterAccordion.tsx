@@ -17,20 +17,21 @@ export const FilterAccordion: FC<Props> = (props) => {
 
   const name = filter.name ?? filter.property;
 
+  const content =
+    filter instanceof DateRangeFilter ? (
+      <FilterAccordionDateRange
+        filter={filter as DateRangeFilter<never, never>}
+      />
+    ) : filter.mode === "one" ? (
+      <FilterAccordionRadioGroup filter={filter} />
+    ) : (
+      <FilterAccordionCheckboxGroup filter={filter} />
+    );
+
   return (
     <AccordionView>
       <HeadingView>{name}</HeadingView>
-      <ContentView>
-        {filter.mode === "one" && <FilterAccordionRadioGroup filter={filter} />}
-        {(filter.mode === "all" || filter.mode === "some") && (
-          <FilterAccordionCheckboxGroup filter={filter} />
-        )}
-        {filter instanceof DateRangeFilter && (
-          <FilterAccordionDateRange
-            filter={filter as DateRangeFilter<never, never>}
-          />
-        )}
-      </ContentView>
+      <ContentView>{content}</ContentView>
     </AccordionView>
   );
 };
