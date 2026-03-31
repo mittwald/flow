@@ -86,10 +86,14 @@ export const Slider = flowComponent("Slider", (props) => {
             <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
             <div className={styles.text}>
-              <span>
-                <Aria.SliderOutput className={styles.value} />{" "}
-                {unit && <b>{unit}</b>}{" "}
-              </span>
+              <Aria.SliderOutput className={styles.value}>
+                {(value) => {
+                  if (unit) {
+                    return `${value.defaultChildren} ${unit}`;
+                  }
+                  return value.defaultChildren;
+                }}
+              </Aria.SliderOutput>
               <TunnelExit id="label" />
             </div>
 
