@@ -61,6 +61,8 @@ export class RemoteItemsListBoxItemElement extends FlowRemoteElement<RemoteItems
       hoverChange: {},
       hoverEnd: {},
       hoverStart: {},
+      keyDown: {},
+      keyUp: {},
       lostPointerCapture: {},
       lostPointerCaptureCapture: {},
       mouseDown: {},

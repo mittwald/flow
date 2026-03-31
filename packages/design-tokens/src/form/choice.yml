@@ -3,6 +3,6 @@ choice:
     default:
       value: "{icon.color}"
     selected:
-      value: "{primary.color.800}"
+      value: "{primary.color.900}"
     disabled:
       value: "{disabled-outline-content-color}"
