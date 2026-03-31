@@ -2,7 +2,7 @@ import { EmptyView } from "@/components/List";
 import Item from "@/components/List/components/Items/components/Item/Item";
 import { useList } from "@/components/List/hooks/useList";
 import DivView from "@/views/DivView";
-import ItemsGridListView from "@/views/ItemsGridListView";
+import ItemsListBoxView from "@/views/ItemsListBoxView";
 import clsx from "clsx";
 import type { FC } from "react";
 import styles from "./Items.module.scss";
@@ -30,7 +30,7 @@ export const Items: FC = () => {
 
   return (
     <DivView aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
-      <ItemsGridListView
+      <ItemsListBoxView
         className={rootClassName}
         {...list.componentProps}
         renderEmptyState={() => <EmptyView />}
@@ -38,7 +38,7 @@ export const Items: FC = () => {
         tileMaxWidth={list.itemView.tileMaxWidth}
       >
         {items.length === 0 && isInitiallyLoading ? <FallbackItems /> : items}
-      </ItemsGridListView>
+      </ItemsListBoxView>
     </DivView>
   );
 };

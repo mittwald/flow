@@ -1,6 +1,6 @@
-import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import { useBoxItemProps } from "@/components/List/components/Items/components/Item/hooks/useBoxItemProps";
 import { useList } from "@/components/List/hooks/useList";
-import ItemsGridListItemView from "@/views/ItemsGridListItemView";
+import ItemsListBoxItemView from "@/views/ItemsListBoxItemView";
 import type { FC, PropsWithChildren } from "react";
 import { Suspense } from "react";
 import type { Key } from "react-aria-components";
@@ -18,7 +18,7 @@ export const Item = (props: Props) => {
 
   const itemView = list.itemView;
 
-  const { gridItemProps, children } = useGridItemProps(props);
+  const { boxItemProps, children } = useBoxItemProps(props);
 
   if (!itemView) {
     return null;
@@ -26,37 +26,38 @@ export const Item = (props: Props) => {
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = !!gridItemProps.onAction || !!href;
+
+  const hasAction = !!boxItemProps.onAction || !!href;
 
   return (
-    <ItemsGridListItemView
+    <ItemsListBoxItemView
       id={id}
       textValue={textValue}
       href={href}
       target={itemView.target}
       hasAction={hasAction}
       isTile={list.viewMode.isTiles}
-      {...gridItemProps}
+      {...boxItemProps}
     >
       <Suspense
         fallback={<ListItemSkeletonView viewMode={list.viewMode.value} />}
       >
         {children}
       </Suspense>
-    </ItemsGridListItemView>
+    </ItemsListBoxItemView>
   );
 };
 
 export const ItemContainer: FC<Props> = (props) => {
   const list = useList();
   return (
-    <ItemsGridListItemView
+    <ItemsListBoxItemView
       textValue="-"
       className={styles.item}
       isTile={list.viewMode.isTiles}
     >
       {props.children}
-    </ItemsGridListItemView>
+    </ItemsListBoxItemView>
   );
 };
 
