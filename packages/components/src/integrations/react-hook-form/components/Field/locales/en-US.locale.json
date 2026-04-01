@@ -1,8 +1,8 @@
 {
   "max": "Maximum number of {number} reached",
   "maxLength": "Please enter at most {number} characters",
-  "min": "Minimum number of {number} has not been reached yet",
+  "min": "Minimum number of {number} has not yet been reached",
   "minLength": "Please enter at least {number} characters",
   "pattern": "Does not match the expected format: {pattern}",
-  "required": "Please fill out this field"
+  "required": "This field is required"
 }
