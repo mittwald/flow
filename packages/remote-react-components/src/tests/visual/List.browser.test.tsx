@@ -1,7 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { test } from "vitest";
+import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 test.each(testEnvironments)(
   "List items (%s)",
@@ -468,5 +469,85 @@ test.each(testEnvironments)(
     await render(<Wrapper />);
 
     await testScreenshot("List edge cases - column layout");
+  },
+);
+
+test.each(testEnvironments)(
+  "List date range filter (%s)",
+  async ({ testScreenshot, render, components: { typedList } }) => {
+    function Wrapper() {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List
+          defaultViewMode="table"
+          aria-label="list"
+          getItemId={(i) => i.id}
+        >
+          <List.StaticData
+            data={[
+              {
+                id: "RG100000",
+                date: "2025-09-01T11:00:00Z",
+              },
+              {
+                id: "RG100001",
+                date: "2025-09-02T11:00:00Z",
+              },
+              {
+                id: "RG100002",
+                date: "2025-09-03T11:00:00Z",
+              },
+            ]}
+          />
+          <List.Filter
+            property="date"
+            mode="dateRange"
+            name="Date"
+            dateRangeOptions={{
+              maxValue: today(getLocalTimeZone()),
+            }}
+          />
+          <List.Table>
+            <List.TableHeader>
+              <List.TableColumn>Rechnung</List.TableColumn>
+              <List.TableColumn>Datum</List.TableColumn>
+            </List.TableHeader>
+
+            <List.TableBody>
+              <List.TableRow>
+                <List.TableCell>{(invoice) => invoice.id}</List.TableCell>
+                <List.TableCell>
+                  {(invoice) =>
+                    new Date(invoice.date).toLocaleDateString("de-DE")
+                  }
+                </List.TableCell>
+              </List.TableRow>
+            </List.TableBody>
+          </List.Table>
+        </List.List>
+      );
+    }
+
+    vi.setSystemTime(new Date("2025-09-03T11:00:00Z"));
+
+    await render(<Wrapper />);
+
+    await testScreenshot("List date range filter - default");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filter opened");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("List date range filter - filtered");
   },
 );
