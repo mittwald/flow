@@ -19,10 +19,14 @@ export interface SliderProps
     FlowComponentProps<HTMLInputElement>,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
+  /** Whether the marker for the initial value should be visible */
   showInitialMarker?: boolean;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
+  /** Whether the component is invalid. */
   isInvalid?: boolean;
+  /** Hide Buttons, Label and Value */
+  sliderOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -36,6 +40,8 @@ export const Slider = flowComponent("Slider", (props) => {
     showInitialMarker,
     isReadOnly,
     ref,
+    step,
+    sliderOnly,
     ...rest
   } = props;
 
@@ -61,6 +67,7 @@ export const Slider = flowComponent("Slider", (props) => {
     Label: {
       tunnelId: "label",
       ...fieldPropsContext.Label,
+      className: styles.label,
     },
   };
 
@@ -71,15 +78,18 @@ export const Slider = flowComponent("Slider", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         defaultValue={defaultValue}
+        step={step}
       >
         <TunnelProvider>
           <PropsContextProvider props={propsContext}>
             <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
-            <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value} />
-              <TunnelExit id="label" />
-            </div>
+            {!sliderOnly && (
+              <div className={styles.text}>
+                <Aria.SliderOutput className={styles.value} />{" "}
+                <TunnelExit id="label" />
+              </div>
+            )}
 
             <Aria.SliderTrack className={styles.track}>
               {({ state }) => (
@@ -94,26 +104,28 @@ export const Slider = flowComponent("Slider", (props) => {
                       isDisabled,
                       variant: "plain",
                       color: "secondary",
+                      size: "s",
                     },
                   }}
                 >
-                  <Button
-                    size="s"
-                    onPress={() => state.decrementThumb(0)}
-                    aria-label={stringFormatter.format("slider.decrement")}
-                    className={styles.decrement}
-                  >
-                    <IconMinus />
-                  </Button>
-
-                  <Button
-                    size="s"
-                    onPress={() => state.incrementThumb(0)}
-                    aria-label={stringFormatter.format("slider.increment")}
-                    className={styles.increment}
-                  >
-                    <IconPlus />
-                  </Button>
+                  {!sliderOnly && (
+                    <>
+                      <Button
+                        onPress={() => state.decrementThumb(0, step)}
+                        aria-label={stringFormatter.format("slider.decrement")}
+                        className={styles.decrement}
+                      >
+                        <IconMinus />
+                      </Button>
+                      <Button
+                        onPress={() => state.incrementThumb(0, step)}
+                        aria-label={stringFormatter.format("slider.increment")}
+                        className={styles.increment}
+                      >
+                        <IconPlus />
+                      </Button>
+                    </>
+                  )}
 
                   <div
                     className={styles.fill}

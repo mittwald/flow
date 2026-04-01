@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.773](https://github.com/mittwald/flow/compare/0.2.0-alpha.772...0.2.0-alpha.773) (2026-04-01)
+
+### Features
+
+* **ReactHookForm:** add default validation messages ([#2424](https://github.com/mittwald/flow/issues/2424)) ([cdbd8cd](https://github.com/mittwald/flow/commit/cdbd8cdd1604ab3ce54395102b7e748f7b811f5b))
+
+# [0.2.0-alpha.772](https://github.com/mittwald/flow/compare/0.2.0-alpha.771...0.2.0-alpha.772) (2026-04-01)
+
+### Bug Fixes
+
+* **List:** fix initial save of autosaved filters not working ([aeae102](https://github.com/mittwald/flow/commit/aeae102a86f4280623a5527f93d4274c93ce19db))
+
+### Features
+
+* **ImageCropper:** add image cropper component ([9c057b3](https://github.com/mittwald/flow/commit/9c057b320f2c23564758adcc3218f7efdeae7b81))
+
 # [0.2.0-alpha.771](https://github.com/mittwald/flow/compare/0.2.0-alpha.770...0.2.0-alpha.771) (2026-04-01)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

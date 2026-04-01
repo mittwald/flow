@@ -123,10 +123,6 @@ export class Filter<
     list: List<T>,
     options: ListSettingsStoreOperationOptions,
   ) {
-    if (!list.filters.some((f) => f.hasChanges())) {
-      return;
-    }
-
     const data = Object.fromEntries(
       list.filters.map((filter) => [
         filter.storageKey,

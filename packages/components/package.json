@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.771",
+  "version": "0.2.0-alpha.773",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -96,6 +96,7 @@
     "react-aria": "^3.47.0",
     "react-aria-components": "^1.16.0",
     "react-children-utilities": "^2.10.0",
+    "react-easy-crop": "^5.5.0",
     "react-hotkeys-hook": "^5.2.4",
     "react-markdown": "^10.1.0",
     "react-stately": "^3.45.0",

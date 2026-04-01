@@ -22,7 +22,7 @@ type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {};
 
-export const WithUnit: Story = {
+export const WithFormatOptions: Story = {
   render: (props) => (
     <Slider
       {...props}
