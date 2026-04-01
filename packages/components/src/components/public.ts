@@ -55,6 +55,7 @@ export * from "@/components/IllustratedMessage";
 export * from "@/components/Image";
 export * from "@/components/Initials";
 export * from "@/components/InlineCode";
+export * from "@/components/IntlProvider";
 export * from "@/components/Label";
 export * from "@/components/LabeledValue";
 export * from "@/components/LayoutCard";
