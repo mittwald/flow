@@ -25,7 +25,7 @@ export interface SliderProps
   isReadOnly?: boolean;
   /** Whether the component is invalid. */
   isInvalid?: boolean;
-  /** Hide Buttons Label and Value */
+  /** Hide Buttons, Label and Value */
   sliderOnly?: boolean;
 }
 
@@ -114,7 +114,6 @@ export const Slider = flowComponent("Slider", (props) => {
                         onPress={() => state.decrementThumb(0, step)}
                         aria-label={stringFormatter.format("slider.decrement")}
                         className={styles.decrement}
-                        isDisabled={isDisabled}
                       >
                         <IconMinus />
                       </Button>
@@ -122,7 +121,6 @@ export const Slider = flowComponent("Slider", (props) => {
                         onPress={() => state.incrementThumb(0, step)}
                         aria-label={stringFormatter.format("slider.increment")}
                         className={styles.increment}
-                        isDisabled={isDisabled}
                       >
                         <IconPlus />
                       </Button>
