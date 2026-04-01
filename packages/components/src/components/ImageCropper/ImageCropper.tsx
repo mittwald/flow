@@ -13,8 +13,7 @@ import { Slider } from "@/components/Slider";
 import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
-import { Label } from "@/components/Label";
-import { useSetImageSrc } from "@/lib/hooks/useSetImage";
+import { useImageSrc } from "@/lib/hooks/useImageSrc";
 
 export interface ImageCropperProps
   extends PropsWithClassName, Partial<Pick<CropperProps, "cropShape">> {
@@ -41,7 +40,8 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     aspectRatio,
     ...rest
   } = props;
-  const imageSrc = useSetImageSrc(image);
+
+  const imageSrc = useImageSrc(image);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
@@ -90,11 +90,10 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
         maxValue={3}
         step={0.01}
         value={zoom}
-        unit="×"
+        sliderOnly
         onChange={(zoom) => setZoom(zoom as number)}
-      >
-        <Label optional={false}>{stringFormatter.format("zoom")}</Label>
-      </Slider>
+        aria-label={stringFormatter.format("zoom")}
+      />
     </div>
   );
 };

@@ -27,6 +27,8 @@ export interface SliderProps
   isInvalid?: boolean;
   /** Unit suffix appended to the displayed value */
   unit?: string;
+  /** Hide Buttons Label and Value */
+  sliderOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -42,6 +44,7 @@ export const Slider = flowComponent("Slider", (props) => {
     ref,
     step,
     unit,
+    sliderOnly,
     ...rest
   } = props;
 
@@ -85,17 +88,16 @@ export const Slider = flowComponent("Slider", (props) => {
           <PropsContextProvider props={propsContext}>
             <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
-            <div className={styles.text}>
-              <Aria.SliderOutput className={styles.value}>
-                {(value) => {
-                  if (unit) {
-                    return `${value.defaultChildren} ${unit}`;
-                  }
-                  return value.defaultChildren;
-                }}
-              </Aria.SliderOutput>
-              <TunnelExit id="label" />
-            </div>
+            {!sliderOnly && (
+              <div className={styles.text}>
+                <Aria.SliderOutput className={styles.value}>
+                  {(value) => {
+                    return `${value.defaultChildren} ${unit ?? ""} `;
+                  }}
+                </Aria.SliderOutput>
+                <TunnelExit id="label" />
+              </div>
+            )}
 
             <Aria.SliderTrack className={styles.track}>
               {({ state }) => (
@@ -113,23 +115,26 @@ export const Slider = flowComponent("Slider", (props) => {
                     },
                   }}
                 >
-                  <Button
-                    onPress={() => state.decrementThumb(0, step)}
-                    aria-label={stringFormatter.format("slider.decrement")}
-                    className={styles.decrement}
-                    isDisabled={isDisabled}
-                  >
-                    <IconMinus />
-                  </Button>
-
-                  <Button
-                    onPress={() => state.incrementThumb(0, step)}
-                    aria-label={stringFormatter.format("slider.increment")}
-                    className={styles.increment}
-                    isDisabled={isDisabled}
-                  >
-                    <IconPlus />
-                  </Button>
+                  {!sliderOnly && (
+                    <>
+                      <Button
+                        onPress={() => state.decrementThumb(0, step)}
+                        aria-label={stringFormatter.format("slider.decrement")}
+                        className={styles.decrement}
+                        isDisabled={isDisabled}
+                      >
+                        <IconMinus />
+                      </Button>
+                      <Button
+                        onPress={() => state.incrementThumb(0, step)}
+                        aria-label={stringFormatter.format("slider.increment")}
+                        className={styles.increment}
+                        isDisabled={isDisabled}
+                      >
+                        <IconPlus />
+                      </Button>
+                    </>
+                  )}
 
                   <div
                     className={styles.fill}

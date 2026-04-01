@@ -1,6 +1,6 @@
 import { useEffect, useEffectEvent, useState } from "react";
 
-export const useSetImageSrc = (image?: string | File) => {
+export const useImageSrc = (image?: string | File) => {
   const [imageSrc, setImageSrc] = useState<string>("");
 
   const onImageChange = useEffectEvent(() => {
