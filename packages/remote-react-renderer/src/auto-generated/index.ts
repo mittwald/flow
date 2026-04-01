@@ -59,6 +59,7 @@ import { Heading as Heading } from "@mittwald/flow-react-components";
 import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
+import { ImageCropper as ImageCropper } from "@mittwald/flow-react-components";
 import { Initials as Initials } from "@mittwald/flow-react-components";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components";
 import { ListBox as ItemsListBox } from "@mittwald/flow-react-components";
@@ -93,6 +94,7 @@ import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
+import { RangeCalendar as RangeCalendar } from "@mittwald/flow-react-components";
 import { Rating as Rating } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
@@ -280,6 +282,10 @@ export const flowComponents = {
     IllustratedMessage,
   ),
   "flr-image": createFlowRemoteComponentRenderer("Image", Image),
+  "flr-image-cropper": createFlowRemoteComponentRenderer(
+    "ImageCropper",
+    ImageCropper,
+  ),
   "flr-initials": createFlowRemoteComponentRenderer("Initials", Initials),
   "flr-inline-code": createFlowRemoteComponentRenderer(
     "InlineCode",
@@ -379,6 +385,10 @@ export const flowComponents = {
   "flr-radio-group": createFlowRemoteComponentRenderer(
     "RadioGroup",
     RadioGroup,
+  ),
+  "flr-range-calendar": createFlowRemoteComponentRenderer(
+    "RangeCalendar",
+    RangeCalendar,
   ),
   "flr-rating": createFlowRemoteComponentRenderer("Rating", Rating),
   "flr-search-field": createFlowRemoteComponentRenderer(

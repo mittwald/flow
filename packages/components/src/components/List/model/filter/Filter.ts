@@ -30,7 +30,11 @@ const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
 const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
-export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
+export class Filter<
+  T = never,
+  TProp extends PropertyName<T> = never,
+  TMatchValue = never,
+> {
   private _values?: FilterValue[] | undefined;
   private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
@@ -119,10 +123,6 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     list: List<T>,
     options: ListSettingsStoreOperationOptions,
   ) {
-    if (!list.filters.some((f) => f.hasChanges())) {
-      return;
-    }
-
     const data = Object.fromEntries(
       list.filters.map((filter) => [
         filter.storageKey,

@@ -1,2 +1,2 @@
 export * from "./Calendar";
-export * from "./RangeCalendar";
+export * from "./components/RangeCalendar";
