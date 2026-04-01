@@ -1,6 +1,6 @@
 image-cropper:
   spacing:
-    value: "{size-px.s}"
+    value: "{size-px.m}"
   border-color:
     value: "{neutral-outline-border-color}"
   border-style:

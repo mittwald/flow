@@ -71,6 +71,11 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
     <div className={rootClassName} style={{ width }}>
       <div className={styles.cropperContainer} style={{ height }}>
         <Cropper
+          style={{
+            containerStyle: {
+              borderRadius: "calc(var(--image-cropper--corner-radius) - 1px)",
+            },
+          }}
           aspect={aspectRatio}
           crop={crop}
           image={imageSrc}
