@@ -13,7 +13,7 @@ export interface IconProps
   extends
     PropsWithChildren<Omit<SvgAttributeProps, "name">>,
     FlowComponentProps {
-  status?: Status | "unavailable";
+  status?: Status;
   /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
 }

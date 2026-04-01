@@ -13,7 +13,7 @@ export interface BreadcrumbProps
     Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
   /** The color of the breadcrumb. @default "default" */
-  color?: "primary" | AlphaColor;
+  color?: "default" | AlphaColor;
   /** The size of the element. @default "m" */
   size?: "s" | "m";
 }

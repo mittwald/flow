@@ -73,3 +73,16 @@ notification:
       value: "{success-outline-background-color.hover}"
     pressed:
       value: "{success-outline-background-color.pressed}"
+
+  # Unavailable
+  unavailable-border-color:
+    value: "{success-outline-border-color}"
+  unavailable-heading-color:
+    value: "{success-outline-content-color}"
+  unavailable-background-color:
+    default:
+      value: "{neutral.color.100}"
+    hover:
+      value: "{success-outline-background-color.hover}"
+    pressed:
+      value: "{success-outline-background-color.pressed}"

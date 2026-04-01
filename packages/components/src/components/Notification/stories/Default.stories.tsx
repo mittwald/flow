@@ -5,6 +5,7 @@ import { Notification } from "@/components/Notification";
 import { Text } from "@/components/Text";
 import { action } from "storybook/actions";
 import { dummyText } from "@/lib/dev/dummyText";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Notification> = {
   title: "Status/Notification",
@@ -15,7 +16,7 @@ const meta: Meta<typeof Notification> = {
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
     },
   },
   args: { status: "info" },

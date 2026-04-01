@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Link } from "@/components/Link";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Alert> = {
   title: "Status/Alert",
@@ -14,7 +15,7 @@ const meta: Meta<typeof Alert> = {
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
     },
   },
   args: { status: "info" },

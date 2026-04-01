@@ -109,4 +109,5 @@
   @include status(warning);
   @include status(danger);
   @include status(success);
+  @include status(unavailable);
 }

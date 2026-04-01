@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { typedList } from "@/components/List";
 import { Image } from "@/components/Image";
 import { Text } from "@/components/Text";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof AlertText> = {
   title: "Status/AlertText",
@@ -13,7 +14,7 @@ const meta: Meta<typeof AlertText> = {
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger", "unavailable"],
+      options: statusTypes,
     },
   },
   args: {

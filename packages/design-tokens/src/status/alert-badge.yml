@@ -30,3 +30,11 @@ alert-badge:
     value: "{danger-soft-content-color}"
   danger-border-color:
     value: "{danger-outline-border-color}"
+
+  # Unavailable
+  unavailable-background-color:
+    value: "{neutral.color.200}"
+  unavailable-content-color:
+    value: "{neutral.color.700}"
+  unavailable-border-color:
+    value: "{neutral.color.700}"

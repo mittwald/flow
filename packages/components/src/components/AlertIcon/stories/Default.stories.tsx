@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AlertIcon from "../AlertIcon";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof AlertIcon> = {
   title: "Status/AlertIcon",
@@ -11,7 +12,7 @@ const meta: Meta<typeof AlertIcon> = {
     },
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger", "unavailable"],
+      options: statusTypes,
     },
   },
   args: {

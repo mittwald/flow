@@ -5,6 +5,7 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import IconApp from "@/components/Icon/components/icons/IconApp";
 import { avatarColors } from "@/components/Avatar/avatarColors";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
@@ -29,7 +30,7 @@ const meta: Meta<typeof Avatar> = {
     },
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
     },
   },
 };

@@ -16,3 +16,5 @@ avatar:
     value: "{danger.color.200}"
   success-status-background-color:
     value: "{success.color.200}"
+  unavailable-status-background-color:
+    value: "{neutral.color.300}"
