@@ -18,20 +18,35 @@ import BadgeView from "@/views/BadgeView";
 import TooltipTriggerView from "@/views/TooltipTriggerView";
 import TextView from "@/views/TextView";
 import { Filter } from "@/components/List/model/filter/Filter";
+import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales);
 
-  const activeFilterValues = list.filters
-    .flatMap((f) => f.values)
-    .filter((v) => v.isActive);
+  const activeFilters = list.filters.flatMap((f) => {
+    if (f instanceof DateRangeFilter) {
+      const value = f.getValue();
+      if (value) {
+        return [
+          <BadgeView key={f.name} onClose={() => f.clear()}>
+            <TextView>
+              {`${transformDateValueToFormattedDate(value.start)} - ${transformDateValueToFormattedDate(value.end)}`}
+            </TextView>
+          </BadgeView>,
+        ];
+      }
+    }
 
-  const activeFilters = activeFilterValues.map((v) => (
-    <BadgeView key={v.id} onClose={() => v.deactivate()}>
-      <TextView>{v.render()}</TextView>
-    </BadgeView>
-  ));
+    return f.values
+      .filter((v) => v.isActive)
+      .map((v) => (
+        <BadgeView key={v.id} onClose={() => v.deactivate()}>
+          <TextView>{v.render()}</TextView>
+        </BadgeView>
+      ));
+  });
 
   const storingAvailable = list.filters.some((f) => f.isStoringAvailable());
   const hasChanges = list.filters.some((f) => f.hasChanges());
