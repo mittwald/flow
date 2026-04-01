@@ -2,7 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
 
-const states = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger", "unavailable"] as const;
 
 test.each(testEnvironments)(
   "Alert states (%s)",

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { PropsWithClassName, Status } from "@/lib/types/props";
+import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./AlertText.module.scss";
 import { AlertIcon } from "@/components/AlertIcon";
@@ -10,9 +10,11 @@ import {
 import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface AlertTextProps
-  extends PropsWithClassName, PropsWithChildren, FlowComponentProps {
-  status?: Status | "unavailable";
-}
+  extends
+    PropsWithClassName,
+    PropsWithChildren,
+    FlowComponentProps,
+    PropsWithStatus {}
 
 /** @flr-generate all */
 export const AlertText = flowComponent("AlertText", (props) => {

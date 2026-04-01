@@ -3,7 +3,7 @@ import gopher from "@/tests/assets/gopher.webp";
 import { test } from "vitest";
 
 const sizes = ["xs", "s", "m", "l"] as const;
-const states = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger", "unavailable"] as const;
 const colors = ["blue", "teal", "green", "violet", "lilac"] as const;
 
 test.each(testEnvironments)(

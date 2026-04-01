@@ -3,7 +3,7 @@ import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
-const states = ["info", "success", "warning", "danger"] as const;
+const states = ["info", "success", "warning", "danger", "unavailable"] as const;
 
 test.each(testEnvironments)(
   "Notification (%s)",
