@@ -510,9 +510,9 @@ unavailable-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{unavailable.color.200}"
-  pressed:
     value: "{unavailable.color.300}"
+  pressed:
+    value: "{unavailable.color.400}"
 unavailable-plain-content-color:
   value: "{unavailable.color.800}"
 
@@ -521,27 +521,27 @@ unavailable-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{unavailable.color.200}"
-  pressed:
     value: "{unavailable.color.300}"
+  pressed:
+    value: "{unavailable.color.400}"
 unavailable-outline-content-color:
-  value: "{unavailable.color.800}"
+  value: "{unavailable.color.900}"
 unavailable-outline-border-color:
   value: "{unavailable.color.800}"
 
 # Unavailable Soft
 unavailable-soft-background-color:
   default:
-    value: "{unavailable.color.200}"
-  hover:
     value: "{unavailable.color.300}"
-  pressed:
+  hover:
     value: "{unavailable.color.400}"
+  pressed:
+    value: "{unavailable.color.500}"
 unavailable-soft-content-color:
   default:
-    value: "{unavailable.color.800}"
-  pressed:
     value: "{unavailable.color.900}"
+  pressed:
+    value: "{unavailable.color.1000}"
 
 # Neutral Solid
 neutral-solid-background-color:
