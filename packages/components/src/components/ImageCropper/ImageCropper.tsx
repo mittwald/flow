@@ -42,6 +42,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   } = props;
 
   const imageSrc = useImageSrc(image);
+
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
