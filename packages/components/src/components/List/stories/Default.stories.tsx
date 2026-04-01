@@ -31,6 +31,8 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
 import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
+import { DateTime } from "luxon";
+import { getLocalTimeZone, today } from "@internationalized/date";
 import { dummyText } from "@/lib/dev/dummyText";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
@@ -294,6 +296,43 @@ export const LoadingView: Story = {
           </TableBody>
         </Table>
       </List>
+    );
+  },
+};
+
+export const WithDateRangeFilter: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List batchSize={5} aria-label="Invoices">
+        <List.StaticData
+          data={[
+            { id: "RG100000", date: DateTime.now().toISO() },
+            { id: "RG100001", date: DateTime.now().minus({ day: 7 }).toISO() },
+            { id: "RG100002", date: DateTime.now().minus({ day: 14 }).toISO() },
+          ]}
+        />
+        <List.Filter
+          property="date"
+          name="Date"
+          mode="dateRange"
+          dateRangeOptions={{ maxValue: today(getLocalTimeZone()) }}
+        />
+        <List.Item textValue={(invoice) => invoice.id}>
+          {(invoice) => (
+            <ListItemView>
+              <Heading>{invoice.id}</Heading>
+              <Text>
+                {DateTime.fromISO(invoice.date).toFormat("dd.MM.yyyy")}
+              </Text>
+            </ListItemView>
+          )}
+        </List.Item>
+      </List.List>
     );
   },
 };

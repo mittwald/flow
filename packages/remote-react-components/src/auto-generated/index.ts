@@ -92,6 +92,7 @@ export * from "./ProgressBar";
 export * from "./Radio";
 export * from "./RadioButton";
 export * from "./RadioGroup";
+export * from "./RangeCalendar";
 export * from "./Rating";
 export * from "./SearchField";
 export * from "./Section";
