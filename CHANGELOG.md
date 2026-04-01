@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.769](https://github.com/mittwald/flow/compare/0.2.0-alpha.768...0.2.0-alpha.769) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** autosave filters only if column state changes ([308eba8](https://github.com/mittwald/flow/commit/308eba81aaf0100e4dda4cabda6dbc5546a1312d))
+
+# [0.2.0-alpha.768](https://github.com/mittwald/flow/compare/0.2.0-alpha.767...0.2.0-alpha.768) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** fix rerender loop ([bc15c3e](https://github.com/mittwald/flow/commit/bc15c3e48d07ac977bbe4166704029d37b508b64))
+
+# [0.2.0-alpha.767](https://github.com/mittwald/flow/compare/0.2.0-alpha.766...0.2.0-alpha.767) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** do not store filters if not needed ([8c2ac00](https://github.com/mittwald/flow/commit/8c2ac00dcee50a7f4f9a57cc04c6c25885baf02d))
+
 # [0.2.0-alpha.766](https://github.com/mittwald/flow/compare/0.2.0-alpha.765...0.2.0-alpha.766) (2026-03-31)
 
 **Note:** Version bump only for package @mittwald/flow-project

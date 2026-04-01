@@ -119,6 +119,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     list: List<T>,
     options: ListSettingsStoreOperationOptions,
   ) {
+    if (!list.filters.some((f) => f.hasChanges())) {
+      return;
+    }
+
     const data = Object.fromEntries(
       list.filters.map((filter) => [
         filter.storageKey,
