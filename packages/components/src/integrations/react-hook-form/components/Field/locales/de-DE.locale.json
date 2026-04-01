@@ -1,4 +1,8 @@
 {
+  "max": "Maximale Anzahl von {number} erreicht",
   "maxLength": "Bitte gib höchstens {number} Zeichen ein",
-  "minLength": "Bitte gib mindestens {number} Zeichen ein"
+  "min": "Minimale Anzahl von {number} noch nicht erreicht",
+  "minLength": "Bitte gib mindestens {number} Zeichen ein",
+  "pattern": "Entspricht nicht dem erwarteten Format: {pattern}",
+  "required": "Bitte fülle dieses Feld aus"
 }
