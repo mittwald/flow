@@ -2,11 +2,15 @@ notification:
   padding:
     value: "{size-px.s}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-x-start-width:
     value: "{border-width.300}"
   border-style:
     value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral.color.300}"
   box-shadow:
     value: "{shadow.overlay}"
   width:
@@ -63,6 +67,19 @@ notification:
   success-heading-color:
     value: "{success-outline-content-color}"
   success-background-color:
+    default:
+      value: "{neutral.color.100}"
+    hover:
+      value: "{success-outline-background-color.hover}"
+    pressed:
+      value: "{success-outline-background-color.pressed}"
+
+  # Unavailable
+  unavailable-border-color:
+    value: "{success-outline-border-color}"
+  unavailable-heading-color:
+    value: "{success-outline-content-color}"
+  unavailable-background-color:
     default:
       value: "{neutral.color.100}"
     hover:

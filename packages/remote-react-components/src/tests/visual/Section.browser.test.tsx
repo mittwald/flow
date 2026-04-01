@@ -65,13 +65,18 @@ test.each(testEnvironments)(
               dolore voluptas.
             </Text>
             <Heading level={3}>Sub-Heading</Heading>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
-            </Text>
             <Link>Link</Link>
+          </Section>
+          <Section>
+            <Header>
+              <Heading>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+                eius quam quas vel voluptas, ullam aliquid fugit. Voluptate
+                harum accusantium rerum ullam modi blanditiis vitae, laborum ea
+                tempore, dolore voluptas.<Badge>Badge</Badge>
+              </Heading>
+              <Button>Button</Button>
+            </Header>
           </Section>
         </>
       );

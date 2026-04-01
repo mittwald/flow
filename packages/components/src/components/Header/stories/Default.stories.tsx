@@ -6,13 +6,9 @@ import Section from "@/components/Section";
 const meta: Meta<typeof Header> = {
   title: "Content/Header",
   component: Header,
-  argTypes: {
-    elementType: {
-      control: "inline-radio",
-      options: ["header", "div"],
-    },
+  parameters: {
+    controls: { disable: true },
   },
-  args: { elementType: "header" },
   render: (props) => (
     <Section>
       <Header {...props}>

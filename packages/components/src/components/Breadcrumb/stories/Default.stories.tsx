@@ -8,8 +8,8 @@ import { alphaColors } from "@/lib/types/props";
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
   component: Breadcrumb,
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Breadcrumb {...props}>
         <Link href="#">Project</Link>
         <Link href="#">Apps</Link>
@@ -20,11 +20,11 @@ const meta: Meta<typeof Breadcrumb> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", ...alphaColors],
+      options: ["default", ...alphaColors],
     },
     size: { control: "inline-radio", options: ["s", "m"] },
   },
-  args: { size: "m", color: "primary" },
+  args: { size: "m", color: "default" },
 };
 
 export default meta;

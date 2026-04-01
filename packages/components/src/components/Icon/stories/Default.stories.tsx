@@ -17,20 +17,19 @@ const meta: Meta<typeof Icon> = {
       options: ["s", "m", "l"],
     },
   },
-  render: (props) => <IconProject {...props} />,
+  render: (props) => <IconProject aria-label="Project" {...props} />,
 };
 export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const Alias: Story = {
-  args: { "aria-label": "project" },
+export const Default: Story = {
+  args: {},
 };
 
 export const TablerIcon: Story = {
-  args: { "aria-label": "star" },
   render: (props) => (
-    <Icon {...props}>
+    <Icon {...props} aria-label="Star">
       <IconStar />
     </Icon>
   ),

@@ -3,9 +3,15 @@
   flex-direction: column;
   row-gap: var(--message--spacing-y);
   width: max-content;
-  max-width: min(100%, var(--text--max-width));
+  max-width: min(100%, var(--max-text-width));
 
   --message-background: var(--message--background-color-responder);
+  --message-tip-border-size-x: calc(
+    var(--message--tip-size-x) + var(--size-px--xxs)
+  );
+  --message-tip-border-size-y: calc(
+    var(--message--tip-size-y) + var(--message--tip-size-y) / 2
+  );
 
   .content {
     grid-area: content;
@@ -14,6 +20,8 @@
     padding-block: var(--message--padding-y);
     background-color: var(--message-background);
     position: relative;
+    border: var(--message--border-width) var(--message--border-style)
+      var(--message--border-color);
 
     .tip {
       position: absolute;
@@ -29,6 +37,23 @@
         left: 0;
         width: var(--message--tip-size-x);
         height: var(--message--tip-size-y);
+      }
+    }
+
+    .tipBorder {
+      position: absolute;
+      top: calc(var(--size-px--xxxs) * -1);
+      width: var(--message-tip-border-size-x);
+      height: var(--message-tip-border-size-y);
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--message-tip-border-size-x);
+        height: var(--message-tip-border-size-y);
       }
     }
   }
@@ -71,6 +96,16 @@
           box-shadow: 0 0 0 var(--message--tip-size-x) var(--message-background);
         }
       }
+
+      .tipBorder {
+        right: calc(var(--message-tip-border-size-x) * -1);
+
+        &::before {
+          border-top-left-radius: 100%;
+          box-shadow: 0 0 0 var(--message-tip-border-size-x)
+            var(--message--border-color);
+        }
+      }
     }
 
     .action,
@@ -92,6 +127,16 @@
           border-top-right-radius: 100%;
           box-shadow: var(--message--tip-size-x) 0 0 var(--message--tip-size-x)
             var(--message-background);
+        }
+      }
+
+      .tipBorder {
+        left: calc(var(--message-tip-border-size-x) * -1);
+
+        &::before {
+          border-top-right-radius: 100%;
+          box-shadow: var(--message-tip-border-size-x) 0 0
+            var(--message-tip-border-size-x) var(--message--border-color);
         }
       }
     }

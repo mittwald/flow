@@ -52,6 +52,9 @@ test.each(testEnvironments)(
         <NumberField minValue={5} defaultValue={5}>
           <Label>Disabled increment</Label>
         </NumberField>
+        <NumberField maxValue={5} defaultValue={5}>
+          <Label>Disabled decrement</Label>
+        </NumberField>
       </Flex>,
     );
 

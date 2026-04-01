@@ -14,10 +14,10 @@ const meta: Meta<typeof Link> = {
     onPress: action("onPress"),
     isDisabled: false,
     size: "m",
-    color: "primary",
+    color: "default",
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link {...props}>Adjust project</Link>
     </StoryBackground>
   ),
@@ -42,9 +42,9 @@ type Story = StoryObj<typeof Link>;
 export const Default: Story = {};
 
 export const Inline: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
-      <Text color={props.color === "primary" ? undefined : props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Text color={props.color}>
         Check our <Link {...props}>onboarding</Link> for more information.
       </Text>
     </StoryBackground>
@@ -52,8 +52,8 @@ export const Inline: Story = {
 };
 
 export const WithIcon: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link {...props} href="https://mittwald.de">
         Download invoice
         <IconDownload aria-label="download" />
@@ -63,8 +63,8 @@ export const WithIcon: Story = {
 };
 
 export const ExternalLink: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link target="_blank" {...props}>
         mittwald.de
       </Link>
@@ -73,8 +73,8 @@ export const ExternalLink: Story = {
 };
 
 export const Download: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link target="_blank" download {...props}>
         Download file
       </Link>

@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  border: var(--layout-card--border-width) var(--layout-card--border-style)
+    var(--layout-card--border-color);
 
   > .tabs {
     margin: calc(var(--layout-card--padding) * -1);
@@ -16,7 +18,8 @@
       border-top-left-radius: var(--layout-card--corner-radius);
     }
 
-    :global(.flow--tabs--tab-title):first-child {
+    :global(.flow--tabs--tab-title):first-child,
+    :global(.flow--tabs--tab-list--context-menu-button) {
       border-top-left-radius: var(--layout-card--corner-radius);
     }
   }
@@ -26,6 +29,8 @@
 
     .accentBox {
       padding: var(--layout-card--padding);
+      border-radius: var(--layout-card--corner-radius);
+      flex-grow: 1;
     }
   }
 }

@@ -4,7 +4,7 @@ header-navigation:
   spacing:
     value: "{size-rem.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   corner-radius-round:
     value: "{corner-radius.round}"
   font-weight-current:
@@ -13,12 +13,12 @@ header-navigation:
     value: "{border-width.200}"
 
   color:
-    value: "{primary.color.1000}"
+    value: "{neutral.color.1100}"
   background-color:
     hover:
-      value: "{primary-plain-background-color.hover}"
+      value: "{neutral-plain-background-color.hover}"
     pressed:
-      value: "{primary-plain-background-color.pressed}"
+      value: "{neutral-plain-background-color.pressed}"
 
   # Dark
   color-dark:

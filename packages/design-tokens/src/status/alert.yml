@@ -2,7 +2,7 @@ alert:
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-x-start-width:
@@ -13,8 +13,8 @@ alert:
     value: "{size-rem.s}"
   spacing:
     value: "{size-rem.m}"
-  font-size-heading:
-    value: "{font-size-text.m}"
+  heading-size:
+    value: "{font-size-heading.xs}"
 
   # Info
   info-border-color:
@@ -39,3 +39,9 @@ alert:
     value: "{success-outline-border-color}"
   success-heading-color:
     value: "{success-outline-content-color}"
+
+  # Unavailable
+  unavailable-border-color:
+    value: "{neutral.color.700}"
+  unavailable-heading-color:
+    value: "{neutral.color.700}"

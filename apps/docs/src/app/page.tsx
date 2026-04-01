@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Icon,
-  Image,
   LayoutCard,
   Link,
   Section,
@@ -17,19 +16,12 @@ import {
   IconComponents,
   IconDeviceLaptop,
 } from "@tabler/icons-react";
-import homeImage from "../../assets/Styleguide_Startseite.svg";
-import styles from "./layout.module.scss";
 
 const Home: FC = () => {
   return (
     <Flex direction="column" gap="m">
-      <LayoutCard className={styles.homeTopLayoutCard}>
-        <Image
-          className={styles.homeImage}
-          src={homeImage.src}
-          alt="Flow Design System"
-        />
-        <Section className={styles.homeTopContent}>
+      <LayoutCard>
+        <Section>
           <Heading level={1}>
             Flow Design System <AlertBadge>beta</AlertBadge>
           </Heading>

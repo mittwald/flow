@@ -25,18 +25,7 @@ const meta: Meta<typeof Action> = {
     </Action>
   ),
   parameters: {
-    controls: {
-      exclude: [
-        "children",
-        "action",
-        "closeOverlay",
-        "openOverlay",
-        "toggleOverlay",
-        "showFeedback",
-        "break",
-        "skip",
-      ],
-    },
+    controls: { disable: true },
   },
 };
 

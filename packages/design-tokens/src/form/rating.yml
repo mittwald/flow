@@ -7,4 +7,4 @@ rating:
   star-color:
     value: "{neutral.color.700}"
   star-filled-color:
-    value: "{primary.color.1000}"
+    value: "{primary.color.800}"

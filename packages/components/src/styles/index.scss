@@ -1,3 +1,19 @@
-@forward "@mittwald/flow-design-tokens/css";
+@use "sass:meta";
+
+@forward "@mittwald/flow-design-tokens/css/base.css";
+@forward "@mittwald/flow-design-tokens/css/colors-light.css";
+@forward "@mittwald/flow-design-tokens/css/colors-dark.css";
 @forward "./fonts";
 @forward "./globals";
+
+@media (prefers-color-scheme: dark) {
+  @include meta.load-css(
+    "@mittwald/flow-design-tokens/css/colors-dark-system.css"
+  );
+}
+
+@media (prefers-color-scheme: light) {
+  @include meta.load-css(
+    "@mittwald/flow-design-tokens/css/colors-light-system.css"
+  );
+}

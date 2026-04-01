@@ -19,7 +19,7 @@
 
   /* Color */
 
-  @mixin status($color) {
+  @mixin color($color) {
     &.#{$color} {
       background: var(--accent-box--background-color-#{$color});
 
@@ -29,8 +29,7 @@
     }
   }
 
-  @include status("blue");
-  @include status("green");
-  @include status("gradient");
-  @include status("neutral");
+  @include color("blue");
+  @include color("green");
+  @include color("neutral");
 }

@@ -18,8 +18,8 @@ const meta: Meta<typeof Text> = {
     },
   },
   args: { align: "start", elementType: "div", color: "default" },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Text {...props}>
         {dummyText.long}
         <br />

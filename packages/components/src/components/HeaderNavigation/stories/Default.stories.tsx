@@ -29,8 +29,8 @@ const meta: Meta<typeof HeaderNavigation> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <HeaderNavigation aria-label="Header navigation" {...props}>
         <Link href="#">Getting startet</Link>
         <Link href="#" aria-current="page">
@@ -71,10 +71,10 @@ const meta: Meta<typeof HeaderNavigation> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", ...alphaColors],
+      options: ["default", ...alphaColors],
     },
   },
-  args: { color: "primary" },
+  args: { color: "default" },
 };
 
 export default meta;

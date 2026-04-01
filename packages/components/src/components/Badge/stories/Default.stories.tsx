@@ -24,8 +24,8 @@ const meta: Meta<typeof Badge> = {
       options: badgeColors,
     },
   },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Badge {...props}>Value</Badge>
     </StoryBackground>
   ),
@@ -37,8 +37,8 @@ type Story = StoryObj<typeof Badge>;
 export const Default: Story = {};
 
 export const WithScope: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Badge {...props}>
         <Label>Scope</Label>
         <Text>Value</Text>
@@ -48,8 +48,8 @@ export const WithScope: Story = {
 };
 
 export const WithActions: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Badge
         {...props}
         onClose={() => {
@@ -67,12 +67,12 @@ export const WithActions: Story = {
 };
 
 export const WithContextMenu: Story = {
-  render: (props) => {
+  render: (props, context) => {
     const controller = useOverlayController("ContextMenu");
     const triggerRef = React.useRef(null);
 
     return (
-      <StoryBackground color={props.color}>
+      <StoryBackground color={props.color} theme={context.globals.theme}>
         <Badge ref={triggerRef} onPress={controller.open} {...props}>
           <Label>Scope</Label>
           <Text>Value</Text>

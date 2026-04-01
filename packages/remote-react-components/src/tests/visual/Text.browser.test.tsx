@@ -1,5 +1,6 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import React from "react";
 
 test.each(testEnvironments)(
   "Text (%s)",
@@ -24,13 +25,15 @@ test.each(testEnvironments)(
             <li>Item</li>
           </ol>
         </Text>
-        <Text color="dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
-        </Text>
-        <AccentBox>
+        <AccentBox color="neutral">
+          <Text color="dark">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
+            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
+            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
+            dolore voluptas.
+          </Text>
+        </AccentBox>
+        <AccentBox color="#3A434E">
           <Text color="light">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
             quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
@@ -42,5 +45,32 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Text");
+  },
+);
+
+test.each(testEnvironments)(
+  "Text edge cases (%s)",
+  async ({ testScreenshot, render, components: { Text, Flex, IconStar } }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <Text>
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text wordBreak="break-word">
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text>
+          <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Text>
+        <Text>
+          <small>
+            <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing
+            elit.
+          </small>
+        </Text>
+      </Flex>,
+    );
+
+    await testScreenshot("Text edge cases");
   },
 );

@@ -23,6 +23,7 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       defaultInputValue: {},
       defaultItems: {},
       defaultSelectedKey: {},
+      defaultValue: {},
       dir: {},
       disabledKeys: {},
       form: {},
@@ -40,13 +41,16 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       menuTrigger: {},
       name: {},
       placeholder: {},
+      render: {},
       renderEmptyState: {},
       selectedKey: {},
+      selectionMode: {},
       shouldFocusWrap: {},
       slot: {},
       translate: {},
       validate: {},
       validationBehavior: {},
+      value: {},
     };
   }
 

@@ -31,6 +31,7 @@ export class RemoteItemsListBoxElement extends FlowRemoteElement<RemoteItemsList
       lang: {},
       layout: {},
       orientation: {},
+      render: {},
       renderEmptyState: {},
       selectedKeys: {},
       selectionBehavior: {},

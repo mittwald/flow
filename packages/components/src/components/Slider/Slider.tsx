@@ -65,7 +65,6 @@ export const Slider = flowComponent("Slider", (props) => {
   const propsContext: PropsContext = {
     ...fieldPropsContext,
     Label: {
-      unstyled: true,
       tunnelId: "label",
       ...fieldPropsContext.Label,
       className: styles.label,
@@ -105,6 +104,7 @@ export const Slider = flowComponent("Slider", (props) => {
                       isDisabled,
                       variant: "plain",
                       color: "secondary",
+                      size: "s",
                     },
                   }}
                 >

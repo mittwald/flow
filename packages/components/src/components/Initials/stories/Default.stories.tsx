@@ -7,7 +7,7 @@ const meta: Meta<typeof Initials> = {
   component: Initials,
   render: (props) => <Initials {...props}>Max Mustermann</Initials>,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
 };
 export default meta;
