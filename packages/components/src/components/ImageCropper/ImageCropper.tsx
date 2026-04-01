@@ -63,10 +63,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   });
 
   useEffect(() => {
-    async function crop() {
-      await onCropAreaPixelsChange();
-    }
-    void crop();
+    void onCropAreaPixelsChange();
   }, [croppedAreaPixels]);
 
   return (

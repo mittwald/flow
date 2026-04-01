@@ -44,21 +44,6 @@ export const WithFormatOptions: Story = {
   ),
 };
 
-export const WithUnit: Story = {
-  render: (props) => (
-    <Slider
-      {...props}
-      unit="×"
-      minValue={1}
-      maxValue={3}
-      defaultValue={2.5}
-      step={0.5}
-    >
-      <Label>Zoom</Label>
-    </Slider>
-  ),
-};
-
 export const Disabled: Story = { args: { isDisabled: true } };
 
 export const WithInitialMarker: Story = {

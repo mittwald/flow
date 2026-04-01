@@ -25,8 +25,6 @@ export interface SliderProps
   isReadOnly?: boolean;
   /** Whether the component is invalid. */
   isInvalid?: boolean;
-  /** Unit suffix appended to the displayed value */
-  unit?: string;
   /** Hide Buttons Label and Value */
   sliderOnly?: boolean;
 }
@@ -43,7 +41,6 @@ export const Slider = flowComponent("Slider", (props) => {
     isReadOnly,
     ref,
     step,
-    unit,
     sliderOnly,
     ...rest
   } = props;
@@ -90,11 +87,7 @@ export const Slider = flowComponent("Slider", (props) => {
 
             {!sliderOnly && (
               <div className={styles.text}>
-                <Aria.SliderOutput className={styles.value}>
-                  {(value) => {
-                    return `${value.defaultChildren} ${unit ?? ""} `;
-                  }}
-                </Aria.SliderOutput>
+                <Aria.SliderOutput className={styles.value} />{" "}
                 <TunnelExit id="label" />
               </div>
             )}
