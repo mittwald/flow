@@ -12,11 +12,10 @@ import {
 } from "@/components/Calendar";
 import { dateRangeFilterFn } from "@/components/List/model/filter/dateRangeFilterFn";
 
-export class DateRangeFilter<T, TProp extends PropertyName<T>> extends Filter<
-  T,
-  TProp,
-  never
-> {
+export class DateRangeFilter<
+  T = never,
+  TProp extends PropertyName<T> = never,
+> extends Filter<T, TProp> {
   public readonly dateRangeOptions?: RangeCalendarProps;
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, never>) {

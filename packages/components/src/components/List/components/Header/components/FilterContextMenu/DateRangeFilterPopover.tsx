@@ -9,10 +9,10 @@ import { Popover, PopoverTrigger } from "@/components/Popover";
 import styles from "./FilterContextMenus.module.scss";
 import { useOverlayController } from "@/lib/controller";
 import RangeCalendarView from "@/views/RangeCalendarView";
-import type { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
+import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";
 
 interface Props {
-  filter: DateRangeFilter<never, never>;
+  filter: AnyDateRangeFilter;
 }
 
 export const DateRangeFilterPopover: FC<Props> = (props) => {

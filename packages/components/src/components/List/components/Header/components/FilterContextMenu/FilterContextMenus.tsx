@@ -12,10 +12,7 @@ export const FilterContextMenus: FC = () => {
     .filter((f) => f.priority === "primary")
     .map((filter) =>
       filter instanceof DateRangeFilter ? (
-        <DateRangeFilterPopover
-          key={filter.property}
-          filter={filter as DateRangeFilter<never, never>}
-        />
+        <DateRangeFilterPopover key={filter.property} filter={filter} />
       ) : (
         <FilterContextMenu key={filter.property} filter={filter} />
       ),

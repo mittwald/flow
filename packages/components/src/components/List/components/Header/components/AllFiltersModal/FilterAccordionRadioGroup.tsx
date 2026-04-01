@@ -8,7 +8,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: Filter;
 }
 
 export const FilterAccordionRadioGroup: FC<Props> = (props) => {

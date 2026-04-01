@@ -4,10 +4,10 @@ import { Flex } from "@/components/Flex";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 import RangeCalendarView from "@/views/RangeCalendarView";
-import type { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
+import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";
 
 interface Props {
-  filter: DateRangeFilter<never, never>;
+  filter: AnyDateRangeFilter;
 }
 
 export const FilterAccordionDateRange: FC<Props> = (props) => {

@@ -4,7 +4,7 @@ import CheckboxView from "@/views/CheckboxView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: Filter;
 }
 
 export const FilterAccordionCheckboxGroup: FC<Props> = (props) => {

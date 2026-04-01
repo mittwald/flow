@@ -9,7 +9,7 @@ import { FilterAccordionDateRange } from "@/components/List/components/Header/co
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 interface Props {
-  filter: Filter<never, never, never> | DateRangeFilter<never, never>;
+  filter: Filter | DateRangeFilter;
 }
 
 export const FilterAccordion: FC<Props> = (props) => {
@@ -19,9 +19,7 @@ export const FilterAccordion: FC<Props> = (props) => {
 
   const content =
     filter instanceof DateRangeFilter ? (
-      <FilterAccordionDateRange
-        filter={filter as DateRangeFilter<never, never>}
-      />
+      <FilterAccordionDateRange filter={filter} />
     ) : filter.mode === "one" ? (
       <FilterAccordionRadioGroup filter={filter} />
     ) : (
