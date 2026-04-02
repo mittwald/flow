@@ -42,9 +42,9 @@ export class Sorting<T> {
     this.initialEnabled = this.getInitialEnabled(shape);
   }
 
-  private getInitialEnabled(shape: SortingShape<T>): boolean {
+  private getInitialEnabled(shape: SortingShape<T>): SortingDefaultMode {
     if (shape.defaultEnabled === "hidden") {
-      return false;
+      return "hidden";
     }
 
     const storedSorting = this.list.settingsStorage?.get("sorting", {

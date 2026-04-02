@@ -1,5 +1,11 @@
 import { render } from "vitest-browser-react";
-import { List, ListFilter, ListItem, ListStaticData } from "@/components/List";
+import {
+  List,
+  ListFilter,
+  ListItem,
+  ListSorting,
+  ListStaticData,
+} from "@/components/List";
 import { type ReactNode } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
@@ -31,8 +37,10 @@ const removeFilterButton = page.getByLabelText("Remove");
 const filterButton = page.getByRole("button", {
   name: "num",
 });
-const listItem42 = page.getByText("Item: 42");
-const listItem43 = page.getByText("Item: 43");
+const listItem42TextContent = "Item: 42";
+const listItem43TextContent = "Item: 43";
+const listItem42 = page.getByText(listItem42TextContent);
+const listItem43 = page.getByText(listItem43TextContent);
 
 const filterValueId42 = FilterValue.create(
   {
@@ -369,5 +377,19 @@ describe("Storage", async () => {
 
     await selectFilterOption(42);
     expect(storeFilterButton).not.toBeInTheDocument();
+  });
+});
+
+describe("Sorting", () => {
+  test("Hidden sorting works", async () => {
+    await render(
+      getTestElement(
+        [43, 42],
+        <ListSorting<Data> defaultEnabled="hidden" property="num" />,
+      ),
+    );
+    expect(page.getByRole("grid")).toHaveTextContent(
+      listItem42TextContent + listItem43TextContent,
+    );
   });
 });
