@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AlertBadge from "../AlertBadge";
 import React from "react";
+import { dummyText } from "@/lib/dev/dummyText";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof AlertBadge> = {
   title: "Status/AlertBadge",
@@ -13,10 +15,10 @@ const meta: Meta<typeof AlertBadge> = {
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
     },
   },
-  render: (props) => <AlertBadge {...props}>Info</AlertBadge>,
+  render: (props) => <AlertBadge {...props}>{dummyText.short}</AlertBadge>,
 };
 export default meta;
 

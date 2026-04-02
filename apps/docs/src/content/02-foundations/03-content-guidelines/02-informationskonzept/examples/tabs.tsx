@@ -11,21 +11,10 @@ import {
     Tab Content
   </Tab>
   <Tab>
-    <TabTitle>Tab</TabTitle>
-  </Tab>
-  <Tab>
     <TabTitle>
       Tab
       <AlertIcon />
     </TabTitle>
-    Tab Content
-  </Tab>
-  <Tab>
-    <TabTitle>Tab</TabTitle>
-    Tab Content
-  </Tab>
-  <Tab>
-    <TabTitle>Tab</TabTitle>
     Tab Content
   </Tab>
   <Tab>

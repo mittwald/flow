@@ -1,16 +1,8 @@
 import type { FC, PropsWithChildren } from "react";
 import styles from "./Color.module.scss";
+import { statusTypes } from "@/lib/types/props";
 
-const flowColors = [
-  "blue",
-  "violet",
-  "teal",
-  "lilac",
-  "danger",
-  "warning",
-  "info",
-  "success",
-] as const;
+const flowColors = ["blue", "violet", "teal", "lilac", ...statusTypes] as const;
 
 type FlowColor = (typeof flowColors)[number];
 type FlowWithCustomColor = FlowColor | (string & {});

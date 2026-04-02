@@ -4,30 +4,30 @@ import { Heading } from "@/components/Heading";
 import { Notification } from "@/components/Notification";
 import { Text } from "@/components/Text";
 import { action } from "storybook/actions";
+import { dummyText } from "@/lib/dev/dummyText";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof Notification> = {
-  title: "Status/Notifications/Notification",
+  title: "Status/Notification",
   component: Notification,
-
+  parameters: {
+    controls: { exclude: ["href", "autoClose", "onClick", "onClose"] },
+  },
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger"],
+      options: statusTypes,
     },
   },
-  args: {
-    status: "info",
-    onClick: action("onClick"),
-    onClose: action("onClose"),
-  },
-
+  args: { status: "info" },
   render: (props) => (
-    <Notification {...props}>
-      <Heading>Email address archived</Heading>
-      <Text>
-        Your email address <strong>example@mittwald.de</strong> has been
-        archived.
-      </Text>
+    <Notification
+      {...props}
+      onClick={action("onClick")}
+      onClose={action("onClose")}
+    >
+      <Heading>{dummyText.short}</Heading>
+      <Text>{dummyText.medium}</Text>
     </Notification>
   ),
 };
@@ -39,5 +39,10 @@ type Story = StoryObj<typeof Notification>;
 export const Default: Story = {};
 
 export const WithoutLink: Story = {
-  args: { onClick: undefined, onClose: undefined },
+  render: (props) => (
+    <Notification {...props}>
+      <Heading>{dummyText.short}</Heading>
+      <Text>{dummyText.medium}</Text>
+    </Notification>
+  ),
 };
