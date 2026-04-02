@@ -40,11 +40,18 @@ export interface ChartTooltipProps
       TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
-    WithTooltipFormatters {}
+    WithTooltipFormatters {
+  showProgressBar?: boolean;
+}
 
 /** @flr-generate all */
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
-  const { headingFormatter, formatter, ...rest } = props;
+  const {
+    headingFormatter,
+    formatter,
+    showProgressBar = true,
+    ...rest
+  } = props;
 
   return (
     <Tooltip
@@ -63,6 +70,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
                 {...props}
                 headingFormatter={headingFormatter}
                 formatter={formatter}
+                showProgressBar={showProgressBar}
               />
             </Suspense>
           </div>
