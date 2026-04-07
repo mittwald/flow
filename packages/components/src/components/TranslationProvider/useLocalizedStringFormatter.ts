@@ -1,22 +1,24 @@
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter as useLocalizedStringFormatterAria } from "react-aria";
 import { useTranslationProvider } from "@/components/TranslationProvider/TranslationProvider";
 import { mergeDeep } from "remeda";
 import type { FlowComponentName } from "@/components/propTypes";
 
-type AriaLocalizedStringFormatter = typeof useLocalizedStringFormatter<
+type AriaLocalizedStringFormatter = typeof useLocalizedStringFormatterAria<
   string,
   string
 >;
 type AriaLocalizedStringFormatterParams =
   Parameters<AriaLocalizedStringFormatter>;
 
-export const useLocalizedContextStringFormatter = (
-  strings: AriaLocalizedStringFormatterParams[0],
+export type LocalizedStrings = AriaLocalizedStringFormatterParams[0];
+
+export const useLocalizedStringFormatter = (
+  strings: LocalizedStrings,
   componentName?: FlowComponentName,
 ): ReturnType<AriaLocalizedStringFormatter> => {
   const translationContextStrings = useTranslationProvider();
 
-  return useLocalizedStringFormatter(
+  return useLocalizedStringFormatterAria(
     mergeDeep(strings, translationContextStrings),
     componentName,
   );

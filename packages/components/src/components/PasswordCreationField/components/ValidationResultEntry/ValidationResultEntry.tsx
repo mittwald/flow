@@ -4,8 +4,8 @@ import generateValidationTranslation from "@/components/PasswordCreationField/li
 import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
 import type { RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
-import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 import AlertIcon from "../../../AlertIcon";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 interface Props {
   result: Partial<RuleValidationResult>;
@@ -15,7 +15,7 @@ interface Props {
 /** @internal */
 export const ValidationResultEntry: FC<Props> = (props) => {
   const { result, unspecifiedRules = false } = props;
-  const translate = useLocalizedContextStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(locales);
 
   const icon = <AlertIcon status={result.isValid ? "success" : "warning"} />;
 

@@ -9,12 +9,12 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "./TextField.module.scss";
 import { FieldDescription } from "@/components/FieldDescription";
-import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { Button } from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
 export interface TextFieldProps
   extends
