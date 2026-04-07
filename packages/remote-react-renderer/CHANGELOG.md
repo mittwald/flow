@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.774](https://github.com/mittwald/flow/compare/0.2.0-alpha.773...0.2.0-alpha.774) (2026-04-02)
+
+### Reverts
+
+* Revert "refactor(List): replace grid list with list box (#2420)" ([b4f8171](https://github.com/mittwald/flow/commit/b4f81714add5dd0da76966c483398b3bbd60cb48)), closes [#2420](https://github.com/mittwald/flow/issues/2420)
+
+# [0.2.0-alpha.773](https://github.com/mittwald/flow/compare/0.2.0-alpha.772...0.2.0-alpha.773) (2026-04-01)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
 # [0.2.0-alpha.772](https://github.com/mittwald/flow/compare/0.2.0-alpha.771...0.2.0-alpha.772) (2026-04-01)
 
 ### Features

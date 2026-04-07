@@ -70,6 +70,7 @@ const meta: Meta<typeof List> = {
           <DomainList.List
             batchSize={5}
             aria-label="Domains"
+            onAction={(domain) => console.log(domain.hostname)}
             settingStorageKey="domains"
             defaultViewMode="tiles"
           >
@@ -133,11 +134,7 @@ const meta: Meta<typeof List> = {
               </DomainList.TableBody>
             </DomainList.Table>
 
-            <DomainList.Item
-              href={() => "#"}
-              showTiles
-              textValue={(domain) => domain.hostname}
-            >
+            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
               {(domain) => (
                 <ListItemView>
                   <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>

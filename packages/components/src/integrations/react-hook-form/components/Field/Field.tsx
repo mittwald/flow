@@ -29,6 +29,37 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     ...props,
     rules: {
       ...props.rules,
+      min:
+        typeof rest.rules?.min === "number"
+          ? {
+              value: rest.rules.min,
+              message: stringFormatter.format("min", {
+                number: rest.rules.min,
+              }),
+            }
+          : rest.rules?.min,
+      max:
+        typeof rest.rules?.max === "number"
+          ? {
+              value: rest.rules.max,
+              message: stringFormatter.format("max", {
+                number: rest.rules.max,
+              }),
+            }
+          : rest.rules?.max,
+      required:
+        typeof rest.rules?.required === "boolean"
+          ? stringFormatter.format("required")
+          : rest.rules?.required,
+      pattern:
+        rest.rules?.pattern instanceof RegExp
+          ? {
+              value: rest.rules.pattern,
+              message: stringFormatter.format("pattern", {
+                pattern: rest.rules.pattern.source,
+              }),
+            }
+          : rest.rules?.pattern,
       minLength:
         typeof rest.rules?.minLength === "number"
           ? {
