@@ -19,7 +19,7 @@ export const useLocalizedStringFormatter = (
   const translationContextStrings = useTranslationProvider();
 
   return useLocalizedStringFormatterAria(
-    mergeDeep(strings, translationContextStrings),
+    mergeDeep(strings, translationContextStrings as LocalizedStrings),
     componentName,
   );
 };

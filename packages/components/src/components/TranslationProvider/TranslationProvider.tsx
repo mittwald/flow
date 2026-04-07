@@ -1,7 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext, useMemo } from "react";
 import { pickBy } from "remeda";
-import type { LocalizedStrings } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 type LocaleDictionary = Record<string, string>;
 
@@ -15,7 +14,7 @@ type Props = PropsWithChildren & {
   translations: Translations;
 };
 
-const context = createContext<LocalizedStrings>({});
+const context = createContext<Translations>({});
 
 export const useTranslationProvider = () => useContext(context);
 
