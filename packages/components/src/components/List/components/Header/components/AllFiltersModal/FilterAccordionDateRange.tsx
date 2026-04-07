@@ -1,7 +1,7 @@
 import React, { type FC } from "react";
 import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import RangeCalendarView from "@/views/RangeCalendarView";
 import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";

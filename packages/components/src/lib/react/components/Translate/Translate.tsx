@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { LocalizedStrings } from "react-aria";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 interface Props {
   locales: LocalizedStrings;

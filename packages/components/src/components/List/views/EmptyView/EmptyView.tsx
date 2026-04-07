@@ -5,7 +5,7 @@ import { IconSearch } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import styles from "../../components/Items/Items.module.scss";
 
 export type EmptyViewProps = Record<string, never>;

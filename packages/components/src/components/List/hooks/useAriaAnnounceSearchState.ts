@@ -1,4 +1,4 @@
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import { announce } from "@react-aria/live-announcer";
 import { useDebounceCallback } from "usehooks-ts";

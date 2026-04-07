@@ -1,4 +1,4 @@
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import { useEffect } from "react";
 import type { ActionStateValue } from "@/components/Action/models/ActionState";

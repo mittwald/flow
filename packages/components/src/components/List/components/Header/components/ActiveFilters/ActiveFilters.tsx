@@ -4,7 +4,7 @@ import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { TooltipTrigger } from "@/components/Tooltip";
 import {
   IconClose,

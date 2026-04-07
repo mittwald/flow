@@ -1,12 +1,12 @@
 {
-  "mode.editor": "Exit Preview",
-  "mode.preview": "Preview",
-  "toolbar.bold": "Bold",
-  "toolbar.code": "Code",
-  "toolbar.italic": "Italic",
-  "toolbar.link": "Link",
-  "toolbar.orderedList": "Ordered List",
-  "toolbar.quote": "Quote",
-  "toolbar.strikeThrough": "Strike through",
-  "toolbar.unorderedList": "List"
+  "markdownEditor.mode.editor": "Exit Preview",
+  "markdownEditor.mode.preview": "Preview",
+  "markdownEditor.toolbar.bold": "Bold",
+  "markdownEditor.toolbar.code": "Code",
+  "markdownEditor.toolbar.italic": "Italic",
+  "markdownEditor.toolbar.link": "Link",
+  "markdownEditor.toolbar.orderedList": "Ordered List",
+  "markdownEditor.toolbar.quote": "Quote",
+  "markdownEditor.toolbar.strikeThrough": "Strike through",
+  "markdownEditor.toolbar.unorderedList": "List"
 }

@@ -4,7 +4,7 @@ import RadioView from "@/views/RadioView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 interface Props {

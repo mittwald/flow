@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useList } from "@/components/List";
 import { IconView } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";

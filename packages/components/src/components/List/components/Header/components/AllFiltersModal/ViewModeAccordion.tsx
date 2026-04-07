@@ -6,7 +6,7 @@ import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 export const ViewModeAccordion: FC = () => {

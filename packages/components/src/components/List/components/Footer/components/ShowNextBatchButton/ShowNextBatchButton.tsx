@@ -3,7 +3,7 @@ import React from "react";
 import type { ButtonProps } from "@/components/Button";
 import { useList } from "@/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import ButtonView from "@/views/ButtonView";
 
 export const ShowNextBatchButton: FC<ButtonProps> = (props) => {

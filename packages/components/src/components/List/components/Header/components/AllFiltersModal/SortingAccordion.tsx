@@ -1,7 +1,7 @@
 import React, { type FC } from "react";
 import AccordionView from "@/views/AccordionView";
 import HeadingView from "@/views/HeadingView";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import ContentView from "@/views/ContentView";
 import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";

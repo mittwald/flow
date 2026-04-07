@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 import locales from "./../../locales/*.locale.json";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
@@ -49,7 +49,11 @@ export const ValidationResultButton: FC<Props> = (props) => {
         className={className}
       />
       <ContextualHelp>
-        <Heading>{translate.format("password.requirements.heading")}</Heading>
+        <Heading>
+          {translate.format(
+            "passwordCreationField.password.requirements.heading",
+          )}
+        </Heading>
         {validationResultComponents.length === 0 && (
           <ValidationResultEntry result={{ isValid: true }} unspecifiedRules />
         )}

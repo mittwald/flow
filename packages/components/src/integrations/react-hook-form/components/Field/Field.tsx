@@ -12,7 +12,7 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";

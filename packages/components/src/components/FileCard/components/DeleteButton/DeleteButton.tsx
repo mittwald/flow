@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import styles from "@/components/FileCard/FileCard.module.scss";
 import { IconClose } from "@/components/Icon/components/icons";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 interface Props {
   onDelete: () => void;

@@ -1,6 +1,6 @@
 {
-  "unsavedChangesConfirmationModal.close": "Schließen",
-  "unsavedChangesConfirmationModal.heading": "Ungespeicherte Änderungen",
-  "unsavedChangesConfirmationModal.keepOpen": "Weiter bearbeiten",
-  "unsavedChangesConfirmationModal.text": "Du hast ungespeicherte Änderungen. Möchtest du das Modal wirklich schließen? Alle Änderungen gehen dabei verloren."
+  "modal.unsavedChangesConfirmationModal.close": "Schließen",
+  "modal.unsavedChangesConfirmationModal.heading": "Ungespeicherte Änderungen",
+  "modal.unsavedChangesConfirmationModal.keepOpen": "Weiter bearbeiten",
+  "modal.unsavedChangesConfirmationModal.text": "Du hast ungespeicherte Änderungen. Möchtest du das Modal wirklich schließen? Alle Änderungen gehen dabei verloren."
 }

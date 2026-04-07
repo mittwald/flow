@@ -2,7 +2,7 @@ import { type FC } from "react";
 import MenuItemView from "@/views/MenuItemView";
 import type { ListViewMode } from "@/components/List/model/types";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 interface Props {

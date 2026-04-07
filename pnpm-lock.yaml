@@ -454,6 +454,9 @@ importers:
       copy-to-clipboard:
         specifier: ^3.3.3
         version: 3.3.3
+      country-codes-list:
+        specifier: ^2.0.0
+        version: 2.0.0
       dot-prop:
         specifier: ^10.1.0
         version: 10.1.0
@@ -5523,6 +5526,9 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  country-codes-list@2.0.0:
+    resolution: {integrity: sha512-KZqq/LBdCD76hQCa6nOx0bA/nIjYly1OtV8+Bbt/4SW+mJEqGk7oZHjUj7PRrV0gXJJKs6Tv2cIntFdofBByvA==}
 
   create-ecdh@4.0.4:
     resolution: {integrity: sha512-mf+TCx8wWc9VpuxfP2ht0iSISLZnt0JgWlrOKZiNqyUZWnjIaCIVNQArMHnCZKfEYRg6IM7A+NeJoN8gf/Ws0A==}
@@ -16089,6 +16095,8 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.3
+
+  country-codes-list@2.0.0: {}
 
   create-ecdh@4.0.4:
     dependencies:

@@ -15,7 +15,7 @@ const meta: Meta = {
         <TranslationProvider
           translations={{
             "de-DE": {
-              "validation.charPool.special.min.short":
+              "passwordCreationField.validation.charPool.special.min.short":
                 "Overwritten Translation YAY!",
             },
           }}
@@ -42,6 +42,7 @@ export const WithAdditionalLocale: Story = {
           translations={{
             "fr-FR": {
               "textField.characters": "France YAY!",
+              "label.optional": "(Baguette)",
             },
           }}
         >

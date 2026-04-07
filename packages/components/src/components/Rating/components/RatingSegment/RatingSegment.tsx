@@ -3,7 +3,7 @@ import clsx from "clsx";
 import styles from "@/components/Rating/Rating.module.scss";
 import * as Aria from "react-aria-components";
 import type { RatingProps } from "@/components/Rating";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import { RatingStar } from "@/components/Rating/components/RatingSegment/RatingStar";
 import { RatingStarFilled } from "@/components/Rating/components/RatingSegment/RatingStarFilled";

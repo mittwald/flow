@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { Button, type ButtonProps } from "@/components/Button";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
 import styles from "../MarkdownEditor.module.scss";
@@ -27,7 +27,7 @@ export const ModeButton: FC<ModeButtonProps> = (props) => {
       }}
       {...rest}
     >
-      {stringFormatter.format(`mode.${otherMode}`)}
+      {stringFormatter.format(`markdownEditor.mode.${otherMode}`)}
     </Button>
   );
 };

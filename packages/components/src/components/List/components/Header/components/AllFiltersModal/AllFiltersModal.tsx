@@ -3,7 +3,7 @@ import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import { useList } from "@/components/List";
 import styles from "@/components/List/components/Header/Header.module.css";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import ContentView from "@/views/ContentView";
 import SectionView from "@/views/SectionView";

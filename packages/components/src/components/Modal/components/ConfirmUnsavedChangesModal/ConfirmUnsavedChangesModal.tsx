@@ -1,7 +1,7 @@
 import ContentView from "@/views/ContentView";
 import HeadingView from "@/views/HeadingView";
 import type { FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import Modal from "@/components/Modal/Modal";
 import TextView from "@/views/TextView";
@@ -21,11 +21,15 @@ export const ConfirmUnsavedChangesModal: FC = () => {
     return (
       <Modal controller={controller}>
         <HeadingView>
-          {stringFormatter.format("unsavedChangesConfirmationModal.heading")}
+          {stringFormatter.format(
+            "modal.unsavedChangesConfirmationModal.heading",
+          )}
         </HeadingView>
         <ContentView>
           <TextView>
-            {stringFormatter.format("unsavedChangesConfirmationModal.text")}
+            {stringFormatter.format(
+              "modal.unsavedChangesConfirmationModal.text",
+            )}
           </TextView>
         </ContentView>
         <ActionGroupView>
@@ -33,14 +37,14 @@ export const ConfirmUnsavedChangesModal: FC = () => {
             <Action onAction={confirm}>
               <ButtonView color="danger">
                 {stringFormatter.format(
-                  "unsavedChangesConfirmationModal.close",
+                  "modal.unsavedChangesConfirmationModal.close",
                 )}
               </ButtonView>
             </Action>
             <Action onAction={cancel}>
               <ButtonView color="secondary" variant="soft">
                 {stringFormatter.format(
-                  "unsavedChangesConfirmationModal.keepOpen",
+                  "modal.unsavedChangesConfirmationModal.keepOpen",
                 )}
               </ButtonView>
             </Action>

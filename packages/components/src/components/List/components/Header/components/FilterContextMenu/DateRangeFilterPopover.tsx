@@ -3,7 +3,7 @@ import ButtonView from "@/views/ButtonView";
 import headerStyles from "@/components/List/components/Header/Header.module.css";
 import TextView from "@/views/TextView";
 import { IconFilter } from "@/components/Icon/components/icons";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import { Popover, PopoverTrigger } from "@/components/Popover";
 import styles from "./FilterContextMenus.module.scss";

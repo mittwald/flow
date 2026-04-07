@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./../../locales/*.locale.json";
 import { Button } from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
@@ -21,7 +21,7 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
         variant="plain"
         color="dark"
       >
-        {translate.format("button.generate")}
+        {translate.format("passwordCreationField.button.generate")}
       </Button>
     </Action>
   );

@@ -3,7 +3,7 @@ import type { TextProps } from "@/components/Text";
 import SkeletonView from "@/views/SkeletonView";
 import TextView from "@/views/TextView";
 import type { FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 export const PaginationInfos: FC<TextProps> = (props) => {

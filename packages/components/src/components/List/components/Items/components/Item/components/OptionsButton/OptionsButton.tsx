@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import locales from "../../../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
