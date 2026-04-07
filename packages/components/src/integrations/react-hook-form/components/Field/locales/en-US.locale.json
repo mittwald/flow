@@ -1,8 +1,8 @@
 {
-  "max": "Maximum number of {number} reached",
-  "maxLength": "Please enter at most {number} characters",
-  "min": "Minimum number of {number} has not yet been reached",
-  "minLength": "Please enter at least {number} characters",
-  "pattern": "Does not match the expected format: {pattern}",
-  "required": "This field is required"
+  "rhf.field.validation.max": "Maximum number of {number} reached",
+  "rhf.field.validation.maxLength": "Please enter at most {number} characters",
+  "rhf.field.validation.min": "Minimum number of {number} has not yet been reached",
+  "rhf.field.validation.minLength": "Please enter at least {number} characters",
+  "rhf.field.validation.pattern": "Does not match the expected format: {pattern}",
+  "rhf.field.validation.required": "This field is required"
 }

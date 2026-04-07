@@ -33,7 +33,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.min === "number"
           ? {
               value: rest.rules.min,
-              message: stringFormatter.format("min", {
+              message: stringFormatter.format("rhf.field.validation.min", {
                 number: rest.rules.min,
               }),
             }
@@ -42,20 +42,20 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.max === "number"
           ? {
               value: rest.rules.max,
-              message: stringFormatter.format("max", {
+              message: stringFormatter.format("rhf.field.validation.max", {
                 number: rest.rules.max,
               }),
             }
           : rest.rules?.max,
       required:
         typeof rest.rules?.required === "boolean"
-          ? stringFormatter.format("required")
+          ? stringFormatter.format("rhf.field.validation.required")
           : rest.rules?.required,
       pattern:
         rest.rules?.pattern instanceof RegExp
           ? {
               value: rest.rules.pattern,
-              message: stringFormatter.format("pattern", {
+              message: stringFormatter.format("rhf.field.validation.pattern", {
                 pattern: rest.rules.pattern.source,
               }),
             }
@@ -64,18 +64,24 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.minLength === "number"
           ? {
               value: rest.rules.minLength,
-              message: stringFormatter.format("minLength", {
-                number: rest.rules.minLength,
-              }),
+              message: stringFormatter.format(
+                "rhf.field.validation.minLength",
+                {
+                  number: rest.rules.minLength,
+                },
+              ),
             }
           : rest.rules?.minLength,
       maxLength:
         typeof rest.rules?.maxLength === "number"
           ? {
               value: rest.rules.maxLength,
-              message: stringFormatter.format("maxLength", {
-                number: rest.rules.maxLength,
-              }),
+              message: stringFormatter.format(
+                "rhf.field.validation.maxLength",
+                {
+                  number: rest.rules.maxLength,
+                },
+              ),
             }
           : rest.rules?.maxLength,
     },
