@@ -19,9 +19,13 @@ import { useEffect } from "react";
 import { ListSettingsStore } from "./ListSettingsStore";
 import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
+import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
 export class List<T = unknown, TMeta = unknown> {
-  public readonly filters: Filter<T, never, never>[];
+  public readonly filters: (
+    | Filter<T, never, never>
+    | DateRangeFilter<T, never>
+  )[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
   public readonly search?: Search<T>;
@@ -71,7 +75,11 @@ export class List<T = unknown, TMeta = unknown> {
         : undefined;
 
     this.items = new ItemCollection(this);
-    this.filters = filters.map((shape) => new Filter(this, shape));
+    this.filters = filters.map((shape) =>
+      shape.mode === "dateRange"
+        ? new DateRangeFilter(this, shape)
+        : new Filter(this, shape),
+    );
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;

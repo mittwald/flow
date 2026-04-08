@@ -23,7 +23,7 @@ import type {
 } from "@/components/List/model/types";
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { Filter } from "./filter/Filter";
 
 export class ReactTable<T, TMeta = unknown> {
@@ -108,12 +108,25 @@ export class ReactTable<T, TMeta = unknown> {
       ...tableOptions,
     });
 
-    useEffect(() => {
+    const reactTableState = table.getState();
+
+    const onFiltersChanged = useEffectEvent(() => {
+      Filter.storeFilters(this.list, { autosave: true });
+    });
+
+    const onStateChanged = useEffectEvent(() => {
       if (onChange) {
         onChange(this.list);
       }
-      Filter.storeFilters(this.list, { autosave: true });
-    }, [this.list, onChange, table]);
+    });
+
+    useEffect(() => {
+      onStateChanged();
+    }, [reactTableState]);
+
+    useEffect(() => {
+      onFiltersChanged();
+    }, [reactTableState.columnFilters]);
 
     return table;
   }

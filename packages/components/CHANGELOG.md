@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.776](https://github.com/mittwald/flow/compare/0.2.0-alpha.775...0.2.0-alpha.776) (2026-04-08)
+
+### Bug Fixes
+
+* **CodeBlock:** set to non-editable ([#2431](https://github.com/mittwald/flow/issues/2431)) ([bf8fd4e](https://github.com/mittwald/flow/commit/bf8fd4ed43fbf9b911354a2aa9525a896dd8a8e7))
+
+# [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
+
+### Bug Fixes
+
+* **List:** fix hidden default sorting not working ([01e3695](https://github.com/mittwald/flow/commit/01e3695717f8f5f3103e5acdef9cdaf9bbf8ab48))
+
+# [0.2.0-alpha.774](https://github.com/mittwald/flow/compare/0.2.0-alpha.773...0.2.0-alpha.774) (2026-04-02)
+
+### Reverts
+
+* Revert "refactor(List): replace grid list with list box (#2420)" ([b4f8171](https://github.com/mittwald/flow/commit/b4f81714add5dd0da76966c483398b3bbd60cb48)), closes [#2420](https://github.com/mittwald/flow/issues/2420)
+
+# [0.2.0-alpha.773](https://github.com/mittwald/flow/compare/0.2.0-alpha.772...0.2.0-alpha.773) (2026-04-01)
+
+### Features
+
+* **ReactHookForm:** add default validation messages ([#2424](https://github.com/mittwald/flow/issues/2424)) ([cdbd8cd](https://github.com/mittwald/flow/commit/cdbd8cdd1604ab3ce54395102b7e748f7b811f5b))
+
+# [0.2.0-alpha.772](https://github.com/mittwald/flow/compare/0.2.0-alpha.771...0.2.0-alpha.772) (2026-04-01)
+
+### Bug Fixes
+
+* **List:** fix initial save of autosaved filters not working ([aeae102](https://github.com/mittwald/flow/commit/aeae102a86f4280623a5527f93d4274c93ce19db))
+
+### Features
+
+* **ImageCropper:** add image cropper component ([9c057b3](https://github.com/mittwald/flow/commit/9c057b320f2c23564758adcc3218f7efdeae7b81))
+
+# [0.2.0-alpha.771](https://github.com/mittwald/flow/compare/0.2.0-alpha.770...0.2.0-alpha.771) (2026-04-01)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.770](https://github.com/mittwald/flow/compare/0.2.0-alpha.769...0.2.0-alpha.770) (2026-04-01)
+
+### Features
+
+* **List:** add range filter ([444f796](https://github.com/mittwald/flow/commit/444f796ba85262061c1e31a6dbad085110889fcd))
+
+### Performance Improvements
+
+* **List:** less calls to update filters ([75ecad3](https://github.com/mittwald/flow/commit/75ecad372c7ecf708d9e93fa0f2447aa1f5c178c))
+
+# [0.2.0-alpha.769](https://github.com/mittwald/flow/compare/0.2.0-alpha.768...0.2.0-alpha.769) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** autosave filters only if column state changes ([308eba8](https://github.com/mittwald/flow/commit/308eba81aaf0100e4dda4cabda6dbc5546a1312d))
+
+# [0.2.0-alpha.768](https://github.com/mittwald/flow/compare/0.2.0-alpha.767...0.2.0-alpha.768) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** fix rerender loop ([bc15c3e](https://github.com/mittwald/flow/commit/bc15c3e48d07ac977bbe4166704029d37b508b64))
+
+# [0.2.0-alpha.767](https://github.com/mittwald/flow/compare/0.2.0-alpha.766...0.2.0-alpha.767) (2026-03-31)
+
+### Bug Fixes
+
+* **List:** do not store filters if not needed ([8c2ac00](https://github.com/mittwald/flow/commit/8c2ac00dcee50a7f4f9a57cc04c6c25885baf02d))
+
+# [0.2.0-alpha.766](https://github.com/mittwald/flow/compare/0.2.0-alpha.765...0.2.0-alpha.766) (2026-03-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.765](https://github.com/mittwald/flow/compare/0.2.0-alpha.764...0.2.0-alpha.765) (2026-03-30)
 
 ### Bug Fixes

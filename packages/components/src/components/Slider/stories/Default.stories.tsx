@@ -26,7 +26,7 @@ export const ReadOnly: Story = {
   args: { isReadOnly: true },
 };
 
-export const WithUnit: Story = {
+export const WithFormatOptions: Story = {
   render: (props) => (
     <Slider
       {...props}

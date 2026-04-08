@@ -42,6 +42,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       <CodeEditor
         {...rest}
         value={code}
+        editable={false}
         copyable={copyable}
         showLineNumbers={showLineNumbers}
         showLinterMarkers={false}
