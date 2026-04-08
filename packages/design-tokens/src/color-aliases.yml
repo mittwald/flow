@@ -127,31 +127,6 @@ unavailable:
     1200:
       value: "{color.gray.1200}"
 
-unavailable:
-  color:
-    100:
-      value: "{color.gray.100}"
-    200:
-      value: "{color.gray.200}"
-    300:
-      value: "{color.gray.300}"
-    400:
-      value: "{color.gray.400}"
-    500:
-      value: "{color.gray.500}"
-    600:
-      value: "{color.gray.600}"
-    700:
-      value: "{color.gray.700}"
-    800:
-      value: "{color.gray.800}"
-    900:
-      value: "{color.gray.900}"
-    1000:
-      value: "{color.gray.1000}"
-    1100:
-      value: "{color.gray.1100}"
-
 danger:
   color:
     100:
@@ -539,7 +514,7 @@ unavailable-outline-background-color:
   pressed:
     value: "{unavailable.color.400}"
 unavailable-outline-content-color:
-  value: "{unavailable.color.900}"
+  value: "{unavailable.color.800}"
 unavailable-outline-border-color:
   value: "{unavailable.color.800}"
 
@@ -552,10 +527,7 @@ unavailable-soft-background-color:
   pressed:
     value: "{unavailable.color.500}"
 unavailable-soft-content-color:
-  default:
-    value: "{unavailable.color.900}"
-  pressed:
-    value: "{unavailable.color.1000}"
+  value: "{unavailable.color.800}"
 
 # Neutral Solid
 neutral-solid-background-color:

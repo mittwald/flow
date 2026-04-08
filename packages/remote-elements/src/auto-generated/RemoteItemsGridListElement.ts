@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ListBoxProps as RemoteItemsListBoxElementProps } from "@mittwald/flow-react-components";
-export type { ListBoxProps as RemoteItemsListBoxElementProps } from "@mittwald/flow-react-components";
+import type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components";
+export type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteItemsListBoxElement extends FlowRemoteElement<RemoteItemsListBoxElementProps> {
+export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGridListElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -20,24 +20,24 @@ export class RemoteItemsListBoxElement extends FlowRemoteElement<RemoteItemsList
       defaultSelectedKeys: {},
       dependencies: {},
       dir: {},
+      disabledBehavior: {},
       disabledKeys: {},
       disallowEmptySelection: {},
+      disallowTypeAhead: {},
       dragAndDropHooks: {},
       escapeKeyBehavior: {},
       hidden: {},
       id: {},
       inert: {},
       items: {},
+      keyboardNavigationBehavior: {},
       lang: {},
       layout: {},
-      orientation: {},
       render: {},
       renderEmptyState: {},
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},
-      shouldFocusOnHover: {},
-      shouldFocusWrap: {},
       shouldSelectOnPressUp: {},
       slot: {},
       tileMaxWidth: {},
@@ -56,15 +56,12 @@ export class RemoteItemsListBoxElement extends FlowRemoteElement<RemoteItemsList
       animationStartCapture: {},
       auxClick: {},
       auxClickCapture: {},
-      blur: {},
       click: {},
       clickCapture: {},
       contextMenu: {},
       contextMenuCapture: {},
       doubleClick: {},
       doubleClickCapture: {},
-      focus: {},
-      focusChange: {},
       gotPointerCapture: {},
       gotPointerCaptureCapture: {},
       lostPointerCapture: {},
@@ -126,8 +123,8 @@ export class RemoteItemsListBoxElement extends FlowRemoteElement<RemoteItemsList
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-items-list-box": InstanceType<typeof RemoteItemsListBoxElement>;
+    "flr-items-grid-list": InstanceType<typeof RemoteItemsGridListElement>;
   }
 }
 
-customElements.define("flr-items-list-box", RemoteItemsListBoxElement);
+customElements.define("flr-items-grid-list", RemoteItemsGridListElement);

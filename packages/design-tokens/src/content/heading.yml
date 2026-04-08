@@ -17,4 +17,4 @@ heading:
   color-danger:
     value: "{danger.color.900}"
   color-unavailable:
-    value: "{unavailable.color.900}"
+    value: "{unavailable.color.800}"

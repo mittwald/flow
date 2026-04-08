@@ -10,4 +10,4 @@ alert-text:
   success-color:
     value: "{success.color.900}"
   unavailable-color:
-    value: "{unavailable.color.900}"
+    value: "{unavailable.color.800}"

@@ -57,8 +57,6 @@ export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItem
       hoverChange: {},
       hoverEnd: {},
       hoverStart: {},
-      keyDown: {},
-      keyUp: {},
       lostPointerCapture: {},
       lostPointerCaptureCapture: {},
       mouseDown: {},
