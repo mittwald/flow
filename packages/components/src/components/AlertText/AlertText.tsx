@@ -27,6 +27,7 @@ export const AlertText = flowComponent("AlertText", (props) => {
       <PropsContextProvider props={{ Icon: { size: "s" } }}>
         <AlertIcon status={status} className={styles.icon} />
       </PropsContextProvider>
+
       <>{children}</>
     </span>
   );
