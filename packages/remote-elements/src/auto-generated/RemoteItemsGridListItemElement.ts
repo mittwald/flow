@@ -1,17 +1,16 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ListBoxItemProps as RemoteItemsListBoxItemElementProps } from "@mittwald/flow-react-components";
-export type { ListBoxItemProps as RemoteItemsListBoxItemElementProps } from "@mittwald/flow-react-components";
+import type { GridListItemProps as RemoteItemsGridListItemElementProps } from "@mittwald/flow-react-components";
+export type { GridListItemProps as RemoteItemsGridListItemElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteItemsListBoxItemElement extends FlowRemoteElement<RemoteItemsListBoxItemElementProps> {
+export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItemsGridListItemElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
 
   static override get remoteProperties() {
     return {
-      "aria-label": {},
       className: {},
       dir: {},
       download: {},
@@ -47,15 +46,12 @@ export class RemoteItemsListBoxItemElement extends FlowRemoteElement<RemoteItems
       animationStartCapture: {},
       auxClick: {},
       auxClickCapture: {},
-      blur: {},
       click: {},
       clickCapture: {},
       contextMenu: {},
       contextMenuCapture: {},
       doubleClick: {},
       doubleClickCapture: {},
-      focus: {},
-      focusChange: {},
       gotPointerCapture: {},
       gotPointerCaptureCapture: {},
       hoverChange: {},
@@ -126,10 +122,13 @@ export class RemoteItemsListBoxItemElement extends FlowRemoteElement<RemoteItems
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-items-list-box-item": InstanceType<
-      typeof RemoteItemsListBoxItemElement
+    "flr-items-grid-list-item": InstanceType<
+      typeof RemoteItemsGridListItemElement
     >;
   }
 }
 
-customElements.define("flr-items-list-box-item", RemoteItemsListBoxItemElement);
+customElements.define(
+  "flr-items-grid-list-item",
+  RemoteItemsGridListItemElement,
+);

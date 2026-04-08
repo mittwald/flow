@@ -2,13 +2,13 @@
 /* This file is auto-generated with the remote-components-generator */
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
-import { RemoteItemsListBoxItemElement } from "@mittwald/flow-remote-elements";
-export { type RemoteItemsListBoxItemElement } from "@mittwald/flow-remote-elements";
+import { RemoteItemsGridListItemElement } from "@mittwald/flow-remote-elements";
+export { type RemoteItemsGridListItemElement } from "@mittwald/flow-remote-elements";
 
-export const ItemsListBoxItem = createFlowRemoteComponent(
-  "flr-items-list-box-item",
-  "ItemsListBoxItem",
-  RemoteItemsListBoxItemElement,
+export const ItemsGridListItem = createFlowRemoteComponent(
+  "flr-items-grid-list-item",
+  "ItemsGridListItem",
+  RemoteItemsGridListItemElement,
   {
     slotProps: {
       wrapper: "flr-slot-root-wrapper",
@@ -25,15 +25,12 @@ export const ItemsListBoxItem = createFlowRemoteComponent(
       onAnimationStartCapture: { event: "animationStartCapture" } as never,
       onAuxClick: { event: "auxClick" } as never,
       onAuxClickCapture: { event: "auxClickCapture" } as never,
-      onBlur: { event: "blur" } as never,
       onClick: { event: "click" } as never,
       onClickCapture: { event: "clickCapture" } as never,
       onContextMenu: { event: "contextMenu" } as never,
       onContextMenuCapture: { event: "contextMenuCapture" } as never,
       onDoubleClick: { event: "doubleClick" } as never,
       onDoubleClickCapture: { event: "doubleClickCapture" } as never,
-      onFocus: { event: "focus" } as never,
-      onFocusChange: { event: "focusChange" } as never,
       onGotPointerCapture: { event: "gotPointerCapture" } as never,
       onGotPointerCaptureCapture: {
         event: "gotPointerCaptureCapture",

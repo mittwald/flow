@@ -33,8 +33,8 @@ alert-badge:
 
   # Unavailable
   unavailable-background-color:
-    value: "{neutral.color.200}"
+    value: "{unavailable-soft-background-color.default}"
   unavailable-content-color:
-    value: "{neutral.color.700}"
+    value: "{unavailable-soft-content-color}"
   unavailable-border-color:
-    value: "{neutral.color.700}"
+    value: "{unavailable-outline-border-color}"

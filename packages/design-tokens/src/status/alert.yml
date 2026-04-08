@@ -42,6 +42,6 @@ alert:
 
   # Unavailable
   unavailable-border-color:
-    value: "{neutral.color.700}"
+    value: "{unavailable-outline-border-color}"
   unavailable-heading-color:
-    value: "{neutral.color.700}"
+    value: "{unavailable-outline-content-color}"

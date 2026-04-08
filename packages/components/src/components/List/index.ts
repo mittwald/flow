@@ -10,8 +10,8 @@ export type { SortingFn } from "@/components/List/model/sorting/types";
 
 export { SortingFunctions } from "./model/sorting/SortingFunctions";
 
-export * from "./components/Items/views/ListBox";
-export * from "./components/Items/views/ListBoxItem";
+export * from "./components/Items/views/GridList";
+export * from "./components/Items/views/GridListItem";
 export * from "./components/ListItemView";
 export * from "./components/ListSummary";
 

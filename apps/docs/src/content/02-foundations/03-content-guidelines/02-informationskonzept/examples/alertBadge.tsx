@@ -12,4 +12,8 @@ import { AlertBadge } from "@mittwald/flow-react-components";
   </AlertBadge>
 
   <AlertBadge status="success">Verifiziert</AlertBadge>
+
+  <AlertBadge status="unavailable">
+    Nicht gefunden
+  </AlertBadge>
 </Row>;

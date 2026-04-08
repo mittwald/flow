@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.777](https://github.com/mittwald/flow/compare/0.2.0-alpha.776...0.2.0-alpha.777) (2026-04-08)
+
+### Features
+
+* improve unavailable status ([#2426](https://github.com/mittwald/flow/issues/2426)) ([d195d50](https://github.com/mittwald/flow/commit/d195d50ee951c84abfddb4b8181357d70ba0672c))
+
+# [0.2.0-alpha.776](https://github.com/mittwald/flow/compare/0.2.0-alpha.775...0.2.0-alpha.776) (2026-04-08)
+
+### Bug Fixes
+
+* **CodeBlock:** set to non-editable ([#2431](https://github.com/mittwald/flow/issues/2431)) ([bf8fd4e](https://github.com/mittwald/flow/commit/bf8fd4ed43fbf9b911354a2aa9525a896dd8a8e7))
+
+# [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
+
+### Bug Fixes
+
+* **List:** fix hidden default sorting not working ([01e3695](https://github.com/mittwald/flow/commit/01e3695717f8f5f3103e5acdef9cdaf9bbf8ab48))
+
+# [0.2.0-alpha.774](https://github.com/mittwald/flow/compare/0.2.0-alpha.773...0.2.0-alpha.774) (2026-04-02)
+
+### Reverts
+
+* Revert "refactor(List): replace grid list with list box (#2420)" ([b4f8171](https://github.com/mittwald/flow/commit/b4f81714add5dd0da76966c483398b3bbd60cb48)), closes [#2420](https://github.com/mittwald/flow/issues/2420)
+
 # [0.2.0-alpha.773](https://github.com/mittwald/flow/compare/0.2.0-alpha.772...0.2.0-alpha.773) (2026-04-01)
 
 ### Features

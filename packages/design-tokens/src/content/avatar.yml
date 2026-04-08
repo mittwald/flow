@@ -17,4 +17,4 @@ avatar:
   success-status-background-color:
     value: "{success.color.200}"
   unavailable-status-background-color:
-    value: "{neutral.color.300}"
+    value: "{unavailable.color.400}"

@@ -2,12 +2,12 @@ alert-text:
   spacing:
     value: "{size-rem.xs}"
   info-color:
-    value: "{info-outline-content-color}"
+    value: "{info.color.900}"
   warning-color:
-    value: "{warning-outline-content-color}"
+    value: "{warning.color.900}"
   danger-color:
-    value: "{danger-outline-content-color}"
+    value: "{danger.color.900}"
   success-color:
-    value: "{success-outline-content-color}"
+    value: "{success.color.900}"
   unavailable-color:
-    value: "{neutral.color.700}"
+    value: "{unavailable.color.900}"

@@ -9,4 +9,7 @@ import { AlertBadge } from "@mittwald/flow-react-components";
     Speicher fast voll
   </AlertBadge>
   <AlertBadge status="danger">Speicher voll</AlertBadge>
+  <AlertBadge status="unavailable">
+    Nicht gefunden
+  </AlertBadge>
 </Row>;
