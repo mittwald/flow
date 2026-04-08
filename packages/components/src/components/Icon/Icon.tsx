@@ -5,15 +5,15 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
-import type { Status } from "@/lib/types/props";
+import type { PropsWithStatus } from "@/lib/types/props";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps
   extends
     PropsWithChildren<Omit<SvgAttributeProps, "name">>,
-    FlowComponentProps {
-  status?: Status | "unavailable";
+    FlowComponentProps,
+    PropsWithStatus {
   /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
 }

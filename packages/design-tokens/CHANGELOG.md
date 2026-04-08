@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.777](https://github.com/mittwald/flow/compare/0.2.0-alpha.776...0.2.0-alpha.777) (2026-04-08)
+
+### Features
+
+* improve unavailable status ([#2426](https://github.com/mittwald/flow/issues/2426)) ([d195d50](https://github.com/mittwald/flow/commit/d195d50ee951c84abfddb4b8181357d70ba0672c))
+
+# [0.2.0-alpha.776](https://github.com/mittwald/flow/compare/0.2.0-alpha.775...0.2.0-alpha.776) (2026-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
 # [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

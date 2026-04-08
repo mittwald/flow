@@ -2,7 +2,6 @@ import type { FC } from "react";
 import React from "react";
 import {
   ColumnLayout,
-  Flex,
   Heading,
   IconExternalLink,
   LayoutCard,
@@ -24,12 +23,10 @@ export const TopContent: FC<Props> = (props) => {
 
   if (!component) {
     return (
-      <LayoutCard className={styles.topContent}>
-        <Flex gap="m" direction="column">
-          <Heading level={1}>{mdxFile.getTitle()}</Heading>
-          {mdxFile.mdxSource.frontmatter.description}
-          <MdxFileView mdxFile={mdxFile.serialize()} />
-        </Flex>
+      <LayoutCard className={styles.mainContent}>
+        <Heading level={1}>{mdxFile.getTitle()}</Heading>
+        {mdxFile.mdxSource.frontmatter.description}
+        <MdxFileView mdxFile={mdxFile.serialize()} />
       </LayoutCard>
     );
   }

@@ -9,7 +9,7 @@ illustrated-message:
   danger-content-color:
     value: "{danger.color.900}"
   unavailable-content-color:
-    value: "{neutral.color.900}"
+    value: "{unavailable.color.900}"
   dark-content-color:
     value: "{dark-plain-content-color}"
   light-content-color:

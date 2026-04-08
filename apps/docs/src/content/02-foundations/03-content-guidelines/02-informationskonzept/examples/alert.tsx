@@ -46,13 +46,24 @@ import {
   </Alert>
 
   <Alert status="success">
-    <Heading>E-Mail-Adresse wurde archiviert</Heading>
+    <Heading>App aktualisiert</Heading>
     <Content>
       <Text>
         Deine App wurde erfolgreich auf die neueste Version
         aktualisiert.
       </Text>
       <Link>Mehr Informationen zur aktuellen Version</Link>
+    </Content>
+  </Alert>
+
+  <Alert status="unavailable">
+    <Heading>Inhalte nicht gefunden</Heading>
+    <Content>
+      <Text>
+        Die gewünschten Inhalte sind leider nicht verfügbar.
+        Entweder wurden sie inzwischen gelöscht oder dir
+        fehlen die notwendigen Berechtigungen.
+      </Text>
     </Content>
   </Alert>
 </Column>;
