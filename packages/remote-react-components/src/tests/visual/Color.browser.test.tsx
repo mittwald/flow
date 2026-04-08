@@ -10,6 +10,7 @@ const colors = [
   "warning",
   "info",
   "success",
+  "unavailable",
 ] as const;
 
 test.each(testEnvironments)(

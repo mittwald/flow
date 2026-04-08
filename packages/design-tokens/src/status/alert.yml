@@ -39,3 +39,9 @@ alert:
     value: "{success-outline-border-color}"
   success-heading-color:
     value: "{success-outline-content-color}"
+
+  # Unavailable
+  unavailable-border-color:
+    value: "{unavailable-outline-border-color}"
+  unavailable-heading-color:
+    value: "{unavailable-outline-content-color}"
