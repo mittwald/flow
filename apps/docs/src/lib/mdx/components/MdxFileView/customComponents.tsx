@@ -49,7 +49,7 @@ export const createCustomComponents = () => {
             isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className
               ? preElementContent.props.className.replace("language-", "")
-              : "javascript"
+              : "jsx"
           }
           code={String(
             isValidElement<{ children: string }>(preElementContent)

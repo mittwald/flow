@@ -11,6 +11,10 @@
     padding-right: unset;
     order: 2;
 
+    --button-size: calc(var(--line-height--s) + var(--button--padding-s-y) * 2);
+
+    min-height: calc(var(--form-control--padding-y) * 2 + var(--button-size));
+
     .copyButton {
       position: absolute;
       inset-block-start: var(--form-control--padding-y);
