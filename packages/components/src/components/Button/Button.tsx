@@ -12,6 +12,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import type { AlphaColor } from "@/lib/types/props";
 
 export interface ButtonProps
   extends
@@ -20,7 +21,7 @@ export interface ButtonProps
   /** Slot for button placement in action groups. */
   slot?: string;
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
+  color?: "primary" | "accent" | "secondary" | "danger" | AlphaColor;
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */
@@ -115,7 +116,7 @@ export const Button = flowComponent("Button", (props) => {
         isPending && styles.isPending,
         isSucceeded && styles.isSucceeded,
         isFailed && styles.isFailed,
-        styles[`size-${size}`],
+        size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
         className,

@@ -61,7 +61,7 @@
 
   /* Colors */
 
-  @mixin variant($color) {
+  @mixin color($color) {
     &:where(.#{$color}) {
       .breadcrumbItem {
         color: var(--breadcrumb--color-#{$color}--default);
@@ -81,7 +81,9 @@
     }
   }
 
-  @include variant(primary);
-  @include variant(dark);
-  @include variant(light);
+  @include color(primary);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }

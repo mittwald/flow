@@ -1,0 +1,19 @@
+image-cropper:
+  spacing:
+    value: "{size-px.s}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  border-style:
+    value: "{border-style.default}"
+  border-width:
+    value: "{border-width.100}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  grid-width:
+    value: "0.5px"
+  grid-color:
+    value: "{light.color.400}"
+  mask-border-color:
+    value: "{light.color.800}"
+  mask-color:
+    value: "{dark.color.600}"

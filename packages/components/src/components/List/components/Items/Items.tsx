@@ -10,7 +10,7 @@ import { FallbackItems } from "./components/FallbackItems";
 
 export const Items: FC = () => {
   const list = useList();
-  const tiles = list.viewMode === "tiles";
+  const tiles = list.viewMode.isTiles;
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 
@@ -34,7 +34,7 @@ export const Items: FC = () => {
         className={rootClassName}
         {...list.componentProps}
         renderEmptyState={() => <EmptyView />}
-        layout={list.viewMode === "tiles" ? "grid" : "stack"}
+        layout={tiles ? "grid" : "stack"}
         tileMaxWidth={list.itemView.tileMaxWidth}
       >
         {items.length === 0 && isInitiallyLoading ? <FallbackItems /> : items}

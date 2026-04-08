@@ -2,8 +2,8 @@ import type { PropsWithChildren } from "react";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Popover } from "@/components/Popover/Popover";
-import { RangeCalendar } from "../Calendar/RangeCalendar";
+import { Popover } from "@/components/Popover";
+import { RangeCalendar } from "@/components/Calendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { useOverlayController } from "@/lib/controller";
 import {
@@ -11,6 +11,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "./DateRangePicker.module.scss";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
@@ -55,7 +56,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
           isDialogContent
           controller={popoverController}
         >
-          <RangeCalendar />
+          <RangeCalendar className={styles.calendar} />
         </Popover>
       </FieldErrorCaptureContext>
       <FieldErrorView />

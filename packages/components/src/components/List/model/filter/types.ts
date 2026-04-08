@@ -4,8 +4,10 @@ import type {
   PropertyValueRenderMethod,
 } from "@/components/List/model/types";
 import type { ItemType } from "@/lib/types/array";
+import type { RangeCalendarProps } from "@/components/Calendar";
+import type { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
-export type FilterMode = "all" | "some" | "one";
+export type FilterMode = "all" | "some" | "one" | "dateRange";
 
 export type FilterMatcher<T, P, TMatcherValue> = (
   filterBy: NonNullable<ItemType<TMatcherValue>>,
@@ -20,15 +22,16 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   values?: readonly TMatcherValue[];
   name?: string;
   defaultSelected?: readonly NonNullable<TMatcherValue>[];
-  /**
-   * If provided, the filter will be initialized with these values instead of
-   * the defaultSelected and restored selections from any provided settings
-   * storage. It behaves like an initial user initiated selection.
-   */
-  initialSelected?: readonly NonNullable<TMatcherValue>[];
   onChange?: FilterUpdatedCallback;
   priority?: "primary" | "secondary";
   autosave?: boolean;
+  manualSave?: boolean;
+  dateRangeOptions?: RangeCalendarProps;
 }
 
 export type FilterUpdatedCallback = (values: unknown[]) => unknown;
+
+export type AnyDateRangeFilter =
+  | DateRangeFilter
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | DateRangeFilter<any, any>;

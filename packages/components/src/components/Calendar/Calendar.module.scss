@@ -1,7 +1,7 @@
 @use "@/styles/mixins/focus";
 
 .calendar {
-  padding: var(--popover--padding--m);
+  width: fit-content;
 
   header {
     display: flex;

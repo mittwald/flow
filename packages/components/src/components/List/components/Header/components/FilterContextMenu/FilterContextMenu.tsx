@@ -9,7 +9,7 @@ import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
 interface Props {
-  filter: Filter<never, never, never>;
+  filter: Filter;
 }
 
 export const FilterContextMenu: FC<Props> = (props) => {
