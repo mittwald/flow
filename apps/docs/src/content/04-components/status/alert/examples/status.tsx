@@ -42,4 +42,13 @@ import {
       aktualisiert.
     </Content>
   </Alert>
+
+  <Alert status="unavailable">
+    <Heading>Inhalte nicht gefunden</Heading>
+    <Content>
+      Die gewünschten Inhalte sind leider nicht verfügbar.
+      Entweder wurden sie inzwischen gelöscht oder dir
+      fehlen die notwendigen Berechtigungen.
+    </Content>
+  </Alert>
 </Row>;
