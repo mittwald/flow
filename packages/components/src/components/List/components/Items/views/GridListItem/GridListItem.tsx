@@ -3,16 +3,16 @@ import type { FC } from "react";
 import styles from "@/components/List/components/Items/components/Item/Item.module.scss";
 import clsx from "clsx";
 
-export type ListBoxItemProps = Aria.ListBoxItemProps<never> & {
+export type GridListItemProps = Aria.GridListItemProps<never> & {
   hasAction?: boolean;
   isTile?: boolean;
 };
 
 /** @flr-generate all */
-export const ListBoxItem: FC<ListBoxItemProps> = (props) => {
+export const GridListItem: FC<GridListItemProps> = (props) => {
   const { hasAction, isTile, ...restProps } = props;
   return (
-    <Aria.ListBoxItem
+    <Aria.GridListItem
       {...restProps}
       className={(renderProps) =>
         clsx(
@@ -26,4 +26,4 @@ export const ListBoxItem: FC<ListBoxItemProps> = (props) => {
   );
 };
 
-export default ListBoxItem;
+export default GridListItem;
