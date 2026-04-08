@@ -11,6 +11,8 @@ accent-box:
     value: "{color.soft-contrast-violet.200}"
   background-color-green:
     value: "{color.espelkamp-green.200}"
+  background-color-navy:
+    value: "{color.mittwald-navy.200}"
   background-color-gradient:
     value: "{color.gradient}"
 

@@ -33,6 +33,7 @@ const meta: Meta<typeof AccentBox> = {
         "teal",
         "lilac",
         "green",
+        "navy",
         "gradient",
       ],
     },
@@ -69,14 +70,14 @@ export const BackgroundImage: Story = {
 
 export const WithLink: Story = {
   render: (props) => (
-    <AccentBox {...props}>
-      <Link>
+    <Link>
+      <AccentBox {...props}>
         <Section>
           <Heading>Heading</Heading>
           <Text>{dummyText.medium}</Text>
         </Section>
-      </Link>
-    </AccentBox>
+      </AccentBox>
+    </Link>
   ),
 };
 
@@ -91,5 +92,21 @@ export const InLayoutCard: Story = {
         </Section>
       </AccentBox>
     </LayoutCard>
+  ),
+};
+
+export const InLayoutCardWithLink: Story = {
+  render: (props) => (
+    <Link>
+      <LayoutCard>
+        <AccentBox {...props}>
+          <Section>
+            <Heading>Heading</Heading>
+            <Text>{dummyText.long}</Text>
+            <Link>Link</Link>
+          </Section>
+        </AccentBox>
+      </LayoutCard>
+    </Link>
   ),
 };

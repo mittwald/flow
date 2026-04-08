@@ -19,6 +19,7 @@ const accentBoxBackgroundColors = [
   "teal",
   "lilac",
   "green",
+  "navy",
   "gradient",
 ] as const;
 

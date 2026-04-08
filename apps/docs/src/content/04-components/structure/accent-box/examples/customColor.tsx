@@ -1,17 +1,12 @@
 import {
   AccentBox,
   Heading,
-  Icon,
   Link,
   Section,
   Text,
 } from "@mittwald/flow-react-components";
-import { IconLeaf } from "@tabler/icons-react";
 
-<AccentBox>
-  <Icon>
-    <IconLeaf />
-  </Icon>
+<AccentBox backgroundColor="#d8f5d6" color="dark-static">
   <Section>
     <Heading>Tipps & Tricks für mehr Klimaschutz</Heading>
     <Text>
