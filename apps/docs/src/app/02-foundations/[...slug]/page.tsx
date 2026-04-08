@@ -1,7 +1,6 @@
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
-import MainContent from "@/app/_components/layout/MainContent";
 import type { Metadata } from "next";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import React from "react";
@@ -30,13 +29,7 @@ export default async function Page(props: Props) {
     "index",
   );
 
-  const overviewMdxFile = await MdxFileFactory.fromParams(
-    contentFolder,
-    params,
-    "overview",
-  );
-
-  const path = `/02-foundations/${overviewMdxFile?.slugs[0]}/${overviewMdxFile?.slugs[1]}`;
+  const path = `/02-foundations/${indexMdxFile?.slugs[0]}/${indexMdxFile?.slugs[1]}`;
 
   if (!indexMdxFile) {
     throw new Error("Could not find index.mdx");
@@ -44,18 +37,15 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <TopContent mdxFile={indexMdxFile} />
-      {overviewMdxFile && (
-        <Flex columnGap="m">
-          <MainContent mdxFile={overviewMdxFile} />
+      <Flex columnGap="m">
+        <TopContent mdxFile={indexMdxFile} />
 
-          <AnchorNavigation
-            currentPath={`${path}`}
-            anchors={overviewMdxFile.anchors}
-            title={indexMdxFile.getTitle()}
-          />
-        </Flex>
-      )}
+        <AnchorNavigation
+          currentPath={`${path}`}
+          anchors={indexMdxFile.anchors}
+          title={indexMdxFile.getTitle()}
+        />
+      </Flex>
     </>
   );
 }
