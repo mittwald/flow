@@ -41,6 +41,7 @@ export interface ChartTooltipProps
       "wrapperClassName" | "allowEscapeViewBox"
     >,
     WithTooltipFormatters {
+  /** Show progress bar for stacked areas @default "true" */
   showProgressBar?: boolean;
 }
 

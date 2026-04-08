@@ -8,7 +8,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBarValue";
 import { ProgressBarBar } from "@/components/ProgressBar/components/ProgressBarBar";
 import { ProgressBarLegend } from "@/components/ProgressBar/components/ProgressBarLegend";
-import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import {
   flowComponent,
   type FlowComponentProps,
@@ -27,7 +27,7 @@ export interface ProgressBarProps
   segments?: {
     value: number;
     title: string;
-    color?: CategoricalColor | string;
+    color?: CategoricalWithCustomColor;
     valueText?: string;
   }[];
   /**
