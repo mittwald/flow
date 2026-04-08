@@ -11,7 +11,7 @@ export interface AlertBadgeProps
   extends
     PropsWithChildren,
     PropsWithStatus,
-    FlowComponentProps<HTMLDivElement>,
+    FlowComponentProps,
     PropsWithClassName {}
 
 /** @flr-generate all */

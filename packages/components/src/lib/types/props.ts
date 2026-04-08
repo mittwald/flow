@@ -1,6 +1,14 @@
 import type { ExoticComponent, HTMLAttributes } from "react";
 
-export type Status = "info" | "success" | "warning" | "danger";
+export const statusTypes = [
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "unavailable",
+] as const;
+
+export type Status = (typeof statusTypes)[number];
 
 export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
   /** The elements status */
