@@ -18,7 +18,7 @@ export interface ProgressBarProps
   extends
     PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
     FlowComponentProps {
-  status?: Omit<Status, "unavailable">;
+  status?: Exclude<Status, "unavailable">;
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
   /** The size variant of the progress bar. @default "m" */

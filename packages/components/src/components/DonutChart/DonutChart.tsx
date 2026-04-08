@@ -20,7 +20,7 @@ export interface DonutChartProps
   extends
     Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
     PropsWithChildren {
-  status?: Omit<Status, "unavailable">;
+  status?: Exclude<Status, "unavailable">;
   /** The size variant of the donut chart. @default "m" */
   size?: "m" | "l";
   /** Divides the fill of the donut chart into segments */
