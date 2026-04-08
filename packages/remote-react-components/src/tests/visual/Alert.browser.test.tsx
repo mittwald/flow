@@ -1,8 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
-
-const states = ["info", "success", "warning", "danger", "unavailable"] as const;
 
 test.each(testEnvironments)(
   "Alert states (%s)",
@@ -13,7 +12,7 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        {states.map((status) => (
+        {statusTypes.map((status) => (
           <Alert status={status} key={status}>
             <Heading>{firstLetterToUppercase(status)}</Heading>
             <Content>Content</Content>

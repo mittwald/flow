@@ -1,8 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 
 const sizes = ["s", "m", "l"] as const;
-const states = ["info", "success", "warning", "danger"] as const;
 
 test.each(testEnvironments)(
   "Icon (%s)",
@@ -15,7 +15,7 @@ test.each(testEnvironments)(
           ))}
         </Flex>
         <Flex gap="s">
-          {states.map((status) => (
+          {statusTypes.map((status) => (
             <IconStar status={status} key={status} />
           ))}
         </Flex>
