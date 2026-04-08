@@ -12,12 +12,13 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import type { Status } from "@/lib/types/props";
 
 export interface ProgressBarProps
   extends
     PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
     FlowComponentProps {
-  status?: "info" | "success" | "warning" | "danger";
+  status?: Omit<Status, "unavailable">;
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
   /** The size variant of the progress bar. @default "m" */

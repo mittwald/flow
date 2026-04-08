@@ -7,6 +7,7 @@ import { DonutChartValue } from "@/components/DonutChart/components/DonutChartVa
 import { Donut } from "@/components/DonutChart/components/Donut";
 import { Wrap } from "@/components/Wrap";
 import { DonutChartLegend } from "@/components/DonutChart/components/DonutChartLegend";
+import type { Status } from "@/lib/types/props";
 
 export interface DonutChartSegment {
   value: number;
@@ -19,7 +20,7 @@ export interface DonutChartProps
   extends
     Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
     PropsWithChildren {
-  status?: "info" | "success" | "warning" | "danger";
+  status?: Omit<Status, "unavailable">;
   /** The size variant of the donut chart. @default "m" */
   size?: "m" | "l";
   /** Divides the fill of the donut chart into segments */
