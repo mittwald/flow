@@ -14,6 +14,7 @@ export class RemoteChartTooltipElement extends FlowRemoteElement<RemoteChartTool
       allowEscapeViewBox: {},
       formatter: {},
       headingFormatter: {},
+      showProgressBar: {},
       wrapperClassName: {},
     };
   }

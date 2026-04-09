@@ -37,15 +37,17 @@ export default () => {
       <Heading>Speicherplatz</Heading>
       <CartesianChart data={data} height="300px">
         <CartesianGrid />
-        <Area dataKey="Datenbanken" />
-        <Area dataKey="Webspace" color="palatinate-blue" />
-        <Area dataKey="Email" color="tangerine" />
+        <Area dataKey="Datenbanken" unit="%" />
+        <Area
+          dataKey="Webspace"
+          color="palatinate-blue"
+          unit="%"
+        />
+        <Area dataKey="Email" color="tangerine" unit="%" />
         <XAxis dataKey="Datum" />
         <YAxis domain={[0, 100]} unit=" %" />
         <ChartLegend />
-        <ChartTooltip
-          formatter={(v, k) => `${k}: ${v} %`}
-        />
+        <ChartTooltip />
       </CartesianChart>
     </Section>
   );
