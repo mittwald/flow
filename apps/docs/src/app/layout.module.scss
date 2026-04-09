@@ -132,10 +132,6 @@
   }
 }
 
-:global(.cm-line:last-child):has(br:only-child) {
-  display: none;
-}
-
 @media (max-width: 1400px) {
   .mainNavigation,
   .mainNavigation,

@@ -55,7 +55,7 @@ export const createCustomComponents = () => {
             isValidElement<{ children: string }>(preElementContent)
               ? preElementContent.props.children
               : preElementContent,
-          )}
+          ).trim()}
         />
       );
     },
