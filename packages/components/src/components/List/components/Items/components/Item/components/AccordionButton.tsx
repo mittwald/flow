@@ -16,7 +16,7 @@ interface Props extends PropsWithChildren {
 
 export const AccordionButton: FC<Props> = (props) => {
   const { isExpanded, toggle, children, contentElementId } = props;
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <>
@@ -27,7 +27,7 @@ export const AccordionButton: FC<Props> = (props) => {
         color="secondary"
         onPress={toggle}
         aria-label={stringFormatter.format(
-          "list.toggleExpandButton." + (isExpanded ? "collapse" : "expand"),
+          "toggleExpandButton." + (isExpanded ? "collapse" : "expand"),
         )}
         aria-controls={contentElementId}
         aria-expanded={isExpanded}

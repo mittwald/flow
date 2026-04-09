@@ -1,33 +1,38 @@
 import type { FC, PropsWithChildren } from "react";
-import React, { createContext, useContext, useMemo } from "react";
-import { pickBy } from "remeda";
+import React, { createContext, useContext } from "react";
+import type {
+  LocalizedComponentName,
+  TranslationFunction,
+} from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import type { Variables } from "@internationalized/string";
 
-type LocaleDictionary = Record<string, string>;
+type ComponentTranslationDictionary = Record<
+  LocalizedComponentName,
+  Record<string, string | ((variables: Variables) => string)>
+>;
 
 export interface Translations {
-  [locale: string]: LocaleDictionary | undefined;
-  "de-DE"?: LocaleDictionary;
-  "en-US"?: LocaleDictionary;
+  [locale: string]: ComponentTranslationDictionary | undefined;
+  "de-DE"?: ComponentTranslationDictionary;
+  "en-US"?: ComponentTranslationDictionary;
 }
 
-type Props = PropsWithChildren & {
-  translations: Translations;
-};
+export interface TranslationContext {
+  translations?: Translations;
+  translate?: TranslationFunction;
+}
 
-const context = createContext<Translations>({});
+type Props = PropsWithChildren & TranslationContext;
+
+const context = createContext<TranslationContext>({});
 
 export const useTranslationProvider = () => useContext(context);
 
 export const TranslationProvider: FC<Props> = (props) => {
-  const { children, translations } = props;
+  const { children, translations, translate } = props;
 
   return (
-    <context.Provider
-      value={useMemo(
-        () => pickBy(translations, (value) => value !== undefined),
-        [translations],
-      )}
-    >
+    <context.Provider value={{ translations, translate }}>
       {children}
     </context.Provider>
   );

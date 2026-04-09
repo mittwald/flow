@@ -15,7 +15,7 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
 
   const currentValue = filter.getValue();
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <Flex direction="column" gap="m">
@@ -33,7 +33,7 @@ export const FilterAccordionDateRange: FC<Props> = (props) => {
           variant="soft"
           onPress={() => filter.clear()}
         >
-          {stringFormatter.format("list.filters.clearSelection")}
+          {stringFormatter.format("filters.clearSelection")}
         </ButtonView>
       )}
     </Flex>

@@ -14,7 +14,7 @@ export const useAriaAnnounceActionState = (
   actionState: ActionStateValue,
   options: Options = {},
 ): void => {
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "AriaAnnounce");
 
   const {
     isPendingText = formatter.format("action.isPending"),
@@ -34,7 +34,7 @@ export const useAriaAnnounceActionState = (
 };
 
 export const useAriaAnnounceSuspense = () => {
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "AriaAnnounce");
 
   useEffect(() => {
     const timeout = setTimeout(() => {

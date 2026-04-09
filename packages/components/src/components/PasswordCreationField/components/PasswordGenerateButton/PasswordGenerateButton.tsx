@@ -11,7 +11,10 @@ interface Props {
 
 export const PasswordGenerateButton: FC<Props> = (props) => {
   const { isDisabled, onGeneratePasswordAction } = props;
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   return (
     <Action onAction={onGeneratePasswordAction} showFeedback={false}>
@@ -21,7 +24,7 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
         variant="plain"
         color="dark"
       >
-        {translate.format("passwordCreationField.button.generate")}
+        {translate.format("button.generate")}
       </Button>
     </Action>
   );

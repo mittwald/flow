@@ -20,7 +20,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
 
   const { name, property } = filter;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const controller = useOverlayController("Popover");
 
@@ -37,7 +37,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
       <Popover
         placement="bottom end"
         isDialogContent
-        aria-label={stringFormatter.format("list.dateRange")}
+        aria-label={stringFormatter.format("dateRange")}
       >
         <RangeCalendarView
           {...filter.dateRangeOptions}

@@ -1,12 +1,12 @@
 {
-  "markdownEditor.mode.editor": "Vorschau beenden",
-  "markdownEditor.mode.preview": "Vorschau",
-  "markdownEditor.toolbar.bold": "Fett",
-  "markdownEditor.toolbar.code": "Code",
-  "markdownEditor.toolbar.italic": "Kursiv",
-  "markdownEditor.toolbar.link": "Link",
-  "markdownEditor.toolbar.orderedList": "Sortierte Liste",
-  "markdownEditor.toolbar.quote": "Zitat",
-  "markdownEditor.toolbar.strikeThrough": "Durchgestrichen",
-  "markdownEditor.toolbar.unorderedList": "Liste"
+  "mode.editor": "Vorschau beenden",
+  "mode.preview": "Vorschau",
+  "toolbar.bold": "Fett",
+  "toolbar.code": "Code",
+  "toolbar.italic": "Kursiv",
+  "toolbar.link": "Link",
+  "toolbar.orderedList": "Sortierte Liste",
+  "toolbar.quote": "Zitat",
+  "toolbar.strikeThrough": "Durchgestrichen",
+  "toolbar.unorderedList": "Liste"
 }

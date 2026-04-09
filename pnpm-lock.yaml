@@ -376,6 +376,9 @@ importers:
       '@codemirror/lint':
         specifier: ^6.9.5
         version: 6.9.5
+      '@internationalized/string':
+        specifier: ^3.2.7
+        version: 3.2.7
       '@internationalized/string-compiler':
         specifier: ^3.2.6
         version: 3.2.6

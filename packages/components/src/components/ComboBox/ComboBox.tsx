@@ -48,7 +48,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     fieldPropsContext,
   } = useFieldComponent(props);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
 
   const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
 
@@ -89,7 +89,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
               <Aria.Input placeholder={placeholder} ref={ref} />
               <Button
                 className={styles.toggle}
-                aria-label={stringFormatter.format("comboBox.showOptions")}
+                aria-label={stringFormatter.format("showOptions")}
                 variant="plain"
                 color="secondary"
               >

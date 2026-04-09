@@ -1,6 +1,6 @@
 {
-  "modal.unsavedChangesConfirmationModal.close": "Close",
-  "modal.unsavedChangesConfirmationModal.heading": "Unsaved changes",
-  "modal.unsavedChangesConfirmationModal.keepOpen": "Keep editing",
-  "modal.unsavedChangesConfirmationModal.text": "You have unsaved changes. Are you sure you want to close the modal? All changes will be lost."
+  "unsavedChangesConfirmationModal.close": "Close",
+  "unsavedChangesConfirmationModal.heading": "Unsaved changes",
+  "unsavedChangesConfirmationModal.keepOpen": "Keep editing",
+  "unsavedChangesConfirmationModal.text": "You have unsaved changes. Are you sure you want to close the modal? All changes will be lost."
 }

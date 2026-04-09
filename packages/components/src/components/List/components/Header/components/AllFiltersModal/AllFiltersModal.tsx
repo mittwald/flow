@@ -21,7 +21,7 @@ import { useAvailableViewModes } from "../../lib";
 
 export const AllFiltersModal: FC = () => {
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const totalItemCount =
@@ -61,7 +61,7 @@ export const AllFiltersModal: FC = () => {
         variant="outline"
         color="secondary"
       >
-        <TextView>{stringFormatter.format("list.filters.all")}</TextView>
+        <TextView>{stringFormatter.format("filters.all")}</TextView>
         <IconFilter />
       </ButtonView>
 
@@ -69,13 +69,13 @@ export const AllFiltersModal: FC = () => {
         className={styles.hideOnDesktop}
         variant="outline"
         color="secondary"
-        aria-label={stringFormatter.format("list.filters.all")}
+        aria-label={stringFormatter.format("filters.all")}
       >
         <IconFilter />
       </ButtonView>
 
       <Modal offCanvas controller={controller}>
-        <HeadingView>{stringFormatter.format("list.filters.all")}</HeadingView>
+        <HeadingView>{stringFormatter.format("filters.all")}</HeadingView>
         <ContentView>
           <SectionView>{...accordions}</SectionView>
         </ContentView>
@@ -86,7 +86,7 @@ export const AllFiltersModal: FC = () => {
               {isInitiallyLoading ? (
                 <SkeletonText width="16ch" />
               ) : (
-                stringFormatter.format("list.results.show", {
+                stringFormatter.format("results.show", {
                   totalItemCount,
                 })
               )}
@@ -100,7 +100,7 @@ export const AllFiltersModal: FC = () => {
               controller.close();
             }}
           >
-            {stringFormatter.format("list.reset")}
+            {stringFormatter.format("reset")}
           </ButtonView>
         </ActionGroupView>
       </Modal>

@@ -13,7 +13,10 @@ export interface ModeButtonProps extends Pick<ButtonProps, "isDisabled"> {
 export const ModeButton: FC<ModeButtonProps> = (props) => {
   const { currentMode, onChange, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "MarkdownEditor",
+  );
   const otherMode = currentMode === "editor" ? "preview" : "editor";
 
   return (
@@ -27,7 +30,7 @@ export const ModeButton: FC<ModeButtonProps> = (props) => {
       }}
       {...rest}
     >
-      {stringFormatter.format(`markdownEditor.mode.${otherMode}`)}
+      {stringFormatter.format(`mode.${otherMode}`)}
     </Button>
   );
 };

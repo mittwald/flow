@@ -38,17 +38,17 @@ export const Kbd = flowComponent("Kbd", (props) => {
     styles[variant],
   );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Kbd");
 
   const joinedKeys = keys?.map((key, index) => {
     let formattedKey = key;
 
     if (key === "mod") {
-      formattedKey = isAppleDevice() ? "⌘" : stringFormatter.format("kbd.mod");
+      formattedKey = isAppleDevice() ? "⌘" : stringFormatter.format("mod");
     }
 
     if (key === "alt") {
-      formattedKey = isAppleDevice() ? "⌥" : stringFormatter.format("kbd.alt");
+      formattedKey = isAppleDevice() ? "⌥" : stringFormatter.format("alt");
     }
 
     if (key === "shift") {

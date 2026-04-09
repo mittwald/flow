@@ -11,7 +11,7 @@ import ButtonView from "@/views/ButtonView";
 import { useModalController } from "@/lib/controller";
 
 export const ConfirmUnsavedChangesModal: FC = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
   const closeConfirmationController =
     useModalController().useConfirmationController();
 
@@ -21,15 +21,11 @@ export const ConfirmUnsavedChangesModal: FC = () => {
     return (
       <Modal controller={controller}>
         <HeadingView>
-          {stringFormatter.format(
-            "modal.unsavedChangesConfirmationModal.heading",
-          )}
+          {stringFormatter.format("unsavedChangesConfirmationModal.heading")}
         </HeadingView>
         <ContentView>
           <TextView>
-            {stringFormatter.format(
-              "modal.unsavedChangesConfirmationModal.text",
-            )}
+            {stringFormatter.format("unsavedChangesConfirmationModal.text")}
           </TextView>
         </ContentView>
         <ActionGroupView>
@@ -37,14 +33,14 @@ export const ConfirmUnsavedChangesModal: FC = () => {
             <Action onAction={confirm}>
               <ButtonView color="danger">
                 {stringFormatter.format(
-                  "modal.unsavedChangesConfirmationModal.close",
+                  "unsavedChangesConfirmationModal.close",
                 )}
               </ButtonView>
             </Action>
             <Action onAction={cancel}>
               <ButtonView color="secondary" variant="soft">
                 {stringFormatter.format(
-                  "modal.unsavedChangesConfirmationModal.keepOpen",
+                  "unsavedChangesConfirmationModal.keepOpen",
                 )}
               </ButtonView>
             </Action>

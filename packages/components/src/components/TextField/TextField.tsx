@@ -74,15 +74,12 @@ export const TextField = flowComponent("TextField", (props) => {
     }
   };
 
-  const translation = useLocalizedStringFormatter(locales);
+  const translation = useLocalizedStringFormatter(locales, "TextField");
 
-  const charactersCountDescription = translation.format(
-    "textField.characters",
-    {
-      count: charactersCount,
-      maxCount: props.maxLength ?? 0,
-    },
-  );
+  const charactersCountDescription = translation.format("characters", {
+    count: charactersCount,
+    maxCount: props.maxLength ?? 0,
+  });
 
   return (
     <Aria.TextField
@@ -113,7 +110,7 @@ export const TextField = flowComponent("TextField", (props) => {
                     setType(type === "password" ? "text" : "password")
                   }
                   aria-label={translation.format(
-                    `textField.password.${type === "password" ? "show" : "hide"}`,
+                    `password.${type === "password" ? "show" : "hide"}`,
                   )}
                 >
                   {type === "password" ? <IconShow /> : <IconHide />}

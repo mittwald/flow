@@ -21,7 +21,10 @@ interface Props extends PropsWithClassName {
 export const ValidationResultButton: FC<Props> = (props) => {
   const { policyValidationResult, isDisabled, isEmptyValue, className } = props;
 
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   let validationResults = policyValidationResult?.ruleResults?.filter((r) => {
     return isEmptyValue ? !r.isValid : true;
@@ -49,11 +52,7 @@ export const ValidationResultButton: FC<Props> = (props) => {
         className={className}
       />
       <ContextualHelp>
-        <Heading>
-          {translate.format(
-            "passwordCreationField.password.requirements.heading",
-          )}
-        </Heading>
+        <Heading>{translate.format("password.requirements.heading")}</Heading>
         {validationResultComponents.length === 0 && (
           <ValidationResultEntry result={{ isValid: true }} unspecifiedRules />
         )}

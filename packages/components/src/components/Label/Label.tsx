@@ -34,7 +34,7 @@ export const Label = flowComponent("Label", (props) => {
     ...rest
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Label");
 
   const rootClassName = unstyled
     ? className
@@ -42,7 +42,7 @@ export const Label = flowComponent("Label", (props) => {
 
   const optionalMarker = (
     <span className={styles.optional}>
-      {stringFormatter.format("label.optional")}
+      {stringFormatter.format("optional")}
     </span>
   );
 

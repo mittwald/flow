@@ -2,7 +2,6 @@ import type { FC } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { TooltipTrigger } from "@/components/Tooltip";
@@ -23,7 +22,7 @@ import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter"
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "List.ActiveFilters");
 
   const activeFilters = list.filters.flatMap((f) => {
     if (f instanceof DateRangeFilter) {
@@ -53,9 +52,7 @@ export const ActiveFilters: FC = observer(() => {
 
   const storeFiltersButton = storingAvailable && hasChanges && (
     <TooltipTriggerView>
-      <TooltipView>
-        <Translate locales={locales}>list.filters.store</Translate>
-      </TooltipView>
+      <TooltipView>{formatter.format("filters.store")}</TooltipView>
       <ButtonView
         size="s"
         variant="plain"
@@ -63,7 +60,7 @@ export const ActiveFilters: FC = observer(() => {
         onPress={() =>
           Filter.storeFilters(list, { autosave: false, manualSave: true })
         }
-        aria-label={formatter.format("list.filters.store")}
+        aria-label={formatter.format("filters.store")}
       >
         <IconSave />
       </ButtonView>
@@ -72,15 +69,13 @@ export const ActiveFilters: FC = observer(() => {
 
   const resetFiltersButton = hasChanges ? (
     <TooltipTrigger>
-      <TooltipView>
-        <Translate locales={locales}>list.filters.reset</Translate>
-      </TooltipView>
+      <TooltipView>{formatter.format("filters.reset")}</TooltipView>
       <ButtonView
         size="s"
         variant="plain"
         color="secondary"
         onPress={() => list.resetFilters()}
-        aria-label={formatter.format("list.filters.reset")}
+        aria-label={formatter.format("filters.reset")}
       >
         <IconUndo />
       </ButtonView>
@@ -90,9 +85,7 @@ export const ActiveFilters: FC = observer(() => {
   const removeAllFiltersButton =
     activeFilters.length > 1 ? (
       <TooltipTrigger>
-        <TooltipView>
-          <Translate locales={locales}>list.filters.clear</Translate>
-        </TooltipView>
+        <TooltipView>{formatter.format("filters.clear")}</TooltipView>
         <ButtonView
           size="s"
           variant="plain"

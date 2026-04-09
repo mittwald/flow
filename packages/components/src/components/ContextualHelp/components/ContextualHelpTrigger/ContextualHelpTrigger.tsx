@@ -15,13 +15,14 @@ export const ContextualHelpTrigger = flowComponent(
   "ContextualHelpTrigger",
   (props) => {
     const { children, ...triggerProps } = props;
-    const stringFormatter = useLocalizedStringFormatter(locales);
+    const stringFormatter = useLocalizedStringFormatter(
+      locales,
+      "ContextualHelpTrigger",
+    );
 
     const propsContext: PropsContext = {
       Button: {
-        "aria-label": stringFormatter.format(
-          "contextualHelpButton.moreInformation",
-        ),
+        "aria-label": stringFormatter.format("moreInformation"),
         children: <IconInfo />,
         size: "s",
         variant: "plain",

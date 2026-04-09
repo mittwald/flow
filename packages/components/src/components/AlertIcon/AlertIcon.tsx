@@ -25,13 +25,13 @@ const icons: Record<Status | "unavailable", ComponentType> = {
 export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
 
   const Icon = icons[status];
 
   const iconProps: IconProps = {
     status,
-    "aria-label": stringFormatter.format(`alertIcon.${status}`),
+    "aria-label": stringFormatter.format(`status.${status}`),
     ...rest,
   };
 

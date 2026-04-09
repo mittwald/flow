@@ -18,11 +18,11 @@ export const RatingSegment: FC<Props> = (props) => {
 
   const value = index + 1;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Rating");
 
   return (
     <Aria.Radio
-      aria-label={stringFormatter.format(`rating.${value}`)}
+      aria-label={stringFormatter.format(`segment.${value}`)}
       value={value.toString()}
       className={clsx(
         styles.ratingSegment,

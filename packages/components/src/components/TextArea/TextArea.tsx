@@ -87,9 +87,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
     }
   };
 
-  const translation = useLocalizedStringFormatter(locales);
+  const translation = useLocalizedStringFormatter(locales, "TextArea");
 
-  const charactersCountDescription = translation.format("textArea.characters", {
+  const charactersCountDescription = translation.format("characters", {
     count: charactersCount,
     maxCount: props.maxLength ?? 0,
   });

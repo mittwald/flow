@@ -59,6 +59,7 @@
     "@codemirror/language": "^6.12.2",
     "@codemirror/lint": "^6.9.5",
     "@internationalized/string-compiler": "^3.2.6",
+    "@internationalized/string": "^3.2.7",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
     "@mittwald/password-tools-js": "3.0.0-alpha.18",

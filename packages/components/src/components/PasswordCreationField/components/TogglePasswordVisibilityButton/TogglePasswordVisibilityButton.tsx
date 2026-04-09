@@ -20,12 +20,14 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
   onPress,
   className,
 }) => {
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   const icon = isVisible ? <IconHide /> : <IconShow />;
   const tooltipText = translate.format(
-    "passwordCreationField.button.generate.tooltip." +
-      (isVisible ? "hide" : "show"),
+    "button.generate.tooltip." + (isVisible ? "hide" : "show"),
   );
 
   return (

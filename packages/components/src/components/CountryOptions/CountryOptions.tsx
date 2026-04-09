@@ -25,24 +25,23 @@ export interface CountryOptionsProps<T = object>
 
 const defaultSortBy: CountrySortFn = (left, right) =>
   left.name.localeCompare(right.name);
-const voidSortBy: CountrySortFn = () => 0;
 const defaultFilterBy: CountryFilterFn = () => true;
 
 export const CountryOptions: FC<CountryOptionsProps> = (props) => {
-  const { filterBy = defaultFilterBy, sortBy = voidSortBy } = props;
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const { filterBy = defaultFilterBy, sortBy = defaultSortBy } = props;
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "CountryOptions",
+  );
 
   return useMemo(() => {
     return all()
       .map((countryData) => ({
         ...countryData,
         code: countryData.countryCode,
-        name: stringFormatter.format(
-          `countryOptions.${countryData.countryCode}`,
-        ),
+        name: stringFormatter.format(`countryCode.${countryData.countryCode}`),
       }))
       .filter(filterBy)
-      .sort(defaultSortBy)
       .sort(sortBy)
       .map((country) => (
         <OptionView
@@ -52,7 +51,7 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
           {country.name}
         </OptionView>
       ));
-  }, [stringFormatter, filterBy, sortBy]);
+  }, [stringFormatter]);
 };
 
 export default CountryOptions;

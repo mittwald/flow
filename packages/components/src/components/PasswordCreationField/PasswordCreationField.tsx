@@ -92,7 +92,10 @@ export const PasswordCreationField = flowComponent(
     } = useFieldComponent(props);
 
     const [isLoading, setIsLoading] = useState(false);
-    const translate = useLocalizedStringFormatter(locales);
+    const translate = useLocalizedStringFormatter(
+      locales,
+      "PasswordCreationField",
+    );
 
     const validationPolicy = useMemo(
       () => Policy.fromDeclaration(validationPolicyFromProps),

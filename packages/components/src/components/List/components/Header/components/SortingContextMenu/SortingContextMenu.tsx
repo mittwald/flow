@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "@/lib/react/components/Translate";
 import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
 import {
@@ -13,9 +12,11 @@ import styles from "@/components/List/components/Header/Header.module.css";
 import { SortingMenuItem } from "@/components/List/components/Header/components/SortingContextMenu/SortingMenuItem";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
 export const SortingContextMenu: FC = () => {
   const list = useList();
+  const formatter = useLocalizedStringFormatter(locales, "List");
 
   const sortingItems = list.visibleSorting.map((s) => (
     <SortingMenuItem sorting={s} key={s.id} />
@@ -32,7 +33,7 @@ export const SortingContextMenu: FC = () => {
       {labelSorting ? (
         <>{labelSorting.name ?? labelSorting.property}</>
       ) : (
-        <Translate locales={locales}>list.sorting</Translate>
+        formatter.format("sorting")
       )}
     </TextView>
   );

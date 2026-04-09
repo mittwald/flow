@@ -49,7 +49,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const rootClassName = clsx(styles.imageCropper, className);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "ImageCropper");
 
   const onCropAreaPixelsChange = useEffectEvent(async () => {
     if (croppedAreaPixels) {
@@ -90,7 +90,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
         value={zoom}
         sliderOnly
         onChange={(zoom) => setZoom(zoom as number)}
-        aria-label={stringFormatter.format("imageCropper.zoom")}
+        aria-label={stringFormatter.format("zoom")}
       />
     </div>
   );

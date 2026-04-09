@@ -15,8 +15,10 @@ const meta: Meta = {
         <TranslationProvider
           translations={{
             "de-DE": {
-              "passwordCreationField.validation.charPool.special.min.short":
-                "Overwritten Translation YAY!",
+              PasswordCreationField: {
+                "validation.charPool.special.min.short":
+                  "Overwritten Translation YAY!",
+              },
             },
           }}
         >
@@ -41,9 +43,32 @@ export const WithAdditionalLocale: Story = {
         <TranslationProvider
           translations={{
             "fr-FR": {
-              "textField.characters": "France YAY!",
-              "label.optional": "(Baguette)",
+              TextField: {
+                characters: (variables) =>
+                  `${variables?.count} Zeichen 🥐 YAY!`,
+              },
+              Label: {
+                optional: "(🥖 Maybe?)",
+              },
             },
+          }}
+        >
+          <TextField showCharacterCount onChange={action("onChange")}>
+            <Label>Password</Label>
+          </TextField>
+        </TranslationProvider>
+      </IntlProvider>
+    );
+  },
+};
+
+export const WithTranslateFunction: Story = {
+  render: () => {
+    return (
+      <IntlProvider locale={"fr-FR"}>
+        <TranslationProvider
+          translate={(key, variables, { component, locale }) => {
+            return `${key}-${JSON.stringify(variables)}-${component}-${locale}`;
           }}
         >
           <TextField showCharacterCount onChange={action("onChange")}>

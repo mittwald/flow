@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren, PropsWithClassName {}
 
 export const OptionsButton: FC<Props> = (props) => {
   const { className, children } = props;
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <ContextMenuTriggerView>
@@ -18,7 +18,7 @@ export const OptionsButton: FC<Props> = (props) => {
         variant="plain"
         color="secondary"
         className={className}
-        aria-label={stringFormatter.format("list.options")}
+        aria-label={stringFormatter.format("options")}
         tunnelId={null}
       >
         <IconContextMenu />

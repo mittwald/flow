@@ -12,12 +12,12 @@ interface Props {
 
 export const DeleteButton: FC<Props> = (props) => {
   const { onDelete } = props;
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "FileCard");
 
   return (
     <Button
       className={styles.deleteButton}
-      aria-label={stringFormatter.format(`fileCard.delete`)}
+      aria-label={stringFormatter.format(`delete`)}
       variant="plain"
       color="secondary"
       onPress={onDelete}

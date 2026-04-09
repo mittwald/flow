@@ -12,13 +12,13 @@ export type EmptyViewProps = Record<string, never>;
 
 /** @flr-generate all */
 export const EmptyView: FC<EmptyViewProps> = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <IllustratedMessage className={styles.emptyView}>
       <IconSearch />
-      <Heading>{stringFormatter.format("list.noResult.heading")}</Heading>
-      <Text>{stringFormatter.format("list.noResult.text")}</Text>
+      <Heading>{stringFormatter.format("noResult.heading")}</Heading>
+      <Text>{stringFormatter.format("noResult.text")}</Text>
     </IllustratedMessage>
   );
 };

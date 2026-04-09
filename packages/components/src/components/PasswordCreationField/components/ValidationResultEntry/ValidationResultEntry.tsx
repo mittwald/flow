@@ -15,7 +15,10 @@ interface Props {
 /** @internal */
 export const ValidationResultEntry: FC<Props> = (props) => {
   const { result, unspecifiedRules = false } = props;
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   const icon = <AlertIcon status={result.isValid ? "success" : "warning"} />;
 

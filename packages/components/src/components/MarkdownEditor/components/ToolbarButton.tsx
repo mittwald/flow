@@ -15,13 +15,16 @@ export interface ToolBarButtonProps extends Pick<
 export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
   const { children, type, onPress, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "MarkdownEditor",
+  );
 
   return (
     <Button
       {...rest}
       data-button-type={type}
-      aria-label={stringFormatter.format(`markdownEditor.toolbar.${type}`)}
+      aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"
       color="dark"

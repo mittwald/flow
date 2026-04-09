@@ -8,9 +8,9 @@ const generateTranslationString = (
   shortVersion = false,
 ): string => {
   if (rule.translationKey) {
-    return `passwordCreationField.validation.${rule.translationKey}`;
+    return `validation.${rule.translationKey}`;
   }
-  const translateString = `passwordCreationField.validation.${rule.ruleType ?? "general"}`;
+  const translateString = `validation.${rule.ruleType ?? "general"}`;
   let finalTranslationString = "";
 
   if (

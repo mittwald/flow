@@ -7,7 +7,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "../../../../locales/*.locale.json";
 
 export const PaginationInfos: FC<TextProps> = (props) => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const list = useList();
   const pagination = list.batches;
@@ -24,7 +24,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   const text = isInitiallyLoading ? (
     <SkeletonView width="200px" />
   ) : (
-    stringFormatter.format("list.paginationInfo", {
+    stringFormatter.format("paginationInfo", {
       visibleItemsCount,
       totalItemsCount,
     })

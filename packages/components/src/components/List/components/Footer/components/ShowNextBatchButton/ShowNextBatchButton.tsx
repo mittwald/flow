@@ -7,7 +7,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import ButtonView from "@/views/ButtonView";
 
 export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
@@ -27,7 +27,7 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
       variant="plain"
       size="s"
     >
-      {stringFormatter.format("list.showMore")}
+      {stringFormatter.format("showMore")}
     </ButtonView>
   );
 };

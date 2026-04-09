@@ -28,9 +28,9 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
     ...buttonProps
   } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "CopyButton");
 
-  const tooltip = stringFormatter.format("copyButton.copy");
+  const tooltip = stringFormatter.format("copy");
 
   const copyValue = () => {
     copy(onlyText(text));

@@ -11,22 +11,18 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 export const LinkIcon: FC<LinkProps> = (props) => {
   const { unstyled, target, download } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Link");
 
   if (unstyled) {
     return null;
   }
 
   if (download) {
-    return (
-      <IconDownload aria-label={stringFormatter.format("link.download")} />
-    );
+    return <IconDownload aria-label={stringFormatter.format("download")} />;
   }
 
   if (target === "_blank") {
-    return (
-      <IconExternalLink aria-label={stringFormatter.format("link.external")} />
-    );
+    return <IconExternalLink aria-label={stringFormatter.format("external")} />;
   }
 
   return null;

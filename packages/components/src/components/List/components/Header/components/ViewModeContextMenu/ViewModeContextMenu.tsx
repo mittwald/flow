@@ -12,7 +12,7 @@ import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
 export const ViewModeContextMenu: FC = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
   const selectedViewMode = list.viewMode.value;
 
@@ -27,11 +27,11 @@ export const ViewModeContextMenu: FC = () => {
       <ButtonView
         variant="outline"
         color="secondary"
-        aria-label={stringFormatter.format("list.settings")}
+        aria-label={stringFormatter.format("settings")}
         className={styles.hideOnMobile}
       >
         <TextView>
-          {stringFormatter.format(`list.settings.viewMode.${selectedViewMode}`)}
+          {stringFormatter.format(`settings.viewMode.${selectedViewMode}`)}
         </TextView>
         <IconView />
       </ButtonView>
