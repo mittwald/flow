@@ -4,7 +4,6 @@ import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
 import { observer } from "mobx-react-lite";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import { TooltipTrigger } from "@/components/Tooltip";
 import {
   IconClose,
   IconSave,
@@ -20,16 +19,25 @@ import { Filter } from "@/components/List/model/filter/Filter";
 import { transformDateValueToFormattedDate } from "@/lib/date/transformDateValueToFormattedDate";
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
 
-export const ActiveFilters: FC = observer(() => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const ActiveFilters: FC<Props> = observer((props) => {
+  const { isDisabled } = props;
   const list = useList();
-  const formatter = useLocalizedStringFormatter(locales, "List.ActiveFilters");
+  const formatter = useLocalizedStringFormatter(locales, "List");
 
   const activeFilters = list.filters.flatMap((f) => {
     if (f instanceof DateRangeFilter) {
       const value = f.getValue();
       if (value) {
         return [
-          <BadgeView key={f.name} onClose={() => f.clear()}>
+          <BadgeView
+            key={f.name}
+            onClose={() => f.clear()}
+            isDisabled={isDisabled}
+          >
             <TextView>
               {`${transformDateValueToFormattedDate(value.start)} - ${transformDateValueToFormattedDate(value.end)}`}
             </TextView>
@@ -41,7 +49,11 @@ export const ActiveFilters: FC = observer(() => {
     return f.values
       .filter((v) => v.isActive)
       .map((v) => (
-        <BadgeView key={v.id} onClose={() => v.deactivate()}>
+        <BadgeView
+          key={v.id}
+          onClose={() => v.deactivate()}
+          isDisabled={isDisabled}
+        >
           <TextView>{v.render()}</TextView>
         </BadgeView>
       ));
@@ -51,7 +63,7 @@ export const ActiveFilters: FC = observer(() => {
   const hasChanges = list.filters.some((f) => f.hasChanges());
 
   const storeFiltersButton = storingAvailable && hasChanges && (
-    <TooltipTriggerView>
+    <TooltipTriggerView isDisabled={isDisabled}>
       <TooltipView>{formatter.format("filters.store")}</TooltipView>
       <ButtonView
         size="s"
@@ -68,7 +80,7 @@ export const ActiveFilters: FC = observer(() => {
   );
 
   const resetFiltersButton = hasChanges ? (
-    <TooltipTrigger>
+    <TooltipTriggerView isDisabled={isDisabled}>
       <TooltipView>{formatter.format("filters.reset")}</TooltipView>
       <ButtonView
         size="s"
@@ -79,12 +91,12 @@ export const ActiveFilters: FC = observer(() => {
       >
         <IconUndo />
       </ButtonView>
-    </TooltipTrigger>
+    </TooltipTriggerView>
   ) : undefined;
 
   const removeAllFiltersButton =
     activeFilters.length > 1 ? (
-      <TooltipTrigger>
+      <TooltipTriggerView isDisabled={isDisabled}>
         <TooltipView>{formatter.format("filters.clear")}</TooltipView>
         <ButtonView
           size="s"
@@ -94,7 +106,7 @@ export const ActiveFilters: FC = observer(() => {
         >
           <IconClose />
         </ButtonView>
-      </TooltipTrigger>
+      </TooltipTriggerView>
     ) : undefined;
 
   if (

@@ -49,22 +49,29 @@ interface DynamicLoaderShape {
   manualPagination?: boolean;
 }
 
+interface SuspenseLoaderShape {
+  disableInitialSuspenseBoundary?: boolean;
+}
+
 export interface StaticDataLoaderShape<T> {
   staticData: ListData<T>;
 }
 
 export type AsyncResourceFactoryDataLoaderShape<T> = {
   asyncResourceFactory: AsyncResourceFactory<T>;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type AsyncDataLoaderShape<T> = {
   asyncLoader: AsyncDataLoader<T>;
   dependencies?: DependencyList;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type HooksDataLoaderShape<T> = {
   useData: HooksDataLoader<T>;
-} & DynamicLoaderShape;
+} & DynamicLoaderShape &
+  SuspenseLoaderShape;
 
 export type DataSource<T> =
   | StaticDataLoaderShape<T>

@@ -1,4 +1,3 @@
-import { EmptyView } from "@/components/List";
 import Item from "@/components/List/components/Items/components/Item/Item";
 import { useList } from "@/components/List/hooks/useList";
 import DivView from "@/views/DivView";
@@ -7,6 +6,7 @@ import clsx from "clsx";
 import type { FC } from "react";
 import styles from "./Items.module.scss";
 import { FallbackItems } from "./components/FallbackItems";
+import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
 
 export const Items: FC = () => {
   const list = useList();
@@ -33,7 +33,13 @@ export const Items: FC = () => {
       <ItemsGridListView
         className={rootClassName}
         {...list.componentProps}
-        renderEmptyState={() => <EmptyView />}
+        emptyView={
+          <ListEmptyViewContainerView
+            viewType={list.getEmptyViewType()}
+            emptySearchResultView={list.emptySearchResultView}
+            emptyView={list.emptyView}
+          />
+        }
         layout={tiles ? "grid" : "stack"}
         tileMaxWidth={list.itemView.tileMaxWidth}
       >
