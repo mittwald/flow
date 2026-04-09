@@ -2,14 +2,17 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
 import { page } from "vitest/browser";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
 const colors = [
   "primary",
   "accent",
   "danger",
   "secondary",
-  "dark",
-  "light",
+  ...alphaColors,
 ] as const;
 const variants = ["solid", "outline", "soft", "plain"] as const;
 
@@ -80,8 +83,12 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Flex gap="s">
                 {variants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
