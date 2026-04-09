@@ -40,10 +40,6 @@
       & :global(.cm-panels) {
         display: none;
       }
-
-      & :global(.cm-gutters) {
-        background-color: var(--form-control--background-color--default);
-      }
     }
   }
 }
