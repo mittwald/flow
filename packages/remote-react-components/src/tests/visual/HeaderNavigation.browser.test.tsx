@@ -6,7 +6,7 @@ import {
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
 
-const colors = ["primary", ...alphaColors] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",

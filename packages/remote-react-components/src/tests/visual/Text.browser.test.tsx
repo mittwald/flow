@@ -1,18 +1,38 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import React from "react";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Text (%s)",
-  async ({ testScreenshot, render, components: { Text, Flex, AccentBox } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Text, Flex, AccentBox, Wrap },
+  }) => {
     await render(
       <Flex direction="column" gap="m">
+        {colors.map((color) => (
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
+              <Text color={color}>
+                Lorem ipsum <strong>dolor sit</strong> amet consectetur
+                <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel
+                voluptas, ullam aliquid fugit.
+              </Text>
+            </AccentBox>
+          </Wrap>
+        ))}
         <Text>
-          Lorem ipsum <strong>dolor sit</strong> amet consectetur
-          <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel voluptas,
-          ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi
-          blanditiis vitae
-          <br />
           <small>laborum ea tempore, dolore voluptas.</small>
           <ul>
             <li>Item</li>
@@ -25,22 +45,6 @@ test.each(testEnvironments)(
             <li>Item</li>
           </ol>
         </Text>
-        <AccentBox color="neutral">
-          <Text color="dark">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
-          </Text>
-        </AccentBox>
-        <AccentBox color="#3A434E">
-          <Text color="light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
-          </Text>
-        </AccentBox>
       </Flex>,
     );
 
