@@ -2,8 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
 import { page } from "vitest/browser";
-
-const states = ["info", "success", "warning", "danger"] as const;
+import { statusTypes } from "@mittwald/flow-react-components/internal";
 
 test.each(testEnvironments)(
   "Notification (%s)",
@@ -22,7 +21,7 @@ test.each(testEnvironments)(
       const notificationController = useNotificationController();
 
       const triggerNotifications = () => {
-        states.forEach((status) =>
+        statusTypes.forEach((status) =>
           notificationController.add(
             <Notification status={status} key={status}>
               <Heading>{firstLetterToUppercase(status)}</Heading>

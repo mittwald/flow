@@ -2,23 +2,23 @@ import * as Aria from "react-aria-components";
 import type { PropsWithChildren } from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
-import type { PropsWithStatus } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBarValue";
 import { ProgressBarBar } from "@/components/ProgressBar/components/ProgressBarBar";
 import { ProgressBarLegend } from "@/components/ProgressBar/components/ProgressBarLegend";
-import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import type { Status } from "@/lib/types/props";
 
 export interface ProgressBarProps
   extends
     PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
-    PropsWithStatus,
     FlowComponentProps {
+  status?: Exclude<Status, "unavailable">;
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
   /** The size variant of the progress bar. @default "m" */
@@ -27,7 +27,7 @@ export interface ProgressBarProps
   segments?: {
     value: number;
     title: string;
-    color?: CategoricalColor;
+    color?: CategoricalWithCustomColor;
     valueText?: string;
   }[];
   /**

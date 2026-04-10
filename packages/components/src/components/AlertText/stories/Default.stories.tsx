@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AlertText } from "@/components/AlertText";
 import { dummyText } from "@/lib/dev/dummyText";
-import { typedList } from "@/components/List";
-import Section from "@/components/Section";
-import { Avatar } from "@/components/Avatar";
-import Image from "@/components/Image";
 import { Heading } from "@/components/Heading";
+import { Avatar } from "@/components/Avatar";
+import { typedList } from "@/components/List";
+import { Image } from "@/components/Image";
 import { Text } from "@/components/Text";
+import { statusTypes } from "@/lib/types/props";
 
 const meta: Meta<typeof AlertText> = {
   title: "Status/AlertText",
@@ -14,63 +14,43 @@ const meta: Meta<typeof AlertText> = {
   argTypes: {
     status: {
       control: "inline-radio",
-      options: ["info", "success", "warning", "danger", "unavailable"],
+      options: statusTypes,
     },
   },
   args: {
     status: "info",
-    children: dummyText.short,
   },
+  render: (props) => <AlertText {...props}>{dummyText.short}</AlertText>,
 };
 
 export default meta;
 
 type Story = StoryObj<typeof AlertText>;
 
-export const Info: Story = {
-  args: { status: "info" },
-};
-
-export const Success: Story = {
-  args: { status: "success" },
-};
-
-export const Warning: Story = {
-  args: { status: "warning" },
-};
-
-export const Danger: Story = {
-  args: { status: "danger" },
-};
-
-export const Unavailable: Story = {
-  args: { status: "unavailable" },
-};
+export const Default: Story = {};
 
 export const InList: Story = {
   render: (props) => {
     const List = typedList<{ name: string }>();
 
     return (
-      <Section>
-        <List.List aria-label="Mitglieder">
-          <List.StaticData data={[{ name: "John Doe" }]} />
-          <List.Item showTiles textValue={(user) => user.name}>
-            {(user) => (
-              <List.ItemView>
-                <Avatar>
-                  <Image alt={user.name} src={dummyText.imageSrc} />
-                </Avatar>
-                <Heading>{user.name}</Heading>
-                <Text>{dummyText.medium}</Text>
-                <Text>
-                  <AlertText {...props}>{dummyText.medium}</AlertText>
-                </Text>
-              </List.ItemView>
-            )}
-          </List.Item>
-        </List.List>
-      </Section>
+      <List.List aria-label="Mitglieder" hidePagination>
+        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.Item textValue={(user) => user.name}>
+          {(user) => (
+            <List.ItemView>
+              <Avatar>
+                <Image alt={user.name} src={dummyText.imageSrc} />
+              </Avatar>
+              <Heading>{user.name}</Heading>
+              <Text>{dummyText.medium}</Text>
+              <Text>
+                <AlertText {...props}>{dummyText.medium}</AlertText>
+              </Text>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
     );
   },
 };
@@ -79,7 +59,7 @@ export const InHeading: Story = {
   render: (props) => {
     return (
       <Heading>
-        {dummyText.short} <AlertText {...props}>{dummyText.short}</AlertText>
+        <AlertText {...props}>{dummyText.short}</AlertText>
       </Heading>
     );
   },

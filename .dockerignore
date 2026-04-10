@@ -1,0 +1,10 @@
+.git
+node_modules
+.nx
+dist
+out
+build
+storybook-static
+.idea
+.vscode
+

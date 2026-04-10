@@ -13,7 +13,7 @@ import type { IconProps } from "@/components/Icon";
 
 export type AlertIconProps = IconProps;
 
-const icons: Record<Status | "unavailable", ComponentType> = {
+const icons: Record<Status, ComponentType> = {
   danger: IconDanger,
   info: IconInfo,
   success: IconSuccess,

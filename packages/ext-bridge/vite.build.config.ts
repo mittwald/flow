@@ -27,6 +27,7 @@ export default mergeConfig(
           "index-node": "./src/index-node.ts",
           "index-browser": "./src/index-browser.ts",
           react: "./src/react/index.ts",
+          i18next: "./src/integrations/i18next/index.ts",
         },
         formats: ["es"],
       },

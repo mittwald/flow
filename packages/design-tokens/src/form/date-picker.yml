@@ -32,5 +32,11 @@ calendar:
       value: "{primary-solid-content-color}"
   cell-range-background-color:
     value: "{primary.color.100}"
+  cell-range-border-color:
+    value: "{form-control.border-color.default}"
+  cell-range-border-width:
+    value: "{border-width.100}"
+  cell-range-border-style:
+    value: "{border-style.default}"
   header-cell-font-weight:
     value: "{font-weight.bold}"

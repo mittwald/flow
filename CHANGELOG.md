@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.784](https://github.com/mittwald/flow/compare/0.2.0-alpha.783...0.2.0-alpha.784) (2026-04-10)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
+# [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
+
+### Features
+
+* **ci:** deploy review apps to mittwald Container Hosting ([#2257](https://github.com/mittwald/flow/issues/2257)) ([5c4861d](https://github.com/mittwald/flow/commit/5c4861d8444aca52709191c513d0bd65bf372199))
+
+# [0.2.0-alpha.782](https://github.com/mittwald/flow/compare/0.2.0-alpha.781...0.2.0-alpha.782) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.781](https://github.com/mittwald/flow/compare/0.2.0-alpha.780...0.2.0-alpha.781) (2026-04-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.780](https://github.com/mittwald/flow/compare/0.2.0-alpha.779...0.2.0-alpha.780) (2026-04-09)
+
+### Features
+
+* **CartesianChart:** add progressbar to chart tooltip ([85e0fec](https://github.com/mittwald/flow/commit/85e0fec0160582ae027711f3b9bb4e526dc3999e))
+
+# [0.2.0-alpha.779](https://github.com/mittwald/flow/compare/0.2.0-alpha.778...0.2.0-alpha.779) (2026-04-09)
+
+### Bug Fixes
+
+* **CodeBlock:** visual improvements ([#2435](https://github.com/mittwald/flow/issues/2435)) ([26a030d](https://github.com/mittwald/flow/commit/26a030d901b0857eff3d746305de4d6e75ec0702))
+
+# [0.2.0-alpha.778](https://github.com/mittwald/flow/compare/0.2.0-alpha.777...0.2.0-alpha.778) (2026-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.777](https://github.com/mittwald/flow/compare/0.2.0-alpha.776...0.2.0-alpha.777) (2026-04-08)
+
+### Features
+
+* improve unavailable status ([#2426](https://github.com/mittwald/flow/issues/2426)) ([d195d50](https://github.com/mittwald/flow/commit/d195d50ee951c84abfddb4b8181357d70ba0672c))
+
+# [0.2.0-alpha.776](https://github.com/mittwald/flow/compare/0.2.0-alpha.775...0.2.0-alpha.776) (2026-04-08)
+
+### Bug Fixes
+
+* **CodeBlock:** set to non-editable ([#2431](https://github.com/mittwald/flow/issues/2431)) ([bf8fd4e](https://github.com/mittwald/flow/commit/bf8fd4ed43fbf9b911354a2aa9525a896dd8a8e7))
+
 # [0.2.0-alpha.775](https://github.com/mittwald/flow/compare/0.2.0-alpha.774...0.2.0-alpha.775) (2026-04-07)
 
 ### Bug Fixes

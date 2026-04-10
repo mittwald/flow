@@ -37,4 +37,11 @@ import {
       installiert.
     </Text>
   </Notification>
+
+  <Notification status="unavailable">
+    <Heading>Nicht gefunden</Heading>
+    <Text>
+      Die gewünschten Inhalte sind leider nicht verfügbar.
+    </Text>
+  </Notification>
 </Flex>;
