@@ -1,4 +1,6 @@
 .lightBox {
+  background-color: var(--light-box--overlay-background-color);
+
   > div {
     position: fixed;
     height: var(--visual-viewport-height);
