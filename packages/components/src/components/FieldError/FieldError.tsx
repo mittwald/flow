@@ -7,7 +7,6 @@ import React, {
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import { FieldErrorContext, TextContext } from "react-aria-components";
-import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertText } from "@/components/AlertText";
@@ -24,9 +23,8 @@ export interface FieldErrorProps
 
 /** @flr-generate all */
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ref, renderAlert, ...rest } = props;
+  const { children, ref, renderAlert, ...rest } = props;
 
-  const rootClassName = clsx(styles.fieldError, className);
   const fieldErrorFromAriaContext = useContext(FieldErrorContext);
   const isInvalidFromChildren = React.Children.count(children) >= 1;
 
@@ -72,14 +70,16 @@ export const FieldError = flowComponent("FieldError", (props) => {
   return (
     <Aria.Provider values={[[TextContext, { slot: undefined }]]}>
       <FieldErrorContext value={mergedErrorState as never}>
-        <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
+        <Aria.FieldError ref={ref} {...rest}>
           {({ validationErrors }) => {
             return renderAlert ? (
               <Alert status="danger">
                 <Heading>{validationErrors}</Heading>
               </Alert>
             ) : (
-              <AlertText status="danger">{validationErrors}</AlertText>
+              <AlertText className={styles.text} status="danger">
+                {validationErrors}
+              </AlertText>
             );
           }}
         </Aria.FieldError>
