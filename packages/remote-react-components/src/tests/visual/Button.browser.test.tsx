@@ -1,14 +1,17 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
 const colors = [
   "primary",
   "accent",
   "danger",
   "secondary",
-  "dark",
-  "light",
+  ...alphaColors,
 ] as const;
 const variants = ["solid", "outline", "soft", "plain"] as const;
 
@@ -75,8 +78,12 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light" || color === "dark"} key={color}>
-            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Flex gap="s">
                 {variants.map((variant) => (
                   <Button variant={variant} color={color} key={variant}>
@@ -95,6 +102,8 @@ test.each(testEnvironments)(
   },
 );
 
+const avatarSizes = ["xs", "s", "m", "l"] as const;
+
 test.each(testEnvironments)(
   "Button with Avatar (%s)",
   async ({
@@ -104,21 +113,13 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="s">
-        <Button>
-          <Avatar size="l">
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar size="m">
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar size="s">
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
+        {avatarSizes.map((size) => (
+          <Button>
+            <Avatar size={size}>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+          </Button>
+        ))}
       </Flex>,
     );
 

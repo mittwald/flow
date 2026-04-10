@@ -83,8 +83,8 @@ export const Default: Story = {
       <Area dataKey="thirdKey" color="#555" />
       <XAxis dataKey="name" />
       <YAxis interval="equidistantPreserveStart" />
-      <ChartTooltip />
       <ChartLegend />
+      <ChartTooltip />
     </CartesianChart>
   ),
 };
@@ -109,8 +109,8 @@ export const MultipleSynced: Story = {
         <Area dataKey="thirdKey" color="malachite" />
         <XAxis dataKey="name" />
         <YAxis />
-        <ChartTooltip />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     </>
   ),
@@ -133,8 +133,8 @@ export const WithEmptyView: Story = {
         <Area dataKey="thirdKey" color="tangerine" />
         <XAxis dataKey="name" />
         <YAxis interval="equidistantPreserveStart" />
-        <ChartTooltip />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     );
   },
@@ -179,6 +179,7 @@ export const WithLine: Story = {
       <Line dataKey="max" color="magenta" unit="ms" />
       <XAxis dataKey="time" />
       <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
+      <ChartLegend />
       <ChartTooltip
         headingFormatter={(v) => {
           return `Sync Format: ${v}`;
@@ -188,7 +189,6 @@ export const WithLine: Story = {
           return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
         }}
       />
-      <ChartLegend />
     </CartesianChart>
   ),
 };

@@ -16,4 +16,8 @@
   border-style: var(--popover--border-style);
   border-color: var(--popover--border-color);
   padding: var(--popover--padding--m);
+
+  &:has(.progressBar) {
+    min-width: 250px;
+  }
 }

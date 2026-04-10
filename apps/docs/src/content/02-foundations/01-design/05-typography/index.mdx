@@ -5,3 +5,79 @@ title: Typography
 Typography strukturiert den Inhaltsbereich, indem sie eine visuelle Hierarchie
 schafft. Darüber hinaus erhöht eine gute Typography die Lesbarkeit und stärkt
 die Marke im Erscheinungsbild.
+
+---
+
+Flow nutzt die Schriftfamilie **Inter**, die für Bildschirmdarstellung optimiert
+ist und auch in kleinen Größen gut lesbar bleibt. Die einheitliche Verwendung
+sorgt für ein ruhiges, konsistentes Erscheinungsbild.
+
+Für Fließtexte wird **Regular**, für Überschriften und Hervorhebungen **Bold**
+eingesetzt. Eine Zeilenhöhe (line height) von 150 Prozent zur Schriftgröße (font
+size) verbessert die Lesbarkeit und unterstützt die Barrierefreiheit.
+Abweichungen sind nur in Ausnahmefällen vorgesehen.
+
+Alle Schriftgrößen werden in **REM** definiert. So bleiben Texte skalierbar,
+reagieren auf Zoom und berücksichtigen individuelle Systemeinstellungen.
+
+---
+
+# Schriftgrößen und Hierarchie
+
+Eine klare typografische Hierarchie hilft dabei, Inhalte strukturiert und
+schnell erfassbar zu machen.
+
+## Headings
+
+[Headings](/04-components/content/heading/overview) strukturieren Inhalte und
+definieren Abschnitte. Jede Stufe hat eine semantische Bedeutung und sollte
+entsprechend eingesetzt werden. H1 ist die oberste inhaltliche Ebene einer
+Seite.
+
+| Preview                                | REM       | Token                   |
+| -------------------------------------- | --------- | ----------------------- |
+| <Heading level={1}>Heading 1</Heading> | 2.625 rem | `font-size-heading-xxl` |
+| <Heading level={2}>Heading 2</Heading> | 2 rem     | `font-size-heading-xl`  |
+| <Heading level={3}>Heading 3</Heading> | 1.5 rem   | `font-size-heading-l`   |
+| <Heading level={4}>Heading 4</Heading> | 1.25 rem  | `font-size-heading-m`   |
+| <Heading level={5}>Heading 5</Heading> | 1.125 rem | `font-size-heading-s`   |
+| <Heading level={6}>Heading 6</Heading> | 1 rem     | `font-size-heading-xs`  |
+
+---
+
+## Body
+
+### Text
+
+[Text](/04-components/content/text/overview) wird für Fließtexte, Beschreibungen
+und längere Inhalte verwendet. Small eignet sich für unterstützende oder
+sekundäre Informationen. Um Inhalte übersichtlich und schnell erfassbar zu
+gestalten, lassen sich zentrale Informationen durch Bold gezielt hervorheben.
+
+| Preview                                       | REM       | Token              |
+| --------------------------------------------- | --------- | ------------------ |
+| Text (Body)                                   | 1 rem     | `font-size-text-m` |
+| <strong>Text (Body)</strong>                  | 1 rem     | `font-size-text-m` |
+| <small>Text (Small)</small>                   | 0,875 rem | `font-size-text-s` |
+| <small><strong>Text (Small)</strong> </small> | 0,875 rem | `font-size-text-s` |
+
+### Links
+
+[Links](/04-components/navigation/link/overview) werden je nach Kontext
+unterschiedlich gekennzeichnet. Freistehende Verlinkungen sind visuell in Bold
+hervorgehoben, während sie im Fließtext durch Unterstreichung kenntlich gemacht
+werden.
+
+| Preview           | REM   | Token              |
+| ----------------- | ----- | ------------------ |
+| <Link>Link</Link> | 1 rem | `font-size-text-m` |
+| [Link]()          | 1 rem | `font-size-text-m` |
+
+### Code
+
+Für eine technische Darstellung von Code wird die Schrift **Fira Code**
+eingesetzt.
+
+| Preview | REM       | Token              |
+| ------- | --------- | ------------------ |
+| `code`  | 0,875 rem | `font-size-text-s` |

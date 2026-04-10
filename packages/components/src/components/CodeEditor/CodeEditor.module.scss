@@ -11,6 +11,13 @@
     padding-right: unset;
     order: 2;
 
+    --editor-padding: calc(
+      var(--form-control--padding-y) - var(--form-control--border-width)
+    );
+
+    // 28px = height of one editor line
+    min-height: calc(var(--editor-padding) * 2 + 28px);
+
     .copyButton {
       position: absolute;
       inset-block-start: var(--form-control--padding-y);

@@ -1,5 +1,6 @@
-import type { PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import type {
+  AlphaColor,
   PropsWithClassName,
   PropsWithElementType,
 } from "@/lib/types/props";
@@ -9,16 +10,32 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
-const accentBoxColors = ["blue", "green", "neutral"] as const;
+const accentBoxBackgroundColors = [
+  "neutral",
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
+  "green",
+  "navy",
+  "gradient",
+] as const;
 
-type AccentBoxColor = (typeof accentBoxColors)[number];
-type AccentBoxWithCustomColor = AccentBoxColor | (string & {});
+type AccentBoxBackgroundColor = (typeof accentBoxBackgroundColors)[number];
+type AccentBoxWithCustomBackgroundColor =
+  | AccentBoxBackgroundColor
+  | (string & {});
 
-function isAccentBoxColor(something: unknown): something is AccentBoxColor {
-  const anyAccentBoxColors = accentBoxColors as readonly string[];
+function isFlowColor(
+  something: unknown,
+): something is AccentBoxBackgroundColor {
+  const anyAccentBoxBackgroundColors =
+    accentBoxBackgroundColors as readonly string[];
   return (
-    typeof something === "string" && anyAccentBoxColors.includes(something)
+    typeof something === "string" &&
+    anyAccentBoxBackgroundColors.includes(something)
   );
 }
 
@@ -29,40 +46,66 @@ export interface AccentBoxProps
     PropsWithClassName,
     FlowComponentProps {
   /** The background color of the accent box. @default "neutral" */
-  color?: AccentBoxWithCustomColor;
+  backgroundColor?: AccentBoxWithCustomBackgroundColor;
+  /** The fcontent color of the accent box. @default "default" */
+  color?: "default" | AlphaColor;
+  /** The background image of the accent box. */
+  backgroundImage?: string;
+  /** The aspect ratio of the accent box. */
+  aspectRatio?: CSSProperties["aspectRatio"];
 }
 
 /** @flr-generate all */
-export const AccentBox = flowComponent(
-  "AccentBox",
-  (props) => {
-    const {
-      color = "neutral",
-      children,
-      elementType = "div",
-      className,
-    } = props;
+export const AccentBox = flowComponent("AccentBox", (props) => {
+  const {
+    color = "default",
+    backgroundColor = "neutral",
+    backgroundImage,
+    children,
+    elementType = "div",
+    className,
+    style: styleFromProps,
+    aspectRatio,
+  } = props;
 
-    const accentBoxColor = isAccentBoxColor(color);
+  const isAFlowColor = isFlowColor(backgroundColor);
 
-    const rootClassName = clsx(
-      styles.accentBox,
-      className,
-      accentBoxColor && styles[color],
-    );
+  const style = {
+    backgroundColor: isAFlowColor ? undefined : backgroundColor,
+    backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+    aspectRatio,
+    ...styleFromProps,
+  };
 
-    const Element = elementType;
+  const rootClassName = clsx(
+    styles.accentBox,
+    className,
+    isAFlowColor ? styles[backgroundColor] : undefined,
+  );
 
-    return (
-      <Element
-        className={rootClassName}
-        style={{ backgroundColor: accentBoxColor ? undefined : color }}
-      >
+  const Element = elementType;
+
+  const contentColor = color === "default" ? undefined : color;
+
+  const propsContext: PropsContext = {
+    Link: {
+      color: contentColor,
+    },
+    Text: {
+      color: contentColor,
+    },
+    Heading: {
+      color: contentColor,
+    },
+  };
+
+  return (
+    <Element className={rootClassName} style={style}>
+      <PropsContextProvider props={propsContext}>
         {children}
-      </Element>
-    );
-  },
-  { type: "layout" },
-);
+      </PropsContextProvider>
+    </Element>
+  );
+});
 
 export default AccentBox;

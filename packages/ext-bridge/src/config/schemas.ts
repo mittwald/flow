@@ -6,6 +6,7 @@ const baseConfig = z.object({
   extensionId: z.string(),
   extensionInstanceId: z.string(),
   variantKey: z.string().optional().nullable(),
+  language: z.string().default("de"),
 });
 
 const contextParameters = z.object({

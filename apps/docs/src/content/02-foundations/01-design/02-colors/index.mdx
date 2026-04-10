@@ -5,3 +5,140 @@ title: Color
 Ausgewählte Colors verkörpern die Marke und dienen gleichzeitig als wesentliches
 Kommunikationsmittel in der Benutzeroberfläche. Sie lenken die Aufmerksamkeit
 des Users und vermitteln gezielt wichtige Informationen wie z. B. den Status.
+
+---
+
+# Base Color
+
+Base Colors bilden das Fundament des Flow Design Systems. Sie prägen die
+Oberflächen und schaffen die visuelle Grundlage für alle Komponenten und
+Layouts.
+
+## Neutral Color
+
+Neutral Colors sind zurückhaltend und vielseitig einsetzbar. Durch ihre
+Ausgewogenheit harmonieren sie mit allen weiteren Farben und kommen in nahezu
+allen UI-Elementen zum Einsatz.
+
+<DesignTokenTable path="color.gray" />
+
+## Hosting Blue
+
+Hosting Blue ist unsere Primärfarbe. Sie verleiht dem mStudio ein prägnantes
+Erscheinungsbild und stärkt die Wiedererkennung der Marke mittwald. Aufgrund
+ihrer Leuchtkraft eignet sie sich besonders für gezielte Akzente, interaktive
+Elemente und visuelle Hervorhebungen.
+
+<DesignTokenTable path="color.hosting-blue" />
+
+---
+
+# Functional Color
+
+Functional Colors kommunizieren Zustände und unterstützen die Nutzerführung. Sie
+helfen dabei, Informationen schnell einzuordnen und Handlungsbedarf zu erkennen.
+Weitere Details zur Anwendung finden sich im
+[Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept).
+
+## Espelkamp Green
+
+Espelkamp Green steht für positive Rückmeldungen und erfolgreiche Aktionen. Die
+Farbe signalisiert Bestätigung, Abschluss oder einen fehlerfreien Zustand.
+
+<DesignTokenTable path="color.espelkamp-green" />
+
+## Royal Orange
+
+Royal Orange kennzeichnet Warnungen und weist auf potenzielle Risiken oder
+unerwünschte Zustände hin. Die Farbe signalisiert, dass Aufmerksamkeit
+erforderlich ist und eine Handlung zeitnah erfolgen sollte, auch wenn noch kein
+kritischer Fehler vorliegt.
+
+<DesignTokenTable path="color.royal-orange" />
+
+## Amaranth Red
+
+Amaranth Red kennzeichnet kritische Zustände. Die Farbe signalisiert dringenden
+Handlungsbedarf oder Fehler, die unmittelbare Aufmerksamkeit erfordern.
+
+<DesignTokenTable path="color.amaranth-red" />
+
+---
+
+# Decorative Color
+
+Decorative Colors erweitern die Farbpalette um zusätzliche Markenfarben. Sie
+werden ausschließlich für dekorative Elemente sowie für Marketing- und
+Kommunikationsmaßnahmen eingesetzt und haben keine funktionale Bedeutung
+innerhalb des Interfaces.
+
+## Soft Contrast Violet
+
+<DesignTokenTable path="color.soft-contrast-violet" />
+
+## Super Teal
+
+<DesignTokenTable path="color.super-teal" />
+
+## Bright Lilac
+
+<DesignTokenTable path="color.bright-lilac" />
+
+## mittwald Navy
+
+<DesignTokenTable path="color.mittwald-navy" />
+
+---
+
+# Light und Dark Color
+
+Light und Dark Colors wurden speziell für den Einsatz auf farbigen Hintergründen
+oder Bildern entwickelt. Sie bestehen aus jeweils 8 transparenten Abstufungen.
+Da die Farben auf Transparenzen basieren, muss der Kontrast zur jeweiligen
+Hintergrundfarbe eigenständig auf Barrierefreiheit geprüft werden. Aus diesem
+Grund stehen sie nur in definierten Components zur Verfügung, beispielsweise im
+[Button](/04-components/actions/button/overview).
+
+Die Verwendung orientiert sich am HSL-Farbmodell. HSL steht für Hue, Saturation
+und Lightness. Für die Auswahl von Light oder Dark ist ausschließlich der
+Lightness-Wert relevant. Er beschreibt die wahrgenommene Helligkeit einer Farbe
+auf einer Skala von 0 bis 100.
+
+Als Schwellenwert gilt 50. Liegt der Lightness-Wert **unter 50**, sollte
+**Light** verwendet. Liegt der Lightness-Wert **über 50**, sollte **Dark**
+verwendet.
+
+Grundsätzlich gilt: Je weiter der Lightness-Wert vom Schwellenwert 50 entfernt
+ist, desto größer ist in der Regel der erreichbare Kontrast. Werte deutlich
+unter 50 verbessern den Kontrast mit Light, Werte deutlich über 50 verbessern
+den Kontrast mit Dark.
+
+## Light
+
+Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL Lightness-Wert
+von weniger als 50.
+
+<DesignTokenTable path="color.white-alpha" />
+
+## Dark
+
+Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem HSL
+Lightness-Wert von größer als 50.
+
+<DesignTokenTable path="color.black-alpha" />
+
+---
+
+# Categorical Color
+
+Categorical Colors eignen sich hervorragend, um Daten optisch in Kategorien zu
+unterscheiden. Die Farben sind so optimiert, dass sie durch hohe Kontraste auch
+für Menschen mit einer Farbsehschwäche gut unterscheidbar sind. Am besten
+funktionieren sie in der hier gegebenen Reihenfolge.
+
+**Achtung:** Categorical Colors sind ausschließlich für Datenvisualisierung
+gedacht und heben sich bewusst von allen anderen Farben im Design System ab.
+Darum sollten sie nicht für dekorative Zwecke oder andere UI-Elemente verwendet
+werden.
+
+<DesignTokenTable path="color.categorical" />

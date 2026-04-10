@@ -1,5 +1,9 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
 export const colors = [
   "neutral",
@@ -11,8 +15,7 @@ export const colors = [
   "green",
   "orange",
   "red",
-  "dark",
-  "light",
+  ...alphaColors,
 ] as const;
 
 test.each(testEnvironments)(
@@ -25,8 +28,12 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light" || color === "dark"} key={color}>
-            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Flex gap="s">
                 <Badge color={color}>Value</Badge>
                 <Badge color={color} onClose={() => console.log("onClose")}>

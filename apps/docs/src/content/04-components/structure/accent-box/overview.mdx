@@ -12,32 +12,68 @@ oder [Flex](/04-components/structure/flex/overview) angeordnet werden.
 
 # Color
 
-Je nach Anwendungsfall stehen für die AccentBox die Colors **Blue, Green** und
-**Neutral** zur Verfügung. Blue ist dabei als Standard definiert.
+Beim Verwenden der AccentBox muss während der Entwicklung auf einen
+ausreichenden Kontrast zwischen Hintergrundfarbe und Inhalt geachtet werden.
+Falls der Kontrast nicht ausreicht, sollte mit der
+[Light oder Dark Color](/02-foundations/01-design/02-colors#light-und-dark-color)
+gearbeitet werden.
 
-## Blue, Green und Neutral
+---
 
-Die Colors haben unterschiedliche Wirkungen auf den User und sollten daher
-gezielt entsprechend der gewünschten Wirkung eingesetzt werden.
+# Background Color
 
-Bei Verwendung der Color Green erscheinen enthaltene Components automatisch in
-der Dark-Variante (siehe
-[Light und Dark Color](/02-foundations/01-design/02-colors)) dargestellt, um die
-nötigen Kontraste sicherzustellen.
+## Base Colors
 
-<LiveCodeEditor example="color" editorCollapsed />
+Die AccentBox unterstützt die Basisfarben **Blue** und **Neutral** (Default).
+Diese helfen dabei, Inhalte für den User dezent hervorzuheben.
+
+<LiveCodeEditor example="baseColor" editorCollapsed />
+
+## Brand Colors
+
+Die Brand Colors **Teal**, **Violet**, **Lilac**, **Navy** und **Green** eignen
+sich besonders für werbliche Inhalte und Marketing Storys.
+
+<LiveCodeEditor example="brandColor" editorCollapsed />
+
+[Example]
+
+## Custom Color
+
+Die AccentBox unterstützt zusätzlich eine benutzerdefinierte Farbe. Diese Option
+sollte nur in Ausnahmefällen genutzt werden. Für die meisten Use Cases sollten
+**Base Colors** oder **Brand Colors** verwendet werden, damit die visuelle
+Konsistenz erhalten bleibt.
+
+<LiveCodeEditor example="customColor" editorCollapsed />
+
+## Gradient
+
+Eine AccentBox mit Gradient hebt sich visuell stärker hervor. Dadurch eignet
+sich diese Variante besonders für aufmerksamkeitsstarke Inhalte wie
+Werbemaßnahmen.
+
+<LiveCodeEditor example="gradient" editorCollapsed />
+
+---
+
+# Background Image
+
+Die AccentBox unterstützt ein Hintergrundbild. Über `aspectRatio` kann ein
+festes Seitenverhältnis definiert werden.
+
+<LiveCodeEditor example="backgroundImage" editorCollapsed />
 
 ---
 
 # Kombiniere mit ...
 
-## Icon
+## Link
 
-Ein direkt in der AccentBox platziertes
-[Icon](/04-components/content/icon/overview) wird als dekoratives
-Hintergrundbild angezeigt.
+Die AccentBox kann in einen [Link](/04-components/navigation/link/overview)
+gewrappt werden, um die gesamte Component klickbar zu machen.
 
-<LiveCodeEditor example="icon" editorCollapsed />
+<LiveCodeEditor example="link" editorCollapsed />
 
 ## LayoutCard
 

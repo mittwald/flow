@@ -85,4 +85,25 @@
   @include status(warning);
   @include status(info);
   @include status(unavailable);
+
+  &:has(> .accentBox),
+  &:has(> .layoutCard) {
+    color: unset;
+    font-weight: unset;
+    display: block;
+    min-width: 0;
+    width: auto;
+
+    .linkIcon {
+      display: none;
+    }
+  }
+
+  &:has(> .accentBox) {
+    border-radius: var(--accent-box--corner-radius);
+  }
+
+  &:has(> .layoutCard) {
+    border-radius: var(--layout-card--corner-radius);
+  }
 }

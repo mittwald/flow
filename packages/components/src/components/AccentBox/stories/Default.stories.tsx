@@ -5,29 +5,39 @@ import { Link } from "@/components/Link";
 import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Section } from "@/components/Section";
-import { Flex } from "@/components/Flex";
-import { IconStar } from "@/components/Icon/components/icons";
 import { LayoutCard } from "@/components/LayoutCard";
+import { alphaColors } from "@/lib/types/props";
+import { ColumnLayout } from "@/components/ColumnLayout";
 
 const meta: Meta<typeof AccentBox> = {
   title: "Structure/AccentBox",
   component: AccentBox,
-  args: { color: "blue" },
-  argTypes: {
-    color: {
-      control: "inline-radio",
-      options: ["blue", "green", "neutral"],
-    },
-  },
   render: (props) => (
     <AccentBox {...props}>
       <Section>
         <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
+        <Text>{dummyText.medium}</Text>
         <Link>Link</Link>
       </Section>
     </AccentBox>
   ),
+  args: { color: "default", backgroundColor: "neutral" },
+  argTypes: {
+    color: { control: "inline-radio", options: ["default", ...alphaColors] },
+    backgroundColor: {
+      control: "inline-radio",
+      options: [
+        "neutral",
+        "blue",
+        "violet",
+        "teal",
+        "lilac",
+        "green",
+        "navy",
+        "gradient",
+      ],
+    },
+  },
 };
 export default meta;
 
@@ -35,29 +45,39 @@ type Story = StoryObj<typeof AccentBox>;
 
 export const Default: Story = {};
 
-export const WithIcon: Story = {
+export const CustomColor: Story = {
+  args: { backgroundColor: "#82368e", color: "light-static" },
+};
+
+export const BackgroundImage: Story = {
+  args: {
+    backgroundImage: dummyText.imageSrc,
+    color: "light-static",
+    aspectRatio: 1,
+  },
   render: (props) => (
-    <AccentBox {...props}>
-      <IconStar />
-      <Section>
-        <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Link>Link</Link>
-      </Section>
-    </AccentBox>
+    <ColumnLayout>
+      <AccentBox {...props}>
+        <Section>
+          <Heading>Heading</Heading>
+          <Text>{dummyText.medium}</Text>
+          <Link>Link</Link>
+        </Section>
+      </AccentBox>
+    </ColumnLayout>
   ),
 };
 
-export const CustomColor: Story = {
-  args: { color: "#fde6ff" },
+export const WithLink: Story = {
   render: (props) => (
-    <AccentBox {...props}>
-      <Section>
-        <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Link>Link</Link>
-      </Section>
-    </AccentBox>
+    <Link>
+      <AccentBox {...props}>
+        <Section>
+          <Heading>Heading</Heading>
+          <Text>{dummyText.medium}</Text>
+        </Section>
+      </AccentBox>
+    </Link>
   ),
 };
 
@@ -65,18 +85,28 @@ export const InLayoutCard: Story = {
   render: (props) => (
     <LayoutCard>
       <AccentBox {...props}>
-        <Flex align="center">
-          <Flex direction="column" grow>
-            <Heading size="l">Heading</Heading>
-            <Text color="dark">
-              <strong>{dummyText.short}</strong>
-            </Text>
-          </Flex>
-          <Link target="_blank" href="#" color="dark">
-            Link
-          </Link>
-        </Flex>
+        <Section>
+          <Heading>Heading</Heading>
+          <Text>{dummyText.long}</Text>
+          <Link>Link</Link>
+        </Section>
       </AccentBox>
     </LayoutCard>
+  ),
+};
+
+export const InLayoutCardWithLink: Story = {
+  render: (props) => (
+    <Link>
+      <LayoutCard>
+        <AccentBox {...props}>
+          <Section>
+            <Heading>Heading</Heading>
+            <Text>{dummyText.long}</Text>
+            <Link>Link</Link>
+          </Section>
+        </AccentBox>
+      </LayoutCard>
+    </Link>
   ),
 };

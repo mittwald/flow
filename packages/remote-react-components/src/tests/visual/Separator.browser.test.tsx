@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import React from "react";
 
 test.each(testEnvironments)(
   "Separator (%s)",

@@ -1,8 +1,12 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import gopher from "@/tests/assets/gopher.webp";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
-const colors = ["default", "dark", "light"] as const;
+const colors = ["primary", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",
@@ -24,8 +28,12 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light" || color === "dark"} key={color}>
-            <AccentBox color={color === "light" ? "#3A434E" : "neutral"}>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <HeaderNavigation color={color}>
                 <Link>Link</Link>
                 <Link aria-current="page">Current</Link>

@@ -100,7 +100,7 @@ export const Modal = flowComponent("Modal", (props) => {
       l: [2, 1],
       m: [1],
       className: styles.columnLayout,
-      AccentBox: { className: styles.accentBox, color: "neutral" },
+      AccentBox: { className: styles.accentBox, backgroundColor: "neutral" },
       wrapWith: <ClearPropsContext />,
     },
     Heading: {

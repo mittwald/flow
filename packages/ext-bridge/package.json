@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "0.2.0-alpha.777",
+  "version": "0.2.0-alpha.786",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",
@@ -20,6 +20,10 @@
     "./react": {
       "types": "./dist/types/react/index.d.ts",
       "default": "./dist/js/react.mjs"
+    },
+    "./i18next": {
+      "types": "./dist/types/integrations/i18next/index.d.ts",
+      "default": "./dist/js/integrations/i18next.mjs"
     }
   },
   "files": [
@@ -59,6 +63,7 @@
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
+    "i18next": "^26.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -67,6 +72,9 @@
       "optional": true
     },
     "react-dom": {
+      "optional": true
+    },
+    "i18next": {
       "optional": true
     }
   }
