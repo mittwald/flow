@@ -1,45 +1,32 @@
-name: Cleanup preview repository
+name: Cleanup Preview Apps
 
 on:
   pull_request:
-    types:
-      - closed
-
-env:
-  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.number }}/merge"
-  TARGET_STORYBOOK_PATH:
-    "/storybook/${{ github.event.pull_request.number }}/merge"
+    types: [closed]
 
 jobs:
-  cleanup_previews:
+  cleanup:
     runs-on: ubuntu-latest
 
-    env:
-      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
-
     steps:
-      - name: Cleanup docs directory 🧹
-        uses: maaaathis/delete-remote-directory@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
-        with:
-          target-github-username: mittwald
-          target-repository-name: flow-previews
-          target-branch: main
-          target-directory: "${{ env.TARGET_DOCS_PATH }}"
-          commit-message: "Cleanup merged docs previews"
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-      - name: Cleanup storybook directory 🧹
-        uses: maaaathis/delete-remote-directory@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          target-github-username: mittwald
-          target-repository-name: flow-previews
-          target-branch: main
-          target-directory: "${{ env.TARGET_STORYBOOK_PATH }}"
-          commit-message: "Cleanup merged Storybook previews"
+          node-version: "24"
 
-      - name: Summary
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cleanup preview environment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
         run: |
-          echo Deleted Documentation and Storybook for branch: ${{ github.event.pull_request.head.ref }}
+          pnpm tsx dev/cleanup-review.ts
