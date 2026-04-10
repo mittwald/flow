@@ -50,7 +50,11 @@ export const Overlay: FC<OverlayProps> = (props) => {
 
   const isOpen = isOpenFromProps ?? controller.useIsOpen();
 
-  const rootClassName = clsx(styles.overlay, className);
+  const rootClassName = clsx(
+    styles.overlay,
+    className,
+    overlayType === "Modal" ? styles.typeModal : styles.typeLightBox,
+  );
 
   return (
     <OverlayContentView
@@ -60,7 +64,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       isDismissable={isDismissable}
       className={rootClassName}
     >
-      <OverlayContextProvider type="Modal" controller={controller}>
+      <OverlayContextProvider type={overlayType} controller={controller}>
         {children}
       </OverlayContextProvider>
     </OverlayContentView>

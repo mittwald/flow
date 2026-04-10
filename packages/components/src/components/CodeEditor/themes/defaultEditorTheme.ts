@@ -8,7 +8,7 @@ export const defaultLightTheme = githubLightInit({
     fontFamily: "var(--code-editor--font-family);",
     foreground: "var(--color--code-syntax--title)",
     background: "transparent",
-    gutterBackground: "transparent",
+    gutterBackground: "var(--form-control--background-color--default)",
     gutterForeground: "var(--color--code-syntax--title)",
   },
   styles: [
