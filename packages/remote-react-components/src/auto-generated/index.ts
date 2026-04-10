@@ -52,6 +52,8 @@ export * from "./FileCardList";
 export * from "./FileDropZone";
 export * from "./FileField";
 export * from "./Flex";
+export * from "./Gallery";
+export * from "./GalleryItem";
 export * from "./Header";
 export * from "./HeaderNavigation";
 export * from "./Heading";

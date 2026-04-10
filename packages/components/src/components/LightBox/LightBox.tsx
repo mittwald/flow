@@ -49,6 +49,9 @@ export const LightBox = flowComponent("LightBox", (props) => {
       Button: { variant: "solid", color: "light-static" },
       tunnelId: "actionGroup",
     },
+    Gallery: {
+      className: styles.gallery,
+    },
   };
 
   const controllerFromContext = useOverlayController("LightBox", {
