@@ -6,18 +6,16 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<AccentBox>
+<AccentBox backgroundColor="blue">
   <Section>
-    <Heading>Tipps & Tricks für mehr Klimaschutz</Heading>
+    <Heading>Hilf uns, Flow noch besser zu machen!</Heading>
     <Text>
-      Dein Cronjob läuft in weniger als
-      5-Minuten-Intervallen. Das verbraucht mehr Ressourcen.
-      Falls das nicht unbedingt nötig ist, kannst du ein
-      längeres Intervall wählen - das spart Energie und
-      schützt das Klima
+      Fehlt dir eine bestimmte Component oder etwas anderes?
+      Hast du Feedback? Dann teile es uns gerne auf GitHub
+      mit.
     </Text>
     <Link href="#" target="_blank">
-      Blogartikel zu mehr Nachhaltigkeit
+      Feedback zu Flow geben
     </Link>
   </Section>
 </AccentBox>;

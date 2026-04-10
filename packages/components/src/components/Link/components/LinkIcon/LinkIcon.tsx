@@ -7,6 +7,7 @@ import {
 import type { LinkProps } from "@/components/Link";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import styles from "../../Link.module.scss";
 
 export const LinkIcon: FC<LinkProps> = (props) => {
   const { unstyled, target, download } = props;
@@ -18,11 +19,21 @@ export const LinkIcon: FC<LinkProps> = (props) => {
   }
 
   if (download) {
-    return <IconDownload aria-label={stringFormatter.format("download")} />;
+    return (
+      <IconDownload
+        className={styles.linkIcon}
+        aria-label={stringFormatter.format("download")}
+      />
+    );
   }
 
   if (target === "_blank") {
-    return <IconExternalLink aria-label={stringFormatter.format("external")} />;
+    return (
+      <IconExternalLink
+        className={styles.linkIcon}
+        aria-label={stringFormatter.format("external")}
+      />
+    );
   }
 
   return null;

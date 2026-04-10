@@ -100,6 +100,7 @@ export const Badge = flowComponent("Badge", (props) => {
             {children}
           </Button>
         )}
+
         {onClose && (
           <Button
             className={styles.close}

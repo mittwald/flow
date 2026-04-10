@@ -1,7 +1,11 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
-const colors = ["primary", "dark", "light"] as const;
+const colors = ["primary", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Breadcrumb colors (%s)",
@@ -13,8 +17,12 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Flex direction="column" gap="m">
                 <Breadcrumb color={color}>
                   <Link>Link 1</Link>
