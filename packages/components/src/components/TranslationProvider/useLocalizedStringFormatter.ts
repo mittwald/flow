@@ -1,4 +1,3 @@
-import { useLocalizedStringFormatter as useLocalizedStringFormatterAria } from "react-aria";
 import {
   type Translations,
   useTranslationProvider,
@@ -11,6 +10,9 @@ import type {
   Variables,
   LocalizedStrings as LocalizedStringsIntl,
 } from "@internationalized/string";
+import IntlMessageFormat from "intl-messageformat";
+import { useLocalizedStringDictionary } from "@react-aria/i18n";
+import { useCallback, useMemo } from "react";
 
 export type LocalizedStrings = LocalizedStringsIntl<string, string>;
 export type LocalizedComponentName = FlowComponentName | string;
@@ -42,37 +44,42 @@ export const useLocalizedStringFormatter = (
   strings: LocalizedStrings,
   componentName: LocalizedComponentName,
 ) => {
+  const { locale } = useLocale();
   const { translations, translate } = useTranslationProvider();
-  const locale = useLocale();
-  const translateDefault = () =>
-    useLocalizedStringFormatterAria(strings, componentName);
 
-  if (translations) {
-    return useLocalizedStringFormatterAria(
+  const mergedStrings = useMemo(
+    () =>
       mergeDeep(
         strings,
         pickComponentTranslations(componentName, translations),
       ),
-      componentName,
-    );
-  }
+    [strings, translations, componentName],
+  );
 
-  if (translate) {
-    return {
-      format: (key: string, variables?: Variables): string => {
+  const dictionary = useLocalizedStringDictionary(mergedStrings, componentName);
+  const formatFunction = useCallback(
+    (key: string, variables?: Variables): string => {
+      if (translate) {
         const customTranslated = translate(key, variables, {
           component: componentName,
-          locale: locale.locale,
+          locale,
         });
 
-        if (customTranslated === undefined) {
-          return translateDefault().format(key, variables);
+        if (customTranslated !== undefined) {
+          return customTranslated;
         }
+      }
 
-        return customTranslated;
-      },
-    };
-  }
+      const translationString = dictionary.getStringForLocale(key, locale);
+      const translationMessage = new IntlMessageFormat(
+        translationString,
+        locale,
+      );
 
-  return translateDefault();
+      return String(translationMessage.format(variables));
+    },
+    [translate, locale, componentName, dictionary],
+  );
+
+  return useMemo(() => ({ format: formatFunction }), [formatFunction]);
 };

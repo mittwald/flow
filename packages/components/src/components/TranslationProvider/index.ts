@@ -1,3 +1,4 @@
+export * from "./view";
 export {
   TranslationProvider,
   useTranslationProvider,

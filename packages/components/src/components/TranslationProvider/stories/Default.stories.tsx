@@ -44,8 +44,7 @@ export const WithAdditionalLocale: Story = {
           translations={{
             "fr-FR": {
               TextField: {
-                characters: (variables) =>
-                  `${variables?.count} Zeichen 🥐 YAY!`,
+                characters: `{maxCount, select, 0 {{count}} other {{count}/{maxCount}}} Zeichen 🥐 YAY!`,
               },
               Label: {
                 optional: "(🥖 Maybe?)",
