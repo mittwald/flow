@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.784](https://github.com/mittwald/flow/compare/0.2.0-alpha.783...0.2.0-alpha.784) (2026-04-10)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
 # [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
