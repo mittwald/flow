@@ -102,7 +102,7 @@ test("Content from entry is updated in exit", async () => {
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
-  await dom.rerender(
+  dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -126,7 +126,7 @@ test("Content in exit is removed when not rendering entry", async () => {
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
-  await dom.rerender(
+  dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -147,7 +147,7 @@ test("Fallback content in exit is rendered again when not rendering entry", asyn
     </TunnelProvider>,
   );
 
-  await dom.rerender(
+  dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>Fallback!</TunnelExit>
@@ -181,7 +181,7 @@ test("Render function in TunnelExit gets updated children from TunnelEntry", asy
     </TunnelProvider>,
   );
 
-  await dom.rerender(
+  dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
@@ -209,7 +209,7 @@ test("Order of multiple children is preserved when entry is updated", async () =
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello Tunnel!");
 
-  await dom.rerender(
+  dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
