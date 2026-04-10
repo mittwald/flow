@@ -23,4 +23,8 @@
     border-color: var(--image-cropper--grid-color);
     border-width: var(--image-cropper--grid-width);
   }
+
+  :global(.reactEasyCrop_Container) {
+    border-radius: var(--image-cropper--corner-radius);
+  }
 }
