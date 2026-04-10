@@ -100,6 +100,8 @@ test.each(testEnvironments)(
   },
 );
 
+const avatarSizes = ["xs", "s", "m", "l"] as const;
+
 test.each(testEnvironments)(
   "Button with Avatar (%s)",
   async ({
@@ -109,26 +111,15 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="s">
-        <Button>
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button data-testid="hover">
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
-        <Button>
-          <Avatar>
-            <Initials>Max Mustermann</Initials>
-          </Avatar>
-        </Button>
+        {avatarSizes.map((size) => (
+          <Button>
+            <Avatar size={size}>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+          </Button>
+        ))}
       </Flex>,
     );
-
-    const hoverButton = page.getByTestId("hover");
-    await hoverButton.hover();
 
     await testScreenshot("Button with avatar");
   },
