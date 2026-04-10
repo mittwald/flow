@@ -15,7 +15,7 @@
     height: var(--light-box--max-height);
 
     --content-width: calc(
-      (var(--button-width) * 2) + var(--light-box--spacing)
+      (var(--button-width) * 4) + (var(--light-box--spacing) * 2)
     );
 
     width: calc(var(--light-box--max-width) - var(--content-width));
@@ -31,7 +31,16 @@
   }
 
   .indicator {
-    display: flex;
+    display: block;
+    width: var(--light-box--indicator-size);
+    height: var(--light-box--indicator-size);
+    border: var(--light-box--indicator-border-width)
+      var(--light-box--indicator-border-style) var(--light-box--content-color);
+    border-radius: var(--light-box--indicator-corner-radius);
+
+    &.current {
+      background-color: var(--light-box--content-color);
+    }
   }
 
   .galleryItem {
@@ -72,19 +81,6 @@
       to {
         opacity: 1;
       }
-    }
-  }
-
-  @media (max-width: 850px) {
-    .content {
-      width: calc(
-        var(--light-box--max-width) - (var(--button-width) + var(--size-px--s))
-      );
-    }
-
-    .prev,
-    .next {
-      display: none;
     }
   }
 }

@@ -1,9 +1,21 @@
 light-box:
   overlay-background-color:
-    value: "{dark.color.600}"
+    value: "{dark-static.color.600}"
   max-width:
     value: "calc(100dvw - {size-px.l})"
   max-height:
     value: "calc(100dvh - {size-px.l})"
   spacing:
     value: "{size-px.m}"
+  indicator-spacing:
+    value: "{size-px.xs}"
+  indicator-size:
+    value: "{size-px.m}"
+  indicator-border-width:
+    value: "{border-width.200}"
+  indicator-border-style:
+    value: "{border-style.default}"
+  indicator-corner-radius:
+    value: "{corner-radius.round}"
+  content-color:
+    value: "{light-static.color.800}"

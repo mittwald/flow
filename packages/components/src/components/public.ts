@@ -46,7 +46,6 @@ export * from "@/components/FileCardList";
 export * from "@/components/FileDropZone";
 export * from "@/components/FileField";
 export * from "@/components/Flex";
-export * from "@/components/Gallery";
 export * from "@/components/Header";
 export * from "@/components/HeaderNavigation";
 export * from "@/components/Heading";

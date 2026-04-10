@@ -2,13 +2,20 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import Button from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
-import { LightBox } from "@/components/LightBox";
+import { Gallery, GalleryItem, LightBox } from "@/components/LightBox";
 import LightBoxTrigger from "@/components/LightBox/components/LightBoxTrigger";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import { IconDelete, IconDownload } from "@/components/Icon/components/icons";
 import { useOverlayController } from "@/lib/controller";
 import svg from "./test.svg";
+import { Flex } from "@/components/Flex";
+
+const images = [
+  dummyText.imageSrc,
+  "https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg",
+  svg,
+];
 
 const meta: Meta<typeof LightBox> = {
   title: "Overlays/LightBox",
@@ -89,5 +96,33 @@ export const WithSvg: Story = {
         <Image alt="Gopher" src={svg} />
       </LightBox>
     </LightBoxTrigger>
+  ),
+};
+
+export const WithGallery: Story = {
+  render: () => (
+    <Flex gap="m">
+      {images.map((src, index) => (
+        <LightBoxTrigger key={index}>
+          <Button>
+            <Image alt="" src={src} height="100px" withBorder />
+          </Button>
+          <LightBox>
+            <Gallery defaultIndex={index}>
+              {images.map((src) => (
+                <GalleryItem>
+                  <Image src={src} />
+                  <ActionGroup>
+                    <Button>
+                      <IconDownload />
+                    </Button>
+                  </ActionGroup>
+                </GalleryItem>
+              ))}
+            </Gallery>
+          </LightBox>
+        </LightBoxTrigger>
+      ))}
+    </Flex>
   ),
 };

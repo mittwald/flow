@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   GalleryItem,
   type GalleryItemProps,
-} from "@/components/Gallery/components/GalleryItem";
+} from "@/components/LightBox/components/GalleryItem/GalleryItem";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const GalleryItemView: FC<GalleryItemProps> = memo((props) => {

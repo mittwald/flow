@@ -84,7 +84,7 @@ import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
-import type { GalleryProps } from "@/components/Gallery";
+import type { GalleryItemProps, GalleryProps } from "@/components/LightBox";
 
 export * from "./types";
 

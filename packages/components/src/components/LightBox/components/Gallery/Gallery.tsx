@@ -5,12 +5,10 @@ import {
   IconChevronRight,
 } from "@/components/Icon/components/icons";
 import styles from "./Gallery.module.scss";
-import { IconCircle, IconCircleFilled } from "@tabler/icons-react";
-import { Icon } from "@/components/Icon";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import { useLocalizedStringFormatter } from "react-aria";
-import locales from "./locales/*.locale.json";
+import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
 
 export interface GalleryProps extends PropsWithClassName {
@@ -27,7 +25,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
   const count = React.Children.count(children);
 
   const paginate = (direction: number) => {
-    setIndex((prev) => (prev + direction + count) % count);
+    setIndex((prev: number) => (prev + direction + count) % count);
   };
 
   const pointerStartX = useRef<number | null>(null);
@@ -59,9 +57,13 @@ export const Gallery = flowComponent("Gallery", (props) => {
   const indicators = Array(count)
     .fill("")
     .map((_, index) => (
-      <Icon key={index} className={styles.indicator} size="s" aria-hidden>
-        {currentIndex === index ? <IconCircleFilled /> : <IconCircle />}
-      </Icon>
+      <span
+        key={index}
+        className={clsx(
+          styles.indicator,
+          currentIndex === index && styles.current,
+        )}
+      />
     ));
 
   return (
@@ -69,8 +71,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
       <Button
         aria-label={stringFormatter.format("gallery.previous")}
         onPress={() => paginate(-1)}
-        color="light"
-        className={styles.prev}
+        color="light-static"
       >
         <IconChevronLeft />
       </Button>
@@ -99,8 +100,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
       <Button
         aria-label={stringFormatter.format("gallery.next")}
         onPress={() => paginate(1)}
-        color="light"
-        className={styles.next}
+        color="light-static"
       >
         <IconChevronRight />
       </Button>
