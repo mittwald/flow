@@ -1,5 +1,4 @@
 .overlay {
-  background: var(--overlay--background-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -13,6 +12,14 @@
 
   &[data-exiting] {
     animation: overlay-fade var(--transition--duration--default) reverse ease-in;
+  }
+
+  &.typeModal {
+    background: var(--overlay--background-color);
+  }
+
+  &.typeLightBox {
+    background: var(--light-box--overlay-background-color);
   }
 }
 
