@@ -84,6 +84,7 @@ import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
+import type { TranslationProviderProps } from "@/components/TranslationProvider/TranslationProvider";
 
 export * from "./types";
 
@@ -168,6 +169,7 @@ export interface FlowComponentPropsTypes {
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
   TimeField: TimeFieldProps;
+  TranslationProvider: TranslationProviderProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -255,6 +257,7 @@ const propsContextSupportingComponentsMap: Record<
   TextArea: true,
   TextField: true,
   TimeField: true,
+  TranslationProvider: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

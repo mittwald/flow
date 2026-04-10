@@ -4,7 +4,7 @@ import RadioView from "@/views/RadioView";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import ButtonView from "@/views/ButtonView";
 import { Flex } from "@/components/Flex";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 interface Props {
@@ -18,7 +18,7 @@ export const FilterAccordionRadioGroup: FC<Props> = (props) => {
 
   const name = filter.name ?? filter.property;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <Flex direction="column" gap="m">
@@ -49,7 +49,7 @@ export const FilterAccordionRadioGroup: FC<Props> = (props) => {
           variant="soft"
           onPress={() => filter.clear()}
         >
-          {stringFormatter.format("list.filters.clearSelection")}
+          {stringFormatter.format("filters.clearSelection")}
         </ButtonView>
       )}
     </Flex>

@@ -80,11 +80,15 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatch(
-        'export default {"bar": {  "bar": (args) => `test with variable ${args.var}`,\n' +
-          '  "bar.simple": `test simple variable`,\n' +
-          '},"foo": {  "foo": (args) => `bar ${args.var}`,\n' +
-          '  "foo.simple": `test simple variable`,\n' +
-          "}};",
+        'export default {"bar":{\n' +
+          '  "bar": "test with variable {var}",\n' +
+          '  "bar.simple": "test simple variable"\n' +
+          "}\n" +
+          ',"foo":{\n' +
+          '  "foo": "bar {var}",\n' +
+          '  "foo.simple": "test simple variable"\n' +
+          "}\n" +
+          "};",
       );
     }
   });
@@ -116,9 +120,11 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatch(
-        'export default {"bar": {  "bar": (args) => `test with variable ${args.var}`,\n' +
-          '  "bar.simple": `test simple variable`,\n' +
-          "}};",
+        'export default {"bar":{\n' +
+          '  "bar": "test with variable {var}",\n' +
+          '  "bar.simple": "test simple variable"\n' +
+          "}\n" +
+          "};",
       );
     }
   });

@@ -11,7 +11,7 @@ import clsx from "clsx";
 import styles from "./ImageCropper.module.scss";
 import { Slider } from "@/components/Slider";
 import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import { useImageSrc } from "@/lib/hooks/useImageSrc";
 
@@ -49,7 +49,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const rootClassName = clsx(styles.imageCropper, className);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "ImageCropper");
 
   const onCropAreaPixelsChange = useEffectEvent(async () => {
     if (croppedAreaPixels) {

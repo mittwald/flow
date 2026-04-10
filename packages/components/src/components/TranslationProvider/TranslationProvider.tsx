@@ -1,27 +1,48 @@
-import type { FC, PropsWithChildren } from "react";
-import React, { createContext, useContext, useMemo } from "react";
+import type { PropsWithChildren } from "react";
+import React, { createContext, useContext } from "react";
+import type {
+  LocalizedComponentName,
+  TranslationFunction,
+} from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+
+type ComponentTranslationDictionary = Record<
+  LocalizedComponentName,
+  Record<string, string>
+>;
 
 export interface Translations {
-  "de-DE"?: Record<string, string>;
-  "en-US"?: Record<string, string>;
+  [locale: string]: ComponentTranslationDictionary | undefined;
+  "de-DE"?: ComponentTranslationDictionary;
+  "en-US"?: ComponentTranslationDictionary;
 }
 
-type Props = PropsWithChildren & {
-  translations: Translations;
-};
+export interface TranslationContext {
+  translations?: Translations;
+  translate?: TranslationFunction;
+}
 
-const context = createContext<Translations>({});
+export type TranslationProviderProps = PropsWithChildren &
+  TranslationContext &
+  FlowComponentProps<never>;
+
+const context = createContext<TranslationContext>({});
 
 export const useTranslationProvider = () => useContext(context);
 
-export const TranslationProvider: FC<Props> = (props) => {
-  const { children, translations } = props;
+/** @flr-generate all */
+export const TranslationProvider = flowComponent(
+  "TranslationProvider",
+  (props) => {
+    const { children, translations, translate } = props;
 
-  return (
-    <context.Provider value={useMemo(() => translations, [translations])}>
-      {children}
-    </context.Provider>
-  );
-};
+    return (
+      <context.Provider value={{ translations, translate }}>
+        {children}
+      </context.Provider>
+    );
+  },
+);
 
 export default TranslationProvider;

@@ -121,6 +121,7 @@ export * from "./TextField";
 export * from "./TimeField";
 export * from "./Tooltip";
 export * from "./TooltipTrigger";
+export * from "./TranslationProvider";
 export * from "./Truncate";
 export * from "./TunnelEntry";
 export * from "./XAxis";

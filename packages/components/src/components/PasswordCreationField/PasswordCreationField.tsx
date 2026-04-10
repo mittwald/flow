@@ -28,7 +28,6 @@ import { generatePassword } from "@/components/PasswordCreationField/worker/gene
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
-import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 import type {
   PolicyValidationResult,
   PolicyGenericDeclaration,
@@ -42,6 +41,7 @@ import { usePolicyValidationResult } from "@/components/PasswordCreationField/li
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 export interface PasswordCreationFieldProps
   extends
@@ -92,7 +92,10 @@ export const PasswordCreationField = flowComponent(
     } = useFieldComponent(props);
 
     const [isLoading, setIsLoading] = useState(false);
-    const translate = useLocalizedContextStringFormatter(locales);
+    const translate = useLocalizedStringFormatter(
+      locales,
+      "PasswordCreationField",
+    );
 
     const validationPolicy = useMemo(
       () => Policy.fromDeclaration(validationPolicyFromProps),

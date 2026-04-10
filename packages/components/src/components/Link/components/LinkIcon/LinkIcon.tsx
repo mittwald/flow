@@ -6,13 +6,13 @@ import {
 } from "@/components/Icon/components/icons";
 import type { LinkProps } from "@/components/Link";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import styles from "../../Link.module.scss";
 
 export const LinkIcon: FC<LinkProps> = (props) => {
   const { unstyled, target, download } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Link");
 
   if (unstyled) {
     return null;
@@ -22,7 +22,7 @@ export const LinkIcon: FC<LinkProps> = (props) => {
     return (
       <IconDownload
         className={styles.linkIcon}
-        aria-label={stringFormatter.format("link.download")}
+        aria-label={stringFormatter.format("download")}
       />
     );
   }
@@ -31,7 +31,7 @@ export const LinkIcon: FC<LinkProps> = (props) => {
     return (
       <IconExternalLink
         className={styles.linkIcon}
-        aria-label={stringFormatter.format("link.external")}
+        aria-label={stringFormatter.format("external")}
       />
     );
   }

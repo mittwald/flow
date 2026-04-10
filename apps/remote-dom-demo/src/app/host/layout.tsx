@@ -1,10 +1,10 @@
 "use client";
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { getHostPath, getRemotePath } from "@/app/_lib/navigation";
-import { IntlProvider } from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { IntlProvider } from "@mittwald/flow-react-components";
 
 export default function HostPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function HostPage() {
   const [isNavigating, setIsNavigating] = useState(false);
 
   return (
-    <IntlProvider locale="en-US">
+    <IntlProvider locale="de-DE">
       {isNavigating && <LoadingMessage />}
       <RemoteRenderer
         onNavigationStateChanged={(state) => {
@@ -32,8 +32,8 @@ export default function HostPage() {
             userId: "user-id",
             appInstallationId: "appi-id",
             customerId: "customer-id",
+            language: "de-DE",
             projectId: "project-id",
-            language: "en-US",
           }),
           getSessionToken: async () => "session-token",
         }}

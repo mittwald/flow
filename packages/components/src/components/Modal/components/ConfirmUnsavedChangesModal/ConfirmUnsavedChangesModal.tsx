@@ -1,7 +1,7 @@
 import ContentView from "@/views/ContentView";
 import HeadingView from "@/views/HeadingView";
 import type { FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import Modal from "@/components/Modal/Modal";
 import TextView from "@/views/TextView";
@@ -11,7 +11,7 @@ import ButtonView from "@/views/ButtonView";
 import { useModalController } from "@/lib/controller";
 
 export const ConfirmUnsavedChangesModal: FC = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
   const closeConfirmationController =
     useModalController().useConfirmationController();
 

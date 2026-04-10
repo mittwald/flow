@@ -6,26 +6,24 @@ import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 export const ViewModeAccordion: FC = () => {
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   const availableViewModes = useAvailableViewModes();
   const selectedViewMode = list.viewMode.value;
 
   return (
     <AccordionView>
-      <HeadingView>
-        {stringFormatter.format("list.settings.viewMode")}
-      </HeadingView>
+      <HeadingView>{stringFormatter.format("settings.viewMode")}</HeadingView>
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>
           {availableViewModes.map((v) => (
             <RadioView key={v} value={v} onPress={() => list.viewMode.set(v)}>
-              {stringFormatter.format(`list.settings.viewMode.${v}`)}
+              {stringFormatter.format(`settings.viewMode.${v}`)}
             </RadioView>
           ))}
         </RadioGroupView>
