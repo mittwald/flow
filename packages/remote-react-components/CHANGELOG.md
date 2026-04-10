@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.787](https://github.com/mittwald/flow/compare/0.2.0-alpha.786...0.2.0-alpha.787) (2026-04-10)
+
+### Features
+
+* **i18n:** add custom translations & support remote translations ([#2430](https://github.com/mittwald/flow/issues/2430)) ([1b0e238](https://github.com/mittwald/flow/commit/1b0e23813afe8da2743d96ed5cb51c7466ec2c1e))
+
 # [0.2.0-alpha.786](https://github.com/mittwald/flow/compare/0.2.0-alpha.785...0.2.0-alpha.786) (2026-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

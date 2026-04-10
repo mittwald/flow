@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.786",
+  "version": "0.2.0-alpha.787",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -65,9 +65,9 @@
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.1.3",
+    "@react-aria/i18n": "^3.12.16",
     "@react-aria/live-announcer": "^3.4.4",
     "@react-aria/utils": "^3.32.0",
-    "@react-aria/i18n": "^3.12.16",
     "@react-stately/form": "^3.2.2",
     "@react-types/shared": "^3.32.1",
     "@replit/codemirror-indentation-markers": "^6.5.3",
