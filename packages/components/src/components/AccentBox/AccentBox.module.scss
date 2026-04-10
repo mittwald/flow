@@ -5,32 +5,28 @@
   isolation: isolate;
   position: relative;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 0;
 
-  > svg {
-    position: absolute;
-    top: var(--accent-box--padding);
-    right: var(--accent-box--padding);
-    height: calc(100% - var(--accent-box--padding) * 2);
-    max-width: calc(100% - var(--accent-box--padding) * 2);
-    width: auto;
-    z-index: -1;
+  &.gradient {
+    background: var(--accent-box--background-color-gradient);
   }
 
   /* Color */
 
   @mixin status($color) {
     &.#{$color} {
-      background: var(--accent-box--background-color-#{$color});
-
-      > svg {
-        color: var(--accent-box--icon-color-#{$color});
-      }
+      background-color: var(--accent-box--background-color-#{$color});
     }
   }
 
-  @include status("blue");
-  @include status("green");
-  @include status("gradient");
   @include status("neutral");
+  @include status("blue");
+  @include status("teal");
+  @include status("lilac");
+  @include status("violet");
+  @include status("green");
+  @include status("navy");
 }
