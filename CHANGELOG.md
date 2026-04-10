@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
+
+### Features
+
+* **ci:** deploy review apps to mittwald Container Hosting ([#2257](https://github.com/mittwald/flow/issues/2257)) ([5c4861d](https://github.com/mittwald/flow/commit/5c4861d8444aca52709191c513d0bd65bf372199))
+
 # [0.2.0-alpha.782](https://github.com/mittwald/flow/compare/0.2.0-alpha.781...0.2.0-alpha.782) (2026-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-project
