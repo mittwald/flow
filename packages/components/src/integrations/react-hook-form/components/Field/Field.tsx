@@ -23,7 +23,10 @@ export interface FieldProps<T extends FieldValues>
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales, "RHF.Field");
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "ReactHookForm.Field",
+  );
 
   const controller = useController({
     ...props,
