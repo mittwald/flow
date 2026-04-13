@@ -12,7 +12,7 @@ export interface NavigationState {
   isPending: boolean;
 }
 
-export type RemoteExtBridgeConfig = Exclude<
+export type RemoteExtBridgeConfig = Omit<
   ExtBridgeConfigInput,
   keyof HostConfig
 >;
@@ -30,7 +30,7 @@ export interface RemoteExtBridgeConnectionApi extends Omit<
  *
  * When addding properties, make sure to release the host before all clients.
  */
-export interface HostExports extends RemoteExtBridgeConnectionApi {
+export interface HostExports extends ExtBridgeConnectionApi {
   setIsReady: (version?: Version) => Promise<void>;
   setIsLoading: (isLoading: boolean) => Promise<void>;
   setError: (error: string) => Promise<void>;
