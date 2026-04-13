@@ -169,7 +169,6 @@ export interface FlowComponentPropsTypes {
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
   TimeField: TimeFieldProps;
-  TranslationProvider: TranslationProviderProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -257,7 +256,6 @@ const propsContextSupportingComponentsMap: Record<
   TextArea: true,
   TextField: true,
   TimeField: true,
-  TranslationProvider: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(
