@@ -10,7 +10,7 @@ test.each(testEnvironments)(
           Lorem ipsum <strong>dolor sit</strong> amet consectetur
           <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel voluptas,
           ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi
-          blanditiis vitae 5x4
+          blanditiis vitae
           <br />
           <small>laborum ea tempore, dolore voluptas.</small>
           <ul>
@@ -38,6 +38,8 @@ test.each(testEnvironments)(
             dolore voluptas.
           </Text>
         </AccentBox>
+        <Text noLigatures>5x4</Text>
+        <Text>5x4</Text>
       </Flex>,
     );
 
