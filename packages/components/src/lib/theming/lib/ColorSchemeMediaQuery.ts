@@ -1,5 +1,5 @@
 import type { ResolvedTheme } from "../types";
-import { getResolvedTheme } from "./getResolvedTheme";
+import { getTheme } from "./getTheme";
 import { isClientSide } from "./isClientSide";
 
 interface ColorSchemaPreference {
@@ -21,11 +21,12 @@ export class ColorSchemeMediaQuery {
   }
 
   public static getPreference(): ColorSchemaPreference {
-    const fallback = getResolvedTheme();
+    const fallback = getTheme();
+    const fallbackResolved = fallback === "system" ? "light" : fallback;
 
     const preferred =
       this.mediaQuery === undefined
-        ? fallback
+        ? fallbackResolved
         : this.mediaQuery.matches
           ? "light"
           : "dark";
