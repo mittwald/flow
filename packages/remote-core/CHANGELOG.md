@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.789](https://github.com/mittwald/flow/compare/0.2.0-alpha.788...0.2.0-alpha.789) (2026-04-13)
+
+### Features
+
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+
 # [0.2.0-alpha.788](https://github.com/mittwald/flow/compare/0.2.0-alpha.787...0.2.0-alpha.788) (2026-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

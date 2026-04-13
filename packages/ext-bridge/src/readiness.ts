@@ -2,6 +2,7 @@ import { parseConfig } from "@/config/parse";
 import { ExtBridgeError } from "@/error";
 import { assertBrowserEnv } from "@/lib/assertBrowserEnv";
 import { controllablePromise } from "@/lib/controllablePromise";
+import { extractHostConfig } from "./config/extractHostConfig";
 
 const timeoutMs = 7500;
 
@@ -24,7 +25,14 @@ export const readinessApi = {
   },
   setIsReady: async () => {
     const config = await mwExtBridge.connection.getConfig();
-    mwExtBridge.config = parseConfig(config);
+
+    const parsedConfig = parseConfig(config);
+    const hostConfig = extractHostConfig(config);
+    mwExtBridge.config = {
+      ...parsedConfig,
+      ...hostConfig,
+    };
+
     resolveReadiness();
   },
 } as const;
