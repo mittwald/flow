@@ -137,9 +137,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
       ?.then((connection) => {
         connectionRef.current = connection;
         setIsLoadingFromProps();
-        if ("getHostConfig" in connection.imports) {
-          return connection.imports.getHostConfig();
-        }
+        return connection.imports.getHostConfig();
       })
       .then((hostConfig) => {
         hostConfigRef.current = hostConfig;
