@@ -23,6 +23,8 @@ import {
 import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
+import { IntlProvider, useLanguage } from "@mittwald/flow-react-components";
+import type { HostConfig } from "@mittwald/flow-core";
 
 const viewComponents = {
   ...remoteComponents,
@@ -71,9 +73,17 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   }
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
+  const hostConfigRef = useRef<HostConfig | undefined>(undefined);
   const isConnectionInitialized = useRef(false);
   const [connectionError, setConnectionError] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+
+  const fallbackLanguage = useLanguage();
+  const language =
+    hostConfigRef.current?.language === undefined ||
+    hostConfigRef.current?.language?.trim() === ""
+      ? fallbackLanguage
+      : hostConfigRef.current.language;
 
   const [pathnameChangedPending, startPathnameChangedTransition] =
     useTransition();
@@ -127,6 +137,12 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
       ?.then((connection) => {
         connectionRef.current = connection;
         setIsLoadingFromProps();
+        if ("getHostConfig" in connection.imports) {
+          return connection.imports.getHostConfig();
+        }
+      })
+      .then((hostConfig) => {
+        hostConfigRef.current = hostConfig;
         setIsConnected(true);
       })
       .catch((error) => {
@@ -152,11 +168,13 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
               connection: connectionRef.current,
             }}
           >
-            <Suspense fallback={loadingFallback}>
-              <ViewComponentContextProvider components={viewComponents}>
-                {children}
-              </ViewComponentContextProvider>
-            </Suspense>
+            <IntlProvider locale={language}>
+              <Suspense fallback={loadingFallback}>
+                <ViewComponentContextProvider components={viewComponents}>
+                  {children}
+                </ViewComponentContextProvider>
+              </Suspense>
+            </IntlProvider>
           </RemoteContextProvider>
         )}
       </ErrorBoundary>

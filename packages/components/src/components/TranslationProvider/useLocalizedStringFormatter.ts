@@ -5,7 +5,6 @@ import {
 import { mergeDeep } from "remeda";
 import type { FlowComponentName } from "@/components/propTypes";
 import { mapValues, pick } from "remeda";
-import { useLocale } from "react-aria-components";
 import type {
   Variables,
   LocalizedStrings as LocalizedStringsIntl,
@@ -13,6 +12,7 @@ import type {
 import IntlMessageFormat from "intl-messageformat";
 import { useLocalizedStringDictionary } from "@react-aria/i18n";
 import { useCallback, useMemo } from "react";
+import { useLanguage } from "@/lib/hooks/useLanguage";
 
 export type LocalizedStrings = LocalizedStringsIntl<string, string>;
 export type LocalizedComponentName = FlowComponentName | string;
@@ -44,7 +44,7 @@ export const useLocalizedStringFormatter = (
   strings: LocalizedStrings,
   componentName: LocalizedComponentName,
 ) => {
-  const { locale } = useLocale();
+  const locale = useLanguage();
   const { translations, translate } = useTranslationProvider();
 
   const mergedStrings = useMemo(
