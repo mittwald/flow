@@ -27,7 +27,7 @@ html
   all: initial;
 }
 
-/*
+/**
   "all: initial" sets "display: inline" for **all elements**. This rule, reverts this for common block elements.
  */
 body article:where([class*="flow--"]),
