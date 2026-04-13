@@ -101,7 +101,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
-    extBridgeImplementation: extBridgeImplementation,
+    extBridgeImplementation,
     hostConfig,
     onReady: (establishedConnection) => {
       establishedConnection.updateHostPathname(hostPathname);

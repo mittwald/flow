@@ -22,6 +22,4 @@ const contextParameters = z.object({
   customerId: z.string().optional(),
 });
 
-export const config = baseConfig
-  .extend(contextParameters.shape)
-  .catchall(z.string().optional().nullable());
+export const config = baseConfig.extend(contextParameters.shape);
