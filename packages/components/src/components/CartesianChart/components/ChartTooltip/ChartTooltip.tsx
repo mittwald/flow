@@ -21,6 +21,11 @@ export type TooltipHeadingFormatter = (
   title: string | number | undefined,
 ) => Promise<string> | string;
 
+export type TooltipLProgressBarFormatter = (
+  value: TooltipPayloadItem["value"],
+  unit?: TooltipPayloadItem["unit"],
+) => Promise<string> | string;
+
 export interface WithTooltipFormatters {
   /**
    * A formatter function for the lines in the tooltip. Can be used for purposes
@@ -32,6 +37,11 @@ export interface WithTooltipFormatters {
    * purposes like translations.
    */
   headingFormatter?: TooltipHeadingFormatter;
+  /**
+   * A formatter function for the progressBar of the tooltip. Can be used for
+   * purposes like translations.
+   */
+  progressBarFormatter?: TooltipLProgressBarFormatter;
 }
 
 export interface ChartTooltipProps
