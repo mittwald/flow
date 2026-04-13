@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import { Action, type ActionFn } from "@/components/Action";
 import locales from "./../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 interface Props extends PropsWithClassName {
@@ -20,7 +20,10 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
   onPress,
   className,
 }) => {
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   const icon = isVisible ? <IconHide /> : <IconShow />;
   const tooltipText = translate.format(

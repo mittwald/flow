@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./../../locales/*.locale.json";
 import { Button } from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
@@ -11,7 +11,10 @@ interface Props {
 
 export const PasswordGenerateButton: FC<Props> = (props) => {
   const { isDisabled, onGeneratePasswordAction } = props;
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   return (
     <Action onAction={onGeneratePasswordAction} showFeedback={false}>

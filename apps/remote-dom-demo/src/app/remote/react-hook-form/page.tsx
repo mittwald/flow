@@ -16,6 +16,7 @@ import {
   PasswordCreationField,
   Autocomplete,
   CheckboxGroup,
+  TranslationProvider,
   Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
@@ -95,11 +96,21 @@ export default function Page() {
             <Label>Name</Label>
           </TextField>
         </Field>
-        <Field name="email">
-          <TextField>
-            <Label>E-Mail</Label>
-          </TextField>
-        </Field>
+        <TranslationProvider
+          translations={{
+            "de-DE": {
+              Label: {
+                optional: "(Translated via TranslationProvider -Optional-)",
+              },
+            },
+          }}
+        >
+          <Field name="email">
+            <TextField>
+              <Label>E-Mail</Label>
+            </TextField>
+          </Field>
+        </TranslationProvider>
         <Field
           name="account"
           rules={{

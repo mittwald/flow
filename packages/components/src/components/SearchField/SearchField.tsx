@@ -9,7 +9,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -37,8 +37,8 @@ export const SearchField = flowComponent("SearchField", (props) => {
     className,
   );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-  const searchText = stringFormatter.format(`searchField.search`);
+  const stringFormatter = useLocalizedStringFormatter(locales, "SearchField");
+  const searchText = stringFormatter.format(`search`);
 
   const propsContext: PropsContext = {
     Kbd: {

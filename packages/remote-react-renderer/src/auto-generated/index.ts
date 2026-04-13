@@ -122,6 +122,7 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { TranslationProvider as TranslationProvider } from "@mittwald/flow-react-components";
 import { Truncate as Truncate } from "@mittwald/flow-react-components";
 import { TunnelEntry as TunnelEntry } from "@mittwald/flow-react-components";
 import { XAxis as XAxis } from "@mittwald/flow-react-components";
@@ -437,6 +438,10 @@ export const flowComponents = {
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
     "TooltipTrigger",
     TooltipTrigger,
+  ),
+  "flr-translation-provider": createFlowRemoteComponentRenderer(
+    "TranslationProvider",
+    TranslationProvider,
   ),
   "flr-truncate": createFlowRemoteComponentRenderer("Truncate", Truncate),
   "flr-tunnel-entry": createFlowRemoteComponentRenderer(

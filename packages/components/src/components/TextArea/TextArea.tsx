@@ -8,7 +8,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import { type PropsWithChildren, useEffect, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import { FieldDescription } from "@/components/FieldDescription";
 
@@ -87,9 +87,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
     }
   };
 
-  const translation = useLocalizedStringFormatter(locales);
+  const translation = useLocalizedStringFormatter(locales, "TextArea");
 
-  const charactersCountDescription = translation.format("textArea.characters", {
+  const charactersCountDescription = translation.format("characters", {
     count: charactersCount,
     maxCount: props.maxLength ?? 0,
   });

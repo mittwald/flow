@@ -9,6 +9,7 @@ export {
   type BrowserOnlyProps,
   CountryOptions,
   type CountryOptionsProps,
+  IntlProvider,
   LightBox,
   type LightBoxProps,
   LightBoxTrigger,
