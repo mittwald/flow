@@ -4,6 +4,7 @@ import {
   alphaColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 const colors = ["default", ...alphaColors] as const;
 
@@ -24,7 +25,7 @@ test.each(testEnvironments)(
               }
             >
               <Flex gap="s">
-                <Link color={color}>Default</Link>
+                <Link color={color}>{firstLetterToUppercase(color)}</Link>
                 <Link color={color} inline>
                   Inline
                 </Link>

@@ -4,6 +4,7 @@ import {
   alphaColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
 export const colors = [
   "neutral",
@@ -35,7 +36,7 @@ test.each(testEnvironments)(
               }
             >
               <Flex gap="s">
-                <Badge color={color}>Value</Badge>
+                <Badge color={color}>{firstLetterToUppercase(color)}</Badge>
                 <Badge color={color} onClose={() => console.log("onClose")}>
                   Value
                 </Badge>
