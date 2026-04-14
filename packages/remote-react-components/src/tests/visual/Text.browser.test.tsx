@@ -9,7 +9,7 @@ import {
 const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
-  "Text (%s)",
+  "Text colors (%s)",
   async ({
     testScreenshot,
     render,
@@ -32,23 +32,10 @@ test.each(testEnvironments)(
             </AccentBox>
           </Wrap>
         ))}
-        <Text>
-          <small>laborum ea tempore, dolore voluptas.</small>
-          <ul>
-            <li>Item</li>
-            <li>Item</li>
-            <li>Item</li>
-          </ul>
-          <ol>
-            <li>Item</li>
-            <li>Item</li>
-            <li>Item</li>
-          </ol>
-        </Text>
       </Flex>,
     );
 
-    await testScreenshot("Text");
+    await testScreenshot("Text colors");
   },
 );
 
@@ -62,6 +49,17 @@ test.each(testEnvironments)(
         </Text>
         <Text wordBreak="break-word">
           LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text>
+          <small>laborum ea tempore, dolore voluptas.</small>
+          <ul>
+            <li>Item</li>
+            <li>Item</li>
+          </ul>
+          <ol>
+            <li>Item</li>
+            <li>Item</li>
+          </ol>
         </Text>
         <Text>
           <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing elit.
