@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.798](https://github.com/mittwald/flow/compare/0.2.0-alpha.797...0.2.0-alpha.798) (2026-04-14)
+
+### Features
+
+* **CartesianChart:** add progress bar formatter ([#2449](https://github.com/mittwald/flow/issues/2449)) ([0a54516](https://github.com/mittwald/flow/commit/0a545161dcb9a8a56c0987ff744a534e0298bbed))
+
 # [0.2.0-alpha.797](https://github.com/mittwald/flow/compare/0.2.0-alpha.796...0.2.0-alpha.797) (2026-04-14)
 
 ### Bug Fixes
