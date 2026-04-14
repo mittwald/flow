@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.795](https://github.com/mittwald/flow/compare/0.2.0-alpha.794...0.2.0-alpha.795) (2026-04-14)
+
+### Bug Fixes
+
+* **Ext-Bridge:** check for SSR in detection function ([#2455](https://github.com/mittwald/flow/issues/2455)) ([83119c5](https://github.com/mittwald/flow/commit/83119c50cb1b942fb099bb5e015aba5e421c1f2d))
+
 # [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
 
 ### Bug Fixes
