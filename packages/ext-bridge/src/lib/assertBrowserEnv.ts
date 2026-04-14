@@ -1,6 +1,6 @@
 import { ExtBridgeError } from "@/error";
 
-const isBrowser: boolean =
+export const isBrowser: boolean =
   typeof window !== "undefined" && typeof window.document !== "undefined";
 
 export const assertBrowserEnv = () => {
