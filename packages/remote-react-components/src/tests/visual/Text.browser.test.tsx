@@ -38,6 +38,8 @@ test.each(testEnvironments)(
             dolore voluptas.
           </Text>
         </AccentBox>
+        <Text noLigatures>5x4</Text>
+        <Text>5x4</Text>
       </Flex>,
     );
 

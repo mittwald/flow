@@ -68,4 +68,8 @@
   &:where(.wrap-pretty) {
     text-wrap: pretty;
   }
+
+  &:where(.no-ligatures) {
+    font-variant-ligatures: none;
+  }
 }
