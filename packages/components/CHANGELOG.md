@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
+
+### Bug Fixes
+
+* **storybook:** show mittwald branding ([#2454](https://github.com/mittwald/flow/issues/2454)) ([0991688](https://github.com/mittwald/flow/commit/0991688adda8505fe9256d476623dc7ffba5e3e6))
+
 # [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
