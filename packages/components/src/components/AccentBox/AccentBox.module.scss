@@ -29,4 +29,9 @@
   @include status("violet");
   @include status("green");
   @include status("navy");
+
+  /* backwards compatibility */
+  > .icon {
+    display: none;
+  }
 }
