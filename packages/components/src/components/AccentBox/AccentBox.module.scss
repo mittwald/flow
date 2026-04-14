@@ -29,4 +29,9 @@
   @include color("violet");
   @include color("green");
   @include color("navy");
+
+  /* backwards compatibility */
+  > .icon {
+    display: none;
+  }
 }

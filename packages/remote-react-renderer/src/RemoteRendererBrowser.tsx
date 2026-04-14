@@ -4,12 +4,12 @@ import { useMergedComponents } from "@/hooks/useMergedComponents";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
-import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,
   RemoteError,
   type HostToRemoteConnection,
   type NavigationState,
+  type RemoteExtBridgeConnectionApi,
 } from "@mittwald/flow-remote-core";
 import { usePromise } from "@mittwald/react-use-promise";
 import {
@@ -17,6 +17,8 @@ import {
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
 import { type CSSProperties, type FC, useMemo, useRef, useState } from "react";
+import { useLanguage } from "@mittwald/flow-react-components";
+import type { HostConfig } from "@mittwald/flow-core";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
@@ -24,7 +26,7 @@ export interface RemoteRendererBrowserProps {
   timeoutMs?: number;
   onNavigationStateChanged?: (state: NavigationState) => void;
   hostPathname?: string;
-  extBridgeImplementation?: ExtBridgeConnectionApi;
+  extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
   __remoteReceiver?: RemoteReceiver;
 }
@@ -66,6 +68,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     throw new RemoteError("'src' prop is required");
   }
 
+  const language = useLanguage();
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const loadingPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
@@ -92,9 +95,14 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   useUpdateHostPathnameOnRemote(hostPathname, connection.current);
 
+  const hostConfig: HostConfig = {
+    language,
+  };
+
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
-    extBridgeImplementation: extBridgeImplementation,
+    extBridgeImplementation,
+    hostConfig,
     onReady: (establishedConnection) => {
       establishedConnection.updateHostPathname(hostPathname);
       connectionPromise.resolve();

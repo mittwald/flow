@@ -44,7 +44,7 @@ const customPolicy = Policy.fromDeclaration({
   ],
 });
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Page() {
   const form = useForm({

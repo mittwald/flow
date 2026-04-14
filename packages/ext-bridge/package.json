@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "0.2.0-alpha.788",
+  "version": "0.2.0-alpha.793",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",
@@ -45,6 +45,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@mittwald/flow-core": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",

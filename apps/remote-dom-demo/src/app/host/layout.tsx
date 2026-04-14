@@ -32,7 +32,6 @@ export default function HostPage() {
             userId: "user-id",
             appInstallationId: "appi-id",
             customerId: "customer-id",
-            language: "de-DE",
             projectId: "project-id",
           }),
           getSessionToken: async () => "session-token",

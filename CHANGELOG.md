@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
+
+### Features
+
+* **ci:** deploy master to mittwald ([#2452](https://github.com/mittwald/flow/issues/2452)) ([ae98297](https://github.com/mittwald/flow/commit/ae982975b57b1429fbf19dc24e9169a7cae191a3))
+
+# [0.2.0-alpha.792](https://github.com/mittwald/flow/compare/0.2.0-alpha.791...0.2.0-alpha.792) (2026-04-14)
+
+### Bug Fixes
+
+* **AccentBox:** make accent box backwards compatible ([#2451](https://github.com/mittwald/flow/issues/2451)) ([c856f2b](https://github.com/mittwald/flow/commit/c856f2b732ff639e3ef50635f9880084d3a2ee11))
+
+### Features
+
+* **Text:** add noLigatures option ([b4b799d](https://github.com/mittwald/flow/commit/b4b799dbdbb7e0ead87ef9a1b4e71d3e25482290))
+
+# [0.2.0-alpha.791](https://github.com/mittwald/flow/compare/0.2.0-alpha.790...0.2.0-alpha.791) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.790](https://github.com/mittwald/flow/compare/0.2.0-alpha.789...0.2.0-alpha.790) (2026-04-13)
+
+### Bug Fixes
+
+* **Remote:** fix auto-setting remote language ([3c008cd](https://github.com/mittwald/flow/commit/3c008cddf6bb806963726b65ab6ce81dfbfb702e))
+* **Remote:** fix config types ([5a8fe9a](https://github.com/mittwald/flow/commit/5a8fe9a29ac9d67a9900bee716a508aed674c095))
+
+# [0.2.0-alpha.789](https://github.com/mittwald/flow/compare/0.2.0-alpha.788...0.2.0-alpha.789) (2026-04-13)
+
+### Features
+
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+
 # [0.2.0-alpha.788](https://github.com/mittwald/flow/compare/0.2.0-alpha.787...0.2.0-alpha.788) (2026-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -72,6 +72,8 @@ test.each(testEnvironments)(
             elit.
           </small>
         </Text>
+        <Text noLigatures>5x4</Text>
+        <Text>5x4</Text>
       </Flex>,
     );
 

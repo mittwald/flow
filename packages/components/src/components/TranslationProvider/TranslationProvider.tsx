@@ -1,11 +1,9 @@
-import type { PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext } from "react";
 import type {
   LocalizedComponentName,
   TranslationFunction,
 } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 type ComponentTranslationDictionary = Record<
   LocalizedComponentName,
@@ -23,26 +21,21 @@ export interface TranslationContext {
   translate?: TranslationFunction;
 }
 
-export type TranslationProviderProps = PropsWithChildren &
-  TranslationContext &
-  FlowComponentProps<never>;
+export type TranslationProviderProps = PropsWithChildren & TranslationContext;
 
 const context = createContext<TranslationContext>({});
 
 export const useTranslationProvider = () => useContext(context);
 
 /** @flr-generate all */
-export const TranslationProvider = flowComponent(
-  "TranslationProvider",
-  (props) => {
-    const { children, translations, translate } = props;
+export const TranslationProvider: FC<TranslationProviderProps> = (props) => {
+  const { children, translations, translate } = props;
 
-    return (
-      <context.Provider value={{ translations, translate }}>
-        {children}
-      </context.Provider>
-    );
-  },
-);
+  return (
+    <context.Provider value={{ translations, translate }}>
+      {children}
+    </context.Provider>
+  );
+};
 
 export default TranslationProvider;

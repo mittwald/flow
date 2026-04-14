@@ -34,6 +34,8 @@ export interface TextProps
   whiteSpace?: React.CSSProperties["whiteSpace"];
   /* The word-break property of the text. @default undefined */
   wordBreak?: React.CSSProperties["wordBreak"];
+  /* Disables standard and contextual ligatures for predictable, literal text rendering */
+  noLigatures?: boolean;
 }
 
 /** @flr-generate all */
@@ -50,6 +52,7 @@ export const Text = flowComponent("Text", (props) => {
     style: styleFromProps,
     whiteSpace,
     wordBreak,
+    noLigatures,
     ...rest
   } = props;
 
@@ -58,6 +61,7 @@ export const Text = flowComponent("Text", (props) => {
     isAlphaColor(color) && styles[color],
     align && styles[`align-${align}`],
     wrap && styles[`wrap-${wrap}`],
+    noLigatures && styles[`no-ligatures`],
     className,
   );
 
@@ -71,7 +75,11 @@ export const Text = flowComponent("Text", (props) => {
     Kbd: { variant: "soft" },
   };
 
-  const style = { whiteSpace, wordBreak, ...styleFromProps };
+  const style = {
+    whiteSpace,
+    wordBreak,
+    ...styleFromProps,
+  };
 
   const childrenElement = (
     <PropsContextProvider props={propsContext}>
