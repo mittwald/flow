@@ -45,9 +45,9 @@ export interface AccentBoxProps
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {
-  /** The background color of the accent box. @default "neutral" */
+  /** The background color of the accent box. @default "blue" */
   backgroundColor?: AccentBoxWithCustomBackgroundColor;
-  /** The fcontent color of the accent box. @default "default" */
+  /** The content color of the accent box. @default "default" */
   color?: "default" | AlphaColor;
   /** The background image of the accent box. */
   backgroundImage?: string;
@@ -59,7 +59,7 @@ export interface AccentBoxProps
 export const AccentBox = flowComponent("AccentBox", (props) => {
   const {
     color = "default",
-    backgroundColor = "neutral",
+    backgroundColor = "blue",
     backgroundImage,
     children,
     elementType = "div",
@@ -69,6 +69,14 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   } = props;
 
   const isAFlowColor = isFlowColor(backgroundColor);
+
+  // backwards compatibility
+  const backgroundColorFromColor =
+    (color as unknown as string) === "neutral" ||
+    (color as unknown as string) === "gradient" ||
+    (color as unknown as string) === "green"
+      ? (color as unknown as AccentBoxBackgroundColor)
+      : undefined;
 
   const style = {
     backgroundColor: isAFlowColor ? undefined : backgroundColor,
@@ -80,7 +88,11 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   const rootClassName = clsx(
     styles.accentBox,
     className,
-    isAFlowColor ? styles[backgroundColor] : undefined,
+    backgroundColorFromColor
+      ? styles[backgroundColorFromColor]
+      : isAFlowColor
+        ? styles[backgroundColor]
+        : undefined,
   );
 
   const Element = elementType;
@@ -96,6 +108,9 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
     },
     Heading: {
       color: contentColor,
+    },
+    Icon: {
+      className: styles.icon,
     },
   };
 
