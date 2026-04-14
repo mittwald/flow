@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.792](https://github.com/mittwald/flow/compare/0.2.0-alpha.791...0.2.0-alpha.792) (2026-04-14)
+
+### Bug Fixes
+
+* **AccentBox:** make accent box backwards compatible ([#2451](https://github.com/mittwald/flow/issues/2451)) ([c856f2b](https://github.com/mittwald/flow/commit/c856f2b732ff639e3ef50635f9880084d3a2ee11))
+
+### Features
+
+* **Text:** add noLigatures option ([b4b799d](https://github.com/mittwald/flow/commit/b4b799dbdbb7e0ead87ef9a1b4e71d3e25482290))
+
 # [0.2.0-alpha.791](https://github.com/mittwald/flow/compare/0.2.0-alpha.790...0.2.0-alpha.791) (2026-04-13)
 
 **Note:** Version bump only for package @mittwald/flow-project
