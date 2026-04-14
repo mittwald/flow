@@ -19,8 +19,14 @@ export const TooltipContent: FC<
       showProgressBar?: boolean;
     }
 > = (props) => {
-  const { headingFormatter, formatter, label, payload, showProgressBar } =
-    props;
+  const {
+    headingFormatter,
+    formatter,
+    progressBarFormatter,
+    label,
+    payload,
+    showProgressBar,
+  } = props;
 
   const formattedHeading = usePromise(
     async (label, formatter) => {
@@ -46,7 +52,12 @@ export const TooltipContent: FC<
   return (
     <Flex direction="column" gap="s">
       <Heading level={4}>{formattedHeading}</Heading>
-      {showProgressBar && <TooltipProgressBar items={filteredPayload} />}
+      {showProgressBar && (
+        <TooltipProgressBar
+          progressBarFormatter={progressBarFormatter}
+          items={filteredPayload}
+        />
+      )}
       <div>{items}</div>
     </Flex>
   );
