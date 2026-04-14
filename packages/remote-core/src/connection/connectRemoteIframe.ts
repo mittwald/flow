@@ -4,11 +4,11 @@ import {
   type HostToRemoteConnection,
   type NavigationState,
   type RemoteExports,
+  type RemoteExtBridgeConnectionApi,
 } from "@/connection/types";
 import { getWithMergedHostConfig } from "@/ext-bridge/getWithMergedHostConfig";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
-import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import { type HostConfig } from "@mittwald/flow-core";
 import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
@@ -21,7 +21,7 @@ interface Options {
   onLoadingChanged?: (isLoading: boolean) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
-  extBridgeImplementation?: ExtBridgeConnectionApi;
+  extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
 
 export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
