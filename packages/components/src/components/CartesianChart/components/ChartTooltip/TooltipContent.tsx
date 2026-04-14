@@ -1,5 +1,5 @@
 import React, { type FC, Suspense } from "react";
-import type { TooltipContentProps } from "recharts";
+import type { TooltipContentProps as RechartTooltipContentProps } from "recharts";
 import type {
   NameType,
   ValueType,
@@ -11,14 +11,17 @@ import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartT
 import SkeletonTextView from "@/views/SkeletonTextView";
 import { TooltipProgressBar } from "@/components/CartesianChart/components/ChartTooltip/TooltipProgressBar";
 import { Flex } from "@/components/Flex";
+import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
+
+export interface TooltipContentProps<TData = ChartDataValue>
+  extends
+    WithTooltipFormatters<TData>,
+    Omit<RechartTooltipContentProps<ValueType, NameType>, "formatter"> {
+  showProgressBar?: boolean;
+}
 
 /** @internal */
-export const TooltipContent: FC<
-  WithTooltipFormatters &
-    Omit<TooltipContentProps<ValueType, NameType>, "formatter"> & {
-      showProgressBar?: boolean;
-    }
-> = (props) => {
+export const TooltipContent: FC<TooltipContentProps> = (props) => {
   const {
     headingFormatter,
     formatter,

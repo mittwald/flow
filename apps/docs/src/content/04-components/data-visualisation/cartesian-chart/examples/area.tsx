@@ -1,13 +1,7 @@
 import {
-  Area,
-  CartesianChart,
-  CartesianGrid,
-  ChartLegend,
-  ChartTooltip,
   Heading,
   Section,
-  XAxis,
-  YAxis,
+  typedCartesianChart,
 } from "@mittwald/flow-react-components";
 
 export default () => {
@@ -32,22 +26,39 @@ export default () => {
     },
   ];
 
+  const CartesianChart = typedCartesianChart<{
+    Datum: string;
+    Datenbanken: number;
+    Webspace: number;
+    Email: number;
+  }>();
+
   return (
     <Section>
       <Heading>Speicherplatz</Heading>
-      <CartesianChart data={data} height="300px">
-        <CartesianGrid />
-        <Area dataKey="Datenbanken" unit="%" />
-        <Area
+      <CartesianChart.CartesianChart
+        data={data}
+        height="300px"
+      >
+        <CartesianChart.Area
+          dataKey="Datenbanken"
+          unit="%"
+        />
+        <CartesianChart.Area
           dataKey="Webspace"
           color="palatinate-blue"
           unit="%"
         />
-        <Area dataKey="Email" color="tangerine" unit="%" />
-        <XAxis dataKey="Datum" />
-        <YAxis domain={[0, 100]} unit=" %" />
-        <ChartLegend />
-        <ChartTooltip
+        <CartesianChart.Area
+          dataKey="Email"
+          color="tangerine"
+          unit="%"
+        />
+        <CartesianChart.XAxis dataKey="Datum" />
+        <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
+        <CartesianChart.ChartGrid />
+        <CartesianChart.ChartLegend />
+        <CartesianChart.ChartTooltip
           formatter={(value, name) =>
             `${name}: ${Intl.NumberFormat(undefined, {
               style: "unit",
@@ -63,7 +74,7 @@ export default () => {
             }).format(typeof value === "number" ? value : 0)
           }
         />
-      </CartesianChart>
+      </CartesianChart.CartesianChart>
     </Section>
   );
 };

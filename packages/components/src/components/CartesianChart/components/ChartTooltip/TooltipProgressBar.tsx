@@ -2,14 +2,15 @@ import type { FC } from "react";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import type { TooltipPayloadItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
-import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import styles from "./ChartTooltip.module.scss";
 import type { WithTooltipFormatters } from "@/components/CartesianChart";
 import { usePromise } from "@mittwald/react-use-promise";
+import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
-interface TooltipProgressBarProps extends Pick<
-  WithTooltipFormatters,
+interface TooltipProgressBarProps<TData = ChartDataValue> extends Pick<
+  WithTooltipFormatters<TData>,
   "progressBarFormatter"
 > {
   items: TooltipPayloadItem[];
@@ -22,7 +23,10 @@ export const TooltipProgressBar: FC<TooltipProgressBarProps> = (props) => {
     (item) => item.fill !== "none" && item.graphicalItemId.includes("area"),
   );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "CartesianChart",
+  );
 
   const unit = areaItems[0]?.unit;
 
@@ -57,7 +61,7 @@ export const TooltipProgressBar: FC<TooltipProgressBarProps> = (props) => {
       valueLabel={formattedLabel}
       maxValue={unit === "%" ? undefined : total}
     >
-      <Label>{stringFormatter.format("cartesianChart.total")}</Label>
+      <Label>{stringFormatter.format("tooltip.progressBar.total")}</Label>
     </ProgressBar>
   );
 };

@@ -1,6 +1,7 @@
 import { ComposedChart, ResponsiveContainer } from "recharts";
 import React, {
   type ComponentProps,
+  type ComponentType,
   type FC,
   isValidElement,
   type PropsWithChildren,
@@ -13,18 +14,41 @@ import { useChartClipRect } from "@/components/CartesianChart/hooks/useChartClip
 import DivView from "@/views/DivView";
 import Wrap from "@/components/Wrap";
 
+import { TypedArea } from "@/components/CartesianChart/components/Area";
+import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid";
+import { TypedYAxis } from "@/components/CartesianChart/components/YAxis";
+import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLegend";
+import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
+import { TypedXAxis } from "@/components/CartesianChart/components/XAxis";
+import { TypedLine } from "@/components/CartesianChart/components/Line";
+
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
   data?: ComponentProps<typeof ComposedChart>["data"];
 }
 
-export interface CartesianChartProps
+export type ChartDataValue = Record<string, unknown>;
+export type DataKey<TData> = keyof TData | (() => keyof TData) | number;
+export type DataKeyValue<
+  TData,
+  TDataKey extends DataKey<TData>,
+> = TDataKey extends keyof TData
+  ? TData[TDataKey]
+  : TDataKey extends () => infer K
+    ? K extends keyof TData
+      ? TData[K]
+      : TData[keyof TData]
+    : TData[keyof TData];
+
+export interface CartesianChartProps<TData = ChartDataValue>
   extends
     Pick<
       ComponentProps<typeof ComposedChart>,
-      "data" | "className" | "syncId" | "syncMethod"
+      "className" | "syncId" | "syncMethod"
     >,
     PropsWithChildren {
+  data?: TData[];
+
   height?: string;
 
   /** View that is provided when data is empty/undefined */
@@ -94,5 +118,16 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     </Wrap>
   );
 };
+
+export const typedCartesianChart = <TData = ChartDataValue,>() => ({
+  CartesianChart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
+  Area: TypedArea<TData>(),
+  XAxis: TypedXAxis<TData>(),
+  YAxis: TypedYAxis<TData>(),
+  ChartGrid: TypedChartGrid(),
+  ChartLegend: TypedChartLegend(),
+  ChartTooltip: TypedChartTooltip<TData>(),
+  Line: TypedLine<TData>(),
+});
 
 export default CartesianChart;

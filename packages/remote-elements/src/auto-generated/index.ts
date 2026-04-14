@@ -18,6 +18,7 @@ export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";
 export * from "./RemoteCartesianChartElement";
 export * from "./RemoteCartesianGridElement";
+export * from "./RemoteChartGridElement";
 export * from "./RemoteChartLegendElement";
 export * from "./RemoteChartTooltipElement";
 export * from "./RemoteChatElement";

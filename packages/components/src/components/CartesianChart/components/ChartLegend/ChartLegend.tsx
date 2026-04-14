@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { ComponentType, FC } from "react";
 import * as Recharts from "recharts";
 import LegendContent from "./LegendContent";
 
@@ -29,5 +29,8 @@ export const ChartLegend: FC<ChartLegendProps> = (props) => {
     />
   );
 };
+
+export const TypedChartLegend = () =>
+  ChartLegend as ComponentType<ChartLegendProps>;
 
 export default ChartLegend;
