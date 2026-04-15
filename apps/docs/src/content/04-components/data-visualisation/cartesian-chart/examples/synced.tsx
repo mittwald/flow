@@ -16,7 +16,7 @@ export default () => {
   return (
     <Section>
       <Heading>CPU</Heading>
-      <CartesianChart.CartesianChart
+      <CartesianChart.Chart
         data={[
           {
             Zeit: "0 Uhr",
@@ -53,11 +53,11 @@ export default () => {
         />
         <CartesianChart.XAxis dataKey="Zeit" />
         <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
-        <CartesianChart.ChartGrid />
-        <CartesianChart.ChartTooltip />
-      </CartesianChart.CartesianChart>
+        <CartesianChart.Grid />
+        <CartesianChart.Tooltip />
+      </CartesianChart.Chart>
       <Heading>RAM</Heading>
-      <CartesianChart.CartesianChart
+      <CartesianChart.Chart
         data={[
           {
             Zeit: "0 Uhr",
@@ -93,10 +93,10 @@ export default () => {
         />
         <CartesianChart.XAxis dataKey="Zeit" />
         <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
-        <CartesianChart.ChartGrid />
-        <CartesianChart.ChartLegend />
-        <CartesianChart.ChartTooltip />
-      </CartesianChart.CartesianChart>
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip />
+      </CartesianChart.Chart>
     </Section>
   );
 };

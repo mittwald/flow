@@ -36,10 +36,7 @@ export default () => {
   return (
     <Section>
       <Heading>Besucher</Heading>
-      <CartesianChart.CartesianChart
-        data={data}
-        height="300px"
-      >
+      <CartesianChart.Chart data={data} height="300px">
         <CartesianChart.Line dataKey="Projekt A" />
         <CartesianChart.Line
           dataKey="Projekt B"
@@ -51,12 +48,12 @@ export default () => {
         />
         <CartesianChart.XAxis dataKey="Datum" />
         <CartesianChart.YAxis />
-        <CartesianChart.ChartGrid />
-        <CartesianChart.ChartLegend />
-        <CartesianChart.ChartTooltip
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip
           formatter={(v, k) => `${k} (${v} Besucher)`}
         />
-      </CartesianChart.CartesianChart>
+      </CartesianChart.Chart>
     </Section>
   );
 };

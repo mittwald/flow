@@ -36,10 +36,7 @@ export default () => {
   return (
     <Section>
       <Heading>Speicherplatz</Heading>
-      <CartesianChart.CartesianChart
-        data={data}
-        height="300px"
-      >
+      <CartesianChart.Chart data={data} height="300px">
         <CartesianChart.Area
           dataKey="Datenbanken"
           unit="%"
@@ -56,9 +53,9 @@ export default () => {
         />
         <CartesianChart.XAxis dataKey="Datum" />
         <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
-        <CartesianChart.ChartGrid />
-        <CartesianChart.ChartLegend />
-        <CartesianChart.ChartTooltip
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip
           formatter={(value, name) =>
             `${name}: ${Intl.NumberFormat(undefined, {
               style: "unit",
@@ -74,7 +71,7 @@ export default () => {
             }).format(typeof value === "number" ? value : 0)
           }
         />
-      </CartesianChart.CartesianChart>
+      </CartesianChart.Chart>
     </Section>
   );
 };

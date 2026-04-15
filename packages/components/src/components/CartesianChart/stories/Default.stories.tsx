@@ -177,7 +177,7 @@ export const WithLine: Story = {
     }>();
 
     return (
-      <CartesianChart.CartesianChart
+      <CartesianChart.Chart
         data={[
           {
             Zeit: new Date(Date.parse("2026-06-11")),
@@ -222,9 +222,9 @@ export const WithLine: Story = {
           }}
         />
         <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
-        <CartesianChart.ChartGrid />
-        <CartesianChart.ChartLegend />
-        <CartesianChart.ChartTooltip
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip
           headingFormatter={(d) =>
             Intl.DateTimeFormat("de", {
               month: "long",
@@ -232,7 +232,7 @@ export const WithLine: Story = {
             }).format(d)
           }
         />
-      </CartesianChart.CartesianChart>
+      </CartesianChart.Chart>
     );
   },
 };

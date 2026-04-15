@@ -120,13 +120,13 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
 };
 
 export const typedCartesianChart = <TData = ChartDataValue,>() => ({
-  CartesianChart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
+  Chart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
   Area: TypedArea<TData>(),
   XAxis: TypedXAxis<TData>(),
   YAxis: TypedYAxis<TData>(),
-  ChartGrid: TypedChartGrid(),
-  ChartLegend: TypedChartLegend(),
-  ChartTooltip: TypedChartTooltip<TData>(),
+  Grid: TypedChartGrid(),
+  Legend: TypedChartLegend(),
+  Tooltip: TypedChartTooltip<TData>(),
   Line: TypedLine<TData>(),
 });
 
