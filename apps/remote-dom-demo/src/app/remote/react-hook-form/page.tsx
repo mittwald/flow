@@ -16,6 +16,7 @@ import {
   PasswordCreationField,
   Autocomplete,
   CheckboxGroup,
+  TranslationProvider,
   Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import {
@@ -43,7 +44,7 @@ const customPolicy = Policy.fromDeclaration({
   ],
 });
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Page() {
   const form = useForm({
@@ -95,11 +96,21 @@ export default function Page() {
             <Label>Name</Label>
           </TextField>
         </Field>
-        <Field name="email">
-          <TextField>
-            <Label>E-Mail</Label>
-          </TextField>
-        </Field>
+        <TranslationProvider
+          translations={{
+            "de-DE": {
+              Label: {
+                optional: "(Translated via TranslationProvider -Optional-)",
+              },
+            },
+          }}
+        >
+          <Field name="email">
+            <TextField>
+              <Label>E-Mail</Label>
+            </TextField>
+          </Field>
+        </TranslationProvider>
         <Field
           name="account"
           rules={{

@@ -12,7 +12,7 @@ import {
   type UseFormReturn,
   useWatch,
 } from "react-hook-form";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useUpdateFormDefaultValue } from "@/integrations/react-hook-form/components/Field/hooks/useUpdateFormDefaultValue";
@@ -23,7 +23,10 @@ export interface FieldProps<T extends FieldValues>
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "ReactHookForm.Field",
+  );
 
   const controller = useController({
     ...props,
@@ -33,7 +36,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.min === "number"
           ? {
               value: rest.rules.min,
-              message: stringFormatter.format("min", {
+              message: stringFormatter.format("validation.min", {
                 number: rest.rules.min,
               }),
             }
@@ -42,20 +45,20 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.max === "number"
           ? {
               value: rest.rules.max,
-              message: stringFormatter.format("max", {
+              message: stringFormatter.format("validation.max", {
                 number: rest.rules.max,
               }),
             }
           : rest.rules?.max,
       required:
         typeof rest.rules?.required === "boolean"
-          ? stringFormatter.format("required")
+          ? stringFormatter.format("validation.required")
           : rest.rules?.required,
       pattern:
         rest.rules?.pattern instanceof RegExp
           ? {
               value: rest.rules.pattern,
-              message: stringFormatter.format("pattern", {
+              message: stringFormatter.format("validation.pattern", {
                 pattern: rest.rules.pattern.source,
               }),
             }
@@ -64,7 +67,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.minLength === "number"
           ? {
               value: rest.rules.minLength,
-              message: stringFormatter.format("minLength", {
+              message: stringFormatter.format("validation.minLength", {
                 number: rest.rules.minLength,
               }),
             }
@@ -73,7 +76,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
         typeof rest.rules?.maxLength === "number"
           ? {
               value: rest.rules.maxLength,
-              message: stringFormatter.format("maxLength", {
+              message: stringFormatter.format("validation.maxLength", {
                 number: rest.rules.maxLength,
               }),
             }

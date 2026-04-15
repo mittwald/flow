@@ -1,7 +1,11 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
-const colors = ["default", "dark", "light"] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Markdown colors (%s)",
@@ -13,15 +17,15 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam aliquid fugit.\n" +
-                  "```json\n" +
-                  '"projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-                  "```\n" +
-                  "[link](#)\n"}
+                  "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam [aliquid fugit](#)."}
               </Markdown>
             </AccentBox>
           </Wrap>

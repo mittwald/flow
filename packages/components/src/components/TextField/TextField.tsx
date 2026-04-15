@@ -9,12 +9,12 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "./TextField.module.scss";
 import { FieldDescription } from "@/components/FieldDescription";
-import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import { Button } from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
 export interface TextFieldProps
   extends
@@ -74,15 +74,12 @@ export const TextField = flowComponent("TextField", (props) => {
     }
   };
 
-  const translation = useLocalizedStringFormatter(locales);
+  const translation = useLocalizedStringFormatter(locales, "TextField");
 
-  const charactersCountDescription = translation.format(
-    "textField.characters",
-    {
-      count: charactersCount,
-      maxCount: props.maxLength ?? 0,
-    },
-  );
+  const charactersCountDescription = translation.format("characters", {
+    count: charactersCount,
+    maxCount: props.maxLength ?? 0,
+  });
 
   return (
     <Aria.TextField
@@ -113,7 +110,7 @@ export const TextField = flowComponent("TextField", (props) => {
                     setType(type === "password" ? "text" : "password")
                   }
                   aria-label={translation.format(
-                    `textField.password.${type === "password" ? "show" : "hide"}`,
+                    `password.${type === "password" ? "show" : "hide"}`,
                   )}
                 >
                   {type === "password" ? <IconShow /> : <IconHide />}

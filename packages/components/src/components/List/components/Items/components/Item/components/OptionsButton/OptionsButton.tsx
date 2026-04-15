@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import locales from "../../../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren, PropsWithClassName {}
 
 export const OptionsButton: FC<Props> = (props) => {
   const { className, children } = props;
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <ContextMenuTriggerView>
@@ -18,7 +18,7 @@ export const OptionsButton: FC<Props> = (props) => {
         variant="plain"
         color="secondary"
         className={className}
-        aria-label={stringFormatter.format("list.options")}
+        aria-label={stringFormatter.format("options")}
         tunnelId={null}
       >
         <IconContextMenu />

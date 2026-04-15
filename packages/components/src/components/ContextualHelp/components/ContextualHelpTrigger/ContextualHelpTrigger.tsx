@@ -4,7 +4,7 @@ import { OverlayTrigger } from "@/components/OverlayTrigger";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { IconInfo } from "@/components/Icon/components/icons";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
@@ -15,13 +15,14 @@ export const ContextualHelpTrigger = flowComponent(
   "ContextualHelpTrigger",
   (props) => {
     const { children, ...triggerProps } = props;
-    const stringFormatter = useLocalizedStringFormatter(locales);
+    const stringFormatter = useLocalizedStringFormatter(
+      locales,
+      "ContextualHelpTrigger",
+    );
 
     const propsContext: PropsContext = {
       Button: {
-        "aria-label": stringFormatter.format(
-          "contextualHelpButton.moreInformation",
-        ),
+        "aria-label": stringFormatter.format("moreInformation"),
         children: <IconInfo />,
         size: "s",
         variant: "plain",

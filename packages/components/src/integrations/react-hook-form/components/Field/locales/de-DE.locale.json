@@ -1,8 +1,8 @@
 {
-  "max": "Maximale Anzahl von {number} erreicht",
-  "maxLength": "Bitte gib höchstens {number} Zeichen ein",
-  "min": "Minimale Anzahl von {number} noch nicht erreicht",
-  "minLength": "Bitte gib mindestens {number} Zeichen ein",
-  "pattern": "Entspricht nicht dem erwarteten Format: {pattern}",
-  "required": "Dieses Feld ist erforderlich"
+  "validation.max": "Maximale Anzahl von {number} erreicht",
+  "validation.maxLength": "Bitte gib höchstens {number} Zeichen ein",
+  "validation.min": "Minimale Anzahl von {number} noch nicht erreicht",
+  "validation.minLength": "Bitte gib mindestens {number} Zeichen ein",
+  "validation.pattern": "Entspricht nicht dem erwarteten Format: {pattern}",
+  "validation.required": "Dieses Feld ist erforderlich"
 }

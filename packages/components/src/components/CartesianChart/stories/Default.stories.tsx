@@ -81,8 +81,8 @@ export const Default: Story = {
       <Area dataKey="thirdKey" color="#555" />
       <XAxis dataKey="name" />
       <YAxis interval="equidistantPreserveStart" />
-      <ChartTooltip />
       <ChartLegend />
+      <ChartTooltip />
     </CartesianChart>
   ),
 };
@@ -107,8 +107,8 @@ export const MultipleSynced: Story = {
         <Area dataKey="thirdKey" color="malachite" />
         <XAxis dataKey="name" />
         <YAxis />
-        <ChartTooltip />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     </>
   ),
@@ -131,8 +131,8 @@ export const WithEmptyView: Story = {
         <Area dataKey="thirdKey" color="tangerine" />
         <XAxis dataKey="name" />
         <YAxis interval="equidistantPreserveStart" />
-        <ChartTooltip />
         <ChartLegend />
+        <ChartTooltip />
       </CartesianChart>
     );
   },
@@ -177,6 +177,7 @@ export const WithLine: Story = {
       <Line dataKey="max" color="magenta" unit="ms" />
       <XAxis dataKey="time" />
       <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
+      <ChartLegend />
       <ChartTooltip
         headingFormatter={(v) => {
           return `Sync Format: ${v}`;
@@ -186,7 +187,49 @@ export const WithLine: Story = {
           return `Async Format: ${name}: ${value}${unit ? ` ${unit}` : ""}`;
         }}
       />
+    </CartesianChart>
+  ),
+};
+
+export const WithIntlNumberFormat: Story = {
+  args: {
+    data: lineChartData,
+  },
+  render: () => (
+    <CartesianChart
+      data={[
+        {
+          Zeit: "0 Uhr",
+          Projekte: 24,
+          Container: 13.42,
+        },
+        {
+          Zeit: "1 Uhr",
+          Projekte: 13,
+          Container: 13.42,
+        },
+      ]}
+    >
+      <CartesianGrid />
+      <Area dataKey="Projekte" color="palatinate-blue" />
+      <Area dataKey="Container" />
+      <XAxis dataKey="Zeit" />
+      <YAxis domain={[0, 100]} />
       <ChartLegend />
+      <ChartTooltip
+        formatter={(value, name) =>
+          `${name}: ${Intl.NumberFormat(undefined, {
+            style: "unit",
+            unit: "gigabyte",
+          }).format(typeof value === "number" ? value : 0)}`
+        }
+        progressBarFormatter={(value) =>
+          Intl.NumberFormat(undefined, {
+            style: "unit",
+            unit: "gigabyte",
+          }).format(typeof value === "number" ? value : 0)
+        }
+      />
     </CartesianChart>
   ),
 };

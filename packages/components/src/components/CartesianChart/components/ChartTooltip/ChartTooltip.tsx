@@ -21,6 +21,11 @@ export type TooltipHeadingFormatter = (
   title: string | number | undefined,
 ) => Promise<string> | string;
 
+export type TooltipLProgressBarFormatter = (
+  value: TooltipPayloadItem["value"],
+  unit?: TooltipPayloadItem["unit"],
+) => Promise<string> | string;
+
 export interface WithTooltipFormatters {
   /**
    * A formatter function for the lines in the tooltip. Can be used for purposes
@@ -32,6 +37,11 @@ export interface WithTooltipFormatters {
    * purposes like translations.
    */
   headingFormatter?: TooltipHeadingFormatter;
+  /**
+   * A formatter function for the progressBar of the tooltip. Can be used for
+   * purposes like translations.
+   */
+  progressBarFormatter?: TooltipLProgressBarFormatter;
 }
 
 export interface ChartTooltipProps
@@ -40,11 +50,19 @@ export interface ChartTooltipProps
       TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
-    WithTooltipFormatters {}
+    WithTooltipFormatters {
+  /** Show progress bar for stacked areas @default "true" */
+  showProgressBar?: boolean;
+}
 
 /** @flr-generate all */
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
-  const { headingFormatter, formatter, ...rest } = props;
+  const {
+    headingFormatter,
+    formatter,
+    showProgressBar = true,
+    ...rest
+  } = props;
 
   return (
     <Tooltip
@@ -63,6 +81,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
                 {...props}
                 headingFormatter={headingFormatter}
                 formatter={formatter}
+                showProgressBar={showProgressBar}
               />
             </Suspense>
           </div>

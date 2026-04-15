@@ -121,6 +121,7 @@ export * from "./RemoteTextFieldElement";
 export * from "./RemoteTimeFieldElement";
 export * from "./RemoteTooltipElement";
 export * from "./RemoteTooltipTriggerElement";
+export * from "./RemoteTranslationProviderElement";
 export * from "./RemoteTruncateElement";
 export * from "./RemoteTunnelEntryElement";
 export * from "./RemoteXAxisElement";

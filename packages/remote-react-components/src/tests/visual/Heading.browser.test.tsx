@@ -1,10 +1,14 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
 const levels = [1, 2, 3, 4, 5, 6] as const;
 const sizes = ["xs", "s", "m", "l", "xl", "xxl"] as const;
-const colors = ["primary", "dark", "light", "danger", "unavailable"] as const;
+const colors = ["primary", "danger", "unavailable", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Heading sizes (%s)",
@@ -43,8 +47,12 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <Heading color={color}>
                 <IconStar />
                 {firstLetterToUppercase(color)}

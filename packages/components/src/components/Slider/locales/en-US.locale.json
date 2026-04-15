@@ -1,4 +1,4 @@
 {
-  "slider.decrement": "Decrement value",
-  "slider.increment": "Increment value"
+  "decrement": "Decrement value",
+  "increment": "Increment value"
 }

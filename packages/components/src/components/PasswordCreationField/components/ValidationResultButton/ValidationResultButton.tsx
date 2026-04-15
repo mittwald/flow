@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 import locales from "./../../locales/*.locale.json";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
@@ -21,7 +21,10 @@ interface Props extends PropsWithClassName {
 export const ValidationResultButton: FC<Props> = (props) => {
   const { policyValidationResult, isDisabled, isEmptyValue, className } = props;
 
-  const translate = useLocalizedStringFormatter(locales);
+  const translate = useLocalizedStringFormatter(
+    locales,
+    "PasswordCreationField",
+  );
 
   let validationResults = policyValidationResult?.ruleResults?.filter((r) => {
     return isEmptyValue ? !r.isValid : true;
