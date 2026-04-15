@@ -8,9 +8,10 @@ import type {
   PartialResolvedId,
   PluginContext,
   SourceDescription,
-} from "rollup";
+} from "rolldown";
 import path from "path";
-import type { HmrContext, ViteDevServer } from "vite";
+import type { MinimalPluginContextWithoutEnvironment } from "vite";
+import { type HmrContext, type ViteDevServer } from "vite";
 
 describe("vite i18n plugin", () => {
   test("resolve will return correct id", async () => {
@@ -23,7 +24,6 @@ describe("vite i18n plugin", () => {
         "./foo.ts",
         {
           isEntry: false,
-          attributes: {},
         },
       ])) as PartialResolvedId;
 
@@ -45,7 +45,6 @@ describe("vite i18n plugin", () => {
         "",
         {
           isEntry: false,
-          attributes: {},
         },
       ])) as PartialResolvedId;
 
@@ -144,7 +143,10 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply(
+        this as unknown as MinimalPluginContextWithoutEnvironment,
+        [hmrContext],
+      );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(0);
       expect(hmrContext.server.reloadModule).toBeCalledTimes(0);
     }
@@ -172,7 +174,10 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply(
+        this as unknown as MinimalPluginContextWithoutEnvironment,
+        [hmrContext],
+      );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
         generateVirtualFileId("./dev/vite/test/locales/*.locale.json"),

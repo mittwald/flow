@@ -2,6 +2,3 @@ packages:
   - "apps/*"
   - "packages/*"
 
-minimumReleaseAge: 10080 # 1 week in minutes
-minimumReleaseAgeExclude:
-  - "@mittwald/*"
