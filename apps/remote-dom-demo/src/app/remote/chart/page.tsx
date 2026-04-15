@@ -48,7 +48,7 @@ export default function Page() {
     </IllustratedMessage>
   );
 
-  const ExampleChart: FC<{ data: readonly unknown[] }> = ({ data }) => {
+  const ExampleChart: FC<{ data: Record<string, unknown>[] }> = ({ data }) => {
     return (
       <CartesianChart emptyView={emptyView} data={data} height="300px">
         <CartesianGrid />

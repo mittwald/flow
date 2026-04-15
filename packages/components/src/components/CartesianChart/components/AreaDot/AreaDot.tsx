@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import type * as Recharts from "recharts";
 
-export const AreaDot: FC<Recharts.DotProps & { color: string }> = ({
-  cx,
-  cy,
-  color,
-}) => {
+export interface AreaDotProps extends Recharts.DotProps {
+  color: string;
+}
+
+export const AreaDot: FC<AreaDotProps> = ({ cx, cy, color }) => {
   if (cx === undefined || cy === undefined) return null;
 
   return (
@@ -23,3 +23,5 @@ export const AreaDot: FC<Recharts.DotProps & { color: string }> = ({
     </svg>
   );
 };
+
+export default AreaDot;

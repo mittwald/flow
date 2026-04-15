@@ -1,11 +1,19 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
+import type {
+  ChartDataValue,
+  DataKey,
+  DataKeyValue,
+} from "@/components/CartesianChart/CartesianChart";
 
-export type YAxisProps = Pick<
+export type YAxisProps<
+  TData = ChartDataValue,
+  TDataKey extends DataKey<TData> = DataKey<TData>,
+  TDataMatch = DataKeyValue<TData, TDataKey>,
+> = Pick<
   Recharts.YAxisProps,
   | "className"
-  | "dataKey"
   | "orientation"
   | "allowDecimals"
   | "interval"
@@ -15,8 +23,10 @@ export type YAxisProps = Pick<
   | "domain"
   | "hide"
   | "unit"
-  | "tickFormatter"
->;
+> & {
+  dataKey?: TDataKey;
+  tickFormatter?: (value: TDataMatch, index: number) => string;
+};
 
 /** @flr-generate all */
 export const YAxis: FC<YAxisProps> = (props) => {
@@ -36,5 +46,7 @@ export const YAxis: FC<YAxisProps> = (props) => {
     />
   );
 };
+
+export { TypedYAxis } from "./types";
 
 export default YAxis;
