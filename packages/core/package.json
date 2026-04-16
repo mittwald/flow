@@ -10,22 +10,5 @@
   "dependencies": {
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4"
-  },
-  "devDependencies": {
-    "@vitest/browser-playwright": "^4.0.18",
-    "vite-plugin-node-polyfills": "^0.25.0",
-    "vitest": "^4.1.4"
-  },
-  "peerDependencies": {
-    "@vitest/browser-playwright": "^4",
-    "vitest": "^4"
-  },
-  "peerDependenciesMeta": {
-    "@vitest/browser-playwright": {
-      "optional": true
-    },
-    "vitest": {
-      "optional": true
-    }
   }
 }
