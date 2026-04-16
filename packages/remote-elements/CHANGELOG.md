@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing options with same value ([#2458](https://github.com/mittwald/flow/issues/2458)) ([83174c7](https://github.com/mittwald/flow/commit/83174c71e4abdfe675ea0c8d2c22d8dc85d3b4f9))
+
 # [0.2.0-alpha.799](https://github.com/mittwald/flow/compare/0.2.0-alpha.798...0.2.0-alpha.799) (2026-04-15)
 
 ### Features
