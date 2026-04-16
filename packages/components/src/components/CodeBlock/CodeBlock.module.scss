@@ -2,8 +2,9 @@
   display: block;
   font-size: var(--code-block--font-size);
   font-family: var(--code-block--font-family);
+  overflow: hidden;
 
-  &.withCodeContent {
+  &.withChildren {
     color: var(--code-block--content-color);
     background-color: var(--code-block--background-color);
     border: var(--code-block--border-width) var(--code-block--border-style)
@@ -17,6 +18,36 @@
       > code {
         text-shadow: none;
       }
+    }
+  }
+}
+
+.buttonContainer {
+  background-color: var(--code-block--background-color);
+  border: var(--code-block--border-width) var(--code-block--border-style)
+    var(--code-block--border-color);
+  border-top: none;
+  border-bottom-left-radius: var(--code-block--corner-radius);
+  border-bottom-right-radius: var(--code-block--corner-radius);
+  position: relative;
+  margin-top: calc(var(--size-px--xs) * -1);
+  display: flex;
+  justify-content: center;
+  padding-block: var(--size-px--xs);
+
+  &.collapsed {
+    &::before {
+      content: "";
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--code-block--background-color)
+      );
+      height: var(--code-block--padding);
+      width: 100%;
+      position: absolute;
+      top: calc(var(--code-block--padding) * -1);
+      inset-inline: 0;
     }
   }
 }

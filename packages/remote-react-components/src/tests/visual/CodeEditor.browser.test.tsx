@@ -16,6 +16,6 @@ test.each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("CodeBlock");
+    await testScreenshot("CodeEditor");
   },
 );

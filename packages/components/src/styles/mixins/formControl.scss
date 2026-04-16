@@ -53,6 +53,7 @@
   }
 
   /* Read Only */
+  &.readonly,
   &[readonly],
   &[data-readonly],
   [data-readonly] & {
