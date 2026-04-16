@@ -9,11 +9,11 @@ export default mergeConfig(
   defineConfig({
     experimental: {},
     build: {
-      minify: false,
+      minify: "oxc",
       sourcemap: true,
       outDir: "dist",
       target: "esnext",
-      cssMinify: "esbuild",
+      cssMinify: "lightningcss",
       lib: {
         entry: {
           default: "./src/index/default.ts",

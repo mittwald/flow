@@ -1,4 +1,3 @@
-import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
 import banner from "vite-plugin-banner";
 import dts from "vite-plugin-dts";
@@ -9,7 +8,6 @@ export default mergeConfig(
   baseConfig,
   defineConfig({
     plugins: [
-      preserveDirectives(),
       banner((filename) =>
         filename.endsWith(".mjs") ? '"use client"\r\n/* */' : "",
       ),
