@@ -4,8 +4,8 @@ import type { ListBoxProps } from "react-aria-components";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
-import OptionView from "@/views/OptionView";
 import { all, type CountryData } from "country-codes-list";
+import { Option } from "@/components/Option";
 
 export type Country = CountryData & {
   name: string;
@@ -44,12 +44,14 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
       .filter(filterBy)
       .sort(sortBy)
       .map((country) => (
-        <OptionView
-          key={`${country.countryCode}-${country.countryNameEn}`}
+        <Option
+          key={country.countryNameEn}
+          id={country.countryNameEn}
           value={country.countryCode}
+          textValue={country.name}
         >
           {country.name}
-        </OptionView>
+        </Option>
       ));
   }, [stringFormatter]);
 };
