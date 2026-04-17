@@ -86,6 +86,7 @@ export const TabNotFound: Story = {
           <Heading>General</Heading>
         </Section>
       </Tab>
+
       <Tab id="storage">
         <TabTitle>Storage settings</TabTitle>
         <Section>
