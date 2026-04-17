@@ -33,7 +33,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     showLineNumbers = false,
     children,
     expandable = false,
-    expandAfterLines = 10,
+    expandAfterLines = 8,
     ...rest
   } = props;
 
