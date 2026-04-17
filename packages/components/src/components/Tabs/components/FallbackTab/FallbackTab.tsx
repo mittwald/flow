@@ -8,13 +8,13 @@ import { Text } from "@/components/Text";
 import { AlertIcon } from "@/components/AlertIcon";
 
 export const FallbackTab: FC = () => {
-  const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
+  const stringFormatter = useLocalizedStringFormatter(locales, "Tabs");
 
   return (
     <IllustratedMessage className={styles.fallbackTab} color="unavailable">
       <AlertIcon status="unavailable" />
-      <Heading>{stringFormatter.format("tabs.fallbackTab.heading")}</Heading>
-      <Text>{stringFormatter.format("tabs.fallbackTab.text")}</Text>
+      <Heading>{stringFormatter.format("fallbackTab.heading")}</Heading>
+      <Text>{stringFormatter.format("fallbackTab.text")}</Text>
     </IllustratedMessage>
   );
 };

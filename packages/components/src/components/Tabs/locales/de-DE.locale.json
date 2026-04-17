@@ -1,4 +1,4 @@
 {
-  "tabs.fallbackTab.heading": "Tab nicht gefunden",
-  "tabs.fallbackTab.text": "Das Tab das du aufrufen wolltest gibt es nicht mehr oder du hast keinen Zugriff darauf."
+  "fallbackTab.heading": "Tab nicht gefunden",
+  "fallbackTab.text": "Das Tab das du aufrufen wolltest gibt es nicht mehr oder du hast keinen Zugriff darauf."
 }
