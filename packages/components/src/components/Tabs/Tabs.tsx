@@ -3,7 +3,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
@@ -13,7 +13,10 @@ export interface TabsProps
   extends
     Omit<Aria.TabsProps, "children">,
     PropsWithChildren,
-    FlowComponentProps {}
+    FlowComponentProps {
+  /* custom fallback view for not found tabs */
+  tabNotFoundView?: ReactElement;
+}
 
 /** @flr-generate all */
 export const Tabs = flowComponent("Tabs", (props) => {
@@ -25,6 +28,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     disabledKeys,
     ref,
     onSelectionChange,
+    tabNotFoundView,
     ...rest
   } = props;
 
@@ -63,7 +67,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           disabledKeys={disabledKeys}
         />
         <TunnelExit id="Panels" />
-        <FallbackTab />
+        {tabNotFoundView ?? <FallbackTab />}
       </Aria.Tabs>
     </TunnelProvider>
   );
