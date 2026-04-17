@@ -7,6 +7,7 @@ import type { PropsWithChildren } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
+import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
 
 export interface TabsProps
   extends
@@ -62,6 +63,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           disabledKeys={disabledKeys}
         />
         <TunnelExit id="Panels" />
+        <FallbackTab />
       </Aria.Tabs>
     </TunnelProvider>
   );
