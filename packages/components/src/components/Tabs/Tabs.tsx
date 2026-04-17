@@ -67,7 +67,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           disabledKeys={disabledKeys}
         />
         <TunnelExit id="Panels" />
-        {tabNotFoundView ?? <FallbackTab />}
+        <FallbackTab tabNotFoundView={tabNotFoundView} />
       </Aria.Tabs>
     </TunnelProvider>
   );
