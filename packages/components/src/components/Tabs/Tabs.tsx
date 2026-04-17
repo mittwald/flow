@@ -3,7 +3,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
-import type { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
@@ -15,7 +15,7 @@ export interface TabsProps
     PropsWithChildren,
     FlowComponentProps {
   /* custom fallback view for not found tabs */
-  tabNotFoundView?: ReactElement;
+  tabNotFoundView?: ReactNode;
 }
 
 /** @flr-generate all */
