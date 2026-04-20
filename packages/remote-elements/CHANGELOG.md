@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.801](https://github.com/mittwald/flow/compare/0.2.0-alpha.800...0.2.0-alpha.801) (2026-04-20)
+
+### Features
+
+* **Tab:** add not found fallback ([#2460](https://github.com/mittwald/flow/issues/2460)) ([e0955cd](https://github.com/mittwald/flow/commit/e0955cdda5eb11e1fef5ed760eda3f1e1fcb1384))
+
 # [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
 
 ### Bug Fixes
