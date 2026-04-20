@@ -19,6 +19,7 @@ import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianChart as CartesianChart } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
+import { ChartGrid as ChartGrid } from "@mittwald/flow-react-components";
 import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
 import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
 import { Chat as Chat } from "@mittwald/flow-react-components";
@@ -165,6 +166,7 @@ export const flowComponents = {
     "CartesianGrid",
     CartesianGrid,
   ),
+  "flr-chart-grid": createFlowRemoteComponentRenderer("ChartGrid", ChartGrid),
   "flr-chart-legend": createFlowRemoteComponentRenderer(
     "ChartLegend",
     ChartLegend,

@@ -104,7 +104,7 @@ export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps>
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["tabNotFoundView"];
   }
 }
 

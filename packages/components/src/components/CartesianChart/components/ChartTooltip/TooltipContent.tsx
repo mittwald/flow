@@ -1,5 +1,5 @@
 import React, { type FC, Suspense } from "react";
-import type { TooltipContentProps } from "recharts";
+import type { TooltipContentProps as RechartTooltipContentProps } from "recharts";
 import type {
   NameType,
   ValueType,
@@ -11,16 +11,25 @@ import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartT
 import SkeletonTextView from "@/views/SkeletonTextView";
 import { TooltipProgressBar } from "@/components/CartesianChart/components/ChartTooltip/TooltipProgressBar";
 import { Flex } from "@/components/Flex";
+import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
+
+export interface TooltipContentProps<TData = ChartDataValue>
+  extends
+    WithTooltipFormatters<TData>,
+    Omit<RechartTooltipContentProps<ValueType, NameType>, "formatter"> {
+  showProgressBar?: boolean;
+}
 
 /** @internal */
-export const TooltipContent: FC<
-  WithTooltipFormatters &
-    Omit<TooltipContentProps<ValueType, NameType>, "formatter"> & {
-      showProgressBar?: boolean;
-    }
-> = (props) => {
-  const { headingFormatter, formatter, label, payload, showProgressBar } =
-    props;
+export const TooltipContent: FC<TooltipContentProps> = (props) => {
+  const {
+    headingFormatter,
+    formatter,
+    progressBarFormatter,
+    label,
+    payload,
+    showProgressBar,
+  } = props;
 
   const formattedHeading = usePromise(
     async (label, formatter) => {
@@ -46,7 +55,12 @@ export const TooltipContent: FC<
   return (
     <Flex direction="column" gap="s">
       <Heading level={4}>{formattedHeading}</Heading>
-      {showProgressBar && <TooltipProgressBar items={filteredPayload} />}
+      {showProgressBar && (
+        <TooltipProgressBar
+          progressBarFormatter={progressBarFormatter}
+          items={filteredPayload}
+        />
+      )}
       <div>{items}</div>
     </Flex>
   );

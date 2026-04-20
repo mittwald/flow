@@ -1,11 +1,19 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
+import type {
+  ChartDataValue,
+  DataKey,
+  DataKeyValue,
+} from "@/components/CartesianChart/CartesianChart";
 import { useDesignTokens } from "../../../../lib/theming";
 
-export type XAxisProps = Pick<
+export type XAxisProps<
+  TData = ChartDataValue,
+  TDataKey extends DataKey<TData> = DataKey<TData>,
+  TDataMatch = DataKeyValue<TData, TDataKey>,
+> = Pick<
   Recharts.XAxisProps,
   | "className"
-  | "dataKey"
   | "orientation"
   | "allowDecimals"
   | "allowDataOverflow"
@@ -16,8 +24,10 @@ export type XAxisProps = Pick<
   | "domain"
   | "hide"
   | "unit"
-  | "tickFormatter"
->;
+> & {
+  dataKey?: TDataKey;
+  tickFormatter?: (value: TDataMatch, index: number) => string;
+};
 
 /** @flr-generate all */
 export const XAxis: FC<XAxisProps> = (props) => {
@@ -35,5 +45,7 @@ export const XAxis: FC<XAxisProps> = (props) => {
     />
   );
 };
+
+export { TypedXAxis } from "./types";
 
 export default XAxis;

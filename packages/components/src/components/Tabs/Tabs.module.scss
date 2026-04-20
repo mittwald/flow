@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .tabs {
   display: flex;
   flex-direction: column;
@@ -5,5 +7,33 @@
   .list {
     display: flex;
     flex-direction: row;
+  }
+
+  .fallbackTab {
+    display: none;
+  }
+
+  &:not(:has(.tabPanel[id])) {
+    .fallbackTab {
+      display: flex;
+    }
+  }
+}
+
+.tabPanel {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+
+  &[id] {
+    padding: var(--layout-card--padding);
+    opacity: 1;
+    height: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .tabPanel[id] {
+    padding: var(--layout-card--padding-mobile);
   }
 }

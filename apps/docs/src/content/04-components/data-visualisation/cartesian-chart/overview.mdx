@@ -3,7 +3,8 @@
 Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte
 dabei, dass zum Rendern entweder das übergeordnete Parent eine feste Höhe
 vorgeben muss oder das Chart selbst über die Property `height` eine eigene Höhe
-erhalten muss.
+erhalten muss. Mit `typedCartesianChart<T>` lässt sich ein Chart für einen
+bestimmten Datentyp erzeugen.
 
 <LiveCodeEditor editorCollapsed />
 
@@ -14,11 +15,13 @@ erhalten muss.
 Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
 `<Line />` oder eine Kombination aus beiden verwendet werden.
 
-**Line:** Zeigt die Entwicklung einzelner Objekte über einen Zeitraum und ermöglicht den Vergleich zwischen ihnen.
+**Line:** Zeigt die Entwicklung einzelner Objekte über einen Zeitraum und
+ermöglicht den Vergleich zwischen ihnen.
 
 <LiveCodeEditor example="line" editorCollapsed />
 
-**Area:** Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den jeweiligen Anteil einzelner Objekte daran.
+**Area:** Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den
+jeweiligen Anteil einzelner Objekte daran.
 
 <LiveCodeEditor example="area" editorCollapsed />
 

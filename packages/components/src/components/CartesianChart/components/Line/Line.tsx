@@ -1,14 +1,19 @@
-import { type FC } from "react";
+import { type ComponentType, type FC } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import type {
+  ChartDataValue,
+  DataKey,
+} from "@/components/CartesianChart/CartesianChart";
 import { useDesignTokens } from "../../../../lib/theming";
 
-export interface LineProps extends Pick<
+export interface LineProps<TData = ChartDataValue> extends Pick<
   Recharts.LineProps,
-  "className" | "dataKey" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
+  "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
 > {
+  dataKey?: DataKey<TData>;
   /** The color of the line. @default "sea-green" */
   color?: CategoricalWithCustomColor;
 }
@@ -34,5 +39,8 @@ export const Line: FC<LineProps> = (props) => {
     />
   );
 };
+
+export const TypedLine = <T = ChartDataValue,>() =>
+  Line as ComponentType<LineProps<T>>;
 
 export default Line;

@@ -18,6 +18,7 @@ export * from "./Breadcrumb";
 export * from "./Button";
 export * from "./CartesianChart";
 export * from "./CartesianGrid";
+export * from "./ChartGrid";
 export * from "./ChartLegend";
 export * from "./ChartTooltip";
 export * from "./Chat";

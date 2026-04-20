@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "0.2.0-alpha.793",
+  "version": "0.2.0-alpha.802",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",
@@ -23,7 +23,7 @@
     },
     "./i18next": {
       "types": "./dist/types/integrations/i18next/index.d.ts",
-      "default": "./dist/js/integrations/i18next.mjs"
+      "default": "./dist/js/i18next.mjs"
     }
   },
   "files": [

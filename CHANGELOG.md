@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.801](https://github.com/mittwald/flow/compare/0.2.0-alpha.800...0.2.0-alpha.801) (2026-04-20)
+
+### Features
+
+* **Tab:** add not found fallback ([#2460](https://github.com/mittwald/flow/issues/2460)) ([e0955cd](https://github.com/mittwald/flow/commit/e0955cdda5eb11e1fef5ed760eda3f1e1fcb1384))
+
+# [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing options with same value ([#2458](https://github.com/mittwald/flow/issues/2458)) ([83174c7](https://github.com/mittwald/flow/commit/83174c71e4abdfe675ea0c8d2c22d8dc85d3b4f9))
+
+# [0.2.0-alpha.799](https://github.com/mittwald/flow/compare/0.2.0-alpha.798...0.2.0-alpha.799) (2026-04-15)
+
+### Features
+
+* **CartesianChart:** add typed CartesianChart ([#2456](https://github.com/mittwald/flow/issues/2456)) ([8db3a8b](https://github.com/mittwald/flow/commit/8db3a8b7a312c24b63775e669f151191665ef20a))
+
+# [0.2.0-alpha.798](https://github.com/mittwald/flow/compare/0.2.0-alpha.797...0.2.0-alpha.798) (2026-04-14)
+
+### Features
+
+* **CartesianChart:** add progress bar formatter ([#2449](https://github.com/mittwald/flow/issues/2449)) ([0a54516](https://github.com/mittwald/flow/commit/0a545161dcb9a8a56c0987ff744a534e0298bbed))
+
+# [0.2.0-alpha.797](https://github.com/mittwald/flow/compare/0.2.0-alpha.796...0.2.0-alpha.797) (2026-04-14)
+
+### Bug Fixes
+
+* **Ext-Bridge:** fix export path ([178283c](https://github.com/mittwald/flow/commit/178283c7ddd4e7fef7506c35a333cd8132569060))
+
+# [0.2.0-alpha.796](https://github.com/mittwald/flow/compare/0.2.0-alpha.795...0.2.0-alpha.796) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.795](https://github.com/mittwald/flow/compare/0.2.0-alpha.794...0.2.0-alpha.795) (2026-04-14)
+
+### Bug Fixes
+
+* **Ext-Bridge:** check for SSR in detection function ([#2455](https://github.com/mittwald/flow/issues/2455)) ([83119c5](https://github.com/mittwald/flow/commit/83119c50cb1b942fb099bb5e015aba5e421c1f2d))
+
+# [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
+
+### Bug Fixes
+
+* **storybook:** show mittwald branding ([#2454](https://github.com/mittwald/flow/issues/2454)) ([0991688](https://github.com/mittwald/flow/commit/0991688adda8505fe9256d476623dc7ffba5e3e6))
+
 # [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
 
 ### Features

@@ -1,14 +1,17 @@
-import { type FC } from "react";
+import { type ComponentType, type FC } from "react";
 import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
+import type {
+  ChartDataValue,
+  DataKey,
+} from "@/components/CartesianChart/CartesianChart";
 import { useDesignTokens } from "../../../../lib/theming";
 
-export interface AreaProps extends Pick<
+export interface AreaProps<TData = ChartDataValue> extends Pick<
   Recharts.AreaProps,
   | "className"
-  | "dataKey"
   | "stackId"
   | "fillOpacity"
   | "key"
@@ -17,6 +20,7 @@ export interface AreaProps extends Pick<
   | "type"
   | "unit"
 > {
+  dataKey: DataKey<TData>;
   /** The color of the area. @default "sea-green" */
   color?: CategoricalWithCustomColor;
 }
@@ -48,5 +52,8 @@ export const Area: FC<AreaProps> = (props) => {
     />
   );
 };
+
+export const TypedArea = <T = ChartDataValue,>() =>
+  Area as ComponentType<AreaProps<T>>;
 
 export default Area;

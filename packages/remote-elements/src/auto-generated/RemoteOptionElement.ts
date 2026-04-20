@@ -18,6 +18,7 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       hidden: {},
       href: {},
       hrefLang: {},
+      id: {},
       inert: {},
       isDisabled: {},
       lang: {},

@@ -1,13 +1,7 @@
 import {
-  CartesianChart,
-  CartesianGrid,
-  ChartLegend,
-  ChartTooltip,
+  typedCartesianChart,
   Heading,
-  Line,
   Section,
-  XAxis,
-  YAxis,
 } from "@mittwald/flow-react-components";
 
 export default () => {
@@ -32,21 +26,34 @@ export default () => {
     },
   ];
 
+  const CartesianChart = typedCartesianChart<{
+    Datum: string;
+    "Projekt A": number;
+    "Projekt B": number;
+    "Projekt C": number;
+  }>();
+
   return (
     <Section>
       <Heading>Besucher</Heading>
-      <CartesianChart data={data} height="300px">
-        <CartesianGrid />
-        <Line dataKey="Projekt A" />
-        <Line dataKey="Projekt B" color="palatinate-blue" />
-        <Line dataKey="Projekt C" color="tangerine" />
-        <XAxis dataKey="Datum" />
-        <YAxis />
-        <ChartLegend />
-        <ChartTooltip
+      <CartesianChart.Chart data={data} height="300px">
+        <CartesianChart.Line dataKey="Projekt A" />
+        <CartesianChart.Line
+          dataKey="Projekt B"
+          color="palatinate-blue"
+        />
+        <CartesianChart.Line
+          dataKey="Projekt C"
+          color="tangerine"
+        />
+        <CartesianChart.XAxis dataKey="Datum" />
+        <CartesianChart.YAxis />
+        <CartesianChart.Grid />
+        <CartesianChart.Legend />
+        <CartesianChart.Tooltip
           formatter={(v, k) => `${k} (${v} Besucher)`}
         />
-      </CartesianChart>
+      </CartesianChart.Chart>
     </Section>
   );
 };
