@@ -5,6 +5,7 @@ import defaultMeta from "./Default.stories";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs/Edge Cases",
@@ -70,6 +71,26 @@ export const Nested: Story = {
               </Section>
             </Tab>
           </Tabs>
+        </Section>
+      </Tab>
+    </Tabs>
+  ),
+};
+
+export const TabNotFound: Story = {
+  render: (props) => (
+    <Tabs {...props} defaultSelectedKey="notFound">
+      <Tab id="general">
+        <TabTitle>General</TabTitle>
+        <Section>
+          <Heading>General</Heading>
+        </Section>
+      </Tab>
+
+      <Tab id="storage">
+        <TabTitle>Storage settings</TabTitle>
+        <Section>
+          <Heading>Storage</Heading>
         </Section>
       </Tab>
     </Tabs>
