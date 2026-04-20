@@ -130,3 +130,23 @@ export const Collapsed: Story = {
     </Tabs>
   ),
 };
+
+export const TabNotFound: Story = {
+  render: (props) => (
+    <Tabs {...props} defaultSelectedKey="notFound">
+      <Tab id="general">
+        <TabTitle>General</TabTitle>
+        <Section>
+          <Heading>General</Heading>
+        </Section>
+      </Tab>
+
+      <Tab id="storage">
+        <TabTitle>Storage settings</TabTitle>
+        <Section>
+          <Heading>Storage</Heading>
+        </Section>
+      </Tab>
+    </Tabs>
+  ),
+};

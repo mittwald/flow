@@ -1,6 +1,6 @@
 import type { ComponentType, FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
+import { useDesignTokens } from "@/lib/theming";
 
 export type ChartGridProps = Pick<
   Recharts.CartesianGridProps,
@@ -11,12 +11,14 @@ export type ChartGridProps = Pick<
 export const ChartGrid: FC<ChartGridProps> = (props) => {
   const { vertical = false, ...rest } = props;
 
+  const designTokens = useDesignTokens();
+
   return (
     <Recharts.CartesianGrid
       vertical={vertical}
       {...rest}
-      stroke={tokens["cartesian-grid"].color.value}
-      strokeWidth={tokens["cartesian-grid"]["stroke-width"].value}
+      stroke={designTokens["cartesian-grid"].color.value}
+      strokeWidth={designTokens["cartesian-grid"]["stroke-width"].value}
     />
   );
 };
