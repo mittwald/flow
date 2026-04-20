@@ -61,7 +61,7 @@
     "@internationalized/string": "^3.2.7",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.18",
+    "@mittwald/password-tools-js": "3.0.0-alpha.29",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.1.3",
