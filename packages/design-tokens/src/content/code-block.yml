@@ -17,3 +17,5 @@ code-block:
     value: "{form-control.background-color.default}"
   content-color:
     value: "{neutral-soft-content-color.default}"
+  show-more-padding:
+    value: "{size-px.xs}"

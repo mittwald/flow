@@ -30,10 +30,10 @@
   border-bottom-left-radius: var(--code-block--corner-radius);
   border-bottom-right-radius: var(--code-block--corner-radius);
   position: relative;
-  margin-top: calc(var(--size-px--xs) * -1);
+  margin-top: calc(var(--code-block--show-more-padding) * -1);
   display: flex;
   justify-content: center;
-  padding-block: var(--size-px--xs);
+  padding-block: var(--code-block--show-more-padding);
 
   &.collapsed {
     &::before {

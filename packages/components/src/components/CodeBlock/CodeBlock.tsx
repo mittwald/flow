@@ -60,7 +60,8 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       <div
         className={rootClassName}
         style={{
-          maxHeight: expanded || !expandable ? "none" : maxHeight,
+          maxHeight:
+            expanded || !expandable || !shouldExpand ? "none" : maxHeight,
         }}
       >
         <CodeEditor
@@ -74,8 +75,6 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           showActiveLineMarker={false}
           isReadOnly
           onCreateEditor={(view) => {
-            console.log(view.state.doc.lines);
-
             const lineHeight = 20;
             const padding = 12;
 
