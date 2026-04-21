@@ -28,6 +28,7 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
         key={present.label}
         isDisabled={present.disabled}
         onPress={present.onPress}
+        aria-label={present.label}
       >
         {present.label}
       </MenuItem>
@@ -38,7 +39,9 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
     <div className={styles.container}>
       {withDatePickerPresets && (
         <>
-          <Aria.Menu>{predefinedDateHelperItems}</Aria.Menu>
+          <Aria.Menu className={styles.presetMenu}>
+            {predefinedDateHelperItems}
+          </Aria.Menu>
           <Separator
             orientation={isSmallViewport ? "horizontal" : "vertical"}
           />

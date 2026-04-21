@@ -18,6 +18,10 @@
     display: flex;
     flex-direction: row;
     gap: var(--popover--padding--m);
+
+    .presetMenu {
+      max-width: 200px;
+    }
   }
 
   @media (max-width: 530px) {
