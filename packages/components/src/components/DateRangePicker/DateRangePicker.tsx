@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
-import { RangeCalendar } from "@/components/Calendar";
+import { type DateRangePresets, RangeCalendar } from "@/components/Calendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { useOverlayController } from "@/lib/controller";
 import {
@@ -15,13 +15,12 @@ import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValue
 import type { RangeValue } from "react-aria";
 import type { DateValue } from "@internationalized/date";
 import styles from "./DateRangePicker.module.scss";
-import type { Presets } from "@/components/Calendar/components/RangeCalendar/helpers/useCalendarDateRangePresets";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
     PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children" | "ref">>,
     FlowComponentProps<HTMLSpanElement> {
-  withDatePickerPresets?: boolean | Presets;
+  withDatePickerPresets?: boolean | DateRangePresets;
 }
 
 /** @flr-generate all */

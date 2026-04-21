@@ -70,8 +70,7 @@ export const WithCustomPresets: Story = {
   args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
     <DateRangePicker
-      withDatePickerPresets
-      datePickerPresets={[
+      withDatePickerPresets={[
         {
           label: "I am valid",
           start: new CalendarDate(2060, 1, 1),

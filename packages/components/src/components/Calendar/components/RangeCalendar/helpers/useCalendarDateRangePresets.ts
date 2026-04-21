@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
-import { CalendarDate } from "@internationalized/date";
+import { CalendarDate, toCalendarDate } from "@internationalized/date";
 import { useContext, useMemo } from "react";
 import { RangeCalendarStateContext } from "react-aria-components";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import locales from "../../../locales/*.locale.json";
+import invariant from "invariant";
 
 export interface DateRangePresetItem {
   start: CalendarDate;
@@ -18,6 +19,38 @@ interface CalendarDateRangePresetItem extends DateRangePresetItem {
   disabled: boolean;
 }
 
+const clampCalendarDate = (
+  date: CalendarDate,
+  minDate?: CalendarDate,
+  maxDate?: CalendarDate,
+) => {
+  if (minDate && date.compare(minDate) < 0) {
+    return minDate;
+  }
+
+  if (maxDate && date.compare(maxDate) > 0) {
+    return maxDate;
+  }
+
+  return date;
+};
+
+const clampCalendarDateRange = (
+  startDate: CalendarDate,
+  endDate: CalendarDate,
+  minDate?: CalendarDate,
+  maxDate?: CalendarDate,
+) => {
+  const clampedStart = clampCalendarDate(startDate, minDate, maxDate);
+  const clampedEnd = clampCalendarDate(endDate, minDate, maxDate);
+
+  return {
+    start: clampedStart,
+    end: clampedEnd,
+    invalid: clampedStart.compare(clampedEnd) > 0,
+  };
+};
+
 /** @internal * */
 export const useCalendarDateRangePresets = (
   customPresets?: DateRangePresets | boolean,
@@ -26,11 +59,13 @@ export const useCalendarDateRangePresets = (
   const state = useContext(RangeCalendarStateContext);
   const stringFormatter = useLocalizedStringFormatter(locales, "Calendar");
 
-  const isValidRange = (range: { start: CalendarDate; end: CalendarDate }) => {
-    return (
-      !!state && !state.isInvalid(range.start) && !state.isInvalid(range.end)
-    );
-  };
+  invariant(!!state, "Could not find RangeCalendarStateContext.");
+
+  const minDate = state.minValue ? toCalendarDate(state.minValue) : undefined;
+  const maxDate = state.maxValue ? toCalendarDate(state.maxValue) : undefined;
+
+  const isValidRange = (range: { start: CalendarDate; end: CalendarDate }) =>
+    !state.isInvalid(range.start) && !state.isInvalid(range.end);
 
   const possibleRanges = useMemo<DateRangePresets>(() => {
     if (typeof customPresets !== "boolean") {
@@ -153,15 +188,41 @@ export const useCalendarDateRangePresets = (
         ),
       },
     ];
-  }, [now, customPresets]);
+  }, [now, customPresets, stringFormatter]);
 
-  return possibleRanges.map((range) => ({
-    ...range,
-    disabled: !isValidRange(range),
-    onPress: () => {
-      if (state) {
-        state.setValue({ start: range.start, end: range.end });
-      }
-    },
-  }));
+  return possibleRanges.map((range) => {
+    if (
+      (minDate && range.end.compare(minDate) < 0) ||
+      (maxDate && range.start.compare(maxDate) > 0)
+    ) {
+      return {
+        ...range,
+        disabled: true,
+        onPress: () => {
+          // void
+        },
+      };
+    }
+
+    const { start, end, invalid } = clampCalendarDateRange(
+      range.start,
+      range.end,
+      minDate,
+      maxDate,
+    );
+
+    const presetDisabled = invalid || !isValidRange({ start, end });
+
+    return {
+      ...range,
+      start,
+      end,
+      disabled: presetDisabled,
+      onPress: () => {
+        if (!presetDisabled) {
+          state.setValue({ start, end });
+        }
+      },
+    };
+  });
 };
