@@ -16,6 +16,7 @@ import {
   modifyValueByType,
 } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { markdownEditorTunnelProviderId } from "./config";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -91,7 +92,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   return (
     <div className={rootClassName}>
-      <TunnelProvider>
+      <TunnelProvider id={markdownEditorTunnelProviderId}>
         <TextArea
           {...rest}
           aria-hidden={mode === "preview"}

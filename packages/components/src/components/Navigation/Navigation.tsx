@@ -9,6 +9,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { navigationTunnelProviderId } from "./config";
 
 export interface NavigationProps
   extends
@@ -40,16 +41,17 @@ export const Navigation = flowComponent("Navigation", (props) => {
         Link: {
           ...linkPropsContext,
           tunnelId: "links",
+          tunnelProviderId: navigationTunnelProviderId,
         },
         NavigationGroup: {
           Link: linkPropsContext,
         },
       }}
     >
-      <TunnelProvider>
+      <TunnelProvider id={navigationTunnelProviderId}>
         <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
           <ul>
-            <TunnelExit id="links" />
+            <TunnelExit id="links" providerId={navigationTunnelProviderId} />
           </ul>
           {children}
         </nav>

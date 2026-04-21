@@ -13,6 +13,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { radioGroupTunnelProviderId } from "./config";
 
 export interface RadioGroupProps
   extends
@@ -35,9 +36,11 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const propsContext: PropsContext = {
     RadioButton: {
       tunnelId: "radioButtons",
+      tunnelProviderId: radioGroupTunnelProviderId,
     },
     Radio: {
       tunnelId: "radios",
+      tunnelProviderId: radioGroupTunnelProviderId,
     },
     ...fieldPropsContext,
   };
@@ -51,11 +54,14 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
       ref={localRadioRef}
     >
-      <TunnelProvider>
+      <TunnelProvider id={radioGroupTunnelProviderId}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-              <TunnelExit id="radioButtons" />
+              <TunnelExit
+                id="radioButtons"
+                providerId={radioGroupTunnelProviderId}
+              />
             </ColumnLayout>
 
             <ColumnLayout
@@ -65,7 +71,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
               rowGap="s"
               className={styles.radioGroup}
             >
-              <TunnelExit id="radios" />
+              <TunnelExit id="radios" providerId={radioGroupTunnelProviderId} />
             </ColumnLayout>
 
             {children}

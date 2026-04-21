@@ -9,6 +9,7 @@ import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { labelTunnelProviderId } from "./config";
 
 export interface LabelProps
   extends
@@ -49,29 +50,34 @@ export const Label = flowComponent("Label", (props) => {
   const propsContext: PropsContext = {
     ContextualHelpTrigger: {
       tunnelId: "contextualHelp",
+      tunnelProviderId: labelTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
     Button: {
       tunnelId: "right",
+      tunnelProviderId: labelTunnelProviderId,
       size: "s",
     },
     Action: {
       tunnelId: "right",
+      tunnelProviderId: labelTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
+      <TunnelProvider id={labelTunnelProviderId}>
         <Aria.Label {...rest} className={rootClassName} ref={ref}>
           {children}
           {optional && optionalMarker}
-          <TunnelExit id="contextualHelp">
+          <TunnelExit id="contextualHelp" providerId={labelTunnelProviderId}>
             {(children) => {
               if (React.Children.count(children) >= 1) {
                 return children;
@@ -80,7 +86,7 @@ export const Label = flowComponent("Label", (props) => {
               return undefined;
             }}
           </TunnelExit>
-          <TunnelExit id="right">
+          <TunnelExit id="right" providerId={labelTunnelProviderId}>
             {(children) => {
               if (React.Children.count(children) >= 1) {
                 return <div className={styles.right}>{children}</div>;

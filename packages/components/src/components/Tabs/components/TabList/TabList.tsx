@@ -9,6 +9,7 @@ import clsx from "clsx";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 import { IconChevronDown } from "@/components/Icon/components/icons";
+import { tabsTunnelProviderId } from "../../config";
 
 interface Props {
   selection: Aria.Key | undefined;
@@ -30,7 +31,7 @@ export const TabList: FC<Props> = (props) => {
 
   const regularTabTitles = (
     <Aria.TabList className={styles.titles} ref={overflowObserver.ref}>
-      <TunnelExit id="Titles" />
+      <TunnelExit id="Titles" providerId={tabsTunnelProviderId} />
     </Aria.TabList>
   );
 
@@ -42,7 +43,7 @@ export const TabList: FC<Props> = (props) => {
         color="light"
         aria-labelledby={titleCollapsedElementId}
       >
-        <TunnelExit id="ActiveTitle" />
+        <TunnelExit id="ActiveTitle" providerId={tabsTunnelProviderId} />
         <IconChevronDown />
       </Button>
 
@@ -52,7 +53,7 @@ export const TabList: FC<Props> = (props) => {
         selectionMode="navigation"
         onAction={(key) => handleContextMenuSelectionChange(key)}
       >
-        <TunnelExit id="ContextMenuItems" />
+        <TunnelExit id="ContextMenuItems" providerId={tabsTunnelProviderId} />
       </ContextMenuView>
     </ContextMenuTriggerView>
   );

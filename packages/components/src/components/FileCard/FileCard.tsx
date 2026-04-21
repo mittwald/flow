@@ -17,6 +17,7 @@ import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { fileCardTunnelProviderId } from "./config";
 
 export interface FileCardProps
   extends
@@ -72,10 +73,12 @@ export const FileCard = flowComponent("FileCard", (props) => {
       elementType: "span",
       className: styles.subTitle,
       tunnelId: "subTitle",
+      tunnelProviderId: fileCardTunnelProviderId,
     },
     ProgressBar: {
       size: "s",
       tunnelId: "progressBar",
+      tunnelProviderId: fileCardTunnelProviderId,
     },
     Button: { variant: "plain", color: "secondary" },
   };
@@ -84,7 +87,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
+      <TunnelProvider id={fileCardTunnelProviderId}>
         <Element ref={ref as never} className={rootClassName}>
           <Wrap if={(href || onPress) && !isFailed}>
             <Link
@@ -104,8 +107,14 @@ export const FileCard = flowComponent("FileCard", (props) => {
                   </Text>
                 )}
                 {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
-                <TunnelExit id="subTitle" />
-                <TunnelExit id="progressBar" />
+                <TunnelExit
+                  id="subTitle"
+                  providerId={fileCardTunnelProviderId}
+                />
+                <TunnelExit
+                  id="progressBar"
+                  providerId={fileCardTunnelProviderId}
+                />
               </span>
             </Link>
           </Wrap>

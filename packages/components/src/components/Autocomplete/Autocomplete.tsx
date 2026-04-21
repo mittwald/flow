@@ -10,7 +10,7 @@ import {
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { TextFieldProps } from "@/components/TextField";
 import Options from "@/components/Options";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import locales from "./locales/*.locale.json";
 import Text from "@/components/Text";
 import styles from "./Autocomplete.module.scss";
@@ -23,6 +23,7 @@ import {
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
+import { autocompleteTunnelProviderId } from "./config";
 
 export interface AutocompleteProps
   extends
@@ -96,6 +97,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     TextField: inputProps,
     Option: {
       tunnelId: "options",
+      tunnelProviderId: autocompleteTunnelProviderId,
     },
     Popover: {
       className: styles.popover,
@@ -112,23 +114,28 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
         >
           <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
-              <Aria.Autocomplete
-                filter={contains}
-                disableAutoFocusFirst
-                {...rest}
-              >
-                {children}
-                <Options
-                  onAction={handleOptionAction}
-                  triggerRef={inputRef}
-                  controller={optionsOverlayController}
-                  renderEmptyState={renderEmptyState}
-                  isNonModal
-                  placement="bottom start"
+              <TunnelProvider id={autocompleteTunnelProviderId}>
+                <Aria.Autocomplete
+                  filter={contains}
+                  disableAutoFocusFirst
+                  {...rest}
                 >
-                  <TunnelExit id="options" />
-                </Options>
-              </Aria.Autocomplete>
+                  {children}
+                  <Options
+                    onAction={handleOptionAction}
+                    triggerRef={inputRef}
+                    controller={optionsOverlayController}
+                    renderEmptyState={renderEmptyState}
+                    isNonModal
+                    placement="bottom start"
+                  >
+                    <TunnelExit
+                      id="options"
+                      providerId={autocompleteTunnelProviderId}
+                    />
+                  </Options>
+                </Aria.Autocomplete>
+              </TunnelProvider>
             </UNSAFE_PortalProvider>
           </div>
         </PropsContextProvider>

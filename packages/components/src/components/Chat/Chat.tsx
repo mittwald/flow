@@ -8,6 +8,7 @@ import {
   PropsContextProvider,
 } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { chatTunnelProviderId } from "./config";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {
   // Height of the chat component
@@ -23,8 +24,13 @@ export const Chat: FC<ChatProps> = (props) => {
   const propsContext: PropsContext = {
     MessageThread: {
       tunnelId: "messageThread",
+      tunnelProviderId: chatTunnelProviderId,
     },
-    FileCardList: { className: styles.fileCardList, tunnelId: "fileCardList" },
+    FileCardList: {
+      className: styles.fileCardList,
+      tunnelId: "fileCardList",
+      tunnelProviderId: chatTunnelProviderId,
+    },
     Button: {
       className: dynamic((props) => {
         return props.color === "accent" ? styles.accentButton : styles.button;
@@ -35,12 +41,12 @@ export const Chat: FC<ChatProps> = (props) => {
   return (
     <PropsContextProvider props={propsContext}>
       <div style={{ height }} className={rootClassName}>
-        <TunnelProvider>
+        <TunnelProvider id={chatTunnelProviderId}>
           <div className={styles.messageThreadContainer}>
             <TunnelExit id="messageThread" />
           </div>
           <div className={styles.controls}>{children}</div>
-          <TunnelExit id="fileCardList" />
+          <TunnelExit id="fileCardList" providerId={chatTunnelProviderId} />
         </TunnelProvider>
       </div>
     </PropsContextProvider>

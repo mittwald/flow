@@ -9,6 +9,7 @@ import { TunnelEntry } from "@mittwald/react-tunnel";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { Activity } from "@/components/Activity";
+import { tabsTunnelProviderId } from "../../config";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">, PropsWithChildren {}
@@ -45,7 +46,7 @@ export const Tab: FC<TabProps> = (props) => {
   };
 
   return (
-    <TunnelEntry id="Panels">
+    <TunnelEntry id="Panels" providerId={tabsTunnelProviderId}>
       <TabContextProvider value={{ id }}>
         <Aria.TabPanel
           className={rootClassName}

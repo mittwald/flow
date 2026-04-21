@@ -5,6 +5,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { sectionHeaderTunnelProviderId } from "./config";
 
 export type SectionHeaderProps = PropsWithChildren &
   PropsWithClassName &
@@ -19,34 +20,48 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
     Switch: {
       labelPosition: "leading",
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
     },
     Button: {
       size: "s",
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
     },
-    FileField: { tunnelId: "actions", Button: { size: "s" } },
+    FileField: {
+      tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
+      Button: { size: "s" },
+    },
     ContextMenuTrigger: {
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
     PopoverTrigger: {
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
     ContextualHelpTrigger: {
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
     Action: {
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
       Button: {
         tunnelId: null,
+        tunnelProviderId: null,
       },
     },
     Heading: {
@@ -54,16 +69,20 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
     },
     Link: {
       tunnelId: "actions",
+      tunnelProviderId: sectionHeaderTunnelProviderId,
     },
   };
 
   return (
     <header ref={ref} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+        <TunnelProvider id={sectionHeaderTunnelProviderId}>
           {children}
           <div className={styles.actions}>
-            <TunnelExit id="actions" />
+            <TunnelExit
+              id="actions"
+              providerId={sectionHeaderTunnelProviderId}
+            />
           </div>
         </TunnelProvider>
       </PropsContextProvider>

@@ -59,10 +59,11 @@ export function flowComponent<C extends FlowComponentName>(
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
-    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
-      componentName,
-      props as FlowComponentPropsOfName<C>,
-    ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
+    const { tunnelId, tunnelProviderId, wrapWith, ...propsWithContext } =
+      useProps(
+        componentName,
+        props as FlowComponentPropsOfName<C>,
+      ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
 
     const implementationTypeProps = propsWithContext as ComponentProps<
       typeof ImplementationComponentType
@@ -120,7 +121,11 @@ export function flowComponent<C extends FlowComponentName>(
     }
 
     if (tunnelId) {
-      element = <TunnelEntry id={tunnelId}>{element}</TunnelEntry>;
+      element = (
+        <TunnelEntry id={tunnelId} providerId={tunnelProviderId ?? undefined}>
+          {element}
+        </TunnelEntry>
+      );
     }
     return element;
   }

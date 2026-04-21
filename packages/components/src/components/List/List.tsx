@@ -32,6 +32,7 @@ import Footer from "./components/Footer";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
+import { listTunnelProviderId } from "./config";
 
 export interface ListProps<T, TMeta = unknown>
   extends
@@ -175,6 +176,7 @@ export const List = flowComponent("List", (props) => {
   const propsContext: PropsContext = {
     ActionGroup: {
       tunnelId: "actions",
+      tunnelProviderId: listTunnelProviderId,
       className: headerStyles.actions,
       Button: {
         className: headerStyles.action,
@@ -182,12 +184,13 @@ export const List = flowComponent("List", (props) => {
     },
     ListSummary: {
       tunnelId: "listSummary",
+      tunnelProviderId: listTunnelProviderId,
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
+      <TunnelProvider id={listTunnelProviderId}>
         <listContext.Provider
           value={{
             list: listModel,
@@ -200,7 +203,10 @@ export const List = flowComponent("List", (props) => {
 
             <DivView className={styles.listWrapper}>
               {listModel.items.entries.length > 0 && (
-                <TunnelExit id="listSummary" />
+                <TunnelExit
+                  id="listSummary"
+                  providerId={listTunnelProviderId}
+                />
               )}
               {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
                 <Items />

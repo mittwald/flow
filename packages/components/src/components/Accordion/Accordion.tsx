@@ -8,6 +8,7 @@ import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Activity } from "@/components/Activity";
+import { accordionTunnelProviderId } from "./config";
 
 export interface AccordionProps extends PropsWithChildren<
   ComponentProps<"div">
@@ -57,6 +58,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
     Content: {
       className: styles.contentInner,
       tunnelId: "content",
+      tunnelProviderId: accordionTunnelProviderId,
     },
     Heading: {
       className: styles.header,
@@ -73,7 +75,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
   return (
     <div {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext} dependencies={[expanded]}>
-        <TunnelProvider>
+        <TunnelProvider id={accordionTunnelProviderId}>
           {children}
           <div
             aria-labelledby={headerId}
@@ -83,7 +85,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
             className={styles.content}
           >
             <Activity isActive={expanded} inactiveDelay={1000}>
-              <TunnelExit id="content" />
+              <TunnelExit id="content" providerId={accordionTunnelProviderId} />
             </Activity>
           </div>
         </TunnelProvider>

@@ -8,6 +8,7 @@ import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
 import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
+import { tabsTunnelProviderId } from "./config";
 
 export interface TabsProps
   extends
@@ -40,7 +41,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
   const selectedKey = selectedKeyProps ?? selectedKeyState;
 
   return (
-    <TunnelProvider>
+    <TunnelProvider id={tabsTunnelProviderId}>
       {children}
       <Aria.Tabs
         slot={null}
@@ -66,7 +67,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           }}
           disabledKeys={disabledKeys}
         />
-        <TunnelExit id="Panels" />
+        <TunnelExit id="Panels" providerId={tabsTunnelProviderId} />
         <FallbackTab tabNotFoundView={tabNotFoundView} />
       </Aria.Tabs>
     </TunnelProvider>

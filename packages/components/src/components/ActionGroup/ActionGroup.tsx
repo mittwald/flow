@@ -6,7 +6,6 @@ import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { TunnelProvider } from "@mittwald/react-tunnel";
 import { ActionStateContextProvider } from "@/components/Action/models/ActionStateContext";
 import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupSlot";
 
@@ -58,11 +57,9 @@ export const ActionGroup = flowComponent(
     return (
       <ActionStateContextProvider>
         <PropsContextProvider props={propsContext}>
-          <TunnelProvider>
-            <div {...rest} className={rootClassName} ref={ref} role="group">
-              {children}
-            </div>
-          </TunnelProvider>
+          <div {...rest} className={rootClassName} ref={ref} role="group">
+            {children}
+          </div>
         </PropsContextProvider>
       </ActionStateContextProvider>
     );

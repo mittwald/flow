@@ -18,6 +18,7 @@ export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
 export interface PropsWithTunnel {
   /** @internal */
   tunnelId?: string | null;
+  tunnelProviderId?: string | null;
 }
 
 export interface PropsWithClassName {

@@ -15,6 +15,7 @@ import clsx from "clsx";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { segmentedControlTunnelProviderId } from "./config";
 
 export interface SegmentedControlProps
   extends
@@ -49,6 +50,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const propsContext: PropsContext = {
     Segment: {
       tunnelId: "segments",
+      tunnelProviderId: segmentedControlTunnelProviderId,
       className: styles.segment,
     },
     ...fieldPropsContext,
@@ -63,12 +65,15 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
       ref={objectRef}
     >
-      <TunnelProvider>
+      <TunnelProvider id={segmentedControlTunnelProviderId}>
         <FieldErrorCaptureContext>
           <PropsContextProvider dependencies={["segment"]} props={propsContext}>
             <div className={styles.segmentedControl}>
               <div className={styles.segments}>
-                <TunnelExit id="segments" />
+                <TunnelExit
+                  id="segments"
+                  providerId={segmentedControlTunnelProviderId}
+                />
               </div>
             </div>
             {children}

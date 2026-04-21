@@ -12,6 +12,7 @@ import styles from "./CheckboxGroup.module.scss";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { checkboxGroupTunnelProviderId } from "./config";
 
 export interface CheckboxGroupProps
   extends
@@ -34,11 +35,13 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     Checkbox: {
       isInvalid,
       tunnelId: "checkboxes",
+      tunnelProviderId: checkboxGroupTunnelProviderId,
       className: styles.checkbox,
     },
     CheckboxButton: {
       isInvalid,
       tunnelId: "checkboxButtons",
+      tunnelProviderId: checkboxGroupTunnelProviderId,
       className: styles.checkboxButton,
     },
     ...fieldPropsContext,
@@ -55,13 +58,16 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       className={clsx(fieldProps.className, className)}
       ref={objectRef}
     >
-      <TunnelProvider>
+      <TunnelProvider id={checkboxGroupTunnelProviderId}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             {children}
 
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
-              <TunnelExit id="checkboxButtons" />
+              <TunnelExit
+                id="checkboxButtons"
+                providerId={checkboxGroupTunnelProviderId}
+              />
             </ColumnLayout>
 
             <ColumnLayout
@@ -71,7 +77,10 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
               rowGap="s"
               className={styles.checkboxGroup}
             >
-              <TunnelExit id="checkboxes" />
+              <TunnelExit
+                id="checkboxes"
+                providerId={checkboxGroupTunnelProviderId}
+              />
             </ColumnLayout>
           </PropsContextProvider>
         </FieldErrorCaptureContext>

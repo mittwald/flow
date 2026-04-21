@@ -14,6 +14,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { selectTunnelProviderId } from "./config";
 
 export interface SelectProps
   extends
@@ -54,6 +55,7 @@ export const Select = flowComponent("Select", (props) => {
   const propsContext: PropsContext = {
     Option: {
       tunnelId: "options",
+      tunnelProviderId: selectTunnelProviderId,
     },
     ...fieldPropsContext,
   };
@@ -78,7 +80,7 @@ export const Select = flowComponent("Select", (props) => {
       isOpen={isOpen}
       data-readonly={isReadOnly}
     >
-      <TunnelProvider>
+      <TunnelProvider id={selectTunnelProviderId}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={propsContext}>
             <Aria.Button
@@ -91,7 +93,7 @@ export const Select = flowComponent("Select", (props) => {
             </Aria.Button>
             {children}
             <Options controller={controller}>
-              <TunnelExit id="options" />
+              <TunnelExit id="options" providerId={selectTunnelProviderId} />
             </Options>
           </PropsContextProvider>
         </FieldErrorCaptureContext>

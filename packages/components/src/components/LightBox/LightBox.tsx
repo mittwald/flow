@@ -15,6 +15,7 @@ import styles from "./LightBox.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
+import { lightBoxTunnelProviderId } from "./config";
 
 export interface LightBoxProps
   extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
@@ -48,6 +49,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
       className: styles.actionGroup,
       Button: { variant: "solid", color: "light-static" },
       tunnelId: "actionGroup",
+      tunnelProviderId: lightBoxTunnelProviderId,
     },
   };
 
@@ -65,7 +67,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+        <TunnelProvider id={lightBoxTunnelProviderId}>
           <DivView className={styles.content}>{children}</DivView>
           <DivView className={styles.actions}>
             <ButtonView
@@ -75,7 +77,10 @@ export const LightBox = flowComponent("LightBox", (props) => {
             >
               <IconClose />
             </ButtonView>
-            <TunnelExit id="actionGroup" />
+            <TunnelExit
+              id="actionGroup"
+              providerId={lightBoxTunnelProviderId}
+            />
           </DivView>
         </TunnelProvider>
       </PropsContextProvider>

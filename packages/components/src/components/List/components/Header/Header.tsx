@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import styles from "./Header.module.css";
 import clsx from "clsx";
 import { ActiveFilters } from "@/components/List/components/Header/components/ActiveFilters";
@@ -13,6 +12,7 @@ import { SortingContextMenu } from "@/components/List/components/Header/componen
 import { FilterContextMenus } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenus";
 import { AllFiltersModal } from "@/components/List/components/Header/components/AllFiltersModal/AllFiltersModal";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
+import { listTunnelProviderId } from "../../config";
 
 export const Header: FC<PropsWithClassName> = (props) => {
   const { className } = props;
@@ -35,7 +35,7 @@ export const Header: FC<PropsWithClassName> = (props) => {
       )}
     >
       <DivView className={styles.headerContent}>
-        <TunnelExit id="actions" />
+        <TunnelExit id="actions" providerId={listTunnelProviderId} />
         {hasOptions && (
           <DivView className={styles.options}>
             <ViewModeContextMenu />

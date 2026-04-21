@@ -13,6 +13,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { sliderTunnelProviderId } from "./config";
 
 export interface SliderProps
   extends
@@ -67,6 +68,7 @@ export const Slider = flowComponent("Slider", (props) => {
     Label: {
       unstyled: true,
       tunnelId: "label",
+      tunnelProviderId: sliderTunnelProviderId,
       ...fieldPropsContext.Label,
       className: styles.label,
     },
@@ -81,14 +83,14 @@ export const Slider = flowComponent("Slider", (props) => {
         defaultValue={defaultValue}
         step={step}
       >
-        <TunnelProvider>
+        <TunnelProvider id={sliderTunnelProviderId}>
           <PropsContextProvider props={propsContext}>
             <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
             {!sliderOnly && (
               <div className={styles.text}>
                 <Aria.SliderOutput className={styles.value} />{" "}
-                <TunnelExit id="label" />
+                <TunnelExit id="label" providerId={sliderTunnelProviderId} />
               </div>
             )}
 

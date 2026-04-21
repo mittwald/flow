@@ -16,6 +16,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { comboBoxTunnelProviderId } from "./config";
 
 export interface ComboBoxProps
   extends
@@ -55,6 +56,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   const propsContext: PropsContext = {
     Option: {
       tunnelId: "options",
+      tunnelProviderId: comboBoxTunnelProviderId,
     },
     ...fieldPropsContext,
   };
@@ -83,7 +85,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       }}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+        <TunnelProvider id={comboBoxTunnelProviderId}>
           <FieldErrorCaptureContext>
             <div className={styles.input}>
               <Aria.Input placeholder={placeholder} ref={ref} />
@@ -106,7 +108,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
               }}
               renderEmptyState={renderEmptyState}
             >
-              <TunnelExit id="options" />
+              <TunnelExit id="options" providerId={comboBoxTunnelProviderId} />
             </Options>
           </FieldErrorCaptureContext>
           <FieldErrorView />

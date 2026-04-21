@@ -42,6 +42,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { passwordCreationFieldTunnelProviderId } from "./config";
 
 export interface PasswordCreationFieldProps
   extends
@@ -200,6 +201,7 @@ export const PasswordCreationField = flowComponent(
       ...fieldPropsContext,
       Button: {
         tunnelId: "button",
+        tunnelProviderId: passwordCreationFieldTunnelProviderId,
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -208,6 +210,7 @@ export const PasswordCreationField = flowComponent(
       },
       CopyButton: {
         tunnelId: "button",
+        tunnelProviderId: passwordCreationFieldTunnelProviderId,
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -248,7 +251,7 @@ export const PasswordCreationField = flowComponent(
         isInvalid={isInvalid}
         isRequired={isRequired}
       >
-        <TunnelProvider>
+        <TunnelProvider id={passwordCreationFieldTunnelProviderId}>
           <FieldErrorCaptureContext>
             <FieldError>{latestValidationErrorText}</FieldError>
             <PropsContextProvider
@@ -274,7 +277,10 @@ export const PasswordCreationField = flowComponent(
                     isDisabled={isDisabled}
                     onPress={togglePasswordVisibilityHandler}
                   />
-                  <TunnelExit id="button" />
+                  <TunnelExit
+                    id="button"
+                    providerId={passwordCreationFieldTunnelProviderId}
+                  />
                 </Aria.Group>
                 <ComplexityIndicator
                   isEmptyValue={isEmptyValue}

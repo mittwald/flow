@@ -15,6 +15,7 @@ import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import { textFieldTunnelProviderId } from "./config";
 
 export interface TextFieldProps
   extends
@@ -60,8 +61,13 @@ export const TextField = flowComponent("TextField", (props) => {
       variant: "plain",
       color: "secondary",
       tunnelId: "button",
+      tunnelProviderId: textFieldTunnelProviderId,
     },
-    CopyButton: { className: styles.button, tunnelId: "button" },
+    CopyButton: {
+      className: styles.button,
+      tunnelId: "button",
+      tunnelProviderId: textFieldTunnelProviderId,
+    },
     ...fieldPropsContext,
   };
 
@@ -89,7 +95,7 @@ export const TextField = flowComponent("TextField", (props) => {
       onChange={handleChange}
       type={type}
     >
-      <TunnelProvider>
+      <TunnelProvider id={textFieldTunnelProviderId}>
         <PropsContextProvider props={propsContext}>
           <FieldErrorCaptureContext>
             {children}
@@ -100,7 +106,7 @@ export const TextField = flowComponent("TextField", (props) => {
                 className={styles.input}
                 ref={ref}
               />
-              <TunnelExit id="button" />
+              <TunnelExit id="button" providerId={textFieldTunnelProviderId} />
               {typeFromProps === "password" && (
                 <Button
                   color="secondary"

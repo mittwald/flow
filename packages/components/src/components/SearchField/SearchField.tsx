@@ -13,6 +13,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { searchFieldTunnelProviderId } from "./config";
 
 export interface SearchFieldProps
   extends
@@ -44,6 +45,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     Kbd: {
       isDisabled: props.isDisabled,
       tunnelId: "kbd",
+      tunnelProviderId: searchFieldTunnelProviderId,
       className: styles.kbd,
     },
     ...fieldPropsContext,
@@ -56,7 +58,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
       aria-label={searchText}
       className={clsx(rootClassName, fieldProps.className)}
     >
-      <TunnelProvider>
+      <TunnelProvider id={searchFieldTunnelProviderId}>
         <PropsContextProvider props={propsContext}>
           <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
@@ -67,7 +69,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
               className={styles.input}
               ref={ref}
             />
-            <TunnelExit id="kbd" />
+            <TunnelExit id="kbd" providerId={searchFieldTunnelProviderId} />
             <Button
               className={styles.clearButton}
               variant="plain"

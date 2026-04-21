@@ -10,6 +10,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { navigationGroupTunnelProviderId } from "./config";
 
 export interface NavigationGroupProps
   extends
@@ -37,18 +38,22 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     },
     Link: {
       tunnelId: "groupLinks",
+      tunnelProviderId: navigationGroupTunnelProviderId,
     },
   };
 
   if (collapsable) {
     return (
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+        <TunnelProvider id={navigationGroupTunnelProviderId}>
           <Accordion defaultExpanded className={rootClassName}>
             {children}
             <Content>
               <ul>
-                <TunnelExit id="groupLinks" />
+                <TunnelExit
+                  id="groupLinks"
+                  providerId={navigationGroupTunnelProviderId}
+                />
               </ul>
             </Content>
           </Accordion>
@@ -59,7 +64,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
+      <TunnelProvider id={navigationGroupTunnelProviderId}>
         <section
           aria-labelledby={generatedId}
           className={rootClassName}
@@ -67,7 +72,10 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
         >
           {children}
           <ul>
-            <TunnelExit id="groupLinks" />
+            <TunnelExit
+              id="groupLinks"
+              providerId={navigationGroupTunnelProviderId}
+            />
           </ul>
         </section>
       </TunnelProvider>
