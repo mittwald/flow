@@ -5,22 +5,23 @@ import { RangeCalendarStateContext } from "react-aria-components";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 import locales from "../../../locales/*.locale.json";
 
-export interface DateRange {
+export interface DateRangePresetItem {
   start: CalendarDate;
   end: CalendarDate;
   label: string;
 }
 
-export type Presets = DateRange[];
+export type DateRangePresets = DateRangePresetItem[];
 
-export interface CalendarDatePresetItem extends DateRange {
+interface CalendarDateRangePresetItem extends DateRangePresetItem {
   onPress: () => void;
   disabled: boolean;
 }
 
+/** @internal * */
 export const useCalendarDateRangePresets = (
-  customPresets?: Presets,
-): CalendarDatePresetItem[] => {
+  customPresets?: DateRangePresets | boolean,
+): CalendarDateRangePresetItem[] => {
   const now = DateTime.local();
   const state = useContext(RangeCalendarStateContext);
   const stringFormatter = useLocalizedStringFormatter(locales, "Calendar");
@@ -31,9 +32,9 @@ export const useCalendarDateRangePresets = (
     );
   };
 
-  const possibleRanges = useMemo<Presets>(() => {
-    if (customPresets) {
-      return customPresets;
+  const possibleRanges = useMemo<DateRangePresets>(() => {
+    if (typeof customPresets !== "boolean") {
+      return customPresets ?? [];
     }
 
     const todayDate = new CalendarDate(now.year, now.month, now.day);

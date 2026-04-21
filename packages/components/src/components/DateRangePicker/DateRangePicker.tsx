@@ -21,8 +21,7 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
     PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children" | "ref">>,
     FlowComponentProps<HTMLSpanElement> {
-  withDatePickerPresets?: boolean;
-  datePickerPresets?: Presets;
+  withDatePickerPresets?: boolean | Presets;
 }
 
 /** @flr-generate all */
@@ -33,7 +32,6 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     onChange,
     ref,
     withDatePickerPresets = false,
-    datePickerPresets,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -74,7 +72,6 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
         >
           <RangeCalendar
             withDatePickerPresets={withDatePickerPresets}
-            datePickerPresets={datePickerPresets}
             className={styles.calendar}
           />
         </Popover>

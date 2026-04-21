@@ -13,15 +13,14 @@ export type RangeCalendarProps = Omit<
   Aria.RangeCalendarProps<Aria.DateValue>,
   "children"
 > &
-  Pick<DateRangePickerProps, "withDatePickerPresets" | "datePickerPresets">;
+  Pick<DateRangePickerProps, "withDatePickerPresets">;
 
 /** @internal */
 const InnerRangeCalendar: FC<RangeCalendarProps> = ({
   withDatePickerPresets,
-  datePickerPresets,
 }) => {
   const isSmallViewport = useMediaQuery("(max-width: 530px)");
-  const dateRangeHelper = useCalendarDateRangePresets(datePickerPresets);
+  const dateRangeHelper = useCalendarDateRangePresets(withDatePickerPresets);
 
   const predefinedDateHelperItems = dateRangeHelper.map((present) => {
     return (
@@ -57,16 +56,12 @@ const InnerRangeCalendar: FC<RangeCalendarProps> = ({
 
 /** @flr-generate all */
 export const RangeCalendar: FC<RangeCalendarProps> = (props) => {
-  const { className, withDatePickerPresets, datePickerPresets, ...rest } =
-    props;
+  const { className, withDatePickerPresets, ...rest } = props;
   const rootClassName = clsx(styles.calendar, styles.range, className);
 
   return (
     <Aria.RangeCalendar {...rest} className={rootClassName}>
-      <InnerRangeCalendar
-        withDatePickerPresets={withDatePickerPresets}
-        datePickerPresets={datePickerPresets}
-      />
+      <InnerRangeCalendar withDatePickerPresets={withDatePickerPresets} />
     </Aria.RangeCalendar>
   );
 };
