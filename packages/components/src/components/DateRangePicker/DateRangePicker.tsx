@@ -40,7 +40,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "DateRangePicker");
 
   const rootClassName = clsx(fieldProps.className, className);
 

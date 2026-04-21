@@ -47,7 +47,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
-    } = useFieldComponent(props);
+    } = useFieldComponent(props, "FileDropZone");
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
     const rootClassName = clsx(

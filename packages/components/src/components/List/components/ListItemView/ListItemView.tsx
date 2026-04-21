@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
 import styles from "./ListItemView.module.scss";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import {
   dynamic,
@@ -10,57 +9,90 @@ import {
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { useList } from "@/components/List";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export type ListItemViewProps = PropsWithChildren &
   Pick<ColumnLayoutProps, "s" | "m" | "l">;
 
-export const ListItemView = (props: ListItemViewProps) => {
-  const { children, s, m, l } = props;
-  const list = useList();
+export const ListItemView = flowComponent(
+  "ListItemView",
+  (props: ListItemViewProps) => {
+    const { children, s, m, l } = props;
+    const list = useList();
 
-  const propsContext: PropsContext = {
-    ContextMenu: {
-      tunnelId: "button",
-      placement: "bottom right",
-      wrapWith: <OptionsButton className={styles.action} />,
-    },
-    Button: {
-      tunnelId: "button",
-      size: dynamic(() => (useList().viewMode.isTiles ? "s" : "m")),
-    },
-    ActionGroup: {
-      tunnelId: "button",
-      Button: {
-        tunnelId: null,
+    const propsContext: PropsContext = {
+      ContextMenu: {
+        tunnel: {
+          id: "button",
+          component: "ListItemView",
+        },
+        placement: "bottom right",
+        wrapWith: <OptionsButton className={styles.action} />,
       },
-    },
-    Avatar: {
-      tunnelId: "avatar",
-    },
-    Heading: {
-      tunnelId: "title",
-    },
-    Text: {
-      tunnelId: "text",
-    },
-    Content: {
-      tunnelId: dynamic((p) => (p.slot === "bottom" ? "bottom" : undefined)),
-    },
-    Checkbox: {
-      tunnelId: "checkbox",
-    },
-  };
+      Button: {
+        tunnel: {
+          id: "button",
+          component: "ListItemView",
+        },
+        size: dynamic(() => (useList().viewMode.isTiles ? "s" : "m")),
+      },
+      ActionGroup: {
+        tunnel: {
+          id: "button",
+          component: "ListItemView",
+        },
+        Button: {
+          tunnel: null,
+        },
+      },
+      Avatar: {
+        tunnel: {
+          id: "avatar",
+          component: "ListItemView",
+        },
+      },
+      Heading: {
+        tunnel: {
+          id: "title",
+          component: "ListItemView",
+        },
+      },
+      Text: {
+        tunnel: {
+          id: "text",
+          component: "ListItemView",
+        },
+      },
+      Content: {
+        tunnel: dynamic((p) =>
+          p.slot === "bottom"
+            ? {
+                id: "bottom",
+                component: "ListItemView",
+              }
+            : undefined,
+        ),
+      },
+      Checkbox: {
+        tunnel: {
+          id: "checkbox",
+          component: "ListItemView",
+        },
+      },
+    };
 
-  return (
-    <TunnelProvider>
+    return (
       <ListItemViewContentView
         viewMode={list.viewMode.value}
-        title={<TunnelExit id="title" />}
-        avatar={<TunnelExit id="avatar" />}
-        button={<TunnelExit id="button" />}
-        subTitle={<TunnelExit id="text" />}
-        bottom={<TunnelExit id="bottom" />}
-        checkbox={<TunnelExit id="checkbox" />}
+        title={<UiComponentTunnelExit id="title" component="ListItemView" />}
+        avatar={<UiComponentTunnelExit id="avatar" component="ListItemView" />}
+        button={<UiComponentTunnelExit id="button" component="ListItemView" />}
+        subTitle={<UiComponentTunnelExit id="text" component="ListItemView" />}
+        bottom={<UiComponentTunnelExit id="bottom" component="ListItemView" />}
+        checkbox={
+          <UiComponentTunnelExit id="checkbox" component="ListItemView" />
+        }
         s={s}
         m={m}
         l={l}
@@ -69,8 +101,11 @@ export const ListItemView = (props: ListItemViewProps) => {
           {children}
         </PropsContextProvider>
       </ListItemViewContentView>
-    </TunnelProvider>
-  );
-};
+    );
+  },
+  {
+    type: "layout",
+  },
+);
 
 export default ListItemView;

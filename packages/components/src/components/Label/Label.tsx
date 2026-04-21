@@ -8,7 +8,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface LabelProps
   extends
@@ -48,49 +48,56 @@ export const Label = flowComponent("Label", (props) => {
 
   const propsContext: PropsContext = {
     ContextualHelpTrigger: {
-      tunnelId: "contextualHelp",
+      tunnel: {
+        id: "contextualHelp",
+        component: "Label",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
     Button: {
-      tunnelId: "right",
+      tunnel: {
+        id: "right",
+        component: "Label",
+      },
       size: "s",
     },
     Action: {
-      tunnelId: "right",
+      tunnel: {
+        id: "right",
+        component: "Label",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <Aria.Label {...rest} className={rootClassName} ref={ref}>
-          {children}
-          {optional && optionalMarker}
-          <TunnelExit id="contextualHelp">
-            {(children) => {
-              if (React.Children.count(children) >= 1) {
-                return children;
-              }
+      <Aria.Label {...rest} className={rootClassName} ref={ref}>
+        {children}
+        {optional && optionalMarker}
+        <UiComponentTunnelExit id="contextualHelp" component="Label">
+          {(children) => {
+            if (React.Children.count(children) >= 1) {
+              return children;
+            }
 
-              return undefined;
-            }}
-          </TunnelExit>
-          <TunnelExit id="right">
-            {(children) => {
-              if (React.Children.count(children) >= 1) {
-                return <div className={styles.right}>{children}</div>;
-              }
+            return undefined;
+          }}
+        </UiComponentTunnelExit>
+        <UiComponentTunnelExit id="right" component="Label">
+          {(children) => {
+            if (React.Children.count(children) >= 1) {
+              return <div className={styles.right}>{children}</div>;
+            }
 
-              return undefined;
-            }}
-          </TunnelExit>
-        </Aria.Label>
-      </TunnelProvider>
+            return undefined;
+          }}
+        </UiComponentTunnelExit>
+      </Aria.Label>
     </PropsContextProvider>
   );
 });

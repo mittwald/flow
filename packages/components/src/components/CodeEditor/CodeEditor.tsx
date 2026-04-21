@@ -18,7 +18,6 @@ import {
   useCodeEditorExtensions,
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
-import React from "react";
 
 export interface CodeEditorProps
   extends
@@ -63,7 +62,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "CodeEditor");
 
   const rootClassName = clsx(
     fieldProps.className,

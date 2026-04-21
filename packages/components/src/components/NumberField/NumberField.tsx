@@ -36,7 +36,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "NumberField");
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 

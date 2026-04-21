@@ -1,6 +1,4 @@
 import type { AlphaColor } from "@/lib/types/props";
-
-export * from "./view";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -8,7 +6,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
@@ -46,15 +44,24 @@ export const Heading = flowComponent("Heading", (props) => {
       className: styles.icon,
     },
     AlertBadge: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
     },
     Badge: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
     },
     ContextualHelpTrigger: {
-      tunnelId: "headingContent",
+      tunnel: {
+        id: "headingContent",
+        component: "Heading",
+      },
       Button: {
-        tunnelId: null,
+        tunnel: null,
       },
     },
     AlertText: {
@@ -66,19 +73,12 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <Aria.Heading
-          level={level}
-          className={rootClassName}
-          {...rest}
-          ref={ref}
-        >
-          <span className={styles.headingText}>{children}</span>
-          <span className={styles.headingContent}>
-            <TunnelExit id="headingContent" />
-          </span>
-        </Aria.Heading>
-      </TunnelProvider>
+      <Aria.Heading level={level} className={rootClassName} {...rest} ref={ref}>
+        <span className={styles.headingText}>{children}</span>
+        <span className={styles.headingContent}>
+          <UiComponentTunnelExit id="headingContent" component="Heading" />
+        </span>
+      </Aria.Heading>
     </PropsContextProvider>
   );
 });

@@ -10,11 +10,11 @@ import styles from "./SegmentedControl.module.scss";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SegmentedControlProps
   extends
@@ -37,7 +37,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "SegmentedControl");
 
   const rootClassName = clsx(
     formFieldStyles.formField,
@@ -48,7 +48,10 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
 
   const propsContext: PropsContext = {
     Segment: {
-      tunnelId: "segments",
+      tunnel: {
+        id: "segments",
+        component: "SegmentedControl",
+      },
       className: styles.segment,
     },
     ...fieldPropsContext,
@@ -63,19 +66,20 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
       ref={objectRef}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider dependencies={["segment"]} props={propsContext}>
-            <div className={styles.segmentedControl}>
-              <div className={styles.segments}>
-                <TunnelExit id="segments" />
-              </div>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider dependencies={["segment"]} props={propsContext}>
+          <div className={styles.segmentedControl}>
+            <div className={styles.segments}>
+              <UiComponentTunnelExit
+                id="segments"
+                component="SegmentedControl"
+              />
             </div>
-            {children}
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+          </div>
+          {children}
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.RadioGroup>
   );
 });

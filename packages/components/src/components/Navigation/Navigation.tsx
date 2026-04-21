@@ -3,12 +3,12 @@ import styles from "./Navigation.module.scss";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface NavigationProps
   extends
@@ -39,21 +39,22 @@ export const Navigation = flowComponent("Navigation", (props) => {
       props={{
         Link: {
           ...linkPropsContext,
-          tunnelId: "links",
+          tunnel: {
+            id: "links",
+            component: "Navigation",
+          },
         },
         NavigationGroup: {
           Link: linkPropsContext,
         },
       }}
     >
-      <TunnelProvider>
-        <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
-          <ul>
-            <TunnelExit id="links" />
-          </ul>
-          {children}
-        </nav>
-      </TunnelProvider>
+      <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
+        <ul>
+          <UiComponentTunnelExit id="links" component="Navigation" />
+        </ul>
+        {children}
+      </nav>
     </PropsContextProvider>
   );
 });

@@ -10,7 +10,6 @@ import {
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { TextFieldProps } from "@/components/TextField";
 import Options from "@/components/Options";
-import { TunnelExit } from "@mittwald/react-tunnel";
 import locales from "./locales/*.locale.json";
 import Text from "@/components/Text";
 import styles from "./Autocomplete.module.scss";
@@ -23,6 +22,7 @@ import {
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface AutocompleteProps
   extends
@@ -89,13 +89,16 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Autocomplete");
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
     TextField: inputProps,
     Option: {
-      tunnelId: "options",
+      tunnel: {
+        id: "options",
+        component: "Autocomplete",
+      },
     },
     Popover: {
       className: styles.popover,
@@ -126,7 +129,10 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                   isNonModal
                   placement="bottom start"
                 >
-                  <TunnelExit id="options" />
+                  <UiComponentTunnelExit
+                    id="options"
+                    component="Autocomplete"
+                  />
                 </Options>
               </Aria.Autocomplete>
             </UNSAFE_PortalProvider>

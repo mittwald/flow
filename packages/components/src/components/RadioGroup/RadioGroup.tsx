@@ -6,13 +6,13 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface RadioGroupProps
   extends
@@ -29,15 +29,21 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "RadioGroup");
 
   const rootClassName = clsx(formFieldStyles.formField, className);
   const propsContext: PropsContext = {
     RadioButton: {
-      tunnelId: "radioButtons",
+      tunnel: {
+        id: "radioButtons",
+        component: "RadioGroup",
+      },
     },
     Radio: {
-      tunnelId: "radios",
+      tunnel: {
+        id: "radios",
+        component: "RadioGroup",
+      },
     },
     ...fieldPropsContext,
   };
@@ -51,28 +57,26 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       className={clsx(rootClassName, fieldProps.className)}
       ref={localRadioRef}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-              <TunnelExit id="radioButtons" />
-            </ColumnLayout>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider props={propsContext}>
+          <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+            <UiComponentTunnelExit id="radioButtons" component="RadioGroup" />
+          </ColumnLayout>
 
-            <ColumnLayout
-              s={s ?? [1]}
-              m={m ?? [1]}
-              l={l ?? [1]}
-              rowGap="s"
-              className={styles.radioGroup}
-            >
-              <TunnelExit id="radios" />
-            </ColumnLayout>
+          <ColumnLayout
+            s={s ?? [1]}
+            m={m ?? [1]}
+            l={l ?? [1]}
+            rowGap="s"
+            className={styles.radioGroup}
+          >
+            <UiComponentTunnelExit id="radios" component="RadioGroup" />
+          </ColumnLayout>
 
-            {children}
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+          {children}
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.RadioGroup>
   );
 });
