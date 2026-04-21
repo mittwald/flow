@@ -19,6 +19,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       autoFocus: {},
       className: {},
       createCalendar: {},
+      datePickerPresets: {},
       defaultFocusedValue: {},
       defaultValue: {},
       dir: {},
@@ -40,6 +41,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       translate: {},
       value: {},
       visibleDuration: {},
+      withDatePickerPresets: {},
     };
   }
 

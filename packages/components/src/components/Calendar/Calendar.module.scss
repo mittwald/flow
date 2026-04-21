@@ -14,6 +14,18 @@
     }
   }
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--popover--padding--m);
+  }
+
+  @media (max-width: 530px) {
+    .container {
+      flex-direction: column-reverse;
+    }
+  }
+
   :global(.react-aria-CalendarHeaderCell) {
     font-size: var(--calendar--cell-font-size);
   }

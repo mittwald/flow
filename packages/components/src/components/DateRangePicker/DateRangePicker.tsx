@@ -11,17 +11,33 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import type { RangeValue } from "react-aria";
+import type { DateValue } from "@internationalized/date";
 import styles from "./DateRangePicker.module.scss";
+import type { Presets } from "@/components/Calendar/components/RangeCalendar/helpers/useCalendarDateRangePresets";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
     PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children" | "ref">>,
-    FlowComponentProps<HTMLSpanElement> {}
+    FlowComponentProps<HTMLSpanElement> {
+  withDatePickerPresets?: boolean;
+  datePickerPresets?: Presets;
+}
 
 /** @flr-generate all */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
-  const { children, className, onChange, ref, ...rest } = props;
+  const {
+    children,
+    className,
+    onChange,
+    ref,
+    withDatePickerPresets = false,
+    datePickerPresets,
+    ...rest
+  } = useControlledHostValueProps(props);
 
+  const popoverController = useOverlayController("Popover");
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
@@ -31,7 +47,12 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
 
   const rootClassName = clsx(fieldProps.className, className);
 
-  const popoverController = useOverlayController("Popover");
+  const onDatePickerChange = (value: RangeValue<DateValue> | null) => {
+    if (onChange) {
+      onChange(value);
+    }
+    popoverController.close();
+  };
 
   return (
     <Aria.DateRangePicker
@@ -39,12 +60,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
-      onChange={(value) => {
-        if (onChange) {
-          onChange(value);
-        }
-        popoverController.close();
-      }}
+      onChange={onDatePickerChange}
     >
       <FieldErrorCaptureContext>
         <DateRangeInput isDisabled={props.isDisabled} ref={ref} />
@@ -56,7 +72,11 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
           isDialogContent
           controller={popoverController}
         >
-          <RangeCalendar className={styles.calendar} />
+          <RangeCalendar
+            withDatePickerPresets={withDatePickerPresets}
+            datePickerPresets={datePickerPresets}
+            className={styles.calendar}
+          />
         </Popover>
       </FieldErrorCaptureContext>
       <FieldErrorView />
