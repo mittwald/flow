@@ -97,6 +97,7 @@ export class RemoteTextElement extends FlowRemoteElement<RemoteTextElementProps>
       itemScope: {},
       itemType: {},
       lang: {},
+      noLigatures: {},
       nonce: {},
       part: {},
       popover: {},

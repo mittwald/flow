@@ -2,7 +2,7 @@ import { type FC } from "react";
 import MenuItemView from "@/views/MenuItemView";
 import type { ListViewMode } from "@/components/List/model/types";
 import { useList } from "@/components/List";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 export const ViewModeMenuItem: FC<Props> = (props) => {
   const { viewMode } = props;
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
   return (
     <MenuItemView
@@ -21,7 +21,7 @@ export const ViewModeMenuItem: FC<Props> = (props) => {
         list.viewMode.set(viewMode);
       }}
     >
-      {stringFormatter.format(`list.settings.viewMode.${viewMode}`)}
+      {stringFormatter.format(`settings.viewMode.${viewMode}`)}
     </MenuItemView>
   );
 };

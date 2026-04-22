@@ -9,7 +9,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
@@ -58,7 +58,7 @@ export const Slider = flowComponent("Slider", (props) => {
     fieldProps,
   } = useFieldComponent(props);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Slider");
 
   const objectRef = useObjectRef(ref);
 
@@ -112,14 +112,14 @@ export const Slider = flowComponent("Slider", (props) => {
                     <>
                       <Button
                         onPress={() => state.decrementThumb(0, step)}
-                        aria-label={stringFormatter.format("slider.decrement")}
+                        aria-label={stringFormatter.format("decrement")}
                         className={styles.decrement}
                       >
                         <IconMinus />
                       </Button>
                       <Button
                         onPress={() => state.incrementThumb(0, step)}
-                        aria-label={stringFormatter.format("slider.increment")}
+                        aria-label={stringFormatter.format("increment")}
                         className={styles.increment}
                       >
                         <IconPlus />

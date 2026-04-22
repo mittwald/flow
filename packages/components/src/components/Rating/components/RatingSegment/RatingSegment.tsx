@@ -3,7 +3,7 @@ import clsx from "clsx";
 import styles from "@/components/Rating/Rating.module.scss";
 import * as Aria from "react-aria-components";
 import type { RatingProps } from "@/components/Rating";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
 import { RatingStar } from "@/components/Rating/components/RatingSegment/RatingStar";
 import { RatingStarFilled } from "@/components/Rating/components/RatingSegment/RatingStarFilled";
@@ -18,11 +18,11 @@ export const RatingSegment: FC<Props> = (props) => {
 
   const value = index + 1;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "Rating");
 
   return (
     <Aria.Radio
-      aria-label={stringFormatter.format(`rating.${value}`)}
+      aria-label={stringFormatter.format(`segment.${value}`)}
       value={value.toString()}
       className={clsx(
         styles.ratingSegment,

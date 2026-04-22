@@ -65,30 +65,44 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Tabs edge cases (%s)",
-  async ({ testScreenshot, render, components: { TabTitle, Tab, Tabs } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { TabTitle, Tab, Tabs, Flex },
+  }) => {
     await render(
-      <Tabs>
-        <Tab>
-          <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
-          Content
-        </Tab>
-        <Tab>
-          <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
-          Content
-        </Tab>
-        <Tab>
-          <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
-          Content
-        </Tab>
-        <Tab>
-          <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
-          Content
-        </Tab>
-        <Tab>
-          <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
-          Content
-        </Tab>
-      </Tabs>,
+      <Flex direction="column" gap="m">
+        <Tabs>
+          <Tab>
+            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            Content
+          </Tab>
+          <Tab>
+            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            Content
+          </Tab>
+          <Tab>
+            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            Content
+          </Tab>
+          <Tab>
+            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            Content
+          </Tab>
+          <Tab>
+            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            Content
+          </Tab>
+        </Tabs>
+        <Tabs defaultSelectedKey="notFound">
+          <Tab id="1">
+            <TabTitle>Tab 1</TabTitle>
+          </Tab>
+          <Tab id="2">
+            <TabTitle>Tab 2</TabTitle>
+          </Tab>
+        </Tabs>
+      </Flex>,
     );
 
     await testScreenshot("Tabs edge cases");

@@ -10,9 +10,4 @@ function config() {
     expectTypeOf<string | undefined>(testConfig.projectId);
     expectTypeOf<string | undefined>(testConfig.appInstallationId);
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function testUnknownContextParameters() {
-    expectTypeOf<string | null | undefined>(testConfig.unknownProp);
-  }
 }

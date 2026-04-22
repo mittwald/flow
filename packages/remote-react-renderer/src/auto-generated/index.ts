@@ -19,6 +19,7 @@ import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianChart as CartesianChart } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
+import { ChartGrid as ChartGrid } from "@mittwald/flow-react-components";
 import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
 import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
 import { Chat as Chat } from "@mittwald/flow-react-components";
@@ -124,6 +125,7 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { TranslationProvider as TranslationProvider } from "@mittwald/flow-react-components";
 import { Truncate as Truncate } from "@mittwald/flow-react-components";
 import { TunnelEntry as TunnelEntry } from "@mittwald/flow-react-components";
 import { XAxis as XAxis } from "@mittwald/flow-react-components";
@@ -166,6 +168,7 @@ export const flowComponents = {
     "CartesianGrid",
     CartesianGrid,
   ),
+  "flr-chart-grid": createFlowRemoteComponentRenderer("ChartGrid", ChartGrid),
   "flr-chart-legend": createFlowRemoteComponentRenderer(
     "ChartLegend",
     ChartLegend,
@@ -444,6 +447,10 @@ export const flowComponents = {
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
     "TooltipTrigger",
     TooltipTrigger,
+  ),
+  "flr-translation-provider": createFlowRemoteComponentRenderer(
+    "TranslationProvider",
+    TranslationProvider,
   ),
   "flr-truncate": createFlowRemoteComponentRenderer("Truncate", Truncate),
   "flr-tunnel-entry": createFlowRemoteComponentRenderer(

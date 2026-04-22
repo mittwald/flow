@@ -1,4 +1,4 @@
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import { useEffect } from "react";
 import type { ActionStateValue } from "@/components/Action/models/ActionState";
@@ -14,7 +14,7 @@ export const useAriaAnnounceActionState = (
   actionState: ActionStateValue,
   options: Options = {},
 ): void => {
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "AriaAnnounce");
 
   const {
     isPendingText = formatter.format("action.isPending"),
@@ -34,7 +34,7 @@ export const useAriaAnnounceActionState = (
 };
 
 export const useAriaAnnounceSuspense = () => {
-  const formatter = useLocalizedStringFormatter(locales);
+  const formatter = useLocalizedStringFormatter(locales, "AriaAnnounce");
 
   useEffect(() => {
     const timeout = setTimeout(() => {

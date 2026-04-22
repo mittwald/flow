@@ -3,6 +3,114 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.801](https://github.com/mittwald/flow/compare/0.2.0-alpha.800...0.2.0-alpha.801) (2026-04-20)
+
+### Features
+
+* **Tab:** add not found fallback ([#2460](https://github.com/mittwald/flow/issues/2460)) ([e0955cd](https://github.com/mittwald/flow/commit/e0955cdda5eb11e1fef5ed760eda3f1e1fcb1384))
+
+# [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing options with same value ([#2458](https://github.com/mittwald/flow/issues/2458)) ([83174c7](https://github.com/mittwald/flow/commit/83174c71e4abdfe675ea0c8d2c22d8dc85d3b4f9))
+
+# [0.2.0-alpha.799](https://github.com/mittwald/flow/compare/0.2.0-alpha.798...0.2.0-alpha.799) (2026-04-15)
+
+### Features
+
+* **CartesianChart:** add typed CartesianChart ([#2456](https://github.com/mittwald/flow/issues/2456)) ([8db3a8b](https://github.com/mittwald/flow/commit/8db3a8b7a312c24b63775e669f151191665ef20a))
+
+# [0.2.0-alpha.798](https://github.com/mittwald/flow/compare/0.2.0-alpha.797...0.2.0-alpha.798) (2026-04-14)
+
+### Features
+
+* **CartesianChart:** add progress bar formatter ([#2449](https://github.com/mittwald/flow/issues/2449)) ([0a54516](https://github.com/mittwald/flow/commit/0a545161dcb9a8a56c0987ff744a534e0298bbed))
+
+# [0.2.0-alpha.797](https://github.com/mittwald/flow/compare/0.2.0-alpha.796...0.2.0-alpha.797) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.796](https://github.com/mittwald/flow/compare/0.2.0-alpha.795...0.2.0-alpha.796) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.795](https://github.com/mittwald/flow/compare/0.2.0-alpha.794...0.2.0-alpha.795) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
+
+### Bug Fixes
+
+* **storybook:** show mittwald branding ([#2454](https://github.com/mittwald/flow/issues/2454)) ([0991688](https://github.com/mittwald/flow/commit/0991688adda8505fe9256d476623dc7ffba5e3e6))
+
+# [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.792](https://github.com/mittwald/flow/compare/0.2.0-alpha.791...0.2.0-alpha.792) (2026-04-14)
+
+### Bug Fixes
+
+* **AccentBox:** make accent box backwards compatible ([#2451](https://github.com/mittwald/flow/issues/2451)) ([c856f2b](https://github.com/mittwald/flow/commit/c856f2b732ff639e3ef50635f9880084d3a2ee11))
+
+### Features
+
+* **Text:** add noLigatures option ([b4b799d](https://github.com/mittwald/flow/commit/b4b799dbdbb7e0ead87ef9a1b4e71d3e25482290))
+
+# [0.2.0-alpha.791](https://github.com/mittwald/flow/compare/0.2.0-alpha.790...0.2.0-alpha.791) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.790](https://github.com/mittwald/flow/compare/0.2.0-alpha.789...0.2.0-alpha.790) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.789](https://github.com/mittwald/flow/compare/0.2.0-alpha.788...0.2.0-alpha.789) (2026-04-13)
+
+### Features
+
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+
+# [0.2.0-alpha.788](https://github.com/mittwald/flow/compare/0.2.0-alpha.787...0.2.0-alpha.788) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.787](https://github.com/mittwald/flow/compare/0.2.0-alpha.786...0.2.0-alpha.787) (2026-04-10)
+
+### Features
+
+* **i18n:** add custom translations & support remote translations ([#2430](https://github.com/mittwald/flow/issues/2430)) ([1b0e238](https://github.com/mittwald/flow/commit/1b0e23813afe8da2743d96ed5cb51c7466ec2c1e))
+
+# [0.2.0-alpha.786](https://github.com/mittwald/flow/compare/0.2.0-alpha.785...0.2.0-alpha.786) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.785](https://github.com/mittwald/flow/compare/0.2.0-alpha.784...0.2.0-alpha.785) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.784](https://github.com/mittwald/flow/compare/0.2.0-alpha.783...0.2.0-alpha.784) (2026-04-10)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
+# [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
+
+### Features
+
+* **ci:** deploy review apps to mittwald Container Hosting ([#2257](https://github.com/mittwald/flow/issues/2257)) ([5c4861d](https://github.com/mittwald/flow/commit/5c4861d8444aca52709191c513d0bd65bf372199))
+
+# [0.2.0-alpha.782](https://github.com/mittwald/flow/compare/0.2.0-alpha.781...0.2.0-alpha.782) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.781](https://github.com/mittwald/flow/compare/0.2.0-alpha.780...0.2.0-alpha.781) (2026-04-09)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.781",
+  "version": "0.2.0-alpha.802",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -51,6 +51,7 @@
   "devDependencies": {
     "@internationalized/date": "^3.10.1",
     "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^24.10.9",

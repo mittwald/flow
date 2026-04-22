@@ -10,7 +10,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./ComboBox.module.scss";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
@@ -48,7 +48,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     fieldPropsContext,
   } = useFieldComponent(props);
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
 
   const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
 
@@ -89,7 +89,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
               <Aria.Input placeholder={placeholder} ref={ref} />
               <Button
                 className={styles.toggle}
-                aria-label={stringFormatter.format("comboBox.showOptions")}
+                aria-label={stringFormatter.format("showOptions")}
                 variant="plain"
                 color="secondary"
               >

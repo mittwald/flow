@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren, ReactNode } from "react";
 import { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import styles from "./Tab.module.scss";
+import styles from "../../Tabs.module.scss";
 import clsx from "clsx";
 import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";

@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.801](https://github.com/mittwald/flow/compare/0.2.0-alpha.800...0.2.0-alpha.801) (2026-04-20)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.800](https://github.com/mittwald/flow/compare/0.2.0-alpha.799...0.2.0-alpha.800) (2026-04-16)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.799](https://github.com/mittwald/flow/compare/0.2.0-alpha.798...0.2.0-alpha.799) (2026-04-15)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.798](https://github.com/mittwald/flow/compare/0.2.0-alpha.797...0.2.0-alpha.798) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.797](https://github.com/mittwald/flow/compare/0.2.0-alpha.796...0.2.0-alpha.797) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.796](https://github.com/mittwald/flow/compare/0.2.0-alpha.795...0.2.0-alpha.796) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.795](https://github.com/mittwald/flow/compare/0.2.0-alpha.794...0.2.0-alpha.795) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.794](https://github.com/mittwald/flow/compare/0.2.0-alpha.793...0.2.0-alpha.794) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.793](https://github.com/mittwald/flow/compare/0.2.0-alpha.792...0.2.0-alpha.793) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.792](https://github.com/mittwald/flow/compare/0.2.0-alpha.791...0.2.0-alpha.792) (2026-04-14)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.791](https://github.com/mittwald/flow/compare/0.2.0-alpha.790...0.2.0-alpha.791) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.790](https://github.com/mittwald/flow/compare/0.2.0-alpha.789...0.2.0-alpha.790) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.789](https://github.com/mittwald/flow/compare/0.2.0-alpha.788...0.2.0-alpha.789) (2026-04-13)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.788](https://github.com/mittwald/flow/compare/0.2.0-alpha.787...0.2.0-alpha.788) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.787](https://github.com/mittwald/flow/compare/0.2.0-alpha.786...0.2.0-alpha.787) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.786](https://github.com/mittwald/flow/compare/0.2.0-alpha.785...0.2.0-alpha.786) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.785](https://github.com/mittwald/flow/compare/0.2.0-alpha.784...0.2.0-alpha.785) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.784](https://github.com/mittwald/flow/compare/0.2.0-alpha.783...0.2.0-alpha.784) (2026-04-10)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
+# [0.2.0-alpha.783](https://github.com/mittwald/flow/compare/0.2.0-alpha.782...0.2.0-alpha.783) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# [0.2.0-alpha.782](https://github.com/mittwald/flow/compare/0.2.0-alpha.781...0.2.0-alpha.782) (2026-04-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
 # [0.2.0-alpha.781](https://github.com/mittwald/flow/compare/0.2.0-alpha.780...0.2.0-alpha.781) (2026-04-09)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

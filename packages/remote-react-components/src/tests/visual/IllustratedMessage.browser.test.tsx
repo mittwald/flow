@@ -1,9 +1,12 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
-import React from "react";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
 
-const colors = ["primary", "danger", "unavailable", "dark", "light"] as const;
+const colors = ["primary", "danger", "unavailable", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "IllustratedMessage content (%s)",
@@ -62,8 +65,12 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s" align="center">
         {colors.map((color) => (
-          <Wrap if={color === "light"} key={color}>
-            <AccentBox>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
               <IllustratedMessage color={color}>
                 <IconStar />
                 <Heading>Heading</Heading>

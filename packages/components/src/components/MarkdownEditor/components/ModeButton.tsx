@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { Button, type ButtonProps } from "@/components/Button";
-import { useLocalizedStringFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../locales/*.locale.json";
 import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
 import styles from "../MarkdownEditor.module.scss";
@@ -13,7 +13,10 @@ export interface ModeButtonProps extends Pick<ButtonProps, "isDisabled"> {
 export const ModeButton: FC<ModeButtonProps> = (props) => {
   const { currentMode, onChange, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(
+    locales,
+    "MarkdownEditor",
+  );
   const otherMode = currentMode === "editor" ? "preview" : "editor";
 
   return (

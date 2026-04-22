@@ -80,6 +80,8 @@ export const Link = flowComponent("Link", (props) => {
     AlertText: {
       className: styles.alertText,
     },
+    AccentBox: { className: styles.accentBox },
+    LayoutCard: { className: styles.layoutCard },
   };
 
   const unsupportedTypingsLinkProps = ariaCurrent
