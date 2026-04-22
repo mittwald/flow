@@ -34,7 +34,7 @@ test("DateRangePicker with presets", async () => {
   const today = new Date();
   const todayString = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
 
-  expect([`${todayString}-${todayString}`]).toContain(content);
+  expect([`${todayString}–${todayString}`]).toContain(content);
 });
 
 test("DateRangePicker with customPresets", async () => {
