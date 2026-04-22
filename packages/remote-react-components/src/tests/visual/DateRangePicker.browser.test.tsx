@@ -1,6 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
+import { CalendarDate } from "@internationalized/date";
 
 test.each(testEnvironments)(
   "DateRangePicker states (%s)",
@@ -59,5 +60,55 @@ test.each(testEnvironments)(
 
     await userEvent.keyboard("{enter}");
     await testScreenshot("DateRangePicker - range selected");
+  },
+);
+
+test.each(testEnvironments)(
+  "DateRangePicker presets (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { DateRangePicker, Label },
+  }) => {
+    await render(
+      <DateRangePicker withDatePickerPresets>
+        <Label>Label</Label>
+      </DateRangePicker>,
+    );
+
+    vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
+
+    const button = page.getByLocator("button");
+    await button.click();
+    await testScreenshot("DateRangePicker - presets");
+  },
+);
+
+test.each(testEnvironments)(
+  "DateRangePicker customPresets (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { DateRangePicker, Label },
+  }) => {
+    await render(
+      <DateRangePicker
+        withDatePickerPresets={[
+          {
+            start: new CalendarDate(2025, 1, 1),
+            end: new CalendarDate(2025, 1, 1),
+            label: "Custom Preset",
+          },
+        ]}
+      >
+        <Label>Label</Label>
+      </DateRangePicker>,
+    );
+
+    vi.setSystemTime(new Date("2025-09-01T11:00:00Z"));
+
+    const button = page.getByLocator("button");
+    await button.click();
+    await testScreenshot("DateRangePicker - customPresets");
   },
 );
