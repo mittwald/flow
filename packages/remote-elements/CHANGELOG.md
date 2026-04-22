@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.804](https://github.com/mittwald/flow/compare/0.2.0-alpha.803...0.2.0-alpha.804) (2026-04-22)
+
+### Features
+
+* **List:** support custom empty views ([#2440](https://github.com/mittwald/flow/issues/2440)) ([67807a8](https://github.com/mittwald/flow/commit/67807a86c1d869c360d6d3bc4ecfd4b936d3f6d2))
+
 # [0.2.0-alpha.803](https://github.com/mittwald/flow/compare/0.2.0-alpha.802...0.2.0-alpha.803) (2026-04-22)
 
 ### Features
