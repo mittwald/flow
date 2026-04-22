@@ -27,7 +27,7 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
@@ -50,6 +50,8 @@ export interface ListProps<T, TMeta = unknown>
   /** The number of items to be displayed on one page. */
   batchSize?: number;
   hidePagination?: boolean;
+  emptySearchResultView?: ReactNode;
+  emptyView?: ReactNode;
 }
 
 export const List = flowComponent("List", (props) => {

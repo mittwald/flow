@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 interface Props extends PropsWithChildren {
   useRenderSuspense: () => void;
+  disabled?: boolean;
 }
 
 interface FallbackProps {
@@ -17,7 +18,10 @@ const Fallback: FC<FallbackProps> = (props) => {
 };
 
 export const DataLoaderSuspense: FC<Props> = (props) => {
-  const { useRenderSuspense, children } = props;
+  const { useRenderSuspense, children, disabled = false } = props;
+  if (disabled) {
+    return <>{children}</>;
+  }
   const fallback = <Fallback useRenderSuspense={useRenderSuspense} />;
   return <Suspense fallback={fallback}>{children}</Suspense>;
 };

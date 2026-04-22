@@ -14,7 +14,13 @@ import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
-export const SortingContextMenu: FC = () => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const SortingContextMenu: FC<Props> = (props) => {
+  const { isDisabled } = props;
+
   const list = useList();
   const formatter = useLocalizedStringFormatter(locales, "List");
 
@@ -52,6 +58,7 @@ export const SortingContextMenu: FC = () => {
         variant="outline"
         color="secondary"
         className={styles.hideOnMobile}
+        isDisabled={isDisabled}
       >
         {text}
         {icon}

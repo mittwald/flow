@@ -73,6 +73,7 @@ import { Legend as Legend } from "@mittwald/flow-react-components";
 import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
+import { EmptyViewContainer as ListEmptyViewContainer } from "@mittwald/flow-react-components";
 import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components";
 import { ListSummary as ListSummary } from "@mittwald/flow-react-components";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components";
@@ -318,6 +319,10 @@ export const flowComponents = {
   "flr-list-empty-view": createFlowRemoteComponentRenderer(
     "ListEmptyView",
     ListEmptyView,
+  ),
+  "flr-list-empty-view-container": createFlowRemoteComponentRenderer(
+    "ListEmptyViewContainer",
+    ListEmptyViewContainer,
   ),
   "flr-list-item-view-content": createFlowRemoteComponentRenderer(
     "ListItemViewContent",

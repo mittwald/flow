@@ -70,6 +70,9 @@ export interface ListShape<
   onChange?: OnListChanged<T, TMeta>;
   defaultViewMode?: ListViewMode;
   settingsStorageDefaults?: ListSettingsStorageDefaults;
+
+  emptySearchResultView?: ReactNode;
+  emptyView?: ReactNode;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
@@ -83,3 +86,5 @@ export interface ListSettingsStorageShape {
 export type ListViewMode = "table" | "list" | "tiles";
 export type ItemActionFn<T> = (data: T) => void;
 export type GetItemId<T> = (data: T) => string;
+
+export type EmptyViewType = "search" | "list";

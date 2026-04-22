@@ -7,6 +7,7 @@ interface SearchFieldRenderProps extends SupportedSearchFieldProps {
   onChange: (value: SearchValue) => unknown;
   value: SearchValue;
   autoSubmit?: boolean;
+  isDisabled?: boolean;
 }
 
 export type SearchFieldRenderComponent = ComponentType<SearchFieldRenderProps>;
