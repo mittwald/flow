@@ -25,7 +25,7 @@ export type XAxisProps<
   | "hide"
   | "unit"
 > & {
-  dataKey: TDataKey;
+  dataKey?: TDataKey;
   tickFormatter?: (value: TDataKeyValue, index: number) => string;
 };
 
