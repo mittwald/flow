@@ -4,9 +4,30 @@
 
 ### CartesianChart
 
-The Data Types from the CartesianChart have changed from `any` to `unknown`.
+> If you're using a _Function_ in the `dataKey` - you need to define a
+> `dataKeyLabel` as well.
 
-**Before:** With type `any`
+The `dataKeyLabel` is required to identify the RowData in the formatter
+functions. If a `string` is used - this will automatically be used as the
+`dataKeyLabel`.
+
+**Before:**
+
+```tsx
+<XAxis dataKey={() => 1337} />
+```
+
+**Now:**
+
+```tsx
+<XAxis dataKey={() => 1337} dataKeyLabel={"leet"} />
+```
+
+---
+
+> The Data Types from the CartesianChart have changed from `any` to `unknown`.
+
+**Before (With type `any`):**
 
 ```tsx
 const data = [
