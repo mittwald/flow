@@ -1,5 +1,85 @@
 # Migrations
 
+## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
+
+### CartesianChart
+
+The Data Types from the CartesianChart have changed from `any` to `unknown`.
+
+**Before:** With type `any`
+
+```tsx
+const data = [
+  {
+    amount: 1,
+    time: new Date("2026-08-11"),
+  }
+];
+
+<CartesianChart data={data}>>
+  <XAxis
+    dataKey="time"
+    tickFormatter={(date) =>
+      // date is typeof any
+      Intl.DateTimeFormat("de", {
+        month: "short",
+        day: "2-digit",
+      }).format(date)
+    }
+  />
+</CartesianChart>
+```
+
+**Now:** now you need to check the type explicit e.g.
+
+```tsx
+<XAxis
+  dataKey="time"
+  tickFormatter={(date) => {
+    // date is typeof unknown
+    if (date instanceof Date) {
+      return Intl.DateTimeFormat("de", {
+        month: "short",
+        day: "2-digit",
+      }).format(date);
+    }
+  }}
+/>
+```
+
+or use the **new** `typedCartesianChart` which infers the type automatically
+
+```tsx
+interface ChartData {
+  amount: number;
+  time: Date,
+};
+
+const data: ChartData[] = [
+  {
+    amount: 1,
+    time: new Date("2026-08-11"),
+  }
+];
+
+const ExampleChart = typedCartesianChart<ChartData>();
+
+<ExampleChart.Chart data={data}>>
+  <ExampleChart.XAxis
+    dataKey="time"
+    tickFormatter={(date) =>
+      // date is typeof Date
+      Intl.DateTimeFormat("de", {
+        month: "short",
+        day: "2-digit",
+      }).format(date)
+    }
+  />
+</ExampleChart.Chart>
+```
+
+---
+
 ## From version 0.1.0 to version 0.2.0
 
 With the latest update to `@mittwald/flow-react-components`, the way package

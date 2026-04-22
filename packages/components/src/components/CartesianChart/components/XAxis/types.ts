@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
-import type {
-  DataKey,
-  DataKeyValue,
-} from "@/components/CartesianChart/CartesianChart";
-
 import { XAxis, type XAxisProps } from "@/components/CartesianChart";
+import type {
+  ChartDataValue,
+  DataKeyProp,
+  DataKeyValue,
+} from "@/components/CartesianChart/types";
 
-export const TypedXAxis = <TData>() =>
+export const TypedXAxis = <
+  TData extends ChartDataValue = ChartDataValue,
+  XAxisDataKey extends keyof TData = keyof TData,
+>() =>
   XAxis as <
-    const TProp extends DataKey<TData>,
-    TMatcherValue = DataKeyValue<TData, TProp>,
+    const TProp extends DataKeyProp<TData> = XAxisDataKey,
+    XAxisDataKeyValue = DataKeyValue<TData, TProp>,
   >(
-    props: XAxisProps<TData, TProp, TMatcherValue>,
+    props: XAxisProps<TData, TProp, XAxisDataKeyValue>,
   ) => ReactNode;
