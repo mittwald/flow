@@ -4,6 +4,7 @@ export {
   type CartesianChartProps,
   CartesianChart,
   type CartesianChartEmptyViewProps,
+  typedCartesianChart,
 } from "./CartesianChart";
 export * from "./view";
 export * from "./components/Area";
