@@ -5,7 +5,6 @@ export {
   CartesianChart,
   type CartesianChartEmptyViewProps,
 } from "./CartesianChart";
-export { typedCartesianChart } from "@/components/CartesianChart/types";
 export * from "./view";
 export * from "./components/Area";
 export * from "./components/AreaDot";
