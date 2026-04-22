@@ -30,7 +30,11 @@ test("DateRangePicker with presets", async () => {
 
   const element = page.getByTestId("element");
   const content = element.element().textContent;
-  expect(["21.4.2026–21.4.2026"]).toContain(content);
+
+  const today = new Date();
+  const todayString = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+
+  expect([`${todayString}-${todayString}`]).toContain(content);
 });
 
 test("DateRangePicker with customPresets", async () => {
