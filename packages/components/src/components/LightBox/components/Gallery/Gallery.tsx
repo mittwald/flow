@@ -52,7 +52,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
     pointerStartX.current = null;
   };
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   const indicators = Array(count)
     .fill("")
@@ -68,14 +68,6 @@ export const Gallery = flowComponent("Gallery", (props) => {
 
   return (
     <div className={clsx(styles.gallery, className)}>
-      <Button
-        aria-label={stringFormatter.format("gallery.previous")}
-        onPress={() => paginate(-1)}
-        color="light-static"
-      >
-        <IconChevronLeft />
-      </Button>
-
       <div
         className={styles.content}
         onPointerDown={handlePointerDown}
@@ -86,24 +78,34 @@ export const Gallery = flowComponent("Gallery", (props) => {
           {children[currentIndex]}
         </div>
 
-        <div
-          className={styles.indicators}
-          aria-label={stringFormatter.format("gallery.indicator", {
-            current: currentIndex + 1,
-            count,
-          })}
-        >
-          {indicators}
+        <div className={styles.controls}>
+          <Button
+            aria-label={stringFormatter.format("gallery.previous")}
+            onPress={() => paginate(-1)}
+            color="light-static"
+            className={styles.previousButton}
+          >
+            <IconChevronLeft />
+          </Button>
+          <div
+            className={styles.indicators}
+            aria-label={stringFormatter.format("gallery.indicator", {
+              current: currentIndex + 1,
+              count,
+            })}
+          >
+            {indicators}
+          </div>
+          <Button
+            aria-label={stringFormatter.format("gallery.next")}
+            onPress={() => paginate(1)}
+            color="light-static"
+            className={styles.nextButton}
+          >
+            <IconChevronRight />
+          </Button>
         </div>
       </div>
-
-      <Button
-        aria-label={stringFormatter.format("gallery.next")}
-        onPress={() => paginate(1)}
-        color="light-static"
-      >
-        <IconChevronRight />
-      </Button>
     </div>
   );
 });

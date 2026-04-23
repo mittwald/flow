@@ -4,35 +4,32 @@
   justify-content: space-between;
   align-items: center;
 
-  --button-width: calc(
+  --button-size: calc(
     var(--icon--size--m) + 2 * var(--button--padding-icon-only)
   );
-  --button-width-plus-spacing: calc(
-    var(--button-width) + var(--light-box--spacing)
+  --button-size-plus-spacing: calc(
+    var(--button-size) + var(--light-box--spacing)
   );
+  --indicator-height: calc(var(--light-box--spacing) + var(--icon--size--m));
 
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-inline: var(--button-width-plus-spacing);
     height: var(--light-box--max-height);
+    width: 100%;
+    justify-content: center;
   }
 
   .galleryItem {
     position: relative;
     margin: 0 auto;
     user-select: none;
-
-    --indicator-height: calc(var(--light-box--spacing) + var(--icon--size--m));
-
-    max-height: calc(var(--light-box--max-height) - var(--indicator-height));
   }
 
   .actions {
     position: absolute;
     top: 0;
-    right: calc(var(--button-width-plus-spacing) * -1);
+    right: calc(var(--button-size-plus-spacing) * -1);
     display: flex;
     flex-direction: column;
     row-gap: var(--light-box--spacing);
@@ -64,7 +61,6 @@
   .indicators {
     display: flex;
     justify-content: center;
-    padding-top: var(--light-box--spacing);
     column-gap: var(--light-box--indicator-spacing);
     color: var(--light-box--content-color);
   }
@@ -80,5 +76,60 @@
     &.current {
       background-color: var(--light-box--content-color);
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding-inline: calc(
+      var(--button-size-plus-spacing) + var(--light-box--spacing)
+    );
+    padding-bottom: var(--indicator-height);
+  }
+
+  .galleryItem {
+    max-height: calc(var(--light-box--max-height) - var(--indicator-height));
+  }
+
+  .indicators {
+    position: absolute;
+    bottom: calc(var(--light-box--spacing) / 2);
+    inset-inline: 0;
+  }
+
+  .previousButton,
+  .nextButton {
+    position: absolute;
+    top: calc(50% - var(--button-size) / 2);
+  }
+
+  .previousButton {
+    left: 0;
+  }
+
+  .nextButton {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding-inline: var(--button-size-plus-spacing);
+    padding-bottom: var(--button-size-plus-spacing);
+  }
+
+  .galleryItem {
+    max-height: calc(
+      var(--light-box--max-height) - var(--button-size-plus-spacing)
+    );
+  }
+
+  .controls {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    inset-inline: 0;
+    justify-content: space-between;
+    align-items: center;
   }
 }
