@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.805](https://github.com/mittwald/flow/compare/0.2.0-alpha.804...0.2.0-alpha.805) (2026-04-23)
+
+### Features
+
+* **CodeBlock:** add truncate lines option ([#2459](https://github.com/mittwald/flow/issues/2459)) ([99cdbe3](https://github.com/mittwald/flow/commit/99cdbe30468ca814cc3d9d18c8ee870c1a710b28))
+
 # [0.2.0-alpha.804](https://github.com/mittwald/flow/compare/0.2.0-alpha.803...0.2.0-alpha.804) (2026-04-22)
 
 ### Features
