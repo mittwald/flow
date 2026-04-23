@@ -31,7 +31,6 @@ export interface CodeEditorProps
   className?: string;
   language?: CodeEditorLanguage;
   copyable?: boolean;
-
   isRequired?: boolean;
   validationBehavior?: unknown;
 }
@@ -100,7 +99,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             aria-required={isRequired}
             aria-invalid={isInvalid}
             readOnly={isReadOnly}
-            className={styles.codeMirror}
+            className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
               if (codeMirrorRef?.editor) {
                 localRef.current = codeMirrorRef.editor;

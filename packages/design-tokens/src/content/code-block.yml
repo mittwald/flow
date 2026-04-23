@@ -14,6 +14,8 @@ code-block:
   border-color:
     value: "{separator.color}"
   background-color:
-    value: "{neutral.color.200}"
+    value: "{form-control.background-color.default}"
   content-color:
     value: "{neutral-soft-content-color.default}"
+  show-more-padding:
+    value: "{size-px.xs}"
