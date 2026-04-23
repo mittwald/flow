@@ -102,7 +102,7 @@ test("Content from entry is updated in exit", async () => {
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
-  dom.rerender(
+  await dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -126,7 +126,7 @@ test("Content in exit is removed when not rendering entry", async () => {
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
 
-  dom.rerender(
+  await dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -147,7 +147,7 @@ test("Fallback content in exit is rendered again when not rendering entry", asyn
     </TunnelProvider>,
   );
 
-  dom.rerender(
+  await dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>Fallback!</TunnelExit>
@@ -181,7 +181,7 @@ test("Render function in TunnelExit gets updated children from TunnelEntry", asy
     </TunnelProvider>,
   );
 
-  dom.rerender(
+  await dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
@@ -209,7 +209,7 @@ test("Order of multiple children is preserved when entry is updated", async () =
 
   expect(dom.getByTestId("exit")).toHaveTextContent("Hello Tunnel!");
 
-  dom.rerender(
+  await dom.rerender(
     <TunnelProvider>
       <div data-testid="exit">
         <TunnelExit />
@@ -388,5 +388,30 @@ describe("Nested tunnel provider", () => {
       </TunnelProvider>,
     );
     expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  });
+
+  test("Content from entry is rendered in exit of parent provider", async () => {
+    const dom = await render(
+      <TunnelProvider id="outer">
+        <div data-testid="exit">
+          <TunnelExit id="hello" providerId="outer" />
+        </div>
+        <TunnelProvider id="inner">
+          <TunnelEntry id="hello" providerId="outer">
+            Hello!
+          </TunnelEntry>
+        </TunnelProvider>
+      </TunnelProvider>,
+    );
+
+    await dom.rerender(
+      <TunnelProvider id="outer">
+        <div data-testid="exit">
+          <TunnelExit id="hello" providerId="outer" />
+        </div>
+      </TunnelProvider>,
+    );
+
+    expect(dom.getByTestId("exit")).toBeEmptyDOMElement();
   });
 });

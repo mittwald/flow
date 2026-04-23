@@ -13,11 +13,14 @@ export interface TunnelProviderProps extends PropsWithChildren {
 export const TunnelProvider: FC<TunnelProviderProps> = (props) => {
   const { children, id } = props;
 
-  const parentState = useContext(tunnelContext);
+  const parentContext = useContext(tunnelContext);
 
   return (
     <tunnelContext.Provider
-      value={TunnelState.useNew({ id, parentTunnelState: parentState })}
+      value={{
+        state: TunnelState.useNew(id),
+        parentContext: parentContext,
+      }}
     >
       {children}
     </tunnelContext.Provider>
