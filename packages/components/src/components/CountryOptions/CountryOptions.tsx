@@ -46,7 +46,6 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
       .map((country) => (
         <Option
           key={country.countryNameEn}
-          id={country.countryNameEn}
           value={country.countryCode}
           textValue={country.name}
         >

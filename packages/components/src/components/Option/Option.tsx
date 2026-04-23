@@ -9,7 +9,7 @@ import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface OptionProps
   extends
-    Omit<Aria.ListBoxItemProps, "children" | "value">,
+    Omit<Aria.ListBoxItemProps, "children" | "value" | "id">,
     PropsWithChildren,
     FlowComponentProps {
   value?: string | number;
@@ -36,7 +36,6 @@ export const Option = flowComponent("Option", (props) => {
       id={value}
       {...rest}
       textValue={textValue}
-      key={value}
     >
       {hasChildren ? children : textValue}
     </Aria.ListBoxItem>
