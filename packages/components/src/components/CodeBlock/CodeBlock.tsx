@@ -1,4 +1,4 @@
-import { type FC, type PropsWithChildren, useState } from "react";
+import { type FC, type PropsWithChildren, useId, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./CodeBlock.module.scss";
@@ -44,6 +44,8 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
   const rootClassName = clsx(styles.codeBlock, className);
 
+  const id = useId();
+
   if (!code) {
     return (
       <div className={clsx(rootClassName, styles.withChildren)}>
@@ -84,7 +86,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
             const totalLines = view.state.doc.lines;
             setShouldCollapse(totalLines > visibleLines);
           }}
-          id="code-block"
+          id={id}
         />
       </div>
 
@@ -101,7 +103,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
             size="s"
             onPress={() => setCollapsed((prev) => !prev)}
             aria-expanded={!collapsed}
-            aria-controls="code-block"
+            aria-controls={id}
           >
             {stringFormatter.format(collapsed ? "showMore" : "showLess")}
           </Button>
