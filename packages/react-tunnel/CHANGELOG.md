@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.806](https://github.com/mittwald/flow/compare/0.2.0-alpha.805...0.2.0-alpha.806) (2026-04-23)
+
+### Features
+
+* **Tunnel:** support Tunnel nesting ([#2466](https://github.com/mittwald/flow/issues/2466)) ([ac85de2](https://github.com/mittwald/flow/commit/ac85de2032644a9f8f08c393cf9d3721b44e1173))
+
 # [0.2.0-alpha.805](https://github.com/mittwald/flow/compare/0.2.0-alpha.804...0.2.0-alpha.805) (2026-04-23)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
