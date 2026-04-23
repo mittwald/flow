@@ -101,7 +101,7 @@ export const WithSvg: Story = {
 
 export const WithGallery: Story = {
   render: () => (
-    <Flex gap="m">
+    <Flex gap="m" wrap="wrap">
       {images.map((src, index) => (
         <LightBoxTrigger key={index}>
           <Button>

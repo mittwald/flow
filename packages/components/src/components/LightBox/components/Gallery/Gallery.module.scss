@@ -7,19 +7,58 @@
   --button-width: calc(
     var(--icon--size--m) + 2 * var(--button--padding-icon-only)
   );
+  --button-width-plus-spacing: calc(
+    var(--button-width) + var(--light-box--spacing)
+  );
 
   .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-inline: var(--button-width-plus-spacing);
     height: var(--light-box--max-height);
+  }
 
-    --content-width: calc(
-      (var(--button-width) * 4) + (var(--light-box--spacing) * 2)
-    );
+  .galleryItem {
+    position: relative;
+    margin: 0 auto;
+    user-select: none;
 
-    width: calc(var(--light-box--max-width) - var(--content-width));
-    touch-action: pan-y;
+    --indicator-height: calc(var(--light-box--spacing) + var(--icon--size--m));
+
+    max-height: calc(var(--light-box--max-height) - var(--indicator-height));
+  }
+
+  .actions {
+    position: absolute;
+    top: 0;
+    right: calc(var(--button-width-plus-spacing) * -1);
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--light-box--spacing);
+  }
+
+  .actionGroup {
+    flex-grow: 0;
+    flex-direction: column;
+    row-gap: var(--light-box--spacing);
+  }
+
+  .image {
+    animation: fade-in var(--transition--duration--default) ease-in forwards;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 
   .indicators {
@@ -40,47 +79,6 @@
 
     &.current {
       background-color: var(--light-box--content-color);
-    }
-  }
-
-  .galleryItem {
-    display: flex;
-    justify-content: center;
-
-    --content-height: calc(var(--light-box--spacing) + var(--icon--size--m));
-
-    max-height: calc(var(--light-box--max-height) - var(--content-height));
-    user-select: none;
-
-    .actions {
-      display: flex;
-      flex-direction: column;
-      margin-right: calc(var(--button-width) * -1);
-      margin-inline-start: var(--light-box--spacing);
-      row-gap: var(--light-box--spacing);
-    }
-
-    .actionGroup {
-      flex-grow: 0;
-      flex-direction: column;
-      row-gap: var(--light-box--spacing);
-    }
-
-    .image {
-      animation: fade-in var(--transition--duration--default) ease-in forwards;
-      max-height: 100%;
-      max-width: 100%;
-      pointer-events: none;
-    }
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
     }
   }
 }
