@@ -14,6 +14,7 @@ export class RemoteAreaElement extends FlowRemoteElement<RemoteAreaElementProps>
       className: {},
       color: {},
       dataKey: {},
+      dataKeyLabel: {},
       fillOpacity: {},
       stackId: {},
       type: {},

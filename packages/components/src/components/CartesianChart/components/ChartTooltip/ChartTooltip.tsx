@@ -1,57 +1,28 @@
-import React, { type ComponentType, type FC, Suspense } from "react";
+import React, { type FC, Suspense } from "react";
 import { Tooltip, type TooltipProps } from "recharts";
 import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { type TooltipPayloadItem } from "@/components/CartesianChart/components/ChartTooltip/TooltipLegendItem";
 import { TooltipContent } from "@/components/CartesianChart/components/ChartTooltip/TooltipContent";
 import clsx from "clsx";
 import styles from "./ChartTooltip.module.scss";
 import LoadingSpinnerView from "@/views/LoadingSpinnerView";
-import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
+import type { ChartDataValue } from "@/components/CartesianChart/types";
+import type { WithTooltipFormatters } from "@/components/CartesianChart/components/ChartTooltip/types";
 
-export type TooltipLineFormatter<TData> = (
-  value: TData[keyof TData],
-  name: keyof TData,
-  index: number,
-  unit?: TooltipPayloadItem["unit"],
-) => Promise<string> | string;
+export { TypedChartTooltip } from "./types";
 
-export type TooltipHeadingFormatter<TData> = (
-  title: TData[keyof TData],
-) => Promise<string> | string;
-
-export type TooltipLProgressBarFormatter<TData> = (
-  value: TData[keyof TData],
-  unit?: TooltipPayloadItem["unit"],
-) => Promise<string> | string;
-
-export interface WithTooltipFormatters<TData> {
-  /**
-   * A formatter function for the lines in the tooltip. Can be used for purposes
-   * like translations.
-   */
-  formatter?: TooltipLineFormatter<TData>;
-  /**
-   * A formatter function for the heading of the tooltip. Can be used for
-   * purposes like translations.
-   */
-  headingFormatter?: TooltipHeadingFormatter<TData>;
-  /**
-   * A formatter function for the progressBar of the tooltip. Can be used for
-   * purposes like translations.
-   */
-  progressBarFormatter?: TooltipLProgressBarFormatter<TData>;
-}
-
-export interface ChartTooltipProps<TData = ChartDataValue>
+export interface ChartTooltipProps<
+  TData extends ChartDataValue = ChartDataValue,
+  XAxisDataKey extends keyof TData = keyof TData,
+>
   extends
     Pick<
       TooltipProps<ValueType, NameType>,
       "wrapperClassName" | "allowEscapeViewBox"
     >,
-    WithTooltipFormatters<TData> {
+    WithTooltipFormatters<TData, XAxisDataKey> {
   /** Show progress bar for stacked areas @default "true" */
   showProgressBar?: boolean;
 }
@@ -91,8 +62,5 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
     />
   );
 };
-
-export const TypedChartTooltip = <T = ChartDataValue,>() =>
-  ChartTooltip as ComponentType<ChartTooltipProps<T>>;
 
 export default ChartTooltip;

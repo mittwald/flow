@@ -7,9 +7,11 @@ import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 import type {
   ChartDataValue,
   DataKey,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 
-export interface LineProps<TData = ChartDataValue> extends Pick<
+export interface LineProps<
+  TData extends ChartDataValue = ChartDataValue,
+> extends Pick<
   Recharts.LineProps,
   "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
 > {
@@ -38,7 +40,7 @@ export const Line: FC<LineProps> = (props) => {
   );
 };
 
-export const TypedLine = <T = ChartDataValue,>() =>
+export const TypedLine = <T extends ChartDataValue = ChartDataValue>() =>
   Line as ComponentType<LineProps<T>>;
 
 export default Line;
