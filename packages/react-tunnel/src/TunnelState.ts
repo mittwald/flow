@@ -81,13 +81,16 @@ export class TunnelState {
     index: number,
     children: TunnelChildren,
     providerId?: string,
+    recurse = true,
   ): void {
-    if (providerId) {
+    if (recurse) {
       return this.getTunnelState(providerId)?.setChildren(
         tunnelId,
         entryId,
         index,
         children,
+        providerId,
+        false,
       );
     }
 
@@ -107,7 +110,9 @@ export class TunnelState {
     this.children.set(tunnelId, tunnelEntries);
   }
 
-  private getTunnelState(providerId: string): TunnelState | undefined {
+  private getTunnelState(
+    providerId: string = defaultId,
+  ): TunnelState | undefined {
     if (providerId === this.id) {
       return this;
     }
@@ -122,13 +127,16 @@ export class TunnelState {
     index: number,
     children: TunnelChildren,
     providerId?: string,
+    recurse = true,
   ): void {
-    if (providerId) {
+    if (recurse) {
       return this.getTunnelState(providerId)?.prepareChildren(
         tunnelId,
         entryId,
         index,
         children,
+        providerId,
+        false,
       );
     }
 
@@ -154,12 +162,15 @@ export class TunnelState {
     tunnelId: string,
     entryId: string,
     providerId?: string,
+    recurse = true,
   ): void {
-    if (providerId) {
+    if (recurse) {
       return this.getTunnelState(providerId)?.deleteChildrenFromMap(
         map,
         tunnelId,
         entryId,
+        providerId,
+        false,
       );
     }
 
@@ -187,9 +198,14 @@ export class TunnelState {
   public getEntries(
     tunnelId: string = defaultId,
     providerId?: string,
+    recurse = true,
   ): TunnelEntryState[] | undefined {
-    if (providerId) {
-      return this.getTunnelState(providerId)?.getEntries(tunnelId);
+    if (recurse) {
+      return this.getTunnelState(providerId)?.getEntries(
+        tunnelId,
+        providerId,
+        false,
+      );
     }
 
     const tunnelEntries =

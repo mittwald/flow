@@ -360,6 +360,20 @@ describe("Nested tunnel provider", () => {
     expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
   });
 
+  test("Content from entry is rendered in nearest provider with default ID", async () => {
+    const dom = await render(
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit id="hello" />
+        </div>
+        <TunnelProvider id="inner">
+          <TunnelEntry id="hello">Hello!</TunnelEntry>
+        </TunnelProvider>
+      </TunnelProvider>,
+    );
+    expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  });
+
   test("Content from entry is rendered in exit of parent provider", async () => {
     const dom = await render(
       <TunnelProvider id="outer">
