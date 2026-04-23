@@ -4,71 +4,103 @@ import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export type SectionHeaderProps = PropsWithChildren &
   PropsWithClassName &
   RefAttributes<HTMLHeadingElement>;
 
-export const SectionHeader: FC<SectionHeaderProps> = (props) => {
-  const { children, className, ref } = props;
+export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
+  "SectionHeader",
+  (props) => {
+    const { children, className, ref } = props;
 
-  const rootClassName = clsx(styles.sectionHeader, className);
+    const rootClassName = clsx(styles.sectionHeader, className);
 
-  const propsContext: PropsContext = {
-    Switch: {
-      labelPosition: "leading",
-      tunnelId: "actions",
-    },
-    Button: {
-      size: "s",
-      tunnelId: "actions",
-    },
-    FileField: { tunnelId: "actions", Button: { size: "s" } },
-    ContextMenuTrigger: {
-      tunnelId: "actions",
-      Button: {
-        tunnelId: null,
+    const propsContext: PropsContext = {
+      Switch: {
+        labelPosition: "leading",
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
       },
-    },
-    PopoverTrigger: {
-      tunnelId: "actions",
       Button: {
-        tunnelId: null,
+        size: "s",
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
       },
-    },
-    ContextualHelpTrigger: {
-      tunnelId: "actions",
-      Button: {
-        tunnelId: null,
+      FileField: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+        Button: { size: "s" },
       },
-    },
-    Action: {
-      tunnelId: "actions",
-      Button: {
-        tunnelId: null,
+      ContextMenuTrigger: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+        Button: {
+          tunnel: null,
+        },
       },
-    },
-    Heading: {
-      level: 2,
-    },
-    Link: {
-      tunnelId: "actions",
-    },
-  };
+      PopoverTrigger: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+        Button: {
+          tunnel: null,
+        },
+      },
+      ContextualHelpTrigger: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+        Button: {
+          tunnel: null,
+        },
+      },
+      Action: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+        Button: {
+          tunnel: null,
+        },
+      },
+      Heading: {
+        level: 2,
+      },
+      Link: {
+        tunnel: {
+          id: "actions",
+          component: "SectionHeader",
+        },
+      },
+    };
 
-  return (
-    <header ref={ref} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
+    return (
+      <header ref={ref} className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
           {children}
           <div className={styles.actions}>
-            <TunnelExit id="actions" />
+            <UiComponentTunnelExit id="actions" component="SectionHeader" />
           </div>
-        </TunnelProvider>
-      </PropsContextProvider>
-    </header>
-  );
-};
+        </PropsContextProvider>
+      </header>
+    );
+  },
+  {
+    type: "layout",
+  },
+);
 
 export default SectionHeader;

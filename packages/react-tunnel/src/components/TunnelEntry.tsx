@@ -12,10 +12,12 @@ export interface TunnelEntryProps {
   children?: TunnelEntryChildren;
   /** Static entry ID instead of generated ID by `useId` */
   staticEntryId?: string;
+  /** Select a dedicated tunnel provider by ID. */
+  providerId?: string;
 }
 
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
-  const { children, id, staticEntryId } = props;
+  const { children, id, staticEntryId, providerId } = props;
   const tunnel = useContext(tunnelContext);
   const usedId = useId();
   const entryId = staticEntryId ?? usedId;
@@ -24,13 +26,13 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.prepareChildren(id, entryId, index, children);
+    tunnel.prepareChildren(id, entryId, index, children, providerId);
   }
 
   useEffect(() => {
     mounted.current = true;
-    tunnel.setChildren(id, entryId, index, children);
-  }, [children, id, entryId, index]);
+    tunnel.setChildren(id, entryId, index, children, providerId);
+  }, [children, id, entryId, index, providerId]);
 
   useEffect(() => {
     /**
@@ -40,9 +42,9 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
      * in the TunnelExit may be disrupted as well.
      */
     return () => {
-      tunnel.deleteChildren(id, entryId);
+      tunnel.deleteChildren(id, entryId, providerId);
     };
-  }, [id, entryId]);
+  }, [id, entryId, providerId]);
 
   return null;
 };

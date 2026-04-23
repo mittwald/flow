@@ -10,10 +10,10 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SelectProps
   extends
@@ -43,7 +43,7 @@ export const Select = flowComponent("Select", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Select");
 
   const rootClassName = clsx(
     styles.select,
@@ -53,7 +53,10 @@ export const Select = flowComponent("Select", (props) => {
 
   const propsContext: PropsContext = {
     Option: {
-      tunnelId: "options",
+      tunnel: {
+        id: "options",
+        component: "Select",
+      },
     },
     ...fieldPropsContext,
   };
@@ -78,25 +81,23 @@ export const Select = flowComponent("Select", (props) => {
       isOpen={isOpen}
       data-readonly={isReadOnly}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            <Aria.Button
-              data-readonly={isReadOnly}
-              className={styles.toggle}
-              ref={ref}
-            >
-              <Aria.SelectValue />
-              <IconChevronDown />
-            </Aria.Button>
-            {children}
-            <Options controller={controller}>
-              <TunnelExit id="options" />
-            </Options>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+      <FieldErrorCaptureContext>
+        <PropsContextProvider props={propsContext}>
+          <Aria.Button
+            data-readonly={isReadOnly}
+            className={styles.toggle}
+            ref={ref}
+          >
+            <Aria.SelectValue />
+            <IconChevronDown />
+          </Aria.Button>
+          {children}
+          <Options controller={controller}>
+            <UiComponentTunnelExit id="options" component="Select" />
+          </Options>
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.Select>
   );
 });

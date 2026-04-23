@@ -13,8 +13,8 @@ import locales from "./locales/*.locale.json";
 import { Button } from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import clsx from "clsx";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface TextFieldProps
   extends
@@ -50,7 +50,7 @@ export const TextField = flowComponent("TextField", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "TextField");
 
   const rootClassName = clsx(fieldProps.className, className);
 
@@ -59,9 +59,18 @@ export const TextField = flowComponent("TextField", (props) => {
       className: styles.button,
       variant: "plain",
       color: "secondary",
-      tunnelId: "button",
+      tunnel: {
+        id: "button",
+        component: "TextField",
+      },
     },
-    CopyButton: { className: styles.button, tunnelId: "button" },
+    CopyButton: {
+      className: styles.button,
+      tunnel: {
+        id: "button",
+        component: "TextField",
+      },
+    },
     ...fieldPropsContext,
   };
 
@@ -89,41 +98,39 @@ export const TextField = flowComponent("TextField", (props) => {
       onChange={handleChange}
       type={type}
     >
-      <TunnelProvider>
-        <PropsContextProvider props={propsContext}>
-          <FieldErrorCaptureContext>
-            {children}
-            <div className={styles.inputContainer}>
-              <Aria.Input
-                form={form}
-                placeholder={placeholder}
-                className={styles.input}
-                ref={ref}
-              />
-              <TunnelExit id="button" />
-              {typeFromProps === "password" && (
-                <Button
-                  color="secondary"
-                  variant="plain"
-                  className={styles.button}
-                  onPress={() =>
-                    setType(type === "password" ? "text" : "password")
-                  }
-                  aria-label={translation.format(
-                    `password.${type === "password" ? "show" : "hide"}`,
-                  )}
-                >
-                  {type === "password" ? <IconShow /> : <IconHide />}
-                </Button>
-              )}
-            </div>
-            {showCharacterCount && (
-              <FieldDescription>{charactersCountDescription}</FieldDescription>
+      <PropsContextProvider props={propsContext}>
+        <FieldErrorCaptureContext>
+          {children}
+          <div className={styles.inputContainer}>
+            <Aria.Input
+              form={form}
+              placeholder={placeholder}
+              className={styles.input}
+              ref={ref}
+            />
+            <UiComponentTunnelExit id="button" component="TextField" />
+            {typeFromProps === "password" && (
+              <Button
+                color="secondary"
+                variant="plain"
+                className={styles.button}
+                onPress={() =>
+                  setType(type === "password" ? "text" : "password")
+                }
+                aria-label={translation.format(
+                  `password.${type === "password" ? "show" : "hide"}`,
+                )}
+              >
+                {type === "password" ? <IconShow /> : <IconHide />}
+              </Button>
             )}
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </PropsContextProvider>
-      </TunnelProvider>
+          </div>
+          {showCharacterCount && (
+            <FieldDescription>{charactersCountDescription}</FieldDescription>
+          )}
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
+      </PropsContextProvider>
     </Aria.TextField>
   );
 });

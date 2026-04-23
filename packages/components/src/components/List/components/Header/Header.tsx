@@ -6,12 +6,12 @@ import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeContextMenu } from "@/components/List/components/Header/components/ViewModeContextMenu/ViewModeContextMenu";
-import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import { SortingContextMenu } from "@/components/List/components/Header/components/SortingContextMenu/SortingContextMenu";
 import { FilterContextMenus } from "@/components/List/components/Header/components/FilterContextMenu/FilterContextMenus";
 import { AllFiltersModal } from "@/components/List/components/Header/components/AllFiltersModal/AllFiltersModal";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export const Header: FC<PropsWithClassName> = (props) => {
   const { className } = props;
@@ -43,7 +43,7 @@ export const Header: FC<PropsWithClassName> = (props) => {
       )}
     >
       <DivView className={styles.headerContent}>
-        <TunnelExit id="actions" />
+        <UiComponentTunnelExit id="actions" component="List" />
         {hasOptions && (
           <DivView className={styles.options}>
             <ViewModeContextMenu isDisabled={isDisabled} />

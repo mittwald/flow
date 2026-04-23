@@ -28,7 +28,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "DatePicker");
 
   const rootClassName = clsx(fieldProps.className, className);
 
