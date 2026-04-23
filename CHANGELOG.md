@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.810](https://github.com/mittwald/flow/compare/0.2.0-alpha.809...0.2.0-alpha.810) (2026-04-23)
+
+### Bug Fixes
+
+* **CountryOptions:** fix missing countries when sorting ([efdcea2](https://github.com/mittwald/flow/commit/efdcea246e04d15c5b601abe786bb9cc5182a1d8))
+* **Tunnel:** fix tunnel items are not removed ([419a0dc](https://github.com/mittwald/flow/commit/419a0dcc41edb5b470d9fcf21282158c03ef0343))
+
 # [0.2.0-alpha.809](https://github.com/mittwald/flow/compare/0.2.0-alpha.808...0.2.0-alpha.809) (2026-04-23)
 
 **Note:** Version bump only for package @mittwald/flow-project
