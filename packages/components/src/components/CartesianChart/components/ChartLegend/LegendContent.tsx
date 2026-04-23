@@ -3,6 +3,8 @@ import type { WithChartLegendFormatters } from "./ChartLegend";
 import type { FC } from "react";
 import Legend, { LegendItem } from "@/components/Legend";
 
+import { isDataKeyWithLabel } from "@/components/CartesianChart/types";
+
 type LegendContentType = Omit<Props, "formatter"> & WithChartLegendFormatters;
 
 const LegendContent: FC<LegendContentType> = (props) => {
@@ -24,13 +26,16 @@ const LegendContent: FC<LegendContentType> = (props) => {
               ? payload.fill
               : undefined;
 
+          const name =
+            typeof dataKey === "function"
+              ? isDataKeyWithLabel(payload)
+                ? payload.dataKeyLabel
+                : ""
+              : String(dataKey);
+
           return (
             <LegendItem key={`legendItem-${index}`} color={fill}>
-              {dataKey
-                ? formatter
-                  ? formatter(dataKey?.toString())
-                  : dataKey.toString()
-                : ""}
+              {formatter ? formatter(name, index) : name}
             </LegendItem>
           );
         })}

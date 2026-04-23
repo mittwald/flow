@@ -46,7 +46,7 @@ export const FileField = flowComponent("FileField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "FileField");
 
   const inputRef = useObjectRef(ref);
 

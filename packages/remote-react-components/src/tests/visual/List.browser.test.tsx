@@ -3,6 +3,7 @@ import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import type { ListProps } from "@mittwald/flow-react-components";
 
 test.each(testEnvironments)(
   "List items (%s)",
@@ -549,5 +550,75 @@ test.each(testEnvironments)(
     await userEvent.keyboard("{enter}");
 
     await testScreenshot("List date range filter - filtered");
+  },
+);
+
+test.each(testEnvironments)(
+  "List empty views (%s)",
+  async ({ testScreenshot, render, components: { typedList, Heading } }) => {
+    function Wrapper(
+      props: ListProps<{
+        id: string;
+        date: string;
+      }>,
+    ) {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id} {...props}>
+          <List.StaticData data={[]} />
+          <List.Search data-testid="search" />
+          <List.Item>{(item) => <>{item.id}</>}</List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+    await testScreenshot("List empty view - default");
+
+    const emptyView = <Heading>Custom nothing in the list</Heading>;
+
+    await render(<Wrapper emptyView={emptyView} />);
+    await testScreenshot("List empty view - custom default");
+  },
+);
+
+test.each(testEnvironments)(
+  "List empty search views (%s)",
+  async ({ testScreenshot, render, components: { typedList, Heading } }) => {
+    function Wrapper(
+      props: ListProps<{
+        id: string;
+        date: string;
+      }>,
+    ) {
+      const List = typedList<{
+        id: string;
+        date: string;
+      }>();
+
+      return (
+        <List.List aria-label="list" getItemId={(i) => i.id} {...props}>
+          <List.StaticData data={[{ id: "", date: "" }]} />
+          <List.Search data-testid="search" />
+          <List.Item>{(item) => <>{item.id}</>}</List.Item>
+        </List.List>
+      );
+    }
+
+    await render(<Wrapper />);
+    const search = page.getByPlaceholder("Search");
+    await userEvent.type(search, "test");
+    await sleep(1000);
+    await testScreenshot("List empty search view - default");
+
+    const emptySearchView = <Heading>Custom nothing found</Heading>;
+    await render(<Wrapper emptySearchResultView={emptySearchView} />);
+    await userEvent.type(search, "test");
+    await sleep(1000);
+    await testScreenshot("List empty search view - custom");
   },
 );

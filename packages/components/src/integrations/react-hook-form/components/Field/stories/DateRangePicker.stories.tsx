@@ -60,7 +60,7 @@ const meta: Meta<typeof Field> = {
 
           <Field name="dateRangeDefaultValue">
             <DateRangePicker>
-              <Label>Date range</Label>
+              <Label>Date range (with form default value)</Label>
             </DateRangePicker>
           </Field>
 

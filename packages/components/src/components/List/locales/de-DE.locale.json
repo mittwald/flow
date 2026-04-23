@@ -6,6 +6,8 @@
   "filters.clearSelection": "Auswahl aufheben",
   "filters.reset": "Filter zurücksetzen",
   "filters.store": "Filter speichern",
+  "noItems.heading": "Keine Einträge gefunden",
+  "noItems.text": "Sobald es Einträge gibt, werden sie hier angezeigt.",
   "noResult.heading": "Keine Suchergebnisse gefunden",
   "noResult.text": "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
   "options": "Optionen",

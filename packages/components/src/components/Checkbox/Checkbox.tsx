@@ -31,7 +31,7 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Checkbox");
 
   const inputRef = useObjectRef(ref);
 

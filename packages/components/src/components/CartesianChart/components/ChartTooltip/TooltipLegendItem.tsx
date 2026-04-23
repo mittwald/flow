@@ -1,5 +1,4 @@
 import { LegendItem } from "@/components/Legend/components/LegendItem";
-import type { WithTooltipFormatters } from "./ChartTooltip";
 import type { FC } from "react";
 import type { DefaultTooltipContentProps } from "recharts";
 import type {
@@ -7,7 +6,9 @@ import type {
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import { usePromise } from "@mittwald/react-use-promise";
-import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
+
+import type { ChartDataValue } from "@/components/CartesianChart/types";
+import type { WithTooltipFormatters } from "@/components/CartesianChart/components/ChartTooltip/types";
 
 /** @internal */
 export type TooltipPayloadItem = NonNullable<
@@ -15,10 +16,10 @@ export type TooltipPayloadItem = NonNullable<
 >[number];
 
 /** @internal */
-interface LegendItemLabelProps<TData = ChartDataValue> extends Pick<
-  WithTooltipFormatters<TData>,
-  "formatter"
-> {
+interface LegendItemLabelProps<
+  TData extends ChartDataValue = ChartDataValue,
+  TTooltipLabelValue extends keyof TData = keyof TData,
+> extends Pick<WithTooltipFormatters<TData, TTooltipLabelValue>, "formatter"> {
   item: TooltipPayloadItem;
   index: number;
 }
@@ -29,17 +30,17 @@ export const TooltipLegendItem: FC<LegendItemLabelProps> = ({
   item,
   index,
 }) => {
-  const { value, dataKey, unit, fill } = item;
+  const { value, dataKey, unit, fill, name } = item;
 
   const formattedLabel = usePromise(
-    async (value, dataKey, index, unit, formatter) => {
+    async (value, dataKey, index, unit, formatter, name) => {
       if (!formatter) {
-        return `${dataKey} (${value}${unit ? ` ${unit}` : ""})`;
+        return `${name ?? ""} (${value ?? ""}${unit ? unit : ""})`;
       }
 
-      return formatter(value, dataKey as never, index, unit);
+      return formatter(value, String(name), index, unit);
     },
-    [value, dataKey, index, unit, formatter] as const,
+    [value, dataKey, index, unit, formatter, name] as const,
   );
 
   return <LegendItem color={fill}>{formattedLabel}</LegendItem>;

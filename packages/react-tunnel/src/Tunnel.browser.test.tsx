@@ -1,7 +1,7 @@
 import TunnelEntry, { type TunnelEntryProps } from "./components/TunnelEntry";
 import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
-import { expect, test } from "vitest";
+import { expect, test, describe } from "vitest";
 import { render } from "vitest-browser-react";
 import { useState, type FC, type PropsWithChildren } from "react";
 import { userEvent } from "vitest/browser";
@@ -343,4 +343,50 @@ test("Order of multiple children is changed when entries are changing", async ()
     </Test>,
   );
   expect(dom.getByTestId("exit")).toHaveTextContent("ACB");
+});
+
+describe("Nested tunnel provider", () => {
+  test("Content from entry is rendered in direct parent if no provider ID is used", async () => {
+    const dom = await render(
+      <TunnelProvider>
+        <TunnelProvider>
+          <div data-testid="exit">
+            <TunnelExit id="hello" />
+          </div>
+          <TunnelEntry id="hello">Hello!</TunnelEntry>
+        </TunnelProvider>
+      </TunnelProvider>,
+    );
+    expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  });
+
+  test("Content from entry is rendered in nearest provider with default ID", async () => {
+    const dom = await render(
+      <TunnelProvider>
+        <div data-testid="exit">
+          <TunnelExit id="hello" />
+        </div>
+        <TunnelProvider id="inner">
+          <TunnelEntry id="hello">Hello!</TunnelEntry>
+        </TunnelProvider>
+      </TunnelProvider>,
+    );
+    expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  });
+
+  test("Content from entry is rendered in exit of parent provider", async () => {
+    const dom = await render(
+      <TunnelProvider id="outer">
+        <div data-testid="exit">
+          <TunnelExit id="hello" providerId="outer" />
+        </div>
+        <TunnelProvider id="inner">
+          <TunnelEntry id="hello" providerId="outer">
+            Hello!
+          </TunnelEntry>
+        </TunnelProvider>
+      </TunnelProvider>,
+    );
+    expect(dom.getByTestId("exit")).toHaveTextContent("Hello!");
+  });
 });

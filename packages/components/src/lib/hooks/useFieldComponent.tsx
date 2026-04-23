@@ -3,6 +3,7 @@ import { type PropsContext } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFieldError } from "@/lib/hooks/useFieldError";
 import clsx, { type ClassValue } from "clsx";
+import type { FlowComponentName } from "@/components/propTypes";
 
 interface FieldComponentProps {
   className?: ClassValue;
@@ -21,8 +22,11 @@ export interface UseFieldComponent {
 
 export const useFieldComponent = (
   props: FieldComponentProps,
+  component: FlowComponentName,
 ): UseFieldComponent => {
-  const { FieldErrorView, FieldErrorCaptureContext } = useFieldError();
+  const { FieldErrorView, FieldErrorCaptureContext } = useFieldError({
+    component,
+  });
 
   // setting up the props context for all components that
   // are part of a form control

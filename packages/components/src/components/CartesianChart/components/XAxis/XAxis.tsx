@@ -5,12 +5,12 @@ import type {
   ChartDataValue,
   DataKey,
   DataKeyValue,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 
 export type XAxisProps<
-  TData = ChartDataValue,
+  TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
-  TDataMatch = DataKeyValue<TData, TDataKey>,
+  TDataKeyValue = DataKeyValue<TData, TDataKey>,
 > = Pick<
   Recharts.XAxisProps,
   | "className"
@@ -26,7 +26,7 @@ export type XAxisProps<
   | "unit"
 > & {
   dataKey?: TDataKey;
-  tickFormatter?: (value: TDataMatch, index: number) => string;
+  tickFormatter?: (value: TDataKeyValue, index: number) => string;
 };
 
 /** @flr-generate all */

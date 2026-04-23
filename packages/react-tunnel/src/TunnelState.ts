@@ -15,7 +15,14 @@ interface TunnelEntryState {
   children: TunnelChildren;
 }
 
+export interface TunnelStateOptions {
+  parentTunnelState?: TunnelState;
+  id?: string;
+}
+
 export class TunnelState {
+  public readonly id: string;
+
   public readonly children = observable.map<
     string,
     ObservableMap<string, TunnelEntryState>
@@ -26,6 +33,8 @@ export class TunnelState {
     },
   );
 
+  public parentTunnelState?: TunnelState;
+
   private readonly preparedChildren = new Map<
     string,
     Map<string, TunnelEntryState>
@@ -33,15 +42,21 @@ export class TunnelState {
 
   private nextIndex = 0;
 
-  public constructor() {
+  public constructor(options: TunnelStateOptions = {}) {
+    const { parentTunnelState, id } = options;
+    this.parentTunnelState = parentTunnelState;
+    this.id = id ?? defaultId;
+
     makeObservable(this, {
+      id: false,
+      parentTunnelState: false,
       deleteChildren: action.bound,
       setChildren: action.bound,
     });
   }
 
-  public static useNew(): TunnelState {
-    const tunnelState = useState(() => new TunnelState())[0];
+  public static useNew(options?: TunnelStateOptions): TunnelState {
+    const tunnelState = useState(() => new TunnelState(options))[0];
     tunnelState.resetIndex();
     return tunnelState;
   }
@@ -65,7 +80,20 @@ export class TunnelState {
     entryId: string,
     index: number,
     children: TunnelChildren,
+    providerId?: string,
+    recurse = true,
   ): void {
+    if (recurse) {
+      return this.getTunnelState(providerId)?.setChildren(
+        tunnelId,
+        entryId,
+        index,
+        children,
+        providerId,
+        false,
+      );
+    }
+
     const entryState: TunnelEntryState = {
       id: entryId,
       index,
@@ -82,12 +110,36 @@ export class TunnelState {
     this.children.set(tunnelId, tunnelEntries);
   }
 
+  private getTunnelState(
+    providerId: string = defaultId,
+  ): TunnelState | undefined {
+    if (providerId === this.id) {
+      return this;
+    }
+    if (this.parentTunnelState) {
+      return this.parentTunnelState.getTunnelState(providerId);
+    }
+  }
+
   public prepareChildren(
     tunnelId: string = defaultId,
     entryId: string,
     index: number,
     children: TunnelChildren,
+    providerId?: string,
+    recurse = true,
   ): void {
+    if (recurse) {
+      return this.getTunnelState(providerId)?.prepareChildren(
+        tunnelId,
+        entryId,
+        index,
+        children,
+        providerId,
+        false,
+      );
+    }
+
     const entryState: TunnelEntryState = {
       id: entryId,
       index,
@@ -104,10 +156,24 @@ export class TunnelState {
   }
 
   private deleteChildrenFromMap(
-    map: Map<string, Map<string, TunnelEntryState>>,
+    map:
+      | Map<string, Map<string, TunnelEntryState>>
+      | ObservableMap<string, ObservableMap<string, TunnelEntryState>>,
     tunnelId: string,
     entryId: string,
+    providerId?: string,
+    recurse = true,
   ): void {
+    if (recurse) {
+      return this.getTunnelState(providerId)?.deleteChildrenFromMap(
+        map,
+        tunnelId,
+        entryId,
+        providerId,
+        false,
+      );
+    }
+
     const mapEntries = map.get(tunnelId);
     mapEntries?.delete(entryId);
     if (mapEntries?.size === 0) {
@@ -115,14 +181,33 @@ export class TunnelState {
     }
   }
 
-  public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
-    this.deleteChildrenFromMap(this.children, tunnelId, entryId);
-    this.deleteChildrenFromMap(this.preparedChildren, tunnelId, entryId);
+  public deleteChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    providerId?: string,
+  ): void {
+    this.deleteChildrenFromMap(this.children, tunnelId, entryId, providerId);
+    this.deleteChildrenFromMap(
+      this.preparedChildren,
+      tunnelId,
+      entryId,
+      providerId,
+    );
   }
 
   public getEntries(
     tunnelId: string = defaultId,
+    providerId?: string,
+    recurse = true,
   ): TunnelEntryState[] | undefined {
+    if (recurse) {
+      return this.getTunnelState(providerId)?.getEntries(
+        tunnelId,
+        providerId,
+        false,
+      );
+    }
+
     const tunnelEntries =
       this.children.get(tunnelId)?.values() ??
       this.preparedChildren.get(tunnelId)?.values();

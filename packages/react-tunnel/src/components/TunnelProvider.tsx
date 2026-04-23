@@ -1,13 +1,24 @@
-import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import { useContext, type FC, type PropsWithChildren } from "react";
 import tunnelContext from "@/context";
 import { TunnelState } from "@/TunnelState";
 
-export const TunnelProvider: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+export interface TunnelProviderProps extends PropsWithChildren {
+  /**
+   * Dedicated id for this tunnel provider. If not provided, the tunnel provider
+   * will be registered as a global provider.
+   */
+  id?: string;
+}
+
+export const TunnelProvider: FC<TunnelProviderProps> = (props) => {
+  const { children, id } = props;
+
+  const parentState = useContext(tunnelContext);
 
   return (
-    <tunnelContext.Provider value={TunnelState.useNew()}>
+    <tunnelContext.Provider
+      value={TunnelState.useNew({ id, parentTunnelState: parentState })}
+    >
       {children}
     </tunnelContext.Provider>
   );

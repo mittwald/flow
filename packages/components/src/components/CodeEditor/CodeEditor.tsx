@@ -18,7 +18,6 @@ import {
   useCodeEditorExtensions,
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
-import React from "react";
 
 export interface CodeEditorProps
   extends
@@ -31,7 +30,6 @@ export interface CodeEditorProps
   className?: string;
   language?: CodeEditorLanguage;
   copyable?: boolean;
-
   isRequired?: boolean;
   validationBehavior?: unknown;
 }
@@ -63,7 +61,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "CodeEditor");
 
   const rootClassName = clsx(
     fieldProps.className,
@@ -100,7 +98,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             aria-required={isRequired}
             aria-invalid={isInvalid}
             readOnly={isReadOnly}
-            className={styles.codeMirror}
+            className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
               if (codeMirrorRef?.editor) {
                 localRef.current = codeMirrorRef.editor;

@@ -7,7 +7,8 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {
   // Height of the chat component
@@ -15,36 +16,49 @@ export interface ChatProps extends PropsWithChildren, PropsWithClassName {
 }
 
 /** @flr-generate all */
-export const Chat: FC<ChatProps> = (props) => {
-  const { height, className, children } = props;
+export const Chat: FC<ChatProps> = flowComponent(
+  "Chat",
+  (props) => {
+    const { height, className, children } = props;
 
-  const rootClassName = clsx(styles.chat, className);
+    const rootClassName = clsx(styles.chat, className);
 
-  const propsContext: PropsContext = {
-    MessageThread: {
-      tunnelId: "messageThread",
-    },
-    FileCardList: { className: styles.fileCardList, tunnelId: "fileCardList" },
-    Button: {
-      className: dynamic((props) => {
-        return props.color === "accent" ? styles.accentButton : styles.button;
-      }),
-    },
-  };
+    const propsContext: PropsContext = {
+      MessageThread: {
+        tunnel: {
+          id: "messageThread",
+          component: "Chat",
+        },
+      },
+      FileCardList: {
+        className: styles.fileCardList,
+        tunnel: {
+          id: "fileCardList",
+          component: "Chat",
+        },
+      },
+      Button: {
+        className: dynamic((props) => {
+          return props.color === "accent" ? styles.accentButton : styles.button;
+        }),
+      },
+    };
 
-  return (
-    <PropsContextProvider props={propsContext}>
-      <div style={{ height }} className={rootClassName}>
-        <TunnelProvider>
+    return (
+      <PropsContextProvider props={propsContext}>
+        <div style={{ height }} className={rootClassName}>
           <div className={styles.messageThreadContainer}>
-            <TunnelExit id="messageThread" />
+            <UiComponentTunnelExit id="messageThread" component="Chat" />
           </div>
           <div className={styles.controls}>{children}</div>
-          <TunnelExit id="fileCardList" />
-        </TunnelProvider>
-      </div>
-    </PropsContextProvider>
-  );
-};
+          <UiComponentTunnelExit id="fileCardList" component="Chat" />
+        </div>
+      </PropsContextProvider>
+    );
+  },
+  {
+    type: "layout",
+  },
+);
 
 export default Chat;

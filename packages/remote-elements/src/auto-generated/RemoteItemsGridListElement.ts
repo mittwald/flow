@@ -116,7 +116,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["emptyView"];
   }
 }
 

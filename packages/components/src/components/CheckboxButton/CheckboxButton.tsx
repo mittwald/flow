@@ -20,7 +20,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
     fieldProps,
     FieldErrorView,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "CheckboxButton");
 
   const mergedPropsContext: PropsContext = {
     Text: {

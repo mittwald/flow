@@ -17,7 +17,6 @@ import {
 import styles from "./PasswordCreationField.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
@@ -42,6 +41,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface PasswordCreationFieldProps
   extends
@@ -89,7 +89,7 @@ export const PasswordCreationField = flowComponent(
       FieldErrorCaptureContext,
       fieldProps,
       fieldPropsContext,
-    } = useFieldComponent(props);
+    } = useFieldComponent(props, "PasswordCreationField");
 
     const [isLoading, setIsLoading] = useState(false);
     const translate = useLocalizedStringFormatter(
@@ -199,7 +199,10 @@ export const PasswordCreationField = flowComponent(
     const propsContext: PropsContext = {
       ...fieldPropsContext,
       Button: {
-        tunnelId: "button",
+        tunnel: {
+          id: "button",
+          component: "PasswordCreationField",
+        },
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -207,7 +210,10 @@ export const PasswordCreationField = flowComponent(
         className: styles.button,
       },
       CopyButton: {
-        tunnelId: "button",
+        tunnel: {
+          id: "button",
+          component: "PasswordCreationField",
+        },
         size: "m",
         variant: "plain",
         color: "secondary",
@@ -248,48 +254,49 @@ export const PasswordCreationField = flowComponent(
         isInvalid={isInvalid}
         isRequired={isRequired}
       >
-        <TunnelProvider>
-          <FieldErrorCaptureContext>
-            <FieldError>{latestValidationErrorText}</FieldError>
-            <PropsContextProvider
-              props={propsContext}
-              dependencies={[
-                isDisabled,
-                isRequired,
-                value,
-                policyValidationResult,
-                isEmptyValue,
-              ]}
+        <FieldErrorCaptureContext>
+          <FieldError>{latestValidationErrorText}</FieldError>
+          <PropsContextProvider
+            props={propsContext}
+            dependencies={[
+              isDisabled,
+              isRequired,
+              value,
+              policyValidationResult,
+              isEmptyValue,
+            ]}
+          >
+            {children}
+            <Aria.Group
+              isDisabled={isDisabled}
+              className={clsx(styles.inputGroup)}
             >
-              {children}
-              <Aria.Group
-                isDisabled={isDisabled}
-                className={clsx(styles.inputGroup)}
-              >
-                <Aria.Input ref={ref} className={styles.input} />
-                <Aria.Group className={styles.buttonContainer}>
-                  <TogglePasswordVisibilityButton
-                    className={styles.button}
-                    isVisible={isPasswordRevealed}
-                    isDisabled={isDisabled}
-                    onPress={togglePasswordVisibilityHandler}
-                  />
-                  <TunnelExit id="button" />
-                </Aria.Group>
-                <ComplexityIndicator
-                  isEmptyValue={isEmptyValue}
-                  isLoading={isLoading}
-                  policyValidationResult={policyValidationResult}
-                  validationResultState={stateFromValidationResult}
+              <Aria.Input ref={ref} className={styles.input} />
+              <Aria.Group className={styles.buttonContainer}>
+                <TogglePasswordVisibilityButton
+                  className={styles.button}
+                  isVisible={isPasswordRevealed}
+                  isDisabled={isDisabled}
+                  onPress={togglePasswordVisibilityHandler}
+                />
+                <UiComponentTunnelExit
+                  id="button"
+                  component="PasswordCreationField"
                 />
               </Aria.Group>
-              {isValidFromValidationResult && (
-                <FieldDescription>{latestValidationErrorText}</FieldDescription>
-              )}
-            </PropsContextProvider>
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </TunnelProvider>
+              <ComplexityIndicator
+                isEmptyValue={isEmptyValue}
+                isLoading={isLoading}
+                policyValidationResult={policyValidationResult}
+                validationResultState={stateFromValidationResult}
+              />
+            </Aria.Group>
+            {isValidFromValidationResult && (
+              <FieldDescription>{latestValidationErrorText}</FieldDescription>
+            )}
+          </PropsContextProvider>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
       </Aria.TextField>
     );
   },
