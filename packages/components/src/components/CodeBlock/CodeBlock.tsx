@@ -38,7 +38,6 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
   const [collapsed, setCollapsed] = useState(true);
   const [maxHeight, setMaxHeight] = useState<number>();
-  const [shouldCollapse, setShouldCollapse] = useState(false);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
 
@@ -61,8 +60,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       <div
         className={rootClassName}
         style={{
-          maxHeight:
-            collapsed && truncateLines && shouldCollapse ? maxHeight : "none",
+          maxHeight: collapsed ? maxHeight : undefined,
         }}
       >
         <CodeEditor
@@ -76,21 +74,26 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           showActiveLineMarker={false}
           isReadOnly
           onCreateEditor={(view) => {
+            if (!truncateLines) {
+              return;
+            }
+
             const lineHeight = 20;
             const padding = 12;
 
             const visibleLines =
               typeof truncateLines === "number" ? truncateLines : 8;
-            setMaxHeight(lineHeight * visibleLines + padding);
 
             const totalLines = view.state.doc.lines;
-            setShouldCollapse(totalLines > visibleLines);
+
+            if (totalLines > visibleLines)
+              setMaxHeight(lineHeight * visibleLines + padding);
           }}
           id={id}
         />
       </div>
 
-      {truncateLines && shouldCollapse && (
+      {truncateLines && maxHeight && (
         <div
           className={clsx(
             styles.buttonContainer,
