@@ -8,10 +8,10 @@ import type {
 
 export const TypedXAxis = <
   TData extends ChartDataValue = ChartDataValue,
-  XAxisDataKey extends keyof TData = keyof TData,
+  XAxisDataKey extends DataKeyProp<TData> = DataKeyProp<TData>,
 >() =>
   XAxis as <
-    const TProp extends DataKeyProp<TData> = XAxisDataKey,
+    const TProp extends XAxisDataKey,
     XAxisDataKeyValue = DataKeyValue<TData, TProp>,
   >(
     props: XAxisProps<TData, TProp, XAxisDataKeyValue>,
