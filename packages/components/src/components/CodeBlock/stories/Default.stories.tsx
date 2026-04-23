@@ -24,7 +24,7 @@ const meta: Meta<typeof CodeBlock> = {
 }`,
   },
   parameters: {
-    controls: { exclude: ["expandable", "expandAfterLines"] },
+    controls: { exclude: ["truncateLines"] },
   },
 };
 
@@ -34,8 +34,8 @@ type Story = StoryObj<typeof CodeBlock>;
 
 export const Default: Story = {};
 
-export const Expandable: Story = {
-  args: { expandable: true, expandAfterLines: 4 },
+export const TruncateLines: Story = {
+  args: { truncateLines: 4 },
 };
 
 export const WithChildren: Story = {

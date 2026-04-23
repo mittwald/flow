@@ -16,12 +16,12 @@ export interface CodeBlockProps
     > {
   code?: string;
   /**
-   * Enables collapsing of long code blocks with a "Show more" toggle. @default:
-   * false
+   * Controls truncation of long code blocks. `false` disables it, `true`
+   * truncates after 8 lines, and a number sets the maximum line count.
+   *
+   * @default: false
    */
-  expandable?: boolean;
-  /** Line count threshold before the code block is collapsed. @default: 10 */
-  expandAfterLines?: number;
+  truncateLines?: boolean | number;
 }
 
 /** @flr-generate all */
@@ -32,16 +32,15 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     copyable = false,
     showLineNumbers = false,
     children,
-    expandable = false,
-    expandAfterLines = 8,
+    truncateLines = false,
     ...rest
   } = props;
 
-  const [expanded, setExpanded] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [maxHeight, setMaxHeight] = useState<number>();
-  const [shouldExpand, setShouldExpand] = useState(false);
+  const [shouldCollapse, setShouldCollapse] = useState(false);
 
-  const stringFormatter = useLocalizedStringFormatter(locales, "AlertIcon");
+  const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
 
   const rootClassName = clsx(styles.codeBlock, className);
 
@@ -61,7 +60,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         className={rootClassName}
         style={{
           maxHeight:
-            expanded || !expandable || !shouldExpand ? "none" : maxHeight,
+            collapsed && truncateLines && shouldCollapse ? maxHeight : "none",
         }}
       >
         <CodeEditor
@@ -78,48 +77,34 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
             const lineHeight = 20;
             const padding = 12;
 
-            const visibleLines = expandAfterLines;
+            const visibleLines =
+              typeof truncateLines === "number" ? truncateLines : 8;
             setMaxHeight(lineHeight * visibleLines + padding);
 
             const totalLines = view.state.doc.lines;
-            setShouldExpand(totalLines > visibleLines);
+            setShouldCollapse(totalLines > visibleLines);
           }}
           id="code-block"
         />
       </div>
 
-      {expandable && shouldExpand && (
+      {truncateLines && shouldCollapse && (
         <div
           className={clsx(
             styles.buttonContainer,
-            !expanded && styles.collapsed,
+            collapsed && styles.collapsed,
           )}
         >
-          {!expanded && (
-            <Button
-              variant="plain"
-              color="secondary"
-              size="s"
-              onPress={() => setExpanded(true)}
-              aria-expanded={expanded}
-              aria-controls="code-block"
-            >
-              {stringFormatter.format("codeBlock.showMore")}
-            </Button>
-          )}
-
-          {expanded && (
-            <Button
-              variant="plain"
-              color="secondary"
-              size="s"
-              onPress={() => setExpanded(false)}
-              aria-expanded={expanded}
-              aria-controls="code-block"
-            >
-              {stringFormatter.format("codeBlock.showLess")}
-            </Button>
-          )}
+          <Button
+            variant="plain"
+            color="secondary"
+            size="s"
+            onPress={() => setCollapsed((prev) => !prev)}
+            aria-expanded={!collapsed}
+            aria-controls="code-block"
+          >
+            {stringFormatter.format(collapsed ? "showMore" : "showLess")}
+          </Button>
         </div>
       )}
     </div>

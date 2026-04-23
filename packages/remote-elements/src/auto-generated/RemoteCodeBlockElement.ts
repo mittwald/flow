@@ -14,10 +14,9 @@ export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockEle
       className: {},
       code: {},
       copyable: {},
-      expandAfterLines: {},
-      expandable: {},
       language: {},
       showLineNumbers: {},
+      truncateLines: {},
     };
   }
 

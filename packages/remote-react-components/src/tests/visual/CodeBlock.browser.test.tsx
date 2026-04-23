@@ -38,7 +38,7 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
-  "CodeBlock expandable (%s)",
+  "CodeBlock truncated (%s)",
   async ({ testScreenshot, render, components: { CodeBlock } }) => {
     await render(
       <CodeBlock
@@ -53,19 +53,17 @@ test.each(testEnvironments)(
   "serverId": "830d3c18-2d32-4768-b6a0-7e8b424a1271",
   "serverShortId": "s-123456",
 }`}
-        expandable
-        expandAfterLines={4}
+        truncateLines={4}
       />,
     );
 
     await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{enter}");
 
-    await testScreenshot("CodeBlock expandable - expanded");
+    await testScreenshot("CodeBlock truncated - expanded");
 
-    await userEvent.keyboard("{tab}");
     await userEvent.keyboard("{enter}");
 
-    await testScreenshot("CodeBlock expandable - collapsed");
+    await testScreenshot("CodeBlock truncated - collapsed");
   },
 );

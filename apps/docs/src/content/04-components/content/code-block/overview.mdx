@@ -30,12 +30,12 @@ Zwischenablage kopieren. Eventuelle Zeilennummern werden nicht mit kopiert.
 
 # Mehr anzeigen
 
-Über die Property `expandable` lässt sich die Höhe des CodeBlocks begrenzen. Mit
-`expandAfterLines` kann dabei festgelegt werden, nach wie vielen Zeilen der
-Inhalt gekürzt wird. Überschreitet der Code diese Länge, erscheint automatisch
-ein „Mehr anzeigen“-Button.
+Über die Property `truncateLines` lässt sich die Höhe des CodeBlocks begrenzen.
+Ist sie `true`, wird der Inhalt nach dem Standardwert gekürzt. Bei einer Zahl
+erfolgt die Kürzung nach der angegebenen Zeilenanzahl. Überschreitet der Code
+diese Länge, erscheint automatisch ein „Mehr anzeigen“-Button.
 
-<LiveCodeEditor example="expandable" editorCollapsed />
+<LiveCodeEditor example="truncateLines" editorCollapsed />
 
 ---
 
