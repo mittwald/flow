@@ -11,7 +11,13 @@ import styles from "@/components/List/components/Header/Header.module.css";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
-export const ViewModeContextMenu: FC = () => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const ViewModeContextMenu: FC<Props> = (props) => {
+  const { isDisabled } = props;
+
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
   const list = useList();
   const selectedViewMode = list.viewMode.value;
@@ -29,6 +35,7 @@ export const ViewModeContextMenu: FC = () => {
         color="secondary"
         aria-label={stringFormatter.format("settings")}
         className={styles.hideOnMobile}
+        isDisabled={isDisabled}
       >
         <TextView>
           {stringFormatter.format(`settings.viewMode.${selectedViewMode}`)}

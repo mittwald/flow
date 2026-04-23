@@ -4,12 +4,12 @@ import { tags as t } from "@lezer/highlight";
 export const defaultLightTheme = githubLightInit({
   theme: "light",
   settings: {
-    fontSize: "var(--code-editor--font-size);",
-    fontFamily: "var(--code-editor--font-family);",
-    foreground: "var(--color--code-syntax--title)",
+    fontSize: "var(--code-editor--font-size)",
+    fontFamily: "var(--code-editor--font-family)",
+    foreground: "var(--form-control--content-color--default)",
     background: "transparent",
     gutterBackground: "var(--form-control--background-color--default)",
-    gutterForeground: "var(--color--code-syntax--title)",
+    gutterForeground: "var(--form-control--content-color--default)",
   },
   styles: [
     { tag: t.keyword, color: "var(--color--code-syntax--keyword)" },

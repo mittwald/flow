@@ -6,6 +6,8 @@
   "filters.clearSelection": "Clear selection",
   "filters.reset": "Reset filters",
   "filters.store": "Store filters",
+  "noItems.heading": "No items found",
+  "noItems.text": "Once there are items, they will be displayed here.",
   "noResult.heading": "No search results found",
   "noResult.text": "Your search did not return any results. Please adjust the search query or your filters.",
   "options": "Options",

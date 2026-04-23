@@ -13,10 +13,11 @@ import type { AnyDateRangeFilter } from "@/components/List/model/filter/types";
 
 interface Props {
   filter: AnyDateRangeFilter;
+  isDisabled?: boolean;
 }
 
 export const DateRangeFilterPopover: FC<Props> = (props) => {
-  const { filter } = props;
+  const { filter, isDisabled } = props;
 
   const { name, property } = filter;
 
@@ -30,6 +31,7 @@ export const DateRangeFilterPopover: FC<Props> = (props) => {
         className={headerStyles.hideOnMobile}
         variant="outline"
         color="secondary"
+        isDisabled={isDisabled}
       >
         <TextView>{name ?? property}</TextView>
         <IconFilter />

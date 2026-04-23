@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.805](https://github.com/mittwald/flow/compare/0.2.0-alpha.804...0.2.0-alpha.805) (2026-04-23)
+
+### Features
+
+* **CodeBlock:** add truncate lines option ([#2459](https://github.com/mittwald/flow/issues/2459)) ([99cdbe3](https://github.com/mittwald/flow/commit/99cdbe30468ca814cc3d9d18c8ee870c1a710b28))
+
+# [0.2.0-alpha.804](https://github.com/mittwald/flow/compare/0.2.0-alpha.803...0.2.0-alpha.804) (2026-04-22)
+
+### Features
+
+* **List:** support custom empty views ([#2440](https://github.com/mittwald/flow/issues/2440)) ([67807a8](https://github.com/mittwald/flow/commit/67807a86c1d869c360d6d3bc4ecfd4b936d3f6d2))
+
+# [0.2.0-alpha.803](https://github.com/mittwald/flow/compare/0.2.0-alpha.802...0.2.0-alpha.803) (2026-04-22)
+
+### Features
+
+* **DateRangePicker:** add date picker presets ([#2463](https://github.com/mittwald/flow/issues/2463)) ([06154f3](https://github.com/mittwald/flow/commit/06154f3b97a69fe899dac30a070006a4b3da44d4))
+
 # [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

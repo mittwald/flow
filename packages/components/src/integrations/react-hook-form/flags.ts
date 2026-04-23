@@ -1,5 +1,6 @@
 export const flags = {
   requireCloseModalConfirmationOnUnsavedChanges: false,
+  disableInitialListSuspenseBoundaries: false,
 };
 
 const defaultFlags = { ...flags };

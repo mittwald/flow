@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import { IconSearch } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
@@ -10,7 +9,11 @@ import styles from "../../components/Items/Items.module.scss";
 
 export type EmptyViewProps = Record<string, never>;
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ *
+ * Keep this unused component for backwards compatibility!
+ */
 export const EmptyView: FC<EmptyViewProps> = () => {
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 

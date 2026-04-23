@@ -2,7 +2,6 @@ import type { FC } from "react";
 import { useList } from "@/components/List";
 import styles from "./Table.module.css";
 import clsx from "clsx";
-import ListEmptyViewView from "@/views/ListEmptyViewView";
 import TableView from "@/views/TableView";
 import TableHeaderView from "@/views/TableHeaderView";
 import TableBodyView from "@/views/TableBodyView";
@@ -10,6 +9,7 @@ import TableRowView from "@/views/TableRowView";
 import TableCellView from "@/views/TableCellView";
 import TableColumnView from "@/views/TableColumnView";
 import { TableBodyLoadingView } from "@/components/List/components/Table/components/TableBodyLoadingView";
+import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
 
 export const Table: FC = () => {
   const list = useList();
@@ -24,7 +24,13 @@ export const Table: FC = () => {
   }
 
   if (listIsEmpty) {
-    return <ListEmptyViewView />;
+    return (
+      <ListEmptyViewContainerView
+        viewType={list.getEmptyViewType()}
+        emptySearchResultView={list.emptySearchResultView}
+        emptyView={list.emptyView}
+      />
+    );
   }
 
   const rowAction = table.list.onAction;

@@ -19,7 +19,12 @@ import Modal, { ModalTrigger } from "@/components/Modal";
 import { SkeletonText } from "@/components/SkeletonText";
 import { useAvailableViewModes } from "../../lib";
 
-export const AllFiltersModal: FC = () => {
+interface Props {
+  isDisabled?: boolean;
+}
+
+export const AllFiltersModal: FC<Props> = (props) => {
+  const { isDisabled } = props;
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
@@ -60,6 +65,7 @@ export const AllFiltersModal: FC = () => {
         )}
         variant="outline"
         color="secondary"
+        isDisabled={isDisabled}
       >
         <TextView>{stringFormatter.format("filters.all")}</TextView>
         <IconFilter />

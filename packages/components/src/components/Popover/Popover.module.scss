@@ -32,10 +32,6 @@
     }
   }
 
-  hr {
-    margin-block: var(--popover--spacing);
-  }
-
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));
 

@@ -74,6 +74,7 @@ export * from "./RemoteLegendElement";
 export * from "./RemoteLineElement";
 export * from "./RemoteLinkElement";
 export * from "./RemoteListEmptyViewElement";
+export * from "./RemoteListEmptyViewContainerElement";
 export * from "./RemoteListItemViewContentElement";
 export * from "./RemoteListSummaryElement";
 export * from "./RemoteLoadingSpinnerElement";
