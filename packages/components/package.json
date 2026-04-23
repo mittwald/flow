@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.800",
+  "version": "0.2.0-alpha.804",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -61,7 +61,7 @@
     "@internationalized/string": "^3.2.7",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.18",
+    "@mittwald/password-tools-js": "3.0.0-alpha.29",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^4.2.2",
     "@react-aria/form": "^3.1.3",

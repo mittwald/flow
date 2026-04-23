@@ -13,6 +13,7 @@ import {
   Select,
   TextArea,
   TextField,
+  DateRangePicker,
   PasswordCreationField,
   Autocomplete,
   CheckboxGroup,
@@ -50,6 +51,7 @@ export default function Page() {
   const form = useForm({
     defaultValues: {
       name: "",
+      dateRange: [],
       account: "p1122",
       confirm: false,
       email: "",
@@ -95,6 +97,11 @@ export default function Page() {
           <TextField>
             <Label>Name</Label>
           </TextField>
+        </Field>
+        <Field name="dateRange">
+          <DateRangePicker withDatePickerPresets>
+            <Label>Datum Filter</Label>
+          </DateRangePicker>
         </Field>
         <TranslationProvider
           translations={{

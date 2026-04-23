@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import styles from "./Header.module.css";
 import clsx from "clsx";
 import { ActiveFilters } from "@/components/List/components/Header/components/ActiveFilters";
@@ -18,6 +17,11 @@ export const Header: FC<PropsWithClassName> = (props) => {
   const { className } = props;
   const list = useList();
 
+  const isEmpty = list.useIsEmpty();
+  const isInitiallyLoading = list.loader.useIsInitiallyLoading();
+  const noItemsAvailable = isEmpty && list.getEmptyViewType() === "list";
+  const isDisabled = isInitiallyLoading || noItemsAvailable;
+
   const availableViewModes = useAvailableViewModes();
 
   const hasOptions =
@@ -25,6 +29,10 @@ export const Header: FC<PropsWithClassName> = (props) => {
     list.visibleSorting.length > 0 ||
     list.search ||
     availableViewModes.length > 1;
+
+  if (noItemsAvailable) {
+    return;
+  }
 
   return (
     <DivView
@@ -38,16 +46,18 @@ export const Header: FC<PropsWithClassName> = (props) => {
         <TunnelExit id="actions" />
         {hasOptions && (
           <DivView className={styles.options}>
-            <ViewModeContextMenu />
-            <SortingContextMenu />
-            <FilterContextMenus />
-            <AllFiltersModal />
+            <ViewModeContextMenu isDisabled={isDisabled} />
+            <SortingContextMenu isDisabled={isDisabled} />
+            <FilterContextMenus isDisabled={isDisabled} />
+            <AllFiltersModal isDisabled={isDisabled} />
 
-            {list.search && <SearchField search={list.search} />}
+            {list.search && (
+              <SearchField search={list.search} isDisabled={isDisabled} />
+            )}
           </DivView>
         )}
       </DivView>
-      <ActiveFilters />
+      <ActiveFilters isDisabled={isDisabled} />
     </DivView>
   );
 };

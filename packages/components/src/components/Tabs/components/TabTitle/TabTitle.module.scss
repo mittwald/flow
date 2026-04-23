@@ -6,8 +6,7 @@
   color: var(--tabs--color);
   cursor: default;
   white-space: nowrap;
-  transition-property: color, background-color;
-  transition-duration: var(--transition--duration--default);
+  transition-property: background-color;
   display: flex;
   align-items: center;
   column-gap: var(--tabs--spacing);
@@ -20,10 +19,12 @@
 
   &:hover {
     background-color: var(--tabs--background-color--hover);
+    transition-duration: var(--transition--duration--default);
   }
 
   &[data-pressed] {
     background-color: var(--tabs--background-color--pressed);
+    transition-duration: var(--transition--duration--default);
   }
 
   &[aria-disabled="true"] {
@@ -39,18 +40,7 @@
 }
 
 /* selected tab */
-.tabTitle[data-selected],
-  /**
-    The following selectors setting the selected style at the first (not disabled) tab,
-    if the selected state is undetermined at first render (no tab has [data-selected]).
-    This prevents the initial CSS transition, which looks like flickering.
-  */
-
-  /* first tab disabled */
-:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])):has(.tabTitle[aria-disabled]) .tabTitle[aria-disabled]:first-of-type + .tabTitle,
-
-  /* other/no tab disabled */
-:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])) .tabTitle:first-of-type:not([aria-disabled]) {
+.tabTitle[data-selected] {
   background-color: var(--tabs--background-color--selected);
   font-weight: var(--tabs--font-weight--selected);
 }

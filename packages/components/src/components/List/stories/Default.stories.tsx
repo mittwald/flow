@@ -6,7 +6,11 @@ import { usePromise } from "@mittwald/react-use-promise";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
-import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
+import {
+  IconDomain,
+  IconInvoice,
+  IconSubdomain,
+} from "@/components/Icon/components/icons";
 import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
@@ -33,6 +37,7 @@ import SkeletonText from "@/components/SkeletonText";
 import Skeleton from "@/components/Skeleton";
 import { DateTime } from "luxon";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import IllustratedMessage from "@/components/IllustratedMessage";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -453,6 +458,69 @@ export const WithDateRangeFilter: Story = {
             </ListItemView>
           )}
         </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const EmptyView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List aria-label="Invoices">
+        <List.StaticData data={[]} />
+        <List.Item textValue={(invoice) => invoice.id}>{() => null}</List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const CustomEmptyView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    const emptyView = (
+      <IllustratedMessage>
+        <IconInvoice />
+        <Heading>No invoices found</Heading>
+        <Text>
+          If you haven't added any invoices yet, start by creating a new one.
+        </Text>
+      </IllustratedMessage>
+    );
+
+    return (
+      <List.List aria-label="Invoices" emptyView={emptyView}>
+        <List.Search />
+        <List.Filter property="id" name="ID" />
+        <List.StaticData data={[]} />
+        <List.Item showTiles textValue={(invoice) => invoice.id}>
+          {() => null}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const NoSearchResultView: Story = {
+  render: () => {
+    const List = typedList<{
+      id: string;
+      date: string;
+    }>();
+
+    return (
+      <List.List aria-label="Invoices">
+        <List.Filter property="id" name="ID" defaultSelected={["123"]} />
+        <List.StaticData data={[]} />
+        <List.Item textValue={(invoice) => invoice.id}>{() => null}</List.Item>
       </List.List>
     );
   },

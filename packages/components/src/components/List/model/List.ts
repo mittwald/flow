@@ -4,6 +4,7 @@ import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
 import type {
+  EmptyViewType,
   GetItemId,
   ItemActionFn,
   ListSettingsStorageDefaults,
@@ -15,7 +16,7 @@ import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { ListSettingsStore } from "./ListSettingsStore";
 import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
@@ -42,6 +43,8 @@ export class List<T = unknown, TMeta = unknown> {
   public readonly settingsStorage?: ListSettingsStore<T>;
   public readonly loadingItemsCount;
   public readonly viewMode: ListViewMode<T>;
+  public readonly emptyView?: ReactNode;
+  public readonly emptySearchResultView?: ReactNode;
   public readonly settingsStorageDefaults?: ListSettingsStorageDefaults;
 
   public constructor(shape: ListShape<T, TMeta>) {
@@ -97,17 +100,20 @@ export class List<T = unknown, TMeta = unknown> {
       manualSorting: this.loader.manualSorting,
     });
     this.viewMode = new ListViewMode(this, { defaultViewMode });
+    this.emptyView = shape.emptyView;
+    this.emptySearchResultView = shape.emptySearchResultView;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
   }
 
-  public get isFiltered(): boolean {
-    return (
-      this.filters.some((f) => f.isActive()) ||
-      (!!this.search && this.search.isSet)
-    );
+  public getEmptyViewType(): EmptyViewType {
+    return this.hasActiveFilters || this.search?.isSet ? "search" : "list";
+  }
+
+  public get hasActiveFilters(): boolean {
+    return this.filters.some((f) => f.isActive());
   }
 
   public get visibleSorting() {

@@ -141,6 +141,19 @@ Die Pagination ist standardmäßig bei jeder List aktiviert, kann jedoch über
 `hidePagination` deaktiviert werden. Über die `batchSize`-Property kann
 festgelegt werden, wie viele Einträge gleichzeitig angezeigt werden sollen.
 
+## Empty View
+
+Mit `emptyView` kann eine benutzerdefinierte Ansicht angezeigt werden, wenn die
+Liste keine Einträge enthält. So lässt sich beispielsweise eine Illustration mit
+einem Hinweistext anzeigen, um die Nutzer zu informieren, dass keine Daten
+vorhanden sind, und ihnen gegebenenfalls Tipps zu geben, wie sie Daten
+hinzufügen können.
+
+In der Regel sollte als Empty View eine IllustratedMessage verwendet werden, um
+eine konsistente Nutzererfahrung zu gewährleisten.
+
+<LiveCodeEditor example="customEmptyView" editorCollapsed />
+
 ---
 
 # Kombiniere mit ...
