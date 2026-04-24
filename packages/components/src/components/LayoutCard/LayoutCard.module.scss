@@ -37,10 +37,18 @@
 
 @media (max-width: 768px) {
   .layoutCard {
-    padding: var(--layout-card--padding-mobile);
+    padding: calc(var(--layout-card--padding-mobile) - 1px);
 
     > .tabs {
       margin: calc(var(--layout-card--padding-mobile) * -1);
+    }
+
+    &:has(> .accentBox:only-child) {
+      padding: 0;
+
+      .accentBox {
+        padding: calc(var(--layout-card--padding-mobile) - 1px);
+      }
     }
   }
 }
