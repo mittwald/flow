@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import Button from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
-import { Gallery, GalleryItem, LightBox } from "@/components/LightBox";
+import {
+  LightBoxGallery,
+  LightBoxGalleryItem,
+  LightBox,
+} from "@/components/LightBox";
 import LightBoxTrigger from "@/components/LightBox/components/LightBoxTrigger";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
@@ -108,18 +112,18 @@ export const WithGallery: Story = {
             <Image alt="" src={src} height="100px" withBorder />
           </Button>
           <LightBox>
-            <Gallery defaultIndex={index}>
+            <LightBoxGallery defaultIndex={index}>
               {images.map((src) => (
-                <GalleryItem>
+                <LightBoxGalleryItem>
                   <Image src={src} />
                   <ActionGroup>
                     <Button>
                       <IconDownload />
                     </Button>
                   </ActionGroup>
-                </GalleryItem>
+                </LightBoxGalleryItem>
               ))}
-            </Gallery>
+            </LightBoxGallery>
           </LightBox>
         </LightBoxTrigger>
       ))}

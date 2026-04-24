@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { GalleryProps as RemoteGalleryElementProps } from "@mittwald/flow-react-components";
-export type { GalleryProps as RemoteGalleryElementProps } from "@mittwald/flow-react-components";
+import type { LightBoxGalleryProps as RemoteLightBoxGalleryElementProps } from "@mittwald/flow-react-components";
+export type { LightBoxGalleryProps as RemoteLightBoxGalleryElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteGalleryElement extends FlowRemoteElement<RemoteGalleryElementProps> {
+export class RemoteLightBoxGalleryElement extends FlowRemoteElement<RemoteLightBoxGalleryElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -27,8 +27,8 @@ export class RemoteGalleryElement extends FlowRemoteElement<RemoteGalleryElement
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-gallery": InstanceType<typeof RemoteGalleryElement>;
+    "flr-light-box-gallery": InstanceType<typeof RemoteLightBoxGalleryElement>;
   }
 }
 
-customElements.define("flr-gallery", RemoteGalleryElement);
+customElements.define("flr-light-box-gallery", RemoteLightBoxGalleryElement);

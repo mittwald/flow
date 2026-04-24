@@ -15,6 +15,8 @@ import styles from "./LightBox.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface LightBoxProps
   extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
@@ -49,7 +51,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
       Button: { variant: "solid", color: "light-static" },
       tunnelId: "actionGroup",
     },
-    Gallery: {
+    LightBoxGallery: {
       className: styles.gallery,
     },
   };
@@ -59,6 +61,8 @@ export const LightBox = flowComponent("LightBox", (props) => {
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
     <Overlay
@@ -75,6 +79,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
               color="light-static"
               variant="solid"
               onPress={() => controller.close()}
+              aria-label={stringFormatter.format("close")}
             >
               <IconClose />
             </ButtonView>

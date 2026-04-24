@@ -5,8 +5,8 @@ import {
   LightBox,
   LightBoxTrigger,
   ActionGroup,
-  Gallery,
-  GalleryItem,
+  LightBoxGallery,
+  LightBoxGalleryItem,
   IconDownload,
 } from "@mittwald/flow-react-components";
 
@@ -29,18 +29,18 @@ export default () => {
             />
           </Button>
           <LightBox>
-            <Gallery defaultIndex={index}>
+            <LightBoxGallery defaultIndex={index}>
               {images.map((src) => (
-                <GalleryItem>
+                <LightBoxGalleryItem>
                   <Image src={src} />
                   <ActionGroup>
                     <Button aria-label="Herunterladen">
                       <IconDownload />
                     </Button>
                   </ActionGroup>
-                </GalleryItem>
+                </LightBoxGalleryItem>
               ))}
-            </Gallery>
+            </LightBoxGallery>
           </LightBox>
         </LightBoxTrigger>
       ))}

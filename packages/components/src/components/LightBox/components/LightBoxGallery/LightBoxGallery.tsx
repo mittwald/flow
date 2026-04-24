@@ -4,20 +4,20 @@ import {
   IconChevronLeft,
   IconChevronRight,
 } from "@/components/Icon/components/icons";
-import styles from "./Gallery.module.scss";
+import styles from "./LightBoxGallery.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
 
-export interface GalleryProps extends PropsWithClassName {
+export interface LightBoxGalleryProps extends PropsWithClassName {
   children: ReactNode[];
   defaultIndex?: number;
 }
 
 /** @flr-generate all */
-export const Gallery = flowComponent("Gallery", (props) => {
+export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const { children, className, defaultIndex = 0 } = props;
 
   const [currentIndex, setIndex] = useState(defaultIndex);
@@ -80,7 +80,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
 
         <div className={styles.controls}>
           <Button
-            aria-label={stringFormatter.format("gallery.previous")}
+            aria-label={stringFormatter.format("previous")}
             onPress={() => paginate(-1)}
             color="light-static"
             className={styles.previousButton}
@@ -89,7 +89,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
           </Button>
           <div
             className={styles.indicators}
-            aria-label={stringFormatter.format("gallery.indicator", {
+            aria-label={stringFormatter.format("indicator", {
               current: currentIndex + 1,
               count,
             })}
@@ -97,7 +97,7 @@ export const Gallery = flowComponent("Gallery", (props) => {
             {indicators}
           </div>
           <Button
-            aria-label={stringFormatter.format("gallery.next")}
+            aria-label={stringFormatter.format("next")}
             onPress={() => paginate(1)}
             color="light-static"
             className={styles.nextButton}
@@ -110,4 +110,4 @@ export const Gallery = flowComponent("Gallery", (props) => {
   );
 });
 
-export default Gallery;
+export default LightBoxGallery;

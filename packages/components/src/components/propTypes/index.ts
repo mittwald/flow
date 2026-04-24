@@ -84,7 +84,10 @@ import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
-import type { GalleryItemProps, GalleryProps } from "@/components/LightBox";
+import type {
+  LightBoxGalleryItemProps,
+  LightBoxGalleryProps,
+} from "@/components/LightBox";
 
 export * from "./types";
 
@@ -124,8 +127,8 @@ export interface FlowComponentPropsTypes {
   FileCardList: FileCardListProps;
   FileField: FileFieldProps;
   FileDropZone: FileDropZoneProps;
-  Gallery: GalleryProps;
-  GalleryItem: GalleryItemProps;
+  LightBoxGallery: LightBoxGalleryProps;
+  LightBoxGalleryItem: LightBoxGalleryItemProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -212,8 +215,8 @@ const propsContextSupportingComponentsMap: Record<
   FileCardList: true,
   FileField: true,
   FileDropZone: true,
-  Gallery: true,
-  GalleryItem: true,
+  LightBoxGallery: true,
+  LightBoxGalleryItem: true,
   Header: true,
   Heading: true,
   Icon: true,

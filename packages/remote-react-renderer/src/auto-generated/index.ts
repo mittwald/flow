@@ -54,8 +54,6 @@ import { FileCardList as FileCardList } from "@mittwald/flow-react-components";
 import { FileDropZone as FileDropZone } from "@mittwald/flow-react-components";
 import { FileField as FileField } from "@mittwald/flow-react-components";
 import { Flex as Flex } from "@mittwald/flow-react-components";
-import { Gallery as Gallery } from "@mittwald/flow-react-components";
-import { GalleryItem as GalleryItem } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
 import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components";
 import { Heading as Heading } from "@mittwald/flow-react-components";
@@ -72,6 +70,8 @@ import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
+import { LightBoxGallery as LightBoxGallery } from "@mittwald/flow-react-components";
+import { LightBoxGalleryItem as LightBoxGalleryItem } from "@mittwald/flow-react-components";
 import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
@@ -276,11 +276,6 @@ export const flowComponents = {
   ),
   "flr-file-field": createFlowRemoteComponentRenderer("FileField", FileField),
   "flr-flex": createFlowRemoteComponentRenderer("Flex", Flex),
-  "flr-gallery": createFlowRemoteComponentRenderer("Gallery", Gallery),
-  "flr-gallery-item": createFlowRemoteComponentRenderer(
-    "GalleryItem",
-    GalleryItem,
-  ),
   "flr-header": createFlowRemoteComponentRenderer("Header", Header),
   "flr-header-navigation": createFlowRemoteComponentRenderer(
     "HeaderNavigation",
@@ -321,6 +316,14 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
+  "flr-light-box-gallery": createFlowRemoteComponentRenderer(
+    "LightBoxGallery",
+    LightBoxGallery,
+  ),
+  "flr-light-box-gallery-item": createFlowRemoteComponentRenderer(
+    "LightBoxGalleryItem",
+    LightBoxGalleryItem,
+  ),
   "flr-line": createFlowRemoteComponentRenderer("Line", Line),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(

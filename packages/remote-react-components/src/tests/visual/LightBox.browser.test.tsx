@@ -2,6 +2,7 @@ import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
+import logo from "@/tests/assets/mittwald_logo_rgb.jpg";
 import { userEvent } from "vitest/browser";
 import React from "react";
 
@@ -59,8 +60,8 @@ test.each(testEnvironments)(
       LightBoxTrigger,
       Image,
       ActionGroup,
-      Gallery,
-      GalleryItem,
+      LightBoxGallery,
+      LightBoxGalleryItem,
       IconDownload,
     },
   }) => {
@@ -68,24 +69,24 @@ test.each(testEnvironments)(
       <LightBoxTrigger>
         <Button data-testid="trigger">Trigger</Button>
         <LightBox>
-          <Gallery>
-            <GalleryItem>
+          <LightBoxGallery>
+            <LightBoxGalleryItem>
               <Image src={gopher} />
               <ActionGroup>
                 <Button>
                   <IconDownload />
                 </Button>
               </ActionGroup>
-            </GalleryItem>
-            <GalleryItem>
-              <Image src={gopher} />
+            </LightBoxGalleryItem>
+            <LightBoxGalleryItem>
+              <Image src={logo} />
               <ActionGroup>
                 <Button>
                   <IconDownload />
                 </Button>
               </ActionGroup>
-            </GalleryItem>
-          </Gallery>
+            </LightBoxGalleryItem>
+          </LightBoxGallery>
         </LightBox>
       </LightBoxTrigger>,
     );
@@ -94,6 +95,13 @@ test.each(testEnvironments)(
     await trigger.click();
 
     await testScreenshot("LightBox  with Gallery - opened");
+
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{tab}");
+    await userEvent.keyboard("{enter}");
+
+    await testScreenshot("LightBox  with Gallery - previous");
 
     await userEvent.keyboard("{escape}");
 
