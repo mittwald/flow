@@ -385,6 +385,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^3.2.0
         version: 3.2.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4)
+      '@internationalized/string':
+        specifier: ^3.2.7
+        version: 3.2.7
       '@internationalized/string-compiler':
         specifier: ^3.3.0
         version: 3.3.0
