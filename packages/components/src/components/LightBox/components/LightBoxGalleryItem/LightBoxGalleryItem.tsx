@@ -2,12 +2,12 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import styles from "@/components/LightBox/components/LightBoxGallery/LightBoxGallery.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useOverlayController } from "@/lib/hooks";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import { Button } from "@/components/Button";
 import type { PropsWithChildren } from "react";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export type LightBoxGalleryItemProps = PropsWithChildren;
 
@@ -23,7 +23,7 @@ export const LightBoxGalleryItem = flowComponent(
       ActionGroup: {
         className: styles.actionGroup,
         Button: { color: "light-static" },
-        tunnelId: "actionGroup",
+        tunnel: { id: "actionGroup", component: "LightBoxGalleryItem" },
       },
       Image: { className: styles.image },
     };
@@ -32,19 +32,20 @@ export const LightBoxGalleryItem = flowComponent(
 
     return (
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          {children}
-          <div className={styles.actions}>
-            <Button
-              aria-label={stringFormatter.format("close")}
-              color="light-static"
-              onPress={() => controller.close()}
-            >
-              <IconClose />
-            </Button>
-            <TunnelExit id="actionGroup" />
-          </div>
-        </TunnelProvider>
+        {children}
+        <div className={styles.actions}>
+          <Button
+            aria-label={stringFormatter.format("close")}
+            color="light-static"
+            onPress={() => controller.close()}
+          >
+            <IconClose />
+          </Button>
+          <UiComponentTunnelExit
+            id="actionGroup"
+            component="LightBoxGalleryItem"
+          />
+        </div>
       </PropsContextProvider>
     );
   },
