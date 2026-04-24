@@ -6,6 +6,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { all, type CountryData } from "country-codes-list";
 import { Option } from "@/components/Option";
+import { uniqueBy } from "remeda";
 
 export type Country = CountryData & {
   name: string;
@@ -27,6 +28,9 @@ const defaultSortBy: CountrySortFn = (left, right) =>
   left.name.localeCompare(right.name);
 const defaultFilterBy: CountryFilterFn = () => true;
 
+// see https://github.com/Synergy-Shock/country-codes-list/issues/37
+const uniqueCountries = uniqueBy(all(), (c) => c.countryCode);
+
 export const CountryOptions: FC<CountryOptionsProps> = (props) => {
   const { filterBy = defaultFilterBy, sortBy = defaultSortBy } = props;
   const stringFormatter = useLocalizedStringFormatter(
@@ -35,14 +39,14 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
   );
 
   return useMemo(() => {
-    return all()
+    return uniqueCountries
       .map((countryData) => ({
         ...countryData,
         code: countryData.countryCode,
         name: stringFormatter.format(`countryCode.${countryData.countryCode}`),
       }))
       .filter(filterBy)
-      .toSorted(sortBy)
+      .sort(sortBy)
       .map((country) => (
         <Option
           key={country.countryNameEn}
