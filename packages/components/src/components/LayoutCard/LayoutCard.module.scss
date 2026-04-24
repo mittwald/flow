@@ -29,7 +29,7 @@
 
     .accentBox {
       padding: var(--layout-card--padding);
-      border-radius: var(--layout-card--corner-radius);
+      border-radius: calc(var(--layout-card--corner-radius) - 1px);
       flex-grow: 1;
     }
   }
@@ -37,7 +37,7 @@
 
 @media (max-width: 768px) {
   .layoutCard {
-    padding: calc(var(--layout-card--padding-mobile) - 1px);
+    padding: var(--layout-card--padding-mobile);
 
     > .tabs {
       margin: calc(var(--layout-card--padding-mobile) * -1);
@@ -47,7 +47,7 @@
       padding: 0;
 
       .accentBox {
-        padding: calc(var(--layout-card--padding-mobile) - 1px);
+        padding: var(--layout-card--padding-mobile);
       }
     }
   }
