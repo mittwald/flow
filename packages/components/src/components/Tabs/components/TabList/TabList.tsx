@@ -2,13 +2,13 @@ import type { FC } from "react";
 import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
-import { TunnelExit } from "@mittwald/react-tunnel";
 import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
 import { Button } from "@/components/Button";
 import clsx from "clsx";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 import { IconChevronDown } from "@/components/Icon/components/icons";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface Props {
   selection: Aria.Key | undefined;
@@ -30,7 +30,7 @@ export const TabList: FC<Props> = (props) => {
 
   const regularTabTitles = (
     <Aria.TabList className={styles.titles} ref={overflowObserver.ref}>
-      <TunnelExit id="Titles" />
+      <UiComponentTunnelExit id="Titles" component="Tabs" />
     </Aria.TabList>
   );
 
@@ -42,7 +42,7 @@ export const TabList: FC<Props> = (props) => {
         color="light"
         aria-labelledby={titleCollapsedElementId}
       >
-        <TunnelExit id="ActiveTitle" />
+        <UiComponentTunnelExit id="ActiveTitle" component="Tabs" />
         <IconChevronDown />
       </Button>
 
@@ -52,7 +52,7 @@ export const TabList: FC<Props> = (props) => {
         selectionMode="navigation"
         onAction={(key) => handleContextMenuSelectionChange(key)}
       >
-        <TunnelExit id="ContextMenuItems" />
+        <UiComponentTunnelExit id="ContextMenuItems" component="Tabs" />
       </ContextMenuView>
     </ContextMenuTriggerView>
   );

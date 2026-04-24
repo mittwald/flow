@@ -12,13 +12,14 @@ import type {
 } from "react";
 import { cloneElement, memo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
-import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
 import ClearPropsContextView from "@/views/ClearPropsContextView";
+import { UiComponentTunnelProvider } from "@/components/UiComponentTunnel/UiComponentTunnelProvider";
+import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -59,7 +60,7 @@ export function flowComponent<C extends FlowComponentName>(
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
-    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
+    const { tunnel, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
     ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
@@ -75,6 +76,14 @@ export function flowComponent<C extends FlowComponentName>(
     let element: ReactNode = (
       <MemoizedImplementationComponentType {...implementationTypeProps} />
     );
+
+    if (type === "ui" || type === "layout") {
+      element = (
+        <UiComponentTunnelProvider component={componentName}>
+          {element}
+        </UiComponentTunnelProvider>
+      );
+    }
 
     element = (
       <ComponentPropsContextProvider componentProps={componentProps}>
@@ -119,9 +128,14 @@ export function flowComponent<C extends FlowComponentName>(
       element = cloneElement(wrapWith, undefined, element);
     }
 
-    if (tunnelId) {
-      element = <TunnelEntry id={tunnelId}>{element}</TunnelEntry>;
+    if (tunnel) {
+      element = (
+        <UiComponentTunnelEntry id={tunnel.id} component={tunnel.component}>
+          {element}
+        </UiComponentTunnelEntry>
+      );
     }
+
     return element;
   }
 

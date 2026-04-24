@@ -41,6 +41,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       translate: {},
       value: {},
       visibleDuration: {},
+      withDatePickerPresets: {},
     };
   }
 

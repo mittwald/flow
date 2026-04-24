@@ -4,11 +4,11 @@ import type {
   ChartDataValue,
   DataKey,
   DataKeyValue,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 import { useDesignTokens } from "../../../../lib/theming";
 
 export type YAxisProps<
-  TData = ChartDataValue,
+  TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
   TDataMatch = DataKeyValue<TData, TDataKey>,
 > = Pick<
@@ -32,19 +32,19 @@ export type YAxisProps<
 export const YAxis: FC<YAxisProps> = (props) => {
   const { domain, ...rest } = props;
 
-  const designTokens = useDesignTokens();
+  const tokens = useDesignTokens();
 
   return (
     <Recharts.YAxis
       {...rest}
       allowDataOverflow
       domain={domain}
-      fontSize={designTokens.axis["font-size"].value}
+      fontSize={tokens.axis["font-size"].value}
       tick={{
-        fill: designTokens.text.color.default.value,
+        fill: tokens.axis["text-color"].value,
       }}
-      tickMargin={parseInt(designTokens.axis.spacing.value)}
-      tickSize={parseInt(designTokens.axis["tick-size"].value)}
+      tickMargin={parseInt(tokens.axis.spacing.value)}
+      tickSize={parseInt(tokens.axis["tick-size"].value)}
     />
   );
 };

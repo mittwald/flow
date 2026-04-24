@@ -22,7 +22,10 @@ export const AccordionButton: FC<Props> = (props) => {
     <>
       <ButtonView
         className={styles.action}
-        tunnelId="button"
+        tunnel={{
+          id: "button",
+          component: "Accordion",
+        }}
         variant="plain"
         color="secondary"
         onPress={toggle}

@@ -3,6 +3,7 @@ import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 
 const defaultId = "default";
+export const defaultTunnelProviderId = "default";
 
 export type TunnelChildren =
   | ReactNode
@@ -16,6 +17,8 @@ interface TunnelEntryState {
 }
 
 export class TunnelState {
+  public readonly id: string;
+
   public readonly children = observable.map<
     string,
     ObservableMap<string, TunnelEntryState>
@@ -33,15 +36,17 @@ export class TunnelState {
 
   private nextIndex = 0;
 
-  public constructor() {
+  public constructor(id = defaultTunnelProviderId) {
+    this.id = id;
     makeObservable(this, {
+      id: false,
       deleteChildren: action.bound,
       setChildren: action.bound,
     });
   }
 
-  public static useNew(): TunnelState {
-    const tunnelState = useState(() => new TunnelState())[0];
+  public static useNew(id?: string): TunnelState {
+    const tunnelState = useState(() => new TunnelState(id))[0];
     tunnelState.resetIndex();
     return tunnelState;
   }

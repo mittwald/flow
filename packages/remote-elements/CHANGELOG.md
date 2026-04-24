@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.811](https://github.com/mittwald/flow/compare/0.2.0-alpha.810...0.2.0-alpha.811) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.810](https://github.com/mittwald/flow/compare/0.2.0-alpha.809...0.2.0-alpha.810) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.809](https://github.com/mittwald/flow/compare/0.2.0-alpha.808...0.2.0-alpha.809) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.808](https://github.com/mittwald/flow/compare/0.2.0-alpha.807...0.2.0-alpha.808) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.807](https://github.com/mittwald/flow/compare/0.2.0-alpha.806...0.2.0-alpha.807) (2026-04-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.806](https://github.com/mittwald/flow/compare/0.2.0-alpha.805...0.2.0-alpha.806) (2026-04-23)
+
+### Features
+
+* **CartesianChart:** typedCartesianChart improvements ([#2467](https://github.com/mittwald/flow/issues/2467)) ([102e84d](https://github.com/mittwald/flow/commit/102e84d932667836eb787c535f75e261fdccd6ed))
+* **Tunnel:** support Tunnel nesting ([#2466](https://github.com/mittwald/flow/issues/2466)) ([ac85de2](https://github.com/mittwald/flow/commit/ac85de2032644a9f8f08c393cf9d3721b44e1173))
+
+# [0.2.0-alpha.805](https://github.com/mittwald/flow/compare/0.2.0-alpha.804...0.2.0-alpha.805) (2026-04-23)
+
+### Features
+
+* **CodeBlock:** add truncate lines option ([#2459](https://github.com/mittwald/flow/issues/2459)) ([99cdbe3](https://github.com/mittwald/flow/commit/99cdbe30468ca814cc3d9d18c8ee870c1a710b28))
+
+# [0.2.0-alpha.804](https://github.com/mittwald/flow/compare/0.2.0-alpha.803...0.2.0-alpha.804) (2026-04-22)
+
+### Features
+
+* **List:** support custom empty views ([#2440](https://github.com/mittwald/flow/issues/2440)) ([67807a8](https://github.com/mittwald/flow/commit/67807a86c1d869c360d6d3bc4ecfd4b936d3f6d2))
+
+# [0.2.0-alpha.803](https://github.com/mittwald/flow/compare/0.2.0-alpha.802...0.2.0-alpha.803) (2026-04-22)
+
+### Features
+
+* **DateRangePicker:** add date picker presets ([#2463](https://github.com/mittwald/flow/issues/2463)) ([06154f3](https://github.com/mittwald/flow/commit/06154f3b97a69fe899dac30a070006a4b3da44d4))
+
 # [0.2.0-alpha.802](https://github.com/mittwald/flow/compare/0.2.0-alpha.801...0.2.0-alpha.802) (2026-04-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

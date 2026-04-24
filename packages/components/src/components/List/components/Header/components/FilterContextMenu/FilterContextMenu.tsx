@@ -10,10 +10,11 @@ import ContextMenuView from "@/views/ContextMenuView";
 
 interface Props {
   filter: Filter;
+  isDisabled?: boolean;
 }
 
 export const FilterContextMenu: FC<Props> = (props) => {
-  const { filter } = props;
+  const { filter, isDisabled } = props;
 
   const { values, mode, name, property } = filter;
 
@@ -31,6 +32,7 @@ export const FilterContextMenu: FC<Props> = (props) => {
         className={styles.hideOnMobile}
         variant="outline"
         color="secondary"
+        isDisabled={isDisabled}
       >
         <TextView>{name ?? property}</TextView>
         <IconFilter />

@@ -1,7 +1,6 @@
 import { type PropsWithChildren } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Options } from "@/components/Options";
@@ -16,6 +15,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ComboBoxProps
   extends
@@ -46,7 +46,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
 
@@ -54,7 +54,10 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   const propsContext: PropsContext = {
     Option: {
-      tunnelId: "options",
+      tunnel: {
+        id: "options",
+        component: "ComboBox",
+      },
     },
     ...fieldPropsContext,
   };
@@ -83,34 +86,32 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       }}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <FieldErrorCaptureContext>
-            <div className={styles.input}>
-              <Aria.Input placeholder={placeholder} ref={ref} />
-              <Button
-                className={styles.toggle}
-                aria-label={stringFormatter.format("showOptions")}
-                variant="plain"
-                color="secondary"
-              >
-                <IconChevronDown />
-              </Button>
-            </div>
-
-            {children}
-
-            <Options
-              controller={controller}
-              onOpenChange={() => {
-                // cut-off to avoid double controller state changes
-              }}
-              renderEmptyState={renderEmptyState}
+        <FieldErrorCaptureContext>
+          <div className={styles.input}>
+            <Aria.Input placeholder={placeholder} ref={ref} />
+            <Button
+              className={styles.toggle}
+              aria-label={stringFormatter.format("showOptions")}
+              variant="plain"
+              color="secondary"
             >
-              <TunnelExit id="options" />
-            </Options>
-          </FieldErrorCaptureContext>
-          <FieldErrorView />
-        </TunnelProvider>
+              <IconChevronDown />
+            </Button>
+          </div>
+
+          {children}
+
+          <Options
+            controller={controller}
+            onOpenChange={() => {
+              // cut-off to avoid double controller state changes
+            }}
+            renderEmptyState={renderEmptyState}
+          >
+            <UiComponentTunnelExit id="options" component="ComboBox" />
+          </Options>
+        </FieldErrorCaptureContext>
+        <FieldErrorView />
       </PropsContextProvider>
     </Aria.ComboBox>
   );

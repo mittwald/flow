@@ -44,7 +44,7 @@ export const Switch = flowComponent("Switch", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Switch");
 
   const propsContext: PropsContext = {
     ...fieldPropsContext,

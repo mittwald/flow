@@ -4,13 +4,13 @@ import type {
   ChartDataValue,
   DataKey,
   DataKeyValue,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 import { useDesignTokens } from "../../../../lib/theming";
 
 export type XAxisProps<
-  TData = ChartDataValue,
+  TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
-  TDataMatch = DataKeyValue<TData, TDataKey>,
+  TDataKeyValue = DataKeyValue<TData, TDataKey>,
 > = Pick<
   Recharts.XAxisProps,
   | "className"
@@ -26,22 +26,22 @@ export type XAxisProps<
   | "unit"
 > & {
   dataKey?: TDataKey;
-  tickFormatter?: (value: TDataMatch, index: number) => string;
+  tickFormatter?: (value: TDataKeyValue, index: number) => string;
 };
 
 /** @flr-generate all */
 export const XAxis: FC<XAxisProps> = (props) => {
-  const designTokens = useDesignTokens();
+  const tokens = useDesignTokens();
 
   return (
     <Recharts.XAxis
       {...props}
-      fontSize={designTokens.axis["font-size"].value}
+      fontSize={tokens.axis["font-size"].value}
       tick={{
-        fill: designTokens.text.color.default.value,
+        fill: tokens.axis["text-color"].value,
       }}
-      tickMargin={parseInt(designTokens.axis.spacing.value)}
-      tickSize={parseInt(designTokens.axis["tick-size"].value)}
+      tickMargin={parseInt(tokens.axis.spacing.value)}
+      tickSize={parseInt(tokens.axis["tick-size"].value)}
     />
   );
 };

@@ -3,7 +3,12 @@ import React from "react";
 import { DateRangePicker } from "../index";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
-import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
+import {
+  CalendarDate,
+  getLocalTimeZone,
+  parseDate,
+  today,
+} from "@internationalized/date";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof DateRangePicker> = {
@@ -51,6 +56,38 @@ export const FutureDatesOnly: Story = {
     <DateRangePicker minValue={today(getLocalTimeZone())} {...props}>
       <Label>Future date range</Label>
       <FieldDescription>Select a future date range</FieldDescription>
+    </DateRangePicker>
+  ),
+};
+
+export const WithDefaultPresets: Story = {
+  args: { minValue: today(getLocalTimeZone()) },
+  render: (props) => (
+    <DateRangePicker withDatePickerPresets {...props}>
+      <Label>DatePicker WithPresets</Label>
+    </DateRangePicker>
+  ),
+};
+
+export const WithCustomPresets: Story = {
+  args: { minValue: today(getLocalTimeZone()) },
+  render: (props) => (
+    <DateRangePicker
+      withDatePickerPresets={[
+        {
+          label: "I am valid",
+          start: new CalendarDate(2060, 1, 1),
+          end: new CalendarDate(2061, 1, 1),
+        },
+        {
+          label: "I am disabled",
+          start: new CalendarDate(2022, 1, 1),
+          end: new CalendarDate(2023, 1, 1),
+        },
+      ]}
+      {...props}
+    >
+      <Label>DatePicker Presents</Label>
     </DateRangePicker>
   ),
 };

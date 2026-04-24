@@ -22,6 +22,7 @@ export default defineConfig({
     ],
   },
   optimizeDeps: {
+    include: ["@mittwald/flow-icons"],
     exclude: ["@lezer/lr"],
   },
   css: {

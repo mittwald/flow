@@ -50,6 +50,7 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       validate: {},
       validationBehavior: {},
       value: {},
+      withDatePickerPresets: {},
     };
   }
 

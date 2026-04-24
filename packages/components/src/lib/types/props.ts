@@ -1,3 +1,4 @@
+import type { FlowComponentName } from "@/components/propTypes";
 import type { ExoticComponent, HTMLAttributes } from "react";
 
 export const statusTypes = [
@@ -17,7 +18,10 @@ export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
 
 export interface PropsWithTunnel {
   /** @internal */
-  tunnelId?: string | null;
+  tunnel?: {
+    id: string;
+    component: FlowComponentName;
+  } | null;
 }
 
 export interface PropsWithClassName {

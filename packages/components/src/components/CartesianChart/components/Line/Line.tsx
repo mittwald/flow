@@ -6,10 +6,12 @@ import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
 import type {
   ChartDataValue,
   DataKey,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 import { useDesignTokens } from "../../../../lib/theming";
 
-export interface LineProps<TData = ChartDataValue> extends Pick<
+export interface LineProps<
+  TData extends ChartDataValue = ChartDataValue,
+> extends Pick<
   Recharts.LineProps,
   "className" | "key" | "xAxisId" | "yAxisId" | "type" | "unit"
 > {
@@ -22,7 +24,7 @@ export interface LineProps<TData = ChartDataValue> extends Pick<
 export const Line: FC<LineProps> = (props) => {
   const { color: colorFromProps = "sea-green", ...rest } = props;
 
-  const designTokens = useDesignTokens();
+  const tokens = useDesignTokens();
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
@@ -35,12 +37,12 @@ export const Line: FC<LineProps> = (props) => {
       activeDot={<AreaDot color={color} />}
       dot={false}
       stroke={color}
-      strokeWidth={designTokens.line["border-width"].value}
+      strokeWidth={tokens.line["border-width"].value}
     />
   );
 };
 
-export const TypedLine = <T = ChartDataValue,>() =>
+export const TypedLine = <T extends ChartDataValue = ChartDataValue>() =>
   Line as ComponentType<LineProps<T>>;
 
 export default Line;

@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
-import { useContext, useEffect, useId, useRef } from "react";
-import tunnelContext from "@/context";
+import { useEffect, useId, useRef } from "react";
+import { useTunnelState } from "@/context";
 
 export type TunnelEntryChildren =
   | ReactNode
@@ -12,11 +12,13 @@ export interface TunnelEntryProps {
   children?: TunnelEntryChildren;
   /** Static entry ID instead of generated ID by `useId` */
   staticEntryId?: string;
+  /** Select a dedicated tunnel provider by ID. */
+  providerId?: string;
 }
 
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
-  const { children, id, staticEntryId } = props;
-  const tunnel = useContext(tunnelContext);
+  const { children, id, staticEntryId, providerId } = props;
+  const tunnel = useTunnelState(providerId);
   const usedId = useId();
   const entryId = staticEntryId ?? usedId;
   const index = tunnel.useEntryIndex();
@@ -30,7 +32,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   useEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, index, children);
-  }, [children, id, entryId, index]);
+  }, [children, id, entryId, index, providerId]);
 
   useEffect(() => {
     /**
@@ -42,7 +44,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
     return () => {
       tunnel.deleteChildren(id, entryId);
     };
-  }, [id, entryId]);
+  }, [id, entryId, providerId]);
 
   return null;
 };

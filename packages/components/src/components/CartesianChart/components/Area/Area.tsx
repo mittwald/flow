@@ -3,13 +3,15 @@ import * as Recharts from "recharts";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
-import type {
-  ChartDataValue,
-  DataKey,
-} from "@/components/CartesianChart/CartesianChart";
+import {
+  type ChartDataValue,
+  type DataKeyProp,
+  type DataKeyWithLabel,
+  isDataKeyWithLabel,
+} from "@/components/CartesianChart/types";
 import { useDesignTokens } from "../../../../lib/theming";
 
-export interface AreaProps<TData = ChartDataValue> extends Pick<
+type AreaBaseProps = Pick<
   Recharts.AreaProps,
   | "className"
   | "stackId"
@@ -19,11 +21,25 @@ export interface AreaProps<TData = ChartDataValue> extends Pick<
   | "yAxisId"
   | "type"
   | "unit"
-> {
-  dataKey: DataKey<TData>;
+> & {
   /** The color of the area. @default "sea-green" */
   color?: CategoricalWithCustomColor;
+};
+
+export interface AreaPropsByDataKeyProp<
+  TData extends ChartDataValue = ChartDataValue,
+> extends AreaBaseProps {
+  dataKey: DataKeyProp<TData>;
 }
+
+export interface AreaPropsByDataKey<
+  TData extends ChartDataValue = ChartDataValue,
+>
+  extends AreaBaseProps, DataKeyWithLabel<TData> {}
+
+export type AreaProps<TData extends ChartDataValue = ChartDataValue> =
+  | AreaPropsByDataKey<TData>
+  | AreaPropsByDataKeyProp<TData>;
 
 /** @flr-generate all */
 export const Area: FC<AreaProps> = (props) => {
@@ -34,7 +50,7 @@ export const Area: FC<AreaProps> = (props) => {
     ...rest
   } = props;
 
-  const designTokens = useDesignTokens();
+  const tokens = useDesignTokens();
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`
@@ -42,18 +58,19 @@ export const Area: FC<AreaProps> = (props) => {
 
   return (
     <Recharts.Area
+      name={isDataKeyWithLabel(props) ? props.dataKeyLabel : props.dataKey}
       stackId={stackId}
       fillOpacity={fillOpacity}
       {...rest}
       activeDot={<AreaDot color={color} />}
       fill={color}
-      stroke={designTokens.area["border-color"].value}
-      strokeWidth={designTokens.area["border-width"].value}
+      stroke={tokens.area["border-color"].value}
+      strokeWidth={tokens.area["border-width"].value}
     />
   );
 };
 
-export const TypedArea = <T = ChartDataValue,>() =>
-  Area as ComponentType<AreaProps<T>>;
+export const TypedArea = <TData extends ChartDataValue = ChartDataValue>() =>
+  Area as ComponentType<AreaPropsByDataKeyProp<TData>>;
 
 export default Area;

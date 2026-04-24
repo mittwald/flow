@@ -57,7 +57,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "TextArea");
 
   let { allowResize } = props;
   if (allowVerticalResize) {

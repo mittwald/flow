@@ -1,13 +1,13 @@
 import { TabList } from "@/components/Tabs/components/TabList";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 import type { PropsWithChildren, ReactNode } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
 import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface TabsProps
   extends
@@ -40,7 +40,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
   const selectedKey = selectedKeyProps ?? selectedKeyState;
 
   return (
-    <TunnelProvider>
+    <>
       {children}
       <Aria.Tabs
         slot={null}
@@ -66,10 +66,10 @@ export const Tabs = flowComponent("Tabs", (props) => {
           }}
           disabledKeys={disabledKeys}
         />
-        <TunnelExit id="Panels" />
+        <UiComponentTunnelExit id="Panels" component="Tabs" />
         <FallbackTab tabNotFoundView={tabNotFoundView} />
       </Aria.Tabs>
-    </TunnelProvider>
+    </>
   );
 });
 
