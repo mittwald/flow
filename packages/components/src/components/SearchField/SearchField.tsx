@@ -12,7 +12,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SearchFieldProps
   extends
@@ -29,7 +29,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "SearchField");
 
   const rootClassName = clsx(
     formFieldStyles.formField,
@@ -43,7 +43,10 @@ export const SearchField = flowComponent("SearchField", (props) => {
   const propsContext: PropsContext = {
     Kbd: {
       isDisabled: props.isDisabled,
-      tunnelId: "kbd",
+      tunnel: {
+        id: "kbd",
+        component: "SearchField",
+      },
       className: styles.kbd,
     },
     ...fieldPropsContext,
@@ -56,29 +59,27 @@ export const SearchField = flowComponent("SearchField", (props) => {
       aria-label={searchText}
       className={clsx(rootClassName, fieldProps.className)}
     >
-      <TunnelProvider>
-        <PropsContextProvider props={propsContext}>
-          <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
+      <PropsContextProvider props={propsContext}>
+        <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
 
-          <div className={styles.inputContainer}>
-            <IconSearch className={styles.searchIcon} />
-            <Aria.Input
-              placeholder={searchText}
-              className={styles.input}
-              ref={ref}
-            />
-            <TunnelExit id="kbd" />
-            <Button
-              className={styles.clearButton}
-              variant="plain"
-              color="secondary"
-            >
-              <IconClose />
-            </Button>
-          </div>
-        </PropsContextProvider>
-        <FieldErrorView />
-      </TunnelProvider>
+        <div className={styles.inputContainer}>
+          <IconSearch className={styles.searchIcon} />
+          <Aria.Input
+            placeholder={searchText}
+            className={styles.input}
+            ref={ref}
+          />
+          <UiComponentTunnelExit id="kbd" component="SearchField" />
+          <Button
+            className={styles.clearButton}
+            variant="plain"
+            color="secondary"
+          >
+            <IconClose />
+          </Button>
+        </div>
+      </PropsContextProvider>
+      <FieldErrorView />
     </Aria.SearchField>
   );
 });

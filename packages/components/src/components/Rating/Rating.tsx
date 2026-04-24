@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import styles from "./Rating.module.scss";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
@@ -42,7 +42,7 @@ export const Rating = flowComponent("Rating", (props) => {
     FieldErrorCaptureContext,
     fieldProps,
     fieldPropsContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "Rating");
 
   const rootClassName = clsx(
     styles.rating,

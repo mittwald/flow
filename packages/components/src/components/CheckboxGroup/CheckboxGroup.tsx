@@ -4,7 +4,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
@@ -12,6 +11,7 @@ import styles from "./CheckboxGroup.module.scss";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface CheckboxGroupProps
   extends
@@ -28,18 +28,24 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     fieldPropsContext,
     fieldProps,
     FieldErrorCaptureContext,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "CheckboxGroup");
 
   const propsContext: PropsContext = {
     Checkbox: {
       isInvalid,
-      tunnelId: "checkboxes",
       className: styles.checkbox,
+      tunnel: {
+        id: "checkboxes",
+        component: "CheckboxGroup",
+      },
     },
     CheckboxButton: {
       isInvalid,
-      tunnelId: "checkboxButtons",
       className: styles.checkboxButton,
+      tunnel: {
+        id: "checkboxButtons",
+        component: "CheckboxGroup",
+      },
     },
     ...fieldPropsContext,
   };
@@ -55,28 +61,29 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       className={clsx(fieldProps.className, className)}
       ref={objectRef}
     >
-      <TunnelProvider>
-        <FieldErrorCaptureContext>
-          <PropsContextProvider props={propsContext}>
-            {children}
+      <FieldErrorCaptureContext>
+        <PropsContextProvider props={propsContext}>
+          {children}
 
-            <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
-              <TunnelExit id="checkboxButtons" />
-            </ColumnLayout>
+          <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
+            <UiComponentTunnelExit
+              id="checkboxButtons"
+              component="CheckboxGroup"
+            />
+          </ColumnLayout>
 
-            <ColumnLayout
-              s={s ?? [1]}
-              m={m ?? [1]}
-              l={l ?? [1]}
-              rowGap="s"
-              className={styles.checkboxGroup}
-            >
-              <TunnelExit id="checkboxes" />
-            </ColumnLayout>
-          </PropsContextProvider>
-        </FieldErrorCaptureContext>
-        <FieldErrorView />
-      </TunnelProvider>
+          <ColumnLayout
+            s={s ?? [1]}
+            m={m ?? [1]}
+            l={l ?? [1]}
+            rowGap="s"
+            className={styles.checkboxGroup}
+          >
+            <UiComponentTunnelExit id="checkboxes" component="CheckboxGroup" />
+          </ColumnLayout>
+        </PropsContextProvider>
+      </FieldErrorCaptureContext>
+      <FieldErrorView />
     </Aria.CheckboxGroup>
   );
 });

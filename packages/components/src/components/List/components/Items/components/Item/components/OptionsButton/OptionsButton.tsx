@@ -19,7 +19,7 @@ export const OptionsButton: FC<Props> = (props) => {
         color="secondary"
         className={className}
         aria-label={stringFormatter.format("options")}
-        tunnelId={null}
+        tunnel={null}
       >
         <IconContextMenu />
       </ButtonView>

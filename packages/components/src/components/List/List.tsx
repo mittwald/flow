@@ -26,12 +26,12 @@ import {
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithChildren, ReactNode } from "react";
 import Footer from "./components/Footer";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ListProps<T, TMeta = unknown>
   extends
@@ -176,43 +176,47 @@ export const List = flowComponent("List", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
-      tunnelId: "actions",
+      tunnel: {
+        id: "actions",
+        component: "List",
+      },
       className: headerStyles.actions,
       Button: {
         className: headerStyles.action,
       },
     },
     ListSummary: {
-      tunnelId: "listSummary",
+      tunnel: {
+        id: "listSummary",
+        component: "List",
+      },
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <listContext.Provider
-          value={{
-            list: listModel,
-          }}
-        >
-          <DataLoader />
-          <DivView className={styles.list} ref={ref}>
-            {children}
-            <Header />
+      <listContext.Provider
+        value={{
+          list: listModel,
+        }}
+      >
+        <DataLoader />
+        <DivView className={styles.list} ref={ref}>
+          {children}
+          <Header />
 
-            <DivView className={styles.listWrapper}>
-              {listModel.items.entries.length > 0 && (
-                <TunnelExit id="listSummary" />
-              )}
-              {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
-                <Items />
-              )}
-              {listModel.viewMode.isTable && <Table />}
-            </DivView>
-            {!hidePagination && <Footer />}
+          <DivView className={styles.listWrapper}>
+            {listModel.items.entries.length > 0 && (
+              <UiComponentTunnelExit id="listSummary" component="List" />
+            )}
+            {(listModel.viewMode.isList || listModel.viewMode.isTiles) && (
+              <Items />
+            )}
+            {listModel.viewMode.isTable && <Table />}
           </DivView>
-        </listContext.Provider>
-      </TunnelProvider>
+          {!hidePagination && <Footer />}
+        </DivView>
+      </listContext.Provider>
     </PropsContextProvider>
   );
 });

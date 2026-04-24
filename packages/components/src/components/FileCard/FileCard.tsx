@@ -16,7 +16,7 @@ import Wrap from "@/components/Wrap";
 import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
 export interface FileCardProps
   extends
@@ -71,11 +71,17 @@ export const FileCard = flowComponent("FileCard", (props) => {
     Text: {
       elementType: "span",
       className: styles.subTitle,
-      tunnelId: "subTitle",
+      tunnel: {
+        id: "subTitle",
+        component: "FileCard",
+      },
     },
     ProgressBar: {
       size: "s",
-      tunnelId: "progressBar",
+      tunnel: {
+        id: "progressBar",
+        component: "FileCard",
+      },
     },
     Button: { variant: "plain", color: "secondary" },
   };
@@ -84,35 +90,33 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <TunnelProvider>
-        <Element ref={ref as never} className={rootClassName}>
-          <Wrap if={(href || onPress) && !isFailed}>
-            <Link
-              className={styles.link}
-              unstyled
-              href={href}
-              onPress={onPress}
-              target={target}
-              download={download}
-            >
-              <Avatar type={type} imageSrc={imageSrc} isFailed={isFailed} />
+      <Element ref={ref as never} className={rootClassName}>
+        <Wrap if={(href || onPress) && !isFailed}>
+          <Link
+            className={styles.link}
+            unstyled
+            href={href}
+            onPress={onPress}
+            target={target}
+            download={download}
+          >
+            <Avatar type={type} imageSrc={imageSrc} isFailed={isFailed} />
 
-              <span className={styles.text}>
-                {name && (
-                  <Text className={styles.title}>
-                    <strong>{name}</strong>
-                  </Text>
-                )}
-                {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
-                <TunnelExit id="subTitle" />
-                <TunnelExit id="progressBar" />
-              </span>
-            </Link>
-          </Wrap>
-          {children}
-          {onDelete && <DeleteButton onDelete={onDelete} />}
-        </Element>
-      </TunnelProvider>
+            <span className={styles.text}>
+              {name && (
+                <Text className={styles.title}>
+                  <strong>{name}</strong>
+                </Text>
+              )}
+              {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
+              <UiComponentTunnelExit id="subTitle" component="FileCard" />
+              <UiComponentTunnelExit id="progressBar" component="FileCard" />
+            </span>
+          </Link>
+        </Wrap>
+        {children}
+        {onDelete && <DeleteButton onDelete={onDelete} />}
+      </Element>
     </PropsContextProvider>
   );
 });

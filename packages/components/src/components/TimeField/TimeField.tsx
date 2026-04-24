@@ -23,7 +23,7 @@ export const TimeField = flowComponent("TimeField", (props) => {
     FieldErrorCaptureContext,
     fieldPropsContext,
     fieldProps,
-  } = useFieldComponent(props);
+  } = useFieldComponent(props, "TimeField");
 
   return (
     <Aria.TimeField hourCycle={24} {...rest} {...fieldProps}>

@@ -48,7 +48,7 @@ import type {
 } from "@/components/ContextualHelp";
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
-import type { ListProps } from "@/components/List";
+import type { ListItemViewContentProps, ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
@@ -84,6 +84,9 @@ import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
+import type { AccordionProps } from "@/components/Accordion";
+import type { ChatProps } from "../Chat";
+import type { SectionHeaderProps } from "../Section/components/SectionHeader/SectionHeader";
 import type {
   LightBoxGalleryItemProps,
   LightBoxGalleryProps,
@@ -95,6 +98,7 @@ export interface FlowComponentPropsTypes {
   AccentBox: AccentBoxProps;
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  Accordion: AccordionProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
@@ -105,6 +109,7 @@ export interface FlowComponentPropsTypes {
   Badge: BadgeProps;
   Button: ButtonProps;
   CodeEditor: CodeEditorProps;
+  Chat: ChatProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
@@ -127,8 +132,6 @@ export interface FlowComponentPropsTypes {
   FileCardList: FileCardListProps;
   FileField: FileFieldProps;
   FileDropZone: FileDropZoneProps;
-  LightBoxGallery: LightBoxGalleryProps;
-  LightBoxGalleryItem: LightBoxGalleryItemProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -138,8 +141,11 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
+  LightBoxGallery: LightBoxGalleryProps;
+  LightBoxGalleryItem: LightBoxGalleryItemProps;
   Link: LinkProps;
   List: ListProps<never>;
+  ListItemView: ListItemViewContentProps;
   ListSummary: ListSummaryProps;
   MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
@@ -166,6 +172,7 @@ export interface FlowComponentPropsTypes {
   SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Kbd: KbdProps;
+  SectionHeader: SectionHeaderProps;
   Slider: SliderProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -183,6 +190,7 @@ const propsContextSupportingComponentsMap: Record<
   AccentBox: true,
   Action: true,
   ActionGroup: true,
+  Accordion: true,
   Avatar: true,
   Autocomplete: true,
   Alert: true,
@@ -193,6 +201,7 @@ const propsContextSupportingComponentsMap: Record<
   Badge: true,
   Button: true,
   CodeEditor: true,
+  Chat: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
@@ -215,8 +224,6 @@ const propsContextSupportingComponentsMap: Record<
   FileCardList: true,
   FileField: true,
   FileDropZone: true,
-  LightBoxGallery: true,
-  LightBoxGalleryItem: true,
   Header: true,
   Heading: true,
   Icon: true,
@@ -227,8 +234,11 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   LightBox: true,
+  LightBoxGallery: true,
+  LightBoxGalleryItem: true,
   Link: true,
   List: true,
+  ListItemView: true,
   ListSummary: true,
   MarkdownEditor: true,
   MenuItem: true,
@@ -251,6 +261,7 @@ const propsContextSupportingComponentsMap: Record<
   Rating: true,
   SearchField: true,
   Section: true,
+  SectionHeader: true,
   Segment: true,
   SegmentedControl: true,
   Select: true,

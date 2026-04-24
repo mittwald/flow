@@ -6,7 +6,6 @@ import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
-import { TunnelProvider } from "@mittwald/react-tunnel";
 import {
   modifyValueByMarkdownSyntax,
   scrollToCursor,
@@ -91,39 +90,37 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   return (
     <div className={rootClassName}>
-      <TunnelProvider>
-        <TextArea
-          {...rest}
-          aria-hidden={mode === "preview"}
-          isReadOnly={isReadOnly || mode === "preview"}
+      <TextArea
+        {...rest}
+        aria-hidden={mode === "preview"}
+        isReadOnly={isReadOnly || mode === "preview"}
+        isDisabled={isDisabled}
+        ref={inputRef}
+        value={value}
+        rows={rows}
+        autoResizeMaxRows={autoResizeMaxRows}
+        onChange={onChange}
+        onKeyDown={handleKeyDown}
+      >
+        {mode === "preview" && (
+          <Markdown
+            headingOffset={headingOffset}
+            className={styles.markdown}
+            style={{
+              height: inputRef.current?.offsetHeight,
+            }}
+          >
+            {value}
+          </Markdown>
+        )}
+        {children}
+        <Toolbar
+          currentMode={mode}
           isDisabled={isDisabled}
-          ref={inputRef}
-          value={value}
-          rows={rows}
-          autoResizeMaxRows={autoResizeMaxRows}
-          onChange={onChange}
-          onKeyDown={handleKeyDown}
-        >
-          {mode === "preview" && (
-            <Markdown
-              headingOffset={headingOffset}
-              className={styles.markdown}
-              style={{
-                height: inputRef.current?.offsetHeight,
-              }}
-            >
-              {value}
-            </Markdown>
-          )}
-          {children}
-          <Toolbar
-            currentMode={mode}
-            isDisabled={isDisabled}
-            onModeChange={setMode}
-            onToolPressed={handleToolButtonPressed}
-          />
-        </TextArea>
-      </TunnelProvider>
+          onModeChange={setMode}
+          onToolPressed={handleToolButtonPressed}
+        />
+      </TextArea>
     </div>
   );
 });

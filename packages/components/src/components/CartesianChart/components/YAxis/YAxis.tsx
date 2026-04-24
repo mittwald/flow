@@ -5,10 +5,10 @@ import type {
   ChartDataValue,
   DataKey,
   DataKeyValue,
-} from "@/components/CartesianChart/CartesianChart";
+} from "@/components/CartesianChart/types";
 
 export type YAxisProps<
-  TData = ChartDataValue,
+  TData extends ChartDataValue = ChartDataValue,
   TDataKey extends DataKey<TData> = DataKey<TData>,
   TDataMatch = DataKeyValue<TData, TDataKey>,
 > = Pick<

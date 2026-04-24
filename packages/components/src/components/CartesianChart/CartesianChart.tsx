@@ -13,32 +13,22 @@ import styles from "./CartesianChart.module.scss";
 import { useChartClipRect } from "@/components/CartesianChart/hooks/useChartClipRect";
 import DivView from "@/views/DivView";
 import Wrap from "@/components/Wrap";
-
+import type {
+  ChartDataValue,
+  DataKeyProp,
+} from "@/components/CartesianChart/types";
 import { TypedArea } from "@/components/CartesianChart/components/Area";
-import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid";
+import { TypedXAxis } from "@/components/CartesianChart/components/XAxis";
 import { TypedYAxis } from "@/components/CartesianChart/components/YAxis";
+import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid";
 import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLegend";
 import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
-import { TypedXAxis } from "@/components/CartesianChart/components/XAxis";
 import { TypedLine } from "@/components/CartesianChart/components/Line";
 
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
   data?: ComponentProps<typeof ComposedChart>["data"];
 }
-
-export type ChartDataValue = Record<string, unknown>;
-export type DataKey<TData> = keyof TData | (() => keyof TData) | number;
-export type DataKeyValue<
-  TData,
-  TDataKey extends DataKey<TData>,
-> = TDataKey extends keyof TData
-  ? TData[TDataKey]
-  : TDataKey extends () => infer K
-    ? K extends keyof TData
-      ? TData[K]
-      : TData[keyof TData]
-    : TData[keyof TData];
 
 export interface CartesianChartProps<TData = ChartDataValue>
   extends
@@ -119,14 +109,18 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
   );
 };
 
-export const typedCartesianChart = <TData = ChartDataValue,>() => ({
+export const typedCartesianChart = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TData extends ChartDataValue<any> = ChartDataValue<any>,
+  XAxisDataKey extends DataKeyProp<TData> = DataKeyProp<TData>,
+>() => ({
   Chart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
   Area: TypedArea<TData>(),
-  XAxis: TypedXAxis<TData>(),
+  XAxis: TypedXAxis<TData, XAxisDataKey>(),
   YAxis: TypedYAxis<TData>(),
   Grid: TypedChartGrid(),
   Legend: TypedChartLegend(),
-  Tooltip: TypedChartTooltip<TData>(),
+  Tooltip: TypedChartTooltip<TData, XAxisDataKey>(),
   Line: TypedLine<TData>(),
 });
 

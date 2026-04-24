@@ -42,11 +42,10 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
         name: stringFormatter.format(`countryCode.${countryData.countryCode}`),
       }))
       .filter(filterBy)
-      .sort(sortBy)
+      .toSorted(sortBy)
       .map((country) => (
         <Option
           key={country.countryNameEn}
-          id={country.countryNameEn}
           value={country.countryCode}
           textValue={country.name}
         >

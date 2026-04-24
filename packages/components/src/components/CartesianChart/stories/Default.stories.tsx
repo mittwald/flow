@@ -169,12 +169,14 @@ export const WithLine: Story = {
     data: lineChartData,
   },
   render: () => {
-    const CartesianChart = typedCartesianChart<{
+    interface ChartData {
       Zeit: Date;
       Datenbanken: number;
       Projekte: number;
       Median: number;
-    }>();
+    }
+
+    const CartesianChart = typedCartesianChart<ChartData>();
 
     return (
       <CartesianChart.Chart
@@ -221,7 +223,7 @@ export const WithLine: Story = {
             }).format(d);
           }}
         />
-        <CartesianChart.YAxis domain={[0, 100]} unit=" %" />
+        <CartesianChart.YAxis domain={[0, 100]} unit="%" />
         <CartesianChart.Grid />
         <CartesianChart.Legend />
         <CartesianChart.Tooltip
@@ -273,7 +275,7 @@ export const WithIntlNumberFormat: Story = {
           Intl.NumberFormat(undefined, {
             style: "unit",
             unit: "gigabyte",
-          }).format(typeof value === "number" ? value : 0)
+          }).format(value)
         }
       />
     </CartesianChart>

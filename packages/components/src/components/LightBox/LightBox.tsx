@@ -12,9 +12,9 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
+import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 
@@ -49,7 +49,10 @@ export const LightBox = flowComponent("LightBox", (props) => {
     ActionGroup: {
       className: styles.actionGroup,
       Button: { variant: "solid", color: "light-static" },
-      tunnelId: "actionGroup",
+      tunnel: {
+        id: "actionGroup",
+        component: "LightBox",
+      },
     },
     LightBoxGallery: {
       className: styles.gallery,
@@ -72,20 +75,18 @@ export const LightBox = flowComponent("LightBox", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <DivView className={styles.content}>{children}</DivView>
-          <DivView className={styles.actions}>
-            <ButtonView
-              color="light-static"
-              variant="solid"
-              onPress={() => controller.close()}
-              aria-label={stringFormatter.format("close")}
-            >
-              <IconClose />
-            </ButtonView>
-            <TunnelExit id="actionGroup" />
-          </DivView>
-        </TunnelProvider>
+        <DivView className={styles.content}>{children}</DivView>
+        <DivView className={styles.actions}>
+          <ButtonView
+            color="light-static"
+            variant="solid"
+            onPress={() => controller.close()}
+            aria-label={stringFormatter.format("close")}
+          >
+            <IconClose />
+          </ButtonView>
+          <UiComponentTunnelExit id="actionGroup" component="LightBox" />
+        </DivView>
       </PropsContextProvider>
     </Overlay>
   );

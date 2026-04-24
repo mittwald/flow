@@ -36,7 +36,7 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
         <Button
           className={className}
           size="m"
-          tunnelId={null}
+          tunnel={null}
           variant="plain"
           color="secondary"
           isDisabled={isDisabled}

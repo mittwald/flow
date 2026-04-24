@@ -6,11 +6,14 @@ import locales from "../../locales/*.locale.json";
 import styles from "./ChartTooltip.module.scss";
 import type { WithTooltipFormatters } from "@/components/CartesianChart";
 import { usePromise } from "@mittwald/react-use-promise";
-import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import type { ChartDataValue } from "@/components/CartesianChart/types";
 
-interface TooltipProgressBarProps<TData = ChartDataValue> extends Pick<
-  WithTooltipFormatters<TData>,
+interface TooltipProgressBarProps<
+  TData extends ChartDataValue = ChartDataValue,
+  TTooltipLabelValue extends keyof TData = keyof TData,
+> extends Pick<
+  WithTooltipFormatters<TData, TTooltipLabelValue>,
   "progressBarFormatter"
 > {
   items: TooltipPayloadItem[];
@@ -36,12 +39,18 @@ export const TooltipProgressBar: FC<TooltipProgressBarProps> = (props) => {
     color: i.fill,
   }));
 
-  const total = segments.reduce((sum, segment) => sum + segment.value, 0);
+  const total = areaItems.reduce((sum, segment) => {
+    if (typeof segment.value === "number") {
+      return sum + segment.value;
+    }
+
+    return sum;
+  }, 0);
 
   const formattedLabel = usePromise(
     async (value, unit, formatter) => {
       if (!formatter) {
-        return `${value}${unit ? ` ${unit}` : ""}`;
+        return `${value}${unit ? unit : ""}`;
       }
 
       return formatter(value, unit);

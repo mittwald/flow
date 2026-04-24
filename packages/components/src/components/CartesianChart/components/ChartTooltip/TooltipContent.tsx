@@ -11,11 +11,15 @@ import { TooltipLegendItem } from "@/components/CartesianChart/components/ChartT
 import SkeletonTextView from "@/views/SkeletonTextView";
 import { TooltipProgressBar } from "@/components/CartesianChart/components/ChartTooltip/TooltipProgressBar";
 import { Flex } from "@/components/Flex";
-import type { ChartDataValue } from "@/components/CartesianChart/CartesianChart";
 
-export interface TooltipContentProps<TData = ChartDataValue>
+import type { ChartDataValue } from "@/components/CartesianChart/types";
+
+export interface TooltipContentProps<
+  TData extends ChartDataValue = ChartDataValue,
+  TTooltipLabelValue extends keyof TData = keyof TData,
+>
   extends
-    WithTooltipFormatters<TData>,
+    WithTooltipFormatters<TData, TTooltipLabelValue>,
     Omit<RechartTooltipContentProps<ValueType, NameType>, "formatter"> {
   showProgressBar?: boolean;
 }
@@ -34,10 +38,10 @@ export const TooltipContent: FC<TooltipContentProps> = (props) => {
   const formattedHeading = usePromise(
     async (label, formatter) => {
       if (!formatter) {
-        return label;
+        return String(label);
       }
 
-      return formatter(label);
+      return formatter(label as never);
     },
     [label, headingFormatter] as const,
   );
