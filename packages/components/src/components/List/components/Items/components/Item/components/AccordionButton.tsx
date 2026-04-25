@@ -24,7 +24,7 @@ export const AccordionButton: FC<Props> = (props) => {
         className={styles.action}
         tunnel={{
           id: "button",
-          component: "Accordion",
+          component: "ListItemView",
         }}
         variant="plain"
         color="secondary"

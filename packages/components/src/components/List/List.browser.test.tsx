@@ -3,6 +3,7 @@ import {
   List,
   ListFilter,
   ListItem,
+  ListItemView,
   ListSorting,
   ListStaticData,
 } from "@/components/List";
@@ -15,6 +16,7 @@ import {
   type SettingsJson,
 } from "../SettingsProvider";
 import { FilterValue } from "./model/filter/FilterValue";
+import Content from "../Content";
 
 interface Data {
   num: number;
@@ -69,6 +71,21 @@ beforeEach(() => {
 
 test("renders empty list without errors", async () => {
   await render(<List />);
+});
+
+test("renders accordion list without errors", async () => {
+  await render(
+    <List accordion>
+      <ListStaticData data={[1, 2, 3]} />
+      <ListItem defaultExpanded={() => true}>
+        {() => (
+          <ListItemView>
+            <Content slot="bottom">Item</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>,
+  );
 });
 
 describe("Static data", () => {
