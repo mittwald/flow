@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.813](https://github.com/mittwald/flow/compare/0.2.0-alpha.812...0.2.0-alpha.813) (2026-04-25)
+
+### Bug Fixes
+
+* **List:** fix error when rendering accordion ([bda8df1](https://github.com/mittwald/flow/commit/bda8df1ede78a5feb6d27d19517d7d3e66744885))
+
 # [0.2.0-alpha.812](https://github.com/mittwald/flow/compare/0.2.0-alpha.811...0.2.0-alpha.812) (2026-04-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
