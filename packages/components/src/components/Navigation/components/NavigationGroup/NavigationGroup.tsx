@@ -1,4 +1,4 @@
-import { Children, type ComponentProps, type PropsWithChildren } from "react";
+import { type ComponentProps, type PropsWithChildren } from "react";
 import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
@@ -9,7 +9,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 
 export interface NavigationGroupProps
   extends
@@ -47,17 +47,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     <Accordion defaultExpanded className={rootClassName}>
       {children}
       <Content>
-        <UiComponentTunnelExit
-          id="groupLinks"
-          component="NavigationGroup"
-          children={(children) => {
-            if (Children.count(children) >= 1) {
-              return <ul>{children}</ul>;
-            }
-
-            return null;
-          }}
-        />
+        <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
       </Content>
     </Accordion>
   );
@@ -65,17 +55,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   const defaultUi = (
     <section aria-labelledby={generatedId} className={rootClassName} {...rest}>
       {children}
-      <UiComponentTunnelExit
-        id="groupLinks"
-        component="NavigationGroup"
-        children={(children) => {
-          if (Children.count(children) >= 1) {
-            return <ul>{children}</ul>;
-          }
-
-          return null;
-        }}
-      />
+      <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
     </section>
   );
 
