@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import { Children, type ComponentProps, type PropsWithChildren } from "react";
 import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
@@ -44,12 +44,20 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   };
 
   const collapsableUi = (
-    <Accordion defaultExpanded>
+    <Accordion defaultExpanded className={rootClassName}>
       {children}
       <Content>
-        <ul>
-          <UiComponentTunnelExit id="groupLinks" component="NavigationGroup" />
-        </ul>
+        <UiComponentTunnelExit
+          id="groupLinks"
+          component="NavigationGroup"
+          children={(children) => {
+            if (Children.count(children) >= 1) {
+              return <ul>{children}</ul>;
+            }
+
+            return null;
+          }}
+        />
       </Content>
     </Accordion>
   );
@@ -57,9 +65,17 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   const defaultUi = (
     <section aria-labelledby={generatedId} className={rootClassName} {...rest}>
       {children}
-      <ul>
-        <UiComponentTunnelExit id="groupLinks" component="NavigationGroup" />
-      </ul>
+      <UiComponentTunnelExit
+        id="groupLinks"
+        component="NavigationGroup"
+        children={(children) => {
+          if (Children.count(children) >= 1) {
+            return <ul>{children}</ul>;
+          }
+
+          return null;
+        }}
+      />
     </section>
   );
 
