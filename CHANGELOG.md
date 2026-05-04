@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.817](https://github.com/mittwald/flow/compare/0.2.0-alpha.816...0.2.0-alpha.817) (2026-05-04)
+
+### Bug Fixes
+
+* **Icon:** fix fa icon size ([#2477](https://github.com/mittwald/flow/issues/2477)) ([331ac3d](https://github.com/mittwald/flow/commit/331ac3d2e6b3aa8904d8d2836aac0e099be768e0))
+
 # [0.2.0-alpha.816](https://github.com/mittwald/flow/compare/0.2.0-alpha.815...0.2.0-alpha.816) (2026-05-04)
 
 **Note:** Version bump only for package @mittwald/flow-project
