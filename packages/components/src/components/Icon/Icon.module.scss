@@ -11,7 +11,7 @@
       width: var(--icon--size--#{$size});
       height: var(--icon--size--#{$size});
 
-      &.svg-inline--fa {
+      &:global(.svg-inline--fa) {
         box-sizing: border-box;
         padding: $faPadding;
       }
