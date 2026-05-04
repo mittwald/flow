@@ -4,7 +4,10 @@ import type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
 export type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props providerId
+ */
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => (
   <ReactTunnelEntry {...props} />
 );

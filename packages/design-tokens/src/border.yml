@@ -8,6 +8,8 @@ corner-radius:
   round:
     value: 50%
 border-width:
+  50:
+    value: 0.5px
   100:
     value: "{size-px.xxxs}"
   200:

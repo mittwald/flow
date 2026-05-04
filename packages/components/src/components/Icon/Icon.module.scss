@@ -11,16 +11,16 @@
       width: var(--icon--size--#{$size});
       height: var(--icon--size--#{$size});
 
-      &.svg-inline--fa {
+      &:global(.svg-inline--fa) {
         box-sizing: border-box;
         padding: $faPadding;
       }
     }
   }
 
-  @include size(m, 2px);
-  @include size(s, 1px);
-  @include size(l, 4px);
+  @include size(m, var(--size-rem--xxs));
+  @include size(s, var(--size-rem--xxxs));
+  @include size(l, var(--size-rem--xs));
 
   /* Colors */
   @mixin status($status) {

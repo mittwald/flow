@@ -1,4 +1,4 @@
-import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
 import { useId, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
@@ -42,19 +42,22 @@ export const Accordion: FC<AccordionProps> = flowComponent(
     const headerId = useId();
     const contentId = useId();
 
-    const headerButton = (children: ReactNode) => (
-      <Button
-        tunnel={null}
-        unstyled
-        aria-expanded={expanded}
-        className={styles.headerButton}
-        onPress={() => setExpanded((expanded) => !expanded)}
-        aria-controls={contentId}
-      >
-        {children}
-        <IconChevronDown className={styles.chevron} />
-      </Button>
-    );
+    const HeaderButton: FC<PropsWithChildren> = (props) => {
+      const { children } = props;
+      return (
+        <Button
+          tunnel={null}
+          unstyled
+          aria-expanded={expanded}
+          className={styles.headerButton}
+          onPress={() => setExpanded((expanded) => !expanded)}
+          aria-controls={contentId}
+        >
+          {children}
+          <IconChevronDown className={styles.chevron} />
+        </Button>
+      );
+    };
 
     const propsContext: PropsContext = {
       Content: {
@@ -68,11 +71,15 @@ export const Accordion: FC<AccordionProps> = flowComponent(
         className: styles.header,
         level: 4,
         size: "xs",
-        children: dynamic((props) => headerButton(props.children)),
+        children: dynamic((props) => (
+          <HeaderButton>{props.children}</HeaderButton>
+        )),
       },
       Label: {
         className: styles.header,
-        children: dynamic((props) => headerButton(props.children)),
+        children: dynamic((props) => (
+          <HeaderButton>{props.children}</HeaderButton>
+        )),
       },
     };
 

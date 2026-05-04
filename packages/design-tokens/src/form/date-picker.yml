@@ -30,13 +30,13 @@ calendar:
       value: "{disabled-plain-content-color}"
     selected:
       value: "{primary-solid-content-color}"
-  cell-range-background-color:
+  range-background-color:
     value: "{primary.color.100}"
-  cell-range-border-color:
+  range-border-color:
     value: "{form-control.border-color.default}"
-  cell-range-border-width:
-    value: "{border-width.100}"
-  cell-range-border-style:
+  range-border-width:
+    value: "{border-width.50}"
+  range-border-style:
     value: "{border-style.default}"
   header-cell-font-weight:
     value: "{font-weight.bold}"
