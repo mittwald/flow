@@ -15,6 +15,8 @@ import styles from "./LightBox.module.scss";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface LightBoxProps
   extends PropsWithChildren, FlowComponentProps, PropsWithClassName {
@@ -52,6 +54,9 @@ export const LightBox = flowComponent("LightBox", (props) => {
         component: "LightBox",
       },
     },
+    LightBoxGallery: {
+      className: styles.gallery,
+    },
   };
 
   const controllerFromContext = useOverlayController("LightBox", {
@@ -59,6 +64,8 @@ export const LightBox = flowComponent("LightBox", (props) => {
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
     <Overlay
@@ -74,6 +81,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
             color="light-static"
             variant="solid"
             onPress={() => controller.close()}
+            aria-label={stringFormatter.format("close")}
           >
             <IconClose />
           </ButtonView>

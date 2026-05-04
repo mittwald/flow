@@ -27,12 +27,12 @@
   }
 
   .heading {
-    --button-width: calc(
+    --button-size: calc(
       var(--button--line-height-s) + 2 * var(--button--padding-s-x)
     );
 
     padding-inline-end: calc(
-      var(--button-width) + var(--heading--icon-to-text-spacing)
+      var(--button-size) + var(--heading--icon-to-text-spacing)
     );
 
     .icon {

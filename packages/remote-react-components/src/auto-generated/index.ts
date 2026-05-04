@@ -69,6 +69,8 @@ export * from "./Label";
 export * from "./LabeledValue";
 export * from "./LayoutCard";
 export * from "./Legend";
+export * from "./LightBoxGallery";
+export * from "./LightBoxGalleryItem";
 export * from "./Line";
 export * from "./Link";
 export * from "./ListEmptyView";
