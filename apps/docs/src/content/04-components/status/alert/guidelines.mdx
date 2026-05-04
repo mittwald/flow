@@ -58,6 +58,8 @@ Status verwendet werden.
   </Plain>
 </DoAndDont>
 
+---
+
 # Anwendung
 
 ## Position
@@ -81,3 +83,31 @@ Bezieht sich der Alert auf den gesamten Inhalt, wird er prominent oberhalb der
 ersten Section innerhalb der LayoutCard platziert.
 
 </Do>
+
+---
+
+# Writing guidelines
+
+## Aufbau 
+
+### Headline
+
+Benennt das Problem oder Ereignis kurz und prägnant. „E-Mail-Empfang wurde deaktiviert“
+
+### Content
+
+Als erstes sollte die Ursache vermitterlt werden. Was ist passiert und was sind die Folgen. „Der Empfang der E-Mails für dieses Postfach ist aufgrund fehlerhafter MX-Records deaktiviert.“
+
+Im Anschluss sollte dem User vermittelt werdern was er tun kann um die Situation zu lösen. „Bitte setze die richtigen Mailserver.“
+
+Optional kann ein zusätzlicher Kontext oder technische Hintergründe erklärt werden. „Bei einer Neuregistrierung einer Domain kann es einige Minuten dauern, bis die MX-Records global im DNS verfügbar sind. Die E-Mail-Adresse wird in diesem Fall automatisch aktiviert.“
+
+Weitere Formulierungshilfen sind in unseren Content Guidelines unter [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen).
+
+### Action (optional)
+
+Optional kann ein Alert eine direkte Handlung ermöglichen, etwa über einen [Button](/04-components/actions/button/overview) zur Problemlösung oder einen [Link](/04-components/navigation/link/overview) zu weiteren Informationen bzw. zur relevanten Stelle.
+
+## Beispiel 
+
+<LiveCodeEditor example="with-content" editorCollapsed />
