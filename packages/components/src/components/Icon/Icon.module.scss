@@ -18,9 +18,9 @@
     }
   }
 
-  @include size(s, var(--size-rem--xxxs));
-  @include size(m, var(--size-rem--xxs));
-  @include size(l, var(--size-rem--xs));
+  @include size(s, 1px);
+  @include size(m, 2px);
+  @include size(l, 4px);
 
   /* Colors */
   @mixin status($status) {
