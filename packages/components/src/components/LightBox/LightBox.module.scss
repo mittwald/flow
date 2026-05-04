@@ -65,3 +65,24 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .lightBox {
+    [role="dialog"] {
+      max-width: var(--light-box--max-width-mobile);
+      max-height: var(--light-box--max-height-mobile);
+    }
+
+    &.fitScreen {
+      .content {
+        > * {
+          max-height: var(--light-box--max-height-mobile);
+        }
+      }
+    }
+
+    .gallery {
+      width: var(--light-box--max-width-mobile);
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import React, { type ReactNode, useRef, useState } from "react";
+import React, { type ReactNode, useEffect, useRef, useState } from "react";
 import {
   IconChevronLeft,
   IconChevronRight,
@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../locales/*.locale.json";
 import Button from "@/components/Button";
+import { Controls } from "@/components/LightBox/components/LightBoxGallery/Controls";
 
 export interface LightBoxGalleryProps extends PropsWithClassName {
   children: ReactNode[];
@@ -24,12 +25,28 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
   const count = React.Children.count(children);
 
-  const paginate = (direction: number) => {
-    setIndex((prev: number) => (prev + direction + count) % count);
-  };
+  const isFirst = currentIndex === 0;
+  const isLast = currentIndex === count - 1;
 
   const pointerStartX = useRef<number | null>(null);
-  const SWIPE_THRESHOLD = 50;
+  const swipeThreshold = 50;
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    containerRef.current?.focus();
+  }, [containerRef.current]);
+
+  const paginate = (direction: number) => {
+    setIndex((prev) => {
+      const next = prev + direction;
+
+      if (next < 0) return 0;
+      if (next >= count) return count - 1;
+
+      return next;
+    });
+  };
 
   const handlePointerDown = (e: React.PointerEvent) => {
     if (!e.isPrimary) return;
@@ -41,7 +58,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
 
     const distance = pointerStartX.current - e.clientX;
 
-    if (Math.abs(distance) > SWIPE_THRESHOLD) {
+    if (Math.abs(distance) > swipeThreshold) {
       paginate(distance > 0 ? 1 : -1);
     }
 
@@ -52,27 +69,32 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
     pointerStartX.current = null;
   };
 
-  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case "ArrowLeft":
+        if (!isFirst) paginate(-1);
+        break;
+      case "ArrowRight":
+        if (!isLast) paginate(1);
+        break;
+    }
+  };
 
-  const indicators = Array(count)
-    .fill("")
-    .map((_, index) => (
-      <span
-        key={index}
-        className={clsx(
-          styles.indicator,
-          currentIndex === index && styles.current,
-        )}
-      />
-    ));
+  const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
     <div className={clsx(styles.gallery, className)}>
       <div
+        ref={containerRef}
         className={styles.content}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerCancel}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={stringFormatter.format("gallery")}
       >
         <div className={styles.galleryItem} key={currentIndex}>
           {children[currentIndex]}
@@ -84,23 +106,19 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
             onPress={() => paginate(-1)}
             color="light-static"
             className={styles.previousButton}
+            isDisabled={isFirst}
           >
             <IconChevronLeft />
           </Button>
-          <div
-            className={styles.indicators}
-            aria-label={stringFormatter.format("indicator", {
-              current: currentIndex + 1,
-              count,
-            })}
-          >
-            {indicators}
-          </div>
+
+          <Controls count={count} currentIndex={currentIndex} />
+
           <Button
             aria-label={stringFormatter.format("next")}
             onPress={() => paginate(1)}
             color="light-static"
             className={styles.nextButton}
+            isDisabled={isLast}
           >
             <IconChevronRight />
           </Button>

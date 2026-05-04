@@ -15,9 +15,12 @@
   .content {
     display: flex;
     flex-direction: column;
-    height: var(--light-box--max-height);
     width: 100%;
     justify-content: center;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .galleryItem {
@@ -85,6 +88,7 @@
       var(--button-size-plus-spacing) + var(--light-box--spacing)
     );
     padding-bottom: var(--indicator-height);
+    height: var(--light-box--max-height);
   }
 
   .galleryItem {
@@ -116,6 +120,7 @@
   .content {
     padding-inline: var(--button-size-plus-spacing);
     padding-bottom: var(--button-size-plus-spacing);
+    height: var(--light-box--max-height-mobile);
   }
 
   .galleryItem {

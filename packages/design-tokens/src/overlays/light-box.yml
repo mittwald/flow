@@ -2,8 +2,12 @@ light-box:
   overlay-background-color:
     value: "{dark-static.color.600}"
   max-width:
-    value: "calc(100dvw - {size-px.l})"
+    value: "calc(100dvw - {size-px.xxl})"
   max-height:
+    value: "calc(100dvh - {size-px.xxl})"
+  max-width-mobile:
+    value: "calc(100dvw - {size-px.l})"
+  max-height-mobile:
     value: "calc(100dvh - {size-px.l})"
   spacing:
     value: "{size-px.m}"
