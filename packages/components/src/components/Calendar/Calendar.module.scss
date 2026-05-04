@@ -87,10 +87,10 @@
       &[data-selected] {
         &::before {
           content: "";
-          background: var(--calendar--cell-range-background-color);
-          border-block: var(--calendar--cell-range-border-width)
-            var(--calendar--cell-range-border-style)
-            var(--calendar--cell-range-border-color);
+          background: var(--calendar--range-background-color);
+          border-block: var(--calendar--range-border-width)
+            var(--calendar--range-border-style)
+            var(--calendar--range-border-color);
           width: calc(100% + 0.375rem);
           height: 100%;
           position: absolute;

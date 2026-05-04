@@ -8,7 +8,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
 
 export interface NavigationProps
   extends
@@ -50,9 +50,7 @@ export const Navigation = flowComponent("Navigation", (props) => {
       }}
     >
       <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
-        <ul>
-          <UiComponentTunnelExit id="links" component="Navigation" />
-        </ul>
+        <LinkListTunnelExit id="links" component="Navigation" />
         {children}
       </nav>
     </PropsContextProvider>

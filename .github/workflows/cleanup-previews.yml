@@ -2,7 +2,8 @@ name: Cleanup Preview Apps
 
 on:
   pull_request:
-    types: [closed]
+    types:
+      - closed
 
 jobs:
   cleanup:

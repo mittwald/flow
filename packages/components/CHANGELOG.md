@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.817](https://github.com/mittwald/flow/compare/0.2.0-alpha.816...0.2.0-alpha.817) (2026-05-04)
+
+### Bug Fixes
+
+* **Icon:** fix fa icon size ([#2477](https://github.com/mittwald/flow/issues/2477)) ([331ac3d](https://github.com/mittwald/flow/commit/331ac3d2e6b3aa8904d8d2836aac0e099be768e0))
+
+# [0.2.0-alpha.816](https://github.com/mittwald/flow/compare/0.2.0-alpha.815...0.2.0-alpha.816) (2026-05-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.815](https://github.com/mittwald/flow/compare/0.2.0-alpha.814...0.2.0-alpha.815) (2026-04-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.814](https://github.com/mittwald/flow/compare/0.2.0-alpha.813...0.2.0-alpha.814) (2026-04-28)
+
+### Bug Fixes
+
+* **Navigation:** fix visual style ([#2473](https://github.com/mittwald/flow/issues/2473)) ([39ead3c](https://github.com/mittwald/flow/commit/39ead3c160b1fcdfa891a2e48fa7302b9cc213a6))
+
+# [0.2.0-alpha.813](https://github.com/mittwald/flow/compare/0.2.0-alpha.812...0.2.0-alpha.813) (2026-04-25)
+
+### Bug Fixes
+
+* **List:** fix error when rendering accordion ([bda8df1](https://github.com/mittwald/flow/commit/bda8df1ede78a5feb6d27d19517d7d3e66744885))
+
 # [0.2.0-alpha.812](https://github.com/mittwald/flow/compare/0.2.0-alpha.811...0.2.0-alpha.812) (2026-04-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

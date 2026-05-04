@@ -11,5 +11,6 @@
   .label {
     display: block;
     padding-block: var(--accordion--padding-y);
+    padding-inline: var(--accordion--padding-x);
   }
 }
