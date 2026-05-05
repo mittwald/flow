@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix render-loop edge-case during suspense ([c8f771c](https://github.com/mittwald/flow/commit/c8f771c1b1887760c4b9a2fc0d9814ab740a124a))
+
 # [0.2.0-alpha.818](https://github.com/mittwald/flow/compare/0.2.0-alpha.817...0.2.0-alpha.818) (2026-05-05)
 
 ### Bug Fixes
