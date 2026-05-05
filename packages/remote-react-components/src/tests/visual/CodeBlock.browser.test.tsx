@@ -79,11 +79,15 @@ test.each(testEnvironments)(
 
     const scroller = container.querySelector(".cm-scroller");
 
-    if (!scroller) throw new Error("cm-scroller not found");
+    if (!(scroller instanceof HTMLElement)) {
+      throw new Error("cm-scroller not found or not HTMLElement");
+    }
 
-    scroller.scrollTop = 80;
-    scroller.scrollLeft = 120;
+    scroller.style.overflowX = "scroll";
 
+    scroller.dispatchEvent(new MouseEvent("mouseenter", { bubbles: true }));
+
+    scroller.scrollLeft = 300;
     scroller.dispatchEvent(new Event("scroll"));
 
     await new Promise((r) => setTimeout(r, 100));
