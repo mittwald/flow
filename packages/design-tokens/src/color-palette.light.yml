@@ -351,3 +351,8 @@ color:
       26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
       55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
       100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+
+  background-gradient:
+    value:
+      "linear-gradient( 180deg, rgba(244, 248, 252, 1) 20%, rgba(208, 214, 243,
+      1) 100% )"

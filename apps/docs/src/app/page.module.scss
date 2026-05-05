@@ -6,6 +6,10 @@
   max-width: 100%;
 }
 
+.top {
+  padding-bottom: 88px !important;
+}
+
 .logo {
   width: 300px;
   height: 100px;
@@ -16,12 +20,19 @@
   background-color: var(--dark--color--800) !important;
   background-position-x: right;
   padding: 0 !important;
+
+  :global(.flow--column-layout--column-layout-container),
+  :global(.flow--column-layout) {
+    height: 100%;
+  }
 }
 
 .darkModeContent {
+  height: 100%;
   border-radius: var(--layout-card--corner-radius);
   padding: var(--layout-card--padding);
   padding-right: 64px;
+  width: max(80%, 300px);
   background: linear-gradient(
     to left,
     rgba(0, 0, 0, 0) 0%,
@@ -42,6 +53,19 @@
   :global(.flow--column-layout),
   img {
     height: 100%;
+  }
+
+  :global(.flow--column-layout--column-layout-container) {
+    @container (max-width: 550px) {
+      :global(.flow--column-layout) {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+
+      :global(.flow--section) {
+        width: 100%;
+      }
+    }
   }
 
   img {

@@ -31,7 +31,7 @@ import {
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import {
   IconBooks,
   IconComponents,
@@ -58,11 +58,17 @@ const Home: FC = () => {
 
   return (
     <Flex direction="column" className={styles.wrapper}>
-      <Flex direction="column" align="center" padding="xl" gap="l">
+      <Flex
+        direction="column"
+        align="center"
+        padding="xl"
+        gap="l"
+        className={styles.top}
+      >
         <FlowLogo aria-hidden className={styles.logo} />
         <Heading level={1}>mStudio Design System</Heading>
       </Flex>
-      <ColumnLayout l={[1, 1]} gap="xl">
+      <ColumnLayout s={[1]} l={[1, 1]} gap="xl">
         <LayoutCard>
           <AccentBox backgroundColor="gradient" color="dark-static">
             <Section>
@@ -82,25 +88,23 @@ const Home: FC = () => {
             color="light-static"
             className={styles.darkModeTile}
           >
-            <ColumnLayout m={[2, 1]}>
-              <Section className={styles.darkModeContent}>
-                <Heading>
-                  Dark-Mode entdecken<Badge color="violet">Neu</Badge>
-                </Heading>
-                <Text>
-                  Capre Noctem - Nutze die Dunkelheit! Ab jetzt unterstützt
-                  unser Design System ein Light- und ein Dark-Theme.
-                </Text>
-                <Link href="/02-foundations/01-design/03-themes">
-                  Mehr erfahren
-                </Link>
-              </Section>
-            </ColumnLayout>
+            <Section className={styles.darkModeContent}>
+              <Heading>
+                Dark-Mode entdecken<Badge color="violet">Neu</Badge>
+              </Heading>
+              <Text>
+                Capre Noctem - Nutze die Dunkelheit! Ab jetzt unterstützt unser
+                Design System ein Light- und ein Dark-Theme.
+              </Text>
+              <Link href="/02-foundations/01-design/03-themes">
+                Mehr erfahren
+              </Link>
+            </Section>
           </AccentBox>
         </LayoutCard>
       </ColumnLayout>
       <LayoutCard className={styles.codeTile}>
-        <ColumnLayout l={[1, 1]} gap="xl">
+        <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
           <Section>
             <Heading>Fokus auf Developer Experience</Heading>
             <Text>
@@ -133,7 +137,7 @@ const Home: FC = () => {
         </ColumnLayout>
       </LayoutCard>
 
-      <ColumnLayout l={[1, 1]} gap="xl">
+      <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
           <AccentBox
             backgroundColor="blue"
