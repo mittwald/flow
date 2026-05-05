@@ -7,16 +7,17 @@
     @include formControl.formControl();
 
     position: relative;
-    padding-left: unset;
-    padding-right: unset;
+    padding: unset;
     order: 2;
 
     --editor-padding: calc(
       var(--form-control--padding-y) - var(--form-control--border-width)
     );
+    --editor-line-height: calc(
+      var(--font-size-text--default) * var(--line-height--default)
+    );
 
-    // 28px = height of one editor line
-    min-height: calc(var(--editor-padding) * 2 + 28px);
+    min-height: calc(var(--editor-padding) * 2 + var(--editor-line-height));
 
     &.readonly {
       border-color: var(--form-control--border-color--default);
@@ -43,6 +44,10 @@
 
       & :global(.cm-panels) {
         display: none;
+      }
+
+      & :global(.cm-content) {
+        padding-block: var(--form-control--padding-y);
       }
     }
   }
