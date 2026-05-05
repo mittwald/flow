@@ -26,7 +26,6 @@ import {
         </Text>
       </Flex>
     </AccentBox>
-
     <AccentBox backgroundColor="blue">
       <Flex direction="column" gap="xs" align="center">
         <BigNumber>
