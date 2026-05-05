@@ -13,7 +13,7 @@ import ScrollToHash from "@/app/_components/ScrollToHash";
 import Footer from "@/app/_components/layout/Footer";
 import { ThemeProvider } from "next-themes";
 import { NotificationProvider } from "@mittwald/flow-react-components";
-import bg from "../../public/assets/bg.png";
+import bg from "../../public/assets/bg.svg";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
