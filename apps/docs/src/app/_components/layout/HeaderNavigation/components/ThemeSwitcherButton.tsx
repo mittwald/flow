@@ -30,7 +30,14 @@ export const ThemeSwitcherButton = () => {
         : "Zum hellen Farbmodus wechseln, System-Farbmodus aktiv";
 
   return (
-    <Button onPress={toggleTheme} aria-label={ariaLabel}>
+    <Button
+      onPress={toggleTheme}
+      aria-label={ariaLabel}
+      variant="plain"
+      color="secondary"
+      slot="primary"
+      style={{ flexGrow: 0, width: "auto" }}
+    >
       <Icon>{icon}</Icon>
     </Button>
   );

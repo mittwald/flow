@@ -31,7 +31,7 @@
     "fumadocs-mdx": "^14.2.9",
     "humanize-string": "^3.1.0",
     "luxon": "^3.7.2",
-    "next": "~16.1.6",
+    "next": "16.2.3",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "parse-es-import": "^0.6.0",
