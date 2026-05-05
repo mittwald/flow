@@ -1,48 +1,80 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
+import React from "react";
+import {
+  alphaColors,
+  isAlphaColor,
+} from "@mittwald/flow-react-components/internal";
+
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
-  "Text (%s)",
-  async ({ testScreenshot, render, components: { Text, Flex, AccentBox } }) => {
+  "Text colors (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Text, Flex, AccentBox, Wrap },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        {colors.map((color) => (
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
+              <Text color={color}>
+                Lorem ipsum <strong>dolor sit</strong> amet consectetur
+                <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel
+                voluptas, ullam aliquid fugit.
+              </Text>
+            </AccentBox>
+          </Wrap>
+        ))}
+      </Flex>,
+    );
+
+    await testScreenshot("Text colors");
+  },
+);
+
+test.each(testEnvironments)(
+  "Text edge cases (%s)",
+  async ({ testScreenshot, render, components: { Text, Flex, IconStar } }) => {
     await render(
       <Flex direction="column" gap="m">
         <Text>
-          Lorem ipsum <strong>dolor sit</strong> amet consectetur
-          <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel voluptas,
-          ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi
-          blanditiis vitae
-          <br />
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text wordBreak="break-word">
+          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+        </Text>
+        <Text>
           <small>laborum ea tempore, dolore voluptas.</small>
           <ul>
-            <li>Item</li>
             <li>Item</li>
             <li>Item</li>
           </ul>
           <ol>
             <li>Item</li>
             <li>Item</li>
-            <li>Item</li>
           </ol>
         </Text>
-        <Text color="dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
+        <Text>
+          <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Text>
-        <AccentBox>
-          <Text color="light">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
-          </Text>
-        </AccentBox>
+        <Text>
+          <small>
+            <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing
+            elit.
+          </small>
+        </Text>
         <Text noLigatures>5x4</Text>
         <Text>5x4</Text>
       </Flex>,
     );
 
-    await testScreenshot("Text");
+    await testScreenshot("Text edge cases");
   },
 );
