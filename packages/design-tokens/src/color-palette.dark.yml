@@ -1,0 +1,357 @@
+color:
+  gray:
+    100:
+      value: "#1B1F24"
+    200:
+      value: "#292F37"
+    300:
+      value: "#3A434E"
+    400:
+      value: "#5E6C7A"
+    500:
+      value: "#8FA1B4"
+    600:
+      value: "#B7C9DB"
+    700:
+      value: "#DCE9F7"
+    800:
+      value: "#E5EFF8"
+    900:
+      value: "#F4F8FC"
+    1000:
+      value: "#FFFFFF"
+    1100:
+      value: "#FFFFFF"
+    1200:
+      value: "#FFFFFF"
+
+  hosting-blue:
+    100:
+      value: "#00205C"
+    200:
+      value: "#002A7B"
+    300:
+      value: "#003FB8"
+    400:
+      value: "#0054F5"
+    500:
+      value: "#1A68FF"
+    600:
+      value: "#3D80FF"
+    700:
+      value: "#6197FF"
+    800:
+      value: "#85AFFF"
+    900:
+      value: "#ABC6FF"
+    1000:
+      value: "#E0EBFF"
+    1100:
+      value: "#F0F5FF"
+
+  amaranth-red:
+    100:
+      value: "#540B1B"
+    200:
+      value: "#710F24"
+    300:
+      value: "#AB1737"
+    400:
+      value: "#E1244C"
+    500:
+      value: "#E54366"
+    600:
+      value: "#EA637F"
+    700:
+      value: "#EE8299"
+    800:
+      value: "#F2A2B3"
+    900:
+      value: "#F7C1CC"
+    1000:
+      value: "#FBE0E6"
+    1100:
+      value: "#FDF0F3"
+
+  royal-orange:
+    100:
+      value: "#763200"
+    200:
+      value: "#8F3D00"
+    300:
+      value: "#C25200"
+    400:
+      value: "#F56800"
+    500:
+      value: "#FF8225"
+    600:
+      value: "#FF9343"
+    700:
+      value: "#FFA562"
+    800:
+      value: "#FFC89F"
+    900:
+      value: "#FFD9BD"
+    1000:
+      value: "#FFEBDC"
+    1100:
+      value: "#FFF4EB"
+
+  espelkamp-green:
+    100:
+      value: "#00291C"
+    200:
+      value: "#003B29"
+    300:
+      value: "#005F42"
+    400:
+      value: "#00825B"
+    500:
+      value: "#00A673"
+    600:
+      value: "#00DE9A"
+    700:
+      value: "#17FFB8"
+    800:
+      value: "#4FFFC9"
+    900:
+      value: "#87FFDA"
+    1000:
+      value: "#C0FFEB"
+    1100:
+      value: "#DCFFF4"
+
+  soft-contrast-violet:
+    100:
+      value: "#302a6f"
+    200:
+      value: "#483b9f"
+    300:
+      value: "#5d4abf"
+    400:
+      value: "#715DEE"
+    500:
+      value: "#8574F0"
+    600:
+      value: "#998BF3"
+    700:
+      value: "#AEA2F5"
+    800:
+      value: "#C2B9F8"
+    900:
+      value: "#D6D0FA"
+    1000:
+      value: "#EAE7FD"
+    1100:
+      value: "#F4F3FE"
+
+  mittwald-navy:
+    100:
+      value: "#0E142E"
+    200:
+      value: "#131B3D"
+    300:
+      value: "#1D285C"
+    400:
+      value: "#27367B"
+    500:
+      value: "#32459E"
+    600:
+      value: "#3D55C1"
+    700:
+      value: "#5F73CC"
+    800:
+      value: "#8291D7"
+    900:
+      value: "#A5B0E2"
+    1000:
+      value: "#C8CFEE"
+    1100:
+      value: "#E4E7F6"
+
+  bright-lilac:
+    100:
+      value: "#470062"
+    200:
+      value: "#5f0083"
+    300:
+      value: "#9000c5"
+    400:
+      value: "#bc08ff"
+    500:
+      value: "#ce4bff"
+    600:
+      value: "#e08dff"
+    700:
+      value: "#e6a1ff"
+    800:
+      value: "#ebb6ff"
+    900:
+      value: "#f1caff"
+    1000:
+      value: "#f6dfff"
+    1100:
+      value: "#f9e9ff"
+
+  super-teal:
+    100:
+      value: "#00424a"
+    200:
+      value: "#004f59"
+    300:
+      value: "#006b78"
+    400:
+      value: "#008696"
+    500:
+      value: "#00a1b5"
+    600:
+      value: "#00d3ed"
+    700:
+      value: "#26e7ff"
+    800:
+      value: "#5eedff"
+    900:
+      value: "#96f3ff"
+    1000:
+      value: "#cffaff"
+    1100:
+      value: "#ebfdff"
+
+  categorical:
+    sea-green:
+      value: "#0fb5ae"
+    palatinate-blue:
+      value: "#4046ca"
+    tangerine:
+      value: "#f68511"
+    magenta:
+      value: "#de3d82"
+    tropical-indigo:
+      value: "#7e84fa"
+    malachite:
+      value: "#72e06a"
+    azure:
+      value: "#147af3"
+    violet:
+      value: "#7326d3"
+    yellow:
+      value: "#e8c600"
+    alloy-orange:
+      value: "#cb5d00"
+    green:
+      value: "#008f5d"
+    lime:
+      value: "#bce931"
+
+  transparent:
+    value: transparent
+
+  code-syntax:
+    keyword:
+      value: "#ff7b72"
+    type:
+      value: "#d2a8ff"
+    variable:
+      value: "#79c0ff"
+    property:
+      value: "#d2a8ff"
+    string:
+      value: "#a5d6ff"
+    number:
+      value: "#79c0ff"
+    comment:
+      value: "#a0a7b0"
+    function:
+      value: "#d2a8ff"
+    operator:
+      value: "#ff7b72"
+    invalid:
+      value: "#f97583"
+
+  black-alpha:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"
+
+  white-alpha:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+  static-black-alpha:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+  static-white-alpha:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"
+
+  gradient:
+    value:
+      "radial-gradient(circle at 27.74% 38.09%,#d8e9f8,transparent
+      60%),radial-gradient(circle at 63.98% 99.4%,#e4b8ff,transparent
+      37%),radial-gradient(circle at 79.7% 64.93%,#d8e9f8,transparent
+      52%),radial-gradient(circle at 10.9% 91.41%,#d8e9f8,transparent
+      56%),radial-gradient(circle at 3.68% 3.26%,#0056ff,transparent
+      31%),radial-gradient(circle at 99.62% 17.78%,#48c7d8,transparent
+      26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
+      55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
+      100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+
+  background-gradient:
+    value:
+      "linear-gradient(180deg,rgba(15, 15, 16, 1) 0%, rgba(35, 41, 64, 1) 80%)"

@@ -15,8 +15,8 @@ import { alphaColors } from "@/lib/types/props";
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
   component: IllustratedMessage,
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <IllustratedMessage {...props}>
         <IconStar />
         <Heading>{dummyText.short}</Heading>
@@ -27,10 +27,10 @@ const meta: Meta<typeof IllustratedMessage> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "danger", "unavailable", ...alphaColors],
+      options: ["default", "danger", "unavailable", ...alphaColors],
     },
   },
-  args: { color: "primary" },
+  args: { color: "default" },
 };
 export default meta;
 

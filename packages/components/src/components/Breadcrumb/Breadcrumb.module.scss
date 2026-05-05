@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     min-width: 0;
+    color: var(--breadcrumb--color--default);
 
     &:last-child {
       .icon {
@@ -42,6 +43,18 @@
     &[data-disabled="true"] {
       .link {
         cursor: unset;
+      }
+    }
+
+    &:not([data-disabled="true"]) {
+      .link {
+        &:hover {
+          color: var(--breadcrumb--color--hover);
+        }
+
+        &[data-pressed] {
+          color: var(--breadcrumb--color--pressed);
+        }
       }
     }
   }
@@ -81,7 +94,6 @@
     }
   }
 
-  @include color(primary);
   @include color(dark);
   @include color(light);
   @include color(dark-static);

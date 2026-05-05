@@ -8,13 +8,12 @@
   /* Elements */
 
   :where(.icon) {
-    color: var(--illustrated-message--info-icon-color);
-    margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
+    color: var(--illustrated-message--content-color);
   }
 
   .text,
   .heading {
-    max-width: var(--text--max-width);
+    max-width: var(--max-text-width);
     text-align: center;
   }
 
@@ -40,7 +39,6 @@
     }
   }
 
-  @include color(primary);
   @include color(danger);
   @include color(unavailable);
   @include color(dark);

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import React from "react";
-import humanizeString from "humanize-string";
+import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 
 interface Props {
   children: string;
@@ -9,5 +9,5 @@ interface Props {
 export const GroupText: FC<Props> = (props) => {
   const { children } = props;
 
-  return <>{humanizeString(children.replaceAll(/^[0-9]+/g, ""))}</>;
+  return <>{extractTextFromPath(children)}</>;
 };

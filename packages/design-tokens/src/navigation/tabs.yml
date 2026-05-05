@@ -11,7 +11,7 @@ tabs:
     selected:
       value: "{neutral.color.100}"
   color:
-    value: "{neutral-soft-content-color.default}"
+    value: "{neutral-soft-content-color}"
   disabled-color:
     value: "{disabled-soft-content-color}"
   font-weight:

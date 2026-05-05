@@ -15,13 +15,13 @@ import { Text } from "@/components/Text";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>, PropsWithClassName {
-  /** The color of the header navigation. @default "primary" */
-  color?: "primary" | AlphaColor;
+  /** The color of the header navigation. @default "default" */
+  color?: "default" | AlphaColor;
 }
 
 /** @flr-generate all */
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, color = "primary", ...rest } = props;
+  const { children, className, color = "default", ...rest } = props;
 
   const rootClassName = clsx(
     styles.headerNavigation,
@@ -40,7 +40,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      color,
+      color: isAlphaColor(color) ? color : "secondary",
       variant: "plain",
       wrapWith: <li />,
     },

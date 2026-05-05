@@ -40,8 +40,8 @@
 
   small {
     .icon {
-      width: var(--line-height--s);
-      height: var(--line-height--s);
+      width: calc(var(--font-size-text--s) * var(--line-height));
+      height: calc(var(--font-size-text--s) * var(--line-height));
     }
   }
 

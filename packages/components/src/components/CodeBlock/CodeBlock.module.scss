@@ -20,6 +20,10 @@
       }
     }
   }
+
+  &.codeBlock div:global(.flow--code-editor--code-mirror) {
+    border-color: var(--code-block--border-color);
+  }
 }
 
 .buttonContainer {

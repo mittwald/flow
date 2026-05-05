@@ -53,7 +53,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -79,21 +79,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <SegmentedControl>
+        <Section>
+          <Field name="field">
+            <SegmentedControl>
+              <Label>Role</Label>
+              <Segment value="admin">Admin</Segment>
+              <Segment value="member">Member</Segment>
+              <Segment value="accountant">Accountant</Segment>
+            </SegmentedControl>
+          </Field>
+          <SegmentedControl isInvalid>
             <Label>Role</Label>
             <Segment value="admin">Admin</Segment>
             <Segment value="member">Member</Segment>
             <Segment value="accountant">Accountant</Segment>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </SegmentedControl>
-        </Field>
-        <SegmentedControl isInvalid>
-          <Label>Role</Label>
-          <Segment value="admin">Admin</Segment>
-          <Segment value="member">Member</Segment>
-          <Segment value="accountant">Accountant</Segment>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </SegmentedControl>
+        </Section>
       </Form>
     );
   },
@@ -104,7 +106,7 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <SegmentedControl>
             <Label>Role</Label>
             <Segment value="admin">Admin</Segment>
@@ -113,22 +115,32 @@ export const WithFocus: Story = {
           </SegmentedControl>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

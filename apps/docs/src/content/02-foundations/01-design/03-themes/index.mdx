@@ -1,0 +1,50 @@
+---
+title: Themes
+---
+
+Themes definieren die visuelle Gestaltung einer Anwendung, ohne die zugrunde liegende Struktur oder Semantik zu verändern.
+
+Aktuell unterstützt Flow zwei Themes:
+* Light (Default)
+* Dark
+
+Beide basieren auf denselben Design Tokens und Komponenten. Ein Theme ist damit kein separater Modus mit eigener Logik, sondern eine alternative Darstellung derselben UI.
+
+# Best Practices
+
+Flow stellt die Grundlage für Themes bereit, übernimmt jedoch nicht automatisch das Theme-Handling in der Anwendung.
+
+Das Design System stellt bereit:
+* Design Tokens für Light und Dark
+* Komponenten, die diese Tokens verwenden
+
+Die Anwendung ist verantwortlich für:
+* Festlegen des aktiven Themes
+* Umschalten zwischen Themes
+* Berücksichtigung der System-Einstellung
+* Speicherung der Nutzerpräferenz
+
+Bei der Umsetzung sollte besonders auf Stellen geachtet werden, an denen nicht ausschließlich Tokens verwendet werden, zum Beispiel:
+* Custom Farben und Farbverläufe 
+* Bilder, Illustrationen oder Media Assets
+
+Diese Bereiche reagieren nicht automatisch auf Theme-Wechsel und müssen daher gezielt so gestaltet werden, dass sie in beiden Themes funktionieren.
+
+// Verweise auf Static Light und Static Dark?
+
+# Technische Implementierung 
+
+// Help wanted
+
+## System-Einstellung (Default)
+
+Standardmäßig sollte die Systemeinstellung des Users berücksichtigt werden. Viele User legen auf Betriebssystemebene fest, ob sie Light- oder Darkmode bevorzugen, entweder systemweit oder für einzelne Anwendungen  zum Beispiel ihren Browser.
+Diese Präferenz kann über `prefers-color-scheme` ausgelesen werden und sollte als Ausgangspunkt dienen.
+
+// Code-Beispiel wie man die Systemeinstellungen ausliest?
+
+## Wechseln zwischen den Themes (Override)
+
+Wenn beide Themes in einer Anwendung angeboten werden sollten die User die Möglichkeit haben Aktiv ein Theme auszuwählen, diese auswahl überschreibt die System-Einstellungen und sollte persistent gespeichert werden, damit sie beim nächsten Besuch erhalten bleibt.
+
+// Code-Beispiel vom Speichern?

@@ -1,6 +1,6 @@
 file-drop-zone:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   padding:
     value: "{size-px.m}"
   content-color:

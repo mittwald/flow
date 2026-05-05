@@ -1,6 +1,5 @@
 import { type ComponentType, type FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 import { AreaDot } from "../AreaDot";
 import type { CategoricalWithCustomColor } from "@/lib/tokens/CategoricalColors";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";
@@ -10,6 +9,7 @@ import {
   type DataKeyWithLabel,
   isDataKeyWithLabel,
 } from "@/components/CartesianChart/types";
+import { useDesignTokens } from "../../../../lib/theming";
 
 type AreaBaseProps = Pick<
   Recharts.AreaProps,
@@ -49,6 +49,8 @@ export const Area: FC<AreaProps> = (props) => {
     fillOpacity = 1,
     ...rest
   } = props;
+
+  const tokens = useDesignTokens();
 
   const color = isCategoricalColor(colorFromProps)
     ? `var(--color--categorical--${colorFromProps})`

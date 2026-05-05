@@ -4,8 +4,9 @@ import {
   alphaColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", ...alphaColors] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "Breadcrumb colors (%s)",
@@ -25,14 +26,14 @@ test.each(testEnvironments)(
             >
               <Flex direction="column" gap="m">
                 <Breadcrumb color={color}>
-                  <Link>Link 1</Link>
-                  <Link>Link 2</Link>
-                  <Link>Link 3</Link>
+                  <Link>{firstLetterToUppercase(color)}</Link>
+                  <Link>Lorem</Link>
+                  <Link>Ipsum</Link>
                 </Breadcrumb>
                 <Breadcrumb color={color} size="s">
-                  <Link>Link 1</Link>
-                  <Link>Link 2</Link>
-                  <Link>Link 3</Link>
+                  <Link>Small</Link>
+                  <Link>Lorem</Link>
+                  <Link>Ipsum</Link>
                 </Breadcrumb>
               </Flex>
             </AccentBox>

@@ -1,0 +1,3 @@
+.button {
+  border-radius: var(--button--corner-radius) !important;
+}

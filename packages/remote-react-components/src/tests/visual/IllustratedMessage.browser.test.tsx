@@ -5,8 +5,9 @@ import {
   alphaColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", "danger", "unavailable", ...alphaColors] as const;
+const colors = ["default", "danger", "unavailable", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "IllustratedMessage content (%s)",
@@ -73,7 +74,7 @@ test.each(testEnvironments)(
             >
               <IllustratedMessage color={color}>
                 <IconStar />
-                <Heading>Heading</Heading>
+                <Heading>{firstLetterToUppercase(color)}</Heading>
                 <Text>Text</Text>
                 <Button>Button</Button>
               </IllustratedMessage>

@@ -4,7 +4,9 @@
     gap: var(--align--avatar-text--spacing);
     height: fit-content;
 
-    --first-two-lines-height: calc(var(--line-height--s) * 2);
+    --first-two-lines-height: calc(
+      (var(--font-size-text--s) * var(--line-height)) * 2
+    );
 
     min-height: var(--first-two-lines-height);
 

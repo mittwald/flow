@@ -22,7 +22,7 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
         data-component="generatePassword"
         isDisabled={isDisabled}
         variant="plain"
-        color="dark"
+        color="secondary"
       >
         {translate.format("button.generate")}
       </Button>

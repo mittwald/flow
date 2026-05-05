@@ -1,6 +1,4 @@
 light-box:
-  overlay-background-color:
-    value: "{dark.color.600}"
   max-width:
     value: "calc(100dvw - {size-px.l})"
   max-height:

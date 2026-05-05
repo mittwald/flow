@@ -2,21 +2,21 @@ accent-box:
   background-color-neutral:
     value: "{neutral.color.300}"
   background-color-blue:
-    value: "{color.hosting-blue.200}"
+    value: "{color.hosting-blue.300}"
   background-color-teal:
-    value: "{color.super-teal.200}"
+    value: "{color.super-teal.300}"
   background-color-lilac:
-    value: "{color.bright-lilac.200}"
+    value: "{color.bright-lilac.300}"
   background-color-violet:
-    value: "{color.soft-contrast-violet.200}"
+    value: "{color.soft-contrast-violet.300}"
   background-color-green:
-    value: "{color.espelkamp-green.200}"
+    value: "{color.espelkamp-green.300}"
   background-color-navy:
-    value: "{color.mittwald-navy.200}"
+    value: "{color.mittwald-navy.300}"
   background-color-gradient:
     value: "{color.gradient}"
 
   padding:
     value: "{size-px.m}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"

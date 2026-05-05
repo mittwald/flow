@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 import type {
   ChartDataValue,
   DataKey,
   DataKeyValue,
 } from "@/components/CartesianChart/types";
+import { useDesignTokens } from "../../../../lib/theming";
 
 export type YAxisProps<
   TData extends ChartDataValue = ChartDataValue,
@@ -32,6 +32,8 @@ export type YAxisProps<
 export const YAxis: FC<YAxisProps> = (props) => {
   const { domain, ...rest } = props;
 
+  const tokens = useDesignTokens();
+
   return (
     <Recharts.YAxis
       {...rest}
@@ -39,7 +41,7 @@ export const YAxis: FC<YAxisProps> = (props) => {
       domain={domain}
       fontSize={tokens.axis["font-size"].value}
       tick={{
-        fill: tokens.axis["text-color"].value,
+        fill: tokens.axis["color"].value,
       }}
       tickMargin={parseInt(tokens.axis.spacing.value)}
       tickSize={parseInt(tokens.axis["tick-size"].value)}

@@ -1,13 +1,9 @@
 "use client";
 import type { FC } from "react";
-import React from "react";
 import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { MdxFile } from "@/lib/mdx/MdxFile";
-import { groupBy } from "remeda";
-import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
-import { usePathname } from "next/navigation";
-import { Link } from "@mittwald/flow-react-components";
+import { ThemeSwitcherButton } from "./components/ThemeSwitcherButton";
+import Groups from "@/app/_components/layout/Groups";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -15,33 +11,13 @@ interface Props {
 }
 
 const HeaderNavigation: FC<Props> = (props) => {
-  const docs = props.docs.map(MdxFile.deserialize);
-
-  const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
-
-  const currentPathname = usePathname();
-
-  const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
-    const pathname = mdxFiles[0].pathname;
-    const isComponent = pathname.includes("04-components");
-
-    return (
-      <Link
-        href={`${pathname}${isComponent ? "/overview" : ""}`}
-        key={pathname}
-        aria-current={currentPathname.includes(group) ? "page" : undefined}
-      >
-        <GroupText>{group}</GroupText>
-      </Link>
-    );
-  });
-
   return (
     <HeaderNavigationComponent
       className={props.className}
       aria-label="Header Navigation"
     >
-      {navigationItems}
+      <Groups docs={props.docs} />
+      <ThemeSwitcherButton />
     </HeaderNavigationComponent>
   );
 };

@@ -1,7 +1,7 @@
 text:
   color:
     default:
-      value: "{neutral.color.1000}"
+      value: "{neutral.color.1100}"
     light:
       value: "{light-plain-content-color}"
     dark:
@@ -12,8 +12,6 @@ text:
       value: "{dark-static-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
-  max-width:
-    value: "780px"
 
   blockquote-border-width:
     value: "{border-width.300}"

@@ -12,6 +12,9 @@ import { Button } from "@/components/Button";
 const meta: Meta<typeof ContextualHelp> = {
   title: "Overlays/ContextualHelp",
   component: ContextualHelp,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <ContextualHelpTrigger>
       <Button />
