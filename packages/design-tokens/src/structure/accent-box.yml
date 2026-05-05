@@ -2,7 +2,7 @@ accent-box:
   background-color-neutral:
     value: "{neutral.color.300}"
   background-color-blue:
-    value: "{color.hosting-blue.200}"
+    value: "{color.hosting-blue.100}"
   background-color-teal:
     value: "{color.super-teal.200}"
   background-color-lilac:

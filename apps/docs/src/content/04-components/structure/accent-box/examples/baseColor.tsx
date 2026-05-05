@@ -10,7 +10,7 @@ import {
 
 <Section>
   <ColumnLayout>
-    <AccentBox>
+    <AccentBox backgroundColor="neutral">
       <Flex direction="column" gap="s" align="center">
         <BigNumber>
           <Text>250 ms</Text>
@@ -26,7 +26,6 @@ import {
         </Text>
       </Flex>
     </AccentBox>
-
     <AccentBox backgroundColor="blue">
       <Flex direction="column" gap="xs" align="center">
         <BigNumber>
