@@ -1,6 +1,7 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import {
   alphaColors,
+  isAlphaColor,
   statusTypes,
 } from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
@@ -19,23 +20,31 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, Heading, Text, IconStar, Color },
+    components: { Flex, Heading, Text, IconStar, Color, Wrap, AccentBox },
   }) => {
     await render(
-      <Flex direction="column" gap="m">
+      <Flex direction="column" gap="s">
         {colors.map((color) => (
-          <Flex gap="s" key={color}>
-            <Text>
-              <Color color={color}>Text</Color>
-            </Text>
-            <Heading>
-              <Color color={color}>Heading</Color>
-            </Heading>
+          <Wrap if={isAlphaColor(color)} key={color}>
+            <AccentBox
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
+              <Flex gap="s" key={color}>
+                <Text>
+                  <Color color={color}>Text</Color>
+                </Text>
+                <Heading>
+                  <Color color={color}>Heading</Color>
+                </Heading>
 
-            <Color color={color}>
-              <IconStar />
-            </Color>
-          </Flex>
+                <Color color={color}>
+                  <IconStar />
+                </Color>
+              </Flex>
+            </AccentBox>
+          </Wrap>
         ))}
       </Flex>,
     );
