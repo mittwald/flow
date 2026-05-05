@@ -14,12 +14,13 @@ export const TunnelProvider: FC<TunnelProviderProps> = (props) => {
   const { children, id } = props;
 
   const parentContext = useContext(tunnelContext);
+  const state = TunnelState.useNew(id);
 
   return (
     <tunnelContext.Provider
       value={{
-        state: TunnelState.useNew(id),
-        parentContext: parentContext,
+        state,
+        parentContext,
       }}
     >
       {children}

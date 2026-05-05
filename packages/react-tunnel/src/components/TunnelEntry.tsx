@@ -26,7 +26,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.prepareChildren(id, entryId, index, children);
+    tunnel.setRenderPhaseChildren(id, entryId, index, children);
   }
 
   useEffect(() => {
