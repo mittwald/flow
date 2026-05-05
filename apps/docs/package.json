@@ -11,7 +11,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "^3.12.1",
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
@@ -24,20 +24,20 @@
     "clsx": "^2.1.1",
     "cron-parser": "^5.5.0",
     "cron-time-generator": "^2.0.3",
-    "cronstrue": "^3.9.0",
+    "cronstrue": "^3.14.0",
     "dot-prop": "^10.1.0",
     "fs-jetpack": "^5.1.0",
     "fumadocs-mdx": "^14.2.6",
     "humanize-string": "^3.1.0",
     "luxon": "^3.7.2",
-    "next": "~16.1.6",
+    "next": "^16.2.3",
     "next-mdx-remote": "^5.0.0",
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.0",
+    "react": "^19.2.4",
     "react-children-utilities": "^2.10.0",
-    "react-dom": "^19.2.0",
+    "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.1",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
@@ -45,7 +45,7 @@
     "sass": "^1.97.3",
     "slugify": "^1.6.6",
     "tsx": "^4.21.0",
-    "webpack": "^5.104.1"
+    "webpack": "^5.105.4"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",

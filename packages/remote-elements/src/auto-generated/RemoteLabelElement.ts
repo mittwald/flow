@@ -108,6 +108,7 @@ export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProp
       property: {},
       radioGroup: {},
       rel: {},
+      render: {},
       resource: {},
       results: {},
       rev: {},

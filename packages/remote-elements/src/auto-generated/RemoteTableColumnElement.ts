@@ -23,6 +23,7 @@ export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColum
       lang: {},
       maxWidth: {},
       minWidth: {},
+      render: {},
       textValue: {},
       translate: {},
       width: {},
