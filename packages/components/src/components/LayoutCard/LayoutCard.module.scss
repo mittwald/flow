@@ -26,6 +26,7 @@
 
   &:has(> .accentBox:only-child) {
     padding: 0;
+    border: none;
 
     .accentBox {
       padding: var(--layout-card--padding);

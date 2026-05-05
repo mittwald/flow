@@ -132,6 +132,7 @@ const Home: FC = () => {
           </LiveProvider>
         </ColumnLayout>
       </LayoutCard>
+
       <ColumnLayout l={[1, 1]} gap="xl">
         <LayoutCard>
           <AccentBox
@@ -139,7 +140,7 @@ const Home: FC = () => {
             color="dark"
             className={styles.imageTile}
           >
-            <ColumnLayout s={[1, 1]}>
+            <ColumnLayout m={[1, 1]}>
               <Section>
                 <Heading>mittwald Developer Portal</Heading>
                 <Text>
@@ -160,11 +161,11 @@ const Home: FC = () => {
         </LayoutCard>
         <LayoutCard>
           <AccentBox
-            backgroundColor="lilac"
+            backgroundColor="violet"
             color="dark"
             className={styles.imageTile}
           >
-            <ColumnLayout s={[1, 1]}>
+            <ColumnLayout m={[1, 1]}>
               <Section>
                 <Heading>Baue mStudio Extensions</Heading>
                 <Text>

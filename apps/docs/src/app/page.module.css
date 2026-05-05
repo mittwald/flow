@@ -1,11 +1,14 @@
 .wrapper {
-  gap: 128px;
+  gap: 64px;
   padding-block: 128px;
+  width: 1500px;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .logo {
-  width: 200px;
-  height: 70px;
+  width: 300px;
+  height: 100px;
 }
 
 .darkModeTile {
@@ -39,7 +42,14 @@
   :global(.flow--column-layout),
   img {
     height: 100%;
+  }
+
+  img {
     border-radius: var(--corner-radius--m);
+    object-fit: cover;
+    min-height: 400px;
+    flex: 1;
+    min-width: 0;
   }
 
   :global(.flow--column-layout) {

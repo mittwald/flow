@@ -1,27 +1,16 @@
 .body {
   --header-height: 72px;
 
-  background-color: var(--neutral--color--200);
   isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 248, 252, 1) 20%,
+    rgba(208, 214, 243, 1) 100%
+  );
 
   * {
     box-sizing: border-box;
   }
-}
-
-.background {
-  background-position: -10vw 10vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: fixed;
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 10%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
-  mask-repeat: no-repeat;
-  mask-size: cover;
-  inset: 0;
 }
 
 .wrapper {

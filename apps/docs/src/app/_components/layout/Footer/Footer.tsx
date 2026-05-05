@@ -1,11 +1,5 @@
 "use client";
-import {
-  Flex,
-  Heading,
-  IconFeedback,
-  Link,
-  Text,
-} from "@mittwald/flow-react-components";
+import { Flex, Heading, Link, Text } from "@mittwald/flow-react-components";
 import React, { type FC } from "react";
 import styles from "./Footer.module.scss";
 import { DateTime } from "luxon";
@@ -81,23 +75,20 @@ const Footer: FC = () => {
           </Flex>
         </Flex>
 
-        <Flex className={styles.feedback} gap="xl">
-          <Flex elementType="section" direction="column" gap="s">
-            <Heading size="s">Hilf uns, Flow noch besser zu machen!</Heading>
-            <Text>
-              Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
-              Feedback? Dann teile es uns gerne auf GitHub mit.
-            </Text>
-            <Link
-              className={styles.feedbackLink}
-              color="dark"
-              href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
-              target="_blank"
-            >
-              Feedback zu Flow geben
-            </Link>
-          </Flex>
-          <IconFeedback size="l" className={styles.feedbackImage} />
+        <Flex elementType="section" direction="column" gap="s">
+          <Heading size="s">Hilf uns, Flow noch besser zu machen!</Heading>
+          <Text>
+            Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
+            Feedback? Dann teile es uns gerne auf GitHub mit.
+          </Text>
+          <Link
+            className={styles.feedbackLink}
+            color="dark"
+            href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
+            target="_blank"
+          >
+            Feedback zu Flow geben
+          </Link>
         </Flex>
       </Flex>
     </footer>

@@ -13,7 +13,6 @@ import ScrollToHash from "@/app/_components/ScrollToHash";
 import Footer from "@/app/_components/layout/Footer";
 import { ThemeProvider } from "next-themes";
 import { NotificationProvider } from "@mittwald/flow-react-components";
-import bg from "../../public/assets/bg.svg";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -27,10 +26,6 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   return (
     <html lang="de" suppressHydrationWarning>
       <body className={bodyClassName}>
-        <div
-          style={{ backgroundImage: `url(${bg.src})` }}
-          className={styles.background}
-        />
         <ThemeProvider attribute="data-flow-theme" disableTransitionOnChange>
           <RouterProvider>
             <ScrollToHash />
