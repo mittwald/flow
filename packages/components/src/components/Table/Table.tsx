@@ -15,7 +15,7 @@ export const Table: FC<TableProps> = (props) => {
 
   const rootClassName = clsx(
     styles.table,
-    styles[`vertical-align-${verticalAlign}`],
+    verticalAlign === "middle" && styles[`vertical-align-${verticalAlign}`],
     className,
   );
 

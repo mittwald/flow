@@ -21,7 +21,27 @@ import { useListMetadata } from "@/components/List/hooks/useListMetadata";
 export const TypedList = <T, TMeta = unknown>() =>
   List as unknown as ComponentType<ListProps<T, TMeta>>;
 
-export const typedList = <T, TMeta = unknown>() => ({
+interface TypedListReturn<T, TMeta> {
+  List: ReturnType<typeof TypedList<T, TMeta>>;
+  Filter: ReturnType<typeof TypedListFilter<T>>;
+  Search: ReturnType<typeof TypedListSearch<T>>;
+  Sorting: ReturnType<typeof TypedListSorting<T>>;
+  Item: ReturnType<typeof TypedListItem<T>>;
+  ItemView: typeof ListItemView;
+  TableHeader: typeof TableHeader<T>;
+  TableColumn: typeof TableColumn<T>;
+  TableBody: typeof TableBody<T>;
+  TableRow: typeof TableRow<T>;
+  TableCell: typeof TableCell<T>;
+  Table: typeof Table<T>;
+  StaticData: ReturnType<typeof TypedListStaticData<T>>;
+  LoaderAsync: ReturnType<typeof TypedListLoaderAsync<T>>;
+  LoaderHooks: ReturnType<typeof TypedListLoaderHooks<T>>;
+  LoaderAsyncResource: ReturnType<typeof TypedListLoaderAsyncResource<T>>;
+  useMetadata: () => ReturnType<typeof useListMetadata<TMeta>>;
+}
+
+export const typedList = <T, TMeta = unknown>(): TypedListReturn<T, TMeta> => ({
   List: TypedList<T, TMeta>(),
   Filter: TypedListFilter<T>(),
   Search: TypedListSearch<T>(),
