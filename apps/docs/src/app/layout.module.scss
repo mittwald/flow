@@ -1,16 +1,22 @@
 .body {
   --header-height: 72px;
 
+  background-color: var(--neutral--color--200);
   isolation: isolate;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.background {
+  position: fixed;
+  inset: 0;
   background: linear-gradient(
     180deg,
     rgba(244, 248, 252, 1) 20%,
     rgba(208, 214, 243, 1) 100%
   );
-
-  * {
-    box-sizing: border-box;
-  }
 }
 
 .wrapper {

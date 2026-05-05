@@ -26,6 +26,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   return (
     <html lang="de" suppressHydrationWarning>
       <body className={bodyClassName}>
+        <div className={styles.background} />
         <ThemeProvider attribute="data-flow-theme" disableTransitionOnChange>
           <RouterProvider>
             <ScrollToHash />
