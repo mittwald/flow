@@ -3,24 +3,23 @@ import React from "react";
 import styles from "@/app/layout.module.scss";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import {
+  ActionGroup,
   Button,
   Content,
   HeaderNavigation,
   Heading,
   IconMenu,
-  Link,
   Modal,
   ModalTrigger,
   Navigation,
   Section,
-  ActionGroup,
 } from "@mittwald/flow-react-components";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileHeaderNavigation from "@/app/_components/layout/MobileHeaderNavigation";
-import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { groupBy } from "remeda";
 import { usePathname } from "next/navigation";
 import { ThemeSwitcherButton } from "@/app/_components/layout/HeaderNavigation/components/ThemeSwitcherButton";
+import Groups from "@/app/_components/layout/Groups";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -35,20 +34,6 @@ export const MobileNavigation: FC<Props> = (props) => {
   const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
 
   const currentPathname = usePathname();
-
-  const mainItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
-    const pathname = mdxFiles[0].pathname;
-    const isComponent = pathname.includes("04-components");
-
-    return (
-      <Link
-        href={`${pathname}${isComponent ? "/overview" : ""}`}
-        key={pathname}
-      >
-        <GroupText>{group}</GroupText>
-      </Link>
-    );
-  });
 
   const currentGroup = Object.entries(navGroups).find(([group]) => {
     return currentPathname.includes(group);
@@ -65,7 +50,11 @@ export const MobileNavigation: FC<Props> = (props) => {
           <Heading>Menü</Heading>
           <Content>
             <Section>
-              {!currentGroup && <Navigation>{mainItems}</Navigation>}
+              {!currentGroup && (
+                <Navigation>
+                  <Groups docs={props.docs} />
+                </Navigation>
+              )}
               <MainNavigation docs={props.docs} mobileNavigation />
             </Section>
           </Content>

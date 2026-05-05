@@ -6,7 +6,6 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   IconChevronDown,
-  MenuItem,
   Text,
 } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
@@ -15,6 +14,7 @@ import { groupBy } from "remeda";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
 import styles from "./MobileHeaderNavigation.module.css";
+import Groups from "@/app/_components/layout/Groups";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -27,20 +27,6 @@ const MobileHeaderNavigation: FC<Props> = (props) => {
   const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
 
   const currentPathname = usePathname();
-
-  const menuItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
-    const pathname = mdxFiles[0].pathname;
-    const isComponent = pathname.includes("04-components");
-
-    return (
-      <MenuItem
-        href={`${pathname}${isComponent ? "/overview" : ""}`}
-        key={pathname}
-      >
-        <GroupText>{group}</GroupText>
-      </MenuItem>
-    );
-  });
 
   const currentGroup = Object.entries(navGroups).find(([group]) => {
     return currentPathname.includes(group);
@@ -58,7 +44,9 @@ const MobileHeaderNavigation: FC<Props> = (props) => {
         </Text>
         <IconChevronDown />
       </Button>
-      <ContextMenu>{menuItems}</ContextMenu>
+      <ContextMenu>
+        <Groups docs={props.docs} render="menuItem" />
+      </ContextMenu>
     </ContextMenuTrigger>
   );
 };
