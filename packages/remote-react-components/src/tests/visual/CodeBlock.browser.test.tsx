@@ -67,3 +67,27 @@ test.each(testEnvironments)(
     await testScreenshot("CodeBlock truncated - collapsed");
   },
 );
+
+test.each(testEnvironments)(
+  "CodeBlock scrolled (%s)",
+  async ({ testScreenshot, render, components: { CodeBlock } }) => {
+    const { container } = await render(
+      <CodeBlock
+        code={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae, laborum ea tempore, dolore voluptas.`}
+      />,
+    );
+
+    const scroller = container.querySelector(".cm-scroller");
+
+    if (!scroller) throw new Error("cm-scroller not found");
+
+    scroller.scrollTop = 80;
+    scroller.scrollLeft = 120;
+
+    scroller.dispatchEvent(new Event("scroll"));
+
+    await new Promise((r) => setTimeout(r, 100));
+
+    await testScreenshot("CodeBlock scrolled");
+  },
+);
