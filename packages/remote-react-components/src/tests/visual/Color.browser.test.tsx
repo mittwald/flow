@@ -1,4 +1,8 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import {
+  alphaColors,
+  statusTypes,
+} from "@mittwald/flow-react-components/internal";
 import { test } from "vitest";
 
 const colors = [
@@ -6,11 +10,8 @@ const colors = [
   "violet",
   "teal",
   "lilac",
-  "danger",
-  "warning",
-  "info",
-  "success",
-  "unavailable",
+  ...statusTypes,
+  ...alphaColors,
 ] as const;
 
 test.each(testEnvironments)(

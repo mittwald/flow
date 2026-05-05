@@ -1,10 +1,15 @@
 import { Icon } from "@mittwald/flow-react-components";
 import type { FC } from "react";
-import styles from "./Header.module.scss";
 
-export const FlowLogo: FC = () => {
+interface Props {
+  className?: string;
+}
+
+export const FlowLogo: FC<Props> = (props) => {
+  const { className } = props;
+
   return (
-    <Icon className={styles.logo}>
+    <Icon className={className}>
       <svg
         fill="currentColor"
         width="88px"

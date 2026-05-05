@@ -33,3 +33,19 @@
 .unavailable {
   color: var(--unavailable-plain-content-color);
 }
+
+.light {
+  color: var(--light-plain-content-color);
+}
+
+.dark {
+  color: var(--dark-plain-content-color);
+}
+
+.light-static {
+  color: var(--light-static-plain-content-color);
+}
+
+.dark-static {
+  color: var(--dark-static-plain-content-color);
+}

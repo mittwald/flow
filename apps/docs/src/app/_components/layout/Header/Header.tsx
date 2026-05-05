@@ -18,7 +18,7 @@ const Header: FC<Props> = (props) => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Link href="/" aria-label="Flow">
-          <FlowLogo />
+          <FlowLogo className={styles.logo} />
         </Link>
         <HeaderNavigation
           className={styles.headerNavigation}

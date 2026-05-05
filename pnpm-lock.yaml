@@ -144,8 +144,8 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(axios@1.15.0)(react@19.2.4)
       '@tabler/icons-react':
-        specifier: ^3.40.0
-        version: 3.40.0(react@19.2.4)
+        specifier: ^3.41.1
+        version: 3.41.1(react@19.2.4)
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1
@@ -4633,11 +4633,19 @@ packages:
     peerDependencies:
       react: ^19.2.0
 
+  '@tabler/icons-react@3.41.1':
+    resolution: {integrity: sha512-kUgweE+DJtAlMZVIns1FTDdcbpRVnkK7ZpUOXmoxy3JAF0rSHj0TcP4VHF14+gMJGnF+psH2Zt26BLT6owetBA==}
+    peerDependencies:
+      react: ^19.2.0
+
   '@tabler/icons@3.36.1':
     resolution: {integrity: sha512-f4Jg3Fof/Vru5ioix/UO4GX+sdDsF9wQo47FbtvG+utIYYVQ/QVAC0QYgcBbAjQGfbdOh2CCf0BgiFOF9Ixtjw==}
 
   '@tabler/icons@3.40.0':
     resolution: {integrity: sha512-V/Q4VgNPKubRTiLdmWjV/zscYcj5IIk+euicUtaVVqF6luSC9rDngYWgST5/yh3Mrg/mYUwRv1YVTk71Jp0twQ==}
+
+  '@tabler/icons@3.41.1':
+    resolution: {integrity: sha512-OaRnVbRmH2nHtFeg+RmMJ/7m2oBIF9XCJAUD5gQnMrpK9f05ydj8MZrAf3NZQqOXyxGN1UBL0D5IKLLEUfr74Q==}
 
   '@tanstack/react-table@8.21.3':
     resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
@@ -15127,9 +15135,16 @@ snapshots:
       '@tabler/icons': 3.40.0
       react: 19.2.4
 
+  '@tabler/icons-react@3.41.1(react@19.2.4)':
+    dependencies:
+      '@tabler/icons': 3.41.1
+      react: 19.2.4
+
   '@tabler/icons@3.36.1': {}
 
   '@tabler/icons@3.40.0': {}
+
+  '@tabler/icons@3.41.1': {}
 
   '@tanstack/react-table@8.21.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:

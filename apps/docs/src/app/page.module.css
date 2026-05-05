@@ -1,0 +1,54 @@
+.wrapper {
+  gap: 128px;
+  padding-block: 128px;
+}
+
+.logo {
+  width: 200px;
+  height: 70px;
+}
+
+.darkModeTile {
+  background-size: contain;
+  background-color: var(--dark--color--800) !important;
+  background-position-x: right;
+  padding: 0 !important;
+}
+
+.darkModeContent {
+  border-radius: var(--layout-card--corner-radius);
+  padding: var(--layout-card--padding);
+  padding-right: 64px;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 20%
+  );
+}
+
+.codeTile {
+  :global(.flow--column-layout) {
+    align-items: center;
+  }
+}
+
+.imageTile {
+  position: relative;
+
+  :global(.flow--column-layout--column-layout-container),
+  :global(.flow--column-layout),
+  img {
+    height: 100%;
+    border-radius: var(--corner-radius--m);
+  }
+
+  :global(.flow--column-layout) {
+    align-items: center;
+  }
+}
+
+.imageTileIcon {
+  position: absolute;
+  top: var(--size-px--xl);
+  right: var(--size-px--xl);
+}
