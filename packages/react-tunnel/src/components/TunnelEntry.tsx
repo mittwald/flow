@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { useId, useLayoutEffect } from "react";
+import { useEffect, useId, useRef } from "react";
 import { useTunnelState } from "@/context";
 
 export type TunnelEntryChildren =
@@ -23,11 +23,18 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const entryId = staticEntryId ?? usedId;
   const index = tunnel.useEntryIndex();
 
-  useLayoutEffect(() => {
+  const mounted = useRef(false);
+
+  if (!mounted.current) {
+    tunnel.prepareChildren(id, entryId, index, children);
+  }
+
+  useEffect(() => {
+    mounted.current = true;
     tunnel.setChildren(id, entryId, index, children);
   }, [children, id, entryId, index, providerId]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     /**
      * Delete children only on ID changes. NOT if children itself changes,
      * because this would delete the map entry with a subsequent re-insert. This

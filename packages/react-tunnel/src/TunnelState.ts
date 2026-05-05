@@ -29,6 +29,11 @@ export class TunnelState {
     },
   );
 
+  private readonly preparedChildren = new Map<
+    string,
+    Map<string, TunnelEntryState>
+  >();
+
   private nextIndex = 0;
 
   public constructor(id = defaultTunnelProviderId) {
@@ -51,8 +56,10 @@ export class TunnelState {
   }
 
   public useEntryIndex() {
+    const thisRef = useRef(this);
     const thisIndex = useRef<number | null>(null);
-    if (thisIndex.current === null) {
+    if (thisIndex.current === null || thisRef.current !== this) {
+      thisRef.current = this;
       thisIndex.current = this.nextIndex++;
     }
     return thisIndex.current;
@@ -76,21 +83,54 @@ export class TunnelState {
 
     tunnelEntries.set(entryId, entryState);
 
+    this.preparedChildren.get(tunnelId)?.delete(entryId);
     this.children.set(tunnelId, tunnelEntries);
   }
 
-  public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
-    const mapEntries = this.children.get(tunnelId);
+  public prepareChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    index: number,
+    children: TunnelChildren,
+  ): void {
+    const entryState: TunnelEntryState = {
+      id: entryId,
+      index,
+      children,
+    };
+
+    const tunnelEntries =
+      this.preparedChildren.get(tunnelId) ??
+      new Map<string, TunnelEntryState>();
+
+    tunnelEntries.set(entryId, entryState);
+
+    this.preparedChildren.set(tunnelId, tunnelEntries);
+  }
+
+  private deleteChildrenFromMap(
+    map: Map<string, Map<string, TunnelEntryState>>,
+    tunnelId: string,
+    entryId: string,
+  ): void {
+    const mapEntries = map.get(tunnelId);
     mapEntries?.delete(entryId);
     if (mapEntries?.size === 0) {
-      this.children.delete(tunnelId);
+      map.delete(tunnelId);
     }
+  }
+
+  public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
+    this.deleteChildrenFromMap(this.children, tunnelId, entryId);
+    this.deleteChildrenFromMap(this.preparedChildren, tunnelId, entryId);
   }
 
   public getEntries(
     tunnelId: string = defaultId,
   ): TunnelEntryState[] | undefined {
-    const tunnelEntries = this.children.get(tunnelId)?.values();
+    const tunnelEntries =
+      this.children.get(tunnelId)?.values() ??
+      this.preparedChildren.get(tunnelId)?.values();
     if (tunnelEntries) {
       return Array.from(tunnelEntries).sort(
         (first, second) => first.index - second.index,
