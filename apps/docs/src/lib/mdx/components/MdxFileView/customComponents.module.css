@@ -132,6 +132,42 @@
   }
 }
 
+.table {
+  border-radius: var(--table--corner-radius);
+  overflow: hidden;
+  width: 100%;
+  border-width: var(--table--border-width);
+  border-style: var(--table--border-style);
+  border-color: var(--table--border-color);
+  border-spacing: 0;
+  background-color: var(--table--background-color);
+
+  td,
+  th {
+    padding-inline: var(--table--padding-x);
+    padding-block: var(--table--padding-y);
+    text-align: start;
+    vertical-align: top;
+    border-style: var(--table--border-style);
+    border-color: var(--table--border-color);
+    border-width: 0;
+  }
+
+  thead th {
+    border-block-end-width: var(--table--header-border-width);
+  }
+
+  tbody tr {
+    &:nth-of-type(odd) {
+      background-color: var(--table--background-color-accent);
+    }
+
+    &:not(:last-child) td {
+      border-block-end-width: var(--table--border-width);
+    }
+  }
+}
+
 @media (max-width: 1200px) {
   .doAndDont {
     display: flex;

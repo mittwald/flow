@@ -42,13 +42,13 @@ const MobileHeaderNavigation: FC<Props> = (props) => {
     );
   });
 
-  const currentGroup =
-    Object.entries(navGroups).find(([group, mdxFiles]) => {
-      const pathname = mdxFiles[0].pathname;
-      return (
-        currentPathname.includes(group) || currentPathname.startsWith(pathname)
-      );
-    })?.[0] || "";
+  const currentGroup = Object.entries(navGroups).find(([group]) => {
+    return currentPathname.includes(group);
+  })?.[0];
+
+  if (!currentGroup) {
+    return null;
+  }
 
   return (
     <ContextMenuTrigger>

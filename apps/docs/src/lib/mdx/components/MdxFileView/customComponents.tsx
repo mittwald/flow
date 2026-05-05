@@ -10,12 +10,6 @@ import {
   Label,
   Link,
   Separator,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
   Text,
 } from "@mittwald/flow-react-components";
 import { Children, isValidElement, type PropsWithChildren } from "react";
@@ -133,18 +127,9 @@ export const createCustomComponents = () => {
     hr: () => <Separator className={styles.separator} />,
 
     table: ({ children }: PropsWithChildren) => (
-      <Table aria-label="Tabelle">{children}</Table>
+      <table aria-label="Tabelle" className={styles.table}>
+        {children}
+      </table>
     ),
-    thead: ({ children }: PropsWithChildren) => (
-      <TableHeader>{children}</TableHeader>
-    ),
-    tr: ({ children }: PropsWithChildren) => <TableRow>{children}</TableRow>,
-    th: ({ children }: PropsWithChildren) => (
-      <TableColumn>{children}</TableColumn>
-    ),
-    tbody: ({ children }: PropsWithChildren) => (
-      <TableBody>{children}</TableBody>
-    ),
-    td: ({ children }: PropsWithChildren) => <TableCell>{children}</TableCell>,
   } as const;
 };

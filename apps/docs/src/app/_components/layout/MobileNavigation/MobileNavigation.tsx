@@ -8,12 +8,17 @@ import {
   HeaderNavigation,
   Heading,
   IconMenu,
+  Link,
   Modal,
   ModalTrigger,
+  Navigation,
   Section,
 } from "@mittwald/flow-react-components";
-import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileHeaderNavigation from "@/app/_components/layout/MobileHeaderNavigation";
+import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
+import { groupBy } from "remeda";
+import { usePathname } from "next/navigation";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -21,11 +26,35 @@ interface Props {
 }
 
 export const MobileNavigation: FC<Props> = (props) => {
-  const { className, docs } = props;
+  const { className } = props;
+
+  const docs = props.docs.map(MdxFile.deserialize);
+
+  const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
+
+  const currentPathname = usePathname();
+
+  const mainItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
+    const pathname = mdxFiles[0].pathname;
+    const isComponent = pathname.includes("04-components");
+
+    return (
+      <Link
+        href={`${pathname}${isComponent ? "/overview" : ""}`}
+        key={pathname}
+      >
+        <GroupText>{group}</GroupText>
+      </Link>
+    );
+  });
+
+  const currentGroup = Object.entries(navGroups).find(([group]) => {
+    return currentPathname.includes(group);
+  })?.[0];
 
   return (
     <HeaderNavigation className={className}>
-      <MobileHeaderNavigation docs={docs} />
+      <MobileHeaderNavigation docs={props.docs} />
       <ModalTrigger>
         <Button variant="plain">
           <IconMenu />
@@ -34,7 +63,8 @@ export const MobileNavigation: FC<Props> = (props) => {
           <Heading>Menü</Heading>
           <Content>
             <Section>
-              <MainNavigation docs={docs} mobileNavigation />
+              {!currentGroup && <Navigation>{mainItems}</Navigation>}
+              <MainNavigation docs={props.docs} mobileNavigation />
             </Section>
           </Content>
         </Modal>
