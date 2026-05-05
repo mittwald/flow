@@ -29,7 +29,7 @@
 
 .darkModeContent {
   height: 100%;
-  border-radius: var(--layout-card--corner-radius);
+  border-radius: calc(var(--layout-card--corner-radius) - 2px);
   padding: var(--layout-card--padding);
   padding-right: 64px;
   width: max(80%, 300px);
