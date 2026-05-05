@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.818](https://github.com/mittwald/flow/compare/0.2.0-alpha.817...0.2.0-alpha.818) (2026-05-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix children are not removed if TunnelEntry suspends during render ([1cdeb5c](https://github.com/mittwald/flow/commit/1cdeb5c798a98c901dc70bce65ab73f15d030695))
+
 # [0.2.0-alpha.817](https://github.com/mittwald/flow/compare/0.2.0-alpha.816...0.2.0-alpha.817) (2026-05-04)
 
 ### Bug Fixes
