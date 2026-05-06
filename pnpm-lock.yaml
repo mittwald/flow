@@ -153,11 +153,11 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       acorn:
-        specifier: 8.15.0
-        version: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+        specifier: ^8.16.0
+        version: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       acorn-typescript:
         specifier: ^1.4.13
-        version: 1.4.13(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+        version: 1.4.13(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -5176,11 +5176,6 @@ packages:
   acorn-walk@8.3.4:
     resolution: {integrity: sha512-ueEepnujpqee2o5aIYnvHU6C0A42MNdsIDeqy5BydrkuC5R1ZuUFnm27EeFJGoEHJQgn3uleRvmTXaJgfXbt4g==}
     engines: {node: '>=0.4.0'}
-
-  acorn@8.15.0:
-    resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
 
   acorn@8.16.0:
     resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
@@ -12970,7 +12965,7 @@ snapshots:
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.4
       '@types/mdx': 2.0.13
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       collapse-white-space: 2.1.0
       devlop: 1.1.0
       estree-util-is-identifier-name: 3.0.0
@@ -12979,7 +12974,7 @@ snapshots:
       hast-util-to-jsx-runtime: 2.3.6
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
-      recma-jsx: 1.0.1(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      recma-jsx: 1.0.1(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       recma-stringify: 1.0.0
       rehype-recma: 1.0.0
       remark-mdx: 3.1.1
@@ -15940,20 +15935,18 @@ snapshots:
     dependencies:
       acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
 
-  acorn-jsx@5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-jsx@5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
 
-  acorn-typescript@1.4.13(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-typescript@1.4.13(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
 
   acorn-walk@8.3.4:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
     optional: true
-
-  acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f): {}
 
   acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f): {}
 
@@ -17080,7 +17073,7 @@ snapshots:
   esast-util-from-js@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.3
 
@@ -17233,8 +17226,8 @@ snapshots:
 
   espree@10.4.0:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn-jsx: 5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       eslint-visitor-keys: 4.2.1
 
   esprima@4.0.1: {}
@@ -18857,8 +18850,8 @@ snapshots:
 
   micromark-extension-mdxjs@3.0.0:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn-jsx: 5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       micromark-extension-mdx-expression: 3.0.1
       micromark-extension-mdx-jsx: 3.0.2
       micromark-extension-mdx-md: 2.0.0
@@ -19107,7 +19100,7 @@ snapshots:
 
   mlly@1.8.0:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.6.3
@@ -19662,8 +19655,8 @@ snapshots:
 
   parse-es-import@0.6.0:
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn-jsx: 5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
 
   parse-json@5.2.0:
     dependencies:
@@ -20306,10 +20299,10 @@ snapshots:
       estree-util-build-jsx: 3.0.1
       vfile: 6.0.3
 
-  recma-jsx@1.0.1(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  recma-jsx@1.0.1(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
     dependencies:
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn-jsx: 5.3.2(acorn@8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
       estree-util-to-js: 2.0.0
       recma-parse: 1.0.0
       recma-stringify: 1.0.0
@@ -21158,7 +21151,7 @@ snapshots:
   terser@5.46.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -21256,7 +21249,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 24.10.1
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
@@ -21463,7 +21456,7 @@ snapshots:
   unplugin@2.3.11:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.15.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.16.0(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
 

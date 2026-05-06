@@ -89,7 +89,6 @@ export const TabContent: FC<Props> = async (props) => {
       <AnchorNavigation
         currentPath={`${path}/${activeTab}`}
         anchors={currentMdxFile.anchors}
-        title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
       />
     </Flex>
   );

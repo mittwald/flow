@@ -7,17 +7,17 @@ import {
   Section,
 } from "@mittwald/flow-react-components";
 import React, { type FC, useEffect } from "react";
-import styles from "../../../layout.module.scss";
+import globalStyles from "../../../layout.module.scss";
 import type { Anchor } from "@/lib/mdx/MdxFile";
+import styles from "./AnchorNavigation.module.scss";
 
 interface Props {
   anchors: Anchor[];
-  title: string;
   currentPath: string;
 }
 
 export const AnchorNavigation: FC<Props> = (props) => {
-  const { anchors, title, currentPath } = props;
+  const { anchors, currentPath } = props;
 
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
@@ -67,13 +67,14 @@ export const AnchorNavigation: FC<Props> = (props) => {
   }, [anchors]);
 
   return (
-    <LayoutCard className={styles.anchorNavigation}>
+    <LayoutCard className={globalStyles.anchorNavigation}>
       <Section>
-        <Heading level={4}>{title}</Heading>
+        <Heading level={4}>Auf dieser Seite</Heading>
         <Navigation>
           {anchors.map((a) => {
             return (
               <Link
+                className={styles.anchorLink}
                 aria-current={a.slug === activeAnchor ? "page" : undefined}
                 href={`${currentPath}#${a.slug}`}
                 key={a.slug}

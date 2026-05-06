@@ -20,7 +20,7 @@
     "@tabler/icons-react": "^3.41.1",
     "@types/luxon": "^3.7.1",
     "@types/mdx": "^2.0.13",
-    "acorn": "8.15.0",
+    "acorn": "^8.16.0",
     "acorn-typescript": "^1.4.13",
     "clsx": "^2.1.1",
     "cron-parser": "^5.5.0",
