@@ -1,9 +1,15 @@
 import TunnelEntry, { type TunnelEntryProps } from "./components/TunnelEntry";
 import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
-import { expect, test, describe } from "vitest";
+import { expect, test, describe, vitest } from "vitest";
 import { render } from "vitest-browser-react";
-import { useState, type FC, type PropsWithChildren } from "react";
+import React, {
+  Suspense,
+  useState,
+  type ComponentType,
+  type FC,
+  type PropsWithChildren,
+} from "react";
 import { userEvent } from "vitest/browser";
 
 test("Exit is empty when no entry is set", async () => {
@@ -343,6 +349,56 @@ test("Order of multiple children is changed when entries are changing", async ()
     </Test>,
   );
   expect(dom.getByTestId("exit")).toHaveTextContent("ACB");
+});
+
+vitest.useFakeTimers();
+
+test("Content is not rendered if removing previously suspended tunnel entry", async () => {
+  const lazyComponentFactory = (props: { sleep: number }) =>
+    function Lazy() {
+      return new Promise<{ default: ComponentType }>((resolve) => {
+        setTimeout(() => {
+          resolve({
+            default: function Component() {
+              return null;
+            },
+          });
+        }, props.sleep);
+      });
+    };
+
+  const Lazy100 = React.lazy(lazyComponentFactory({ sleep: 100 }));
+  const Lazy500 = React.lazy(lazyComponentFactory({ sleep: 500 }));
+
+  const TestComponent: FC<{ renderEntries: boolean }> = (props) => (
+    <TunnelProvider id="test">
+      <Suspense>
+        <Lazy100 />
+        <Lazy500 />
+        {props.renderEntries && (
+          <>
+            <TunnelEntry>A</TunnelEntry>
+            <TunnelEntry>B</TunnelEntry>
+          </>
+        )}
+      </Suspense>
+      <div data-testid="exit">
+        <Suspense>
+          <TunnelExit />
+        </Suspense>
+      </div>
+    </TunnelProvider>
+  );
+
+  const dom = await render(<TestComponent renderEntries />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("");
+
+  vitest.advanceTimersByTime(1000);
+  await dom.rerender(<TestComponent renderEntries />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("AB");
+
+  await dom.rerender(<TestComponent renderEntries={false} />);
+  expect(dom.getByTestId("exit")).toHaveTextContent("");
 });
 
 describe("Nested tunnel provider", () => {
