@@ -389,8 +389,8 @@ importers:
         specifier: workspace:*
         version: link:../icons-pro
       '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.29
-        version: 3.0.0-alpha.29
+        specifier: 3.0.0-alpha.30
+        version: 3.0.0-alpha.30
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -740,7 +740,7 @@ importers:
         version: 4.2.2(axios@1.15.2)(react@19.2.4)
       axios:
         specifier: ^1.15.2
-        version: 1.15.2
+        version: 1.15.2(debug@4.4.3)
       jose:
         specifier: ^6.1.3
         version: 6.1.3
@@ -2936,8 +2936,8 @@ packages:
   '@microsoft/tsdoc@0.16.0':
     resolution: {integrity: sha512-xgAyonlVVS+q7Vc7qLW0UrJU7rSFcETRWsqdXZtjzRU8dF+6CkozTK4V4y1LwOX7j8r/vHphjDeMeGI4tNGeGA==}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.29':
-    resolution: {integrity: sha512-lEXC+ag+zfDP8UfCMWcBe+v2fV0flih+YlcCYzLuGPUlZj8HlT1SFFkvu5idZVxm+qUnKCEcmK+YXzNpmv7vXw==}
+  '@mittwald/password-tools-js@3.0.0-alpha.30':
+    resolution: {integrity: sha512-FMc9cQSSy5JOwtfCexB/l2B0CEQ3fsQi8sXUy40XBjnQ8cam0ciY41tLM7+YttfQsoT+oicdCGI5WArdR8C3AA==}
     hasBin: true
 
   '@mittwald/react-use-promise@4.2.2':
@@ -12778,14 +12778,14 @@ snapshots:
 
   '@microsoft/tsdoc@0.16.0': {}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.29':
+  '@mittwald/password-tools-js@3.0.0-alpha.30':
     dependencies:
       '@zxcvbn-ts/core': 3.0.4
       '@zxcvbn-ts/language-common': 3.0.4
       '@zxcvbn-ts/language-de': 3.0.2
       '@zxcvbn-ts/language-en': 3.0.2
       ajv: 8.17.1
-      axios: 1.13.4(debug@4.4.3)
+      axios: 1.15.2(debug@4.4.3)
       debug: 4.4.3
       fs-jetpack: 5.1.0
       ora: 8.2.0
@@ -12805,7 +12805,7 @@ snapshots:
       object-code: 1.3.4
       react: 19.2.4
     optionalDependencies:
-      axios: 1.15.2
+      axios: 1.15.2(debug@4.4.3)
 
   '@mittwald/remote-dom-core@1.7.0-mittwald.10(@preact/signals-core@1.12.1)':
     dependencies:
@@ -15745,7 +15745,7 @@ snapshots:
 
   axe-core@4.11.1: {}
 
-  axios@1.13.4(debug@4.4.3):
+  axios@1.13.4:
     dependencies:
       follow-redirects: 1.15.11(debug@4.4.3)
       form-data: 4.0.5
@@ -15753,7 +15753,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.15.2:
+  axios@1.15.2(debug@4.4.3):
     dependencies:
       follow-redirects: 1.15.11(debug@4.4.3)
       form-data: 4.0.5
@@ -19026,7 +19026,7 @@ snapshots:
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.2
       '@zkochan/js-yaml': 0.0.7
-      axios: 1.13.4(debug@4.4.3)
+      axios: 1.13.4
       chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
