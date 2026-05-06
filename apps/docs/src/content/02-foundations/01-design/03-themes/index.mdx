@@ -10,7 +10,7 @@ Aktuell unterstützt Flow zwei Themes:
 
 Beide basieren auf denselben Design Tokens und Komponenten. Ein Theme ist damit kein separater Modus mit eigener Logik, sondern eine alternative Darstellung derselben UI.
 
-# Best Practices
+# Umgang mit Themes
 
 Flow stellt die Grundlage für Themes bereit, übernimmt jedoch nicht automatisch das Theme-Handling in der Anwendung.
 
@@ -24,13 +24,19 @@ Die Anwendung ist verantwortlich für:
 * Berücksichtigung der System-Einstellung
 * Speicherung der Nutzerpräferenz
 
+# Individuelle Inhalte
+
 Bei der Umsetzung sollte besonders auf Stellen geachtet werden, an denen nicht ausschließlich Tokens verwendet werden, zum Beispiel:
 * Custom Farben und Farbverläufe 
 * Bilder, Illustrationen oder Media Assets
 
-Diese Bereiche reagieren nicht automatisch auf Theme-Wechsel und müssen daher gezielt so gestaltet werden, dass sie in beiden Themes funktionieren.
+Diese Inhalte reagieren nicht automatisch auf Theme-Wechsel und müssen bewusst so gestaltet werden, dass sie in beiden Themes funktionieren.
 
-// Verweise auf Static Light und Static Dark?
+In bestimmten Fällen ist es sinnvoll, dass einzelne UI-Elemente nicht auf einen Theme-Wechsel reagieren. Zum Beispiel, wenn Komponenten auf festen Hintergründen wie Bildern oder Farbverläufen eingesetzt werden, die sich beim Wechsel des Themes nicht verändern. Für solche Szenarien stellt Flow die Farben Light Static und Dark Static bereit. Diese bleiben unabhängig vom aktiven Theme unverändert und sorgen für konsistente Lesbarkeit.
+
+Für die Verwendung von Light Static und Dark Static gelten die gleichen Richtlinien wie für [Light und Dark Colors](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+[CodeBeispiel in beiden Themes und mit und ohne Static ]
 
 # Technische Implementierung 
 
