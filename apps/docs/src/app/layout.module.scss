@@ -87,7 +87,9 @@
   .anchorNavigation {
     display: none !important;
   }
+}
 
+@media (max-width: 768px) {
   .mainWrapper {
     padding-inline: var(--size-px--m);
   }

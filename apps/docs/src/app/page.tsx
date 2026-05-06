@@ -57,7 +57,7 @@ const Home: FC = () => {
   const scope = extractEditorScope(code);
 
   return (
-    <Flex direction="column" className={styles.wrapper}>
+    <Flex direction="column" className={styles.wrapper} align="center">
       <Flex
         direction="column"
         align="center"
@@ -68,6 +68,7 @@ const Home: FC = () => {
         <FlowLogo aria-hidden className={styles.logo} />
         <Heading level={1}>mStudio Design System</Heading>
       </Flex>
+
       <ColumnLayout s={[1]} l={[1, 1]} gap="xl">
         <LayoutCard>
           <AccentBox backgroundColor="gradient" color="dark-static">
@@ -103,39 +104,46 @@ const Home: FC = () => {
           </AccentBox>
         </LayoutCard>
       </ColumnLayout>
-      <LayoutCard className={styles.codeTile}>
-        <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
-          <Section>
-            <Heading>Fokus auf Developer Experience</Heading>
-            <Text>
-              Verschachtelte Komponenten erleichtern das Einfügen.
-              Automatisierungen ordnen Komponenten automatisch mit passenden
-              Abständen an und verhindern Abweichungen vom Design System. Alles
-              Open Source auf{" "}
-              <Link href="https://github.com/mittwald/flow" target="_blank">
-                GitHub
-              </Link>{" "}
-              verfügbar und hier im Styleguide dokumentiert.
-            </Text>
-            <Link href="/04-components/actions/action-group/overview">
-              Zu Components
-            </Link>
-          </Section>
-          <LiveProvider transformCode={transformCode} code={code} scope={scope}>
-            <div className={clsx(codeStyles.liveCodeEditor)}>
-              <LivePreview className={clsx(codeStyles.preview)} />
 
-              <div className={codeStyles.editorContainer}>
-                <LiveEditor
-                  tabMode="focus"
-                  theme={flowTheme}
-                  className={codeStyles.editor}
-                />
+      <div className={styles.codeTileWrapper}>
+        <div className={styles.codeTile}>
+          <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
+            <Section>
+              <Heading>Fokus auf Developer Experience</Heading>
+              <Text>
+                Verschachtelte Komponenten erleichtern das Einfügen.
+                Automatisierungen ordnen Komponenten automatisch mit passenden
+                Abständen an und verhindern Abweichungen vom Design System.
+                Alles Open Source auf{" "}
+                <Link href="https://github.com/mittwald/flow" target="_blank">
+                  GitHub
+                </Link>{" "}
+                verfügbar und hier im Styleguide dokumentiert.
+              </Text>
+              <Link href="/04-components/actions/action-group/overview">
+                Zu Components
+              </Link>
+            </Section>
+            <LiveProvider
+              transformCode={transformCode}
+              code={code}
+              scope={scope}
+            >
+              <div className={clsx(codeStyles.liveCodeEditor)}>
+                <LivePreview className={clsx(codeStyles.preview)} />
+
+                <div className={codeStyles.editorContainer}>
+                  <LiveEditor
+                    tabMode="focus"
+                    theme={flowTheme}
+                    className={codeStyles.editor}
+                  />
+                </div>
               </div>
-            </div>
-          </LiveProvider>
-        </ColumnLayout>
-      </LayoutCard>
+            </LiveProvider>
+          </ColumnLayout>
+        </div>
+      </div>
 
       <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
