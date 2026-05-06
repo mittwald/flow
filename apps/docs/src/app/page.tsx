@@ -65,7 +65,7 @@ const Home: FC = () => {
 
       <ColumnLayout s={[1]} l={[1, 1]} gap="xl">
         <LayoutCard>
-          <AccentBox color="dark" backgroundColor="navy">
+          <AccentBox color="dark">
             <Section>
               <Heading>Im Design System starten</Heading>
               <Text>
@@ -136,7 +136,7 @@ const Home: FC = () => {
       <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
           <AccentBox
-            backgroundColor="blue"
+            backgroundColor="violet"
             color="dark"
             className={styles.imageTile}
           >
@@ -161,7 +161,7 @@ const Home: FC = () => {
         </LayoutCard>
         <LayoutCard>
           <AccentBox
-            backgroundColor="violet"
+            backgroundColor="navy"
             color="dark"
             className={styles.imageTile}
           >

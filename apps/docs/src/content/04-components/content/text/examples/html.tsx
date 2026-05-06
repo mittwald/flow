@@ -1,6 +1,6 @@
 import { Text } from "@mittwald/flow-react-components";
 
-<Column>
+<>
   <Text>
     <ul>
       <li>Item 1</li>
@@ -11,4 +11,4 @@ import { Text } from "@mittwald/flow-react-components";
     Dies ist ein <strong>Beispiel</strong> für{" "}
     <i>verschiedene</i> HTML-Formatierungen.
   </Text>
-</Column>;
+</>;
