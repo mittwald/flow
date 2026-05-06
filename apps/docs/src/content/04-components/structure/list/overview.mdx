@@ -4,7 +4,7 @@ Mit `typedList<T>` lässt sich eine List für einen bestimmten Datentyp erzeugen
 
 Im Tab Develop stehen verschiedene Anleitungen zum technischen Aufbau bereit.
 
-<LiveCodeEditor />
+<LiveCodeEditor stretch />
 
 ---
 
@@ -18,7 +18,7 @@ werden. Die Default-Ansicht wird über das Property `defaultViewMode` festgelegt
 
 Nutze `<List.Item />`, um die List in der Listenansicht darzustellen.
 
-<LiveCodeEditor example="mode-list" editorCollapsed />
+<LiveCodeEditor example="mode-list" editorCollapsed stretch />
 
 ## Rasteransicht
 
@@ -29,14 +29,14 @@ werden, indem `showList` auf `false` gesetzt wird.
 Über das `maxTileWidth`-Property lässt sich die maximale Breite der Kacheln
 steuern.
 
-<LiveCodeEditor example="mode-tile" editorCollapsed />
+<LiveCodeEditor example="mode-tile" editorCollapsed stretch />
 
 ## Tabellenansicht
 
 Nutze `<List.Table />`, um die List als
 [Table](/04-components/structure/table/overview) darzustellen.
 
-<LiveCodeEditor example="mode-table" editorCollapsed />
+<LiveCodeEditor example="mode-table" editorCollapsed stretch />
 
 ---
 
@@ -49,7 +49,7 @@ Aufbaumöglichkeiten einsetzen.
 
 Ein ListItem bietet das Property `href` an, um das Element zu verlinken.
 
-<LiveCodeEditor example="item-link" editorCollapsed />
+<LiveCodeEditor example="item-link" editorCollapsed stretch />
 
 ## Mit Accordion
 
@@ -57,7 +57,7 @@ Das Accordion-Verhalten wird über die `accordion`-Property aktiviert. Dadurch
 lässt sich ein ListItem per Klick ein- oder ausklappen. Der erweiterte Inhalt
 wird in `<Content slot="bottom" />` platziert.
 
-<LiveCodeEditor example="item-accordion" editorCollapsed />
+<LiveCodeEditor example="item-accordion" editorCollapsed stretch />
 
 ## Mit Checkboxen
 
@@ -67,14 +67,14 @@ Checkbox wird nicht von der List gesteuert und muss individuell implementiert
 werden. Achte bei der Implementierung jedoch darauf, dass die gesamte Zeile zur
 Auswahl des Elements genutzt werden kann. Nutze dafür `onAction` der List.
 
-<LiveCodeEditor example="item-checkbox" editorCollapsed />
+<LiveCodeEditor example="item-checkbox" editorCollapsed stretch />
 
 ## Mit Content Slots
 
 In einem ListItem kann zusätzlicher `<Content/ >` (Top und Bottom Content)
 platziert werden. Die Position wird über das `slot`-Property gesteuert.
 
-<LiveCodeEditor example="item-content" editorCollapsed />
+<LiveCodeEditor example="item-content" editorCollapsed stretch />
 
 ## Mit ColumnLayout
 
@@ -83,20 +83,20 @@ Dem ListItem können die
 `m` und `l` mitgegeben werden, um das Seitenverhältnis sowie das
 Umbruchverhalten von Header und Content zu steuern.
 
-<LiveCodeEditor example="item-column-layout" editorCollapsed />
+<LiveCodeEditor example="item-column-layout" editorCollapsed stretch />
 
 Da für die ColumnLayout-Spalten auch `null` gesetzt werden kann, ist es möglich,
 nicht zwingend benötigten Content in kleineren Ansichten auszublenden. In diesem
 Fall werden auch die entsprechenden Content Slots nicht angezeigt.
 
-<LiveCodeEditor example="item-column-layout-hidden" editorCollapsed />
+<LiveCodeEditor example="item-column-layout-hidden" editorCollapsed stretch />
 
 ## Mit ActionGroup
 
 Verwende eine ActionGroup innerhalb des `<Content />`, um
 [Buttons](/04-components/actions/button/overview) in der List zu platzieren.
 
-<LiveCodeEditor example="item-action-group" editorCollapsed />
+<LiveCodeEditor example="item-action-group" editorCollapsed stretch />
 
 ---
 
@@ -106,7 +106,7 @@ Die List bietet **Sortierung, Filter, Suche** und **Pagination** an.
 Detaillierte Anleitungen zu den einzelnen Einstellmöglichkeiten stehen unter dem
 Develop-Tab der List zur Verfügung.
 
-<LiveCodeEditor editorCollapsed example="filter" />
+<LiveCodeEditor editorCollapsed example="filter" stretch />
 
 ## Sortierung
 
@@ -125,7 +125,7 @@ Mit dem `mode="dateRange"` kannst du einen Filter definieren, der es ermöglicht
 einen Zeitraum auszuwählen. So lassen sich Einträge gezielt zwischen einem
 Start- und Enddatum eingrenzen.
 
-<LiveCodeEditor example="filterDateRange" editorCollapsed />
+<LiveCodeEditor example="filterDateRange" editorCollapsed stretch />
 
 ## Suche
 
@@ -152,7 +152,7 @@ hinzufügen können.
 In der Regel sollte als Empty View eine IllustratedMessage verwendet werden, um
 eine konsistente Nutzererfahrung zu gewährleisten.
 
-<LiveCodeEditor example="customEmptyView" editorCollapsed />
+<LiveCodeEditor example="customEmptyView" editorCollapsed stretch />
 
 ---
 
@@ -165,7 +165,7 @@ Verwende `<ActionGroup />` innerhalb der List, um eine
 können eine oder mehrere Aktionen definiert werden, die sich direkt auf die
 Liste beziehen.
 
-<LiveCodeEditor example="actionGroup" editorCollapsed />
+<LiveCodeEditor example="actionGroup" editorCollapsed stretch />
 
 ## Summary
 
@@ -173,4 +173,4 @@ Verwende eine `<ListSummary />`, um eine Zusammenfassung anzuzeigen,
 beispielsweise die Gesamtsumme der Beträge. Über das `position`-Property wird
 festgelegt, ob die Summary oberhalb oder unterhalb der List erscheint.
 
-<LiveCodeEditor example="summary" editorCollapsed />
+<LiveCodeEditor example="summary" editorCollapsed stretch />

@@ -41,17 +41,7 @@
   );
 }
 
-.codeTileWrapper {
-  width: 100dvw;
-  background-color: var(--layout-card--background-color);
-  display: flex;
-  justify-content: center;
-  padding: 64px var(--size-px--xl);
-}
-
 .codeTile {
-  width: 1500px;
-
   :global(.flow--column-layout) {
     align-items: center;
   }

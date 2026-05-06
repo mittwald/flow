@@ -2,18 +2,17 @@
 import {
   AccentBox,
   Badge,
+  Color,
   ColumnLayout,
   Flex,
   Heading,
+  IconCode,
+  IconExtension,
+  Image,
   LayoutCard,
   Link,
   Section,
   Text,
-  Image,
-  IconExtension,
-  IconCode,
-  Color,
-  Icon,
 } from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import React from "react";
@@ -32,11 +31,6 @@ import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowThem
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
 import styles from "./page.module.scss";
-import {
-  IconBooks,
-  IconComponents,
-  IconDeviceLaptop,
-} from "@tabler/icons-react";
 
 const Home: FC = () => {
   const transformCode = (code: string) => {
@@ -71,7 +65,7 @@ const Home: FC = () => {
 
       <ColumnLayout s={[1]} l={[1, 1]} gap="xl">
         <LayoutCard>
-          <AccentBox backgroundColor="gradient" color="dark-static">
+          <AccentBox color="dark" backgroundColor="navy">
             <Section>
               <Heading>Im Design System starten</Heading>
               <Text>
@@ -105,45 +99,39 @@ const Home: FC = () => {
         </LayoutCard>
       </ColumnLayout>
 
-      <div className={styles.codeTileWrapper}>
-        <div className={styles.codeTile}>
-          <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
-            <Section>
-              <Heading>Fokus auf Developer Experience</Heading>
-              <Text>
-                Verschachtelte Komponenten erleichtern das Einfügen.
-                Automatisierungen ordnen Komponenten automatisch mit passenden
-                Abständen an und verhindern Abweichungen vom Design System.
-                Alles Open Source auf{" "}
-                <Link href="https://github.com/mittwald/flow" target="_blank">
-                  GitHub
-                </Link>{" "}
-                verfügbar und hier im Styleguide dokumentiert.
-              </Text>
-              <Link href="/04-components/actions/action-group/overview">
-                Zu Components
-              </Link>
-            </Section>
-            <LiveProvider
-              transformCode={transformCode}
-              code={code}
-              scope={scope}
-            >
-              <div className={clsx(codeStyles.liveCodeEditor)}>
-                <LivePreview className={clsx(codeStyles.preview)} />
+      <LayoutCard className={styles.codeTile}>
+        <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
+          <Section>
+            <Heading>Fokus auf Developer Experience</Heading>
+            <Text>
+              Verschachtelte Komponenten erleichtern das Einfügen.
+              Automatisierungen ordnen Komponenten automatisch mit passenden
+              Abständen an und verhindern Abweichungen vom Design System. Alles
+              Open Source auf{" "}
+              <Link href="https://github.com/mittwald/flow" target="_blank">
+                GitHub
+              </Link>{" "}
+              verfügbar und hier im Styleguide dokumentiert.
+            </Text>
+            <Link href="/04-components/actions/action-group/overview">
+              Zu Components
+            </Link>
+          </Section>
+          <LiveProvider transformCode={transformCode} code={code} scope={scope}>
+            <div className={clsx(codeStyles.liveCodeEditor)}>
+              <LivePreview className={clsx(codeStyles.preview)} />
 
-                <div className={codeStyles.editorContainer}>
-                  <LiveEditor
-                    tabMode="focus"
-                    theme={flowTheme}
-                    className={codeStyles.editor}
-                  />
-                </div>
+              <div className={codeStyles.editorContainer}>
+                <LiveEditor
+                  tabMode="focus"
+                  theme={flowTheme}
+                  className={codeStyles.editor}
+                />
               </div>
-            </LiveProvider>
-          </ColumnLayout>
-        </div>
-      </div>
+            </div>
+          </LiveProvider>
+        </ColumnLayout>
+      </LayoutCard>
 
       <ColumnLayout l={[1, 1]} gap="xl" s={[1]}>
         <LayoutCard>
@@ -204,44 +192,36 @@ const Home: FC = () => {
       <ColumnLayout l={[1, 1, 1]} gap="xl">
         <LayoutCard>
           <Section>
-            <Heading>
-              <Icon>
-                <IconDeviceLaptop />
-              </Icon>
-              Get Started
-            </Heading>
-            <Text>Installiere Flow und starte in wenigen Schritten.</Text>
-            <Link href="/01-get-started/installation">Get started</Link>
-          </Section>
-        </LayoutCard>
-        <LayoutCard>
-          <Section>
-            <Heading>
-              <Icon>
-                <IconBooks />
-              </Icon>
-              Foundations
-            </Heading>
+            <Heading>Foundations</Heading>
             <Text>
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
             <Link href="/02-foundations/01-design/01-design-tokens">
-              Foundations
+              Mehr erfahren
             </Link>
           </Section>
         </LayoutCard>
         <LayoutCard>
           <Section>
-            <Heading>
-              <Icon>
-                <IconComponents />
-              </Icon>
-              Components
-            </Heading>
+            <Heading>Patterns</Heading>
+            <Text>
+              Finde passende Pattern für häufige Design- und
+              Interaktionsaufgaben.
+            </Text>
+            <Link href="/03-patterns/01-patterns/anlegeprozess">
+              Mehr erfahren
+            </Link>
+          </Section>
+        </LayoutCard>
+        <LayoutCard>
+          <Section>
+            <Heading>Components</Heading>
             <Text>
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
-            <Link href="/04-components/actions/action-group">Components</Link>
+            <Link href="/04-components/actions/action-group">
+              Mehr erfahren
+            </Link>
           </Section>
         </LayoutCard>
       </ColumnLayout>

@@ -4,7 +4,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Notification status="info">
     <Heading>E-Mail-Adresse archiviert</Heading>
     <Text>
@@ -43,4 +43,4 @@ import {
       Die gewünschten Inhalte sind leider nicht verfügbar.
     </Text>
   </Notification>
-</Row>;
+</>;

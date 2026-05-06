@@ -66,3 +66,13 @@
     background-color: color-mix(in srgb, #121518 40%, transparent);
   }
 }
+
+@media (max-width: 768px) {
+  .headerContent {
+    padding-inline: var(--size-px--m);
+  }
+
+  .logo {
+    width: 80px !important;
+  }
+}
