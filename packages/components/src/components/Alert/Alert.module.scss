@@ -51,4 +51,8 @@
   + :global(.flow--section) {
     margin-block-start: var(--section--section-to-section-spacing);
   }
+
+  + .alert {
+    margin-block-start: var(--section--spacing);
+  }
 }
