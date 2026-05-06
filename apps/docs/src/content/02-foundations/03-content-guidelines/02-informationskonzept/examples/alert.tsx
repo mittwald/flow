@@ -7,7 +7,7 @@ import {
   Link,
 } from "@mittwald/flow-react-components";
 
-<Column>
+<>
   <Alert>
     <Heading>E-Mail-Adresse wurde archiviert</Heading>
     <Content>
@@ -66,4 +66,4 @@ import {
       </Text>
     </Content>
   </Alert>
-</Column>;
+</>;

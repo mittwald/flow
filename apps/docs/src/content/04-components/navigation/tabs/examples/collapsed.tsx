@@ -5,8 +5,8 @@ import {
   TabTitle,
 } from "@mittwald/flow-react-components";
 
-<LayoutCard>
-  <Tabs style={{ width: "250px" }}>
+<LayoutCard style={{ width: "250px" }}>
+  <Tabs>
     <Tab>
       <TabTitle>Allgemein</TabTitle>
       Allgemeiner Inhalt

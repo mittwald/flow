@@ -1,6 +1,6 @@
 import { DonutChart } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <DonutChart
     value={30}
     status="success"
@@ -17,4 +17,4 @@ import { DonutChart } from "@mittwald/flow-react-components";
     status="danger"
     aria-label="Auslastung"
   />
-</Row>;
+</>;

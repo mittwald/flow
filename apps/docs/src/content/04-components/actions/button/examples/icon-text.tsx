@@ -5,7 +5,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Button size="s">
     <Text>E-Mail hinzufügen</Text>
     <IconChevronDown />
@@ -22,4 +22,4 @@ import {
     <Text>Filter</Text>
     <IconClose />
   </Button>
-</Row>;
+</>;
