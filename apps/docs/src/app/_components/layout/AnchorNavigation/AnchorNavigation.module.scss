@@ -1,3 +1,7 @@
+.navigation ul {
+  gap: var(--size-rem--s);
+}
+
 .anchorLink {
   font-size: var(--font-size-text--s);
   text-decoration: underline;

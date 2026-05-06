@@ -70,7 +70,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
     <LayoutCard className={globalStyles.anchorNavigation}>
       <Section>
         <Heading level={4}>Auf dieser Seite</Heading>
-        <Navigation>
+        <Navigation className={styles.navigation}>
           {anchors.map((a) => {
             return (
               <Link
