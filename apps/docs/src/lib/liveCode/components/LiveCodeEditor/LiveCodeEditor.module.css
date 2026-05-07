@@ -38,7 +38,7 @@
 
   &.mstudioBackground,
   &.mstudioBackground.mobile .preview {
-    background-color: var(--neutral--color--200);
+    background: var(--color--background-gradient);
   }
 
   &.mobile {

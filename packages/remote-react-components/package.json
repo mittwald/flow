@@ -61,7 +61,7 @@
     "@vitest/browser-playwright": "^4.0.18",
     "@vitest/coverage-v8": "^4.0.18",
     "nx": "^22.5.4",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.2",

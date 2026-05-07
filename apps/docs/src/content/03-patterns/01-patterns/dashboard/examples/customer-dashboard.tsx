@@ -80,7 +80,7 @@ export default () => {
         </LayoutCard>
       </ColumnLayout>
       <LayoutCard>
-        <AccentBox>
+        <AccentBox color="dark">
           <Icon>
             <IconHeartHandshake />
           </Icon>
