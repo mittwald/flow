@@ -20,6 +20,7 @@ test.each(testEnvironments)(
       Avatar,
       Initials,
       Kbd,
+      Badge,
     },
   }) => {
     await render(
@@ -44,6 +45,7 @@ test.each(testEnvironments)(
             <MenuItem>
               <IconStar />
               <Text>Link 1</Text>
+              <Badge>Badge</Badge>
             </MenuItem>
             <MenuItem>
               Link 2<Kbd keys={["mod", "x"]} />
