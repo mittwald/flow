@@ -36,6 +36,7 @@ test.each(testEnvironments)(
             <Heading>Max Mustermann</Heading>
           </ContextMenuSection>
           <Separator />
+
           <ContextMenuSection selectionMode="switch">
             <MenuItem>Switch</MenuItem>
           </ContextMenuSection>
