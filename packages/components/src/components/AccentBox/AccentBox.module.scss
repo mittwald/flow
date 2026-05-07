@@ -16,19 +16,19 @@
 
   /* Color */
 
-  @mixin status($color) {
+  @mixin color($color) {
     &.#{$color} {
       background-color: var(--accent-box--background-color-#{$color});
     }
   }
 
-  @include status("neutral");
-  @include status("blue");
-  @include status("teal");
-  @include status("lilac");
-  @include status("violet");
-  @include status("green");
-  @include status("navy");
+  @include color("neutral");
+  @include color("blue");
+  @include color("teal");
+  @include color("lilac");
+  @include color("violet");
+  @include color("green");
+  @include color("navy");
 
   /* backwards compatibility */
   > .icon {

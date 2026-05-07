@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.824](https://github.com/mittwald/flow/compare/0.2.0-alpha.823...0.2.0-alpha.824) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.823](https://github.com/mittwald/flow/compare/0.2.0-alpha.822...0.2.0-alpha.823) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.822](https://github.com/mittwald/flow/compare/0.2.0-alpha.821...0.2.0-alpha.822) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.821](https://github.com/mittwald/flow/compare/0.2.0-alpha.820...0.2.0-alpha.821) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.820](https://github.com/mittwald/flow/compare/0.2.0-alpha.819...0.2.0-alpha.820) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 # [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
