@@ -3,7 +3,7 @@ import locales from "../../locales/*.locale.json";
 import IllustratedMessageView from "@/views/IllustratedMessageView";
 import HeadingView from "@/views/HeadingView";
 import TextView from "@/views/TextView";
-import { IconClose } from "@/components/Icon/components/icons";
+import { IconUnorderedList } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
 
 export type EmptyViewProps = Record<string, never>;
@@ -13,7 +13,7 @@ export const EmptyView: FC<EmptyViewProps> = () => {
 
   return (
     <IllustratedMessageView>
-      <IconClose />
+      <IconUnorderedList />
       <HeadingView>{stringFormatter.format("noItems.heading")}</HeadingView>
       <TextView>{stringFormatter.format("noItems.text")}</TextView>
     </IllustratedMessageView>
