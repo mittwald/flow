@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
+
+### Bug Fixes
+
+* **Text:** fix text link alpha colors ([#2486](https://github.com/mittwald/flow/issues/2486)) ([2790dd9](https://github.com/mittwald/flow/commit/2790dd9507641dca1b6d2ae9d99a685cb0bb73ef))
+
 # [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
 
 ### Bug Fixes
