@@ -139,7 +139,9 @@ export class TunnelState {
   private takeRenderPhaseChildren(tunnelId: string) {
     if (this.renderPhaseChildren.has(tunnelId)) {
       const children = this.renderPhaseChildren.get(tunnelId)?.values();
-      this.renderPhaseChildren.delete(tunnelId);
+      if (typeof window !== "undefined") {
+        this.renderPhaseChildren.delete(tunnelId);
+      }
       return children;
     }
   }
