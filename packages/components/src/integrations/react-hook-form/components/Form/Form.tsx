@@ -94,11 +94,11 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   modalController.useUpdateOptions({
     confirmOnClose:
       flags.requireCloseModalConfirmationOnUnsavedChanges && isDirty,
-    onClose: () => {
-      if (autoResetOptions?.onAfterModalClose) {
-        form.reset();
-      }
-    },
+  });
+  modalController.useOnClosed(() => {
+    if (autoResetOptions?.onAfterModalClose) {
+      form.reset();
+    }
   });
 
   const { submitInterceptor } = useFormSettings();

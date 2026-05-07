@@ -17,6 +17,8 @@ import { useModalController } from "@/lib/controller";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
+import { Render } from "../public";
+import { commands } from "vitest/browser";
 
 afterEach(() => {
   resetFlags();
@@ -228,6 +230,49 @@ test("Modal with dirty form does not require confirmation when using abort butto
     await userEvent.click(abortButton);
     expect(modalText).not.toBeInTheDocument();
   }
+});
+
+test("useOnClosed is called when the closing animation has finished", async () => {
+  const onClosed = vitest.fn();
+
+  // Activating animations
+  await commands.setReducedMotion("no-preference");
+
+  const dom = await render(
+    <Modal isDefaultOpen>
+      <Render>
+        {() => {
+          useModalController().useOnClosed(onClosed);
+        }}
+      </Render>
+      <Content>
+        <Text data-testid="modal-text">Hello World</Text>
+      </Content>
+      <ActionGroup>
+        <Action closeModal>
+          <Button>Close</Button>
+        </Action>
+      </ActionGroup>
+    </Modal>,
+    {},
+  );
+
+  const closeButton = dom.getByRole("button", {
+    name: "Close",
+    exact: true,
+  });
+  const modalText = dom.getByTestId("modal-text");
+
+  expect(modalText).toBeInTheDocument();
+  expect(onClosed).not.toHaveBeenCalled();
+
+  await userEvent.click(closeButton);
+  expect(modalText).toBeInTheDocument();
+  expect(onClosed).not.toHaveBeenCalledOnce();
+
+  await vi.waitFor(() => expect(modalText).not.toBeInTheDocument());
+  // onClosed is just called, when the Modal has unmounted (after close animation)
+  expect(onClosed).toHaveBeenCalledOnce();
 });
 
 test("Form in Modal is auto-resetted on close", async () => {
