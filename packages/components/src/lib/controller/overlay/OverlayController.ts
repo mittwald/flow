@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useStatic } from "@/lib/hooks/useStatic";
-import { useEffect } from "react";
+import { useEffect, useRef, type DependencyList } from "react";
 import { useCloseOverlayConfirmationController } from "@/lib/controller/overlay/useCloseOverlayConfirmationController";
 import type { FlowComponentName } from "@/components/propTypes";
 
@@ -18,6 +18,10 @@ type DisposerFn = () => void;
 export interface CloseOverlayOptions {
   overlay: FlowComponentName | OverlayController;
   bypassConfirmation?: boolean;
+}
+
+export interface OnOverlayClosedOptions {
+  dependencies?: DependencyList;
 }
 
 export type CloseModalOptions = Omit<CloseOverlayOptions, "overlay">;
@@ -81,6 +85,36 @@ export class OverlayController {
     );
 
     this.confirmOnCloseEnabled = confirmOnClose;
+  }
+
+  /**
+   * Can be used to execute a callback when the Overlay has unmounted – means
+   * after any closing animation.
+   *
+   * NOTICE: This hook only works inside the corresponding Overlay!
+   */
+  public useOnClosed(
+    callback: () => unknown,
+    options: OnOverlayClosedOptions = {},
+  ) {
+    const { dependencies = [] } = options;
+    const isOpen = this.useIsOpen();
+    const wasOpen = useRef(this.isOpen);
+
+    this.useUpdateOptions({
+      onOpen: () => {
+        wasOpen.current = true;
+      },
+    });
+
+    useEffect(() => {
+      return () => {
+        if (!isOpen && wasOpen.current) {
+          wasOpen.current = false;
+          callback();
+        }
+      };
+    }, [isOpen, ...dependencies]);
   }
 
   public static useNew(
