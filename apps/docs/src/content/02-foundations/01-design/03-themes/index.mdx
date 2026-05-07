@@ -2,55 +2,118 @@
 title: Themes
 ---
 
-Themes definieren die visuelle Gestaltung einer Anwendung, ohne die zugrunde liegende Struktur oder Semantik zu verändern.
+Themes definieren die visuelle Gestaltung einer Anwendung, ohne die zugrunde
+liegende Struktur oder Semantik zu verändern.
 
 Aktuell unterstützt Flow zwei Themes:
-* Light (Default)
-* Dark
 
-Beide basieren auf denselben Design Tokens und Komponenten. Ein Theme ist damit kein separater Modus mit eigener Logik, sondern eine alternative Darstellung derselben UI.
+- Light
+- Dark
+
+Beide basieren auf denselben Design Tokens und Komponenten. Ein Theme ist damit
+kein separater Modus mit eigener Logik, sondern eine alternative Darstellung
+derselben UI.
 
 # Umgang mit Themes
 
-Flow stellt die Grundlage für Themes bereit, übernimmt jedoch nicht automatisch das Theme-Handling in der Anwendung.
+Flow stellt die Grundlage für Themes bereit, übernimmt jedoch nicht automatisch
+das Theme-Handling in der Anwendung.
 
 Das Design System stellt bereit:
-* Design Tokens für Light und Dark
-* Komponenten, die diese Tokens verwenden
+
+- Design Tokens für Light und Dark
+- Komponenten, die diese Tokens verwenden
 
 Die Anwendung ist verantwortlich für:
-* Festlegen des aktiven Themes
-* Umschalten zwischen Themes
-* Berücksichtigung der System-Einstellung
-* Speicherung der Nutzerpräferenz
+
+- Festlegen des aktiven Themes
+- Umschalten zwischen Themes
+- Berücksichtigung der Browsereinstellung
+- Speicherung der Nutzerpräferenz
 
 # Individuelle Inhalte
 
-Bei der Umsetzung sollte besonders auf Stellen geachtet werden, an denen nicht ausschließlich Tokens verwendet werden, zum Beispiel:
-* Custom Farben und Farbverläufe 
-* Bilder, Illustrationen oder Media Assets
+Bei der Umsetzung sollte besonders auf Stellen geachtet werden, an denen nicht
+ausschließlich Tokens verwendet werden, zum Beispiel:
 
-Diese Inhalte reagieren nicht automatisch auf Theme-Wechsel und müssen bewusst so gestaltet werden, dass sie in beiden Themes funktionieren.
+- Custom Farben und Farbverläufe
+- Bilder, Illustrationen oder Media Assets
 
-In bestimmten Fällen ist es sinnvoll, dass einzelne UI-Elemente nicht auf einen Theme-Wechsel reagieren. Zum Beispiel, wenn Komponenten auf festen Hintergründen wie Bildern oder Farbverläufen eingesetzt werden, die sich beim Wechsel des Themes nicht verändern. Für solche Szenarien stellt Flow die Farben Light Static und Dark Static bereit. Diese bleiben unabhängig vom aktiven Theme unverändert und sorgen für konsistente Lesbarkeit.
+Diese Inhalte reagieren nicht automatisch auf Theme-Wechsel und müssen bewusst
+so gestaltet werden, dass sie in beiden Themes funktionieren.
 
-Für die Verwendung von Light Static und Dark Static gelten die gleichen Richtlinien wie für [Light und Dark Colors](/02-foundations/01-design/02-colors#light-und-dark-color).
+In bestimmten Fällen ist es sinnvoll, dass einzelne UI-Elemente nicht auf einen
+Theme-Wechsel reagieren. Zum Beispiel, wenn Komponenten auf festen Hintergründen
+wie Bildern oder Farbverläufen eingesetzt werden, die sich beim Wechsel des
+Themes nicht verändern. Für solche Szenarien stellt Flow die Farben Light Static
+und Dark Static bereit. Diese bleiben unabhängig vom aktiven Theme unverändert
+und sorgen für konsistente Lesbarkeit.
 
-[CodeBeispiel in beiden Themes und mit und ohne Static ]
+Für die Verwendung von Light Static und Dark Static gelten die gleichen
+Richtlinien wie für
+[Light und Dark Colors](/02-foundations/01-design/02-colors#light-und-dark-color).
 
-# Technische Implementierung 
+<DoAndDont>
+  <Info
+    example="alpha-light"
+    bgColor="light"
+    editorDisabled
+    stretch
+    heading="Light Theme"
+  />
+  <Info
+    example="alpha-dark"
+    bgColor="dark"
+    editorDisabled
+    stretch
+    heading="Dark Theme"
 
-// Help wanted
+/>
 
-## System-Einstellung (Default)
+</DoAndDont>
 
-Standardmäßig sollte die Systemeinstellung des Users berücksichtigt werden. Viele User legen auf Betriebssystemebene fest, ob sie Light- oder Darkmode bevorzugen, entweder systemweit oder für einzelne Anwendungen  zum Beispiel ihren Browser.
-Diese Präferenz kann über `prefers-color-scheme` ausgelesen werden und sollte als Ausgangspunkt dienen.
+# Technische Implementierung
 
-// Code-Beispiel wie man die Systemeinstellungen ausliest?
+Das Theme wird über das Attribut `data-flow-theme` auf dem `:root`-Element
+gesteuert. Verfügbare Werte sind:
 
-## Wechseln zwischen den Themes (Override)
+- `light`
+- `dark`
+- `system`
 
-Wenn beide Themes in einer Anwendung angeboten werden sollten die User die Möglichkeit haben Aktiv ein Theme auszuwählen, diese auswahl überschreibt die System-Einstellungen und sollte persistent gespeichert werden, damit sie beim nächsten Besuch erhalten bleibt.
+Wird kein Theme gesetzt oder explizit `data-flow-theme="system"` verwendet,
+dient die bevorzugte Browsereinstellung des Nutzers als Grundlage für die
+Darstellung.
 
-// Code-Beispiel vom Speichern?
+## next-themes
+
+Für die Verwaltung und das Umschalten des Themes kann next-themes verwendet
+werden. Die Bibliothek übernimmt dabei das Speichern des gewählten Themes und
+das Setzen des `data-flow-theme` Attributs.
+
+### ThemeProvider
+
+Der `ThemeProvider` wird in der Root der Anwendung eingebunden und steuert, wie
+das Theme im DOM abgebildet wird:
+
+```tsx
+import { ThemeProvider } from "next-themes";
+
+<ThemeProvider attribute="data-flow-theme">{children}</ThemeProvider>;
+```
+
+### Theme wechseln mit `useTheme`
+
+Innerhalb von Client Components kann das Theme über den Hook `useTheme`
+gesteuert werden:
+
+```ts
+import { useTheme } from "next-themes";
+
+const { theme, setTheme } = useTheme();
+```
+
+#### Verfügbare Werte:
+
+- `theme` → aktuelles gesetztes Theme (`light`, `dark`, `system`)
+- `setTheme("light" | "dark" | "system")` → wechselt das Theme
