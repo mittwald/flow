@@ -92,7 +92,7 @@ const Home: FC = () => {
                 Design System ein Light- und ein Dark-Theme.
               </Text>
               <Link href="/02-foundations/01-design/03-themes">
-                Mehr erfahren
+                Mehr zu Themes
               </Link>
             </Section>
           </AccentBox>
@@ -114,7 +114,7 @@ const Home: FC = () => {
               verfügbar und hier im Styleguide dokumentiert.
             </Text>
             <Link href="/04-components/actions/action-group/overview">
-              Zu Components
+              Zu den Components
             </Link>
           </Section>
           <LiveProvider transformCode={transformCode} code={code} scope={scope}>
@@ -177,7 +177,7 @@ const Home: FC = () => {
                   href="https://www.mittwald.de/mstudio/extensions"
                   target="_blank"
                 >
-                  Mehr erfahren
+                  Zur Extension Landingpage
                 </Link>
               </Section>
               <Image src={extensionsTile.src} />
@@ -197,7 +197,7 @@ const Home: FC = () => {
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
             <Link href="/02-foundations/01-design/01-design-tokens">
-              Mehr erfahren
+              Zu den Foundations
             </Link>
           </Section>
         </LayoutCard>
@@ -209,7 +209,7 @@ const Home: FC = () => {
               Interaktionsaufgaben.
             </Text>
             <Link href="/03-patterns/01-patterns/anlegeprozess">
-              Mehr erfahren
+              Zu den Patterns
             </Link>
           </Section>
         </LayoutCard>
@@ -220,7 +220,7 @@ const Home: FC = () => {
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
             <Link href="/04-components/actions/action-group">
-              Mehr erfahren
+              Zu den Components
             </Link>
           </Section>
         </LayoutCard>
