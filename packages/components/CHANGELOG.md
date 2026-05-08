@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
+
+### Features
+
+* **OverlayController:** support onClose callback ([b206009](https://github.com/mittwald/flow/commit/b206009b64406bf6bc3025574634940ca98709ea))
+
 # [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
 
 ### Bug Fixes
