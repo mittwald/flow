@@ -58,7 +58,7 @@ export interface AccentBoxProps
 /** @flr-generate all */
 export const AccentBox = flowComponent("AccentBox", (props) => {
   const {
-    color = "default",
+    color: colorFromProps,
     backgroundColor = "blue",
     backgroundImage,
     children,
@@ -68,14 +68,22 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
     aspectRatio,
   } = props;
 
+  const defaultColor =
+    (colorFromProps as unknown as string) === "gradient" ||
+    backgroundColor === "gradient"
+      ? "dark-static"
+      : "default";
+
+  const color = colorFromProps ?? defaultColor;
+
   const isAFlowColor = isFlowColor(backgroundColor);
 
   // backwards compatibility
   const backgroundColorFromColor =
-    (color as unknown as string) === "neutral" ||
-    (color as unknown as string) === "gradient" ||
-    (color as unknown as string) === "green"
-      ? (color as unknown as AccentBoxBackgroundColor)
+    (colorFromProps as unknown as string) === "neutral" ||
+    (colorFromProps as unknown as string) === "gradient" ||
+    (colorFromProps as unknown as string) === "green"
+      ? (colorFromProps as unknown as AccentBoxBackgroundColor)
       : undefined;
 
   const style = {

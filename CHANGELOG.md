@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
+
+### Bug Fixes
+
+* **Text:** fix text link alpha colors ([#2486](https://github.com/mittwald/flow/issues/2486)) ([2790dd9](https://github.com/mittwald/flow/commit/2790dd9507641dca1b6d2ae9d99a685cb0bb73ef))
+
+# [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
+
+### Bug Fixes
+
+* **CodeBlock:** fix scrollbar position ([#2479](https://github.com/mittwald/flow/issues/2479)) ([907c3f8](https://github.com/mittwald/flow/commit/907c3f81f0812a7f46383706af21d2673f013ab8))
+
+### Features
+
+* **AccentBox:** set default color for gradient background ([#2491](https://github.com/mittwald/flow/issues/2491)) ([b557223](https://github.com/mittwald/flow/commit/b55722331932107a1b487fa66c4202b73661da3f))
+* **ContextMenu:** support badges ([#2493](https://github.com/mittwald/flow/issues/2493)) ([8e8582f](https://github.com/mittwald/flow/commit/8e8582f44eb44ef2f9c0dded3eaa1f684882c5c7))
+* **List:** improve empty view ([#2490](https://github.com/mittwald/flow/issues/2490)) ([475c1c7](https://github.com/mittwald/flow/commit/475c1c7432c189a113ffad14dfd9547e1a18a724))
+
+# [0.2.0-alpha.824](https://github.com/mittwald/flow/compare/0.2.0-alpha.823...0.2.0-alpha.824) (2026-05-06)
+
+### Bug Fixes
+
+* **Tabs:** fix not found tabs ([cfe541f](https://github.com/mittwald/flow/commit/cfe541f4888de31ec75360aae98fe6c6ae1fb9ef))
+
+# [0.2.0-alpha.823](https://github.com/mittwald/flow/compare/0.2.0-alpha.822...0.2.0-alpha.823) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.822](https://github.com/mittwald/flow/compare/0.2.0-alpha.821...0.2.0-alpha.822) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.821](https://github.com/mittwald/flow/compare/0.2.0-alpha.820...0.2.0-alpha.821) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.820](https://github.com/mittwald/flow/compare/0.2.0-alpha.819...0.2.0-alpha.820) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix render-loop edge-case during suspense ([c8f771c](https://github.com/mittwald/flow/commit/c8f771c1b1887760c4b9a2fc0d9814ab740a124a))
+
+# [0.2.0-alpha.818](https://github.com/mittwald/flow/compare/0.2.0-alpha.817...0.2.0-alpha.818) (2026-05-05)
+
+### Bug Fixes
+
+* **Tunnel:** fix children are not removed if TunnelEntry suspends during render ([1cdeb5c](https://github.com/mittwald/flow/commit/1cdeb5c798a98c901dc70bce65ab73f15d030695))
+
 # [0.2.0-alpha.817](https://github.com/mittwald/flow/compare/0.2.0-alpha.816...0.2.0-alpha.817) (2026-05-04)
 
 ### Bug Fixes

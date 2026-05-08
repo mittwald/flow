@@ -1,4 +1,4 @@
-import { type ReactNode, useRef, useState } from "react";
+import { type ReactNode, useId, useRef, useState } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 
@@ -16,10 +16,16 @@ interface TunnelEntryState {
   children: TunnelChildren;
 }
 
+interface TunnelEntries {
+  committed: boolean;
+  entries: TunnelEntryState[];
+}
+
 export class TunnelState {
   public readonly id: string;
+  private instanceId: string;
 
-  public readonly children = observable.map<
+  public readonly committedChildren = observable.map<
     string,
     ObservableMap<string, TunnelEntryState>
   >(
@@ -29,15 +35,19 @@ export class TunnelState {
     },
   );
 
-  private readonly preparedChildren = new Map<
+  private readonly renderPhaseChildren = new Map<
     string,
     Map<string, TunnelEntryState>
   >();
 
   private nextIndex = 0;
 
-  public constructor(id = defaultTunnelProviderId) {
+  public constructor(
+    id = defaultTunnelProviderId,
+    instanceId = defaultTunnelProviderId,
+  ) {
     this.id = id;
+    this.instanceId = instanceId;
     makeObservable(this, {
       id: false,
       deleteChildren: action.bound,
@@ -46,7 +56,8 @@ export class TunnelState {
   }
 
   public static useNew(id?: string): TunnelState {
-    const tunnelState = useState(() => new TunnelState(id))[0];
+    const instanceId = useId();
+    const tunnelState = useState(() => new TunnelState(id, instanceId))[0];
     tunnelState.resetIndex();
     return tunnelState;
   }
@@ -56,10 +67,10 @@ export class TunnelState {
   }
 
   public useEntryIndex() {
-    const thisRef = useRef(this);
+    const thisIdRef = useRef(this.instanceId);
     const thisIndex = useRef<number | null>(null);
-    if (thisIndex.current === null || thisRef.current !== this) {
-      thisRef.current = this;
+    if (thisIndex.current === null || thisIdRef.current !== this.instanceId) {
+      thisIdRef.current = this.instanceId;
       thisIndex.current = this.nextIndex++;
     }
     return thisIndex.current;
@@ -78,16 +89,16 @@ export class TunnelState {
     };
 
     const tunnelEntries =
-      this.children.get(tunnelId) ??
+      this.committedChildren.get(tunnelId) ??
       observable.map<string, TunnelEntryState>({}, { deep: false });
 
     tunnelEntries.set(entryId, entryState);
 
-    this.preparedChildren.get(tunnelId)?.delete(entryId);
-    this.children.set(tunnelId, tunnelEntries);
+    this.renderPhaseChildren.get(tunnelId)?.delete(entryId);
+    this.committedChildren.set(tunnelId, tunnelEntries);
   }
 
-  public prepareChildren(
+  public setRenderPhaseChildren(
     tunnelId: string = defaultId,
     entryId: string,
     index: number,
@@ -100,12 +111,12 @@ export class TunnelState {
     };
 
     const tunnelEntries =
-      this.preparedChildren.get(tunnelId) ??
+      this.renderPhaseChildren.get(tunnelId) ??
       new Map<string, TunnelEntryState>();
 
     tunnelEntries.set(entryId, entryState);
 
-    this.preparedChildren.set(tunnelId, tunnelEntries);
+    this.renderPhaseChildren.set(tunnelId, tunnelEntries);
   }
 
   private deleteChildrenFromMap(
@@ -121,20 +132,34 @@ export class TunnelState {
   }
 
   public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
-    this.deleteChildrenFromMap(this.children, tunnelId, entryId);
-    this.deleteChildrenFromMap(this.preparedChildren, tunnelId, entryId);
+    this.deleteChildrenFromMap(this.committedChildren, tunnelId, entryId);
+    this.deleteChildrenFromMap(this.renderPhaseChildren, tunnelId, entryId);
   }
 
-  public getEntries(
-    tunnelId: string = defaultId,
-  ): TunnelEntryState[] | undefined {
+  private takeRenderPhaseChildren(tunnelId: string) {
+    if (this.renderPhaseChildren.has(tunnelId)) {
+      const children = this.renderPhaseChildren.get(tunnelId)?.values();
+      this.renderPhaseChildren.delete(tunnelId);
+      return children;
+    }
+  }
+
+  public getEntries(tunnelId = defaultId): TunnelEntries | undefined {
+    const commitedChildren = this.committedChildren.get(tunnelId)?.values();
+
     const tunnelEntries =
-      this.children.get(tunnelId)?.values() ??
-      this.preparedChildren.get(tunnelId)?.values();
+      commitedChildren ?? this.takeRenderPhaseChildren(tunnelId);
+
     if (tunnelEntries) {
-      return Array.from(tunnelEntries).sort(
+      const committed = !!commitedChildren;
+      const entries = Array.from(tunnelEntries).sort(
         (first, second) => first.index - second.index,
       );
+
+      return {
+        committed,
+        entries,
+      };
     }
   }
 }
