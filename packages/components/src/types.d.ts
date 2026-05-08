@@ -38,3 +38,9 @@ declare global {
     type IntrinsicClassAttributes = Jsx.IntrinsicClassAttributes<never>;
   }
 }
+
+declare module "vitest/browser" {
+  interface BrowserCommands {
+    setReducedMotion: (value: string) => Promise<void>;
+  }
+}
