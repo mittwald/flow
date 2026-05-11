@@ -117,7 +117,7 @@ test("Modal with dirty form requires confirmation", async () => {
     exact: true,
   });
   const confirmCloseModalButton = dom.getByRole("button", {
-    name: "Confirm close",
+    name: "Close",
     exact: true,
   });
   const cancelConfirmCloseModalButton = dom.getByRole("button", {
