@@ -17,6 +17,8 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import locales from "./locales/*.locale.json";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -61,6 +63,8 @@ export const Modal = flowComponent("Modal", (props) => {
     ...overlayProps
   } = props;
 
+  const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
+
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
@@ -72,7 +76,11 @@ export const Modal = flowComponent("Modal", (props) => {
     <>
       {children}
       <Action closeModal={{ bypassConfirmation: true }}>
-        <ButtonView variant="plain" color="secondary">
+        <ButtonView
+          variant="plain"
+          color="secondary"
+          aria-label={stringFormatter.format("close")}
+        >
           <IconClose />
         </ButtonView>
       </Action>
