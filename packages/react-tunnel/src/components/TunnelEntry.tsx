@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useLayoutEffect, useRef } from "react";
 import { useTunnelState } from "@/context";
 
 export type TunnelEntryChildren =
@@ -29,7 +29,7 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
     tunnel.setRenderPhaseChildren(id, entryId, index, children);
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, index, children);
   }, [children, id, entryId, index, providerId]);

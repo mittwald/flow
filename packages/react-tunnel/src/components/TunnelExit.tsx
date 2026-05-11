@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, type FC } from "react";
+import { type FC } from "react";
 import { useTunnelState } from "@/context";
 import { observer } from "mobx-react-lite";
 import type { TunnelChildren } from "@/TunnelState";
@@ -19,13 +19,6 @@ const ChildrenRenderer: FC<{ children: TunnelExitChildren }> = (props) => {
 export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
   const { children, id, providerId } = props;
   const tunnelChildren = useTunnelState(providerId).getEntries(id);
-  const [, setRerenderToken] = useState(0);
-
-  useLayoutEffect(() => {
-    if (tunnelChildren && !tunnelChildren.committed) {
-      setRerenderToken((t) => t + 1);
-    }
-  }, [tunnelChildren?.committed]);
 
   const renderedTunnelChildren = tunnelChildren?.entries.map((entry) => (
     <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>
