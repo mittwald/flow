@@ -115,7 +115,7 @@ test("Modal with dirty form requires confirmation", async () => {
     exact: true,
   });
   const confirmCloseModalButton = dom.getByRole("button", {
-    name: "Close",
+    name: "Confirm close",
     exact: true,
   });
   const cancelConfirmCloseModalButton = dom.getByRole("button", {
@@ -250,7 +250,7 @@ test("Form in Modal is auto-resetted on close", async () => {
           </Content>
           <ActionGroup>
             <Action closeModal>
-              <Button>Close</Button>
+              <Button>Close modal</Button>
             </Action>
           </ActionGroup>
         </Modal>
@@ -262,7 +262,7 @@ test("Form in Modal is auto-resetted on close", async () => {
 
   const isDirtyText = dom.getByTestId("is-dirty");
   const closeButton = dom.getByRole("button", {
-    name: "Close",
+    name: "Close modal",
     exact: true,
   });
   const openModalButton = dom.getByRole("button", {
@@ -299,7 +299,7 @@ test("Form in Modal is not auto-resetted on close when opted-out", async () => {
           </Content>
           <ActionGroup>
             <Action closeModal>
-              <Button>Close</Button>
+              <Button>Close modal</Button>
             </Action>
           </ActionGroup>
         </Modal>
@@ -311,7 +311,7 @@ test("Form in Modal is not auto-resetted on close when opted-out", async () => {
 
   const isDirtyText = dom.getByTestId("is-dirty");
   const closeButton = dom.getByRole("button", {
-    name: "Close",
+    name: "Close modal",
     exact: true,
   });
   const openModalButton = dom.getByRole("button", {
