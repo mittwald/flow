@@ -28,6 +28,16 @@
     }
   }
 
+  &:has(.actionGroup) {
+    .closeButton:not(.alwaysVisible) {
+      display: none;
+    }
+  }
+
+  .closeButton.alwaysHidden {
+    display: none;
+  }
+
   [role="dialog"] {
     > form {
       display: contents;

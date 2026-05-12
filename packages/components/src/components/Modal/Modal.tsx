@@ -49,6 +49,8 @@ export interface ModalProps
   slot?: string;
   /** Whether the modal can be closed by clicking outside of it. */
   isDismissable?: boolean;
+  /** Whether the close button should be visible */
+  showCloseButton?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
@@ -60,6 +62,7 @@ export const Modal = flowComponent("Modal", (props) => {
     ref,
     className,
     offCanvasOrientation = "right",
+    showCloseButton,
     ...overlayProps
   } = props;
 
@@ -80,6 +83,14 @@ export const Modal = flowComponent("Modal", (props) => {
           variant="plain"
           color="secondary"
           aria-label={stringFormatter.format("close")}
+          className={clsx(
+            styles.closeButton,
+            showCloseButton === true
+              ? styles.alwaysVisible
+              : showCloseButton === false
+                ? styles.alwaysHidden
+                : undefined,
+          )}
         >
           <IconClose />
         </ButtonView>
