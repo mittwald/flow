@@ -70,6 +70,7 @@ export const Text = flowComponent("Text", (props) => {
   const propsContext: PropsContext = {
     Link: {
       inline: true,
+      color: isAlphaColor(color) ? color : undefined,
     },
     Icon: { className: styles.icon },
     Kbd: { variant: "soft" },

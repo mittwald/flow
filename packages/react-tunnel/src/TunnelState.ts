@@ -139,16 +139,17 @@ export class TunnelState {
   private takeRenderPhaseChildren(tunnelId: string) {
     if (this.renderPhaseChildren.has(tunnelId)) {
       const children = this.renderPhaseChildren.get(tunnelId)?.values();
-      this.renderPhaseChildren.delete(tunnelId);
+      if (typeof window !== "undefined") {
+        this.renderPhaseChildren.delete(tunnelId);
+      }
       return children;
     }
   }
 
   public getEntries(tunnelId = defaultId): TunnelEntries | undefined {
+    const renderPhaseChildren = this.takeRenderPhaseChildren(tunnelId);
     const commitedChildren = this.committedChildren.get(tunnelId)?.values();
-
-    const tunnelEntries =
-      commitedChildren ?? this.takeRenderPhaseChildren(tunnelId);
+    const tunnelEntries = commitedChildren ?? renderPhaseChildren;
 
     if (tunnelEntries) {
       const committed = !!commitedChildren;
