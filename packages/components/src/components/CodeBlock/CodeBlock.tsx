@@ -56,7 +56,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div
         className={rootClassName}
         style={{
