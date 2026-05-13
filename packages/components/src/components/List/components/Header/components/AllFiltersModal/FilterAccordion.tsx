@@ -10,10 +10,11 @@ import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter"
 
 interface Props {
   filter: Filter | DateRangeFilter;
+  expandAccordions: boolean;
 }
 
 export const FilterAccordion: FC<Props> = (props) => {
-  const { filter } = props;
+  const { filter, expandAccordions } = props;
 
   const name = filter.name ?? filter.property;
 
@@ -27,7 +28,7 @@ export const FilterAccordion: FC<Props> = (props) => {
     );
 
   return (
-    <AccordionView>
+    <AccordionView defaultExpanded={expandAccordions}>
       <HeadingView>{name}</HeadingView>
       <ContentView>{content}</ContentView>
     </AccordionView>
