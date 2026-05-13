@@ -38,6 +38,10 @@ type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
 
+export const WithElementType: Story = {
+  args: { elementType: "span" },
+};
+
 export const AdditionalContent: Story = {
   render: (props) => (
     <StoryBackground color={props.color}>

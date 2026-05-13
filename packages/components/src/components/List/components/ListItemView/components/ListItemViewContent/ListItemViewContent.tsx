@@ -80,6 +80,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     Heading: {
       className: styles.heading,
       level: 5,
+      elementType: "span",
       Badge: { className: styles.badge },
       AlertBadge: { className: styles.badge },
     },
