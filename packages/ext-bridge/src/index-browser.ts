@@ -1,6 +1,3 @@
-import { init as initExtBridge } from "@/global-browser";
-
-export { initExtBridge };
-
+export { initExtBridge } from "@/global-browser";
 export { getConfig } from "@/config/getConfig";
 export { getSessionToken } from "@/sessionToken/getSessionToken";
