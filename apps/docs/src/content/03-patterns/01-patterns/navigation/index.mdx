@@ -12,19 +12,13 @@ können.
 
 # Navigationsstrukturen
 
-Eine Navigation kann durch unterschiedliche Components umgesetzt werden und
-besteht in der Regel aus dem Zusammenspiel mehrerer Elemente. Eine
-HeaderNavigation ermöglicht den Zugriff auf die zentralen Navigationsbereiche.
-Ähnlich wie die Navigation, die im mStudio auf der linken Seite platziert ist
-und eine Primary- und Secondary-Navigation abbildet. Ergänzend sollte der
-Content durch Breadcrumbs und Tabs sinnvoll strukturiert und vervollständigt
-werden.
+Eine Navigation besteht in der Regel aus mehreren aufeinander abgestimmten Components. Hauptnavigationen ermöglichen den Zugriff auf zentrale Bereiche einer Anwendung, während ergänzende Navigations-Elemente innerhalb des Contents Orientierung schaffen und den Wechsel zwischen Ebenen oder Ansichten erleichtern.
 
 ---
 
-# Menü-Navigation
+# Hauptnavigation
 
-Es gibt zwei grundlegende Navigationsvarianten: vertikal und horizontal. Welche
+Es gibt zwei grundlegende Navigationsvarianten: HeaderNavigation und SideNavigation. Welche
 eingesetzt wird, hängt vom Layout und der Komplexität der Inhalte ab. Beachte
 hierbei die Best practices der Navigationen. Durch den Einsatz einer
 [Suche](/04-components/form-controls/search-field/overview),
@@ -35,43 +29,80 @@ einer Layout Card platziert werden.
 
 <LiveCodeEditor example="navigation" editorCollapsed bgColor="dark" />
 
-## Vertikal
-
-Die [Navigation](/04-components/navigation/navigation/overview) ist Vertikal
-angeordnet und eignet sich besonders für Seitenlayouts mit viel Platz in der
-Breite oder für Anwendungen mit komplexeren oder hierarchischen Strukturen. Im
-mStudio wird diese für eine Primary- und Secondary Naviagtion genutzt.
-
-## Horizontal
+## HeaderNaviagtion
 
 Die [HeaderNavigation](/04-components/navigation/header-navigation/overview),
-befindet sich im oberen Bereich der Seite und eignet sich ideal für
-Hauptnavigationen mit flacher Struktur. Sie wird vor allem mit übersichtlicher
-Informationsarchitektur verwendet.
+befindet sich im oberen Bereich der Seite und eignet sich besonders für Hauptnavigationen mit flacher Struktur und übersichtlicher Informationsarchitektur.
+Zusätzlich zu den zentralen Navigationspunkten bietet sie Platz für übergeordnete Funktionen wie beispielsweise ein Profil, globale Aktionen oder eine globale Suche.
+
+
+## Navigation (SideNavigation)
+
+Die [Navigation](/04-components/navigation/navigation/overview) ist vertikal
+angeordnet und eignet sich besonders für Seitenlayouts mit viel Platz in der Breite oder für Anwendungen mit komplexeren beziehungsweise hierarchischen Strukturen. Sie bietet ausreichend Platz für viele Menüpunkte sowie verschachtelte Navigations-Ebenen.
+
+Im mStudio wird die SideNavigation aufgrund der komplexen Informationsarchitektur sowohl für Hauptnavigationspunkte als auch für untergeordnete Navigationspunkte genutzt.
+
 
 ---
 
 # Content-Navigation
 
-Die Navigations-Components Breadcrumb und Tabs unterstützen die Orientierung
-innerhalb des Contents und ermöglichen den schnellen Wechsel zwischen
-zusammengehörenden Ebenen oder Ansichten.
+Die Navigations-Components Breadcrumb, Tabs und List unterstützen die Orientierung innerhalb des Contents und ermöglichen den schnellen Wechsel zwischen zusammengehörenden Inhalten oder Hierarchieebenen.
 
 <LiveCodeEditor example="tabs" editorCollapsed bgColor="dark" />
 
 ## Breadcrumb
 
-Die [Breadcrumb](/04-components/navigation/breadcrumb/overview) zeigt den
-aktuellen Pfad innerhalb einer hierarchischen Struktur an. Sie unterstützt die
-Orientierung, indem sie den Usern jederzeit verdeutlicht, wo sie sich befinden.
-Gleichzeitig ermöglicht sie den schnellen Wechsel zu übergeordneten Ebenen und
-erleichtert so die Navigation innerhalb.
+Die [Breadcrumb](/04-components/navigation/breadcrumb/overview) zeigt den aktuellen Pfad innerhalb einer hierarchischen Struktur an. Sie unterstützt die Orientierung, indem sie den Usern jederzeit verdeutlicht, wo sie sich befinden. Zusätzlich erleichtert sie die Rücknavigation zu übergeordneten Ebenen und verbessert damit die Navigierbarkeit komplexerer Anwendungen.
 
 ## Tabs
 
-[Tabs](/04-components/navigation/tabs/overview) ermöglichen den schnellen
-Wechsel zwischen Ansichten, die auf der gleichen Hierarchieebene liegen. Sie
-strukturieren verwandte Informationen in klar abgegrenzte Bereiche, ohne dass
-eine neue Seite geladen wird. Durch ihre permanente Sichtbarkeit unterstützen
-die Tabs den Usern dabei, Inhalte schnell zu erfassen und zwischen ihnen zu
-wechseln.
+[Tabs](/04-components/navigation/tabs/overview) ermöglichen den schnellen Wechsel zwischen Ansichten auf derselben Hierarchieebene. Sie strukturieren verwandte Informationen in klar abgegrenzte Bereiche, ohne dass eine neue Seite geladen werden muss. Durch ihre permanente Sichtbarkeit unterstützen die Tabs den Usern dabei, Inhalte schnell zu erfassen und effizient zwischen verschiedenen Ansichten zu wechseln.
+
+## List
+
+[Listen](/04-components/structure/list/overview) dienen der Navigation, wenn Inhalte strukturiert und übersichtlich dargestellt werden. Sie ermöglichen einen schnellen Wechsel zwischen zusammengehörenden Inhalten und unterstützen besonders bei vielen Einträgen.
+
+
+
+---
+
+# Quernavigation
+
+Quernavigation beschreibt Navigationspfade außerhalb der klassischen Navigation. Sie erfolgt beispielsweise über Links, Suche oder automatische Weiterleitungen.
+
+
+## Links
+
+[Links](/04-components/navigation/link/overview) ermöglichen den direkten Wechsel zwischen inhaltlich zusammenhängenden Bereichen und ergänzen die klassische Navigation. Sie helfen dabei, relevante Informationen schnell erreichbar zu machen.
+
+## Suche
+
+Die [Suche](/04-components/form-controls/search-field/overview) ermöglicht den direkten Zugriff auf Inhalte, Funktionen oder Bereiche, ohne mehrere Navigationsebenen durchlaufen zu müssen. Besonders in komplexen Anwendungen mit vielen Inhalten unterstützt sie User dabei, Informationen effizient und zielgerichtet zu finden.
+
+## Weiterleitungen
+
+Weiterleitungen führen User automatisch oder systemgesteuert zu einer anderen Ansicht oder einem anderen Bereich der Anwendung. Sie sollten bewusst und nachvollziehbar eingesetzt werden, da unerwartete Wechsel schnell zu Orientierungsverlust führen können.
+
+
+
+---
+
+# Best Practices
+
+- **Komplexität reduzieren:** Gestalte Inhalte und Navigationen klar und verständlich. Eine reduzierte und konsistente Navigation verbessert die Orientierung und erleichtert die Nutzung.
+- **Orientierung schaffen:** User sollten jederzeit erkennen können, wo sie sich befinden. Aktive Zustände, Breadcrumbs und Tabs unterstützen dabei.
+- **Suche integrieren:** Eine gut sichtbare Suche und Schnellzugriffe erleichtern besonders in komplexen Anwendungen den schnellen Zugriff auf Inhalte.
+- **Konsistente Navigation:** Navigationsmuster und Positionierungen sollten innerhalb der gesamten Anwendung konsistent verwendet werden. Wiederkehrende Muster erleichtern das Verständnis und stärken die Orientierung.
+
+
+---
+
+# A11y
+
+Eine barrierefreie Navigation stellt sicher, dass alle User die Anwendung zuverlässig bedienen können.
+
+- **Fokus-Reihenfolge und Tastaturbedienung:** Navigations-Elemente müssen vollständig per Tastatur erreichbar und bedienbar sein. Die Fokus-Reihenfolge sollte logisch aufgebaut sein und der visuellen Struktur folgen.
+- **Semantische Struktur und ARIA-Rollen:** Verwende semantisch korrekte HTML-Elemente und ergänze diese bei Bedarf durch passende ARIA-Rollen und -Attribute. Dadurch können Screenreader Navigationsbereiche korrekt interpretieren und vermitteln.
+- **Verständliche Bezeichnungen:** Navigationspunkte sollten eindeutig benannt sein und verständlich kommunizieren, wohin sie führen. Dadurch wird die Orientierung zusätzlich verbessert.
