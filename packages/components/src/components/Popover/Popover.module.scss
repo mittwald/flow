@@ -113,6 +113,7 @@
 
 @media (max-width: 768px) {
   .popover {
+    position: fixed !important;
     inset: auto 0 0 !important;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
