@@ -25,6 +25,7 @@ import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
 import { IntlProvider, useLanguage } from "@mittwald/flow-react-components";
 import type { HostConfig } from "@mittwald/flow-core";
+import { initExtBridge } from "@mittwald/ext-bridge/browser";
 
 const viewComponents = {
   ...remoteComponents,
@@ -132,6 +133,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     if (isConnectionInitialized.current) {
       return;
     }
+    initExtBridge();
     isConnectionInitialized.current = true;
     connect(div)
       ?.then((connection) => {
