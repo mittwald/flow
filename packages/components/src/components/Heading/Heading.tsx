@@ -1,4 +1,4 @@
-import type { AlphaColor } from "@/lib/types/props";
+import type { AlphaColor, PropsWithElementType } from "@/lib/types/props";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -8,7 +8,11 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
 
-export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
+export interface HeadingProps
+  extends
+    Aria.HeadingProps,
+    FlowComponentProps,
+    PropsWithElementType<"span" | "p"> {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
   /** The color of the heading. @default "primary" */
@@ -27,6 +31,7 @@ export const Heading = flowComponent("Heading", (props) => {
     wrap,
     size,
     ref,
+    elementType,
     ...rest
   } = props;
 
@@ -35,8 +40,11 @@ export const Heading = flowComponent("Heading", (props) => {
     size && styles[`size-${size}`],
     styles[color],
     wrap && styles[`wrap-${wrap}`],
+    elementType && styles[`h${level}`],
     className,
   );
+
+  const Element = elementType ?? Aria.Heading;
 
   const propsContext: PropsContext = {
     Icon: {
@@ -73,12 +81,12 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Aria.Heading level={level} className={rootClassName} {...rest} ref={ref}>
+      <Element className={rootClassName} {...rest} ref={ref} level={level}>
         <span className={styles.headingText}>{children}</span>
         <span className={styles.headingContent}>
           <UiComponentTunnelExit id="headingContent" component="Heading" />
         </span>
-      </Aria.Heading>
+      </Element>
     </PropsContextProvider>
   );
 });
