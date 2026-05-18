@@ -53,11 +53,7 @@ export const connectHostRenderRoot = async (
 
     if (typeof mwExtBridge !== "undefined") {
       mwExtBridge.connection = connection.imports;
-      try {
-        await mwExtBridge.readiness.setIsReady();
-      } catch (error) {
-        console.warn("Failed to initialize ext-bridge readiness:", error);
-      }
+      await mwExtBridge.readiness.setIsReady();
     }
 
     return connection;
