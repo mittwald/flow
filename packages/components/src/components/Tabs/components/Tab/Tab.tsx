@@ -27,10 +27,10 @@ export const Tab: FC<TabProps> = (props) => {
 
     const propsContext: PropsContext = {
       Content: {
-        wrapWith: <Activity isActive={isSelected} />,
+        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
       },
       Section: {
-        wrapWith: <Activity isActive={isSelected} />,
+        wrapWith: <Activity isActive={isSelected} forceCustomActivity />,
       },
     };
 
