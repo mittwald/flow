@@ -9,7 +9,13 @@ import { useList } from "@/components/List";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 
-export const ViewModeAccordion: FC = () => {
+interface Props {
+  expandAccordions: boolean;
+}
+
+export const ViewModeAccordion: FC<Props> = (props) => {
+  const { expandAccordions } = props;
+
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
@@ -17,7 +23,7 @@ export const ViewModeAccordion: FC = () => {
   const selectedViewMode = list.viewMode.value;
 
   return (
-    <AccordionView>
+    <AccordionView defaultExpanded={expandAccordions}>
       <HeadingView>{stringFormatter.format("settings.viewMode")}</HeadingView>
       <ContentView>
         <RadioGroupView value={selectedViewMode} m={[1, 1]}>

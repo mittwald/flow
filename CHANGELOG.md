@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.828](https://github.com/mittwald/flow/compare/0.2.0-alpha.827...0.2.0-alpha.828) (2026-05-13)
+
+### Bug Fixes
+
+* **CodeBlock:** fix overflow ([#2496](https://github.com/mittwald/flow/issues/2496)) ([a2e6c3b](https://github.com/mittwald/flow/commit/a2e6c3bd3e034dc706551e0515774c5c0cf9667e))
+
+### Features
+
+* **List:** expand accordions in all filters modal ([#2497](https://github.com/mittwald/flow/issues/2497)) ([2faf0bf](https://github.com/mittwald/flow/commit/2faf0bfc25f1ae6d16327b806f0615351d814e83))
+
 # [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
 
 ### Bug Fixes
