@@ -14,7 +14,7 @@ import { IncrementalLoaderState } from "@/components/List/model/loading/Incremen
 import { hash } from "object-code";
 import type { PropertyName } from "@/components/List/model/types";
 import { useMemo } from "react";
-import { flags } from "@/integrations/react-hook-form";
+import { flags } from "@/flags";
 
 const emptyData: never[] = [];
 
