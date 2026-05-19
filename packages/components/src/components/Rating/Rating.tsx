@@ -58,6 +58,7 @@ export const Rating = flowComponent("Rating", (props) => {
   );
 
   const localRef = useObjectRef(ref);
+
   useMakeFocusable(localRef);
 
   const stringValue = value?.toString();
