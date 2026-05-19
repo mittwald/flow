@@ -1,20 +1,26 @@
-import React, { type FC } from "react";
+import React, {
+  type FC,
+  type PropsWithChildren,
+  type ReactElement,
+} from "react";
 import clsx from "clsx";
 import styles from "@/components/Rating/Rating.module.scss";
 import * as Aria from "react-aria-components";
 import type { RatingProps } from "@/components/Rating";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
-import { RatingStar } from "@/components/Rating/components/RatingSegment/RatingStar";
-import { RatingStarFilled } from "@/components/Rating/components/RatingSegment/RatingStarFilled";
+import { FilledSegment } from "@/components/Rating/components/RatingSegment/FilledSegment";
+import { EmptySegment } from "@/components/Rating/components/RatingSegment/EmptySegment";
 
-interface Props {
+interface Props extends PropsWithChildren {
   index: number;
   selectedValue: number;
   size: RatingProps["size"];
+  iconEmpty?: ReactElement;
+  iconFilled?: ReactElement;
 }
 export const RatingSegment: FC<Props> = (props) => {
-  const { index, selectedValue, size } = props;
+  const { index, selectedValue, size, iconEmpty, iconFilled } = props;
 
   const value = index + 1;
 
@@ -29,8 +35,8 @@ export const RatingSegment: FC<Props> = (props) => {
         value === selectedValue && styles.current,
       )}
     >
-      <RatingStarFilled size={size} />
-      <RatingStar size={size} />
+      <FilledSegment size={size}>{iconFilled}</FilledSegment>
+      <EmptySegment size={size}>{iconEmpty}</EmptySegment>
     </Aria.Radio>
   );
 };
