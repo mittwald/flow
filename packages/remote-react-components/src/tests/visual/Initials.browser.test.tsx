@@ -7,7 +7,8 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s" align="center">
         <Initials>Max Mustermann</Initials>
-        <Initials>Max </Initials>
+        <Initials>Max</Initials>
+        <Initials>😄</Initials>
       </Flex>,
     );
 

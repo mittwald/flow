@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.832](https://github.com/mittwald/flow/compare/0.2.0-alpha.831...0.2.0-alpha.832) (2026-05-19)
+
+### Features
+
+* **Initials:** support emojis ([#2510](https://github.com/mittwald/flow/issues/2510)) ([9ff88e7](https://github.com/mittwald/flow/commit/9ff88e73c77f711d1f82c97f824204fd6d3780b2))
+
 # [0.2.0-alpha.831](https://github.com/mittwald/flow/compare/0.2.0-alpha.830...0.2.0-alpha.831) (2026-05-18)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
