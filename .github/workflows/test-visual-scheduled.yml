@@ -23,10 +23,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        working-directory: packages/remote-react-components
-        run: npx playwright install --with-deps firefox
-
       - name: Prepare browser tests
         run: pnpm test:browser:prepare --only-shell
 
