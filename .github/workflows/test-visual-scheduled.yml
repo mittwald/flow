@@ -25,7 +25,7 @@ jobs:
 
       - name: Install Playwright browsers
         working-directory: packages/remote-react-components
-        run: npx playwright install --with-deps firefox
+        run: npx playwright install --with-deps
 
       - name: Prepare browser tests
         run: pnpm test:browser:prepare --only-shell
