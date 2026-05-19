@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Update playwright
-        run: pnpm exec playwright install
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
 
       - name: Prepare browser tests
         run: pnpm test:browser:prepare --only-shell
