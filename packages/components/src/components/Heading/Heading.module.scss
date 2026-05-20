@@ -45,21 +45,27 @@
     }
   }
 
-  &:where(h1) {
+  &:where(h1),
+  &:where(.h1) {
     --font-size: var(--font-size-heading--xl);
   }
 
-  &:where(h2) {
+  &:where(h2),
+  &:where(.h2) {
     --font-size: var(--font-size-heading--m);
   }
 
-  &:where(h3) {
+  &:where(h3),
+  &:where(.h3) {
     --font-size: var(--font-size-heading--s);
   }
 
   &:where(h4),
+  &:where(.h4),
   &:where(h5),
-  &:where(h6) {
+  &:where(.h5),
+  &:where(h6),
+  &:where(.h6) {
     --font-size: var(--font-size-heading--xs);
   }
 

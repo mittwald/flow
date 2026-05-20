@@ -8,6 +8,7 @@ import { Label } from "@/components/Label";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
+import { Button } from "@/components/Button";
 import { AlertIcon } from "@/components/AlertIcon";
 import { dummyText } from "@/lib/dev/dummyText";
 import { useEffect, useState } from "react";
@@ -28,7 +29,10 @@ const meta: Meta<typeof Tabs> = {
             <AlertIcon status="info" />
           </TabTitle>
           <Section>
-            <Heading>General</Heading>
+            <Header>
+              <Heading>General</Heading>
+              <Button>Button</Button>
+            </Header>
             <TextField defaultValue="example@mittwald.de">
               <Label>Mail address</Label>
             </TextField>

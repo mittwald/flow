@@ -12,7 +12,7 @@ import {
   Form,
   SubmitButton,
 } from "@/integrations/react-hook-form";
-import { resetFlags } from "@/integrations/react-hook-form/flags";
+import { resetFlags } from "@/flags";
 import { useModalController } from "@/lib/controller";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";

@@ -1,6 +1,6 @@
 import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { flags } from "@/integrations/react-hook-form/flags";
+import { flags } from "@/flags";
 import { useModalController } from "@/lib/controller";
 import {
   type BaseSyntheticEvent,

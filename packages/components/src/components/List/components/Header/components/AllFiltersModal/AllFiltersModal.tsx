@@ -32,15 +32,30 @@ export const AllFiltersModal: FC<Props> = (props) => {
   const totalItemCount =
     list.batches.getTotalItemsCount() ?? list.items.entries.length;
 
-  const filterAccordions = list.filters.map((f) => (
-    <FilterAccordion filter={f} key={f.name} />
-  ));
-
   const availableViewModes = useAvailableViewModes();
 
+  const accordionCount =
+    (availableViewModes.length > 0 ? 1 : 0) +
+    (list.sorting.length > 0 ? 1 : 0) +
+    list.filters.length;
+
+  const expandAccordions = accordionCount <= 2;
+
+  const filterAccordions = list.filters.map((f) => (
+    <FilterAccordion
+      filter={f}
+      key={f.name}
+      expandAccordions={expandAccordions}
+    />
+  ));
+
   const accordions = [
-    availableViewModes.length > 1 && <ViewModeAccordion key="viewMode" />,
-    list.sorting.length > 0 && <SortingAccordion key="sorting" />,
+    availableViewModes.length > 1 && (
+      <ViewModeAccordion key="viewMode" expandAccordions={expandAccordions} />
+    ),
+    list.sorting.length > 0 && (
+      <SortingAccordion key="sorting" expandAccordions={expandAccordions} />
+    ),
     ...filterAccordions,
   ].filter(Boolean);
 

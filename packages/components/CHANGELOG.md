@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.832](https://github.com/mittwald/flow/compare/0.2.0-alpha.831...0.2.0-alpha.832) (2026-05-19)
+
+### Features
+
+* **Initials:** support emojis ([#2510](https://github.com/mittwald/flow/issues/2510)) ([9ff88e7](https://github.com/mittwald/flow/commit/9ff88e73c77f711d1f82c97f824204fd6d3780b2))
+
+# [0.2.0-alpha.831](https://github.com/mittwald/flow/compare/0.2.0-alpha.830...0.2.0-alpha.831) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.830](https://github.com/mittwald/flow/compare/0.2.0-alpha.829...0.2.0-alpha.830) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.829](https://github.com/mittwald/flow/compare/0.2.0-alpha.828...0.2.0-alpha.829) (2026-05-18)
+
+### Bug Fixes
+
+* **Tabs:** fix disappearing buttons ([#2500](https://github.com/mittwald/flow/issues/2500)) ([f7845fa](https://github.com/mittwald/flow/commit/f7845fa3d8e1f1b0417913077e3b16d7a2e66349))
+
+### Features
+
+* **Heading:** allow element type ([#2505](https://github.com/mittwald/flow/issues/2505)) ([a550b59](https://github.com/mittwald/flow/commit/a550b594d1b14616d2f1884abcf941a7869a8bad))
+
+# [0.2.0-alpha.828](https://github.com/mittwald/flow/compare/0.2.0-alpha.827...0.2.0-alpha.828) (2026-05-13)
+
+### Bug Fixes
+
+* **CodeBlock:** fix overflow ([#2496](https://github.com/mittwald/flow/issues/2496)) ([a2e6c3b](https://github.com/mittwald/flow/commit/a2e6c3bd3e034dc706551e0515774c5c0cf9667e))
+
+### Features
+
+* **List:** expand accordions in all filters modal ([#2497](https://github.com/mittwald/flow/issues/2497)) ([2faf0bf](https://github.com/mittwald/flow/commit/2faf0bfc25f1ae6d16327b806f0615351d814e83))
+
 # [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
 
 ### Features
