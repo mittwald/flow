@@ -17,6 +17,7 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const { id } = useTabContext();
+
   const titleClassName = clsx(styles.tabTitle, className);
 
   return (
