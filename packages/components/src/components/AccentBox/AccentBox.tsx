@@ -45,7 +45,7 @@ export interface AccentBoxProps
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {
-  /** The background color of the accent box. @default "blue" */
+  /** The background color of the accent box. @default "neutral" */
   backgroundColor?: AccentBoxWithCustomBackgroundColor;
   /** The content color of the accent box. @default "default" */
   color?: "default" | AlphaColor;
@@ -59,7 +59,7 @@ export interface AccentBoxProps
 export const AccentBox = flowComponent("AccentBox", (props) => {
   const {
     color: colorFromProps,
-    backgroundColor = "blue",
+    backgroundColor = "neutral",
     backgroundImage,
     children,
     elementType = "div",
