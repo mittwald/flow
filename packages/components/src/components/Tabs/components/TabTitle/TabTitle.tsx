@@ -37,7 +37,7 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
       </UiComponentTunnelEntry>
 
       <UiComponentTunnelEntry id="ContextMenuItems" component="Tabs">
-        <MenuItem className={styles.menuItem} id={id}>
+        <MenuItem {...rest} className={styles.menuItem} id={id}>
           {children}
         </MenuItem>
       </UiComponentTunnelEntry>
