@@ -4,9 +4,7 @@
     gap: var(--align--avatar-text--spacing);
     height: fit-content;
 
-    --first-two-lines-height: calc(
-      (var(--font-size-text--s) * var(--line-height)) * 2
-    );
+    --first-two-lines-height: calc(var(--line-height-s) * 2);
 
     min-height: var(--first-two-lines-height);
 
@@ -36,9 +34,7 @@
 
     &:has(label) {
       .button {
-        margin-top: calc(
-          var(--label--font-size) * 1.5 + var(--form-control--spacing-y)
-        );
+        margin-top: calc(var(--line-height-s) + var(--form-control--spacing-y));
       }
     }
   }
