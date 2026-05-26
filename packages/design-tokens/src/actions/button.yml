@@ -28,7 +28,7 @@ button:
   font-size-s:
     value: "{font-size-text.s}"
   line-height-s:
-    value: "{single-line-height.s}"
+    value: "{single-line-height}"
   corner-radius-s:
     value: "{corner-radius.s}"
 

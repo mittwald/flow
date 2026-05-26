@@ -7,6 +7,18 @@
   position: relative;
   border: var(--notification--border-width) var(--notification--border-style)
     var(--notification--border-color);
+  background-color: #fff;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--notification--border-x-start-width);
+    left: calc(var(--size-px--xxxs) * -1);
+    border-top-left-radius: var(--notification--corner-radius);
+    border-bottom-left-radius: var(--notification--corner-radius);
+  }
 
   @extend .info;
 
@@ -14,10 +26,9 @@
 
   .link {
     padding: var(--notification--padding);
-    border-radius: var(--notification--corner-radius);
-    border-style: var(--notification--border-style);
-    border-width: 0;
-    border-inline-start-width: var(--notification--border-x-start-width);
+    padding-inline-start: calc(
+      var(--notification--padding) + var(--notification--border-x-start-width)
+    );
     display: flex;
     flex-direction: column;
     row-gap: var(--notification--heading-to-text-spacing);
@@ -27,17 +38,6 @@
     position: relative;
 
     @include focus.focus;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: var(--notification--border-x-start-width);
-      left: calc(var(--notification--border-x-start-width) * -1);
-      border-top-left-radius: var(--notification--corner-radius);
-      border-bottom-left-radius: var(--notification--corner-radius);
-    }
   }
 
   .heading {
@@ -72,15 +72,8 @@
 
   @mixin status($status) {
     &.#{$status} {
-      .link {
-        border-color: var(--notification--#{$status}-background-color--default);
-        background-color: var(
-          --notification--#{$status}-background-color--default
-        );
-
-        &::before {
-          background-color: var(--notification--#{$status}-border-color);
-        }
+      &::after {
+        background-color: var(--notification--#{$status}-border-color);
       }
 
       &.hasLink {
