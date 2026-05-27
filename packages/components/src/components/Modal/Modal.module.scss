@@ -62,7 +62,7 @@
 
   .header {
     padding-inline: var(--modal--padding);
-    padding-block: var(--modal--header-padding-y);
+    padding-top: var(--modal--header-padding-top);
 
     > span {
       display: flex;
