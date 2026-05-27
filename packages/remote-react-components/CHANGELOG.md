@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
+
+### Bug Fixes
+
+* **Tabs:** fix collapsed tabs with link ([#2513](https://github.com/mittwald/flow/issues/2513)) ([9ffc8bc](https://github.com/mittwald/flow/commit/9ffc8bca6a8e3eea33112758da9abfa22158dcb5))
+
 # [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
