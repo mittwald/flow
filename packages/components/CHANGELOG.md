@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
+
+### Features
+
+* **Rating:** support custom icons ([#2511](https://github.com/mittwald/flow/issues/2511)) ([6c4ef13](https://github.com/mittwald/flow/commit/6c4ef13c5c039d08d937857cce30c57a9788b4d3))
+
 # [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
 
 ### Bug Fixes
