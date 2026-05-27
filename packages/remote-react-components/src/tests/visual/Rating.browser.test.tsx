@@ -44,3 +44,24 @@ test.each(testEnvironments)(
     await testScreenshot("Rating interaction - option selected");
   },
 );
+
+test.each(testEnvironments)(
+  "Rating custom icon (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Rating, Label, IconHome },
+  }) => {
+    await render(
+      <Rating
+        defaultValue={2}
+        iconFilled={<IconHome status="success" />}
+        iconEmpty={<IconHome />}
+      >
+        <Label>Custom icon</Label>
+      </Rating>,
+    );
+
+    await testScreenshot("Rating custom icon");
+  },
+);
