@@ -11,12 +11,13 @@ interface Props extends Pick<
 }
 
 export const Donut: FC<Props> = (props) => {
-  const { value = 0, segments, size, maxValue } = props;
+  const { value = 0, segments, size, maxValue: maxValueFromProps } = props;
 
   const strokeWidth = 0.5;
   const fillWidth = size === "m" ? 8 : 12;
   const center = fillWidth * 4;
   const radius = center - fillWidth / 2;
+  const maxValue = maxValueFromProps ?? 100;
 
   return (
     <>
@@ -52,9 +53,9 @@ export const Donut: FC<Props> = (props) => {
         <DonutChartFill
           radius={radius}
           center={center}
-          value={value}
+          value={value < maxValue ? value : maxValue}
           segments={segments}
-          maxValue={maxValue ?? 100}
+          maxValue={maxValue}
         />
       </svg>
     </>
