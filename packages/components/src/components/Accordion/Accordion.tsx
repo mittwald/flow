@@ -40,6 +40,7 @@ export const Accordion: FC<AccordionProps> = flowComponent(
     );
 
     const headerId = useId();
+
     const contentId = useId();
 
     const HeaderButton: FC<PropsWithChildren> = (props) => {
