@@ -7,6 +7,12 @@
   @include formInteractionStates;
 }
 
+@mixin formHiddenInputScrollBehaviorFix {
+  // required for correct scroll behavior
+  // see https://react-aria.adobe.com/VisuallyHidden
+  position: relative;
+}
+
 @mixin formBorder {
   border-width: var(--form-control--border-width);
   border-style: var(--form-control--border-style);

@@ -1,6 +1,9 @@
 @use "@/styles/mixins/focus";
+@use "@/styles/mixins/formControl";
 
 .switch {
+  @include formControl.formHiddenInputScrollBehaviorFix;
+
   display: flex;
   align-items: center;
   column-gap: var(--switch--label-to-track-spacing);

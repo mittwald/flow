@@ -1,6 +1,8 @@
-@use "../../styles/mixins/formControl";
+@use "@/styles/mixins/formControl";
 
 .checkboxButton {
+  @include formControl.formHiddenInputScrollBehaviorFix;
+
   align-self: normal;
   width: fit-content;
 

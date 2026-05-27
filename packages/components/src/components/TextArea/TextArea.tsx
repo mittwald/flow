@@ -6,7 +6,7 @@ import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
-import { type PropsWithChildren, useEffect, useState } from "react";
+import { type ChangeEventHandler, useEffect, useState } from "react";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
@@ -14,8 +14,17 @@ import { FieldDescription } from "@/components/FieldDescription";
 
 export interface TextAreaProps
   extends
-    PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
-    Pick<Aria.TextAreaProps, "placeholder" | "rows" | "aria-hidden">,
+    Omit<Aria.TextAreaProps, "onChange" | "defaultValue" | "value">,
+    Pick<
+      Aria.TextFieldProps,
+      | "isReadOnly"
+      | "isDisabled"
+      | "isInvalid"
+      | "isRequired"
+      | "value"
+      | "defaultValue"
+      | "onChange"
+    >,
     FlowComponentProps<HTMLTextAreaElement> {
   /** Whether a character count should be displayed inside the field description. */
   showCharacterCount?: boolean;
@@ -78,13 +87,16 @@ export const TextArea = flowComponent("TextArea", (props) => {
         : null,
   );
 
-  const handleChange = (v: string) => {
+  const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+    const value = event.target.value;
     if (showCharacterCount) {
-      setCharactersCount(v.length);
+      setCharactersCount(value.length);
     }
     if (onChange) {
-      onChange(v);
+      onChange(value);
     }
+
+    updateHeight();
   };
 
   const translation = useLocalizedStringFormatter(locales, "TextArea");
@@ -155,21 +167,17 @@ export const TextArea = flowComponent("TextArea", (props) => {
   };
 
   return (
-    <Aria.TextField
-      {...rest}
-      {...fieldProps}
-      className={rootClassName}
-      onChange={handleChange}
-    >
+    <div {...fieldProps} className={rootClassName}>
       <PropsContextProvider props={fieldPropsContext}>
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
         <Aria.TextArea
+          {...rest}
           rows={rows}
           aria-hidden={props["aria-hidden"]}
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
-          onChange={updateHeight}
+          onChange={handleChange}
           style={{
             minHeight: getHeight(rows),
             maxHeight: verticallyResizable
@@ -182,7 +190,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
         )}
         <FieldErrorView />
       </PropsContextProvider>
-    </Aria.TextField>
+    </div>
   );
 });
 
