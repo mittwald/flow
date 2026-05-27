@@ -7,7 +7,6 @@
   position: relative;
   border: var(--notification--border-width) var(--notification--border-style)
     var(--notification--border-color);
-  background-color: #fff;
 
   &::after {
     content: "";
@@ -36,6 +35,7 @@
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
     position: relative;
+    border-radius: calc(var(--notification--corner-radius) - 1px);
 
     @include focus.focus;
   }
@@ -72,6 +72,13 @@
 
   @mixin status($status) {
     &.#{$status} {
+      .link {
+        border-color: var(--notification--#{$status}-background-color--default);
+        background-color: var(
+          --notification--#{$status}-background-color--default
+        );
+      }
+
       &::after {
         background-color: var(--notification--#{$status}-border-color);
       }
