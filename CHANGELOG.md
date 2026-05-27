@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.836](https://github.com/mittwald/flow/compare/0.2.0-alpha.835...0.2.0-alpha.836) (2026-05-27)
+
+### Bug Fixes
+
+* **Modal:** add missing aria label ([#2495](https://github.com/mittwald/flow/issues/2495)) ([d576882](https://github.com/mittwald/flow/commit/d576882bb4c98cbe6f9beb7967a927ae2a9737f4))
+
 # [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
 
 ### Features
