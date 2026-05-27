@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.837](https://github.com/mittwald/flow/compare/0.2.0-alpha.836...0.2.0-alpha.837) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.836](https://github.com/mittwald/flow/compare/0.2.0-alpha.835...0.2.0-alpha.836) (2026-05-27)
+
+### Bug Fixes
+
+* **Modal:** add missing aria label ([#2495](https://github.com/mittwald/flow/issues/2495)) ([d576882](https://github.com/mittwald/flow/commit/d576882bb4c98cbe6f9beb7967a927ae2a9737f4))
+
+# [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
+
+### Features
+
+* **Rating:** support custom icons ([#2511](https://github.com/mittwald/flow/issues/2511)) ([6c4ef13](https://github.com/mittwald/flow/commit/6c4ef13c5c039d08d937857cce30c57a9788b4d3))
+
+# [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
+
+### Bug Fixes
+
+* **Tabs:** fix collapsed tabs with link ([#2513](https://github.com/mittwald/flow/issues/2513)) ([9ffc8bc](https://github.com/mittwald/flow/commit/9ffc8bca6a8e3eea33112758da9abfa22158dcb5))
+
 # [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

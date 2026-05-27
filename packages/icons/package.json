@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-icons",
-  "version": "0.2.0-alpha.833",
+  "version": "0.2.0-alpha.837",
   "type": "module",
   "description": "Default iconset for Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -21,7 +21,7 @@
     "clean": "rimraf dist src/components/*"
   },
   "dependencies": {
-    "@tabler/icons-react": "^3.40.0"
+    "@tabler/icons-react": "^3.44.0"
   },
   "devDependencies": {
     "@mittwald/flow-icons-base": "workspace:*",
