@@ -17,6 +17,8 @@ import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import locales from "./locales/*.locale.json";
 
 type SupportedOverlayProps = Pick<
   OverlayProps,
@@ -47,6 +49,8 @@ export interface ModalProps
   slot?: string;
   /** Whether the modal can be closed by clicking outside of it. */
   isDismissable?: boolean;
+  /** Whether the close button should be visible */
+  showCloseButton?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
@@ -58,8 +62,11 @@ export const Modal = flowComponent("Modal", (props) => {
     ref,
     className,
     offCanvasOrientation = "right",
+    showCloseButton,
     ...overlayProps
   } = props;
+
+  const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
@@ -72,7 +79,19 @@ export const Modal = flowComponent("Modal", (props) => {
     <>
       {children}
       <Action closeModal={{ bypassConfirmation: true }}>
-        <ButtonView variant="plain" color="secondary">
+        <ButtonView
+          variant="plain"
+          color="secondary"
+          aria-label={stringFormatter.format("close")}
+          className={clsx(
+            styles.closeButton,
+            showCloseButton === true
+              ? styles.alwaysVisible
+              : showCloseButton === false
+                ? styles.alwaysHidden
+                : undefined,
+          )}
+        >
           <IconClose />
         </ButtonView>
       </Action>
