@@ -21,6 +21,8 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       dir: {},
       form: {},
       hidden: {},
+      iconEmpty: {},
+      iconFilled: {},
       id: {},
       inert: {},
       isDisabled: {},

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-icons-pro",
-  "version": "0.2.0-alpha.833",
+  "version": "0.2.0-alpha.836",
   "type": "module",
   "description": "Pro iconset for Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.2.0",
-    "@tabler/icons-react": "^3.40.0"
+    "@tabler/icons-react": "^3.44.0"
   },
   "devDependencies": {
     "@fortawesome/sharp-regular-svg-icons": "npm:@fortawesome/free-regular-svg-icons@^7.2.0",

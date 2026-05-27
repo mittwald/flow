@@ -11,8 +11,11 @@ const meta: Meta<typeof Rating> = {
   component: Rating,
   args: { size: "m", isDisabled: false, isReadOnly: false, isRequired: false },
   argTypes: { size: { control: "inline-radio", options: ["s", "m"] } },
+  parameters: {
+    controls: { exclude: ["iconEmpty", "iconFilled"] },
+  },
   render: (props) => (
-    <Rating aria-label="Rating" defaultValue={2} {...props}>
+    <Rating defaultValue={2} {...props}>
       <Label>Rating</Label>
     </Rating>
   ),
@@ -46,6 +49,9 @@ export const WithControlledValue: Story = {
 };
 
 export const WithForm: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const form = useForm<{ rating: number }>({ defaultValues: { rating: 2 } });
 
@@ -62,5 +68,19 @@ export const WithForm: Story = {
         <SubmitButton>Submit</SubmitButton>
       </Form>
     );
+  },
+};
+export const WithCustomIcon: Story = {
+  args: {
+    iconEmpty: (
+      <Icon>
+        <IconLeaf />
+      </Icon>
+    ),
+    iconFilled: (
+      <Icon status="success">
+        <IconLeafFilled />
+      </Icon>
+    ),
   },
 };

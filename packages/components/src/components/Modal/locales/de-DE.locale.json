@@ -1,4 +1,5 @@
 {
+  "close": "Schließen",
   "unsavedChangesConfirmationModal.close": "Schließen",
   "unsavedChangesConfirmationModal.heading": "Ungespeicherte Änderungen",
   "unsavedChangesConfirmationModal.keepOpen": "Weiter bearbeiten",
