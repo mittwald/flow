@@ -54,6 +54,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     showCharacterCount,
     className,
     onChange,
+    isInvalid,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -172,6 +173,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
         <Aria.TextArea
           {...rest}
+          aria-invalid={isInvalid}
           rows={rows}
           aria-hidden={props["aria-hidden"]}
           placeholder={placeholder}
