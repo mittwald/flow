@@ -1,3 +1,5 @@
 .calendar {
-  padding: var(--popover--padding--m);
+  &:not(.small) {
+    padding: var(--popover--padding--s);
+  }
 }

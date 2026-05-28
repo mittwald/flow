@@ -12,6 +12,7 @@ import {
 import { Calendar } from "@/components/Calendar";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import styles from "./DatePicker.module.scss";
+import { getBodyInnerWidth } from "@/lib/dom/getBodyInnerWidth";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
@@ -31,6 +32,11 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
   } = useFieldComponent(props, "DatePicker");
 
   const rootClassName = clsx(fieldProps.className, className);
+
+  const calendarClassName = clsx(
+    styles.calendar,
+    getBodyInnerWidth() < 300 && styles.small,
+  );
 
   return (
     <Aria.DatePicker
@@ -56,7 +62,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
           isDialogContent
           controller={popoverController}
         >
-          <Calendar className={styles.calendar} />
+          <Calendar className={calendarClassName} />
         </Popover>
       </FieldErrorCaptureContext>
       <FieldErrorView />
