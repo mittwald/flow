@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.839](https://github.com/mittwald/flow/compare/0.2.0-alpha.838...0.2.0-alpha.839) (2026-05-28)
+
+### Features
+
+* reduce duration of success-feedback ([#2514](https://github.com/mittwald/flow/issues/2514)) ([1d30670](https://github.com/mittwald/flow/commit/1d3067019c5b4ba4c8b32789f8adf4ecc3fb05ba))
+
 # [0.2.0-alpha.838](https://github.com/mittwald/flow/compare/0.2.0-alpha.837...0.2.0-alpha.838) (2026-05-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
