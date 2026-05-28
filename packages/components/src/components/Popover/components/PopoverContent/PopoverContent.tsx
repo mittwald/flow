@@ -2,6 +2,7 @@ import type { FC, PropsWithChildren, Ref, RefObject } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { getBodyInnerWidth } from "@/lib/dom/getBodyInnerWidth";
 
 export interface PopoverContentProps
   extends PropsWithChildren, PropsWithClassName {
@@ -38,7 +39,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      style={{ width }}
+      style={{ width, maxWidth: getBodyInnerWidth() }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
