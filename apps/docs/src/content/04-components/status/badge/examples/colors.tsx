@@ -4,7 +4,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Badge color="neutral">
     <Label>Scope</Label>
     <Text>Value</Text>
@@ -41,4 +41,4 @@ import {
     <Label>Scope</Label>
     <Text>Value</Text>
   </Badge>
-</Row>;
+</>;

@@ -2,7 +2,6 @@
 import {
   Button,
   Heading,
-  LayoutCard,
   Link,
   MenuItem,
   Section,
@@ -19,7 +18,7 @@ export default function Page() {
   const router = useRouter();
   const [isNavigating, startNavigating] = useTransition();
   return (
-    <LayoutCard>
+    <>
       <Title>Details</Title>
       <Actions>
         <MenuItem
@@ -52,6 +51,6 @@ export default function Page() {
         </Button>
         <Link href="/remote/navigation">To Page 1</Link>
       </Section>
-    </LayoutCard>
+    </>
   );
 }

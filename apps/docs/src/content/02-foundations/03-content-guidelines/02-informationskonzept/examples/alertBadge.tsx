@@ -1,6 +1,6 @@
 import { AlertBadge } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <AlertBadge>Update verfügbar</AlertBadge>
 
   <AlertBadge status="warning">
@@ -16,4 +16,4 @@ import { AlertBadge } from "@mittwald/flow-react-components";
   <AlertBadge status="unavailable">
     Nicht gefunden
   </AlertBadge>
-</Row>;
+</>;

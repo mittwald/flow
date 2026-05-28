@@ -24,7 +24,7 @@ const meta: Meta<typeof Chat> = {
   title: "Chat/Chat",
   component: Chat,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   args: { height: 400 },
   render: (props) => (

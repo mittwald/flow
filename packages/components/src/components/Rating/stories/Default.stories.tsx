@@ -5,8 +5,8 @@ import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { useForm } from "react-hook-form";
 import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
+import { Icon } from "@/components/Icon";
 import { IconLeaf, IconLeafFilled } from "@tabler/icons-react";
-import Icon from "@/components/Icon";
 
 const meta: Meta<typeof Rating> = {
   title: "Form Controls/Rating",

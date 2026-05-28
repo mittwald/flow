@@ -18,6 +18,11 @@ import { CountryOptions } from "@/components/CountryOptions";
 const meta: Meta<typeof ComboBox> = {
   title: "Form Controls/ComboBox",
   component: ComboBox,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <ComboBox {...props}>
       <Label>Domain</Label>
@@ -37,14 +42,6 @@ export default meta;
 type Story = StoryObj<typeof ComboBox>;
 
 export const Default: Story = {};
-
-export const Disabled: Story = { args: { isDisabled: true } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const Required: Story = {
-  args: { isRequired: true },
-};
 
 export const WithFieldDescription: Story = {
   render: (props) => (
@@ -118,7 +115,7 @@ export const Emails: Story = {
           isRequired
           onInputChange={(v) => setValue(v)}
         >
-          <Label>Domain</Label>
+          <Label>Email</Label>
           {options}
         </ComboBox>
       </Section>

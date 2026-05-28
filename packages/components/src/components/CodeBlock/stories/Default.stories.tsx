@@ -7,7 +7,9 @@ import { Color } from "@/components/Color";
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
   component: CodeBlock,
-  render: (props) => <CodeBlock {...props} />,
+  parameters: {
+    controls: { exclude: ["truncateLines"] },
+  },
   args: {
     showLineNumbers: false,
     copyable: false,
@@ -23,9 +25,10 @@ const meta: Meta<typeof CodeBlock> = {
   "serverShortId": "s-123456",
 }`,
   },
-  parameters: {
-    controls: { exclude: ["truncateLines"] },
+  argTypes: {
+    showLineNumbers: { control: "boolean" },
   },
+  render: (props) => <CodeBlock {...props} />,
 };
 
 export default meta;

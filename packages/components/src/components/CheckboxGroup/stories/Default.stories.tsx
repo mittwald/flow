@@ -12,6 +12,8 @@ const meta: Meta<typeof CheckboxGroup> = {
   component: CheckboxGroup,
   args: {
     onChange: action("onChange"),
+    isDisabled: false,
+    isReadOnly: false,
   },
   parameters: {
     controls: { exclude: ["onChange"] },
@@ -30,14 +32,6 @@ export default meta;
 type Story = StoryObj<typeof CheckboxGroup>;
 
 export const Default: Story = {};
-
-export const CheckboxGroupDisabled: Story = {
-  args: { isDisabled: true },
-};
-
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
 
 export const CheckboxDisabled: Story = {
   render: (props) => (

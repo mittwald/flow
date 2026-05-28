@@ -44,17 +44,12 @@
   }
 
   .button {
+    color: var(--header-navigation--color);
     border-radius: var(--header-navigation--corner-radius-round);
-  }
 
-  &:not(.light, .dark, .dark-static, .light-static) {
-    .button {
+    &:hover,
+    &[data-pressed] {
       color: var(--header-navigation--color);
-
-      &:hover,
-      &[data-pressed] {
-        color: var(--header-navigation--color);
-      }
     }
   }
 

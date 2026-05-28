@@ -26,7 +26,7 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
 
 export default () => {
   return (
-    <Row>
+    <>
       <ModalTrigger>
         <Button>Modal S</Button>
         <Modal size="s">
@@ -276,6 +276,6 @@ export default () => {
           </ActionGroup>
         </Modal>
       </ModalTrigger>
-    </Row>
+    </>
   );
 };

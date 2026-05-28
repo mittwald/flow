@@ -35,6 +35,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       maxValue: {},
       minValue: {},
       pageBehavior: {},
+      render: {},
       selectionAlignment: {},
       slot: {},
       translate: {},

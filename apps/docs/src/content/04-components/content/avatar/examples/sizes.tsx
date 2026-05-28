@@ -3,7 +3,7 @@ import {
   Initials,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Avatar size="xs">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
@@ -16,4 +16,4 @@ import {
   <Avatar size="l">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
-</Row>;
+</>;

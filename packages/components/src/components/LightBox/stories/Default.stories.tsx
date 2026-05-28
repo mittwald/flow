@@ -14,7 +14,7 @@ const meta: Meta<typeof LightBox> = {
   title: "Overlays/LightBox",
   component: LightBox,
   parameters: {
-    controls: { exclude: ["controller"] },
+    controls: { disable: true },
   },
   render: (props) => {
     return (

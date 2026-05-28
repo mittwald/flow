@@ -87,21 +87,21 @@ Die verschiedenen Button-Variants folgen einer klaren Hierarchie:
 - Versuche, Buttons derselben Variant bzw. Color zu gruppieren.
 
 <DoAndDont>
-  <Do example="hierarchy-solid-do">
+  <Do example="hierarchy-solid-do" row>
     Verwende zwei Solid-Button nebeneinander, wenn beide wichtige Aktionen
     enthalten.
   </Do>
-  <Do example="hierarchy-soft-do">
+  <Do example="hierarchy-soft-do" row>
     Verwende die Soft-Variant, um Nebenaktionen weniger wichtig erscheinen zu
     lassen.
   </Do>
 </DoAndDont>
 <DoAndDont>
-  <Do example="hierarchy-order-do">
+  <Do example="hierarchy-order-do" row>
     Versuche, ähnliche Buttons zu gruppieren. Zum Beispiel so, dass Buttons in
     der Solid-Variant nebeneinander stehen.
   </Do>
-  <Dont example="hierarchy-order-dont">
+  <Dont example="hierarchy-order-dont" row>
     Ignoriere nicht die Hierarchie der Buttons, die sie zueinander haben.
   </Dont>
 </DoAndDont>
@@ -115,7 +115,7 @@ des Buttons bestimmt.
 - **Small** wird seltener verwendet und ist für Buttons gedacht, die
   platzsparender sein sollten.
 
-<Dont example="sizes-dont">
+<Dont example="sizes-dont" row>
   Verwende nie Buttons in den Sizes Medium und Small direkt nebeneinander.
 </Dont>
 
@@ -153,10 +153,10 @@ Achte beim Verfassen des Textes besonders auf:
 </DoAndDont>
 
 <DoAndDont>
-  <Do example="text-clarity-do" zoom={0.7} bgColor="dark">
+  <Do example="text-clarity-do" zoom={0.7} bgColor="light">
     Beschreibe exakt und kurz, welche Aktion sich hinter den Buttons verbergen.
   </Do>
-  <Dont example="text-clarity-dont" zoom={0.7} bgColor="dark">
+  <Dont example="text-clarity-dont" zoom={0.7} bgColor="light">
     Verwirre den User nicht mit mehrdeutigen Begriffen.
   </Dont>
 </DoAndDont>
@@ -168,10 +168,10 @@ Achte bei der Auswahl des Icons besonders darauf, dass die
 universell verständliches Icon gewählt wird.
 
 <DoAndDont>
-  <Do example="icon-clarity-do">
+  <Do example="icon-clarity-do" row>
     Verwende Icons, die die Funktion hinter dem Icon visuell verdeutlichen.
   </Do>
-  <Dont example="icon-clarity-dont">
+  <Dont example="icon-clarity-dont" row>
     Verwende keine Icons die nur gut aussehen, aber keine Funktion
     widerspiegeln.
   </Dont>
@@ -205,19 +205,20 @@ kleiner als 400 px ist.
 
 <DoAndDont>
   <Do
-    example="mobile-width-group-do"
+    example="mobile-width-standard-do"
     mobile
     heading="Mobile Text- und Icon-Buttons"
+    bgColor="mstudio"
   >
     Buttons behalten in den meisten Fällen auch bei schmaleren Bildschirmbreiten
     die gewählte Größe. Die Position der Buttons kann sich jedoch der Breite
     anpassen.
   </Do>
   <Do
-    example="mobile-width-standard-do"
+    example="mobile-width-group-do"
     mobile
-    bgColor="dark"
     heading="Mobile Modal-Buttons"
+    bgColor="light"
   >
     Um auch mobil eine schnelle Navigation durch ein Modal zu ermöglichen,
     füllen die Buttons im unteren Bereich des Modals die gesamte Breite des
@@ -255,13 +256,13 @@ Für beide Colors gilt: Je weiter der HSL Lightness-Wert von 50 entfernt ist,
 desto besser ist der Kontrast.
 
 <DoAndDont>
-  <Do example="light" bgColor="dark">
+  <Do example="light" bgColor="dark" row>
     Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
     Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
     weniger als 50.
   </Do>
 
-  <Do example="dark" bgColor="light">
+  <Do example="dark" bgColor="light" row>
     Color Dark kommt besonders gut auf sehr hellen Hintergründen zur Geltung. Verwende sie auf Hintergründen mit einem
     HSL Lightness-Wert von über 50.
   </Do>

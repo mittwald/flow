@@ -2,7 +2,6 @@
 import {
   Button,
   Heading,
-  LayoutCard,
   Section,
 } from "@mittwald/flow-remote-react-components";
 import { Title } from "@mittwald/mstudio-ext-react-components";
@@ -13,7 +12,7 @@ export default function Page() {
   const router = useRouter();
   const [isNavigating, startNavigating] = useTransition();
   return (
-    <LayoutCard>
+    <>
       <Title>Passwortschutz</Title>
       <Section>
         <Heading>Page 1</Heading>
@@ -26,6 +25,6 @@ export default function Page() {
           To Page 2
         </Button>
       </Section>
-    </LayoutCard>
+    </>
   );
 }

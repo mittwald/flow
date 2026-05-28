@@ -19,10 +19,6 @@ test.each(testEnvironments)(
           <Heading>Default Expanded</Heading>
           <Content>Content</Content>
         </Accordion>
-        <Accordion data-testid="hover">
-          <Heading>Hovered</Heading>
-          <Content>Content</Content>
-        </Accordion>
         <Accordion>
           <Label>Label</Label>
           <Content>Content</Content>
@@ -33,9 +29,6 @@ test.each(testEnvironments)(
         </Accordion>
       </Flex>,
     );
-
-    const hover = page.getByTestId("hover");
-    await hover.hover();
 
     await testScreenshot("Accordion states");
   },

@@ -5,7 +5,7 @@ import {
   TextField,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <TextField value="Suche" aria-label="Suche" />
   <Button variant="plain" aria-label="Sortierung">
     <IconSorting />
@@ -16,4 +16,4 @@ import {
   <Button variant="outline" aria-label="Filter">
     <IconFilter />
   </Button>
-</Row>;
+</>;

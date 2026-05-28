@@ -35,7 +35,9 @@ export const Initials = flowComponent("Initials", (props) => {
   const rootClassName = clsx(styles.initials, className);
 
   const initialsElements = initials.map((initial, index) => (
-    <span key={index}>{initial}</span>
+    <span aria-hidden role="presentation" key={index}>
+      {initial}
+    </span>
   ));
 
   return (
@@ -45,6 +47,7 @@ export const Initials = flowComponent("Initials", (props) => {
       aria-label={textContent}
       className={rootClassName}
       ref={ref}
+      role="img"
     >
       {initialsElements}
     </div>

@@ -5,6 +5,9 @@ import React from "react";
 const meta: Meta<typeof EmulatedBoldText> = {
   title: "Content/EmulatedBoldText",
   component: EmulatedBoldText,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <EmulatedBoldText {...props}>Example Text</EmulatedBoldText>
   ),

@@ -10,7 +10,7 @@ const meta: Meta<typeof Chat> = {
   title: "Form Controls/Autocomplete",
   component: Autocomplete,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { disable: true },
   },
   render: () => {
     const suggestEmail = (value: string) => {
@@ -38,6 +38,10 @@ const meta: Meta<typeof Chat> = {
 };
 export default meta;
 
+type Story = StoryObj<typeof Autocomplete>;
+
+export const Default: Story = {};
+
 export const FixedOptions: Story = {
   render: () => (
     <Autocomplete>
@@ -50,7 +54,3 @@ export const FixedOptions: Story = {
     </Autocomplete>
   ),
 };
-
-type Story = StoryObj<typeof Autocomplete>;
-
-export const Default: Story = {};

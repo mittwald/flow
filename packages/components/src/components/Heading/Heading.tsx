@@ -15,8 +15,8 @@ export interface HeadingProps
     PropsWithElementType<"span" | "p"> {
   /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
-  /** The color of the heading. @default "primary" */
-  color?: "primary" | "danger" | "unavailable" | AlphaColor;
+  /** The color of the heading. @default "default" */
+  color?: "default" | "danger" | "unavailable" | AlphaColor;
   /** The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance";
 }
@@ -27,7 +27,7 @@ export const Heading = flowComponent("Heading", (props) => {
     children,
     className,
     level = 2,
-    color = "primary",
+    color = "default",
     wrap,
     size,
     ref,
@@ -38,7 +38,7 @@ export const Heading = flowComponent("Heading", (props) => {
   const rootClassName = clsx(
     styles.heading,
     size && styles[`size-${size}`],
-    styles[color],
+    color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
     elementType && styles[`h${level}`],
     className,

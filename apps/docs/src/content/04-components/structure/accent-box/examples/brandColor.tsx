@@ -3,7 +3,7 @@ import {
   Heading,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <AccentBox backgroundColor="teal">
     <Heading>Teal</Heading>
   </AccentBox>
@@ -19,4 +19,4 @@ import {
   <AccentBox backgroundColor="green">
     <Heading>Green</Heading>
   </AccentBox>
-</Row>;
+</>;

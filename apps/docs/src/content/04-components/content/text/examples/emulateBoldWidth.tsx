@@ -1,6 +1,6 @@
 import { Text } from "@mittwald/flow-react-components";
 
-<Column>
+<>
   <Text
     style={{ borderInline: "2px solid red" }}
     emulateBoldWidth
@@ -10,4 +10,4 @@ import { Text } from "@mittwald/flow-react-components";
   <Text style={{ borderInline: "2px solid red" }}>
     <strong>Das ist ein Text</strong>
   </Text>
-</Column>;
+</>;
