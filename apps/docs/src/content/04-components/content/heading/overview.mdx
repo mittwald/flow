@@ -2,7 +2,7 @@
 
 Verwende `<Heading />`, um eine Heading darzustellen.
 
-<LiveCodeEditor />
+<LiveCodeEditor stretch />
 
 ---
 
@@ -12,7 +12,7 @@ Verwende `<Heading />`, um eine Heading darzustellen.
 Standardmäßig wird eine Heading mit dem Level `H2` erzeugt. Die Seite sollte
 eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 
-<LiveCodeEditor example="levels" editorCollapsed />
+<LiveCodeEditor example="levels" editorCollapsed stretch />
 
 ---
 
@@ -22,23 +22,19 @@ eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 manuell angepasst werden. Die Headings sollten dabei eine visuelle Hierarchie
 beibehalten.
 
-<LiveCodeEditor example="size" editorCollapsed />
+<LiveCodeEditor example="size" editorCollapsed stretch />
 
 ---
 
 # Color
 
-Die Heading wird standardmäßig in der Color `Primary` dargestellt.
+Zusätzlich zu der Standard-Color, kann die Heading in **Light** und **Dark**
+dargestellt werden. Beide Colors eigenen sich, wenn die Standardfarbe auf
+farbigen oder dekorativen Hintergründen nicht gut funktioniert.
 
-## Light und Dark
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed stretch />
 
-Zusätzlich zu der Standard-Color, kann die Heading in Light und Dark dargestellt
-werden. Beide Colors eigenen sich, wenn die Standardfarbe auf farbigen oder
-dekorativen Hintergründen nicht gut funktioniert.
-
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed stretch />
 
 **Light:** Verwende die Light-Color bei dunklen Hintergründen mit einem
 HSL-Lightness-Wert unter 50.
@@ -50,22 +46,16 @@ HSL-Lightness-Wert über 50.
 
 # Kombiniere mit ...
 
-## Icon
-
-Verwende `<Icon />`, um die Heading mit einem dekorativen Icon zu unterstützen.
-
-<LiveCodeEditor example="icon" editorCollapsed />
-
 ## ContextualHelp
 
 Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben
 (z. B. bei Fachbegriffen).
 
-<LiveCodeEditor example="contextualHelp" editorCollapsed />
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
 
 ## Badge oder AlertBadge
 
 Verwende `<Badge />`, um wichtige Metainformationen zu einem Abschnitt
 hervorzuheben, oder eine `<AlertBadge/>`, um einen Status anzuzeigen.
 
-<LiveCodeEditor example="badge" editorCollapsed />
+<LiveCodeEditor example="badge" editorCollapsed stretch />

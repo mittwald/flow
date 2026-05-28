@@ -1,6 +1,6 @@
 modal:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.l}"
   padding:
     value: "{size-px.l}"
   padding-mobile:
@@ -15,15 +15,15 @@ modal:
     l:
       value: 1300px
   footer-background-color:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.200}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{neutral.color.300}"
   border-width:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
-  header-padding-y:
-    value: "{size-px.s}"
+  header-padding-top:
+    value: "{size-px.m}"
   off-canvas-max-width:
     value: "calc(100dvw - {size-px.m})"
   content-min-height:

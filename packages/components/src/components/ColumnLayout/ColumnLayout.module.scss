@@ -1,5 +1,6 @@
 .columnLayoutContainer {
   container-type: inline-size;
+  width: 100%;
 
   &:has(> .columnLayout) {
     display: block;

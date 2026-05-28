@@ -43,7 +43,6 @@ export default async function Page(props: Props) {
       <AnchorNavigation
         currentPath={`${path}`}
         anchors={indexMdxFile.anchors}
-        title={indexMdxFile?.getTitle()}
       />
     </Flex>
   );

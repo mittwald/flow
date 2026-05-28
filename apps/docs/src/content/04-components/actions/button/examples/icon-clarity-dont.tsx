@@ -5,7 +5,7 @@ import {
 } from "@mittwald/flow-react-components";
 import { IconCat, IconDog } from "@tabler/icons-react";
 
-<Row>
+<>
   <TextField value="Suche" aria-label="Suche" />
   <Button variant="plain" aria-label="Katze">
     <Icon>
@@ -22,4 +22,4 @@ import { IconCat, IconDog } from "@tabler/icons-react";
       <IconDog />
     </Icon>
   </Button>
-</Row>;
+</>;

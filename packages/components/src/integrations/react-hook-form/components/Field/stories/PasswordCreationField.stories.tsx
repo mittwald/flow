@@ -112,7 +112,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -142,21 +142,24 @@ export const WithForm: Story = {
           console.log("submitted", values);
         }}
       >
-        <Field
-          rules={{
-            required: true,
-            validate: usePasswordCreationFieldValidation(policyDecl),
-          }}
-          name="password"
-        >
-          <PasswordCreationField validationPolicy={policyDecl}>
-            <Label>Password</Label>
-            <Button>asd</Button>
-          </PasswordCreationField>
-        </Field>
-        <br />
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <Section>
+          <Field
+            rules={{
+              required: true,
+              validate: usePasswordCreationFieldValidation(policyDecl),
+            }}
+            name="password"
+          >
+            <PasswordCreationField validationPolicy={policyDecl}>
+              <Label>Password</Label>
+              <Button>asd</Button>
+            </PasswordCreationField>
+          </Field>
+          <ActionGroup>
+            <ResetButton slot="abort">Reset</ResetButton>
+            <SubmitButton>Submit</SubmitButton>
+          </ActionGroup>
+        </Section>
       </Form>
     );
   },
@@ -178,21 +181,23 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name="field">
-          <PasswordCreationField>
+        <Section>
+          <Field name="field">
+            <PasswordCreationField>
+              <Label>Password</Label>
+              <Button>asd</Button>
+            </PasswordCreationField>
+          </Field>
+          <PasswordCreationField defaultValue="" isInvalid>
+            <Label>Password</Label>
+            <Button>asd</Button>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
+          </PasswordCreationField>
+          <PasswordCreationField defaultValue="">
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>
-        </Field>
-        <PasswordCreationField defaultValue={""} isInvalid>
-          <Label>Password</Label>
-          <Button>asd</Button>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </PasswordCreationField>
-        <PasswordCreationField defaultValue={""}>
-          <Label>Password</Label>
-          <Button>asd</Button>
-        </PasswordCreationField>
+        </Section>
       </Form>
     );
   },
@@ -207,29 +212,39 @@ export const WithFocus: Story = {
     });
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <PasswordCreationField>
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

@@ -6,6 +6,7 @@
     border-style: var(--image--border-style);
     border-radius: var(--image--corner-radius);
     border-color: var(--image--border-color);
+    overflow: hidden;
   }
 
   &:where(.aspectRatio) {

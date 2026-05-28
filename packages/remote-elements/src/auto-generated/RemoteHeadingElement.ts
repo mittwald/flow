@@ -105,6 +105,7 @@ export class RemoteHeadingElement extends FlowRemoteElement<RemoteHeadingElement
       property: {},
       radioGroup: {},
       rel: {},
+      render: {},
       resource: {},
       results: {},
       rev: {},

@@ -1,6 +1,6 @@
 table:
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.m}"
   border-width:
     value: "{border-width.100}"
   border-style:
@@ -22,4 +22,4 @@ table:
   background-color:
     value: "{neutral.color.100}"
   background-color-accent:
-    value: "{neutral.color.300}"
+    value: "{neutral.color.200}"

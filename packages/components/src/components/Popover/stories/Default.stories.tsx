@@ -8,6 +8,9 @@ import { useOverlayController } from "@/lib/controller";
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <PopoverTrigger>
       <Button>Trigger popover</Button>

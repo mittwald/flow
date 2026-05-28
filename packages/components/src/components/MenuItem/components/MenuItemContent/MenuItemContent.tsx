@@ -45,6 +45,7 @@ export const MenuItemContent: FC<Props> = (props) => {
     },
     Switch: {
       className: clsx(styles.controlIcon, styles.switch),
+      labelPosition: "leading",
     },
   };
 

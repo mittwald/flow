@@ -1,26 +1,26 @@
 "use client";
 import type { FC } from "react";
-import { useId, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
+  Label,
+  LayoutCard,
+  Link,
   Navigation,
   NavigationGroup,
+  SearchField,
+  Section,
   useModalController,
+  useOnChange,
+  Wrap,
 } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
-import { Link } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { useOnChange } from "@mittwald/flow-react-components";
-import { SearchField } from "@mittwald/flow-react-components";
 import styles from "@/app/layout.module.scss";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Wrap } from "@mittwald/flow-react-components";
+import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -119,8 +119,6 @@ const MainNavigation: FC<Props> = (props) => {
     setSearchValue("");
   });
 
-  const headingId = useId();
-
   if (mainPathSegment === undefined) {
     return null;
   }
@@ -134,15 +132,14 @@ const MainNavigation: FC<Props> = (props) => {
     <Wrap if={!props.mobileNavigation}>
       <LayoutCard className={styles.mainNavigation}>
         <Section>
-          <Heading id={headingId}>
-            <GroupText>{mainPathSegment}</GroupText>
-          </Heading>
-
           <SearchField
             value={searchValue}
             onChange={(value) => setSearchValue(value.toLowerCase().trim())}
           />
-          <Navigation aria-labelledby={headingId} key={mainPathSegment}>
+          <Navigation
+            aria-label={extractTextFromPath(mainPathSegment)}
+            key={mainPathSegment}
+          >
             {Object.entries(selectedMainBranch)
               .filter((tree) => filterBySearchValue(searchValue, tree))
               .map(([group, treeItem]) =>

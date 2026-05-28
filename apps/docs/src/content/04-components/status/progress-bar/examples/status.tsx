@@ -1,6 +1,6 @@
 import { ProgressBar } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <ProgressBar value={100} status="success">
     Success
   </ProgressBar>
@@ -13,4 +13,4 @@ import { ProgressBar } from "@mittwald/flow-react-components";
   <ProgressBar value={90} status="danger">
     Danger
   </ProgressBar>
-</Row>;
+</>;

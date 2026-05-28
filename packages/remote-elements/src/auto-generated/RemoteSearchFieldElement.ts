@@ -42,6 +42,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       minLength: {},
       name: {},
       pattern: {},
+      render: {},
       slot: {},
       spellCheck: {},
       translate: {},

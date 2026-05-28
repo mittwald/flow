@@ -36,112 +36,76 @@ export const MdxFileView: FC<Props> = (props) => {
     />
   );
 
-  const ExampleDo: FC<ExampleProps> = ({
-    example,
-    exampleText,
-    zoom,
-    bgColor,
-    mobile,
-    children,
-    heading,
-  }) => (
-    <ExampleTile
-      type="do"
-      text={exampleText}
-      code={example ? mdxFile.getExample(example) : undefined}
-      zoom={zoom}
-      bgColor={bgColor}
-      mobile={mobile}
-      heading={heading}
-    >
-      {children}
-    </ExampleTile>
-  );
+  const ExampleDo: FC<ExampleProps> = (props) => {
+    const { exampleText, example, children, ...rest } = props;
 
-  const ExampleDont: FC<ExampleProps> = ({
-    example,
-    exampleText,
-    zoom,
-    bgColor,
-    mobile,
-    children,
-    heading,
-  }) => (
-    <ExampleTile
-      type="dont"
-      text={exampleText}
-      code={example ? mdxFile.getExample(example) : undefined}
-      zoom={zoom}
-      bgColor={bgColor}
-      mobile={mobile}
-      heading={heading}
-    >
-      {children}
-    </ExampleTile>
-  );
+    return (
+      <ExampleTile
+        type="do"
+        text={exampleText}
+        code={example ? mdxFile.getExample(example) : undefined}
+        {...rest}
+      >
+        {children}
+      </ExampleTile>
+    );
+  };
 
-  const ExampleInfo: FC<ExampleProps> = ({
-    example,
-    exampleText,
-    zoom,
-    bgColor,
-    mobile,
-    children,
-    heading,
-  }) => (
-    <ExampleTile
-      type="info"
-      text={exampleText}
-      code={example ? mdxFile.getExample(example) : undefined}
-      zoom={zoom}
-      bgColor={bgColor}
-      mobile={mobile}
-      heading={heading}
-    >
-      {children}
-    </ExampleTile>
-  );
-  const ExampleStudio: FC<ExampleProps> = ({
-    example,
-    exampleText,
-    zoom,
-    bgColor,
-    mobile,
-    children,
-    heading,
-  }) => (
-    <ExampleTile
-      type="mstudio"
-      text={exampleText}
-      code={example ? mdxFile.getExample(example) : undefined}
-      zoom={zoom}
-      bgColor={bgColor}
-      mobile={mobile}
-      heading={heading}
-    >
-      {children}
-    </ExampleTile>
-  );
-  const ExamplePlain: FC<ExampleProps> = ({
-    example,
-    exampleText,
-    zoom,
-    bgColor,
-    mobile,
-    children,
-    heading,
-  }) => (
-    <ExampleTile
-      text={exampleText}
-      code={example ? mdxFile.getExample(example) : undefined}
-      zoom={zoom}
-      bgColor={bgColor}
-      mobile={mobile}
-      heading={heading}
-    >
-      {children}
-    </ExampleTile>
-  );
+  const ExampleDont: FC<ExampleProps> = (props) => {
+    const { exampleText, example, children, ...rest } = props;
+
+    return (
+      <ExampleTile
+        type="dont"
+        text={exampleText}
+        code={example ? mdxFile.getExample(example) : undefined}
+        {...rest}
+      >
+        {children}
+      </ExampleTile>
+    );
+  };
+
+  const ExampleInfo: FC<ExampleProps> = (props) => {
+    const { exampleText, example, children, ...rest } = props;
+    return (
+      <ExampleTile
+        type="info"
+        text={exampleText}
+        code={example ? mdxFile.getExample(example) : undefined}
+        {...rest}
+      >
+        {children}
+      </ExampleTile>
+    );
+  };
+  const ExampleStudio: FC<ExampleProps> = (props) => {
+    const { exampleText, example, children, ...rest } = props;
+
+    return (
+      <ExampleTile
+        type="mstudio"
+        text={exampleText}
+        code={example ? mdxFile.getExample(example) : undefined}
+        {...rest}
+      >
+        {children}
+      </ExampleTile>
+    );
+  };
+  const ExamplePlain: FC<ExampleProps> = (props) => {
+    const { exampleText, example, children, ...rest } = props;
+
+    return (
+      <ExampleTile
+        text={exampleText}
+        code={example ? mdxFile.getExample(example) : undefined}
+        {...rest}
+      >
+        {children}
+      </ExampleTile>
+    );
+  };
 
   const ExamplePropertiesTables = () => (
     <PropertiesTables

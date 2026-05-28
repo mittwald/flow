@@ -97,6 +97,8 @@ neutral:
       value: "{color.gray.1000}"
     1100:
       value: "{color.gray.1100}"
+    1200:
+      value: "{color.gray.1200}"
 
 unavailable:
   color:
@@ -122,6 +124,8 @@ unavailable:
       value: "{color.gray.1000}"
     1100:
       value: "{color.gray.1100}"
+    1200:
+      value: "{color.gray.1200}"
 
 danger:
   color:
@@ -280,10 +284,7 @@ primary-soft-background-color:
   pressed:
     value: "{primary.color.300}"
 primary-soft-content-color:
-  default:
-    value: "{primary.color.900}"
-  pressed:
-    value: "{primary.color.1000}"
+  value: "{primary.color.900}"
 
 # Primary Outline
 primary-outline-background-color:
@@ -342,10 +343,7 @@ danger-soft-background-color:
   pressed:
     value: "{danger.color.300}"
 danger-soft-content-color:
-  default:
-    value: "{danger.color.900}"
-  pressed:
-    value: "{danger.color.1000}"
+  value: "{danger.color.900}"
 
 # Info Solid
 info-solid-background-color:
@@ -380,10 +378,7 @@ info-soft-background-color:
   pressed:
     value: "{info.color.300}"
 info-soft-content-color:
-  default:
-    value: "{info.color.900}"
-  pressed:
-    value: "{info.color.1000}"
+  value: "{info.color.900}"
 
 # Info Plain
 info-plain-background-color:
@@ -440,10 +435,7 @@ success-soft-background-color:
   pressed:
     value: "{success.color.300}"
 success-soft-content-color:
-  default:
-    value: "{success.color.900}"
-  pressed:
-    value: "{success.color.1000}"
+  value: "{success.color.900}"
 
 # Warning Solid
 warning-solid-background-color:
@@ -478,10 +470,7 @@ warning-soft-background-color:
   pressed:
     value: "{warning.color.300}"
 warning-soft-content-color:
-  default:
-    value: "{warning.color.900}"
-  pressed:
-    value: "{warning.color.1000}"
+  value: "{warning.color.900}"
 
 # Warning Plain
 warning-plain-background-color:
@@ -525,7 +514,7 @@ unavailable-outline-background-color:
   pressed:
     value: "{unavailable.color.400}"
 unavailable-outline-content-color:
-  value: "{unavailable.color.900}"
+  value: "{unavailable.color.800}"
 unavailable-outline-border-color:
   value: "{unavailable.color.800}"
 
@@ -538,10 +527,7 @@ unavailable-soft-background-color:
   pressed:
     value: "{unavailable.color.500}"
 unavailable-soft-content-color:
-  default:
-    value: "{unavailable.color.900}"
-  pressed:
-    value: "{unavailable.color.1000}"
+  value: "{unavailable.color.800}"
 
 # Neutral Solid
 neutral-solid-background-color:
@@ -559,9 +545,9 @@ neutral-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{neutral.color.400}"
+    value: "{neutral.color.300}"
   pressed:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
 neutral-plain-content-color:
   value: "{neutral.color.1000}"
 
@@ -570,11 +556,11 @@ neutral-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{neutral.color.400}"
+    value: "{neutral.color.300}"
   selected:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
   pressed:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.400}"
 neutral-outline-content-color:
   value: "{neutral.color.1000}"
 neutral-outline-border-color:
@@ -589,16 +575,13 @@ neutral-soft-background-color:
   pressed:
     value: "{neutral.color.600}"
 neutral-soft-content-color:
-  default:
-    value: "{neutral.color.1000}"
-  pressed:
-    value: "{neutral.color.1100}"
+  value: "{neutral.color.1000}"
 
 # Disabled Solid
 disabled-solid-background-color:
-  value: "{neutral.color.400}"
+  value: "{neutral.color.300}"
 disabled-solid-content-color:
-  value: "{neutral.color.600}"
+  value: "{neutral.color.500}"
 disabled-solid-dark-background-color:
   value: "{dark.color.300}"
 disabled-solid-dark-content-color:
@@ -622,17 +605,17 @@ disabled-plain-background-color:
 disabled-plain-content-color:
   value: "{neutral.color.400}"
 disabled-plain-dark-content-color:
-  value: "{dark.color.300}"
+  value: "{dark.color.200}"
 disabled-plain-light-content-color:
-  value: "{light.color.300}"
+  value: "{light.color.200}"
 disabled-plain-dark-static-content-color:
-  value: "{dark-static.color.300}"
+  value: "{dark-static.color.200}"
 disabled-plain-light-static-content-color:
-  value: "{light-static.color.300}"
+  value: "{light-static.color.200}"
 
 # Disabled Outline
 disabled-outline-background-color:
-  value: "{neutral.color.300}"
+  value: "{neutral.color.200}"
 disabled-outline-content-color:
   value: "{neutral.color.500}"
 disabled-outline-border-color:
@@ -640,31 +623,31 @@ disabled-outline-border-color:
 disabled-outline-dark-background-color:
   value: "{color.transparent}"
 disabled-outline-dark-border-color:
-  value: "{dark.color.300}"
+  value: "{dark.color.200}"
 disabled-outline-dark-content-color:
-  value: "{dark.color.300}"
+  value: "{dark.color.200}"
 disabled-outline-light-background-color:
   value: "{color.transparent}"
 disabled-outline-light-border-color:
-  value: "{light.color.300}"
+  value: "{light.color.200}"
 disabled-outline-light-content-color:
-  value: "{light.color.300}"
+  value: "{light.color.200}"
 disabled-outline-dark-static-background-color:
   value: "{color.transparent}"
 disabled-outline-dark-static-border-color:
-  value: "{dark-static.color.300}"
+  value: "{dark-static.color.200}"
 disabled-outline-dark-static-content-color:
-  value: "{dark-static.color.300}"
+  value: "{dark-static.color.200}"
 disabled-outline-light-static-background-color:
   value: "{color.transparent}"
 disabled-outline-light-static-border-color:
-  value: "{light-static.color.300}"
+  value: "{light-static.color.200}"
 disabled-outline-light-static-content-color:
-  value: "{light-static.color.300}"
+  value: "{light-static.color.200}"
 
 # Disabled Soft
 disabled-soft-background-color:
-  value: "{neutral.color.300}"
+  value: "{neutral.color.200}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
 disabled-soft-dark-background-color:

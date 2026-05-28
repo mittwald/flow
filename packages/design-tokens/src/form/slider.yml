@@ -1,31 +1,48 @@
 slider:
   color:
     default:
-      value: "{primary.color.1000}"
+      value: "{neutral.color.1000}"
     disabled:
       value: "{neutral.color.600}"
-  track-color:
-    default:
-      value: "{neutral.color.700}"
-    disabled:
-      value: "{neutral.color.400}"
   spacing-x:
     value: "{size-rem.s}"
   spacing-y:
     value: "{size-rem.m}"
-  border-width:
-    value: "{border-width.300}"
-  border-style:
-    value: "{border-style.default}"
-  corner-radius:
-    value: "{corner-radius.default}"
   value-font-weight:
     value: "{font-weight.bold}"
+
+  # Track
+  track-color:
+    default:
+      value: "{form-control.background-color.default}"
+    disabled:
+      value: "{form-control.background-color.disabled}"
+  track-height:
+    value: "{size-px.s}"
+  track-border-width:
+    value: "{border-width.100}"
+  track-border-style:
+    value: "{border-style.default}"
+  track-border-color:
+    default:
+      value: "{form-control.border-color.default}"
+    disabled:
+      value: "{form-control.border-color.disabled}"
+  corner-radius:
+    value: "{corner-radius.s}"
+
+  # Handle
   handle-corner-radius:
     value: "{corner-radius.round}"
   handle-size:
     value: "{size-rem.l}"
   handle-fill-color:
     value: "{neutral.color.100}"
+  handle-border-width:
+    value: "{border-width.300}"
+
+  # Initial marker
   initial-marker-height:
     value: "{size-rem.m}"
+  initial-marker-border-width:
+    value: "{border-width.300}"

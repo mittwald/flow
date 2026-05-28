@@ -5,7 +5,9 @@ import { LegendItem } from "../components/LegendItem";
 const meta: Meta<typeof Legend> = {
   title: "Content/Legend",
   component: Legend,
-  args: {},
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <Legend {...props}>
       <LegendItem color="sea-green">Item 1</LegendItem>

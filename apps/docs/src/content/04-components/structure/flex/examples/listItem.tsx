@@ -36,8 +36,8 @@ export default () => {
             </Avatar>
             <Heading>{i.text}</Heading>
 
-            <Content>
-              <Flex justify="end" align="end" grow>
+            <Content slot="bottom">
+              <Flex justify="end" align="end">
                 <Text>Kostenlos</Text>
               </Flex>
             </Content>

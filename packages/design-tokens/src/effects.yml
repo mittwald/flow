@@ -1,0 +1,15 @@
+shadow:
+  content:
+    value: "{dark-static.color.100} 0 {size-px.xxs} {size-px.xs}"
+  overlay:
+    value: "{dark-static.color.100} 0 {size-px.s} {size-px.m}"
+blur:
+  value: "3px"
+transition:
+  duration:
+    fast:
+      value: 200ms
+    default:
+      value: 300ms
+    slow:
+      value: 400ms

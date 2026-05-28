@@ -31,9 +31,7 @@ const meta: Meta<typeof ContextMenu> = {
     </ContextMenuTrigger>
   ),
   parameters: {
-    controls: {
-      exclude: ["defaultOpen", "selectionMode", "defaultSelectedKeys"],
-    },
+    controls: { disable: true },
   },
 };
 export default meta;

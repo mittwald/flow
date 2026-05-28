@@ -13,11 +13,8 @@
     --editor-padding: calc(
       var(--form-control--padding-y) - var(--form-control--border-width)
     );
-    --editor-line-height: calc(
-      var(--font-size-text--default) * var(--line-height--default)
-    );
 
-    min-height: calc(var(--editor-padding) * 2 + var(--editor-line-height));
+    min-height: calc(var(--editor-padding) * 2 + var(--line-height-m));
 
     &.readonly {
       border-color: var(--form-control--border-color--default);

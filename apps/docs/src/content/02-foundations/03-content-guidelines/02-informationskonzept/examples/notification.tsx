@@ -2,10 +2,9 @@ import {
   Heading,
   Notification,
   Text,
-  Flex,
 } from "@mittwald/flow-react-components";
 
-<Flex gap="m" wrap="wrap">
+<>
   <Notification>
     <Heading>E-Mail-Adresse archiviert</Heading>
     <Text>
@@ -44,4 +43,4 @@ import {
       Die gewünschten Inhalte sind leider nicht verfügbar.
     </Text>
   </Notification>
-</Flex>;
+</>;

@@ -2,16 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
 import { AlertBadge } from "@/components/AlertBadge";
 import Header from "@/components/Header";
-import {
-  IconContextMenu,
-  IconMember,
-} from "@/components/Icon/components/icons";
+import { IconContextMenu } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Action } from "@/components/Action";
@@ -24,15 +19,16 @@ import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuT
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { FileField } from "@/components/FileField";
-import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
-import { useForm } from "react-hook-form";
-import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import ActionGroup from "@/components/ActionGroup";
+import { Badge } from "@/components/Badge";
+import React from "react";
+import Alert from "@/components/Alert";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
   component: Section,
+  argTypes: { hideSeparator: { control: "boolean" } },
   render: (props) => (
     <Section {...props}>
       <Heading>Newsletter</Heading>
@@ -44,54 +40,31 @@ const meta: Meta<typeof Section> = {
       <Link href="#">Subscribe</Link>
     </Section>
   ),
+  args: { hideSeparator: false },
 };
 export default meta;
 
 type Story = StoryObj<typeof Section>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+};
 
 export const MultipleSections: Story = {
   render: (props) => (
     <>
-      <Section {...props}>
-        <Heading>
-          <IconMember />
-          Personal Information
-        </Heading>
-        <TextField isRequired defaultValue="John">
-          <Label>First name</Label>
-        </TextField>
-        <TextField isRequired defaultValue="Doe">
-          <Label>Last name</Label>
-        </TextField>
-      </Section>
-      <Section {...props}>
-        <Heading>Newsletter</Heading>
-        <Text>
-          Upcoming releases, new features and tips about your hosting - we bring
-          you the most important information in your inbox. Subscribe to our
-          newsletter and stay up to date.
-        </Text>
-        <Link href="#">Subscribe</Link>
-      </Section>
-    </>
-  ),
-};
-
-export const WithHeaderContent: Story = {
-  render: (props) => (
-    <>
+      <Alert>
+        <Heading>Alert above sections</Heading>
+      </Alert>
       <Section {...props}>
         <Header>
           <Heading>
-            Newsletter <AlertBadge>Subscribed</AlertBadge>
+            Newsletter <Badge>Subscribed</Badge>
           </Heading>
 
           <Switch defaultSelected>Subscription</Switch>
-          <Button variant="soft" color="secondary">
-            Start database migration
-          </Button>
           <ContextualHelpTrigger>
             <Button />
             <ContextualHelp>
@@ -108,12 +81,9 @@ export const WithHeaderContent: Story = {
       <Section {...props}>
         <Header>
           <Heading>
-            My Project with a looooooooooong name
+            My Project
             <AlertBadge status="danger">Deactivated</AlertBadge>
           </Heading>
-          <Button variant="soft" color="secondary">
-            Start database migration
-          </Button>
           <ModalTrigger>
             <Button color="danger">Delete project</Button>
             <Modal>
@@ -131,14 +101,13 @@ export const WithHeaderContent: Story = {
               </ActionGroup>
             </Modal>
           </ModalTrigger>
-        </Header>
-        <Text>{dummyText.medium}</Text>
-      </Section>
-      <Section {...props}>
-        <Header>
-          <Heading>My Project</Heading>
-          <ContextMenuTrigger>
+          <FileField>
             <Button variant="soft" color="secondary">
+              Import CSV
+            </Button>
+          </FileField>
+          <ContextMenuTrigger>
+            <Button variant="soft" color="secondary" aria-label="More actions">
               <IconContextMenu />
             </Button>
             <ContextMenu>
@@ -146,119 +115,14 @@ export const WithHeaderContent: Story = {
               <MenuItem>Item 2</MenuItem>
             </ContextMenu>
           </ContextMenuTrigger>
-          <Button color="danger">Deactivate</Button>
         </Header>
+        <Alert>
+          <Heading>Alert in section</Heading>
+        </Alert>
+        <Text>{dummyText.long}</Text>
+        <Heading level={3}>Sub-Heading</Heading>
         <Text>{dummyText.medium}</Text>
       </Section>
     </>
   ),
-};
-
-export const WithSubHeadings: Story = {
-  render: (props) => (
-    <>
-      <Section {...props}>
-        <Heading>Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Heading level={3}>Sub-Heading</Heading>
-        <Text>{dummyText.long}</Text>
-        <Heading level={4}>Sub-Sub-Heading</Heading>
-        <Text>{dummyText.long}</Text>
-      </Section>
-      <Section {...props}>
-        <Header>
-          <Heading>Heading</Heading>
-          <Button>Button</Button>
-        </Header>
-        <Text>{dummyText.long}</Text>
-        <Header>
-          <Heading level={3}>Sub-Heading</Heading>
-          <Button>Button</Button>
-        </Header>
-        <Text>{dummyText.long}</Text>
-      </Section>
-    </>
-  ),
-};
-
-export const HideSeperator: Story = {
-  render: (props) => (
-    <>
-      <Section {...props} hideSeparator>
-        <Heading>
-          <IconMember />
-          Personal Information
-        </Heading>
-        <TextField isRequired defaultValue="John">
-          <Label>First name</Label>
-        </TextField>
-        <TextField isRequired defaultValue="Doe">
-          <Label>Last name</Label>
-        </TextField>
-      </Section>
-      <Section {...props}>
-        <Heading>Newsletter</Heading>
-        <Text>
-          Upcoming releases, new features and tips about your hosting - we bring
-          you the most important information in your inbox. Subscribe to our
-          newsletter and stay up to date.
-        </Text>
-        <Link href="#">Subscribe</Link>
-      </Section>
-    </>
-  ),
-};
-
-export const WithFileField: Story = {
-  render: (props) => (
-    <>
-      <Section {...props} hideSeparator>
-        <Header>
-          <Heading>Domains</Heading>
-          <FileField>
-            <Button>Import CSV</Button>
-          </FileField>
-          <Button>Add</Button>
-        </Header>
-        <Text>Add at least one domain.</Text>
-      </Section>
-    </>
-  ),
-};
-
-export const WithForm: Story = {
-  render: (props) => {
-    const form = useForm();
-
-    return (
-      <Section {...props}>
-        <Form form={form} onSubmit={() => action("submit")}>
-          <Heading>
-            <IconMember />
-            Personal Information
-          </Heading>
-          <Field name="firstName">
-            <TextField isRequired defaultValue="John">
-              <Label>First name</Label>
-            </TextField>
-          </Field>
-          <Field name="lastName">
-            <TextField isRequired defaultValue="Doe">
-              <Label>Last name</Label>
-            </TextField>
-          </Field>
-          <Heading level={3}>Newsletter</Heading>
-          <Text>
-            Upcoming releases, new features and tips about your hosting - we
-            bring you the most important information in your inbox. Subscribe to
-            our newsletter and stay up to date.
-          </Text>
-          <Link href="#">Subscribe</Link>
-          <ActionGroup>
-            <SubmitButton color="accent">Submit</SubmitButton>
-          </ActionGroup>
-        </Form>
-      </Section>
-    );
-  },
 };

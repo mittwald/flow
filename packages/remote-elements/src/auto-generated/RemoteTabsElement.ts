@@ -26,6 +26,7 @@ export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps>
       keyboardActivation: {},
       lang: {},
       orientation: {},
+      render: {},
       selectedKey: {},
       slot: {},
       translate: {},

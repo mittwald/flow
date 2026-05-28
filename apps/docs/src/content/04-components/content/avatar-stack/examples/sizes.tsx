@@ -4,7 +4,7 @@ import {
   Initials,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <AvatarStack size="xs">
     <Avatar>
       <Initials>Max Mustermann</Initials>
@@ -37,4 +37,4 @@ import {
       <Initials>John Doe</Initials>
     </Avatar>
   </AvatarStack>
-</Row>;
+</>;

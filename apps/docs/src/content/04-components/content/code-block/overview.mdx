@@ -6,7 +6,7 @@ Programmiersprache (siehe
 [unterstütze language imports](https://github.com/mittwald/flow/tree/main/packages/components/src/components/CodeEditor/languages/all.ts))
 zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
 
-<LiveCodeEditor />
+<LiveCodeEditor stretch />
 
 ---
 
@@ -14,7 +14,7 @@ zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
 
 Wird das `showLineNumbers` Property gesetzt, werden Zeilennummern angezeigt.
 
-<LiveCodeEditor example="lineNumbers" editorCollapsed />
+<LiveCodeEditor example="lineNumbers" editorCollapsed stretch />
 
 ---
 
@@ -24,7 +24,7 @@ Ergänzt man das Property `copyable`, so bekommt der CodeBlock eine
 Kopierfunktion. Dadurch kann der User den gesamten Inhalt des CodeBlocks in die
 Zwischenablage kopieren. Eventuelle Zeilennummern werden nicht mit kopiert.
 
-<LiveCodeEditor example="copyable" editorCollapsed />
+<LiveCodeEditor example="copyable" editorCollapsed stretch />
 
 ---
 
@@ -35,7 +35,7 @@ Ist sie `true`, wird der Inhalt nach dem Standardwert gekürzt. Bei einer Zahl
 erfolgt die Kürzung nach der angegebenen Zeilenanzahl. Überschreitet der Code
 diese Länge, erscheint automatisch ein „Mehr anzeigen“-Button.
 
-<LiveCodeEditor example="truncateLines" editorCollapsed />
+<LiveCodeEditor example="truncateLines" editorCollapsed stretch />
 
 ---
 
@@ -44,4 +44,4 @@ diese Länge, erscheint automatisch ein „Mehr anzeigen“-Button.
 Um den Inhalt des CodeBlocks frei gestalten zu können, gibt es die Möglichkeit
 anstatt des `code` Properties Children zu nutzen.
 
-<LiveCodeEditor example="children" editorCollapsed />
+<LiveCodeEditor example="children" editorCollapsed stretch />

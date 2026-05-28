@@ -31,6 +31,7 @@ export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementPr
       labelPosition: {},
       lang: {},
       name: {},
+      render: {},
       slot: {},
       translate: {},
       value: {},

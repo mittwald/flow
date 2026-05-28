@@ -3,20 +3,25 @@ import { isAlphaColor } from "@/lib/types/props";
 
 interface Props extends PropsWithChildren {
   color?: string;
+  theme: "dark" | "light";
 }
 
 export const StoryBackground: FC<Props> = (props) => {
-  const { color, children } = props;
+  const { color, children, theme } = props;
 
   if (!color || !isAlphaColor(color)) {
     return children;
   }
 
+  const showLightBackground =
+    color === "dark-static" ||
+    (color === "light" && theme === "dark") ||
+    (color === "dark" && theme === "light");
+
   return (
     <div
       style={{
-        backgroundColor:
-          color === "dark" || color === "dark-static" ? "#E5EFF8" : "#3A434E",
+        backgroundColor: showLightBackground ? "#E5EFF8" : "#3A434E",
         padding: 16,
         borderRadius: 16,
       }}
