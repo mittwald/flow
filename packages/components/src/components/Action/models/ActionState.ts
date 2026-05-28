@@ -17,7 +17,7 @@ export type ActionStateValue =
 
 export const duration = {
   pending: 1000,
-  succeeded: 1500,
+  succeeded: 800,
   failed: 2000,
 };
 
