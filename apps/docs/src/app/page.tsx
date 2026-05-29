@@ -152,7 +152,9 @@ const Home: FC = () => {
                   Zum Developer-Portal
                 </Link>
               </Section>
-              <Image src={developerTile.src} />
+              <div className={styles.imageContainer}>
+                <Image src={developerTile.src} />
+              </div>
               <Color color="light-static" className={styles.imageTileIcon}>
                 <IconCode size="l" aria-hidden />
               </Color>
@@ -180,7 +182,9 @@ const Home: FC = () => {
                   Zur Extension Landingpage
                 </Link>
               </Section>
-              <Image src={extensionsTile.src} />
+              <div className={styles.imageContainer}>
+                <Image src={extensionsTile.src} />
+              </div>
               <Color color="dark-static" className={styles.imageTileIcon}>
                 <IconExtension size="l" aria-hidden />
               </Color>
