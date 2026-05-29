@@ -50,10 +50,16 @@
 .imageTile {
   position: relative;
 
+  .imageContainer {
+    max-height: 400px;
+    width: 100%;
+  }
+
   :global(.flow--column-layout--column-layout-container),
   :global(.flow--column-layout),
   img {
     height: 100%;
+    width: 100%;
   }
 
   :global(.flow--column-layout--column-layout-container) {
