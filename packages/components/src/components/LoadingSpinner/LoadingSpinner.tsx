@@ -5,7 +5,6 @@ import styles from "./LoadingSpinner.module.scss";
 import type { IconProps } from "@/components/Icon";
 import clsx from "clsx";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
-import { useGlobalSpinnerAngle } from "@/components/LoadingSpinner/lib/useGlobalSpinnerAngle";
 import { useReducedMotion } from "framer-motion";
 import { useDesignTokens } from "@/lib/theming";
 
@@ -33,16 +32,16 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     className,
   );
 
-  const angle = useGlobalSpinnerAngle(animationDurationMs);
+  const startingRotation = (performance.now() / animationDurationMs) * 360;
 
   return (
     <IconPending
+      className={rootClassName}
       style={
         {
-          "--from-angle": `${angle}deg`,
+          "--from-angle": `${startingRotation}deg`,
         } as React.CSSProperties
       }
-      className={rootClassName}
       {...rest}
     />
   );
