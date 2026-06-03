@@ -39,7 +39,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     <IconPending
       className={rootClassName}
       style={{
-        transform: "rotate(" + angle + "deg)",
+        transform: `rotate(${angle}deg)`,
       }}
       {...rest}
     />
