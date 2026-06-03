@@ -88,7 +88,7 @@ const Home: FC = () => {
                 Dark-Mode entdecken<Badge color="violet">Neu</Badge>
               </Heading>
               <Text>
-                Capre Noctem - Nutze die Dunkelheit! Ab jetzt unterstützt unser
+                Carpe Noctem - Nutze die Dunkelheit! Ab jetzt unterstützt unser
                 Design System ein Light- und ein Dark-Theme.
               </Text>
               <Link href="/02-foundations/01-design/03-themes">
