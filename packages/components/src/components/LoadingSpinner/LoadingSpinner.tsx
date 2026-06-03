@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useMemo } from "react";
 import React from "react";
 import { IconPending } from "@/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
@@ -12,6 +12,8 @@ export interface LoadingSpinnerProps extends IconProps {
   /** The color of the loading spinner. @default "default" */
   color?: "default" | AlphaColor;
 }
+
+const globalSpinnerTime = performance.now();
 
 /** @flr-generate all */
 export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
@@ -32,15 +34,20 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     className,
   );
 
-  const startingRotation =
-    ((((performance.now() / animationDurationMs) * 360) % 360) + 360) % 360;
+  const animationDelayMs = useMemo(() => {
+    const elapsedMs = performance.now() - globalSpinnerTime;
+    const phaseMs =
+      ((elapsedMs % animationDurationMs) + animationDurationMs) %
+      animationDurationMs;
+    return -phaseMs;
+  }, [animationDurationMs]);
 
   return (
     <IconPending
       className={rootClassName}
       style={
         {
-          "--from-angle": `${startingRotation}deg`,
+          "--animation-delay": `${animationDelayMs}ms`,
         } as React.CSSProperties
       }
       {...rest}
