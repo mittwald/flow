@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
+
+### Features
+
+* **LoadingSpinner:** use global clock for starting angle ([#2529](https://github.com/mittwald/flow/issues/2529)) ([f97a2a8](https://github.com/mittwald/flow/commit/f97a2a81a0e29f85c71c85684acc6ce326126d54))
+
 # [0.2.0-alpha.841](https://github.com/mittwald/flow/compare/0.2.0-alpha.840...0.2.0-alpha.841) (2026-06-03)
 
 ### Bug Fixes
