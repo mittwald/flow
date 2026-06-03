@@ -19,6 +19,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
   const { className, color = "default", ...rest } = props;
 
   const preferReducedMotion = useReducedMotion();
+
   const designTokens = useDesignTokens();
   const loadingSpinnerTokens = designTokens["loading-spinner"];
 

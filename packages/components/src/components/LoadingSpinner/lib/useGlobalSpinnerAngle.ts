@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { globalSpinnerClockStore } from "@/components/LoadingSpinner/lib/globalSpinnerClockStore";
 
+/** @internal * */
 export const useGlobalSpinnerAngle = (animationDurationMs = 900) => {
   const now = useSyncExternalStore(
     globalSpinnerClockStore.subscribe,

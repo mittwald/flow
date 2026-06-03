@@ -12,6 +12,7 @@ const animationFrameTick = (ts: number) => {
   requestedAnimationFrameId = requestAnimationFrame(animationFrameTick);
 };
 
+/** @internal * */
 export const globalSpinnerClockStore = {
   getEpoch: () => epoch,
   getSnapshot: () => now,
