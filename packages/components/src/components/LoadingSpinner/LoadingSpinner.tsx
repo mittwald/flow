@@ -32,7 +32,8 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     className,
   );
 
-  const startingRotation = (performance.now() / animationDurationMs) * 360;
+  const startingRotation =
+    ((((performance.now() / animationDurationMs) * 360) % 360) + 360) % 360;
 
   return (
     <IconPending
