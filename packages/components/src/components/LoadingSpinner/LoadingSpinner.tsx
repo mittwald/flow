@@ -1,10 +1,13 @@
-import type { FC } from "react";
+import { type FC } from "react";
 import React from "react";
 import { IconPending } from "@/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
 import type { IconProps } from "@/components/Icon";
 import clsx from "clsx";
 import { type AlphaColor, isAlphaColor } from "@/lib/types/props";
+import { useGlobalSpinnerAngle } from "@/components/LoadingSpinner/lib/useGlobalSpinnerAngle";
+import { useReducedMotion } from "framer-motion";
+import { useDesignTokens } from "@/lib/theming";
 
 export interface LoadingSpinnerProps extends IconProps {
   /** The color of the loading spinner. @default "default" */
@@ -15,13 +18,31 @@ export interface LoadingSpinnerProps extends IconProps {
 export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
   const { className, color = "default", ...rest } = props;
 
+  const preferReducedMotion = useReducedMotion();
+  const designTokens = useDesignTokens();
+  const loadingSpinnerTokens = designTokens["loading-spinner"];
+
   const rootClassName = clsx(
     styles.loadingSpinner,
     isAlphaColor(color) && styles[color],
     className,
   );
 
-  return <IconPending className={rootClassName} {...rest} />;
+  const angle = useGlobalSpinnerAngle(
+    preferReducedMotion
+      ? parseInt(loadingSpinnerTokens["transition-duration-slow"].value)
+      : parseInt(loadingSpinnerTokens["transition-duration"].value),
+  );
+
+  return (
+    <IconPending
+      className={rootClassName}
+      style={{
+        transform: "rotate(" + angle + "deg)",
+      }}
+      {...rest}
+    />
+  );
 };
 
 export default LoadingSpinner;
