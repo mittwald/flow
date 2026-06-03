@@ -1,5 +1,10 @@
 .loadingSpinner {
   color: var(--loading-spinner--color);
+  animation: spin var(--loading-spinner--transition-duration) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: var(--loading-spinner--transition-duration-slow);
+  }
 
   /* Alpha Colors */
   @mixin color($color) {
@@ -12,4 +17,14 @@
   @include color(dark);
   @include color(dark-static);
   @include color(light-static);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(var(--from-angle, 0deg));
+  }
+
+  to {
+    transform: rotate(calc(var(--from-angle, 0deg) + 360deg));
+  }
 }

@@ -23,24 +23,26 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
   const designTokens = useDesignTokens();
   const loadingSpinnerTokens = designTokens["loading-spinner"];
 
+  const animationDurationMs = preferReducedMotion
+    ? parseInt(loadingSpinnerTokens["transition-duration-slow"].value)
+    : parseInt(loadingSpinnerTokens["transition-duration"].value);
+
   const rootClassName = clsx(
     styles.loadingSpinner,
     isAlphaColor(color) && styles[color],
     className,
   );
 
-  const angle = useGlobalSpinnerAngle(
-    preferReducedMotion
-      ? parseInt(loadingSpinnerTokens["transition-duration-slow"].value)
-      : parseInt(loadingSpinnerTokens["transition-duration"].value),
-  );
+  const angle = useGlobalSpinnerAngle(animationDurationMs);
 
   return (
     <IconPending
+      style={
+        {
+          "--from-angle": `${angle}deg`,
+        } as React.CSSProperties
+      }
       className={rootClassName}
-      style={{
-        transform: `rotate(${angle}deg)`,
-      }}
       {...rest}
     />
   );
