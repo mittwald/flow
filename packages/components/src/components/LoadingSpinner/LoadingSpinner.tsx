@@ -1,4 +1,4 @@
-import { type FC, useMemo } from "react";
+import { type FC } from "react";
 import React from "react";
 import { IconPending } from "@/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
@@ -34,22 +34,19 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     className,
   );
 
-  const animationDelayMs = useMemo(() => {
-    const elapsedMs = performance.now() - globalSpinnerTime;
-    const phaseMs =
-      ((elapsedMs % animationDurationMs) + animationDurationMs) %
-      animationDurationMs;
-    return -phaseMs;
-  }, [animationDurationMs]);
-
   return (
     <IconPending
       className={rootClassName}
-      style={
-        {
-          "--animation-delay": `${animationDelayMs}ms`,
-        } as React.CSSProperties
-      }
+      ref={(element) => {
+        if (element) {
+          const elapsedMs = performance.now() - globalSpinnerTime;
+          const phaseMs =
+            ((elapsedMs % animationDurationMs) + animationDurationMs) %
+            animationDurationMs;
+
+          element.style.setProperty("--animation-delay", `${-phaseMs}ms`);
+        }
+      }}
       {...rest}
     />
   );
