@@ -13,6 +13,8 @@ export interface LoadingSpinnerProps extends IconProps {
   color?: "default" | AlphaColor;
 }
 
+const globalSpinnerTime = performance.now();
+
 /** @flr-generate all */
 export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
   const { className, color = "default", ...rest } = props;
@@ -32,17 +34,17 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
     className,
   );
 
-  const startingRotation =
-    ((((performance.now() / animationDurationMs) * 360) % 360) + 360) % 360;
-
   return (
     <IconPending
       className={rootClassName}
-      style={
-        {
-          "--from-angle": `${startingRotation}deg`,
-        } as React.CSSProperties
-      }
+      ref={(element) => {
+        if (element) {
+          const elapsedMs = performance.now() - globalSpinnerTime;
+          const phaseMs = elapsedMs % animationDurationMs;
+
+          element.style.setProperty("--animation-delay", `${-phaseMs}ms`);
+        }
+      }}
       {...rest}
     />
   );
