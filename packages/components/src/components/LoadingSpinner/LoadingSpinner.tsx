@@ -40,9 +40,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = (props) => {
       ref={(element) => {
         if (element) {
           const elapsedMs = performance.now() - globalSpinnerTime;
-          const phaseMs =
-            ((elapsedMs % animationDurationMs) + animationDurationMs) %
-            animationDurationMs;
+          const phaseMs = elapsedMs % animationDurationMs;
 
           element.style.setProperty("--animation-delay", `${-phaseMs}ms`);
         }
