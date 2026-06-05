@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
+
+### Features
+
+* **LoadingSpinner:** use animation delay ([#2530](https://github.com/mittwald/flow/issues/2530)) ([7e79288](https://github.com/mittwald/flow/commit/7e79288a947b227bdefc92486ff9685696a79cd2))
+
 # [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
 
 ### Features
