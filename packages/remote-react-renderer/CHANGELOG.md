@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
+
+### Features
+
+* **RemoteRenderer:** export RemoteError ([5baea09](https://github.com/mittwald/flow/commit/5baea099ed3155a91cec3b03b2089d7f91e5fdb1))
+
 # [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
