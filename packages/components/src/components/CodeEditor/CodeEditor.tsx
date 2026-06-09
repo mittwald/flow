@@ -77,6 +77,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   });
 
   const localRef = useObjectRef(ref);
+
   useMakeFocusable(localRef);
 
   return (
