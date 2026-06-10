@@ -13,7 +13,7 @@ const meta: Meta<typeof Markdown> = {
   },
   args: { color: "default", headingOffset: 0 },
   parameters: {
-    controls: { exclude: ["style", "ref"] },
+    controls: { exclude: ["style", "ref", "components"] },
   },
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
@@ -44,3 +44,25 @@ export default meta;
 type Story = StoryObj<typeof Markdown>;
 
 export const Default: Story = {};
+
+export const CustomComponents: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Markdown
+        {...props}
+        components={{
+          h2: ({ children }) => (
+            <h2 style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              {children}
+            </h2>
+          ),
+        }}
+      >
+        {"# Heading 1\n" +
+          "## Heading 2 overridden\n" +
+          "This story uses custom renderers for `h2`\n" +
+          "[Open docs](https://flowtide.dev)"}
+      </Markdown>
+    </StoryBackground>
+  ),
+};
