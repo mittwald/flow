@@ -1,6 +1,9 @@
-import { type KeyboardEventHandler, useState } from "react";
+import { type ComponentType, type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
-import { Markdown, type MarkdownProps } from "@/components/Markdown";
+import {
+  Markdown as DefaultMarkdown,
+  type MarkdownProps,
+} from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
 import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
@@ -19,7 +22,13 @@ import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValue
 export type MarkdownEditorMode = "editor" | "preview";
 
 export interface MarkdownEditorProps
-  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {}
+  extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
+  /**
+   * Allows replacing the markdown preview renderer implementation. Defaults to
+   * the internal `Markdown` component.
+   */
+  markdownComponent?: ComponentType<MarkdownProps>;
+}
 
 /** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
@@ -31,6 +40,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     rows = 5,
     autoResizeMaxRows,
     headingOffset,
+    markdownComponent: MarkdownComponent = DefaultMarkdown,
     value,
     onChange,
     ref,
@@ -103,7 +113,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
         onKeyDown={handleKeyDown}
       >
         {mode === "preview" && (
-          <Markdown
+          <MarkdownComponent
             headingOffset={headingOffset}
             className={styles.markdown}
             style={{
@@ -111,7 +121,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
             }}
           >
             {value}
-          </Markdown>
+          </MarkdownComponent>
         )}
         {children}
         <Toolbar
