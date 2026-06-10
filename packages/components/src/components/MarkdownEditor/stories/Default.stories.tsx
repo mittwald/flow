@@ -5,6 +5,8 @@ import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
+import type { MarkdownProps } from "@/components/Markdown";
+import ReactMarkdown from "react-markdown";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -85,4 +87,52 @@ export const WithRef: StoryObj = {
       </Section>
     );
   },
+};
+
+const DemoMentionMarkdownPreview = ({
+  children,
+  className,
+  style,
+}: MarkdownProps) => (
+  <div className={className} style={style}>
+    <ReactMarkdown
+      components={{
+        a: ({ children, href }) => {
+          if (href?.includes("mention:")) {
+            return (
+              <strong
+                style={{
+                  color: "var(--color--primary)",
+                  background: "var(--color--primary-subtle)",
+                  borderRadius: "var(--border-radius-pill)",
+                  padding: "0 var(--space-1)",
+                }}
+              >
+                @{children}
+              </strong>
+            );
+          }
+
+          return <a href={href}>{children}</a>;
+        },
+      }}
+      urlTransform={(url) => {
+        // add urlTransform to support custom protocols in `react-markdown`
+        return url;
+      }}
+    >
+      {String(children ?? "")}
+    </ReactMarkdown>
+  </div>
+);
+
+export const WithCustomMentionPreview: Story = {
+  args: {
+    defaultValue: "Sag Hallo zu [Max Mustermann](mention:user-max)",
+  },
+  render: (props) => (
+    <MarkdownEditor {...props} markdownComponent={DemoMentionMarkdownPreview}>
+      <Label>Message</Label>
+    </MarkdownEditor>
+  ),
 };

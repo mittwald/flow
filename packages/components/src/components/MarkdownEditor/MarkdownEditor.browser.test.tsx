@@ -1,7 +1,9 @@
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor";
+import type { MarkdownProps } from "@/components/Markdown";
 import { page, userEvent } from "vitest/browser";
+import ReactMarkdown from "react-markdown";
 
 const expandSteps = (value: string) => {
   const result = [];
@@ -145,4 +147,46 @@ describe("MarkdownEditor Tests", () => {
       expect(onChangeEvent).toHaveBeenLastCalledWith(expectedResult);
     },
   );
+
+  test("uses custom a-tag handling for mentions in preview mode", async () => {
+    const MentionMarkdownPreview = ({
+      children,
+      className,
+      style,
+    }: MarkdownProps) => (
+      <div className={className} style={style}>
+        <ReactMarkdown
+          components={{
+            a: ({ href, children }) => {
+              if (href?.startsWith("mention:")) {
+                return <span data-testid="mention-chip">@{children}</span>;
+              }
+
+              return <a href={href}>{children}</a>;
+            },
+          }}
+          urlTransform={(url) => {
+            // add urlTransform to support custom protocols in `react-markdown`
+            return url;
+          }}
+        >
+          {String(children ?? "")}
+        </ReactMarkdown>
+      </div>
+    );
+
+    await render(
+      <MarkdownEditor
+        aria-label="test"
+        defaultValue="Hello [max](mention:user-max)."
+        markdownComponent={MentionMarkdownPreview}
+      />,
+    );
+
+    await userEvent.click(page.getByRole("button", { name: "Preview" }));
+
+    const mentionChip = page.getByTestId("mention-chip");
+    await expect(mentionChip).toBeInTheDocument();
+    await expect(mentionChip).toHaveTextContent("@max");
+  });
 });
