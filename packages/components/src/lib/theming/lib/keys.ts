@@ -1,1 +1,1 @@
-export const themeHtmlAttribute = "data-flow-theme";
+export const themeHtmlAttribute = "data-theme";

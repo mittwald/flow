@@ -28,7 +28,7 @@ const preview: Preview = {
         theme === "dark" ? "#1b1f24" : "#FFF";
 
       return (
-        <ThemeProvider attribute="data-flow-theme">
+        <ThemeProvider attribute="data-theme">
           <ThemeDecorator theme={theme}>
             <Story />
           </ThemeDecorator>
