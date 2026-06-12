@@ -45,6 +45,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     showCharacterCount,
     className,
     onChange,
+    isReadOnly,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -79,6 +80,10 @@ export const TextArea = flowComponent("TextArea", (props) => {
   );
 
   const handleChange = (v: string) => {
+    if (isReadOnly) {
+      return;
+    }
+
     if (showCharacterCount) {
       setCharactersCount(v.length);
     }
@@ -165,12 +170,15 @@ export const TextArea = flowComponent("TextArea", (props) => {
         <FieldErrorCaptureContext>{children}</FieldErrorCaptureContext>
         <Aria.TextArea
           rows={rows}
+          {...(isReadOnly ? { "data-readonly": true } : {})}
+          aria-readonly={isReadOnly}
           aria-hidden={props["aria-hidden"]}
           placeholder={placeholder}
           className={inputClassName}
           ref={localRef}
           onChange={updateHeight}
           style={{
+            caretColor: isReadOnly ? "transparent" : undefined,
             minHeight: getHeight(rows),
             maxHeight: verticallyResizable
               ? undefined
