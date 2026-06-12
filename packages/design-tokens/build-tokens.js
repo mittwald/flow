@@ -18,7 +18,7 @@ StyleDictionary.registerTransform({
   },
 });
 
-const htmlAttribute = "data-flow-theme";
+const htmlAttribute = "data-theme";
 
 const configVariants = [
   {
