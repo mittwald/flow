@@ -74,22 +74,21 @@ Richtlinien wie für
 
 # Technische Implementierung
 
-Das Theme wird über das Attribut `data-flow-theme` auf dem `:root`-Element
-gesteuert. Verfügbare Werte sind:
+Das Theme wird über das Attribut `data-theme` auf dem `:root`-Element gesteuert.
+Verfügbare Werte sind:
 
 - `light`
 - `dark`
 - `system`
 
-Wird kein Theme gesetzt oder explizit `data-flow-theme="system"` verwendet,
-dient die bevorzugte Browsereinstellung des Nutzers als Grundlage für die
-Darstellung.
+Wird kein Theme gesetzt oder explizit `data-theme="system"` verwendet, dient die
+bevorzugte Browsereinstellung des Nutzers als Grundlage für die Darstellung.
 
 ## next-themes
 
 Für die Verwaltung und das Umschalten des Themes kann next-themes verwendet
 werden. Die Bibliothek übernimmt dabei das Speichern des gewählten Themes und
-das Setzen des `data-flow-theme` Attributs.
+das Setzen des `data-theme` Attributs.
 
 ### ThemeProvider
 
@@ -99,7 +98,7 @@ das Theme im DOM abgebildet wird:
 ```tsx
 import { ThemeProvider } from "next-themes";
 
-<ThemeProvider attribute="data-flow-theme">{children}</ThemeProvider>;
+<ThemeProvider attribute="data-theme">{children}</ThemeProvider>;
 ```
 
 ### Theme wechseln mit `useTheme`
