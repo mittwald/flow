@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+### Bug Fixes
+
+* add missing gradient for dark-mode ([c151f5f](https://github.com/mittwald/flow/commit/c151f5fb56cfe351b89916c019b11f4846bc0ed0))
+
 # [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
