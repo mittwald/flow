@@ -6,4 +6,5 @@
  */
 export interface HostConfig {
   language: string;
+  theme: "dark" | "light";
 }

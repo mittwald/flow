@@ -5,4 +5,5 @@ export const extractHostConfig = (
   config: ExtBridgeConfigInput,
 ): HostConfig => ({
   language: config.language,
+  theme: config.theme,
 });
