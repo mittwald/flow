@@ -98,7 +98,7 @@
 }
 
 /* Normal Modal Desktop */
-@media (min-width: 768px) {
+@media (width > 768px) {
   .modal {
     @include size(s);
     @include size(m);

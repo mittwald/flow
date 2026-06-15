@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
+
+### Bug Fixes
+
+* **Select:** fix placeholder color ([#2547](https://github.com/mittwald/flow/issues/2547)) ([866d340](https://github.com/mittwald/flow/commit/866d34039fdabf4e5db8b9bf3bb09616eb5545cc))
+
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+### Bug Fixes
+
+* **Modal:** fix media queries at threshold ([#2550](https://github.com/mittwald/flow/issues/2550)) ([4f4794a](https://github.com/mittwald/flow/commit/4f4794a44a143efda647b0844509572e60bbb148))
+
+# [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+### Bug Fixes
+
+* **List:** fix tile hover ([#2546](https://github.com/mittwald/flow/issues/2546)) ([e57a9a8](https://github.com/mittwald/flow/commit/e57a9a8bf88e19bafbc7661575e5ef21f4d6cfa6))
+
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
+
+### Features
+
+* **LoadingSpinner:** use animation delay ([#2530](https://github.com/mittwald/flow/issues/2530)) ([7e79288](https://github.com/mittwald/flow/commit/7e79288a947b227bdefc92486ff9685696a79cd2))
+
+# [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
+
+### Features
+
+* **LoadingSpinner:** use global clock for starting angle ([#2529](https://github.com/mittwald/flow/issues/2529)) ([f97a2a8](https://github.com/mittwald/flow/commit/f97a2a81a0e29f85c71c85684acc6ce326126d54))
+
+# [0.2.0-alpha.841](https://github.com/mittwald/flow/compare/0.2.0-alpha.840...0.2.0-alpha.841) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.840](https://github.com/mittwald/flow/compare/0.2.0-alpha.839...0.2.0-alpha.840) (2026-05-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.839](https://github.com/mittwald/flow/compare/0.2.0-alpha.838...0.2.0-alpha.839) (2026-05-28)
+
+### Features
+
+* reduce duration of success-feedback ([#2514](https://github.com/mittwald/flow/issues/2514)) ([1d30670](https://github.com/mittwald/flow/commit/1d3067019c5b4ba4c8b32789f8adf4ecc3fb05ba))
+
 # [0.2.0-alpha.838](https://github.com/mittwald/flow/compare/0.2.0-alpha.837...0.2.0-alpha.838) (2026-05-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

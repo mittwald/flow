@@ -26,7 +26,6 @@ export const Icon = flowComponent("Icon", (props) => {
     children,
     size = "m",
     status,
-    ref: ignoredRef,
     ...svgAttributes
   } = props;
 
