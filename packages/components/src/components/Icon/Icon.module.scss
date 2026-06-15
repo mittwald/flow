@@ -19,7 +19,7 @@
   }
 
   @include size(m, var(--size-rem--xxs));
-  @include size(s, var(--size-rem--xxxs));
+  @include size(s, var(--size-rem--xxs));
   @include size(l, var(--size-rem--xs));
 
   /* Colors */
