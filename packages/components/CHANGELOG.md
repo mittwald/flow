@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+### Bug Fixes
+
+* **List:** fix tile hover ([#2546](https://github.com/mittwald/flow/issues/2546)) ([e57a9a8](https://github.com/mittwald/flow/commit/e57a9a8bf88e19bafbc7661575e5ef21f4d6cfa6))
+
 # [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
