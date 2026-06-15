@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.850](https://github.com/mittwald/flow/compare/0.2.0-alpha.849...0.2.0-alpha.850) (2026-06-15)
+
+### Bug Fixes
+
+* **Code:** fix active line color ([#2518](https://github.com/mittwald/flow/issues/2518)) ([6055e07](https://github.com/mittwald/flow/commit/6055e073a3cf8b9fac051f4721f1f91414fc8dc1))
+
 # [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
 
 ### Bug Fixes
