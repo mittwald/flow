@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+### Bug Fixes
+
+* **Modal:** fix media queries at threshold ([#2550](https://github.com/mittwald/flow/issues/2550)) ([4f4794a](https://github.com/mittwald/flow/commit/4f4794a44a143efda647b0844509572e60bbb148))
+
 # [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
