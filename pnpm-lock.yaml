@@ -271,8 +271,8 @@ importers:
   apps/remote-dom-demo:
     dependencies:
       '@internationalized/date':
-        specifier: ^3.12.0
-        version: 3.12.0
+        specifier: ^3.12.2
+        version: 3.12.2
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../../packages/ext-bridge
@@ -549,8 +549,8 @@ importers:
         specifier: ^10.3.0
         version: 10.4.0
       '@internationalized/date':
-        specifier: ^3.12.0
-        version: 3.12.0
+        specifier: ^3.12.2
+        version: 3.12.2
       '@lezer/generator':
         specifier: ^1.8.0
         version: 1.8.0
@@ -1020,8 +1020,8 @@ importers:
   packages/remote-core:
     dependencies:
       '@internationalized/date':
-        specifier: ^3.12.0
-        version: 3.12.0
+        specifier: ^3.12.2
+        version: 3.12.2
       '@lit-labs/ssr-dom-shim':
         specifier: ^1.5.1
         version: 1.5.1
@@ -1158,8 +1158,8 @@ importers:
         version: 6.1.1(react@19.2.4)
     devDependencies:
       '@internationalized/date':
-        specifier: ^3.12.0
-        version: 3.12.0
+        specifier: ^3.12.2
+        version: 3.12.2
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
@@ -2783,9 +2783,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@internationalized/date@3.12.0':
-    resolution: {integrity: sha512-/PyIMzK29jtXaGU23qTvNZxvBXRtKbNnGDFD+PY6CZw/Y8Ex8pFUzkuCJCG9aOqmShjqhS9mPqP6Dk5onQY8rQ==}
 
   '@internationalized/date@3.12.2':
     resolution: {integrity: sha512-FY1Y+H64NDs+HAF6omlnWxm3mEpfgaCSWtL5l551ZZfImA+kGjPFgrnJrGjH6lfmLL0g8Z/mBu1R3kufeCp6Jw==}
@@ -12382,10 +12379,6 @@ snapshots:
   '@inquirer/type@3.0.10(@types/node@24.12.2)':
     optionalDependencies:
       '@types/node': 24.12.2
-
-  '@internationalized/date@3.12.0':
-    dependencies:
-      '@swc/helpers': 0.5.18
 
   '@internationalized/date@3.12.2':
     dependencies:
