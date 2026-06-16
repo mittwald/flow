@@ -20,7 +20,7 @@ import {
   </LayoutCard>
   <LayoutCard>
     <AccentBox
-      backgroundImage="https://mittwald.github.io/flow/_next/static/media/darkmode-bg.174mob-24zj3j.png"
+      backgroundImage="https://raw.githubusercontent.com/mittwald/flow/main/apps/docs/public/assets/darkmode-bg.png"
       color="light-static"
     >
       <Section>
