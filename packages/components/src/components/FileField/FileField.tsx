@@ -11,6 +11,8 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import styles from "./FileField.module.scss";
+import clsx from "clsx";
 
 export interface FileFieldProps
   extends
@@ -73,7 +75,10 @@ export const FileField = flowComponent("FileField", (props) => {
   };
 
   return (
-    <div {...fieldProps}>
+    <div
+      {...fieldProps}
+      className={clsx(fieldProps.className, styles.FileField)}
+    >
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <FieldErrorCaptureContext>
           <PropsContextProvider props={fieldPropsContext}>
