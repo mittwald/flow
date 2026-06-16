@@ -111,6 +111,7 @@ import { IconServer as Server } from "./components/IconServer.tsx";
 import { IconSsh as Ssh } from "./components/IconSsh.tsx";
 import { IconSshKey as SshKey } from "./components/IconSshKey.tsx";
 import { IconSshSftp as SshSftp } from "./components/IconSshSftp.tsx";
+import { IconStack as Stack } from "./components/IconStack.tsx";
 import { IconStar as Star } from "./components/IconStar.tsx";
 import { IconStarFilled as StarFilled } from "./components/IconStarFilled.tsx";
 import { IconSubdomain as Subdomain } from "./components/IconSubdomain.tsx";
@@ -243,6 +244,7 @@ export const proIconSet = {
   Ssh,
   SshKey,
   SshSftp,
+  Stack,
   Star,
   StarFilled,
   Subdomain,

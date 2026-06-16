@@ -341,6 +341,9 @@ SshKey:
 SshSftp:
   tb: Door
   fa: doorOpen
+Stack:
+  tb: Stack2
+  fa: stack
 Star:
   svg: |
     <svg

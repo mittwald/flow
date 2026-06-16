@@ -56,6 +56,7 @@ import {
   IconSsh,
   IconSshKey,
   IconSshSftp,
+  IconStack,
   IconStar,
   IconSubdomain,
   IconSupport,
@@ -293,6 +294,10 @@ import {
   <LabeledValue>
     <Label>SshSftp</Label>
     <IconSshSftp />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Stack</Label>
+    <IconStack />
   </LabeledValue>
   <LabeledValue>
     <Label>Star</Label>
