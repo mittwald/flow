@@ -32,6 +32,7 @@ import styles from "./List.module.css";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
 
 export interface ListProps<T, TMeta = unknown>
   extends
@@ -193,6 +194,25 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
+  const isEmpty = listModel.useIsEmpty();
+
+  // IMPORTANT: we always render the emptyView to the dom.
+  // otherwise we will lose e.g. modalState when switching from noItems to itemsAvailable and vise versa.
+  const emptyView = (
+    <DivView
+      aria-hidden={!isEmpty}
+      className={!isEmpty ? styles.hideVisuallyEmptyView : undefined}
+    >
+      {listModel.emptyView ?? (
+        <ListEmptyViewContainerView
+          viewType={listModel.getEmptyViewType()}
+          emptySearchResultView={listModel.emptySearchResultView}
+          emptyView={listModel.emptyView}
+        />
+      )}
+    </DivView>
+  );
+
   return (
     <PropsContextProvider props={propsContext}>
       <listContext.Provider
@@ -206,6 +226,7 @@ export const List = flowComponent("List", (props) => {
           <Header />
 
           <DivView className={styles.listWrapper}>
+            {emptyView}
             {listModel.items.entries.length > 0 && (
               <UiComponentTunnelExit id="listSummary" component="List" />
             )}

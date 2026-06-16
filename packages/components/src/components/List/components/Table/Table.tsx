@@ -9,7 +9,6 @@ import TableRowView from "@/views/TableRowView";
 import TableCellView from "@/views/TableCellView";
 import TableColumnView from "@/views/TableColumnView";
 import { TableBodyLoadingView } from "@/components/List/components/Table/components/TableBodyLoadingView";
-import ListEmptyViewContainerView from "@/views/ListEmptyViewContainerView";
 
 export const Table: FC = () => {
   const list = useList();
@@ -19,18 +18,8 @@ export const Table: FC = () => {
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 
-  if (!table) {
+  if (!table || listIsEmpty) {
     return null;
-  }
-
-  if (listIsEmpty) {
-    return (
-      <ListEmptyViewContainerView
-        viewType={list.getEmptyViewType()}
-        emptySearchResultView={list.emptySearchResultView}
-        emptyView={list.emptyView}
-      />
-    );
   }
 
   const rowAction = table.list.onAction;
