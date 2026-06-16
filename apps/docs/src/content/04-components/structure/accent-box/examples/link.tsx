@@ -4,7 +4,7 @@ import {
   Link,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Link href="#" target="_blank">
     <AccentBox backgroundColor="blue">
       Verlinkte AccentBox
@@ -17,4 +17,4 @@ import {
       </AccentBox>
     </LayoutCard>
   </Link>
-</Row>;
+</>;

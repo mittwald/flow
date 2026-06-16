@@ -13,4 +13,6 @@ export const mwExtBridge = {
   readiness: readinessApi,
 } as ExtBridge;
 
-globalThis.mwExtBridge = mwExtBridge;
+export function initExtBridge(): void {
+  globalThis.mwExtBridge = mwExtBridge;
+}

@@ -1,7 +1,16 @@
 import { playwright } from "@vitest/browser-playwright";
 import type { ProjectConfig } from "vitest/node";
+import type { BrowserCommand } from "vitest/node";
 
 const viewport = { width: 1280, height: 720 };
+
+const setReducedMotion: BrowserCommand<
+  [value: "reduce" | "no-preference"]
+> = async ({ page }, value) => {
+  await page.emulateMedia({
+    reducedMotion: value,
+  });
+};
 
 export const vitestBrowserTestConfig: ProjectConfig = {
   css: {
@@ -9,6 +18,9 @@ export const vitestBrowserTestConfig: ProjectConfig = {
   },
   browser: {
     enabled: true,
+    commands: {
+      setReducedMotion,
+    },
     provider: playwright({
       actionTimeout: 5000,
       contextOptions: {

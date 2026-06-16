@@ -35,6 +35,7 @@ export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldEle
       minValue: {},
       name: {},
       placeholderValue: {},
+      render: {},
       shouldForceLeadingZeros: {},
       slot: {},
       translate: {},

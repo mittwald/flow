@@ -1,6 +1,11 @@
 heading:
+  icon-to-text-spacing:
+    value: "{size-rem.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+
   color:
-    value: "{primary.color.1000}"
+    value: "{neutral.color.1100}"
   color-dark:
     value: "{dark-plain-content-color}"
   color-light:
@@ -12,8 +17,4 @@ heading:
   color-danger:
     value: "{danger.color.900}"
   color-unavailable:
-    value: "{unavailable.color.900}"
-  icon-to-text-spacing:
-    value: "{size-rem.s}"
-  font-weight:
-    value: "{font-weight.bold}"
+    value: "{unavailable.color.800}"

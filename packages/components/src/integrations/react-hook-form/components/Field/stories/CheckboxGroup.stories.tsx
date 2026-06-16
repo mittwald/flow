@@ -110,7 +110,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
-            <ResetButton>Reset</ResetButton>
+            <ResetButton slot="abort">Reset</ResetButton>
             <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Section>
@@ -136,8 +136,19 @@ export const WithFieldError: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
-          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
+        <Section>
+          <Field name="field">
+            <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
+              <Label>Options</Label>
+              <Checkbox value="1">Option 1</Checkbox>
+              <Checkbox value="2">Option 2</Checkbox>
+              <Checkbox value="3">Option 3</Checkbox>
+              <Checkbox value="4">Option 4</Checkbox>
+              <Checkbox value="5">Option 5</Checkbox>
+              <Checkbox value="6">Option 6</Checkbox>
+            </CheckboxGroup>
+          </Field>
+          <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} isInvalid {...props}>
             <Label>Options</Label>
             <Checkbox value="1">Option 1</Checkbox>
             <Checkbox value="2">Option 2</Checkbox>
@@ -145,18 +156,9 @@ export const WithFieldError: Story = {
             <Checkbox value="4">Option 4</Checkbox>
             <Checkbox value="5">Option 5</Checkbox>
             <Checkbox value="6">Option 6</Checkbox>
+            <FieldError>ErrorFromOuterFieldError!</FieldError>
           </CheckboxGroup>
-        </Field>
-        <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} isInvalid {...props}>
-          <Label>Options</Label>
-          <Checkbox value="1">Option 1</Checkbox>
-          <Checkbox value="2">Option 2</Checkbox>
-          <Checkbox value="3">Option 3</Checkbox>
-          <Checkbox value="4">Option 4</Checkbox>
-          <Checkbox value="5">Option 5</Checkbox>
-          <Checkbox value="6">Option 6</Checkbox>
-          <FieldError>ErrorFromOuterFieldError!</FieldError>
-        </CheckboxGroup>
+        </Section>
       </Form>
     );
   },
@@ -167,7 +169,7 @@ export const WithFocus: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"field"}>
+        <Field name="field">
           <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
             <Label>Options</Label>
             <Checkbox value="1">Option 1</Checkbox>
@@ -179,22 +181,32 @@ export const WithFocus: Story = {
           </CheckboxGroup>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
-        <Button
-          onPress={() =>
-            form.setError(
-              "field",
-              { type: "required", message: "oh no" },
-              { shouldFocus: true },
-            )
-          }
-        >
-          err through form
-        </Button>
-        <Button onPress={() => form.setFocus("field")}>
-          focus through form
-        </Button>
-        <ResetButton>Reset</ResetButton>
-        <SubmitButton>Submit</SubmitButton>
+        <ActionGroup>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() =>
+              form.setError(
+                "field",
+                { type: "required", message: "oh no" },
+                { shouldFocus: true },
+              )
+            }
+          >
+            Error through form
+          </Button>
+          <Button
+            variant="soft"
+            color="secondary"
+            slot="secondary"
+            onPress={() => form.setFocus("field")}
+          >
+            Focus through form
+          </Button>
+          <ResetButton slot="abort">Reset</ResetButton>
+          <SubmitButton>Submit</SubmitButton>
+        </ActionGroup>
       </Form>
     );
   },

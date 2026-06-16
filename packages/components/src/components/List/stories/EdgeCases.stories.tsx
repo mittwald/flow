@@ -4,12 +4,9 @@ import { Content } from "@/components/Content";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { Heading } from "@/components/Heading";
 import { Initials } from "@/components/Initials";
-import { ListItemView, SortingFunctions, typedList } from "@/components/List";
-import Section from "@/components/Section";
+import { SortingFunctions, typedList } from "@/components/List";
 import { Text } from "@/components/Text";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
-import { Render } from "@/lib/react/components/Render";
-import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { SortingFn } from "@tanstack/react-table";
 import type List from "../List";
@@ -26,112 +23,12 @@ export default meta;
 
 type Story = StoryObj<typeof List>;
 
-const apiSleep = (): Promise<void> =>
-  new Promise((res) => window.setTimeout(res, 2000));
-
-const getEmail = async (name: string) => {
-  await apiSleep();
-  return `${name}@info.de`;
-};
-
-export const LoadingListItem: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List batchSize={5} aria-label="List">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Item textValue={(item) => item.name}>
-          {(item) => (
-            <Render>
-              {() => {
-                const email = usePromise(getEmail, [item.name]);
-
-                return (
-                  <ListItemView>
-                    <Heading>{item.name}</Heading>
-                    <Text>{email}</Text>
-                  </ListItemView>
-                );
-              }}
-            </Render>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const LoadingTile: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List defaultViewMode="tiles" batchSize={5} aria-label="List">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Item showTiles showList={false} textValue={(item) => item.name}>
-          {(item) => (
-            <Render>
-              {() => {
-                const email = usePromise(getEmail, [item.name]);
-
-                return (
-                  <ListItemView>
-                    <Heading>{item.name}</Heading>
-                    <Text>{email}</Text>
-                  </ListItemView>
-                );
-              }}
-            </Render>
-          )}
-        </List.Item>
-      </List.List>
-    );
-  },
-};
-
-export const LoadingTableCell: Story = {
-  render: () => {
-    const List = typedList<{ name: string }>();
-
-    return (
-      <List.List batchSize={5} aria-label="List" defaultViewMode="table">
-        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
-
-        <List.Table>
-          <List.TableHeader>
-            <List.TableColumn>Name</List.TableColumn>
-            <List.TableColumn>Email</List.TableColumn>
-          </List.TableHeader>
-
-          <List.TableBody>
-            <List.TableRow>
-              <List.TableCell>{(item) => item.name}</List.TableCell>
-              <List.TableCell>
-                {(item) => (
-                  <Render>
-                    {() => {
-                      return usePromise(getEmail, [item.name]);
-                    }}
-                  </Render>
-                )}
-              </List.TableCell>
-            </List.TableRow>
-          </List.TableBody>
-        </List.Table>
-      </List.List>
-    );
-  },
-};
-
 export const VeryLongWords: Story = {
   render: () => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List>
+      <List.List aria-label="List">
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
@@ -198,7 +95,7 @@ const domainTypeSortingFn: SortingFn<DomainWithBigIntId> = (
   return String(valueA).localeCompare(String(valueB));
 };
 
-export const CustomSortingList = () => {
+export const CustomSorting = () => {
   const domainsWithBigInt = domains.map((domain, index) => {
     const bigIntId = BigInt(1000000000000 + index);
 
@@ -214,84 +111,82 @@ export const CustomSortingList = () => {
     SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
 
   return (
-    <Section>
-      <DomainList.List batchSize={10}>
-        <DomainList.StaticData data={domainsWithBigInt} />
+    <DomainList.List batchSize={10} aria-label="Domains">
+      <DomainList.StaticData data={domainsWithBigInt} />
 
-        <DomainList.Sorting
-          property="hostname"
-          name="Hostname"
-          direction="asc"
-          directionName="ascending"
-        />
-        <DomainList.Sorting
-          property="hostname"
-          name="Hostname"
-          direction="desc"
-          directionName="descending"
-        />
+      <DomainList.Sorting
+        property="hostname"
+        name="Hostname"
+        direction="asc"
+        directionName="ascending"
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Hostname"
+        direction="desc"
+        directionName="descending"
+      />
 
-        <DomainList.Sorting
-          property="id"
-          name="ID"
-          direction="asc"
-          customSortingFn={bigIntSorting}
-          directionName="ascending"
-        />
-        <DomainList.Sorting
-          property="id"
-          name="ID"
-          direction="desc"
-          customSortingFn={bigIntSorting}
-          defaultEnabled
-          directionName="descending"
-        />
+      <DomainList.Sorting
+        property="id"
+        name="ID"
+        direction="asc"
+        customSortingFn={bigIntSorting}
+        directionName="ascending"
+      />
+      <DomainList.Sorting
+        property="id"
+        name="ID"
+        direction="desc"
+        customSortingFn={bigIntSorting}
+        defaultEnabled
+        directionName="descending"
+      />
 
-        <DomainList.Sorting
-          property="tld"
-          name="TLD length"
-          direction="asc"
-          customSortingFn={tldLengthSortingFn}
-          directionName="shortest first"
-        />
-        <DomainList.Sorting
-          property="tld"
-          name="TLD length"
-          direction="desc"
-          customSortingFn={tldLengthSortingFn}
-          directionName="longest first"
-        />
+      <DomainList.Sorting
+        property="tld"
+        name="TLD length"
+        direction="asc"
+        customSortingFn={tldLengthSortingFn}
+        directionName="shortest first"
+      />
+      <DomainList.Sorting
+        property="tld"
+        name="TLD length"
+        direction="desc"
+        customSortingFn={tldLengthSortingFn}
+        directionName="longest first"
+      />
 
-        <DomainList.Sorting
-          property="type"
-          name="Type"
-          direction="asc"
-          customSortingFn={domainTypeSortingFn}
-        />
+      <DomainList.Sorting
+        property="type"
+        name="Type"
+        direction="asc"
+        customSortingFn={domainTypeSortingFn}
+      />
 
-        <DomainList.Item>
-          {(domain) => (
-            <DomainList.ItemView>
-              <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>
-                {domain.hostname}
-                {!domain.verified && (
-                  <AlertBadge status="warning">Unverified</AlertBadge>
-                )}
-              </Heading>
-              <Text>{domain.type}</Text>
-              <Text>ID: {domain.id}</Text>
-              <Text>TLD: {domain.tld}</Text>
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </DomainList.ItemView>
-          )}
-        </DomainList.Item>
-      </DomainList.List>
-    </Section>
+      <DomainList.Item>
+        {(domain) => (
+          <DomainList.ItemView>
+            <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+              {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <AlertBadge status="warning">Unverified</AlertBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+            <Text>ID: {domain.id}</Text>
+            <Text>TLD: {domain.tld}</Text>
+            <ContextMenu>
+              <MenuItem>Show details</MenuItem>
+              <MenuItem>Delete</MenuItem>
+            </ContextMenu>
+          </DomainList.ItemView>
+        )}
+      </DomainList.Item>
+    </DomainList.List>
   );
 };

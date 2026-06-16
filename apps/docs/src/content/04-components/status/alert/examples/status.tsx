@@ -4,7 +4,7 @@ import {
   Heading,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Alert status="info">
     <Heading>E-Mail-Adresse wurde archiviert</Heading>
     <Content>
@@ -51,4 +51,4 @@ import {
       fehlen die notwendigen Berechtigungen.
     </Content>
   </Alert>
-</Row>;
+</>;

@@ -8,6 +8,7 @@ import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
 import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useIsSSR } from "react-aria";
 
 export interface TabsProps
   extends
@@ -39,6 +40,8 @@ export const Tabs = flowComponent("Tabs", (props) => {
 
   const selectedKey = selectedKeyProps ?? selectedKeyState;
 
+  const isSsr = useIsSSR();
+
   return (
     <>
       {children}
@@ -67,7 +70,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
           disabledKeys={disabledKeys}
         />
         <UiComponentTunnelExit id="Panels" component="Tabs" />
-        <FallbackTab tabNotFoundView={tabNotFoundView} />
+        {!isSsr && <FallbackTab tabNotFoundView={tabNotFoundView} />}
       </Aria.Tabs>
     </>
   );

@@ -5,8 +5,9 @@ import {
   alphaColors,
   isAlphaColor,
 } from "@mittwald/flow-react-components/internal";
+import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
 
-const colors = ["primary", ...alphaColors] as const;
+const colors = ["default", ...alphaColors] as const;
 
 test.each(testEnvironments)(
   "HeaderNavigation (%s)",
@@ -35,7 +36,7 @@ test.each(testEnvironments)(
               }
             >
               <HeaderNavigation color={color}>
-                <Link>Link</Link>
+                <Link>{firstLetterToUppercase(color)}</Link>
                 <Link aria-current="page">Current</Link>
                 <Button>
                   <IconSearch />

@@ -32,16 +32,20 @@ export function getCroppedImageFile(
         pixelCrop.height,
       );
 
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          return;
-        }
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            return;
+          }
 
-        const file = new File([blob], "cropped-image.png", {
-          type: "image/png",
-        });
-        resolve(file);
-      }, "image/png");
+          const file = new File([blob], "cropped-image.png", {
+            type: "image/png",
+          });
+          resolve(file);
+        },
+        "image/png",
+        85,
+      );
     };
 
     image.onerror = () => {

@@ -1,3 +1,7 @@
+.wrapper {
+  min-width: 0;
+}
+
 .codeBlock {
   display: block;
   font-size: var(--code-block--font-size);
@@ -19,6 +23,10 @@
         text-shadow: none;
       }
     }
+  }
+
+  &.codeBlock div:global(.flow--code-editor--code-mirror) {
+    border-color: var(--code-block--border-color);
   }
 }
 

@@ -18,11 +18,11 @@ export default () => {
   return (
     <ColumnLayout l={[1]} m={[1]}>
       <Flex direction="column" gap="xs">
-        <Breadcrumb color="light">
+        <Breadcrumb color="dark">
           <Link href="#">Organisation</Link>
           <Link href="#">Dashboard</Link>
         </Breadcrumb>
-        <Heading color="light" level={1}>
+        <Heading color="dark" level={1}>
           Dashboard
         </Heading>
       </Flex>
@@ -80,7 +80,7 @@ export default () => {
         </LayoutCard>
       </ColumnLayout>
       <LayoutCard>
-        <AccentBox>
+        <AccentBox color="dark">
           <Icon>
             <IconHeartHandshake />
           </Icon>

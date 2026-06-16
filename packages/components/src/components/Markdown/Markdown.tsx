@@ -38,11 +38,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ...rest
   } = props;
 
-  const headingAndLinkColor = color === "default" ? "primary" : color;
-
   const components: Components = {
     a: (props) => (
-      <Link target="_blank" color={headingAndLinkColor} href={props.href}>
+      <Link target="_blank" color={color} href={props.href}>
         {props.children}
       </Link>
     ),
@@ -55,7 +53,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h1: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(1, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -63,7 +61,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h2: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(2, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -71,7 +69,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h3: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(3, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -79,7 +77,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h4: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(4, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -87,7 +85,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h5: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(5, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>
@@ -95,7 +93,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     h6: (props) => (
       <Heading
         level={getHeadingLevelWithOffset(6, headingOffset)}
-        color={headingAndLinkColor}
+        color={color}
       >
         {props.children}
       </Heading>

@@ -8,7 +8,13 @@ import RadioView from "@/views/RadioView";
 import { useList } from "@/components/List";
 import locales from "../../../../locales/*.locale.json";
 
-export const SortingAccordion: FC = () => {
+interface Props {
+  expandAccordions: boolean;
+}
+
+export const SortingAccordion: FC<Props> = (props) => {
+  const { expandAccordions } = props;
+
   const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales, "List");
 
@@ -20,7 +26,7 @@ export const SortingAccordion: FC = () => {
   }
 
   return (
-    <AccordionView>
+    <AccordionView defaultExpanded={expandAccordions}>
       <HeadingView>{stringFormatter.format("sorting")}</HeadingView>
       <ContentView>
         <RadioGroupView value={activeSorting?.id} m={[1, 1]}>

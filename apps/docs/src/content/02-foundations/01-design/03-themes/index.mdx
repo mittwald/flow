@@ -1,0 +1,118 @@
+---
+title: Themes
+---
+
+Themes definieren die visuelle Gestaltung einer Anwendung, ohne die zugrunde
+liegende Struktur oder Semantik zu verändern.
+
+Aktuell unterstützt Flow zwei Themes:
+
+- Light
+- Dark
+
+Beide basieren auf denselben Design Tokens und Komponenten. Ein Theme ist damit
+kein separater Modus mit eigener Logik, sondern eine alternative Darstellung
+derselben UI.
+
+# Umgang mit Themes
+
+Flow stellt die Grundlage für Themes bereit, übernimmt jedoch nicht automatisch
+das Theme-Handling in der Anwendung.
+
+Das Design System stellt bereit:
+
+- Design Tokens für Light und Dark
+- Komponenten, die diese Tokens verwenden
+
+Die Anwendung ist verantwortlich für:
+
+- Festlegen des aktiven Themes
+- Umschalten zwischen Themes
+- Berücksichtigung der Browsereinstellung
+- Speicherung der Nutzerpräferenz
+
+# Individuelle Inhalte
+
+Bei der Umsetzung sollte besonders auf Stellen geachtet werden, an denen nicht
+ausschließlich Tokens verwendet werden, zum Beispiel:
+
+- Custom Farben und Farbverläufe
+- Bilder, Illustrationen oder Media Assets
+
+Diese Inhalte reagieren nicht automatisch auf Theme-Wechsel und müssen bewusst
+so gestaltet werden, dass sie in beiden Themes funktionieren.
+
+In bestimmten Fällen ist es sinnvoll, dass einzelne UI-Elemente nicht auf einen
+Theme-Wechsel reagieren. Zum Beispiel, wenn Komponenten auf festen Hintergründen
+wie Bildern oder Farbverläufen eingesetzt werden, die sich beim Wechsel des
+Themes nicht verändern. Für solche Szenarien stellt Flow die Farben Light Static
+und Dark Static bereit. Diese bleiben unabhängig vom aktiven Theme unverändert
+und sorgen für konsistente Lesbarkeit.
+
+Für die Verwendung von Light Static und Dark Static gelten die gleichen
+Richtlinien wie für
+[Light und Dark Colors](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<DoAndDont>
+  <Info
+    example="alpha-light"
+    bgColor="light"
+    editorDisabled
+    stretch
+    heading="Light Theme"
+  />
+  <Info
+    example="alpha-dark"
+    bgColor="dark"
+    editorDisabled
+    stretch
+    heading="Dark Theme"
+
+/>
+
+</DoAndDont>
+
+# Technische Implementierung
+
+Das Theme wird über das Attribut `data-theme` auf dem `:root`-Element gesteuert.
+Verfügbare Werte sind:
+
+- `light`
+- `dark`
+- `system`
+
+Wird kein Theme gesetzt oder explizit `data-theme="system"` verwendet, dient die
+bevorzugte Browsereinstellung des Nutzers als Grundlage für die Darstellung.
+
+## next-themes
+
+Für die Verwaltung und das Umschalten des Themes kann next-themes verwendet
+werden. Die Bibliothek übernimmt dabei das Speichern des gewählten Themes und
+das Setzen des `data-theme` Attributs.
+
+### ThemeProvider
+
+Der `ThemeProvider` wird in der Root der Anwendung eingebunden und steuert, wie
+das Theme im DOM abgebildet wird:
+
+```tsx
+import { ThemeProvider } from "next-themes";
+
+<ThemeProvider attribute="data-theme">{children}</ThemeProvider>;
+```
+
+### Theme wechseln mit `useTheme`
+
+Innerhalb von Client Components kann das Theme über den Hook `useTheme`
+gesteuert werden:
+
+```ts
+import { useTheme } from "next-themes";
+
+const { theme, setTheme } = useTheme();
+```
+
+#### Verfügbare Werte:
+
+- `theme` → aktuelles gesetztes Theme (`light`, `dark`, `system`)
+- `setTheme("light" | "dark" | "system")` → wechselt das Theme

@@ -3,6 +3,158 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.851](https://github.com/mittwald/flow/compare/0.2.0-alpha.850...0.2.0-alpha.851) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.850](https://github.com/mittwald/flow/compare/0.2.0-alpha.849...0.2.0-alpha.850) (2026-06-15)
+
+### Bug Fixes
+
+* **Code:** fix active line color ([#2518](https://github.com/mittwald/flow/issues/2518)) ([6055e07](https://github.com/mittwald/flow/commit/6055e073a3cf8b9fac051f4721f1f91414fc8dc1))
+
+# [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
+
+### Bug Fixes
+
+* **Select:** fix placeholder color ([#2547](https://github.com/mittwald/flow/issues/2547)) ([866d340](https://github.com/mittwald/flow/commit/866d34039fdabf4e5db8b9bf3bb09616eb5545cc))
+
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.841](https://github.com/mittwald/flow/compare/0.2.0-alpha.840...0.2.0-alpha.841) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.840](https://github.com/mittwald/flow/compare/0.2.0-alpha.839...0.2.0-alpha.840) (2026-05-29)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.839](https://github.com/mittwald/flow/compare/0.2.0-alpha.838...0.2.0-alpha.839) (2026-05-28)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.838](https://github.com/mittwald/flow/compare/0.2.0-alpha.837...0.2.0-alpha.838) (2026-05-28)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.837](https://github.com/mittwald/flow/compare/0.2.0-alpha.836...0.2.0-alpha.837) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.836](https://github.com/mittwald/flow/compare/0.2.0-alpha.835...0.2.0-alpha.836) (2026-05-27)
+
+### Bug Fixes
+
+* **Modal:** add missing aria label ([#2495](https://github.com/mittwald/flow/issues/2495)) ([d576882](https://github.com/mittwald/flow/commit/d576882bb4c98cbe6f9beb7967a927ae2a9737f4))
+
+# [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
+
+### Features
+
+* **Rating:** support custom icons ([#2511](https://github.com/mittwald/flow/issues/2511)) ([6c4ef13](https://github.com/mittwald/flow/commit/6c4ef13c5c039d08d937857cce30c57a9788b4d3))
+
+# [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
+
+### Bug Fixes
+
+* **Tabs:** fix collapsed tabs with link ([#2513](https://github.com/mittwald/flow/issues/2513)) ([9ffc8bc](https://github.com/mittwald/flow/commit/9ffc8bca6a8e3eea33112758da9abfa22158dcb5))
+
+# [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.832](https://github.com/mittwald/flow/compare/0.2.0-alpha.831...0.2.0-alpha.832) (2026-05-19)
+
+### Features
+
+* **Initials:** support emojis ([#2510](https://github.com/mittwald/flow/issues/2510)) ([9ff88e7](https://github.com/mittwald/flow/commit/9ff88e73c77f711d1f82c97f824204fd6d3780b2))
+
+# [0.2.0-alpha.831](https://github.com/mittwald/flow/compare/0.2.0-alpha.830...0.2.0-alpha.831) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.830](https://github.com/mittwald/flow/compare/0.2.0-alpha.829...0.2.0-alpha.830) (2026-05-18)
+
+### Bug Fixes
+
+* **ExtBridge:** init ExtBridge in RemoteRoot connection ([#2506](https://github.com/mittwald/flow/issues/2506)) ([16d5f01](https://github.com/mittwald/flow/commit/16d5f014e90b89dfc353053d00eba8341ac08732))
+
+# [0.2.0-alpha.829](https://github.com/mittwald/flow/compare/0.2.0-alpha.828...0.2.0-alpha.829) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.828](https://github.com/mittwald/flow/compare/0.2.0-alpha.827...0.2.0-alpha.828) (2026-05-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
+
+### Bug Fixes
+
+* **Text:** fix text link alpha colors ([#2486](https://github.com/mittwald/flow/issues/2486)) ([2790dd9](https://github.com/mittwald/flow/commit/2790dd9507641dca1b6d2ae9d99a685cb0bb73ef))
+
+# [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
+
+### Bug Fixes
+
+* **CodeBlock:** fix scrollbar position ([#2479](https://github.com/mittwald/flow/issues/2479)) ([907c3f8](https://github.com/mittwald/flow/commit/907c3f81f0812a7f46383706af21d2673f013ab8))
+
+### Features
+
+* **AccentBox:** set default color for gradient background ([#2491](https://github.com/mittwald/flow/issues/2491)) ([b557223](https://github.com/mittwald/flow/commit/b55722331932107a1b487fa66c4202b73661da3f))
+* **ContextMenu:** support badges ([#2493](https://github.com/mittwald/flow/issues/2493)) ([8e8582f](https://github.com/mittwald/flow/commit/8e8582f44eb44ef2f9c0dded3eaa1f684882c5c7))
+* **List:** improve empty view ([#2490](https://github.com/mittwald/flow/issues/2490)) ([475c1c7](https://github.com/mittwald/flow/commit/475c1c7432c189a113ffad14dfd9547e1a18a724))
+
+# [0.2.0-alpha.824](https://github.com/mittwald/flow/compare/0.2.0-alpha.823...0.2.0-alpha.824) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.823](https://github.com/mittwald/flow/compare/0.2.0-alpha.822...0.2.0-alpha.823) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.822](https://github.com/mittwald/flow/compare/0.2.0-alpha.821...0.2.0-alpha.822) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.821](https://github.com/mittwald/flow/compare/0.2.0-alpha.820...0.2.0-alpha.821) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.820](https://github.com/mittwald/flow/compare/0.2.0-alpha.819...0.2.0-alpha.820) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

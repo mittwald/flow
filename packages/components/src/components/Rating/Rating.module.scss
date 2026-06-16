@@ -10,7 +10,7 @@
   .ratingSegment {
     display: grid;
     grid-template-areas: "star";
-    border-radius: var(--corner-radius--default);
+    border-radius: var(--corner-radius--m);
 
     @include focus.focus;
 
@@ -21,23 +21,23 @@
     &[data-focus-visible] {
       transform: scale(1.2);
     }
+  }
 
-    .star,
-    .starFilled {
-      grid-area: star;
-      transition-property: opacity, transform;
-      transition-duration: var(--transition--duration--fast);
-    }
+  .empty,
+  .filled {
+    grid-area: star;
+    transition-property: opacity, transform;
+    transition-duration: var(--transition--duration--fast);
+  }
 
-    .star {
-      opacity: 0;
-      color: var(--rating--star-color);
-    }
+  :where(.empty) {
+    opacity: 0;
+    color: var(--rating--star-color);
+  }
 
-    .starFilled {
-      opacity: 1;
-      color: var(--rating--star-filled-color);
-    }
+  :where(.filled) {
+    opacity: 1;
+    color: var(--rating--star-filled-color);
   }
 
   &:not(:has(.ratingSegments:hover)),
@@ -45,11 +45,11 @@
     .ratingSegment {
       &.current {
         ~ .ratingSegment {
-          .star {
+          .empty {
             opacity: 1;
           }
 
-          .starFilled {
+          .filled {
             opacity: 0;
           }
         }
@@ -58,11 +58,11 @@
 
     &:not(:has(.current)) {
       .ratingSegment {
-        .star {
+        .empty {
           opacity: 1;
         }
 
-        .starFilled {
+        .filled {
           opacity: 0;
         }
       }
@@ -72,11 +72,11 @@
   &:not([data-readonly]) {
     &.ratingSegments:hover {
       .ratingSegment {
-        .star {
+        .empty {
           opacity: 0;
         }
 
-        .starFilled {
+        .filled {
           opacity: 1;
         }
       }
@@ -87,13 +87,24 @@
       transform-origin: center;
 
       ~ .ratingSegment {
-        .star {
+        .empty {
           opacity: 1;
         }
 
-        .starFilled {
+        .filled {
           opacity: 0;
         }
+      }
+    }
+  }
+
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .ratingSegment {
+      .star,
+      .starFilled {
+        color: var(--form-control--border-color--disabled);
       }
     }
   }

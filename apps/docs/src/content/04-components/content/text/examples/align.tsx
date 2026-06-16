@@ -8,7 +8,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<Column>
+<>
   <Align>
     <IconDomain />
     <Text>mail.agenturserver.de</Text>
@@ -31,4 +31,4 @@ import {
       </ContextualHelp>
     </ContextualHelpTrigger>
   </Align>
-</Column>;
+</>;

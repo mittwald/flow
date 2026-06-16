@@ -7,12 +7,6 @@
   .input {
     @include formControl.formControl();
 
-    display: grid;
-    gap: var(--form-control--spacing-y) var(--form-control--spacing-x);
-    grid-template-areas: "icon label";
-    grid-template-columns: auto 1fr;
-    align-self: start;
-
     & {
       order: unset;
     }
@@ -28,6 +22,7 @@
     }
 
     &:has(.content) {
+      display: grid;
       grid-template-areas:
         "icon label"
         ".    content";

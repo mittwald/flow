@@ -41,6 +41,9 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
 const meta: Meta<typeof MessageThread> = {
   title: "Chat/MessageThread",
   component: MessageThread,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => (
     <MessageThread {...props}>
       <ExampleMessage

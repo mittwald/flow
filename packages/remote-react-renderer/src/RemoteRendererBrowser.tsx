@@ -11,13 +11,20 @@ import {
   type NavigationState,
   type RemoteExtBridgeConnectionApi,
 } from "@mittwald/flow-remote-core";
-import { usePromise } from "@mittwald/react-use-promise";
+import { refresh, usePromise } from "@mittwald/react-use-promise";
 import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
-import { type CSSProperties, type FC, useMemo, useRef, useState } from "react";
-import { useLanguage } from "@mittwald/flow-react-components";
+import {
+  type CSSProperties,
+  type FC,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useLanguage, useTheme } from "@mittwald/flow-react-components";
 import type { HostConfig } from "@mittwald/flow-core";
 
 export interface RemoteRendererBrowserProps {
@@ -69,6 +76,8 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   }
 
   const language = useLanguage();
+  const theme = useTheme();
+
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const loadingPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
@@ -97,6 +106,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const hostConfig: HostConfig = {
     language,
+    theme,
   };
 
   const connect = connectRemoteIframeRef({
@@ -143,6 +153,18 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const awaitLoadingPromise = connectionSrc === src;
 
+  const loaderResourceTag = `mittwald/remote-react-renderer/connect/${src}`;
+
+  // refresh on remount
+  useEffect(
+    () => () => {
+      refresh({
+        tag: loaderResourceTag,
+      });
+    },
+    [src],
+  );
+
   usePromise(
     async () => {
       await overallLoading();
@@ -151,6 +173,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     awaitLoadingPromise ? [] : null,
     {
       loaderId: src,
+      tags: [loaderResourceTag],
     },
   );
 

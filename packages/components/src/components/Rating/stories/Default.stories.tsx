@@ -5,12 +5,22 @@ import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { useForm } from "react-hook-form";
 import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
+import { Icon } from "@/components/Icon";
+import { IconLeaf, IconLeafFilled } from "@tabler/icons-react";
 
 const meta: Meta<typeof Rating> = {
   title: "Form Controls/Rating",
   component: Rating,
-  args: { defaultValue: 2 },
-  render: (props) => <Rating aria-label="Rating" {...props} />,
+  args: { size: "m", isDisabled: false, isReadOnly: false, isRequired: false },
+  argTypes: { size: { control: "inline-radio", options: ["s", "m"] } },
+  parameters: {
+    controls: { exclude: ["iconEmpty", "iconFilled"] },
+  },
+  render: (props) => (
+    <Rating defaultValue={2} {...props}>
+      <Label>Rating</Label>
+    </Rating>
+  ),
 };
 
 export default meta;
@@ -18,18 +28,6 @@ export default meta;
 type Story = StoryObj<typeof Rating>;
 
 export const Default: Story = {};
-
-export const Small: Story = { args: { size: "s" } };
-
-export const ReadOnly: Story = { args: { isReadOnly: true } };
-
-export const WithLabel: Story = {
-  render: (props) => (
-    <Rating {...props}>
-      <Label>Rating</Label>
-    </Rating>
-  ),
-};
 
 export const WithFieldError: Story = {
   render: (props) => (
@@ -53,6 +51,9 @@ export const WithControlledValue: Story = {
 };
 
 export const WithForm: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
   render: () => {
     const form = useForm<{ rating: number }>({ defaultValues: { rating: 2 } });
 
@@ -69,5 +70,19 @@ export const WithForm: Story = {
         <SubmitButton>Submit</SubmitButton>
       </Form>
     );
+  },
+};
+export const WithCustomIcon: Story = {
+  args: {
+    iconEmpty: (
+      <Icon>
+        <IconLeaf />
+      </Icon>
+    ),
+    iconFilled: (
+      <Icon status="success">
+        <IconLeafFilled />
+      </Icon>
+    ),
   },
 };

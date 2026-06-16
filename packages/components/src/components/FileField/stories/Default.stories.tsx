@@ -11,6 +11,11 @@ import { IconAttachment } from "../../Icon/components/icons";
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",
   component: FileField,
+  args: {
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
   render: (props) => (
     <FileField {...props}>
       <Label>Certificate</Label>
@@ -27,11 +32,7 @@ type Story = StoryObj<typeof FileField>;
 
 export const Default: Story = {};
 
-export const ReadOnly: Story = {
-  args: { isReadOnly: true },
-};
-
-export const WithDescription: Story = {
+export const WithFieldDescription: Story = {
   render: (props) => (
     <FileField {...props}>
       <Label>Certificate</Label>
@@ -43,7 +44,7 @@ export const WithDescription: Story = {
   ),
 };
 
-export const WithError: Story = {
+export const WithFieldError: Story = {
   render: (props) => (
     <FileField {...props} isInvalid>
       <Label>Certificate</Label>

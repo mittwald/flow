@@ -91,7 +91,7 @@
       .button {
         border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
-        color: var(--badge--#{$color}-content-color--default);
+        color: var(--badge--#{$color}-content-color);
       }
 
       &:not(.disabled) {
@@ -102,7 +102,6 @@
 
           &[data-pressed] {
             background-color: var(--badge--#{$color}-background-color--pressed);
-            color: var(--badge--#{$color}-content-color--pressed);
           }
         }
       }

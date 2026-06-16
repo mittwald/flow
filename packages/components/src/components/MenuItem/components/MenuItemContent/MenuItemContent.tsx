@@ -34,6 +34,9 @@ export const MenuItemContent: FC<Props> = (props) => {
     Kbd: {
       className: styles.kbd,
     },
+    Badge: {
+      className: styles.badge,
+    },
   };
 
   const controlIconPropsContext: PropsContext = {
@@ -42,6 +45,7 @@ export const MenuItemContent: FC<Props> = (props) => {
     },
     Switch: {
       className: clsx(styles.controlIcon, styles.switch),
+      labelPosition: "leading",
     },
   };
 

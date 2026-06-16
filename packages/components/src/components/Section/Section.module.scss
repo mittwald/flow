@@ -3,6 +3,7 @@
   flex-direction: column;
   row-gap: var(--section--spacing);
   container-type: inline-size;
+  width: 100%;
 
   > form {
     display: flex;

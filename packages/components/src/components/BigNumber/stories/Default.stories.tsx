@@ -6,6 +6,9 @@ import { Text } from "@/components/Text";
 const meta: Meta<typeof BigNumber> = {
   title: "Data Visualisation/BigNumber",
   component: BigNumber,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => <BigNumber {...props}>69%</BigNumber>,
 };
 export default meta;

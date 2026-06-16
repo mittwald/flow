@@ -1,6 +1,10 @@
 .loadingSpinner {
-  animation: spin var(--loading-spinner--transition-duration) linear infinite;
   color: var(--loading-spinner--color);
+  animation-name: spin;
+  animation-duration: var(--loading-spinner--transition-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-delay: var(--animation-delay, 0ms);
 
   @media (prefers-reduced-motion: reduce) {
     animation-duration: var(--loading-spinner--transition-duration-slow);

@@ -7,7 +7,7 @@ import {
   IconArrowUp,
 } from "@tabler/icons-react";
 
-<Row>
+<>
   <Color color="success">
     <Icon>
       <IconArrowUp />
@@ -18,4 +18,4 @@ import {
       <IconArrowDown />
     </Icon>
   </Color>
-</Row>;
+</>;

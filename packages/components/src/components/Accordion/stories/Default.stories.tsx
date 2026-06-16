@@ -14,6 +14,13 @@ const meta: Meta<typeof Accordion> = {
       <Content>Accordion Content</Content>
     </Accordion>
   ),
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+      options: ["default", "outline"],
+    },
+  },
+  args: { variant: "default" },
   parameters: {
     controls: { exclude: ["defaultExpanded"] },
   },
@@ -23,14 +30,6 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {};
-
-export const DefaultExpanded: Story = {
-  args: { defaultExpanded: true },
-};
-
-export const OutlineVariant: Story = {
-  args: { variant: "outline" },
-};
 
 export const WithLabel: Story = {
   render: (props) => (

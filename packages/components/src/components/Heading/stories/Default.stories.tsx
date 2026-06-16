@@ -22,12 +22,12 @@ const meta: Meta<typeof Heading> = {
     },
     color: {
       control: "inline-radio",
-      options: ["primary", "danger", "unavailable", ...alphaColors],
+      options: ["default", "danger", "unavailable", ...alphaColors],
     },
   },
-  args: { level: 2, color: "primary" },
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  args: { level: 2, color: "default" },
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Heading {...props}>I am a H{props.level} Heading</Heading>
     </StoryBackground>
   ),
@@ -38,9 +38,13 @@ type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
 
+export const WithElementType: Story = {
+  args: { elementType: "span" },
+};
+
 export const AdditionalContent: Story = {
-  render: (props) => (
-    <StoryBackground color={props.color}>
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
       <Heading {...props}>
         <IconStar />
         {dummyText.medium}

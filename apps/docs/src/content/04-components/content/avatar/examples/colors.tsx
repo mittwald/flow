@@ -5,7 +5,7 @@ import {
   Initials,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<>
   <Avatar>
     <Initials>Gillian Gopher</Initials>
   </Avatar>
@@ -21,4 +21,4 @@ import {
   <Avatar>
     <IconCustomer />
   </Avatar>
-</Row>;
+</>;

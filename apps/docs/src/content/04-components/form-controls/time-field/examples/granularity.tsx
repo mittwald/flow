@@ -1,9 +1,10 @@
 import {
+  ColumnLayout,
   Label,
   TimeField,
 } from "@mittwald/flow-react-components";
 
-<Row>
+<ColumnLayout>
   <TimeField granularity="hour">
     <Label>Stunde</Label>
   </TimeField>
@@ -13,4 +14,4 @@ import {
   <TimeField granularity="second">
     <Label>Stunde, Minute und Sekunde</Label>
   </TimeField>
-</Row>;
+</ColumnLayout>;

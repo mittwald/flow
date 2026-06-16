@@ -1,3 +1,4 @@
+import type { RemoteExtBridgeConnectionApi } from "@mittwald/flow-remote-core";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -11,6 +12,16 @@ interface Options {
 }
 
 const loadingTimeout = 30_000;
+
+const extBridgeImplementation: RemoteExtBridgeConnectionApi = {
+  getConfig: async () => ({
+    sessionId: "",
+    userId: "",
+    extensionId: "",
+    extensionInstanceId: "",
+  }),
+  getSessionToken: async () => "",
+};
 
 export const renderRemoteTest = async (
   testName: string,
@@ -29,7 +40,11 @@ export const renderRemoteTest = async (
       <Suspense
         fallback={<div data-testid="root-loading-view">Loading...</div>}
       >
-        <RemoteRenderer src={url.toString()} timeoutMs={loadingTimeout} />
+        <RemoteRenderer
+          src={url.toString()}
+          timeoutMs={loadingTimeout}
+          extBridgeImplementation={extBridgeImplementation}
+        />
       </Suspense>
     </ErrorBoundary>,
   );

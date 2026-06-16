@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 import styles from "./Rating.module.scss";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
@@ -23,6 +23,10 @@ export interface RatingProps
   defaultValue?: number;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
+  /** An alternative icon for the empty state */
+  iconEmpty?: ReactElement;
+  /** An alternative icon for the filled state */
+  iconFilled?: ReactElement;
 }
 
 /** @flr-generate all */
@@ -34,6 +38,8 @@ export const Rating = flowComponent("Rating", (props) => {
     className,
     children,
     ref,
+    iconEmpty,
+    iconFilled,
     ...rest
   } = props;
 
@@ -52,6 +58,7 @@ export const Rating = flowComponent("Rating", (props) => {
   );
 
   const localRef = useObjectRef(ref);
+
   useMakeFocusable(localRef);
 
   const stringValue = value?.toString();
@@ -81,6 +88,8 @@ export const Rating = flowComponent("Rating", (props) => {
                         index={index}
                         selectedValue={selectedValue}
                         size={size}
+                        iconEmpty={iconEmpty}
+                        iconFilled={iconFilled}
                       />
                     ))}
                 </div>

@@ -25,6 +25,7 @@ export class RemoteBreadcrumbElement extends FlowRemoteElement<RemoteBreadcrumbE
       isDisabled: {},
       items: {},
       lang: {},
+      render: {},
       size: {},
       slot: {},
       translate: {},

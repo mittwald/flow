@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     font-weight: normal;
-    font-size: var(--font-size-text--default);
+    font-size: var(--font-size-text--m);
     text-align: left;
 
     @include formControl.formControl();
@@ -27,5 +27,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    &[data-placeholder="true"] {
+      color: var(--form-control--placeholder-color--default);
+    }
   }
 }

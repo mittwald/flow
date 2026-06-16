@@ -33,7 +33,7 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
   };
 
   return (
-    <header className={styles.toolbar} role="toolbar">
+    <div className={styles.toolbar} role="toolbar">
       <div className={styles.toolbarButtons}>
         <ToolbarButton {...sharedToolButtonProps} type="bold">
           <IconBold />
@@ -73,6 +73,6 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
         currentMode={props.currentMode}
         isDisabled={props.isDisabled}
       />
-    </header>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 import { getProperty } from "dot-prop";
 import {
   Table,
@@ -8,6 +7,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  useDesignTokens,
+  type DesignTokens,
 } from "@mittwald/flow-react-components";
 import { Sample } from "@/lib/mdx/components/DesignTokenTable/Samples/Sample";
 
@@ -37,15 +38,14 @@ function getTokens(current: unknown, collector: DesignToken[] = []) {
   return collector;
 }
 
-function recursiveGetTokensInPath(path: string) {
+function recursiveGetTokensInPath(path: string, tokens: DesignTokens) {
   const values = getProperty<unknown, string>(tokens, path, undefined);
   return getTokens(values);
 }
 
 export const DesignTokenTable: FC<Props> = (props) => {
   const { path } = props;
-
-  const designTokens = recursiveGetTokensInPath(path);
+  const designTokens = recursiveGetTokensInPath(path, useDesignTokens());
   const rows = designTokens.map((token) => {
     const tokenName = token.path.join("--");
 

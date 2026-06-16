@@ -6,11 +6,11 @@ inline-code:
   padding-y:
     value: "{size-px.xxs}"
   corner-radius:
-    value: "{corner-radius.default}"
+    value: "{corner-radius.s}"
   background-color:
     value: "{neutral-soft-background-color.default}"
   content-color:
-    value: "{neutral-soft-content-color.default}"
+    value: "{neutral-soft-content-color}"
 
   # Dark
   dark-background-color:

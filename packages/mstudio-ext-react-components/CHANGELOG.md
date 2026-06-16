@@ -3,6 +3,134 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.851](https://github.com/mittwald/flow/compare/0.2.0-alpha.850...0.2.0-alpha.851) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.850](https://github.com/mittwald/flow/compare/0.2.0-alpha.849...0.2.0-alpha.850) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.843](https://github.com/mittwald/flow/compare/0.2.0-alpha.842...0.2.0-alpha.843) (2026-06-05)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.842](https://github.com/mittwald/flow/compare/0.2.0-alpha.841...0.2.0-alpha.842) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.841](https://github.com/mittwald/flow/compare/0.2.0-alpha.840...0.2.0-alpha.841) (2026-06-03)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.840](https://github.com/mittwald/flow/compare/0.2.0-alpha.839...0.2.0-alpha.840) (2026-05-29)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.839](https://github.com/mittwald/flow/compare/0.2.0-alpha.838...0.2.0-alpha.839) (2026-05-28)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.838](https://github.com/mittwald/flow/compare/0.2.0-alpha.837...0.2.0-alpha.838) (2026-05-28)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.837](https://github.com/mittwald/flow/compare/0.2.0-alpha.836...0.2.0-alpha.837) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.836](https://github.com/mittwald/flow/compare/0.2.0-alpha.835...0.2.0-alpha.836) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.835](https://github.com/mittwald/flow/compare/0.2.0-alpha.834...0.2.0-alpha.835) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.834](https://github.com/mittwald/flow/compare/0.2.0-alpha.833...0.2.0-alpha.834) (2026-05-27)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.833](https://github.com/mittwald/flow/compare/0.2.0-alpha.832...0.2.0-alpha.833) (2026-05-19)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.832](https://github.com/mittwald/flow/compare/0.2.0-alpha.831...0.2.0-alpha.832) (2026-05-19)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.831](https://github.com/mittwald/flow/compare/0.2.0-alpha.830...0.2.0-alpha.831) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.830](https://github.com/mittwald/flow/compare/0.2.0-alpha.829...0.2.0-alpha.830) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.829](https://github.com/mittwald/flow/compare/0.2.0-alpha.828...0.2.0-alpha.829) (2026-05-18)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.828](https://github.com/mittwald/flow/compare/0.2.0-alpha.827...0.2.0-alpha.828) (2026-05-13)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.827](https://github.com/mittwald/flow/compare/0.2.0-alpha.826...0.2.0-alpha.827) (2026-05-08)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.826](https://github.com/mittwald/flow/compare/0.2.0-alpha.825...0.2.0-alpha.826) (2026-05-07)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.825](https://github.com/mittwald/flow/compare/0.2.0-alpha.824...0.2.0-alpha.825) (2026-05-07)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.824](https://github.com/mittwald/flow/compare/0.2.0-alpha.823...0.2.0-alpha.824) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.823](https://github.com/mittwald/flow/compare/0.2.0-alpha.822...0.2.0-alpha.823) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.822](https://github.com/mittwald/flow/compare/0.2.0-alpha.821...0.2.0-alpha.822) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.821](https://github.com/mittwald/flow/compare/0.2.0-alpha.820...0.2.0-alpha.821) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
+# [0.2.0-alpha.820](https://github.com/mittwald/flow/compare/0.2.0-alpha.819...0.2.0-alpha.820) (2026-05-06)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
 # [0.2.0-alpha.819](https://github.com/mittwald/flow/compare/0.2.0-alpha.818...0.2.0-alpha.819) (2026-05-05)
 
 **Note:** Version bump only for package @mittwald/mstudio-ext-react-components

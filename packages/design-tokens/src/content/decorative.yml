@@ -38,11 +38,3 @@ decorative:
     value: "{color.bright-lilac.800}"
   lilac-content-color:
     value: "{color.bright-lilac.1000}"
-
-  # Disabled
-  disabled-background-color:
-    value: "{color.gray.300}"
-  disabled-content-accent-color:
-    value: "{color.gray.500}"
-  disabled-content-color:
-    value: "{color.gray.600}"

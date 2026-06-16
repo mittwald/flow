@@ -8,13 +8,18 @@ import { Label } from "@/components/Label";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
+import { Button } from "@/components/Button";
 import { AlertIcon } from "@/components/AlertIcon";
+import { dummyText } from "@/lib/dev/dummyText";
 import { useEffect, useState } from "react";
 import type { Key } from "react-aria";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
   component: Tabs,
+  parameters: {
+    controls: { disable: true },
+  },
   render: (props) => {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>
@@ -24,7 +29,10 @@ const meta: Meta<typeof Tabs> = {
             <AlertIcon status="info" />
           </TabTitle>
           <Section>
-            <Heading>General</Heading>
+            <Header>
+              <Heading>General</Heading>
+              <Button>Button</Button>
+            </Header>
             <TextField defaultValue="example@mittwald.de">
               <Label>Mail address</Label>
             </TextField>
@@ -64,10 +72,6 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {};
-
-export const SmallSpace: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
-};
 
 export const Controlled: Story = {
   render: (props) => {
@@ -112,4 +116,41 @@ export const WithLinks: Story = {
       </Tabs>
     );
   },
+};
+
+export const Collapsed: Story = {
+  render: (props) => (
+    <Tabs {...props}>
+      {Array(20)
+        .fill("")
+        .map((_, index) => (
+          <Tab key={index}>
+            <TabTitle>{dummyText.short}</TabTitle>
+            <Section>
+              <Text>{dummyText.long}</Text>
+            </Section>
+          </Tab>
+        ))}
+    </Tabs>
+  ),
+};
+
+export const TabNotFound: Story = {
+  render: (props) => (
+    <Tabs {...props} defaultSelectedKey="notFound">
+      <Tab id="general">
+        <TabTitle>General</TabTitle>
+        <Section>
+          <Heading>General</Heading>
+        </Section>
+      </Tab>
+
+      <Tab id="storage">
+        <TabTitle>Storage settings</TabTitle>
+        <Section>
+          <Heading>Storage</Heading>
+        </Section>
+      </Tab>
+    </Tabs>
+  ),
 };

@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC } from "react";
 import { useTunnelState } from "@/context";
 import { observer } from "mobx-react-lite";
 import type { TunnelChildren } from "@/TunnelState";
@@ -20,11 +20,9 @@ export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
   const { children, id, providerId } = props;
   const tunnelChildren = useTunnelState(providerId).getEntries(id);
 
-  const renderedTunnelChildren = tunnelChildren
-    ? tunnelChildren.map((entry) => (
-        <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>
-      ))
-    : null;
+  const renderedTunnelChildren = tunnelChildren?.entries.map((entry) => (
+    <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>
+  ));
 
   if (typeof children === "function") {
     return children(renderedTunnelChildren);
