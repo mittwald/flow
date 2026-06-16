@@ -16,7 +16,7 @@ export interface DoAndDontTileProps extends PropsWithChildren {
   text?: string;
   type?: "do" | "dont" | "info" | "mstudio";
   zoom?: number;
-  bgColor?: "mstudio" | "dark" | "light";
+  bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
   heading?: string;
   mobile?: boolean;
   stretch?: boolean;
