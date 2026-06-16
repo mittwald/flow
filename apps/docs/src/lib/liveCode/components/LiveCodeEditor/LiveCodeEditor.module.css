@@ -36,6 +36,16 @@
     background-color: var(--neutral--color--300);
   }
 
+  &.darkStaticBackground,
+  &.darkStaticBackground.mobile .preview {
+    background-color: #3a434e;
+  }
+
+  &.lightStaticBackground,
+  &.lightStaticBackground.mobile .preview {
+    background-color: #e5eff8;
+  }
+
   &.mstudioBackground,
   &.mstudioBackground.mobile .preview {
     background: var(--color--background-gradient);
