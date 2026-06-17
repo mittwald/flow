@@ -1,7 +1,7 @@
 /* auto-generated file */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { faStack as icon } from "@fortawesome/sharp-regular-svg-icons";
+import { faLayerGroup as icon } from "@fortawesome/sharp-regular-svg-icons";
 import {
   FontAwesomeIcon,
   type FontAwesomeIconProps,
