@@ -32,7 +32,7 @@ const meta: Meta<typeof HeaderNavigation> = {
   render: (props) => (
     <StoryBackground color={props.color}>
       <HeaderNavigation aria-label="Header navigation" {...props}>
-        <Link href="#">Getting startet</Link>
+        <Link href="#">Getting started</Link>
         <Link href="#" aria-current="page">
           Components
         </Link>
