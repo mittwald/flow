@@ -43,6 +43,7 @@ type ConstructorOptions = Pick<
 
 export class OverlayController {
   public isOpen = false;
+  public isContentSuspended = false;
   private onOpenHandlers = new Set<OverlayOpenHandler>();
   private onCloseHandlers = new Set<OverlayCloseHandler>();
   private onOpenChangeHandlers = new Set<OverlayOpenStateHandler>();
@@ -54,11 +55,13 @@ export class OverlayController {
   public constructor(options: ConstructorOptions = {}) {
     makeObservable(this, {
       isOpen: observable,
+      isContentSuspended: observable,
       showConfirmationModal: observable,
       open: action.bound,
       close: action.bound,
       toggle: action.bound,
       setOpen: action.bound,
+      setIsContentSuspended: action.bound,
       confirmClose: action.bound,
     });
     const { isDefaultOpen = false, confirmOnClose = false } = options;
@@ -226,8 +229,16 @@ export class OverlayController {
     }
   }
 
+  public setIsContentSuspended(to: boolean): void {
+    this.isContentSuspended = to;
+  }
+
   public useIsOpen() {
     return useSelector(() => this.isOpen);
+  }
+
+  public useIsContentSuspended() {
+    return useSelector(() => this.isContentSuspended);
   }
 
   public useShowConfirmationModal() {

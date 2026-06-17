@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import ContextMenu, {
   ContextMenuSection,
   ContextMenuTrigger,
@@ -16,6 +15,9 @@ import {
 import { Text } from "@/components/Text";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
+import { usePromise } from "@mittwald/react-use-promise";
+import { sleep } from "@/lib/promises/sleep";
+import type { PropsWithChildren } from "react";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -217,6 +219,26 @@ export const MenuItemStates: Story = {
         <MenuItem isPending>Pending</MenuItem>
         <MenuItem isSucceeded>Succeeded</MenuItem>
         <MenuItem isFailed>Failed</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+};
+
+const WrapInSuspense = (props: PropsWithChildren) => {
+  usePromise(sleep, [2000], { loaderId: "wrappedInSuspense" });
+  return props.children;
+};
+
+export const WithSuspense: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <MenuItem>Menu Item 1</MenuItem>
+        <MenuItem>Menu Item 2</MenuItem>
+        <WrapInSuspense>
+          <MenuItem>Menu Item 3</MenuItem>
+        </WrapInSuspense>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
