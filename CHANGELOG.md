@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.856](https://github.com/mittwald/flow/compare/0.2.0-alpha.855...0.2.0-alpha.856) (2026-06-17)
+
+### Bug Fixes
+
+* stack icon fa variant ([#2556](https://github.com/mittwald/flow/issues/2556)) ([baf21a6](https://github.com/mittwald/flow/commit/baf21a6dab38dd3f8569a3749d4e88384ccfddc0))
+
 # [0.2.0-alpha.855](https://github.com/mittwald/flow/compare/0.2.0-alpha.854...0.2.0-alpha.855) (2026-06-17)
 
 **Note:** Version bump only for package @mittwald/flow-project
