@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.854](https://github.com/mittwald/flow/compare/0.2.0-alpha.853...0.2.0-alpha.854) (2026-06-17)
+
+### Features
+
+* **Icon:** add stack icon ([#2553](https://github.com/mittwald/flow/issues/2553)) ([a8becec](https://github.com/mittwald/flow/commit/a8bececefc8ca50a5fd25de68d96dc2cb9d95e1e))
+
 # [0.2.0-alpha.853](https://github.com/mittwald/flow/compare/0.2.0-alpha.852...0.2.0-alpha.853) (2026-06-16)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
