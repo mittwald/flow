@@ -111,6 +111,7 @@ export { IconServer } from "./IconServer.tsx";
 export { IconSsh } from "./IconSsh.tsx";
 export { IconSshKey } from "./IconSshKey.tsx";
 export { IconSshSftp } from "./IconSshSftp.tsx";
+export { IconStack } from "./IconStack.tsx";
 export { IconStar } from "./IconStar.tsx";
 export { IconStarFilled } from "./IconStarFilled.tsx";
 export { IconSubdomain } from "./IconSubdomain.tsx";
