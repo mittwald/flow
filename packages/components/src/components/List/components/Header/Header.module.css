@@ -63,3 +63,7 @@
     }
   }
 }
+
+.hideVisuallyActions {
+  display: none;
+}
