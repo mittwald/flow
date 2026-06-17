@@ -343,7 +343,7 @@ SshSftp:
   fa: doorOpen
 Stack:
   tb: Stack2
-  fa: stack
+  fa: layerGroup
 Star:
   svg: |
     <svg
