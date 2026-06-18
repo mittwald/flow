@@ -24,7 +24,8 @@
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
-    "test:compile": "tsc --noEmit"
+    "test:compile": "tsc --noEmit",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@mittwald/ext-bridge": "workspace:*",
@@ -54,7 +55,8 @@
     "vite-plugin-banner": "^0.8.1",
     "vite-plugin-checker": "^0.12.0",
     "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-externalize-deps": "^0.10.0"
+    "vite-plugin-externalize-deps": "^0.10.0",
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
