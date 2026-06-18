@@ -20,7 +20,7 @@ export interface LiveCodeEditorProps {
   editorCollapsed?: boolean;
   editorDisabled?: boolean;
   zoom?: number;
-  bgColor?: "mstudio" | "dark" | "light";
+  bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
   mobile?: boolean;
   stretch?: boolean;
   row?: boolean;
@@ -78,9 +78,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       <div
         className={clsx(
           styles.liveCodeEditor,
-          bgColor === "dark" && styles.darkBackground,
-          bgColor === "light" && styles.lightBackground,
-          bgColor === "mstudio" && styles.mstudioBackground,
+          bgColor && styles[`${bgColor}Background`],
           mobile && styles.mobile,
           className,
         )}

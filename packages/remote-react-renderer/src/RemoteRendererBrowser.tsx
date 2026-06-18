@@ -24,7 +24,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useLanguage } from "@mittwald/flow-react-components";
+import { useLanguage, useTheme } from "@mittwald/flow-react-components";
 import type { HostConfig } from "@mittwald/flow-core";
 
 export interface RemoteRendererBrowserProps {
@@ -76,6 +76,8 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   }
 
   const language = useLanguage();
+  const theme = useTheme();
+
   const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
   const loadingPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
@@ -104,6 +106,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const hostConfig: HostConfig = {
     language,
+    theme,
   };
 
   const connect = connectRemoteIframeRef({

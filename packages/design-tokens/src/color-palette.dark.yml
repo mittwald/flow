@@ -342,15 +342,10 @@ color:
 
   gradient:
     value:
-      "radial-gradient(circle at 27.74% 38.09%,#d8e9f8,transparent
-      60%),radial-gradient(circle at 63.98% 99.4%,#e4b8ff,transparent
-      37%),radial-gradient(circle at 79.7% 64.93%,#d8e9f8,transparent
-      52%),radial-gradient(circle at 10.9% 91.41%,#d8e9f8,transparent
-      56%),radial-gradient(circle at 3.68% 3.26%,#0056ff,transparent
-      31%),radial-gradient(circle at 99.62% 17.78%,#48c7d8,transparent
-      26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
-      55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
-      100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"
+      "radial-gradient(circle at 18% 20%, #3D55C159, transparent 22%),
+      radial-gradient(circle at 82% 18%, #00A1B54D, transparent 18%),
+      radial-gradient(circle at 70% 82%, #715DEE47, transparent 24%),
+      linear-gradient(180deg, #06070A 0%, #0A0E18 45%, #0F1424 100%)"
 
   background-gradient:
     value:

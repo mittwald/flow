@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.857](https://github.com/mittwald/flow/compare/0.2.0-alpha.856...0.2.0-alpha.857) (2026-06-17)
+
+### Bug Fixes
+
+* **docs:** getting started typo ([#2557](https://github.com/mittwald/flow/issues/2557)) ([7ad6661](https://github.com/mittwald/flow/commit/7ad666139ad799eee3edd0af1c92993d1164f3f4))
+
+# [0.2.0-alpha.856](https://github.com/mittwald/flow/compare/0.2.0-alpha.855...0.2.0-alpha.856) (2026-06-17)
+
+### Bug Fixes
+
+* stack icon fa variant ([#2556](https://github.com/mittwald/flow/issues/2556)) ([baf21a6](https://github.com/mittwald/flow/commit/baf21a6dab38dd3f8569a3749d4e88384ccfddc0))
+
+# [0.2.0-alpha.855](https://github.com/mittwald/flow/compare/0.2.0-alpha.854...0.2.0-alpha.855) (2026-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.854](https://github.com/mittwald/flow/compare/0.2.0-alpha.853...0.2.0-alpha.854) (2026-06-17)
+
+### Features
+
+* **Icon:** add stack icon ([#2553](https://github.com/mittwald/flow/issues/2553)) ([a8becec](https://github.com/mittwald/flow/commit/a8bececefc8ca50a5fd25de68d96dc2cb9d95e1e))
+
+# [0.2.0-alpha.853](https://github.com/mittwald/flow/compare/0.2.0-alpha.852...0.2.0-alpha.853) (2026-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.852](https://github.com/mittwald/flow/compare/0.2.0-alpha.851...0.2.0-alpha.852) (2026-06-16)
+
+### Bug Fixes
+
+* **Forms:** fixes scroll to input with error in forms ([#2516](https://github.com/mittwald/flow/issues/2516)) ([94e62aa](https://github.com/mittwald/flow/commit/94e62aa76e54ca54f94708ac100294eb488b910b))
+
+# [0.2.0-alpha.851](https://github.com/mittwald/flow/compare/0.2.0-alpha.850...0.2.0-alpha.851) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.850](https://github.com/mittwald/flow/compare/0.2.0-alpha.849...0.2.0-alpha.850) (2026-06-15)
+
+### Bug Fixes
+
+* **Code:** fix active line color ([#2518](https://github.com/mittwald/flow/issues/2518)) ([6055e07](https://github.com/mittwald/flow/commit/6055e073a3cf8b9fac051f4721f1f91414fc8dc1))
+
+# [0.2.0-alpha.849](https://github.com/mittwald/flow/compare/0.2.0-alpha.848...0.2.0-alpha.849) (2026-06-15)
+
+### Bug Fixes
+
+* **Select:** fix placeholder color ([#2547](https://github.com/mittwald/flow/issues/2547)) ([866d340](https://github.com/mittwald/flow/commit/866d34039fdabf4e5db8b9bf3bb09616eb5545cc))
+
+# [0.2.0-alpha.848](https://github.com/mittwald/flow/compare/0.2.0-alpha.847...0.2.0-alpha.848) (2026-06-15)
+
+### Bug Fixes
+
+* **Modal:** fix media queries at threshold ([#2550](https://github.com/mittwald/flow/issues/2550)) ([4f4794a](https://github.com/mittwald/flow/commit/4f4794a44a143efda647b0844509572e60bbb148))
+
+# [0.2.0-alpha.847](https://github.com/mittwald/flow/compare/0.2.0-alpha.846...0.2.0-alpha.847) (2026-06-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.846](https://github.com/mittwald/flow/compare/0.2.0-alpha.845...0.2.0-alpha.846) (2026-06-15)
+
+### Bug Fixes
+
+* **List:** fix tile hover ([#2546](https://github.com/mittwald/flow/issues/2546)) ([e57a9a8](https://github.com/mittwald/flow/commit/e57a9a8bf88e19bafbc7661575e5ef21f4d6cfa6))
+
+# [0.2.0-alpha.845](https://github.com/mittwald/flow/compare/0.2.0-alpha.844...0.2.0-alpha.845) (2026-06-12)
+
+### Bug Fixes
+
+* add missing gradient for dark-mode ([c151f5f](https://github.com/mittwald/flow/commit/c151f5fb56cfe351b89916c019b11f4846bc0ed0))
+* correct dark mode teaser typo ([#2531](https://github.com/mittwald/flow/issues/2531)) ([d74334b](https://github.com/mittwald/flow/commit/d74334b15a6eb429b3fff8c972265ea79dca7858))
+
 # [0.2.0-alpha.844](https://github.com/mittwald/flow/compare/0.2.0-alpha.843...0.2.0-alpha.844) (2026-06-09)
 
 ### Features

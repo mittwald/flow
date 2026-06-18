@@ -341,6 +341,9 @@ SshKey:
 SshSftp:
   tb: Door
   fa: doorOpen
+Stack:
+  tb: Stack2
+  fa: layerGroup
 Star:
   svg: |
     <svg
