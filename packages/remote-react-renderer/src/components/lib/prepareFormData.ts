@@ -3,26 +3,17 @@ import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 export const prepareFormData = async (
   formData: FormData,
 ): Promise<FormData> => {
-  for (const [fieldName] of formData) {
-    const fieldValues = formData.getAll(fieldName);
+  const fieldNames = [...new Set(Array.from(formData.keys()))];
 
-    if (fieldValues.every((v) => v instanceof File)) {
-      formData.delete(fieldName);
-    }
+  for (const fieldName of fieldNames) {
+    const values = formData.getAll(fieldName);
+    formData.delete(fieldName);
 
-    for (let value of fieldValues) {
+    for (const value of values) {
       if (value instanceof File) {
-        if (!value.name || value.size <= 0) {
-          break;
-        }
-
-        value = await addAwaitedArrayBuffer(value);
-        if (formData.has(fieldName)) {
-          formData.append(fieldName, value);
-        } else {
-          formData.set(fieldName, value);
-        }
+        await addAwaitedArrayBuffer(value);
       }
+      formData.append(fieldName, value);
     }
   }
 

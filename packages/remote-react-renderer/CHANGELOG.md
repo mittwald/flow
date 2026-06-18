@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.859](https://github.com/mittwald/flow/compare/0.2.0-alpha.858...0.2.0-alpha.859) (2026-06-18)
+
+### Bug Fixes
+
+* **Remote:** support mixed data in prepareFormData ([#2560](https://github.com/mittwald/flow/issues/2560)) ([369bfe9](https://github.com/mittwald/flow/commit/369bfe97ff7d42a969b6ae7b313d0f6615aaeb36))
+
+# [0.2.0-alpha.858](https://github.com/mittwald/flow/compare/0.2.0-alpha.857...0.2.0-alpha.858) (2026-06-18)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
 # [0.2.0-alpha.857](https://github.com/mittwald/flow/compare/0.2.0-alpha.856...0.2.0-alpha.857) (2026-06-17)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer

@@ -28,7 +28,15 @@ export const getAwaitArrayBuffer = (
 ) => {
   invariant(
     isFileWithAwaitedArrayBuffer(file),
-    "Could not get awaited ArrayBuffer from file",
+    `File buffer unavailable (objectType=${Object.prototype.toString.call(
+      file,
+    )}, hasArrayBuffer=${
+      Key in file && file[Key] instanceof ArrayBuffer
+    }, isDetached=${
+      Key in file && file[Key] instanceof ArrayBuffer
+        ? file[Key].detached
+        : "n/a"
+    })`,
   );
   return file[Key];
 };
