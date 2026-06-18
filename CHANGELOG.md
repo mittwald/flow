@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.860](https://github.com/mittwald/flow/compare/0.2.0-alpha.859...0.2.0-alpha.860) (2026-06-18)
+
+### Features
+
+* **Markdown:** allow custom components to override default renderers ([#2541](https://github.com/mittwald/flow/issues/2541)) ([7d429fb](https://github.com/mittwald/flow/commit/7d429fb2f87b858098207167bdef927e0af1bb5a))
+
 # [0.2.0-alpha.859](https://github.com/mittwald/flow/compare/0.2.0-alpha.858...0.2.0-alpha.859) (2026-06-18)
 
 ### Bug Fixes
