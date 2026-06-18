@@ -22,23 +22,29 @@ export interface MarkdownProps
   color?: "default" | AlphaColor;
   /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
+  /** Allows overriding markdown element renderers from outside. */
+  components?: Components;
   /** @internal */
   style?: CSSProperties;
   ref?: Ref<HTMLDivElement>;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props components
+ */
 export const Markdown: FC<MarkdownProps> = (props) => {
   const {
     children,
     color = "default",
     className,
     headingOffset = 0,
+    components: customComponents,
     ref,
     ...rest
   } = props;
 
-  const components: Components = {
+  const defaultComponents: Components = {
     a: (props) => (
       <Link target="_blank" color={color} href={props.href}>
         {props.children}
@@ -140,10 +146,14 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   };
 
   const textContent = extractTextFromFirstChild(children);
+  const mergedComponents: Components = {
+    ...defaultComponents,
+    ...customComponents,
+  };
 
   return (
     <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={mergedComponents}>
         {textContent}
       </ReactMarkdown>
     </div>
