@@ -5,6 +5,7 @@ import { useObjectRef } from "@react-aria/utils";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import styles from "./FileInput.module.scss";
+import { useVisuallyHidden } from "react-aria";
 
 export type FileInputOnChangeHandler = (files: FileList | null) => void;
 
@@ -21,6 +22,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
   const { children, isDisabled, onChange, isReadOnly, ref, ...restInputProps } =
     props;
   const inputRef = useObjectRef(ref);
+  const { visuallyHiddenProps } = useVisuallyHidden();
 
   const handlePress = () => {
     if (inputRef.current?.value) {
@@ -48,7 +50,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
       {children}
       <Aria.Input
         {...restInputProps}
-        className={styles.FileInput}
+        {...visuallyHiddenProps}
         type="file"
         ref={inputRef}
         onChange={handleChange}

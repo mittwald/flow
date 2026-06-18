@@ -9,7 +9,7 @@ import {
   aria-label="Header navigation"
   color="dark"
 >
-  <Link href="#">Getting startet</Link>
+  <Link href="#">Getting started</Link>
   <Link href="#" aria-current="page">
     Components
   </Link>
