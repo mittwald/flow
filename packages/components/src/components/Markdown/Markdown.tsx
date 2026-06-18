@@ -29,7 +29,10 @@ export interface MarkdownProps
   ref?: Ref<HTMLDivElement>;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props components
+ */
 export const Markdown: FC<MarkdownProps> = (props) => {
   const {
     children,
