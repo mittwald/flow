@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.858](https://github.com/mittwald/flow/compare/0.2.0-alpha.857...0.2.0-alpha.858) (2026-06-18)
+
+### Features
+
+* **MarkdownEditor:** add support for custom markdown component in preview mode ([31440b6](https://github.com/mittwald/flow/commit/31440b61f51bf947cd6f36ffa8bbcce689dce83e))
+* show loading state in trigger button if context menu suspends ([e18e32a](https://github.com/mittwald/flow/commit/e18e32ae0b02796afe1acedc509acbfa0b990890))
+
 # [0.2.0-alpha.857](https://github.com/mittwald/flow/compare/0.2.0-alpha.856...0.2.0-alpha.857) (2026-06-17)
 
 ### Bug Fixes
