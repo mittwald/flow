@@ -64,6 +64,8 @@ export class List<T = unknown, TMeta = unknown> {
       accordion = false,
       loadingItemsCount = 5,
       settingsStorageDefaults,
+      emptyView,
+      emptySearchResultView,
       ...componentProps
     } = shape;
 
@@ -100,8 +102,8 @@ export class List<T = unknown, TMeta = unknown> {
       manualSorting: this.loader.manualSorting,
     });
     this.viewMode = new ListViewMode(this, { defaultViewMode });
-    this.emptyView = shape.emptyView;
-    this.emptySearchResultView = shape.emptySearchResultView;
+    this.emptyView = emptyView;
+    this.emptySearchResultView = emptySearchResultView;
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());

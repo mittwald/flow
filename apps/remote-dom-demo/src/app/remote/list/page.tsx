@@ -72,7 +72,9 @@ export default function Page() {
                       </Section>
                     </Content>
                     <ActionGroup>
-                      <Button>Close</Button>
+                      <Action closeModal>
+                        <Button>Abbrechen</Button>
+                      </Action>
                     </ActionGroup>
                   </Modal>
                 </>

@@ -8,7 +8,7 @@ export const ThemeInitializerScript: FC = () => {
  * inlined.
  */
 function initialize() {
-  const htmlAttribute = "data-flow-theme";
+  const htmlAttribute = "data-theme";
   const storageKey = "${themeStorageKey}";
 
     function getLocalStorageValue() {

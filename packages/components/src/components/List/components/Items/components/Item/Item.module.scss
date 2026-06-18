@@ -47,6 +47,7 @@
 
   &.tile {
     border: none;
+    border-radius: var(--list-item--corner-radius);
 
     &.item {
       outline-offset: var(--size-px--xxs);

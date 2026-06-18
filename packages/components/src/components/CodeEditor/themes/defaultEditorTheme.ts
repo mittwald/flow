@@ -14,7 +14,7 @@ export const defaultLightTheme = githubLightInit({
   styles: [
     { tag: t.keyword, color: "var(--color--code-syntax--keyword)" },
     {
-      tag: [t.typeName, t.className],
+      tag: [t.typeName, t.className, t.tagName],
       color: "var(--color--code-syntax--type)",
     },
     { tag: t.variableName, color: "var(--color--code-syntax--variable)" },

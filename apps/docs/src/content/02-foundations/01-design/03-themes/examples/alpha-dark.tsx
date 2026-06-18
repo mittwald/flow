@@ -8,26 +8,25 @@ import {
 
 <>
   <LayoutCard>
-    <AccentBox color="light" backgroundColor="#003FB8">
+    <AccentBox
+      color="light-static"
+      backgroundColor="#5f0083"
+    >
       <Section>
-        <Heading>Dark</Heading>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing
-          elit.
-        </Text>
+        <Heading>Nicht Static</Heading>
+        <Text>Die Farben passen sich an das Theme an.</Text>
       </Section>
     </AccentBox>
   </LayoutCard>
   <LayoutCard>
     <AccentBox
-      backgroundColor="var(--neutral--color--900)"
-      color="light"
+      backgroundImage="https://raw.githubusercontent.com/mittwald/flow/main/apps/docs/public/assets/darkmode-bg.png"
+      color="light-static"
     >
       <Section>
-        <Heading>Light Static</Heading>
+        <Heading>Static</Heading>
         <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing
-          elit.
+          Die Farben bleiben in Dark und Light Theme gleich.
         </Text>
       </Section>
     </AccentBox>
