@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.864](https://github.com/mittwald/flow/compare/0.2.0-alpha.863...0.2.0-alpha.864) (2026-06-19)
+
+### Bug Fixes
+
+* **Accordion:** fix lost focus ([#2565](https://github.com/mittwald/flow/issues/2565)) ([d7fb682](https://github.com/mittwald/flow/commit/d7fb68251ab753e599de5847d3ece0d69cb699b4))
+
 # [0.2.0-alpha.863](https://github.com/mittwald/flow/compare/0.2.0-alpha.862...0.2.0-alpha.863) (2026-06-19)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
