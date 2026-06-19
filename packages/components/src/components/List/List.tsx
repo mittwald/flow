@@ -203,13 +203,11 @@ export const List = flowComponent("List", (props) => {
       aria-hidden={!isEmpty}
       className={!isEmpty ? styles.hideVisuallyEmptyView : undefined}
     >
-      {listModel.emptyView ?? (
-        <ListEmptyViewContainerView
-          viewType={listModel.getEmptyViewType()}
-          emptySearchResultView={listModel.emptySearchResultView}
-          emptyView={listModel.emptyView}
-        />
-      )}
+      <ListEmptyViewContainerView
+        viewType={listModel.getEmptyViewType()}
+        emptySearchResultView={listModel.emptySearchResultView}
+        emptyView={listModel.emptyView}
+      />
     </DivView>
   );
 
