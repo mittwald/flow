@@ -86,7 +86,7 @@ export const Accordion: FC<AccordionProps> = flowComponent(
 
     return (
       <div {...rest} className={rootClassName}>
-        <PropsContextProvider props={propsContext} dependencies={[expanded]}>
+        <PropsContextProvider props={propsContext}>
           {children}
           <div
             aria-labelledby={headerId}
