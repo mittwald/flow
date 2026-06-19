@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.862](https://github.com/mittwald/flow/compare/0.2.0-alpha.861...0.2.0-alpha.862) (2026-06-19)
+
+### Bug Fixes
+
+* **List:** fix empty search view ([#2561](https://github.com/mittwald/flow/issues/2561)) ([082260f](https://github.com/mittwald/flow/commit/082260f5ca004685ec442c1d119345c635e7ee18))
+
 # [0.2.0-alpha.861](https://github.com/mittwald/flow/compare/0.2.0-alpha.860...0.2.0-alpha.861) (2026-06-19)
 
 ### Features
