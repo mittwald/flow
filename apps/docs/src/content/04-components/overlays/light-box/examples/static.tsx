@@ -16,7 +16,7 @@ import {
       />
     </div>
     <div className="flow--light-box--actions">
-      <Button color="light" variant="soft">
+      <Button color="light-static" variant="soft">
         <IconClose />
       </Button>
     </div>
