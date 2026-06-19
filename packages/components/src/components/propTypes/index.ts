@@ -87,6 +87,10 @@ import type { KbdProps } from "@/components/Kbd/Kbd";
 import type { AccordionProps } from "@/components/Accordion";
 import type { ChatProps } from "../Chat";
 import type { SectionHeaderProps } from "../Section/components/SectionHeader/SectionHeader";
+import type {
+  LightBoxGalleryItemProps,
+  LightBoxGalleryProps,
+} from "@/components/LightBox";
 
 export * from "./types";
 
@@ -137,6 +141,8 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
+  LightBoxGallery: LightBoxGalleryProps;
+  LightBoxGalleryItem: LightBoxGalleryItemProps;
   Link: LinkProps;
   List: ListProps<never>;
   ListItemView: ListItemViewContentProps;
@@ -228,6 +234,8 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   LightBox: true,
+  LightBoxGallery: true,
+  LightBoxGalleryItem: true,
   Link: true,
   List: true,
   ListItemView: true,
