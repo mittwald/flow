@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.865](https://github.com/mittwald/flow/compare/0.2.0-alpha.864...0.2.0-alpha.865) (2026-06-22)
+
+### Bug Fixes
+
+* **Markdown:** add remarkPlugins and useTransform prop to correct component ([#2567](https://github.com/mittwald/flow/issues/2567)) ([7e541c6](https://github.com/mittwald/flow/commit/7e541c6736f4375bc99011f15b60f4a7d20f212c))
+
 # [0.2.0-alpha.864](https://github.com/mittwald/flow/compare/0.2.0-alpha.863...0.2.0-alpha.864) (2026-06-19)
 
 ### Bug Fixes
