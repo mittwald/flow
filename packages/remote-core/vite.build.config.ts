@@ -14,7 +14,7 @@ export default mergeConfig(
       }),
       dts({
         include: ["src"],
-        outDir: "dist/types",
+        outDirs: "dist/types",
       }),
     ],
 

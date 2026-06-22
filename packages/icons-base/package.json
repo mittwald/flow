@@ -16,11 +16,9 @@
   ],
   "dependencies": {
     "fs-jetpack": "^5.1.0",
-    "prettier": "^3.8.1",
-    "typescript": "^5.9.3",
-    "yaml": "^2.8.3"
+    "prettier": "^3.8.4",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.0"
   },
-  "devDependencies": {},
-  "peerDependencies": {},
   "peerDependenciesMeta": {}
 }

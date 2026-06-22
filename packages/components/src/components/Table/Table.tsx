@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
 
-export type TableProps = Aria.TableProps & {
+export type TableProps = Omit<Aria.TableProps, "render" | "className"> & {
   /** The vertical alignment of the table cells content. */
   verticalAlign?: "top" | "middle";
+  className?: string;
 };
 
 /** @flr-generate all */

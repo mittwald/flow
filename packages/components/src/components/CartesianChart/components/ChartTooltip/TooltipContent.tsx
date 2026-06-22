@@ -1,4 +1,4 @@
-import React, { type FC, Suspense } from "react";
+import { type FC, Suspense } from "react";
 import type { TooltipContentProps as RechartTooltipContentProps } from "recharts";
 import type {
   NameType,

@@ -12,7 +12,7 @@ export default mergeConfig(
       externalizeDeps(),
       dts({
         include: ["src"],
-        outDir: "dist/types",
+        outDirs: "dist/types",
       }),
     ],
     build: {

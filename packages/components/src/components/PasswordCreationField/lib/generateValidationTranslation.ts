@@ -11,7 +11,7 @@ const generateTranslationString = (
     return `validation.${rule.translationKey}`;
   }
   const translateString = `validation.${rule.ruleType ?? "general"}`;
-  let finalTranslationString = "";
+  let finalTranslationString: string;
 
   if (
     ("min" in rule && rule.min !== undefined) ||

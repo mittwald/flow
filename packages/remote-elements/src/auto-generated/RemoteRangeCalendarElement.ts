@@ -18,6 +18,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       "aria-labelledby": {},
       autoFocus: {},
       className: {},
+      commitBehavior: {},
       createCalendar: {},
       defaultFocusedValue: {},
       defaultValue: {},
@@ -41,6 +42,7 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       translate: {},
       value: {},
       visibleDuration: {},
+      weeksInMonth: {},
       withDatePickerPresets: {},
     };
   }
