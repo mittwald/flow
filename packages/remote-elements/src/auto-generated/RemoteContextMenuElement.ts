@@ -26,6 +26,7 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       defaultSelectedKeys: {},
       dir: {},
       disabledKeys: {},
+      getTargetRect: {},
       hidden: {},
       inert: {},
       isDialogContent: {},

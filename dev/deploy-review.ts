@@ -266,7 +266,7 @@ class ReviewDeployer {
     console.log(`\n📦 Deploying ${image.imageType} image...`);
 
     const existingService = services.find((s) => s.serviceName === serviceName);
-    let containerId = existingService?.id;
+    let containerId: string;
 
     if (existingService) {
       console.log(

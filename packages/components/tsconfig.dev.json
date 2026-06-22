@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "rootDir": "dev"
+  },
   "extends": "./tsconfig.json",
   "include": ["./dev/**/*.ts"]
 }

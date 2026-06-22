@@ -72,7 +72,7 @@ export const getIndexFileContent = (icons: IconDefinitions) => {
   const iconsContent = Object.keys(icons)
     .map(
       (icon) => `\
-        export { Icon${icon} } from "./Icon${icon}.tsx";
+        export { Icon${icon} } from "./Icon${icon}";
       `,
     )
     .join("");
@@ -90,7 +90,7 @@ export const getIconSetFileContent = (
   const imports = Object.keys(icons)
     .map(
       (icon) => `\
-        import { Icon${icon} as ${icon} } from "./components/Icon${icon}.tsx";
+        import { Icon${icon} as ${icon} } from "./components/Icon${icon}";
       `,
     )
     .join("");

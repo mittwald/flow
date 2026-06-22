@@ -11,6 +11,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
 
   static override get remoteProperties() {
     return {
+      UNSTABLE_focusOnEntry: {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-label": {},
@@ -33,6 +34,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       keyboardNavigationBehavior: {},
       lang: {},
       layout: {},
+      orientation: {},
       render: {},
       renderEmptyState: {},
       selectedKeys: {},

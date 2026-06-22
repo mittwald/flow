@@ -22,10 +22,9 @@
     "incremental": true,
     "module": "preserve",
     "outDir": "${configDir}/dist",
-    "baseUrl": "${configDir}",
     "rootDir": "${configDir}/src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["${configDir}/src/*"]
     }
   },
   "display": "Base Configuration",

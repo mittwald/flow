@@ -213,7 +213,7 @@ export class OverlayController {
       return;
     }
 
-    let aborted = false;
+    let aborted: boolean;
     if (toOpen) {
       aborted = this.executeOnOpen();
     } else {
