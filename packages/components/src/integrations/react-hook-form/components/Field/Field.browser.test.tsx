@@ -5,7 +5,11 @@ import { Option } from "@/components/Option";
 import { Select } from "@/components/Select";
 import { Switch } from "@/components/Switch";
 import TextField from "@/components/TextField";
-import { Form, typedField } from "@/integrations/react-hook-form";
+import {
+  Form,
+  typedField,
+  debounceValidate,
+} from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { beforeEach, expect, vitest } from "vitest";
 import { render } from "vitest-browser-react";
@@ -216,5 +220,157 @@ describe("Text field", () => {
       "aria-invalid",
       "true",
     );
+  });
+});
+
+describe("debounceValidate integration", () => {
+  interface Values {
+    username: string;
+  }
+
+  test("does not validate before debounce delay and then shows async error", async () => {
+    const validate = vitest.fn(
+      async (value: string): Promise<true | string> => {
+        return value === "taken" ? "Username already taken" : true;
+      },
+    );
+
+    const TestForm = () => {
+      const form = useForm<Values>({
+        defaultValues: {
+          username: "",
+        },
+      });
+      const Field = typedField(form);
+
+      return (
+        <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+          <Field
+            name="username"
+            rules={{
+              validate: debounceValidate<Values, "username">(validate, 300),
+            }}
+          >
+            <TextField aria-label="Username" />
+          </Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+
+    const input = page.getByLabelText("Username");
+    await userEvent.type(input, "taken");
+    await userEvent.click(page.getByText("Submit"));
+
+    await vitest.advanceTimersByTimeAsync(299);
+    expect(validate).not.toHaveBeenCalled();
+    await expect
+      .element(page.getByText("Username already taken"))
+      .not.toBeInTheDocument();
+
+    await vitest.advanceTimersByTimeAsync(1);
+    expect(validate).toHaveBeenCalledTimes(1);
+    expect(validate).toHaveBeenCalledWith("taken", expect.any(Object));
+
+    expect(page.getByText("Username already taken")).toBeInTheDocument();
+    expect(input).toHaveAttribute("aria-invalid", "true");
+    expect(handleSubmit).not.toHaveBeenCalled();
+  });
+
+  test("submits when debounced async validation resolves true", async () => {
+    const validate = vitest.fn(async (): Promise<true | string> => {
+      return true;
+    });
+
+    const TestForm = () => {
+      const form = useForm<Values>({
+        defaultValues: {
+          username: "",
+        },
+      });
+      const Field = typedField(form);
+
+      return (
+        <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+          <Field
+            name="username"
+            rules={{
+              validate: debounceValidate<Values, "username">(validate, 200),
+            }}
+          >
+            <TextField aria-label="Username" />
+          </Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+
+    const input = page.getByLabelText("Username");
+    await userEvent.type(input, "available");
+    await userEvent.click(page.getByText("Submit"));
+
+    await vitest.advanceTimersByTimeAsync(200);
+
+    expect(validate).toHaveBeenCalledTimes(1);
+    expect(validate).toHaveBeenCalledWith("available", expect.any(Object));
+    expect(handleSubmit).toHaveBeenCalledWith({ username: "available" });
+    await expect
+      .element(page.getByText("Username already taken"))
+      .not.toBeInTheDocument();
+  });
+
+  test("debounces rapid input and validates only latest value", async () => {
+    const validate = vitest.fn(
+      async (value: string): Promise<true | string> => {
+        return value.length >= 3 ? true : "Too short";
+      },
+    );
+
+    const TestForm = () => {
+      const form = useForm<Values>({
+        defaultValues: {
+          username: "",
+        },
+        mode: "onChange",
+      });
+      const Field = typedField(form);
+
+      return (
+        <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+          <Field
+            name="username"
+            rules={{
+              validate: debounceValidate<Values, "username">(validate, 250),
+            }}
+          >
+            <TextField aria-label="Username" />
+          </Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      );
+    };
+
+    await render(<TestForm />);
+
+    const input = page.getByLabelText("Username");
+
+    await userEvent.type(input, "a");
+    await vitest.advanceTimersByTimeAsync(100);
+
+    await userEvent.type(input, "b");
+    await vitest.advanceTimersByTimeAsync(100);
+
+    await userEvent.type(input, "c");
+
+    await vitest.advanceTimersByTimeAsync(250);
+
+    expect(validate).toHaveBeenCalledTimes(1);
+    expect(validate).toHaveBeenLastCalledWith("abc", expect.any(Object));
+
+    await expect.element(page.getByText("Too short")).not.toBeInTheDocument();
   });
 });
