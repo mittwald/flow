@@ -17,7 +17,9 @@ import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExi
 
 export interface SelectProps
   extends
-    PropsWithChildren<Omit<Aria.SelectProps, "children" | "className" | "ref">>,
+    PropsWithChildren<
+      Omit<Aria.SelectProps<string>, "children" | "className" | "ref">
+    >,
     FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */

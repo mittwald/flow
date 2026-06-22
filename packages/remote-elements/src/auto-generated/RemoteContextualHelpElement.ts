@@ -24,6 +24,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       crossOffset: {},
       defaultOpen: {},
       dir: {},
+      getTargetRect: {},
       hidden: {},
       inert: {},
       isDialogContent: {},

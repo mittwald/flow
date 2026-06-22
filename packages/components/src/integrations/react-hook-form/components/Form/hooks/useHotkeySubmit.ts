@@ -13,7 +13,7 @@ export const useHotkeySubmit = (options: Options) => {
 
   return useMergeRefs([
     useObjectRef(ref),
-    useHotkeys<never>("mod+enter", submitController.submit, {
+    useHotkeys("mod+enter", submitController.submit, {
       enableOnFormTags: true,
       enableOnContentEditable: true,
     }),

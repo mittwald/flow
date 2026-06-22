@@ -13,7 +13,7 @@ export default defineConfig(
       externalizeDeps(),
       dts({
         include: ["src"],
-        outDir: "dist/types",
+        outDirs: "dist/types",
       }),
     ],
     build: {
