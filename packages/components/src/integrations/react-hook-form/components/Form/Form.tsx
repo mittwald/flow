@@ -77,7 +77,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = idProp ?? newFormId;
   const FormComponent = useMemo(() => formComponent, [formId]);
   const afterSubmitCallback = useRef<AfterFormSubmitCallback>(undefined);
-  const { isSubmitting, isValidating, isDirty } = form.formState;
+  const { isDirty } = form.formState;
   const rootErrorController = useFormRootErrorController();
 
   const defaultSubmitController = useFormSubmitController();
@@ -119,16 +119,11 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const handleSubmit = (e?: BaseSyntheticEvent | F) => {
     const formEvent =
       e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
-
     formEvent?.stopPropagation();
 
-    if (isSubmitting || isValidating) {
-      return;
-    }
-
-    modalController.confirmClose();
-
     return form.handleSubmit((values, event) => {
+      modalController.confirmClose();
+
       const submitResult = onSubmit(values, event);
       if (submitResult instanceof Promise) {
         return submitResult.then(handleSubmitResult);
