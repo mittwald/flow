@@ -41,6 +41,8 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     headingOffset = 0,
     components: customComponents,
     ref,
+    remarkPlugins,
+    urlTransform,
     ...rest
   } = props;
 
@@ -153,7 +155,11 @@ export const Markdown: FC<MarkdownProps> = (props) => {
 
   return (
     <div className={clsx(styles.markdown, className)} {...rest} ref={ref}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={mergedComponents}>
+      <ReactMarkdown
+        remarkPlugins={remarkPlugins ?? [remarkGfm]}
+        urlTransform={urlTransform}
+        components={mergedComponents}
+      >
         {textContent}
       </ReactMarkdown>
     </div>
