@@ -224,6 +224,15 @@ describe("Text field", () => {
 });
 
 describe("debounceValidate integration", () => {
+  beforeEach(() => {
+    vitest.resetAllMocks();
+    vitest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vitest.useRealTimers();
+  });
+
   interface Values {
     username: string;
   }
