@@ -19,6 +19,7 @@ import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
 import { Render } from "../public";
 import { commands } from "vitest/browser";
+import { sleep } from "@/lib/promises/sleep";
 
 afterEach(() => {
   resetFlags();
@@ -233,12 +234,12 @@ test("Modal with dirty form does not require confirmation when using abort butto
 });
 
 test("useOnClosed is called when the closing animation has finished", async () => {
-  const onClosed = vitest.fn();
-
   // Activating animations
   await commands.setReducedMotion("no-preference");
 
-  const dom = await render(
+  const onClosed = vitest.fn();
+
+  const ui = (
     <Modal isDefaultOpen>
       <Render>
         {() => {
@@ -253,9 +254,10 @@ test("useOnClosed is called when the closing animation has finished", async () =
           <Button>Close</Button>
         </Action>
       </ActionGroup>
-    </Modal>,
-    {},
+    </Modal>
   );
+
+  const dom = await render(ui);
 
   const closeButton = dom.getByRole("button", {
     name: "Close",
@@ -267,10 +269,14 @@ test("useOnClosed is called when the closing animation has finished", async () =
   expect(onClosed).not.toHaveBeenCalled();
 
   await userEvent.click(closeButton);
+  await sleep(50);
+
   expect(modalText).toBeInTheDocument();
   expect(onClosed).not.toHaveBeenCalledOnce();
 
-  await vi.waitFor(() => expect(modalText).not.toBeInTheDocument());
+  await sleep(500);
+  expect(modalText).not.toBeInTheDocument();
+
   // onClosed is just called, when the Modal has unmounted (after close animation)
   expect(onClosed).toHaveBeenCalledOnce();
 });
