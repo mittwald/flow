@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.867](https://github.com/mittwald/flow/compare/0.2.0-alpha.866...0.2.0-alpha.867) (2026-06-22)
+
+### Bug Fixes
+
+* **RHF:** press enter on fields will reload complete page when validation is running ([#2568](https://github.com/mittwald/flow/issues/2568)) ([bad596d](https://github.com/mittwald/flow/commit/bad596d4a11c18bd0832b59364521009bb501efc))
+
 # [0.2.0-alpha.866](https://github.com/mittwald/flow/compare/0.2.0-alpha.865...0.2.0-alpha.866) (2026-06-22)
 
 **Note:** Version bump only for package @mittwald/flow-project
