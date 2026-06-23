@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.869](https://github.com/mittwald/flow/compare/0.2.0-alpha.868...0.2.0-alpha.869) (2026-06-23)
+
+### Bug Fixes
+
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+
 # [0.2.0-alpha.868](https://github.com/mittwald/flow/compare/0.2.0-alpha.867...0.2.0-alpha.868) (2026-06-23)
 
 **Note:** Version bump only for package @mittwald/mstudio-ext-react-components
