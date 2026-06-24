@@ -105,6 +105,7 @@ export const Modal = flowComponent("Modal", (props) => {
     Section: {
       Header: { Heading: { level: nestedHeadingLevel } },
       Heading: { level: nestedHeadingLevel },
+      hideSeparator: true,
     },
     Header: { Heading: { level: nestedHeadingLevel } },
   };

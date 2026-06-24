@@ -34,6 +34,9 @@ test.each(testEnvironments)(
                 <Label>Label</Label>
               </TextField>
             </Section>
+            <Section>
+              <Heading>Heading</Heading>
+            </Section>
           </Content>
           <ActionGroup>
             <Button>Ok</Button>
