@@ -1,5 +1,5 @@
 "use client";
-import type { FC } from "react";
+import { type FC, useEffect, useRef, useSyncExternalStore } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
@@ -10,6 +10,7 @@ import styles from "./customComponents.module.css";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
+import { usePathname } from "next/navigation";
 
 interface Props {
   mdxFile: SerializedMdxFile;
@@ -21,8 +22,55 @@ interface ExampleProps extends DoAndDontTileProps {
   exampleText?: string;
 }
 
+interface Snapshot {
+  ready: boolean;
+  version: number;
+  routeKey: string | null;
+}
+
+function createMdxStore() {
+  let snapshot: Snapshot = { ready: false, version: 0, routeKey: null };
+  const listeners = new Set<() => void>();
+  const emit = () => listeners.forEach((l) => l());
+
+  return {
+    subscribe(fn: () => void) {
+      listeners.add(fn);
+      return () => listeners.delete(fn);
+    },
+    getSnapshot: () => snapshot,
+
+    start(routeKey: string) {
+      snapshot = {
+        ready: false,
+        version: snapshot.version + 1,
+        routeKey,
+      };
+      emit();
+    },
+
+    markReady(routeKey: string) {
+      if (snapshot.routeKey !== routeKey) return;
+      snapshot = { ...snapshot, ready: true };
+      emit();
+    },
+  };
+}
+
+export const mdxStore = createMdxStore();
+
+export const useMdxStatus = () => {
+  return useSyncExternalStore(
+    mdxStore.subscribe,
+    mdxStore.getSnapshot,
+    mdxStore.getSnapshot,
+  );
+};
+
 export const MdxFileView: FC<Props> = (props) => {
   const mdxFile = MdxFile.deserialize(props.mdxFile);
+  const pathname = usePathname();
+  const routeKey = `${pathname}:${mdxFile.mdxSource?.compiledSource?.length ?? 0}`;
 
   const ExampleLiveCodeEditor: FC<
     {
@@ -126,7 +174,32 @@ export const MdxFileView: FC<Props> = (props) => {
     ...createCustomComponents(),
   };
 
-  return <NextMDXRemote {...mdxFile.mdxSource} components={mdxComponents} />;
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    mdxStore.start(routeKey);
+
+    queueMicrotask(() => {
+      if (!cancelled) {
+        mdxStore.markReady(routeKey);
+
+        if (window.location.hash.length === 0) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [routeKey]);
+
+  return (
+    <div ref={rootRef} style={{ display: "contents" }}>
+      <NextMDXRemote {...mdxFile.mdxSource} components={mdxComponents} />
+    </div>
+  );
 };
 
 export default MdxFileView;

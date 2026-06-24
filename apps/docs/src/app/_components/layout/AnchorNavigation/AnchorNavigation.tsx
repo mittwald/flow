@@ -10,6 +10,7 @@ import React, { type FC, useEffect } from "react";
 import globalStyles from "../../../layout.module.scss";
 import type { Anchor } from "@/lib/mdx/MdxFile";
 import styles from "./AnchorNavigation.module.scss";
+import { useMdxStatus } from "@/lib/mdx/components/MdxFileView/MdxFileView";
 
 interface Props {
   anchors: Anchor[];
@@ -18,6 +19,7 @@ interface Props {
 
 export const AnchorNavigation: FC<Props> = (props) => {
   const { anchors, currentPath } = props;
+  const { ready } = useMdxStatus();
 
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
@@ -58,13 +60,17 @@ export const AnchorNavigation: FC<Props> = (props) => {
         threshold: [0, 0.25, 0.5],
       },
     );
+
     anchors.forEach((a) => {
       const el = document.getElementById(a.slug);
-      if (el) observer.observe(el);
+      if (el) {
+        observer.unobserve(el);
+        observer.observe(el);
+      }
     });
 
     return () => observer.disconnect();
-  }, [anchors]);
+  }, [anchors, ready]);
 
   return (
     <LayoutCard className={globalStyles.anchorNavigation}>
