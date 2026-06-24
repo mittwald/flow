@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.871](https://github.com/mittwald/flow/compare/0.2.0-alpha.870...0.2.0-alpha.871) (2026-06-24)
+
+### Bug Fixes
+
+* **Docs:** anchor navigations fails in mdxView and scrollTop ([#2573](https://github.com/mittwald/flow/issues/2573)) ([6fa1b07](https://github.com/mittwald/flow/commit/6fa1b071fafb90ae1b70455bd6b8728e57844831))
+
 # [0.2.0-alpha.870](https://github.com/mittwald/flow/compare/0.2.0-alpha.869...0.2.0-alpha.870) (2026-06-23)
 
 **Note:** Version bump only for package @mittwald/flow-project
