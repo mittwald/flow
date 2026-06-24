@@ -1,5 +1,4 @@
 import { type ComponentProps, type PropsWithChildren } from "react";
-import { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -28,11 +27,8 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     className,
   );
 
-  const generatedId = useId();
-
   const propsContext: PropsContext = {
     Label: {
-      id: generatedId,
       className: styles.label,
     },
     Link: {
@@ -53,14 +49,14 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   );
 
   const defaultUi = (
-    <section aria-labelledby={generatedId} className={rootClassName} {...rest}>
+    <section className={rootClassName} {...rest}>
       {children}
       <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
     </section>
   );
 
   return (
-    <PropsContextProvider props={propsContext} dependencies={[generatedId]}>
+    <PropsContextProvider props={propsContext}>
       {collapsable ? collapsableUi : defaultUi}
     </PropsContextProvider>
   );
