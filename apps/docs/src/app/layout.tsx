@@ -9,7 +9,6 @@ import MainNavigation from "@/app/_components/layout/MainNavigation";
 import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import Header from "@/app/_components/layout/Header";
-import ScrollToHash from "@/app/_components/ScrollToHash";
 import Footer from "@/app/_components/layout/Footer";
 import { ThemeProvider } from "next-themes";
 import { NotificationProvider } from "@mittwald/flow-react-components";
@@ -29,7 +28,6 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <div className={styles.background} />
         <ThemeProvider attribute="data-theme" disableTransitionOnChange>
           <RouterProvider>
-            <ScrollToHash />
             <Matomo />
             <NotificationProvider>
               <div className={styles.wrapper}>
