@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.875](https://github.com/mittwald/flow/compare/0.2.0-alpha.874...0.2.0-alpha.875) (2026-06-25)
+
+### Bug Fixes
+
+* **List:** do not use labelled by and label at the same time ([#2578](https://github.com/mittwald/flow/issues/2578)) ([8595bdd](https://github.com/mittwald/flow/commit/8595bddf1d75d149c27d311f325d14752334d640))
+
 # [0.2.0-alpha.874](https://github.com/mittwald/flow/compare/0.2.0-alpha.873...0.2.0-alpha.874) (2026-06-25)
 
 ### Bug Fixes
