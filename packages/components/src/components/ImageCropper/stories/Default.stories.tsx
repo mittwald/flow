@@ -54,6 +54,19 @@ export const WithDownload: Story = {
 
     const croppedImageSrc = useImageSrc(cropped);
 
+    const downloadCroppedImage = () => {
+      if (!cropped) {
+        return;
+      }
+
+      const a = document.createElement("a");
+      a.href = croppedImageSrc;
+      a.download = cropped.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+
     return (
       <>
         <Section>
@@ -72,6 +85,9 @@ export const WithDownload: Story = {
               image={file?.[0]}
               onCropComplete={setCroppedFile}
             />
+          )}
+          {croppedImageSrc && (
+            <Button onPress={downloadCroppedImage}>Download</Button>
           )}
         </Section>
         <Section>
