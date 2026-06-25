@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.874](https://github.com/mittwald/flow/compare/0.2.0-alpha.873...0.2.0-alpha.874) (2026-06-25)
+
+### Bug Fixes
+
+* **NavigationGroup:** remove unnecessary labelled by ([#2574](https://github.com/mittwald/flow/issues/2574)) ([b3c4b58](https://github.com/mittwald/flow/commit/b3c4b584730a247c1040d2a4e544afa49985db1e))
+
 # [0.2.0-alpha.873](https://github.com/mittwald/flow/compare/0.2.0-alpha.872...0.2.0-alpha.873) (2026-06-25)
 
 ### Bug Fixes
