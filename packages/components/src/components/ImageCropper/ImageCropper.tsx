@@ -57,7 +57,6 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
         croppedAreaPixels,
       );
 
-      console.log("complete", croppedImageFile);
       onCropComplete?.(croppedImageFile);
     },
     500,
