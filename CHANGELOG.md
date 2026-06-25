@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.873](https://github.com/mittwald/flow/compare/0.2.0-alpha.872...0.2.0-alpha.873) (2026-06-25)
+
+### Bug Fixes
+
+* **Cropper:** performance optimization ([#2577](https://github.com/mittwald/flow/issues/2577)) ([108dcee](https://github.com/mittwald/flow/commit/108dceecb6bd4686863bb137ee1d417b25e73bec))
+
 # [0.2.0-alpha.872](https://github.com/mittwald/flow/compare/0.2.0-alpha.871...0.2.0-alpha.872) (2026-06-25)
 
 ### Bug Fixes
