@@ -1,10 +1,4 @@
-import {
-  type CSSProperties,
-  type FC,
-  useEffect,
-  useEffectEvent,
-  useState,
-} from "react";
+import { type CSSProperties, type FC, useEffect, useState } from "react";
 import Cropper, { type Area, type CropperProps } from "react-easy-crop";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
@@ -14,6 +8,7 @@ import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedIma
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import { useImageSrc } from "@/lib/hooks/useImageSrc";
+import { useDebouncedCallback } from "use-debounce";
 
 export interface ImageCropperProps
   extends PropsWithClassName, Partial<Pick<CropperProps, "cropShape">> {
@@ -43,29 +38,37 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
 
   const imageSrc = useImageSrc(image);
 
+  const [mediaLoaded, setMediaLoaded] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
-
-  const rootClassName = clsx(styles.imageCropper, className);
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ImageCropper");
+  const rootClassName = clsx(styles.imageCropper, className);
 
-  const onCropAreaPixelsChange = useEffectEvent(async () => {
-    if (croppedAreaPixels) {
+  const debouncedCropComplete = useDebouncedCallback(
+    async (croppedAreaPixels: Area) => {
+      if (!croppedAreaPixels) {
+        return;
+      }
+
       const croppedImageFile = await getCroppedImageFile(
         imageSrc,
+        image ?? "",
         croppedAreaPixels,
       );
-      if (onCropComplete) {
-        onCropComplete(croppedImageFile);
-      }
-    }
-  });
+
+      console.log("complete", croppedImageFile);
+      onCropComplete?.(croppedImageFile);
+    },
+    500,
+    {
+      leading: true,
+    },
+  );
 
   useEffect(() => {
-    void onCropAreaPixelsChange();
-  }, [croppedAreaPixels]);
+    setMediaLoaded(false);
+  }, [imageSrc]);
 
   return (
     <div className={rootClassName} style={{ width }}>
@@ -82,9 +85,12 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
           onCropChange={setCrop}
           zoom={zoom}
           onZoomChange={setZoom}
-          onCropComplete={(_, croppedAreaPixels) =>
-            setCroppedAreaPixels(croppedAreaPixels)
-          }
+          onMediaLoaded={() => setMediaLoaded(true)}
+          onCropComplete={(_, croppedAreaPixels) => {
+            if (mediaLoaded) {
+              debouncedCropComplete(croppedAreaPixels);
+            }
+          }}
           {...rest}
         />
       </div>

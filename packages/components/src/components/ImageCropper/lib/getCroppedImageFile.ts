@@ -2,6 +2,7 @@ import type { Area } from "react-easy-crop";
 
 export function getCroppedImageFile(
   imageSrc: string,
+  sourceImage: File | string,
   pixelCrop: Area,
 ): Promise<File> {
   return new Promise((resolve, reject) => {
@@ -11,9 +12,10 @@ export function getCroppedImageFile(
 
     image.onload = () => {
       const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
       canvas.width = pixelCrop.width;
       canvas.height = pixelCrop.height;
-      const ctx = canvas.getContext("2d");
 
       if (!ctx) {
         reject(new Error("Failed to get canvas context"));
@@ -32,19 +34,35 @@ export function getCroppedImageFile(
         pixelCrop.height,
       );
 
+      const isSourceImageJsFile = sourceImage instanceof File;
+      const sourceImageName = isSourceImageJsFile
+        ? sourceImage.name
+        : "cropped-image.png";
+      const sourceImageType = isSourceImageJsFile
+        ? sourceImage.type
+        : "image/png";
+
+      const quality =
+        sourceImageType === "image/jpeg"
+          ? 0.86
+          : sourceImageType === "image/webp"
+            ? 0.82
+            : undefined;
+
       canvas.toBlob(
         (blob) => {
           if (!blob) {
             return;
           }
 
-          const file = new File([blob], "cropped-image.png", {
-            type: "image/png",
-          });
-          resolve(file);
+          resolve(
+            new File([blob], sourceImageName, {
+              type: sourceImageType,
+            }),
+          );
         },
-        "image/png",
-        85,
+        sourceImageType,
+        quality,
       );
     };
 

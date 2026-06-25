@@ -7,6 +7,7 @@ import { FileField } from "@/components/FileField";
 import { Button } from "@/components/Button";
 import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
+import { useImageSrc } from "@/lib/hooks/useImageSrc";
 
 const meta: Meta<typeof ImageCropper> = {
   title: "Upload/ImageCropper",
@@ -18,7 +19,27 @@ const meta: Meta<typeof ImageCropper> = {
     height: { control: "number" },
   },
   parameters: { controls: { exclude: ["image", "onCropComplete"] } },
-  render: (props) => <ImageCropper {...props} image={dummyText.imageSrc} />,
+  render: (props) => {
+    const [cropped, setCroppedFile] = useState<File | undefined>(undefined);
+    const croppedImageSrc = useImageSrc(cropped);
+
+    return (
+      <>
+        <Section>
+          <ImageCropper
+            {...props}
+            image={dummyText.imageSrc}
+            onCropComplete={setCroppedFile}
+          />
+        </Section>
+        <Section>
+          {croppedImageSrc && (
+            <img alt="cropped-image-result" src={croppedImageSrc} />
+          )}
+        </Section>
+      </>
+    );
+  },
 };
 export default meta;
 
@@ -28,43 +49,37 @@ export const Default: Story = {};
 
 export const WithDownload: Story = {
   render: (props) => {
-    const [croppedImage, setCroppedImage] = useState<File>();
     const [file, setFile] = useState<FileList | null>(null);
+    const [cropped, setCroppedFile] = useState<File | undefined>(undefined);
 
-    const downloadCroppedImage = () => {
-      if (!croppedImage) {
-        return;
-      }
-      const url = URL.createObjectURL(croppedImage);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = croppedImage.name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    };
+    const croppedImageSrc = useImageSrc(cropped);
 
     return (
-      <Section>
-        <FileField accept="image/png, image/jpeg, image/svg" onChange={setFile}>
-          <Button variant="outline" color="secondary">
-            Select an image
-          </Button>
-        </FileField>
+      <>
+        <Section>
+          <FileField
+            accept="image/png, image/jpeg, image/svg"
+            onChange={setFile}
+          >
+            <Button variant="outline" color="secondary">
+              Select an image
+            </Button>
+          </FileField>
 
-        {file && (
-          <ImageCropper
-            {...props}
-            image={file?.[0]}
-            onCropComplete={(croppedImage) => setCroppedImage(croppedImage)}
-          />
-        )}
-
-        {croppedImage && (
-          <Button onPress={downloadCroppedImage}>Download</Button>
-        )}
-      </Section>
+          {file && (
+            <ImageCropper
+              {...props}
+              image={file?.[0]}
+              onCropComplete={setCroppedFile}
+            />
+          )}
+        </Section>
+        <Section>
+          {croppedImageSrc && (
+            <img alt="cropped-image-result" src={croppedImageSrc} />
+          )}
+        </Section>
+      </>
     );
   },
 };
