@@ -35,7 +35,7 @@ export const AllFiltersModal: FC<Props> = (props) => {
   const availableViewModes = useAvailableViewModes();
 
   const accordionCount =
-    (availableViewModes.length > 0 ? 1 : 0) +
+    (availableViewModes.length > 1 ? 1 : 0) +
     (list.sorting.length > 0 ? 1 : 0) +
     list.filters.length;
 
