@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.871",
+  "version": "0.2.0-alpha.873",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -110,6 +110,7 @@
     "remeda": "^2.39.0",
     "type-fest": "^5.7.0",
     "use-callback-ref": "^1.3.3",
+    "use-debounce": "^10.1.1",
     "usehooks-ts": "^3.1.1",
     "zod": "^4.4.3"
   },
