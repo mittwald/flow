@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.872](https://github.com/mittwald/flow/compare/0.2.0-alpha.871...0.2.0-alpha.872) (2026-06-25)
+
+### Bug Fixes
+
+* **List:** fix expanded filters ([#2576](https://github.com/mittwald/flow/issues/2576)) ([8e2dda4](https://github.com/mittwald/flow/commit/8e2dda48b3efb772a932059664a2afa76b03f70f))
+
+# [0.2.0-alpha.871](https://github.com/mittwald/flow/compare/0.2.0-alpha.870...0.2.0-alpha.871) (2026-06-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.870](https://github.com/mittwald/flow/compare/0.2.0-alpha.869...0.2.0-alpha.870) (2026-06-23)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
