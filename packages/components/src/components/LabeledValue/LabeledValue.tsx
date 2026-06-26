@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import { useId, type PropsWithChildren, type FC } from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -14,21 +14,28 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
 
   const rootClassName = clsx(styles.labeledValue, className);
 
+  const generatedId = useId();
+
   const propsContext: PropsContext = {
     Label: {
       className: styles.label,
+      elementType: "span",
+      id: generatedId,
     },
     CopyButton: {
       className: styles.button,
       variant: "plain",
       size: "s",
+      "aria-describedby": generatedId,
     },
     Button: {
       className: styles.button,
       size: "s",
+      "aria-describedby": generatedId,
     },
     Link: {
       inline: true,
+      "aria-describedby": generatedId,
     },
   };
 

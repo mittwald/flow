@@ -66,12 +66,12 @@ export const WithButton: Story = {
 
 export const WithContextualHelp: Story = {
   render: (props) => (
-    <LabeledValue>
+    <LabeledValue {...props}>
       <Label>
         Role
         <ContextualHelpTrigger>
           <Button />
-          <ContextualHelp {...props}>
+          <ContextualHelp>
             <Heading>Rights & roles</Heading>
             <Text>
               Each user profile is assigned a role in mStudio for each project
