@@ -91,6 +91,7 @@ import type {
   LightBoxGalleryItemProps,
   LightBoxGalleryProps,
 } from "@/components/LightBox";
+import type { LabeledValueProps } from "@/components/LabeledValue";
 
 export * from "./types";
 
@@ -139,6 +140,7 @@ export interface FlowComponentPropsTypes {
   Image: ImageProps;
   Initials: InitialsProps;
   Label: LabelProps;
+  LabeledValue: LabeledValueProps;
   LayoutCard: LayoutCardProps;
   LightBox: LightBoxProps;
   LightBoxGallery: LightBoxGalleryProps;
@@ -232,6 +234,7 @@ const propsContextSupportingComponentsMap: Record<
   Initials: true,
   Kbd: true,
   Label: true,
+  LabeledValue: true,
   LayoutCard: true,
   LightBox: true,
   LightBoxGallery: true,

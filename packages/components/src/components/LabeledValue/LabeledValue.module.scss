@@ -1,28 +1,16 @@
 .labeledValue {
-  display: grid;
-  grid-template-areas:
-    "label"
-    "value";
-  gap: var(--labeled-value--label-to-value-spacing)
-    var(--labeled-value--value-to-action-spacing);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--labeled-value--label-to-value-spacing);
   grid-template-rows: auto 1fr;
 
-  &:has(.button:not(:nth-child(2))) {
-    grid-template-areas:
-      "label label "
-      "value button";
-    grid-template-columns: auto 1fr;
+  dd {
+    display: flex;
+    align-items: start;
+    column-gap: var(--labeled-value--value-to-action-spacing);
   }
-
-  /* Elements */
 
   .label {
-    grid-area: label;
     width: fit-content;
-  }
-
-  .button:not(:nth-child(2)) {
-    grid-area: button;
-    place-self: start;
   }
 }

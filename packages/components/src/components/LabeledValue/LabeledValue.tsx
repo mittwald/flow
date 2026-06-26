@@ -1,51 +1,50 @@
-import { useId, type PropsWithChildren, type FC } from "react";
+import type { PropsWithChildren } from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface LabeledValueProps
   extends PropsWithChildren, PropsWithClassName {}
 
 /** @flr-generate all */
-export const LabeledValue: FC<LabeledValueProps> = (props) => {
+export const LabeledValue = flowComponent("LabeledValue", (props) => {
   const { children, className } = props;
 
   const rootClassName = clsx(styles.labeledValue, className);
 
-  const generatedId = useId();
-
   const propsContext: PropsContext = {
     Label: {
       className: styles.label,
-      elementType: "span",
-      id: generatedId,
+      elementType: "dt",
+      tunnel: {
+        id: "label",
+        component: "LabeledValue",
+      },
     },
     CopyButton: {
-      className: styles.button,
       variant: "plain",
       size: "s",
-      "aria-describedby": generatedId,
     },
     Button: {
-      className: styles.button,
       size: "s",
-      "aria-describedby": generatedId,
     },
     Link: {
       inline: true,
-      "aria-describedby": generatedId,
     },
   };
 
   return (
-    <div className={rootClassName}>
+    <dl className={rootClassName}>
       <PropsContextProvider props={propsContext}>
-        {children}
+        <UiComponentTunnelExit id="label" component="LabeledValue" />
+        <dd>{children}</dd>
       </PropsContextProvider>
-    </div>
+    </dl>
   );
-};
+});
 
 export default LabeledValue;
