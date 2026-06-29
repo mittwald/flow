@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.877](https://github.com/mittwald/flow/compare/0.2.0-alpha.876...0.2.0-alpha.877) (2026-06-29)
+
+### Bug Fixes
+
+* **Modal:** fix modal heading accessibility ([1d14ff6](https://github.com/mittwald/flow/commit/1d14ff685fb96ed53ffaeb0e85ff81728694bf34))
+
+### Features
+
+* **Modal:** hide section separators ([#2572](https://github.com/mittwald/flow/issues/2572)) ([5d95034](https://github.com/mittwald/flow/commit/5d9503429bbb5a2d1e84438711db686da5d246df))
+
 # [0.2.0-alpha.876](https://github.com/mittwald/flow/compare/0.2.0-alpha.875...0.2.0-alpha.876) (2026-06-29)
 
 ### Features
