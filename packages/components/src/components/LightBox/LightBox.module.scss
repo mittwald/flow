@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 .lightBox {
   > div {
     position: fixed;
@@ -31,6 +33,8 @@
       width: 100%;
     }
   }
+
+  @include colorScheme.colorScheme(".content");
 
   &.fitScreen {
     .content {

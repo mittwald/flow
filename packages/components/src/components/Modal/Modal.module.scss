@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 @mixin size($size) {
   &.size-#{$size} {
     [role="dialog"] {
@@ -81,6 +83,8 @@
     flex-grow: 1;
     background-color: var(--modal--background-color);
   }
+
+  @include colorScheme.colorScheme(".content, .columnLayout");
 
   .actionGroup {
     padding: var(--modal--padding);
