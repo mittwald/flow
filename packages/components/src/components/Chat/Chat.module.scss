@@ -15,8 +15,6 @@
     flex-direction: column-reverse;
   }
 
-  @include colorScheme.colorScheme(".messageThreadContainer");
-
   .fileCardList {
     margin-top: var(--chat--spacing);
   }
@@ -51,3 +49,5 @@
     flex-grow: 1;
   }
 }
+
+@include colorScheme.colorScheme(".messageThreadContainer");

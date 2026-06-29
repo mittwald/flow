@@ -34,8 +34,6 @@
     }
   }
 
-  @include colorScheme.colorScheme(".content");
-
   &.fitScreen {
     .content {
       > * {
@@ -88,3 +86,5 @@
     }
   }
 }
+
+@include colorScheme.colorScheme(".content");

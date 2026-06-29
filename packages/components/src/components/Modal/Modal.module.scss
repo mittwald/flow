@@ -84,8 +84,6 @@
     background-color: var(--modal--background-color);
   }
 
-  @include colorScheme.colorScheme(".content, .columnLayout");
-
   .actionGroup {
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
@@ -293,3 +291,5 @@
     translate: 0 0;
   }
 }
+
+@include colorScheme.colorScheme(".content, .columnLayout");
