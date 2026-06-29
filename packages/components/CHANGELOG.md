@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.876](https://github.com/mittwald/flow/compare/0.2.0-alpha.875...0.2.0-alpha.876) (2026-06-29)
+
+### Features
+
+* **FieldError:** announce fieldError message to aria ([#2581](https://github.com/mittwald/flow/issues/2581)) ([b6809b2](https://github.com/mittwald/flow/commit/b6809b24d76b4435d65ce183a0d6c5df0b6aaa2a))
+
 # [0.2.0-alpha.875](https://github.com/mittwald/flow/compare/0.2.0-alpha.874...0.2.0-alpha.875) (2026-06-25)
 
 ### Bug Fixes
