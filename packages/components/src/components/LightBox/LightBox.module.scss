@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 .lightBox {
   > div {
     position: fixed;
@@ -84,3 +86,5 @@
     }
   }
 }
+
+@include colorScheme.colorScheme(".content");

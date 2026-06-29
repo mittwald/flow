@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 .layoutCard {
   align-self: normal;
   background-color: var(--layout-card--background-color);
@@ -53,3 +55,5 @@
     }
   }
 }
+
+@include colorScheme.colorScheme(".layoutCard");

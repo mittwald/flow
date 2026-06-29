@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 @mixin size($size) {
   &.size-#{$size} {
     [role="dialog"] {
@@ -289,3 +291,5 @@
     translate: 0 0;
   }
 }
+
+@include colorScheme.colorScheme(".content, .columnLayout");

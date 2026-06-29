@@ -1,0 +1,31 @@
+@mixin colorScheme($selector) {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]),
+    :root[data-theme="system"] {
+      #{$selector} {
+        color-scheme: dark;
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]),
+    :root[data-theme="system"] {
+      #{$selector} {
+        color-scheme: light;
+      }
+    }
+  }
+
+  :root[data-theme="dark"] {
+    #{$selector} {
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="light"] {
+    #{$selector} {
+      color-scheme: light;
+    }
+  }
+}

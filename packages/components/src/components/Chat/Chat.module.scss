@@ -1,3 +1,5 @@
+@use "@/styles/mixins/colorScheme";
+
 .chat {
   display: flex;
   flex-direction: column;
@@ -47,3 +49,5 @@
     flex-grow: 1;
   }
 }
+
+@include colorScheme.colorScheme(".messageThreadContainer");
