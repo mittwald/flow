@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.878](https://github.com/mittwald/flow/compare/0.2.0-alpha.877...0.2.0-alpha.878) (2026-06-29)
+
+### Features
+
+* **LabeledValue:** improve accessibility ([73b9dfa](https://github.com/mittwald/flow/commit/73b9dfa415b576868e33210208ca14eda0071930))
+
 # [0.2.0-alpha.877](https://github.com/mittwald/flow/compare/0.2.0-alpha.876...0.2.0-alpha.877) (2026-06-29)
 
 ### Bug Fixes
