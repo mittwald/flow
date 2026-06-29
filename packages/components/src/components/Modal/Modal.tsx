@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactNode, Suspense } from "react";
+import { type PropsWithChildren, type ReactNode, Suspense, useId } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -75,6 +75,8 @@ export const Modal = flowComponent("Modal", (props) => {
     className,
   );
 
+  const generatedId = useId();
+
   const header = (children: ReactNode) => (
     <>
       {children}
@@ -125,8 +127,8 @@ export const Modal = flowComponent("Modal", (props) => {
     Heading: {
       className: styles.header,
       level: 2,
-      slot: "title",
       children: dynamic((props) => header(props.children)),
+      id: generatedId,
     },
     ActionGroup: {
       className: styles.actionGroup,
@@ -171,6 +173,7 @@ export const Modal = flowComponent("Modal", (props) => {
       className={rootClassName}
       controller={controller}
       ref={ref}
+      aria-labelledby={generatedId}
       {...overlayProps}
     >
       <PropsContextProvider props={propsContext}>

@@ -6,7 +6,10 @@ import styles from "../Overlay.module.scss";
 import DivView from "@/views/DivView";
 
 export interface OverlayContentProps
-  extends PropsWithChildren, PropsWithClassName {
+  extends
+    PropsWithChildren,
+    PropsWithClassName,
+    Pick<Aria.DialogProps, "aria-labelledby"> {
   ref?: Ref<HTMLDivElement>;
   onOpenChange: (isOpen: boolean) => void;
   isDismissable?: boolean;
@@ -15,7 +18,12 @@ export interface OverlayContentProps
 
 /** @flr-generate all */
 export const OverlayContent: FC<OverlayContentProps> = (props) => {
-  const { children, className, ...restProps } = props;
+  const {
+    children,
+    className,
+    "aria-labelledby": ariaLabelledBy,
+    ...restProps
+  } = props;
 
   const Fallback = () => {
     return (
@@ -30,7 +38,9 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
       <DivView>
         <Aria.Modal>
           <Suspense fallback={<Fallback />}>
-            <Aria.Dialog>{children}</Aria.Dialog>
+            <Aria.Dialog aria-labelledby={ariaLabelledBy}>
+              {children}
+            </Aria.Dialog>
           </Suspense>
         </Aria.Modal>
       </DivView>
