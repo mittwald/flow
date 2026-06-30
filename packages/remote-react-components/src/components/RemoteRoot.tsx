@@ -23,7 +23,10 @@ import {
 import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
-import { IntlProvider, useLanguage } from "@mittwald/flow-react-components";
+import {
+  IntlProvider,
+  useLanguage,
+} from "@mittwald/flow-react-components/flr-universal";
 import type { HostConfig } from "@mittwald/flow-core";
 import { initExtBridge } from "@mittwald/ext-bridge/browser";
 
