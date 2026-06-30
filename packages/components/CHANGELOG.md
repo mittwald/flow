@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.880](https://github.com/mittwald/flow/compare/0.2.0-alpha.879...0.2.0-alpha.880) (2026-06-30)
+
+### Bug Fixes
+
+* **Calendar:** Fix size for small mobile ([#2586](https://github.com/mittwald/flow/issues/2586)) ([ac6f72c](https://github.com/mittwald/flow/commit/ac6f72cbdbc23d5dd6157bf9289b7665d730b4af))
+
 # [0.2.0-alpha.879](https://github.com/mittwald/flow/compare/0.2.0-alpha.878...0.2.0-alpha.879) (2026-06-29)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
