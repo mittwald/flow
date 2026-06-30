@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.881](https://github.com/mittwald/flow/compare/0.2.0-alpha.880...0.2.0-alpha.881) (2026-06-30)
+
+### Features
+
+* add color scheme to all flow classes ([#2587](https://github.com/mittwald/flow/issues/2587)) ([03457ed](https://github.com/mittwald/flow/commit/03457ed26d6f97dbe14c28fda4a16522b04480db))
+
 # [0.2.0-alpha.880](https://github.com/mittwald/flow/compare/0.2.0-alpha.879...0.2.0-alpha.880) (2026-06-30)
 
 ### Bug Fixes
