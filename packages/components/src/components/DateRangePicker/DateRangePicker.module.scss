@@ -1,3 +1,9 @@
 .calendar {
   padding: var(--popover--padding--m);
 }
+
+@media (max-width: 360px) {
+  .calendar {
+    padding: var(--popover--padding--s);
+  }
+}
