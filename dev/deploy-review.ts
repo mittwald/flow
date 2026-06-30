@@ -36,16 +36,23 @@ const getApiHeaders = () => ({
   "x-access-token": process.env.MITTWALD_API_TOKEN || "",
 });
 
+// Wildcard certificate for *.review.flow-components.de. Can be overridden via
+// the MITTWALD_TLS_CERTIFICATE_ID environment variable.
+const DEFAULT_TLS_CERTIFICATE_ID = "67bdea7c-7b60-40fb-97a6-1fce0a2b4838";
+
 class ReviewDeployer {
   private readonly prNumber: string;
   private readonly projectId: string;
   private readonly images: DockerImage[];
+  private readonly tlsCertificateId: string;
 
   constructor() {
     this.validateEnvironment();
     this.prNumber = process.env.PR_NUMBER || "";
     this.projectId = process.env.MITTWALD_PROJECT_ID || "";
     this.images = this.parseImages();
+    this.tlsCertificateId =
+      process.env.MITTWALD_TLS_CERTIFICATE_ID || DEFAULT_TLS_CERTIFICATE_ID;
   }
 
   private validateEnvironment(): void {
@@ -301,6 +308,35 @@ class ReviewDeployer {
     }
   }
 
+  async connectTlsCertificate(ingressId: string): Promise<void> {
+    console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
+
+    try {
+      const response = await fetch(
+        `https://api.mittwald.de/v2/ingresses/${ingressId}/tls`,
+        {
+          method: "PATCH",
+          headers: getApiHeaders(),
+          body: JSON.stringify({
+            certificateId: this.tlsCertificateId,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(
+          `Failed to connect TLS certificate: ${response.statusText} - ${error}`,
+        );
+      }
+
+      console.log("✅ TLS certificate connected successfully");
+    } catch (error) {
+      console.error("❌ Failed to connect TLS certificate:", error);
+      throw error;
+    }
+  }
+
   async deployImage(
     image: DockerImage,
     services: MittwaldService[],
@@ -354,7 +390,8 @@ class ReviewDeployer {
       if (!containerId) {
         throw new Error(`Container ID not found for ${serviceName}`);
       }
-      await this.createIngress(hostname, containerId);
+      const ingress = await this.createIngress(hostname, containerId);
+      await this.connectTlsCertificate(ingress.id);
     } else {
       console.log(`   Ingress for ${hostname} already exists`);
     }
