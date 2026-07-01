@@ -22,7 +22,7 @@ const meta: Meta<typeof Message> = {
     <Message {...props}>
       <Header>
         <ContextMenuTrigger>
-          <Button aria-label="Aktionen" />
+          <Button />
           <ContextMenu>
             <MenuItem>Bearbeiten</MenuItem>
             <MenuItem>Löschen</MenuItem>
@@ -34,10 +34,12 @@ const meta: Meta<typeof Message> = {
           </Avatar>
           <Text>
             <strong>Max Mustermann</strong>
-            Organisationsinhaber
+            <span>Organisationsinhaber</span>
           </Text>
         </Align>
-        <Text>01.09.2024, 12:45</Text>
+        <Text>
+          <time dateTime="2024-09-01T12:45">01.09.2024, 12:45</time>
+        </Text>
       </Header>
 
       <Content>

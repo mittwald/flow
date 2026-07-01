@@ -8,13 +8,15 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlignProps
-  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {}
+  extends PropsWithChildren, PropsWithClassName, FlowComponentProps {
+  id?: string;
+}
 
 /** @flr-generate all */
 export const Align = flowComponent(
   "Align",
   (props) => {
-    const { children, className } = props;
+    const { children, className, id } = props;
 
     const rootClassName = clsx(styles.align, className);
 
@@ -33,7 +35,9 @@ export const Align = flowComponent(
 
     return (
       <PropsContextProvider props={propsContext}>
-        <div className={rootClassName}>{children}</div>
+        <div className={rootClassName} id={id}>
+          {children}
+        </div>
       </PropsContextProvider>
     );
   },

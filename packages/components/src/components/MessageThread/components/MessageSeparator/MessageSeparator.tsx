@@ -5,6 +5,9 @@ import React from "react";
 import clsx from "clsx";
 import { Separator } from "@/components/Separator";
 import { Content } from "@/components/Content";
+import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import locales from "../../locales/*.locale.json";
+import * as Aria from "react-aria-components";
 
 export interface MessageSeparatorProps
   extends PropsWithChildren, PropsWithClassName {}
@@ -15,11 +18,16 @@ export const MessageSeparator: FC<MessageSeparatorProps> = (props) => {
 
   const rootClassName = clsx(styles.messageSeparator, className);
 
+  const formatter = useLocalizedStringFormatter(locales, "MessageThread");
+
   return (
-    <span className={rootClassName}>
+    <li className={rootClassName}>
       <Separator className={styles.separator} />
+      <Aria.VisuallyHidden>
+        {formatter.format("separator.label")}
+      </Aria.VisuallyHidden>
       <Content className={styles.content}>{children}</Content>
-    </span>
+    </li>
   );
 };
 export default MessageSeparator;
