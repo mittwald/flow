@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.882](https://github.com/mittwald/flow/compare/0.2.0-alpha.881...0.2.0-alpha.882) (2026-07-01)
+
+### Bug Fixes
+
+* **Remote:** import flow components from flr-universal only ([#2588](https://github.com/mittwald/flow/issues/2588)) ([9a418a9](https://github.com/mittwald/flow/commit/9a418a91b0360e1f1e27acec512d153083472cea))
+
 # [0.2.0-alpha.881](https://github.com/mittwald/flow/compare/0.2.0-alpha.880...0.2.0-alpha.881) (2026-06-30)
 
 ### Features
