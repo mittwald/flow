@@ -36,3 +36,5 @@ export {
 
 export * from "@/lib/controller/public";
 export * from "@/lib/hooks/public";
+
+export { useControlledRemoteValueProps } from "@/lib/remote/useControlledRemoteValueProps";
