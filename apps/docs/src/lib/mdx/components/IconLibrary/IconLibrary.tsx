@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import {
   AccentBox,
+  BigNumber,
   ColumnLayout,
   iconCategories,
   type IconCategory,
-  Label,
-  LabeledValue,
+  Text,
 } from "@mittwald/flow-react-components";
 import * as FlowComponents from "@mittwald/flow-react-components";
 
@@ -25,7 +25,7 @@ export const IconLibrary: FC<Props> = (props) => {
 
   return (
     <AccentBox>
-      <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
+      <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]} rowGap="xl">
         {iconCategories[category].map((name) => {
           const Icon = iconComponents[`Icon${name}`];
 
@@ -34,10 +34,10 @@ export const IconLibrary: FC<Props> = (props) => {
           }
 
           return (
-            <LabeledValue key={name}>
-              <Label>{name}</Label>
+            <BigNumber key={name}>
               <Icon />
-            </LabeledValue>
+              <Text>{name}</Text>
+            </BigNumber>
           );
         })}
       </ColumnLayout>
