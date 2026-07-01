@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.883](https://github.com/mittwald/flow/compare/0.2.0-alpha.882...0.2.0-alpha.883) (2026-07-01)
+
+### Bug Fixes
+
+* **Popover:** hide decorative tip from accessibility tree ([#2589](https://github.com/mittwald/flow/issues/2589)) ([0a06977](https://github.com/mittwald/flow/commit/0a0697744036897456e2cff1b8d8e329c6d5bd56))
+
 # [0.2.0-alpha.882](https://github.com/mittwald/flow/compare/0.2.0-alpha.881...0.2.0-alpha.882) (2026-07-01)
 
 ### Bug Fixes
