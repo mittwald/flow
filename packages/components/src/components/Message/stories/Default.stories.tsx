@@ -37,9 +37,7 @@ const meta: Meta<typeof Message> = {
             <span>Organisationsinhaber</span>
           </Text>
         </Align>
-        <Text>
-          <time dateTime="2024-09-01T12:45">01.09.2024, 12:45</time>
-        </Text>
+        <Text>01.09.2024, 12:45</Text>
       </Header>
 
       <Content>
