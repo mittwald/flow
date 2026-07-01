@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
+
+### Features
+
+* **icons:** auto-generate icon overview from categorized icon set ([#2591](https://github.com/mittwald/flow/issues/2591)) ([55d6f44](https://github.com/mittwald/flow/commit/55d6f4461d03900b58b8423c08cb9f60abd8a235))
+
 # [0.2.0-alpha.883](https://github.com/mittwald/flow/compare/0.2.0-alpha.882...0.2.0-alpha.883) (2026-07-01)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro
