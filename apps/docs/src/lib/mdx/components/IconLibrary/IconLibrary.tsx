@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import {
+  AccentBox,
   ColumnLayout,
   iconCategories,
   type IconCategory,
@@ -23,22 +24,24 @@ export const IconLibrary: FC<Props> = (props) => {
   const { category } = props;
 
   return (
-    <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
-      {iconCategories[category].map((name) => {
-        const Icon = iconComponents[`Icon${name}`];
+    <AccentBox>
+      <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
+        {iconCategories[category].map((name) => {
+          const Icon = iconComponents[`Icon${name}`];
 
-        if (!Icon) {
-          return null;
-        }
+          if (!Icon) {
+            return null;
+          }
 
-        return (
-          <LabeledValue key={name}>
-            <Label>{name}</Label>
-            <Icon />
-          </LabeledValue>
-        );
-      })}
-    </ColumnLayout>
+          return (
+            <LabeledValue key={name}>
+              <Label>{name}</Label>
+              <Icon />
+            </LabeledValue>
+          );
+        })}
+      </ColumnLayout>
+    </AccentBox>
   );
 };
 
