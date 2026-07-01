@@ -132,3 +132,4 @@ export { IconUnavailable } from "./IconUnavailable.tsx";
 export { IconWarning } from "./IconWarning.tsx";
 
 export * from "../iconSet.ts";
+export * from "../iconCategories.ts";
