@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
+
+### Bug Fixes
+
+* **Docs:** adjust FileDrop docs with correct usage ([#2593](https://github.com/mittwald/flow/issues/2593)) ([c7b7789](https://github.com/mittwald/flow/commit/c7b7789120c2af45ca847d6ba5424ab418e199c8))
+
 # [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
 
 ### Features
