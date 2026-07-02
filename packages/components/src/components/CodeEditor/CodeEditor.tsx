@@ -53,6 +53,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     showLinterMarkers = true,
     showActiveLineMarker = true,
     copyable = true,
+    height,
+    minHeight,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -106,6 +108,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
               }
             }}
             extensions={enabledExtensions}
+            height={height ?? minHeight}
           >
             {copyable && (
               <CopyButton

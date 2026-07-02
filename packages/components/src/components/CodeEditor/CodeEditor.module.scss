@@ -16,6 +16,10 @@
 
     min-height: calc(var(--editor-padding) * 2 + var(--line-height-m));
 
+    &:hover {
+      background-color: var(--form-control--background-color--default);
+    }
+
     &.readonly {
       border-color: var(--form-control--border-color--default);
     }
@@ -51,7 +55,7 @@
       & :global(.cm-activeLine) {
         background-color: color-mix(
           in srgb,
-          var(--form-control--background-color--selected) 70%,
+          var(--form-control--background-color--hover) 65%,
           transparent
         );
       }

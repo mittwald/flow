@@ -13,6 +13,13 @@ test.each(testEnvironments)(
     "name": "My Project"
 }`}
         />
+        <CodeEditor
+          minHeight="200px"
+          language="json"
+          value={`{
+    "minHeight": "200px"
+}`}
+        />
       </Flex>,
     );
 
