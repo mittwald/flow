@@ -18,10 +18,7 @@ import {
     <Text>
       Es sind nur Bilder vom Typ image/png erlaubt.
     </Text>
-    <FileField
-      name="file"
-      onChange={(files) => console.log(files)}
-    >
+    <FileField>
       <Button>Bild auswählen</Button>
     </FileField>
   </FileDropZone>
