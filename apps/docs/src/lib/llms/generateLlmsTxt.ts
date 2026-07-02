@@ -1,9 +1,7 @@
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
-
-const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mittwald.github.io/flow"
-).replace(/\/$/, "");
+import path from "path";
+import fs from "fs";
 
 interface Section {
   contentFolder: string;
@@ -12,37 +10,32 @@ interface Section {
   toPathname: (mdxFile: MdxFile) => string;
 }
 
-const sections: Section[] = [
-  {
-    contentFolder: "src/content/01-get-started",
-    routeSegment: "01-get-started",
-    heading: "Get Started",
-    toPathname: (mdx) => `/01-get-started/${mdx.slugs.join("/")}`,
-  },
-  {
-    contentFolder: "src/content/02-foundations",
-    routeSegment: "02-foundations",
-    heading: "Foundations",
-    toPathname: (mdx) => `/02-foundations/${mdx.slugs.join("/")}`,
-  },
-  {
-    contentFolder: "src/content/03-patterns",
-    routeSegment: "03-patterns",
-    heading: "Patterns",
-    toPathname: (mdx) => `/03-patterns/${mdx.slugs.join("/")}`,
-  },
-  {
-    contentFolder: "src/content/04-components",
-    routeSegment: "04-components",
-    heading: "Components",
-    toPathname: (mdx) => `/04-components/${mdx.slugs.join("/")}/overview`,
-  },
-];
+const contentFolder = "./src/content";
+const directorySections = fs.readdirSync(contentFolder);
+const sections: Section[] = directorySections.map((s) => {
+  return {
+    contentFolder: path.join(contentFolder, s),
+    routeSegment: s,
+    heading: s
+      .replaceAll(/(\d+)-/g, "")
+      .split("-")
+      .map(
+        (word) =>
+          `${word.charAt(0).toUpperCase()}${word.substring(1, word.length)}`,
+      )
+      .join(" "),
+    toPathname: (mdx) => `/${s}/${mdx.slugs.join("/")}`,
+  };
+});
 
 const normalizeWhitespace = (value: string): string =>
   value.replace(/\s+/g, " ").trim();
 
-const toListItem = (mdxFile: MdxFile, section: Section): string => {
+const toListItem = (
+  siteUrl: string,
+  mdxFile: MdxFile,
+  section: Section,
+): string => {
   const title = mdxFile.getTitle();
   const url = `${siteUrl}${section.toPathname(mdxFile)}`;
   const description = mdxFile.mdxSource.frontmatter.description;
@@ -51,18 +44,23 @@ const toListItem = (mdxFile: MdxFile, section: Section): string => {
   return `- [${title}](${url})${suffix}`;
 };
 
-const renderSection = async (section: Section): Promise<string> => {
+const renderSection = async (
+  siteUrl: string,
+  section: Section,
+): Promise<string> => {
   const mdxFiles = await MdxFileFactory.fromDir(section.contentFolder);
 
   const items = mdxFiles
     .sort((a, b) => a.filename.localeCompare(b.filename))
-    .map((mdxFile) => toListItem(mdxFile, section));
+    .map((mdxFile) => toListItem(siteUrl, mdxFile, section));
 
   return [`## ${section.heading}`, "", ...items].join("\n");
 };
 
-export const generateLlmsTxt = async (): Promise<string> => {
-  const renderedSections = await Promise.all(sections.map(renderSection));
+export const generateLlmsTxt = async (siteUrl: string): Promise<string> => {
+  const renderedSections = await Promise.all(
+    sections.map((s) => renderSection(siteUrl, s)),
+  );
 
   const header = [
     "# mittwald Flow",
