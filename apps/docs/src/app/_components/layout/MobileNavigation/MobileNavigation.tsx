@@ -12,6 +12,7 @@ import {
   Modal,
   ModalTrigger,
   Navigation,
+  type OverlayController,
   Section,
 } from "@mittwald/flow-react-components";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
@@ -20,14 +21,16 @@ import { groupBy } from "remeda";
 import { usePathname } from "next/navigation";
 import { ThemeSwitcherButton } from "@/app/_components/layout/HeaderNavigation/components/ThemeSwitcherButton";
 import Groups from "@/app/_components/layout/Groups";
+import { SearchButton } from "@/app/_components/layout/DocsSearch";
 
 interface Props {
   docs: SerializedMdxFile[];
   className?: string;
+  searchController: OverlayController;
 }
 
 export const MobileNavigation: FC<Props> = (props) => {
-  const { className } = props;
+  const { className, searchController } = props;
 
   const docs = props.docs.map(MdxFile.deserialize);
 
@@ -42,6 +45,7 @@ export const MobileNavigation: FC<Props> = (props) => {
   return (
     <HeaderNavigation className={className}>
       <MobileHeaderNavigation docs={props.docs} />
+      <SearchButton controller={searchController} iconOnly />
       <ModalTrigger>
         <Button variant="plain">
           <IconMenu />
