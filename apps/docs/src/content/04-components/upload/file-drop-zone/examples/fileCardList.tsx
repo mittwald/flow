@@ -25,14 +25,7 @@ export default () => {
       >
         <IconUpload />
         <Heading>Dateien ablegen</Heading>
-        <FileField
-          name="file"
-          onChange={(value) => {
-            if (value) {
-              setFiles([...files, ...value]);
-            }
-          }}
-        >
+        <FileField>
           <Button>Dateien auswählen</Button>
         </FileField>
       </FileDropZone>
