@@ -47,7 +47,6 @@
   background-color: var(--neutral--color--200);
 }
 
-/* Scroll container for the results. Layout/gap is handled by <Flex>. */
 .results {
   list-style: none;
   margin: 0;
@@ -76,7 +75,6 @@
   font-weight: 600;
 }
 
-/* Muted, small secondary text (no Flow prop covers this). */
 .meta {
   font-size: var(--font-size-text--s);
   color: var(--neutral--color--600);
