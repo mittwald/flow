@@ -4,7 +4,6 @@ import {
   type PropsWithChildren,
   type Ref,
 } from "react";
-import { prepareFormData } from "@/components/lib/prepareFormData";
 
 type FormProps = {
   action?: (data: FormData) => void | Promise<void>;
@@ -22,15 +21,11 @@ export const Form: FC<FormProps> = (props) => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const resolvedData = await prepareFormData(
-      new FormData(event.currentTarget),
-    );
-    await onSubmitFromProps?.(resolvedData);
+    await onSubmitFromProps?.(new FormData(event.currentTarget));
   };
 
   const onAction = async (formData: FormData) => {
-    const resolvedFormData = await prepareFormData(formData);
-    await onActionFromProps?.(resolvedFormData);
+    await onActionFromProps?.(formData);
   };
 
   return (

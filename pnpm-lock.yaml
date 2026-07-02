@@ -11,6 +11,9 @@ overrides:
   '@types/react-dom': ^19.2
 
 patchedDependencies:
+  '@quilted/threads@3.3.1':
+    hash: df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4
+    path: patches/@quilted__threads@3.3.1.patch
   acorn:
     hash: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
     path: patches/acorn.patch
@@ -1033,7 +1036,7 @@ importers:
         version: 1.7.0-mittwald.10(@preact/signals-core@1.14.2)
       '@quilted/threads':
         specifier: ^3.3.1
-        version: 3.3.1(@preact/signals-core@1.14.2)
+        version: 3.3.1(patch_hash=df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4)(@preact/signals-core@1.14.2)
       '@types/invariant':
         specifier: ^2.2.37
         version: 2.2.37
@@ -12614,7 +12617,7 @@ snapshots:
     dependencies:
       '@preact/signals-core': 1.14.2
 
-  '@quilted/threads@3.3.1(@preact/signals-core@1.14.2)':
+  '@quilted/threads@3.3.1(patch_hash=df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4)(@preact/signals-core@1.14.2)':
     dependencies:
       '@quilted/events': 2.1.5
     optionalDependencies:

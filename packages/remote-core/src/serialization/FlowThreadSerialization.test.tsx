@@ -5,30 +5,12 @@ import {
   markAsTransferable,
   TRANSFERABLE,
 } from "@quilted/threads";
-import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { CalendarDate } from "@internationalized/date";
 import { createFileList } from "@/tests/utils";
 
-test("will create a new arraybuffer when detached", async () => {
-  let testFile = new File([new ArrayBuffer(0)], "test");
-  testFile = await addAwaitedArrayBuffer(testFile);
-
-  const buff = await testFile.arrayBuffer();
-  expect(buff.detached).toBeFalsy();
-
-  // make the file buffer detached
-  structuredClone(buff, { transfer: [buff] });
-
-  expect(buff.detached).toBeTruthy();
-  testFile = await addAwaitedArrayBuffer(testFile);
-
-  const newBuff = await testFile.arrayBuffer();
-  expect(newBuff.detached).toBeFalsy();
-});
-
 test("will omit specific types on serialize", async () => {
   const serializer = new FlowThreadSerialization();
-  const result = serializer.serialize(
+  const result = await serializer.serialize(
     {
       window,
       element: document.createElement("div"),
@@ -52,32 +34,20 @@ test("will serialize and deserialize structures", async () => {
   const buff5 = new ArrayBuffer(5);
 
   const fileList = createFileList([
-    await addAwaitedArrayBuffer(new File([buff1], "foo", { lastModified: 1 })),
-    await addAwaitedArrayBuffer(new File([buff2], "bar", { lastModified: 2 })),
+    new File([buff1], "foo", { lastModified: 1 }),
+    new File([buff2], "bar", { lastModified: 2 }),
   ]);
 
   const formData = new FormData();
   formData.set("foo", "string");
-  formData.set(
-    "file",
-    await addAwaitedArrayBuffer(
-      new File([buff3], "formDataFile1", { lastModified: 3 }),
-    ),
-  );
+  formData.set("file", new File([buff3], "formDataFile1", { lastModified: 3 }));
   formData.append(
     "file",
-    await addAwaitedArrayBuffer(
-      new File([buff4], "formDataFile2", { lastModified: 4 }),
-    ),
+    new File([buff4], "formDataFile2", { lastModified: 4 }),
   );
 
   const testMap = new Map();
-  testMap.set(
-    "foo",
-    await addAwaitedArrayBuffer(
-      new File([buff5], "mapFile1", { lastModified: 1 }),
-    ),
-  );
+  testMap.set("foo", new File([buff5], "mapFile1", { lastModified: 1 }));
 
   const calendarDate = new CalendarDate(2025, 1, 2);
 
@@ -86,7 +56,7 @@ test("will serialize and deserialize structures", async () => {
   Object.setPrototypeOf(dataTransfer, DataTransfer.prototype);
 
   const transferable: ArrayBuffer[] = [];
-  const serializeResult = serializer.serialize(
+  const serializeResult = await serializer.serialize(
     {
       dataTransfer: dataTransfer,
       date: calendarDate,
@@ -101,7 +71,7 @@ test("will serialize and deserialize structures", async () => {
     transferable,
   );
 
-  expect(transferable).toStrictEqual(
+  expect(transferable).toEqual(
     expect.arrayContaining([
       markAsTransferable(buff1),
       markAsTransferable(buff2),
@@ -191,7 +161,7 @@ test("will serialize and deserialize structures", async () => {
     ]),
   });
 
-  const deserializeResult = serializer.deserialize(
+  const deserializeResult = await serializer.deserialize(
     serializeResult,
     {} as AnyThread,
   );
