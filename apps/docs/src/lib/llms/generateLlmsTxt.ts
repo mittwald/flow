@@ -58,8 +58,9 @@ const renderSection = async (
 };
 
 export const generateLlmsTxt = async (siteUrl: string): Promise<string> => {
+  const normalizedSiteUrl = siteUrl.replace(/\/$/, "");
   const renderedSections = await Promise.all(
-    sections.map((s) => renderSection(siteUrl, s)),
+    sections.map((s) => renderSection(normalizedSiteUrl, s)),
   );
 
   const header = [
