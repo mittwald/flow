@@ -3,12 +3,19 @@ import type { NextRequest } from "next/server";
 
 export const dynamic = "force-static";
 
-export async function GET(request: NextRequest): Promise<Response> {
-  const currentUrl = request.url;
-  const pathname = request.nextUrl.pathname;
-  const siteUrl = currentUrl.replace(pathname, "");
+const getBaseUrl = (req: NextRequest) => {
+  const proto = req.headers.get("x-forwarded-proto") ?? "http";
+  const host =
+    req.headers.get("x-forwarded-host") ??
+    req.headers.get("host") ??
+    "localhost";
 
-  const body = await generateLlmsTxt(siteUrl);
+  return new URL("", `${proto}://${host}`);
+};
+
+export async function GET(request: NextRequest): Promise<Response> {
+  const baseUrl = getBaseUrl(request);
+  const body = await generateLlmsTxt(baseUrl.toString());
 
   return new Response(body, {
     headers: {
