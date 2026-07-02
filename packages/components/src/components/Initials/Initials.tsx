@@ -44,7 +44,7 @@ export const Initials = flowComponent("Initials", (props) => {
     <div
       data-dynamic-color={dynamicColor}
       aria-hidden={ariaHidden}
-      aria-label={textContent}
+      aria-label={ariaHidden ? undefined : textContent}
       className={rootClassName}
       ref={ref}
       role="img"

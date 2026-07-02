@@ -4,6 +4,10 @@
   row-gap: var(--message-thread--spacing);
   width: 100%;
 
+  li {
+    list-style: none;
+  }
+
   .message {
     &.responder {
       padding-inline-end: var(--message-thread--indentation);
