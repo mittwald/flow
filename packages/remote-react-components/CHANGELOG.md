@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.887](https://github.com/mittwald/flow/compare/0.2.0-alpha.886...0.2.0-alpha.887) (2026-07-02)
+
+### Bug Fixes
+
+* **CodeEditor:** fix height and colors ([#2592](https://github.com/mittwald/flow/issues/2592)) ([06b2fa2](https://github.com/mittwald/flow/commit/06b2fa224ee5744f7c994af276b1622024d13b29))
+
 # [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
 
 ### Bug Fixes
