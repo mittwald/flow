@@ -1,11 +1,12 @@
 "use client";
 import { type FC } from "react";
 import styles from "./Header.module.scss";
-import { Link } from "@mittwald/flow-react-components";
+import { Link, useModalController } from "@mittwald/flow-react-components";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
+import { SearchDialog } from "@/app/_components/layout/DocsSearch";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -13,6 +14,7 @@ interface Props {
 
 const Header: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
+  const searchController = useModalController();
 
   return (
     <header className={styles.header}>
@@ -23,12 +25,15 @@ const Header: FC<Props> = (props) => {
         <HeaderNavigation
           className={styles.headerNavigation}
           docs={docs.map((mdx) => mdx.serialize())}
+          searchController={searchController}
         />
         <MobileNavigation
           docs={docs.map((mdx) => mdx.serialize())}
           className={styles.mobileNavigation}
+          searchController={searchController}
         />
       </div>
+      <SearchDialog controller={searchController} />
     </header>
   );
 };
