@@ -20,7 +20,13 @@ export interface NavigationGroupProps
 
 /** @flr-generate all */
 export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
-  const { children, className, collapsable, ...rest } = props;
+  const {
+    children,
+    className,
+    collapsable,
+    "aria-label": ariaLabel,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.navigationGroup,
@@ -32,7 +38,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
 
   const propsContext: PropsContext = {
     Label: {
-      id: generatedId,
+      id: ariaLabel ? undefined : generatedId,
       className: styles.label,
     },
     Link: {
@@ -53,7 +59,12 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   );
 
   const defaultUi = (
-    <section aria-labelledby={generatedId} className={rootClassName} {...rest}>
+    <section
+      aria-labelledby={ariaLabel ? undefined : generatedId}
+      aria-label={ariaLabel}
+      className={rootClassName}
+      {...rest}
+    >
       {children}
       <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
     </section>

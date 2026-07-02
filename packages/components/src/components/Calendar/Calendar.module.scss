@@ -32,6 +32,7 @@
 
   :global(.react-aria-CalendarHeaderCell) {
     font-size: var(--calendar--cell-font-size);
+    height: var(--calendar--cell-size);
   }
 
   table {
@@ -153,5 +154,12 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 360px) {
+  .calendar {
+    --calendar--cell-size: 2.1rem;
+    --calendar--cell-font-size: 0.8rem;
   }
 }

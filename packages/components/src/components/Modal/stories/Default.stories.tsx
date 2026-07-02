@@ -225,8 +225,15 @@ export const WithSuspense: Story = {
     const [isLoading, setIsLoading] = useState(true);
     useTimeout(() => setIsLoading(false), 3000);
     return (
-      <Modal {...props} isOpen>
-        {isLoading ? <Loader /> : <Content>Loaded content!</Content>}
+      <Modal {...props} isOpen offCanvas>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <Heading>Heading</Heading>
+            <Content>Loaded content!</Content>
+          </>
+        )}
       </Modal>
     );
   },

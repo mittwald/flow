@@ -27,11 +27,19 @@ export const Items: FC = () => {
     tiles && styles.tiles,
   );
 
+  const {
+    "aria-labelledby": ariaLabelledby,
+    "aria-label": ariaLabel,
+    ...rest
+  } = list.componentProps;
+
   return (
     <DivView aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
       <ItemsGridListView
         className={rootClassName}
-        {...list.componentProps}
+        {...rest}
+        aria-labelledby={ariaLabel ? undefined : ariaLabelledby}
+        aria-label={ariaLabel}
         layout={tiles ? "grid" : "stack"}
         tileMaxWidth={list.itemView.tileMaxWidth}
       >

@@ -3,6 +3,90 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
+
+### Bug Fixes
+
+* **Chat:** improve screen reader experience ([#2590](https://github.com/mittwald/flow/issues/2590)) ([2ac1351](https://github.com/mittwald/flow/commit/2ac1351303fab2d647061d85e66bbf92717aa5aa))
+
+# [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
+
+### Features
+
+* **icons:** auto-generate icon overview from categorized icon set ([#2591](https://github.com/mittwald/flow/issues/2591)) ([55d6f44](https://github.com/mittwald/flow/commit/55d6f4461d03900b58b8423c08cb9f60abd8a235))
+
+# [0.2.0-alpha.883](https://github.com/mittwald/flow/compare/0.2.0-alpha.882...0.2.0-alpha.883) (2026-07-01)
+
+### Bug Fixes
+
+* **Popover:** hide decorative tip from accessibility tree ([#2589](https://github.com/mittwald/flow/issues/2589)) ([0a06977](https://github.com/mittwald/flow/commit/0a0697744036897456e2cff1b8d8e329c6d5bd56))
+
+# [0.2.0-alpha.882](https://github.com/mittwald/flow/compare/0.2.0-alpha.881...0.2.0-alpha.882) (2026-07-01)
+
+### Bug Fixes
+
+* **Remote:** import flow components from flr-universal only ([#2588](https://github.com/mittwald/flow/issues/2588)) ([9a418a9](https://github.com/mittwald/flow/commit/9a418a91b0360e1f1e27acec512d153083472cea))
+
+# [0.2.0-alpha.881](https://github.com/mittwald/flow/compare/0.2.0-alpha.880...0.2.0-alpha.881) (2026-06-30)
+
+### Features
+
+* add color scheme to all flow classes ([#2587](https://github.com/mittwald/flow/issues/2587)) ([03457ed](https://github.com/mittwald/flow/commit/03457ed26d6f97dbe14c28fda4a16522b04480db))
+
+# [0.2.0-alpha.880](https://github.com/mittwald/flow/compare/0.2.0-alpha.879...0.2.0-alpha.880) (2026-06-30)
+
+### Bug Fixes
+
+* **Calendar:** Fix size for small mobile ([#2586](https://github.com/mittwald/flow/issues/2586)) ([ac6f72c](https://github.com/mittwald/flow/commit/ac6f72cbdbc23d5dd6157bf9289b7665d730b4af))
+
+# [0.2.0-alpha.879](https://github.com/mittwald/flow/compare/0.2.0-alpha.878...0.2.0-alpha.879) (2026-06-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.878](https://github.com/mittwald/flow/compare/0.2.0-alpha.877...0.2.0-alpha.878) (2026-06-29)
+
+### Features
+
+* **LabeledValue:** improve accessibility ([73b9dfa](https://github.com/mittwald/flow/commit/73b9dfa415b576868e33210208ca14eda0071930))
+
+# [0.2.0-alpha.877](https://github.com/mittwald/flow/compare/0.2.0-alpha.876...0.2.0-alpha.877) (2026-06-29)
+
+### Bug Fixes
+
+* **Modal:** fix modal heading accessibility ([1d14ff6](https://github.com/mittwald/flow/commit/1d14ff685fb96ed53ffaeb0e85ff81728694bf34))
+
+### Features
+
+* **Modal:** hide section separators ([#2572](https://github.com/mittwald/flow/issues/2572)) ([5d95034](https://github.com/mittwald/flow/commit/5d9503429bbb5a2d1e84438711db686da5d246df))
+
+# [0.2.0-alpha.876](https://github.com/mittwald/flow/compare/0.2.0-alpha.875...0.2.0-alpha.876) (2026-06-29)
+
+### Features
+
+* **FieldError:** announce fieldError message to aria ([#2581](https://github.com/mittwald/flow/issues/2581)) ([b6809b2](https://github.com/mittwald/flow/commit/b6809b24d76b4435d65ce183a0d6c5df0b6aaa2a))
+
+# [0.2.0-alpha.875](https://github.com/mittwald/flow/compare/0.2.0-alpha.874...0.2.0-alpha.875) (2026-06-25)
+
+### Bug Fixes
+
+* **List:** do not use labelled by and label at the same time ([#2578](https://github.com/mittwald/flow/issues/2578)) ([8595bdd](https://github.com/mittwald/flow/commit/8595bddf1d75d149c27d311f325d14752334d640))
+
+# [0.2.0-alpha.874](https://github.com/mittwald/flow/compare/0.2.0-alpha.873...0.2.0-alpha.874) (2026-06-25)
+
+### Bug Fixes
+
+* **NavigationGroup:** remove unnecessary labelled by ([#2574](https://github.com/mittwald/flow/issues/2574)) ([b3c4b58](https://github.com/mittwald/flow/commit/b3c4b584730a247c1040d2a4e544afa49985db1e))
+
+# [0.2.0-alpha.873](https://github.com/mittwald/flow/compare/0.2.0-alpha.872...0.2.0-alpha.873) (2026-06-25)
+
+### Bug Fixes
+
+* **Cropper:** performance optimization ([#2577](https://github.com/mittwald/flow/issues/2577)) ([108dcee](https://github.com/mittwald/flow/commit/108dceecb6bd4686863bb137ee1d417b25e73bec))
+
 # [0.2.0-alpha.872](https://github.com/mittwald/flow/compare/0.2.0-alpha.871...0.2.0-alpha.872) (2026-06-25)
 
 ### Bug Fixes

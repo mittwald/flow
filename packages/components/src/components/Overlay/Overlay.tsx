@@ -11,8 +11,13 @@ import type {
   OverlayOpenHandler,
   OverlayOpenStateHandler,
 } from "@/lib/controller/overlay/OverlayController";
+import type * as Aria from "react-aria-components";
 
-export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
+export interface OverlayProps
+  extends
+    PropsWithChildren,
+    PropsWithClassName,
+    Pick<Aria.DialogProps, "aria-labelledby"> {
   ref?: Ref<HTMLDivElement>;
   /** The controller to control the overlay state. */
   controller?: OverlayController;
@@ -37,6 +42,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
     isDefaultOpen,
     isOpen: isOpenFromProps,
     ref,
+    "aria-labelledby": ariaLabelledBy,
     ...controllerOptions
   } = props;
 
@@ -59,6 +65,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       ref={ref}
       isDismissable={isDismissable}
       className={rootClassName}
+      aria-labelledby={ariaLabelledBy}
     >
       <OverlayContextProvider type="Modal" controller={controller}>
         {children}

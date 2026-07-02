@@ -1,4 +1,5 @@
 import {
+  type IconCategory,
   type IconDefinition,
   type IconDefinitions,
   type IconVendor,
@@ -80,6 +81,7 @@ export const getIndexFileContent = (icons: IconDefinitions) => {
   return `\
     ${iconsContent}
     export * from "../iconSet.ts";
+    export * from "../iconCategories.ts";
   `;
 };
 
@@ -105,11 +107,37 @@ export const getIconSetFileContent = (
 
   return `\
     ${imports}
-    
+
     export const ${iconSetName} = {
       ${registryEntries}
     } as const;
 
     export default ${iconSetName};
+  `;
+};
+
+const categoryOrder: IconCategory[] = ["functional", "decorative", "status"];
+
+export const getIconCategoriesFileContent = (icons: IconDefinitions) => {
+  const entries = categoryOrder
+    .map((category) => {
+      const names = Object.entries(icons)
+        .filter(([, icon]) => icon.category === category && !icon.deprecated)
+        .map(([name]) => `"${name}"`);
+
+      return `\
+        ${category}: [${names.join(", ")}],
+      `;
+    })
+    .join("");
+
+  return `\
+    export const iconCategories = {
+      ${entries}
+    } as const;
+
+    export type IconCategory = keyof typeof iconCategories;
+
+    export default iconCategories;
   `;
 };

@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
+
+### Bug Fixes
+
+* **Chat:** improve screen reader experience ([#2590](https://github.com/mittwald/flow/issues/2590)) ([2ac1351](https://github.com/mittwald/flow/commit/2ac1351303fab2d647061d85e66bbf92717aa5aa))
+
+# [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.883](https://github.com/mittwald/flow/compare/0.2.0-alpha.882...0.2.0-alpha.883) (2026-07-01)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.882](https://github.com/mittwald/flow/compare/0.2.0-alpha.881...0.2.0-alpha.882) (2026-07-01)
+
+### Bug Fixes
+
+* **Remote:** import flow components from flr-universal only ([#2588](https://github.com/mittwald/flow/issues/2588)) ([9a418a9](https://github.com/mittwald/flow/commit/9a418a91b0360e1f1e27acec512d153083472cea))
+
+# [0.2.0-alpha.881](https://github.com/mittwald/flow/compare/0.2.0-alpha.880...0.2.0-alpha.881) (2026-06-30)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.880](https://github.com/mittwald/flow/compare/0.2.0-alpha.879...0.2.0-alpha.880) (2026-06-30)
+
+### Bug Fixes
+
+* **Calendar:** Fix size for small mobile ([#2586](https://github.com/mittwald/flow/issues/2586)) ([ac6f72c](https://github.com/mittwald/flow/commit/ac6f72cbdbc23d5dd6157bf9289b7665d730b4af))
+
+# [0.2.0-alpha.879](https://github.com/mittwald/flow/compare/0.2.0-alpha.878...0.2.0-alpha.879) (2026-06-29)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.878](https://github.com/mittwald/flow/compare/0.2.0-alpha.877...0.2.0-alpha.878) (2026-06-29)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.877](https://github.com/mittwald/flow/compare/0.2.0-alpha.876...0.2.0-alpha.877) (2026-06-29)
+
+### Features
+
+* **Modal:** hide section separators ([#2572](https://github.com/mittwald/flow/issues/2572)) ([5d95034](https://github.com/mittwald/flow/commit/5d9503429bbb5a2d1e84438711db686da5d246df))
+
+# [0.2.0-alpha.876](https://github.com/mittwald/flow/compare/0.2.0-alpha.875...0.2.0-alpha.876) (2026-06-29)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.875](https://github.com/mittwald/flow/compare/0.2.0-alpha.874...0.2.0-alpha.875) (2026-06-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.874](https://github.com/mittwald/flow/compare/0.2.0-alpha.873...0.2.0-alpha.874) (2026-06-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.873](https://github.com/mittwald/flow/compare/0.2.0-alpha.872...0.2.0-alpha.873) (2026-06-25)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.872](https://github.com/mittwald/flow/compare/0.2.0-alpha.871...0.2.0-alpha.872) (2026-06-25)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

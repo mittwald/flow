@@ -31,12 +31,13 @@ export const MessageThread = flowComponent("MessageThread", (props) => {
           styles[props.type ?? "responder"],
         );
       }),
+      elementType: "li",
     },
   };
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>{children}</div>
+      <ul className={rootClassName}>{children}</ul>
     </PropsContextProvider>
   );
 });

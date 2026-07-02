@@ -11,10 +11,7 @@ import {
   <FileDropZone onChange={(files) => console.log(files)}>
     <IconUpload />
     <Heading>Datei ablegen</Heading>
-    <FileField
-      name="file"
-      onChange={(files) => console.log(files)}
-    >
+    <FileField>
       <Button>Datei auswählen</Button>
     </FileField>
   </FileDropZone>

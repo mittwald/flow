@@ -120,3 +120,33 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
     color: inherit;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :root[data-theme="system"] {
+    [class*="flow--"] {
+      color-scheme: dark;
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]),
+  :root[data-theme="system"] {
+    [class*="flow--"] {
+      color-scheme: light;
+    }
+  }
+}
+
+:root[data-theme="dark"] {
+  [class*="flow--"] {
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="light"] {
+  [class*="flow--"] {
+    color-scheme: light;
+  }
+}

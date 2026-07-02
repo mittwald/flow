@@ -16,6 +16,7 @@ import { Children, isValidElement, type PropsWithChildren } from "react";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
+import { IconLibrary } from "@/lib/mdx/components/IconLibrary/IconLibrary";
 import { onlyText } from "react-children-utilities";
 import { AnchorLinkHeading } from "@/lib/mdx/components/MdxFileView/AnchorLinkHeading";
 
@@ -30,6 +31,7 @@ export const createCustomComponents = () => {
     DoAndDont: ExamplesContainer,
     ColumnLayout,
     DesignTokenTable,
+    IconLibrary,
     Label,
     Link,
 
