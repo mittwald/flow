@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
+
+### Bug Fixes
+
+* **Chat:** improve screen reader experience ([#2590](https://github.com/mittwald/flow/issues/2590)) ([2ac1351](https://github.com/mittwald/flow/commit/2ac1351303fab2d647061d85e66bbf92717aa5aa))
+
 # [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
