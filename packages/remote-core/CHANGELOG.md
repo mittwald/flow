@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.888](https://github.com/mittwald/flow/compare/0.2.0-alpha.887...0.2.0-alpha.888) (2026-07-03)
+
+### Features
+
+* **Remote:** add async serializers ([#2596](https://github.com/mittwald/flow/issues/2596)) ([57e2ee5](https://github.com/mittwald/flow/commit/57e2ee5fdb82a7f13b19fe28574ced14d2a46a93))
+
 # [0.2.0-alpha.887](https://github.com/mittwald/flow/compare/0.2.0-alpha.886...0.2.0-alpha.887) (2026-07-02)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

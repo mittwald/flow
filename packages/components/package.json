@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.887",
+  "version": "0.2.0-alpha.888",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -56,7 +56,6 @@
     "test:unit:dev": "vitest dev --project=unit*"
   },
   "dependencies": {
-    "use-debounce": "^10.1.1",
     "@codemirror/language": "^6.12.3",
     "@codemirror/lint": "^6.9.7",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
