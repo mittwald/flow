@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import {
-  Badge,
   Content,
   Flex,
   Heading,
@@ -268,51 +267,51 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
               role="listbox"
               aria-label={hasQuery ? "Suchergebnisse" : "Bereiche"}
             >
-              {items.map((item, itemIndex) => (
-                <li key={item.entry.id} role="presentation">
-                  <a
-                    ref={(element) => {
-                      itemRefs.current[itemIndex] = element;
-                    }}
-                    id={optionId(itemIndex)}
-                    role="option"
-                    aria-selected={itemIndex === activeIndex}
-                    href={
-                      item.hash
-                        ? `${item.entry.url}#${item.hash}`
-                        : item.entry.url
-                    }
-                    className={clsx(
-                      styles.result,
-                      itemIndex === activeIndex && styles.active,
-                    )}
-                    onMouseMove={() => setActiveIndex(itemIndex)}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      openResult(item);
-                    }}
-                  >
-                    <Flex direction="column" gap="xs">
-                      <Flex direction="row" gap="s" align="center">
+              {items.map((item, itemIndex) => {
+                const breadcrumb = [...item.entry.breadcrumb, item.entry.tab]
+                  .filter(Boolean)
+                  .join(" › ");
+                return (
+                  <li key={item.entry.id} role="presentation">
+                    <a
+                      ref={(element) => {
+                        itemRefs.current[itemIndex] = element;
+                      }}
+                      id={optionId(itemIndex)}
+                      role="option"
+                      aria-selected={itemIndex === activeIndex}
+                      href={
+                        item.hash
+                          ? `${item.entry.url}#${item.hash}`
+                          : item.entry.url
+                      }
+                      className={clsx(
+                        styles.result,
+                        itemIndex === activeIndex && styles.active,
+                      )}
+                      onMouseMove={() => setActiveIndex(itemIndex)}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        openResult(item);
+                      }}
+                    >
+                      <Flex direction="column" gap="xs">
                         <Text className={styles.resultTitle}>
                           <HighlightedText segments={item.titleSegments} />
                         </Text>
-                        {item.entry.tab && <Badge>{item.entry.tab}</Badge>}
+                        {breadcrumb && (
+                          <Text className={styles.meta}>{breadcrumb}</Text>
+                        )}
+                        {item.snippet.length > 0 && (
+                          <Text className={styles.snippet}>
+                            <HighlightedText segments={item.snippet} />
+                          </Text>
+                        )}
                       </Flex>
-                      {item.entry.breadcrumb.length > 0 && (
-                        <Text className={styles.meta}>
-                          {item.entry.breadcrumb.join(" › ")}
-                        </Text>
-                      )}
-                      {item.snippet.length > 0 && (
-                        <Text className={styles.snippet}>
-                          <HighlightedText segments={item.snippet} />
-                        </Text>
-                      )}
-                    </Flex>
-                  </a>
-                </li>
-              ))}
+                    </a>
+                  </li>
+                );
+              })}
             </Flex>
           )}
         </Flex>
