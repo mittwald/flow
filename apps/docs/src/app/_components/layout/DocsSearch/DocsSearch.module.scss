@@ -1,50 +1,20 @@
 .trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--size-px--s);
-  min-width: 14rem;
+  padding-inline-start: var(--size-px--s) !important;
   padding-block: calc(
     var(--form-control--padding-y) - var(--form-control--border-width)
-  );
-  padding-inline: var(--form-control--padding-x);
-  border-width: var(--form-control--border-width);
-  border-style: var(--form-control--border-style);
-  border-radius: var(--form-control--corner-radius);
-  border-color: var(--form-control--border-color--default);
+  ) !important;
+  border-color: var(--form-control--border-color--default) !important;
+  border-width: var(--form-control--border-width) !important;
+  border-style: var(--form-control--border-style) !important;
+  color: var(--form-control--placeholder-color--default) !important;
+  font-weight: normal !important;
+  border-radius: 20px !important;
+  width: 200px !important;
   background-color: var(--form-control--background-color--default);
-  color: var(--form-control--placeholder-color--default);
-  font: inherit;
-  cursor: pointer;
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--transition--duration--default);
-}
 
-.trigger:hover {
-  background-color: var(--form-control--background-color--hover);
-}
-
-.trigger:focus-visible {
-  border-color: var(--form-control--border-color--focused);
-  outline: none;
-}
-
-.triggerKbd {
-  flex: none;
-  margin-inline-start: auto;
-}
-
-.trigger.iconOnly {
-  min-width: 0;
-  gap: 0;
-  border-color: transparent;
-  background-color: transparent;
-  color: inherit;
-  padding: var(--size-px--s);
-  border-radius: var(--corner-radius--m);
-}
-
-.trigger.iconOnly:hover {
-  background-color: var(--neutral--color--200);
+  :global(.flow--button--content) {
+    justify-content: space-between !important;
+  }
 }
 
 .results {

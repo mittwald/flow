@@ -38,6 +38,33 @@ type LoadStatus = "idle" | "loading" | "error";
 
 const RESULT_LIMIT = 20;
 
+const DEFAULT_SECTIONS = [
+  {
+    segment: "01-get-started",
+    title: "Get started",
+    description:
+      "Alles für den Einstieg in flow – von den wichtigsten Grundlagen bis zu ersten Schritten für einen schnellen Start.",
+  },
+  {
+    segment: "02-foundations",
+    title: "Foundations",
+    description:
+      "Die Grundlagen des Designsystems – von Designprinzipien bis zu Farben, Typografie und weiteren Basisbausteinen.",
+  },
+  {
+    segment: "03-patterns",
+    title: "Patterns",
+    description:
+      "Wiederkehrende Nutzerabläufe und Best Practices, die zeigen, wie mehrere Components sinnvoll zusammenspielen.",
+  },
+  {
+    segment: "04-components",
+    title: "Components",
+    description:
+      "Die Dokumentation aller Components mit Beschreibungen, Eigenschaften, Anwendungsfällen und Implementierungshinweisen.",
+  },
+];
+
 const searchIndexUrl = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/search-index`;
 
 const optionId = (index: number): string => `docs-search-result-${index}`;
@@ -76,6 +103,42 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
   );
 
   const hasQuery = query.trim().length > 0;
+
+  const items = useMemo<SearchResult[]>(() => {
+    if (hasQuery) {
+      return results;
+    }
+    if (!index) {
+      return [];
+    }
+    return DEFAULT_SECTIONS.flatMap((section) => {
+      const inSection = index.filter((entry) =>
+        entry.url.startsWith(`/${section.segment}/`),
+      );
+      const landing =
+        inSection.find((entry) => entry.url.endsWith("/overview")) ??
+        inSection[0];
+      if (!landing) {
+        return [];
+      }
+      return [
+        {
+          entry: {
+            id: section.segment,
+            url: landing.url,
+            title: section.title,
+            section: section.title,
+            breadcrumb: [],
+            headings: [],
+            content: "",
+          },
+          score: 0,
+          titleSegments: [{ text: section.title, match: false }],
+          snippet: [{ text: section.description, match: false }],
+        },
+      ];
+    });
+  }, [hasQuery, results, index]);
 
   const loadIndex = useCallback(() => {
     if (loadStartedRef.current) {
@@ -122,12 +185,12 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
     if (!input) {
       return;
     }
-    if (hasQuery && results[activeIndex]) {
+    if (items[activeIndex]) {
       input.setAttribute("aria-activedescendant", optionId(activeIndex));
     } else {
       input.removeAttribute("aria-activedescendant");
     }
-  }, [activeIndex, results, hasQuery]);
+  }, [activeIndex, items]);
 
   useEffect(() => {
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
@@ -141,28 +204,27 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
   }, [controller]);
 
   const openResult = (result: SearchResult): void => {
-    const target = result.hash
-      ? `${result.entry.url}#${result.hash}`
-      : result.entry.url;
     controller.close();
-    router.push(target);
+    router.push(
+      result.hash ? `${result.entry.url}#${result.hash}` : result.entry.url,
+    );
   };
 
   const onKeyDownCapture = (event: KeyboardEvent): void => {
-    if (results.length === 0) {
+    if (items.length === 0) {
       return;
     }
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setActiveIndex((current) => Math.min(current + 1, results.length - 1));
+      setActiveIndex((current) => Math.min(current + 1, items.length - 1));
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setActiveIndex((current) => Math.max(current - 1, 0));
     } else if (event.key === "Enter") {
-      const result = results[activeIndex];
-      if (result) {
+      const item = items[activeIndex];
+      if (item) {
         event.preventDefault();
-        openResult(result);
+        openResult(item);
       }
     }
   };
@@ -187,78 +249,72 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
             onChange={setQuery}
           />
 
-          {status === "loading" && (
+          {hasQuery && !index && status === "loading" ? (
             <Flex justify="center" padding="l">
               <LoadingSpinner />
             </Flex>
-          )}
-
-          {status === "error" && (
+          ) : hasQuery && !index && status === "error" ? (
             <Text>
               Die Suche konnte nicht geladen werden. Bitte versuche es erneut.
             </Text>
-          )}
-
-          {index &&
-            hasQuery &&
-            (results.length > 0 ? (
-              <Flex
-                elementType="ul"
-                direction="column"
-                gap="xs"
-                className={styles.results}
-                role="listbox"
-                aria-label="Suchergebnisse"
-              >
-                {results.map((result, resultIndex) => (
-                  <li key={result.entry.id} role="presentation">
-                    <a
-                      ref={(element) => {
-                        itemRefs.current[resultIndex] = element;
-                      }}
-                      id={optionId(resultIndex)}
-                      role="option"
-                      aria-selected={resultIndex === activeIndex}
-                      href={
-                        result.hash
-                          ? `${result.entry.url}#${result.hash}`
-                          : result.entry.url
-                      }
-                      className={clsx(
-                        styles.result,
-                        resultIndex === activeIndex && styles.active,
-                      )}
-                      onMouseMove={() => setActiveIndex(resultIndex)}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        openResult(result);
-                      }}
-                    >
-                      <Flex direction="column" gap="xs">
-                        <Flex direction="row" gap="s" align="center">
-                          <Text className={styles.resultTitle}>
-                            <HighlightedText segments={result.titleSegments} />
-                          </Text>
-                          {result.entry.tab && (
-                            <Badge>{result.entry.tab}</Badge>
-                          )}
-                        </Flex>
-                        <Text className={styles.meta}>
-                          {result.entry.breadcrumb.join(" › ")}
+          ) : hasQuery && index && items.length === 0 ? (
+            <Text>Keine Ergebnisse für „{query.trim()}“.</Text>
+          ) : (
+            <Flex
+              elementType="ul"
+              direction="column"
+              gap="xs"
+              className={styles.results}
+              role="listbox"
+              aria-label={hasQuery ? "Suchergebnisse" : "Bereiche"}
+            >
+              {items.map((item, itemIndex) => (
+                <li key={item.entry.id} role="presentation">
+                  <a
+                    ref={(element) => {
+                      itemRefs.current[itemIndex] = element;
+                    }}
+                    id={optionId(itemIndex)}
+                    role="option"
+                    aria-selected={itemIndex === activeIndex}
+                    href={
+                      item.hash
+                        ? `${item.entry.url}#${item.hash}`
+                        : item.entry.url
+                    }
+                    className={clsx(
+                      styles.result,
+                      itemIndex === activeIndex && styles.active,
+                    )}
+                    onMouseMove={() => setActiveIndex(itemIndex)}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      openResult(item);
+                    }}
+                  >
+                    <Flex direction="column" gap="xs">
+                      <Flex direction="row" gap="s" align="center">
+                        <Text className={styles.resultTitle}>
+                          <HighlightedText segments={item.titleSegments} />
                         </Text>
-                        {result.snippet.length > 0 && (
-                          <Text className={styles.snippet}>
-                            <HighlightedText segments={result.snippet} />
-                          </Text>
-                        )}
+                        {item.entry.tab && <Badge>{item.entry.tab}</Badge>}
                       </Flex>
-                    </a>
-                  </li>
-                ))}
-              </Flex>
-            ) : (
-              <Text>Keine Ergebnisse für „{query.trim()}“.</Text>
-            ))}
+                      {item.entry.breadcrumb.length > 0 && (
+                        <Text className={styles.meta}>
+                          {item.entry.breadcrumb.join(" › ")}
+                        </Text>
+                      )}
+                      {item.snippet.length > 0 && (
+                        <Text className={styles.snippet}>
+                          <HighlightedText segments={item.snippet} />
+                        </Text>
+                      )}
+                    </Flex>
+                  </a>
+                </li>
+              ))}
+            </Flex>
+          )}
         </Flex>
       </Content>
     </Modal>
