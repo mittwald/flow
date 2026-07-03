@@ -19,7 +19,7 @@ import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileHeaderNavigation from "@/app/_components/layout/MobileHeaderNavigation";
 import { groupBy } from "remeda";
 import { usePathname } from "next/navigation";
-import { ThemeSwitcherButton } from "@/app/_components/layout/HeaderNavigation/components/ThemeSwitcherButton";
+import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
 import Groups from "@/app/_components/layout/Groups";
 import { SearchButton } from "@/app/_components/layout/DocsSearch";
 

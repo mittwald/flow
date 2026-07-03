@@ -1,12 +1,21 @@
 "use client";
 import { type FC } from "react";
 import styles from "./Header.module.scss";
-import { Link, useModalController } from "@mittwald/flow-react-components";
-import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
+import {
+  Link,
+  useModalController,
+  HeaderNavigation as HeaderNavigationComponent,
+  Flex,
+} from "@mittwald/flow-react-components";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
-import { SearchDialog } from "@/app/_components/layout/DocsSearch";
+import {
+  SearchButton,
+  SearchDialog,
+} from "@/app/_components/layout/DocsSearch";
+import Groups from "@/app/_components/layout/Groups";
+import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -19,14 +28,21 @@ const Header: FC<Props> = (props) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <Link href="/" aria-label="Flow">
-          <FlowLogo className={styles.logo} />
-        </Link>
-        <HeaderNavigation
-          className={styles.headerNavigation}
-          docs={docs.map((mdx) => mdx.serialize())}
-          searchController={searchController}
-        />
+        <Flex align="center" gap="l">
+          <Link href="/" aria-label="Flow">
+            <FlowLogo className={styles.logo} />
+          </Link>
+          <HeaderNavigationComponent
+            className={styles.headerNavigation}
+            aria-label="Header Navigation"
+          >
+            <Groups docs={docs.map((mdx) => mdx.serialize())} />
+          </HeaderNavigationComponent>
+        </Flex>
+        <Flex gap="m">
+          <SearchButton controller={searchController} />
+          <ThemeSwitcherButton />
+        </Flex>
         <MobileNavigation
           docs={docs.map((mdx) => mdx.serialize())}
           className={styles.mobileNavigation}
