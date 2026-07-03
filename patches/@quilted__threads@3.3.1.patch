@@ -1,0 +1,572 @@
+diff --git a/build/esm/Thread.mjs b/build/esm/Thread.mjs
+index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70fec845c4 100644
+--- a/build/esm/Thread.mjs
++++ b/build/esm/Thread.mjs
+@@ -5,42 +5,6 @@ import { MESSAGE_FUNCTION_RELEASE, MESSAGE_FUNCTION_RESULT, MESSAGE_CALL_RESULT,
+ import { ThreadFunctionsAutomatic } from './functions/ThreadFunctionsAutomatic.mjs';
+ import { ThreadSerializationStructuredClone } from './serialization/ThreadSerializationStructuredClone.mjs';
+ 
+-/**
+- * An object that can serialize and deserialize values communicated between two threads.
+- */
+-
+-/**
+- * An object that can serialize and deserialize values communicated between two threads.
+- */
+-
+-/**
+- * Options to customize the creation of a `ThreadSerialization` instance.
+- */
+-
+-/**
+- * Options to customize the creation of a `Thread` instance.
+- */
+-
+-/**
+- * An object backing a `Thread` that provides the message-passing interface
+- * that allows communication to flow between environments. This message-passing
+- * interface is based on the [`postMessage` interface](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage),
+- * which is easily adaptable to many JavaScript objects and environments.
+- */
+-
+-/**
+- * A map of messages that can be sent between threads.
+- */
+-
+-/**
+- * The possible data payloads that can be transferred between threads.
+- */
+-
+-/**
+- * A helper type that extracts all callable methods that can be safely proxied
+- * between threads; that is, ones which return a promise or async iterator.
+- */
+-
+ /**
+  * A thread represents a target JavaScript environment that exposes a set
+  * of callable, asynchronous methods. The thread takes care of automatically
+@@ -49,46 +13,17 @@ import { ThreadSerializationStructuredClone } from './serialization/ThreadSerial
+  * own code.
+  */
+ class Thread {
+-  /**
+-   * An object that exposes the methods that can be called on the paired thread.
+-   * This object will automatically encode and decode arguments and return values
+-   * as necessary.
+-   */
+-
+-  /**
+-   * An object that exposes the methods that can be called on this thread by the
+-   * paired thread. To set these methods, pass the `exports` option when creating
+-   * a new `Thread`.
+-   */
+-
+-  /**
+-   * An object that provides the message-passing interface that allows communication
+-   * to flow between environments.
+-   */
+-
+-  /**
+-   * An object that manages how functions are proxied between threads.
+-   */
+-
+-  /**
+-   * An object that manages how values are serialized and deserialized between threads.
+-   */
+-
+-  /**
+-   * An `AbortSignal` that indicates whether the communication channel is still open.
+-   */
+   get signal() {
+     return this.#abort.signal;
+   }
+ 
+-  /**
+-   * A boolean indicating whether the communication channel is still open.
+-   */
+   get closed() {
+     return this.#abort.signal.aborted;
+   }
++
+   #abort;
+   #idsToResolver = (() => new Map())();
++
+   constructor(messages, {
+     imports,
+     exports,
+@@ -102,105 +37,105 @@ class Thread {
+     this.imports = createThreadImports(this.#handlerForCall.bind(this), imports);
+     this.functions = functions;
+     this.serialization = serialization;
++
+     this.functions.start?.(this);
+     this.serialization.start?.(this);
++
+     this.signal.addEventListener('abort', () => {
+       for (const id of this.#idsToResolver.keys()) {
+         this.#resolveCall(id, undefined, new ThreadClosedError());
+       }
+       this.#idsToResolver.clear();
+-    }, {
+-      once: true
+-    });
+-    messages.listen(async rawData => {
++    }, { once: true });
++
++    messages.listen(async (rawData) => {
+       const isThreadMessageData = Array.isArray(rawData) && typeof rawData[0] === 'number';
+-      if (!isThreadMessageData) {
+-        return;
+-      }
++      if (!isThreadMessageData) return;
++
+       const data = rawData;
++
+       switch (data[0]) {
+-        case MESSAGE_CALL:
+-          {
+-            const [, id, property, args] = data;
+-            const func = this.exports[property] ?? (() => {
+-              throw new Error(`No '${property}' method is exported from this thread`);
+-            });
+-            await this.#callLocal(func, args, (value, error, transferable) => {
+-              this.messages.send([MESSAGE_CALL_RESULT, id, value, error], transferable);
+-            });
+-            break;
+-          }
+-        case MESSAGE_FUNCTION_CALL:
+-          {
+-            const [, callID, funcID, args] = data;
+-            const func = this.functions.get(funcID, this) ?? missingThreadFunction;
+-            await this.#callLocal(func, args, (value, error, transferable) => {
+-              this.messages.send([MESSAGE_FUNCTION_RESULT, callID, value, error], transferable);
+-            });
+-            break;
+-          }
++        case MESSAGE_CALL: {
++          const [, id, property, args] = data;
++          const func = this.exports[property] ?? (() => {
++            throw new Error(`No '${property}' method is exported from this thread`);
++          });
++
++          await this.#callLocal(func, args, (value, error, transferable) => {
++            this.messages.send([MESSAGE_CALL_RESULT, id, value, error], transferable);
++          });
++
++          break;
++        }
++
++        case MESSAGE_FUNCTION_CALL: {
++          const [, callID, funcID, args] = data;
++          const func = this.functions.get(funcID, this) ?? missingThreadFunction;
++
++          await this.#callLocal(func, args, (value, error, transferable) => {
++            this.messages.send([MESSAGE_FUNCTION_RESULT, callID, value, error], transferable);
++          });
++
++          break;
++        }
++
+         case MESSAGE_CALL_RESULT:
+-        case MESSAGE_FUNCTION_RESULT:
+-          {
+-            this.#resolveCall(...data.slice(1));
+-            break;
+-          }
+-        case MESSAGE_FUNCTION_RELEASE:
+-          {
+-            const id = data[1];
+-            this.functions.release(id, this);
+-            break;
+-          }
++        case MESSAGE_FUNCTION_RESULT: {
++          this.#resolveCall(...data.slice(1));
++          break;
++        }
++
++        case MESSAGE_FUNCTION_RELEASE: {
++          const id = data[1];
++          this.functions.release(id, this);
++          break;
++        }
+       }
+-    }, {
+-      signal: this.signal
+-    });
++    }, { signal: this.signal });
+   }
+ 
+-  /**
+-   * Closes the communication channel between the two threads. This will prevent
+-   * any further communication between the threads, and will clean up any memory
+-   * associated with in-progress communication. It will also reject any inflight
+-   * function calls between threads with a `ThreadClosedError`.
+-   */
+   close() {
+     this.#abort.abort();
+   }
+ 
+-  /**
+-   * Requests that the thread provide the context needed to make a function
+-   * call between threads. You provide this method a function to call and the
+-   * unserialized arguments you wish to call it with, and the thread will call
+-   * the function you provided with a serialized call ID, the serialized arguments,
+-   * and any transferable objects that need to be passed between threads.
+-   */
+-  call(func, args) {
++  async call(func, args) {
+     if (this.closed) {
+       return Promise.reject(new ThreadClosedError());
+     }
++
+     const transferable = [];
+-    const serialized = this.serialization.serialize(args, this, transferable);
++    const serialized = await this.serialization.serialize(args, this, transferable);
++
+     const id = nanoid();
+     const done = this.#waitForResult(id);
++
+     func(id, serialized, transferable);
++
+     return done;
+   }
++
+   async #callLocal(func, args, withResult) {
+     try {
+-      const result = this.functions.call ? await this.functions.call(func, args, this) : await func(...this.serialization.deserialize(args, this));
++      const result = this.functions.call
++        ? await this.functions.call(func, args, this) // keep original contract
++        : await func(...(await this.serialization.deserialize(args, this)));
++
+       const transferable = [];
+-      const serialized = this.serialization.serialize(result, this, transferable);
++      const serialized = await this.serialization.serialize(result, this, transferable);
++
+       withResult(serialized, undefined, transferable);
+     } catch (error) {
+-      withResult(undefined, this.serialization.serialize(error, this));
++      withResult(undefined, await this.serialization.serialize(error, this));
+     }
+   }
++
+   #handlerForCall(property) {
+     return (...args) => {
+       try {
+         if (typeof property !== 'string' && typeof property !== 'number') {
+           throw new Error(`Can’t call a symbol method on a thread: ${property.toString()}`);
+         }
++
+         return this.call((id, serializedArgs, transferable) => {
+           this.messages.send([MESSAGE_CALL, id, property, serializedArgs], transferable);
+         }, args);
+@@ -209,48 +144,64 @@ class Thread {
+       }
+     };
+   }
++
+   #resolveCall(...args) {
+     const callID = args[0];
+     const resolver = this.#idsToResolver.get(callID);
++
+     if (resolver) {
+       resolver(...args);
+       this.#idsToResolver.delete(callID);
+     }
+   }
++
+   #waitForResult(id) {
+     const promise = new Promise((resolve, reject) => {
+-      this.#idsToResolver.set(id, (_, value, error) => {
+-        if (error == null) {
+-          resolve(this.serialization.deserialize(value, this));
+-        } else {
+-          reject(this.serialization.deserialize(error, this));
++      this.#idsToResolver.set(id, async (_, value, error) => {
++        try {
++          if (error == null) {
++            resolve(await this.serialization.deserialize(value, this));
++          } else {
++            reject(await this.serialization.deserialize(error, this));
++          }
++        } catch (deserializeError) {
++          reject(deserializeError);
+         }
+       });
+     });
++
+     Object.defineProperty(promise, Symbol.asyncIterator, {
+       async *value() {
+         const result = await promise;
++
+         Object.defineProperty(result, Symbol.asyncIterator, {
+           value: () => result
+         });
++
+         yield* result;
+       }
+     });
++
+     return promise;
+   }
+ }
++
+ function createThreadImports(handlerForImport, imported) {
+   let call;
++
+   if (imported == null) {
+     if (typeof Proxy !== 'function') {
+       throw new Error(`You must pass an array of callable methods in environments without Proxies.`);
+     }
++
+     const cache = new Map();
++
+     call = new Proxy({}, {
+       get(_target, property) {
+         if (cache.has(property)) {
+           return cache.get(property);
+         }
++
+         const handler = handlerForImport(property);
+         cache.set(property, handler);
+         return handler;
+@@ -258,6 +209,7 @@ function createThreadImports(handlerForImport, imported) {
+     });
+   } else {
+     call = {};
++
+     for (const method of imported) {
+       Object.defineProperty(call, method, {
+         value: handlerForImport(method),
+@@ -267,8 +219,10 @@ function createThreadImports(handlerForImport, imported) {
+       });
+     }
+   }
++
+   return call;
+ }
++
+ function missingThreadFunction() {
+   throw new Error(`You attempted to call a function that is not stored. It may have already been released.`);
+ }
+diff --git a/build/esm/serialization/ThreadSerializationStructuredClone.mjs b/build/esm/serialization/ThreadSerializationStructuredClone.mjs
+index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdccd98d4df 100644
+--- a/build/esm/serialization/ThreadSerializationStructuredClone.mjs
++++ b/build/esm/serialization/ThreadSerializationStructuredClone.mjs
+@@ -17,6 +17,7 @@ const ASYNC_ITERATOR = '_@i';
+ class ThreadSerializationStructuredClone {
+   #customSerializer;
+   #customDeserializer;
++
+   constructor(options) {
+     this.#customSerializer = options?.serialize;
+     this.#customDeserializer = options?.deserialize;
+@@ -25,81 +26,108 @@ class ThreadSerializationStructuredClone {
+   /**
+    * Serializes a value into a structured cloning-compatible format that can be transferred between threads.
+    */
+-  serialize(value, thread, transferable) {
++  async serialize(value, thread, transferable) {
+     return this.#serializeInternal(value, thread, transferable);
+   }
+-  #serializeInternal(value, thread, transferable, seen = new Map(), isApplyingDefault = false) {
++
++  async #serializeInternal(value, thread, transferable, seen = new Map(), isApplyingDefault = false) {
+     if (value == null) return value;
+     if (seen.has(value)) return seen.get(value);
+ 
+     // Prevent circular references
+     seen.set(value, undefined);
++
+     if (typeof value === 'object') {
+       if (this.#customSerializer && !isApplyingDefault) {
+-        const customValue = this.#customSerializer(value, value => this.#serializeInternal(value, thread, transferable, seen, true), thread, transferable);
++        const customValue = await this.#customSerializer(
++          value,
++          (value) => this.#serializeInternal(value, thread, transferable, seen, true),
++          thread,
++          transferable,
++        );
++
+         if (customValue !== undefined) {
+           seen.set(value, customValue);
+           return customValue;
+         }
+       }
++
+       if (value[TRANSFERABLE]) {
+         transferable?.push(value);
+         seen.set(value, value);
+         return value;
+       }
+-      const serializeValue = value => {
++
++      const serializeValue = (value) => {
+         return this.#serializeInternal(value, thread, transferable, seen);
+       };
++
+       if (typeof value[SERIALIZE_METHOD] === 'function') {
+-        const result = value[SERIALIZE_METHOD]({
+-          serialize: serializeValue
++        const result = await value[SERIALIZE_METHOD]({
++          serialize: serializeValue,
+         });
++
+         seen.set(value, result);
+         return result;
+       }
++
+       if (Array.isArray(value)) {
+-        const result = value.map(item => serializeValue(item));
++        const result = await Promise.all(value.map((item) => serializeValue(item)));
+         seen.set(value, result);
+         return result;
+       }
++
+       if (value instanceof Map) {
+-        const entries = [...value.entries()].map(([key, value]) => {
+-          return [serializeValue(key), serializeValue(value)];
+-        });
++        const entries = await Promise.all(
++          [...value.entries()].map(async ([key, value]) => {
++            return [await serializeValue(key), await serializeValue(value)];
++          }),
++        );
++
+         const result = new Map(entries);
+         seen.set(value, result);
+         return result;
+       }
++
+       if (value instanceof Set) {
+-        const entries = [...value].map(entry => serializeValue(entry));
++        const entries = await Promise.all(
++          [...value].map((entry) => serializeValue(entry)),
++        );
++
+         const result = new Set(entries);
+         seen.set(value, result);
+         return result;
+       }
++
+       const valueIsIterator = isIterator(value);
++
+       if (isBasicObject(value) || valueIsIterator) {
+         const result = {};
++
+         for (const key of Object.keys(value)) {
+-          result[key] = serializeValue(value[key]);
++          result[key] = await serializeValue(value[key]);
+         }
++
+         if (valueIsIterator) {
+-          result.next ??= serializeValue(value.next.bind(value));
+-          result.return ??= serializeValue(value.return.bind(value));
+-          result.throw ??= serializeValue(value.throw.bind(value));
++          result.next ??= await serializeValue(value.next.bind(value));
++          result.return ??= await serializeValue(value.return.bind(value));
++          result.throw ??= await serializeValue(value.throw.bind(value));
+           result[ASYNC_ITERATOR] = true;
+         }
++
+         seen.set(value, result);
+         return result;
+       }
+     }
++
+     if (typeof value === 'function') {
+       const serialized = thread.functions.serialize(value, thread, transferable);
+-      const result = {
+-        [FUNCTION]: serialized
+-      };
++      const result = { [FUNCTION]: serialized };
++
+       seen.set(value, result);
+       return result;
+     }
++
+     seen.set(value, value);
+     return value;
+   }
+@@ -107,47 +135,75 @@ class ThreadSerializationStructuredClone {
+   /**
+    * Deserializes a structured cloning-compatible value from another thread.
+    */
+-  deserialize(value, thread) {
++  async deserialize(value, thread) {
+     return this.#deserializeInternal(value, thread);
+   }
+-  #deserializeInternal(value, thread, isApplyingDefault = false) {
++
++  async #deserializeInternal(value, thread, isApplyingDefault = false) {
+     if (value == null) return value;
++
+     if (typeof value === 'object') {
+       if (this.#customDeserializer && !isApplyingDefault) {
+-        const customValue = this.#customDeserializer(value, value => this.#deserializeInternal(value, thread, true), thread);
++        const customValue = await this.#customDeserializer(
++          value,
++          (value) => this.#deserializeInternal(value, thread, true),
++          thread,
++        );
++
+         if (customValue !== undefined) {
+           return customValue;
+         }
+       }
++
+       if (value == null) {
+         return value;
+       }
++
+       if (Array.isArray(value)) {
+-        return value.map(value => this.#deserializeInternal(value, thread));
++        return Promise.all(value.map((value) => this.#deserializeInternal(value, thread)));
+       }
++
+       if (value instanceof Map) {
+-        return new Map([...value].map(([key, value]) => [this.#deserializeInternal(key, thread), this.#deserializeInternal(value, thread)]));
++        const entries = await Promise.all(
++          [...value].map(async ([key, value]) => [
++            await this.#deserializeInternal(key, thread),
++            await this.#deserializeInternal(value, thread),
++          ]),
++        );
++
++        return new Map(entries);
+       }
++
+       if (value instanceof Set) {
+-        return new Set([...value].map(entry => this.#deserializeInternal(entry, thread)));
++        const entries = await Promise.all(
++          [...value].map((entry) => this.#deserializeInternal(entry, thread)),
++        );
++
++        return new Set(entries);
+       }
++
+       if (FUNCTION in value) {
+         const func = thread.functions.deserialize(value[FUNCTION], thread);
+         return func;
+       }
++
+       if (!isBasicObject(value)) {
+         return value;
+       }
++
+       const result = {};
++
+       for (const key of Object.keys(value)) {
+         if (key === ASYNC_ITERATOR) {
+           result[Symbol.asyncIterator] = () => result;
+         } else {
+-          result[key] = this.#deserializeInternal(value[key], thread);
++          result[key] = await this.#deserializeInternal(value[key], thread);
+         }
+       }
++
+       return result;
+     }
++
+     return value;
+   }
+ }
