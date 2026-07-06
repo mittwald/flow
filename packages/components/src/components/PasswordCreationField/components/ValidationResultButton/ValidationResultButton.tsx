@@ -9,7 +9,6 @@ import {
   ContextualHelp,
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
-import { Heading } from "@/components/Heading";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 interface Props extends PropsWithClassName {
@@ -45,14 +44,15 @@ export const ValidationResultButton: FC<Props> = (props) => {
     }) ?? [];
 
   return (
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger
+      label={translate.format("password.requirements.heading")}
+    >
       <Button
         data-component="showPasswordRules"
         isDisabled={isDisabled}
         className={className}
       />
       <ContextualHelp>
-        <Heading>{translate.format("password.requirements.heading")}</Heading>
         {validationResultComponents.length === 0 && (
           <ValidationResultEntry result={{ isValid: true }} unspecifiedRules />
         )}

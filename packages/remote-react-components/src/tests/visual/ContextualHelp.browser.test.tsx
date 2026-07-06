@@ -7,20 +7,12 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: {
-      ContextualHelpTrigger,
-      ContextualHelp,
-      Button,
-      Heading,
-      Text,
-      Link,
-    },
+    components: { ContextualHelpTrigger, ContextualHelp, Button, Text, Link },
   }) => {
     await render(
       <ContextualHelpTrigger>
         <Button data-testid="trigger" />
         <ContextualHelp>
-          <Heading>Heading</Heading>
           <Text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
             quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
