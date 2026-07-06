@@ -2,9 +2,12 @@ import {
   Version,
   type HostExports,
   type HostToRemoteConnection,
+  type HostToRemoteConnectionReadyEvent,
   type NavigationState,
   type RemoteExports,
   type RemoteExtBridgeConnectionApi,
+  type RemoteReadyEvent,
+  type RemoteReadyEventInput,
 } from "@/connection/types";
 import { getWithMergedHostConfig } from "@/ext-bridge/getWithMergedHostConfig";
 import { emptyImplementation } from "@/ext-bridge/implementation";
@@ -17,12 +20,28 @@ interface Options {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
   hostConfig: HostConfig;
-  onReady?: (connection: HostToRemoteConnection) => void;
+  onReady?: (event: HostToRemoteConnectionReadyEvent) => void;
   onLoadingChanged?: (isLoading: boolean) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
+
+const normalizeReadyEvent = (
+  event?: RemoteReadyEventInput,
+): RemoteReadyEvent => {
+  if (typeof event === "number") {
+    return {
+      version: event,
+    };
+  }
+
+  return (
+    event ?? {
+      version: Version.v1,
+    }
+  );
+};
 
 export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
   const {
@@ -41,14 +60,18 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     getConfig: getWithMergedHostConfig(extBridgeImplementationProp, hostConfig),
   };
 
-  const result = {
+  const result: HostToRemoteConnection = {
     thread: new ThreadIframe<RemoteExports, HostExports>(iframe, {
       serialization: new FlowThreadSerialization(),
       exports: {
         ...extBridgeImplementation,
-        setIsReady: async (version = Version.v1) => {
-          result.version = version;
-          onReady?.(result);
+        setIsReady: async (event) => {
+          const readyEvent = normalizeReadyEvent(event);
+          result.version = readyEvent.version;
+          onReady?.({
+            connection: result,
+            remoteReadyEvent: readyEvent,
+          });
         },
         setIsLoading: async (isLoading: boolean) => {
           onLoadingChanged?.(isLoading);

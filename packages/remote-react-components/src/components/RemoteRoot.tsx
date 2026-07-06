@@ -3,6 +3,7 @@ import * as remoteComponents from "@/auto-generated";
 import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
+import { packageVersion } from "@/version";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
@@ -123,6 +124,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const connect = connectHostRenderRootRef({
     onPathnameChanged: (pathname) =>
       startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+    packageVersion,
   });
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
