@@ -30,41 +30,49 @@
       inset-inline-end: var(--form-control--padding-x);
       z-index: 1;
     }
+  }
+}
 
-    & :global(.cm-editor) {
-      outline: none;
+@layer unlayered {
+  .codeEditor {
+    .codeMirror {
+      & :global(.cm-editor) {
+        outline: none;
 
-      & :global(.cm-lineNumbers .cm-gutterElement) {
-        min-width: var(--code-editor--gutter-element-min-width);
-      }
+        & :global(.cm-lineNumbers .cm-gutterElement) {
+          min-width: var(--code-editor--gutter-element-min-width);
+        }
 
-      & :global(.cm-foldGutter) {
-        min-width: var(--code-editor--gutter-element-min-width);
-        text-align: center;
-      }
+        & :global(.cm-foldGutter) {
+          min-width: var(--code-editor--gutter-element-min-width);
+          text-align: center;
+        }
 
-      & :global(.cm-panels) {
-        display: none;
-      }
+        & :global(.cm-panels) {
+          display: none;
+        }
 
-      & :global(.cm-content) {
-        padding-block: var(--form-control--padding-y);
-      }
+        & :global(.cm-content) {
+          padding-block: var(--form-control--padding-y);
+        }
 
-      & :global(.cm-activeLineGutter),
-      & :global(.cm-activeLine) {
-        background-color: color-mix(
-          in srgb,
-          var(--form-control--background-color--hover) 65%,
-          transparent
-        );
-      }
+        & :global(.cm-activeLineGutter),
+        & :global(.cm-activeLine) {
+          background-color: color-mix(
+            in srgb,
+            var(--form-control--background-color--hover) 65%,
+            transparent
+          );
+        }
 
-      & :global(.cm-gutters) {
-        border-top-left-radius: calc(var(--form-control--corner-radius) - 1px);
-        border-bottom-left-radius: calc(
-          var(--form-control--corner-radius) - 1px
-        );
+        & :global(.cm-gutters) {
+          border-top-left-radius: calc(
+            var(--form-control--corner-radius) - 1px
+          );
+          border-bottom-left-radius: calc(
+            var(--form-control--corner-radius) - 1px
+          );
+        }
       }
     }
   }

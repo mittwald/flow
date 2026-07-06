@@ -12,19 +12,23 @@
     border-style: var(--image-cropper--border-style);
     border-width: var(--image-cropper--border-width);
   }
+}
 
-  :global(.reactEasyCrop_CropArea) {
-    color: var(--image-cropper--mask-color);
-    border-color: var(--image-cropper--mask-border-color);
-    box-sizing: content-box;
-  }
+@layer unlayered {
+  .imageCropper {
+    :global(.reactEasyCrop_CropArea) {
+      color: var(--image-cropper--mask-color);
+      border-color: var(--image-cropper--mask-border-color);
+      box-sizing: content-box;
+    }
 
-  :global(.reactEasyCrop_CropAreaGrid::before) {
-    border-color: var(--image-cropper--grid-color);
-    border-width: var(--image-cropper--grid-width);
-  }
+    :global(.reactEasyCrop_CropAreaGrid::before) {
+      border-color: var(--image-cropper--grid-color);
+      border-width: var(--image-cropper--grid-width);
+    }
 
-  :global(.reactEasyCrop_Container) {
-    border-radius: var(--image-cropper--corner-radius);
+    :global(.reactEasyCrop_Container) {
+      border-radius: var(--image-cropper--corner-radius);
+    }
   }
 }

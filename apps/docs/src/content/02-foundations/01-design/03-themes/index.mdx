@@ -83,6 +83,54 @@ Verfügbare Werte sind:
 Wird kein Theme gesetzt oder explizit `data-theme="system"` verwendet, dient die
 bevorzugte Browsereinstellung des Nutzers als Grundlage für die Darstellung.
 
+Flow Styles werden in einer festen Cascade-Layer-Reihenfolge ausgeliefert:
+
+```css
+@layer flow.reset, flow.base, flow.theme, flow.components;
+```
+
+Theme Tokens und Theme-Entscheidungen liegen in `flow.theme`. Anwendungen
+können eigene Overrides gezielt in einem späteren Layer definieren.
+
+Für Anwendungs-Overrides reicht es aus, den gesamten Flow-Layer vor einem
+eigenen App-Layer einzuordnen:
+
+```css
+@layer flow, app;
+
+@import "@mittwald/flow-react-components/all.css";
+
+@layer app {
+  :root[data-theme="dark"] {
+    --text--color--default: var(--color--gray--1100);
+  }
+}
+```
+
+## Theme für einen Bereich festlegen
+
+Einzelne Bereiche können unabhängig vom globalen Theme explizit auf Light oder
+Dark gesetzt werden. Dafür wird zusätzlich zum Standard-Stylesheet das scoped
+Theme Stylesheet importiert und `data-flow-theme` auf einem Container
+verwendet:
+
+```tsx
+import "@mittwald/flow-react-components/all.css";
+import "@mittwald/flow-react-components/scoped-theme.css";
+```
+
+```tsx
+<section data-flow-theme="dark">
+  {/* Flow Komponenten in diesem Bereich verwenden Dark Theme Tokens. */}
+</section>
+```
+
+<Info
+  example="scoped-themes"
+  heading="Light und Dark Bereiche"
+  stretch
+/>
+
 ## next-themes
 
 Für die Verwaltung und das Umschalten des Themes kann next-themes verwendet

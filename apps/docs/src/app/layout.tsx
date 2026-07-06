@@ -1,4 +1,5 @@
 import "@mittwald/flow-react-components/all.css";
+import "@mittwald/flow-react-components/scoped-theme.css";
 import "./global.scss";
 import type { Metadata } from "next";
 import { type FC, type PropsWithChildren } from "react";

@@ -19,6 +19,13 @@ StyleDictionary.registerTransform({
 });
 
 const htmlAttribute = "data-theme";
+const themeScopeAttribute = "data-flow-theme";
+
+const isColorDependentToken = (token) => {
+  const value = token.original?.value ?? token.value;
+
+  return token.path[0] === "color" || String(value).includes("color");
+};
 
 const configVariants = [
   {
@@ -58,6 +65,20 @@ const configVariants = [
     destination: "colors-light",
     filter: (token) => token.path[0] === "color",
     cssSelector: `:root[${htmlAttribute}='light']`,
+  },
+  {
+    source: "src/**/!(*.light).yml",
+    destination: "colors-dark-scoped",
+    filter: isColorDependentToken,
+    cssSelector: `:where([${themeScopeAttribute}='dark'])`,
+    options: { warnings: "disabled" },
+  },
+  {
+    source: "src/**/!(*.dark).yml",
+    destination: "colors-light-scoped",
+    filter: isColorDependentToken,
+    cssSelector: `:where([${themeScopeAttribute}='light'])`,
+    options: { warnings: "disabled" },
   },
 ];
 

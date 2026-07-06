@@ -1,4 +1,6 @@
 import banner from "vite-plugin-banner";
+import { cssLayerPlugin } from "./dev/vite/cssLayerPlugin";
+import { scopedThemeCssPlugin } from "./dev/vite/scopedThemeCssPlugin";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
@@ -54,6 +56,8 @@ export default mergeConfig(
       externalizeDeps({
         except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
       }),
+      scopedThemeCssPlugin(),
+      cssLayerPlugin(),
       dts({
         include: ["src"],
         outDirs: "dist/types",
