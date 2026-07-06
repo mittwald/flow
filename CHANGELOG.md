@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
+
+### Bug Fixes
+
+* **docs:** llms.txt siteUrl ([#2602](https://github.com/mittwald/flow/issues/2602)) ([44b98a5](https://github.com/mittwald/flow/commit/44b98a5c0c151cf86de94e6c476444b552cb13eb))
+
 # [0.2.0-alpha.888](https://github.com/mittwald/flow/compare/0.2.0-alpha.887...0.2.0-alpha.888) (2026-07-03)
 
 ### Features
