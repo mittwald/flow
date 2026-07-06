@@ -47,6 +47,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
           tags: |
             type=ref,event=branch
+            type=raw,value=latest
             type=sha
 
       - name: Extract metadata for Storybook
@@ -58,6 +59,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
           tags: |
             type=ref,event=branch
+            type=raw,value=latest
             type=sha
 
       - name: Build and push Docker image
