@@ -11,7 +11,6 @@ const getApiHeaders = () => ({
 });
 
 const serviceNames = {
-  docs: "docs-main",
   storybook: "storybook-main",
 };
 

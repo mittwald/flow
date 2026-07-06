@@ -75,6 +75,12 @@ jobs:
           build-args: |
             NEXT_BASE_PATH=
 
+      - name: Trigger docs redeploy webhook
+        if: matrix.image_suffix == 'docs'
+        run: curl --fail --silent --show-error --location "$FLOW_REDEPLOY_WEBHOOK"
+        env:
+          FLOW_REDEPLOY_WEBHOOK: ${{ secrets.FLOW_REDEPLOY_WEBHOOK }}
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
