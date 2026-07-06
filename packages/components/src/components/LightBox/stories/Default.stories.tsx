@@ -17,7 +17,7 @@ import { Flex } from "@/components/Flex";
 
 const images = [
   dummyText.imageSrc,
-  "https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg",
+  "https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg",
   svg,
 ];
 
