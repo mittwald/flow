@@ -24,6 +24,7 @@ import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid
 import { TypedChartLegend } from "@/components/CartesianChart/components/ChartLegend";
 import { TypedChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";
 import { TypedLine } from "@/components/CartesianChart/components/Line";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 /** @deprecated Use a ReactNode instead */
 export interface CartesianChartEmptyViewProps {
@@ -55,6 +56,7 @@ export interface CartesianChartProps<TData = ChartDataValue>
 export const CartesianChart: FC<CartesianChartProps> = (props) => {
   const { children, data, className, height, flexGrow, emptyView, ...rest } =
     props;
+  const warnDeprecation = useWarnDeprecation();
 
   const { viewDimensions, ref: containerRef } = useChartClipRect();
 
@@ -64,6 +66,13 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     className,
     showEmptyView && styles.emptyView,
   );
+  const usesDeprecatedEmptyView = !!emptyView && !isValidElement(emptyView);
+
+  if (usesDeprecatedEmptyView) {
+    warnDeprecation(
+      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
+    );
+  }
 
   const emptyElement = useMemo(() => {
     if (isValidElement(emptyView)) {
@@ -74,9 +83,6 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
       return;
     }
 
-    console.warn(
-      "CartesianChart: emptyView as a non-element is deprecated and will be removed in a future release. Please provide an element as emptyView.",
-    );
     return null;
   }, [emptyView]);
 
