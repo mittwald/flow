@@ -12,7 +12,7 @@ import {
     <div className="flow--light-box--content">
       <Image
         width={200}
-        src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
+        src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
       />
     </div>
     <div className="flow--light-box--actions">

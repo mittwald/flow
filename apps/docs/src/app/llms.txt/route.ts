@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export async function GET(): Promise<Response> {
   const body = await generateLlmsTxt(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mittwald.github.io/flow/",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://flow.mittwald.de/",
   );
 
   return new Response(body, {

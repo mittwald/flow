@@ -3,8 +3,8 @@
 React components that can be used by mStudio extension developers
 
 This package is part of
-[Flow – mittwald design system](https://mittwald.github.io/flow/). See the
-homepage for more details.
+[Flow – mittwald design system](https://flow.mittwald.de/). See the homepage for
+more details.
 
 ## Customize the mStudio page header for your extension
 

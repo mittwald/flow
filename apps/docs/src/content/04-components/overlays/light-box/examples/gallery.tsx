@@ -12,7 +12,7 @@ import {
 
 export default () => {
   const images = [
-    "https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg",
+    "https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg",
     "https://cdn.shopify.com/s/files/1/2022/6883/products/IMG_2002_250x250@2x.JPG?v=1538235544",
   ];
 

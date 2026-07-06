@@ -2,9 +2,6 @@ name: Publish docs to GitHub Pages
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
   contents: read
@@ -15,44 +12,41 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ⬇️
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node 🎛️
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          registry-url: "https://registry.npmjs.org"
-
-      - name: pnpm Install 📦️
-        run: pnpm install --frozen-lockfile
-
-      - name: Setup NX 1/2 🎛️
-        uses: nrwl/nx-set-shas@v4
-
-      - name: Setup NX 2/2 🎛
-        if: github.ref != 'refs/heads/main'
-        run: git branch --track main origin/main
-
-      - name: Build 🔨
-        env:
-          NEXT_BASE_PATH: "/flow"
-        run: pnpm nx build docs
+      - name: Generate redirect site 🔀
+        run: |
+          mkdir -p out
+          cat > out/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>Redirecting to flow.mittwald.de</title>
+              <link rel="canonical" href="https://flow.mittwald.de/" />
+              <meta name="robots" content="noindex" />
+              <meta http-equiv="refresh" content="0; url=https://flow.mittwald.de/" />
+              <script>
+                (function () {
+                  var target = "https://flow.mittwald.de";
+                  var path = window.location.pathname.replace(/^\/flow/, "");
+                  window.location.replace(target + path + window.location.search + window.location.hash);
+                })();
+              </script>
+            </head>
+            <body>
+              <p>This site has moved to <a href="https://flow.mittwald.de/">flow.mittwald.de</a>.</p>
+            </body>
+          </html>
+          HTML
+          cp out/index.html out/404.html
 
       - name: Configure GitHub pages ⚙️
         uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
 
       - name: Upload GitHub Pages artifact ⬆️
         uses: actions/upload-pages-artifact@v4
         with:
-          path: apps/docs/out
+          path: out
 
   deploy:
     environment:

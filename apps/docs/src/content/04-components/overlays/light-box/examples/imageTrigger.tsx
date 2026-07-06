@@ -11,13 +11,13 @@ import {
       width={100}
       withBorder
       alt="mittwald"
-      src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
+      src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
     />
   </Button>
   <LightBox>
     <Image
       alt="mittwald"
-      src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
+      src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
     />
   </LightBox>
 </LightBoxTrigger>;

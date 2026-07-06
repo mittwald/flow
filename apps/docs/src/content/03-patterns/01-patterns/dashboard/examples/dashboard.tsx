@@ -122,7 +122,7 @@ export default () => {
             <ColumnLayout m={[1, 3]} s={[null, 1]}>
               <Flex align="center" grow>
                 <Image
-                  src="https://mittwald.github.io/flow/assets/onboarding.png"
+                  src="https://flow.mittwald.de/assets/onboarding.png"
                   alt=""
                   aria-hidden
                 />
@@ -164,7 +164,7 @@ export default () => {
             <Section>
               <Heading>Neues aus dem Blog</Heading>
               <Image
-                src="https://mittwald.github.io/flow/assets/blog.png"
+                src="https://flow.mittwald.de/assets/blog.png"
                 alt=""
                 aria-hidden
               />
