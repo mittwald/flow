@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 import {
   Link,
   useModalController,
-  HeaderNavigation as HeaderNavigationComponent,
+  HeaderNavigation,
   Flex,
 } from "@mittwald/flow-react-components";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
@@ -32,12 +32,12 @@ const Header: FC<Props> = (props) => {
           <Link href="/" aria-label="Flow">
             <FlowLogo className={styles.logo} />
           </Link>
-          <HeaderNavigationComponent
+          <HeaderNavigation
             className={styles.headerNavigation}
             aria-label="Header Navigation"
           >
             <Groups docs={docs.map((mdx) => mdx.serialize())} />
-          </HeaderNavigationComponent>
+          </HeaderNavigation>
         </Flex>
         <Flex gap="m">
           <SearchButton controller={searchController} />
