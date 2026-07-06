@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
+
+### Features
+
+* **ci:** tag main images as latest ([#2604](https://github.com/mittwald/flow/issues/2604)) ([33a157f](https://github.com/mittwald/flow/commit/33a157fa1c97a6faa5337c1f979bc12bcd8bfa2a))
+
 # [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
 
 ### Bug Fixes
