@@ -12,6 +12,7 @@ export class RemoteContextualHelpTriggerElement extends FlowRemoteElement<Remote
   static override get remoteProperties() {
     return {
       isDefaultOpen: {},
+      label: {},
     };
   }
 
