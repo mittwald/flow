@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
+
+### Bug Fixes
+
+* **previews:** only post preview comment on first deployment ([#2608](https://github.com/mittwald/flow/issues/2608)) ([f866957](https://github.com/mittwald/flow/commit/f86695788e7ebdf84cbd99ce02806aca59f3a553))
+
 # [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
 
 ### Features
