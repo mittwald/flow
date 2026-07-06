@@ -1,11 +1,10 @@
 import { generateLlmsTxt } from "@/lib/llms/generateLlmsTxt";
-import type { NextRequest } from "next/server";
 
 export const dynamic = "force-static";
 
-export async function GET(request: NextRequest): Promise<Response> {
+export async function GET(): Promise<Response> {
   const body = await generateLlmsTxt(
-    process.env.NEXT_PUBLIC_SITE_URL ?? request.nextUrl.origin,
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mittwald.github.io/flow/",
   );
 
   return new Response(body, {
