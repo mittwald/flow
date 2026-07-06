@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.892](https://github.com/mittwald/flow/compare/0.2.0-alpha.891...0.2.0-alpha.892) (2026-07-06)
+
+### Features
+
+* **ci:** trigger redeploy after docs image push on main ([#2606](https://github.com/mittwald/flow/issues/2606)) ([1ffa328](https://github.com/mittwald/flow/commit/1ffa328e59574686dd1423dc488a83e6ceb7c2db))
+
 # [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
 
 ### Bug Fixes
