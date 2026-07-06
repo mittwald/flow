@@ -24,9 +24,7 @@ export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
   const controller = controllerFromProps ?? controllerFromContext;
 
   const propsContext: PropsContext = {
-    Heading: {
-      level: 5,
-    },
+    Text: {},
   };
 
   return (

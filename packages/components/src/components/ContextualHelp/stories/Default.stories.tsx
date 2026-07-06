@@ -4,7 +4,6 @@ import {
   ContextualHelp,
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
-import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
@@ -16,10 +15,9 @@ const meta: Meta<typeof ContextualHelp> = {
     controls: { disable: true },
   },
   render: (props) => (
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger label="rights & roles">
       <Button />
       <ContextualHelp {...props}>
-        <Heading>Rights & roles</Heading>
         <Text>
           Each user profile is assigned a role in mStudio for each project
           and/or organization. This allows you to work in a completely new and
