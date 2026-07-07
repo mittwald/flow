@@ -13,7 +13,7 @@ practices for building user-centered interfaces with flow.
 
 The Styleguide is available at:
 
-http://flow.mittwald.de/
+https://flow.mittwald.de/
 
 ## Styleguide Structure
 
