@@ -1,3 +1,7 @@
+patchedDependencies:
+  "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch"
+  "acorn": "patches/acorn.patch"
+
 packages:
   - "apps/*"
   - "packages/*"
