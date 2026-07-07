@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.894](https://github.com/mittwald/flow/compare/0.2.0-alpha.893...0.2.0-alpha.894) (2026-07-07)
+
+### Features
+
+* **components:** add deprecation warning provider ([#2614](https://github.com/mittwald/flow/issues/2614)) ([7c95067](https://github.com/mittwald/flow/commit/7c95067b82754bd198d74704ba6d69d0c633745f))
+
+# [0.2.0-alpha.893](https://github.com/mittwald/flow/compare/0.2.0-alpha.892...0.2.0-alpha.893) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.892](https://github.com/mittwald/flow/compare/0.2.0-alpha.891...0.2.0-alpha.892) (2026-07-06)
+
+### Features
+
+* **ci:** trigger redeploy after docs image push on main ([#2606](https://github.com/mittwald/flow/issues/2606)) ([1ffa328](https://github.com/mittwald/flow/commit/1ffa328e59574686dd1423dc488a83e6ceb7c2db))
+
+# [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
+
+### Bug Fixes
+
+* **previews:** only post preview comment on first deployment ([#2608](https://github.com/mittwald/flow/issues/2608)) ([f866957](https://github.com/mittwald/flow/commit/f86695788e7ebdf84cbd99ce02806aca59f3a553))
+
+# [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
+
+### Features
+
+* **ci:** tag main images as latest ([#2604](https://github.com/mittwald/flow/issues/2604)) ([33a157f](https://github.com/mittwald/flow/commit/33a157fa1c97a6faa5337c1f979bc12bcd8bfa2a))
+
+# [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
+
+### Bug Fixes
+
+* **docs:** llms.txt siteUrl ([#2602](https://github.com/mittwald/flow/issues/2602)) ([44b98a5](https://github.com/mittwald/flow/commit/44b98a5c0c151cf86de94e6c476444b552cb13eb))
+
 # [0.2.0-alpha.888](https://github.com/mittwald/flow/compare/0.2.0-alpha.887...0.2.0-alpha.888) (2026-07-03)
 
 ### Features

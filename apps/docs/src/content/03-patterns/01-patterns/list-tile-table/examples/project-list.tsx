@@ -37,7 +37,7 @@ export default () => {
                 id: "p-12345abc",
                 description: "Green Portfolio",
                 avatar:
-                  "https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg",
+                  "https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg",
               },
               {
                 id: "p-12345def",

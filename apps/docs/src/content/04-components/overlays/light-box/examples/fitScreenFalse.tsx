@@ -8,6 +8,6 @@ import {
 <LightBoxTrigger>
   <Button>Open LightBox</Button>
   <LightBox fitScreen={false}>
-    <Image src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg" />
+    <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
   </LightBox>
 </LightBoxTrigger>;

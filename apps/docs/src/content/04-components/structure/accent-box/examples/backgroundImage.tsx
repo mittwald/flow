@@ -6,7 +6,7 @@ import {
 
 <ColumnLayout>
   <AccentBox
-    backgroundImage="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
+    backgroundImage="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
     aspectRatio={1}
     color="light-static"
   >
