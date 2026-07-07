@@ -188,6 +188,9 @@ importers:
       luxon:
         specifier: ^3.7.2
         version: 3.7.2
+      minisearch:
+        specifier: ^7.2.0
+        version: 7.2.0
       next:
         specifier: ^16.2.9
         version: 16.2.9(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.101.0)
@@ -7530,6 +7533,9 @@ packages:
     resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  minisearch@7.2.0:
+    resolution: {integrity: sha512-dqT2XBYUOZOiC5t2HRnwADjhNS2cecp9u+TJRiJ1Qp/f5qjkeT5APcGPjHw+bz89Ms8Jp+cG4AlE+QZ/QnDglg==}
+
   minizlib@3.1.0:
     resolution: {integrity: sha512-KZxYo1BUkWD2TVFLr0MQoM8vUUigWD3LlD83a/75BqC+4qE0Hb1Vo5v1FgcfaNXvfXzr+5EhQ6ing/CaBijTlw==}
     engines: {node: '>= 18'}
@@ -13593,9 +13599,9 @@ snapshots:
       obug: 2.1.3
       std-env: 4.1.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.9(@types/node@25.9.3)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(happy-dom@20.10.6)(msw@2.7.3(@types/node@25.9.3)(typescript@6.0.3))(vite@7.3.5(@types/node@25.9.3)(less@4.6.6)(lightningcss@1.32.0)(sass@1.101.0)(stylus@0.62.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))
+      vitest: 4.1.9(@types/node@25.9.3)(@vitest/browser-playwright@4.1.9)(@vitest/coverage-v8@4.1.9)(happy-dom@20.10.6)(msw@2.7.3(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(less@4.6.6)(sass@1.101.0)(stylus@0.62.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))
     optionalDependencies:
-      '@vitest/browser': 4.1.9(msw@2.7.3(@types/node@25.9.3)(typescript@6.0.3))(vite@7.3.5(@types/node@25.9.3)(less@4.6.6)(lightningcss@1.32.0)(sass@1.101.0)(stylus@0.62.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vitest@4.1.9)
+      '@vitest/browser': 4.1.9(msw@2.7.3(@types/node@25.9.3)(typescript@6.0.3))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(less@4.6.6)(sass@1.101.0)(stylus@0.62.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vitest@4.1.9)
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -16866,6 +16872,8 @@ snapshots:
       yallist: 4.0.0
 
   minipass@7.1.3: {}
+
+  minisearch@7.2.0: {}
 
   minizlib@3.1.0:
     dependencies:

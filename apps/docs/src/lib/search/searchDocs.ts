@@ -1,3 +1,4 @@
+import MiniSearch from "minisearch";
 import type { SearchIndexEntry } from "@/lib/search/types";
 
 export interface HighlightSegment {
@@ -13,12 +14,12 @@ export interface SearchResult {
   hash?: string;
 }
 
-const FIELD_WEIGHTS = {
+const FIELD_BOOST = {
   title: 12,
   tab: 2,
   breadcrumb: 4,
   description: 6,
-  heading: 5,
+  headings: 5,
   content: 1,
 };
 
@@ -96,101 +97,87 @@ const buildSnippet = (
   return highlight(snippet, terms);
 };
 
+const createIndex = (
+  entries: SearchIndexEntry[],
+): MiniSearch<SearchIndexEntry> => {
+  const index = new MiniSearch<SearchIndexEntry>({
+    fields: Object.keys(FIELD_BOOST),
+    extractField: (entry, field) => {
+      if (field === "breadcrumb") {
+        return entry.breadcrumb.join(" ");
+      }
+      if (field === "headings") {
+        return entry.headings.map((heading) => heading.text).join(" ");
+      }
+      return (entry[field as keyof SearchIndexEntry] as string) ?? "";
+    },
+    searchOptions: {
+      boost: FIELD_BOOST,
+      prefix: true,
+      fuzzy: 0.2,
+      combineWith: "AND",
+    },
+  });
+  index.addAll(entries);
+  return index;
+};
+
+const indexCache = new WeakMap<
+  SearchIndexEntry[],
+  { index: MiniSearch<SearchIndexEntry>; byId: Map<string, SearchIndexEntry> }
+>();
+
+const getIndex = (
+  entries: SearchIndexEntry[],
+): {
+  index: MiniSearch<SearchIndexEntry>;
+  byId: Map<string, SearchIndexEntry>;
+} => {
+  let cached = indexCache.get(entries);
+  if (!cached) {
+    cached = {
+      index: createIndex(entries),
+      byId: new Map(entries.map((entry) => [entry.id, entry])),
+    };
+    indexCache.set(entries, cached);
+  }
+  return cached;
+};
+
 export const searchDocs = (
   entries: SearchIndexEntry[],
   query: string,
   limit = 30,
 ): SearchResult[] => {
-  const normalizedQuery = query.trim().toLowerCase();
-  if (normalizedQuery.length === 0) {
+  const trimmed = query.trim();
+  if (trimmed.length === 0) {
     return [];
   }
-  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+  const terms = trimmed.toLowerCase().split(/\s+/).filter(Boolean);
+  const { index, byId } = getIndex(entries);
 
-  const results: SearchResult[] = [];
-
-  for (const entry of entries) {
-    const title = entry.title.toLowerCase();
-    const tab = entry.tab?.toLowerCase() ?? "";
-    const breadcrumb = entry.breadcrumb.join(" ").toLowerCase();
-    const description = entry.description?.toLowerCase() ?? "";
-    const headingsText = entry.headings
-      .map((heading) => heading.text)
-      .join(" ")
-      .toLowerCase();
-    const content = entry.content.toLowerCase();
-
-    let score = 0;
-    let matchesAllTerms = true;
-
-    for (const term of terms) {
-      let termScore = 0;
-
-      if (title.includes(term)) {
-        termScore += FIELD_WEIGHTS.title;
-        if (title === term) {
-          termScore += 20;
-        } else if (title.startsWith(term)) {
-          termScore += 6;
-        }
+  return index
+    .search(trimmed)
+    .slice(0, limit)
+    .flatMap((result) => {
+      const entry = byId.get(String(result.id));
+      if (!entry) {
+        return [];
       }
-      if (tab.includes(term)) {
-        termScore += FIELD_WEIGHTS.tab;
-      }
-      if (breadcrumb.includes(term)) {
-        termScore += FIELD_WEIGHTS.breadcrumb;
-      }
-      if (description.includes(term)) {
-        termScore += FIELD_WEIGHTS.description;
-      }
-      if (headingsText.includes(term)) {
-        termScore += FIELD_WEIGHTS.heading;
-      }
-      if (content.includes(term)) {
-        termScore += FIELD_WEIGHTS.content;
-      }
+      const hash = entry.headings.find(
+        (heading) =>
+          heading.slug !== undefined &&
+          terms.some((term) => heading.text.toLowerCase().includes(term)),
+      )?.slug;
 
-      if (termScore === 0) {
-        matchesAllTerms = false;
-        break;
-      }
-      score += termScore;
-    }
-
-    if (!matchesAllTerms) {
-      continue;
-    }
-
-    if (terms.length > 1) {
-      if (title.includes(normalizedQuery)) {
-        score += 15;
-      }
-      if (
-        content.includes(normalizedQuery) ||
-        description.includes(normalizedQuery)
-      ) {
-        score += 5;
-      }
-    }
-
-    const matchingHeading = entry.headings.find(
-      (heading) =>
-        heading.slug !== undefined &&
-        terms.some((term) => heading.text.toLowerCase().includes(term)),
-    );
-
-    results.push({
-      entry,
-      score,
-      titleSegments: highlight(entry.title, terms),
-      snippet: buildSnippet(entry, terms),
-      hash: matchingHeading?.slug,
+      return [
+        {
+          entry,
+          score: result.score,
+          titleSegments: highlight(entry.title, terms),
+          snippet: buildSnippet(entry, terms),
+          hash,
+        },
+      ];
     });
-  }
-
-  results.sort(
-    (a, b) => b.score - a.score || a.entry.title.localeCompare(b.entry.title),
-  );
-
-  return results.slice(0, limit);
 };
