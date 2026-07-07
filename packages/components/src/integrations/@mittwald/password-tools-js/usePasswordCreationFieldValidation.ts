@@ -1,8 +1,5 @@
-import type { PolicyGenericDeclaration } from "@/integrations/@mittwald/password-tools-js";
-import {
-  defaultPasswordCreationPolicy,
-  Policy,
-} from "@/integrations/@mittwald/password-tools-js";
+import type { PolicyGenericDeclaration } from ".";
+import { defaultPasswordCreationPolicy, Policy } from ".";
 import { useMemo, useRef } from "react";
 import type { Validate } from "react-hook-form";
 
@@ -30,7 +27,7 @@ export const usePasswordCreationFieldValidation = (
 
     try {
       const validationResult = await validationPolicy.validate(value);
-      const isValid = await validationResult.isValid;
+      const isValid = validationResult.isValid;
 
       cache.current = {
         password: value,
