@@ -185,8 +185,16 @@
     }
 
     .checkboxContainer {
-      height: 100%;
-      max-height: var(--avatar--size--m);
+      position: absolute;
+      top: var(--list-item--padding);
+      left: var(--list-item--padding);
+      background-color: var(--list-item--checkbox-background-color);
+      border-radius: var(--list-item--checkbox-corner-radius);
+
+      :global(.flow--checkbox .flow--checkbox--icon) {
+        color: var(--list-item--checkbox-color);
+        padding: 1px;
+      }
     }
 
     .title {
@@ -198,6 +206,13 @@
         top: var(--list-item--padding);
         left: var(--list-item--padding);
         right: var(--list-item--padding);
+        justify-content: end;
+      }
+    }
+
+    &:has(.checkboxContainer:not(:empty)) {
+      :global(.flow--heading--heading-content) {
+        left: calc(var(--list-item--padding) * 2 + var(--icon--size--m));
       }
     }
 
