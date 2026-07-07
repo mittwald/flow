@@ -2,8 +2,10 @@ import {
   Button,
   FileCard,
   FileCardList,
+  FileDropZone,
   FileField,
-  Label,
+  Heading,
+  IconUpload,
   Section,
 } from "@mittwald/flow-react-components";
 import { useState } from "react";
@@ -13,7 +15,7 @@ export default () => {
 
   return (
     <Section>
-      <FileField
+      <FileDropZone
         multiple
         onChange={(value) => {
           if (value) {
@@ -21,11 +23,12 @@ export default () => {
           }
         }}
       >
-        <Label>Dateien</Label>
-        <Button variant="outline" color="secondary">
-          Auswählen
-        </Button>
-      </FileField>
+        <IconUpload />
+        <Heading>Dateien ablegen</Heading>
+        <FileField>
+          <Button>Dateien auswählen</Button>
+        </FileField>
+      </FileDropZone>
 
       <FileCardList>
         {files.map((file) => (
