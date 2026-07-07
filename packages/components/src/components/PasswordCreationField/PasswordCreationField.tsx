@@ -2,8 +2,8 @@ import {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
-  useDeferredValue,
   useMemo,
+  useRef,
 } from "react";
 import {
   dynamic,
@@ -91,7 +91,6 @@ export const PasswordCreationField = flowComponent(
       fieldPropsContext,
     } = useFieldComponent(props, "PasswordCreationField");
 
-    const [isLoading, setIsLoading] = useState(false);
     const translate = useLocalizedStringFormatter(
       locales,
       "PasswordCreationField",
@@ -102,11 +101,9 @@ export const PasswordCreationField = flowComponent(
       [validationPolicyFromProps],
     );
 
-    const deferredValue = useDeferredValue(value ?? "");
-
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
-      isValid: true,
+      isValid: "indeterminate",
       complexity: {
         min: validationPolicy.minComplexity,
         actual: 4,
@@ -118,17 +115,28 @@ export const PasswordCreationField = flowComponent(
     const [policyValidationResult, setPolicyValidationResult] = useState(
       initialPolicyValidationState,
     );
+
+    const loadingRef = useRef<ReturnType<typeof setTimeout>>(null);
     usePolicyValidationResult(
       validationPolicy,
-      deferredValue,
+      value ?? "",
       () => {
         if (isEmptyValue) {
           return;
         }
 
-        setIsLoading(() => true);
+        loadingRef.current = setTimeout(() => {
+          setPolicyValidationResult((r) => ({
+            ...r,
+            isValid: "indeterminate",
+          }));
+        }, 150);
       },
       ({ password, isValid, results }) => {
+        if (loadingRef.current) {
+          clearTimeout(loadingRef.current);
+        }
+
         if (isEmptyValue) {
           setPolicyValidationResult(() => ({
             ...results,
@@ -137,7 +145,6 @@ export const PasswordCreationField = flowComponent(
           return;
         }
 
-        setIsLoading(() => false);
         setPolicyValidationResult(() => results);
         onValidationResult?.({ password, isValid });
       },
@@ -161,14 +168,14 @@ export const PasswordCreationField = flowComponent(
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
+
     const isInvalidFromValidationResult =
-      !isEmptyValue && !stateFromValidationResult?.isValid;
+      !isEmptyValue && stateFromValidationResult?.isValid === false;
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
-      setIsLoading(() => false);
       setPolicyValidationResult(() => ({
         ...initialPolicyValidationState,
         ...state,
@@ -255,7 +262,9 @@ export const PasswordCreationField = flowComponent(
         isRequired={isRequired}
       >
         <FieldErrorCaptureContext>
-          <FieldError>{latestValidationErrorText}</FieldError>
+          {latestValidationErrorText && (
+            <FieldError>{latestValidationErrorText}</FieldError>
+          )}
           <PropsContextProvider
             props={propsContext}
             dependencies={[
@@ -285,8 +294,9 @@ export const PasswordCreationField = flowComponent(
                 />
               </Aria.Group>
               <ComplexityIndicator
+                key={value}
                 isEmptyValue={isEmptyValue}
-                isLoading={isLoading}
+                isLoading={policyValidationResult.isValid === "indeterminate"}
                 policyValidationResult={policyValidationResult}
                 validationResultState={stateFromValidationResult}
               />
