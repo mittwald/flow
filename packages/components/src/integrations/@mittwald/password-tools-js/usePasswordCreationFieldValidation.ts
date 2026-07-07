@@ -1,6 +1,8 @@
-import type { PolicyGenericDeclaration } from "@mittwald/password-tools-js/policy";
-import { Policy } from "@mittwald/password-tools-js/policy";
-import { defaultPasswordCreationPolicy } from ".";
+import type { PolicyGenericDeclaration } from "@/integrations/@mittwald/password-tools-js";
+import {
+  defaultPasswordCreationPolicy,
+  Policy,
+} from "@/integrations/@mittwald/password-tools-js";
 import { useMemo, useRef } from "react";
 import type { Validate } from "react-hook-form";
 

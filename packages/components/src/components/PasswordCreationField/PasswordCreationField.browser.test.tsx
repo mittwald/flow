@@ -68,6 +68,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
   });
 
   test("shows complexity when password is entered", async () => {
@@ -78,6 +79,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
 
     const inputElement = renderResult.getByRole("textbox");
     const complexityElement = renderResult.getByLocator(
@@ -122,6 +124,8 @@ describe("PasswordCreationField Tests", () => {
     expect(inputElement).toHaveDisplayValue("");
 
     await userEvent.type(inputElement, "12");
+    await vi.runAllTimersAsync();
+
     expect(inputElement).toHaveDisplayValue("12");
 
     const infoButton = renderResult.getByLocator(
@@ -136,6 +140,8 @@ describe("PasswordCreationField Tests", () => {
     await userEvent.keyboard("{escape}");
 
     await userEvent.type(inputElement, "3");
+    await vi.runAllTimersAsync();
+
     expect(inputElement).toHaveDisplayValue("123");
 
     await userEvent.click(infoButton);
@@ -153,6 +159,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
 
     const infoButton = renderResult.getByLocator(
       'button[data-component="showPasswordRules"]',
@@ -171,6 +178,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
 
     const inputElement = renderResult.getByRole("textbox");
     expect(inputElement).toHaveAttribute("type", "password");
@@ -194,6 +202,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
 
     const inputElement = renderResult.getByRole("textbox");
     expect(inputElement).toHaveValue("");
@@ -211,6 +220,7 @@ describe("PasswordCreationField Tests", () => {
     );
 
     await userEvent.click(generateButton);
+    await vi.runAllTimersAsync();
 
     await expect
       .poll(() => expect(inputElement).toHaveDisplayValue(/^.{12}$/))
@@ -241,6 +251,7 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
 
     const inputElement = renderResult.getByRole("textbox");
     expect(inputElement).toHaveValue("");
@@ -266,12 +277,16 @@ describe("PasswordCreationField Tests", () => {
         </PasswordCreationFieldTestComponent>
       </I18nProvider>,
     );
+    await vi.runAllTimersAsync();
+
     expect(onChangeHandler).not.toBeCalled();
 
     const inputElement = renderResult.getByRole("textbox");
     expect(inputElement).toHaveValue("");
 
     await userEvent.type(inputElement, "invalid");
+    await vi.runAllTimersAsync();
+
     expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
     await expect
       .poll(() =>
@@ -285,6 +300,8 @@ describe("PasswordCreationField Tests", () => {
 
     await userEvent.clear(inputElement);
     await userEvent.type(inputElement, "d!iBCsc8(l~i");
+    await vi.runAllTimersAsync();
+
     expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
     await expect
       .poll(() =>
