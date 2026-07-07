@@ -176,16 +176,23 @@ export const PasswordCreationField = flowComponent(
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
-      setPolicyValidationResult(() => ({
-        ...initialPolicyValidationState,
-        ...state,
+      setPolicyValidationResult((currentState) => ({
+        ...currentState,
         isValid: true,
+        ...state,
       }));
     };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
-      setOptimisticPolicyValidationResult();
+      setOptimisticPolicyValidationResult({
+        ...initialPolicyValidationState,
+        isValid: true,
+        ruleResults: policyValidationResult.ruleResults.map((r) => ({
+          ...r,
+          isValid: true,
+        })),
+      });
       setIsPasswordRevealed(true);
       onChange(generatedPassword);
     };

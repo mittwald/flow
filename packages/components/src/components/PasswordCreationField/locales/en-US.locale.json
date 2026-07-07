@@ -26,7 +26,7 @@
   "validation.general.securePassword": "Awesome! Your password is secure.",
   "validation.general.short.unspecified": "No specific requirements",
   "validation.hibp": "{isValid, select, true {The password is not compromised.} other {The password has been compromised. Please set a new one.}}",
-  "validation.hibp.short": "{isValid, select, true {Not compromised} other {Compromised}}",
+  "validation.hibp.short": "{isValid, select, true {Not compromised} other {Not compromised}}",
   "validation.length.max": "{max, plural, one {Please choose a password with a maximum of one character.} other {Please choose a password with a maximum of {max} characters.}}",
   "validation.length.max.short": "{max, plural, one {Maximum one character} other {Maximum {max} characters}}",
   "validation.length.min": "{min, plural, one {Please choose a password with at least one character.} other {Please choose a password with at least {min} characters.}}",
