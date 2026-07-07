@@ -70,7 +70,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "acorn": "patches/acorn.patch"
+      "acorn": "patches/acorn.patch",
+      "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch"
     },
     "onlyBuiltDependencies": [
       "@bundled-es-modules/glob",

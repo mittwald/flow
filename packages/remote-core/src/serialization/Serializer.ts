@@ -1,6 +1,6 @@
 interface SerializationStrategy<TIn, TOut> {
   isApplicable: (val: unknown) => val is TIn;
-  apply: (val: TIn) => TOut;
+  apply: (val: TIn) => TOut | Promise<TOut>;
 }
 
 const Key = "mittwald.flow-remote-core.serializer.name";
@@ -23,41 +23,40 @@ export class Serializer<TIn, TOut> {
     },
   ) {}
 
-  private apply<TIn, TOut>(
+  private async apply<TIn, TOut>(
     val: unknown,
     strategy: SerializationStrategy<TIn, TOut>,
-  ): SerializationResult<TOut> {
-    if (strategy.isApplicable(val)) {
-      return {
-        applied: true,
-        result: {
-          [Key]: this.options.name,
-          value: strategy.apply(val),
-        },
-      };
+  ): Promise<SerializationResult<TOut>> {
+    if (!strategy.isApplicable(val)) {
+      return { applied: false };
     }
+
+    const resolved = await strategy.apply(val);
+
     return {
-      applied: false,
+      applied: true,
+      result: {
+        [Key]: this.options.name,
+        value: resolved,
+      },
     };
   }
 
-  public serialize(val: unknown): SerializationResult<TOut> {
+  public async serialize(val: unknown): Promise<SerializationResult<TOut>> {
     return this.apply<TIn, TOut>(val, this.options.serialize);
   }
 
-  public deserialize(val: unknown): SerializationResult<TIn> {
+  public async deserialize(val: unknown): Promise<SerializationResult<TIn>> {
     return this.apply(val, {
-      apply: (serialization: SuccessfulSerializationResult<TOut>) => {
-        return this.options.deserialize.apply(serialization.value);
-      },
-      isApplicable: (val): val is SuccessfulSerializationResult<TOut> => {
-        return (
-          !!val &&
-          typeof val === "object" &&
-          Key in val &&
-          val[Key] === this.options.name
-        );
-      },
+      isApplicable: (
+        candidate,
+      ): candidate is SuccessfulSerializationResult<TOut> =>
+        !!candidate &&
+        typeof candidate === "object" &&
+        Key in candidate &&
+        (candidate as never)[Key] === this.options.name,
+      apply: (serialization) =>
+        this.options.deserialize.apply(serialization.value),
     });
   }
 }

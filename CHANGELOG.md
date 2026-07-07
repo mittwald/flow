@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.892](https://github.com/mittwald/flow/compare/0.2.0-alpha.891...0.2.0-alpha.892) (2026-07-06)
+
+### Features
+
+* **ci:** trigger redeploy after docs image push on main ([#2606](https://github.com/mittwald/flow/issues/2606)) ([1ffa328](https://github.com/mittwald/flow/commit/1ffa328e59574686dd1423dc488a83e6ceb7c2db))
+
+# [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
+
+### Bug Fixes
+
+* **previews:** only post preview comment on first deployment ([#2608](https://github.com/mittwald/flow/issues/2608)) ([f866957](https://github.com/mittwald/flow/commit/f86695788e7ebdf84cbd99ce02806aca59f3a553))
+
+# [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
+
+### Features
+
+* **ci:** tag main images as latest ([#2604](https://github.com/mittwald/flow/issues/2604)) ([33a157f](https://github.com/mittwald/flow/commit/33a157fa1c97a6faa5337c1f979bc12bcd8bfa2a))
+
+# [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
+
+### Bug Fixes
+
+* **docs:** llms.txt siteUrl ([#2602](https://github.com/mittwald/flow/issues/2602)) ([44b98a5](https://github.com/mittwald/flow/commit/44b98a5c0c151cf86de94e6c476444b552cb13eb))
+
+# [0.2.0-alpha.888](https://github.com/mittwald/flow/compare/0.2.0-alpha.887...0.2.0-alpha.888) (2026-07-03)
+
+### Features
+
+* **docs:** generate llms.txt from docs content ([#2595](https://github.com/mittwald/flow/issues/2595)) ([729d4b2](https://github.com/mittwald/flow/commit/729d4b21c6d1cb23c80dd0c19dd5a61d7cb6d434))
+* **Remote:** add async serializers ([#2596](https://github.com/mittwald/flow/issues/2596)) ([57e2ee5](https://github.com/mittwald/flow/commit/57e2ee5fdb82a7f13b19fe28574ced14d2a46a93))
+
+# [0.2.0-alpha.887](https://github.com/mittwald/flow/compare/0.2.0-alpha.886...0.2.0-alpha.887) (2026-07-02)
+
+### Bug Fixes
+
+* **CodeEditor:** fix height and colors ([#2592](https://github.com/mittwald/flow/issues/2592)) ([06b2fa2](https://github.com/mittwald/flow/commit/06b2fa224ee5744f7c994af276b1622024d13b29))
+
+# [0.2.0-alpha.886](https://github.com/mittwald/flow/compare/0.2.0-alpha.885...0.2.0-alpha.886) (2026-07-02)
+
+### Bug Fixes
+
+* **Chat:** improve screen reader experience ([#2590](https://github.com/mittwald/flow/issues/2590)) ([2ac1351](https://github.com/mittwald/flow/commit/2ac1351303fab2d647061d85e66bbf92717aa5aa))
+
+# [0.2.0-alpha.885](https://github.com/mittwald/flow/compare/0.2.0-alpha.884...0.2.0-alpha.885) (2026-07-02)
+
+### Bug Fixes
+
+* **Docs:** adjust FileDrop docs with correct usage ([#2593](https://github.com/mittwald/flow/issues/2593)) ([c7b7789](https://github.com/mittwald/flow/commit/c7b7789120c2af45ca847d6ba5424ab418e199c8))
+
 # [0.2.0-alpha.884](https://github.com/mittwald/flow/compare/0.2.0-alpha.883...0.2.0-alpha.884) (2026-07-01)
 
 ### Features

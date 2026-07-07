@@ -11,6 +11,9 @@ import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
+import { Button } from "@/components/Button";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
+import MenuItem from "@/components/MenuItem";
 
 interface ExampleMessageProps extends Pick<MessageProps, "type"> {
   name: string;
@@ -27,13 +30,25 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
           </Avatar>
           <Text>
             <strong>{name}</strong>
+            <span>Admin</span>
           </Text>
         </Align>
+        <Text>01.09.2024, 12:45</Text>
+
+        <ContextMenuTrigger>
+          <Button />
+          <ContextMenu>
+            <MenuItem>Bearbeiten</MenuItem>
+            <MenuItem>Löschen</MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
       </Header>
 
       <Content>
         <Text>{content}</Text>
       </Content>
+
+      <Button>Button</Button>
     </Message>
   );
 };

@@ -1,5 +1,4 @@
 import type { Area } from "react-easy-crop";
-import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 
 export function getCroppedImageFile(
   imageSrc: string,
@@ -56,12 +55,11 @@ export function getCroppedImageFile(
             return;
           }
 
-          const file = new File([blob], sourceImageName, {
-            type: sourceImageType,
-          });
-          addAwaitedArrayBuffer(file).then((fileWithArrayBuffer) => {
-            resolve(fileWithArrayBuffer);
-          });
+          resolve(
+            new File([blob], sourceImageName, {
+              type: sourceImageType,
+            }),
+          );
         },
         sourceImageType,
         quality,
