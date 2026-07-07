@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 import { useState } from "react";
-import { expect, test } from "vitest";
+import { beforeEach, expect, test, vitest } from "vitest";
 import PasswordCreationField from "@/components/PasswordCreationField/PasswordCreationField";
 import {
   Policy,
@@ -51,6 +51,15 @@ const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
 };
 
 describe("PasswordCreationField Tests", () => {
+  beforeEach(() => {
+    vitest.resetAllMocks();
+    vitest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vitest.useRealTimers();
+  });
+
   test("renders empty list without errors", async () => {
     await render(
       <I18nProvider locale="de">
