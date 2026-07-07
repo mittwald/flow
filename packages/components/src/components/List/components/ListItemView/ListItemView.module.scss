@@ -193,7 +193,7 @@
 
       :global(.flow--checkbox .flow--checkbox--icon) {
         color: var(--list-item--checkbox-color);
-        padding: 1px;
+        padding: var(--size-px--xxxs);
       }
     }
 
