@@ -3,11 +3,20 @@ import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
+import {
+  flowComponentsLayerPostcssPlugin,
+  flowLayerOrderPlugin,
+} from "./dev/vite/flowCssLayerPlugin";
 
 export default mergeConfig(
   baseConfig,
   defineConfig({
     experimental: {},
+    css: {
+      postcss: {
+        plugins: [flowComponentsLayerPostcssPlugin()],
+      },
+    },
     build: {
       minify: false,
       sourcemap: true,
@@ -58,6 +67,7 @@ export default mergeConfig(
         include: ["src"],
         outDirs: "dist/types",
       }),
+      flowLayerOrderPlugin(),
     ],
   }),
 );

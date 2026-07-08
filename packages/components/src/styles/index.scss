@@ -1,10 +1,22 @@
 @use "sass:meta";
 
+// Design tokens are pure CSS custom properties (cascade-layer-neutral) and are
+// intentionally left unlayered so consumers can override them with unlayered CSS.
 @forward "@mittwald/flow-design-tokens/css/base.css";
 @forward "@mittwald/flow-design-tokens/css/colors-light.css";
 @forward "@mittwald/flow-design-tokens/css/colors-dark.css";
+
+// @font-face is not affected by cascade layers; keep it unlayered.
 @forward "./fonts";
-@forward "./globals";
+
+// Flow global styles are assigned to sublayers of `flow`.
+@layer flow.reset {
+  @include meta.load-css("./globals-reset");
+}
+
+@layer flow.base {
+  @include meta.load-css("./globals-base");
+}
 
 @media (prefers-color-scheme: dark) {
   @include meta.load-css(

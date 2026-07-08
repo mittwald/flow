@@ -1,5 +1,58 @@
 # Migrations
 
+## From version `0.2.0-alpha.896` to `>=0.2.0-alpha.897`
+
+### CSS Cascade Layers
+
+> Flow's component styles are now emitted inside CSS cascade layers. Every rule
+> in `all.css` (and in the standalone `@mittwald/flow-stylesheet`) lives under a
+> top-level `flow` layer, split into the sublayers `flow.reset`, `flow.base`,
+> `flow.components` and `flow.components-override` (in ascending priority).
+> Design tokens (CSS custom properties) and `@font-face` remain **unlayered**.
+
+**What this means for you**
+
+Unlayered CSS always wins over layered CSS. So any **unlayered** style in your
+application now overrides Flow automatically — no specificity tricks and no
+`!important` needed:
+
+```css
+/* Reliably wins over Flow's component styles */
+.flow--button {
+  border-radius: 0;
+}
+```
+
+**Potential breaking change**
+
+If you previously relied on Flow winning over your own **unlayered** global CSS
+(for example an app-wide reset, `box-sizing`, link colors or base typography
+that Flow used to override), that relationship is now reversed — your unlayered
+CSS wins. Review your global styles. If you want Flow to keep precedence for a
+given rule, move that rule into a layer that you declare **before** `flow`:
+
+```css
+/* `flow` is declared last, so it wins over `base` again */
+@layer base, flow;
+
+@layer base {
+  /* rules here are overridden by Flow */
+}
+```
+
+**Overriding design tokens**
+
+Because design tokens are intentionally left unlayered, override them with
+unlayered CSS as well (a layered override would lose to Flow's unlayered token):
+
+```css
+:root {
+  --primary--color--500: #6b21a8;
+}
+```
+
+---
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart

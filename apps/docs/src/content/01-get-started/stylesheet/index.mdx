@@ -102,3 +102,42 @@ sowie den spezialisierten Klassennamen (`flow--alert--heading`), um spezifische
 Styles des Inline Alerts zu erhalten.
 
 <LiveCodeEditor example="composition" />
+
+---
+
+# CSS Cascade Layers
+
+Alle Regeln des Stylesheets liegen in CSS Cascade Layern unterhalb eines
+`flow`-Layers (Sublayer `flow.reset`, `flow.base`, `flow.components` und
+`flow.components-override`, aufsteigend nach Priorität). Design Tokens (CSS
+Custom Properties) und `@font-face` sind bewusst **nicht** gelayert.
+
+Das Wichtigste in Kürze: **ungelayertes CSS gewinnt immer gegen gelayertes
+CSS.** Dein eigenes (ungelayertes) CSS überschreibt Flow also automatisch — ohne
+Spezifitäts-Kämpfe und ohne `!important`:
+
+```css
+.flow--button {
+  border-radius: 0; /* gewinnt zuverlässig über Flow */
+}
+```
+
+Falls dein globales CSS Flow dadurch **ungewollt** überschreibt und Flow die
+Oberhand behalten soll, lege deine betroffene Regel in einen Layer, den du
+**vor** `flow` deklarierst:
+
+```css
+@layer base, flow; /* flow wird später deklariert und gewinnt über base */
+
+@layer base {
+  /* Regeln hier werden von Flow überschrieben */
+}
+```
+
+Design Tokens überschreibst du ebenfalls ungelayert:
+
+```css
+:root {
+  --primary--color--500: #6b21a8;
+}
+```
