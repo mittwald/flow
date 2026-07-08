@@ -1,11 +1,8 @@
 import jetpack from "fs-jetpack";
+import matter from "gray-matter";
 import * as path from "path";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
-import {
-  extractHeadings,
-  mdxToPlainText,
-  parseFrontmatter,
-} from "@/lib/search/plainText";
+import { extractHeadings, mdxToPlainText } from "@/lib/search/plainText";
 import type { SearchHeading, SearchIndexEntry } from "@/lib/search/types";
 
 const COMPONENTS_SEGMENT = "04-components";
@@ -42,8 +39,13 @@ export const buildSearchIndex = (
     .map((file) => {
       const relativeDir = path.dirname(path.relative(contentDir, file));
       const segments = relativeDir === "." ? [] : relativeDir.split(path.sep);
-      const { data, content } = parseFrontmatter(jetpack.read(file) ?? "");
-      return { segments, name: path.basename(file, ".mdx"), data, content };
+      const { data, content } = matter(jetpack.read(file) ?? "");
+      return {
+        segments,
+        name: path.basename(file, ".mdx"),
+        data: data as Record<string, string>,
+        content,
+      };
     });
 
   const componentMeta = new Map<

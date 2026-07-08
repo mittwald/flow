@@ -6,35 +6,6 @@ export interface DocHeading {
   slug?: string;
 }
 
-const stripQuotes = (value: string): string =>
-  value.replace(/^["'](.*)["']$/s, "$1").trim();
-
-export const parseFrontmatter = (
-  raw: string,
-): { data: Record<string, string>; content: string } => {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(raw);
-  if (!match) {
-    return { data: {}, content: raw };
-  }
-
-  const data: Record<string, string> = {};
-  let currentKey: string | null = null;
-
-  for (const line of (match[1] ?? "").split(/\r?\n/)) {
-    const keyMatch = /^([A-Za-z][\w-]*):\s*(.*)$/.exec(line);
-    const key = keyMatch?.[1];
-    if (key) {
-      currentKey = key;
-      data[key] = stripQuotes(keyMatch?.[2] ?? "");
-    } else if (currentKey && /^\s+\S/.test(line)) {
-      const existing = data[currentKey];
-      data[currentKey] = `${existing ? `${existing} ` : ""}${line.trim()}`;
-    }
-  }
-
-  return { data, content: raw.slice(match[0].length) };
-};
-
 const stripCodeFences = (mdx: string): string =>
   mdx.replace(/```[\s\S]*?```/g, " ");
 
