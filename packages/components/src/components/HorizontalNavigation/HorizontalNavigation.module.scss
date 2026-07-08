@@ -1,0 +1,115 @@
+@use "@/styles/mixins/focus";
+
+.horizontalNavigation {
+  position: relative;
+  overflow-x: clip;
+  display: flex;
+  width: 100%;
+  background-color: var(--horizontal-navigation--background-color--default);
+}
+
+.visibleList,
+.measureList {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+
+.measureList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  width: max-content;
+}
+
+.visibleList {
+  width: 100%;
+}
+
+li {
+  list-style: none;
+
+  &:has(.overflowButton) {
+    margin-left: auto;
+  }
+}
+
+.link {
+  padding: var(--horizontal-navigation--padding);
+  background-color: var(--horizontal-navigation--background-color--default);
+  color: var(--horizontal-navigation--color);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+  @include focus.focus;
+
+  & {
+    outline-offset: calc(var(--size-px--xs) * -1);
+  }
+
+  &:hover:not([aria-current]) {
+    background-color: var(--horizontal-navigation--background-color--hover);
+  }
+
+  &[data-pressed]:not([aria-current]) {
+    background-color: var(--horizontal-navigation--background-color--pressed);
+  }
+
+  &[aria-current] {
+    background-color: var(--horizontal-navigation--background-color--selected);
+    font-weight: var(--horizontal-navigation--font-weight--selected);
+  }
+}
+
+.linkContent {
+  display: flex;
+  align-items: center;
+  column-gap: var(--horizontal-navigation--spacing);
+}
+
+.overflowButton.overflowButton {
+  outline-offset: calc(var(--size-px--xs) * -1);
+  padding: var(--horizontal-navigation--padding);
+  font-weight: initial;
+  border-radius: 0;
+  background-color: var(--horizontal-navigation--background-color--default);
+
+  &:hover {
+    background-color: var(--horizontal-navigation--background-color--hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--horizontal-navigation--background-color--pressed);
+  }
+}
+
+/**
+ * The overflow button looks "selected" when the currently active link is
+ * hidden in the overflow menu. This is detected purely via CSS (instead of
+ * introspecting the hidden link's props in JS) because that also has to work
+ * when HorizontalNavigation is used through the remote-DOM bridge, where
+ * `children` are opaque renderer components rather than plain elements with
+ * directly readable props.
+ */
+.horizontalNavigation:has(.overflowLinkSource [aria-current]) {
+  .overflowButton.overflowButton {
+    background-color: var(--horizontal-navigation--background-color--selected);
+    font-weight: var(--horizontal-navigation--font-weight--selected);
+
+    &:hover,
+    &[data-pressed] {
+      background-color: var(--horizontal-navigation--background-color--selected);
+    }
+  }
+}
+
+.overflowLinkSource {
+  display: none;
+}
+
+.menuItemCurrent.menuItemCurrent {
+  background-color: var(--menu-item--background-color--current);
+  font-weight: var(--menu-item--font-weight--current);
+}

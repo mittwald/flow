@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "components",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": [
+        "-c",
+        "PATH=/Users/lmeyer/.nvm/versions/node/v22.14.0/bin:$PATH pnpm nx dev components"
+      ],
+      "port": 6006
+    },
+    {
+      "name": "docs",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["nx", "dev", "docs"],
+      "port": 3000
+    }
+  ]
+}

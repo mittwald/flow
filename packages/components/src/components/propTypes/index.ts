@@ -74,6 +74,7 @@ import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import type { MenuTriggerProps } from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
+import type { HorizontalNavigationProps } from "@/components/HorizontalNavigation";
 import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
@@ -134,6 +135,7 @@ export interface FlowComponentPropsTypes {
   FileDropZone: FileDropZoneProps;
   Header: HeaderProps;
   Heading: HeadingProps;
+  HorizontalNavigation: HorizontalNavigationProps;
   Icon: IconProps;
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
@@ -226,6 +228,7 @@ const propsContextSupportingComponentsMap: Record<
   FileDropZone: true,
   Header: true,
   Heading: true,
+  HorizontalNavigation: true,
   Icon: true,
   IllustratedMessage: true,
   Image: true,
