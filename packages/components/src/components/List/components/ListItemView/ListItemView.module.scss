@@ -174,13 +174,15 @@
       height: 100%;
       border-radius: 0;
 
-      :global(.flow--avatar--icon) {
-        width: var(--size-px--xxl);
-        height: var(--size-px--xxl);
-      }
+      @layer flow.components-override {
+        :global(.flow--avatar--icon) {
+          width: var(--size-px--xxl);
+          height: var(--size-px--xxl);
+        }
 
-      :global(.flow--avatar--initials) {
-        font-size: var(--size-px--xxl);
+        :global(.flow--avatar--initials) {
+          font-size: var(--size-px--xxl);
+        }
       }
     }
 

@@ -15,8 +15,10 @@
 
   .checkbox,
   .checkboxButton {
-    :global(.flow--form-field) {
-      display: block;
+    @layer flow.components-override {
+      :global(.flow--form-field) {
+        display: block;
+      }
     }
 
     &[data-invalid]:not([data-selected]) {

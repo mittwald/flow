@@ -1,8 +1,10 @@
 .cartesianChart {
   font-family: Inter, sans-serif;
 
-  *:focus:not(:focus-visible) {
-    outline: none !important;
+  @layer flow.components-override {
+    *:focus:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   :global(.flow--illustrated-message--illustrated-message-container) {

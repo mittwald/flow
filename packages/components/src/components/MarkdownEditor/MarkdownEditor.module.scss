@@ -43,8 +43,10 @@
     @include formControl.formColor;
   }
 
-  :global(.flow--form-field) {
-    display: contents;
+  @layer flow.components-override {
+    :global(.flow--form-field) {
+      display: contents;
+    }
   }
 
   textarea,
