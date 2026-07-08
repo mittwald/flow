@@ -1,5 +1,9 @@
 # Contribute
 
+> **Deep-dive companion to the [root CONTRIBUTING.md](../../CONTRIBUTING.md).**
+> Start there for prerequisites, setup, and the general workflow. This file is
+> the detailed reference for visual regression testing.
+
 ## Visual Regression Testing
 
 In the `src/tests/visual` directory, you will find visual regression tests for

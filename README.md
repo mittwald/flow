@@ -18,10 +18,15 @@ the [Migration Guide](/packages/components/MIGRATION.md).
 
 ## Contributing
 
-### Dev Environment
+Contributions are welcome! See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the
+full guide — prerequisites, project setup, how to add a component, testing, and
+our commit and pull-request conventions.
 
-To start the dev environment for the components package, run:
+Quick start:
 
 ```shell
-pnpm nx dev components
+corepack enable            # use the pinned pnpm version
+pnpm install
+pnpm dev:init-githooks     # install the local Git hooks
+pnpm nx dev components     # start Storybook on http://localhost:6006
 ```

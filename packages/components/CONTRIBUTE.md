@@ -1,5 +1,9 @@
 # Contribute
 
+> **Deep-dive companion to the [root CONTRIBUTING.md](../../CONTRIBUTING.md).**
+> Start there for prerequisites, setup, and the general component workflow. This
+> file covers `@mittwald/flow-react-components` specifics.
+
 ## Develop with remote component support
 
 Here are some general rules when developing with support for remote components:
