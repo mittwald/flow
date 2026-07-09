@@ -15,19 +15,19 @@ permissions:
 jobs:
   publish:
     if:
-      github.event_name == 'workflow_dispatch' ||
-      github.event.pull_request.merged == true
+      (github.event_name == 'workflow_dispatch' && secrets.PUBLISH_PAT != '') ||
+      (github.event.pull_request.merged == true && secrets.PUBLISH_PAT != '')
     runs-on: ubuntu-latest
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
-      GH_TOKEN: ${{ secrets.PUBLISH_PAT || github.token }}
+      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
     steps:
       - name: Checkout ⬇️
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          token: ${{ secrets.PUBLISH_PAT || github.token }}
+          token: ${{ secrets.PUBLISH_PAT }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
