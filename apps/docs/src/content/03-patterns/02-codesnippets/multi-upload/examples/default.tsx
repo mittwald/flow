@@ -17,9 +17,12 @@ export default () => {
     <Section>
       <FileDropZone
         multiple
-        onChange={(value) => {
-          if (value) {
-            setFiles([...files, ...value]);
+        onChange={(droppedFiles) => {
+          if (droppedFiles) {
+            setFiles((existingFiles) => [
+              ...existingFiles,
+              ...droppedFiles,
+            ]);
           }
         }}
       >
