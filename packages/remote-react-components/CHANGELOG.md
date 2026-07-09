@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** adjust validation behavior ([#2618](https://github.com/mittwald/flow/issues/2618)) ([4bb31c3](https://github.com/mittwald/flow/commit/4bb31c3377334bc0f73cd1225f84992c6901422a))
+
 # [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

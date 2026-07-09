@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** adjust validation behavior ([#2618](https://github.com/mittwald/flow/issues/2618)) ([4bb31c3](https://github.com/mittwald/flow/commit/4bb31c3377334bc0f73cd1225f84992c6901422a))
+* **Workflow:** publish workflow trigger to preserve release credentials on merged PRs ([#2627](https://github.com/mittwald/flow/issues/2627)) ([5943478](https://github.com/mittwald/flow/commit/5943478c31c34358cab37a3f862c5d3fec4c23c9))
+
+### Features
+
+* **docs:** fulltext search ([#2594](https://github.com/mittwald/flow/issues/2594)) ([f920e5c](https://github.com/mittwald/flow/commit/f920e5c9ac07e4452841e1ebd1824a0d9e8ae3ff))
+
 # [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
 
 ### Bug Fixes
