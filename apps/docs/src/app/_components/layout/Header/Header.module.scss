@@ -34,7 +34,8 @@
 }
 
 @media (max-width: 1400px) {
-  .headerNavigation {
+  .headerNavigation,
+  .desktopActions {
     display: none !important;
   }
 

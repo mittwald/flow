@@ -39,7 +39,7 @@ const Header: FC<Props> = (props) => {
             <Groups docs={docs.map((mdx) => mdx.serialize())} />
           </HeaderNavigation>
         </Flex>
-        <Flex gap="m">
+        <Flex gap="m" className={styles.desktopActions}>
           <SearchButton controller={searchController} />
           <ThemeSwitcherButton />
         </Flex>
