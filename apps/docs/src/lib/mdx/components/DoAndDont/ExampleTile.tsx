@@ -19,7 +19,6 @@ export interface DoAndDontTileProps extends PropsWithChildren {
   bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
   heading?: string;
   mobile?: boolean;
-  stretch?: boolean;
   row?: boolean;
 }
 

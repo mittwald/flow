@@ -2,12 +2,9 @@
   padding: var(--size-px--l);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  justify-content: center;
   gap: var(--size-rem--m);
-
-  &.stretch {
-    align-items: stretch;
-  }
 
   &.row {
     flex-flow: row wrap;
