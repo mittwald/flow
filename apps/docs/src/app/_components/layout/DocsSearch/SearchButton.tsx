@@ -19,7 +19,7 @@ export const SearchButton: FC<Props> = ({ controller, iconOnly }) => {
   if (iconOnly) {
     return (
       <Button
-        variant="outline"
+        variant="plain"
         onPress={() => controller.open()}
         aria-label={"Dokumentation durchsuchen"}
       >
