@@ -197,7 +197,7 @@ for the Component:
 3. `# Inhalt` — which elements and sub-Components belong inside the Component
    (for example, which content a Modal should contain).
 
-4. `# Writing guidelines` — how the content displayed inside the Component is
+4. `# Writing Guidelines` — how the content displayed inside the Component is
    worded. Depending on the Component, this may include Labels, Text, Icons, or
    Illustrations.
 
@@ -220,7 +220,7 @@ The Styleguide content is written in **German**.
   „Komponente“ / „Komponenten“.
 - Headings are written in German (`# Grundlagen`, `# Anwendung`, `# Verhalten`).
   Established technical terms remain English — for example `Best practices`,
-  `Writing guidelines`, `Accessibility`, `Playground`, `Properties`, and
+  `Writing Guidelines`, `Accessibility`, `Playground`, `Properties`, and
   property names such as `Disabled`.
 - Headings use sentence case: only the first word and names/terms are
   capitalized (`## Best practices`, `## Responsive layout`).
