@@ -28,3 +28,12 @@ Verwende ein CounterBadge, um ...
 - die Anzahl von Elementen anzuzeigen, zum Beispiel bei offenen Tickets.
 - visuell auf Hinweise oder Warnungen innerhalb eines Navigationselements (z. B.
   Tabs oder Menüpunkte) aufmerksam zu machen.
+
+---
+
+# Accessibility
+
+Da das CounterBadge selbst nicht accessible ist, muss der Wert über das
+darunterliegende Element vermittelt werden. Wird das CounterBadge zum Beispiel
+auf einem Button platziert, sollte der Button ein `aria-label` erhalten, das die
+Zahl des Counters enthält.

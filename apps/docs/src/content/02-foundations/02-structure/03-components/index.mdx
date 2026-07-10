@@ -28,12 +28,12 @@ vs.
 
 # Logik
 
-Component Libraries basieren in der Regel darauf, Komponenten zu verschachteln,
-um größere Komponenten zu bauen. Das ist ein weit verbreitetes und effektives
-Pattern, das außerdem leicht verständlich ist. Genau deshalb unterstützen wir
-dieses Modell auch in Flow. Wenn man zum Beispiel ein CounterBadge innerhalb
-eines Buttons platziert, wird dieses automatisch oben rechts positioniert – so,
-wie man es erwarten würde.
+Komponenten-Libraries basieren in der Regel darauf, Komponenten zu
+verschachteln, um größere Komponenten zu bauen. Das ist ein weit verbreitetes
+und effektives Pattern, das außerdem leicht verständlich ist. Genau deshalb
+unterstützen wir dieses Modell auch in Flow. Wenn man zum Beispiel ein
+CounterBadge innerhalb eines Buttons platziert, wird dieses automatisch oben
+rechts positioniert – so, wie man es erwarten würde.
 
 ---
 
@@ -68,7 +68,7 @@ verwendet werden.
 
 # Suspense- / ErrorBoundaries
 
-Nur mit dem „Components-Ansatz“ ist es möglich, Child-Komponenten in Loading-
+Nur mit dem „Komponenten-Ansatz“ ist es möglich, Child-Komponenten in Loading-
 oder ErrorBoundaries zu kapseln.
 
 ```
@@ -92,7 +92,7 @@ unterstützt? Jede unterstützte Eigenschaft müsste dann als
 `counter[CounterProp]` im Button (und möglicherweise weiteren
 Parent-Komponenten) vorhanden sein.
 
-Aufgeblähte Gesamtbibliothek vs. All-Mighty-Components
+Aufgeblähte Gesamtbibliothek vs. All-Mighty-Komponenten
 
 Wenn Flow für jeden Anwendungsfall spezielle Komponenten anbieten würde, müsste
 es z. B. einen `IconButton`, einen `CounterBadgeButton` und streng genommen
@@ -100,14 +100,14 @@ sogar einen `IconCounterBadgeButton` geben. Das würde schnell zu sehr vielen
 Komponenten führen.
 
 Und was wäre, wenn man stattdessen alles direkt im Button unterstützt? Das führt
-meist zu sehr großen „All-Mighty-Components“ ohne klaren Scope und mit
+meist zu sehr großen „All-Mighty-Komponenten“ ohne klaren Scope und mit
 überladener Implementierung.
 
 ---
 
 # Children in Unterkomponenten
 
-Nur mit dem „Components-Ansatz“ ist es möglich, Children auch in
+Nur mit dem „Komponenten-Ansatz“ ist es möglich, Children auch in
 Unterkomponenten zu verwenden.
 
 ```
