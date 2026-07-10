@@ -184,7 +184,7 @@ for the Component:
 1. `# Grundlagen` — a short introduction (plain text directly below the
    heading), followed by:
 
-- `## Best practices` — a bullet list opening with the phrase _„Achte bei der
+- `## Best Practices` — a bullet list opening with the phrase _„Achte bei der
   Verwendung einer/eines X darauf, dass ..."_
 - `## Verwendung` — a bullet list opening with the phrase _„Verwende eine/n X,
   um ..."_
@@ -202,7 +202,7 @@ for the Component:
    Illustrations.
 
 5. `# Verhalten` — how the Component behaves in different situations, such as
-   `## Responsive layout` or interaction behavior.
+   `## Responsive Layout` or interaction behavior.
 
 6. `# Accessibility` — accessibility considerations specific to the Component.
 
@@ -219,11 +219,14 @@ The Styleguide content is written in **German**.
   States, and Props. The generic word itself, however, is written in German:
   „Komponente“ / „Komponenten“.
 - Headings are written in German (`# Grundlagen`, `# Anwendung`, `# Verhalten`).
-  Established technical terms remain English — for example `Best practices`,
+  Established technical terms remain English — for example `Best Practices`,
   `Writing Guidelines`, `Accessibility`, `Playground`, `Properties`, and
   property names such as `Disabled`.
-- Headings use sentence case: only the first word and names/terms are
-  capitalized (`## Best practices`, `## Responsive layout`).
+- English headings and terms use title case: every main word is capitalized
+  (`## Best Practices`, `## Responsive Layout`, `# Writing Guidelines`). German
+  headings follow regular German orthography — function words stay lowercase and
+  sentence-like headings remain unchanged (`# Reihenfolge der Tabs`,
+  `# Kombiniere mit ...`).
 
 ## Tone of Voice
 
