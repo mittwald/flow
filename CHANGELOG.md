@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.899](https://github.com/mittwald/flow/compare/0.2.0-alpha.898...0.2.0-alpha.899) (2026-07-10)
+
+### Bug Fixes
+
+* **ci:** scope screenshot workflow concurrency to label to prevent cancellation on new labels ([#2632](https://github.com/mittwald/flow/issues/2632)) ([6195667](https://github.com/mittwald/flow/commit/619566759cd22cc59c239fc53692773c0221ac04))
+
 # [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
 
 **Note:** Version bump only for package @mittwald/flow-project
