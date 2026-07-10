@@ -1,0 +1,136 @@
+@use "@/styles/mixins/focus";
+
+.horizontalNavigation {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background-color: var(--horizontal-navigation--background-color--default);
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  li {
+    display: flex;
+    list-style: none;
+  }
+
+  /* Elements */
+
+  .link {
+    display: flex;
+    align-items: center;
+    column-gap: var(--horizontal-navigation--spacing);
+    padding: var(--horizontal-navigation--padding);
+    background-color: var(--horizontal-navigation--background-color--default);
+    color: var(--horizontal-navigation--color);
+    white-space: nowrap;
+    transition-property: background-color;
+
+    @include focus.focus;
+
+    & {
+      outline-offset: calc(var(--size-px--xs) * -1);
+    }
+
+    &:hover {
+      background-color: var(--horizontal-navigation--background-color--hover);
+      transition-duration: var(--transition--duration--default);
+    }
+
+    &[data-pressed] {
+      background-color: var(
+        --horizontal-navigation--background-color--pressed
+      );
+      transition-duration: var(--transition--duration--default);
+    }
+
+    &[aria-current] {
+      background-color: var(
+        --horizontal-navigation--background-color--current
+      );
+      font-weight: var(--horizontal-navigation--font-weight--current);
+    }
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    column-gap: var(--horizontal-navigation--spacing);
+  }
+
+  .more {
+    display: flex;
+    align-items: stretch;
+
+    /* Rendered (but hidden) when there is no overflow, so its width can be
+       reserved before items are collapsed. */
+    visibility: hidden;
+    position: absolute;
+    inset-inline-end: 0;
+  }
+
+  .moreButton {
+    display: flex;
+    align-items: center;
+    column-gap: var(--horizontal-navigation--spacing);
+    padding: var(--horizontal-navigation--padding);
+    border: none;
+    border-radius: 0;
+    background-color: var(--horizontal-navigation--background-color--default);
+    color: var(--horizontal-navigation--color);
+    cursor: pointer;
+    white-space: nowrap;
+    transition-property: background-color;
+
+    @include focus.focus;
+
+    & {
+      outline-offset: calc(var(--size-px--xs) * -1);
+    }
+
+    &:hover {
+      background-color: var(--horizontal-navigation--background-color--hover);
+      transition-duration: var(--transition--duration--default);
+    }
+
+    &[data-pressed] {
+      background-color: var(
+        --horizontal-navigation--background-color--pressed
+      );
+      transition-duration: var(--transition--duration--default);
+    }
+
+    &.current,
+    &.current:hover {
+      background-color: var(
+        --horizontal-navigation--background-color--current
+      );
+      font-weight: var(--horizontal-navigation--font-weight--current);
+    }
+  }
+
+  /* States */
+
+  &.collapsed {
+    .more {
+      visibility: visible;
+      position: static;
+    }
+  }
+}
+
+/* Menu items of collapsed links (rendered inside the context menu popover,
+   outside of the navigation element). */
+.menuItem {
+  &.current,
+  &.current:hover {
+    background-color: var(--menu-item--background-color--current);
+    font-weight: var(--menu-item--font-weight--current);
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "storybook",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["nx", "dev", "components"],
+      "port": 6006
+    },
+    {
+      "name": "remote-dom-demo",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["nx", "dev", "remote-dom-demo"],
+      "port": 3000
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+horizontal-navigation:
+  padding:
+    value: "{size-px.m}"
+  background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
+    current:
+      value: "{neutral.color.100}"
+  color:
+    value: "{neutral-soft-content-color}"
+  font-weight:
+    current:
+      value: "{font-weight.bold}"
+  spacing:
+    value: "{size-rem.s}"

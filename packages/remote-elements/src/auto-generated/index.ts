@@ -56,6 +56,7 @@ export * from "./RemoteFlexElement";
 export * from "./RemoteHeaderElement";
 export * from "./RemoteHeaderNavigationElement";
 export * from "./RemoteHeadingElement";
+export * from "./RemoteHorizontalNavigationElement";
 export * from "./RemoteIconElement";
 export * from "./RemoteIllustratedMessageElement";
 export * from "./RemoteImageElement";

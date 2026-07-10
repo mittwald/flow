@@ -57,6 +57,7 @@ import { Flex as Flex } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
 import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components";
 import { Heading as Heading } from "@mittwald/flow-react-components";
+import { HorizontalNavigation as HorizontalNavigation } from "@mittwald/flow-react-components";
 import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
@@ -282,6 +283,10 @@ export const flowComponents = {
     HeaderNavigation,
   ),
   "flr-heading": createFlowRemoteComponentRenderer("Heading", Heading),
+  "flr-horizontal-navigation": createFlowRemoteComponentRenderer(
+    "HorizontalNavigation",
+    HorizontalNavigation,
+  ),
   "flr-icon": createFlowRemoteComponentRenderer("Icon", Icon),
   "flr-illustrated-message": createFlowRemoteComponentRenderer(
     "IllustratedMessage",

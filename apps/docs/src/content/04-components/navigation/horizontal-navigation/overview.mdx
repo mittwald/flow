@@ -1,0 +1,32 @@
+# Playground
+
+Verwende `<HorizontalNavigation />`, um eine horizontale Navigation aus
+[Links](/04-components/navigation/link/overview) darzustellen. Enthaltene Links
+werden automatisch im passenden Style formatiert. Markiere die aktuell aktive
+Seite mit `aria-current="page"`.
+
+<LiveCodeEditor />
+
+---
+
+# Responsives Overflow-Verhalten
+
+Passen nicht alle Links in die verfügbare Breite, bleiben die vorderen Links
+sichtbar und die übrigen werden ausgeblendet. Stattdessen erscheint rechts ein
+**Weitere**-Button, der die ausgeblendeten Links in einem
+[ContextMenu](/04-components/actions/context-menu/overview) öffnet. Befindet
+sich die aktuell aktive Seite im ContextMenu, wird der Button wie ein aktiver
+Link dargestellt.
+
+<LiveCodeEditor example="overflow" editorCollapsed />
+
+---
+
+# Mit Status-Icons
+
+Innerhalb der Links können Status-Icons wie das AlertIcon oder die
+[AlertBadge](/04-components/status/alert-badge/overview) verwendet werden, um
+auf Zustände innerhalb eines Navigationsbereichs hinzuweisen. Sie werden auch in
+den Einträgen des ContextMenus dargestellt.
+
+<LiveCodeEditor example="status" editorCollapsed />

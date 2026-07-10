@@ -56,6 +56,7 @@ export * from "./Flex";
 export * from "./Header";
 export * from "./HeaderNavigation";
 export * from "./Heading";
+export * from "./HorizontalNavigation";
 export * from "./Icon";
 export * from "./IllustratedMessage";
 export * from "./Image";
