@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
+
+### Bug Fixes
+
+* **Remote:** flag @quilted/threads not as externalized ([#2620](https://github.com/mittwald/flow/issues/2620)) ([286515e](https://github.com/mittwald/flow/commit/286515e84e4e6b5802333c66dddd2206c50bc6f9))
+
+# [0.2.0-alpha.895](https://github.com/mittwald/flow/compare/0.2.0-alpha.894...0.2.0-alpha.895) (2026-07-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.894](https://github.com/mittwald/flow/compare/0.2.0-alpha.893...0.2.0-alpha.894) (2026-07-07)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 # [0.2.0-alpha.893](https://github.com/mittwald/flow/compare/0.2.0-alpha.892...0.2.0-alpha.893) (2026-07-06)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

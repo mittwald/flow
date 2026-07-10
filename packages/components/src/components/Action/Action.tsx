@@ -9,6 +9,7 @@ import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { ActionFn } from "@/components/Action/types";
 import { useActionState } from "@/components/Action/hooks/useActionState";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {
@@ -57,10 +58,15 @@ export const Action = flowComponent(
       ...actionProps
     } = props;
 
-    if ("action" in actionProps && typeof actionProps.action === "function") {
-      console.warn(
+    const warnDeprecation = useWarnDeprecation();
+    const usesDeprecatedActionProp =
+      "action" in actionProps && typeof actionProps.action === "function";
+
+    if (usesDeprecatedActionProp) {
+      warnDeprecation(
         "The 'action' prop is now deprecated. Use 'onAction' instead.",
       );
+
       if ("onAction" in actionProps === false) {
         actionProps.onAction = actionProps.action as ActionFn;
       }

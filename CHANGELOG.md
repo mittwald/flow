@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** adjust validation behavior ([#2618](https://github.com/mittwald/flow/issues/2618)) ([4bb31c3](https://github.com/mittwald/flow/commit/4bb31c3377334bc0f73cd1225f84992c6901422a))
+* **Workflow:** publish workflow trigger to preserve release credentials on merged PRs ([#2627](https://github.com/mittwald/flow/issues/2627)) ([5943478](https://github.com/mittwald/flow/commit/5943478c31c34358cab37a3f862c5d3fec4c23c9))
+
+### Features
+
+* **docs:** fulltext search ([#2594](https://github.com/mittwald/flow/issues/2594)) ([f920e5c](https://github.com/mittwald/flow/commit/f920e5c9ac07e4452841e1ebd1824a0d9e8ae3ff))
+
+# [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
+
+### Bug Fixes
+
+* **Remote:** flag @quilted/threads not as externalized ([#2620](https://github.com/mittwald/flow/issues/2620)) ([286515e](https://github.com/mittwald/flow/commit/286515e84e4e6b5802333c66dddd2206c50bc6f9))
+
+# [0.2.0-alpha.895](https://github.com/mittwald/flow/compare/0.2.0-alpha.894...0.2.0-alpha.895) (2026-07-07)
+
+### Bug Fixes
+
+* **Remote:** use correct patch annotation ([78cb8ec](https://github.com/mittwald/flow/commit/78cb8ec75c17b810aac2104d4808dea655af457f))
+
+# [0.2.0-alpha.894](https://github.com/mittwald/flow/compare/0.2.0-alpha.893...0.2.0-alpha.894) (2026-07-07)
+
+### Features
+
+* **components:** add deprecation warning provider ([#2614](https://github.com/mittwald/flow/issues/2614)) ([7c95067](https://github.com/mittwald/flow/commit/7c95067b82754bd198d74704ba6d69d0c633745f))
+
 # [0.2.0-alpha.893](https://github.com/mittwald/flow/compare/0.2.0-alpha.892...0.2.0-alpha.893) (2026-07-06)
 
 **Note:** Version bump only for package @mittwald/flow-project
