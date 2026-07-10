@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.900](https://github.com/mittwald/flow/compare/0.2.0-alpha.899...0.2.0-alpha.900) (2026-07-10)
+
+### Bug Fixes
+
+* **List:** use plain dark variant for list item options button ([#2630](https://github.com/mittwald/flow/issues/2630)) ([bf71490](https://github.com/mittwald/flow/commit/bf7149076763e23b1541c940b5d237ccfdc8e443))
+
 # [0.2.0-alpha.899](https://github.com/mittwald/flow/compare/0.2.0-alpha.898...0.2.0-alpha.899) (2026-07-10)
 
 ### Bug Fixes
