@@ -10,15 +10,15 @@ export const getStateFromLatestPolicyValidationResult = (
   isEmptyValue: boolean,
   result: ResolvedPolicyValidationResult,
 ): StateFromLatestPolicyValidationResult => {
+  if (result.isValid === "indeterminate") {
+    return undefined;
+  }
+
   if (result.ruleResults.length >= 1) {
     const failingRule = result.ruleResults.find((r) => !r.isValid);
     if (failingRule) {
       return failingRule;
     }
-  }
-
-  if (result.isValid === "indeterminate") {
-    return undefined;
   }
 
   if (!isEmptyValue) {

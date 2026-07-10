@@ -6,6 +6,9 @@ const nextConfig = {
   basePath: process.env.NEXT_BASE_PATH ?? "",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   transpilePackages: ["next-mdx-remote"],
+  env: {
+    NEXT_PUBLIC_BASE_PATH: process.env.NEXT_BASE_PATH ?? "",
+  },
 };
 
 const withMDX = createMDX();

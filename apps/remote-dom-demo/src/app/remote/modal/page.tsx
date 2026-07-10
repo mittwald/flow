@@ -134,7 +134,7 @@ export default function Page() {
         <LightBoxTrigger>
           <Button>Lightbox</Button>
           <LightBox>
-            <Image src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg" />
+            <Image src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg" />
           </LightBox>
         </LightBoxTrigger>
 

@@ -22,7 +22,7 @@ import {
     </Text>
   </Section>
   <Image
-    src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
+    src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
     alt="mittwald"
   />
 </ColumnLayout>;
