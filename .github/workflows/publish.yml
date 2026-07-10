@@ -2,7 +2,7 @@ name: Publish packages to NPM
 
 on:
   workflow_dispatch:
-  pull_request:
+  pull_request_target:
     types:
       - closed
     branches:
@@ -20,14 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
-      GH_TOKEN: ${{ secrets.PUBLISH_PAT || github.token }}
+      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
     steps:
       - name: Checkout ⬇️
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          token: ${{ secrets.PUBLISH_PAT || github.token }}
+          token: ${{ secrets.PUBLISH_PAT }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
