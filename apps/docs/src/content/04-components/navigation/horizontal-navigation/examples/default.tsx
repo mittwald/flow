@@ -3,7 +3,6 @@ import {
   Link,
   AlertIcon,
 } from "@mittwald/flow-react-components";
-import React from "react";
 
 <HorizontalNavigation aria-label="Projekt-Navigation">
   <Link href="#">Apps</Link>
