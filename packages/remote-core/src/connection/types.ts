@@ -12,6 +12,13 @@ export interface NavigationState {
   isPending: boolean;
 }
 
+export interface RemoteReadyEvent {
+  version: Version;
+  packageVersion?: string;
+}
+
+export type RemoteReadyEventInput = Version | RemoteReadyEvent;
+
 export type RemoteExtBridgeConfig = Omit<
   ExtBridgeConfigInput,
   keyof HostConfig
@@ -31,7 +38,7 @@ export interface RemoteExtBridgeConnectionApi extends Omit<
  * When addding properties, make sure to release the host before all clients.
  */
 export interface HostExports extends ExtBridgeConnectionApi {
-  setIsReady: (version?: Version) => Promise<void>;
+  setIsReady: (event?: RemoteReadyEventInput) => Promise<void>;
   setIsLoading: (isLoading: boolean) => Promise<void>;
   setError: (error: string) => Promise<void>;
   setNavigationState: (state: NavigationState) => Promise<void>;
@@ -54,9 +61,15 @@ export interface HostToRemoteConnection {
   updateHostPathname: (hostPathname?: string) => void;
 }
 
+export interface HostToRemoteConnectionReadyEvent {
+  connection: HostToRemoteConnection;
+  remoteReadyEvent: RemoteReadyEvent;
+}
+
 export enum Version {
   vUnknown = 0,
   v1 = 1,
   v2 = 2,
   v3 = 3,
+  v4 = 4,
 }
