@@ -73,6 +73,12 @@ export const generateLlmsTxt = async (siteUrl: string): Promise<string> => {
     "",
     "The React components are published as `@mittwald/flow-react-components`. " +
       "Source code and issues live at https://github.com/mittwald/flow.",
+    "",
+    `For machine-readable Markdown, fetch [${normalizedSiteUrl}/llms-full.txt]` +
+      `(${normalizedSiteUrl}/llms-full.txt) for the full documentation, or get a ` +
+      "single page by prefixing its path with `/raw/` and appending `.md` " +
+      `(e.g. ${normalizedSiteUrl}/raw/04-components/actions/button/develop.md). ` +
+      `A JSON manifest of all pages is at ${normalizedSiteUrl}/llms.json.`,
   ].join("\n");
 
   return [header, "", ...renderedSections, ""].join("\n\n");
