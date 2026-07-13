@@ -10,17 +10,19 @@
   border: var(--layout-card--border-width) var(--layout-card--border-style)
     var(--layout-card--border-color);
 
-  > .tabs {
-    margin: calc(var(--layout-card--padding) * -1);
+  > .horizontalNavigation {
+    margin-top: calc(var(--layout-card--padding) * -1);
+    margin-inline: calc(var(--layout-card--padding) * -1);
+    margin-bottom: var(--layout-card--padding);
+    border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
+    border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
 
-    :global(.flow--tabs--tab-list) {
-      border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
+    li:first-child :global(.flow--horizontal-navigation--link) {
       border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
 
-    :global(.flow--tabs--tab-title):first-child,
-    :global(.flow--tabs--tab-list--context-menu-button) {
-      border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
+    :global(.flow--horizontal-navigation--more-button) {
+      border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
   }
 
@@ -40,8 +42,10 @@
   .layoutCard {
     padding: var(--layout-card--padding-mobile);
 
-    > .tabs {
-      margin: calc(var(--layout-card--padding-mobile) * -1);
+    > .horizontalNavigation {
+      margin-top: calc(var(--layout-card--padding-mobile) * -1);
+      margin-inline: calc(var(--layout-card--padding-mobile) * -1);
+      margin-bottom: var(--layout-card--padding-mobile);
     }
 
     &:has(> .accentBox:only-child) {

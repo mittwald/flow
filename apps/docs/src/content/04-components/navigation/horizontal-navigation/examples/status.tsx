@@ -1,6 +1,6 @@
 import {
-  AlertBadge,
   AlertIcon,
+  Badge,
   HorizontalNavigation,
   Link,
 } from "@mittwald/flow-react-components";
@@ -15,6 +15,6 @@ import {
   </Link>
   <Link href="#">
     Backups
-    <AlertBadge status="warning">2</AlertBadge>
+    <Badge color="violet">Neu</Badge>
   </Link>
 </HorizontalNavigation>;

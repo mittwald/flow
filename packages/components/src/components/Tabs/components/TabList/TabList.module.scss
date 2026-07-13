@@ -1,12 +1,14 @@
 .tabList {
   background-color: var(--tabs--background-color--default);
   position: relative;
-  overflow-x: clip;
+  border-radius: var(--tabs--corner-radius);
 
   .contextMenuButton {
-    padding: var(--tabs--padding);
-    border-radius: 0;
+    padding-block: var(--tabs--padding-y);
+    padding-inline: var(--tabs--padding-x);
     background-color: var(--tabs--background-color--selected);
+    border-radius: var(--tabs--corner-radius);
+    box-shadow: var(--tabs--box-shadow) !important;
   }
 
   .titles {

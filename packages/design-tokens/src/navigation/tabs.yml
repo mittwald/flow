@@ -1,6 +1,12 @@
 tabs:
-  padding:
+  padding-y:
+    value: "{size-px.s}"
+  padding-x:
     value: "{size-px.m}"
+  corner-radius:
+    value: "calc({size-px.s} * 2 + {line-height-m})"
+  box-shadow:
+    value: "{shadow.content}"
   background-color:
     default:
       value: "{neutral-soft-background-color.default}"
