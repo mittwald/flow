@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.904](https://github.com/mittwald/flow/compare/0.2.0-alpha.903...0.2.0-alpha.904) (2026-07-13)
+
+### Features
+
+* **docs:** make documentation agent-ready with markdown, llms.json, sitemap and discovery metadata ([#2635](https://github.com/mittwald/flow/issues/2635)) ([1e7e579](https://github.com/mittwald/flow/commit/1e7e57918223f11aa73f3cce0f803db53e378d7c))
+
 # [0.2.0-alpha.903](https://github.com/mittwald/flow/compare/0.2.0-alpha.902...0.2.0-alpha.903) (2026-07-13)
 
 ### Bug Fixes
