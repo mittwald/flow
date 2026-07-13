@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.901](https://github.com/mittwald/flow/compare/0.2.0-alpha.900...0.2.0-alpha.901) (2026-07-13)
+
+### Features
+
+* **remote:** expose package version in connection handshake ([#2610](https://github.com/mittwald/flow/issues/2610)) ([9637dce](https://github.com/mittwald/flow/commit/9637dcea778f0254ea81084d89434b06f070df16))
+
 # [0.2.0-alpha.900](https://github.com/mittwald/flow/compare/0.2.0-alpha.899...0.2.0-alpha.900) (2026-07-10)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
