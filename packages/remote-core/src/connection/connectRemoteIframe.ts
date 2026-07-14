@@ -24,6 +24,7 @@ interface Options {
   onLoadingChanged?: (isLoading: boolean) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
+  onDeprecation?: (message: string) => void;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
 
@@ -51,6 +52,7 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     onLoadingChanged,
     onError,
     onNavigationStateChanged,
+    onDeprecation,
     extBridgeImplementation: extBridgeImplementationProp = emptyImplementation,
     hostConfig,
   } = opts;
@@ -81,6 +83,9 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         },
         setNavigationState: async (state) => {
           onNavigationStateChanged?.(state);
+        },
+        reportDeprecation: async (message: string) => {
+          onDeprecation?.(message);
         },
         getHostConfig: async () => {
           return hostConfig;

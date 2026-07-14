@@ -25,6 +25,8 @@ import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
 import {
+  DeprecationWarningProvider,
+  type DeprecationWarningHandler,
   IntlProvider,
   useLanguage,
 } from "@mittwald/flow-react-components/flr-universal";
@@ -98,6 +100,12 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const handleRenderError = (error: unknown) => {
     renderErrorRef.current = error;
     connectionRef.current?.imports.setError(stringifyError(error));
+  };
+
+  const forwardDeprecationWarning: DeprecationWarningHandler = (message) => {
+    void connectionRef.current?.imports.reportDeprecation(message).catch(() => {
+      // ignore: host does not support deprecation reporting
+    });
   };
 
   const setIsLoadingFromProps = () => {
@@ -174,11 +182,13 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
             }}
           >
             <IntlProvider locale={language}>
-              <Suspense fallback={loadingFallback}>
-                <ViewComponentContextProvider components={viewComponents}>
-                  {children}
-                </ViewComponentContextProvider>
-              </Suspense>
+              <DeprecationWarningProvider onWarning={forwardDeprecationWarning}>
+                <Suspense fallback={loadingFallback}>
+                  <ViewComponentContextProvider components={viewComponents}>
+                    {children}
+                  </ViewComponentContextProvider>
+                </Suspense>
+              </DeprecationWarningProvider>
             </IntlProvider>
           </RemoteContextProvider>
         )}

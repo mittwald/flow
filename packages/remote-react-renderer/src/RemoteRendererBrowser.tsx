@@ -34,6 +34,7 @@ export interface RemoteRendererBrowserProps {
   timeoutMs?: number;
   onNavigationStateChanged?: (state: NavigationState) => void;
   onConnected?: (event: RemoteReadyEvent) => void;
+  onDeprecation?: (message: string) => void;
   hostPathname?: string;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
@@ -59,6 +60,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     extBridgeImplementation,
     onNavigationStateChanged,
     onConnected,
+    onDeprecation,
     hostPathname,
     __remoteReceiver: remoteReceiverFromProps,
   } = props;
@@ -130,6 +132,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     },
     onError: setRemoteError,
     onNavigationStateChanged,
+    onDeprecation,
   });
 
   const timeoutPromise = (message: string) =>
