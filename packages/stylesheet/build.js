@@ -6,13 +6,21 @@ import { createRequire } from "module";
 const stylesheetPathname = createRequire(import.meta.url).resolve(
   "@mittwald/flow-react-components/all.css",
 );
+const unlayeredStylesheetPathname = createRequire(import.meta.url).resolve(
+  "@mittwald/flow-react-components/all.unlayered.css",
+);
 
 const thisDirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 const targetPathname = path.join(thisDirname, "dist/styles.css");
+const unlayeredTargetPathname = path.join(
+  thisDirname,
+  "dist/styles.unlayered.css",
+);
 
 if (!fs.existsSync(path.dirname(targetPathname))) {
   fs.mkdirSync(path.dirname(targetPathname));
 }
 
 fs.copyFileSync(stylesheetPathname, targetPathname);
+fs.copyFileSync(unlayeredStylesheetPathname, unlayeredTargetPathname);

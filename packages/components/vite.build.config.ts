@@ -3,6 +3,9 @@ import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
+import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin";
+import { layerOrderPlugin } from "./dev/vite/layerOrderPlugin";
+import { unlayeredCssPlugin } from "./dev/vite/unlayeredCssPlugin";
 
 export default mergeConfig(
   baseConfig,
@@ -45,7 +48,14 @@ export default mergeConfig(
         },
       },
     },
+    css: {
+      postcss: {
+        plugins: [flowComponentsLayerPlugin()],
+      },
+    },
     plugins: [
+      layerOrderPlugin(),
+      unlayeredCssPlugin(),
       banner((filename) =>
         filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
           ? '"use client"\r\n/* */'

@@ -6,7 +6,8 @@
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./css": "./dist/styles.css"
+    "./css": "./dist/styles.css",
+    "./css-unlayered": "./dist/styles.unlayered.css"
   },
   "files": [
     "dist"

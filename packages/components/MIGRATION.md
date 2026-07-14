@@ -1,5 +1,52 @@
 # Migrations
 
+## Stylesheet: CSS Cascade Layers
+
+> Flow's generated stylesheet is now wrapped in CSS Cascade Layers. **Unlayered
+> CSS in your application now always overrides Flow's styles, regardless of
+> specificity.**
+
+The stylesheet is organized under a top-level `flow` layer:
+
+```css
+@layer flow.tokens, flow.reset, flow.base, flow.components;
+```
+
+**Before:** overriding a Flow style required matching or exceeding its
+specificity (nested selectors or `!important`).
+
+**Now:** any unlayered rule wins:
+
+```css
+.flow--button {
+  border-radius: 0;
+}
+```
+
+If you rely on your own global element styles or resets losing against Flow, note
+that unlayered styles now **win** against Flow's (layered) styles. Move such
+styles into a layer declared before `flow`, or raise their intent.
+
+If you use CSS Cascade Layers yourself (e.g. Tailwind), declare your layers
+**after** `flow` so they keep precedence.
+
+**Extreme case — a global `* { all: initial }` reset:** an unlayered reset like
+this now overrides **every** Flow style and leaves components unstyled. Either move
+the reset into a layer declared before `flow`, or use the unlayered stylesheet
+variant below.
+
+**Opt-out — unlayered variant:** if you cannot adopt layers, import the unlayered
+build instead. It ships the same styles without `@layer`, so Flow's `.flow--*`
+selectors win by specificity again (you lose easy layer-based overriding):
+
+```ts
+import "@mittwald/flow-react-components/all.unlayered.css";
+// or, from the standalone stylesheet package:
+import "@mittwald/flow-stylesheet/css-unlayered";
+```
+
+---
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart
