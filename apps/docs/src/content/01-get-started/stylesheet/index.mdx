@@ -31,12 +31,27 @@ import "@mittwald/flow-stylesheet/css";
 
 ---
 
-# CSS Cascade Layers
+# Layered-Variante (optional)
 
-Flows Styles sind in
+Das Standard-Stylesheet (`@mittwald/flow-stylesheet/css`) ist **ungelayert**:
+welche Regel gewinnt, entscheidet sich wie gewohnt über Spezifität und
+Quell-Reihenfolge – gegenüber früheren Versionen ändert sich nichts.
+
+Optional gibt es eine **gelayerte Variante**, deren Styles in
 [CSS Cascade Layers](https://developer.mozilla.org/de/docs/Web/CSS/@layer)
-organisiert. Das gesamte Stylesheet liegt unter einem `flow`-Layer mit dieser
-Reihenfolge:
+organisiert sind:
+
+```
+import "@mittwald/flow-stylesheet/css-layered";
+```
+
+Aus dem `@mittwald/flow-react-components`-Paket entsprechend:
+
+```
+import "@mittwald/flow-react-components/all-layered.css";
+```
+
+Sie liegt unter einem `flow`-Layer mit dieser Reihenfolge:
 
 ```css
 @layer flow.tokens, flow.reset, flow.base, flow.components;
@@ -49,12 +64,11 @@ Reihenfolge:
 
 ---
 
-## Eigene Styles haben Vorrang
+## Warum die gelayerte Variante?
 
 Nach den Regeln der Cascade Layers gewinnt **ungelayertes** CSS immer gegen
-gelayertes – unabhängig von der Spezifität. Deine eigenen Styles überschreiben
-Flows Styles daher ohne `!important` oder Spezifitäts-Tricks, solange sie nicht
-selbst in einem Layer liegen, der vor `flow` deklariert ist:
+gelayertes – unabhängig von der Spezifität. Mit der gelayerten Variante
+überschreibst du Flows Styles daher ohne `!important` oder Spezifitäts-Tricks:
 
 ```css
 /* Gewinnt gegen Flows .flow--button, ohne !important */
@@ -68,28 +82,14 @@ Layer **nach** `flow`, damit sie Vorrang behalten.
 
 ---
 
-## Ungelayerte Variante
+## Welche Variante wann?
 
-Falls deine App die Layer (noch) nicht adoptieren kann – etwa weil sie einen
-aggressiven, ungelayerten Reset wie `* { all: initial }` mitbringt, der die
-gelayerten Flow-Styles vollständig überschreiben würde – gibt es eine
-**ungelayerte** Fassung des Stylesheets:
-
-```
-import "@mittwald/flow-stylesheet/css-unlayered";
-```
-
-Aus dem `@mittwald/flow-react-components`-Paket entsprechend:
-
-```
-import "@mittwald/flow-react-components/all.unlayered.css";
-```
-
-Diese Variante enthält dieselben Styles ohne `@layer`. Damit gilt wieder das
-klassische, spezifitätsbasierte Verhalten: Flows `.flow--*`-Selektoren setzen sich
-gegen generische App-Selektoren durch. Nutze sie nur, wenn du die gelayerte
-Standard-Variante nicht verwenden kannst – die Überschreibbarkeit über eigene
-Layer entfällt dann.
+- **Standard (`css` / `all.css`):** klassisches, spezifitätsbasiertes Verhalten,
+  unverändert gegenüber früheren Versionen. Passt auch für Apps mit einem
+  aggressiven globalen Reset (z. B. `* { all: initial }`), der gelayerte Styles
+  sonst vollständig überschreiben würde.
+- **Layered (`css-layered` / `all-layered.css`):** einfache, spezifitätsfreie
+  Überschreibbarkeit und saubere Interop mit eigenen Cascade Layers.
 
 ---
 

@@ -3,7 +3,8 @@
 - **Status:** Accepted
 - **Date:** 2026-07-07
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
-- **Affects:** `@mittwald/flow-react-components` (`./all.css`), `@mittwald/flow-stylesheet`
+- **Affects:** `@mittwald/flow-react-components` (`./all.css`, `./all-layered.css`),
+  `@mittwald/flow-stylesheet` (`./css`, `./css-layered`)
 
 ## Context and problem statement
 
@@ -12,10 +13,9 @@
 
 Flow ships its CSS as one bundled stylesheet. Components are authored in ~114
 `*.module.scss` files (CSS Modules + Sass) and bundled by Vite/Rollup into a single
-artifact (`dist/css/all.css`), which `@mittwald/flow-stylesheet` re-exports
-unchanged. The foundation layer (design tokens as CSS custom properties,
-`@font-face`, and a global reset with `all: initial` in `globals.scss`) comes from
-`src/styles/index.scss` as a separate build branch.
+artifact (`dist/css/all.css`), which `@mittwald/flow-stylesheet` re-exports. The
+foundation layer (design tokens as CSS custom properties, `@font-face`, and a global
+reset with `all: initial` in `globals.scss`) comes from `src/styles/index.scss`.
 
 Today Flow uses **no** CSS cascade layers (`@layer`). Which rule wins is decided
 solely by **specificity + source order**. Flow relies on a prefix naming scheme
@@ -31,247 +31,209 @@ That leads to two recurring problems:
    precedence.
 
 React Aria Components ship **no CSS of their own** — Flow styles their
-data-/class-hooks itself. So there is no third-party CSS conflict to account for
-from that direction.
+data-/class-hooks itself. So there is no third-party CSS conflict from that
+direction.
 
 ## Decision drivers
 
-- **Overridability without a specificity fight** for consumers.
+- **Overridability without a specificity fight** for consumers who want it.
 - **Deterministic, language-guaranteed layer ordering** within Flow (tokens before
   reset before components).
+- **No forced breaking change** for existing consumers — cascade layers change how
+  overrides resolve, so adopting them must be opt-in.
 - **Minimal invasiveness** in the ~114 SCSS sources.
-- **Interop** with consumer setups, especially Tailwind v4 (which uses `@layer`
-  itself).
+- **Interop** with consumer setups, especially Tailwind v4 (which uses `@layer`).
 - **Browser support** must fit Flow's support matrix.
 
 ## Options considered
 
-### Option A — Status quo (no layers)
+*Layer granularity:*
 
-No change. Cascade stays specificity + order based.
+### Option A — Status quo (no layers)
 
 - ➕ No effort, no breakage.
 - ➖ Solves neither problem. Override pain remains.
 
 ### Option B — A single layer `@layer flow`
 
-Wrap the entire bundled CSS in one layer.
+- ➕ Simplest contract; overrides become trivial.
+- ➖ No internal layer separation.
 
-- ➕ Simplest contract; consumer overrides become trivial.
-- ➕ Doable post-build in one step.
-- ➖ No internal layer separation; foundation and components stay in the same layer.
+### Option C — Nested sublayers `@layer flow.tokens, flow.reset, flow.base, flow.components` *(chosen for the layered variant)*
 
-### Option C — Nested sublayers `@layer flow.tokens, flow.reset, flow.base, flow.components` *(chosen)*
+- ➕ Overrides trivial; deterministic internal order; consumers can intervene
+  between levels.
+- ➖ Slightly more build logic.
 
-A top-level `flow` layer with a defined sub-order.
+*Default behavior:*
 
-- ➕ Consumer overrides trivial (like B).
-- ➕ Deterministic internal order: tokens → base/reset → components.
-- ➕ Consumers can intervene between levels when needed.
-- ➖ Slightly more build logic; the sub-boundaries must be derived from the existing
-  foundation/component split.
+Wrapping the **default** `all.css` in layers changes how existing consumers'
+unlayered CSS resolves against Flow (unlayered then beats Flow regardless of
+specificity — a runtime behavior change; the extreme case is an app-wide
+`* { all: initial }` that would wipe layered Flow entirely). To avoid forcing that
+on anyone, the layered stylesheet is shipped as an **opt-in variant** rather than
+replacing the default.
 
 ## Decision
 
-Flow wraps its generated stylesheet in **nested CSS cascade layers** under a
-top-level `flow` layer:
+Flow ships **two** stylesheet variants:
 
-```css
-@layer flow.tokens, flow.reset, flow.base, flow.components;
-```
+- **`all.css` / `css` (default, unlayered)** — unchanged behavior. Cascade stays
+  specificity + source order based, exactly as before. Adopting this release is
+  **non-breaking**.
+- **`all-layered.css` / `css-layered` (opt-in, layered)** — the same styles wrapped
+  in nested CSS cascade layers under a top-level `flow` layer:
 
-- **`flow.tokens`** — design-token declarations (CSS custom properties).
-  **Deliberately layered too**, so consumers can override tokens without
-  specificity tricks.
-- **`flow.reset`** — the global reset from `globals.scss` (`all: initial`,
-  `prefers-reduced-motion`, `display` reverts, base typography defaults,
-  `color-scheme`). Its own lowest style layer, so the reset unintentionally
-  overrides neither components nor consumer styles.
-- **`flow.base`** — `@font-face` (from `fonts.scss`) and future global base styles.
-- **`flow.components`** — all component module styles.
+  ```css
+  @layer flow.tokens, flow.reset, flow.base, flow.components;
+  ```
 
-The order is deliberate: reset at the bottom (only value tokens before it), then
-base, then components. Since `globals.scss` already contains exclusively reset
-rules (fonts live separately in `fonts.scss`), `flow.reset` can be assigned the
-file as a whole — no cut within a file needed.
+  - **`flow.tokens`** — design-token declarations (CSS custom properties), layered
+    so consumers can override tokens without specificity tricks.
+  - **`flow.reset`** — the global reset from `globals.scss` (`all: initial`,
+    `prefers-reduced-motion`, `display` reverts, base typography, `color-scheme`);
+    its own lowest style layer.
+  - **`flow.base`** — `@font-face` (from `fonts.scss`) and future global base
+    styles.
+  - **`flow.components`** — all component module styles.
+
+Both variants come from the same build: the pipeline layers the CSS at the source,
+which yields the layered variant directly; the default is that output with the
+`@layer` wrappers stripped (see "Implementation").
 
 Further decisions:
 
-- **Flow-owned layers only.** Flow declares and documents **no** layer order
+- **Flow-owned layers only.** The layered variant declares/documents no layer order
   relative to consumer layers (e.g. Tailwind). Consumers position their own layers
-  themselves. Flow only guarantees that its CSS lives entirely under `flow.*`.
-- **In-place implementation at the source.** The ~114 `*.module.scss` stay
-  untouched. The sublayers are assigned at their respective source (token build,
-  `index.scss`, PostCSS plugin for components) and an order declaration is hoisted
-  to the top of the merged `all.css` — no separate files, no assembly step. See
-  "Implementation".
-- **Rollout as a hard breaking change** for the default `all.css` in the next alpha
-  release; additionally an **unlayered opt-out variant** as a separate export (see
-  "Rollout & migration").
+  themselves; Flow only guarantees its CSS lives entirely under `flow.*`.
+- **Non-breaking rollout.** The default `all.css` keeps today's behavior; the
+  layered variant is purely additive.
 
 ## Consequences
 
 ### Positive
 
-- Consumers override any Flow rule with **unlayered** CSS — regardless of
-  specificity, without `!important`.
-- Flow's internal cascade is language-guaranteed: components beat the base, the
-  base beats tokens — no matter how Rollup concatenates the files.
-- Future-proof for more granular consumer control without pinning down a consumer
+- **Non-breaking:** existing consumers on `all.css` / `css` see no change.
+- Consumers who opt into the layered variant override any Flow rule with
+  **unlayered** CSS — regardless of specificity, without `!important` — and get a
+  language-guaranteed internal order (components beat base beats tokens).
+- Future-proof for more granular consumer control, without pinning down a consumer
   contract today.
 
 ### Negative / risks
 
-- **Behavior break on overrides.** Layered CSS generally loses against unlayered.
-  Consumers who relied on Flow *overriding* their global styles/resets get
-  regressions. Example: a global, unlayered `button { background: red }` previously
-  lost against `.flow--button` and now wins.
-- **Reset interaction.** The `all: initial` reset lives in the lowest style layer
-  `flow.reset` and therefore loses against unlayered consumer resets as well as
-  against all other Flow layers. This is consistent with the model but must be
-  called out explicitly in the migration. Positive side effect: today's necessary
-  fine-tuning of reset specificity (consistently 0-0-2 via `:where()`) becomes less
-  critical, since components already beat the reset via layer order.
-- **Browser support.** `@layer` is supported from Chrome/Edge 99, Firefox 97,
-  Safari 15.4 (all ~Q1 2022, global >96%). In browsers without support the entire
-  `@layer` rule is **ignored** — Flow's CSS would not apply there *at all*. Flow
-  maintains **no** official browser-support matrix; the `@layer` baseline (~Q1 2022)
-  is therefore the de-facto floor. This is deemed acceptable, since all relevant
-  evergreen browsers have supported the feature for years.
+- **Two artifacts to maintain and document.** Consumers must consciously choose the
+  layered variant to gain the benefit.
+- **Opt-in behavior semantics.** In the layered variant, layered CSS loses to
+  unlayered CSS. A consumer adopting it whose unlayered global styles/resets used to
+  lose against Flow will now see those win (extreme case: `* { all: initial }`
+  wipes Flow). This is why it is opt-in; documented in the stylesheet docs.
+- **Browser support (layered variant).** `@layer` is supported from Chrome/Edge 99,
+  Firefox 97, Safari 15.4 (all ~Q1 2022, global >96%). In browsers without support
+  the entire `@layer` rule is **ignored** — the layered variant would not apply
+  there at all; those consumers should use the default `all.css`. Flow keeps no
+  official browser-support matrix; the `@layer` baseline (~Q1 2022) is the de-facto
+  floor for the layered variant.
 - **Tooling.** Minifiers/bundlers must preserve `@layer`. esbuild (current
-  `cssMinify`) and Lightning CSS do; verify before release.
+  `cssMinify`) does; verify before release.
 
 ## Rollout & migration
 
-Since Flow is explicitly in `0.2.x-alpha` **without stability guarantees**, the
-**default stylesheet is switched hard**: `all.css` is layered going forward. As an
-**opt-out**, an **unlayered variant** is additionally shipped (see "Unlayered
-variant" below) — so the switch is not forced, without diluting the layered default
-variant.
+**Non-breaking.** The default `all.css` / `css` is unchanged; the layered variant is
+an additional opt-in export. No consumer action is required to adopt the release.
 
-- Layering becomes **active by default** for `all.css` in the next alpha bump; the
-  existing `all.css` is replaced directly by the layered variant.
-- Entry in `packages/components/MIGRATION.md` with:
-  - Explanation of the new model (unlayered beats `flow.*`).
-  - "Before/after" for the most common case (overriding gets *easier* — no more
-    `!important`).
-  - Warning for the regression case (global element styles/resets now win against
-    Flow). **Extreme case:** an app-wide, unlayered `* { all: initial }` now
-    overrides *all* Flow styles and leaves components unstyled. Recommendation: put
-    your own reset in a layer *before* `flow` — or use the unlayered variant.
-
-### Unlayered variant
-
-For consumers who cannot (yet) adopt cascade layers, or whose app ships an
-aggressive, unlayered reset (`* { all: initial }`), an additional **unlayered**
-version is exported:
-
-- `@mittwald/flow-react-components/all.unlayered.css`
-- `@mittwald/flow-stylesheet/css-unlayered`
-
-It is derived from the layered `all.css` by stripping the `@layer` wrappers (the
-relative rule order is preserved). This restores the old, specificity-based
-behavior: Flow's `.flow--*` selectors win over generic app selectors. The default
-export (`all.css` / `css`) stays layered.
+- The stylesheet docs page documents both variants and when to pick the layered one.
+- Consumers who want easy, specificity-free overriding (or full Tailwind-style layer
+  interop) opt into `all-layered.css` / `css-layered`. When adopting it, an
+  app-side unlayered reset that conflicts with Flow (e.g. `* { all: initial }`)
+  should be moved into a layer declared before `flow`.
 
 ## Implementation
 
 > **Verified via a local build** (see
 > [ADR 0002](./0002-stylesheet-generation.md)): the release build produces **a
-> single** `all.css` with tokens, fonts, reset and components. There are no separate
-> foundation/component assets.
+> single** CSS output containing tokens, fonts, reset and components. There are no
+> separate foundation/component assets.
 
-The sublayers are assigned **in place at their respective source** — no emit of
-separate `flow-*.css` files, no assembly step. The merged `all.css` contains the
-`@layer` blocks distributed throughout; a leading order declaration fixes the
-priority, independent of the physical position of the blocks. The ~114
-`*.module.scss` stay untouched. Implemented and verified via
+The pipeline assigns the sublayers **in place at their respective source**, which
+produces the layered variant; the unlayered default is that output with `@layer`
+stripped. The ~114 `*.module.scss` stay untouched. Implemented and verified via
 `corepack pnpm --filter @mittwald/flow-react-components build`:
 
 1. **`flow.tokens` — token build (Style Dictionary).**
-   `packages/design-tokens/build-tokens.js` generates the token CSS across **7
-   destinations** (`base`, `colors-light`, `colors-dark`, the `*-system` variants,
-   `all-light/-dark`), each with its own `:root` selector. A custom registered
-   format `css/variables-layered` wraps the `css/variables` output in
-   `@layer flow.tokens { … }` (respecting `selector` + `outputReferences`). Since
-   these files flow into `index.scss` via `@forward`, the layer travels into
-   `all.css`; the `:root[data-theme=…]` and `prefers-color-scheme` selectors are
+   `packages/design-tokens/build-tokens.js` registers a custom format
+   `css/variables-layered` that wraps the `css/variables` output (all 7
+   destinations; `selector` + `outputReferences` preserved) in
+   `@layer flow.tokens { … }`. Via `@forward` in `index.scss` the layer travels into
+   the bundle; the `:root[data-theme=…]` / `prefers-color-scheme` selectors are
    preserved inside the layer.
 
 2. **`flow.reset` / `flow.base` — `index.scss`.**
-   `packages/components/src/styles/index.scss` assigns reset and fonts via
-   `@layer flow.reset { @include meta.load-css("./globals"); }` and
-   `@layer flow.base { @include meta.load-css("./fonts"); }` respectively, and
-   declares the order `@layer flow.tokens, flow.reset, flow.base, flow.components;`.
+   `packages/components/src/styles/index.scss` assigns the reset via
+   `@layer flow.reset { @include meta.load-css("./globals"); }` and fonts via
+   `@layer flow.base { @include meta.load-css("./fonts"); }`, and declares the order.
 
 3. **`flow.components` — PostCSS plugin.**
    `packages/components/dev/vite/flowComponentsLayerPlugin.ts` wraps every
-   `*.module.(scss|css)` under `/src/components/` in `@layer flow.components` during
-   CSS processing. Vite's CSS-modules scoping pipeline stays untouched, since only
-   the parsed root is wrapped (`.module.css` **and** `.module.scss` are covered).
+   `*.module.(scss|css)` under `/src/components/` in `@layer flow.components`
+   without disturbing Vite's CSS-modules scoping.
 
 4. **Order declaration — Vite `writeBundle`.**
-   esbuild (`cssMinify`) drops the declaration originating from `index.scss`;
-   `packages/components/dev/vite/layerOrderPlugin.ts` hoists it to the top of
-   `all.css` (after an optional `@charset`) after minification and removes
-   duplicates.
+   esbuild (`cssMinify`) drops the declaration from `index.scss`;
+   `packages/components/dev/vite/layerOrderPlugin.ts` hoists it to the top of the
+   emitted `all.css` (after an optional `@charset`) and removes duplicates. This
+   emitted file is the **layered** output.
 
-**Deliberate consequence (in-place instead of separate files):** Since `all.css`
-stays a merged artifact, tokens cannot easily be shipped separately at the document
-level — this complicates Shadow-DOM encapsulation (tokens on the document `:root`,
-components in the shadow root, because `:root` does not match inside the shadow
-tree). If this use case becomes relevant, the file-per-layer approach should be
-reconsidered.
+5. **Variant split — Vite `writeBundle`.**
+   `packages/components/dev/vite/stylesheetVariantsPlugin.ts` writes the layered
+   output to `all-layered.css`, then strips all `@layer` wrappers (block-form
+   `replaceWith(nodes)`, statement-form `remove`) and overwrites `all.css` with the
+   unlayered result. `@mittwald/flow-stylesheet` copies both into `styles.css`
+   (default) and `styles-layered.css`.
 
-**Open technical point:** The `writeBundle` rewrite shifts byte offsets after
-minification → the `all.css.map` is then slightly inaccurate; follow up for
-production.
+**Note (Shadow DOM):** since the layered variant is a single merged file, tokens
+cannot easily be shipped separately at the document level, which complicates
+Shadow-DOM encapsulation (tokens on the document `:root`, components in the shadow
+root, because `:root` does not match inside the shadow tree). If that use case
+becomes relevant, a file-per-layer approach should be reconsidered.
+
+**Open technical point:** the `writeBundle` rewrite shifts byte offsets after
+minification → the sourcemap is then slightly inaccurate; follow up for production.
 
 ## Resolved points
 
-All originally open points are decided:
-
-1. **Browser support:** There is no official support matrix. The `@layer` baseline
-   (~Q1 2022) is the accepted floor.
-2. **Artifact reality:** Confirmed via a local build — `all.css` stays a single,
-   merged bundle (see "Implementation" /
-   [ADR 0002](./0002-stylesheet-generation.md)). The sublayers are therefore
-   assigned **in place at the source** (no separate file emit, no assembly).
-3. **Escape hatch:** The default `all.css` is switched hard to layered; additionally
-   an **unlayered variant** is shipped as an opt-out export (`./all.unlayered.css`
-   and `./css-unlayered`) — among others for apps with an aggressive
-   `* { all: initial }` reset (see "Rollout & migration").
-4. **`flow.tokens`:** Token declarations are layered (consumers can override tokens
-   without specificity tricks).
+1. **Browser support:** No official support matrix; the `@layer` baseline (~Q1 2022)
+   is the accepted floor for the layered variant. Older browsers use the default.
+2. **Artifact reality:** Confirmed via a local build — the build yields a single
+   merged output (see "Implementation" /
+   [ADR 0002](./0002-stylesheet-generation.md)); the variants are produced by
+   keeping vs. stripping `@layer`.
+3. **Default vs. opt-in:** The default `all.css` / `css` stays **unlayered**
+   (non-breaking); the layered variant is shipped as the opt-in
+   `all-layered.css` / `css-layered`.
+4. **`flow.tokens`:** Token declarations are layered in the layered variant
+   (consumers can override tokens without specificity tricks).
 
 ## Implementation status
 
-A spike implements the layers and is verified via
-`corepack pnpm --filter @mittwald/flow-react-components build` (the built `all.css`
-begins with the order declaration, all four sublayers correctly populated,
-including the three `*.module.css` components). Implemented in:
+A spike implements the variants and is verified via
+`corepack pnpm --filter @mittwald/flow-react-components build` and
+`--filter @mittwald/flow-stylesheet build`. Implemented in:
 
-- `packages/design-tokens/build-tokens.js` – Style Dictionary format
-  `css/variables-layered` wraps the token CSS in `@layer flow.tokens`.
-- `packages/components/src/styles/index.scss` – reset in `@layer flow.reset`, fonts
-  in `@layer flow.base`, order declaration.
-- `packages/components/dev/vite/flowComponentsLayerPlugin.ts` – PostCSS plugin that
-  wraps every `*.module.(scss|css)` in `@layer flow.components`.
-- `packages/components/dev/vite/layerOrderPlugin.ts` – Vite `writeBundle` plugin
-  that hoists the order declaration to the top of `all.css` after minification
-  (esbuild drops it otherwise).
-
-The **in-place approach** (per-module wrap + order hoist in a merged `all.css`) is
-the decided implementation; the "Implementation" section describes it. The
-file-per-layer variant is rejected (kept only as an option for a later Shadow-DOM
-use case, see "Implementation").
+- `packages/design-tokens/build-tokens.js` – `css/variables-layered` format.
+- `packages/components/src/styles/index.scss` – reset/fonts layers + order.
+- `packages/components/dev/vite/flowComponentsLayerPlugin.ts` – component wrap.
+- `packages/components/dev/vite/layerOrderPlugin.ts` – order-declaration hoist.
+- `packages/components/dev/vite/stylesheetVariantsPlugin.ts` – emits
+  `all-layered.css` and strips `@layer` for the unlayered default `all.css`.
+- exports: `@mittwald/flow-react-components` `./all-layered.css`,
+  `@mittwald/flow-stylesheet` `./css-layered`.
 
 ## Next steps
 
-- Sourcemap accuracy: the `writeBundle` rewrite shifts offsets in `all.css.map` –
-  follow up for production.
+- Sourcemap accuracy: the `writeBundle` rewrite shifts offsets; follow up for
+  production.
 - Full-pipeline run in CI (`corepack pnpm nx build components` with a complete
   workspace/codegen).
-- Cosmetic: the 117 individual `@layer flow.components` blocks could be merged into
+- Cosmetic: the many individual `@layer flow.components` blocks could be merged into
   one.
-- `packages/components/MIGRATION.md` added; finalize the version heading at release.

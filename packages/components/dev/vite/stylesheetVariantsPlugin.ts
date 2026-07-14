@@ -1,11 +1,11 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import postcss from "postcss";
 import type { AtRule } from "postcss";
 import type { Plugin } from "vite";
 
-export const unlayeredCssPlugin = (): Plugin => ({
-  name: "flow-unlayered-css",
+export const stylesheetVariantsPlugin = (): Plugin => ({
+  name: "flow-stylesheet-variants",
   writeBundle: (options, bundle) => {
     for (const asset of Object.values(bundle)) {
       if (asset.type !== "asset" || asset.fileName !== "css/all.css") {
@@ -13,10 +13,13 @@ export const unlayeredCssPlugin = (): Plugin => ({
       }
 
       const fileName = join(options.dir ?? "dist", asset.fileName);
-      const root = postcss.parse(readFileSync(fileName, "utf8"), {
+      const layeredCss = readFileSync(fileName, "utf8");
+      const root = postcss.parse(layeredCss, {
         from: fileName,
       });
       const layerAtRules: AtRule[] = [];
+
+      writeFileSync(join(options.dir ?? "dist", "css/all-layered.css"), layeredCss);
 
       root.walkAtRules("layer", (atRule) => {
         layerAtRules.push(atRule);
@@ -30,7 +33,15 @@ export const unlayeredCssPlugin = (): Plugin => ({
         }
       }
 
-      writeFileSync(join(options.dir ?? "dist", "css/all.unlayered.css"), root.toString());
+      writeFileSync(fileName, root.toString());
+
+      const previousUnlayeredFileName = join(
+        options.dir ?? "dist",
+        "css/all.unlayered.css",
+      );
+      if (existsSync(previousUnlayeredFileName)) {
+        unlinkSync(previousUnlayeredFileName);
+      }
     }
   },
 });

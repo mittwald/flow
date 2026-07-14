@@ -5,7 +5,7 @@ import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin";
 import { layerOrderPlugin } from "./dev/vite/layerOrderPlugin";
-import { unlayeredCssPlugin } from "./dev/vite/unlayeredCssPlugin";
+import { stylesheetVariantsPlugin } from "./dev/vite/stylesheetVariantsPlugin";
 
 export default mergeConfig(
   baseConfig,
@@ -55,7 +55,7 @@ export default mergeConfig(
     },
     plugins: [
       layerOrderPlugin(),
-      unlayeredCssPlugin(),
+      stylesheetVariantsPlugin(),
       banner((filename) =>
         filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
           ? '"use client"\r\n/* */'

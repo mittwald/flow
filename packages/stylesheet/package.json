@@ -7,7 +7,7 @@
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     "./css": "./dist/styles.css",
-    "./css-unlayered": "./dist/styles.unlayered.css"
+    "./css-layered": "./dist/styles-layered.css"
   },
   "files": [
     "dist"
