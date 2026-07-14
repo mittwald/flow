@@ -11,21 +11,31 @@ import {
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "@/app/layout.module.scss";
+import { rawMarkdownPath } from "@/lib/llms/siteUrls";
 
 interface Props {
   mdxFile: MdxFile;
+  section: string;
 }
 
 export const TopContent: FC<Props> = (props) => {
-  const { mdxFile } = props;
+  const { mdxFile, section } = props;
 
   const component = mdxFile.mdxSource.frontmatter.component;
+  const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
+
+  const markdownLink = (
+    <Link href={markdownUrl} target="_blank">
+      Markdown
+    </Link>
+  );
 
   if (!component) {
     return (
       <LayoutCard className={styles.mainContent}>
         <Heading level={1}>{mdxFile.getTitle()}</Heading>
         {mdxFile.mdxSource.frontmatter.description}
+        {markdownLink}
         <MdxFileView mdxFile={mdxFile.serialize()} />
       </LayoutCard>
     );
@@ -43,6 +53,7 @@ export const TopContent: FC<Props> = (props) => {
             GitHub
             <IconExternalLink />
           </Link>
+          {markdownLink}
         </Section>
 
         <MdxFileView mdxFile={mdxFile.serialize()} />

@@ -38,7 +38,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Flex columnGap="m">
-        <TopContent mdxFile={indexMdxFile} />
+        <TopContent mdxFile={indexMdxFile} section="02-foundations" />
 
         <AnchorNavigation
           currentPath={`${path}`}
