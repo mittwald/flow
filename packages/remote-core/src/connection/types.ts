@@ -43,6 +43,7 @@ export interface HostExports extends ExtBridgeConnectionApi {
   setError: (error: string) => Promise<void>;
   setNavigationState: (state: NavigationState) => Promise<void>;
   getHostConfig: () => Promise<HostConfig>;
+  reportDeprecation: (message: string) => Promise<void>;
 }
 
 export interface RemoteExports {
