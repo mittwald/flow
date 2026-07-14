@@ -103,9 +103,11 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   };
 
   const forwardDeprecationWarning: DeprecationWarningHandler = (message) => {
-    void connectionRef.current?.imports.reportDeprecation(message).catch(() => {
-      // ignore: host does not support deprecation reporting
-    });
+    void connectionRef.current?.imports
+      .reportDeprecation?.(message)
+      ?.catch(() => {
+        // ignore: host does not support deprecation reporting
+      });
   };
 
   const setIsLoadingFromProps = () => {
