@@ -1,7 +1,5 @@
-import {
-  Label,
-  PasswordCreationField,
-} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { PasswordCreationField } from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useState } from "react";
 
 export default () => {

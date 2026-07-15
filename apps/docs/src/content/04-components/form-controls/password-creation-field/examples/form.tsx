@@ -8,9 +8,9 @@ import { sleep } from "@/content/04-components/actions/action/examples/lib";
 import {
   Label,
   Section,
-  PasswordCreationField,
 } from "@mittwald/flow-react-components";
 import {
+  PasswordCreationField,
   generatePasswordCreationFieldValidation,
   Policy,
   RuleType,

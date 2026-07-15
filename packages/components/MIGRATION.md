@@ -1,5 +1,31 @@
 # Migrations
 
+## From version `<1.0.0` to `1.0.0`
+
+### PasswordCreationField moved to dedicated export entry
+
+`PasswordCreationField` is no longer exported from
+`@mittwald/flow-react-components`.
+
+Use `@mittwald/flow-react-components/mittwald-password-tools-js` instead:
+
+```diff
+- import { PasswordCreationField } from "@mittwald/flow-react-components";
++ import { PasswordCreationField } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+```
+
+### Use Codemod
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow100.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. If you do not use TypeScript in your
+project, use `--parser jsx`.
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart

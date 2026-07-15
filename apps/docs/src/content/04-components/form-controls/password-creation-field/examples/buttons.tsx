@@ -1,9 +1,9 @@
 import {
   Button,
   Label,
-  PasswordCreationField,
   IconSshKey,
 } from "@mittwald/flow-react-components";
+import { PasswordCreationField } from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useState } from "react";
 export default () => {
   const [password, setPassword] = useState("");
