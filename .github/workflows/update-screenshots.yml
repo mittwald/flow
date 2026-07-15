@@ -17,12 +17,15 @@ env:
 jobs:
   update-screenshots:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     if: |
       ${{ (github.event.label.name == 'update-screenshots') && (github.head_ref != github.event.repository.default_branch) }}
 
     # one at a time per branch
     concurrency:
-      group: visual-regression-screenshots@${{ github.head_ref }}@${{ github.event.label.name }}
+      group:
+        visual-regression-screenshots@${{ github.head_ref }}@${{
+        github.event.label.name }}
       cancel-in-progress: true
 
     permissions:
@@ -69,8 +72,17 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - run: pnpm test:browser:prepare --only-shell
 
@@ -103,25 +115,32 @@ jobs:
 
       - name: Push changes
         if: steps.check_changes.outputs.changes == 'true'
-        run: git push origin ${{ github.head_ref }}
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: git push origin "$HEAD_REF"
 
       - name: Summary
+        env:
+          CHANGES: ${{ steps.check_changes.outputs.changes }}
+          CHANGED_COUNT: ${{ steps.check_changes.outputs.changed_count }}
+          CHANGED_FILES: ${{ steps.check_changes.outputs.changed_files }}
+          HEAD_REF: ${{ github.head_ref }}
         run: |
-          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
-            echo "### 📸 Visual Regression Screenshots Updated" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Successfully updated **${{ steps.check_changes.outputs.changed_count }}** screenshot(s) on \`${{ github.head_ref }}\`" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "#### Changed Files:" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-            echo "${{ steps.check_changes.outputs.changed_files }}" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "✅ The updated screenshots have been committed and pushed. Your visual regression baseline is now up to date!" >> $GITHUB_STEP_SUMMARY
+          if [[ "$CHANGES" == "true" ]]; then
+            echo "### 📸 Visual Regression Screenshots Updated" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Successfully updated **$CHANGED_COUNT** screenshot(s) on \`$HEAD_REF\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "#### Changed Files:" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "$CHANGED_FILES" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "✅ The updated screenshots have been committed and pushed. Your visual regression baseline is now up to date!" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "### ℹ️ No Screenshot Updates Required" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "The visual regression test command ran successfully but no screenshots needed updating." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "All screenshots are already up to date! 🎉" >> $GITHUB_STEP_SUMMARY
+            echo "### ℹ️ No Screenshot Updates Required" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "The visual regression test command ran successfully but no screenshots needed updating." >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "All screenshots are already up to date! 🎉" >> "$GITHUB_STEP_SUMMARY"
           fi

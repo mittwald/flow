@@ -12,12 +12,17 @@ permissions:
   id-token: write
   contents: write
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     if:
       github.event_name == 'workflow_dispatch' ||
       github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
@@ -37,6 +42,7 @@ jobs:
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
+          cache: pnpm
 
       - name: Git Identity 🪪
         run: |
