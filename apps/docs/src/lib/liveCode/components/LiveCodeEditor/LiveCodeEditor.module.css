@@ -20,6 +20,9 @@
   :global(.flow--file-card),
   :global(.flow--flex),
   :global(.flow--tabs),
+  :global(.flow--action-group),
+  :global(.flow--markdown-editor),
+  :global(.flow--code-block),
   form {
     align-self: stretch;
   }

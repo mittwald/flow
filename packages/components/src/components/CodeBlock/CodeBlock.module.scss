@@ -1,12 +1,9 @@
-.wrapper {
-  min-width: 0;
-}
-
 .codeBlock {
   display: block;
   font-size: var(--code-block--font-size);
   font-family: var(--code-block--font-family);
   overflow: hidden;
+  min-width: 0;
 
   &.withChildren {
     color: var(--code-block--content-color);
