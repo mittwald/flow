@@ -89,9 +89,7 @@ jobs:
           else
             echo "### ❌ Visual Regression Tests Failed" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "One or more snapshots differ from the committed baselines." >> $GITHUB_STEP_SUMMARY
+            echo "The visual test step did not pass. If snapshots differ from the committed baselines, download the **visual-diffs** artifact from this run to inspect the actual/diff images (the artifact is absent if the run failed before comparison, e.g. during install or browser setup)." >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Download the **visual-diffs** artifact from this run to inspect the actual/diff images." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "If the changes are intentional, update the baselines by adding the \`update-screenshots\` label to the PR." >> $GITHUB_STEP_SUMMARY
+            echo "If the differences are intentional, update the baselines by adding the \`update-screenshots\` label to the PR." >> $GITHUB_STEP_SUMMARY
           fi
