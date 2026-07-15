@@ -1,9 +1,9 @@
 {
   "name": "@mittwald/flow-remote-react-renderer",
-  "version": "0.2.0-alpha.889",
+  "version": "0.2.0-alpha.907",
   "type": "module",
   "description": "React rendering for Flow Remote Elements",
-  "homepage": "https://mittwald.github.io/flow",
+  "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {

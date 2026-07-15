@@ -11,6 +11,7 @@ import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValue
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import { FieldDescription } from "@/components/FieldDescription";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface TextAreaProps
   extends
@@ -34,6 +35,7 @@ export interface TextAreaProps
 
 /** @flr-generate all */
 export const TextArea = flowComponent("TextArea", (props) => {
+  const warnDeprecation = useWarnDeprecation();
   const {
     children,
     placeholder,
@@ -52,6 +54,17 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const [charactersCount, setCharactersCount] = useState(
     props.defaultValue?.length ?? props.value?.length ?? 0,
   );
+
+  if (allowHorizontalResize !== undefined) {
+    warnDeprecation(
+      "The 'allowHorizontalResize' prop is deprecated and will be removed in a future release. Use 'allowResize' instead.",
+    );
+  }
+  if (allowVerticalResize !== undefined) {
+    warnDeprecation(
+      "The 'allowVerticalResize' prop is deprecated and will be removed in a future release. Use 'allowResize' instead.",
+    );
+  }
 
   const {
     FieldErrorView,

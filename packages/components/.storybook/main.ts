@@ -1,5 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import viteCheckerPlugin from "vite-plugin-checker";
+import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],
@@ -14,10 +15,10 @@ const config: StorybookConfig = {
       // no options
     },
   },
+  typescript: {
+    reactDocgen: false,
+  },
   viteFinal: async (conf) => {
-    // See why dynamic import: see https://github.com/storybookjs/storybook/issues/26291#issuecomment-1978193283
-    const { mergeConfig } = await import("vite");
-
     return mergeConfig(conf, {
       plugins: [
         viteCheckerPlugin({

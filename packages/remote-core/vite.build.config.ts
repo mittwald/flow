@@ -10,7 +10,7 @@ export default mergeConfig(
     plugins: [
       preserveDirectives(),
       externalizeDeps({
-        except: ["@mittwald/flow-core"],
+        except: ["@mittwald/flow-core", "@quilted/threads"],
       }),
       dts({
         include: ["src"],

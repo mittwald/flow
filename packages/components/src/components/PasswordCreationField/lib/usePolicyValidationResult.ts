@@ -1,10 +1,7 @@
 import { startTransition, useEffect, useRef } from "react";
-import type {
-  Policy,
-  PolicyValidationResult,
-} from "@/integrations/@mittwald/password-tools-js";
-import { isPromise } from "remeda";
+import type { Policy } from "@/integrations/@mittwald/password-tools-js";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
+import { useDebouncedCallback } from "use-debounce";
 
 export const usePolicyValidationResult = (
   validationPolicy: Policy,
@@ -21,62 +18,38 @@ export const usePolicyValidationResult = (
     results: ResolvedPolicyValidationResult;
   } | null>(null);
 
-  useEffect(() => {
+  const validatePassword = (pwd: string) => {
     onValidationStart?.();
 
-    if (cache.current?.password === password) {
-      onValidationResult?.({
-        password: cache.current.password,
-        isValid: Boolean(cache.current.results.isValid),
-        results: cache.current.results,
-      });
-      return;
-    }
-
-    validationPolicy.validate(password).then((validationResult) => {
-      const setValidationResult = (
-        password: string,
-        policyValidationResult: PolicyValidationResult,
-      ) => {
-        const results =
-          policyValidationResult as ResolvedPolicyValidationResult;
-        const isValid = Boolean(policyValidationResult.isValid);
-
-        cache.current = { password, results };
+    startTransition(async () => {
+      if (cache.current?.password === pwd) {
         onValidationResult?.({
-          password,
-          isValid,
-          results: policyValidationResult as ResolvedPolicyValidationResult,
+          password: cache.current.password,
+          isValid: Boolean(cache.current.results.isValid),
+          results: cache.current.results,
         });
-      };
+        return;
+      }
 
-      startTransition(async () => {
-        if (!isPromise(validationResult.isValid)) {
-          return setValidationResult(password, validationResult);
-        }
-
-        void Promise.all([
-          Promise.resolve(password),
-          Promise.resolve(validationResult),
-          ...validationResult.ruleResults,
-        ]).then(
-          ([
-            resolvedValue,
-            resolvedValidationResult,
-            ...resolvedValidationRuleResults
-          ]) => {
-            startTransition(() => {
-              setValidationResult(resolvedValue, {
-                complexity: resolvedValidationResult.complexity,
-                ruleResults: resolvedValidationRuleResults,
-                isValid:
-                  resolvedValidationResult.isValid &&
-                  resolvedValidationRuleResults.every((r) => r.isValid),
-              });
-            });
-          },
-        );
+      const validationResult = await validationPolicy.validate(pwd);
+      cache.current = { password: pwd, results: validationResult };
+      onValidationResult?.({
+        password: pwd,
+        isValid: validationResult.isValid,
+        results: validationResult,
       });
     });
+  };
+
+  const validatePasswordDebounce = useDebouncedCallback(validatePassword, 350, {
+    trailing: true,
+  });
+
+  useEffect(() => {
+    if (password) {
+      validatePasswordDebounce(password);
+    } else {
+      validatePassword(password);
+    }
   }, [password, validationPolicy]);
 };

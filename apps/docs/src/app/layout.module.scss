@@ -25,6 +25,7 @@
 .mainWrapper {
   display: flex;
   position: relative;
+  padding-block-start: var(--size-px--m);
   padding-inline: var(--size-px--xl);
   column-gap: var(--size-px--l);
   width: 1800px;

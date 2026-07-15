@@ -159,6 +159,7 @@ test.each(testEnvironments)(
       MenuItem,
       Text,
       Content,
+      Checkbox,
     },
   }) => {
     function Wrapper() {
@@ -207,9 +208,15 @@ test.each(testEnvironments)(
                 <Avatar>
                   <Initials>{i.name}</Initials>
                 </Avatar>
+                <Checkbox aria-label="select item" defaultSelected={i.active} />
                 <Heading>
                   {i.name}
-                  {i.active && <Badge>Active</Badge>}
+                  {i.active && (
+                    <>
+                      <Badge>Badge</Badge>
+                      <Badge>Another Badge</Badge>
+                    </>
+                  )}
                 </Heading>
                 <Text>{i.role}</Text>
                 <Content>{i.content}</Content>

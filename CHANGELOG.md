@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.907](https://github.com/mittwald/flow/compare/0.2.0-alpha.906...0.2.0-alpha.907) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.906](https://github.com/mittwald/flow/compare/0.2.0-alpha.905...0.2.0-alpha.906) (2026-07-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.905](https://github.com/mittwald/flow/compare/0.2.0-alpha.904...0.2.0-alpha.905) (2026-07-14)
+
+### Features
+
+* **remote:** forward remote deprecation notices to the host via onDeprecation ([#2639](https://github.com/mittwald/flow/issues/2639)) ([d17da88](https://github.com/mittwald/flow/commit/d17da885b7a8bf6e1637fa6ad78e729d39cb53ba))
+
+# [0.2.0-alpha.904](https://github.com/mittwald/flow/compare/0.2.0-alpha.903...0.2.0-alpha.904) (2026-07-13)
+
+### Features
+
+* **docs:** make documentation agent-ready with markdown, llms.json, sitemap and discovery metadata ([#2635](https://github.com/mittwald/flow/issues/2635)) ([1e7e579](https://github.com/mittwald/flow/commit/1e7e57918223f11aa73f3cce0f803db53e378d7c))
+
+# [0.2.0-alpha.903](https://github.com/mittwald/flow/compare/0.2.0-alpha.902...0.2.0-alpha.903) (2026-07-13)
+
+### Bug Fixes
+
+* update CODEOWNERS ([#2637](https://github.com/mittwald/flow/issues/2637)) ([266c313](https://github.com/mittwald/flow/commit/266c3138cc187dd2d527c954882b5a47b372806b))
+
+# [0.2.0-alpha.902](https://github.com/mittwald/flow/compare/0.2.0-alpha.901...0.2.0-alpha.902) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.901](https://github.com/mittwald/flow/compare/0.2.0-alpha.900...0.2.0-alpha.901) (2026-07-13)
+
+### Features
+
+* **remote:** expose package version in connection handshake ([#2610](https://github.com/mittwald/flow/issues/2610)) ([9637dce](https://github.com/mittwald/flow/commit/9637dcea778f0254ea81084d89434b06f070df16))
+
+# [0.2.0-alpha.900](https://github.com/mittwald/flow/compare/0.2.0-alpha.899...0.2.0-alpha.900) (2026-07-10)
+
+### Bug Fixes
+
+* **List:** use plain dark variant for list item options button ([#2630](https://github.com/mittwald/flow/issues/2630)) ([bf71490](https://github.com/mittwald/flow/commit/bf7149076763e23b1541c940b5d237ccfdc8e443))
+
+# [0.2.0-alpha.899](https://github.com/mittwald/flow/compare/0.2.0-alpha.898...0.2.0-alpha.899) (2026-07-10)
+
+### Bug Fixes
+
+* **ci:** scope screenshot workflow concurrency to label to prevent cancellation on new labels ([#2632](https://github.com/mittwald/flow/issues/2632)) ([6195667](https://github.com/mittwald/flow/commit/619566759cd22cc59c239fc53692773c0221ac04))
+
+# [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.897](https://github.com/mittwald/flow/compare/0.2.0-alpha.896...0.2.0-alpha.897) (2026-07-09)
+
+### Bug Fixes
+
+* **PasswordCreationField:** adjust validation behavior ([#2618](https://github.com/mittwald/flow/issues/2618)) ([4bb31c3](https://github.com/mittwald/flow/commit/4bb31c3377334bc0f73cd1225f84992c6901422a))
+* **Workflow:** publish workflow trigger to preserve release credentials on merged PRs ([#2627](https://github.com/mittwald/flow/issues/2627)) ([5943478](https://github.com/mittwald/flow/commit/5943478c31c34358cab37a3f862c5d3fec4c23c9))
+
+### Features
+
+* **docs:** fulltext search ([#2594](https://github.com/mittwald/flow/issues/2594)) ([f920e5c](https://github.com/mittwald/flow/commit/f920e5c9ac07e4452841e1ebd1824a0d9e8ae3ff))
+
+# [0.2.0-alpha.896](https://github.com/mittwald/flow/compare/0.2.0-alpha.895...0.2.0-alpha.896) (2026-07-07)
+
+### Bug Fixes
+
+* **Remote:** flag @quilted/threads not as externalized ([#2620](https://github.com/mittwald/flow/issues/2620)) ([286515e](https://github.com/mittwald/flow/commit/286515e84e4e6b5802333c66dddd2206c50bc6f9))
+
+# [0.2.0-alpha.895](https://github.com/mittwald/flow/compare/0.2.0-alpha.894...0.2.0-alpha.895) (2026-07-07)
+
+### Bug Fixes
+
+* **Remote:** use correct patch annotation ([78cb8ec](https://github.com/mittwald/flow/commit/78cb8ec75c17b810aac2104d4808dea655af457f))
+
+# [0.2.0-alpha.894](https://github.com/mittwald/flow/compare/0.2.0-alpha.893...0.2.0-alpha.894) (2026-07-07)
+
+### Features
+
+* **components:** add deprecation warning provider ([#2614](https://github.com/mittwald/flow/issues/2614)) ([7c95067](https://github.com/mittwald/flow/commit/7c95067b82754bd198d74704ba6d69d0c633745f))
+
+# [0.2.0-alpha.893](https://github.com/mittwald/flow/compare/0.2.0-alpha.892...0.2.0-alpha.893) (2026-07-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.892](https://github.com/mittwald/flow/compare/0.2.0-alpha.891...0.2.0-alpha.892) (2026-07-06)
+
+### Features
+
+* **ci:** trigger redeploy after docs image push on main ([#2606](https://github.com/mittwald/flow/issues/2606)) ([1ffa328](https://github.com/mittwald/flow/commit/1ffa328e59574686dd1423dc488a83e6ceb7c2db))
+
+# [0.2.0-alpha.891](https://github.com/mittwald/flow/compare/0.2.0-alpha.890...0.2.0-alpha.891) (2026-07-06)
+
+### Bug Fixes
+
+* **previews:** only post preview comment on first deployment ([#2608](https://github.com/mittwald/flow/issues/2608)) ([f866957](https://github.com/mittwald/flow/commit/f86695788e7ebdf84cbd99ce02806aca59f3a553))
+
+# [0.2.0-alpha.890](https://github.com/mittwald/flow/compare/0.2.0-alpha.889...0.2.0-alpha.890) (2026-07-06)
+
+### Features
+
+* **ci:** tag main images as latest ([#2604](https://github.com/mittwald/flow/issues/2604)) ([33a157f](https://github.com/mittwald/flow/commit/33a157fa1c97a6faa5337c1f979bc12bcd8bfa2a))
+
 # [0.2.0-alpha.889](https://github.com/mittwald/flow/compare/0.2.0-alpha.888...0.2.0-alpha.889) (2026-07-06)
 
 ### Bug Fixes

@@ -2,98 +2,153 @@
 title: Navigation
 ---
 
-Eine Navigation ist ein zentraler Baustein jeder Benutzeroberfläche. Sie hilft Usern, Inhalte schnell und intuitiv zu finden. Sie verbindet verschiedene Bereiche miteinander, macht Strukturen verständlich und unterstützt ein konsistentes Nutzungserlebnis. Je nach Struktur und Komplexität einer Anwendung kommen unterschiedliche Components zum Einsatz, die häufig sinnvoll miteinander kombiniert werden.
+Eine Navigation ist ein zentraler Baustein jeder Benutzeroberfläche. Sie hilft
+Usern, Inhalte schnell und intuitiv zu finden. Sie verbindet verschiedene
+Bereiche miteinander, macht Strukturen verständlich und unterstützt ein
+konsistentes Nutzungserlebnis. Je nach Struktur und Komplexität einer Anwendung
+kommen unterschiedliche Components zum Einsatz, die häufig sinnvoll miteinander
+kombiniert werden.
 
 ---
 
 # Best Practices
 
-- **Komplexität reduzieren:** Gestalte Inhalte und Navigationen klar und verständlich. Eine reduzierte und konsistente Navigation verbessert die Orientierung und erleichtert die Nutzung.
-- **Orientierung schaffen:** User sollten jederzeit erkennen können, wo sie sich befinden. Aktive Zustände, Breadcrumbs und Tabs unterstützen dabei.
-- **Suche integrieren:** Eine gut sichtbare Suche und Schnellzugriffe erleichtern besonders in komplexen Anwendungen den schnellen Zugriff auf Inhalte.
-- **Konsistente Navigation:** Navigationsmuster und Positionierungen sollten innerhalb der gesamten Anwendung konsistent verwendet werden. Wiederkehrende Muster erleichtern das Verständnis und stärken die Orientierung.
-
+- **Komplexität reduzieren:** Gestalte Inhalte und Navigationen klar und
+  verständlich. Eine reduzierte und konsistente Navigation verbessert die
+  Orientierung und erleichtert die Nutzung.
+- **Orientierung schaffen:** User sollten jederzeit erkennen können, wo sie sich
+  befinden. Aktive Zustände, Breadcrumbs und Tabs unterstützen dabei.
+- **Suche integrieren:** Eine gut sichtbare Suche und Schnellzugriffe
+  erleichtern besonders in komplexen Anwendungen den schnellen Zugriff auf
+  Inhalte.
+- **Konsistente Navigation:** Navigationsmuster und Positionierungen sollten
+  innerhalb der gesamten Anwendung konsistent verwendet werden. Wiederkehrende
+  Muster erleichtern das Verständnis und stärken die Orientierung.
 
 ---
 
-
 # Navigationsstrukturen
 
-Hauptnavigationen ermöglichen den Zugriff auf zentrale Bereiche einer Anwendung. Ergänzende Navigationskomponenten innerhalb des Contents schaffen Orientierung, erleichtern den Wechsel zwischen Ansichten und ermöglichen die Navigation auf tieferer Ebene.
-
-
+Hauptnavigationen ermöglichen den Zugriff auf zentrale Bereiche einer Anwendung.
+Ergänzende Navigationskomponenten innerhalb des Contents schaffen Orientierung,
+erleichtern den Wechsel zwischen Ansichten und ermöglichen die Navigation auf
+tieferer Ebene.
 
 ## Hauptnavigation
 
-Es gibt zwei grundlegende Navigationsvarianten: HeaderNavigation und SideNavigation. Welche
-eingesetzt wird, hängt vom Layout und der Komplexität der Anwendung ab. Beachte
-hierbei die Best Practices der Navigationen.
+Es gibt zwei grundlegende Navigationsvarianten: HeaderNavigation und
+SideNavigation. Welche eingesetzt wird, hängt vom Layout und der Komplexität der
+Anwendung ab. Beachte hierbei die Best Practices der Navigationen.
 
-<LiveCodeEditor example="navigation" editorCollapsed bgColor="dark" />
+<LiveCodeEditor
+  example="navigation"
+  editorCollapsed
+  bgColor="mstudio"
+  stretch
+/>
 
 ### HeaderNaviagtion
 
 Die [HeaderNavigation](/04-components/navigation/header-navigation/overview),
-befindet sich im oberen Bereich der Seite und eignet sich besonders für Hauptnavigationen mit flacher Struktur und übersichtlicher Informationsarchitektur.
-Zusätzlich zu den zentralen Navigationspunkten kann sie mit übergeordneten Funktionen ergänzt werden, wie beispielsweise der Zugang zu einem Profil, eine globale Suche oder globale Einstellungen.
-
+befindet sich im oberen Bereich der Seite und eignet sich besonders für
+Hauptnavigationen mit flacher Struktur und übersichtlicher
+Informationsarchitektur. Zusätzlich zu den zentralen Navigationspunkten kann sie
+mit übergeordneten Funktionen ergänzt werden, wie beispielsweise der Zugang zu
+einem Profil, eine globale Suche oder globale Einstellungen.
 
 ### Navigation (SideNavigation)
 
 Die [Navigation](/04-components/navigation/navigation/overview) ist vertikal
-angeordnet und eignet sich besonders für Seitenlayouts mit viel Platz in der Breite oder für Anwendungen mit komplexeren Strukturen. Sie bietet ausreichend Platz für viele Menüpunkte sowie verschachtelte Navigations-Ebenen.
+angeordnet und eignet sich besonders für Seitenlayouts mit viel Platz in der
+Breite oder für Anwendungen mit komplexeren Strukturen. Sie bietet ausreichend
+Platz für viele Menüpunkte sowie verschachtelte Navigations-Ebenen.
 
-Im mStudio wird die SideNavigation aufgrund der komplexen Informationsarchitektur sowohl für Hauptnavigationspunkte als auch für untergeordnete Navigationspunkte genutzt und in einer [LayoudCard](/04-components/structure/layout-card/overview) dargestellt.
+Im mStudio wird die SideNavigation aufgrund der komplexen
+Informationsarchitektur sowohl für Hauptnavigationspunkte als auch für
+untergeordnete Navigationspunkte genutzt und in einer
+[LayoudCard](/04-components/structure/layout-card/overview) dargestellt.
 
 ---
 
 ## Content-Navigation
 
-Die Components Breadcrumb, Tabs und List unterstützen bei der Orientierung innerhalb des Contents und ermöglichen einen schnellen Wechsel zwischen zusammengehörenden Inhalten oder beim navigieren in tiefere Ebenen.
+Die Components Breadcrumb, Tabs und List unterstützen bei der Orientierung
+innerhalb des Contents und ermöglichen einen schnellen Wechsel zwischen
+zusammengehörenden Inhalten oder beim navigieren in tiefere Ebenen.
 
-<LiveCodeEditor example="tabs" editorCollapsed bgColor="dark" />
+<LiveCodeEditor example="tabs" editorCollapsed bgColor="mstudio" stretch />
 
 ### Breadcrumb
 
-Die [Breadcrumb](/04-components/navigation/breadcrumb/overview) zeigt den aktuellen Pfad innerhalb einer hierarchischen Struktur an. Sie unterstützt die Orientierung, indem sie den Usern jederzeit verdeutlicht, wo sie sich befinden. Zusätzlich erleichtert sie die Rücknavigation zu übergeordneten Ebenen und verbessert damit die Navigierbarkeit komplexerer Anwendungen.
+Die [Breadcrumb](/04-components/navigation/breadcrumb/overview) zeigt den
+aktuellen Pfad innerhalb einer hierarchischen Struktur an. Sie unterstützt die
+Orientierung, indem sie den Usern jederzeit verdeutlicht, wo sie sich befinden.
+Zusätzlich erleichtert sie die Rücknavigation zu übergeordneten Ebenen und
+verbessert damit die Navigierbarkeit komplexerer Anwendungen.
 
 ### Tabs
 
-[Tabs](/04-components/navigation/tabs/overview) ermöglichen den schnellen Wechsel zwischen Ansichten auf derselben Hierarchieebene. Sie strukturieren verwandte Informationen in klar abgegrenzte Bereiche, ohne dass eine neue Seite geladen werden muss. Durch ihre permanente Sichtbarkeit unterstützen die Tabs den Usern dabei, Inhalte schnell zu erfassen und effizient zwischen verschiedenen Ansichten zu wechseln.
+[Tabs](/04-components/navigation/tabs/overview) ermöglichen den schnellen
+Wechsel zwischen Ansichten auf derselben Hierarchieebene. Sie strukturieren
+verwandte Informationen in klar abgegrenzte Bereiche, ohne dass eine neue Seite
+geladen werden muss. Durch ihre permanente Sichtbarkeit unterstützen die Tabs
+den Usern dabei, Inhalte schnell zu erfassen und effizient zwischen
+verschiedenen Ansichten zu wechseln.
 
 ### Listen, Raster und Tabellen
 
-Die verschiedenen Darstellungen einer [List](/04-components/structure/list/overview) strukturieren Inhalte, schaffen Übersicht über ähnliche Elemente und ermöglichen die Navigation zu detaillierteren Ansichten.
-
-
-
+Die verschiedenen Darstellungen einer
+[List](/04-components/structure/list/overview) strukturieren Inhalte, schaffen
+Übersicht über ähnliche Elemente und ermöglichen die Navigation zu
+detaillierteren Ansichten.
 
 ---
 
 ## Ergänzende Navigation
 
-Klassische Navigationen können durch Verlinkungen, eine globale Suche oder automatische Weiterleitungen ergänzt werden. Gerade in komplexen Anwendungen möchten User schnell zu bestimmten Inhalten gelangen, ohne sich durch die gesamte Navigationsstruktur bewegen zu müssen. Ergänzende Navigationskomponenten ersetzen die Hauptnavigation nicht, sondern erweitern sie gezielt.
+Klassische Navigationen können durch Verlinkungen, eine globale Suche oder
+automatische Weiterleitungen ergänzt werden. Gerade in komplexen Anwendungen
+möchten User schnell zu bestimmten Inhalten gelangen, ohne sich durch die
+gesamte Navigationsstruktur bewegen zu müssen. Ergänzende Navigationskomponenten
+ersetzen die Hauptnavigation nicht, sondern erweitern sie gezielt.
 
 ### Links
 
-[Links](/04-components/navigation/link/overview) ermöglichen den direkten Wechsel in einen anderen Bereich der Anwendung oder zu externen Inhalten. User können dabei selbst entscheiden, ob sie dem Wechsel folgen wollen. Daher sollten Links klar und aussagekräftig benannt sein, damit erkennbar ist, welches Ziel sie haben.
+[Links](/04-components/navigation/link/overview) ermöglichen den direkten
+Wechsel in einen anderen Bereich der Anwendung oder zu externen Inhalten. User
+können dabei selbst entscheiden, ob sie dem Wechsel folgen wollen. Daher sollten
+Links klar und aussagekräftig benannt sein, damit erkennbar ist, welches Ziel
+sie haben.
 
 ### Suche
 
-Die [Suche](/04-components/form-controls/search-field/overview) ermöglicht den direkten Zugriff auf Inhalte, Funktionen oder Bereiche, ohne mehrere Navigationsebenen durchlaufen zu müssen. Besonders in komplexen Anwendungen mit vielen Inhalten unterstützt sie User dabei, Informationen effizient und zielgerichtet zu finden.
+Die [Suche](/04-components/form-controls/search-field/overview) ermöglicht den
+direkten Zugriff auf Inhalte, Funktionen oder Bereiche, ohne mehrere
+Navigationsebenen durchlaufen zu müssen. Besonders in komplexen Anwendungen mit
+vielen Inhalten unterstützt sie User dabei, Informationen effizient und
+zielgerichtet zu finden.
 
 ### Weiterleitungen
 
-Weiterleitungen führen User automatisch oder systemgesteuert zu einer anderen Ansicht oder einem anderen Bereich der Anwendung. Sie sollten bewusst und nachvollziehbar eingesetzt werden, da unerwartete Wechsel schnell zu Orientierungsverlust führen können.
-
+Weiterleitungen führen User automatisch oder systemgesteuert zu einer anderen
+Ansicht oder einem anderen Bereich der Anwendung. Sie sollten bewusst und
+nachvollziehbar eingesetzt werden, da unerwartete Wechsel schnell zu
+Orientierungsverlust führen können.
 
 ---
 
-
 # Accessibility
 
-Eine barrierefreie Navigation stellt sicher, dass alle User die Anwendung zuverlässig bedienen können.
+Eine barrierefreie Navigation stellt sicher, dass alle User die Anwendung
+zuverlässig bedienen können.
 
-- **Semantische Struktur und ARIA-Rollen:** Verwende semantisch korrekte HTML-Elemente und ergänze diese bei Bedarf durch passende ARIA-Rollen und -Attribute. Dadurch können Screenreader Navigationsbereiche korrekt interpretieren und vermitteln.
-- **Fokus-Reihenfolge und Tastaturbedienung:** Navigations-Elemente müssen vollständig per Tastatur erreichbar und bedienbar sein. Die Fokus-Reihenfolge sollte logisch aufgebaut sein und der visuellen Struktur folgen.
-- **Verständliche Bezeichnungen:** Navigationspunkte sollten eindeutig benannt sein und verständlich kommunizieren, wohin sie führen. Dadurch wird die Orientierung zusätzlich verbessert.
+- **Semantische Struktur und ARIA-Rollen:** Verwende semantisch korrekte
+  HTML-Elemente und ergänze diese bei Bedarf durch passende ARIA-Rollen und
+  -Attribute. Dadurch können Screenreader Navigationsbereiche korrekt
+  interpretieren und vermitteln.
+- **Fokus-Reihenfolge und Tastaturbedienung:** Navigations-Elemente müssen
+  vollständig per Tastatur erreichbar und bedienbar sein. Die Fokus-Reihenfolge
+  sollte logisch aufgebaut sein und der visuellen Struktur folgen.
+- **Verständliche Bezeichnungen:** Navigationspunkte sollten eindeutig benannt
+  sein und verständlich kommunizieren, wohin sie führen. Dadurch wird die
+  Orientierung zusätzlich verbessert.

@@ -64,7 +64,7 @@ export default () => {
             autoResizeMaxRows={10}
           />
         </Field>
-        <SubmitButton color="accent">Submit</SubmitButton>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     </Chat>
   );
