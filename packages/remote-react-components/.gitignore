@@ -1,2 +1,3 @@
 cross-version.manifest.json
 node_modules/.cross-version/
+dev/cross-version/.generated/
