@@ -105,6 +105,16 @@ const GENERATED_FILE_NAME = "environments.ts";
  * at vitest-config module-evaluation time.
  */
 export function writeCrossVersionEnvironmentsModule(targets: Target[]): string {
+  // Fail loudly on an empty target set. A manifest that parses but resolved
+  // zero versions would otherwise emit `export const testEnvironments = []`,
+  // and Task 6's `test.each(testEnvironments)` would run ZERO assertions —
+  // letting CI go green while validating nothing.
+  if (targets.length === 0) {
+    throw new Error(
+      "cross-version manifest resolved zero targets — run `test:cross-version:prepare` and check its output for skipped/un-installable versions.",
+    );
+  }
+
   const outDir = join(here, GENERATED_ENVIRONMENTS_DIR_NAME);
   const outFile = join(outDir, GENERATED_FILE_NAME);
   mkdirSync(outDir, { recursive: true });
