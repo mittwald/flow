@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.911](https://github.com/mittwald/flow/compare/0.2.0-alpha.910...0.2.0-alpha.911) (2026-07-15)
+
+### Bug Fixes
+
+* **Avatar:** hide decorative avatars from screen readers and add label prop ([#2648](https://github.com/mittwald/flow/issues/2648)) ([1ddda11](https://github.com/mittwald/flow/commit/1ddda1119b3054eadd60af6e5970996a2219f499))
+
 # [0.2.0-alpha.910](https://github.com/mittwald/flow/compare/0.2.0-alpha.909...0.2.0-alpha.910) (2026-07-15)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
