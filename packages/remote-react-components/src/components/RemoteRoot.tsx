@@ -3,6 +3,7 @@ import * as remoteComponents from "@/auto-generated";
 import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
+import { packageVersion } from "@/version";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
@@ -24,6 +25,8 @@ import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
 import {
+  DeprecationWarningProvider,
+  type DeprecationWarningHandler,
   IntlProvider,
   useLanguage,
 } from "@mittwald/flow-react-components/flr-universal";
@@ -99,6 +102,14 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     connectionRef.current?.imports.setError(stringifyError(error));
   };
 
+  const forwardDeprecationWarning: DeprecationWarningHandler = (message) => {
+    void connectionRef.current?.imports
+      .reportDeprecation?.(message)
+      ?.catch(() => {
+        // ignore: host does not support deprecation reporting
+      });
+  };
+
   const setIsLoadingFromProps = () => {
     if (isLoadingFromProps !== undefined) {
       connectionRef.current?.imports.setIsLoading(isLoadingFromProps);
@@ -123,6 +134,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const connect = connectHostRenderRootRef({
     onPathnameChanged: (pathname) =>
       startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+    packageVersion,
   });
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
@@ -172,11 +184,13 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
             }}
           >
             <IntlProvider locale={language}>
-              <Suspense fallback={loadingFallback}>
-                <ViewComponentContextProvider components={viewComponents}>
-                  {children}
-                </ViewComponentContextProvider>
-              </Suspense>
+              <DeprecationWarningProvider onWarning={forwardDeprecationWarning}>
+                <Suspense fallback={loadingFallback}>
+                  <ViewComponentContextProvider components={viewComponents}>
+                    {children}
+                  </ViewComponentContextProvider>
+                </Suspense>
+              </DeprecationWarningProvider>
             </IntlProvider>
           </RemoteContextProvider>
         )}

@@ -11,6 +11,7 @@ import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
 import slugify from "slugify";
+import { absoluteUrl, pagePath, rawMarkdownPath } from "@/lib/llms/siteUrls";
 
 export class MdxFileFactory {
   public static async fromDir(
@@ -60,10 +61,30 @@ export class MdxFileFactory {
   public static async generateMetadata(
     contentFolder: string,
     params: StaticParams,
+    options: { tab?: string } = {},
   ): Promise<Metadata> {
     const mdxFile = await MdxFileFactory.fromParams(contentFolder, params);
+
+    const section = path.basename(contentFolder);
+    const segments =
+      "slug" in params
+        ? [section, ...params.slug]
+        : [
+            section,
+            params.group,
+            params.component,
+            ...(options.tab ? [options.tab] : []),
+          ];
+
     return {
       title: mdxFile?.getTitle(),
+      description: mdxFile?.mdxSource.frontmatter.description,
+      alternates: {
+        canonical: absoluteUrl(pagePath(segments)),
+        types: {
+          "text/markdown": absoluteUrl(rawMarkdownPath(segments)),
+        },
+      },
     };
   }
 

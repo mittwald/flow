@@ -15,8 +15,8 @@ permissions:
 jobs:
   publish:
     if:
-      (github.event_name == 'workflow_dispatch' && secrets.PUBLISH_PAT != '') ||
-      (github.event.pull_request.merged == true && secrets.PUBLISH_PAT != '')
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}

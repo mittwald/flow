@@ -81,6 +81,23 @@ Standardgröße und wird für die meisten Buttons verwendet.
 
 ---
 
+# States
+
+Ein Button kann unterschiedliche States annehmen, die anzeigen, dass aktuell
+keine Interaktion möglich ist.
+
+<LiveCodeEditor example="states" editorCollapsed row />
+
+**Disabled:** Verwende den Disabled-State, wenn der Button keine Aktion oder
+kein Ereignis auslösen soll.
+
+**Pending, Succeeded und Failed:** Pending, Succeeded und Failed sollen dem
+Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf einen
+Button geklickt hat. Verwende den Button zusammen mit der Component
+[Action](/04-components/actions/action/overview), um die States zu steuern.
+
+---
+
 # Kombiniere mit ...
 
 Im Content-Bereich des Buttons kann entweder **Text**, ein **Icon** oder **Text
@@ -105,24 +122,7 @@ der Button als Filterelement wieder entfernt werden kann.
 
 ## Align
 
-Benutze die [Align](/04-components/structure/align/overview) Komponente, um
+Benutze die [Align](/04-components/structure/align/overview) Component, um
 deinen Button neben Input Feldern zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
-
----
-
-# States
-
-Ein Button kann unterschiedliche States annehmen, die anzeigen, dass aktuell
-keine Interaktion möglich ist.
-
-<LiveCodeEditor example="states" editorCollapsed row />
-
-**Disabled:** Verwende den Disabled-State, wenn der Button keine Aktion oder
-kein Ereignis auslösen soll.
-
-**Pending, Succeeded und Failed:** Pending, Succeeded und Failed sollen dem
-Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf einen
-Button geklickt hat. Verwende den Button zusammen mit der Komponente
-[Action](/04-components/actions/action/overview), um die States zu steuern.

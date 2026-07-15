@@ -22,7 +22,7 @@ jobs:
 
     # one at a time per branch
     concurrency:
-      group: visual-regression-screenshots@${{ github.head_ref }}
+      group: visual-regression-screenshots@${{ github.head_ref }}@${{ github.event.label.name }}
       cancel-in-progress: true
 
     permissions:
