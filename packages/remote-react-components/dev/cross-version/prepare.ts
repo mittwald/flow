@@ -72,15 +72,19 @@ const installVersion = (version: string): boolean => {
       },
     );
     return true;
-  } catch {
+  } catch (err) {
     // Remove the partial install dir so a later run doesn't treat it as
     // installed. Failures here are typically a repo publish gap: the version's
     // dependency tree pins a transitive @mittwald/* version that was never
-    // published to npm (ETARGET).
-    rmSync(dir, { recursive: true, force: true });
+    // published to npm (ETARGET). Cleanup is best-effort — never let it crash.
+    try {
+      rmSync(dir, { recursive: true, force: true });
+    } catch {
+      // best-effort cleanup
+    }
+    const reason = err instanceof Error ? err.message : String(err);
     console.warn(
-      `[cross-version] WARNING: skipping ${version} — install failed ` +
-        `(likely an unpublished transitive dependency)`,
+      `[cross-version] WARNING: skipping ${version} — install failed: ${reason} (often an unpublished transitive dependency)`,
     );
     return false;
   }
