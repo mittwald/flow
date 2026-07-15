@@ -6,7 +6,7 @@ dezent an [Tabs](/04-components/navigation/tabs/overview),
 [Icons](/04-components/content/icon/overview) oder anderen UI-Elementen
 platziert und hilft dabei, die User gezielt durch die Oberfläche zu führen.
 
-## Best practices
+## Best Practices
 
 Achte bei der Verwendung einer CounterBadge darauf, dass ...
 
@@ -28,3 +28,12 @@ Verwende ein CounterBadge, um ...
 - die Anzahl von Elementen anzuzeigen, zum Beispiel bei offenen Tickets.
 - visuell auf Hinweise oder Warnungen innerhalb eines Navigationselements (z. B.
   Tabs oder Menüpunkte) aufmerksam zu machen.
+
+---
+
+# Accessibility
+
+Da das CounterBadge selbst nicht accessible ist, muss der Wert über das
+darunterliegende Element vermittelt werden. Wird das CounterBadge zum Beispiel
+auf einem Button platziert, sollte der Button ein `aria-label` erhalten, das die
+Zahl des Counters enthält.

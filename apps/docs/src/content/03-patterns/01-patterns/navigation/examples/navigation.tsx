@@ -52,7 +52,7 @@ import {
           </Link>
         </NavigationGroup>
         <NavigationGroup>
-          <Label>Komponenten</Label>
+          <Label>Components</Label>
           <Link>
             <IconApp />
             Apps
