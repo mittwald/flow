@@ -72,13 +72,14 @@ export const AnchorNavigation: FC<Props> = (props) => {
             .map((a) => {
               const slugElement = document.getElementById(a.slug);
 
-              if (
-                !initialScrollProcessed.current &&
-                currentUrlSlug &&
-                currentUrlSlug === encodeURIComponent(a.slug)
-              ) {
+              if (!initialScrollProcessed.current) {
                 initialScrollProcessed.current = true;
-                slugElement?.scrollIntoView();
+                if (
+                  currentUrlSlug &&
+                  currentUrlSlug === encodeURIComponent(a.slug)
+                ) {
+                  slugElement?.scrollIntoView();
+                }
               }
 
               return slugElement;
