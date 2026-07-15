@@ -1,12 +1,13 @@
 {
   "name": "@mittwald/flow-design-tokens",
-  "version": "0.2.0-alpha.900",
+  "version": "0.2.0-alpha.912",
   "type": "module",
   "description": "The design tokens used in Flow, mittwald’s design system",
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/design-tokens",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     "./css/*": "./dist/css/*",
+    "./css-layered/*": "./dist/css-layered/*",
     "./json/*": "./dist/json/*"
   },
   "files": [

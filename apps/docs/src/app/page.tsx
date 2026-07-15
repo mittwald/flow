@@ -69,7 +69,7 @@ const Home: FC = () => {
             <Section>
               <Heading>Im Design System starten</Heading>
               <Text>
-                Konsistente Komponenten und Patterns im Einklang mit der Marke
+                Konsistente Components und Patterns im Einklang mit der Marke
                 fördern nutzerzentriertes, barrierearmes Design und sorgen für
                 eine starke Developer Experience.
               </Text>
@@ -104,8 +104,8 @@ const Home: FC = () => {
           <Section>
             <Heading>Fokus auf Developer Experience</Heading>
             <Text>
-              Verschachtelte Komponenten erleichtern das Einfügen.
-              Automatisierungen ordnen Komponenten automatisch mit passenden
+              Verschachtelte Components erleichtern das Einfügen.
+              Automatisierungen ordnen Components automatisch mit passenden
               Abständen an und verhindern Abweichungen vom Design System. Alles
               Open Source auf{" "}
               <Link href="https://github.com/mittwald/flow" target="_blank">

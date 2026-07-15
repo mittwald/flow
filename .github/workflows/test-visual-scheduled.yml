@@ -27,9 +27,24 @@ jobs:
         run: pnpm test:browser:prepare --only-shell
 
       - name: Run visual tests
-        # run without file parallelism, because firefox has issues with parallel visual tests
+        # Run without file parallelism, because firefox has issues with parallel visual tests.
+        # Retry the whole step because firefox intermittently *hangs* (not a snapshot diff) on a
+        # single visual test file in headless CI, which aborts the run with exit code 1 even though
+        # every test that runs passes. A hang can't be recovered by vitest's per-test `retry`, so we
+        # re-run the step with a fresh vitest/browser process. Successful `^build` deps are served
+        # from the nx cache, so retries only re-execute test:visual.
         run: |
-          pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false
+          for attempt in 1 2 3; do
+            echo "::group::Visual tests (attempt $attempt/3)"
+            if pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            echo "::warning::Visual tests failed on attempt $attempt/3 (likely a flaky firefox hang), retrying..."
+          done
+          echo "::error::Visual tests still failing after 3 attempts."
+          exit 1
 
       - name: Send alerting message to Slack
         if: failure()

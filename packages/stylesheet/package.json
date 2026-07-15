@@ -1,12 +1,13 @@
 {
   "name": "@mittwald/flow-stylesheet",
-  "version": "0.2.0-alpha.900",
+  "version": "0.2.0-alpha.912",
   "type": "module",
   "description": "A collection of CSS classes used in Flow, mittwald's design system.",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./css": "./dist/styles.css"
+    "./css": "./dist/styles.css",
+    "./css-layered": "./dist/styles-layered.css"
   },
   "files": [
     "dist"

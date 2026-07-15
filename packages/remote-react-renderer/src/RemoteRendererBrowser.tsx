@@ -10,6 +10,7 @@ import {
   type HostToRemoteConnection,
   type NavigationState,
   type RemoteExtBridgeConnectionApi,
+  type RemoteReadyEvent,
 } from "@mittwald/flow-remote-core";
 import { refresh, usePromise } from "@mittwald/react-use-promise";
 import {
@@ -32,6 +33,8 @@ export interface RemoteRendererBrowserProps {
   src?: string;
   timeoutMs?: number;
   onNavigationStateChanged?: (state: NavigationState) => void;
+  onConnected?: (event: RemoteReadyEvent) => void;
+  onDeprecation?: (message: string) => void;
   hostPathname?: string;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
@@ -56,6 +59,8 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     src,
     extBridgeImplementation,
     onNavigationStateChanged,
+    onConnected,
+    onDeprecation,
     hostPathname,
     __remoteReceiver: remoteReceiverFromProps,
   } = props;
@@ -113,8 +118,9 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     connection: receiver.connection,
     extBridgeImplementation,
     hostConfig,
-    onReady: (establishedConnection) => {
+    onReady: ({ connection: establishedConnection, remoteReadyEvent }) => {
       establishedConnection.updateHostPathname(hostPathname);
+      onConnected?.(remoteReadyEvent);
       connectionPromise.resolve();
     },
     onLoadingChanged: (isLoading) => {
@@ -126,6 +132,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     },
     onError: setRemoteError,
     onNavigationStateChanged,
+    onDeprecation,
   });
 
   const timeoutPromise = (message: string) =>

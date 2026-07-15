@@ -50,7 +50,11 @@ export const MobileNavigation: FC<Props> = (props) => {
         <Button variant="plain">
           <IconMenu />
         </Button>
-        <Modal offCanvas className={styles.mobileNavigationOffCanvas}>
+        <Modal
+          offCanvas
+          className={styles.mobileNavigationOffCanvas}
+          showCloseButton
+        >
           <Heading>Menü</Heading>
           <Content>
             <Section>

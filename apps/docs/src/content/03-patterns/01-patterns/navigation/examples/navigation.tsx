@@ -21,7 +21,7 @@ import {
 
 <Flex direction="column" rowGap="l">
   <Flex justify="end">
-    <HeaderNavigation color="light">
+    <HeaderNavigation color="dark">
       <Link>Dashboard</Link>
       <Link aria-current="page">Projekt</Link>
       <Link>Server</Link>
@@ -52,7 +52,7 @@ import {
           </Link>
         </NavigationGroup>
         <NavigationGroup>
-          <Label>Komponenten</Label>
+          <Label>Components</Label>
           <Link>
             <IconApp />
             Apps

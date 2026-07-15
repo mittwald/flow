@@ -8,7 +8,7 @@ import {
 <HeaderNavigation aria-label="Header navigation">
   <Link href="#">Getting started</Link>
   <Link href="#" aria-current="page">
-    Komponenten
+    Components
   </Link>
   <Button>
     <IconSearch />

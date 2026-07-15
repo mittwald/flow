@@ -274,8 +274,12 @@ test("useOnClosed is called when the closing animation has finished", async () =
   expect(modalText).toBeInTheDocument();
   expect(onClosed).not.toHaveBeenCalledOnce();
 
-  await sleep(500);
-  expect(modalText).not.toBeInTheDocument();
+  // Wait for the close animation to finish and the Modal to unmount instead of
+  // relying on a fixed delay: the animation duration varies and a hard-coded
+  // sleep races against it under CI load, which made this test flaky.
+  await vitest.waitFor(() => expect(modalText).not.toBeInTheDocument(), {
+    timeout: 2000,
+  });
 
   // onClosed is just called, when the Modal has unmounted (after close animation)
   expect(onClosed).toHaveBeenCalledOnce();
