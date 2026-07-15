@@ -56,41 +56,41 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   }
 
   return (
-    <div
-      className={rootClassName}
-      style={{
-        maxHeight: collapsed ? maxHeight : undefined,
-      }}
-    >
-      <CodeEditor
-        {...rest}
-        value={code}
-        editable={false}
-        copyable={copyable}
-        showLineNumbers={showLineNumbers}
-        showLinterMarkers={false}
-        showCodeFolding={false}
-        showActiveLineMarker={false}
-        isReadOnly
-        onCreateEditor={(view) => {
-          if (!truncateLines) {
-            return;
-          }
-
-          const lineHeight = 20;
-          const padding = 12;
-
-          const visibleLines =
-            typeof truncateLines === "number" ? truncateLines : 8;
-
-          const totalLines = view.state.doc.lines;
-
-          if (totalLines > visibleLines)
-            setMaxHeight(lineHeight * visibleLines + padding);
+    <div className={rootClassName}>
+      <div
+        style={{
+          maxHeight: collapsed ? maxHeight : undefined,
         }}
-        id={id}
-      />
+      >
+        <CodeEditor
+          {...rest}
+          value={code}
+          editable={false}
+          copyable={copyable}
+          showLineNumbers={showLineNumbers}
+          showLinterMarkers={false}
+          showCodeFolding={false}
+          showActiveLineMarker={false}
+          isReadOnly
+          onCreateEditor={(view) => {
+            if (!truncateLines) {
+              return;
+            }
 
+            const lineHeight = 20;
+            const padding = 12;
+
+            const visibleLines =
+              typeof truncateLines === "number" ? truncateLines : 8;
+
+            const totalLines = view.state.doc.lines;
+
+            if (totalLines > visibleLines)
+              setMaxHeight(lineHeight * visibleLines + padding);
+          }}
+          id={id}
+        />
+      </div>
       {truncateLines && maxHeight && (
         <div
           className={clsx(
