@@ -46,6 +46,7 @@ export const IllustratedMessage = flowComponent(
         color: alphaColor,
       },
       ActionGroup: {
+        preserveOrder: true,
         className: styles.actionGroup,
       },
       ProgressBar: { className: styles.progressBar },

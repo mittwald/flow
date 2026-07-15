@@ -52,3 +52,35 @@ test.each(testEnvironments)(
     await testScreenshot("ActionGroup");
   },
 );
+
+test.each(testEnvironments)(
+  "ActionGroup preserveOrder (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, ActionGroup, Button, Separator },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <ActionGroup preserveOrder>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
+            Save as draft
+          </Button>
+        </ActionGroup>
+        <Separator />
+        <ActionGroup preserveOrder>
+          <Button color="accent">Primary</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+        </ActionGroup>
+      </Flex>,
+    );
+
+    await testScreenshot("ActionGroup-preserveOrder");
+  },
+);

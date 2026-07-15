@@ -177,6 +177,7 @@ export const List = flowComponent("List", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
+      preserveOrder: true,
       tunnel: {
         id: "actions",
         component: "List",

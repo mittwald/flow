@@ -77,6 +77,20 @@ export const WithExtraSecondaryAction: Story = {
   ),
 };
 
+export const PreserveOrder: Story = {
+  render: (props) => (
+    <ActionGroup {...props} preserveOrder>
+      <Button color="secondary" variant="soft">
+        Abort
+      </Button>
+      <Button color="accent">Create customer</Button>
+      <Button color="secondary" variant="soft">
+        Save as draft
+      </Button>
+    </ActionGroup>
+  ),
+};
+
 export const WithSwitch: Story = {
   render: (props) => (
     <ActionGroup {...props}>

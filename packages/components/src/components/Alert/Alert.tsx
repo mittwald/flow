@@ -38,6 +38,7 @@ export const Alert = flowComponent("Alert", (props) => {
         size: "s",
       },
       ActionGroup: {
+        preserveOrder: true,
         Button: {
           size: "s",
         },

@@ -16,36 +16,63 @@ export interface ActionGroupProps
     PropsWithClassName {
   /** The spacing between the buttons inside the action group. @default "s" */
   spacing?: "s" | "m";
+  /**
+   * When set, the buttons are not automatically arranged; they stay in the
+   * order they appear in the source, laid out from left to right with spacing
+   * between them. Alignment of the group is then up to the surrounding
+   * context.
+   *
+   * @default false
+   */
+  preserveOrder?: boolean;
 }
 
 /** @flr-generate all */
 export const ActionGroup = flowComponent(
   "ActionGroup",
   (props) => {
-    const { children, className, ref, spacing = "s", ...rest } = props;
+    const {
+      children,
+      className,
+      ref,
+      spacing = "s",
+      preserveOrder = false,
+      ...rest
+    } = props;
 
-    const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
+    const rootClassName = clsx(
+      styles.actionGroup,
+      className,
+      styles[spacing],
+      !preserveOrder && styles.sorted,
+    );
 
-    const propsContext: PropsContext = {
-      Button: {
-        slot: dynamic((props) => getActionGroupSlot(props)),
-        className: dynamic((props) => {
-          const slot = getActionGroupSlot(props);
-          return clsx(props.className, styles[slot]);
-        }),
-      },
-      Switch: {
-        labelPosition: "leading",
-        className: dynamic((props) => {
-          return clsx(props.className, props.slot && styles[props.slot]);
-        }),
-      },
-      Link: {
-        className: dynamic((props) => {
-          return clsx(props.className, props.slot && styles[props.slot]);
-        }),
-      },
-    };
+    const propsContext: PropsContext = preserveOrder
+      ? {
+          Switch: {
+            labelPosition: "leading",
+          },
+        }
+      : {
+          Button: {
+            slot: dynamic((props) => getActionGroupSlot(props)),
+            className: dynamic((props) => {
+              const slot = getActionGroupSlot(props);
+              return clsx(props.className, styles[slot]);
+            }),
+          },
+          Switch: {
+            labelPosition: "leading",
+            className: dynamic((props) => {
+              return clsx(props.className, props.slot && styles[props.slot]);
+            }),
+          },
+          Link: {
+            className: dynamic((props) => {
+              return clsx(props.className, props.slot && styles[props.slot]);
+            }),
+          },
+        };
 
     return (
       <ActionStateContextProvider>

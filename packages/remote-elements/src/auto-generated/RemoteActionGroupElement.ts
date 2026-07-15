@@ -12,6 +12,7 @@ export class RemoteActionGroupElement extends FlowRemoteElement<RemoteActionGrou
   static override get remoteProperties() {
     return {
       className: {},
+      preserveOrder: {},
       spacing: {},
     };
   }

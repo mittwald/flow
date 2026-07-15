@@ -2,34 +2,35 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  flex-grow: 1;
 
-  @extend .s;
+  &.sorted {
+    justify-content: flex-end;
+    flex-grow: 1;
 
-  .primary {
-    order: 3;
+    @mixin spacing($spacing) {
+      &.#{$spacing} {
+        gap: var(--action-group--spacing--#{$spacing});
+      }
+    }
 
-    &:only-child {
-      margin-left: auto;
+    @include spacing(s);
+    @include spacing(m);
+
+    .primary {
+      order: 3;
+
+      &:only-child {
+        margin-left: auto;
+      }
+    }
+
+    .secondary {
+      order: 2;
+    }
+
+    .abort {
+      order: 1;
+      margin-right: auto;
     }
   }
-
-  .secondary {
-    order: 2;
-  }
-
-  .abort {
-    order: 1;
-    margin-right: auto;
-  }
-
-  @mixin spacing($spacing) {
-    &.#{$spacing} {
-      gap: var(--action-group--spacing--#{$spacing});
-    }
-  }
-
-  @include spacing(s);
-  @include spacing(m);
 }
