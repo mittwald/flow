@@ -1,7 +1,7 @@
 import type { ComponentDoc } from "react-docgen-typescript";
 
 const componentExportPathMap: Record<string, string> = {
-  PasswordCreationField: "/mittwald-password-tools-js",
+  PasswordCreationField: "/password-tools",
 };
 
 export const componentModulePathOf = (c: ComponentDoc) => {

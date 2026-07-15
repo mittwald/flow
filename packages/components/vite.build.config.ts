@@ -21,7 +21,7 @@ export default mergeConfig(
           "flr-universal": "./src/index/flr-universal.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
-          "@mittwald/password-tools-js":
+          "password-tools":
             "./src/integrations/@mittwald/password-tools-js/index.ts",
           globals: "./src/styles/index.ts",
         },

@@ -16,7 +16,7 @@ import {
   Select,
   TextField,
 } from "@mittwald/flow-react-components";
-import { PasswordCreationField } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import { PasswordCreationField } from "@mittwald/flow-react-components/password-tools";
 
 <ModalTrigger>
   <Button color="accent">Beispiel öffnen</Button>

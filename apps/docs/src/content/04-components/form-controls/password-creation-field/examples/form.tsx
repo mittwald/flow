@@ -14,7 +14,7 @@ import {
   generatePasswordCreationFieldValidation,
   Policy,
   RuleType,
-} from "@mittwald/flow-react-components/mittwald-password-tools-js";
+} from "@mittwald/flow-react-components/password-tools";
 
 export default () => {
   const customPolicy = Policy.fromDeclaration({

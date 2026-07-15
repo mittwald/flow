@@ -5,7 +5,7 @@ const flowAlphaPasswordCreationFieldTransform: Transform = (
   { j },
 ) => {
   const flowPackage = "@mittwald/flow-react-components";
-  const passwordToolsPackage = `${flowPackage}/mittwald-password-tools-js`;
+  const passwordToolsPackage = `${flowPackage}/password-tools`;
 
   const root = j(fileInfo.source, {
     parser: "ts",

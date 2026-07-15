@@ -5,7 +5,7 @@ import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import type { Locator, ScreenshotMatcherOptions } from "vitest/browser";
 import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
-import * as PasswordToolsComponents from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import * as PasswordToolsComponents from "@mittwald/flow-react-components/password-tools";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";

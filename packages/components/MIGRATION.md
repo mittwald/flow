@@ -7,11 +7,11 @@
 `PasswordCreationField` is no longer exported from
 `@mittwald/flow-react-components`.
 
-Use `@mittwald/flow-react-components/mittwald-password-tools-js` instead:
+Use `@mittwald/flow-react-components/password-tools` instead:
 
 ```diff
 - import { PasswordCreationField } from "@mittwald/flow-react-components";
-+ import { PasswordCreationField } from "@mittwald/flow-react-components/mittwald-password-tools-js";
++ import { PasswordCreationField } from "@mittwald/flow-react-components/password-tools";
 ```
 
 ### Use Codemod
