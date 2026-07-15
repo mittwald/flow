@@ -6,7 +6,7 @@ import {
   Navigation,
   Section,
 } from "@mittwald/flow-react-components";
-import React, { type FC, useEffect } from "react";
+import React, { type FC, useEffect, useRef } from "react";
 import globalStyles from "../../../layout.module.scss";
 import type { Anchor } from "@/lib/mdx/MdxFile";
 import styles from "./AnchorNavigation.module.scss";
@@ -17,9 +17,39 @@ interface Props {
   currentPath: string;
 }
 
+// Next.js patches the instance method `window.history.replaceState`, to update
+// his internal router – this triggers a rerender and interferes with the scrolling.
+// so we use the native replace state.
+const nativeReplaceState =
+  typeof History !== "undefined" ? History.prototype.replaceState : undefined;
+
+const updateLocationHash = (slug: string) => {
+  if (!nativeReplaceState) {
+    return;
+  }
+
+  const encoded = encodeURIComponent(slug);
+  if (window.location.hash.slice(1) === encoded) {
+    return;
+  }
+
+  const url = window.location.pathname + window.location.search + `#${encoded}`;
+  nativeReplaceState.call(window.history, window.history.state, "", url);
+};
+
 export const AnchorNavigation: FC<Props> = (props) => {
   const { anchors, currentPath } = props;
   const { ready } = useMdxStatus();
+
+  const initialScrollProcessed = useRef<boolean>(false);
+  useEffect(() => {
+    const prev = history.scrollRestoration;
+    history.scrollRestoration = "manual";
+
+    return () => {
+      history.scrollRestoration = prev;
+    };
+  }, []);
 
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
@@ -37,8 +67,22 @@ export const AnchorNavigation: FC<Props> = (props) => {
         if (visible.length > 0) {
           setActiveAnchor(visible[0]!.target.id);
         } else {
+          const currentUrlSlug = window.location.hash.slice(1);
           const aboveViewport = anchors
-            .map((a) => document.getElementById(a.slug))
+            .map((a) => {
+              const slugElement = document.getElementById(a.slug);
+
+              if (
+                !initialScrollProcessed.current &&
+                currentUrlSlug &&
+                currentUrlSlug === encodeURIComponent(a.slug)
+              ) {
+                initialScrollProcessed.current = true;
+                slugElement?.scrollIntoView();
+              }
+
+              return slugElement;
+            })
             .filter((el): el is HTMLElement => el !== null)
             .filter(
               (el) =>
@@ -83,6 +127,12 @@ export const AnchorNavigation: FC<Props> = (props) => {
                 className={styles.anchorLink}
                 aria-current={a.slug === activeAnchor ? "page" : undefined}
                 href={`${currentPath}#${a.slug}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveAnchor(a.slug);
+                  updateLocationHash(a.slug);
+                  document.getElementById(a.slug)?.scrollIntoView();
+                }}
                 key={a.slug}
                 style={{
                   marginInlineStart: a.level !== 2 ? "16px" : undefined,
