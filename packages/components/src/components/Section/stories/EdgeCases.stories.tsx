@@ -40,7 +40,7 @@ export const WithForm: Story = {
             </TextField>
           </Field>
           <ActionGroup>
-            <SubmitButton color="accent">Submit</SubmitButton>
+            <SubmitButton>Submit</SubmitButton>
           </ActionGroup>
         </Form>
       </Section>
