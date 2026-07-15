@@ -53,9 +53,7 @@ export default () => {
         </Field>
 
         <ActionGroup>
-          <SubmitButton color="accent">
-            Speichern
-          </SubmitButton>
+          <SubmitButton>Speichern</SubmitButton>
         </ActionGroup>
       </Section>
     </Form>

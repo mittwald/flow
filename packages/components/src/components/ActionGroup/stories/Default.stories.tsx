@@ -101,7 +101,7 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <ActionGroup {...props}>
-          <SubmitButton color="accent">Submit</SubmitButton>
+          <SubmitButton>Submit</SubmitButton>
           <Button color="secondary" variant="soft">
             Abort
           </Button>

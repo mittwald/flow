@@ -138,7 +138,7 @@ export const WithForm: Story = {
           <Field name="message">
             <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
           </Field>
-          <SubmitButton color="accent">Submit</SubmitButton>
+          <SubmitButton>Submit</SubmitButton>
         </Form>
       </Chat>
     );
