@@ -148,8 +148,16 @@ const buildConfig = ({
       buildPath: "dist/",
       files: [
         {
-          format: "css/variables-layered",
+          format: "css/variables",
           destination: `css/${destination}.css`,
+          filter: filter,
+          options: {
+            selector: cssSelector,
+          },
+        },
+        {
+          format: "css/variables-layered",
+          destination: `css-layered/${destination}.css`,
           filter: filter,
           options: {
             selector: cssSelector,

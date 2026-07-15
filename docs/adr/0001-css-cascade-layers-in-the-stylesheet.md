@@ -4,7 +4,8 @@
 - **Date:** 2026-07-07
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `@mittwald/flow-react-components` (`./all.css`, `./all-layered.css`),
-  `@mittwald/flow-stylesheet` (`./css`, `./css-layered`)
+  `@mittwald/flow-stylesheet` (`./css`, `./css-layered`),
+  `@mittwald/flow-design-tokens` (`./css/*` unlayered, `./css-layered/*` layered)
 
 ## Context and problem statement
 
@@ -161,12 +162,15 @@ stripped. The ~114 `*.module.scss` stay untouched. Implemented and verified via
 `corepack pnpm --filter @mittwald/flow-react-components build`:
 
 1. **`flow.tokens` — token build (Style Dictionary).**
-   `packages/design-tokens/build-tokens.js` registers a custom format
-   `css/variables-layered` that wraps the `css/variables` output (all 7
-   destinations; `selector` + `outputReferences` preserved) in
-   `@layer flow.tokens { … }`. Via `@forward` in `index.scss` the layer travels into
-   the bundle; the `:root[data-theme=…]` / `prefers-color-scheme` selectors are
-   preserved inside the layer.
+   `packages/design-tokens/build-tokens.js` emits each of the 7 token destinations
+   in **two variants**: unlayered under `dist/css/*` (built-in `css/variables`; the
+   package's non-breaking default export `./css/*`) and layered under
+   `dist/css-layered/*` (custom `css/variables-layered` format wrapping the output
+   in `@layer flow.tokens { … }`; `selector` + `outputReferences` preserved;
+   exported as `./css-layered/*`). The components build `@forward`s the **layered**
+   token files in `index.scss`, so the layer travels into the bundle; the
+   `:root[data-theme=…]` / `prefers-color-scheme` selectors are preserved inside the
+   layer. (The default `all.css` is then produced by stripping `@layer` downstream.)
 
 2. **`flow.reset` / `flow.base` — `index.scss`.**
    `packages/components/src/styles/index.scss` assigns the reset via
@@ -220,8 +224,10 @@ A spike implements the variants and is verified via
 `corepack pnpm --filter @mittwald/flow-react-components build` and
 `--filter @mittwald/flow-stylesheet build`. Implemented in:
 
-- `packages/design-tokens/build-tokens.js` – `css/variables-layered` format.
-- `packages/components/src/styles/index.scss` – reset/fonts layers + order.
+- `packages/design-tokens/build-tokens.js` – emits unlayered `css/*` (default) +
+  layered `css-layered/*` token CSS; `package.json` exports both.
+- `packages/components/src/styles/index.scss` – `@forward`s the layered
+  `css-layered/*` token files; reset/fonts layers + order declaration.
 - `packages/components/dev/vite/flowComponentsLayerPlugin.ts` – component wrap.
 - `packages/components/dev/vite/layerOrderPlugin.ts` – order-declaration hoist.
 - `packages/components/dev/vite/stylesheetVariantsPlugin.ts` – emits

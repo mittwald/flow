@@ -1,8 +1,8 @@
 @use "sass:meta";
 
-@forward "@mittwald/flow-design-tokens/css/base.css";
-@forward "@mittwald/flow-design-tokens/css/colors-light.css";
-@forward "@mittwald/flow-design-tokens/css/colors-dark.css";
+@forward "@mittwald/flow-design-tokens/css-layered/base.css";
+@forward "@mittwald/flow-design-tokens/css-layered/colors-light.css";
+@forward "@mittwald/flow-design-tokens/css-layered/colors-dark.css";
 
 @layer flow.tokens, flow.reset, flow.base, flow.components;
 
@@ -16,12 +16,12 @@
 
 @media (prefers-color-scheme: dark) {
   @include meta.load-css(
-    "@mittwald/flow-design-tokens/css/colors-dark-system.css"
+    "@mittwald/flow-design-tokens/css-layered/colors-dark-system.css"
   );
 }
 
 @media (prefers-color-scheme: light) {
   @include meta.load-css(
-    "@mittwald/flow-design-tokens/css/colors-light-system.css"
+    "@mittwald/flow-design-tokens/css-layered/colors-light-system.css"
   );
 }
