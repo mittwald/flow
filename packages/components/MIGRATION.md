@@ -1,6 +1,6 @@
 # Migrations
 
-## From version `<1.0.0` to `1.0.0`
+## From version `0.2.0-alpha.908` to `>=0.2.0-alpha.909`
 
 ### PasswordCreationField moved to dedicated export entry
 
@@ -18,7 +18,7 @@ Use `@mittwald/flow-react-components/mittwald-password-tools-js` instead:
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow100.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaPasswordCreationField.ts \
   --parser tsx \
   src
 ```

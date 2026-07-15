@@ -1,6 +1,9 @@
 import type { Transform } from "jscodeshift";
 
-const flow100Transform: Transform = (fileInfo, { j }) => {
+const flowAlphaPasswordCreationFieldTransform: Transform = (
+  fileInfo,
+  { j },
+) => {
   const flowPackage = "@mittwald/flow-react-components";
   const passwordToolsPackage = `${flowPackage}/mittwald-password-tools-js`;
 
@@ -91,4 +94,4 @@ const flow100Transform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flow100Transform;
+export default flowAlphaPasswordCreationFieldTransform;

@@ -5,10 +5,16 @@ import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import type { Locator, ScreenshotMatcherOptions } from "vitest/browser";
 import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
+import * as PasswordToolsComponents from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
 import { expect } from "vitest";
+
+const localComponents: typeof Components & typeof PasswordToolsComponents = {
+  ...Components,
+  ...PasswordToolsComponents,
+};
 
 const RemoteTestUi: FC<PropsWithChildren> = (props) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
@@ -52,7 +58,7 @@ const testScreenshot = async (
 
 interface TestEnvironement {
   toString: () => string;
-  components: typeof Components | typeof RemoteComponents;
+  components: typeof localComponents | typeof RemoteComponents;
   render: typeof render;
   container: Locator;
   testScreenshot: (
@@ -71,7 +77,7 @@ const remoteTestEnvironement: TestEnvironement = {
 
 const localTestEnvironement: TestEnvironement = {
   toString: () => "Local",
-  components: Components,
+  components: localComponents,
   render: renderLocal,
   container: rootContainerLocator,
   testScreenshot,
