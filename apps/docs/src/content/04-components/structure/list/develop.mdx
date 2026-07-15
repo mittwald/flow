@@ -102,6 +102,29 @@ return {
 
 ---
 
+# Infinite Scroll
+
+Standardmäßig wird die nächste Seite über einen **"Mehr anzeigen"**-Button
+nachgeladen. Für sehr lange Listen, in denen ohne konkretes Suchziel gestöbert
+wird, kann stattdessen **Infinite Scroll** aktiviert werden: Die nächste Seite
+wird automatisch geladen, sobald das Ende der Liste in den sichtbaren Bereich
+scrollt.
+
+```tsx
+<List.List infiniteScroll batchSize={20} aria-label="Domains">
+  {/* ... */}
+</List.List>
+```
+
+- Infinite Scroll ist **opt-in** und sollte nicht der Default für alle Listen
+  sein. Für kurze oder gezielt durchsuchte Listen ist der "Mehr anzeigen"-Button
+  in der Regel die bessere Wahl.
+- Der Mechanismus funktioniert unabhängig davon, ob die Daten statisch,
+  asynchron oder über Hooks geladen werden, und respektiert `manualPagination`.
+- Während des Nachladens wird ein Ladeindikator am Ende der Liste angezeigt.
+
+---
+
 # Filter
 
 In der Regel werden Filter für ein Property der List gesetzt:

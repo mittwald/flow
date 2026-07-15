@@ -65,6 +65,7 @@ export interface ListShape<
 
   onAction?: ItemActionFn<T>;
   accordion?: boolean;
+  infiniteScroll?: boolean;
   loadingItemsCount?: number;
   getItemId?: GetItemId<T>;
   onChange?: OnListChanged<T, TMeta>;
