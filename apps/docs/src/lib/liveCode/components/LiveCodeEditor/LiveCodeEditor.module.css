@@ -10,20 +10,20 @@
     align-self: normal;
   }
 
+  > :global(.flow--accordion),
+  > :global(.flow--action-group),
+  > :global(.flow--breadcrumb),
+  > :global(.flow--code-block),
+  > :global(.flow--file-card),
+  > :global(.flow--flex),
+  > :global(.flow--form-field),
+  > :global(.flow--labeled-value),
+  > :global(.flow--list),
+  > :global(.flow--markdown-editor),
   > :global(.flow--navigation),
-  :global(.flow--labeled-value),
-  :global(.flow--list),
-  :global(.flow--text),
-  :global(.flow--form-field),
-  :global(.flow--breadcrumb),
-  :global(.flow--accordion),
-  :global(.flow--file-card),
-  :global(.flow--flex),
-  :global(.flow--tabs),
-  :global(.flow--action-group),
-  :global(.flow--markdown-editor),
-  :global(.flow--code-block),
-  form {
+  > :global(.flow--tabs),
+  > :global(.flow--text),
+  > form {
     align-self: stretch;
   }
 
