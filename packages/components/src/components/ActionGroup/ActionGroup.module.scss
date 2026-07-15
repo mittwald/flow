@@ -3,18 +3,18 @@
   align-items: center;
   flex-wrap: wrap;
 
+  @mixin spacing($spacing) {
+    &.#{$spacing} {
+      gap: var(--action-group--spacing--#{$spacing});
+    }
+  }
+
+  @include spacing(s);
+  @include spacing(m);
+
   &.sorted {
     justify-content: flex-end;
     flex-grow: 1;
-
-    @mixin spacing($spacing) {
-      &.#{$spacing} {
-        gap: var(--action-group--spacing--#{$spacing});
-      }
-    }
-
-    @include spacing(s);
-    @include spacing(m);
 
     .primary {
       order: 3;
