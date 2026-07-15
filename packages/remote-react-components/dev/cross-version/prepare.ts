@@ -1,8 +1,17 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { resolveCrossVersionTargets } from "./resolveCrossVersionTargets";
+import {
+  resolveCrossVersionTargets,
+  type ResolvedTarget,
+} from "./resolveCrossVersionTargets";
 
 const PACKAGE_NAME = "@mittwald/flow-remote-react-components";
 const here = dirname(fileURLToPath(import.meta.url));
@@ -37,12 +46,12 @@ const fetchPublishedVersions = (): string[] => {
   return JSON.parse(raw) as string[];
 };
 
-const installVersion = (version: string): void => {
+const installVersion = (version: string): boolean => {
   const dir = join(installRoot, version);
   const target = installPathFor(version);
   if (existsSync(target)) {
     console.log(`[cross-version] ${version} already installed, skipping`);
-    return;
+    return true;
   }
   mkdirSync(dir, { recursive: true });
   writeFileSync(
@@ -54,13 +63,27 @@ const installVersion = (version: string): void => {
     ),
   );
   console.log(`[cross-version] installing ${PACKAGE_NAME}@${version}`);
-  execFileSync(
-    "npm",
-    ["install", "--prefix", dir, `${PACKAGE_NAME}@${version}`],
-    {
-      stdio: "inherit",
-    },
-  );
+  try {
+    execFileSync(
+      "npm",
+      ["install", "--prefix", dir, `${PACKAGE_NAME}@${version}`],
+      {
+        stdio: "inherit",
+      },
+    );
+    return true;
+  } catch {
+    // Remove the partial install dir so a later run doesn't treat it as
+    // installed. Failures here are typically a repo publish gap: the version's
+    // dependency tree pins a transitive @mittwald/* version that was never
+    // published to npm (ETARGET).
+    rmSync(dir, { recursive: true, force: true });
+    console.warn(
+      `[cross-version] WARNING: skipping ${version} — install failed ` +
+        `(likely an unpublished transitive dependency)`,
+    );
+    return false;
+  }
 };
 
 const main = (): void => {
@@ -80,14 +103,34 @@ const main = (): void => {
   }
 
   mkdirSync(installRoot, { recursive: true });
+  const installed: ResolvedTarget[] = [];
+  const dropped: ResolvedTarget[] = [];
   for (const target of targets) {
-    installVersion(target.version);
+    if (installVersion(target.version)) {
+      installed.push(target);
+    } else {
+      dropped.push(target);
+    }
+  }
+
+  if (dropped.length > 0) {
+    console.warn(
+      `[cross-version] WARNING: dropped ${dropped.length} un-installable ` +
+        `version(s): ` +
+        dropped.map((t) => `${t.category}=${t.version}`).join(", "),
+    );
+  }
+  if (installed.length === 0) {
+    console.warn(
+      "[cross-version] WARNING: no installable versions found — writing an " +
+        "empty manifest (cross-version smoke tests will have nothing to run)",
+    );
   }
 
   const manifest = {
     resolvedAt: new Date().toISOString(),
     packageName: PACKAGE_NAME,
-    targets: targets.map((t) => ({
+    targets: installed.map((t) => ({
       category: t.category,
       version: t.version,
       installPath: installPathFor(t.version),
@@ -98,8 +141,8 @@ const main = (): void => {
     JSON.stringify(manifest, null, 2) + "\n",
   );
   console.log(
-    `[cross-version] wrote manifest with ${targets.length} target(s): ` +
-      targets.map((t) => `${t.category}=${t.version}`).join(", "),
+    `[cross-version] wrote manifest with ${installed.length} target(s): ` +
+      installed.map((t) => `${t.category}=${t.version}`).join(", "),
   );
 };
 
