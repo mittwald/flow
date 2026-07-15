@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.910](https://github.com/mittwald/flow/compare/0.2.0-alpha.909...0.2.0-alpha.910) (2026-07-15)
+
+### Features
+
+* **components:** add opt-in layered stylesheet variant (CSS cascade layers) ([#2643](https://github.com/mittwald/flow/issues/2643)) ([4b190c2](https://github.com/mittwald/flow/commit/4b190c2ad574ff2cbaa2385047e98aeb6384541b))
+
 # [0.2.0-alpha.909](https://github.com/mittwald/flow/compare/0.2.0-alpha.908...0.2.0-alpha.909) (2026-07-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
