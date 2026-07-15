@@ -12,7 +12,9 @@ export const layerOrderPlugin = (): Plugin => ({
   name: "flow-layer-order",
   writeBundle: (options, bundle) => {
     for (const asset of Object.values(bundle)) {
-      if (asset.type !== "asset" || !asset.fileName.endsWith(".css")) {
+      // Hoist the layer order only for the main bundled stylesheet.
+      // Additional CSS assets should keep their original content untouched.
+      if (asset.type !== "asset" || asset.fileName !== "css/all.css") {
         continue;
       }
 
