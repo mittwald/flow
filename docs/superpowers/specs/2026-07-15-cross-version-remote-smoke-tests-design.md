@@ -59,8 +59,19 @@ Four pieces, smallest-surface-first.
 
 ### 1. Version resolver — `resolveCrossVersionTargets` (pure, unit-tested)
 
-A pure function: `(currentVersion, publishedVersions[]) => ResolvedTarget[]`,
+A pure function:
+`(currentVersion, publishedVersions[], excludedVersions[]) => ResolvedTarget[]`,
 where `ResolvedTarget = { category, version }`.
+
+**Excluded versions.** Specific published versions can be marked as *excluded*
+— e.g. a known-broken release that should never be tested against. Excluded
+versions are removed from the candidate pool **before** the categories/offsets
+are resolved, so each category naturally lands on the next valid candidate
+(e.g. "previous" skips a broken version and picks the next-nearest below current;
+an offset that would land on an excluded version steps to the next). The
+exclude list is a checked-in, commented config (`cross-version.exclude.json`,
+`{ version, reason }[]`) so each exclusion is documented and reviewable. If a
+version is later fixed, removing it from the list re-includes it.
 
 Implements the issue's semver categories:
 
@@ -94,7 +105,8 @@ prepare step (below).
   1. Reads the current version (`lerna.json`).
   2. Queries npm **once** for the published version list of
      `@mittwald/flow-remote-react-components`.
-  3. Runs `resolveCrossVersionTargets`.
+  3. Runs `resolveCrossVersionTargets`, passing the checked-in exclude list
+     (`cross-version.exclude.json`).
   4. Writes **`cross-version.manifest.json`** (`{ category → version }`, plus
      resolved-at metadata).
   5. Installs each **distinct** resolved version into an isolated directory
@@ -163,8 +175,8 @@ Add a section to `packages/remote-react-components/CONTRIBUTE.md`:
 ## Testing this feature
 
 - **Unit:** `resolveCrossVersionTargets` — semver categories, alpha-offset
-  fallback, dedup, and "too few versions" drop behaviour, over injected version
-  lists.
+  fallback, dedup, excluded-version skipping (candidate steps to the next valid
+  version), and "too few versions" drop behaviour, over injected version lists.
 - **Integration (implicit):** the cross-version project itself running the ~10
   subset against at least one resolved old version, green against the current
   baseline.
