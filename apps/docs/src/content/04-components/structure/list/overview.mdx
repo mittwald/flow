@@ -141,6 +141,22 @@ Die Pagination ist standardmäßig bei jeder List aktiviert, kann jedoch über
 `hidePagination` deaktiviert werden. Über die `batchSize`-Property kann
 festgelegt werden, wie viele Einträge gleichzeitig angezeigt werden sollen.
 
+## Loading View
+
+Während die Daten einer List initial geladen werden, zeigt die List eine
+**Loading View** aus Skeleton-Platzhaltern an. Ohne weitere Angabe wird dafür
+ein generisches Skeleton verwendet. Über das `loadingView`-Property eines
+`<List.Item />` (bzw. eines `<TableCell />` in der Tabellenansicht) lässt sich
+diese Ansicht anpassen.
+
+Gestalte die Loading View so, dass sie dem tatsächlichen Inhalt in Aufbau und
+Größe möglichst nahekommt, und verwende dafür
+[Skeleton](/04-components/content/skeleton/overview) und `SkeletonText`. So
+wirkt der Übergang von der Lade- zur Inhaltsansicht ruhig und ohne
+Layout-Sprung.
+
+<LiveCodeEditor example="loadingView" editorCollapsed stretch />
+
 ## Empty View
 
 Mit `emptyView` kann eine benutzerdefinierte Ansicht angezeigt werden, wenn die
@@ -153,6 +169,23 @@ In der Regel sollte als Empty View eine IllustratedMessage verwendet werden, um
 eine konsistente Nutzererfahrung zu gewährleisten.
 
 <LiveCodeEditor example="customEmptyView" editorCollapsed stretch />
+
+Für den Fall, dass eine Suche oder ein Filter kein Ergebnis liefert, kann über
+`emptySearchResultView` eine eigene Ansicht angezeigt werden. Wird sie nicht
+gesetzt, zeigt die List einen passenden, vordefinierten Hinweis an.
+
+## Layout-Shift zwischen Loading und Empty View
+
+Loading View (mehrere Skeleton-Zeilen) und Empty View (in der Regel eine
+einzelne IllustratedMessage) unterscheiden sich in der Höhe. Beim initialen
+Laden einer leeren Liste entsteht dadurch ein sichtbarer Sprung, sobald von der
+Lade- zur Leeransicht gewechselt wird.
+
+Ist die List in eine Seite eingebettet, die bereits einen eigenen Ladezustand
+anzeigt, lässt sich dieser Sprung vermeiden, indem die List beim initialen Laden
+keinen eigenen Ladezustand rendert. Wie sich das über das
+`disableInitialSuspenseBoundary`-Property steuern lässt, ist im Develop-Tab
+beschrieben.
 
 ---
 
