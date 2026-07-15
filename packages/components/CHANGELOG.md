@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.908](https://github.com/mittwald/flow/compare/0.2.0-alpha.907...0.2.0-alpha.908) (2026-07-15)
+
+### Bug Fixes
+
+* **ci:** fix two flaky visual/browser test failures (firefox hang retry + Modal deflake) ([#2641](https://github.com/mittwald/flow/issues/2641)) ([c6ce4f6](https://github.com/mittwald/flow/commit/c6ce4f69877b9ff04793468dcade412274a7e923))
+
 # [0.2.0-alpha.907](https://github.com/mittwald/flow/compare/0.2.0-alpha.906...0.2.0-alpha.907) (2026-07-15)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
