@@ -19,7 +19,10 @@ export const stylesheetVariantsPlugin = (): Plugin => ({
       });
       const layerAtRules: AtRule[] = [];
 
-      writeFileSync(join(options.dir ?? "dist", "css/all-layered.css"), layeredCss);
+      writeFileSync(
+        join(options.dir ?? "dist", "css/all-layered.css"),
+        layeredCss,
+      );
 
       root.walkAtRules("layer", (atRule) => {
         layerAtRules.push(atRule);

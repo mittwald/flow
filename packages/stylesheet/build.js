@@ -13,10 +13,7 @@ const layeredStylesheetPathname = createRequire(import.meta.url).resolve(
 const thisDirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 const targetPathname = path.join(thisDirname, "dist/styles.css");
-const layeredTargetPathname = path.join(
-  thisDirname,
-  "dist/styles-layered.css",
-);
+const layeredTargetPathname = path.join(thisDirname, "dist/styles-layered.css");
 
 if (!fs.existsSync(path.dirname(targetPathname))) {
   fs.mkdirSync(path.dirname(targetPathname));

@@ -18,7 +18,9 @@ export const layerOrderPlugin = (): Plugin => ({
 
       const fileName = join(options.dir ?? "dist", asset.fileName);
       const source = readFileSync(fileName, "utf8");
-      const withoutLayerOrder = source.replace(layerOrderPattern, "").trimStart();
+      const withoutLayerOrder = source
+        .replace(layerOrderPattern, "")
+        .trimStart();
       const charset = withoutLayerOrder.match(/^@charset\s+[^;]+;/);
 
       const nextSource = charset

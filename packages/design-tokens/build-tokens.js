@@ -28,8 +28,13 @@ StyleDictionary.registerFormat({
       : options.selector
         ? [options.selector]
         : [":root"];
-    const { outputReferences, outputReferenceFallbacks, usesDtcg, formatting, sort } =
-      options;
+    const {
+      outputReferences,
+      outputReferenceFallbacks,
+      usesDtcg,
+      formatting,
+      sort,
+    } = options;
     const indentation = formatting?.indentation ?? "  ";
     const header = await fileHeader({ file, formatting, options });
 
@@ -47,7 +52,8 @@ StyleDictionary.registerFormat({
     });
 
     const nestedVariables = selector
-      .slice().reverse()
+      .slice()
+      .reverse()
       .reduce(
         (content, currentSelector, index) =>
           `${indentation.repeat(selector.length - index)}${currentSelector} {\n` +
