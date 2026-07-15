@@ -8,6 +8,17 @@ const layerOrderDeclaration =
 const layerOrderPattern =
   /@layer\s+flow\.tokens\s*,\s*flow\.reset\s*,\s*flow\.base\s*,\s*flow\.components\s*;/g;
 
+export const hoistLayerOrder = (css: string): string => {
+  const withoutLayerOrder = css.replace(layerOrderPattern, "").trimStart();
+  const charset = withoutLayerOrder.match(/^@charset\s+[^;]+;/);
+
+  return charset
+    ? `${charset[0]}\n${layerOrderDeclaration}\n${withoutLayerOrder
+        .slice(charset[0].length)
+        .trimStart()}`
+    : `${layerOrderDeclaration}\n${withoutLayerOrder}`;
+};
+
 export const layerOrderPlugin = (): Plugin => ({
   name: "flow-layer-order",
   writeBundle: (options, bundle) => {
@@ -20,18 +31,7 @@ export const layerOrderPlugin = (): Plugin => ({
 
       const fileName = join(options.dir ?? "dist", asset.fileName);
       const source = readFileSync(fileName, "utf8");
-      const withoutLayerOrder = source
-        .replace(layerOrderPattern, "")
-        .trimStart();
-      const charset = withoutLayerOrder.match(/^@charset\s+[^;]+;/);
-
-      const nextSource = charset
-        ? `${charset[0]}\n${layerOrderDeclaration}\n${withoutLayerOrder
-            .slice(charset[0].length)
-            .trimStart()}`
-        : `${layerOrderDeclaration}\n${withoutLayerOrder}`;
-
-      writeFileSync(fileName, nextSource);
+      writeFileSync(fileName, hoistLayerOrder(source));
     }
   },
 });

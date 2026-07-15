@@ -3,7 +3,7 @@ import postcss from "postcss";
 export const flowComponentsLayerPlugin = () => ({
   postcssPlugin: "flow-components-layer",
   Once: (root: postcss.Root, { result }: { result: postcss.Result }) => {
-    const from = result.opts.from ?? "";
+    const from = (result.opts.from ?? "").replaceAll("\\", "/");
 
     if (
       !from.includes("/src/components/") ||

@@ -4,6 +4,25 @@ import postcss from "postcss";
 import type { AtRule } from "postcss";
 import type { Plugin } from "vite";
 
+export const stripCascadeLayers = (css: string): string => {
+  const root = postcss.parse(css);
+  const layerAtRules: AtRule[] = [];
+
+  root.walkAtRules("layer", (atRule) => {
+    layerAtRules.push(atRule);
+  });
+
+  for (const atRule of layerAtRules) {
+    if (atRule.nodes) {
+      atRule.replaceWith(...atRule.nodes);
+    } else {
+      atRule.remove();
+    }
+  }
+
+  return root.toString();
+};
+
 export const stylesheetVariantsPlugin = (): Plugin => ({
   name: "flow-stylesheet-variants",
   writeBundle: (options, bundle) => {
@@ -14,29 +33,13 @@ export const stylesheetVariantsPlugin = (): Plugin => ({
 
       const fileName = join(options.dir ?? "dist", asset.fileName);
       const layeredCss = readFileSync(fileName, "utf8");
-      const root = postcss.parse(layeredCss, {
-        from: fileName,
-      });
-      const layerAtRules: AtRule[] = [];
 
       writeFileSync(
         join(options.dir ?? "dist", "css/all-layered.css"),
         layeredCss,
       );
 
-      root.walkAtRules("layer", (atRule) => {
-        layerAtRules.push(atRule);
-      });
-
-      for (const atRule of layerAtRules) {
-        if (atRule.nodes) {
-          atRule.replaceWith(...atRule.nodes);
-        } else {
-          atRule.remove();
-        }
-      }
-
-      writeFileSync(fileName, root.toString());
+      writeFileSync(fileName, stripCascadeLayers(layeredCss));
 
       const previousUnlayeredFileName = join(
         options.dir ?? "dist",
