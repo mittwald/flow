@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.914](https://github.com/mittwald/flow/compare/0.2.0-alpha.913...0.2.0-alpha.914) (2026-07-15)
+
+### Features
+
+* **remote:** surface "No component found" error on the remote side ([#2651](https://github.com/mittwald/flow/issues/2651)) ([715fd75](https://github.com/mittwald/flow/commit/715fd7537cc776f8376ffc4634021071ba5fde18)), closes [#2441](https://github.com/mittwald/flow/issues/2441)
+
 # [0.2.0-alpha.913](https://github.com/mittwald/flow/compare/0.2.0-alpha.912...0.2.0-alpha.913) (2026-07-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
