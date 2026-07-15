@@ -49,13 +49,9 @@ export const Avatar = flowComponent("Avatar", (props) => {
     Initials: {
       className: styles.initials,
       useDynamicColor,
-      "aria-hidden": true,
     },
     Icon: {
       className: styles.icon,
-    },
-    Image: {
-      "aria-hidden": true,
     },
   };
 
