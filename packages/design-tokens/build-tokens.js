@@ -47,7 +47,7 @@ StyleDictionary.registerFormat({
     });
 
     const nestedVariables = selector
-      .reverse()
+      .slice().reverse()
       .reduce(
         (content, currentSelector, index) =>
           `${indentation.repeat(selector.length - index)}${currentSelector} {\n` +
