@@ -6,6 +6,7 @@ import { defineConfig } from "vitest/config";
 import defaultConfig from "../../vite.config";
 import { vitestBrowserTestConfig } from "../../../core/src/vitestBrowserTestConfig";
 import { writeCrossVersionEnvironmentsModule } from "./crossVersionEnvironmentsPlugin";
+import { SUBSET } from "./subset";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../..");
@@ -200,6 +201,18 @@ export default mergeConfig(
         `@flr-crossversion/${t.version}`,
         `@flr-crossversion/${t.version}/RemoteRoot`,
       ]),
+      // ATTEMPT at a deterministic cold-cache first run (see the long
+      // `optimizeDeps`/scanner comment above for the two-run-before-green
+      // problem this is trying to fix). `optimizeDeps.entries` feeds
+      // esbuild's STARTUP scan (a different, more thorough pass than the
+      // request-time scanner that seeds `include`) — that scan DOES follow
+      // imports transitively, so pointing it at the generated environments
+      // module and the subset test files should make it discover the old
+      // versions' transitive deps up front instead of lazily mid-run.
+      entries: [
+        crossVersionEnvironmentsPath,
+        ...SUBSET.map((s) => join(packageRoot, s)),
+      ],
       // Without this, Vite's optimizer transitively inlines a SEPARATE
       // bundled copy of (the current, aliased) `@mittwald/flow-remote-elements`
       // into each `@flr-crossversion/<version>` chunk, while the CURRENT host
@@ -224,7 +237,7 @@ export default mergeConfig(
       globals: true,
       ...vitestBrowserTestConfig,
       name: "cross-version",
-      include: ["dev/cross-version/**/*.browser.test.{ts,tsx}"],
+      include: SUBSET,
       setupFiles: "./dev/vitest/setupBrowser.ts",
     },
   }),
