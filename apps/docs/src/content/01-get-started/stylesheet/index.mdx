@@ -31,6 +31,67 @@ import "@mittwald/flow-stylesheet/css";
 
 ---
 
+# Layered-Variante (optional)
+
+Das Standard-Stylesheet (`@mittwald/flow-stylesheet/css`) ist **ungelayert**:
+welche Regel gewinnt, entscheidet sich über Spezifität und Quell-Reihenfolge.
+
+Optional gibt es eine **gelayerte Variante**, deren Styles in
+[CSS Cascade Layers](https://developer.mozilla.org/de/docs/Web/CSS/@layer)
+organisiert sind:
+
+```
+import "@mittwald/flow-stylesheet/css-layered";
+```
+
+Aus dem `@mittwald/flow-react-components`-Paket entsprechend:
+
+```
+import "@mittwald/flow-react-components/all-layered.css";
+```
+
+Sie liegt unter einem `flow`-Layer mit dieser Reihenfolge:
+
+```css
+@layer flow.tokens, flow.reset, flow.base, flow.components;
+```
+
+- `flow.tokens` – die Design-Token als CSS Custom Properties
+- `flow.reset` – der globale Reset
+- `flow.base` – Schriftarten (`@font-face`) und globale Basis-Styles
+- `flow.components` – die Styles der einzelnen Komponenten
+
+---
+
+## Warum die gelayerte Variante?
+
+Nach den Regeln der Cascade Layers gewinnt **ungelayertes** CSS immer gegen
+gelayertes – unabhängig von der Spezifität. Mit der gelayerten Variante
+überschreibst du Flows Styles daher ohne `!important` oder Spezifitäts-Tricks:
+
+```css
+/* Gewinnt gegen Flows .flow--button, ohne !important */
+.flow--button {
+  border-radius: 0;
+}
+```
+
+Wenn du selbst mit Cascade Layers arbeitest (z. B. Tailwind), deklariere deine
+Layer **nach** `flow`, damit sie Vorrang behalten.
+
+---
+
+## Welche Variante wann?
+
+- **Standard (`css` / `all.css`):** klassisches, spezifitätsbasiertes Verhalten.
+  Passt auch für Apps mit einem aggressiven globalen Reset (z. B.
+  `* { all: initial }`), der gelayerte Styles sonst vollständig überschreiben
+  würde.
+- **Layered (`css-layered` / `all-layered.css`):** einfache, spezifitätsfreie
+  Überschreibbarkeit und saubere Interop mit eigenen Cascade Layers.
+
+---
+
 # Anwendung des Stylesheets
 
 Um anfangen zu können, solltest du verstehen, wie die Klassennamen strukturiert
