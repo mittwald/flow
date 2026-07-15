@@ -1,4 +1,4 @@
-import { Component, type ErrorInfo, type ReactNode } from "react";
+import { Component, type ReactNode } from "react";
 
 const HOST_ERROR_DELIVERY_TIMEOUT_MS = 1000;
 
@@ -28,7 +28,7 @@ export class HostRenderErrorBoundary extends Component<Props, State> {
     return { errorToRethrow: error };
   }
 
-  override componentDidCatch(error: unknown, _info: ErrorInfo): void {
+  override componentDidCatch(error: unknown): void {
     if (!isNoComponentFoundError(error)) {
       return;
     }
