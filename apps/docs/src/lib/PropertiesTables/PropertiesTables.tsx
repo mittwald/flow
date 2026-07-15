@@ -8,6 +8,7 @@ import {
 } from "@mittwald/flow-react-components";
 import React from "react";
 import loadProperties from "./lib/loadProperties";
+import { StaticPropertiesTables } from "./components/StaticPropertiesTables";
 
 interface PropertiesTableProps {
   name: string;
@@ -17,12 +18,12 @@ export const PropertiesTables: React.FC<PropertiesTableProps> = ({ name }) => {
   const properties = loadProperties(name);
   const isMounted = useIsMounted();
 
-  if (!isMounted) {
-    return <p>...</p>;
-  }
-
   if (!properties) {
     return <p>Keine Properties vorhanden.</p>;
+  }
+
+  if (!isMounted) {
+    return <StaticPropertiesTables properties={properties} />;
   }
 
   return (

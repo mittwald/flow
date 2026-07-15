@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.906](https://github.com/mittwald/flow/compare/0.2.0-alpha.905...0.2.0-alpha.906) (2026-07-14)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.905](https://github.com/mittwald/flow/compare/0.2.0-alpha.904...0.2.0-alpha.905) (2026-07-14)
+
+### Features
+
+* **remote:** forward remote deprecation notices to the host via onDeprecation ([#2639](https://github.com/mittwald/flow/issues/2639)) ([d17da88](https://github.com/mittwald/flow/commit/d17da885b7a8bf6e1637fa6ad78e729d39cb53ba))
+
+# [0.2.0-alpha.904](https://github.com/mittwald/flow/compare/0.2.0-alpha.903...0.2.0-alpha.904) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.903](https://github.com/mittwald/flow/compare/0.2.0-alpha.902...0.2.0-alpha.903) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.902](https://github.com/mittwald/flow/compare/0.2.0-alpha.901...0.2.0-alpha.902) (2026-07-13)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.901](https://github.com/mittwald/flow/compare/0.2.0-alpha.900...0.2.0-alpha.901) (2026-07-13)
+
+### Features
+
+* **remote:** expose package version in connection handshake ([#2610](https://github.com/mittwald/flow/issues/2610)) ([9637dce](https://github.com/mittwald/flow/commit/9637dcea778f0254ea81084d89434b06f070df16))
+
+# [0.2.0-alpha.900](https://github.com/mittwald/flow/compare/0.2.0-alpha.899...0.2.0-alpha.900) (2026-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.899](https://github.com/mittwald/flow/compare/0.2.0-alpha.898...0.2.0-alpha.899) (2026-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 # [0.2.0-alpha.898](https://github.com/mittwald/flow/compare/0.2.0-alpha.897...0.2.0-alpha.898) (2026-07-09)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
