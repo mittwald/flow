@@ -9,6 +9,7 @@ on:
 jobs:
   run-visual-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event.label.name == 'run-visual-tests' &&
@@ -20,6 +21,7 @@ jobs:
       cancel-in-progress: true
 
     permissions:
+      contents: read # checkout only; this run never pushes
       pull-requests: write # needs to remove the triggering label
 
     steps:
