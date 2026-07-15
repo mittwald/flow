@@ -22,11 +22,18 @@ export interface AvatarProps
    * explained by an element (like text or label) nearby.
    */
   status?: Status;
+  /**
+   * A descriptive label that assistive technology announces for the avatar
+   * (e.g. the name of the represented person or entity). When set, the avatar
+   * is exposed as a single image with this label. When omitted, the avatar is
+   * treated as purely decorative and hidden from assistive technology.
+   */
+  label?: string;
 }
 
 /** @flr-generate all */
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, color, size = "m", status, ref } = props;
+  const { children, className, color, size = "m", status, label, ref } = props;
 
   const rootClassName = clsx(
     styles.avatar,
@@ -38,18 +45,34 @@ export const Avatar = flowComponent("Avatar", (props) => {
 
   const useDynamicColor = color === undefined && status === undefined;
 
+  // The avatar itself is the accessibility boundary (see below): it is either
+  // hidden or exposed as a single labelled image. Its content therefore never
+  // exposes its own structure to assistive technology.
   const propsContext: PropsContext = {
     Initials: {
       className: styles.initials,
       useDynamicColor,
+      "aria-hidden": true,
     },
     Icon: {
       className: styles.icon,
     },
+    Image: {
+      "aria-hidden": true,
+    },
   };
 
+  const isMeaningful = label !== undefined;
+  const isDecorative = !isMeaningful && !status;
+
   return (
-    <div className={rootClassName} ref={ref}>
+    <div
+      className={rootClassName}
+      role={isMeaningful ? "img" : undefined}
+      aria-label={label}
+      aria-hidden={isDecorative || undefined}
+      ref={ref}
+    >
       <PropsContextProvider props={propsContext}>
         {!status && children}
         {status && <AlertIcon className={styles.icon} status={status} />}
