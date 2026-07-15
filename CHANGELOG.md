@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.912](https://github.com/mittwald/flow/compare/0.2.0-alpha.911...0.2.0-alpha.912) (2026-07-15)
+
+### Bug Fixes
+
+* **CodeEditor:** fix copy button z-index ([#2649](https://github.com/mittwald/flow/issues/2649)) ([9a806d0](https://github.com/mittwald/flow/commit/9a806d0cad63a1b43e39cacff41005bc7019a89a))
+
 # [0.2.0-alpha.911](https://github.com/mittwald/flow/compare/0.2.0-alpha.910...0.2.0-alpha.911) (2026-07-15)
 
 ### Bug Fixes
