@@ -1,0 +1,4 @@
+{
+  "$comment": "Published versions to NEVER run cross-version smoke tests against (e.g. known-broken releases). Removing an entry re-includes that version. See CONTRIBUTE.md.",
+  "excluded": []
+}
