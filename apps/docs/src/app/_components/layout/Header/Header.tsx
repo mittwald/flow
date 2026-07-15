@@ -41,7 +41,7 @@ const Header: FC<Props> = (props) => {
         </Flex>
         <Flex gap="m" className={styles.desktopActions}>
           <SearchButton controller={searchController} />
-          <ThemeSwitcherButton />
+          <ThemeSwitcherButton iconOnly />
         </Flex>
         <MobileNavigation
           docs={docs.map((mdx) => mdx.serialize())}
