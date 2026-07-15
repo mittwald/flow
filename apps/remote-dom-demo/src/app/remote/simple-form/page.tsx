@@ -39,41 +39,41 @@ export default function Page() {
     >
       <Section>
         <CheckboxGroup name="check">
-          <Label>Berechtigungen</Label>
-          <Checkbox value="read">Lesen</Checkbox>
-          <Checkbox value="write">Schreiben</Checkbox>
+          <Label>Clearance</Label>
+          <Checkbox value="archives">Jedi Archives</Checkbox>
+          <Checkbox value="command">Command deck</Checkbox>
         </CheckboxGroup>
         <RadioGroup name="role" defaultValue="admin">
-          <Label>Rolle</Label>
-          <Radio value="admin">Administrator</Radio>
-          <Radio value="member">Mitglied</Radio>
-          <Radio value="accountant">Buchhalter</Radio>
+          <Label>Rank</Label>
+          <Radio value="admin">Commander</Radio>
+          <Radio value="member">Pilot</Radio>
+          <Radio value="accountant">Engineer</Radio>
         </RadioGroup>
         <Autocomplete>
-          <TextField name="text" aria-label="Text" />
-          <Option textValue="Foo" value="Foo">
-            Foo
+          <TextField name="text" aria-label="Homeworld" />
+          <Option textValue="Tatooine" value="Tatooine">
+            Tatooine
           </Option>
-          <Option textValue="Bar" value="Bar">
-            Bar
+          <Option textValue="Alderaan" value="Alderaan">
+            Alderaan
           </Option>
         </Autocomplete>
 
-        <Select name="select" aria-label="Select">
-          <Option value="Foo" textValue="Foo">
-            Foo
+        <Select name="select" aria-label="Homeworld">
+          <Option value="Tatooine" textValue="Tatooine">
+            Tatooine
           </Option>
-          <Option value="Bar" textValue="Bar">
-            Bar
+          <Option value="Alderaan" textValue="Alderaan">
+            Alderaan
           </Option>
-          <Option value="Baz" textValue="Baz">
-            Baz
+          <Option value="Hoth" textValue="Hoth">
+            Hoth
           </Option>
         </Select>
         <FileField multiple name="certificates">
-          <Label>Zertifikates</Label>
+          <Label>Holocrons</Label>
           <Button variant="outline" color="secondary">
-            Auswählen
+            Choose
           </Button>
         </FileField>
         <Button type="submit">Submit</Button>
