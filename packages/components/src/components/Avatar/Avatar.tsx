@@ -45,9 +45,6 @@ export const Avatar = flowComponent("Avatar", (props) => {
 
   const useDynamicColor = color === undefined && status === undefined;
 
-  // The avatar itself is the accessibility boundary (see below): it is either
-  // hidden or exposed as a single labelled image. Its content therefore never
-  // exposes its own structure to assistive technology.
   const propsContext: PropsContext = {
     Initials: {
       className: styles.initials,
