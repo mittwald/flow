@@ -11,12 +11,12 @@ import {
 } from "@mittwald/flow-react-components";
 
 <Flex direction="column" gap="m">
-  <Breadcrumb color="light">
+  <Breadcrumb color="dark">
     <Link>Projekt</Link>
     <Link>E-Mails</Link>
     <Link>E-Mail-Adresse</Link>
   </Breadcrumb>
-  <Heading level={1} color="light">
+  <Heading level={1} color="dark">
     mail@meinprojekt.de
   </Heading>
   <LayoutCard>
