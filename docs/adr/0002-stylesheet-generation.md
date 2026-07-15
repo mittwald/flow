@@ -6,9 +6,9 @@
 - **Affects:** `@mittwald/flow-react-components`, `@mittwald/flow-stylesheet`,
   `@mittwald/flow-design-tokens`
 
-> This ADR describes the **current state** of stylesheet generation. It was written
-> retroactively to record the already-established architecture as a decision basis —
-> among others as context for
+> This ADR describes the **current state** of stylesheet generation. It was
+> written retroactively to record the already-established architecture as a
+> decision basis — among others as context for
 > [ADR 0001 (CSS cascade layers)](./0001-css-cascade-layers-in-the-stylesheet.md).
 
 ## Context
@@ -68,24 +68,24 @@ Configuration: `packages/components/vite.build.config.ts` (+ base
 - CSS minification via **esbuild** (`cssMinify: "esbuild"`).
 - Asset mapping in `rollupOptions.output.assetFileNames`:
   - `flow-react-components.css` → `dist/css/all.css`
-  - `globals.css` → `dist/css/globals.css` *(mapping present, but currently not
-    produced as a separate asset by the release build — see below)*
+  - `globals.css` → `dist/css/globals.css` _(mapping present, but currently not
+    produced as a separate asset by the release build — see below)_
 - **No** explicit PostCSS setup (no `postcss.config.*`). `postcss`,
   `postcss-nesting`, `postcss-nested-import` are in devDependencies; Sass is the
   primary preprocessor.
 
 ### 5. Delivery
 
-- The release build produces **a single** CSS artifact: `dist/css/all.css`
-  (~390 KB). It contains **everything** — component styles, token definitions
+- The release build produces **a single** CSS artifact: `dist/css/all.css` (~390
+  KB). It contains **everything** — component styles, token definitions
   (`:root`, incl. 756 `--color--*` declarations), `@font-face` and the
-  `all: initial` reset. A separate `globals.css` is **not** produced by the release
-  build.
+  `all: initial` reset. A separate `globals.css` is **not** produced by the
+  release build.
 - `@mittwald/flow-react-components` exports it as `./all.css` (`exports` in
   `package.json`).
 - `@mittwald/flow-stylesheet` re-exports it unchanged: `build.js` copies
-  `@mittwald/flow-react-components/all.css` to `dist/styles.css` and exports it as
-  `./css`.
+  `@mittwald/flow-react-components/all.css` to `dist/styles.css` and exports it
+  as `./css`.
 
 ### 6. Cascade model (current state)
 
@@ -95,34 +95,36 @@ Configuration: `packages/components/vite.build.config.ts` (+ base
   2. **Token `:root` definitions** (from ~byte 270k)
   3. **`@font-face` + global `all: initial` reset** (~byte 373k, at the end)
 
-  So *components → tokens → fonts/reset* — not foundation-first. This works because
-  CSS custom properties are resolved independently of source order.
+  So _components → tokens → fonts/reset_ — not foundation-first. This works
+  because CSS custom properties are resolved independently of source order.
+
 - Precedence is therefore effectively decided by **specificity** (the `flow--*`
   prefix), **not** by source order. → This is the starting point for
   [ADR 0001](./0001-css-cascade-layers-in-the-stylesheet.md).
 
 ### 7. React Aria
 
-`react-aria-components` (^1.19) provides only behavior/markup, **no CSS**, and is
-externalized in the build (`externalizeDeps`). No third-party CSS therefore ends up
-in the shipped bundle.
+`react-aria-components` (^1.19) provides only behavior/markup, **no CSS**, and
+is externalized in the build (`externalizeDeps`). No third-party CSS therefore
+ends up in the shipped bundle.
 
 ## Consequences
 
 - **Maintainability:** Clear separation tokens ↔ foundation ↔ components; styles
   live next to their component. Scoped naming prevents collisions.
 - **One artifact:** Consumers include a single CSS file — simple integration.
-- **No layer precedence model:** Overrides depend on specificity (the motivation for
-  ADR 0001).
-- **Tooling dependency:** The build relies on Vite's Sass/CSS-module pipeline and a
-  tailored asset renaming; changes there act directly on `all.css`.
+- **No layer precedence model:** Overrides depend on specificity (the motivation
+  for ADR 0001).
+- **Tooling dependency:** The build relies on Vite's Sass/CSS-module pipeline
+  and a tailored asset renaming; changes there act directly on `all.css`.
 
 ## Verified via a local build
 
-A local `npx nx build components` and inspection of `dist/css/` confirmed: **exactly
-one** file, `all.css`, is produced, containing tokens, fonts, reset and components in
-the order described above. The release build produces **no** separate foundation
-asset. This is decisive for the implementation of
+A local `npx nx build components` and inspection of `dist/css/` confirmed:
+**exactly one** file, `all.css`, is produced, containing tokens, fonts, reset
+and components in the order described above. The release build produces **no**
+separate foundation asset. This is decisive for the implementation of
 [ADR 0001](./0001-css-cascade-layers-in-the-stylesheet.md): since foundation and
-components live in one merged file (foundation even partly *after* the components),
-the sublayer structure **cannot** be achieved by wrapping separate assets.
+components live in one merged file (foundation even partly _after_ the
+components), the sublayer structure **cannot** be achieved by wrapping separate
+assets.
