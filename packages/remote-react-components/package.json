@@ -31,6 +31,7 @@
     "test:browser": "vitest run --project=browser --browser.headless --passWithNoTests",
     "test:browser:dev": "vitest dev --project=browser",
     "test:compile": "tsc --noEmit",
+    "test:cross-version:prepare": "tsx dev/cross-version/prepare.ts",
     "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
     "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
     "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",
