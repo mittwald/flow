@@ -2,6 +2,7 @@
 
 .codeEditor {
   outline: none;
+  isolation: isolate;
 
   .codeMirror {
     @include formControl.formControl();
