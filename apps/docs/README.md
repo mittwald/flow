@@ -216,8 +216,7 @@ The Styleguide content is written in **German**.
 
 - Component names and Design System terminology are never translated: write
   **Button**, **Section**, **Dialog** as well as Variants, Colors, Sizes,
-  States, and Props. The generic word itself, however, is written in German:
-  „Komponente“ / „Komponenten“.
+  States, and Props.
 - Headings are written in German (`# Grundlagen`, `# Anwendung`, `# Verhalten`).
   Established technical terms remain English — for example `Best Practices`,
   `Writing Guidelines`, `Accessibility`, `Playground`, `Properties`, and

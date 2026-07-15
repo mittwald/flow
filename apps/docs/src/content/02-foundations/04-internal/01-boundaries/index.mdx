@@ -19,7 +19,7 @@ practices sollen bei der Orientierung und Entscheidungsfindung helfen.
   <Content>
     Diese Guideline richtet sich in erster Linie an das interne Team von
     mittwald und setzt entsprechendes Vorwissen voraus. Die darin genannten
-    Komponenten beziehen sich auf interne mStudio-Komponenten.
+    Components beziehen sich auf interne mStudio-Components.
   </Content>
 </Alert>
 
@@ -34,20 +34,20 @@ Boundaries wie "LayoutCard" und "Section" rendern das jeweilige Element,
 Boundaries mit dem Zusatz "Fragment" nutzen die Fehler und Ladezustände des
 jeweiligen Elements, rendern am Ende aber nur ein Fragment.
 
-| Typ                             | Verwendung                                                     | Fehlerfall                                                                             | Loading                                                                                       |
-| ------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| LayoutCard / LayoutCardFragment | Äußerste Boundary einer Seite                                  | <LiveCodeEditor example="layout-card-error" editorDisabled zoom=".6" bgColor="dark" /> | <LiveCodeEditor example="layout-card-loading" editorDisabled zoom=".6" bgColor="dark" />      |
-| SectionsFragment                | Äußerste Boundary in Tabs                                      | <LiveCodeEditor example="illustrated-message-error" editorDisabled zoom=".6" />        | <LiveCodeEditor example="illustrated-message-loading" editorDisabled zoom=".6" />             |
-| Section                         | Ersetzt normale Sections                                       | <LiveCodeEditor example="section-error" editorDisabled zoom=".6" />                    | <LiveCodeEditor example="section-loading" editorDisabled zoom=".6" />                         |
-| ContentFragment                 | Für mehrzeilige Inhalte                                        | <LiveCodeEditor example="content-fragment-error" editorDisabled zoom=".6" />           | <LiveCodeEditor example="content-fragment-loading" editorDisabled zoom=".6" />                |
-| Fragment                        | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Kein Fallback                                                                          | Kein Fallback                                                                                 |
-| Modal                           | Ersetzt normale Modals                                         | <LiveCodeEditor example="modal-error" editorDisabled zoom=".6" />                      | <LiveCodeEditor example="modal-loading" editorDisabled  /> (Loading View der Flow Komponente) |
-| ContextMenu                     | Ersetzt normale ContextMenus                                   | <LiveCodeEditor example="context-menu-error" editorDisabled/>                          | <LiveCodeEditor example="context-menu-loading" editorDisabled/>                               |
-| MenuItemFragment                | Für MenuItems                                                  | Kein Fallback                                                                          | Keine Loading Boundary                                                                        |
-| ChartFragment                   | Für CartesianCharts                                            | <LiveCodeEditor example="chart-error" editorDisabled  zoom=".6"/>                      | <LiveCodeEditor example="chart-loading" editorDisabled  zoom=".6"/>                           |
-| FieldFragment                   | Für Form Fields mit nachgeladenen Inhalten                     | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="field-fragment-loading" editorDisabled/>                             |
-| Avatar                          | Für Avatare                                                    | <LiveCodeEditor example="avatar-error" editorDisabled/>                                | <LiveCodeEditor example="avatar-loading" editorDisabled/>                                     |
-| Text / String                   | Für Texte                                                      | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="text-loading" editorDisabled/>                                       |
+| Typ                             | Verwendung                                                     | Fehlerfall                                                                             | Loading                                                                                      |
+| ------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| LayoutCard / LayoutCardFragment | Äußerste Boundary einer Seite                                  | <LiveCodeEditor example="layout-card-error" editorDisabled zoom=".6" bgColor="dark" /> | <LiveCodeEditor example="layout-card-loading" editorDisabled zoom=".6" bgColor="dark" />     |
+| SectionsFragment                | Äußerste Boundary in Tabs                                      | <LiveCodeEditor example="illustrated-message-error" editorDisabled zoom=".6" />        | <LiveCodeEditor example="illustrated-message-loading" editorDisabled zoom=".6" />            |
+| Section                         | Ersetzt normale Sections                                       | <LiveCodeEditor example="section-error" editorDisabled zoom=".6" />                    | <LiveCodeEditor example="section-loading" editorDisabled zoom=".6" />                        |
+| ContentFragment                 | Für mehrzeilige Inhalte                                        | <LiveCodeEditor example="content-fragment-error" editorDisabled zoom=".6" />           | <LiveCodeEditor example="content-fragment-loading" editorDisabled zoom=".6" />               |
+| Fragment                        | Für Inhalte die im Lade / Fehlerzustand nicht angezeigt werden | Kein Fallback                                                                          | Kein Fallback                                                                                |
+| Modal                           | Ersetzt normale Modals                                         | <LiveCodeEditor example="modal-error" editorDisabled zoom=".6" />                      | <LiveCodeEditor example="modal-loading" editorDisabled  /> (Loading View der Flow Component) |
+| ContextMenu                     | Ersetzt normale ContextMenus                                   | <LiveCodeEditor example="context-menu-error" editorDisabled/>                          | <LiveCodeEditor example="context-menu-loading" editorDisabled/>                              |
+| MenuItemFragment                | Für MenuItems                                                  | Kein Fallback                                                                          | Keine Loading Boundary                                                                       |
+| ChartFragment                   | Für CartesianCharts                                            | <LiveCodeEditor example="chart-error" editorDisabled  zoom=".6"/>                      | <LiveCodeEditor example="chart-loading" editorDisabled  zoom=".6"/>                          |
+| FieldFragment                   | Für Form Fields mit nachgeladenen Inhalten                     | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="field-fragment-loading" editorDisabled/>                            |
+| Avatar                          | Für Avatare                                                    | <LiveCodeEditor example="avatar-error" editorDisabled/>                                | <LiveCodeEditor example="avatar-loading" editorDisabled/>                                    |
+| Text / String                   | Für Texte                                                      | <LiveCodeEditor example="text-error" editorDisabled/>                                  | <LiveCodeEditor example="text-loading" editorDisabled/>                                      |
 
 ## Inhalte einer LayoutCard
 
@@ -253,8 +253,8 @@ Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
 
 ### Texte
 
-Für Texte gibt es die `WithBoundaries.Text` Komponente, bzw die
-`WithBoundaries.String` Komponente, je nachdem ob am Ende eine `Text` Komponente
+Für Texte gibt es die `WithBoundaries.Text` Component, bzw die
+`WithBoundaries.String` Component, je nachdem ob am Ende eine `Text` Component
 oder nur ein String gerendert werden soll.
 
 ```
@@ -266,8 +266,8 @@ oder nur ein String gerendert werden soll.
 </LabeledValue>
 ```
 
-Zusätzlich gibt es Komponenten, die direkt auf ein Model angewendet werden
-können und eine eingebaute Boundary besitzen.
+Zusätzlich gibt es Components, die direkt auf ein Model angewendet werden können
+und eine eingebaute Boundary besitzen.
 
 ```
 <ModelLink model={cronjob}>
@@ -306,7 +306,7 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 
 ### Field
 
-Für Fields kann die `WithBoundaries.FieldFragment` Komponente verwendet werden.
+Für Fields kann die `WithBoundaries.FieldFragment` Component verwendet werden.
 Sie zeigt im Loading State ein Textfeld, dem optional ein Label mitgegeben
 werden kann.
 

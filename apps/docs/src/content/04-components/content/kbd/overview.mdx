@@ -1,6 +1,6 @@
 # Playground
 
-Die Komponente unterstützt ein Array von `keys`. Die einzelnen keys werden als
+Die Component unterstützt ein Array von `keys`. Die einzelnen keys werden als
 Strings übergeben. Wenn dabei die Werte "mod", "alt" oder "shift" verwendet
 werden, wird automatisch das passende Tastensymbol angezeigt – abhängig davon,
 ob der User macOS oder Windows verwendet. Dadurch werden die jeweiligen
@@ -13,9 +13,9 @@ zusätzliche Logik implementiert werden muss.
 
 # Children
 
-Um flexiblere Shortcuts darzustellen, unterstützt die Komponente auch
-`children`. Hierbei ist darauf zu achten, dass Kbd-Komponenten für die einzelnen
-Keys gesetzt werden müssen, um semantisch korrekte
+Um flexiblere Shortcuts darzustellen, unterstützt die Component auch `children`.
+Hierbei ist darauf zu achten, dass Kbd-Components für die einzelnen Keys gesetzt
+werden müssen, um semantisch korrekte
 [kbd-HTML-Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd)
 zu erzeugen.
 
@@ -25,7 +25,7 @@ zu erzeugen.
 
 # Varianten
 
-Die Komponente wird in den Varianten `plain` und `soft` angeboten. Für die
+Die Component wird in den Varianten `plain` und `soft` angeboten. Für die
 Darstellung von Shortcuts direkt an Bedienelementen sollte die Variante `plain`
 verwendet werden, da sie sich dezent in die Oberfläche einfügt und nicht zu
 aufdringlich wirkt. Innerhalb von erklärenden Texten oder Beschreibungen sollte
@@ -41,7 +41,7 @@ um einen Keyboard-Shortcut handelt.
 ## SearchField
 
 Wenn eine Suche durch einen Keyboard-Shortcut fokussiert werden kann, kann die
-Kbd Komponente mit dem
+Kbd Component mit dem
 [SearchField](/04-components/form-controls/search-field/overview) kombiniert
 werden, um dem User das verfügbare Tastaturkürzel sichtbar zu machen.
 
@@ -57,7 +57,7 @@ können. In diesem Fall kann Kbd mit dem jeweiligen MenuItem kombiniert werden.
 
 ## Text
 
-Wird die Kbd Komponente innerhalb eines
+Wird die Kbd Component innerhalb eines
 [Texts](/04-components/content/text/overview) verwendet, wird sie automatisch in
 der `soft` Variante dargestellt. Dadurch hebt sie sich visuell vom Fließtext ab
 und macht deutlich, dass es sich um einen Keyboard-Shortcut handelt.

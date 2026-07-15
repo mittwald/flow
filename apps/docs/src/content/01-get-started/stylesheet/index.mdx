@@ -1,6 +1,6 @@
-Die Flow-Komponenten-Bibliotheken werden über ein gemeinsames Stylesheet, das
+Die Flow-Components-Bibliotheken werden über ein gemeinsames Stylesheet, das
 auch für sich alleine verwendet werden kann, gestyled. Das kann nützlich sein,
-wenn du dein eigenes Framework verwendest, um Komponenten zu bauen, und dich
+wenn du dein eigenes Framework verwendest, um Components zu bauen, und dich
 dabei an die mittwald Styling Guidelines halten willst.
 
 Auf dieser Seite findest du alle Informationen darüber, wie du das Stylesheet
@@ -22,7 +22,7 @@ yarn add @mittwald/flow-stylesheet
 
 # Styles importieren
 
-Um die Komponenten-Styles zu verwenden, musst du das Stylesheet importieren.
+Um die Components-Styles zu verwenden, musst du das Stylesheet importieren.
 Füge diese Zeile zum Einstiegspunkt deines Projektes hinzu.
 
 ```
@@ -47,7 +47,7 @@ trennen und `--` um logische Abschnitte zu unterteilen.
 Der erste logische Abschnitt ist immer der `flow` Namespace. Andere Abschnitte
 könnten beispielsweise so aussehen:
 
-### Komponenten
+### Components
 
 ```css
 .flow--button
@@ -55,7 +55,7 @@ könnten beispielsweise so aussehen:
 .flow--alert-icon
 ```
 
-### Sub-Komponenten
+### Sub-Components
 
 ```css
 .flow--navigation
@@ -70,7 +70,7 @@ könnten beispielsweise so aussehen:
 .flow--icon--fixed-width
 ```
 
-### Spezialisierung: In einer Komposition verwendete Komponenten
+### Spezialisierung: In einer Komposition verwendete Components
 
 ```css
 .flow--button--icon
@@ -92,11 +92,11 @@ Hier ein paar Beispiele um die diese Anforderung zu verdeutlichen:
 
 <LiveCodeEditor example="multiple-variants" />
 
-### In einer Komposition verwendete Komponenten
+### In einer Komposition verwendete Components
 
-Es ist gängige Praxis, größere Komponenten aus bereits bestehenden kleineren
-Komponenten zusammenzusetzen. Der Alert besteht beispielsweise aus einem Icon,
-einer Heading und optionalem Inhalt. Die verwendeten Komponenten müssen ihren
+Es ist gängige Praxis, größere Components aus bereits bestehenden kleineren
+Components zusammenzusetzen. Der Alert besteht beispielsweise aus einem Icon,
+einer Heading und optionalem Inhalt. Die verwendeten Components müssen ihren
 Basis-Klassennamen für das grundsätzliche Styling erhalten (`flow--heading`),
 sowie den spezialisierten Klassennamen (`flow--alert--heading`), um spezifische
 Styles des Inline Alerts zu erhalten.
