@@ -131,3 +131,100 @@ For pull requests, visual tests are executed **with a single browser only**
 
 In addition, visual tests are run **with all supported browsers** twice a day to
 detect potential issues early.
+
+## Cross-version smoke tests
+
+Extension developers ship remote apps built against a **published** version of
+`@mittwald/flow-remote-react-components`, but those apps render inside a mStudio
+host that runs the **current** version. The cross-version smoke tests guard that
+contract.
+
+### What it validates (and what it doesn't)
+
+For each selected old version, the **full old remote stack** — the real
+published `@mittwald/flow-remote-react-components` **and** its matching
+`@mittwald/flow-remote-core` bundle — runs in a **real iframe document/realm**,
+connected to the **current host** over the versioned `@quilted/threads`
+connection (the same path production uses). A set of representative entries
+(`e2e/cross-version/tests/entries.browser.test.remote.tsx`) is rendered, and the
+**host-rendered HTML** is normalized and compared to a single committed
+reference per entry (`e2e/cross-version/__html__/*.html`).
+
+This is an **HTML/DOM-output comparison**, not a screenshot/pixel comparison
+(screenshots may be added later). It proves props/attributes serialize and the
+host renders the same structure for an old version as for the current one — it
+does not assert visual/pixel fidelity. The normalizer
+(`e2e/cross-version/normalizeHtml.ts`) strips volatile bits (generated ids →
+stable placeholders, the hidden connection iframe, `data-flr-*`, inter-tag
+whitespace) while keeping semantic attributes, text, and the label↔control
+wiring.
+
+### Running locally
+
+```sh
+# once: install the target old versions (network) + write the manifest
+pnpm nx run remote-react-components:test:cross-version:prepare
+
+# run the suite against every installed old version, comparing to references
+pnpm nx run remote-react-components:test:cross-version
+```
+
+`test:cross-version` loops the installed versions (one vitest run each, webkit,
+headless) and prints a per-version `PASS`/`FAIL` summary, exiting non-zero if
+any version fails. For local iteration, `test:cross-version:dev` opens vitest in
+watch mode against the suite.
+
+### Updating the references
+
+The references are the **current** version's output. Regenerate them only when
+you **intentionally** change how the current version renders one of the entries
+(or add/adjust an entry):
+
+```sh
+pnpm nx run remote-react-components:test:cross-version:update
+```
+
+This runs the suite once with `FLOW_CROSS_VERSION=current` (aliasing the package
+specifier to the workspace `src`) and rewrites `__html__/*.html`. Review the
+diff carefully and commit it. **Do not** run update to "fix" a failure against
+an old version — a real diff there is a backwards-compatibility finding: either
+fix the regression, or, if the drift is legitimate, drop that entry from the set
+and record why (never weaken the normalizer to hide it).
+
+### Which versions are tested
+
+`dev/cross-version/prepare.ts` resolves the target versions from the published
+version list (`resolveCrossVersionTargets.ts`):
+
+- **semver categories** when a stable line exists: `previous` (nearest below
+  current), `firstOfLine` (earliest on the current line),
+  `latestOfPreviousLine`.
+- **alpha-offset fallback** for prerelease-only histories (the current state):
+  `previous` plus fixed offsets back through the candidate list (`offset-10`,
+  `offset-100`, `offset-200`), skipping excluded versions.
+
+The resolved set is written to `cross-version.manifest.json` (generated, not
+committed).
+
+#### Excluding a version (broken-window list)
+
+Some published versions are known-broken and must never be tested. They live in
+`cross-version.exclude.json`; add an entry (with a `reason`) to exclude one,
+remove it to re-include. Currently excluded: **`0.2.0-alpha.889`–`895`**, which
+shipped async serializers (#2596) against an externalized, unpatched
+`@quilted/threads` and fail to connect by design; fixed in #2620 (`alpha.896`).
+
+#### Publish gaps
+
+An otherwise-valid target (often the `previous`/recent alpha) can fail to
+install when its dependency tree pins a transitive `@mittwald/*` version that
+was never published to npm (an `ETARGET`/404). `prepare.ts` treats this as a
+best-effort skip: it logs a warning, drops the version, and continues, so a repo
+publish gap doesn't block the suite. If every target drops, an empty manifest is
+written and `test:cross-version` passes with a "nothing to run" warning.
+
+### CI
+
+The cross-version smoke tests run in the **scheduled** visual workflow
+(`test-visual-scheduled.yml`), twice a day — **not** on pull requests (they do
+network installs of published versions). Failures alert Slack.
