@@ -1,29 +1,11 @@
 {
-  "$comment": "Published versions to NEVER run cross-version smoke tests against (e.g. known-broken releases). Removing an entry re-includes that version. See CONTRIBUTE.md.",
+  "$comment": "Published versions to NEVER run cross-version smoke tests against. Removing an entry re-includes that version. See CONTRIBUTE.md.",
   "excluded": [
-    {
-      "version": "0.2.0-alpha.889",
-      "reason": "Broken window: async serializers (#2596, first shipped in alpha.889) require the patched @quilted/threads, but threads was still externalized (not bundled) until #2620 (alpha.896). These releases DataCloneError on connect for consumers without a pnpm-patched threads. Fixed in alpha.896."
-    },
-    {
-      "version": "0.2.0-alpha.891",
-      "reason": "Broken window between #2596 (alpha.889) and #2620 (alpha.896): async serializers without bundled patched @quilted/threads. Fixed in alpha.896."
-    },
-    {
-      "version": "0.2.0-alpha.892",
-      "reason": "Broken window between #2596 (alpha.889) and #2620 (alpha.896): async serializers without bundled patched @quilted/threads. Fixed in alpha.896."
-    },
-    {
-      "version": "0.2.0-alpha.893",
-      "reason": "Broken window between #2596 (alpha.889) and #2620 (alpha.896): async serializers without bundled patched @quilted/threads. Fixed in alpha.896."
-    },
-    {
-      "version": "0.2.0-alpha.894",
-      "reason": "Broken window between #2596 (alpha.889) and #2620 (alpha.896): async serializers without bundled patched @quilted/threads. Fixed in alpha.896."
-    },
-    {
-      "version": "0.2.0-alpha.895",
-      "reason": "Broken window between #2596 (alpha.889) and #2620 (alpha.896): async serializers without bundled patched @quilted/threads. Fixed in alpha.896."
-    }
+    { "version": "0.2.0-alpha.889", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.891", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.892", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.893", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.894", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.895", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" }
   ]
 }
