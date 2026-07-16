@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.917",
+  "version": "0.2.0-alpha.918",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
