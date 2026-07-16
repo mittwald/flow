@@ -37,6 +37,7 @@ export class List<T = unknown, TMeta = unknown> {
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
   public readonly accordion: boolean;
+  public readonly infiniteScroll: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public metadata?: TMeta;
@@ -62,6 +63,7 @@ export class List<T = unknown, TMeta = unknown> {
       getItemId,
       defaultViewMode,
       accordion = false,
+      infiniteScroll = false,
       loadingItemsCount = 5,
       settingsStorageDefaults,
       emptyView,
@@ -89,6 +91,7 @@ export class List<T = unknown, TMeta = unknown> {
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
     this.accordion = accordion;
+    this.infiniteScroll = infiniteScroll;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
     this.componentProps = componentProps;

@@ -98,6 +98,7 @@ import { IconMittwald as Mittwald } from "./components/IconMittwald.tsx";
 import { IconMobile as Mobile } from "./components/IconMobile.tsx";
 import { IconMonitoring as Monitoring } from "./components/IconMonitoring.tsx";
 import { IconMove as Move } from "./components/IconMove.tsx";
+import { IconNewsletter as Newsletter } from "./components/IconNewsletter.tsx";
 import { IconNumber as Number } from "./components/IconNumber.tsx";
 import { IconOrder as Order } from "./components/IconOrder.tsx";
 import { IconPassword as Password } from "./components/IconPassword.tsx";
@@ -231,6 +232,7 @@ export const defaultIconSet = {
   Mobile,
   Monitoring,
   Move,
+  Newsletter,
   Number,
   Order,
   Password,

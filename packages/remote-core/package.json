@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.920",
+  "version": "0.2.0-alpha.922",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://flow.mittwald.de",

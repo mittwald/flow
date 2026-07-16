@@ -6,6 +6,7 @@
   "filters.clearSelection": "Clear selection",
   "filters.reset": "Reset filters",
   "filters.store": "Store filters",
+  "loadingMore": "Loading more items",
   "noItems.heading": "No items available",
   "noItems.text": "Once there are items available, they will be displayed here.",
   "noResult.heading": "No search results found",
