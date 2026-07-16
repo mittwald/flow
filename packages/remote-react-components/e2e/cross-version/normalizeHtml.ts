@@ -93,7 +93,15 @@ export const normalizeHtml = (html: string): string => {
     },
   );
 
-  // 4. Collapse insignificant whitespace between tags. NOTE: this assumes
+  // 4. Normalize the loading spinner's time-based animation offset — it is
+  //    derived per render (e.g. `--animation-delay: -1499ms`), so it differs
+  //    run-to-run and is not a semantic difference.
+  out = out.replace(
+    /--animation-delay:\s*-?[\d.]+ms/gi,
+    "--animation-delay: 0ms",
+  );
+
+  // 5. Collapse insignificant whitespace between tags. NOTE: this assumes
   //    block-level component boundaries (whitespace between tags is not
   //    meaningful). An inline-composition entry where a space between adjacent
   //    inline elements is significant would need a more careful rule.

@@ -37,6 +37,13 @@ export const entryVersionRules: EntryVersionRule[] = [
     reason:
       "List gained an always-present, visually-hidden empty-view wrapper between alpha.791 and alpha.883; older versions render List without it, so the host HTML differs. Comparable from alpha.883 onward.",
   },
+  {
+    entryFile: "/ButtonVisual.browser.test.remote.tsx",
+    exportName: "colors",
+    minVersion: "0.2.0-alpha.791",
+    reason:
+      "AccentBox backgroundColor handling evolved: <= alpha.686 render a `--neutral` class variant, later versions render a custom color as an inline style. Comparable from alpha.791 onward.",
+  },
 ];
 
 /**
