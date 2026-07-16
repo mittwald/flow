@@ -1,2 +1,3 @@
 cross-version.manifest.json
 node_modules/.cross-version/
+e2e/cross-version/__screenshots__/

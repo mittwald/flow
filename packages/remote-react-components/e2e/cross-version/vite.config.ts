@@ -104,6 +104,13 @@ const versionAliases: { find: string; replacement: string }[] = target.isCurrent
         replacement: join(packageRoot, "src/components/RemoteRoot.tsx"),
       },
       {
+        find: "@mittwald/flow-remote-react-components/react-hook-form",
+        replacement: join(
+          packageRoot,
+          "src/integrations/react-hook-form/index.ts",
+        ),
+      },
+      {
         find: "@mittwald/flow-remote-react-components",
         replacement: join(packageRoot, "src/index.ts"),
       },
@@ -150,7 +157,11 @@ export default mergeConfig(defaultConfig, {
     fs: {
       // The installed old versions live in an isolated install dir outside the
       // normal workspace tree; allow the dev server to serve from it.
-      allow: [packageRoot, join(packageRoot, "node_modules", ".cross-version")],
+      allow: [
+        packageRoot,
+        join(packageRoot, "e2e/tests"),
+        join(packageRoot, "node_modules", ".cross-version"),
+      ],
     },
   },
 });

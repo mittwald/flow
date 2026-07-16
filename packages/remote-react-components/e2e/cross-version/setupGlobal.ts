@@ -1,11 +1,20 @@
+import { createTestServer } from "../remote-test-server/createTestServer";
 import { createCrossVersionServer } from "./createServer";
 
-const server = await createCrossVersionServer();
+const referenceServer = await createTestServer();
+const candidateServer = await createCrossVersionServer();
 
 export async function setup() {
-  await server.start();
+  await referenceServer.start();
+
+  try {
+    await candidateServer.start();
+  } catch (error) {
+    await referenceServer.stop();
+    throw error;
+  }
 }
 
 export async function teardown() {
-  await server.stop();
+  await Promise.all([candidateServer.stop(), referenceServer.stop()]);
 }

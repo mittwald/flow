@@ -1,10 +1,3 @@
-// Entry point for the cross-version remote document. Same shape as
-// `e2e/remote-test-server/main.tsx` (routes by `?file=&test=`, resolves the
-// test component from an `import.meta.glob` over the remote entries), BUT
-// `RemoteRoot` is imported from the PACKAGE SPECIFIER
-// `@mittwald/flow-remote-react-components/RemoteRoot` so the version alias in
-// `vite.config.ts` applies and the OLD version's RemoteRoot is used — not this
-// package's `src`.
 import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
@@ -15,8 +8,8 @@ if (!container) {
   throw new Error("No container");
 }
 
-const basePath = "./tests";
-const modules = import.meta.glob("./tests/**/*.browser.test.remote.tsx", {
+const basePath = "../tests";
+const modules = import.meta.glob("../tests/*.browser.test.remote.tsx", {
   eager: true,
 });
 

@@ -9,18 +9,16 @@ import { fileURLToPath } from "node:url";
  * the HTML-output comparison suite (`e2e/cross-version/vitest.config.ts`) once
  * per installed old version, with `FLOW_CROSS_VERSION` set to that version, so
  * each old published bundle is rendered through the CURRENT host over the real
- * iframe connection and its host-rendered HTML compared against the committed
- * `__html__/*.html` references.
+ * iframe connection and its host-rendered HTML compared against an ephemeral
+ * reference rendered by the current workspace version.
  *
  * Looping in node (not a package.json shell loop) keeps it cross-platform.
  *
  * Modes:
  *
- * - Default → loop installed old versions, compare against references. Exit
+ * - Default → loop installed old versions, compare against current output. Exit
  *   non-zero if ANY version fails; print a PASS/FAIL summary.
- * - `--update` → regenerate the references from the CURRENT version: run the
- *   suite once with `FLOW_CROSS_VERSION=current` and vitest's snapshot-update
- *   flag, rewriting `__html__/*.html`.
+ * - `--update` → validate the harness by comparing CURRENT against CURRENT.
  */
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -83,26 +81,24 @@ const runSuite = (crossVersion: string, extraArgs: string[] = []): boolean => {
 };
 
 const runUpdate = (): void => {
-  console.log(
-    "[cross-version] regenerating __html__ references from current version",
-  );
-  const ok = runSuite(CURRENT_SENTINEL, ["--update"]);
+  console.log("[cross-version] validating current version against itself");
+  const ok = runSuite(CURRENT_SENTINEL);
   if (!ok) {
-    console.error("[cross-version] reference regeneration FAILED");
+    console.error("[cross-version] current-version validation FAILED");
     process.exit(1);
   }
-  console.log("[cross-version] references regenerated — review and commit");
+  console.log("[cross-version] current-version validation passed");
 };
 
 const runCompareLoop = (): void => {
   const { targets } = readManifest();
 
   if (targets.length === 0) {
-    console.warn(
-      "[cross-version] manifest has no targets — nothing to run " +
-        "(likely a publish gap; see prepare output). Passing.",
+    console.error(
+      "[cross-version] manifest has no targets — compatibility check FAILED " +
+        "without running any versions (see prepare output).",
     );
-    return;
+    process.exit(1);
   }
 
   console.log(

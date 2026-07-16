@@ -28,7 +28,9 @@ const GENERATED_ID_TOKEN = /^(?:react-aria[\w-]*|_r_[\w-]*|:r[0-9a-z]+:)$/i;
 /**
  * Attributes that hold element ids (a single id, or — for the aria-* ones — a
  * whitespace-separated list). Their generated id tokens are rewritten to
- * placeholders; non-generated tokens are left untouched.
+ * placeholders; non-generated tokens are left untouched. `data-collection` is
+ * react-aria's internal collection id, volatile per render, so it is normalized
+ * too.
  */
 const ID_ATTRIBUTES = [
   "id",
@@ -39,6 +41,7 @@ const ID_ATTRIBUTES = [
   "aria-describedby",
   "aria-details",
   "aria-owns",
+  "data-collection",
 ];
 
 const idAttributePattern = new RegExp(

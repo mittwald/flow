@@ -6,9 +6,9 @@
 // the REMOTE document served by `createServer.tsx` (which loads
 // e2e/cross-version/vite.config.ts itself).
 //
-// `globalSetup` starts the R1 cross-version server, serving whichever version
-// FLOW_CROSS_VERSION selects (`current` for reference generation, an installed
-// old version otherwise).
+// `globalSetup` starts both remote servers: the existing e2e server for the
+// ephemeral current-version reference and the cross-version server for the old
+// candidate selected by FLOW_CROSS_VERSION.
 //
 // The pure `normalizeHtml` unit test is NOT run here — it lives in the
 // package's `unit-dev` project (node env, no server); see ../../vitest.config.ts.
@@ -18,6 +18,12 @@ import defaultConfig from "../../vite.config";
 
 export default mergeConfig(defaultConfig, {
   cacheDir: "e2e/cross-version/.vitest/cache/test-browser",
+  // The host bundle renders the current RemoteRenderer; dedupe react so the
+  // renderer and the test harness share one React instance (a second copy
+  // makes hooks throw "resolveDispatcher() is null").
+  resolve: {
+    dedupe: ["react", "react-dom"],
+  },
   test: {
     globals: true,
     globalSetup: "e2e/cross-version/setupGlobal.ts",
