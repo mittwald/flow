@@ -60,19 +60,22 @@ Base this task on the spike setup in `dev/cross-version-e2e-spike/` — it alrea
 
 ---
 
-## Task R2: Remote entries + host screenshot test + baselines
+## Task R2: Remote entries + host HTML-output comparison + references
+
+**Decision:** Start with **HTML/DOM-output comparison**, not screenshots. Comparing the host-rendered HTML is deterministic (no pixel/rendering-environment fragility, no per-browser/OS PNGs), needs no stability settings, and directly catches what this harness is for — prop/attribute serialization drift (`data-testid`, `disabled`, variant attributes all appear in the DOM). Screenshots can be layered on later.
 
 **Files (create):** under `e2e/cross-version/`:
-- `entries.browser.test.remote.tsx` — one exported render function per representative component/scenario (start from the same states the visual suite covers, e.g. Button states, Checkbox states, Icon sizes/status, TextField, Badge, etc.), importing components from the package specifier `@mittwald/flow-remote-react-components`.
-- `screenshots.browser.test.tsx` — host test: for each entry, render `<RemoteRenderer src="http://localhost:<port>/?file=…&test=<entry>">` inside a fixed-size container (reuse `RootContainer`/`rootContainerLocator` pattern from `src/tests/lib/RootContainer.tsx`), wait for connection (loading-view poll from `renderRemoteTest.tsx`), neutral-pointer, then `expect(container).toMatchScreenshot("<entry description>", opts)`.
-- `vitest.config.ts` for the cross-version e2e suite — browser mode, webkit, `fileParallelism:false`, **add screenshot-stability settings** (reduced motion, fixed 1280×720 viewport) since the e2e base config lacks them, globalSetup starting the R1 server.
+- `entries.browser.test.remote.tsx` — one exported render function per representative component/scenario (Button states, Checkbox states, Icon sizes/status, TextField, Badge, etc.), importing components from the package specifier `@mittwald/flow-remote-react-components`.
+- `entries.browser.test.tsx` — host test: for each entry, render `<RemoteRenderer src="http://localhost:<port>/?file=…&test=<entry>">` in a container, wait for connection (loading-view poll from `renderRemoteTest.tsx`), then capture the host-rendered **HTML** (the container's `innerHTML` of the `RemoteRootRenderer` output), **normalize** it (see below), and `expect(normalizedHtml).toMatchFileSnapshot("__html__/<entry>.html")`.
+- `normalizeHtml.ts` — strips volatile, non-semantic attributes so the comparison is stable and version-independent: React-generated ids (`id="react-aria-…"`, `aria-labelledby`/`aria-controls` pointing at them), `data-flr-version`/`data-flr-initialized`, and insignificant whitespace. Keep semantic attributes (roles, `data-testid`, `disabled`, `aria-disabled`, class names, text). Unit-test this pure function.
+- `vitest.config.ts` for the cross-version e2e suite — browser mode, webkit, `fileParallelism:false`, globalSetup starting the R1 server.
 
-**Interfaces:** Screenshot description strings are stable and version-independent → all versions + the current reference share one baseline file per description.
+**Interfaces:** The snapshot file path is **version-independent** (`__html__/<entry>.html`), so every version + the current reference share one reference file per entry. A diff = the old bundle produces different host HTML than current = a real prop/serialization/structure backwards-compat signal.
 
-- [ ] **Step 1:** Write ~10 entries + the host screenshot test + config.
-- [ ] **Step 2:** Generate the reference baselines from the CURRENT version through the iframe (run with `FLOW_CROSS_VERSION` set to the current workspace/published version in `--update` mode). Commit the baseline PNGs.
-- [ ] **Step 3:** Run against an OLD version (e.g. 889) and confirm props render (proving the pivot) and it matches the current baseline where the API is unchanged. Investigate any diff — a real API/serialization drift is a legitimate finding (drop that entry from the set or record it), NOT something to force-green.
-- [ ] **Step 4:** Commit `feat(remote-react-components): add cross-version screenshot entries + baselines`.
+- [ ] **Step 1:** Write `normalizeHtml` (+ unit test), ~10 entries, the host test, and the config.
+- [ ] **Step 2:** Generate the reference HTML from the CURRENT version through the iframe (`FLOW_CROSS_VERSION`=current workspace/published version, `--update`/first-run writes the `__html__/*.html` files). Commit them.
+- [ ] **Step 3:** Run against an OLD version (883) and confirm props render (proving the pivot) and the normalized HTML matches the reference where the API is unchanged. A real diff = a legitimate backwards-compat finding (drop that entry or record it), NOT something to force-green.
+- [ ] **Step 4:** Commit `feat(remote-react-components): add cross-version html-output comparison + references`.
 
 ---
 
@@ -80,19 +83,20 @@ Base this task on the spike setup in `dev/cross-version-e2e-spike/` — it alrea
 
 **Files:** `package.json` scripts; `project.json`/`nx.json`; `.github/workflows/test-visual-scheduled.yml`; `CONTRIBUTE.md`.
 
-- [ ] **Step 1:** Add a `test:cross-version` script that loops the manifest versions, setting `FLOW_CROSS_VERSION` for each and running the R2 vitest config; plus `test:cross-version:update` (reference baselines) and `test:cross-version:dev`. Depends on `test:cross-version:prepare`.
-- [ ] **Step 2:** Empirically curate the entry set to ~10 that render green across all installed old versions (props now work, so far more components are viable than the in-process attempt's 4). Record dropped entries + reason.
+- [ ] **Step 1:** Add a `test:cross-version` script that loops the manifest versions, setting `FLOW_CROSS_VERSION` for each and running the R2 vitest config; plus `test:cross-version:update` (regenerate the `__html__` references from the current version) and `test:cross-version:dev`. Depends on `test:cross-version:prepare`.
+- [ ] **Step 2:** Empirically curate the entry set to ~10 that match the reference across all installed old versions (props now work, so far more components are viable than the in-process attempt's 4). Record dropped entries + reason.
 - [ ] **Step 3:** nx wiring (`dependsOn`, `inputs` incl. manifest + install dir, `outputs`), mirroring Task 7 of the original plan.
-- [ ] **Step 4:** CI job in `test-visual-scheduled.yml` (scheduled-only, all browsers, retry loop + Slack). Budget one discarded cold-cache warm-up run before the assertion run.
-- [ ] **Step 5:** `CONTRIBUTE.md` section — honest scope (full old remote stack vs current host over the real connection), how to run/update, version manifest + threads-patch note, exclude list.
+- [ ] **Step 4:** CI job in `test-visual-scheduled.yml` (scheduled-only, retry loop + Slack). Measure cold-cache behavior; budget a discarded warm-up run only if needed.
+- [ ] **Step 5:** `CONTRIBUTE.md` section — honest scope (full old remote stack vs current host over the real connection; HTML-output comparison, not screenshots yet), how to run/update the `__html__` references, version manifest + broken-window exclude list.
 - [ ] **Step 6:** Commit in logical chunks.
 
 ---
 
 ## Self-review
 - Prop-level compat now genuinely tested (spike-proven). ✓
-- Baseline strategy restated for the iframe path (current-through-iframe reference). ✓
-- threads-patch install gap handled (R0b). ✓
+- HTML-output comparison (deterministic) chosen over screenshots for the first cut; screenshots deferred. ✓
+- Reference strategy: current-version-through-iframe HTML, shared per entry, version-independent path. ✓
+- Broken-version window (alpha.889–895) excluded; no threads handling needed (R0b). ✓
 - In-process artifacts removed (R0a). ✓
-- Scheduled-only, git-ignored artifacts, honest docs. ✓
+- Scheduled-only, git-ignored install artifacts, honest docs. ✓
 - Open risk: cold-cache warm-up (carry from Task 5; the e2e server's `optimizeDeps.force` may change the picture — R2/R3 to measure).
