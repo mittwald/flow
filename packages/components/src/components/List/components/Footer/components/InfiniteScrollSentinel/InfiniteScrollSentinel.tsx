@@ -1,6 +1,5 @@
 import type { FC } from "react";
-import React, { useRef } from "react";
-import { useEffectEvent, useLayoutEffect } from "@react-aria/utils";
+import React, { useEffect, useEffectEvent, useRef } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import DivView from "@/views/DivView";
@@ -26,7 +25,7 @@ export const InfiniteScrollSentinel: FC = () => {
     }
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) {
       return;
