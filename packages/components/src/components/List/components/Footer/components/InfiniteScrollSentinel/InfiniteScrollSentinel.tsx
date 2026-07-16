@@ -21,7 +21,7 @@ export const InfiniteScrollSentinel: FC = () => {
   const visibleItemsCount = list.batches.getVisibleItemsCount();
 
   const loadNextBatch = useEffectEvent(() => {
-    if (list.batches.hasNextBatch() && !list.loader.loaderState.isLoading) {
+    if (list.batches.hasNextBatch() && !isLoading) {
       list.batches.nextBatch();
     }
   });
