@@ -5,7 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { crossVersionServerPort } from "./crossVersionServerPort";
-import { isExcludedEntry } from "./excludedEntries";
+import { isEntryComparable } from "./entryVersionSupport";
 import { normalizeHtml } from "./normalizeHtml";
 
 declare const __FLOW_CROSS_VERSION__: string;
@@ -33,9 +33,8 @@ const entries = Object.entries(entrySources)
       exportName: match[1],
     })),
   )
-  .filter(
-    ({ entryFile, exportName }) =>
-      !isExcludedEntry(entryFile, exportName, __FLOW_CROSS_VERSION__),
+  .filter(({ entryFile, exportName }) =>
+    isEntryComparable(entryFile, exportName, __FLOW_CROSS_VERSION__),
   );
 
 const extBridgeImplementation: RemoteExtBridgeConnectionApi = {

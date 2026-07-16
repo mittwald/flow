@@ -168,7 +168,7 @@ wiring.
 # once: install the target old versions (network) + write the manifest
 pnpm nx run remote-react-components:test:cross-version:prepare
 
-# run the suite against every installed old version, comparing to references
+# run every installed old version against the current version (ephemeral ref)
 pnpm nx run remote-react-components:test:cross-version
 ```
 
@@ -186,12 +186,13 @@ watch mode against the suite.
   exist yet.
 - **A component's output legitimately evolved:** when the current version
   renders a different (but not broken) structure than an old one, the strict
-  HTML comparison would flag it. Record such an entry in
-  `e2e/cross-version/excludedEntries.ts` with the reason (the analogue of the
-  broken-version exclude list), and remove it once the divergence no longer
-  spans the tested range. A real diff you can't explain is a
-  backwards-compatibility finding — investigate it; **never** weaken the
-  normalizer (`normalizeHtml.ts`) to hide it.
+  HTML comparison would flag it. Record it positively in
+  `e2e/cross-version/entryVersionSupport.ts` as "this entry is comparable from
+  version X onward" (`minVersion`), plus `skipVersions` for one-off exceptions.
+  Older versions are then skipped while newer in-range versions still get real
+  coverage. A real diff you can't explain is a backwards-compatibility finding —
+  investigate it; **never** weaken the normalizer (`normalizeHtml.ts`) to hide
+  it.
 
 ### Which versions are tested
 
