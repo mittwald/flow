@@ -32,6 +32,9 @@ const meta: Meta<typeof Avatar> = {
       control: "inline-radio",
       options: statusTypes,
     },
+    label: {
+      control: "text",
+    },
   },
 };
 export default meta;
@@ -50,6 +53,17 @@ export const WithInitials: Story = {
   },
   render: (props) => (
     <Avatar {...props}>
+      <Initials>Max Mustermann</Initials>
+    </Avatar>
+  ),
+};
+
+export const Meaningful: Story = {
+  parameters: {
+    controls: { exclude: ["status"] },
+  },
+  render: (props) => (
+    <Avatar {...props} label="Max Mustermann">
       <Initials>Max Mustermann</Initials>
     </Avatar>
   ),

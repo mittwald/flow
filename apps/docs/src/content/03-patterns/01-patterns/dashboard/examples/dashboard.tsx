@@ -4,7 +4,6 @@ import {
   Button,
   ColumnLayout,
   Content,
-  Flex,
   Header,
   Heading,
   IconCheck,
@@ -119,25 +118,16 @@ export default () => {
           </LayoutCard>
 
           <LayoutCard>
-            <ColumnLayout m={[1, 3]} s={[null, 1]}>
-              <Flex align="center" grow>
-                <Image
-                  src="https://flow.mittwald.de/assets/onboarding.png"
-                  alt=""
-                  aria-hidden
-                />
-              </Flex>
-              <Section>
-                <Heading>mStudio entdecken</Heading>
-                <Text>
-                  Du willst das Beste aus deinen Projekten
-                  herausholen? Unsere{" "}
-                  <Link href="#">Wissensdatenbank</Link>{" "}
-                  hilft dir dabei, das mStudio und seine
-                  Möglichkeiten besser kennenzulernen.
-                </Text>
-              </Section>
-            </ColumnLayout>
+            <Section>
+              <Heading>mStudio entdecken</Heading>
+              <Text>
+                Du willst das Beste aus deinen Projekten
+                herausholen? Unsere{" "}
+                <Link href="#">Wissensdatenbank</Link> hilft
+                dir dabei, das mStudio und seine
+                Möglichkeiten besser kennenzulernen.
+              </Text>
+            </Section>
           </LayoutCard>
         </ColumnLayout>
 

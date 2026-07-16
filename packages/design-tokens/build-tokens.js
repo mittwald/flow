@@ -1,5 +1,7 @@
 import yaml from "js-yaml";
 import StyleDictionary from "style-dictionary";
+import { fileHeader, formattedVariables } from "style-dictionary/utils";
+import { propertyFormatNames } from "style-dictionary/enums";
 
 StyleDictionary.registerParser({
   pattern: /\.yml$/,
@@ -15,6 +17,52 @@ StyleDictionary.registerTransform({
       .concat(token.path)
       .filter((p) => !!p)
       .join("--");
+  },
+});
+
+StyleDictionary.registerFormat({
+  name: "css/variables-layered",
+  format: async ({ dictionary, options = {}, file }) => {
+    const selector = Array.isArray(options.selector)
+      ? options.selector
+      : options.selector
+        ? [options.selector]
+        : [":root"];
+    const {
+      outputReferences,
+      outputReferenceFallbacks,
+      usesDtcg,
+      formatting,
+      sort,
+    } = options;
+    const indentation = formatting?.indentation ?? "  ";
+    const header = await fileHeader({ file, formatting, options });
+
+    const variables = formattedVariables({
+      format: propertyFormatNames.css,
+      dictionary,
+      outputReferences,
+      outputReferenceFallbacks,
+      formatting: {
+        ...formatting,
+        indentation: indentation.repeat(selector.length + 1),
+      },
+      usesDtcg,
+      sort,
+    });
+
+    const nestedVariables = selector
+      .slice()
+      .reverse()
+      .reduce(
+        (content, currentSelector, index) =>
+          `${indentation.repeat(selector.length - index)}${currentSelector} {\n` +
+          content +
+          `\n${indentation.repeat(selector.length - index)}}`,
+        variables,
+      );
+
+    return `${header}@layer flow.tokens {\n${nestedVariables}\n}\n`;
   },
 });
 
@@ -102,6 +150,14 @@ const buildConfig = ({
         {
           format: "css/variables",
           destination: `css/${destination}.css`,
+          filter: filter,
+          options: {
+            selector: cssSelector,
+          },
+        },
+        {
+          format: "css/variables-layered",
+          destination: `css-layered/${destination}.css`,
           filter: filter,
           options: {
             selector: cssSelector,

@@ -55,9 +55,7 @@ export default () => {
           </Content>
 
           <ActionGroup>
-            <SubmitButton color="accent">
-              Speichern
-            </SubmitButton>
+            <SubmitButton>Speichern</SubmitButton>
             <Action closeModal>
               <Button color="secondary" variant="soft">
                 Abbrechen

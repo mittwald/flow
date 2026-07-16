@@ -159,7 +159,7 @@ export const WithForm: Story = {
               </Field>
             </Content>
             <ActionGroup>
-              <SubmitButton color="accent">Submit</SubmitButton>
+              <SubmitButton>Submit</SubmitButton>
               <Action closeModal>
                 <Button variant="soft" color="secondary">
                   Abort

@@ -11,9 +11,9 @@ export default function Page() {
   return (
     <Section>
       <PopoverTrigger>
-        <Button>Open</Button>
+        <Button>Show battle station status</Button>
         <Popover>
-          <>Popover content</>
+          <>The Death Star is fully operational.</>
         </Popover>
       </PopoverTrigger>
     </Section>
