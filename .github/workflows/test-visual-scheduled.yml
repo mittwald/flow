@@ -59,3 +59,65 @@ jobs:
                 text:
                   type: "mrkdwn"
                   text: "Visual tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+
+  cross-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare browser tests
+        run: pnpm test:browser:prepare --only-shell
+
+      - name: Install old published versions
+        # Resolves + npm-installs the target old versions (network) and writes
+        # cross-version.manifest.json. Kept a separate step so a publish-gap
+        # install failure shows as its own red step.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version:prepare
+
+      - name: Run cross-version smoke tests
+        # Renders each installed old remote version through the current host over
+        # the real iframe connection and compares host HTML to the committed
+        # references. Retry the whole step to absorb a rare headless-browser hang
+        # (not a diff), same rationale as the visual job; `^build` deps come from
+        # the nx cache, so retries only re-execute the suite.
+        run: |
+          for attempt in 1 2 3; do
+            echo "::group::Cross-version tests (attempt $attempt/3)"
+            if pnpm nx run remote-react-components:test:cross-version; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            echo "::warning::Cross-version tests failed on attempt $attempt/3, retrying..."
+          done
+          echo "::error::Cross-version tests still failing after 3 attempts."
+          exit 1
+
+      - name: Send alerting message to Slack
+        if: failure()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "Cross-version smoke tests failed"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "Cross-version smoke tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
