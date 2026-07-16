@@ -1,59 +1,99 @@
 /**
  * Normalizes host-rendered HTML so the output of an OLD remote version can be
- * compared against the CURRENT reference. Strips volatile, non-semantic bits
- * that legitimately differ run-to-run (or carry version bookkeeping) while
- * keeping everything that expresses what the component actually rendered
- * (roles, `data-testid`, disabled/aria-disabled, type/name/value, class names,
- * text content).
+ * compared against the CURRENT reference. Strips volatile, run-to-run bits (and
+ * version bookkeeping) while keeping everything that expresses what the
+ * component actually rendered — roles, `data-testid`, disabled/aria-disabled,
+ * type/name/value, class names, text content, AND the label↔control wiring
+ * (attribute presence + which reference points at which id).
+ *
+ * Crucially, generated ids are REWRITTEN to stable placeholders rather than
+ * deleted: deleting them would make "attribute present, pointing at a generated
+ * id" indistinguishable from "attribute absent", masking real
+ * label/description-association regressions. Rewriting preserves both the
+ * presence of the attribute and the cross-reference (a `for` and the `id` it
+ * targets get the SAME placeholder).
  *
  * Pure string transform — no DOM — so it runs in a plain node unit test.
  */
 
 /**
- * Matches a React / react-aria generated id token: `react-aria…`, a
- * `useId`-style `:r…:`, or an embedded `_r_…` fragment. These ids are
- * non-deterministic across renders and versions, so any `id` holding one, and
- * any attribute referencing one, is dropped.
+ * Full-VALUE-token match for a React / react-aria generated id: `react-aria…`,
+ * a `useId`-style `:r…:`, or an embedded `_r_…` fragment. Anchored so an
+ * author-set id/value that merely CONTAINS such a substring is not treated as
+ * generated. Applied per whitespace-separated token, since id-reference
+ * attributes (e.g. `aria-labelledby`) may hold several ids.
  */
-const GENERATED_ID = /(?:react-aria[\w-]*|_r_[\w-]*|:r[0-9a-z]+:)/i;
+const GENERATED_ID_TOKEN = /^(?:react-aria[\w-]*|_r_[\w-]*|:r[0-9a-z]+:)$/i;
 
-/** Attributes whose value references an element id (may be a generated one). */
-const ID_REFERENCE_ATTRIBUTES = [
+/**
+ * Attributes that hold element ids (a single id, or — for the aria-* ones — a
+ * whitespace-separated list). Their generated id tokens are rewritten to
+ * placeholders; non-generated tokens are left untouched.
+ */
+const ID_ATTRIBUTES = [
+  "id",
+  "for",
+  "htmlFor",
   "aria-labelledby",
   "aria-controls",
   "aria-describedby",
   "aria-details",
   "aria-owns",
-  "for",
-  "htmlFor",
 ];
+
+const idAttributePattern = new RegExp(
+  `(\\s(?:${ID_ATTRIBUTES.join("|")})=")([^"]*)(")`,
+  "gi",
+);
 
 export const normalizeHtml = (html: string): string => {
   let out = html;
 
-  // 1. Remove the hidden connection <iframe> RemoteRenderer renders alongside
-  //    the real output — with or without children, and self-closing.
-  out = out.replace(/<iframe\b[^>]*?>[\s\S]*?<\/iframe>/gi, "");
-  out = out.replace(/<iframe\b[^>]*?\/?>/gi, "");
+  // 1. Remove ONLY RemoteRenderer's hidden connection <iframe> — identified by
+  //    its inline `visibility: hidden` style (it carries no class/id/data
+  //    marker). A real iframe rendered by a component must survive.
+  out = out.replace(
+    /<iframe\b[^>]*\bstyle="[^"]*visibility:\s*hidden[^"]*"[^>]*>[\s\S]*?<\/iframe>/gi,
+    "",
+  );
 
   // 2. Remove flr version bookkeeping attributes.
   out = out.replace(/\s+data-flr-version(?:="[^"]*")?/gi, "");
   out = out.replace(/\s+data-flr-initialized(?:="[^"]*")?/gi, "");
 
-  // 3. Drop `id` attributes whose value is a generated id (keep semantic ids).
-  out = out.replace(/\s+id="([^"]*)"/gi, (match, value: string) =>
-    GENERATED_ID.test(value) ? "" : match,
+  // 3. Rewrite generated id VALUES to stable, position-based placeholders,
+  //    consistently across every attribute that references the same id. The
+  //    global replace visits matches left-to-right, so numbering follows first
+  //    appearance in the string and is deterministic. Attribute presence and
+  //    cross-references are preserved; only the volatile suffix is normalized.
+  const placeholders = new Map<string, string>();
+  const placeholderFor = (id: string): string => {
+    const existing = placeholders.get(id);
+    if (existing !== undefined) {
+      return existing;
+    }
+    const token = `GENERATED_ID_${placeholders.size + 1}`;
+    placeholders.set(id, token);
+    return token;
+  };
+
+  out = out.replace(
+    idAttributePattern,
+    (_match, prefix, value: string, suffix) => {
+      const rewritten = value
+        .split(/\s+/)
+        .map((token) =>
+          GENERATED_ID_TOKEN.test(token) ? placeholderFor(token) : token,
+        )
+        .join(" ");
+      return `${prefix}${rewritten}${suffix}`;
+    },
   );
 
-  // 4. Drop id-reference attributes that point at a generated id.
-  for (const attribute of ID_REFERENCE_ATTRIBUTES) {
-    const re = new RegExp(`\\s+${attribute}="([^"]*)"`, "gi");
-    out = out.replace(re, (match, value: string) =>
-      GENERATED_ID.test(value) ? "" : match,
-    );
-  }
-
-  // 5. Collapse insignificant whitespace between tags.
+  // 4. Collapse insignificant whitespace between tags. NOTE: this assumes
+  //    block-level component boundaries (whitespace between tags is not
+  //    meaningful). An inline-composition entry where a space between adjacent
+  //    inline elements is significant would need a more careful rule.
   out = out.replace(/>\s+</g, "><").trim();
 
   return out;
