@@ -12,7 +12,7 @@ export interface ResolveOptions {
 
 const DEFAULT_OFFSETS = [10, 100, 200];
 
-/** major.minor of a version (release line), ignoring patch and prerelease tag. */
+/** Major.minor of a version (release line), ignoring patch and prerelease tag. */
 const lineOf = (version: string): string => {
   const parsed = semver.parse(version);
   if (!parsed) {
@@ -63,7 +63,9 @@ export function resolveCrossVersionTargets(
   push(semverTargets, "previous", candidates[candidates.length - 1]);
 
   // firstOfLine: earliest candidate on the current line
-  const currentLineVersions = candidates.filter((v) => lineOf(v) === currentLine);
+  const currentLineVersions = candidates.filter(
+    (v) => lineOf(v) === currentLine,
+  );
   push(semverTargets, "firstOfLine", currentLineVersions[0]);
 
   // latestOfPreviousLine: latest candidate on the highest line strictly below currentLine
@@ -73,7 +75,9 @@ export function resolveCrossVersionTargets(
     .sort((a, b) => semver.compare(`${a}.0`, `${b}.0`))
     .pop();
   if (previousLine) {
-    const previousLineVersions = candidates.filter((v) => lineOf(v) === previousLine);
+    const previousLineVersions = candidates.filter(
+      (v) => lineOf(v) === previousLine,
+    );
     push(
       semverTargets,
       "latestOfPreviousLine",
@@ -86,7 +90,9 @@ export function resolveCrossVersionTargets(
     return semverTargets;
   }
 
-  const hasLatestOfPreviousLine = semverTargets.some((t) => t.category === "latestOfPreviousLine");
+  const hasLatestOfPreviousLine = semverTargets.some(
+    (t) => t.category === "latestOfPreviousLine",
+  );
   if (hasLatestOfPreviousLine) {
     return semverTargets;
   }
@@ -98,11 +104,7 @@ export function resolveCrossVersionTargets(
   push(offsetTargets, "previous", candidates[candidates.length - 1]);
 
   for (const offset of offsets) {
-    // Step further back while the landing version is excluded.
-    let index = candidates.length - offset;
-    while (index >= 0 && excluded.has(candidates[index])) {
-      index -= 1;
-    }
+    const index = candidates.length - offset;
     if (index >= 0) {
       push(offsetTargets, `offset-${offset}`, candidates[index]);
     }

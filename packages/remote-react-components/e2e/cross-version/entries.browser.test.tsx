@@ -82,11 +82,14 @@ const renderRemoteEntry = async (
     </ErrorBoundary>,
   );
 
-  // Wait until the Suspense loading view is gone AND the host has actually
-  // painted the remote output (or the error boundary tripped). Reading the
-  // HTML the instant the loading view disappears races the remote render —
-  // the container may still hold only the hidden connection iframe (which
-  // normalizeHtml strips to ""), so poll until real content appears.
+  // Wait until the remote output is not just painted but STABLE. Capturing the
+  // instant the Suspense loading view disappears races the remote render (the
+  // container may still hold only the hidden connection iframe → normalizeHtml
+  // "") and also races transient states (e.g. a List's `--is-loading` class),
+  // which would flake the comparison. So poll until the normalized HTML is
+  // non-empty and unchanged across two consecutive samples, or the error
+  // boundary trips.
+  let lastHtml = "";
   await expect
     .poll(
       () => {
@@ -95,20 +98,26 @@ const renderRemoteEntry = async (
             '[data-testid="root-loading-view"]',
           )
         ) {
-          return "";
+          lastHtml = "";
+          return false;
         }
         if (
           renderResult.container.querySelector(
             '[data-testid="remote-render-error"]',
           )
         ) {
-          return "error";
+          return true;
         }
-        return normalizeHtml(renderResult.container.innerHTML);
+        const html = normalizeHtml(renderResult.container.innerHTML);
+        if (html !== "" && html === lastHtml) {
+          return true;
+        }
+        lastHtml = html;
+        return false;
       },
-      { timeout: loadingTimeout, interval: 100 },
+      { timeout: loadingTimeout, interval: 150 },
     )
-    .not.toBe("");
+    .toBe(true);
 
   const renderError = renderResult.container.querySelector(
     '[data-testid="remote-render-error"]',

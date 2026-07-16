@@ -54,10 +54,24 @@ const manifestPath = join(packageRoot, "cross-version.manifest.json");
 const readManifest = (): Manifest => {
   try {
     return JSON.parse(readFileSync(manifestPath, "utf8")) as Manifest;
-  } catch {
+  } catch (error) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      error.code === "ENOENT"
+    ) {
+      throw new Error(
+        `cross-version.manifest.json not found at ${manifestPath}. ` +
+          `Run \`pnpm nx test:cross-version:prepare remote-react-components\` first.`,
+        { cause: error },
+      );
+    }
+
+    const message = error instanceof Error ? error.message : String(error);
     throw new Error(
-      `cross-version.manifest.json not found at ${manifestPath}. ` +
-        `Run \`pnpm nx test:cross-version:prepare remote-react-components\` first.`,
+      `cross-version manifest at ${manifestPath} could not be read: ${message}`,
+      { cause: error },
     );
   }
 };

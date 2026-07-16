@@ -25,7 +25,7 @@ export default mergeConfig(defaultConfig, {
     dedupe: ["react", "react-dom"],
   },
   // Expose the old version under test to the host bundle so it can apply
-  // version-scoped entry exclusions (see excludedEntries.ts).
+  // version-scoped entry rules (see entryVersionSupport.ts).
   define: {
     __FLOW_CROSS_VERSION__: JSON.stringify(
       process.env.FLOW_CROSS_VERSION ?? "",
