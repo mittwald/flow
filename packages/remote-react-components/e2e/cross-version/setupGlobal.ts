@@ -1,8 +1,21 @@
-import { createTestServer } from "../remote-test-server/createTestServer";
 import { createCrossVersionServer } from "./createServer";
+import { currentServerPort, oldServerPort } from "./crossVersionServerPort";
+import {
+  CROSS_VERSION_ENV,
+  resolveCrossVersionTarget,
+} from "./resolveCrossVersionTarget";
 
-const referenceServer = await createTestServer();
-const candidateServer = await createCrossVersionServer();
+const candidateVersion = resolveCrossVersionTarget(
+  process.env[CROSS_VERSION_ENV],
+).version;
+const referenceServer = await createCrossVersionServer(
+  "current",
+  currentServerPort,
+);
+const candidateServer = await createCrossVersionServer(
+  candidateVersion,
+  oldServerPort,
+);
 
 export async function setup() {
   await referenceServer.start();

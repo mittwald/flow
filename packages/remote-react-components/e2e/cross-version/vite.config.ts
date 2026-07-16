@@ -1,8 +1,6 @@
-// Vite config for the cross-version remote test server. Mirrors
-// `e2e/remote-test-server/vite.config.ts`, but the remote document is built
-// against an INSTALLED OLD version of `@mittwald/flow-remote-react-components`
-// (selected via `FLOW_CROSS_VERSION`, resolved from `cross-version.manifest.json`)
-// instead of this package's own `src`.
+// Vite config factory for a cross-version remote test server. Each server's
+// remote document is built against the explicitly selected version of
+// `@mittwald/flow-remote-react-components`.
 //
 // It aliases the bare specifiers `@mittwald/flow-remote-react-components`
 // (+ `/RemoteRoot`) to the installed old copy's real dist files. Vite's alias
@@ -33,8 +31,6 @@ import { resolveCrossVersionTarget } from "./resolveCrossVersionTarget";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../..");
-
-const target = resolveCrossVersionTarget();
 
 interface PackageExportsMap {
   exports?: Record<string, string | Record<string, string>>;
@@ -97,71 +93,75 @@ const aliasPackageExports = (
  *   copies of react in one page throws "Invalid hook call" regardless of
  *   matching version numbers).
  */
-const versionAliases: { find: string; replacement: string }[] = target.isCurrent
-  ? [
-      {
-        find: "@mittwald/flow-remote-react-components/RemoteRoot",
-        replacement: join(packageRoot, "src/components/RemoteRoot.tsx"),
-      },
-      {
-        find: "@mittwald/flow-remote-react-components/react-hook-form",
-        replacement: join(
-          packageRoot,
-          "src/integrations/react-hook-form/index.ts",
-        ),
-      },
-      {
-        find: "@mittwald/flow-remote-react-components",
-        replacement: join(packageRoot, "src/index.ts"),
-      },
-    ]
-  : (() => {
-      // installPath ends in
-      // `.../node_modules/@mittwald/flow-remote-react-components`; two levels
-      // up is the old install's `node_modules` root (its own react lives
-      // there).
-      const oldNodeModules = resolve(target.installPath, "../..");
-      return [
-        {
-          find: "react-dom/client",
-          replacement: join(oldNodeModules, "react-dom/client.js"),
-        },
-        {
-          find: "react-dom",
-          replacement: join(oldNodeModules, "react-dom/index.js"),
-        },
-        {
-          find: "react/jsx-dev-runtime",
-          replacement: join(oldNodeModules, "react/jsx-dev-runtime.js"),
-        },
-        {
-          find: "react/jsx-runtime",
-          replacement: join(oldNodeModules, "react/jsx-runtime.js"),
-        },
-        { find: "react", replacement: join(oldNodeModules, "react/index.js") },
-        ...aliasPackageExports(
-          "@mittwald/flow-remote-react-components",
-          target.installPath,
-        ),
-      ];
-    })();
+export const createCrossVersionViteConfig = (version: string) => {
+  const target = resolveCrossVersionTarget(version);
+  const versionAliases: { find: string; replacement: string }[] =
+    target.isCurrent
+      ? [
+          {
+            find: "@mittwald/flow-remote-react-components/RemoteRoot",
+            replacement: join(packageRoot, "src/components/RemoteRoot.tsx"),
+          },
+          {
+            find: "@mittwald/flow-remote-react-components/react-hook-form",
+            replacement: join(
+              packageRoot,
+              "src/integrations/react-hook-form/index.ts",
+            ),
+          },
+          {
+            find: "@mittwald/flow-remote-react-components",
+            replacement: join(packageRoot, "src/index.ts"),
+          },
+        ]
+      : (() => {
+          // installPath ends in
+          // `.../node_modules/@mittwald/flow-remote-react-components`; two
+          // levels up is the old install's `node_modules` root.
+          const oldNodeModules = resolve(target.installPath, "../..");
+          return [
+            {
+              find: "react-dom/client",
+              replacement: join(oldNodeModules, "react-dom/client.js"),
+            },
+            {
+              find: "react-dom",
+              replacement: join(oldNodeModules, "react-dom/index.js"),
+            },
+            {
+              find: "react/jsx-dev-runtime",
+              replacement: join(oldNodeModules, "react/jsx-dev-runtime.js"),
+            },
+            {
+              find: "react/jsx-runtime",
+              replacement: join(oldNodeModules, "react/jsx-runtime.js"),
+            },
+            {
+              find: "react",
+              replacement: join(oldNodeModules, "react/index.js"),
+            },
+            ...aliasPackageExports(
+              "@mittwald/flow-remote-react-components",
+              target.installPath,
+            ),
+          ];
+        })();
 
-export default mergeConfig(defaultConfig, {
-  optimizeDeps: {
-    include: ["react-error-boundary"],
-  },
-  resolve: {
-    alias: versionAliases,
-  },
-  server: {
-    fs: {
-      // The installed old versions live in an isolated install dir outside the
-      // normal workspace tree; allow the dev server to serve from it.
-      allow: [
-        packageRoot,
-        join(packageRoot, "e2e/tests"),
-        join(packageRoot, "node_modules", ".cross-version"),
-      ],
+  return mergeConfig(defaultConfig, {
+    optimizeDeps: {
+      include: ["react-error-boundary"],
     },
-  },
-});
+    resolve: {
+      alias: versionAliases,
+    },
+    server: {
+      fs: {
+        // Installed old versions live outside the normal workspace tree.
+        allow: [
+          packageRoot,
+          join(packageRoot, "node_modules", ".cross-version"),
+        ],
+      },
+    },
+  });
+};

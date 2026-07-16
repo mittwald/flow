@@ -77,14 +77,15 @@ const readManifest = (): Manifest => {
 };
 
 /**
- * Resolve which version of `@mittwald/flow-remote-react-components` the
- * cross-version remote server should serve. Reads
- * `cross-version.manifest.json`, honours `FLOW_CROSS_VERSION` (see
- * {@link CROSS_VERSION_ENV}), and throws a clear error if it names a version
- * that is neither `current` nor a manifest target.
+ * Resolve an explicit version of `@mittwald/flow-remote-react-components` for a
+ * cross-version remote server. When omitted, the version is read from
+ * `FLOW_CROSS_VERSION` for backwards compatibility. An unset version selects
+ * the first manifest target.
  */
-export const resolveCrossVersionTarget = (): CrossVersionTarget => {
-  const requested = process.env[CROSS_VERSION_ENV];
+export const resolveCrossVersionTarget = (
+  version: string | undefined = process.env[CROSS_VERSION_ENV],
+): CrossVersionTarget => {
+  const requested = version;
 
   if (requested === CURRENT_SENTINEL) {
     return { version: CURRENT_SENTINEL, isCurrent: true };

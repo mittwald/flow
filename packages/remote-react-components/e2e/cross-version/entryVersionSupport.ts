@@ -1,26 +1,25 @@
 import semver from "semver";
 
 /**
- * Version-support rules for the reused e2e entries in the cross-version
- * harness.
+ * Version-support rules for the visual scenarios in the cross-version harness.
  *
- * By default every entry is compared against every installed old version. Some
- * entries only render the same as current from a certain version onward — e.g.
- * a component's output structure evolved — and would otherwise flag a
+ * By default every scenario is compared against every installed old version.
+ * Some scenarios only render the same as current from a certain version onward
+ * — e.g. a component's output structure evolved — and would otherwise flag a
  * non-regression. Express that positively with `minVersion` ("this entry is
  * only comparable from version X onward"); older versions are skipped. Use
  * `skipVersions` for one-off exceptions (a specific intermediate release to
- * skip). Entries with no rule are always compared.
+ * skip). Scenarios with no rule are always compared.
  *
- * This is the entry-level analogue of `cross-version.exclude.json` (which
+ * This is the scenario-level analogue of `cross-version.exclude.json` (which
  * excludes whole broken published versions).
  */
-export interface EntryVersionRule {
-  /** Entry file, as the host test derives it: leading-slash, no `../tests`. */
-  entryFile: string;
-  exportName: string;
+export interface ScenarioVersionRule {
+  /** Scenario module basename, as the host test derives it. */
+  scenarioFile: string;
+  scenarioName: string;
   /**
-   * Only compare this entry for old versions `>=` this one (the component it
+   * Only compare this scenario for old versions `>=` this one (the component it
    * exercises reached its current shape here). Older versions are skipped.
    */
   minVersion?: string;
@@ -29,17 +28,10 @@ export interface EntryVersionRule {
   reason: string;
 }
 
-export const entryVersionRules: EntryVersionRule[] = [
+export const scenarioVersionRules: ScenarioVersionRule[] = [
   {
-    entryFile: "/Modal.browser.test.remote.tsx",
-    exportName: "inList",
-    minVersion: "0.2.0-alpha.883",
-    reason:
-      "List gained an always-present, visually-hidden empty-view wrapper between alpha.791 and alpha.883; older versions render List without it, so the host HTML differs. Comparable from alpha.883 onward.",
-  },
-  {
-    entryFile: "/ButtonVisual.browser.test.remote.tsx",
-    exportName: "colors",
+    scenarioFile: "Button.scenarios.tsx",
+    scenarioName: "Button colors",
     minVersion: "0.2.0-alpha.791",
     reason:
       "AccentBox backgroundColor handling evolved: <= alpha.686 render a `--neutral` class variant, later versions render a custom color as an inline style. Comparable from alpha.791 onward.",
@@ -47,21 +39,22 @@ export const entryVersionRules: EntryVersionRule[] = [
 ];
 
 /**
- * Whether an entry should be compared for the given tested version. Entries
+ * Whether a scenario should be compared for the given tested version. Scenarios
  * with no rule are always comparable. A non-semver version (the `current`
  * sentinel, or unset) is always comparable.
  */
-export const isEntryComparable = (
-  entryFile: string,
-  exportName: string,
+export const isScenarioComparable = (
+  scenarioFile: string,
+  scenarioName: string,
   version: string,
 ): boolean => {
   if (semver.valid(version) === null) {
     return true;
   }
-  const rule = entryVersionRules.find(
+  const rule = scenarioVersionRules.find(
     (candidate) =>
-      candidate.entryFile === entryFile && candidate.exportName === exportName,
+      candidate.scenarioFile === scenarioFile &&
+      candidate.scenarioName === scenarioName,
   );
   if (!rule) {
     return true;

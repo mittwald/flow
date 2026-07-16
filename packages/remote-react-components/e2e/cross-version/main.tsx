@@ -1,5 +1,6 @@
 import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
-import { createElement } from "react";
+import * as components from "@mittwald/flow-remote-react-components";
+import type { VisualScenarios } from "@/tests/lib/visualScenario";
 import { createRoot } from "react-dom/client";
 
 const container = document.getElementById("root");
@@ -8,10 +9,10 @@ if (!container) {
   throw new Error("No container");
 }
 
-const basePath = "../tests";
-const modules = import.meta.glob("../tests/*.browser.test.remote.tsx", {
-  eager: true,
-});
+const modules = import.meta.glob<{ default: VisualScenarios }>(
+  "../../src/tests/visual/*.scenarios.tsx",
+  { eager: true },
+);
 
 const root = createRoot(container);
 
@@ -20,22 +21,21 @@ const file = url.searchParams.get("file");
 const test = url.searchParams.get("test");
 
 if (!file || !test) {
-  throw new Error("Invalid params");
+  throw new Error('Missing required query parameters "file" and "test"');
 }
 
-const foundFile = Object.entries(modules).find(([key]) =>
-  file.includes(key.slice(basePath.length)),
-)?.[0];
+const scenarioModule = Object.entries(modules).find(([key]) =>
+  key.endsWith(`/${file}`),
+)?.[1];
 
-if (!foundFile) {
-  throw new Error(`File "${file}" not found`);
+if (!scenarioModule) {
+  throw new Error(`Scenario module "${file}" not found`);
 }
 
-const module = modules[foundFile] as Record<string, () => JSX.Element>;
-const TestComponent = module[test];
+const scenario = scenarioModule.default[test];
 
-if (!TestComponent) {
-  throw new Error(`Test "${test}" not found in "${file}"`);
+if (!scenario) {
+  throw new Error(`Scenario "${test}" not found in "${file}"`);
 }
 
-root.render(<RemoteRoot>{createElement(TestComponent)}</RemoteRoot>);
+root.render(<RemoteRoot>{scenario(components)}</RemoteRoot>);

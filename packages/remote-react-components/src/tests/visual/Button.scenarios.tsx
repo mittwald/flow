@@ -113,3 +113,5 @@ export const buttonScenarios: VisualScenarios = {
     </Flex>
   ),
 };
+
+export default buttonScenarios;

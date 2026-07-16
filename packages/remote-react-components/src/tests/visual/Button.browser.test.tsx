@@ -1,5 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
-import { buttonScenarios } from "./Button.scenarios";
+import buttonScenarios from "./Button.scenarios";
 import { test } from "vitest";
 
 for (const [name, scenario] of Object.entries(buttonScenarios)) {

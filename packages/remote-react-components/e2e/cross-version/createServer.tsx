@@ -1,32 +1,32 @@
 import { createServer as createViteServer } from "vite";
-import { crossVersionServerPort } from "./crossVersionServerPort";
-import { resolveCrossVersionTarget } from "./resolveCrossVersionTarget";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { createCrossVersionViteConfig } from "./vite.config";
 
-/**
- * Cross-version remote test server. Serves a remote document (`index.html` +
- * `main.tsx`) built against an installed OLD version of
- * `@mittwald/flow-remote-react-components` (selected via `FLOW_CROSS_VERSION`,
- * see `resolveCrossVersionTarget`). The host-side browser test loads this
- * document into an iframe through `RemoteRenderer` and asserts the old version
- * renders/serializes correctly against the current host.
- *
- * Structure mirrors `e2e/remote-test-server/createTestServer.tsx`.
- */
-export const createCrossVersionServer = async () => {
-  const target = resolveCrossVersionTarget();
+const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+
+/** Cross-version remote test server built against one explicit package version. */
+export const createCrossVersionServer = async (
+  version: string,
+  port: number,
+) => {
+  const inlineConfig = createCrossVersionViteConfig(version);
 
   const server = await createViteServer({
-    configFile: "e2e/cross-version/vite.config.ts",
-    cacheDir: ".vitest/cache/cross-version-server",
-    root: "e2e/cross-version",
+    ...inlineConfig,
+    configFile: false,
+    cacheDir: join(packageRoot, `.vitest/cache/cross-version-server-${port}`),
+    root: join(packageRoot, "e2e/cross-version"),
     server: {
-      port: crossVersionServerPort,
+      ...inlineConfig.server,
+      port,
       strictPort: true,
       warmup: {
-        clientFiles: ["./tests/*.browser.test.remote.tsx"],
+        clientFiles: ["../../src/tests/visual/*.scenarios.tsx"],
       },
     },
     optimizeDeps: {
+      ...inlineConfig.optimizeDeps,
       force: true,
     },
   });
@@ -41,7 +41,7 @@ export const createCrossVersionServer = async () => {
     try {
       isStarted = true;
       await server.listen();
-      console.log(`Cross-version server serving version ${target.version}`);
+      console.log(`Cross-version server serving version ${version}`);
       server.printUrls();
     } catch (error) {
       isStarted = false;
@@ -51,7 +51,7 @@ export const createCrossVersionServer = async () => {
 
   async function stop() {
     await server.close();
-    console.log("Cross-version server stopped");
+    console.log(`Cross-version server for ${version} stopped`);
     isStarted = false;
   }
 
