@@ -1,33 +1,35 @@
+import type { TestProject } from "vitest/node";
 import { createCrossVersionServer } from "./createServer";
-import { currentServerPort, oldServerPort } from "./crossVersionServerPort";
 import {
   CROSS_VERSION_ENV,
   resolveCrossVersionServerPackage,
 } from "./resolveServerPackage";
 
+declare module "vitest" {
+  interface ProvidedContext {
+    crossVersionCurrentPort: number;
+    crossVersionOldPort: number;
+  }
+}
+
 const candidateVersion = resolveCrossVersionServerPackage(
   process.env[CROSS_VERSION_ENV],
 ).version;
-const referenceServer = await createCrossVersionServer(
-  "current",
-  currentServerPort,
-);
-const candidateServer = await createCrossVersionServer(
-  candidateVersion,
-  oldServerPort,
-);
 
-export async function setup() {
-  await referenceServer.start();
+export async function setup({ provide }: TestProject) {
+  const referenceServer = await createCrossVersionServer("current");
 
   try {
-    await candidateServer.start();
+    const candidateServer = await createCrossVersionServer(candidateVersion);
+
+    provide("crossVersionCurrentPort", referenceServer.port);
+    provide("crossVersionOldPort", candidateServer.port);
+
+    return async () => {
+      await Promise.all([candidateServer.stop(), referenceServer.stop()]);
+    };
   } catch (error) {
     await referenceServer.stop();
     throw error;
   }
-}
-
-export async function teardown() {
-  await Promise.all([candidateServer.stop(), referenceServer.stop()]);
 }

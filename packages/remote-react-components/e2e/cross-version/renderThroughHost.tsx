@@ -6,7 +6,11 @@ import { expect } from "vitest";
 import { render } from "vitest-browser-react";
 import { normalizeHtml } from "./normalizeHtml";
 
-export const renderThroughHostTimeout = 30_000;
+// Generous per-render cap: on a cold Vite cache (always the case in CI) the
+// first render of an old version's heavy dep graph can take well over the
+// default. `server.warmup` pre-optimizes, but this is the headroom in case the
+// warmup hasn't finished when the first render starts.
+export const renderThroughHostTimeout = 60_000;
 
 const extBridgeImplementation: RemoteExtBridgeConnectionApi = {
   getConfig: async () => ({

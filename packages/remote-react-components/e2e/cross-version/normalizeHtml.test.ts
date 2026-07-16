@@ -5,7 +5,7 @@ describe("normalizeHtml", () => {
   it("removes the hidden connection iframe (identified by visibility:hidden)", () => {
     const input =
       '<button data-testid="btn">ok</button>' +
-      '<iframe src="http://localhost:6099/?x=1" ' +
+      '<iframe src="http://localhost:4321/?x=1" ' +
       'style="visibility: hidden; height: 0px; width: 0px;"></iframe>';
     expect(normalizeHtml(input)).toBe('<button data-testid="btn">ok</button>');
   });

@@ -1,7 +1,8 @@
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { appendFileSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 /**
@@ -41,6 +42,12 @@ interface Manifest {
   targets: ManifestTarget[];
 }
 
+interface VersionResult {
+  version: string;
+  ok: boolean;
+  failedScenarios: string[];
+}
+
 const readManifest = (): Manifest => {
   const path = join(packageRoot, "cross-version.manifest.json");
   try {
@@ -53,24 +60,151 @@ const readManifest = (): Manifest => {
   }
 };
 
-/** Run the vitest suite for one FLOW_CROSS_VERSION value. Returns success. */
-const runSuite = (crossVersion: string): boolean => {
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const readFailedScenarios = (path: string): string[] => {
+  try {
+    const report: unknown = JSON.parse(readFileSync(path, "utf8"));
+    if (!isRecord(report) || !Array.isArray(report.testResults)) {
+      return [];
+    }
+
+    const failedScenarios = report.testResults.flatMap((testResult) => {
+      if (
+        !isRecord(testResult) ||
+        !Array.isArray(testResult.assertionResults)
+      ) {
+        return [];
+      }
+
+      return testResult.assertionResults.flatMap((assertionResult) => {
+        if (!isRecord(assertionResult) || assertionResult.status !== "failed") {
+          return [];
+        }
+
+        const title =
+          typeof assertionResult.fullName === "string"
+            ? assertionResult.fullName
+            : assertionResult.title;
+        return typeof title === "string" && title.length > 0 ? [title] : [];
+      });
+    });
+
+    return [...new Set(failedScenarios)];
+  } catch {
+    return [];
+  }
+};
+
+/** Run the vitest suite for one FLOW_CROSS_VERSION value. */
+const runSuite = (crossVersion: string): VersionResult => {
+  const tempDirectory = mkdtempSync(join(tmpdir(), "flow-cross-version-"));
+  const jsonPath = join(tempDirectory, "vitest-results.json");
   const args = [
     vitestBin,
     "run",
     `--config=${VITEST_CONFIG}`,
     "--browser.headless",
+    "--reporter=default",
+    "--reporter=json",
+    `--outputFile=${jsonPath}`,
   ];
+  let ok: boolean;
   try {
     execFileSync(process.execPath, args, {
       cwd: packageRoot,
       stdio: "inherit",
       env: { ...process.env, FLOW_CROSS_VERSION: crossVersion },
     });
-    return true;
+    ok = true;
   } catch {
-    return false;
+    ok = false;
   }
+
+  const failedScenarios = readFailedScenarios(jsonPath);
+  rmSync(tempDirectory, { recursive: true, force: true });
+  return { version: crossVersion, ok, failedScenarios };
+};
+
+const escapeWorkflowCommand = (value: string, property = false): string => {
+  const escaped = value
+    .replaceAll("%", "%25")
+    .replaceAll("\r", "%0D")
+    .replaceAll("\n", "%0A");
+  return property
+    ? escaped.replaceAll(":", "%3A").replaceAll(",", "%2C")
+    : escaped;
+};
+
+const escapeMarkdownCell = (value: string): string =>
+  value.replaceAll("|", "\\|").replaceAll("\r", " ").replaceAll("\n", " ");
+
+const getFailureLines = (results: VersionResult[]): string[] =>
+  results.flatMap(({ version, ok, failedScenarios }) => {
+    if (ok) {
+      return [];
+    }
+    if (failedScenarios.length === 0) {
+      return [`${version}: version failed (see logs)`];
+    }
+    return failedScenarios.map((scenario) => `${version}: ${scenario}`);
+  });
+
+const writeGitHubOutput = (failures: string): void => {
+  const path = process.env.GITHUB_OUTPUT;
+  if (path === undefined) {
+    return;
+  }
+
+  let delimiter = "CROSSVER_EOF";
+  while (failures.split("\n").includes(delimiter)) {
+    delimiter += "_";
+  }
+  appendFileSync(path, `failures<<${delimiter}\n${failures}\n${delimiter}\n`);
+};
+
+const reportToGitHub = (results: VersionResult[]): void => {
+  for (const { version, ok, failedScenarios } of results) {
+    if (ok) {
+      continue;
+    }
+    const title = escapeWorkflowCommand(`cross-version ${version}`, true);
+    if (failedScenarios.length === 0) {
+      console.log(`::error title=${title}::suite failed (see logs)`);
+      continue;
+    }
+    for (const scenario of failedScenarios) {
+      console.log(
+        `::error title=${title}::${escapeWorkflowCommand(scenario)} — host HTML differs from current`,
+      );
+    }
+  }
+
+  const stepSummaryPath = process.env.GITHUB_STEP_SUMMARY;
+  if (stepSummaryPath !== undefined) {
+    const rows = results.map(({ version, ok, failedScenarios }) => {
+      const failures = ok
+        ? ""
+        : failedScenarios.length > 0
+          ? failedScenarios.join("<br>")
+          : "version failed (see logs)";
+      return `| ${escapeMarkdownCell(version)} | ${ok ? "✅" : "❌"} | ${escapeMarkdownCell(failures)} |`;
+    });
+    appendFileSync(
+      stepSummaryPath,
+      [
+        "## Cross-version smoke tests",
+        "",
+        "| version | result | failing scenarios |",
+        "| --- | --- | --- |",
+        ...rows,
+        "",
+      ].join("\n"),
+    );
+  }
+
+  writeGitHubOutput(getFailureLines(results).join("\n"));
 };
 
 const runCompareLoop = (): void => {
@@ -89,22 +223,37 @@ const runCompareLoop = (): void => {
       targets.map((t) => `${t.category}=${t.version}`).join(", "),
   );
 
-  const results: { target: ManifestTarget; ok: boolean }[] = [];
+  const results: { target: ManifestTarget; result: VersionResult }[] = [];
   for (const target of targets) {
+    const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+    if (isGitHubActions) {
+      console.log(`::group::cross-version ${target.version}`);
+    }
     console.log(
       `\n[cross-version] ===== ${target.category} = ${target.version} =====`,
     );
-    results.push({ target, ok: runSuite(target.version) });
+    try {
+      results.push({ target, result: runSuite(target.version) });
+    } finally {
+      if (isGitHubActions) {
+        console.log("::endgroup::");
+      }
+    }
   }
 
   console.log("\n[cross-version] summary:");
-  for (const { target, ok } of results) {
+  for (const { target, result } of results) {
     console.log(
-      `  ${ok ? "PASS" : "FAIL"}  ${target.category} = ${target.version}`,
+      `  ${result.ok ? "PASS" : "FAIL"}  ${target.category} = ${target.version}`,
     );
   }
 
-  const failed = results.filter((r) => !r.ok);
+  const versionResults = results.map(({ result }) => result);
+  if (process.env.GITHUB_ACTIONS === "true") {
+    reportToGitHub(versionResults);
+  }
+
+  const failed = versionResults.filter((result) => !result.ok);
   if (failed.length > 0) {
     console.error(
       `\n[cross-version] ${failed.length}/${results.length} version(s) FAILED`,

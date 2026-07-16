@@ -1,6 +1,5 @@
 import type { VisualScenarios } from "@/tests/lib/visualScenario";
-import { expect, test } from "vitest";
-import { currentServerPort, oldServerPort } from "./crossVersionServerPort";
+import { expect, inject, test } from "vitest";
 import {
   renderThroughHost,
   renderThroughHostTimeout,
@@ -8,6 +7,9 @@ import {
 import { isScenarioComparable } from "./scenarioVersionSupport";
 
 declare const __FLOW_CROSS_VERSION__: string;
+
+const currentPort = inject("crossVersionCurrentPort");
+const oldPort = inject("crossVersionOldPort");
 
 const scenarioModules = import.meta.glob<{ default: VisualScenarios }>(
   "../../src/tests/visual/*.scenarios.tsx",
@@ -30,7 +32,7 @@ test.each(scenarios)(
   "cross-version HTML output matches: $scenarioFile#$scenarioName",
   async ({ scenarioFile, scenarioName }) => {
     const reference = await renderThroughHost(
-      currentServerPort,
+      currentPort,
       scenarioFile,
       scenarioName,
     );
@@ -38,11 +40,7 @@ test.each(scenarios)(
 
     let candidate: string;
     try {
-      candidate = await renderThroughHost(
-        oldServerPort,
-        scenarioFile,
-        scenarioName,
-      );
+      candidate = await renderThroughHost(oldPort, scenarioFile, scenarioName);
     } catch (error) {
       console.warn(
         `[cross-version] SKIP ${scenarioFile}#${scenarioName}: ` +

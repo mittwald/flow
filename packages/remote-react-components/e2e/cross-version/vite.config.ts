@@ -155,6 +155,13 @@ export const createCrossVersionViteConfig = (version: string) => {
       alias: versionAliases,
     },
     server: {
+      // Pre-optimize the served module graph at startup so the FIRST scenario
+      // render doesn't race a cold dep-optimization (CI always starts cold, and
+      // the oldest versions pull the heaviest dep graphs — enough to exceed the
+      // per-render timeout without this).
+      warmup: {
+        clientFiles: ["main.tsx"],
+      },
       fs: {
         // Installed old versions live outside the normal workspace tree.
         allow: [

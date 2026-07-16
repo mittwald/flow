@@ -90,25 +90,16 @@ jobs:
           test:cross-version:prepare
 
       - name: Run cross-version smoke tests
+        id: crossversion
         # Renders each installed old remote version through the current host over
         # the real iframe connection and compares its host HTML to an ephemeral
-        # reference rendered from the current version. Retry the whole step to
-        # absorb a rare headless-browser hang (not a diff), same rationale as the
-        # visual job. Invoke the package script directly (not the nx target) so a
-        # retry does NOT re-run the network prepare step above — retries only
-        # re-execute the suite.
-        run: |
-          for attempt in 1 2 3; do
-            echo "::group::Cross-version tests (attempt $attempt/3)"
-            if corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version; then
-              echo "::endgroup::"
-              exit 0
-            fi
-            echo "::endgroup::"
-            echo "::warning::Cross-version tests failed on attempt $attempt/3, retrying..."
-          done
-          echo "::error::Cross-version tests still failing after 3 attempts."
-          exit 1
+        # reference rendered from the current version. This suite is WebKit-only
+        # and waits for stable HTML, so the visual job's flaky Firefox hang
+        # rationale does not apply. Retrying would re-run every version and
+        # obscure which version failed.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version
 
       - name: Send alerting message to Slack
         if: failure()
@@ -117,9 +108,31 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "Cross-version smoke tests failed"
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "Cross-version smoke tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            {
+              "text": "Cross-version smoke tests failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Cross-version smoke tests failed.*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(steps.crossversion.outputs.failures || 'No per-version failure details were produced (see logs).') }}
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Open workflow run>"
+                    }
+                  ]
+                }
+              ]
+            }
