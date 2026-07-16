@@ -1,5 +1,5 @@
 import { ComposedChart, ResponsiveContainer } from "recharts";
-import React, {
+import {
   type ComponentProps,
   type ComponentType,
   type FC,
@@ -63,8 +63,8 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
   const showEmptyView = !!((!data || data.length === 0) && emptyView);
   const rootClassName = clsx(
     styles.cartesianChart,
-    className,
     showEmptyView && styles.emptyView,
+    className,
   );
   const usesDeprecatedEmptyView = !!emptyView && !isValidElement(emptyView);
 

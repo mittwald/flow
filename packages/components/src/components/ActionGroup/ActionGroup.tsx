@@ -24,7 +24,7 @@ export const ActionGroup = flowComponent(
   (props) => {
     const { children, className, ref, spacing = "s", ...rest } = props;
 
-    const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
+    const rootClassName = clsx(styles.actionGroup, styles[spacing], className);
 
     const propsContext: PropsContext = {
       Button: {

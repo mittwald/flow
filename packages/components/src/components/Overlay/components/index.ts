@@ -1,3 +1,3 @@
 import "./view";
-export { OverlayContent, type OverlayContentProps } from "./OverlayContent";
+export { type OverlayContentProps, OverlayContent } from "./OverlayContent";
 export * from "./OverlaySuspenseFallback";

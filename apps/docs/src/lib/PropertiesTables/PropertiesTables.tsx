@@ -6,7 +6,7 @@ import {
   Heading,
   useIsMounted,
 } from "@mittwald/flow-react-components";
-import React from "react";
+import type React from "react";
 import loadProperties from "./lib/loadProperties";
 import { StaticPropertiesTables } from "./components/StaticPropertiesTables";
 

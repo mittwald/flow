@@ -38,9 +38,9 @@ export const Avatar = flowComponent("Avatar", (props) => {
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
-    className,
     !status && styles[color ?? "blue"],
     status && styles[status],
+    className,
   );
 
   const useDynamicColor = color === undefined && status === undefined;

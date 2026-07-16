@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { FileCard } from "@/components/FileCard";
 import { dummyText } from "@/lib/dev/dummyText";
 import { action } from "storybook/actions";

@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import styles from "@/app/layout.module.scss";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import {

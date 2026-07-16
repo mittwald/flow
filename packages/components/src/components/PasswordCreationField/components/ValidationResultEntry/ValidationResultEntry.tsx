@@ -4,7 +4,7 @@ import generateValidationTranslation from "@/components/PasswordCreationField/li
 import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
 import type { RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
-import AlertIcon from "../../../AlertIcon";
+import AlertIcon from "@/components/AlertIcon";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 
 interface Props {

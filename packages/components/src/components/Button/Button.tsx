@@ -119,12 +119,12 @@ export const Button = flowComponent("Button", (props) => {
         size === "s" && styles["size-s"],
         styles[color],
         styles[variant],
-        className,
         /**
          * Workaround warning: The Aria.Button does not support "aria-disabled"
          * by now, so this Button will be visually disabled via CSS.
          */
         ariaDisabled && styles.ariaDisabled,
+        className,
       );
 
   useAriaAnnounceActionState(

@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import type { TableRowProps } from "../TableRow";
 import { TableRow } from "../TableRow";
 

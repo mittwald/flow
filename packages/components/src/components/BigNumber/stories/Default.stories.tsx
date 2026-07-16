@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { BigNumber } from "@/components/BigNumber";
 import { Text } from "@/components/Text";
 

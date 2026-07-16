@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import type { Property } from "../types";
 import { TableCell, TableRow } from "@mittwald/flow-react-components";
 import { InlineCode } from "@mittwald/flow-react-components";

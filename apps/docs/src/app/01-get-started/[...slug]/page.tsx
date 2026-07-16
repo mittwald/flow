@@ -3,7 +3,6 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent";
 import type { Metadata } from "next";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
-import React from "react";
 import { Flex } from "@mittwald/flow-react-components";
 
 const contentFolder = "src/content/01-get-started";

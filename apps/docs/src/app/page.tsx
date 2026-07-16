@@ -15,7 +15,6 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import type { FC } from "react";
-import React from "react";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
 import darkmodeBg from "../../public/assets/darkmode-bg.png";
 import developerTile from "../../public/assets/developer-tile.png";

@@ -4,7 +4,6 @@ import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import Text from "@/components/Text";
 import { FieldError } from "@/components/FieldError";
-import React from "react";
 
 const meta: Meta<typeof CheckboxButton> = {
   title: "Form Controls/CheckboxButton",

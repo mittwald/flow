@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Align } from "@/components/Align";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";

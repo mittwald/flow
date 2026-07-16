@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LabeledValue from "../LabeledValue";
-import React from "react";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import { CopyButton } from "@/components/CopyButton";

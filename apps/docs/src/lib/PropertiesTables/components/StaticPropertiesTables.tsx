@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import type { Properties, Property } from "@/lib/PropertiesTables/types";
 
 const formatDescription = (description: string | null | undefined): string =>

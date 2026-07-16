@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { CodeEditor, type CodeEditorProps } from "./CodeEditor";
+export { type CodeEditorProps, CodeEditor } from "./CodeEditor";
 export { default } from "./CodeEditor";

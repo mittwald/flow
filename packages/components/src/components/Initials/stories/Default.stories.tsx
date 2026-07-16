@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Initials from "../Initials";
-import React from "react";
 import { Flex } from "@/components/Flex";
 import { Avatar } from "@/components/Avatar";
 

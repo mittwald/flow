@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DonutChart } from "../index";
-import React from "react";
 
 const meta: Meta<typeof DonutChart> = {
   title: "Data Visualisation/DonutChart",

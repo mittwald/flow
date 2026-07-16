@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import { action } from "storybook/actions";
-import React from "react";
 import { Text } from "@/components/Text";
 import { IconDownload } from "@/components/Icon/components/icons";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
