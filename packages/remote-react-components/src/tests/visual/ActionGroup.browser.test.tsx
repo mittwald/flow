@@ -84,3 +84,31 @@ test.each(testEnvironments)(
     await testScreenshot("ActionGroup-preserveOrder");
   },
 );
+
+test.each(testEnvironments)(
+  "ActionGroup size (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, ActionGroup, Button, Link, Separator },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <ActionGroup size="s">
+          <Link slot="abort">Link</Link>
+          <Button>Primary</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+        </ActionGroup>
+        <Separator />
+        <ActionGroup size="m">
+          <Link slot="abort">Link</Link>
+          <Button>Primary</Button>
+        </ActionGroup>
+      </Flex>,
+    );
+
+    await testScreenshot("ActionGroup-size");
+  },
+);
