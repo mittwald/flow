@@ -91,14 +91,16 @@ jobs:
 
       - name: Run cross-version smoke tests
         # Renders each installed old remote version through the current host over
-        # the real iframe connection and compares host HTML to the committed
-        # references. Retry the whole step to absorb a rare headless-browser hang
-        # (not a diff), same rationale as the visual job; `^build` deps come from
-        # the nx cache, so retries only re-execute the suite.
+        # the real iframe connection and compares its host HTML to an ephemeral
+        # reference rendered from the current version. Retry the whole step to
+        # absorb a rare headless-browser hang (not a diff), same rationale as the
+        # visual job. Invoke the package script directly (not the nx target) so a
+        # retry does NOT re-run the network prepare step above — retries only
+        # re-execute the suite.
         run: |
           for attempt in 1 2 3; do
             echo "::group::Cross-version tests (attempt $attempt/3)"
-            if pnpm nx run remote-react-components:test:cross-version; then
+            if corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version; then
               echo "::endgroup::"
               exit 0
             fi
