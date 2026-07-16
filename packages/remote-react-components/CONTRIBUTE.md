@@ -145,10 +145,13 @@ For each selected old version, the **full old remote stack** — the real
 published `@mittwald/flow-remote-react-components` **and** its matching
 `@mittwald/flow-remote-core` bundle — runs in a **real iframe document/realm**,
 connected to the **current host** over the versioned `@quilted/threads`
-connection (the same path production uses). A set of representative entries
-(`e2e/cross-version/tests/entries.browser.test.remote.tsx`) is rendered, and the
-**host-rendered HTML** is normalized and compared to a single committed
-reference per entry (`e2e/cross-version/__html__/*.html`).
+connection (the same path production uses). The corpus is the **existing e2e
+remote entries** (`e2e/tests/*.browser.test.remote.tsx`) — reused, not a
+separate hand-maintained set — and for each one the **host-rendered HTML** is
+compared **old-vs-current**: the same entry is rendered once through the current
+version (the existing e2e server) as an **ephemeral reference** and once through
+the old version (the cross-version server), and the normalized HTML must match.
+Nothing is committed as a baseline.
 
 This is an **HTML/DOM-output comparison**, not a screenshot/pixel comparison
 (screenshots may be added later). It proves props/attributes serialize and the
@@ -174,22 +177,21 @@ headless) and prints a per-version `PASS`/`FAIL` summary, exiting non-zero if
 any version fails. For local iteration, `test:cross-version:dev` opens vitest in
 watch mode against the suite.
 
-### Updating the references
+### Missing components and legitimate divergences
 
-The references are the **current** version's output. Regenerate them only when
-you **intentionally** change how the current version renders one of the entries
-(or add/adjust an entry):
-
-```sh
-pnpm nx run remote-react-components:test:cross-version:update
-```
-
-This runs the suite once with `FLOW_CROSS_VERSION=current` (aliasing the package
-specifier to the workspace `src`) and rewrites `__html__/*.html`. Review the
-diff carefully and commit it. **Do not** run update to "fix" a failure against
-an old version — a real diff there is a backwards-compatibility finding: either
-fix the regression, or, if the drift is legitimate, drop that entry from the set
-and record why (never weaken the normalizer to hide it).
+- **Component missing in an old version:** if an entry uses a component that a
+  given old version predates, that old render can't resolve it. The test
+  **skips** that entry for that version (logged) rather than failing — an
+  extension on that old version could not have used a component that didn't
+  exist yet.
+- **A component's output legitimately evolved:** when the current version
+  renders a different (but not broken) structure than an old one, the strict
+  HTML comparison would flag it. Record such an entry in
+  `e2e/cross-version/excludedEntries.ts` with the reason (the analogue of the
+  broken-version exclude list), and remove it once the divergence no longer
+  spans the tested range. A real diff you can't explain is a
+  backwards-compatibility finding — investigate it; **never** weaken the
+  normalizer (`normalizeHtml.ts`) to hide it.
 
 ### Which versions are tested
 

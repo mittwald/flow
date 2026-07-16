@@ -24,6 +24,13 @@ export default mergeConfig(defaultConfig, {
   resolve: {
     dedupe: ["react", "react-dom"],
   },
+  // Expose the old version under test to the host bundle so it can apply
+  // version-scoped entry exclusions (see excludedEntries.ts).
+  define: {
+    __FLOW_CROSS_VERSION__: JSON.stringify(
+      process.env.FLOW_CROSS_VERSION ?? "",
+    ),
+  },
   test: {
     globals: true,
     globalSetup: "e2e/cross-version/setupGlobal.ts",

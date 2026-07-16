@@ -13,19 +13,13 @@ import { fileURLToPath } from "node:url";
  * reference rendered by the current workspace version.
  *
  * Looping in node (not a package.json shell loop) keeps it cross-platform.
- *
- * Modes:
- *
- * - Default → loop installed old versions, compare against current output. Exit
- *   non-zero if ANY version fails; print a PASS/FAIL summary.
- * - `--update` → validate the harness by comparing CURRENT against CURRENT.
+ * Exits non-zero if ANY version fails; prints a PASS/FAIL summary.
  */
 
 const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../..");
 
 const VITEST_CONFIG = "e2e/cross-version/vitest.config.ts";
-const CURRENT_SENTINEL = "current";
 
 // Resolve the vitest CLI entry via its package.json `bin` (the bin path itself
 // is not an allowed `exports` subpath, so it can't be `require.resolve`d
@@ -60,13 +54,12 @@ const readManifest = (): Manifest => {
 };
 
 /** Run the vitest suite for one FLOW_CROSS_VERSION value. Returns success. */
-const runSuite = (crossVersion: string, extraArgs: string[] = []): boolean => {
+const runSuite = (crossVersion: string): boolean => {
   const args = [
     vitestBin,
     "run",
     `--config=${VITEST_CONFIG}`,
     "--browser.headless",
-    ...extraArgs,
   ];
   try {
     execFileSync(process.execPath, args, {
@@ -78,16 +71,6 @@ const runSuite = (crossVersion: string, extraArgs: string[] = []): boolean => {
   } catch {
     return false;
   }
-};
-
-const runUpdate = (): void => {
-  console.log("[cross-version] validating current version against itself");
-  const ok = runSuite(CURRENT_SENTINEL);
-  if (!ok) {
-    console.error("[cross-version] current-version validation FAILED");
-    process.exit(1);
-  }
-  console.log("[cross-version] current-version validation passed");
 };
 
 const runCompareLoop = (): void => {
@@ -131,12 +114,4 @@ const runCompareLoop = (): void => {
   console.log(`\n[cross-version] all ${results.length} version(s) passed`);
 };
 
-const main = (): void => {
-  if (process.argv.includes("--update")) {
-    runUpdate();
-    return;
-  }
-  runCompareLoop();
-};
-
-main();
+runCompareLoop();

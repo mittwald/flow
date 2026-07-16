@@ -34,7 +34,6 @@
     "test:cross-version": "tsx dev/cross-version/run.ts",
     "test:cross-version:dev": "vitest dev --config=e2e/cross-version/vitest.config.ts",
     "test:cross-version:prepare": "tsx dev/cross-version/prepare.ts",
-    "test:cross-version:update": "tsx dev/cross-version/run.ts --update",
     "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
     "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
     "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",

@@ -8,6 +8,8 @@ import { crossVersionServerPort } from "./crossVersionServerPort";
 import { isExcludedEntry } from "./excludedEntries";
 import { normalizeHtml } from "./normalizeHtml";
 
+declare const __FLOW_CROSS_VERSION__: string;
+
 const referenceServerPort = 6022;
 const loadingTimeout = 30_000;
 const entryBasePath = "../tests";
@@ -32,7 +34,8 @@ const entries = Object.entries(entrySources)
     })),
   )
   .filter(
-    ({ entryFile, exportName }) => !isExcludedEntry(entryFile, exportName),
+    ({ entryFile, exportName }) =>
+      !isExcludedEntry(entryFile, exportName, __FLOW_CROSS_VERSION__),
   );
 
 const extBridgeImplementation: RemoteExtBridgeConnectionApi = {
