@@ -48,6 +48,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
   const propsContext: PropsContext = {
     ActionGroup: {
       preserveOrder: true,
+      spacing: "m",
       className: styles.actionGroup,
       Button: { variant: "solid", color: "light-static" },
       tunnel: {
