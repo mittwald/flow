@@ -32,6 +32,29 @@
       "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
+    "test:cross-version:prepare": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "test:cross-version": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": true,
+      "inputs": [
+        "default",
+        "{projectRoot}/e2e/cross-version/**/*",
+        "{projectRoot}/dev/cross-version/**/*",
+        "{projectRoot}/cross-version.manifest.json",
+        "{projectRoot}/cross-version.exclude.json"
+      ]
+    },
+    "test:cross-version:update": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
+    "test:cross-version:dev": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
     "test:dev": {
       "dependsOn": ["^build"],
       "cache": true
