@@ -98,6 +98,7 @@ export { IconMittwald } from "./IconMittwald.tsx";
 export { IconMobile } from "./IconMobile.tsx";
 export { IconMonitoring } from "./IconMonitoring.tsx";
 export { IconMove } from "./IconMove.tsx";
+export { IconNewsletter } from "./IconNewsletter.tsx";
 export { IconNumber } from "./IconNumber.tsx";
 export { IconOrder } from "./IconOrder.tsx";
 export { IconPassword } from "./IconPassword.tsx";

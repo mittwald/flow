@@ -102,6 +102,7 @@ export const iconCategories = {
     "Mobile",
     "Monitoring",
     "Move",
+    "Newsletter",
     "Number",
     "Order",
     "Password",
