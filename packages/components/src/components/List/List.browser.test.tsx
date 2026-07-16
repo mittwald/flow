@@ -402,17 +402,26 @@ describe("Storage", async () => {
 describe("Infinite scroll", () => {
   const manyItems = Array.from({ length: 9 }, (_, i) => i);
 
-  test("Auto-loads following batches until no next batch remains", async () => {
+  test("Does not prefetch when the first batch already fills the viewport", async () => {
     await render(
-      <List aria-label="Test" batchSize={3} infiniteScroll>
+      <List aria-label="Test" batchSize={1} infiniteScroll>
         <ListStaticData<Data> data={manyItems.map((num) => ({ num }))} />
         <ListItem<Data> textValue={(num) => String(num)}>
-          {({ num }) => <span>Item: {num}</span>}
+          {({ num }) => (
+            <span style={{ display: "block", height: "150vh" }}>
+              Item: {num}
+            </span>
+          )}
         </ListItem>
       </List>,
     );
 
-    await expect.element(page.getByText("Item: 8")).toBeInTheDocument();
+    await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+    expect(page.getByText("Item: 1").query()).not.toBeInTheDocument();
+
+    document.scrollingElement?.scrollTo(0, document.body.scrollHeight);
+    await expect.element(page.getByText("Item: 1")).toBeInTheDocument();
+
     expect(
       page.getByRole("button", { name: "Show more" }).query(),
     ).not.toBeInTheDocument();
