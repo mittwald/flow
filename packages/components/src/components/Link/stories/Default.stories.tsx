@@ -17,7 +17,7 @@ const meta: Meta<typeof Link> = {
   },
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
-      <Link {...props}>Adjust project</Link>
+      <Link {...props}>Adjust mission</Link>
     </StoryBackground>
   ),
   parameters: {
@@ -44,7 +44,7 @@ export const Inline: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Text color={props.color}>
-        Check our <Link {...props}>onboarding</Link> for more information.
+        Check the <Link {...props}>star charts</Link> for more information.
       </Text>
     </StoryBackground>
   ),
@@ -54,7 +54,7 @@ export const WithIcon: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link {...props} href="https://mittwald.de">
-        Download invoice
+        Download briefing
         <IconDownload aria-label="download" />
       </Link>
     </StoryBackground>
@@ -75,7 +75,7 @@ export const Download: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link target="_blank" download {...props}>
-        Download file
+        Download the plans
       </Link>
     </StoryBackground>
   ),

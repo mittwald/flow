@@ -10,9 +10,9 @@ const meta: Meta<typeof Breadcrumb> = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Breadcrumb {...props}>
-        <Link href="#">Project</Link>
-        <Link href="#">Apps</Link>
-        <Link href="#">App</Link>
+        <Link href="#">Rebel Alliance</Link>
+        <Link href="#">Fleets</Link>
+        <Link href="#">Millennium Falcon</Link>
       </Breadcrumb>
     </StoryBackground>
   ),

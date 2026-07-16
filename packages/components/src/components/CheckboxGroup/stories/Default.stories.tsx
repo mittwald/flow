@@ -68,13 +68,13 @@ export const WithFieldError: Story = {
 export const ColumnLayout: Story = {
   render: (props) => (
     <CheckboxGroup l={[1, 1, 1]} m={[1, 1]} {...props}>
-      <Label>Options</Label>
-      <Checkbox value="1">Option 1</Checkbox>
-      <Checkbox value="2">Option 2</Checkbox>
-      <Checkbox value="3">Option 3</Checkbox>
-      <Checkbox value="4">Option 4</Checkbox>
-      <Checkbox value="5">Option 5</Checkbox>
-      <Checkbox value="6">Option 6</Checkbox>
+      <Label>Fleet</Label>
+      <Checkbox value="1">X-Wing</Checkbox>
+      <Checkbox value="2">TIE Fighter</Checkbox>
+      <Checkbox value="3">Millennium Falcon</Checkbox>
+      <Checkbox value="4">Star Destroyer</Checkbox>
+      <Checkbox value="5">Y-Wing</Checkbox>
+      <Checkbox value="6">A-Wing</Checkbox>
     </CheckboxGroup>
   ),
 };

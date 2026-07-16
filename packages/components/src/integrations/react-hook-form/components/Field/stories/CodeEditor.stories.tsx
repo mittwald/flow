@@ -35,7 +35,7 @@ const meta: Meta<typeof Field> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        code: "foo=bar\nfoo=baz",
+        code: "PLANET=tatooine\nFACTION=rebellion",
       },
     });
 

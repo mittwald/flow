@@ -19,21 +19,21 @@ const meta: Meta<typeof Markdown> = {
       <Markdown {...props}>
         {"# Heading 1\n" +
           "## Heading 2\n" +
-          "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam aliquid fugit.\n" +
+          "The Death Star plans are hidden aboard the **Tantive IV** en route to `Tatooine`, guarded by the Rebel Alliance.\n" +
           "```json\n" +
           "{\n" +
           '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "My Project"\n' +
+          '    "name": "Rebel Base Yavin 4"\n' +
           "}\n" +
           "```\n" +
           "[link](#)\n" +
-          "> Block quote" +
-          "\n - Unordered list item 1 \n - Unordered list item 2 " +
-          "\n 1. Ordered list item 1 \n 2. Ordered list item 2\n\n" +
-          "| Column 1       | Column 2      |\n" +
+          "> May the Force be with you." +
+          "\n - X-Wing squadron \n - Y-Wing squadron " +
+          "\n 1. Approach the trench \n 2. Fire on the exhaust port\n\n" +
+          "| Pilot          | Squadron      |\n" +
           "|---------------|---------------|\n" +
-          "| Row 1 Cell 1  | Row 1 Cell 2  |\n" +
-          "| Row 2 Cell 1  | Row 2 Cell 2  |\n"}
+          "| Luke Skywalker | Red Five      |\n" +
+          "| Wedge Antilles | Red Two       |\n"}
       </Markdown>
     </StoryBackground>
   ),

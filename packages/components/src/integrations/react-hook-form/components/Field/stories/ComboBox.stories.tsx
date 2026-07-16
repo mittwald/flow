@@ -44,7 +44,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         domain: "",
-        domainDefaultValue: "mydomain.de",
+        domainDefaultValue: "rebellion.org",
         domainRequired: "",
       },
     });
@@ -57,16 +57,16 @@ const meta: Meta<typeof Field> = {
           <Field name="domain">
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
           <Field name="domainDefaultValue">
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
@@ -76,8 +76,8 @@ const meta: Meta<typeof Field> = {
           >
             <ComboBox>
               <Label>Domain</Label>
-              <Option value="mydomain.de">mydomain.de</Option>
-              <Option value="anotherdomain.com">anotherdomain.com</Option>
+              <Option value="rebellion.org">rebellion.org</Option>
+              <Option value="empire.gov">empire.gov</Option>
             </ComboBox>
           </Field>
 
@@ -124,14 +124,14 @@ export const WithFieldError: Story = {
                   </ContextualHelp>
                 </ContextualHelpTrigger>
               </Label>
-              <Option>mydomain.de</Option>
-              <Option>shop.mydomain.de</Option>
-              <Option>anotherdomain.com</Option>
-              <Option>www.anotherdomain.com</Option>
-              <Option>anotherdomain.com/shop</Option>
-              <Option>anotherdomain.com/blog</Option>
-              <Option>onemoredomain.de</Option>
-              <Option>www.onemoredomain.de</Option>
+              <Option>rebellion.org</Option>
+              <Option>shop.rebellion.org</Option>
+              <Option>empire.gov</Option>
+              <Option>www.empire.gov</Option>
+              <Option>empire.gov/shop</Option>
+              <Option>empire.gov/blog</Option>
+              <Option>jedi.order</Option>
+              <Option>www.jedi.order</Option>
             </ComboBox>
           </Field>
           <ComboBox isInvalid>
@@ -144,14 +144,14 @@ export const WithFieldError: Story = {
                 </ContextualHelp>
               </ContextualHelpTrigger>
             </Label>
-            <Option>mydomain.de</Option>
-            <Option>shop.mydomain.de</Option>
-            <Option>anotherdomain.com</Option>
-            <Option>www.anotherdomain.com</Option>
-            <Option>anotherdomain.com/shop</Option>
-            <Option>anotherdomain.com/blog</Option>
-            <Option>onemoredomain.de</Option>
-            <Option>www.onemoredomain.de</Option>
+            <Option>rebellion.org</Option>
+            <Option>shop.rebellion.org</Option>
+            <Option>empire.gov</Option>
+            <Option>www.empire.gov</Option>
+            <Option>empire.gov/shop</Option>
+            <Option>empire.gov/blog</Option>
+            <Option>jedi.order</Option>
+            <Option>www.jedi.order</Option>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </ComboBox>
         </Section>
@@ -180,14 +180,14 @@ export const WithFocus: Story = {
                 </ContextualHelp>
               </ContextualHelpTrigger>
             </Label>
-            <Option>mydomain.de</Option>
-            <Option>shop.mydomain.de</Option>
-            <Option>anotherdomain.com</Option>
-            <Option>www.anotherdomain.com</Option>
-            <Option>anotherdomain.com/shop</Option>
-            <Option>anotherdomain.com/blog</Option>
-            <Option>onemoredomain.de</Option>
-            <Option>www.onemoredomain.de</Option>
+            <Option>rebellion.org</Option>
+            <Option>shop.rebellion.org</Option>
+            <Option>empire.gov</Option>
+            <Option>www.empire.gov</Option>
+            <Option>empire.gov/shop</Option>
+            <Option>empire.gov/blog</Option>
+            <Option>jedi.order</Option>
+            <Option>www.jedi.order</Option>
           </ComboBox>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

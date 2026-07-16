@@ -21,14 +21,16 @@ import { FieldError } from "@/components/FieldError";
 const submitAction = action("submit");
 
 const generateFromString = (value: string | undefined = "") => {
-  return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
-    const email = `${value.split("@")[0]}@${d}`;
-    return (
-      <Option key={email} value={email} textValue={email}>
-        {email}
-      </Option>
-    );
-  });
+  return ["rebellion.org", "empire.gov", "jedi.order", "mandalore.net"].map(
+    (d) => {
+      const email = `${value.split("@")[0]}@${d}`;
+      return (
+        <Option key={email} value={email} textValue={email}>
+          {email}
+        </Option>
+      );
+    },
+  );
 };
 
 const meta: Meta<typeof Autocomplete> = {
@@ -46,7 +48,7 @@ const meta: Meta<typeof Autocomplete> = {
 
     const form = useForm<Values>({
       defaultValues: {
-        email: "asd@example.com",
+        email: "luke@rebellion.org",
       },
     });
 
@@ -59,7 +61,7 @@ const meta: Meta<typeof Autocomplete> = {
           <Field name="email" rules={{ required: "Is required" }}>
             <Autocomplete>
               <TextField>
-                <Label>Test</Label>
+                <Label>Email</Label>
               </TextField>
               {generateFromString(email)}
             </Autocomplete>
@@ -97,14 +99,14 @@ export const WithFieldError: Story = {
           <Field name="field">
             <Autocomplete {...props}>
               <TextField>
-                <Label>Test</Label>
+                <Label>Email</Label>
               </TextField>
               {generateFromString(fieldValue)}
             </Autocomplete>
           </Field>
           <Autocomplete {...props}>
             <TextField isInvalid>
-              <Label>Test</Label>
+              <Label>Email</Label>
             </TextField>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
             {generateFromString(fieldValue)}
@@ -125,7 +127,7 @@ export const WithFocus: Story = {
         <Field name="field">
           <Autocomplete {...props}>
             <TextField>
-              <Label>Test</Label>
+              <Label>Email</Label>
             </TextField>
             {generateFromString(fieldValue)}
           </Autocomplete>

@@ -65,14 +65,14 @@ export const WithSegments: Story = {
     <ProgressBar
       {...props}
       segments={[
-        { title: "Item 1", value: 5 },
-        { title: "Item 2", value: 10 },
-        { title: "Item 3", value: 4 },
-        { title: "Item 4", value: 7 },
-        { title: "Item 5", value: 12 },
-        { title: "Item 6", value: 24 },
-        { title: "Item 7", value: 5 },
-        { title: "Item 8", value: 8 },
+        { title: "X-Wings", value: 5 },
+        { title: "Y-Wings", value: 10 },
+        { title: "TIE Fighters", value: 4 },
+        { title: "Star Destroyers", value: 7 },
+        { title: "A-Wings", value: 12 },
+        { title: "B-Wings", value: 24 },
+        { title: "Shuttles", value: 5 },
+        { title: "Freighters", value: 8 },
       ]}
     >
       <Label>Storage</Label>

@@ -30,13 +30,14 @@ const meta: Meta<typeof Section> = {
   argTypes: { hideSeparator: { control: "boolean" } },
   render: (props) => (
     <Section {...props}>
-      <Heading>Newsletter</Heading>
+      <Heading>Rebel Alliance Briefing</Heading>
       <Text>
-        Upcoming releases, new features and tips about your hosting - we bring
-        the most important information to inbox. Subscribe to our newsletter and
-        stay up to date.
+        Fleet movements, secret mission dispatches and intel from across the
+        galaxy - we bring the most important transmissions straight to your
+        comlink. Join the Alliance briefing and stay one step ahead of the
+        Empire.
       </Text>
-      <Link href="#">Subscribe</Link>
+      <Link href="#">Join the Alliance</Link>
     </Section>
   ),
   args: { hideSeparator: false },
@@ -72,44 +73,45 @@ export const MultipleSections: Story = {
   render: (props) => (
     <>
       <Alert>
-        <Heading>Alert above sections</Heading>
+        <Heading>Transmission from Alliance High Command</Heading>
       </Alert>
       <Section {...props}>
         <Header>
           <Heading>
-            Newsletter <Badge>Subscribed</Badge>
+            Rebel Alliance Briefing <Badge>Subscribed</Badge>
           </Heading>
 
-          <Switch defaultSelected>Subscription</Switch>
+          <Switch defaultSelected>Transmissions</Switch>
           <ContextualHelpTrigger>
             <Button />
             <ContextualHelp>
-              Additional information about database migration
+              Additional information about the fleet rendezvous
             </ContextualHelp>
           </ContextualHelpTrigger>
         </Header>
         <Text>
-          Upcoming releases, new features and tips about your hosting - we bring
-          the most important information to inbox. Subscribe to our newsletter
-          and stay up to date.
+          Fleet movements, secret mission dispatches and intel from across the
+          galaxy - we bring the most important transmissions straight to your
+          comlink. Join the Alliance briefing and stay one step ahead of the
+          Empire.
         </Text>
       </Section>
       <Section {...props}>
         <Header>
           <Heading>
-            My Project
+            Project Stardust
             <AlertBadge status="danger">Deactivated</AlertBadge>
           </Heading>
           <ModalTrigger>
-            <Button color="danger">Delete project</Button>
+            <Button color="danger">Decommission project</Button>
             <Modal>
-              <Heading>Delete project</Heading>
+              <Heading>Decommission project</Heading>
               <Content>
-                <Text>Are you sure you want to delete this project?</Text>
+                <Text>Are you sure you want to decommission this project?</Text>
               </Content>
               <ActionGroup>
                 <Action closeModal>
-                  <Button color="danger">Delete project</Button>
+                  <Button color="danger">Decommission project</Button>
                   <Button variant="soft" color="secondary">
                     Abort
                   </Button>
@@ -119,7 +121,7 @@ export const MultipleSections: Story = {
           </ModalTrigger>
           <FileField>
             <Button variant="soft" color="secondary">
-              Import CSV
+              Import roster
             </Button>
           </FileField>
           <ContextMenuTrigger>
@@ -127,16 +129,16 @@ export const MultipleSections: Story = {
               <IconContextMenu />
             </Button>
             <ContextMenu>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
+              <MenuItem>Rename</MenuItem>
+              <MenuItem>Archive</MenuItem>
             </ContextMenu>
           </ContextMenuTrigger>
         </Header>
         <Alert>
-          <Heading>Alert in section</Heading>
+          <Heading>The plans are stored in the main computer</Heading>
         </Alert>
         <Text>{dummyText.long}</Text>
-        <Heading level={3}>Sub-Heading</Heading>
+        <Heading level={3}>Mission Details</Heading>
         <Text>{dummyText.medium}</Text>
       </Section>
     </>

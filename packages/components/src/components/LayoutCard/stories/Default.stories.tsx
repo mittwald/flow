@@ -31,13 +31,13 @@ export const WithTabs: Story = {
     <LayoutCard {...props}>
       <Tabs>
         <Tab id="general">
-          <TabTitle>General</TabTitle>
+          <TabTitle>Crew</TabTitle>
           <Section>
             <Text>{dummyText.long}</Text>
           </Section>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage</TabTitle>
+          <TabTitle>Cargo</TabTitle>
           <Section>
             <Text>{dummyText.long}</Text>
           </Section>

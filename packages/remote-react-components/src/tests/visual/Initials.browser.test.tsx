@@ -6,8 +6,8 @@ test.each(testEnvironments)(
   async ({ testScreenshot, render, components: { Initials, Flex } }) => {
     await render(
       <Flex gap="s" align="center">
-        <Initials>Max Mustermann</Initials>
-        <Initials>Max</Initials>
+        <Initials>Luke Skywalker</Initials>
+        <Initials>Leia</Initials>
         <Initials>😄</Initials>
       </Flex>,
     );

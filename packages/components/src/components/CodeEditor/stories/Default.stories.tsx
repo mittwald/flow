@@ -17,7 +17,7 @@ const meta: Meta<typeof CodeEditor> = {
         "  render: (props) => (\n" +
         "    <CodeEditor\n" +
         "      value={\n" +
-        '        "const foo = () => {\\n" +\n' +
+        '        "const jedi = () => {\\n" +\n' +
         '        "}"\n' +
         "      }\n" +
         '      language={"tsx"}\n' +

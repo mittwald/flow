@@ -22,7 +22,7 @@ const meta: Meta<typeof TextArea> = {
   },
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
-      <Label>Message</Label>
+      <Label>Message to the Rebel Alliance</Label>
     </TextArea>
   ),
 };

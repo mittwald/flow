@@ -26,14 +26,14 @@ const meta: Meta<typeof ComboBox> = {
   render: (props) => (
     <ComboBox {...props}>
       <Label>Domain</Label>
-      <Option>mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option>rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
     </ComboBox>
   ),
 };
@@ -47,14 +47,14 @@ export const WithFieldDescription: Story = {
   render: (props) => (
     <ComboBox {...props}>
       <Label>Domain</Label>
-      <Option>mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option>rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
       <FieldDescription>Select a domain</FieldDescription>
     </ComboBox>
   ),
@@ -62,16 +62,16 @@ export const WithFieldDescription: Story = {
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <ComboBox {...props} defaultSelectedKey="mydomain.de">
+    <ComboBox {...props} defaultSelectedKey="rebelbase.org">
       <Label>Domain</Label>
-      <Option value="mydomain.de">mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option value="rebelbase.org">rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
     </ComboBox>
   ),
 };
@@ -80,14 +80,14 @@ export const WithFieldError: Story = {
   render: (props) => (
     <ComboBox {...props} isInvalid isRequired>
       <Label>Domain</Label>
-      <Option>mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option>rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
       <FieldError>Select a domain to continue</FieldError>
     </ComboBox>
   ),
@@ -97,7 +97,7 @@ export const Emails: Story = {
   render: (props) => {
     const [value, setValue] = useState<string>();
 
-    const domains = ["a.de", "b.de", "c.de"];
+    const domains = ["hoth.org", "endor.org", "dagobah.org"];
 
     const options = value?.includes("@")
       ? domains.map((d) => (
@@ -127,14 +127,14 @@ export const WithPlaceholder: Story = {
   render: (props) => (
     <ComboBox {...props} placeholder="Select a domain" isRequired>
       <Label>Domain</Label>
-      <Option>mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option>rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
     </ComboBox>
   ),
 };
@@ -151,14 +151,14 @@ export const WithContextualHelp: Story = {
           </ContextualHelp>
         </ContextualHelpTrigger>
       </Label>
-      <Option>mydomain.de</Option>
-      <Option>shop.mydomain.de</Option>
-      <Option>anotherdomain.com</Option>
-      <Option>www.anotherdomain.com</Option>
-      <Option>anotherdomain.com/shop</Option>
-      <Option>anotherdomain.com/blog</Option>
-      <Option>onemoredomain.de</Option>
-      <Option>www.onemoredomain.de</Option>
+      <Option>rebelbase.org</Option>
+      <Option>shop.rebelbase.org</Option>
+      <Option>tatooine.com</Option>
+      <Option>www.tatooine.com</Option>
+      <Option>tatooine.com/shop</Option>
+      <Option>tatooine.com/blog</Option>
+      <Option>naboo.de</Option>
+      <Option>www.naboo.de</Option>
     </ComboBox>
   ),
 };

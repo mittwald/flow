@@ -18,11 +18,11 @@ const meta: Meta<typeof Color> = {
   render: (props) => (
     <Section>
       <Heading>
-        Lorem <Color {...props}>ipsum</Color> dolor sit amet
+        The <Color {...props}>Force</Color> flows through all things
       </Heading>
       <Text>
-        Lorem ipsum dolor <Color {...props}>sit amet consectetur</Color>{" "}
-        adipisicing elit.
+        In my experience, <Color {...props}>there is no such thing</Color> as
+        luck — only the Force.
       </Text>
     </Section>
   ),

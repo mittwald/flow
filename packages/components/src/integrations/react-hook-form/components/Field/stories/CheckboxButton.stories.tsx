@@ -46,8 +46,8 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="acceptTerms">
             <CheckboxButton>
-              <Text>Terms and Conditions</Text>
-              <Content>Consent to terms and conditions</Content>
+              <Text>Rebel Alliance Charter</Text>
+              <Content>Consent to join the Rebel Alliance</Content>
             </CheckboxButton>
           </Field>
 
@@ -81,13 +81,13 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <CheckboxButton {...props}>
-              <Text>Terms and Conditions</Text>
-              <Content>Consent to terms and conditions</Content>
+              <Text>Rebel Alliance Charter</Text>
+              <Content>Consent to join the Rebel Alliance</Content>
             </CheckboxButton>
           </Field>
           <CheckboxButton {...props} isInvalid>
-            <Text>Terms and Conditions</Text>
-            <Content>Consent to terms and conditions</Content>
+            <Text>Rebel Alliance Charter</Text>
+            <Content>Consent to join the Rebel Alliance</Content>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </CheckboxButton>
         </Section>
@@ -103,8 +103,8 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <CheckboxButton {...props}>
-            <Text>Terms and Conditions</Text>
-            <Content>Consent to terms and conditions</Content>
+            <Text>Rebel Alliance Charter</Text>
+            <Content>Consent to join the Rebel Alliance</Content>
           </CheckboxButton>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

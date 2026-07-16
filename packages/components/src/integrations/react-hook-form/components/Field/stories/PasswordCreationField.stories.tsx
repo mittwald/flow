@@ -107,7 +107,7 @@ const meta: Meta<typeof Field> = {
           >
             <PasswordCreationField>
               <Label>Password</Label>
-              <Button>asd</Button>
+              <Button>Generate</Button>
             </PasswordCreationField>
           </Field>
 
@@ -152,7 +152,7 @@ export const WithForm: Story = {
           >
             <PasswordCreationField validationPolicy={policyDecl}>
               <Label>Password</Label>
-              <Button>asd</Button>
+              <Button>Generate</Button>
             </PasswordCreationField>
           </Field>
           <ActionGroup>
@@ -185,17 +185,17 @@ export const WithFieldError: Story = {
           <Field name="field">
             <PasswordCreationField>
               <Label>Password</Label>
-              <Button>asd</Button>
+              <Button>Generate</Button>
             </PasswordCreationField>
           </Field>
           <PasswordCreationField defaultValue="" isInvalid>
             <Label>Password</Label>
-            <Button>asd</Button>
+            <Button>Generate</Button>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </PasswordCreationField>
           <PasswordCreationField defaultValue="">
             <Label>Password</Label>
-            <Button>asd</Button>
+            <Button>Generate</Button>
           </PasswordCreationField>
         </Section>
       </Form>
@@ -215,7 +215,7 @@ export const WithFocus: Story = {
         <Field name="field">
           <PasswordCreationField>
             <Label>Password</Label>
-            <Button>asd</Button>
+            <Button>Generate</Button>
           </PasswordCreationField>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

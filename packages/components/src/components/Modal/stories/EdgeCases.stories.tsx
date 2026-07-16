@@ -44,7 +44,7 @@ export const SizeChange: Story = {
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button color="accent">Create customer</Button>
+            <Button color="accent">Create squadron</Button>
             <Button variant="soft" color="secondary">
               Abort
             </Button>

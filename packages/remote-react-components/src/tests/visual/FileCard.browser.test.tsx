@@ -20,23 +20,23 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex gap="m" direction="column">
-        <FileCard name="image.png" />
+        <FileCard name="x-wing.png" />
         <FileCard
-          name="image.png"
+          name="millennium-falcon.png"
           type="image/png"
           sizeInBytes={47500}
           onDelete={() => console.log("onDelete")}
           href="#"
         />
-        <FileCard name="image.png" imageSrc={gopher}>
+        <FileCard name="tatooine-sunset.png" imageSrc={gopher}>
           <ContextMenu />
         </FileCard>
         <FileCard>
           <ProgressBar value={20}>
-            <Label>Image.png</Label>
+            <Label>tie-fighter.png</Label>
           </ProgressBar>
         </FileCard>
-        <FileCard name="image.png">
+        <FileCard name="endor-forest.png">
           <Button>
             <IconChevronUp />
           </Button>
@@ -57,16 +57,16 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="m" direction="column">
         <FileCard
-          name="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas."
+          name="A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies stole secret
+          plans to the Empire's ultimate weapon, the Death Star, an armored space
+          station."
         />
         <FileCard
-          name="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas."
+          name="A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies stole secret
+          plans to the Empire's ultimate weapon, the Death Star, an armored space
+          station."
           onDelete={() => console.log("onDelete")}
         />
       </Flex>,

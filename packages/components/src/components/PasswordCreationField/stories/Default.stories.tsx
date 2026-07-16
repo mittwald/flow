@@ -40,7 +40,7 @@ type Story = StoryObj<typeof PasswordCreationField>;
 export const Default: Story = {};
 
 export const WithPlaceholder: Story = {
-  args: { placeholder: "helloMoto" },
+  args: { placeholder: "useTheForce" },
 };
 
 export const WithCustomButton: Story = {

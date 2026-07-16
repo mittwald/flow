@@ -16,7 +16,7 @@ const meta: Meta = {
             "de-DE": {
               PasswordCreationField: {
                 "validation.charPool.special.min.short":
-                  "Overwritten Translation YAY!",
+                  "The Force is strong with this one!",
               },
             },
           }}

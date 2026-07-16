@@ -24,9 +24,9 @@ test.each(testEnvironments)(
               }
             >
               <Text color={color}>
-                Lorem ipsum <strong>dolor sit</strong> amet consectetur
-                <i>adipisicing</i> elit. Cumque eius <s>quam quas</s> vel
-                voluptas, <Link>ullam aliquid</Link> fugit.
+                The Rebel <strong>Alliance struck</strong> a decisive
+                <i>blow against</i> the Empire. Rebel spies <s>stole plans</s>{" "}
+                to the <Link>Death Star</Link> weapon.
               </Text>
             </AccentBox>
           </Wrap>
@@ -44,13 +44,13 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         <Text>
-          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+          AlongtimeagoinagalaxyfarfarawaytheRebelAlliancestruckadecisiveblowagainsttheGalacticEmpireRebelspiesmanagedtostealthesecretplanstotheEmpiresultimateweaponcalledtheDeathStaranarmoredspacestationwithenoughpowertodestroyanentireplanetPrincessLeiaracedhomeaboardherstarshipcustodianofthestolenplansthatcansaveherpeopleandrestorefreedomtothegalaxyHopeRemains
         </Text>
         <Text wordBreak="break-word">
-          LoremipsumdolorsitametconsecteturadipisicingelitCumqueeiusquamquasvelvoluptasullamaliquidfugitVoluptateharumaccusantiumrerumullammodiblanditiisvitaelaborumeatemporedolorevoluptasEarumpariatursimiliquecorruptiidofficiaperferendisLaboresimiliqueEarumquasinAtdoloremcorruptiblanditiisnulladeseruntlaborumCorruptidelectusaspernaturnihilnullaobcaecatiipsamporrosequiremQuam
+          AlongtimeagoinagalaxyfarfarawaytheRebelAlliancestruckadecisiveblowagainsttheGalacticEmpireRebelspiesmanagedtostealthesecretplanstotheEmpiresultimateweaponcalledtheDeathStaranarmoredspacestationwithenoughpowertodestroyanentireplanetPrincessLeiaracedhomeaboardherstarshipcustodianofthestolenplansthatcansaveherpeopleandrestorefreedomtothegalaxyHopeRemains
         </Text>
         <Text>
-          <small>laborum ea tempore, dolore voluptas.</small>
+          <small>the secret plans to the Death Star.</small>
           <ul>
             <li>Item</li>
             <li>Item</li>
@@ -61,12 +61,11 @@ test.each(testEnvironments)(
           </ol>
         </Text>
         <Text>
-          <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <IconStar /> The Rebel Alliance struck against the Galactic Empire.
         </Text>
         <Text>
           <small>
-            <IconStar /> Lorem ipsum dolor sit amet consectetur adipisicing
-            elit.
+            <IconStar /> The Rebel Alliance struck against the Galactic Empire.
           </small>
         </Text>
         <Text noLigatures>5x4</Text>
