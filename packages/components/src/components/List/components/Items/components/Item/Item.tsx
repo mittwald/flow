@@ -1,7 +1,8 @@
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 import { useList } from "@/components/List/hooks/useList";
 import ItemsGridListItemView from "@/views/ItemsGridListItemView";
-import type { FC, PropsWithChildren, Ref, RefCallback } from "react";
+import { mergeRefs } from "@react-aria/utils";
+import type { FC, PropsWithChildren, Ref } from "react";
 import { Suspense } from "react";
 import type { Key } from "react-aria-components";
 import styles from "./Item.module.scss";
@@ -12,18 +13,6 @@ interface Props extends PropsWithChildren {
   data: never;
   triggerRef?: Ref<HTMLDivElement>;
 }
-
-const mergeRefs =
-  <T,>(...refs: (Ref<T> | undefined)[]): RefCallback<T> =>
-  (node) => {
-    for (const ref of refs) {
-      if (typeof ref === "function") {
-        ref(node);
-      } else if (ref) {
-        ref.current = node;
-      }
-    }
-  };
 
 export const Item = (props: Props) => {
   const { id, data, triggerRef } = props;
