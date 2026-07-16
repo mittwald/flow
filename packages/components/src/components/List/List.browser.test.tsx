@@ -402,13 +402,15 @@ describe("Storage", async () => {
 describe("Infinite scroll", () => {
   const manyItems = Array.from({ length: 9 }, (_, i) => i);
 
-  test("Does not prefetch when the first batch already fills the viewport", async () => {
+  test("Loads the next batch only once the trigger row scrolls into view", async () => {
+    const data = Array.from({ length: 15 }, (_, i) => ({ num: i }));
+
     await render(
-      <List aria-label="Test" batchSize={1} infiniteScroll>
-        <ListStaticData<Data> data={manyItems.map((num) => ({ num }))} />
+      <List aria-label="Test" batchSize={10} infiniteScroll>
+        <ListStaticData<Data> data={data} />
         <ListItem<Data> textValue={(num) => String(num)}>
           {({ num }) => (
-            <span style={{ display: "block", height: "150vh" }}>
+            <span style={{ display: "block", height: "100vh" }}>
               Item: {num}
             </span>
           )}
@@ -416,11 +418,13 @@ describe("Infinite scroll", () => {
       </List>,
     );
 
+    // With batchSize 10 the trigger row sits ~2 rows before the end (item 8),
+    // far below the fold, so no further batch is loaded on mount.
     await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
-    expect(page.getByText("Item: 1").query()).not.toBeInTheDocument();
+    expect(page.getByText("Item: 10").query()).not.toBeInTheDocument();
 
-    document.scrollingElement?.scrollTo(0, document.body.scrollHeight);
-    await expect.element(page.getByText("Item: 1")).toBeInTheDocument();
+    await (await page.getByText("Item: 8").element()).scrollIntoView();
+    await expect.element(page.getByText("Item: 10")).toBeInTheDocument();
 
     expect(
       page.getByRole("button", { name: "Show more" }).query(),
@@ -454,7 +458,8 @@ describe("Infinite scroll", () => {
       </List>,
     );
 
-    // First batch loaded; the sentinel auto-triggers the (pending) second batch.
+    // First batch is short, so the trigger row is visible and auto-loads the
+    // (pending) second batch.
     await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
 
     // While the next batch is pending, a generic loading indicator is shown and

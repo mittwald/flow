@@ -233,7 +233,7 @@ interface Invoice {
   amount: string;
 }
 
-const allInvoices: Invoice[] = Array.from({ length: 260 }, (_, i) => ({
+const allInvoices: Invoice[] = Array.from({ length: 460 }, (_, i) => ({
   id: `RG${100000 + i}`,
   date: `${(i % 28) + 1}.9.2024`,
   amount: `${(i % 50) + 1},00 €`,
@@ -258,7 +258,7 @@ export const InfiniteScroll: Story = {
     return (
       <Section>
         <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={10} aria-label="Invoices" infiniteScroll>
+        <InvoiceList.List batchSize={20} aria-label="Invoices" infiniteScroll>
           <InvoiceList.LoaderAsync manualPagination>
             {loadInvoices}
           </InvoiceList.LoaderAsync>
