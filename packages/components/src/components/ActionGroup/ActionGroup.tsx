@@ -16,6 +16,8 @@ export interface ActionGroupProps
     PropsWithClassName {
   /** The spacing between the buttons inside the action group. @default "s" */
   spacing?: "s" | "m";
+  /** The size of the buttons and links inside the action group. @default "m" */
+  size?: "s" | "m";
   /**
    * When set, the buttons are not sorted automatically but stay in source
    * order. @default false
@@ -32,6 +34,7 @@ export const ActionGroup = flowComponent(
       className,
       ref,
       spacing = "s",
+      size,
       preserveOrder = false,
       ...rest
     } = props;
@@ -45,12 +48,15 @@ export const ActionGroup = flowComponent(
 
     const propsContext: PropsContext = preserveOrder
       ? {
+          Button: { size },
           Switch: {
             labelPosition: "leading",
           },
+          Link: { size },
         }
       : {
           Button: {
+            size,
             slot: dynamic((props) => getActionGroupSlot(props)),
             className: dynamic((props) => {
               const slot = getActionGroupSlot(props);
@@ -64,6 +70,7 @@ export const ActionGroup = flowComponent(
             }),
           },
           Link: {
+            size,
             className: dynamic((props) => {
               return clsx(props.className, props.slot && styles[props.slot]);
             }),

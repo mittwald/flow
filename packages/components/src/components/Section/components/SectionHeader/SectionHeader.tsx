@@ -35,13 +35,13 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
       },
       ActionGroup: {
         preserveOrder: true,
+        size: "s",
         tunnel: {
           id: "actions",
           component: "SectionHeader",
         },
         Button: {
           tunnel: null,
-          size: "s",
         },
         Switch: {
           tunnel: null,

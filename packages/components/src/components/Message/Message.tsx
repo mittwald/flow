@@ -104,9 +104,9 @@ export const Message = flowComponent("Message", (props) => {
     },
     ActionGroup: {
       preserveOrder: true,
+      size: "s",
       className: styles.actionGroup,
       Button: {
-        size: "s",
         className: styles.actionGroupAction,
       },
     },

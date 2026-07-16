@@ -13,6 +13,7 @@ export class RemoteActionGroupElement extends FlowRemoteElement<RemoteActionGrou
     return {
       className: {},
       preserveOrder: {},
+      size: {},
       spacing: {},
     };
   }
