@@ -1,12 +1,9 @@
-.wrapper {
-  min-width: 0;
-}
-
 .codeBlock {
   display: block;
   font-size: var(--code-block--font-size);
   font-family: var(--code-block--font-family);
   overflow: hidden;
+  min-width: 0;
 
   &.withChildren {
     color: var(--code-block--content-color);
@@ -25,37 +22,37 @@
     }
   }
 
+  &.folded {
+    :global(.cm-content) {
+      max-height: var(--max-height);
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50%;
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--code-block--background-color)
+        );
+      }
+    }
+  }
+
   &.codeBlock div:global(.flow--code-editor--code-mirror) {
     border-color: var(--code-block--border-color);
   }
-}
 
-.buttonContainer {
-  background-color: var(--code-block--background-color);
-  border: var(--code-block--border-width) var(--code-block--border-style)
-    var(--code-block--border-color);
-  border-top: none;
-  border-bottom-left-radius: var(--code-block--corner-radius);
-  border-bottom-right-radius: var(--code-block--corner-radius);
-  position: relative;
-  margin-top: calc(var(--code-block--show-more-padding) * -1);
-  display: flex;
-  justify-content: center;
-  padding-block: var(--code-block--show-more-padding);
-
-  &.collapsed {
-    &::before {
-      content: "";
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--code-block--background-color)
-      );
-      height: var(--code-block--padding);
-      width: 100%;
-      position: absolute;
-      top: calc(var(--code-block--padding) * -1);
-      inset-inline: 0;
-    }
+  .buttonContainer {
+    position: relative;
+    margin-top: calc(var(--code-block--show-more-padding) * -1);
+    display: flex;
+    justify-content: center;
+    padding-block: var(--code-block--show-more-padding);
   }
 }

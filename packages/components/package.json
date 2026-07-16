@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.910",
+  "version": "0.2.0-alpha.916",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
@@ -26,9 +26,9 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.mjs"
     },
-    "./mittwald-password-tools-js": {
+    "./password-tools": {
       "types": "./dist/types/integrations/@mittwald/password-tools-js/index.d.ts",
-      "import": "./dist/js/@mittwald/password-tools-js.mjs"
+      "import": "./dist/js/password-tools.mjs"
     },
     "./all.css": "./dist/css/all.css",
     "./all-layered.css": "./dist/css/all-layered.css",

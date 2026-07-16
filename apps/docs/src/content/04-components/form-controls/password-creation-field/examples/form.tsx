@@ -8,13 +8,13 @@ import { sleep } from "@/content/04-components/actions/action/examples/lib";
 import {
   Label,
   Section,
-  PasswordCreationField,
 } from "@mittwald/flow-react-components";
 import {
+  PasswordCreationField,
   generatePasswordCreationFieldValidation,
   Policy,
   RuleType,
-} from "@mittwald/flow-react-components/mittwald-password-tools-js";
+} from "@mittwald/flow-react-components/password-tools";
 
 export default () => {
   const customPolicy = Policy.fromDeclaration({

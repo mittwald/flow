@@ -204,7 +204,7 @@ Run: `pnpm nx test:unit components`,
 | `.` (default) | Everything listed **manually** in `src/components/public.ts` — new public components must be added there. |
 | `./internal` | Advanced internals (`flowComponent`, prop helper types, …). |
 | `./flr-universal` | Curated subset that works local *and* remote. Adding to `public.ts` does **not** add here. |
-| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface. |
+| `./nextjs`, `./react-hook-form`, `./password-tools` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface. |
 | `./all.css` | Bundled stylesheet. |
 | `./doc-properties` | Generated prop metadata for the docs site. |
 

@@ -13,9 +13,9 @@ export default function Page() {
   return (
     <Section>
       <Button onPress={setEvent} color="danger" variant="outline">
-        Press me
+        Fire proton torpedo
       </Button>
-      <TextField onChange={setEvent} aria-label="Test" />
+      <TextField onChange={setEvent} aria-label="Mission name" />
       <CodeBlock code={JSON.stringify(event, undefined, 2)} />
     </Section>
   );

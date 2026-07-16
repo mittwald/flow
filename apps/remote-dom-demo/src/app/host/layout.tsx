@@ -24,7 +24,7 @@ export default function HostPage() {
   const [remoteReadyEvent, setRemoteReadyEvent] = useState<RemoteReadyEvent>();
 
   return (
-    <IntlProvider locale="de-DE">
+    <IntlProvider locale="en-US">
       <Section>
         {isNavigating && <LoadingMessage />}
         {remoteReadyEvent && (
@@ -53,13 +53,13 @@ export default function HostPage() {
           src={srcRef.current}
           extBridgeImplementation={{
             getConfig: async () => ({
-              extensionId: "ext-id",
-              extensionInstanceId: "exti-id",
-              sessionId: "session-id",
-              userId: "user-id",
-              appInstallationId: "appi-id",
-              customerId: "customer-id",
-              projectId: "project-id",
+              extensionId: "ext-death-star",
+              extensionInstanceId: "exti-death-star",
+              sessionId: "session-rebel-alliance",
+              userId: "user-luke-skywalker",
+              appInstallationId: "appi-death-star",
+              customerId: "customer-rebel-alliance",
+              projectId: "mission-death-star",
             }),
             getSessionToken: async () => "session-token",
           }}

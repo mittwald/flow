@@ -101,6 +101,11 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         result.thread.imports.setPathname(hostPathname);
       }
     },
+    reportHostError: async (error) => {
+      if (result.version >= Version.v5) {
+        await result.thread.imports.setHostError(error);
+      }
+    },
     version: 0,
   };
 

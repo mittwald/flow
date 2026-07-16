@@ -12,13 +12,13 @@ import {
 export default function Page() {
   return (
     <Alert status="danger">
-      <Heading>Alert title</Heading>
-      <Text>Alert text</Text>
+      <Heading>Mission failed</Heading>
+      <Text>The assault on the Death Star could not be completed.</Text>
       <TextField>
-        <Label>Name</Label>
+        <Label>Mission name</Label>
       </TextField>
       <Content>
-        <Button>Test</Button>
+        <Button>Retry</Button>
       </Content>
     </Alert>
   );

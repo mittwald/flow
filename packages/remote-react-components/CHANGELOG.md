@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.916](https://github.com/mittwald/flow/compare/0.2.0-alpha.915...0.2.0-alpha.916) (2026-07-15)
+
+### Bug Fixes
+
+* **Docs:** remove stretch prop ([#2647](https://github.com/mittwald/flow/issues/2647)) ([2d527f9](https://github.com/mittwald/flow/commit/2d527f9a61dc444f7b70587aac764abff9ce8843))
+
+# [0.2.0-alpha.915](https://github.com/mittwald/flow/compare/0.2.0-alpha.914...0.2.0-alpha.915) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.914](https://github.com/mittwald/flow/compare/0.2.0-alpha.913...0.2.0-alpha.914) (2026-07-15)
+
+### Features
+
+* **remote:** surface "No component found" error on the remote side ([#2651](https://github.com/mittwald/flow/issues/2651)) ([715fd75](https://github.com/mittwald/flow/commit/715fd7537cc776f8376ffc4634021071ba5fde18)), closes [#2441](https://github.com/mittwald/flow/issues/2441)
+
+# [0.2.0-alpha.913](https://github.com/mittwald/flow/compare/0.2.0-alpha.912...0.2.0-alpha.913) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.912](https://github.com/mittwald/flow/compare/0.2.0-alpha.911...0.2.0-alpha.912) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.911](https://github.com/mittwald/flow/compare/0.2.0-alpha.910...0.2.0-alpha.911) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.910](https://github.com/mittwald/flow/compare/0.2.0-alpha.909...0.2.0-alpha.910) (2026-07-15)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

@@ -19,6 +19,10 @@ import {
   useModalController,
 } from "@mittwald/flow-remote-react-components";
 
+const squadronExplainer =
+  "Think of a squadron as your crew. This is where you rally your pilots, " +
+  "assign ships, and plan your next mission.";
+
 export default function Page() {
   const controller = useModalController();
 
@@ -26,27 +30,23 @@ export default function Page() {
     <Section>
       <Flex columnGap="s">
         <ModalTrigger>
-          <Button>Modal trigger</Button>
+          <Button>New squadron</Button>
           <Modal>
-            <Heading>Modal title</Heading>
+            <Heading>New squadron</Heading>
             <Content>
               <Section>
-                <Heading>Bla</Heading>
-                <Text>
-                  Eine Organisation kannst du dir wie ein Unternehmen
-                  vorstellen. An diesem Ort verwaltest du deine Mitarbeiter,
-                  Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-                </Text>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
                 <TextField isRequired>
-                  <Label>Organisationsname</Label>
+                  <Label>Squadron name</Label>
                 </TextField>
               </Section>
             </Content>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Organisation anlegen</Button>
+                <Button color="accent">Create squadron</Button>
                 <Button variant="soft" color="secondary">
-                  Abbrechen
+                  Cancel
                 </Button>
               </Action>
             </ActionGroup>
@@ -56,36 +56,28 @@ export default function Page() {
         <ModalTrigger>
           <Button>Offcanvas</Button>
           <Modal offCanvas>
-            <Heading>Modal title</Heading>
+            <Heading>New squadron</Heading>
             <Content>
               <Section>
-                <Heading>Bla</Heading>
-                <Text>
-                  Eine Organisation kannst du dir wie ein Unternehmen
-                  vorstellen. An diesem Ort verwaltest du deine Mitarbeiter,
-                  Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-                </Text>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
                 <TextField isRequired>
-                  <Label>Organisationsname</Label>
+                  <Label>Squadron name</Label>
                 </TextField>
               </Section>
               <Section>
-                <Heading>Bla</Heading>
-                <Text>
-                  Eine Organisation kannst du dir wie ein Unternehmen
-                  vorstellen. An diesem Ort verwaltest du deine Mitarbeiter,
-                  Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-                </Text>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
                 <TextField isRequired>
-                  <Label>Organisationsname</Label>
+                  <Label>Squadron name</Label>
                 </TextField>
               </Section>
             </Content>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Organisation anlegen</Button>
+                <Button color="accent">Create squadron</Button>
                 <Button variant="soft" color="secondary">
-                  Abbrechen
+                  Cancel
                 </Button>
               </Action>
             </ActionGroup>
@@ -95,36 +87,28 @@ export default function Page() {
         <ModalTrigger>
           <Button>With columns</Button>
           <Modal offCanvas size="l">
-            <Heading>Modal title</Heading>
+            <Heading>New squadron</Heading>
             <ColumnLayout>
               <Section>
-                <Heading>Bla</Heading>
-                <Text>
-                  Eine Organisation kannst du dir wie ein Unternehmen
-                  vorstellen. An diesem Ort verwaltest du deine Mitarbeiter,
-                  Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-                </Text>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
                 <TextField isRequired>
-                  <Label>Organisationsname</Label>
+                  <Label>Squadron name</Label>
                 </TextField>
               </Section>
               <Section>
-                <Heading>Bla</Heading>
-                <Text>
-                  Eine Organisation kannst du dir wie ein Unternehmen
-                  vorstellen. An diesem Ort verwaltest du deine Mitarbeiter,
-                  Zahlungsmodalitäten und kannst deine Rechnungen einsehen.
-                </Text>
+                <Heading>What is a squadron?</Heading>
+                <Text>{squadronExplainer}</Text>
                 <TextField isRequired>
-                  <Label>Organisationsname</Label>
+                  <Label>Squadron name</Label>
                 </TextField>
               </Section>
             </ColumnLayout>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Organisation anlegen</Button>
+                <Button color="accent">Create squadron</Button>
                 <Button variant="soft" color="secondary">
-                  Abbrechen
+                  Cancel
                 </Button>
               </Action>
             </ActionGroup>
@@ -138,21 +122,20 @@ export default function Page() {
           </LightBox>
         </LightBoxTrigger>
 
-        <Action onAction={() => console.log("Projekt löschen clicked")}>
+        <Action onAction={() => console.log("Destroy the Death Star clicked")}>
           <Modal slot="actionConfirm">
-            <Heading>Projekt löschen</Heading>
+            <Heading>Destroy the Death Star</Heading>
             <Content>
-              Wenn das Projekt &quot;Test&quot; einmal gelöscht ist, kann es
-              nicht wiederhergestellt werden.
+              Once the Death Star is destroyed, it cannot be rebuilt.
             </Content>
             <ActionGroup>
-              <Button color="danger">Löschen</Button>
+              <Button color="danger">Fire superlaser</Button>
               <Button color="secondary" variant="soft">
-                Abbrechen
+                Cancel
               </Button>
             </ActionGroup>
           </Modal>
-          <Button color="danger">Projekt löschen</Button>
+          <Button color="danger">Destroy the Death Star</Button>
         </Action>
       </Flex>
 
@@ -162,27 +145,23 @@ export default function Page() {
           controller.open();
         }}
       >
-        Modal trigger
+        New squadron
       </Button>
       <Modal controller={controller}>
-        <Heading>Modal title</Heading>
+        <Heading>New squadron</Heading>
         <Content>
           <Section>
-            <Text>
-              Eine Organisation kannst du dir wie ein Unternehmen vorstellen. An
-              diesem Ort verwaltest du deine Mitarbeiter, Zahlungsmodalitäten
-              und kannst deine Rechnungen einsehen.
-            </Text>
+            <Text>{squadronExplainer}</Text>
             <TextField isRequired>
-              <Label>Organisationsname</Label>
+              <Label>Squadron name</Label>
             </TextField>
           </Section>
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button color="accent">Organisation anlegen</Button>
+            <Button color="accent">Create squadron</Button>
             <Button variant="soft" color="secondary">
-              Abbrechen
+              Cancel
             </Button>
           </Action>
         </ActionGroup>

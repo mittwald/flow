@@ -12,5 +12,6 @@ export {
 export type * from "@mittwald/password-tools-js/generator";
 export { Generator } from "@mittwald/password-tools-js/generator";
 
+export * from "@/components/PasswordCreationField";
 export * from "./defaultPasswordCreationPolicy";
 export * from "./usePasswordCreationFieldValidation";

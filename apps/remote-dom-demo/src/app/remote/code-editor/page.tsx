@@ -14,7 +14,7 @@ import {
 export default function Page() {
   const form = useForm({
     defaultValues: {
-      code: "foo=bar",
+      code: "hyperdrive_class=1.0",
     },
   });
 
@@ -38,7 +38,7 @@ export default function Page() {
           <CodeEditor language={"tsx"} />
         </Field>
         <ActionGroup>
-          <SubmitButton>Send</SubmitButton>
+          <SubmitButton>Save configuration</SubmitButton>
         </ActionGroup>
       </Form>
     </Section>

@@ -19,37 +19,37 @@ export default function Page() {
   const [isNavigating, startNavigating] = useTransition();
   return (
     <>
-      <Title>Details</Title>
+      <Title>Battle station</Title>
       <Actions>
         <MenuItem
           onAction={() => {
-            console.log("Test");
+            console.log("Rename station");
           }}
         >
-          Test
+          Rename
         </MenuItem>
         <MenuItem
           onAction={() => {
-            console.log("Test");
+            console.log("Decommission station");
           }}
         >
-          Test
+          Decommission
         </MenuItem>
       </Actions>
       <Breadcrumb>
-        <Link href="/remote/navigation/subpage">Subpage</Link>
+        <Link href="/remote/navigation/subpage">Battle station</Link>
       </Breadcrumb>
       <Section>
-        <Heading>Page 2</Heading>
+        <Heading>Death Star</Heading>
         <Button
           isPending={isNavigating}
           onPress={() =>
             startNavigating(() => router.push("/remote/navigation"))
           }
         >
-          To Page 1
+          Back to fleet
         </Button>
-        <Link href="/remote/navigation">To Page 1</Link>
+        <Link href="/remote/navigation">Back to fleet</Link>
       </Section>
     </>
   );

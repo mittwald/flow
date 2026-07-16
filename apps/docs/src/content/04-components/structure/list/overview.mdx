@@ -4,7 +4,7 @@ Mit `typedList<T>` lässt sich eine List für einen bestimmten Datentyp erzeugen
 
 Im Tab Develop stehen verschiedene Anleitungen zum technischen Aufbau bereit.
 
-<LiveCodeEditor stretch />
+<LiveCodeEditor />
 
 ---
 
@@ -18,7 +18,7 @@ werden. Die Default-Ansicht wird über das Property `defaultViewMode` festgelegt
 
 Nutze `<List.Item />`, um die List in der Listenansicht darzustellen.
 
-<LiveCodeEditor example="mode-list" editorCollapsed stretch />
+<LiveCodeEditor example="mode-list" editorCollapsed />
 
 ## Rasteransicht
 
@@ -29,14 +29,14 @@ werden, indem `showList` auf `false` gesetzt wird.
 Über das `maxTileWidth`-Property lässt sich die maximale Breite der Kacheln
 steuern.
 
-<LiveCodeEditor example="mode-tile" editorCollapsed stretch />
+<LiveCodeEditor example="mode-tile" editorCollapsed />
 
 ## Tabellenansicht
 
 Nutze `<List.Table />`, um die List als
 [Table](/04-components/structure/table/overview) darzustellen.
 
-<LiveCodeEditor example="mode-table" editorCollapsed stretch />
+<LiveCodeEditor example="mode-table" editorCollapsed />
 
 ---
 
@@ -49,7 +49,7 @@ Aufbaumöglichkeiten einsetzen.
 
 Ein ListItem bietet das Property `href` an, um das Element zu verlinken.
 
-<LiveCodeEditor example="item-link" editorCollapsed stretch />
+<LiveCodeEditor example="item-link" editorCollapsed />
 
 ## Mit Accordion
 
@@ -57,7 +57,7 @@ Das Accordion-Verhalten wird über die `accordion`-Property aktiviert. Dadurch
 lässt sich ein ListItem per Klick ein- oder ausklappen. Der erweiterte Inhalt
 wird in `<Content slot="bottom" />` platziert.
 
-<LiveCodeEditor example="item-accordion" editorCollapsed stretch />
+<LiveCodeEditor example="item-accordion" editorCollapsed />
 
 ## Mit Checkboxen
 
@@ -67,14 +67,14 @@ Checkbox wird nicht von der List gesteuert und muss individuell implementiert
 werden. Achte bei der Implementierung jedoch darauf, dass die gesamte Zeile zur
 Auswahl des Elements genutzt werden kann. Nutze dafür `onAction` der List.
 
-<LiveCodeEditor example="item-checkbox" editorCollapsed stretch />
+<LiveCodeEditor example="item-checkbox" editorCollapsed />
 
 ## Mit Content Slots
 
 In einem ListItem kann zusätzlicher `<Content/ >` (Top und Bottom Content)
 platziert werden. Die Position wird über das `slot`-Property gesteuert.
 
-<LiveCodeEditor example="item-content" editorCollapsed stretch />
+<LiveCodeEditor example="item-content" editorCollapsed />
 
 ## Mit ColumnLayout
 
