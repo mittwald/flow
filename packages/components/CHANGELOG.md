@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.923](https://github.com/mittwald/flow/compare/0.2.0-alpha.922...0.2.0-alpha.923) (2026-07-16)
+
+### Features
+
+* **ActionGroup:** add preserveOrder prop for DOM-order layout ([#2652](https://github.com/mittwald/flow/issues/2652)) ([a0f14f1](https://github.com/mittwald/flow/commit/a0f14f11fb0a305e3589fa392f7d5dceacb70b00))
+
 # [0.2.0-alpha.922](https://github.com/mittwald/flow/compare/0.2.0-alpha.921...0.2.0-alpha.922) (2026-07-16)
 
 ### Features
