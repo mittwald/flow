@@ -8,6 +8,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { ActionStateContextProvider } from "@/components/Action/models/ActionStateContext";
 import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupSlot";
+import type { ButtonProps } from "@/components/Button";
 
 export interface ActionGroupProps
   extends
@@ -17,7 +18,7 @@ export interface ActionGroupProps
   /** The spacing between the buttons inside the action group. @default "s" */
   spacing?: "s" | "m";
   /** The size of the buttons and links inside the action group. @default "m" */
-  size?: "s" | "m";
+  size?: ButtonProps["size"];
   /**
    * When set, the buttons are not sorted automatically but stay in source
    * order. @default false
@@ -79,7 +80,10 @@ export const ActionGroup = flowComponent(
 
     return (
       <ActionStateContextProvider>
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[preserveOrder, size]}
+        >
           <div {...rest} className={rootClassName} ref={ref} role="group">
             {children}
           </div>
