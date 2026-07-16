@@ -95,7 +95,7 @@ test.each(testEnvironments)(
     await render(
       <Flex direction="column" gap="m">
         <ActionGroup size="s">
-          <Link slot="abort">Link</Link>
+          <Link slot="secondary">Link</Link>
           <Button>Primary</Button>
           <Button variant="soft" color="secondary">
             Abort
@@ -103,8 +103,11 @@ test.each(testEnvironments)(
         </ActionGroup>
         <Separator />
         <ActionGroup size="m">
-          <Link slot="abort">Link</Link>
+          <Link slot="secondary">Link</Link>
           <Button>Primary</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
         </ActionGroup>
       </Flex>,
     );
