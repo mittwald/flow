@@ -36,11 +36,6 @@ const packageRoot = resolve(here, "../..");
 
 const target = resolveCrossVersionTarget();
 
-// installPath ends in `.../node_modules/@mittwald/flow-remote-react-components`;
-// two levels up is the old install's `node_modules` root, where its own
-// react/react-dom live.
-const oldNodeModules = resolve(target.installPath, "../..");
-
 interface PackageExportsMap {
   exports?: Record<string, string | Record<string, string>>;
 }
@@ -89,38 +84,67 @@ const aliasPackageExports = (
   });
 };
 
-const oldPackageAliases = aliasPackageExports(
-  "@mittwald/flow-remote-react-components",
-  target.installPath,
-);
-
-// Pin the whole remote document to the old install's single React instance.
-const reactAliases = [
-  {
-    find: "react-dom/client",
-    replacement: join(oldNodeModules, "react-dom/client.js"),
-  },
-  {
-    find: "react-dom",
-    replacement: join(oldNodeModules, "react-dom/index.js"),
-  },
-  {
-    find: "react/jsx-dev-runtime",
-    replacement: join(oldNodeModules, "react/jsx-dev-runtime.js"),
-  },
-  {
-    find: "react/jsx-runtime",
-    replacement: join(oldNodeModules, "react/jsx-runtime.js"),
-  },
-  { find: "react", replacement: join(oldNodeModules, "react/index.js") },
-];
+/**
+ * Package-specifier aliases for the selected version.
+ *
+ * - `current` → this workspace's `src` (mirrors how `e2e/remote-test-server`
+ *   imports `../../src` directly): `.` → `src/index.ts`, `/RemoteRoot` →
+ *   `src/components/RemoteRoot.tsx`. No react alias — the current build uses
+ *   the workspace's own react (as the normal browser suite does).
+ * - Installed old version → the old copy's dist via its `exports` map, plus
+ *   react/react-dom pinned to the old install's own copies so the remote
+ *   document runs on a single React instance (mixing two separately-loaded
+ *   copies of react in one page throws "Invalid hook call" regardless of
+ *   matching version numbers).
+ */
+const versionAliases: { find: string; replacement: string }[] = target.isCurrent
+  ? [
+      {
+        find: "@mittwald/flow-remote-react-components/RemoteRoot",
+        replacement: join(packageRoot, "src/components/RemoteRoot.tsx"),
+      },
+      {
+        find: "@mittwald/flow-remote-react-components",
+        replacement: join(packageRoot, "src/index.ts"),
+      },
+    ]
+  : (() => {
+      // installPath ends in
+      // `.../node_modules/@mittwald/flow-remote-react-components`; two levels
+      // up is the old install's `node_modules` root (its own react lives
+      // there).
+      const oldNodeModules = resolve(target.installPath, "../..");
+      return [
+        {
+          find: "react-dom/client",
+          replacement: join(oldNodeModules, "react-dom/client.js"),
+        },
+        {
+          find: "react-dom",
+          replacement: join(oldNodeModules, "react-dom/index.js"),
+        },
+        {
+          find: "react/jsx-dev-runtime",
+          replacement: join(oldNodeModules, "react/jsx-dev-runtime.js"),
+        },
+        {
+          find: "react/jsx-runtime",
+          replacement: join(oldNodeModules, "react/jsx-runtime.js"),
+        },
+        { find: "react", replacement: join(oldNodeModules, "react/index.js") },
+        ...aliasPackageExports(
+          "@mittwald/flow-remote-react-components",
+          target.installPath,
+        ),
+      ];
+    })();
 
 export default mergeConfig(defaultConfig, {
   optimizeDeps: {
     include: ["react-error-boundary"],
   },
   resolve: {
-    alias: [...reactAliases, ...oldPackageAliases],
+    alias: versionAliases,
   },
   server: {
     fs: {

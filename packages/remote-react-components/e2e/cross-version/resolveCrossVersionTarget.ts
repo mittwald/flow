@@ -6,11 +6,20 @@ const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../..");
 
 /**
- * Environment variable selecting which installed old version the cross-version
- * remote server builds its remote document against. When unset, the first
- * manifest target is used.
+ * Environment variable selecting which version of
+ * `@mittwald/flow-remote-react-components` the remote document is built
+ * against.
+ *
+ * - Unset → the first manifest target (an installed old version)
+ * - `current` → this workspace's own `src` (used to generate the reference HTML
+ *   the old versions are compared against)
+ * - A version string → that specific installed old version (must be a manifest
+ *   target)
  */
 export const CROSS_VERSION_ENV = "FLOW_CROSS_VERSION";
+
+/** Sentinel value of `FLOW_CROSS_VERSION` selecting the workspace `src`. */
+export const CURRENT_SENTINEL = "current";
 
 interface ManifestTarget {
   category: string;
@@ -23,15 +32,22 @@ interface Manifest {
   targets: ManifestTarget[];
 }
 
-export interface CrossVersionTarget {
-  /** The selected old version, e.g. `0.2.0-alpha.883`. */
-  version: string;
-  /**
-   * Absolute path to the installed old `@mittwald/flow-remote-react-components`
-   * package directory.
-   */
-  installPath: string;
-}
+export type CrossVersionTarget =
+  | {
+      /** Reserved sentinel; the remote document uses the workspace `src`. */
+      version: typeof CURRENT_SENTINEL;
+      isCurrent: true;
+    }
+  | {
+      /** The selected installed old version, e.g. `0.2.0-alpha.883`. */
+      version: string;
+      isCurrent: false;
+      /**
+       * Absolute path to the installed old
+       * `@mittwald/flow-remote-react-components` package directory.
+       */
+      installPath: string;
+    };
 
 const manifestPath = join(packageRoot, "cross-version.manifest.json");
 
@@ -47,14 +63,19 @@ const readManifest = (): Manifest => {
 };
 
 /**
- * Resolve which installed old version the cross-version remote server should
- * serve. Reads `cross-version.manifest.json` (the source of truth for which old
- * versions are installed) and selects the version named by the
- * `FLOW_CROSS_VERSION` env var, defaulting to the first manifest target when
- * unset. Throws a clear error if `FLOW_CROSS_VERSION` names a version that is
- * not a manifest target (typo / stale value / not installed).
+ * Resolve which version of `@mittwald/flow-remote-react-components` the
+ * cross-version remote server should serve. Reads
+ * `cross-version.manifest.json`, honours `FLOW_CROSS_VERSION` (see
+ * {@link CROSS_VERSION_ENV}), and throws a clear error if it names a version
+ * that is neither `current` nor a manifest target.
  */
 export const resolveCrossVersionTarget = (): CrossVersionTarget => {
+  const requested = process.env[CROSS_VERSION_ENV];
+
+  if (requested === CURRENT_SENTINEL) {
+    return { version: CURRENT_SENTINEL, isCurrent: true };
+  }
+
   const manifest = readManifest();
 
   if (manifest.targets.length === 0) {
@@ -64,8 +85,6 @@ export const resolveCrossVersionTarget = (): CrossVersionTarget => {
     );
   }
 
-  const requested = process.env[CROSS_VERSION_ENV];
-
   const target = requested
     ? manifest.targets.find((t) => t.version === requested)
     : manifest.targets[0];
@@ -74,9 +93,13 @@ export const resolveCrossVersionTarget = (): CrossVersionTarget => {
     const available = manifest.targets.map((t) => t.version).join(", ");
     throw new Error(
       `${CROSS_VERSION_ENV}="${requested}" is not a cross-version manifest ` +
-        `target. Available targets: ${available}.`,
+        `target. Available targets: ${available} (or "${CURRENT_SENTINEL}").`,
     );
   }
 
-  return { version: target.version, installPath: target.installPath };
+  return {
+    version: target.version,
+    isCurrent: false,
+    installPath: target.installPath,
+  };
 };
