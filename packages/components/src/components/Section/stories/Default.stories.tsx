@@ -52,6 +52,23 @@ export const Default: Story = {
   },
 };
 
+export const WithHeaderActionGroup: Story = {
+  render: (props) => (
+    <Section {...props}>
+      <Header>
+        <Heading>Project settings</Heading>
+        <ActionGroup>
+          <Button variant="soft" color="secondary">
+            Cancel
+          </Button>
+          <Button color="accent">Save</Button>
+        </ActionGroup>
+      </Header>
+      <Text>{dummyText.medium}</Text>
+    </Section>
+  ),
+};
+
 export const MultipleSections: Story = {
   render: (props) => (
     <>
