@@ -103,8 +103,8 @@ export const normalizeHtml = (html: string): string => {
 
   // 5. Collapse insignificant whitespace between tags. NOTE: this assumes
   //    block-level component boundaries (whitespace between tags is not
-  //    meaningful). An inline-composition entry where a space between adjacent
-  //    inline elements is significant would need a more careful rule.
+  //    meaningful). An inline-composition scenario where a space between
+  //    adjacent inline elements is significant would need a more careful rule.
   out = out.replace(/>\s+</g, "><").trim();
 
   return out;

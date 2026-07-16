@@ -18,10 +18,10 @@ const root = createRoot(container);
 
 const url = new URL(window.location.href);
 const file = url.searchParams.get("file");
-const test = url.searchParams.get("test");
+const scenarioName = url.searchParams.get("scenario");
 
-if (!file || !test) {
-  throw new Error('Missing required query parameters "file" and "test"');
+if (!file || !scenarioName) {
+  throw new Error('Missing required query parameters "file" and "scenario"');
 }
 
 const scenarioModule = Object.entries(modules).find(([key]) =>
@@ -32,10 +32,10 @@ if (!scenarioModule) {
   throw new Error(`Scenario module "${file}" not found`);
 }
 
-const scenario = scenarioModule.default[test];
+const scenario = scenarioModule.default[scenarioName];
 
 if (!scenario) {
-  throw new Error(`Scenario "${test}" not found in "${file}"`);
+  throw new Error(`Scenario "${scenarioName}" not found in "${file}"`);
 }
 
 root.render(<RemoteRoot>{scenario(components)}</RemoteRoot>);

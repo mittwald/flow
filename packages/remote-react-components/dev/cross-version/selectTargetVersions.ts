@@ -1,11 +1,11 @@
 import semver from "semver";
 
-export interface ResolvedTarget {
+export interface SelectedTargetVersion {
   category: string;
   version: string;
 }
 
-export interface ResolveOptions {
+export interface SelectTargetVersionsOptions {
   /** Index offsets (versions back) used in the prerelease fallback. */
   offsets?: number[];
 }
@@ -22,16 +22,16 @@ const lineOf = (version: string): string => {
 };
 
 /**
- * Resolves the set of previously-published versions to run cross-version smoke
+ * Selects the set of previously-published versions to run cross-version smoke
  * tests against. Pure: no I/O. The caller supplies the published version list
  * (from npm) and the exclude list.
  */
-export function resolveCrossVersionTargets(
+export function selectCrossVersionTargetVersions(
   currentVersion: string,
   publishedVersions: string[],
   excludedVersions: string[] = [],
-  options: ResolveOptions = {},
-): ResolvedTarget[] {
+  options: SelectTargetVersionsOptions = {},
+): SelectedTargetVersion[] {
   const excluded = new Set(excludedVersions);
 
   // Valid, non-excluded, strictly-older versions, ascending.
@@ -46,7 +46,7 @@ export function resolveCrossVersionTargets(
   }
 
   const push = (
-    targets: ResolvedTarget[],
+    targets: SelectedTargetVersion[],
     category: string,
     version: string | undefined,
   ): void => {
@@ -56,7 +56,7 @@ export function resolveCrossVersionTargets(
   };
 
   // --- semver categories ---
-  const semverTargets: ResolvedTarget[] = [];
+  const semverTargets: SelectedTargetVersion[] = [];
   const currentLine = lineOf(currentVersion);
 
   // previous: nearest below current
@@ -98,7 +98,7 @@ export function resolveCrossVersionTargets(
   }
 
   const offsets = options.offsets ?? DEFAULT_OFFSETS;
-  const offsetTargets: ResolvedTarget[] = [];
+  const offsetTargets: SelectedTargetVersion[] = [];
 
   // previous still makes sense in prerelease mode
   push(offsetTargets, "previous", candidates[candidates.length - 1]);

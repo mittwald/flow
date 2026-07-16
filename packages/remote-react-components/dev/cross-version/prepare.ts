@@ -9,9 +9,9 @@ import {
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  resolveCrossVersionTargets,
-  type ResolvedTarget,
-} from "./resolveCrossVersionTargets";
+  type SelectedTargetVersion,
+  selectCrossVersionTargetVersions,
+} from "./selectTargetVersions";
 
 const PACKAGE_NAME = "@mittwald/flow-remote-react-components";
 const here = dirname(fileURLToPath(import.meta.url));
@@ -95,7 +95,7 @@ const main = (): void => {
   const published = fetchPublishedVersions();
   const excluded = readExcluded();
 
-  const targets = resolveCrossVersionTargets(
+  const targets = selectCrossVersionTargetVersions(
     currentVersion,
     published,
     excluded,
@@ -107,8 +107,8 @@ const main = (): void => {
   }
 
   mkdirSync(installRoot, { recursive: true });
-  const installed: ResolvedTarget[] = [];
-  const dropped: ResolvedTarget[] = [];
+  const installed: SelectedTargetVersion[] = [];
+  const dropped: SelectedTargetVersion[] = [];
   for (const target of targets) {
     if (installVersion(target.version)) {
       installed.push(target);

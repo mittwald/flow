@@ -6,7 +6,7 @@ import semver from "semver";
  * By default every scenario is compared against every installed old version.
  * Some scenarios only render the same as current from a certain version onward
  * — e.g. a component's output structure evolved — and would otherwise flag a
- * non-regression. Express that positively with `minVersion` ("this entry is
+ * non-regression. Express that positively with `minVersion` ("this scenario is
  * only comparable from version X onward"); older versions are skipped. Use
  * `skipVersions` for one-off exceptions (a specific intermediate release to
  * skip). Scenarios with no rule are always compared.

@@ -32,7 +32,7 @@ interface Manifest {
   targets: ManifestTarget[];
 }
 
-export type CrossVersionTarget =
+export type CrossVersionServerPackage =
   | {
       /** Reserved sentinel; the remote document uses the workspace `src`. */
       version: typeof CURRENT_SENTINEL;
@@ -77,14 +77,14 @@ const readManifest = (): Manifest => {
 };
 
 /**
- * Resolve an explicit version of `@mittwald/flow-remote-react-components` for a
+ * Resolve the `@mittwald/flow-remote-react-components` package used by a
  * cross-version remote server. When omitted, the version is read from
  * `FLOW_CROSS_VERSION` for backwards compatibility. An unset version selects
  * the first manifest target.
  */
-export const resolveCrossVersionTarget = (
+export const resolveCrossVersionServerPackage = (
   version: string | undefined = process.env[CROSS_VERSION_ENV],
-): CrossVersionTarget => {
+): CrossVersionServerPackage => {
   const requested = version;
 
   if (requested === CURRENT_SENTINEL) {

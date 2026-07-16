@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { resolveCrossVersionTargets } from "./resolveCrossVersionTargets";
+import { selectCrossVersionTargetVersions } from "./selectTargetVersions";
 
 // A stable released history spanning two minor lines.
 const released = ["0.1.0", "0.1.1", "0.1.2", "0.2.0", "0.2.1", "0.2.2"];
 
-describe("resolveCrossVersionTargets — semver categories", () => {
-  it("resolves previous, firstOfLine and latestOfPreviousLine for a released version", () => {
-    const result = resolveCrossVersionTargets("0.2.2", released);
+describe("selectCrossVersionTargetVersions — semver categories", () => {
+  it("selects previous, firstOfLine and latestOfPreviousLine for a released version", () => {
+    const result = selectCrossVersionTargetVersions("0.2.2", released);
     const byCategory = Object.fromEntries(
       result.map((r) => [r.category, r.version]),
     );
@@ -16,7 +16,7 @@ describe("resolveCrossVersionTargets — semver categories", () => {
   });
 
   it("ignores versions at or above the current version", () => {
-    const result = resolveCrossVersionTargets("0.2.0", released);
+    const result = selectCrossVersionTargetVersions("0.2.0", released);
     for (const target of result) {
       expect(target.version.startsWith("0.2.")).not.toBe(true);
     }
@@ -27,7 +27,7 @@ describe("resolveCrossVersionTargets — semver categories", () => {
   });
 
   it("drops categories that cannot resolve (no previous line) without throwing", () => {
-    const result = resolveCrossVersionTargets("0.1.2", released);
+    const result = selectCrossVersionTargetVersions("0.1.2", released);
     expect(
       result.find((r) => r.category === "latestOfPreviousLine"),
     ).toBeUndefined();
@@ -37,15 +37,17 @@ describe("resolveCrossVersionTargets — semver categories", () => {
   });
 
   it("de-duplicates versions shared by multiple categories", () => {
-    const result = resolveCrossVersionTargets("0.2.1", released);
+    const result = selectCrossVersionTargetVersions("0.2.1", released);
     const versions = result.map((r) => r.version);
     expect(new Set(versions).size).toBe(versions.length);
   });
 });
 
-describe("resolveCrossVersionTargets — exclusions", () => {
+describe("selectCrossVersionTargetVersions — exclusions", () => {
   it("skips an excluded version and steps to the next valid candidate", () => {
-    const result = resolveCrossVersionTargets("0.2.2", released, ["0.2.1"]);
+    const result = selectCrossVersionTargetVersions("0.2.2", released, [
+      "0.2.1",
+    ]);
     // previous should now skip the broken 0.2.1 and pick 0.2.0
     expect(result.find((r) => r.category === "previous")?.version).toBe(
       "0.2.0",
@@ -54,12 +56,12 @@ describe("resolveCrossVersionTargets — exclusions", () => {
   });
 });
 
-describe("resolveCrossVersionTargets — alpha-offset fallback", () => {
+describe("selectCrossVersionTargetVersions — alpha-offset fallback", () => {
   const alpha = Array.from({ length: 250 }, (_, i) => `0.2.0-alpha.${i + 1}`);
 
   it("falls back to computed offsets when categories collapse on a prerelease line", () => {
     const current = "0.2.0-alpha.250";
-    const result = resolveCrossVersionTargets(current, alpha, [], {
+    const result = selectCrossVersionTargetVersions(current, alpha, [], {
       offsets: [10, 100, 200],
     });
     const versions = result.map((r) => r.version);
@@ -71,7 +73,7 @@ describe("resolveCrossVersionTargets — alpha-offset fallback", () => {
   it("drops offsets that fall before the earliest published version", () => {
     const current = "0.2.0-alpha.250";
     const short = alpha.slice(-30); // only 30 published
-    const result = resolveCrossVersionTargets(current, short, [], {
+    const result = selectCrossVersionTargetVersions(current, short, [], {
       offsets: [10, 100, 200],
     });
     const versions = result.map((r) => r.version);
@@ -81,7 +83,7 @@ describe("resolveCrossVersionTargets — alpha-offset fallback", () => {
 
   it("honours exclusions in offset mode by stepping to the next older version", () => {
     const current = "0.2.0-alpha.250";
-    const result = resolveCrossVersionTargets(
+    const result = selectCrossVersionTargetVersions(
       current,
       alpha,
       ["0.2.0-alpha.240"],

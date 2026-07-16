@@ -27,7 +27,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vite";
 import defaultConfig from "../../vite.config";
-import { resolveCrossVersionTarget } from "./resolveCrossVersionTarget";
+import { resolveCrossVersionServerPackage } from "./resolveServerPackage";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(here, "../..");
@@ -94,7 +94,7 @@ const aliasPackageExports = (
  *   matching version numbers).
  */
 export const createCrossVersionViteConfig = (version: string) => {
-  const target = resolveCrossVersionTarget(version);
+  const target = resolveCrossVersionServerPackage(version);
   const versionAliases: { find: string; replacement: string }[] =
     target.isCurrent
       ? [

@@ -146,12 +146,11 @@ published `@mittwald/flow-remote-react-components` **and** its matching
 `@mittwald/flow-remote-core` bundle — runs in a **real iframe document/realm**,
 connected to the **current host** over the versioned `@quilted/threads`
 connection (the same path production uses). The corpus is the **existing e2e
-remote entries** (`e2e/tests/*.browser.test.remote.tsx`) — reused, not a
-separate hand-maintained set — and for each one the **host-rendered HTML** is
-compared **old-vs-current**: the same entry is rendered once through the current
-version (the existing e2e server) as an **ephemeral reference** and once through
-the old version (the cross-version server), and the normalized HTML must match.
-Nothing is committed as a baseline.
+visual scenarios** (`src/tests/visual/*.scenarios.tsx`) — reused, not a separate
+hand-maintained set — and for each one the **host-rendered HTML** is compared
+**old-vs-current**: the same scenario is rendered once through the current
+version as an **ephemeral reference** and once through the old version, and the
+normalized HTML must match. Nothing is committed as a baseline.
 
 This is an **HTML/DOM-output comparison**, not a screenshot/pixel comparison
 (screenshots may be added later). It proves props/attributes serialize and the
@@ -179,25 +178,25 @@ watch mode against the suite.
 
 ### Missing components and legitimate divergences
 
-- **Component missing in an old version:** if an entry uses a component that a
+- **Component missing in an old version:** if a scenario uses a component that a
   given old version predates, that old render can't resolve it. The test
-  **skips** that entry for that version (logged) rather than failing — an
+  **skips** that scenario for that version (logged) rather than failing — an
   extension on that old version could not have used a component that didn't
   exist yet.
 - **A component's output legitimately evolved:** when the current version
   renders a different (but not broken) structure than an old one, the strict
   HTML comparison would flag it. Record it positively in
-  `e2e/cross-version/entryVersionSupport.ts` as "this entry is comparable from
-  version X onward" (`minVersion`), plus `skipVersions` for one-off exceptions.
-  Older versions are then skipped while newer in-range versions still get real
-  coverage. A real diff you can't explain is a backwards-compatibility finding —
-  investigate it; **never** weaken the normalizer (`normalizeHtml.ts`) to hide
-  it.
+  `e2e/cross-version/scenarioVersionSupport.ts` as "this scenario is comparable
+  from version X onward" (`minVersion`), plus `skipVersions` for one-off
+  exceptions. Older versions are then skipped while newer in-range versions
+  still get real coverage. A real diff you can't explain is a
+  backwards-compatibility finding — investigate it; **never** weaken the
+  normalizer (`normalizeHtml.ts`) to hide it.
 
 ### Which versions are tested
 
 `dev/cross-version/prepare.ts` resolves the target versions from the published
-version list (`resolveCrossVersionTargets.ts`):
+version list (`selectTargetVersions.ts`):
 
 - **semver categories** when a stable line exists: `previous` (nearest below
   current), `firstOfLine` (earliest on the current line),

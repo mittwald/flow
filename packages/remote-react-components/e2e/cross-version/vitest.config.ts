@@ -16,10 +16,10 @@ import { mergeConfig } from "vitest/config";
 import defaultConfig from "../../vite.config";
 import {
   CROSS_VERSION_ENV,
-  resolveCrossVersionTarget,
-} from "./resolveCrossVersionTarget";
+  resolveCrossVersionServerPackage,
+} from "./resolveServerPackage";
 
-const candidateVersion = resolveCrossVersionTarget(
+const candidateVersion = resolveCrossVersionServerPackage(
   process.env[CROSS_VERSION_ENV],
 ).version;
 
@@ -32,7 +32,7 @@ export default mergeConfig(defaultConfig, {
     dedupe: ["react", "react-dom"],
   },
   // Expose the old version under test to the host bundle so it can apply
-  // version-scoped scenario rules (see entryVersionSupport.ts).
+  // version-scoped scenario rules (see scenarioVersionSupport.ts).
   define: {
     __FLOW_CROSS_VERSION__: JSON.stringify(candidateVersion),
   },

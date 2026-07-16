@@ -2,10 +2,10 @@ import { createCrossVersionServer } from "./createServer";
 import { currentServerPort, oldServerPort } from "./crossVersionServerPort";
 import {
   CROSS_VERSION_ENV,
-  resolveCrossVersionTarget,
-} from "./resolveCrossVersionTarget";
+  resolveCrossVersionServerPackage,
+} from "./resolveServerPackage";
 
-const candidateVersion = resolveCrossVersionTarget(
+const candidateVersion = resolveCrossVersionServerPackage(
   process.env[CROSS_VERSION_ENV],
 ).version;
 const referenceServer = await createCrossVersionServer(
