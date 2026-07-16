@@ -17,12 +17,8 @@ export interface ActionGroupProps
   /** The spacing between the buttons inside the action group. @default "s" */
   spacing?: "s" | "m";
   /**
-   * When set, the buttons are not automatically arranged; they stay in the
-   * order they appear in the source, laid out from left to right with spacing
-   * between them. Alignment of the group is then up to the surrounding
-   * context.
-   *
-   * @default false
+   * When set, the buttons are not sorted automatically but stay in source
+   * order. @default false
    */
   preserveOrder?: boolean;
 }
