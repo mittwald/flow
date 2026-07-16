@@ -31,19 +31,15 @@
 
 ---
 
-## Task R0b: Prepare script applies the threads patch
+## Task R0b: Exclude the broken version window (DONE — no threads patch)
 
-**Files:** Modify `dev/cross-version/prepare.ts`.
+**Superseded diagnosis:** An earlier hypothesis blamed a missing pnpm patch (`npm install --prefix` skips `patchedDependencies`) for the spike's `DataCloneError`. That was wrong. The real cause: **alpha.889–895 are genuinely broken published releases.** PR #2596 (first shipped in **alpha.889**) made `FlowThreadSerialization` async, but `@quilted/threads` was still externalized (not bundled) until PR #2620 (**alpha.896**, `vite.build.config.ts` `externalizeDeps({ except: ["@quilted/threads"] })`). So alpha.889–895 ship async serializers against an externalized, unpatched threads and `DataCloneError` on connect for any consumer without a pnpm-patched threads. Versions ≤ alpha.888 predate async serializers (sync, safe); versions ≥ alpha.896 bundle the patched threads (safe).
 
-**Context:** `npm install --prefix` does not apply pnpm `patchedDependencies`, so each old install's nested `@quilted/threads@3.3.1` is missing the repo's load-bearing `patches/@quilted__threads@3.3.1.patch` (sync→async serialize/deserialize). Without it the remote↔host handshake throws `DataCloneError`. The patch requirement is identical for old and current versions (confirmed), so this is a harness-install gap.
+**Resolution (done, commit `a17adeae4`):** No threads patch and no threads alias. The broken window is added to `cross-version.exclude.json` (`889, 891, 892, 893, 894, 895`; 890 was never published). The resolver's exclude-stepping moves offset targets off the broken window automatically. Re-running prepare yields safe targets (e.g. `offset-10=883, offset-100=791, offset-200=686`, all pre-#2596).
 
-**Interfaces:** After a successful install of a version, apply the patch to every `@quilted/threads@3.3.1` directory under that version's install tree.
-
-- [ ] **Step 1:** In `installVersion` (after successful install, before returning `true`), locate the repo patch at `<repoRoot>/patches/@quilted__threads@3.3.1.patch` and apply it to each `.../node_modules/@quilted/threads` (and nested copies) inside `node_modules/.cross-version/<version>/`. Use `git apply --directory=<relPath> <patch>` or `patch -p1 -d <dir>`, guarding for already-applied (`git apply --check` first) and for versions whose threads differ from 3.3.1 (skip with a log). Wrap in try/catch — a patch failure should downgrade to a loud warning + skip that version (reuse the resilient-skip pattern), not crash.
-- [ ] **Step 2:** Re-run prepare live; confirm it installs + patches the 3 targets, manifest still valid.
-   Run: `corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version:prepare`
-   Expected: 3 targets installed and patched, no `DataCloneError` when later used.
-- [ ] **Step 3:** Add a resolver/prepare-adjacent note; commit `fix(remote-react-components): apply @quilted/threads patch to cross-version installs`.
+- [x] Broken window excluded in `cross-version.exclude.json` with documented reasons.
+- [x] `prepare` re-run → manifest holds only safe (non-broken, installable) versions.
+- [ ] Confirm via the iframe spike that a clean pre-#2596 version (e.g. 883) connects and passes props with **no** threads patch (in progress).
 
 ---
 
