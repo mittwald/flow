@@ -8,6 +8,4 @@
 // `test.skipIf(crossVersion({ below: "<v>" }))` (see @/tests/lib/environments — the
 // cross-version harness injects the real predicate). There is no exclude list
 // here; every file is included on every version and the per-test skip decides.
-export const REUSED_VISUAL_TESTS: string[] = [
-  "src/tests/visual/*.browser.test.tsx",
-];
+export const REUSED_VISUAL_TESTS = ["src/tests/visual/*.browser.test.tsx"];

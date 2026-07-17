@@ -16,10 +16,10 @@
  * like the iframe harness's `normalizeHtml`.
  */
 export const structuralHtml = (html: string): string => {
-  let out = html;
+  let normalizedHtml = html;
 
   // Drop RemoteRenderer's hidden connection <iframe> (no structural meaning).
-  out = out.replace(
+  normalizedHtml = normalizedHtml.replace(
     /<iframe\b[^>]*\bstyle="[^"]*visibility:\s*hidden[^"]*"[^>]*>[\s\S]*?<\/iframe>/gi,
     "",
   );
@@ -33,21 +33,24 @@ export const structuralHtml = (html: string): string => {
   // from the inside out (a single non-greedy pass can't match nesting safely).
   let previous: string;
   do {
-    previous = out;
-    out = out
+    previous = normalizedHtml;
+    normalizedHtml = normalizedHtml
       // <flr-x ...>…no nested flr-*…</flr-x>
       .replace(/<flr-[\w-]+\b[^>]*>(?:(?!<flr-)[\s\S])*?<\/flr-[\w-]+>/gi, "")
       // <flr-x ... /> (self-closing)
       .replace(/<flr-[\w-]+\b[^>]*\/>/gi, "");
-  } while (out !== previous);
+  } while (normalizedHtml !== previous);
 
   // Strip all attributes from every opening / self-closing tag:
   // `<tag a="1" b>` -> `<tag>`, `<path d="…" />` -> `<path/>`. Closing tags
   // (`</tag>`) start with `/` after `<` and are left untouched.
-  out = out.replace(/<([a-zA-Z][\w-]*)\b[^>]*?(\/?)>/g, "<$1$2>");
+  normalizedHtml = normalizedHtml.replace(
+    /<([a-zA-Z][\w-]*)\b[^>]*?(\/?)>/g,
+    "<$1$2>",
+  );
 
   // Collapse insignificant whitespace between tags.
-  out = out.replace(/>\s+</g, "><").trim();
+  normalizedHtml = normalizedHtml.replace(/>\s+</g, "><").trim();
 
-  return out;
+  return normalizedHtml;
 };

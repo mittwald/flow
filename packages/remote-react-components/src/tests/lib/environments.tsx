@@ -10,14 +10,14 @@ import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
 import { expect } from "vitest";
 
-const RemoteTestUi: FC<PropsWithChildren> = (props) => {
+const RemoteTestUi: FC<PropsWithChildren> = ({ children }) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
 
   return (
     <RootContainer>
       <RemoteRenderer __remoteReceiver={receiver} />
       <RemoteRoot __remoteReceiver={receiver}>
-        <NotificationProvider>{props.children}</NotificationProvider>
+        <NotificationProvider>{children}</NotificationProvider>
       </RemoteRoot>
     </RootContainer>
   );
@@ -50,7 +50,7 @@ const testScreenshot = async (
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
-interface TestEnvironement {
+interface TestEnvironment {
   toString: () => string;
   components: typeof Components | typeof RemoteComponents;
   render: typeof render;
@@ -61,7 +61,7 @@ interface TestEnvironement {
   ) => Promise<void>;
 }
 
-const remoteTestEnvironement: TestEnvironement = {
+const remoteTestEnvironment: TestEnvironment = {
   toString: () => "Remote",
   components: RemoteComponents,
   render: renderRemote,
@@ -69,7 +69,7 @@ const remoteTestEnvironement: TestEnvironement = {
   testScreenshot,
 };
 
-const localTestEnvironement: TestEnvironement = {
+const localTestEnvironment: TestEnvironment = {
   toString: () => "Local",
   components: Components,
   render: renderLocal,
@@ -78,8 +78,8 @@ const localTestEnvironement: TestEnvironement = {
 };
 
 export const testEnvironments = [
-  localTestEnvironement,
-  remoteTestEnvironement,
+  localTestEnvironment,
+  remoteTestEnvironment,
 ] as const;
 
 export interface CrossVersionSkip {

@@ -18,20 +18,20 @@ import { expect } from "vitest";
 
 declare const __CROSS_VERSION_REF_DIR__: string;
 
-const slug = (value: string): string =>
+const slugify = (value: string): string =>
   value
     .replace(/[^a-z0-9]+/gi, "-")
     .replace(/^-|-$/g, "")
     .toLowerCase();
 
-const refPathFor = (testName: string, description: string): string =>
-  `${__CROSS_VERSION_REF_DIR__}/${slug(`${testName}-${description}`)}.html`;
+const referencePathFor = (testName: string, description: string): string =>
+  `${__CROSS_VERSION_REF_DIR__}/${slugify(`${testName}-${description}`)}.html`;
 
 // One tag per line so a structural-mismatch diff is line-oriented and readable.
-const prettyTags = (html: string): string => html.replace(/></g, ">\n<");
+const formatTagsForDiff = (html: string): string => html.replace(/></g, ">\n<");
 
 const captureStructure = (): string =>
-  prettyTags(structuralHtml(rootContainerLocator.element().innerHTML));
+  formatTagsForDiff(structuralHtml(rootContainerLocator.element().innerHTML));
 
 /**
  * Read the structural HTML once it stops changing between samples, so an
@@ -90,7 +90,9 @@ const testScreenshot = async (description: string): Promise<void> => {
   // the ephemeral ref, old-version passes compare against it. Wait for the
   // structure to settle first so async rendering can't cause a spurious diff.
   const html = await readStableStructure();
-  await expect(html).toMatchFileSnapshot(refPathFor(testName, description));
+  await expect(html).toMatchFileSnapshot(
+    referencePathFor(testName, description),
+  );
 };
 
 export const crossVersionEnvironment = {
