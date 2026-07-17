@@ -1,7 +1,8 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+// CodeEditor is undefined in the alpha.686 bundle; available from alpha.791.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   "CodeEditor (%s)",
   async ({ testScreenshot, render, components: { CodeEditor, Flex } }) => {
     await render(

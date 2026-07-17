@@ -15,10 +15,8 @@ import { structuralHtml } from "./structuralHtml";
 import { cleanup, render } from "vitest-browser-react";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { expect } from "vitest";
-import { isTestComparable } from "./testVersionSupport";
 
 declare const __CROSS_VERSION_REF_DIR__: string;
-declare const __FLOW_CROSS_VERSION__: string;
 
 const slug = (value: string): string =>
   value
@@ -81,19 +79,12 @@ const setNeutralPointerPosition = async () => {
 };
 
 // The current pass writes ephemeral HTML refs; old-version passes compare.
+// Tests whose output doesn't hold on a given old version are skipped whole
+// (test.skipIf(crossVersion({ below: ... })) in the reused test), so anything that
+// reaches here is expected to match.
 const testScreenshot = async (description: string): Promise<void> => {
   await setNeutralPointerPosition();
   const testName = expect.getState().currentTestName ?? description;
-
-  if (
-    __FLOW_CROSS_VERSION__ !== "current" &&
-    !isTestComparable(testName, __FLOW_CROSS_VERSION__)
-  ) {
-    console.warn(
-      `[cross-version-inprocess] SKIP ${testName}: not comparable with ${__FLOW_CROSS_VERSION__}`,
-    );
-    return;
-  }
 
   // Compare element tree only (all attributes stripped); the current pass writes
   // the ephemeral ref, old-version passes compare against it. Wait for the

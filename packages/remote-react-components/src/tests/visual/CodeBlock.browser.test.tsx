@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { userEvent } from "vitest/browser";
 
@@ -37,7 +37,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// Element tree diverges at alpha.791 and earlier; comparable from alpha.883.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "CodeBlock truncated (%s)",
   async ({ testScreenshot, render, components: { CodeBlock } }) => {
     await render(

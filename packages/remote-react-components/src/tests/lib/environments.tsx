@@ -81,3 +81,20 @@ export const testEnvironments = [
   localTestEnvironement,
   remoteTestEnvironement,
 ] as const;
+
+export interface CrossVersionSkip {
+  /** Skip when the tested version is older than this (semver). */
+  below?: string;
+  /** Skip these exact versions (for non-monotonic breakage). */
+  exclude?: string[];
+}
+
+/**
+ * Skip predicate for the cross-version harness (see
+ * e2e/cross-version-inprocess). In the normal visual suite there is no old
+ * version, so this is always `false` and every test runs. The cross-version
+ * harness replaces this module with its own implementation that skips tests
+ * whose component/output didn't yet exist in the tested version.
+ */
+export const crossVersion = (ignoredOptions: CrossVersionSkip): boolean =>
+  false;

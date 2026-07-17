@@ -172,19 +172,20 @@ depth**.
 - **Where:** `e2e/cross-version-inprocess/`, corpus the **whole**
   `src/tests/visual/*.browser.test.tsx` suite, reused UNMODIFIED by injecting a
   `CrossVersion` environment in place of local/remote (`REUSED_VISUAL_TESTS` is
-  the glob; `reusedVisualTests.ts` subtracts what can't run — see below).
+  the glob). It runs with the same browser config as the screenshot tests
+  (1280×720 desktop viewport, en-US locale, reduced motion), so responsive
+  layouts and interactions (clicking a trigger, keyboard navigation) behave the
+  same as in the normal suite.
 - **Connection:** old remote and current host run in **one realm** (shared
   `RemoteReceiver`) — cheaper, but **lower connection fidelity** than the iframe
   harness, so attribute-level serialization can differ from the real protocol.
-  It also can't drive some **click-to-open interactions**: for a control like
-  Select, a _programmatic_ click doesn't fire the open in the one-realm setup
-  (the press→open round-trip to the remote side doesn't trigger —
-  keyboard-driven overlays like ComboBox and manual clicks do open, so overlays
-  render fine in general). The popover never opens, so the test's
-  `getByTestId("option")` finds nothing and times out — those tests are
-  file-excluded.
-- **Comparison:** **structure only** (`structuralHtml` strips ALL attributes) —
-  the element tree (tag names + nesting + text) must match.
+  That's exactly why the comparison is structure-only.
+- **Comparison:** **structure only** (`structuralHtml`) — it drops the hidden
+  remote-DOM (`<flr-*>`) subtree and strips ALL attributes, so only the **host
+  output's** element tree (tag names + nesting + text) must match. The `<flr-*>`
+  tree is the remote side's own element graph (an implementation detail that
+  changes freely between versions); what we assert is the host DOM the renderer
+  builds from it.
 - **COVERS:** broad backwards compatibility of the **DOM shape** — does the
   current host still build the same element tree from an old remote version's
   output, across the whole reused corpus?
@@ -192,8 +193,8 @@ depth**.
   serialization form (attribute vs property), icon geometry, ARIA/id wiring. All
   of that is intentionally invisible here and is the iframe harness's job. A
   genuine **structural** divergence (an element added/removed/reordered across
-  versions) is the only thing that fails; scope a legitimate one with
-  `e2e/cross-version-inprocess/testVersionSupport.ts`.
+  versions) is the only thing that fails; scope a legitimate one per-test with
+  `test.skipIf(crossVersion({ below: "<v>" }))` (see below).
 
 In short: **iframe = does it render _correctly_ (attributes) for a few
 scenarios; in-process = does it render _at all in the same shape_ for many.**
@@ -238,18 +239,28 @@ its ephemeral current refs, then loops over the same installed versions;
   normalizer (`normalizeHtml.ts`) to hide it.
 - The two points above are the **iframe harness's** mechanisms
   (`scenarioVersionSupport.ts`). The **in-process harness** reuses the whole
-  visual suite, so `reusedVisualTests.ts` carries two subtraction lists instead:
-  - `EXCLUDED_VISUAL_TESTS` — whole **files** that can't RUN through a
-    render-only harness (the failure happens before the comparison, so it can't
-    be version-scoped): click-to-open interaction tests whose programmatic open
-    doesn't fire in the one-realm setup, and files that hit a render error
-    because they use a component `undefined` in an old version's bundle.
-  - `VERSION_SCOPED_TESTS` — individual tests whose **element tree** genuinely
-    changed, listed with the `fromVersion` they became comparable from (older
-    versions skip the comparison). Since structure-only already ignores
-    attribute drift, a structural diff here is a real change — confirm the
-    boundary (e.g. by bisect) rather than guessing, and **never** weaken
-    `structuralHtml.ts` to hide an unexplained one.
+  visual suite unmodified, so a version-bound test gates **itself** with a skip
+  predicate the injected environment provides:
+
+  ```tsx
+  import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+
+  // Kbd is undefined in the alpha.686 bundle; available from alpha.791.
+  test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
+    "Kbd (%s)",
+    /* … */
+  );
+  ```
+
+  `crossVersion({ below, exclude })` returns `true` (skip) when the tested
+  version is older than `below`, or is listed in `exclude` (for non-monotonic
+  breakage). In the normal visual suite it is always `false`, so the test runs
+  everywhere. The whole test is skipped — render, interaction, and comparison —
+  which covers both causes uniformly: a **component missing** in the old bundle
+  (would throw on render), and a **legitimately evolved element tree** (a real
+  structural diff). Determine the boundary rather than guessing (bisect the
+  installed versions), keep the one-line reason next to the test, and **never**
+  weaken `structuralHtml.ts` to hide an unexplained diff.
 
 ### Which versions are tested
 

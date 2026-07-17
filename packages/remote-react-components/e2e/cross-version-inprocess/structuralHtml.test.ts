@@ -32,6 +32,21 @@ describe("structuralHtml", () => {
     );
   });
 
+  it("removes the hidden remote-DOM flr-* subtree, keeping host output", () => {
+    const input =
+      "<div><h2><span>Neutral</span></h2></div>" +
+      "<div><flr-flex><flr-accent-box><flr-heading>Neutral</flr-heading>" +
+      "</flr-accent-box></flr-flex></div>";
+    expect(structuralHtml(input)).toBe(
+      "<div><h2><span>Neutral</span></h2></div><div></div>",
+    );
+  });
+
+  it("removes self-closing flr-* elements", () => {
+    const input = "<div><flr-icon/></div>";
+    expect(structuralHtml(input)).toBe("<div></div>");
+  });
+
   it("removes the hidden connection iframe", () => {
     const input =
       "<button>ok</button>" +
