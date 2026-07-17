@@ -81,6 +81,14 @@ jobs:
       - name: Prepare browser tests
         run: pnpm test:browser:prepare --only-shell
 
+      - name: Build workspace packages
+        # The cross-version steps below run the package scripts directly (not via
+        # the nx target), so nx's `^build` never fires. Build the host packages
+        # the harnesses consume from dist — @mittwald/flow-react-components
+        # (incl. the /internal subpath) and @mittwald/flow-remote-react-renderer —
+        # explicitly. `^build` pulls in the full dependency closure; nx caches it.
+        run: pnpm nx run remote-react-components:build
+
       - name: Install old published versions
         # Resolves + npm-installs the target old versions (network) and writes
         # cross-version.manifest.json. Kept a separate step so a publish-gap
@@ -100,6 +108,18 @@ jobs:
         run:
           corepack pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version
+
+      - name: Run in-process cross-version tests
+        id: crossversion_inprocess
+        if:
+          always() && (steps.crossversion.outcome == 'success' ||
+          steps.crossversion.outcome == 'failure')
+        # Reuses the broad visual-test corpus in-process. Like the iframe
+        # harness, it is WebKit-only and deterministic; retrying every version
+        # would obscure the failing version without addressing Firefox flakiness.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version-inprocess
 
       - name: Send alerting message to Slack
         if: failure()
@@ -122,7 +142,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(steps.crossversion.outputs.failures || 'No per-version failure details were produced (see logs).') }}
+                    "text": ${{ toJSON(format('*Iframe harness*{0}{1}', '\n', steps.crossversion.outputs.failures || 'No failures reported.')) }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(format('*In-process harness*{0}{1}', '\n', steps.crossversion_inprocess.outputs.failures || 'No failures reported.')) }}
                   }
                 },
                 {
