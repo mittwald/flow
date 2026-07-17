@@ -29,8 +29,7 @@ test.each(testEnvironments)(
   },
 );
 
-// CheckboxButton dropped its wrapper <div>s in alpha.884 (bisected: fails at
-// 883, passes at 884+), so the element tree only matches from there.
+// Element tree comparable from alpha.884 (CheckboxButton wrapper divs changed).
 test.skipIf(crossVersion({ below: "0.2.0-alpha.884" })).each(testEnvironments)(
   "Checkbox edge cases(%s)",
   async ({

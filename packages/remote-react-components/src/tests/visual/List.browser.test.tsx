@@ -5,8 +5,7 @@ import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
 
-// The whole List family renders a different element tree at alpha.791 and
-// earlier; the current host builds a comparable tree only from alpha.883.
+// List element tree comparable from alpha.883.
 const listComparableFrom = "0.2.0-alpha.883";
 
 test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(

@@ -49,8 +49,7 @@ test.each(testEnvironments)(
   },
 );
 
-// LightBoxGallery is undefined in the alpha.686 bundle and the element tree
-// still diverges through alpha.791; comparable from alpha.883.
+// LightBoxGallery element tree comparable from alpha.883.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "LightBox with Gallery (%s)",
   async ({

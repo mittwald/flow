@@ -36,7 +36,7 @@ test.each(testEnvironments)(
 );
 
 // Full-featured menu (sections, selection modes, icon, badge, Kbd shortcut).
-// Kbd is undefined in the alpha.686 bundle; available from alpha.791.
+// Kbd is available from alpha.791.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   "ContextMenu sections and shortcuts (%s)",
   async ({
