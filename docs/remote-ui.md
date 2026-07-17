@@ -335,6 +335,85 @@ passing visual tests in **both** the `Local` and `Remote` test targets.
 
 ## Versioning & backwards compatibility
 
+A host is deployed once and then runs for a long time next to extensions that
+were built against many different remote releases — the protocol has to tolerate
+that spread, and it does so through two independent version mechanisms.
+
+The first is the connection handshake: a `Version` enum (`vUnknown`, `v1`…`v5`
+in `packages/remote-core/src/connection/types.ts`) that the remote side reports
+when it connects. The host feature-gates behavior with `>=` checks against this
+version and always defaults to the most conservative path when in doubt.
+Critically, there is **no hard mismatch error** — a remote that reports nothing,
+or an old remote build, simply normalizes to `v1` and gets the oldest supported
+behavior rather than a broken connection.
+
+The second mechanism is per-element rather than per-connection: each `flr-*`
+element carries a `data-flr-version` and a `data-flr-initialized` attribute
+(`FlowRemoteElement.versionPropertyName` and
+`FlowRemoteElement.initializationPropertyName` in
+`packages/remote-elements/src/lib/FlowRemoteElement.ts`). From `v3` onward, the
+host renders `null` for an element until it signals `data-flr-initialized`,
+which avoids a visible flash of the component rendering with its bare default
+props before its real remote props have arrived.
+
+Underneath both mechanisms sits the actual backwards-compatibility boundary that
+must never break: the `HostExports` interface
+(`packages/remote-core/src/connection/types.ts`). Its own doc comment spells out
+the rule — never remove, rename, or otherwise change the meaning of an existing
+member, since older remotes may depend on it; when adding a new member, release
+the host before any client that uses it.
+
+Deprecations travel a defined path rather than being an ad hoc `console.warn`:
+`useWarnDeprecation` (deferred to an effect and deduplicated so a warning fires
+once, not on every render) writes to `console.warn` and to a context `onWarning`
+handler; in a remote context, `RemoteRoot` forwards the message across the
+connection via `connection.imports.reportDeprecation?.(message)` — the optional
+chaining is a deliberate guard for hosts that predate the `reportDeprecation`
+export — which surfaces on the host side as `onDeprecation`.
+
 ## Host-side rendering — special cases
 
+A handful of host-rendering behaviors don't fit neatly into the
+render-and-mirror model above and are worth knowing about directly:
+
+- `<script>` elements in the remote tree render to `null` on the host — a
+  deliberate security omission, not an oversight
+  (`packages/remote-react-renderer/src/components.ts`). A set of raw HTML tags,
+  by contrast — `svg`, `path`, `ul`, `li`, and similar — pass straight through
+  as real DOM elements, which is what lets rich-text and Markdown output render
+  correctly. `flr-notification` is a special case handled imperatively: it is
+  pushed into the host's notification controller rather than rendered inline
+  (`packages/remote-react-renderer/src/components.ts`).
+- **Suspense on the host does not unmount.** A suspended remote subtree is
+  transmitted with `display: none !important` rather than being removed, so it
+  stays mounted (and any state inside it survives) while hidden.
+- **Performance characteristics worth knowing:** navigation changes are detected
+  by polling `location.href` every 50 ms, because no appropriate browser API
+  exists for observing it otherwise
+  (`packages/remote-react-components/src/hooks/useWatchPathname.ts`); and
+  serialization shallow-clones every non-base object prop (`{ ...val }` in
+  `FlowThreadSerialization`) on every pass across the boundary, so passing deep
+  or large object props is more expensive over the wire than it would be
+  locally.
+
 ## Where to go deeper
+
+This document covers the concepts; the following are where the procedural and
+package-level detail lives:
+
+- [`packages/remote-core/AGENTS.md`](../packages/remote-core/AGENTS.md) —
+  connection and serialization internals.
+- [`packages/remote-elements/AGENTS.md`](../packages/remote-elements/AGENTS.md)
+  — the custom `flr-*` elements.
+- [`packages/remote-react-components/AGENTS.md`](../packages/remote-react-components/AGENTS.md)
+  — the remote React API and Local/Remote testing.
+- [`packages/remote-react-renderer/AGENTS.md`](../packages/remote-react-renderer/AGENTS.md)
+  — the host-side renderer.
+- [`packages/components/AGENTS.md`](../packages/components/AGENTS.md) —
+  component patterns: views, `PropsContext`, and generation details.
+- [`CONTRIBUTE.md`](../CONTRIBUTE.md), section
+  ["Adding or changing a component"](../CONTRIBUTE.md#adding-or-changing-a-component)
+  → step 6, "Generate the remote artifacts" — the concrete procedure for
+  regenerating and committing.
+- [`apps/remote-dom-demo/AGENTS.md`](../apps/remote-dom-demo/AGENTS.md) — the
+  demo app every remote-capable component needs a page in.
