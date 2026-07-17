@@ -6,6 +6,7 @@ import styles from "./Option.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import { IconCheck } from "@/components/Icon/components/icons";
 
 export interface OptionProps
   extends
@@ -37,7 +38,10 @@ export const Option = flowComponent("Option", (props) => {
       {...rest}
       textValue={textValue}
     >
-      {hasChildren ? children : textValue}
+      <span className={styles.content}>
+        {hasChildren ? children : textValue}
+      </span>
+      <IconCheck aria-hidden className={styles.checkMark} />
     </Aria.ListBoxItem>
   );
 });

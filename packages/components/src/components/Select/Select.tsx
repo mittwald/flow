@@ -18,12 +18,17 @@ import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExi
 export interface SelectProps
   extends
     PropsWithChildren<
-      Omit<Aria.SelectProps<string>, "children" | "className" | "ref">
+      Omit<
+        Aria.SelectProps<string, "single" | "multiple">,
+        "children" | "className" | "ref"
+      >
     >,
     FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
-  onChange?: (value: Key | null) => void;
+  onChange?: (value: Key | Key[] | null) => void;
+  /** @deprecated */
+  onSelectionChange?: (value: Key | Key[] | null) => void;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
 }
@@ -90,7 +95,11 @@ export const Select = flowComponent("Select", (props) => {
             className={styles.toggle}
             ref={ref}
           >
-            <Aria.SelectValue />
+            <Aria.SelectValue>
+              {({ selectedText, isPlaceholder }) =>
+                isPlaceholder || !selectedText ? undefined : selectedText
+              }
+            </Aria.SelectValue>
             <IconChevronDown />
           </Aria.Button>
           {children}

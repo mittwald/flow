@@ -13,6 +13,7 @@ import {
 import { dummyText } from "@/lib/dev/dummyText";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
@@ -21,11 +22,20 @@ const meta: Meta<typeof Select> = {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
+    selectionMode: "single",
+  },
+  argTypes: {
+    selectionMode: {
+      control: "inline-radio",
+      options: ["single", "multiple"],
+    },
   },
   render: (props) => (
     <Select {...props}>
       <Label>App</Label>
-      <Option>WordPress</Option>
+      <Option textValue="WordPress">
+        WordPress <Badge>Latest</Badge>
+      </Option>
       <Option>TYPO3</Option>
       <Option>Contao</Option>
       <Option>Drupal</Option>
@@ -57,7 +67,7 @@ export const WithFieldDescription: Story = {
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <Select {...props} defaultSelectedKey="WordPress">
+    <Select {...props} defaultValue="WordPress">
       <Label>App</Label>
       <Option value="WordPress">WordPress</Option>
       <Option value="TYPO3">TYPO3</Option>
