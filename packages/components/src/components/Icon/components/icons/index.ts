@@ -98,6 +98,7 @@ export { IconMittwald } from "./IconMittwald";
 export { IconMobile } from "./IconMobile";
 export { IconMonitoring } from "./IconMonitoring";
 export { IconMove } from "./IconMove";
+export { IconNewsletter } from "./IconNewsletter";
 export { IconNumber } from "./IconNumber";
 export { IconOrder } from "./IconOrder";
 export { IconPassword } from "./IconPassword";

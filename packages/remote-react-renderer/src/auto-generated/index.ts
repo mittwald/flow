@@ -93,7 +93,7 @@ import { Notification as Notification } from "@mittwald/flow-react-components";
 import { NumberField as NumberField } from "@mittwald/flow-react-components";
 import { Option as Option } from "@mittwald/flow-react-components";
 import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components";
-import { PasswordCreationField as PasswordCreationField } from "@mittwald/flow-react-components";
+import { PasswordCreationField as PasswordCreationField } from "@mittwald/flow-react-components/password-tools";
 import { PopoverContent as PopoverContent } from "@mittwald/flow-react-components";
 import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";

@@ -102,6 +102,92 @@ return {
 
 ---
 
+# Infinite Scroll
+
+Standardmäßig wird die nächste Seite über einen **"Mehr anzeigen"**-Button
+nachgeladen. Für sehr lange Listen, in denen ohne konkretes Suchziel gestöbert
+wird, kann stattdessen **Infinite Scroll** aktiviert werden: Die nächste Seite
+wird automatisch geladen, sobald das Ende der Liste in den sichtbaren Bereich
+scrollt.
+
+```tsx
+<List.List infiniteScroll batchSize={20} aria-label="Domains">
+  {/* ... */}
+</List.List>
+```
+
+- Infinite Scroll ist **opt-in** und sollte nicht der Default für alle Listen
+  sein. Für kurze oder gezielt durchsuchte Listen ist der "Mehr anzeigen"-Button
+  in der Regel die bessere Wahl.
+- Der Mechanismus funktioniert unabhängig davon, ob die Daten statisch,
+  asynchron oder über Hooks geladen werden, und respektiert `manualPagination`.
+- Während des Nachladens wird ein Ladeindikator am Ende der Liste angezeigt.
+
+---
+
+# Lade- und Leeransichten
+
+## Loading View
+
+Während die Daten initial geladen werden, zeigt die List eine Loading View aus
+Skeleton-Platzhaltern an. Über `loadingView` an einem `<List.Item />` – oder an
+einem `<TableCell />` in der Tabellenansicht – kann diese Ansicht angepasst
+werden:
+
+```tsx
+<List.Item
+  loadingView={
+    <List.ItemView>
+      <Avatar>
+        <Skeleton />
+      </Avatar>
+      <Heading>
+        <SkeletonText width="12em" />
+      </Heading>
+    </List.ItemView>
+  }
+>
+  {(item) => /* ... */}
+</List.Item>
+```
+
+Wird kein `loadingView` gesetzt, verwendet die List ein generisches Skeleton.
+
+## Empty View
+
+- `emptyView`: Wird angezeigt, wenn die Liste keine Einträge enthält.
+- `emptySearchResultView`: Wird angezeigt, wenn eine Suche oder ein Filter kein
+  Ergebnis liefert.
+
+Ist das jeweilige Property nicht gesetzt, zeigt die List eine passende,
+vordefinierte Ansicht an.
+
+## Initiale Suspense-Boundary
+
+Beim initialen Laden umschließt die List das Laden der Daten standardmäßig mit
+einer eigenen [Suspense](https://react.dev/reference/react/Suspense)-Boundary
+und zeigt währenddessen ihre Loading View an. Über
+`disableInitialSuspenseBoundary` an der Datenquelle (`<List.StaticData />`,
+`<List.LoaderAsync />`, `<List.LoaderHooks />`) lässt sich dieses Verhalten
+steuern:
+
+| Wert              | Verhalten                                                                                                                                                                                             |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `false` (Default) | Die List rendert beim initialen Laden ihre eigene Loading View (Skeleton).                                                                                                                            |
+| `true`            | Die List rendert beim initialen Laden keine eigene Suspense-Boundary. Das Suspending wird an die nächste übergeordnete Suspense-Boundary weitergereicht; die List erscheint erst mit geladenen Daten. |
+
+### Wann welchen Wert wählen?
+
+- Belasse den Wert bei **`false`**, wenn die List den Hauptinhalt darstellt oder
+  keine übergeordnete Ladeanzeige existiert. Nutzer erhalten so unmittelbar ein
+  visuelles Feedback direkt in der Liste.
+- Setze den Wert auf **`true`**, wenn die List in eine Seite oder einen Bereich
+  eingebettet ist, die bzw. der bereits einen eigenen Ladezustand anzeigt. So
+  wird die List atomar dargestellt und der Layout-Shift zwischen Loading und
+  Empty View vermieden.
+
+---
+
 # Filter
 
 In der Regel werden Filter für ein Property der List gesetzt:

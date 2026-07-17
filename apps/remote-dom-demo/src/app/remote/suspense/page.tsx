@@ -17,7 +17,7 @@ const getAsyncValue = (sleepMs: number) =>
 
 interface Props {
   sleepMs: number;
-  foo: string;
+  label: string;
 }
 
 const EnhancedDataComponent: FC<Props> = (props) => {
@@ -31,17 +31,17 @@ const EnhancedDataComponent: FC<Props> = (props) => {
 
   return (
     <Section>
-      <Heading>{props.foo}</Heading>
-      <Text>Promise WaitFor: {value} seconds</Text>
-      <Button onPress={() => asyncResource.refresh()}>Reload</Button>
+      <Heading>{props.label}</Heading>
+      <Text>Reached in {value} seconds</Text>
+      <Button onPress={() => asyncResource.refresh()}>Reconnect</Button>
       <Button
         color="secondary"
         variant="soft"
         onPress={() => setButtonPressState((p) => p + 1)}
       >
-        <Text>Button {buttonPressState}x clicked</Text>
+        <Text>Pinged {buttonPressState}x</Text>
       </Button>
-      <TextField />
+      <TextField aria-label="Outpost name" />
     </Section>
   );
 };
@@ -49,14 +49,14 @@ const EnhancedDataComponent: FC<Props> = (props) => {
 export default function Page() {
   return (
     <BrowserOnly>
-      <Suspense fallback={<Heading>[Loading-1]</Heading>}>
-        <EnhancedDataComponent foo="[Content-1]" sleepMs={1500} />
+      <Suspense fallback={<Heading>Contacting Tatooine…</Heading>}>
+        <EnhancedDataComponent label="Tatooine outpost" sleepMs={1500} />
       </Suspense>
-      <Suspense fallback={<Heading>[Loading-2]</Heading>}>
-        <EnhancedDataComponent foo="[Content-2]" sleepMs={1100} />
+      <Suspense fallback={<Heading>Contacting Hoth…</Heading>}>
+        <EnhancedDataComponent label="Hoth outpost" sleepMs={1100} />
       </Suspense>
-      <Suspense fallback={<Heading>[Loading-3]</Heading>}>
-        <EnhancedDataComponent foo="[Content-3]" sleepMs={1700} />
+      <Suspense fallback={<Heading>Contacting Endor…</Heading>}>
+        <EnhancedDataComponent label="Endor outpost" sleepMs={1700} />
       </Suspense>
     </BrowserOnly>
   );

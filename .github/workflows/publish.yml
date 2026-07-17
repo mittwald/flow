@@ -2,6 +2,11 @@ name: Publish packages to NPM
 
 on:
   workflow_dispatch:
+    inputs:
+      only_publish:
+        description: "Publish missing packages only, without a version bump"
+        type: boolean
+        default: false
   pull_request_target:
     types:
       - closed
@@ -56,12 +61,30 @@ jobs:
       - name: Build 🔨
         run: pnpm build
 
-      - name: Version and publish 🚀
+      - name: Version 🏷️
+        if: ${{ !inputs.only_publish }}
         run: |
-          pnpm lerna publish \
+          pnpm lerna version \
             --force-publish \
             --conventional-commits --conventional-prerelease="*" \
             --create-release github \
             --message "chore(release): bump version to %v" \
-            --yes --no-private \
+            --yes \
             --tag-version-prefix ""
+
+      - name: Publish 🚀
+        run: |
+          for attempt in 1 2 3; do
+            echo "::group::Publish attempt ${attempt}/3"
+            if pnpm lerna publish from-package --yes --no-private; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            if [ "${attempt}" -lt 3 ]; then
+              echo "Publish attempt ${attempt} failed, retrying in 30s…"
+              sleep 30
+            fi
+          done
+          echo "::error::All publish attempts failed" >&2
+          exit 1

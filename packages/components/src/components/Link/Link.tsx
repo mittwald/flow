@@ -2,6 +2,7 @@ import type {
   ComponentProps,
   ComponentType,
   CSSProperties,
+  MouseEvent,
   PropsWithChildren,
 } from "react";
 import { useContext } from "react";
@@ -19,6 +20,7 @@ import {
 } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
+import { handleLinkClick, useRouter } from "@react-aria/utils";
 
 export interface LinkProps
   extends
@@ -56,6 +58,7 @@ export const Link = flowComponent("Link", (props) => {
     style,
     whiteSpace,
     size = "m",
+    onClickCapture: onClickCaptureFromProps,
     ...rest
   } = props;
 
@@ -65,6 +68,25 @@ export const Link = flowComponent("Link", (props) => {
     : props.href && linkComponentFromContext
       ? (linkComponentFromContext as typeof Aria.Link)
       : Aria.Link;
+
+  const router = useRouter();
+
+  /**
+   * An interactive child (e.g. a Button) stops click propagation via React
+   * Aria's `usePress`, so the anchor's own `onClick` never runs and navigation
+   * falls back to a full page load. Handling it in the capture phase (top-down,
+   * before the child) keeps navigation client-side. Only needed for React
+   * Aria's `<a>`; custom link components handle navigation themselves.
+   */
+  const handleClickCapture =
+    Link === Aria.Link && props.href
+      ? (event: MouseEvent<HTMLAnchorElement>) => {
+          onClickCaptureFromProps?.(event);
+          if (event.target !== event.currentTarget) {
+            handleLinkClick(event, router, props.href, props.routerOptions);
+          }
+        }
+      : onClickCaptureFromProps;
 
   const rootClassName = unstyled
     ? className
@@ -98,6 +120,7 @@ export const Link = flowComponent("Link", (props) => {
     <Link
       {...unsupportedTypingsLinkProps}
       {...rest}
+      onClickCapture={handleClickCapture}
       className={rootClassName}
       ref={ref}
       style={{ ...style, whiteSpace }}

@@ -14,10 +14,6 @@
     flex-flow: row-reverse wrap;
   }
 
-  .actions {
-    flex-grow: 0;
-  }
-
   .options {
     display: flex;
     gap: var(--list--spacing);

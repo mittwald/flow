@@ -4,9 +4,11 @@ import {
   ListFilter,
   ListItem,
   ListItemView,
+  ListLoaderAsync,
   ListSorting,
   ListStaticData,
 } from "@/components/List";
+import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { type ReactNode } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
@@ -394,6 +396,103 @@ describe("Storage", async () => {
 
     await selectFilterOption(42);
     expect(storeFilterButton).not.toBeInTheDocument();
+  });
+});
+
+describe("Infinite scroll", () => {
+  const manyItems = Array.from({ length: 9 }, (_, i) => i);
+
+  test("Loads the next batch only once the trigger row scrolls into view", async () => {
+    const data = Array.from({ length: 15 }, (_, i) => ({ num: i }));
+
+    await render(
+      <List aria-label="Test" batchSize={10} infiniteScroll>
+        <ListStaticData<Data> data={data} />
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => (
+            <span style={{ display: "block", height: "100vh" }}>
+              Item: {num}
+            </span>
+          )}
+        </ListItem>
+      </List>,
+    );
+
+    // With batchSize 10 the trigger row sits ~2 rows before the end (item 8),
+    // far below the fold, so no further batch is loaded on mount.
+    await expect.element(page.getByText("Item: 0")).toBeInTheDocument();
+    expect(page.getByText("Item: 10").query()).not.toBeInTheDocument();
+
+    await (await page.getByText("Item: 8").element()).scrollIntoView();
+    await expect.element(page.getByText("Item: 10")).toBeInTheDocument();
+
+    expect(
+      page.getByRole("button", { name: "Show more" }).query(),
+    ).not.toBeInTheDocument();
+  });
+
+  test("Shows a loading indicator while the next batch is loading", async () => {
+    let resolveSecondBatch: (() => void) | undefined;
+
+    const loader: AsyncDataLoader<Data> = async (opts) => {
+      const offset = opts?.pagination?.offset ?? 0;
+      // Keep only the first following batch pending so the loading indicator can
+      // be observed; later batches resolve immediately.
+      if (offset === 3) {
+        await new Promise<void>((resolve) => {
+          resolveSecondBatch = resolve;
+        });
+      }
+      return {
+        data: manyItems.slice(offset, offset + 3).map((num) => ({ num })),
+        itemTotalCount: manyItems.length,
+      };
+    };
+
+    await render(
+      <List aria-label="Test" batchSize={3} infiniteScroll>
+        <ListLoaderAsync<Data> manualPagination>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    // First batch is short, so the trigger row is visible and auto-loads the
+    // (pending) second batch.
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+
+    // While the next batch is pending, a generic loading indicator is shown and
+    // the pagination count stays stable instead of turning into a skeleton.
+    await expect
+      .element(page.getByLabelText("Loading more items"))
+      .toBeInTheDocument();
+    expect(page.getByText("Showing 3 of 9")).toBeInTheDocument();
+
+    resolveSecondBatch?.();
+
+    // Once every batch has loaded, the indicator disappears again.
+    await expect.element(page.getByText("Item: 8")).toBeInTheDocument();
+    await expect
+      .element(page.getByLabelText("Loading more items"))
+      .not.toBeInTheDocument();
+  });
+
+  test("Without infiniteScroll only the first batch loads", async () => {
+    await render(
+      <List aria-label="Test" batchSize={3}>
+        <ListStaticData<Data> data={manyItems.map((num) => ({ num }))} />
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => <span>Item: {num}</span>}
+        </ListItem>
+      </List>,
+    );
+
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+    expect(page.getByText("Item: 3").query()).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Show more" }))
+      .toBeInTheDocument();
   });
 });
 

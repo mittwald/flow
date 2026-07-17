@@ -12,6 +12,7 @@ import { ThreadNestedIframe } from "@quilted/threads";
 interface Options {
   root: HTMLDivElement;
   onPathnameChanged?: (pathname: string) => void;
+  onHostError?: (error: string) => void;
   packageVersion?: string;
 }
 
@@ -32,7 +33,7 @@ export const connectRemoteReceiver = (
 export const connectHostRenderRoot = async (
   options: Options,
 ): Promise<RemoteToHostConnection> => {
-  const { root, onPathnameChanged, packageVersion } = options;
+  const { root, onPathnameChanged, onHostError, packageVersion } = options;
 
   const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
     serialization: new FlowThreadSerialization(),
@@ -41,6 +42,9 @@ export const connectHostRenderRoot = async (
         connectRemoteReceiver(root, connection),
       setPathname: async (pathname) => {
         onPathnameChanged?.(pathname);
+      },
+      setHostError: async (error) => {
+        onHostError?.(error);
       },
     },
   });
@@ -51,7 +55,7 @@ export const connectHostRenderRoot = async (
 
   try {
     await connection.imports.setIsReady({
-      version: Version.v4,
+      version: Version.v5,
       packageVersion,
     });
 

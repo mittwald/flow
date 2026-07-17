@@ -57,6 +57,9 @@ export default function Layout(props: PropsWithChildren) {
                       Ext Bridge
                     </NavigationItem>
                     <NavigationItem page="error">Error</NavigationItem>
+                    <NavigationItem page="no-component">
+                      No component
+                    </NavigationItem>
                     <NavigationItem page="navigation">
                       Navigation
                     </NavigationItem>
