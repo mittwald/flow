@@ -1,6 +1,9 @@
 import { playwright } from "@vitest/browser-playwright";
 import { mergeConfig } from "vitest/config";
-import { REUSED_VISUAL_TESTS } from "./reusedVisualTests";
+import {
+  EXCLUDED_VISUAL_TESTS,
+  REUSED_VISUAL_TESTS,
+} from "./reusedVisualTests";
 import viteConfig from "./vite.config";
 
 // Reuses unmodified visual tests by replacing their environments import.
@@ -8,8 +11,14 @@ export default mergeConfig(viteConfig, {
   cacheDir: "e2e/cross-version-inprocess/.vitest/cache/test-browser",
   test: {
     globals: true,
-    setupFiles: ["e2e/cross-version-inprocess/setup.ts"],
+    // setup.ts (first-wins customElements patch) first, then the normal browser
+    // setup so reused tests get the same helpers (page.getByLocator, all.css).
+    setupFiles: [
+      "e2e/cross-version-inprocess/setup.ts",
+      "dev/vitest/setupBrowser.ts",
+    ],
     include: REUSED_VISUAL_TESTS,
+    exclude: EXCLUDED_VISUAL_TESTS,
     browser: {
       enabled: true,
       headless: true,

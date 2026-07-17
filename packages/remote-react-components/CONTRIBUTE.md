@@ -169,12 +169,16 @@ depth**.
 
 #### in-process harness — broad, structure-only
 
-- **Where:** `e2e/cross-version-inprocess/`, corpus the reused, UNMODIFIED
-  `src/tests/visual/*.browser.test.tsx` files listed in `REUSED_VISUAL_TESTS` (a
-  `CrossVersion` environment is injected in place of local/remote).
+- **Where:** `e2e/cross-version-inprocess/`, corpus the **whole**
+  `src/tests/visual/*.browser.test.tsx` suite, reused UNMODIFIED by injecting a
+  `CrossVersion` environment in place of local/remote (`REUSED_VISUAL_TESTS` is
+  the glob; `reusedVisualTests.ts` subtracts what can't run — see below).
 - **Connection:** old remote and current host run in **one realm** (shared
   `RemoteReceiver`) — cheaper, but **lower connection fidelity** than the iframe
   harness, so attribute-level serialization can differ from the real protocol.
+  It also can't drive stateful **overlay interactions**: react-aria's overlay
+  context is split by the aliased one-realm setup, so dropdowns/popovers don't
+  open (their `.click()` never resolves) — those tests are file-excluded.
 - **Comparison:** **structure only** (`structuralHtml` strips ALL attributes) —
   the element tree (tag names + nesting + text) must match.
 - **COVERS:** broad backwards compatibility of the **DOM shape** — does the
@@ -229,14 +233,19 @@ its ephemeral current refs, then loops over the same installed versions;
   backwards-compatibility finding — investigate it; **never** weaken the
   normalizer (`normalizeHtml.ts`) to hide it.
 - The two points above are the **iframe harness's** mechanisms
-  (`scenarioVersionSupport.ts`). The **in-process harness** compares structure
-  only, so attribute-level evolution never reaches it — no per-diff handling is
-  needed. Only a genuine **structural** divergence (an element added, removed,
-  or reordered across versions) can fail it; scope a legitimate one with
-  `e2e/cross-version-inprocess/testVersionSupport.ts` (`minVersion` /
-  `skipVersions`, keyed by full Vitest test name). A structural diff you can't
-  explain is a backwards-compatibility finding — investigate it; **never**
-  weaken `structuralHtml.ts` to hide it.
+  (`scenarioVersionSupport.ts`). The **in-process harness** reuses the whole
+  visual suite, so `reusedVisualTests.ts` carries two subtraction lists instead:
+  - `EXCLUDED_VISUAL_TESTS` — whole **files** that can't RUN through a
+    render-only harness (the failure happens before the comparison, so it can't
+    be version-scoped): interaction tests whose overlay never opens, and files
+    that hit a render error because they use a component `undefined` in an old
+    version's bundle.
+  - `VERSION_SCOPED_TESTS` — individual tests whose **element tree** genuinely
+    changed, listed with the `fromVersion` they became comparable from (older
+    versions skip the comparison). Since structure-only already ignores
+    attribute drift, a structural diff here is a real change — confirm the
+    boundary (e.g. by bisect) rather than guessing, and **never** weaken
+    `structuralHtml.ts` to hide an unexplained one.
 
 ### Which versions are tested
 

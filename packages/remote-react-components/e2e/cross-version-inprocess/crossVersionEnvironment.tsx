@@ -32,6 +32,32 @@ const refPathFor = (testName: string, description: string): string =>
 // One tag per line so a structural-mismatch diff is line-oriented and readable.
 const prettyTags = (html: string): string => html.replace(/></g, ">\n<");
 
+const captureStructure = (): string =>
+  prettyTags(structuralHtml(rootContainerLocator.element().innerHTML));
+
+/**
+ * Read the structural HTML once it stops changing between samples, so an
+ * in-flight render (async content settling, a remote update still applying)
+ * can't be captured mid-frame and produce a spurious diff. Returns as soon as
+ * two consecutive samples match, or the last sample after a bounded number of
+ * tries.
+ */
+const readStableStructure = async (
+  samples = 10,
+  intervalMs = 50,
+): Promise<string> => {
+  let previous = captureStructure();
+  for (let i = 0; i < samples; i++) {
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    const next = captureStructure();
+    if (next === previous) {
+      return next;
+    }
+    previous = next;
+  }
+  return previous;
+};
+
 const CrossVersionUi: FC<PropsWithChildren> = ({ children }) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
   return (
@@ -70,10 +96,9 @@ const testScreenshot = async (description: string): Promise<void> => {
   }
 
   // Compare element tree only (all attributes stripped); the current pass writes
-  // the ephemeral ref, old-version passes compare against it.
-  const html = prettyTags(
-    structuralHtml(rootContainerLocator.element().innerHTML),
-  );
+  // the ephemeral ref, old-version passes compare against it. Wait for the
+  // structure to settle first so async rendering can't cause a spurious diff.
+  const html = await readStableStructure();
   await expect(html).toMatchFileSnapshot(refPathFor(testName, description));
 };
 
