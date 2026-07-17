@@ -3,7 +3,6 @@ import {
   ComboBox,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Option,
   Text,
@@ -15,7 +14,6 @@ import {
     <ContextualHelpTrigger>
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

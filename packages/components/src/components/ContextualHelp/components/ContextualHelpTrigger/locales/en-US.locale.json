@@ -1,3 +1,4 @@
 {
-  "moreInformation": "More information"
+  "moreInformation": "More information",
+  "moreInformationAbout": "More information about {label}"
 }

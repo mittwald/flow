@@ -2,16 +2,14 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Link,
   Text,
 } from "@mittwald/flow-react-components";
 
-<ContextualHelpTrigger>
+<ContextualHelpTrigger label="Rechte & Rollen">
   <Button />
 
   <ContextualHelp>
-    <Heading>Rechte & Rollen</Heading>
     <Text>
       Jedem Benutzer-Profil wird im mStudio je Projekt
       und/oder Organisation eine Rolle zugewiesen. Das
