@@ -3,7 +3,6 @@
 .tabTitle {
   padding-block: var(--tabs--padding-y);
   padding-inline: var(--tabs--padding-x);
-  background-color: var(--tabs--background-color--default);
   color: var(--tabs--color);
   cursor: default;
   white-space: nowrap;
@@ -19,19 +18,8 @@
     outline-offset: calc(var(--size-px--xs) * -1);
   }
 
-  &:hover {
-    background-color: var(--tabs--background-color--hover);
-    transition-duration: var(--transition--duration--default);
-  }
-
-  &[data-pressed] {
-    background-color: var(--tabs--background-color--pressed);
-    transition-duration: var(--transition--duration--default);
-  }
-
   &[aria-disabled="true"] {
     color: var(--tabs--disabled-color);
-    background-color: var(--tabs--background-color--default);
   }
 
   .text {
@@ -43,9 +31,7 @@
 
 /* selected tab */
 .tabTitle[data-selected] {
-  background-color: var(--tabs--background-color--selected);
   font-weight: var(--tabs--font-weight--selected);
-  box-shadow: var(--tabs--box-shadow);
 }
 
 .menuItem {

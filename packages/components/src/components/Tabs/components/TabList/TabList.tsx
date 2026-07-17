@@ -2,9 +2,11 @@ import type { FC } from "react";
 import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
+import { useTabIndicator } from "../../lib/useTabIndicator";
 import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
 import { Button } from "@/components/Button";
 import clsx from "clsx";
+import { useMergeRefs } from "use-callback-ref";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 import { IconChevronDown } from "@/components/Icon/components/icons";
@@ -23,13 +25,19 @@ export const TabList: FC<Props> = (props) => {
   const overflowObserver = useObserveOverflow();
   const isCollapsed = overflowObserver.isOverflowing;
   const rootClassName = clsx(styles.tabList, isCollapsed && styles.collapsed);
+  const tabIndicator = useTabIndicator(isCollapsed);
+
+  const setTitlesRef = useMergeRefs<HTMLDivElement>([
+    overflowObserver.ref,
+    tabIndicator.titlesRef,
+  ]);
 
   const handleContextMenuSelectionChange = (key: Aria.Key) => {
     onContextMenuSelectionChange(key);
   };
 
   const regularTabTitles = (
-    <Aria.TabList className={styles.titles} ref={overflowObserver.ref}>
+    <Aria.TabList className={styles.titles} ref={setTitlesRef}>
       <UiComponentTunnelExit id="Titles" component="Tabs" />
     </Aria.TabList>
   );
@@ -58,7 +66,17 @@ export const TabList: FC<Props> = (props) => {
   );
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} ref={tabIndicator.rootRef}>
+      {!isCollapsed && tabIndicator.indicatorStyle && (
+        <div
+          aria-hidden="true"
+          className={clsx(
+            styles.activeIndicator,
+            tabIndicator.isAnimated && styles.animated,
+          )}
+          style={tabIndicator.indicatorStyle}
+        />
+      )}
       {regularTabTitles}
       {contextMenuWhenCollapsed}
     </div>

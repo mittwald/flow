@@ -3,6 +3,23 @@
   position: relative;
   border-radius: var(--tabs--corner-radius);
 
+  .activeIndicator {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: var(--tab-indicator-width);
+    transform: translateX(var(--tab-indicator-x));
+    border-radius: var(--tabs--corner-radius);
+    background-color: var(--tabs--background-color--selected);
+    box-shadow: var(--tabs--box-shadow);
+    pointer-events: none;
+
+    &.animated {
+      transition-property: transform, width;
+      transition-duration: var(--transition--duration--default);
+    }
+  }
+
   .contextMenuButton {
     padding-block: var(--tabs--padding-y);
     padding-inline: var(--tabs--padding-x);
@@ -16,6 +33,7 @@
     flex-direction: row;
     justify-content: flex-start;
     width: fit-content;
+    position: relative;
   }
 
   &.collapsed {

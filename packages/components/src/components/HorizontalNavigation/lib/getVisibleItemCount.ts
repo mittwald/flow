@@ -4,12 +4,6 @@
  */
 const floatTolerance = 0.5;
 
-/**
- * Returns the number of items (counted from the start) that fit into the
- * available width. When not all items fit, the width of the "more" item is
- * reserved, so the overflow trigger can be displayed next to the visible
- * items.
- */
 export const getVisibleItemCount = (
   itemWidths: number[],
   availableWidth: number,

@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import { getVisibleItemCount } from "./lib";
+import { getVisibleItemCount } from "./getVisibleItemCount";
 
 interface CollapsingItemsState {
   /** Number of visible items. `null` until the first measurement was done. */

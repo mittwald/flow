@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { getVisibleItemCount } from "./lib";
+import { getVisibleItemCount } from "./getVisibleItemCount";
 
 describe("getVisibleItemCount", () => {
   test("returns all items when they fit into the available width", () => {

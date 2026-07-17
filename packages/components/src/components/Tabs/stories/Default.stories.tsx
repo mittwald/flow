@@ -94,30 +94,6 @@ export const Controlled: Story = {
   },
 };
 
-export const WithLinks: Story = {
-  render: (props) => {
-    const [tab, setTab] = useState("general");
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setTab(window.location.hash.slice(1));
-      }, 100);
-      return () => clearInterval(interval);
-    }, [setTab]);
-
-    return (
-      <Tabs {...props} selectedKey={tab}>
-        <Tab id="general">
-          <TabTitle href="#general">General</TabTitle>
-        </Tab>
-        <Tab id="storage">
-          <TabTitle href="#storage">Storage settings</TabTitle>
-        </Tab>
-      </Tabs>
-    );
-  },
-};
-
 export const Collapsed: Story = {
   render: (props) => (
     <Tabs {...props}>

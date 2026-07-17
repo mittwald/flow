@@ -20,7 +20,7 @@ import ContextMenuView from "@/views/ContextMenuView";
 import { LinkContent } from "./components/LinkContent";
 import styles from "./HorizontalNavigation.module.scss";
 import locales from "./locales/*.locale.json";
-import { useCollapsingItems } from "./useCollapsingItems";
+import { useCollapsingItems } from "./lib/useCollapsingItems";
 
 export interface HorizontalNavigationProps
   extends
