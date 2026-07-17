@@ -176,9 +176,13 @@ depth**.
 - **Connection:** old remote and current host run in **one realm** (shared
   `RemoteReceiver`) — cheaper, but **lower connection fidelity** than the iframe
   harness, so attribute-level serialization can differ from the real protocol.
-  It also can't drive stateful **overlay interactions**: react-aria's overlay
-  context is split by the aliased one-realm setup, so dropdowns/popovers don't
-  open (their `.click()` never resolves) — those tests are file-excluded.
+  It also can't drive some **click-to-open interactions**: for a control like
+  Select, a _programmatic_ click doesn't fire the open in the one-realm setup
+  (the press→open round-trip to the remote side doesn't trigger —
+  keyboard-driven overlays like ComboBox and manual clicks do open, so overlays
+  render fine in general). The popover never opens, so the test's
+  `getByTestId("option")` finds nothing and times out — those tests are
+  file-excluded.
 - **Comparison:** **structure only** (`structuralHtml` strips ALL attributes) —
   the element tree (tag names + nesting + text) must match.
 - **COVERS:** broad backwards compatibility of the **DOM shape** — does the
@@ -237,9 +241,9 @@ its ephemeral current refs, then loops over the same installed versions;
   visual suite, so `reusedVisualTests.ts` carries two subtraction lists instead:
   - `EXCLUDED_VISUAL_TESTS` — whole **files** that can't RUN through a
     render-only harness (the failure happens before the comparison, so it can't
-    be version-scoped): interaction tests whose overlay never opens, and files
-    that hit a render error because they use a component `undefined` in an old
-    version's bundle.
+    be version-scoped): click-to-open interaction tests whose programmatic open
+    doesn't fire in the one-realm setup, and files that hit a render error
+    because they use a component `undefined` in an old version's bundle.
   - `VERSION_SCOPED_TESTS` — individual tests whose **element tree** genuinely
     changed, listed with the `fromVersion` they became comparable from (older
     versions skip the comparison). Since structure-only already ignores

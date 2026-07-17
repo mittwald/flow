@@ -14,9 +14,12 @@ export const REUSED_VISUAL_TESTS: string[] = [
  * all. A failure here happens before `testScreenshot`, so it can't be
  * version-scoped (that gates only the comparison); the whole file must go.
  *
- * INTERACTION timeout — the test drives the UI with `.click()`, but the opened
- * popover/dropdown keeps re-rendering in the one-realm setup, so Playwright's
- * "visible, enabled and stable" actionability wait never resolves:
+ * INTERACTION timeout — a click-to-open control (e.g. Select) whose open never
+ * fires under a PROGRAMMATIC click in the one-realm setup: the press→open
+ * round-trip to the remote side doesn't trigger (keyboard-driven overlays like
+ * ComboBox and real manual clicks do open, so overlays render fine in general).
+ * The popover never opens, so the test's `getByTestId("option")` finds nothing
+ * and times out — it's the open, not the selector or the HTML normalization:
  */
 export const EXCLUDED_VISUAL_TESTS: string[] = [
   "**/AutoComplete.browser.test.tsx",
