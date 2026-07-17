@@ -45,7 +45,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
           return null;
         }
 
-        const className = clsx(props.wrapperClassName, styles.tooltip);
+        const className = clsx(props.wrapperClassName, styles.chartTooltip);
         return (
           <div className={className}>
             <Suspense fallback={<LoadingSpinnerView />}>
