@@ -183,6 +183,156 @@ directly.
 
 ## Implementing a component
 
+### Three ways a component participates in remote
+
+Every component in `packages/components` falls into exactly one of three
+categories, and the category determines what you can and cannot do with it.
+
+- **Self remote-capable** — annotated `/** @flr-generate all */`. Generation
+  turns it into a self-contained remote unit with its own `flr-*` element. From
+  the remote side it is "closed": the only way to extend what it renders is
+  through its `children`, and its props are exactly the serialized contract
+  described below — nothing more crosses the boundary.
+- **Universal component** — carries no `@flr-generate` annotation but is
+  exported additionally from `src/index/flr-universal.ts`. It wires and renders
+  other remote-capable components itself rather than owning an `flr-*` element
+  directly. Inside it, compose **only** through view components (`@/views/*`): a
+  view renders the plain Flow component locally, or its `flr-*` counterpart when
+  running in a remote context. This local/remote switch inside a single import
+  is exactly what lets a composite component work correctly in both worlds.
+- **Host-only** — exported only from `src/components/public.ts`, with no sibling
+  `view.ts`, no `@flr-generate` tag, and absent from `flr-universal.ts`
+  (examples: `Activity`, `RouterProvider`, the `OverlayTrigger` wrapper). It has
+  no `flr-*` element and cannot render remotely at all. **Gotcha:** if a
+  universal component composes a host-only component through a direct
+  `@/components/*` import instead of a view, it will silently render nothing in
+  a remote context — there is no error, the output is just missing (see
+  `packages/components/PATTERNS.md:274-277`).
+
+### State, data loading, and side effects belong on the remote side
+
+Because the host only mirrors output and relays events (see
+[The mental model](#the-mental-model)), any logic that produces or reacts to
+state — fetching data, tracking loading states, sorting or filtering, controlled
+input state — has to run on the remote side. Never assume that a piece of your
+component's logic executes on the host; the host has nothing to run it against.
+The `List` example above is the pattern to follow: state and behavior live
+remotely, and the host only ever shows the latest emitted output.
+
+### How props cross the boundary — the contract mechanics
+
+The remote-components generator classifies every prop of a `@flr-generate`
+component
+(`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`),
+and the classification decides how that prop behaves once it crosses into remote
+territory:
+
+- **Callbacks must be named `on[A-Z]…`** to become cross-boundary _events_. A
+  function prop under any other name is treated as an ordinary serialized
+  property, not an event. The event name is derived from the prop name minus the
+  `on` prefix, with the first letter lowercased — `onPress` becomes the `press`
+  event.
+- **Event handlers receive exactly one argument: the event's `detail`** — not a
+  DOM or synthetic event. There is no `preventDefault`, `target`, or
+  `currentTarget` to call. Callbacks are proxied across the thread connection
+  and are effectively **async and fire-and-forget**: whatever the handler
+  returns does not cross back, so patterns like "return `false` to cancel" only
+  work within a single runtime.
+- **Props typed `ReactNode` become slots**, not serialized data — they cross as
+  rendered child content rather than as values that get cloned across the
+  connection.
+- **There are no HTML attributes.** `isAttribute` in the generator is hard-coded
+  to `false`
+  (`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`),
+  so every non-event, non-slot prop is treated as a serialized _property_ —
+  don't rely on boolean or number props reflecting as DOM attributes on the
+  `flr-*` element.
+- **Non-serializable props generate cleanly but break at runtime.** Class
+  instances lose their prototype once cloned, `HTMLElement` and `window` coerce
+  to `null`, and raw DOM events degrade to near-empty objects. Nothing in the
+  type system stops you from adding such a prop to a `@flr-generate` component —
+  it will only misbehave once actually exercised across the boundary. This is
+  exactly why the ignore list below exists.
+
+Props of a `@flr-generate` component form a **contract** with extension
+developers: they can be relied on across arbitrary remote versions, so changing
+or removing one is a breaking change. Evolve them instead by adding new props
+and deprecating the old ones with `useWarnDeprecation` (see
+[Versioning & backwards compatibility](#versioning--backwards-compatibility)).
+
+### The ignore list, and why `ref` / `controller` / `tunnel` don't cross
+
+Some props are excluded from generation outright, either globally or per
+component. The global ignore list lives in
+`packages/components/dev/remote-components-generator/config.ts`: `style`,
+`dangerouslySetInnerHTML`, `ref`, `controller`, `tunnel`, `key`, `children`, and
+`wrapWith`. A component can additionally exclude one of its own props with a
+`@flr-ignore-props` JSDoc tag.
+
+Three of these deserve a specific explanation, because they look like they
+should cross the boundary and deliberately don't:
+
+- **`ref`** resolves to the _remote_ custom element, not to any host DOM node —
+  there is no host element to hand back. Patterns that rely on a host DOM
+  measurement or imperative call (`getBoundingClientRect`, `focus`) simply have
+  nothing to attach to across the boundary.
+- **`controller`** is a live MobX object that drives rendering on the **remote**
+  side. It coordinates components within the same remote tree; it has no
+  host-side counterpart to coordinate with.
+- **`tunnel`** is an intra-tree portal (`@mittwald/react-tunnel`) that resolves
+  entirely before anything crosses the boundary — it is not a boundary-crossing
+  mechanism at all, just implemented with the same "cannot serialize"
+  characteristics as the others.
+
+### Controlled text inputs need echo-suppression
+
+Every keystroke in a controlled remote text input has to round-trip
+asynchronously: the remote side updates its value, serializes the change, sends
+it to the host, the host renders it, and — for a controlled field — the new
+value has to make it back to the remote side as a prop update. Naively wiring
+this up causes dropped or reordered characters under fast typing, so controlled
+text fields pair `useControlledRemoteValueProps` (used on the remote side) with
+`useControlledHostValueProps` (used on the host side) to suppress the echo of a
+value the remote side just sent.
+
+This pairing is opted into through a hardcoded allowlist,
+`controlledComponentNames`, in
+`packages/remote-react-components/src/lib/createRemoteComponent.ts`. Adding a
+new controlled remote text field means adding its `flr-*` tag name to that list
+— skip it, and the field will drop characters under fast typing.
+
+### Placement and registration for a new remote-capable component
+
+A new `@flr-generate` component has two placement requirements beyond the
+annotation itself: it must live under `src/components` or `src/integrations` in
+`packages/components` (the glob the doc-extraction step scans), and it must be
+registered in the hand-maintained `FlowComponentPropsTypes` registry at
+`packages/components/src/components/propTypes/index.ts`. Miss either one and the
+component is silently skipped by the generator or fails typecheck — there is no
+generator-side error pointing at the missing registration.
+
+### PropsContext — only remote-capable components belong in one
+
+`PropsContext` is plain React context: it is resolved independently on each side
+of the boundary and is never itself serialized. That independence has a
+consequence worth internalizing. A host `PropsContextProvider` placed above
+`<RemoteRenderer>` _does_ reach the mirrored `flr-*` components, because each
+one becomes a host `flowComponent` that re-reads context from its position in
+the host's React tree. But a non-remote-capable child that lives only inside the
+extension iframe resolves context purely against the iframe's own tree — it has
+no path back to host-side context — so it silently misses whatever the host
+provider set, without any warning that the value never arrived. Only put
+remote-capable components in a `PropsContext` that is meant to reach across the
+boundary.
+
+### Definition of Done for a remote-capable component
+
+Beyond the general
+[Definition of Done](../AGENTS.md#definition-of-done--component-work) for
+component work, a remote-capable component additionally needs: regenerated and
+committed generated artifacts, a demo page in `apps/remote-dom-demo`, and
+passing visual tests in **both** the `Local` and `Remote` test targets.
+
 ## Versioning & backwards compatibility
 
 ## Host-side rendering — special cases
