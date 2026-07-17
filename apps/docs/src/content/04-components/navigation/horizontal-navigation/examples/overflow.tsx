@@ -1,9 +1,10 @@
 import {
   HorizontalNavigation,
   Link,
+  LayoutCard,
 } from "@mittwald/flow-react-components";
 
-<div style={{ width: "320px" }}>
+<LayoutCard style={{ width: "320px" }}>
   <HorizontalNavigation aria-label="Projekt-Navigation">
     <Link href="#">Dashboard</Link>
     <Link href="#">Domains</Link>
@@ -13,4 +14,4 @@ import {
       Einstellungen
     </Link>
   </HorizontalNavigation>
-</div>;
+</LayoutCard>;

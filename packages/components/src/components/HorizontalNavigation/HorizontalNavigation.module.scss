@@ -44,16 +44,12 @@
     }
 
     &[data-pressed] {
-      background-color: var(
-        --horizontal-navigation--background-color--pressed
-      );
+      background-color: var(--horizontal-navigation--background-color--pressed);
       transition-duration: var(--transition--duration--default);
     }
 
     &[aria-current] {
-      background-color: var(
-        --horizontal-navigation--background-color--current
-      );
+      background-color: var(--horizontal-navigation--background-color--current);
       font-weight: var(--horizontal-navigation--font-weight--current);
     }
   }
@@ -100,17 +96,13 @@
     }
 
     &[data-pressed] {
-      background-color: var(
-        --horizontal-navigation--background-color--pressed
-      );
+      background-color: var(--horizontal-navigation--background-color--pressed);
       transition-duration: var(--transition--duration--default);
     }
 
     &.current,
     &.current:hover {
-      background-color: var(
-        --horizontal-navigation--background-color--current
-      );
+      background-color: var(--horizontal-navigation--background-color--current);
       font-weight: var(--horizontal-navigation--font-weight--current);
     }
   }
