@@ -23,8 +23,8 @@ export const IllustratedMessage = flowComponent(
 
     const rootClassName = clsx(
       styles.illustratedMessage,
-      className,
       color !== "default" && styles[color],
+      className,
     );
 
     const alphaColor = isAlphaColor(color) ? color : undefined;

@@ -52,8 +52,8 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   const rootClassName = clsx(
     styles.markdownEditor,
-    className,
     styles[`mode-${mode}`],
+    className,
   );
 
   const handleKeyDown: KeyboardEventHandler = (event) => {

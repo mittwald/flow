@@ -42,9 +42,9 @@ export const ActionGroup = flowComponent(
 
     const rootClassName = clsx(
       styles.actionGroup,
-      className,
       styles[spacing],
       !preserveOrder && styles.sorted,
+      className,
     );
 
     const propsContext: PropsContext = preserveOrder

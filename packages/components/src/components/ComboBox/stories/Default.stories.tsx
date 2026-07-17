@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/Label";
 import { Option } from "@/components/Option";
 import FieldDescription from "@/components/FieldDescription";

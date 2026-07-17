@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { TranslationProvider } from "@/components/TranslationProvider";

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { FileCardList } from "@/components/FileCardList";
 import FileCard from "@/components/FileCard";
 

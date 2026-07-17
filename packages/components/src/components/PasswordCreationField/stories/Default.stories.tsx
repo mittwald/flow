@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { PasswordCreationField } from "../index";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { Button } from "@/components/Button";

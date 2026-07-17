@@ -22,6 +22,9 @@ Determine the diff to review:
    - `packages/components/AGENTS.md` when components are touched: patterns
      (flowComponent, PropsContext, views, styling, testing bar, i18n, public
      API surfaces)
+   - `packages/components/PATTERNS.md` when a components change needs a finer
+     check: the full pattern catalog with per-pattern applicability (when a
+     pattern applies / when to use an alternative)
    - the nearest `packages/*/AGENTS.md` / `apps/*/AGENTS.md` for every other
      touched package
 2. Check the diff against those sections. Pay special attention to:

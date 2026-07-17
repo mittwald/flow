@@ -22,7 +22,6 @@ import { FileField } from "@/components/FileField";
 import Content from "@/components/Content";
 import ActionGroup from "@/components/ActionGroup";
 import { Badge } from "@/components/Badge";
-import React from "react";
 import Alert from "@/components/Alert";
 
 const meta: Meta<typeof Section> = {

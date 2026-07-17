@@ -34,8 +34,8 @@ export const Kbd = flowComponent("Kbd", (props) => {
   const rootClassName = clsx(
     styles.kbd,
     isDisabled && styles.disabled,
-    className,
     styles[variant],
+    className,
   );
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Kbd");
@@ -73,3 +73,5 @@ export const Kbd = flowComponent("Kbd", (props) => {
     </kbd>
   );
 });
+
+export default Kbd;

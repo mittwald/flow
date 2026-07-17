@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import RadioGroupView from "@/views/RadioGroupView";
 import RadioView from "@/views/RadioView";
 import type { Filter } from "@/components/List/model/filter/Filter";

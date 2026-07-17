@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { SkeletonText, type SkeletonTextProps } from "./SkeletonText";
+export { type SkeletonTextProps, SkeletonText } from "./SkeletonText";
 export { default } from "./SkeletonText";

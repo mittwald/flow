@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
-import React from "react";
 import { useContext } from "react";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 

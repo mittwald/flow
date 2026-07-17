@@ -1,5 +1,5 @@
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIndex";
 import { isCategoricalColor } from "@/lib/tokens/isCategoricalColor";

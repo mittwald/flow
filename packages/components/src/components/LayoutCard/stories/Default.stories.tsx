@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LayoutCard from "../LayoutCard";
-import React from "react";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
