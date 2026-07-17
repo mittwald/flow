@@ -11,7 +11,7 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { AlertIcon } from "@/components/AlertIcon";
 import { dummyText } from "@/lib/dev/dummyText";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Key } from "react-aria";
 
 const meta: Meta<typeof Tabs> = {
