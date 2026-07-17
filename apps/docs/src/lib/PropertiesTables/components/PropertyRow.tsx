@@ -1,4 +1,4 @@
-import type React from "react";
+import type { FC } from "react";
 import type { Property } from "../types";
 import { TableCell, TableRow } from "@mittwald/flow-react-components";
 import { InlineCode } from "@mittwald/flow-react-components";
@@ -11,9 +11,7 @@ export interface PropertyTableGroupProps {
   property: Property;
 }
 
-export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
-  property,
-}) => {
+export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
   const formattedDescription = property.description
     ?.replaceAll(/{@link (\S+) (.+)}/g, "[$2]($1)")
     .replaceAll(/{@link (\S+)}/g, "[$1]($1)");

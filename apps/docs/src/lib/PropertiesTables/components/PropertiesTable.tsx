@@ -1,4 +1,4 @@
-import type React from "react";
+import type { FC } from "react";
 import { PropertyRow } from "./PropertyRow";
 import {
   Table,
@@ -12,9 +12,7 @@ interface PropertiesTableProps {
   properties: Property[];
 }
 
-export const PropertiesTable: React.FC<PropertiesTableProps> = ({
-  properties,
-}) => {
+export const PropertiesTable: FC<PropertiesTableProps> = ({ properties }) => {
   return (
     <>
       <Table aria-label="Properties">
