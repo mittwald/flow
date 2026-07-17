@@ -139,27 +139,58 @@ Extension developers ship remote apps built against a **published** version of
 host that runs the **current** version. The cross-version smoke tests guard that
 contract.
 
-### What it validates (and what it doesn't)
+### Two harnesses — what each covers
 
-For each selected old version, the **full old remote stack** — the real
-published `@mittwald/flow-remote-react-components` **and** its matching
-`@mittwald/flow-remote-core` bundle — runs in a **real iframe document/realm**,
-connected to the **current host** over the versioned `@quilted/threads`
-connection (the same path production uses). The corpus is the **existing e2e
-visual scenarios** (`src/tests/visual/*.scenarios.tsx`) — reused, not a separate
-hand-maintained set — and for each one the **host-rendered HTML** is compared
-**old-vs-current**: the same scenario is rendered once through the current
-version as an **ephemeral reference** and once through the old version, and the
-normalized HTML must match. Nothing is committed as a baseline.
+Both harnesses take an **old published version's remote output**, render it
+through the **current host**, and compare the resulting **host HTML** against
+the current version's output (old-vs-current). Both are HTML/DOM comparisons,
+**not** screenshot/pixel — neither asserts visual fidelity. They are
+deliberately different in two axes: **connection fidelity** and **comparison
+depth**.
 
-This is an **HTML/DOM-output comparison**, not a screenshot/pixel comparison
-(screenshots may be added later). It proves props/attributes serialize and the
-host renders the same structure for an old version as for the current one — it
-does not assert visual/pixel fidelity. The normalizer
-(`e2e/cross-version/normalizeHtml.ts`) strips volatile bits (generated ids →
-stable placeholders, the hidden connection iframe, `data-flr-*`, inter-tag
-whitespace) while keeping semantic attributes, text, and the label↔control
-wiring.
+#### iframe harness — high fidelity, narrow
+
+- **Where:** `e2e/cross-version/`, corpus `src/tests/visual/*.scenarios.tsx`
+  (curated, hand-written scenarios).
+- **Connection:** the **real** one — the full old remote stack
+  (`@mittwald/flow-remote-react-components` + its matching
+  `@mittwald/flow-remote-core`) runs in a real iframe realm and talks to the
+  current host over the versioned `@quilted/threads` protocol, exactly as
+  production does.
+- **Comparison:** **full HTML including attributes** (`normalizeHtml`, which
+  only strips volatile bits — generated ids, the hidden connection iframe,
+  `data-flr-*`, whitespace — keeping classes, attributes, text, and
+  label↔control wiring).
+- **COVERS:** attribute-accurate backwards compatibility over the real protocol
+  — props serialize correctly, the host renders the same
+  classes/attributes/styles for an old version as for current.
+- **DOES NOT COVER:** breadth (only the curated scenarios); visual/pixel
+  fidelity.
+
+#### in-process harness — broad, structure-only
+
+- **Where:** `e2e/cross-version-inprocess/`, corpus the reused, UNMODIFIED
+  `src/tests/visual/*.browser.test.tsx` files listed in `REUSED_VISUAL_TESTS` (a
+  `CrossVersion` environment is injected in place of local/remote).
+- **Connection:** old remote and current host run in **one realm** (shared
+  `RemoteReceiver`) — cheaper, but **lower connection fidelity** than the iframe
+  harness, so attribute-level serialization can differ from the real protocol.
+- **Comparison:** **structure only** (`structuralHtml` strips ALL attributes) —
+  the element tree (tag names + nesting + text) must match.
+- **COVERS:** broad backwards compatibility of the **DOM shape** — does the
+  current host still build the same element tree from an old remote version's
+  output, across the whole reused corpus?
+- **DOES NOT COVER:** anything attribute-level — classes, inline styles, prop
+  serialization form (attribute vs property), icon geometry, ARIA/id wiring. All
+  of that is intentionally invisible here and is the iframe harness's job. A
+  genuine **structural** divergence (an element added/removed/reordered across
+  versions) is the only thing that fails; scope a legitimate one with
+  `e2e/cross-version-inprocess/testVersionSupport.ts`.
+
+In short: **iframe = does it render _correctly_ (attributes) for a few
+scenarios; in-process = does it render _at all in the same shape_ for many.**
+Neither commits a baseline — the current version is re-rendered as an ephemeral
+reference each run.
 
 ### Running locally
 
@@ -169,12 +200,17 @@ pnpm nx run remote-react-components:test:cross-version:prepare
 
 # run every installed old version against the current version (ephemeral ref)
 pnpm nx run remote-react-components:test:cross-version
+
+# run the reused visual tests through the in-process harness
+pnpm nx run remote-react-components:test:cross-version-inprocess
 ```
 
 `test:cross-version` loops the installed versions (one vitest run each, webkit,
 headless) and prints a per-version `PASS`/`FAIL` summary, exiting non-zero if
 any version fails. For local iteration, `test:cross-version:dev` opens vitest in
-watch mode against the suite.
+watch mode against the suite. `test:cross-version-inprocess` first regenerates
+its ephemeral current refs, then loops over the same installed versions;
+`test:cross-version-inprocess:dev` opens that harness in watch mode.
 
 ### Missing components and legitimate divergences
 
@@ -192,6 +228,15 @@ watch mode against the suite.
   still get real coverage. A real diff you can't explain is a
   backwards-compatibility finding — investigate it; **never** weaken the
   normalizer (`normalizeHtml.ts`) to hide it.
+- The two points above are the **iframe harness's** mechanisms
+  (`scenarioVersionSupport.ts`). The **in-process harness** compares structure
+  only, so attribute-level evolution never reaches it — no per-diff handling is
+  needed. Only a genuine **structural** divergence (an element added, removed,
+  or reordered across versions) can fail it; scope a legitimate one with
+  `e2e/cross-version-inprocess/testVersionSupport.ts` (`minVersion` /
+  `skipVersions`, keyed by full Vitest test name). A structural diff you can't
+  explain is a backwards-compatibility finding — investigate it; **never**
+  weaken `structuralHtml.ts` to hide it.
 
 ### Which versions are tested
 
@@ -227,6 +272,6 @@ written and `test:cross-version` passes with a "nothing to run" warning.
 
 ### CI
 
-The cross-version smoke tests run in the **scheduled** visual workflow
+Both cross-version harnesses run in the **scheduled** visual workflow
 (`test-visual-scheduled.yml`), twice a day — **not** on pull requests (they do
 network installs of published versions). Failures alert Slack.

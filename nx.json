@@ -40,6 +40,10 @@
       "dependsOn": ["^build", "test:cross-version:prepare"],
       "cache": false
     },
+    "test:cross-version-inprocess": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
     "test:cross-version:dev": {
       "dependsOn": ["^build", "test:cross-version:prepare"],
       "cache": false
