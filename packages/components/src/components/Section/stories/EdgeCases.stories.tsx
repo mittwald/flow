@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import defaultStories from "./Default.stories";
 import { useForm } from "react-hook-form";

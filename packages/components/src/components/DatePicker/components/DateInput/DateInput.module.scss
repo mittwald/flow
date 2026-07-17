@@ -29,4 +29,12 @@
     );
     outline-offset: calc(var(--size-px--xxxs) * -1);
   }
+
+  [data-placeholder="true"] ~ * {
+    color: var(--form-control--placeholder-color--default);
+  }
+
+  [data-disabled="true"] ~ * {
+    color: var(--form-control--placeholder-color--disabled);
+  }
 }

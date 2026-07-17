@@ -23,8 +23,8 @@ export const IllustratedMessage = flowComponent(
 
     const rootClassName = clsx(
       styles.illustratedMessage,
-      className,
       color !== "default" && styles[color],
+      className,
     );
 
     const alphaColor = isAlphaColor(color) ? color : undefined;
@@ -46,6 +46,7 @@ export const IllustratedMessage = flowComponent(
         color: alphaColor,
       },
       ActionGroup: {
+        preserveOrder: true,
         className: styles.actionGroup,
       },
       ProgressBar: { className: styles.progressBar },

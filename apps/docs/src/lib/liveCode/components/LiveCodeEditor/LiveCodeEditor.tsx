@@ -1,5 +1,5 @@
 import type { FC, JSX } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -22,7 +22,6 @@ export interface LiveCodeEditorProps {
   zoom?: number;
   bgColor?: "mstudio" | "dark" | "light" | "darkStatic" | "lightStatic";
   mobile?: boolean;
-  stretch?: boolean;
   row?: boolean;
 }
 
@@ -42,7 +41,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     zoom = 1,
     bgColor,
     mobile,
-    stretch,
     row,
   } = props;
 
@@ -84,11 +82,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         )}
       >
         <LivePreview
-          className={clsx(
-            styles.preview,
-            stretch && styles.stretch,
-            row && styles.row,
-          )}
+          className={clsx(styles.preview, row && styles.row)}
           style={{ zoom }}
         />
 

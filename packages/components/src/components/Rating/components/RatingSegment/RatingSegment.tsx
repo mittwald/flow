@@ -1,8 +1,4 @@
-import React, {
-  type FC,
-  type PropsWithChildren,
-  type ReactElement,
-} from "react";
+import { type FC, type PropsWithChildren, type ReactElement } from "react";
 import clsx from "clsx";
 import styles from "@/components/Rating/Rating.module.scss";
 import * as Aria from "react-aria-components";

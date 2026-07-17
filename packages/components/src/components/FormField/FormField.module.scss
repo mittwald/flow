@@ -35,7 +35,8 @@
 
   /* Disabled */
 
-  &[data-disabled] .label {
+  &[data-disabled] .label,
+  &[data-disabled] .fieldDescription {
     color: var(--label--color--disabled);
   }
 }

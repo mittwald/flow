@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AlertBadge from "../AlertBadge";
-import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { statusTypes } from "@/lib/types/props";
 

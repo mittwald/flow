@@ -33,8 +33,8 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    className,
     styles[`label-${labelPosition}`],
+    className,
   );
 
   const objectRef = useObjectRef(ref);

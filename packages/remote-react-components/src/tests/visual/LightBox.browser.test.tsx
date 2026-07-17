@@ -4,7 +4,6 @@ import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
 import logo from "@/tests/assets/mittwald_logo_rgb.jpg";
 import { userEvent } from "vitest/browser";
-import React from "react";
 
 test.each(testEnvironments)(
   "LightBox (%s)",

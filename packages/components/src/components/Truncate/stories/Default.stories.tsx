@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Truncate } from "../index";
-import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";

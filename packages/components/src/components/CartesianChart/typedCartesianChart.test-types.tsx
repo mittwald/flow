@@ -1,4 +1,4 @@
-import React, { type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { expectTypeOf } from "vitest";
 import { typedCartesianChart } from "@/components/CartesianChart/CartesianChart";
 import { ChartTooltip } from "@/components/CartesianChart/components/ChartTooltip";

@@ -12,6 +12,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   const list = useList();
   const pagination = list.batches;
   const isLoading = list.loader.useIsLoading();
+  const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const isEmpty = list.useIsEmpty();
 
   const totalItemsCount = pagination.getTotalItemsCount();
@@ -21,7 +22,10 @@ export const PaginationInfos: FC<TextProps> = (props) => {
     return null;
   }
 
-  const text = isLoading ? (
+  const showSkeleton =
+    isLoading && (!list.infiniteScroll || isInitiallyLoading);
+
+  const text = showSkeleton ? (
     <SkeletonView width="200px" />
   ) : (
     stringFormatter.format("paginationInfo", {

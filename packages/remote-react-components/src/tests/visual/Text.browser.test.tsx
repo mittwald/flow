@@ -1,6 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import React from "react";
 import {
   alphaColors,
   isAlphaColor,

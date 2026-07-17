@@ -36,7 +36,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
     ...rest
   } = props;
 
-  const [collapsed, setCollapsed] = useState(true);
+  const [folded, setFolded] = useState(truncateLines !== false);
   const [maxHeight, setMaxHeight] = useState<number>();
 
   const stringFormatter = useLocalizedStringFormatter(locales, "CodeBlock");
@@ -56,62 +56,53 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div
-        className={rootClassName}
-        style={{
-          maxHeight: collapsed ? maxHeight : undefined,
+    <div
+      className={clsx(rootClassName, folded ? styles.folded : undefined)}
+      style={{ "--max-height": `${maxHeight}px` } as React.CSSProperties}
+    >
+      <CodeEditor
+        {...rest}
+        value={code}
+        editable={false}
+        copyable={copyable}
+        showLineNumbers={showLineNumbers}
+        showLinterMarkers={false}
+        showCodeFolding={false}
+        showActiveLineMarker={false}
+        isReadOnly
+        onCreateEditor={(view) => {
+          if (!truncateLines) {
+            return;
+          }
+
+          const lineHeight = 20;
+          const padding = 12;
+
+          const visibleLines =
+            typeof truncateLines === "number" ? truncateLines : 8;
+
+          const totalLines = view.state.doc.lines;
+
+          if (totalLines > visibleLines)
+            setMaxHeight(lineHeight * visibleLines + padding);
         }}
+        id={id}
       >
-        <CodeEditor
-          {...rest}
-          value={code}
-          editable={false}
-          copyable={copyable}
-          showLineNumbers={showLineNumbers}
-          showLinterMarkers={false}
-          showCodeFolding={false}
-          showActiveLineMarker={false}
-          isReadOnly
-          onCreateEditor={(view) => {
-            if (!truncateLines) {
-              return;
-            }
-
-            const lineHeight = 20;
-            const padding = 12;
-
-            const visibleLines =
-              typeof truncateLines === "number" ? truncateLines : 8;
-
-            const totalLines = view.state.doc.lines;
-
-            if (totalLines > visibleLines)
-              setMaxHeight(lineHeight * visibleLines + padding);
-          }}
-          id={id}
-        />
-      </div>
-
-      {truncateLines && maxHeight && (
-        <div
-          className={clsx(
-            styles.buttonContainer,
-            collapsed && styles.collapsed,
-          )}
-        >
-          <Button
-            variant="plain"
-            color="secondary"
-            size="s"
-            onPress={() => setCollapsed((prev) => !prev)}
-            aria-expanded={!collapsed}
-            aria-controls={id}
-          >
-            {stringFormatter.format(collapsed ? "showMore" : "showLess")}
-          </Button>
-        </div>
-      )}
+        {truncateLines && maxHeight && (
+          <div className={clsx(styles.buttonContainer)}>
+            <Button
+              variant="plain"
+              color="secondary"
+              size="s"
+              onPress={() => setFolded((folded) => !folded)}
+              aria-expanded={!folded}
+              aria-controls={id}
+            >
+              {stringFormatter.format(folded ? "showMore" : "showLess")}
+            </Button>
+          </div>
+        )}
+      </CodeEditor>
     </div>
   );
 };

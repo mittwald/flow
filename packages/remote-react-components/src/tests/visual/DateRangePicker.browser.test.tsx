@@ -25,6 +25,7 @@ test.each(testEnvironments)(
         </DateRangePicker>
         <DateRangePicker isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </DateRangePicker>
       </Flex>,
     );

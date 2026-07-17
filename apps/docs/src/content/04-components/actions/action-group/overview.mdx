@@ -2,7 +2,7 @@
 
 Verwende `<ActionGroup />`, um eine ActionGroup darzustellen.
 
-<LiveCodeEditor stretch />
+<LiveCodeEditor />
 
 ---
 
@@ -14,7 +14,26 @@ Die Actions werden von der ActionGroup automatisch in die Slots `primary`,
 (Standard), Accent und Danger automatisch dem Slot `primary` zugeordnet, der am
 Ende der ActionGroup positioniert ist.
 
-<LiveCodeEditor example="slots" editorCollapsed stretch />
+<LiveCodeEditor example="slots" editorCollapsed />
+
+---
+
+# Reihenfolge beibehalten
+
+Mit `preserveOrder` verzichtet die ActionGroup auf die automatische Sortierung
+in die Slots `primary`, `secondary` und `abort`. Die Actions bleiben in der
+Reihenfolge, in der sie im Code stehen.
+
+<LiveCodeEditor example="preserveOrder" editorCollapsed />
+
+---
+
+# Größe
+
+Mit `size` werden die Buttons und Links in der ActionGroup einheitlich
+dimensioniert.
+
+<LiveCodeEditor example="size" editorCollapsed />
 
 ---
 
@@ -22,4 +41,4 @@ Ende der ActionGroup positioniert ist.
 
 ## Link
 
-<LiveCodeEditor example="link" editorCollapsed stretch />
+<LiveCodeEditor example="link" editorCollapsed />

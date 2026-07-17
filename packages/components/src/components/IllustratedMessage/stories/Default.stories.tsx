@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IllustratedMessage from "../IllustratedMessage";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";

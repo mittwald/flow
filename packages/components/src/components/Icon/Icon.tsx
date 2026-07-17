@@ -37,9 +37,9 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-label": ariaLabel,
     className: clsx(
       styles.icon,
-      className,
       styles[`size-${size}`],
       status && styles[status],
+      className,
     ),
   };
 

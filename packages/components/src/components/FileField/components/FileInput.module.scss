@@ -1,3 +1,7 @@
 .trigger {
   order: 2;
+
+  &[data-disabled="true"] ~ .fieldDescription {
+    color: var(--label--color--disabled);
+  }
 }

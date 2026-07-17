@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { CodeEditor } from "@/components/CodeEditor";
 
 const meta: Meta<typeof CodeEditor> = {

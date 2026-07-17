@@ -1,4 +1,3 @@
-import React from "react";
 import { Align } from "@/components/Align";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";

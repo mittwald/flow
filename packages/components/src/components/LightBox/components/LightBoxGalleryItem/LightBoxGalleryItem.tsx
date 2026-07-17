@@ -21,6 +21,7 @@ export const LightBoxGalleryItem = flowComponent(
 
     const propsContext: PropsContext = {
       ActionGroup: {
+        spacing: "m",
         className: styles.actionGroup,
         Button: { color: "light-static" },
         tunnel: { id: "actionGroup", component: "LightBoxGalleryItem" },
@@ -50,3 +51,5 @@ export const LightBoxGalleryItem = flowComponent(
     );
   },
 );
+
+export default LightBoxGalleryItem;

@@ -2,5 +2,5 @@
 export * from "./components/TooltipTrigger";
 export * from "./view";
 
-export { Tooltip, type TooltipProps } from "./Tooltip";
+export { type TooltipProps, Tooltip } from "./Tooltip";
 export { default } from "./Tooltip";

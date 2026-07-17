@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Rating } from "@/components/Rating";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";

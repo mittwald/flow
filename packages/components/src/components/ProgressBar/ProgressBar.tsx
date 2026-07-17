@@ -55,10 +55,10 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
   } = props;
 
   const rootClassName = clsx(
-    className,
     styles.progressBar,
     styles[`size-${size}`],
     styles[status],
+    className,
   );
 
   const propsContext: PropsContext = {

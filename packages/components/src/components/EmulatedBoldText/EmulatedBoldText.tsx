@@ -1,5 +1,4 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
-import React from "react";
 import styles from "./EmulatedBoldText.module.scss";
 import clsx from "clsx";
 

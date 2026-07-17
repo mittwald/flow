@@ -35,8 +35,8 @@ export const Accordion: FC<AccordionProps> = flowComponent(
     const rootClassName = clsx(
       styles.accordion,
       expanded && styles.expanded,
-      className,
       variant === "outline" && styles.outline,
+      className,
     );
 
     const headerId = useId();

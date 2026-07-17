@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { FC } from "react";
-import React from "react";
 import type { MessageProps } from "@/components/Message";
 import { Message } from "@/components/Message";
 import { MessageSeparator, MessageThread } from "@/components/MessageThread";
