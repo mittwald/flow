@@ -44,7 +44,7 @@ export default () => {
           </CodeEditor>
         </Field>
         <ActionGroup>
-          <SubmitButton color="accent">Senden</SubmitButton>
+          <SubmitButton>Senden</SubmitButton>
         </ActionGroup>
       </Form>
     </Section>

@@ -380,6 +380,12 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
         this.getIngresses(),
       ]);
 
+      const isFirstDeployment = !this.images.some((image) =>
+        existingServices.some(
+          (s) => s.serviceName === this.getServiceName(image.imageType),
+        ),
+      );
+
       const urls: Record<string, string> = {};
       for (const image of this.images) {
         urls[image.imageType] = await this.deployImage(
@@ -389,7 +395,9 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
         );
       }
 
-      await this.postGitHubComment(urls);
+      if (isFirstDeployment) {
+        await this.postGitHubComment(urls);
+      }
 
       console.log("\n✨ Deployment completed successfully!");
       console.log("\nPreview URLs:");

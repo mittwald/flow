@@ -31,9 +31,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    &[data-placeholder="true"] {
-      color: var(--form-control--placeholder-color--default);
-    }
   }
 }

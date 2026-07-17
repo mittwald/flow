@@ -2,27 +2,6 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  flex-grow: 1;
-
-  @extend .s;
-
-  .primary {
-    order: 3;
-
-    &:only-child {
-      margin-left: auto;
-    }
-  }
-
-  .secondary {
-    order: 2;
-  }
-
-  .abort {
-    order: 1;
-    margin-right: auto;
-  }
 
   @mixin spacing($spacing) {
     &.#{$spacing} {
@@ -32,4 +11,26 @@
 
   @include spacing(s);
   @include spacing(m);
+
+  &.sorted {
+    justify-content: flex-end;
+    flex-grow: 1;
+
+    .primary {
+      order: 3;
+
+      &:only-child {
+        margin-left: auto;
+      }
+    }
+
+    .secondary {
+      order: 2;
+    }
+
+    .abort {
+      order: 1;
+      margin-right: auto;
+    }
+  }
 }

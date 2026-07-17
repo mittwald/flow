@@ -2,6 +2,7 @@
 
 import { demoData } from "@/app/remote/list/demoData";
 import {
+  Action,
   ActionGroup,
   Avatar,
   BrowserOnly,
@@ -27,7 +28,7 @@ export default function Page() {
     <BrowserOnly>
       <Section>
         <List onAction={console.log} batchSize={10} aria-label="Demo">
-          <DemoList.Filter property="language" name="Language">
+          <DemoList.Filter property="faction" name="Faction">
             {(val) => <>{val}</>}
           </DemoList.Filter>
           <DemoList.Search autoSubmit />
@@ -53,13 +54,13 @@ export default function Page() {
                       <IconEmail />
                     </Avatar>
                     <Heading>
-                      {d.name} ({d.language})
+                      {d.name} ({d.faction})
                     </Heading>
                     <Text>{d.bio.slice(0, 100)}</Text>
                     <ContextMenu>
                       <MenuItem onAction={c.open}>
                         <IconEmail />
-                        <Text>Menu item</Text>
+                        <Text>Send message</Text>
                       </MenuItem>
                     </ContextMenu>
                   </ListItemView>
@@ -67,13 +68,13 @@ export default function Page() {
                     <Heading>{d.name}</Heading>
                     <Content>
                       <Section>
-                        <Heading>{d.language}</Heading>
+                        <Heading>{d.faction}</Heading>
                         <Text>{d.bio}</Text>
                       </Section>
                     </Content>
                     <ActionGroup>
                       <Action closeModal>
-                        <Button>Abbrechen</Button>
+                        <Button>Cancel</Button>
                       </Action>
                     </ActionGroup>
                   </Modal>

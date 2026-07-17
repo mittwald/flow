@@ -11,7 +11,7 @@ export default function HostPage() {
     <>
       <RemoteRenderer __remoteReceiver={receiver} />
       <RemoteRoot __remoteReceiver={receiver}>
-        <Button>Test</Button>
+        <Button>Launch X-wing</Button>
       </RemoteRoot>
     </>
   );

@@ -3,8 +3,8 @@ import { Markdown } from "@mittwald/flow-remote-react-components";
 export default function Page() {
   return (
     <Markdown>
-      Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius
-      *quam quas vel voluptas* ullam aliquid ***fugit***.
+      The **Death Star** is fully operational and moving toward the *Endor*
+      system, guarded by the ***entire Imperial fleet***.
     </Markdown>
   );
 }

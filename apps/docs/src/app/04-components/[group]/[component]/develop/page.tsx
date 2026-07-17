@@ -17,7 +17,9 @@ export const generateStaticParams = async () => {
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
-  return await MdxFileFactory.generateMetadata(contentFolder, params);
+  return await MdxFileFactory.generateMetadata(contentFolder, params, {
+    tab: "develop",
+  });
 };
 
 export default async function Page(props: Props) {
@@ -31,7 +33,9 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
+      {indexMdxFile && (
+        <TopContent mdxFile={indexMdxFile} section="04-components" />
+      )}
 
       <TabContent params={params} activeTab="develop" />
     </>

@@ -3,7 +3,7 @@ import { Button, Section } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
 
 const Thrower = () => {
-  throw new Error("Something went wrong");
+  throw new Error("Hyperdrive malfunction on the Millennium Falcon");
 };
 
 export default function Page() {
@@ -17,7 +17,7 @@ export default function Page() {
           setRenderThrower(true);
         }}
       >
-        Trigger error
+        Engage hyperdrive
       </Button>
     </Section>
   );

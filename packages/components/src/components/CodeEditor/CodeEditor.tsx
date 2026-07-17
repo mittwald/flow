@@ -118,8 +118,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
                 text={value}
               />
             )}
+            {children}
           </CodeMirror>
-          {children}
         </FieldErrorCaptureContext>
         <FieldErrorView />
       </PropsContextProvider>

@@ -50,9 +50,6 @@ const policyDecl: PolicyDeclaration = {
       translationKey: "canNotStartWithSpecialCharacter",
     },
     {
-      ruleType: RuleType.hibp,
-    },
-    {
       identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],
@@ -70,6 +67,9 @@ const policyDecl: PolicyDeclaration = {
       ruleType: RuleType.blocklist,
       blocklist: ["foo", "bar"],
       substringMatch: true,
+    },
+    {
+      ruleType: RuleType.hibp,
     },
   ],
 };

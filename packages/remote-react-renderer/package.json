@@ -1,9 +1,9 @@
 {
   "name": "@mittwald/flow-remote-react-renderer",
-  "version": "0.2.0-alpha.887",
+  "version": "0.2.0-alpha.924",
   "type": "module",
   "description": "React rendering for Flow Remote Elements",
-  "homepage": "https://mittwald.github.io/flow",
+  "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
@@ -25,7 +25,7 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test:compile": "tsc --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@mittwald/ext-bridge": "workspace:*",

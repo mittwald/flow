@@ -14,7 +14,7 @@ import {
     </Link>
   </NavigationGroup>
   <NavigationGroup collapsable>
-    <Label>Komponenten</Label>
+    <Label>Components</Label>
     <Link href="#">Apps</Link>
     <Link href="#">Datenbanken</Link>
     <Link href="#">Domains</Link>

@@ -26,7 +26,7 @@
   "validation.general.securePassword": "Sehr gut! Dein Passwort ist sicher.",
   "validation.general.short.unspecified": "Keine spezifischen Anforderungen",
   "validation.hibp": "{isValid, select, true {Das Passwort ist nicht kompromittiert.} other {Das Passwort ist kompromittiert. Bitte vergib ein neues.}}",
-  "validation.hibp.short": "{isValid, select, true {Nicht kompromittiert} other {Kompromittiert}}",
+  "validation.hibp.short": "{isValid, select, true {Nicht kompromittiert} other {Nicht kompromittiert}}",
   "validation.length.max": "{max, plural, one {Bitte wähle ein Passwort mit maximal einem Zeichen.} other {Bitte wähle ein Passwort mit maximal {max} Zeichen.}}",
   "validation.length.max.short": "{max, plural, one {Maximal ein Zeichen} other {Maximal {max} Zeichen}}",
   "validation.length.min": "{min, plural, one {Bitte wähle ein Passwort mit mindestens einem Zeichen.} other {Bitte wähle ein Passwort mit mindestens {min} Zeichen.}}",

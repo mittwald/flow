@@ -172,9 +172,7 @@ export default () => {
           </Field>
         </ColumnLayout>
         <ActionGroup>
-          <SubmitButton color="accent">
-            Speichern
-          </SubmitButton>
+          <SubmitButton>Speichern</SubmitButton>
         </ActionGroup>
       </Section>
     </Form>

@@ -14,7 +14,7 @@ const serializers = Object.values(serializerModules).filter(
 export class FlowThreadSerialization extends ThreadSerializationStructuredClone {
   public constructor() {
     const options: ThreadSerializationOptions = {
-      serialize: (val, serialize) => {
+      serialize: async (val, serialize) => {
         try {
           if (this.isSerializableByBase(val)) {
             return;
@@ -23,34 +23,42 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
             return null;
           }
           for (const serializer of serializers) {
-            const serialization = serializer.serialize(val);
+            const serialization = await serializer.serialize(val);
+
             if (serialization.applied) {
-              return serialize(serialization.result);
+              return await serialize(serialization.result);
             }
           }
+
           if (isObjectType(val)) {
-            return serialize({ ...val });
+            return await serialize({ ...val });
           }
+
+          return undefined;
         } catch (error) {
           console.error("Error while serializing", error);
           throw error;
         }
       },
-      deserialize: (val, serialize) => {
+
+      deserialize: async (val, deserialize) => {
         try {
           for (const serializer of serializers) {
-            const deserialization = serializer.deserialize(val);
+            const deserialization = await serializer.deserialize(val);
+
             if (deserialization.applied) {
               return deserialization.result.value;
             }
           }
-          return serialize(val);
+
+          return await deserialize(val);
         } catch (error) {
           console.error("Error while deserializing", error);
           throw error;
         }
       },
     };
+
     super(options);
   }
 

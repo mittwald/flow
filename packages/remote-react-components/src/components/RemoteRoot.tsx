@@ -3,6 +3,7 @@ import * as remoteComponents from "@/auto-generated";
 import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
+import { packageVersion } from "@/version";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
@@ -24,6 +25,8 @@ import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { RemoteContextProvider } from "@/components/RemoteContextProvider";
 import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
 import {
+  DeprecationWarningProvider,
+  type DeprecationWarningHandler,
   IntlProvider,
   useLanguage,
 } from "@mittwald/flow-react-components/flr-universal";
@@ -80,6 +83,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const hostConfigRef = useRef<HostConfig | undefined>(undefined);
   const isConnectionInitialized = useRef(false);
   const [connectionError, setConnectionError] = useState(null);
+  const [hostError, setHostError] = useState<string | undefined>(undefined);
   const [isConnected, setIsConnected] = useState(false);
 
   const fallbackLanguage = useLanguage();
@@ -97,6 +101,14 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const handleRenderError = (error: unknown) => {
     renderErrorRef.current = error;
     connectionRef.current?.imports.setError(stringifyError(error));
+  };
+
+  const forwardDeprecationWarning: DeprecationWarningHandler = (message) => {
+    void connectionRef.current?.imports
+      .reportDeprecation?.(message)
+      ?.catch(() => {
+        // ignore: host does not support deprecation reporting
+      });
   };
 
   const setIsLoadingFromProps = () => {
@@ -120,9 +132,15 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     throw connectionError;
   }
 
+  if (hostError) {
+    throw new Error(hostError);
+  }
+
   const connect = connectHostRenderRootRef({
     onPathnameChanged: (pathname) =>
       startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+    onHostError: (error) => setHostError(error),
+    packageVersion,
   });
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
@@ -172,11 +190,13 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
             }}
           >
             <IntlProvider locale={language}>
-              <Suspense fallback={loadingFallback}>
-                <ViewComponentContextProvider components={viewComponents}>
-                  {children}
-                </ViewComponentContextProvider>
-              </Suspense>
+              <DeprecationWarningProvider onWarning={forwardDeprecationWarning}>
+                <Suspense fallback={loadingFallback}>
+                  <ViewComponentContextProvider components={viewComponents}>
+                    {children}
+                  </ViewComponentContextProvider>
+                </Suspense>
+              </DeprecationWarningProvider>
             </IntlProvider>
           </RemoteContextProvider>
         )}

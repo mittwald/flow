@@ -32,7 +32,7 @@ export default () => {
           </MarkdownEditor>
         </Field>
         <ActionGroup>
-          <SubmitButton color="accent">Senden</SubmitButton>
+          <SubmitButton>Senden</SubmitButton>
         </ActionGroup>
       </Form>
     </Section>

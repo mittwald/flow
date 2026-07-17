@@ -43,6 +43,7 @@ test.each(testEnvironments)(
         </TextField>
         <TextField isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </TextField>
         <TextField type="password">
           <Label>Password</Label>

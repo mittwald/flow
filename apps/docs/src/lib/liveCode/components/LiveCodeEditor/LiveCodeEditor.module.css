@@ -3,15 +3,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--size-rem--m);
 
-  &.stretch {
-    align-items: stretch;
+  > :global(.flow--truncate) {
+    align-self: normal;
+  }
+
+  > :global(.flow--accordion),
+  > :global(.flow--action-group),
+  > :global(.flow--breadcrumb),
+  > :global(.flow--code-block),
+  > :global(.flow--file-card),
+  > :global(.flow--flex),
+  > :global(.flow--form-field),
+  > :global(.flow--labeled-value),
+  > :global(.flow--list),
+  > :global(.flow--markdown-editor),
+  > :global(.flow--navigation),
+  > :global(.flow--tabs),
+  > :global(.flow--text),
+  > form {
+    align-self: stretch;
   }
 
   &.row {
     flex-flow: row wrap;
-    justify-content: center;
   }
 }
 
