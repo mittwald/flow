@@ -206,8 +206,8 @@ categories, and the category determines what you can and cannot do with it.
   no `flr-*` element and cannot render remotely at all. **Gotcha:** if a
   universal component composes a host-only component through a direct
   `@/components/*` import instead of a view, it will silently render nothing in
-  a remote context — there is no error, the output is just missing (see
-  `packages/components/PATTERNS.md:274-277`).
+  a remote context — there is no error, the output is just missing (see the
+  host-only components note in `packages/components/PATTERNS.md`).
 
 ### State, data loading, and side effects belong on the remote side
 
