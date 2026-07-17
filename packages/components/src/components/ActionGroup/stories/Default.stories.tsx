@@ -34,6 +34,15 @@ type Story = StoryObj<typeof ActionGroup>;
 
 export const Default: Story = {};
 
+export const Size: Story = {
+  render: (props) => (
+    <ActionGroup {...props} size="s">
+      <Link slot="abort">Forgot password?</Link>
+      <Button color="accent">Login</Button>
+    </ActionGroup>
+  ),
+};
+
 export const PrimaryActionOnly: Story = {
   render: (props) => (
     <ActionGroup {...props}>
@@ -72,6 +81,20 @@ export const WithExtraSecondaryAction: Story = {
       </Button>
       <Button slot="abort" variant="soft" color="secondary">
         Abort
+      </Button>
+    </ActionGroup>
+  ),
+};
+
+export const PreserveOrder: Story = {
+  render: (props) => (
+    <ActionGroup {...props} preserveOrder>
+      <Button color="secondary" variant="soft">
+        Abort
+      </Button>
+      <Button color="accent">Create customer</Button>
+      <Button color="secondary" variant="soft">
+        Save as draft
       </Button>
     </ActionGroup>
   ),

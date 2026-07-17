@@ -4,8 +4,13 @@ import DivView from "@/views/DivView";
 import ItemsGridListView from "@/views/ItemsGridListView";
 import clsx from "clsx";
 import type { FC } from "react";
+import { useRef } from "react";
 import styles from "./Items.module.scss";
 import { FallbackItems } from "./components/FallbackItems";
+import {
+  getLoadMoreThresholdRows,
+  useInfiniteScrollTrigger,
+} from "./hooks/useInfiniteScrollTrigger";
 
 export const Items: FC = () => {
   const list = useList();
@@ -13,12 +18,28 @@ export const Items: FC = () => {
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 
+  const triggerRef = useRef<HTMLDivElement>(null);
+  useInfiniteScrollTrigger(triggerRef);
+
   if (!list.itemView) {
     return null;
   }
 
-  const items = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} id={item.id} />
+  const triggerIndex = Math.max(
+    0,
+    list.items.entries.length -
+      getLoadMoreThresholdRows(list.batches.batchSize),
+  );
+
+  const items = list.items.entries.map((item, index) => (
+    <Item
+      key={item.id}
+      data={item.data}
+      id={item.id}
+      triggerRef={
+        list.infiniteScroll && index === triggerIndex ? triggerRef : undefined
+      }
+    />
   ));
 
   const rootClassName = clsx(

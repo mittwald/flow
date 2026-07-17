@@ -50,6 +50,13 @@ export interface ListProps<T, TMeta = unknown>
     > {
   /** The number of items to be displayed on one page. */
   batchSize?: number;
+  /**
+   * Automatically loads the next batch of items when the user scrolls to the
+   * end of the list, instead of showing a "Show more" button.
+   *
+   * @default false
+   */
+  infiniteScroll?: boolean;
   hidePagination?: boolean;
   emptySearchResultView?: ReactNode;
   emptyView?: ReactNode;
@@ -177,6 +184,7 @@ export const List = flowComponent("List", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
+      preserveOrder: true,
       tunnel: {
         id: "actions",
         component: "List",

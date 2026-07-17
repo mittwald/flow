@@ -6,6 +6,7 @@
   "filters.clearSelection": "Auswahl aufheben",
   "filters.reset": "Filter zurücksetzen",
   "filters.store": "Filter speichern",
+  "loadingMore": "Weitere Einträge werden geladen",
   "noItems.heading": "Keine Einträge vorhanden",
   "noItems.text": "Sobald Einträge vorhanden sind, werden sie hier angezeigt.",
   "noResult.heading": "Keine Suchergebnisse gefunden",
