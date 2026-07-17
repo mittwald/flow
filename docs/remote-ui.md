@@ -84,6 +84,66 @@ Five packages divide the responsibilities along this flow:
 
 ## The mental model
 
+The clearest way to think about remote-UI is as two worlds separated by a
+serialization boundary: the **remote** world (the extension, running inside the
+hidden iframe) and the **host** world (the backoffice). Everything that crosses
+between them has to survive being serialized, sent over the thread connection,
+and deserialized on the other side. `FlowThreadSerialization`
+(`packages/remote-core/src/serialization/FlowThreadSerialization.ts`)
+deliberately excludes `HTMLElement` and `window` from what it will serialize —
+they simply cannot mean anything on the other side of the boundary. The `flr-*`
+custom elements exist precisely to stand in for host components inside this
+boundary: the remote side only ever manipulates `flr-*` elements, never a real
+DOM node.
+
+```text
+  REMOTE (iframe)                    │  thread boundary  │      HOST (backoffice)
+  ────────────────                   │                   │      ─────────────────
+  state · data loading · effects     │  serialized       │  mirror of remote output
+  Suspense resolves here             │  mutations  ────► │  real Flow components render
+  flr-* output tree                  │                   │
+  event handlers run here      ◄──── │  events           │  every event forwarded back
+
+  crosses:      serializable props · on* events (detail only) · slots (ReactNode)
+  never crosses: HTMLElement/window · ref · controller · tunnel · return values
+```
+
+**Render-and-mirror, events-back.** The relationship between the two sides is
+directional, not symmetric. The host renders only what the remote emits — it is
+a mirror of the remote output tree, nothing more. In the other direction, the
+host forwards **all** events back to the remote side, where the actual event
+handlers run. This is why state and logic live on the remote side: the host is
+deliberately "dumb", a rendering surface that reflects output and relays input.
+
+**Everything rendered remote-side must itself be remote-capable.** This is the
+general principle the boundary enforces. In extension code, it is guaranteed
+structurally: extension developers can only render components imported from
+`@mittwald/flow-remote-react-components`, so there is no way to accidentally
+render something the host cannot mirror (this is a user-land concern for
+extension developers and out of scope here). The contributor-side equivalent —
+what this means when you compose components _inside_ Flow itself — is covered in
+[Implementing a component](#implementing-a-component), where composing through
+views (`@/views/*`) is what keeps a composite component remote-safe.
+
+Two worked examples make the principle concrete:
+
+- **List.** Data loading for `List` runs entirely on the remote side
+  (`List/setupComponents/ListLoaderAsync*`, `List/model/ListSettingsStore`). The
+  loading state is rendered by the remote and mirrored to the host; once data
+  arrives, the list entries themselves are produced remotely and mirrored the
+  same way. The remote side holds the state and drives the interaction end to
+  end — the host only reflects whatever output currently exists and relays
+  events (like a row click) back.
+- **Suspense.** Suspense resolves on the remote side too. The Suspense boundary
+  itself renders no DOM elements, so nothing is transmitted across the boundary
+  for the boundary mechanism itself — only its `fallback` crosses, and the
+  fallback, like anything rendered remote-side, must be remote-capable.
+  `SuspenseTrigger`
+  (`packages/components/src/components/SuspenseTrigger/SuspenseTrigger.tsx`)
+  illustrates the underlying mechanism: it renders a lazy element that never
+  resolves, which is enough to hold a boundary suspended for testing or demo
+  purposes.
+
 ## The generation pipeline
 
 ## Implementing a component
