@@ -146,6 +146,41 @@ Two worked examples make the principle concrete:
 
 ## The generation pipeline
 
+A component becomes remote-capable by carrying a `/** @flr-generate all */`
+JSDoc tag directly above its declaration (see, for example,
+`packages/components/src/components/Button/Button.tsx`). The `all` value is
+decorative — the generator only checks that the `flr-generate` tag is _present_
+on the component, not what value it carries.
+
+That single tag drives a chain of generated artifacts:
+
+- `view.ts` next to the component, plus a generated view component under
+  `packages/components/src/views/` (e.g. `<Name>View.tsx`) — the piece that lets
+  other components compose it transparently through `@/views/*` (see
+  [Implementing a component](#implementing-a-component)).
+- A custom `flr-*` element in `packages/remote-elements/src/auto-generated/`.
+- A remote React component in
+  `packages/remote-react-components/src/auto-generated/`, which is what
+  extension code actually imports and renders.
+- An entry in the host-side component map in
+  `packages/remote-react-renderer/src/auto-generated/`, which is what lets
+  `RemoteRenderer` turn the `flr-*` element back into the real component.
+
+The whole pipeline runs with `pnpm nx build:remote-components components` (or
+simply `pnpm build`, which runs every generator). It depends on prop
+documentation extracted from JSDoc: `pnpm nx build:docs-properties components`
+writes `packages/components/dist/assets/doc-properties.json`, which the
+remote-components generator reads to decide which props become which kind of
+contract (see [How props cross the boundary](#implementing-a-component)).
+Because of this dependency, changing prop JSDoc without rebuilding leaves the
+generated artifacts out of sync.
+
+Generated files are committed, never hand-edited — every header on a generated
+file says so, and CI enforces this with `git diff --exit-code` after running the
+build. Fixing something that looks wrong in a generated file means fixing the
+generator or the source component and regenerating, not editing the output
+directly.
+
 ## Implementing a component
 
 ## Versioning & backwards compatibility
