@@ -4,10 +4,9 @@ import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "../../../layout.module.scss";
 import {
   Flex,
+  HorizontalNavigation,
   LayoutCard,
-  Tab,
-  Tabs,
-  TabTitle,
+  Link,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
@@ -63,26 +62,33 @@ export const TabContent: FC<Props> = async (props) => {
     <Flex columnGap="m" className={styles.tabsContainer}>
       <Flex direction="column" rowGap="m" className={styles.tabsContainer}>
         <LayoutCard className={styles.tabs}>
-          <Tabs selectedKey={activeTab}>
+          <HorizontalNavigation aria-label="Bereiche">
             {overviewMdxFile && (
-              <Tab id="overview">
-                <TabTitle href={`${path}/overview`}>Overview</TabTitle>
-                {activeTab === "overview" && tabContent}
-              </Tab>
+              <Link
+                href={`${path}/overview`}
+                aria-current={activeTab === "overview" ? "page" : undefined}
+              >
+                Overview
+              </Link>
             )}
             {developMdxFile && (
-              <Tab id="develop">
-                <TabTitle href={`${path}/develop`}>Develop</TabTitle>
-                {activeTab === "develop" && tabContent}
-              </Tab>
+              <Link
+                href={`${path}/develop`}
+                aria-current={activeTab === "develop" ? "page" : undefined}
+              >
+                Develop
+              </Link>
             )}
             {guidelinesMdxFile && (
-              <Tab id="guidelines">
-                <TabTitle href={`${path}/guidelines`}>Guidelines</TabTitle>
-                {activeTab === "guidelines" && tabContent}
-              </Tab>
+              <Link
+                href={`${path}/guidelines`}
+                aria-current={activeTab === "guidelines" ? "page" : undefined}
+              >
+                Guidelines
+              </Link>
             )}
-          </Tabs>
+          </HorizontalNavigation>
+          {tabContent}
         </LayoutCard>
       </Flex>
 
