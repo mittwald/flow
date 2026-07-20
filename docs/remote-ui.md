@@ -11,12 +11,12 @@ building the Flow components themselves.
 
 ## Why remote-UI exists
 
-mStudio extensions run inside a hidden iframe, sandboxed away from the host (the
-mittwald backoffice) for security. Yet the UI an extension produces has to look
-and feel like it belongs in the backoffice — buttons, tables, forms, and layouts
-that are indistinguishable from the surrounding product. Remote-UI is the system
-that bridges that gap: extensions describe their UI in terms of Flow components,
-and the host renders real Flow components on their behalf.
+mStudio extensions run inside a hidden iframe, sandboxed away from the host
+(mStudio) for security. Yet the UI an extension produces has to look and feel
+like it belongs in mStudio — buttons, tables, forms, and layouts that are
+indistinguishable from the surrounding product. Remote-UI is the system that
+bridges that gap: extensions describe their UI in terms of Flow components, and
+the host renders real Flow components on their behalf.
 
 The alternative — shipping a component library inside every extension bundle —
 was rejected for reasons that all trace back to control. A bundled library
@@ -42,7 +42,7 @@ to that hidden tree is serialized and sent across a
 [`@quilted/threads`](https://github.com/lemonmade/quilt) connection to the host.
 On the host side, a `RemoteReceiver` accepts the incoming mutations and a
 `RemoteRenderer` maps each `flr-*` element to its real Flow component
-counterpart, so the backoffice ends up rendering actual Flow components — not a
+counterpart, so the host ends up rendering actual Flow components — not a
 re-implementation of them. Events run in the opposite direction: user
 interaction on the rendered host component is captured and forwarded back across
 the same connection so the handler, which lives in the extension, can respond to
@@ -56,7 +56,7 @@ flowchart LR
     RDOM["hidden remote DOM<br/>(flr-* elements)"]
     RR --> RDOM
   end
-  subgraph HOST["Host (mStudio backoffice)"]
+  subgraph HOST["Host (mStudio)"]
     direction TB
     RECV["RemoteReceiver"]
     REND["RemoteRenderer"]
@@ -86,10 +86,10 @@ Five packages divide the responsibilities along this flow:
 
 The clearest way to think about remote-UI is as two worlds separated by a
 serialization boundary: the **remote** world (the extension, running inside the
-hidden iframe) and the **host** world (the backoffice). Everything that crosses
-between them has to survive being serialized, sent over the thread connection,
-and deserialized on the other side. `FlowThreadSerialization`
-(`packages/remote-core/src/serialization/FlowThreadSerialization.ts`)
+hidden iframe) and the **host** world (mStudio). Everything that crosses between
+them has to survive being serialized, sent over the thread connection, and
+deserialized on the other side. `FlowThreadSerialization`
+([`packages/remote-core/src/serialization/FlowThreadSerialization.ts`](../packages/remote-core/src/serialization/FlowThreadSerialization.ts))
 deliberately excludes `HTMLElement` and `window` from what it will serialize —
 they simply cannot mean anything on the other side of the boundary. The `flr-*`
 custom elements exist precisely to stand in for host components inside this
@@ -102,12 +102,12 @@ flowchart LR
     direction TB
     R["state · data loading · effects<br/>Suspense resolves here<br/>flr-* output tree<br/>event handlers run here"]
   end
-  subgraph HOST["HOST (backoffice)"]
+  subgraph HOST["HOST (mStudio)"]
     direction TB
     H["mirror of remote output<br/>real Flow components render<br/>every event forwarded back"]
   end
-  REMOTE -- "serialized mutations ▶" --> HOST
-  HOST -- "◀ events" --> REMOTE
+  REMOTE -- "serialized mutations" --> HOST
+  HOST -- "events" --> REMOTE
 ```
 
 Across that boundary, what **crosses** is: serializable props, `on*` events (the
@@ -146,7 +146,7 @@ Two worked examples make the principle concrete:
   for the boundary mechanism itself — only its `fallback` crosses, and the
   fallback, like anything rendered remote-side, must be remote-capable.
   `SuspenseTrigger`
-  (`packages/components/src/components/SuspenseTrigger/SuspenseTrigger.tsx`)
+  [(`packages/components/src/components/SuspenseTrigger/SuspenseTrigger.tsx`)](../packages/components/src/components/SuspenseTrigger/SuspenseTrigger.tsx)
   illustrates the underlying mechanism: it renders a lazy element that never
   resolves, which is enough to hold a boundary suspended for testing or demo
   purposes.
@@ -155,9 +155,9 @@ Two worked examples make the principle concrete:
 
 A component becomes remote-capable by carrying a `/** @flr-generate all */`
 JSDoc tag directly above its declaration (see, for example,
-`packages/components/src/components/Button/Button.tsx`). The `all` value is
-decorative — the generator only checks that the `flr-generate` tag is _present_
-on the component, not what value it carries.
+[`packages/components/src/components/Button/Button.tsx`](../packages/components/src/components/Button/Button.tsx)).
+The `all` value is decorative — the generator only checks that the
+`flr-generate` tag is _present_ on the component, not what value it carries.
 
 That single tag drives a chain of generated artifacts:
 
@@ -214,7 +214,8 @@ categories, and the category determines what you can and cannot do with it.
   universal component composes a host-only component through a direct
   `@/components/*` import instead of a view, it will silently render nothing in
   a remote context — there is no error, the output is just missing (see the
-  host-only components note in `packages/components/PATTERNS.md`).
+  host-only components note in
+  [`packages/components/PATTERNS.md`](../packages/components/PATTERNS.md)).
 
 ### State, data loading, and side effects belong on the remote side
 
@@ -230,7 +231,7 @@ remotely, and the host only ever shows the latest emitted output.
 
 The remote-components generator classifies every prop of a `@flr-generate`
 component
-(`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`),
+([`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`](../packages/components/dev/remote-components-generator/lib/propClassifiers.ts)),
 and the classification decides how that prop behaves once it crosses into remote
 territory:
 
@@ -250,7 +251,7 @@ territory:
   connection.
 - **There are no HTML attributes.** `isAttribute` in the generator is hard-coded
   to `false`
-  (`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`),
+  ([`packages/components/dev/remote-components-generator/lib/propClassifiers.ts`](../packages/components/dev/remote-components-generator/lib/propClassifiers.ts)),
   so every non-event, non-slot prop is treated as a serialized _property_ —
   don't rely on boolean or number props reflecting as DOM attributes on the
   `flr-*` element.
@@ -271,10 +272,10 @@ and deprecating the old ones with `useWarnDeprecation` (see
 
 Some props are excluded from generation outright, either globally or per
 component. The global ignore list lives in
-`packages/components/dev/remote-components-generator/config.ts`: `style`,
-`dangerouslySetInnerHTML`, `ref`, `controller`, `tunnel`, `key`, `children`, and
-`wrapWith`. A component can additionally exclude one of its own props with a
-`@flr-ignore-props` JSDoc tag.
+[`packages/components/dev/remote-components-generator/config.ts`](../packages/components/dev/remote-components-generator/config.ts):
+`style`, `dangerouslySetInnerHTML`, `ref`, `controller`, `tunnel`, `key`,
+`children`, and `wrapWith`. A component can additionally exclude one of its own
+props with a `@flr-ignore-props` JSDoc tag.
 
 Three of these deserve a specific explanation, because they look like they
 should cross the boundary and deliberately don't:
@@ -304,9 +305,9 @@ value the remote side just sent.
 
 This pairing is opted into through a hardcoded allowlist,
 `controlledComponentNames`, in
-`packages/remote-react-components/src/lib/createRemoteComponent.ts`. Adding a
-new controlled remote text field means adding its `flr-*` tag name to that list
-— skip it, and the field will drop characters under fast typing.
+[`packages/remote-react-components/src/lib/createRemoteComponent.ts`](../packages/remote-react-components/src/lib/createRemoteComponent.ts).
+Adding a new controlled remote text field means adding its `flr-*` tag name to
+that list — skip it, and the field will drop characters under fast typing.
 
 ### Placement and registration for a new remote-capable component
 
@@ -314,9 +315,10 @@ A new `@flr-generate` component has two placement requirements beyond the
 annotation itself: it must live under `src/components` or `src/integrations` in
 `packages/components` (the glob the doc-extraction step scans), and it must be
 registered in the hand-maintained `FlowComponentPropsTypes` registry at
-`packages/components/src/components/propTypes/index.ts`. Miss either one and the
-component is silently skipped by the generator or fails typecheck — there is no
-generator-side error pointing at the missing registration.
+[`packages/components/src/components/propTypes/index.ts`](../packages/components/src/components/propTypes/index.ts).
+Miss either one and the component is silently skipped by the generator or fails
+typecheck — there is no generator-side error pointing at the missing
+registration.
 
 ### PropsContext — only remote-capable components belong in one
 
@@ -347,28 +349,29 @@ were built against many different remote releases — the protocol has to tolera
 that spread, and it does so through two independent version mechanisms.
 
 The first is the connection handshake: a `Version` enum (`vUnknown`, `v1`…`v5`
-in `packages/remote-core/src/connection/types.ts`) that the remote side reports
-when it connects. The host feature-gates behavior with `>=` checks against this
-version and always defaults to the most conservative path when in doubt.
-Critically, there is **no hard mismatch error** — a remote that reports nothing,
-or an old remote build, simply normalizes to `v1` and gets the oldest supported
-behavior rather than a broken connection.
+in
+[`packages/remote-core/src/connection/types.ts`](../packages/remote-core/src/connection/types.ts))
+that the remote side reports when it connects. The host feature-gates behavior
+with `>=` checks against this version and always defaults to the most
+conservative path when in doubt. Critically, there is **no hard mismatch error**
+— a remote that reports nothing, or an old remote build, simply normalizes to
+`v1` and gets the oldest supported behavior rather than a broken connection.
 
 The second mechanism is per-element rather than per-connection: each `flr-*`
 element carries a `data-flr-version` and a `data-flr-initialized` attribute
 (`FlowRemoteElement.versionPropertyName` and
 `FlowRemoteElement.initializationPropertyName` in
-`packages/remote-elements/src/lib/FlowRemoteElement.ts`). From `v3` onward, the
-host renders `null` for an element until it signals `data-flr-initialized`,
-which avoids a visible flash of the component rendering with its bare default
-props before its real remote props have arrived.
+[`packages/remote-elements/src/lib/FlowRemoteElement.ts`](../packages/remote-elements/src/lib/FlowRemoteElement.ts)).
+From `v3` onward, the host renders `null` for an element until it signals
+`data-flr-initialized`, which avoids a visible flash of the component rendering
+with its bare default props before its real remote props have arrived.
 
 Underneath both mechanisms sits the actual backwards-compatibility boundary that
 must never break: the `HostExports` interface
-(`packages/remote-core/src/connection/types.ts`). Its own doc comment spells out
-the rule — never remove, rename, or otherwise change the meaning of an existing
-member, since older remotes may depend on it; when adding a new member, release
-the host before any client that uses it.
+([`packages/remote-core/src/connection/types.ts`](../packages/remote-core/src/connection/types.ts)).
+Its own doc comment spells out the rule — never remove, rename, or otherwise
+change the meaning of an existing member, since older remotes may depend on it;
+when adding a new member, release the host before any client that uses it.
 
 Deprecations travel a defined path rather than being an ad hoc `console.warn`:
 `useWarnDeprecation` (deferred to an effect and deduplicated so a warning fires
@@ -385,20 +388,21 @@ render-and-mirror model above and are worth knowing about directly:
 
 - `<script>` elements in the remote tree render to `null` on the host — a
   deliberate security omission, not an oversight
-  (`packages/remote-react-renderer/src/components.ts`). A set of raw HTML tags,
-  by contrast — `svg`, `path`, `ul`, `li`, and similar — pass straight through
-  as real DOM elements, which is what lets rich-text and Markdown output render
-  correctly. `flr-notification` is a special case handled imperatively: it is
-  pushed into the host's notification controller rather than rendered inline
-  (`packages/remote-react-renderer/src/components.ts`).
+  ([`packages/remote-react-renderer/src/components.ts`](../packages/remote-react-renderer/src/components.ts)).
+  A set of raw HTML tags, by contrast — `svg`, `path`, `ul`, `li`, and similar —
+  pass straight through as real DOM elements, which is what lets rich-text and
+  Markdown output render correctly. `flr-notification` is a special case handled
+  imperatively: it is pushed into the host's notification controller rather than
+  rendered inline
+  ([`packages/remote-react-renderer/src/components.ts`](../packages/remote-react-renderer/src/components.ts)).
 - **Suspense on the host does not unmount.** A suspended remote subtree is
   transmitted with `display: none !important` rather than being removed, so it
   stays mounted (and any state inside it survives) while hidden.
 - **Performance characteristics worth knowing:** navigation changes are detected
   by polling `location.href` every 50 ms, because no appropriate browser API
   exists for observing it otherwise
-  (`packages/remote-react-components/src/hooks/useWatchPathname.ts`); and
-  serialization shallow-clones every non-base object prop (`{ ...val }` in
+  ([`packages/remote-react-components/src/hooks/useWatchPathname.ts`](../packages/remote-react-components/src/hooks/useWatchPathname.ts));
+  and serialization shallow-clones every non-base object prop (`{ ...val }` in
   `FlowThreadSerialization`) on every pass across the boundary, so passing deep
   or large object props is more expensive over the wire than it would be
   locally.
