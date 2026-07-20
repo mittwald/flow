@@ -96,17 +96,24 @@ custom elements exist precisely to stand in for host components inside this
 boundary: the remote side only ever manipulates `flr-*` elements, never a real
 DOM node.
 
-```text
-  REMOTE (iframe)                    │  thread boundary  │      HOST (backoffice)
-  ────────────────                   │                   │      ─────────────────
-  state · data loading · effects     │  serialized       │  mirror of remote output
-  Suspense resolves here             │  mutations  ────► │  real Flow components render
-  flr-* output tree                  │                   │
-  event handlers run here      ◄──── │  events           │  every event forwarded back
-
-  crosses:      serializable props · on* events (detail only) · slots (ReactNode)
-  never crosses: HTMLElement/window · ref · controller · tunnel · return values
+```mermaid
+flowchart LR
+  subgraph REMOTE["REMOTE (iframe)"]
+    direction TB
+    R["state · data loading · effects<br/>Suspense resolves here<br/>flr-* output tree<br/>event handlers run here"]
+  end
+  subgraph HOST["HOST (backoffice)"]
+    direction TB
+    H["mirror of remote output<br/>real Flow components render<br/>every event forwarded back"]
+  end
+  REMOTE -- "serialized mutations ▶" --> HOST
+  HOST -- "◀ events" --> REMOTE
 ```
+
+Across that boundary, what **crosses** is: serializable props, `on*` events (the
+event `detail` only), and slots (`ReactNode`). What **never crosses** is:
+`HTMLElement`/`window`, `ref`, `controller`, `tunnel`, and callback return
+values.
 
 **Render-and-mirror, events-back.** The relationship between the two sides is
 directional, not symmetric. The host renders only what the remote emits — it is
