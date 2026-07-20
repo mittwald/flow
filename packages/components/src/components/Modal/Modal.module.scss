@@ -100,9 +100,17 @@
 
   /* Action group — the footer */
   .actionGroup {
-    flex-grow: 0;
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
+  }
+
+  /* ActionGroup's "sorted" layout sets flex-grow:1 on itself; the modal footer
+     must keep its natural height (otherwise it fills the full-height off-canvas
+     panel). Scope via the dialog so flex-grow:0 wins the equal-specificity /
+     source-order battle — without raising the specificity of the padding above,
+     which the mobile rules override. */
+  [role="dialog"] .actionGroup {
+    flex-grow: 0;
   }
 }
 
