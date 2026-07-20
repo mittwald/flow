@@ -15,6 +15,28 @@ describe("selectCrossVersionTargetVersions — semver categories", () => {
     expect(byCategory.latestOfPreviousLine).toBe("0.1.2");
   });
 
+  it("crosses a major boundary: latestOfPreviousLine is the latest of the previous major", () => {
+    // Two majors: 1.x (lines 1.0/1.1/1.2) then 2.x. Current is the first minor
+    // line of major 2, so the previous line is the highest line of major 1 —
+    // i.e. latestOfPreviousLine must be the latest published 1.x version.
+    const acrossMajors = [
+      "1.0.0",
+      "1.1.0",
+      "1.2.0",
+      "1.2.1",
+      "2.0.0",
+      "2.0.1",
+      "2.0.2",
+    ];
+    const result = selectCrossVersionTargetVersions("2.0.2", acrossMajors);
+    const byCategory = Object.fromEntries(
+      result.map((r) => [r.category, r.version]),
+    );
+    expect(byCategory.previous).toBe("2.0.1");
+    expect(byCategory.firstOfLine).toBe("2.0.0");
+    expect(byCategory.latestOfPreviousLine).toBe("1.2.1");
+  });
+
   it("ignores versions at or above the current version", () => {
     const result = selectCrossVersionTargetVersions("0.2.0", released);
     for (const target of result) {
