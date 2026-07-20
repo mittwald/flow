@@ -1,3 +1,4 @@
+/* Caps the dialog width per size token (`size-s` / `size-m` / `size-l`). */
 @mixin size($size) {
   &.size-#{$size} {
     [role="dialog"] {
@@ -7,8 +8,13 @@
   }
 }
 
+/* ===========================================================================
+   Base — shared by Modal (centered / bottom sheet) and OffCanvas (side panel).
+   =========================================================================== */
 .modal,
 .offCanvas {
+  /* Fixed full-viewport layer + centering wrapper. Sized to the visual
+     viewport so it tracks the on-screen keyboard (Overlay sets the var). */
   > div {
     position: fixed;
     height: var(--visual-viewport-height);
@@ -28,6 +34,7 @@
     }
   }
 
+  /* Close button: hidden when an action group is present, unless forced. */
   &:has(.actionGroup) {
     .closeButton:not(.alwaysVisible) {
       display: none;
@@ -38,22 +45,24 @@
     display: none;
   }
 
+  /* The dialog card itself — a flex column. */
   [role="dialog"] {
-    > form {
-      display: contents;
-    }
-
-    pointer-events: all;
-    outline: none;
     display: flex;
     flex-direction: column;
     max-height: 100%;
-    background-color: var(--modal--background-color);
     overflow: hidden;
+    outline: none;
+    pointer-events: all;
+    background-color: var(--modal--background-color);
     border: var(--modal--border-width) var(--modal--border-style)
       var(--modal--border-color);
+
+    > form {
+      display: contents;
+    }
   }
 
+  /* Header */
   header {
     display: flex;
     justify-content: space-between;
@@ -61,8 +70,8 @@
   }
 
   .header {
-    padding-inline: var(--modal--padding);
     padding-top: var(--modal--header-padding-top);
+    padding-inline: var(--modal--padding);
 
     > span {
       display: flex;
@@ -73,31 +82,33 @@
     }
   }
 
+  /* Content — the scrollable body */
   .content,
   .columnLayout {
-    overflow: hidden auto;
+    flex-grow: 1;
     min-height: var(--modal--content-min-height);
     padding: var(--modal--padding);
-    flex-grow: 1;
+    overflow: hidden auto;
     background-color: var(--modal--background-color);
   }
 
-  .actionGroup {
-    padding: var(--modal--padding);
-    background-color: var(--modal--footer-background-color);
-    flex-grow: 0;
+  .columnLayout .accentBox {
+    position: sticky;
+    top: 0;
+    height: fit-content;
   }
 
-  .columnLayout {
-    .accentBox {
-      position: sticky;
-      height: fit-content;
-      top: 0;
-    }
+  /* Action group — the footer */
+  .actionGroup {
+    flex-grow: 0;
+    padding: var(--modal--padding);
+    background-color: var(--modal--footer-background-color);
   }
 }
 
-/* Normal Modal Desktop */
+/* ===========================================================================
+   Modal — desktop (centered dialog, zoom in/out).
+   =========================================================================== */
 @media (width > 768px) {
   .modal {
     @include size(s);
@@ -108,24 +119,23 @@
       border-radius: var(--modal--corner-radius);
     }
 
-    > div {
-      > div {
-        &[data-entering] {
-          animation: modal-zoom var(--transition--duration--slow)
-            cubic-bezier(0.1, 0.8, 0.3, 1.2);
-        }
+    > div > div {
+      &[data-entering] {
+        animation: modal-zoom var(--transition--duration--slow)
+          cubic-bezier(0.1, 0.8, 0.3, 1.2);
+      }
 
-        &[data-exiting] {
-          animation: modal-zoom var(--transition--duration--default)
-            cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
-        }
+      &[data-exiting] {
+        animation: modal-zoom var(--transition--duration--default)
+          cubic-bezier(0.1, 0.8, 0.3, 1.2) reverse;
       }
     }
   }
 }
 
-/* OffCanvas Mobile & Desktop */
-
+/* ===========================================================================
+   OffCanvas — side panel (all widths), full height, slides in from the side.
+   =========================================================================== */
 .offCanvas {
   @include size(s);
   @include size(m);
@@ -183,46 +193,49 @@
   }
 }
 
-/* Mobile Tray — single scroll container with sticky header + footer.
-   The dialog scrolls; the header sticks to the top, the footer to the bottom.
-   While the virtual keyboard is open (.keyboardVisible) both un-stick so header
-   + content + footer flow normally and the content gets the full space (#2423). */
+/* ===========================================================================
+   Modal — mobile (bottom sheet), issue #2423.
 
+   One scroll container: the dialog scrolls while the header sticks to the top
+   and the footer to the bottom. While the virtual keyboard is open
+   (.keyboardVisible) both un-stick so header + content + footer flow normally
+   and the content gets the full available space.
+   =========================================================================== */
 @media (max-width: 768px) {
   .modal {
-    > div {
-      > div {
-        margin-top: auto;
-        padding: unset;
-        width: 100%;
-        overflow: hidden;
-        border-top-left-radius: var(--modal--corner-radius);
-        border-top-right-radius: var(--modal--corner-radius);
-        pointer-events: all;
+    /* Bottom-anchored sheet: rounded top corners + slide-up animation. */
+    > div > div {
+      margin-top: auto;
+      width: 100%;
+      padding: unset;
+      overflow: hidden;
+      border-top-left-radius: var(--modal--corner-radius);
+      border-top-right-radius: var(--modal--corner-radius);
+      pointer-events: all;
 
-        &[data-entering] {
-          animation: modal-slide-up var(--transition--duration--slow);
-        }
+      &[data-entering] {
+        animation: modal-slide-up var(--transition--duration--slow);
+      }
 
-        &[data-exiting] {
-          animation: modal-slide-up var(--transition--duration--default) reverse;
-        }
+      &[data-exiting] {
+        animation: modal-slide-up var(--transition--duration--default) reverse;
       }
     }
 
+    /* The dialog is the single scroll container. */
     [role="dialog"] {
       width: inherit;
-      overflow: hidden auto;
       max-height: var(--visual-viewport-height);
+      overflow: hidden auto;
     }
 
     [role="dialog"] > form {
       width: inherit;
     }
 
-    /* flex: 0 0 auto keeps natural heights; without flex-shrink:0 the flex column
-       compresses the content box and the (overflow:visible) fields spill over
-       the footer. */
+    /* flex: 0 0 auto keeps natural heights; without flex-shrink:0 the flex
+       column compresses the content box and the (overflow:visible) fields
+       spill over the footer. */
     .header,
     .content,
     .columnLayout,
@@ -232,10 +245,11 @@
 
     .content,
     .columnLayout {
-      overflow: visible;
       min-height: 0;
+      overflow: visible;
     }
 
+    /* Docked header + footer (sticky within the single scroll container). */
     .header {
       position: sticky;
       top: 0;
@@ -252,7 +266,7 @@
 
   /* Keyboard open: un-stick both so everything flows for maximum typing space.
      The dialog fills the available height and the footer uses margin-top:auto,
-     so with SHORT content the footer still sits at the bottom (not mid-air), and
+     so with SHORT content the footer still sits at the bottom (not mid-air) and
      with tall content it scrolls away with everything else. Never hidden. */
   .modal.keyboardVisible {
     [role="dialog"] {
@@ -268,11 +282,8 @@
       margin-top: auto;
     }
   }
-}
 
-/* Mobile  */
-
-@media (max-width: 768px) {
+  /* Shared mobile spacing + full-width stacked actions (Modal + OffCanvas). */
   .modal,
   .offCanvas {
     .header {
@@ -295,8 +306,9 @@
   }
 }
 
-/* Animations */
-
+/* ===========================================================================
+   Animations
+   =========================================================================== */
 @keyframes modal-zoom {
   /* Start with scale(1) to let ResizeObservers take the correct width on mount. */
   0% {
