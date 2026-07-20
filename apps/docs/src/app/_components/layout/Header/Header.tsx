@@ -16,6 +16,7 @@ import {
 } from "@/app/_components/layout/DocsSearch";
 import Groups from "@/app/_components/layout/Groups";
 import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
+import { SkipLink } from "@/app/_components/layout/Header/SkipLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -29,9 +30,12 @@ const Header: FC<Props> = (props) => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Flex align="center" gap="l">
-          <Link href="/" aria-label="Flow">
-            <FlowLogo className={styles.logo} />
-          </Link>
+          <div className={styles.brand}>
+            <Link href="/" aria-label="Flow">
+              <FlowLogo className={styles.logo} />
+            </Link>
+            <SkipLink />
+          </div>
           <HeaderNavigation
             className={styles.headerNavigation}
             aria-label="Header Navigation"
