@@ -11,7 +11,7 @@ import styles from "./CheckboxGroup.module.scss";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface CheckboxGroupProps
   extends

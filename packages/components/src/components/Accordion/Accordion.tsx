@@ -8,7 +8,7 @@ import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Activity } from "@/components/Activity";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface AccordionProps extends PropsWithChildren<
   ComponentProps<"div">

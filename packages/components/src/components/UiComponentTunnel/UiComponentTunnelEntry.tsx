@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { TunnelEntry, type TunnelEntryProps } from "@mittwald/react-tunnel";
 import { getTunnelProviderId } from "./lib";
-import type { FlowComponentName } from "../propTypes";
+import type { FlowComponentName } from "@/components/propTypes";
 
 export type UiComponentTunnelEntryProps = Omit<
   TunnelEntryProps,

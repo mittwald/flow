@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import { TunnelProvider } from "@mittwald/react-tunnel";
 import { getTunnelProviderId } from "./lib";
-import type { FlowComponentName } from "../propTypes";
+import type { FlowComponentName } from "@/components/propTypes";
 
 export interface UiComponentTunnelProviderProps extends PropsWithChildren {
   component: FlowComponentName;

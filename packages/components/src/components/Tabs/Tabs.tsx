@@ -7,7 +7,7 @@ import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tabs.module.scss";
 import { FallbackTab } from "@/components/Tabs/components/FallbackTab";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useIsSSR } from "react-aria";
 
 export interface TabsProps

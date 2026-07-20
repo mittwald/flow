@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "../FormField/FormField.module.scss";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SearchField.module.scss";
 import clsx from "clsx";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -12,7 +12,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SearchFieldProps
   extends

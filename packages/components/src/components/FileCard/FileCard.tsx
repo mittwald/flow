@@ -16,7 +16,7 @@ import Wrap from "@/components/Wrap";
 import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface FileCardProps
   extends
