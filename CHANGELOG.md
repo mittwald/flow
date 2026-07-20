@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+### Features
+
+* **docs:** add skip link and adopt layered Flow CSS ([#2670](https://github.com/mittwald/flow/issues/2670)) ([2532897](https://github.com/mittwald/flow/commit/25328976685248c01c1cf41c482a112173e0e2dd)), closes [#main-content](https://github.com/mittwald/flow/issues/main-content)
+
 # [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
 
 **Note:** Version bump only for package @mittwald/flow-project
