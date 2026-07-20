@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.928](https://github.com/mittwald/flow/compare/0.2.0-alpha.927...0.2.0-alpha.928) (2026-07-20)
+
+### Bug Fixes
+
+* **Overlay:** keep browser extension overlays clickable inside modals ([#2668](https://github.com/mittwald/flow/issues/2668)) ([3f105d5](https://github.com/mittwald/flow/commit/3f105d53169d906cd08aa418f774e35e4b3037ef))
+
 # [0.2.0-alpha.927](https://github.com/mittwald/flow/compare/0.2.0-alpha.926...0.2.0-alpha.927) (2026-07-20)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
