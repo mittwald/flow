@@ -98,22 +98,37 @@ jobs:
         id: crossversion
         # Renders each installed old remote version through the current host over
         # the real iframe connection and compares its host HTML to an ephemeral
-        # reference rendered from the current version. This suite is WebKit-only
-        # and waits for stable HTML, so the visual job's flaky Firefox hang
-        # rationale does not apply. Retrying would re-run every version and
-        # obscure which version failed.
-        run:
-          corepack pnpm --filter @mittwald/flow-remote-react-components
-          test:cross-version
+        # reference rendered from the current version. WebKit-only. The
+        # @quilted/threads handshake intermittently times out under CI ("Could not
+        # establish remote connection: Timeout reached") — a transient infra flake,
+        # not a diff. Retry the whole step (same idea as the visual job's Firefox
+        # hang retry): a real HTML divergence fails deterministically on every
+        # attempt, while a connection flake clears on a fresh run. Runs the package
+        # script directly (not `nx run`) so a retry doesn't re-trigger the
+        # non-cached network prepare above; the final attempt's `failures` output
+        # feeds the Slack alert.
+        run: |
+          for attempt in 1 2 3; do
+            echo "::group::Cross-version smoke tests (attempt $attempt/3)"
+            if corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            echo "::warning::Cross-version smoke tests failed on attempt $attempt/3 (possibly a flaky remote-connection timeout), retrying..."
+          done
+          echo "::error::Cross-version smoke tests still failing after 3 attempts."
+          exit 1
 
       - name: Run in-process cross-version tests
         id: crossversion_inprocess
         if:
           always() && (steps.crossversion.outcome == 'success' ||
           steps.crossversion.outcome == 'failure')
-        # Reuses the broad visual-test corpus in-process. Like the iframe
-        # harness, it is WebKit-only and deterministic; retrying every version
-        # would obscure the failing version without addressing Firefox flakiness.
+        # Reuses the broad visual-test corpus in-process. WebKit-only. Unlike the
+        # iframe suite it has no real connection to time out; its config already
+        # sets vitest `retry: 2` to absorb the occasional per-test webkit flake,
+        # so no step-level retry is needed here.
         run:
           corepack pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version-inprocess
