@@ -444,17 +444,17 @@ test("mobile Modal is a single scroll container with sticky header and footer", 
 
     await render(
       <Modal isOpen>
-        <Heading>New customer</Heading>
+        <Heading>New Squadron</Heading>
         <Content>
           {Array.from({ length: 12 }, (_, index) => (
             <TextField key={index}>
-              <Label>Field {index + 1}</Label>
+              <Label>Pilot {index + 1}</Label>
             </TextField>
           ))}
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button>Save</Button>
+            <Button>Create squadron</Button>
           </Action>
         </ActionGroup>
       </Modal>,
