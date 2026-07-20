@@ -35,6 +35,12 @@ const readExcluded = (): string[] => {
   return config.excluded.map((e) => e.version);
 };
 
+// npm (not pnpm) on purpose throughout this file: we query and install the real
+// PUBLISHED packages against the registry. This dir lives inside a pnpm
+// workspace, so pnpm would resolve the target's transitive @mittwald/* deps to
+// the LOCAL workspace sources instead of the versions published alongside it —
+// exactly what we must avoid. npm has no workspace awareness here, so it fetches
+// the genuine published tree (and surfaces publish gaps as ETARGET, see below).
 const fetchPublishedVersions = (): string[] => {
   const raw = execFileSync(
     "npm",
