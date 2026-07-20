@@ -35,13 +35,13 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <HorizontalNavigation aria-label="Horizontal navigation">
-        <Link href="#">Lorem ipsum dolor sit amet consectetur</Link>
-        <Link href="#">Lorem ipsum dolor sit amet consectetur</Link>
-        <Link href="#">Lorem ipsum dolor sit amet consectetur</Link>
-        <Link href="#">Lorem ipsum dolor sit amet consectetur</Link>
-        <Link href="#">Lorem ipsum dolor sit amet consectetur</Link>
+        <Link href="#">The Rebel Alliance versus the Empire</Link>
+        <Link href="#">The Rebel Alliance versus the Empire</Link>
+        <Link href="#">The Rebel Alliance versus the Empire</Link>
+        <Link href="#">The Rebel Alliance versus the Empire</Link>
+        <Link href="#">The Rebel Alliance versus the Empire</Link>
         <Link href="#" aria-current="page">
-          Lorem ipsum dolor sit amet consectetur
+          The Rebel Alliance versus the Empire
         </Link>
       </HorizontalNavigation>,
     );

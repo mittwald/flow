@@ -28,13 +28,14 @@
     border-radius: var(--tabs--corner-radius);
     border: var(--tabs--border-width) var(--tabs--border-style)
       var(--tabs--border-color--default);
+    width: 100%;
   }
 
   .titles {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: fit-content;
+    width: 100%;
+    overflow: hidden;
     position: relative;
   }
 

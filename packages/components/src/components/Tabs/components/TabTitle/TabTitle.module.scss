@@ -9,6 +9,8 @@
   transition-property: background-color;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
   column-gap: var(--tabs--spacing);
   border-radius: var(--tabs--corner-radius);
 

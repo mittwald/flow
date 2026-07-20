@@ -3,7 +3,7 @@ import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
 import { useTabIndicator } from "../../lib/useTabIndicator";
-import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
+import { useObserveOverflow } from "../../lib/useObserveOverflow";
 import { Button } from "@/components/Button";
 import clsx from "clsx";
 import { useMergeRefs } from "use-callback-ref";
