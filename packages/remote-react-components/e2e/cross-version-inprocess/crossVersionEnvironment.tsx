@@ -34,24 +34,34 @@ const captureStructure = (): string =>
   formatTagsForDiff(structuralHtml(rootContainerLocator.element().innerHTML));
 
 /**
- * Read the structural HTML once it stops changing between samples, so an
- * in-flight render (async content settling, a remote update still applying)
- * can't be captured mid-frame and produce a spurious diff. Returns as soon as
- * two consecutive samples match, or the last sample after a bounded number of
- * tries.
+ * Read the structural HTML once it has stopped changing, so an in-flight render
+ * can't be captured mid-frame and produce a spurious diff. It waits for a
+ * SUSTAINED quiet window (`stableReads` consecutive identical samples), not
+ * just one matching pair: ResizeObserver-driven text truncation briefly
+ * duplicates the DOM (a measuring copy alongside the displayed one) and can
+ * plateau for a frame or two before collapsing, so a single matching pair can
+ * capture that transient. Polls up to `maxSamples` before giving up and
+ * returning the last sample (best effort).
  */
 const readStableStructure = async (
-  samples = 10,
+  stableReads = 5,
   intervalMs = 50,
+  maxSamples = 80,
 ): Promise<string> => {
   let previous = captureStructure();
-  for (let i = 0; i < samples; i++) {
+  let consecutive = 1;
+  for (let i = 0; i < maxSamples; i++) {
     await new Promise((resolve) => setTimeout(resolve, intervalMs));
     const next = captureStructure();
     if (next === previous) {
-      return next;
+      consecutive += 1;
+      if (consecutive >= stableReads) {
+        return next;
+      }
+    } else {
+      consecutive = 1;
+      previous = next;
     }
-    previous = next;
   }
   return previous;
 };
