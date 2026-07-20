@@ -382,3 +382,56 @@ test("Form in Modal is not auto-resetted on close when opted-out", async () => {
   await userEvent.click(openModalButton);
   expect(isDirtyText).toBeInTheDocument();
 });
+
+test("browser extension UI stays interactive while a modal is open", async () => {
+  await render(
+    <Modal isOpen>
+      <Content>
+        <Text>Hello World</Text>
+      </Content>
+    </Modal>,
+  );
+
+  const customElement = document.createElement("some-extension-overlay");
+  const shadowHost = document.createElement("div");
+  shadowHost.attachShadow({ mode: "open" });
+
+  for (const node of [customElement, shadowHost]) {
+    node.inert = true;
+    node.setAttribute("aria-hidden", "true");
+  }
+  document.body.append(customElement, shadowHost);
+
+  try {
+    await vitest.waitFor(() => {
+      for (const node of [customElement, shadowHost]) {
+        expect(node.hasAttribute("data-react-aria-top-layer")).toBe(true);
+        expect(node.inert).toBe(false);
+        expect(node.hasAttribute("aria-hidden")).toBe(false);
+      }
+    });
+  } finally {
+    customElement.remove();
+    shadowHost.remove();
+  }
+});
+
+test("unrelated background nodes stay isolated while a modal is open", async () => {
+  await render(
+    <Modal isOpen>
+      <Content>
+        <Text>Hello World</Text>
+      </Content>
+    </Modal>,
+  );
+
+  const background = document.createElement("div");
+  document.body.append(background);
+
+  try {
+    await vitest.waitFor(() => expect(background.inert).toBe(true));
+    expect(background.hasAttribute("data-react-aria-top-layer")).toBe(false);
+  } finally {
+    background.remove();
+  }
+});
