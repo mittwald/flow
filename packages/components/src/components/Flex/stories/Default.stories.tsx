@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Flex } from "@/components/Flex";
 import { LayoutCard } from "@/components/LayoutCard";
 import { BigNumber } from "@/components/BigNumber";

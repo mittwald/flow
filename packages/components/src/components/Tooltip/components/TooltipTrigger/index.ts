@@ -1,2 +1,2 @@
 export { default } from "./TooltipTrigger";
-export { TooltipTrigger, type TooltipTriggerProps } from "./TooltipTrigger";
+export { type TooltipTriggerProps, TooltipTrigger } from "./TooltipTrigger";

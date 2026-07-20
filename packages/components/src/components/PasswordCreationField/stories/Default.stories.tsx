@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { PasswordCreationField } from "../index";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
@@ -40,7 +40,7 @@ type Story = StoryObj<typeof PasswordCreationField>;
 export const Default: Story = {};
 
 export const WithPlaceholder: Story = {
-  args: { placeholder: "helloMoto" },
+  args: { placeholder: "useTheForce" },
 };
 
 export const WithCustomButton: Story = {

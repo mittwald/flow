@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { Button } from "@/components/Button";
 import styles from "@/components/FileCard/FileCard.module.scss";
 import { IconClose } from "@/components/Icon/components/icons";

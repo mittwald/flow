@@ -51,3 +51,5 @@ export const LightBoxGalleryItem = flowComponent(
     );
   },
 );
+
+export default LightBoxGalleryItem;

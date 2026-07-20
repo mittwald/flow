@@ -1,5 +1,5 @@
 import styles from "../DonutChart.module.scss";
-import React, { Children, type FC } from "react";
+import { Children, type FC } from "react";
 import { useNumberFormatter } from "react-aria";
 import type { DonutChartProps } from "@/components/DonutChart";
 

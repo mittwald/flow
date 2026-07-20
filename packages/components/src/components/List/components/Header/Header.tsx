@@ -48,9 +48,9 @@ export const Header: FC<PropsWithClassName> = (props) => {
   return (
     <DivView
       className={clsx(
-        className,
         styles.header,
         list.search && styles.withSearch,
+        className,
       )}
     >
       <DivView className={styles.headerContent}>

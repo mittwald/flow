@@ -1,1 +1,2 @@
-export { Kbd, type KbdProps } from "./Kbd";
+export { type KbdProps, Kbd } from "./Kbd";
+export { default } from "./Kbd";

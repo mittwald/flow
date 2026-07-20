@@ -43,7 +43,7 @@ const meta: Meta<typeof Field> = {
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="isEnabled">
-            <Switch>Text</Switch>
+            <Switch>Engage hyperdrive</Switch>
           </Field>
 
           <ActionGroup>

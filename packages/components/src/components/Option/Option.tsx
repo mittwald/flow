@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from "react";
-import React, { Children } from "react";
+import { Children } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Option.module.scss";

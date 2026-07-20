@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import EmulatedBoldText from "@/components/EmulatedBoldText";
-import React from "react";
 
 const meta: Meta<typeof EmulatedBoldText> = {
   title: "Content/EmulatedBoldText",
@@ -9,7 +8,7 @@ const meta: Meta<typeof EmulatedBoldText> = {
     controls: { disable: true },
   },
   render: (props) => (
-    <EmulatedBoldText {...props}>Example Text</EmulatedBoldText>
+    <EmulatedBoldText {...props}>May the Force be with you.</EmulatedBoldText>
   ),
 };
 

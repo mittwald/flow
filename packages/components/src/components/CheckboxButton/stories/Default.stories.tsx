@@ -4,7 +4,6 @@ import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import Text from "@/components/Text";
 import { FieldError } from "@/components/FieldError";
-import React from "react";
 
 const meta: Meta<typeof CheckboxButton> = {
   title: "Form Controls/CheckboxButton",
@@ -19,7 +18,7 @@ const meta: Meta<typeof CheckboxButton> = {
     controls: { exclude: ["onChange"] },
   },
   render: (props) => (
-    <CheckboxButton {...props}>Consent to terms and conditions</CheckboxButton>
+    <CheckboxButton {...props}>Join the Rebel Alliance</CheckboxButton>
   ),
 };
 
@@ -32,8 +31,8 @@ export const Default: Story = {};
 export const WithContent: Story = {
   render: (props) => (
     <CheckboxButton {...props}>
-      <Text>Terms and Conditions</Text>
-      <Content>Consent to terms and conditions</Content>
+      <Text>Rebel Alliance</Text>
+      <Content>Enlist with the Rebel Alliance and fight the Empire</Content>
     </CheckboxButton>
   ),
 };
@@ -41,8 +40,8 @@ export const WithContent: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <CheckboxButton {...props} isInvalid>
-      Consent to terms and conditions
-      <FieldError>Please consent</FieldError>
+      Join the Rebel Alliance
+      <FieldError>Please join to continue</FieldError>
     </CheckboxButton>
   ),
 };

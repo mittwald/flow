@@ -21,7 +21,7 @@ test.each(testEnvironments)(
               <Image alt="Gopher" src={gopher} />
             </Avatar>
             <Avatar size={size}>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Luke Skywalker</Initials>
             </Avatar>
             <Avatar size={size}>
               <IconStar />
@@ -36,7 +36,7 @@ test.each(testEnvironments)(
         <Flex gap="s">
           {colors.map((color) => (
             <Avatar color={color} key={color}>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Luke Skywalker</Initials>
             </Avatar>
           ))}
         </Flex>

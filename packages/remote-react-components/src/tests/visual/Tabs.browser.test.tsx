@@ -74,23 +74,23 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Tabs>
           <Tab>
-            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
             Content
           </Tab>
           <Tab>
-            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
             Content
           </Tab>
           <Tab>
-            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
             Content
           </Tab>
           <Tab>
-            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
             Content
           </Tab>
           <Tab>
-            <TabTitle>Lorem ipsum dolor sit amet consectetur</TabTitle>
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
             Content
           </Tab>
         </Tabs>

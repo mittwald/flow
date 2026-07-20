@@ -12,7 +12,7 @@ const meta: Meta<typeof Avatar> = {
   component: Avatar,
   render: (props) => (
     <Avatar {...props} color="teal">
-      <Image alt="Gopher" src={dummyText.imageSrc} />
+      <Image alt="Han Solo" src={dummyText.imageSrc} />
     </Avatar>
   ),
   parameters: {
@@ -53,7 +53,7 @@ export const WithInitials: Story = {
   },
   render: (props) => (
     <Avatar {...props}>
-      <Initials>Max Mustermann</Initials>
+      <Initials>Han Solo</Initials>
     </Avatar>
   ),
 };
@@ -63,8 +63,8 @@ export const Meaningful: Story = {
     controls: { exclude: ["status"] },
   },
   render: (props) => (
-    <Avatar {...props} label="Max Mustermann">
-      <Initials>Max Mustermann</Initials>
+    <Avatar {...props} label="Han Solo">
+      <Initials>Han Solo</Initials>
     </Avatar>
   ),
 };

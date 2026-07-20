@@ -95,12 +95,12 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const rootClassName = clsx(
     styles.accentBox,
-    className,
     backgroundColorFromColor
       ? styles[backgroundColorFromColor]
       : isAFlowColor
         ? styles[backgroundColor]
         : undefined,
+    className,
   );
 
   const Element = elementType;

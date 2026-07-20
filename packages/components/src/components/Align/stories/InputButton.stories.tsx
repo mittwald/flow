@@ -1,4 +1,3 @@
-import React from "react";
 import { Align } from "@/components/Align";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
@@ -20,9 +19,9 @@ const meta: Meta<typeof Align> = {
   render: (props) => (
     <Align {...props}>
       <TextField>
-        <Label>Mail address</Label>
+        <Label>Comlink address</Label>
       </TextField>
-      <Button>Hinzufügen</Button>
+      <Button>Add</Button>
     </Align>
   ),
 };
@@ -38,7 +37,7 @@ export const WithNumberField: Story = {
       <NumberField>
         <Label>Number</Label>
       </NumberField>
-      <Button>Hinzufügen</Button>
+      <Button>Add</Button>
     </Align>
   ),
 };
@@ -49,7 +48,7 @@ export const WithTextArea: Story = {
       <TextArea>
         <Label>Message</Label>
       </TextArea>
-      <Button>Hinzufügen</Button>
+      <Button>Add</Button>
     </Align>
   ),
 };
@@ -62,7 +61,7 @@ export const WithSelect: Story = {
         <Option>Option 1</Option>
         <Option>Option 2</Option>
       </Select>
-      <Button>Hinzufügen</Button>
+      <Button>Add</Button>
     </Align>
   ),
 };
@@ -71,7 +70,7 @@ export const WithoutLabel: Story = {
   render: (props) => (
     <Align {...props}>
       <TextField aria-label="Label" />
-      <Button>Hinzufügen</Button>
+      <Button>Add</Button>
     </Align>
   ),
 };
@@ -83,9 +82,9 @@ export const WithForm: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Align {...props}>
           <TextField>
-            <Label>Mail address</Label>
+            <Label>Comlink address</Label>
           </TextField>
-          <SubmitButton>Hinzufügen</SubmitButton>
+          <SubmitButton>Add</SubmitButton>
         </Align>
       </Form>
     );

@@ -1,7 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import styles from "./MessageSeparator.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
-import React from "react";
 import clsx from "clsx";
 import { Separator } from "@/components/Separator";
 import { Content } from "@/components/Content";

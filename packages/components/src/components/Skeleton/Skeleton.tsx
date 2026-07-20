@@ -1,5 +1,4 @@
 import type { ComponentProps, CSSProperties, FC } from "react";
-import React from "react";
 import styles from "./Skeleton.module.scss";
 import clsx from "clsx";
 

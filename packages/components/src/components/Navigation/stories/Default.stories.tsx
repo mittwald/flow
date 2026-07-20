@@ -25,16 +25,16 @@ type Story = StoryObj<typeof Navigation>;
 
 export const Default: Story = {
   render: (props) => (
-    <Navigation aria-label="Companies" {...props}>
-      <Link>Apple</Link>
-      <Link aria-current="page">mittwald</Link>
-      <Link>Adobe</Link>
-      <Link>Google</Link>
+    <Navigation aria-label="Factions" {...props}>
+      <Link>Jedi Order</Link>
+      <Link aria-current="page">Rebel Alliance</Link>
+      <Link>Galactic Empire</Link>
+      <Link>The Mandalorians</Link>
       <Link>
-        Domains<Badge>New</Badge>
+        Bounties<Badge>New</Badge>
       </Link>
       <Link>
-        Notifications
+        Transmissions
         <CounterBadge count={3} />
       </Link>
     </Navigation>
@@ -64,16 +64,16 @@ export const WithGroups: Story = {
   render: (props) => (
     <Navigation aria-label="Main navigation" {...props}>
       <NavigationGroup collapsable>
-        <Label>General</Label>
-        <Link>Dashboard</Link>
-        <Link aria-current="page">Performance</Link>
+        <Label>Command</Label>
+        <Link>Command Center</Link>
+        <Link aria-current="page">Fleet Status</Link>
       </NavigationGroup>
 
       <NavigationGroup>
-        <Label>General</Label>
-        <Link>Apps</Link>
-        <Link>Databases</Link>
-        <Link>Domains</Link>
+        <Label>Systems</Label>
+        <Link>Squadrons</Link>
+        <Link>Star Charts</Link>
+        <Link>Outposts</Link>
       </NavigationGroup>
     </Navigation>
   ),

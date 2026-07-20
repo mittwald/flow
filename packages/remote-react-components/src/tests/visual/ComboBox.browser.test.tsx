@@ -75,7 +75,7 @@ test.each(testEnvironments)(
   async ({ testScreenshot, render, components: { Flex, ComboBox, Label } }) => {
     await render(
       <Flex direction="column" gap="m">
-        <ComboBox defaultInputValue=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae, laborum ea tempore.">
+        <ComboBox defaultInputValue=" A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole secret plans to the Empire's ultimate weapon, the Death Star, an armored station.">
           <Label>Label</Label>
         </ComboBox>
       </Flex>,

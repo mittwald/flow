@@ -78,8 +78,8 @@ export const WithContextMenu: Story = {
           <Text>Value</Text>
         </Badge>
         <ContextMenu controller={controller} triggerRef={triggerRef}>
-          <MenuItem>Item 1</MenuItem>
-          <MenuItem>Item 2</MenuItem>
+          <MenuItem>Promote</MenuItem>
+          <MenuItem>Dismiss</MenuItem>
         </ContextMenu>
       </StoryBackground>
     );

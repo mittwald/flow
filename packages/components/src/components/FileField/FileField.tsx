@@ -74,7 +74,7 @@ export const FileField = flowComponent("FileField", (props) => {
   return (
     <div
       {...fieldProps}
-      className={clsx(fieldProps.className, styles.FileField)}
+      className={clsx(fieldProps.className, styles.fileField)}
     >
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <FieldErrorCaptureContext>

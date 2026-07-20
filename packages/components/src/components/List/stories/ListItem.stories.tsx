@@ -31,7 +31,7 @@ export const WithContent: Story = {
 
     return (
       <List.List>
-        <List.StaticData data={[{ mail: "john@doe.de" }]} />
+        <List.StaticData data={[{ mail: "luke.skywalker@rebellion.org" }]} />
         <List.Item showTiles textValue={(mail) => mail.mail}>
           {(mail) => (
             <List.ItemView>
@@ -64,7 +64,7 @@ export const WithActionGroup: Story = {
 
     return (
       <List.List>
-        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.StaticData data={[{ name: "Han Solo" }]} />
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
@@ -72,7 +72,7 @@ export const WithActionGroup: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>mittwald</Text>
+              <Text>Rebel Alliance</Text>
               <Content>
                 <ActionGroup>
                   <Button color="secondary" variant="soft" slot="secondary">
@@ -97,7 +97,7 @@ export const WithCustomTileMaxWidth: Story = {
 
     return (
       <List.List defaultViewMode="tiles">
-        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.StaticData data={[{ name: "Leia Organa" }]} />
         <List.Item tileMaxWidth={100} showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
@@ -105,8 +105,8 @@ export const WithCustomTileMaxWidth: Story = {
                 <Image alt={user.name} src={dummyText.imageSrc} />
               </Avatar>
               <Heading>{user.name}</Heading>
-              <Text>mittwald</Text>
-              <Text>Development</Text>
+              <Text>Rebel Alliance</Text>
+              <Text>Command</Text>
             </List.ItemView>
           )}
         </List.Item>
@@ -121,7 +121,7 @@ export const WithCheckbox: Story = {
 
     return (
       <List.List>
-        <List.StaticData data={[{ mail: "john@doe.de" }]} />
+        <List.StaticData data={[{ mail: "leia.organa@rebellion.org" }]} />
         <List.Table>
           <List.TableHeader>
             <List.TableColumn>
@@ -165,8 +165,8 @@ export const WithColumnLayout: Story = {
       <List.List>
         <List.StaticData
           data={[
-            { mail: "john@doe.de" },
-            { mail: "johnWithAVeryVeryLongEmailAddress@doe.de" },
+            { mail: "han.solo@rebellion.org" },
+            { mail: "chewbacca.the.wookiee.copilot@rebellion.org" },
           ]}
         />
         <List.Item textValue={(mail) => mail.mail}>

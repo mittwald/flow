@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { TranslationProvider } from "@/components/TranslationProvider";
@@ -17,7 +16,7 @@ const meta: Meta = {
             "de-DE": {
               PasswordCreationField: {
                 "validation.charPool.special.min.short":
-                  "Overwritten Translation YAY!",
+                  "The Force is strong with this one!",
               },
             },
           }}

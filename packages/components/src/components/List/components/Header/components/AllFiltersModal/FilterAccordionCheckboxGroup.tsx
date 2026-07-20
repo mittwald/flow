@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import CheckboxGroupView from "@/views/CheckboxGroupView";
 import CheckboxView from "@/views/CheckboxView";
 import type { Filter } from "@/components/List/model/filter/Filter";

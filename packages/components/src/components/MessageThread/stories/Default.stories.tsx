@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { FC } from "react";
-import React from "react";
 import type { MessageProps } from "@/components/Message";
 import { Message } from "@/components/Message";
 import { MessageSeparator, MessageThread } from "@/components/MessageThread";
@@ -30,7 +29,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
           </Avatar>
           <Text>
             <strong>{name}</strong>
-            <span>Admin</span>
+            <span>Rebel Commander</span>
           </Text>
         </Align>
         <Text>01.09.2024, 12:45</Text>
@@ -38,8 +37,8 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
         <ContextMenuTrigger>
           <Button />
           <ContextMenu>
-            <MenuItem>Bearbeiten</MenuItem>
-            <MenuItem>Löschen</MenuItem>
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>Delete</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
       </Header>
@@ -48,7 +47,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
         <Text>{content}</Text>
       </Content>
 
-      <Button>Button</Button>
+      <Button>Reply</Button>
     </Message>
   );
 };
@@ -62,13 +61,13 @@ const meta: Meta<typeof MessageThread> = {
   render: (props) => (
     <MessageThread {...props}>
       <ExampleMessage
-        name="Max Mustermann"
+        name="Leia Organa"
         content={dummyText.medium}
         type="sender"
       />
 
       <ExampleMessage
-        name="John Doe"
+        name="Han Solo"
         content={dummyText.long}
         type="responder"
       />
@@ -76,7 +75,7 @@ const meta: Meta<typeof MessageThread> = {
       <MessageSeparator {...props}>Conversation closed</MessageSeparator>
 
       <ExampleMessage
-        name="Max Mustermann"
+        name="Leia Organa"
         content={dummyText.short}
         type="sender"
       />
