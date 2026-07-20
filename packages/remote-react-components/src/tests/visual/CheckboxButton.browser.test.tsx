@@ -29,8 +29,10 @@ test.each(testEnvironments)(
   },
 );
 
-// Element tree comparable from alpha.884 (CheckboxButton wrapper divs changed).
-test.skipIf(crossVersion({ below: "0.2.0-alpha.884" })).each(testEnvironments)(
+// CheckboxButton's edge-case wrapper structure was flattened again in alpha.926
+// (nothing was published between alpha.921 and alpha.926), so it is comparable
+// only from there; older targets skip until a newer version ships to compare.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.926" })).each(testEnvironments)(
   "Checkbox edge cases(%s)",
   async ({
     testScreenshot,
