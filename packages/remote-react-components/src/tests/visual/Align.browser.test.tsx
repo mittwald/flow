@@ -12,7 +12,7 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         <Align>
           <Avatar>
-            <Initials>Max Mustermann</Initials>
+            <Initials>Luke Skywalker</Initials>
           </Avatar>
           <Text>
             <strong>Text</strong>
@@ -20,7 +20,7 @@ test.each(testEnvironments)(
         </Align>
         <Align>
           <Avatar>
-            <Initials>Max Mustermann</Initials>
+            <Initials>Luke Skywalker</Initials>
           </Avatar>
           <Text>
             <strong>Text</strong>
@@ -29,7 +29,7 @@ test.each(testEnvironments)(
         </Align>
         <Align>
           <Avatar>
-            <Initials>Max Mustermann</Initials>
+            <Initials>Luke Skywalker</Initials>
           </Avatar>
           <Text>
             <strong>Text</strong>

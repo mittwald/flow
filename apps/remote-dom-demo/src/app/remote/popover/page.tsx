@@ -5,7 +5,6 @@ import {
   PopoverTrigger,
   Section,
 } from "@mittwald/flow-remote-react-components";
-import React from "react";
 
 export default function Page() {
   return (

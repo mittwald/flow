@@ -72,7 +72,7 @@ test.each(testEnvironments)(
           maxValue={1000000000000}
         />
         <DonutChart aria-label="label" value={10}>
-          Lorem ipsum dolor sit amet consectetur.
+          The Death Star is now fully operational.
         </DonutChart>
       </Flex>,
     );

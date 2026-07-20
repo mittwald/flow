@@ -42,7 +42,9 @@
 }
 
 @mixin formInteractionStates {
-  &::placeholder {
+  &::placeholder,
+  &[data-placeholder="true"],
+  & [data-placeholder="true"] {
     color: var(--form-control--placeholder-color--default);
   }
 
@@ -94,7 +96,9 @@
     border-color: var(--form-control--border-color--disabled);
     background-color: var(--form-control--background-color--disabled);
 
-    &::placeholder {
+    &::placeholder,
+    &[data-placeholder="true"],
+    & [data-placeholder="true"] {
       color: var(--form-control--placeholder-color--disabled);
     }
   }

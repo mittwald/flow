@@ -41,7 +41,7 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <MarkdownEditor>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </MarkdownEditor>
           </Field>
 
@@ -79,11 +79,11 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <MarkdownEditor>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </MarkdownEditor>
           </Field>
           <MarkdownEditor isInvalid>
-            <Label>Message</Label>
+            <Label>Transmission</Label>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </MarkdownEditor>
         </Section>
@@ -103,7 +103,7 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <MarkdownEditor>
-            <Label>Message</Label>
+            <Label>Transmission</Label>
           </MarkdownEditor>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

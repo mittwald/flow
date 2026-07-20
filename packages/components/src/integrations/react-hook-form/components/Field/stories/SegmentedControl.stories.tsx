@@ -45,10 +45,10 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <SegmentedControl>
-              <Label>Role</Label>
-              <Segment value="admin">Admin</Segment>
-              <Segment value="member">Member</Segment>
-              <Segment value="accountant">Accountant</Segment>
+              <Label>Rank</Label>
+              <Segment value="master">Jedi Master</Segment>
+              <Segment value="padawan">Padawan</Segment>
+              <Segment value="sith">Sith Lord</Segment>
             </SegmentedControl>
           </Field>
 
@@ -82,17 +82,17 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <SegmentedControl>
-              <Label>Role</Label>
-              <Segment value="admin">Admin</Segment>
-              <Segment value="member">Member</Segment>
-              <Segment value="accountant">Accountant</Segment>
+              <Label>Rank</Label>
+              <Segment value="master">Jedi Master</Segment>
+              <Segment value="padawan">Padawan</Segment>
+              <Segment value="sith">Sith Lord</Segment>
             </SegmentedControl>
           </Field>
           <SegmentedControl isInvalid>
-            <Label>Role</Label>
-            <Segment value="admin">Admin</Segment>
-            <Segment value="member">Member</Segment>
-            <Segment value="accountant">Accountant</Segment>
+            <Label>Rank</Label>
+            <Segment value="master">Jedi Master</Segment>
+            <Segment value="padawan">Padawan</Segment>
+            <Segment value="sith">Sith Lord</Segment>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </SegmentedControl>
         </Section>
@@ -108,10 +108,10 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <SegmentedControl>
-            <Label>Role</Label>
-            <Segment value="admin">Admin</Segment>
-            <Segment value="member">Member</Segment>
-            <Segment value="accountant">Accountant</Segment>
+            <Label>Rank</Label>
+            <Segment value="master">Jedi Master</Segment>
+            <Segment value="padawan">Padawan</Segment>
+            <Segment value="sith">Sith Lord</Segment>
           </SegmentedControl>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

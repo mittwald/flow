@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { Option, type OptionProps } from "./Option";
+export { type OptionProps, Option } from "./Option";
 export { default } from "./Option";

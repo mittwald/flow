@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.927](https://github.com/mittwald/flow/compare/0.2.0-alpha.926...0.2.0-alpha.927) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.926](https://github.com/mittwald/flow/compare/0.2.0-alpha.925...0.2.0-alpha.926) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.925](https://github.com/mittwald/flow/compare/0.2.0-alpha.924...0.2.0-alpha.925) (2026-07-17)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.924](https://github.com/mittwald/flow/compare/0.2.0-alpha.923...0.2.0-alpha.924) (2026-07-17)
+
+### Bug Fixes
+
+* **components:** correct placeholder and disabled colors for form fields ([#2663](https://github.com/mittwald/flow/issues/2663)) ([89735c0](https://github.com/mittwald/flow/commit/89735c0e86686cdfee259fc5f43b09350e3a69e1))
+
 # [0.2.0-alpha.923](https://github.com/mittwald/flow/compare/0.2.0-alpha.922...0.2.0-alpha.923) (2026-07-16)
 
 ### Features

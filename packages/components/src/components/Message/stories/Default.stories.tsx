@@ -24,26 +24,26 @@ const meta: Meta<typeof Message> = {
         <ContextMenuTrigger>
           <Button />
           <ContextMenu>
-            <MenuItem>Bearbeiten</MenuItem>
-            <MenuItem>Löschen</MenuItem>
+            <MenuItem>Edit</MenuItem>
+            <MenuItem>Delete</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
         <Align>
           <Avatar>
-            <Initials>Max Mustermann</Initials>
+            <Initials>Leia Organa</Initials>
           </Avatar>
           <Text>
-            <strong>Max Mustermann</strong>
-            <span>Organisationsinhaber</span>
+            <strong>Leia Organa</strong>
+            <span>Rebel Commander</span>
           </Text>
         </Align>
         <Text>01.09.2024, 12:45</Text>
       </Header>
 
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
-      <Button>Button</Button>
+      <Button>Reply</Button>
     </Message>
   ),
 };
@@ -57,7 +57,7 @@ export const MessageOnly: Story = {
   render: (props) => (
     <Message {...props}>
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
     </Message>
   ),
@@ -71,7 +71,7 @@ export const WithActionGroup: Story = {
   render: (props) => (
     <Message {...props}>
       <Content>
-        <Text>Das ist eine Nachricht</Text>
+        <Text>The Death Star plans are in transit.</Text>
       </Content>
       <ActionGroup>
         <Button slot="secondary" variant="soft" color="secondary">

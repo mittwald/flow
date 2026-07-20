@@ -54,13 +54,13 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="dateRange">
             <DateRangePicker>
-              <Label>Date range</Label>
+              <Label>Mission date range</Label>
             </DateRangePicker>
           </Field>
 
           <Field name="dateRangeDefaultValue">
             <DateRangePicker>
-              <Label>Date range (with form default value)</Label>
+              <Label>Mission date range (with form default value)</Label>
             </DateRangePicker>
           </Field>
 
@@ -69,13 +69,13 @@ const meta: Meta<typeof Field> = {
             rules={{ required: "Please select a date range" }}
           >
             <DateRangePicker>
-              <Label>Date range</Label>
+              <Label>Mission date range</Label>
             </DateRangePicker>
           </Field>
 
           <Field name="dateRangeMinValue">
             <DateRangePicker minValue={today(getLocalTimeZone())}>
-              <Label>Future date range</Label>
+              <Label>Future mission date range</Label>
             </DateRangePicker>
           </Field>
 
@@ -113,13 +113,13 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <DateRangePicker>
-              <Label>Future Date</Label>
-              <FieldDescription>Select a future date</FieldDescription>
+              <Label>Mission date range</Label>
+              <FieldDescription>Select a future mission date</FieldDescription>
             </DateRangePicker>
           </Field>
           <DateRangePicker isInvalid>
-            <Label>Future Date</Label>
-            <FieldDescription>Select a future date</FieldDescription>
+            <Label>Mission date range</Label>
+            <FieldDescription>Select a future mission date</FieldDescription>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </DateRangePicker>
         </Section>
@@ -139,8 +139,8 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <DateRangePicker>
-            <Label>Future Date</Label>
-            <FieldDescription>Select a future date</FieldDescription>
+            <Label>Mission date range</Label>
+            <FieldDescription>Select a future mission date</FieldDescription>
           </DateRangePicker>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

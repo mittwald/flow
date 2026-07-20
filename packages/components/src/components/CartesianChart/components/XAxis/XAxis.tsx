@@ -5,7 +5,7 @@ import type {
   DataKey,
   DataKeyValue,
 } from "@/components/CartesianChart/types";
-import { useDesignTokens } from "../../../../lib/theming";
+import { useDesignTokens } from "@/lib/theming";
 
 export type XAxisProps<
   TData extends ChartDataValue = ChartDataValue,

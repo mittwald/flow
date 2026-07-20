@@ -47,14 +47,14 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "Max Mustermann",
-                role: "Admin",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
                 status: "active",
               },
               {
                 id: "2",
-                name: "John Doe",
-                role: "Developer",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
                 status: "unavailable",
               },
             ]}
@@ -126,7 +126,7 @@ test.each(testEnvironments)(
     await userEvent.keyboard("{enter}");
     await userEvent.keyboard("{escape}");
     await search.click();
-    await userEvent.keyboard("Max");
+    await userEvent.keyboard("Luke");
     await sleep(1000);
 
     await testScreenshot("List items - searched");
@@ -184,21 +184,21 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "Max Mustermann",
-                role: "Admin",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
                 active: true,
                 content: "Content",
                 bottomContent: "Bottom Content",
               },
               {
                 id: "2",
-                name: "John Doe",
-                role: "Developer",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
                 active: false,
                 content:
-                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                  " A long time ago in a galaxy far, far away, a rebellion rose",
                 bottomContent:
-                  " Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                  " A long time ago in a galaxy far, far away, a rebellion rose",
               },
             ]}
           />
@@ -259,15 +259,30 @@ test.each(testEnvironments)(
         >
           <List.StaticData
             data={[
-              { id: "1", name: "Max Mustermann", role: "Admin", active: true },
-              { id: "2", name: "John Doe", role: "Developer", active: false },
               {
-                id: "3",
-                name: "John Mustermann",
-                role: "Developer",
+                id: "1",
+                name: "Luke Skywalker",
+                role: "Jedi Master",
+                active: true,
+              },
+              {
+                id: "2",
+                name: "Leia Organa",
+                role: "Rebel Pilot",
                 active: false,
               },
-              { id: "4", name: "Max Doe", role: "Developer", active: false },
+              {
+                id: "3",
+                name: "Han Solo",
+                role: "Rebel Pilot",
+                active: false,
+              },
+              {
+                id: "4",
+                name: "Din Djarin",
+                role: "Rebel Pilot",
+                active: false,
+              },
             ]}
           />
           <List.Table>
@@ -323,7 +338,7 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "MaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermann",
+                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
                 role: "AdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdminAdmin",
                 content:
                   "ContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContentContent",
@@ -391,7 +406,7 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "MaxMustermannMaxMustermann",
+                name: "LukeSkywalkerLukeSkywalker",
                 role: "AdminAdminAdminAdminAdminAdminAdmin",
                 content:
                   "ContentContentContentContentContentContentContentContentContentContent",
@@ -452,7 +467,7 @@ test.each(testEnvironments)(
             data={[
               {
                 id: "1",
-                name: "MaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermannMaxMustermann",
+                name: "LukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalkerLukeSkywalker",
                 content:
                   "ContentContentContentContentContentContentContentContentContentContent",
               },

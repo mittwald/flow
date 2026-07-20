@@ -1,7 +1,6 @@
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
-import React from "react";
 import TabContent from "@/app/_components/layout/TabContent";
 import type { Metadata } from "next";
 

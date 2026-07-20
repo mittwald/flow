@@ -24,6 +24,7 @@ test.each(testEnvironments)(
         </DatePicker>
         <DatePicker isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </DatePicker>
       </Flex>,
     );
@@ -52,6 +53,7 @@ test.each(testEnvironments)(
     await testScreenshot("DatePicker - calendar visible");
 
     await userEvent.keyboard("{enter}");
+    await userEvent.keyboard("{tab}");
 
     await testScreenshot("DatePicker - date selected");
   },

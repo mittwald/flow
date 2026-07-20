@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";

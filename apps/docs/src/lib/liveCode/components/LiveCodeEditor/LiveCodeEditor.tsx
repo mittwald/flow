@@ -1,5 +1,5 @@
 import type { FC, JSX } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   LiveEditor,
   LiveError,

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ImageCropper } from "@/components/ImageCropper";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Section } from "@/components/Section";

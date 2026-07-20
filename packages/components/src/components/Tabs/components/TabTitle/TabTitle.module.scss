@@ -3,7 +3,7 @@
 .tabTitle {
   padding-block: var(--tabs--padding-y);
   padding-inline: var(--tabs--padding-x);
-  color: var(--tabs--color);
+  color: var(--tabs--color--default);
   cursor: default;
   white-space: nowrap;
   transition-property: background-color;
@@ -19,7 +19,7 @@
   }
 
   &[aria-disabled="true"] {
-    color: var(--tabs--disabled-color);
+    color: var(--tabs--color--disabled);
   }
 
   .text {

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { AlertIcon } from "@/components/AlertIcon";
 import { HorizontalNavigation } from "@/components/HorizontalNavigation";
 import { Link } from "@/components/Link";

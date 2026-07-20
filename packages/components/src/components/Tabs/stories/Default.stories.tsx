@@ -11,7 +11,7 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
 import { AlertIcon } from "@/components/AlertIcon";
 import { dummyText } from "@/lib/dev/dummyText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Key } from "react-aria";
 
 const meta: Meta<typeof Tabs> = {
@@ -25,25 +25,25 @@ const meta: Meta<typeof Tabs> = {
       <Tabs {...props} disabledKeys={["spam"]}>
         <Tab id="general">
           <TabTitle>
-            General
+            Comms
             <AlertIcon status="info" />
           </TabTitle>
           <Section>
             <Header>
-              <Heading>General</Heading>
-              <Button>Button</Button>
+              <Heading>Comms</Heading>
+              <Button>Save</Button>
             </Header>
-            <TextField defaultValue="example@mittwald.de">
-              <Label>Mail address</Label>
+            <TextField defaultValue="luke.skywalker@rebellion.org">
+              <Label>Holomail address</Label>
             </TextField>
           </Section>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage settings</TabTitle>
+          <TabTitle>Cargo hold</TabTitle>
           <Section>
-            <Heading>Storage</Heading>
+            <Heading>Cargo hold</Heading>
             <LabeledValue>
-              <Label>Available storage</Label>
+              <Label>Available cargo</Label>
               <Text>2.4 GB</Text>
             </LabeledValue>
           </Section>
@@ -56,9 +56,9 @@ const meta: Meta<typeof Tabs> = {
               <Switch>Spam protection</Switch>
             </Header>
             <Text>
-              The spam filter protects you from unwanted emails. Nobody wants
-              garbage in their inbox, so we recommend that you always leave spam
-              protection activated.
+              The spam filter protects you from unwanted transmissions. Nobody
+              wants garbage in their inbox, so we recommend that you always
+              leave spam protection activated.
             </Text>
           </Section>
         </Tab>
@@ -84,10 +84,34 @@ export const Controlled: Story = {
         onSelectionChange={(key) => setSelectedKey(key)}
       >
         <Tab id="general">
-          <TabTitle>General</TabTitle>
+          <TabTitle>Comms</TabTitle>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage settings</TabTitle>
+          <TabTitle>Cargo hold</TabTitle>
+        </Tab>
+      </Tabs>
+    );
+  },
+};
+
+export const WithLinks: Story = {
+  render: (props) => {
+    const [tab, setTab] = useState("general");
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setTab(window.location.hash.slice(1));
+      }, 100);
+      return () => clearInterval(interval);
+    }, [setTab]);
+
+    return (
+      <Tabs {...props} selectedKey={tab}>
+        <Tab id="general">
+          <TabTitle href="#general">Comms</TabTitle>
+        </Tab>
+        <Tab id="storage">
+          <TabTitle href="#storage">Cargo hold</TabTitle>
         </Tab>
       </Tabs>
     );
@@ -115,16 +139,16 @@ export const TabNotFound: Story = {
   render: (props) => (
     <Tabs {...props} defaultSelectedKey="notFound">
       <Tab id="general">
-        <TabTitle>General</TabTitle>
+        <TabTitle>Comms</TabTitle>
         <Section>
-          <Heading>General</Heading>
+          <Heading>Comms</Heading>
         </Section>
       </Tab>
 
       <Tab id="storage">
-        <TabTitle>Storage settings</TabTitle>
+        <TabTitle>Cargo hold</TabTitle>
         <Section>
-          <Heading>Storage</Heading>
+          <Heading>Cargo hold</Heading>
         </Section>
       </Tab>
     </Tabs>

@@ -1,7 +1,6 @@
 ---
 description: Review changes against the Flow patterns and CI gates (AGENTS.md)
-argument-hint:
-  [base ref — defaults to uncommitted changes, else merge-base with main]
+argument-hint: [base ref — defaults to uncommitted changes, else merge-base with main]
 ---
 
 Review the current changes against this repository's documented patterns.
@@ -11,38 +10,38 @@ Review the current changes against this repository's documented patterns.
 Determine the diff to review:
 
 - If `$ARGUMENTS` names a base (branch, commit, PR ref), diff against that.
-- Otherwise: review uncommitted changes if any exist, else the current branch's
-  diff against its merge-base with `main`.
+- Otherwise: review uncommitted changes if any exist, else the current
+  branch's diff against its merge-base with `main`.
 
 ## Method
 
-1. Read the rules — they are the single source of truth; do not invent criteria
-   beyond them:
-
-- `AGENTS.md` (root): generated code, Definition of Done, hard rules, workflow
-- `packages/components/AGENTS.md` when components are touched: patterns
-  (flowComponent, PropsContext, views, styling, testing bar, i18n, public API
-  surfaces)
-- the nearest `packages/*/AGENTS.md` / `apps/*/AGENTS.md` for every other
-  touched package
-
+1. Read the rules — they are the single source of truth; do not invent
+   criteria beyond them:
+   - `AGENTS.md` (root): generated code, Definition of Done, hard rules,
+     workflow
+   - `packages/components/AGENTS.md` when components are touched: patterns
+     (flowComponent, PropsContext, views, styling, testing bar, i18n, public
+     API surfaces)
+   - `packages/components/PATTERNS.md` when a components change needs a finer
+     check: the full pattern catalog with per-pattern applicability (when a
+     pattern applies / when to use an alternative)
+   - the nearest `packages/*/AGENTS.md` / `apps/*/AGENTS.md` for every other
+     touched package
 2. Check the diff against those sections. Pay special attention to:
-
-- **Generated code:** were `@flr-generate` component props, icons, or prop JSDoc
-  changed without regenerating and committing the artifacts? CI enforces
-  `git diff --exit-code`.
-- **Backwards compatibility:** are props of `@flr-generate` / `flr-universal`
-  components changed in a breaking way? Renames/removals need a
-  `useWarnDeprecation` path instead.
-- **Definition of Done** for component work: story, docs page, tests along the
-  testing bar, locales (both `de-DE` and `en-US`), `public.ts` export, remote
-  demo page — list what is missing.
-- **Patterns:** flowComponent usage, PropsContext rules (remote-capable
-  components only), views for internal composition in flr-universal components,
-  token-based styling (no hard-coded values).
-
-3. Verify each finding against the actual code before reporting — read the file;
-   never report from the diff hunk alone.
+   - **Generated code:** were `@flr-generate` component props, icons, or prop
+     JSDoc changed without regenerating and committing the artifacts? CI
+     enforces `git diff --exit-code`.
+   - **Backwards compatibility:** are props of `@flr-generate` /
+     `flr-universal` components changed in a breaking way? Renames/removals
+     need a `useWarnDeprecation` path instead.
+   - **Definition of Done** for component work: story, docs page, tests along
+     the testing bar, locales (both `de-DE` and `en-US`), `public.ts` export,
+     remote demo page — list what is missing.
+   - **Patterns:** flowComponent usage, PropsContext rules (remote-capable
+     components only), views for internal composition in flr-universal
+     components, token-based styling (no hard-coded values).
+3. Verify each finding against the actual code before reporting — read the
+   file; never report from the diff hunk alone.
 
 ## Report
 
@@ -53,5 +52,5 @@ Group findings by severity:
 - **Nit** — style/polish
 
 For each finding: `file:line`, what is wrong, and which AGENTS.md section it
-violates. If everything holds, say so explicitly. For component work, end with
-the Definition-of-Done checklist status.
+violates. If everything holds, say so explicitly. For component work, end
+with the Definition-of-Done checklist status.

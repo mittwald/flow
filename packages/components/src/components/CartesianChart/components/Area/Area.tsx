@@ -9,7 +9,7 @@ import {
   type DataKeyWithLabel,
   isDataKeyWithLabel,
 } from "@/components/CartesianChart/types";
-import { useDesignTokens } from "../../../../lib/theming";
+import { useDesignTokens } from "@/lib/theming";
 
 type AreaBaseProps = Pick<
   Recharts.AreaProps,

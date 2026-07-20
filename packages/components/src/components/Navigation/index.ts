@@ -1,5 +1,5 @@
 export * from "./view";
 
-export { Navigation, type NavigationProps } from "./Navigation";
+export { type NavigationProps, Navigation } from "./Navigation";
 export * from "./components/NavigationGroup";
 export { default } from "./Navigation";

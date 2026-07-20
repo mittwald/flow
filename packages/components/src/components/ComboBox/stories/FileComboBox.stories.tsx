@@ -8,24 +8,27 @@ import Section from "@/components/Section";
 import InlineCode from "@/components/InlineCode";
 
 const paths: Record<string, string[]> = {
-  "/": ["/project-42/", "/project-7/"],
-  "/project-42/": ["/project-42/dir-1/", "/project-42/dir-2/"],
-  "/project-7/": ["/project-7/dir-1/", "/project-7/dir-2/"],
-  "/project-42/dir-1/": [
-    "/project-42/dir-1/sql.dat",
-    "/project-42/dir-1/backup.tar",
+  "/": ["/death-star/", "/millennium-falcon/"],
+  "/death-star/": ["/death-star/schematics/", "/death-star/briefings/"],
+  "/millennium-falcon/": [
+    "/millennium-falcon/schematics/",
+    "/millennium-falcon/briefings/",
   ],
-  "/project-42/dir-2/": [
-    "/project-42/dir-2/sql.dat",
-    "/project-42/dir-2/backup.tar",
+  "/death-star/schematics/": [
+    "/death-star/schematics/plans.dat",
+    "/death-star/schematics/backup.tar",
   ],
-  "/project-7/dir-1/": [
-    "/project-7/dir-1/sql.dat",
-    "/project-7/dir-1/backup.tar",
+  "/death-star/briefings/": [
+    "/death-star/briefings/plans.dat",
+    "/death-star/briefings/backup.tar",
   ],
-  "/project-7/dir-2/": [
-    "/project-7/dir-2/sql.dat",
-    "/project-7/dir-2/backup.tar",
+  "/millennium-falcon/schematics/": [
+    "/millennium-falcon/schematics/plans.dat",
+    "/millennium-falcon/schematics/backup.tar",
+  ],
+  "/millennium-falcon/briefings/": [
+    "/millennium-falcon/briefings/plans.dat",
+    "/millennium-falcon/briefings/backup.tar",
   ],
 };
 

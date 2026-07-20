@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import {
   Table,
   TableBody,
@@ -73,15 +72,15 @@ export const WithFooter: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell>Hyperdrive overhaul</TableCell>
           <TableCell horizontalAlign="end">32,00 €</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>20 GB storage</TableCell>
+          <TableCell>Deflector shield repair</TableCell>
           <TableCell horizontalAlign="end">Inclusive</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>20 GB additional storage</TableCell>
+          <TableCell>Hull plating replacement</TableCell>
           <TableCell horizontalAlign="end">2,00 €</TableCell>
         </TableRow>
         <TableFooterRow>
@@ -102,15 +101,15 @@ export const WithRowHeader: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell rowHeader>Webhosting (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell rowHeader>Hyperdrive overhaul</TableCell>
           <TableCell>32,00 €</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell rowHeader>20 GB storage</TableCell>
+          <TableCell rowHeader>Deflector shield repair</TableCell>
           <TableCell>Inclusive</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell rowHeader>20 GB additional storage</TableCell>
+          <TableCell rowHeader>Hull plating replacement</TableCell>
           <TableCell>2,00 €</TableCell>
         </TableRow>
       </TableBody>
@@ -128,7 +127,7 @@ export const HorizontallyCenteredColumns: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>Projekt</TableCell>
+          <TableCell>Death Star plans</TableCell>
           <TableCell horizontalAlign="center">
             <IconCheck status="success" />
           </TableCell>

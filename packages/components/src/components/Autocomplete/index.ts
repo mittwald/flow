@@ -1,4 +1,4 @@
 export * from "./view";
 
-export { Autocomplete, type AutocompleteProps } from "./Autocomplete";
+export { type AutocompleteProps, Autocomplete } from "./Autocomplete";
 export { default } from "./Autocomplete";

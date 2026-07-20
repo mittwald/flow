@@ -11,7 +11,8 @@
     transform: translateX(var(--tab-indicator-x));
     border-radius: var(--tabs--corner-radius);
     background-color: var(--tabs--background-color--selected);
-    box-shadow: var(--tabs--box-shadow);
+    border: var(--tabs--border-width) var(--tabs--border-style)
+      var(--tabs--border-color--default);
     pointer-events: none;
 
     &.animated {
@@ -25,7 +26,8 @@
     padding-inline: var(--tabs--padding-x);
     background-color: var(--tabs--background-color--selected);
     border-radius: var(--tabs--corner-radius);
-    box-shadow: var(--tabs--box-shadow) !important;
+    border: var(--tabs--border-width) var(--tabs--border-style)
+      var(--tabs--border-color--default);
   }
 
   .titles {

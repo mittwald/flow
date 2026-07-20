@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Tooltip, { TooltipTrigger } from "../index";
-import React from "react";
 import { Button } from "@/components/Button";
 import { IconCopy } from "@/components/Icon/components/icons";
 
@@ -15,10 +14,10 @@ const meta: Meta<typeof Tooltip> = {
   },
   render: (props) => (
     <TooltipTrigger {...props}>
-      <Button aria-label="copy">
+      <Button aria-label="copy coordinates">
         <IconCopy />
       </Button>
-      <Tooltip>Save</Tooltip>
+      <Tooltip>Copy coordinates</Tooltip>
     </TooltipTrigger>
   ),
 };

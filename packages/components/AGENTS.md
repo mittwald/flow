@@ -4,6 +4,11 @@ Component patterns for the core package. Read the
 [root AGENTS.md](../../AGENTS.md) first for repo-wide rules (generated code,
 Definition of Done, workflow).
 
+> **Full pattern catalog:** [PATTERNS.md](./PATTERNS.md) lists every convention
+> (182 patterns) with per-pattern applicability (when to use / when not), a
+> canonical example each, and a decision cheat-sheet. This guide covers the
+> must-know core; look there when deciding between two approaches.
+
 ## Component anatomy
 
 ```
@@ -224,3 +229,37 @@ props to hide.
   component code.
 - Storybook discovers all `src/**/*.stories.tsx` automatically; there is no
   registry to update.
+
+## Non-obvious conventions
+
+Easy-to-miss conventions not spelled out above. Full details and examples in
+[PATTERNS.md](./PATTERNS.md).
+
+- **`PropsContext` is structural, not just styling** — nested entries,
+  `dynamic` children, semantic defaults (icon size, heading level, status), and
+  contextual `wrapWith` define much of a composite's internal API.
+- **The factory supplies hidden infrastructure** — memoization, nested-context
+  preservation, slot propagation, UI isolation, and tunnel entry/provider
+  wiring are all automatic consequences of `flowComponent`; don't rebuild them.
+- **Raw string children get `Text`-normalized** where typography is
+  context-driven (detect raw strings, wrap in `Text`); explicit structured
+  children are left intact.
+- **Semantic generated CSS classes are coordination points** — scoped modules
+  still use `:global(.flow--…)` when independently rendered Flow descendants
+  must affect layout.
+- **Controllers coexist with declarative props** — overlay-like APIs support
+  controlled/uncontrolled props *and* a controller object, not one or the other.
+- **Complex behavior is split by vocabulary** — `components/` for render,
+  `hooks/` for behavior, `lib/` for pure transforms, `models/` for durable
+  state.
+- **`SettingsProvider` combines async resources, hierarchical MobX stores, and
+  serialized, Suspense-aware writes** — reuse it rather than rolling
+  persistence.
+- **The empty `Default` story is intentional** — realistic args and rendering
+  live in the typed `meta`, so `export const Default: Story = {}` is the norm.
+- **CSS leans on modern relational/low-specificity selectors** — `:has`,
+  `:where`, logical properties, data attributes, and container boundaries
+  reduce the need for runtime styling props.
+- **Universal exports are deliberately explicit** — remote-safe values and
+  their types are curated in `flr-universal.ts` independently of the main
+  public surface; adding to `public.ts` does not add them there.

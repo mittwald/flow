@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TextArea } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
@@ -23,7 +22,7 @@ const meta: Meta<typeof TextArea> = {
   },
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
-      <Label>Message</Label>
+      <Label>Message to the Rebel Alliance</Label>
     </TextArea>
   ),
 };

@@ -1,5 +1,4 @@
 import { type FC } from "react";
-import React from "react";
 import { IconPending } from "@/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
 import type { IconProps } from "@/components/Icon";

@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-icons-base",
   "private": "true",
-  "version": "0.2.0-alpha.923",
+  "version": "0.2.0-alpha.927",
   "type": "module",
   "exports": {
     ".": {

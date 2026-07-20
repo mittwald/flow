@@ -8,7 +8,6 @@ import {
   Text,
   Button,
 } from "@mittwald/flow-remote-react-components";
-import React from "react";
 
 export default function Page() {
   const [elemCount, setElemCount] = useState(100);

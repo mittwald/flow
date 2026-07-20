@@ -50,13 +50,13 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="date">
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
           <Field name="dateDefaultValue">
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
@@ -65,13 +65,13 @@ const meta: Meta<typeof Field> = {
             rules={{ required: "Please select a date" }}
           >
             <DatePicker>
-              <Label>Date</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
 
           <Field name="dateMinValue">
             <DatePicker minValue={today(getLocalTimeZone())}>
-              <Label>Future date</Label>
+              <Label>Future mission date</Label>
             </DatePicker>
           </Field>
 
@@ -109,11 +109,11 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <DatePicker>
-              <Label>Text</Label>
+              <Label>Mission date</Label>
             </DatePicker>
           </Field>
           <DatePicker isInvalid>
-            <Label>Text</Label>
+            <Label>Mission date</Label>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </DatePicker>
         </Section>
@@ -133,7 +133,7 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <DatePicker>
-            <Label>Text</Label>
+            <Label>Mission date</Label>
           </DatePicker>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

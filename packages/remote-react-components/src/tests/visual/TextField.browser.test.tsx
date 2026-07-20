@@ -43,6 +43,7 @@ test.each(testEnvironments)(
         </TextField>
         <TextField isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </TextField>
         <TextField type="password">
           <Label>Password</Label>
@@ -88,16 +89,16 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        <TextField value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae.">
+        <TextField value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon.">
           <Label>Default</Label>
         </TextField>
         <TextField
           type="password"
-          value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae."
+          value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon."
         >
           <Label>Password</Label>
         </TextField>
-        <TextField value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum accusantium rerum ullam modi blanditiis vitae.">
+        <TextField value="A long time ago in a galaxy far, far away, the Rebel Alliance struck a decisive blow against the Galactic Empire. Rebel spies stole the secret plans to the Death Star weapon.">
           <Label>CustomButton</Label>
           <Button aria-label="Custom">
             <IconStar />

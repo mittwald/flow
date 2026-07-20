@@ -24,7 +24,7 @@ const meta: Meta<typeof MarkdownEditor> = {
     },
   },
   render: (props) => (
-    <MarkdownEditor placeholder="Write a message..." {...props}>
+    <MarkdownEditor placeholder="Transmit a message to the fleet..." {...props}>
       <Label>Message</Label>
     </MarkdownEditor>
   ),
@@ -43,7 +43,7 @@ export const WithFieldError: Story = {
   render: (props) => (
     <MarkdownEditor {...props} isInvalid defaultValue="hello">
       <Label>Message</Label>
-      <FieldError>Invalid message</FieldError>
+      <FieldError>Transmission garbled</FieldError>
     </MarkdownEditor>
   ),
 };
@@ -128,7 +128,7 @@ const DemoMentionMarkdownPreview = ({
 
 export const WithCustomMentionPreview: Story = {
   args: {
-    defaultValue: "Sag Hallo zu [Max Mustermann](mention:user-max)",
+    defaultValue: "Say hello to [Luke Skywalker](mention:user-luke)",
   },
   render: (props) => (
     <MarkdownEditor {...props} markdownComponent={DemoMentionMarkdownPreview}>

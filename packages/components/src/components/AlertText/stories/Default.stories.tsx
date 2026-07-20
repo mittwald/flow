@@ -34,8 +34,8 @@ export const InList: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List aria-label="Mitglieder" hidePagination>
-        <List.StaticData data={[{ name: "John Doe" }]} />
+      <List.List aria-label="Rebel members" hidePagination>
+        <List.StaticData data={[{ name: "Luke Skywalker" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>

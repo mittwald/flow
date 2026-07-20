@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Segment, SegmentedControl } from "../index";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import { FieldError } from "@/components/FieldError";
@@ -19,10 +18,10 @@ const meta: Meta<typeof SegmentedControl> = {
       onChange={action("onChange")}
       defaultValue="admin"
     >
-      <Label>Role</Label>
-      <Segment value="admin">Admin</Segment>
-      <Segment value="member">Member</Segment>
-      <Segment value="accountant">Accountant</Segment>
+      <Label>Rank</Label>
+      <Segment value="admin">Jedi Master</Segment>
+      <Segment value="member">Jedi Knight</Segment>
+      <Segment value="accountant">Padawan</Segment>
     </SegmentedControl>
   ),
 };
@@ -40,9 +39,9 @@ export const CustomContainerBreakpoint: Story = {
       defaultValue="admin"
       containerBreakpointSize="xs"
     >
-      <Label>Role</Label>
-      <Segment value="admin">Admin</Segment>
-      <Segment value="member">Member</Segment>
+      <Label>Rank</Label>
+      <Segment value="admin">Jedi Master</Segment>
+      <Segment value="member">Jedi Knight</Segment>
     </SegmentedControl>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
@@ -51,11 +50,11 @@ export const CustomContainerBreakpoint: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <SegmentedControl {...props} isInvalid isRequired>
-      <Label>Role</Label>
-      <Segment value="admin">Admin</Segment>
-      <Segment value="member">Member</Segment>
-      <Segment value="accountant">Accountant</Segment>
-      <FieldError>Select a role to continue</FieldError>
+      <Label>Rank</Label>
+      <Segment value="admin">Jedi Master</Segment>
+      <Segment value="member">Jedi Knight</Segment>
+      <Segment value="accountant">Padawan</Segment>
+      <FieldError>Select a rank to continue</FieldError>
     </SegmentedControl>
   ),
 };
@@ -63,12 +62,12 @@ export const WithFieldError: Story = {
 export const DisabledSegment: Story = {
   render: (props) => (
     <SegmentedControl {...props} defaultValue="admin">
-      <Label>Role</Label>
-      <Segment value="admin">Admin</Segment>
+      <Label>Rank</Label>
+      <Segment value="admin">Jedi Master</Segment>
       <Segment value="member" isDisabled>
-        Member
+        Jedi Knight
       </Segment>
-      <Segment value="accountant">Accountant</Segment>
+      <Segment value="accountant">Padawan</Segment>
     </SegmentedControl>
   ),
 };

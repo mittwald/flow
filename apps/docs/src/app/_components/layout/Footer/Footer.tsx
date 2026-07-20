@@ -1,6 +1,6 @@
 "use client";
 import { Flex, Heading, Link, Text } from "@mittwald/flow-react-components";
-import React, { type FC } from "react";
+import { type FC } from "react";
 import styles from "./Footer.module.scss";
 import { DateTime } from "luxon";
 import { MittwaldLogo } from "@/app/_components/layout/Footer/MittwaldLogo";

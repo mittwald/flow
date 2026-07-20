@@ -42,8 +42,8 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.segmentedControlContainer,
-    className,
     styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+    className,
   );
 
   const propsContext: PropsContext = {

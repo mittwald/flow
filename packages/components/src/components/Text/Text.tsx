@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
+import type React from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";

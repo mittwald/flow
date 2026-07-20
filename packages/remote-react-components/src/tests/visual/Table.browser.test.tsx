@@ -50,19 +50,19 @@ test.each(testEnvironments)(
             <TableRow>
               <TableCell>TableCell</TableCell>
               <TableCell>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-                eius quam quas vel voluptas, ullam aliquid fugit. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Cumque eius quam
-                quas vel voluptas, ullam aliquid fugit.
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a blow against the Galactic Empire. Rebel spies stole
+                secret plans to the Death Star, the Empire's ultimate weapon,
+                from the fortress world of Scarif.
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>TableCell</TableCell>
               <TableCell>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-                eius quam quas vel voluptas, ullam aliquid fugit. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Cumque eius quam
-                quas vel voluptas, ullam aliquid fugit.
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a blow against the Galactic Empire. Rebel spies stole
+                secret plans to the Death Star, the Empire's ultimate weapon,
+                from the fortress world of Scarif.
               </TableCell>
             </TableRow>
             <TableFooterRow>
