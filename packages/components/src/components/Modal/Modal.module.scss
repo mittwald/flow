@@ -183,7 +183,10 @@
   }
 }
 
-/* Mobile Tray */
+/* Mobile Tray — single scroll container with sticky header + footer.
+   The dialog scrolls; the header sticks to the top, the footer to the bottom.
+   While the virtual keyboard is open (.keyboardVisible) both un-stick so header
+   + content + footer flow normally and the content gets the full space (#2423). */
 
 @media (max-width: 768px) {
   .modal {
@@ -192,7 +195,7 @@
         margin-top: auto;
         padding: unset;
         width: 100%;
-        overflow: hidden auto;
+        overflow: hidden;
         border-top-left-radius: var(--modal--corner-radius);
         border-top-right-radius: var(--modal--corner-radius);
         pointer-events: all;
@@ -207,11 +210,62 @@
       }
     }
 
-    [role="dialog"],
-    [role="dialog"] > form {
+    [role="dialog"] {
       width: inherit;
       overflow: hidden auto;
-      max-height: unset;
+      max-height: var(--visual-viewport-height);
+    }
+
+    [role="dialog"] > form {
+      width: inherit;
+    }
+
+    /* flex: 0 0 auto keeps natural heights; without flex-shrink:0 the flex column
+       compresses the content box and the (overflow:visible) fields spill over
+       the footer. */
+    .header,
+    .content,
+    .columnLayout,
+    .actionGroup {
+      flex: 0 0 auto;
+    }
+
+    .content,
+    .columnLayout {
+      overflow: visible;
+      min-height: 0;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: var(--modal--background-color);
+    }
+
+    .actionGroup {
+      position: sticky;
+      bottom: 0;
+      z-index: 1;
+    }
+  }
+
+  /* Keyboard open: un-stick both so everything flows for maximum typing space.
+     The dialog fills the available height and the footer uses margin-top:auto,
+     so with SHORT content the footer still sits at the bottom (not mid-air), and
+     with tall content it scrolls away with everything else. Never hidden. */
+  .modal.keyboardVisible {
+    [role="dialog"] {
+      min-height: var(--visual-viewport-height);
+    }
+
+    .header,
+    .actionGroup {
+      position: static;
+    }
+
+    .actionGroup {
+      margin-top: auto;
     }
   }
 }
