@@ -29,7 +29,7 @@ export const VeryLongWords: Story = {
 
     return (
       <List.List aria-label="List">
-        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.StaticData data={[{ name: "Luke Skywalker" }]} />
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>

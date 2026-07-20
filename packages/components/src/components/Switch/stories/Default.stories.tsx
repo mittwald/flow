@@ -23,7 +23,7 @@ const meta: Meta<typeof Switch> = {
   },
   render: (props) => (
     <Switch {...props}>
-      <Label>Autoresponder</Label>
+      <Label>Hyperdrive</Label>
     </Switch>
   ),
 };

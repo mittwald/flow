@@ -17,7 +17,7 @@ const meta: Meta<typeof ActionGroup> = {
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>
-        <Button color="accent">Create customer</Button>
+        <Button color="accent">Recruit pilot</Button>
       </Action>
       <Action>
         <Button slot="abort" variant="soft" color="secondary">
@@ -55,7 +55,7 @@ export const WithSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="primary" color="accent">
-        Add email address
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more
@@ -71,7 +71,7 @@ export const WithExtraSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="primary" color="accent">
-        Add email address
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more

@@ -36,4 +36,4 @@ export const asyncFunctionWithError = async (...args: unknown[]) => {
   throw new Error("Something went wrong!");
 };
 
-export const button = <Button color="accent">Create customer</Button>;
+export const button = <Button color="accent">Recruit rebel</Button>;

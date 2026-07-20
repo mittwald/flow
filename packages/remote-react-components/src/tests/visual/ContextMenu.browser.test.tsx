@@ -65,10 +65,10 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
           <ContextMenuSection>
             <MenuItem>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
             </MenuItem>
-            <Heading>Max Mustermann</Heading>
+            <Heading>Luke Skywalker</Heading>
           </ContextMenuSection>
           <Separator />
 

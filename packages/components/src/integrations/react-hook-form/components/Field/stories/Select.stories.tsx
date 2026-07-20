@@ -38,7 +38,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         app: "",
-        appDefaultValue: "wordpress",
+        appDefaultValue: "falcon",
         appRequired: "",
       },
     });
@@ -50,31 +50,31 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="app">
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
           <Field name="appDefaultValue">
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
           <Field
             name="appRequired"
-            rules={{ required: "Please select an app" }}
+            rules={{ required: "Please select a starship" }}
           >
             <Select>
-              <Label>App</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Label>Starship</Label>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
 
@@ -109,16 +109,16 @@ export const WithFieldError: Story = {
           <Field name="field">
             <Select>
               <Label>Field</Label>
-              <Option value="wordpress">WordPress</Option>
-              <Option value="typo3">TYPO3</Option>
-              <Option value="magento">Magento</Option>
+              <Option value="falcon">Millennium Falcon</Option>
+              <Option value="xwing">X-Wing</Option>
+              <Option value="tie">TIE Fighter</Option>
             </Select>
           </Field>
           <Select isInvalid>
             <Label>Field</Label>
-            <Option value="wordpress">WordPress</Option>
-            <Option value="typo3">TYPO3</Option>
-            <Option value="magento">Magento</Option>
+            <Option value="falcon">Millennium Falcon</Option>
+            <Option value="xwing">X-Wing</Option>
+            <Option value="tie">TIE Fighter</Option>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </Select>
         </Section>
@@ -135,9 +135,9 @@ export const WithFocus: Story = {
         <Field name="field">
           <Select>
             <Label>Field</Label>
-            <Option value="wordpress">WordPress</Option>
-            <Option value="typo3">TYPO3</Option>
-            <Option value="magento">Magento</Option>
+            <Option value="falcon">Millennium Falcon</Option>
+            <Option value="xwing">X-Wing</Option>
+            <Option value="tie">TIE Fighter</Option>
           </Select>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

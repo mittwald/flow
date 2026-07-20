@@ -6,7 +6,7 @@ const meta: Meta<typeof CopyButton> = {
   component: CopyButton,
   render: (props) => <CopyButton {...props} />,
   args: {
-    text: "Copied content",
+    text: "May the Force be with you.",
   },
   parameters: {
     controls: { disable: true },

@@ -40,7 +40,7 @@ const meta: Meta<typeof Field> = {
     const form = useForm<Values>({
       defaultValues: {
         name: "",
-        nameDefaultValue: "John",
+        nameDefaultValue: "Luke Skywalker",
         nameRequired: "",
         nameMaxLength: "",
         controlledName: "",

@@ -18,7 +18,7 @@ const meta: Meta<typeof Rating> = {
   },
   render: (props) => (
     <Rating defaultValue={2} {...props}>
-      <Label>Rating</Label>
+      <Label>Cantina rating</Label>
     </Rating>
   ),
 };
@@ -32,8 +32,8 @@ export const Default: Story = {};
 export const WithFieldError: Story = {
   render: (props) => (
     <Rating {...props} defaultValue={0} isInvalid isRequired>
-      <Label>Rating</Label>
-      <FieldError>Please rate</FieldError>
+      <Label>Cantina rating</Label>
+      <FieldError>Please rate the cantina</FieldError>
     </Rating>
   ),
 };
@@ -44,7 +44,7 @@ export const WithControlledValue: Story = {
 
     return (
       <Rating {...props} value={value} onChange={(v) => setValue(parseInt(v))}>
-        <Label>Rating</Label>
+        <Label>Cantina rating</Label>
       </Rating>
     );
   },
@@ -63,7 +63,7 @@ export const WithForm: Story = {
       <Form form={form} onSubmit={async (v) => console.log(v.rating)}>
         <Field name="rating">
           <Rating>
-            <Label>Rating</Label>
+            <Label>Cantina rating</Label>
           </Rating>
         </Field>
         <br />

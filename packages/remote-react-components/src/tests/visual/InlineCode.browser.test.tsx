@@ -42,17 +42,17 @@ test.each(testEnvironments)(
   async ({ testScreenshot, render, components: { Text, InlineCode } }) => {
     await render(
       <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-        quam quas vel voluptas, ullam aliquid fugit.
+        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+        blow against the Galactic Empire.
         <InlineCode>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          blow against the Galactic Empire.
         </InlineCode>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-        quam quas vel voluptas, ullam aliquid fugit.
+        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+        blow against the Galactic Empire.
         <InlineCode>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          blow against the Galactic Empire.
         </InlineCode>
       </Text>,
     );

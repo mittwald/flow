@@ -45,7 +45,7 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <SearchField>
-              <Label>Suche</Label>
+              <Label>Search the archives</Label>
             </SearchField>
           </Field>
 
@@ -79,11 +79,11 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <SearchField>
-              <Label>Suche</Label>
+              <Label>Search the archives</Label>
             </SearchField>
           </Field>
           <SearchField isInvalid>
-            <Label>Suche</Label>
+            <Label>Search the archives</Label>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </SearchField>
         </Section>
@@ -99,7 +99,7 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <SearchField>
-            <Label>Suche</Label>
+            <Label>Search the archives</Label>
           </SearchField>
         </Field>
         <div style={{ marginBottom: "2200px" }} />

@@ -21,8 +21,7 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
           <Kbd keys={["mod", "k"]} />
         </SearchField>
         <Text>
-          Lorem ipsum dolor sit amet <Kbd keys={["mod", "k"]} /> consectetur
-          adipisicing elit.
+          A long time ago in a <Kbd keys={["mod", "k"]} /> galaxy far, far away.
         </Text>
         <Kbd isDisabled variant="soft">
           k

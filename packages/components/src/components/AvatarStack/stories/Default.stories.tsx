@@ -22,13 +22,13 @@ const meta: Meta<typeof AvatarStack> = {
   render: (props) => (
     <AvatarStack {...props}>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
     </AvatarStack>
   ),
@@ -44,17 +44,17 @@ export const ClickableAvatars: Story = {
     <AvatarStack {...props} onCountPress={action("count clicked")}>
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>{" "}
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>{" "}
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Rebel pilot" src={dummyText.imageSrc} />
         </Avatar>
       </Button>
     </AvatarStack>
@@ -66,13 +66,13 @@ export const WithoutTotalCount: Story = {
   render: (props) => (
     <AvatarStack {...props}>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
       <Avatar size={props.size}>
-        <Image alt="Gopher" src={dummyText.imageSrc} />
+        <Image alt="Rebel pilot" src={dummyText.imageSrc} />
       </Avatar>
     </AvatarStack>
   ),

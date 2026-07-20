@@ -48,22 +48,21 @@ const meta: Meta<typeof Modal> = {
   render: (props) => {
     return (
       <Modal {...props} isDefaultOpen>
-        <Heading>New Customer</Heading>
+        <Heading>New Squadron</Heading>
         <Content>
           <Section>
             <Text>
-              Create a new customer to manage your projects, members and
-              payments.
+              Create a new squadron to manage your pilots, ships and missions.
             </Text>
             <TextField>
-              <Label>Customer name</Label>
+              <Label>Squadron name</Label>
             </TextField>
           </Section>
         </Content>
         <ActionGroup>
           <Action closeModal>
             <Action onAction={asyncLongFunction}>
-              <Button color="accent">Create customer</Button>
+              <Button color="accent">Create squadron</Button>
             </Action>
             <Button color="secondary" variant="soft">
               Abort
@@ -91,7 +90,7 @@ export const WithController: Story = {
       <>
         <Button onPress={controller.open}>Open controller</Button>
         <Modal {...props} controller={controller}>
-          <Heading>Heading</Heading>
+          <Heading>Imperial Briefing</Heading>
           <Content>
             <Text>{dummyText.long}</Text>
           </Content>
@@ -113,7 +112,7 @@ export const WithTrigger: Story = {
     <ModalTrigger>
       <Button>Trigger</Button>
       <Modal {...props}>
-        <Heading>Heading</Heading>
+        <Heading>Imperial Briefing</Heading>
         <Content>
           <Text>{dummyText.long}</Text>
         </Content>
@@ -139,7 +138,7 @@ export const WithForm: Story = {
     return (
       <>
         <Button color="accent" onPress={controller.open}>
-          Add customer
+          Add pilot
         </Button>
 
         <Modal
@@ -150,11 +149,11 @@ export const WithForm: Story = {
           }}
         >
           <Form form={form} onSubmit={() => () => controller.close()}>
-            <Heading>Add Customer</Heading>
+            <Heading>Add Pilot</Heading>
             <Content>
               <Field name="name" rules={{ required: "Please enter a name" }}>
                 <TextField>
-                  <Label>Customer name</Label>
+                  <Label>Pilot name</Label>
                 </TextField>
               </Field>
             </Content>
@@ -178,10 +177,10 @@ export const WithColumnLayout: Story = {
   render: (props) => {
     return (
       <ModalTrigger>
-        <Button color="accent">Book tariff</Button>
+        <Button color="accent">Charter a ship</Button>
 
         <Modal {...props}>
-          <Heading>Book tariff</Heading>
+          <Heading>Charter a ship</Heading>
 
           <ColumnLayout>
             <Section>
@@ -230,8 +229,8 @@ export const WithSuspense: Story = {
           <Loader />
         ) : (
           <>
-            <Heading>Heading</Heading>
-            <Content>Loaded content!</Content>
+            <Heading>Imperial Briefing</Heading>
+            <Content>Transmission received!</Content>
           </>
         )}
       </Modal>
@@ -297,7 +296,7 @@ export const LongContent: Story = {
       </Content>
       <ActionGroup>
         <Action closeModal>
-          <Button color="accent">Create customer</Button>
+          <Button color="accent">Create SFTP user</Button>
           <Button variant="soft" color="secondary">
             Abort
           </Button>

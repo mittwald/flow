@@ -73,10 +73,10 @@ test.each(testEnvironments)(
       <Select selectedKey="1">
         <Label>Label</Label>
         <Option value="1">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star,
+          hidden on Scarif.
         </Option>
       </Select>,
     );

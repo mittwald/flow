@@ -15,9 +15,7 @@ const meta: Meta<typeof Checkbox> = {
   parameters: {
     controls: { exclude: ["onChange"] },
   },
-  render: (props) => (
-    <Checkbox {...props}>Consent to terms and conditions</Checkbox>
-  ),
+  render: (props) => <Checkbox {...props}>Join the Rebel Alliance</Checkbox>,
 };
 
 export default meta;
@@ -29,8 +27,8 @@ export const Default: Story = {};
 export const WithFieldError: Story = {
   render: (props) => (
     <Checkbox {...props} isInvalid>
-      Consent to terms and conditions
-      <FieldError>Please consent</FieldError>
+      Join the Rebel Alliance
+      <FieldError>Please join to continue</FieldError>
     </Checkbox>
   ),
 };
