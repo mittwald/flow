@@ -395,6 +395,11 @@ test("browser extension UI stays interactive while a modal is open", async () =>
   const customElement = document.createElement("some-extension-overlay");
   const shadowHost = document.createElement("div");
   shadowHost.attachShadow({ mode: "open" });
+
+  for (const node of [customElement, shadowHost]) {
+    node.inert = true;
+    node.setAttribute("aria-hidden", "true");
+  }
   document.body.append(customElement, shadowHost);
 
   try {
@@ -402,6 +407,7 @@ test("browser extension UI stays interactive while a modal is open", async () =>
       for (const node of [customElement, shadowHost]) {
         expect(node.hasAttribute("data-react-aria-top-layer")).toBe(true);
         expect(node.inert).toBe(false);
+        expect(node.hasAttribute("aria-hidden")).toBe(false);
       }
     });
   } finally {
