@@ -55,6 +55,11 @@
   row-gap: var(--size-px--m);
   flex-grow: 1;
   min-width: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .tabsContainer {
