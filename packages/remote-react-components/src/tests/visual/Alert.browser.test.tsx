@@ -63,10 +63,10 @@ test.each(testEnvironments)(
     await render(
       <Alert>
         <Heading>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-          accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-          dolore voluptas.
+          A long time ago in a galaxy far, far away, the Rebel Alliance struck a
+          decisive blow against the Galactic Empire. Rebel spies managed to
+          steal secret plans to the Empire's ultimate weapon, the Death Star, an
+          armored space station with enough power to destroy an entire planet.
         </Heading>
         <Content>Content</Content>
       </Alert>,

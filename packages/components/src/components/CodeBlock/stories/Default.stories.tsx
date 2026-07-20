@@ -14,7 +14,7 @@ const meta: Meta<typeof CodeBlock> = {
     copyable: false,
     language: "json",
     code: `{
-  "name": "My Project"
+  "name": "Death Star Project"
   "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
   "shortId": "p-123456",
   "createdAt": "2025-08-25T06:11:21.000Z",

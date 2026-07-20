@@ -33,10 +33,10 @@ const meta: Meta<typeof Chat> = {
           <Header>
             <Align>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
-                <strong>Max Mustermann</strong>
+                <strong>Luke Skywalker</strong>
               </Text>
             </Align>
           </Header>
@@ -48,10 +48,10 @@ const meta: Meta<typeof Chat> = {
           <Header>
             <Align>
               <Avatar>
-                <Initials>John Doe</Initials>
+                <Initials>Leia Organa</Initials>
               </Avatar>
               <Text>
-                <strong>John Doe</strong>
+                <strong>Leia Organa</strong>
               </Text>
             </Align>
           </Header>
@@ -61,7 +61,7 @@ const meta: Meta<typeof Chat> = {
         </Message>
       </MessageThread>
       <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Submit</Button>
+      <Button color="accent">Send</Button>
     </Chat>
   ),
 };
@@ -79,10 +79,10 @@ export const WithUpload: Story = {
           <Header>
             <Align>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
-                <strong>Max Mustermann</strong>
+                <strong>Luke Skywalker</strong>
               </Text>
             </Align>
           </Header>
@@ -97,10 +97,10 @@ export const WithUpload: Story = {
           Attach file
         </Button>
       </FileField>
-      <Button color="accent">Submit</Button>
+      <Button color="accent">Send</Button>
       <FileCardList>
-        <FileCard name="Uploaded File 1" />
-        <FileCard name="Uploaded File 2" />
+        <FileCard name="death-star-plans.pdf" />
+        <FileCard name="rebel-briefing.docx" />
       </FileCardList>
     </Chat>
   ),
@@ -116,10 +116,10 @@ export const WithForm: Story = {
             <Header>
               <Align>
                 <Avatar>
-                  <Initials>Max Mustermann</Initials>
+                  <Initials>Luke Skywalker</Initials>
                 </Avatar>
                 <Text>
-                  <strong>Max Mustermann</strong>
+                  <strong>Luke Skywalker</strong>
                 </Text>
               </Align>
             </Header>
@@ -137,7 +137,7 @@ export const WithForm: Story = {
           <Field name="message">
             <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
           </Field>
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton>Send</SubmitButton>
         </Form>
       </Chat>
     );
@@ -152,10 +152,10 @@ export const WithMarkdownEditor: Story = {
           <Header>
             <Align>
               <Avatar>
-                <Initials>Max Mustermann</Initials>
+                <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
-                <strong>Max Mustermann</strong>
+                <strong>Luke Skywalker</strong>
               </Text>
             </Align>
           </Header>
@@ -165,7 +165,7 @@ export const WithMarkdownEditor: Story = {
         </Message>
       </MessageThread>
       <MarkdownEditor aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Submit</Button>
+      <Button color="accent">Send</Button>
     </Chat>
   ),
 };

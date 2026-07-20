@@ -45,7 +45,7 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="user">
             <FileField>
-              <Label>Certificate</Label>
+              <Label>Death Star plans</Label>
               <Button variant="outline" color="secondary">
                 Select
               </Button>
@@ -86,14 +86,14 @@ export const WithFieldError: Story = {
         <Section>
           <Field name="field">
             <FileField multiple>
-              <Label>Certificate</Label>
+              <Label>Death Star plans</Label>
               <Button variant="outline" color="secondary">
                 Select
               </Button>
             </FileField>
           </Field>
           <FileField multiple isInvalid>
-            <Label>Certificate</Label>
+            <Label>Death Star plans</Label>
             <Button variant="outline" color="secondary">
               Select
             </Button>
@@ -116,7 +116,7 @@ export const WithFocus: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
           <FileField multiple>
-            <Label>Certificate</Label>
+            <Label>Death Star plans</Label>
             <Button variant="outline" color="secondary">
               Select
             </Button>

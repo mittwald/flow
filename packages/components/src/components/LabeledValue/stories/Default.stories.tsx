@@ -21,8 +21,8 @@ const meta: Meta<typeof LabeledValue> = {
   },
   render: (props) => (
     <LabeledValue {...props}>
-      <Label>Project</Label>
-      <Content>My Webhosting</Content>
+      <Label>Starship</Label>
+      <Content>Millennium Falcon</Content>
     </LabeledValue>
   ),
 };
@@ -71,17 +71,17 @@ export const WithContextualHelp: Story = {
         <ContextualHelpTrigger>
           <Button />
           <ContextualHelp {...props}>
-            <Heading>Rights & roles</Heading>
+            <Heading>Ranks & roles</Heading>
             <Text>
-              Each user profile is assigned a role in mStudio for each project
-              and/or organization. This allows you to work in a completely new
-              and modern way.
+              Each crew member is assigned a rank in your fleet for each mission
+              and/or squadron. This lets you command in a completely new and
+              modern way.
             </Text>
             <Link>Learn more</Link>
           </ContextualHelp>
         </ContextualHelpTrigger>
       </Label>
-      <Text>Admin</Text>
+      <Text>Jedi Master</Text>
     </LabeledValue>
   ),
 };

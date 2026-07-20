@@ -16,7 +16,7 @@ import {
 const meta: Meta<typeof FileCard> = {
   title: "Upload/FileCard",
   component: FileCard,
-  args: { name: "image.jpg" },
+  args: { name: "millennium-falcon.jpg" },
   parameters: {
     controls: { disable: true },
   },
@@ -45,7 +45,7 @@ export const WithContextMenu: Story = {
   render: (props) => (
     <FileCard {...props}>
       <ContextMenu>
-        <MenuItem>Löschen</MenuItem>
+        <MenuItem>Delete</MenuItem>
       </ContextMenu>
     </FileCard>
   ),
@@ -76,7 +76,7 @@ export const WithProgressBar: Story = {
         showMaxValue
         formatOptions={{ style: "unit", unit: "megabyte" }}
       >
-        <Label>Image.png</Label>
+        <Label>millennium-falcon.png</Label>
       </ProgressBar>
     </FileCard>
   ),

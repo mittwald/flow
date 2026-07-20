@@ -59,10 +59,10 @@ test.each(testEnvironments)(
             </Alert>
             <Heading>Heading</Heading>
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a decisive blow against the Galactic Empire. Rebel spies
+              managed to steal secret plans to the Empire's ultimate weapon, the
+              Death Star.
             </Text>
             <Heading level={3}>Sub-Heading</Heading>
             <Link>Link</Link>
@@ -70,10 +70,10 @@ test.each(testEnvironments)(
           <Section>
             <Header>
               <Heading>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-                eius quam quas vel voluptas, ullam aliquid fugit. Voluptate
-                harum accusantium rerum ullam modi blanditiis vitae, laborum ea
-                tempore, dolore voluptas.<Badge>Badge</Badge>
+                A long time ago in a galaxy far, far away, the Rebel Alliance
+                struck a decisive blow against the Galactic Empire. Rebel spies
+                managed to steal secret plans to the Empire's ultimate weapon,
+                the Death Star.<Badge>Badge</Badge>
               </Heading>
               <Button>Button</Button>
             </Header>

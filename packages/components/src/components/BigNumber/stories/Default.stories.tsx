@@ -20,7 +20,7 @@ export const WithSubtitle: Story = {
   render: (props) => (
     <BigNumber {...props}>
       <Text>69%</Text>
-      <Text>Performance</Text>
+      <Text>Shield integrity</Text>
     </BigNumber>
   ),
 };

@@ -8,7 +8,7 @@ const meta: Meta<typeof EmulatedBoldText> = {
     controls: { disable: true },
   },
   render: (props) => (
-    <EmulatedBoldText {...props}>Example Text</EmulatedBoldText>
+    <EmulatedBoldText {...props}>May the Force be with you.</EmulatedBoldText>
   ),
 };
 

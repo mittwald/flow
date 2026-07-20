@@ -26,9 +26,9 @@ const meta: Meta<typeof ContextMenu> = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <MenuItem id="item1">Item 1</MenuItem>
-        <MenuItem id="item2">Item 2</MenuItem>
-        <MenuItem id="item3">Item 3</MenuItem>
+        <MenuItem id="item1">Engage hyperdrive</MenuItem>
+        <MenuItem id="item2">Cloak ship</MenuItem>
+        <MenuItem id="item3">Self-destruct</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
@@ -162,11 +162,11 @@ export const WithAvatar: Story = {
         <ContextMenuSection>
           <MenuItem>
             <Avatar>
-              <Initials>Max Mustermann</Initials>
+              <Initials>Din Djarin</Initials>
             </Avatar>
             <IconCamera />
           </MenuItem>
-          <Heading>Max Mustermann</Heading>
+          <Heading>Din Djarin</Heading>
         </ContextMenuSection>
         <Separator />
         <ContextMenuSection>
@@ -234,10 +234,10 @@ export const WithSuspense: Story = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <MenuItem>Menu Item 1</MenuItem>
-        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>Squadron Alpha</MenuItem>
+        <MenuItem>Squadron Beta</MenuItem>
         <WrapInSuspense>
-          <MenuItem>Menu Item 3</MenuItem>
+          <MenuItem>Squadron Gamma</MenuItem>
         </WrapInSuspense>
       </ContextMenu>
     </ContextMenuTrigger>

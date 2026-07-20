@@ -17,18 +17,17 @@ test.each(testEnvironments)(
           showLineNumbers
           code={`{
     "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
-    "name": "My Project"
+    "name": "Death Star"
 }`}
         />
 
         <CodeBlock>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          A long time ago in a galaxy far, far away, the Rebels.
           <br />
           <Color color="danger">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            A long time ago in a galaxy far, far away, the Rebels.
           </Color>
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <br />A long time ago in a galaxy far, far away, the Rebels.
         </CodeBlock>
       </Flex>,
     );
@@ -44,7 +43,7 @@ test.each(testEnvironments)(
       <CodeBlock
         language="json"
         code={`{
-  "name": "My Project"
+  "name": "Death Star"
   "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
   "shortId": "p-123456",
   "createdAt": "2025-08-25T06:11:21.000Z",

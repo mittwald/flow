@@ -58,12 +58,12 @@ export const WithUnit: Story = {
 export const WithSegments: Story = {
   args: {
     segments: [
-      { title: "Item 1", value: 28 },
-      { title: "Item 2", value: 24 },
-      { title: "Item 3", value: 8 },
-      { title: "Item 4", value: 10 },
-      { title: "Item 5", value: 12, color: "yellow" },
-      { title: "Item 6", value: 6, color: "#555" },
+      { title: "Death Star plans", value: 28 },
+      { title: "Star charts", value: 24 },
+      { title: "Holograms", value: 8 },
+      { title: "Comm logs", value: 10 },
+      { title: "Droid backups", value: 12, color: "yellow" },
+      { title: "Archives", value: 6, color: "#555" },
     ],
     legendPosition: "right",
     showLegend: true,

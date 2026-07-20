@@ -14,14 +14,16 @@ const meta: Meta<typeof Chat> = {
   },
   render: () => {
     const suggestEmail = (value: string) => {
-      return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
-        const email = `${value.split("@")[0]}@${d}`;
-        return (
-          <Option key={email} value={email} textValue={email}>
-            {email}
-          </Option>
-        );
-      });
+      return ["rebellion.org", "empire.gov", "jedi.org", "hoth.net"].map(
+        (d) => {
+          const email = `${value.split("@")[0]}@${d}`;
+          return (
+            <Option key={email} value={email} textValue={email}>
+              {email}
+            </Option>
+          );
+        },
+      );
     };
 
     const [input, setInput] = useState("");
@@ -29,7 +31,7 @@ const meta: Meta<typeof Chat> = {
     return (
       <Autocomplete>
         <SearchField onChange={setInput} value={input}>
-          <Label>Test</Label>
+          <Label>Comlink address</Label>
         </SearchField>
         {suggestEmail(input)}
       </Autocomplete>
@@ -46,11 +48,11 @@ export const FixedOptions: Story = {
   render: () => (
     <Autocomplete>
       <SearchField>
-        <Label>Test</Label>
+        <Label>Comlink address</Label>
       </SearchField>
-      <Option value="example.com">example.com</Option>
-      <Option value="domain.de">domain.de</Option>
-      <Option value="test.org">test.org</Option>
+      <Option value="rebellion.org">rebellion.org</Option>
+      <Option value="empire.gov">empire.gov</Option>
+      <Option value="jedi.org">jedi.org</Option>
     </Autocomplete>
   ),
 };

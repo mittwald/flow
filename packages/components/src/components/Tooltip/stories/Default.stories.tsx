@@ -14,10 +14,10 @@ const meta: Meta<typeof Tooltip> = {
   },
   render: (props) => (
     <TooltipTrigger {...props}>
-      <Button aria-label="copy">
+      <Button aria-label="copy coordinates">
         <IconCopy />
       </Button>
-      <Tooltip>Save</Tooltip>
+      <Tooltip>Copy coordinates</Tooltip>
     </TooltipTrigger>
   ),
 };

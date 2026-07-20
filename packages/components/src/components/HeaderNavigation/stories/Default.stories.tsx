@@ -31,9 +31,9 @@ const meta: Meta<typeof HeaderNavigation> = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <HeaderNavigation aria-label="Header navigation" {...props}>
-        <Link href="#">Getting started</Link>
+        <Link href="#">Star systems</Link>
         <Link href="#" aria-current="page">
-          Components
+          Starships
         </Link>
         <Button aria-label="Search">
           <IconSearch />
@@ -50,7 +50,7 @@ const meta: Meta<typeof HeaderNavigation> = {
         <ContextMenuTrigger>
           <Button>
             <Avatar>
-              <Image alt="Gopher" src={dummyText.imageSrc} />
+              <Image alt="Grogu" src={dummyText.imageSrc} />
             </Avatar>
           </Button>
           <ContextMenu>

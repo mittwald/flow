@@ -153,16 +153,14 @@ test.each(testEnvironments)(
         <RadioGroup isRequired defaultValue="1">
           <Label>Label</Label>
           <Radio value="1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
           </Radio>
           <Radio value="2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-            quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-            accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-            dolore voluptas.
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a decisive blow against the Galactic Empire. Rebel spies managed to
+            steal secret plans to the Empire's ultimate weapon, the Death Star.
           </Radio>
         </RadioGroup>
         <RadioGroup isRequired defaultValue="1">
@@ -173,14 +171,14 @@ test.each(testEnvironments)(
           </RadioButton>
           <RadioButton value="2">
             <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a blow against the Empire.
             </Text>
             <Content>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-              eius quam quas vel voluptas, ullam aliquid fugit. Voluptate harum
-              accusantium rerum ullam modi blanditiis vitae, laborum ea tempore,
-              dolore voluptas.
+              A long time ago in a galaxy far, far away, the Rebel Alliance
+              struck a decisive blow against the Galactic Empire. Rebel spies
+              managed to steal secret plans to the Empire's ultimate weapon, the
+              Death Star.
             </Content>
           </RadioButton>
         </RadioGroup>

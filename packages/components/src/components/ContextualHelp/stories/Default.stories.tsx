@@ -18,11 +18,11 @@ const meta: Meta<typeof ContextualHelp> = {
     <ContextualHelpTrigger>
       <Button />
       <ContextualHelp {...props}>
-        <Heading>Rights & roles</Heading>
+        <Heading>Ranks & roles</Heading>
         <Text>
-          Each user profile is assigned a role in mStudio for each project
-          and/or organization. This allows you to work in a completely new and
-          modern way.
+          Each member of the Rebel Alliance is assigned a rank for every mission
+          and/or squadron. This allows the fleet to coordinate the fight against
+          the Empire in a completely new and modern way.
         </Text>
         <Link>Learn more</Link>
       </ContextualHelp>

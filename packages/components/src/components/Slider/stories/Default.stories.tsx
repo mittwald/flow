@@ -7,7 +7,7 @@ const meta: Meta<typeof Slider> = {
   component: Slider,
   render: (props) => (
     <Slider {...props} defaultValue={20}>
-      <Label>Amount</Label>
+      <Label>Bounty (credits)</Label>
     </Slider>
   ),
   args: {
@@ -42,7 +42,7 @@ export const WithFormatOptions: Story = {
 export const WithInitialMarker: Story = {
   render: (props) => (
     <Slider {...props} showInitialMarker defaultValue={20}>
-      <Label>Amount</Label>
+      <Label>Bounty (credits)</Label>
     </Slider>
   ),
 };

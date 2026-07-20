@@ -287,9 +287,9 @@ export const WithAccordion: Story = {
     return (
       <List.List batchSize={5} aria-label="Invoices" accordion>
         <List.StaticData
-          data={[{ id: "Item 1" }, { id: "Item 2" }, { id: "Item 3" }]}
+          data={[{ id: "Tatooine" }, { id: "Hoth" }, { id: "Endor" }]}
         />
-        <List.Item defaultExpanded={(invoice) => invoice.id === "Item 1"}>
+        <List.Item defaultExpanded={(invoice) => invoice.id === "Tatooine"}>
           {(invoice) => (
             <ListItemView>
               <Heading>{invoice.id}</Heading>

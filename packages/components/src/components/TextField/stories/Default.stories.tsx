@@ -45,7 +45,7 @@ export const WithFieldDescription: Story = {
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <TextField {...props} defaultValue="https://mittwald.de">
+    <TextField {...props} defaultValue="https://rebellion.org">
       <Label>URL</Label>
     </TextField>
   ),
