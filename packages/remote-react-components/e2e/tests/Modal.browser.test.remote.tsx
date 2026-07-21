@@ -1,6 +1,14 @@
-import { ActionGroup, Button, Content, Heading, Text } from "../../src/index";
-import { Action, Modal, ModalTrigger } from "../../src/index";
-import { typedList } from "../../src/index";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Content,
+  Heading,
+  Modal,
+  ModalTrigger,
+  Text,
+  typedList,
+} from "@mittwald/flow-remote-react-components";
 
 const TestModal = (
   <Modal>

@@ -1,4 +1,4 @@
-import { CopyButton, TextField } from "../../src/auto-generated";
+import { CopyButton, TextField } from "@mittwald/flow-remote-react-components";
 
 export const standard = () => (
   <CopyButton data-testid="button" text="copy-me" />

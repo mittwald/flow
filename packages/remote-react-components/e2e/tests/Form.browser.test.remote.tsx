@@ -7,8 +7,8 @@ import {
   Option,
   Select,
   Button,
-} from "../../src/auto-generated";
-import { Form } from "../../src/components/Form";
+} from "@mittwald/flow-remote-react-components";
+import { Form } from "@mittwald/flow-remote-react-components";
 import { type FC, useState } from "react";
 
 const TestForm: FC<{
