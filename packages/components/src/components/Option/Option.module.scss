@@ -2,4 +2,18 @@
 
 .option {
   @include menuItem.menuItem();
+
+  & {
+    justify-content: space-between;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    column-gap: var(--menu-item--spacing);
+  }
+
+  .checkMark {
+    align-self: start;
+  }
 }

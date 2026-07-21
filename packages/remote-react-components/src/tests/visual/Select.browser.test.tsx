@@ -42,12 +42,18 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "Select interaction (%s)",
-  async ({ testScreenshot, render, components: { Select, Label, Option } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Select, Label, Option, Badge },
+  }) => {
     await render(
       <Select>
         <Label>Label</Label>
-        <Option data-testid="option">Option 1</Option>
-        <Option>Option 2</Option>
+        <Option data-testid="option" textValue="Option 1">
+          Option 1 <Badge>Badge</Badge>
+        </Option>
+        <Option textValue="Option 2">Option 2</Option>
       </Select>,
     );
 
@@ -67,10 +73,39 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "Select multiple (%s)",
+  async ({ testScreenshot, render, components: { Select, Label, Option } }) => {
+    await render(
+      <Select selectionMode="multiple">
+        <Label>Label</Label>
+        <Option data-testid="option1">Option 1</Option>
+        <Option data-testid="option2">Option 2</Option>
+        <Option>Option 3</Option>
+      </Select>,
+    );
+
+    const select = page.getByLocator("button");
+    const option1 = page.getByTestId("option1");
+    const option2 = page.getByTestId("option2");
+
+    await testScreenshot("Select multiple - default");
+
+    await select.click();
+
+    await testScreenshot("Select multiple - options visible");
+
+    await option1.click();
+    await option2.click();
+
+    await testScreenshot("Select multiple - option selected");
+  },
+);
+
+test.each(testEnvironments)(
   "Select edge cases (%s)",
   async ({ testScreenshot, render, components: { Select, Label, Option } }) => {
     await render(
-      <Select selectedKey="1">
+      <Select value="1">
         <Label>Label</Label>
         <Option value="1">
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
