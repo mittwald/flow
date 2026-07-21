@@ -24,11 +24,13 @@ export class IncrementalLoaderState<T> {
       prevDataBatches: false,
       useMergedData: false,
       useIsLoading: false,
+      useIsLoadingMore: false,
       dataBatches: observable.shallow,
       batchLoadingStates: observable.shallow,
       metadata: observable,
       mergedData: computed,
       isLoading: computed,
+      isLoadingMore: computed,
       isInitiallyLoading: observable,
       setIsInitiallyLoading: action.bound,
       reset: action.bound,
@@ -100,6 +102,14 @@ export class IncrementalLoaderState<T> {
 
   public useIsLoading(): boolean {
     return useSelector(() => this.isLoading);
+  }
+
+  public get isLoadingMore(): boolean {
+    return this.isLoading && this.dataBatches.length > 0;
+  }
+
+  public useIsLoadingMore(): boolean {
+    return useSelector(() => this.isLoadingMore);
   }
 
   public useIsInitiallyLoading(): boolean {
