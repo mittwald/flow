@@ -1,0 +1,32 @@
+# Playground
+
+Verwende `<PhoneNumberField />`, um Telefonnummern einzugeben. Die Component
+basiert auf [libphonenumber-js](https://www.npmjs.com/package/libphonenumber-js)
+und wird über den Export `@mittwald/flow-react-components/phone-tools`
+bereitgestellt.
+
+Eingaben werden unabhängig von Leerzeichen und Formatierung verstanden. Über
+`onChange` liefert die Component gültige Nummern immer im E.164-Format (z. B.
+`+495772293100`); beim Verlassen des Felds wird die Anzeige international
+formatiert.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Ländervorwahl
+
+Nummern ohne Ländervorwahl werden über `defaultCountry` interpretiert (Standard:
+`DE`). Nummern mit `+`-Präfix werden unabhängig davon automatisch erkannt.
+
+<LiveCodeEditor example="defaultCountry" editorCollapsed stretch />
+
+---
+
+# Validierung
+
+Ungültige Telefonnummern invalidieren das Feld automatisch. Mittels
+`<FieldError />` wird die Fehlermeldung angezeigt; eigene Validierungen können
+zusätzlich über `validate` ergänzt werden und erhalten die normalisierte Nummer.
+
+<LiveCodeEditor example="validation" editorCollapsed stretch />

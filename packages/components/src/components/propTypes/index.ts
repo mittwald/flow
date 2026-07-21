@@ -50,6 +50,7 @@ import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { ListItemViewContentProps, ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
+import type { PhoneNumberFieldProps } from "@/components/PhoneNumberField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
 import type { DatePickerProps } from "@/components/DatePicker";
@@ -161,6 +162,7 @@ export interface FlowComponentPropsTypes {
   Popover: PopoverProps;
   PopoverTrigger: PopoverTriggerProps;
   PasswordCreationField: PasswordCreationFieldProps;
+  PhoneNumberField: PhoneNumberFieldProps;
   ProgressBar: ProgressBarProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
@@ -255,6 +257,7 @@ const propsContextSupportingComponentsMap: Record<
   Popover: true,
   PopoverTrigger: true,
   PasswordCreationField: true,
+  PhoneNumberField: true,
   ProgressBar: true,
   RadioButton: true,
   RadioGroup: true,

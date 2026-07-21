@@ -26,6 +26,7 @@ export default mergeConfig(
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
           "password-tools":
             "./src/integrations/@mittwald/password-tools-js/index.ts",
+          "phone-tools": "./src/integrations/libphonenumber-js/index.ts",
           globals: "./src/styles/index.ts",
         },
         formats: ["es"],

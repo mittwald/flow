@@ -1,0 +1,25 @@
+# Grundlagen
+
+Das PhoneNumberField ist eine Component zur Eingabe von Telefonnummern. Es
+akzeptiert Eingaben in beliebigem Format — mit oder ohne Leerzeichen, mit oder
+ohne Ländervorwahl — und normalisiert sie zu einem einheitlichen Wert. User
+müssen sich dadurch nicht an ein vorgegebenes Format halten. Für Eingaben, die
+keine Telefonnummern sind, sollte ein reguläres
+[TextField](/04-components/form-controls/text-field/overview) verwendet werden.
+
+## Best Practices
+
+Achte bei der Verwendung eines PhoneNumberFields darauf, dass ...
+
+- ein `<FieldError />` vorhanden ist, damit ungültige Nummern für den User
+  nachvollziehbar sind.
+- das `defaultCountry` zum Kontext passt, wenn die Zielgruppe überwiegend
+  außerhalb Deutschlands liegt.
+
+## Verwendung
+
+Verwende ein PhoneNumberField, um ...
+
+- Telefonnummern ohne Formatvorgaben zu erfassen.
+- Telefonnummern einheitlich (E.164) zu speichern.
+- Tippfehler durch die eingebaute Validierung frühzeitig sichtbar zu machen.
