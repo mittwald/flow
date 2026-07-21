@@ -46,7 +46,7 @@ export const useTabIndicator = (isCollapsed: boolean) => {
     const measureIndicator = () => {
       const selectedTab = titles.querySelector<HTMLElement>("[data-selected]");
 
-      if (!selectedTab || titles.children.length === 0) {
+      if (!selectedTab) {
         resetIndicator();
         return;
       }

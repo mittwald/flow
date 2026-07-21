@@ -2,18 +2,20 @@
   background-color: var(--tabs--background-color--default);
   position: relative;
   border-radius: var(--tabs--corner-radius);
+  isolation: isolate;
 
   .activeIndicator {
     position: absolute;
     inset-block: 0;
     inset-inline-start: 0;
-    width: var(--tab-indicator-width);
-    transform: translateX(var(--tab-indicator-x));
+    width: calc(var(--tab-indicator-width) + (var(--size-px--xs) * 2));
+    transform: translateX(calc(var(--tab-indicator-x) - var(--size-px--xs)));
     border-radius: var(--tabs--corner-radius);
     background-color: var(--tabs--background-color--selected);
     border: var(--tabs--border-width) var(--tabs--border-style)
       var(--tabs--border-color--default);
     pointer-events: none;
+    z-index: 1;
 
     &.animated {
       transition-property: transform, width;
