@@ -8,6 +8,9 @@
  * animation whose animationstart event is handled in AutofillSelectionHandler.
  * Remove together with the handler once the upstream issue is fixed.
  */
+/* stylelint-disable-next-line keyframes-name-pattern --
+   the name is kebab-case; :global() keeps it un-hashed so it can be
+   compared against event.animationName in AutofillSelectionHandler */
 @keyframes :global(flow-combobox-autofill-start) {
   from {
     --flow--combobox--autofill-detected: 1;

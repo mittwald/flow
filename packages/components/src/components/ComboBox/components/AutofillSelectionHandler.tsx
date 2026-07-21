@@ -61,7 +61,7 @@ export const AutofillSelectionHandler = ({ inputRef }: Props) => {
 
     const handleAutofill = () => {
       const value = input.value;
-      if (!value || input.disabled || input.readOnly) {
+      if (!value.trim() || input.disabled || input.readOnly) {
         return;
       }
       if (state.selectedKey !== null && state.selectedKey !== undefined) {

@@ -162,6 +162,17 @@ test("ComboBox ignores empty autofill values", async () => {
   expect(onSelectionChange).not.toHaveBeenCalled();
 });
 
+test("ComboBox ignores whitespace-only autofill values", async () => {
+  const onSelectionChange = vi.fn();
+  const { input } = await renderComboBox({ onSelectionChange });
+
+  simulateAutofill(input, "   ");
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  expect(onSelectionChange).not.toHaveBeenCalled();
+  expect(input).toHaveAttribute("aria-expanded", "false");
+});
+
 test("ComboBox ignores foreign animations", async () => {
   const onSelectionChange = vi.fn();
   const { input } = await renderComboBox({ onSelectionChange });

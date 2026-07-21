@@ -36,7 +36,9 @@ export const collectItemNodes = (
 const getChildrenAccessor = (collection: CollectionLike) =>
   collection.getChildren ? collection.getChildren.bind(collection) : undefined;
 
-const normalize = (value: string): string => value.trim().toLocaleLowerCase();
+// toLowerCase (not toLocaleLowerCase) keeps matching independent of the
+// user's locale (e.g. Turkish dotless-i casing rules)
+const normalize = (value: string): string => value.trim().toLowerCase();
 
 /**
  * Tries to resolve a string value (e.g. filled in by browser autofill) to an
