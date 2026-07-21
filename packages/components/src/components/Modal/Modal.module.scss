@@ -275,16 +275,24 @@
     }
   }
 
-  /* Keyboard open: un-stick header + footer so they flow with the content in a
-     single scroll. Short content stays bottom-anchored via the tray (footer at
-     the bottom, not mid-air); tall content scrolls with the footer reachable at
-     the end. Deliberately no min-height / margin-top:auto here — an auto margin
-     inside the scroll container makes Chrome-Android reserve phantom scroll
-     space below the footer that reveals the backdrop. */
+  /* Keyboard open: un-stick both so everything flows for maximum typing space.
+     The dialog fills the available height and the footer uses margin-top:auto,
+     so with SHORT content the footer still sits at the bottom (not mid-air) and
+     with tall content it scrolls away with everything else. Never hidden. */
   .modal.keyboardVisible {
+    [role="dialog"] {
+      min-height: calc(
+        var(--visual-viewport-height) - var(--modal--tray-top-spacing)
+      );
+    }
+
     .header,
     .actionGroup {
       position: static;
+    }
+
+    .actionGroup {
+      margin-top: auto;
     }
   }
 
