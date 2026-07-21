@@ -1,4 +1,8 @@
+@use "@/styles/mixins/scrollbar";
+
 .layoutCard {
+  @include scrollbar.scrollbar;
+
   align-self: normal;
   background-color: var(--layout-card--background-color);
   box-shadow: var(--layout-card--box-shadow);

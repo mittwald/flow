@@ -1,6 +1,9 @@
 @use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
 
 .input {
+  @include scrollbar.scrollbar;
+
   resize: none;
   min-width: 100%;
 

@@ -1,4 +1,5 @@
 @use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
 
 .markdownEditor {
   display: grid;
@@ -49,6 +50,8 @@
 
   textarea,
   .markdown {
+    @include scrollbar.scrollbar;
+
     grid-area: content;
     padding-block: calc(
       var(--form-control--padding-y) - var(--form-control--border-width)

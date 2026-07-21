@@ -1,3 +1,5 @@
+@use "@/styles/mixins/scrollbar";
+
 .popover {
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);
@@ -14,6 +16,8 @@
   max-width: 100dvw;
 
   :where(.content) {
+    @include scrollbar.scrollbar;
+
     overflow-y: auto;
 
     &:focus-visible {
