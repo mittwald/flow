@@ -1,3 +1,5 @@
+@use "@/styles/mixins/scrollbar";
+
 @mixin size($size) {
   &.size-#{$size} {
     [role="dialog"] {
@@ -75,6 +77,8 @@
 
   .content,
   .columnLayout {
+    @include scrollbar.scrollbar;
+
     overflow: hidden auto;
     min-height: var(--modal--content-min-height);
     padding: var(--modal--padding);
@@ -189,6 +193,8 @@
   .modal {
     > div {
       > div {
+        @include scrollbar.scrollbar;
+
         margin-top: auto;
         padding: unset;
         width: 100%;
@@ -209,6 +215,8 @@
 
     [role="dialog"],
     [role="dialog"] > form {
+      @include scrollbar.scrollbar;
+
       width: inherit;
       overflow: hidden auto;
       max-height: unset;
