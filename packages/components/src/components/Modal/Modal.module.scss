@@ -230,10 +230,13 @@
       }
     }
 
-    /* The dialog is the single scroll container. */
+    /* The dialog is the single scroll container. Capped just below the visual
+       viewport so a full-height sheet keeps a small gap from the top edge. */
     [role="dialog"] {
       width: inherit;
-      max-height: var(--visual-viewport-height);
+      max-height: calc(
+        var(--visual-viewport-height) - var(--modal--tray-top-spacing)
+      );
       overflow: hidden auto;
     }
 
@@ -278,7 +281,9 @@
      with tall content it scrolls away with everything else. Never hidden. */
   .modal.keyboardVisible {
     [role="dialog"] {
-      min-height: var(--visual-viewport-height);
+      min-height: calc(
+        var(--visual-viewport-height) - var(--modal--tray-top-spacing)
+      );
     }
 
     .header,
