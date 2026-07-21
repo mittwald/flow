@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+### Bug Fixes
+
+* **List:** stop dimming the list while loading more via infinite scroll ([#2673](https://github.com/mittwald/flow/issues/2673)) ([0587956](https://github.com/mittwald/flow/commit/0587956f06a358b786e0ff53def6622643684242))
+
 # [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
 
 ### Features
