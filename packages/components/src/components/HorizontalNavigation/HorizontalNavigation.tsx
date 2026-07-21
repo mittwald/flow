@@ -78,7 +78,7 @@ export const HorizontalNavigation = flowComponent(
               </Text>
               <IconChevronDown />
             </Button>
-            <ContextMenuView>
+            <ContextMenuView placement="bottom end">
               <UiComponentTunnelExit
                 id="menuItems"
                 component="HorizontalNavigation"

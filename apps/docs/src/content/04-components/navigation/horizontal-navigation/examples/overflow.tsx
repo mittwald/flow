@@ -4,7 +4,7 @@ import {
   LayoutCard,
 } from "@mittwald/flow-react-components";
 
-<LayoutCard style={{ width: "320px" }}>
+<LayoutCard style={{ maxWidth: "450px" }}>
   <HorizontalNavigation aria-label="Projekt-Navigation">
     <Link href="#">Dashboard</Link>
     <Link href="#">Domains</Link>
