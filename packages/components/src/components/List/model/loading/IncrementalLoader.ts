@@ -109,6 +109,10 @@ export class IncrementalLoader<T> {
     return this.loaderState.useIsInitiallyLoading();
   }
 
+  public useIsLoadingMore(): boolean {
+    return this.loaderState.useIsLoadingMore();
+  }
+
   public useData(): T[] {
     return this.loaderState.useMergedData();
   }
