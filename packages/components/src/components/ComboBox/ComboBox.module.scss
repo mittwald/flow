@@ -1,5 +1,19 @@
 @use "@/styles/mixins/formControl";
 
+/*
+ * Autofill workaround (https://github.com/mittwald/flow/issues/2173):
+ * react-aria fully controls the ComboBox input value, so browser autofill
+ * never triggers a selection (https://github.com/adobe/react-spectrum/issues/9057).
+ * The :autofill / :-webkit-autofill pseudo classes start a no-op marker
+ * animation whose animationstart event is handled in AutofillSelectionHandler.
+ * Remove together with the handler once the upstream issue is fixed.
+ */
+@keyframes :global(flow-combobox-autofill-start) {
+  from {
+    --flow--combobox--autofill-detected: 1;
+  }
+}
+
 .comboBox {
   .input {
     order: 2;
@@ -13,6 +27,18 @@
       padding-right: calc(
         var(--button--padding-icon-only) * 2 + var(--icon--size--s)
       );
+    }
+
+    /* Separate rules on purpose: an unsupported selector in a selector
+       list would invalidate the entire rule in older browsers. */
+    input:-webkit-autofill {
+      animation-name: flow-combobox-autofill-start;
+      animation-duration: 1ms;
+    }
+
+    input:autofill {
+      animation-name: flow-combobox-autofill-start;
+      animation-duration: 1ms;
     }
 
     .toggle {
