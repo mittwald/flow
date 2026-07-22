@@ -142,9 +142,14 @@ export const HorizontallyCenteredColumns: Story = {
 
 export const FixedColumnWidths: Story = {
   render: (props) => (
-    <Table {...props} layout="fixed" aria-label="Crew assignments">
+    <Table
+      {...props}
+      layout="fixed"
+      minWidth={550}
+      aria-label="Crew assignments"
+    >
       <TableHeader>
-        <TableColumn width={80}>ID</TableColumn>
+        <TableColumn width={110}>ID</TableColumn>
         <TableColumn width="40%">Name</TableColumn>
         <TableColumn>Role</TableColumn>
       </TableHeader>
