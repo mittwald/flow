@@ -19,6 +19,63 @@ not guarantees. Never edit generated files (`view.ts`, `src/views/`,
 
 ---
 
+## Guiding principles
+
+The **why** behind the concrete rules below. When a specific pattern is unclear
+or a new situation isn't covered, fall back to these; the numbered sections are
+these principles applied. (`→` points to the sections each one mostly governs.)
+
+1. **Composition is the architecture.** `PropsContext` is the backbone —
+   components adapt to their surroundings automatically (classes, icon size,
+   heading level) instead of the consumer wiring everything. When a parent
+   shapes its descendants, do it through context, not child-cloning or
+   prop-drilling. → §3.
+2. **Build on standards; don't reinvent accessibility.** Nearly everything wraps
+   `react-aria-components`; expose ARIA directly only where react-aria has a
+   gap. Accessibility is non-negotiable: semantic roots, labels for icon-only
+   controls, `aria-hidden` for decoration, generated `id` / `aria-describedby`.
+   → §1, §8.
+3. **A factory hides the infrastructure — convention over configuration.**
+   `flowComponent` supplies memoization, context isolation, slot/tunnel wiring,
+   and `wrapWith`; never rebuild it by hand. Ref-as-prop (no `forwardRef`),
+   forward `...rest`, defaults in destructuring. The payoff: every component
+   looks the same. → §1.
+4. **Single source of truth; generate what's derivable.** Tokens, views, icons,
+   the `propTypes` registry, and doc-properties are generated and committed,
+   never hand-maintained twice. (It's why this catalog is _referenced_ from
+   `AGENTS.md`, not duplicated into it.) → §4, §5.
+5. **The public API is a contract — extend, don't break.** Export surfaces
+   (`public.ts`, `flr-universal.ts`, `internal.ts`) are curated by hand. Remote
+   props for extension developers are additive; deprecate with
+   `useWarnDeprecation` instead of renaming/removing. JSDoc + `@default` /
+   `@internal` _is_ the API's documentation. → §5, §2, §4.
+6. **Design comes from UX — base tokens are taboo.** Never hard-code
+   colors/sizes/radii; compose existing design tokens, and add component tokens
+   only with an established design. → §6.
+7. **TypeScript is a contract, kept precise.** `interface` for a component's own
+   extensible prop shape; a `type` alias for
+   intersections/`Omit`/`Pick`/generics. Types are tested (`*.test-types.tsx`),
+   and names derive from the registry rather than parallel unions. → §2, §11.
+8. **Enforce consistency with tooling, not discipline.** Prefer an
+   ESLint/Prettier rule + autofix over hundreds of hand edits. Write
+   self-explanatory code with minimal comments. → §12.
+9. **Colocate by role.** `components/` (render), `hooks/` (behavior), `lib/`
+   (pure transforms), `models/` (durable state), `locales/`, `stories/`.
+   Cross-cutting imports use the `@/` alias; a component's own feature stays
+   relative. → §7, §12.
+10. **Effort scales with risk.** Testing bar: a story always, a browser test for
+    real behavior, a unit test for pure logic, a type test for generics. i18n
+    always ships both `de-DE` and `en-US` (ICU). Reach for modern CSS (`:where`,
+    `:has`, logical properties, container queries, `data-*` state) before adding
+    runtime styling props. → §11, §9, §6.
+
+**In one sentence:** composable, accessibility-first React components built on
+react-aria, unified by a factory, backed by a generated single source of truth,
+with a public API treated as a contract and visual design driven by UX tokens —
+and consistency enforced by tooling, not maintained by hand.
+
+---
+
 ## 1. Component definition
 
 - **Factory registration** — public Flow components via
