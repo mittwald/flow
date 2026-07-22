@@ -82,4 +82,12 @@
       vertical-align: middle;
     }
   }
+
+  &.layout-auto {
+    table-layout: auto;
+  }
+
+  &.layout-fixed {
+    table-layout: fixed;
+  }
 }

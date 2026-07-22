@@ -92,3 +92,67 @@ test.each(testEnvironments)(
     await testScreenshot("Table");
   },
 );
+
+test.each(testEnvironments)(
+  "Table Column Widths (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Table,
+      TableHeader,
+      TableColumn,
+      TableBody,
+      TableRow,
+      TableCell,
+      Flex,
+    },
+  }) => {
+    await render(
+      <Flex direction="column" gap="m">
+        <Table aria-label="Fixed layout" layout="fixed">
+          <TableHeader>
+            <TableColumn width={80}>ID</TableColumn>
+            <TableColumn width="40%">Name</TableColumn>
+            <TableColumn>Description</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>1024</TableCell>
+              <TableCell>
+                A very long name that clearly exceeds the fixed column width and
+                therefore wraps onto several lines instead of widening the
+                column
+              </TableCell>
+              <TableCell>
+                Columns without a fixed width share the remaining space.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>1025</TableCell>
+              <TableCell>Short</TableCell>
+              <TableCell>Another description.</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Table aria-label="Minimum column width">
+          <TableHeader>
+            <TableColumn minWidth={240}>Status</TableColumn>
+            <TableColumn>Note</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>OK</TableCell>
+              <TableCell>
+                The status column keeps its minimum width even with short
+                content.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Flex>,
+    );
+
+    await testScreenshot("Table Column Widths");
+  },
+);
