@@ -50,7 +50,7 @@ export * from "@/components/Flex";
 export * from "@/components/Header";
 export * from "@/components/HeaderNavigation";
 export * from "@/components/Heading";
-export * from "@/components/HorizontalNavigation";
+export * from "@/components/TabNavigation";
 export * from "@/components/Icon";
 export * from "@/components/Icon/components/icons";
 export * from "@/components/IllustratedMessage";

@@ -24,8 +24,8 @@ export const LayoutCard = flowComponent(
     const Element = elementType;
 
     const propsContext: PropsContext = {
-      HorizontalNavigation: {
-        className: styles.horizontalNavigation,
+      TabNavigation: {
+        className: styles.tabNavigation,
       },
       AccentBox: { className: styles.accentBox },
     };

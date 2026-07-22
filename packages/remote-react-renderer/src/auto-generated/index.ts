@@ -57,7 +57,6 @@ import { Flex as Flex } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
 import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components";
 import { Heading as Heading } from "@mittwald/flow-react-components";
-import { HorizontalNavigation as HorizontalNavigation } from "@mittwald/flow-react-components";
 import { Icon as Icon } from "@mittwald/flow-react-components";
 import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components";
 import { Image as Image } from "@mittwald/flow-react-components";
@@ -112,6 +111,7 @@ import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
 import { Tab as Tab } from "@mittwald/flow-react-components";
+import { TabNavigation as TabNavigation } from "@mittwald/flow-react-components";
 import { TabTitle as TabTitle } from "@mittwald/flow-react-components";
 import { Table as Table } from "@mittwald/flow-react-components";
 import { TableBody as TableBody } from "@mittwald/flow-react-components";
@@ -283,10 +283,6 @@ export const flowComponents = {
     HeaderNavigation,
   ),
   "flr-heading": createFlowRemoteComponentRenderer("Heading", Heading),
-  "flr-horizontal-navigation": createFlowRemoteComponentRenderer(
-    "HorizontalNavigation",
-    HorizontalNavigation,
-  ),
   "flr-icon": createFlowRemoteComponentRenderer("Icon", Icon),
   "flr-illustrated-message": createFlowRemoteComponentRenderer(
     "IllustratedMessage",
@@ -434,6 +430,10 @@ export const flowComponents = {
   "flr-slider": createFlowRemoteComponentRenderer("Slider", Slider),
   "flr-switch": createFlowRemoteComponentRenderer("Switch", Switch),
   "flr-tab": createFlowRemoteComponentRenderer("Tab", Tab),
+  "flr-tab-navigation": createFlowRemoteComponentRenderer(
+    "TabNavigation",
+    TabNavigation,
+  ),
   "flr-tab-title": createFlowRemoteComponentRenderer("TabTitle", TabTitle),
   "flr-table": createFlowRemoteComponentRenderer("Table", Table),
   "flr-table-body": createFlowRemoteComponentRenderer("TableBody", TableBody),

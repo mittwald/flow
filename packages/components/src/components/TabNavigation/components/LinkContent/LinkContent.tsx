@@ -4,16 +4,16 @@ import type { LinkProps } from "@/components/Link";
 import { MenuItem } from "@/components/MenuItem";
 import { Text } from "@/components/Text";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
-import styles from "../../HorizontalNavigation.module.scss";
+import styles from "../../TabNavigation.module.scss";
 
 interface Props {
   linkProps: Partial<LinkProps>;
 }
 
 /**
- * Renders the content of a link inside the horizontal navigation and mirrors
- * the link as a menu item into the overflow context menu (via tunnel). The
- * context menu only renders the menu items of the currently collapsed links.
+ * Renders the content of a link inside the tab navigation and mirrors the link
+ * as a menu item into the overflow context menu (via tunnel). The context menu
+ * only renders the menu items of the currently collapsed links.
  */
 export const LinkContent: FC<Props> = (props) => {
   const { linkProps } = props;
@@ -39,7 +39,7 @@ export const LinkContent: FC<Props> = (props) => {
       <Text emulateBoldWidth>
         <span className={styles.text}>{children}</span>
       </Text>
-      <UiComponentTunnelEntry id="menuItems" component="HorizontalNavigation">
+      <UiComponentTunnelEntry id="menuItems" component="TabNavigation">
         <MenuItem
           className={clsx(styles.menuItem, isCurrent && styles.current)}
           href={href}

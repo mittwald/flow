@@ -1,11 +1,11 @@
 import {
   AlertIcon,
   Badge,
-  HorizontalNavigation,
+  TabNavigation,
   Link,
 } from "@mittwald/flow-react-components";
 
-<HorizontalNavigation aria-label="Projekt-Navigation">
+<TabNavigation aria-label="Projekt-Navigation">
   <Link href="#" aria-current="page">
     Dashboard
   </Link>
@@ -17,4 +17,4 @@ import {
     Backups
     <Badge color="violet">Neu</Badge>
   </Link>
-</HorizontalNavigation>;
+</TabNavigation>;

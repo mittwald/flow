@@ -23,7 +23,7 @@
   > :global(.flow--navigation),
   > :global(.flow--tabs),
   > :global(.flow--text),
-  > :global(.flow--horizontal-navigation),
+  > :global(.flow--tab-navigation),
   > form {
     align-self: stretch;
   }

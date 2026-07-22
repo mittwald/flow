@@ -1,4 +1,4 @@
-horizontal-navigation:
+tab-navigation:
   padding:
     value: "{size-px.m}"
   background-color:

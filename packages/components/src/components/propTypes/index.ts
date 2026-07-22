@@ -10,7 +10,7 @@ import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
 import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
-import type { HorizontalNavigationProps } from "@/components/HorizontalNavigation";
+import type { TabNavigationProps } from "@/components/TabNavigation";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
@@ -135,7 +135,7 @@ export interface FlowComponentPropsTypes {
   FileDropZone: FileDropZoneProps;
   Header: HeaderProps;
   Heading: HeadingProps;
-  HorizontalNavigation: HorizontalNavigationProps;
+  TabNavigation: TabNavigationProps;
   Icon: IconProps;
   IllustratedMessage: IllustratedMessageProps;
   Image: ImageProps;
@@ -228,7 +228,7 @@ const propsContextSupportingComponentsMap: Record<
   FileDropZone: true,
   Header: true,
   Heading: true,
-  HorizontalNavigation: true,
+  TabNavigation: true,
   Icon: true,
   IllustratedMessage: true,
   Image: true,

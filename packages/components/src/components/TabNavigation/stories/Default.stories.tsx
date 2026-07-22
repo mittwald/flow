@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AlertIcon } from "@/components/AlertIcon";
-import { HorizontalNavigation } from "@/components/HorizontalNavigation";
+import { TabNavigation } from "@/components/TabNavigation";
 import { Link } from "@/components/Link";
 
-const meta: Meta<typeof HorizontalNavigation> = {
-  title: "Navigation/HorizontalNavigation",
-  component: HorizontalNavigation,
+const meta: Meta<typeof TabNavigation> = {
+  title: "Navigation/TabNavigation",
+  component: TabNavigation,
   parameters: {
     controls: { exclude: ["className"] },
   },
   render: (props) => (
-    <HorizontalNavigation aria-label="Project navigation" {...props}>
+    <TabNavigation aria-label="Project navigation" {...props}>
       <Link href="#">Apps</Link>
       <Link href="#" aria-current="page">
         Container
@@ -22,12 +22,12 @@ const meta: Meta<typeof HorizontalNavigation> = {
         <AlertIcon status="warning" />
       </Link>
       <Link href="#">Backups</Link>
-    </HorizontalNavigation>
+    </TabNavigation>
   ),
 };
 
 export default meta;
 
-type Story = StoryObj<typeof HorizontalNavigation>;
+type Story = StoryObj<typeof TabNavigation>;
 
 export const Default: Story = {};

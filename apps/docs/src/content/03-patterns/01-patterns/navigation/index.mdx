@@ -17,7 +17,8 @@ kombiniert werden.
   verständlich. Eine reduzierte und konsistente Navigation verbessert die
   Orientierung und erleichtert die Nutzung.
 - **Orientierung schaffen:** User sollten jederzeit erkennen können, wo sie sich
-  befinden. Aktive Zustände, Breadcrumbs und Tabs unterstützen dabei.
+  befinden. Aktive Zustände, Breadcrumbs und die TabNavigation unterstützen
+  dabei.
 - **Suche integrieren:** Eine gut sichtbare Suche und Schnellzugriffe
   erleichtern besonders in komplexen Anwendungen den schnellen Zugriff auf
   Inhalte.
@@ -72,11 +73,16 @@ untergeordnete Navigationspunkte genutzt und in einer
 
 ## Content-Navigation
 
-Die Components Breadcrumb, Tabs und List unterstützen bei der Orientierung
-innerhalb des Contents und ermöglichen einen schnellen Wechsel zwischen
-zusammengehörenden Inhalten oder beim navigieren in tiefere Ebenen.
+Die Components Breadcrumb, TabNavigation und List unterstützen bei der
+Orientierung innerhalb des Contents und ermöglichen einen schnellen Wechsel
+zwischen zusammengehörenden Bereichen oder das Navigieren in tiefere Ebenen.
 
-<LiveCodeEditor example="tabs" editorCollapsed bgColor="mstudio" stretch />
+<LiveCodeEditor
+  example="tab-navigation"
+  editorCollapsed
+  bgColor="mstudio"
+  stretch
+/>
 
 ### Breadcrumb
 
@@ -86,14 +92,14 @@ Orientierung, indem sie den Usern jederzeit verdeutlicht, wo sie sich befinden.
 Zusätzlich erleichtert sie die Rücknavigation zu übergeordneten Ebenen und
 verbessert damit die Navigierbarkeit komplexerer Anwendungen.
 
-### Tabs
+### TabNavigation
 
-[Tabs](/04-components/navigation/tabs/overview) ermöglichen den schnellen
-Wechsel zwischen Ansichten auf derselben Hierarchieebene. Sie strukturieren
-verwandte Informationen in klar abgegrenzte Bereiche, ohne dass eine neue Seite
-geladen werden muss. Durch ihre permanente Sichtbarkeit unterstützen die Tabs
-den Usern dabei, Inhalte schnell zu erfassen und effizient zwischen
-verschiedenen Ansichten zu wechseln.
+Die [TabNavigation](/04-components/navigation/tab-navigation/overview)
+ermöglicht das Navigieren zwischen gleichrangigen Unterseiten eines Bereichs
+oder Objekts. Durch ihre permanente Sichtbarkeit behalten User den Überblick
+über die verfügbaren Bereiche und erkennen am aktiven Zustand, wo sie sich
+gerade befinden. Reicht die verfügbare Breite nicht aus, klappen überzählige
+Punkte automatisch in ein ContextMenu zusammen.
 
 ### Listen, Raster und Tabellen
 

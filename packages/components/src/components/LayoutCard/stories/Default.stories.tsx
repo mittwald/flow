@@ -4,7 +4,7 @@ import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
-import { HorizontalNavigation } from "@/components/HorizontalNavigation";
+import { TabNavigation } from "@/components/TabNavigation";
 import { Link } from "@/components/Link";
 import { AlertIcon } from "@/components/AlertIcon";
 
@@ -50,10 +50,10 @@ export const WithTabs: Story = {
   ),
 };
 
-export const WithHorizontalNavigation: Story = {
+export const WithTabNavigation: Story = {
   render: (props) => (
     <LayoutCard {...props}>
-      <HorizontalNavigation aria-label="Project navigation">
+      <TabNavigation aria-label="Project navigation">
         <Link href="#">Apps</Link>
         <Link href="#" aria-current="page">
           Container
@@ -65,7 +65,7 @@ export const WithHorizontalNavigation: Story = {
           <AlertIcon status="warning" />
         </Link>
         <Link href="#">Backups</Link>
-      </HorizontalNavigation>
+      </TabNavigation>
       <Section>Content</Section>
     </LayoutCard>
   ),

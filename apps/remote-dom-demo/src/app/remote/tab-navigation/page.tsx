@@ -1,13 +1,13 @@
 "use client";
 import {
   AlertIcon,
-  HorizontalNavigation,
+  TabNavigation,
   Link,
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
   return (
-    <HorizontalNavigation aria-label="Project navigation">
+    <TabNavigation aria-label="Project navigation">
       <Link href="#">Apps</Link>
       <Link href="#" aria-current="page">
         Container
@@ -19,6 +19,6 @@ export default function Page() {
         <AlertIcon status="warning" />
       </Link>
       <Link href="#">Backups</Link>
-    </HorizontalNavigation>
+    </TabNavigation>
   );
 }

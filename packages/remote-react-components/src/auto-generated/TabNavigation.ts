@@ -2,13 +2,13 @@
 /* This file is auto-generated with the remote-components-generator */
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
-import { RemoteHorizontalNavigationElement } from "@mittwald/flow-remote-elements";
-export { type RemoteHorizontalNavigationElement } from "@mittwald/flow-remote-elements";
+import { RemoteTabNavigationElement } from "@mittwald/flow-remote-elements";
+export { type RemoteTabNavigationElement } from "@mittwald/flow-remote-elements";
 
-export const HorizontalNavigation = createFlowRemoteComponent(
-  "flr-horizontal-navigation",
-  "HorizontalNavigation",
-  RemoteHorizontalNavigationElement,
+export const TabNavigation = createFlowRemoteComponent(
+  "flr-tab-navigation",
+  "TabNavigation",
+  RemoteTabNavigationElement,
   {
     slotProps: {
       wrapper: "flr-slot-root-wrapper",

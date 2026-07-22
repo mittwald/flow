@@ -1,11 +1,11 @@
 @use "@/styles/mixins/focus";
 
-.horizontalNavigation {
+.tabNavigation {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: var(--horizontal-navigation--background-color--default);
+  background-color: var(--tab-navigation--background-color--default);
 
   ul {
     display: flex;
@@ -25,10 +25,10 @@
   .link {
     display: flex;
     align-items: center;
-    column-gap: var(--horizontal-navigation--spacing);
-    padding: var(--horizontal-navigation--padding);
-    background-color: var(--horizontal-navigation--background-color--default);
-    color: var(--horizontal-navigation--color);
+    column-gap: var(--tab-navigation--spacing);
+    padding: var(--tab-navigation--padding);
+    background-color: var(--tab-navigation--background-color--default);
+    color: var(--tab-navigation--color);
     white-space: nowrap;
     transition-property: background-color;
 
@@ -39,25 +39,25 @@
     }
 
     &:hover {
-      background-color: var(--horizontal-navigation--background-color--hover);
+      background-color: var(--tab-navigation--background-color--hover);
       transition-duration: var(--transition--duration--default);
     }
 
     &[data-pressed] {
-      background-color: var(--horizontal-navigation--background-color--pressed);
+      background-color: var(--tab-navigation--background-color--pressed);
       transition-duration: var(--transition--duration--default);
     }
 
     &[aria-current] {
-      background-color: var(--horizontal-navigation--background-color--current);
-      font-weight: var(--horizontal-navigation--font-weight--current);
+      background-color: var(--tab-navigation--background-color--current);
+      font-weight: var(--tab-navigation--font-weight--current);
     }
   }
 
   .text {
     display: flex;
     align-items: center;
-    column-gap: var(--horizontal-navigation--spacing);
+    column-gap: var(--tab-navigation--spacing);
   }
 
   .more {
@@ -74,12 +74,12 @@
   .moreButton {
     display: flex;
     align-items: center;
-    column-gap: var(--horizontal-navigation--spacing);
-    padding: var(--horizontal-navigation--padding);
+    column-gap: var(--tab-navigation--spacing);
+    padding: var(--tab-navigation--padding);
     border: none;
     border-radius: 0;
-    background-color: var(--horizontal-navigation--background-color--default);
-    color: var(--horizontal-navigation--color);
+    background-color: var(--tab-navigation--background-color--default);
+    color: var(--tab-navigation--color);
     cursor: pointer;
     white-space: nowrap;
     transition-property: background-color;
@@ -91,19 +91,19 @@
     }
 
     &:hover {
-      background-color: var(--horizontal-navigation--background-color--hover);
+      background-color: var(--tab-navigation--background-color--hover);
       transition-duration: var(--transition--duration--default);
     }
 
     &[data-pressed] {
-      background-color: var(--horizontal-navigation--background-color--pressed);
+      background-color: var(--tab-navigation--background-color--pressed);
       transition-duration: var(--transition--duration--default);
     }
 
     &.current,
     &.current:hover {
-      background-color: var(--horizontal-navigation--background-color--current);
-      font-weight: var(--horizontal-navigation--font-weight--current);
+      background-color: var(--tab-navigation--background-color--current);
+      font-weight: var(--tab-navigation--font-weight--current);
     }
   }
 

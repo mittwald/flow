@@ -1,10 +1,10 @@
 import {
-  HorizontalNavigation,
+  TabNavigation,
   Link,
   AlertIcon,
 } from "@mittwald/flow-react-components";
 
-<HorizontalNavigation aria-label="Projekt-Navigation">
+<TabNavigation aria-label="Projekt-Navigation">
   <Link href="#">Apps</Link>
   <Link href="#" aria-current="page">
     Container
@@ -16,4 +16,4 @@ import {
     <AlertIcon status="warning" />
   </Link>
   <Link href="#">Backups</Link>
-</HorizontalNavigation>;
+</TabNavigation>;

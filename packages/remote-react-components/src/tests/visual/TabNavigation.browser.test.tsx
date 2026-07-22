@@ -3,14 +3,14 @@ import { test } from "vitest";
 import { page } from "vitest/browser";
 
 test.each(testEnvironments)(
-  "HorizontalNavigation (%s)",
+  "TabNavigation (%s)",
   async ({
     testScreenshot,
     render,
-    components: { HorizontalNavigation, Link, AlertIcon },
+    components: { TabNavigation, Link, AlertIcon },
   }) => {
     await render(
-      <HorizontalNavigation aria-label="Horizontal navigation">
+      <TabNavigation aria-label="Tab navigation">
         <Link href="#">Link</Link>
         <Link href="#" aria-current="page">
           Current Link
@@ -19,22 +19,18 @@ test.each(testEnvironments)(
           Link with Status
           <AlertIcon status="danger" />
         </Link>
-      </HorizontalNavigation>,
+      </TabNavigation>,
     );
 
-    await testScreenshot("HorizontalNavigation");
+    await testScreenshot("TabNavigation");
   },
 );
 
 test.each(testEnvironments)(
-  "HorizontalNavigation collapsed (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: { HorizontalNavigation, Link },
-  }) => {
+  "TabNavigation collapsed (%s)",
+  async ({ testScreenshot, render, components: { TabNavigation, Link } }) => {
     await render(
-      <HorizontalNavigation aria-label="Horizontal navigation">
+      <TabNavigation aria-label="Tab navigation">
         <Link href="#">The Rebel Alliance versus the Empire</Link>
         <Link href="#">The Rebel Alliance versus the Empire</Link>
         <Link href="#">The Rebel Alliance versus the Empire</Link>
@@ -43,13 +39,13 @@ test.each(testEnvironments)(
         <Link href="#" aria-current="page">
           The Rebel Alliance versus the Empire
         </Link>
-      </HorizontalNavigation>,
+      </TabNavigation>,
     );
 
-    await testScreenshot("HorizontalNavigation - collapsed");
+    await testScreenshot("TabNavigation - collapsed");
 
     await page.getByRole("button", { name: /More|Weitere/ }).click();
 
-    await testScreenshot("HorizontalNavigation - context menu opened");
+    await testScreenshot("TabNavigation - context menu opened");
   },
 );

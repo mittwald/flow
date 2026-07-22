@@ -10,18 +10,18 @@
   border: var(--layout-card--border-width) var(--layout-card--border-style)
     var(--layout-card--border-color);
 
-  > .horizontalNavigation {
+  > .tabNavigation {
     margin-top: calc(var(--layout-card--padding) * -1);
     margin-inline: calc(var(--layout-card--padding) * -1);
     margin-bottom: var(--layout-card--padding);
     border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
     border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
 
-    li:first-child :global(.flow--horizontal-navigation--link) {
+    li:first-child :global(.flow--tab-navigation--link) {
       border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
 
-    :global(.flow--horizontal-navigation--more-button) {
+    :global(.flow--tab-navigation--more-button) {
       border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
   }
@@ -42,7 +42,7 @@
   .layoutCard {
     padding: var(--layout-card--padding-mobile);
 
-    > .horizontalNavigation {
+    > .tabNavigation {
       margin-top: calc(var(--layout-card--padding-mobile) * -1);
       margin-inline: calc(var(--layout-card--padding-mobile) * -1);
       margin-bottom: var(--layout-card--padding-mobile);

@@ -4,7 +4,7 @@ import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "../../../layout.module.scss";
 import {
   Flex,
-  HorizontalNavigation,
+  TabNavigation,
   LayoutCard,
   Link,
 } from "@mittwald/flow-react-components";
@@ -62,7 +62,7 @@ export const TabContent: FC<Props> = async (props) => {
     <Flex columnGap="m" className={styles.tabsContainer}>
       <Flex direction="column" rowGap="m" className={styles.tabsContainer}>
         <LayoutCard className={styles.tabs}>
-          <HorizontalNavigation aria-label="Bereiche">
+          <TabNavigation aria-label="Bereiche">
             {overviewMdxFile && (
               <Link
                 href={`${path}/overview`}
@@ -87,7 +87,7 @@ export const TabContent: FC<Props> = async (props) => {
                 Guidelines
               </Link>
             )}
-          </HorizontalNavigation>
+          </TabNavigation>
           {tabContent}
         </LayoutCard>
       </Flex>

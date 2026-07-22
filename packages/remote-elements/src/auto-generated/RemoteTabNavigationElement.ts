@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { HorizontalNavigationProps as RemoteHorizontalNavigationElementProps } from "@mittwald/flow-react-components";
-export type { HorizontalNavigationProps as RemoteHorizontalNavigationElementProps } from "@mittwald/flow-react-components";
+import type { TabNavigationProps as RemoteTabNavigationElementProps } from "@mittwald/flow-react-components";
+export type { TabNavigationProps as RemoteTabNavigationElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteHorizontalNavigationElement extends FlowRemoteElement<RemoteHorizontalNavigationElementProps> {
+export class RemoteTabNavigationElement extends FlowRemoteElement<RemoteTabNavigationElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -301,13 +301,8 @@ export class RemoteHorizontalNavigationElement extends FlowRemoteElement<RemoteH
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-horizontal-navigation": InstanceType<
-      typeof RemoteHorizontalNavigationElement
-    >;
+    "flr-tab-navigation": InstanceType<typeof RemoteTabNavigationElement>;
   }
 }
 
-customElements.define(
-  "flr-horizontal-navigation",
-  RemoteHorizontalNavigationElement,
-);
+customElements.define("flr-tab-navigation", RemoteTabNavigationElement);
