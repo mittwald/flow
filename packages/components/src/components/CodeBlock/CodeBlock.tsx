@@ -58,7 +58,11 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   return (
     <div
       className={clsx(rootClassName, folded ? styles.folded : undefined)}
-      style={{ "--max-height": `${maxHeight}px` } as React.CSSProperties}
+      style={
+        maxHeight
+          ? ({ "--max-height": `${maxHeight}px` } as React.CSSProperties)
+          : undefined
+      }
     >
       <CodeEditor
         {...rest}
