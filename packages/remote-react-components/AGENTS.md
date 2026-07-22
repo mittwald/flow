@@ -12,6 +12,11 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
 - Richest test surface outside `components`: unit, browser, e2e and visual
   tests. **Visual tests must pass in both environments — `Local` and `Remote`**
   (see `CONTRIBUTE.md` and `src/tests/lib/environments.tsx`).
+- **New or changed rendered behavior always gets a visual test here** — add a
+  new `src/tests/visual/<Name>.browser.test.tsx` or extend the existing one so
+  the new prop/variant/layout is captured. Because every scenario runs in both
+  `Local` and `Remote`, this single test guards the component and its remote
+  path at once.
 - Update visual snapshots: `pnpm nx test:visual:update remote-react-components`.
   Updating everything takes long — for a single component use
   `pnpm nx test:visual:update remote-react-components MyNewComponent`.

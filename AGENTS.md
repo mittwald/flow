@@ -177,7 +177,11 @@ A new or substantially changed component comes with:
    variants
 3. A docs page in `apps/docs/src/content/04-components/<category>/…`
 4. Tests along the testing bar: unit tests for lib functions, browser tests for
-   behavior (see the components AGENTS.md testing section)
+   behavior (see the components AGENTS.md testing section). **New or changed
+   rendered behavior (a new prop, variant, or layout that affects the visual
+   output) gets an added or extended visual test in
+   `packages/remote-react-components/src/tests/visual` — it runs in both the
+   `Local` and `Remote` environments and guards the whole path.**
 5. UI text in `locales/de-DE.locale.json` **and** `locales/en-US.locale.json`
    (import pattern: i18n section of
    [packages/components/AGENTS.md](packages/components/AGENTS.md))
