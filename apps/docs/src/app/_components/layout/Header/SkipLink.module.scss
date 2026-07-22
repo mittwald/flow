@@ -1,0 +1,20 @@
+.skipLink {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--size-px--s);
+  z-index: 1;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.skipLink:focus-within {
+  width: auto;
+  height: auto;
+  max-width: none;
+  overflow: visible;
+  clip-path: none;
+}

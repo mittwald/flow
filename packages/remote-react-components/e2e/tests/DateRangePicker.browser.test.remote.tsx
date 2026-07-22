@@ -1,4 +1,4 @@
-import { DateRangePicker } from "../../src/auto-generated";
+import { DateRangePicker } from "@mittwald/flow-remote-react-components";
 import { CalendarDate } from "@internationalized/date";
 
 export const standard = () => <DateRangePicker data-testid="element" />;

@@ -17,6 +17,7 @@ export const Items: FC = () => {
   const tiles = list.viewMode.isTiles;
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
+  const isLoadingMore = list.loader.useIsLoadingMore();
 
   const triggerRef = useRef<HTMLDivElement>(null);
   useInfiniteScrollTrigger(triggerRef);
@@ -44,7 +45,7 @@ export const Items: FC = () => {
 
   const rootClassName = clsx(
     styles.items,
-    isLoading && styles.isLoading,
+    isLoading && !(list.infiniteScroll && isLoadingMore) && styles.isLoading,
     tiles && styles.tiles,
   );
 

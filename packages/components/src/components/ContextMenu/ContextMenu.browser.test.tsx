@@ -1,10 +1,10 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import ContextMenu from "./ContextMenu";
-import MenuItem from "../MenuItem";
+import MenuItem from "@/components/MenuItem";
 import { usePromise } from "@mittwald/react-use-promise";
 import { sleep } from "@/lib/promises/sleep";
-import { Button, ContextMenuTrigger } from "../public";
+import { Button, ContextMenuTrigger } from "@/components/public";
 
 const expectIconInDom = (iconName: string) => {
   expect(

@@ -1,4 +1,4 @@
-.footer.footer {
+.footer {
   margin-top: var(--size-px--l);
 
   .footerContent {
@@ -24,7 +24,7 @@
 }
 
 @media (max-width: 1400px) {
-  .footer.footer {
+  .footer {
     .feedbackImage {
       display: none;
     }

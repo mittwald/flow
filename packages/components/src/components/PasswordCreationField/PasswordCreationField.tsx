@@ -41,7 +41,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { FieldError } from "@/components/FieldError";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface PasswordCreationFieldProps
   extends

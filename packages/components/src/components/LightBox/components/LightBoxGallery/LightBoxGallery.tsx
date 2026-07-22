@@ -83,7 +83,7 @@ export const LightBoxGallery = flowComponent("LightBoxGallery", (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales, "LightBox");
 
   return (
-    <div className={clsx(styles.gallery, className)}>
+    <div className={clsx(styles.lightBoxGallery, className)}>
       <div
         ref={containerRef}
         className={styles.content}

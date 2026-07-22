@@ -1,4 +1,5 @@
 @use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
 
 .codeEditor {
   outline: none;
@@ -34,6 +35,10 @@
 
     & :global(.cm-editor) {
       outline: none;
+
+      & :global(.cm-scroller) {
+        @include scrollbar.scrollbar;
+      }
 
       & :global(.cm-lineNumbers .cm-gutterElement) {
         min-width: var(--code-editor--gutter-element-min-width);

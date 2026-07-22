@@ -12,7 +12,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import { useObjectRef } from "@react-aria/utils";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface SliderProps
   extends
