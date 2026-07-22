@@ -8,7 +8,11 @@ import {
   TableRow,
 } from "@mittwald/flow-react-components";
 
-<Table layout="fixed" aria-label="Button Props">
+<Table
+  layout="fixed"
+  minWidth={640}
+  aria-label="Button Props"
+>
   <TableHeader>
     <TableColumn width={160}>Name</TableColumn>
     <TableColumn width="25%">Type</TableColumn>

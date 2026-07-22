@@ -3,7 +3,10 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
 
-export type TableProps = Omit<Aria.TableProps, "render" | "className"> & {
+export type TableProps = Omit<
+  Aria.TableProps,
+  "render" | "className" | "style"
+> & {
   /** The vertical alignment of the table cells content. */
   verticalAlign?: "top" | "middle";
   /**
@@ -11,6 +14,11 @@ export type TableProps = Omit<Aria.TableProps, "render" | "className"> & {
    * widths to enforce exact widths. @default "auto"
    */
   layout?: "auto" | "fixed";
+  /**
+   * The minimum width of the table. Below this width the table scrolls
+   * horizontally instead of shrinking its columns.
+   */
+  minWidth?: number | string;
   className?: string;
 };
 
@@ -21,6 +29,7 @@ export const Table: FC<TableProps> = (props) => {
     className,
     verticalAlign = "top",
     layout = "auto",
+    minWidth,
     ...rest
   } = props;
 
@@ -33,9 +42,11 @@ export const Table: FC<TableProps> = (props) => {
 
   return (
     <div className={styles.tableContainer}>
-      <Aria.Table className={rootClassName} {...rest}>
-        {children}
-      </Aria.Table>
+      <div className={styles.tableScrollArea} style={{ minWidth }}>
+        <Aria.Table className={rootClassName} {...rest}>
+          {children}
+        </Aria.Table>
+      </div>
     </div>
   );
 };

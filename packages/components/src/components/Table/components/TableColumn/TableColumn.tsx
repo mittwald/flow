@@ -1,4 +1,4 @@
-import type { CSSProperties, FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
@@ -14,9 +14,9 @@ export interface TableColumnProps
   /** Horizontal alignment of the cell content @default "start" */
   horizontalAlign?: "start" | "center" | "end";
   /** The width of the column. */
-  width?: CSSProperties["width"];
+  width?: number | string;
   /** The minimum width of the column. */
-  minWidth?: CSSProperties["minWidth"];
+  minWidth?: number | string;
 }
 
 /** @flr-generate all */
