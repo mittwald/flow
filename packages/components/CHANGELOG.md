@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.935](https://github.com/mittwald/flow/compare/0.2.0-alpha.934...0.2.0-alpha.935) (2026-07-22)
+
+### Bug Fixes
+
+* **Modal:** keep mobile modals with forms usable when the virtual keyboard opens ([#2423](https://github.com/mittwald/flow/issues/2423)) ([#2671](https://github.com/mittwald/flow/issues/2671)) ([5b1b856](https://github.com/mittwald/flow/commit/5b1b8563d6e5e7a0a5c046620104480f1f7620cd))
+
 # [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
 
 ### Features
