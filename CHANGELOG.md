@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
+
+### Features
+
+* **components:** add reusable slim scrollbar mixin and apply to scroll containers ([#2672](https://github.com/mittwald/flow/issues/2672)) ([a06dd9a](https://github.com/mittwald/flow/commit/a06dd9a4e88899612eba19a21f6464ba0a98167e))
+
+# [0.2.0-alpha.933](https://github.com/mittwald/flow/compare/0.2.0-alpha.932...0.2.0-alpha.933) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.932](https://github.com/mittwald/flow/compare/0.2.0-alpha.931...0.2.0-alpha.932) (2026-07-21)
+
+### Features
+
+* **remote-react-components:** cross-version backwards-compatibility smoke tests ([#2600](https://github.com/mittwald/flow/issues/2600)) ([#2661](https://github.com/mittwald/flow/issues/2661)) ([1f3efa0](https://github.com/mittwald/flow/commit/1f3efa02700f86ea9faf5a62b3039a84e0c51953)), closes [#2596](https://github.com/mittwald/flow/issues/2596) [#2620](https://github.com/mittwald/flow/issues/2620) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [ButtonVisual#colors](https://github.com/ButtonVisual/issues/colors) [hi#fidelity](https://github.com/hi/issues/fidelity)
+
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+### Bug Fixes
+
+* **List:** stop dimming the list while loading more via infinite scroll ([#2673](https://github.com/mittwald/flow/issues/2673)) ([0587956](https://github.com/mittwald/flow/commit/0587956f06a358b786e0ff53def6622643684242))
+
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+### Features
+
+* **docs:** add skip link and adopt layered Flow CSS ([#2670](https://github.com/mittwald/flow/issues/2670)) ([2532897](https://github.com/mittwald/flow/commit/25328976685248c01c1cf41c482a112173e0e2dd)), closes [#main-content](https://github.com/mittwald/flow/issues/main-content)
+
 # [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
 
 **Note:** Version bump only for package @mittwald/flow-project

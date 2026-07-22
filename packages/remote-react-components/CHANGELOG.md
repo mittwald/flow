@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.933](https://github.com/mittwald/flow/compare/0.2.0-alpha.932...0.2.0-alpha.933) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.932](https://github.com/mittwald/flow/compare/0.2.0-alpha.931...0.2.0-alpha.932) (2026-07-21)
+
+### Features
+
+* **remote-react-components:** cross-version backwards-compatibility smoke tests ([#2600](https://github.com/mittwald/flow/issues/2600)) ([#2661](https://github.com/mittwald/flow/issues/2661)) ([1f3efa0](https://github.com/mittwald/flow/commit/1f3efa02700f86ea9faf5a62b3039a84e0c51953)), closes [#2596](https://github.com/mittwald/flow/issues/2596) [#2620](https://github.com/mittwald/flow/issues/2620) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [ButtonVisual#colors](https://github.com/ButtonVisual/issues/colors) [hi#fidelity](https://github.com/hi/issues/fidelity)
+
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

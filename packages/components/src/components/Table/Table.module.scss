@@ -1,4 +1,8 @@
+@use "@/styles/mixins/scrollbar";
+
 .tableContainer {
+  @include scrollbar.scrollbar;
+
   width: 100%;
   overflow-x: auto;
 }

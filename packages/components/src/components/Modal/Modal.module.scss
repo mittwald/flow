@@ -1,3 +1,5 @@
+@use "@/styles/mixins/scrollbar";
+
 /* Caps the dialog width per size token (`size-s` / `size-m` / `size-l`). */
 @mixin size($size) {
   &.size-#{$size} {
@@ -85,6 +87,8 @@
   /* Content — the scrollable body */
   .content,
   .columnLayout {
+    @include scrollbar.scrollbar;
+
     flex-grow: 1;
     min-height: var(--modal--content-min-height);
     padding: var(--modal--padding);
@@ -233,6 +237,8 @@
     /* The dialog is the single scroll container. Capped just below the visual
        viewport so a full-height sheet keeps a small gap from the top edge. */
     [role="dialog"] {
+      @include scrollbar.scrollbar;
+
       width: inherit;
       max-height: calc(
         var(--visual-viewport-height) - var(--modal--tray-top-spacing)

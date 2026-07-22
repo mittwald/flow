@@ -1,5 +1,5 @@
-import { Section, Text } from "../../src/auto-generated";
-import { LoadingFallbackTrigger } from "../../src/components";
+import { Section, Text } from "@mittwald/flow-remote-react-components";
+import { LoadingFallbackTrigger } from "@mittwald/flow-remote-react-components";
 import { useEffect, useState } from "react";
 
 export const standard = () => {

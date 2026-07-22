@@ -32,6 +32,22 @@
       "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
+    "test:cross-version:prepare": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "test:cross-version": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
+    "test:cross-version-inprocess": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
+    "test:cross-version:dev": {
+      "dependsOn": ["^build", "test:cross-version:prepare"],
+      "cache": false
+    },
     "test:dev": {
       "dependsOn": ["^build"],
       "cache": true

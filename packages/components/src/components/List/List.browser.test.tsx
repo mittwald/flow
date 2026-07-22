@@ -469,6 +469,12 @@ describe("Infinite scroll", () => {
       .toBeInTheDocument();
     expect(page.getByText("Showing 3 of 9")).toBeInTheDocument();
 
+    // The already-loaded items must stay fully visible while the next batch
+    // loads — the footer spinner communicates the load instead of dimming the
+    // whole area (regression guard for the list briefly turning dark on scroll).
+    const grid = await page.getByRole("grid").element();
+    expect(getComputedStyle(grid).opacity).toBe("1");
+
     resolveSecondBatch?.();
 
     // Once every batch has loaded, the indicator disappears again.

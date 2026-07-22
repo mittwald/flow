@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
 test.each(testEnvironments)(
@@ -21,7 +21,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// Element tree comparable from alpha.884 (CheckboxButton wrapper divs changed).
+test.skipIf(crossVersion({ below: "0.2.0-alpha.884" })).each(testEnvironments)(
   "Checkbox edge cases(%s)",
   async ({ testScreenshot, render, components: { Checkbox } }) => {
     await render(

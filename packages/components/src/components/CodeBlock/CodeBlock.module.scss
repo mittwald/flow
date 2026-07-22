@@ -1,3 +1,5 @@
+@use "@/styles/mixins/scrollbar";
+
 .codeBlock {
   display: block;
   font-size: var(--code-block--font-size);
@@ -13,6 +15,8 @@
     border-radius: var(--code-block--corner-radius);
 
     > pre {
+      @include scrollbar.scrollbar;
+
       overflow-x: auto;
       padding: var(--code-block--padding);
 
