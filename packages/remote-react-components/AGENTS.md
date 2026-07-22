@@ -20,6 +20,14 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
 - Update visual snapshots: `pnpm nx test:visual:update remote-react-components`.
   Updating everything takes long — for a single component use
   `pnpm nx test:visual:update remote-react-components MyNewComponent`.
+- **The `Remote` environment resolves the built `dist` of the remote packages,
+  not their source.** After changing a component's `@flr-generate` props (which
+  regenerates `src/auto-generated/**`), rebuild the remote chain before running
+  or updating visual tests — otherwise the `Remote` render uses a stale `dist`,
+  silently drops the new prop, and you get a misleading baseline that only fails
+  on the host side. Force a fresh build with
+  `pnpm nx run-many -t build -p components remote-elements remote-react-components remote-react-renderer --skip-nx-cache`,
+  then update snapshots.
 - Failing visual tests write `*--Local--*.png` / `*--Remote--*.png` diff
   artifacts — useful for inspection, **never commit them**. Only the baselines
   (`<Name>-<browser>-<os>.png`) belong in the repo.
