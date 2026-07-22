@@ -29,11 +29,10 @@ test.each(testEnvironments)(
   },
 );
 
-// CheckboxButton's edge-case structure was flattened in alpha.926: up to
-// alpha.921 it renders extra wrapper divs plus a duplicated measuring text node,
-// current renders a flat label (verified deterministic, not a capture flake).
-// Comparable only from alpha.926; older targets skip until a newer version ships.
-test.skipIf(crossVersion({ below: "0.2.0-alpha.926" })).each(testEnvironments)(
+// CheckboxButton's edge-case structure changed again in alpha.933: alpha.932
+// still renders extra wrapper/measurement nodes in the in-process harness,
+// while newer versions render the current flat structure deterministically.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.933" })).each(testEnvironments)(
   "Checkbox edge cases(%s)",
   async ({
     testScreenshot,
