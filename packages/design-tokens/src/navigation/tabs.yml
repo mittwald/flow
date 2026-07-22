@@ -17,6 +17,10 @@ tabs:
   background-color:
     default:
       value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
     selected:
       value: "{neutral.color.100}"
   color:
