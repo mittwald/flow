@@ -39,7 +39,7 @@
     "vite": "7.3.5",
     "vite-plugin-banner": "^0.8.1",
     "vite-plugin-checker": "^0.14.1",
-    "vite-plugin-dts": "^5.0.2",
+    "vite-plugin-dts": "^5.0.3",
     "vite-plugin-externalize-deps": "^0.10.0"
   },
   "peerDependencies": {
