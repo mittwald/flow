@@ -5,7 +5,7 @@ Component patterns for the core package. Read the
 Definition of Done, workflow).
 
 > **Full pattern catalog:** [PATTERNS.md](./PATTERNS.md) lists every convention
-> (182 patterns) with per-pattern applicability (when to use / when not), a
+> (184 patterns) with per-pattern applicability (when to use / when not), a
 > canonical example each, and a decision cheat-sheet. This guide covers the
 > must-know core; look there when deciding between two approaches.
 

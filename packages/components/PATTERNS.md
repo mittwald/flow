@@ -124,6 +124,12 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/Button/Button.tsx:112`
   - ✓ root styling combines base, variants, state, and consumer classes.
   - ✗ a single invariant class → pass it directly.
+- **Readable JSX via extracted expressions** `[undocumented]` — lift computed
+  nodes (icon, label, tooltip text) and non-trivial conditionals into named
+  consts above the `return`; the returned tree stays scannable — no large inline
+  ternaries, no deep logic in the markup. `src/components/Button/Button.tsx:168`
+  - ✓ markup mixes conditional content or several computed values.
+  - ✗ a single self-evident inline expression → keep it inline.
 - **Helpers outside the component** `[undocumented]` — hookless pure
   helpers/constants live above the component const.
   `src/components/Button/Button.tsx:45`
@@ -442,10 +448,17 @@ and consistency enforced by tooling, not maintained by hand.
   colors/sizes/radii. `src/components/Button/Button.module.scss:8`
   - ✓ colors/spacing/type/radii/shadow/size.
   - ✗ a structural CSS keyword or genuine calculation → CSS directly.
+  - `rem` vs `px`: see [design-tokens/AGENTS.md](../design-tokens/AGENTS.md) —
+    text-proportional spacing/sizing → `size-rem`, fixed values → `size-px`.
 - **No invented base values** — compose existing tokens; add component tokens
   only with a design.
   - ✓ values composed from approved tokens.
   - ✗ a missing design decision → ask UX / add an approved component token.
+- **Own the decision in a component token** `[undocumented]` — reference a
+  component-namespaced token for a value that expresses this component's design
+  decision, even when a similar global token exists.
+  - ✓ a value is this component's design choice → component token.
+  - ✗ a genuinely systemic concept (separator, focus ring) → the shared token.
 - **Shared `focus` mixin** — `@use "@/styles/mixins/focus"`.
   `src/components/Button/Button.module.scss:32`
   - ✓ an interactive element needs the system focus ring.
@@ -948,3 +961,7 @@ Quick answers to the highest-frequency choices when authoring a component:
   otherwise one colocated file.
 - **Structure that's only spacing/alignment** → Flow layout primitives; a raw
   wrapper only for semantics or component-owned integration.
+- **JSX getting dense** → extract computed nodes/conditionals into named consts
+  before `return`; split a growing tree into subcomponents.
+- **Sizing/spacing token unit** → text-proportional → `size-rem`; fixed →
+  `size-px` (see design-tokens/AGENTS.md).
