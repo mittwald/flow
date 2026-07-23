@@ -15,7 +15,7 @@ const meta: Meta<typeof Popover> = {
     <PopoverTrigger>
       <Button>Trigger popover</Button>
       <Popover {...props} placement="bottom right">
-        I am a popover.
+        These aren't the droids you're looking for.
       </Popover>
     </PopoverTrigger>
   ),
@@ -39,7 +39,7 @@ export const WithController: Story = {
           Trigger popover
         </Button>
         <Popover triggerRef={triggerRef} {...props} controller={controller}>
-          I am a popover.
+          These aren't the droids you're looking for.
         </Popover>
       </>
     );

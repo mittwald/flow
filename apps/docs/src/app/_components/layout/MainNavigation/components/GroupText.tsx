@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 
 interface Props {

@@ -15,24 +15,24 @@ import type { FC } from "react";
 
 const data = [
   {
-    Zeit: "0 Uhr",
-    Datenbanken: 40,
-    Projekte: 24,
+    time: "0:00",
+    Shields: 40,
+    Hull: 24,
   },
   {
-    Zeit: "1 Uhr",
-    Datenbanken: 30,
-    Projekte: 13,
+    time: "1:00",
+    Shields: 30,
+    Hull: 13,
   },
   {
-    Zeit: "2 Uhr",
-    Datenbanken: 20,
-    Projekte: 78,
+    time: "2:00",
+    Shields: 20,
+    Hull: 78,
   },
   {
-    Zeit: "3 Uhr",
-    Datenbanken: 27,
-    Projekte: 39,
+    time: "3:00",
+    Shields: 27,
+    Hull: 39,
   },
 ];
 
@@ -44,7 +44,7 @@ export default function Page() {
   const emptyView = (
     <IllustratedMessage>
       <IconMonitoring />
-      <Heading>Keine Daten verfügbar</Heading>
+      <Heading>No data available</Heading>
     </IllustratedMessage>
   );
 
@@ -52,9 +52,9 @@ export default function Page() {
     return (
       <CartesianChart emptyView={emptyView} data={data} height="300px">
         <CartesianGrid />
-        <Area dataKey="Datenbanken" />
-        <Area dataKey="Projekte" color="palatinate-blue" />
-        <XAxis dataKey="Zeit" />
+        <Area dataKey="Shields" />
+        <Area dataKey="Hull" color="palatinate-blue" />
+        <XAxis dataKey="time" />
         <YAxis domain={[0, 100]} unit="%" />
         <ChartTooltip
           headingFormatter={(v) => {

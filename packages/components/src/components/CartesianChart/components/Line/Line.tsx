@@ -7,7 +7,7 @@ import type {
   ChartDataValue,
   DataKey,
 } from "@/components/CartesianChart/types";
-import { useDesignTokens } from "../../../../lib/theming";
+import { useDesignTokens } from "@/lib/theming";
 
 export interface LineProps<
   TData extends ChartDataValue = ChartDataValue,

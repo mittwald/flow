@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import type { Properties, Property } from "@/lib/PropertiesTables/types";
 
 const formatDescription = (description: string | null | undefined): string =>
@@ -6,7 +6,7 @@ const formatDescription = (description: string | null | undefined): string =>
     .replaceAll(/{@link (\S+) (.+?)}/g, "$2")
     .replaceAll(/{@link (\S+)}/g, "$1");
 
-const StaticTable: React.FC<{ properties: Property[] }> = ({ properties }) => (
+const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
   <table aria-label="Properties" className="flow--table">
     <thead className="flow--table--header">
       <tr className="flow--table--row">
@@ -36,7 +36,7 @@ const StaticTable: React.FC<{ properties: Property[] }> = ({ properties }) => (
   </table>
 );
 
-export const StaticPropertiesTables: React.FC<{ properties: Properties }> = ({
+export const StaticPropertiesTables: FC<{ properties: Properties }> = ({
   properties,
 }) => (
   <>

@@ -85,8 +85,8 @@ import type { RatingProps } from "@/components/Rating";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
 import type { AccordionProps } from "@/components/Accordion";
-import type { ChatProps } from "../Chat";
-import type { SectionHeaderProps } from "../Section/components/SectionHeader/SectionHeader";
+import type { ChatProps } from "@/components/Chat";
+import type { SectionHeaderProps } from "@/components/Section/components/SectionHeader/SectionHeader";
 import type {
   LightBoxGalleryItemProps,
   LightBoxGalleryProps,

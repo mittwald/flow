@@ -3,6 +3,140 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.937](https://github.com/mittwald/flow/compare/0.2.0-alpha.936...0.2.0-alpha.937) (2026-07-22)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fix overflow ([#2686](https://github.com/mittwald/flow/issues/2686)) ([e668e98](https://github.com/mittwald/flow/commit/e668e98b3bd91a4e06089fc3ec21cb5ca2703d70))
+
+# [0.2.0-alpha.936](https://github.com/mittwald/flow/compare/0.2.0-alpha.935...0.2.0-alpha.936) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.935](https://github.com/mittwald/flow/compare/0.2.0-alpha.934...0.2.0-alpha.935) (2026-07-22)
+
+### Bug Fixes
+
+* **Modal:** keep mobile modals with forms usable when the virtual keyboard opens ([#2423](https://github.com/mittwald/flow/issues/2423)) ([#2671](https://github.com/mittwald/flow/issues/2671)) ([5b1b856](https://github.com/mittwald/flow/commit/5b1b8563d6e5e7a0a5c046620104480f1f7620cd))
+
+# [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
+
+### Features
+
+* **components:** add reusable slim scrollbar mixin and apply to scroll containers ([#2672](https://github.com/mittwald/flow/issues/2672)) ([a06dd9a](https://github.com/mittwald/flow/commit/a06dd9a4e88899612eba19a21f6464ba0a98167e))
+
+# [0.2.0-alpha.933](https://github.com/mittwald/flow/compare/0.2.0-alpha.932...0.2.0-alpha.933) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.932](https://github.com/mittwald/flow/compare/0.2.0-alpha.931...0.2.0-alpha.932) (2026-07-21)
+
+### Features
+
+* **remote-react-components:** cross-version backwards-compatibility smoke tests ([#2600](https://github.com/mittwald/flow/issues/2600)) ([#2661](https://github.com/mittwald/flow/issues/2661)) ([1f3efa0](https://github.com/mittwald/flow/commit/1f3efa02700f86ea9faf5a62b3039a84e0c51953)), closes [#2596](https://github.com/mittwald/flow/issues/2596) [#2620](https://github.com/mittwald/flow/issues/2620) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [ButtonVisual#colors](https://github.com/ButtonVisual/issues/colors) [hi#fidelity](https://github.com/hi/issues/fidelity)
+
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+### Bug Fixes
+
+* **List:** stop dimming the list while loading more via infinite scroll ([#2673](https://github.com/mittwald/flow/issues/2673)) ([0587956](https://github.com/mittwald/flow/commit/0587956f06a358b786e0ff53def6622643684242))
+
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+### Features
+
+* **docs:** add skip link and adopt layered Flow CSS ([#2670](https://github.com/mittwald/flow/issues/2670)) ([2532897](https://github.com/mittwald/flow/commit/25328976685248c01c1cf41c482a112173e0e2dd)), closes [#main-content](https://github.com/mittwald/flow/issues/main-content)
+
+# [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.928](https://github.com/mittwald/flow/compare/0.2.0-alpha.927...0.2.0-alpha.928) (2026-07-20)
+
+### Bug Fixes
+
+* **Overlay:** keep browser extension overlays clickable inside modals ([#2668](https://github.com/mittwald/flow/issues/2668)) ([3f105d5](https://github.com/mittwald/flow/commit/3f105d53169d906cd08aa418f774e35e4b3037ef))
+
+# [0.2.0-alpha.927](https://github.com/mittwald/flow/compare/0.2.0-alpha.926...0.2.0-alpha.927) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.926](https://github.com/mittwald/flow/compare/0.2.0-alpha.925...0.2.0-alpha.926) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.925](https://github.com/mittwald/flow/compare/0.2.0-alpha.924...0.2.0-alpha.925) (2026-07-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.924](https://github.com/mittwald/flow/compare/0.2.0-alpha.923...0.2.0-alpha.924) (2026-07-17)
+
+### Bug Fixes
+
+* **components:** correct placeholder and disabled colors for form fields ([#2663](https://github.com/mittwald/flow/issues/2663)) ([89735c0](https://github.com/mittwald/flow/commit/89735c0e86686cdfee259fc5f43b09350e3a69e1))
+
+# [0.2.0-alpha.923](https://github.com/mittwald/flow/compare/0.2.0-alpha.922...0.2.0-alpha.923) (2026-07-16)
+
+### Features
+
+* **ActionGroup:** add preserveOrder prop for DOM-order layout ([#2652](https://github.com/mittwald/flow/issues/2652)) ([a0f14f1](https://github.com/mittwald/flow/commit/a0f14f11fb0a305e3589fa392f7d5dceacb70b00))
+
+# [0.2.0-alpha.922](https://github.com/mittwald/flow/compare/0.2.0-alpha.921...0.2.0-alpha.922) (2026-07-16)
+
+### Features
+
+* **List:** add optional infinite scroll ([#2650](https://github.com/mittwald/flow/issues/2650)) ([9526b46](https://github.com/mittwald/flow/commit/9526b462dea8165d6f9987db7178545c8c59e035))
+
+# [0.2.0-alpha.921](https://github.com/mittwald/flow/compare/0.2.0-alpha.920...0.2.0-alpha.921) (2026-07-16)
+
+### Features
+
+* **Icons:** add Newsletter icon ([#2659](https://github.com/mittwald/flow/issues/2659)) ([87b92d8](https://github.com/mittwald/flow/commit/87b92d85cf6c759a12c54223534a4d4cfed1a81d))
+
+# [0.2.0-alpha.920](https://github.com/mittwald/flow/compare/0.2.0-alpha.919...0.2.0-alpha.920) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.919](https://github.com/mittwald/flow/compare/0.2.0-alpha.918...0.2.0-alpha.919) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.918](https://github.com/mittwald/flow/compare/0.2.0-alpha.917...0.2.0-alpha.918) (2026-07-16)
+
+### Bug Fixes
+
+* **Link:** keep client-side navigation with interactive children ([#2657](https://github.com/mittwald/flow/issues/2657)) ([b4719e5](https://github.com/mittwald/flow/commit/b4719e5c44646c990dc23ef334341e13c174b91c))
+
+# [0.2.0-alpha.917](https://github.com/mittwald/flow/compare/0.2.0-alpha.916...0.2.0-alpha.917) (2026-07-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.916](https://github.com/mittwald/flow/compare/0.2.0-alpha.915...0.2.0-alpha.916) (2026-07-15)
+
+### Bug Fixes
+
+* **Docs:** remove stretch prop ([#2647](https://github.com/mittwald/flow/issues/2647)) ([2d527f9](https://github.com/mittwald/flow/commit/2d527f9a61dc444f7b70587aac764abff9ce8843))
+
+# [0.2.0-alpha.915](https://github.com/mittwald/flow/compare/0.2.0-alpha.914...0.2.0-alpha.915) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.914](https://github.com/mittwald/flow/compare/0.2.0-alpha.913...0.2.0-alpha.914) (2026-07-15)
+
+### Features
+
+* **remote:** surface "No component found" error on the remote side ([#2651](https://github.com/mittwald/flow/issues/2651)) ([715fd75](https://github.com/mittwald/flow/commit/715fd7537cc776f8376ffc4634021071ba5fde18)), closes [#2441](https://github.com/mittwald/flow/issues/2441)
+
+# [0.2.0-alpha.913](https://github.com/mittwald/flow/compare/0.2.0-alpha.912...0.2.0-alpha.913) (2026-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.912](https://github.com/mittwald/flow/compare/0.2.0-alpha.911...0.2.0-alpha.912) (2026-07-15)
+
+### Bug Fixes
+
+* **CodeEditor:** fix copy button z-index ([#2649](https://github.com/mittwald/flow/issues/2649)) ([9a806d0](https://github.com/mittwald/flow/commit/9a806d0cad63a1b43e39cacff41005bc7019a89a))
+
 # [0.2.0-alpha.911](https://github.com/mittwald/flow/compare/0.2.0-alpha.910...0.2.0-alpha.911) (2026-07-15)
 
 ### Bug Fixes

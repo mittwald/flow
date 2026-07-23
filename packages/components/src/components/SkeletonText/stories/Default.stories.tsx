@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import SkeletonText from "../SkeletonText";
-import React from "react";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";

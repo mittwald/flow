@@ -72,3 +72,119 @@ jobs:
                 text:
                   type: "mrkdwn"
                   text: "Visual tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+
+  cross-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare browser tests
+        run: pnpm test:browser:prepare --only-shell
+
+      - name: Build host packages and install old published versions
+        # `test:cross-version:prepare` declares `^build` as an nx dependency, so
+        # this single `pnpm nx run` builds the host packages the harnesses consume
+        # from dist (@mittwald/flow-react-components incl. /internal, and
+        # @mittwald/flow-remote-react-renderer — nx-cached) and then runs prepare,
+        # which resolves + npm-installs the target old versions (network) and
+        # writes cross-version.manifest.json. No separate build step needed.
+        # The two suites below stay separate direct-script steps on purpose: each
+        # exposes its own `failures` output for the Slack alert, and the in-process
+        # suite runs even if the iframe one fails. Running a suite via `nx run`
+        # would re-trigger this non-cached network prepare on every step.
+        run: pnpm nx run remote-react-components:test:cross-version:prepare
+
+      - name: Run cross-version smoke tests
+        id: crossversion
+        # Renders each installed old remote version through the current host over
+        # the real iframe connection and compares its host HTML to an ephemeral
+        # reference rendered from the current version. WebKit-only. The
+        # @quilted/threads handshake intermittently times out under CI ("Could not
+        # establish remote connection: Timeout reached") — a transient infra flake,
+        # not a diff. Retry the whole step (same idea as the visual job's Firefox
+        # hang retry): a real HTML divergence fails deterministically on every
+        # attempt, while a connection flake clears on a fresh run. Runs the package
+        # script directly (not `nx run`) so a retry doesn't re-trigger the
+        # non-cached network prepare above; the final attempt's `failures` output
+        # feeds the Slack alert.
+        run: |
+          for attempt in 1 2 3; do
+            echo "::group::Cross-version smoke tests (attempt $attempt/3)"
+            if corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            echo "::warning::Cross-version smoke tests failed on attempt $attempt/3 (possibly a flaky remote-connection timeout), retrying..."
+          done
+          echo "::error::Cross-version smoke tests still failing after 3 attempts."
+          exit 1
+
+      - name: Run in-process cross-version tests
+        id: crossversion_inprocess
+        if:
+          always() && (steps.crossversion.outcome == 'success' ||
+          steps.crossversion.outcome == 'failure')
+        # Reuses the broad visual-test corpus in-process. WebKit-only. Unlike the
+        # iframe suite it has no real connection to time out; its config already
+        # sets vitest `retry: 2` to absorb the occasional per-test webkit flake,
+        # so no step-level retry is needed here.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version-inprocess
+
+      - name: Send alerting message to Slack
+        if: failure()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Cross-version smoke tests failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Cross-version smoke tests failed.*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(format('*Iframe harness*{0}{1}', '\n', steps.crossversion.outputs.failures || 'No failures reported.')) }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(format('*In-process harness*{0}{1}', '\n', steps.crossversion_inprocess.outputs.failures || 'No failures reported.')) }}
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Open workflow run>"
+                    }
+                  ]
+                }
+              ]
+            }

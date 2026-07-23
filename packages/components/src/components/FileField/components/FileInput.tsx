@@ -43,6 +43,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
       isDisabled,
       isReadOnly,
     },
+    FieldDescription: { className: styles.fieldDescription },
   };
 
   return (

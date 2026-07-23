@@ -1,10 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 import gopher from "@/tests/assets/gopher.webp";
 import logo from "@/tests/assets/mittwald_logo_rgb.jpg";
 import { userEvent } from "vitest/browser";
-import React from "react";
 
 test.each(testEnvironments)(
   "LightBox (%s)",
@@ -49,7 +48,8 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+// LightBoxGallery element tree comparable from alpha.883.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   "LightBox with Gallery (%s)",
   async ({
     testScreenshot,

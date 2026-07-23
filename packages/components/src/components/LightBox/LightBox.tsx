@@ -14,7 +14,7 @@ import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
 import DivView from "@/views/DivView";
 import ButtonView from "@/views/ButtonView";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 
@@ -47,6 +47,8 @@ export const LightBox = flowComponent("LightBox", (props) => {
 
   const propsContext: PropsContext = {
     ActionGroup: {
+      preserveOrder: true,
+      spacing: "m",
       className: styles.actionGroup,
       Button: { variant: "solid", color: "light-static" },
       tunnel: {

@@ -1,3 +1,3 @@
 export * from "./view";
-export { PopoverContent, type PopoverContentProps } from "./PopoverContent";
+export { type PopoverContentProps, PopoverContent } from "./PopoverContent";
 export { default } from "./PopoverContent";

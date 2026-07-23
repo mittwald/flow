@@ -49,6 +49,7 @@ export interface HostExports extends ExtBridgeConnectionApi {
 export interface RemoteExports {
   render: (connection: RemoteConnection) => Promise<void>;
   setPathname: (pathname: string) => Promise<void>;
+  setHostError: (error: string) => Promise<void>;
 }
 
 export type RemoteToHostConnection = ThreadNestedIframe<
@@ -60,6 +61,7 @@ export interface HostToRemoteConnection {
   version: Version;
   thread: ThreadIframe<RemoteExports, HostExports>;
   updateHostPathname: (hostPathname?: string) => void;
+  reportHostError: (error: string) => Promise<void>;
 }
 
 export interface HostToRemoteConnectionReadyEvent {
@@ -73,4 +75,5 @@ export enum Version {
   v2 = 2,
   v3 = 3,
   v4 = 4,
+  v5 = 5,
 }

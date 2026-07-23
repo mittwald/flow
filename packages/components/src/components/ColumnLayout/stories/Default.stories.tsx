@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ColumnLayout from "../ColumnLayout";
-import React from "react";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Text } from "@/components/Text";

@@ -83,6 +83,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const hostConfigRef = useRef<HostConfig | undefined>(undefined);
   const isConnectionInitialized = useRef(false);
   const [connectionError, setConnectionError] = useState(null);
+  const [hostError, setHostError] = useState<string | undefined>(undefined);
   const [isConnected, setIsConnected] = useState(false);
 
   const fallbackLanguage = useLanguage();
@@ -131,9 +132,14 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     throw connectionError;
   }
 
+  if (hostError) {
+    throw new Error(hostError);
+  }
+
   const connect = connectHostRenderRootRef({
     onPathnameChanged: (pathname) =>
       startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+    onHostError: (error) => setHostError(error),
     packageVersion,
   });
 

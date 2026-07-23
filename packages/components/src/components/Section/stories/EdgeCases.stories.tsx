@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import defaultStories from "./Default.stories";
 import { useForm } from "react-hook-form";
@@ -28,14 +27,14 @@ export const WithForm: Story = {
     return (
       <Section {...props}>
         <Form form={form} onSubmit={() => action("submit")}>
-          <Heading>Personal Information</Heading>
+          <Heading>Rebel Personnel File</Heading>
           <Field name="firstName">
-            <TextField isRequired defaultValue="John">
+            <TextField isRequired defaultValue="Luke">
               <Label>First name</Label>
             </TextField>
           </Field>
           <Field name="lastName">
-            <TextField isRequired defaultValue="Doe">
+            <TextField isRequired defaultValue="Skywalker">
               <Label>Last name</Label>
             </TextField>
           </Field>

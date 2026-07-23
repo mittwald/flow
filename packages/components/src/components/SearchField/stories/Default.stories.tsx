@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SearchField } from "../index";
-import React from "react";
 import { action } from "storybook/actions";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
@@ -13,7 +12,7 @@ const meta: Meta<typeof SearchField> = {
   args: { isDisabled: false, isReadOnly: false, isRequired: false },
   render: (props) => (
     <SearchField onChange={action("onChange")} {...props}>
-      <Label>Search</Label>
+      <Label>Search the Jedi Archives</Label>
     </SearchField>
   ),
 };
@@ -27,17 +26,17 @@ export const Default: Story = {};
 export const WithFieldDescription: Story = {
   render: (props) => (
     <SearchField {...props}>
-      <Label>Search</Label>
-      <FieldDescription>Press enter to search</FieldDescription>
+      <Label>Search the Jedi Archives</Label>
+      <FieldDescription>Press enter to search the archives</FieldDescription>
     </SearchField>
   ),
 };
 
 export const WithFieldError: Story = {
   render: (props) => (
-    <SearchField {...props} defaultValue="test" isInvalid>
-      <Label>Search</Label>
-      <FieldError>Invalid search value</FieldError>
+    <SearchField {...props} defaultValue="Kamino" isInvalid>
+      <Label>Search the Jedi Archives</Label>
+      <FieldError>No records found in the archives</FieldError>
     </SearchField>
   ),
 };

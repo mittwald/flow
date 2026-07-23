@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { CounterBadge } from "@/components/CounterBadge";
 import Button from "@/components/Button";
 import { IconNotification } from "@/components/Icon/components/icons";

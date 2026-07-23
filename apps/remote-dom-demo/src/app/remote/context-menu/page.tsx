@@ -20,12 +20,12 @@ export default function Page() {
   return (
     <Section>
       <Header>
-        <Heading>Heading</Heading>
+        <Heading>Death Star</Heading>
         <ModalTrigger>
-          <Button>Open modal</Button>
+          <Button>Battle station controls</Button>
           <Modal>
-            <Heading>Modal Heading</Heading>
-            <Content>Modal Content</Content>
+            <Heading>Battle station controls</Heading>
+            <Content>Command the Death Star&apos;s systems.</Content>
             <ActionGroup>
               <Action closeModal>
                 <Button>Close</Button>
@@ -35,29 +35,29 @@ export default function Page() {
         </ModalTrigger>
 
         <ContextMenuTrigger>
-          <Button>Open menu</Button>
+          <Button>Station actions</Button>
           <ContextMenu onAction={(item) => console.log(item)}>
             <MenuItem>
               <IconApp />
-              <Text>Test</Text>
+              <Text>Fire superlaser</Text>
             </MenuItem>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test</MenuItem>
+            <MenuItem>Rotate station</MenuItem>
+            <MenuItem>Scan sector</MenuItem>
+            <MenuItem>Self-destruct</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
       </Header>
       <Content>
         <ContextMenuTrigger>
-          <Button>Open menu</Button>
+          <Button>Station actions</Button>
           <ContextMenu onAction={(item) => console.log(item)}>
             <MenuItem>
               <IconApp />
-              <Text>Test</Text>
+              <Text>Fire superlaser</Text>
             </MenuItem>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test</MenuItem>
+            <MenuItem>Rotate station</MenuItem>
+            <MenuItem>Scan sector</MenuItem>
+            <MenuItem>Self-destruct</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
       </Content>

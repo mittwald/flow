@@ -27,13 +27,13 @@ test.each(testEnvironments)(
               <Flex direction="column" gap="m">
                 <Breadcrumb color={color}>
                   <Link>{firstLetterToUppercase(color)}</Link>
-                  <Link>Lorem</Link>
-                  <Link>Ipsum</Link>
+                  <Link>Tatooine</Link>
+                  <Link>Mos Eisley</Link>
                 </Breadcrumb>
                 <Breadcrumb color={color} size="s">
                   <Link>Small</Link>
-                  <Link>Lorem</Link>
-                  <Link>Ipsum</Link>
+                  <Link>Tatooine</Link>
+                  <Link>Mos Eisley</Link>
                 </Breadcrumb>
               </Flex>
             </AccentBox>
@@ -52,16 +52,16 @@ test.each(testEnvironments)(
     await render(
       <Breadcrumb>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
         <Link>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque eius
-          quam quas vel voluptas, ullam aliquid fugit.
+          A long time ago in a galaxy far, far away the Rebel Alliance struck a
+          decisive blow against the Galactic Empire fleet.
         </Link>
       </Breadcrumb>,
     );

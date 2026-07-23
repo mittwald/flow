@@ -25,7 +25,7 @@ test.each(testEnvironments)(
             >
               <Markdown color={color}>
                 {"## Heading 2\n" +
-                  "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam [aliquid fugit](#)."}
+                  "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](#)."}
               </Markdown>
             </AccentBox>
           </Wrap>
@@ -44,11 +44,11 @@ test.each(testEnvironments)(
       <Markdown>
         {"# Heading 1\n" +
           "## Heading 2\n" +
-          "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam aliquid fugit.\n" +
+          "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the Empire.\n" +
           "```json\n" +
           "{\n" +
           '    "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",\n' +
-          '    "name": "My Project"\n' +
+          '    "name": "Death Star"\n' +
           "}\n" +
           "```\n" +
           "[link](#)\n" +

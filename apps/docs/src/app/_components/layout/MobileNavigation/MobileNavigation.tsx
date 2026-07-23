@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import styles from "@/app/layout.module.scss";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import {
@@ -50,7 +49,11 @@ export const MobileNavigation: FC<Props> = (props) => {
         <Button variant="plain">
           <IconMenu />
         </Button>
-        <Modal offCanvas className={styles.mobileNavigationOffCanvas}>
+        <Modal
+          offCanvas
+          className={styles.mobileNavigationOffCanvas}
+          showCloseButton
+        >
           <Heading>Menü</Heading>
           <Content>
             <Section>

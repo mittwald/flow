@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Align } from "@/components/Align";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
@@ -28,11 +27,11 @@ export const AvatarText: Story = {
   render: (props) => (
     <Align {...props}>
       <Avatar>
-        <Initials>Max Mustermann</Initials>
+        <Initials>Han Solo</Initials>
       </Avatar>
       <Text>
-        <strong>Max Mustermann</strong>
-        Organisationsinhaber
+        <strong>Han Solo</strong>
+        Rebel Alliance general
       </Text>
     </Align>
   ),
@@ -42,7 +41,7 @@ export const IconText: Story = {
   render: (props) => (
     <Align {...props}>
       <IconDomain />
-      <Text>mail.agenturserver.de</Text>
+      <Text>comms.rebellion.org</Text>
     </Align>
   ),
 };
@@ -67,8 +66,8 @@ export const TextContextualHelp: Story = {
 export const TextCopyButton: Story = {
   render: (props) => (
     <Align {...props}>
-      <Text>mail.agenturserver.de</Text>
-      <CopyButton text="mail.agenturserver.de" />
+      <Text>comms.rebellion.org</Text>
+      <CopyButton text="comms.rebellion.org" />
     </Align>
   ),
 };

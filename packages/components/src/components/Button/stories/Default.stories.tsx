@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
-import React from "react";
 import { IconCamera, IconPlus } from "@/components/Icon/components/icons";
 import { action } from "storybook/actions";
 import { Text } from "@/components/Text";
@@ -74,7 +73,7 @@ export const Default: Story = {};
 export const WithIcon: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
-      <Button {...props} aria-label="Add to favorites">
+      <Button {...props} aria-label="Add to squadron">
         <IconPlus />
       </Button>
     </StoryBackground>
@@ -85,7 +84,7 @@ export const WithTextAndIcon: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Button {...props}>
-        <Text>Add email address</Text>
+        <Text>Add rebel pilot</Text>
         <IconChevronDown />
       </Button>
     </StoryBackground>
@@ -100,11 +99,11 @@ export const WithAvatar: Story = {
     <TooltipTrigger>
       <Button {...props}>
         <Avatar size="l">
-          <Image alt="Gopher" src={dummyText.imageSrc} />
+          <Image alt="Luke Skywalker" src={dummyText.imageSrc} />
         </Avatar>
         <IconCamera />
       </Button>
-      <Tooltip>Profilbild ändern</Tooltip>
+      <Tooltip>Change holo-portrait</Tooltip>
     </TooltipTrigger>
   ),
 };

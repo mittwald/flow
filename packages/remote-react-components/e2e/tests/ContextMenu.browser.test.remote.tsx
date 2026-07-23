@@ -3,7 +3,7 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   MenuItem,
-} from "../../src/auto-generated";
+} from "@mittwald/flow-remote-react-components";
 
 export const standard = () => (
   <ContextMenuTrigger>

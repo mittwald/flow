@@ -1,5 +1,6 @@
 "use client";
 
+import { HostRenderErrorBoundary } from "@/components/HostRenderErrorBoundary";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
@@ -186,7 +187,15 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   return (
     <>
-      <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      <HostRenderErrorBoundary
+        onNoComponentError={async (error) => {
+          await connection.current?.reportHostError(
+            error instanceof Error ? error.message : String(error),
+          );
+        }}
+      >
+        <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      </HostRenderErrorBoundary>
       <iframe
         src={src}
         ref={(ref) => {

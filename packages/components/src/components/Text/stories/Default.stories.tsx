@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
-import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { alphaColors } from "@/lib/types/props";

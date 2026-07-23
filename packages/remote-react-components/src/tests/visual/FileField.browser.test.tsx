@@ -32,6 +32,7 @@ test.each(testEnvironments)(
         <FileField name="file" isDisabled>
           <Label>Disabled</Label>
           <Button>Select file</Button>
+          <FieldDescription>FieldDescription</FieldDescription>
         </FileField>
         <FileField name="file" isReadOnly>
           <Label>Readonly</Label>

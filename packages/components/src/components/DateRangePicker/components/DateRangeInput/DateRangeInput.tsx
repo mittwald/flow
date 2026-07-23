@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React from "react";
+import type React from "react";
 import styles from "./DateRangeInput.module.scss";
 import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";

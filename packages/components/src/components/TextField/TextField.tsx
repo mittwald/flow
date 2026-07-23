@@ -14,7 +14,7 @@ import { Button } from "@/components/Button";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface TextFieldProps
   extends

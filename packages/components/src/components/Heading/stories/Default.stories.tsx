@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
-import React from "react";
 import { IconStar } from "@/components/Icon/components/icons";
 import { Section } from "@/components/Section";
 import { StoryBackground } from "@/lib/dev/StoryBackground";

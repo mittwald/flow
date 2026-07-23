@@ -1,5 +1,5 @@
 "use client";
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import { usePathname } from "next/navigation";

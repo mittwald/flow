@@ -227,6 +227,57 @@ export const WithSummary: Story = {
     );
   },
 };
+interface Invoice {
+  id: string;
+  date: string;
+  amount: string;
+}
+
+const allInvoices: Invoice[] = Array.from({ length: 460 }, (_, i) => ({
+  id: `RG${100000 + i}`,
+  date: `${(i % 28) + 1}.9.2024`,
+  amount: `${(i % 50) + 1},00 €`,
+}));
+
+const loadInvoices: AsyncDataLoader<Invoice> = async (opts) => {
+  await new Promise((resolve) => setTimeout(resolve, 600));
+
+  const offset = opts?.pagination?.offset ?? 0;
+  const limit = opts?.pagination?.limit ?? allInvoices.length;
+
+  return {
+    data: allInvoices.slice(offset, offset + limit),
+    itemTotalCount: allInvoices.length,
+  };
+};
+
+export const InfiniteScroll: Story = {
+  render: () => {
+    const InvoiceList = typedList<Invoice>();
+
+    return (
+      <Section>
+        <Heading>Invoices</Heading>
+        <InvoiceList.List batchSize={20} aria-label="Invoices" infiniteScroll>
+          <InvoiceList.LoaderAsync manualPagination>
+            {loadInvoices}
+          </InvoiceList.LoaderAsync>
+          <InvoiceList.Item>
+            {(invoice) => (
+              <ListItemView>
+                <Heading level={3}>{invoice.id}</Heading>
+                <Text>
+                  {invoice.date} - {invoice.amount}
+                </Text>
+              </ListItemView>
+            )}
+          </InvoiceList.Item>
+        </InvoiceList.List>
+      </Section>
+    );
+  },
+};
+
 export const WithAccordion: Story = {
   render: () => {
     const List = typedList<{
@@ -236,9 +287,9 @@ export const WithAccordion: Story = {
     return (
       <List.List batchSize={5} aria-label="Invoices" accordion>
         <List.StaticData
-          data={[{ id: "Item 1" }, { id: "Item 2" }, { id: "Item 3" }]}
+          data={[{ id: "Tatooine" }, { id: "Hoth" }, { id: "Endor" }]}
         />
-        <List.Item defaultExpanded={(invoice) => invoice.id === "Item 1"}>
+        <List.Item defaultExpanded={(invoice) => invoice.id === "Tatooine"}>
           {(invoice) => (
             <ListItemView>
               <Heading>{invoice.id}</Heading>

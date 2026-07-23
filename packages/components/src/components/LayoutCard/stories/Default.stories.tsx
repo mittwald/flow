@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LayoutCard from "../LayoutCard";
-import React from "react";
 import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
@@ -32,18 +31,30 @@ export const WithTabs: Story = {
     <LayoutCard {...props}>
       <Tabs>
         <Tab id="general">
-          <TabTitle>General</TabTitle>
+          <TabTitle>Crew</TabTitle>
           <Section>
             <Text>{dummyText.long}</Text>
           </Section>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage</TabTitle>
+          <TabTitle>Cargo</TabTitle>
           <Section>
             <Text>{dummyText.long}</Text>
           </Section>
         </Tab>
       </Tabs>
+    </LayoutCard>
+  ),
+};
+
+export const Scrolling: Story = {
+  render: (props) => (
+    <LayoutCard {...props} style={{ height: 300, overflowY: "auto" }}>
+      <Section>
+        <Text>
+          {dummyText.long} {dummyText.long} {dummyText.long}
+        </Text>
+      </Section>
     </LayoutCard>
   ),
 };

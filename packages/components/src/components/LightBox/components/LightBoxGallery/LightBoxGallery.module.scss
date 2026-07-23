@@ -1,4 +1,4 @@
-.gallery {
+.lightBoxGallery {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -39,9 +39,7 @@
   }
 
   .actionGroup {
-    flex-grow: 0;
     flex-direction: column;
-    row-gap: var(--light-box--spacing);
   }
 
   .image {

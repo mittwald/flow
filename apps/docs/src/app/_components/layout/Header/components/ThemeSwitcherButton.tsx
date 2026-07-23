@@ -1,10 +1,17 @@
 "use client";
 
-import { Button, Icon } from "@mittwald/flow-react-components";
+import { Button, Icon, Text } from "@mittwald/flow-react-components";
 import { IconContrastFilled, IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
+import type { FC } from "react";
 
-export const ThemeSwitcherButton = () => {
+interface Props {
+  iconOnly?: boolean;
+}
+
+export const ThemeSwitcherButton: FC<Props> = (props) => {
+  const { iconOnly } = props;
+
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -33,12 +40,21 @@ export const ThemeSwitcherButton = () => {
     <Button
       onPress={toggleTheme}
       aria-label={ariaLabel}
-      variant="plain"
+      variant={iconOnly ? "plain" : "soft"}
       color="secondary"
       slot="primary"
       style={{ flexGrow: 0, width: "auto" }}
     >
       <Icon>{icon}</Icon>
+      {!iconOnly && (
+        <Text>
+          {theme === "light"
+            ? "Heller Farbmodus"
+            : theme === "dark"
+              ? "Dunkler Farbmodus"
+              : "System-Farbmodus"}
+        </Text>
+      )}
     </Button>
   );
 };

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FileDropZone } from "@/components/FileDropZone";
 import { Section } from "@/components/Section";
 import { FileCardList } from "@/components/FileCardList";

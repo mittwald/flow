@@ -25,7 +25,7 @@ export const WithButton: Story = {
   render: (props) => (
     <Label {...props}>
       <Text>Label</Text>
-      <Button>Do stuff</Button>
+      <Button>Engage hyperdrive</Button>
     </Label>
   ),
 };
@@ -37,10 +37,10 @@ export const WithContextualHelp: Story = {
       <ContextualHelpTrigger>
         <Button />
         <ContextualHelp>
-          <Heading>Rights & roles</Heading>
+          <Heading>Ranks & roles</Heading>
           <Text>
-            Each user profile is assigned a role in mStudio for each project
-            and/or organization. This allows you to work in a completely new and
+            Each crew member is assigned a rank in your fleet for each mission
+            and/or squadron. This lets you command in a completely new and
             modern way.
           </Text>
           <Link>Learn more</Link>

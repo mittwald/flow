@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import clsx from "clsx";
 import styles from "./Separator.module.scss";
 import * as Aria from "react-aria-components";

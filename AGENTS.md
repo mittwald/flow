@@ -30,7 +30,9 @@ it. Patterns are documented in
 ### 2. Remote DOM ("flr" = **Fl**ow **R**emote)
 
 mStudio extensions run in a hidden iframe and render UI that the host
-materializes with real Flow components:
+materializes with real Flow components. For the full picture — end-to-end flow,
+the mental model, and what remote-capability means when you implement a
+component — see [docs/remote-ui.md](docs/remote-ui.md).
 
 ```
 extension (iframe)                          host (mStudio)
@@ -183,8 +185,9 @@ A new or substantially changed component comes with:
    (`flr-universal.ts` additionally, only when remote-capable)
 7. Remote-capable (`@flr-generate`): generated code regenerated + committed, and
    a demo page in `apps/remote-dom-demo`
-8. Intentional visual changes: snapshots updated (`test:visual:update` or the
-   `update-screenshots` PR label)
+8. Visual changes: run the suite on demand with the `run-visual-tests` PR label
+   (verify only); for intentional changes, update snapshots
+   (`test:visual:update` or the `update-screenshots` PR label)
 
 ## Hard rules
 
@@ -207,6 +210,7 @@ A new or substantially changed component comes with:
 | Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                          |
 | Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                        |
 | Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                  |
+| Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
 | Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
 | Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
 | Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |

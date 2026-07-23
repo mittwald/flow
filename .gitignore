@@ -23,3 +23,6 @@ coverage/*.json
 .DS_Store
 **/.DS_Store
 packages/remote-react-components/.vitest-attachments
+
+# Local Claude Code preview launch config
+.claude/launch.json

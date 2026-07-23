@@ -42,6 +42,7 @@ test.each(testEnvironments)(
         </TextArea>
         <TextArea rows={1} isDisabled>
           <Label>Disabled</Label>
+          <FieldDescription>FieldDescription</FieldDescription>
         </TextArea>
         <TextArea rows={1} allowResize>
           <Label>Resizeable</Label>

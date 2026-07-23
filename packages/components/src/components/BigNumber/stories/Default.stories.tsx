@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { BigNumber } from "@/components/BigNumber";
 import { Text } from "@/components/Text";
 
@@ -21,7 +20,7 @@ export const WithSubtitle: Story = {
   render: (props) => (
     <BigNumber {...props}>
       <Text>69%</Text>
-      <Text>Performance</Text>
+      <Text>Shield integrity</Text>
     </BigNumber>
   ),
 };

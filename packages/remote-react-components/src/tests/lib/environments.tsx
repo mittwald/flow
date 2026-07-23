@@ -5,19 +5,25 @@ import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import type { Locator, ScreenshotMatcherOptions } from "vitest/browser";
 import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
+import * as PasswordToolsComponents from "@mittwald/flow-react-components/password-tools";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
 import { expect } from "vitest";
 
-const RemoteTestUi: FC<PropsWithChildren> = (props) => {
+const localComponents: typeof Components & typeof PasswordToolsComponents = {
+  ...Components,
+  ...PasswordToolsComponents,
+};
+
+const RemoteTestUi: FC<PropsWithChildren> = ({ children }) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
 
   return (
     <RootContainer>
       <RemoteRenderer __remoteReceiver={receiver} />
       <RemoteRoot __remoteReceiver={receiver}>
-        <NotificationProvider>{props.children}</NotificationProvider>
+        <NotificationProvider>{children}</NotificationProvider>
       </RemoteRoot>
     </RootContainer>
   );
@@ -50,9 +56,9 @@ const testScreenshot = async (
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
-interface TestEnvironement {
+interface TestEnvironment {
   toString: () => string;
-  components: typeof Components | typeof RemoteComponents;
+  components: typeof localComponents | typeof RemoteComponents;
   render: typeof render;
   container: Locator;
   testScreenshot: (
@@ -61,7 +67,7 @@ interface TestEnvironement {
   ) => Promise<void>;
 }
 
-const remoteTestEnvironement: TestEnvironement = {
+const remoteTestEnvironment: TestEnvironment = {
   toString: () => "Remote",
   components: RemoteComponents,
   render: renderRemote,
@@ -69,15 +75,32 @@ const remoteTestEnvironement: TestEnvironement = {
   testScreenshot,
 };
 
-const localTestEnvironement: TestEnvironement = {
+const localTestEnvironment: TestEnvironment = {
   toString: () => "Local",
-  components: Components,
+  components: localComponents,
   render: renderLocal,
   container: rootContainerLocator,
   testScreenshot,
 };
 
 export const testEnvironments = [
-  localTestEnvironement,
-  remoteTestEnvironement,
+  localTestEnvironment,
+  remoteTestEnvironment,
 ] as const;
+
+export interface CrossVersionSkip {
+  /** Skip when the tested version is older than this (semver). */
+  below?: string;
+  /** Skip these exact versions (for non-monotonic breakage). */
+  exclude?: string[];
+}
+
+/**
+ * Skip predicate for the cross-version harness (see
+ * e2e/cross-version-inprocess). In the normal visual suite there is no old
+ * version, so this is always `false` and every test runs. The cross-version
+ * harness replaces this module with its own implementation that skips tests
+ * whose component/output didn't yet exist in the tested version.
+ */
+export const crossVersion = (ignoredOptions: CrossVersionSkip): boolean =>
+  false;

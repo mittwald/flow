@@ -400,6 +400,10 @@ Move:
   category: decorative
   tb: TruckDelivery
   fa: truckFast
+Newsletter:
+  category: decorative
+  tb: News
+  fa: newspaper
 Number:
   category: decorative
   tb: Hash

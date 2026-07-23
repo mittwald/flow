@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IllustratedMessage from "../IllustratedMessage";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
@@ -45,13 +44,15 @@ export const WithActionGroup: Story = {
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />
-      <Heading>No apps installed</Heading>
-      <Text>Create your first app to start working on your website.</Text>
+      <Heading>No starships docked</Heading>
+      <Text>
+        Add your first starship to begin your mission across the galaxy.
+      </Text>
       <ActionGroup>
         <Button variant="soft" color="secondary">
           Go back
         </Button>
-        <Button>Create app</Button>
+        <Button>Add starship</Button>
       </ActionGroup>
     </IllustratedMessage>
   ),
@@ -64,7 +65,7 @@ export const WithProgressBar: Story = {
   render: (props) => (
     <IllustratedMessage {...props}>
       <IconApp />
-      <Heading>App is installing</Heading>
+      <Heading>Droid is booting up</Heading>
       <Text>This can take a couple of minutes.</Text>
       <ProgressBar
         value={500}

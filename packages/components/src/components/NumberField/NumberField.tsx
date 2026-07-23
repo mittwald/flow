@@ -1,6 +1,6 @@
 import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "../FormField/FormField.module.scss";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
 import { PropsContextProvider } from "@/lib/propsContext";

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
@@ -23,7 +22,7 @@ const meta: Meta<typeof TimeField> = {
   },
   render: (props) => (
     <TimeField onChange={action("onChange")} {...props}>
-      <Label>Time</Label>
+      <Label>Departure time</Label>
     </TimeField>
   ),
 };
@@ -37,8 +36,8 @@ export const Default: Story = {};
 export const WithFieldDescription: Story = {
   render: (props) => (
     <TimeField {...props}>
-      <Label>Time</Label>
-      <FieldDescription>Enter a time</FieldDescription>
+      <Label>Departure time</Label>
+      <FieldDescription>Enter the departure time</FieldDescription>
     </TimeField>
   ),
 };
@@ -46,7 +45,7 @@ export const WithFieldDescription: Story = {
 export const WithDefaultValue: Story = {
   render: (props) => (
     <TimeField {...props} defaultValue={new Time(11, 45)}>
-      <Label>Time</Label>
+      <Label>Departure time</Label>
     </TimeField>
   ),
 };
@@ -54,8 +53,8 @@ export const WithDefaultValue: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <TimeField {...props} isInvalid isRequired>
-      <Label>Time</Label>
-      <FieldError>Time is required</FieldError>
+      <Label>Departure time</Label>
+      <FieldError>Departure time is required</FieldError>
     </TimeField>
   ),
 };
@@ -63,7 +62,7 @@ export const WithFieldError: Story = {
 export const MinMaxValue: Story = {
   render: (props) => (
     <TimeField minValue={new Time(8, 0)} maxValue={new Time(16, 0)} {...props}>
-      <Label>Time</Label>
+      <Label>Departure time</Label>
     </TimeField>
   ),
 };

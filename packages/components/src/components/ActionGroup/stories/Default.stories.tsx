@@ -17,7 +17,7 @@ const meta: Meta<typeof ActionGroup> = {
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>
-        <Button color="accent">Create customer</Button>
+        <Button color="accent">Recruit pilot</Button>
       </Action>
       <Action>
         <Button slot="abort" variant="soft" color="secondary">
@@ -34,6 +34,15 @@ type Story = StoryObj<typeof ActionGroup>;
 
 export const Default: Story = {};
 
+export const Size: Story = {
+  render: (props) => (
+    <ActionGroup {...props} size="s">
+      <Link slot="abort">Forgot password?</Link>
+      <Button color="accent">Login</Button>
+    </ActionGroup>
+  ),
+};
+
 export const PrimaryActionOnly: Story = {
   render: (props) => (
     <ActionGroup {...props}>
@@ -46,7 +55,7 @@ export const WithSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="primary" color="accent">
-        Add email address
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more
@@ -62,7 +71,7 @@ export const WithExtraSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="primary" color="accent">
-        Add email address
+        Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
         Save and add more
@@ -72,6 +81,20 @@ export const WithExtraSecondaryAction: Story = {
       </Button>
       <Button slot="abort" variant="soft" color="secondary">
         Abort
+      </Button>
+    </ActionGroup>
+  ),
+};
+
+export const PreserveOrder: Story = {
+  render: (props) => (
+    <ActionGroup {...props} preserveOrder>
+      <Button color="secondary" variant="soft">
+        Abort
+      </Button>
+      <Button color="accent">Create customer</Button>
+      <Button color="secondary" variant="soft">
+        Save as draft
       </Button>
     </ActionGroup>
   ),

@@ -5,7 +5,7 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { all, type CountryData } from "country-codes-list";
-import { Option } from "@/components/Option";
+import OptionView from "@/views/OptionView";
 import { uniqueBy } from "remeda";
 
 export type Country = CountryData & {
@@ -48,13 +48,13 @@ export const CountryOptions: FC<CountryOptionsProps> = (props) => {
       .filter(filterBy)
       .sort(sortBy)
       .map((country) => (
-        <Option
+        <OptionView
           key={country.countryNameEn}
           value={country.countryCode}
           textValue={country.name}
         >
           {country.name}
-        </Option>
+        </OptionView>
       ));
   }, [stringFormatter]);
 };

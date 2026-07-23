@@ -1,4 +1,4 @@
-.header.header {
+.header {
   backdrop-filter: blur(5px);
   background-color: color-mix(
     in srgb,
@@ -8,6 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  padding-top: var(--size-px--s);
 }
 
 .headerNavigation {
@@ -19,7 +20,14 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  padding-inline: calc(var(--size-px--xl) + var(--size-px--l));
+  padding-inline: var(--size-px--xl);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.brand {
+  position: relative;
+  display: flex;
   align-items: center;
 }
 
@@ -63,7 +71,7 @@
 }
 
 [data-theme="dark"] {
-  .header.header {
+  .header {
     background-color: color-mix(in srgb, #121518 40%, transparent);
   }
 }
@@ -73,7 +81,11 @@
     padding-inline: var(--size-px--m);
   }
 
+  .mobileNavigation {
+    padding-block: var(--size-px--s);
+  }
+
   .logo {
-    width: 80px !important;
+    width: 60px !important;
   }
 }

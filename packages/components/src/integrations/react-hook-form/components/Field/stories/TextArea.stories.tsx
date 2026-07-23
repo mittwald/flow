@@ -52,13 +52,13 @@ const meta: Meta<typeof Field> = {
         <Section>
           <Field name="message">
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
           <Field name="messageDefaultValue">
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
@@ -67,13 +67,13 @@ const meta: Meta<typeof Field> = {
             rules={{ required: "Please enter your message" }}
           >
             <TextArea>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 
           <Field name="messageMaxLength">
             <TextArea maxLength={100} showCharacterCount>
-              <Label>Message</Label>
+              <Label>Transmission</Label>
             </TextArea>
           </Field>
 

@@ -1,4 +1,4 @@
-import React, { type FC, Suspense } from "react";
+import { type FC, Suspense } from "react";
 import { Tooltip, type TooltipProps } from "recharts";
 import type {
   NameType,
@@ -45,7 +45,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
           return null;
         }
 
-        const className = clsx(props.wrapperClassName, styles.tooltip);
+        const className = clsx(props.wrapperClassName, styles.chartTooltip);
         return (
           <div className={className}>
             <Suspense fallback={<LoadingSpinnerView />}>

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import styles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
 import {
   IconBold,

@@ -16,8 +16,8 @@ export const InlineCode: FC<InlineCodeProps> = (props) => {
 
   const rootClassName = clsx(
     styles.inlineCode,
-    className,
     isAlphaColor(color) && styles[color],
+    className,
   );
 
   return (

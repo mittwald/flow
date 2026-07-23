@@ -24,12 +24,12 @@ export default function Page() {
                 console.log("Clicked");
               }}
             >
-              <Text>Remote notification</Text>
+              <Text>Transmission received from Rebel command</Text>
             </Notification>,
           );
         }}
       >
-        Trigger
+        Send transmission
       </Button>
       <Button
         onPress={() => {
@@ -41,7 +41,7 @@ export default function Page() {
           }
         }}
       >
-        Close all
+        Dismiss all
       </Button>
     </Flex>
   );

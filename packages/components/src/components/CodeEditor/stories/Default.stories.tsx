@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { CodeEditor } from "@/components/CodeEditor";
 
 const meta: Meta<typeof CodeEditor> = {
@@ -18,7 +17,7 @@ const meta: Meta<typeof CodeEditor> = {
         "  render: (props) => (\n" +
         "    <CodeEditor\n" +
         "      value={\n" +
-        '        "const foo = () => {\\n" +\n' +
+        '        "const jedi = () => {\\n" +\n' +
         '        "}"\n' +
         "      }\n" +
         '      language={"tsx"}\n' +

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { FileCardList } from "@/components/FileCardList";
 import FileCard from "@/components/FileCard";
 
@@ -11,10 +10,10 @@ const meta: Meta<typeof FileCardList> = {
   },
   render: (props) => (
     <FileCardList {...props}>
-      <FileCard name="file1.txt" />
-      <FileCard name="file2.txt" />
-      <FileCard name="file3.txt" />
-      <FileCard type="image/jpg" name="image.jpg" />
+      <FileCard name="rebel-briefing.txt" />
+      <FileCard name="mission-log.txt" />
+      <FileCard name="hyperspace-route.txt" />
+      <FileCard type="image/jpg" name="millennium-falcon.jpg" />
     </FileCardList>
   ),
 };
