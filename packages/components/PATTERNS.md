@@ -124,10 +124,10 @@ and consistency enforced by tooling, not maintained by hand.
   `src/components/Button/Button.tsx:112`
   - ✓ root styling combines base, variants, state, and consumer classes.
   - ✗ a single invariant class → pass it directly.
-- **Readable JSX via extracted expressions** `[undocumented]` — lift computed
-  nodes (icon, label, tooltip text) and non-trivial conditionals into named
-  consts above the `return`; the returned tree stays scannable — no large inline
-  ternaries, no deep logic in the markup. `src/components/Button/Button.tsx:168`
+- **Readable JSX via extracted expressions** — lift computed nodes (icon, label,
+  tooltip text) and non-trivial conditionals into named consts above the
+  `return`; the returned tree stays scannable — no large inline ternaries, no
+  deep logic in the markup. `src/components/Button/Button.tsx:168`
   - ✓ markup mixes conditional content or several computed values.
   - ✗ a single self-evident inline expression → keep it inline.
 - **Helpers outside the component** `[undocumented]` — hookless pure
