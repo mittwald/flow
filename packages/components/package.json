@@ -30,6 +30,10 @@
       "types": "./dist/types/integrations/@mittwald/password-tools-js/index.d.ts",
       "import": "./dist/js/password-tools.mjs"
     },
+    "./phone-tools": {
+      "types": "./dist/types/integrations/libphonenumber-js/index.d.ts",
+      "import": "./dist/js/phone-tools.mjs"
+    },
     "./all.css": "./dist/css/all.css",
     "./all-layered.css": "./dist/css/all-layered.css",
     "./doc-properties": "./dist/assets/doc-properties.json"
@@ -94,6 +98,7 @@
     "html-react-parser": "^6.1.3",
     "intl-messageformat": "^11.2.8",
     "invariant": "^2.2.4",
+    "libphonenumber-js": "^1.13.8",
     "luxon": "^3.7.2",
     "mobx": "^6.16.1",
     "mobx-react-lite": "^4.1.1",
