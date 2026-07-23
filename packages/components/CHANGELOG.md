@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.938](https://github.com/mittwald/flow/compare/0.2.0-alpha.937...0.2.0-alpha.938) (2026-07-23)
+
+### Performance Improvements
+
+* **List:** memoize items so they don't re-render when loading more ([#2677](https://github.com/mittwald/flow/issues/2677)) ([deb547a](https://github.com/mittwald/flow/commit/deb547a07849ce89a59bca9aab7e3a5e33812b54))
+
 # [0.2.0-alpha.937](https://github.com/mittwald/flow/compare/0.2.0-alpha.936...0.2.0-alpha.937) (2026-07-22)
 
 ### Bug Fixes
