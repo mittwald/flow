@@ -522,7 +522,7 @@ importers:
         version: 2.10.0(react@19.2.7)
       react-easy-crop:
         specifier: ^6.0.2
-        version: 6.0.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.2.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-hotkeys-hook:
         specifier: ^5.3.3
         version: 5.3.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -8317,8 +8317,8 @@ packages:
     peerDependencies:
       react: ^19.2.0
 
-  react-easy-crop@6.0.2:
-    resolution: {integrity: sha512-nY/YiNEuRjc851+/PsOR6Q7XoshmnXMl+oEOsxp3Ah0PrhECi5388jjRnHwsTFx3W0o2zPwvq85oljzUqZNpEw==}
+  react-easy-crop@6.2.2:
+    resolution: {integrity: sha512-b0HOicSvLYoNk1yvZTwjH8sNjF5uD9xLtWrSDnv+fx1dXTbwd8bNLQaP6gjXw//A+tni9Mw5KDmPNOEjKF55NQ==}
     peerDependencies:
       react: ^19.2.0
       react-dom: ^19.2.0
@@ -17947,7 +17947,7 @@ snapshots:
       react: 19.2.7
       scheduler: 0.27.0
 
-  react-easy-crop@6.0.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  react-easy-crop@6.2.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       normalize-wheel: 1.0.1
       react: 19.2.7
