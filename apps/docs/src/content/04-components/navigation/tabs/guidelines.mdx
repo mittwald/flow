@@ -5,14 +5,9 @@
 Achte bei der Verwendung von Tabs darauf, dass ...
 
 - innerhalb eines Tabs nur thematisch eng verwandter Content gruppiert wird.
-- nie mehrere Tabs gleichzeitig relevant für eine Aufgabe sind. Alle relevanten
-  Informationen müssen innerhalb eines Tabs direkt zugänglich sein.
-- idealerweise nicht mehr als sechs Tabs verwendet werden, um Übersichtlichkeit
-  zu gewährleisten.
 - die Reihenfolge nach Wichtigkeit oder Häufigkeit der Nutzung erfolgt.
 - jeder Tab eigenständig verständlich ist und eine kurze und deutliche
   Beschriftung hat.
-- kein Content in mehreren Tabs gedoppelt wird.
 - sie nicht zur Navigation eingesetzt werden – Tabs schalten ausschließlich
   Inhalte innerhalb derselben Seite um, ohne zu einer anderen Seite bzw. URL zu
   navigieren, und ersetzen keine Navigation.
@@ -25,10 +20,30 @@ Achte bei der Verwendung von Tabs darauf, dass ...
 Verwende Tabs, um ...
 
 - komplexe Inhalte in kleinere, übersichtlichere Ansichten zu gliedern.
-- umfangreiche Detailseiten in mehrere aufgaben- oder themenbezogene Abschnitte
-  aufzuteilen.
 
 Verwende stattdessen
 [TabNavigation](/04-components/navigation/tab-navigation/overview), wenn
 zwischen gleichrangigen Unterbereichen navigiert wird und dabei eine andere
 Seite bzw. URL geladen wird.
+
+## Tabs vs. TabNavigation
+
+Flow bietet mit Tabs und der
+[TabNavigation](/04-components/navigation/tab-navigation/overview) zwei ähnlich
+aussehende Components. Die Cards unter dem Text geben hilfreiche Anhaltspunkte
+zur Unterscheidung.
+
+<DoAndDont>
+  <Info heading="Verwende Tabs, um z. B. ...">
+    - Inhalte innerhalb derselben Seite umzuschalten, ohne zu navigieren.
+    - zusammengehörige Sections in klar abgegrenzte Ansichten zu gliedern.
+    - den Content zu wechseln, ohne dass sich die URL ändert.
+  </Info>
+
+  <Info heading="Verwende eine TabNavigation, um z. B. ...">
+    - zwischen gleichrangigen Unterseiten zu navigieren.
+    - zu einer anderen Seite bzw. URL zu wechseln.
+    - eine platzsparende, responsive Navigation bereitzustellen, die bei wenig
+      Platz automatisch in ein ContextMenu zusammenklappt.
+  </Info>
+</DoAndDont>
