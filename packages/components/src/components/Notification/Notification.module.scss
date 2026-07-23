@@ -14,9 +14,9 @@
     top: 0;
     bottom: 0;
     width: var(--notification--border-x-start-width);
-    left: calc(var(--size-px--xxxs) * -1);
-    border-top-left-radius: var(--notification--corner-radius);
-    border-bottom-left-radius: var(--notification--corner-radius);
+    inset-inline-start: calc(var(--size-px--xxxs) * -1);
+    border-start-start-radius: var(--notification--corner-radius);
+    border-end-start-radius: var(--notification--corner-radius);
   }
 
   @extend .info;
@@ -65,7 +65,7 @@
   .close {
     position: absolute;
     top: var(--notification--padding);
-    right: var(--notification--padding);
+    inset-inline-end: var(--notification--padding);
   }
 
   /* Status */

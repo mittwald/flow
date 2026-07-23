@@ -12,9 +12,9 @@
     padding: var(--kbd--padding);
     padding-top: var(--kbd--padding-y-start);
     border-radius: var(--kbd--corner-radius);
-    border-left: var(--kbd--inner-shadow-size-x) solid
+    border-inline-start: var(--kbd--inner-shadow-size-x) solid
       var(--kbd--inner-shadow-color--default);
-    border-right: var(--kbd--inner-shadow-size-x) solid
+    border-inline-end: var(--kbd--inner-shadow-size-x) solid
       var(--kbd--inner-shadow-color--default);
     box-shadow: inset 0 calc(var(--kbd--inner-shadow-size-y-end) * -1) 0
       var(--kbd--inner-shadow-color--default);
@@ -30,8 +30,8 @@
     &.soft {
       color: var(--kbd--content-color--disabled);
       background-color: var(--kbd--background-color--disabled);
-      border-left-color: var(--kbd--inner-shadow-color--disabled);
-      border-right-color: var(--kbd--inner-shadow-color--disabled);
+      border-inline-start-color: var(--kbd--inner-shadow-color--disabled);
+      border-inline-end-color: var(--kbd--inner-shadow-color--disabled);
       box-shadow: inset 0 calc(var(--kbd--inner-shadow-size-y-end) * -1) 0
         var(--kbd--inner-shadow-color--disabled);
     }

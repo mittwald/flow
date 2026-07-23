@@ -10,7 +10,7 @@
       @include formControl.formControl();
 
       grid-area: input;
-      padding-right: calc(
+      padding-inline-end: calc(
         var(--button--padding-icon-only) * 2 + var(--icon--size--s)
       );
     }

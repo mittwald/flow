@@ -60,7 +60,7 @@
     --origin: translateX(var(--size-px--s--negative));
 
     &:has(.tip) {
-      margin-left: var(--popover--tip-height);
+      margin-inline-start: var(--popover--tip-height);
     }
 
     .tip svg {
@@ -72,7 +72,7 @@
     --origin: translateX(var(--size-px--s));
 
     &:has(.tip) {
-      margin-right: var(--popover--tip-height);
+      margin-inline-end: var(--popover--tip-height);
     }
 
     .tip svg {

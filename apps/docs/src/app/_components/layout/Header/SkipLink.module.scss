@@ -1,7 +1,7 @@
 .skipLink {
   position: absolute;
   top: 100%;
-  left: 0;
+  inset-inline-start: 0;
   margin-top: var(--size-px--s);
   z-index: 1;
   white-space: nowrap;

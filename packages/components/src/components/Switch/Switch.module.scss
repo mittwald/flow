@@ -41,7 +41,7 @@
     transform: translateX(0);
     position: absolute;
     top: var(--switch--track-padding);
-    left: var(--switch--track-padding);
+    inset-inline-start: var(--switch--track-padding);
   }
 
   .label {

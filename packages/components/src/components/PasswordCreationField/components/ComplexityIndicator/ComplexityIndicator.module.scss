@@ -4,7 +4,7 @@
   width: 100%;
   position: absolute;
   bottom: 0;
-  left: 0;
+  inset-inline-start: 0;
   height: var(--progress-bar--height--s);
   overflow: hidden;
   border-top: var(--form-control--border-width) solid
@@ -25,14 +25,14 @@
     display: block;
     height: 100%;
     border-radius: calc(var(--form-control--corner-radius) - 1px);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
     transition:
       width #{complexity.$animation-width-responsiveness},
       background-color #{complexity.$animation-background-color-change};
 
     &.running {
-      border-bottom-right-radius: 0;
+      border-end-end-radius: 0;
     }
 
     &.bar-background-status-danger {

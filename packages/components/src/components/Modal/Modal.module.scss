@@ -155,12 +155,12 @@
 
   [role="dialog"] {
     height: 100%;
-    border-top-left-radius: var(--modal--corner-radius);
-    border-bottom-left-radius: var(--modal--corner-radius);
+    border-start-start-radius: var(--modal--corner-radius);
+    border-end-start-radius: var(--modal--corner-radius);
   }
 
   > div {
-    padding-left: var(--size-px--m);
+    padding-inline-start: var(--size-px--m);
 
     > div {
       justify-content: flex-end;
@@ -185,8 +185,7 @@
     }
 
     > div {
-      padding-left: 0;
-      padding-right: var(--size-px--m);
+      padding-inline: 0 var(--size-px--m);
 
       > div {
         justify-content: flex-start;
@@ -221,8 +220,8 @@
       width: 100%;
       padding: unset;
       overflow: hidden;
-      border-top-left-radius: var(--modal--corner-radius);
-      border-top-right-radius: var(--modal--corner-radius);
+      border-start-start-radius: var(--modal--corner-radius);
+      border-start-end-radius: var(--modal--corner-radius);
       pointer-events: all;
 
       &[data-entering] {

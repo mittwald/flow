@@ -15,7 +15,7 @@
         transparent var(--mask-cutout),
         white 0
       );
-      margin-right: var(--mask-offset);
+      margin-inline-end: var(--mask-offset);
     }
 
     outline-offset: calc(var(--size-px--xxs) * -1);

@@ -67,8 +67,8 @@
       }
 
       & :global(.cm-gutters) {
-        border-top-left-radius: calc(var(--form-control--corner-radius) - 1px);
-        border-bottom-left-radius: calc(
+        border-start-start-radius: calc(var(--form-control--corner-radius) - 1px);
+        border-end-start-radius: calc(
           var(--form-control--corner-radius) - 1px
         );
       }

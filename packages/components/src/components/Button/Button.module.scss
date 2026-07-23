@@ -68,7 +68,7 @@
   .counterBadge {
     position: absolute;
     top: calc(var(--size-px--xxs) * -1);
-    right: calc(var(--size-px--xxs) * -1);
+    inset-inline-end: calc(var(--size-px--xxs) * -1);
   }
 
   /* States */

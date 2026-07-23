@@ -23,8 +23,8 @@
 
     & {
       border-bottom: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
     }
   }
 
@@ -57,8 +57,8 @@
       var(--form-control--padding-y) - var(--form-control--border-width)
     );
     padding-inline: var(--form-control--padding-x);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
   }
 
   &.mode-editor {
@@ -74,7 +74,7 @@
       pointer-events: none;
       width: 1px;
       height: 1px;
-      left: 0;
+      inset-inline-start: 0;
     }
   }
 
