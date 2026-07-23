@@ -92,7 +92,13 @@ jobs:
       packages: read
       pull-requests: write
 
-    if: github.event_name == 'pull_request'
+    # Preview deploy needs the MITTWALD_* secrets, which GitHub withholds from
+    # Dependabot-triggered runs and from forks. Skip there so those PRs don't
+    # fail on missing secrets (the build job above still validates the images).
+    if: >
+      github.event_name == 'pull_request' &&
+      github.actor != 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       - name: Checkout repository
