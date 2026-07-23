@@ -175,7 +175,7 @@ importers:
         version: 2.0.3
       cronstrue:
         specifier: ^3.14.0
-        version: 3.14.0
+        version: 3.24.0
       dot-prop:
         specifier: ^10.1.0
         version: 10.1.0
@@ -5607,8 +5607,8 @@ packages:
   cron-time-generator@2.0.3:
     resolution: {integrity: sha512-02Ab5okFEMpcDernEwUXY16hLCryUxATAFGYyzyLymin0xl/udC50LkBFHX+qOeXnwXMRyK+uH4doXzUSpOoQA==}
 
-  cronstrue@3.14.0:
-    resolution: {integrity: sha512-XnW4vuK/jPJjmTyDWiej1Zq36Od7ITwxaV2O1pzHZuyMVvdy7NAvyvIBzybt+idqSpfqYuoDG7uf/ocGtJVWxA==}
+  cronstrue@3.24.0:
+    resolution: {integrity: sha512-t/Ji3Ur2c/pzhIAWNwC0ftl3JAE4dLfCjAdZoTZXmPDZwcispnS1PaMcMS4OmIIXyIVouAz+yw+mfQiE3hz5OQ==}
     hasBin: true
 
   cross-spawn@7.0.6:
@@ -14621,7 +14621,7 @@ snapshots:
 
   cron-time-generator@2.0.3: {}
 
-  cronstrue@3.14.0: {}
+  cronstrue@3.24.0: {}
 
   cross-spawn@7.0.6:
     dependencies:
