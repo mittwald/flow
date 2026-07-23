@@ -20,7 +20,15 @@ updates:
     directory: "/apps/docs"
     schedule:
       interval: weekly
+    # Stay on the Node 24 LTS base image; take 24.x patches but not the jump to
+    # a non-LTS major (25/26). Bump the major deliberately once 26 goes LTS.
+    ignore:
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
     directory: "/packages/components"
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
