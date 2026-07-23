@@ -24,8 +24,27 @@ const slugify = (value: string): string =>
     .replace(/^-|-$/g, "")
     .toLowerCase();
 
-const referencePathFor = (testName: string, description: string): string =>
-  `${__CROSS_VERSION_REF_DIR__}/${slugify(`${testName}-${description}`)}.html`;
+// The reference file is keyed by the SOURCE FILE too, not just the test name +
+// description. Two reused tests in different files can share a name — e.g. both
+// Checkbox and CheckboxButton have a `Checkbox edge cases` test — which without
+// the file scope would collide on one ref file, so whichever wrote it last made
+// the other version-compare mismatch (a spurious, order-dependent failure).
+// This mirrors how vitest itself scopes browser screenshots per test file.
+const referencePathFor = (
+  testFile: string,
+  testName: string,
+  description: string,
+): string =>
+  `${__CROSS_VERSION_REF_DIR__}/${slugify(`${testFile}-${testName}-${description}`)}.html`;
+
+/** Basename of a test file path, without extension, for use in a ref filename. */
+const testFileKey = (testPath: string | undefined): string => {
+  if (!testPath) {
+    return "unknown";
+  }
+  const base = testPath.split(/[/\\]/).pop() ?? testPath;
+  return base.replace(/\.(browser\.)?test\.[jt]sx?$/, "");
+};
 
 // One tag per line so a structural-mismatch diff is line-oriented and readable.
 const formatTagsForDiff = (html: string): string => html.replace(/></g, ">\n<");
@@ -94,14 +113,16 @@ const setNeutralPointerPosition = async () => {
 // reaches here is expected to match.
 const testScreenshot = async (description: string): Promise<void> => {
   await setNeutralPointerPosition();
-  const testName = expect.getState().currentTestName ?? description;
+  const state = expect.getState();
+  const testName = state.currentTestName ?? description;
+  const testFile = testFileKey(state.testPath);
 
   // Compare element tree only (all attributes stripped); the current pass writes
   // the ephemeral ref, old-version passes compare against it. Wait for the
   // structure to settle first so async rendering can't cause a spurious diff.
   const html = await readStableStructure();
   await expect(html).toMatchFileSnapshot(
-    referencePathFor(testName, description),
+    referencePathFor(testFile, testName, description),
   );
 };
 
