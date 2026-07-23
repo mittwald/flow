@@ -54,12 +54,12 @@
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@next/eslint-plugin-next": "~16.2.10",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.1.1",
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2",
     "eslint": "^10.5.0",
     "glob": "^13.0.6",
-    "nx": "^22.7.5",
+    "nx": "^23.1.0",
     "react-docgen-typescript": "^2.4.0",
     "typescript": "^6.0.3"
   }
