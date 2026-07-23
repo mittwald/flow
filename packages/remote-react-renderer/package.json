@@ -19,7 +19,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
@@ -54,9 +54,9 @@
     "vite": "7.3.5",
     "vite-plugin-banner": "^0.8.1",
     "vite-plugin-checker": "^0.14.1",
-    "vite-plugin-dts": "^5.0.2",
+    "vite-plugin-dts": "^5.0.3",
     "vite-plugin-externalize-deps": "^0.10.0",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@mittwald/flow-react-components": "workspace:*",

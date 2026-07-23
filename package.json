@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "affected:test": "nx affected --targets=test:unit,test:compile",
@@ -52,7 +52,7 @@
     "eslint-plugin-unused-imports": "^4.4.1",
     "fs-jetpack": "^5.1.0",
     "nx": "^22.7.5",
-    "playwright": "^1.61.0",
+    "playwright": "^1.61.1",
     "prettier": "^3.8.4",
     "prettier-plugin-jsdoc": "^1.8.1",
     "prettier-plugin-pkgsort": "^0.3.0",

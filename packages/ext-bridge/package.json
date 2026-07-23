@@ -30,7 +30,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@mittwald/react-use-promise": "~4.2.2",
-    "axios": "^1.18.0",
+    "axios": "^1.18.1",
     "jose": "^6.2.3",
     "std-env": "^4.1.0",
     "zod": "^4.4.3"
@@ -59,9 +59,9 @@
     "typescript": "^6.0.3",
     "vite": "7.3.5",
     "vite-plugin-checker": "^0.14.1",
-    "vite-plugin-dts": "^5.0.2",
+    "vite-plugin-dts": "^5.0.3",
     "vite-plugin-externalize-deps": "^0.10.0",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "i18next": "^26.0.0",

@@ -17,12 +17,15 @@ env:
 jobs:
   update-screenshots:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     if: |
       ${{ (github.event.label.name == 'update-screenshots') && (github.head_ref != github.event.repository.default_branch) }}
 
     # one at a time per branch
     concurrency:
-      group: visual-regression-screenshots@${{ github.head_ref }}@${{ github.event.label.name }}
+      group:
+        visual-regression-screenshots@${{ github.head_ref }}@${{
+        github.event.label.name }}
       cancel-in-progress: true
 
     permissions:
@@ -31,7 +34,7 @@ jobs:
 
     steps:
       - name: Remove label if exists
-        uses: actions/github-script@v7
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
           script: |
@@ -53,7 +56,7 @@ jobs:
             }
 
       - name: Checkout selected branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
@@ -64,13 +67,22 @@ jobs:
           git config --global user.email "${{ env.AUTHOR_EMAIL }}"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
+          cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - run: pnpm test:browser:prepare --only-shell
 
@@ -103,25 +115,32 @@ jobs:
 
       - name: Push changes
         if: steps.check_changes.outputs.changes == 'true'
-        run: git push origin ${{ github.head_ref }}
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: git push origin "$HEAD_REF"
 
       - name: Summary
+        env:
+          CHANGES: ${{ steps.check_changes.outputs.changes }}
+          CHANGED_COUNT: ${{ steps.check_changes.outputs.changed_count }}
+          CHANGED_FILES: ${{ steps.check_changes.outputs.changed_files }}
+          HEAD_REF: ${{ github.head_ref }}
         run: |
-          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
-            echo "### 📸 Visual Regression Screenshots Updated" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Successfully updated **${{ steps.check_changes.outputs.changed_count }}** screenshot(s) on \`${{ github.head_ref }}\`" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "#### Changed Files:" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-            echo "${{ steps.check_changes.outputs.changed_files }}" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "✅ The updated screenshots have been committed and pushed. Your visual regression baseline is now up to date!" >> $GITHUB_STEP_SUMMARY
+          if [[ "$CHANGES" == "true" ]]; then
+            echo "### 📸 Visual Regression Screenshots Updated" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Successfully updated **$CHANGED_COUNT** screenshot(s) on \`$HEAD_REF\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "#### Changed Files:" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "$CHANGED_FILES" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "✅ The updated screenshots have been committed and pushed. Your visual regression baseline is now up to date!" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "### ℹ️ No Screenshot Updates Required" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "The visual regression test command ran successfully but no screenshots needed updating." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "All screenshots are already up to date! 🎉" >> $GITHUB_STEP_SUMMARY
+            echo "### ℹ️ No Screenshot Updates Required" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "The visual regression test command ran successfully but no screenshots needed updating." >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "All screenshots are already up to date! 🎉" >> "$GITHUB_STEP_SUMMARY"
           fi

@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      dev-dependencies:
+        dependency-type: development
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+  - package-ecosystem: docker
+    directory: "/apps/docs"
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: "/packages/components"
+    schedule:
+      interval: weekly
