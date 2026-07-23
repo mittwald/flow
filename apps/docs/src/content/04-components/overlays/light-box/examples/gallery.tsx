@@ -31,7 +31,7 @@ export default () => {
           <LightBox>
             <LightBoxGallery defaultIndex={index}>
               {images.map((src) => (
-                <LightBoxGalleryItem>
+                <LightBoxGalleryItem key={src}>
                   <Image src={src} />
                   <ActionGroup>
                     <Button aria-label="Herunterladen">

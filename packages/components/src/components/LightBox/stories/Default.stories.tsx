@@ -113,7 +113,7 @@ export const WithGallery: Story = {
           <LightBox>
             <LightBoxGallery defaultIndex={index}>
               {images.map((src) => (
-                <LightBoxGalleryItem>
+                <LightBoxGalleryItem key={src}>
                   <Image src={src} />
                   <ActionGroup>
                     <Button>
