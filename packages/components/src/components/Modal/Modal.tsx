@@ -18,6 +18,7 @@ import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanv
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
+import { useVirtualKeyboardVisible } from "@/lib/hooks/dom/useVirtualKeyboardVisible";
 import locales from "./locales/*.locale.json";
 
 type SupportedOverlayProps = Pick<
@@ -68,10 +69,16 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
 
+  // On mobile the header/footer are docked (sticky) while at rest, but flow
+  // normally while the on-screen keyboard is open so the content gets the full
+  // available space (see Modal.module.scss). #2423
+  const keyboardVisible = useVirtualKeyboardVisible();
+
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
     offCanvasOrientation === "left" && styles["left"],
+    keyboardVisible && styles.keyboardVisible,
     className,
   );
 
