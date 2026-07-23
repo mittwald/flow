@@ -17,7 +17,6 @@ import {
     <TableColumn width={160}>Name</TableColumn>
     <TableColumn width="25%">Type</TableColumn>
     <TableColumn>Default</TableColumn>
-    <TableColumn>Description</TableColumn>
   </TableHeader>
   <TableBody>
     <TableRow>
@@ -28,7 +27,6 @@ import {
         primary | accent | secondary | danger
       </TableCell>
       <TableCell>primary</TableCell>
-      <TableCell>The color of the button</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
@@ -36,7 +34,6 @@ import {
       </TableCell>
       <TableCell>plain | solid | soft</TableCell>
       <TableCell>solid</TableCell>
-      <TableCell>The variant of the button</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>
@@ -44,7 +41,6 @@ import {
       </TableCell>
       <TableCell>m | s</TableCell>
       <TableCell>m</TableCell>
-      <TableCell>The size of the button</TableCell>
     </TableRow>
   </TableBody>
 </Table>;
