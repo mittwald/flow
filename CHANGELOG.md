@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.939](https://github.com/mittwald/flow/compare/0.2.0-alpha.938...0.2.0-alpha.939) (2026-07-23)
+
+### Bug Fixes
+
+* **remote-react-components:** scope cross-version refs per test file ([#2688](https://github.com/mittwald/flow/issues/2688)) ([65c3cc5](https://github.com/mittwald/flow/commit/65c3cc50757334a2ce62bea6f68bd80ed6a0d478))
+
 # [0.2.0-alpha.938](https://github.com/mittwald/flow/compare/0.2.0-alpha.937...0.2.0-alpha.938) (2026-07-23)
 
 ### Performance Improvements
