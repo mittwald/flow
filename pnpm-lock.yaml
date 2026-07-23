@@ -483,7 +483,7 @@ importers:
         version: 4.0.2
       country-codes-list:
         specifier: ^2.0.0
-        version: 2.0.0
+        version: 2.1.0
       dot-prop:
         specifier: ^10.1.0
         version: 10.1.0
@@ -5582,8 +5582,8 @@ packages:
       typescript:
         optional: true
 
-  country-codes-list@2.0.0:
-    resolution: {integrity: sha512-KZqq/LBdCD76hQCa6nOx0bA/nIjYly1OtV8+Bbt/4SW+mJEqGk7oZHjUj7PRrV0gXJJKs6Tv2cIntFdofBByvA==}
+  country-codes-list@2.1.0:
+    resolution: {integrity: sha512-YKZY8roDLQyG3VKcDRMRvtsO6/s/XUjEpEyAU/LkPEaioc65G4hrzwkmR6PpNY9dzbduw2i5LcHM9jwbA8zEng==}
 
   create-ecdh@4.0.4:
     resolution: {integrity: sha512-mf+TCx8wWc9VpuxfP2ht0iSISLZnt0JgWlrOKZiNqyUZWnjIaCIVNQArMHnCZKfEYRg6IM7A+NeJoN8gf/Ws0A==}
@@ -14587,7 +14587,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  country-codes-list@2.0.0: {}
+  country-codes-list@2.1.0: {}
 
   create-ecdh@4.0.4:
     dependencies:
