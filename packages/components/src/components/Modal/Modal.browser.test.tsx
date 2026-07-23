@@ -2,6 +2,8 @@ import Action from "@/components/Action";
 import ActionGroup from "@/components/ActionGroup";
 import Button from "@/components/Button";
 import Content from "@/components/Content";
+import Heading from "@/components/Heading";
+import Label from "@/components/Label";
 import ModalTrigger from "@/components/Modal/components/ModalTrigger";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
@@ -16,7 +18,7 @@ import { resetFlags } from "@/flags";
 import { useModalController } from "@/lib/controller";
 import { useForm } from "react-hook-form";
 import { render } from "vitest-browser-react";
-import { userEvent } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 import { Render } from "../public";
 import { commands } from "vitest/browser";
 import { sleep } from "@/lib/promises/sleep";
@@ -433,5 +435,49 @@ test("unrelated background nodes stay isolated while a modal is open", async () 
     expect(background.hasAttribute("data-react-aria-top-layer")).toBe(false);
   } finally {
     background.remove();
+  }
+});
+
+test("mobile Modal is a single scroll container with sticky header and footer", async () => {
+  try {
+    await page.viewport(375, 500);
+
+    await render(
+      <Modal isOpen>
+        <Heading>New Squadron</Heading>
+        <Content>
+          {Array.from({ length: 12 }, (_, index) => (
+            <TextField key={index}>
+              <Label>Pilot {index + 1}</Label>
+            </TextField>
+          ))}
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button>Create squadron</Button>
+          </Action>
+        </ActionGroup>
+      </Modal>,
+    );
+
+    const dialog = document.querySelector('[role="dialog"]') as HTMLElement;
+    const header = dialog.querySelector(
+      '[class*="modal--header"]',
+    ) as HTMLElement;
+    const footer = dialog.querySelector(
+      '[class*="action-group"]',
+    ) as HTMLElement;
+
+    // the content overflows, and the dialog itself is the scroll container
+    await vitest.waitFor(() => {
+      expect(dialog.scrollHeight).toBeGreaterThan(dialog.clientHeight);
+    });
+    expect(getComputedStyle(dialog).overflowY).toBe("auto");
+
+    // at rest the header sticks to the top and the footer to the bottom
+    expect(getComputedStyle(header).position).toBe("sticky");
+    expect(getComputedStyle(footer).position).toBe("sticky");
+  } finally {
+    await page.viewport(1280, 720);
   }
 });

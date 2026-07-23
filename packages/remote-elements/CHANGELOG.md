@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
+
+### Features
+
+* **Table:** add configurable column widths ([#2682](https://github.com/mittwald/flow/issues/2682)) ([c0b9a45](https://github.com/mittwald/flow/commit/c0b9a45a89f75246cead39a940a8e23d65acf160))
+
+# [0.2.0-alpha.939](https://github.com/mittwald/flow/compare/0.2.0-alpha.938...0.2.0-alpha.939) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.938](https://github.com/mittwald/flow/compare/0.2.0-alpha.937...0.2.0-alpha.938) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.937](https://github.com/mittwald/flow/compare/0.2.0-alpha.936...0.2.0-alpha.937) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.936](https://github.com/mittwald/flow/compare/0.2.0-alpha.935...0.2.0-alpha.936) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.935](https://github.com/mittwald/flow/compare/0.2.0-alpha.934...0.2.0-alpha.935) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

@@ -37,6 +37,8 @@ export const Items: FC = () => {
       key={item.id}
       data={item.data}
       id={item.id}
+      list={list}
+      isTile={tiles}
       triggerRef={
         list.infiniteScroll && index === triggerIndex ? triggerRef : undefined
       }

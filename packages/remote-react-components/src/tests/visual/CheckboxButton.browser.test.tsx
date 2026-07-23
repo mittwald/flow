@@ -34,7 +34,7 @@ test.each(testEnvironments)(
 // current renders a flat label (verified deterministic, not a capture flake).
 // Comparable only from alpha.926; older targets skip until a newer version ships.
 test.skipIf(crossVersion({ below: "0.2.0-alpha.926" })).each(testEnvironments)(
-  "Checkbox edge cases(%s)",
+  "CheckboxButton edge cases(%s)",
   async ({
     testScreenshot,
     render,
@@ -68,6 +68,6 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.926" })).each(testEnvironments)(
       </Flex>,
     );
 
-    await testScreenshot("Checkbox edge cases");
+    await testScreenshot("CheckboxButton edge cases");
   },
 );

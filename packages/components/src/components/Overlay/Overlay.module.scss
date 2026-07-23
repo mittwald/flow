@@ -1,12 +1,17 @@
+/* Full-page backdrop behind every overlay (Modal, LightBox, …).
+   react-aria publishes two custom properties on the overlay element that this
+   package relies on: `--page-height` (full scrollable page height, used here)
+   and `--visual-viewport-height` (space above the on-screen keyboard, used by
+   Modal). Both update as the visual viewport changes. */
 .overlay {
-  background: var(--overlay--backdrop-color);
-  backdrop-filter: blur(var(--blur));
   position: fixed;
   top: 0;
   left: 0;
-  isolation: isolate;
   width: 100%;
   height: var(--page-height);
+  isolation: isolate;
+  background: var(--overlay--backdrop-color);
+  backdrop-filter: blur(var(--blur));
 
   &[data-entering] {
     animation: overlay-fade var(--transition--duration--slow);
@@ -17,6 +22,7 @@
   }
 }
 
+/* Fallback shown while suspended overlay content loads. */
 .suspense {
   padding: var(--size-px--xl);
 }
