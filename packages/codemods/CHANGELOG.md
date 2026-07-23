@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 # [0.2.0-alpha.944](https://github.com/mittwald/flow/compare/0.2.0-alpha.943...0.2.0-alpha.944) (2026-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
