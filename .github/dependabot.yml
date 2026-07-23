@@ -1,4 +1,9 @@
 version: 2
+# Only minor/patch updates are proposed automatically. Major bumps are ignored
+# across all ecosystems and upgraded deliberately by hand — majors tend to carry
+# breaking changes (build/runtime/API) that warrant a considered upgrade rather
+# than an auto-PR. To take a specific major, bump it manually (or temporarily
+# remove/relax the matching ignore).
 updates:
   - package-ecosystem: npm
     directory: "/"
@@ -8,6 +13,9 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -16,19 +24,20 @@ updates:
       actions:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
     directory: "/apps/docs"
     schedule:
       interval: weekly
-    # Stay on the Node 24 LTS base image; take 24.x patches but not the jump to
-    # a non-LTS major (25/26). Bump the major deliberately once 26 goes LTS.
     ignore:
-      - dependency-name: "node"
+      - dependency-name: "*"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
     directory: "/packages/components"
     schedule:
       interval: weekly
     ignore:
-      - dependency-name: "node"
+      - dependency-name: "*"
         update-types: ["version-update:semver-major"]
