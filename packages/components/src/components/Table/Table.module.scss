@@ -7,6 +7,10 @@
   overflow-x: auto;
 }
 
+.tableScrollArea {
+  width: 100%;
+}
+
 .table {
   border-radius: var(--table--corner-radius);
   overflow: hidden;
@@ -81,5 +85,13 @@
     .column {
       vertical-align: middle;
     }
+  }
+
+  &.layout-auto {
+    table-layout: auto;
+  }
+
+  &.layout-fixed {
+    table-layout: fixed;
   }
 }

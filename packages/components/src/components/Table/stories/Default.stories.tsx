@@ -139,3 +139,37 @@ export const HorizontallyCenteredColumns: Story = {
     </Table>
   ),
 };
+
+export const FixedColumnWidths: Story = {
+  render: (props) => (
+    <Table
+      {...props}
+      layout="fixed"
+      minWidth={550}
+      aria-label="Crew assignments"
+    >
+      <TableHeader>
+        <TableColumn width={110}>ID</TableColumn>
+        <TableColumn width="40%">Name</TableColumn>
+        <TableColumn>Role</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>YT-1300</TableCell>
+          <TableCell>Han Solo</TableCell>
+          <TableCell>Captain</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>R2</TableCell>
+          <TableCell>R2-D2</TableCell>
+          <TableCell>Astromech droid</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>TK-421</TableCell>
+          <TableCell>Luke Skywalker</TableCell>
+          <TableCell>Rescue operation</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
