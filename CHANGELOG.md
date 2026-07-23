@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.941](https://github.com/mittwald/flow/compare/0.2.0-alpha.940...0.2.0-alpha.941) (2026-07-23)
+
+### Bug Fixes
+
+* **ci:** deploy both preview apps (avoid matrix job-output clobber) ([ad4f132](https://github.com/mittwald/flow/commit/ad4f13251f212e37ef096c8ca299da1eca58cf45))
+* **ci:** report failure when preview PR comment cannot be posted ([196ca82](https://github.com/mittwald/flow/commit/196ca82a1aed6e9bc068cf6fff54414f246d3420))
+* **ci:** scope preview cleanup to the exact PR's services ([7f1deb4](https://github.com/mittwald/flow/commit/7f1deb4c984b6b8f4539aef452056a19b14296db)), closes [#1](https://github.com/mittwald/flow/issues/1)
+* **CodeBlock:** fix undefined max height in code block ([8773c73](https://github.com/mittwald/flow/commit/8773c73c7ca63cf3b69a5177712ed8a34bed4fd0))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+
 # [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
 
 ### Features

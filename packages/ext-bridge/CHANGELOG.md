@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.941](https://github.com/mittwald/flow/compare/0.2.0-alpha.940...0.2.0-alpha.941) (2026-07-23)
+
+### Bug Fixes
+
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+
 # [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
