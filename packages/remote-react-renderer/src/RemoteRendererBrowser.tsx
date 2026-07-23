@@ -56,18 +56,15 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 ) => {
   const {
     integrations = [],
-    timeoutMs = 10_000,
-    src,
-    extBridgeImplementation,
-    onNavigationStateChanged,
-    onConnected,
-    onDeprecation,
-    hostPathname,
     __remoteReceiver: remoteReceiverFromProps,
+    ...connectedProps
   } = props;
 
   const remoteComponents = useMergedComponents(integrations);
 
+  // The two branches use disjoint sets of hooks, so the connection path lives
+  // in a dedicated component. This keeps each component's hook order stable
+  // (Rules of Hooks) while preserving the exact rendering of both paths.
   if (remoteReceiverFromProps) {
     return (
       <RemoteRootRenderer
@@ -77,9 +74,39 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     );
   }
 
+  const { src } = connectedProps;
   if (!src) {
     throw new RemoteError("'src' prop is required");
   }
+
+  return (
+    <RemoteRendererConnected
+      {...connectedProps}
+      src={src}
+      remoteComponents={remoteComponents}
+    />
+  );
+};
+
+interface RemoteRendererConnectedProps extends Omit<
+  RemoteRendererBrowserProps,
+  "integrations" | "__remoteReceiver" | "src"
+> {
+  src: string;
+  remoteComponents: ReturnType<typeof useMergedComponents>;
+}
+
+const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
+  const {
+    timeoutMs = 10_000,
+    src,
+    extBridgeImplementation,
+    onNavigationStateChanged,
+    onConnected,
+    onDeprecation,
+    hostPathname,
+    remoteComponents,
+  } = props;
 
   const language = useLanguage();
   const theme = useTheme();
@@ -92,10 +119,6 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const [connectionSrc, setConnectionSrc] = useState<string | null>(null);
   const connection = useRef<HostToRemoteConnection>(undefined);
   const [remoteError, setRemoteError] = useState<string | undefined>();
-
-  if (remoteError) {
-    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
-  }
 
   const [receiver, rendererSubscriber] = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
@@ -178,12 +201,18 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
       await overallLoading();
       rendererSubscriber.abort();
     },
-    awaitLoadingPromise ? [] : null,
+    // Disabled while erroring so the error is thrown below instead of the
+    // loader suspending indefinitely.
+    awaitLoadingPromise && !remoteError ? [] : null,
     {
       loaderId: src,
       tags: [loaderResourceTag],
     },
   );
+
+  if (remoteError) {
+    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
+  }
 
   return (
     <>
