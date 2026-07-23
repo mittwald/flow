@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Log in to the Container registry
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -46,7 +46,7 @@ jobs:
       - name: Extract metadata for Docs
         id: meta-docs
         if: matrix.image_suffix == 'docs'
-        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
@@ -58,7 +58,7 @@ jobs:
       - name: Extract metadata for Storybook
         id: meta-storybook
         if: matrix.image_suffix == 'storybook'
-        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
@@ -68,11 +68,12 @@ jobs:
             type=sha
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
           file: ${{ matrix.dockerfile }}
           push: true
+          provenance: false # single-manifest image (as before v7); deploy pulls by ref
           tags:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.tags ||
             steps.meta-storybook.outputs.tags }}
@@ -98,7 +99,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
