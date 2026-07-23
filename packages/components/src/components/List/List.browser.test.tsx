@@ -484,6 +484,46 @@ describe("Infinite scroll", () => {
       .not.toBeInTheDocument();
   });
 
+  test("Already-loaded items are not re-rendered when the next batch loads", async () => {
+    const data = Array.from({ length: 9 }, (_, i) => ({ num: i }));
+    const renderCounts: Record<number, number> = {};
+
+    const loader: AsyncDataLoader<Data> = async (opts) => {
+      const offset = opts?.pagination?.offset ?? 0;
+      return {
+        data: data.slice(offset, offset + 3),
+        itemTotalCount: data.length,
+      };
+    };
+
+    await render(
+      <List aria-label="Test" batchSize={3} infiniteScroll>
+        <ListLoaderAsync<Data> manualPagination>{loader}</ListLoaderAsync>
+        <ListItem<Data> textValue={(num) => String(num)}>
+          {({ num }) => {
+            renderCounts[num] = (renderCounts[num] ?? 0) + 1;
+            return <span>Item: {num}</span>;
+          }}
+        </ListItem>
+      </List>,
+    );
+
+    await expect.element(page.getByText("Item: 2")).toBeInTheDocument();
+
+    // Baseline for items that never carry the moving infinite-scroll trigger.
+    const before0 = renderCounts[0];
+    const before1 = renderCounts[1];
+
+    // Scrolling the trigger row into view appends the next batch(es).
+    await (await page.getByText("Item: 2").element()).scrollIntoView();
+    await expect.element(page.getByText("Item: 5")).toBeInTheDocument();
+
+    // Appending items must not re-run the render of the existing ones — their
+    // memoized item components bail out on the unchanged (id, data).
+    expect(renderCounts[0]).toBe(before0);
+    expect(renderCounts[1]).toBe(before1);
+  });
+
   test("Without infiniteScroll only the first batch loads", async () => {
     await render(
       <List aria-label="Test" batchSize={3}>
