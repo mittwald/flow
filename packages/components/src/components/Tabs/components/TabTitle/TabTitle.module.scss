@@ -28,7 +28,7 @@
     inset-inline-end: 0;
     height: var(--tabs--separator-height);
     border-inline-end: var(--tabs--border-width) var(--tabs--border-style)
-      var(--tabs--border-color--default);
+      var(--tabs--border-color);
     transform: translateY(-50%);
     pointer-events: none;
     z-index: 0;

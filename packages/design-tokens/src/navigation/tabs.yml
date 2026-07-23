@@ -10,10 +10,7 @@ tabs:
   border-style:
     value: "{border-style.default}"
   border-color:
-    default:
-      value: "{form-control.border-color.default}"
-    disabled:
-      value: "{form-control.border-color.disabled}"
+    value: "{neutral-outline-border-color}"
   background-color:
     default:
       value: "{neutral-soft-background-color.default}"
@@ -34,4 +31,4 @@ tabs:
   spacing:
     value: "{size-rem.s}"
   separator-height:
-    value: "{size-px.m}"
+    value: "{size-rem.m}"

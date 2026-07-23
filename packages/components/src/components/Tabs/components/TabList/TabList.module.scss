@@ -13,7 +13,7 @@
     border-radius: var(--tabs--corner-radius);
     background-color: var(--tabs--background-color--selected);
     border: var(--tabs--border-width) var(--tabs--border-style)
-      var(--tabs--border-color--default);
+      var(--tabs--border-color);
     pointer-events: none;
     z-index: 1;
 
@@ -29,7 +29,7 @@
     background-color: var(--tabs--background-color--selected);
     border-radius: var(--tabs--corner-radius);
     border: var(--tabs--border-width) var(--tabs--border-style)
-      var(--tabs--border-color--default);
+      var(--tabs--border-color);
     width: 100%;
   }
 
