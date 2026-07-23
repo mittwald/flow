@@ -16,7 +16,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",

@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "affected:test": "nx affected --targets=test:unit,test:compile",
