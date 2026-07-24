@@ -4,7 +4,6 @@
 .box,
 .input,
 .button,
-.bar,
 .line,
 .circle,
 .text,
@@ -17,6 +16,17 @@
 
 .frame svg {
   color: var(--neutral--color--800);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.frame .iconTone svg {
+  color: inherit;
 }
 
 .stack {
@@ -35,11 +45,11 @@
 
 .input {
   align-items: center;
-  min-height: var(--size-px--xl);
   padding-inline: var(--size-px--m);
   padding-block: var(--size-px--s);
   border: 1px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--m);
+  min-height: 48px;
 }
 
 .overlay {
@@ -52,12 +62,16 @@
 }
 
 .button {
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--corner-radius--l);
+  display: flex;
+  padding: var(--size-px--m);
+  border-radius: var(--corner-radius--m);
+  min-height: 48px;
+
+  svg {
+    color: var(--neutral--color--400);
+  }
 }
 
-.bar,
 .line {
   display: block;
   width: var(--wireframe-width, 100%);

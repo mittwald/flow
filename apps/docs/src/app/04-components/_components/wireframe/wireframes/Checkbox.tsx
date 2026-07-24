@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WRow,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
@@ -10,7 +11,9 @@ import { IconCheckboxChecked } from "@mittwald/flow-react-components";
 export const CheckboxWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WRow alignItems="center" width="64%">
-      <IconCheckboxChecked />
+      <WIcon tone="800">
+        <IconCheckboxChecked />
+      </WIcon>
       <WText />
     </WRow>
   </WFrame>

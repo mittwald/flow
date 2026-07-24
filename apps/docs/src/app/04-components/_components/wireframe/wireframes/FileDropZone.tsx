@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WInput,
 } from "@/app/04-components/_components/wireframe/primitives";
 import styles from "./wireframes.module.scss";
@@ -14,7 +15,9 @@ export const FileDropZoneWireframe: FC = () => (
       justifyContent="center"
       alignItems="center"
     >
-      <IconUpload size="l" />
+      <WIcon tone="800">
+        <IconUpload size="l" />
+      </WIcon>
     </WInput>
   </WFrame>
 );

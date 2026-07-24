@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WRow,
   WStack,
   WText,
@@ -12,11 +13,15 @@ export const RadioGroupWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="80%">
       <WRow alignItems="center" width="80%">
-        <IconRadioOn />
+        <WIcon tone="800">
+          <IconRadioOn />
+        </WIcon>
         <WText />
       </WRow>
       <WRow alignItems="center" width="100%">
-        <IconRadioOff />
+        <WIcon tone="800">
+          <IconRadioOff />
+        </WIcon>
         <WText />
       </WRow>
     </WStack>

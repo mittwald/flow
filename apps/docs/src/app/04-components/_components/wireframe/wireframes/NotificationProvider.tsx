@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WOverlay,
   WRow,
   WText,
@@ -12,14 +13,18 @@ export const NotificationProviderWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WOverlay>
       <WRow>
-        <IconDanger size="s" />
+        <WIcon tone="800">
+          <IconDanger size="s" />
+        </WIcon>
         <WText width="48%" tone="800" />
       </WRow>
       <WText width="88%" />
     </WOverlay>
     <WOverlay>
       <WRow>
-        <IconDanger size="s" />
+        <WIcon tone="800">
+          <IconDanger size="s" />
+        </WIcon>
         <WText width="60%" tone="800" />
       </WRow>
       <WText width="80%" />

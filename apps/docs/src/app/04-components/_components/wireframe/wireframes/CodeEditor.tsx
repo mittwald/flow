@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WInput,
   WRow,
   WStack,
@@ -14,7 +15,9 @@ export const CodeEditorWireframe: FC = () => (
     <WInput>
       <WStack>
         <WRow>
-          <IconCode size="s" />
+          <WIcon tone="800">
+            <IconCode size="s" />
+          </WIcon>
           <WText width="74%" />
         </WRow>
         <WText width="90%" />

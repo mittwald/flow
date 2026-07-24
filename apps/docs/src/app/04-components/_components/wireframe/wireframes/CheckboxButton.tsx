@@ -3,6 +3,7 @@ import type { FC } from "react";
 import {
   WBox,
   WFrame,
+  WIcon,
   WRow,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
@@ -12,7 +13,9 @@ export const CheckboxButtonWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WBox width="64%">
       <WRow alignItems="center">
-        <IconCheckboxChecked />
+        <WIcon tone="800">
+          <IconCheckboxChecked />
+        </WIcon>
         <WText />
       </WRow>
     </WBox>

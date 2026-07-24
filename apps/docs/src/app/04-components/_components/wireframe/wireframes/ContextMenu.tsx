@@ -1,8 +1,9 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
+  WButton,
   WFrame,
+  WIcon,
   WOverlay,
   WStack,
   WText,
@@ -12,9 +13,11 @@ import { IconContextMenu } from "@mittwald/flow-react-components";
 export const ContextMenuWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WBox width="fit-content">
-        <IconContextMenu size="s" />
-      </WBox>
+      <WButton width="fit-content">
+        <WIcon tone="400">
+          <IconContextMenu />
+        </WIcon>
+      </WButton>
       <WOverlay>
         <WText width="70%" />
         <WText />

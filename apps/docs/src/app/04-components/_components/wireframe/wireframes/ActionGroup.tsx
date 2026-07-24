@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
+  WButton,
   WFrame,
   WRow,
   WText,
@@ -10,16 +10,16 @@ import {
 export const ActionGroupWireframe: FC = () => (
   <WFrame>
     <WRow justifyContent="space-between">
-      <WBox tone="300" width={80}>
+      <WButton tone="400" width={70}>
         <WText />
-      </WBox>
+      </WButton>
       <WRow width="auto">
-        <WBox tone="300" width={80}>
+        <WButton tone="400" width={70}>
           <WText />
-        </WBox>
-        <WBox tone="800" width={80}>
+        </WButton>
+        <WButton width={70}>
           <WText />
-        </WBox>
+        </WButton>
       </WRow>
     </WRow>
   </WFrame>

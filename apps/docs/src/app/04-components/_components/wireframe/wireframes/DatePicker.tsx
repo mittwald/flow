@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WInput,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconDate } from "@mittwald/flow-react-components";
@@ -9,7 +10,9 @@ import { IconDate } from "@mittwald/flow-react-components";
 export const DatePickerWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="flex-end">
-      <IconDate />
+      <WIcon tone="800">
+        <IconDate />
+      </WIcon>
     </WInput>
   </WFrame>
 );

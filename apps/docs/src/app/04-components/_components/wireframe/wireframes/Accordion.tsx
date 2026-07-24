@@ -3,6 +3,7 @@ import type { FC } from "react";
 import {
   WBox,
   WFrame,
+  WIcon,
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
@@ -16,14 +17,18 @@ export const AccordionWireframe: FC = () => (
     <WStack>
       <WBox tone="100" flexDirection="row" justifyContent="space-between">
         <WText width="40%" />
-        <IconChevronDown size="s" />
+        <WIcon tone="800">
+          <IconChevronDown size="s" />
+        </WIcon>
       </WBox>
       <WBox tone="100" flexDirection="row" justifyContent="space-between">
         <WStack>
           <WText width="50%" />
           <WText width="80%" />
         </WStack>
-        <IconChevronUp size="s" />
+        <WIcon tone="800">
+          <IconChevronUp size="s" />
+        </WIcon>
       </WBox>
     </WStack>
   </WFrame>

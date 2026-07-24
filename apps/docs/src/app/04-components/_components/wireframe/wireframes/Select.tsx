@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WInput,
   WOverlay,
   WText,
@@ -11,7 +12,9 @@ import { IconChevronDown } from "@mittwald/flow-react-components";
 export const SelectWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WInput justifyContent="flex-end">
-      <IconChevronDown />
+      <WIcon tone="800">
+        <IconChevronDown />
+      </WIcon>
     </WInput>
     <WOverlay>
       <WText width="80%" />

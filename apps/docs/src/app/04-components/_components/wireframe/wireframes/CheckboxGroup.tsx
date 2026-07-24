@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WRow,
   WStack,
   WText,
@@ -15,11 +16,15 @@ export const CheckboxGroupWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="80%">
       <WRow alignItems="center" width="80%">
-        <IconCheckboxChecked />
+        <WIcon tone="800">
+          <IconCheckboxChecked />
+        </WIcon>
         <WText />
       </WRow>
       <WRow alignItems="center" width="100%">
-        <IconCheckboxEmpty />
+        <WIcon tone="800">
+          <IconCheckboxEmpty />
+        </WIcon>
         <WText />
       </WRow>
     </WStack>

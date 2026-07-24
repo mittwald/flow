@@ -16,16 +16,6 @@ type Tone =
   | "1100"
   | "1200";
 
-interface PrimitiveProps extends PropsWithChildren {
-  className?: string;
-  tone?: Tone;
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
-  padding?: CSSProperties["padding"];
-  margin?: CSSProperties["margin"];
-  marginBlock?: CSSProperties["marginBlock"];
-}
-
 interface LayoutProps extends PropsWithChildren {
   className?: string;
   width?: CSSProperties["width"];
@@ -34,6 +24,9 @@ interface LayoutProps extends PropsWithChildren {
   justifyContent?: CSSProperties["justifyContent"];
   flexDirection?: CSSProperties["flexDirection"];
   borderRadius?: CSSProperties["borderRadius"];
+  padding?: CSSProperties["padding"];
+  margin?: CSSProperties["margin"];
+  marginBlock?: CSSProperties["marginBlock"];
   tone?: Tone;
 }
 
@@ -41,6 +34,21 @@ const cx = (...classes: (string | undefined | false)[]) =>
   classes.filter(Boolean).join(" ");
 
 const getToneClass = (tone: Tone = "400") => styles[`tone${tone}`];
+
+export const WIcon: FC<
+  PropsWithChildren<{ tone?: Tone; className?: string }>
+> = (props) => {
+  const { children, className, tone } = props;
+
+  return (
+    <span
+      className={cx(styles.icon, tone && styles.iconTone, className)}
+      style={tone ? { color: `var(--neutral--color--${tone})` } : undefined}
+    >
+      {children}
+    </span>
+  );
+};
 
 export const WFrame: FC<LayoutProps> = (props) => {
   const { children, className, ...rest } = props;
@@ -89,18 +97,7 @@ export const WBox: FC<PropsWithChildren<LayoutProps>> = (props) => {
   );
 };
 
-export const WBar: FC<PrimitiveProps> = (props) => {
-  const { className, tone = "700", width = "100%", height } = props;
-
-  return (
-    <span
-      className={cx(styles.bar, getToneClass(tone), className)}
-      style={{ width, height }}
-    />
-  );
-};
-
-export const WLine: FC<PrimitiveProps> = (props) => {
+export const WLine: FC<LayoutProps> = (props) => {
   const { className, tone = "500", ...rest } = props;
 
   return (
@@ -111,7 +108,7 @@ export const WLine: FC<PrimitiveProps> = (props) => {
   );
 };
 
-export const WCircle: FC<PrimitiveProps> = (props) => {
+export const WCircle: FC<LayoutProps> = (props) => {
   const { className, tone = "500", children, ...rest } = props;
 
   return (
@@ -150,20 +147,20 @@ export const WOverlay: FC<PropsWithChildren<LayoutProps>> = (props) => {
   );
 };
 
-export const WButton: FC<PropsWithChildren<PrimitiveProps>> = (props) => {
-  const { children, className, tone = "700", width, height } = props;
+export const WButton: FC<LayoutProps> = (props) => {
+  const { children, className, tone = "700", ...rest } = props;
 
   return (
     <div
       className={cx(styles.button, getToneClass(tone), className)}
-      style={{ width, height }}
+      style={rest}
     >
       {children}
     </div>
   );
 };
 
-export const WText: FC<PropsWithChildren<PrimitiveProps>> = (props) => {
+export const WText: FC<LayoutProps> = (props) => {
   const { children, className, tone = "500", width, height = 16 } = props;
 
   return (

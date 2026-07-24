@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WRow,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
@@ -11,9 +12,14 @@ export const BreadcrumbWireframe: FC = () => (
   <WFrame>
     <WRow>
       <WText width="22%" />
-      <IconChevronRight size="s" />
+      <WIcon tone="800">
+        <IconChevronRight size="s" />
+      </WIcon>
       <WText width="26%" />
-      <IconChevronRight size="s" /> <WText width="16%" />
+      <WIcon tone="800">
+        <IconChevronRight size="s" />
+      </WIcon>{" "}
+      <WText width="16%" />
     </WRow>
   </WFrame>
 );

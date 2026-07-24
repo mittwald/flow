@@ -4,6 +4,7 @@ import {
   WBox,
   WCircle,
   WFrame,
+  WIcon,
   WRow,
   WStack,
   WText,
@@ -14,6 +15,7 @@ export const ListWireframe: FC = () => (
   <WFrame>
     <WStack>
       <WBox
+        padding={12}
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
@@ -22,9 +24,12 @@ export const ListWireframe: FC = () => (
           <WCircle height={24} width={24} padding={0} />
           <WText width="60%" />
         </WRow>
-        <IconContextMenu size="s" />
+        <WIcon tone="800">
+          <IconContextMenu size="s" />
+        </WIcon>
       </WBox>
       <WBox
+        padding={12}
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
@@ -33,9 +38,12 @@ export const ListWireframe: FC = () => (
           <WCircle height={24} width={24} padding={0} />
           <WText width="60%" />
         </WRow>
-        <IconContextMenu size="s" />
+        <WIcon tone="800">
+          <IconContextMenu size="s" />
+        </WIcon>
       </WBox>
       <WBox
+        padding={12}
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
@@ -44,7 +52,9 @@ export const ListWireframe: FC = () => (
           <WCircle height={24} width={24} padding={0} />
           <WText width="60%" />
         </WRow>
-        <IconContextMenu size="s" />
+        <WIcon tone="800">
+          <IconContextMenu size="s" />
+        </WIcon>
       </WBox>
     </WStack>
   </WFrame>

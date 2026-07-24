@@ -2,6 +2,7 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
   WInput,
   WRow,
   WText,
@@ -14,7 +15,9 @@ export const DateRangePickerWireframe: FC = () => (
       <WRow alignItems="center">
         <WText tone="400" width="30%" />-<WText tone="400" width="30%" />
       </WRow>
-      <IconDate />
+      <WIcon tone="800">
+        <IconDate />
+      </WIcon>
     </WInput>
   </WFrame>
 );
