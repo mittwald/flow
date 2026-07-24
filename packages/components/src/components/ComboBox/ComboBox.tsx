@@ -16,6 +16,8 @@ import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import { useObjectRef } from "@react-aria/utils";
+import { AutofillSelectionHandler } from "./components/AutofillSelectionHandler";
 
 export interface ComboBoxProps
   extends
@@ -49,6 +51,8 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   } = useFieldComponent(props, "ComboBox");
 
   const stringFormatter = useLocalizedStringFormatter(locales, "ComboBox");
+
+  const inputRef = useObjectRef(ref);
 
   const rootClassName = clsx(fieldProps.className, styles.comboBox, className);
 
@@ -87,8 +91,9 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <FieldErrorCaptureContext>
+          <AutofillSelectionHandler inputRef={inputRef} />
           <div className={styles.input}>
-            <Aria.Input placeholder={placeholder} ref={ref} />
+            <Aria.Input placeholder={placeholder} ref={inputRef} />
             <Button
               className={styles.toggle}
               aria-label={stringFormatter.format("showOptions")}
