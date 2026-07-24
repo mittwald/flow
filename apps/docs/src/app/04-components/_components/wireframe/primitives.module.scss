@@ -1,0 +1,128 @@
+.frame,
+.stack,
+.row,
+.box,
+.input,
+.button,
+.bar,
+.line,
+.circle,
+.text,
+.overlay {
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--size-px--s);
+  width: 100%;
+}
+
+.frame svg {
+  color: var(--neutral--color--800);
+}
+
+.stack {
+  flex-direction: column;
+}
+
+.box {
+  padding: var(--size-px--m);
+  border-radius: var(--corner-radius--m);
+  flex-direction: column;
+}
+
+.text {
+  border-radius: var(--corner-radius--l);
+}
+
+.input {
+  align-items: center;
+  min-height: var(--size-px--xl);
+  padding-inline: var(--size-px--m);
+  padding-block: var(--size-px--s);
+  border: 1px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+}
+
+.overlay {
+  flex-direction: column;
+  min-height: var(--size-px--xl);
+  padding: var(--size-px--m);
+  border: 1px solid var(--neutral--color--300);
+  border-radius: var(--corner-radius--m);
+  box-shadow: var(--shadow--content);
+}
+
+.button {
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--corner-radius--l);
+}
+
+.bar,
+.line {
+  display: block;
+  width: var(--wireframe-width, 100%);
+  height: var(--wireframe-height, var(--size-px--xxs));
+  border-radius: var(--corner-radius--l);
+}
+
+.line {
+  height: var(--wireframe-height, 1px);
+}
+
+.circle {
+  width: var(--wireframe-width, var(--size-px--m));
+  height: var(--wireframe-height, var(--size-px--m));
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: var(--size-px--m);
+}
+
+.tone100 {
+  background: var(--neutral--color--100);
+}
+
+.tone200 {
+  background: var(--neutral--color--200);
+}
+
+.tone300 {
+  background: var(--neutral--color--300);
+}
+
+.tone400 {
+  background: var(--neutral--color--400);
+}
+
+.tone500 {
+  background: var(--neutral--color--500);
+}
+
+.tone600 {
+  background: var(--neutral--color--600);
+}
+
+.tone700 {
+  background: var(--neutral--color--700);
+}
+
+.tone800 {
+  background: var(--neutral--color--800);
+}
+
+.tone900 {
+  background: var(--neutral--color--900);
+}
+
+.tone1000 {
+  background: var(--neutral--color--1000);
+}
+
+.tone1100 {
+  background: var(--neutral--color--1100);
+}
+
+.tone1200 {
+  background: var(--neutral--color--1200);
+}

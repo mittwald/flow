@@ -1,9 +1,11 @@
 "use client";
 import type { FC } from "react";
-import { Heading, Text, typedList } from "@mittwald/flow-react-components";
+import { typedList } from "@mittwald/flow-react-components";
+import { ComponentCard } from "@/app/04-components/_components/ComponentCard";
 
 export interface ComponentLink {
   id: string;
+  slug: string;
   name: string;
   description?: string;
   href: string;
@@ -22,20 +24,20 @@ export const ComponentsList: FC<Props> = (props) => {
     <List.List
       aria-label="Components"
       getItemId={(component) => component.id}
+      defaultViewMode="tiles"
       batchSize={components.length}
       hidePagination
     >
+      <List.Search />
       <List.StaticData data={components} />
       <List.Item
         href={(component) => component.href}
         textValue={(component) => component.name}
+        showTiles
+        showList={false}
+        tileMaxWidth={280}
       >
-        {(component) => (
-          <List.ItemView>
-            <Heading>{component.name}</Heading>
-            {component.description && <Text>{component.description}</Text>}
-          </List.ItemView>
-        )}
+        {(component) => <ComponentCard component={component} />}
       </List.Item>
     </List.List>
   );

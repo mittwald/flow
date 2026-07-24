@@ -17,6 +17,7 @@ export default async function Page() {
   const components = mdxFiles
     .map((mdxFile) => ({
       id: mdxFile.pathname,
+      slug: mdxFile.slugs[1] ?? "",
       name: mdxFile.getNavTitle(),
       description: mdxFile.mdxSource.frontmatter.description,
       href: `/04-components${mdxFile.pathname}/overview`,

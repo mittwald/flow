@@ -1,0 +1,189 @@
+.table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 84%;
+  overflow: hidden;
+  background: var(--neutral--color--100);
+  border: 1px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+}
+
+.tableHeaderCell,
+.tableCell {
+  min-height: var(--size-px--l);
+  border-inline-end: 1px solid var(--neutral--color--400);
+  border-block-end: 1px solid var(--neutral--color--400);
+}
+
+.tableHeaderCell:nth-child(3n),
+.tableCell:nth-child(3n) {
+  border-inline-end: 0;
+}
+
+.tableCell:nth-last-child(-n + 3) {
+  border-block-end: 0;
+}
+
+.tableHeaderCell {
+  background:
+    linear-gradient(var(--neutral--color--700), var(--neutral--color--700))
+      center / 52% var(--size-px--xxxs) no-repeat,
+    var(--neutral--color--300);
+}
+
+.tableCell {
+  background:
+    linear-gradient(var(--neutral--color--500), var(--neutral--color--500))
+      center / 64% 1px no-repeat,
+    var(--neutral--color--100);
+}
+
+.progressTrack {
+  width: 78%;
+  height: var(--size-px--m);
+  overflow: hidden;
+  background: var(--neutral--color--400);
+  border: 1px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--l);
+}
+
+.progressValue {
+  display: block;
+  width: 58%;
+  height: 100%;
+  background: var(--neutral--color--800);
+  border-radius: var(--corner-radius--l);
+}
+
+.donut {
+  position: relative;
+  width: 42%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    var(--neutral--color--800) 0 38%,
+    var(--neutral--color--600) 38% 68%,
+    var(--neutral--color--400) 68% 100%
+  );
+  border-radius: 50%;
+}
+
+.donut::after {
+  position: absolute;
+  inset: 28%;
+  content: "";
+  background: var(--neutral--color--200);
+  border-radius: 50%;
+}
+
+.cropper,
+.chart,
+.dropZone {
+  position: relative;
+}
+
+.avatarOverlap {
+  margin-inline-start: calc(var(--size-px--l) * -1);
+  border: 2px solid var(--neutral--color--200);
+}
+
+.switchTrack {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 80px;
+  height: 40px;
+  padding: var(--size-px--xs);
+  background: var(--neutral--color--700);
+  border-radius: 20px;
+}
+
+.segmentGroup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+}
+
+.segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-px--xl);
+  border-inline-end: 1px solid var(--neutral--color--400);
+}
+
+.segment:last-child {
+  border-inline-end: 0;
+}
+
+.segmentActive {
+  background: var(--neutral--color--300);
+}
+
+.sliderTrack {
+  position: relative;
+  width: 78%;
+  height: var(--size-px--s);
+  background: var(--neutral--color--400);
+  border-radius: var(--corner-radius--l);
+}
+
+.sliderTrack::before {
+  display: block;
+  width: 48%;
+  height: 100%;
+  content: "";
+  background: var(--neutral--color--800);
+  border-radius: inherit;
+}
+
+.sliderKnob {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 48%;
+  width: var(--size-px--l);
+  aspect-ratio: 1;
+  background: var(--neutral--color--800);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cropper {
+  padding-block: 64px;
+  padding-inline: 0;
+  border: 1px solid var(--neutral--color--800);
+}
+
+.cropFrame {
+  border-radius: 0;
+  border-block: 1px solid var(--neutral--color--800);
+}
+
+.chart {
+  width: 78%;
+  height: 64%;
+  border-inline-start: 2px solid var(--neutral--color--700);
+  border-block-end: 2px solid var(--neutral--color--700);
+}
+
+.chartBars {
+  position: absolute;
+  inset: auto 12% 0 16%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  gap: var(--size-px--xs);
+  height: 58%;
+}
+
+.chartBars span {
+  display: block;
+  background: var(--neutral--color--500);
+  border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;
+}
+
+.dropZone {
+  border: 2px dashed var(--neutral--color--600);
+}
