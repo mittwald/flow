@@ -82,7 +82,7 @@ jobs:
         run: |
           for attempt in 1 2 3; do
             echo "::group::Publish attempt ${attempt}/3"
-            if pnpm lerna publish from-package --yes --no-private; then
+            if pnpm lerna publish from-package --yes --no-private --concurrency 1; then
               echo "::endgroup::"
               exit 0
             fi
