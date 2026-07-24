@@ -67,30 +67,51 @@ jobs:
       - name: Build 🔨
         run: pnpm build
 
+      # Bump versions, write changelogs, commit and tag — but do NOT push and do
+      # NOT create the GitHub release yet. Pushing the release commit before the
+      # npm publish succeeded is what let a failed publish "ratchet" main ahead of
+      # npm (versions bumped in git, nothing on npm). The push + release are
+      # deferred to after a successful publish below.
       - name: Version 🏷️
         if: ${{ !inputs.only_publish }}
         run: |
           pnpm lerna version \
             --force-publish \
             --conventional-commits --conventional-prerelease="*" \
-            --create-release github \
             --message "chore(release): bump version to %v" \
             --yes \
+            --no-push \
             --tag-version-prefix ""
 
+      # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
+      # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is
+      # patched (patches/@sigstore__sign@4.1.1.patch) to default fetchOnConflict
+      # to true, so it fetches the existing transparency-log entry and the publish
+      # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
+        run: pnpm lerna publish from-package --yes --no-private --concurrency 1
+
+      # Only reached when the publish above succeeded. Now it is safe to advance
+      # main and cut the GitHub release.
+      - name: Push release commit & tag, create GitHub release 🚀
+        if: ${{ !inputs.only_publish }}
         run: |
-          for attempt in 1 2 3; do
-            echo "::group::Publish attempt ${attempt}/3"
-            if pnpm lerna publish from-package --yes --no-private --concurrency 1; then
-              echo "::endgroup::"
-              exit 0
-            fi
-            echo "::endgroup::"
-            if [ "${attempt}" -lt 3 ]; then
-              echo "Publish attempt ${attempt} failed, retrying in 30s…"
-              sleep 30
-            fi
-          done
-          echo "::error::All publish attempts failed" >&2
-          exit 1
+          tag="$(git describe --tags --abbrev=0)"
+          echo "Pushing release commit and tag ${tag} to main"
+          git push origin HEAD:main
+          git push origin "refs/tags/${tag}"
+
+          # Release notes = this version's section of the root changelog
+          # (everything between this version's header and the previous one).
+          awk '/^# \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+
+          # Mark as pre-release when the version carries a semver pre-release id
+          # (e.g. 0.2.0-alpha.N), matching lerna's own --create-release behaviour.
+          prerelease=""
+          case "${tag}" in *-*) prerelease="--prerelease" ;; esac
+
+          gh release create "${tag}" \
+            --title "${tag}" \
+            --notes-file release-notes.md \
+            ${prerelease}
+          rm -f release-notes.md
