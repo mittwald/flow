@@ -204,7 +204,7 @@
       :global(.flow--heading--heading-content) {
         position: absolute;
         top: var(--list-item--padding);
-        inset-inline: var(--list-item--padding) var(--list-item--padding);
+        inset-inline: var(--list-item--padding);
         justify-content: end;
       }
     }
