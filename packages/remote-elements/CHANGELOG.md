@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.949](https://github.com/mittwald/flow/compare/0.2.0-alpha.948...0.2.0-alpha.949) (2026-07-24)
+
+### Bug Fixes
+
+* **remote:** rebuild dist when [@flr-generate](https://github.com/flr-generate) components change ([#2712](https://github.com/mittwald/flow/issues/2712)) ([844db46](https://github.com/mittwald/flow/commit/844db46e2134293d21b158cc3005f2aeae63c608))
+
+# [0.2.0-alpha.948](https://github.com/mittwald/flow/compare/0.2.0-alpha.947...0.2.0-alpha.948) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
