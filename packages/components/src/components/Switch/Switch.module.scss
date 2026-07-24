@@ -41,7 +41,12 @@
     transform: translateX(0);
     position: absolute;
     top: var(--switch--track-padding);
-    inset-inline-start: var(--switch--track-padding);
+
+    /* Must stay physical: `.label-leading` sets `direction: rtl` as a layout
+       hack to reorder label and track, which would flip a logical inset and
+       place the handle on the wrong side. */
+    /* stylelint-disable-next-line logical-css/require-logical-properties */
+    left: var(--switch--track-padding);
   }
 
   .label {
