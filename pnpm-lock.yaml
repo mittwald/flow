@@ -169,7 +169,7 @@ importers:
         version: 2.1.1
       cron-parser:
         specifier: ^5.5.0
-        version: 5.5.0
+        version: 5.6.2
       cron-time-generator:
         specifier: ^2.0.3
         version: 2.0.3
@@ -5455,8 +5455,8 @@ packages:
   crelt@1.0.7:
     resolution: {integrity: sha512-aK6BbWfhf4U/wCcLHKPJl/xa6VkVstRaPywWtMKGwuOLc/wZTyQYuoxgvZnNsBvv7Kg3YTBQYYBCggcviQczuA==}
 
-  cron-parser@5.5.0:
-    resolution: {integrity: sha512-oML4lKUXxizYswqmxuOCpgFS8BNUJpIu6k/2HVHyaL8Ynnf3wdf9tkns0yRdJLSIjkJ+b0DXHMZEHGpMwjnPww==}
+  cron-parser@5.6.2:
+    resolution: {integrity: sha512-yJ/G1LVir6CnlkLI40CsampPLKl1SprGGlUagWtGJxewytRVYezv5xVyzzbT+Pvzx+VIRvZVF7/a0eEMTxdnTA==}
     engines: {node: '>=18'}
 
   cron-time-generator@2.0.3:
@@ -14400,7 +14400,7 @@ snapshots:
 
   crelt@1.0.7: {}
 
-  cron-parser@5.5.0:
+  cron-parser@5.6.2:
     dependencies:
       luxon: 3.7.2
 
