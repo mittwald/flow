@@ -5,7 +5,7 @@ Component patterns for the core package. Read the
 Definition of Done, workflow).
 
 > **Full pattern catalog:** [PATTERNS.md](./PATTERNS.md) lists every convention
-> (182 patterns) with per-pattern applicability (when to use / when not), a
+> (184 patterns) with per-pattern applicability (when to use / when not), a
 > canonical example each, and a decision cheat-sheet. This guide covers the
 > must-know core; look there when deciding between two approaches.
 
@@ -81,6 +81,10 @@ Conventions:
   that hand-maintained registry, so a missing entry fails the typecheck.
 - Most components wrap `react-aria-components` primitives; expose ARIA props
   directly only where React Aria lacks the behavior.
+- **Keep the returned JSX readable.** Lift computed nodes (icon, label, tooltip
+  text) and non-trivial conditionals into named consts above the `return`; the
+  returned tree should stay scannable — no large inline ternaries or deep logic
+  in the markup. Split a growing tree into subcomponents.
 
 ## PropsContext — contextual composability
 
