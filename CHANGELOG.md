@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
+
+### Bug Fixes
+
+* **publish:** authenticate via push:main and make the Rekor 409 patch effective ([#2718](https://github.com/mittwald/flow/issues/2718)) ([76f71ac](https://github.com/mittwald/flow/commit/76f71ac514dce38f9af28cacda8ae6801bcb59d3))
+
 # [0.2.0-alpha.954](https://github.com/mittwald/flow/compare/0.2.0-alpha.953...0.2.0-alpha.954) (2026-07-24)
 
 **Note:** Version bump only for package @mittwald/flow-project
