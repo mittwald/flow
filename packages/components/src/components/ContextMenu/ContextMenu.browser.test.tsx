@@ -5,6 +5,7 @@ import MenuItem from "@/components/MenuItem";
 import { usePromise } from "@mittwald/react-use-promise";
 import { sleep } from "@/lib/promises/sleep";
 import { Button, ContextMenuTrigger } from "@/components/public";
+import { duration } from "@/components/Action/models/ActionState";
 
 const expectIconInDom = (iconName: string) => {
   expect(
@@ -47,12 +48,21 @@ test("Loading spinner is shown in trigger if content suspends", async () => {
   const menuItem = page.getByText("Menu Item");
 
   await userEvent.click(trigger);
-  await vitest.advanceTimersByTimeAsync(1500);
+
+  // The trigger only shows the spinner after the suspended menu content
+  // registers via a Suspense-fallback effect (setIsContentSuspended) and the
+  // pending-wait timer (duration.pending) has elapsed. Flush the suspend
+  // registration first – without advancing the clock – so the pending timer is
+  // scheduled at a known point, then advance past it. Advancing in a single
+  // step races the fallback effect and makes the spinner assertion flaky.
+  await vitest.advanceTimersByTimeAsync(0);
+  await rerender(testUi);
+  await vitest.advanceTimersByTimeAsync(duration.pending);
   await rerender(testUi);
   expectIconInDom("loader-2");
   expect(menuItem).not.toBeInTheDocument();
 
-  await vitest.advanceTimersByTimeAsync(1500);
+  await vitest.advanceTimersByTimeAsync(2000);
   await rerender(testUi);
   expect(menuItem).toBeInTheDocument();
 });

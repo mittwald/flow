@@ -155,8 +155,7 @@
 
   [role="dialog"] {
     height: 100%;
-    border-start-start-radius: var(--modal--corner-radius);
-    border-end-start-radius: var(--modal--corner-radius);
+    border-radius: 0;
   }
 
   > div {
@@ -180,10 +179,6 @@
   }
 
   &.left {
-    [role="dialog"] {
-      border-radius: 0 var(--modal--corner-radius) var(--modal--corner-radius) 0;
-    }
-
     > div {
       padding-inline: 0 var(--size-px--m);
 

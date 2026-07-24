@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+### Bug Fixes
+
+* **Modal:** square corners on OffCanvas side panel ([#2713](https://github.com/mittwald/flow/issues/2713)) ([ee56827](https://github.com/mittwald/flow/commit/ee568273426bfa33359705f1d33a3632f950dcad))
+
+# [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.944](https://github.com/mittwald/flow/compare/0.2.0-alpha.943...0.2.0-alpha.944) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.943](https://github.com/mittwald/flow/compare/0.2.0-alpha.942...0.2.0-alpha.943) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.942](https://github.com/mittwald/flow/compare/0.2.0-alpha.941...0.2.0-alpha.942) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.941](https://github.com/mittwald/flow/compare/0.2.0-alpha.940...0.2.0-alpha.941) (2026-07-23)
+
+### Bug Fixes
+
+* **CodeBlock:** fix undefined max height in code block ([8773c73](https://github.com/mittwald/flow/commit/8773c73c7ca63cf3b69a5177712ed8a34bed4fd0))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+
 # [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
 
 ### Features
