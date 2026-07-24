@@ -7,9 +7,7 @@ on:
         description: "Publish missing packages only, without a version bump"
         type: boolean
         default: false
-  pull_request_target:
-    types:
-      - closed
+  push:
     branches:
       - main
 
@@ -23,9 +21,19 @@ concurrency:
 
 jobs:
   publish:
-    if:
+    # Publish on manual dispatch, or on any push to main EXCEPT the release
+    # commit this workflow pushes itself (guarded below to avoid an infinite
+    # publish loop).
+    #
+    # The trigger is `push: main`, NOT `pull_request_target: closed`: npm's
+    # Trusted Publisher only accepts the OIDC token when its ref is
+    # refs/heads/main. pull_request_target runs carry refs/pull/<n>/merge, which
+    # npm rejects — the publish then falls back to an anonymous request and npm
+    # returns a misleading 404. A push to main carries refs/heads/main and
+    # authenticates correctly.
+    if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.pull_request.merged == true
+      !startsWith(github.event.head_commit.message, 'chore(release):')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
