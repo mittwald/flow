@@ -110,6 +110,7 @@ export * from "./RemoteSkeletonTextElement";
 export * from "./RemoteSliderElement";
 export * from "./RemoteSwitchElement";
 export * from "./RemoteTabElement";
+export * from "./RemoteTabNavigationElement";
 export * from "./RemoteTabTitleElement";
 export * from "./RemoteTableElement";
 export * from "./RemoteTableBodyElement";

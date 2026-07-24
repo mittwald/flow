@@ -110,6 +110,7 @@ export * from "./SkeletonText";
 export * from "./Slider";
 export * from "./Switch";
 export * from "./Tab";
+export * from "./TabNavigation";
 export * from "./TabTitle";
 export * from "./Table";
 export * from "./TableBody";

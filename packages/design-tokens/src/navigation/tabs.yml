@@ -1,6 +1,16 @@
 tabs:
-  padding:
+  padding-y:
+    value: "{size-px.s}"
+  padding-x:
     value: "{size-px.m}"
+  corner-radius:
+    value: "calc({size-px.s} * 2 + {line-height-m})"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral-outline-border-color}"
   background-color:
     default:
       value: "{neutral-soft-background-color.default}"
@@ -11,11 +21,14 @@ tabs:
     selected:
       value: "{neutral.color.100}"
   color:
-    value: "{neutral-soft-content-color}"
-  disabled-color:
-    value: "{disabled-soft-content-color}"
+    default:
+      value: "{neutral-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-content-color}"
   font-weight:
     selected:
       value: "{font-weight.bold}"
   spacing:
     value: "{size-rem.s}"
+  separator-height:
+    value: "{size-rem.m}"

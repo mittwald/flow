@@ -9,28 +9,22 @@ test.each(testEnvironments)(
     components: {
       LayoutCard,
       Flex,
-      Tab,
-      Tabs,
-      TabTitle,
+      TabNavigation,
       Alert,
       Heading,
       Section,
+      Link,
     },
   }) => {
     await render(
       <Flex direction="column" gap="m">
         <LayoutCard>LayoutCard</LayoutCard>
         <LayoutCard>
-          <Tabs>
-            <Tab id="general">
-              <TabTitle>Tab 1</TabTitle>
-              Content
-            </Tab>
-            <Tab id="storage">
-              <TabTitle>Tab 2</TabTitle>
-              Content
-            </Tab>
-          </Tabs>
+          <TabNavigation>
+            <Link>Tab 1</Link>
+            <Link>Tab 2</Link>
+          </TabNavigation>
+          Content
         </LayoutCard>
         <LayoutCard>
           <Alert>
