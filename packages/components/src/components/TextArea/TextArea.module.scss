@@ -8,11 +8,11 @@
   min-width: 100%;
 
   &.horizontalResize {
-    resize: horizontal;
+    resize: inline;
   }
 
   &.verticalResize {
-    resize: vertical;
+    resize: block;
   }
 
   &.resize {

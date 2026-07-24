@@ -29,7 +29,7 @@
   }
 
   &[data-placement="right"] {
-    margin-left: var(--tooltip--tooltip-to-trigger-spacing);
+    margin-inline-start: var(--tooltip--tooltip-to-trigger-spacing);
 
     --translate-origin: translateX(var(--translate-origin-length) * -1);
 
@@ -39,7 +39,7 @@
   }
 
   &[data-placement="left"] {
-    margin-right: var(--tooltip--tooltip-to-trigger-spacing);
+    margin-inline-end: var(--tooltip--tooltip-to-trigger-spacing);
 
     --translate-origin: translateX(var(--translate-origin-length));
 

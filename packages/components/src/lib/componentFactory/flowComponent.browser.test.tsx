@@ -523,8 +523,11 @@ describe("propsContext", () => {
     let elements: ReactElement = <></>;
 
     for (let i = components.length - 1; i >= 0; i--) {
-      const Component = components[i]!;
-      const testCase = testCases[i]!;
+      const Component = components[i];
+      const testCase = testCases[i];
+      if (!Component || !testCase) {
+        continue;
+      }
       elements = <Component {...testCase.localProps}>{elements}</Component>;
     }
 

@@ -9,18 +9,18 @@
   border-radius: var(--corner-radius--m);
   position: relative;
   min-width: 0;
-  padding-right: var(--size-px--xl);
+  padding-inline-end: var(--size-px--xl);
 }
 
 .preCopyButton {
   position: absolute !important;
   top: var(--size-px--s);
-  right: var(--size-px--s);
+  inset-inline-end: var(--size-px--s);
 }
 
 .ul {
   list-style-type: disc;
-  padding-left: var(--size-rem--m);
+  padding-inline-start: var(--size-rem--m);
 }
 
 .separator {
@@ -57,8 +57,8 @@
 .doAndDontCode {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
 }
 
 .doAndDontText {
@@ -67,8 +67,8 @@
   border-width: var(--border-width--100);
   border-color: var(--neutral-outline-border-color);
   border-bottom: none;
-  border-top-left-radius: var(--corner-radius--m);
-  border-top-right-radius: var(--corner-radius--m);
+  border-start-start-radius: var(--corner-radius--m);
+  border-start-end-radius: var(--corner-radius--m);
   padding: var(--size-px--l);
   background: var(--info-soft-background-color--default);
   display: flex;
@@ -89,8 +89,8 @@
   row-gap: var(--size-px--s);
 
   &.withContent {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
   }
 }
 
