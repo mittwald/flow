@@ -114,7 +114,7 @@ test.each(testEnvironments)(
     await render(
       <Flex gap="s">
         {avatarSizes.map((size) => (
-          <Button>
+          <Button key={size}>
             <Avatar size={size}>
               <Initials>Luke Skywalker</Initials>
             </Avatar>

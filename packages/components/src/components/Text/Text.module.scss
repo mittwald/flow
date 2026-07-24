@@ -15,7 +15,7 @@
 
   ul,
   ol {
-    padding-left: var(--text--list-padding);
+    padding-inline-start: var(--text--list-padding);
   }
 
   ul {
@@ -29,9 +29,9 @@
   }
 
   blockquote {
-    border-left: var(--text--blockquote-border-width)
+    border-inline-start: var(--text--blockquote-border-width)
       var(--text--blockquote-border-style) var(--text--blockquote-border-color);
-    padding-left: var(--text--blockquote-padding);
+    padding-inline-start: var(--text--blockquote-padding);
   }
 
   .icon {
