@@ -1,0 +1,18 @@
+diff --git a/dist/witness/tlog/client.js b/dist/witness/tlog/client.js
+index 8d13c45124e0b8c6c7456ebfb514e65f5c2a79db..49e45ef1c75cef8cf1375e5fb738640a4ed0f1f1 100644
+--- a/dist/witness/tlog/client.js
++++ b/dist/witness/tlog/client.js
+@@ -24,7 +24,12 @@ class TLogClient {
+     rekor;
+     fetchOnConflict;
+     constructor(options) {
+-        this.fetchOnConflict = options.fetchOnConflict ?? false;
++        // mittwald patch: default fetchOnConflict to true so a Rekor 409
++        // ("equivalent entry already exists") is treated as success by fetching
++        // the existing transparency-log entry instead of throwing
++        // TLOG_CREATE_ENTRY_ERROR. Keeps npm provenance intact while making
++        // publishes resilient to sigstore-js's non-idempotent tlog upload retry.
++        this.fetchOnConflict = options.fetchOnConflict ?? true;
+         this.rekor = new rekor_1.Rekor({
+             baseURL: options.rekorBaseURL,
+             retry: options.retry,
