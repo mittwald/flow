@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+### Bug Fixes
+
+* **Modal:** square corners on OffCanvas side panel ([#2713](https://github.com/mittwald/flow/issues/2713)) ([ee56827](https://github.com/mittwald/flow/commit/ee568273426bfa33359705f1d33a3632f950dcad))
+
 # [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-project
