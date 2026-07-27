@@ -2,19 +2,7 @@
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 import styles from "./primitives.module.scss";
 
-type Tone =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "1000"
-  | "1100"
-  | "1200";
+type Tone = "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800";
 
 interface LayoutProps extends PropsWithChildren {
   className?: string;

@@ -9,7 +9,7 @@ import {
 export const LabeledValueWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="62%">
-      <WText width="42%" />
+      <WText width="42%" tone="600" />
       <WText width="78%" />
     </WStack>
   </WFrame>

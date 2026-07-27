@@ -7,7 +7,7 @@ import {
 
 export const LabelWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WText width="34%" />
+    <WText width="34%" tone="600" />
   </WFrame>
 );
 

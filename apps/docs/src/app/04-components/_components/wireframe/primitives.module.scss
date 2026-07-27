@@ -63,10 +63,12 @@
 
 .button {
   display: flex;
-  padding: var(--size-px--m);
+  padding: var(--size-px--s);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
+  min-width: 48px;
   align-items: center;
+  justify-content: center;
 }
 
 .line {
@@ -115,20 +117,4 @@
 
 .tone800 {
   background: var(--neutral--color--800);
-}
-
-.tone900 {
-  background: var(--neutral--color--900);
-}
-
-.tone1000 {
-  background: var(--neutral--color--1000);
-}
-
-.tone1100 {
-  background: var(--neutral--color--1100);
-}
-
-.tone1200 {
-  background: var(--neutral--color--1200);
 }

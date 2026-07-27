@@ -1,20 +1,20 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
   WFrame,
+  WIcon,
   WRow,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import { IconCode } from "@mittwald/flow-react-components";
 
 export const InlineCodeWireframe: FC = () => (
-  <WFrame>
-    <WRow alignItems="center">
-      <WText tone="500" width="20%" />
-      <WBox tone="300" width="35%">
-        <WText />
-      </WBox>
-      <WText tone="500" width="35%" />
+  <WFrame justifyContent="center">
+    <WRow alignItems="center" width="60%">
+      <WIcon>
+        <IconCode />
+      </WIcon>
+      <WText tone="500" />
     </WRow>
   </WFrame>
 );
