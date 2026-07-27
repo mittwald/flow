@@ -15,13 +15,8 @@ Achte bei der Verwendung eines SegmentedControl darauf, dass...
 
 ## Verwendung
 
-Verwende einen SegmentedControl, um ...
-
-- eine platzsparende Einfachauswahlmöglichkeit anzubieten.
-- einen Teil des Contents unterhalb zu ändern oder zu filtern. Ein
-  SegmentedControl ist kein Ersatz für
-  [Tabs](/04-components/navigation/tabs/overview), welche den gesamten Content
-  einer Seite ändern.
+Verwende einen SegmentedControl, um eine platzsparende Einfachauswahlmöglichkeit
+anzubieten.
 
 ## SegmentedControl vs. RadioGroup
 
@@ -32,9 +27,8 @@ Unterscheidung.
 
 <DoAndDont>
   <Info heading="Verwende ein SegmentedControl, um z. B. ...">
-    - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen. - Optionen anzuzeigen,
+    eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen. - Optionen anzuzeigen,
     die aus 1 bis 2 Wörtern bestehen.
-    - Optionen anzuzeigen, die den darunterliegenden Inhalt verändern.
   </Info>
 
   <Info heading="Verwende eine RadioGroup, um z. B. ...">
@@ -44,24 +38,6 @@ Unterscheidung.
 </DoAndDont>
 
 ---
-
-# Anwendung
-
-## Position
-
-Das SegmentedControl wird häufig in Formularen oder als Ansichtsfilter
-verwendet. Bei der Positionierung ist Folgendes zu beachten:
-
-- In der Regel nimmt das SegmentedControl die gesamte Breite des
-  Content-Bereiches ein. In Ausnahmefällen kann das SegmentedControl auch
-  schmaler dargestellt werden, z. B. wenn es nicht in Formularen, sondern nur
-  als Ansichtsfilter über Diagrammen verwendet wird.
-- Wenn Inhalte mithilfe des SegmentedControls geändert werden sollen, muss das
-  SegmentedControl direkt über dem zu ändernden Inhaltsbereich stehen.
-
-<Do example="changeContent">
-  Das SegmentedControl steht über dem angepassten Inhalt.
-</Do>
 
 ## Hierarchie
 
@@ -118,7 +94,7 @@ Das SegmentedControl hat Text in den Optionen und im
 
 Sobald die Breite des Containers kleiner als 551px ist, werden alle Optionen im
 SegmentedControl untereinander dargestellt. Dieser Wert kann mit
-`containerBreakpointSize` angepasst werden. Auch bei schmaleren Containerns
+`containerBreakpointSize` angepasst werden. Auch bei schmaleren Containern
 sollte vermieden werden, dass der Text zweizeilig wird oder nicht mehr lesbar
 ist.
 
