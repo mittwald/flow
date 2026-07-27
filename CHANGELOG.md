@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.959](https://github.com/mittwald/flow/compare/0.2.0-alpha.958...0.2.0-alpha.959) (2026-07-27)
+
+### Features
+
+* **release:** add /prepare-release command for RFC [#2711](https://github.com/mittwald/flow/issues/2711) promotion PR ([#2723](https://github.com/mittwald/flow/issues/2723)) ([eea0cff](https://github.com/mittwald/flow/commit/eea0cffe6cb1bd22ac4da8be30f391459bf8322a)), closes [#2724](https://github.com/mittwald/flow/issues/2724)
+
 # [0.2.0-alpha.958](https://github.com/mittwald/flow/compare/0.2.0-alpha.957...0.2.0-alpha.958) (2026-07-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
