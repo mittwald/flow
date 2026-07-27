@@ -17,8 +17,8 @@
   padding: var(--size-px--m);
   background: var(--neutral--color--200);
   border-bottom: var(--list-item--border-width) var(--list-item--border-style) var(--list-item--border-color);
-  border-top-left-radius: var(--corner-radius--l);
-  border-top-right-radius: var(--corner-radius--l);
+  border-start-start-radius: var(--corner-radius--l);
+  border-start-end-radius: var(--corner-radius--l);
 }
 
 .content {
