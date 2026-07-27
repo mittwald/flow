@@ -91,14 +91,57 @@ jobs:
       - name: Summary
         if: always()
         run: |
-          if [[ "${{ job.status }}" == "success" ]]; then
-            echo "### ✅ Visual Regression Tests Passed" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "All visual snapshots match the committed baselines." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "### ❌ Visual Regression Tests Failed" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "The visual test step did not pass. If snapshots differ from the committed baselines, download the **visual-diffs** artifact from this run to inspect the actual/diff images (the artifact is absent if the run failed before comparison, e.g. during install or browser setup)." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "If the differences are intentional, update the baselines by adding the \`update-screenshots\` label to the PR." >> $GITHUB_STEP_SUMMARY
-          fi
+          runUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            if [[ "${{ job.status }}" == "success" ]]; then
+              echo "### ✅ Visual Regression Tests Passed"
+              echo ""
+              echo "All visual snapshots match the committed baselines."
+            else
+              echo "### ❌ Visual Regression Tests Failed"
+              echo ""
+              echo "The visual test step did not pass. If snapshots differ from the committed baselines, download the **visual-diffs** artifact from [this run]($runUrl) to inspect the actual/diff images (the artifact is absent if the run failed before comparison, e.g. during install or browser setup)."
+              echo ""
+              echo "If the differences are intentional, update the baselines by adding the \`update-screenshots\` label to the PR."
+            fi
+          } > "$RUNNER_TEMP/visual-summary.md"
+          cat "$RUNNER_TEMP/visual-summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment summary on PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = require("fs");
+            const marker = "<!-- visual-regression-summary -->";
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const summary = fs.readFileSync(`${process.env.RUNNER_TEMP}/visual-summary.md`, "utf8");
+            const body = `${marker}\n${summary}\n\n_[Run details](${runUrl})_`;
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+
+            // keep a single, updated comment instead of stacking a new one per run
+            const comments = await github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+                await github.rest.issues.updateComment({
+                    owner,
+                    repo,
+                    comment_id: existing.id,
+                    body,
+                });
+            } else {
+                await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number,
+                    body,
+                });
+            }

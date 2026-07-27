@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
+
+### Bug Fixes
+
+* **publish:** authenticate via push:main and make the Rekor 409 patch effective ([#2718](https://github.com/mittwald/flow/issues/2718)) ([76f71ac](https://github.com/mittwald/flow/commit/76f71ac514dce38f9af28cacda8ae6801bcb59d3))
+
+# [0.2.0-alpha.954](https://github.com/mittwald/flow/compare/0.2.0-alpha.953...0.2.0-alpha.954) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.953](https://github.com/mittwald/flow/compare/0.2.0-alpha.952...0.2.0-alpha.953) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.952](https://github.com/mittwald/flow/compare/0.2.0-alpha.951...0.2.0-alpha.952) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.951](https://github.com/mittwald/flow/compare/0.2.0-alpha.950...0.2.0-alpha.951) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.950](https://github.com/mittwald/flow/compare/0.2.0-alpha.949...0.2.0-alpha.950) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.949](https://github.com/mittwald/flow/compare/0.2.0-alpha.948...0.2.0-alpha.949) (2026-07-24)
+
+### Bug Fixes
+
+* **remote:** rebuild dist when [@flr-generate](https://github.com/flr-generate) components change ([#2712](https://github.com/mittwald/flow/issues/2712)) ([844db46](https://github.com/mittwald/flow/commit/844db46e2134293d21b158cc3005f2aeae63c608))
+
+# [0.2.0-alpha.948](https://github.com/mittwald/flow/compare/0.2.0-alpha.947...0.2.0-alpha.948) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+### Bug Fixes
+
+* **Modal:** square corners on OffCanvas side panel ([#2713](https://github.com/mittwald/flow/issues/2713)) ([ee56827](https://github.com/mittwald/flow/commit/ee568273426bfa33359705f1d33a3632f950dcad))
+
 # [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-project

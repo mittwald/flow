@@ -58,26 +58,61 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
   const {
     children,
     onHostPathnameChanged,
-    isLoading: isLoadingFromProps,
+    isLoading,
     __remoteReceiver: remoteReceiver,
   } = props;
 
+  // The two branches use disjoint sets of hooks, so they live in dedicated
+  // components. This keeps each component's hook order stable (Rules of Hooks)
+  // while preserving the exact rendering of both paths.
   if (remoteReceiver) {
     return (
-      <div
-        style={hiddenStyle}
-        ref={(div) => {
-          if (div) {
-            connectRemoteReceiver(div, remoteReceiver.connection);
-          }
-        }}
-      >
-        <ViewComponentContextProvider components={viewComponents}>
-          {children}
-        </ViewComponentContextProvider>
-      </div>
+      <RemoteReceiverRoot remoteReceiver={remoteReceiver}>
+        {children}
+      </RemoteReceiverRoot>
     );
   }
+
+  return (
+    <RemoteConnectionRoot
+      onHostPathnameChanged={onHostPathnameChanged}
+      isLoading={isLoading}
+    >
+      {children}
+    </RemoteConnectionRoot>
+  );
+};
+
+interface RemoteReceiverRootProps extends PropsWithChildren {
+  remoteReceiver: RemoteReceiver;
+}
+
+const RemoteReceiverRoot: FC<RemoteReceiverRootProps> = ({
+  remoteReceiver,
+  children,
+}) => (
+  <div
+    style={hiddenStyle}
+    ref={(div) => {
+      if (div) {
+        connectRemoteReceiver(div, remoteReceiver.connection);
+      }
+    }}
+  >
+    <ViewComponentContextProvider components={viewComponents}>
+      {children}
+    </ViewComponentContextProvider>
+  </div>
+);
+
+type RemoteConnectionRootProps = Omit<RemoteRootProps, "__remoteReceiver">;
+
+const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
+  const {
+    children,
+    onHostPathnameChanged,
+    isLoading: isLoadingFromProps,
+  } = props;
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
   const hostConfigRef = useRef<HostConfig | undefined>(undefined);

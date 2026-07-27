@@ -27,7 +27,7 @@
 
       .segment {
         margin-bottom: -1px; /* Collapse borders */
-        margin-right: 0;
+        margin-inline-end: 0;
 
         &:first-of-type {
           border-start-start-radius: var(--form-control--corner-radius);

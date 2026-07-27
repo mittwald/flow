@@ -20,7 +20,7 @@
       order: 3;
 
       &:only-child {
-        margin-left: auto;
+        margin-inline-start: auto;
       }
     }
 
@@ -30,7 +30,7 @@
 
     .abort {
       order: 1;
-      margin-right: auto;
+      margin-inline-end: auto;
     }
   }
 }

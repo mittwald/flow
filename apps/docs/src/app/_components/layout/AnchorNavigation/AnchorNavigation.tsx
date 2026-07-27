@@ -53,10 +53,6 @@ export const AnchorNavigation: FC<Props> = (props) => {
 
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
-  if (anchors.length === 0) {
-    return null;
-  }
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -64,8 +60,9 @@ export const AnchorNavigation: FC<Props> = (props) => {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-        if (visible.length > 0) {
-          setActiveAnchor(visible[0]!.target.id);
+        const [firstVisible] = visible;
+        if (firstVisible) {
+          setActiveAnchor(firstVisible.target.id);
         } else {
           const currentUrlSlug = window.location.hash.slice(1);
           const aboveViewport = anchors
@@ -93,9 +90,8 @@ export const AnchorNavigation: FC<Props> = (props) => {
 
           if (aboveViewport) {
             setActiveAnchor(aboveViewport.id);
-          } else if (!activeAnchor && anchors.length > 0) {
-            const firstSlug = anchors[0]!.slug;
-            setActiveAnchor(firstSlug);
+          } else if (!activeAnchor && anchors[0]) {
+            setActiveAnchor(anchors[0].slug);
           }
         }
       },
@@ -116,6 +112,10 @@ export const AnchorNavigation: FC<Props> = (props) => {
 
     return () => observer.disconnect();
   }, [anchors, ready]);
+
+  if (anchors.length === 0) {
+    return null;
+  }
 
   return (
     <LayoutCard className={globalStyles.anchorNavigation}>

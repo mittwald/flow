@@ -32,7 +32,7 @@
   height: 100%;
   border-radius: calc(var(--layout-card--corner-radius) - 2px);
   padding: var(--layout-card--padding);
-  padding-right: 64px;
+  padding-inline-end: 64px;
   width: max(80%, 300px);
   background: linear-gradient(
     to left,
@@ -91,5 +91,5 @@
 .imageTileIcon {
   position: absolute;
   top: var(--size-px--xl);
-  right: var(--size-px--xl);
+  inset-inline-end: var(--size-px--xl);
 }

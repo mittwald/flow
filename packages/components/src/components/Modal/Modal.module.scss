@@ -155,12 +155,11 @@
 
   [role="dialog"] {
     height: 100%;
-    border-top-left-radius: var(--modal--corner-radius);
-    border-bottom-left-radius: var(--modal--corner-radius);
+    border-radius: 0;
   }
 
   > div {
-    padding-left: var(--size-px--m);
+    padding-inline-start: var(--size-px--m);
 
     > div {
       justify-content: flex-end;
@@ -180,13 +179,8 @@
   }
 
   &.left {
-    [role="dialog"] {
-      border-radius: 0 var(--modal--corner-radius) var(--modal--corner-radius) 0;
-    }
-
     > div {
-      padding-left: 0;
-      padding-right: var(--size-px--m);
+      padding-inline: 0 var(--size-px--m);
 
       > div {
         justify-content: flex-start;
@@ -221,8 +215,8 @@
       width: 100%;
       padding: unset;
       overflow: hidden;
-      border-top-left-radius: var(--modal--corner-radius);
-      border-top-right-radius: var(--modal--corner-radius);
+      border-start-start-radius: var(--modal--corner-radius);
+      border-start-end-radius: var(--modal--corner-radius);
       pointer-events: all;
 
       &[data-entering] {

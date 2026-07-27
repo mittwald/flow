@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.954](https://github.com/mittwald/flow/compare/0.2.0-alpha.953...0.2.0-alpha.954) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.953](https://github.com/mittwald/flow/compare/0.2.0-alpha.952...0.2.0-alpha.953) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.952](https://github.com/mittwald/flow/compare/0.2.0-alpha.951...0.2.0-alpha.952) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.951](https://github.com/mittwald/flow/compare/0.2.0-alpha.950...0.2.0-alpha.951) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.950](https://github.com/mittwald/flow/compare/0.2.0-alpha.949...0.2.0-alpha.950) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.949](https://github.com/mittwald/flow/compare/0.2.0-alpha.948...0.2.0-alpha.949) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.948](https://github.com/mittwald/flow/compare/0.2.0-alpha.947...0.2.0-alpha.948) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-icons-base
+
 # [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-icons-base
