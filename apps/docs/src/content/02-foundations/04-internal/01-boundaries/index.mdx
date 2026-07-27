@@ -453,8 +453,9 @@ export const AppInstallationSelectField: FC<Props> = (props) => {
 
 Für ContextMenus wird `ContextMenuWithErrorBoundary` verwendet. Um zu
 verhindern, dass der Inhalt des ContextMenus springt, werden Elemente die
-nachgeladene Inhalte benötigen in ein `MenuItemFragment` gepackt; diese Boundary
-enthält kein Suspense, damit das ganze ContextMenu im Ladezustand verbleibt.
+nachgeladene Inhalte benötigen in ein `MenuItemFragmentWithBoundaries` gepackt;
+diese Boundary enthält kein Suspense, damit das ganze ContextMenu im Ladezustand
+verbleibt.
 
 ```tsx
 export const ActionsContextMenu: FC<Props> = (props) => {
@@ -473,7 +474,7 @@ export const ActionsContextMenu: FC<Props> = (props) => {
                 onAction={() => deleteModalController.open()}
                 isDisabled={isBusy}
               />
-              <MenuItemFragment>
+              <MenuItemFragmentWithBoundaries>
                 {() => {
                   const updateAvailable = appInstallationGhost
                     .getCommon()
@@ -488,7 +489,7 @@ export const ActionsContextMenu: FC<Props> = (props) => {
                     />
                   );
                 }}
-              </MenuItemFragment>
+              </MenuItemFragmentWithBoundaries>
             </>
           );
         }}
@@ -544,9 +545,12 @@ in den Render-Prop der Wurzel-Boundary wandern.
 **Kombiniert (Loading + Error):** `FragmentWithBoundaries`,
 `ContentFragmentWithBoundaries`, `SectionWithBoundaries`,
 `SectionsFragmentWithBoundaries`, `LayoutCardWithBoundaries`,
-`LayoutCardFragmentWithBoundaries`, `TextWithBoundaries`,
-`StringWithBoundaries`, `FieldFragmentWithBoundaries`,
-`LinkFragmentWithBoundaries`, `ChartFragmentWithBoundaries` u. a.
+`LayoutCardFragmentWithBoundaries`, `RootLayoutWithBoundaries`,
+`SecondarySideNavigationWithBoundaries`, `TextWithBoundaries`,
+`StringWithBoundaries`, `LinkWithBoundaries`, `LinkFragmentWithBoundaries`,
+`FieldFragmentWithBoundaries`, `ChartFragmentWithBoundaries`,
+`AvatarWithBoundaries`, `LoadingSpinnerFragmentWithBoundaries`,
+`MenuItemFragmentWithBoundaries`.
 
 **Error-only (`…WithErrorBoundary`):** `FragmentWithErrorBoundary`,
 `ContentFragmentWithErrorBoundary`, `SectionWithErrorBoundary`,
