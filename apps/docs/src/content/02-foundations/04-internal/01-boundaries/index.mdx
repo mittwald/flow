@@ -512,61 +512,48 @@ export const ActionsContextMenu: FC<Props> = (props) => {
 
 Detailseiten teilen ihren Inhalt oft in **einmalig genutzte**
 `-components/`-Sektionen auf – rein zur Lesbarkeit. Liest eine solche Sektion
-**ausschließlich die Primär-Ressource der Seite** (die bereits an der
-Seiten-Wurzel aufgelöste Routen-Parameter-Ressource), bekommt sie **keine eigene
-Boundary** – weder kombiniert noch error-only. Sie verlässt sich auf die weite
-Boundary an der Seiten-Wurzel; eine eigene wäre reine Redundanz. Das gilt, egal
-ob die Sektion selbst `entity.getCommon().use()` aufruft (das Suspense blubbert
-nach oben) oder die Ressource als Prop bekommt und **kein** Suspense auslöst
-(dann greift „kein Suspense → keine Boundary" – das **plain** Layout-Primitiv
-genügt).
+**ausschließlich die Primär-Ressource der Seite**, bekommt sie **keine eigene
+Boundary**: Sie verlässt sich auf die weite Boundary an der Seiten-Wurzel, eine
+eigene wäre reine Redundanz.
 
-**Boundary behalten**, sobald **eine** Bedingung zutrifft:
+**Eigene Boundary behalten**, sobald **eine** Bedingung zutrifft:
 
-- Die Sektion liest **Sekundärdaten** – eine andere Entity, Relation oder
-  Liste/Query, die **nicht** schon an der Seiten-Wurzel aufgelöst ist → enge
-  `…WithErrorBoundary` (kombiniert bei sichtbarem, unabhängig ladendem Inhalt).
+- Die Sektion liest **Sekundärdaten**, die **nicht** schon an der Seiten-Wurzel
+  aufgelöst sind → enge `…WithErrorBoundary` (kombiniert bei sichtbarem,
+  unabhängig ladendem Inhalt).
 - Die Component wird **mehrfach oder geteilt** genutzt (alles unter
-  `src/shared/`, Listenelemente, aus mehreren Seiten importiert) → über einer
-  Verwendung ist keine Seiten-Wurzel-Boundary garantiert.
+  `src/shared/`, Listenelemente) → über einer Verwendung ist keine
+  Seiten-Wurzel-Boundary garantiert.
 - **Modals / Kontextmenüs**, die erst beim Öffnen Sekundärdaten laden (siehe
   [Modals](#modals)).
 
-**Fehlt der Seite die Seiten-Wurzel-Boundary komplett**, erst diese ergänzen
-(den Seiteninhalt z. B. in `LayoutCardWithBoundaries` /
-`SectionsFragmentWithBoundaries` wrappen), **dann** die engen
-Sektions-Boundaries entfernen. Achtung: Wird die Primär-Ressource **oberhalb**
-des zurückgegebenen Wrappers aufgelöst (`Ghost.ofId(id).…use()` vor dem
-`return`), sitzt das Suspense außerhalb der Boundary – die Auflösung muss dann
-in den Render-Prop der Wurzel-Boundary wandern.
+Auf oberster Ebene jeder Seite braucht es immer eine Loading- **und**
+Error-Boundary – die weite kombinierte `…WithBoundaries` an der Seiten-Wurzel.
 
 # Verfügbare Wrapper
 
-**Kombiniert (Loading + Error):** `FragmentWithBoundaries`,
-`ContentFragmentWithBoundaries`, `SectionWithBoundaries`,
-`SectionsFragmentWithBoundaries`, `LayoutCardWithBoundaries`,
-`LayoutCardFragmentWithBoundaries`, `RootLayoutWithBoundaries`,
-`SecondarySideNavigationWithBoundaries`, `TextWithBoundaries`,
-`StringWithBoundaries`, `LinkWithBoundaries`, `LinkFragmentWithBoundaries`,
-`FieldFragmentWithBoundaries`, `ChartFragmentWithBoundaries`,
-`AvatarWithBoundaries`, `LoadingSpinnerFragmentWithBoundaries`,
-`MenuItemFragmentWithBoundaries`.
+Der Component-Name ergibt sich aus dem Element plus `WithBoundaries`
+(kombiniert: Loading + Error) bzw. `WithErrorBoundary` (nur Error). Nicht jedes
+Element hat beide Varianten:
 
-**Error-only (`…WithErrorBoundary`):** `FragmentWithErrorBoundary`,
-`ContentFragmentWithErrorBoundary`, `SectionWithErrorBoundary`,
-`SectionsFragmentWithErrorBoundary`, `LayoutCardWithErrorBoundary`,
-`LayoutCardFragmentWithErrorBoundary`, `TextWithErrorBoundary`,
-`StringWithErrorBoundary`, `ModalWithErrorBoundary`,
-`ContextMenuWithErrorBoundary`.
-
-# Enforcement
-
-- **Syntaktisch, per Lint** (`local/no-raw-boundaries`): kein rohes `<Suspense>`
-  und kein direkter Import aus `react-error-boundary` außerhalb von
-  `src/shared/boundaries/`. Alles läuft über die Wrapper.
-- **Semantisch, per Review anhand dieses Regelwerks**: Kritikalität (primär /
-  sekundär), Skeleton-Treue, weit/eng-Platzierung. Diese Urteile sind statisch
-  nicht zuverlässig prüfbar und gehören daher in Review + dieses Dokument.
+| Element              | Kombiniert (`…WithBoundaries`) | Nur Error (`…WithErrorBoundary`) |
+| -------------------- | :----------------------------: | :------------------------------: |
+| `LayoutCard`         |               ✓                |                ✓                 |
+| `LayoutCardFragment` |               ✓                |                ✓                 |
+| `Section`            |               ✓                |                ✓                 |
+| `SectionsFragment`   |               ✓                |                ✓                 |
+| `ContentFragment`    |               ✓                |                ✓                 |
+| `Fragment`           |               ✓                |                ✓                 |
+| `Text`               |               ✓                |                ✓                 |
+| `String`             |               ✓                |                ✓                 |
+| `Link`               |               ✓                |                –                 |
+| `LinkFragment`       |               ✓                |                –                 |
+| `FieldFragment`      |               ✓                |                –                 |
+| `ChartFragment`      |               ✓                |                –                 |
+| `Avatar`             |               ✓                |                –                 |
+| `MenuItemFragment`   |               ✓                |                –                 |
+| `Modal`              |               –                |                ✓                 |
+| `ContextMenu`        |               –                |                ✓                 |
 
 ---
 
