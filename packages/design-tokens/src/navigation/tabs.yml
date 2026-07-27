@@ -30,5 +30,3 @@ tabs:
       value: "{font-weight.bold}"
   spacing:
     value: "{size-rem.s}"
-  separator-height:
-    value: "{size-rem.m}"
