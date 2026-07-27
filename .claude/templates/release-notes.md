@@ -25,8 +25,11 @@
 
 ## Deprecations
 
-<!-- APIs now deprecated (via useWarnDeprecation) + the replacement path.
-     Appears in minors too. Delete the section if there are none. -->
+<!-- APIs newly deprecated this release (via useWarnDeprecation). Deprecations
+     are non-breaking (the old API still works and only warns), so this section
+     belongs in minors too, not just majors. Per item: the replacement path,
+     plus a MIGRATION.md entry / codemod under packages/codemods where one
+     exists. Delete the section if there are none. -->
 
 - …
 
