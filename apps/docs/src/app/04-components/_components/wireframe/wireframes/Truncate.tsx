@@ -10,8 +10,8 @@ import { IconContextMenu } from "@mittwald/flow-react-components";
 
 export const TruncateWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WRow width="78%">
-      <WText width="72%" />
+    <WRow width="70%">
+      <WText />
       <WIcon>
         <IconContextMenu />
       </WIcon>

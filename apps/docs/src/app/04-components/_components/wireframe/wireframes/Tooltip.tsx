@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import {
-  WCircle,
+  WButton,
   WFrame,
   WOverlay,
   WStack,
@@ -9,16 +9,12 @@ import {
 } from "@/app/04-components/_components/wireframe/primitives";
 
 export const TooltipWireframe: FC = () => (
-  <WFrame>
-    <WStack alignItems="center">
-      <WOverlay tone="700" width={100}>
-        <WText tone="200" />
+  <WFrame justifyContent="center">
+    <WStack alignItems="center" width={200}>
+      <WOverlay>
+        <WText />
       </WOverlay>
-      <WCircle
-        tone="600"
-        width="var(--size-px--m)"
-        height="var(--size-px--m)"
-      />
+      <WButton width="80%" />
     </WStack>
   </WFrame>
 );

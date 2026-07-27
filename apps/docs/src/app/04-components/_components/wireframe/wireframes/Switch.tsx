@@ -10,7 +10,7 @@ export const SwitchWireframe: FC = () => (
   <WFrame justifyContent="center">
     <span className={styles.switchTrack}>
       <WCircle
-        tone="100"
+        tone="200"
         width="var(--size-px--m)"
         height="var(--size-px--m)"
       />

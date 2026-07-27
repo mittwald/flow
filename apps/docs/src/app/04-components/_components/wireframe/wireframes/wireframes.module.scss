@@ -10,7 +10,7 @@
 
 .tableHeaderCell,
 .tableCell {
-  min-height: var(--size-px--l);
+  min-height: var(--size-px--xl);
   border-inline-end: 2px solid var(--neutral--color--500);
   border-block-end: 2px solid var(--neutral--color--500);
 }
@@ -33,7 +33,6 @@
   height: var(--size-px--l);
   overflow: hidden;
   background: var(--neutral--color--400);
-  border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--l);
 }
 

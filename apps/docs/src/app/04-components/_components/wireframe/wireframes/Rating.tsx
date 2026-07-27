@@ -10,20 +10,14 @@ import { IconStar, IconStarFilled } from "@mittwald/flow-react-components";
 export const RatingWireframe: FC = () => (
   <WFrame>
     <WRow justifyContent="center">
-      <WIcon>
-        <IconStarFilled />
+      <WIcon tone="600">
+        <IconStarFilled size="l" />
       </WIcon>
-      <WIcon>
-        <IconStarFilled />
+      <WIcon tone="600">
+        <IconStarFilled size="l" />
       </WIcon>
-      <WIcon>
-        <IconStarFilled />
-      </WIcon>
-      <WIcon>
-        <IconStar />
-      </WIcon>
-      <WIcon>
-        <IconStar />
+      <WIcon tone="600">
+        <IconStar size="l" />
       </WIcon>
     </WRow>
   </WFrame>
