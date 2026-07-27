@@ -10,7 +10,7 @@ import { IconImage } from "@mittwald/flow-react-components";
 export const LightBoxWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WOverlay width="60%" alignItems="center">
-      <WIcon tone="800">
+      <WIcon>
         <IconImage size="l" />
       </WIcon>
     </WOverlay>

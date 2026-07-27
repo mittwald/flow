@@ -10,15 +10,15 @@ import { IconChevronRight } from "@mittwald/flow-react-components";
 
 export const BreadcrumbWireframe: FC = () => (
   <WFrame>
-    <WRow>
+    <WRow alignItems="center">
       <WText width="22%" />
-      <WIcon tone="800">
-        <IconChevronRight size="s" />
+      <WIcon>
+        <IconChevronRight />
       </WIcon>
       <WText width="26%" />
-      <WIcon tone="800">
-        <IconChevronRight size="s" />
-      </WIcon>{" "}
+      <WIcon>
+        <IconChevronRight />
+      </WIcon>
       <WText width="16%" />
     </WRow>
   </WFrame>

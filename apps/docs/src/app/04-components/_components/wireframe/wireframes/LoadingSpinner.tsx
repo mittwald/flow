@@ -9,7 +9,7 @@ import { Icon } from "@mittwald/flow-react-components";
 
 export const LoadingSpinnerWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WIcon tone="800">
+    <WIcon>
       <Icon size="l">
         <IconLoader2 />
       </Icon>

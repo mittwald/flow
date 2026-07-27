@@ -9,13 +9,9 @@ import { IconUser } from "@mittwald/flow-react-components";
 
 export const AvatarWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WCircle
-      tone="500"
-      width="var(--size-px--xxl)"
-      height="var(--size-px--xxl)"
-    >
-      <WIcon tone="800">
-        <IconUser size="m" />
+    <WCircle tone="600" width={72} height={72}>
+      <WIcon tone="400">
+        <IconUser size="l" />
       </WIcon>
     </WCircle>
   </WFrame>

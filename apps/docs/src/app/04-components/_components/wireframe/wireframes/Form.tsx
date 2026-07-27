@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
+  WButton,
   WFrame,
   WInput,
   WRow,
@@ -18,7 +18,7 @@ export const FormWireframe: FC = () => (
         <WInput />
       </WStack>
       <WRow justifyContent="flex-end">
-        <WBox width="40%" />
+        <WButton width="40%" />
       </WRow>
     </WStack>
   </WFrame>

@@ -11,17 +11,17 @@ import {
 export const MessageThreadWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WRow>
-      <WCircle width={32} height={32} />
+      <WCircle width={40} height={40} />
       <WBox width="70%">
         <WText />
         <WText width="80%" />
       </WBox>
     </WRow>
     <WRow justifyContent="flex-end">
-      <WBox width="60%">
+      <WBox width="75%">
         <WText />
       </WBox>
-      <WCircle width={32} height={32} />
+      <WCircle width={40} height={40} />
     </WRow>
   </WFrame>
 );

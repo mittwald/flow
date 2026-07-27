@@ -11,7 +11,7 @@ import { IconStar } from "@mittwald/flow-react-components";
 export const IllustratedMessageWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack alignItems="center">
-      <WIcon tone="800">
+      <WIcon>
         <IconStar size="l" />
       </WIcon>
       <WText width="50%" />

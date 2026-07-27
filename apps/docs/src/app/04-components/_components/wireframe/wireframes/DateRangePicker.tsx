@@ -8,14 +8,19 @@ import {
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconDate } from "@mittwald/flow-react-components";
+import { IconMinus } from "@mittwald/flow-react-components";
 
 export const DateRangePickerWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="space-between">
       <WRow alignItems="center">
-        <WText tone="400" width="30%" />-<WText tone="400" width="30%" />
+        <WText tone="400" width="30%" />
+        <WIcon>
+          <IconMinus size="s" />
+        </WIcon>
+        <WText tone="400" width="30%" />
       </WRow>
-      <WIcon tone="800">
+      <WIcon>
         <IconDate />
       </WIcon>
     </WInput>

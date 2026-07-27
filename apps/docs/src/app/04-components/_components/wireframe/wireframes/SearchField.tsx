@@ -10,7 +10,7 @@ import { IconSearch } from "@mittwald/flow-react-components";
 export const SearchFieldWireframe: FC = () => (
   <WFrame>
     <WInput>
-      <WIcon tone="800">
+      <WIcon>
         <IconSearch />
       </WIcon>
     </WInput>

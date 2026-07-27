@@ -13,13 +13,13 @@ export const RadioGroupWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="80%">
       <WRow alignItems="center" width="80%">
-        <WIcon tone="800">
+        <WIcon>
           <IconRadioOn />
         </WIcon>
         <WText />
       </WRow>
       <WRow alignItems="center" width="100%">
-        <WIcon tone="800">
+        <WIcon>
           <IconRadioOff />
         </WIcon>
         <WText />

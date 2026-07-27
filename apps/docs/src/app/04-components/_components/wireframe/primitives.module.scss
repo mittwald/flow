@@ -47,7 +47,7 @@
   align-items: center;
   padding-inline: var(--size-px--m);
   padding-block: var(--size-px--s);
-  border: 1px solid var(--neutral--color--500);
+  border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
 }
@@ -66,21 +66,13 @@
   padding: var(--size-px--m);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
-
-  svg {
-    color: var(--neutral--color--400);
-  }
+  align-items: center;
 }
 
 .line {
   display: block;
-  width: var(--wireframe-width, 100%);
-  height: var(--wireframe-height, var(--size-px--xxs));
-  border-radius: var(--corner-radius--l);
-}
-
-.line {
-  height: var(--wireframe-height, 1px);
+  border-radius: 2px;
+  height: 2px;
 }
 
 .circle {

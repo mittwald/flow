@@ -2,17 +2,24 @@
 import type { FC } from "react";
 import {
   WFrame,
+  WIcon,
+  WRow,
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import { IconNumber } from "@mittwald/flow-react-components";
 
 export const MarkdownWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WText width="56%" />
+      <WRow alignItems="center">
+        <WIcon>
+          <IconNumber />
+        </WIcon>
+        <WText width="56%" />
+      </WRow>
       <WText width="92%" />
       <WText width="78%" />
-      <WText width="64%" />
     </WStack>
   </WFrame>
 );

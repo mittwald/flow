@@ -8,7 +8,7 @@ import { IconImage } from "@mittwald/flow-react-components";
 
 export const ImageWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WIcon tone="800">
+    <WIcon>
       <IconImage size="l" />
     </WIcon>
   </WFrame>

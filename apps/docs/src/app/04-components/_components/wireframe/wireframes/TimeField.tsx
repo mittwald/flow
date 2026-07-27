@@ -10,7 +10,7 @@ import { IconTime } from "@mittwald/flow-react-components";
 export const TimeFieldWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="flex-end">
-      <WIcon tone="800">
+      <WIcon>
         <IconTime />
       </WIcon>
     </WInput>

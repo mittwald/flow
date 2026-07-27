@@ -8,11 +8,11 @@ import {
 import { IconDanger } from "@mittwald/flow-react-components";
 
 export const AlertTextWireframe: FC = () => (
-  <WFrame justifyContent="center" width="50%">
+  <WFrame justifyContent="center" alignItems="center" width="50%">
     <WIcon tone="800">
-      <IconDanger size="s" />
+      <IconDanger />
     </WIcon>
-    <WText tone="800" />
+    <WText tone="700" />
   </WFrame>
 );
 

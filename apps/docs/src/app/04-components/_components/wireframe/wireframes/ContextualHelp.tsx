@@ -10,7 +10,7 @@ import { IconInfo } from "@mittwald/flow-react-components";
 
 export const ContextualHelpWireframe: FC = () => (
   <WFrame>
-    <WIcon tone="800">
+    <WIcon>
       <IconInfo />
     </WIcon>
     <WOverlay>

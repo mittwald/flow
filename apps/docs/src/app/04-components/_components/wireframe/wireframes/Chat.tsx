@@ -12,7 +12,7 @@ import {
 export const ChatWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WRow>
-      <WCircle width={32} height={32} />
+      <WCircle width={40} height={40} />
       <WBox>
         <WText />
         <WText width="80%" />

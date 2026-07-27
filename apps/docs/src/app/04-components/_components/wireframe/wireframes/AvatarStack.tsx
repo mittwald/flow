@@ -14,13 +14,13 @@ export const AvatarStackWireframe: FC = () => (
       height="var(--size-px--xxl)"
     />
     <WCircle
-      tone="500"
+      tone="600"
       width="var(--size-px--xxl)"
       height="var(--size-px--xxl)"
       className={styles.avatarOverlap}
     />
     <WCircle
-      tone="300"
+      tone="500"
       width="var(--size-px--xxl)"
       height="var(--size-px--xxl)"
       className={styles.avatarOverlap}

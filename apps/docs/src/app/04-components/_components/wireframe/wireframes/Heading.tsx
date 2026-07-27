@@ -7,7 +7,7 @@ import {
 
 export const HeadingWireframe: FC = () => (
   <WFrame>
-    <WText width="64%" height="var(--size-px--l)" />
+    <WText width="64%" height={32} />
   </WFrame>
 );
 

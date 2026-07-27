@@ -12,20 +12,20 @@ import { IconDanger } from "@mittwald/flow-react-components";
 export const NotificationProviderWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WOverlay>
-      <WRow>
+      <WRow alignItems="center">
         <WIcon tone="800">
-          <IconDanger size="s" />
+          <IconDanger />
         </WIcon>
-        <WText width="48%" tone="800" />
+        <WText width="48%" tone="700" />
       </WRow>
       <WText width="88%" />
     </WOverlay>
     <WOverlay>
-      <WRow>
+      <WRow alignItems="center">
         <WIcon tone="800">
-          <IconDanger size="s" />
+          <IconDanger />
         </WIcon>
-        <WText width="60%" tone="800" />
+        <WText width="60%" tone="700" />
       </WRow>
       <WText width="80%" />
     </WOverlay>

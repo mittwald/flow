@@ -12,7 +12,7 @@ import { IconChevronDown } from "@mittwald/flow-react-components";
 export const SelectWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WInput justifyContent="flex-end">
-      <WIcon tone="800">
+      <WIcon>
         <IconChevronDown />
       </WIcon>
     </WInput>

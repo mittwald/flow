@@ -1,18 +1,18 @@
 .table {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 84%;
+  width: 100%;
   overflow: hidden;
   background: var(--neutral--color--100);
-  border: 1px solid var(--neutral--color--500);
+  border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--m);
 }
 
 .tableHeaderCell,
 .tableCell {
   min-height: var(--size-px--l);
-  border-inline-end: 1px solid var(--neutral--color--400);
-  border-block-end: 1px solid var(--neutral--color--400);
+  border-inline-end: 2px solid var(--neutral--color--500);
+  border-block-end: 2px solid var(--neutral--color--500);
 }
 
 .tableHeaderCell:nth-child(3n),
@@ -25,25 +25,15 @@
 }
 
 .tableHeaderCell {
-  background:
-    linear-gradient(var(--neutral--color--700), var(--neutral--color--700))
-      center / 52% var(--size-px--xxxs) no-repeat,
-    var(--neutral--color--300);
-}
-
-.tableCell {
-  background:
-    linear-gradient(var(--neutral--color--500), var(--neutral--color--500))
-      center / 64% 1px no-repeat,
-    var(--neutral--color--100);
+  background: var(--neutral--color--300);
 }
 
 .progressTrack {
   width: 78%;
-  height: var(--size-px--m);
+  height: var(--size-px--l);
   overflow: hidden;
   background: var(--neutral--color--400);
-  border: 1px solid var(--neutral--color--500);
+  border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--l);
 }
 
@@ -51,7 +41,7 @@
   display: block;
   width: 58%;
   height: 100%;
-  background: var(--neutral--color--800);
+  background: var(--neutral--color--700);
   border-radius: var(--corner-radius--l);
 }
 
@@ -102,16 +92,17 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 0;
   overflow: hidden;
-  border: 1px solid var(--neutral--color--500);
+  border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--m);
+  gap: 0;
 }
 
 .segment {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--size-px--xl);
-  border-inline-end: 1px solid var(--neutral--color--400);
+  height: 100%;
+  border-inline-end: 2px solid var(--neutral--color--500);
 }
 
 .segment:last-child {
@@ -123,9 +114,9 @@
 }
 
 .sliderTrack {
+  width: 100%;
   position: relative;
-  width: 78%;
-  height: var(--size-px--s);
+  height: 12px;
   background: var(--neutral--color--400);
   border-radius: var(--corner-radius--l);
 }
@@ -135,7 +126,7 @@
   width: 48%;
   height: 100%;
   content: "";
-  background: var(--neutral--color--800);
+  background: var(--neutral--color--700);
   border-radius: inherit;
 }
 
@@ -143,29 +134,29 @@
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 48%;
-  width: var(--size-px--l);
+  width: var(--size-px--xl);
   aspect-ratio: 1;
-  background: var(--neutral--color--800);
+  background: var(--neutral--color--700);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
 .cropper {
-  padding-block: 64px;
+  padding-block: 48px;
   padding-inline: 0;
-  border: 1px solid var(--neutral--color--800);
+  border: 2px solid var(--neutral--color--600);
 }
 
 .cropFrame {
   border-radius: 0;
-  border-block: 1px solid var(--neutral--color--800);
+  border-block: 2px solid var(--neutral--color--600);
 }
 
 .chart {
   width: 78%;
   height: 64%;
-  border-inline-start: 2px solid var(--neutral--color--700);
-  border-block-end: 2px solid var(--neutral--color--700);
+  border-inline-start: 4px solid var(--neutral--color--600);
+  border-block-end: 4px solid var(--neutral--color--600);
 }
 
 .chartBars {

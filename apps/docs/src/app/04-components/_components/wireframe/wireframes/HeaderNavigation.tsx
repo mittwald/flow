@@ -8,9 +8,9 @@ import {
 
 export const HeaderNavigationWireframe: FC = () => (
   <WFrame alignItems="center" justifyContent="center">
-    <WText width="18%" />
-    <WText width="18%" />
-    <WCircle width={32} height={32} />
+    <WText width="25%" height={24} />
+    <WText width="25%" height={24} />
+    <WCircle width={40} height={40} />
   </WFrame>
 );
 

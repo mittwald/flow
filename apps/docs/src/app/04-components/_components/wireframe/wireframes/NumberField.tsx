@@ -10,10 +10,10 @@ import { IconPlus, IconMinus } from "@mittwald/flow-react-components";
 export const NumberFieldWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="flex-end">
-      <WIcon tone="800">
+      <WIcon>
         <IconPlus />
       </WIcon>
-      <WIcon tone="800">
+      <WIcon>
         <IconMinus />
       </WIcon>
     </WInput>

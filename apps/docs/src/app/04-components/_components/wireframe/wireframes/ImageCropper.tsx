@@ -12,7 +12,7 @@ export const ImageCropperWireframe: FC = () => (
   <WFrame>
     <WBox className={styles.cropper} tone="600">
       <WBox className={styles.cropFrame} alignItems="center">
-        <WIcon tone="800">
+        <WIcon>
           <IconImage />
         </WIcon>
       </WBox>

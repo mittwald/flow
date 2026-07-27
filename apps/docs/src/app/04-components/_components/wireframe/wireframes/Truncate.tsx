@@ -12,7 +12,7 @@ export const TruncateWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WRow width="78%">
       <WText width="72%" />
-      <WIcon tone="800">
+      <WIcon>
         <IconContextMenu />
       </WIcon>
     </WRow>

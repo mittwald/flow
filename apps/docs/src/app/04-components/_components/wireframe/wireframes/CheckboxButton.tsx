@@ -1,7 +1,7 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
+  WButton,
   WFrame,
   WIcon,
   WRow,
@@ -11,14 +11,14 @@ import { IconCheckboxChecked } from "@mittwald/flow-react-components";
 
 export const CheckboxButtonWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WBox width="64%">
+    <WButton width="64%">
       <WRow alignItems="center">
-        <WIcon tone="800">
+        <WIcon tone="400">
           <IconCheckboxChecked />
         </WIcon>
         <WText />
       </WRow>
-    </WBox>
+    </WButton>
   </WFrame>
 );
 

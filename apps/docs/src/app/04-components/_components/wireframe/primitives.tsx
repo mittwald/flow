@@ -38,7 +38,7 @@ const getToneClass = (tone: Tone = "400") => styles[`tone${tone}`];
 export const WIcon: FC<
   PropsWithChildren<{ tone?: Tone; className?: string }>
 > = (props) => {
-  const { children, className, tone } = props;
+  const { children, className, tone = "700" } = props;
 
   return (
     <span

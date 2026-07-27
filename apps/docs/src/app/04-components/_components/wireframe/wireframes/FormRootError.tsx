@@ -22,11 +22,11 @@ export const FormRootErrorWireframe: FC = () => (
       </WStack>
 
       <WBox tone="300">
-        <WRow>
+        <WRow alignItems="center">
           <WIcon tone="800">
-            <IconDanger size="s" />
+            <IconDanger />
           </WIcon>
-          <WText width="48%" tone="800" />
+          <WText tone="700" />
         </WRow>
       </WBox>
     </WStack>

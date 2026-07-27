@@ -14,9 +14,9 @@ export const CodeEditorWireframe: FC = () => (
   <WFrame>
     <WInput>
       <WStack>
-        <WRow>
-          <WIcon tone="800">
-            <IconCode size="s" />
+        <WRow alignItems="center">
+          <WIcon>
+            <IconCode />
           </WIcon>
           <WText width="74%" />
         </WRow>

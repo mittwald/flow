@@ -8,8 +8,8 @@ import {
 } from "@/app/04-components/_components/wireframe/primitives";
 
 export const AlignWireframe: FC = () => (
-  <WFrame>
-    <WCircle height={42} width={42} />
+  <WFrame alignItems="center">
+    <WCircle height={48} width={48} />
     <WStack width="70%">
       <WText width="80%" />
       <WText width="100%" />

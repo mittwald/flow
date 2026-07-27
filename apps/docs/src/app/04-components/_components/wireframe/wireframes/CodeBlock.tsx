@@ -1,9 +1,9 @@
 "use client";
 import type { FC } from "react";
 import {
+  WBox,
   WFrame,
   WIcon,
-  WInput,
   WRow,
   WStack,
   WText,
@@ -12,17 +12,17 @@ import { IconCode } from "@mittwald/flow-react-components";
 
 export const CodeBlockWireframe: FC = () => (
   <WFrame>
-    <WInput>
+    <WBox>
       <WStack>
-        <WRow>
-          <WIcon tone="800">
-            <IconCode size="s" />
+        <WRow alignItems="center">
+          <WIcon>
+            <IconCode />
           </WIcon>
           <WText width="74%" />
         </WRow>
         <WText width="90%" />
       </WStack>
-    </WInput>
+    </WBox>
   </WFrame>
 );
 

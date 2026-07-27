@@ -10,7 +10,7 @@ import { IconDate } from "@mittwald/flow-react-components";
 export const DatePickerWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="flex-end">
-      <WIcon tone="800">
+      <WIcon>
         <IconDate />
       </WIcon>
     </WInput>
