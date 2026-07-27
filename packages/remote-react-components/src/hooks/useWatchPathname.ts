@@ -3,13 +3,15 @@ import { useEffect, useRef } from "react";
 type Callback = (pathname: string) => void;
 
 export const useWatchPathname = (callback: Callback) => {
-  if (typeof location === "undefined") {
-    return;
-  }
-
-  const storedHref = useRef(location.href);
+  const storedHref = useRef<string | undefined>(
+    typeof location === "undefined" ? undefined : location.href,
+  );
 
   useEffect(() => {
+    if (typeof location === "undefined") {
+      return;
+    }
+
     /** Need to poll here, because no appropriate browser API exists */
     const checker = setInterval(() => {
       const href = location.href;

@@ -18,15 +18,15 @@
     margin-top: calc(var(--layout-card--padding) * -1);
     margin-inline: calc(var(--layout-card--padding) * -1);
     margin-bottom: var(--layout-card--padding);
-    border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
-    border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
+    border-start-end-radius: calc(var(--layout-card--corner-radius) - 1px);
+    border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
 
     li:first-child :global(.flow--tab-navigation--link) {
-      border-top-left-radius: calc(var(--layout-card--corner-radius) - 1px);
+      border-start-start-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
 
     :global(.flow--tab-navigation--more-button) {
-      border-top-right-radius: calc(var(--layout-card--corner-radius) - 1px);
+      border-start-end-radius: calc(var(--layout-card--corner-radius) - 1px);
     }
   }
 

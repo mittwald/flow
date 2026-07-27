@@ -1,7 +1,7 @@
 .notificationContainer {
   position: fixed;
   top: var(--notification-provider--window-to-provider-spacing);
-  right: var(--notification-provider--window-to-provider-spacing);
+  inset-inline-end: var(--notification-provider--window-to-provider-spacing);
   display: flex;
   flex-direction: column;
   z-index: 1;

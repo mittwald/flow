@@ -32,7 +32,7 @@
   .actions {
     position: absolute;
     top: 0;
-    right: calc(var(--button-size-plus-spacing) * -1);
+    inset-inline-end: calc(var(--button-size-plus-spacing) * -1);
     display: flex;
     flex-direction: column;
     row-gap: var(--light-box--spacing);
@@ -106,11 +106,11 @@
   }
 
   .previousButton {
-    left: 0;
+    inset-inline-start: 0;
   }
 
   .nextButton {
-    right: 0;
+    inset-inline-end: 0;
   }
 }
 

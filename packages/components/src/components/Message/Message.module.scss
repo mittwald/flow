@@ -35,7 +35,7 @@
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
+        inset-inline-start: 0;
         width: var(--message--tip-size-x);
         height: var(--message--tip-size-y);
       }
@@ -52,7 +52,7 @@
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
+        inset-inline-start: 0;
         width: var(--message-tip-border-size-x);
         height: var(--message-tip-border-size-y);
       }
@@ -84,23 +84,23 @@
 
     .content {
       background-color: var(--message-background);
-      border-top-right-radius: 0;
+      border-start-end-radius: 0;
       margin-inline-end: var(--message--tip-size-x);
 
       .tip {
-        right: calc(var(--message--tip-size-x) * -1);
+        inset-inline-end: calc(var(--message--tip-size-x) * -1);
 
         &::before {
-          border-top-left-radius: 100%;
+          border-start-start-radius: 100%;
           box-shadow: 0 0 0 var(--message--tip-size-x) var(--message-background);
         }
       }
 
       .tipBorder {
-        right: calc(var(--message-tip-border-size-x) * -1);
+        inset-inline-end: calc(var(--message-tip-border-size-x) * -1);
 
         &::before {
-          border-top-left-radius: 100%;
+          border-start-start-radius: 100%;
           box-shadow: 0 0 0 var(--message-tip-border-size-x)
             var(--message--border-color);
         }
@@ -116,24 +116,24 @@
 
   &.responder {
     .content {
-      border-top-left-radius: 0;
+      border-start-start-radius: 0;
       margin-inline-start: var(--message--tip-size-x);
 
       .tip {
-        left: calc(var(--message--tip-size-x) * -1);
+        inset-inline-start: calc(var(--message--tip-size-x) * -1);
 
         &::before {
-          border-top-right-radius: 100%;
+          border-start-end-radius: 100%;
           box-shadow: var(--message--tip-size-x) 0 0 var(--message--tip-size-x)
             var(--message-background);
         }
       }
 
       .tipBorder {
-        left: calc(var(--message-tip-border-size-x) * -1);
+        inset-inline-start: calc(var(--message-tip-border-size-x) * -1);
 
         &::before {
-          border-top-right-radius: 100%;
+          border-start-end-radius: 100%;
           box-shadow: var(--message-tip-border-size-x) 0 0
             var(--message-tip-border-size-x) var(--message--border-color);
         }
