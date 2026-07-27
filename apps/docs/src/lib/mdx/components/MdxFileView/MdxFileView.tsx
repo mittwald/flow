@@ -198,6 +198,7 @@ export const MdxFileView: FC<Props> = (props) => {
   return (
     <div ref={rootRef} style={{ display: "contents" }}>
       <NextMDXRemote {...mdxFile.mdxSource} components={mdxComponents} />
+      <div>Foo</div>
     </div>
   );
 };
