@@ -11,8 +11,8 @@ release state on a branch, and open a **Draft** PR. You do **not** bump the
 version, build, tag, publish, or create the GitHub release — CI does all of that
 on merge.
 
-The model may not be live yet: if there is no `next` branch, require `--from`/
-`--to` overrides and say so before doing anything else.
+The model may not be live yet: if there is no `next` branch, Step 1 stops and
+requires `--from`/`--to` overrides before doing anything else.
 
 ## Arguments
 
@@ -25,16 +25,15 @@ The model may not be live yet: if there is no `next` branch, require `--from`/
 ## Steps
 
 1. **Fetch.** Run `git fetch --all --tags`. Compute everything against
-   `origin/<from>` and `origin/<to>`, never the local working state.
+   `origin/<from>` and `origin/<to>`, never the local working state. If the
+   resolved `<from>` (default `next`) does not exist on `origin`, stop and
+   explain that the model may not be live yet and that the maintainer must pass
+   `--from`/`--to` overrides.
 
-2. **Preconditions.**
-   - **Hard-stop** (abort and explain) if any hold:
+2. **Version-independent preconditions.**
+   - **Hard-stop** (abort and explain) if:
      - `origin/<from>` has no commits ahead of `origin/<to>` (nothing to
-       release);
-     - a `release/*` branch or an open release PR for the same version already
-       exists;
-     - the computed `x.y.0` already exists as a git tag or as a published npm
-       version of `@mittwald/flow-react-components`.
+       release).
    - **Warn + ask to proceed** (show the problem, wait for an explicit yes) if:
      - the working tree is dirty;
      - the forward-merge is behind (`origin/<to>` has commits not on
@@ -51,16 +50,23 @@ The model may not be live yet: if there is no `next` branch, require `--from`/
      breaking change → major).
    - `--version` overrides both.
 
-4. **Collect raw material.** List the Conventional Commits in
+4. **Version-dependent preconditions** (now that `x.y.0` is known).
+   - **Hard-stop** (abort and explain) if any hold:
+     - a `release/*` branch or an open release PR for the same version already
+       exists;
+     - the computed `x.y.0` already exists as a git tag or as a published npm
+       version of `@mittwald/flow-react-components`.
+
+5. **Collect raw material.** List the Conventional Commits in
    `origin/<to>..origin/<from>`. Group by type, capture scope and PR number
    (e.g. `(#1234)`), and count the commits.
 
-5. **Draft the curated notes.** Follow `.claude/templates/release-notes.md`
+6. **Draft the curated notes.** Follow `.claude/templates/release-notes.md`
    **exactly**: copy its structure, obey its authoring rules, and delete its
    authoring comments and any empty section from your output. Minor/major only —
    no Fixes section. Include `## Migrations` only for a major.
 
-6. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
+7. **Assemble the PR body** by filling this frame (replace every `{{…}}`):
 
    ```markdown
    ## Release {{VERSION}}
@@ -101,14 +107,17 @@ The model may not be live yet: if there is no `next` branch, require `--from`/
    The curated notes MUST sit **verbatim** between
    `<!-- release-notes:start -->` and `<!-- release-notes:end -->`, with nothing
    else between the markers — that block is the single source CI reads to create
-   the GitHub release.
+   the GitHub release. The extraction CI performs on merge must tolerate (trim)
+   leading and trailing blank lines inside the marker block — prettier may
+   insert blank lines adjacent to the markers, and that whitespace is not
+   content.
 
-7. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
+8. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
    `release/x.y.0`, `from → to`, `current → target` version). Ask for explicit
    confirmation **before any push or PR creation**. If declined, stop and change
    nothing on the remote.
 
-8. **Freeze branch + Draft PR** (only after confirmation):
+9. **Freeze branch + Draft PR** (only after confirmation):
    - Create `release/x.y.0` from `origin/<from>` and push it to `origin`.
    - Open a **Draft** PR into `<to>`:
      ```bash
@@ -116,10 +125,10 @@ The model may not be live yet: if there is no `next` branch, require `--from`/
        --title "Release x.y.0" --body-file <path-to-body>
      ```
 
-9. **Summary.** Print the PR URL, the target version, and the maintainer's next
-   steps: curate the notes in the PR, tick the checklist, mark Draft → Ready,
-   and merge — after which CI versions, builds, publishes under `latest`, and
-   creates the GitHub release from the marker block.
+10. **Summary.** Print the PR URL, the target version, and the maintainer's next
+    steps: curate the notes in the PR, tick the checklist, mark Draft → Ready,
+    and merge — after which CI versions, builds, publishes under `latest`, and
+    creates the GitHub release from the marker block.
 
 ## You do NOT
 

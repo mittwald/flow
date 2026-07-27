@@ -2,8 +2,8 @@
 
 - **Date:** 2026-07-27
 - **Status:** Approved (design) — implementation pending
-- **Related:** RFC [#2711](https://github.com/mittwald/flow/issues/2711) (release
-  model — proposed, not yet adopted)
+- **Related:** RFC [#2711](https://github.com/mittwald/flow/issues/2711)
+  (release model — proposed, not yet adopted)
 
 ## Purpose
 
@@ -37,17 +37,17 @@ source/target branches are overridable via arguments.
 The command owns everything that is side-effect-light and can run from a
 developer machine; CI owns everything that mutates versioned release state.
 
-| Responsibility | Owner |
-| --- | --- |
-| Compute target version | command |
-| Collect raw commits, draft curated notes | command |
-| Create + push freeze branch `release/x.y.0` | command |
-| Open Draft PR `release/x.y.0 → main` | command |
-| `lerna version` (version commit) | CI, on merge |
-| Build | CI, on merge |
-| Git tags | CI, on merge |
-| npm publish (`latest`) | CI, on merge |
-| Create GitHub release from curated notes | CI, on merge |
+| Responsibility                              | Owner        |
+| ------------------------------------------- | ------------ |
+| Compute target version                      | command      |
+| Collect raw commits, draft curated notes    | command      |
+| Create + push freeze branch `release/x.y.0` | command      |
+| Open Draft PR `release/x.y.0 → main`        | command      |
+| `lerna version` (version commit)            | CI, on merge |
+| Build                                       | CI, on merge |
+| Git tags                                    | CI, on merge |
+| npm publish (`latest`)                      | CI, on merge |
+| Create GitHub release from curated notes    | CI, on merge |
 
 **The command creates no tags, no version commit, no build, and no publish.**
 
@@ -59,8 +59,8 @@ The command itself — a prompt with frontmatter (`description`, `argument-hint`
 Modeled on `.claude/commands/review-flow.md`. Arguments are **free-text** (the
 command is a prompt, not a CLI); the `argument-hint` documents examples:
 
-- `--from <branch>` (default `next`), `--to <branch>` (default `main`) — override
-  source/target for prototype/testing against other branches.
+- `--from <branch>` (default `next`), `--to <branch>` (default `main`) —
+  override source/target for prototype/testing against other branches.
 - `--version <x.y.0>` — explicit override when the graduation calculation is
   wrong.
 
@@ -103,38 +103,45 @@ Details:
 
 1. **Parse arguments** (free-text `--from` / `--to` / `--version`) → defaults
    `next` / `main`.
-2. **`git fetch`**, then check preconditions (compute against `origin/*`, not the
-   local working state):
+2. **`git fetch`**, computing everything against `origin/*`, not the local
+   working state. If the resolved source branch (default `next`) does not exist
+   on `origin`, stop and explain that the model may not be live yet and that the
+   maintainer must pass `--from`/`--to` overrides.
+3. **Version-independent preconditions:**
    - **Hard-stop (abort, explain why):**
-     - source has no commits ahead of target (nothing to release),
-     - a `release/*` branch or open release PR for the same version already
-       exists,
-     - the computed `x.y.0` already exists as a git tag / npm version.
+     - source has no commits ahead of target (nothing to release).
    - **Warn + confirm (show the problem, ask whether to proceed):**
      - working tree dirty,
      - forward-merge behind (target has commits not on source),
      - CI on source (`next`) is not green — warn rather than hard-stop because
-       this repo has known flaky cases (Linux-gated visual snapshots,
-       fake-timer races).
-3. **Determine target version** — strip `-next.N` (prerelease id) from the
+       this repo has known flaky cases (Linux-gated visual snapshots, fake-timer
+       races).
+4. **Determine target version** — strip `-next.N` (prerelease id) from the
    `origin/next` version; if not unambiguously determinable, fall back to
    recomputing the bump from Conventional Commits in `main..next`; `--version`
    overrides everything.
-4. **Collect raw material** — Conventional Commits `main..next`, grouped by type,
-   with PR links and a commit count.
-5. **Draft curated notes** — strictly following `.claude/templates/release-notes.md`.
-6. **Preview + confirm** — show the full PR body preview and ask before any push.
-7. **Freeze branch** — create `release/x.y.0` from `origin/next` and push it.
-8. **Open Draft PR** `release/x.y.0 → main` with the fixed body frame (below).
-9. **Summary** — print the PR URL, target version, and the maintainer's next
-   steps (curate notes, tick the checklist, mark Draft → Ready, merge).
+5. **Version-dependent preconditions** (now that `x.y.0` is known):
+   - **Hard-stop (abort, explain why):**
+     - a `release/*` branch or open release PR for the same version already
+       exists,
+     - the computed `x.y.0` already exists as a git tag / npm version.
+6. **Collect raw material** — Conventional Commits `main..next`, grouped by
+   type, with PR links and a commit count.
+7. **Draft curated notes** — strictly following
+   `.claude/templates/release-notes.md`.
+8. **Preview + confirm** — show the full PR body preview and ask before any
+   push.
+9. **Freeze branch** — create `release/x.y.0` from `origin/next` and push it.
+10. **Open Draft PR** `release/x.y.0 → main` with the fixed body frame (below).
+11. **Summary** — print the PR URL, target version, and the maintainer's next
+    steps (curate notes, tick the checklist, mark Draft → Ready, merge).
 
 ## PR body frame
 
 Defined in command prose (not a file). Sections:
 
-- **Meta table** — Source → Target, Version (`current → x.y.0`), Bump
-  (type + basis).
+- **Meta table** — Source → Target, Version (`current → x.y.0`), Bump (type +
+  basis).
 - **Curated release notes** between the marker comments (see contract below).
 - **Maintainer checklist** — notes curated; breaking changes surfaced +
   MIGRATION.md / codemod where needed; target version correct; forward-merge
@@ -157,6 +164,10 @@ CI reads exactly this block from the PR body and passes it to
 is committed to the repo — the canonical changelog is the GitHub release, while
 per-package `CHANGELOG.md` files remain the auto-generated raw log.
 
+The extraction CI performs on merge must tolerate (trim) leading and trailing
+blank lines inside the marker block — prettier may insert blank lines adjacent
+to the markers, and that whitespace is not content.
+
 ## Dependency outside this command (documented, not implemented here)
 
 `publish.yml` must be adapted so that, on merge of a release PR, the release
@@ -169,5 +180,5 @@ to work end to end.
 
 ## Non-goals
 
-The command does **not**: run `lerna version`, build, create git tags, publish to
-npm, or create the GitHub release. All of that remains CI's job on merge.
+The command does **not**: run `lerna version`, build, create git tags, publish
+to npm, or create the GitHub release. All of that remains CI's job on merge.
