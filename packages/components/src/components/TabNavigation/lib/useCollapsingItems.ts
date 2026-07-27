@@ -1,5 +1,6 @@
 import type { RefObject } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { createFrameResizeObserver } from "@/lib/dom/createFrameResizeObserver";
 import { getVisibleItemCount } from "./getVisibleItemCount";
 
 interface CollapsingItemsState {
@@ -100,35 +101,12 @@ export const useCollapsingItems = (): UseCollapsingItemsReturn => {
       return;
     }
 
-    // Defers the update to the next animation frame, because updating causes
-    // layout changes of observed elements, which would otherwise trigger
-    // "ResizeObserver loop" errors.
-    let frameRequest: number | null = null;
-
-    const observer = new ResizeObserver(() => {
-      if (frameRequest !== null) {
-        window.cancelAnimationFrame(frameRequest);
-      }
-      frameRequest = window.requestAnimationFrame(() => {
-        frameRequest = null;
-        update();
-      });
-    });
-
-    observer.observe(container);
-    observer.observe(more);
-    for (const item of list.children) {
-      observer.observe(item);
-    }
+    const observer = createFrameResizeObserver(update);
+    observer.observe([container, more, ...list.children]);
 
     update();
 
-    return () => {
-      observer.disconnect();
-      if (frameRequest !== null) {
-        window.cancelAnimationFrame(frameRequest);
-      }
-    };
+    return () => observer.disconnect();
   });
 
   return { ...state, listRef, moreRef };
