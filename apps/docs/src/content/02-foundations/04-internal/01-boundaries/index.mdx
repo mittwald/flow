@@ -132,52 +132,18 @@ zum Scope passen – ein enges Sekundär-Widget darf nicht die ganze App neu lad
 ## Seiten-Wurzel: LayoutCard
 
 Sind Funktionen oder Informationen einer LayoutCard essenziell für die Seite,
-umschließt die gesamte LayoutCard eine `LayoutCardWithBoundaries`. Über
-`sectionsCount` wird die Loading View passend dimensioniert.
-
-### Listenseite
-
-Eine Listenseite enthält meist eine einzelne Section (`sectionsCount: 1`). Der
-Count der Liste wird zuerst geladen, damit im Fehlerfall die gesamte Liste in
-die ErrorView wechselt.
-
-```tsx
-export const CronjobsPage: FC = () => (
-  <LayoutCardWithBoundaries suspenseFallbackProps={{ sectionsCount: 1 }}>
-    {() => {
-      const { projectId } = usePathParams("projectId");
-      const projectGhost = ProjectGhost.ofId(projectId);
-      const cronjobCount = projectGhost.cronjobs.getTotalCount().use();
-
-      return (
-        <>
-          <ProjectDeactivatedAlert project={projectGhost} />
-          <SectionWithBoundaries>
-            {cronjobCount === 0 ? (
-              <CronjobIllustratedMessage project={projectGhost} />
-            ) : (
-              <CronjobList project={projectGhost} />
-            )}
-          </SectionWithBoundaries>
-        </>
-      );
-    }}
-  </LayoutCardWithBoundaries>
-);
-```
+umschließt die gesamte LayoutCard eine `LayoutCardWithBoundaries`.
 
 ### Detailseite
 
-`sectionsCount` entspricht der erwarteten Anzahl Sections, damit das Layout
-stabil bleibt. Die **Primär**-Ressource des Routen-Parameters wird zuerst
-geladen, damit im Fehlerfall die ganze Seite in die ErrorView wechselt. Die
-einzelnen `…Section`-Components lesen nur diese Ressource und bekommen daher
-**keine eigene Boundary** (siehe
-[Error-Scope](#error-scope-kritikalität-der-daten)).
+Die **Primär**-Ressource des Routen-Parameters wird zuerst geladen, damit im
+Fehlerfall die ganze Seite in die ErrorView wechselt. Die einzelnen
+`…Section`-Components lesen nur diese Ressource und bekommen daher **keine
+eigene Boundary** (siehe [Error-Scope](#error-scope-kritikalität-der-daten)).
 
 ```tsx
 export const CronjobPage: FC = () => (
-  <LayoutCardWithBoundaries suspenseFallbackProps={{ sectionsCount: 2 }}>
+  <LayoutCardWithBoundaries>
     {() => {
       const { cronjobId } = usePathParams("cronjobId");
       const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
@@ -205,9 +171,7 @@ export const CronjobTabs: FC = () => (
     <Tabs>
       <Tab>
         <TabTitle>Allgemein</TabTitle>
-        <SectionsFragmentWithBoundaries
-          suspenseFallbackProps={{ sectionsCount: 3 }}
-        >
+        <SectionsFragmentWithBoundaries>
           {() => {
             const { cronjobId } = usePathParams("cronjobId");
             const cronjob = CronjobGhost.ofId(cronjobId).getCommon().use();
