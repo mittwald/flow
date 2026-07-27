@@ -1,8 +1,8 @@
 ---
-description: Prepare the release PR (next → main) — curated changelog + Draft PR
-  (RFC #2711)
-argument-hint:
-  [optional free-text, e.g. "--from next --to main --version 0.3.0"]
+description:
+  "Prepare the release PR (next → main) — curated changelog + Draft PR (RFC
+  #2711)"
+argument-hint: "optional free-text, e.g. --from next --to main --version 0.3.0"
 ---
 
 Prepare the **promotion / release PR** for mittwald Flow, following the release
