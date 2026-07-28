@@ -7,27 +7,11 @@
     "level": "stable",
     "isNew": false
   },
-  "AccordionButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "Action": {
     "level": "stable",
     "isNew": false
   },
-  "ActionBatch": {
-    "level": "stable",
-    "isNew": false
-  },
   "ActionGroup": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ActionStateContextProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ActiveFilters": {
     "level": "stable",
     "isNew": false
   },
@@ -55,18 +39,6 @@
     "level": "stable",
     "isNew": false
   },
-  "AllFiltersModal": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Area": {
-    "level": "stable",
-    "isNew": false
-  },
-  "AreaDot": {
-    "level": "stable",
-    "isNew": false
-  },
   "Autocomplete": {
     "level": "stable",
     "isNew": false
@@ -91,10 +63,6 @@
     "level": "stable",
     "isNew": false
   },
-  "BreadcrumbItem": {
-    "level": "stable",
-    "isNew": false
-  },
   "BrowserOnly": {
     "level": "stable",
     "isNew": false
@@ -103,31 +71,7 @@
     "level": "stable",
     "isNew": false
   },
-  "Calendar": {
-    "level": "stable",
-    "isNew": false
-  },
-  "CalendarHeader": {
-    "level": "stable",
-    "isNew": false
-  },
   "CartesianChart": {
-    "level": "stable",
-    "isNew": false
-  },
-  "CartesianGrid": {
-    "level": "deprecated",
-    "isNew": false
-  },
-  "ChartGrid": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ChartLegend": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ChartTooltip": {
     "level": "stable",
     "isNew": false
   },
@@ -171,15 +115,7 @@
     "level": "stable",
     "isNew": false
   },
-  "ComplexityIndicator": {
-    "level": "stable",
-    "isNew": false
-  },
   "ComponentPropsContextProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ConfirmUnsavedChangesModal": {
     "level": "stable",
     "isNew": false
   },
@@ -191,31 +127,7 @@
     "level": "stable",
     "isNew": false
   },
-  "ContextMenuContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ContextMenuSection": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ContextMenuTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
   "ContextualHelp": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ContextualHelpTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ControlledNotification": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Controls": {
     "level": "stable",
     "isNew": false
   },
@@ -231,23 +143,7 @@
     "level": "stable",
     "isNew": false
   },
-  "DataLoaderSuspense": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DateInput": {
-    "level": "stable",
-    "isNew": false
-  },
   "DatePicker": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DateRangeFilterPopover": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DateRangeInput": {
     "level": "stable",
     "isNew": false
   },
@@ -255,19 +151,7 @@
     "level": "stable",
     "isNew": false
   },
-  "DeleteButton": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DeprecationWarningContext": {
-    "level": "stable",
-    "isNew": false
-  },
   "DeprecationWarningProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DialogTrigger": {
     "level": "stable",
     "isNew": false
   },
@@ -275,55 +159,7 @@
     "level": "stable",
     "isNew": false
   },
-  "Donut": {
-    "level": "stable",
-    "isNew": false
-  },
   "DonutChart": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DonutChartFill": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DonutChartLegend": {
-    "level": "stable",
-    "isNew": false
-  },
-  "DonutChartValue": {
-    "level": "stable",
-    "isNew": false
-  },
-  "EmptySearchResultView": {
-    "level": "stable",
-    "isNew": false
-  },
-  "EmptySegment": {
-    "level": "stable",
-    "isNew": false
-  },
-  "EmptyView": {
-    "level": "stable",
-    "isNew": false
-  },
-  "EmptyViewContainer": {
-    "level": "stable",
-    "isNew": false
-  },
-  "EmulatedBoldText": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FallbackItems": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FallbackTab": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Field": {
     "level": "stable",
     "isNew": false
   },
@@ -351,91 +187,7 @@
     "level": "stable",
     "isNew": false
   },
-  "FileInput": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FileSizeText": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilledSegment": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterAccordion": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterAccordionCheckboxGroup": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterAccordionDateRange": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterAccordionRadioGroup": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterContextMenu": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterContextMenus": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FilterMenuItem": {
-    "level": "stable",
-    "isNew": false
-  },
   "Flex": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Footer": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Form": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormAction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormContext": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormContextProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormResetAction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormRootError": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormSettingsProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "FormSubmitAction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "GridList": {
-    "level": "stable",
-    "isNew": false
-  },
-  "GridListItem": {
     "level": "stable",
     "isNew": false
   },
@@ -452,10 +204,6 @@
     "isNew": false
   },
   "Icon": {
-    "level": "stable",
-    "isNew": false
-  },
-  "IconSetProvider": {
     "level": "stable",
     "isNew": false
   },
@@ -479,14 +227,6 @@
     "level": "stable",
     "isNew": false
   },
-  "Item": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Items": {
-    "level": "stable",
-    "isNew": false
-  },
   "Kbd": {
     "level": "stable",
     "isNew": false
@@ -507,31 +247,7 @@
     "level": "stable",
     "isNew": false
   },
-  "LegendContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LegendItem": {
-    "level": "stable",
-    "isNew": false
-  },
   "LightBox": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LightBoxGallery": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LightBoxGalleryItem": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LightBoxTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Line": {
     "level": "stable",
     "isNew": false
   },
@@ -539,35 +255,7 @@
     "level": "deprecated",
     "isNew": false
   },
-  "LinkIcon": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LinkListTunnelExit": {
-    "level": "stable",
-    "isNew": false
-  },
-  "LinkProvider": {
-    "level": "deprecated",
-    "isNew": false
-  },
   "List": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ListItemSkeletonView": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ListItemView": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ListItemViewContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ListSummary": {
     "level": "stable",
     "isNew": false
   },
@@ -587,19 +275,7 @@
     "level": "stable",
     "isNew": false
   },
-  "MenuItemContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "MenuTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
   "Message": {
-    "level": "stable",
-    "isNew": false
-  },
-  "MessageSeparator": {
     "level": "stable",
     "isNew": false
   },
@@ -611,27 +287,11 @@
     "level": "stable",
     "isNew": false
   },
-  "ModalTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ModeButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "Navigation": {
     "level": "stable",
     "isNew": false
   },
-  "NavigationGroup": {
-    "level": "stable",
-    "isNew": false
-  },
   "Notification": {
-    "level": "stable",
-    "isNew": false
-  },
-  "NotificationContainer": {
     "level": "stable",
     "isNew": false
   },
@@ -643,19 +303,7 @@
     "level": "stable",
     "isNew": false
   },
-  "OffCanvasSuspenseFallback": {
-    "level": "stable",
-    "isNew": false
-  },
   "Option": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Options": {
-    "level": "stable",
-    "isNew": false
-  },
-  "OptionsButton": {
     "level": "stable",
     "isNew": false
   },
@@ -663,27 +311,7 @@
     "level": "stable",
     "isNew": false
   },
-  "OverlayContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "OverlaySuspenseFallback": {
-    "level": "stable",
-    "isNew": false
-  },
   "OverlayTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
-  "PaginationInfos": {
-    "level": "stable",
-    "isNew": false
-  },
-  "PasswordCreationField": {
-    "level": "stable",
-    "isNew": false
-  },
-  "PasswordGenerateButton": {
     "level": "stable",
     "isNew": false
   },
@@ -691,39 +319,7 @@
     "level": "stable",
     "isNew": false
   },
-  "PopoverContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "PopoverTip": {
-    "level": "stable",
-    "isNew": false
-  },
-  "PopoverTrigger": {
-    "level": "stable",
-    "isNew": false
-  },
   "ProgressBar": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ProgressBarBar": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ProgressBarLegend": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ProgressBarValue": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Radio": {
-    "level": "stable",
-    "isNew": false
-  },
-  "RadioButton": {
     "level": "stable",
     "isNew": false
   },
@@ -739,14 +335,6 @@
     "level": "stable",
     "isNew": false
   },
-  "RatingSegment": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ResetButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "RouterProvider": {
     "level": "stable",
     "isNew": false
@@ -756,14 +344,6 @@
     "isNew": false
   },
   "Section": {
-    "level": "stable",
-    "isNew": false
-  },
-  "SectionHeader": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Segment": {
     "level": "stable",
     "isNew": false
   },
@@ -783,10 +363,6 @@
     "level": "stable",
     "isNew": false
   },
-  "ShowNextBatchButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "Skeleton": {
     "level": "stable",
     "isNew": false
@@ -799,22 +375,6 @@
     "level": "stable",
     "isNew": false
   },
-  "SortingAccordion": {
-    "level": "stable",
-    "isNew": false
-  },
-  "SortingContextMenu": {
-    "level": "stable",
-    "isNew": false
-  },
-  "SortingMenuItem": {
-    "level": "stable",
-    "isNew": false
-  },
-  "SubmitButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "SuspenseTrigger": {
     "level": "stable",
     "isNew": false
@@ -823,51 +383,7 @@
     "level": "stable",
     "isNew": false
   },
-  "Tab": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TabList": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TabTitle": {
-    "level": "stable",
-    "isNew": false
-  },
   "Table": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableBody": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableBodyLoadingView": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableCell": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableColumn": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableFooterRow": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableHeader": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableRow": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TableRowSkeletonView": {
     "level": "stable",
     "isNew": false
   },
@@ -891,35 +407,7 @@
     "level": "stable",
     "isNew": false
   },
-  "TogglePasswordVisibilityButton": {
-    "level": "stable",
-    "isNew": false
-  },
-  "Toolbar": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ToolbarButton": {
-    "level": "stable",
-    "isNew": false
-  },
   "Tooltip": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TooltipContent": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TooltipLegendItem": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TooltipProgressBar": {
-    "level": "stable",
-    "isNew": false
-  },
-  "TooltipTrigger": {
     "level": "stable",
     "isNew": false
   },
@@ -935,47 +423,7 @@
     "level": "stable",
     "isNew": false
   },
-  "UiComponentTunnelEntry": {
-    "level": "stable",
-    "isNew": false
-  },
-  "UiComponentTunnelExit": {
-    "level": "stable",
-    "isNew": false
-  },
-  "UiComponentTunnelProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ValidationResultButton": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ValidationResultEntry": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ViewModeAccordion": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ViewModeContextMenu": {
-    "level": "stable",
-    "isNew": false
-  },
-  "ViewModeMenuItem": {
-    "level": "stable",
-    "isNew": false
-  },
   "Wrap": {
-    "level": "stable",
-    "isNew": false
-  },
-  "XAxis": {
-    "level": "stable",
-    "isNew": false
-  },
-  "YAxis": {
     "level": "stable",
     "isNew": false
   }

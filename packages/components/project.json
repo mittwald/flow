@@ -64,6 +64,7 @@
         "{projectRoot}/dev/status-registry/**/*",
         "!{projectRoot}/dev/status-registry/**/*.test.ts",
         "{projectRoot}/src/status/types.ts",
+        "{projectRoot}/src/components/public.ts",
         "{projectRoot}/dist/assets/doc-properties.json"
       ],
       "outputs": [

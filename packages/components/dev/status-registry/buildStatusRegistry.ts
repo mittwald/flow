@@ -19,17 +19,21 @@ export const isComponentDisplayName = (displayName: string): boolean =>
   /^[A-Z][A-Za-z0-9]*$/.test(displayName);
 
 /**
- * Builds the complete, sorted status registry from parsed component docs. Every
- * component with a displayName is listed explicitly (ADR §4: completeness lets
- * a future guard distinguish "removed" from "stable").
+ * Builds the status registry, scoped to Flow's curated public API surface.
+ * `publicComponentNames` comes from parsePublicComponentNames(public.ts): only
+ * components on that surface are tracked (ADR §4 completeness applies WITHIN
+ * the public surface — internal/sub-components are badged via their parent, not
+ * tracked independently).
  */
 export const buildStatusRegistry = (
   components: Pick<ComponentDoc, "displayName" | "tags">[],
+  publicComponentNames: ReadonlySet<string>,
 ): DerivedStatusRegistry => {
   const registry: DerivedStatusRegistry = {};
 
   const sorted = [...components]
     .filter((component) => isComponentDisplayName(component.displayName))
+    .filter((component) => publicComponentNames.has(component.displayName))
     .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
   for (const component of sorted) {

@@ -7,6 +7,7 @@ import {
   buildStatusRegistry,
   type DerivedStatusRegistry,
 } from "./buildStatusRegistry";
+import { parsePublicComponentNames } from "./parsePublicComponentNames";
 
 const DOC_PROPERTIES_FILE = "./dist/assets/doc-properties.json";
 const STATUS_DIR = "./src/status";
@@ -48,8 +49,21 @@ async function generateStatusRegistry() {
   const raw = await fs.readFile(DOC_PROPERTIES_FILE, "utf-8");
   const components = JSON.parse(raw) as ComponentDoc[];
 
+  const publicTsSource = await fs.readFile(
+    "./src/components/public.ts",
+    "utf-8",
+  );
+  const publicComponentNames = parsePublicComponentNames(publicTsSource);
+
+  console.log(
+    `🔎 ${publicComponentNames.size} public component names from public.ts`,
+  );
+
   console.log("🧮 Building status registry");
-  const unsortedRegistry = buildStatusRegistry(components);
+  const unsortedRegistry = buildStatusRegistry(
+    components,
+    publicComponentNames,
+  );
 
   for (const [name, status] of Object.entries(unsortedRegistry)) {
     if (

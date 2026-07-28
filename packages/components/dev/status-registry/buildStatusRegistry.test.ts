@@ -5,11 +5,14 @@ import {
 } from "./buildStatusRegistry";
 
 test("lists every component keyed by displayName, sorted", () => {
-  const registry = buildStatusRegistry([
-    { displayName: "Button", tags: {} },
-    { displayName: "Chat", tags: { flowStatus: "beta, new" } },
-    { displayName: "Alert", tags: { deprecated: "gone" } },
-  ]);
+  const registry = buildStatusRegistry(
+    [
+      { displayName: "Button", tags: {} },
+      { displayName: "Chat", tags: { flowStatus: "beta, new" } },
+      { displayName: "Alert", tags: { deprecated: "gone" } },
+    ],
+    new Set(["Alert", "Button", "Chat"]),
+  );
 
   expect(Object.keys(registry)).toEqual(["Alert", "Button", "Chat"]);
   expect(registry.Button).toEqual({ level: "stable", isNew: false });
@@ -18,35 +21,57 @@ test("lists every component keyed by displayName, sorted", () => {
 });
 
 test("skips entries without a displayName", () => {
-  const registry = buildStatusRegistry([
-    { displayName: "", tags: {} },
-    { displayName: "Button", tags: {} },
-  ]);
+  const registry = buildStatusRegistry(
+    [
+      { displayName: "", tags: {} },
+      { displayName: "Button", tags: {} },
+    ],
+    new Set(["Button"]),
+  );
 
   expect(Object.keys(registry)).toEqual(["Button"]);
 });
 
 test("last entry wins on duplicate displayName (deterministic)", () => {
-  const registry = buildStatusRegistry([
-    { displayName: "Dup", tags: {} },
-    { displayName: "Dup", tags: { flowStatus: "beta" } },
-  ]);
+  const registry = buildStatusRegistry(
+    [
+      { displayName: "Dup", tags: {} },
+      { displayName: "Dup", tags: { flowStatus: "beta" } },
+    ],
+    new Set(["Dup"]),
+  );
 
   expect(registry.Dup).toEqual({ level: "beta", isNew: false });
 });
 
 test("drops non-component exports (hooks, helpers, fixtures, qualified names)", () => {
-  const registry = buildStatusRegistry([
-    { displayName: "Button", tags: {} },
-    { displayName: "useGridItemProps", tags: {} },
-    { displayName: "getActionGroupSlot", tags: {} },
-    { displayName: "asyncFunction", tags: {} },
-    { displayName: "validator", tags: {} },
-    { displayName: "ActionModel.getCloseOverlayOptions", tags: {} },
-    { displayName: "YAxis", tags: {} }, // real PascalCase component, kept
-  ]);
+  const registry = buildStatusRegistry(
+    [
+      { displayName: "Button", tags: {} },
+      { displayName: "useGridItemProps", tags: {} },
+      { displayName: "getActionGroupSlot", tags: {} },
+      { displayName: "asyncFunction", tags: {} },
+      { displayName: "validator", tags: {} },
+      { displayName: "ActionModel.getCloseOverlayOptions", tags: {} },
+      { displayName: "YAxis", tags: {} }, // real PascalCase component, kept
+    ],
+    new Set(["Button", "YAxis"]),
+  );
 
   expect(Object.keys(registry)).toEqual(["Button", "YAxis"]);
+});
+
+test("drops PascalCase components that are not on the public surface", () => {
+  const registry = buildStatusRegistry(
+    [
+      { displayName: "Button", tags: {} }, // public
+      { displayName: "AccordionButton", tags: {} }, // internal sub-component
+      { displayName: "CartesianGrid", tags: { deprecated: "gone" } }, // internal
+    ],
+    new Set(["Button"]),
+  );
+
+  expect(Object.keys(registry)).toEqual(["Button"]);
 });
 
 test.each([
