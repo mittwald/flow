@@ -67,7 +67,7 @@ compiles YAML → `dist/css` (CSS variables) and `dist/json`.
 
 ## Repository map
 
-nx + pnpm workspace monorepo. Node `>=20.19`, pnpm pinned via `packageManager`
+nx + pnpm workspace monorepo. Node `>=24`, pnpm pinned via `packageManager`
 (use corepack). Several packages ship their own `AGENTS.md` — **always read the
 nearest `AGENTS.md` before working in a package.**
 
