@@ -88,3 +88,22 @@ test.each(testEnvironments)(
     );
   },
 );
+
+test.each(testEnvironments)(
+  "PasswordCreationField edge cases (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { PasswordCreationField, Label, ColumnLayout },
+  }) => {
+    await render(
+      <ColumnLayout l={[1, 1, 1, 1, 1]}>
+        <PasswordCreationField isRequired>
+          <Label>Default</Label>
+        </PasswordCreationField>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("PasswordCreationField edge cases");
+  },
+);

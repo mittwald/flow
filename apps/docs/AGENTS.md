@@ -14,5 +14,10 @@ Next.js documentation site for the flow Styleguide, deployed to
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
   README).
+- **No pop-culture or Star Wars references in example content.** Use neutral,
+  realistic content from the mittwald domain (hosting products, projects,
+  members/roles, prices, component props) — see the existing `table/examples`
+  for the tone. Star Wars-flavoured fixtures are fine in Storybook stories, but
+  never in the docs.
 - Run `pnpm format` (Prettier, 80-character prose wrap) before committing. The
   local dev server is `pnpm nx dev docs`.

@@ -46,3 +46,15 @@ export const WithTabs: Story = {
     </LayoutCard>
   ),
 };
+
+export const Scrolling: Story = {
+  render: (props) => (
+    <LayoutCard {...props} style={{ height: 300, overflowY: "auto" }}>
+      <Section>
+        <Text>
+          {dummyText.long} {dummyText.long} {dummyText.long}
+        </Text>
+      </Section>
+    </LayoutCard>
+  ),
+};

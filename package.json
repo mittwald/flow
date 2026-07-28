@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "affected:test": "nx affected --targets=test:unit,test:compile",
@@ -25,8 +25,8 @@
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {
-    "post-checkout": "pnpm install && pnpm clean",
-    "post-merge": "pnpm install && pnpm clean",
+    "post-checkout": "pnpm install",
+    "post-merge": "pnpm install",
     "pre-commit": "pnpm lint"
   },
   "dependencies": {
@@ -49,10 +49,12 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-unused-imports": "^4.4.1",
     "fs-jetpack": "^5.1.0",
     "nx": "^22.7.5",
-    "playwright": "^1.61.0",
+    "playwright": "^1.61.1",
     "prettier": "^3.8.4",
     "prettier-plugin-jsdoc": "^1.8.1",
     "prettier-plugin-pkgsort": "^0.3.0",
@@ -62,6 +64,7 @@
     "stylelint": "^17.13.0",
     "stylelint-config-recommended-scss": "^17.0.1",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-plugin-logical-css": "^2.1.0",
     "stylelint-scss": "^7.2.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
@@ -71,8 +74,9 @@
   },
   "pnpm": {
     "patchedDependencies": {
+      "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch",
       "acorn": "patches/acorn.patch",
-      "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch"
+      "@sigstore/sign@4.1.1": "patches/@sigstore__sign@4.1.1.patch"
     },
     "onlyBuiltDependencies": [
       "@bundled-es-modules/glob",

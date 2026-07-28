@@ -1,2 +1,2 @@
-export * from "./ComponentPropsContextProvider";
 export * from "./view";
+export * from "./ComponentPropsContextProvider";

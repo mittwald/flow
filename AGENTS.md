@@ -30,7 +30,9 @@ it. Patterns are documented in
 ### 2. Remote DOM ("flr" = **Fl**ow **R**emote)
 
 mStudio extensions run in a hidden iframe and render UI that the host
-materializes with real Flow components:
+materializes with real Flow components. For the full picture — end-to-end flow,
+the mental model, and what remote-capability means when you implement a
+component — see [docs/remote-ui.md](docs/remote-ui.md).
 
 ```
 extension (iframe)                          host (mStudio)
@@ -175,7 +177,11 @@ A new or substantially changed component comes with:
    variants
 3. A docs page in `apps/docs/src/content/04-components/<category>/…`
 4. Tests along the testing bar: unit tests for lib functions, browser tests for
-   behavior (see the components AGENTS.md testing section)
+   behavior (see the components AGENTS.md testing section). **New or changed
+   rendered behavior (a new prop, variant, or layout that affects the visual
+   output) gets an added or extended visual test in
+   `packages/remote-react-components/src/tests/visual` — it runs in both the
+   `Local` and `Remote` environments and guards the whole path.**
 5. UI text in `locales/de-DE.locale.json` **and** `locales/en-US.locale.json`
    (import pattern: i18n section of
    [packages/components/AGENTS.md](packages/components/AGENTS.md))
@@ -184,8 +190,8 @@ A new or substantially changed component comes with:
 7. Remote-capable (`@flr-generate`): generated code regenerated + committed, and
    a demo page in `apps/remote-dom-demo`
 8. Visual changes: run the suite on demand with the `run-visual-tests` PR label
-   (verify only); for intentional changes, update snapshots (`test:visual:update`
-   or the `update-screenshots` PR label)
+   (verify only); for intentional changes, update snapshots
+   (`test:visual:update` or the `update-screenshots` PR label)
 
 ## Hard rules
 
@@ -201,6 +207,29 @@ A new or substantially changed component comes with:
 - **Only remote-capable components in a `PropsContext`** (see the PropsContext
   section of [packages/components/AGENTS.md](packages/components/AGENTS.md)).
 
+## Common failures
+
+Symptom → cause → fix for the footguns that cost the most time here. None of
+these are repo bugs — they are the workflow biting back, and the fix is rarely
+where the error points.
+
+> **Agents:** hit a footgun that cost real time and isn't covered yet? Add a row
+> — here, or in the nearest package's `AGENTS.md`. Keep the bar high: only a
+> **verified, recurring workflow trap** with its real error signature, and
+> **reproducible + non-obvious**. A genuine repo bug is not a row — fix it.
+
+| Symptom                                                                                                                                               | Cause                                                                                                                                                                                                                                                                                             | Fix                                                                                                                                                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI step **"Check all generated code is committed"** fails (`git diff --exit-code`)                                                                    | You changed an `@flr-generate` component's props, an icon, or prop JSDoc and didn't regenerate — or regenerated but didn't commit                                                                                                                                                                 | `pnpm build` (or the specific generator from the [Generated code](#generated-code--must-be-committed) table), then commit the changed `view.ts`, `src/views/*`, `src/auto-generated/**`, icon, or `doc-properties.json`                                                                  |
+| `test:compile` fails on a new component — the `flowComponent("X", …)` name/props type isn't assignable                                                | `flowComponent` names are typed as `keyof` a hand-maintained props registry                                                                                                                                                                                                                       | Register the props type in `packages/components/src/components/propTypes/index.ts` (see [The flowComponent factory](packages/components/AGENTS.md#the-flowcomponent-factory))                                                                                                            |
+| A package script errors (e.g. **"X is not exported from `@mittwald/flow-…`"**, missing module) or silently uses **stale** output from another package | You ran the package script directly (`pnpm --filter <pkg> <script>`, `next dev`, bare `vite`), which builds only that package and skips the `^build` chain that (re)builds and regenerates its workspace dependencies (incl. `view.ts` / `src/auto-generated/**`)                                 | **Default to the nx target** — `pnpm nx <target> <pkg>` (e.g. `pnpm nx dev <app>`, `pnpm nx build <pkg>`); its `dependsOn: ["^build", …]` builds and regenerates every dependency first. Reach for a direct single-package script only when the dependencies are already current         |
+| An `nx` graph target dies with **"configured to use 10.28.2 of pnpm … your current pnpm is v…"**                                                      | You prefixed a dependency-graph target with `corepack`; nested per-task pnpm spawns resolve to a pnpm other than the pinned `10.28.2`                                                                                                                                                             | Use **bare `pnpm nx …`** for graph targets (`build`, `dev`, anything with `dependsOn`/`^build`). `corepack pnpm --filter <pkg> <script>` stays fine for single-package scripts                                                                                                           |
+| Browser tests fail instantly with a missing-executable / "no browser" error                                                                           | Playwright browsers not installed in this environment                                                                                                                                                                                                                                             | `pnpm test:browser:prepare` once                                                                                                                                                                                                                                                         |
+| A visual test stays red in CI after you regenerated screenshots locally on macOS                                                                      | `test:visual:update` on macOS only writes `-darwin` snapshots; CI gates on the `-webkit-linux` baseline                                                                                                                                                                                           | Push and add the **`update-screenshots`** PR label — CI regenerates the Linux baseline and commits it back. Local `-darwin` regen only helps local macOS runs                                                                                                                            |
+| A visual test fails with a **small** diff (`N pixels (ratio 0.01) differ`) and you're tempted to just add `update-screenshots`                        | A small diff is not automatically noise — a real regression can hide in ~1% (e.g. a logical-property autofix flipping under a `direction: rtl` layout hack, so a toggle handle lands on the wrong side). `update-screenshots` bakes whatever renders _now_ into the baseline, entrenching the bug | **Open the diff image** first (CI job artifacts, or local `.vitest-attachments/**/*-diff-*.png`). Only use `update-screenshots` for a change you confirmed is intentional; otherwise fix the code. Add the verify-only **`run-visual-tests`** label proactively on any styling/layout PR |
+| A new dependency **won't resolve** on `pnpm install`                                                                                                  | `minimumReleaseAge` blocks versions younger than one week (`@mittwald/*` exempt)                                                                                                                                                                                                                  | Use an older published version, or wait out the window                                                                                                                                                                                                                                   |
+| Dev server 500s with **"Can't resolve '&lt;pkg&gt;'"** after merging `main` into a worktree                                                           | `pnpm install` ran before the merge pulled in a new dependency                                                                                                                                                                                                                                    | Re-run `pnpm install`; a running dev server picks the dep up on the next request                                                                                                                                                                                                         |
+
 ## Where to look next
 
 | Topic                                       | Read                                                                                    |
@@ -208,6 +237,7 @@ A new or substantially changed component comes with:
 | Component patterns, styling, testing, i18n  | [packages/components/AGENTS.md](packages/components/AGENTS.md)                          |
 | Remote connection & serialization           | [packages/remote-core/AGENTS.md](packages/remote-core/AGENTS.md)                        |
 | Remote elements / React API / host renderer | `packages/remote-{elements,react-components,react-renderer}/AGENTS.md`                  |
+| Remote-UI concepts & component implications | [docs/remote-ui.md](docs/remote-ui.md)                                                  |
 | Icon pipeline                               | [packages/icons-base/AGENTS.md](packages/icons-base/AGENTS.md)                          |
 | Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
 | Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |

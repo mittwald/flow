@@ -7,7 +7,7 @@
     align-items: center;
     font-weight: normal;
     font-size: var(--font-size-text--m);
-    text-align: left;
+    text-align: start;
 
     @include formControl.formControl();
 

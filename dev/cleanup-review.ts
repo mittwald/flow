@@ -36,6 +36,17 @@ class ReviewCleanup {
       );
       process.exit(1);
     }
+
+    // PR_NUMBER is interpolated into the deletion filters below, so it must be a
+    // plain positive integer — a malformed value could mis-scope which services
+    // and ingresses get deleted.
+    const prNumber = process.env.PR_NUMBER || "";
+    if (!/^\d+$/.test(prNumber)) {
+      console.error(
+        `Invalid PR_NUMBER (expected a positive integer): ${prNumber}`,
+      );
+      process.exit(1);
+    }
   }
 
   async getServices(): Promise<MittwaldService[]> {
@@ -165,8 +176,17 @@ class ReviewCleanup {
         }
       }
 
+      // Preview services are named `<app>pr-<number>` (see getServiceName in
+      // deploy-review.ts). Match those exact names: a substring check like
+      // `.includes("pr-1")` also matches `docspr-10`, `storybookpr-19`, … and
+      // would delete other PRs' preview environments. Mirrors the anchored
+      // ingress filter above.
+      const previewApps = ["docs", "storybook"] as const;
+      const expectedServiceNames = new Set(
+        previewApps.map((app) => `${app}pr-${this.prNumber}`),
+      );
       const prServices = services.filter((s) =>
-        s.serviceName.includes(`pr-${this.prNumber}`),
+        expectedServiceNames.has(s.serviceName),
       );
 
       if (prServices.length === 0) {

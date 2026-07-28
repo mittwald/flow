@@ -3,6 +3,176 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.959](https://github.com/mittwald/flow/compare/0.2.0-alpha.958...0.2.0-alpha.959) (2026-07-27)
+
+### Features
+
+* **release:** add /prepare-release command for RFC [#2711](https://github.com/mittwald/flow/issues/2711) promotion PR ([#2723](https://github.com/mittwald/flow/issues/2723)) ([eea0cff](https://github.com/mittwald/flow/commit/eea0cffe6cb1bd22ac4da8be30f391459bf8322a)), closes [#2724](https://github.com/mittwald/flow/issues/2724)
+
+# [0.2.0-alpha.958](https://github.com/mittwald/flow/compare/0.2.0-alpha.957...0.2.0-alpha.958) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.957](https://github.com/mittwald/flow/compare/0.2.0-alpha.956...0.2.0-alpha.957) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.956](https://github.com/mittwald/flow/compare/0.2.0-alpha.955...0.2.0-alpha.956) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
+
+### Bug Fixes
+
+* **publish:** authenticate via push:main and make the Rekor 409 patch effective ([#2718](https://github.com/mittwald/flow/issues/2718)) ([76f71ac](https://github.com/mittwald/flow/commit/76f71ac514dce38f9af28cacda8ae6801bcb59d3))
+
+# [0.2.0-alpha.954](https://github.com/mittwald/flow/compare/0.2.0-alpha.953...0.2.0-alpha.954) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.953](https://github.com/mittwald/flow/compare/0.2.0-alpha.952...0.2.0-alpha.953) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.952](https://github.com/mittwald/flow/compare/0.2.0-alpha.951...0.2.0-alpha.952) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.951](https://github.com/mittwald/flow/compare/0.2.0-alpha.950...0.2.0-alpha.951) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.950](https://github.com/mittwald/flow/compare/0.2.0-alpha.949...0.2.0-alpha.950) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.949](https://github.com/mittwald/flow/compare/0.2.0-alpha.948...0.2.0-alpha.949) (2026-07-24)
+
+### Bug Fixes
+
+* **remote:** rebuild dist when [@flr-generate](https://github.com/flr-generate) components change ([#2712](https://github.com/mittwald/flow/issues/2712)) ([844db46](https://github.com/mittwald/flow/commit/844db46e2134293d21b158cc3005f2aeae63c608))
+
+# [0.2.0-alpha.948](https://github.com/mittwald/flow/compare/0.2.0-alpha.947...0.2.0-alpha.948) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.947](https://github.com/mittwald/flow/compare/0.2.0-alpha.946...0.2.0-alpha.947) (2026-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.946](https://github.com/mittwald/flow/compare/0.2.0-alpha.945...0.2.0-alpha.946) (2026-07-24)
+
+### Bug Fixes
+
+* **Modal:** square corners on OffCanvas side panel ([#2713](https://github.com/mittwald/flow/issues/2713)) ([ee56827](https://github.com/mittwald/flow/commit/ee568273426bfa33359705f1d33a3632f950dcad))
+
+# [0.2.0-alpha.945](https://github.com/mittwald/flow/compare/0.2.0-alpha.944...0.2.0-alpha.945) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.944](https://github.com/mittwald/flow/compare/0.2.0-alpha.943...0.2.0-alpha.944) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.943](https://github.com/mittwald/flow/compare/0.2.0-alpha.942...0.2.0-alpha.943) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.942](https://github.com/mittwald/flow/compare/0.2.0-alpha.941...0.2.0-alpha.942) (2026-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.941](https://github.com/mittwald/flow/compare/0.2.0-alpha.940...0.2.0-alpha.941) (2026-07-23)
+
+### Bug Fixes
+
+* **ci:** deploy both preview apps (avoid matrix job-output clobber) ([ad4f132](https://github.com/mittwald/flow/commit/ad4f13251f212e37ef096c8ca299da1eca58cf45))
+* **ci:** report failure when preview PR comment cannot be posted ([196ca82](https://github.com/mittwald/flow/commit/196ca82a1aed6e9bc068cf6fff54414f246d3420))
+* **ci:** scope preview cleanup to the exact PR's services ([7f1deb4](https://github.com/mittwald/flow/commit/7f1deb4c984b6b8f4539aef452056a19b14296db)), closes [#1](https://github.com/mittwald/flow/issues/1)
+* **CodeBlock:** fix undefined max height in code block ([8773c73](https://github.com/mittwald/flow/commit/8773c73c7ca63cf3b69a5177712ed8a34bed4fd0))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+
+# [0.2.0-alpha.940](https://github.com/mittwald/flow/compare/0.2.0-alpha.939...0.2.0-alpha.940) (2026-07-23)
+
+### Features
+
+* **Table:** add configurable column widths ([#2682](https://github.com/mittwald/flow/issues/2682)) ([c0b9a45](https://github.com/mittwald/flow/commit/c0b9a45a89f75246cead39a940a8e23d65acf160))
+
+# [0.2.0-alpha.939](https://github.com/mittwald/flow/compare/0.2.0-alpha.938...0.2.0-alpha.939) (2026-07-23)
+
+### Bug Fixes
+
+* **remote-react-components:** scope cross-version refs per test file ([#2688](https://github.com/mittwald/flow/issues/2688)) ([65c3cc5](https://github.com/mittwald/flow/commit/65c3cc50757334a2ce62bea6f68bd80ed6a0d478))
+
+# [0.2.0-alpha.938](https://github.com/mittwald/flow/compare/0.2.0-alpha.937...0.2.0-alpha.938) (2026-07-23)
+
+### Performance Improvements
+
+* **List:** memoize items so they don't re-render when loading more ([#2677](https://github.com/mittwald/flow/issues/2677)) ([deb547a](https://github.com/mittwald/flow/commit/deb547a07849ce89a59bca9aab7e3a5e33812b54))
+
+# [0.2.0-alpha.937](https://github.com/mittwald/flow/compare/0.2.0-alpha.936...0.2.0-alpha.937) (2026-07-22)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fix overflow ([#2686](https://github.com/mittwald/flow/issues/2686)) ([e668e98](https://github.com/mittwald/flow/commit/e668e98b3bd91a4e06089fc3ec21cb5ca2703d70))
+
+# [0.2.0-alpha.936](https://github.com/mittwald/flow/compare/0.2.0-alpha.935...0.2.0-alpha.936) (2026-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.935](https://github.com/mittwald/flow/compare/0.2.0-alpha.934...0.2.0-alpha.935) (2026-07-22)
+
+### Bug Fixes
+
+* **Modal:** keep mobile modals with forms usable when the virtual keyboard opens ([#2423](https://github.com/mittwald/flow/issues/2423)) ([#2671](https://github.com/mittwald/flow/issues/2671)) ([5b1b856](https://github.com/mittwald/flow/commit/5b1b8563d6e5e7a0a5c046620104480f1f7620cd))
+
+# [0.2.0-alpha.934](https://github.com/mittwald/flow/compare/0.2.0-alpha.933...0.2.0-alpha.934) (2026-07-21)
+
+### Features
+
+* **components:** add reusable slim scrollbar mixin and apply to scroll containers ([#2672](https://github.com/mittwald/flow/issues/2672)) ([a06dd9a](https://github.com/mittwald/flow/commit/a06dd9a4e88899612eba19a21f6464ba0a98167e))
+
+# [0.2.0-alpha.933](https://github.com/mittwald/flow/compare/0.2.0-alpha.932...0.2.0-alpha.933) (2026-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.932](https://github.com/mittwald/flow/compare/0.2.0-alpha.931...0.2.0-alpha.932) (2026-07-21)
+
+### Features
+
+* **remote-react-components:** cross-version backwards-compatibility smoke tests ([#2600](https://github.com/mittwald/flow/issues/2600)) ([#2661](https://github.com/mittwald/flow/issues/2661)) ([1f3efa0](https://github.com/mittwald/flow/commit/1f3efa02700f86ea9faf5a62b3039a84e0c51953)), closes [#2596](https://github.com/mittwald/flow/issues/2596) [#2620](https://github.com/mittwald/flow/issues/2620) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [Modal#inList](https://github.com/Modal/issues/inList) [ButtonVisual#colors](https://github.com/ButtonVisual/issues/colors) [hi#fidelity](https://github.com/hi/issues/fidelity)
+
+# [0.2.0-alpha.931](https://github.com/mittwald/flow/compare/0.2.0-alpha.930...0.2.0-alpha.931) (2026-07-21)
+
+### Bug Fixes
+
+* **List:** stop dimming the list while loading more via infinite scroll ([#2673](https://github.com/mittwald/flow/issues/2673)) ([0587956](https://github.com/mittwald/flow/commit/0587956f06a358b786e0ff53def6622643684242))
+
+# [0.2.0-alpha.930](https://github.com/mittwald/flow/compare/0.2.0-alpha.929...0.2.0-alpha.930) (2026-07-20)
+
+### Features
+
+* **docs:** add skip link and adopt layered Flow CSS ([#2670](https://github.com/mittwald/flow/issues/2670)) ([2532897](https://github.com/mittwald/flow/commit/25328976685248c01c1cf41c482a112173e0e2dd)), closes [#main-content](https://github.com/mittwald/flow/issues/main-content)
+
+# [0.2.0-alpha.929](https://github.com/mittwald/flow/compare/0.2.0-alpha.928...0.2.0-alpha.929) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.928](https://github.com/mittwald/flow/compare/0.2.0-alpha.927...0.2.0-alpha.928) (2026-07-20)
+
+### Bug Fixes
+
+* **Overlay:** keep browser extension overlays clickable inside modals ([#2668](https://github.com/mittwald/flow/issues/2668)) ([3f105d5](https://github.com/mittwald/flow/commit/3f105d53169d906cd08aa418f774e35e4b3037ef))
+
+# [0.2.0-alpha.927](https://github.com/mittwald/flow/compare/0.2.0-alpha.926...0.2.0-alpha.927) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.926](https://github.com/mittwald/flow/compare/0.2.0-alpha.925...0.2.0-alpha.926) (2026-07-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.925](https://github.com/mittwald/flow/compare/0.2.0-alpha.924...0.2.0-alpha.925) (2026-07-17)
 
 **Note:** Version bump only for package @mittwald/flow-project

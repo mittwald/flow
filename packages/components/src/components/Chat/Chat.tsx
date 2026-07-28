@@ -8,7 +8,7 @@ import {
   PropsContextProvider,
 } from "@/lib/propsContext";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {
   // Height of the chat component

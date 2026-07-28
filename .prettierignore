@@ -1,6 +1,10 @@
 apps/docs/out
 node_modules
 dist
+
+# Cross-version HTML-output references are exact snapshots compared byte-for-byte
+# by toMatchFileSnapshot; reformatting them would break the comparison.
+packages/remote-react-components/e2e/cross-version/__html__
 .nx
 .yarn
 .next

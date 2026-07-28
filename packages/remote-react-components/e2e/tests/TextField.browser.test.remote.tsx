@@ -1,5 +1,8 @@
-import { Text, TextField } from "../../src/auto-generated";
-import { Form, Field } from "../../src/integrations/react-hook-form";
+import { Text, TextField } from "@mittwald/flow-remote-react-components";
+import {
+  Form,
+  Field,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import type { FlowComponentName } from "../propTypes";
+import type { FlowComponentName } from "@/components/propTypes";
 
 const tunnelProviderPrefix = "@mittwald/flow/tunnel/";
 

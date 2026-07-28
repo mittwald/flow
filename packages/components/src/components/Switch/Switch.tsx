@@ -7,7 +7,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import labelStyles from "../Label/Label.module.scss";
+import labelStyles from "@/components/Label/Label.module.scss";
 import { useObjectRef } from "react-aria";
 
 export interface SwitchProps

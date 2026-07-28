@@ -1,4 +1,4 @@
-import { Button, Text } from "../../src/auto-generated";
+import { Button, Text } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
 
 export const standard = () => <Button data-testid="button">Click me</Button>;

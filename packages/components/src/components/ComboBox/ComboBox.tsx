@@ -15,7 +15,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 import type { OptionsProps } from "@/components/Options/Options";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ComboBoxProps
   extends

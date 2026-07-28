@@ -1,0 +1,11 @@
+{
+  "$comment": "Published versions to NEVER run cross-version smoke tests against. Removing an entry re-includes that version. See CONTRIBUTE.md.",
+  "excluded": [
+    { "version": "0.2.0-alpha.889", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.891", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.892", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.893", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.894", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" },
+    { "version": "0.2.0-alpha.895", "reason": "broken: #2596 async serializers + externalized threads, fixed in #2620 (alpha.896)" }
+  ]
+}

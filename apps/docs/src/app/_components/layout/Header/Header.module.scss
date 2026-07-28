@@ -1,4 +1,4 @@
-.header.header {
+.header {
   backdrop-filter: blur(5px);
   background-color: color-mix(
     in srgb,
@@ -23,6 +23,12 @@
   padding-inline: var(--size-px--xl);
   align-items: center;
   flex-wrap: wrap;
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -65,7 +71,7 @@
 }
 
 [data-theme="dark"] {
-  .header.header {
+  .header {
     background-color: color-mix(in srgb, #121518 40%, transparent);
   }
 }

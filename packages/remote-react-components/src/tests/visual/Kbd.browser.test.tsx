@@ -1,7 +1,8 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+// Kbd is available from alpha.791.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   "Kbd (%s)",
   async ({
     testScreenshot,

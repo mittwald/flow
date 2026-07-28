@@ -1,4 +1,5 @@
 @use "@/styles/mixins/formControl";
+@use "@/styles/mixins/scrollbar";
 
 .codeEditor {
   outline: none;
@@ -35,6 +36,10 @@
     & :global(.cm-editor) {
       outline: none;
 
+      & :global(.cm-scroller) {
+        @include scrollbar.scrollbar;
+      }
+
       & :global(.cm-lineNumbers .cm-gutterElement) {
         min-width: var(--code-editor--gutter-element-min-width);
       }
@@ -62,8 +67,8 @@
       }
 
       & :global(.cm-gutters) {
-        border-top-left-radius: calc(var(--form-control--corner-radius) - 1px);
-        border-bottom-left-radius: calc(
+        border-start-start-radius: calc(var(--form-control--corner-radius) - 1px);
+        border-end-start-radius: calc(
           var(--form-control--corner-radius) - 1px
         );
       }

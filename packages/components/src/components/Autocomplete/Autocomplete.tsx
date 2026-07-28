@@ -22,7 +22,7 @@ import {
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
-import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface AutocompleteProps
   extends

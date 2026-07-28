@@ -33,3 +33,14 @@ Ausrichtung unterstützt die Table optional die Statusanzeigen `success` und
 `danger`.
 
 <LiveCodeEditor example="horizontally-centered" editorCollapsed />
+
+---
+
+# Feste Spaltenbreiten
+
+Setze `layout="fixed"` an der `Table` und weise einzelnen `TableColumn` über
+`width` eine feste Breite zu. Spalten ohne Breite teilen sich den restlichen
+Platz. Mit `minWidth` an der `Table` bleibt bei wenig Platz die Breite erhalten
+und die Tabelle scrollt horizontal, statt die Spalten zu stauchen.
+
+<LiveCodeEditor example="fixed-column-widths" editorCollapsed />

@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components/all.css";
+import "@mittwald/flow-react-components/all-layered.css";
 import "./global.scss";
 import type { Metadata } from "next";
 import { type FC, type PropsWithChildren } from "react";
@@ -35,7 +35,9 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
                 <div className={styles.mainWrapper}>
                   <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
 
-                  <main className={styles.main}>{props.children}</main>
+                  <main className={styles.main} id="main-content" tabIndex={-1}>
+                    {props.children}
+                  </main>
                 </div>
                 <Footer />
               </div>

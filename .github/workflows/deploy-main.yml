@@ -9,9 +9,14 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
+concurrency:
+  group: deploy-main-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
       packages: write
@@ -29,10 +34,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Log in to the Container registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -41,7 +46,7 @@ jobs:
       - name: Extract metadata for Docs
         id: meta-docs
         if: matrix.image_suffix == 'docs'
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
@@ -53,7 +58,7 @@ jobs:
       - name: Extract metadata for Storybook
         id: meta-storybook
         if: matrix.image_suffix == 'storybook'
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
           images:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.image_suffix }}
@@ -63,11 +68,12 @@ jobs:
             type=sha
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
           file: ${{ matrix.dockerfile }}
           push: true
+          provenance: false # single-manifest image (as before v7)
           tags:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.tags ||
             steps.meta-storybook.outputs.tags }}
@@ -79,12 +85,15 @@ jobs:
 
       - name: Trigger docs redeploy webhook
         if: matrix.image_suffix == 'docs'
-        run: curl --fail --silent --show-error --location "$FLOW_REDEPLOY_WEBHOOK"
+        run:
+          curl --fail --silent --show-error --location "$FLOW_REDEPLOY_WEBHOOK"
         env:
           FLOW_REDEPLOY_WEBHOOK: ${{ secrets.FLOW_REDEPLOY_WEBHOOK }}
 
       - name: Trigger storybook redeploy webhook
         if: matrix.image_suffix == 'storybook'
-        run: curl --fail --silent --show-error --location "$STORYBOOK_REDEPLOY_WEBHOOK"
+        run:
+          curl --fail --silent --show-error --location
+          "$STORYBOOK_REDEPLOY_WEBHOOK"
         env:
           STORYBOOK_REDEPLOY_WEBHOOK: ${{ secrets.STORYBOOK_REDEPLOY_WEBHOOK }}

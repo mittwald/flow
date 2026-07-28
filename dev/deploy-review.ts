@@ -340,7 +340,7 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
 `;
 
     try {
-      await fetch(
+      const response = await fetch(
         `https://api.github.com/repos/${owner}/${repoName}/issues/${this.prNumber}/comments`,
         {
           method: "POST",
@@ -353,6 +353,12 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
           }),
         },
       );
+      if (!response.ok) {
+        console.warn(
+          `⚠️  Failed to post GitHub comment: ${response.status} ${response.statusText}`,
+        );
+        return;
+      }
       console.log("✅ Posted comment to GitHub PR");
     } catch (error) {
       console.warn("⚠️  Failed to post GitHub comment:", error);

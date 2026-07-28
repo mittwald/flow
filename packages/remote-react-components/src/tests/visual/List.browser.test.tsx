@@ -1,11 +1,14 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { sleep } from "@/tests/lib/sleep";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import type { ListProps } from "@mittwald/flow-react-components";
 
-test.each(testEnvironments)(
+// List element tree comparable from alpha.883.
+const listComparableFrom = "0.2.0-alpha.883";
+
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List items (%s)",
   async ({
     testScreenshot,
@@ -143,7 +146,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List tiles (%s)",
   async ({
     testScreenshot,
@@ -238,7 +241,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List table (%s)",
   async ({ testScreenshot, render, components: { typedList } }) => {
     function Wrapper() {
@@ -307,7 +310,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List edge cases - list view (%s)",
   async ({
     testScreenshot,
@@ -371,7 +374,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List edge cases - tile view (%s)",
   async ({
     testScreenshot,
@@ -439,7 +442,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List edge cases - column layout (%s)",
   async ({
     testScreenshot,
@@ -495,7 +498,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List date range filter (%s)",
   async ({ testScreenshot, render, components: { typedList } }) => {
     function Wrapper() {
@@ -575,7 +578,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List empty views (%s)",
   async ({ testScreenshot, render, components: { typedList, Heading } }) => {
     function Wrapper(
@@ -608,7 +611,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: listComparableFrom })).each(testEnvironments)(
   "List empty search views (%s)",
   async ({ testScreenshot, render, components: { typedList, Heading } }) => {
     function Wrapper(

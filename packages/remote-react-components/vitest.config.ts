@@ -46,7 +46,8 @@ export default mergeConfig(
           extends: true,
           test: {
             name: "unit-dev",
-            include: ["dev/**/*.test.{ts,tsx}"],
+            include: ["dev/**/*.test.{ts,tsx}", "e2e/**/*.test.{ts,tsx}"],
+            exclude: ["**/*.browser.test.{ts,tsx}"],
             environment: "node",
           },
         },

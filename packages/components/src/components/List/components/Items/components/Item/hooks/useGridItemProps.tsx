@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { useEffect, useId, useRef, useState } from "react";
-import { useList } from "@/components/List";
+import type List from "@/components/List/model/List";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { AccordionButton } from "@/components/List/components/Items/components/Item/components/AccordionButton";
@@ -9,9 +9,8 @@ interface P extends PropsWithChildren {
   data: never;
 }
 
-export const useGridItemProps = (props: P) => {
+export const useGridItemProps = (props: P, list: List<never>) => {
   const { data, children: childrenFromProps } = props;
-  const list = useList();
   const itemView = list.itemView;
   const onAction = list.onAction;
 

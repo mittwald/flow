@@ -1,12 +1,10 @@
-export { default } from "./CartesianChart";
-
+export * from "./view";
 export {
   type CartesianChartProps,
-  CartesianChart,
   type CartesianChartEmptyViewProps,
+  CartesianChart,
   typedCartesianChart,
 } from "./CartesianChart";
-export * from "./view";
 export * from "./components/Area";
 export * from "./components/AreaDot";
 export * from "./components/Line";
@@ -16,3 +14,4 @@ export * from "./components/CartesianGrid";
 export * from "./components/ChartLegend";
 export * from "./components/YAxis";
 export * from "./components/XAxis";
+export { default } from "./CartesianChart";

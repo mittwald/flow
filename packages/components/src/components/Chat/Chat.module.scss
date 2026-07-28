@@ -1,13 +1,17 @@
+@use "@/styles/mixins/scrollbar";
+
 .chat {
   display: flex;
   flex-direction: column;
   width: 100%;
 
   .messageThreadContainer {
+    @include scrollbar.scrollbar;
+
     overflow: auto;
     padding-bottom: var(--chat--spacing);
-    padding-right: var(--size-px--m);
-    margin-right: calc(var(--size-px--m) * -1);
+    padding-inline-end: var(--size-px--m);
+    margin-inline-end: calc(var(--size-px--m) * -1);
     flex-grow: 1;
     display: flex;
     flex-direction: column-reverse;

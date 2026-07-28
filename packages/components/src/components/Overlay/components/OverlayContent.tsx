@@ -4,6 +4,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { OverlaySuspenseFallback } from "@/components/Overlay/components/OverlaySuspenseFallback";
 import styles from "../Overlay.module.scss";
 import DivView from "@/views/DivView";
+import { useKeepBrowserExtensionsInteractive } from "@/lib/hooks/dom/useKeepBrowserExtensionsInteractive";
 
 export interface OverlayContentProps
   extends
@@ -24,6 +25,8 @@ export const OverlayContent: FC<OverlayContentProps> = (props) => {
     "aria-labelledby": ariaLabelledBy,
     ...restProps
   } = props;
+
+  useKeepBrowserExtensionsInteractive(restProps.isOpen ?? false);
 
   const Fallback = () => {
     return (

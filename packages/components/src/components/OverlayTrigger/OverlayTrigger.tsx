@@ -5,7 +5,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentName } from "@/components/propTypes";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { useIsPendingWithWait } from "../Action/hooks/useIsPendingWithWait";
+import { useIsPendingWithWait } from "@/components/Action/hooks/useIsPendingWithWait";
 
 type AriaComponentType = ComponentType<{
   isOpen?: boolean;

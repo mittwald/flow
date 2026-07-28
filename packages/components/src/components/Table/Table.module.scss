@@ -1,6 +1,14 @@
+@use "@/styles/mixins/scrollbar";
+
 .tableContainer {
+  @include scrollbar.scrollbar;
+
   width: 100%;
   overflow-x: auto;
+}
+
+.tableScrollArea {
+  width: 100%;
 }
 
 .table {
@@ -77,5 +85,13 @@
     .column {
       vertical-align: middle;
     }
+  }
+
+  &.layout-auto {
+    table-layout: auto;
+  }
+
+  &.layout-fixed {
+    table-layout: fixed;
   }
 }
