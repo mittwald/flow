@@ -11,7 +11,7 @@ export const LinkWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="42%">
       <WText />
-      <WLine height="2px" />
+      <WLine height="2px" tone="600" />
     </WStack>
   </WFrame>
 );

@@ -9,9 +9,9 @@ import {
 export const FlexWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WRow width="78%">
-      <WBox width="31%" height="var(--size-px--xxl)" />
-      <WBox width="31%" height="var(--size-px--xxl)" />
-      <WBox width="31%" height="var(--size-px--xxl)" />
+      <WBox width="31%" height="var(--size-px--xxl)" tone="500" />
+      <WBox width="31%" height="var(--size-px--xxl)" tone="500" />
+      <WBox width="31%" height="var(--size-px--xxl)" tone="500" />
     </WRow>
   </WFrame>
 );

@@ -13,7 +13,7 @@ export const NotificationWireframe: FC = () => (
   <WFrame>
     <WOverlay>
       <WRow alignItems="center">
-        <WIcon tone="800">
+        <WIcon>
           <IconDanger />
         </WIcon>
         <WText width="48%" tone="700" />

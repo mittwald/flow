@@ -143,7 +143,7 @@ export const WButton: FC<LayoutProps> = (props) => {
       className={cx(styles.button, getToneClass(tone), className)}
       style={rest}
     >
-      {children}
+      {children ?? <WText width="calc(100% - 16px)" />}
     </div>
   );
 };

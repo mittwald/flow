@@ -4,7 +4,7 @@ import { WFrame } from "@/app/04-components/_components/wireframe/primitives";
 import styles from "./wireframes.module.scss";
 
 export const TableWireframe: FC = () => (
-  <WFrame justifyContent="center">
+  <WFrame>
     <div className={styles.table}>
       {Array.from({ length: 12 }, (_, index) => (
         <span

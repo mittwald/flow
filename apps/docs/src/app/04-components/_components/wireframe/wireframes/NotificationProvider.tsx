@@ -13,7 +13,7 @@ export const NotificationProviderWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WOverlay>
       <WRow alignItems="center">
-        <WIcon tone="800">
+        <WIcon>
           <IconDanger />
         </WIcon>
         <WText width="48%" tone="700" />
@@ -22,7 +22,7 @@ export const NotificationProviderWireframe: FC = () => (
     </WOverlay>
     <WOverlay>
       <WRow alignItems="center">
-        <WIcon tone="800">
+        <WIcon>
           <IconDanger />
         </WIcon>
         <WText width="60%" tone="700" />

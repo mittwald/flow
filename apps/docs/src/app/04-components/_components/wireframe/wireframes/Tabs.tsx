@@ -1,23 +1,26 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
   WFrame,
-  WRow,
+  WInput,
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import styles from "@/app/04-components/_components/wireframe/wireframes/wireframes.module.scss";
 
 export const TabsWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WRow>
+      <WInput className={styles.segmentGroup}>
         {[0, 1, 2].map((item) => (
-          <WBox key={item} tone={item === 0 ? "300" : "100"} width="33%">
-            <WText />
-          </WBox>
+          <div
+            key={item}
+            className={`${styles.segment} ${item === 0 ? styles.segmentActive : ""}`}
+          >
+            <WText width="50%" />
+          </div>
         ))}
-      </WRow>
+      </WInput>
       <WStack>
         <WText width="84%" />
         <WText width="58%" />

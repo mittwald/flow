@@ -11,7 +11,7 @@ import { IconDanger } from "@mittwald/flow-react-components";
 export const AlertBadgeWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WBox flexDirection="row" width="60%" borderRadius={30} alignItems="center">
-      <WIcon tone="800">
+      <WIcon>
         <IconDanger />
       </WIcon>
       <WText tone="700" />

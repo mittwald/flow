@@ -1,3 +1,37 @@
+.cropperContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cropperImage {
+  position: absolute;
+}
+
+.cropper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border: 2px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+  position: relative;
+}
+
+.cropperCell {
+  min-height: 40px;
+  border-inline-end: 2px solid var(--neutral--color--500);
+  border-block-end: 2px solid var(--neutral--color--500);
+}
+
+.cropperCell:nth-child(3n) {
+  border-inline-end: 0;
+}
+
+.cropperCell:nth-last-child(-n + 3) {
+  border-block-end: 0;
+}
+
 .table {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,9 +83,9 @@
   width: 42%;
   aspect-ratio: 1;
   background: conic-gradient(
-    var(--neutral--color--800) 0 38%,
+    var(--neutral--color--700) 0 38%,
     var(--neutral--color--600) 38% 68%,
-    var(--neutral--color--400) 68% 100%
+    var(--neutral--color--500) 68% 100%
   );
   border-radius: 50%;
 }
@@ -64,7 +98,6 @@
   border-radius: 50%;
 }
 
-.cropper,
 .chart,
 .dropZone {
   position: relative;
@@ -138,17 +171,6 @@
   background: var(--neutral--color--700);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-}
-
-.cropper {
-  padding-block: 48px;
-  padding-inline: 0;
-  border: 2px solid var(--neutral--color--600);
-}
-
-.cropFrame {
-  border-radius: 0;
-  border-block: 2px solid var(--neutral--color--600);
 }
 
 .chart {
