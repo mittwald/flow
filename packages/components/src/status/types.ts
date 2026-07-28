@@ -26,16 +26,3 @@ export interface FlowComponentStatus {
  * several entries appears under one key per specifier.
  */
 export type FlowComponentStatusRegistry = Record<string, FlowComponentStatus>;
-
-/**
- * The component-bearing public export entries. Used with
- * `getFlowComponentStatus(name, entry)` to look up a component's status on a
- * given surface. Must stay in sync with `STATUS_EXPORT_ENTRIES`
- * (`dev/status-registry/exportEntries.ts`).
- */
-export type FlowExportEntry =
-  | "."
-  | "flr-universal"
-  | "nextjs"
-  | "react-hook-form"
-  | "password-tools";
