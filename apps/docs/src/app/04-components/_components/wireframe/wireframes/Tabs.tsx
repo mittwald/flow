@@ -10,7 +10,7 @@ import styles from "@/app/04-components/_components/wireframe/wireframes/wirefra
 
 export const TabsWireframe: FC = () => (
   <WFrame>
-    <WStack>
+    <WStack gap={16}>
       <WInput className={styles.segmentGroup}>
         {[0, 1, 2].map((item) => (
           <div

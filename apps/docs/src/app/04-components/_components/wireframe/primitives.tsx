@@ -15,6 +15,7 @@ interface LayoutProps extends PropsWithChildren {
   padding?: CSSProperties["padding"];
   margin?: CSSProperties["margin"];
   marginBlock?: CSSProperties["marginBlock"];
+  gap?: CSSProperties["gap"];
   tone?: Tone;
 }
 
