@@ -67,9 +67,7 @@
         "{projectRoot}/package.json",
         "{projectRoot}/src/components/public.ts",
         "{projectRoot}/src/index/flr-universal.ts",
-        "{projectRoot}/src/integrations/nextjs/index.ts",
-        "{projectRoot}/src/integrations/react-hook-form/index.ts",
-        "{projectRoot}/src/integrations/@mittwald/password-tools-js/index.ts",
+        "{projectRoot}/src/integrations/**/index.ts",
         "{projectRoot}/dist/assets/doc-properties.json"
       ],
       "outputs": [
