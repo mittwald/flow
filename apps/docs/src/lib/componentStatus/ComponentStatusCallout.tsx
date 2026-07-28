@@ -1,3 +1,4 @@
+"use client";
 import type { FC } from "react";
 import { Alert, Content, Heading } from "@mittwald/flow-react-components";
 import {

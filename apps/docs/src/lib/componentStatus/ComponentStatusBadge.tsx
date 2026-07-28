@@ -1,3 +1,4 @@
+"use client";
 import type { FC } from "react";
 import { Badge } from "@mittwald/flow-react-components";
 import {
