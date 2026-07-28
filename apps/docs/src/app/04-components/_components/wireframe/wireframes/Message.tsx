@@ -11,7 +11,7 @@ import {
 export const MessageWireframe: FC = () => (
   <WFrame>
     <WRow>
-      <WCircle width={40} height={40} />
+      <WCircle size={40} />
       <WBox>
         <WText />
         <WText width="80%" />

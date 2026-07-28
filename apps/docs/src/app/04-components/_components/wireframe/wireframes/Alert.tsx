@@ -12,7 +12,7 @@ import { IconDanger } from "@mittwald/flow-react-components";
 export const AlertWireframe: FC = () => (
   <WFrame>
     <WBox>
-      <WRow alignItems="center">
+      <WRow>
         <WIcon>
           <IconDanger />
         </WIcon>

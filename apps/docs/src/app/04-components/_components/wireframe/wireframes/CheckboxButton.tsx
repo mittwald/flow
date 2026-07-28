@@ -12,7 +12,7 @@ import { IconCheckboxChecked } from "@mittwald/flow-react-components";
 export const CheckboxButtonWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WButton width="64%">
-      <WRow alignItems="center" width="90%">
+      <WRow width="90%">
         <WIcon tone="400">
           <IconCheckboxChecked />
         </WIcon>

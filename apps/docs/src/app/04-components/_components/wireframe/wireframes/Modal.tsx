@@ -12,7 +12,7 @@ import { IconClose } from "@mittwald/flow-react-components";
 export const ModalWireframe: FC = () => (
   <WFrame>
     <WOverlay>
-      <WRow justifyContent="space-between" alignItems="center">
+      <WRow justifyContent="space-between">
         <WText width="52%" />
         <WIcon>
           <IconClose />

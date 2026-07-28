@@ -18,8 +18,8 @@ export const ListWireframe: FC = () => (
         alignItems="center"
         justifyContent="space-between"
       >
-        <WRow alignItems="center">
-          <WCircle height={24} width={24} padding={0} />
+        <WRow>
+          <WCircle size={24} padding={0} />
           <WText width="60%" />
         </WRow>
       </WBox>
@@ -29,8 +29,8 @@ export const ListWireframe: FC = () => (
         alignItems="center"
         justifyContent="space-between"
       >
-        <WRow alignItems="center">
-          <WCircle height={24} width={24} padding={0} />
+        <WRow>
+          <WCircle size={24} padding={0} />
           <WText width="60%" />
         </WRow>
       </WBox>
@@ -40,8 +40,8 @@ export const ListWireframe: FC = () => (
         alignItems="center"
         justifyContent="space-between"
       >
-        <WRow alignItems="center">
-          <WCircle height={24} width={24} padding={0} />
+        <WRow>
+          <WCircle size={24} padding={0} />
           <WText width="60%" />
         </WRow>
       </WBox>

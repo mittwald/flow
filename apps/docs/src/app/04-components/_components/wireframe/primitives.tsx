@@ -59,17 +59,10 @@ export const WStack: FC<LayoutProps> = (props) => {
 };
 
 export const WRow: FC<LayoutProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, alignItems = "center", ...rest } = props;
 
   return (
-    <div
-      className={cx(
-        styles.row,
-
-        className,
-      )}
-      style={rest}
-    >
+    <div className={cx(styles.row, className)} style={{ alignItems, ...rest }}>
       {children}
     </div>
   );
@@ -96,13 +89,15 @@ export const WLine: FC<LayoutProps> = (props) => {
   );
 };
 
-export const WCircle: FC<LayoutProps> = (props) => {
-  const { className, tone = "500", children, ...rest } = props;
+export const WCircle: FC<LayoutProps & { size?: CSSProperties["width"] }> = (
+  props,
+) => {
+  const { className, tone = "500", children, size, ...rest } = props;
 
   return (
     <span
       className={cx(styles.circle, getToneClass(tone), className)}
-      style={{ ...rest }}
+      style={{ width: size, height: size, ...rest }}
     >
       {children}
     </span>

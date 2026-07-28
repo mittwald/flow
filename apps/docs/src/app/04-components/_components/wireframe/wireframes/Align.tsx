@@ -9,7 +9,7 @@ import {
 
 export const AlignWireframe: FC = () => (
   <WFrame alignItems="center">
-    <WCircle height={48} width={48} />
+    <WCircle size={48} />
     <WStack width="70%">
       <WText width="80%" />
       <WText width="100%" />

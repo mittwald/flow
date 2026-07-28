@@ -10,7 +10,7 @@ import {
 export const BigNumberWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack alignItems="center" width={72}>
-      <WCircle width={72} height={72} />
+      <WCircle size={72} />
       <WText />
     </WStack>
   </WFrame>

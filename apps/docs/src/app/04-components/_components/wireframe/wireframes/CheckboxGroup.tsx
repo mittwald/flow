@@ -15,13 +15,13 @@ import {
 export const CheckboxGroupWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="80%">
-      <WRow alignItems="center" width="80%">
+      <WRow width="80%">
         <WIcon>
           <IconCheckboxChecked />
         </WIcon>
         <WText />
       </WRow>
-      <WRow alignItems="center" width="100%">
+      <WRow width="100%">
         <WIcon>
           <IconCheckboxEmpty />
         </WIcon>

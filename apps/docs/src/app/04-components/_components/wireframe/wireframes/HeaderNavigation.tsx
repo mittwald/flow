@@ -10,7 +10,7 @@ export const HeaderNavigationWireframe: FC = () => (
   <WFrame alignItems="center" justifyContent="center">
     <WText width="25%" height={24} />
     <WText width="25%" height={24} />
-    <WCircle width={40} height={40} />
+    <WCircle size={40} />
   </WFrame>
 );
 

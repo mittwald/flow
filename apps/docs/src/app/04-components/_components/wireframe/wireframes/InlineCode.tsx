@@ -10,7 +10,7 @@ import { IconCode } from "@mittwald/flow-react-components";
 
 export const InlineCodeWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WRow alignItems="center" width="60%">
+    <WRow width="60%">
       <WIcon>
         <IconCode />
       </WIcon>

@@ -8,21 +8,15 @@ import styles from "./wireframes.module.scss";
 
 export const AvatarStackWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WCircle
-      tone="700"
-      width="var(--size-px--xxl)"
-      height="var(--size-px--xxl)"
-    />
+    <WCircle tone="700" size="var(--size-px--xxl)" />
     <WCircle
       tone="600"
-      width="var(--size-px--xxl)"
-      height="var(--size-px--xxl)"
+      size="var(--size-px--xxl)"
       className={styles.avatarOverlap}
     />
     <WCircle
       tone="500"
-      width="var(--size-px--xxl)"
-      height="var(--size-px--xxl)"
+      size="var(--size-px--xxl)"
       className={styles.avatarOverlap}
     />
   </WFrame>

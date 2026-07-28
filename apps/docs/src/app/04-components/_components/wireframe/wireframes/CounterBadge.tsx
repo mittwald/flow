@@ -10,7 +10,7 @@ import { IconNumber3 } from "@tabler/icons-react";
 
 export const CounterBadgeWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WCircle width={48} height={48} tone="600">
+    <WCircle size={48} tone="600">
       <WIcon tone="400">
         <Icon>
           <IconNumber3 />

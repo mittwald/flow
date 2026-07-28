@@ -27,11 +27,7 @@ export const AccordionWireframe: FC = () => (
         </WIcon>
       </WBox>
       <WBox>
-        <WRow
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <WRow flexDirection="row" justifyContent="space-between">
           <WText width="50%" />
           <WIcon>
             <IconChevronUp />

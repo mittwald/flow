@@ -9,11 +9,7 @@ import styles from "./wireframes.module.scss";
 export const SwitchWireframe: FC = () => (
   <WFrame justifyContent="center">
     <span className={styles.switchTrack}>
-      <WCircle
-        tone="200"
-        width="var(--size-px--m)"
-        height="var(--size-px--m)"
-      />
+      <WCircle tone="200" size="var(--size-px--m)" />
     </span>
   </WFrame>
 );

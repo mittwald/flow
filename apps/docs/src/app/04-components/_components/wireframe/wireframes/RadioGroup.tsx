@@ -12,13 +12,13 @@ import { IconRadioOff, IconRadioOn } from "@mittwald/flow-react-components";
 export const RadioGroupWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="80%">
-      <WRow alignItems="center" width="80%">
+      <WRow width="80%">
         <WIcon>
           <IconRadioOn />
         </WIcon>
         <WText />
       </WRow>
-      <WRow alignItems="center" width="100%">
+      <WRow width="100%">
         <WIcon>
           <IconRadioOff />
         </WIcon>

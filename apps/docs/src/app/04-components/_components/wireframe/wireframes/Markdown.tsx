@@ -12,7 +12,7 @@ import { IconNumber } from "@mittwald/flow-react-components";
 export const MarkdownWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WRow alignItems="center">
+      <WRow>
         <WIcon>
           <IconNumber />
         </WIcon>

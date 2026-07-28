@@ -13,7 +13,7 @@ import { IconMinus } from "@mittwald/flow-react-components";
 export const DateRangePickerWireframe: FC = () => (
   <WFrame>
     <WInput justifyContent="space-between">
-      <WRow alignItems="center">
+      <WRow>
         <WText tone="400" width="30%" />
         <WIcon>
           <IconMinus size="s" />

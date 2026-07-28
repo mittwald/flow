@@ -14,7 +14,7 @@ export const CodeBlockWireframe: FC = () => (
   <WFrame>
     <WBox>
       <WStack>
-        <WRow alignItems="center">
+        <WRow>
           <WIcon>
             <IconCode />
           </WIcon>

@@ -14,7 +14,7 @@ export const MarkdownEditorWireframe: FC = () => (
   <WFrame>
     <WInput>
       <WStack>
-        <WRow alignItems="center">
+        <WRow>
           <WIcon>
             <IconNumber />
           </WIcon>

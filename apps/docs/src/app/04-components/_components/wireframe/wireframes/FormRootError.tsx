@@ -22,7 +22,7 @@ export const FormRootErrorWireframe: FC = () => (
       </WStack>
 
       <WBox tone="300">
-        <WRow alignItems="center">
+        <WRow>
           <WIcon>
             <IconDanger />
           </WIcon>

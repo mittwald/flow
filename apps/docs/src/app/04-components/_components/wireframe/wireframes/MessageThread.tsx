@@ -11,7 +11,7 @@ import {
 export const MessageThreadWireframe: FC = () => (
   <WFrame flexDirection="column">
     <WRow>
-      <WCircle width={40} height={40} />
+      <WCircle size={40} />
       <WBox width="70%">
         <WText />
         <WText width="80%" />
@@ -21,7 +21,7 @@ export const MessageThreadWireframe: FC = () => (
       <WBox width="75%">
         <WText />
       </WBox>
-      <WCircle width={40} height={40} />
+      <WCircle size={40} />
     </WRow>
   </WFrame>
 );

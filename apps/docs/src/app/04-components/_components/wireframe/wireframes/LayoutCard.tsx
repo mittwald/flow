@@ -12,8 +12,8 @@ export const LayoutCardWireframe: FC = () => (
     <WBox>
       <WStack>
         <WText width="54%" />
-        <WText width="82%" />
-        <WText width="75%" />
+        <WText width="92%" />
+        <WText width="78%" />
       </WStack>
     </WBox>
   </WFrame>
