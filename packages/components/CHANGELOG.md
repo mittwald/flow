@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.963](https://github.com/mittwald/flow/compare/0.2.0-alpha.962...0.2.0-alpha.963) (2026-07-28)
+
+### Features
+
+* **components:** add component lifecycle status registry (ADR 0003) ([#2729](https://github.com/mittwald/flow/issues/2729)) ([6a76d1e](https://github.com/mittwald/flow/commit/6a76d1e4ea6cf2e449cdcea0952bb54e9e8725c0))
+
 # [0.2.0-alpha.962](https://github.com/mittwald/flow/compare/0.2.0-alpha.961...0.2.0-alpha.962) (2026-07-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
