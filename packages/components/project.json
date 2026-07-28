@@ -64,7 +64,12 @@
         "{projectRoot}/dev/status-registry/**/*",
         "!{projectRoot}/dev/status-registry/**/*.test.ts",
         "{projectRoot}/src/status/types.ts",
+        "{projectRoot}/package.json",
         "{projectRoot}/src/components/public.ts",
+        "{projectRoot}/src/index/flr-universal.ts",
+        "{projectRoot}/src/integrations/nextjs/index.ts",
+        "{projectRoot}/src/integrations/react-hook-form/index.ts",
+        "{projectRoot}/src/integrations/@mittwald/password-tools-js/index.ts",
         "{projectRoot}/dist/assets/doc-properties.json"
       ],
       "outputs": [
