@@ -13,6 +13,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "build": "node build-tokens.js",
     "clean": "rimraf dist"
