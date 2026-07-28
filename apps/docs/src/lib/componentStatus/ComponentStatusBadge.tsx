@@ -1,6 +1,6 @@
 "use client";
 import type { FC } from "react";
-import { Badge } from "@mittwald/flow-react-components";
+import { AlertBadge, Badge } from "@mittwald/flow-react-components";
 import {
   getComponentStatusInfo,
   getStatusBadges,
@@ -20,11 +20,17 @@ export const ComponentStatusBadge: FC<Props> = (props) => {
 
   return (
     <>
-      {badges.map((badge) => (
-        <Badge key={badge.label} color={badge.color}>
-          {badge.label}
-        </Badge>
-      ))}
+      {badges.map((badge) =>
+        badge.variant === "alert" ? (
+          <AlertBadge key={badge.label} status={badge.status}>
+            {badge.label}
+          </AlertBadge>
+        ) : (
+          <Badge key={badge.label} color={badge.color}>
+            {badge.label}
+          </Badge>
+        ),
+      )}
     </>
   );
 };

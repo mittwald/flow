@@ -14,10 +14,13 @@ export const getComponentStatusInfo = (
   name: string,
 ): FlowComponentStatus | undefined => getFlowComponentStatus(name);
 
-export interface StatusBadgeDescriptor {
-  label: string;
-  color: "violet" | "green" | "orange";
-}
+/**
+ * A `level` (Beta/Veraltet) renders as an `AlertBadge` carrying the matching
+ * status; `Neu` renders as a violet `Badge`.
+ */
+export type StatusBadgeDescriptor =
+  | { variant: "alert"; status: "info" | "warning"; label: string }
+  | { variant: "badge"; color: "violet"; label: string };
 
 /**
  * The single badge to render for a status. The `level` badge takes precedence
@@ -34,13 +37,13 @@ export const getStatusBadges = (
   }
 
   if (status.level === "beta") {
-    return [{ label: "Beta", color: "violet" }];
+    return [{ variant: "alert", status: "info", label: "Beta" }];
   }
   if (status.level === "deprecated") {
-    return [{ label: "Veraltet", color: "orange" }];
+    return [{ variant: "alert", status: "warning", label: "Veraltet" }];
   }
   if (status.isNew) {
-    return [{ label: "Neu", color: "green" }];
+    return [{ variant: "badge", color: "violet", label: "Neu" }];
   }
 
   return [];

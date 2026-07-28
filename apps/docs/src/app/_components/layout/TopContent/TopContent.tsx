@@ -46,25 +46,27 @@ export const TopContent: FC<Props> = (props) => {
 
   return (
     <LayoutCard className={styles.topContent}>
-      <ComponentStatusCallout name={component} />
-      <ColumnLayout l={[1, 1]} m={[1]}>
-        <Section>
-          <Heading level={1}>
-            {mdxFile.getTitle()}
-            <ComponentStatusBadge name={component} />
-          </Heading>
+      <Section>
+        <ComponentStatusCallout name={component} />
+        <ColumnLayout l={[1, 1]} m={[1]}>
+          <Section>
+            <Heading level={1}>
+              {mdxFile.getTitle()}
+              <ComponentStatusBadge name={component} />
+            </Heading>
 
-          {mdxFile.mdxSource.frontmatter.description}
+            {mdxFile.mdxSource.frontmatter.description}
 
-          <Link href={mdxFile.getGitHubUrl()}>
-            GitHub
-            <IconExternalLink />
-          </Link>
-          {markdownLink}
-        </Section>
+            <Link href={mdxFile.getGitHubUrl()}>
+              GitHub
+              <IconExternalLink />
+            </Link>
+            {markdownLink}
+          </Section>
 
-        <MdxFileView mdxFile={mdxFile.serialize()} />
-      </ColumnLayout>
+          <MdxFileView mdxFile={mdxFile.serialize()} />
+        </ColumnLayout>
+      </Section>
     </LayoutCard>
   );
 };
