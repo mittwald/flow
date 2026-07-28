@@ -43,3 +43,17 @@ test("does not match `export type * from` and dedupes repeats", () => {
     { name: "Field", sourceRoot: "src/integrations/react-hook-form" },
   ]);
 });
+
+test("collects the renamed identifier for `A as B` in a named block", () => {
+  const source =
+    'export { SubmitButton as Submit, type Foo } from "./components/SubmitButton";';
+
+  expect(
+    parseIntegrationIndexComponentNames(
+      source,
+      "src/integrations/react-hook-form",
+    ),
+  ).toEqual([
+    { name: "Submit", sourceRoot: "src/integrations/react-hook-form" },
+  ]);
+});
