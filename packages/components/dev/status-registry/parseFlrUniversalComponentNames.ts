@@ -12,7 +12,8 @@ export const parseFlrUniversalComponentNames = (
   const block = /export\s*\{([\s\S]*?)\}\s*from\s*"[^"]+"/g;
   let match: RegExpExecArray | null;
   while ((match = block.exec(source)) !== null) {
-    for (const raw of match[1].split(",")) {
+    const members = match[1] ?? "";
+    for (const raw of members.split(",")) {
       const token = raw.trim();
       if (!token || token.startsWith("type ")) {
         continue;

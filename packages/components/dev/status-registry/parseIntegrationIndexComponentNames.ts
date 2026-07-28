@@ -28,7 +28,7 @@ export const parseIntegrationIndexComponentNames = (
   const wildcard = /export\s*\*\s*from\s*"([^"]+)"/g;
   let match: RegExpExecArray | null;
   while ((match = wildcard.exec(source)) !== null) {
-    const importPath = match[1];
+    const importPath = match[1] ?? "";
     const name = importPath.split("/").pop() ?? "";
     const sourceRoot = importPath.startsWith("@/components/")
       ? "src/components"
@@ -38,7 +38,8 @@ export const parseIntegrationIndexComponentNames = (
 
   const block = /export\s*\{([\s\S]*?)\}\s*from\s*"[^"]+"/g;
   while ((match = block.exec(source)) !== null) {
-    for (const raw of match[1].split(",")) {
+    const members = match[1] ?? "";
+    for (const raw of members.split(",")) {
       const token = raw.trim();
       if (!token || token.startsWith("type ")) {
         continue;

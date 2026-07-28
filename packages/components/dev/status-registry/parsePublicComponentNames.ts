@@ -13,7 +13,8 @@ export const parsePublicComponentNames = (
   const exportFrom = /export\s+\*\s+from\s+"([^"]+)"/g;
   let match: RegExpExecArray | null;
   while ((match = exportFrom.exec(publicTsSource)) !== null) {
-    const segments = match[1].split("/");
+    const captured = match[1] ?? "";
+    const segments = captured.split("/");
     const last = segments[segments.length - 1];
     if (last) {
       names.add(last);
