@@ -48,6 +48,7 @@
 
 ## Migrations
 
-<!-- MAJOR releases only — delete this whole section for a minor.
-     Per breaking change: what changed, why, and the concrete migration step.
-     Link MIGRATION.md and any codemod under packages/codemods. -->
+<!-- Only when there is something to migrate — delete this whole section if
+     there are no breaking changes with migration steps (typically the case for
+     a minor). Per breaking change: what changed, why, and the concrete
+     migration step. Link MIGRATION.md and any codemod under packages/codemods. -->
