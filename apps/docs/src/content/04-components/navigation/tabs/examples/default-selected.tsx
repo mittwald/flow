@@ -7,8 +7,10 @@ import {
 <Tabs defaultSelectedKey="container">
   <Tab>
     <TabTitle>Mit App verbinden</TabTitle>
+    App Content
   </Tab>
   <Tab id="container">
     <TabTitle>Mit Container verbinden</TabTitle>
+    Container Content
   </Tab>
 </Tabs>;
