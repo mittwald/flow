@@ -32,7 +32,7 @@ export const LinkContent: FC<Props> = (props) => {
     "aria-current": ariaCurrent,
   } = linkProps;
 
-  const isCurrent = !!ariaCurrent && ariaCurrent !== "false";
+  const isCurrent = ariaCurrent === "page";
 
   return (
     <>

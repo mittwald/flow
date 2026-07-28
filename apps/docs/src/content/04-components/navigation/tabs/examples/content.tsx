@@ -15,8 +15,8 @@ import {
     <TabTitle>Mit App verbinden</TabTitle>
     <Table>
       <TableHeader>
-        <TableColumn> </TableColumn>
-        <TableColumn> </TableColumn>
+        <TableColumn />
+        <TableColumn />
       </TableHeader>
       <TableBody>
         <TableRow>
@@ -34,8 +34,8 @@ import {
     <TabTitle>Mit Container verbinden</TabTitle>
     <Table>
       <TableHeader>
-        <TableColumn> </TableColumn>
-        <TableColumn> </TableColumn>
+        <TableColumn />
+        <TableColumn />
       </TableHeader>
       <TableBody>
         <TableRow>

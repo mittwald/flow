@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LayoutCard from "../LayoutCard";
-import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
@@ -28,27 +27,6 @@ export default meta;
 type Story = StoryObj<typeof LayoutCard>;
 
 export const Default: Story = {};
-
-export const WithTabs: Story = {
-  render: (props) => (
-    <LayoutCard {...props}>
-      <Tabs>
-        <Tab id="general">
-          <TabTitle>Crew</TabTitle>
-          <Section>
-            <Text>{dummyText.long}</Text>
-          </Section>
-        </Tab>
-        <Tab id="storage">
-          <TabTitle>Cargo</TabTitle>
-          <Section>
-            <Text>{dummyText.long}</Text>
-          </Section>
-        </Tab>
-      </Tabs>
-    </LayoutCard>
-  ),
-};
 
 export const WithTabNavigation: Story = {
   render: (props) => (
