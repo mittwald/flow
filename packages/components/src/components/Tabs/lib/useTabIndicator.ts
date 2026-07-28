@@ -1,5 +1,6 @@
-import type { CSSProperties, RefCallback } from "react";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { createFrameResizeObserver } from "@/lib/dom/createFrameResizeObserver";
 
 interface TabIndicatorState {
   x: number;
@@ -24,14 +25,12 @@ export const useTabIndicator = (isCollapsed: boolean) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const titlesRef = useRef<HTMLDivElement | null>(null);
   const hasMeasuredRef = useRef(false);
-  const animationFrameRef = useRef<number | undefined>(undefined);
   const [indicator, setIndicator] = useState<TabIndicatorState | undefined>();
 
   const resetIndicator = () => {
     hasMeasuredRef.current = false;
-    setIndicator((previousIndicator) =>
-      previousIndicator ? undefined : previousIndicator,
-    );
+    // React bails out of the re-render when the state is already `undefined`.
+    setIndicator(undefined);
   };
 
   useLayoutEffect(() => {
@@ -75,43 +74,17 @@ export const useTabIndicator = (isCollapsed: boolean) => {
       hasMeasuredRef.current = true;
     };
 
-    const scheduleMeasurement = () => {
-      if (animationFrameRef.current !== undefined) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-
-      animationFrameRef.current = requestAnimationFrame(() => {
-        animationFrameRef.current = undefined;
-        measureIndicator();
-      });
-    };
-
     measureIndicator();
 
-    const resizeObserver = new ResizeObserver(scheduleMeasurement);
-    resizeObserver.observe(root);
-    resizeObserver.observe(titles);
+    const observer = createFrameResizeObserver(measureIndicator);
+    observer.observe([root, titles]);
 
-    return () => {
-      resizeObserver.disconnect();
-
-      if (animationFrameRef.current !== undefined) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
+    return () => observer.disconnect();
   });
 
-  const setRootRef: RefCallback<HTMLDivElement> = useCallback((element) => {
-    rootRef.current = element;
-  }, []);
-
-  const setTitlesRef: RefCallback<HTMLDivElement> = useCallback((element) => {
-    titlesRef.current = element;
-  }, []);
-
   return {
-    rootRef: setRootRef,
-    titlesRef: setTitlesRef,
+    rootRef,
+    titlesRef,
     indicatorStyle: getTabIndicatorStyle(indicator),
     isAnimated: indicator?.isAnimated ?? false,
   };

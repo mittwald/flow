@@ -1,5 +1,7 @@
 import type { RefCallback } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { FrameResizeObserver } from "@/lib/dom/createFrameResizeObserver";
+import { createFrameResizeObserver } from "@/lib/dom/createFrameResizeObserver";
 
 interface UseObserveOverflowReturn {
   ref: RefCallback<HTMLElement>;
@@ -8,9 +10,8 @@ interface UseObserveOverflowReturn {
 
 export const useObserveOverflow = (): UseObserveOverflowReturn => {
   const elementRef = useRef<HTMLElement | null>(null);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const observerRef = useRef<FrameResizeObserver | null>(null);
   const mutationObserverRef = useRef<MutationObserver | null>(null);
-  const animationFrameRef = useRef<number | undefined>(undefined);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const measureOverflow = useCallback(() => {
@@ -22,57 +23,32 @@ export const useObserveOverflow = (): UseObserveOverflowReturn => {
       return;
     }
 
-    const nextIsOverflowing = element.scrollWidth - parent.clientWidth > 1;
-
-    setIsOverflowing((currentIsOverflowing) =>
-      currentIsOverflowing === nextIsOverflowing
-        ? currentIsOverflowing
-        : nextIsOverflowing,
-    );
+    // React bails out of the re-render when the boolean is unchanged.
+    setIsOverflowing(element.scrollWidth - parent.clientWidth > 1);
   }, []);
 
-  const scheduleMeasurement = useCallback(() => {
-    if (animationFrameRef.current !== undefined) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    animationFrameRef.current = requestAnimationFrame(() => {
-      animationFrameRef.current = undefined;
-      measureOverflow();
-    });
-  }, [measureOverflow]);
-
-  const observeResizeTargets = useCallback(() => {
+  const observeTargets = useCallback(() => {
     const element = elementRef.current;
-    const resizeObserver = resizeObserverRef.current;
 
-    if (!element || !resizeObserver) {
+    if (!element) {
       return;
     }
 
-    resizeObserver.disconnect();
-    resizeObserver.observe(element);
-
+    const targets: Element[] = [element];
     if (element.parentElement) {
-      resizeObserver.observe(element.parentElement);
+      targets.push(element.parentElement);
     }
+    targets.push(...element.children);
 
-    for (const child of element.children) {
-      resizeObserver.observe(child);
-    }
+    observerRef.current?.observe(targets);
   }, []);
 
   const stopObservers = useCallback(() => {
-    resizeObserverRef.current?.disconnect();
+    observerRef.current?.disconnect();
     mutationObserverRef.current?.disconnect();
 
-    resizeObserverRef.current = null;
+    observerRef.current = null;
     mutationObserverRef.current = null;
-
-    if (animationFrameRef.current !== undefined) {
-      cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = undefined;
-    }
   }, []);
 
   const ref: RefCallback<HTMLElement> = useCallback(
@@ -85,23 +61,24 @@ export const useObserveOverflow = (): UseObserveOverflowReturn => {
         return;
       }
 
-      resizeObserverRef.current = new ResizeObserver(scheduleMeasurement);
-      observeResizeTargets();
+      const observer = createFrameResizeObserver(measureOverflow);
+      observerRef.current = observer;
+      observeTargets();
 
       // Tab titles are portaled in via UiComponentTunnel, so this component
       // never receives a `children`/count prop to react to — childList
       // mutations are the only signal that a tab was added or removed.
       mutationObserverRef.current = new MutationObserver(() => {
-        observeResizeTargets();
-        scheduleMeasurement();
+        observeTargets();
+        observer.schedule();
       });
       mutationObserverRef.current.observe(element, {
         childList: true,
       });
 
-      scheduleMeasurement();
+      observer.schedule();
     },
-    [observeResizeTargets, scheduleMeasurement, stopObservers],
+    [measureOverflow, observeTargets, stopObservers],
   );
 
   useEffect(() => {
