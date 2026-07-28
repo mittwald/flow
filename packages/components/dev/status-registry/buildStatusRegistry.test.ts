@@ -81,8 +81,7 @@ test("drops integration-sourced entries colliding with a public component name",
         displayName: "Link",
         tags: { "flr-generate": "all" },
         // react-docgen-typescript returns this one as an absolute path...
-        filePath:
-          "/abs/packages/components/src/components/Link/Link.tsx",
+        filePath: "/abs/packages/components/src/components/Link/Link.tsx",
       },
       {
         displayName: "Link",
