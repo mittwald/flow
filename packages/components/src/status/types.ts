@@ -14,6 +14,8 @@ export type FlowComponentStatusLevel = "beta" | "stable" | "deprecated";
 export interface FlowComponentStatus {
   level: FlowComponentStatusLevel;
   isNew: boolean;
+  /** Migration text from a component-level `@deprecated` tag (deprecated only). */
+  deprecationNotice?: string;
 }
 
 /**

@@ -24,7 +24,11 @@ test.each([
   [
     "component @deprecated → deprecated",
     { deprecated: "Use X instead." },
-    { level: "deprecated", isNew: false },
+    {
+      level: "deprecated",
+      isNew: false,
+      deprecationNotice: "Use X instead.",
+    },
   ],
   [
     "empty @deprecated tag still deprecated",
@@ -34,12 +38,12 @@ test.each([
   [
     "deprecated wins over beta",
     { flowStatus: "beta", deprecated: "gone soon" },
-    { level: "deprecated", isNew: false },
+    { level: "deprecated", isNew: false, deprecationNotice: "gone soon" },
   ],
   [
     "deprecated keeps isNew from flowStatus",
     { flowStatus: "beta, new", deprecated: "gone soon" },
-    { level: "deprecated", isNew: true },
+    { level: "deprecated", isNew: true, deprecationNotice: "gone soon" },
   ],
   [
     "unrelated tags ignored",

@@ -7,6 +7,8 @@ export type DerivedComponentStatusLevel = "beta" | "stable" | "deprecated";
 export interface DerivedComponentStatus {
   level: DerivedComponentStatusLevel;
   isNew: boolean;
+  /** Migration text from a component-level `@deprecated` tag (deprecated only). */
+  deprecationNotice?: string;
 }
 
 const parseFlowStatusTokens = (raw: string | undefined): string[] =>
@@ -36,5 +38,14 @@ export const deriveComponentStatus = (
     level = "beta";
   }
 
-  return { level, isNew };
+  const status: DerivedComponentStatus = { level, isNew };
+
+  if (isDeprecated) {
+    const notice = tags.deprecated?.trim();
+    if (notice) {
+      status.deprecationNotice = notice;
+    }
+  }
+
+  return status;
 };

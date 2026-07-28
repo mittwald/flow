@@ -52,7 +52,11 @@ test("keys entries by `<specifier>#<name>` and derives status per source", () =>
   expect(registry).toEqual({
     [`${PKG}#Button`]: { level: "stable", isNew: false },
     [`${PKG}#Link`]: { level: "stable", isNew: false },
-    [`${PKG}/nextjs#Link`]: { level: "deprecated", isNew: false },
+    [`${PKG}/nextjs#Link`]: {
+      level: "deprecated",
+      isNew: false,
+      deprecationNotice: "Use RouterProvider instead",
+    },
   });
 });
 

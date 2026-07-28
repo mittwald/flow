@@ -489,11 +489,13 @@
   },
   "@mittwald/flow-react-components/nextjs#Link": {
     "level": "deprecated",
-    "isNew": false
+    "isNew": false,
+    "deprecationNotice": "Use RouterProvider instead"
   },
   "@mittwald/flow-react-components/nextjs#LinkProvider": {
     "level": "deprecated",
-    "isNew": false
+    "isNew": false,
+    "deprecationNotice": "Use RouterProvider instead"
   },
   "@mittwald/flow-react-components/nextjs#RouterProvider": {
     "level": "stable",

@@ -10,13 +10,14 @@ import type {
 export const flowComponentStatus =
   componentStatus as FlowComponentStatusRegistry;
 
-const SPECIFIER_BY_ENTRY: Record<FlowExportEntry, string> = {
-  ".": "@mittwald/flow-react-components",
-  "flr-universal": "@mittwald/flow-react-components/flr-universal",
-  nextjs: "@mittwald/flow-react-components/nextjs",
-  "react-hook-form": "@mittwald/flow-react-components/react-hook-form",
-  "password-tools": "@mittwald/flow-react-components/password-tools",
-};
+const PACKAGE_NAME = "@mittwald/flow-react-components";
+
+/**
+ * The public import specifier for an export entry (mirrors specifierOf in
+ * exportEntries.ts).
+ */
+const specifierOf = (entry: FlowExportEntry): string =>
+  entry === "." ? PACKAGE_NAME : `${PACKAGE_NAME}/${entry}`;
 
 /**
  * Looks up a component's lifecycle status on a given public export surface.
@@ -27,4 +28,4 @@ export const getFlowComponentStatus = (
   name: string,
   entry: FlowExportEntry = ".",
 ): FlowComponentStatus | undefined =>
-  flowComponentStatus[`${SPECIFIER_BY_ENTRY[entry]}#${name}`];
+  flowComponentStatus[`${specifierOf(entry)}#${name}`];
