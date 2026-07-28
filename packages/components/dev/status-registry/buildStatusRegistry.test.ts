@@ -80,13 +80,15 @@ test("drops integration-sourced entries colliding with a public component name",
       {
         displayName: "Link",
         tags: { "flr-generate": "all" },
-        filePath: "/abs/packages/components/src/components/Link/Link.tsx",
+        // react-docgen-typescript returns this one as an absolute path...
+        filePath:
+          "/abs/packages/components/src/components/Link/Link.tsx",
       },
       {
         displayName: "Link",
         tags: { deprecated: "Use RouterProvider instead" },
-        filePath:
-          "/abs/packages/components/src/integrations/nextjs/components/Link/Link.tsx",
+        // ...and this one as a RELATIVE path — the exclusion must handle both.
+        filePath: "src/integrations/nextjs/components/Link/Link.tsx",
       },
     ],
     new Set(["Link"]),

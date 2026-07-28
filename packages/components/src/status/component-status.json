@@ -335,10 +335,6 @@
     "level": "stable",
     "isNew": false
   },
-  "RouterProvider": {
-    "level": "stable",
-    "isNew": false
-  },
   "SearchField": {
     "level": "stable",
     "isNew": false

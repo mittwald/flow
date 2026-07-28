@@ -39,7 +39,14 @@ export const buildStatusRegistry = (
   const registry: DerivedStatusRegistry = {};
 
   const sorted = [...components]
-    .filter((component) => !component.filePath?.includes("/src/integrations/"))
+    // Match the `src/integrations/` path segment regardless of absolute vs.
+    // relative form or path separator: react-docgen-typescript returns
+    // `filePath` absolute for some files and relative for others, so a plain
+    // `.includes("/src/integrations/")` would miss the relative form.
+    .filter(
+      (component) =>
+        !/(?:^|[\\/])src[\\/]integrations[\\/]/.test(component.filePath ?? ""),
+    )
     .filter((component) => isComponentDisplayName(component.displayName))
     .filter((component) => publicComponentNames.has(component.displayName))
     .sort((a, b) => a.displayName.localeCompare(b.displayName));
