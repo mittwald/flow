@@ -1,10 +1,10 @@
 {
   "@mittwald/flow-react-components#AccentBox": {
-    "level": "stable",
+    "level": "beta",
     "isNew": false
   },
   "@mittwald/flow-react-components#Accordion": {
-    "level": "stable",
+    "level": "beta",
     "isNew": false
   },
   "@mittwald/flow-react-components#Action": {
