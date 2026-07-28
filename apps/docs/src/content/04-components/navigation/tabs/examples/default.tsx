@@ -6,15 +6,9 @@ import {
 
 <Tabs>
   <Tab>
-    <TabTitle>Allgemein</TabTitle>
-    Allgemeiner Inhalt
-  </Tab>
-  <Tab id="storage">
-    <TabTitle>Speicherplatz</TabTitle>
-    Speicherplatz Inhalt
+    <TabTitle>Mit App verbinden</TabTitle>
   </Tab>
   <Tab>
-    <TabTitle>Spamschutz</TabTitle>
-    Spamschutz Inhalt
+    <TabTitle>Mit Container verbinden</TabTitle>
   </Tab>
 </Tabs>;

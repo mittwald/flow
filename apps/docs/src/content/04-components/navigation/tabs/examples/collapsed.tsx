@@ -1,23 +1,22 @@
 import {
+  Heading,
   LayoutCard,
+  Section,
   Tab,
   Tabs,
   TabTitle,
 } from "@mittwald/flow-react-components";
 
 <LayoutCard style={{ maxWidth: "320px" }}>
-  <Tabs>
-    <Tab>
-      <TabTitle>Allgemein</TabTitle>
-      Allgemeiner Inhalt
-    </Tab>
-    <Tab id="storage">
-      <TabTitle>Speicherplatz</TabTitle>
-      Speicherplatz Inhalt
-    </Tab>
-    <Tab>
-      <TabTitle>Spamschutz</TabTitle>
-      Spamschutz Inhalt
-    </Tab>
-  </Tabs>
+  <Section>
+    <Heading>SSH-Benutzer</Heading>
+    <Tabs>
+      <Tab>
+        <TabTitle>Mit App verbinden</TabTitle>
+      </Tab>
+      <Tab>
+        <TabTitle>Mit Container verbinden</TabTitle>
+      </Tab>
+    </Tabs>
+  </Section>
 </LayoutCard>;

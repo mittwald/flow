@@ -4,17 +4,11 @@ import {
   TabTitle,
 } from "@mittwald/flow-react-components";
 
-<Tabs defaultSelectedKey="storage">
+<Tabs defaultSelectedKey="container">
   <Tab>
-    <TabTitle>Allgemein</TabTitle>
-    Allgemeiner Inhalt
+    <TabTitle>Mit App verbinden</TabTitle>
   </Tab>
-  <Tab id="storage">
-    <TabTitle>Speicherplatz</TabTitle>
-    Speicherplatz Inhalt
-  </Tab>
-  <Tab>
-    <TabTitle>Spamschutz</TabTitle>
-    Spamschutz Inhalt
+  <Tab id="container">
+    <TabTitle>Mit Container verbinden</TabTitle>
   </Tab>
 </Tabs>;
