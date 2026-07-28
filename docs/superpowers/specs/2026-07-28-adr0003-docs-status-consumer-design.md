@@ -5,8 +5,9 @@
 - **Spec type:** implementation design for the documentation consumer of the
   component lifecycle status registry.
 - **Depends on:** [ADR 0003](../../adr/0003-component-lifecycle-status.md) and its
-  registry foundation, shipping on branch `claude/adr003-write-plan-97787f`
-  ([PR #2729](https://github.com/mittwald/flow/pull/2729), still open).
+  registry foundation, **merged to `main`** via
+  [PR #2729](https://github.com/mittwald/flow/pull/2729) (2026-07-28). The
+  registry is available on `main` now.
 
 ## Goal
 
@@ -33,7 +34,7 @@ re-derived from JSDoc in the docs app — the registry is the single source.
 - Any change to the registry, its generator, or the `/internal` export — this
   spec only *consumes* what #2729 ships.
 
-## Registry API this consumes (as shipped in #2729 at time of writing)
+## Registry API this consumes (as shipped in #2729, now on `main`)
 
 From `@mittwald/flow-react-components/internal`:
 
@@ -178,9 +179,9 @@ Component-name resolution in the nav is from the `MdxFile` tree item's
 
 ## Branching
 
-The docs consumer imports `#2729`'s `/internal` exports. Branch off `main` once
-#2729 merges; if it has not merged, branch off `claude/adr003-write-plan-97787f`.
-Code, commits, and this spec are in English; user-facing docs copy is German.
+#2729 is merged, so the `/internal` exports are on `main` — branch the docs
+work off `main`. Code, commits, and this spec are in English; user-facing docs
+copy is German.
 
 ## Implementation-time verifications (carry into the plan)
 
