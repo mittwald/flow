@@ -1,10 +1,15 @@
 "use client";
 import type { FC } from "react";
 import { Alert, Content, Heading } from "@mittwald/flow-react-components";
-import {
-  getComponentStatusInfo,
-  getStatusCallout,
-} from "@/lib/componentStatus/componentStatus";
+import { getComponentStatusInfo } from "@/lib/componentStatus/componentStatus";
+
+const BETA_BODY =
+  "Diese Komponente befindet sich in der Beta-Phase. Ihre API ist von der " +
+  "Stabilitätsgarantie ausgenommen und kann sich auch in Minor- oder " +
+  "Patch-Releases noch ändern.";
+
+const DEPRECATED_FALLBACK =
+  "Diese Komponente ist veraltet und wird in einer zukünftigen Version entfernt.";
 
 interface Props {
   /** Component display name (registry lookup key on the main "." surface). */
@@ -12,18 +17,27 @@ interface Props {
 }
 
 export const ComponentStatusCallout: FC<Props> = (props) => {
-  const callout = getStatusCallout(getComponentStatusInfo(props.name));
+  const status = getComponentStatusInfo(props.name);
 
-  if (!callout) {
-    return null;
+  if (status?.level === "beta") {
+    return (
+      <Alert status="info">
+        <Heading>Beta</Heading>
+        <Content>{BETA_BODY}</Content>
+      </Alert>
+    );
   }
 
-  return (
-    <Alert status={callout.status}>
-      <Heading>{callout.heading}</Heading>
-      <Content>{callout.body}</Content>
-    </Alert>
-  );
+  if (status?.level === "deprecated") {
+    return (
+      <Alert status="warning">
+        <Heading>Veraltet</Heading>
+        <Content>{status.deprecationNotice ?? DEPRECATED_FALLBACK}</Content>
+      </Alert>
+    );
+  }
+
+  return null;
 };
 
 export default ComponentStatusCallout;
