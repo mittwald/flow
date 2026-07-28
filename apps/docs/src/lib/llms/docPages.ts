@@ -50,12 +50,17 @@ const componentPages = (): DocPage[] => {
     const description = normalizeWhitespace(frontmatter.description);
     const header = pageHeader(title, description);
 
+    // The "overview" section lives in the component's index.mdx; the other
+    // sections have their own files.
+    const tabFileName = (tab: (typeof COMPONENT_TABS)[number]): string =>
+      tab === "overview" ? "index.mdx" : `${tab}.mdx`;
+
     const availableTabs = COMPONENT_TABS.filter((tab) =>
-      Boolean(jetpack.exists(path.join(dir, `${tab}.mdx`))),
+      Boolean(jetpack.exists(path.join(dir, tabFileName(tab)))),
     );
 
     const renderTab = (tab: (typeof COMPONENT_TABS)[number]): string =>
-      mdxToMarkdown(path.join(dir, `${tab}.mdx`), { componentName });
+      mdxToMarkdown(path.join(dir, tabFileName(tab)), { componentName });
 
     const fullPage: DocPage = {
       segments: [COMPONENTS_SECTION, group, component],

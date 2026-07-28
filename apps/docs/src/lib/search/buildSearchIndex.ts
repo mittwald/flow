@@ -90,27 +90,22 @@ export const buildSearchIndex = (
       const breadcrumb = [section, extractTextFromPath(group)];
       const basePath = `/${COMPONENTS_SEGMENT}/${group}/${component}`;
 
+      // The component's index.mdx holds the "Overview" section content.
       if (file.name === "index") {
-        const hasOverview = parsed.some(
-          (other) =>
-            other.segments[0] === COMPONENTS_SEGMENT &&
-            other.segments[1] === group &&
-            other.segments[2] === component &&
-            other.name === "overview",
-        );
-        if (hasOverview) {
-          continue;
-        }
         const url = `${basePath}/overview`;
+        const body = mdxToPlainText(file.content);
         entries.push({
           id: url,
           url,
           title,
           section,
           breadcrumb,
+          tab: TAB_LABELS.overview,
           description: meta?.description,
-          headings: [],
-          content: meta?.description ?? "",
+          headings: toHeadings(file.content),
+          content: meta?.description
+            ? `${meta.description} ${body}`.trim()
+            : body,
         });
         continue;
       }
@@ -120,8 +115,6 @@ export const buildSearchIndex = (
         continue;
       }
       const url = `${basePath}/${file.name}`;
-      const isOverview = file.name === "overview";
-      const description = isOverview ? meta?.description : undefined;
       const body = mdxToPlainText(file.content);
 
       entries.push({
@@ -131,9 +124,8 @@ export const buildSearchIndex = (
         section,
         breadcrumb,
         tab,
-        description,
         headings: toHeadings(file.content),
-        content: description ? `${description} ${body}`.trim() : body,
+        content: body,
       });
       continue;
     }

@@ -6,4 +6,62 @@ description:
   erleichtert, unsichere Passwörter zu erkennen und zu meiden.
 ---
 
-<LiveCodeEditor editorDisabled stretch />
+# Playground
+
+Verwende `<PasswordCreationField />`, um ein PasswordCreationField darzustellen.
+Standardmäßig enthält die Component folgende Passwortregeln:
+
+- Mindestlänge von 12 Zeichen
+- Mindestens ein Sonderzeichen enthalten
+- Mindestens eine Zahl enthalten
+- Darf nicht durch [HaveIBeenPwned](https://haveibeenpwned.com/passwords)
+  verboten sein
+
+<LiveCodeEditor stretch />
+
+---
+
+# Mit zusätzlichen Buttons
+
+Das PasswordCreationField kann mit zusätzlichen
+[Buttons](/04-components/actions/button/overview) ergänzt werden. Diese
+Erweiterungen sind flexibel einsetzbar und sollten im direkten Zusammenhang mit
+der Passworterstellung stehen.
+
+<LiveCodeEditor example="buttons" editorCollapsed stretch />
+
+## Mit Copy Button
+
+Optional kann ein [CopyButton](/04-components/actions/copy-button/overview)
+integriert werden. Dadurch lassen sich erstellte Passwörter direkt in die
+Zwischenablage kopieren.
+
+<LiveCodeEditor example="copyButton" editorCollapsed stretch />
+
+---
+
+# Passwort Richtlinien
+
+Neben den Standardrichtlinien können eigene Passwortanforderungen definiert
+werden. Diese sollten klar formuliert und für User nachvollziehbar sein.
+
+<LiveCodeEditor example="rules" editorCollapsed stretch />
+
+---
+
+# Disabled
+
+Ist das PasswordCreationField **disabled**, ist keine Interaktion möglich.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />

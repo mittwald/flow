@@ -112,7 +112,7 @@ const Home: FC = () => {
               </Link>{" "}
               verfügbar und hier im Styleguide dokumentiert.
             </Text>
-            <Link href="/04-components/actions/action-group/overview">
+            <Link href="/04-components/actions/action-group">
               Zu den Components
             </Link>
           </Section>

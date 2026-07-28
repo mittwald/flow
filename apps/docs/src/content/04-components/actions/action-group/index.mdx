@@ -5,4 +5,47 @@ description:
   Sie wird beispielsweise in Sections oder Modals verwendet.
 ---
 
-<LiveCodeEditor editorDisabled zoom={0.7} />
+# Playground
+
+Verwende `<ActionGroup />`, um eine ActionGroup darzustellen.
+
+<LiveCodeEditor />
+
+---
+
+# Slots
+
+Die Actions werden von der ActionGroup automatisch in die Slots `primary`,
+`secondary` und `abort` sortiert. So werden
+[Buttons](/04-components/actions/button/overview) mit der Color Primary
+(Standard), Accent und Danger automatisch dem Slot `primary` zugeordnet, der am
+Ende der ActionGroup positioniert ist.
+
+<LiveCodeEditor example="slots" editorCollapsed />
+
+---
+
+# Reihenfolge beibehalten
+
+Mit `preserveOrder` verzichtet die ActionGroup auf die automatische Sortierung
+in die Slots `primary`, `secondary` und `abort`. Die Actions bleiben in der
+Reihenfolge, in der sie im Code stehen.
+
+<LiveCodeEditor example="preserveOrder" editorCollapsed />
+
+---
+
+# Größe
+
+Mit `size` werden die Buttons und Links in der ActionGroup einheitlich
+dimensioniert.
+
+<LiveCodeEditor example="size" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Link
+
+<LiveCodeEditor example="link" editorCollapsed />
