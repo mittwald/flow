@@ -11,6 +11,10 @@ import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "@/app/layout.module.scss";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
+import {
+  ComponentStatusBadge,
+  ComponentStatusCallout,
+} from "@/lib/componentStatus";
 
 interface Props {
   mdxFile: MdxFile;
@@ -45,8 +49,10 @@ export const TopContent: FC<Props> = (props) => {
       <ColumnLayout l={[1, 1]} m={[1]}>
         <Section>
           <Heading level={1}>{mdxFile.getTitle()}</Heading>
+          <ComponentStatusBadge name={component} />
 
           {mdxFile.mdxSource.frontmatter.description}
+          <ComponentStatusCallout name={component} />
 
           <Link href={mdxFile.getGitHubUrl()}>
             GitHub
