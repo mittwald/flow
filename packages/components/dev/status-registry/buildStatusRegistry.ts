@@ -7,52 +7,78 @@ import {
 export type DerivedStatusRegistry = Record<string, DerivedComponentStatus>;
 
 /**
- * A real Flow component display name is a PascalCase identifier: it starts with
- * an uppercase letter and contains only letters/digits. This deliberately drops
- * the non-component exports react-docgen-typescript also captures from the
- * source glob — hooks (`useX`), helpers (`getX`), qualified names
- * (`Model.method`), and camelCase test fixtures (`asyncFunction`, `validator`)
- * — none of which are components a consumer or the breaking-change guard should
- * track.
+ * One export entry's resolved component names + the source root each lives
+ * under.
+ */
+export interface StatusRegistryEntry {
+  specifier: string;
+  components: { name: string; sourceRoot: string }[];
+}
+
+type SourceComponent = Pick<ComponentDoc, "displayName" | "tags"> &
+  Partial<Pick<ComponentDoc, "filePath">>;
+
+/**
+ * A real Flow component display name is a PascalCase identifier — starts with
+ * an uppercase letter, letters/digits only. Drops non-component exports
+ * react-docgen also captures (hooks `useX`, helpers `getX`, `Model.method`,
+ * camelCase fixtures, lowercase barrel segments like `icons`).
  */
 export const isComponentDisplayName = (displayName: string): boolean =>
   /^[A-Z][A-Za-z0-9]*$/.test(displayName);
 
 /**
- * Builds the status registry, scoped to Flow's curated public API surface.
- * `publicComponentNames` comes from parsePublicComponentNames(public.ts): only
- * components on that surface are tracked (ADR §4 completeness applies WITHIN
- * the public surface — internal/sub-components are badged via their parent, not
- * tracked independently).
- *
- * Entries sourced from `src/integrations/**` are excluded: integration
- * components (e.g. the Next.js `Link`) ship through their own package entries
- * (`./nextjs`, …), not the `.` surface, and can collide with a public component
- * of the same displayName — the deprecated Next.js `Link` must not overwrite
- * the public, non-deprecated `Link`.
+ * True when `filePath` lies under `sourceRoot`, matched as a path segment
+ * regardless of absolute/relative form or separator: react-docgen-typescript
+ * returns `filePath` absolute for some files and relative for others, so a
+ * plain substring check is not reliable.
+ */
+export const isUnderSourceRoot = (
+  filePath: string | undefined,
+  sourceRoot: string,
+): boolean => {
+  if (!filePath) {
+    return false;
+  }
+  const segments = sourceRoot
+    .split("/")
+    .map((segment) => segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("[\\\\/]");
+  return new RegExp(`(?:^|[\\\\/])${segments}[\\\\/]`).test(filePath);
+};
+
+/**
+ * Builds the status registry keyed by public import specifier
+ * (`"<specifier>#<name>"`). For each `(entry, name)`, the source component is
+ * the doc-properties entry with that `displayName` whose `filePath` is under
+ * the entry's `sourceRoot` — this disambiguates same-named components across
+ * export surfaces (e.g. the public `Link` vs. the Next.js integration `Link`).
+ * Names with no such source (e.g. a react-aria re-export with no Flow doc) are
+ * skipped.
  */
 export const buildStatusRegistry = (
-  components: (Pick<ComponentDoc, "displayName" | "tags"> &
-    Partial<Pick<ComponentDoc, "filePath">>)[],
-  publicComponentNames: ReadonlySet<string>,
+  components: SourceComponent[],
+  entries: StatusRegistryEntry[],
 ): DerivedStatusRegistry => {
   const registry: DerivedStatusRegistry = {};
 
-  const sorted = [...components]
-    // Match the `src/integrations/` path segment regardless of absolute vs.
-    // relative form or path separator: react-docgen-typescript returns
-    // `filePath` absolute for some files and relative for others, so a plain
-    // `.includes("/src/integrations/")` would miss the relative form.
-    .filter(
-      (component) =>
-        !/(?:^|[\\/])src[\\/]integrations[\\/]/.test(component.filePath ?? ""),
-    )
-    .filter((component) => isComponentDisplayName(component.displayName))
-    .filter((component) => publicComponentNames.has(component.displayName))
-    .sort((a, b) => a.displayName.localeCompare(b.displayName));
-
-  for (const component of sorted) {
-    registry[component.displayName] = deriveComponentStatus(component.tags);
+  for (const entry of entries) {
+    for (const { name, sourceRoot } of entry.components) {
+      if (!isComponentDisplayName(name)) {
+        continue;
+      }
+      const source = components.find(
+        (component) =>
+          component.displayName === name &&
+          isUnderSourceRoot(component.filePath, sourceRoot),
+      );
+      if (!source) {
+        continue;
+      }
+      registry[`${entry.specifier}#${name}`] = deriveComponentStatus(
+        source.tags,
+      );
+    }
   }
 
   return registry;

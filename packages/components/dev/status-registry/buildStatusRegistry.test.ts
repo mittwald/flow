@@ -2,111 +2,141 @@ import { expect, test } from "vitest";
 import {
   buildStatusRegistry,
   isComponentDisplayName,
+  isUnderSourceRoot,
 } from "./buildStatusRegistry";
 
-test("lists every component keyed by displayName, sorted", () => {
+const PKG = "@mittwald/flow-react-components";
+
+// doc-properties fixtures (react-docgen returns filePath absolute OR relative).
+const publicButton = {
+  displayName: "Button",
+  tags: {},
+  filePath: "/abs/packages/components/src/components/Button/Button.tsx",
+};
+const publicLink = {
+  displayName: "Link",
+  tags: { "flr-generate": "all" },
+  filePath: "/abs/packages/components/src/components/Link/Link.tsx",
+};
+const nextjsLink = {
+  displayName: "Link",
+  tags: { deprecated: "Use RouterProvider instead" },
+  // relative on purpose — react-docgen emits this form for some files
+  filePath: "src/integrations/nextjs/components/Link/Link.tsx",
+};
+const nextjsRouterProvider = {
+  displayName: "RouterProvider",
+  tags: {},
+  filePath:
+    "src/integrations/nextjs/components/RouterProvider/RouterProvider.tsx",
+};
+
+test("keys entries by `<specifier>#<name>` and derives status per source", () => {
   const registry = buildStatusRegistry(
-    [
-      { displayName: "Button", tags: {} },
-      { displayName: "Chat", tags: { flowStatus: "beta, new" } },
-      { displayName: "Alert", tags: { deprecated: "gone" } },
-    ],
-    new Set(["Alert", "Button", "Chat"]),
-  );
-
-  expect(Object.keys(registry)).toEqual(["Alert", "Button", "Chat"]);
-  expect(registry.Button).toEqual({ level: "stable", isNew: false });
-  expect(registry.Chat).toEqual({ level: "beta", isNew: true });
-  expect(registry.Alert).toEqual({ level: "deprecated", isNew: false });
-});
-
-test("skips entries without a displayName", () => {
-  const registry = buildStatusRegistry(
-    [
-      { displayName: "", tags: {} },
-      { displayName: "Button", tags: {} },
-    ],
-    new Set(["Button"]),
-  );
-
-  expect(Object.keys(registry)).toEqual(["Button"]);
-});
-
-test("last entry wins on duplicate displayName (deterministic)", () => {
-  const registry = buildStatusRegistry(
-    [
-      { displayName: "Dup", tags: {} },
-      { displayName: "Dup", tags: { flowStatus: "beta" } },
-    ],
-    new Set(["Dup"]),
-  );
-
-  expect(registry.Dup).toEqual({ level: "beta", isNew: false });
-});
-
-test("drops non-component exports (hooks, helpers, fixtures, qualified names)", () => {
-  const registry = buildStatusRegistry(
-    [
-      { displayName: "Button", tags: {} },
-      { displayName: "useGridItemProps", tags: {} },
-      { displayName: "getActionGroupSlot", tags: {} },
-      { displayName: "asyncFunction", tags: {} },
-      { displayName: "validator", tags: {} },
-      { displayName: "ActionModel.getCloseOverlayOptions", tags: {} },
-      { displayName: "YAxis", tags: {} }, // real PascalCase component, kept
-    ],
-    new Set(["Button", "YAxis"]),
-  );
-
-  expect(Object.keys(registry)).toEqual(["Button", "YAxis"]);
-});
-
-test("drops PascalCase components that are not on the public surface", () => {
-  const registry = buildStatusRegistry(
-    [
-      { displayName: "Button", tags: {} }, // public
-      { displayName: "AccordionButton", tags: {} }, // internal sub-component
-      { displayName: "CartesianGrid", tags: { deprecated: "gone" } }, // internal
-    ],
-    new Set(["Button"]),
-  );
-
-  expect(Object.keys(registry)).toEqual(["Button"]);
-});
-
-test("drops integration-sourced entries colliding with a public component name", () => {
-  const registry = buildStatusRegistry(
+    [publicButton, publicLink, nextjsLink],
     [
       {
-        displayName: "Link",
-        tags: { "flr-generate": "all" },
-        // react-docgen-typescript returns this one as an absolute path...
-        filePath: "/abs/packages/components/src/components/Link/Link.tsx",
+        specifier: PKG,
+        components: [
+          { name: "Button", sourceRoot: "src/components" },
+          { name: "Link", sourceRoot: "src/components" },
+        ],
       },
       {
-        displayName: "Link",
-        tags: { deprecated: "Use RouterProvider instead" },
-        // ...and this one as a RELATIVE path — the exclusion must handle both.
-        filePath: "src/integrations/nextjs/components/Link/Link.tsx",
+        specifier: `${PKG}/nextjs`,
+        components: [{ name: "Link", sourceRoot: "src/integrations/nextjs" }],
       },
     ],
-    new Set(["Link"]),
   );
 
-  // The public component wins; the deprecated Next.js integration Link is dropped.
-  expect(registry.Link).toEqual({ level: "stable", isNew: false });
+  expect(registry).toEqual({
+    [`${PKG}#Button`]: { level: "stable", isNew: false },
+    [`${PKG}#Link`]: { level: "stable", isNew: false },
+    [`${PKG}/nextjs#Link`]: { level: "deprecated", isNew: false },
+  });
+});
+
+test("skips a name with no source component under the entry's root", () => {
+  // `.#RouterProvider` has no core doc (react-aria re-export); the nextjs one is
+  // a different component and must not fill the `.` slot.
+  const registry = buildStatusRegistry(
+    [nextjsRouterProvider],
+    [
+      {
+        specifier: PKG,
+        components: [{ name: "RouterProvider", sourceRoot: "src/components" }],
+      },
+      {
+        specifier: `${PKG}/nextjs`,
+        components: [
+          { name: "RouterProvider", sourceRoot: "src/integrations/nextjs" },
+        ],
+      },
+    ],
+  );
+
+  expect(Object.keys(registry)).toEqual([`${PKG}/nextjs#RouterProvider`]);
+});
+
+test("flr-universal duplicates the `.` status under its own key", () => {
+  const action = {
+    displayName: "Action",
+    tags: {},
+    filePath: "/abs/packages/components/src/components/Action/Action.tsx",
+  };
+  const registry = buildStatusRegistry(
+    [action],
+    [
+      {
+        specifier: PKG,
+        components: [{ name: "Action", sourceRoot: "src/components" }],
+      },
+      {
+        specifier: `${PKG}/flr-universal`,
+        components: [{ name: "Action", sourceRoot: "src/components" }],
+      },
+    ],
+  );
+
+  expect(registry[`${PKG}#Action`]).toEqual({ level: "stable", isNew: false });
+  expect(registry[`${PKG}/flr-universal#Action`]).toEqual({
+    level: "stable",
+    isNew: false,
+  });
+});
+
+test("drops non-component names (lowercase barrel segments)", () => {
+  const registry = buildStatusRegistry(
+    [publicButton],
+    [
+      {
+        specifier: PKG,
+        components: [
+          { name: "icons", sourceRoot: "src/components" },
+          { name: "Button", sourceRoot: "src/components" },
+        ],
+      },
+    ],
+  );
+
+  expect(Object.keys(registry)).toEqual([`${PKG}#Button`]);
+});
+
+test.each([
+  ["/abs/x/src/components/Link/Link.tsx", "src/components", true],
+  ["src/components/Link/Link.tsx", "src/components", true],
+  ["src\\integrations\\nextjs\\Link.tsx", "src/integrations/nextjs", true],
+  ["/abs/src/components/Link/Link.tsx", "src/integrations/nextjs", false],
+  [undefined, "src/components", false],
+] as const)("isUnderSourceRoot(%s, %s) === %s", (filePath, root, expected) => {
+  expect(isUnderSourceRoot(filePath, root)).toBe(expected);
 });
 
 test.each([
   ["Button", true],
   ["YAxis", true],
-  ["LinkProvider", true],
-  ["H1", true],
   ["useContextIcon", false],
-  ["getActionGroupSlot", false],
-  ["asyncFunction", false],
-  ["validator", false],
-  ["ActionModel.getCloseOverlayOptions", false],
+  ["icons", false],
   ["", false],
 ] as const)("isComponentDisplayName(%s) === %s", (name, expected) => {
   expect(isComponentDisplayName(name)).toBe(expected);
