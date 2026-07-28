@@ -9,9 +9,9 @@ import {
 export const ActionGroupWireframe: FC = () => (
   <WFrame>
     <WRow justifyContent="space-between">
-      <WButton tone="500" width="25%" />
+      <WButton tone="400" width="25%" />
       <WRow width="60%">
-        <WButton tone="500" />
+        <WButton tone="400" />
         <WButton />
       </WRow>
     </WRow>

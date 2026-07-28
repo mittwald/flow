@@ -10,9 +10,15 @@ import {
 export const SeparatorWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WText width="82%" />
-      <WLine marginBlock={16} />
-      <WText width="72%" />
+      <WStack>
+        <WText width="42%" />
+        <WText width="82%" />
+      </WStack>
+      <WLine marginBlock={16} tone="600" />
+      <WStack>
+        <WText width="42%" />
+        <WText width="82%" />
+      </WStack>
     </WStack>
   </WFrame>
 );

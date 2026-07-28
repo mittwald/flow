@@ -3,19 +3,14 @@ import type { FC } from "react";
 import {
   WFrame,
   WIcon,
-  WRow,
-  WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconContextMenu } from "@mittwald/flow-react-components";
 
 export const TruncateWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WRow width="70%">
-      <WText />
-      <WIcon>
-        <IconContextMenu />
-      </WIcon>
-    </WRow>
+    <WIcon>
+      <IconContextMenu size="l" />
+    </WIcon>
   </WFrame>
 );
 

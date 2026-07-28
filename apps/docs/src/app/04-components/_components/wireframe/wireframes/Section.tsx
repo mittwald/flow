@@ -11,13 +11,12 @@ export const SectionWireframe: FC = () => (
   <WFrame>
     <WStack>
       <WStack>
-        <WText width="42%" />
-        <WText width="82%" />
+        <WText width="42%" tone="600" />
+        <WText width="82%" tone="600" />
       </WStack>
       <WLine marginBlock={16} />
       <WStack>
-        <WText width="32%" />
-        <WText width="100%" />
+        <WText width="42%" />
         <WText width="82%" />
       </WStack>
     </WStack>

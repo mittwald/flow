@@ -10,7 +10,7 @@ import {
 export const AccentBoxWireframe: FC = () => (
   <WFrame>
     <WStack>
-      <WBox tone="700">
+      <WBox tone="400">
         <WText width="60%" />
         <WText width="100%" />
       </WBox>
