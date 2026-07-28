@@ -117,6 +117,15 @@ generator. Everything downstream consumes the derived result.
 - **Export:** via `src/index/internal.ts` (i.e. the `/internal` package export).
   Consumers are documentation, Storybook, and tooling — not the public
   component API.
+- **Scope — public surface, not icons.** The registry lists Flow's curated
+  public components (the entries in `src/components/public.ts`). The generated
+  icon components (`Icon*`) carry no JSDoc, are excluded from
+  `doc-properties.json`, and are **not** tracked per icon — the `Icon` component
+  represents them (`stable`). Icons are **never removed — only deprecated**, and
+  that lifecycle is authored in `icons-base/src/icons.yaml` (`deprecated: true`),
+  owned by the icon pipeline. Because there is no icon removal, a breaking-change
+  guard has no per-icon "removed vs. stable" ambiguity to resolve, so per-icon
+  registry entries would add no value.
 
 ### 5. Consumers
 
