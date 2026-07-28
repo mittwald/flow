@@ -51,6 +51,11 @@ test.each([
     { flowStatus: "" }, // component-level tags; no `deprecated` key here
     { level: "stable", isNew: false },
   ],
+  [
+    "flowStatus 'deprecated' token is ignored (deprecation is only via @deprecated) → stable",
+    { flowStatus: "deprecated" },
+    { level: "stable", isNew: false },
+  ],
 ] as const)("%s", (_desc, tags, expected) => {
   expect(deriveComponentStatus(tags)).toEqual(expected);
 });

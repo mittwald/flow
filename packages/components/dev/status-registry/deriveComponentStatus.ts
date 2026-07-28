@@ -24,13 +24,17 @@ export const deriveComponentStatus = (
   tags: Record<string, string> = {},
 ): DerivedComponentStatus => {
   const tokens = parseFlowStatusTokens(tags.flowStatus);
+
   const isDeprecated = "deprecated" in tags;
+  const isBeta = tokens.includes("beta");
+  const isNew = tokens.includes("new");
 
-  const level: DerivedComponentStatusLevel = isDeprecated
-    ? "deprecated"
-    : tokens.includes("beta")
-      ? "beta"
-      : "stable";
+  let level: DerivedComponentStatusLevel = "stable";
+  if (isDeprecated) {
+    level = "deprecated";
+  } else if (isBeta) {
+    level = "beta";
+  }
 
-  return { level, isNew: tokens.includes("new") };
+  return { level, isNew };
 };

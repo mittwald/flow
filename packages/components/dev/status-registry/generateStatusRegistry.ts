@@ -70,9 +70,7 @@ async function generateStatusRegistry() {
       !ALLOWED_LEVELS.includes(status.level as (typeof ALLOWED_LEVELS)[number])
     ) {
       throw new Error(
-        `Unknown status level "${status.level}" for component "${name}". ` +
-          `If you added a level to DerivedComponentStatusLevel (dev/), add it to ` +
-          `FlowComponentStatusLevel (src/status/types.ts) too.`,
+        `Unknown status level "${status.level}" for component "${name}".`,
       );
     }
   }
