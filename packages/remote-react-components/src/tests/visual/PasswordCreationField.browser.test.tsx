@@ -80,7 +80,9 @@ test.each(testEnvironments)(
       "PasswordCreationField interaction - password generated",
     );
 
-    const showInfo = page.getByLocator('[aria-label="More information"]');
+    const showInfo = page.getByLocator(
+      '[aria-label="More information about your password requirements"]',
+    );
     await showInfo.click();
 
     await testScreenshot(

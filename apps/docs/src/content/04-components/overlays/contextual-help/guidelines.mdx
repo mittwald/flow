@@ -11,6 +11,16 @@ Achte bei der Verwendung des ContextualHelp darauf, dass ...
 - es nicht für Inhalte benutzt wird, die zum Verständnis der Benutzeroberfläche
   unerlässlich sind. Stattdessen wird es für weiterführende Erklärungen oder zum
   Verweisen auf externe Quellen verwendet.
+- der Inhalt kompakt bleibt und nicht in mehrere Absätze oder Abschnitte
+  aufgeteilt wird. Eine Überschrift ist nicht notwendig.
+- über die `subject` Property des `<ContextualHelpTrigger />` beschrieben wird,
+  worauf sich das ContextualHelp bezieht. Das `subject` ist dabei kein
+  vollständiges Accessibility-Label, sondern nur der Betreff, der in die
+  übersetzte Vorlage `Weitere Informationen zu {subject}` eingesetzt wird. Gib
+  also nur den Betreff an (`subject="Rechte & Rollen"`), nicht den ganzen Satz.
+- `subject` bevorzugt wird, weil es übersetzt bleibt. Passt die Vorlage nicht,
+  wird stattdessen ein vollständiges `aria-label` am `<ContextualHelpTrigger />`
+  gesetzt – es ersetzt den aus `subject` gebauten Text.
 
 ## Verwendung
 
