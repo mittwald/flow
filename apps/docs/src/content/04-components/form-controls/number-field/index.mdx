@@ -5,6 +5,27 @@ description:
   schrittweise manuelle Anpassung.
 ---
 
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung eines NumberFields darauf, dass ...
+
+- bei Bedarf eine Einheit über `formatOptions` ergänzt wird.
+- Mindest- und Höchstwerte (`minValue`/`maxValue`) sinnvoll definiert sind, wenn
+  Eingaben eingeschränkt werden sollen.
+- das [Label](/04-components/content/label/overview) prägnant und leicht
+  verständlich ist.
+- die FieldDescription genutzt wird, um Beispiele oder Formatierungshinweise
+  bereitzustellen.
+- [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
+  klar, hilfreich und lösungsorientiert formuliert sind.
+
+## Verwendung
+
+Verwende ein NumberField, um Eingaben zu ermöglichen, die ausschließlich aus
+Zahlen bestehen (z. B. Alter, Menge, Preis).
+
 # Playground
 
 Verwende `<NumberField />`, um ein NumberField darzustellen. Platziere innerhalb
@@ -87,3 +108,7 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

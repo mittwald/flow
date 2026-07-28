@@ -4,6 +4,33 @@ description:
   Die Action wird um einen Button gelegt, um beispielsweise visuelles Feedback bei asynchronen Aktionen zu ermöglichen oder ein Bestätigungsmodal auszulösen.
 ---
 
+# Grundlagen
+
+Die Action wird verwendet, um das asynchrone Verhalten von zum Beispiel
+[Buttons](/04-components/actions/button/overview) zu steuern. Sie wird genutzt,
+um den Usern visuelles Feedback bei Interaktionen zu geben, zum Beispiel durch
+Ladezustände oder Bestätigungsmodals.
+
+## Best Practices
+
+Achte bei der Verwendung einer Action darauf, dass ...
+
+- der Pending State nur für Vorgänge verwendet wird, die in der Regel unter 5
+  Sekunden dauern. Für längere Prozesse kann eine
+  [Notification](/04-components/status/notification/overview) die bessere Wahl
+  sein.
+- Feedback States nur dann eingesetzt werden, wenn sie dem Nutzer einen Mehrwert
+  in der Interaktion bieten.
+
+## Verwendung
+
+Verwende eine Action, um ...
+
+- einen Button mit einem automatisierten Lade- und Erfolgs-Feedback bei
+  asynchronen Prozessen zu versehen.
+- Useraktionen mit Bestätigungsmodals zu sichern, bevor ein kritischer Vorgang
+  gestartet wird.
+
 # Playground
 
 Lege `<Action />`, um einen [Button](/04-components/actions/button/overview), um
@@ -56,3 +83,25 @@ ineinander verschachtelt werden.
 Actions können auch um `MenuItems` gelegt werden, um deren State zu steuern.
 
 <LiveCodeEditor example="menuItem" editorCollapsed />
+
+# Actions abbrechen
+
+Wenn eine Action abgebrochen werden soll, ohne einen Fehler auszulösen, kann die
+Funktion `abortAction` aus dem Action-Modul verwendet werden. Diese Funktion
+wirft einen speziellen Fehler, der von der Action-Component erkannt wird.
+Dadurch kann die Action sauber abgebrochen werden, ohne dass unerwünschte
+Fehlermeldungen oder Seiteneffekte auftreten.
+
+Alle nachfolgenden Funktionen in der Action-Execution-Logik, die nach dem Aufruf
+von `abortAction` definiert sind, werden nicht mehr ausgeführt. Das bedeutet,
+dass der gesamte Ablauf der Action sofort gestoppt wird, sobald `abortAction`
+aufgerufen wird.
+
+Umschließende Actions bei einer Verschachtelung von Actions werden ebenfalls
+abgebrochen, wenn `abortAction` in einer inneren Action aufgerufen wird.
+
+<LiveCodeEditor example="abort" />
+
+# Properties
+
+<PropertiesTables />

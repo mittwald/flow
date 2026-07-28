@@ -7,12 +7,6 @@ import type { SearchHeading, SearchIndexEntry } from "@/lib/search/types";
 
 const COMPONENTS_SEGMENT = "04-components";
 
-const TAB_LABELS: Record<string, string> = {
-  overview: "Overview",
-  guidelines: "Guidelines",
-  develop: "Develop",
-};
-
 interface ParsedFile {
   segments: string[];
   name: string;
@@ -85,36 +79,14 @@ export const buildSearchIndex = (
       if (file.segments.length !== 3 || !group || !component) {
         continue;
       }
+      // A component is a single index.mdx holding the whole page.
+      if (file.name !== "index") {
+        continue;
+      }
       const meta = componentMeta.get(`${group}/${component}`);
       const title = meta?.title ?? extractTextFromPath(component);
       const breadcrumb = [section, extractTextFromPath(group)];
-      const basePath = `/${COMPONENTS_SEGMENT}/${group}/${component}`;
-
-      // The component's index.mdx holds the "Overview" section content.
-      if (file.name === "index") {
-        const url = `${basePath}/overview`;
-        const body = mdxToPlainText(file.content);
-        entries.push({
-          id: url,
-          url,
-          title,
-          section,
-          breadcrumb,
-          tab: TAB_LABELS.overview,
-          description: meta?.description,
-          headings: toHeadings(file.content),
-          content: meta?.description
-            ? `${meta.description} ${body}`.trim()
-            : body,
-        });
-        continue;
-      }
-
-      const tab = TAB_LABELS[file.name];
-      if (!tab) {
-        continue;
-      }
-      const url = `${basePath}/${file.name}`;
+      const url = `/${COMPONENTS_SEGMENT}/${group}/${component}`;
       const body = mdxToPlainText(file.content);
 
       entries.push({
@@ -123,9 +95,11 @@ export const buildSearchIndex = (
         title,
         section,
         breadcrumb,
-        tab,
+        description: meta?.description,
         headings: toHeadings(file.content),
-        content: body,
+        content: meta?.description
+          ? `${meta.description} ${body}`.trim()
+          : body,
       });
       continue;
     }

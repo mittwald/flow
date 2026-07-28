@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import type { MdxFile, StaticParams } from "@/lib/mdx/MdxFile";
+import type { StaticParams } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "../../../layout.module.scss";
 import {
@@ -21,51 +21,36 @@ interface Props {
 const section = "04-components";
 const contentFolder = `src/content/${section}`;
 
-// Order in which the former tabs are stacked on the single component page:
-// first Guidelines, then Overview (the component's index.mdx), finally Develop.
-const sectionOrder = ["guidelines", "index", "develop"] as const;
-
 export const ComponentContent: FC<Props> = async (props) => {
   const { params } = props;
 
-  const sectionFiles = await Promise.all(
-    sectionOrder.map((name) =>
-      MdxFileFactory.fromParams(contentFolder, params, name),
-    ),
-  );
-
-  const orderedFiles = sectionFiles.filter(
-    (file): file is MdxFile => file !== undefined,
-  );
-
-  // The component name + description live in the index file's frontmatter.
-  const metaFile = await MdxFileFactory.fromParams(
+  // A component is a single index.mdx that holds the whole page (in order:
+  // Guidelines, Overview, Develop); name + description live in its frontmatter.
+  const mdxFile = await MdxFileFactory.fromParams(
     contentFolder,
     params,
     "index",
   );
 
-  if (!metaFile) {
+  if (!mdxFile) {
     return null;
   }
 
-  const path = `/${section}/${metaFile.slugs[0]}/${metaFile.slugs[1]}`;
-  const markdownUrl = rawMarkdownPath([section, ...metaFile.slugs]);
-  const description = metaFile.mdxSource.frontmatter.description;
-
-  const anchors = orderedFiles.flatMap((file) => file.anchors);
+  const path = `/${section}/${mdxFile.slugs[0]}/${mdxFile.slugs[1]}`;
+  const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
+  const description = mdxFile.mdxSource.frontmatter.description;
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
       <LayoutCard className={styles.tabs}>
         <div className={styles.mainContent}>
           <Section>
-            <Heading level={1}>{metaFile.getTitle()}</Heading>
+            <Heading level={1}>{mdxFile.getTitle()}</Heading>
 
             {description}
 
             <Flex direction="row" columnGap="m">
-              <Link href={metaFile.getGitHubUrl()}>
+              <Link href={mdxFile.getGitHubUrl()}>
                 GitHub
                 <IconExternalLink />
               </Link>
@@ -75,13 +60,11 @@ export const ComponentContent: FC<Props> = async (props) => {
             </Flex>
           </Section>
 
-          {orderedFiles.map((file) => (
-            <MdxFileView key={file.filename} mdxFile={file.serialize()} />
-          ))}
+          <MdxFileView mdxFile={mdxFile.serialize()} />
         </div>
       </LayoutCard>
 
-      <AnchorNavigation currentPath={path} anchors={anchors} />
+      <AnchorNavigation currentPath={path} anchors={mdxFile.anchors} />
     </Flex>
   );
 };

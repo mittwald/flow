@@ -5,6 +5,49 @@ description:
   einer Gruppierung zusammen.
 ---
 
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung einer CheckboxGroup darauf, dass ...
+
+- das Label die Gruppierung logisch und prägnant beschreibt.
+- die Reihenfolge der
+  [Checkboxen](/04-components/form-controls/checkbox/overview) bzw.
+  [CheckboxButtons](/04-components/form-controls/checkbox-button/overview)
+  sinnvoll gewählt ist – zum Beispiel nach Relevanz, alphabetisch oder
+  thematisch gruppiert.
+- die Anzahl der Auswahlmöglichkeiten überschaubar bleibt. Zu viele Optionen
+  führen schnell zu Überforderung.
+
+## Verwendung
+
+Verwende eine CheckboxGroup, um ...
+
+- mehrere Checkboxen oder CheckboxButtons sinnvoll zu strukturieren.
+- dem User eine Mehrfachauswahl anzubieten.
+
+## CheckboxGroup vs. RadioGroup
+
+Mit einer CheckboxGroup oder mit einer
+[RadioGroup](/04-components/form-controls/radio-group/overview) erhalten User
+verschiedene Auswahlmöglichkeiten. Um die beiden besser unterscheiden zu können,
+hier ein paar hilfreiche Anhaltspunkte.
+
+<DoAndDont>
+  <Plain heading="Verwende eine CheckboxGroup, um z. B. ...">
+    - eine Mehrfachauswahl darzustellen.
+    - [Checkboxen](/04-components/form-controls/checkbox/overview) oder [CheckboxButtons](/04-components/form-controls/checkbox-button/overview) sinnvoll zu strukturieren.
+
+  </Plain>
+
+  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
+    - eine Einfachauswahl darzustellen.
+    - Radios oder RadioButtons sinnvoll zu strukturieren.
+
+  </Plain>
+</DoAndDont>
+
 # Playground
 
 Verwende `<CheckboxGroup />` zusammen mit mehreren `<Checkbox />` oder
@@ -60,3 +103,7 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

@@ -6,7 +6,6 @@ import { mdxToMarkdown } from "@/lib/llms/mdxToMarkdown";
 
 const CONTENT_ROOT = "./src/content";
 const COMPONENTS_SECTION = "04-components";
-const COMPONENT_TABS = ["overview", "develop", "guidelines"] as const;
 
 export interface DocPage {
   segments: string[];
@@ -27,9 +26,6 @@ const readFrontmatter = (filePath: string): Frontmatter =>
 const normalizeWhitespace = (value: string | undefined): string =>
   (value ?? "").replace(/\s+/g, " ").trim();
 
-const capitalize = (value: string): string =>
-  value.charAt(0).toUpperCase() + value.slice(1);
-
 const pageHeader = (title: string, description?: string): string =>
   description ? `# ${title}\n\n${description}` : `# ${title}`;
 
@@ -37,53 +33,26 @@ const componentPages = (): DocPage[] => {
   const sectionDir = path.join(CONTENT_ROOT, COMPONENTS_SECTION);
   const indexFiles = jetpack.find(sectionDir, { matching: "*/*/index.mdx" });
 
-  return indexFiles.flatMap((indexFile) => {
+  // A component is a single index.mdx that already contains the whole page.
+  return indexFiles.map((indexFile) => {
     const relativeSegments = path
       .relative(sectionDir, indexFile)
       .split(path.sep);
     const group = relativeSegments[0] ?? "";
     const component = relativeSegments[1] ?? "";
-    const dir = path.dirname(indexFile);
     const frontmatter = readFrontmatter(indexFile);
     const componentName = frontmatter.component ?? humanizeString(component);
     const title = frontmatter.title ?? componentName;
     const description = normalizeWhitespace(frontmatter.description);
     const header = pageHeader(title, description);
 
-    // The "overview" section lives in the component's index.mdx; the other
-    // sections have their own files.
-    const tabFileName = (tab: (typeof COMPONENT_TABS)[number]): string =>
-      tab === "overview" ? "index.mdx" : `${tab}.mdx`;
-
-    const availableTabs = COMPONENT_TABS.filter((tab) =>
-      Boolean(jetpack.exists(path.join(dir, tabFileName(tab)))),
-    );
-
-    const renderTab = (tab: (typeof COMPONENT_TABS)[number]): string =>
-      mdxToMarkdown(path.join(dir, tabFileName(tab)), { componentName });
-
-    const fullPage: DocPage = {
+    return {
       segments: [COMPONENTS_SECTION, group, component],
       title,
       description,
       toMarkdown: () =>
-        `${[
-          header,
-          ...availableTabs.map(
-            (tab) => `## ${capitalize(tab)}\n\n${renderTab(tab)}`,
-          ),
-        ].join("\n\n")}\n`,
+        `${header}\n\n${mdxToMarkdown(indexFile, { componentName })}\n`,
     };
-
-    const tabPages: DocPage[] = availableTabs.map((tab) => ({
-      segments: [COMPONENTS_SECTION, group, component, tab],
-      title: `${title} – ${capitalize(tab)}`,
-      description,
-      toMarkdown: () =>
-        `${[header, `## ${capitalize(tab)}\n\n${renderTab(tab)}`].join("\n\n")}\n`,
-    }));
-
-    return [fullPage, ...tabPages];
   });
 };
 

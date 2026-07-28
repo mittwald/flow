@@ -4,6 +4,28 @@ description:
   Der NotificationProvider dient zur Anzeige und Steuerung von Notifications.
 ---
 
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung des NotificationProviders darauf, dass ...
+
+- die User nicht von zu vielen Notifications überflutet werden.
+- die eingesetzten Notifications die Richtlinien aus der
+  [Notification Guideline](/04-components/status/notification/overview)
+  einhalten.
+- bei der Nutzung von `autoClose` darauf geachtet wird, dass User ausreichend
+  Zeit haben, die Notification zu lesen. Idealerweise sollte die Anzeigedauer
+  einstellbar sein.
+
+## Verwendung
+
+Verwende den NotificationProvider, um ...
+
+- allen Teilen der Anwendung zu ermöglichen, Notifications zu triggern.
+- Benachrichtigungen konsistent und zentralisiert zu verwalten (Anzeigeort und
+  Anzeigedauer).
+
 # Initialisierung
 
 Damit Notifications angezeigt werden können, muss der `<NotificationProvider />`
@@ -38,3 +60,7 @@ Die `add()`-Methode gibt eine Notification-ID zurück. Diese kann in der
 `remove()`-Methode verwendet werden, um eine Notification manuell zu schließen.
 
 <LiveCodeEditor example="closeById" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

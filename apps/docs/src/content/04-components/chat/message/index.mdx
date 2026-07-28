@@ -5,6 +5,29 @@ description:
 
 ---
 
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung der Message darauf, dass ...
+
+- mehrere Messages in einem
+  [MessageThread](/04-components/chat/message-thread/overview) gruppiert werden.
+- die [Markdown](/04-components/content/markdown/overview)-Component genutzt
+  wird, wenn eine Texteingabe in Markdown zu erwarten ist.
+- das [ContextMenu](/04-components/actions/context-menu/overview) nicht
+  überladen wird und nur direkt relevante Aktionen (z. B. Bearbeiten und
+  Löschen) enthält.
+
+## Verwendung
+
+Verwende die Message, um ...
+
+- einzelne Nachrichten eines Chats darzustellen.
+- in Kombination mit dem
+  [MessageThread](/04-components/chat/message-thread/overview) einen
+  Gesprächsverlauf abzubilden.
+
 # Playground
 
 Verwende `<Message />`, um eine Message darzustellen.
@@ -54,3 +77,7 @@ Um eine Texteingabe innerhalb der Message als
 `<Markdown />`-Component verwendet werden.
 
 <LiveCodeEditor example="markdown" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

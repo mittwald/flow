@@ -5,6 +5,40 @@ description:
   Wertebereichs.
 ---
 
+# Grundlagen
+
+Slider ermöglichen es Usern, einen Wert innerhalb eines definierten
+Zahlenbereichs auszuwählen. Die Bedienung wirkt intuitiv, da die Kombination aus
+Interaktivität und visuellem Feedback an vertraute physische Bedienelemente
+erinnert (z. B. Regler oder Schiebeschalter).
+
+Slider eignen sich besonders, wenn ungefähre Werte ausreichend sind. Soll ein
+exakter Zahlenwert gewählt werden, ist ein
+[NumberField](/04-components/form-controls/number-field/overview) die bessere
+Wahl.
+
+## Best Practices
+
+Achte bei der Verwendung eines Sliders darauf, dass ...
+
+- Min-, Max- und Default-Werte logisch für die User gewählt sind.
+- die Schrittweite (`step`) sinnvoll gewählt wird und nicht zu viele kleine
+  Schritte enthält.
+- das beschreibende Label (neben der Unit) kurz und verständlich ist.
+- bei Bedarf ein InitialMarker (durch `showInitialMarker`) gesetzt wird, damit
+  User den Startwert erkennen können.
+
+## Verwendung
+
+Verwende einen Slider, um ...
+
+- Werte eines definierten Bereichs schnell anzupassen.
+- Einstellungen zu justieren, die ein direktes Feedback erfordern, wie etwa
+  Lautstärke, Helligkeit oder Zoomstufen.
+- einen Bereich darzustellen, der sich durch visuelles Ausprobieren leichter
+  erfassen lässt als durch direkte Eingabe in ein
+  [NumberField](/04-components/form-controls/number-field/overview).
+
 # Playground
 
 Verwende `<Slider />`, um einen Slider darzustellen.
@@ -26,3 +60,7 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />
