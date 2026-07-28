@@ -79,8 +79,8 @@ const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
 };
 
 const sortEntriesByStatus = (
-  entries: Array<[string, MdxDirectoryTree | MdxFile]>,
-): Array<[string, MdxDirectoryTree | MdxFile]> =>
+  entries: [string, MdxDirectoryTree | MdxFile][],
+): [string, MdxDirectoryTree | MdxFile][] =>
   [...entries].sort(([, a], [, b]) => deprecatedRank(a) - deprecatedRank(b));
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
@@ -130,7 +130,11 @@ const MainNavigation: FC<Props> = (props) => {
                 treeItem instanceof MdxFile ? (
                   <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
                 ) : (
-                  <NavigationSection key={group} tree={treeItem} group={group} />
+                  <NavigationSection
+                    key={group}
+                    tree={treeItem}
+                    group={group}
+                  />
                 ),
             )}
           </Navigation>
