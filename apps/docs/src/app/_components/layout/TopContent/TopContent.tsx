@@ -46,13 +46,15 @@ export const TopContent: FC<Props> = (props) => {
 
   return (
     <LayoutCard className={styles.topContent}>
+      <ComponentStatusCallout name={component} />
       <ColumnLayout l={[1, 1]} m={[1]}>
         <Section>
-          <Heading level={1}>{mdxFile.getTitle()}</Heading>
-          <ComponentStatusBadge name={component} />
+          <Heading level={1}>
+            {mdxFile.getTitle()}
+            <ComponentStatusBadge name={component} />
+          </Heading>
 
           {mdxFile.mdxSource.frontmatter.description}
-          <ComponentStatusCallout name={component} />
 
           <Link href={mdxFile.getGitHubUrl()}>
             GitHub

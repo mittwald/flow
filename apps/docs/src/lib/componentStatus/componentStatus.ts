@@ -20,8 +20,11 @@ export interface StatusBadgeDescriptor {
 }
 
 /**
- * Badges to render for a status. `level` and `isNew` are orthogonal, so a
- * beta-and-new component yields two badges. `stable` contributes no level badge.
+ * The single badge to render for a status. The `level` badge takes precedence
+ * over the `new` flag: a beta-and-new (or deprecated-and-new) component shows
+ * only its level badge. `Neu` shows only when the level is `stable`. `stable`
+ * without `new` yields no badge. Returns an array (0 or 1) so the caller can
+ * render uniformly.
  */
 export const getStatusBadges = (
   status: FlowComponentStatus | undefined,
@@ -30,19 +33,17 @@ export const getStatusBadges = (
     return [];
   }
 
-  const badges: StatusBadgeDescriptor[] = [];
-
   if (status.level === "beta") {
-    badges.push({ label: "Beta", color: "violet" });
+    return [{ label: "Beta", color: "violet" }];
   }
   if (status.level === "deprecated") {
-    badges.push({ label: "Veraltet", color: "orange" });
+    return [{ label: "Veraltet", color: "orange" }];
   }
   if (status.isNew) {
-    badges.push({ label: "Neu", color: "green" });
+    return [{ label: "Neu", color: "green" }];
   }
 
-  return badges;
+  return [];
 };
 
 export interface StatusCalloutDescriptor {
