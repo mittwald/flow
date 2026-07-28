@@ -252,7 +252,7 @@
     "isNew": false
   },
   "Link": {
-    "level": "deprecated",
+    "level": "stable",
     "isNew": false
   },
   "List": {

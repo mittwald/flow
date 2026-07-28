@@ -74,6 +74,28 @@ test("drops PascalCase components that are not on the public surface", () => {
   expect(Object.keys(registry)).toEqual(["Button"]);
 });
 
+test("drops integration-sourced entries colliding with a public component name", () => {
+  const registry = buildStatusRegistry(
+    [
+      {
+        displayName: "Link",
+        tags: { "flr-generate": "all" },
+        filePath: "/abs/packages/components/src/components/Link/Link.tsx",
+      },
+      {
+        displayName: "Link",
+        tags: { deprecated: "Use RouterProvider instead" },
+        filePath:
+          "/abs/packages/components/src/integrations/nextjs/components/Link/Link.tsx",
+      },
+    ],
+    new Set(["Link"]),
+  );
+
+  // The public component wins; the deprecated Next.js integration Link is dropped.
+  expect(registry.Link).toEqual({ level: "stable", isNew: false });
+});
+
 test.each([
   ["Button", true],
   ["YAxis", true],

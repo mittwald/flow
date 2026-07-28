@@ -24,14 +24,22 @@ export const isComponentDisplayName = (displayName: string): boolean =>
  * components on that surface are tracked (ADR §4 completeness applies WITHIN
  * the public surface — internal/sub-components are badged via their parent, not
  * tracked independently).
+ *
+ * Entries sourced from `src/integrations/**` are excluded: integration
+ * components (e.g. the Next.js `Link`) ship through their own package entries
+ * (`./nextjs`, …), not the `.` surface, and can collide with a public component
+ * of the same displayName — the deprecated Next.js `Link` must not overwrite
+ * the public, non-deprecated `Link`.
  */
 export const buildStatusRegistry = (
-  components: Pick<ComponentDoc, "displayName" | "tags">[],
+  components: (Pick<ComponentDoc, "displayName" | "tags"> &
+    Partial<Pick<ComponentDoc, "filePath">>)[],
   publicComponentNames: ReadonlySet<string>,
 ): DerivedStatusRegistry => {
   const registry: DerivedStatusRegistry = {};
 
   const sorted = [...components]
+    .filter((component) => !component.filePath?.includes("/src/integrations/"))
     .filter((component) => isComponentDisplayName(component.displayName))
     .filter((component) => publicComponentNames.has(component.displayName))
     .sort((a, b) => a.displayName.localeCompare(b.displayName));
