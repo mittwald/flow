@@ -23,10 +23,6 @@
     "level": "stable",
     "isNew": false
   },
-  "ActionModel.getCloseOverlayOptions": {
-    "level": "stable",
-    "isNew": false
-  },
   "ActionStateContextProvider": {
     "level": "stable",
     "isNew": false
@@ -980,46 +976,6 @@
     "isNew": false
   },
   "YAxis": {
-    "level": "stable",
-    "isNew": false
-  },
-  "asyncFunction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "asyncFunctionWithError": {
-    "level": "stable",
-    "isNew": false
-  },
-  "asyncLongFunction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "asyncLongFunctionWithError": {
-    "level": "stable",
-    "isNew": false
-  },
-  "getActionGroupSlot": {
-    "level": "stable",
-    "isNew": false
-  },
-  "syncFunction": {
-    "level": "stable",
-    "isNew": false
-  },
-  "typedField": {
-    "level": "stable",
-    "isNew": false
-  },
-  "useContextIcon": {
-    "level": "stable",
-    "isNew": false
-  },
-  "useGridItemProps": {
-    "level": "stable",
-    "isNew": false
-  },
-  "validator": {
     "level": "stable",
     "isNew": false
   }

@@ -1,5 +1,9 @@
+// Twin of `FlowComponentStatusLevel` in `src/status/types.ts` — the `dev`/`src`
+// rootDir split forbids a shared import, so keep both structurally identical.
 export type DerivedComponentStatusLevel = "beta" | "stable" | "deprecated";
 
+// Twin of `FlowComponentStatus` in `src/status/types.ts` — keep both structurally
+// identical (see note on `DerivedComponentStatusLevel` above).
 export interface DerivedComponentStatus {
   level: DerivedComponentStatusLevel;
   isNew: boolean;

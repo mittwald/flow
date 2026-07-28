@@ -46,6 +46,11 @@ test.each([
     { "flr-generate": "all", foo: "bar" },
     { level: "stable", isNew: false },
   ],
+  [
+    "prop-level @deprecated does not touch component tags → stable",
+    { flowStatus: "" }, // component-level tags; no `deprecated` key here
+    { level: "stable", isNew: false },
+  ],
 ] as const)("%s", (_desc, tags, expected) => {
   expect(deriveComponentStatus(tags)).toEqual(expected);
 });

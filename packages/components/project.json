@@ -62,6 +62,7 @@
       "dependsOn": ["build:docs-properties"],
       "inputs": [
         "{projectRoot}/dev/status-registry/**/*",
+        "!{projectRoot}/dev/status-registry/**/*.test.ts",
         "{projectRoot}/src/status/types.ts",
         "{projectRoot}/dist/assets/doc-properties.json"
       ],
