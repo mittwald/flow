@@ -194,3 +194,28 @@ copy is German.
 3. **Layout of the title badge** — place inline with the H1 using Flow layout
    primitives only, no ad-hoc CSS.
 ```
+
+## Amendments (post-implementation)
+
+Refinements decided during implementation / live review; these supersede the
+matching parts above.
+
+- **Client boundary.** `@mittwald/flow-react-components/internal` is a
+  client-boundary module, so `getFlowComponentStatus()` cannot be called from a
+  Server Component (`TopContent` is one). `ComponentStatusBadge` and
+  `ComponentStatusCallout` are therefore `"use client"`; they still SSR.
+- **Single badge, not two.** The level badge takes precedence over `new`: a
+  `beta`+`new` (or `deprecated`+`new`) component shows only its level badge;
+  `Neu` shows only for `stable`. (Replaces the "up to two badges" rule.)
+- **AlertBadge for the level.** `Beta` → `AlertBadge status="info"`, `Veraltet`
+  → `AlertBadge status="warning"`; `Neu` stays a violet `Badge`. (The `Badge`
+  colour palette for beta/deprecated is superseded by AlertBadge status colours.)
+- **Placement.** The badge renders **inside** the H1 `Heading` (Flow's Heading
+  badge slot). The callout renders **full-width above** the two-column layout;
+  the callout and the `ColumnLayout` are wrapped in a `Section` so the callout
+  is spaced from the title.
+- **Known follow-up.** In the sidebar an `AlertBadge` is not right-aligned like a
+  `Badge` (Navigation's `PropsContext` has no `AlertBadge` entry) — filed as
+  mittwald/flow#2731.
+- **Curation.** Deciding which components are `beta`/`new`/`deprecated` for 1.0.0
+  is tracked as a team to-do on RFC #2711.
