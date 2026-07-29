@@ -1,7 +1,7 @@
 # ADR 0003 – Component lifecycle status
 
-- **Status:** Proposed
-- **Date:** 2026-07-27
+- **Status:** Accepted
+- **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `@mittwald/flow-react-components`, `apps/docs`, Storybook, and a
   future breaking-change guard (see
