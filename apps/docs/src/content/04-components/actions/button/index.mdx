@@ -1,359 +1,77 @@
 ---
 component: Button
 description:
-  Mit einem Button können User Aktionen ausführen. Je nach Bedarf kann ein
-  Button – mit Text und/oder mit einem Icon – in verschiedenen Größen und Typen
-  gewählt werden.
+  Buttons werden verwendet, um Aktionen auf einer Seite oder in einem Formular
+  auszulösen.
 ---
 
-# Grundlagen
+# Code-Beispiel
 
-Mit einem Button können Aktionen ausgeführt werden. Entweder wird die Aktion
-direkt im Content-Bereich durchgeführt oder innerhalb eines
-[Modal](/04-components/overlays/modal/overview), ohne dass die Seite verlassen
-werden muss. Ein Button hat eine hohe Sichtbarkeit und sollte daher nicht zu
-übermäßig eingesetzt werden.
-
-## Best Practices
-
-Achte bei der Verwendung eines Buttons darauf, dass ...
-
-- er für den User leicht zu finden und zu bedienen ist.
-- die richtige Art von Button für die auszuführende Aktion gewählt wurde.
-- er sparsam und gezielt verwendet wird, um eine gute Sichtbarkeit zu erhalten.
-- der Text oder das Icon die Aktion klar und verständlich vermitteln.
-
-## Verwendung
-
-Verwende einen Button, um ...
-
-- Aktionen wie Speichern und Zurücksetzen in Formularen anzuzeigen.
-- ein [Modal](/04-components/overlays/modal/overview) zu öffnen.
-- einen Erstellungsprozess zu starten oder auszuführen.
-- Aktionen in einem Modal anzubieten.
-
-## Button vs. Link
-
-Buttons und [Links](/04-components/navigation/link/overview) werden häufig
-verwechselt. Um die beiden besser unterscheiden zu können, hier ein paar
-hilfreiche Anhaltspunkte.
-
-<DoAndDont>
-  <Plain heading="Verwende Buttons, um z. B. ...">
-    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
-    - Formulare zu speichern oder zurückzusetzen.
-    - in einem [Modal](/04-components/overlays/modal/overview) Aktionen auszuwählen.
-
-  </Plain>
-
-  <Plain heading="Verwende Links, um z. B. ...">
-    - zu einer anderen Seite zu navigieren.
-    - zu einem Anker auf der Seite zu scrollen.
-    - eine externe Seite zu öffnen.
-    - einen Download zu starten.
-
-  </Plain>
-</DoAndDont>
-
----
-
-# Anwendung
-
-## Position
-
-Bei der Positionierung des Buttons sind folgende Punkte zu beachten:
-
-- Ein Button sollte gut sichtbar platziert werden, damit er vom User leicht
-  gefunden wird.
-- Ein Button kann im Action-Bereich einer
-  [Section](/04-components/structure/section/overview) platziert werden, wenn er
-  sich unmittelbar auf den Inhalt der Section bezieht.
-- Gruppiere Buttons derselben Variant und Color, um eine klare Struktur zu
-  schaffen. Nutze dazu eine
-  [ActionGroup](/04-components/actions/action-group/overview).
-- Ein Button sollte immer ausreichend Kontrast zum Hintergrund (min. 3:1)
-  besitzen. Besonders auf farbigen Hintergründen empfiehlt es sich, dazu die
-  Colors Light oder Dark zu verwenden.
-- Setze Buttons sparsam ein. Als Faustregel gilt, nicht mehr als zwei bis drei
-  Buttons nebeneinander zu platzieren.
-
-## Hierarchie
-
-Die verschiedenen Button-Variants folgen einer klaren Hierarchie:
-
-- Verwende die Solid-Variant in den Colors Primary, Accent oder Danger für **die
-  wichtigsten Aktionen**. In der Regel sollte es pro Ansicht nur eine
-  Hauptaktion geben.
-- Für **fast gleichwertige Nebenaktionen** eignet sich die Solid-Variante in der
-  Farbe Secondary.
-- Die Soft-Variante passt gut für **weniger wichtige Nebenaktionen**, wie z. B.
-  „Schließen“ oder „Zurück“.
-- Die Outline-Variante kann ebenfalls für Nebenaktionen genutzt werden, wird
-  jedoch selten verwendet.
-- Für **unauffälligere Aktionen**, die weniger Aufmerksamkeit erfordern, eignet
-  sich die Plain-Variante.
-- Versuche, Buttons derselben Variant bzw. Color zu gruppieren.
-
-<DoAndDont>
-  <Do example="hierarchy-solid-do" row>
-    Verwende zwei Solid-Button nebeneinander, wenn beide wichtige Aktionen
-    enthalten.
-  </Do>
-  <Do example="hierarchy-soft-do" row>
-    Verwende die Soft-Variant, um Nebenaktionen weniger wichtig erscheinen zu
-    lassen.
-  </Do>
-</DoAndDont>
-<DoAndDont>
-  <Do example="hierarchy-order-do" row>
-    Versuche, ähnliche Buttons zu gruppieren. Zum Beispiel so, dass Buttons in
-    der Solid-Variant nebeneinander stehen.
-  </Do>
-  <Dont example="hierarchy-order-dont" row>
-    Ignoriere nicht die Hierarchie der Buttons, die sie zueinander haben.
-  </Dont>
-</DoAndDont>
-
-## Sizes
-
-Buttons sind in den Sizes Medium und Small erhältlich. Die Höhe wird vom Inhalt
-des Buttons bestimmt.
-
-- **Medium** ist die Standardgröße und wird in den meisten Fällen verwendet.
-- **Small** wird seltener verwendet und ist für Buttons gedacht, die
-  platzsparender sein sollten.
-
-<Dont example="sizes-dont" row>
-  Verwende nie Buttons in den Sizes Medium und Small direkt nebeneinander.
-</Dont>
-
-## Feedback
-
-Zeige dem User immer an, dass der Klick auf den Button eine Aktion auslöst:
-
-- Ein [Modal](/04-components/overlays/modal/overview) öffnet sich.
-- Ein Spinner, Häkchen oder ein Kreuz wird angezeigt, um zu signalisieren, dass
-  ein Prozess läuft, erfolgreich war oder fehlgeschlagen ist. Für die Steuerung
-  wird die [Action-Component](/04-components/actions/action/overview) verwendet.
-- Mit den unterschiedlichen States eines Buttons, die Interaktivität vermitteln.
-
----
-
-# Writing Guidelines
-
-## Text
-
-Achte beim Verfassen des Textes besonders auf:
-
-- Der Button sollte maximal zwei Wörter als Beschreibung beinhalten.
-- Die Aktion, die sich hinter dem Button verbirgt, sollte klar aus dem Text
-  hervorgehen.
-- Der Text im Button sollte nie mehrzeilig sein und auch auf kleinen
-  Bildschirmgrößen funktionieren. Zu langer Text wird automatisch auspunktiert.
-- Das erste Wort im Button beginnt immer mit einem Großbuchstaben. Vermeide es,
-  den Button ausschließlich in Großbuchstaben zu beschreiben.
-
-<DoAndDont>
-  <Do example="text-length-do">Beschreibe die Aktion kurz und prägnant.</Do>
-  <Dont example="text-length-dont">
-    Werde nicht mehrzeilig und verwende nicht zu viele Wörter.
-  </Dont>
-</DoAndDont>
-
-<DoAndDont>
-  <Do example="text-clarity-do" zoom={0.7} bgColor="light">
-    Beschreibe exakt und kurz, welche Aktion sich hinter den Buttons verbergen.
-  </Do>
-  <Dont example="text-clarity-dont" zoom={0.7} bgColor="light">
-    Verwirre den User nicht mit mehrdeutigen Begriffen.
-  </Dont>
-</DoAndDont>
-
-## Icon
-
-Achte bei der Auswahl des Icons besonders darauf, dass die
-[Icon-Component](/04-components/content/icon/overview) verwendet und ein
-universell verständliches Icon gewählt wird.
-
-<DoAndDont>
-  <Do example="icon-clarity-do" row>
-    Verwende Icons, die die Funktion hinter dem Icon visuell verdeutlichen.
-  </Do>
-  <Dont example="icon-clarity-dont" row>
-    Verwende keine Icons die nur gut aussehen, aber keine Funktion
-    widerspiegeln.
-  </Dont>
-</DoAndDont>
-
-### Text mit Icon
-
-Bei einer Kombination von Text und Icon muss das Icon dem User einen Mehrwert
-bieten. Es darf keinem rein dekorativen Zweck dienen und sollte dem User
-stattdessen helfen, die Funktion des Buttons zu verstehen.
-
-- Das Icon darf keinen rein dekorativen Zweck erfüllen.
-- Das Icon sollte dem User verdeutlichen, welche Funktion oder Aktion sich
-  hinter dem Button verbirgt. Dies kann z. B. der Fall sein, wenn ein
-  Chevron-Icon den User darauf hinweist, dass der Button ein Dropdown öffnet.
-
-<Do example="icon-context-menu-do">
-  Das Chevron-Icon zeigt an, dass ein Dropdown sich nach einem Klick öffnet.
-</Do>
-
----
-
-# Verhalten
-
-## Responsive Layout
-
-Buttons behalten auch auf schmaleren Bildschirmen ihre Breite, es sei denn, sie
-befinden sich in der [Modal](/04-components/overlays/modal/overview)-Navigation.
-Dort füllen sie die volle Breite des Contents an, wenn die Bildschirmbreite
-kleiner als 400 px ist.
-
-<DoAndDont>
-  <Do
-    example="mobile-width-standard-do"
-    mobile
-    heading="Mobile Text- und Icon-Buttons"
-    bgColor="mstudio"
-  >
-    Buttons behalten in den meisten Fällen auch bei schmaleren Bildschirmbreiten
-    die gewählte Größe. Die Position der Buttons kann sich jedoch der Breite
-    anpassen.
-  </Do>
-  <Do
-    example="mobile-width-group-do"
-    mobile
-    heading="Mobile Modal-Buttons"
-    bgColor="light"
-  >
-    Um auch mobil eine schnelle Navigation durch ein Modal zu ermöglichen,
-    füllen die Buttons im unteren Bereich des Modals die gesamte Breite des
-    Contents aus.
-  </Do>
-</DoAndDont>
-
----
-
-# Accessibility
-
-Achte beim Button darauf, dass ...
-
-- ein [Tooltip](/04-components/overlays/tooltip/overview) das Icon beschreibt,
-  wenn das Icon selbst nicht verständlich genug ist
-- man den Button auch per Tastatur erreichen kann.
-- der Screenreader den Button als Button erkennt.
-
-## Icon
-
-Bei einem reinen Icon-Button müssen folgende Dinge beachtet werden:
-
-- Das Icon erhält in diesem Fall automatisch das Attribut `aria-hidden=true`.
-- Verwende ein `aria-label`, um die Aktion des Buttons zu beschreiben.
-- Achte außerdem darauf, einen Tooltip anzuzeigen, der die Aktion beschreibt.
-
-### Color
-
-Achte bei den Colors Light und Dark auf einen genügenden Kontrast zum
-Hintergrund. Es wird empfohlen, eine Color in Light zu verwenden, wenn der HSL
-Lightness-Wert des Hintergrunds weniger als 50 ist. Die Color Dark wird für
-Hintergründe empfohlen, die einen HSL Lightness-Wert von größer als 50 haben.
-
-Für beide Colors gilt: Je weiter der HSL Lightness-Wert von 50 entfernt ist,
-desto besser ist der Kontrast.
-
-<DoAndDont>
-  <Do example="light" bgColor="dark" row>
-    Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
-    Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
-    weniger als 50.
-  </Do>
-
-  <Do example="dark" bgColor="light" row>
-    Color Dark kommt besonders gut auf sehr hellen Hintergründen zur Geltung. Verwende sie auf Hintergründen mit einem
-    HSL Lightness-Wert von über 50.
-  </Do>
-</DoAndDont>
-
-# Playground
-
-Verwende `<Button />`, um einen Button darzustellen.
-
-Benutze das `onPress` Property um die Interaktion mit Maus, Keyboard oder Touch
+Benutze das `onPress` Property, um die Interaktion mit Maus, Keyboard oder Touch
 zu ermöglichen.
 
 <LiveCodeEditor />
 
 ---
 
-# Variants
+# Verwendung
 
-Beim Button wird zwischen den Variants **Solid, Soft, Outline** und **Plain**
-unterschieden.
+Verwende einen Button, um ...
+
+- eine Aktion oder einen Befehl in einem Formular oder einer Oberfläche
+  auszuführen.
+- ein [Modal](/04-components/overlays/modal/overview) zu öffnen.
+
+Achte bei der Verwendung eines Buttons darauf, dass ...
+
+- der Text oder das Icon die auszuführende Aktion eindeutig beschreibt.
+- die visuelle Hierarchie der Wichtigkeit der Aktion entspricht.
+- die gewählte Variante die Bedeutung der Aktion unterstützt.
+
+---
+
+# Variants
 
 <LiveCodeEditor example="variants" editorCollapsed row />
 
-**Solid:** Die Solid-Variant zeichnet sich durch ein flächiges und auffälliges
-Aussehen aus. Aus diesem Grund verbergen sich in der Regel die Hauptaktionen
-hinter einem Solid-Button.
+Verwende die unterschiedlichen Varianten, um Buttons in einer Oberfläche eine
+visuelle Hierarchie zu geben:
 
-**Soft:** Die Soft-Variant verleiht dem Button einen softeren Touch und eignet
-sich daher gut für sekundäre Aktionen.
-
-**Outline:** Die Outline-Variant wirkt durch den Verzicht auf eine
-Hintergrundfarbe dezent. Durch den Rahmen bleibt sie weiterhin präsent, ohne
-dominant zu erscheinen.
-
-**Plain:** Die Plain-Variant ist weniger auffällig als die anderen Variants und
-wird für weniger wichtige oder versteckte Aktionen verwendet.
+- **Solid** für Hauptaktionen, die eine hohe Aufmerksamkeit erfordern.
+- **Soft** für Nebenaktionen, die visuell keine hohe Aufmerksamkeit erfordern.
+- **Outline**, wenn eine Aktion sichtbar und klar erkennbar sein soll, ohne
+  dabei die Aufmerksamkeit eines gefüllten Buttons zu beanspruchen.
+- **Plain** für weniger wichtige oder versteckte Aktionen.
 
 ---
 
 # Color
 
-Je nach Bedarf stehen vier Button-Color zur Auswahl: **Primary, Secondary,
-Accent** und **Danger**.
-
 <LiveCodeEditor example="colors" editorCollapsed row />
 
-**Primary:** Verwende die Primary-Color für Hauptaktionen, wenn der Kontext
-keinen Accent- oder Danger-Button erfordert.
+Farben unterstützen die visuelle Hierarchie zusätzlich. Verwende:
 
-**Secondary:** Die Secondary-Color wird für Nebenaktionen verwendet. Um dies zu
-verdeutlichen, wird die Secondary-Color häufig als Soft-Variant verwendet.
-
-**Accent:** Die grüne Farbe der Accent-Color soll dem Button eine positive
-Bedeutung verleihen. Daher wird diese Color vor allem im Kontext von
-Erstellungs-, Speicher- oder Bestellvorgängen verwendet.
-
-**Danger:** Die Danger-Color zeichnet sich durch die rote Farbe aus, die davor
-warnen soll, dass sich hinter dem Button eine negative Konsequenz verbirgt.
-Beispielsweise kann sich hinter dem Button eine Lösch- oder Kündigungsfunktion
-verbergen.
+- **Primary**, um Hauptaktionen standardmäßig visuell hervorzuheben.
+- **Secondary**, um Nebenaktionen abzuschwächen und neutral darzustellen.
+- **Accent**, um die positive Bedeutung einer Aktion zu stärken. Diese Farbe
+  wird daher vor allem im Kontext von Erstellungs-, Speicher- oder
+  Bestellvorgängen verwendet.
+- **Danger**, um negative Konsequenzen einer Aktion zu verdeutlichen. Sie wird
+  beispielsweise für Lösch- oder Kündigungsaktionen verwendet.
 
 ## Light und Dark
 
-Zusätzlich zu den Standard-Colors, können Button in **Light** und **Dark**
-dargestellt werden. Beide Colors sind Alternativen zu den herkömmlichen Farben,
-falls diese nicht auf farbigen oder dekorativen Hintergründen funktionieren.
-
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed row />
-
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed row />
-
-**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
-Lightness-Wert von weniger als 50.
-
-**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
-HSL Lightness-Wert von größer als 50.
+Um auf farbigen Hintergründen ausreichend Kontrast zu erreichen, können Buttons
+auch in Light und Dark eingesetzt werden. Mehr zur richtigen Verwendung von
+Light und Dark findest du in den Foundations unter Color.
 
 ---
 
 # Sizes
 
-Die Size des Buttons kann **Small** oder **Medium** sein. Medium ist die
-Standardgröße und wird für die meisten Buttons verwendet.
+Medium ist die Standardgröße und wird für die meisten Buttons verwendet. Small
+kann genutzt werden, wenn weniger Platz vorhanden ist. Vermeide es,
+unterschiedliche Button-Größen direkt nebeneinander zu verwenden.
 
 <LiveCodeEditor example="sizes" editorCollapsed row />
 
@@ -361,49 +79,52 @@ Standardgröße und wird für die meisten Buttons verwendet.
 
 # States
 
-Ein Button kann unterschiedliche States annehmen, die anzeigen, dass aktuell
-keine Interaktion möglich ist.
-
 <LiveCodeEditor example="states" editorCollapsed row />
 
-**Disabled:** Verwende den Disabled-State, wenn der Button keine Aktion oder
-kein Ereignis auslösen soll.
+**Disabled** zeigt an, dass eine Aktion nicht ausgeführt werden kann. Achte
+darauf, dass aus dem Kontext klar wird, warum die Aktion nicht zur Verfügung
+steht.
 
-**Pending, Succeeded und Failed:** Pending, Succeeded und Failed sollen dem
-Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf einen
-Button geklickt hat. Verwende den Button zusammen mit der Component
-[Action](/04-components/actions/action/overview), um die States zu steuern.
+Die States **Pending**, **Succeeded** und **Failed** geben dem User zusätzliches
+visuelles Feedback darüber, dass im Hintergrund eine Aktion läuft, erfolgreich
+abgeschlossen wurde oder fehlgeschlagen ist. Um diese States zu steuern, kann
+die [Action](/04-components/actions/action/overview)-Komponente genutzt werden.
 
 ---
 
-# Kombiniere mit ...
+# Content
 
-Im Content-Bereich des Buttons kann entweder **Text**, ein **Icon** oder **Text
-mit einem Icon am Ende** beinhalten.
+Der Content-Bereich eines Buttons kann entweder Text, ein Icon oder Text mit
+einem Icon am Ende enthalten.
 
 ## Icon
 
-Verwende `<Icon />` in einem `<Button />`, um ein Icon statt Text im Button
-anzuzeigen.
-
 <LiveCodeEditor example="icon" editorCollapsed row />
 
-## Text und Icon
+Wenn ausschließlich ein Icon verwendet wird, sollte das `aria-label` den
+Verwendungszweck beschreiben. Ein Tooltip kann zusätzlich verdeutlichen, wofür
+die Aktion gedacht ist.
 
-Verwende `<Text />` und `<Icon />` zusammen, um sowohl Text als auch Icon im
-Button anzuzeigen. Achte darauf, dass das Icon dem User einen Mehrwert bietet
-und nicht nur einen dekorativen Zweck erfüllt. Zum Beispiel indiziert ein
-Chevron-Icon, dass der Button ein Dropdown öffnet. Ein Close-Icon zeigt an, dass
-der Button als Filterelement wieder entfernt werden kann.
+## Text + Icon
 
 <LiveCodeEditor example="icon-text" editorCollapsed row />
 
+Bei der Kombination aus Text und Icon sollte das Icon keinen rein dekorativen
+Zweck erfüllen. Zum Beispiel kann ein Chevron-Icon darauf hinweisen, dass der
+Button ein Dropdown öffnet.
+
+---
+
+# Kombiniere mit …
+
 ## Align
 
-Benutze die [Align](/04-components/structure/align/overview) Component, um
-deinen Button neben Input Feldern zu platzieren.
+Benutze die [Align](/04-components/structure/align/overview)-Component, um
+deinen Button neben Input-Feldern zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
+
+---
 
 # Properties
 
