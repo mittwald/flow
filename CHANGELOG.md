@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
+
+### Features
+
+* **docs:** show component lifecycle status (ADR 0003 §5) ([#2732](https://github.com/mittwald/flow/issues/2732)) ([4914e62](https://github.com/mittwald/flow/commit/4914e625ca1d337a233d8a9d6c60d67e45e0af63)), closes [#2729](https://github.com/mittwald/flow/issues/2729) [#2731](https://github.com/mittwald/flow/issues/2731) [#2711](https://github.com/mittwald/flow/issues/2711)
+
 # [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
 
 ### Features
