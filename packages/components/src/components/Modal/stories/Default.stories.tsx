@@ -172,6 +172,44 @@ export const WithForm: Story = {
   },
 };
 
+export const WithConfirmOnClose: Story = {
+  render: (props) => {
+    const [squadronName, setSquadronName] = useState("");
+
+    return (
+      <ModalTrigger>
+        <Button>New squadron</Button>
+
+        <Modal
+          {...props}
+          confirmOnClose={squadronName !== ""}
+          onClose={() => setSquadronName("")}
+        >
+          <Heading>New Squadron</Heading>
+          <Content>
+            <Text>
+              Enter a name and close the modal with Escape or by clicking
+              outside: the unsaved changes have to be confirmed. Abort closes
+              immediately.
+            </Text>
+            <TextField value={squadronName} onChange={setSquadronName}>
+              <Label>Squadron name</Label>
+            </TextField>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button color="accent">Create squadron</Button>
+              <Button color="secondary" variant="soft">
+                Abort
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  },
+};
+
 export const WithColumnLayout: Story = {
   args: { size: "l", offCanvas: true },
   render: (props) => {

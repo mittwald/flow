@@ -34,6 +34,21 @@ einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
 
 ---
 
+# Ungespeicherte Änderungen
+
+Mit `confirmOnClose` muss das Schließen des Modals bestätigt werden – zum
+Beispiel, damit ungespeicherte Änderungen nicht unbemerkt verloren gehen. Die
+Bestätigung erscheint beim Schließen per Escape, per Klick außerhalb des Modals
+und über eine `<Action closeModal />`.
+
+Aktionen in der `<ActionGroup />` und der Close-Button in der Überschrift
+schließen das Modal weiterhin direkt: Dort ist das Verwerfen eine bewusste
+Entscheidung des Nutzers.
+
+<LiveCodeEditor example="confirmOnClose" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## Controller

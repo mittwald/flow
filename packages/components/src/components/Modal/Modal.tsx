@@ -15,6 +15,7 @@ import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
 import ButtonView from "@/views/ButtonView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
+import { ConfirmUnsavedChangesModal } from "@/components/Modal/components/ConfirmUnsavedChangesModal/ConfirmUnsavedChangesModal";
 import Wrap from "@/components/Wrap";
 import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider";
@@ -52,6 +53,13 @@ export interface ModalProps
   isDismissable?: boolean;
   /** Whether the close button should be visible */
   showCloseButton?: boolean;
+  /**
+   * Whether closing the modal must be confirmed – use it to protect unsaved
+   * changes. Actions in an `<ActionGroup>` and the close button in the heading
+   * still close the modal right away; pass `bypassConfirmation` to skip the
+   * confirmation on other close paths as well.
+   */
+  confirmOnClose?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
@@ -191,6 +199,7 @@ export const Modal = flowComponent("Modal", (props) => {
           </Suspense>
         </Wrap>
       </PropsContextProvider>
+      <ConfirmUnsavedChangesModal />
     </Overlay>
   );
 });
