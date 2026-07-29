@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.967](https://github.com/mittwald/flow/compare/0.2.0-alpha.966...0.2.0-alpha.967) (2026-07-29)
+
+### Bug Fixes
+
+* **components:** track doc-properties output in status-registry nx hash ([#2734](https://github.com/mittwald/flow/issues/2734)) ([2201f85](https://github.com/mittwald/flow/commit/2201f85a3e0f0c41eac645c6af84606468b40aa2))
+
 # [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
 
 ### Features
