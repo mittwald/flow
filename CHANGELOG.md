@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+### Features
+
+* **Navigation:** support AlertBadge ([#2737](https://github.com/mittwald/flow/issues/2737)) ([0d022ba](https://github.com/mittwald/flow/commit/0d022ba5d3b7c3da3515c7fe11159c6642282759))
+
 # [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
 
 **Note:** Version bump only for package @mittwald/flow-project
