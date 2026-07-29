@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
+
+### Features
+
+* **components:** adopt component lifecycle statuses (ADR 0003) ([#2733](https://github.com/mittwald/flow/issues/2733)) ([ae27285](https://github.com/mittwald/flow/commit/ae272850e4decc45bc65c9eaf533bba757b60693))
+
 # [0.2.0-alpha.964](https://github.com/mittwald/flow/compare/0.2.0-alpha.963...0.2.0-alpha.964) (2026-07-28)
 
 **Note:** Version bump only for package @mittwald/flow-project
