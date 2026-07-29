@@ -34,7 +34,10 @@ export interface CodeEditorProps
   validationBehavior?: unknown;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus new
+ */
 export const CodeEditor = flowComponent("CodeEditor", (props) => {
   const {
     ref,

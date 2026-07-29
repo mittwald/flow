@@ -19,7 +19,10 @@ export interface AccordionProps extends PropsWithChildren<
   variant?: "default" | "outline";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus beta
+ */
 export const Accordion: FC<AccordionProps> = flowComponent(
   "Accordion",
   (props) => {

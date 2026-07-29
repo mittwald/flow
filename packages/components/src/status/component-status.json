@@ -1,10 +1,10 @@
 {
   "@mittwald/flow-react-components#AccentBox": {
-    "level": "stable",
+    "level": "beta",
     "isNew": false
   },
   "@mittwald/flow-react-components#Accordion": {
-    "level": "stable",
+    "level": "beta",
     "isNew": false
   },
   "@mittwald/flow-react-components#Action": {
@@ -101,7 +101,7 @@
   },
   "@mittwald/flow-react-components#CodeEditor": {
     "level": "stable",
-    "isNew": false
+    "isNew": true
   },
   "@mittwald/flow-react-components#Color": {
     "level": "stable",
@@ -217,7 +217,7 @@
   },
   "@mittwald/flow-react-components#ImageCropper": {
     "level": "stable",
-    "isNew": false
+    "isNew": true
   },
   "@mittwald/flow-react-components#Initials": {
     "level": "stable",
@@ -229,7 +229,7 @@
   },
   "@mittwald/flow-react-components#Kbd": {
     "level": "stable",
-    "isNew": false
+    "isNew": true
   },
   "@mittwald/flow-react-components#Label": {
     "level": "stable",
@@ -519,7 +519,7 @@
   },
   "@mittwald/flow-react-components/react-hook-form#FormRootError": {
     "level": "stable",
-    "isNew": false
+    "isNew": true
   },
   "@mittwald/flow-react-components/react-hook-form#FormSettingsProvider": {
     "level": "stable",
