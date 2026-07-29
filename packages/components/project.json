@@ -68,7 +68,7 @@
         "{projectRoot}/src/components/public.ts",
         "{projectRoot}/src/index/flr-universal.ts",
         "{projectRoot}/src/integrations/**/index.ts",
-        "{projectRoot}/dist/assets/doc-properties.json"
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
       ],
       "outputs": [
         "{projectRoot}/src/status/component-status.json",

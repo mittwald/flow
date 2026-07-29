@@ -67,8 +67,8 @@ compiles YAML → `dist/css` (CSS variables) and `dist/json`.
 
 ## Repository map
 
-nx + pnpm workspace monorepo. Node `>=24`, pnpm pinned via `packageManager`
-(use corepack). Several packages ship their own `AGENTS.md` — **always read the
+nx + pnpm workspace monorepo. Node `>=24`, pnpm pinned via `packageManager` (use
+corepack). Several packages ship their own `AGENTS.md` — **always read the
 nearest `AGENTS.md` before working in a package.**
 
 | Path                                    | Package                                  | Role                                                                                       |
@@ -154,7 +154,14 @@ JSDoc? Regenerate (or simply `pnpm build`) and commit the results.
   `inputs`/`outputs` (caching, affected detection) in the package's
   `project.json` or in `nx.json` targetDefaults. When adding a script or a new
   generated artifact, wire these up — otherwise caching serves stale results and
-  `nx affected` misses work.
+  `nx affected` misses work. **A gitignored file cannot be an `inputs` glob** —
+  nx hashes only files in its workspace file map (git-tracked / non-ignored), so
+  a path like `{projectRoot}/dist/…` silently contributes nothing to the hash
+  and the task serves stale cache on upstream changes. To make a task's hash
+  track a **dependency task's output**, use
+  `{ "dependentTasksOutputFiles": "**/*", "transitive": false }` (nx hashes its
+  own task outputs) — `dependsOn` alone only orders execution, it does not fold
+  the dependency's hash into the dependent.
 - **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
   `pnpm install && pnpm clean` — expect installs after switching branches.
   `pre-commit` runs `pnpm lint`.
