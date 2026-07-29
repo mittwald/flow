@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-renderer",
-  "version": "0.2.0-alpha.957",
+  "version": "0.2.0-alpha.968",
   "type": "module",
   "description": "React rendering for Flow Remote Elements",
   "homepage": "https://flow.mittwald.de",
@@ -62,7 +62,7 @@
     "@mittwald/flow-react-components": "workspace:*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "*"
+    "react-hook-form": "^7.65.0"
   },
   "peerDependenciesMeta": {
     "react-hook-form": {

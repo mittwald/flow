@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "0.2.0-alpha.957",
+  "version": "0.2.0-alpha.968",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
@@ -22,6 +22,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",

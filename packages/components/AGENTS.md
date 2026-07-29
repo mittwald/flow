@@ -224,6 +224,12 @@ Run: `pnpm nx test:unit components`,
 | `./all.css`                                         | Bundled stylesheet.                                                                                                                                                                         |
 | `./doc-properties`                                  | Generated prop metadata for the docs site.                                                                                                                                                  |
 
+**Adding a new integration export entry?** Also register it in the component
+status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
+(`dev/status-registry/exportEntries.ts`) — the `FlowExportEntry` union and the
+registry regenerate from it. A generation-time guard fails if an entry resolves
+to zero components.
+
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
 props to hide.

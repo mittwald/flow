@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.957",
+  "version": "0.2.0-alpha.968",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -88,7 +88,7 @@
     "@internationalized/date": "^3.12.2",
     "@mittwald/ext-bridge": "workspace:*",
     "react": "^19.2.0",
-    "react-hook-form": "*"
+    "react-hook-form": "^7.65.0"
   },
   "peerDependenciesMeta": {
     "@internationalized/date": {

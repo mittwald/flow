@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
+
+### Bug Fixes
+
+* **Switch:** use flex-direction for label-leading instead of direction:rtl ([#2717](https://github.com/mittwald/flow/issues/2717)) ([1539318](https://github.com/mittwald/flow/commit/153931839d015b6a7c6779f9c9ff0ea0fffc6307))
+
+# [0.2.0-alpha.967](https://github.com/mittwald/flow/compare/0.2.0-alpha.966...0.2.0-alpha.967) (2026-07-29)
+
+### Bug Fixes
+
+* **components:** track doc-properties output in status-registry nx hash ([#2734](https://github.com/mittwald/flow/issues/2734)) ([2201f85](https://github.com/mittwald/flow/commit/2201f85a3e0f0c41eac645c6af84606468b40aa2))
+
+# [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
+
+### Features
+
+* **docs:** show component lifecycle status (ADR 0003 §5) ([#2732](https://github.com/mittwald/flow/issues/2732)) ([4914e62](https://github.com/mittwald/flow/commit/4914e625ca1d337a233d8a9d6c60d67e45e0af63)), closes [#2729](https://github.com/mittwald/flow/issues/2729) [#2731](https://github.com/mittwald/flow/issues/2731) [#2711](https://github.com/mittwald/flow/issues/2711)
+
+# [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
+
+### Features
+
+* **components:** adopt component lifecycle statuses (ADR 0003) ([#2733](https://github.com/mittwald/flow/issues/2733)) ([ae27285](https://github.com/mittwald/flow/commit/ae272850e4decc45bc65c9eaf533bba757b60693))
+
+# [0.2.0-alpha.964](https://github.com/mittwald/flow/compare/0.2.0-alpha.963...0.2.0-alpha.964) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.963](https://github.com/mittwald/flow/compare/0.2.0-alpha.962...0.2.0-alpha.963) (2026-07-28)
+
+### Features
+
+* **components:** add component lifecycle status registry (ADR 0003) ([#2729](https://github.com/mittwald/flow/issues/2729)) ([6a76d1e](https://github.com/mittwald/flow/commit/6a76d1e4ea6cf2e449cdcea0952bb54e9e8725c0))
+
+# [0.2.0-alpha.962](https://github.com/mittwald/flow/compare/0.2.0-alpha.961...0.2.0-alpha.962) (2026-07-28)
+
+### Bug Fixes
+
+* declare a uniform Node engines floor (>=24) and pin react-hook-form peer ([#2728](https://github.com/mittwald/flow/issues/2728)) ([a3b6f81](https://github.com/mittwald/flow/commit/a3b6f8168622c0a2cbfdcd018dd0f83f48a01b2a))
+
+# [0.2.0-alpha.961](https://github.com/mittwald/flow/compare/0.2.0-alpha.960...0.2.0-alpha.961) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.960](https://github.com/mittwald/flow/compare/0.2.0-alpha.959...0.2.0-alpha.960) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.959](https://github.com/mittwald/flow/compare/0.2.0-alpha.958...0.2.0-alpha.959) (2026-07-27)
+
+### Features
+
+* **release:** add /prepare-release command for RFC [#2711](https://github.com/mittwald/flow/issues/2711) promotion PR ([#2723](https://github.com/mittwald/flow/issues/2723)) ([eea0cff](https://github.com/mittwald/flow/commit/eea0cffe6cb1bd22ac4da8be30f391459bf8322a)), closes [#2724](https://github.com/mittwald/flow/issues/2724)
+
+# [0.2.0-alpha.958](https://github.com/mittwald/flow/compare/0.2.0-alpha.957...0.2.0-alpha.958) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.957](https://github.com/mittwald/flow/compare/0.2.0-alpha.956...0.2.0-alpha.957) (2026-07-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
