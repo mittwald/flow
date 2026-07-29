@@ -36,48 +36,23 @@ einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
 
 # Ungespeicherte Änderungen
 
-Enthält ein Modal Eingaben, gehen diese beim Schließen verloren. Damit das nicht
-unbemerkt passiert, kann das Schließen zunächst einen Bestätigungs-Dialog
-auslösen, der fragt, ob die Änderungen wirklich verworfen werden sollen. Der
-Dialog ist Teil des Modals – du musst ihn nicht selbst bauen, sondern nur
-festlegen, wann es etwas zu verlieren gibt.
-
-## Wann der Dialog erscheint
-
-Bestätigt werden die Wege, auf denen ein Modal beiläufig geschlossen wird: per
-Escape, per Klick außerhalb des Modals und über eine `<Action closeModal />`.
-
-Aktionen in der `<ActionGroup />` und der Close-Button in der Überschrift
-schließen das Modal dagegen direkt. Dort ist das Verwerfen eine bewusste
-Entscheidung des Nutzers, die nicht noch einmal abgefragt werden muss.
-
-## Manuell festlegen
-
-Mit `confirmOnClose` entscheidest du selbst, wann eine Bestätigung nötig ist –
-zum Beispiel abhängig davon, ob ein Feld gefüllt ist. Der Prop kann sich
-jederzeit ändern: Sobald es nichts mehr zu verwerfen gibt, schließt das Modal
-wieder ohne Rückfrage.
-
-<LiveCodeEditor example="confirmOnClose" editorCollapsed />
-
-## Automatisch bei einer geänderten Form
+Eingaben in einem Modal gehen beim Schließen verloren. Damit das nicht unbemerkt
+passiert, kann das Schließen erst einen Bestätigungs-Dialog auslösen. Bestätigt
+werden die Wege, auf denen ein Modal beiläufig geschlossen wird: Escape, Klick
+außerhalb und `<Action closeModal />`. Aktionen in der `<ActionGroup />` und der
+Close-Button in der Überschrift schließen dagegen direkt – dort ist das
+Verwerfen eine bewusste Entscheidung des Nutzers.
 
 Enthält das Modal eine
-[Form (React Hook Form)](/04-components/react-hook-form/form/overview),
-übernimmt diese die Entscheidung: Sobald die Form _dirty_ ist – der Nutzer also
-etwas geändert hat –, wird das Schließen bestätigt. Nach einem erfolgreichen
-Submit oder einem `form.reset()` ist die Form wieder unverändert und das Modal
-schließt direkt. `confirmOnClose` brauchst du dafür nicht.
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview), ist das
+der Standard: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
+einem erfolgreichen Submit oder einem `form.reset()` nicht mehr. Voraussetzung
+ist das Flag `requireCloseModalConfirmationOnUnsavedChanges` in der Anwendung.
 
-<Alert>
-  <Heading>Noch nicht standardmäßig aktiv</Heading>
-  <Content>
-    Das automatische Verhalten hängt an dem globalen Flag
-    `requireCloseModalConfirmationOnUnsavedChanges`, das die Anwendung erst
-    aktivieren muss. Ist es nicht gesetzt, führt nur `confirmOnClose` zum
-    Bestätigungs-Dialog.
-  </Content>
-</Alert>
+Ohne Form – oder wenn du selbst entscheiden willst, wann es etwas zu verlieren
+gibt – setzt du `confirmOnClose`:
+
+<LiveCodeEditor example="confirmOnClose" editorCollapsed />
 
 ---
 
