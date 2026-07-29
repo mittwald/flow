@@ -74,7 +74,8 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint) on your changes.
+- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
+  changes.
 - **post-checkout** / **post-merge** run `pnpm install && pnpm clean` so your
   dependencies and Nx cache stay in sync after switching branches or pulling.
 
@@ -543,7 +544,7 @@ branch.
 To run everything the way CI does:
 
 ```shell
-pnpm lint                                                       # ESLint + Stylelint
+pnpm lint                                                       # ESLint + Stylelint + Prettier check
 pnpm affected:test                                              # unit + compile, changed projects
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 ```
@@ -559,9 +560,18 @@ Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
 you.
 
 ```shell
-pnpm lint      # check with ESLint + Stylelint
-pnpm format    # auto-format everything with Prettier
+pnpm lint           # check with ESLint + Stylelint + Prettier
+pnpm format         # auto-format everything with Prettier
+pnpm format:check   # just the Prettier check (also part of pnpm lint)
 ```
+
+Prettier covers more than ESLint does: ESLint only ever sees `js`/`ts`/`tsx`
+(where Prettier runs as an ESLint rule via `eslint-plugin-prettier`), while
+`format:check` additionally gates `md`, `mdx`, `json`, `yaml` and `css`. So an
+unformatted Markdown or JSON file fails `pnpm lint` too — run `pnpm format`.
+
+Hand-wrapped GitHub YAML (`.github/workflows`, `.github/ISSUE_TEMPLATE`) is in
+`.prettierignore` on purpose; don't reformat it.
 
 Enforced conventions (see `eslint.config.js` / `.prettierrc.json`):
 
