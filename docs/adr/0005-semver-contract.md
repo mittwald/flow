@@ -14,7 +14,7 @@
 > [ADR 0004](0004-forward-merge-main-into-next.md); the **per-component** switch
 > on this contract is [ADR 0003](0003-component-lifecycle-status.md). The model
 > itself is accepted in [RFC #2711](https://github.com/mittwald/flow/issues/2711).
-> The Node/React portion below was grilled separately and landed with
+> The Node/React portion below landed with
 > [#2728](https://github.com/mittwald/flow/pull/2728); this ADR records it.
 
 ## Context
@@ -53,7 +53,7 @@ RFC #2711) means this one contract applies uniformly to every package.
 - **The remote protocol** — the versioned negotiation layer stays compatible as
   long as it can; when it genuinely cannot, that is a `feat!:` → Major.
 
-### 2. Node engines floor (grilled — #2728)
+### 2. Node engines floor (#2728)
 
 - The **guaranteed floor is the actively supported Node LTS** — currently
   `node >=24`, declared **uniformly across all packages** (#2728). It is bumped
