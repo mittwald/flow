@@ -3,9 +3,7 @@ import { useFormContext } from "../FormContextProvider";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useMountedFormRootErrorComponent } from "./useMountedFormRootErrorComponent";
 
-/**
- * @flowStatus new
- */
+/** @flowStatus new */
 export const FormRootError: FC = () => {
   const form = useFormContext().form;
   useMountedFormRootErrorComponent();
