@@ -66,9 +66,12 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
   /**
    * React Aria drops `aria-current` from the props it forwards to the DOM, so
    * the current state is exposed as a data attribute (`data-*` passes the
-   * filter) — that is what the `menuItem` styling matches on.
+   * filter) — that is what the `menuItem` styling matches on. Every
+   * `aria-current` value marks the item as current, except an explicit
+   * "false".
    */
-  const currentProps = ariaCurrent ? { "data-current": true } : {};
+  const currentProps =
+    ariaCurrent && ariaCurrent !== "false" ? { "data-current": true } : {};
 
   const rootClassName = clsx(
     styles.menuItem /**
