@@ -1,7 +1,7 @@
 # ADR 0004 – Forward-merge `main` into `next`
 
-- **Status:** Proposed
-- **Date:** 2026-07-27
+- **Status:** Accepted
+- **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `.github/workflows/` (a new `forward-merge.yml` and a symmetric
   `publish-next.yml`), the `next` branch protection, `.gitattributes`, and the
