@@ -169,8 +169,6 @@ generator. Everything downstream consumes the derived result.
 - **Criteria for `beta`:** young API not yet hardened by real-world use; known
   open design questions; complex / experimental surface; likely breaking changes
   before stabilization.
-- **Seed list (non-binding proposal):** `Chat`, `CodeEditor`, plus whatever the
-  team flags as "shaky" during the review.
 
 ## Consequences
 

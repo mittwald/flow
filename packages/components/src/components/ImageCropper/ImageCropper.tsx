@@ -24,7 +24,10 @@ export interface ImageCropperProps
   aspectRatio?: number;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus new
+ */
 export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
     image,

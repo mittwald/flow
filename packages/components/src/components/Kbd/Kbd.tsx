@@ -20,7 +20,10 @@ export interface KbdProps
   variant?: "plain" | "soft";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus new
+ */
 export const Kbd = flowComponent("Kbd", (props) => {
   const {
     keys,
