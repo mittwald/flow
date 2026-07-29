@@ -116,13 +116,3 @@
     }
   }
 }
-
-/* Menu items of collapsed links (rendered inside the context menu popover,
-   outside of the navigation element). */
-.menuItem {
-  &.current,
-  &.current:hover {
-    background-color: var(--menu-item--background-color--current);
-    font-weight: var(--menu-item--font-weight--current);
-  }
-}

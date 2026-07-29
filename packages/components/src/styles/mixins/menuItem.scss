@@ -49,6 +49,7 @@
 
   &:not(:has(.controlIcon)) {
     &[aria-current],
+    &[data-current],
     &[data-selected] {
       background-color: var(--menu-item--background-color--current);
       font-weight: var(--menu-item--font-weight--current);
@@ -56,6 +57,7 @@
   }
 
   &[aria-current],
+  &[data-current],
   &[data-selected] {
     :where(.icon) {
       color: var(--menu-item--icon-color--current);

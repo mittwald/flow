@@ -21,14 +21,18 @@
     outline-offset: calc(var(--size-px--xs) * -1);
   }
 
-  &:hover {
-    background-color: var(--tabs--background-color--hover);
-    transition-duration: var(--transition--duration--default);
-  }
+  /* The active indicator is painted below the titles (it precedes them in the
+     tab list), so the selected title must not paint a background over it. */
+  &:not([data-selected]) {
+    &:hover {
+      background-color: var(--tabs--background-color--hover);
+      transition-duration: var(--transition--duration--default);
+    }
 
-  &[data-pressed] {
-    background-color: var(--tabs--background-color--pressed);
-    transition-duration: var(--transition--duration--default);
+    &[data-pressed] {
+      background-color: var(--tabs--background-color--pressed);
+      transition-duration: var(--transition--duration--default);
+    }
   }
 
   &[aria-disabled="true"] {
@@ -36,11 +40,9 @@
   }
 
   .text {
-    position: relative;
     display: flex;
     align-items: center;
     column-gap: var(--tabs--spacing);
-    z-index: 2;
   }
 }
 

@@ -2,8 +2,9 @@
   background-color: var(--tabs--background-color--default);
   position: relative;
   border-radius: var(--tabs--corner-radius);
-  isolation: isolate;
 
+  /* Precedes `.titles` in the DOM, so it is painted below the tab titles
+     without needing a z-index. */
   .activeIndicator {
     position: absolute;
     inset-block: 0;
@@ -15,7 +16,6 @@
     border: var(--tabs--border-width) var(--tabs--border-style)
       var(--tabs--border-color);
     pointer-events: none;
-    z-index: 1;
 
     &.animated {
       transition-property: transform, width;

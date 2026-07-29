@@ -3,17 +3,31 @@ import { page, userEvent } from "vitest/browser";
 import { TabNavigation } from "./TabNavigation";
 import { Link } from "@/components/Link";
 
-const renderNavigation = (width?: string) =>
+const current = (href: string, currentHref: string) =>
+  href === currentHref ? "page" : undefined;
+
+const renderNavigation = (width?: string, currentHref = "#container") =>
   render(
     <div style={width ? { width } : undefined}>
       <TabNavigation aria-label="Project navigation">
-        <Link href="#apps">Apps</Link>
-        <Link href="#container" aria-current="page">
+        <Link href="#apps" aria-current={current("#apps", currentHref)}>
+          Apps
+        </Link>
+        <Link
+          href="#container"
+          aria-current={current("#container", currentHref)}
+        >
           Container
         </Link>
-        <Link href="#domains">Domains</Link>
-        <Link href="#emails">E-Mails</Link>
-        <Link href="#backups">Backups</Link>
+        <Link href="#domains" aria-current={current("#domains", currentHref)}>
+          Domains
+        </Link>
+        <Link href="#emails" aria-current={current("#emails", currentHref)}>
+          E-Mails
+        </Link>
+        <Link href="#backups" aria-current={current("#backups", currentHref)}>
+          Backups
+        </Link>
       </TabNavigation>
     </div>,
   );
@@ -54,4 +68,23 @@ test("collapses overflowing links into the overflow menu", async () => {
   await expect
     .element(page.getByRole("menuitem", { name: "Backups" }))
     .toBeInTheDocument();
+});
+
+test("marks a collapsed current page as the current menu item", async () => {
+  renderNavigation("200px", "#backups");
+
+  await userEvent.click(overflowButton());
+
+  /**
+   * React Aria filters `aria-current` out of the props forwarded to the DOM, so
+   * `MenuItem` exposes the state as `data-current` — the attribute the menu
+   * item styling matches on.
+   */
+  await expect
+    .element(page.getByRole("menuitem", { name: "Backups" }))
+    .toHaveAttribute("data-current", "true");
+
+  await expect
+    .element(page.getByRole("menuitem", { name: "Domains" }))
+    .not.toHaveAttribute("data-current");
 });

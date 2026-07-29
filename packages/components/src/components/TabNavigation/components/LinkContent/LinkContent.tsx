@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import clsx from "clsx";
 import type { LinkProps } from "@/components/Link";
 import { MenuItem } from "@/components/MenuItem";
 import { Text } from "@/components/Text";
@@ -32,8 +31,6 @@ export const LinkContent: FC<Props> = (props) => {
     "aria-current": ariaCurrent,
   } = linkProps;
 
-  const isCurrent = ariaCurrent === "page";
-
   return (
     <>
       <Text emulateBoldWidth>
@@ -41,7 +38,7 @@ export const LinkContent: FC<Props> = (props) => {
       </Text>
       <UiComponentTunnelEntry id="menuItems" component="TabNavigation">
         <MenuItem
-          className={clsx(styles.menuItem, isCurrent && styles.current)}
+          aria-current={ariaCurrent}
           href={href}
           target={target}
           rel={rel}

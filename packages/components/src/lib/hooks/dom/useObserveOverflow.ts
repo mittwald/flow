@@ -8,6 +8,11 @@ interface UseObserveOverflowReturn {
   isOverflowing: boolean;
 }
 
+/**
+ * Tracks whether the observed element overflows its parent horizontally.
+ * Re-measures when the element, its parent or any of its children resize, and
+ * when children are added or removed.
+ */
 export const useObserveOverflow = (): UseObserveOverflowReturn => {
   const elementRef = useRef<HTMLElement | null>(null);
   const observerRef = useRef<FrameResizeObserver | null>(null);
@@ -65,9 +70,10 @@ export const useObserveOverflow = (): UseObserveOverflowReturn => {
       observerRef.current = observer;
       observeTargets();
 
-      // Tab titles are portaled in via UiComponentTunnel, so this component
-      // never receives a `children`/count prop to react to — childList
-      // mutations are the only signal that a tab was added or removed.
+      // Children may be rendered by someone else entirely (e.g. portaled in via
+      // UiComponentTunnel), so the observing component never receives a
+      // `children`/count prop to react to — childList mutations are the only
+      // signal that a child was added or removed.
       mutationObserverRef.current = new MutationObserver(() => {
         observeTargets();
         observer.schedule();
