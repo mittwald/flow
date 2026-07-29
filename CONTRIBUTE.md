@@ -3,14 +3,14 @@
 First off — thank you for taking the time to contribute! 🎉
 
 **Flow** is [mittwald's design system](https://flow.mittwald.de/). This
-repository is a monorepo containing the React component library, design
-tokens, icon sets, the remote-rendering stack, and the documentation site.
+repository is a monorepo containing the React component library, design tokens,
+icon sets, the remote-rendering stack, and the documentation site.
 
-This guide is for people who want to **work on Flow itself**. If you only
-want to _use_ Flow in your own project, you're in the wrong place — head to
+This guide is for people who want to **work on Flow itself**. If you only want
+to _use_ Flow in your own project, you're in the wrong place — head to
 [flow.mittwald.de](https://flow.mittwald.de/) instead. For deep dives beyond
-this guide, every package ships an `AGENTS.md` next to its code — written
-for AI coding agents, but great reference docs for humans too.
+this guide, every package ships an `AGENTS.md` next to its code — written for AI
+coding agents, but great reference docs for humans too.
 
 ## Table of contents
 
@@ -37,9 +37,9 @@ for AI coding agents, but great reference docs for humans too.
 | **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack |
 | **Git**     | any recent version                                              |
 
-We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to
-get the exact pinned version is
-[Corepack](https://nodejs.org/api/corepack.html), which ships with Node.js:
+We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to get
+the exact pinned version is [Corepack](https://nodejs.org/api/corepack.html),
+which ships with Node.js:
 
 ```shell
 corepack enable
@@ -65,8 +65,8 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
-Storybook opens on <http://localhost:6006>. This is where you'll spend most
-of your time when developing components.
+Storybook opens on <http://localhost:6006>. This is where you'll spend most of
+your time when developing components.
 
 ### Git hooks
 
@@ -87,48 +87,48 @@ publishing).
 
 The packages you're most likely to touch:
 
-| Package                        | npm name                              | What it is                                                 |
-| ------------------------------ | ------------------------------------- | ---------------------------------------------------------- |
-| `packages/components` ⭐       | `@mittwald/flow-react-components`     | **The core React component library.** Start here.          |
-| `packages/design-tokens`       | `@mittwald/flow-design-tokens`        | Design tokens (colors, spacing, typography) as YAML → CSS  |
-| `packages/icons` / `icons-pro` | `@mittwald/flow-icons` / `-icons-pro` | The default and pro icon sets (generated from `icons-base`) |
+| Package                        | npm name                              | What it is                                                       |
+| ------------------------------ | ------------------------------------- | ---------------------------------------------------------------- |
+| `packages/components` ⭐       | `@mittwald/flow-react-components`     | **The core React component library.** Start here.                |
+| `packages/design-tokens`       | `@mittwald/flow-design-tokens`        | Design tokens (colors, spacing, typography) as YAML → CSS        |
+| `packages/icons` / `icons-pro` | `@mittwald/flow-icons` / `-icons-pro` | The default and pro icon sets (generated from `icons-base`)      |
 | `packages/stylesheet`          | `@mittwald/flow-stylesheet`           | The components' `all.css`, published as a standalone CSS package |
-| `apps/docs`                    | `@mittwald/flow-documentation`        | The public documentation site (Next.js)                    |
+| `apps/docs`                    | `@mittwald/flow-documentation`        | The public documentation site (Next.js)                          |
 
 Supporting packages (touch these only when your change concerns them):
 
-| Package                                | Purpose                                                          |
-| -------------------------------------- | ---------------------------------------------------------------- |
+| Package                                | Purpose                                                                       |
+| -------------------------------------- | ----------------------------------------------------------------------------- |
 | `packages/remote-*`                    | The remote-rendering stack (render Flow UI from sandboxed mStudio extensions) |
-| `packages/react-tunnel`                | Render React components through a "tunnel" (portal-like)         |
-| `packages/ext-bridge`, `mstudio-ext-*` | Building blocks for mStudio embedded extensions                  |
-| `packages/codemods`                    | Codemods to help consumers migrate between versions              |
-| `packages/typescript-config`           | Shared TypeScript config                                         |
-| `apps/remote-dom-demo`                 | Demo app for the remote-rendering stack                          |
+| `packages/react-tunnel`                | Render React components through a "tunnel" (portal-like)                      |
+| `packages/ext-bridge`, `mstudio-ext-*` | Building blocks for mStudio embedded extensions                               |
+| `packages/codemods`                    | Codemods to help consumers migrate between versions                           |
+| `packages/typescript-config`           | Shared TypeScript config                                                      |
+| `apps/remote-dom-demo`                 | Demo app for the remote-rendering stack                                       |
 
 ## The ground rules
 
-Five invariants that hold everywhere in this repo — internalize these and
-the rest is detail:
+Five invariants that hold everywhere in this repo — internalize these and the
+rest is detail:
 
-1. **Generated code is committed — and never hand-edited.** Remote views,
-   icon components, and `doc-properties.json` are generated. After changing
-   their sources, regenerate (`pnpm build` covers everything) and commit the
-   result. CI fails on any uncommitted generated diff.
-2. **Don't break extension developers.** Props of `@flr-generate` components
-   are a contract — mStudio extensions in the wild use them. Keep old paths
-   working and log their usage with `useWarnDeprecation`. Breaking changes
-   for consumers ship with a `MIGRATION.md` entry and ideally a codemod in
+1. **Generated code is committed — and never hand-edited.** Remote views, icon
+   components, and `doc-properties.json` are generated. After changing their
+   sources, regenerate (`pnpm build` covers everything) and commit the result.
+   CI fails on any uncommitted generated diff.
+2. **Don't break extension developers.** Props of `@flr-generate` components are
+   a contract — mStudio extensions in the wild use them. Keep old paths working
+   and log their usage with `useWarnDeprecation`. Breaking changes for consumers
+   ship with a `MIGRATION.md` entry and ideally a codemod in
    `packages/codemods`.
-3. **Design comes from UX.** Base design tokens are taboo. Component tokens
-   for a new component are fine — model them on existing components and ask
-   when unsure. Never invent visual design.
+3. **Design comes from UX.** Base design tokens are taboo. Component tokens for
+   a new component are fine — model them on existing components and ask when
+   unsure. Never invent visual design.
 4. **UI text is bilingual.** Everything user-facing ships in
    `locales/de-DE.locale.json` **and** `locales/en-US.locale.json`. A new
    language is welcome — but then translate everything initially.
-5. **Dependencies are deliberate.** New package versions younger than one
-   week won't resolve (`minimumReleaseAge`; `@mittwald/*` exempt), and the
-   pnpm patches in `patches/` are intentional — leave them alone.
+5. **Dependencies are deliberate.** New package versions younger than one week
+   won't resolve (`minimumReleaseAge`; `@mittwald/*` exempt), and the pnpm
+   patches in `patches/` are intentional — leave them alone.
 
 ## Development workflow
 
@@ -152,11 +152,11 @@ A few things worth knowing:
   `dependsOn`, so e.g. starting the docs site will first build the component
   library it imports.
 - Inside a package you can also run its scripts directly, but going through
-  `pnpm nx …` from the repo root is preferred so caching and dependency
-  graphs work.
-- **Adding a script?** Wire up its Nx metadata (`dependsOn`,
-  `inputs`/`outputs` in `project.json` or `nx.json`) — otherwise caching
-  serves stale results and `nx affected` misses your target.
+  `pnpm nx …` from the repo root is preferred so caching and dependency graphs
+  work.
+- **Adding a script?** Wire up its Nx metadata (`dependsOn`, `inputs`/`outputs`
+  in `project.json` or `nx.json`) — otherwise caching serves stale results and
+  `nx affected` misses your target.
 
 ## Anatomy of a component
 
@@ -190,16 +190,15 @@ from the published name `@mittwald/flow-react-components`.
 Components are **not** written with `forwardRef` or `FC` directly. They are
 wrapped in the **`flowComponent(name, impl)`** factory, use
 [`react-aria-components`](https://react-spectrum.adobe.com/react-aria/) for
-behavior and accessibility, [`clsx`](https://github.com/lukeed/clsx) for
-class composition, and CSS Modules for styling.
+behavior and accessibility, [`clsx`](https://github.com/lukeed/clsx) for class
+composition, and CSS Modules for styling.
 
 Before you code: pick a similar existing component as your template —
 `TextField` (form control), `Modal` (overlay), `Alert` (simple semantic
-component), `Button` (action). Copying its structure is the fastest way to
-get every convention right.
+component), `Button` (action). Copying its structure is the fastest way to get
+every convention right.
 
-Here's the full checklist for a **new component** — using `Badge` as an
-example.
+Here's the full checklist for a **new component** — using `Badge` as an example.
 
 ### 1. Write the component
 
@@ -237,27 +236,27 @@ Conventions to follow **exactly**:
 
 - Export an interface named `<Name>Props` that extends the relevant
   `Aria.*Props` (when wrapping a React Aria component) **and**
-  `FlowComponentProps<HTMLElement>` (this supplies `ref`, `tunnel`,
-  `wrapWith`, …). The **ref is a normal prop** (React 19) — no `forwardRef`.
-- **Document every public prop with a JSDoc comment.** These are extracted
-  into the property tables on the docs site — undocumented props ship with
-  empty descriptions. Use `@default` for defaults and `@internal` for props
-  that aren't part of the public API.
-- Wrap the implementation in `flowComponent("<Name>", (props) => …)`. The
-  string **must** match the name you register in step 4.
-- The `/** @flr-generate all */` tag marks the component as
-  **remote-capable**: the generator emits remote/view artifacts for it
-  (step 6), and its props become part of the extension contract. Only add it
-  when the component should be available to mStudio extensions.
+  `FlowComponentProps<HTMLElement>` (this supplies `ref`, `tunnel`, `wrapWith`,
+  …). The **ref is a normal prop** (React 19) — no `forwardRef`.
+- **Document every public prop with a JSDoc comment.** These are extracted into
+  the property tables on the docs site — undocumented props ship with empty
+  descriptions. Use `@default` for defaults and `@internal` for props that
+  aren't part of the public API.
+- Wrap the implementation in `flowComponent("<Name>", (props) => …)`. The string
+  **must** match the name you register in step 4.
+- The `/** @flr-generate all */` tag marks the component as **remote-capable**:
+  the generator emits remote/view artifacts for it (step 6), and its props
+  become part of the extension contract. Only add it when the component should
+  be available to mStudio extensions.
 - Export the component **both** as a named export and as the `default`.
 
 ### 2. Write the styles
 
-`src/components/Badge/Badge.module.scss` — a CSS Module in SCSS. Scoped
-class names are generated from the component path (semantic CSS by design),
-so don't bypass CSS Modules for component roots. **Never hard-code values**:
-use design-token CSS custom properties, and shared mixins from
-`@/styles/mixins/` (`focus`, `formControl`, `ellipsis`):
+`src/components/Badge/Badge.module.scss` — a CSS Module in SCSS. Scoped class
+names are generated from the component path (semantic CSS by design), so don't
+bypass CSS Modules for component roots. **Never hard-code values**: use
+design-token CSS custom properties, and shared mixins from `@/styles/mixins/`
+(`focus`, `formControl`, `ellipsis`):
 
 ```scss
 @use "@/styles/mixins/focus";
@@ -275,14 +274,14 @@ use design-token CSS custom properties, and shared mixins from
 }
 ```
 
-The root class is the lower-camel component name; modifier classes match
-prop values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
+The root class is the lower-camel component name; modifier classes match prop
+values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
 ### 3. Add the barrel `index.ts`
 
-Always the same three lines (the `./view` line only exists on
-`@flr-generate` components — the file is generated in step 6):
+Always the same three lines (the `./view` line only exists on `@flr-generate`
+components — the file is generated in step 6):
 
 ```ts
 export * from "./view";
@@ -292,8 +291,8 @@ export { default } from "./Badge";
 
 ### 4. Register the component in the public API
 
-This is the **easy-to-miss** step. Two central registries must be updated,
-or the component won't be exported / won't type-check:
+This is the **easy-to-miss** step. Two central registries must be updated, or
+the component won't be exported / won't type-check:
 
 1. **`src/components/public.ts`** — add (alphabetically):
 
@@ -321,11 +320,10 @@ automatically include a component there.
 
 ### 5. Style children via PropsContext
 
-When your component composes other Flow components, don't thread `className`
-or defaults down manually — provide a `PropsContext` so children adapt
-automatically (this is the backbone of Flow's composability; e.g. an
-`<Icon>` inside `<IllustratedMessage>` automatically renders with
-`size="l"`):
+When your component composes other Flow components, don't thread `className` or
+defaults down manually — provide a `PropsContext` so children adapt
+automatically (this is the backbone of Flow's composability; e.g. an `<Icon>`
+inside `<IllustratedMessage>` automatically renders with `size="l"`):
 
 ```tsx
 import { PropsContextProvider, type PropsContext } from "@/lib/propsContext";
@@ -338,17 +336,17 @@ const propsContext: PropsContext = {
 ```
 
 - `dynamic()` derives context values from the consumer's local props.
-- **Only remote-capable components belong in a context** — non-remote
-  components break remote rendering.
+- **Only remote-capable components belong in a context** — non-remote components
+  break remote rendering.
 - Inside `flr-universal` components, compose internals through **views**
   (`@/views/*` — e.g. `ButtonView` instead of `Button`): views switch to the
   remote counterpart automatically.
 
 ### 6. Generate the remote artifacts
 
-`view.ts` is **auto-generated** from the `@flr-generate` tag — never edit it
-by hand. Regenerate it (and the auto-generated files in the `remote-*`
-packages) with:
+`view.ts` is **auto-generated** from the `@flr-generate` tag — never edit it by
+hand. Regenerate it (and the auto-generated files in the `remote-*` packages)
+with:
 
 ```shell
 pnpm nx build:remote-components components
@@ -360,19 +358,19 @@ pnpm nx build:remote-components components
 
 For remote-capable components, also:
 
-- Exclude props that must not cross the remote boundary with
-  `@flr-ignore-props` (`style` & friends are ignored globally — see
+- Exclude props that must not cross the remote boundary with `@flr-ignore-props`
+  (`style` & friends are ignored globally — see
   `dev/remote-components-generator/config.ts`).
 - Add a demo page in `apps/remote-dom-demo/src/app/remote/<component>/`.
-- Remember: from now on these props are a **contract with extension
-  developers** — never break them; deprecate with `useWarnDeprecation`.
+- Remember: from now on these props are a **contract with extension developers**
+  — never break them; deprecate with `useWarnDeprecation`.
 
 ### 7. Add a Storybook story
 
 `src/components/Badge/stories/Default.stories.tsx`. The `title` groups the
-component into a category (`Actions`, `Form Controls`, `Status`,
-`Overlays`, …) — match the category used on the docs site. Use realistic
-args and add a named story per meaningful variant or state:
+component into a category (`Actions`, `Form Controls`, `Status`, `Overlays`, …)
+— match the category used on the docs site. Use realistic args and add a named
+story per meaningful variant or state:
 
 ```tsx
 import { Badge } from "../index";
@@ -418,22 +416,21 @@ stringFormatter.format("itemCount", { count: 3 });
 (For real-world plural/select usage, see
 `src/components/PasswordCreationField/locales/`.)
 
-Accessibility goes hand in hand with this: icon-only buttons need a
-localized `aria-label`, decorative icons are `aria-hidden` (the `Icon`
-component handles that automatically when no label is given).
+Accessibility goes hand in hand with this: icon-only buttons need a localized
+`aria-label`, decorative icons are `aria-hidden` (the `Icon` component handles
+that automatically when no label is given).
 
 ### 9. Document it on the docs site
 
 Add a doc set under `apps/docs/src/content/04-components/<category>/<slug>/`
-(the content is **not** colocated with the component — copy the structure of
-a neighbor like `actions/button/`):
+(the content is **not** colocated with the component — copy the structure of a
+neighbor like `actions/button/`):
 
 - `index.mdx` — frontmatter `component: Badge` + a `description:`
-- `overview.mdx` — usage narrative with `<LiveCodeEditor example="…" />`
-  blocks
+- `overview.mdx` — usage narrative with `<LiveCodeEditor example="…" />` blocks
 - `guidelines.mdx` — design guidelines (when to use / when not)
-- `develop.mdx` — usually `# Properties` + `<PropertiesTables />`
-  (generated from your prop JSDoc; regenerate with
+- `develop.mdx` — usually `# Properties` + `<PropertiesTables />` (generated
+  from your prop JSDoc; regenerate with
   `pnpm nx build:docs-properties components`)
 - `examples/*.tsx` — live-code snippets, importing from
   `@mittwald/flow-react-components`
@@ -445,12 +442,12 @@ The docs prose is written in **German**. Preview with `pnpm nx dev docs`.
 Some source files are **generated** and must not be hand-edited:
 
 - **Design tokens** are authored as YAML in
-  `packages/design-tokens/src/**/*.yml` and built to CSS with
-  style-dictionary. Component tokens live in category files —
-  `src/actions/button.yml` defines the `--button--*` custom properties.
-  Adding a file like this for a new component is fine (model it on an
-  existing one). **Base tokens** (top-level files: colors, font, size, …)
-  are design authority — never change them on your own; ask when unsure.
+  `packages/design-tokens/src/**/*.yml` and built to CSS with style-dictionary.
+  Component tokens live in category files — `src/actions/button.yml` defines the
+  `--button--*` custom properties. Adding a file like this for a new component
+  is fine (model it on an existing one). **Base tokens** (top-level files:
+  colors, font, size, …) are design authority — never change them on your own;
+  ask when unsure.
 - **Icons** have a single source of truth: `packages/icons-base/src/icons.yaml`.
   The icon sets and the component-internal icons are generated from it:
   `pnpm nx build:icons icons`, `… icons-pro`, `… components` — or simply
@@ -458,19 +455,19 @@ Some source files are **generated** and must not be hand-edited:
 
 ## Testing
 
-Tests use [Vitest](https://vitest.dev/) and are **colocated** next to the
-code. Naming decides how a test runs:
+Tests use [Vitest](https://vitest.dev/) and are **colocated** next to the code.
+Naming decides how a test runs:
 
-| File pattern         | Project   | Runs in        | Use for                            |
-| -------------------- | --------- | -------------- | ---------------------------------- |
-| `*.browser.test.tsx` | `browser` | a real browser | component interaction / rendering  |
-| `*.test.ts(x)`       | `unit`    | happy-dom      | pure logic (helpers, hooks)        |
-| `*.test-types.tsx`   | —         | type-check     | generic/typed public APIs          |
+| File pattern         | Project   | Runs in        | Use for                           |
+| -------------------- | --------- | -------------- | --------------------------------- |
+| `*.browser.test.tsx` | `browser` | a real browser | component interaction / rendering |
+| `*.test.ts(x)`       | `unit`    | happy-dom      | pure logic (helpers, hooks)       |
+| `*.test-types.tsx`   | —         | type-check     | generic/typed public APIs         |
 
 The bar: **every component has stories** (they double as the review and
-visual-test surface); browser tests when there is real behavior
-(interaction, controlled state, async flows, forms); unit tests for lib
-functions; type tests for generic APIs.
+visual-test surface); browser tests when there is real behavior (interaction,
+controlled state, async flows, forms); unit tests for lib functions; type tests
+for generic APIs.
 
 Run them per package via Nx:
 
@@ -506,17 +503,17 @@ test("TextField keeps its value on blur", async () => {
 });
 ```
 
-(`globals: true` is set, so `test` / `expect` don't need to be imported.
-Query by role — that keeps the DOM accessible, too.)
+(`globals: true` is set, so `test` / `expect` don't need to be imported. Query
+by role — that keeps the DOM accessible, too.)
 
 ### Visual regression testing
 
 Visual regression tests live in **`packages/remote-react-components`**
-(`src/tests/visual/`). They render each component in **both** the local and
-the remote environment and compare against committed screenshots — catching
+(`src/tests/visual/`). They render each component in **both** the local and the
+remote environment and compare against committed screenshots — catching
 unintended visual changes, such as a design-token tweak that ripples further
-than expected. Screenshots are keyed by browser and OS
-(e.g. `Badge-webkit-linux.png`).
+than expected. Screenshots are keyed by browser and OS (e.g.
+`Badge-webkit-linux.png`).
 
 ```shell
 # run the visual tests (headless, WebKit):
@@ -526,8 +523,7 @@ pnpm nx test:visual remote-react-components --browser.name=webkit
 pnpm nx test:visual:dev remote-react-components --browser.name=webkit
 ```
 
-When you add or change a component, update its screenshots and review the
-diffs:
+When you add or change a component, update its screenshots and review the diffs:
 
 ```shell
 pnpm nx test:visual:update remote-react-components          # all (slow!)
@@ -539,10 +535,10 @@ Local runs update the baselines for **your** OS. Additionally add the
 reference screenshots on Linux (matching CI) and commits them back to your
 branch.
 
-> ⚠️ When a visual test fails, it writes `*--Local--*.png` /
-> `*--Remote--*.png` diff artifacts showing the difference between the two
-> environments. Use them to inspect the failure — but **never commit them**;
-> only the baselines belong in the repo.
+> ⚠️ When a visual test fails, it writes `*--Local--*.png` / `*--Remote--*.png`
+> diff artifacts showing the difference between the two environments. Use them
+> to inspect the failure — but **never commit them**; only the baselines belong
+> in the repo.
 
 To run everything the way CI does:
 
@@ -559,8 +555,8 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint`
-for you.
+Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
+you.
 
 ```shell
 pnpm lint      # check with ESLint + Stylelint
@@ -576,9 +572,9 @@ Enforced conventions (see `eslint.config.js` / `.prettierrc.json`):
 
 ## Commit conventions
 
-Flow uses [Conventional Commits](https://www.conventionalcommits.org/). This
-is **not optional cosmetics** — Lerna-Lite derives version bumps and the
-changelog from your commit messages.
+Flow uses [Conventional Commits](https://www.conventionalcommits.org/). This is
+**not optional cosmetics** — Lerna-Lite derives version bumps and the changelog
+from your commit messages.
 
 ```
 <type>(<scope>): <short summary>
@@ -597,8 +593,8 @@ fix(CodeEditor): fix height and colors
 chore(docs): migrate site URL and redirect pages
 ```
 
-`feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci`
-for everything that isn't. Write messages for the changelog reader.
+`feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci` for
+everything that isn't. Write messages for the changelog reader.
 
 ## Opening a pull request
 
@@ -608,26 +604,26 @@ for everything that isn't. Write messages for the changelog reader.
    - [ ] `pnpm lint` is clean
    - [ ] `pnpm affected:test` passes (unit + type-check)
    - [ ] browser tests pass if you touched behavior
-   - [ ] **generated code is committed** (`git diff` is empty after running
-         the relevant `build:*` targets)
-   - [ ] intentional visual changes: snapshots updated
-         (`test:visual:update` locally and/or the `update-screenshots` label)
+   - [ ] **generated code is committed** (`git diff` is empty after running the
+         relevant `build:*` targets)
+   - [ ] intentional visual changes: snapshots updated (`test:visual:update`
+         locally and/or the `update-screenshots` label)
    - [ ] docs updated if you changed a public API
 4. Push to your fork and open a PR against `mittwald/flow`'s `main` branch.
 
 CI (`.github/workflows/test.yml`) runs lint, unit tests, and browser tests
-(WebKit) on every PR, and verifies all generated code is committed. A
-preview deployment of docs + Storybook is built for each PR so reviewers can
-see your changes live.
+(WebKit) on every PR, and verifies all generated code is committed. A preview
+deployment of docs + Storybook is built for each PR so reviewers can see your
+changes live.
 
-PRs are **squash-merged**, so the PR title becomes the commit on `main` —
-give it a Conventional-Commits-style title.
+PRs are **squash-merged**, so the PR title becomes the commit on `main` — give
+it a Conventional-Commits-style title.
 
 ## Releases
 
 You don't need to do anything to release. When a PR is merged into `main`,
-Lerna-Lite (via `.github/workflows/publish.yml`) versions the packages based
-on the Conventional Commits, generates the changelogs, and publishes to npm.
+Lerna-Lite (via `.github/workflows/publish.yml`) versions the packages based on
+the Conventional Commits, generates the changelogs, and publishes to npm.
 
 ## Getting help
 
