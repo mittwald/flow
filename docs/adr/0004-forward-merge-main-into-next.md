@@ -1,7 +1,7 @@
 # ADR 0004 – Forward-merge `main` into `next`
 
-- **Status:** Proposed
-- **Date:** 2026-07-27
+- **Status:** Accepted
+- **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `.github/workflows/` (a new `forward-merge.yml` and a symmetric
   `publish-next.yml`), the `next` branch protection, `.gitattributes`, and the
@@ -10,10 +10,10 @@
 > This ADR fixes the **mechanics of the forward-merge** — the automatic merge of
 > a lower release line into the line above it (`main → next`, and analogously
 > `next → major line`) — for the 1.0.0 release model. The model itself is
-> accepted in [RFC #2711](https://github.com/mittwald/flow/issues/2711); this ADR
-> only specifies *how* the forward-merge is built. **The design is fixed here;
-> the implementation lands with the 1.0.0 cut** (nothing can be exercised until
-> `main`/`next` exist and the repo is off the `0.2.0-alpha.*` line).
+> accepted in [RFC #2711](https://github.com/mittwald/flow/issues/2711); this
+> ADR only specifies _how_ the forward-merge is built. **The design is fixed
+> here; the implementation lands with the 1.0.0 cut** (nothing can be exercised
+> until `main`/`next` exist and the repo is off the `0.2.0-alpha.*` line).
 
 ## Context
 
@@ -27,13 +27,13 @@ The naive "just merge `main` into `next` on every push" has four traps that make
 or break the model:
 
 1. **History shape.** If the merge replays commits (rebase/squash/cherry-pick),
-   `main` stops being an ancestor of `next`, and every subsequent forward-merge —
-   and the Promotion `next → main` — re-collides with the "same" changes. That is
-   exactly the cherry-picking pain the model exists to avoid.
-2. **Version churn.** With fixed versioning, `main` and `next` carry *different*
+   `main` stops being an ancestor of `next`, and every subsequent forward-merge
+   — and the Promotion `next → main` — re-collides with the "same" changes. That
+   is exactly the cherry-picking pain the model exists to avoid.
+2. **Version churn.** With fixed versioning, `main` and `next` carry _different_
    versions in ~15 `package.json` files plus the `CHANGELOG.md` files. A 3-way
-   merge conflicts on every release, which would spawn a maintainer-facing PR for
-   every single patch — killing the "unattended" promise.
+   merge conflicts on every release, which would spawn a maintainer-facing PR
+   for every single patch — killing the "unattended" promise.
 3. **Concurrent writers.** Once `next` is published continuously, two workflows
    push to it (`forward-merge.yml` and `publish-next.yml`); `main` similarly has
    `publish.yml` and Promotion merges. Un-serialized, they race on
@@ -61,14 +61,14 @@ changelog is the curated GitHub Release, not `next`'s raw history (per RFC
 
 A new **`.github/workflows/forward-merge.yml`**, triggered on **`push: main`**
 **and** on **`workflow_dispatch`** (manual runs, consistent with `publish.yml`).
-The manual trigger is a first-class recovery/force path — e.g. to re-run the sync
-after a failed automatic run — and is safe precisely because the workflow is
-idempotent: a manual run merges the current `main` tip into `next` exactly like
-an automatic one. Not a step inside `publish.yml` (separation of concerns: a
-failed publish must not block the sync and vice versa), and not
+The manual trigger is a first-class recovery/force path — e.g. to re-run the
+sync after a failed automatic run — and is safe precisely because the workflow
+is idempotent: a manual run merges the current `main` tip into `next` exactly
+like an automatic one. Not a step inside `publish.yml` (separation of concerns:
+a failed publish must not block the sync and vice versa), and not
 `workflow_run`-chained (needless token/default-branch complexity).
 
-The workflow is **idempotent**: it merges the *current* `main` tip into `next`,
+The workflow is **idempotent**: it merges the _current_ `main` tip into `next`,
 never "a specific commit". Consequences:
 
 - A `fix:` push and the later `chore(release):` push that `publish.yml` makes
@@ -81,19 +81,15 @@ Runs are serialized (see §5).
 
 ### 3. Version / changelog churn: merge drivers, not sync PRs
 
-`next` needs `main`'s **code**, never `main`'s **version number** (`next` has its
-own derived version line). The version/changelog conflict is therefore
+`next` needs `main`'s **code**, never `main`'s **version number** (`next` has
+its own derived version line). The version/changelog conflict is therefore
 mechanical noise, not a real conflict, and is resolved automatically via
 `.gitattributes` merge drivers:
 
-- **`**/CHANGELOG.md merge=ours`** — keep `next`'s changelog; `lerna` regenerates
-  `next`'s entries from the merged commits anyway. Per-package `CHANGELOG.md` are
-  only the machine record (RFC #2711), so this loss is inconsequential.
-- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script)
-  that, on conflict, keeps the `version` field from `next` while merging all
-  other changes (e.g. genuine dependency bumps from `main`) with the normal
-  3-way result. A blanket `merge=ours` on `package.json` is rejected — it would
-  silently drop legitimate dependency changes from `main`.
+- **`**/CHANGELOG.md
+  merge=ours`** — keep `next`'s changelog; `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package `CHANGELOG.md`
+  are only the machine record (RFC #2711), so this loss is inconsequential.
+- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script) that, on conflict, keeps the `version`field from`next`while merging all other changes (e.g. genuine dependency bumps from`main`) with the normal 3-way result. A blanket `merge=ours`on`package.json`is rejected — it would silently drop legitimate dependency changes from`main`.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
 sync PR (§4). The exact version string produced by the merge is irrelevant — it
@@ -105,8 +101,8 @@ On a real (non-version) conflict, the workflow:
 
 - Creates/updates a dedicated branch **`sync/main-to-next`** at `main`'s tip and
   opens a PR **`sync/main-to-next → next`** (not `head == main` directly —
-  conflict-resolution commits must not land on `main`). A maintainer resolves the
-  conflict on the sync branch (locally or via the web editor) and merges.
+  conflict-resolution commits must not land on `main`). A maintainer resolves
+  the conflict on the sync branch (locally or via the web editor) and merges.
 - Applies the **`sync`** label (plus `automated`) and requests review from
   **CODEOWNERS** (the Frontend Core Team) — not a single assignee (bus factor),
   no round-robin (overkill for the team size).
@@ -119,18 +115,18 @@ by branch protection on `next` (see §5), consistent with §1.
 
 ### 5. Concurrency and branch protection
 
-**One shared `concurrency` group per target branch**, used by *every* workflow
+**One shared `concurrency` group per target branch**, used by _every_ workflow
 that pushes to it — `mutate-main`, `mutate-next`, `mutate-major` — each with
-`cancel-in-progress: false`. This serializes all writers of a branch against each
-other and removes the non-fast-forward races by design. (`publish.yml` moves from
-its current `publish-${{ github.ref }}` group to `mutate-main`.) As a belt-and-
-suspenders, each mutating job does **fetch-before-push with one retry** (on
-non-fast-forward: `git fetch` + re-merge + re-push).
+`cancel-in-progress: false`. This serializes all writers of a branch against
+each other and removes the non-fast-forward races by design. (`publish.yml`
+moves from its current `publish-${{ github.ref }}` group to `mutate-main`.) As a
+belt-and- suspenders, each mutating job does **fetch-before-push with one
+retry** (on non-fast-forward: `git fetch` + re-merge + re-push).
 
 **`next` is protected** (real-merge-commit-only for human PRs, direct pushes
 restricted), **with the automation identity as a bypass actor** for direct
 pushes. Humans go through a PR + merge commit; the bot pushes directly on the
-clean path (its pushes *are* merge commits, so the invariant holds). The bypass
+clean path (its pushes _are_ merge commits, so the invariant holds). The bypass
 must **not** waive the merge-method restriction for real PRs — only the
 direct-push block.
 
@@ -141,9 +137,10 @@ A forward-merged fix **produces a new `next` prerelease** so that `flow@next` �
 
 - The forward-merge stays **version-free** — it merges and pushes, nothing more.
 - The push to `next` triggers a **symmetric `publish-next.yml`** (`push: next`,
-  analogous to `publish.yml`) that runs `lerna version --conventional-prerelease`
-  → `X.Y.0-next.N+1` → publishes dist-tag `next`. This re-derives the version, so
-  the string the merge driver (§3) produced is irrelevant.
+  analogous to `publish.yml`) that runs
+  `lerna version --conventional-prerelease` → `X.Y.0-next.N+1` → publishes
+  dist-tag `next`. This re-derives the version, so the string the merge driver
+  (§3) produced is irrelevant.
 
 Because of idempotency (§2): the `fix:` push carries real code delta → `next`
 re-publishes; the later `chore(release):` push carries only version/changelog
@@ -152,8 +149,8 @@ double trigger collapses to exactly one meaningful publish.
 
 ### 7. The Promotion loop
 
-The back-merge after a Promotion needs **no special mechanism**. A Promotion is a
-`next → main` merge; the resulting push to `main` triggers the normal
+The back-merge after a Promotion needs **no special mechanism**. A Promotion is
+a `next → main` merge; the resulting push to `main` triggers the normal
 `forward-merge.yml`. Since the Release-PR merge commit has `next`'s tip as a
 parent, `next` is already an ancestor of `main`; the back-merge brings only the
 `chore(release): graduate to X.Y.0` churn, which the driver (§3) absorbs → an
@@ -184,8 +181,8 @@ already linted on their way into `main`, and merge commits are ignored by
 
 **Interface note (belongs to the routing guard, not this ADR):** the Promotion
 Release-PR `next → main` is full of `feat:` commits. The RFC #2711 routing guard
-("reject `feat:` on PRs to `main`") **must exempt** the case `head == next` (or a
-major line), or it would block the Promotion itself. Recorded here so the two
+("reject `feat:` on PRs to `main`") **must exempt** the case `head == next` (or
+a major line), or it would block the Promotion itself. Recorded here so the two
 designs fit together.
 
 ### 9. Implementation vehicle and permissions
@@ -254,5 +251,5 @@ convention — only with different branch names. It is not designed separately.
   `PUBLISH_PAT` bot as the direct-push bypass actor.
 - The routing-guard `head == next`/major-line exemption (§8) — tracked with the
   guard in RFC #2711.
-- All of the above is **gated on the 1.0.0 cut** (`main`/`next` established, repo
-  off the `0.2.0-alpha.*` line).
+- All of the above is **gated on the 1.0.0 cut** (`main`/`next` established,
+  repo off the `0.2.0-alpha.*` line).
