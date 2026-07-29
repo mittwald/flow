@@ -1,0 +1,111 @@
+name: Commit guard
+
+# Enforces the two commit-level gates of the 1.0.0 release model (RFC #2711):
+#
+# 1. Conventional PR title — the whole model derives versioning and the
+#    changelog from the merged commit's type. Because this repo squash-merges
+#    (the PR title becomes the commit subject), the PR *title* is what must be a
+#    valid Conventional Commit, so that is what we lint.
+# 2. Routing — features/breaking changes belong on `next` / a major line, not on
+#    `main`. This guard makes the dangerous direction ("feature into stable")
+#    mechanically hard. It is self-gating: dormant until the `next` branch exists
+#    (i.e. until the 1.0.0 cut), because pre-cut everything legitimately targets
+#    `main`.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: commit-guard-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  conventional-title:
+    name: Conventional PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint PR title
+        uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The Conventional Commit types Flow derives releases + changelog from.
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          # Scopes are a convention here (e.g. `fix(Button):`), not mandatory
+          # (e.g. `chore(release):` vs. a scopeless `ci:`), so don't force one.
+          requireScope: false
+
+  routing:
+    name: Routing (feature -> next, not main)
+    # Only PRs targeting the Stable line are subject to routing.
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Enforce fix-only routing on main
+        run: |
+          set -euo pipefail
+
+          # --- Self-gating -----------------------------------------------------
+          # The routing rule only applies once the `next` collection branch
+          # exists (after the 1.0.0 cut). Until then every change — features
+          # included — legitimately targets `main`, so the guard stays dormant.
+          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "::notice::'next' branch does not exist yet — routing guard dormant (pre-1.0.0-cut). Skipping."
+            exit 0
+          fi
+
+          # --- Promotion exemption (ADR 0004 §8) -------------------------------
+          # A Promotion PR (next -> main, or a major line -> main) is *supposed*
+          # to carry feat:/breaking commits. Exempt it, or it blocks the release.
+          if [ "$HEAD_REF" = "next" ] || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion source — routing guard exempt."
+            exit 0
+          fi
+
+          # --- The rule --------------------------------------------------------
+          fail=0
+
+          # A feature belongs on `next`, not directly on `main`.
+          if printf '%s' "$PR_TITLE" | grep -qiE '^feat(\([^)]+\))?!?:'; then
+            echo "::error::PR title is a 'feat' — features target 'next', not 'main'."
+            fail=1
+          fi
+
+          # Any breaking change (type! marker, or a BREAKING CHANGE footer)
+          # belongs on the major line, never directly on `main`.
+          if printf '%s' "$PR_TITLE" | grep -qE '^[a-z]+(\([^)]+\))?!:'; then
+            echo "::error::PR title marks a breaking change ('!') — breaking changes target the major line, not 'main'."
+            fail=1
+          fi
+          if printf '%s\n' "$PR_BODY" | grep -qE '^[[:space:]]*BREAKING(-| )CHANGE:'; then
+            echo "::error::PR body has a 'BREAKING CHANGE:' footer — breaking changes target the major line, not 'main'."
+            fail=1
+          fi
+
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::Route this PR to 'next' (feature) or a major line (breaking). Only fix:/docs:/ci:/chore:/… land on 'main'."
+            exit 1
+          fi
+
+          echo "Routing OK: no feat/breaking targeting 'main'."
