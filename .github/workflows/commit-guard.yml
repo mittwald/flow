@@ -6,11 +6,13 @@ name: Commit guard
 #    changelog from the merged commit's type. Because this repo squash-merges
 #    (the PR title becomes the commit subject), the PR *title* is what must be a
 #    valid Conventional Commit, so that is what we lint.
-# 2. Routing — features/breaking changes belong on `next` / a major line, not on
-#    `main`. This guard makes the dangerous direction ("feature into stable")
-#    mechanically hard. It is self-gating: dormant until the `next` branch exists
-#    (i.e. until the 1.0.0 cut), because pre-cut everything legitimately targets
-#    `main`.
+# 2. Routing — where a change is allowed to land:
+#      - a feature (`feat:`) belongs on `next`, not on `main`;
+#      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
+#        line, not on any standing line (`main` *or* `next`).
+#    This makes the dangerous directions mechanically hard. It is self-gating:
+#    dormant until the `next` branch exists (i.e. until the 1.0.0 cut), because
+#    pre-cut everything legitimately targets `main`.
 
 on:
   pull_request:
@@ -52,60 +54,70 @@ jobs:
           requireScope: false
 
   routing:
-    name: Routing (feature -> next, not main)
-    # Only PRs targeting the Stable line are subject to routing.
-    if: github.event.pull_request.base.ref == 'main'
+    name: Routing (feature -> next, breaking -> major line)
+    # PRs targeting a standing release line are subject to routing.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
     runs-on: ubuntu-latest
     env:
       PR_TITLE: ${{ github.event.pull_request.title }}
       PR_BODY: ${{ github.event.pull_request.body }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      BASE_REF: ${{ github.event.pull_request.base.ref }}
       REPO: ${{ github.repository }}
     steps:
-      - name: Enforce fix-only routing on main
+      - name: Enforce release-line routing
         run: |
           set -euo pipefail
 
           # --- Self-gating -----------------------------------------------------
-          # The routing rule only applies once the `next` collection branch
-          # exists (after the 1.0.0 cut). Until then every change — features
-          # included — legitimately targets `main`, so the guard stays dormant.
+          # Routing only applies once the `next` collection branch exists (after
+          # the 1.0.0 cut). Until then every change legitimately targets `main`,
+          # so the guard stays dormant. (A PR based on `next` can only exist once
+          # `next` does, so this check short-circuits correctly for both bases.)
           if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
             echo "::notice::'next' branch does not exist yet — routing guard dormant (pre-1.0.0-cut). Skipping."
             exit 0
           fi
 
-          # --- Promotion exemption (ADR 0004 §8) -------------------------------
-          # A Promotion PR (next -> main, or a major line -> main) is *supposed*
-          # to carry feat:/breaking commits. Exempt it, or it blocks the release.
-          if [ "$HEAD_REF" = "next" ] || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$'; then
-            echo "::notice::head='${HEAD_REF}' is a promotion source — routing guard exempt."
+          # --- Promotion / forward-merge exemption (ADR 0004 §8) ---------------
+          # A promotion PR (next -> main, major line -> main) or a sync PR is
+          # *supposed* to carry feat:/breaking commits. Exempt those heads, or
+          # they would block the release itself.
+          if [ "$HEAD_REF" = "next" ] \
+             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
+             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — routing guard exempt."
             exit 0
           fi
 
-          # --- The rule --------------------------------------------------------
+          # --- Classify the PR title / body ------------------------------------
+          is_feat=0
+          is_breaking=0
+          if printf '%s' "$PR_TITLE" | grep -qiE '^feat(\([^)]+\))?!?:'; then is_feat=1; fi
+          if printf '%s' "$PR_TITLE" | grep -qE '^[a-z]+(\([^)]+\))?!:'; then is_breaking=1; fi
+          if printf '%s\n' "$PR_BODY" | grep -qE '^[[:space:]]*BREAKING(-| )CHANGE:'; then is_breaking=1; fi
+
+          # --- The rules -------------------------------------------------------
           fail=0
 
+          # A breaking change belongs on the major line — never on a standing
+          # line (neither `main` nor `next`).
+          if [ "$is_breaking" -eq 1 ]; then
+            echo "::error::PR marks a breaking change — breaking changes target the major line, not '${BASE_REF}'."
+            fail=1
+          fi
+
           # A feature belongs on `next`, not directly on `main`.
-          if printf '%s' "$PR_TITLE" | grep -qiE '^feat(\([^)]+\))?!?:'; then
+          if [ "$BASE_REF" = "main" ] && [ "$is_feat" -eq 1 ]; then
             echo "::error::PR title is a 'feat' — features target 'next', not 'main'."
             fail=1
           fi
 
-          # Any breaking change (type! marker, or a BREAKING CHANGE footer)
-          # belongs on the major line, never directly on `main`.
-          if printf '%s' "$PR_TITLE" | grep -qE '^[a-z]+(\([^)]+\))?!:'; then
-            echo "::error::PR title marks a breaking change ('!') — breaking changes target the major line, not 'main'."
-            fail=1
-          fi
-          if printf '%s\n' "$PR_BODY" | grep -qE '^[[:space:]]*BREAKING(-| )CHANGE:'; then
-            echo "::error::PR body has a 'BREAKING CHANGE:' footer — breaking changes target the major line, not 'main'."
-            fail=1
-          fi
-
           if [ "$fail" -ne 0 ]; then
-            echo "::error::Route this PR to 'next' (feature) or a major line (breaking). Only fix:/docs:/ci:/chore:/… land on 'main'."
+            echo "::error::Routing: 'main' takes fix:/docs:/chore:/…; 'next' additionally takes feat:; breaking changes go to the major line."
             exit 1
           fi
 
-          echo "Routing OK: no feat/breaking targeting 'main'."
+          echo "Routing OK for base '${BASE_REF}'."
