@@ -28,7 +28,10 @@ export interface TabNavigationProps
     PropsWithClassName,
     FlowComponentProps<HTMLElement> {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus new
+ */
 export const TabNavigation = flowComponent("TabNavigation", (props) => {
   const { children, className, ref, ...rest } = props;
 
