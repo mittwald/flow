@@ -14,6 +14,10 @@ import {
 } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
+import {
+  ComponentStatusBadge,
+  getComponentStatusInfo,
+} from "@/lib/componentStatus";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
@@ -52,15 +56,32 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
     ? currentPathname.substring(0, lastSlashIndex)
     : currentPathname;
 
+  const component = treeItem.mdxSource.frontmatter.component;
+
   return (
     <Link
       href={`${pathname}${isComponent ? "/overview" : ""}`}
       aria-current={pathname === currentPage ? "page" : undefined}
     >
       {treeItem.getNavTitle()}
+      {component && <ComponentStatusBadge name={component} />}
     </Link>
   );
 };
+
+const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
+  if (!(treeItem instanceof MdxFile)) {
+    return 0;
+  }
+  const component = treeItem.mdxSource.frontmatter.component;
+  const status = component ? getComponentStatusInfo(component) : undefined;
+  return status?.level === "deprecated" ? 1 : 0;
+};
+
+const sortEntriesByStatus = (
+  entries: [string, MdxDirectoryTree | MdxFile][],
+): [string, MdxDirectoryTree | MdxFile][] =>
+  [...entries].sort(([, a], [, b]) => deprecatedRank(a) - deprecatedRank(b));
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
   const { tree, group } = props;
@@ -70,7 +91,7 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
-      {Object.entries(tree).map(([group, treeItem]) =>
+      {sortEntriesByStatus(Object.entries(tree)).map(([group, treeItem]) =>
         treeItem instanceof MdxFile ? (
           <NavigationLink key={group} treeItem={treeItem} />
         ) : (
@@ -104,12 +125,17 @@ const MainNavigation: FC<Props> = (props) => {
             aria-label={extractTextFromPath(mainPathSegment)}
             key={mainPathSegment}
           >
-            {Object.entries(selectedMainBranch).map(([group, treeItem]) =>
-              treeItem instanceof MdxFile ? (
-                <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
-              ) : (
-                <NavigationSection key={group} tree={treeItem} group={group} />
-              ),
+            {sortEntriesByStatus(Object.entries(selectedMainBranch)).map(
+              ([group, treeItem]) =>
+                treeItem instanceof MdxFile ? (
+                  <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
+                ) : (
+                  <NavigationSection
+                    key={group}
+                    tree={treeItem}
+                    group={group}
+                  />
+                ),
             )}
           </Navigation>
         </Section>
