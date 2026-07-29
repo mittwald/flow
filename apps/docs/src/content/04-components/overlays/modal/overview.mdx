@@ -36,16 +36,48 @@ einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
 
 # Ungespeicherte Änderungen
 
-Mit `confirmOnClose` muss das Schließen des Modals bestätigt werden – zum
-Beispiel, damit ungespeicherte Änderungen nicht unbemerkt verloren gehen. Die
-Bestätigung erscheint beim Schließen per Escape, per Klick außerhalb des Modals
-und über eine `<Action closeModal />`.
+Enthält ein Modal Eingaben, gehen diese beim Schließen verloren. Damit das nicht
+unbemerkt passiert, kann das Schließen zunächst einen Bestätigungs-Dialog
+auslösen, der fragt, ob die Änderungen wirklich verworfen werden sollen. Der
+Dialog ist Teil des Modals – du musst ihn nicht selbst bauen, sondern nur
+festlegen, wann es etwas zu verlieren gibt.
+
+## Wann der Dialog erscheint
+
+Bestätigt werden die Wege, auf denen ein Modal beiläufig geschlossen wird: per
+Escape, per Klick außerhalb des Modals und über eine `<Action closeModal />`.
 
 Aktionen in der `<ActionGroup />` und der Close-Button in der Überschrift
-schließen das Modal weiterhin direkt: Dort ist das Verwerfen eine bewusste
-Entscheidung des Nutzers.
+schließen das Modal dagegen direkt. Dort ist das Verwerfen eine bewusste
+Entscheidung des Nutzers, die nicht noch einmal abgefragt werden muss.
+
+## Manuell festlegen
+
+Mit `confirmOnClose` entscheidest du selbst, wann eine Bestätigung nötig ist –
+zum Beispiel abhängig davon, ob ein Feld gefüllt ist. Der Prop kann sich
+jederzeit ändern: Sobald es nichts mehr zu verwerfen gibt, schließt das Modal
+wieder ohne Rückfrage.
 
 <LiveCodeEditor example="confirmOnClose" editorCollapsed />
+
+## Automatisch bei einer geänderten Form
+
+Enthält das Modal eine
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview),
+übernimmt diese die Entscheidung: Sobald die Form _dirty_ ist – der Nutzer also
+etwas geändert hat –, wird das Schließen bestätigt. Nach einem erfolgreichen
+Submit oder einem `form.reset()` ist die Form wieder unverändert und das Modal
+schließt direkt. `confirmOnClose` brauchst du dafür nicht.
+
+<Alert>
+  <Heading>Noch nicht standardmäßig aktiv</Heading>
+  <Content>
+    Das automatische Verhalten hängt an dem globalen Flag
+    `requireCloseModalConfirmationOnUnsavedChanges`, das die Anwendung erst
+    aktivieren muss. Ist es nicht gesetzt, führt nur `confirmOnClose` zum
+    Bestätigungs-Dialog.
+  </Content>
+</Alert>
 
 ---
 
