@@ -31,6 +31,7 @@ export const Navigation = flowComponent("Navigation", (props) => {
       size: "m",
     },
     Badge: { className: styles.badge },
+    AlertBadge: { className: styles.badge },
     CounterBadge: { className: styles.badge },
   };
 
