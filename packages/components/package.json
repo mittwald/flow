@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.968",
+  "version": "0.2.0-alpha.973",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
@@ -60,10 +60,13 @@
   "dependencies": {
     "@codemirror/language": "^6.12.4",
     "@codemirror/lint": "^6.9.7",
+    "@codemirror/state": "^6.7.1",
+    "@codemirror/view": "^6.43.6",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.3.1",
     "@internationalized/string": "^3.2.9",
     "@internationalized/string-compiler": "^3.4.1",
+    "@lezer/common": "^1.5.2",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
     "@mittwald/password-tools-js": "3.0.0-alpha.31",

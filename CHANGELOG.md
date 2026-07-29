@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+### Bug Fixes
+
+* **CodeEditor:** pin CodeMirror/Lezer singletons as direct deps ([#2745](https://github.com/mittwald/flow/issues/2745)) ([020c77d](https://github.com/mittwald/flow/commit/020c77dc4b9f354e1258608b7f09ae6ad6f9d3b5))
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
 
 ### Bug Fixes
