@@ -71,9 +71,15 @@ change.
 
 ### Scope
 
-Only **non-private** (`private !== true`) `package.json` files — the publishable
-packages that form the consumer contract. Private apps/tooling and the workspace
-root are skipped.
+Only the **publishable Flow packages** — those whose `name` starts with
+`@mittwald/` **and** that are not private. Private apps/tooling, the workspace
+root, and vendored patch manifests (e.g. `packages/components/patching`, named
+`acorn`) are skipped.
+
+**Gotcha — `private` is declared inconsistently.** Some manifests use the
+boolean `"private": true`, others the **string** `"private": "true"`
+(`flow-core`, `icons-base`). A `private !== true` test is therefore unreliable;
+treat a package as private when `private === true || private === "true"`.
 
 ## Architecture
 
@@ -99,7 +105,10 @@ collectFindings(packages) -> Finding[]        // packages: {name, base, head}
   `"engines.node"` or `"peer:<name>"`.
 - `collectFindings` receives already-loaded base/head `package.json` objects (or
   `null` when the file is absent on a side), so it is pure and fully testable
-  without git.
+  without git. It internally skips packages that are not publishable (a private
+  `pkg` helper: `@mittwald/`-scoped and not private, robust to the
+  string/boolean `private` gotcha) and packages new in this PR
+  (`base === null`).
 
 ### Range model (deterministic, hermetic)
 
@@ -145,20 +154,24 @@ intervals.
 
 ### Guard shell (`version-contract-guard.mjs`)
 
-Runs inside the checked-out repo:
+Runs inside the checked-out repo (a PR merge checkout, so the working tree is
+head-merged-into-base):
 
-1. `git ls-files '**/package.json' 'package.json'` → candidate files present in
-   HEAD.
+1. `git ls-files` → filter to entries equal to `package.json` or ending in
+   `/package.json` (reliable at any depth; git tracks no `node_modules`).
 2. For each: read HEAD JSON (working tree); read base JSON via
-   `git show origin/$BASE_REF:<path>` (absent ⇒ `null`). Skip if HEAD
-   `private === true`.
-3. Build `{name, base, head}` list → `collectFindings`.
+   `git show <BASE_SHA>:<path>` (absent ⇒ `null`).
+3. Build `{name, base, head}` list → `collectFindings`, which itself skips
+   non-publishable packages (not `@mittwald/`-scoped, or private) and new
+   packages (`base === null`).
 4. Compute `isBreakingMarker(PR_TITLE, PR_BODY)`.
 5. If findings exist **and** no marker → print each finding as a GitHub
    `::error::` annotation naming package + surface + old→new, then `exit 1`.
    Else print an OK/notice and `exit 0`.
 
-Env in: `BASE_REF`, `PR_TITLE`, `PR_BODY`.
+Env in: `BASE_SHA` (the PR base commit, `github.event.pull_request.base.sha`),
+`PR_TITLE`, `PR_BODY`. Using the base **SHA** (reachable in a `fetch-depth: 0`
+merge checkout) avoids depending on an `origin/<branch>` remote-tracking ref.
 
 ### Workflow job (`version-contract` in `commit-guard.yml`)
 
@@ -168,15 +181,17 @@ version-contract:
   if: base == 'main' || base == 'next'
   steps:
     - id: gate           # self-gating + exemptions -> outputs.active
-    - if active: actions/checkout (fetch base ref for `git show origin/$BASE`)
+    - if active: actions/checkout with fetch-depth: 0 (base SHA reachable in the merge checkout)
     - if active: node --test .github/scripts/version-contract-lib.test.mjs
-    - if active: node .github/scripts/version-contract-guard.mjs   # env: BASE_REF/PR_TITLE/PR_BODY
+    - if active: node .github/scripts/version-contract-guard.mjs   # env: BASE_SHA/PR_TITLE/PR_BODY
 ```
 
 - The `gate` step reproduces `routing`'s self-gating + exemption bash and writes
   a single `active` output; all heavy steps are
   `if: steps.gate.outputs.active == 'true'`.
-- Checkout fetches the base ref so `git show origin/$BASE_REF:<path>` resolves.
+- `fetch-depth: 0` makes the base commit reachable, so
+  `git show <BASE_SHA>:<path>` resolves without relying on an `origin/<branch>`
+  remote-tracking ref.
 - The `node --test` step runs the lib suite on every invocation, so a broken
   classifier fails the job rather than mis-passing a PR.
 
