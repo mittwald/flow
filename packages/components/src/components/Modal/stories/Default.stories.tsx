@@ -187,14 +187,16 @@ export const WithConfirmOnClose: Story = {
         >
           <Heading>New Squadron</Heading>
           <Content>
-            <Text>
-              Enter a name and close the modal with Escape or by clicking
-              outside: the unsaved changes have to be confirmed. Abort closes
-              immediately.
-            </Text>
-            <TextField value={squadronName} onChange={setSquadronName}>
-              <Label>Squadron name</Label>
-            </TextField>
+            <Section>
+              <Text>
+                Enter a name and close the modal with Escape or by clicking
+                outside: the unsaved changes have to be confirmed. Abort closes
+                immediately.
+              </Text>
+              <TextField value={squadronName} onChange={setSquadronName}>
+                <Label>Squadron name</Label>
+              </TextField>
+            </Section>
           </Content>
           <ActionGroup>
             <Action closeModal>

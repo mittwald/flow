@@ -7,6 +7,7 @@ import {
   Label,
   Modal,
   ModalTrigger,
+  Section,
   Text,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -26,19 +27,21 @@ export default () => {
         <Heading>Projekt-Beschreibung</Heading>
 
         <Content>
-          <Text>
-            Gib eine Beschreibung ein und schließe das Modal
-            anschließend mit Escape oder per Klick außerhalb
-            – das Verwerfen der Änderungen muss bestätigt
-            werden.
-          </Text>
+          <Section>
+            <Text>
+              Gib eine Beschreibung ein und schließe das
+              Modal anschließend mit Escape oder per Klick
+              außerhalb – das Verwerfen der Änderungen muss
+              bestätigt werden.
+            </Text>
 
-          <TextField
-            value={description}
-            onChange={setDescription}
-          >
-            <Label>Beschreibung</Label>
-          </TextField>
+            <TextField
+              value={description}
+              onChange={setDescription}
+            >
+              <Label>Beschreibung</Label>
+            </TextField>
+          </Section>
         </Content>
 
         <ActionGroup>
