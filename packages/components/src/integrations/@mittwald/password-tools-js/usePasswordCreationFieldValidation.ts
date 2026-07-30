@@ -2,6 +2,7 @@ import type { PolicyGenericDeclaration } from ".";
 import { defaultPasswordCreationPolicy, Policy } from ".";
 import { useMemo, useRef } from "react";
 import type { Validate } from "react-hook-form";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export const usePasswordCreationFieldValidation = (
   genericValidationPolicy: PolicyGenericDeclaration = defaultPasswordCreationPolicy,
@@ -41,5 +42,13 @@ export const usePasswordCreationFieldValidation = (
 };
 
 /** @deprecated Use `usePasswordCreationFieldValidation` instead. */
-export const generatePasswordCreationFieldValidation =
-  usePasswordCreationFieldValidation;
+export const generatePasswordCreationFieldValidation = (
+  genericValidationPolicy: PolicyGenericDeclaration = defaultPasswordCreationPolicy,
+): Validate<string, unknown> => {
+  const warnDeprecation = useWarnDeprecation();
+  warnDeprecation(
+    "The 'generatePasswordCreationFieldValidation' function is deprecated and will be removed in a future release. Use 'usePasswordCreationFieldValidation' instead.",
+  );
+
+  return usePasswordCreationFieldValidation(genericValidationPolicy);
+};

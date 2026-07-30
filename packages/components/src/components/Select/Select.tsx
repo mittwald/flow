@@ -14,6 +14,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SelectProps
   extends
@@ -27,7 +28,7 @@ export interface SelectProps
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
   onChange?: (value: Key | Key[] | null) => void;
-  /** @deprecated */
+  /** @deprecated Use `onChange` instead. */
   onSelectionChange?: (value: Key | Key[] | null) => void;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
@@ -44,6 +45,13 @@ export const Select = flowComponent("Select", (props) => {
     ref,
     ...rest
   } = props;
+
+  const warnDeprecation = useWarnDeprecation();
+  if (onSelectionChange !== undefined) {
+    warnDeprecation(
+      "The 'onSelectionChange' prop is deprecated and will be removed in a future release. Use 'onChange' instead.",
+    );
+  }
 
   const {
     FieldErrorView,
