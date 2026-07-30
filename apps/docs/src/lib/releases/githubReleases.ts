@@ -25,11 +25,11 @@ const npmUrl = (version: string) =>
   `https://www.npmjs.com/package/@mittwald/flow-react-components/v/${version}`;
 
 /**
- * Parse fix lines out of a (lerna/conventional-changelog) release body. Matches
- * markdown bullet lines and extracts a trailing commit sha, whether written as
- * a bare `(a1b2c3d)` or a markdown link
- * `([a1b2c3d](https://.../commit/a1b2c3d))`. Lines without a sha are skipped
- * (they are not commit-linkable fixes).
+ * Parse fix lines out of a (lerna-lite / conventional-changelog) release body.
+ * The changelog appends up to two markdown links per line — an issue/PR link
+ * and the commit link. We take the sha from the trailing commit URL when
+ * present (else the last hex token on the line) and strip all trailing link
+ * groups from the description. Lines with no sha are skipped.
  */
 const parseFixes = (body: string | null): Fix[] => {
   if (!body) {
@@ -41,14 +41,19 @@ const parseFixes = (body: string | null): Fix[] => {
     if (!line.startsWith("-") && !line.startsWith("*")) {
       continue;
     }
-    const shaMatch = line.match(/([0-9a-f]{7,40})/i);
-    if (!shaMatch) {
+
+    const commitUrlMatch = line.match(/commit\/([0-9a-f]{7,40})/i);
+    const hexTokens = line.match(/[0-9a-f]{7,40}/gi);
+    const rawSha = commitUrlMatch?.[1] ?? hexTokens?.[hexTokens.length - 1];
+    if (!rawSha) {
       continue;
     }
-    const sha = shaMatch[1].slice(0, 7);
+    const sha = rawSha.slice(0, 7);
+
     const text = line
       .replace(/^[-*]\s*/, "")
-      .replace(/\(?\[?[0-9a-f]{7,40}\]?(\([^)]*\))?\)?\.?$/i, "")
+      .replace(/(\s*\(\[[^\]]*\]\([^)]*\)\))+\s*\.?$/g, "")
+      .replace(/\s*\([0-9a-f]{7,40}\)\s*\.?$/i, "")
       .trim();
     if (text) {
       fixes.push({
