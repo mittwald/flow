@@ -108,17 +108,23 @@ jobs:
             # `main`: conflict-resolution commits go on `sync/main-to-next`.
             local branch="sync/main-to-next"
 
-            # Create/update the sync branch at main's tip. Idempotent: an already
-            # open PR only gets its branch fast-forwarded, never a duplicate PR.
-            git push --force origin "origin/main:refs/heads/${branch}"
-
+            # If a sync PR is already open, a maintainer may be resolving the
+            # conflict on that branch RIGHT NOW. Never touch the branch in that
+            # case — a force-push would silently discard their resolution
+            # commits. Bail out and let the existing PR carry the resolution;
+            # once it merges, the next run re-evaluates against the new `next`.
             local open_pr
             open_pr="$(gh pr list --repo "$REPO" --head "$branch" \
               --base next --state open --json number --jq '.[].number')"
             if [ -n "$open_pr" ]; then
-              echo "::notice::Sync PR #${open_pr} already open — branch fast-forwarded to main."
+              echo "::notice::Sync PR #${open_pr} already open — leaving its branch untouched (a maintainer may be resolving it)."
               return 0
             fi
+
+            # No open sync PR → safe to (re)create the branch at main's tip. Any
+            # commits here are stale (a previously closed/merged sync attempt),
+            # so resetting to main is correct.
+            git push --force origin "origin/main:refs/heads/${branch}"
 
             # Labels must exist before use; create idempotently.
             gh label create sync --repo "$REPO" --color BFD4F2 \
