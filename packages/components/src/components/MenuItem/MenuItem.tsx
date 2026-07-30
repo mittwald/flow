@@ -23,6 +23,8 @@ export interface MenuItemProps
   isFailed?: boolean;
   /** Disables button but keeps it focusable. */
   "aria-disabled"?: boolean;
+  /** Marks the menu item as referring to the currently active page. */
+  "aria-current"?: string;
 }
 
 const disablePendingProps = (props: MenuItemProps) => {
@@ -54,11 +56,22 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     id,
     ref,
     "aria-disabled": ariaDisabled,
+    "aria-current": ariaCurrent,
     isPending,
     isSucceeded,
     isFailed,
     ...rest
   } = props;
+
+  /**
+   * React Aria drops `aria-current` from the props it forwards to the DOM, so
+   * the current state is exposed as a data attribute (`data-*` passes the
+   * filter) — that is what the `menuItem` styling matches on. Every
+   * `aria-current` value marks the item as current, except an explicit
+   * "false".
+   */
+  const currentProps =
+    ariaCurrent && ariaCurrent !== "false" ? { "data-current": true } : {};
 
   const rootClassName = clsx(
     styles.menuItem /**
@@ -99,6 +112,7 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
   return (
     <Aria.MenuItem
       {...rest}
+      {...currentProps}
       key={id}
       id={id}
       className={rootClassName}

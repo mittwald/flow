@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import type { Key } from "react-aria";
 
 const meta: Meta<typeof Tabs> = {
-  title: "Navigation/Tabs",
+  title: "Structure/Tabs",
   component: Tabs,
   parameters: {
     controls: { disable: true },

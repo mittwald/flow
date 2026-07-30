@@ -1,15 +1,19 @@
 @use "@/styles/mixins/focus";
 
 .tabTitle {
-  padding: var(--tabs--padding);
-  background-color: var(--tabs--background-color--default);
-  color: var(--tabs--color);
+  position: relative;
+  padding-block: var(--tabs--padding-y);
+  padding-inline: var(--tabs--padding-x);
+  color: var(--tabs--color--default);
   cursor: default;
   white-space: nowrap;
   transition-property: background-color;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
   column-gap: var(--tabs--spacing);
+  border-radius: var(--tabs--corner-radius);
 
   @include focus.focus;
 
@@ -17,19 +21,22 @@
     outline-offset: calc(var(--size-px--xs) * -1);
   }
 
-  &:hover {
-    background-color: var(--tabs--background-color--hover);
-    transition-duration: var(--transition--duration--default);
-  }
+  /* The active indicator is painted below the titles (it precedes them in the
+     tab list), so the selected title must not paint a background over it. */
+  &:not([data-selected]) {
+    &:hover {
+      background-color: var(--tabs--background-color--hover);
+      transition-duration: var(--transition--duration--default);
+    }
 
-  &[data-pressed] {
-    background-color: var(--tabs--background-color--pressed);
-    transition-duration: var(--transition--duration--default);
+    &[data-pressed] {
+      background-color: var(--tabs--background-color--pressed);
+      transition-duration: var(--transition--duration--default);
+    }
   }
 
   &[aria-disabled="true"] {
-    color: var(--tabs--disabled-color);
-    background-color: var(--tabs--background-color--default);
+    color: var(--tabs--color--disabled);
   }
 
   .text {
@@ -41,7 +48,6 @@
 
 /* selected tab */
 .tabTitle[data-selected] {
-  background-color: var(--tabs--background-color--selected);
   font-weight: var(--tabs--font-weight--selected);
 }
 

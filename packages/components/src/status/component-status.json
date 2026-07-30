@@ -379,6 +379,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#TabNavigation": {
+    "level": "stable",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#Table": {
     "level": "stable",
     "isNew": false
