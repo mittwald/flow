@@ -1,8 +1,11 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 
-test.each(testEnvironments)(
+// TabNavigation was introduced in alpha.977.
+const tabNavigationSince = "0.2.0-alpha.977";
+
+test.skipIf(crossVersion({ below: tabNavigationSince })).each(testEnvironments)(
   "TabNavigation (%s)",
   async ({
     testScreenshot,
@@ -26,7 +29,7 @@ test.each(testEnvironments)(
   },
 );
 
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: tabNavigationSince })).each(testEnvironments)(
   "TabNavigation collapsed (%s)",
   async ({ testScreenshot, render, components: { TabNavigation, Link } }) => {
     await render(
