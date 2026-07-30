@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.979](https://github.com/mittwald/flow/compare/0.2.0-alpha.978...0.2.0-alpha.979) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+### Features
+
+* **TabNavigation:** Introduce tab navigation ([#2634](https://github.com/mittwald/flow/issues/2634)) ([b83a414](https://github.com/mittwald/flow/commit/b83a414b18e1868196aa6f839e086d603b7debfb))
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+### Features
+
+* **Select:** Support multi select ([#2603](https://github.com/mittwald/flow/issues/2603)) ([fc7b631](https://github.com/mittwald/flow/commit/fc7b6318ea388507cc1bebae303b48b0ce92d625))
+
 # [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

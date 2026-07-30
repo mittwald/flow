@@ -12,6 +12,7 @@ import {
 import { dummyText } from "@/lib/dev/dummyText";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
@@ -20,11 +21,20 @@ const meta: Meta<typeof Select> = {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
+    selectionMode: "single",
+  },
+  argTypes: {
+    selectionMode: {
+      control: "inline-radio",
+      options: ["single", "multiple"],
+    },
   },
   render: (props) => (
     <Select {...props}>
       <Label>Starship</Label>
-      <Option>Millennium Falcon</Option>
+      <Option>
+        Millennium Falcon <Badge>Latest</Badge>
+      </Option>
       <Option>X-Wing</Option>
       <Option>TIE Fighter</Option>
       <Option>Star Destroyer</Option>
@@ -56,7 +66,7 @@ export const WithFieldDescription: Story = {
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <Select {...props} defaultSelectedKey="Millennium Falcon">
+    <Select {...props} defaultValue="Millennium Falcon">
       <Label>Starship</Label>
       <Option value="Millennium Falcon">Millennium Falcon</Option>
       <Option value="X-Wing">X-Wing</Option>
