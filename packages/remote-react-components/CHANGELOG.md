@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+### Bug Fixes
+
+* **remote-react-components:** stabilize flaky cross-version iframe suite ([#2750](https://github.com/mittwald/flow/issues/2750)) ([15ee59d](https://github.com/mittwald/flow/commit/15ee59dde5774c7fb1e54e5b0eef0249ac591b13))
+
 # [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
 
 ### Features
