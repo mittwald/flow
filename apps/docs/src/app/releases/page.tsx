@@ -7,16 +7,13 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import { getReleases } from "@/lib/releases/getReleases";
+import ReleaseCard from "./_components/ReleaseCard";
 
 export const metadata: Metadata = {
   title: "Releases",
   description:
     "Überblick über die veröffentlichten Flow-Releases, ihre Highlights und die enthaltenen Fixes.",
 };
-
-/** Deterministic anchor/id slug for a release, e.g. "1.1.0" -> "release-1-1-0". */
-export const releaseSlug = (version: string): string =>
-  `release-${version.replace(/\./g, "-")}`;
 
 export default async function ReleasesPage() {
   const releases = await getReleases();
@@ -36,14 +33,7 @@ export default async function ReleasesPage() {
           </LayoutCard>
         ) : (
           releases.map((release) => (
-            <LayoutCard key={release.version}>
-              <Section>
-                <Heading level={2} id={releaseSlug(release.version)}>
-                  {release.version} — {release.title}
-                </Heading>
-                <Text>{release.date}</Text>
-              </Section>
-            </LayoutCard>
+            <ReleaseCard key={release.version} release={release} />
           ))
         )}
       </Flex>
