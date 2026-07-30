@@ -107,3 +107,33 @@ export function parseRange(range) {
   }
   return normalise(intervals);
 }
+
+/** True iff every interval of A is covered by a single interval of B. */
+function isSubset(A, B) {
+  return A.every(([lo, hi]) =>
+    B.some(([blo, bhi]) => cmp(blo, lo) <= 0 && cmpHi(bhi, hi) >= 0),
+  );
+}
+
+/**
+ * Classify a range change old→new.
+ *
+ * @returns {"ok" | "narrowed" | "unparseable"}
+ */
+export function classifyRangeChange(oldRange, newRange) {
+  const A = parseRange(oldRange);
+  const B = parseRange(newRange);
+  if (A === null || B === null) return "unparseable";
+  // old ⊆ new  ⇒  new is a superset (widened or equal)  ⇒  ok.
+  return isSubset(A, B) ? "ok" : "narrowed";
+}
+
+/**
+ * Classify an engines.node change. An absent floor (either side) means "*".
+ *
+ * @returns {"ok" | "raised" | "unparseable"}
+ */
+export function classifyEngineChange(oldNode, newNode) {
+  const verdict = classifyRangeChange(oldNode ?? "*", newNode ?? "*");
+  return verdict === "narrowed" ? "raised" : verdict;
+}
