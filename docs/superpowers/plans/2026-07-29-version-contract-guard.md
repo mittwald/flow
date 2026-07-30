@@ -48,6 +48,12 @@ dependencies), `node:test` built-in test runner.
 
 ### Task 1: Range model + `parseRange`
 
+> **Amended during execution:** `parseVersion` was tightened to require a full
+> `X.Y.Z` triple — partial versions (`16`, `1.2`, `~1`, `^19`) now fail closed
+> (`parseRange` returns `null`) rather than parsing loosely. The shipped
+> `.github/scripts/version-contract-lib.{mjs,test.mjs}` reflect this; the code
+> block below shows the original, looser snippet.
+
 **Files:**
 
 - Create: `.github/scripts/version-contract-lib.mjs`

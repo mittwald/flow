@@ -60,6 +60,7 @@ test("classifyEngineChange: raises vs relaxations", () => {
   assert.equal(classifyEngineChange(">=24.0.0", ">=20.0.0"), "ok"); // lower
   assert.equal(classifyEngineChange(">=24.0.0", null), "ok"); // remove floor
   assert.equal(classifyEngineChange(">=24.0.0", ">=24.0.0"), "ok"); // unchanged
+  assert.equal(classifyEngineChange(">1", ">=24.0.0"), "unparseable"); // garbage old floor → fail-closed
 });
 
 test("isBreakingMarker: title bang and body trailer", () => {
@@ -162,6 +163,25 @@ test("collectFindings: non-publishable and new packages are skipped", () => {
         name: "@mittwald/flow-new",
         engines: { node: ">=24.0.0" },
         peerDependencies: { react: "^19.0.0" },
+      },
+    },
+  ];
+  assert.deepEqual(collectFindings(packages), []);
+});
+
+test("collectFindings: boolean private:true is treated as private (skipped)", () => {
+  const packages = [
+    {
+      name: "@mittwald/flow-codemods",
+      base: {
+        name: "@mittwald/flow-codemods",
+        private: true, // boolean form (the common in-repo form)
+        peerDependencies: { react: "*" },
+      },
+      head: {
+        name: "@mittwald/flow-codemods",
+        private: true,
+        peerDependencies: { react: "^19.0.0" }, // would narrow, but skipped
       },
     },
   ];

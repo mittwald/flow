@@ -199,6 +199,9 @@ export function collectFindings(packages) {
       if (!(key in headPeers)) continue; // removed peer = fewer constraints = ok
       const oldR = basePeers[key];
       const newR = headPeers[key];
+      // A peer whose range never parses (e.g. `workspace:*`) only yields a
+      // finding when its string actually changes; an unchanged value is
+      // skipped here, so static workspace peers never trip the guard.
       if (oldR === newR) continue;
       const v = classifyRangeChange(oldR, newR);
       if (v === "narrowed" || v === "unparseable") {
