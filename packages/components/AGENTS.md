@@ -149,8 +149,16 @@ Remote generation details:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
 - Props of these components are consumed by mStudio extension developers — no
-  breaking changes; deprecate instead. Why this matters:
+  breaking changes; deprecate instead (see
+  [Deprecating an API](#deprecating-an-api)). Why this matters:
   [docs/remote-ui.md](../../docs/remote-ui.md).
+
+## Deprecating an API
+
+Never break a shipped API — keep the old path working and warn at runtime with
+`useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
+of deprecated entry point: a prop, a whole component, a hook, or an integration
+export (`nextjs`, `password-tools`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -158,6 +166,17 @@ if ("action" in props) {
   warnDeprecation("The 'action' prop is deprecated. Use 'onAction' instead.");
 }
 ```
+
+- Warn a deprecated **prop** only when it is actually passed; warn a deprecated
+  **component** unconditionally at the top of its render.
+- `useWarnDeprecation` is a hook — it must run inside a render or another hook.
+  A class constructor works only when it is itself a `Model.useNew`-style
+  render-time hook (e.g. `List`), not when it is constructed conditionally (e.g.
+  `new ItemView(…)`); warn one level up in that case.
+- Messages are deduplicated per string; follow the shape
+  `The '<name>' <prop|component|function> is deprecated and will be removed in a future release. Use '<replacement>' instead.`
+- A type-only deprecation (e.g. a deprecated type alias) has no runtime path —
+  nothing to warn.
 
 ## Styling
 

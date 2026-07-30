@@ -345,11 +345,13 @@ and consistency enforced by tooling, not maintained by hand.
   `@flr-generate` props.
   - ✓ generated props are serializable, least-privilege, backward-compatible.
   - ✗ host-only/non-serializable → ignore remotely or stay host-only.
-- **Deprecation warning hook (`useWarnDeprecation`)** — warn on legacy prop
-  usage, keep supporting it.
+- **Deprecation warning hook (`useWarnDeprecation`)** — warn on any deprecated
+  runtime path (prop, whole component, or hook/alias), keep supporting it.
   `src/components/CartesianChart/CartesianChart.tsx:59`
-  - ✓ a shipped remote prop/API must keep working while guiding to its
-    replacement.
+  - ✓ any shipped API (remote prop, non-remote component, integration export)
+    must keep working while guiding to its replacement.
+  - ✗ a deprecation with no runtime entry point (a type-only alias) — nothing to
+    warn; or a spot with no render/hook context (warn one level up instead).
   - ✗ unshipped/internal API → change directly.
 - **Controlled remote adapter** `[undocumented]` — shared hooks bridge
   serialized value/callbacks. `src/lib/remote/useControlledHostValueProps.ts:23`
