@@ -31,8 +31,12 @@
   /* Elements */
   :where(.icon) {
     color: var(--menu-item--icon-color--default);
-    transition-property: background-color;
+    transition-property: color;
     transition-duration: var(--transition--duration--default);
+  }
+
+  .checkMark {
+    opacity: 0;
   }
 
   &:hover {
@@ -59,6 +63,10 @@
   &[data-selected] {
     :where(.icon) {
       color: var(--menu-item--icon-color--current);
+    }
+
+    .checkMark {
+      opacity: 1;
     }
 
     .controlIcon {
