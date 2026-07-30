@@ -52,6 +52,7 @@ const parseFixes = (body: string | null): Fix[] => {
 
     const text = line
       .replace(/^[-*]\s*/, "")
+      .replace(/,?\s*closes\s+.*$/i, "")
       .replace(/(\s*\(\[[^\]]*\]\([^)]*\)\))+\s*\.?$/g, "")
       .replace(/\s*\([0-9a-f]{7,40}\)\s*\.?$/i, "")
       .trim();

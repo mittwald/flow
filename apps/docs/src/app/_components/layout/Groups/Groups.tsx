@@ -11,6 +11,19 @@ interface Props {
   render?: "menuItem" | "link";
 }
 
+const SECTION_ORDER = [
+  "01-get-started",
+  "releases",
+  "02-foundations",
+  "03-patterns",
+  "04-components",
+];
+
+const orderIndex = (group: string): number => {
+  const i = SECTION_ORDER.indexOf(group);
+  return i === -1 ? SECTION_ORDER.length : i;
+};
+
 export const Groups: FC<Props> = (props) => {
   const { docs, render = "link" } = props;
 
@@ -19,19 +32,6 @@ export const Groups: FC<Props> = (props) => {
   const navGroups = groupBy(deserializedDocs, (d) => d.pathname.split("/")[1]);
 
   const currentPathname = usePathname();
-
-  const SECTION_ORDER = [
-    "01-get-started",
-    "releases",
-    "02-foundations",
-    "03-patterns",
-    "04-components",
-  ];
-
-  const orderIndex = (group: string): number => {
-    const i = SECTION_ORDER.indexOf(group);
-    return i === -1 ? SECTION_ORDER.length : i;
-  };
 
   return Object.entries(navGroups)
     .sort(([a], [b]) => orderIndex(a) - orderIndex(b))

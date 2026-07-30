@@ -42,8 +42,13 @@ export const ReleaseCard: FC<{ release: Release }> = ({ release }) => {
         {release.body && <Markdown headingOffset={2}>{release.body}</Markdown>}
 
         <Text>
-          <Link href={release.npmUrl}>npm</Link> ·{" "}
-          <Link href={release.githubUrl}>GitHub Release</Link>
+          <Link href={release.npmUrl} target="_blank">
+            npm
+          </Link>{" "}
+          ·{" "}
+          <Link href={release.githubUrl} target="_blank">
+            GitHub Release
+          </Link>
         </Text>
 
         {release.patchGroups.length > 0 && (

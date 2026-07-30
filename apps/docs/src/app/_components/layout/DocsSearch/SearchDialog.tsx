@@ -117,8 +117,10 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
       return [];
     }
     return DEFAULT_SECTIONS.flatMap((section) => {
-      const inSection = index.filter((entry) =>
-        entry.url.startsWith(`/${section.segment}/`),
+      const inSection = index.filter(
+        (entry) =>
+          entry.url === `/${section.segment}` ||
+          entry.url.startsWith(`/${section.segment}/`),
       );
       const landing =
         inSection.find((entry) => entry.url.endsWith("/overview")) ??
