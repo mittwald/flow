@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
+
+### Features
+
+* **components:** warn on all remaining deprecated APIs via useWarnDeprecation ([#2757](https://github.com/mittwald/flow/issues/2757)) ([8a945e6](https://github.com/mittwald/flow/commit/8a945e652cf919abe8a6b5577f5bda24a62cdcc9))
+
 # [0.2.0-alpha.981](https://github.com/mittwald/flow/compare/0.2.0-alpha.980...0.2.0-alpha.981) (2026-07-30)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
