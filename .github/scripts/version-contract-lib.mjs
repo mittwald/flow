@@ -137,3 +137,80 @@ export function classifyEngineChange(oldNode, newNode) {
   const verdict = classifyRangeChange(oldNode ?? "*", newNode ?? "*");
   return verdict === "narrowed" ? "raised" : verdict;
 }
+
+/**
+ * Breaking-marker detection — identical to the routing job's classification.
+ *
+ * @returns {boolean}
+ */
+export function isBreakingMarker(title, body) {
+  const t = String(title ?? "");
+  const b = String(body ?? "");
+  if (/^[a-z]+(\([^)]+\))?!:/.test(t)) return true;
+  if (/^[ \t]*BREAKING(-| )CHANGE:/m.test(b)) return true;
+  return false;
+}
+
+/**
+ * A publishable Flow package: @mittwald/-scoped and not private (string OR
+ * boolean).
+ */
+function isPublishable(pkg) {
+  if (!pkg || typeof pkg.name !== "string") return false;
+  if (!pkg.name.startsWith("@mittwald/")) return false;
+  if (pkg.private === true || pkg.private === "true") return false;
+  return true;
+}
+
+/**
+ * @typedef {{
+ *   package: string;
+ *   surface: string;
+ *   kind: string;
+ *   detail: string;
+ * }} Finding
+ * @param {{ name: string; base: object | null; head: object | null }[]} packages
+ * @returns {Finding[]}
+ */
+export function collectFindings(packages) {
+  /** @type {Finding[]} */
+  const findings = [];
+  for (const { name, base, head } of packages) {
+    if (!isPublishable(head)) continue; // not a consumer-facing Flow package
+    if (!base) continue; // new package: no prior contract to break
+
+    const oldNode = base.engines?.node ?? null;
+    const newNode = head.engines?.node ?? null;
+    if (oldNode !== newNode) {
+      const v = classifyEngineChange(oldNode, newNode);
+      if (v === "raised" || v === "unparseable") {
+        findings.push({
+          package: name,
+          surface: "engines.node",
+          kind: v,
+          detail: `${oldNode ?? "(none)"} -> ${newNode ?? "(none)"}`,
+        });
+      }
+    }
+
+    const basePeers = base.peerDependencies ?? {};
+    const headPeers = head.peerDependencies ?? {};
+    for (const key of Object.keys(basePeers)) {
+      if (!(key in headPeers)) continue; // removed peer = fewer constraints = ok
+      const oldR = basePeers[key];
+      const newR = headPeers[key];
+      if (oldR === newR) continue;
+      const v = classifyRangeChange(oldR, newR);
+      if (v === "narrowed" || v === "unparseable") {
+        findings.push({
+          package: name,
+          surface: `peer:${key}`,
+          kind: v,
+          detail: `${oldR} -> ${newR}`,
+        });
+      }
+    }
+    // Peers present in head but not base (added) are unflagged in v1.
+  }
+  return findings;
+}
