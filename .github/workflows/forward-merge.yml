@@ -1,0 +1,225 @@
+name: Forward-merge main into next
+
+# Forward-merge cascade (ADR 0004). Keeps the higher release line a superset of
+# the lower one BY CONSTRUCTION: every change on `main` is merged up into `next`
+# as a TRUE merge commit (never rebase/squash/cherry-pick), so `main` stays an
+# ancestor of `next` and routine merges never re-collide (ADR 0004 §1).
+#
+# The workflow is idempotent: it merges the CURRENT `main` tip into `next`, not
+# "a specific commit" (ADR 0004 §2). A `fix:` push and the later
+# `chore(release):` push both trigger a run; both converge on "next contains
+# main's tip", and the churn-only run collapses to an empty merge with no push
+# (ADR 0004 §6/§7).
+#
+# Version/changelog divergence between the lines is absorbed by the
+# `.gitattributes` merge drivers (registered below, ADR 0004 §3). Only a genuine
+# code conflict escalates to the `sync/main-to-next` PR (ADR 0004 §4). Any other
+# failure opens an issue (ADR 0004 §10).
+#
+# The push to `next` triggers `publish-next.yml`, which re-derives the version
+# and publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
+# version-free — it merges and pushes, nothing more.
+
+on:
+  push:
+    branches:
+      - main
+  # First-class manual recovery/force path (ADR 0004 §2): a manual run merges
+  # the current `main` tip into `next` exactly like an automatic one.
+  workflow_dispatch:
+
+permissions:
+  contents: write # push the merge commit / sync branch
+  pull-requests: write # open the sync PR
+  issues: write # open the failure issue (ADR 0004 §10)
+
+# One shared concurrency group per TARGET branch, used by every workflow that
+# pushes to `next` (this one and `publish-next.yml`) — serializes all writers of
+# `next` and removes non-fast-forward races by design (ADR 0004 §5).
+concurrency:
+  group: mutate-next
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+  REPO: ${{ github.repository }}
+
+jobs:
+  forward-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Self-gating (mirrors commit-guard.yml): the cascade only exists once the
+      # `next` collection branch does, i.e. after the 1.0.0 cut. Until then this
+      # workflow is dormant, so pushes to `main` on the `0.2.0-alpha.*` line do
+      # not fail.
+      - name: Check whether the `next` branch exists yet
+        id: guard
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads \
+               "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::'next' branch does not exist yet — forward-merge dormant (pre-1.0.0-cut). Skipping."
+          fi
+
+      - name: Checkout `next` ⬇️
+        if: steps.guard.outputs.exists == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          ref: next
+          fetch-depth: 0
+          token: ${{ secrets.PUBLISH_PAT }}
+
+      # A pinned Node just for the JSON merge driver (`.github/scripts/merge-
+      # package-json.cjs`); no dependency install — the merge is version-free.
+      - name: Setup Node 🎛️
+        if: steps.guard.outputs.exists == 'true'
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+
+      - name: Git identity 🪪
+        if: steps.guard.outputs.exists == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # A `merge=<driver>` attribute is inert unless the driver is registered in
+      # the runner's git config too (ADR 0004 §3, Consequences).
+      - name: Register merge drivers 🔧
+        if: steps.guard.outputs.exists == 'true'
+        run: |
+          set -euo pipefail
+          git config merge.ours.driver true
+          git config merge.package-json.driver \
+            "node .github/scripts/merge-package-json.cjs %O %A %B %L %P"
+
+      - name: Forward-merge and push (or open sync PR) 🔀
+        id: merge
+        if: steps.guard.outputs.exists == 'true'
+        run: |
+          set -euo pipefail
+
+          open_sync_pr() {
+            # Real (non-version) conflict → sync PR (ADR 0004 §4). Never lands on
+            # `main`: conflict-resolution commits go on `sync/main-to-next`.
+            local branch="sync/main-to-next"
+
+            # Create/update the sync branch at main's tip. Idempotent: an already
+            # open PR only gets its branch fast-forwarded, never a duplicate PR.
+            git push --force origin "origin/main:refs/heads/${branch}"
+
+            local open_pr
+            open_pr="$(gh pr list --repo "$REPO" --head "$branch" \
+              --base next --state open --json number --jq '.[].number')"
+            if [ -n "$open_pr" ]; then
+              echo "::notice::Sync PR #${open_pr} already open — branch fast-forwarded to main."
+              return 0
+            fi
+
+            # Labels must exist before use; create idempotently.
+            gh label create sync --repo "$REPO" --color BFD4F2 \
+              --description "Forward-merge / promotion sync PR" 2>/dev/null || true
+            gh label create automated --repo "$REPO" --color EDEDED \
+              --description "Opened by automation" 2>/dev/null || true
+
+            local body
+            body="$(printf '%s\n' \
+              'The automated forward-merge of `main` into `next` hit a real code conflict (ADR 0004 §4). The version/changelog churn is handled automatically by the merge drivers, so this is a genuine same-line conflict that needs a human.' \
+              '' \
+              'How to resolve: resolve the conflict on this `sync/main-to-next` branch (locally or in the web editor) and merge it AS A TRUE MERGE COMMIT — a squash/rebase merge would break the superset invariant (ADR 0004 §1) and is blocked by branch protection on `next`.')"
+
+            gh pr create --repo "$REPO" --base next --head "$branch" \
+              --title "chore(sync): resolve forward-merge conflict (main into next)" \
+              --label sync --label automated \
+              --body "$body"
+
+            # Request review from CODEOWNERS (the Frontend Core Team). Kept
+            # non-fatal: the PR must exist even if a reviewer request is rejected
+            # (e.g. the automation identity is itself one of the owners).
+            gh pr edit "$branch" --repo "$REPO" \
+              --add-reviewer mfal,Lisa18289,ins0,maaaathis,Jan-Eimertenbrink \
+              || echo "::warning::Could not request all CODEOWNERS reviewers."
+          }
+
+          git fetch --no-tags origin main
+          MAIN_SHA="$(git rev-parse origin/main)"
+          SHORT_SHA="$(git rev-parse --short origin/main)"
+          NEXT_BEFORE="$(git rev-parse HEAD)"
+          MERGE_MSG="chore(sync): forward-merge main into next (${SHORT_SHA})"
+
+          echo "Merging main (${SHORT_SHA}) into next ($(git rev-parse --short HEAD))"
+
+          # True merge commit with an explicit conventional message (ADR 0004
+          # §1, §8) — `chore(sync):` is valid-conventional and non-releasing.
+          if git merge --no-ff -m "$MERGE_MSG" "$MAIN_SHA"; then
+            echo "Merge succeeded."
+          elif [ -n "$(git ls-files --unmerged)" ]; then
+            echo "::warning::Merge conflict — escalating to the sync PR."
+            git merge --abort
+            open_sync_pr
+            exit 0
+          else
+            echo "::error::git merge failed without a conflict."
+            exit 1
+          fi
+
+          # Empty forward-merge (ADR 0004 §6/§7): if the merge brought in no code
+          # delta (only version/changelog churn the drivers absorbed), the tree
+          # is unchanged. Drop the empty merge and skip the push, so no spurious
+          # `next` re-publish is triggered.
+          if git diff --quiet "$NEXT_BEFORE" HEAD; then
+            echo "No code delta after merge — skipping push (nothing to re-publish)."
+            git reset --hard "$NEXT_BEFORE"
+            exit 0
+          fi
+
+          # Push with one fetch-before-push retry on non-fast-forward (ADR 0004
+          # §5, belt-and-suspenders on top of the shared concurrency group).
+          if git push origin HEAD:next; then
+            echo "Pushed forward-merge to next."
+            exit 0
+          fi
+
+          echo "::warning::Push rejected (non-fast-forward) — refetching next and retrying once."
+          git fetch --no-tags origin next
+          if git merge --no-ff -m "$MERGE_MSG" origin/next; then
+            git push origin HEAD:next
+            echo "Pushed forward-merge to next after retry."
+            exit 0
+          fi
+
+          if [ -n "$(git ls-files --unmerged)" ]; then
+            echo "::warning::Conflict against a concurrent next writer — escalating to the sync PR."
+            git merge --abort
+            open_sync_pr
+            exit 0
+          fi
+          echo "::error::Retry re-merge/push failed."
+          exit 1
+
+      # A conflict is the expected non-error path (handled above, exits 0). Any
+      # genuine failure (retry exhausted, workflow error) must not let `next`
+      # silently fall behind `main` — open an issue and ping CODEOWNERS (ADR
+      # 0004 §10).
+      - name: Open an issue on failure 🚨
+        if: failure() && steps.guard.outputs.exists == 'true'
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh label create automated --repo "$REPO" --color EDEDED \
+            --description "Opened by automation" 2>/dev/null || true
+          body="$(printf '%s\n' \
+            'The automated forward-merge of main into next failed for a reason OTHER THAN a merge conflict (ADR 0004 §10). next may now be falling behind main.' \
+            '' \
+            "Run: ${RUN_URL}" \
+            '' \
+            '/cc @mfal @Lisa18289 @ins0 @maaaathis @Jan-Eimertenbrink')"
+          gh issue create --repo "$REPO" --label automated \
+            --title "Forward-merge main into next failed" \
+            --body "$body" \
+            || echo "::warning::Could not open the failure issue."
