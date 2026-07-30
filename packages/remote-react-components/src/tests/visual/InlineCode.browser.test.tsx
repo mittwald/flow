@@ -66,16 +66,20 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { ColumnLayout, Label, InlineCode },
+    components: { ColumnLayout, LabeledValue, Label, InlineCode },
   }) => {
     await render(
       <ColumnLayout l={[1, 1, 1, 1]}>
-        <Label>default</Label>
-        <InlineCode>struckABlowAgainstTheGalacticEmpire</InlineCode>
-        <Label>nowrap</Label>
-        <InlineCode whiteSpace="nowrap">
-          struckABlowAgainstTheGalacticEmpire
-        </InlineCode>
+        <LabeledValue>
+          <Label>default</Label>
+          <InlineCode>struckABlowAgainstTheGalacticEmpire</InlineCode>
+        </LabeledValue>
+        <LabeledValue>
+          <Label>nowrap</Label>
+          <InlineCode whiteSpace="nowrap">
+            struckABlowAgainstTheGalacticEmpire
+          </InlineCode>
+        </LabeledValue>
       </ColumnLayout>,
     );
 
