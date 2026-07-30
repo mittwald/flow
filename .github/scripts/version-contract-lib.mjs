@@ -30,11 +30,11 @@ function cmpHi(a, b) {
   return cmp(a, b);
 }
 
-/** Parse "X", "X.Y" or "X.Y.Z" into a Version, or null if not plain numeric. */
+/** Parse "X.Y.Z" into a Version, or null if not a full numeric triple. */
 function parseVersion(str) {
-  const m = /^(\d+)(?:\.(\d+))?(?:\.(\d+))?$/.exec(str.trim());
+  const m = /^(\d+)\.(\d+)\.(\d+)$/.exec(str.trim());
   if (!m) return null;
-  return [Number(m[1]), Number(m[2] ?? 0), Number(m[3] ?? 0)];
+  return [Number(m[1]), Number(m[2]), Number(m[3])];
 }
 
 /** Parse a single comparator into an Interval, or null if unsupported. */

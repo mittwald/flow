@@ -20,4 +20,8 @@ test("parseRange: unsupported shapes → null (fail-closed upstream)", () => {
   assert.equal(parseRange("latest"), null); // dist-tag
   assert.equal(parseRange(null), null);
   assert.equal(parseRange(undefined), null);
+  assert.equal(parseRange("16"), null); // bare partial version (X-range) unsupported
+  assert.equal(parseRange("1.2"), null); // partial version unsupported
+  assert.equal(parseRange("~1"), null); // partial tilde unsupported
+  assert.equal(parseRange("^19"), null); // partial caret unsupported
 });
