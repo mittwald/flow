@@ -55,9 +55,7 @@ export interface ModalProps
   showCloseButton?: boolean;
   /**
    * Whether closing the modal must be confirmed – use it to protect unsaved
-   * changes. Actions in an `<ActionGroup>` and the close button in the heading
-   * still close the modal right away; pass `bypassConfirmation` to skip the
-   * confirmation on other close paths as well.
+   * changes.
    */
   confirmOnClose?: boolean;
 }

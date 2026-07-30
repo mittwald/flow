@@ -36,12 +36,12 @@ einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
 
 # Ungespeicherte Änderungen
 
-Eingaben in einem Modal gehen beim Schließen verloren. Damit das nicht unbemerkt
-passiert, kann das Schließen erst einen Bestätigungs-Dialog auslösen. Bestätigt
-werden die Wege, auf denen ein Modal beiläufig geschlossen wird: Escape, Klick
-außerhalb und `<Action closeModal />`. Aktionen in der `<ActionGroup />` und der
-Close-Button in der Überschrift schließen dagegen direkt – dort ist das
-Verwerfen eine bewusste Entscheidung des Nutzers.
+Eingaben in einem Modal gehen verloren, wenn es geschlossen wird. Damit das
+nicht unbemerkt passiert, kann zuvor ein Bestätigungs-Dialog erscheinen: bei
+Escape, bei einem Klick außerhalb des Modals und bei einer
+`<Action closeModal />`. Aktionen in der `<ActionGroup />` und der Close-Button
+in der Überschrift schließen das Modal dagegen sofort – hier verwirft der Nutzer
+seine Änderungen bewusst.
 
 Enthält das Modal eine
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview), ist das
