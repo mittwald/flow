@@ -71,10 +71,10 @@ test.each(testEnvironments)(
     await render(
       <ColumnLayout l={[1, 1, 1, 1]}>
         <Label>default</Label>
-        <InlineCode>onSelectionChangeWithoutLineBreaks</InlineCode>
+        <InlineCode>struckABlowAgainstTheGalacticEmpire</InlineCode>
         <Label>nowrap</Label>
         <InlineCode whiteSpace="nowrap">
-          onSelectionChangeWithoutLineBreaks
+          struckABlowAgainstTheGalacticEmpire
         </InlineCode>
       </ColumnLayout>,
     );
