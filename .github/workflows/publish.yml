@@ -7,6 +7,14 @@ on:
         description: "Publish missing packages only, without a version bump"
         type: boolean
         default: false
+      release_as:
+        description: "Force an explicit version (e.g. 1.0.0 for the one-time 1.0.0 cut). Empty = normal conventional-commits derivation."
+        type: string
+        default: ""
+      dry_run:
+        description: "Rehearse: build, compute the version, and run 'lerna publish --dry-run' without pushing, tagging, creating a release, or publishing to npm."
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -86,13 +94,28 @@ jobs:
       - name: Version 🏷️
         if: ${{ !inputs.only_publish }}
         run: |
-          pnpm lerna version \
-            --force-publish \
-            --conventional-commits --conventional-prerelease="*" \
-            --message "chore(release): bump version to %v" \
-            --yes \
-            --no-push \
-            --tag-version-prefix ""
+          if [ -n "${{ inputs.release_as }}" ]; then
+            # One-time explicit version (the 1.0.0 cut, or any forced version via
+            # workflow_dispatch). An explicit target overrides conventional-commit
+            # derivation entirely, so the prerelease flag is irrelevant here.
+            pnpm lerna version "${{ inputs.release_as }}" \
+              --force-publish \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          else
+            # Standing path (push: main): graduate to STABLE X.Y.Z (dist-tag
+            # latest). --conventional-prerelease="*" was intentionally dropped at
+            # the 1.0.0 cut so main no longer produces 0.x-alpha.N prereleases.
+            pnpm lerna version \
+              --force-publish \
+              --conventional-commits \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          fi
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is
@@ -100,12 +123,18 @@ jobs:
       # to true, so it fetches the existing transparency-log entry and the publish
       # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
-        run: pnpm lerna publish from-package --yes --no-private --concurrency 1
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            # Rehearsal: show the publish plan, touch neither npm nor origin.
+            pnpm lerna publish from-package --yes --no-private --concurrency 1 --dry-run
+          else
+            pnpm lerna publish from-package --yes --no-private --concurrency 1
+          fi
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.
       - name: Push release commit & tag, create GitHub release 🚀
-        if: ${{ !inputs.only_publish }}
+        if: ${{ !inputs.only_publish && !inputs.dry_run }}
         run: |
           tag="$(git describe --tags --abbrev=0)"
           echo "Pushing release commit and tag ${tag} to main"
