@@ -60,3 +60,25 @@ test.each(testEnvironments)(
     await testScreenshot("InlineCode edge cases");
   },
 );
+
+test.each(testEnvironments)(
+  "InlineCode whiteSpace (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ColumnLayout, Label, InlineCode },
+  }) => {
+    await render(
+      <ColumnLayout l={[1, 1, 1, 1]}>
+        <Label>default</Label>
+        <InlineCode>onSelectionChangeWithoutLineBreaks</InlineCode>
+        <Label>nowrap</Label>
+        <InlineCode whiteSpace="nowrap">
+          onSelectionChangeWithoutLineBreaks
+        </InlineCode>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("InlineCode whiteSpace");
+  },
+);
