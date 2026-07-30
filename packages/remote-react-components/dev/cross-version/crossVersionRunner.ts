@@ -82,6 +82,17 @@ export interface RunCrossVersionOptions {
    * this; the iframe harness renders its reference inline, so it omits it.
    */
   reference?: { refDirectory: string };
+  /**
+   * How many times to run a single version's suite before giving up (default 1
+   * = no retry). Each attempt is a FRESH vitest process, so it starts fresh
+   * Vite dev servers — the only thing observed to clear the iframe harness's
+   * per-server-instance @quilted/threads connection wedge ("Could not establish
+   * remote connection: Timeout reached"): every scenario for the wedged version
+   * times out together, and only a brand-new server pair recovers. A real HTML
+   * divergence fails deterministically on every attempt, so retrying costs time
+   * only on a genuine break (rare) — it never masks one.
+   */
+  attemptsPerVersion?: number;
 }
 
 const readManifest = (logPrefix: string): Manifest => {
@@ -166,6 +177,34 @@ const runSuite = (
   const failures = readFailures(jsonPath);
   rmSync(tempDirectory, { recursive: true, force: true });
   return { version: crossVersion, ok, failures };
+};
+
+/**
+ * Run one version's suite, retrying the whole (fresh-process, fresh-server) run
+ * up to `attemptsPerVersion` times. See `attemptsPerVersion` on the options for
+ * why a fresh run is what clears the connection wedge.
+ */
+const runSuiteWithRetries = (
+  crossVersion: string,
+  options: RunCrossVersionOptions,
+): VersionResult => {
+  const attempts = Math.max(1, options.attemptsPerVersion ?? 1);
+  const { logPrefix } = options.labels;
+
+  let result = runSuite(crossVersion, options);
+  for (let attempt = 2; attempt <= attempts && !result.ok; attempt++) {
+    console.log(
+      `${logPrefix} ${crossVersion} failed on attempt ${attempt - 1}/${attempts}; ` +
+        "retrying with a fresh server pair (a real diff fails on every attempt).",
+    );
+    result = runSuite(crossVersion, options);
+    if (result.ok) {
+      console.log(
+        `${logPrefix} ${crossVersion} passed on attempt ${attempt}/${attempts}.`,
+      );
+    }
+  }
+  return result;
 };
 
 const escapeWorkflowCommand = (value: string, property = false): string => {
@@ -319,7 +358,7 @@ export const runCrossVersion = (options: RunCrossVersionOptions): void => {
         console.log(
           `\n${logPrefix} ===== ${target.category} = ${target.version} =====`,
         );
-        return runSuite(target.version, options);
+        return runSuiteWithRetries(target.version, options);
       },
     ),
   }));
