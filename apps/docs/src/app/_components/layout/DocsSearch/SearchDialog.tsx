@@ -45,6 +45,12 @@ const DEFAULT_SECTIONS = [
       "Alles für den Einstieg in flow – von den wichtigsten Grundlagen bis zu ersten Schritten für einen schnellen Start.",
   },
   {
+    segment: "releases",
+    title: "Releases",
+    description:
+      "Die veröffentlichten Flow-Releases mit Highlights, Migrationshinweisen und den enthaltenen Fixes.",
+  },
+  {
     segment: "02-foundations",
     title: "Foundations",
     description:

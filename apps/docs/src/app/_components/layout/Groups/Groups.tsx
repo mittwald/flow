@@ -20,29 +20,44 @@ export const Groups: FC<Props> = (props) => {
 
   const currentPathname = usePathname();
 
-  return Object.entries(navGroups).map(([group, mdxFiles]) => {
-    const pathname = mdxFiles[0].pathname;
-    const isComponent = pathname.includes("04-components");
-    const href = `${pathname}${isComponent ? "/overview" : ""}`;
+  const SECTION_ORDER = [
+    "01-get-started",
+    "releases",
+    "02-foundations",
+    "03-patterns",
+    "04-components",
+  ];
 
-    if (render === "menuItem") {
+  const orderIndex = (group: string): number => {
+    const i = SECTION_ORDER.indexOf(group);
+    return i === -1 ? SECTION_ORDER.length : i;
+  };
+
+  return Object.entries(navGroups)
+    .sort(([a], [b]) => orderIndex(a) - orderIndex(b))
+    .map(([group, mdxFiles]) => {
+      const pathname = mdxFiles[0].pathname;
+      const isComponent = pathname.includes("04-components");
+      const href = `${pathname}${isComponent ? "/overview" : ""}`;
+
+      if (render === "menuItem") {
+        return (
+          <MenuItem href={href} key={pathname}>
+            <GroupText>{group}</GroupText>
+          </MenuItem>
+        );
+      }
+
       return (
-        <MenuItem href={href} key={pathname}>
+        <Link
+          href={href}
+          key={pathname}
+          aria-current={currentPathname.includes(group) ? "page" : undefined}
+        >
           <GroupText>{group}</GroupText>
-        </MenuItem>
+        </Link>
       );
-    }
-
-    return (
-      <Link
-        href={href}
-        key={pathname}
-        aria-current={currentPathname.includes(group) ? "page" : undefined}
-      >
-        <GroupText>{group}</GroupText>
-      </Link>
-    );
-  });
+    });
 };
 
 export default Groups;
