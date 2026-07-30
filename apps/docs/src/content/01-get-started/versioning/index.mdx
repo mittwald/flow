@@ -36,14 +36,19 @@ Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
   existieren und welche Props sie zur Laufzeit akzeptieren, sowie das
   dokumentierte Verhalten dokumentierter Funktionen. Die Type-Ebene ist hiervon
   ausdrücklich ausgenommen (siehe unten).
-- **Props von `@flr-generate`- und `flr-universal`-Components** — der Vertrag
-  mit Extension-Entwicklern. Hier gilt: deprecaten statt brechen. Der alte Pfad
-  bleibt erhalten und wird zur Laufzeit über eine Deprecation-Warnung
-  angekündigt, bevor er in einer Major-Version entfernt wird.
+- **Components aus `@mittwald/flow-remote-react-components`** — die in
+  mStudio-Extensions verwendete API. Ihre Props sind der Vertrag mit
+  Extension-Entwicklern und unterliegen derselben Zusage.
 - **Veröffentlichte Icons** — ein Icon zu entfernen oder umzubenennen ist ein
   Breaking Change. Icons werden ohnehin nie entfernt, sondern nur deprecated.
 - **Das Remote-Protokoll** — die versionierte Verbindungsschicht zwischen
   Extension und Host bleibt kompatibel, solange dies möglich ist.
+
+Wo ein Teil dieser öffentlichen API entfernt werden soll, gilt durchgängig:
+deprecaten statt brechen. Der alte Pfad bleibt zunächst erhalten und wird zur
+Laufzeit über eine Deprecation-Warnung angekündigt, bevor er in einer
+Major-Version entfernt wird — das betrifft die gesamte öffentliche API, nicht
+nur die in Extensions verwendeten Components.
 
 ---
 
