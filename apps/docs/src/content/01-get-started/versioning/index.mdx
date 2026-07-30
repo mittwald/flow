@@ -1,0 +1,109 @@
+---
+title: Versionierung & Stabilität
+navTitle: Versionierung
+description:
+  Ab Version 1.0.0 folgt Flow Semantic Versioning. Diese Seite beschreibt,
+  worauf du dich als Consumer verlassen kannst, worauf nicht — und wie du dich
+  gegen ungewollte Änderungen absicherst.
+---
+
+# Semantic Versioning bei Flow
+
+Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
+Zusage gilt damit einheitlich für jedes Package — es gibt keine
+Package-spezifischen Sonderregeln.
+
+Ab `1.0.0` wird aus dem bisherigen „wir versuchen, dich nicht zu brechen" ein
+verbindliches Versprechen nach [Semantic Versioning](https://semver.org):
+
+- **Major** — enthält Breaking Changes. Ein Update kann Anpassungen in deinem
+  Code erfordern. Major-Versionen bleiben bewusst selten.
+- **Minor** — fügt neue Funktionen hinzu und ist abwärtskompatibel.
+- **Patch** — enthält Bugfixes und ist abwärtskompatibel.
+
+Entscheidend ist die Grenze: Welche Änderung erzwingt eine neue Major-Version —
+und welche darf in einem Minor oder Patch erscheinen? Die folgenden Abschnitte
+beschreiben diese Grenze aus Sicht der Consumer.
+
+---
+
+# Worauf du dich verlassen kannst
+
+Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
+Änderung daran erscheint nur in einer neuen Major-Version:
+
+- **Runtime Public API von `public.ts`** — welche Components und Exports
+  existieren und welche Props sie zur Laufzeit akzeptieren, sowie das
+  dokumentierte Verhalten dokumentierter Funktionen. Die Type-Ebene ist hiervon
+  ausdrücklich ausgenommen (siehe unten).
+- **Props von `@flr-generate`- und `flr-universal`-Components** — der Vertrag
+  mit Extension-Entwicklern. Hier gilt: deprecaten statt brechen. Der alte Pfad
+  bleibt erhalten und wird zur Laufzeit über eine Deprecation-Warnung
+  angekündigt, bevor er in einer Major-Version entfernt wird.
+- **Veröffentlichte Icons** — ein Icon zu entfernen oder umzubenennen ist ein
+  Breaking Change. Icons werden ohnehin nie entfernt, sondern nur deprecated.
+- **Das Remote-Protokoll** — die versionierte Verbindungsschicht zwischen
+  Extension und Host bleibt kompatibel, solange dies möglich ist.
+
+---
+
+# Was nicht garantiert ist
+
+Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
+bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
+Release ändern — auch in einem Minor oder Patch:
+
+- **Alle Änderungen auf Type-Ebene (TypeScript).** Die Typen sind best-effort
+  und nicht durch Semantic Versioning geschützt. Auch das Entfernen oder
+  Umbenennen eines exportierten Typs oder das Verengen eines Prop-Typs ist für
+  sich genommen kein Breaking Change. Nennenswerte Type-Änderungen werden
+  dennoch im Changelog erwähnt.
+- **Das visuelle Erscheinungsbild.**
+- **Die interne DOM-Struktur.**
+- **CSS-Klassennamen.**
+- **Namen und Werte von Design Tokens.**
+
+---
+
+# So schützt du dich
+
+Weil die oben genannten Bereiche bewusst nicht garantiert sind, gibt es zwei
+Regeln, an die du dich als Consumer halten solltest.
+
+<Alert>
+  <Heading>Zwei Regeln für den stabilen Betrieb</Heading>
+  <Content>
+    Style nicht gegen interne CSS-Klassen, und behandle Flows TypeScript-Typen
+    als best-effort. Beide Bereiche können sich in jedem Release ändern.
+  </Content>
+</Alert>
+
+## Style nicht gegen interne CSS-Klassen
+
+Die CSS-Klassennamen der Components sind ein internes Implementierungsdetail und
+können sich in jedem Release ändern. Verlasse dich für eigenes Styling nicht
+darauf, dass eine bestimmte interne Klasse existiert oder gleich heißt.
+Andernfalls kann bereits ein Patch dein Styling brechen.
+
+## Behandle TypeScript-Typen als best-effort
+
+Flows TypeScript-Typen folgen nicht Semantic Versioning. Ein `tsc`-Fehler kann
+daher theoretisch schon in einem Patch auftreten. Wenn ein solcher Bruch für
+dein Projekt teuer wäre, pinne exakte Versionen (statt `^`-Ranges), sodass ein
+Update bewusst und kontrolliert erfolgt.
+
+---
+
+# Component-Status: Beta, Stable, Deprecated
+
+Der Vertrag gilt nicht für jede Component gleich. Jede Component hat einen
+Lifecycle-Status, der die obigen Regeln überschreibt:
+
+- **Beta** — von der Breaking-Change-Zusage ausgenommen. Die API kann sich auch
+  außerhalb einer Major-Version ändern.
+- **Stable** (Standard) — vollständig durch die obigen Regeln gebunden.
+- **Deprecated** — bis zur Entfernung in einer Major-Version weiter abgesichert
+  und mit einem Migrationspfad versehen.
+
+Das vollständige Lifecycle-Modell beschreibt
+[ADR 0003](https://github.com/mittwald/flow/blob/main/docs/adr/0003-component-lifecycle-status.md).
