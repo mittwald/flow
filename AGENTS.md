@@ -52,7 +52,9 @@ RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteRecei
   developers.** Avoid breaking changes. When an API must change, keep the old
   path working and log usage with `useWarnDeprecation` (from
   `DeprecationWarningProvider`) so extension developers can be informed about
-  deprecation paths they still use.
+  deprecation paths they still use. `useWarnDeprecation` is the standard way to
+  flag any deprecated runtime path — see
+  [Deprecating an API](packages/components/AGENTS.md#deprecating-an-api).
 - Inside components that are part of the `flr-universal` export surface, compose
   other Flow components through their **views** (`@/views/*`) — views
   automatically switch to the remote counterpart in a remote context.
