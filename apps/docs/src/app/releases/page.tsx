@@ -6,8 +6,11 @@ import {
   Section,
   Text,
 } from "@mittwald/flow-react-components";
+import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
+import type { Anchor } from "@/lib/mdx/MdxFile";
 import { getReleases } from "@/lib/releases/getReleases";
 import ReleaseCard from "./_components/ReleaseCard";
+import { releaseSlug } from "./_lib/releaseSlug";
 
 export const metadata: Metadata = {
   title: "Releases",
@@ -17,6 +20,12 @@ export const metadata: Metadata = {
 
 export default async function ReleasesPage() {
   const releases = await getReleases();
+
+  const anchors: Anchor[] = releases.map((r) => ({
+    slug: releaseSlug(r.version),
+    text: `${r.version} — ${r.title}`,
+    level: 2,
+  }));
 
   return (
     <Flex columnGap="m">
@@ -37,6 +46,7 @@ export default async function ReleasesPage() {
           ))
         )}
       </Flex>
+      <AnchorNavigation currentPath="/releases" anchors={anchors} />
     </Flex>
   );
 }
