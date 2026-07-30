@@ -102,6 +102,24 @@ test.each(testEnvironments)(
             <TabTitle>Tab 2</TabTitle>
           </Tab>
         </Tabs>
+        <Tabs>
+          <Tab id="1">
+            <TabTitle>Go</TabTitle>
+            Content
+          </Tab>
+          <Tab id="2">
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
+            Content
+          </Tab>
+          <Tab id="3">
+            <TabTitle>Ok</TabTitle>
+            Content
+          </Tab>
+          <Tab id="4">
+            <TabTitle>The Rebel Alliance versus the Empire</TabTitle>
+            Content
+          </Tab>
+        </Tabs>
       </Flex>,
     );
 

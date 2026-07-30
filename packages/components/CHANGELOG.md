@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+### Features
+
+* **TabNavigation:** Introduce tab navigation ([#2634](https://github.com/mittwald/flow/issues/2634)) ([b83a414](https://github.com/mittwald/flow/commit/b83a414b18e1868196aa6f839e086d603b7debfb))
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+### Features
+
+* **Select:** Support multi select ([#2603](https://github.com/mittwald/flow/issues/2603)) ([fc7b631](https://github.com/mittwald/flow/commit/fc7b6318ea388507cc1bebae303b48b0ce92d625))
+
+# [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+### Features
+
+* **Navigation:** support AlertBadge ([#2737](https://github.com/mittwald/flow/issues/2737)) ([0d022ba](https://github.com/mittwald/flow/commit/0d022ba5d3b7c3da3515c7fe11159c6642282759))
+
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+### Bug Fixes
+
+* **CodeEditor:** pin CodeMirror/Lezer singletons as direct deps ([#2745](https://github.com/mittwald/flow/issues/2745)) ([020c77d](https://github.com/mittwald/flow/commit/020c77dc4b9f354e1258608b7f09ae6ad6f9d3b5))
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
 
 ### Bug Fixes

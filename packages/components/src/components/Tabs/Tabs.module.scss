@@ -26,14 +26,8 @@
   overflow: hidden;
 
   &[id] {
-    padding: var(--layout-card--padding);
+    padding-top: var(--section--spacing);
     opacity: 1;
     height: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .tabPanel[id] {
-    padding: var(--layout-card--padding-mobile);
   }
 }

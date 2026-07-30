@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/typescript-config
+
 # [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
 
 **Note:** Version bump only for package @mittwald/typescript-config
