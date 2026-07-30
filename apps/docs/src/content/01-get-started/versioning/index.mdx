@@ -47,6 +47,33 @@ Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
 
 ---
 
+# Node- und React-Unterstützung
+
+Node und React sind echte Runtime-Voraussetzungen. Auch hier gibt es klare
+Regeln, welche Änderung eine neue Major-Version erzwingt.
+
+**Node**
+
+- Der garantierte Node-Floor ist die aktiv unterstützte Node-LTS — aktuell
+  `node >=24`, einheitlich über alle Packages. Er wird nur bei konkretem Bedarf
+  angehoben, nicht um neuen Releases hinterherzulaufen.
+- Eine Node-Version fallen zu lassen, die noch in ihrem LTS-/Maintenance-Fenster
+  liegt, ist ein Breaking Change (→ Major). Eine bereits End-of-Life-Version
+  fallen zu lassen, darf in einem Minor erscheinen.
+- Strenger sind die Node-Runtime-Packages `@mittwald/ext-bridge` und
+  `@mittwald/flow-remote-core`: Für sie ist jedes Anheben des Node-Floors ein
+  Breaking Change (→ Major), unabhängig von EOL — und ihr Floor kann
+  konservativer sein als der der übrigen Packages.
+
+**React**
+
+- Das **Erweitern** der akzeptierten Range (z. B. `^19` → `^19 || ^20`) ist
+  abwärtskompatibel (Minor).
+- Das **Anheben der Mindestversion** oder das Fallenlassen einer React-Major ist
+  ein Breaking Change (→ Major).
+
+---
+
 # Was nicht garantiert ist
 
 Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
