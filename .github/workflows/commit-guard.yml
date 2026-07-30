@@ -121,3 +121,55 @@ jobs:
           fi
 
           echo "Routing OK for base '${BASE_REF}'."
+
+  version-contract:
+    name: Version contract (engines.node + peer ranges)
+    # Same standing-line scope as routing: only PRs targeting a release line.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Gate (self-gating + promotion/sync exemptions)
+        id: gate
+        run: |
+          set -euo pipefail
+
+          # Dormant until `next` exists (pre-1.0.0-cut) — mirrors the routing job.
+          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "::notice::'next' branch does not exist yet — version-contract guard dormant (pre-1.0.0-cut). Skipping."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Promotion / forward-merge / sync sources legitimately carry breaking
+          # changes (ADR 0004 §8) — exempt, same as routing.
+          if [ "$HEAD_REF" = "next" ] \
+             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
+             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — version-contract guard exempt."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "active=true" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout (full history so the base commit is reachable)
+        if: steps.gate.outputs.active == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Self-test the classifier
+        if: steps.gate.outputs.active == 'true'
+        run: node --test .github/scripts/version-contract-lib.test.mjs
+
+      - name: Enforce the version contract
+        if: steps.gate.outputs.active == 'true'
+        run: node .github/scripts/version-contract-guard.mjs
