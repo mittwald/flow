@@ -90,24 +90,18 @@ jobs:
         # Renders each installed old remote version through the current host over
         # the real iframe connection and compares its host HTML to an ephemeral
         # reference rendered from the current version. WebKit-only. The
-        # @quilted/threads handshake intermittently times out under CI — a
-        # transient infra flake, not a diff — so retry the whole step: a real HTML
-        # divergence fails deterministically on every attempt, while a connection
-        # flake clears on a fresh run. Runs the package script directly (not
-        # `nx run`) so a retry doesn't re-trigger the non-cached network prepare
-        # above; the final attempt's `failures` output feeds the PR comment.
-        run: |
-          for attempt in 1 2 3; do
-            echo "::group::Cross-version smoke tests (attempt $attempt/3)"
-            if corepack pnpm --filter @mittwald/flow-remote-react-components test:cross-version; then
-              echo "::endgroup::"
-              exit 0
-            fi
-            echo "::endgroup::"
-            echo "::warning::Cross-version smoke tests failed on attempt $attempt/3 (possibly a flaky remote-connection timeout), retrying..."
-          done
-          echo "::error::Cross-version smoke tests still failing after 3 attempts."
-          exit 1
+        # @quilted/threads handshake intermittently wedges a whole version's run
+        # under CI load ("Could not establish remote connection: Timeout reached")
+        # — a transient infra flake, not a diff, and only a fresh server pair
+        # recovers it. The runner retries EACH version in-process with fresh
+        # servers (`attemptsPerVersion`), so a single flaky version no longer reds
+        # the run; a real HTML divergence still fails on every attempt. Runs the
+        # package script directly (not `nx run`) so it doesn't re-trigger the
+        # non-cached network prepare above; the `failures` output feeds the PR
+        # comment.
+        run:
+          corepack pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version
 
       - name: Run in-process cross-version tests
         id: crossversion_inprocess
