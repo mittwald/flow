@@ -17,7 +17,7 @@ export default () => {
 
   return (
     <ModalTrigger>
-      <Button>Beschreibung bearbeiten</Button>
+      <Button>Modal öffnen</Button>
 
       <Modal
         confirmOnClose={description !== ""}
