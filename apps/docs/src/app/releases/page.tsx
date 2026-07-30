@@ -11,6 +11,7 @@ import type { Anchor } from "@/lib/mdx/MdxFile";
 import { getReleases } from "@/lib/releases/getReleases";
 import ReleaseCard from "./_components/ReleaseCard";
 import { releaseSlug } from "./_lib/releaseSlug";
+import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
   title: "Releases",
@@ -29,7 +30,7 @@ export default async function ReleasesPage() {
 
   return (
     <Flex columnGap="m">
-      <Flex direction="column" gap="m">
+      <Flex direction="column" gap="m" className={styles.timeline}>
         {releases.length === 0 ? (
           <LayoutCard>
             <Section>
