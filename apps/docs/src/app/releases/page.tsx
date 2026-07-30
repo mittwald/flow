@@ -31,10 +31,10 @@ export default async function ReleasesPage() {
   return (
     <Flex columnGap="m">
       <Flex direction="column" gap="m" className={styles.timeline}>
+        <Heading level={1}>Releases</Heading>
         {releases.length === 0 ? (
           <LayoutCard>
             <Section>
-              <Heading level={1}>Releases</Heading>
               <Text>
                 Sobald die ersten stabilen Releases veröffentlicht sind,
                 erscheinen sie hier. Aktuell gibt es nur Vorab-Versionen.
