@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
+
+### Bug Fixes
+
+* **remote-react-components:** gate TabNavigation visual tests by version ([#2756](https://github.com/mittwald/flow/issues/2756)) ([53a46a5](https://github.com/mittwald/flow/commit/53a46a522c29ac86a1757cd331ad13d86c10803b))
+
 # [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
 
 ### Features
