@@ -6,10 +6,14 @@
 - **Affects:** `@mittwald/flow-react-components`, `@mittwald/flow-stylesheet`,
   `@mittwald/flow-design-tokens`
 
-> This ADR describes the **current state** of stylesheet generation. It was
-> written retroactively to record the already-established architecture as a
-> decision basis — among others as context for
+> This ADR was written retroactively to record the stylesheet architecture as
+> the decision basis for
 > [ADR 0001 (CSS cascade layers)](./0001-css-cascade-layers-in-the-stylesheet.md).
+> **ADR 0001 has since been implemented**, so the "current state" sections below
+> (esp. §2 and §6) describe the **pre-0001 baseline**, not today's build: today
+> `index.scss` forwards the layered `css-layered/*` token files and the cascade
+> uses `@layer` (see ADR 0001). The rest — CSS-module authoring, Style
+> Dictionary, the Vite pipeline — is unchanged.
 
 ## Context
 

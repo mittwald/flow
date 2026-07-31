@@ -166,9 +166,9 @@ JSDoc? Regenerate (or simply `pnpm build`) and commit the results.
   own task outputs) — `dependsOn` alone only orders execution, it does not fold
   the dependency's hash into the dependent.
 - **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
-  `pnpm install && pnpm clean` — expect installs after switching branches.
-  `pre-commit` runs `pnpm lint` — which includes `format:check`, so a stray
-  unformatted `.md`/`.json`/`.yml` blocks the commit; `pnpm format` fixes it.
+  `pnpm install` — expect installs after switching branches. `pre-commit` runs
+  `pnpm lint` — which includes `format:check`, so a stray unformatted
+  `.md`/`.json`/`.yml` blocks the commit; `pnpm format` fixes it.
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Breaking changes for consumers** ship with a `MIGRATION.md` entry and,
