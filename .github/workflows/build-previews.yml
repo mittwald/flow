@@ -81,23 +81,26 @@ jobs:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
             || steps.meta-storybook.outputs.labels }}
           # ════════════════════════════════════════════════════════════════
-          # 🚨🚨🚨  TEMPORARY — DO NOT MERGE WITH THIS LINE  🚨🚨🚨
+          # 🚨🚨🚨  TEMPORARY — MUST BE REMOVED BEFORE THE 1.0 RELEASE  🚨🚨🚨
           # ════════════════════════════════════════════════════════════════
-          # PR #2760 review aid ONLY: renders the Releases page with its dummy
-          # dataset in the PR preview so the layout is reviewable before real
-          # stable releases exist. This is NOT production-safe as a permanent
-          # setting — it would force dummy Releases data into EVERY docs PR
-          # preview.
+          # This intentionally STAYS while the Releases page is reviewed: it
+          # renders the page with its dummy dataset in the PR preview so the
+          # layout is testable before real stable releases exist. Keep it for
+          # the whole review of this PR.
+          #
+          # It is NOT production-safe as a permanent setting — left in, it would
+          # force dummy Releases data into EVERY docs PR preview once merged.
           #
           # ▶▶▶ REMOVE the `RELEASES_USE_DUMMY=1` build-arg line below before
-          #     this PR is merged. ◀◀◀
+          #     the 1.0 release (i.e. once real release data exists and this
+          #     page goes live). ◀◀◀
           #
-          # (Production is unaffected regardless: deploy-main.yml passes no such
+          # (Production is unaffected meanwhile: deploy-main.yml passes no such
           #  arg, and the Dockerfile defaults RELEASES_USE_DUMMY to "".)
           # ════════════════════════════════════════════════════════════════
           build-args: |
             NEXT_BASE_PATH=
-            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }} # 🚨 TEMPORARY — remove before merge (see banner above)
+            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }} # 🚨 TEMPORARY — keep for review, remove before the 1.0 release (see banner above)
 
   deploy:
     runs-on: ubuntu-latest
