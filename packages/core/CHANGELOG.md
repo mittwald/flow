@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.986](https://github.com/mittwald/flow/compare/0.2.0-alpha.985...0.2.0-alpha.986) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 # [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
 
 **Note:** Version bump only for package @mittwald/flow-core
