@@ -9,8 +9,9 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import type { Anchor } from "@/lib/mdx/MdxFile";
 import { getReleases } from "@/lib/releases/getReleases";
-import ReleaseCard from "./_components/ReleaseCard";
+import ReleaseEntry from "./_components/ReleaseEntry";
 import { releaseSlug } from "./_lib/releaseSlug";
+import { formatReleaseDate } from "./_lib/formatReleaseDate";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
@@ -24,29 +25,34 @@ export default async function ReleasesPage() {
 
   const anchors: Anchor[] = releases.map((r) => ({
     slug: releaseSlug(r.version),
-    text: `${r.version} — ${r.title}`,
+    text: `${r.version} · ${formatReleaseDate(r.date)}`,
     level: 2,
   }));
 
   return (
     <Flex columnGap="m">
-      <Flex direction="column" gap="m" className={styles.timeline}>
-        <Heading level={1}>Releases</Heading>
+      <LayoutCard className={styles.timeline}>
+        <Section>
+          <Heading level={1}>Releases</Heading>
+          <Text>
+            Alle veröffentlichten Flow-Releases mit ihren Highlights,
+            Migrationshinweisen und den enthaltenen Fixes.
+          </Text>
+        </Section>
+
         {releases.length === 0 ? (
-          <LayoutCard>
-            <Section>
-              <Text>
-                Sobald die ersten stabilen Releases veröffentlicht sind,
-                erscheinen sie hier. Aktuell gibt es nur Vorab-Versionen.
-              </Text>
-            </Section>
-          </LayoutCard>
+          <Section>
+            <Text>
+              Sobald die ersten stabilen Releases veröffentlicht sind,
+              erscheinen sie hier. Aktuell gibt es nur Vorab-Versionen.
+            </Text>
+          </Section>
         ) : (
           releases.map((release) => (
-            <ReleaseCard key={release.version} release={release} />
+            <ReleaseEntry key={release.version} release={release} />
           ))
         )}
-      </Flex>
+      </LayoutCard>
       <AnchorNavigation currentPath="/releases" anchors={anchors} />
     </Flex>
   );
