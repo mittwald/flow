@@ -41,8 +41,13 @@ export const ReleaseEntry: FC<{ release: Release }> = ({ release }) => {
 
       <Text elementType="p" className={styles.meta}>
         {formatReleaseDate(release.date)} -{" "}
-        <Link href={release.npmUrl}>npm</Link> -{" "}
-        <Link href={release.githubUrl}>GitHub Release</Link>
+        <Link size="s" href={release.npmUrl}>
+          npm
+        </Link>{" "}
+        -{" "}
+        <Link size="s" href={release.githubUrl}>
+          GitHub Release
+        </Link>
       </Text>
 
       {release.highlights.length > 0 && (
