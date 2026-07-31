@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
+
+### Features
+
+* **InlineCode:** add whiteSpace prop ([#2754](https://github.com/mittwald/flow/issues/2754)) ([81a2330](https://github.com/mittwald/flow/commit/81a2330de8d012d076cf60429d2c4a23cbb0722d))
+
 # [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
 
 ### Bug Fixes
