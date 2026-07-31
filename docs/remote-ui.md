@@ -406,6 +406,16 @@ render-and-mirror model above and are worth knowing about directly:
   `FlowThreadSerialization`) on every pass across the boundary, so passing deep
   or large object props is more expensive over the wire than it would be
   locally.
+- **The host can observe which components a remote uses.** `onComponentUsage` on
+  `RemoteRenderer` fires once per Flow component a remote renders, carrying the
+  component's display name and its lifecycle status (ADR 0003). It is collected
+  entirely on the host — in
+  [`createFlowRemoteComponentRenderer`](../packages/remote-react-renderer/src/lib/createFlowRemoteComponentRenderer.tsx),
+  the single funnel every renderer-map entry passes through — so it needs no
+  protocol version and works with extensions published long before it existed.
+  Because the signal is what actually rendered, absence is not proof of
+  non-usage: a component behind an unopened modal never reports. See
+  [remote-react-renderer/AGENTS.md](../packages/remote-react-renderer/AGENTS.md#component-usage-reporting).
 
 ## Where to go deeper
 

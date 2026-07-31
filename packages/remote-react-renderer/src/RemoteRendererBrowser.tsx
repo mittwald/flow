@@ -1,7 +1,9 @@
 "use client";
 
+import { ComponentUsageProvider } from "@/components/ComponentUsageProvider";
 import { HostRenderErrorBoundary } from "@/components/HostRenderErrorBoundary";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
+import type { ComponentUsageHandler } from "@/lib/componentUsage";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
@@ -36,6 +38,7 @@ export interface RemoteRendererBrowserProps {
   onNavigationStateChanged?: (state: NavigationState) => void;
   onConnected?: (event: RemoteReadyEvent) => void;
   onDeprecation?: (message: string) => void;
+  onComponentUsage?: ComponentUsageHandler;
   hostPathname?: string;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
@@ -57,6 +60,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const {
     integrations = [],
     __remoteReceiver: remoteReceiverFromProps,
+    onComponentUsage,
     ...connectedProps
   } = props;
 
@@ -67,10 +71,12 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   // (Rules of Hooks) while preserving the exact rendering of both paths.
   if (remoteReceiverFromProps) {
     return (
-      <RemoteRootRenderer
-        components={remoteComponents}
-        receiver={remoteReceiverFromProps}
-      />
+      <ComponentUsageProvider onUsage={onComponentUsage}>
+        <RemoteRootRenderer
+          components={remoteComponents}
+          receiver={remoteReceiverFromProps}
+        />
+      </ComponentUsageProvider>
     );
   }
 
@@ -80,17 +86,19 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   }
 
   return (
-    <RemoteRendererConnected
-      {...connectedProps}
-      src={src}
-      remoteComponents={remoteComponents}
-    />
+    <ComponentUsageProvider onUsage={onComponentUsage}>
+      <RemoteRendererConnected
+        {...connectedProps}
+        src={src}
+        remoteComponents={remoteComponents}
+      />
+    </ComponentUsageProvider>
   );
 };
 
 interface RemoteRendererConnectedProps extends Omit<
   RemoteRendererBrowserProps,
-  "integrations" | "__remoteReceiver" | "src"
+  "integrations" | "__remoteReceiver" | "onComponentUsage" | "src"
 > {
   src: string;
   remoteComponents: ReturnType<typeof useMergedComponents>;
