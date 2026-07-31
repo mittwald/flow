@@ -80,14 +80,24 @@ jobs:
           labels:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
             || steps.meta-storybook.outputs.labels }}
-          # TEMPORARY (PR #2760 review aid): render the Releases page with its
-          # dummy dataset in the preview only. Production (deploy-main) passes
-          # no such arg, so it stays on live/empty-state data. Remove this
-          # RELEASES_USE_DUMMY line before merge so other PR previews are
-          # unaffected.
+          # ════════════════════════════════════════════════════════════════
+          # 🚨🚨🚨  TEMPORARY — DO NOT MERGE WITH THIS LINE  🚨🚨🚨
+          # ════════════════════════════════════════════════════════════════
+          # PR #2760 review aid ONLY: renders the Releases page with its dummy
+          # dataset in the PR preview so the layout is reviewable before real
+          # stable releases exist. This is NOT production-safe as a permanent
+          # setting — it would force dummy Releases data into EVERY docs PR
+          # preview.
+          #
+          # ▶▶▶ REMOVE the `RELEASES_USE_DUMMY=1` build-arg line below before
+          #     this PR is merged. ◀◀◀
+          #
+          # (Production is unaffected regardless: deploy-main.yml passes no such
+          #  arg, and the Dockerfile defaults RELEASES_USE_DUMMY to "".)
+          # ════════════════════════════════════════════════════════════════
           build-args: |
             NEXT_BASE_PATH=
-            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }}
+            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }} # 🚨 TEMPORARY — remove before merge (see banner above)
 
   deploy:
     runs-on: ubuntu-latest
