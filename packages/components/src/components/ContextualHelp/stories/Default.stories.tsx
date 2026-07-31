@@ -3,7 +3,6 @@ import {
   ContextualHelp,
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
-import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
@@ -15,10 +14,9 @@ const meta: Meta<typeof ContextualHelp> = {
     controls: { disable: true },
   },
   render: (props) => (
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="ranks & roles">
       <Button />
       <ContextualHelp {...props}>
-        <Heading>Ranks & roles</Heading>
         <Text>
           Each member of the Rebel Alliance is assigned a rank for every mission
           and/or squadron. This allows the fleet to coordinate the fight against

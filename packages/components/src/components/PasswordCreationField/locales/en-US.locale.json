@@ -3,6 +3,7 @@
   "button.generate.tooltip.hide": "Hide password",
   "button.generate.tooltip.show": "Show password",
   "password.requirements.heading": "Requirements for your password",
+  "password.requirements.subject": "your password requirements",
   "validation.allowedSpecialCharacters": "Allowed special characters: #!~%^*_+-=?()<>|.,;$:/",
   "validation.atLeastOneCapitalLetter": "At least one capital letter",
   "validation.atLeastOneLowercaseLetter": "At least one lowercase letter",
