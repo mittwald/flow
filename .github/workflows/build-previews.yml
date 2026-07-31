@@ -100,7 +100,7 @@ jobs:
           # ════════════════════════════════════════════════════════════════
           build-args: |
             NEXT_BASE_PATH=
-            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }} # 🚨 TEMPORARY — keep for review, remove before the 1.0 release (see banner above)
+            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }}
 
   deploy:
     runs-on: ubuntu-latest
