@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
+
+### Bug Fixes
+
+* **ci:** stop orphaning preview apps for fast-merged PRs ([#2763](https://github.com/mittwald/flow/issues/2763)) ([0de49c2](https://github.com/mittwald/flow/commit/0de49c267c5d5d1b4b160b3f4061f029e9c3272e))
+
 # [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
 
 ### Features
