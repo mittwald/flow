@@ -8,6 +8,10 @@ import { action } from "storybook/actions";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { ActionGroup } from "@/components/ActionGroup";
+import { Text } from "@/components/Text";
+import { Link } from "@/components/Link";
+import { dummyText } from "@/lib/dev/dummyText";
+import type { FC } from "react";
 
 const meta: Meta<typeof Section> = {
   ...defaultStories,
@@ -16,6 +20,37 @@ const meta: Meta<typeof Section> = {
 export default meta;
 
 type Story = StoryObj<typeof Section>;
+
+/**
+ * Stands in for a boundary, permission gate or empty list — a child that is
+ * present but renders nothing.
+ */
+const RendersNothing: FC = () => null;
+
+/**
+ * The middle section renders no content and collapses, so the sections around
+ * it are separated by exactly one line.
+ */
+export const EmptyContentBetweenSections: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render: (props) => (
+    <>
+      <Section {...props}>
+        <Heading>Rebel Alliance Briefing</Heading>
+        <Text>{dummyText.medium}</Text>
+      </Section>
+      <Section {...props}>
+        <RendersNothing />
+      </Section>
+      <Section {...props}>
+        <Heading>Helpful Transmissions</Heading>
+        <Link href="#">Join the Alliance</Link>
+      </Section>
+    </>
+  ),
+};
 
 export const WithForm: Story = {
   parameters: {
