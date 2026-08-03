@@ -7,14 +7,15 @@ description:
   gegen ungewollte Änderungen absicherst.
 ---
 
-# Semantic Versioning bei Flow
+# Semantic Versioning
 
 Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
 Zusage gilt damit einheitlich für jedes Package. Es gibt keine
 Package-spezifischen Sonderregeln.
 
-Ab `1.0.0` wird aus dem bisherigen „wir versuchen, dich nicht zu brechen" ein
-verbindliches Versprechen nach [Semantic Versioning](https://semver.org):
+Mit Version `1.0.0` wird aus einer guten Absicht eine verlässliche Zusage: Wir
+halten uns an [Semantic Versioning](https://semver.org) und gehen Änderungen
+planbar und nachvollziehbar an.
 
 - **Major** – enthält Breaking Changes. Ein Update kann Anpassungen in deinem
   Code erfordern. Major-Versionen bleiben bewusst selten.
@@ -44,11 +45,11 @@ Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
 - **Das Remote-Protokoll** – die versionierte Verbindungsschicht zwischen
   Extension und Host bleibt kompatibel, solange dies möglich ist.
 
-Wo ein Teil dieser öffentlichen API entfernt werden soll, gilt durchgängig:
-deprecaten statt brechen. Der alte Pfad bleibt zunächst erhalten und wird zur
-Laufzeit über eine Deprecation-Warnung angekündigt, bevor er in einer
-Major-Version entfernt wird. Das betrifft die gesamte öffentliche API, nicht nur
-die in Extensions verwendeten Components.
+Wenn ein Teil der öffentlichen API entfernt werden soll, wird er zunächst als
+deprecated gekennzeichnet und nicht sofort entfernt. Der alte Pfad bleibt
+erhalten und wird zur Laufzeit über eine Deprecation-Warnung angekündigt, bevor
+er in einer Major-Version entfernt wird. Das betrifft die gesamte öffentliche
+API, nicht nur die in Extensions verwendeten Components.
 
 ---
 
@@ -126,7 +127,7 @@ Update bewusst und kontrolliert erfolgt.
 
 ---
 
-# Component-Status: Beta, Stable, Deprecated
+# Component Lifecycle
 
 Der Vertrag gilt nicht für jede Component gleich. Jede Component hat einen
 Lifecycle-Status, der die obigen Regeln überschreibt:
