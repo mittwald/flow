@@ -21,7 +21,7 @@
     "lint": "eslint . && stylelint '**/*.{css,scss}' && pnpm format:check",
     "test": "nx run-many --targets=test:unit,test:compile",
     "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
-    "test:browser:prepare": "pnpx playwright install --with-deps firefox webkit",
+    "test:browser:prepare": "pnpm exec playwright install --with-deps firefox webkit",
     "test:visual": "nx run-many --targets=test:visual",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
