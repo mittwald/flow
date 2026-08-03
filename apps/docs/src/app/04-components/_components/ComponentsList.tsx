@@ -5,6 +5,7 @@ import { ComponentCard } from "@/app/04-components/_components/ComponentCard";
 
 export interface ComponentLink {
   id: string;
+  group: string;
   slug: string;
   name: string;
   description?: string;
@@ -22,13 +23,11 @@ export const ComponentsList: FC<Props> = (props) => {
 
   return (
     <List.List
-      aria-label="Components"
       getItemId={(component) => component.id}
       defaultViewMode="tiles"
       batchSize={components.length}
       hidePagination
     >
-      <List.Search />
       <List.StaticData data={components} />
       <List.Item
         href={(component) => component.href}
