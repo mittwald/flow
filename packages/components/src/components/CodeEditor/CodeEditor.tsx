@@ -1,12 +1,13 @@
 import type { ReactCodeMirrorProps } from "@uiw/react-codemirror";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
+import { useId } from "react";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./CodeEditor.module.scss";
 import { type CodeEditorLanguage } from "@/components/CodeEditor/languages";
@@ -18,6 +19,7 @@ import {
   useCodeEditorExtensions,
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface CodeEditorProps
   extends
@@ -74,11 +76,47 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     className,
   );
 
+  const labelId = useId();
+  const descriptionId = useId();
+
+  /**
+   * The label and the field description are declared as children of the code
+   * editor, but must be rendered outside of the editor itself. They are
+   * tunneled out of the editor – just like the field error.
+   */
+  const propsContext: PropsContext = {
+    ...fieldPropsContext,
+    Label: {
+      ...fieldPropsContext.Label,
+      tunnel: { id: "label", component: "CodeEditor" },
+    },
+    FieldDescription: {
+      ...fieldPropsContext.FieldDescription,
+      tunnel: { id: "fieldDescription", component: "CodeEditor" },
+    },
+  };
+
   const enabledExtensions = useCodeEditorExtensions(language, extensions, {
     showLineNumbers: showLineNumbers,
     showCodeIndentationMakers: showCodeIndentationMakers,
     showCodeFolding: showCodeFolding,
     showLinterMarkers: showLinterMarkers,
+  });
+
+  /**
+   * The editable element of CodeMirror is the `.cm-content` element – not the
+   * root element the props are applied to. Its ARIA attributes are set through
+   * the content attributes facet.
+   */
+  const describedBy =
+    [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
+    undefined;
+
+  const contentAttributes = EditorView.contentAttributes.of({
+    "aria-labelledby": labelId,
+    ...(describedBy ? { "aria-describedby": describedBy } : {}),
+    ...(isRequired ? { "aria-required": "true" } : {}),
+    ...(isInvalid ? { "aria-invalid": "true" } : {}),
   });
 
   const localRef = useObjectRef(ref);
@@ -87,7 +125,10 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
 
   return (
     <div className={rootClassName}>
-      <PropsContextProvider props={fieldPropsContext}>
+      <PropsContextProvider props={propsContext}>
+        <div className={styles.labelSlot} id={labelId}>
+          <UiComponentTunnelExit id="label" component="CodeEditor" />
+        </div>
         <FieldErrorCaptureContext>
           <CodeMirror
             {...rest}
@@ -101,8 +142,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
               highlightSelectionMatches: false,
             }}
             theme={defaultLightTheme}
-            aria-required={isRequired}
-            aria-invalid={isInvalid}
+            data-invalid={isInvalid || undefined}
             readOnly={isReadOnly}
             className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
@@ -110,7 +150,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
                 localRef.current = codeMirrorRef.editor;
               }
             }}
-            extensions={enabledExtensions}
+            extensions={[...enabledExtensions, contentAttributes]}
             height={height ?? minHeight}
           >
             {copyable && (
@@ -124,6 +164,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             {children}
           </CodeMirror>
         </FieldErrorCaptureContext>
+        <div className={styles.fieldDescriptionSlot} id={descriptionId}>
+          <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
+        </div>
         <FieldErrorView />
       </PropsContextProvider>
     </div>
