@@ -32,11 +32,11 @@ coding agents, but great reference docs for humans too.
 
 ## Prerequisites
 
-| Tool        | Version                                                         |
-| ----------- | --------------------------------------------------------------- |
-| **Node.js** | `>=20.19` (CI runs on Node 24 — any recent 20.19+ LTS works)    |
-| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack |
-| **Git**     | any recent version                                              |
+| Tool        | Version                                                             |
+| ----------- | ------------------------------------------------------------------- |
+| **Node.js** | `>=24` (`engines.node` in the root `package.json`; CI runs Node 24) |
+| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack     |
+| **Git**     | any recent version                                                  |
 
 We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to get
 the exact pinned version is [Corepack](https://nodejs.org/api/corepack.html),
@@ -77,8 +77,8 @@ installed:
 
 - **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
   changes.
-- **post-checkout** / **post-merge** run `pnpm install && pnpm clean` so your
-  dependencies and Nx cache stay in sync after switching branches or pulling.
+- **post-checkout** / **post-merge** run `pnpm install` so your dependencies
+  stay in sync after switching branches or pulling.
 
 ## Repository overview
 
@@ -537,10 +537,11 @@ Local runs update the baselines for **your** OS. Additionally add the
 reference screenshots on Linux (matching CI) and commits them back to your
 branch.
 
-> ⚠️ When a visual test fails, it writes `*--Local--*.png` / `*--Remote--*.png`
-> diff artifacts showing the difference between the two environments. Use them
-> to inspect the failure — but **never commit them**; only the baselines belong
-> in the repo.
+> ⚠️ When a visual test fails, it writes diff images into `.vitest-attachments/`
+> (`*-diff-*.png`) — one per failing environment (`Local` / `Remote`), each
+> showing the current render against its committed baseline. That directory is
+> gitignored; use the images to inspect the failure but **never commit them** —
+> only the baselines belong in the repo.
 
 To run everything the way CI does:
 

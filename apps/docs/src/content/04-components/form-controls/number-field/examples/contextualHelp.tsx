@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   NumberField,
   Text,
@@ -11,10 +10,9 @@ import {
 <NumberField minValue={0} maxValue={100}>
   <Label>
     Alter
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Alter">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.990](https://github.com/mittwald/flow/compare/0.2.0-alpha.989...0.2.0-alpha.990) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.989](https://github.com/mittwald/flow/compare/0.2.0-alpha.988...0.2.0-alpha.989) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.988](https://github.com/mittwald/flow/compare/0.2.0-alpha.987...0.2.0-alpha.988) (2026-07-31)
+
+### Features
+
+* **Modal:** allow manually requiring close confirmation ([#2739](https://github.com/mittwald/flow/issues/2739)) ([6b35d8f](https://github.com/mittwald/flow/commit/6b35d8f5766571218fe4ba92ad6cc07ec7f6dfa3))
+
 # [0.2.0-alpha.987](https://github.com/mittwald/flow/compare/0.2.0-alpha.986...0.2.0-alpha.987) (2026-07-31)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

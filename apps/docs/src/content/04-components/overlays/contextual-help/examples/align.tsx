@@ -9,7 +9,7 @@ import {
 <Align>
   <Text>mail.agenturserver.de</Text>
 
-  <ContextualHelpTrigger>
+  <ContextualHelpTrigger subject="mail.agenturserver.de">
     <Button />
 
     <ContextualHelp>

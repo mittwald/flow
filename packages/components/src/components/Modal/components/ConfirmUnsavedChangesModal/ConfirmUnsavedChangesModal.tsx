@@ -10,12 +10,18 @@ import Action from "@/components/Action";
 import ButtonView from "@/views/ButtonView";
 import { useModalController } from "@/lib/controller";
 
+/**
+ * Rendered by every `Modal` and only becomes active once something requires the
+ * close to be confirmed – the `confirmOnClose` prop or a dirty `Form`.
+ */
 export const ConfirmUnsavedChangesModal: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales, "Modal");
+  const modalController = useModalController();
+  const confirmOnCloseEnabled = modalController.useConfirmOnCloseEnabled();
   const closeConfirmationController =
-    useModalController().useConfirmationController();
+    modalController.useConfirmationController();
 
-  if (closeConfirmationController) {
+  if (confirmOnCloseEnabled && closeConfirmationController) {
     const { controller, confirm, cancel } = closeConfirmationController;
 
     return (

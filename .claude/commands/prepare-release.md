@@ -105,11 +105,17 @@ requires `--from`/`--to` overrides before doing anything else.
 
    The curated notes MUST sit **verbatim** between
    `<!-- release-notes:start -->` and `<!-- release-notes:end -->`, with nothing
-   else between the markers — that block is the single source CI reads to create
-   the GitHub release. The extraction CI performs on merge must tolerate (trim)
-   leading and trailing blank lines inside the marker block — prettier may
-   insert blank lines adjacent to the markers, and that whitespace is not
-   content.
+   else between the markers — that block is the intended single source CI reads
+   to create the GitHub release. The extraction CI performs on merge must
+   tolerate (trim) leading and trailing blank lines inside the marker block —
+   prettier may insert blank lines adjacent to the markers, and that whitespace
+   is not content.
+
+   > ⚠️ **Not wired up yet.** No workflow reads this marker block today —
+   > `publish.yml` still builds the GitHub-release body from `CHANGELOG.md`. The
+   > marker extraction lands with the `publish.yml` follow-up (#2724, RFC
+   > #2711); until then the curated notes are for the PR only and are **not**
+   > published to the GitHub release.
 
 9. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
    `release/x.y.0`, `from → to`, `current → target` version). Ask for explicit
