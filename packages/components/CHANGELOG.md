@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.992](https://github.com/mittwald/flow/compare/0.2.0-alpha.991...0.2.0-alpha.992) (2026-08-03)
+
+### Bug Fixes
+
+* **Section:** collapse sections whose content renders nothing ([#2770](https://github.com/mittwald/flow/issues/2770)) ([c9f5745](https://github.com/mittwald/flow/commit/c9f5745f993723c3f5e8fb9ae083f5297f529e6f))
+
 # [0.2.0-alpha.991](https://github.com/mittwald/flow/compare/0.2.0-alpha.990...0.2.0-alpha.991) (2026-08-03)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
