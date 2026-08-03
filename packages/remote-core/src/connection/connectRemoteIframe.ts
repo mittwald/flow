@@ -26,7 +26,6 @@ interface Options {
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
   onDeprecation?: (message: string) => void;
-  /** Receives events a remote reports; unparseable ones never arrive here. */
   onEvent?: (event: ReportedEvent) => void;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
