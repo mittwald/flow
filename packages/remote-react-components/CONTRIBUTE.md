@@ -246,7 +246,9 @@ its ephemeral current refs, then loops over the same installed versions;
   import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 
   // Kbd is undefined in the alpha.686 bundle; available from alpha.791.
-  test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
+  test
+    .skipIf(crossVersion({ below: "0.2.0-alpha.791" }))
+    .each(testEnvironments)(
     "Kbd (%s)",
     /* … */
   );
@@ -297,5 +299,23 @@ written and `test:cross-version` passes with a "nothing to run" warning.
 ### CI
 
 Both cross-version harnesses run in the **scheduled** visual workflow
-(`test-visual-scheduled.yml`), twice a day — **not** on pull requests (they do
-network installs of published versions). Failures alert Slack.
+(`test-visual-scheduled.yml`), twice a day — **not** automatically on pull
+requests (they do network installs of published versions). Failures alert Slack.
+
+#### Running them on a pull request
+
+Because they don't run on every PR, a regression that a change introduces is
+only caught by the next scheduled run — after the PR has merged. **Run them
+on-demand by adding the `run-cross-version-tests` label to the PR**
+(`test-cross-version-label.yml`): it runs both harnesses against the PR branch
+and comments a per-version PASS/FAIL summary. The label removes itself, so
+re-adding it re-runs.
+
+**Add the label whenever you remove a component or change its rendered
+structure** (a public component gone, or an element added/removed/reordered in
+the host output). Such changes are exactly what produces an old-vs-current
+structural divergence, so the version gates may need adjusting — a
+`test.skipIf(crossVersion({ below }))` on a reused visual test, or a
+`minVersion`/`skipVersions` entry in `scenarioVersionSupport.ts` (see
+[Missing components and legitimate divergences](#missing-components-and-legitimate-divergences)).
+The label lets you find and fix that on the PR instead of after merge.

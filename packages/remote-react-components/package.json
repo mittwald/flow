@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.955",
+  "version": "0.2.0-alpha.990",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -32,10 +32,10 @@
     "test:browser:dev": "vitest dev --project=browser",
     "test:compile": "tsc --noEmit",
     "test:cross-version": "tsx dev/cross-version/run.ts",
-    "test:cross-version-inprocess": "tsx dev/cross-version/run-inprocess.ts",
-    "test:cross-version-inprocess:dev": "vitest dev --config=e2e/cross-version-inprocess/vitest.config.ts",
     "test:cross-version:dev": "vitest dev --config=e2e/cross-version/vitest.config.ts",
     "test:cross-version:prepare": "tsx dev/cross-version/prepare.ts",
+    "test:cross-version-inprocess": "tsx dev/cross-version/run-inprocess.ts",
+    "test:cross-version-inprocess:dev": "vitest dev --config=e2e/cross-version-inprocess/vitest.config.ts",
     "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
     "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
     "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",
@@ -88,7 +88,7 @@
     "@internationalized/date": "^3.12.2",
     "@mittwald/ext-bridge": "workspace:*",
     "react": "^19.2.0",
-    "react-hook-form": "*"
+    "react-hook-form": "^7.65.0"
   },
   "peerDependenciesMeta": {
     "@internationalized/date": {

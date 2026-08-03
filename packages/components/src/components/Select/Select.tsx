@@ -14,16 +14,22 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { useOverlayController } from "@/lib/controller";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SelectProps
   extends
     PropsWithChildren<
-      Omit<Aria.SelectProps<string>, "children" | "className" | "ref">
+      Omit<
+        Aria.SelectProps<string, "single" | "multiple">,
+        "children" | "className" | "ref"
+      >
     >,
     FlowComponentProps<HTMLButtonElement>,
     PropsWithClassName {
   /** Handler that is called when the selected value changes. */
-  onChange?: (value: Key | null) => void;
+  onChange?: (value: Key | Key[] | null) => void;
+  /** @deprecated Use `onChange` instead. */
+  onSelectionChange?: (value: Key | Key[] | null) => void;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
 }
@@ -39,6 +45,13 @@ export const Select = flowComponent("Select", (props) => {
     ref,
     ...rest
   } = props;
+
+  const warnDeprecation = useWarnDeprecation();
+  if (onSelectionChange !== undefined) {
+    warnDeprecation(
+      "The 'onSelectionChange' prop is deprecated and will be removed in a future release. Use 'onChange' instead.",
+    );
+  }
 
   const {
     FieldErrorView,
@@ -90,7 +103,11 @@ export const Select = flowComponent("Select", (props) => {
             className={styles.toggle}
             ref={ref}
           >
-            <Aria.SelectValue />
+            <Aria.SelectValue>
+              {({ selectedText, isPlaceholder }) =>
+                isPlaceholder || !selectedText ? undefined : selectedText
+              }
+            </Aria.SelectValue>
             <IconChevronDown />
           </Aria.Button>
           {children}

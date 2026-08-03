@@ -118,6 +118,7 @@ export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeE
       typeof: {},
       unselectable: {},
       vocab: {},
+      whiteSpace: {},
     };
   }
 

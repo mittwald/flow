@@ -2,12 +2,16 @@
 
 Verwende `<ContextualHelp />`, um ein ContextualHelp darzustellen. Das
 ContextualHelp kann beispielsweise aus
-[Heading](/04-components/content/heading/overview),
 [Text](/04-components/content/text/overview) und
 [Link](/04-components/navigation/link/overview) bestehen.
 
 Da das ContextualHelp sich nur durch eine Aktion des Users anzeigen lässt, wird
 ein `<ContextualHelpTrigger />` in Kombination mit einem `<Button />` benötigt.
+Über die `subject` Property des Triggers wird der Betreff angegeben, auf den
+sich das ContextualHelp bezieht. Er wird in die übersetzte Vorlage
+`Weitere Informationen zu {subject}` eingesetzt und ergibt so das
+Accessibility-Label des Buttons, etwa „Weitere Informationen zu Rechte &
+Rollen“.
 
 <LiveCodeEditor />
 

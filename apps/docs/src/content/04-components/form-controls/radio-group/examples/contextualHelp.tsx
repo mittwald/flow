@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Radio,
   RadioGroup,
@@ -12,10 +11,9 @@ import {
 <RadioGroup defaultValue="more">
   <Label>
     Täglicher Kaffeekonsum
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Täglicher Kaffeekonsum">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

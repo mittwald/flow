@@ -55,7 +55,10 @@ export interface AccentBoxProps
   aspectRatio?: CSSProperties["aspectRatio"];
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flowStatus beta
+ */
 export const AccentBox = flowComponent("AccentBox", (props) => {
   const {
     color: colorFromProps,

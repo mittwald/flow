@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Text,
   TextField,
@@ -11,10 +10,9 @@ import {
 <TextField>
   <Label>
     URL
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="URL">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

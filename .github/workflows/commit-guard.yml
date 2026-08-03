@@ -1,0 +1,175 @@
+name: Commit guard
+
+# Enforces the two commit-level gates of the 1.0.0 release model (RFC #2711):
+#
+# 1. Conventional PR title — the whole model derives versioning and the
+#    changelog from the merged commit's type. Because this repo squash-merges
+#    (the PR title becomes the commit subject), the PR *title* is what must be a
+#    valid Conventional Commit, so that is what we lint.
+# 2. Routing — where a change is allowed to land:
+#      - a feature (`feat:`) belongs on `next`, not on `main`;
+#      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
+#        line, not on any standing line (`main` *or* `next`).
+#    This makes the dangerous directions mechanically hard. It is self-gating:
+#    dormant until the `next` branch exists (i.e. until the 1.0.0 cut), because
+#    pre-cut everything legitimately targets `main`.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: commit-guard-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  conventional-title:
+    name: Conventional PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint PR title
+        uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The Conventional Commit types Flow derives releases + changelog from.
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          # Scopes are a convention here (e.g. `fix(Button):`), not mandatory
+          # (e.g. `chore(release):` vs. a scopeless `ci:`), so don't force one.
+          requireScope: false
+
+  routing:
+    name: Routing (feature -> next, breaking -> major line)
+    # PRs targeting a standing release line are subject to routing.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      BASE_REF: ${{ github.event.pull_request.base.ref }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Enforce release-line routing
+        run: |
+          set -euo pipefail
+
+          # --- Self-gating -----------------------------------------------------
+          # Routing only applies once the `next` collection branch exists (after
+          # the 1.0.0 cut). Until then every change legitimately targets `main`,
+          # so the guard stays dormant. (A PR based on `next` can only exist once
+          # `next` does, so this check short-circuits correctly for both bases.)
+          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "::notice::'next' branch does not exist yet — routing guard dormant (pre-1.0.0-cut). Skipping."
+            exit 0
+          fi
+
+          # --- Promotion / forward-merge exemption (ADR 0004 §8) ---------------
+          # A promotion PR (next -> main, major line -> main) or a sync PR is
+          # *supposed* to carry feat:/breaking commits. Exempt those heads, or
+          # they would block the release itself.
+          if [ "$HEAD_REF" = "next" ] \
+             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
+             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — routing guard exempt."
+            exit 0
+          fi
+
+          # --- Classify the PR title / body ------------------------------------
+          is_feat=0
+          is_breaking=0
+          if printf '%s' "$PR_TITLE" | grep -qiE '^feat(\([^)]+\))?!?:'; then is_feat=1; fi
+          if printf '%s' "$PR_TITLE" | grep -qE '^[a-z]+(\([^)]+\))?!:'; then is_breaking=1; fi
+          if printf '%s\n' "$PR_BODY" | grep -qE '^[[:space:]]*BREAKING(-| )CHANGE:'; then is_breaking=1; fi
+
+          # --- The rules -------------------------------------------------------
+          fail=0
+
+          # A breaking change belongs on the major line — never on a standing
+          # line (neither `main` nor `next`).
+          if [ "$is_breaking" -eq 1 ]; then
+            echo "::error::PR marks a breaking change — breaking changes target the major line, not '${BASE_REF}'."
+            fail=1
+          fi
+
+          # A feature belongs on `next`, not directly on `main`.
+          if [ "$BASE_REF" = "main" ] && [ "$is_feat" -eq 1 ]; then
+            echo "::error::PR title is a 'feat' — features target 'next', not 'main'."
+            fail=1
+          fi
+
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::Routing: 'main' takes fix:/docs:/chore:/…; 'next' additionally takes feat:; breaking changes go to the major line."
+            exit 1
+          fi
+
+          echo "Routing OK for base '${BASE_REF}'."
+
+  version-contract:
+    name: Version contract (engines.node + peer ranges)
+    # Same standing-line scope as routing: only PRs targeting a release line.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
+    runs-on: ubuntu-latest
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_BODY: ${{ github.event.pull_request.body }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Gate (self-gating + promotion/sync exemptions)
+        id: gate
+        run: |
+          set -euo pipefail
+
+          # Dormant until `next` exists (pre-1.0.0-cut) — mirrors the routing job.
+          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "::notice::'next' branch does not exist yet — version-contract guard dormant (pre-1.0.0-cut). Skipping."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Promotion / forward-merge / sync sources legitimately carry breaking
+          # changes (ADR 0004 §8) — exempt, same as routing.
+          if [ "$HEAD_REF" = "next" ] \
+             || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
+             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+            echo "::notice::head='${HEAD_REF}' is a promotion/sync source — version-contract guard exempt."
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "active=true" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout (full history so the base commit is reachable)
+        if: steps.gate.outputs.active == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Self-test the classifier
+        if: steps.gate.outputs.active == 'true'
+        run: node --test .github/scripts/version-contract-lib.test.mjs
+
+      - name: Enforce the version contract
+        if: steps.gate.outputs.active == 'true'
+        run: node .github/scripts/version-contract-guard.mjs

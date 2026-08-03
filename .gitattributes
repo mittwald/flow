@@ -1,1 +1,24 @@
 .yarn -diff
+
+# Forward-merge cascade drivers (ADR 0004 §3).
+#
+# When a lower release line is merged up into a higher one (`main → next`, and
+# `next → major line`), version/changelog differences are mechanical noise, not
+# real conflicts. These attributes let them resolve automatically so only a
+# genuine code conflict reaches a human via the sync PR (ADR 0004 §4).
+#
+# IMPORTANT: a `merge=<driver>` attribute is inert on its own — the driver must
+# ALSO be registered in the runner's git config. `.github/workflows/forward-
+# merge.yml` does this before every merge:
+#   git config merge.ours.driver true
+#   git config merge.package-json.driver \
+#     "node .github/scripts/merge-package-json.cjs %O %A %B %L %P"
+
+# `next` keeps its own CHANGELOG.md; lerna regenerates its entries from the
+# merged commits, and per-package changelogs are only the machine record.
+**/CHANGELOG.md merge=ours
+
+# `package.json`: keep the higher line's `version` field but merge every other
+# change (e.g. genuine dependency bumps) with a normal 3-way merge. A blanket
+# `merge=ours` is rejected — it would silently drop those. See the driver.
+**/package.json merge=package-json

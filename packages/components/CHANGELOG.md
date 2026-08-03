@@ -3,6 +3,168 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.990](https://github.com/mittwald/flow/compare/0.2.0-alpha.989...0.2.0-alpha.990) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.989](https://github.com/mittwald/flow/compare/0.2.0-alpha.988...0.2.0-alpha.989) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.988](https://github.com/mittwald/flow/compare/0.2.0-alpha.987...0.2.0-alpha.988) (2026-07-31)
+
+### Features
+
+* **Modal:** allow manually requiring close confirmation ([#2739](https://github.com/mittwald/flow/issues/2739)) ([6b35d8f](https://github.com/mittwald/flow/commit/6b35d8f5766571218fe4ba92ad6cc07ec7f6dfa3))
+
+# [0.2.0-alpha.987](https://github.com/mittwald/flow/compare/0.2.0-alpha.986...0.2.0-alpha.987) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.986](https://github.com/mittwald/flow/compare/0.2.0-alpha.985...0.2.0-alpha.986) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
+
+### Features
+
+* **InlineCode:** add whiteSpace prop ([#2754](https://github.com/mittwald/flow/issues/2754)) ([81a2330](https://github.com/mittwald/flow/commit/81a2330de8d012d076cf60429d2c4a23cbb0722d))
+
+# [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
+
+### Features
+
+* **components:** warn on all remaining deprecated APIs via useWarnDeprecation ([#2757](https://github.com/mittwald/flow/issues/2757)) ([8a945e6](https://github.com/mittwald/flow/commit/8a945e652cf919abe8a6b5577f5bda24a62cdcc9))
+
+# [0.2.0-alpha.981](https://github.com/mittwald/flow/compare/0.2.0-alpha.980...0.2.0-alpha.981) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.980](https://github.com/mittwald/flow/compare/0.2.0-alpha.979...0.2.0-alpha.980) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.979](https://github.com/mittwald/flow/compare/0.2.0-alpha.978...0.2.0-alpha.979) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+### Features
+
+* **TabNavigation:** Introduce tab navigation ([#2634](https://github.com/mittwald/flow/issues/2634)) ([b83a414](https://github.com/mittwald/flow/commit/b83a414b18e1868196aa6f839e086d603b7debfb))
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+### Features
+
+* **Select:** Support multi select ([#2603](https://github.com/mittwald/flow/issues/2603)) ([fc7b631](https://github.com/mittwald/flow/commit/fc7b6318ea388507cc1bebae303b48b0ce92d625))
+
+# [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+### Features
+
+* **Navigation:** support AlertBadge ([#2737](https://github.com/mittwald/flow/issues/2737)) ([0d022ba](https://github.com/mittwald/flow/commit/0d022ba5d3b7c3da3515c7fe11159c6642282759))
+
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+### Bug Fixes
+
+* **CodeEditor:** pin CodeMirror/Lezer singletons as direct deps ([#2745](https://github.com/mittwald/flow/issues/2745)) ([020c77d](https://github.com/mittwald/flow/commit/020c77dc4b9f354e1258608b7f09ae6ad6f9d3b5))
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
+
+### Bug Fixes
+
+* **Switch:** use flex-direction for label-leading instead of direction:rtl ([#2717](https://github.com/mittwald/flow/issues/2717)) ([1539318](https://github.com/mittwald/flow/commit/153931839d015b6a7c6779f9c9ff0ea0fffc6307))
+
+# [0.2.0-alpha.967](https://github.com/mittwald/flow/compare/0.2.0-alpha.966...0.2.0-alpha.967) (2026-07-29)
+
+### Bug Fixes
+
+* **components:** track doc-properties output in status-registry nx hash ([#2734](https://github.com/mittwald/flow/issues/2734)) ([2201f85](https://github.com/mittwald/flow/commit/2201f85a3e0f0c41eac645c6af84606468b40aa2))
+
+# [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
+
+### Features
+
+* **components:** adopt component lifecycle statuses (ADR 0003) ([#2733](https://github.com/mittwald/flow/issues/2733)) ([ae27285](https://github.com/mittwald/flow/commit/ae272850e4decc45bc65c9eaf533bba757b60693))
+
+# [0.2.0-alpha.964](https://github.com/mittwald/flow/compare/0.2.0-alpha.963...0.2.0-alpha.964) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.963](https://github.com/mittwald/flow/compare/0.2.0-alpha.962...0.2.0-alpha.963) (2026-07-28)
+
+### Features
+
+* **components:** add component lifecycle status registry (ADR 0003) ([#2729](https://github.com/mittwald/flow/issues/2729)) ([6a76d1e](https://github.com/mittwald/flow/commit/6a76d1e4ea6cf2e449cdcea0952bb54e9e8725c0))
+
+# [0.2.0-alpha.962](https://github.com/mittwald/flow/compare/0.2.0-alpha.961...0.2.0-alpha.962) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.961](https://github.com/mittwald/flow/compare/0.2.0-alpha.960...0.2.0-alpha.961) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.960](https://github.com/mittwald/flow/compare/0.2.0-alpha.959...0.2.0-alpha.960) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.959](https://github.com/mittwald/flow/compare/0.2.0-alpha.958...0.2.0-alpha.959) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.958](https://github.com/mittwald/flow/compare/0.2.0-alpha.957...0.2.0-alpha.958) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.957](https://github.com/mittwald/flow/compare/0.2.0-alpha.956...0.2.0-alpha.957) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.956](https://github.com/mittwald/flow/compare/0.2.0-alpha.955...0.2.0-alpha.956) (2026-07-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.955](https://github.com/mittwald/flow/compare/0.2.0-alpha.954...0.2.0-alpha.955) (2026-07-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

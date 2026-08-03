@@ -11,6 +11,10 @@ import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "@/app/layout.module.scss";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
+import {
+  ComponentStatusBadge,
+  ComponentStatusCallout,
+} from "@/lib/componentStatus";
 
 interface Props {
   mdxFile: MdxFile;
@@ -42,21 +46,27 @@ export const TopContent: FC<Props> = (props) => {
 
   return (
     <LayoutCard className={styles.topContent}>
-      <ColumnLayout l={[2, 1]} m={[1]} columnGap="l">
-        <Section>
-          <Heading level={1}>{mdxFile.getTitle()}</Heading>
+      <Section>
+        <ComponentStatusCallout name={component} />
+        <ColumnLayout l={[2, 1]} m={[1]} columnGap="l">
+          <Section>
+            <Heading level={1}>
+              {mdxFile.getTitle()}
+              <ComponentStatusBadge name={component} />
+            </Heading>
 
-          {mdxFile.mdxSource.frontmatter.description}
+            {mdxFile.mdxSource.frontmatter.description}
 
-          <Link href={mdxFile.getGitHubUrl()}>
-            GitHub
-            <IconExternalLink />
-          </Link>
-          {markdownLink}
-        </Section>
+            <Link href={mdxFile.getGitHubUrl()}>
+              GitHub
+              <IconExternalLink />
+            </Link>
+            {markdownLink}
+          </Section>
 
-        <MdxFileView mdxFile={mdxFile.serialize()} />
-      </ColumnLayout>
+          <MdxFileView mdxFile={mdxFile.serialize()} />
+        </ColumnLayout>
+      </Section>
     </LayoutCard>
   );
 };
