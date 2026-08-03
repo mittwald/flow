@@ -145,6 +145,29 @@
   background: var(--neutral--color--300);
 }
 
+.tabBar {
+  overflow: hidden;
+  background: var(--neutral--color--100);
+  border-radius: var(--corner-radius--m);
+}
+
+.tab {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: var(--size-px--m);
+}
+
+.tab:last-child {
+  flex: 0 0 auto;
+}
+
+.tabCurrent {
+  background: var(--neutral--color--300);
+}
+
 .sliderTrack {
   width: 100%;
   position: relative;

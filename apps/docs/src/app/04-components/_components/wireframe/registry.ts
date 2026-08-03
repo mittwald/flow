@@ -77,6 +77,7 @@ import { SkeletonWireframe } from "@/app/04-components/_components/wireframe/wir
 import { SliderWireframe } from "@/app/04-components/_components/wireframe/wireframes/Slider";
 import { SubmitButtonWireframe } from "@/app/04-components/_components/wireframe/wireframes/SubmitButton";
 import { SwitchWireframe } from "@/app/04-components/_components/wireframe/wireframes/Switch";
+import { TabNavigationWireframe } from "@/app/04-components/_components/wireframe/wireframes/TabNavigation";
 import { TableWireframe } from "@/app/04-components/_components/wireframe/wireframes/Table";
 import { TabsWireframe } from "@/app/04-components/_components/wireframe/wireframes/Tabs";
 import { TextAreaWireframe } from "@/app/04-components/_components/wireframe/wireframes/TextArea";
@@ -165,6 +166,7 @@ const wireframes: Record<string, FC> = {
   slider: SliderWireframe,
   "submit-button": SubmitButtonWireframe,
   switch: SwitchWireframe,
+  "tab-navigation": TabNavigationWireframe,
   table: TableWireframe,
   tabs: TabsWireframe,
   "text-area": TextAreaWireframe,
