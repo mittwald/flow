@@ -3,27 +3,27 @@ title: Versionierung & Stabilität
 navTitle: Versionierung
 description:
   Ab Version 1.0.0 folgt Flow Semantic Versioning. Diese Seite beschreibt,
-  worauf du dich als Consumer verlassen kannst, worauf nicht — und wie du dich
+  worauf du dich als Entwickler verlassen kannst, worauf nicht und wie du dich
   gegen ungewollte Änderungen absicherst.
 ---
 
 # Semantic Versioning bei Flow
 
 Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
-Zusage gilt damit einheitlich für jedes Package — es gibt keine
+Zusage gilt damit einheitlich für jedes Package. Es gibt keine
 Package-spezifischen Sonderregeln.
 
 Ab `1.0.0` wird aus dem bisherigen „wir versuchen, dich nicht zu brechen" ein
 verbindliches Versprechen nach [Semantic Versioning](https://semver.org):
 
-- **Major** — enthält Breaking Changes. Ein Update kann Anpassungen in deinem
+- **Major** – enthält Breaking Changes. Ein Update kann Anpassungen in deinem
   Code erfordern. Major-Versionen bleiben bewusst selten.
-- **Minor** — fügt neue Funktionen hinzu und ist abwärtskompatibel.
-- **Patch** — enthält Bugfixes und ist abwärtskompatibel.
+- **Minor** – fügt neue Funktionen hinzu und ist abwärtskompatibel.
+- **Patch** – enthält Bugfixes und ist abwärtskompatibel.
 
-Entscheidend ist die Grenze: Welche Änderung erzwingt eine neue Major-Version —
+Entscheidend ist die Grenze: Welche Änderung erzwingt eine neue Major-Version,
 und welche darf in einem Minor oder Patch erscheinen? Die folgenden Abschnitte
-beschreiben diese Grenze aus Sicht der Consumer.
+beschreiben diese Grenze aus Sicht der Entwickler.
 
 ---
 
@@ -32,23 +32,23 @@ beschreiben diese Grenze aus Sicht der Consumer.
 Diese Bereiche sind durch die Versionierung geschützt. Eine inkompatible
 Änderung daran erscheint nur in einer neuen Major-Version:
 
-- **Runtime Public API von `public.ts`** — welche Components und Exports
+- **Runtime Public API von `public.ts`** – welche Components und Exports
   existieren und welche Props sie zur Laufzeit akzeptieren, sowie das
   dokumentierte Verhalten dokumentierter Funktionen. Die Type-Ebene ist hiervon
   ausdrücklich ausgenommen (siehe unten).
-- **Components aus `@mittwald/flow-remote-react-components`** — die in
+- **Components aus `@mittwald/flow-remote-react-components`** – die in
   mStudio-Extensions verwendete API. Ihre Props sind der Vertrag mit
   Extension-Entwicklern und unterliegen derselben Zusage.
-- **Veröffentlichte Icons** — ein Icon zu entfernen oder umzubenennen ist ein
+- **Veröffentlichte Icons** – ein Icon zu entfernen oder umzubenennen ist ein
   Breaking Change. Icons werden ohnehin nie entfernt, sondern nur deprecated.
-- **Das Remote-Protokoll** — die versionierte Verbindungsschicht zwischen
+- **Das Remote-Protokoll** – die versionierte Verbindungsschicht zwischen
   Extension und Host bleibt kompatibel, solange dies möglich ist.
 
 Wo ein Teil dieser öffentlichen API entfernt werden soll, gilt durchgängig:
 deprecaten statt brechen. Der alte Pfad bleibt zunächst erhalten und wird zur
 Laufzeit über eine Deprecation-Warnung angekündigt, bevor er in einer
-Major-Version entfernt wird — das betrifft die gesamte öffentliche API, nicht
-nur die in Extensions verwendeten Components.
+Major-Version entfernt wird. Das betrifft die gesamte öffentliche API, nicht nur
+die in Extensions verwendeten Components.
 
 ---
 
@@ -59,7 +59,7 @@ Regeln, welche Änderung eine neue Major-Version erzwingt.
 
 **Node**
 
-- Der garantierte Node-Floor ist die aktiv unterstützte Node-LTS — aktuell
+- Der garantierte Node-Floor ist die aktiv unterstützte Node-LTS, aktuell
   `node >=24`, einheitlich über alle Packages. Er wird nur bei konkretem Bedarf
   angehoben, nicht um neuen Releases hinterherzulaufen.
 - Eine Node-Version fallen zu lassen, die noch in ihrem LTS-/Maintenance-Fenster
@@ -67,7 +67,7 @@ Regeln, welche Änderung eine neue Major-Version erzwingt.
   fallen zu lassen, darf in einem Minor erscheinen.
 - Strenger sind die Node-Runtime-Packages `@mittwald/ext-bridge` und
   `@mittwald/flow-remote-core`: Für sie ist jedes Anheben des Node-Floors ein
-  Breaking Change (→ Major), unabhängig von EOL — und ihr Floor kann
+  Breaking Change (→ Major), unabhängig von EOL, und ihr Floor kann
   konservativer sein als der der übrigen Packages.
 
 **React**
@@ -83,7 +83,7 @@ Regeln, welche Änderung eine neue Major-Version erzwingt.
 
 Damit sich das Design System weiterentwickeln kann, sind die folgenden Bereiche
 bewusst nicht durch die Versionierung abgedeckt. Sie können sich in jedem
-Release ändern — auch in einem Minor oder Patch:
+Release ändern, auch in einem Minor oder Patch:
 
 - **Alle Änderungen auf Type-Ebene (TypeScript).** Die Typen sind best-effort
   und nicht durch Semantic Versioning geschützt. Auch das Entfernen oder
@@ -100,7 +100,7 @@ Release ändern — auch in einem Minor oder Patch:
 # So schützt du dich
 
 Weil die oben genannten Bereiche bewusst nicht garantiert sind, gibt es zwei
-Regeln, an die du dich als Consumer halten solltest.
+Regeln, an die du dich als Entwickler halten solltest.
 
 <Alert>
   <Heading>Zwei Regeln für den stabilen Betrieb</Heading>
@@ -131,10 +131,10 @@ Update bewusst und kontrolliert erfolgt.
 Der Vertrag gilt nicht für jede Component gleich. Jede Component hat einen
 Lifecycle-Status, der die obigen Regeln überschreibt:
 
-- **Beta** — von der Breaking-Change-Zusage ausgenommen. Die API kann sich auch
+- **Beta** – von der Breaking-Change-Zusage ausgenommen. Die API kann sich auch
   außerhalb einer Major-Version ändern.
-- **Stable** (Standard) — vollständig durch die obigen Regeln gebunden.
-- **Deprecated** — bis zur Entfernung in einer Major-Version weiter abgesichert
+- **Stable** (Standard) – vollständig durch die obigen Regeln gebunden.
+- **Deprecated** – bis zur Entfernung in einer Major-Version weiter abgesichert
   und mit einem Migrationspfad versehen.
 
 Das vollständige Lifecycle-Modell beschreibt
