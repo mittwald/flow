@@ -3,11 +3,16 @@ import type { FC } from "react";
 import {
   WFrame,
   WInput,
+  WStack,
+  WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 
 export const TextAreaWireframe: FC = () => (
   <WFrame>
-    <WInput height={80} />
+    <WStack>
+      <WText width="34%" />
+      <WInput height={80} />
+    </WStack>
   </WFrame>
 );
 

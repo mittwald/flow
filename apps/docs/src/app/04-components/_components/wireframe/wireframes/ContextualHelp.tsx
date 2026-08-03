@@ -7,15 +7,17 @@ import {
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconInfo } from "@mittwald/flow-react-components";
+import styles from "./wireframes.module.scss";
 
 export const ContextualHelpWireframe: FC = () => (
-  <WFrame>
+  <WFrame alignItems="center" gap={0}>
     <WIcon>
       <IconInfo />
     </WIcon>
-    <WOverlay>
-      <WText width="70%" />
-      <WText />
+    <span className={styles.tipInlineStart} />
+    <WOverlay className={styles.tippedOverlay} tone="500">
+      <WText width="70%" tone="300" />
+      <WText tone="300" />
     </WOverlay>
   </WFrame>
 );

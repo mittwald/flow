@@ -12,18 +12,21 @@ import { IconNumber } from "@mittwald/flow-react-components";
 
 export const MarkdownEditorWireframe: FC = () => (
   <WFrame>
-    <WInput>
-      <WStack>
-        <WRow>
-          <WIcon>
-            <IconNumber />
-          </WIcon>
-          <WText width="56%" />
-        </WRow>
-        <WText width="92%" />
-        <WText width="78%" />
-      </WStack>
-    </WInput>
+    <WStack>
+      <WText width="34%" />
+      <WInput>
+        <WStack>
+          <WRow>
+            <WIcon>
+              <IconNumber />
+            </WIcon>
+            <WText width="56%" />
+          </WRow>
+          <WText width="92%" />
+          <WText width="78%" />
+        </WStack>
+      </WInput>
+    </WStack>
   </WFrame>
 );
 

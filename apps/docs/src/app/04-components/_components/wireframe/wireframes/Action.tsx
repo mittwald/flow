@@ -11,7 +11,7 @@ import { IconLoader2 } from "@tabler/icons-react";
 export const ActionWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WButton width="58%" justifyContent="center">
-      <WIcon tone="400">
+      <WIcon tone="300">
         <Icon>
           <IconLoader2 />
         </Icon>

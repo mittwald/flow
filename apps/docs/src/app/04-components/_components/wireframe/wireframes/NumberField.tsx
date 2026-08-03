@@ -4,19 +4,24 @@ import {
   WFrame,
   WIcon,
   WInput,
+  WStack,
+  WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconPlus, IconMinus } from "@mittwald/flow-react-components";
 
 export const NumberFieldWireframe: FC = () => (
   <WFrame>
-    <WInput justifyContent="flex-end">
-      <WIcon>
-        <IconPlus />
-      </WIcon>
-      <WIcon>
-        <IconMinus />
-      </WIcon>
-    </WInput>
+    <WStack>
+      <WText width="34%" />
+      <WInput justifyContent="flex-end">
+        <WIcon>
+          <IconPlus />
+        </WIcon>
+        <WIcon>
+          <IconMinus />
+        </WIcon>
+      </WInput>
+    </WStack>
   </WFrame>
 );
 

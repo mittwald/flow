@@ -145,6 +145,60 @@
   background: var(--neutral--color--300);
 }
 
+/* One notch (8px) below the l icon size, for icons that would otherwise
+   crowd their container. */
+.iconReduced svg {
+  width: calc(var(--icon--size--l) - var(--size-px--s));
+  height: calc(var(--icon--size--l) - var(--size-px--s));
+}
+
+/* Popover tip pointing at the element that triggered the overlay. Filled in the
+   structural tone rather than the overlay's own near-white fill, which would
+   disappear against the card background. */
+.tipDown,
+.tipInlineStart {
+  position: relative;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  flex-shrink: 0;
+}
+
+.tipDown {
+  border-inline: var(--size-px--s) solid transparent;
+  border-block-start: var(--size-px--s) solid var(--neutral--color--500);
+}
+
+.tipInlineStart {
+  border-block: var(--size-px--s) solid transparent;
+  border-inline-end: var(--size-px--s) solid var(--neutral--color--500);
+}
+
+/* Overlay outlined in the tip's color, so tip and border read as one shape.
+   Doubled class to outrank the primitive's own single-class border-color
+   without depending on stylesheet order. */
+.tippedOverlay.tippedOverlay {
+  border-color: var(--neutral--color--500);
+}
+
+/* Modal footer — bleeds to the overlay edges, like the real footer. */
+.modalFooter {
+  width: auto;
+  margin-block: var(--size-px--s) calc(var(--size-px--m) * -1);
+  margin-inline: calc(var(--size-px--m) * -1);
+  padding: var(--size-px--s);
+  background: var(--neutral--color--200);
+  border-radius: 0 0 var(--corner-radius--m) var(--corner-radius--m);
+}
+
+/* Keep the footer compact — the primitive's 48px button box makes the modal
+   overlay taller than the card's media area. */
+.modalFooter .modalFooterButton {
+  min-width: 0;
+  min-height: var(--size-px--xl);
+  padding-block: 0;
+}
+
 .tabBar {
   overflow: hidden;
   background: var(--neutral--color--100);

@@ -10,7 +10,7 @@ import { IconUpload } from "@mittwald/flow-react-components";
 export const FileFieldWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WButton width="fit-content">
-      <WIcon tone="400">
+      <WIcon tone="300">
         <IconUpload />
       </WIcon>
     </WButton>

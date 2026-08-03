@@ -14,7 +14,7 @@ export const ContextMenuWireframe: FC = () => (
   <WFrame>
     <WStack>
       <WButton width="fit-content">
-        <WIcon tone="400">
+        <WIcon tone="300">
           <IconContextMenu />
         </WIcon>
       </WButton>

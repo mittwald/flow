@@ -12,17 +12,20 @@ import { IconCode } from "@mittwald/flow-react-components";
 
 export const CodeEditorWireframe: FC = () => (
   <WFrame>
-    <WInput>
-      <WStack>
-        <WRow>
-          <WIcon>
-            <IconCode />
-          </WIcon>
-          <WText width="74%" />
-        </WRow>
-        <WText width="90%" />
-      </WStack>
-    </WInput>
+    <WStack>
+      <WText width="34%" />
+      <WInput>
+        <WStack>
+          <WRow>
+            <WIcon>
+              <IconCode />
+            </WIcon>
+            <WText width="74%" />
+          </WRow>
+          <WText width="90%" />
+        </WStack>
+      </WInput>
+    </WStack>
   </WFrame>
 );
 

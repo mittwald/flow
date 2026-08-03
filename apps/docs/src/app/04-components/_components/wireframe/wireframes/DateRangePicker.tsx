@@ -5,6 +5,7 @@ import {
   WIcon,
   WInput,
   WRow,
+  WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconDate } from "@mittwald/flow-react-components";
@@ -12,18 +13,21 @@ import { IconMinus } from "@mittwald/flow-react-components";
 
 export const DateRangePickerWireframe: FC = () => (
   <WFrame>
-    <WInput justifyContent="space-between">
-      <WRow>
-        <WText tone="400" width="30%" />
+    <WStack>
+      <WText width="34%" />
+      <WInput justifyContent="space-between">
+        <WRow>
+          <WText tone="400" width="30%" />
+          <WIcon>
+            <IconMinus size="s" />
+          </WIcon>
+          <WText tone="400" width="30%" />
+        </WRow>
         <WIcon>
-          <IconMinus size="s" />
+          <IconDate />
         </WIcon>
-        <WText tone="400" width="30%" />
-      </WRow>
-      <WIcon>
-        <IconDate />
-      </WIcon>
-    </WInput>
+      </WInput>
+    </WStack>
   </WFrame>
 );
 

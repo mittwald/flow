@@ -13,7 +13,7 @@ export const CheckboxButtonWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WButton width="64%">
       <WRow width="90%">
-        <WIcon tone="400">
+        <WIcon tone="300">
           <IconCheckboxChecked />
         </WIcon>
         <WText />

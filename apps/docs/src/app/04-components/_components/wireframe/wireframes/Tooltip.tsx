@@ -7,14 +7,16 @@ import {
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import styles from "./wireframes.module.scss";
 
 export const TooltipWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WStack alignItems="center" width={200}>
-      <WOverlay>
-        <WText />
+    <WStack alignItems="center" width={200} gap={0}>
+      <WOverlay className={styles.tippedOverlay} tone="500">
+        <WText tone="300" />
       </WOverlay>
-      <WButton width="80%" />
+      <span className={styles.tipDown} />
+      <WButton width="80%" marginBlock={8} />
     </WStack>
   </WFrame>
 );

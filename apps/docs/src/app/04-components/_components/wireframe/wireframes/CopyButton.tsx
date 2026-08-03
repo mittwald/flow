@@ -10,7 +10,7 @@ import { IconCopy } from "@mittwald/flow-react-components";
 export const CopyButtonWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WButton width="fit-content">
-      <WIcon tone="400">
+      <WIcon tone="300">
         <IconCopy />
       </WIcon>
     </WButton>

@@ -14,6 +14,12 @@
   width: 100%;
 }
 
+/* Every wireframe is its own stacking context, so a z-index inside one (e.g. a
+   popover tip lifted above an overlay's shadow) can never escape the card. */
+.frame {
+  isolation: isolate;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
