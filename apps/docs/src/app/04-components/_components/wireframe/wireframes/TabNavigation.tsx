@@ -1,6 +1,7 @@
 "use client";
 import type { FC } from "react";
 import {
+  WBox,
   WFrame,
   WIcon,
   WRow,
@@ -12,7 +13,7 @@ import styles from "@/app/04-components/_components/wireframe/wireframes/wirefra
 
 export const TabNavigationWireframe: FC = () => (
   <WFrame>
-    <WStack gap={16}>
+    <WStack gap={0}>
       <WRow className={styles.tabBar} gap={0}>
         {[0, 1, 2].map((item) => (
           <div
@@ -28,10 +29,10 @@ export const TabNavigationWireframe: FC = () => (
           </WIcon>
         </div>
       </WRow>
-      <WStack>
+      <WBox tone="300" className={styles.tabPanel}>
         <WText width="84%" />
         <WText width="58%" />
-      </WStack>
+      </WBox>
     </WStack>
   </WFrame>
 );
