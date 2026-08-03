@@ -5,6 +5,10 @@
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
