@@ -5,6 +5,7 @@
   "description": "Default iconset for Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/types/components/index.d.ts",
