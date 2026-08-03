@@ -1,75 +1,61 @@
-import { describe, expect, test, vi } from "vitest";
-import {
-  createComponentUsageCollector,
-  type ComponentUsageEvent,
-} from "@/lib/componentUsage";
+import { describe, expect, test } from "vitest";
+import { toComponentUsageEvent } from "@/lib/componentUsage";
 
 const noStatus = () => undefined;
 
-describe("createComponentUsageCollector", () => {
-  test("reports a component on first use", () => {
-    const handler = vi.fn();
-    const collector = createComponentUsageCollector(handler, noStatus);
-
-    collector.report("Button");
-
-    expect(handler).toHaveBeenCalledExactlyOnceWith({
+describe("toComponentUsageEvent", () => {
+  test("carries component and origin through", () => {
+    expect(
+      toComponentUsageEvent(
+        {
+          event: "ComponentRendered",
+          data: { component: "Button", isInternalComposition: false },
+        },
+        noStatus,
+      ),
+    ).toEqual({
       component: "Button",
+      isInternalComposition: false,
       status: undefined,
     });
   });
 
-  test("reports a component only once, no matter how often it is used", () => {
-    const handler = vi.fn();
-    const collector = createComponentUsageCollector(handler, noStatus);
-
-    collector.report("Button");
-    collector.report("Button");
-    collector.report("Button");
-
-    expect(handler).toHaveBeenCalledTimes(1);
-  });
-
-  test("reports every distinct component", () => {
-    const events: ComponentUsageEvent[] = [];
-    const collector = createComponentUsageCollector(
-      (event) => events.push(event),
-      noStatus,
-    );
-
-    collector.report("Button");
-    collector.report("Table");
-    collector.report("Button");
-
-    expect(events.map((event) => event.component)).toEqual(["Button", "Table"]);
+  test("keeps the internal-composition flag", () => {
+    expect(
+      toComponentUsageEvent(
+        {
+          event: "ComponentRendered",
+          data: { component: "OverlayContent", isInternalComposition: true },
+        },
+        noStatus,
+      ).isInternalComposition,
+    ).toBe(true);
   });
 
   test("attaches the resolved lifecycle status", () => {
-    const handler = vi.fn();
-    const collector = createComponentUsageCollector(handler, (component) =>
-      component === "Accordion" ? { level: "beta", isNew: false } : undefined,
-    );
-
-    collector.report("Accordion");
-    collector.report("TableCell");
-
-    expect(handler).toHaveBeenNthCalledWith(1, {
-      component: "Accordion",
-      status: { level: "beta", isNew: false },
-    });
-    expect(handler).toHaveBeenNthCalledWith(2, {
-      component: "TableCell",
-      status: undefined,
-    });
+    expect(
+      toComponentUsageEvent(
+        {
+          event: "ComponentRendered",
+          data: { component: "Accordion", isInternalComposition: false },
+        },
+        (component) =>
+          component === "Accordion"
+            ? { level: "beta", isNew: false }
+            : undefined,
+      ).status,
+    ).toEqual({ level: "beta", isNew: false });
   });
 
-  test("keeps collectors independent of each other", () => {
-    const handler = vi.fn();
-    const resolve = noStatus;
-
-    createComponentUsageCollector(handler, resolve).report("Button");
-    createComponentUsageCollector(handler, resolve).report("Button");
-
-    expect(handler).toHaveBeenCalledTimes(2);
+  test("leaves the status undefined for untracked components", () => {
+    expect(
+      toComponentUsageEvent(
+        {
+          event: "ComponentRendered",
+          data: { component: "TableCell", isInternalComposition: false },
+        },
+        noStatus,
+      ).status,
+    ).toBeUndefined();
   });
 });

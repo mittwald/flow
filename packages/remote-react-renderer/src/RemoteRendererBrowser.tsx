@@ -1,9 +1,12 @@
 "use client";
 
-import { ComponentUsageProvider } from "@/components/ComponentUsageProvider";
 import { HostRenderErrorBoundary } from "@/components/HostRenderErrorBoundary";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
-import type { ComponentUsageHandler } from "@/lib/componentUsage";
+import {
+  toComponentUsageEvent,
+  type ComponentUsageHandler,
+} from "@/lib/componentUsage";
+import { getFlowComponentStatus } from "@mittwald/flow-react-components/internal";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
@@ -60,7 +63,6 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const {
     integrations = [],
     __remoteReceiver: remoteReceiverFromProps,
-    onComponentUsage,
     ...connectedProps
   } = props;
 
@@ -69,14 +71,13 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   // The two branches use disjoint sets of hooks, so the connection path lives
   // in a dedicated component. This keeps each component's hook order stable
   // (Rules of Hooks) while preserving the exact rendering of both paths.
+  // Note that the receiver path has no connection, so it reports no usage.
   if (remoteReceiverFromProps) {
     return (
-      <ComponentUsageProvider onUsage={onComponentUsage}>
-        <RemoteRootRenderer
-          components={remoteComponents}
-          receiver={remoteReceiverFromProps}
-        />
-      </ComponentUsageProvider>
+      <RemoteRootRenderer
+        components={remoteComponents}
+        receiver={remoteReceiverFromProps}
+      />
     );
   }
 
@@ -86,19 +87,17 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   }
 
   return (
-    <ComponentUsageProvider onUsage={onComponentUsage}>
-      <RemoteRendererConnected
-        {...connectedProps}
-        src={src}
-        remoteComponents={remoteComponents}
-      />
-    </ComponentUsageProvider>
+    <RemoteRendererConnected
+      {...connectedProps}
+      src={src}
+      remoteComponents={remoteComponents}
+    />
   );
 };
 
 interface RemoteRendererConnectedProps extends Omit<
   RemoteRendererBrowserProps,
-  "integrations" | "__remoteReceiver" | "onComponentUsage" | "src"
+  "integrations" | "__remoteReceiver" | "src"
 > {
   src: string;
   remoteComponents: ReturnType<typeof useMergedComponents>;
@@ -112,6 +111,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     onNavigationStateChanged,
     onConnected,
     onDeprecation,
+    onComponentUsage,
     hostPathname,
     remoteComponents,
   } = props;
@@ -165,6 +165,13 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     onError: setRemoteError,
     onNavigationStateChanged,
     onDeprecation,
+    onEvent: (event) => {
+      if (event.event === "ComponentRendered") {
+        onComponentUsage?.(
+          toComponentUsageEvent(event, getFlowComponentStatus),
+        );
+      }
+    },
   });
 
   const timeoutPromise = (message: string) =>

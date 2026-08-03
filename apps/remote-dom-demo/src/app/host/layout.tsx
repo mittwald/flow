@@ -18,7 +18,35 @@ import type {
   RemoteReadyEvent,
 } from "@mittwald/flow-remote-react-renderer";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, type FC } from "react";
+
+const UsageList: FC<{ label: string; usage: ComponentUsageEvent[] }> = ({
+  label,
+  usage,
+}) => (
+  <LabeledValue>
+    <Label>
+      {label} ({usage.length})
+    </Label>
+    <Flex gap="s" wrap="wrap">
+      {usage.map(({ component, status }) => (
+        <Badge
+          key={component}
+          color={
+            status?.level === "deprecated"
+              ? "red"
+              : status?.level === "beta"
+                ? "orange"
+                : "neutral"
+          }
+        >
+          <Label>{component}</Label>
+          <Text>{status?.level ?? "untracked"}</Text>
+        </Badge>
+      ))}
+    </Flex>
+  </LabeledValue>
+);
 
 export default function HostPage() {
   const router = useRouter();
@@ -60,26 +88,20 @@ export default function HostPage() {
         )}
         {componentUsage.length > 0 && (
           <>
-            <LabeledValue>
-              <Label>Used components ({componentUsage.length})</Label>
-              <Flex gap="s" wrap="wrap">
-                {componentUsage.map(({ component, status }) => (
-                  <Badge
-                    key={component}
-                    color={
-                      status?.level === "deprecated"
-                        ? "red"
-                        : status?.level === "beta"
-                          ? "orange"
-                          : "neutral"
-                    }
-                  >
-                    <Label>{component}</Label>
-                    <Text>{status?.level ?? "untracked"}</Text>
-                  </Badge>
-                ))}
-              </Flex>
-            </LabeledValue>
+            <ColumnLayout>
+              <UsageList
+                label="Used by the extension"
+                usage={componentUsage.filter(
+                  (usage) => !usage.isInternalComposition,
+                )}
+              />
+              <UsageList
+                label="Composed by Flow"
+                usage={componentUsage.filter(
+                  (usage) => usage.isInternalComposition,
+                )}
+              />
+            </ColumnLayout>
             <Separator />
           </>
         )}

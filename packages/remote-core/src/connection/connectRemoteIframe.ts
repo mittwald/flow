@@ -9,6 +9,7 @@ import {
   type RemoteReadyEvent,
   type RemoteReadyEventInput,
 } from "@/connection/types";
+import { parseReportedEvent, type ReportedEvent } from "@/events/remoteEvents";
 import { getWithMergedHostConfig } from "@/ext-bridge/getWithMergedHostConfig";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
@@ -25,6 +26,8 @@ interface Options {
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
   onDeprecation?: (message: string) => void;
+  /** Receives events a remote reports; unparseable ones never arrive here. */
+  onEvent?: (event: ReportedEvent) => void;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
 }
 
@@ -53,6 +56,7 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     onError,
     onNavigationStateChanged,
     onDeprecation,
+    onEvent,
     extBridgeImplementation: extBridgeImplementationProp = emptyImplementation,
     hostConfig,
   } = opts;
@@ -86,6 +90,12 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         },
         reportDeprecation: async (message: string) => {
           onDeprecation?.(message);
+        },
+        reportEvent: async (event) => {
+          const parsed = parseReportedEvent(event);
+          if (parsed) {
+            onEvent?.(parsed);
+          }
         },
         getHostConfig: async () => {
           return hostConfig;

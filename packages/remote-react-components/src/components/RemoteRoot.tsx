@@ -4,7 +4,13 @@ import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import { packageVersion } from "@/version";
-import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
+import {
+  ComponentUsageProvider,
+  isFlowComponentName,
+  markInternalComposition,
+  ViewComponentContextProvider,
+  type ComponentUsageHandler,
+} from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
   connectRemoteReceiver,
@@ -33,10 +39,17 @@ import {
 import type { HostConfig } from "@mittwald/flow-core";
 import { initExtBridge } from "@mittwald/ext-bridge/browser";
 
-const viewComponents = {
-  ...remoteComponents,
-  ...customViewComponents,
-} as FlowViewComponents;
+const viewComponents = Object.fromEntries(
+  Object.entries({
+    ...remoteComponents,
+    ...customViewComponents,
+  }).map(([name, component]) => [
+    name,
+    isFlowComponentName(name)
+      ? markInternalComposition(component as never)
+      : component,
+  ]),
+) as unknown as FlowViewComponents;
 
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
@@ -146,6 +159,28 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
       });
   };
 
+  const reportedComponentUsage = useRef(new Set<string>());
+
+  const forwardComponentUsage: ComponentUsageHandler = ({
+    component,
+    isInternalComposition,
+  }) => {
+    const key = `${component}#${isInternalComposition}`;
+    if (reportedComponentUsage.current.has(key)) {
+      return;
+    }
+    reportedComponentUsage.current.add(key);
+
+    void connectionRef.current?.imports
+      .reportEvent?.({
+        event: "ComponentRendered",
+        data: { component, isInternalComposition },
+      })
+      ?.catch(() => {
+        // ignore: host does not support event reporting
+      });
+  };
+
   const setIsLoadingFromProps = () => {
     if (isLoadingFromProps !== undefined) {
       connectionRef.current?.imports.setIsLoading(isLoadingFromProps);
@@ -226,11 +261,13 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
           >
             <IntlProvider locale={language}>
               <DeprecationWarningProvider onWarning={forwardDeprecationWarning}>
-                <Suspense fallback={loadingFallback}>
-                  <ViewComponentContextProvider components={viewComponents}>
-                    {children}
-                  </ViewComponentContextProvider>
-                </Suspense>
+                <ComponentUsageProvider onUsage={forwardComponentUsage}>
+                  <Suspense fallback={loadingFallback}>
+                    <ViewComponentContextProvider components={viewComponents}>
+                      {children}
+                    </ViewComponentContextProvider>
+                  </Suspense>
+                </ComponentUsageProvider>
               </DeprecationWarningProvider>
             </IntlProvider>
           </RemoteContextProvider>

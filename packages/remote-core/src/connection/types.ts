@@ -3,6 +3,7 @@ import type {
   ExtBridgeConnectionApi,
 } from "@mittwald/ext-bridge";
 import type { HostConfig } from "@mittwald/flow-core";
+import type { ReportedEvent } from "@/events/remoteEvents";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
 export type { RemoteConnection } from "@mittwald/remote-dom-core";
@@ -44,6 +45,16 @@ export interface HostExports extends ExtBridgeConnectionApi {
   setNavigationState: (state: NavigationState) => Promise<void>;
   getHostConfig: () => Promise<HostConfig>;
   reportDeprecation: (message: string) => Promise<void>;
+  /**
+   * The generic remote→host event channel — see `events/remoteEvents.ts`. Route
+   * new remote→host signals through this instead of adding another method here:
+   * the host validates the payload and ignores events it does not know, so a
+   * new event needs no protocol change and no host rollout.
+   *
+   * Older hosts do not implement it. Call it as `reportEvent?.(…)` and swallow
+   * the rejection, the way `reportDeprecation` is called.
+   */
+  reportEvent: (event: ReportedEvent) => Promise<void>;
 }
 
 export interface RemoteExports {

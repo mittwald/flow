@@ -1,4 +1,3 @@
-import { useReportComponentUsage } from "@/components/ComponentUsageProvider";
 import { isReactSuspendedStyle, isStyleProp } from "@/lib/propClassifiers";
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
@@ -25,8 +24,6 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<RemoteComponentRendererProps> => {
   function HostComponent(props: P & FlowRemoteElementMetaData) {
-    useReportComponentUsage(name);
-
     const hostComponentProps = mapValues(props, (v, k) =>
       mapProperty(v, k),
     ) as P & FlowRemoteElementMetaData;

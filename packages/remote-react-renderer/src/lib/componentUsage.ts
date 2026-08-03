@@ -1,7 +1,9 @@
 import type { FlowComponentStatus } from "@mittwald/flow-react-components/internal";
+import type { ComponentRenderedEvent } from "@mittwald/flow-remote-core";
 
 export interface ComponentUsageEvent {
   component: string;
+  isInternalComposition: boolean;
   status?: FlowComponentStatus;
 }
 
@@ -11,23 +13,10 @@ export type ComponentStatusResolver = (
   component: string,
 ) => FlowComponentStatus | undefined;
 
-export interface ComponentUsageCollector {
-  report: (component: string) => void;
-}
-
-export const createComponentUsageCollector = (
-  handler: ComponentUsageHandler,
+export const toComponentUsageEvent = (
+  event: ComponentRenderedEvent,
   resolveStatus: ComponentStatusResolver,
-): ComponentUsageCollector => {
-  const reported = new Set<string>();
-
-  return {
-    report: (component) => {
-      if (reported.has(component)) {
-        return;
-      }
-      reported.add(component);
-      handler({ component, status: resolveStatus(component) });
-    },
-  };
-};
+): ComponentUsageEvent => ({
+  ...event.data,
+  status: resolveStatus(event.data.component),
+});

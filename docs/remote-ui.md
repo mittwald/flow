@@ -381,6 +381,17 @@ connection via `connection.imports.reportDeprecation?.(message)` — the optiona
 chaining is a deliberate guard for hosts that predate the `reportDeprecation`
 export — which surfaces on the host side as `onDeprecation`.
 
+Every remote→host signal added after that one goes through **one** generic
+channel instead of its own `HostExports` member: `reportEvent`
+([`packages/remote-core/src/events/remoteEvents.ts`](../packages/remote-core/src/events/remoteEvents.ts)).
+The payload of each event type is a zod schema, validated on the host, and an
+event the host cannot parse — an unknown type, or a newer payload — is silently
+dropped. A new signal is therefore a schema addition, not a protocol change, and
+needs no host rollout. What does not disappear is payload versioning: extend a
+schema additively, and introduce a new event type rather than changing an
+existing field. The channel itself is still an `HostExports` member older hosts
+lack, so callers use `reportEvent?.(…)` and swallow the rejection.
+
 ## Host-side rendering — special cases
 
 A handful of host-rendering behaviors don't fit neatly into the
@@ -407,15 +418,30 @@ render-and-mirror model above and are worth knowing about directly:
   or large object props is more expensive over the wire than it would be
   locally.
 - **The host can observe which components a remote uses.** `onComponentUsage` on
-  `RemoteRenderer` fires once per Flow component a remote renders, carrying the
-  component's display name and its lifecycle status (ADR 0003). It is collected
-  entirely on the host — in
-  [`createFlowRemoteComponentRenderer`](../packages/remote-react-renderer/src/lib/createFlowRemoteComponentRenderer.tsx),
-  the single funnel every renderer-map entry passes through — so it needs no
-  protocol version and works with extensions published long before it existed.
-  Because the signal is what actually rendered, absence is not proof of
-  non-usage: a component behind an unopened modal never reports. See
-  [remote-react-renderer/AGENTS.md](../packages/remote-react-renderer/AGENTS.md#component-usage-reporting).
+  `RemoteRenderer` fires once per Flow component an extension uses, carrying the
+  display name, whether Flow composed it internally, and its lifecycle status
+  (ADR 0003).
+
+  It is collected **in the remote**, in `flowComponent`, and reported over the
+  generic `reportEvent` channel. Collecting it on the host would measure the
+  wrong thing: the host only sees the `flr-*` elements that reach it, which is
+  neither a subset nor a superset of what the extension used. Components that
+  execute inside the remote (`Modal`, `List`, `LightBox`, `Popover`, `Action`,
+  …) never produce an element and would be invisible, while the views they
+  compose internally would look like the author's own usage.
+
+  What the signal does **not** tell you:
+
+  - **Absence is not proof of non-usage.** Only what rendered is reported, so a
+    component behind an unopened modal never appears.
+  - **Icons collapse to `Icon`** — per ADR 0003 §4 they are not tracked
+    individually. `IconApp` and friends are plain components that render
+    `IconView`, so they surface as an internally composed `Icon`.
+  - **Components that are not `flowComponent`s report nothing** — `ModalTrigger`
+    and the other plain wrappers around `OverlayTrigger`, for instance.
+  - Internal composition is recognized at the **view** seam. That is complete as
+    long as `flr-universal` components compose through views, which is the rule
+    anyway; a component reaching past its view would look like consumer usage.
 
 ## Where to go deeper
 

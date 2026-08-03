@@ -20,6 +20,10 @@ import { ClearPropsContext } from "@/components/ClearPropsContext";
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { UiComponentTunnelProvider } from "@/components/UiComponentTunnel/UiComponentTunnelProvider";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
+import {
+  takeInternalCompositionMark,
+  useReportComponentUsage,
+} from "@/components/ComponentUsageProvider";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -59,7 +63,12 @@ export function flowComponent<C extends FlowComponentName>(
 
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
-  function Component(props: Props) {
+  function Component(unmarkedProps: Props) {
+    const [isInternalComposition, props] =
+      takeInternalCompositionMark(unmarkedProps);
+
+    useReportComponentUsage(componentName, isInternalComposition);
+
     const { tunnel, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
