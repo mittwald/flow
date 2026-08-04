@@ -5,18 +5,6 @@
   outline: none;
   isolation: isolate;
 
-  /*
-   * The label and the field description are rendered into these slots, so that
-   * the editor can reference them – even when they are empty.
-   */
-  .labelSlot {
-    order: 1;
-  }
-
-  .fieldDescriptionSlot {
-    order: 3;
-  }
-
   .codeMirror {
     @include formControl.formControl();
 

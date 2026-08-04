@@ -82,16 +82,19 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   /**
    * The label and the field description are declared as children of the code
    * editor, but must be rendered outside of the editor itself. They are
-   * tunneled out of the editor – just like the field error.
+   * tunneled out of the editor – just like the field error. Their ids are the
+   * ones the editor references.
    */
   const propsContext: PropsContext = {
     ...fieldPropsContext,
     Label: {
       ...fieldPropsContext.Label,
+      id: labelId,
       tunnel: { id: "label", component: "CodeEditor" },
     },
     FieldDescription: {
       ...fieldPropsContext.FieldDescription,
+      id: descriptionId,
       tunnel: { id: "fieldDescription", component: "CodeEditor" },
     },
   };
@@ -107,6 +110,9 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
    * The editable element of CodeMirror is the `.cm-content` element – not the
    * root element the props are applied to. Its ARIA attributes are set through
    * the content attributes facet.
+   *
+   * The references are only resolvable when a label or a field description is
+   * actually given; without them the editor stays unnamed – just like before.
    */
   const describedBy =
     [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
@@ -126,9 +132,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
   return (
     <div className={rootClassName}>
       <PropsContextProvider props={propsContext}>
-        <div className={styles.labelSlot} id={labelId}>
-          <UiComponentTunnelExit id="label" component="CodeEditor" />
-        </div>
+        <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
           <CodeMirror
             {...rest}
@@ -164,9 +168,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             {children}
           </CodeMirror>
         </FieldErrorCaptureContext>
-        <div className={styles.fieldDescriptionSlot} id={descriptionId}>
-          <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
-        </div>
+        <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
         <FieldErrorView />
       </PropsContextProvider>
     </div>
