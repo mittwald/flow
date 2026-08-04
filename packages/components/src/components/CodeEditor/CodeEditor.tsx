@@ -60,6 +60,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     copyable = true,
     height,
     minHeight,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -111,15 +113,19 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
    * root element the props are applied to. Its ARIA attributes are set through
    * the content attributes facet.
    *
-   * The references are only resolvable when a label or a field description is
-   * actually given; without them the editor stays unnamed – just like before.
+   * The label reference only resolves when a label is given. Without one, an
+   * `aria-label` names the editor instead – the name computation skips
+   * references that point at nothing.
    */
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
+
   const describedBy =
     [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
     undefined;
 
   const contentAttributes = EditorView.contentAttributes.of({
-    "aria-labelledby": labelId,
+    "aria-labelledby": labelledBy,
+    ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
     ...(describedBy ? { "aria-describedby": describedBy } : {}),
     ...(isRequired ? { "aria-required": "true" } : {}),
     ...(isInvalid ? { "aria-invalid": "true" } : {}),

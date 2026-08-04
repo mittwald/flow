@@ -18,6 +18,16 @@ test("CodeEditor renders the label outside of the editor", async () => {
   expect(editor).toHaveAccessibleName(expect.stringContaining("Source code"));
 });
 
+test("CodeEditor can be named with an aria-label instead", async () => {
+  const dom = await render(
+    <CodeEditor value="const jedi = true;" aria-label="Source code" />,
+  );
+
+  await expect
+    .element(dom.getByRole("textbox"))
+    .toHaveAccessibleName("Source code");
+});
+
 test("CodeEditor is described by its field description", async () => {
   const dom = await render(
     <CodeEditor value="const jedi = true;">
