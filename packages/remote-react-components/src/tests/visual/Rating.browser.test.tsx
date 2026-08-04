@@ -56,7 +56,7 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
     await render(
       <Rating
         defaultValue={2}
-        iconFilled={<IconHome status="success" />}
+        iconFilled={<IconHome color="success" />}
         iconEmpty={<IconHome />}
       >
         <Label>Custom icon</Label>
