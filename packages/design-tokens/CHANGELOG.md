@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
+
+### Features
+
+* **Icon:** support color property ([#2773](https://github.com/mittwald/flow/issues/2773)) ([a2befb3](https://github.com/mittwald/flow/commit/a2befb363239b8b7705867f8048d1ce0a7c179a9))
+
 # [0.2.0-alpha.995](https://github.com/mittwald/flow/compare/0.2.0-alpha.994...0.2.0-alpha.995) (2026-08-04)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
