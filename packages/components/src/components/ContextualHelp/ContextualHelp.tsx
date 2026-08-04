@@ -24,8 +24,12 @@ export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
   const controller = controllerFromProps ?? controllerFromContext;
 
   const propsContext: PropsContext = {
+    // A contextual help holds a single, simple explanation — it does not need
+    // its own heading structure. A heading is rendered as a bold text label
+    // instead of an actual heading element.
     Heading: {
       level: 5,
+      elementType: "span",
     },
   };
 

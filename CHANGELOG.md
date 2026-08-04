@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.994](https://github.com/mittwald/flow/compare/0.2.0-alpha.993...0.2.0-alpha.994) (2026-08-03)
+
+### Bug Fixes
+
+* add sideEffect config ([#2772](https://github.com/mittwald/flow/issues/2772)) ([cee26cc](https://github.com/mittwald/flow/commit/cee26cc1258623b578aaeac87aa038602cc104e5))
+
+# [0.2.0-alpha.993](https://github.com/mittwald/flow/compare/0.2.0-alpha.992...0.2.0-alpha.993) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.992](https://github.com/mittwald/flow/compare/0.2.0-alpha.991...0.2.0-alpha.992) (2026-08-03)
+
+### Bug Fixes
+
+* **Section:** collapse sections whose content renders nothing ([#2770](https://github.com/mittwald/flow/issues/2770)) ([c9f5745](https://github.com/mittwald/flow/commit/c9f5745f993723c3f5e8fb9ae083f5297f529e6f))
+
+# [0.2.0-alpha.991](https://github.com/mittwald/flow/compare/0.2.0-alpha.990...0.2.0-alpha.991) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.990](https://github.com/mittwald/flow/compare/0.2.0-alpha.989...0.2.0-alpha.990) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.989](https://github.com/mittwald/flow/compare/0.2.0-alpha.988...0.2.0-alpha.989) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.988](https://github.com/mittwald/flow/compare/0.2.0-alpha.987...0.2.0-alpha.988) (2026-07-31)
+
+### Features
+
+* **Modal:** allow manually requiring close confirmation ([#2739](https://github.com/mittwald/flow/issues/2739)) ([6b35d8f](https://github.com/mittwald/flow/commit/6b35d8f5766571218fe4ba92ad6cc07ec7f6dfa3))
+
+# [0.2.0-alpha.987](https://github.com/mittwald/flow/compare/0.2.0-alpha.986...0.2.0-alpha.987) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.986](https://github.com/mittwald/flow/compare/0.2.0-alpha.985...0.2.0-alpha.986) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
+
+### Bug Fixes
+
+* **ci:** stop orphaning preview apps for fast-merged PRs ([#2763](https://github.com/mittwald/flow/issues/2763)) ([0de49c2](https://github.com/mittwald/flow/commit/0de49c267c5d5d1b4b160b3f4061f029e9c3272e))
+
+# [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
+
+### Features
+
+* **InlineCode:** add whiteSpace prop ([#2754](https://github.com/mittwald/flow/issues/2754)) ([81a2330](https://github.com/mittwald/flow/commit/81a2330de8d012d076cf60429d2c4a23cbb0722d))
+
+# [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
+
+### Bug Fixes
+
+* **remote-react-components:** gate TabNavigation visual tests by version ([#2756](https://github.com/mittwald/flow/issues/2756)) ([53a46a5](https://github.com/mittwald/flow/commit/53a46a522c29ac86a1757cd331ad13d86c10803b))
+
+# [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
+
+### Features
+
+* **components:** warn on all remaining deprecated APIs via useWarnDeprecation ([#2757](https://github.com/mittwald/flow/issues/2757)) ([8a945e6](https://github.com/mittwald/flow/commit/8a945e652cf919abe8a6b5577f5bda24a62cdcc9))
+
+# [0.2.0-alpha.981](https://github.com/mittwald/flow/compare/0.2.0-alpha.980...0.2.0-alpha.981) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.980](https://github.com/mittwald/flow/compare/0.2.0-alpha.979...0.2.0-alpha.980) (2026-07-30)
 
 **Note:** Version bump only for package @mittwald/flow-project

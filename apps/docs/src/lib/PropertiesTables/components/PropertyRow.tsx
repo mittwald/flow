@@ -21,7 +21,7 @@ export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
   return (
     <TableRow>
       <TableCell>
-        <InlineCode>{property.name}</InlineCode>
+        <InlineCode whiteSpace="nowrap">{property.name}</InlineCode>
         {property.required && <Badge>Required</Badge>}
       </TableCell>
       <TableCell>{property.type}</TableCell>

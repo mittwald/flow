@@ -4,9 +4,26 @@ on:
   pull_request:
     types:
       - closed
+  # Manual escape hatch to clean up an orphaned preview — e.g. one left behind by
+  # a PR that was merged before its deploy finished (see the concurrency note).
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number whose orphaned preview should be cleaned up"
+        required: true
+        type: string
 
 permissions:
   contents: read
+
+# Shared with build-previews.yml: queuing this cleanup cancels a still-running
+# build+deploy for the same PR, closing the race where a deploy finishes after
+# the cleanup and orphans the preview resources.
+concurrency:
+  group:
+    preview-${{ github.event.pull_request.number ||
+    github.event.inputs.pr_number }}
+  cancel-in-progress: true
 
 jobs:
   cleanup:
@@ -31,7 +48,9 @@ jobs:
 
       - name: Cleanup preview environment
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER:
+            ${{ github.event.pull_request.number || github.event.inputs.pr_number
+            }}
           MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
         run: |

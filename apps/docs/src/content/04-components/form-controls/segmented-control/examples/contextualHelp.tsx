@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Segment,
   SegmentedControl,
@@ -12,10 +11,9 @@ import {
 <SegmentedControl defaultValue="lastschrift">
   <Label>
     Zahlungsart
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Zahlungsart">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

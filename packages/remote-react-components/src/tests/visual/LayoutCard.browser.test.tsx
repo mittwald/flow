@@ -1,4 +1,4 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
 test.each(testEnvironments)(
@@ -6,26 +6,11 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: {
-      LayoutCard,
-      Flex,
-      TabNavigation,
-      Alert,
-      Heading,
-      Section,
-      Link,
-    },
+    components: { LayoutCard, Flex, Alert, Heading, Section },
   }) => {
     await render(
       <Flex direction="column" gap="m">
         <LayoutCard>LayoutCard</LayoutCard>
-        <LayoutCard>
-          <TabNavigation>
-            <Link>Tab 1</Link>
-            <Link>Tab 2</Link>
-          </TabNavigation>
-          Content
-        </LayoutCard>
         <LayoutCard>
           <Alert>
             <Heading>Alert</Heading>
@@ -38,5 +23,27 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("LayoutCard");
+  },
+);
+
+// TabNavigation was introduced in alpha.977.
+test.skipIf(crossVersion({ below: "0.2.0-alpha.977" })).each(testEnvironments)(
+  "LayoutCard with TabNavigation (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { LayoutCard, TabNavigation, Link },
+  }) => {
+    await render(
+      <LayoutCard>
+        <TabNavigation>
+          <Link>Tab 1</Link>
+          <Link>Tab 2</Link>
+        </TabNavigation>
+        Content
+      </LayoutCard>,
+    );
+
+    await testScreenshot("LayoutCard with TabNavigation");
   },
 );

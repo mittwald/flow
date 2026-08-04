@@ -11,7 +11,9 @@ export class RemoteContextualHelpTriggerElement extends FlowRemoteElement<Remote
 
   static override get remoteProperties() {
     return {
+      "aria-label": {},
       isDefaultOpen: {},
+      subject: {},
     };
   }
 

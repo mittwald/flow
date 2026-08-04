@@ -109,6 +109,53 @@ class ReviewDeployer {
     return `${imageType.toUpperCase()}/PR-${this.prNumber}`;
   }
 
+  // Guard against a race with the cleanup workflow: the build+deploy takes
+  // several minutes, but `cleanup-previews.yml` fires the moment a PR closes.
+  // A PR merged before its deploy finishes gets cleaned up first (finds
+  // nothing), then this deploy would create preview resources the cleanup can
+  // never reach again — orphaning them forever. So bail out if the PR is no
+  // longer open. Fail open: only skip when we can positively confirm it's
+  // closed, otherwise keep deploying.
+  async isPullRequestClosed(): Promise<boolean> {
+    const token = process.env.GITHUB_TOKEN;
+    const repo = process.env.GITHUB_REPOSITORY;
+    if (!token || !repo) {
+      console.warn(
+        "⚠️  GITHUB_TOKEN or GITHUB_REPOSITORY not set — skipping the PR-state guard; proceeding with deployment.",
+      );
+      return false;
+    }
+
+    const [owner, repoName] = repo.split("/");
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repoName}/pulls/${this.prNumber}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        },
+      );
+
+      if (!response.ok) {
+        console.warn(
+          `⚠️  Could not fetch PR #${this.prNumber} state (${response.status} ${response.statusText}); proceeding with deployment.`,
+        );
+        return false;
+      }
+
+      const pr = (await response.json()) as { state: string };
+      return pr.state !== "open";
+    } catch (error) {
+      console.warn(
+        `⚠️  Failed to check PR #${this.prNumber} state; proceeding with deployment.`,
+        error,
+      );
+      return false;
+    }
+  }
+
   async getServices(): Promise<MittwaldService[]> {
     console.log("📋 Fetching existing services...");
 
@@ -368,6 +415,13 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
   async deploy(): Promise<void> {
     try {
       console.log("🚀 Starting preview deployment process...\n");
+
+      if (await this.isPullRequestClosed()) {
+        console.log(
+          `⏭️  PR #${this.prNumber} is already closed/merged — skipping preview deployment to avoid orphaned resources the cleanup can no longer reach.`,
+        );
+        return;
+      }
 
       console.log(`📦 Parsed images (${this.images.length}):`);
       this.images.forEach((img) => {

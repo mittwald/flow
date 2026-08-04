@@ -8,21 +8,45 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import { IconInfo } from "@/components/Icon/components/icons";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export type ContextualHelpTriggerProps = OverlayTriggerProps;
+export interface ContextualHelpTriggerProps extends OverlayTriggerProps {
+  /**
+   * The subject the contextual help is about — not a complete accessibility
+   * label. It is inserted into the localized template "More information about
+   * {subject}", which becomes the accessibility label of the trigger.
+   */
+  subject?: string;
+  /**
+   * A complete accessibility label for the trigger, replacing the label built
+   * from `subject`. Prefer `subject`, which stays localized — reach for this
+   * only when the template does not fit.
+   */
+  "aria-label"?: string;
+}
 
 /** @flr-generate all */
 export const ContextualHelpTrigger = flowComponent(
   "ContextualHelpTrigger",
   (props) => {
-    const { children, ...triggerProps } = props;
+    const {
+      children,
+      subject,
+      "aria-label": ariaLabelFromProps,
+      ...triggerProps
+    } = props;
     const stringFormatter = useLocalizedStringFormatter(
       locales,
       "ContextualHelpTrigger",
     );
 
+    const ariaLabel =
+      ariaLabelFromProps ??
+      (subject === undefined
+        ? stringFormatter.format("moreInformation")
+        : stringFormatter.format("moreInformationAbout", { subject }));
+
     const propsContext: PropsContext = {
       Button: {
-        "aria-label": stringFormatter.format("moreInformation"),
+        "aria-label": ariaLabel,
         children: <IconInfo />,
         size: "s",
         variant: "plain",

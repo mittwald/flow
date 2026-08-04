@@ -1,10 +1,14 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.980",
+  "version": "0.2.0-alpha.994",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index/default.d.ts",

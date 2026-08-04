@@ -12,8 +12,10 @@
 > `next → major line`) — for the 1.0.0 release model. The model itself is
 > accepted in [RFC #2711](https://github.com/mittwald/flow/issues/2711); this
 > ADR only specifies _how_ the forward-merge is built. **The design is fixed
-> here; the implementation lands with the 1.0.0 cut** (nothing can be exercised
-> until `main`/`next` exist and the repo is off the `0.2.0-alpha.*` line).
+> here; the implementation has since landed** in #2753 (`forward-merge.yml`,
+> `publish-next.yml`, the `.gitattributes` merge drivers, and `publish.yml`
+> moved to the shared `mutate-main` group). It stays inert until the `next`
+> branch exists and the repo is off the `0.2.0-alpha.*` line.
 
 ## Context
 
@@ -118,10 +120,10 @@ by branch protection on `next` (see §5), consistent with §1.
 **One shared `concurrency` group per target branch**, used by _every_ workflow
 that pushes to it — `mutate-main`, `mutate-next`, `mutate-major` — each with
 `cancel-in-progress: false`. This serializes all writers of a branch against
-each other and removes the non-fast-forward races by design. (`publish.yml`
-moves from its current `publish-${{ github.ref }}` group to `mutate-main`.) As a
-belt-and- suspenders, each mutating job does **fetch-before-push with one
-retry** (on non-fast-forward: `git fetch` + re-merge + re-push).
+each other and removes the non-fast-forward races by design. (`publish.yml` now
+uses this shared `mutate-main` group.) As a belt-and- suspenders, each mutating
+job does **fetch-before-push with one retry** (on non-fast-forward:
+`git fetch` + re-merge + re-push).
 
 **`next` is protected** (real-merge-commit-only for human PRs, direct pushes
 restricted), **with the automation identity as a bypass actor** for direct
@@ -243,13 +245,20 @@ convention — only with different branch names. It is not designed separately.
 
 ## Follow-ups (not part of this ADR)
 
-- Implement `forward-merge.yml`, the `.gitattributes` drivers + the JSON merge
-  driver script, and the shared `concurrency` groups; move `publish.yml` to
-  `mutate-main`.
-- Implement the symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+**Landed** in #2753:
+
+- `forward-merge.yml`, the `.gitattributes` merge drivers + the JSON merge
+  driver script (`.github/scripts/merge-package-json.cjs`), and the shared
+  per-target-branch `concurrency` groups; `publish.yml` moved to `mutate-main`.
+- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+
+**Still pending** — gated on the 1.0.0 cut (`next` established, repo off the
+`0.2.0-alpha.*` line):
+
 - Configure `next` (and, on demand, the major line) branch protection with the
   `PUBLISH_PAT` bot as the direct-push bypass actor.
 - The routing-guard `head == next`/major-line exemption (§8) — tracked with the
   guard in RFC #2711.
-- All of the above is **gated on the 1.0.0 cut** (`main`/`next` established,
-  repo off the `0.2.0-alpha.*` line).
+- Until `next` exists the cascade stays inert: `forward-merge.yml` triggers on
+  `main` pushes but has no `next` to merge into, and the version-contract guard
+  is dormant (see ADR 0005).
