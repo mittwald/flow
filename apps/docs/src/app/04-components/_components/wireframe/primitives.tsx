@@ -131,15 +131,15 @@ export const WOverlay: FC<PropsWithChildren<LayoutProps>> = (props) => {
   );
 };
 
-export const WButton: FC<LayoutProps> = (props) => {
-  const { children, className, tone = "700", ...rest } = props;
+export const WButton: FC<LayoutProps & { hideLabel?: boolean }> = (props) => {
+  const { children, className, tone = "700", hideLabel, ...rest } = props;
 
   return (
     <div
       className={cx(styles.button, getToneClass(tone), className)}
       style={rest}
     >
-      {children ?? <WText width="calc(100% - 16px)" />}
+      {hideLabel ? null : (children ?? <WText width="calc(100% - 16px)" />)}
     </div>
   );
 };
