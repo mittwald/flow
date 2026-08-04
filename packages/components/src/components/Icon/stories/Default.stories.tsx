@@ -2,6 +2,17 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@/components/Icon/Icon";
 import { IconStar } from "@tabler/icons-react";
 import { IconProject } from "@/components/Icon/components/icons";
+import { Flex } from "@/components/Flex";
+import { alphaColors, statusTypes } from "@/lib/types/props";
+
+const colors = [
+  "neutral",
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
+  ...statusTypes,
+] as const;
 
 const meta: Meta<typeof Icon> = {
   title: "Content/Icon",
@@ -15,6 +26,10 @@ const meta: Meta<typeof Icon> = {
       control: "inline-radio",
       options: ["s", "m", "l"],
     },
+    color: {
+      control: "select",
+      options: [...colors, ...alphaColors],
+    },
   },
   render: (props) => <IconProject aria-label="Project" {...props} />,
 };
@@ -24,6 +39,25 @@ type Story = StoryObj<typeof Icon>;
 
 export const Default: Story = {
   args: {},
+};
+
+export const Colors: Story = {
+  render: (props) => (
+    <Flex gap="s">
+      {colors.map((color) => (
+        <IconProject key={color} aria-label={color} {...props} color={color} />
+      ))}
+    </Flex>
+  ),
+};
+
+export const CustomColor: Story = {
+  args: { color: "#0fdf00" },
+  argTypes: {
+    color: {
+      control: "text",
+    },
+  },
 };
 
 export const TablerIcon: Story = {

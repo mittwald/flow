@@ -23,15 +23,27 @@
   @include size(l, var(--size-rem--xs));
 
   /* Colors */
-  @mixin status($status) {
-    &.#{$status} {
-      color: var(--icon--#{$status}-color);
+  @mixin color($color) {
+    &.#{$color} {
+      color: var(--icon--#{$color}-color);
     }
   }
 
-  @include status(danger);
-  @include status(success);
-  @include status(warning);
-  @include status(info);
-  @include status(unavailable);
+  &.neutral {
+    color: var(--icon--color);
+  }
+
+  @include color(danger);
+  @include color(success);
+  @include color(warning);
+  @include color(info);
+  @include color(unavailable);
+  @include color(blue);
+  @include color(violet);
+  @include color(teal);
+  @include color(lilac);
+  @include color(dark);
+  @include color(light);
+  @include color(dark-static);
+  @include color(light-static);
 }

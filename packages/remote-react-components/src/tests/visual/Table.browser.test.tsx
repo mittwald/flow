@@ -30,13 +30,13 @@ test.each(testEnvironments)(
             <TableRow>
               <TableCell>TableCell</TableCell>
               <TableCell horizontalAlign="center">
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>TableCell</TableCell>
               <TableCell horizontalAlign="center">
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
             </TableRow>
           </TableBody>

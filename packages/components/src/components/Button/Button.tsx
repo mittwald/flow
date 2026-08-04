@@ -157,21 +157,13 @@ export const Button = flowComponent("Button", (props) => {
     },
   };
 
-  const StateIconComponent = isSucceeded
-    ? IconSucceeded
-    : isFailed
-      ? IconFailed
-      : isPending
-        ? LoadingSpinner
-        : undefined;
-
-  const stateIcon = StateIconComponent && (
-    <StateIconComponent
-      size={size}
-      className={styles.stateIcon}
-      status={isFailed ? "danger" : isSucceeded ? "success" : undefined}
-    />
-  );
+  const stateIcon = isSucceeded ? (
+    <IconSucceeded size={size} className={styles.stateIcon} color="success" />
+  ) : isFailed ? (
+    <IconFailed size={size} className={styles.stateIcon} color="danger" />
+  ) : isPending ? (
+    <LoadingSpinner size={size} className={styles.stateIcon} />
+  ) : undefined;
 
   const isStringContent = extractTextFromFirstChild(children) !== undefined;
 

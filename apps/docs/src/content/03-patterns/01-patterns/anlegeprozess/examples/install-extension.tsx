@@ -78,37 +78,37 @@ import {
             <TableRow>
               <TableCell>Projekt</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>App</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>SSH-Benutzer</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
             </TableRow>
           </TableBody>

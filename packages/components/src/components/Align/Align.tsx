@@ -23,7 +23,7 @@ export const Align = flowComponent(
       Button: { className: styles.button },
       Avatar: { className: styles.avatar, size: "m" },
       CopyButton: { size: "s", className: styles.copyButton },
-      Icon: { size: "s", className: styles.icon },
+      Icon: { size: "s", className: styles.icon, color: "neutral" },
       ContextualHelpTrigger: {
         Button: {
           className: styles.contextualHelpTriggerButton,

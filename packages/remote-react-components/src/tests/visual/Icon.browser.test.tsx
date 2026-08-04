@@ -1,22 +1,54 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
-import { statusTypes } from "@mittwald/flow-react-components/internal";
+import {
+  alphaColors,
+  statusTypes,
+} from "@mittwald/flow-react-components/internal";
 
 const sizes = ["s", "m", "l"] as const;
 
+const colors = [
+  "neutral",
+  "blue",
+  "violet",
+  "teal",
+  "lilac",
+  ...statusTypes,
+] as const;
+
 test.each(testEnvironments)(
   "Icon (%s)",
-  async ({ testScreenshot, render, components: { Flex, IconStar, Icon } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, IconStar, Icon, AccentBox },
+  }) => {
     await render(
-      <Flex gap="m" direction="column">
+      <Flex gap="m" direction="column" align="start">
         <Flex gap="s" align="center">
           {sizes.map((size) => (
             <IconStar size={size} key={size} />
           ))}
         </Flex>
-        <Flex gap="s">
-          {statusTypes.map((status) => (
-            <IconStar status={status} key={status} />
+        <Flex gap="s" align="center">
+          {colors.map((color) => (
+            <IconStar color={color} key={color} />
+          ))}
+          <IconStar color="#0fdf00" />
+        </Flex>
+        <Flex gap="s" direction="column">
+          {alphaColors.map((color) => (
+            <AccentBox
+              key={color}
+              backgroundColor={
+                color.startsWith("light") ? "#3A434E" : "neutral"
+              }
+            >
+              {/* AccentBox hides direct icon children, so nest it */}
+              <Flex>
+                <IconStar color={color} />
+              </Flex>
+            </AccentBox>
           ))}
         </Flex>
         <Icon>

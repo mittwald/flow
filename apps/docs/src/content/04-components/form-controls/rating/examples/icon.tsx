@@ -15,7 +15,7 @@ import {
     </Icon>
   }
   iconFilled={
-    <Icon status="success">
+    <Icon color="success">
       <IconLeafFilled />
     </Icon>
   }
