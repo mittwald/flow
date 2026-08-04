@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.995](https://github.com/mittwald/flow/compare/0.2.0-alpha.994...0.2.0-alpha.995) (2026-08-04)
+
+### Bug Fixes
+
+* **CodeEditor:** render label above the editor and align padding ([#2766](https://github.com/mittwald/flow/issues/2766)) ([fa693a8](https://github.com/mittwald/flow/commit/fa693a872169edd782a381b1c1ede7074993825c))
+
 # [0.2.0-alpha.994](https://github.com/mittwald/flow/compare/0.2.0-alpha.993...0.2.0-alpha.994) (2026-08-03)
 
 ### Bug Fixes
