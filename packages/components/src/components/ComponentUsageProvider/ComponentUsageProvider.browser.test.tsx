@@ -1,15 +1,14 @@
 import {
   ComponentUsageProvider,
-  markInternalComposition,
   type ComponentUsageEvent,
 } from "@/components/ComponentUsageProvider";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
-import { Text } from "@/components/Text";
 import { ViewComponentContextProvider } from "@/lib/viewComponentContext";
 import ButtonView from "@/views/ButtonView";
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import { Text } from "@/components/Text";
+import type { FC, ReactNode } from "react";
 import { useState } from "react";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
@@ -27,8 +26,8 @@ const renderCollecting = async (
   return events;
 };
 
-const usageOf = (events: ComponentUsageEvent[], component: string) =>
-  events.filter((event) => event.component === component);
+const componentsOf = (events: ComponentUsageEvent[]) =>
+  events.map((event) => event.component);
 
 test("reports the components that render", async () => {
   const events = await renderCollecting(
@@ -39,53 +38,8 @@ test("reports the components that render", async () => {
   );
 
   await expect
-    .poll(() => events.map((event) => event.component).toSorted())
-    .toEqual(["Button", "Heading", "Section", "Text"]);
-});
-
-test("reports consumer-rendered components as direct usage", async () => {
-  const events = await renderCollecting(<Button>Fire</Button>);
-
-  await expect
-    .poll(() => usageOf(events, "Button"))
-    .toEqual([{ component: "Button", isInternalComposition: false }]);
-});
-
-test("reports view-resolved components as internal composition", async () => {
-  const events = await renderCollecting(
-    <ViewComponentContextProvider
-      components={{ Button: markInternalComposition(Button) }}
-    >
-      <ButtonView>Fire</ButtonView>
-    </ViewComponentContextProvider>,
-  );
-
-  await expect
-    .poll(() => usageOf(events, "Button"))
-    .toEqual([{ component: "Button", isInternalComposition: true }]);
-});
-
-test("attributes the children of an internally composed component to the consumer", async () => {
-  const Composed: FC<PropsWithChildren> = ({ children }) => (
-    <ViewComponentContextProvider
-      components={{ Button: markInternalComposition(Button) }}
-    >
-      <ButtonView>{children}</ButtonView>
-    </ViewComponentContextProvider>
-  );
-
-  const events = await renderCollecting(
-    <Composed>
-      <Text>Fire</Text>
-    </Composed>,
-  );
-
-  await expect
-    .poll(() => usageOf(events, "Button"))
-    .toEqual([{ component: "Button", isInternalComposition: true }]);
-  expect(usageOf(events, "Text")).toEqual([
-    { component: "Text", isInternalComposition: false },
-  ]);
+    .poll(() => componentsOf(events))
+    .toEqual(expect.arrayContaining(["Section", "Heading", "Button"]));
 });
 
 test("reports every instance, leaving deduplication to the consumer", async () => {
@@ -96,7 +50,9 @@ test("reports every instance, leaving deduplication to the consumer", async () =
     </>,
   );
 
-  await expect.poll(() => usageOf(events, "Button")).toHaveLength(2);
+  await expect
+    .poll(() => componentsOf(events).filter((c) => c === "Button"))
+    .toHaveLength(2);
 });
 
 test("does not report again when a component re-renders", async () => {
@@ -113,5 +69,49 @@ test("does not report again when a component re-renders", async () => {
   await button.click();
 
   await expect.element(button).toHaveTextContent("Fired 2 times");
-  expect(usageOf(events, "Button")).toHaveLength(1);
+  expect(componentsOf(events).filter((c) => c === "Button")).toHaveLength(1);
+});
+
+test("does not report a component reached through a view", async () => {
+  const events = await renderCollecting(
+    <ViewComponentContextProvider components={{ Button }}>
+      <Section>
+        <ButtonView>Fire</ButtonView>
+      </Section>
+    </ViewComponentContextProvider>,
+  );
+
+  // Section proves the reporting path ran, so the missing Button is a decision
+  // and not a race.
+  await expect.poll(() => componentsOf(events)).toContain("Section");
+  expect(componentsOf(events)).not.toContain("Button");
+});
+
+test("attributes the children of a view-composed component to the consumer", async () => {
+  const Composed: FC<{ children: ReactNode }> = ({ children }) => (
+    <ViewComponentContextProvider components={{ Button }}>
+      <ButtonView>{children}</ButtonView>
+    </ViewComponentContextProvider>
+  );
+
+  const events = await renderCollecting(
+    <Composed>
+      <Text>Fire</Text>
+    </Composed>,
+  );
+
+  await expect.poll(() => componentsOf(events)).toContain("Text");
+  expect(componentsOf(events)).not.toContain("Button");
+});
+
+test("reports nothing without a handler", async () => {
+  // A host that does not collect usage pays a context read and nothing else —
+  // rendering must not depend on the provider being configured.
+  await render(
+    <ComponentUsageProvider>
+      <Button>Fire</Button>
+    </ComponentUsageProvider>,
+  );
+
+  await expect.element(page.getByRole("button")).toBeInTheDocument();
 });

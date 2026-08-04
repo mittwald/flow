@@ -6,8 +6,7 @@ import { stringifyError } from "@/lib/stringifyError";
 import { packageVersion } from "@/version";
 import {
   ComponentUsageProvider,
-  isFlowComponentName,
-  markInternalComposition,
+  markViewComponents,
   ViewComponentContextProvider,
   type ComponentUsageHandler,
 } from "@mittwald/flow-react-components/internal";
@@ -39,17 +38,14 @@ import {
 import type { HostConfig } from "@mittwald/flow-core";
 import { initExtBridge } from "@mittwald/ext-bridge/browser";
 
-const viewComponents = Object.fromEntries(
-  Object.entries({
-    ...remoteComponents,
-    ...customViewComponents,
-  }).map(([name, component]) => [
-    name,
-    isFlowComponentName(name)
-      ? markInternalComposition(component as never)
-      : component,
-  ]),
-) as unknown as FlowViewComponents;
+const viewComponents = {
+  ...remoteComponents,
+  ...customViewComponents,
+} as FlowViewComponents;
+
+const { Div: LoadingFallbackDiv } = markViewComponents({
+  Div: remoteComponents.Div,
+});
 
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
@@ -161,20 +157,16 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
 
   const reportedComponentUsage = useRef(new Set<string>());
 
-  const forwardComponentUsage: ComponentUsageHandler = ({
-    component,
-    isInternalComposition,
-  }) => {
-    const key = `${component}#${isInternalComposition}`;
-    if (reportedComponentUsage.current.has(key)) {
+  const forwardComponentUsage: ComponentUsageHandler = ({ component }) => {
+    if (reportedComponentUsage.current.has(component)) {
       return;
     }
-    reportedComponentUsage.current.add(key);
+    reportedComponentUsage.current.add(component);
 
     void connectionRef.current?.imports
       .reportEvent?.({
         event: "ComponentRendered",
-        data: { component, isInternalComposition },
+        data: { component },
       })
       ?.catch(() => {
         // ignore: host does not support event reporting
@@ -215,9 +207,9 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
   const loadingFallback = (
-    <remoteComponents.Div>
+    <LoadingFallbackDiv>
       <LoadingFallbackTrigger />
-    </remoteComponents.Div>
+    </LoadingFallbackDiv>
   );
 
   const connectDiv = (div: HTMLDivElement) => {

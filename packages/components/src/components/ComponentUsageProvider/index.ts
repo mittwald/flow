@@ -1,10 +1,8 @@
 export {
-  ComponentUsageContext,
   ComponentUsageProvider,
-  internalCompositionProp,
-  markInternalComposition,
-  takeInternalCompositionMark,
+  markViewComponents,
   useReportComponentUsage,
+  ViewCompositionReset,
   type ComponentUsageEvent,
   type ComponentUsageHandler,
   type ComponentUsageProviderProps,

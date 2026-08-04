@@ -10,20 +10,15 @@ import {
 
 export interface ComponentUsageEvent {
   component: string;
-  isInternalComposition: boolean;
 }
 
 export type ComponentUsageHandler = (event: ComponentUsageEvent) => void;
 
-export const ComponentUsageContext = createContext<
-  ComponentUsageHandler | undefined
->(undefined);
+const componentUsageContext = createContext<ComponentUsageHandler | undefined>(
+  undefined,
+);
 
-export const internalCompositionProp = "__flowInternalComposition";
-
-interface InternalCompositionProps {
-  [internalCompositionProp]?: boolean;
-}
+const viewCompositionContext = createContext(false);
 
 export interface ComponentUsageProviderProps extends PropsWithChildren {
   onUsage?: ComponentUsageHandler;
@@ -35,48 +30,67 @@ export const ComponentUsageProvider: FC<ComponentUsageProviderProps> = (
   const { children, onUsage } = props;
 
   return (
-    <ComponentUsageContext.Provider value={onUsage}>
+    <componentUsageContext.Provider value={onUsage}>
       {children}
-    </ComponentUsageContext.Provider>
+    </componentUsageContext.Provider>
   );
 };
 
-export const markInternalComposition = <P extends object>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const markedComponents = new WeakMap<ComponentType<any>, ComponentType<any>>();
+
+const markViewComposition = <P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<P> => {
-  const InternalComposition: FC<P> = (props) =>
-    createElement(Component, {
-      ...props,
-      [internalCompositionProp]: true,
-    });
-
-  InternalComposition.displayName = `InternalComposition(${Component.displayName ?? Component.name})`;
-
-  return InternalComposition;
-};
-
-export const takeInternalCompositionMark = <P extends object>(
-  props: P,
-): [isInternalComposition: boolean, restProps: P] => {
-  if (!(internalCompositionProp in props)) {
-    return [false, props];
+  const cached = markedComponents.get(Component);
+  if (cached) {
+    return cached as ComponentType<P>;
   }
 
-  const { [internalCompositionProp]: isInternalComposition, ...restProps } =
-    props as P & InternalCompositionProps;
+  const ViewComposition: FC<P> = (props) => (
+    <viewCompositionContext.Provider value={true}>
+      {createElement(Component, props)}
+    </viewCompositionContext.Provider>
+  );
 
-  return [isInternalComposition === true, restProps as unknown as P];
+  ViewComposition.displayName = `ViewComposition(${Component.displayName ?? Component.name})`;
+
+  markedComponents.set(Component, ViewComposition);
+
+  return ViewComposition;
 };
 
-export const useReportComponentUsage = (
-  component: string,
-  isInternalComposition: boolean,
-): void => {
-  const onUsage = useContext(ComponentUsageContext);
+export const markViewComponents = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends Record<string, ComponentType<any>>,
+>(
+  components: T,
+): T =>
+  Object.fromEntries(
+    Object.entries(components).map(([name, component]) => [
+      name,
+      markViewComposition(component),
+    ]),
+    // Same keys, same props — only the render is wrapped.
+  ) as T;
+
+export const ViewCompositionReset: FC<PropsWithChildren> = ({ children }) => (
+  <viewCompositionContext.Provider value={false}>
+    {children}
+  </viewCompositionContext.Provider>
+);
+
+export const useReportComponentUsage = (component: string): boolean => {
+  const onUsage = useContext(componentUsageContext);
+  const isViewComposition = useContext(viewCompositionContext);
 
   useEffect(() => {
-    onUsage?.({ component, isInternalComposition });
-  }, [onUsage, component, isInternalComposition]);
+    if (!isViewComposition) {
+      onUsage?.({ component });
+    }
+  }, [onUsage, component, isViewComposition]);
+
+  return isViewComposition;
 };
 
 export default ComponentUsageProvider;

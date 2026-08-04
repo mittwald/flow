@@ -3,8 +3,8 @@ import { z } from "zod";
 export const componentRenderedEventSchema = z.object({
   event: z.literal("ComponentRendered"),
   data: z.object({
+    /** Display name of the Flow component the extension rendered. */
     component: z.string(),
-    isInternalComposition: z.boolean(),
   }),
 });
 
@@ -17,7 +17,6 @@ export type ComponentRenderedEvent = z.infer<
 >;
 
 export type ReportedEvent = z.infer<typeof reportedEventSchema>;
-export type ReportedEventName = ReportedEvent["event"];
 
 export const parseReportedEvent = (
   event: unknown,

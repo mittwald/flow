@@ -4,41 +4,19 @@ import { toComponentUsageEvent } from "@/lib/componentUsage";
 const noStatus = () => undefined;
 
 describe("toComponentUsageEvent", () => {
-  test("carries component and origin through", () => {
+  test("carries the component through", () => {
     expect(
       toComponentUsageEvent(
-        {
-          event: "ComponentRendered",
-          data: { component: "Button", isInternalComposition: false },
-        },
+        { event: "ComponentRendered", data: { component: "Button" } },
         noStatus,
       ),
-    ).toEqual({
-      component: "Button",
-      isInternalComposition: false,
-      status: undefined,
-    });
-  });
-
-  test("keeps the internal-composition flag", () => {
-    expect(
-      toComponentUsageEvent(
-        {
-          event: "ComponentRendered",
-          data: { component: "OverlayContent", isInternalComposition: true },
-        },
-        noStatus,
-      ).isInternalComposition,
-    ).toBe(true);
+    ).toEqual({ component: "Button", status: undefined });
   });
 
   test("attaches the resolved lifecycle status", () => {
     expect(
       toComponentUsageEvent(
-        {
-          event: "ComponentRendered",
-          data: { component: "Accordion", isInternalComposition: false },
-        },
+        { event: "ComponentRendered", data: { component: "Accordion" } },
         (component) =>
           component === "Accordion"
             ? { level: "beta", isNew: false }
@@ -47,13 +25,12 @@ describe("toComponentUsageEvent", () => {
     ).toEqual({ level: "beta", isNew: false });
   });
 
-  test("leaves the status undefined for untracked components", () => {
+  test("leaves the status undefined for components outside the registry", () => {
+    // Table is a real reported component — it is just not tracked in the
+    // status registry, which only covers the curated public surface.
     expect(
       toComponentUsageEvent(
-        {
-          event: "ComponentRendered",
-          data: { component: "TableCell", isInternalComposition: false },
-        },
+        { event: "ComponentRendered", data: { component: "Table" } },
         noStatus,
       ).status,
     ).toBeUndefined();

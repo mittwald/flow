@@ -6,11 +6,11 @@ describe("parseReportedEvent", () => {
     expect(
       parseReportedEvent({
         event: "ComponentRendered",
-        data: { component: "Button", isInternalComposition: false },
+        data: { component: "Button" },
       }),
     ).toEqual({
       event: "ComponentRendered",
-      data: { component: "Button", isInternalComposition: false },
+      data: { component: "Button" },
     });
   });
 
@@ -25,10 +25,7 @@ describe("parseReportedEvent", () => {
 
   test("ignores a known event with an invalid payload", () => {
     expect(
-      parseReportedEvent({
-        event: "ComponentRendered",
-        data: { component: "Button" },
-      }),
+      parseReportedEvent({ event: "ComponentRendered", data: {} }),
     ).toBeUndefined();
   });
 
@@ -42,15 +39,11 @@ describe("parseReportedEvent", () => {
     expect(
       parseReportedEvent({
         event: "ComponentRendered",
-        data: {
-          component: "Button",
-          isInternalComposition: false,
-          fieldFromANewerFlow: "ignored",
-        },
+        data: { component: "Button", fieldFromANewerFlow: "ignored" },
       }),
     ).toEqual({
       event: "ComponentRendered",
-      data: { component: "Button", isInternalComposition: false },
+      data: { component: "Button" },
     });
   });
 });

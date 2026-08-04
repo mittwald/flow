@@ -20,14 +20,9 @@ import type {
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useRef, useState, type FC } from "react";
 
-const UsageList: FC<{ label: string; usage: ComponentUsageEvent[] }> = ({
-  label,
-  usage,
-}) => (
+const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
   <LabeledValue>
-    <Label>
-      {label} ({usage.length})
-    </Label>
+    <Label>Used components ({usage.length})</Label>
     <Flex gap="s" wrap="wrap">
       {usage.map(({ component, status }) => (
         <Badge
@@ -88,20 +83,7 @@ export default function HostPage() {
         )}
         {componentUsage.length > 0 && (
           <>
-            <ColumnLayout>
-              <UsageList
-                label="Used by the extension"
-                usage={componentUsage.filter(
-                  (usage) => !usage.isInternalComposition,
-                )}
-              />
-              <UsageList
-                label="Composed by Flow"
-                usage={componentUsage.filter(
-                  (usage) => usage.isInternalComposition,
-                )}
-              />
-            </ColumnLayout>
+            <UsageList usage={componentUsage} />
             <Separator />
           </>
         )}
