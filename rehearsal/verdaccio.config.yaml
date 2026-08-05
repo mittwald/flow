@@ -1,0 +1,50 @@
+# Verdaccio config for the 1.0.0 cut rehearsal (#2769). Throwaway instance —
+# delete it, and its volume, at teardown.
+
+storage: /verdaccio/storage
+listen: 0.0.0.0:4873
+
+# Behind the container-hosting ingress, Verdaccio derives tarball URLs from the
+# incoming request. Set VERDACCIO_PUBLIC_URL to the public https ingress in the
+# container environment, or npm receives http:// tarball links it cannot fetch.
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    # Allows exactly the one publisher account to self-register. Set this to -1
+    # right after creating it: the ingress is public, and an open registry with
+    # open registration is an invitation.
+    max_users: 5
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+# Order matters — Verdaccio matches top to bottom.
+packages:
+  # The rehearsal artifacts. Deliberately NO proxy: with one, Verdaccio would
+  # resolve these against the real npmjs versions and refuse or confuse the
+  # publish. Every @mittwald/flow-* package is a workspace package, so nothing
+  # is ever *installed* from here — only published.
+  "@mittwald/flow-*":
+    access: $all
+    publish: $authenticated
+
+  # Genuine external deps that share the scope — @mittwald/password-tools-js,
+  # @mittwald/react-use-promise, @mittwald/remote-dom-core. The workflow maps
+  # the whole @mittwald scope to this registry, so without this block the
+  # install breaks.
+  "@mittwald/*":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+  "**":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+# Default is 10mb; flow-icons-pro exceeds it.
+max_body_size: 100mb
+
+log: { type: stdout, format: pretty, level: http }
