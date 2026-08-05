@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1000](https://github.com/mittwald/flow/compare/0.2.0-alpha.999...0.2.0-alpha.1000) (2026-08-05)
+
+### Reverts
+
+* **PasswordCreationField:** move PasswordCreationField to integrations [#2646](https://github.com/mittwald/flow/issues/2646) ([42095b5](https://github.com/mittwald/flow/commit/42095b5e7ff9049a339cd66af86faebfa3721519))
+
+# [0.2.0-alpha.999](https://github.com/mittwald/flow/compare/0.2.0-alpha.998...0.2.0-alpha.999) (2026-08-05)
+
+### Features
+
+* **ci:** set wildcard ssl cert id on preview deployments ([#2798](https://github.com/mittwald/flow/issues/2798)) ([bf9702a](https://github.com/mittwald/flow/commit/bf9702a43b93593551c65d5d4ff2556facb5a46c))
+
 # [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
 
 ### Bug Fixes

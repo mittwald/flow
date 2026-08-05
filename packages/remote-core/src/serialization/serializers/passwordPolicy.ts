@@ -2,7 +2,7 @@ import { Serializer } from "@/serialization/Serializer";
 import {
   Policy,
   type PolicyDeclaration,
-} from "@mittwald/flow-react-components/password-tools";
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 
 export const passwordPolicySerializer = new Serializer<
   Policy,
