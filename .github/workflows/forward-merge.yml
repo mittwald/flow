@@ -103,19 +103,115 @@ jobs:
         run: |
           set -euo pipefail
 
+          # If a sync PR is already open, a maintainer may be resolving the
+          # conflict on that branch RIGHT NOW. Never touch the branch in that
+          # case — a force-push would silently discard their resolution commits.
+          # Let the existing PR carry the resolution; once it merges, the next
+          # run re-evaluates against the new `next`.
+          sync_pr_open() {
+            gh pr list --repo "$REPO" --head "sync/main-to-next" \
+              --base next --state open --json number --jq '.[].number'
+          }
+
+          # git writes conflict markers only for a CONTENT conflict on a text
+          # file that has both sides staged (stage 2 = ours, stage 3 = theirs).
+          # A delete/modify or rename conflict carries only one of them, and a
+          # binary file gets no markers at all — committing those with `git add`
+          # would silently pick a side. Only the plain-text case may be
+          # pre-merged; anything else falls back to the raw sync branch.
+          conflicts_are_plain_text() {
+            local path stages
+            while IFS= read -r path; do
+              [ -n "$path" ] || continue
+              stages="$(git ls-files --unmerged -- "$path" | awk '{print $3}' | sort -u | tr -d '\n')"
+              case "$stages" in
+                *2*3* | *3*2*) : ;;
+                *)
+                  echo "::notice::${path} is not a plain content conflict (stages: ${stages:-none})."
+                  return 1
+                  ;;
+              esac
+              if ! grep -Iq . "$path" 2>/dev/null; then
+                echo "::notice::${path} is binary — no usable conflict markers."
+                return 1
+              fi
+            done < <(git ls-files --unmerged | cut -f2 | sort -u)
+          }
+
+          # Pre-merged escalation. At this point the runner has already done the
+          # work: the drivers resolved the version/CHANGELOG churn in the index,
+          # and only genuine conflicts are unmerged. Aborting and handing a human
+          # a raw branch at main's tip throws that away and makes them redo it —
+          # and because GitHub does not run merge drivers, the PR-side merge shows
+          # the whole churn as conflicts again (35 files in the #2769 rehearsal,
+          # 34 of them noise). So commit the partial merge instead: markers land
+          # only in the files that genuinely conflict.
+          #
+          # The catch: such a PR LOOKS mergeable to GitHub, because its head
+          # contains the base. `sync-pr-guard.yml` fails while markers are present
+          # and MUST be a required check on `next` for this to be safe.
+          open_sync_pr_premerged() {
+            local branch="sync/main-to-next" open_pr conflicted body
+            open_pr="$(sync_pr_open)"
+            if [ -n "$open_pr" ]; then
+              echo "::notice::Sync PR #${open_pr} already open — leaving its branch untouched (a maintainer may be resolving it)."
+              return 0
+            fi
+
+            conflicted="$(git ls-files --unmerged | cut -f2 | sort -u | sed 's/^/- `/; s/$/`/')"
+
+            git add -A
+            git commit -q -m "${MERGE_MSG} [UNRESOLVED CONFLICTS]"
+            git push --force origin "HEAD:refs/heads/${branch}"
+
+            gh label create sync --repo "$REPO" --color BFD4F2 \
+              --description "Forward-merge / promotion sync PR" 2>/dev/null || true
+            gh label create automated --repo "$REPO" --color EDEDED \
+              --description "Opened by automation" 2>/dev/null || true
+
+            body="$(printf '%s\n' \
+              'The automated forward-merge of `main` into `next` hit a genuine code conflict (ADR 0004 §4) and needs a human.' \
+              '' \
+              '**This branch is already merged as far as the machine could take it.** The version and `CHANGELOG.md` churn was resolved by the merge drivers in the runner, so conflict markers are left in these files only:' \
+              '' \
+              "${conflicted}" \
+              '' \
+              '⚠️ **This PR looks mergeable to GitHub, but must not be merged as it stands** — it contains conflict markers. The `sync-pr-guard` check fails until they are gone.' \
+              '' \
+              'Resolve with an AMEND, so the marker commit never reaches `next`. A commit that does not build would otherwise sit in the history forever and break `git bisect`:' \
+              '' \
+              '```shell' \
+              'git fetch origin' \
+              'git checkout -B sync/main-to-next origin/sync/main-to-next' \
+              '# fix the conflict markers in the files above, then:' \
+              'git add -A' \
+              'git commit --amend -m "chore(sync): forward-merge main into next"' \
+              'git push --force-with-lease origin sync/main-to-next' \
+              '```' \
+              '' \
+              'The amend keeps both merge parents, so the superset invariant (ADR 0004 §1) still holds. Merge this PR AS A TRUE MERGE COMMIT — a squash or rebase merge would break that invariant and is blocked by branch protection on `next`.' \
+              '' \
+              'Note: while this PR is open the cascade leaves the branch untouched, so it does not pick up commits that land on `main` afterwards. Those arrive with the next forward-merge run once this PR is merged.')"
+
+            gh pr create --repo "$REPO" --base next --head "$branch" \
+              --title "chore(sync): resolve forward-merge conflict (main into next)" \
+              --label sync --label automated \
+              --body "$body"
+
+            gh pr edit "$branch" --repo "$REPO" \
+              --add-reviewer mfal,Lisa18289,ins0,maaaathis,Jan-Eimertenbrink \
+              || echo "::warning::Could not request all CODEOWNERS reviewers."
+          }
+
           open_sync_pr() {
-            # Real (non-version) conflict → sync PR (ADR 0004 §4). Never lands on
-            # `main`: conflict-resolution commits go on `sync/main-to-next`.
+            # Fallback for conflicts git cannot express as markers (delete/modify,
+            # rename, binary): hand over a raw branch at main's tip and let the
+            # human do the whole merge locally. Never lands on `main`:
+            # conflict-resolution commits go on `sync/main-to-next`.
             local branch="sync/main-to-next"
 
-            # If a sync PR is already open, a maintainer may be resolving the
-            # conflict on that branch RIGHT NOW. Never touch the branch in that
-            # case — a force-push would silently discard their resolution
-            # commits. Bail out and let the existing PR carry the resolution;
-            # once it merges, the next run re-evaluates against the new `next`.
             local open_pr
-            open_pr="$(gh pr list --repo "$REPO" --head "$branch" \
-              --base next --state open --json number --jq '.[].number')"
+            open_pr="$(sync_pr_open)"
             if [ -n "$open_pr" ]; then
               echo "::notice::Sync PR #${open_pr} already open — leaving its branch untouched (a maintainer may be resolving it)."
               return 0
@@ -181,8 +277,13 @@ jobs:
             echo "Merge succeeded."
           elif [ -n "$(git ls-files --unmerged)" ]; then
             echo "::warning::Merge conflict — escalating to the sync PR."
-            git merge --abort
-            open_sync_pr
+            if conflicts_are_plain_text; then
+              open_sync_pr_premerged
+            else
+              echo "::warning::Not a plain-text-only conflict — falling back to a raw sync branch."
+              git merge --abort
+              open_sync_pr
+            fi
             exit 0
           else
             echo "::error::git merge failed without a conflict."
