@@ -115,6 +115,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#ComponentDefaultsProvider": {
+    "level": "stable",
+    "isNew": true
+  },
   "@mittwald/flow-react-components#ComponentPropsContextProvider": {
     "level": "stable",
     "isNew": false

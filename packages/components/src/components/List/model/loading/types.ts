@@ -50,6 +50,14 @@ interface DynamicLoaderShape {
 }
 
 interface SuspenseLoaderShape {
+  /**
+   * Whether the List renders no own Suspense boundary while it initially loads.
+   * Suspending is then handed over to the closest Suspense boundary above the
+   * List, so the List appears with loaded data instead of showing its loading
+   * view (skeleton) first.
+   *
+   * @default false
+   */
   disableInitialSuspenseBoundary?: boolean;
 }
 

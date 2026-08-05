@@ -255,8 +255,18 @@ props to hide.
 
 ## Misc
 
-- Feature flags: `src/flags.ts` holds a few behavior toggles; there is no formal
-  policy around them.
+- Application-wide component defaults: `ComponentDefaultsProvider`
+  (`src/components/ComponentDefaultsProvider/`) is where a behavior default that
+  an application should be able to set **once** belongs. Add the setting to the
+  `ComponentDefaults` interface plus its built-in value in
+  `builtInComponentDefaults`, and read it with `useComponentDefaults("<Name>")`
+  at the place that decides. Resolution order: local prop → provider →
+  deprecated `flags` → built-in default. This is not a replacement for
+  `PropsContext`: a UI component clears the props context for its children, so
+  PropsContext cannot carry an app-wide default past the first UI ancestor.
+- Feature flags: `src/flags.ts` is the deprecated predecessor of the
+  `ComponentDefaultsProvider`. Assigned flags still act as an application-wide
+  default (and warn via `useWarnDeprecation`); do not add new ones.
 - `SettingsProvider` (`src/components/SettingsProvider/`) is the built-in
   persistence for component settings (e.g. `List` remembering its view
   settings), with pluggable backends (localStorage by default). Internal
