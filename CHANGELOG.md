@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
+
+### Bug Fixes
+
+* **docs:** serve raw Markdown pages with a MIME type browsers display inline ([#2797](https://github.com/mittwald/flow/issues/2797)) ([0abee86](https://github.com/mittwald/flow/commit/0abee86c952a3fdd27e029bfb7f31468ac5412e1))
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 ### Bug Fixes
