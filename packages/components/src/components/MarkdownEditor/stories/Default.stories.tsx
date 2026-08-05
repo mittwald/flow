@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
+import { IconPlus } from "@/components/Icon/components/icons";
 import type { MarkdownProps } from "@/components/Markdown";
 import ReactMarkdown from "react-markdown";
 
@@ -24,7 +25,7 @@ const meta: Meta<typeof MarkdownEditor> = {
     },
   },
   render: (props) => (
-    <MarkdownEditor placeholder="Transmit a message to the fleet..." {...props}>
+    <MarkdownEditor placeholder="Write a message..." {...props}>
       <Label>Message</Label>
     </MarkdownEditor>
   ),
@@ -43,7 +44,7 @@ export const WithFieldError: Story = {
   render: (props) => (
     <MarkdownEditor {...props} isInvalid defaultValue="hello">
       <Label>Message</Label>
-      <FieldError>Transmission garbled</FieldError>
+      <FieldError>Invalid message</FieldError>
     </MarkdownEditor>
   ),
 };
@@ -135,4 +136,36 @@ export const WithCustomMentionPreview: Story = {
       <Label>Message</Label>
     </MarkdownEditor>
   ),
+};
+
+export const WithCustomToolbarTool: Story = {
+  render: (props) => {
+    const [value, setValue] = useState("# Message\n\nHello there");
+
+    return (
+      <MarkdownEditor
+        {...props}
+        value={value}
+        onChange={setValue}
+        toolbarTools={[
+          {
+            id: "insert-signature",
+            label: "Insert signature",
+            icon: <IconPlus />,
+            onPress: ({ value: currentValue, setValue: setEditorValue }) => {
+              const signature = "\n\n-- Flow Team";
+              if (currentValue.endsWith(signature)) {
+                return;
+              }
+
+              const nextValue = `${currentValue}${signature}`;
+              setEditorValue(nextValue, nextValue.length, nextValue.length);
+            },
+          },
+        ]}
+      >
+        <Label>Message</Label>
+      </MarkdownEditor>
+    );
+  },
 };

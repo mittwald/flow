@@ -14,6 +14,19 @@ Achte bei der Verwendung eines MarkdownEditors darauf, dass ...
 - [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
   klar, hilfreich und lösungsorientiert formuliert sind.
 
+## Custom Buttons
+
+Custom Buttons ermöglichen es, spezielle Funktionen direkt in der Toolbar
+verfügbar zu machen. Diese sollten:
+
+- ein aussagekräftiges Icon haben, das die Funktion klar erklärt.
+- mit einem aussagekräftigen Label versehen sein (wird bei Hover angezeigt).
+- nur dann aktiv sein, wenn die Funktion sinnvoll ist (verwende `isDisabled`).
+- die aktuelle Text- und Cursor-Position berücksichtigen (über den
+  `MarkdownEditorCustomToolContext` zugänglich).
+- die neue Cursor-Position sinnvoll setzen, damit der User direkt weiterarbeiten
+  kann.
+
 ## Verwendung
 
 Verwende einen MarkdownEditor, um Usern die Möglichkeit zu geben, Texte wie

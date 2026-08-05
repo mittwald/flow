@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { type ComponentType, type KeyboardEventHandler, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import {
@@ -21,6 +22,24 @@ import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValue
 
 export type MarkdownEditorMode = "editor" | "preview";
 
+export interface MarkdownEditorCustomToolContext {
+  value: string;
+  textarea: HTMLTextAreaElement | null;
+  setValue: (
+    newValue: string,
+    newSelectionStart?: number,
+    newSelectionEnd?: number,
+  ) => void;
+}
+
+export interface MarkdownEditorCustomTool {
+  id: string;
+  label: string;
+  icon: ReactNode;
+  isDisabled?: boolean;
+  onPress: (context: MarkdownEditorCustomToolContext) => void;
+}
+
 export interface MarkdownEditorProps
   extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
   /**
@@ -28,9 +47,13 @@ export interface MarkdownEditorProps
    * the internal `Markdown` component.
    */
   markdownComponent?: ComponentType<MarkdownProps>;
+  toolbarTools?: MarkdownEditorCustomTool[];
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props toolbarTools
+ */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const {
     isDisabled,
@@ -41,6 +64,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     autoResizeMaxRows,
     headingOffset,
     markdownComponent: MarkdownComponent = DefaultMarkdown,
+    toolbarTools = [],
     value,
     onChange,
     ref,
@@ -98,6 +122,29 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     onChange(newValue);
   };
 
+  const handleCustomToolPressed = (tool: MarkdownEditorCustomTool) => {
+    tool.onPress({
+      value: value ?? "",
+      textarea: inputRef.current,
+      setValue: (newValue, newSelectionStart, newSelectionEnd) => {
+        const defaultSelectionStart =
+          inputRef.current?.selectionStart ?? newValue.length;
+        const selectionStart = newSelectionStart ?? defaultSelectionStart;
+        const selectionEnd = newSelectionEnd ?? selectionStart;
+
+        requestAnimationFrame(() => {
+          if (inputRef.current) {
+            inputRef.current.value = newValue;
+            inputRef.current.setSelectionRange(selectionStart, selectionEnd);
+            inputRef.current.focus();
+          }
+        });
+
+        onChange(newValue);
+      },
+    });
+  };
+
   return (
     <div className={rootClassName}>
       <TextArea
@@ -129,6 +176,8 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           isDisabled={isDisabled}
           onModeChange={setMode}
           onToolPressed={handleToolButtonPressed}
+          customTools={toolbarTools}
+          onCustomToolPressed={handleCustomToolPressed}
         />
       </TextArea>
     </div>

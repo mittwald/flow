@@ -62,6 +62,45 @@ const FormatButtonTestCases = [
 ];
 
 describe("MarkdownEditor Tests", () => {
+  test("renders and executes custom toolbar tool", async () => {
+    const onChangeEvent = vi.fn();
+
+    const editor = (
+      <MarkdownEditor
+        aria-label="test"
+        data-testid="markdown"
+        defaultValue="hello"
+        onChange={onChangeEvent}
+        toolbarTools={[
+          {
+            id: "append-world",
+            label: "Append world",
+            icon: <span>+</span>,
+            onPress: ({ value, setValue }) => {
+              const nextValue = `${value} world`;
+              setValue(nextValue, nextValue.length, nextValue.length);
+            },
+          },
+        ]}
+      />
+    );
+
+    const { rerender } = await render(editor);
+
+    const textArea = page.getByRole("textbox");
+    const customToolButton = page.getByLocator(
+      '[data-button-type="append-world"]',
+    );
+
+    expect(customToolButton).toBeInTheDocument();
+
+    await userEvent.click(customToolButton);
+    await rerender(editor);
+
+    expect(textArea).toHaveDisplayValue("hello world");
+    expect(onChangeEvent).toHaveBeenLastCalledWith("hello world");
+  });
+
   test.each(FormatButtonTestCases)(
     "test formatted message with button type '%s' (%$)",
     async (type, text, expectedResult) => {
