@@ -34,7 +34,7 @@ export const STATUS_EXPORT_ENTRIES: StatusExportEntry[] = [
     sourceRoot: "src/integrations/react-hook-form",
   },
   {
-    key: "./password-tools",
+    key: "./mittwald-password-tools-js",
     indexFile: "src/integrations/@mittwald/password-tools-js/index.ts",
     sourceRoot: "src/integrations/@mittwald/password-tools-js",
   },

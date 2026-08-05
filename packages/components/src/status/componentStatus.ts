@@ -15,7 +15,7 @@ export type FlowExportEntry =
   | "flr-universal"
   | "nextjs"
   | "react-hook-form"
-  | "password-tools";
+  | "mittwald-password-tools-js";
 
 const PACKAGE_NAME = "@mittwald/flow-react-components";
 
