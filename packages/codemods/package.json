@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-codemods",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "devDependencies": {
     "@types/jscodeshift": "^17.3.0",
     "jscodeshift": "^17.3.0",
