@@ -1,19 +1,7 @@
-import { server } from "vitest/browser";
 import { setTheme } from "@mittwald/flow-react-components";
+import { isDarkVisualTheme } from "@/tests/lib/visualTheme";
 
-/**
- * The visual suite runs every test in two browsers. Instead of doubling the
- * (already long) run time with a second theme axis, one browser renders all
- * screenshots in the dark theme, the other one in the light theme — so a single
- * run covers both themes.
- *
- * Consequence: the `*-firefox-*.png` baselines are dark by design, the
- * `*-webkit-*.png` baselines are light. Filtering the run to a single browser
- * (`--browser.name=webkit`) therefore only verifies one of the two themes.
- */
-const darkThemeBrowser = "firefox";
-
-if (server.browser === darkThemeBrowser) {
+if (isDarkVisualTheme()) {
   setTheme("dark");
 
   /**

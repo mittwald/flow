@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -40,9 +41,7 @@ test.each(testEnvironments)(
           {alphaColors.map((color) => (
             <AccentBox
               key={color}
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
+              backgroundColor={alphaColorAccentBoxBackground(color)}
             >
               {/* AccentBox hides direct icon children, so nest it */}
               <Flex>
