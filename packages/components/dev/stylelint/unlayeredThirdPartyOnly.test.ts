@@ -64,6 +64,22 @@ describe("flow/unlayered-third-party-only", () => {
       ).toEqual([]);
     });
 
+    test("a flow owned rule that only scaffolds the nesting", async () => {
+      expect(
+        await lint(
+          "@layer flow.unlayered { .codeEditor .codeMirror { & :global(.cm-line) { color: red; } } }",
+        ),
+      ).toEqual([]);
+    });
+
+    test("a flow owned scaffold that also carries declarations", async () => {
+      const [warning] = await lint(
+        "@layer flow.unlayered { .codeEditor { color: red; & :global(.cm-line) { color: blue; } } }",
+      );
+
+      expect(warning?.text).toMatch(/third-party/i);
+    });
+
     test("a stylesheet without any marker", async () => {
       expect(await lint(".codeEditor { .copyButton { color: red; } }")).toEqual(
         [],

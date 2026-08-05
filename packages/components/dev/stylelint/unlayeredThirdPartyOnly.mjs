@@ -101,10 +101,19 @@ const targetsThirdParty = (selector) => {
   return !ownClasses && !outsideGlobals.includes(".");
 };
 
-/** The rules an unlayered block applies to, in either authoring shape. */
+/**
+ * The rules an unlayered block applies to, in either authoring shape. Only
+ * rules that declare something are targets — a rule that merely scaffolds the
+ * nesting down to a third-party selector carries no declaration of its own and
+ * is therefore never unlayered.
+ */
 const targetRulesOf = (marker) => {
   const nested = [];
-  marker.walkRules((rule) => nested.push(rule));
+  marker.walkRules((rule) => {
+    if (rule.some((node) => node.type === "decl")) {
+      nested.push(rule);
+    }
+  });
 
   if (nested.length > 0) {
     return nested;

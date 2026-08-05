@@ -3,7 +3,7 @@ import { join } from "node:path";
 import postcss from "postcss";
 import type { AtRule } from "postcss";
 import type { Plugin } from "vite";
-import { unlayeredMarker } from "./flowComponentsLayerPlugin";
+import { unlayeredMarker } from "./unlayeredMarker";
 
 /**
  * The unlayered marker is a build instruction, not a layer, so it must never

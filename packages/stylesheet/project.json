@@ -4,7 +4,11 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "inputs": ["{projectRoot}/build.js", "default"],
+      "inputs": [
+        "{projectRoot}/build.js",
+        "default",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ],
       "outputs": ["{projectRoot}/dist/*"]
     }
   }
