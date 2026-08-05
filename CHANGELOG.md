@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.5...1.0.6) (2026-08-05)
+
+### Bug Fixes
+
+* **forward-merge:** cover lerna.json, and make sync PRs resolvable ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([53b4a43](https://github.com/mfal/flow-1-0-rehearsal/commit/53b4a4367f5ca11a14ec11c6d9cfbb18485c9c1c))
+* **publish-next:** seed the next line as a minor prerelease ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([4d56f8c](https://github.com/mfal/flow-1-0-rehearsal/commit/4d56f8cc5df34d3ba25a4d802071f998855901a9)), closes [#2724](https://github.com/mfal/flow-1-0-rehearsal/issues/2724)
+
+### Features
+
+* **forward-merge:** hand over a pre-merged sync branch ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([8465b5c](https://github.com/mfal/flow-1-0-rehearsal/commit/8465b5cf098568bd3b70a022061f71b77a24976f))
+
 ## [1.0.5](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.4...1.0.5) (2026-08-05)
 
 ### Bug Fixes

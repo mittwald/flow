@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.5...1.0.6) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 ## [1.0.5](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.4...1.0.5) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-core
