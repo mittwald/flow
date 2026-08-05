@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* declare a uniform Node engines floor (>=24) and pin react-hook-form peer ([#2728](https://github.com/mittwald/flow/issues/2728)) ([a3b6f81](https://github.com/mittwald/flow/commit/a3b6f8168622c0a2cbfdcd018dd0f83f48a01b2a))
+* fix List renders without entries ([#1164](https://github.com/mittwald/flow/issues/1164)) ([b505747](https://github.com/mittwald/flow/commit/b505747bf80d61d2f4ac7aa7a2078be754719daf))
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+* **Tabs:** fix Tabs crashing when used in Activity ([be087bc](https://github.com/mittwald/flow/commit/be087bca064825243f0dabb1a23e57a91a3c4e53))
+* **Tunnel:** fix children are not removed if TunnelEntry suspends during render ([1cdeb5c](https://github.com/mittwald/flow/commit/1cdeb5c798a98c901dc70bce65ab73f15d030695))
+* **Tunnel:** fix issue with disordered entries after re-render ([67eb660](https://github.com/mittwald/flow/commit/67eb66027ffcb408406819651d0832b55b3e4b46))
+* **Tunnel:** fix missing  children in SSR ([9777d0a](https://github.com/mittwald/flow/commit/9777d0a114378b1437397007ea785e60d5ced1eb))
+* **Tunnel:** fix not rendering exit ([9ecfdac](https://github.com/mittwald/flow/commit/9ecfdac02f10f0eca4d8092ca509e869515fd571))
+* **Tunnel:** fix not showing entries when used in Activity ([1a9d7f0](https://github.com/mittwald/flow/commit/1a9d7f0ee7943068d2fa1dcf43a60f31fc30461a))
+* **Tunnel:** fix re-ordering issue in Tunnel children ([#1806](https://github.com/mittwald/flow/issues/1806)) ([c603260](https://github.com/mittwald/flow/commit/c6032601a316f9bae431a22867c83ddff7685dd8))
+* **Tunnel:** fix render-loop edge-case during suspense ([c8f771c](https://github.com/mittwald/flow/commit/c8f771c1b1887760c4b9a2fc0d9814ab740a124a))
+* **Tunnel:** fix rendering order when using multiple Tunnel Entries ([a088504](https://github.com/mittwald/flow/commit/a0885047c38123e4fc5fe24314411715816982b1))
+* **Tunnel:** fix state update on render ([c1eaf85](https://github.com/mittwald/flow/commit/c1eaf85fd3be303d721837766f196c1e21531dc1))
+* **Tunnel:** fix tunnel items are not removed ([419a0dc](https://github.com/mittwald/flow/commit/419a0dcc41edb5b470d9fcf21282158c03ef0343))
+* **Tunnel:** render children if not already in Tunnel ([64e7d52](https://github.com/mittwald/flow/commit/64e7d52499ad68dee403dc05f737b46d28e4193e))
+* use original remote dom packages ([9e3c9ad](https://github.com/mittwald/flow/commit/9e3c9ad0badb4a6681d89b6fc46d3367d191131f))
+
+### Features
+
+* add Tabs ([8f3ac47](https://github.com/mittwald/flow/commit/8f3ac47d4708df5106dd1776ced3a244728c064d))
+* deactivate collapsed Accordion content ([e846839](https://github.com/mittwald/flow/commit/e84683944859a3df55669068196f476752a67ca7))
+* **ExtBridge:** add Extension Bridge ([69bbcd5](https://github.com/mittwald/flow/commit/69bbcd50d5df33a3d54bfa1534fc2a84cdcf0a9f))
+* loading view and data provider in RemoteRenderer ([f7cdb53](https://github.com/mittwald/flow/commit/f7cdb5335d69060de0170dacce30f91dafe28f4a))
+* move Tunnel into own package ([5a2ba52](https://github.com/mittwald/flow/commit/5a2ba5206a229df93f9c59493fafe2b797798e1d))
+* **Remote:** add RemoteTunnelEntry ([ce63c57](https://github.com/mittwald/flow/commit/ce63c57f5194b4d7acae34aa993d209bebe7cfcf))
+* **Tunnel:** support static entry ID ([7ed7c10](https://github.com/mittwald/flow/commit/7ed7c10e1f1b667c93d4a9ec0359eae05266c1d2))
+* **Tunnel:** support Tunnel nesting ([#2466](https://github.com/mittwald/flow/issues/2466)) ([ac85de2](https://github.com/mittwald/flow/commit/ac85de2032644a9f8f08c393cf9d3721b44e1173))
+
+### Performance Improvements
+
+* **Tunnel:** reduce initial re-render in TunnelExit ([3b26ab6](https://github.com/mittwald/flow/commit/3b26ab69e711088a39377a9e16fbf9ca000b40f2))
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/react-tunnel

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* add sideEffect config ([#2772](https://github.com/mittwald/flow/issues/2772)) ([cee26cc](https://github.com/mittwald/flow/commit/cee26cc1258623b578aaeac87aa038602cc104e5))
+* declare a uniform Node engines floor (>=24) and pin react-hook-form peer ([#2728](https://github.com/mittwald/flow/issues/2728)) ([a3b6f81](https://github.com/mittwald/flow/commit/a3b6f8168622c0a2cbfdcd018dd0f83f48a01b2a))
+* fix broken exports in icons packages ([6d744b3](https://github.com/mittwald/flow/commit/6d744b34671cc25789749339efb8a3cc309cc1ea))
+* stack icon fa variant ([#2556](https://github.com/mittwald/flow/issues/2556)) ([baf21a6](https://github.com/mittwald/flow/commit/baf21a6dab38dd3f8569a3749d4e88384ccfddc0))
+
+### Features
+
+* Add interchangeable icon packages ([61faf2d](https://github.com/mittwald/flow/commit/61faf2db0c65ce1f4e299bcd3d6cfab073d97ca5))
+* **Icon:** add stack icon ([#2553](https://github.com/mittwald/flow/issues/2553)) ([a8becec](https://github.com/mittwald/flow/commit/a8bececefc8ca50a5fd25de68d96dc2cb9d95e1e))
+* **Icons:** add Newsletter icon ([#2659](https://github.com/mittwald/flow/issues/2659)) ([87b92d8](https://github.com/mittwald/flow/commit/87b92d85cf6c759a12c54223534a4d4cfed1a81d))
+* **icons:** auto-generate icon overview from categorized icon set ([#2591](https://github.com/mittwald/flow/issues/2591)) ([55d6f44](https://github.com/mittwald/flow/commit/55d6f4461d03900b58b8423c08cb9f60abd8a235))
+* **Rating:** support custom icons ([#2511](https://github.com/mittwald/flow/issues/2511)) ([6c4ef13](https://github.com/mittwald/flow/commit/6c4ef13c5c039d08d937857cce30c57a9788b4d3))
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-icons-pro

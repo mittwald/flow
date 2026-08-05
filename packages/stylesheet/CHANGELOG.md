@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* declare a uniform Node engines floor (>=24) and pin react-hook-form peer ([#2728](https://github.com/mittwald/flow/issues/2728)) ([a3b6f81](https://github.com/mittwald/flow/commit/a3b6f8168622c0a2cbfdcd018dd0f83f48a01b2a))
+* **stylesheet:** fix export filename ([e49864a](https://github.com/mittwald/flow/commit/e49864a12681054cf903d22e959d68124291a65f))
+
+### Features
+
+* **components:** add opt-in layered stylesheet variant (CSS cascade layers) ([#2643](https://github.com/mittwald/flow/issues/2643)) ([4b190c2](https://github.com/mittwald/flow/commit/4b190c2ad574ff2cbaa2385047e98aeb6384541b))
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet

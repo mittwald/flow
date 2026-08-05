@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* **Remote:** fixes transferable datatypes and remote forms optimizations ([#1659](https://github.com/mfal/flow-1-0-rehearsal/issues/1659)) ([cd5882c](https://github.com/mfal/flow-1-0-rehearsal/commit/cd5882ce5db2e0347e8478b37be2de69c9b65d8d))
+* **Remote:** support mixed data in prepareFormData ([#2560](https://github.com/mfal/flow-1-0-rehearsal/issues/2560)) ([369bfe9](https://github.com/mfal/flow-1-0-rehearsal/commit/369bfe97ff7d42a969b6ae7b313d0f6615aaeb36))
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mfal/flow-1-0-rehearsal/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+
+### Features
+
+* **OverlayController:** support onClose callback ([b206009](https://github.com/mfal/flow-1-0-rehearsal/commit/b206009b64406bf6bc3025574634940ca98709ea))
+* **Remote:** add async serializers ([#2596](https://github.com/mfal/flow-1-0-rehearsal/issues/2596)) ([57e2ee5](https://github.com/mfal/flow-1-0-rehearsal/commit/57e2ee5fdb82a7f13b19fe28574ced14d2a46a93))
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mfal/flow-1-0-rehearsal/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+* **Remote:** refactor event serialization ([#1552](https://github.com/mfal/flow-1-0-rehearsal/issues/1552)) ([e7b00ac](https://github.com/mfal/flow-1-0-rehearsal/commit/e7b00ac7df6b1396b17c2574d0b82479192d1174))
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-core

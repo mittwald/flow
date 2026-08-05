@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* **Ext Bridge:** add missing export ([08d745f](https://github.com/mittwald/flow/commit/08d745fe0c7e13d4e08feaa2dc975c6e52bf1cdd))
+* **Ext Bridge:** fix schema ([887bdb0](https://github.com/mittwald/flow/commit/887bdb08c05b43cc78bd367254620c1ced35382b))
+* **Ext-Bridge:** check for SSR in detection function ([#2455](https://github.com/mittwald/flow/issues/2455)) ([83119c5](https://github.com/mittwald/flow/commit/83119c50cb1b942fb099bb5e015aba5e421c1f2d))
+* **ext-bridge:** fix config type + tests ([#1371](https://github.com/mittwald/flow/issues/1371)) ([5804ed4](https://github.com/mittwald/flow/commit/5804ed4ee5d7a0739a6e8a2a8b485452e96670c9))
+* **Ext-Bridge:** fix export path ([178283c](https://github.com/mittwald/flow/commit/178283c7ddd4e7fef7506c35a333cd8132569060))
+* **ext-bridge:** fix public key fetching ([#1324](https://github.com/mittwald/flow/issues/1324)) ([ab7bd33](https://github.com/mittwald/flow/commit/ab7bd3316107cf1cabbf5a6295f3dcf893a26aaa))
+* **Ext-Bridge:** fix validation issue in session token ([b288441](https://github.com/mittwald/flow/commit/b2884417048e0f1be1b22da48b4e2c14404f28d2))
+* **ExtBridge:** config catchall ([#2276](https://github.com/mittwald/flow/issues/2276)) ([d5d6a3b](https://github.com/mittwald/flow/commit/d5d6a3b147454b8d68e973a88379ee79a5660eec))
+* **ExtBridge:** init ExtBridge in RemoteRoot connection ([#2506](https://github.com/mittwald/flow/issues/2506)) ([16d5f01](https://github.com/mittwald/flow/commit/16d5f014e90b89dfc353053d00eba8341ac08732))
+* **Remote:** fix config types ([5a8fe9a](https://github.com/mittwald/flow/commit/5a8fe9a29ac9d67a9900bee716a508aed674c095))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+* update to bug-fixed remote packages ([54b53cd](https://github.com/mittwald/flow/commit/54b53cdd05964843c0b4e7d2635fd4c524206691))
+
+### Features
+
+* **Ext-Bridge:** add variant key to session token ([#1987](https://github.com/mittwald/flow/issues/1987)) ([42afb06](https://github.com/mittwald/flow/commit/42afb06d21cff2c85c1017d420908e1ee5b67979))
+* **Ext-Bridge:** support language config in schema ([#2439](https://github.com/mittwald/flow/issues/2439)) ([62742f1](https://github.com/mittwald/flow/commit/62742f184508eea30dbe75853691be5a52070fd0))
+* **ExtBridge:** add Extension Bridge ([69bbcd5](https://github.com/mittwald/flow/commit/69bbcd50d5df33a3d54bfa1534fc2a84cdcf0a9f))
+* **ExtBridge:** expose variantKey in baseConfig ([#2274](https://github.com/mittwald/flow/issues/2274)) ([b540f7a](https://github.com/mittwald/flow/commit/b540f7aafecb3bc03a9e31d207f49402b978cf50))
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/ext-bridge

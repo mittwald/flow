@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* **LoadingIndicator:** fix loading view stays forever ([#1732](https://github.com/mittwald/flow/issues/1732)) ([55032fb](https://github.com/mittwald/flow/commit/55032fbb6903a61a180157db74a7936b117c908c))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+
+### Features
+
+* add mstudio-ext-react-components package ([7944410](https://github.com/mittwald/flow/commit/79444109c00e146e84e658de8767ebf1629e4f89))
+* **SuspenseTrigger:** added remote suspense loading trigger ([#1722](https://github.com/mittwald/flow/issues/1722)) ([98e19ee](https://github.com/mittwald/flow/commit/98e19eef41cb66a0dcb5a6024eee33f1464f58d0))
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/mstudio-ext-react-components

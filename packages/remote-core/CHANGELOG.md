@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0-alpha.998 (2026-08-05)
+
+### Bug Fixes
+
+* **AutoComplete:** fixes infinity loop in docs ([#1861](https://github.com/mittwald/flow/issues/1861)) ([9aed97b](https://github.com/mittwald/flow/commit/9aed97b29d9c0f5ddf89a037a09f209657a6a505))
+* **LoadingIndicator:** fix loading view stays forever ([#1732](https://github.com/mittwald/flow/issues/1732)) ([55032fb](https://github.com/mittwald/flow/commit/55032fbb6903a61a180157db74a7936b117c908c))
+* **PasswordCreationField:** fixes policy not working in remote context ([#1879](https://github.com/mittwald/flow/issues/1879)) ([0165437](https://github.com/mittwald/flow/commit/0165437cc7b611d1f5e2fd7363d50813281c418a))
+* **Remote:** fix backwards incompatibility of RemoteRenderer ([41800d1](https://github.com/mittwald/flow/commit/41800d127300a0eccd13c52354ac081cc01fe8a0))
+* **Remote:** fix config types ([5a8fe9a](https://github.com/mittwald/flow/commit/5a8fe9a29ac9d67a9900bee716a508aed674c095))
+* **Remote:** fix navigation may get lost ([11d7c57](https://github.com/mittwald/flow/commit/11d7c5788ab87c4cf4781f29e650b72359dc33f7))
+* **Remote:** fixes transferable datatypes and remote forms optimizations ([#1659](https://github.com/mittwald/flow/issues/1659)) ([cd5882c](https://github.com/mittwald/flow/commit/cd5882ce5db2e0347e8478b37be2de69c9b65d8d))
+* **Remote:** flag @quilted/threads not as externalized ([#2620](https://github.com/mittwald/flow/issues/2620)) ([286515e](https://github.com/mittwald/flow/commit/286515e84e4e6b5802333c66dddd2206c50bc6f9))
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+* **Remote:** update packages ([84e7040](https://github.com/mittwald/flow/commit/84e70403fd2af79976a5bc36e4bbee8a84fed403))
+* **Remote:** update packages ([301f597](https://github.com/mittwald/flow/commit/301f597b72c271b956144f4281cef1fa17ece356))
+* **Remote:** update packages ([be68e91](https://github.com/mittwald/flow/commit/be68e910e68d1c400a264e5fa7a6ba1d12fb831f))
+* **Remote:** update packages ([9e6d299](https://github.com/mittwald/flow/commit/9e6d299eecbb129bf488e2f3fa70adee3dbda304))
+* **Remote:** update packages ([402013a](https://github.com/mittwald/flow/commit/402013a9cde85894d606f662c28de6e87a81e129))
+* require Node >= 24 (the tested and supported runtime) ([7f9a8ec](https://github.com/mittwald/flow/commit/7f9a8ec0b34fc9db009dc330a3632e3b1ee41eea))
+* rollback to Vite 7 because of broken build files ([79a7818](https://github.com/mittwald/flow/commit/79a7818d5f08885a284bc6efc41b61548026f6c6))
+* switch to mittwald remote libs ([9883bb2](https://github.com/mittwald/flow/commit/9883bb210517c9991545baf94fec9e9adffd18eb))
+* update lock file ([f52894b](https://github.com/mittwald/flow/commit/f52894b32c90bd9f38c49fd51f45ee6eca7c1377))
+* update to bug-fixed remote packages ([54b53cd](https://github.com/mittwald/flow/commit/54b53cdd05964843c0b4e7d2635fd4c524206691))
+* update to bug-fixed remote packages [#2](https://github.com/mittwald/flow/issues/2) ([99654b5](https://github.com/mittwald/flow/commit/99654b533c08953145e1814df9c3414b60f361dc))
+* update to fixed remote core package ([f8bf337](https://github.com/mittwald/flow/commit/f8bf3370843966591b6b34b47c501588a04c0ff7))
+* use original remote dom packages ([9e3c9ad](https://github.com/mittwald/flow/commit/9e3c9ad0badb4a6681d89b6fc46d3367d191131f))
+* use patched remote packages ([#1246](https://github.com/mittwald/flow/issues/1246)) ([09fa922](https://github.com/mittwald/flow/commit/09fa922626fb0f799985669d1118792f9aa7ebba))
+* use patched remote-dom-core ([5b91ef3](https://github.com/mittwald/flow/commit/5b91ef3cb72d385aa705424c851cf88286a5f75e))
+
+### Features
+
+* **ExtBridge:** add Extension Bridge ([69bbcd5](https://github.com/mittwald/flow/commit/69bbcd50d5df33a3d54bfa1534fc2a84cdcf0a9f))
+* loading view and data provider in RemoteRenderer ([f7cdb53](https://github.com/mittwald/flow/commit/f7cdb5335d69060de0170dacce30f91dafe28f4a))
+* **PasswordCreationField:** introduce new component ([8fdb60e](https://github.com/mittwald/flow/commit/8fdb60e2b6219c5e0aedffcaa002806a7303282a))
+* **Remote:** add async serializers ([#2596](https://github.com/mittwald/flow/issues/2596)) ([57e2ee5](https://github.com/mittwald/flow/commit/57e2ee5fdb82a7f13b19fe28574ced14d2a46a93))
+* **Remote:** Allow remote navigation ([#1355](https://github.com/mittwald/flow/issues/1355)) ([351e34b](https://github.com/mittwald/flow/commit/351e34b274eb9ea6176c4f2e74804810d4b8e69a))
+* **Remote:** Allow transferable remote file uploads ([#1540](https://github.com/mittwald/flow/issues/1540)) ([acd8802](https://github.com/mittwald/flow/commit/acd88026f7c537b5a76bccfc980db7727439bea1))
+* **Remote:** auto-set host language on remote-side ([5288973](https://github.com/mittwald/flow/commit/5288973b3d4ab7b68c9b8295014b014b9e75923e))
+* **remote:** expose package version in connection handshake ([#2610](https://github.com/mittwald/flow/issues/2610)) ([9637dce](https://github.com/mittwald/flow/commit/9637dcea778f0254ea81084d89434b06f070df16))
+* **remote:** forward remote deprecation notices to the host via onDeprecation ([#2639](https://github.com/mittwald/flow/issues/2639)) ([d17da88](https://github.com/mittwald/flow/commit/d17da885b7a8bf6e1637fa6ad78e729d39cb53ba))
+* **Remote:** refactor event serialization ([#1552](https://github.com/mittwald/flow/issues/1552)) ([e7b00ac](https://github.com/mittwald/flow/commit/e7b00ac7df6b1396b17c2574d0b82479192d1174))
+* **Remote:** support "local" remote connection ([#2180](https://github.com/mittwald/flow/issues/2180)) ([15e72d3](https://github.com/mittwald/flow/commit/15e72d3c3315c65dc7c4444658776c78dc18ec6c))
+* **Remote:** support SSR by adding Node shims ([#1383](https://github.com/mittwald/flow/issues/1383)) ([0af7f26](https://github.com/mittwald/flow/commit/0af7f26adcff9c15ea99069216f72d7981f8a0d1))
+* **Remote:** support version for backwards compatibility ([#1432](https://github.com/mittwald/flow/issues/1432)) ([4a9ee6f](https://github.com/mittwald/flow/commit/4a9ee6f5515927471f7d762f330e4d23b0de6ad4))
+* **remote:** surface "No component found" error on the remote side ([#2651](https://github.com/mittwald/flow/issues/2651)) ([715fd75](https://github.com/mittwald/flow/commit/715fd7537cc776f8376ffc4634021071ba5fde18)), closes [#2441](https://github.com/mittwald/flow/issues/2441)
+
+### Reverts
+
+* Revert "chore(bundle): migrate to vite 8 (#2436)" ([ae52cd3](https://github.com/mittwald/flow/commit/ae52cd3eb70e645df475c74fe92e739ae84e5f8e)), closes [#2436](https://github.com/mittwald/flow/issues/2436)
+
 # [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
