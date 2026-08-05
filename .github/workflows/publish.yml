@@ -102,10 +102,16 @@ jobs:
         run: |
           if [ -n "${{ inputs.release_as }}" ]; then
             # One-time explicit version (the 1.0.0 cut, or any forced version via
-            # workflow_dispatch). An explicit target overrides conventional-commit
-            # derivation entirely, so the prerelease flag is irrelevant here.
+            # workflow_dispatch). The explicit target overrides conventional-commit
+            # *derivation*, but --conventional-commits is still required: it is
+            # also what writes CHANGELOG.md. Without it lerna bumps the versions
+            # and writes no changelog entry at all, and the release-notes
+            # extraction below then silently picks up the PREVIOUS version's
+            # section (verified in the #2769 rehearsal: CHANGELOG.md at tag 1.0.0
+            # still started with `# [0.2.0-alpha.999]`).
             pnpm lerna version "${{ inputs.release_as }}" \
               --force-publish \
+              --conventional-commits \
               --message "chore(release): bump version to %v" \
               --yes \
               --no-push \
@@ -155,7 +161,26 @@ jobs:
 
           # Release notes = this version's section of the root changelog
           # (everything between this version's header and the previous one).
-          awk '/^# \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+          #
+          # `#+` matches ANY header level, not just H1: conventional-changelog
+          # varies the level with the bump type, so a patch release can render as
+          # `## [1.0.1]`. Matching `^# \[` only would skip it and start at the
+          # previous H1 instead — emitting the wrong version's notes.
+          awk '/^#+ \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+
+          # GitHub rejects a release body over 125000 characters with a 422. By
+          # this point the publish has succeeded and the tag is pushed, so failing
+          # here leaves a released-but-Release-less state that has to be cleaned up
+          # by hand. Truncating is strictly better. The check counts bytes, which
+          # for UTF-8 is >= the character count GitHub measures, so it errs safe;
+          # `iconv -c` drops the partial multi-byte sequence `head -c` may leave.
+          limit=125000
+          if [ "$(wc -c < release-notes.md)" -gt "$limit" ]; then
+            echo "::warning::Changelog section exceeds GitHub's release-body limit — truncating."
+            head -c "$((limit - 200))" release-notes.md | iconv -c -f utf-8 -t utf-8 > release-notes.trunc
+            printf '\n\n_Truncated — see `CHANGELOG.md` at tag `%s` for the full list._\n' "${tag}" >> release-notes.trunc
+            mv release-notes.trunc release-notes.md
+          fi
 
           # Mark as pre-release when the version carries a semver pre-release id
           # (e.g. 0.2.0-alpha.N), matching lerna's own --create-release behaviour.
