@@ -61,11 +61,17 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 
+      # REHEARSAL ONLY — publish to the throwaway Verdaccio, never to npmjs.
+      # The URL comes from a repo variable so a container restart with a new
+      # ingress needs no commit. `scope` narrows the redirect to @mittwald;
+      # everything else keeps resolving straight from npmjs instead of being
+      # dragged through Verdaccio's uplink.
       - name: Setup Node 🎛️
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
-          registry-url: "https://registry.npmjs.org"
+          registry-url: ${{ vars.REHEARSAL_REGISTRY }}
+          scope: "@mittwald"
           cache: pnpm
 
       - name: Git Identity 🪪
@@ -122,7 +128,13 @@ jobs:
       # patched (patches/@sigstore__sign@4.1.1.patch) to default fetchOnConflict
       # to true, so it fetches the existing transparency-log entry and the publish
       # succeeds. No retry loop — re-signing only re-collided with itself.
+      #
+      # REHEARSAL ONLY — token auth against Verdaccio. OIDC/provenance/sigstore
+      # engage only against npmjs, so the comment above describes the one part of
+      # the real cut this rehearsal cannot exercise (see #2769).
       - name: Publish 🚀
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.REHEARSAL_NPM_TOKEN }}
         run: |
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             # Rehearsal: show the publish plan, touch neither npm nor origin.
