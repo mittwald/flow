@@ -221,7 +221,8 @@ A new or substantially changed component comes with:
 ## Writing style (issues, ADRs, PR/commit bodies, code comments)
 
 Applies to prose we author — issues, ADRs, PR and commit bodies, code comments.
-Not to user-facing UI text (that lives in `locales/*` and follows product voice).
+Not to user-facing UI text (that lives in `locales/*` and follows product
+voice).
 
 Write **dense and simple**. Cut words, never content. Every fact stays —
 constraints, edge cases, reasons, trade-offs, links. Brevity filters words, not
@@ -237,7 +238,8 @@ delete it.
 - **No summary that just repeats the body.** Either the TL;DR replaces the
   detail or the detail replaces it — not both.
 - **Cut marketing adjectives.** "robust", "seamless", "comprehensive",
-  "powerful" carry no information. Delete them, or replace with the concrete fact.
+  "powerful" carry no information. Delete them, or replace with the concrete
+  fact.
 - **Structure only when it earns its keep.** Three lines don't need three
   headings.
 
@@ -251,8 +253,8 @@ delete it.
   "flipping the default results in a change to X".
 - **Unpack lists.** Three options crammed into one sentence → three bullets.
 
-When brevity and clarity conflict, **clarity wins** — a few more words to split a
-dense sentence is a good trade.
+When brevity and clarity conflict, **clarity wins** — a few more words to split
+a dense sentence is a good trade.
 
 ## Common failures
 
