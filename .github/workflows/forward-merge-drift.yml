@@ -1,0 +1,136 @@
+name: Forward-merge drift check
+
+# Safety net for a hole found in the #2769 rehearsal.
+#
+# ADR 0004 §5 assumes the shared `mutate-next` concurrency group "serializes all
+# writers of next and removes non-fast-forward races by design". It does not
+# serialize: GitHub keeps at most ONE pending run per concurrency group and
+# EVICTS it as soon as a newer run arrives. `cancel-in-progress: false` protects
+# only the RUNNING job. Measured in the rehearsal fork: a forward-merge queued at
+# 14:40:45 was cancelled at 14:43:03 — two seconds after a publish-next run
+# entered the group. The manual recovery dispatch (ADR 0004 §2) is evicted the
+# same way.
+#
+# Forward-merge runs are therefore DROPPED, not delayed, and a cancelled run is
+# not a `failure`, so the escalation in ADR 0004 §10 never fires — `next` falls
+# behind `main` silently. The cascade is self-healing only in part: forward-merge
+# always merges main's TIP, so a later run catches up, but only if another push
+# to `main` follows, and that run can be evicted just the same.
+#
+# This workflow closes the SILENT part. It deliberately neither merges nor
+# dispatches anything: recovery is the manual `forward-merge.yml` dispatch, which
+# is already a first-class path. Detection is what was missing.
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      max_drift_minutes:
+        description: "Escalate when the oldest un-merged commit on main is older than this many minutes. Use 0 to escalate on any drift (exercises the escalation path)."
+        type: string
+        default: "120"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+# Its OWN group. This workflow never writes to `next`, so it must not sit in
+# `mutate-next` — sharing that group is precisely what gets runs evicted.
+concurrency:
+  group: forward-merge-drift
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+  REPO: ${{ github.repository }}
+  MAX_DRIFT_MINUTES: ${{ inputs.max_drift_minutes || '120' }}
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Self-gating, same as forward-merge.yml and commit-guard.yml: there is no
+      # cascade to drift until `next` exists.
+      - name: Check whether the `next` branch exists yet
+        id: guard
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads \
+               "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::'next' branch does not exist yet — drift check dormant (pre-1.0.0-cut). Skipping."
+          fi
+
+      - name: Checkout ⬇️
+        if: steps.guard.outputs.exists == 'true'
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Compare `main` against `next` 🔍
+        if: steps.guard.outputs.exists == 'true'
+        run: |
+          set -euo pipefail
+
+          git fetch --no-tags origin main next
+
+          # The invariant from ADR 0004 §1: `main` is an ancestor of `next`.
+          if git merge-base --is-ancestor origin/main origin/next; then
+            echo "next contains main's tip — no drift."
+            exit 0
+          fi
+
+          behind="$(git rev-list --count origin/next..origin/main)"
+          oldest="$(git rev-list origin/next..origin/main | tail -1)"
+          age_min=$(( ( $(date +%s) - $(git show -s --format=%ct "$oldest") ) / 60 ))
+          echo "::warning::next is behind main by ${behind} commit(s); the oldest un-merged commit is ${age_min} minutes old."
+
+          # A forward-merge run for a fresh push may simply still be queued. Only
+          # drift that OUTLIVES the normal cascade means something was dropped.
+          if [ "$age_min" -lt "$MAX_DRIFT_MINUTES" ]; then
+            echo "Below the ${MAX_DRIFT_MINUTES} minute threshold — a forward-merge run is probably still pending. Not escalating."
+            exit 0
+          fi
+
+          # A conflict is already in a human's hands (ADR 0004 §4) — that drift is
+          # expected and must not generate a second alert.
+          if [ -n "$(gh pr list --repo "$REPO" --head sync/main-to-next \
+                       --base next --state open --json number --jq '.[].number')" ]; then
+            echo "::notice::An open sync/main-to-next PR is carrying the resolution — not escalating."
+            exit 0
+          fi
+
+          title="next has fallen behind main (forward-merge drift)"
+
+          # Idempotent: the schedule runs hourly, the alert must not.
+          if [ -n "$(gh issue list --repo "$REPO" --state open --label automated \
+                       --search "in:title \"${title}\"" --json number --jq '.[].number')" ]; then
+            echo "::notice::A drift issue is already open — not opening another."
+            exit 0
+          fi
+
+          gh label create automated --repo "$REPO" --color EDEDED \
+            --description "Opened by automation" 2>/dev/null || true
+
+          body="$(printf '%s\n' \
+            "\`next\` is behind \`main\` by ${behind} commit(s), and the oldest un-merged commit is ${age_min} minutes old — well past the ${MAX_DRIFT_MINUTES} minute threshold. The superset invariant (ADR 0004 §1) is broken." \
+            '' \
+            'The likely cause is an EVICTED forward-merge run: GitHub keeps at most one pending run per concurrency group and cancels it when a newer run enters the group. A cancelled run is not a failure, so the escalation in ADR 0004 §10 does not fire.' \
+            '' \
+            'Recovery — a manual forward-merge is a first-class path (ADR 0004 §2) and is idempotent, it merges main'"'"'s current tip:' \
+            '' \
+            '```' \
+            "gh workflow run forward-merge.yml --repo ${REPO} --ref main" \
+            '```' \
+            '' \
+            'Close this issue once `next` contains `main` again; the next scheduled check will re-open it if it does not.' \
+            '' \
+            '/cc @mfal @Lisa18289 @ins0 @maaaathis @Jan-Eimertenbrink')"
+
+          gh issue create --repo "$REPO" --label automated \
+            --title "$title" --body "$body"
