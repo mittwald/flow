@@ -148,8 +148,20 @@ jobs:
           # only in the files that genuinely conflict.
           #
           # The catch: such a PR LOOKS mergeable to GitHub, because its head
-          # contains the base. `sync-pr-guard.yml` fails while markers are present
-          # and MUST be a required check on `next` for this to be safe.
+          # contains the base. Two independent defences, because the invariant in
+          # ADR 0004 §1 must not be breakable by a misconfiguration:
+          #
+          #   1. The PR is opened as a DRAFT. GitHub refuses to merge a draft, so
+          #      this holds even where no branch protection is configured. Marking
+          #      it ready for review IS the signal that the resolution is done.
+          #   2. `sync-pr-guard.yml` fails while markers are present; as a required
+          #      check on `next` it blocks the merge even if someone un-drafts a
+          #      PR that is not actually resolved.
+          #
+          # Markers are deliberately preferred over any "clean but incomplete"
+          # hand-over (resolve to one side, ship the other side as a patch): that
+          # would produce a mergeable branch that silently drops main's change.
+          # Markers fail loudly — in the diff, in the build, in the tests.
           open_sync_pr_premerged() {
             local branch="sync/main-to-next" open_pr conflicted body
             open_pr="$(sync_pr_open)"
@@ -176,7 +188,7 @@ jobs:
               '' \
               "${conflicted}" \
               '' \
-              '⚠️ **This PR looks mergeable to GitHub, but must not be merged as it stands** — it contains conflict markers. The `sync-pr-guard` check fails until they are gone.' \
+              '⚠️ **It is a draft on purpose.** Its head contains the base, so GitHub would otherwise consider it mergeable — while it still carries conflict markers. It stays a draft until a human has resolved them; the `sync-pr-guard` check backs that up.' \
               '' \
               'Resolve with an AMEND, so the marker commit never reaches `next`. A commit that does not build would otherwise sit in the history forever and break `git bisect`:' \
               '' \
@@ -189,11 +201,14 @@ jobs:
               'git push --force-with-lease origin sync/main-to-next' \
               '```' \
               '' \
+              'Then mark this PR **ready for review** — that is the signal that the resolution is done.' \
+              '' \
               'The amend keeps both merge parents, so the superset invariant (ADR 0004 §1) still holds. Merge this PR AS A TRUE MERGE COMMIT — a squash or rebase merge would break that invariant and is blocked by branch protection on `next`.' \
               '' \
               'Note: while this PR is open the cascade leaves the branch untouched, so it does not pick up commits that land on `main` afterwards. Those arrive with the next forward-merge run once this PR is merged.')"
 
             gh pr create --repo "$REPO" --base next --head "$branch" \
+              --draft \
               --title "chore(sync): resolve forward-merge conflict (main into next)" \
               --label sync --label automated \
               --body "$body"
