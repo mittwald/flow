@@ -231,10 +231,31 @@ function openPullRequest() {
     return;
   }
 
+  // Link the escalation issue so merging this PR closes it — otherwise the
+  // cascade stays "blocked" in the tracker long after it is unblocked, and the
+  // drift check keeps treating the stale issue as an open escalation.
+  const issue = gh([
+    "issue",
+    "list",
+    "--state",
+    "open",
+    "--label",
+    "sync",
+    "--search",
+    'in:title "Forward-merge blocked"',
+    "--json",
+    "number",
+    "--jq",
+    ".[0].number // empty",
+  ]);
+  const issueNumber =
+    issue.status === 0 ? (issue.stdout ?? "").trim() : "";
+
   const body = [
     "Resolves the forward-merge conflict between `main` and `next` (ADR 0004 §4), resolved locally with the merge drivers active via `pnpm sync:resolve`.",
     "",
     "Merge this **as a true merge commit** — a squash or rebase merge would break the superset invariant (ADR 0004 §1) and is blocked by branch protection on `next`.",
+    ...(issueNumber ? ["", `Closes #${issueNumber}`] : []),
   ].join("\n");
 
   const created = gh([
