@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.1...1.0.2) (2026-08-05)
+
+### Bug Fixes
+
+* **publish:** correct release-notes extraction and cap the body ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([aa03e96](https://github.com/mfal/flow-1-0-rehearsal/commit/aa03e96daad1351cea636ce6b9344b892a2d8433)), closes [#2759](https://github.com/mfal/flow-1-0-rehearsal/issues/2759)
+
 ## [1.0.1](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.0...1.0.1) (2026-08-05)
 
 ### Bug Fixes
