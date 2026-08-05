@@ -218,6 +218,42 @@ A new or substantially changed component comes with:
 - **Only remote-capable components in a `PropsContext`** (see the PropsContext
   section of [packages/components/AGENTS.md](packages/components/AGENTS.md)).
 
+## Writing style (issues, ADRs, PR/commit bodies, code comments)
+
+Applies to prose we author — issues, ADRs, PR and commit bodies, code comments.
+Not to user-facing UI text (that lives in `locales/*` and follows product voice).
+
+Write **dense and simple**. Cut words, never content. Every fact stays —
+constraints, edge cases, reasons, trade-offs, links. Brevity filters words, not
+substance. Litmus test: if a sentence can be deleted without losing information,
+delete it.
+
+**Be dense:**
+
+- **Lead with the point.** First sentence = the decision, problem, or ask. Don't
+  restate the title or open with "In this issue we will…".
+- **No filler.** Drop "it's worth noting", "basically", "in order to", hedging
+  stacks ("might possibly perhaps").
+- **No summary that just repeats the body.** Either the TL;DR replaces the
+  detail or the detail replaces it — not both.
+- **Cut marketing adjectives.** "robust", "seamless", "comprehensive",
+  "powerful" carry no information. Delete them, or replace with the concrete fact.
+- **Structure only when it earns its keep.** Three lines don't need three
+  headings.
+
+**Be simple:**
+
+- **Short sentences, one idea each.** Break a clause chain into two or three
+  sentences.
+- **Simplify the glue, keep domain terms exact.** "in order to" → "to", but a
+  symbol name, a token, or a version number stays precise.
+- **Active voice, concrete subject.** "Flip the default and you change X" over
+  "flipping the default results in a change to X".
+- **Unpack lists.** Three options crammed into one sentence → three bullets.
+
+When brevity and clarity conflict, **clarity wins** — a few more words to split a
+dense sentence is a good trade.
+
 ## Common failures
 
 Symptom → cause → fix for the footguns that cost the most time here. None of
