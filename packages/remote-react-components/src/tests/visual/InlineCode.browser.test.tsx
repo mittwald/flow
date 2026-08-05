@@ -36,22 +36,28 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "InlineCode edge cases (%s)",
-  async ({ testScreenshot, render, components: { Text, InlineCode } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, Text, InlineCode },
+  }) => {
     await render(
-      <Text>
-        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-        blow against the Galactic Empire.
-        <InlineCode>
+      <Flex>
+        <Text>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           blow against the Galactic Empire.
-        </InlineCode>
-        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-        blow against the Galactic Empire.
-        <InlineCode>
+          <InlineCode>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a blow against the Galactic Empire.
+          </InlineCode>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           blow against the Galactic Empire.
-        </InlineCode>
-      </Text>,
+          <InlineCode>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a blow against the Galactic Empire.
+          </InlineCode>
+        </Text>
+      </Flex>,
     );
 
     await testScreenshot("InlineCode edge cases");
