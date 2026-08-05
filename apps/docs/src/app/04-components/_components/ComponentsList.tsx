@@ -34,7 +34,7 @@ export const ComponentsList: FC<Props> = (props) => {
         textValue={(component) => component.name}
         showTiles
         showList={false}
-        tileMaxWidth={280}
+        tileMaxWidth={250}
       >
         {(component) => <ComponentCard component={component} />}
       </List.Item>

@@ -1,3 +1,24 @@
+/* At the smallest tile width (250px) the card's media box leaves 133px of
+   height. These wireframes compose taller than that, so they are scaled down to
+   fit — the factor is the one that just clears the box, per wireframe. */
+.scale78,
+.scale84,
+.scale90 {
+  transform-origin: center;
+}
+
+.scale78 {
+  transform: scale(0.78);
+}
+
+.scale84 {
+  transform: scale(0.84);
+}
+
+.scale90 {
+  transform: scale(0.9);
+}
+
 .cropperContainer {
   position: relative;
   display: flex;

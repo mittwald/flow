@@ -8,9 +8,10 @@ import {
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import styles from "./wireframes.module.scss";
 
 export const ListWireframe: FC = () => (
-  <WFrame>
+  <WFrame className={styles.scale78}>
     <WStack>
       <WBox
         padding={12}

@@ -7,9 +7,10 @@ import {
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
+import styles from "./wireframes.module.scss";
 
 export const FileCardListWireframe: FC = () => (
-  <WFrame alignItems="center" flexDirection="column">
+  <WFrame alignItems="center" flexDirection="column" className={styles.scale84}>
     <WBox width="80%" flexDirection="row">
       <WCircle size={42} />
       <WStack width="70%">
