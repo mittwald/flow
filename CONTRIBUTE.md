@@ -66,6 +66,10 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
+`pnpm install` also registers the forward-merge merge drivers
+(`pnpm dev:init-merge-drivers`, see below) — you only run that one by hand if
+you skipped an install.
+
 Storybook opens on <http://localhost:6006>. This is where you'll spend most of
 your time when developing components.
 
@@ -79,6 +83,23 @@ installed:
   changes.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
+
+### Merge drivers
+
+`pnpm dev:init-merge-drivers` registers the two merge drivers the forward-merge
+cascade relies on (ADR 0004 §3). `pnpm install` runs it for you; the standalone
+script exists for the case where you need it without a full install.
+
+They matter in one situation: when a forward-merge hits a real conflict, the
+cascade opens a `sync/main-to-next` PR. **GitHub does not run merge drivers**,
+so that PR shows every `version` and `CHANGELOG.md` divergence as a conflict —
+dozens of mechanical ones around the single real one. Resolve such a PR
+**locally**, never in the web editor: with the drivers registered, the churn
+resolves itself and only the genuine conflict is left for you.
+
+A `merge=<driver>` line in `.gitattributes` is inert on its own — git only runs
+a driver that is also present in your local git config, which is why this step
+exists at all.
 
 ## Repository overview
 

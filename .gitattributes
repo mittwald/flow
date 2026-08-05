@@ -22,3 +22,13 @@
 # change (e.g. genuine dependency bumps) with a normal 3-way merge. A blanket
 # `merge=ours` is rejected — it would silently drop those. See the driver.
 **/package.json merge=package-json
+
+# `lerna.json` carries the SAME top-level `version` field and diverges between
+# the lines for exactly the same mechanical reason — it was missing here, so it
+# conflicted as a plain 3-way merge whenever both lines had bumped since their
+# last common ancestor (the steady state once a `next` prerelease and a `main`
+# release fall between two forward-merges). That turned pure version churn into
+# a sync PR, defeating the point of these drivers (found in the #2769
+# rehearsal). The package-json driver is generic: it normalises the first
+# top-level `"version"` string, which in `lerna.json` is the only one.
+lerna.json merge=package-json

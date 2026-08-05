@@ -1,0 +1,67 @@
+name: Sync PR guard
+
+# Fails a pull request that introduces git conflict markers.
+#
+# This exists because `forward-merge.yml` deliberately produces such a state: on
+# a plain-text conflict it commits the PARTIAL merge onto `sync/main-to-next`, so
+# the version/CHANGELOG churn the merge drivers resolved is preserved and the
+# human only faces the genuinely conflicting files (GitHub does not run merge
+# drivers, so re-doing the merge PR-side would resurface all of it).
+#
+# The cost of that trade is that the sync PR looks mergeable to GitHub — its head
+# contains the base, so there is nothing for GitHub to complain about. This check
+# is what stops a marker-laden tree from reaching `next`, and it therefore MUST be
+# configured as a REQUIRED status check on `next` (and is worth having on `main`
+# too — a stray marker in any PR is a defect).
+#
+# It runs on every pull request, and passes trivially for the overwhelming
+# majority, so it is safe to require. It reads the diff through the API instead of
+# checking the repository out: the marker scan needs no working tree, and a
+# full-history checkout of this monorepo for a grep would be absurd.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: sync-pr-guard-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  no-conflict-markers:
+    name: No conflict markers
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Scan the pull request diff for conflict markers
+        run: |
+          set -euo pipefail
+
+          # Built at runtime so that this workflow file does not match its own
+          # pattern when the guard is (inevitably) pointed at this repository.
+          open_marker="$(printf '<%.0s' 1 2 3 4 5 6 7)"
+          close_marker="$(printf '>%.0s' 1 2 3 4 5 6 7)"
+
+          diff="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR}" \
+            -H "Accept: application/vnd.github.v3.diff")"
+
+          # Only ADDED lines matter: a marker already present in the base is not
+          # this PR's doing. The `=======` marker is deliberately not matched — it
+          # is far too common in ordinary text to be a reliable signal.
+          hits="$(printf '%s\n' "$diff" \
+            | grep -E "^\+(${open_marker}|${close_marker})" || true)"
+
+          if [ -n "$hits" ]; then
+            echo "::error::This pull request introduces git conflict markers — resolve them before merging."
+            printf '%s\n' "$hits"
+            exit 1
+          fi
+
+          echo "No conflict markers introduced."
