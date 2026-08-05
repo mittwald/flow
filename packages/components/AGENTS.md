@@ -158,7 +158,7 @@ Remote generation details:
 Never break a shipped API — keep the old path working and warn at runtime with
 `useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
 of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `password-tools`).
+export (`nextjs`, `mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();

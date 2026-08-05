@@ -315,6 +315,10 @@
     "level": "stable",
     "isNew": false
   },
+  "@mittwald/flow-react-components#PasswordCreationField": {
+    "level": "stable",
+    "isNew": false
+  },
   "@mittwald/flow-react-components#Popover": {
     "level": "stable",
     "isNew": false
@@ -502,10 +506,6 @@
     "deprecationNotice": "Use RouterProvider instead"
   },
   "@mittwald/flow-react-components/nextjs#RouterProvider": {
-    "level": "stable",
-    "isNew": false
-  },
-  "@mittwald/flow-react-components/password-tools#PasswordCreationField": {
     "level": "stable",
     "isNew": false
   },
