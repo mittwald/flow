@@ -36,23 +36,16 @@ const getApiHeaders = () => ({
   "x-access-token": process.env.MITTWALD_API_TOKEN || "",
 });
 
-// Wildcard certificate for *.review.flow-components.de. Can be overridden via
-// the MITTWALD_TLS_CERTIFICATE_ID environment variable.
-const DEFAULT_TLS_CERTIFICATE_ID = "67bdea7c-7b60-40fb-97a6-1fce0a2b4838";
-
 class ReviewDeployer {
   private readonly prNumber: string;
   private readonly projectId: string;
   private readonly images: DockerImage[];
-  private readonly tlsCertificateId: string;
 
   constructor() {
     this.validateEnvironment();
     this.prNumber = process.env.PR_NUMBER || "";
     this.projectId = process.env.MITTWALD_PROJECT_ID || "";
     this.images = this.parseImages();
-    this.tlsCertificateId =
-      process.env.MITTWALD_TLS_CERTIFICATE_ID || DEFAULT_TLS_CERTIFICATE_ID;
   }
 
   private validateEnvironment(): void {
@@ -114,6 +107,14 @@ class ReviewDeployer {
 
   private getDescription(imageType: "docs" | "storybook"): string {
     return `${imageType.toUpperCase()}/PR-${this.prNumber}`;
+  }
+
+  private getTlsCertificateId(
+    imageType: "docs" | "storybook",
+  ): string | undefined {
+    return imageType === "docs"
+      ? process.env.MITTWALD_TLS_CERTIFICATE_ID_DOCS
+      : process.env.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK;
   }
 
   // Guard against a race with the cleanup workflow: the build+deploy takes
@@ -308,7 +309,16 @@ class ReviewDeployer {
     }
   }
 
-  async connectTlsCertificate(ingressId: string): Promise<void> {
+  async connectTlsCertificate(
+    ingressId: string,
+    imageType: "docs" | "storybook",
+  ): Promise<void> {
+    const certificateId = this.getTlsCertificateId(imageType);
+
+    if (!certificateId) {
+      return;
+    }
+
     console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
 
     try {
@@ -318,22 +328,22 @@ class ReviewDeployer {
           method: "PATCH",
           headers: getApiHeaders(),
           body: JSON.stringify({
-            certificateId: this.tlsCertificateId,
+            certificateId,
           }),
         },
       );
 
       if (!response.ok) {
         const error = await response.text();
-        throw new Error(
-          `Failed to connect TLS certificate: ${response.statusText} - ${error}`,
+        console.warn(
+          `⚠️  Failed to connect TLS certificate: ${response.statusText} - ${error}`,
         );
+        return;
       }
 
       console.log("✅ TLS certificate connected successfully");
     } catch (error) {
-      console.error("❌ Failed to connect TLS certificate:", error);
-      throw error;
+      console.warn("⚠️  Failed to connect TLS certificate:", error);
     }
   }
 
@@ -384,6 +394,7 @@ class ReviewDeployer {
     }
 
     const existingIngress = ingresses.find((i) => i.hostname === hostname);
+    let ingressId: string;
 
     if (!existingIngress) {
       console.log(`   Ingress for ${hostname} does not exist, creating...`);
@@ -391,10 +402,13 @@ class ReviewDeployer {
         throw new Error(`Container ID not found for ${serviceName}`);
       }
       const ingress = await this.createIngress(hostname, containerId);
-      await this.connectTlsCertificate(ingress.id);
+      ingressId = ingress.id;
     } else {
       console.log(`   Ingress for ${hostname} already exists`);
+      ingressId = existingIngress.id;
     }
+
+    await this.connectTlsCertificate(ingressId, image.imageType);
 
     return hostname;
   }
