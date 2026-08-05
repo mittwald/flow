@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
+
+### Bug Fixes
+
+* **AccentBox:** fix default color on gradient ([#2793](https://github.com/mittwald/flow/issues/2793)) ([d6f9384](https://github.com/mittwald/flow/commit/d6f93846c63be96663fa268e4d0fe2e8475f8ffb))
+
 # [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
 
 ### Features
