@@ -1,6 +1,6 @@
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
 import { flags } from "@/flags";
-import { useModalController } from "@/lib/controller";
+import { type OverlayController, useModalController } from "@/lib/controller";
 import {
   type BaseSyntheticEvent,
   type ComponentProps,
@@ -57,6 +57,33 @@ export interface FormProps<F extends FieldValues>
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
+
+/**
+ * Runs `operation` while closing the surrounding Modal is allowed without a
+ * confirmation, and drops that permission again as soon as the operation has
+ * settled. Scoping it to the operation is what keeps a submit that only
+ * advances a wizard step from disarming the confirmation for good (#2775).
+ */
+const runWithGrantedModalClose = (
+  modalController: OverlayController,
+  operation: () => unknown,
+): unknown => {
+  const releaseGrant = modalController.grantCloseWithoutConfirmation();
+
+  let result: unknown;
+  try {
+    result = operation();
+  } catch (error) {
+    releaseGrant();
+    throw error;
+  }
+
+  if (result instanceof Promise) {
+    return result.finally(releaseGrant);
+  }
+  releaseGrant();
+  return result;
+};
 
 export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
@@ -124,20 +151,27 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
     formEvent?.stopPropagation();
 
-    return form.handleSubmit((values, event) => {
-      modalController.confirmClose();
-
-      const submitResult = onSubmit(values, event);
-      if (submitResult instanceof Promise) {
-        return submitResult.then(handleSubmitResult);
-      }
-      handleSubmitResult(submitResult);
-    })(formEvent);
+    return form.handleSubmit((values, event) =>
+      runWithGrantedModalClose(modalController, () => {
+        const submitResult = onSubmit(values, event);
+        if (submitResult instanceof Promise) {
+          return submitResult.then(handleSubmitResult);
+        }
+        handleSubmitResult(submitResult);
+      }),
+    )(formEvent);
   };
   submitController.submit.set(handleSubmit);
 
   const onAfterSuccessFeedback = () => {
-    afterSubmitCallback.current?.();
+    const callback = afterSubmitCallback.current;
+    if (!callback) {
+      return;
+    }
+    // The callback runs after the submit itself has finished (and after
+    // SubmitButton's success feedback), so it needs its own permission to close
+    // the Modal.
+    runWithGrantedModalClose(modalController, callback);
   };
 
   const refWithHotkeySubmit = useHotkeySubmit({
