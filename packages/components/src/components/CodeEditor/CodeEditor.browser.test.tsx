@@ -41,6 +41,33 @@ test("CodeEditor is described by its field description", async () => {
     .toHaveAccessibleDescription("Must be valid TypeScript");
 });
 
+/*
+ * CodeMirror injects its styles unlayered, so they win over the layered
+ * stylesheet of Flow regardless of specificity. Colors that the editor theme
+ * leaves out therefore stay at CodeMirror's hard-coded light-mode values –
+ * unreadable in dark mode.
+ */
+test("CodeEditor takes the highlight of the active line from the editor theme", async () => {
+  await render(
+    <CodeEditor value="const jedi = true;" aria-label="Source code" />,
+  );
+
+  const activeLineGutterRules = [...document.styleSheets]
+    .flatMap((sheet) => [...sheet.cssRules])
+    .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule)
+    .filter(
+      (rule) =>
+        rule.selectorText.endsWith(".cm-activeLineGutter") &&
+        !rule.selectorText.includes("flow--"),
+    );
+
+  expect(
+    activeLineGutterRules.map((rule) => rule.style.backgroundColor),
+  ).toContainEqual(
+    expect.stringContaining("--form-control--background-color--hover"),
+  );
+});
+
 test("CodeEditor is marked and styled as invalid", async () => {
   const dom = await render(
     <CodeEditor value="const jedi = ;" isInvalid>

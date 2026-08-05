@@ -13,7 +13,7 @@ import styles from "./CodeEditor.module.scss";
 import { type CodeEditorLanguage } from "@/components/CodeEditor/languages";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useObjectRef } from "react-aria";
-import { defaultLightTheme } from "@/components/CodeEditor/themes/defaultEditorTheme";
+import { defaultEditorTheme } from "@/components/CodeEditor/themes/defaultEditorTheme";
 import {
   type CodeEditorSetup,
   useCodeEditorExtensions,
@@ -151,7 +151,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
               foldGutter: false,
               highlightSelectionMatches: false,
             }}
-            theme={defaultLightTheme}
+            theme={defaultEditorTheme}
             data-invalid={isInvalid || undefined}
             readOnly={isReadOnly}
             className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}

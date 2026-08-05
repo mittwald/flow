@@ -88,15 +88,6 @@
       & :global(.cm-gutters > .cm-gutter:first-child .cm-gutterElement) {
         padding-inline-start: var(--form-control--padding-x);
       }
-
-      & :global(.cm-activeLineGutter),
-      & :global(.cm-activeLine) {
-        background-color: color-mix(
-          in srgb,
-          var(--form-control--background-color--hover) 65%,
-          transparent
-        );
-      }
     }
   }
 }
