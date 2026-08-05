@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.6...1.0.7) (2026-08-05)
+
+### Bug Fixes
+
+* fix stuff ([42fc439](https://github.com/mfal/flow-1-0-rehearsal/commit/42fc43997e8a73d162a0d47db01fe0c0a3a83015))
+* **forward-merge:** open the pre-merged sync PR as a draft ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([094f071](https://github.com/mfal/flow-1-0-rehearsal/commit/094f0712cbbb9760fcfa0e4a5cade4b46dd15f80))
+
+### Features
+
+* **forward-merge:** resolve conflicts with one command, not a marker branch ([#2769](https://github.com/mfal/flow-1-0-rehearsal/issues/2769)) ([26b5b0c](https://github.com/mfal/flow-1-0-rehearsal/commit/26b5b0cbc39e53c4fa35b187406ad8b628fcae70))
+
 ## [1.0.6](https://github.com/mfal/flow-1-0-rehearsal/compare/1.0.5...1.0.6) (2026-08-05)
 
 ### Bug Fixes
