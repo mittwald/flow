@@ -84,22 +84,29 @@ installed:
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
 
-### Merge drivers
+### Resolving a blocked forward-merge
 
-`pnpm dev:init-merge-drivers` registers the two merge drivers the forward-merge
-cascade relies on (ADR 0004 §3). `pnpm install` runs it for you; the standalone
-script exists for the case where you need it without a full install.
+Every change on `main` is merged up into `next` automatically (ADR 0004). When
+that merge hits a conflict the machine cannot resolve, the cascade **pauses** and
+opens an issue — from then on nothing new reaches `next` until someone resolves
+it. That someone needs two commands:
 
-They matter in one situation: when a forward-merge hits a real conflict, the
-cascade opens a `sync/main-to-next` PR. **GitHub does not run merge drivers**,
-so that PR shows every `version` and `CHANGELOG.md` divergence as a conflict —
-dozens of mechanical ones around the single real one. Resolve such a PR
-**locally**, never in the web editor: with the drivers registered, the churn
-resolves itself and only the genuine conflict is left for you.
+```shell
+pnpm sync:resolve             # merges main into next in your checkout
+# resolve the conflicts in your editor or with `git mergetool`, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
 
-A `merge=<driver>` line in `.gitattributes` is inert on its own — git only runs
-a driver that is also present in your local git config, which is why this step
-exists at all.
+You only ever see the genuinely conflicting files. The version and
+`CHANGELOG.md` divergence between the two lines is absorbed by the merge drivers
+(ADR 0004 §3), which `pnpm install` registers for you via
+`pnpm dev:init-merge-drivers` — a `merge=<driver>` line in `.gitattributes` is
+inert on its own, git only runs a driver that is also in your local git config.
+
+That is also why the resolution happens locally rather than on the pull request:
+**GitHub does not run merge drivers.** A merge computed on GitHub's side shows
+every version and changelog divergence as a conflict, burying the one file that
+actually needs you under dozens of mechanical ones.
 
 ## Repository overview
 
