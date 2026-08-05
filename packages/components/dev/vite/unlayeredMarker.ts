@@ -1,4 +1,4 @@
-import postcss from "postcss";
+import type postcss from "postcss";
 
 /**
  * Not a real layer, but a build instruction: take this block out of every
@@ -59,10 +59,25 @@ export const liftUnlayeredMarkers = (root: postcss.Root): void => {
  * the browser tests, where component styles are served unlayered and the marker
  * would otherwise become a real layer that loses to Flow's own rules.
  */
+export const unlayeredMarkerPluginName = "flow-unlayered-marker";
+export const componentsLayerPluginName = "flow-components-layer";
+
 export const unlayeredMarkerPlugin = () => ({
-  postcssPlugin: "flow-unlayered-marker",
+  postcssPlugin: unlayeredMarkerPluginName,
   Once: (root: postcss.Root, { result }: { result: postcss.Result }) => {
-    if (!isComponentModule(result.opts.from)) {
+    /*
+     * The release build merges its config on top of the dev config, which
+     * concatenates the PostCSS plugins. Where the layer plugin is present it
+     * owns the markers – it needs them intact to segment at them – so step
+     * aside instead of stripping them first.
+     */
+    const layersComponents = result.processor.plugins.some(
+      (plugin) =>
+        "postcssPlugin" in plugin &&
+        plugin.postcssPlugin === componentsLayerPluginName,
+    );
+
+    if (layersComponents || !isComponentModule(result.opts.from)) {
       return;
     }
 

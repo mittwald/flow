@@ -64,6 +64,14 @@ describe("flow/unlayered-third-party-only", () => {
       ).toEqual([]);
     });
 
+    test("a third-party class on the same element as a flow class", async () => {
+      expect(
+        await lint(
+          ".icon { &:where(.size-m) { &:global(.svg-inline--fa) { @layer flow.unlayered { box-sizing: border-box; } } } }",
+        ),
+      ).toEqual([]);
+    });
+
     test("a flow owned rule that only scaffolds the nesting", async () => {
       expect(
         await lint(

@@ -55,8 +55,8 @@
     "build:storybook": "storybook build",
     "clean": "rimraf dist src/components/Icon/components/icons/*",
     "dev": "storybook dev --port 6006",
-    "test:browser": "vitest run --project=browser --browser.headless",
-    "test:browser:dev": "vitest dev --project=browser",
+    "test:browser": "vitest run --project=browser* --browser.headless",
+    "test:browser:dev": "vitest dev --project=browser*",
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"

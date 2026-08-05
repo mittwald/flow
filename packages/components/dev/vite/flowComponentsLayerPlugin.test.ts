@@ -1,6 +1,7 @@
 import { test, expect, describe } from "vitest";
 import postcss from "postcss";
 import { flowComponentsLayerPlugin } from "./flowComponentsLayerPlugin";
+import { unlayeredMarkerPlugin } from "./unlayeredMarker";
 
 /**
  * Every rule of the processed stylesheet in source order, each with the params
@@ -141,6 +142,22 @@ describe("flow components layer plugin", () => {
           "@media (min-width: 40rem) { @layer flow.unlayered { :global(.cm-line) { color: red; } } }",
         ),
       ).rejects.toThrow(/flow\.unlayered.*top level/is);
+    });
+
+    test("still segments when the marker plugin runs ahead of it", async () => {
+      const result = await postcss([
+        unlayeredMarkerPlugin(),
+        flowComponentsLayerPlugin(),
+      ]).process(
+        ".codeEditor { color: red; }" +
+          "@layer flow.unlayered { :global(.cm-line) { color: blue; } }",
+        { from: "/abs/src/components/CodeEditor/CodeEditor.module.scss" },
+      );
+
+      expect(layerPathsOf(result.css)).toEqual([
+        { selector: ".codeEditor", layers: ["flow.components"] },
+        { selector: ":global(.cm-line)", layers: [] },
+      ]);
     });
 
     test("leaves a marker in non-component styles to the build assertion", async () => {

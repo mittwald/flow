@@ -4,6 +4,22 @@ import { defineConfig } from "vitest/config";
 import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin";
 
+/*
+ * Vitest names a browser project's nested per-browser projects by writing onto
+ * the instance objects. Two projects that spread the shared browser config would
+ * share those objects, and the second name would overwrite the first – so every
+ * browser project gets its own copies.
+ */
+const browserTestConfig = () => ({
+  ...vitestBrowserTestConfig,
+  browser: {
+    ...vitestBrowserTestConfig.browser,
+    instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
+      (instance) => ({ ...instance }),
+    ),
+  },
+});
+
 export default mergeConfig(
   defaultConfig,
   defineConfig({
@@ -19,7 +35,7 @@ export default mergeConfig(
         {
           extends: true,
           test: {
-            ...vitestBrowserTestConfig,
+            ...browserTestConfig(),
             name: "browser",
             setupFiles: "./dev/vitest/setupBrowser.ts",
             include: ["src/**/*.browser.test.{ts,tsx}"],
@@ -31,24 +47,17 @@ export default mergeConfig(
            * The same components against the opt-in layered stylesheet variant,
            * where Flow's CSS loses to the unlayered CSS dependencies inject at
            * runtime. Its own project because the variant is a property of the
-           * whole document, and it needs the release build's layer plugin
-           * instead of the dev config's marker plugin.
-           *
-           * Spread instead of `extends: true`, because extending concatenates
-           * `css.postcss.plugins` with the dev config's – the marker plugin
-           * would then strip the markers before the layer plugin can segment at
-           * them, and every rule would end up layered.
+           * whole document, and it needs the release build's layer plugin so
+           * that the module styles compiled for these tests are layered the way
+           * the release is.
            */
-          ...defaultConfig,
+          extends: true,
           css: {
-            ...defaultConfig.css,
             postcss: { plugins: [flowComponentsLayerPlugin()] },
           },
           test: {
-            ...vitestBrowserTestConfig,
-            globals: true,
-            globalSetup: "./dev/vitest/setupGlobal.ts",
-            name: "layered",
+            ...browserTestConfig(),
+            name: "browser-layered",
             setupFiles: "./dev/vitest/setupBrowserLayered.ts",
             include: ["src/tests/layered/**/*.browser.test.{ts,tsx}"],
           },

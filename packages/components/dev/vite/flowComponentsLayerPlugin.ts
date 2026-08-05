@@ -1,6 +1,7 @@
 import postcss from "postcss";
 import {
   assertMarkersAreTopLevel,
+  componentsLayerPluginName,
   isComponentModule,
   isUnlayeredMarker,
 } from "./unlayeredMarker";
@@ -8,7 +9,7 @@ import {
 const componentsLayer = "flow.components";
 
 export const flowComponentsLayerPlugin = () => ({
-  postcssPlugin: "flow-components-layer",
+  postcssPlugin: componentsLayerPluginName,
   Once: (root: postcss.Root, { result }: { result: postcss.Result }) => {
     if (!isComponentModule(result.opts.from)) {
       return;

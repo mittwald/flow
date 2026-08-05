@@ -48,6 +48,11 @@ export default mergeConfig(
         },
       },
     },
+    /*
+     * Merged on top of the dev config, so its marker plugin stays in the
+     * pipeline. That is safe: where this plugin is present, the marker plugin
+     * steps aside and leaves the markers for it to segment at.
+     */
     css: {
       postcss: {
         plugins: [flowComponentsLayerPlugin()],

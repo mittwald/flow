@@ -57,6 +57,18 @@ describe("unlayered marker plugin", () => {
     ).rejects.toThrow(/flow\.unlayered.*top level/is);
   });
 
+  test("leaves the marker to the layer plugin when that is in the pipeline", async () => {
+    const css = "@layer flow.unlayered { :global(.cm-line) { color: red; } }";
+    const result = await postcss([
+      unlayeredMarkerPlugin(),
+      { postcssPlugin: "flow-components-layer", Once: () => undefined },
+    ]).process(css, {
+      from: "/abs/src/components/CodeEditor/CodeEditor.module.scss",
+    });
+
+    expect(result.css).toBe(css);
+  });
+
   test("leaves non-component styles to the build assertion", async () => {
     const css = "@layer flow.unlayered { .globals { color: red; } }";
     const result = await process(css, "/abs/src/styles/globals.scss");

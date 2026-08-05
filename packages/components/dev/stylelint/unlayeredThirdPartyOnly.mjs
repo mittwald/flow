@@ -82,23 +82,24 @@ const resolveSelectors = (rule) => {
 
 /**
  * The escape hatch may only target a third-party element: the rightmost
- * compound of the selector has to be a `:global()` of a class that is not
- * Flow's own. Flow classes further up the selector are expected — a third-party
- * element is usually addressed from inside a component.
+ * compound of the selector has to carry a `:global()` of a class that is not
+ * Flow's own.
+ *
+ * Flow classes are expected both further up the selector – a third-party
+ * element is usually addressed from inside a component – and within that same
+ * compound, because a library sometimes styles the very element Flow renders.
+ * FontAwesome is the case in point: its `.svg-inline--fa` sits on the same
+ * `<svg>` that carries Flow's icon classes.
  */
 const targetsThirdParty = (selector) => {
   const compounds = splitTopLevel(selector, " >+~");
   const target = compounds.at(-1) ?? "";
   const globals = [...target.matchAll(/:global\(([^)]*)\)/g)];
 
-  if (globals.length === 0) {
-    return false;
-  }
-
-  const ownClasses = globals.some(([, inner]) => inner.includes(".flow--"));
-  const outsideGlobals = target.replaceAll(/:global\([^)]*\)/g, "");
-
-  return !ownClasses && !outsideGlobals.includes(".");
+  return (
+    globals.length > 0 &&
+    globals.every(([, inner]) => !inner.includes(".flow--"))
+  );
 };
 
 /**

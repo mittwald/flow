@@ -23,11 +23,10 @@ const resolveLength = (context: Element, value: string) => {
  * its declarations beat anything Flow puts in a cascade layer no matter the
  * specificity. The rules below therefore have to leave the layer — which is
  * what this suite, running against the layered stylesheet variant, proves.
- */
-/*
- * Invalid, because the CodeMirror theme sets its gutter background to the
- * default form control token. Only a state that moves the editor background
- * away from that default tells the two apart.
+ *
+ * The editor is rendered invalid throughout, because the CodeMirror theme sets
+ * its gutter background to the default form control token. Only a state that
+ * moves the editor background away from that default tells the two apart.
  */
 test("the CodeEditor gutter follows the editor background", async () => {
   const dom = await render(
