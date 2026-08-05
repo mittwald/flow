@@ -134,9 +134,25 @@ jobs:
 
             local body
             body="$(printf '%s\n' \
-              'The automated forward-merge of `main` into `next` hit a real code conflict (ADR 0004 §4). The version/changelog churn is handled automatically by the merge drivers, so this is a genuine same-line conflict that needs a human.' \
+              'The automated forward-merge of `main` into `next` hit a genuine code conflict (ADR 0004 §4) and needs a human.' \
               '' \
-              'How to resolve: resolve the conflict on this `sync/main-to-next` branch (locally or in the web editor) and merge it AS A TRUE MERGE COMMIT — a squash/rebase merge would break the superset invariant (ADR 0004 §1) and is blocked by branch protection on `next`.')"
+              '**Most of the conflicts shown here are not real.** GitHub does not run the merge drivers declared in `.gitattributes` — a driver only exists in local git config — so every `version` and `CHANGELOG.md` divergence between the two lines surfaces as a conflict. Resolved locally with the drivers registered, that noise disappears and only the genuine conflict is left.' \
+              '' \
+              'Resolve it locally, NOT in the web editor. The direction matters: the drivers keep the version of the branch you merge INTO, so the merge has to run the same way the cascade runs it.' \
+              '' \
+              '```shell' \
+              'pnpm dev:init-merge-drivers   # a merge= attribute is inert without this' \
+              'git fetch origin' \
+              'git checkout -B sync/main-to-next origin/next' \
+              'git merge origin/main         # drivers absorb version/CHANGELOG churn' \
+              '# resolve the remaining, genuine conflict, then:' \
+              'git commit' \
+              'git push --force-with-lease origin sync/main-to-next' \
+              '```' \
+              '' \
+              'Then merge this PR AS A TRUE MERGE COMMIT — a squash or rebase merge would break the superset invariant (ADR 0004 §1) and is blocked by branch protection on `next`.' \
+              '' \
+              'Note: while this PR is open the cascade leaves the branch untouched, so it does not pick up commits that land on `main` afterwards. Those arrive with the next forward-merge run once this PR is merged.')"
 
             gh pr create --repo "$REPO" --base next --head "$branch" \
               --title "chore(sync): resolve forward-merge conflict (main into next)" \
