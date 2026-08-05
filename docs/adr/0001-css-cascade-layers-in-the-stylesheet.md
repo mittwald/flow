@@ -267,39 +267,19 @@ A spike implements the variants and is verified via
 - **Status:** Accepted
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 
-### What this corrects
+**Corrected assumption.** The context above ruled out third-party CSS conflicts
+because React Aria ships none. That does not generalise: **CodeMirror**,
+**react-easy-crop** and **FontAwesome** (`autoAddCss`) each inject their own
+stylesheet as unlayered `<style>` elements at runtime, outside the build. Since
+unlayered CSS beats layered CSS regardless of specificity, Flow's overrides of
+those libraries' selectors lost in `all-layered.css` — the `CodeEditor` gutter,
+its line padding, the `ImageCropper` mask and the `Icon` box-sizing all fell
+back to library values. `recharts` and the `react-aria` class hooks ship no CSS
+and are unaffected; `react-aria`'s injected press style sits in an anonymous
+`@layer`.
 
-The context above concluded there is no third-party CSS conflict, on the grounds
-that React Aria Components ship no CSS. That reasoning holds for React Aria but
-was generalised too far. Two dependencies inject **their own stylesheets at
-runtime**, as unlayered `<style>` elements created outside of Flow's build:
-
-- **CodeMirror** (`@uiw/react-codemirror`, `@uiw/codemirror-theme-github`), via
-  its `StyleModule` — affects `CodeEditor` and `CodeBlock`.
-- **react-easy-crop**, which creates a `<style>` element on import — affects
-  `ImageCropper`.
-
-Unlayered CSS wins over layered CSS regardless of specificity. So in
-`all-layered.css` Flow's overrides of those libraries' own selectors lost: the
-`CodeEditor` gutter kept the library background instead of following the editor
-state, its lines lost the form control padding, and the `ImageCropper` crop mask
-fell back to the library's hard-coded rgba values instead of the design tokens.
-`all.css` was unaffected, because stripping the layers puts the cascade back on
-specificity, where Flow's longer selectors win.
-
-Because those `<style>` elements are created at runtime and never pass through
-the build, Flow cannot move them into a lower layer. **Against unlayered CSS,
-only unlayered CSS helps.**
-
-Not every `:global()` selector of a dependency is affected. `recharts` ships no
-CSS at all and injects none — its grid and tooltip-wrapper rules compete with
-nothing, and the `react-aria-*` class hooks carry no CSS either, as originally
-stated. Those rules stay layered.
-
-### Decision
-
-Component stylesheets may take individual rules out of every cascade layer with
-a build marker:
+**Decision.** Component stylesheets take such rules out of every layer with a
+build marker:
 
 ```scss
 @layer flow.unlayered {
@@ -312,77 +292,38 @@ a build marker:
 ```
 
 `flow.unlayered` is **not a layer** — no layer of that name exists in either
-artifact. It is an instruction to the build, and it is honoured in both
-variants: in `all-layered.css` the marked rules end up at the top level, in
-`all.css` nothing changes because all layers are stripped anyway.
+artifact. It is honoured in both variants: in `all-layered.css` the marked rules
+land at the top level, in `all.css` nothing changes.
 
-Further decisions:
+It is only for a dependency's own selectors, and it is marked per block rather
+than per declaration — a dependency can add a colliding declaration in any patch
+release. Consumer documentation was deliberately skipped.
 
-- **The marker is only for a dependency's own selectors.** It costs consumers
-  the layer-based overridability of the marked rule, which is the whole point of
-  the layered variant, so it is not a general-purpose escape hatch. Enforced by
-  the stylelint rule below rather than by review.
-- **Granularity is the block, not the declaration.** A block that exists to
-  override a library is marked as a whole, even where only some of its
-  declarations currently collide. A dependency can add a declaration in any
-  patch release, and a per-declaration split would silently start losing again.
-- **No consumer documentation.** Deliberately not documented on the stylesheet
-  docs page. Accepted consequence: a consumer trying to override one of these
-  rules through cascade layers gets no hint why it does not work.
+**Mechanics.** `dev/vite/unlayeredMarker.ts` owns the marker; a marker nested
+inside another at rule is rejected, because it cannot be lifted out without
+duplicating that at rule. The release build's `flowComponentsLayerPlugin`
+segments a module's top-level nodes at the markers instead of wrapping them
+wholesale, replacing each marker **in place** — `all.css` strips the layers
+again and source order decides there. Dev, Storybook and the browser tests serve
+component styles unlayered and only strip the marker; where both plugins are in
+one PostCSS pipeline the marker plugin steps aside, so merged Vite configs stay
+correct.
 
-### Implementation
+Guards: `stylesheetVariantsPlugin` fails the build if a marker reaches the
+emitted stylesheet; the stylelint rule `flow/unlayered-third-party-only` (error,
+registered globally) requires a non-Flow `:global()` in the marked rule's
+rightmost compound and rejects the marker outside component module stylesheets;
+the `browser-layered` vitest project renders the affected components against the
+layered variant, which the default browser project cannot do.
 
-1. **Marker handling — `dev/vite/unlayeredMarker.ts`.** Owns the marker name,
-   the top-level assertion and the lifting. A marker nested inside another at
-   rule (e.g. `@media`) is rejected with a build error, because it cannot be
-   lifted out without duplicating that at rule; authors write the at rule
-   _inside_ the marker instead.
-2. **Release build — `flowComponentsLayerPlugin`.** Instead of wrapping a
-   module's nodes wholesale, it segments the top-level nodes at the markers:
-   each run of ordinary nodes gets its own `@layer flow.components`, each marker
-   is replaced **in place** by its contents. In place, because `all.css` strips
-   the layers again and source order decides there — hoisting would change the
-   default variant silently.
-3. **Dev, Storybook, browser tests — `unlayeredMarkerPlugin` in
-   `vite.config.ts`.** These serve component styles unlayered, like the default
-   variant, so the marker is merely removed. Left in place it would become a
-   real, undeclared layer and lose to Flow's own unlayered rules — the opposite
-   of its purpose.
-4. **Build assertion — `stylesheetVariantsPlugin`.** Fails the build if
-   `flow.unlayered` ever reaches the emitted stylesheet, where it would silently
-   become a real layer that loses to the third-party CSS again. This also
-   catches the marker in files the layer plugin never processes (anything
-   outside `src/components/**/*.module.{scss,css}`).
-5. **Guardrail — stylelint rule `flow/unlayered-third-party-only`**
-   (`packages/components/dev/stylelint/`), severity error, registered globally.
-   It requires the rightmost compound of every marked rule's selector to be a
-   `:global()` of a non-Flow class, and rejects the marker outside component
-   module stylesheets. Flow classes as ancestors are expected — a third-party
-   element is addressed from inside a component.
-6. **Test project `layered`** (`packages/components/vitest.config.ts`) renders
-   the affected components against `styles-layered.css` with the release build's
-   layer plugin and asserts computed styles. The default `browser` project
-   cannot see this class of bug: it loads the unlayered variant. The project
-   spreads the vite config instead of extending it, because extending
-   concatenates `css.postcss.plugins` — the dev config's marker plugin would
-   then strip the markers before the layer plugin could segment at them.
+**Result.** `all.css` is byte-identical to the previous build. In
+`styles-layered.css` the 13 `CodeEditor`, 3 `ImageCropper` and 3 `Icon` rules
+sit outside every layer, the `recharts` and `CodeBlock` rules stay in
+`flow.components`, and no marker survives.
 
-Two questions that the design rested on, verified rather than assumed:
+**Price.** The marked rules can no longer be overridden through cascade layers,
+only through specificity or `!important` — which is why the marker is guarded.
 
-- **Sass bubbles the marker.** An `@layer` inside nested rules is hoisted to the
-  top level with the flattened selector, so the marker works at any nesting
-  depth and in both authoring shapes.
-- **CSS modules scope inside `@layer`.** Local class names in a marked block
-  still become the generated `.flow--*` names.
-
-### Consequences
-
-- The affected components render correctly in `all-layered.css`.
-- `all.css` is unchanged.
-- The marked rules can no longer be overridden by consumers through cascade
-  layers, only through specificity or `!important`. This is the price of beating
-  the libraries' own CSS, and it is why the marker is guarded.
-- `stylesheet:build` gained a `dependentTasksOutputFiles` input. Its inputs did
-  not track the components build output, so a changed `all-layered.css` did not
-  invalidate its nx cache and the task served a stale `dist/` — which would have
-  made the new test project verify the wrong stylesheet.
+`stylesheet:build` also gained a `dependentTasksOutputFiles` input: it did not
+track the components build output, so a changed `all-layered.css` left its nx
+cache valid and the task served a stale `dist/`.
