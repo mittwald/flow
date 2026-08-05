@@ -17,9 +17,12 @@ name: Forward-merge drift check
 # always merges main's TIP, so a later run catches up, but only if another push
 # to `main` follows, and that run can be evicted just the same.
 #
-# This workflow closes the SILENT part. It deliberately neither merges nor
-# dispatches anything: recovery is the manual `forward-merge.yml` dispatch, which
-# is already a first-class path. Detection is what was missing.
+# `forward-merge.yml` retries itself for the common case — a `workflow_run`
+# trigger re-runs it when publish-next completes, i.e. when the concurrency group
+# frees up. This workflow is the net underneath that: it detects drift that
+# survived even the catch-up, and makes it loud. It deliberately neither merges
+# nor dispatches anything; recovery is the manual `forward-merge.yml` dispatch,
+# already a first-class path. Detection is what was missing.
 
 on:
   schedule:
