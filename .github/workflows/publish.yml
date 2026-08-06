@@ -199,16 +199,43 @@ jobs:
               --no-push \
               --tag-version-prefix ""
           else
-            # Standing path (push: main): graduate to STABLE X.Y.Z (dist-tag
-            # latest). --conventional-prerelease="*" was intentionally dropped at
-            # the 1.0.0 cut so main no longer produces 0.x-alpha.N prereleases.
-            pnpm lerna version \
-              --force-publish \
-              --conventional-commits \
-              --message "chore(release): bump version to %v" \
-              --yes \
-              --no-push \
-              --tag-version-prefix ""
+            # Standing path (push: main). Whether this is still a prerelease
+            # line is a property of the CURRENT VERSION, not of a flag someone
+            # has to remember to flip: while `main` sits on `0.2.0-alpha.N`,
+            # --conventional-prerelease keeps it there; the moment the cut sets a
+            # stable `1.0.0`, the same condition graduates every later push to
+            # `X.Y.Z` under `latest`.
+            #
+            # Deriving it leaves no window. Dropping the flag by hand needs the
+            # removal to be atomic with the 1.0.0 bump — too early and the next
+            # `fix:` publishes a premature stable `0.2.0`, too late and it
+            # publishes `1.0.1-alpha.0` under `latest` — and #2769 finding 15
+            # showed the "merge is a no-op" assumption that was supposed to make
+            # that atomic does not hold.
+            #
+            # `publish-next.yml` decides its own line the same way.
+            case "$current" in
+              *-*)
+                echo "Prerelease line (${current}) — keeping --conventional-prerelease."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits --conventional-prerelease="*" \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+              *)
+                echo "Stable line (${current}) — publishing X.Y.Z under latest."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+            esac
           fi
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
