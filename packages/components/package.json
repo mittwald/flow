@@ -114,7 +114,7 @@
     "react-markdown": "^10.1.0",
     "react-stately": "^3.48.0",
     "react-truncate-inside": "^1.0.3",
-    "recharts": "~3.7.0",
+    "recharts": "~3.10.1",
     "remark-gfm": "^4.0.1",
     "remeda": "^2.39.0",
     "type-fest": "^5.7.0",
