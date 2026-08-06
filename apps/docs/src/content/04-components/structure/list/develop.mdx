@@ -153,6 +153,10 @@ werden:
 
 Wird kein `loadingView` gesetzt, verwendet die List ein generisches Skeleton.
 
+Die Loading View gilt in allen View Modes (List, Tiles, Table) und auch für
+einzelne Items, die nach dem initialen Laden noch suspenden – etwa weil ihr
+Inhalt eigene Daten nachlädt.
+
 ## Empty View
 
 - `emptyView`: Wird angezeigt, wenn die Liste keine Einträge enthält.
