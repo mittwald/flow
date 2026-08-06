@@ -61,21 +61,30 @@ export const ColumnLayout = flowComponent(
       style: styleFromProps,
     } = props;
 
-    let elementClassName = styles.columnLayout;
+    let elementClassName: string = styles.columnLayout;
 
     s?.map((v, i) => {
       if (v === null) {
-        elementClassName = clsx(elementClassName, styles[`hide-s-${i + 1}`]);
+        elementClassName = clsx(
+          elementClassName,
+          styles[`hide-s-${i + 1}` as keyof typeof styles],
+        );
       }
     });
     m?.map((v, i) => {
       if (v === null) {
-        elementClassName = clsx(elementClassName, styles[`hide-m-${i + 1}`]);
+        elementClassName = clsx(
+          elementClassName,
+          styles[`hide-m-${i + 1}` as keyof typeof styles],
+        );
       }
     });
     l?.map((v, i) => {
       if (v === null) {
-        elementClassName = clsx(elementClassName, styles[`hide-l-${i + 1}`]);
+        elementClassName = clsx(
+          elementClassName,
+          styles[`hide-l-${i + 1}` as keyof typeof styles],
+        );
       }
     });
 
