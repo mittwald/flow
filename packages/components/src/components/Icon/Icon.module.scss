@@ -11,9 +11,21 @@
       width: var(--icon--size--#{$size});
       height: var(--icon--size--#{$size});
 
+      /*
+       * FontAwesome inserts its stylesheet as an unlayered `<style>` element at
+       * runtime (`autoAddCss` defaults to true), outside of Flow's build, and
+       * sets `box-sizing: content-box` on `.svg-inline--fa`. Unlayered CSS beats
+       * layered CSS regardless of specificity, so this override only applies in
+       * the layered stylesheet variant if it leaves the cascade layer as well.
+       *
+       * Marked at the leaf rather than in a separate block, because these rules
+       * live in a size mixin – a block would have to duplicate it.
+       */
       &:global(.svg-inline--fa) {
-        box-sizing: border-box;
-        padding: $faPadding;
+        @layer flow.unlayered {
+          box-sizing: border-box;
+          padding: $faPadding;
+        }
       }
     }
   }

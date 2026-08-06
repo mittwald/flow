@@ -381,6 +381,17 @@ connection via `connection.imports.reportDeprecation?.(message)` — the optiona
 chaining is a deliberate guard for hosts that predate the `reportDeprecation`
 export — which surfaces on the host side as `onDeprecation`.
 
+Every remote→host signal added after that one goes through **one** generic
+channel instead of its own `HostExports` member: `reportEvent`
+([`packages/remote-core/src/events/remoteEvents.ts`](../packages/remote-core/src/events/remoteEvents.ts)).
+The payload of each event type is a zod schema, validated on the host, and an
+event the host cannot parse — an unknown type, or a newer payload — is silently
+dropped. A new signal is therefore a schema addition, not a protocol change, and
+needs no host rollout. What does not disappear is payload versioning: extend a
+schema additively, and introduce a new event type rather than changing an
+existing field. The channel itself is still an `HostExports` member older hosts
+lack, so callers use `reportEvent?.(…)` and swallow the rejection.
+
 ## Host-side rendering — special cases
 
 A handful of host-rendering behaviors don't fit neatly into the
@@ -406,6 +417,57 @@ render-and-mirror model above and are worth knowing about directly:
   `FlowThreadSerialization`) on every pass across the boundary, so passing deep
   or large object props is more expensive over the wire than it would be
   locally.
+- **The host can observe which components an extension uses.**
+  `onComponentUsage` on `RemoteRenderer` fires once per Flow component an
+  extension uses, carrying the display name and the component's lifecycle status
+  (ADR 0003).
+
+  It is collected **in the remote** and reported over the generic `reportEvent`
+  channel. Collecting it on the host would measure the wrong thing: the host
+  only sees the `flr-*` elements that reach it, which is neither a subset nor a
+  superset of what the extension used. Components that execute inside the remote
+  (`Modal`, `List`, `LightBox`, `Popover`, `Action`, …) never produce an element
+  and would be invisible, while the views they compose internally would look
+  like the author's own usage.
+
+  **Flow's own composition is excluded at the view seam.** There is no "internal
+  composition" category and no flag on the event — a render that arrives through
+  a view is simply not reported. `ViewComponentContextProvider` marks every
+  component it registers as a view target
+  ([`packages/components/src/lib/viewComponentContext/ViewComponentContextProvider.tsx`](../packages/components/src/lib/viewComponentContext/ViewComponentContextProvider.tsx)),
+  and the two places that report usage read that mark and clear it again for the
+  component's children, which belong to whoever wrote them:
+
+  - `flowComponent` — covers every Flow component, including the `flr-universal`
+    ones that execute inside the remote (`Modal`, `List`, …).
+  - the bare-element branch of `createFlowRemoteComponent` — covers the remote
+    components that the factory does not build (`Table`, `Flex`, the chart
+    family, …), which is 54 of the 131 generated ones.
+
+  A view renders the component it resolves to directly, so the mark only ever
+  has to survive a single level — which is why both reporting seams must clear
+  it.
+
+  **What it costs.** Every Flow component render does one context read plus a
+  mount effect (`flowComponent`); the bare-element remote components get one
+  extra wrapper component, and a view render gets one extra context provider.
+  That is deliberate: the cheaper place to collect — the host — measures the
+  wrong thing (see above), and the work per element stays far below what
+  serializing that element across the boundary costs.
+
+  What the signal does **not** tell you:
+
+  - **Absence is not proof of non-usage.** Only what rendered is reported, so a
+    component behind an unopened modal never appears.
+  - **Icons are not tracked** — `IconApp` and friends render `IconView`, so per
+    ADR 0003 §4 no icon usage is reported at all.
+  - **Composition that bypasses its view counts as consumer usage.** `Button`
+    renders `<Text>` directly instead of `TextView`, for example. The rule
+    "compose through views" is what makes the exclusion complete; where a
+    component breaks it, the signal over-reports.
+  - Components that are neither remote components nor `flowComponent`s report
+    nothing — `ModalTrigger` and the other plain wrappers around
+    `OverlayTrigger`.
 
 ## Where to go deeper
 

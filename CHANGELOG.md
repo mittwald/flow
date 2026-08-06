@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1009](https://github.com/mittwald/flow/compare/0.2.0-alpha.1008...0.2.0-alpha.1009) (2026-08-06)
+
+### Features
+
+* **Tooltip:** show tooltips after 400ms ([#2811](https://github.com/mittwald/flow/issues/2811)) ([a80c4f6](https://github.com/mittwald/flow/commit/a80c4f665f2ff043cad8d053ad6c96ef8381f6a9)), closes [#2803](https://github.com/mittwald/flow/issues/2803) [#2803](https://github.com/mittwald/flow/issues/2803)
+
+# [0.2.0-alpha.1008](https://github.com/mittwald/flow/compare/0.2.0-alpha.1007...0.2.0-alpha.1008) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1007](https://github.com/mittwald/flow/compare/0.2.0-alpha.1006...0.2.0-alpha.1007) (2026-08-06)
+
+### Features
+
+* **remote-react-renderer:** report component usage to the host ([#2765](https://github.com/mittwald/flow/issues/2765)) ([0ec1ed9](https://github.com/mittwald/flow/commit/0ec1ed931a71ebd18e9a09d38fc656b5e154786b))
+
+# [0.2.0-alpha.1006](https://github.com/mittwald/flow/compare/0.2.0-alpha.1005...0.2.0-alpha.1006) (2026-08-06)
+
+### Bug Fixes
+
+* **CartesianChart:** render tooltip above legend regardless of child order ([#2810](https://github.com/mittwald/flow/issues/2810)) ([a956acd](https://github.com/mittwald/flow/commit/a956acd393d437318eb84883cbc93f49216e22e5))
+
+# [0.2.0-alpha.1005](https://github.com/mittwald/flow/compare/0.2.0-alpha.1004...0.2.0-alpha.1005) (2026-08-06)
+
+### Features
+
+* **components:** add ComponentDefaultsProvider for application-wide defaults ([#2796](https://github.com/mittwald/flow/issues/2796)) ([c043f6c](https://github.com/mittwald/flow/commit/c043f6c89b2aa2bb669355014698e57cd81ea796))
+
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+### Bug Fixes
+
+* **components:** make third-party style overrides work in the layered stylesheet ([#2799](https://github.com/mittwald/flow/issues/2799)) ([ab20016](https://github.com/mittwald/flow/commit/ab2001688a279dc0194845f0da53342db12a574b))
+
 # [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
 
 ### Bug Fixes

@@ -4,7 +4,12 @@ import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import { packageVersion } from "@/version";
-import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
+import {
+  ComponentUsageProvider,
+  markViewComponents,
+  ViewComponentContextProvider,
+  type ComponentUsageHandler,
+} from "@mittwald/flow-react-components/internal";
 import {
   connectHostRenderRootRef,
   connectRemoteReceiver,
@@ -37,6 +42,10 @@ const viewComponents = {
   ...remoteComponents,
   ...customViewComponents,
 } as FlowViewComponents;
+
+const { Div: LoadingFallbackDiv } = markViewComponents({
+  Div: remoteComponents.Div,
+});
 
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
@@ -146,6 +155,24 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
       });
   };
 
+  const reportedComponentUsage = useRef(new Set<string>());
+
+  const forwardComponentUsage: ComponentUsageHandler = ({ component }) => {
+    if (reportedComponentUsage.current.has(component)) {
+      return;
+    }
+    reportedComponentUsage.current.add(component);
+
+    void connectionRef.current?.imports
+      .reportEvent?.({
+        event: "ComponentRendered",
+        data: { component },
+      })
+      ?.catch(() => {
+        // ignore: host does not support event reporting
+      });
+  };
+
   const setIsLoadingFromProps = () => {
     if (isLoadingFromProps !== undefined) {
       connectionRef.current?.imports.setIsLoading(isLoadingFromProps);
@@ -180,9 +207,9 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
 
   /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
   const loadingFallback = (
-    <remoteComponents.Div>
+    <LoadingFallbackDiv>
       <LoadingFallbackTrigger />
-    </remoteComponents.Div>
+    </LoadingFallbackDiv>
   );
 
   const connectDiv = (div: HTMLDivElement) => {
@@ -226,11 +253,13 @@ const RemoteConnectionRoot: FC<RemoteConnectionRootProps> = (props) => {
           >
             <IntlProvider locale={language}>
               <DeprecationWarningProvider onWarning={forwardDeprecationWarning}>
-                <Suspense fallback={loadingFallback}>
-                  <ViewComponentContextProvider components={viewComponents}>
-                    {children}
-                  </ViewComponentContextProvider>
-                </Suspense>
+                <ComponentUsageProvider onUsage={forwardComponentUsage}>
+                  <Suspense fallback={loadingFallback}>
+                    <ViewComponentContextProvider components={viewComponents}>
+                      {children}
+                    </ViewComponentContextProvider>
+                  </Suspense>
+                </ComponentUsageProvider>
               </DeprecationWarningProvider>
             </IntlProvider>
           </RemoteContextProvider>

@@ -14,12 +14,9 @@ import { IncrementalLoaderState } from "@/components/List/model/loading/Incremen
 import { hash } from "object-code";
 import type { PropertyName } from "@/components/List/model/types";
 import { useMemo } from "react";
-import { flags } from "@/flags";
+import { useComponentDefaults } from "@/components/ComponentDefaultsProvider";
 
 const emptyData: never[] = [];
-
-const disableInitialSuspenseBoundaryDefault =
-  flags.disableInitialListSuspenseBoundaries ?? false;
 
 export class IncrementalLoader<T> {
   private readonly list: List<T>;
@@ -35,6 +32,10 @@ export class IncrementalLoader<T> {
     const { source } = shape;
 
     this.dataSource = source ?? { staticData: emptyData };
+
+    const {
+      disableInitialSuspenseBoundary: disableInitialSuspenseBoundaryDefault,
+    } = useComponentDefaults("List");
 
     this.disableInitialSuspenseBoundary =
       "disableInitialSuspenseBoundary" in this.dataSource

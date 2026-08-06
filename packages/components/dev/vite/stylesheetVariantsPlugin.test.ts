@@ -1,5 +1,8 @@
 import { test, expect, describe } from "vitest";
-import { stripCascadeLayers } from "./stylesheetVariantsPlugin";
+import {
+  assertNoUnlayeredMarkers,
+  stripCascadeLayers,
+} from "./stylesheetVariantsPlugin";
 
 describe("stylesheet variants plugin", () => {
   test("unwraps block layer contents", () => {
@@ -25,5 +28,61 @@ describe("stylesheet variants plugin", () => {
     expect(result).toContain("@media (min-width: 40rem)");
     expect(result).toContain(":root { --x: 1 }");
     expect(result).not.toContain("@layer");
+  });
+
+  describe("unlayered marker assertion", () => {
+    test("rejects a marker that survived into the layered stylesheet", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "@layer flow.unlayered { :global(.cm-line) { color: red } }",
+          "css/all-layered.css",
+        ),
+      ).toThrow(/flow\.unlayered/);
+    });
+
+    test("names the offending selector so the source is findable", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "@layer flow.unlayered { .cm-line { color: red } }",
+          "css/all-layered.css",
+        ),
+      ).toThrow(/\.cm-line/);
+    });
+
+    test("rejects a marker with unusual whitespace", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "@layer   flow.unlayered   { .a { color: red } }",
+          "css/all-layered.css",
+        ),
+      ).toThrow(/flow\.unlayered/);
+    });
+
+    test("rejects a marker nested inside a media query", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "@media (min-width: 40rem) { @layer flow.unlayered { .a { color: red } } }",
+          "css/all-layered.css",
+        ),
+      ).toThrow(/flow\.unlayered/);
+    });
+
+    test("accepts a stylesheet without markers", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "@layer flow.components { .flow--button { color: red } }\n.cm-line { color: blue }",
+          "css/all-layered.css",
+        ),
+      ).not.toThrow();
+    });
+
+    test("ignores the marker name in a comment", () => {
+      expect(() =>
+        assertNoUnlayeredMarkers(
+          "/* lifted out of flow.unlayered */\n.a { color: red }",
+          "css/all-layered.css",
+        ),
+      ).not.toThrow();
+    });
   });
 });
