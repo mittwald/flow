@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "noEmit": true,
+    "rootDir": ".."
+  },
+  "extends": "../tsconfig.json",
+  "files": ["../src/types.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx"]
+}

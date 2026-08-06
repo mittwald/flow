@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import viteCheckerPlugin from "vite-plugin-checker";
 import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
@@ -19,14 +18,7 @@ const config: StorybookConfig = {
     reactDocgen: false,
   },
   viteFinal: async (conf) => {
-    return mergeConfig(conf, {
-      plugins: [
-        viteCheckerPlugin({
-          typescript: true,
-          terminal: true,
-        }),
-      ],
-    });
+    return mergeConfig(conf, {});
   },
 };
 

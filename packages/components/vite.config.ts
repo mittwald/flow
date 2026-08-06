@@ -3,10 +3,17 @@ import path from "path";
 import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
 import { lezer } from "@lezer/generator/rollup";
+import sassDts from "vite-plugin-sass-dts";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [lezer(), viteI18nPlugin],
+  plugins: [
+    lezer(),
+    viteI18nPlugin,
+    sassDts({
+      esmExport: true,
+    }),
+  ],
   resolve: {
     alias: [
       {
