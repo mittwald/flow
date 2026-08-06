@@ -28,7 +28,7 @@ import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
 import type { PropsWithChildren, ReactNode } from "react";
 import Footer from "./components/Footer";
-import styles from "./List.module.css";
+import styles from "./List.module.scss";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
