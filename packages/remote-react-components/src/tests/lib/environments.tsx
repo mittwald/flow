@@ -105,6 +105,14 @@ const waitForPaintedContent = async (): Promise<void> => {
           isPainted,
         ),
       {
+        /*
+         * The wait itself costs nothing once content is there — polling stops on
+         * the first painted frame, ~25ms in. The budget only bounds the failure
+         * case, so keep it well above `expect.poll`'s 1s default: a heavy
+         * scenario on a loaded machine would otherwise fail here for being slow
+         * rather than for being blank.
+         */
+        timeout: 5000,
         message:
           "The root container never painted any content, so the screenshot would have captured a blank frame.",
       },
