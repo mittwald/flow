@@ -42,6 +42,17 @@ test("reports the components that render", async () => {
     .toEqual(expect.arrayContaining(["Section", "Heading", "Button"]));
 });
 
+test("over-reports a composition that bypasses its view", async () => {
+  // Known limitation, pinned on purpose: the exclusion sits at the view seam, so
+  // Button rendering <Text> directly instead of TextView lands in the consumer's
+  // bucket. Polling on Button is the flush gate — React runs the child's mount
+  // effect first, so once Button is in, Text is too.
+  const events = await renderCollecting(<Button>Fire</Button>);
+
+  await expect.poll(() => componentsOf(events)).toContain("Button");
+  expect(componentsOf(events)).toContain("Text");
+});
+
 test("reports every instance, leaving deduplication to the consumer", async () => {
   const events = await renderCollecting(
     <>
