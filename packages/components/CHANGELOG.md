@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/mittwald/flow/compare/1.0.9...2.0.0) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-06)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

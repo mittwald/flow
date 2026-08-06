@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-icons",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "type": "module",
   "description": "Default iconset for Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
