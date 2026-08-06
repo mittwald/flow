@@ -87,9 +87,9 @@ installed:
 ### Resolving a blocked forward-merge
 
 Every change on `main` is merged up into `next` automatically (ADR 0004). When
-that merge hits a conflict the machine cannot resolve, the cascade **pauses** and
-opens an issue — from then on nothing new reaches `next` until someone resolves
-it. That someone needs two commands:
+that merge hits a conflict the machine cannot resolve, the cascade **pauses**
+and opens an issue — from then on nothing new reaches `next` until someone
+resolves it. That someone needs two commands:
 
 ```shell
 pnpm sync:resolve             # merges main into next in your checkout

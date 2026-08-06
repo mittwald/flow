@@ -73,8 +73,7 @@ function filesWithMarkers(files) {
     return content
       .split("\n")
       .some(
-        (line) =>
-          line.startsWith(OPEN_MARKER) || line.startsWith(CLOSE_MARKER),
+        (line) => line.startsWith(OPEN_MARKER) || line.startsWith(CLOSE_MARKER),
       );
   });
 }
@@ -111,7 +110,10 @@ function start() {
   });
 
   console.log(`Creating \`${BRANCH}\` from origin/next…`);
-  if (git(["checkout", "-B", BRANCH, "origin/next"], { capture: false }).status !== 0) {
+  if (
+    git(["checkout", "-B", BRANCH, "origin/next"], { capture: false })
+      .status !== 0
+  ) {
     fail(`Could not create \`${BRANCH}\`.`);
   }
 
@@ -249,8 +251,7 @@ function openPullRequest() {
     "--jq",
     ".[0].number // empty",
   ]);
-  const issueNumber =
-    issue.status === 0 ? (issue.stdout ?? "").trim() : "";
+  const issueNumber = issue.status === 0 ? (issue.stdout ?? "").trim() : "";
 
   const body = [
     "Resolves the forward-merge conflict between `main` and `next` (ADR 0004 §4), resolved locally with the merge drivers active via `pnpm sync:resolve`.",

@@ -20,11 +20,11 @@
 > **Amendment 2026-08-06 (from the dry-run rehearsal, #2769).** Rehearsing the
 > cascade on a scratch fork showed two of the mechanisms below do not behave as
 > written. **§5** claimed that a shared `concurrency` group serializes every
-> writer of a branch; it does not — GitHub keeps at most one *pending* run per
-> group and evicts it when a newer run arrives, so forward-merge runs are dropped
-> rather than delayed. **§4** described a sync PR that a human resolves; that
-> cannot work as intended, because GitHub does not run the `.gitattributes` merge
-> drivers, so the churn §3 removes reappears on the PR. Both sections are
+> writer of a branch; it does not — GitHub keeps at most one _pending_ run per
+> group and evicts it when a newer run arrives, so forward-merge runs are
+> dropped rather than delayed. **§4** described a sync PR that a human resolves;
+> that cannot work as intended, because GitHub does not run the `.gitattributes`
+> merge drivers, so the churn §3 removes reappears on the PR. Both sections are
 > corrected in place below; the reasoning and the measurements are recorded on
 > #2769.
 
@@ -123,6 +123,7 @@ mechanical noise, not a real conflict, and is resolved automatically via
 > (`/prepare-release` restores them after its merge); lerna prepends the
 > graduated entry on merge, and the prerelease entries drop out of the record,
 > which is correct — they were never published under `latest`.
+
 - **`**/package.json`** → a **JSON-aware merge driver** (a small Node script) that, on conflict, keeps the `version`field from`next`while merging all other changes (e.g. genuine dependency bumps from`main`) with the normal 3-way result. A blanket `merge=ours`on`package.json`is rejected — it would silently drop legitimate dependency changes from`main`.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
@@ -150,7 +151,8 @@ therefore shows every `version` and `CHANGELOG.md` divergence between the lines
 as a conflict, burying the one file that genuinely needs a human under dozens of
 mechanical ones (35 conflicting files in the #2769 rehearsal, 34 of them noise).
 Locally, with the drivers registered by `pnpm install` (§3), only the genuine
-conflict remains. `--continue` refuses to commit while conflict markers are left.
+conflict remains. `--continue` refuses to commit while conflict markers are
+left.
 
 The pull request `sync/main-to-next → next` appears **after** the resolution and
 is therefore a clean, reviewable merge. It carries the **`sync`** label (plus
@@ -196,13 +198,14 @@ Two mitigations, both implemented:
   delta, does not push, and so triggers no further `publish-next`.
 - **Drift check.** `forward-merge-drift.yml` compares `main` against `next` on a
   schedule and escalates when the gap outlives a threshold, ignoring drift that
-  an open sync issue or sync PR already accounts for — and ageing those too, so a
-  forgotten escalation cannot block the cascade indefinitely without saying so.
+  an open sync issue or sync PR already accounts for — and ageing those too, so
+  a forgotten escalation cannot block the cascade indefinitely without saying
+  so.
 
 Giving `forward-merge.yml` its own group was considered and rejected:
 forward-merge runs evicting each other is harmless (they always merge `main`'s
 tip), but it would let `forward-merge` and `publish-next` push to `next`
-concurrently, and `publish-next` pushes *after* its npm publish — precisely the
+concurrently, and `publish-next` pushes _after_ its npm publish — precisely the
 ratchet this design exists to prevent.
 
 **`next` is protected** (real-merge-commit-only for human PRs, direct pushes
