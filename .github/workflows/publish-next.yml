@@ -65,13 +65,11 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 
-      # REHEARSAL ONLY — see the same note in publish.yml.
       - name: Setup Node 🎛️
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
-          registry-url: ${{ vars.REHEARSAL_REGISTRY }}
-          scope: "@mittwald"
+          registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
       - name: Git Identity 🪪
@@ -175,11 +173,8 @@ jobs:
       # Publish under the `next` dist-tag (ADR 0004 §6) — the distinguishing
       # difference from publish.yml, which publishes `latest`. Provenance/OIDC
       # and the @sigstore/sign Rekor-409 patch behave exactly as in publish.yml.
-      # REHEARSAL ONLY — token auth against Verdaccio (see publish.yml).
       - name: Publish 🚀
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.REHEARSAL_NPM_TOKEN }}
-        run: pnpm lerna publish from-package --yes --no-private --concurrency 1 --dist-tag next
+        run: pnpm lerna publish from-package --yes --concurrency 1 --dist-tag next
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # `next` with the release commit and tag.
