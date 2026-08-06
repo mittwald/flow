@@ -1,6 +1,7 @@
 import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
+import { prefixedStyleClassname } from "@/lib/scss/selectors";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -33,7 +34,8 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    styles[`label-${labelPosition}` as keyof typeof styles],
+    labelPosition !== "trailing" &&
+      prefixedStyleClassname(styles, "label-", labelPosition),
     className,
   );
 

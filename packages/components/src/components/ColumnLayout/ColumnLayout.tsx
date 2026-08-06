@@ -1,5 +1,6 @@
 import type { CSSProperties, PropsWithChildren } from "react";
 import styles from "./ColumnLayout.module.scss";
+import { styleClassname } from "@/lib/scss/selectors";
 import { getColumns } from "./lib/getColumns";
 import clsx from "clsx";
 import type {
@@ -67,7 +68,7 @@ export const ColumnLayout = flowComponent(
       if (v === null) {
         elementClassName = clsx(
           elementClassName,
-          styles[`hide-s-${i + 1}` as keyof typeof styles],
+          styleClassname(styles, `hide-s-${i + 1}`),
         );
       }
     });
@@ -75,7 +76,7 @@ export const ColumnLayout = flowComponent(
       if (v === null) {
         elementClassName = clsx(
           elementClassName,
-          styles[`hide-m-${i + 1}` as keyof typeof styles],
+          styleClassname(styles, `hide-m-${i + 1}`),
         );
       }
     });
@@ -83,7 +84,7 @@ export const ColumnLayout = flowComponent(
       if (v === null) {
         elementClassName = clsx(
           elementClassName,
-          styles[`hide-l-${i + 1}` as keyof typeof styles],
+          styleClassname(styles, `hide-l-${i + 1}`),
         );
       }
     });

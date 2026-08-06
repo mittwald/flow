@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react";
 import styles from "./ActionGroup.module.scss";
+import { styleClassname } from "@/lib/scss/selectors";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
@@ -61,7 +62,7 @@ export const ActionGroup = flowComponent(
             slot: dynamic((props) => getActionGroupSlot(props)),
             className: dynamic((props) => {
               const slot = getActionGroupSlot(props);
-              return clsx(props.className, styles[slot as keyof typeof styles]);
+              return clsx(props.className, styleClassname(styles, slot));
             }),
           },
           Switch: {
@@ -69,7 +70,7 @@ export const ActionGroup = flowComponent(
             className: dynamic((props) => {
               return clsx(
                 props.className,
-                props.slot && styles[props.slot as keyof typeof styles],
+                props.slot && styleClassname(styles, props.slot),
               );
             }),
           },
@@ -78,7 +79,7 @@ export const ActionGroup = flowComponent(
             className: dynamic((props) => {
               return clsx(
                 props.className,
-                props.slot && styles[props.slot as keyof typeof styles],
+                props.slot && styleClassname(styles, props.slot),
               );
             }),
           },
