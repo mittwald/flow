@@ -40,7 +40,7 @@ export const Heading = flowComponent("Heading", (props) => {
     size && styles[`size-${size}`],
     color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
-    elementType && styles[`h${level}`],
+    elementType && styles[`h${level}` as keyof typeof styles],
     className,
   );
 

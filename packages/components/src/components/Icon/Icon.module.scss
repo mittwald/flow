@@ -33,17 +33,17 @@
     color: var(--icon--color);
   }
 
-  @include color(danger);
-  @include color(success);
-  @include color(warning);
-  @include color(info);
-  @include color(unavailable);
-  @include color(blue);
-  @include color(violet);
-  @include color(teal);
-  @include color(lilac);
-  @include color(dark);
-  @include color(light);
-  @include color(dark-static);
-  @include color(light-static);
+  @include color("danger");
+  @include color("success");
+  @include color("warning");
+  @include color("info");
+  @include color("unavailable");
+  @include color("blue");
+  @include color("violet");
+  @include color("teal");
+  @include color("lilac");
+  @include color("dark");
+  @include color("light");
+  @include color("dark-static");
+  @include color("light-static");
 }

@@ -17,16 +17,6 @@ declare global {
     export default langFile;
   }
 
-  declare module "*.module.css" {
-    const classes: Record<string, string>;
-    export default classes;
-  }
-
-  declare module "*.module.scss" {
-    const classes: Record<string, string>;
-    export default classes;
-  }
-
   // React 19 types workaround for outdated types from third party deps
   namespace JSX {
     type ElementType = Jsx.ElementType;
