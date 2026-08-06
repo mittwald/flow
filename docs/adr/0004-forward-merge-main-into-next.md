@@ -63,12 +63,20 @@ This ADR decides each of these.
 The forward-merge is a **true merge commit** (`git merge --no-ff main` on
 `next`). No rebase, squash, cherry-pick, or history rewrite — ever.
 
-This makes `main` an **ancestor** of `next` in the git graph. The superset
-invariant is then materialized in history: Git knows what is already integrated
-and merges only the delta, so routine forward-merges do not re-collide. The cost
-— merge-commit noise in `next`'s history — is irrelevant, because the canonical
-changelog is the curated GitHub Release, not `next`'s raw history (per RFC
-#2711).
+This materializes the superset invariant in history: Git knows what is already
+integrated and merges only the delta, so routine forward-merges do not
+re-collide. The cost — merge-commit noise in `next`'s history — is irrelevant,
+because the canonical changelog is the curated GitHub Release, not `next`'s raw
+history (per RFC #2711).
+
+**The superset holds for _content_, not for ancestry** — this section previously
+claimed `main` becomes an ancestor of `next`, which §6/§7 then contradicts: a
+merge carrying no code delta is deliberately dropped, so the `chore(release):`
+bump never reaches `next`. In the steady state `main` therefore sits permanently
+one commit ahead while being content-identical. Anything that needs to answer
+"has `next` fallen behind?" must probe the **merge**, not the ancestry — an
+`is-ancestor` test reports drift forever. (Found in the #2769 rehearsal, where
+the drift check did exactly that.)
 
 ### 2. Trigger and location: a dedicated, idempotent, serialized workflow
 
