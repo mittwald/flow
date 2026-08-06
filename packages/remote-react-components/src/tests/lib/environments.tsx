@@ -5,7 +5,7 @@ import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import type { Locator, ScreenshotMatcherOptions } from "vitest/browser";
 import * as RemoteComponents from "@/index";
 import * as Components from "@mittwald/flow-react-components";
-import * as PasswordToolsComponents from "@mittwald/flow-react-components/password-tools";
+import * as PasswordToolsComponents from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
@@ -43,8 +43,24 @@ export const renderLocal: typeof render = async (ui, options) => {
   return result;
 };
 
+/*
+ * Parks the pointer where it cannot put anything into its hover state: inside
+ * the container's 32px padding, which no scenario paints into.
+ *
+ * Not `unhover()`, which is implemented as "hover `html > body`" — and hovering
+ * targets an element's centre, so it parked the pointer in the middle of the
+ * viewport, where scenarios put their content. It produced the exact hover state
+ * it is named after preventing.
+ *
+ * `force` skips the hit-target check. Where a full-screen overlay is open there
+ * is no free point in the viewport at all, and the pointer landing on a backdrop
+ * is harmless — the only thing that matters is that it is off the components.
+ */
 const setNeutralPointerPosition = async () => {
-  await rootContainerLocator.unhover();
+  await rootContainerLocator.hover({
+    position: { x: 4, y: 4 },
+    force: true,
+  });
   rootContainerLocator.element().focus();
 };
 

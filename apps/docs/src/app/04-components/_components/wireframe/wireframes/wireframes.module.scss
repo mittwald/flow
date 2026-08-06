@@ -1,0 +1,268 @@
+.cropperContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cropperImage {
+  position: absolute;
+}
+
+.cropper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border: 2px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+  position: relative;
+}
+
+.cropperCell {
+  min-height: 40px;
+  border-inline-end: 2px solid var(--neutral--color--500);
+  border-block-end: 2px solid var(--neutral--color--500);
+}
+
+.cropperCell:nth-child(3n) {
+  border-inline-end: 0;
+}
+
+.cropperCell:nth-last-child(-n + 3) {
+  border-block-end: 0;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  overflow: hidden;
+  background: var(--neutral--color--100);
+  border: 2px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+}
+
+.tableHeaderCell,
+.tableCell {
+  min-height: 32px;
+  border-inline-end: 2px solid var(--neutral--color--500);
+  border-block-end: 2px solid var(--neutral--color--500);
+}
+
+.tableHeaderCell:nth-child(3n),
+.tableCell:nth-child(3n) {
+  border-inline-end: 0;
+}
+
+.tableCell:nth-last-child(-n + 3) {
+  border-block-end: 0;
+}
+
+.tableHeaderCell {
+  background: var(--neutral--color--300);
+}
+
+.progressTrack {
+  width: 78%;
+  height: 24px;
+  overflow: hidden;
+  background: var(--neutral--color--400);
+  border-radius: var(--corner-radius--l);
+}
+
+.progressValue {
+  display: block;
+  width: 58%;
+  height: 100%;
+  background: var(--neutral--color--700);
+  border-radius: var(--corner-radius--l);
+}
+
+.donut {
+  position: relative;
+  width: 42%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    var(--neutral--color--700) 0 38%,
+    var(--neutral--color--600) 38% 68%,
+    var(--neutral--color--500) 68% 100%
+  );
+  border-radius: 50%;
+}
+
+.donut::after {
+  position: absolute;
+  inset: 28%;
+  content: "";
+  background: var(--neutral--color--200);
+  border-radius: 50%;
+}
+
+.chart,
+.dropZone {
+  position: relative;
+}
+
+.avatarOverlap {
+  margin-inline-start: -24px;
+  border: 2px solid var(--neutral--color--200);
+}
+
+.switchTrack {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 80px;
+  height: 40px;
+  padding: 4px;
+  background: var(--neutral--color--700);
+  border-radius: 20px;
+}
+
+.segmentGroup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+  gap: 0;
+}
+
+.segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-inline-end: 2px solid var(--neutral--color--500);
+}
+
+.segment:last-child {
+  border-inline-end: 0;
+}
+
+.segmentActive {
+  background: var(--neutral--color--300);
+}
+
+/* Popover tip pointing at the element that triggered the overlay. Filled in the
+   structural tone rather than the overlay's own near-white fill, which would
+   disappear against the card background. */
+.tipDown,
+.tipInlineStart {
+  position: relative;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  flex-shrink: 0;
+}
+
+.tipDown {
+  border-inline: 8px solid transparent;
+  border-block-start: 8px solid var(--neutral--color--500);
+}
+
+.tipInlineStart {
+  border-block: 8px solid transparent;
+  border-inline-end: 8px solid var(--neutral--color--500);
+}
+
+/* Modal footer — bleeds to the overlay edges, like the real footer. */
+.modalFooter {
+  width: auto;
+  margin-block: 8px -16px;
+  margin-inline: -16px;
+  padding: 16px;
+  background: var(--neutral--color--200);
+  border-radius: 0 0 var(--corner-radius--m) var(--corner-radius--m);
+}
+
+/* Keep the footer compact — the primitive's 48px button box makes the modal
+   overlay taller than the card's media area. */
+.modalFooter .modalFooterButton {
+  min-width: 0;
+  min-height: 32px;
+  padding-block: 0;
+}
+
+.tabBar {
+  overflow: hidden;
+  background: var(--neutral--color--100);
+  border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;
+}
+
+.tabPanel {
+  border-radius: 0 0 var(--corner-radius--m) var(--corner-radius--m);
+}
+
+.tab {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: 16px;
+}
+
+.tab:last-child {
+  flex: 0 0 auto;
+}
+
+.tabCurrent {
+  background: var(--neutral--color--300);
+}
+
+.sliderTrack {
+  width: 100%;
+  position: relative;
+  height: 12px;
+  background: var(--neutral--color--400);
+  border-radius: var(--corner-radius--l);
+}
+
+.sliderTrack::before {
+  display: block;
+  width: 48%;
+  height: 100%;
+  content: "";
+  background: var(--neutral--color--700);
+  border-radius: inherit;
+}
+
+.sliderKnob {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 48%;
+  width: 32px;
+  aspect-ratio: 1;
+  background: var(--neutral--color--700);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart {
+  width: 78%;
+  height: 64%;
+  border-inline-start: 4px solid var(--neutral--color--600);
+  border-block-end: 4px solid var(--neutral--color--600);
+}
+
+.chartBars {
+  position: absolute;
+  inset: auto 12% 0 16%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  gap: 4px;
+  height: 58%;
+}
+
+.chartBars span {
+  display: block;
+  background: var(--neutral--color--500);
+  border-radius: var(--corner-radius--m) var(--corner-radius--m) 0 0;
+}
+
+.dropZone {
+  border: 2px dashed var(--neutral--color--600);
+}
