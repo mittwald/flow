@@ -1,5 +1,6 @@
 .cartesianChart {
   font-family: Inter, sans-serif;
+  isolation: isolate;
 
   *:focus:not(:focus-visible) {
     outline: none !important;
