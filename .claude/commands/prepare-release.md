@@ -143,10 +143,15 @@ requires `--from`/`--to` overrides before doing anything else.
 
 10. **Freeze branch + Draft PR** (only after confirmation):
     - Create `release/x.y.0` from `origin/<from>` and push it to `origin`.
-    - Open a **Draft** PR into `<to>`:
+    - Open a **Draft** PR into `<to>`. The title must be a **Conventional
+      Commit** — `commit-guard.yml` lints every PR title and rejected a plain
+      `Release x.y.0` in the #2769 rehearsal. It must also **not** begin with
+      `chore(release):`, which is the skip-guard `publish.yml` uses to avoid
+      re-publishing its own release commit:
       ```bash
       gh pr create --draft --base <to> --head release/x.y.0 \
-        --title "Release x.y.0" --body-file <path-to-body>
+        --title "chore(promotion): promote <from> to x.y.0" \
+        --body-file <path-to-body>
       ```
 
 11. **Summary.** Print the PR URL, the target version, and the maintainer's next
