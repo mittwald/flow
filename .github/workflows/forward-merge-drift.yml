@@ -82,11 +82,31 @@ jobs:
 
           git fetch --no-tags origin main next
 
-          # The invariant from ADR 0004 §1: `main` is an ancestor of `next`.
-          if git merge-base --is-ancestor origin/main origin/next; then
-            echo "next contains main's tip — no drift."
-            exit 0
+          # Drift is a question about CONTENT, not ancestry. ADR 0004 §6/§7 has
+          # the cascade DROP a merge that produces no code delta — the
+          # `chore(release):` bump on `main` is absorbed by the merge drivers — so
+          # in the steady state `main` is permanently one commit ahead of `next`
+          # while being content-identical. An ancestry test (`merge-base
+          # --is-ancestor`) therefore reports drift forever; measured on the
+          # rehearsal fork, where it would have opened an issue every hour.
+          #
+          # So probe the merge instead, exactly as the cascade would: with the
+          # drivers registered, does merging `main` into `next` change the tree?
+          git config merge.ours.driver true
+          git config merge.package-json.driver \
+            "node .github/scripts/merge-package-json.cjs %O %A %B %L %P"
+          git checkout -q --detach origin/next
+
+          if git merge --no-ff --no-commit origin/main >/dev/null 2>&1; then
+            if git diff --cached --quiet origin/next; then
+              echo "Merging main into next produces no code delta — no drift."
+              exit 0
+            fi
+            echo "The merge is clean but carries a code delta — next is behind."
+          else
+            echo "The merge conflicts — next is behind, and a human is needed."
           fi
+          git merge --abort >/dev/null 2>&1 || git reset -q --hard origin/next
 
           behind="$(git rev-list --count origin/next..origin/main)"
           oldest="$(git rev-list origin/next..origin/main | tail -1)"

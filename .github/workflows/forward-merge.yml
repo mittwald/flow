@@ -2,13 +2,16 @@ name: Forward-merge main into next
 
 # Forward-merge cascade (ADR 0004). Keeps the higher release line a superset of
 # the lower one BY CONSTRUCTION: every change on `main` is merged up into `next`
-# as a TRUE merge commit (never rebase/squash/cherry-pick), so `main` stays an
-# ancestor of `next` and routine merges never re-collide (ADR 0004 §1).
+# as a TRUE merge commit (never rebase/squash/cherry-pick), so routine merges
+# never re-collide (ADR 0004 §1). Note that `main` is NOT literally an ancestor
+# of `next` in the steady state: §6/§7 drops a merge that carries no code delta,
+# so the `chore(release):` bump stays behind. The superset holds for CONTENT,
+# which is what matters — do not write ancestry-based checks against it.
 #
 # The workflow is idempotent: it merges the CURRENT `main` tip into `next`, not
 # "a specific commit" (ADR 0004 §2). A `fix:` push and the later
-# `chore(release):` push both trigger a run; both converge on "next contains
-# main's tip", and the churn-only run collapses to an empty merge with no push
+# `chore(release):` push both trigger a run; both converge on "next carries
+# main's code", and the churn-only run collapses to an empty merge with no push
 # (ADR 0004 §6/§7).
 #
 # Version/changelog divergence between the lines is absorbed by the
@@ -91,22 +94,6 @@ jobs:
           if [ "$ahead" = "0" ]; then
             echo "exists=false" >> "$GITHUB_OUTPUT"
             echo "::notice::'next' already contains every commit from 'main' — nothing to merge."
-
-            # `next` containing `main` again IS the definition of a resolved
-            # escalation, so close any open sync issue here. GitHub cannot do it
-            # via `Closes #n` in the sync PR: it only auto-closes linked issues
-            # when a PR merges into the DEFAULT branch, and the sync PR targets
-            # `next`. Reaching this point promptly after the resolution is what
-            # the `workflow_run` catch-up trigger buys us — merging the sync PR
-            # pushes `next`, which runs publish-next, whose completion brings us
-            # back here.
-            for n in $(gh issue list --repo "$REPO" --state open --label sync \
-                         --search 'in:title "Forward-merge blocked"' \
-                         --json number --jq '.[].number'); do
-              gh issue close "$n" --repo "$REPO" \
-                --comment "\`next\` contains \`main\` again — the cascade is unblocked." \
-                && echo "::notice::Closed sync issue #${n}."
-            done
             exit 0
           fi
 
@@ -150,6 +137,26 @@ jobs:
         if: steps.guard.outputs.exists == 'true'
         run: |
           set -euo pipefail
+
+          # A run that finishes without escalating means the cascade is healthy
+          # again — `next` carries `main`'s CODE, whether or not it carries
+          # `main`'s tip commit. Ancestry is deliberately NOT the signal: §6/§7
+          # drops a churn-only merge, so after every release `main` sits one
+          # `chore(release):` commit ahead of `next` forever while being
+          # content-identical. This is the moment to clear an open escalation.
+          #
+          # GitHub cannot do it from the sync PR — `Closes #n` only fires when a
+          # PR merges into the DEFAULT branch, and the sync PR targets `next`.
+          close_sync_issue() {
+            local n
+            for n in $(gh issue list --repo "$REPO" --state open --label sync \
+                         --search 'in:title "Forward-merge blocked"' \
+                         --json number --jq '.[].number'); do
+              gh issue close "$n" --repo "$REPO" \
+                --comment "\`next\` carries \`main\`'s code again — the cascade is unblocked." \
+                && echo "::notice::Closed sync issue #${n}."
+            done
+          }
 
           # Escalation (ADR 0004 §4). The cascade does NOT create a branch or
           # a pull request here: a PR is a change proposal, and until a human has
@@ -246,6 +253,7 @@ jobs:
           if git diff --quiet "$NEXT_BEFORE" HEAD; then
             echo "No code delta after merge — skipping push (nothing to re-publish)."
             git reset --hard "$NEXT_BEFORE"
+            close_sync_issue
             exit 0
           fi
 
@@ -253,6 +261,7 @@ jobs:
           # §5, belt-and-suspenders on top of the shared concurrency group).
           if git push origin HEAD:next; then
             echo "Pushed forward-merge to next."
+            close_sync_issue
             exit 0
           fi
 
@@ -261,6 +270,7 @@ jobs:
           if git merge --no-ff -m "$MERGE_MSG" origin/next; then
             git push origin HEAD:next
             echo "Pushed forward-merge to next after retry."
+            close_sync_issue
             exit 0
           fi
 
