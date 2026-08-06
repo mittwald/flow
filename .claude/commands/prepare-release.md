@@ -7,9 +7,16 @@ argument-hint: "optional free-text, e.g. --from next --to main --version 0.3.0"
 
 Prepare the **promotion / release PR** for mittwald Flow, following the release
 model in RFC #2711. You draft a curated, user-facing changelog, freeze the
-release state on a branch, and open a **Draft** PR. You do **not** bump the
-version, build, tag, publish, or create the GitHub release — CI does all of that
-on merge.
+release state on a branch, **graduate the version to the stable `x.y.0` in the
+PR itself**, and open a **Draft** PR. You do **not** build, tag, publish, or
+create the GitHub release — CI does all of that on merge.
+
+Graduating in the PR (rather than leaving CI to bump on merge) is deliberate:
+the PR diff then reads honestly as `x.(y-1).z → x.y.0` instead of promoting a
+`x.y.0-next.N` prerelease onto the stable line, and the published version no
+longer hinges on CI re-deriving it. `publish.yml` detects the already-graduated
+branch and **skips** its own `lerna version` (re-running it is not idempotent —
+it dies on `tag already exists` or writes an empty "Version bump only" entry).
 
 The model may not be live yet: if there is no `next` branch, Step 1 stops and
 requires `--from`/`--to` overrides before doing anything else.
@@ -30,9 +37,9 @@ requires `--from`/`--to` overrides before doing anything else.
    explain that the model may not be live yet and that the maintainer must pass
    `--from`/`--to` overrides.
 
-2. **Guard — `<from>` must carry all of `<to>`'s code (forward-merge complete).**
-   Before doing anything else, verify that merging `origin/<to>` into
-   `origin/<from>` would change nothing:
+2. **Guard — `<from>` must carry all of `<to>`'s code (forward-merge
+   complete).** Before doing anything else, verify that merging `origin/<to>`
+   into `origin/<from>` would change nothing:
 
    ```shell
    pnpm dev:init-merge-drivers          # a merge= attribute is inert without this
@@ -42,14 +49,15 @@ requires `--from`/`--to` overrides before doing anything else.
    git merge --abort 2>/dev/null || git reset -q --hard origin/<from>
    ```
 
-   **Ask about CONTENT, never about ancestry.** `git log origin/<from>..origin/<to>`
-   is **not** the test: the forward-merge deliberately drops a merge that carries
-   no code delta (ADR 0004 §6/§7), so after every release `<to>` keeps a
-   `chore(release):` commit that never reaches `<from>`. An ancestry check
-   therefore hard-stops in the perfectly healthy steady state — measured in the
-   #2769 rehearsal, where this guard refused with "main is ahead of next —
-   forward-merge incomplete" while the cascade was working exactly as designed,
-   making the promotion impossible to start.
+   **Ask about CONTENT, never about ancestry.**
+   `git log origin/<from>..origin/<to>` is **not** the test: the forward-merge
+   deliberately drops a merge that carries no code delta (ADR 0004 §6/§7), so
+   after every release `<to>` keeps a `chore(release):` commit that never
+   reaches `<from>`. An ancestry check therefore hard-stops in the perfectly
+   healthy steady state — measured in the #2769 rehearsal, where this guard
+   refused with "main is ahead of next — forward-merge incomplete" while the
+   cascade was working exactly as designed, making the promotion impossible to
+   start.
 
    If the probe **does** show a delta (or conflicts), hard-stop: releasing
    `<from>` would silently drop those changes. The maintainer forward-merges
@@ -104,8 +112,9 @@ requires `--from`/`--to` overrides before doing anything else.
    | **Version**         | `{{CURRENT_VERSION}}` → `{{VERSION}}` |
    | **Bump**            | {{BUMP_TYPE}} ({{BUMP_BASIS}})        |
 
-   Merging graduates the prerelease to `{{VERSION}}`, publishes all
-   `@mittwald/flow-*` packages to npm under `latest`, and creates the GitHub
+   This PR graduates the line to the stable `{{VERSION}}` (version + changelog
+   already bumped on the branch). Merging publishes all `@mittwald/flow-*`
+   packages to npm under `latest`, tags `{{VERSION}}`, and creates the GitHub
    release from the curated notes below.
 
    <!-- release-notes:start -->
@@ -130,11 +139,13 @@ requires `--from`/`--to` overrides before doing anything else.
    prettier may insert blank lines adjacent to the markers, and that whitespace
    is not content.
 
-   > ⚠️ **Not wired up yet.** No workflow reads this marker block today —
-   > `publish.yml` still builds the GitHub-release body from `CHANGELOG.md`. The
-   > marker extraction lands with the `publish.yml` follow-up (#2724, RFC
-   > #2711); until then the curated notes are for the PR only and are **not**
-   > published to the GitHub release.
+   > ✅ **Wired up (#2724).** On a promotion merge, `publish.yml` reads this
+   > marker block from the PR body and uses it verbatim as the GitHub-release
+   > body (trimming blank lines adjacent to the markers). It falls back to the
+   > `CHANGELOG.md` section only when there is no PR or no marker block (the
+   > one-time `1.0.0` cut, or a plain dispatch). This matters because a
+   > prerelease→stable graduation produces only a useless "Version bump only"
+   > changelog entry — the curated block is the real release body.
 
 9. **Preview + confirm.** Show the full assembled PR body plus the plan (branch
    `release/x.y.0`, `from → to`, `current → target` version). Ask for explicit
@@ -152,6 +163,19 @@ requires `--from`/`--to` overrides before doing anything else.
       # The changelogs must come from <to>, not <from> — see below.
       git checkout origin/<to> -- '*CHANGELOG.md'
       git commit --amend --no-edit
+
+      # Graduate the prerelease to the stable x.y.0 IN the PR (RFC #2711): bump
+      # every package + lerna.json, prepend the x.y.0 changelog entry, and create
+      # the `chore(release): bump version to x.y.0` commit. --no-push keeps it
+      # local. Then DROP the tag lerna creates — the release tag belongs on <to>'s
+      # merge commit, and publish.yml creates + pushes it there on merge (a plain
+      # `git push <branch>` would not carry a local tag anyway, but deleting it
+      # avoids a stale tag pinned to the branch commit and keeps re-runs idempotent).
+      pnpm lerna version x.y.0 \
+        --force-publish --conventional-commits \
+        --message "chore(release): bump version to %v" \
+        --yes --no-push --tag-version-prefix ""
+      git tag -d x.y.0
 
       git push origin release/x.y.0
       ```
@@ -176,33 +200,48 @@ requires `--from`/`--to` overrides before doing anything else.
       `<from>`'s changelog carries the prerelease line, interleaved with the
       stable entries it forward-merged, and promoting it **overwrites the stable
       history on `<to>`**. Measured in the #2769 rehearsal, `main` came out of a
-      promotion carrying entries like
-      `## [2.2.5](compare/2.3.0-next.4...2.2.5)` — a stable release comparing
-      against a prerelease of the other line — with its own release bodies
-      hollowed out. That file is what `publish.yml` extracts GitHub Release
-      bodies from, so the damage reaches users.
-      Taking `<to>`'s changelogs keeps the stable history intact; lerna prepends
-      the graduated entry on merge, and the prerelease entries disappear from the
-      record, which is correct — they were never published under `latest`.
+      promotion carrying entries like `## [2.2.5](compare/2.3.0-next.4...2.2.5)`
+      — a stable release comparing against a prerelease of the other line — with
+      its own release bodies hollowed out. That file is what `publish.yml`
+      extracts GitHub Release bodies from, so the damage reaches users. Taking
+      `<to>`'s changelogs keeps the stable history intact; the graduation step
+      below then prepends the `x.y.0` entry, and the prerelease entries
+      disappear from the record, which is correct — they were never published
+      under `latest`. (The graduated entry itself is a terse "Version bump only"
+      comparing `x.y.0-next.N...x.y.0` — that is expected, and exactly why the
+      GitHub release body comes from the curated marker block, not this file.)
 
     - Open a **Draft** PR into `<to>`. The title must be a **Conventional
       Commit** — `commit-guard.yml` lints every PR title and rejected a plain
       `Release x.y.0` in the #2769 rehearsal. It must also **not** begin with
       `chore(release):`, which is the skip-guard `publish.yml` uses to avoid
       re-publishing its own release commit:
+
       ```bash
       gh pr create --draft --base <to> --head release/x.y.0 \
         --title "chore(promotion): promote <from> to x.y.0" \
         --body-file <path-to-body>
       ```
 
+      > ⚠️ **Merge as a merge commit, not squash/rebase.** The graduation commit
+      > on the branch _is_ `chore(release): bump version to x.y.0`. A `--no-ff`
+      > merge makes `<to>`'s new tip the merge commit (a non-`chore(release):`
+      > message) so `publish.yml` runs. A **rebase** merge would leave the
+      > `chore(release):` commit as `<to>`'s head and the skip-guard would abort
+      > the publish; a **squash** merge collapses the graduation and its tree
+      > together but is untested here — stick to the merge commit the model
+      > assumes.
+
 11. **Summary.** Print the PR URL, the target version, and the maintainer's next
-    steps: curate the notes in the PR, mark Draft → Ready, and merge — after
-    which CI versions, builds, publishes under `latest`, and creates the GitHub
-    release from the marker block.
+    steps: curate the notes in the PR, mark Draft → Ready, and merge as a merge
+    commit — after which CI builds, publishes under `latest`, tags `x.y.0`, and
+    creates the GitHub release from the marker block. (CI does **not**
+    re-version — the branch is already graduated.)
 
 ## You do NOT
 
-Run `lerna version`, build, create git tags, publish to npm, or create the
-GitHub release, and you create no local version commit. All of that happens in
-CI on merge.
+Build, create/push git tags, publish to npm, or create the GitHub release — all
+of that happens in CI on merge. You **do** graduate the version: a single local
+`chore(release): bump version to x.y.0` commit on the release branch (Step 10),
+with its lerna-created tag dropped. You create no other commits and push no
+tags.
