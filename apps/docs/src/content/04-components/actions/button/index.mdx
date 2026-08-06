@@ -24,6 +24,8 @@ Verwende einen Button, um ...
   auszuführen.
 - ein [Modal](/04-components/overlays/modal/overview) zu öffnen.
 
+## Best Practices
+
 Achte bei der Verwendung eines Buttons darauf, dass ...
 
 - der Text oder das Icon die auszuführende Aktion eindeutig beschreibt.
@@ -77,8 +79,8 @@ Light und Dark findest du in den Foundations unter
 
 # Sizes
 
-Medium ist die Standardgröße und wird für die meisten Buttons verwendet. Small
-kann genutzt werden, wenn weniger Platz vorhanden ist. Vermeide es,
+**Medium** ist die Standardgröße und wird für die meisten Buttons verwendet.
+**Small** kann genutzt werden, wenn weniger Platz vorhanden ist. Vermeide es,
 unterschiedliche Button-Größen direkt nebeneinander zu verwenden.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
@@ -103,7 +105,8 @@ die [Action](/04-components/actions/action/overview)-Komponente genutzt werden.
 # Content
 
 Der Content-Bereich eines Buttons kann entweder Text, ein Icon oder Text mit
-einem Icon am Ende enthalten.
+einem Icon am Ende enthalten. Achte in allen Fällen darauf, dass Text und Icon
+die Aktion eindeutig beschreiben.
 
 ## Icon
 
@@ -115,9 +118,10 @@ die Aktion gedacht ist.
 
 ## Text + Icon
 
-Bei der Kombination aus Text und Icon sollte das Icon keinen rein dekorativen
-Zweck erfüllen. Zum Beispiel kann ein Chevron-Icon darauf hinweisen, dass der
-Button ein Dropdown öffnet.
+Verwende die Kombination aus Text und Icon nicht zu rein dekorativen Zwecken,
+sondern nur, um den Kontext zu erweitern. Zum Beispiel zeigt ein Chevron-Icon
+an, dass sich hinter dem Button ein
+[ContextMenu](/04-components/actions/context-menu/overview) verbirgt.
 
 <LiveCodeEditor example="icon-text" editorCollapsed row />
 
