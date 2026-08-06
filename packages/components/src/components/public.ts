@@ -28,6 +28,7 @@ export * from "@/components/CodeEditor";
 export * from "@/components/Color";
 export * from "@/components/ColumnLayout";
 export * from "@/components/ComboBox";
+export * from "@/components/ComponentDefaultsProvider";
 export * from "@/components/ComponentPropsContextProvider";
 export * from "@/components/Content";
 export * from "@/components/ContextMenu";
