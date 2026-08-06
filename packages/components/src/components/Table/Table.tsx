@@ -35,7 +35,7 @@ export const Table: FC<TableProps> = (props) => {
 
   const rootClassName = clsx(
     styles.table,
-    styles[`vertical-align-${verticalAlign}`],
+    styles[`vertical-align-${verticalAlign}` as keyof typeof styles],
     styles[`layout-${layout}`],
     className,
   );
