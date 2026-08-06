@@ -86,6 +86,43 @@ jobs:
       - name: Build 🔨
         run: pnpm build
 
+      # A promotion merge (RFC #2711) is a `release/x.y.0 -> main` PR merged as a
+      # true merge commit. Its head branch names the target version — and the
+      # merge carries `next`'s PRERELEASE version onto `main` with it, because
+      # the release branch already contains `main` (that is what makes the PR
+      # mergeable at all: GitHub does not run the merge drivers).
+      #
+      # So the version has to be set explicitly here. Left to derive it, lerna
+      # sees a prerelease as the current version and simply continues that line —
+      # measured in the #2769 rehearsal, where a promotion put `2.3.0-next.6`
+      # under dist-tag `latest`. Eight workflow runs, all green.
+      #
+      # This is the graduation half of #2724; the curated-notes half (building
+      # the GitHub Release body from the PR's marker block instead of the
+      # changelog) is still open there.
+      - name: Identify merge context 🔎
+        id: ctx
+        if: ${{ !inputs.only_publish && !inputs.release_as }}
+        run: |
+          set -euo pipefail
+          version=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # REST, so the field is `head.ref` — NOT `headRefName`, which is the
+            # GraphQL name `gh pr view --json` uses. Reading the GraphQL name off
+            # a REST response yields an empty string and the graduation silently
+            # never fires; verified against the rehearsal's own promotion merge.
+            head_ref="$(gh api \
+              "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+              --jq '.[0].head.ref // ""')"
+            case "$head_ref" in
+              release/*)
+                version="${head_ref#release/}"
+                echo "::notice::Promotion merge from '${head_ref}' — graduating to ${version}."
+                ;;
+            esac
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
       # Bump versions, write changelogs, commit and tag — but do NOT push and do
       # NOT create the GitHub release yet. Pushing the release commit before the
       # npm publish succeeded is what let a failed publish "ratchet" main ahead of
@@ -93,16 +130,25 @@ jobs:
       # deferred to after a successful publish below.
       - name: Version 🏷️
         if: ${{ !inputs.only_publish }}
+        env:
+          RELEASE_AS: ${{ inputs.release_as }}
+          PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
         run: |
-          if [ -n "${{ inputs.release_as }}" ]; then
-            # One-time explicit version (the 1.0.0 cut, or any forced version via
-            # workflow_dispatch). The explicit target overrides conventional-commit
-            # *derivation*, but --conventional-commits is still required: it is
-            # also what writes CHANGELOG.md. Without it lerna bumps the versions
-            # and writes no changelog entry at all, and the release-notes
-            # extraction below then silently picks up the PREVIOUS version's
-            # section. Verified both ways on a scratch fork (#2769).
-            pnpm lerna version "${{ inputs.release_as }}" \
+          # Two ways to reach an explicit version: the one-time cut dispatch, and
+          # a promotion merge. Both take the same path below.
+          target="${RELEASE_AS:-$PROMOTION_VERSION}"
+
+          if [ -n "$target" ]; then
+            # Explicit version — the 1.0.0 cut (or any forced version via
+            # workflow_dispatch), and every promotion merge. The explicit target
+            # overrides conventional-commit *derivation*, but
+            # --conventional-commits is still required: it is also what writes
+            # CHANGELOG.md. Without it lerna bumps the versions and writes no
+            # changelog entry at all, and the release-notes extraction below then
+            # silently picks up the PREVIOUS version's section. Verified both
+            # ways on a scratch fork (#2769).
+            echo "Versioning explicitly to ${target}."
+            pnpm lerna version "$target" \
               --force-publish \
               --conventional-commits \
               --message "chore(release): bump version to %v" \
