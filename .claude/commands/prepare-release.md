@@ -148,6 +148,11 @@ requires `--from`/`--to` overrides before doing anything else.
       ```shell
       git checkout -B release/x.y.0 origin/<from>
       git merge --no-ff -m "chore(sync): merge <to> into release/x.y.0" origin/<to>
+
+      # The changelogs must come from <to>, not <from> — see below.
+      git checkout origin/<to> -- '*CHANGELOG.md'
+      git commit --amend --no-edit
+
       git push origin release/x.y.0
       ```
 
@@ -164,6 +169,21 @@ requires `--from`/`--to` overrides before doing anything else.
       ancestry — which is precisely what the promotion is supposed to establish.
       If it nonetheless conflicts, stop and report the files; something changed
       between Step 2 and here.
+
+      **The changelogs are the one exception, and the direction is the point.**
+      `**/CHANGELOG.md merge=ours` (ADR 0004 §3) is written for `main → next`,
+      where keeping `<from>`'s file is right. In this direction it is wrong:
+      `<from>`'s changelog carries the prerelease line, interleaved with the
+      stable entries it forward-merged, and promoting it **overwrites the stable
+      history on `<to>`**. Measured in the #2769 rehearsal, `main` came out of a
+      promotion carrying entries like
+      `## [2.2.5](compare/2.3.0-next.4...2.2.5)` — a stable release comparing
+      against a prerelease of the other line — with its own release bodies
+      hollowed out. That file is what `publish.yml` extracts GitHub Release
+      bodies from, so the damage reaches users.
+      Taking `<to>`'s changelogs keeps the stable history intact; lerna prepends
+      the graduated entry on merge, and the prerelease entries disappear from the
+      record, which is correct — they were never published under `latest`.
 
     - Open a **Draft** PR into `<to>`. The title must be a **Conventional
       Commit** — `commit-guard.yml` lints every PR title and rejected a plain

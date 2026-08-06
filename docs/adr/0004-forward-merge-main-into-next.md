@@ -110,6 +110,19 @@ mechanical noise, not a real conflict, and is resolved automatically via
 - **`**/CHANGELOG.md
   merge=ours`** — keep `next`'s changelog; `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package `CHANGELOG.md`
   are only the machine record (RFC #2711), so this loss is inconsequential.
+
+> **`merge=ours` is written for `main → next` and must not be applied to the
+> promotion.** In the other direction it keeps `next`'s changelog, which carries
+> the prerelease line interleaved with the stable entries it forward-merged —
+> and promoting it **overwrites the stable history on `main`**. The #2769
+> rehearsal produced exactly that: `main` came out of a promotion carrying
+> `## [2.2.5](compare/2.3.0-next.4...2.2.5)`, a stable release comparing against
+> a prerelease of the other line, with its own release bodies hollowed out. That
+> file is what `publish.yml` extracts GitHub Release bodies from, so the damage
+> reaches users. The promotion therefore takes **`main`'s** changelogs
+> (`/prepare-release` restores them after its merge); lerna prepends the
+> graduated entry on merge, and the prerelease entries drop out of the record,
+> which is correct — they were never published under `latest`.
 - **`**/package.json`** → a **JSON-aware merge driver** (a small Node script) that, on conflict, keeps the `version`field from`next`while merging all other changes (e.g. genuine dependency bumps from`main`) with the normal 3-way result. A blanket `merge=ours`on`package.json`is rejected — it would silently drop legitimate dependency changes from`main`.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
