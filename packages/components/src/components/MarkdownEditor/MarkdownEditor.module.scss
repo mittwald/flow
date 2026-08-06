@@ -30,6 +30,7 @@
 
   .toolbarButtons {
     display: flex;
+    flex-wrap: wrap;
     column-gap: var(--form-control--padding-y);
   }
 
