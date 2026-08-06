@@ -725,18 +725,21 @@ both the title and that it matches the base branch (see
 ## Releases
 
 You don't need to do anything to release. Flow uses **fixed versioning** — all
-`@mittwald/flow-*` packages share one version — and Lerna-Lite derives the bump
-and changelog from your Conventional Commits.
+`@mittwald/flow-*` packages share one version — and releases are automated from
+your Conventional Commit **PR titles** (the repo squash-merges, so the title is
+the commit Lerna-Lite reads). Where your change lands decides how it ships:
 
-- A `fix:` merged into `main` publishes to npm under dist-tag `latest` (via
-  `.github/workflows/publish.yml`) and is forward-merged into `next`.
-- Features accumulate on `next`, published continuously as `X.Y.0-next.N` under
-  dist-tag `next`. A maintainer promotes them to a stable Minor — with a curated
-  changelog — via a `next → main` Release-PR, when there's enough to be worth
-  releasing.
+- **`fix:` (and non-releasing `docs:`/`chore:`/… ) → `main`** — publishes to npm
+  under dist-tag `latest` as soon as it merges.
+- **`feat:` → `next`** — features accumulate there (published as `X.Y.0-next.N`
+  under dist-tag `next`) and a maintainer promotes them to a stable Minor, with
+  a curated changelog, via a `next → main` Release-PR.
 
-See [RFC #2711](https://github.com/mittwald/flow/issues/2711) for the full model
-and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
+This is Flow's two-line release model — see
+[`docs/release-workflow.md`](docs/release-workflow.md) for the full picture (the
+branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
+[RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
+model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
 forward-merge mechanics. (The `next` line and its publishing go live with the
 1.0.0 cut; until then every merge into `main` releases as it does today.)
 
