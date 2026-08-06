@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
+
+### Bug Fixes
+
+* **ci:** drop --no-private from lerna publish to keep workspace deps resolvable ([#2804](https://github.com/mittwald/flow/issues/2804)) ([0c241fa](https://github.com/mittwald/flow/commit/0c241fa7f4207bddaf3cc13afe57131894a7d34c))
+
 # [0.2.0-alpha.1001](https://github.com/mittwald/flow/compare/0.2.0-alpha.1000...0.2.0-alpha.1001) (2026-08-06)
 
 **Note:** Version bump only for package @mittwald/flow-project
