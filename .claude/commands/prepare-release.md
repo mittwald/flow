@@ -30,13 +30,32 @@ requires `--from`/`--to` overrides before doing anything else.
    explain that the model may not be live yet and that the maintainer must pass
    `--from`/`--to` overrides.
 
-2. **Guard — `<from>` must contain all of `<to>` (forward-merge complete).**
-   Before doing anything else, verify `origin/<to>` has **no** commits missing
-   from `origin/<from>` (`git log origin/<from>..origin/<to>` is empty — i.e.
-   `next` already carries every forward-change from `main`). If `origin/<to>` is
-   ahead, **hard-stop**: releasing `<from>` would silently drop those commits.
-   The maintainer must forward-merge `<to>` into `<from>` (or land the open sync
-   PR) first, then re-run. This guard gates the whole command.
+2. **Guard — `<from>` must carry all of `<to>`'s code (forward-merge complete).**
+   Before doing anything else, verify that merging `origin/<to>` into
+   `origin/<from>` would change nothing:
+
+   ```shell
+   pnpm dev:init-merge-drivers          # a merge= attribute is inert without this
+   git checkout -q --detach origin/<from>
+   git merge --no-ff --no-commit origin/<to>
+   git diff --cached --quiet origin/<from>   # empty → nothing missing
+   git merge --abort 2>/dev/null || git reset -q --hard origin/<from>
+   ```
+
+   **Ask about CONTENT, never about ancestry.** `git log origin/<from>..origin/<to>`
+   is **not** the test: the forward-merge deliberately drops a merge that carries
+   no code delta (ADR 0004 §6/§7), so after every release `<to>` keeps a
+   `chore(release):` commit that never reaches `<from>`. An ancestry check
+   therefore hard-stops in the perfectly healthy steady state — measured in the
+   #2769 rehearsal, where this guard refused with "main is ahead of next —
+   forward-merge incomplete" while the cascade was working exactly as designed,
+   making the promotion impossible to start.
+
+   If the probe **does** show a delta (or conflicts), hard-stop: releasing
+   `<from>` would silently drop those changes. The maintainer forward-merges
+   `<to>` into `<from>` — `pnpm sync:resolve` for a conflict, a
+   `forward-merge.yml` dispatch otherwise — and re-runs. This guard gates the
+   whole command.
 
 3. **Version-independent preconditions.**
    - **Hard-stop** (abort and explain) if:
