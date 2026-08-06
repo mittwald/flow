@@ -15,7 +15,7 @@ export const ContextualHelpWireframe: FC = () => (
       <IconInfo />
     </WIcon>
     <span className={styles.tipInlineStart} />
-    <WOverlay className={styles.tippedOverlay} tone="500">
+    <WOverlay tipped>
       <WText width="70%" tone="300" />
       <WText tone="300" />
     </WOverlay>

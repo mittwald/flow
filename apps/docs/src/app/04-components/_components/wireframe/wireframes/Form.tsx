@@ -7,10 +7,9 @@ import {
   WRow,
   WStack,
 } from "@/app/04-components/_components/wireframe/primitives";
-import styles from "./wireframes.module.scss";
 
 export const FormWireframe: FC = () => (
-  <WFrame className={styles.scale78}>
+  <WFrame scale={0.78}>
     <WStack>
       <WStack>
         <WInput />

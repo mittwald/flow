@@ -10,7 +10,7 @@
 .overlay {
   box-sizing: border-box;
   display: flex;
-  gap: var(--size-px--s);
+  gap: 8px;
   width: 100%;
 }
 
@@ -31,12 +31,19 @@
   color: inherit;
 }
 
+/* WIcon with a size: the icon fills the wrapper instead of using its own size
+   token. Outranks the icon's single-class width/height. */
+.iconSized svg {
+  width: 100%;
+  height: 100%;
+}
+
 .stack {
   flex-direction: column;
 }
 
 .box {
-  padding: var(--size-px--m);
+  padding: 16px;
   border-radius: var(--corner-radius--m);
   flex-direction: column;
 }
@@ -47,8 +54,8 @@
 
 .input {
   align-items: center;
-  padding-inline: var(--size-px--m);
-  padding-block: var(--size-px--s);
+  padding-inline: 16px;
+  padding-block: 8px;
   border: 2px solid var(--neutral--color--500);
   border-radius: var(--corner-radius--m);
   min-height: 48px;
@@ -56,8 +63,8 @@
 
 .overlay {
   flex-direction: column;
-  min-height: var(--size-px--xl);
-  padding: var(--size-px--m);
+  min-height: 32px;
+  padding: 16px;
   border: 2px solid var(--neutral--color--300);
   border-radius: var(--corner-radius--m);
   box-shadow: var(--shadow--content);
@@ -65,7 +72,7 @@
 
 .button {
   display: flex;
-  padding: var(--size-px--s);
+  padding: 8px;
   border-radius: var(--corner-radius--m);
   min-height: 48px;
   min-width: 48px;
@@ -80,13 +87,13 @@
 }
 
 .circle {
-  width: var(--wireframe-width, var(--size-px--m));
-  height: var(--wireframe-height, var(--size-px--m));
+  width: var(--wireframe-width, 16px);
+  height: var(--wireframe-height, 16px);
   border-radius: 50%;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding: var(--size-px--m);
+  padding: 16px;
 }
 
 .tone100 {

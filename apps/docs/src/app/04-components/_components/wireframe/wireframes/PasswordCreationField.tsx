@@ -24,7 +24,7 @@ export const PasswordCreationFieldWireframe: FC = () => (
           <Icon>
             <IconAsterisk />
           </Icon>
-        </WIcon>{" "}
+        </WIcon>
         <WIcon>
           <Icon>
             <IconAsterisk />

@@ -15,14 +15,15 @@ export const TabNavigationWireframe: FC = () => (
   <WFrame>
     <WStack gap={0}>
       <WRow className={styles.tabBar} gap={0}>
-        {[0, 1, 2].map((item) => (
-          <div
-            key={item}
-            className={`${styles.tab} ${item === 0 ? styles.tabCurrent : ""}`}
-          >
-            <WText width="100%" />
-          </div>
-        ))}
+        <div className={`${styles.tab} ${styles.tabCurrent}`}>
+          <WText width="100%" />
+        </div>
+        <div className={styles.tab}>
+          <WText width="100%" />
+        </div>
+        <div className={styles.tab}>
+          <WText width="100%" />
+        </div>
         <div className={styles.tab}>
           <WIcon tone="600">
             <IconChevronDown />

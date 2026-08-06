@@ -12,10 +12,9 @@ import {
   IconChevronUp,
   IconChevronDown,
 } from "@mittwald/flow-react-components";
-import styles from "./wireframes.module.scss";
 
 export const AccordionWireframe: FC = () => (
-  <WFrame className={styles.scale90}>
+  <WFrame scale={0.9}>
     <WStack>
       <WBox
         flexDirection="row"

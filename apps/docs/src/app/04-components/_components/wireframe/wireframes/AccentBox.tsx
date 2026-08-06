@@ -6,10 +6,9 @@ import {
   WStack,
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
-import styles from "./wireframes.module.scss";
 
 export const AccentBoxWireframe: FC = () => (
-  <WFrame className={styles.scale84}>
+  <WFrame scale={0.84}>
     <WStack>
       <WBox tone="400">
         <WText width="60%" />

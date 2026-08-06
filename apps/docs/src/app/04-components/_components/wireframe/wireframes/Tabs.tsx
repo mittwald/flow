@@ -12,14 +12,15 @@ export const TabsWireframe: FC = () => (
   <WFrame>
     <WStack gap={16}>
       <WInput className={styles.segmentGroup}>
-        {[0, 1, 2].map((item) => (
-          <div
-            key={item}
-            className={`${styles.segment} ${item === 0 ? styles.segmentActive : ""}`}
-          >
-            <WText width="50%" />
-          </div>
-        ))}
+        <div className={`${styles.segment} ${styles.segmentActive}`}>
+          <WText width="50%" />
+        </div>
+        <div className={styles.segment}>
+          <WText width="50%" />
+        </div>
+        <div className={styles.segment}>
+          <WText width="50%" />
+        </div>
       </WInput>
       <WStack>
         <WText width="84%" />

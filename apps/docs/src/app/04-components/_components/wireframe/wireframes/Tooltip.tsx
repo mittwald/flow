@@ -12,7 +12,7 @@ import styles from "./wireframes.module.scss";
 export const TooltipWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack alignItems="center" width={200} gap={0}>
-      <WOverlay className={styles.tippedOverlay} tone="500">
+      <WOverlay tipped>
         <WText tone="300" />
       </WOverlay>
       <span className={styles.tipDown} />

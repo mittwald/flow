@@ -6,19 +6,18 @@ import {
   WRow,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconStar, IconStarFilled } from "@mittwald/flow-react-components";
-import styles from "./wireframes.module.scss";
 
 export const RatingWireframe: FC = () => (
   <WFrame>
     <WRow justifyContent="center">
-      <WIcon tone="600" className={styles.iconReduced}>
-        <IconStarFilled size="l" />
+      <WIcon tone="600" size={56}>
+        <IconStarFilled />
       </WIcon>
-      <WIcon tone="600" className={styles.iconReduced}>
-        <IconStarFilled size="l" />
+      <WIcon tone="600" size={56}>
+        <IconStarFilled />
       </WIcon>
-      <WIcon tone="600" className={styles.iconReduced}>
-        <IconStar size="l" />
+      <WIcon tone="600" size={56}>
+        <IconStar />
       </WIcon>
     </WRow>
   </WFrame>

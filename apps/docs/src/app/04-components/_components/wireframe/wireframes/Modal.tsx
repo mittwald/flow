@@ -10,7 +10,7 @@ import {
 import styles from "./wireframes.module.scss";
 
 export const ModalWireframe: FC = () => (
-  <WFrame className={styles.scale78}>
+  <WFrame scale={0.78}>
     <WOverlay>
       <WText width="52%" />
       <WText width="86%" />

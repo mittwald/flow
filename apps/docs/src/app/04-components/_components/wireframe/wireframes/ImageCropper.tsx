@@ -15,9 +15,15 @@ export const ImageCropperWireframe: FC = () => (
         <IconImage size="l" />
       </WIcon>
       <div className={styles.cropper}>
-        {Array.from({ length: 9 }, (_, index) => (
-          <span key={index} className={styles.cropperCell} />
-        ))}
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
+        <span className={styles.cropperCell} />
       </div>
     </WStack>
   </WFrame>

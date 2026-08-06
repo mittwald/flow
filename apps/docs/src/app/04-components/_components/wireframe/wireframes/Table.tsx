@@ -6,12 +6,18 @@ import styles from "./wireframes.module.scss";
 export const TableWireframe: FC = () => (
   <WFrame>
     <div className={styles.table}>
-      {Array.from({ length: 12 }, (_, index) => (
-        <span
-          key={index}
-          className={index < 3 ? styles.tableHeaderCell : styles.tableCell}
-        />
-      ))}
+      <span className={styles.tableHeaderCell} />
+      <span className={styles.tableHeaderCell} />
+      <span className={styles.tableHeaderCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
+      <span className={styles.tableCell} />
     </div>
   </WFrame>
 );

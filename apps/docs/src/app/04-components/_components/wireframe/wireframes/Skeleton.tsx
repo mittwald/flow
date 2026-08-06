@@ -10,7 +10,7 @@ import {
 export const SkeletonWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="72%">
-      <WBox tone="300" height="var(--size-px--xxl)" />
+      <WBox tone="300" height={64} />
       <WText tone="300" width="88%" />
       <WText tone="300" width="62%" />
     </WStack>

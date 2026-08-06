@@ -10,10 +10,9 @@ import {
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 import { IconDanger } from "@mittwald/flow-react-components";
-import styles from "./wireframes.module.scss";
 
 export const FormRootErrorWireframe: FC = () => (
-  <WFrame className={styles.scale78}>
+  <WFrame scale={0.78}>
     <WStack>
       <WStack>
         <WInput />

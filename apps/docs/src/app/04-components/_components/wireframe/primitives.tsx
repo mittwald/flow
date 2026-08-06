@@ -24,26 +24,50 @@ const cx = (...classes: (string | undefined | false)[]) =>
 
 const getToneClass = (tone: Tone = "400") => styles[`tone${tone}`];
 
+/**
+ * Wraps an icon. Given a `size`, the icon fills the wrapper instead of using
+ * its own size token — the icon's `size` prop then has no effect.
+ */
 export const WIcon: FC<
-  PropsWithChildren<{ tone?: Tone; className?: string }>
+  PropsWithChildren<{
+    tone?: Tone;
+    className?: string;
+    size?: CSSProperties["width"];
+  }>
 > = (props) => {
-  const { children, className, tone = "700" } = props;
+  const { children, className, tone = "700", size } = props;
 
   return (
     <span
-      className={cx(styles.icon, tone && styles.iconTone, className)}
-      style={tone ? { color: `var(--neutral--color--${tone})` } : undefined}
+      className={cx(
+        styles.icon,
+        tone && styles.iconTone,
+        size !== undefined && styles.iconSized,
+        className,
+      )}
+      style={{
+        color: tone ? `var(--neutral--color--${tone})` : undefined,
+        width: size,
+        height: size,
+      }}
     >
       {children}
     </span>
   );
 };
 
-export const WFrame: FC<LayoutProps> = (props) => {
-  const { children, className, ...rest } = props;
+/**
+ * The outermost element of every wireframe. `scale` shrinks a composition that
+ * would otherwise outgrow the card's media box at the smallest tile width.
+ */
+export const WFrame: FC<LayoutProps & { scale?: number }> = (props) => {
+  const { children, className, scale, ...rest } = props;
 
   return (
-    <div className={cx(styles.frame, className)} style={rest}>
+    <div
+      className={cx(styles.frame, className)}
+      style={{ ...rest, transform: scale ? `scale(${scale})` : undefined }}
+    >
       {children}
     </div>
   );
@@ -118,13 +142,29 @@ export const WInput: FC<PropsWithChildren<LayoutProps>> = (props) => {
   );
 };
 
-export const WOverlay: FC<PropsWithChildren<LayoutProps>> = (props) => {
-  const { children, className, tone = "100", ...rest } = props;
+/**
+ * A popover surface. `tipped` fills it in the same tone as the tip that points
+ * at its trigger (see `tipDown` / `tipInlineStart`), so both read as one
+ * shape.
+ */
+export const WOverlay: FC<
+  PropsWithChildren<LayoutProps & { tipped?: boolean }>
+> = (props) => {
+  const {
+    children,
+    className,
+    tipped,
+    tone = tipped ? "500" : "100",
+    ...rest
+  } = props;
 
   return (
     <div
       className={cx(styles.overlay, getToneClass(tone), className)}
-      style={rest}
+      style={{
+        ...rest,
+        borderColor: tipped ? "var(--neutral--color--500)" : undefined,
+      }}
     >
       {children}
     </div>

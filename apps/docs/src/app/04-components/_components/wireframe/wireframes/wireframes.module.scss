@@ -1,24 +1,3 @@
-/* At the smallest tile width (250px) the card's media box leaves 133px of
-   height. These wireframes compose taller than that, so they are scaled down to
-   fit — the factor is the one that just clears the box, per wireframe. */
-.scale78,
-.scale84,
-.scale90 {
-  transform-origin: center;
-}
-
-.scale78 {
-  transform: scale(0.78);
-}
-
-.scale84 {
-  transform: scale(0.84);
-}
-
-.scale90 {
-  transform: scale(0.9);
-}
-
 .cropperContainer {
   position: relative;
   display: flex;
@@ -65,7 +44,7 @@
 
 .tableHeaderCell,
 .tableCell {
-  min-height: var(--size-px--xl);
+  min-height: 32px;
   border-inline-end: 2px solid var(--neutral--color--500);
   border-block-end: 2px solid var(--neutral--color--500);
 }
@@ -85,7 +64,7 @@
 
 .progressTrack {
   width: 78%;
-  height: var(--size-px--l);
+  height: 24px;
   overflow: hidden;
   background: var(--neutral--color--400);
   border-radius: var(--corner-radius--l);
@@ -125,7 +104,7 @@
 }
 
 .avatarOverlap {
-  margin-inline-start: calc(var(--size-px--l) * -1);
+  margin-inline-start: -24px;
   border: 2px solid var(--neutral--color--200);
 }
 
@@ -135,7 +114,7 @@
   justify-content: flex-end;
   width: 80px;
   height: 40px;
-  padding: var(--size-px--xs);
+  padding: 4px;
   background: var(--neutral--color--700);
   border-radius: 20px;
 }
@@ -166,13 +145,6 @@
   background: var(--neutral--color--300);
 }
 
-/* One notch (8px) below the l icon size, for icons that would otherwise
-   crowd their container. */
-.iconReduced svg {
-  width: calc(var(--icon--size--l) - var(--size-px--s));
-  height: calc(var(--icon--size--l) - var(--size-px--s));
-}
-
 /* Popover tip pointing at the element that triggered the overlay. Filled in the
    structural tone rather than the overlay's own near-white fill, which would
    disappear against the card background. */
@@ -186,28 +158,21 @@
 }
 
 .tipDown {
-  border-inline: var(--size-px--s) solid transparent;
-  border-block-start: var(--size-px--s) solid var(--neutral--color--500);
+  border-inline: 8px solid transparent;
+  border-block-start: 8px solid var(--neutral--color--500);
 }
 
 .tipInlineStart {
-  border-block: var(--size-px--s) solid transparent;
-  border-inline-end: var(--size-px--s) solid var(--neutral--color--500);
-}
-
-/* Overlay outlined in the tip's color, so tip and border read as one shape.
-   Doubled class to outrank the primitive's own single-class border-color
-   without depending on stylesheet order. */
-.tippedOverlay.tippedOverlay {
-  border-color: var(--neutral--color--500);
+  border-block: 8px solid transparent;
+  border-inline-end: 8px solid var(--neutral--color--500);
 }
 
 /* Modal footer — bleeds to the overlay edges, like the real footer. */
 .modalFooter {
   width: auto;
-  margin-block: var(--size-px--s) calc(var(--size-px--m) * -1);
-  margin-inline: calc(var(--size-px--m) * -1);
-  padding: var(--size-px--m);
+  margin-block: 8px -16px;
+  margin-inline: -16px;
+  padding: 16px;
   background: var(--neutral--color--200);
   border-radius: 0 0 var(--corner-radius--m) var(--corner-radius--m);
 }
@@ -216,7 +181,7 @@
    overlay taller than the card's media area. */
 .modalFooter .modalFooterButton {
   min-width: 0;
-  min-height: var(--size-px--xl);
+  min-height: 32px;
   padding-block: 0;
 }
 
@@ -236,7 +201,7 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding-inline: var(--size-px--m);
+  padding-inline: 16px;
 }
 
 .tab:last-child {
@@ -268,7 +233,7 @@
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 48%;
-  width: var(--size-px--xl);
+  width: 32px;
   aspect-ratio: 1;
   background: var(--neutral--color--700);
   border-radius: 50%;
@@ -288,7 +253,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: end;
-  gap: var(--size-px--xs);
+  gap: 4px;
   height: 58%;
 }
 
