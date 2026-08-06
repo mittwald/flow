@@ -94,19 +94,57 @@ jobs:
       # Bump versions, write changelogs, commit and tag — but do NOT push and do
       # NOT create the GitHub release yet (same deferral as publish.yml: pushing
       # the release commit before npm publish succeeded would ratchet `next`
-      # ahead of npm). `--conventional-prerelease` + `--preid next` derives the
-      # `X.Y.0-next.N` line (ADR 0004 §6).
+      # ahead of npm).
+      #
+      # The shape ADR 0004 §6 asks for is `X.Y.0-next.N` — a MINOR prerelease
+      # line, because `next` is where features collect. `--conventional-prerelease`
+      # alone does not produce it: once the version is a prerelease, semver's
+      # `inc('prerelease')` only moves the counter, whatever the commit type. The
+      # base is therefore frozen by the FIRST prerelease publish on the line — and
+      # that one is a patch by construction, since `next` is branched off a stable
+      # `main` and the first thing to arrive is a forward-merged `fix:`.
+      #
+      # Measured on a scratch fork (#2769): the line produced `1.0.3-next.0` from
+      # two `fix:` commits and then `1.0.3-next.1` — the latter containing a
+      # FEATURE, with the minor never moving. `flow@next` would advertise a patch
+      # while shipping features, against ADR 0005.
+      #
+      # Hence the split: seed the line explicitly as `preminor` while the current
+      # version is still stable, and only let conventional-prerelease count once
+      # the line is running. This has to stay automatic rather than being a
+      # one-time seed at the cut — after every promotion `next` lands on a stable
+      # version again and would otherwise restart as a patch line.
       - name: Version 🏷️
         if: ${{ !inputs.only_publish }}
         run: |
-          pnpm lerna version \
-            --force-publish \
-            --conventional-commits --conventional-prerelease="*" \
-            --preid next \
-            --message "chore(release): bump version to %v" \
-            --yes \
-            --no-push \
-            --tag-version-prefix ""
+          current="$(node -p "require('./lerna.json').version")"
+          echo "Current version on next: ${current}"
+
+          case "${current}" in
+            *-*)
+              # Already on the prerelease line → count up `-next.N`.
+              pnpm lerna version \
+                --force-publish \
+                --conventional-commits --conventional-prerelease="*" \
+                --preid next \
+                --message "chore(release): bump version to %v" \
+                --yes \
+                --no-push \
+                --tag-version-prefix ""
+              ;;
+            *)
+              # Stable → open the line at the next MINOR: X.(Y+1).0-next.0.
+              echo "Stable version — seeding the next line as a minor prerelease."
+              pnpm lerna version preminor \
+                --force-publish \
+                --conventional-commits \
+                --preid next \
+                --message "chore(release): bump version to %v" \
+                --yes \
+                --no-push \
+                --tag-version-prefix ""
+              ;;
+          esac
 
       # Publish under the `next` dist-tag (ADR 0004 §6) — the distinguishing
       # difference from publish.yml, which publishes `latest`. Provenance/OIDC
