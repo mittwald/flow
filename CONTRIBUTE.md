@@ -66,6 +66,10 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
+`pnpm install` also registers the forward-merge merge drivers
+(`pnpm dev:init-merge-drivers`, see below) — you only run that one by hand if
+you skipped an install.
+
 Storybook opens on <http://localhost:6006>. This is where you'll spend most of
 your time when developing components.
 
@@ -79,6 +83,30 @@ installed:
   changes.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
+
+### Resolving a blocked forward-merge
+
+Every change on `main` is merged up into `next` automatically (ADR 0004). When
+that merge hits a conflict the machine cannot resolve, the cascade **pauses** and
+opens an issue — from then on nothing new reaches `next` until someone resolves
+it. That someone needs two commands:
+
+```shell
+pnpm sync:resolve             # merges main into next in your checkout
+# resolve the conflicts in your editor or with `git mergetool`, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
+
+You only ever see the genuinely conflicting files. The version and
+`CHANGELOG.md` divergence between the two lines is absorbed by the merge drivers
+(ADR 0004 §3), which `pnpm install` registers for you via
+`pnpm dev:init-merge-drivers` — a `merge=<driver>` line in `.gitattributes` is
+inert on its own, git only runs a driver that is also in your local git config.
+
+That is also why the resolution happens locally rather than on the pull request:
+**GitHub does not run merge drivers.** A merge computed on GitHub's side shows
+every version and changelog divergence as a conflict, burying the one file that
+actually needs you under dozens of mechanical ones.
 
 ## Repository overview
 
