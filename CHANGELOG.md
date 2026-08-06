@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+### Bug Fixes
+
+* **components:** make third-party style overrides work in the layered stylesheet ([#2799](https://github.com/mittwald/flow/issues/2799)) ([ab20016](https://github.com/mittwald/flow/commit/ab2001688a279dc0194845f0da53342db12a574b))
+
 # [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
 
 ### Bug Fixes
