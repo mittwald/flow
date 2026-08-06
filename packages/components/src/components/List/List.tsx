@@ -1,6 +1,6 @@
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { Header } from "@/components/List/components/Header/Header";
-import headerStyles from "@/components/List/components/Header/Header.module.css";
+import headerStyles from "@/components/List/components/Header/Header.module.scss";
 import { Items } from "@/components/List/components/Items/Items";
 import { Table } from "@/components/List/components/Table";
 import ListModel from "@/components/List/model/List";
