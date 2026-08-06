@@ -158,7 +158,7 @@ Remote generation details:
 Never break a shipped API — keep the old path working and warn at runtime with
 `useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
 of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `password-tools`).
+export (`nextjs`, `mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -196,6 +196,15 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **Overriding a dependency that injects its own stylesheet** (CodeMirror,
+  react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
+  `<style>` elements are unlayered, and unlayered CSS beats layered CSS
+  regardless of specificity, so a normal rule never applies in
+  `all-layered.css`. Only for the library's own `:global()` selectors — the
+  `flow/unlayered-third-party-only` lint rule enforces that, because the marker
+  costs consumers the layer-based overridability of the rule. New or changed
+  rendered behavior here gets a test in `src/tests/layered/`, which runs against
+  the layered variant; the default browser project cannot see this class of bug.
 
 ## Testing — the actual bar
 

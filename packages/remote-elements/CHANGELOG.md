@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.1001](https://github.com/mittwald/flow/compare/0.2.0-alpha.1000...0.2.0-alpha.1001) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.1000](https://github.com/mittwald/flow/compare/0.2.0-alpha.999...0.2.0-alpha.1000) (2026-08-05)
+
+### Reverts
+
+* **PasswordCreationField:** move PasswordCreationField to integrations [#2646](https://github.com/mittwald/flow/issues/2646) ([42095b5](https://github.com/mittwald/flow/commit/42095b5e7ff9049a339cd66af86faebfa3721519))
+
+# [0.2.0-alpha.999](https://github.com/mittwald/flow/compare/0.2.0-alpha.998...0.2.0-alpha.999) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
