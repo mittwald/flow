@@ -9,8 +9,8 @@ import { Icon } from "@mittwald/flow-react-components";
 
 export const LoadingSpinnerWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WIcon>
-      <Icon size="l">
+    <WIcon size={64}>
+      <Icon>
         <IconLoader2 />
       </Icon>
     </WIcon>

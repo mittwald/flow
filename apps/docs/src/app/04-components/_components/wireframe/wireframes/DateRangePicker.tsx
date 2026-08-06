@@ -18,8 +18,8 @@ export const DateRangePickerWireframe: FC = () => (
       <WInput justifyContent="space-between">
         <WRow>
           <WText tone="400" width="30%" />
-          <WIcon>
-            <IconMinus size="s" />
+          <WIcon size={16}>
+            <IconMinus />
           </WIcon>
           <WText tone="400" width="30%" />
         </WRow>

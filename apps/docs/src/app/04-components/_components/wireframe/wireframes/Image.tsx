@@ -10,8 +10,8 @@ import { IconImage } from "@mittwald/flow-react-components";
 export const ImageWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WBox width="fit-content">
-      <WIcon>
-        <IconImage size="l" />
+      <WIcon size={64}>
+        <IconImage />
       </WIcon>
     </WBox>
   </WFrame>

@@ -9,8 +9,8 @@ import { Icon } from "@mittwald/flow-react-components";
 
 export const ColorWireframe: FC = () => (
   <WFrame justifyContent="center">
-    <WIcon>
-      <Icon size="l">
+    <WIcon size={64}>
+      <Icon>
         <IconPalette />
       </Icon>
     </WIcon>

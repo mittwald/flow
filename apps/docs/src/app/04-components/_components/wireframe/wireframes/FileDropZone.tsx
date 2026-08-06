@@ -15,8 +15,8 @@ export const FileDropZoneWireframe: FC = () => (
       justifyContent="center"
       alignItems="center"
     >
-      <WIcon>
-        <IconUpload size="l" />
+      <WIcon size={64}>
+        <IconUpload />
       </WIcon>
     </WInput>
   </WFrame>
