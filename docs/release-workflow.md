@@ -90,6 +90,26 @@ flowchart LR
   (self-gating on the `next` branch) and every merge into `main` releases as it
   does today.
 
+## Repository setup (GitHub side)
+
+The model relies on a few repository settings, not just the workflows. They are
+configured in GitHub (repo admin), and mirrored on the rehearsal fork so a
+dry-run is faithful:
+
+- **Squash-only merge**, with the squash commit defaulting to the **PR title** —
+  that title is the release commit Lerna-Lite reads.
+- **Branch protection + required status checks** on `main` (Conventional PR
+  title, Routing, Version contract, the build), prepared the same way for `next`
+  and the on-demand major line once they exist.
+- **Automation bypass:** the publishing identity (`PUBLISH_PAT`) may push past
+  protection — `publish.yml` pushes the release commit/tag and
+  `forward-merge.yml` pushes the cascade merge directly on the clean path.
+- **Actions may open pull requests** — the forward-merge opens a `sync/*` PR on
+  a real conflict.
+
+The full pre-cut settings checklist lives in the cut playbook
+([#2816](https://github.com/mittwald/flow/issues/2816)).
+
 ## The public contract
 
 At 1.0.0 Flow's semver promise becomes explicit. Guaranteed (breaking → major
