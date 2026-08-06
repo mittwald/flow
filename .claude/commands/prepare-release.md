@@ -142,7 +142,29 @@ requires `--from`/`--to` overrides before doing anything else.
    nothing on the remote.
 
 10. **Freeze branch + Draft PR** (only after confirmation):
-    - Create `release/x.y.0` from `origin/<from>` and push it to `origin`.
+    - Create `release/x.y.0` from `origin/<from>`, **merge `<to>` into it**, and
+      push it to `origin`:
+
+      ```shell
+      git checkout -B release/x.y.0 origin/<from>
+      git merge --no-ff -m "chore(sync): merge <to> into release/x.y.0" origin/<to>
+      git push origin release/x.y.0
+      ```
+
+      The merge is what makes the PR mergeable at all. **GitHub does not run the
+      `.gitattributes` merge drivers** — a driver only exists in local git
+      config — so a merge computed on GitHub's side surfaces every `version` and
+      `CHANGELOG.md` divergence between the lines as a conflict. Measured in the
+      #2769 rehearsal: the first promotion PR came out `CONFLICTING` across 35
+      files, 34 of them mechanical. Here the drivers are registered (Step 2), so
+      the churn is absorbed.
+
+      It cannot change any content: Step 2 already established that merging
+      `<to>` into `<from>` produces no code delta, so this merge only moves
+      ancestry — which is precisely what the promotion is supposed to establish.
+      If it nonetheless conflicts, stop and report the files; something changed
+      between Step 2 and here.
+
     - Open a **Draft** PR into `<to>`. The title must be a **Conventional
       Commit** — `commit-guard.yml` lints every PR title and rejected a plain
       `Release x.y.0` in the #2769 rehearsal. It must also **not** begin with
