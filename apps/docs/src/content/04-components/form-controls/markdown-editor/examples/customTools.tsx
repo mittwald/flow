@@ -1,8 +1,6 @@
 import {
   MarkdownEditor,
-  Label,
   Icon,
-  FieldDescription,
 } from "@mittwald/flow-react-components";
 import { IconAt, IconMoodSmile } from "@tabler/icons-react";
 
@@ -14,7 +12,7 @@ export default function MarkdownEditorExample() {
       toolbarTools={[
         {
           id: "mention",
-          label: "Insert mention",
+          label: "Mention einfügen",
           icon: (
             <Icon>
               <IconAt />
@@ -36,7 +34,7 @@ export default function MarkdownEditorExample() {
         },
         {
           id: "emoji",
-          label: "Insert emoji",
+          label: "Emoji einfügen",
           icon: (
             <Icon>
               <IconMoodSmile />
@@ -57,12 +55,6 @@ export default function MarkdownEditorExample() {
           },
         },
       ]}
-    >
-      <Label>Custom Tools Example</Label>
-      <FieldDescription>
-        Click the custom buttons to insert mentions or
-        emojis.
-      </FieldDescription>
-    </MarkdownEditor>
+    />
   );
 }
