@@ -1,6 +1,5 @@
 import { type FC } from "react";
 import styles from "@/components/MarkdownEditor/MarkdownEditor.module.scss";
-import type { MarkdownEditorCustomTool } from "@/components/MarkdownEditor/MarkdownEditor";
 import {
   IconBold,
   IconCode,
@@ -19,14 +18,13 @@ import {
   ModeButton,
   type ModeButtonProps,
 } from "@/components/MarkdownEditor/components/ModeButton";
-import { Button, type ButtonProps } from "@/components/Button";
+import { type ButtonProps } from "@/components/Button";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: ModeButtonProps["currentMode"];
   onModeChange: ModeButtonProps["onChange"];
   onToolPressed: ToolBarButtonProps["onPress"];
-  customTools?: MarkdownEditorCustomTool[];
-  onCustomToolPressed?: (tool: MarkdownEditorCustomTool) => void;
 }
 
 export const Toolbar: FC<ToolbarProps> = (props) => {
@@ -70,27 +68,7 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
           <IconOrderedList />
         </ToolbarButton>
 
-        {props.customTools?.map((tool) => {
-          const isToolDisabled =
-            props.isDisabled ||
-            props.currentMode === "preview" ||
-            tool.isDisabled;
-
-          return (
-            <Button
-              key={tool.id}
-              data-button-type={tool.id}
-              aria-label={tool.label}
-              size="s"
-              variant="plain"
-              color="dark"
-              isDisabled={isToolDisabled}
-              onPress={() => props.onCustomToolPressed?.(tool)}
-            >
-              {tool.icon}
-            </Button>
-          );
-        })}
+        <UiComponentTunnelExit id="toolbarActions" component="MarkdownEditor" />
       </div>
 
       <ModeButton

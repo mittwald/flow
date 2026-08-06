@@ -66,9 +66,9 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 
 ## Custom Buttons
 
-Mit der Property `toolbarTools` lässt sich die Toolbar des Markdown Editors um
-eigene Buttons erweitern. So können beispielsweise Mentions, Emojis oder andere
-benutzerdefinierte Funktionen integriert werden. `toolbarTools` erwartet ein
-Array von `MarkdownEditorCustomTool`-Objekten.
+Ergänze die Toolbar des Markdown Editors, indem du zusätzliche Actions direkt
+als Children von `<MarkdownEditor />` deklarierst. So lassen sich einfache
+Buttons genauso integrieren wie komplexere Trigger-Komponenten wie
+`<ContextMenuTrigger />` oder `<ModalTrigger />`.
 
 <LiveCodeEditor example="customTools" editorCollapsed stretch />
