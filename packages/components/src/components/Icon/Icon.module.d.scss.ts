@@ -1,0 +1,22 @@
+declare const classNames: {
+  readonly icon: "icon";
+  readonly "size-m": "size-m";
+  readonly "svg-inline--fa": "svg-inline--fa";
+  readonly "size-s": "size-s";
+  readonly "size-l": "size-l";
+  readonly neutral: "neutral";
+  readonly danger: "danger";
+  readonly success: "success";
+  readonly warning: "warning";
+  readonly info: "info";
+  readonly unavailable: "unavailable";
+  readonly blue: "blue";
+  readonly violet: "violet";
+  readonly teal: "teal";
+  readonly lilac: "lilac";
+  readonly dark: "dark";
+  readonly light: "light";
+  readonly "dark-static": "dark-static";
+  readonly "light-static": "light-static";
+};
+export default classNames;
