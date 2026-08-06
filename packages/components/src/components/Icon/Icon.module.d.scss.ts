@@ -1,6 +1,7 @@
 declare const classNames: {
   readonly icon: "icon";
   readonly "size-m": "size-m";
+  readonly unlayered: "unlayered";
   readonly "svg-inline--fa": "svg-inline--fa";
   readonly "size-s": "size-s";
   readonly "size-l": "size-l";
