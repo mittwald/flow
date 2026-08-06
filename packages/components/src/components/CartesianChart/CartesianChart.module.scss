@@ -30,4 +30,8 @@
   svg {
     overflow: visible;
   }
+
+  :global(.recharts-tooltip-wrapper) {
+    z-index: 1;
+  }
 }
