@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
+
+### Bug Fixes
+
+* **MarkdownEditor:** enable flex-wrap for toolbar buttons ([#2806](https://github.com/mittwald/flow/issues/2806)) ([8ce4626](https://github.com/mittwald/flow/commit/8ce4626b21ace74549c13769f8e8bba3138132e0))
+
 # [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
 
 ### Bug Fixes
