@@ -102,7 +102,7 @@ jobs:
       # changelog) is still open there.
       - name: Identify merge context 🔎
         id: ctx
-        if: ${{ !inputs.only_publish && !inputs.release_as }}
+        if: ${{ !inputs.only_publish }}
         run: |
           set -euo pipefail
           version=""
@@ -126,6 +126,25 @@ jobs:
                 echo "::notice::Promotion merge from '${head_ref}' (PR #${pr}) — graduating to ${version}."
                 ;;
             esac
+          elif [ -n "${{ inputs.release_as }}" ] && [ "${{ github.ref_name }}" != "main" ]; then
+            # The one-time cut is dispatched ON ITS OWN BRANCH, never merged
+            # first: merging it would itself publish, and with
+            # --conventional-prerelease dropped that publish would be a stable
+            # release (#2769 finding 15). The branch's PR is therefore still open
+            # at cut time, which makes it the natural carrier of the curated
+            # notes — the same marker block a promotion uses, read by the same
+            # step below. Without it the 1.0.0 Release body would read "Version
+            # bump only for package @mittwald/flow-project": the cut is a forced
+            # bump over an empty commit range, so conventional-changelog has
+            # nothing to describe.
+            pr="$(gh api \
+              "repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository_owner }}:${{ github.ref_name }}" \
+              --jq '.[0].number // ""')"
+            if [ -n "$pr" ]; then
+              echo "::notice::Cut dispatched on '${{ github.ref_name }}' — curated notes from PR #${pr}."
+            else
+              echo "::warning::No open PR for '${{ github.ref_name }}' — the release body will fall back to CHANGELOG.md."
+            fi
           fi
           echo "version=${version}" >> "$GITHUB_OUTPUT"
           echo "pr=${pr}" >> "$GITHUB_OUTPUT"
