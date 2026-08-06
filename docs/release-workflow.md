@@ -61,11 +61,28 @@ flowchart LR
   drivers absorb the mechanical version/`CHANGELOG.md` divergence between the
   lines, so only a genuine code conflict ever reaches a human (as a `sync/*`
   PR). See [ADR 0004](adr/0004-forward-merge-main-into-next.md).
-- **Promotion.** A maintainer promotes the features accumulated on `next` down
-  to `main` through a curated `next → main` Release-PR (the `/prepare-release`
-  command builds it). Merging that PR _is_ the release moment: it graduates the
-  prerelease to a stable Minor, publishes `latest`, and creates the GitHub
-  Release from the hand-curated changelog.
+- **Promotion (`next` → `main`).** When enough features have accumulated, a
+  maintainer promotes them to a stable Minor (or Major) through a curated
+  `next → main` Release-PR, built by the **`/prepare-release`** command.
+  Roughly, the command:
+  - freezes the release state on a `release/x.y.0` branch off `next`;
+  - **graduates the version in the PR itself** — bumps every package +
+    `lerna.json` to the stable `x.y.0` and prepends the changelog entry — so the
+    diff reads `x.(y-1).z → x.y.0` instead of promoting a `-next.N` prerelease,
+    and the published version does not hinge on CI re-deriving it;
+  - drafts a **curated, user-facing changelog** (grouped by feature —
+    highlights, deprecations, migrations — not raw commit subjects) into a
+    marker block in the PR body, and opens it as a **Draft** for the maintainer
+    to edit.
+
+  It does **not** build, tag, publish, or create the GitHub Release. **Merging
+  the PR is the release moment**: `publish.yml` detects the already-graduated
+  version, publishes `latest`, and builds the GitHub Release from that marker
+  block verbatim (#2724). Full behaviour + the notes shape:
+  [`.claude/commands/prepare-release.md`](../.claude/commands/prepare-release.md)
+  and
+  [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
+
 - **The cut.** The one-time move from the `0.2.0-alpha.*` line to `1.0.0` is a
   manual `workflow_dispatch` (`release_as=1.0.0`) off `main`; `next` is branched
   from `main` immediately afterwards. Until the cut, `next` does not exist, so
