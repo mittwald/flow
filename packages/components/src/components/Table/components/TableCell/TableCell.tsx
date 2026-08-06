@@ -28,7 +28,7 @@ export const TableCell: FC<TableCellProps> = (props) => {
 
   const rootClassName = clsx(
     styles.cell,
-    styles[`horizontal-align-${horizontalAlign}`],
+    styles[`horizontal-align-${horizontalAlign}` as keyof typeof styles],
     className,
   );
 

@@ -42,7 +42,11 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.segmentedControlContainer,
-    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+    styles[
+      getContainerBreakpointSizeClassName(
+        containerBreakpointSize,
+      ) as keyof typeof styles
+    ],
     className,
   );
 
