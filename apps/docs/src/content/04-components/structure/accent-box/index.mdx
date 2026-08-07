@@ -4,4 +4,139 @@ description:
   Die AccentBox dient dazu, besondere Inhalte dekorativ hervorzuheben.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung einer AccentBox darauf, dass...
+
+- sie sparsam eingesetzt wird, um gezielt Aufmerksamkeit zu lenken.
+- keine kritischen Inhalte darin platziert werden. Wenn Informationen zwingend
+  wahrgenommen werden müssen, verwende stattdessen einen
+  [Alert](/04-components/status/alert/overview).
+- ein ausreichender Kontrast zum Inhalt besteht – insbesondere, wenn Texte
+  mithilfe der [Color](/04-components/content/color/overview)-Component
+  eingefärbt werden.
+
+## Verwendung
+
+Verwende eine AccentBox, um...
+
+- besondere Inhalte visuell hervorzuheben.
+- ergänzenden Inhalt darzustellen, der nicht zwingend wahrgenommen werden muss.
+- Umfragen aufmerksamkeitsstark zu präsentieren.
+- Werbemaßnahmen ansprechend zu platzieren.
+- kontextbezogene Hinweise oder Tipps zu geben.
+
+## AccentBox vs. Alert
+
+AccentBoxen und [Alerts](/04-components/status/alert/overview) dienen beide
+dazu, dem User zusätzliche Informationen bereitzustellen. Eine einfache
+Faustregel hilft bei der Entscheidung: Kann die Information ignoriert werden,
+ohne negative Folgen? Dann ist eine AccentBox die richtige Wahl. Wenn das
+Ignorieren hingegen zu Problemen führen könnte – etwa bei sicherheitsrelevanten
+Hinweisen oder wichtigen Systemmeldungen – sollte ein Alert mit entsprechendem
+Status verwendet werden.
+
+<DoAndDont>
+  <Plain heading="Verwende AccentBoxen, um z. B. ...">
+    - ergänzende, aber nicht kritische Hinweise anzuzeigen.
+    - kontextuelle Informationen oder Tipps zu geben.
+    - visuell strukturierende Inhalte einzubetten, ohne zu unterbrechen.
+  
+  </Plain>
+
+  <Plain heading="Verwende Alerts, um z. B. ...">
+    - den User auf sicherheits- oder funktionsrelevante Informationen hinzuweisen.
+    - vor möglichen Problemen oder Systemzuständen zu warnen.
+    - dringende oder aktionsrelevante Statusmeldungen zu kommunizieren.
+
+  </Plain>
+</DoAndDont>
+
+# Playground
+
+In der `<AccentBox />` lassen sich Inhalte platzieren, die sich bewusst vom
+restlichen Content abheben sollen. Die Component sorgt dabei für die
+Hintergrundfarbe und das Padding. Die Inhalte innerhalb der Box können mithilfe
+von Struktur-Components wie [Section](/04-components/structure/section/overview)
+oder [Flex](/04-components/structure/flex/overview) angeordnet werden.
+
+<LiveCodeEditor />
+
+---
+
+# Color
+
+Beim Verwenden der AccentBox muss während der Entwicklung auf einen
+ausreichenden Kontrast zwischen Hintergrundfarbe und Inhalt geachtet werden.
+Falls der Kontrast nicht ausreicht, sollte mit der
+[Light oder Dark Color](/02-foundations/01-design/02-colors#light-und-dark-color)
+gearbeitet werden.
+
+---
+
+# Background Color
+
+## Base Colors
+
+Die AccentBox unterstützt die Basisfarben **Blue** und **Neutral** (Default).
+Diese helfen dabei, Inhalte für den User dezent hervorzuheben.
+
+<LiveCodeEditor example="baseColor" editorCollapsed />
+
+## Brand Colors
+
+Die Brand Colors **Teal**, **Violet**, **Lilac**, **Navy** und **Green** eignen
+sich besonders für werbliche Inhalte und Marketing Storys.
+
+<LiveCodeEditor example="brandColor" editorCollapsed row />
+
+## Custom Color
+
+Die AccentBox unterstützt zusätzlich eine benutzerdefinierte Farbe. Diese Option
+sollte nur in Ausnahmefällen genutzt werden. Für die meisten Use Cases sollten
+**Base Colors** oder **Brand Colors** verwendet werden, damit die visuelle
+Konsistenz erhalten bleibt.
+
+<LiveCodeEditor example="customColor" editorCollapsed />
+
+## Gradient
+
+Eine AccentBox mit Gradient hebt sich visuell stärker hervor. Dadurch eignet
+sich diese Variante besonders für aufmerksamkeitsstarke Inhalte wie
+Werbemaßnahmen.
+
+<LiveCodeEditor example="gradient" editorCollapsed />
+
+---
+
+# Background Image
+
+Die AccentBox unterstützt ein Hintergrundbild. Über `aspectRatio` kann ein
+festes Seitenverhältnis definiert werden.
+
+<LiveCodeEditor example="backgroundImage" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Link
+
+Die AccentBox kann in einen [Link](/04-components/navigation/link/overview)
+gewrappt werden, um die gesamte Component klickbar zu machen.
+
+<LiveCodeEditor example="link" editorCollapsed row />
+
+## LayoutCard
+
+Befindet sich eine AccentBox als erstes Element innerhalb einer
+[LayoutCard](/04-components/structure/layout-card/overview), füllt sie die
+gesamte Größe der LayoutCard aus.
+
+<LiveCodeEditor example="layoutCard" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

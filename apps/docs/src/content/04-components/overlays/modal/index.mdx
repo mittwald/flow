@@ -3,4 +3,209 @@ component: Modal
 description: Ein Modal zeigt Inhalte zentriert als Overlay über der Hauptseite.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+- Setze Modals nur ein, wenn sie wirklich notwendig sind. Ein geöffnetes Modal
+  zieht die gesamte Aufmerksamkeit des Nutzers auf sich und lenkt von der
+  restlichen Seite ab.
+- Stelle umfangreiche Prozesse in einem OffCanvas dar.
+- Überfordere den Nutzer nicht mit mehr als drei Aktionen im Modal-Footer.
+- Stelle sicher, dass das Modal leicht zu schließen ist, damit der Nutzer nicht
+  in eine Sackgasse gerät.
+- Wähle eine verständliche und prägnante Überschrift und halte den restlichen
+  Inhalt leicht verständlich.
+- Es sollte sich maximal ein weiteres Modal über einem bereits geöffneten Modal
+  öffnen.
+
+## Verwendung
+
+Verwende ein Modal, um ...
+
+- Dialoge zur Abfrage anzuzeigen, z. B. um zu bestätigen, ob etwas wirklich
+  gelöscht werden soll.
+- Erstellungsprozesse zu ermöglichen, ohne die aktuelle Seite zu verlassen.
+- Formulare zur Bearbeitung anzuzeigen.
+
+## Modal vs. OffCanvas
+
+Modal und OffCanvas erfüllen beide den Zweck, dem Nutzer Informationen in einem
+Overlay zu vermitteln. Auch technisch sind sie identisch.
+
+Dennoch sollte je nach Anwendungsfall zwischen beiden unterschieden werden, da
+die unterschiedliche Darstellung verschiedene Vorteile mit sich bringt.
+
+<DoAndDont>
+  <Info heading="Verwende ein Modal, um z. B. ...">
+    - einfache Dialoge wie Abfragen oder kurze Anlege-Prozesse anzuzeigen.
+
+    - kurze Bearbeitungsmöglichkeiten darzustellen.
+
+    - Inhalte anzuzeigen, die kein Scrollen erfordern und für die die Breite des Modals ausreicht.
+
+  </Info>
+  <Info heading="Verwende ein OffCanvas, um z. B. ...">
+    - Inhalte anzuzeigen, die nicht gekürzt werden können und ein Scrollen
+    erfordern.
+
+    - sehr breite Inhalte anzuzeigen.
+
+  </Info>
+</DoAndDont>
+
+---
+
+# Inhalt
+
+In den meisten Fällen ist eine
+[ActionGroup](/04-components/actions/action-group/overview) im Footer des Modals
+erforderlich, um Eingaben zu bestätigen oder das Modal zu verlassen.
+
+Beachte bei der Verwendung jedoch, dass manche Inhalte keine Bestätigung
+erfordern, da ...
+
+- manche Modals rein informativen Inhalt enthalten.
+- einige Inhalte sich unmittelbar selber speichern und zu direkten Änderungen
+  führen (z. B. Einstellungen in einem OffCanvas mittels
+  [Switch](/04-components/form-controls/switch/overview)).
+- bestimmte Eingaben sich automatisch selber validieren (z. B.
+  2-FA-Authentifikation) und das Modal schließen.
+
+In diesen Fällen benötigt die ActionGroup keine Hauptaktion.
+
+<Info bgColor="light" example="noAction">
+  Manche Eingaben erfordern keine explizite Bestätigung. An diesen Stellen ist
+  es ausreichend, nur einen „Schließen“-Button in der ActionGroup des Modal
+  Footers anzuzeigen.
+</Info>
+
+---
+
+# Writing Guidelines
+
+## Heading
+
+Beachte bei der [Heading](/04-components/content/heading/overview) folgende
+Punkte:
+
+- Halte Überschriften kurz und verständlich.
+- Zeichne sie semantisch korrekt aus und halte die Reihenfolge (H2, H3, H4, ...)
+  ein. Die erste Überschrift in einem Modal ist semantisch immer eine H2.
+- HTML-Semantik und visuelle Darstellung können separat voneinander festgelegt
+  werden.
+- Beginne Lösch-Prozesse immer mit einer Frage.
+
+<DoAndDont>
+  <Do example="headingsDo" />
+  <Dont example="headingsDont" />
+</DoAndDont>
+
+## Text
+
+Unter der Heading befindet sich oft ein beschreibender Text. Dabei sind folgende
+Punkte zu beachten:
+
+- Setze wichtige Informationen an den Anfang.
+- Hebe wichtige Informationen in Bold hervor.
+- Verzichte auf einen passiven Satzbau und formuliere aktiv.
+
+---
+
+# Verhalten
+
+## Responsive Layout
+
+Wenn die Bildschirmgröße weniger als 551 px beträgt, dann füllt das Modal die
+gesamte Breite des Bildschirms aus und wird am unteren Rand des Bildschirms
+angezeigt.
+
+<Info heading="Mobile Variante" mobile example="static" />
+
+## Schließen eines Modals
+
+Das Schließen eines Modals sollte einfach sein, besonders wenn im Modal nichts
+Wichtiges vom Nutzer bestätigt werden muss. Es sollte möglich sein, es durch
+einen Klick außerhalb des Modals oder durch Drücken der "Schließen"- oder
+"Abbrechen"-Taste oder der Esc-Taste zu schließen.
+
+# Playground
+
+Verwende `<Modal />`, um ein Modal darzustellen. Da ein Modal in der Regel nur
+durch eine Aktion des Nutzers erscheint, wird ein `<ModalTrigger />` in
+Kombination z. B. einem `<Button />` benötigt.
+
+<LiveCodeEditor />
+
+---
+
+# Variants
+
+## OffCanvas
+
+Neben der klassischen Darstellung lässt sich das Modal auch als OffCanvas
+öffnen.
+
+<LiveCodeEditor example="offCanvas" editorCollapsed />
+
+---
+
+# Sizes
+
+Das Modal gibt es in zwei Standardgrößen: **S** und **M**. Beide Größen sind
+sowohl als klassisches Modal als auch in der OffCanvas-Variante verfügbar.
+
+<LiveCodeEditor example="size" editorCollapsed row />
+
+**Size S:** Ein Modal in der Size S (Breite 660 px) wird zum Beispiel für
+einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
+
+**Size M:** Ein Modal in der Size M (Breite 900 px) wird für komplexere Dialoge
+(z. B. Erstellungs-Prozesse mit mehreren Eingabefeldern) verwendet.
+
+---
+
+# Ungespeicherte Änderungen
+
+Eingaben in einem Modal gehen verloren, wenn es geschlossen wird. Damit das
+nicht unbemerkt passiert, kann zuvor ein Bestätigungs-Dialog erscheinen: bei
+Escape und bei einem Klick außerhalb des Modals. Aktionen in der
+`<ActionGroup />` und der Close-Button in der Überschrift schließen das Modal
+dagegen sofort – hier verwirft der Nutzer seine Änderungen bewusst.
+
+Enthält das Modal eine
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview), passiert
+das automatisch: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
+einem erfolgreichen Submit oder einem `form.reset()` nicht mehr.
+
+Ohne Form – oder wenn du selbst entscheiden willst, wann es etwas zu verlieren
+gibt – setzt du `confirmOnClose`:
+
+<LiveCodeEditor example="confirmOnClose" editorCollapsed />
+
+Beide Wege ergänzen sich: Ein `confirmOnClose` am Modal bleibt wirksam, auch
+wenn eine enthaltene Form gerade keine ungespeicherten Änderungen hat.
+
+---
+
+# Kombiniere mit ...
+
+## Controller
+
+Neben dem `<ModalTrigger />` kann das Modal auch über einen Controller gesteuert
+werden.
+
+Dieser Controller steht auch in Modals zur Verfügung, die über den ModalTrigger
+geöffnet wurden.
+
+<LiveCodeEditor example="controller" editorCollapsed />
+
+## Form
+
+Verwende eine Form innerhalb eines Modals wie im folgenden Beispiel.
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

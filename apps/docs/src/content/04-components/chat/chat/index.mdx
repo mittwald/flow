@@ -3,4 +3,72 @@ component: Chat
 description: Der Chat kombiniert den MessageThread mit einer Texteingabe.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Die Chat-Component dient dem Aufbau eines vollständigen Chat-Interfaces. Sie
+kombiniert einzelne Components wie den
+[MessageThread](/04-components/chat/message-thread/overview) und die Texteingabe
+durch die [TextArea](/04-components/form-controls/text-area/overview) zu einer
+funktionalen Einheit. Dadurch entfällt für Entwickler die Notwendigkeit, diese
+Components manuell zusammenzustellen.
+
+## Best Practices
+
+Achte bei der Verwendung einer Chat-Component darauf, dass ...
+
+- das `aria-label` der Texteingabe bei abweichender Funktionalität angepasst
+  wird.
+- der Wert der `height` Property gut gewählt ist, um ausreichend Platz zum Lesen
+  des Chats zu gewährleisten.
+
+## Verwendung
+
+Verwende die Chat-Component, um einen konsistenten und wiederverwendbaren
+Chatbereich in einer Anwendung bereitzustellen.
+
+# Playground
+
+Verwende `<Chat />`, um einen Chat darzustellen.
+
+Der Chat kombiniert dabei den
+[MessageThread](/04-components/chat/message-thread/overview) mit einem
+Textinput. Mit der `height` Property lässt sich die Höhe des Chats festlegen.
+Gleichzeitig sorgt sie dafür, dass die Texteingabe am unteren Rand platziert
+wird.
+
+<LiveCodeEditor />
+
+---
+
+# Kombiniere mit ...
+
+## Upload
+
+Ein Chat kann um eine Uploadfunktion erweitert werden. Dafür sollte ein
+[FileField](/04-components/form-controls/file-field/overview) genutzt werden,
+über das User Dateien auswählen können. Die hochgeladenen Dateien können dann in
+einer [FileCardList](/04-components/upload/file-card-list/overview) dargestellt
+werden.
+
+<LiveCodeEditor example="upload" editorCollapsed />
+
+---
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+## Markdown Editor
+
+Statt einer TextArea kann auch der
+[MarkdownEditor](/04-components/form-controls/markdown-editor/overview)
+verwendet werden.
+
+<LiveCodeEditor example="markdown-editor" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

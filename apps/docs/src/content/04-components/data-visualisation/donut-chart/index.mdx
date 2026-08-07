@@ -3,4 +3,104 @@ component: DonutChart
 description: Das DonutChart stellt Verteilungen und Anteile als Ring dar.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Ein DonutChart visualisiert proportionale Daten in Form eines ringförmigen
+Diagramms. Es eignet sich besonders zur Darstellung von Anteilen oder
+Verteilungen. Es dient als visuelle Alternative zur ProgressBar. Durch seine
+ansprechende und fokussierende Darstellung rückt es die Daten besonders in den
+Mittelpunkt der Nutzerwahrnehmung, was es ideal für Dashboards und andere
+datenintensive Oberflächen macht.
+
+## Best Practices
+
+Achte bei der Verwendung eines DonutCharts darauf, dass ...
+
+- jede Segmentfarbe eindeutig und kategorisch unterscheidbar ist. Verwende dafür
+  die
+  [Categorical Colors](https://flow.mittwald.de/02-foundations/01-design/02-colors).
+- die Anzahl der Segmente 6 nicht überschreitet, da eine zu große Segmentanzahl
+  die Lesbarkeit stark beeinträchtigt.
+- die Segmente nach ihrer Größe sortiert sind, beginnend mit dem größten Wert
+  auf der 12-Uhr-Position, und danach im Uhrzeigersinn absteigend folgen.
+
+## Verwendung
+
+Verwende ein DonutChart, um ...
+
+- proportionale Daten übersichtlich und intuitiv darzustellen.
+- verschiedene Kategorien oder Anteile innerhalb eines Ganzen hervorzuheben.
+- Daten gezielt in den Fokus der User zu rücken, etwa in Dashboards oder anderen
+  datenintensiven Oberflächen.
+
+# Playground
+
+Verwende `<DonutChart />`, um ein DonutChart darzustellen.
+
+<LiveCodeEditor />
+
+---
+
+# Mit Unit
+
+Im default wird das DonutChart immer mit Prozentangabe angezeigt. Über das
+Property `formatOptions` können aber auch andere Einheiten gewählt werden. (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat))
+
+## Gigabyte
+
+<LiveCodeEditor example="unit" editorCollapsed />
+
+## Dezimalzahl
+
+<LiveCodeEditor example="decimal" editorCollapsed />
+
+---
+
+# Größen
+
+Die Size des DonutCharts kann Medium oder Large sein. Medium ist dabei die
+Standardgröße.
+
+<LiveCodeEditor example="size" editorCollapsed row />
+
+---
+
+# Mit alternativem Text
+
+Über die `children` kann der Text innerhalb des DonutCharts überschrieben werden
+
+<LiveCodeEditor example="children" editorCollapsed />
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Info**,
+**Success**, **Warning** und **Danger**.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Segmente
+
+Die Anzeige des DonutCharts kann über das `segments` Property um einzelne
+Abschnitte ergänzt werden. Der `value` ergibt sich in diesem Fall aus der Summe
+der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern wird
+automatisch die `Legend` Component angezeigt. Über das `showLegend` Property
+kann diese ein- und ausgeblendet werden. Die Position der Legende kann über das
+Property `legendPosition` bestimmt werden.
+
+Die Farben der Segmente werden automatisch festgelegt, können aber über das
+`color`-Property, mit
+[Categorical Colors](/02-foundations/01-design/02-colors#categorical-color) oder
+eigenen Colors überschrieben werden. Beim Überschreiben muss darauf geachtet
+werden, dass nebeneinander liegende Farben weiterhin einen ausreichenden
+Kontrast zueinander haben.
+
+<LiveCodeEditor example="segments" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

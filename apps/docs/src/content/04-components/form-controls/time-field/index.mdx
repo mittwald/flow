@@ -3,4 +3,80 @@ component: TimeField
 description: Mit dem TimeField können User eine konkrete Uhrzeit angeben.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung eines TimeFields darauf, dass ...
+
+- ein verständliches [Label](/04-components/content/label/overview) wie
+  „Uhrzeit“ verwendet wird.
+- das Zeitformat dem vertrauten Format des Users und dem Nutzungskontext
+  entspricht.
+- sinnvolle Defaultwerte gewählt werden.
+- Eingaben ggf. mit `minValue` und `maxValue` eingeschränkt werden – z. B.
+  sodass nur Zeiten zwischen 8 und 16 Uhr möglich sind.
+- die Genauigkeit der Zeitangabe zur Nutzung passt (s.`granularity` Property) –
+  z. B. reicht bei Erinnerungen die Angabe von Stunden und Minuten; Sekunden
+  wären unnötig.
+
+## Verwendung
+
+Verwende ein TimeField, um dem User eine konkrete Uhrzeit angeben zu lassen –
+z. B. für einen Termin.
+
+# Playground
+
+Verwende `<TimeField />`, um ein TimeField darzustellen. Die Values des
+TimeFields sind Objekte aus dem
+[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
+
+<LiveCodeEditor stretch />
+
+---
+
+# Min- und Max-Values
+
+Die wählbare Uhrzeit lässt sich über `minValue` und `maxValue` begrenzen.
+
+<LiveCodeEditor example="minMax" editorCollapsed stretch />
+
+---
+
+# Granularity
+
+Mit der `granularity` Property wird definiert, ob Stunden, Minuten und/oder
+Sekunden auswählbar sind.
+
+<LiveCodeEditor example="granularity" editorCollapsed />
+
+---
+
+# Disabled
+
+Ist das TimeField **disabled**, ist keine Interaktion möglich.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Benutze das [ContextualHelp](/04-components/overlays/contextual-help/overview),
+wenn zusätzliche Informationen bereitgestellt werden sollen, die zu umfangreich
+für die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

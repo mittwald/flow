@@ -4,4 +4,116 @@ description:
   Das ColumnLayout organisiert Inhalte in Spalten, definierbar je Breakpoint.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+- Zu viele Spalten können den Content überladen und unübersichtlich machen. In
+  der Regel reichen maximal 4 Spalten aus.
+- Integriere bei Bedarf mehrere ColumnLayouts ineinander, um Inhalte optisch zu
+  gruppieren.
+- Wähle die Spaltenbreiten bewusst: Einheitliche Breiten schaffen ein
+  harmonisches Layout, während unterschiedliche Breiten den Fokus des Users auf
+  breitere Inhalte lenken.
+- Verwende das ColumnLayout in Kombination mit der
+  [Section](/04-components/structure/section/overview), um einfach
+  übersichtliche Layouts zu erstellen.
+
+# Verwendung
+
+Verwende ein ColumnLayout, um ...
+
+- das Layout eines Dashboards festzulegen.
+- Formularfeldern eine klare Struktur zu geben.
+- Inhalte auf unterschiedlichen Geräten übersichtlich darzustellen.
+
+---
+
+# Verhalten
+
+## Responsive Layout
+
+Das ColumnLayout folgt folgenden Breakpoints:
+
+- Größe `s` bis 550 Pixel Breite: `[1]`
+- Größe `m` bis 850 Pixel Breite: `[1, 1]`
+- Größe `l` ab 851 Pixel Breite: `[1, 1, 1]`
+
+Beachte, dass die Breakpoints sich nicht auf die Bildschirmgröße des Endgeräts
+beziehen. Sie beziehen sich auf die Breite des Containers, in dem das
+ColumnLayout verwendet wird. Für jeden Breakpoint kann sowohl die Anzahl der
+Spalten als auch deren Größenverteilung individuell festgelegt werden (siehe
+Overview). So bricht das Layout automatisch um, wenn es eine bestimmte Breite
+unterschreitet.
+
+# Playground
+
+Verwende `<ColumnLayout />`, um ein ColumnLayout darzustellen.
+
+<LiveCodeEditor />
+
+Das ColumnLayout erzeugt ein flexibles Spalten-Layout, das für die Breakpoints
+s, m und l individuell angepasst werden kann. Diese Breakpoints beziehen sich
+nicht auf die Bildschirmgröße, sondern auf die Breite des Containers, in dem das
+ColumnLayout verwendet wird. Standardmäßig sind die Spalten wie folgt definiert:
+
+- Größe `s` bis 550 Pixel Breite: `[1]`
+- Größe `m` bis 850 Pixel Breite: `[1, 1]`
+- Größe `l` ab 851 Pixel Breite: `[1, 1, 1]`
+
+In der Definition der Spalten-Breiten werden sowohl die Anzahl der Spalten als
+auch ihr Größenverhältnis festgelegt. Eine Aufteilung wie [1, 2, 1] erzeugt zum
+Beispiel drei Spalten, wobei die mittlere Spalte doppelt so breit ist wie die
+beiden äußeren.
+
+---
+
+# Benutzerdefinierte Werte
+
+Für jeden Breakpoint können eigene Werte für die Spaltenanzahl und deren
+Größenverhältnis festgelegt werden. Wenn für einen größeren Breakpoint keine
+eigenen Werte definiert sind, übernimmt er automatisch die Werte des
+nächstkleineren Breakpoints. Standardwerte werden nur verwendet, wenn bei keinem
+kleineren Breakpoint benutzerdefinierte Werte angegeben sind. Beispiel:
+
+- Größe `s` bis 550 Pixel Breite: `[1]` (Default-Wert)
+- Größe `m` bis 850 Pixel Breite: `[2, 1]` (benutzerdefinierter Wert)
+- Größe `l` ab 851 Pixel Breite: `[2, 1]` (Wert von m geerbt)
+
+In diesem Beispiel wurde für den Breakpoint `m` eine benutzerdefinierte
+Spaltenaufteilung festgelegt. Der Breakpoint `l` übernimmt diese Aufteilung von
+`m`, anstatt auf den Standardwert von `[1, 1, 1]` zurückzufallen. Da für den
+Breakpoint `s` kein benutzerdefinierter Wert angegeben wurde, bleibt er beim
+Standardwert von `[1]`.
+
+<LiveCodeEditor example="custom-values" editorCollapsed />
+
+---
+
+# Ausgeblendete Spalten
+
+Als Werte für die Breakpoints kann neben Zahlen auch `null` mitgegeben werden.
+Das führt dazu, dass die entsprechende Spalte ausgeblendet wird. Hier wird
+beispielsweise das Bild in der kleinsten Ansicht ausgeblendet:
+
+<LiveCodeEditor example="hidden-columns" editorCollapsed />
+
+---
+
+# Abstände
+
+Die Abstände des ColumnLayout können in drei Stufen angepasst werden:
+
+- s = 8px
+- m = 16px
+- l = 24px
+
+Die property `rowGap` steuert die Abstände zwischen den Zeilen (oben und unten),
+`columnGap` die Abstände zwischen den Spalten (rechts und links) und `gap` setzt
+alle Abstände gleichzeitig (oben, unten, rechts und links).
+
+<LiveCodeEditor example="gaps" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

@@ -5,4 +5,29 @@ description:
   Die Form-Component gruppiert Formularfelder, nutzbar nur mit React Hook Form.
 ---
 
-<Wireframe />
+# Playground
+
+<LiveCodeEditor stretch />
+
+---
+
+# Aktionen nach Submit
+
+Aktionen, die nach dem Submit ausgeführt werden sollen – zum Beispiel ein
+Form-Reset oder einen Redirect – sollten im Return-Callback des Submit Handlers
+erfolgen. Dieser Callback kann auch asynchron sein.
+
+```
+const submitHandler = () => {
+  // submit logic
+  return () => {
+    form.reset();
+  };
+};
+```
+
+<LiveCodeEditor example="resetOnSubmit" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

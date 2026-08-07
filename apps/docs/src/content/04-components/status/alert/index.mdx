@@ -5,4 +5,164 @@ description:
   ignorierbare Informationen aufmerksam.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Ein Alert ist ein UI-Element zur Kommunikation wichtiger Informationen, die
+Aufmerksamkeit erfordern. Alerts sollten sparsam und gezielt eingesetzt werden,
+da sie visuell hervorgehoben sind und den Nutzerfluss unterbrechen können. Sie
+können informativ, warnend, kritisch oder bestätigend sein.
+
+## Best Practices
+
+Achte bei der Verwendung eines Alerts darauf, dass ...
+
+- der Alert nur verwendet wird, wenn der Inhalt wirklich die Aufmerksamkeit des
+  Users benötigt. Für rein informative Hinweise kann ein weniger auffälliges
+  Element (z. B. ein Hinweistext) ausreichend sein.
+- der Schweregrad sinnvoll gewählt ist – `danger` für sofortigen
+  Handlungsbedarf, `warning` für Handlungsbedarf, `info` für eine wichtige
+  Information und `success` für einen Erfolg.
+- der Text klar, prägnant und lösungsorientiert formuliert ist. Vermeide
+  technische Fachbegriffe oder Schuldzuweisungen. Beachte die Content Guidelines
+  für
+  [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen).
+- er möglichst eine Handlungsmöglichkeit bietet.
+
+## Verwendung
+
+Verwende einen Alert, um ...
+
+- dem User mitzuteilen, dass ein Fehler aufgetreten ist – verursacht durch sein
+  Handeln oder durch das System.
+- vor einer möglichen Folge oder Auswirkung zu warnen.
+- wichtige Statusänderungen oder Systemereignisse mitzuteilen.
+- zusätzliche wichtige Informationen oder Hinweise in einem bestimmten Kontext
+  bereitzustellen.
+
+## Alert vs AccentBox
+
+Alerts und [AccentBoxen](/04-components/structure/accent-box/overview) dienen
+beide dazu, dem User zusätzliche Informationen bereitzustellen. Eine einfache
+Faustregel hilft bei der Entscheidung: Kann die Information ignoriert werden,
+ohne negative Folgen? Dann ist eine AccentBox die richtige Wahl. Wenn das
+Ignorieren hingegen zu Problemen führen könnte – etwa bei sicherheitsrelevanten
+Hinweisen oder wichtigen Systemmeldungen – sollte ein Alert mit entsprechendem
+Status verwendet werden.
+
+<DoAndDont>
+  <Plain heading="Verwende Alerts, um z. B. ...">
+    - den User auf sicherheits- oder funktionsrelevante Informationen hinzuweisen.
+    - vor möglichen Problemen oder Systemzuständen zu warnen.
+    - dringende oder aktionsrelevante Statusmeldungen zu kommunizieren.
+
+  </Plain>
+
+  <Plain heading="Verwende AccentBoxen, um z. B. ...">
+    - ergänzende, aber nicht kritische Hinweise anzuzeigen.
+    - kontextuelle Informationen oder Tipps zu geben.
+    - visuell strukturierende Inhalte einzubetten, ohne zu unterbrechen.
+  
+  </Plain>
+</DoAndDont>
+
+---
+
+# Anwendung
+
+## Position
+
+Ein Alert sollte immer in unmittelbarem Zusammenhang mit dem betroffenen Inhalt
+platziert werden. Er wird in der passenden
+[Section](/04-components/structure/section/overview) untergebracht oder, wenn
+sein Hinweis für die gesamte Seite gilt, in der
+[LayoutCard](/04-components/structure/layout-card/overview) oberhalb aller
+Sections.
+
+<Do example="section" bgColor="light">
+
+Bezieht sich der Alert auf eine bestimmte Section, wird er im Content der
+Section platziert.
+
+</Do>
+
+<Do example="page" bgColor="light">
+
+Bezieht sich der Alert auf den gesamten Inhalt, wird er prominent oberhalb der
+ersten Section innerhalb der LayoutCard platziert.
+
+</Do>
+
+---
+
+# Writing Guidelines
+
+## Heading
+
+Die [Heading](/04-components/content/heading/overview) sollte das Problem oder
+Ereignis kurz und prägnant benennen.
+
+## Content
+
+Zuerst sollte die Ursache vermittelt werden: Was ist passiert und welche Folgen
+ergeben sich daraus? Anschließend sollte erklärt werden, was der User tun kann,
+um die Situation zu lösen. Wenn es den User unterstützt, können optional
+zusätzlicher Kontext oder technische Hintergründe erklärt werden.
+
+Weitere Formulierungshilfen stehen in unseren Content Guidelines unter
+[Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen).
+
+## Action (optional)
+
+Optional kann ein Alert auch eine direkte Handlung ermöglichen, etwa über einen
+[Button](/04-components/actions/button/overview) zur Problemlösung oder einen
+[Link](/04-components/navigation/link/overview) zu weiteren Informationen bzw.
+zur relevanten Stelle.
+
+## Beispiel
+
+<LiveCodeEditor example="with-content" editorCollapsed />
+
+# Playground
+
+Verwende `<Alert />`, um einen Alert darzustellen.
+
+<LiveCodeEditor />
+
+---
+
+# Mit Inhalt
+
+Der Text eines Alerts sollte klar, prägnant und handlungsorientiert formuliert
+sein. Er erklärt dem User, was passiert ist, warum es relevant ist und was als
+Nächstes zu tun ist. Wenn möglich, biete dem User eine Möglichkeit, sein Problem
+zu lösen – verwende dazu einen [Link](/04-components/navigation/link/overview)
+oder [Button](/04-components/actions/button/overview). Eingefügte Buttons werden
+automatisch in der Größe **Small** dargestellt, um ein ausgewogenes Verhältnis
+im Gesamtbild zu gewährleisten.
+
+<LiveCodeEditor example="with-content" editorCollapsed />
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
+
+<LiveCodeEditor example="status" editorCollapsed />
+
+**Info:** Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+erfordern.
+
+**Warning:** Hinweise auf mögliche Risiken mit einer klaren Handlungsempfehlung.
+
+**Danger:** Akute Fehlerzustände oder kritische Probleme, die sofortige
+Aufmerksamkeit erfordern.
+
+**Success:** Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+
+**Unavailable:** Zustände aufgrund von nicht verfügbaren oder gelöschten
+Inhalten.
+
+# Properties
+
+<PropertiesTables />

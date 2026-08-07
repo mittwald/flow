@@ -5,4 +5,79 @@ description:
   übersichtlich dar.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung der Message darauf, dass ...
+
+- mehrere Messages in einem
+  [MessageThread](/04-components/chat/message-thread/overview) gruppiert werden.
+- die [Markdown](/04-components/content/markdown/overview)-Component genutzt
+  wird, wenn eine Texteingabe in Markdown zu erwarten ist.
+- das [ContextMenu](/04-components/actions/context-menu/overview) nicht
+  überladen wird und nur direkt relevante Aktionen (z. B. Bearbeiten und
+  Löschen) enthält.
+
+## Verwendung
+
+Verwende die Message, um ...
+
+- einzelne Nachrichten eines Chats darzustellen.
+- in Kombination mit dem
+  [MessageThread](/04-components/chat/message-thread/overview) einen
+  Gesprächsverlauf abzubilden.
+
+# Playground
+
+Verwende `<Message />`, um eine Message darzustellen.
+
+<LiveCodeEditor />
+
+---
+
+# Type
+
+Eine Message hat im Default den Type `responder`. Stellt man diese Property auf
+`sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
+
+<LiveCodeEditor example="sender" editorCollapsed />
+
+---
+
+# Mit Action
+
+Eine Message kann um einen [Button ](/04-components/actions/button/overview)
+oder eine [ActionGroup](/04-components/actions/action-group/overview) erweitert
+werden. Die Actions sollten dabei immer in direktem Bezug zum Inhalt der Message
+stehen und passende Interaktion ermöglichen.
+
+<LiveCodeEditor example="action" editorCollapsed />
+
+---
+
+# Custom Color
+
+Im Default sind `sender` blau und `responder` grau hinterlegt. Wenn eine
+Nachricht gezielt hervorgehoben werden soll, zum Beispiel als System-Nachricht
+oder als interne Notiz, kann der Message eine customColor mitgegeben werden.
+Dabei muss der Entwickler selbst auf einen ausreichenden Kontrast zur Textfarbe
+achten.
+
+<LiveCodeEditor example="color" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Markdown
+
+Um eine Texteingabe innerhalb der Message als
+[Markdown](/04-components/content/markdown/overview) zu rendern, kann die
+`<Markdown />`-Component verwendet werden.
+
+<LiveCodeEditor example="markdown" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

@@ -4,4 +4,65 @@ description:
   Das Accordion blendet Content-Bereiche ein und aus und spart so Platz.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Accordions eignen sich besonders für Informationen, die nicht dauerhaft sichtbar
+sein müssen, aber bei Bedarf schnell zugänglich sein sollen.
+
+## Best Practices
+
+Achte bei der Verwendung eines Accordions darauf, dass ...
+
+- Inhalte im Accordion standardmäßig verborgen sind und vom User nicht direkt
+  wahrgenommen werden.
+- die Titel klar und prägnant formuliert sind.
+- die relevantesten Informationen im zuerst geöffneten Element stehen.
+
+## Verwendung
+
+Verwende ein Accordion, um...
+
+- Seiten zu verkürzen und das Scrollen zu reduzieren.
+- verwandte Informationen sinnvoll zu gruppieren.
+- FAQ-Bereiche, Formulare oder Einstellungsseiten strukturierter darzustellen.
+
+# Playground
+
+Verwende `<Accordion />`, um ein Accordion darzustellen. Nutze als Titel
+entweder eine `<Heading />` oder ein `<Label />`.
+
+<LiveCodeEditor />
+
+---
+
+# DefaultExpanded
+
+`defaultExpanded` wird verwendet, um ein oder mehrere Accordion-Elemente beim
+Laden der Seite standardmäßig geöffnet darzustellen.
+
+<LiveCodeEditor example="default-expanded" />
+
+---
+
+# Outline Variant
+
+Verwende eine `outline` Variante, wenn das Accordion klar vom umgebenden Inhalt
+abgehoben oder inhaltlich stärker strukturiert werden soll.
+
+<LiveCodeEditor example="outline" />
+
+---
+
+# Mit Label
+
+Statt einer [Heading](/04-components/content/heading/overview) kann auch ein
+[Label](/04-components/content/label/overview) verwendet werden. Ein Label
+eignet sich, wenn der Inhalt ergänzend oder sekundär ist und nicht im Fokus der
+Seite steht – zum Beispiel bei Filtern, Formularfeldern oder optionalen
+Einstellungen.
+
+<LiveCodeEditor example="label" />
+
+# Properties
+
+<PropertiesTables />

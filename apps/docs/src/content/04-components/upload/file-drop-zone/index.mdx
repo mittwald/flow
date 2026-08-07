@@ -5,4 +5,61 @@ description:
   durch manuelle Auswahl.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Kombiniere die FileDropZone mit der
+[FileCard](/04-components/upload/file-card/overview), um einzelne hochgeladene
+Dateien darzustellen, oder mit der
+[FileCardList](/04-components/upload/file-card-list/overview), um mehrere
+hochgeladene Dateien darzustellen.
+
+## Best Practices
+
+Achte bei der Verwendung einer FileDropZone darauf, dass ...
+
+- immer eine alternative Upload-Möglichkeit über einen
+  [Button](/04-components/actions/button/overview) vorhanden ist.
+- die zulässigen Dateitypen und ggf. Größenbeschränkungen deutlich kommuniziert
+  werden.
+- [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
+  klar und hilfreich formuliert sind.
+- die hochgeladenen Dateien übersichtlich durch die
+  [FileCard](/04-components/upload/file-card/overview) oder
+  [FileCardList](/04-components/upload/file-card-list/overview) dargestellt
+  werden.
+
+## Verwendung
+
+Verwende eine FileDropZone, um eine oder mehrere Dateien gleichzeitig hochladen
+zu können.
+
+# Playground
+
+Verwende `<FileDropZone />`, um Dateien per Drag-and-Drop hochzuladen. Biete
+zusätzlich mit `<Button />` eine alternative Möglichkeit an.
+
+<LiveCodeEditor />
+
+---
+
+# Vorgegebene Dateitypen
+
+Verwende `<Text />`, um den User über erlaubte Dateitypen und maximale
+Dateigrößen beim Hochladen zu informieren.
+
+<LiveCodeEditor example="type" editorCollapsed />
+
+---
+
+# Mehrere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneuten Hochladen werden bestehende Dateien ersetzt. Ein
+Beispiel für das Hochladen und Verwalten mehrerer Dateien findest du im
+Codesnippet [Multi Upload](/03-patterns/02-codesnippets/multi-upload).
+
+<LiveCodeEditor example="multiple" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

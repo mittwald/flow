@@ -4,4 +4,67 @@ description:
   Ein AvatarStack zeigt mehrere Avatare in einer horizontalen Gruppierung.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung eines AvatarStacks darauf, dass ...
+
+- nicht zu viele [Avatare](/04-components/content/avatar/overview) gleichzeitig
+  angezeigt werden. Empfohlen ist eine maximale Anzahl von 5 Avataren. Danach
+  sollte die Property `totalCount` genutzt werden, um die verbleibende Anzahl
+  der Avatare darzustellen.
+- die Avatare bei Bedarf mehr Informationen durch Anklicken erhalten. Zum
+  Beispiel kann ein [Modal](/04-components/overlays/modal/overview) geöffnet
+  werden, das weitere Informationen zum Benutzerprofil enthält.
+- die angezeigten Avatare konsistent bleiben und die gleiche Darstellung
+  verwenden wie an anderen Stellen. Beispielsweise sollte das hochgeladene
+  Profilbild eines Users angezeigt werden und nicht ein generisches
+  User-[Icon](/04-components/content/icon/overview).
+
+## Verwendung
+
+Verwende einen AvatarStack, um mehrere Avatare kompakt und übersichtlich zu
+gruppieren (z. B. welche User an einem Projekt beteiligt sind).
+
+# Playground
+
+Lege den `<AvatarStack />` um mehrere
+[Avatare](/04-components/content/avatar/overview), um diese zu gruppieren.
+
+<LiveCodeEditor />
+
+---
+
+# Total Count
+
+Es wird empfohlen, gleichzeitig höchstens 5
+[Avatare](/04-components/content/avatar/overview) anzuzeigen. Weitere Avatare
+können über einen Counter dargestellt werden, indem die Property `totalCount`
+verwendet wird. Ist `totalCount` größer als die Anzahl der angezeigten Avatare,
+wird ein zusätzlicher Counter mit der verbleibenden Anzahl angezeigt.
+
+<LiveCodeEditor example="total-count" editorCollapsed />
+
+---
+
+# Klickbar
+
+Mit `onPress` lassen sich Avatare klickbar machen, sodass zu den jeweiligen
+Avataren beispielsweise weitere Informationen im
+[Modal](/04-components/overlays/modal/overview) angezeigt werden können.
+
+<LiveCodeEditor example="clickable" editorCollapsed />
+
+---
+
+# Sizes
+
+AvatarStacks sind in den Sizes **Extra Small, Small, Medium** und **Large**
+verfügbar.
+
+<LiveCodeEditor example="sizes" editorCollapsed row />
+
+# Properties
+
+<PropertiesTables />

@@ -5,4 +5,46 @@ description:
   werden kann.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung einer LayoutCard darauf, dass ...
+
+- der Content innerhalb sinnvoll strukturiert ist. Dies kann beispielsweise
+  durch die Components [Section](/04-components/structure/section/overview) und
+  [ColumnLayout](/04-components/structure/column-layout/overview) erfolgen.
+- sie in wWeiß eingefärbt ist. Wenn Inhalte besonders hervorgehoben werden
+  sollen, kann sie mit der
+  [AccentBox](/04-components/structure/accent-box/overview) kombiniert werden.
+
+## Verwendung
+
+Verwende eine LayoutCard, um ...
+
+- einen oder mehrere Content-Bereiche auf einer Seite zu erzeugen.
+- eine Kacheloptik auf einem Dashboard darzustellen.
+- eine äußere Hülle für ein Navigationsmenü zu gestalten.
+
+# Playground
+
+Verwende `<LayoutCard />`, um eine LayoutCard zu erhalten. Innerhalb dieser kann
+beliebiger Inhalt eingefügt werden.
+
+<LiveCodeEditor bgColor="light" />
+
+---
+
+# Kombiniere mit ...
+
+## TabNavigation
+
+Platziere die [TabNavigation](/04-components/navigation/tab-navigation/overview)
+in einer LayoutCard, um zwischen den Unterseiten zu navigieren. Der Inhalt der
+aktiven Seite wird darunter in derselben LayoutCard dargestellt.
+
+<LiveCodeEditor example="tab-navigation" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

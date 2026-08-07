@@ -4,4 +4,68 @@ description:
   Die HeaderNavigation ist eine horizontale Navigationsleiste am Seitenanfang.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung einer HeaderNavigation darauf, dass ...
+
+- die Navigationspunkte klar beschriftet und in sinnvoller Reihenfolge
+  angeordnet sind.
+- [Icons](/04-components/content/icon/overview) mit gängigen Symbolen versehen
+  sind und eine eindeutige Funktion haben.
+- die Navigation nicht überladen wird und nur relevante Elemente enthält.
+
+## Verwendung
+
+Verwende eine HeaderNavigation, um ...
+
+- eine zentrale Navigation über die Hauptbereiche einer Anwendung
+  bereitzustellen.
+- die visuelle Struktur und Hierarchie einer Seite zu unterstützen und
+  Orientierung zu schaffen.
+- zusätzliche Aktionen wie Suche, Benachrichtigungen oder Userprofil in einem
+  kompakten, leicht erreichbaren Bereich zu integrieren.
+
+# Playground
+
+Verwende `<HeaderNavigation />`, um eine HeaderNavigation darzustellen.
+Enthaltene [Buttons](/04-components/actions/button/overview) und
+[Links](/04-components/navigation/link/overview) werden automatisch im passenden
+Style formatiert.
+
+<LiveCodeEditor />
+
+---
+
+# Mit ContextMenu
+
+[Avatare](/04-components/content/avatar/overview) und
+[Buttons](/04-components/actions/button/overview) können als Trigger für das
+[ContextMenu](/04-components/actions/context-menu/overview) verwendet werden.
+
+<LiveCodeEditor example="contextMenu" editorCollapsed />
+
+---
+
+# Color
+
+## Light und Dark
+
+Zusätzlich zu der Standard-Color, kann die HeaderNavigation in **Light** und
+**Dark** dargestellt werden. Beide Colors eigenen sich, wenn die Standardfarbe
+auf farbigen oder dekorativen Hintergründen nicht gut funktioniert.
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50.
+
+**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
+HSL Lightness-Wert von größer als 50.
+
+# Properties
+
+<PropertiesTables />

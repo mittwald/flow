@@ -4,4 +4,41 @@ description:
   Der CodeEditor dient dem Bearbeiten von Code, mit Syntax-Highlighting.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung eines CodeEditors darauf, dass die passende Sprache im
+`language` Property gesetzt ist, damit korrektes Syntax-Highlighting möglich
+ist.
+
+## Verwendung
+
+Verwende einen CodeEditor, um Code direkt innerhalb der Oberfläche zu schreiben
+oder zu bearbeiten. Für die reine Anzeige von Code ist der
+[CodeBlock](/04-components/content/code-block/overview) vorgesehen.
+
+# Playground
+
+Verwende `<CodeEditor />`, um einen CodeEditor anzuzeigen. Gib den anzuzeigenden
+Inhalt im `value` Property an. Nutze das `language` Property, um die
+Programmiersprache (siehe
+[unterstütze language imports](https://github.com/mittwald/flow/tree/main/packages/components/src/components/CodeEditor/languages/all.ts))
+zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Kombiniere mit ...
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />

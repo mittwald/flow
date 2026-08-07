@@ -5,4 +5,108 @@ description:
   einfärben.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung der Color-Component darauf, dass ...
+
+- sie sparsam und nur in Ausnahmefällen eingesetzt wird.
+- die eingefärbte Schrift stets einen ausreichenden Kontrast zum Hintergrund
+  aufweist.
+- nur kurze Abschnitte (1-3 Wörter) in
+  [Texten](/04-components/content/text/overview) oder
+  [Headings](/04-components/content/heading/overview) hervorgehoben werden. Die
+  markierten Wörter sollten den Inhalt bzw. die Aussage gezielt betonen.
+
+## Verwendung
+
+Verwende die Color-Component, um ...
+
+- besondere Wörter in [Heading](/04-components/content/heading/overview)
+  innerhalb von
+  Werbe-[AccentBoxen](/04-components/structure/accent-box/overview) farblich
+  hervorzuheben.
+- einzelne Begriffe in Headings oder
+  [Texten](/04-components/content/text/overview) auf Landing-Pages gezielt zu
+  betonen.
+
+# Playground
+
+<Alert>
+  <Heading>Nutze die Color-Component mit Bedacht</Heading>
+  <Content>
+    Die Color-Component hebt den umschlossenen Bereich deutlich vom übrigen
+    Designsystem ab und sollte daher nur in Ausnahmefällen eingesetzt werden.
+  </Content>
+</Alert>
+
+Um ein Element einzufärben, wird es mit `<Color />` umschlossen. Die gewünschte
+Farbe wird über die `color`-Property vergeben.
+
+<LiveCodeEditor />
+
+---
+
+# Color
+
+Je nach Anwendungsfall stehen Colors aus den Bereichen **Brand**, **Status**
+oder **Custom** zur Verfügung. Je nach Hintergrund muss auf ein ausreichendes
+Kontrastverhältnis geachtet werden. Außerdem sollten Farben nicht allein eine
+Bedeutung übertragen.
+
+## Brand Colors
+
+Brand Colors eignen sich, um einzelne Passagen in
+[Texten](/04-components/content/text/overview) oder
+[Headings](/04-components/content/heading/overview) hervorzuheben. Das ist vor
+allem bei werblichen Hinweisen hilfreich.
+
+<LiveCodeEditor example="color" editorCollapsed row />
+
+## Status Colors
+
+Status Colors unterstützen die visuelle Einordnung eines Zustands. Ein häufiger
+Einsatzort ist die Darstellung negativer Beträge.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+## Custom Colors
+
+Für beliebige Colors unterstützt die `color`-Property die Angabe eines
+HEX-Werts.
+
+<LiveCodeEditor example="custom" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Text
+
+Teile eines [Textes](/04-components/content/text/overview) lassen sich mithilfe
+der Color-Component einfärben.
+
+<LiveCodeEditor editorCollapsed />
+
+## Heading
+
+Mit der Color-Component lassen sich in
+[Headings](/04-components/content/heading/overview) gezielt wichtige Wörter
+farblich hervorheben.
+
+<LiveCodeEditor example="heading" editorCollapsed />
+
+## AccentBox
+
+Ein häufiges Einsatzgebiet der Color-Component ist die Hervorhebung von
+[Headings](/04-components/content/heading/overview) in
+[AccentBoxen](/04-components/structure/accent-box/overview) mit Werbeinhalten.
+Dabei ist besonders wichtig, dass die eingefärbte Schrift einen ausreichenden
+Kontrast zum Hintergrund aufweist.
+
+<LiveCodeEditor example="accent-box" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

@@ -5,4 +5,74 @@ description:
   einbinden.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung der Image-Component darauf, dass ...
+
+- die eingebundenen Bilder die Benutzeroberfläche sinnvoll ergänzen, indem sie
+  zum Kontext und der allgemeinen Gestaltung passen.
+- Inhalt oder Zweck des Bildes mittels aussagekräftigem `alt`-Text beschrieben
+  wird. Rein dekorative Bilder bekommen ein leeres `alt`-Attribut (`alt=""`).
+- die Größenverhältnisse optimiert sind, um Ladezeiten und Performance zu
+  verbessern.
+- Auflösung und Seitenverhältnis der gewählten Bilder angenehm und konsistent
+  sind.
+- bei mangelndem Kontrast zum Hintergrund die Image-Component eine sichtbare
+  Border erhält.
+- nach Möglichkeit kein Text im Bild verwendet wird, da dieser von Screenreadern
+  nicht erfasst werden kann.
+
+## Verwendung
+
+Verwende die Image-Component, um ...
+
+- dekorative Bilder anzuzeigen, die die Benutzeroberfläche visuell aufwerten und
+  positive Emotionen bei den Usern auslösen können.
+- hilfreiche Bilder anzuzeigen, die den Kontext so unterstützen, dass Inhalte
+  schneller erfasst und besser verstanden werden.
+
+# Playground
+
+In `<Image />` wird über die Property `src` die Bildquelle festgelegt. Mithilfe
+weiterer Properties wie `width` und `height` lässt sich dessen Größe individuell
+anpassen.
+
+<LiveCodeEditor />
+
+---
+
+# Responsive Images
+
+Um Bilder in unterschiedlichen Auflösungen für verschiedene Bildschirmgrößen
+bereitzustellen, eignet sich das `srcSet`-Attribut. Damit lassen sich mehrere
+Varianten einer Bilddatei hinterlegen – sowohl in niedriger als auch in hoher
+Auflösung –, die je nach Pixeldichte des Endgeräts automatisch ausgewählt
+werden. Weitere Informationen dazu finden sich im folgenden Artikel:
+[Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#resolution_switching_same_size_different_resolutions:~:text=Resolution%20switching%3A%20Same%20size%2C%20different%20resolutions).
+
+---
+
+# Border
+
+Mit der Property `withBorder` erhält die Image-Component eine Border. Dieser ist
+insbesondere bei Bildern mit geringem Kontrast zum Hintergrund von Vorteil, da
+er die visuelle Abgrenzung verbessert und die Bildwahrnehmung unterstützt.
+
+<LiveCodeEditor example="border" editorCollapsed />
+
+---
+
+# Fixes Seitenverhältnis
+
+Die Property `aspectRatio` definiert das Seitenverhältnis der Image-Component.
+Weicht das Seitenverhältnis des eingebetteten Bildes ab – etwa durch eine
+größere Höhe oder Breite –, wird das Bild zentriert, und überstehende Bereiche
+außerhalb des festgelegten Verhältnisses werden ausgeblendet.
+
+<LiveCodeEditor example="aspectRatio" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

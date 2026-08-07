@@ -4,4 +4,71 @@ description:
   Das Skeleton zeigt eine vereinfachte Vorschau, bis der Content geladen ist.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Skeletons sind Platzhalter, die während des Ladens bereits die Struktur einer
+Seite andeuten. Sie vermitteln Usern eine Vorschau auf das Layout und verbessern
+so die wahrgenommene Performance. Gleichzeitig helfen sie, Layout-Sprünge zu
+vermeiden, bevor die eigentlichen Inhalte geladen sind.
+
+## Best Practices
+
+Achte bei der Verwendung von Skeletons darauf, dass ...
+
+- sie das finale Layout der Benutzeroberfläche so gut wie möglich widerspiegeln,
+  sodass User erkennen können, welche Inhalte zu erwarten sind. Verwende dafür
+  vereinfachte Formen wie z. B. Platzhalter für Textblöcke,
+  [Avatare](/04-components/content/avatar/overview) oder
+  [Images](/04-components/content/image/overview).
+- Detailgrad und Anzahl der Skeletons nicht zu hoch sind – sie sollten eher an
+  Wireframes erinnern und keine visuelle Unruhe erzeugen.
+- sie ausschließlich für das initiale und kurzzeitige Laden von Inhalten
+  eingesetzt werden. Für andere Lade- oder Feedbackprozesse verwende
+  beispielsweise stattdessen den
+  [LoadingSpinner](/04-components/status/loading-spinner/overview).
+- beim Laden kein Cumulative Layout Shift entsteht – das finale Layout sollte
+  nahtlos den Skeleton-Content ersetzen.
+- sie für Screenreader ausgeblendet oder entsprechend gekennzeichnet sind (z. B.
+  `aria-busy="true"`).
+
+## Verwendung
+
+Verwende Skeletons, um visuell ansprechende Ladezustände für Inhalte wie
+[Listes](/04-components/structure/list/overview),
+[Images](/04-components/content/image/overview) oder
+[Texte](/04-components/content/text/overview) darzustellen – sie bieten
+Orientierung, indem sie die spätere Struktur und Position der Inhalte andeuten.
+
+# Playground
+
+Verwende `<Skeleton />`, um ein Skeleton anzuzeigen.
+
+<LiveCodeEditor />
+
+---
+
+# Benutzerdefinierte Größe
+
+Skeletons können mit dem `width`- oder `height`-Attribut angepasst werden, um
+die grobe Ladevorschau an die Benutzeroberfläche anzupassen.
+
+<LiveCodeEditor example="custom-size" editorCollapsed />
+
+---
+
+# Accessibility
+
+Das Skeleton verwendet das Property `aria-hidden`, damit es vom Screenreader
+ignoriert wird.
+
+Die Accessibility eines Ladezustands soll **nicht** vom Skeleton geregelt
+werden.
+
+Um Screenreadern mitzuteilen, dass Inhalte noch geladen werden, sollte das
+Property `aria-busy` verwendet werden. Dieses wird auf `false` gesetzt, sobald
+der Ladevorgang abgeschlossen ist (s.
+[MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy)).
+
+# Properties
+
+<PropertiesTables />

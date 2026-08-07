@@ -5,4 +5,77 @@ description:
   Hintergrund.
 ---
 
-<Wireframe />
+# Grundlagen
+
+## Best Practices
+
+Achte bei der Verwendung einer LightBox darauf, dass ...
+
+- [Icons](/04-components/content/icon/overview) für die Aktionen (z. B. Löschen
+  oder Herunterladen) klar und eindeutig gekennzeichnet sind, um
+  Missverständnisse zu vermeiden.
+- für Bilder sinnvolle Alt-Texte gepflegt werden, um Screenreader-Unterstützung
+  sicherzustellen.
+
+## Verwendung
+
+Verwende eine LightBox, um ...
+
+- Inhalte wie Bilder vergrößert und aufmerksamkeitsstark darzustellen.
+- Usern eine Möglichkeit zu bieten, Inhalte zu betrachten, ohne die aktuelle
+  Seite zu verlassen.
+
+# Playground
+
+Verwende `<LightBox />` um eine LightBox anzuzeigen und kombiniere
+`<LightBoxTrigger />` und `<Button />` um die LightBox in der Oberfläche
+aufrufbar zu machen.
+
+<LiveCodeEditor />
+
+---
+
+# Mit ActionGroup
+
+In der LightBox kann eine
+[ActionGroup](/04-components/actions/action-group/overview) verwendet werden,
+diese richtet sich automatisch vertikal am Bild aus.
+
+<LiveCodeEditor example="actions" editorCollapsed />
+
+---
+
+# Mit Image Trigger
+
+Als Trigger kann auch das [Image](/04-components/content/image/overview) selbst
+verwendet werden. Kombiniere dazu `<Button />` mit `<Image />`.
+
+<LiveCodeEditor example="imageTrigger" editorCollapsed />
+
+---
+
+# FitScreen
+
+Standardmäßig passt sich der Inhalt der LightBox an die Bildschirmgröße an. Wird
+die Property `fitScreen` auf `false` gesetzt, wird der Inhalt in seiner vollen
+Höhe dargestellt. Falls der verfügbare Platz nicht ausreicht, erscheint eine
+vertikale Scrollbar. Dieses Verhalten ist besonders hilfreich bei der
+Darstellung von Inhalten mit großer vertikaler Ausdehnung, wie z. B.
+mehrseitigen PDFs.
+
+<LiveCodeEditor example="fitScreenFalse" editorCollapsed />
+
+---
+
+# Mit Galerie
+
+Innerhalb der LightBox kann eine `LightBoxGallery` verwendet werden. Diese kann
+mit `LightBoxGalleryItems` gefüllt werden, welche die Platzierung von
+[Images](/04-components/content/image/overview) und
+[ActionGroups](/04-components/actions/action-group/overview) unterstützen.
+
+<LiveCodeEditor example="gallery" editorCollapsed />
+
+# Properties
+
+<PropertiesTables />

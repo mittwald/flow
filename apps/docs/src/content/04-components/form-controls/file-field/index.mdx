@@ -5,4 +5,100 @@ description:
   ermöglichen.
 ---
 
-<Wireframe />
+# Grundlagen
+
+Das FileField ermöglicht den manuellen Upload einer Datei über eine kompakte
+[Button](/04-components/actions/button/overview)-Darstellung. Wenn genügend
+Platz vorhanden ist und Drag-and-Drop gewünscht wird, sollte stattdessen die
+[FileDropZone](/04-components/upload/file-drop-zone/overview) eingesetzt werden.
+
+## Best Practices
+
+Achte bei der Verwendung eines FileFields darauf, dass ...
+
+- ein aussagekräftiges [Label](/04-components/content/label/overview) vorhanden
+  ist, falls das FileField sonst nicht eindeutig verständlich wäre.
+- die zulässigen Dateitypen und ggf. Größenbeschränkungen deutlich kommuniziert
+  werden.
+- hochgeladene Dateien übersichtlich dargestellt werden – z. B. als
+  [FileCard](/04-components/upload/file-card/overview) oder
+  [FileCardList](/04-components/upload/file-card-list/overview).
+- [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
+  klar und hilfreich formuliert sind.
+
+## Verwendung
+
+Verwende ein FileField, um einen kompakten
+Upload-[Button](/04-components/actions/button/overview) in der
+Benutzeroberfläche bereitzustellen.
+
+# Playground
+
+Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des
+FileFields kommen die Components [Label](/04-components/content/label/overview)
+und [Button](/04-components/actions/button/overview) zum Einsatz.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Disabled
+
+Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die
+Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden. In vielen Fällen empfiehlt es sich, die
+erlaubten Dateitypen dort anzugeben.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Invalid
+
+Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />`
+kann eine entsprechende
+[Fehlermeldung](/02-foundations/03-content-guidelines/03-fehlermeldungen)
+ausgegeben werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed stretch />
+
+---
+
+# Mehere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneutem Hochladen werden bestehende Dateien ersetzt. Ein
+Beispiel für das Hochladen und Verwalten mehrerer Dateien findest du im
+Codesnippet [Multi Upload](/03-patterns/02-codesnippets/multi-upload).
+
+<LiveCodeEditor example="multiple" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Verwende [ContextualHelp](/04-components/overlays/contextual-help/overview), um
+zusätzliche Informationen bereitzustellen.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+# Properties
+
+<PropertiesTables />
