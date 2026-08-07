@@ -7,11 +7,15 @@
  * resolves the Vite config once and invokes the plugin's `transform` for each
  * module directly — no dev server, no other plugins. The plugin resolves the
  * `@/…` SCSS aliases from `config.resolve.alias` itself, so the output is
- * byte-identical to what the dev server writes. Declarations whose SCSS module
- * was removed are deleted.
+ * byte-identical to what the dev server writes.
  *
- * `vite-plugin-sass-dts` writes each declaration in a fire-and-forget callback,
- * so after triggering the transforms we wait until the files stop changing.
+ * The plugin writes each declaration in a fire-and-forget callback with no
+ * completion signal, and swallows Sass compile errors. To make generation
+ * deterministic we delete each declaration first and then wait for the plugin
+ * to recreate it: reappearance is a definitive "written this run" signal, and a
+ * file that never reappears — because its module failed to compile — throws and
+ * fails the build (whether the module is new or already had a committed
+ * declaration). Declarations whose SCSS module was removed are pruned.
  */
 import { resolveConfig, type Plugin, type ResolvedConfig } from "vite";
 import sassDts from "vite-plugin-sass-dts";
@@ -49,45 +53,31 @@ const toDtsPath = (scssFile: string): string =>
   scssFile.replace(/\.module\.scss$/, ".module.d.scss.ts");
 
 /**
- * Wait until every expected declaration exists and its mtime stops changing.
- * Throws on timeout so a hung or failed generation (e.g. a SCSS module that
- * fails to compile, whose declaration is therefore never written) fails the
- * build instead of silently leaving stale or missing files.
+ * Wait for `dtsFile` (deleted by the caller beforehand) to be recreated by the
+ * plugin. Its reappearance is a definitive per-file "written this run" signal.
+ * Throws on timeout — which is what happens when the SCSS module fails to
+ * compile, since the plugin then swallows the error and writes nothing.
  */
-const waitForWrites = async (
-  expected: string[],
-  { stableMs = 1500, timeoutMs = 180_000 } = {},
+const waitForRewrite = async (
+  dtsFile: string,
+  scssFile: string,
+  { timeoutMs = 30_000, intervalMs = 25 } = {},
 ): Promise<void> => {
   const start = Date.now();
-  let lastChange = Date.now();
-  let previous = "";
   while (Date.now() - start < timeoutMs) {
-    await delay(300);
-    let signature = "";
-    let allExist = true;
-    for (const file of expected) {
-      try {
-        signature += `${statSync(file).mtimeMs};`;
-      } catch {
-        allExist = false;
-        signature += "-;";
+    try {
+      if (statSync(dtsFile).size > 0) {
+        return;
       }
+    } catch {
+      // Not written yet.
     }
-    if (signature !== previous) {
-      previous = signature;
-      lastChange = Date.now();
-    }
-    if (allExist && Date.now() - lastChange >= stableMs) {
-      return;
-    }
+    await delay(intervalMs);
   }
-  const missing = expected.filter((file) => !existsSync(file));
-  const [firstMissing] = missing;
   throw new Error(
-    `[scss-types] timed out after ${timeoutMs}ms waiting for declarations to settle` +
-      (firstMissing
-        ? ` — ${missing.length} still missing, e.g. ${path.relative(packageRoot, firstMissing)}`
-        : " — files exist but kept changing"),
+    `[scss-types] ${path.relative(packageRoot, scssFile)} produced no ` +
+      `declaration within ${timeoutMs}ms — the SCSS module likely failed to ` +
+      `compile (see the sass error logged above).`,
   );
 };
 
@@ -111,12 +101,16 @@ const run = async (): Promise<void> => {
   const plugin = sassDts(sassDtsOptions) as Plugin;
   const configResolved = plugin.configResolved as unknown as ConfigResolvedHook;
   const transform = plugin.transform as unknown as TransformHook;
-
   await configResolved(config);
+
+  // Sequential: only the in-flight declaration is ever deleted, so a failure
+  // leaves every other committed file untouched.
   for (const scssFile of scssFiles) {
+    const dtsFile = toDtsPath(scssFile);
+    rmSync(dtsFile, { force: true });
     await transform("", scssFile);
+    await waitForRewrite(dtsFile, scssFile);
   }
-  await waitForWrites(scssFiles.map(toDtsPath));
 
   // Remove declarations whose SCSS module no longer exists.
   for (const dtsFile of walk(srcDir).filter((file) =>
