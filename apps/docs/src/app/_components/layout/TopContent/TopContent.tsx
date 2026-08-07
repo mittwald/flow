@@ -48,7 +48,7 @@ export const TopContent: FC<Props> = (props) => {
     <LayoutCard className={styles.topContent}>
       <Section>
         <ComponentStatusCallout name={component} />
-        <ColumnLayout l={[1, 1]} m={[1]}>
+        <ColumnLayout l={[2, 1]} m={[1]} columnGap="l">
           <Section>
             <Heading level={1}>
               {mdxFile.getTitle()}

@@ -2,7 +2,9 @@
 import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { getHostPath, getRemotePath } from "@/app/_lib/navigation";
 import {
+  Badge,
   ColumnLayout,
+  Flex,
   IntlProvider,
   Label,
   LabeledValue,
@@ -11,9 +13,35 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
-import type { RemoteReadyEvent } from "@mittwald/flow-remote-react-renderer";
+import type {
+  ComponentUsageEvent,
+  RemoteReadyEvent,
+} from "@mittwald/flow-remote-react-renderer";
 import { usePathname, useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState, type FC } from "react";
+
+const UsageList: FC<{ usage: ComponentUsageEvent[] }> = ({ usage }) => (
+  <LabeledValue>
+    <Label>Used components ({usage.length})</Label>
+    <Flex gap="s" wrap="wrap">
+      {usage.map(({ component, status }) => (
+        <Badge
+          key={component}
+          color={
+            status?.level === "deprecated"
+              ? "red"
+              : status?.level === "beta"
+                ? "orange"
+                : "neutral"
+          }
+        >
+          <Label>{component}</Label>
+          <Text>{status?.level ?? "untracked"}</Text>
+        </Badge>
+      ))}
+    </Flex>
+  </LabeledValue>
+);
 
 export default function HostPage() {
   const router = useRouter();
@@ -22,6 +50,17 @@ export default function HostPage() {
   const srcRef = useRef(remotePath);
   const [isNavigating, setIsNavigating] = useState(false);
   const [remoteReadyEvent, setRemoteReadyEvent] = useState<RemoteReadyEvent>();
+  const [componentUsage, setComponentUsage] = useState<ComponentUsageEvent[]>(
+    [],
+  );
+
+  const addComponentUsage = useCallback((event: ComponentUsageEvent) => {
+    setComponentUsage((usage) =>
+      [...usage, event].toSorted((a, b) =>
+        a.component.localeCompare(b.component),
+      ),
+    );
+  }, []);
 
   return (
     <IntlProvider locale="en-US">
@@ -42,7 +81,14 @@ export default function HostPage() {
             <Separator />
           </>
         )}
+        {componentUsage.length > 0 && (
+          <>
+            <UsageList usage={componentUsage} />
+            <Separator />
+          </>
+        )}
         <RemoteRenderer
+          onComponentUsage={addComponentUsage}
           onConnected={setRemoteReadyEvent}
           onNavigationStateChanged={(state) => {
             const { pathname, isPending } = state;

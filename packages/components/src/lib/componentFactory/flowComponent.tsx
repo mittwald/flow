@@ -20,6 +20,10 @@ import { ClearPropsContext } from "@/components/ClearPropsContext";
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { UiComponentTunnelProvider } from "@/components/UiComponentTunnel/UiComponentTunnelProvider";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
+import {
+  useReportComponentUsage,
+  ViewCompositionReset,
+} from "@/components/ComponentUsageProvider";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -60,6 +64,8 @@ export function flowComponent<C extends FlowComponentName>(
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
+    const isViewComposition = useReportComponentUsage(componentName);
+
     const { tunnel, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
@@ -134,6 +140,10 @@ export function flowComponent<C extends FlowComponentName>(
           {element}
         </UiComponentTunnelEntry>
       );
+    }
+
+    if (isViewComposition) {
+      element = <ViewCompositionReset>{element}</ViewCompositionReset>;
     }
 
     return element;

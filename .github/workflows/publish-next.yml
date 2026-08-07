@@ -112,7 +112,7 @@ jobs:
       # difference from publish.yml, which publishes `latest`. Provenance/OIDC
       # and the @sigstore/sign Rekor-409 patch behave exactly as in publish.yml.
       - name: Publish 🚀
-        run: pnpm lerna publish from-package --yes --no-private --concurrency 1 --dist-tag next
+        run: pnpm lerna publish from-package --yes --concurrency 1 --dist-tag next
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # `next` with the release commit and tag.

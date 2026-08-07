@@ -7,3 +7,4 @@ export {
 export * from "./serialization";
 export * from "./connection";
 export * from "./error";
+export * from "./events/remoteEvents";
