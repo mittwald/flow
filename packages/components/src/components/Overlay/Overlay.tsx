@@ -30,6 +30,8 @@ export interface OverlayProps
   onOpen?: OverlayOpenHandler;
   onClose?: OverlayCloseHandler;
   onOpenChange?: OverlayOpenStateHandler;
+  /** Whether closing the overlay must be confirmed. */
+  confirmOnClose?: boolean;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {

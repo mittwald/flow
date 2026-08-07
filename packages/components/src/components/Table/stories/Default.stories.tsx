@@ -129,10 +129,10 @@ export const HorizontallyCenteredColumns: Story = {
         <TableRow>
           <TableCell>Death Star plans</TableCell>
           <TableCell horizontalAlign="center">
-            <IconCheck status="success" />
+            <IconCheck color="success" />
           </TableCell>
           <TableCell horizontalAlign="center">
-            <IconClose status="danger" />
+            <IconClose color="danger" />
           </TableCell>
         </TableRow>
       </TableBody>

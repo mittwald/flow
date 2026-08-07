@@ -15,8 +15,11 @@ permissions:
   id-token: write
   contents: write
 
+# Shared per-target-branch concurrency group (ADR 0004 §5): every writer of
+# `main` (this workflow, and the promotion back-merge once the 1.0.0 model is
+# live) serializes on `mutate-main`, removing non-fast-forward races by design.
 concurrency:
-  group: publish-${{ github.ref }}
+  group: mutate-main
   cancel-in-progress: false
 
 jobs:
@@ -97,7 +100,7 @@ jobs:
       # to true, so it fetches the existing transparency-log entry and the publish
       # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
-        run: pnpm lerna publish from-package --yes --no-private --concurrency 1
+        run: pnpm lerna publish from-package --yes --concurrency 1
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.

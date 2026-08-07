@@ -109,6 +109,61 @@ class ReviewDeployer {
     return `${imageType.toUpperCase()}/PR-${this.prNumber}`;
   }
 
+  private getTlsCertificateId(
+    imageType: "docs" | "storybook",
+  ): string | undefined {
+    return imageType === "docs"
+      ? process.env.MITTWALD_TLS_CERTIFICATE_ID_DOCS
+      : process.env.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK;
+  }
+
+  // Guard against a race with the cleanup workflow: the build+deploy takes
+  // several minutes, but `cleanup-previews.yml` fires the moment a PR closes.
+  // A PR merged before its deploy finishes gets cleaned up first (finds
+  // nothing), then this deploy would create preview resources the cleanup can
+  // never reach again — orphaning them forever. So bail out if the PR is no
+  // longer open. Fail open: only skip when we can positively confirm it's
+  // closed, otherwise keep deploying.
+  async isPullRequestClosed(): Promise<boolean> {
+    const token = process.env.GITHUB_TOKEN;
+    const repo = process.env.GITHUB_REPOSITORY;
+    if (!token || !repo) {
+      console.warn(
+        "⚠️  GITHUB_TOKEN or GITHUB_REPOSITORY not set — skipping the PR-state guard; proceeding with deployment.",
+      );
+      return false;
+    }
+
+    const [owner, repoName] = repo.split("/");
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repoName}/pulls/${this.prNumber}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        },
+      );
+
+      if (!response.ok) {
+        console.warn(
+          `⚠️  Could not fetch PR #${this.prNumber} state (${response.status} ${response.statusText}); proceeding with deployment.`,
+        );
+        return false;
+      }
+
+      const pr = (await response.json()) as { state: string };
+      return pr.state !== "open";
+    } catch (error) {
+      console.warn(
+        `⚠️  Failed to check PR #${this.prNumber} state; proceeding with deployment.`,
+        error,
+      );
+      return false;
+    }
+  }
+
   async getServices(): Promise<MittwaldService[]> {
     console.log("📋 Fetching existing services...");
 
@@ -254,6 +309,44 @@ class ReviewDeployer {
     }
   }
 
+  async connectTlsCertificate(
+    ingressId: string,
+    imageType: "docs" | "storybook",
+  ): Promise<void> {
+    const certificateId = this.getTlsCertificateId(imageType);
+
+    if (!certificateId) {
+      return;
+    }
+
+    console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
+
+    try {
+      const response = await fetch(
+        `https://api.mittwald.de/v2/ingresses/${ingressId}/tls`,
+        {
+          method: "PATCH",
+          headers: getApiHeaders(),
+          body: JSON.stringify({
+            certificateId,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.warn(
+          `⚠️  Failed to connect TLS certificate: ${response.statusText} - ${error}`,
+        );
+        return;
+      }
+
+      console.log("✅ TLS certificate connected successfully");
+    } catch (error) {
+      console.warn("⚠️  Failed to connect TLS certificate:", error);
+    }
+  }
+
   async deployImage(
     image: DockerImage,
     services: MittwaldService[],
@@ -301,16 +394,21 @@ class ReviewDeployer {
     }
 
     const existingIngress = ingresses.find((i) => i.hostname === hostname);
+    let ingressId: string;
 
     if (!existingIngress) {
       console.log(`   Ingress for ${hostname} does not exist, creating...`);
       if (!containerId) {
         throw new Error(`Container ID not found for ${serviceName}`);
       }
-      await this.createIngress(hostname, containerId);
+      const ingress = await this.createIngress(hostname, containerId);
+      ingressId = ingress.id;
     } else {
       console.log(`   Ingress for ${hostname} already exists`);
+      ingressId = existingIngress.id;
     }
+
+    await this.connectTlsCertificate(ingressId, image.imageType);
 
     return hostname;
   }
@@ -368,6 +466,13 @@ ${this.images.map((img) => `- ${img.imageType}: \`${img.name}\``).join("\n")}
   async deploy(): Promise<void> {
     try {
       console.log("🚀 Starting preview deployment process...\n");
+
+      if (await this.isPullRequestClosed()) {
+        console.log(
+          `⏭️  PR #${this.prNumber} is already closed/merged — skipping preview deployment to avoid orphaned resources the cleanup can no longer reach.`,
+        );
+        return;
+      }
 
       console.log(`📦 Parsed images (${this.images.length}):`);
       this.images.forEach((img) => {

@@ -3,7 +3,6 @@ import {
   ContextualHelp,
   ContextualHelpTrigger,
   DateRangePicker,
-  Heading,
   Label,
   Text,
 } from "@mittwald/flow-react-components";
@@ -11,10 +10,9 @@ import {
 <DateRangePicker>
   <Label>
     Zeitraum
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Zeitraum">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

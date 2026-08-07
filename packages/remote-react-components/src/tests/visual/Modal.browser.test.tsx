@@ -109,6 +109,38 @@ test.each(testEnvironments)(
 );
 
 test.each(testEnvironments)(
+  "Modal confirmOnClose (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Button, ModalTrigger, Modal, Content, Heading, Text, Action },
+  }) => {
+    await render(
+      <ModalTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <Modal confirmOnClose>
+          <Heading>Heading</Heading>
+          <Content>
+            <Text>Text</Text>
+            <Action closeModal>
+              <Button data-testid="close">Close</Button>
+            </Action>
+          </Content>
+        </Modal>
+      </ModalTrigger>,
+    );
+
+    const trigger = page.getByTestId("trigger");
+    await trigger.click();
+
+    const close = page.getByTestId("close");
+    await close.click();
+
+    await testScreenshot("Modal confirmOnClose - confirmation opened");
+  },
+);
+
+test.each(testEnvironments)(
   "Modal in ContextMenu (%s)",
   async ({
     testScreenshot,

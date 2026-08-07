@@ -16,6 +16,7 @@ test.each(testEnvironments)(
       Label,
       Badge,
       CounterBadge,
+      AlertBadge,
     },
   }) => {
     await render(
@@ -40,7 +41,9 @@ test.each(testEnvironments)(
         </NavigationGroup>
         <NavigationGroup collapsable>
           <Label data-testid="trigger">Collapsable</Label>
-          <Link>Link</Link>
+          <Link>
+            Link<AlertBadge>AlertBadge</AlertBadge>
+          </Link>
           <Link>Link</Link>
         </NavigationGroup>
       </Navigation>,

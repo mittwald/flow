@@ -3,6 +3,198 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1009](https://github.com/mittwald/flow/compare/0.2.0-alpha.1008...0.2.0-alpha.1009) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1008](https://github.com/mittwald/flow/compare/0.2.0-alpha.1007...0.2.0-alpha.1008) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1007](https://github.com/mittwald/flow/compare/0.2.0-alpha.1006...0.2.0-alpha.1007) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1006](https://github.com/mittwald/flow/compare/0.2.0-alpha.1005...0.2.0-alpha.1006) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1005](https://github.com/mittwald/flow/compare/0.2.0-alpha.1004...0.2.0-alpha.1005) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1001](https://github.com/mittwald/flow/compare/0.2.0-alpha.1000...0.2.0-alpha.1001) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1000](https://github.com/mittwald/flow/compare/0.2.0-alpha.999...0.2.0-alpha.1000) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.999](https://github.com/mittwald/flow/compare/0.2.0-alpha.998...0.2.0-alpha.999) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.995](https://github.com/mittwald/flow/compare/0.2.0-alpha.994...0.2.0-alpha.995) (2026-08-04)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.994](https://github.com/mittwald/flow/compare/0.2.0-alpha.993...0.2.0-alpha.994) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.993](https://github.com/mittwald/flow/compare/0.2.0-alpha.992...0.2.0-alpha.993) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.992](https://github.com/mittwald/flow/compare/0.2.0-alpha.991...0.2.0-alpha.992) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.991](https://github.com/mittwald/flow/compare/0.2.0-alpha.990...0.2.0-alpha.991) (2026-08-03)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.990](https://github.com/mittwald/flow/compare/0.2.0-alpha.989...0.2.0-alpha.990) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.989](https://github.com/mittwald/flow/compare/0.2.0-alpha.988...0.2.0-alpha.989) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.988](https://github.com/mittwald/flow/compare/0.2.0-alpha.987...0.2.0-alpha.988) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.987](https://github.com/mittwald/flow/compare/0.2.0-alpha.986...0.2.0-alpha.987) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.986](https://github.com/mittwald/flow/compare/0.2.0-alpha.985...0.2.0-alpha.986) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.985](https://github.com/mittwald/flow/compare/0.2.0-alpha.984...0.2.0-alpha.985) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.984](https://github.com/mittwald/flow/compare/0.2.0-alpha.983...0.2.0-alpha.984) (2026-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.983](https://github.com/mittwald/flow/compare/0.2.0-alpha.982...0.2.0-alpha.983) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.982](https://github.com/mittwald/flow/compare/0.2.0-alpha.981...0.2.0-alpha.982) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.981](https://github.com/mittwald/flow/compare/0.2.0-alpha.980...0.2.0-alpha.981) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.980](https://github.com/mittwald/flow/compare/0.2.0-alpha.979...0.2.0-alpha.980) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.979](https://github.com/mittwald/flow/compare/0.2.0-alpha.978...0.2.0-alpha.979) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.978](https://github.com/mittwald/flow/compare/0.2.0-alpha.977...0.2.0-alpha.978) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.977](https://github.com/mittwald/flow/compare/0.2.0-alpha.976...0.2.0-alpha.977) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.976](https://github.com/mittwald/flow/compare/0.2.0-alpha.975...0.2.0-alpha.976) (2026-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.975](https://github.com/mittwald/flow/compare/0.2.0-alpha.974...0.2.0-alpha.975) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.974](https://github.com/mittwald/flow/compare/0.2.0-alpha.973...0.2.0-alpha.974) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.973](https://github.com/mittwald/flow/compare/0.2.0-alpha.972...0.2.0-alpha.973) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.972](https://github.com/mittwald/flow/compare/0.2.0-alpha.971...0.2.0-alpha.972) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.971](https://github.com/mittwald/flow/compare/0.2.0-alpha.970...0.2.0-alpha.971) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.970](https://github.com/mittwald/flow/compare/0.2.0-alpha.969...0.2.0-alpha.970) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.969](https://github.com/mittwald/flow/compare/0.2.0-alpha.968...0.2.0-alpha.969) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.968](https://github.com/mittwald/flow/compare/0.2.0-alpha.967...0.2.0-alpha.968) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.967](https://github.com/mittwald/flow/compare/0.2.0-alpha.966...0.2.0-alpha.967) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.966](https://github.com/mittwald/flow/compare/0.2.0-alpha.965...0.2.0-alpha.966) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.965](https://github.com/mittwald/flow/compare/0.2.0-alpha.964...0.2.0-alpha.965) (2026-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.964](https://github.com/mittwald/flow/compare/0.2.0-alpha.963...0.2.0-alpha.964) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.963](https://github.com/mittwald/flow/compare/0.2.0-alpha.962...0.2.0-alpha.963) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.962](https://github.com/mittwald/flow/compare/0.2.0-alpha.961...0.2.0-alpha.962) (2026-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 # [0.2.0-alpha.961](https://github.com/mittwald/flow/compare/0.2.0-alpha.960...0.2.0-alpha.961) (2026-07-28)
 
 **Note:** Version bump only for package @mittwald/flow-core

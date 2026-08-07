@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Option,
   Select,
@@ -12,10 +11,9 @@ import {
 <Select>
   <Label>
     App
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="App">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

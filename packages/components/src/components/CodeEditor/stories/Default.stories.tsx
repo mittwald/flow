@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CodeEditor } from "@/components/CodeEditor";
+import { Label } from "@/components/Label";
+import { FieldDescription } from "@/components/FieldDescription";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof CodeEditor> = {
   title: "Form Controls/CodeEditor",
@@ -33,7 +36,9 @@ const meta: Meta<typeof CodeEditor> = {
       }
       language="tsx"
       {...props}
-    />
+    >
+      <Label>Source code</Label>
+    </CodeEditor>
   ),
 };
 export default meta;
@@ -41,3 +46,29 @@ export default meta;
 type Story = StoryObj<typeof CodeEditor>;
 
 export const Default: Story = {};
+
+export const WithFieldDescription: Story = {
+  render: (props) => (
+    <CodeEditor language="json" value={'{ "name": "flow" }'} {...props}>
+      <Label>Configuration</Label>
+      <FieldDescription>Must be valid JSON</FieldDescription>
+    </CodeEditor>
+  ),
+};
+
+export const WithFieldError: Story = {
+  render: (props) => (
+    <CodeEditor language="json" value={'{ "name": }'} isInvalid {...props}>
+      <Label>Configuration</Label>
+      <FieldError>Invalid JSON</FieldError>
+    </CodeEditor>
+  ),
+};
+
+export const WithoutGutters: Story = {
+  args: {
+    showLineNumbers: false,
+    showCodeFolding: false,
+    showLinterMarkers: false,
+  },
+};

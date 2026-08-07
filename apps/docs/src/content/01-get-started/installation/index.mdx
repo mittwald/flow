@@ -31,9 +31,40 @@ diese Packages bereitgestellt.
 
 # Styles importieren
 
-Um die Components-Styles zu verwenden, musst du das Stylesheet importieren.
-Füge diese Zeile zum Einstiegspunkt deines Projektes hinzu.
+Um die Components-Styles zu verwenden, musst du das Stylesheet importieren. Füge
+diese Zeile zum Einstiegspunkt deines Projektes hinzu.
 
 ```
 import "@mittwald/flow-react-components/all.css";
 ```
+
+---
+
+# Defaults für Components festlegen
+
+Einige Components verhalten sich nach einem Standard, den du für deine gesamte
+Anwendung festlegen kannst, anstatt ihn an jeder Verwendung zu wiederholen.
+Dafür umschließt du deine Anwendung mit dem `<ComponentDefaultsProvider />`:
+
+```tsx
+<ComponentDefaultsProvider
+  defaults={{
+    List: { disableInitialSuspenseBoundary: true },
+    Form: { confirmModalCloseOnUnsavedChanges: false },
+  }}
+>
+  <App />
+</ComponentDefaultsProvider>
+```
+
+Jede einzelne Verwendung bleibt stärker als der Standard: Setzt eine List das
+`disableInitialSuspenseBoundary`-Property an ihrer Datenquelle, gilt dort dieser
+Wert. Verschachtelte Provider gelten jeweils für ihren Teilbaum und übernehmen
+die Werte, die sie nicht selbst nennen.
+
+Diese Defaults stehen zur Verfügung:
+
+| Default                                  | Bedeutung                                                                                                         | Wert ohne Provider |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `List.disableInitialSuspenseBoundary`    | Die List rendert beim initialen Laden keine eigene Suspense-Boundary, sondern erscheint erst mit geladenen Daten. | `false`            |
+| `Form.confirmModalCloseOnUnsavedChanges` | Das Schließen eines Modals, das eine Form mit ungespeicherten Änderungen enthält, muss bestätigt werden.          | `true`             |

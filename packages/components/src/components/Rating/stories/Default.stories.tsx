@@ -80,7 +80,7 @@ export const WithCustomIcon: Story = {
       </Icon>
     ),
     iconFilled: (
-      <Icon status="success">
+      <Icon color="success">
         <IconLeafFilled />
       </Icon>
     ),

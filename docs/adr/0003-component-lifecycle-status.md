@@ -1,16 +1,17 @@
 # ADR 0003 – Component lifecycle status
 
-- **Status:** Proposed
-- **Date:** 2026-07-27
+- **Status:** Accepted
+- **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
-- **Affects:** `@mittwald/flow-react-components`, `apps/docs`,
-  Storybook, and a future breaking-change guard (see
+- **Affects:** `@mittwald/flow-react-components`, `apps/docs`, Storybook, and a
+  future breaking-change guard (see
   [RFC #2711](https://github.com/mittwald/flow/issues/2711))
 
-> This ADR defines a **per-component lifecycle status** for Flow components.
-> The status is an authored, per-component annotation. It does **not** affect
-> the overall Flow package version — it is the per-component switch for the
-> semver contract described in [RFC #2711](https://github.com/mittwald/flow/issues/2711).
+> This ADR defines a **per-component lifecycle status** for Flow components. The
+> status is an authored, per-component annotation. It does **not** affect the
+> overall Flow package version — it is the per-component switch for the semver
+> contract described in
+> [RFC #2711](https://github.com/mittwald/flow/issues/2711).
 
 ## Context
 
@@ -56,17 +57,16 @@ switch for the semver contract from
 - `deprecated` = on its way out; may break as part of removal.
 
 The generated status registry (see §4) is the **canonical, machine-readable
-source of this contract**. A future breaking-change guard (its implementation
-is deferred to RFC #2711) **must** read the registry and exclude `beta` (and, in
+source of this contract**. A future breaking-change guard (its implementation is
+deferred to RFC #2711) **must** read the registry and exclude `beta` (and, in
 practice, `deprecated`) components from the breaking-change check. This ADR does
 **not** build that guard; it fixes the intent and the registry shape so the
 guard is not blocked later.
 
 ### 3. Authoring syntax (JSDoc, component-level)
 
-Status is authored as component-level JSDoc, parsed by
-`react-docgen-typescript` (which already captures component-level tags, e.g.
-`@flr-generate`):
+Status is authored as component-level JSDoc, parsed by `react-docgen-typescript`
+(which already captures component-level tags, e.g. `@flr-generate`):
 
 - `@flowStatus beta` — ladder value `beta`.
 - `@flowStatus new` — the `new` flag.
@@ -83,8 +83,9 @@ Omitting all of the above yields `stable`.
 - If a component carries both `@flowStatus beta` and a component-level
   `@deprecated`, **`deprecated` wins** for the `level` — a component on its way
   out takes precedence over beta.
-- `level: "deprecated"` is derived only from a **component-level** `@deprecated`.
-  A `@deprecated` on an individual prop does **not** set the component status.
+- `level: "deprecated"` is derived only from a **component-level**
+  `@deprecated`. A `@deprecated` on an individual prop does **not** set the
+  component status.
 
 ### 4. Single source of truth: the status registry
 
@@ -115,8 +116,17 @@ generator. Everything downstream consumes the derived result.
   from "component is stable" — an ambiguity a sparse map (absence = stable)
   cannot express.
 - **Export:** via `src/index/internal.ts` (i.e. the `/internal` package export).
-  Consumers are documentation, Storybook, and tooling — not the public
-  component API.
+  Consumers are documentation, Storybook, and tooling — not the public component
+  API.
+- **Scope — public surface, not icons.** The registry lists Flow's curated
+  public components (the entries in `src/components/public.ts`). The generated
+  icon components (`Icon*`) carry no JSDoc, are excluded from
+  `doc-properties.json`, and are **not** tracked per icon — the `Icon` component
+  represents them (`stable`). Icons are **never removed — only deprecated**, and
+  that lifecycle is authored in `icons-base/src/icons.yaml`
+  (`deprecated: true`), owned by the icon pipeline. Because there is no icon
+  removal, a breaking-change guard has no per-icon "removed vs. stable"
+  ambiguity to resolve, so per-icon registry entries would add no value.
 
 ### 5. Consumers
 
@@ -147,8 +157,8 @@ generator. Everything downstream consumes the derived result.
   beta warning.
 - **Deprecation warnings stay manual.** Whether an entire component or a single
   prop is deprecated, the developer reports it in code via `useWarnDeprecation`
-  with the correct migration message (the existing pattern, e.g.
-  `Action.tsx`, `TextArea.tsx`). The registry does **not** drive these.
+  with the correct migration message (the existing pattern, e.g. `Action.tsx`,
+  `TextArea.tsx`). The registry does **not** drive these.
 - `DeprecationWarningProvider` is untouched and knows nothing about the status
   system.
 
@@ -160,8 +170,6 @@ generator. Everything downstream consumes the derived result.
 - **Criteria for `beta`:** young API not yet hardened by real-world use; known
   open design questions; complex / experimental surface; likely breaking changes
   before stabilization.
-- **Seed list (non-binding proposal):** `Chat`, `CodeEditor`, plus whatever the
-  team flags as "shaky" during the review.
 
 ## Consequences
 

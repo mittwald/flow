@@ -31,7 +31,7 @@ import {
   Policy,
   generatePasswordCreationFieldValidation,
   RuleType,
-} from "@mittwald/flow-react-components/password-tools";
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useForm } from "react-hook-form";
 
 const customPolicy = Policy.fromDeclaration({

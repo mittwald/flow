@@ -345,11 +345,13 @@ and consistency enforced by tooling, not maintained by hand.
   `@flr-generate` props.
   - ✓ generated props are serializable, least-privilege, backward-compatible.
   - ✗ host-only/non-serializable → ignore remotely or stay host-only.
-- **Deprecation warning hook (`useWarnDeprecation`)** — warn on legacy prop
-  usage, keep supporting it.
+- **Deprecation warning hook (`useWarnDeprecation`)** — warn on any deprecated
+  runtime path (prop, whole component, or hook/alias), keep supporting it.
   `src/components/CartesianChart/CartesianChart.tsx:59`
-  - ✓ a shipped remote prop/API must keep working while guiding to its
-    replacement.
+  - ✓ any shipped API (remote prop, non-remote component, integration export)
+    must keep working while guiding to its replacement.
+  - ✗ a deprecation with no runtime entry point (a type-only alias) — nothing to
+    warn; or a spot with no render/hook context (warn one level up instead).
   - ✗ unshipped/internal API → change directly.
 - **Controlled remote adapter** `[undocumented]` — shared hooks bridge
   serialized value/callbacks. `src/lib/remote/useControlledHostValueProps.ts:23`
@@ -501,9 +503,29 @@ and consistency enforced by tooling, not maintained by hand.
   - ✓ styling genuinely depends on rendered composition.
   - ✗ the condition exists as state/props → apply a class.
 - **Global `:global()` third-party** — target embedded third-party DOM under the
-  root. `src/components/CodeEditor/CodeEditor.module.scss:35`
+  root. `src/components/CodeEditor/CodeEditor.module.scss:47`
   - ✓ scoped styles must reach third-party widget classes.
   - ✗ Flow-owned elements → module classes/contextual styling.
+- **Unlayered escape hatch (`@layer flow.unlayered`)** — take a third-party
+  override out of every cascade layer.
+  `src/components/CodeEditor/CodeEditor.module.scss:44`
+  - ✓ the library injects its own stylesheet at runtime and its declarations
+    would otherwise win: unlayered CSS beats layered CSS regardless of
+    specificity, so a layered override never applies in `all-layered.css`.
+    Confirmed injectors: CodeMirror, react-easy-crop, FontAwesome
+    (`autoAddCss`).
+  - ✗ the library sets **inline styles** → no layer helps; ✗ it only sets SVG
+    presentation attributes → author CSS already wins, no hatch needed
+    (`recharts` ships no CSS at all); ✗ Flow-owned classes → the
+    `flow/unlayered-third-party-only` lint rule rejects it, because the marker
+    costs consumers the layer-based overridability of that rule.
+  - Prefer one block per component at the end of the file; mark at the leaf only
+    where a block would duplicate scaffolding, e.g. rules inside a Sass mixin
+    (`src/components/Icon/Icon.module.scss:24`).
+  - Mark the whole override block, not single declarations — a dependency can
+    add a colliding declaration in any patch release.
+  - Rationale and build mechanics:
+    [ADR 0001, Amendment 2026-08-05](../../docs/adr/0001-css-cascade-layers-in-the-stylesheet.md#amendment-2026-08-05--unlayered-escape-hatch-for-third-party-css).
 - **Global `.flow--…` descendant selectors** `[undocumented]` — coordinate
   independently rendered descendants.
   `src/components/LayoutCard/LayoutCard.module.scss:16`

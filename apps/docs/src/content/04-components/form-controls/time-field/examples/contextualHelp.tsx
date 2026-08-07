@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   TimeField,
   Text,
@@ -11,10 +10,9 @@ import {
 <TimeField>
   <Label>
     Uhrzeit
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Uhrzeit">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

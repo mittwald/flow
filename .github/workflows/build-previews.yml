@@ -9,8 +9,11 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
+# Shared with cleanup-previews.yml: closing a PR queues the cleanup in this same
+# group and cancels any still-running build+deploy for that PR, so the deploy
+# can no longer create preview resources after the cleanup has already run.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: preview-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -121,6 +124,10 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
           MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+          MITTWALD_TLS_CERTIFICATE_ID_DOCS:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+          MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
           # Derive the exact refs the build job pushed (type=ref,event=pr =>
           # `pr-<number>`). Deriving them here avoids the matrix job-output
           # clobber that left one of the two empty and half-deployed previews.

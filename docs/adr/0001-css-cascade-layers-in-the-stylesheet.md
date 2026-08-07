@@ -37,6 +37,10 @@ React Aria Components ship **no CSS of their own** — Flow styles their
 data-/class-hooks itself. So there is no third-party CSS conflict from that
 direction.
 
+> **Corrected on 2026-08-05.** True for React Aria, but it does not generalise
+> to Flow's other dependencies. See
+> [Amendment 2026-08-05](#amendment-2026-08-05--unlayered-escape-hatch-for-third-party-css).
+
 ## Decision drivers
 
 - **Overridability without a specificity fight** for consumers who want it.
@@ -129,6 +133,9 @@ Further decisions:
 
 - **Two artifacts to maintain and document.** Consumers must consciously choose
   the layered variant to gain the benefit.
+- **A small set of rules is deliberately unlayered** and therefore escapes the
+  layer-based overridability the layered variant otherwise promises — see
+  [Amendment 2026-08-05](#amendment-2026-08-05--unlayered-escape-hatch-for-third-party-css).
 - **Opt-in behavior semantics.** In the layered variant, layered CSS loses to
   unlayered CSS. A consumer adopting it whose unlayered global styles/resets
   used to lose against Flow will now see those win (extreme case:
@@ -254,3 +261,69 @@ A spike implements the variants and is verified via
   workspace/codegen).
 - Cosmetic: the many individual `@layer flow.components` blocks could be merged
   into one.
+
+## Amendment 2026-08-05 — unlayered escape hatch for third-party CSS
+
+- **Status:** Accepted
+- **Deciders:** Flow team (m.falkenberg@mittwald.de)
+
+**Corrected assumption.** The context above ruled out third-party CSS conflicts
+because React Aria ships none. That does not generalise: **CodeMirror**,
+**react-easy-crop** and **FontAwesome** (`autoAddCss`) each inject their own
+stylesheet as unlayered `<style>` elements at runtime, outside the build. Since
+unlayered CSS beats layered CSS regardless of specificity, Flow's overrides of
+those libraries' selectors lost in `all-layered.css` — the `CodeEditor` gutter,
+its line padding, the `ImageCropper` mask and the `Icon` box-sizing all fell
+back to library values. `recharts` and the `react-aria` class hooks ship no CSS
+and are unaffected; `react-aria`'s injected press style sits in an anonymous
+`@layer`.
+
+**Decision.** Component stylesheets take such rules out of every layer with a
+build marker:
+
+```scss
+@layer flow.unlayered {
+  .codeEditor .codeMirror {
+    & :global(.cm-gutters) {
+      background-color: inherit;
+    }
+  }
+}
+```
+
+`flow.unlayered` is **not a layer** — no layer of that name exists in either
+artifact. It is honoured in both variants: in `all-layered.css` the marked rules
+land at the top level, in `all.css` nothing changes.
+
+It is only for a dependency's own selectors, and it is marked per block rather
+than per declaration — a dependency can add a colliding declaration in any patch
+release. Consumer documentation was deliberately skipped.
+
+**Mechanics.** `dev/vite/unlayeredMarker.ts` owns the marker; a marker nested
+inside another at rule is rejected, because it cannot be lifted out without
+duplicating that at rule. The release build's `flowComponentsLayerPlugin`
+segments a module's top-level nodes at the markers instead of wrapping them
+wholesale, replacing each marker **in place** — `all.css` strips the layers
+again and source order decides there. Dev, Storybook and the browser tests serve
+component styles unlayered and only strip the marker; where both plugins are in
+one PostCSS pipeline the marker plugin steps aside, so merged Vite configs stay
+correct.
+
+Guards: `stylesheetVariantsPlugin` fails the build if a marker reaches the
+emitted stylesheet; the stylelint rule `flow/unlayered-third-party-only` (error,
+registered globally) requires a non-Flow `:global()` in the marked rule's
+rightmost compound and rejects the marker outside component module stylesheets;
+the `browser-layered` vitest project renders the affected components against the
+layered variant, which the default browser project cannot do.
+
+**Result.** `all.css` is byte-identical to the previous build. In
+`styles-layered.css` the 13 `CodeEditor`, 3 `ImageCropper` and 3 `Icon` rules
+sit outside every layer, the `recharts` and `CodeBlock` rules stay in
+`flow.components`, and no marker survives.
+
+**Price.** The marked rules can no longer be overridden through cascade layers,
+only through specificity or `!important` — which is why the marker is guarded.
+
+`stylesheet:build` also gained a `dependentTasksOutputFiles` input: it did not
+track the components build output, so a changed `all-layered.css` left its nx
+cache valid and the task served a stale `dist/`.

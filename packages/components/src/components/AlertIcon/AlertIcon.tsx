@@ -8,10 +8,10 @@ import {
 } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import type { Status } from "@/lib/types/props";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 
-export type AlertIconProps = IconProps;
+export type AlertIconProps = Omit<IconProps, "status"> & PropsWithStatus;
 
 const icons: Record<Status, ComponentType> = {
   danger: IconDanger,
@@ -30,7 +30,7 @@ export const AlertIcon: FC<AlertIconProps> = (props) => {
   const Icon = icons[status];
 
   const iconProps: IconProps = {
-    status,
+    color: status,
     "aria-label": stringFormatter.format(`status.${status}`),
     ...rest,
   };

@@ -1,8 +1,7 @@
 ---
 component: List
 description:
-  Die List bildet einen strukturierten Rahmen für mehrere ListItems und bietet
-  Funktionen wie Sortierung, Filter und Suche.
+  Die List stellt mehrere ListItems dar und bietet Sortierung, Filter und Suche.
 ---
 
 # Grundlagen
@@ -648,9 +647,9 @@ vordefinierte Ansicht an.
 Beim initialen Laden umschließt die List das Laden der Daten standardmäßig mit
 einer eigenen [Suspense](https://react.dev/reference/react/Suspense)-Boundary
 und zeigt währenddessen ihre Loading View an. Über
-`disableInitialSuspenseBoundary` an der Datenquelle (`<List.StaticData />`,
-`<List.LoaderAsync />`, `<List.LoaderHooks />`) lässt sich dieses Verhalten
-steuern:
+`disableInitialSuspenseBoundary` an der Datenquelle (`<List.LoaderAsync />`,
+`<List.LoaderAsyncResource />`, `<List.LoaderHooks />`) lässt sich dieses
+Verhalten steuern:
 
 | Wert              | Verhalten                                                                                                                                                                                             |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -666,6 +665,10 @@ steuern:
   eingebettet ist, die bzw. der bereits einen eigenen Ladezustand anzeigt. So
   wird die List atomar dargestellt und der Layout-Shift zwischen Loading und
   Empty View vermieden.
+
+Zeigt deine Anwendung durchgängig eigene Ladezustände, kannst du `true` als
+Standard für alle Lists festlegen, statt es an jeder Datenquelle zu wiederholen
+– siehe `<ComponentDefaultsProvider />`.
 
 ---
 

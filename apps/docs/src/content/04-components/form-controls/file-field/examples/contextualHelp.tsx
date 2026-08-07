@@ -3,7 +3,6 @@ import {
   ContextualHelp,
   ContextualHelpTrigger,
   FileField,
-  Heading,
   Label,
   Text,
 } from "@mittwald/flow-react-components";
@@ -11,10 +10,9 @@ import {
 <FileField>
   <Label>
     Zertifikat
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Zertifikat">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

@@ -1,8 +1,6 @@
 ---
 component: Modal
-description:
-  Ein Modal zeigt Inhalte zentriert als Overlay über der Hauptseite an, wodurch
-  der Nutzer sich voll auf den Inhalt des Modals konzentrieren kann.
+description: Ein Modal zeigt Inhalte zentriert als Overlay über der Hauptseite.
 ---
 
 # Grundlagen
@@ -164,6 +162,29 @@ einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
 
 **Size M:** Ein Modal in der Size M (Breite 900 px) wird für komplexere Dialoge
 (z. B. Erstellungs-Prozesse mit mehreren Eingabefeldern) verwendet.
+
+---
+
+# Ungespeicherte Änderungen
+
+Eingaben in einem Modal gehen verloren, wenn es geschlossen wird. Damit das
+nicht unbemerkt passiert, kann zuvor ein Bestätigungs-Dialog erscheinen: bei
+Escape und bei einem Klick außerhalb des Modals. Aktionen in der
+`<ActionGroup />` und der Close-Button in der Überschrift schließen das Modal
+dagegen sofort – hier verwirft der Nutzer seine Änderungen bewusst.
+
+Enthält das Modal eine
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview), passiert
+das automatisch: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
+einem erfolgreichen Submit oder einem `form.reset()` nicht mehr.
+
+Ohne Form – oder wenn du selbst entscheiden willst, wann es etwas zu verlieren
+gibt – setzt du `confirmOnClose`:
+
+<LiveCodeEditor example="confirmOnClose" editorCollapsed />
+
+Beide Wege ergänzen sich: Ein `confirmOnClose` am Modal bleibt wirksam, auch
+wenn eine enthaltene Form gerade keine ungespeicherten Änderungen hat.
 
 ---
 

@@ -1,6 +1,5 @@
-import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { flags } from "@/flags";
+import { useComponentDefaults } from "@/components/ComponentDefaultsProvider";
 import { useModalController } from "@/lib/controller";
 import {
   type BaseSyntheticEvent,
@@ -90,10 +89,15 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       ? { onAfterModalClose: autoReset }
       : autoReset;
 
+  const { confirmModalCloseOnUnsavedChanges } = useComponentDefaults("Form");
+
   const modalController = useModalController();
   modalController.useUpdateOptions({
-    confirmOnClose:
-      flags.requireCloseModalConfirmationOnUnsavedChanges && isDirty,
+    // A dirty Form contributes one close confirmation source to the surrounding
+    // Modal; sources are combined, so a clean Form does not overrule a
+    // `<Modal confirmOnClose>`. The Modal renders the confirmation dialog.
+    // An application that switched the default off contributes nothing at all.
+    confirmOnClose: confirmModalCloseOnUnsavedChanges ? isDirty : undefined,
   });
   modalController.useOnClosed(() => {
     if (autoResetOptions?.onAfterModalClose) {
@@ -160,7 +164,6 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
           {children}
         </FormComponent>
       </FormContextProvider>
-      <ConfirmUnsavedChangesModal />
     </RhfFormContextProvider>
   );
 }

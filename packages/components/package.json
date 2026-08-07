@@ -1,10 +1,14 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.961",
+  "version": "0.2.0-alpha.1009",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://flow.mittwald.de",
   "repository": "https://github.com/mittwald/flow",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index/default.d.ts",
@@ -26,9 +30,9 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.mjs"
     },
-    "./password-tools": {
+    "./mittwald-password-tools-js": {
       "types": "./dist/types/integrations/@mittwald/password-tools-js/index.d.ts",
-      "import": "./dist/js/password-tools.mjs"
+      "import": "./dist/js/@mittwald/password-tools-js.mjs"
     },
     "./all.css": "./dist/css/all.css",
     "./all-layered.css": "./dist/css/all-layered.css",
@@ -47,11 +51,12 @@
     "build:docs-properties": "tsx dev/createDocPropertiesJson.ts",
     "build:icons": "tsx dev/icons/generate.ts",
     "build:remote-components": "tsx dev/remote-components-generator/generateRemoteComponents.ts",
+    "build:status-registry": "tsx dev/status-registry/generateStatusRegistry.ts",
     "build:storybook": "storybook build",
     "clean": "rimraf dist src/components/Icon/components/icons/*",
     "dev": "storybook dev --port 6006",
-    "test:browser": "vitest run --project=browser --browser.headless",
-    "test:browser:dev": "vitest dev --project=browser",
+    "test:browser": "vitest run --project=browser* --browser.headless",
+    "test:browser:dev": "vitest dev --project=browser*",
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"
@@ -59,10 +64,13 @@
   "dependencies": {
     "@codemirror/language": "^6.12.4",
     "@codemirror/lint": "^6.9.7",
+    "@codemirror/state": "^6.7.1",
+    "@codemirror/view": "^6.43.6",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.3.1",
     "@internationalized/string": "^3.2.9",
     "@internationalized/string-compiler": "^3.4.1",
+    "@lezer/common": "^1.5.2",
     "@lezer/highlight": "^1.2.3",
     "@mittwald/flow-icons": "workspace:*",
     "@mittwald/password-tools-js": "3.0.0-alpha.31",
@@ -150,6 +158,7 @@
     "postcss": "^8.5.19",
     "postcss-nested-import": "^1.3.0",
     "postcss-nesting": "^14.0.0",
+    "postcss-scss": "^4.0.9",
     "prettier": "^3.8.4",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
@@ -162,6 +171,7 @@
     "sass": "^1.101.0",
     "storybook": "^10.4.6",
     "storybook-addon-rtl": "^3.0.2",
+    "stylelint": "^17.13.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-plugin-css-modules": "^5.2.0",

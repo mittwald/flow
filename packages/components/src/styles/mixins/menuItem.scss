@@ -31,8 +31,12 @@
   /* Elements */
   :where(.icon) {
     color: var(--menu-item--icon-color--default);
-    transition-property: background-color;
+    transition-property: color;
     transition-duration: var(--transition--duration--default);
+  }
+
+  .checkMark {
+    opacity: 0;
   }
 
   &:hover {
@@ -49,6 +53,7 @@
 
   &:not(:has(.controlIcon)) {
     &[aria-current],
+    &[data-current],
     &[data-selected] {
       background-color: var(--menu-item--background-color--current);
       font-weight: var(--menu-item--font-weight--current);
@@ -56,9 +61,14 @@
   }
 
   &[aria-current],
+  &[data-current],
   &[data-selected] {
     :where(.icon) {
       color: var(--menu-item--icon-color--current);
+    }
+
+    .checkMark {
+      opacity: 1;
     }
 
     .controlIcon {

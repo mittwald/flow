@@ -76,6 +76,9 @@ export default function Layout(props: PropsWithChildren) {
                       <NavigationItem page="context-menu">
                         Context Menu
                       </NavigationItem>
+                      <NavigationItem page="tab-navigation">
+                        Tab Navigation
+                      </NavigationItem>
                       <NavigationItem page="svg">Icon/SVG</NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
                       <NavigationItem page="markdown">Markdown</NavigationItem>

@@ -115,6 +115,32 @@ export default function Page() {
           </Modal>
         </ModalTrigger>
 
+        <ModalTrigger>
+          <Button>Confirm on close</Button>
+          <Modal confirmOnClose>
+            <Heading>New squadron</Heading>
+            <Content>
+              <Section>
+                <Text>
+                  Closing this modal with Escape or with a click outside has to
+                  be confirmed. Cancel closes it right away.
+                </Text>
+                <TextField isRequired>
+                  <Label>Squadron name</Label>
+                </TextField>
+              </Section>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button color="accent">Create squadron</Button>
+                <Button variant="soft" color="secondary">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+
         <LightBoxTrigger>
           <Button>Lightbox</Button>
           <LightBox>

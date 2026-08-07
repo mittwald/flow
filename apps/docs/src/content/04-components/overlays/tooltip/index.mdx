@@ -1,7 +1,7 @@
 ---
 component: Tooltip
 description:
-  Tooltips sind kurze Hilfselemente, die beim Hovern über ein Element zusätzliche Informationen anzeigen.
+  Tooltips zeigen beim Hovern kurze Zusatzinformationen zu einem Element.
 ---
 
 # Grundlagen
@@ -24,8 +24,11 @@ Achte bei der Verwendung eines Tooltips darauf, dass ...
   [Buttons](/04-components/actions/button/overview),
   [Links](/04-components/navigation/link/overview) oder interaktiven Inhalte
   enthalten sein.
-- sie nicht für Elemente mit vorhandener sichtbarer Beschriftung eingesetzt
-  werden.
+- er die sichtbare Beschriftung eines Elements nicht wiederholt, sondern
+  ergänzt.
+- vor dem Hinzufügen geprüft wird, ob der Tooltip überhaupt nötig ist. Ist die
+  Aktion durch ihren Kontext oder ihre Beschriftung bereits klar, lässt du ihn
+  besser weg.
 
 ## Verwendung
 
@@ -47,6 +50,23 @@ Verwende `<TooltipTrigger />` und `<Tooltip />` in Kombination mit der
 gewünschten Component, um beim Hovern der Component einen Tooltip anzuzeigen.
 
 <LiveCodeEditor />
+
+---
+
+# Delay
+
+Tooltips erscheinen verzögert, damit sie beim Hovern über die Oberfläche nicht
+aufblitzen. Über die `delay` Property des Triggers wählst du zwischen zwei
+Verzögerungen.
+
+<LiveCodeEditor example="delay" editorCollapsed row />
+
+**Default (400 ms):** Verwende ihn, wenn das Element ohne den Tooltip nicht
+verständlich ist – z. B. ein Button, der nur aus einem Icon besteht.
+
+**Long (1500 ms):** Verwende ihn für ergänzende Informationen an Elementen, die
+bereits beschriftet sind. Die längere Verzögerung verhindert, dass der Tooltip
+ungewollt ablenkt.
 
 # Properties
 

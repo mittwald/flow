@@ -20,7 +20,7 @@ test.each(testEnvironments)(
     const button = page.getByLocator("button");
 
     await button.hover();
-    await sleep(1600);
+    await sleep(800);
 
     await testScreenshot("Tooltip - visible");
   },

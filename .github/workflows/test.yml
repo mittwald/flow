@@ -40,7 +40,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      - name: Lint
+      - name: Lint & check formatting
         run: pnpm lint
 
       - name: Run unit tests

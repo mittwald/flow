@@ -4,7 +4,6 @@ import {
   CheckboxGroup,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   Text,
 } from "@mittwald/flow-react-components";
@@ -12,10 +11,9 @@ import {
 <CheckboxGroup>
   <Label>
     Berechtigungen
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Berechtigungen">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

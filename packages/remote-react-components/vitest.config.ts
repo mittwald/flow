@@ -32,6 +32,15 @@ export default mergeConfig(
             name: "visual",
             include: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],
             setupFiles: "./dev/vitest/setupBrowser.ts",
+            browser: {
+              ...vitestBrowserTestConfig.browser,
+              // Failure screenshots land in src/tests/visual/__screenshots__ —
+              // the tracked baseline directory — and are not gitignored, so a
+              // local failure leaves stray PNGs that `git add` picks up. They
+              // add nothing either: a mismatch already writes reference, actual
+              // and diff to the gitignored .vitest-attachments.
+              screenshotFailures: false,
+            },
           },
         },
         {

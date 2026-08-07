@@ -1,0 +1,198 @@
+"use client";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
+import styles from "./primitives.module.scss";
+
+type Tone = "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800";
+
+interface LayoutProps extends PropsWithChildren {
+  className?: string;
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  alignItems?: CSSProperties["alignItems"];
+  justifyContent?: CSSProperties["justifyContent"];
+  flexDirection?: CSSProperties["flexDirection"];
+  borderRadius?: CSSProperties["borderRadius"];
+  padding?: CSSProperties["padding"];
+  margin?: CSSProperties["margin"];
+  marginBlock?: CSSProperties["marginBlock"];
+  gap?: CSSProperties["gap"];
+  tone?: Tone;
+}
+
+const cx = (...classes: (string | undefined | false)[]) =>
+  classes.filter(Boolean).join(" ");
+
+const getToneClass = (tone: Tone = "400") => styles[`tone${tone}`];
+
+/**
+ * Wraps an icon. Given a `size`, the icon fills the wrapper instead of using
+ * its own size token — the icon's `size` prop then has no effect.
+ */
+export const WIcon: FC<
+  PropsWithChildren<{
+    tone?: Tone;
+    className?: string;
+    size?: CSSProperties["width"];
+  }>
+> = (props) => {
+  const { children, className, tone = "700", size } = props;
+
+  return (
+    <span
+      className={cx(
+        styles.icon,
+        tone && styles.iconTone,
+        size !== undefined && styles.iconSized,
+        className,
+      )}
+      style={{
+        color: tone ? `var(--neutral--color--${tone})` : undefined,
+        width: size,
+        height: size,
+      }}
+    >
+      {children}
+    </span>
+  );
+};
+
+/**
+ * The outermost element of every wireframe. `scale` shrinks a composition that
+ * would otherwise outgrow the card's media box at the smallest tile width.
+ */
+export const WFrame: FC<LayoutProps & { scale?: number }> = (props) => {
+  const { children, className, scale, ...rest } = props;
+
+  return (
+    <div
+      className={cx(styles.frame, className)}
+      style={{ ...rest, transform: scale ? `scale(${scale})` : undefined }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const WStack: FC<LayoutProps> = (props) => {
+  const { children, className, ...rest } = props;
+
+  return (
+    <div className={cx(styles.stack, className)} style={rest}>
+      {children}
+    </div>
+  );
+};
+
+export const WRow: FC<LayoutProps> = (props) => {
+  const { children, className, alignItems = "center", ...rest } = props;
+
+  return (
+    <div className={cx(styles.row, className)} style={{ alignItems, ...rest }}>
+      {children}
+    </div>
+  );
+};
+
+export const WBox: FC<PropsWithChildren<LayoutProps>> = (props) => {
+  const { children, className, tone, ...rest } = props;
+
+  return (
+    <div className={cx(styles.box, getToneClass(tone), className)} style={rest}>
+      {children}
+    </div>
+  );
+};
+
+export const WLine: FC<LayoutProps> = (props) => {
+  const { className, tone = "500", ...rest } = props;
+
+  return (
+    <span
+      className={cx(styles.line, getToneClass(tone), className)}
+      style={rest}
+    />
+  );
+};
+
+export const WCircle: FC<LayoutProps & { size?: CSSProperties["width"] }> = (
+  props,
+) => {
+  const { className, tone = "500", children, size, ...rest } = props;
+
+  return (
+    <span
+      className={cx(styles.circle, getToneClass(tone), className)}
+      style={{ width: size, height: size, ...rest }}
+    >
+      {children}
+    </span>
+  );
+};
+
+export const WInput: FC<PropsWithChildren<LayoutProps>> = (props) => {
+  const { children, className, tone = "100", ...rest } = props;
+
+  return (
+    <div
+      className={cx(styles.input, getToneClass(tone), className)}
+      style={rest}
+    >
+      {children}
+    </div>
+  );
+};
+
+/**
+ * A popover surface. `tipped` fills it in the same tone as the tip that points
+ * at its trigger (see `tipDown` / `tipInlineStart`), so both read as one
+ * shape.
+ */
+export const WOverlay: FC<
+  PropsWithChildren<LayoutProps & { tipped?: boolean }>
+> = (props) => {
+  const {
+    children,
+    className,
+    tipped,
+    tone = tipped ? "500" : "100",
+    ...rest
+  } = props;
+
+  return (
+    <div
+      className={cx(styles.overlay, getToneClass(tone), className)}
+      style={{
+        ...rest,
+        borderColor: tipped ? "var(--neutral--color--500)" : undefined,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const WButton: FC<LayoutProps & { hideLabel?: boolean }> = (props) => {
+  const { children, className, tone = "700", hideLabel, ...rest } = props;
+
+  return (
+    <div
+      className={cx(styles.button, getToneClass(tone), className)}
+      style={rest}
+    >
+      {hideLabel ? null : (children ?? <WText width="calc(100% - 16px)" />)}
+    </div>
+  );
+};
+
+export const WText: FC<LayoutProps> = (props) => {
+  const { children, className, tone = "500", width, height = 16 } = props;
+
+  return (
+    <div
+      className={cx(styles.text, getToneClass(tone), className)}
+      style={{ width, height }}
+    >
+      {children}
+    </div>
+  );
+};
