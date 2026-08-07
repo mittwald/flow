@@ -28,7 +28,7 @@ with those same components from inside an iframe.
 
 ## Highlights
 
-- **119 components** covering actions, forms, overlays, navigation, data
+- **Various components** covering actions, forms, overlays, navigation, data
   visualization, content, and status.
 - **Accessible by default** — most components wrap
   [react-aria-components](https://react-spectrum.adobe.com/react-aria/components.html),
