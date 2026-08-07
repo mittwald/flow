@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1014](https://github.com/mittwald/flow/compare/0.2.0-alpha.1013...0.2.0-alpha.1014) (2026-08-07)
+
+### Bug Fixes
+
+* **Modal:** keep close confirmation armed after an intermediate submit ([#2779](https://github.com/mittwald/flow/issues/2779)) ([9138e11](https://github.com/mittwald/flow/commit/9138e113099f2d2cc48bf361596f5d1c5d87c18e))
+
 # [0.2.0-alpha.1013](https://github.com/mittwald/flow/compare/0.2.0-alpha.1012...0.2.0-alpha.1013) (2026-08-07)
 
 **Note:** Version bump only for package @mittwald/flow-project
