@@ -29,7 +29,7 @@ export const flowComponentsLayerPlugin = () => ({
     for (const node of [...root.nodes]) {
       if (isUnlayeredMarker(node)) {
         layer = undefined;
-        segments.push(...node.nodes);
+        segments.push(...(node.nodes ?? []));
         continue;
       }
 
