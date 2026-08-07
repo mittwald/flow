@@ -8,8 +8,7 @@
   "sideEffects": [
     "**/*.css",
     "**/*.scss",
-    "./src/styles/index.ts",
-    "./dist/js/globals.mjs"
+    "./src/styles/index.ts"
   ],
   "exports": {
     ".": {
