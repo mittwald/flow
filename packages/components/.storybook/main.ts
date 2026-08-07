@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig } from "vite";
-import { tsgoCheckerPlugin } from "../dev/vite/tsgoCheckerPlugin";
+import { tsgoCheckerPlugin } from "../dev/vite/tsgoCheckerPlugin.ts";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],

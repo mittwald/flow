@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "composite": false,
     "declaration": false,
     "declarationMap": false,
     "incremental": false,
+    "moduleResolution": "bundler",
     "noEmit": true,
     "rootDir": ".."
   },
