@@ -15,6 +15,7 @@ Definition of Done, workflow).
 src/components/Button/
 ├── Button.tsx               # implementation (hand-written)
 ├── Button.module.scss       # styles (hand-written)
+├── Button.module.d.scss.ts  # GENERATED — CSS-module class-name types
 ├── index.ts                 # barrel (hand-written)
 ├── view.ts                  # GENERATED — remote view declaration (@flr-generate only)
 ├── stories/
@@ -188,6 +189,15 @@ if ("action" in props) {
   match prop values (`.size-s`, `.primary`).
 - Class composition with `clsx`, consumer `className` appended last:
   `clsx(styles.button, styles[size], styles[color], className)`.
+- **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
+  committed generated artifact — see the root
+  [Generated code](../../AGENTS.md#generated-code--must-be-committed) table,
+  `pnpm nx build:scss-types components`). A narrow-union index (`styles[color]`,
+  `styles[`size-${size}`]`) stays type-safe as-is; a `string`-typed or runtime
+  index needs a helper from `@/lib/scss/selectors` — **not** an
+  `as keyof typeof styles` cast, which hides missing classes:
+  `prefixedStyleClassname(styles, "size-", size)` for a `` `prefix-${x}` `` key (guard out a no-class default so the value matches a real suffix), or `styleClassname(styles,
+  key)`(returns`string | undefined`) for a bare key.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.

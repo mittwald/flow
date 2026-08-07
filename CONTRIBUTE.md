@@ -114,9 +114,10 @@ Five invariants that hold everywhere in this repo — internalize these and the
 rest is detail:
 
 1. **Generated code is committed — and never hand-edited.** Remote views, icon
-   components, and `doc-properties.json` are generated. After changing their
-   sources, regenerate (`pnpm build` covers everything) and commit the result.
-   CI fails on any uncommitted generated diff.
+   components, CSS-module type stubs (`*.module.d.scss.ts`), and
+   `doc-properties.json` are generated. After changing their sources, regenerate
+   (`pnpm build` covers everything) and commit the result. CI fails on any
+   uncommitted generated diff.
 2. **Don't break extension developers.** Props of `@flr-generate` components are
    a contract — mStudio extensions in the wild use them. Keep old paths working
    and log their usage with `useWarnDeprecation`. Breaking changes for consumers
@@ -169,6 +170,7 @@ Every component lives in its own **PascalCase** folder under
 packages/components/src/components/Button/
 ├── Button.tsx              # implementation
 ├── Button.module.scss      # styles (CSS Module written in SCSS)
+├── Button.module.d.scss.ts # ⚙️ AUTO-GENERATED — CSS-module class-name types
 ├── index.ts                # barrel export (3 lines, see below)
 ├── view.ts                 # ⚙️ AUTO-GENERATED — do not edit by hand
 └── stories/
@@ -280,6 +282,11 @@ The root class is the lower-camel component name; modifier classes match prop
 values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
+Importing `styles` gives per-class typed access from a generated
+`Badge.module.d.scss.ts` stub. For a dynamic class — a `string`-typed or runtime
+key — use a helper from `@/lib/scss/selectors` (`prefixedStyleClassname` /
+`styleClassname`), not an `as keyof typeof styles` cast.
+
 ### 3. Add the barrel `index.ts`
 
 Always the same three lines (the `./view` line only exists on `@flr-generate`
@@ -355,8 +362,8 @@ pnpm nx build:remote-components components
 ```
 
 > ⚠️ **Commit the generated files.** CI runs `git diff --exit-code` and will
-> fail if generated code (remote views, icons) isn't committed. See
-> [Testing](#testing).
+> fail if generated code (remote views, icons, CSS-module type stubs) isn't
+> committed. See [Testing](#testing).
 
 For remote-capable components, also:
 
