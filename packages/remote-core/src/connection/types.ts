@@ -3,6 +3,7 @@ import type {
   ExtBridgeConnectionApi,
 } from "@mittwald/ext-bridge";
 import type { HostConfig } from "@mittwald/flow-core";
+import type { ReportedEvent } from "@/events/remoteEvents";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
 export type { RemoteConnection } from "@mittwald/remote-dom-core";
@@ -44,6 +45,7 @@ export interface HostExports extends ExtBridgeConnectionApi {
   setNavigationState: (state: NavigationState) => Promise<void>;
   getHostConfig: () => Promise<HostConfig>;
   reportDeprecation: (message: string) => Promise<void>;
+  reportEvent: (event: ReportedEvent) => Promise<void>;
 }
 
 export interface RemoteExports {

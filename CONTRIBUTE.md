@@ -636,6 +636,12 @@ chore(docs): migrate site URL and redirect pages
 `feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci` for
 everything that isn't. Write messages for the changelog reader.
 
+TypeScript type-level changes aren't under the semver guarantee, so a type break
+never forces a Major on its own. But a **deliberate** (even small) TS breaking
+change still ships a **migration note in the commit body and in the release
+notes** telling consumers how to adapt — see
+[ADR 0005](docs/adr/0005-semver-contract.md) for the rationale.
+
 The commit **type** also decides **where your PR lands** — see
 [Choosing the base branch](#choosing-the-base-branch).
 
