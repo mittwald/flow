@@ -7,7 +7,9 @@
   "repository": "https://github.com/mittwald/flow",
   "sideEffects": [
     "**/*.css",
-    "**/*.scss"
+    "**/*.scss",
+    "./src/styles/index.ts",
+    "./dist/js/globals.mjs"
   ],
   "exports": {
     ".": {
