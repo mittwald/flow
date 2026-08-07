@@ -41,7 +41,6 @@
   background-color: var(--neutral--color--100);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   justify-content: center;
 
   &.darkBackground,
@@ -129,6 +128,8 @@
   margin-block-start: auto;
   background-color: var(--neutral--color--100);
   border-top: 1px solid var(--border-color);
+  border-end-start-radius: var(--corner-radius--m);
+  border-end-end-radius: var(--corner-radius--m);
   display: flex;
   justify-content: center;
 

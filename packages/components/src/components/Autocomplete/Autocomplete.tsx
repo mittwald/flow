@@ -116,7 +116,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
           props={propsContext}
           dependencies={[optionsOverlayController]}
         >
-          <div {...focusWithin.focusWithinProps} ref={container}>
+          <div
+            {...focusWithin.focusWithinProps}
+            className={styles.autocomplete}
+            ref={container}
+          >
             <UNSAFE_PortalProvider getContainer={() => container.current}>
               <Aria.Autocomplete
                 filter={contains}
@@ -131,6 +135,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                   renderEmptyState={renderEmptyState}
                   isNonModal
                   placement="bottom start"
+                  containerPadding={0}
                 >
                   <UiComponentTunnelExit
                     id="options"
