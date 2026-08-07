@@ -18,7 +18,8 @@ import {
   ModeButton,
   type ModeButtonProps,
 } from "@/components/MarkdownEditor/components/ModeButton";
-import type { ButtonProps } from "@/components/Button";
+import { type ButtonProps } from "@/components/Button";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: ModeButtonProps["currentMode"];
@@ -66,6 +67,8 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
         <ToolbarButton {...sharedToolButtonProps} type="orderedList">
           <IconOrderedList />
         </ToolbarButton>
+
+        <UiComponentTunnelExit id="toolbarActions" component="MarkdownEditor" />
       </div>
 
       <ModeButton
