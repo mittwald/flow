@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1012](https://github.com/mittwald/flow/compare/0.2.0-alpha.1011...0.2.0-alpha.1012) (2026-08-07)
+
+### Bug Fixes
+
+* **components:** keep the global stylesheet out of tree shaking ([#2819](https://github.com/mittwald/flow/issues/2819)) ([e3a173c](https://github.com/mittwald/flow/commit/e3a173cd3ff65176d2a3bc3b2ea53047258d7867))
+
 # [0.2.0-alpha.1011](https://github.com/mittwald/flow/compare/0.2.0-alpha.1010...0.2.0-alpha.1011) (2026-08-07)
 
 ### Bug Fixes
