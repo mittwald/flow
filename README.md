@@ -70,7 +70,8 @@ export default function App() {
 Prefer to override Flow's styles without specificity tricks? Import the
 [CSS Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)
 variant instead — `@mittwald/flow-react-components/all-layered.css`. See the
-[stylesheet guide](https://flow.mittwald.de/01-get-started/stylesheet#layered-variante-optional) for when to use which.
+[stylesheet guide](https://flow.mittwald.de/01-get-started/stylesheet#layered-variante-optional)
+for when to use which.
 
 Set application-wide component defaults once by wrapping your app in
 `ComponentDefaultsProvider`; every individual usage still wins over the default.
