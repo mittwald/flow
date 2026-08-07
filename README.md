@@ -1,4 +1,4 @@
-# flow.
+# Flow
 
 ## mStudio Design System
 
