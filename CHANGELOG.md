@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1011](https://github.com/mittwald/flow/compare/0.2.0-alpha.1010...0.2.0-alpha.1011) (2026-08-07)
+
+### Bug Fixes
+
+* **Autocomplete:** apply consumer className to root element ([#2821](https://github.com/mittwald/flow/issues/2821)) ([02ee324](https://github.com/mittwald/flow/commit/02ee324d7733cd960c3b9b8092b1911d40b793d4))
+
 # [0.2.0-alpha.1010](https://github.com/mittwald/flow/compare/0.2.0-alpha.1009...0.2.0-alpha.1010) (2026-08-07)
 
 **Note:** Version bump only for package @mittwald/flow-project
