@@ -38,7 +38,17 @@
       inset-inline-end: var(--form-control--padding-x);
       z-index: 1;
     }
+  }
+}
 
+/*
+ * CodeMirror ships its theme as unlayered `<style>` elements that it injects
+ * into the document at runtime, outside of Flow's build. Unlayered CSS beats
+ * layered CSS regardless of specificity, so these overrides only apply in the
+ * layered stylesheet variant if they leave the cascade layer as well.
+ */
+@layer flow.unlayered {
+  .codeEditor .codeMirror {
     /*
      * The gutter needs an opaque background – the content scrolls underneath
      * it – but it must follow the background of the editor, which changes with

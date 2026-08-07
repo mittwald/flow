@@ -7,6 +7,7 @@ import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
+import { styleClassname } from "@/lib/scss/selectors";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -42,7 +43,10 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.segmentedControlContainer,
-    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+    styleClassname(
+      styles,
+      getContainerBreakpointSizeClassName(containerBreakpointSize),
+    ),
     className,
   );
 

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "rootDir": ".."
+  },
+  "extends": "../tsconfig.json",
+  "files": ["../src/types.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx"]
+}

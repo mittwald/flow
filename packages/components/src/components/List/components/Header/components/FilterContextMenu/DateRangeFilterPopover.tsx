@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import ButtonView from "@/views/ButtonView";
-import headerStyles from "@/components/List/components/Header/Header.module.css";
+import headerStyles from "@/components/List/components/Header/Header.module.scss";
 import TextView from "@/views/TextView";
 import { IconFilter } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";

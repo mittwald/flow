@@ -43,15 +43,17 @@ Escape und bei einem Klick außerhalb des Modals. Aktionen in der
 dagegen sofort – hier verwirft der Nutzer seine Änderungen bewusst.
 
 Enthält das Modal eine
-[Form (React Hook Form)](/04-components/react-hook-form/form/overview), ist das
-der Standard: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
-einem erfolgreichen Submit oder einem `form.reset()` nicht mehr. Voraussetzung
-ist das Flag `requireCloseModalConfirmationOnUnsavedChanges` in der Anwendung.
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview), passiert
+das automatisch: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
+einem erfolgreichen Submit oder einem `form.reset()` nicht mehr.
 
 Ohne Form – oder wenn du selbst entscheiden willst, wann es etwas zu verlieren
 gibt – setzt du `confirmOnClose`:
 
 <LiveCodeEditor example="confirmOnClose" editorCollapsed />
+
+Beide Wege ergänzen sich: Ein `confirmOnClose` am Modal bleibt wirksam, auch
+wenn eine enthaltene Form gerade keine ungespeicherten Änderungen hat.
 
 ---
 

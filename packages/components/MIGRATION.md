@@ -1,5 +1,46 @@
 # Migrations
 
+## From version `0.2.0-alpha.1004` to `>=0.2.0-alpha.1005`
+
+### Closing a Modal with unsaved changes is confirmed by default
+
+A `Modal` that contains a react-hook-form `<Form>` now asks for confirmation
+before it closes while the form is _dirty_ — previously this required the
+`requireCloseModalConfirmationOnUnsavedChanges` flag. After a successful submit
+or a `form.reset()` the modal closes right away, and actions in the
+`<ActionGroup />` as well as the close button in the heading still close it
+immediately.
+
+Nothing to do if you had the flag enabled. To keep the previous behavior, switch
+the default off (see below).
+
+### `flags` is replaced by the ComponentDefaultsProvider
+
+The global `flags` object is deprecated. Application-wide defaults are defined
+with the `<ComponentDefaultsProvider />` instead, which additionally works per
+subtree:
+
+```diff
+- import { flags } from "@mittwald/flow-react-components";
+-
+- flags.requireCloseModalConfirmationOnUnsavedChanges = false;
+- flags.disableInitialListSuspenseBoundaries = true;
++ import { ComponentDefaultsProvider } from "@mittwald/flow-react-components";
++
++ <ComponentDefaultsProvider
++   defaults={{
++     Form: { confirmModalCloseOnUnsavedChanges: false },
++     List: { disableInitialSuspenseBoundary: true },
++   }}
++ >
++   <App />
++ </ComponentDefaultsProvider>
+```
+
+Assigning a flag keeps working — it acts as the application-wide default below
+the provider and logs a deprecation warning — but the flags will be removed in a
+future release.
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart

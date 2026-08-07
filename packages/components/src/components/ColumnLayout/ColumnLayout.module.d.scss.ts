@@ -1,0 +1,20 @@
+declare const classNames: {
+  readonly columnLayoutContainer: "columnLayoutContainer";
+  readonly columnLayout: "columnLayout";
+  readonly "hide-l-1": "hide-l-1";
+  readonly "hide-l-2": "hide-l-2";
+  readonly "hide-l-3": "hide-l-3";
+  readonly "hide-l-4": "hide-l-4";
+  readonly "hide-l-5": "hide-l-5";
+  readonly "hide-m-1": "hide-m-1";
+  readonly "hide-m-2": "hide-m-2";
+  readonly "hide-m-3": "hide-m-3";
+  readonly "hide-m-4": "hide-m-4";
+  readonly "hide-m-5": "hide-m-5";
+  readonly "hide-s-1": "hide-s-1";
+  readonly "hide-s-2": "hide-s-2";
+  readonly "hide-s-3": "hide-s-3";
+  readonly "hide-s-4": "hide-s-4";
+  readonly "hide-s-5": "hide-s-5";
+};
+export default classNames;
