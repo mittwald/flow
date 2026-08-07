@@ -49,7 +49,7 @@ export const assertMarkersAreTopLevel = (root: postcss.Root): void => {
 export const liftUnlayeredMarkers = (root: postcss.Root): void => {
   for (const node of [...root.nodes]) {
     if (isUnlayeredMarker(node)) {
-      node.replaceWith(...node.nodes);
+      node.replaceWith(...(node.nodes ?? []));
     }
   }
 };

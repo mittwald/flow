@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import { Button } from "@/components/Button";
-import styles from "@/components/FileCard/FileCard.module.scss";
 import { IconClose } from "@/components/Icon/components/icons";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
@@ -15,7 +14,6 @@ export const DeleteButton: FC<Props> = (props) => {
 
   return (
     <Button
-      className={styles.deleteButton}
       aria-label={stringFormatter.format(`delete`)}
       variant="plain"
       color="secondary"

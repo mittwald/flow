@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useList } from "@/components/List";
-import styles from "./Table.module.css";
+import styles from "./Table.module.scss";
 import clsx from "clsx";
 import TableView from "@/views/TableView";
 import TableHeaderView from "@/views/TableHeaderView";

@@ -1,5 +1,6 @@
 import type { AlphaColor, PropsWithElementType } from "@/lib/types/props";
 import styles from "./Heading.module.scss";
+import { styleClassname } from "@/lib/scss/selectors";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -40,7 +41,7 @@ export const Heading = flowComponent("Heading", (props) => {
     size && styles[`size-${size}`],
     color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
-    elementType && styles[`h${level}`],
+    elementType && styleClassname(styles, `h${level}`),
     className,
   );
 

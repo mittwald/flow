@@ -150,7 +150,7 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(0);
       expect(hmrContext.server.reloadModule).toBeCalledTimes(0);
     }
@@ -178,7 +178,7 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
         generateVirtualFileId("./dev/vite/test/locales/*.locale.json"),
