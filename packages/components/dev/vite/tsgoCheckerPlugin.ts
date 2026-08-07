@@ -223,8 +223,12 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
   // -1 = has not run yet; otherwise the error count of the previous run.
   let previousCount = -1;
   let timer: ReturnType<typeof setTimeout> | undefined;
+  let disposed = false;
 
   const check = async (): Promise<void> => {
+    if (disposed) {
+      return;
+    }
     if (running) {
       rerunQueued = true;
       return;
@@ -235,6 +239,12 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
       tsconfigPath,
       server.config.root,
     );
+
+    // The server may have closed during the (async) tsgo run — don't touch it.
+    if (disposed) {
+      running = false;
+      return;
+    }
 
     if (spawnError) {
       if (!missingBinWarned) {
@@ -279,6 +289,9 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
   };
 
   const scheduleCheck = (): void => {
+    if (disposed) {
+      return;
+    }
     if (timer) {
       clearTimeout(timer);
     }
@@ -308,12 +321,31 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
       // reflects the current state instead of a stale error. The first
       // connection is already covered by the initial check below.
       let hasConnected = false;
-      devServer.ws.on("connection", () => {
+      const onConnection = (): void => {
         if (hasConnected) {
           scheduleCheck();
         }
         hasConnected = true;
-      });
+      };
+      devServer.ws.on("connection", onConnection);
+
+      // Remove our listeners and cancel pending work when the server closes —
+      // e.g. a Storybook / watch-mode restart in the same process — so handlers
+      // and timers don't accumulate across restarts. Vite has no first-class
+      // dev-teardown hook that also fires in middleware mode (Storybook has no
+      // httpServer), so we wrap `close`, which always runs on shutdown/restart.
+      const originalClose = devServer.close.bind(devServer);
+      devServer.close = async () => {
+        disposed = true;
+        if (timer) {
+          clearTimeout(timer);
+        }
+        devServer.watcher.off("change", onChange);
+        devServer.watcher.off("add", onChange);
+        devServer.watcher.off("unlink", onChange);
+        devServer.ws.off("connection", onConnection);
+        return originalClose();
+      };
 
       // Kick off the initial check without blocking server startup.
       void check();
