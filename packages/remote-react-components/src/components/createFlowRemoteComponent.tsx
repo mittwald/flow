@@ -5,12 +5,14 @@ import type {
 import {
   flowComponent,
   isFlowComponentName,
+  useReportComponentUsage,
+  ViewCompositionReset,
 } from "@mittwald/flow-react-components/internal";
 import type {
   RemoteElement,
   RemoteElementConstructor,
 } from "@mittwald/flow-remote-core";
-import { createElement } from "react";
+import { createElement, type FC } from "react";
 import { createRemoteComponent } from "@/lib/createRemoteComponent";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -58,7 +60,24 @@ export function createFlowRemoteComponent<
     ) as never;
   }
 
-  return element;
+  const RemoteComponent: FC<AnyRecord> = (props) => {
+    const isViewComposition = useReportComponentUsage(flowComponentTag);
+    const remoteElement = createElement(
+      element,
+      props as never,
+      props.children,
+    );
+
+    return isViewComposition ? (
+      <ViewCompositionReset>{remoteElement}</ViewCompositionReset>
+    ) : (
+      remoteElement
+    );
+  };
+
+  RemoteComponent.displayName = `FlowRemoteComponent(${flowComponentTag})`;
+
+  return RemoteComponent as never;
 }
 
 export default createFlowRemoteComponent;

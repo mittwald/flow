@@ -109,6 +109,14 @@ class ReviewDeployer {
     return `${imageType.toUpperCase()}/PR-${this.prNumber}`;
   }
 
+  private getTlsCertificateId(
+    imageType: "docs" | "storybook",
+  ): string | undefined {
+    return imageType === "docs"
+      ? process.env.MITTWALD_TLS_CERTIFICATE_ID_DOCS
+      : process.env.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK;
+  }
+
   // Guard against a race with the cleanup workflow: the build+deploy takes
   // several minutes, but `cleanup-previews.yml` fires the moment a PR closes.
   // A PR merged before its deploy finishes gets cleaned up first (finds
@@ -301,6 +309,44 @@ class ReviewDeployer {
     }
   }
 
+  async connectTlsCertificate(
+    ingressId: string,
+    imageType: "docs" | "storybook",
+  ): Promise<void> {
+    const certificateId = this.getTlsCertificateId(imageType);
+
+    if (!certificateId) {
+      return;
+    }
+
+    console.log(`🔒 Connecting TLS certificate to ingress ${ingressId}...`);
+
+    try {
+      const response = await fetch(
+        `https://api.mittwald.de/v2/ingresses/${ingressId}/tls`,
+        {
+          method: "PATCH",
+          headers: getApiHeaders(),
+          body: JSON.stringify({
+            certificateId,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.warn(
+          `⚠️  Failed to connect TLS certificate: ${response.statusText} - ${error}`,
+        );
+        return;
+      }
+
+      console.log("✅ TLS certificate connected successfully");
+    } catch (error) {
+      console.warn("⚠️  Failed to connect TLS certificate:", error);
+    }
+  }
+
   async deployImage(
     image: DockerImage,
     services: MittwaldService[],
@@ -348,16 +394,21 @@ class ReviewDeployer {
     }
 
     const existingIngress = ingresses.find((i) => i.hostname === hostname);
+    let ingressId: string;
 
     if (!existingIngress) {
       console.log(`   Ingress for ${hostname} does not exist, creating...`);
       if (!containerId) {
         throw new Error(`Container ID not found for ${serviceName}`);
       }
-      await this.createIngress(hostname, containerId);
+      const ingress = await this.createIngress(hostname, containerId);
+      ingressId = ingress.id;
     } else {
       console.log(`   Ingress for ${hostname} already exists`);
+      ingressId = existingIngress.id;
     }
+
+    await this.connectTlsCertificate(ingressId, image.imageType);
 
     return hostname;
   }

@@ -36,7 +36,11 @@ const nonDirectionalPhysicalProperties = [
 ];
 
 export default {
-  plugins: ["stylelint-scss", "stylelint-plugin-logical-css"],
+  plugins: [
+    "stylelint-scss",
+    "stylelint-plugin-logical-css",
+    "./packages/components/dev/stylelint/unlayeredThirdPartyOnly.mjs",
+  ],
   extends: ["stylelint-config-standard", "stylelint-config-recommended-scss"],
   rules: {
     "custom-property-pattern": null,
@@ -63,6 +67,13 @@ export default {
       { fix: true, ignore: nonDirectionalPhysicalProperties },
     ],
     "logical-css/require-logical-keywords": [true, { fix: true }],
+    // "@layer flow.unlayered" is a build marker that takes a rule out of every
+    // cascade layer. It exists solely to beat CSS that a dependency injects at
+    // runtime — unlayered CSS wins over layered CSS regardless of specificity —
+    // and it costs consumers the layer-based overridability of that rule.
+    // Registered globally, not just for module stylesheets, so the marker is
+    // also caught where the build would never strip it.
+    "flow/unlayered-third-party-only": true,
   },
   overrides: [
     {

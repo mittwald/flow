@@ -23,7 +23,7 @@ export const Groups: FC<Props> = (props) => {
   return Object.entries(navGroups).map(([group, mdxFiles]) => {
     const pathname = mdxFiles[0].pathname;
     const isComponent = pathname.includes("04-components");
-    const href = `${pathname}${isComponent ? "/overview" : ""}`;
+    const href = isComponent ? "/04-components" : pathname;
 
     if (render === "menuItem") {
       return (

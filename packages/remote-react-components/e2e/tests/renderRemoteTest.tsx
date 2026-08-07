@@ -1,6 +1,6 @@
 import type { RemoteExtBridgeConnectionApi } from "@mittwald/flow-remote-core";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
-import { Suspense } from "react";
+import { Suspense, type ComponentProps } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { expect } from "vitest";
 import { render } from "vitest-browser-react";
@@ -9,6 +9,7 @@ export const remoteTestServerPort = 6022;
 
 interface Options {
   skipLoadingViewCheck?: boolean;
+  rendererProps?: Partial<ComponentProps<typeof RemoteRenderer>>;
 }
 
 const loadingTimeout = 30_000;
@@ -27,7 +28,7 @@ export const renderRemoteTest = async (
   testName: string,
   options: Options = {},
 ) => {
-  const { skipLoadingViewCheck = false } = options;
+  const { skipLoadingViewCheck = false, rendererProps } = options;
   const testFilePath = expect.getState().snapshotState.testFilePath;
 
   const url = new URL("http://localhost");
@@ -44,6 +45,7 @@ export const renderRemoteTest = async (
           src={url.toString()}
           timeoutMs={loadingTimeout}
           extBridgeImplementation={extBridgeImplementation}
+          {...rendererProps}
         />
       </Suspense>
     </ErrorBoundary>,

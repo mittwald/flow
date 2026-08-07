@@ -158,7 +158,7 @@ Remote generation details:
 Never break a shipped API — keep the old path working and warn at runtime with
 `useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
 of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `password-tools`).
+export (`nextjs`, `mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -196,6 +196,15 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **Overriding a dependency that injects its own stylesheet** (CodeMirror,
+  react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
+  `<style>` elements are unlayered, and unlayered CSS beats layered CSS
+  regardless of specificity, so a normal rule never applies in
+  `all-layered.css`. Only for the library's own `:global()` selectors — the
+  `flow/unlayered-third-party-only` lint rule enforces that, because the marker
+  costs consumers the layer-based overridability of the rule. New or changed
+  rendered behavior here gets a test in `src/tests/layered/`, which runs against
+  the layered variant; the default browser project cannot see this class of bug.
 
 ## Testing — the actual bar
 
@@ -255,8 +264,18 @@ props to hide.
 
 ## Misc
 
-- Feature flags: `src/flags.ts` holds a few behavior toggles; there is no formal
-  policy around them.
+- Application-wide component defaults: `ComponentDefaultsProvider`
+  (`src/components/ComponentDefaultsProvider/`) is where a behavior default that
+  an application should be able to set **once** belongs. Add the setting to the
+  `ComponentDefaults` interface plus its built-in value in
+  `builtInComponentDefaults`, and read it with `useComponentDefaults("<Name>")`
+  at the place that decides. Resolution order: local prop → provider →
+  deprecated `flags` → built-in default. This is not a replacement for
+  `PropsContext`: a UI component clears the props context for its children, so
+  PropsContext cannot carry an app-wide default past the first UI ancestor.
+- Feature flags: `src/flags.ts` is the deprecated predecessor of the
+  `ComponentDefaultsProvider`. Assigned flags still act as an application-wide
+  default (and warn via `useWarnDeprecation`); do not add new ones.
 - `SettingsProvider` (`src/components/SettingsProvider/`) is the built-in
   persistence for component settings (e.g. `List` remembering its view
   settings), with pluggable backends (localStorage by default). Internal
