@@ -7,10 +7,9 @@ description: Ein TextField ermöglicht die Texteingabe über die Tastatur.
 
 # Code-Beispiel
 
-Verwende `<TextField />`, um ein TextField anzuzeigen. Nutze ein `<Label />`, um
-Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen
-erleichtern. Weiterführende Informationen (z. B. Formatierungshinweise) können
-über die `<FieldDescription />` ergänzt werden.
+Nutze ein `<Label />`, um Informationen zu vermitteln, die das Verständnis der
+Eingabeanforderungen erleichtern. Weiterführende Informationen (z. B.
+Formatierungshinweise) können über die `<FieldDescription />` ergänzt werden.
 
 <LiveCodeEditor />
 
@@ -25,9 +24,9 @@ Verwende ein TextField für einzeilige Texteingaben, zum Beispiel in
 
 Achte bei der Verwendung eines TextFields darauf, dass …
 
-- das TextField nur für einzeilige Eingaben verwendet wird.
-- für mehrzeilige Inhalte ein
-  [TextArea](/04-components/form-controls/text-area/overview) verwendet wird.
+- das TextField nur für einzeilige Eingaben verwendet wird – für mehrzeilige
+  Angaben eignet sich das
+  [TextArea](/04-components/form-controls/text-area/overview).
 - für spezielle Eingabetypen das passende `type` Attribut verwendet wird,
   beispielsweise `email` für E-Mail-Adressen.
 
@@ -90,9 +89,8 @@ invalidiert. Mittels `<FieldError />` kann eine Fehlermeldung angezeigt werden.
 
 # Disabled
 
-Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden. Sobald
-die Ursache für die Deaktivierung behoben ist, kann das TextField wieder normal
-verwendet werden.
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem TextField interagieren kann.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
 
