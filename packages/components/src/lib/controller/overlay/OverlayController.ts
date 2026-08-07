@@ -69,6 +69,14 @@ export class OverlayController {
    * a single flag keeps them from overwriting each other.
    */
   private confirmOnCloseSources = observable.map<object, boolean>();
+  /**
+   * Active grants that allow closing without a confirmation. Each entry is
+   * scoped to an ongoing operation that legitimately closes the overlay – e.g.
+   * a `Form` submit – and is dropped again when that operation has finished, so
+   * an operation that does _not_ close the overlay leaves the confirmation
+   * armed.
+   */
+  private closeWithoutConfirmationGrants = new Set<object>();
 
   public constructor(options: ConstructorOptions = {}) {
     makeObservable(this, {
@@ -251,14 +259,22 @@ export class OverlayController {
 
     const { bypassConfirmation = false } = options;
 
-    if (
-      toOpen === false &&
-      this.confirmOnCloseEnabled &&
-      !this.closeIsConfirmed &&
-      !bypassConfirmation
-    ) {
-      this.showConfirmationModal = true;
-      return;
+    if (toOpen === false) {
+      // The confirmation is a one-shot permission for exactly this close
+      // attempt – consume it here instead of only when a close succeeds, so it
+      // cannot survive an aborted close and disarm later attempts.
+      const closeIsConfirmed = this.closeIsConfirmed;
+      this.closeIsConfirmed = false;
+
+      if (
+        this.confirmOnCloseEnabled &&
+        !closeIsConfirmed &&
+        this.closeWithoutConfirmationGrants.size === 0 &&
+        !bypassConfirmation
+      ) {
+        this.showConfirmationModal = true;
+        return;
+      }
     }
 
     let aborted: boolean;
@@ -273,7 +289,6 @@ export class OverlayController {
 
     if (!aborted) {
       this.isOpen = toOpen;
-      this.closeIsConfirmed = false;
     }
   }
 
@@ -299,6 +314,22 @@ export class OverlayController {
 
   public useConfirmationController() {
     return useCloseOverlayConfirmationController(this);
+  }
+
+  /**
+   * Allows closing this overlay without a confirmation until the returned
+   * disposer is called. Use it around an operation that may legitimately close
+   * the overlay – e.g. a `Form` submit, where a "discard unsaved changes?"
+   * prompt would be nonsense – and dispose it as soon as that operation has
+   * finished. An operation that ends without closing the overlay therefore
+   * leaves the confirmation armed (#2775).
+   */
+  public grantCloseWithoutConfirmation(): DisposerFn {
+    const grant = {};
+    this.closeWithoutConfirmationGrants.add(grant);
+    return () => {
+      this.closeWithoutConfirmationGrants.delete(grant);
+    };
   }
 
   public confirmClose(): void {
