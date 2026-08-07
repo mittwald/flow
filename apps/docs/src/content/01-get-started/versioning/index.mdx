@@ -123,7 +123,10 @@ Andernfalls kann bereits ein Patch dein Styling brechen.
 Flows TypeScript-Typen folgen nicht Semantic Versioning. Ein `tsc`-Fehler kann
 daher theoretisch schon in einem Patch auftreten. Wenn ein solcher Bruch für
 dein Projekt teuer wäre, pinne exakte Versionen (statt `^`-Ranges), sodass ein
-Update bewusst und kontrolliert erfolgt.
+Update bewusst und kontrolliert erfolgt. Zu einem bewusst herbeigeführten
+Type-Breaking-Change gehört eine Migrationsnotiz in den Release Notes – so
+bekommst du einen konkreten Upgrade-Pfad, auch wenn die Änderung in einem Minor
+oder Patch erscheint.
 
 ---
 
