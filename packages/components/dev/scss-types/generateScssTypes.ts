@@ -48,7 +48,12 @@ const delay = (ms: number): Promise<void> =>
 const toDtsPath = (scssFile: string): string =>
   scssFile.replace(/\.module\.scss$/, ".module.d.scss.ts");
 
-/** Wait until every expected declaration exists and its mtime stops changing. */
+/**
+ * Wait until every expected declaration exists and its mtime stops changing.
+ * Throws on timeout so a hung or failed generation (e.g. a SCSS module that
+ * fails to compile, whose declaration is therefore never written) fails the
+ * build instead of silently leaving stale or missing files.
+ */
 const waitForWrites = async (
   expected: string[],
   { stableMs = 1500, timeoutMs = 180_000 } = {},
@@ -76,7 +81,14 @@ const waitForWrites = async (
       return;
     }
   }
-  console.warn("[scss-types] timed out waiting for declaration writes");
+  const missing = expected.filter((file) => !existsSync(file));
+  const [firstMissing] = missing;
+  throw new Error(
+    `[scss-types] timed out after ${timeoutMs}ms waiting for declarations to settle` +
+      (firstMissing
+        ? ` — ${missing.length} still missing, e.g. ${path.relative(packageRoot, firstMissing)}`
+        : " — files exist but kept changing"),
+  );
 };
 
 // sass-dts implements these hooks as plain functions that don't use the Rollup
