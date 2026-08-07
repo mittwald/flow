@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import { page } from "vitest/browser";
 import {
@@ -67,11 +68,7 @@ test.each(testEnvironments)(
       <Flex gap="s" align="center">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <IllustratedMessage color={color}>
                 <IconStar />
                 <Heading>{firstLetterToUppercase(color)}</Heading>

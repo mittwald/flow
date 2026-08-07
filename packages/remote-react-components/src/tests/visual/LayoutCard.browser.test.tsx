@@ -37,8 +37,10 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.977" })).each(testEnvironments)(
     await render(
       <LayoutCard>
         <TabNavigation>
-          <Link>Tab 1</Link>
-          <Link>Tab 2</Link>
+          <Link href="#" aria-current="page">
+            Tab 1
+          </Link>
+          <Link href="#">Tab 2</Link>
         </TabNavigation>
         Content
       </LayoutCard>,

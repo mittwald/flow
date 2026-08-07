@@ -75,7 +75,7 @@ test.each(testEnvironments)(
         </Message>
         <Message color="#ffeedd">
           <Content>
-            <Text>Custom color</Text>
+            <Text color="dark-static">Custom color</Text>
           </Content>
         </Message>
       </Flex>,
