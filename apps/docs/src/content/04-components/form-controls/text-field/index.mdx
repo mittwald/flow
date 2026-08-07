@@ -3,155 +3,37 @@ component: TextField
 description: Ein TextField ermöglicht die Texteingabe über die Tastatur.
 ---
 
-# Grundlagen
-
-## Best Practices
-
-- Frage nur nach Informationen, die wirklich notwendig sind.
-- Stelle sicher, dass das [Label](/04-components/content/label/overview)
-  prägnant, vollständig sichtbar und leicht verständlich ist.
-- Verwende die FieldDescription für sinnvolle Beispiele oder
-  Formatierungshinweise.
-- Stelle sicher, dass Fehlermeldungen hilfreich sind, eine Lösung bieten und
-  leicht umzusetzen sind.
-- Verwende keine Placeholder für wesentliche Informationen.
-
 ---
 
-# Anwendung
-
-## Position
-
-Das TextField wird meistens innerhalb eines
-[ColumnLayouts](/04-components/structure/column-layout/overview) platziert und
-füllt dort immer die zur Verfügung stehende Breite. Dadurch folgt es auch einer
-Aufteilung in Spalten, sofern das ColumnLayout eine vorsieht. Am besten eignet
-sich ein 1:1 Raster für TextFields, sodass sie maximal die Hälfte des
-Content-Bereichs einnehmen können. Das ColumnLayout kann zudem erweitert werden,
-um spezifischeren Layoutanforderungen gerecht zu werden.
-
-<Do example="columnLayout">
-Nutze ein 1:1 [ColumnLayout](/04-components/structure/column-layout/overview) für
-TextFields. Darin kann ein weiteres Raster (z. B. 2:1) verwendet werden, um
-sinnvolle Gruppierungen (z. B. Straße und Hausnummer) innerhalb des Layouts zu
-erstellen.
-
-</Do>
-
----
-
-## isRequired
-
-Um ein TextField als erforderlich zu markieren, benutze das dazugehörige
-Property `isRequired`. Felder, die nicht required sind, werden als optional
-gekennzeichnet.
-
-<LiveCodeEditor example="required" editorCollapsed />
-
----
-
-# Inhalt
-
-## Label
-
-Jedes TextField sollte ein passendes
-[Label](/04-components/content/label/overview) besitzen. Ein gutes Label
-vermittelt alle notwendigen Informationen, um das TextField korrekt auszufüllen.
-Außerdem sollte es knapp (max. 2 Wörter), präzise und weder versteckt noch
-auspunktiert sein.
-
-  <Do example="default">
-    Verwende ein kurzes, präzises Label, das essentielle Eingabeanforderungen kommuniziert.
-
-  </Do>
-
----
-
-## FieldDescription
-
-Die FieldDescription kann als optionaler Hilfstext unterhalb des TextFields
-angezeigt werden, um dem Nutzer ergänzenden Informationen oder Anweisungen zu
-bieten. Sie sollte sparsam verwendet werden und kann Eingabe- und
-Formatierungsbeispiele liefern.
-
----
-
-## Placeholder
-
-Placeholder sind nicht accessible und dürfen daher keine Informationen
-enthalten, die für das korrekte Ausfüllen des TextFields erforderlich sind. Das
-größte Problem ist, dass Placeholder verschwinden, sobald Text eingegeben wird.
-Darüber hinaus werden sie von manchen Assistenztechnologien nicht korrekt
-erkannt und sind kognitiv schwieriger zu verarbeiten als die FieldDescription.
-Statt einen Placeholder zu verwenden, ergänze das TextField mit ...
-
-- einem [Label](/04-components/content/label/overview) für Informationen, die
-  essenziell für das Verständnis der Eingabeanforderungen sind.
-- einer FieldDescription, um dem Nutzer Beispiele oder Formatierungshinweise zu
-  geben.
-
-<DoAndDont>
-  <Dont example="placeholder">
-    Placeholder sollten keine essentiellen Informationen oder Formatierungshinweise enthalten.
-
-  </Dont>
-  <Do example="default">
-    Verwende das [Label](/04-components/content/label/overview) für essentielle Informationen und die FieldDescription für Ergänzungen, z. B. Formatierungshinweise oder Beispiele.
-  </Do>
-</DoAndDont>
-
----
-
-# Accessibility
-
-Das TextField kann sowohl über die Tastatur erreicht und aktiviert werden als
-auch mit Assistenztechnologien angesteuert werden. Damit auch der Inhalt
-barrierefrei ist, solltest du:
-
-- wenn möglich ein [Label](/04-components/content/label/overview) verwenden,
-  welches essenzielle Eingabeanforderungen über das Label kommuniziert. Können
-  die Eingabeanforderungen an das TextField durch den Kontext erschlossen
-  werden, kann auf den Einsatz eines Labels verzichtet werden. In diesem Fall
-  muss das TextField über `aria-labelledby` verknüpft oder über ein `aria-label`
-  beschrieben werden.
-- die FieldDescription nutzen, um Unterstützung, Beispiele oder
-  Formatierungshilfen zu geben.
-- Placeholder nicht für Inhalte verwenden, die zum Ausfüllen des TextFields
-  hilfreich sind.
-
-# Playground
+# Code-Beispiel
 
 Verwende `<TextField />`, um ein TextField anzuzeigen. Nutze ein `<Label />`, um
 Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen
-erleichtern. Weiterführende Informationen (z. B. Formatierungshinweise) können
+erleichtern. Weiterführende Informationen (z. B. Formatierungshinweise) können
 über die `<FieldDescription />` ergänzt werden.
 
-<LiveCodeEditor stretch />
+<LiveCodeEditor />
 
 ---
 
-# Disabled
+# Verwendung
 
-Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden. Sobald
-die Ursache für die Deaktivierung behoben ist, kann das TextField wieder normal
-verwendet werden.
+Verwende ein TextField für einzeilige Texteingaben, zum Beispiel in
+[Forms](/03-patterns/01-patterns/forms).
 
-<LiveCodeEditor example="disabled" editorCollapsed stretch />
+## Best Practices
 
----
+Achte bei der Verwendung eines TextFields darauf, dass …
 
-# Validierung
+- das TextField nur für einzeilige Eingaben verwendet wird.
+- für mehrzeilige Inhalte ein
+  [TextArea](/04-components/form-controls/text-area/overview) verwendet wird.
+- für spezielle Eingabetypen das passende `type` Attribut verwendet wird,
+  beispielsweise `email` für E-Mail-Adressen.
 
-Um das textField zu validieren, stehen folgende Properties zur Verfügung:
-
-- `isRequired` für Pflichtfelder.
-- `validate` für eigene Validierungen.
-- HTML Input Properties wie `type="email"`, `minLength`.
-
-Wenn die Benutzereingabe nicht den Anforderungen entspricht, wird das TextField
-invalidiert. Mittels `<FieldError />` kann eine Fehlermeldung angezeigt werden.
-
-<LiveCodeEditor example="invalid" editorCollapsed stretch />
+Weitere Richtlinien zur Verwendung von TextFields in Forms, etwa zu Labels,
+Hilfetexten, Platzhaltern und Fehlermeldungen, findest du im
+[Forms Pattern](/03-patterns/01-patterns/forms).
 
 ---
 
@@ -161,7 +43,7 @@ Standardmäßig ist der Value eines TextFields leer. Es ist möglich dem TextFie
 eine uncontrolled `defaultValue` mitzugeben. Es kann auch ein controlled `value`
 für das TextField gesetzt werden, um dieses über `onChange` zu updaten.
 
-<LiveCodeEditor example="defaultValue" editorCollapsed stretch />
+<LiveCodeEditor example="defaultValue" editorCollapsed />
 
 ---
 
@@ -170,7 +52,14 @@ für das TextField gesetzt werden, um dieses über `onChange` zu updaten.
 Das TextField unterstützt die Standard-Properties eines HTML `<input />` Feldes.
 (s. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input))
 
-<LiveCodeEditor example="inputProps" editorCollapsed stretch />
+<LiveCodeEditor example="inputProps" editorCollapsed />
+
+## Passwort
+
+TextFields mit `type="password"` erhalten automatisch einen Button zum ein- und
+ausblenden des Passworts.
+
+<LiveCodeEditor example="password" editorCollapsed />
 
 ---
 
@@ -180,16 +69,32 @@ Das TextField unterstützt die Standard-Properties eines HTML `<input />` Feldes
 die aktuelle Anzahl der Zeichen und, falls angegeben, die maximale Zeichenanzahl
 anzeigt.
 
-<LiveCodeEditor example="characterCount" editorCollapsed stretch />
+<LiveCodeEditor example="characterCount" editorCollapsed />
 
 ---
 
-# Passwort
+# Validierung
 
-TextFields mit `type="password"` erhalten automatisch einen Button zum ein- und
-ausblenden des Passworts.
+Um das TextField zu validieren, stehen folgende Properties zur Verfügung:
 
-<LiveCodeEditor example="password" editorCollapsed stretch />
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+- HTML Input Properties wie `type="email"`, `minLength`.
+
+Wenn die Benutzereingabe nicht den Anforderungen entspricht, wird das TextField
+invalidiert. Mittels `<FieldError />` kann eine Fehlermeldung angezeigt werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed />
+
+---
+
+# Disabled
+
+Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden. Sobald
+die Ursache für die Deaktivierung behoben ist, kann das TextField wieder normal
+verwendet werden.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
 
 ---
 
@@ -197,10 +102,17 @@ ausblenden des Passworts.
 
 ## Align
 
-Benutze die [Align](/04-components/structure/align/overview) Component, um einem
+Benutze die [Align](/04-components/structure/align/overview) Component, um einen
 Button neben deinem TextField zu platzieren.
 
-<LiveCodeEditor example="align" editorCollapsed stretch />
+<LiveCodeEditor example="align" editorCollapsed />
+
+## Button
+
+Du kannst einen Button zum TextField hinzufügen, um benutzerdefinierte Aktionen
+auszuführen.
+
+<LiveCodeEditor example="button" editorCollapsed />
 
 ## ContextualHelp
 
@@ -208,21 +120,16 @@ Benutze die [ContextualHelp](/04-components/overlays/contextual-help/overview)
 Component, wenn du weitere Informationen bereitstellen möchtest, und diese zu
 lang für die FieldDescription sind.
 
-<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## React Hook Form
 
 Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
-<LiveCodeEditor example="form" editorCollapsed stretch />
+<LiveCodeEditor example="form" editorCollapsed />
 
-## Button
-
-Du kannst einen Button zum TextField hinzufügen, um benutzerdefinierte Aktionen
-auszuführen.
-
-<LiveCodeEditor example="button" editorCollapsed stretch />
+---
 
 # Properties
 
