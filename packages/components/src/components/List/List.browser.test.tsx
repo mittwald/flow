@@ -9,7 +9,7 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { type ReactNode } from "react";
+import { use, type ReactNode } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import {
@@ -554,4 +554,54 @@ describe("Sorting", () => {
       listItem42TextContent + listItem43TextContent,
     );
   });
+});
+
+describe("Loading view", () => {
+  const neverResolvingPromise = new Promise(() => {
+    // never resolves
+  });
+
+  const SuspendingContent = () => {
+    use(neverResolvingPromise);
+    return null;
+  };
+
+  const getTestElementWithSuspendingItem = (viewMode: "list" | "tiles") => (
+    <List aria-label="Test" defaultViewMode={viewMode} loadingItemsCount={1}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data>
+        showTiles
+        textValue={({ num }) => String(num)}
+        loadingView={
+          <ListItemView>
+            <Content>Loading item</Content>
+          </ListItemView>
+        }
+      >
+        {({ num }) =>
+          num === 42 ? (
+            <ListItemView>
+              <Content>
+                <SuspendingContent />
+              </Content>
+            </ListItemView>
+          ) : (
+            <span>{listItem43TextContent}</span>
+          )
+        }
+      </ListItem>
+    </List>
+  );
+
+  test.each(["list", "tiles"] as const)(
+    "Suspended items use the item's loading view (%s view)",
+    async (viewMode) => {
+      await render(getTestElementWithSuspendingItem(viewMode));
+
+      // The loaded item proves the initial loading views are gone; only the
+      // suspended item still renders a loading view.
+      await expect.element(listItem43).toBeInTheDocument();
+      await expect.element(page.getByText("Loading item")).toBeInTheDocument();
+    },
+  );
 });

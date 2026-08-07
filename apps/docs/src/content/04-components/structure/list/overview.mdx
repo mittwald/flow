@@ -149,6 +149,9 @@ ein generisches Skeleton verwendet. Über das `loadingView`-Property eines
 `<List.Item />` (bzw. eines `<TableCell />` in der Tabellenansicht) lässt sich
 diese Ansicht anpassen.
 
+Die Loading View gilt in allen View Modes und auch für einzelne Items, die nach
+dem initialen Laden noch suspenden – etwa weil ihr Inhalt eigene Daten nachlädt.
+
 Gestalte die Loading View so, dass sie dem tatsächlichen Inhalt in Aufbau und
 Größe möglichst nahekommt, und verwende dafür
 [Skeleton](/04-components/content/skeleton/overview) und `SkeletonText`. So

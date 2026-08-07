@@ -18,6 +18,7 @@ import { Section } from "@/components/Section";
 import {
   ListItem,
   ListItemView,
+  ListStaticData,
   ListSummary,
   typedList,
 } from "@/components/List";
@@ -39,6 +40,7 @@ import { DateTime } from "luxon";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { dummyText } from "@/lib/dev/dummyText";
 import IllustratedMessage from "@/components/IllustratedMessage";
+import { use } from "react";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -348,6 +350,46 @@ export const LoadingView: Story = {
             </TableRow>
           </TableBody>
         </Table>
+      </List>
+    );
+  },
+};
+
+/**
+ * The item's loading view is also used while an already rendered item suspends
+ * — e.g. because its content loads data of its own.
+ */
+export const LoadingViewOfSuspendedItems: Story = {
+  render: () => {
+    const SuspendingItemContent = () => {
+      use(endlessPromise);
+      return null;
+    };
+
+    return (
+      <List aria-label="Invoices" defaultViewMode="tiles">
+        <ListStaticData data={[1, 2, 3]} />
+        <ListItem
+          loadingView={
+            <ListItemView>
+              <Avatar>
+                <Skeleton height="600px" width="600px" />
+              </Avatar>
+              <Heading>
+                <SkeletonText width="10em" />
+              </Heading>
+            </ListItemView>
+          }
+          showTiles
+        >
+          {() => (
+            <ListItemView>
+              <Content>
+                <SuspendingItemContent />
+              </Content>
+            </ListItemView>
+          )}
+        </ListItem>
       </List>
     );
   },
