@@ -8,7 +8,9 @@ description: Ein Modal zeigt Inhalte zentriert als Overlay über der Hauptseite.
 # Code-Beispiel
 
 Um ein Modal erscheinen zu lassen, kann z. B. ein `<Button />` als
-`<ModalTrigger />` genutzt werden.
+`<ModalTrigger />` genutzt werden. Gliedere den Inhalt des Modals in
+`<Heading />`, `<Content />` und optional eine `<ActionGroup />` – diese
+Struktur gewährleistet die Barrierefreiheit.
 
 <LiveCodeEditor />
 
@@ -33,26 +35,6 @@ Verwende ein Modal, um ...
   Inhalt leicht verständlich.
 - Vermeide es, zu viele Modals übereinander zu öffnen, da der Nutzer sonst die
   Orientierung verliert.
-
-## Modals vs. OffCanvas
-
-<DoAndDont>
-  <Info heading="Verwende ein Modal, um z. B. ...">
-    - einfache Dialoge wie Abfragen oder kurze Anlege-Prozesse anzuzeigen.
-
-    - kurze Bearbeitungsmöglichkeiten darzustellen.
-
-    - Inhalte anzuzeigen, die kein Scrollen erfordern und für die die Breite des Modals ausreicht.
-
-  </Info>
-  <Info heading="Verwende ein OffCanvas, um z. B. ...">
-    - Inhalte anzuzeigen, die nicht gekürzt werden können und ein Scrollen
-    erfordern.
-
-    - sehr breite Inhalte anzuzeigen.
-
-  </Info>
-</DoAndDont>
 
 ---
 
@@ -96,17 +78,13 @@ wenn du selbst entscheiden willst, wann es etwas zu verlieren gibt – setzt du
 
 Standardmäßig wird der Close-Button in der Überschrift ausgeblendet, sobald das
 Modal eine `<ActionGroup />` enthält – die Aktionen im Footer übernehmen dann
-das Schließen. Über das `showCloseButton` Property lässt sich das überschreiben:
-`showCloseButton={true}` zeigt den Button auch neben einer ActionGroup,
-`showCloseButton={false}` blendet ihn immer aus.
+das Schließen. Über das `showCloseButton` Property lässt sich das überschreiben.
 
 <LiveCodeEditor example="showCloseButton" editorCollapsed />
 
 ---
 
-# Kombiniere mit …
-
-## Controller
+# Controller
 
 Neben dem `<ModalTrigger />` kann das Modal auch über einen Controller gesteuert
 werden.
@@ -116,9 +94,14 @@ geöffnet wurden.
 
 <LiveCodeEditor example="controller" editorCollapsed />
 
-## Form
+---
 
-Verwende eine Form innerhalb eines Modals wie im folgenden Beispiel.
+# Kombiniere mit …
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed />
 
