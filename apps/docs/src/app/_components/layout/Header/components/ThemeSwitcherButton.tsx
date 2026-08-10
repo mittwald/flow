@@ -3,7 +3,7 @@
 import { Button, Icon, Text } from "@mittwald/flow-react-components";
 import { IconContrastFilled, IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "@teispace/next-themes";
-import type { FC } from "react";
+import { useEffect, useState, type FC } from "react";
 
 interface Props {
   iconOnly?: boolean;
@@ -14,6 +14,10 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
 
   const { theme, setTheme } = useTheme();
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const currentTheme = mounted ? theme : undefined;
+
   const toggleTheme = () => {
     const nextTheme =
       theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
@@ -21,18 +25,18 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
   };
 
   const icon =
-    theme === "light" ? (
+    currentTheme === "light" ? (
       <IconSun />
-    ) : theme === "dark" ? (
+    ) : currentTheme === "dark" ? (
       <IconMoon />
     ) : (
       <IconContrastFilled />
     );
 
   const ariaLabel =
-    theme === "light"
+    currentTheme === "light"
       ? "Zum dunklen Farbmodus wechseln, heller Farbmodus aktiv"
-      : theme === "dark"
+      : currentTheme === "dark"
         ? "Zum System-Farbmodus wechseln, dunkler Farbmodus aktiv"
         : "Zum hellen Farbmodus wechseln, System-Farbmodus aktiv";
 
@@ -48,9 +52,9 @@ export const ThemeSwitcherButton: FC<Props> = (props) => {
       <Icon>{icon}</Icon>
       {!iconOnly && (
         <Text>
-          {theme === "light"
+          {currentTheme === "light"
             ? "Heller Farbmodus"
-            : theme === "dark"
+            : currentTheme === "dark"
               ? "Dunkler Farbmodus"
               : "System-Farbmodus"}
         </Text>
