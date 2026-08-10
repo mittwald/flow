@@ -145,7 +145,7 @@
     "@storybook/react-vite": "^10.4.6",
     "@tabler/icons-react": "^3.44.0",
     "@types/node": "25.9.5",
-    "@typescript/native-preview": "7.0.0-dev.20260707.2",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-react": "5.2.0",
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",

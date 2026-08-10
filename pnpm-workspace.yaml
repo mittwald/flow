@@ -3,6 +3,19 @@ patchedDependencies:
   "acorn": "patches/acorn.patch"
   "@sigstore/sign@4.1.1": "patches/@sigstore__sign@4.1.1.patch"
 
+overrides:
+  "typescript": "npm:@typescript/typescript6@^6.0.2"
+
+allowBuilds:
+  '@bundled-es-modules/glob': true
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  nx: true
+  sharp: true
+  simple-git-hooks: true
+  style-dictionary: true
+
 packages:
   - "apps/*"
   - "packages/*"

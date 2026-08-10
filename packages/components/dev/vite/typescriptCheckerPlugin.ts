@@ -6,21 +6,22 @@ import process from "process";
 
 /**
  * A Vite plugin that type-checks the project with the native TypeScript
- * compiler (`tsgo`, from `@typescript/native-preview`) and surfaces the current
- * errors in the terminal and the browser error overlay.
+ * compiler (`tsc` from `@typescript/native`, i.e. the Go-based TypeScript 7)
+ * and surfaces the current errors in the terminal and the browser error
+ * overlay.
  *
  * It is a lightweight alternative to `vite-plugin-checker`: instead of a
- * long-lived, memory-hungry `tsc` worker, it runs a fast one-shot `tsgo` check
+ * long-lived, memory-hungry worker, it runs a fast one-shot native check
  * (debounced) whenever a TypeScript file changes.
  *
  * Wire it up in `.storybook/main.ts`:
  *
  * ```ts
  * viteFinal: (config) =>
- *   mergeConfig(config, { plugins: [tsgoCheckerPlugin()] }),
+ *   mergeConfig(config, { plugins: [typescriptCheckerPlugin()] }),
  * ```
  */
-export interface TsgoCheckerOptions {
+export interface TypescriptCheckerOptions {
   /**
    * Path to the tsconfig, relative to the Vite root (the package directory).
    *
@@ -40,9 +41,9 @@ export interface TsgoCheckerOptions {
    */
   debounce?: number;
   /**
-   * Explicit path to the `tsgo` binary. By default it is resolved from the
-   * installed `@typescript/native-preview` package, falling back to `tsgo` on
-   * the `PATH`.
+   * Explicit path to the native TypeScript compiler binary. By default it is
+   * resolved from the installed `@typescript/native` package (the `tsc` bin),
+   * falling back to `tsc` on the `PATH`.
    */
   bin?: string;
 }
@@ -61,12 +62,12 @@ const DIAGNOSTIC_RE =
   /^(?<file>.+?)\((?<line>\d+),(?<column>\d+)\): error (?<code>TS\d+): (?<message>.*)$/;
 
 /**
- * Parse `tsgo`/`tsc --pretty false` stdout into structured diagnostics.
+ * Parse `tsc --pretty false` stdout into structured diagnostics.
  *
- * Pure and side-effect free so it can be unit tested without spawning `tsgo`.
+ * Pure and side-effect free so it can be unit tested without spawning `tsc`.
  * Non-diagnostic lines (summaries, blank lines, unrelated noise) are ignored.
  */
-export const parseTsgoOutput = (
+export const parseTypescriptOutput = (
   output: string,
   root: string,
 ): TsDiagnostic[] => {
@@ -102,39 +103,38 @@ interface ResolvedBin {
   prefixArgs: string[];
 }
 
-const resolveTsgoBin = (root: string, explicit?: string): ResolvedBin => {
+const resolveTypescriptBin = (root: string, explicit?: string): ResolvedBin => {
   if (explicit) {
     return { command: explicit, prefixArgs: [] };
   }
   try {
-    const require = createRequire(path.join(root, "__tsgo_resolve__.js"));
-    const pkgJsonPath =
-      require.resolve("@typescript/native-preview/package.json");
-    const pkg = require("@typescript/native-preview/package.json") as {
+    const require = createRequire(path.join(root, "__typescript_resolve__.js"));
+    const pkgJsonPath = require.resolve("@typescript/native/package.json");
+    const pkg = require("@typescript/native/package.json") as {
       bin?: string | Record<string, string>;
     };
-    const binRelative = typeof pkg.bin === "string" ? pkg.bin : pkg.bin?.tsgo;
+    const binRelative = typeof pkg.bin === "string" ? pkg.bin : pkg.bin?.tsc;
     if (binRelative) {
       const binAbsolute = path.resolve(path.dirname(pkgJsonPath), binRelative);
-      // tsgo's bin is a Node launcher (`#!/usr/bin/env node`); run it via node.
+      // The native tsc bin is a Node launcher (`#!/usr/bin/env node`); run via node.
       return { command: process.execPath, prefixArgs: [binAbsolute] };
     }
   } catch {
     // fall through to a PATH lookup
   }
-  return { command: "tsgo", prefixArgs: [] };
+  return { command: "tsc", prefixArgs: [] };
 };
 
-interface TsgoRunResult {
+interface TypescriptRunResult {
   diagnostics: TsDiagnostic[];
   spawnError?: string;
 }
 
-const runTsgo = (
+const runTypescript = (
   { command, prefixArgs }: ResolvedBin,
   tsconfigPath: string,
   root: string,
-): Promise<TsgoRunResult> =>
+): Promise<TypescriptRunResult> =>
   new Promise((resolve) => {
     const child = spawn(
       command,
@@ -154,7 +154,7 @@ const runTsgo = (
     child.stderr?.on("data", (chunk: Buffer) => (output += chunk.toString()));
     child.on("error", (error: Error) => (spawnError = error.message));
     child.on("close", () =>
-      resolve({ diagnostics: parseTsgoOutput(output, root), spawnError }),
+      resolve({ diagnostics: parseTypescriptOutput(output, root), spawnError }),
     );
   });
 
@@ -178,7 +178,7 @@ const logDiagnostics = (
     })
     .join("\n");
   logger.error(
-    `${RED}✗ [tsgo] ${pluralErrors(diagnostics.length)}${RESET}\n${body}`,
+    `${RED}✗ [typescript] ${pluralErrors(diagnostics.length)}${RESET}\n${body}`,
     {
       timestamp: true,
     },
@@ -197,9 +197,9 @@ const toOverlayError = (
     .join("\n\n");
   const [first] = diagnostics;
   return {
-    message: `${pluralErrors(diagnostics.length)} (tsgo)\n\n${body}`,
+    message: `${pluralErrors(diagnostics.length)} (typescript)\n\n${body}`,
     stack: "",
-    plugin: "tsgo-checker",
+    plugin: "typescript-checker",
     id: first?.file,
     loc: first
       ? { file: first.file, line: first.line, column: first.column }
@@ -207,7 +207,9 @@ const toOverlayError = (
   };
 };
 
-export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
+export const typescriptCheckerPlugin = (
+  options: TypescriptCheckerOptions = {},
+): Plugin => {
   const {
     tsconfigPath = "tsconfig.json",
     overlay = true,
@@ -234,13 +236,13 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
       return;
     }
     running = true;
-    const { diagnostics, spawnError } = await runTsgo(
+    const { diagnostics, spawnError } = await runTypescript(
       resolvedBin,
       tsconfigPath,
       server.config.root,
     );
 
-    // The server may have closed during the (async) tsgo run — don't touch it.
+    // The server may have closed during the (async) typescript run — don't touch it.
     if (disposed) {
       running = false;
       return;
@@ -250,8 +252,8 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
       if (!missingBinWarned) {
         missingBinWarned = true;
         server.config.logger.warn(
-          `${RED}[tsgo] could not run tsgo (${spawnError}).${RESET} ` +
-            `Install it with: pnpm add -D @typescript/native-preview`,
+          `${RED}[typescript] could not run the native compiler (${spawnError}).${RESET} ` +
+            `Install it with: pnpm add -D @typescript/native@npm:typescript@^7.0.2`,
           { timestamp: true },
         );
       }
@@ -273,9 +275,12 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
         if (previousCount !== 0) {
           // Announce success on the first run or after clearing errors, so a
           // stream of green edits does not spam the terminal.
-          server.config.logger.info(`${GREEN}✓ [tsgo] no type errors${RESET}`, {
-            timestamp: true,
-          });
+          server.config.logger.info(
+            `${GREEN}✓ [typescript] no type errors${RESET}`,
+            {
+              timestamp: true,
+            },
+          );
         }
       }
       previousCount = diagnostics.length;
@@ -299,11 +304,11 @@ export const tsgoCheckerPlugin = (options: TsgoCheckerOptions = {}): Plugin => {
   };
 
   return {
-    name: "vite-plugin-tsgo-checker",
+    name: "vite-plugin-typescript-checker",
     apply: "serve",
     configureServer(devServer) {
       server = devServer;
-      resolvedBin = resolveTsgoBin(devServer.config.root, bin);
+      resolvedBin = resolveTypescriptBin(devServer.config.root, bin);
 
       const onChange = (file: string): void => {
         if (
