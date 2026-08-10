@@ -2,7 +2,7 @@
 
 import { Button, Icon, Text } from "@mittwald/flow-react-components";
 import { IconContrastFilled, IconMoon, IconSun } from "@tabler/icons-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 import type { FC } from "react";
 
 interface Props {

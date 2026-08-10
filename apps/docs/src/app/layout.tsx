@@ -10,7 +10,7 @@ import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import Header from "@/app/_components/layout/Header";
 import Footer from "@/app/_components/layout/Footer";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@teispace/next-themes";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 
 export const metadata: Metadata = {

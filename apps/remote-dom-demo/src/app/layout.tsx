@@ -18,7 +18,11 @@ import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { NavigationItem } from "@/app/_components/NavigationItem";
 
 const Error: ErrorComponent = (props) => {
-  return <>REMOTE RENDER ERROR: {props.error.message}</>;
+  const message =
+    props.error instanceof globalThis.Error
+      ? props.error.message
+      : String(props.error);
+  return <>REMOTE RENDER ERROR: {message}</>;
 };
 
 export default function Layout(props: PropsWithChildren) {
