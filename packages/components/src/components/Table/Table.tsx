@@ -2,6 +2,7 @@ import type { FC } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
+import { prefixedStyleClassname } from "@/lib/scss/selectors";
 
 export type TableProps = Omit<
   Aria.TableProps,
@@ -35,7 +36,8 @@ export const Table: FC<TableProps> = (props) => {
 
   const rootClassName = clsx(
     styles.table,
-    styles[`vertical-align-${verticalAlign}`],
+    verticalAlign !== "top" &&
+      prefixedStyleClassname(styles, "vertical-align-", verticalAlign),
     styles[`layout-${layout}`],
     className,
   );

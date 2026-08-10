@@ -8,13 +8,8 @@ import ModalTrigger from "@/components/Modal/components/ModalTrigger";
 import Modal from "@/components/Modal/Modal";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
-import {
-  Field,
-  flags,
-  Form,
-  SubmitButton,
-} from "@/integrations/react-hook-form";
-import { resetFlags } from "@/flags";
+import { Field, Form, SubmitButton } from "@/integrations/react-hook-form";
+import { ComponentDefaultsProvider } from "@/components/ComponentDefaultsProvider";
 import { useModalController } from "@/lib/controller";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -23,10 +18,6 @@ import { page, userEvent } from "vitest/browser";
 import { Render } from "../public";
 import { commands } from "vitest/browser";
 import { sleep } from "@/lib/promises/sleep";
-
-afterEach(() => {
-  resetFlags();
-});
 
 test("Modal is open when using props", async () => {
   const dom = await render(
@@ -82,8 +73,6 @@ test("Modal can be controlled with modal controller", async () => {
 });
 
 test("Modal with dirty form requires confirmation", async () => {
-  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
-
   const Test = () => {
     const form = useForm();
 
@@ -147,9 +136,124 @@ test("Modal with dirty form requires confirmation", async () => {
   expect(modalText).not.toBeInTheDocument();
 });
 
-test("Modal with resetted form does not require confirmation", async () => {
-  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
+test("Modal keeps requiring confirmation after a submit that does not close it", async () => {
+  const Test = () => {
+    const form = useForm();
+    const [step, setStep] = useState<"one" | "two">("one");
 
+    return (
+      <Modal isDefaultOpen>
+        <Content>
+          <Text data-testid="modal-text">Hello World</Text>
+          <Form form={form} onSubmit={() => setStep("two")}>
+            {step === "one" && (
+              <Field name="testField">
+                <TextField />
+              </Field>
+            )}
+            {step === "two" && <Text data-testid="step-two">Step two</Text>}
+            <SubmitButton showFeedback={false}>Continue</SubmitButton>
+          </Form>
+        </Content>
+      </Modal>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const stepTwoText = dom.getByTestId("step-two");
+  const continueButton = dom.getByRole("button", {
+    name: "Continue",
+    exact: true,
+  });
+  const cancelConfirmCloseModalButton = dom.getByRole("button", {
+    name: "Keep editing",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+
+  // The confirmation is armed while the form is dirty
+  await userEvent.keyboard("{Escape}");
+  await userEvent.click(cancelConfirmCloseModalButton);
+  expect(modalText).toBeInTheDocument();
+
+  // Advancing the wizard does not save anything – the unsaved input is still at
+  // risk, so the confirmation must stay armed
+  await userEvent.click(continueButton);
+  await expect.element(stepTwoText).toBeInTheDocument();
+
+  await userEvent.keyboard("{Escape}");
+  await expect.element(cancelConfirmCloseModalButton).toBeInTheDocument();
+  expect(modalText).toBeInTheDocument();
+});
+
+test("Modal closed by its own Form submit needs no confirmation", async () => {
+  // Every way a Form submit can end up closing the surrounding Modal – all of
+  // them must get through without the "unsaved changes" confirmation, even
+  // though the form is dirty at the time of the submit.
+  const variants = {
+    "synchronously in onSubmit": {
+      onSubmit: (close: () => void) => () => close(),
+      showFeedback: false,
+    },
+    "after an awaited async onSubmit": {
+      onSubmit: (close: () => void) => async () => {
+        await sleep(10);
+        close();
+      },
+      showFeedback: false,
+    },
+    "in the after-submit callback": {
+      onSubmit: (close: () => void) => () => close,
+      showFeedback: false,
+    },
+    "in the after-submit callback, with success feedback": {
+      onSubmit: (close: () => void) => () => close,
+      showFeedback: true,
+    },
+  };
+
+  for (const [variant, { onSubmit, showFeedback }] of Object.entries(
+    variants,
+  )) {
+    const Test = () => {
+      const controller = useModalController({ isDefaultOpen: true });
+      const form = useForm();
+
+      return (
+        <Modal controller={controller}>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form form={form} onSubmit={onSubmit(() => controller.close())}>
+              <Field name="testField">
+                <TextField />
+              </Field>
+              <SubmitButton showFeedback={showFeedback}>Save</SubmitButton>
+            </Form>
+          </Content>
+        </Modal>
+      );
+    };
+
+    const dom = await render(<Test />);
+
+    const modalText = dom.getByTestId("modal-text");
+    const saveButton = dom.getByRole("button", { name: "Save", exact: true });
+    const input = dom.getByRole("textbox");
+
+    await userEvent.type(input, "Some changes");
+    await userEvent.click(saveButton);
+
+    await vitest.waitFor(() =>
+      expect(modalText, variant).not.toBeInTheDocument(),
+    );
+  }
+});
+
+test("Modal with resetted form does not require confirmation", async () => {
   const Test = () => {
     const form = useForm();
 
@@ -193,8 +297,6 @@ test("Modal with resetted form does not require confirmation", async () => {
 });
 
 test("Modal with dirty form does not require confirmation when using abort button", async () => {
-  flags.requireCloseModalConfirmationOnUnsavedChanges = true;
-
   const Test = () => {
     const form = useForm();
 
@@ -234,6 +336,45 @@ test("Modal with dirty form does not require confirmation when using abort butto
     await userEvent.click(abortButton);
     expect(modalText).not.toBeInTheDocument();
   }
+});
+
+test("Modal with dirty form does not require confirmation when the default is switched off", async () => {
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ComponentDefaultsProvider
+        defaults={{ Form: { confirmModalCloseOnUnsavedChanges: false } }}
+      >
+        <Modal isDefaultOpen>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form form={form} onSubmit={vitest.fn()}>
+              <Field name="testField">
+                <TextField />
+              </Field>
+              <Action closeModal>
+                <Button>Try close</Button>
+              </Action>
+            </Form>
+          </Content>
+        </Modal>
+      </ComponentDefaultsProvider>
+    );
+  };
+
+  const dom = await render(<Test />);
+
+  const modalText = dom.getByTestId("modal-text");
+  const tryCloseModalButton = dom.getByRole("button", {
+    name: "Try close",
+    exact: true,
+  });
+  const input = dom.getByRole("textbox");
+
+  await userEvent.type(input, "Some changes");
+  await userEvent.click(tryCloseModalButton);
+  expect(modalText).not.toBeInTheDocument();
 });
 
 test("Modal with confirmOnClose requires confirmation", async () => {
@@ -364,8 +505,8 @@ test("Modal with confirmOnClose is not overruled by a contained Form", async () 
     exact: true,
   });
 
-  // The Form does not require a confirmation (clean, and the flag is off), but
-  // it must not disable the one requested via the Modal prop either
+  // The clean Form does not require a confirmation, but it must not disable the
+  // one requested via the Modal prop either
   await userEvent.click(tryCloseModalButton);
   expect(modalText).toBeInTheDocument();
 

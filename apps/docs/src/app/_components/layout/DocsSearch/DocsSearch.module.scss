@@ -34,6 +34,12 @@
   color: inherit;
   cursor: pointer;
   scroll-margin-block: var(--size-px--s);
+  outline: var(--focus--outline-color) none var(--focus--outline-width);
+  outline-offset: calc(var(--focus--outline-offset) * -1);
+}
+
+.result:focus-visible {
+  outline-style: solid;
 }
 
 .result:hover,

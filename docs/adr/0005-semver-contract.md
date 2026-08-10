@@ -80,8 +80,10 @@ React is a genuine runtime peer in every package.
 
 - **All type-level (TypeScript) changes.** The type surface is best-effort, not
   semver-protected. Even removing/renaming an exported type or narrowing a
-  prop's accepted type is not, on its own, breaking. (Notable type changes are
-  still called out in the changelog.)
+  prop's accepted type is not, on its own, breaking. A type break does not force
+  a Major on its own — but a **deliberate** (even small) type-breaking change
+  ships a **migration note in the commit body and in the release notes**: not
+  merely a mention that something changed, but how consumers adapt.
 - **Visual appearance.**
 - **Internal DOM structure.**
 - **CSS class names.**

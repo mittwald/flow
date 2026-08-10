@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import styles from "./ComplexityIndicator.module.scss";
+import { prefixedStyleClassname } from "@/lib/scss/selectors";
 import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import clsx from "clsx";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
@@ -61,7 +62,9 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
 
   const percentageClassName = clsx(
     styles.bar,
-    !isEmptyValue && styles[`bar-background-status-${status}`],
+    !isEmptyValue &&
+      status !== "unavailable" &&
+      prefixedStyleClassname(styles, "bar-background-status-", status),
     {
       [styles.loading as string]: isLoading,
       [styles.running as string]: !complexityFulfilled,

@@ -66,6 +66,10 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
+`pnpm install` also registers the forward-merge merge drivers
+(`pnpm dev:init-merge-drivers`, see below) — you only run that one by hand if
+you skipped an install.
+
 Storybook opens on <http://localhost:6006>. This is where you'll spend most of
 your time when developing components.
 
@@ -79,6 +83,30 @@ installed:
   changes.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
+
+### Resolving a blocked forward-merge
+
+Every change on `main` is merged up into `next` automatically (ADR 0004). When
+that merge hits a conflict the machine cannot resolve, the cascade **pauses**
+and opens an issue — from then on nothing new reaches `next` until someone
+resolves it. That someone needs two commands:
+
+```shell
+pnpm sync:resolve             # merges main into next in your checkout
+# resolve the conflicts in your editor or with `git mergetool`, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
+
+You only ever see the genuinely conflicting files. The version and
+`CHANGELOG.md` divergence between the two lines is absorbed by the merge drivers
+(ADR 0004 §3), which `pnpm install` registers for you via
+`pnpm dev:init-merge-drivers` — a `merge=<driver>` line in `.gitattributes` is
+inert on its own, git only runs a driver that is also in your local git config.
+
+That is also why the resolution happens locally rather than on the pull request:
+**GitHub does not run merge drivers.** A merge computed on GitHub's side shows
+every version and changelog divergence as a conflict, burying the one file that
+actually needs you under dozens of mechanical ones.
 
 ## Repository overview
 
@@ -114,9 +142,10 @@ Five invariants that hold everywhere in this repo — internalize these and the
 rest is detail:
 
 1. **Generated code is committed — and never hand-edited.** Remote views, icon
-   components, and `doc-properties.json` are generated. After changing their
-   sources, regenerate (`pnpm build` covers everything) and commit the result.
-   CI fails on any uncommitted generated diff.
+   components, CSS-module type stubs (`*.module.d.scss.ts`), and
+   `doc-properties.json` are generated. After changing their sources, regenerate
+   (`pnpm build` covers everything) and commit the result. CI fails on any
+   uncommitted generated diff.
 2. **Don't break extension developers.** Props of `@flr-generate` components are
    a contract — mStudio extensions in the wild use them. Keep old paths working
    and log their usage with `useWarnDeprecation`. Breaking changes for consumers
@@ -169,6 +198,7 @@ Every component lives in its own **PascalCase** folder under
 packages/components/src/components/Button/
 ├── Button.tsx              # implementation
 ├── Button.module.scss      # styles (CSS Module written in SCSS)
+├── Button.module.d.scss.ts # ⚙️ AUTO-GENERATED — CSS-module class-name types
 ├── index.ts                # barrel export (3 lines, see below)
 ├── view.ts                 # ⚙️ AUTO-GENERATED — do not edit by hand
 └── stories/
@@ -280,6 +310,11 @@ The root class is the lower-camel component name; modifier classes match prop
 values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
+Importing `styles` gives per-class typed access from a generated
+`Badge.module.d.scss.ts` stub. For a dynamic class — a `string`-typed or runtime
+key — use a helper from `@/lib/scss/selectors` (`prefixedStyleClassname` /
+`styleClassname`), not an `as keyof typeof styles` cast.
+
 ### 3. Add the barrel `index.ts`
 
 Always the same three lines (the `./view` line only exists on `@flr-generate`
@@ -355,8 +390,8 @@ pnpm nx build:remote-components components
 ```
 
 > ⚠️ **Commit the generated files.** CI runs `git diff --exit-code` and will
-> fail if generated code (remote views, icons) isn't committed. See
-> [Testing](#testing).
+> fail if generated code (remote views, icons, CSS-module type stubs) isn't
+> committed. See [Testing](#testing).
 
 For remote-capable components, also:
 
@@ -608,6 +643,12 @@ chore(docs): migrate site URL and redirect pages
 `feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci` for
 everything that isn't. Write messages for the changelog reader.
 
+TypeScript type-level changes aren't under the semver guarantee, so a type break
+never forces a Major on its own. But a **deliberate** (even small) TS breaking
+change still ships a **migration note in the commit body and in the release
+notes** telling consumers how to adapt — see
+[ADR 0005](docs/adr/0005-semver-contract.md) for the rationale.
+
 The commit **type** also decides **where your PR lands** — see
 [Choosing the base branch](#choosing-the-base-branch).
 
@@ -697,18 +738,21 @@ both the title and that it matches the base branch (see
 ## Releases
 
 You don't need to do anything to release. Flow uses **fixed versioning** — all
-`@mittwald/flow-*` packages share one version — and Lerna-Lite derives the bump
-and changelog from your Conventional Commits.
+`@mittwald/flow-*` packages share one version — and releases are automated from
+your Conventional Commit **PR titles** (the repo squash-merges, so the title is
+the commit Lerna-Lite reads). Where your change lands decides how it ships:
 
-- A `fix:` merged into `main` publishes to npm under dist-tag `latest` (via
-  `.github/workflows/publish.yml`) and is forward-merged into `next`.
-- Features accumulate on `next`, published continuously as `X.Y.0-next.N` under
-  dist-tag `next`. A maintainer promotes them to a stable Minor — with a curated
-  changelog — via a `next → main` Release-PR, when there's enough to be worth
-  releasing.
+- **`fix:` (and non-releasing `docs:`/`chore:`/… ) → `main`** — publishes to npm
+  under dist-tag `latest` as soon as it merges.
+- **`feat:` → `next`** — features accumulate there (published as `X.Y.0-next.N`
+  under dist-tag `next`) and a maintainer promotes them to a stable Minor, with
+  a curated changelog, via a `next → main` Release-PR.
 
-See [RFC #2711](https://github.com/mittwald/flow/issues/2711) for the full model
-and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
+This is Flow's two-line release model — see
+[`docs/release-workflow.md`](docs/release-workflow.md) for the full picture (the
+branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
+[RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
+model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
 forward-merge mechanics. (The `next` line and its publishing go live with the
 1.0.0 cut; until then every merge into `main` releases as it does today.)
 

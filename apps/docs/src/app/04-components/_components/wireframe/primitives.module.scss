@@ -1,0 +1,129 @@
+.frame,
+.stack,
+.row,
+.box,
+.input,
+.button,
+.line,
+.circle,
+.text,
+.overlay {
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Every wireframe is its own stacking context, so a z-index inside one (e.g. a
+   popover tip lifted above an overlay's shadow) can never escape the card. */
+.frame {
+  isolation: isolate;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.frame .iconTone svg {
+  color: inherit;
+}
+
+/* WIcon with a size: the icon fills the wrapper instead of using its own size
+   token. Outranks the icon's single-class width/height. */
+.iconSized svg {
+  width: 100%;
+  height: 100%;
+}
+
+.stack {
+  flex-direction: column;
+}
+
+.box {
+  padding: 16px;
+  border-radius: var(--corner-radius--m);
+  flex-direction: column;
+}
+
+.text {
+  border-radius: var(--corner-radius--l);
+}
+
+.input {
+  align-items: center;
+  padding-inline: 16px;
+  padding-block: 8px;
+  border: 2px solid var(--neutral--color--500);
+  border-radius: var(--corner-radius--m);
+  min-height: 48px;
+}
+
+.overlay {
+  flex-direction: column;
+  min-height: 32px;
+  padding: 16px;
+  border: 2px solid var(--neutral--color--300);
+  border-radius: var(--corner-radius--m);
+  box-shadow: var(--shadow--content);
+}
+
+.button {
+  display: flex;
+  padding: 8px;
+  border-radius: var(--corner-radius--m);
+  min-height: 48px;
+  min-width: 48px;
+  align-items: center;
+  justify-content: center;
+}
+
+.line {
+  display: block;
+  border-radius: 2px;
+  height: 2px;
+}
+
+.circle {
+  width: var(--wireframe-width, 16px);
+  height: var(--wireframe-height, 16px);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 16px;
+}
+
+.tone100 {
+  background: var(--neutral--color--100);
+}
+
+.tone200 {
+  background: var(--neutral--color--200);
+}
+
+.tone300 {
+  background: var(--neutral--color--300);
+}
+
+.tone400 {
+  background: var(--neutral--color--400);
+}
+
+.tone500 {
+  background: var(--neutral--color--500);
+}
+
+.tone600 {
+  background: var(--neutral--color--600);
+}
+
+.tone700 {
+  background: var(--neutral--color--700);
+}
+
+.tone800 {
+  background: var(--neutral--color--800);
+}
