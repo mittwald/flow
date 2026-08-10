@@ -18,7 +18,6 @@ import { Section } from "@/components/Section";
 import {
   ListItem,
   ListItemView,
-  ListStaticData,
   ListSummary,
   typedList,
 } from "@/components/List";
@@ -40,7 +39,7 @@ import { DateTime } from "luxon";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { dummyText } from "@/lib/dev/dummyText";
 import IllustratedMessage from "@/components/IllustratedMessage";
-import { use } from "react";
+import { Suspense, type FC } from "react";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -355,42 +354,51 @@ export const LoadingView: Story = {
   },
 };
 
-/**
- * The item's loading view is also used while an already rendered item suspends
- * — e.g. because its content loads data of its own.
- */
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const loadPlanets: AsyncDataLoader<string> = async () => {
+  await delay(2000);
+  const data = ["Tatooine", "Hoth", "Endor"];
+  return { data, itemTotalCount: data.length };
+};
+
+const loadPlanetName = async (planet: string) => {
+  await delay(2000);
+  return planet;
+};
+
+/** A tile without `ListItemView` and without a Suspense boundary of its own. */
+const PlanetTile: FC<{ planet: string }> = ({ planet }) => {
+  const name = usePromise(loadPlanetName, [planet]);
+  return <Heading>{name}</Heading>;
+};
+
+const PlanetTileSkeleton: FC = () => (
+  <Heading>
+    <SkeletonText width="6em" />
+  </Heading>
+);
+
 export const LoadingViewOfSuspendedItems: Story = {
   render: () => {
-    const SuspendingItemContent = () => {
-      use(endlessPromise);
-      return null;
-    };
+    const PlanetList = typedList<string>();
 
     return (
-      <List aria-label="Invoices" defaultViewMode="tiles">
-        <ListStaticData data={[1, 2, 3]} />
-        <ListItem
-          loadingView={
-            <ListItemView>
-              <Avatar>
-                <Skeleton height="600px" width="600px" />
-              </Avatar>
-              <Heading>
-                <SkeletonText width="10em" />
-              </Heading>
-            </ListItemView>
-          }
-          showTiles
-        >
-          {() => (
-            <ListItemView>
-              <Content>
-                <SuspendingItemContent />
-              </Content>
-            </ListItemView>
-          )}
-        </ListItem>
-      </List>
+      <Suspense fallback={<Text>Loading planets…</Text>}>
+        <PlanetList.List aria-label="Planets" defaultViewMode="tiles">
+          <PlanetList.LoaderAsync disableInitialSuspenseBoundary>
+            {loadPlanets}
+          </PlanetList.LoaderAsync>
+          <PlanetList.Item
+            showList={false}
+            showTiles
+            textValue={(planet) => planet}
+            loadingView={<PlanetTileSkeleton />}
+          >
+            {(planet) => <PlanetTile planet={planet} />}
+          </PlanetList.Item>
+        </PlanetList.List>
+      </Suspense>
     );
   },
 };
