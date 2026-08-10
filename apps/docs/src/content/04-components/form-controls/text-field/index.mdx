@@ -17,8 +17,10 @@ Formatierungshinweise) können über die `<FieldDescription />` ergänzt werden.
 
 # Verwendung
 
-Verwende ein TextField für einzeilige Texteingaben, zum Beispiel in
-[Forms](/03-patterns/01-patterns/forms).
+Verwende ein TextField für einzeilige Texteingaben. In Formularen bindest du es
+meist über eine
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview) ein, die
+Zustand, Validierung und Fehleranzeige übernimmt.
 
 ## Best Practices
 
@@ -74,7 +76,9 @@ anzeigt.
 
 # Validierung
 
-Um das TextField zu validieren, stehen folgende Properties zur Verfügung:
+Nutze für die Validierung
+[React Hook Form](/04-components/react-hook-form/form/overview). Alternativ
+stehen aber auch folgende Properties zur Verfügung:
 
 - `isRequired` für Pflichtfelder.
 - `validate` für eigene Validierungen.
