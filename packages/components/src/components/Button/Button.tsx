@@ -13,6 +13,7 @@ import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
+import { filterDOMProps } from "@react-aria/utils";
 
 export interface ButtonProps
   extends
@@ -40,6 +41,8 @@ export interface ButtonProps
   unstyled?: boolean;
   /** @internal */
   ariaSlot?: string | null;
+  /** @internal */
+  elementType?: "button" | "span";
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -87,7 +90,10 @@ const disablePendingProps = (props: ButtonProps) => {
   return props;
 };
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-ignore-props elementType
+ */
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
@@ -106,6 +112,7 @@ export const Button = flowComponent("Button", (props) => {
     ariaSlot: slot,
     unstyled,
     isReadOnly,
+    elementType,
     ...restProps
   } = props;
 
@@ -167,14 +174,8 @@ export const Button = flowComponent("Button", (props) => {
 
   const isStringContent = extractTextFromFirstChild(children) !== undefined;
 
-  return (
-    <Aria.Button
-      className={rootClassName}
-      ref={ref}
-      slot={slot}
-      {...(isReadOnly === true ? { "data-readonly": true } : {})}
-      {...restProps}
-    >
+  const content = (
+    <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
           <span className={styles.content}>
@@ -185,6 +186,33 @@ export const Button = flowComponent("Button", (props) => {
         </Wrap>
       </PropsContextProvider>
       {stateIcon}
+    </>
+  );
+
+  if (elementType === "span") {
+    const spanProps = filterDOMProps(restProps, { global: true });
+
+    return (
+      <span
+        {...spanProps}
+        className={
+          typeof rootClassName === "string" ? rootClassName : undefined
+        }
+      >
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <Aria.Button
+      className={rootClassName}
+      ref={ref}
+      slot={slot}
+      {...(isReadOnly === true ? { "data-readonly": true } : {})}
+      {...restProps}
+    >
+      {content}
     </Aria.Button>
   );
 });

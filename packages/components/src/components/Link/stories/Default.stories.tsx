@@ -5,6 +5,7 @@ import { Text } from "@/components/Text";
 import { IconDownload } from "@/components/Icon/components/icons";
 import { StoryBackground } from "@/lib/dev/StoryBackground";
 import { alphaColors } from "@/lib/types/props";
+import { Button } from "@/components/Button";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -76,6 +77,16 @@ export const Download: Story = {
     <StoryBackground color={props.color} theme={context.globals.theme}>
       <Link target="_blank" download {...props}>
         Download the plans
+      </Link>
+    </StoryBackground>
+  ),
+};
+
+export const WithButton: Story = {
+  render: (props, context) => (
+    <StoryBackground color={props.color} theme={context.globals.theme}>
+      <Link target="_blank" {...props}>
+        <Button>mittwald.de</Button>
       </Link>
     </StoryBackground>
   ),

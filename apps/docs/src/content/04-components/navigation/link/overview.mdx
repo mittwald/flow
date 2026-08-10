@@ -33,13 +33,20 @@ HSL Lightness-Wert von mehr als 50.
 
 ---
 
-# Kombiniere mit ...
+# States
 
-## Icon
+Ein Link hat vier verschiedene States: **Default**, **Hover**, **Pressed** und
+**Disabled**.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Icons
 
 Rechts neben dem Link kann ein `Icon` eingefügt werden.
 
-### Externer Link
+## Externer Link
 
 Das `IconExternalLink` signalisiert dem User, dass es sich um einen externen
 Link handelt – also einen Verweis auf eine andere Domain –, der in einem neuen
@@ -48,7 +55,7 @@ Attribut `target="_blank"` gesetzt ist.
 
 <LiveCodeEditor example="external" editorCollapsed />
 
-### Download
+## Download
 
 Das `IconDownload` zeigt an, dass es sich um einen Download-Link handelt. Das
 Icon wird automatisch neben dem Link angezeigt, wenn das `download` Property
@@ -58,9 +65,12 @@ gesetzt ist.
 
 ---
 
-## States
+# Kombiniere mit ...
 
-Ein Link hat vier verschiedene States: **Default**, **Hover**, **Pressed** und
-**Disabled**.
+## Button
 
-<LiveCodeEditor example="disabled" editorCollapsed />
+Für hervorgehobene Call-to-Actions, bei denen ein Button-ähnliches
+Erscheinungsbild für eine Navigation sinnvoll ist, kann ein Button im Link
+platziert werden.
+
+<LiveCodeEditor example="button" editorCollapsed />

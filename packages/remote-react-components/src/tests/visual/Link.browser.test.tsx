@@ -78,3 +78,30 @@ test.each(testEnvironments)(
     await testScreenshot("Link edge cases");
   },
 );
+
+test.each(testEnvironments)(
+  "Link with Button (%s)",
+  async ({ testScreenshot, render, components: { Link, Flex, Button } }) => {
+    await render(
+      <Flex gap="m" direction="column">
+        <Link target="_blank">
+          <Button>External Link</Button>
+        </Link>
+        <Link size="s" download>
+          <Button>Small & Download</Button>
+        </Link>
+        <Link>
+          <Button color="accent">Button Color</Button>
+        </Link>
+        <Link color="dark">
+          <Button>Link Color</Button>
+        </Link>
+        <Link isDisabled>
+          <Button>Disabled</Button>
+        </Link>
+      </Flex>,
+    );
+
+    await testScreenshot("Link with Button");
+  },
+);

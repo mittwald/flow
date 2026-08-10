@@ -37,7 +37,12 @@ test("link with a nested button still navigates client-side", async () => {
     </RouterProvider>,
   );
 
-  await userEvent.click(page.getByTestId("button"));
+  const button = page.getByTestId("button");
+
+  await expect.element(button).toHaveAttribute("data-testid", "button");
+  expect((await button.element()).tagName).toBe("SPAN");
+
+  await userEvent.click(button);
 
   expect(navigate).toHaveBeenCalledWith(href, undefined);
 });

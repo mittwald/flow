@@ -7,7 +7,7 @@ import type {
 } from "react";
 import { useContext } from "react";
 import * as Aria from "react-aria-components";
-import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
@@ -19,6 +19,7 @@ import {
   type PropsWithClassName,
 } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
+import { Text } from "@/components/Text";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 import { handleLinkClick, useRouter } from "@react-aria/utils";
 
@@ -108,6 +109,19 @@ export const Link = flowComponent("Link", (props) => {
     },
     AccentBox: { className: styles.accentBox },
     LayoutCard: { className: styles.layoutCard },
+    Button: {
+      elementType: "span",
+      className: styles.button,
+      size: props.size,
+      color: props.color === "default" ? undefined : props.color,
+      isDisabled: props.isDisabled,
+      children: dynamic((buttonProps) => (
+        <>
+          <Text>{buttonProps.children}</Text>
+          <LinkIcon {...props} />
+        </>
+      )),
+    },
   };
 
   const unsupportedTypingsLinkProps = ariaCurrent
