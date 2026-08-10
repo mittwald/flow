@@ -90,10 +90,7 @@ const disablePendingProps = (props: ButtonProps) => {
   return props;
 };
 
-/**
- * @flr-generate all
- * @flr-ignore-props elementType
- */
+/** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
