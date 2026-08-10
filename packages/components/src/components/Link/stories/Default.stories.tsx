@@ -85,7 +85,7 @@ export const Download: Story = {
 export const WithButton: Story = {
   render: (props, context) => (
     <StoryBackground color={props.color} theme={context.globals.theme}>
-      <Link target="_blank" {...props}>
+      <Link target="_blank" href="#" {...props}>
         <Button>mittwald.de</Button>
       </Link>
     </StoryBackground>

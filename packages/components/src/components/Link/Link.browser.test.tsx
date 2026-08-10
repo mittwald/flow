@@ -46,3 +46,15 @@ test("link with a nested button still navigates client-side", async () => {
 
   expect(navigate).toHaveBeenCalledWith(href, undefined);
 });
+
+test("button in a disabled link exposes its disabled state", async () => {
+  render(
+    <Link href={href} isDisabled>
+      <Button data-testid="button">Zur App</Button>
+    </Link>,
+  );
+
+  await expect
+    .element(page.getByTestId("button"))
+    .toHaveAttribute("data-disabled", "true");
+});

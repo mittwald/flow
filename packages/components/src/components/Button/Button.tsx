@@ -195,6 +195,7 @@ export const Button = flowComponent("Button", (props) => {
     return (
       <span
         {...spanProps}
+        data-disabled={restProps.isDisabled || undefined}
         className={
           typeof rootClassName === "string" ? rootClassName : undefined
         }

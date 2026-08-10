@@ -149,6 +149,7 @@
       }
 
       &[disabled],
+      &[data-disabled],
       &.ariaDisabled,
       &.isPending,
       &.isFailed,
@@ -204,6 +205,7 @@
         );
 
         &[disabled],
+        &[data-disabled],
         &.ariaDisabled,
         &.isPending,
         &.isFailed {
