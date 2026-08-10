@@ -20,23 +20,21 @@ Verwende ein Modal, um ...
 
 - Dialoge zur Abfrage anzuzeigen, z. B. um zu bestätigen, ob etwas wirklich
   gelöscht werden soll.
-- Erstellungsprozesse zu ermöglichen, ohne die aktuelle Seite zu verlassen.
-- Formulare zur Bearbeitung anzuzeigen.
+- [Anlege- und Bearbeitungsprozesse](/03-patterns/01-patterns/anlegeprozess) zu
+  ermöglichen, ohne die aktuelle Seite zu verlassen.
 
 ## Best Practices
 
-- Setze Modals nur ein, wenn sie wirklich notwendig sind. Ein geöffnetes Modal
-  zieht die gesamte Aufmerksamkeit des Nutzers auf sich und lenkt von der
-  restlichen Seite ab.
+- Öffne ein Modal nur als Reaktion auf eine bewusste Aktion des Nutzers. Ein
+  unerwartet erscheinendes Modal springt dem Nutzer ins Gesicht, unterbricht ihn
+  und beansprucht sofort seine gesamte Aufmerksamkeit.
 - Stelle umfangreiche Prozesse in einem OffCanvas dar.
 - Wähle eine verständliche und prägnante Überschrift und halte den restlichen
   Inhalt leicht verständlich.
 - Vermeide es, zu viele Modals übereinander zu öffnen, da der Nutzer sonst die
   Orientierung verliert.
 
----
-
-# Modals vs. OffCanvas
+## Modals vs. OffCanvas
 
 <DoAndDont>
   <Info heading="Verwende ein Modal, um z. B. ...">
@@ -58,9 +56,7 @@ Verwende ein Modal, um ...
 
 ---
 
-# Variants
-
-## OffCanvas
+# OffCanvas
 
 Nutze die Variante OffCanvas für Modals mit viel Inhalt, bei dem gescrollt
 werden müsste.
@@ -71,11 +67,9 @@ werden müsste.
 
 # Sizes
 
-**Size S:** Ein Modal in der Size S (Breite 660 px) wird zum Beispiel für
-einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
-
-**Size M:** Ein Modal in der Size M (Breite 900 px) wird für komplexere Dialoge
-(z. B. Erstellungs-Prozesse mit mehreren Eingabefeldern) verwendet.
+Ein Modal mit der Size **Small** (Breite 660 px) eignet sich gut für einfache
+Abfragen oder Bestätigungsmodals. Ein Modal mit der Size **Medium** (Breite 900
+px) wird für komplexere Dialoge verwendet.
 
 <LiveCodeEditor example="size" editorCollapsed row />
 
@@ -102,7 +96,7 @@ wenn du selbst entscheiden willst, wann es etwas zu verlieren gibt – setzt du
 
 Standardmäßig wird der Close-Button in der Überschrift ausgeblendet, sobald das
 Modal eine `<ActionGroup />` enthält – die Aktionen im Footer übernehmen dann
-das Schließen. Über das `showCloseButton` Property lässt sich das übersteuern:
+das Schließen. Über das `showCloseButton` Property lässt sich das überschreiben:
 `showCloseButton={true}` zeigt den Button auch neben einer ActionGroup,
 `showCloseButton={false}` blendet ihn immer aus.
 
