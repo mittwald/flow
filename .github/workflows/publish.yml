@@ -7,6 +7,14 @@ on:
         description: "Publish missing packages only, without a version bump"
         type: boolean
         default: false
+      release_as:
+        description: "Force an explicit version (e.g. 1.0.0 for the one-time 1.0.0 cut). Empty = normal conventional-commits derivation."
+        type: string
+        default: ""
+      dry_run:
+        description: "Rehearse: build, compute the version, and run 'lerna publish --dry-run' without pushing, tagging, creating a release, or publishing to npm."
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -78,6 +86,69 @@ jobs:
       - name: Build 🔨
         run: pnpm build
 
+      # A promotion merge (RFC #2711) is a `release/x.y.0 -> main` PR merged as a
+      # true merge commit. Its head branch names the target version — and the
+      # merge carries `next`'s PRERELEASE version onto `main` with it, because
+      # the release branch already contains `main` (that is what makes the PR
+      # mergeable at all: GitHub does not run the merge drivers).
+      #
+      # So the version has to be set explicitly here. Left to derive it, lerna
+      # sees a prerelease as the current version and simply continues that line —
+      # measured in the #2769 rehearsal, where a promotion put `2.3.0-next.6`
+      # under dist-tag `latest`. Eight workflow runs, all green.
+      #
+      # This is the graduation half of #2724; the curated-notes half (building
+      # the GitHub Release body from the PR's marker block instead of the
+      # changelog) is still open there.
+      - name: Identify merge context 🔎
+        id: ctx
+        if: ${{ !inputs.only_publish }}
+        run: |
+          set -euo pipefail
+          version=""
+          pr=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # One REST call yields both facts about the merged PR: its head ref
+            # (→ the target version) and its number (→ the curated release-notes
+            # marker block, read in the release step below).
+            #
+            # REST, so the field is `head.ref` — NOT `headRefName`, which is the
+            # GraphQL name `gh pr view --json` uses. Reading the GraphQL name off
+            # a REST response yields an empty string and the graduation silently
+            # never fires; verified against the rehearsal's own promotion merge.
+            pulls="$(gh api \
+              "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls")"
+            head_ref="$(printf '%s' "$pulls" | jq -r '.[0].head.ref // ""')"
+            pr="$(printf '%s' "$pulls" | jq -r '.[0].number // ""')"
+            case "$head_ref" in
+              release/*)
+                version="${head_ref#release/}"
+                echo "::notice::Promotion merge from '${head_ref}' (PR #${pr}) — graduating to ${version}."
+                ;;
+            esac
+          elif [ -n "${{ inputs.release_as }}" ] && [ "${{ github.ref_name }}" != "main" ]; then
+            # The one-time cut is dispatched ON ITS OWN BRANCH, never merged
+            # first: merging it would itself publish, and with
+            # --conventional-prerelease dropped that publish would be a stable
+            # release (#2769 finding 15). The branch's PR is therefore still open
+            # at cut time, which makes it the natural carrier of the curated
+            # notes — the same marker block a promotion uses, read by the same
+            # step below. Without it the 1.0.0 Release body would read "Version
+            # bump only for package @mittwald/flow-project": the cut is a forced
+            # bump over an empty commit range, so conventional-changelog has
+            # nothing to describe.
+            pr="$(gh api \
+              "repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository_owner }}:${{ github.ref_name }}" \
+              --jq '.[0].number // ""')"
+            if [ -n "$pr" ]; then
+              echo "::notice::Cut dispatched on '${{ github.ref_name }}' — curated notes from PR #${pr}."
+            else
+              echo "::warning::No open PR for '${{ github.ref_name }}' — the release body will fall back to CHANGELOG.md."
+            fi
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "pr=${pr}" >> "$GITHUB_OUTPUT"
+
       # Bump versions, write changelogs, commit and tag — but do NOT push and do
       # NOT create the GitHub release yet. Pushing the release commit before the
       # npm publish succeeded is what let a failed publish "ratchet" main ahead of
@@ -85,14 +156,87 @@ jobs:
       # deferred to after a successful publish below.
       - name: Version 🏷️
         if: ${{ !inputs.only_publish }}
+        env:
+          RELEASE_AS: ${{ inputs.release_as }}
+          PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
         run: |
-          pnpm lerna version \
-            --force-publish \
-            --conventional-commits --conventional-prerelease="*" \
-            --message "chore(release): bump version to %v" \
-            --yes \
-            --no-push \
-            --tag-version-prefix ""
+          current="$(node -p "require('./lerna.json').version")"
+
+          # A promotion PR is graduated in the PR itself (RFC #2711): the
+          # release/x.y.0 branch already carries the stable x.y.0 version,
+          # changelog and `chore(release):` commit, merged onto main. There is
+          # nothing left to version here — and re-running `lerna version x.y.0`
+          # is NOT idempotent: it re-commits and then dies on
+          # `fatal: tag 'x.y.0' already exists`, or (when the tag isn't present
+          # yet) writes a second, empty "Version bump only" x.y.0 changelog
+          # entry comparing x.y.0...x.y.0. Both verified locally in the 2.4.0
+          # rehearsal. So detect the pre-graduated promotion and skip.
+          if [ -n "$PROMOTION_VERSION" ] && [ "$current" = "$PROMOTION_VERSION" ]; then
+            echo "Promotion branch already graduated to ${current} in the PR — skipping lerna version."
+            exit 0
+          fi
+
+          # Two remaining ways to reach an explicit version: the one-time cut
+          # dispatch (release_as), and a promotion branch that was NOT
+          # pre-graduated (fallback — current != target). Both take the path below.
+          target="${RELEASE_AS:-$PROMOTION_VERSION}"
+
+          if [ -n "$target" ]; then
+            # Explicit version — the 1.0.0 cut (or any forced version via
+            # workflow_dispatch), and a not-pre-graduated promotion fallback. The
+            # explicit target overrides conventional-commit *derivation*, but
+            # --conventional-commits is still required: it is also what writes
+            # CHANGELOG.md. Without it lerna bumps the versions and writes no
+            # changelog entry at all, and the release-notes extraction below then
+            # silently picks up the PREVIOUS version's section. Verified both
+            # ways on a scratch fork (#2769).
+            echo "Versioning explicitly to ${target}."
+            pnpm lerna version "$target" \
+              --force-publish \
+              --conventional-commits \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          else
+            # Standing path (push: main). Whether this is still a prerelease
+            # line is a property of the CURRENT VERSION, not of a flag someone
+            # has to remember to flip: while `main` sits on `0.2.0-alpha.N`,
+            # --conventional-prerelease keeps it there; the moment the cut sets a
+            # stable `1.0.0`, the same condition graduates every later push to
+            # `X.Y.Z` under `latest`.
+            #
+            # Deriving it leaves no window. Dropping the flag by hand needs the
+            # removal to be atomic with the 1.0.0 bump — too early and the next
+            # `fix:` publishes a premature stable `0.2.0`, too late and it
+            # publishes `1.0.1-alpha.0` under `latest` — and #2769 finding 15
+            # showed the "merge is a no-op" assumption that was supposed to make
+            # that atomic does not hold.
+            #
+            # `publish-next.yml` decides its own line the same way.
+            case "$current" in
+              *-*)
+                echo "Prerelease line (${current}) — keeping --conventional-prerelease."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits --conventional-prerelease="*" \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+              *)
+                echo "Stable line (${current}) — publishing X.Y.Z under latest."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+            esac
+          fi
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is
@@ -100,21 +244,91 @@ jobs:
       # to true, so it fetches the existing transparency-log entry and the publish
       # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
-        run: pnpm lerna publish from-package --yes --concurrency 1
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            # Rehearsal: show the publish plan, touch neither npm nor origin.
+            pnpm lerna publish from-package --yes --concurrency 1 --dry-run
+          else
+            pnpm lerna publish from-package --yes --concurrency 1
+          fi
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.
       - name: Push release commit & tag, create GitHub release 🚀
-        if: ${{ !inputs.only_publish }}
+        if: ${{ !inputs.only_publish && !inputs.dry_run }}
+        env:
+          PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
+          PR: ${{ steps.ctx.outputs.pr }}
         run: |
-          tag="$(git describe --tags --abbrev=0)"
-          echo "Pushing release commit and tag ${tag} to main"
+          # The tag is the version we actually published — read it from source,
+          # NOT from `git describe`. A pre-graduated promotion (RFC #2711) creates
+          # no new tag in the Version step above, so `git describe --tags` would
+          # resolve to the previous tag (e.g. the 2.4.0-next.3 prerelease the
+          # release branch inherited) and release the wrong ref.
+          tag="$(node -p "require('./lerna.json').version")"
+
+          echo "Advancing main and tagging ${tag}"
+          # No-op for a pre-graduated promotion (the version commit arrived with
+          # the merge, so HEAD is already origin/main); pushes the new commit for
+          # the one-time-cut / dispatch paths where lerna versioned above.
           git push origin HEAD:main
+          # Pre-graduated promotion: no tag exists yet — create it at the merge
+          # commit. Cut/dispatch paths: lerna already tagged, so keep that tag.
+          git rev-parse -q --verify "refs/tags/${tag}" >/dev/null || git tag -m "${tag}" "${tag}"
           git push origin "refs/tags/${tag}"
 
-          # Release notes = this version's section of the root changelog
-          # (everything between this version's header and the previous one).
-          awk '/^# \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+          # Release notes. Preferred source for a promotion: the curated,
+          # user-facing notes in the PR body, verbatim between the
+          # `<!-- release-notes:start -->` / `<!-- release-notes:end -->` markers
+          # (RFC #2711 / #2724). conventional-changelog cannot produce these — a
+          # prerelease→stable graduation yields only a "Version bump only"
+          # CHANGELOG entry (verified in the 2.4.0 rehearsal). Fall back to the
+          # changelog section when there is no PR or no marker block (the one-time
+          # 1.0.0 cut, or a plain dispatch).
+          notes=""
+          if [ -n "${PR}" ]; then
+            body="$(gh pr view "${PR}" --json body --jq .body || true)"
+            # Extract strictly between the markers, then trim leading/trailing
+            # blank lines — prettier may pad the block adjacent to the markers and
+            # that whitespace is not content.
+            notes="$(printf '%s\n' "$body" \
+              | awk '/<!-- release-notes:start -->/{f=1;next} /<!-- release-notes:end -->/{f=0} f' \
+              | awk '{ l[NR]=$0 }
+                     END { s=1; while (s<=NR && l[s] ~ /^[[:space:]]*$/) s++;
+                           e=NR; while (e>=s && l[e] ~/^[[:space:]]*$/) e--;
+                           for (i=s; i<=e; i++) print l[i] }')"
+          fi
+
+          if [ -n "${notes}" ]; then
+            echo "Release body: curated marker block from PR #${PR}."
+            printf '%s\n' "${notes}" > release-notes.md
+          else
+            # Changelog fallback: this version's section of the root changelog
+            # (everything between this version's header and the previous one).
+            #
+            # `#+` matches ANY header level, not just H1: conventional-changelog
+            # varies the level with the bump type, so a patch release renders as
+            # `## [1.0.1]`. Matching `^# \[` only would skip it and start at the
+            # previous H1 instead — emitting the wrong version's notes. Observed on
+            # a scratch fork (#2769): a 1.0.1 release carried the notes of the
+            # release before it.
+            echo "Release body: no marker block — falling back to CHANGELOG.md section."
+            awk '/^#+ \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+          fi
+
+          # GitHub rejects a release body over 125000 characters with a 422. By
+          # this point the publish has succeeded and the tag is pushed, so failing
+          # here leaves a released-but-Release-less state that has to be cleaned up
+          # by hand. Truncating is strictly better. The check counts bytes, which
+          # for UTF-8 is >= the character count GitHub measures, so it errs safe;
+          # `iconv -c` drops the partial multi-byte sequence `head -c` may leave.
+          limit=125000
+          if [ "$(wc -c < release-notes.md)" -gt "$limit" ]; then
+            echo "::warning::Changelog section exceeds GitHub's release-body limit — truncating."
+            head -c "$((limit - 200))" release-notes.md | iconv -c -f utf-8 -t utf-8 > release-notes.trunc
+            printf '\n\n_Truncated — see `CHANGELOG.md` at tag `%s` for the full list._\n' "${tag}" >> release-notes.trunc
+            mv release-notes.trunc release-notes.md
+          fi
 
           # Mark as pre-release when the version carries a semver pre-release id
           # (e.g. 0.2.0-alpha.N), matching lerna's own --create-release behaviour.

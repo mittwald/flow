@@ -82,12 +82,16 @@ jobs:
           fi
 
           # --- Promotion / forward-merge exemption (ADR 0004 §8) ---------------
-          # A promotion PR (next -> main, major line -> main) or a sync PR is
+          # A promotion PR (`release/x.y.0 -> main`, which is what
+          # `/prepare-release` opens, or a major line -> main) and a sync PR are
           # *supposed* to carry feat:/breaking commits. Exempt those heads, or
-          # they would block the release itself.
+          # they would block the release itself. `release/*` was missing here
+          # until the #2769 rehearsal: the first real promotion PR passed routing
+          # only because its title happened to carry no `feat` marker, which is
+          # luck rather than intent.
           if [ "$HEAD_REF" = "next" ] \
              || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
-             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+             || printf '%s' "$HEAD_REF" | grep -qE '^(sync|release)/'; then
             echo "::notice::head='${HEAD_REF}' is a promotion/sync source — routing guard exempt."
             exit 0
           fi
@@ -152,7 +156,7 @@ jobs:
           # changes (ADR 0004 §8) — exempt, same as routing.
           if [ "$HEAD_REF" = "next" ] \
              || printf '%s' "$HEAD_REF" | grep -qE '^([0-9]+\.(x|[0-9]+)|next-major)$' \
-             || printf '%s' "$HEAD_REF" | grep -qE '^sync/'; then
+             || printf '%s' "$HEAD_REF" | grep -qE '^(sync|release)/'; then
             echo "::notice::head='${HEAD_REF}' is a promotion/sync source — version-contract guard exempt."
             echo "active=false" >> "$GITHUB_OUTPUT"
             exit 0
