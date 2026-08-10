@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "rootDir": "dev"
+    "rootDir": "dev",
+    "types": ["vite/client", "vitest/globals"]
   },
   "extends": "./tsconfig.json",
   "include": ["./dev/**/*.ts"]

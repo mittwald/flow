@@ -1,0 +1,20 @@
+declare const classNames: {
+  readonly avatar: "avatar";
+  readonly icon: "icon";
+  readonly initials: "initials";
+  readonly "size-m": "size-m";
+  readonly "size-xs": "size-xs";
+  readonly "size-s": "size-s";
+  readonly "size-l": "size-l";
+  readonly blue: "blue";
+  readonly teal: "teal";
+  readonly green: "green";
+  readonly violet: "violet";
+  readonly lilac: "lilac";
+  readonly info: "info";
+  readonly success: "success";
+  readonly warning: "warning";
+  readonly danger: "danger";
+  readonly unavailable: "unavailable";
+};
+export default classNames;

@@ -176,7 +176,13 @@ dagegen sofort – hier verwirft der Nutzer seine Änderungen bewusst.
 Enthält das Modal eine
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview), passiert
 das automatisch: Sobald die Form _dirty_ ist, wird das Schließen bestätigt, nach
-einem erfolgreichen Submit oder einem `form.reset()` nicht mehr.
+einem `form.reset()` nicht mehr.
+
+Schließt ein Submit das Modal, geschieht das ohne Rückfrage – der Nutzer hat
+seine Eingaben ja gerade gespeichert. Bleibt das Modal nach dem Submit dagegen
+offen, etwa weil ein Wizard nur einen Schritt weiterblättert, ist das Schließen
+weiterhin bestätigungspflichtig: gespeichert wurde nichts, die Eingaben stehen
+also nach wie vor auf dem Spiel.
 
 Ohne Form – oder wenn du selbst entscheiden willst, wann es etwas zu verlieren
 gibt – setzt du `confirmOnClose`:
