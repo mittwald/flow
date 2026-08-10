@@ -29,15 +29,21 @@ test.each(testEnvironments)(
         <MarkdownEditor rows={1} isDisabled>
           <Label>Disabled</Label>
         </MarkdownEditor>
-        <MarkdownEditor rows={1}>
-          <Button>
-            <IconPlus />
-          </Button>
-        </MarkdownEditor>
       </Flex>,
     );
 
     await testScreenshot("MarkdownEditor states");
+
+    await render(
+      <MarkdownEditor rows={1}>
+        <Label>Custom toolbar button</Label>
+        <Button>
+          <IconPlus />
+        </Button>
+      </MarkdownEditor>,
+    );
+
+    await testScreenshot("MarkdownEditor states - custom button");
   },
 );
 
