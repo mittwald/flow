@@ -9,6 +9,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { Fragment, type PropsWithChildren } from "react";
 import { isAppleDevice } from "@react-aria/utils";
+import { useIsSSR } from "react-aria";
 
 export interface KbdProps
   extends PropsWithClassName, FlowComponentProps, PropsWithChildren {
@@ -34,6 +35,8 @@ export const Kbd = flowComponent("Kbd", (props) => {
     ...rest
   } = props;
 
+  const isSsr = useIsSSR();
+
   const rootClassName = clsx(
     styles.kbd,
     isDisabled && styles.disabled,
@@ -42,16 +45,17 @@ export const Kbd = flowComponent("Kbd", (props) => {
   );
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Kbd");
+  const isApple = !isSsr && isAppleDevice();
 
   const joinedKeys = keys?.map((key, index) => {
     let formattedKey = key;
 
     if (key === "mod") {
-      formattedKey = isAppleDevice() ? "⌘" : stringFormatter.format("mod");
+      formattedKey = isApple ? "⌘" : stringFormatter.format("mod");
     }
 
     if (key === "alt") {
-      formattedKey = isAppleDevice() ? "⌥" : stringFormatter.format("alt");
+      formattedKey = isApple ? "⌥" : stringFormatter.format("alt");
     }
 
     if (key === "shift") {
