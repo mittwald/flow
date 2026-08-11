@@ -160,6 +160,14 @@ each bullet to one idea. This is where the actionable essence of the former
 Guidelines content lands — including accessibility and wording nuggets that are
 not tied to a specific feature section.
 
+An optional `## <A> vs. <B>` comparison may follow `## Best Practices` under
+`# Verwendung` — but **only when it clarifies a genuine choice between two
+similar Components** a developer could confuse (for example
+`## Checkbox vs. Switch`). Present it as a short intro sentence plus a
+`<DoAndDont>` of two `<Plain>` tiles („Verwende eine <A>, um …" / „Verwende
+einen <B>, um …"). Omit it when the distinction is thin or purely visual — a
+one-line note in the Verwendung prose is enough then.
+
 ### Feature sections
 
 The variable middle of the page. A capability earns its own `#` section **only
@@ -171,7 +179,10 @@ most a Best-Practice bullet).
   Component-specific sections from common to niche (Button: `# Content`;
   TextField: `# Value` → `# Input Properties` → `# Character Count` →
   `# Validierung` → `# Disabled`; Modal: `# OffCanvas` → `# Sizes` →
-  `# Ungespeicherte Änderungen` → `# Show CloseButton` → `# Controller`).
+  `# Ungespeicherte Änderungen` → `# Show CloseButton` → `# Controller`). A lone
+  peripheral state — most often `# Disabled` — goes **last**, after the
+  Component-specific feature sections (as in TextField), not in the early States
+  slot.
 - **One bullet list per section**, not one paragraph per option. Where the old
   page explained each option as its own bold-term paragraph
   (`**Solid:** Die Solid-Variant …`), collapse it into a single bulleted list.
@@ -225,8 +236,9 @@ content that does not move a developer forward is dropped.
   `# Writing Guidelines`, or `# Verhalten`. Accessibility attaches to the theme
   it concerns.
 - **Do/Dont blocks are removed by default.** Convert the actionable point into a
-  Best-Practice bullet. Keep a visible `<Do>`/`<Dont>` only as an **absolute
-  exception**: a genuine antipattern a developer easily gets wrong.
+  Best-Practice bullet. Two exceptions keep a visible block: a `## <A> vs. <B>`
+  component comparison under `# Verwendung` (see above), and — rarely — a
+  genuine antipattern a developer easily gets wrong.
 - **Merge duplicates** (a Sizes explanation that appeared in both Overview and
   Guidelines becomes one `# Sizes`), and **dissolve wrapper headings**
   (`# Grundlagen`, `# Anwendung`, `# Inhalt`): promote their meaningful children
@@ -385,10 +397,11 @@ The most important MDX Components for writing content:
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.
 - `<Do example="...">` / `<Dont example="...">` / `<DoAndDont>` / `<Plain>` /
-  `<Info>` — visual good/bad usage examples. **Use only as an exception.** These
-  are carried over from the older three-tab Guidelines and are visually heavy;
-  the default is to express the point as a Best-Practice bullet. Reach for a
-  visible Do/Dont only for a genuine antipattern a developer easily gets wrong.
+  `<Info>` — visual good/bad usage examples. **Use sparingly.** Two legitimate
+  uses remain: a `## <A> vs. <B>` component comparison under `# Verwendung` (a
+  `<DoAndDont>` of two `<Plain>` tiles), and — rarely — a genuine antipattern a
+  developer easily gets wrong. Otherwise express the point as a Best-Practice
+  bullet.
 
 Frontmatter:
 
