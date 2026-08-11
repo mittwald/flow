@@ -22,9 +22,11 @@ const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
         <tr className="flow--table--row" key={property.name}>
           <td className="flow--table--cell">
             <div className={styles.propertyCell}>
-              <code className={`flow--inline-code ${styles.propertyName}`}>
-                {property.name}
-              </code>
+              <span className={styles.propertyName}>
+                <small>
+                  <strong>{property.name}</strong>
+                </small>
+              </span>
               {property.required ? " (required)" : ""}
             </div>
           </td>

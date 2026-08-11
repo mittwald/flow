@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import type { Property } from "../types";
 import { TableCell, TableRow, Text } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
@@ -24,9 +23,11 @@ export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
     <TableRow>
       <TableCell>
         <div className={styles.propertyCell}>
-          <InlineCode className={styles.propertyName}>
-            {property.name}
-          </InlineCode>
+          <Text className={styles.propertyName}>
+            <small>
+              <strong>{property.name}</strong>
+            </small>
+          </Text>
           {property.required && <Badge>Required</Badge>}
         </div>
       </TableCell>
