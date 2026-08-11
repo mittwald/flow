@@ -4,7 +4,24 @@ description:
   Die CheckboxGroup fasst mehrere Checkboxen oder CheckboxButtons zusammen.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Fülle die `<CheckboxGroup />` mit mehreren `<Checkbox />` oder
+`<CheckboxButton />` und gib ihr über ein
+[Label](/04-components/content/label/overview) eine Beschriftung.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende eine CheckboxGroup, um ...
+
+- mehrere Checkboxen oder CheckboxButtons sinnvoll zu strukturieren.
+- dem User eine Mehrfachauswahl anzubieten.
 
 ## Best Practices
 
@@ -19,42 +36,25 @@ Achte bei der Verwendung einer CheckboxGroup darauf, dass ...
 - die Anzahl der Auswahlmöglichkeiten überschaubar bleibt. Zu viele Optionen
   führen schnell zu Überforderung.
 
-## Verwendung
-
-Verwende eine CheckboxGroup, um ...
-
-- mehrere Checkboxen oder CheckboxButtons sinnvoll zu strukturieren.
-- dem User eine Mehrfachauswahl anzubieten.
-
 ## CheckboxGroup vs. RadioGroup
 
 Mit einer CheckboxGroup oder mit einer
 [RadioGroup](/04-components/form-controls/radio-group/overview) erhalten User
-verschiedene Auswahlmöglichkeiten. Um die beiden besser unterscheiden zu können,
-hier ein paar hilfreiche Anhaltspunkte.
+verschiedene Auswahlmöglichkeiten.
 
 <DoAndDont>
-  <Plain heading="Verwende eine CheckboxGroup, um z. B. ...">
+  <Plain heading="Verwende eine CheckboxGroup, um z. B. ...">
     - eine Mehrfachauswahl darzustellen.
     - [Checkboxen](/04-components/form-controls/checkbox/overview) oder [CheckboxButtons](/04-components/form-controls/checkbox-button/overview) sinnvoll zu strukturieren.
 
   </Plain>
 
-  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
+  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
     - eine Einfachauswahl darzustellen.
     - Radios oder RadioButtons sinnvoll zu strukturieren.
 
   </Plain>
 </DoAndDont>
-
-# Playground
-
-Verwende `<CheckboxGroup />` zusammen mit mehreren `<Checkbox />` oder
-`<CheckboxButtons />`, um eine CheckboxGroup darzustellen. Über der
-CheckboxGroup kann ein beschreibendes
-[Label](/04-components/content/label/overview) verwendet werden.
-
-<LiveCodeEditor stretch />
 
 ---
 
@@ -80,19 +80,21 @@ untereinander angezeigt werden.
 
 ---
 
-# Kombiniere mit ...
+# FieldDescription
 
-## FieldDescription
-
-Um wichtige Hinweise zu den Auswahloptionen der CheckboxGroup bereitzustellen,
-kann unterhalb der Gruppe eine `<FieldDescription />` eingebaut werden.
+Für eine kurze Hilfestellung zu den Auswahloptionen kann unterhalb der Gruppe
+eine `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
 
+---
+
+# Kombiniere mit …
+
 ## ContextualHelp
 
-Benutze das [ContextualHelp](/04-components/overlays/contextual-help/overview),
-um weitere Informationen bereitstellen zu können.
+Benutze die [ContextualHelp](/04-components/overlays/contextual-help/overview),
+um weitere Informationen bereitzustellen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
 
@@ -102,6 +104,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 
