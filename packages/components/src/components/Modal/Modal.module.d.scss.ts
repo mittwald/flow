@@ -1,0 +1,19 @@
+declare const classNames: {
+  readonly modal: "modal";
+  readonly offCanvas: "offCanvas";
+  readonly actionGroup: "actionGroup";
+  readonly closeButton: "closeButton";
+  readonly alwaysVisible: "alwaysVisible";
+  readonly alwaysHidden: "alwaysHidden";
+  readonly header: "header";
+  readonly content: "content";
+  readonly columnLayout: "columnLayout";
+  readonly accentBox: "accentBox";
+  readonly "size-s": "size-s";
+  readonly "size-m": "size-m";
+  readonly "size-l": "size-l";
+  readonly left: "left";
+  readonly keyboardVisible: "keyboardVisible";
+  readonly "1%": "1%";
+};
+export default classNames;

@@ -1,5 +1,4 @@
-import type { HostConfig } from "@mittwald/flow-core";
-import type { ExtBridgeConfigInput } from "./types";
+import type { ExtBridgeConfigInput, HostConfig } from "./types";
 
 export const extractHostConfig = (
   config: ExtBridgeConfigInput,

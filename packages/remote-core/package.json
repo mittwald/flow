@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.1009",
+  "version": "0.2.0-alpha.1021",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://flow.mittwald.de",
@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^25.9.3",

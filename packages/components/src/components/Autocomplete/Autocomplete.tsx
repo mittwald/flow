@@ -23,6 +23,7 @@ import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { isFocused } from "@/lib/form/isFocused";
 import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
+import clsx from "clsx";
 
 export interface AutocompleteProps
   extends
@@ -36,7 +37,7 @@ export interface AutocompleteProps
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const inputRef = useObjectRef(ref);
 
@@ -91,6 +92,8 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     fieldProps,
   } = useFieldComponent(props, "Autocomplete");
 
+  const rootClassName = clsx(fieldProps.className, className);
+
   const propsContext: PropsContext = {
     SearchField: inputProps,
     TextField: inputProps,
@@ -107,7 +110,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <div {...fieldProps}>
+    <div {...fieldProps} className={rootClassName}>
       <FieldErrorCaptureContext>
         <PropsContextProvider
           props={propsContext}

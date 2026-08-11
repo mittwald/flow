@@ -2,7 +2,7 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@11.19.0",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -15,10 +15,13 @@
     "clean": "nx reset",
     "postclean": "nx run-many --targets=clean",
     "dev": "nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
-    "dev:init-githooks": "pnpm dlx simple-git-hooks",
+    "dev:init-githooks": "simple-git-hooks",
+    "dev:init-merge-drivers": "node .github/scripts/init-merge-drivers.cjs",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "format:check": "prettier --check '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint . && stylelint '**/*.{css,scss}' && pnpm format:check",
+    "prepare": "node .github/scripts/init-merge-drivers.cjs",
+    "sync:resolve": "node .github/scripts/sync-resolve.cjs",
     "test": "nx run-many --targets=test:unit,test:compile",
     "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
     "test:browser:prepare": "pnpm exec playwright install --with-deps firefox webkit",
@@ -28,7 +31,7 @@
   "simple-git-hooks": {
     "post-checkout": "pnpm install",
     "post-merge": "pnpm install",
-    "pre-commit": "pnpm lint"
+    "pre-push": "pnpm lint"
   },
   "dependencies": {
     "eslint-scope": "^9.1.2",
@@ -43,6 +46,7 @@
     "@types/node": "^25.9.3",
     "@types/verror": "^1.10.11",
     "@types/yieldable-json": "^2.0.2",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "concurrently": "^10.0.3",
     "depcheck": "^1.4.7",
     "dot-prop": "^10.1.0",
@@ -68,27 +72,10 @@
     "stylelint-plugin-logical-css": "^2.1.0",
     "stylelint-scss": "^7.2.0",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.61.1",
     "verror": "^1.10.1",
     "yieldable-json": "^2.1.0"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch",
-      "acorn": "patches/acorn.patch",
-      "@sigstore/sign@4.1.1": "patches/@sigstore__sign@4.1.1.patch"
-    },
-    "onlyBuiltDependencies": [
-      "@bundled-es-modules/glob",
-      "@parcel/watcher",
-      "esbuild",
-      "msw",
-      "nx",
-      "sharp",
-      "simple-git-hooks",
-      "style-dictionary"
-    ]
   },
   "resolutions": {
     "react": "^19.2.0",

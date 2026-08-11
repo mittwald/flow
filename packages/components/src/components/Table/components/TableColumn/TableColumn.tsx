@@ -2,6 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
+import { prefixedStyleClassname } from "@/lib/scss/selectors";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface TableColumnProps
@@ -31,7 +32,8 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
   } = props;
   const rootClassName = clsx(
     styles.column,
-    styles[`horizontal-align-${horizontalAlign}`],
+    horizontalAlign !== "start" &&
+      prefixedStyleClassname(styles, "horizontal-align-", horizontalAlign),
     className,
   );
 

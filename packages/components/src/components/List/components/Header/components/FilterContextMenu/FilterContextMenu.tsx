@@ -4,7 +4,7 @@ import { IconFilter } from "@/components/Icon/components/icons";
 import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
 import { FilterMenuItem } from "@/components/List/components/Header/components/FilterContextMenu/FilterMenuItem";
-import styles from "@/components/List/components/Header/Header.module.css";
+import styles from "@/components/List/components/Header/Header.module.scss";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";
 
