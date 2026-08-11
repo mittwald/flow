@@ -1,8 +1,8 @@
 const components = [
   "Button",
+  "Content",
   "Header",
   "Heading",
-  "InlineCode",
   "Label",
   "LabeledValue",
   "Section",
@@ -15,14 +15,18 @@ const components = [
  */
 export const scopeSource = `import { ${components.join(", ")} } from "@mittwald/flow-react-components";`;
 
-const heading = `    <Heading>WordPress 6.5.3</Heading>`;
+const heading = `    <Heading>Profil</Heading>`;
 
-const headerAction = `    <Button color="secondary" variant="soft">Öffnen</Button>`;
+const headerAction = [
+  `    <Button color="secondary" variant="soft">`,
+  `      Bearbeiten`,
+  `    </Button>`,
+].join("\n");
 
 const labeledValue = [
   `  <LabeledValue>`,
-  `    <Label>Installationsverzeichnis</Label>`,
-  `    <InlineCode>/wordpress-th6v8</InlineCode>`,
+  `    <Label>E-Mail-Adresse</Label>`,
+  `    <Content>max@mustermann.de</Content>`,
   `  </LabeledValue>`,
 ].join("\n");
 
@@ -38,7 +42,8 @@ const snippet = (header: string[], section: string[]): string =>
 
 /**
  * The composition the "Fokus auf Developer Experience" tile builds up, one
- * nested layer per step — the app details of the Anlegeprozess pattern.
+ * nested layer per step — a profile section in the shape of the detail page
+ * pattern.
  *
  * Every step inserts a block at a single position, inside `<Header>` or
  * `<Section>`. That is what lets the animation type the difference between two
