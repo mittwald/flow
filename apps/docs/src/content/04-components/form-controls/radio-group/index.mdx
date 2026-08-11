@@ -1,209 +1,73 @@
 ---
 component: RadioGroup
 description:
-  Mit einer RadioGroup wählt der User genau eine Option aus einer Gruppe aus.
+  Eine RadioGroup ermöglicht die Auswahl genau einer Option aus einer Gruppe.
 ---
 
-# Grundlagen
+---
 
-Eine RadioGroup enthält mehrere Radios oder RadioButtons als
-Optionsmöglichkeiten, von denen jeweils nur eine vom User ausgewählt werden
-kann. Die ausgewählte Option wird durch einen ausgefüllten Kreis gekennzeichnet.
-Zu Beginn ist häufig eine sinnvolle Option vorausgewählt.
+# Code-Beispiel
+
+Fülle die `<RadioGroup />` mit mehreren `<Radio />` und gib ihr über ein
+[Label](/04-components/content/label/overview) eine Beschriftung – fehlt ein
+sichtbares Label, setze ein `aria-label`.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende eine RadioGroup, um ...
+
+- dem User eine Einfachauswahl aus mehreren Optionen anzubieten.
+- eine Einfachauswahl in Umfragen darzustellen.
+- Einstellungen vorzunehmen, bei denen immer genau eine Option ausgewählt werden
+  muss.
 
 ## Best Practices
 
 Achte bei der Verwendung einer RadioGroup darauf, dass ...
 
-- ein [Label](/04-components/content/label/overview) verwendet wird, wenn der
-  User die RadioGroup sonst nicht selbstständig verstehen kann. Ein anderes
-  beschreibendes Element in Nähe der RadioGroup, kann das Label ersetzen, z. B.
-  eine [Heading](/04-components/content/heading/overview).
-- die Reihenfolge der Optionen gut gewählt ist. In den meisten Fällen ist es
-  sinnvoll, die wichtigsten Optionen an den Anfang zu stellen. Wenn die
-  RadioGroup in Umfragen verwendet wird, kann es stattdessen sinnvoll sein, die
-  Optionen zufällig zu mischen.
-- die Optionen für den User leicht zu unterscheiden sind, um Unsicherheit über
-  die richtige Wahl zu vermeiden.
-- es nicht zu viele Optionen sind. Idealerweise sind es 2-7 Optionen. Bei mehr
-  Optionen oder wenn die Optionen nicht sofort sichtbar sein sollen, ist ein
-  [Select](/04-components/form-controls/select/overview) die bessere Wahl.
-- die Auswahl durch das Anklicken eines Speicher-Buttons bestätigt werden muss.
-- es oft ratsam ist, zu Beginn eine Option vorzuselektieren, um Fehlermeldungen
-  zu vermeiden.
-
-## Verwendung
-
-Verwende eine RadioGroup, um ...
-
-- dem User eine Einfachauswahl mit ungefähr 2-7 direkt sichtbaren Optionen
-  anzubieten.
-- als Einfachauswahl-Components in Umfragen verwendet zu werden.
-- Einstellungen vorzunehmen, bei denen immer genau eine Option ausgewählt werden
-  muss.
+- ein [Label](/04-components/content/label/overview) die RadioGroup beschreibt.
+  Übernimmt ein nahes Element wie eine
+  [Heading](/04-components/content/heading/overview) diese Rolle, wird
+  stattdessen ein `aria-label` bzw. `aria-labelledby` gesetzt.
+- die wichtigste Option zuerst steht.
+- die Optionen sich eindeutig voneinander unterscheiden.
+- Optionen mit hohem Risiko weiter unten stehen und nie vorselektiert sind.
+- bei mehr als etwa 7 Optionen oder wenn diese nicht sofort sichtbar sein
+  müssen, ein [Select](/04-components/form-controls/select/overview) die bessere
+  Wahl ist.
+- zu Beginn eine sinnvolle Option vorselektiert ist, um Fehlermeldungen zu
+  vermeiden.
 
 ## RadioGroup vs. SegmentedControl
 
-Flow bietet verschiedene Auswahl-Components an. RadioGroup und SegmentedControl
-ähneln sich sehr. In den Cards unter dem Text sind hilfreiche Anhaltspunkte für
-eine Abgrenzung.
+RadioGroup und
+[SegmentedControl](/04-components/form-controls/segmented-control/overview)
+ähneln sich sehr.
 
 <DoAndDont>
-  <Info heading="Verwende eine RadioGroup, um z. B. ...">
+  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
     - eine Einfachauswahl von 2 bis ungefähr 7 Optionen anzuzeigen.
-
     - Optionen mit unterschiedlicher Textlänge darzustellen.
 
-  </Info>
-  <Info heading="Verwende eine SegmentedControl, um z. B. ..." >
+  </Plain>
+
+  <Plain heading="Verwende ein SegmentedControl, um z. B. ...">
     - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen.
+    - Optionen aus 1 bis 2 Wörtern anzuzeigen, die den darunterliegenden Inhalt verändern.
 
-    - Optionen anzuzeigen, die aus 1 bis 2 Wörtern bestehen.
-
-    - Optionen anzuzeigen, die den darunterliegenden Inhalt verändern.
-
-  </Info>
+  </Plain>
 </DoAndDont>
-
----
-
-# Anwendung
-
-## Position
-
-RadioGroups werden häufig in Formularen verwendet.
-
-- Radios dürfen nur untereinander und linksbündig dargestellt werden.
-- RadioButtons dürfen untereinander und nebeneinander verwendet werden.
-
-# Hierarchie
-
-Da RadioGroups aus mehreren Optionen bestehen, müssen diese in eine logische
-Reihenfolge gebracht werden. Folgende Punkte können dabei interessant sein:
-
-- In den meisten Fällen sollte die wichtigste Option an erster Stelle stehen.
-  Die wichtigste Option kann z. B. diejenige sein, die am häufigsten vom User
-  gewählt wird.
-- Eine Option, die ein hohes Risiko für den User darstellt, sollte weiter unten
-  in der Liste erscheinen und niemals vorselektiert sein.
-- Da eine RadioGroup in der Regel bereits über eine vorselektierte Option
-  verfügt, wird die RadioGroup automatisch für den User zur Pflicht. Daher muss
-  es immer eine Option geben, die der tatsächlichen Auswahl des Users
-  entspricht. Dies bedeutet zum Beispiel, dass in einer Liste von Optionen am
-  Ende eine Option mit der Bezeichnung „Andere“ oder „Keine“ angeboten wird.
-
-<DoAndDont>
-  <Do example="hierarchyDo">
-    Der User kann hier den letzten Punkt auswählen, wenn die anderen Optionen
-    nicht zutreffen.
-  </Do>
-  <Dont example="hierarchyDont">
-    Wenn der User woanders wohnt, kann er hier keine richtige Wahl treffen.
-  </Dont>
-</DoAndDont>
-
----
-
-# Inhalt
-
-## Radio
-
-Ein Radio besteht aus zwei Bestandteilen: Einem Kreis, der anzeigt, ob eine
-Option ausgewählt ist oder nicht, und einem kurzen beschreibenden Text. Radios
-werden immer untereinander angeordnet und werden häufig in Umfragen verwendet.
-
-## RadioButton
-
-Auf Benutzeroberflächen sind häufiger RadioButtons anstelle von Radios zu
-finden. RadioButtons haben den Vorteil, dass ...
-
-- mehr Inhalt dargestellt werden kann. RadioButtons können auch eine Headline,
-  Fließtext und einen Subtext besitzen. Dabei sollte der Fließtext, jedoch nicht
-  länger als 2-3 Zeilen Text sein.
-- die Klickfläche durch die Umrandung deutlicher wird und dadurch schneller dem
-  User ins Auge springt.
-- sie durch das ColumnLayout und die visuelle Umrandung auch nebeneinander
-  dargestellt werden können.
-
----
-
-# Writing Guidelines
-
-## Label
-
-Ein [Label](/04-components/content/label/overview) soll dem User helfen
-herauszufinden, worum es sich bei der RadioGroup handelt:
-
-- Labels sind platzsparender und unauffälliger. Sie werden verwendet, wenn 1-3
-  Wörter ausreichen, um die Optionen der RadioGroup zu beschreiben. Wenn mehr
-  Wörter benötigt werden, kann z. B. eine
-  [Heading](/04-components/content/heading/overview) in der Nähe der RadioGroup
-  platziert werden.
-- Achte darauf, dass die Wortwahl verständlich ist und keinen
-  Interpretationsspielraum lässt.
-
-<DoAndDont>
-  <Do example="labelDo" />
-  <Dont example="labelDont" />
-</DoAndDont>
-
-## Optionen
-
-Radios und RadioButtons unterscheiden sich in einigen Punkten, die folgenden
-Punkte sollten jedoch bei beiden berücksichtigt werden:
-
-- Beginne eine Option immer mit einem Großbuchstaben.
-- Versuche die Option so kurz wie möglich zu beschreiben. In einem RadioButton
-  können mehrere Sätze in der Mitte stehen, versuche aber nicht mehr als 3 Sätze
-  zu schreiben.
-- Wenn die Optionen Zahlen enthalten, sollten sich diese nicht überlappen oder
-  zwischendrin Zahlen ausgelassen werden.
-
-<DoAndDont>
-  <Do example="optionsDo">
-    Die Auswahl ist eindeutig, da sich kein Alter überschneidet.
-  </Do>
-  <Dont example="optionsDont">
-    Die Optionen überschneiden sich hier, sodass einige User zwei Optionen
-    auswählen müssten.
-  </Dont>
-</DoAndDont>
-
----
-
-# Accessibility
-
-Achte bei der RadioGroup darauf, dass ...
-
-- wenn kein [Label](/04-components/content/label/overview) verwendet wird ein
-  passendes AriaLabel für den Screenreader gesetzt wird, zum Beispiel bei einer
-  [Heading](/04-components/content/heading/overview) muss eine `aria-labelledby`
-  verwendet werden.
-- nie eine Option mit hohem Risiko zum Start vorausgewählt ist, damit diese
-  nicht versehentlich ausgewählt wird. Zum Beispiel sollte darauf geachtet
-  werden, wenn es um Bezahlung geht.
-- die Auswahl durch einen Button bestätigt werden muss.
-
-# Playground
-
-Verwende `<RadioGroup />` zusammen mit mehreren `<Radio />`, um eine RadioGroup
-darzustellen. Über der RadioGroup kann ein beschreibendes
-[Label](/04-components/content/label/overview) verwendet werden. Es kann
-weggelassen werden, wenn die RadioGroup ohne verstanden wird oder wenn ein
-anderes beschreibendes Element – wie eine
-[Heading](/04-components/content/heading/overview) – in der Nähe platziert wird.
-Wenn kein Label vorhanden ist, muss ein aria-label gesetzt werden.
-
-<LiveCodeEditor example="introduction" stretch />
 
 ---
 
 # RadioButtons
 
-RadioGroups können statt mit einfachen **Radios** auch mit **RadioButtons**
-gefüllt werden. Ersetze dafür `<Radio />` mit `<RadioButton />`. Anders als
-einfache Radios können RadioButtons mehr Inhalt – wie z. B. eine Überschrift mit
-Text und Subtext – darstellen und dürfen auch nebeneinander gesetzt werden.
+Um Inhalte stärker hervorzuheben und die Klickfläche zu vergrößern, lassen sich
+statt `<Radio />` auch `<RadioButton />` nutzen.
 
 <LiveCodeEditor example="buttons" editorCollapsed stretch />
 
@@ -211,7 +75,7 @@ Text und Subtext – darstellen und dürfen auch nebeneinander gesetzt werden.
 
 Anstelle einer einfachen Bezeichnung kann der `<RadioButton />` auch mit
 zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
-`<RadioButtons />` [Text](/04-components/content/text/overview) für eine
+`<RadioButton />` [Text](/04-components/content/text/overview) für eine
 Überschrift und `<Content />` für Fließtext.
 
 <LiveCodeEditor example="content" editorCollapsed stretch />
@@ -228,44 +92,39 @@ untereinander angezeigt werden.
 
 ---
 
-# Mit FieldDescription
+# States
 
-Unterhalb der `<Radio />` oder `<RadioButton />` kann eine hilfreiche
-`<FieldDescription />` eingebaut werden.
+In einer RadioGroup sollte immer eine sinnvolle Option vorausgewählt
+(**Selected**) sein.
+
+## Disabled
+
+Um Optionen in der RadioGroup zu deaktivieren, lässt sich der Disabled-State für
+die gesamte RadioGroup oder gezielt für einzelne Radios bzw. RadioButtons
+setzen.
+
+<LiveCodeEditor example="states" editorCollapsed stretch />
+
+## Error
+
+Ein Error-State wird angezeigt, wenn etwas schiefgelaufen ist (siehe
+[Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)). Da
+meist eine Option vorselektiert ist, wird er nur selten benötigt.
+
+<LiveCodeEditor example="error" editorCollapsed stretch />
+
+---
+
+# FieldDescription
+
+Für eine kurze Hilfestellung zu den Optionen kann unterhalb der `<Radio />` oder
+`<RadioButton />` eine `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
 
 ---
 
-# States
-
-Eine RadioGroup hat 3 States: **Default**, **Disabled** und **Error**. Radios
-und RadioButtons verfügen über die States **Default**, **Hover**, **Pressed**,
-**Disabled**, **Focused** und **Selected**.
-
-<LiveCodeEditor example="states" editorCollapsed stretch />
-
-**Selected:** Wenn ein Radio/RadioButton vom User ausgewählt wird, erhält er den
-State Selected. In einer RadioGroup kann sich immer nur ein Radio/RadioButton in
-diesem State befinden. In den meisten Fällen ist es sinnvoll, zu Beginn eine
-Option vorzuselektieren.
-
-**Disabled:** Wenn die RadioGroup den State Disabled hat, erhalten alle
-Radios/RadioButtons automatisch ebenfalls diesen State, sodass sie vom User
-nicht ausgewählt werden können. Es ist auch möglich, einzelne
-Radios/RadioButtons auf Disabled zu setzen.
-
-<LiveCodeEditor example="error" editorCollapsed stretch />
-
-**Error:** Ein Error-State sollte angezeigt werden, wenn etwas schiefgelaufen
-ist (siehe
-[Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)). Da
-häufig eine Option in der RadioGroup vorselektiert ist, wird das obige Beispiel
-nur selten benötigt.
-
----
-
-# Kombiniere mit ...
+# Kombiniere mit …
 
 ## ContextualHelp
 
@@ -281,6 +140,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 
