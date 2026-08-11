@@ -135,7 +135,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                   renderEmptyState={renderEmptyState}
                   isNonModal
                   placement="bottom start"
-                  containerPadding={0}
                 >
                   <UiComponentTunnelExit
                     id="options"

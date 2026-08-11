@@ -12,12 +12,6 @@ export interface PopoverContentProps
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef?: RefObject<Element | null>;
-  /**
-   * The minimum distance the popover keeps to the edges of its boundary.
-   *
-   * @default 16
-   */
-  containerPadding?: number;
 }
 
 /** @flr-generate all */
@@ -31,7 +25,6 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ref,
     isOpen,
     width,
-    containerPadding = 16,
     ...rest
   } = props;
 
@@ -41,7 +34,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     <Aria.Popover
       {...rest}
       className={className}
-      containerPadding={containerPadding}
+      containerPadding={16}
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}

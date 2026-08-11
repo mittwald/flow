@@ -12,7 +12,6 @@ export class RemotePopoverContentElement extends FlowRemoteElement<RemotePopover
   static override get remoteProperties() {
     return {
       className: {},
-      containerPadding: {},
       isDialogContent: {},
       isOpen: {},
       triggerRef: {},
