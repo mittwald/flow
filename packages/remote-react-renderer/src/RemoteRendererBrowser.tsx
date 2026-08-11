@@ -32,7 +32,7 @@ import {
   useState,
 } from "react";
 import { useLanguage, useTheme } from "@mittwald/flow-react-components";
-import type { HostConfig } from "@mittwald/flow-core";
+import type { HostConfig } from "@mittwald/ext-bridge";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
