@@ -80,12 +80,12 @@ nearest `AGENTS.md` before working in a package.**
 | `packages/icons-base`                   | private                                  | Icon source of truth (`src/icons.yaml`) + shared generator tooling.                        |
 | `packages/icons`, `packages/icons-pro`  | `@mittwald/flow-icons(-pro)`             | Published icon sets, **fully generated** from `icons-base` (Tabler / FontAwesome).         |
 | `packages/stylesheet`                   | `@mittwald/flow-stylesheet`              | Publishes the components' `all.css` as a standalone CSS package.                           |
-| `packages/core`                         | private                                  | Shared utilities: remote host config contract, shared Vitest browser config.               |
+| `packages/core`                         | private                                  | Shared utilities: the shared Vitest browser config.                                        |
 | `packages/remote-core`                  | `@mittwald/flow-remote-core`             | Connection + serialization layer (versioned protocol).                                     |
 | `packages/remote-elements`              | `@mittwald/flow-remote-elements`         | Custom elements (`flr-*`) for the remote side; largely auto-generated.                     |
 | `packages/remote-react-components`      | `@mittwald/flow-remote-react-components` | React API used _inside_ remote apps (extensions); largely auto-generated.                  |
 | `packages/remote-react-renderer`        | `@mittwald/flow-remote-react-renderer`   | Host-side renderer mapping `flr-*` elements to Flow components; map auto-generated.        |
-| `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries).                             |
+| `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
 | `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
 | `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
 | `packages/codemods`                     | private                                  | jscodeshift migrations for consumers.                                                      |

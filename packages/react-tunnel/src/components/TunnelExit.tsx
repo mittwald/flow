@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useSyncExternalStore } from "react";
 import { useTunnelState } from "@/context";
 import { observer } from "mobx-react-lite";
 import type { TunnelChildren } from "@/TunnelState";
@@ -18,7 +18,13 @@ const ChildrenRenderer: FC<{ children: TunnelExitChildren }> = (props) => {
 
 export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
   const { children, id, providerId } = props;
-  const tunnelChildren = useTunnelState(providerId).getEntries(id);
+  const isSsr = useSyncExternalStore(
+    () => () => null,
+    () => false,
+    () => true,
+  );
+
+  const tunnelChildren = useTunnelState(providerId).getEntries(id, isSsr);
 
   const renderedTunnelChildren = tunnelChildren?.entries.map((entry) => (
     <ChildrenRenderer key={entry.id}>{entry.children}</ChildrenRenderer>

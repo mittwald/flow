@@ -1,5 +1,21 @@
 # Migrations
 
+---
+
+## From version `0.2.0-alpha.1007` to `>=0.2.0-alpha.1016`
+
+### TooltipTrigger changed delay type
+
+Numeric delay values are no longer accepted; only string literals are valid.
+
+```diff
+- <TooltipTrigger delay={300} />
++ <TooltipTrigger delay="default" />
+
+- <TooltipTrigger delay={500} />
++ <TooltipTrigger delay="long" />
+```
+
 ## From version `0.2.0-alpha.1004` to `>=0.2.0-alpha.1005`
 
 ### Closing a Modal with unsaved changes is confirmed by default
@@ -41,6 +57,75 @@ Assigning a flag keeps working — it acts as the application-wide default below
 the provider and logs a deprecation warning — but the flags will be removed in a
 future release.
 
+---
+
+## From version `0.2.0-alpha.933` to `>=0.2.0-alpha.956`
+
+### TableColumn: `maxWidth` removed, `width` and `minWidth` retyped
+
+`maxWidth` has been removed. `width` and `minWidth` are now typed as
+`number | string`: they no longer accept `null`, and the previous
+template-literal typing (`` `${number}%` ``, `` `${number}fr` ``) is replaced by
+a plain `string`.
+
+```diff
+- <TableColumn width="50%" minWidth={null} maxWidth={400} />
++ <TableColumn width="50%" />
+```
+
+Percentage, pixel and `fr` values keep working as strings or numbers
+(`width="50%"`, `width="200fr"`, `width={300}`). Where you passed `null` to mean
+"no explicit width", omit the prop instead.
+
+---
+
+## From version `0.2.0-alpha.857` to `>=0.2.0-alpha.866`
+
+### Table: `render` prop removed
+
+The `render` escape hatch on `Table` has been removed. Compose the table from
+`TableHeader`, `TableColumn`, `TableBody`, `TableRow` and `TableCell` instead.
+
+---
+
+## From version `0.2.0-alpha.837` to `>=0.2.0-alpha.846`
+
+### TableCell: `render` prop removed
+
+The `render` escape hatch on `TableCell` has been removed. Provide the cell
+content as children instead.
+
+```diff
+- <TableCell render={(cell) => <CustomCell {...cell} />} />
++ <TableCell>
++  <CustomCell />
++ </TableCell>
+```
+
+### Breadcrumb, HeaderNavigation, Heading, IllustratedMessage, and Link: color property "primary" renamed to "default"
+
+The `color="primary"` property has been renamed to `color="default"`.
+
+```diff
+- <Link color="primary">
++ <Link color="default" />
+```
+
+A codemod rewrites `color="primary"` to `color="default"` on these five
+components (and leaves other components such as `Button`, where `"primary"` is
+still valid, untouched):
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaColorPrimaryToDefault.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder.
+
+---
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart
@@ -52,16 +137,9 @@ The `dataKeyLabel` is required to identify the RowData in the formatter
 functions. If a `string` is used - this will automatically be used as the
 `dataKeyLabel`.
 
-**Before:**
-
-```tsx
-<XAxis dataKey={() => 1337} />
-```
-
-**Now:**
-
-```tsx
-<XAxis dataKey={() => 1337} dataKeyLabel={"leet"} />
+```diff
+- <XAxis dataKey={() => 1337} />
++ <XAxis dataKey={() => 1337} dataKeyLabel={"leet"} />
 ```
 
 ---
@@ -139,6 +217,63 @@ const ExampleChart = typedCartesianChart<ChartData>();
   />
 </ExampleChart.Chart>
 ```
+
+---
+
+## From version `0.2.0-alpha.777` to `>=0.2.0-alpha.786`
+
+### AccentBox.color is now a declaration for foreground
+
+The `color` property now controls foreground colors. Use the `backgroundColor`
+property to set the background color instead.
+
+```diff
+- <AccentBox color="gradient">
++ <AccentBox backgroundColor="gradient" />
+```
+
+---
+
+## From version `0.2.0-alpha.747` to `>=0.2.0-alpha.756`
+
+### Removed the underlying react-syntax-highlighter library from CodeBlock
+
+We've replaced the `react-syntax-highlighter` library, which means many
+properties have been removed and the remaining ones have been simplified. See
+the
+[CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview)
+for details on what's now supported.
+
+---
+
+## From version `0.2.0-alpha.676` to `>=0.2.0-alpha.696`
+
+### OverlayController.addOnClose / addOnOpen return type changed
+
+The return type changed from `() => void` to `() => unknown`
+
+---
+
+## From version `0.2.0-alpha.667` to `>=0.2.0-alpha.676`
+
+### CartesianChart.emptyView changed
+
+Component references are no longer accepted for `emptyView` - must be a rendered
+element now.
+
+```diff
+- <CartesianChart emptyView={EmptyState} />
++ <CartesianChart emptyView={<EmptyState />} />
+```
+
+---
+
+## From version `0.2.0-alpha.637` to `>=0.2.0-alpha.646`
+
+### Removed ResetButton and SubmitButton Interfaces
+
+The `RemoteButtonElementProps`, `ResetButtonProps`, and `SubmitButtonProps`
+interfaces have been removed. Use `ButtonProps` instead.
 
 ---
 
