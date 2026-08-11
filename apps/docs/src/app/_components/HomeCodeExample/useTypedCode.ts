@@ -1,9 +1,9 @@
 "use client";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
-const charDelay = 14;
+const charDelay = 11;
 const lineDelay = 60;
-const stepDelay = 500;
+const stepDelay = 400;
 
 interface Insertion {
   at: number;

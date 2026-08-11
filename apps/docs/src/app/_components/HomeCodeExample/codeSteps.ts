@@ -1,11 +1,18 @@
-const heading = `  <Heading>Domain hinzufügen</Heading>`;
+const heading = `  <Heading>WordPress 6.5.3</Heading>`;
 
-const text = `  <Text>Verbinde deine Domain mit deinem Projekt.</Text>`;
+const labeledValue = [
+  `  <LabeledValue>`,
+  `    <Label>Installationsverzeichnis</Label>`,
+  `    <InlineCode>/wordpress-th6v8</InlineCode>`,
+  `  </LabeledValue>`,
+].join("\n");
 
 const actionGroup = [
   `  <ActionGroup>`,
-  `    <Button color="accent">Domain verbinden</Button>`,
-  `    <Button color="secondary" variant="soft">Abbrechen</Button>`,
+  `    <Button color="accent">App öffnen</Button>`,
+  `    <Button color="secondary" variant="soft">`,
+  `      Einstellungen`,
+  `    </Button>`,
   `  </ActionGroup>`,
 ].join("\n");
 
@@ -21,19 +28,22 @@ const snippet = (components: string[], children: string[]): string =>
   ].join("\n");
 
 const base = ["Heading", "Section"];
-const withText = [...base, "Text"];
-const withActions = ["ActionGroup", "Button", ...withText];
+const withValue = ["Heading", "InlineCode", "Label", "LabeledValue", "Section"];
+const withActions = ["ActionGroup", "Button", ...withValue];
 
 /**
  * The composition the "Fokus auf Developer Experience" tile builds up, one
- * nested layer per step. Every step inserts at a single position (either inside
- * the import braces or before the closing `</Section>`) so the animation can
- * type the difference between two steps.
+ * nested layer per step — the app details of the Anlegeprozess pattern.
+ *
+ * Every step inserts at a single position: a contiguous run of imports (the
+ * component names are picked so the additions stay adjacent in alphabetical
+ * order) or a block before the closing `</Section>`. That is what lets the
+ * animation type the difference between two steps.
  */
 export const codeSteps = [
   snippet(base, [heading]),
-  snippet(withText, [heading]),
-  snippet(withText, [heading, text]),
-  snippet(withActions, [heading, text]),
-  snippet(withActions, [heading, text, actionGroup]),
+  snippet(withValue, [heading]),
+  snippet(withValue, [heading, labeledValue]),
+  snippet(withActions, [heading, labeledValue]),
+  snippet(withActions, [heading, labeledValue, actionGroup]),
 ];

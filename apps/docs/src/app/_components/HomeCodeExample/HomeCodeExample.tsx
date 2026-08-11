@@ -25,6 +25,34 @@ const scope = extractEditorScope(finalCode);
 const useIsomorphicLayoutEffect =
   typeof window === "undefined" ? useEffect : useLayoutEffect;
 
+interface ReservedHeights {
+  preview: number;
+  editor: number;
+}
+
+/**
+ * Heights of the finished example. Preview and code block each hold their own,
+ * so nothing inside the tile moves while the code is typed — a single height on
+ * the wrapper would keep the page still, but the preview would still drift as
+ * the code block grows underneath it.
+ *
+ * Neither element takes a ref (both come from react-live), hence the lookup by
+ * class name.
+ */
+const measure = (wrapper: HTMLElement): ReservedHeights | undefined => {
+  const preview = wrapper.querySelector(`.${styles.preview}`);
+  const editor = wrapper.querySelector(`.${styles.editor}`);
+
+  if (preview === null || editor === null) {
+    return undefined;
+  }
+
+  return {
+    preview: preview.getBoundingClientRect().height,
+    editor: editor.getBoundingClientRect().height,
+  };
+};
+
 /**
  * The live example of the "Fokus auf Developer Experience" tile: it composes
  * itself step by step, so the nesting and the automatic spacing the tile talks
@@ -32,22 +60,21 @@ const useIsomorphicLayoutEffect =
  * afterwards.
  */
 const HomeCodeExample: FC = () => {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const [reservedHeight, setReservedHeight] = useState<number>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [reserved, setReserved] = useState<ReservedHeights>();
   const [isVisible, setIsVisible] = useState(false);
 
-  // The example starts out complete: its final height is measured up front and
-  // held while the animation runs, so growing code never pushes the page
-  // around. The animation itself waits for the tile to be on screen — the tile
-  // sits below the fold and watching it compose itself is the whole point.
+  // The example starts out complete, which is what makes it measurable. The
+  // animation itself waits for the tile to be on screen — the tile sits below
+  // the fold and watching it compose itself is the whole point.
   useIsomorphicLayoutEffect(() => {
-    const element = editorRef.current;
+    const wrapper = wrapperRef.current;
 
-    if (element === null) {
+    if (wrapper === null) {
       return;
     }
 
-    setReservedHeight(element.getBoundingClientRect().height);
+    setReserved(measure(wrapper));
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -59,14 +86,14 @@ const HomeCodeExample: FC = () => {
       { threshold: 0.3 },
     );
 
-    observer.observe(element);
+    observer.observe(wrapper);
 
     return () => observer.disconnect();
   }, []);
 
   const { code, isTyping, skip } = useTypedCode(
     codeSteps,
-    isVisible && reservedHeight !== undefined,
+    isVisible && reserved !== undefined,
   );
 
   const lastPreview = useRef("");
@@ -83,12 +110,17 @@ const HomeCodeExample: FC = () => {
 
   return (
     <LiveProvider transformCode={transformCode} code={code} scope={scope}>
-      <div
-        className={styles.liveCodeEditor}
-        ref={editorRef}
-        style={isTyping ? { minBlockSize: reservedHeight } : undefined}
-      >
-        <LivePreview className={styles.preview} />
+      <div className={styles.liveCodeEditor} ref={wrapperRef}>
+        <LivePreview
+          className={styles.preview}
+          style={
+            isTyping
+              ? // Top aligned, or the composition would drift upwards inside
+                // the reserved space as it grows.
+                { minBlockSize: reserved?.preview, justifyContent: "start" }
+              : undefined
+          }
+        />
 
         <div
           className={styles.editorContainer}
@@ -99,6 +131,7 @@ const HomeCodeExample: FC = () => {
             tabMode="focus"
             theme={flowTheme}
             className={styles.editor}
+            style={isTyping ? { minBlockSize: reserved?.editor } : undefined}
           />
         </div>
       </div>
