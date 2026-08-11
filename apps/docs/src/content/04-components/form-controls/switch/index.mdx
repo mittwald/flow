@@ -1,25 +1,17 @@
 ---
 component: Switch
-description: Mit einem Switch schalten User Optionen ein oder aus.
+description: Ein Switch schaltet eine Option unmittelbar ein oder aus.
 ---
 
-# Grundlagen
+---
 
-Ein Switch ermöglicht das unmittelbare Aktivieren oder Deaktivieren einer
-Option. Die Änderungen treten sofort in Kraft, ohne dass eine separate
-Bestätigung notwendig ist.
+# Code-Beispiel
 
-## Best Practices
+<LiveCodeEditor />
 
-Achte bei der Verwendung von einem Switch darauf, dass ...
+---
 
-- Änderungen sofort übernommen werden, ohne dass ein zusätzlicher
-  Speichern-Button nötig ist.
-- das Label die Funktion klar und prägnant beschreibt (idealerweise in 1–3
-  Wörtern).
-- die Beschriftung unabhängig vom Zustand des Switches gleich bleibt.
-
-## Verwendung
+# Verwendung
 
 Verwende einen Switch, um ...
 
@@ -28,11 +20,15 @@ Verwende einen Switch, um ...
   Bestätigungsschritt.
 - häufig genutzte Optionen schnell und unkompliziert ändern zu können.
 
-# Playground
+## Best Practices
 
-Verwende `<Switch />`, um einen Switch darzustellen.
+Achte bei der Verwendung eines Switches darauf, dass ...
 
-<LiveCodeEditor />
+- Änderungen sofort übernommen werden, ohne dass ein zusätzlicher
+  Speichern-Button nötig ist.
+- das Label die Funktion klar und prägnant beschreibt (idealerweise in 1–3
+  Wörtern).
+- die Beschriftung unabhängig vom Zustand des Switches gleich bleibt.
 
 ---
 
@@ -40,7 +36,7 @@ Verwende `<Switch />`, um einen Switch darzustellen.
 
 Die Positionierung des Labels sollte sich am Seitenlayout orientieren. Steht der
 Switch rechtsbündig, sollte die Beschriftung links davor platziert werden. So
-erfasst der User zuerst den Zweck, bevor die Aktion ausführt wird.
+erfasst der User zuerst den Zweck, bevor die Aktion ausgeführt wird.
 
 <LiveCodeEditor example="leading-label" editorCollapsed />
 
@@ -53,6 +49,8 @@ Funktion temporär als nicht verfügbar darzustellen, ohne diesen vollständig a
 der Oberfläche zu entfernen.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
+
+---
 
 # Properties
 
