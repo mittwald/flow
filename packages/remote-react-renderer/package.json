@@ -39,7 +39,6 @@
     "remeda": "^2.39.0"
   },
   "devDependencies": {
-    "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^25.9.3",

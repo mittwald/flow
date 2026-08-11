@@ -35,7 +35,7 @@ import {
   IntlProvider,
   useLanguage,
 } from "@mittwald/flow-react-components/flr-universal";
-import type { HostConfig } from "@mittwald/flow-core";
+import type { HostConfig } from "@mittwald/ext-bridge";
 import { initExtBridge } from "@mittwald/ext-bridge/browser";
 
 const viewComponents = {

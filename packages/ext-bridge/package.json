@@ -45,7 +45,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@mittwald/flow-core": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2",
