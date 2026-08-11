@@ -31,8 +31,7 @@ export default mergeConfig(
             ...vitestBrowserTestConfig,
             name: "visual",
             include: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],
-            // setupVisualTheme puts one of the two browsers into the dark theme
-            // so a single run covers both themes — visual tests only.
+            // setupVisualTheme renders one of the two browsers in dark theme.
             setupFiles: [
               "./dev/vitest/setupBrowser.ts",
               "./dev/vitest/setupVisualTheme.ts",

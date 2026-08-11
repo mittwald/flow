@@ -51,9 +51,9 @@ pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
 The tests run **headless**. Omitting `--browser.name` runs both browsers — and
-therefore both themes — which is what CI does; Firefox needs
-`--browser.fileParallelism=false`, because it has issues with parallelized
-testing.
+therefore both themes — as the scheduled run and the `run-visual-tests` label
+do. Firefox then needs `--browser.fileParallelism=false`, because it has issues
+with parallelized testing (`test:visual:update` already passes it).
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.

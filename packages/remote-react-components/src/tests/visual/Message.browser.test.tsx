@@ -75,6 +75,8 @@ test.each(testEnvironments)(
         </Message>
         <Message color="#ffeedd">
           <Content>
+            {/* A custom color does not adapt to the theme, so neither can the
+                content color. */}
             <Text color="dark-static">Custom color</Text>
           </Content>
         </Message>
