@@ -149,7 +149,7 @@
       }
 
       &[disabled],
-      &[data-disabled],
+      &[data-disabled="true"],
       &.ariaDisabled,
       &.isPending,
       &.isFailed,

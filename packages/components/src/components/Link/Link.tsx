@@ -110,10 +110,9 @@ export const Link = flowComponent("Link", (props) => {
     AccentBox: { className: styles.accentBox },
     LayoutCard: { className: styles.layoutCard },
     Button: {
-      elementType: "span",
       className: styles.button,
-      size: props.size,
-      color: props.color === "default" ? undefined : props.color,
+      size,
+      color: color === "default" ? undefined : color,
       isDisabled: props.isDisabled,
       children: dynamic((buttonProps) => (
         <>
@@ -121,6 +120,11 @@ export const Link = flowComponent("Link", (props) => {
           <LinkIcon {...props} />
         </>
       )),
+      render: ({ children, className, disabled }) => (
+        <span className={className} data-disabled={disabled}>
+          {children}
+        </span>
+      ),
     },
   };
 
