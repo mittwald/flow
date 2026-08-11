@@ -33,9 +33,7 @@ const labeledValue = [
 const snippet = (header: string[], section: string[]): string =>
   [
     "<Section>",
-    "  <Header>",
-    ...header,
-    "  </Header>",
+    ...(header.length > 0 ? ["  <Header>", ...header, "  </Header>"] : []),
     ...section,
     "</Section>",
   ].join("\n");
@@ -43,13 +41,15 @@ const snippet = (header: string[], section: string[]): string =>
 /**
  * The composition the "Fokus auf Developer Experience" tile builds up, one
  * nested layer per step — a profile section in the shape of the detail page
- * pattern.
+ * pattern. It starts from the bare `<Section>`, so every component the reader
+ * sees was typed in front of them.
  *
  * Every step inserts a block at a single position, inside `<Header>` or
  * `<Section>`. That is what lets the animation type the difference between two
  * steps.
  */
 export const codeSteps = [
+  snippet([], []),
   snippet([heading], []),
   snippet([heading], [labeledValue]),
   snippet([heading, headerAction], [labeledValue]),
