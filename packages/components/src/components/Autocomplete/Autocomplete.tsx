@@ -92,7 +92,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     fieldProps,
   } = useFieldComponent(props, "Autocomplete");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(
+    styles.autocomplete,
+    fieldProps.className,
+    className,
+  );
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
@@ -116,11 +120,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
           props={propsContext}
           dependencies={[optionsOverlayController]}
         >
-          <div
-            {...focusWithin.focusWithinProps}
-            className={styles.autocomplete}
-            ref={container}
-          >
+          <div {...focusWithin.focusWithinProps} ref={container}>
             <UNSAFE_PortalProvider getContainer={() => container.current}>
               <Aria.Autocomplete
                 filter={contains}
