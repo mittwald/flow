@@ -4,44 +4,49 @@ description:
   Mit einem SearchField wird gezielt nach Inhalten in einer Anwendung gesucht.
 ---
 
-# Grundlagen
+---
 
-Ein SearchField unterstützt die effiziente Navigation und hilft dabei, große
-Informationsmengen schnell zu durchsuchen und relevante Ergebnisse zu finden.
+# Code-Beispiel
 
-## Best Practices
+Das SearchField bringt selbst keine Suchlogik mit. Verarbeite die Eingabe über
+`onChange` bzw. `onSubmit` oder binde das Feld in eine
+[Form (React Hook Form)](/04-components/react-hook-form/form/overview) ein.
 
-Achte bei der Verwendung eines SearchFields darauf, dass ...
+<LiveCodeEditor stretch />
 
-- visuelles Feedback bei Ladezuständen oder Fehlern (z. B. keine Suchergebnisse
-  gefunden) gegeben wird.
-- die Component selbst keine Suchlogik mitbringt und daher mit einer Logik- oder
-  Formular-Component wie
-  [Form (React Hook Form)](/04-components/react-hook-form/form/overview)
-  kombiniert werden sollte.
-- sie leicht zugänglich und gut sichtbar positioniert ist, vorzugsweise an
-  Stellen, an denen User eine Suche erwarten.
+---
 
-## Verwendung
+# Verwendung
 
 Verwende ein SearchField, um ...
 
-- große Datenmengen (z. B. in der
+- große Datenmengen (z. B. in der
   [List](/04-components/structure/list/overview)) gezielt und effizient zu
   durchsuchen.
 - Usern das schnelle Auffinden von Inhalten, Produkten oder Daten zu
   ermöglichen.
 - die Navigation innerhalb komplexer Anwendungen oder Websites zu unterstützen.
 
-# Playground
+## Best Practices
 
-Verwende `<SearchField />`, um ein SearchField darzustellen.
+Achte bei der Verwendung eines SearchFields darauf, dass ...
 
-<LiveCodeEditor stretch />
+- visuelles Feedback bei Ladezuständen oder Fehlern (z. B. keine Suchergebnisse
+  gefunden) gegeben wird.
+- sie leicht zugänglich und gut sichtbar positioniert ist, vorzugsweise an
+  Stellen, an denen User eine Suche erwarten.
 
 ---
 
 # Kombiniere mit ...
+
+## Align
+
+Benutze die [Align](/04-components/structure/align/overview)-Component, um
+andere Components, wie einen [Button](/04-components/actions/button/overview),
+neben dem SearchField auszurichten.
+
+<LiveCodeEditor example="align" editorCollapsed stretch />
 
 ## React Hook Form
 
@@ -49,6 +54,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 

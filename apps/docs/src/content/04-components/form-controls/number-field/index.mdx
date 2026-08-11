@@ -4,34 +4,33 @@ description:
   Das NumberField erlaubt die Eingabe und schrittweise Anpassung von Zahlen.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Platziere im `<NumberField />` ein `<Label />`, um die Eingabeanforderung kurz
+zu beschreiben. Über `minValue` und `maxValue` grenzt du den zulässigen
+Wertebereich ein.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende ein NumberField, um Eingaben zu ermöglichen, die ausschließlich aus
+Zahlen bestehen (z. B. Alter, Menge, Preis).
 
 ## Best Practices
 
 Achte bei der Verwendung eines NumberFields darauf, dass ...
 
-- bei Bedarf eine Einheit über `formatOptions` ergänzt wird.
 - Mindest- und Höchstwerte (`minValue`/`maxValue`) sinnvoll definiert sind, wenn
   Eingaben eingeschränkt werden sollen.
 - das [Label](/04-components/content/label/overview) prägnant und leicht
   verständlich ist.
-- die FieldDescription genutzt wird, um Beispiele oder Formatierungshinweise
-  bereitzustellen.
 - [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
   klar, hilfreich und lösungsorientiert formuliert sind.
-
-## Verwendung
-
-Verwende ein NumberField, um Eingaben zu ermöglichen, die ausschließlich aus
-Zahlen bestehen (z. B. Alter, Menge, Preis).
-
-# Playground
-
-Verwende `<NumberField />`, um ein NumberField darzustellen. Platziere innerhalb
-davon ein `<Label />`, um die Eingabeanforderung kurz in einem
-[Label](/04-components/content/label/overview) zu beschreiben.
-
-<LiveCodeEditor stretch />
 
 ---
 
@@ -45,18 +44,11 @@ definieren (s.
 
 ---
 
-# Disabled
-
-Ist das NumberField **disabled**, ist keine Interaktion möglich. Sobald die
-Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
-
-<LiveCodeEditor example="disabled" editorCollapsed stretch />
-
----
-
 # Validierung
 
-Um das NumberField zu validieren, stehen folgende Properties zur Verfügung:
+Nutze für die Validierung
+[React Hook Form](/04-components/react-hook-form/form/overview). Alternativ
+stehen aber auch folgende Properties zur Verfügung:
 
 - `isRequired` für Pflichtfelder.
 - `validate` für eigene Validierungen.
@@ -80,6 +72,15 @@ Um wichtige Hinweise zum NumberField bereitzustellen, kann unterhalb eine
 `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem NumberField interagieren kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
 
 ---
 
@@ -107,6 +108,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 
