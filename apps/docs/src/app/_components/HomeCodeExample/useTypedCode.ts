@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
-const charDelay = 11;
+const charDelay = 16;
 const lineDelay = 60;
 const stepDelay = 400;
 

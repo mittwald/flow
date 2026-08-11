@@ -16,11 +16,10 @@ import styles from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor.modu
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import { codeSteps } from "./codeSteps";
+import { codeSteps, scopeSource } from "./codeSteps";
 import { useTypedCode } from "./useTypedCode";
 
-const finalCode = codeSteps.at(-1) ?? "";
-const scope = extractEditorScope(finalCode);
+const scope = extractEditorScope(scopeSource);
 
 const useIsomorphicLayoutEffect =
   typeof window === "undefined" ? useEffect : useLayoutEffect;
