@@ -202,6 +202,9 @@ each with a link to that Component's page and its own example (Button:
 
 - **Omit the whole section** when there is no genuine composition — do not
   invent one.
+- **Only Components with their own page belong here.** A helper that has no page
+  and cannot be used standalone (for example `FieldDescription`) stays a feature
+  section, never under Kombiniere.
 - **`## React Hook Form` is the fixed convention** for form-capable Components:
   always add it, linking to the
   [Form (React Hook Form)](/04-components/react-hook-form/form/overview) page.
