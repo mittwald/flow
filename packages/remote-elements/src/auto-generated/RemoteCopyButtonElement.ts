@@ -25,6 +25,7 @@ export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonE
       className: {},
       color: {},
       dir: {},
+      elementType: {},
       excludeFromTabOrder: {},
       form: {},
       formAction: {},
