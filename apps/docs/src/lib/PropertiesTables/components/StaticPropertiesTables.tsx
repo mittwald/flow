@@ -1,5 +1,7 @@
 import type { FC } from "react";
 import type { Properties, Property } from "@/lib/PropertiesTables/types";
+import { TypeValue } from "./TypeValue";
+import styles from "../PropertiesTables.module.scss";
 
 const formatDescription = (description: string | null | undefined): string =>
   (description ?? "")
@@ -12,7 +14,6 @@ const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
       <tr className="flow--table--row">
         <th className="flow--table--column">Property</th>
         <th className="flow--table--column">Type</th>
-        <th className="flow--table--column">Default</th>
         <th className="flow--table--column">Description</th>
       </tr>
     </thead>
@@ -20,13 +21,23 @@ const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
       {properties.map((property) => (
         <tr className="flow--table--row" key={property.name}>
           <td className="flow--table--cell">
-            <code>{property.name}</code>
-            {property.required ? " (required)" : ""}
+            <div className={styles.propertyCell}>
+              <code className={`flow--inline-code ${styles.propertyName}`}>
+                {property.name}
+              </code>
+              {property.required ? " (required)" : ""}
+            </div>
           </td>
           <td className="flow--table--cell">
-            <code>{property.type}</code>
+            <div className={styles.typeCell}>
+              <TypeValue type={property.type} />
+              {property.default && (
+                <span className={styles.defaultValue}>
+                  Default: {property.default}
+                </span>
+              )}
+            </div>
           </td>
-          <td className="flow--table--cell">{property.default || "-"}</td>
           <td className="flow--table--cell">
             {formatDescription(property.description)}
           </td>

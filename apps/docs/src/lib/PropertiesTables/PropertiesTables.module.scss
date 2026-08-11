@@ -1,0 +1,35 @@
+.propertyName {
+  background-color: transparent;
+  padding-inline: 0;
+  font-weight: var(--font-weight--bold);
+  overflow-wrap: anywhere;
+}
+
+.propertyCell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-px--xs);
+}
+
+.type {
+  overflow-wrap: anywhere;
+}
+
+.typeChips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--size-px--xs);
+}
+
+.typeCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--size-px--xs);
+}
+
+.defaultValue {
+  font-size: var(--label--font-size);
+  color: var(--label--color--default);
+}

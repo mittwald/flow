@@ -1,11 +1,13 @@
 import type { FC } from "react";
 import type { Property } from "../types";
-import { TableCell, TableRow } from "@mittwald/flow-react-components";
+import { TableCell, TableRow, Text } from "@mittwald/flow-react-components";
 import { InlineCode } from "@mittwald/flow-react-components";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
 import { Badge } from "@mittwald/flow-react-components";
+import { TypeValue } from "./TypeValue";
+import styles from "../PropertiesTables.module.scss";
 
 export interface PropertyTableGroupProps {
   property: Property;
@@ -21,23 +23,37 @@ export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
   return (
     <TableRow>
       <TableCell>
-        <InlineCode whiteSpace="nowrap">{property.name}</InlineCode>
-        {property.required && <Badge>Required</Badge>}
+        <div className={styles.propertyCell}>
+          <InlineCode className={styles.propertyName}>
+            {property.name}
+          </InlineCode>
+          {property.required && <Badge>Required</Badge>}
+        </div>
       </TableCell>
-      <TableCell>{property.type}</TableCell>
-      <TableCell>{property.default || "-"}</TableCell>
       <TableCell>
-        <Markdown
-          components={omit(customComponents, [
-            "Content",
-            "Heading",
-            "Alert",
-            "DoAndDont",
-            "ColumnLayout",
-          ])}
-        >
-          {formattedDescription}
-        </Markdown>
+        <div className={styles.typeCell}>
+          <TypeValue type={property.type} />
+          {property.default && (
+            <Text className={styles.defaultValue}>
+              Default: {property.default}
+            </Text>
+          )}
+        </div>
+      </TableCell>
+      <TableCell>
+        <Text elementType="div">
+          <Markdown
+            components={omit(customComponents, [
+              "Content",
+              "Heading",
+              "Alert",
+              "DoAndDont",
+              "ColumnLayout",
+            ])}
+          >
+            {formattedDescription}
+          </Markdown>
+        </Text>
       </TableCell>
     </TableRow>
   );
