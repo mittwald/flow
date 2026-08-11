@@ -19,36 +19,10 @@ import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
 import darkmodeBg from "../../public/assets/darkmode-bg.png";
 import developerTile from "../../public/assets/developer-tile.png";
 import extensionsTile from "../../public/assets/extensions-tile.webp";
-import clsx from "clsx";
-import codeStyles from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor.module.css";
-import {
-  LiveEditor,
-  LivePreview,
-  LiveProvider,
-} from "@mfalkenberg/react-live-ssr";
-import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
-import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
-import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
+import HomeCodeExample from "@/app/_components/HomeCodeExample";
 import styles from "./page.module.scss";
 
 const Home: FC = () => {
-  const transformCode = (code: string) => {
-    try {
-      return extractDefaultExport(code);
-    } catch (error) {
-      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-    }
-  };
-
-  const code =
-    'import { Button } from "@mittwald/flow-react-components";\n' +
-    "\n" +
-    '<Button color="primary"> \n' +
-    "  Button\n" +
-    "</Button>";
-
-  const scope = extractEditorScope(code);
-
   return (
     <Flex direction="column" className={styles.wrapper} align="center">
       <Flex
@@ -116,19 +90,7 @@ const Home: FC = () => {
               Zu den Components
             </Link>
           </Section>
-          <LiveProvider transformCode={transformCode} code={code} scope={scope}>
-            <div className={clsx(codeStyles.liveCodeEditor)}>
-              <LivePreview className={clsx(codeStyles.preview)} />
-
-              <div className={codeStyles.editorContainer}>
-                <LiveEditor
-                  tabMode="focus"
-                  theme={flowTheme}
-                  className={codeStyles.editor}
-                />
-              </div>
-            </div>
-          </LiveProvider>
+          <HomeCodeExample />
         </ColumnLayout>
       </LayoutCard>
 
