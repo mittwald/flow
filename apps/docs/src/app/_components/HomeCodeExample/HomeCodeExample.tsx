@@ -30,13 +30,9 @@ interface ReservedHeights {
 }
 
 /**
- * Heights of the finished example. Preview and code block each hold their own,
- * so nothing inside the tile moves while the code is typed — a single height on
- * the wrapper would keep the page still, but the preview would still drift as
- * the code block grows underneath it.
- *
- * Neither element takes a ref (both come from react-live), hence the lookup by
- * class name.
+ * Preview and code block are measured apart: a single height on the wrapper
+ * keeps the page still, but the preview keeps drifting as the code block grows
+ * underneath it. Neither takes a ref, hence the lookup by class name.
  */
 const measure = (wrapper: HTMLElement): ReservedHeights | undefined => {
   const preview = wrapper.querySelector(`.${styles.preview}`);
@@ -52,20 +48,13 @@ const measure = (wrapper: HTMLElement): ReservedHeights | undefined => {
   };
 };
 
-/**
- * The live example of the "Fokus auf Developer Experience" tile: it composes
- * itself step by step, so the nesting and the automatic spacing the tile talks
- * about happen in front of the reader. Stays a fully editable live example
- * afterwards.
- */
 const HomeCodeExample: FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [reserved, setReserved] = useState<ReservedHeights>();
   const [isVisible, setIsVisible] = useState(false);
 
-  // The example starts out complete, which is what makes it measurable. The
-  // animation itself waits for the tile to be on screen — the tile sits below
-  // the fold and watching it compose itself is the whole point.
+  // Measuring here works because useTypedCode starts out on the last step. The
+  // animation waits for the tile, which sits below the fold, to be on screen.
   useIsomorphicLayoutEffect(() => {
     const wrapper = wrapperRef.current;
 
@@ -101,8 +90,8 @@ const HomeCodeExample: FC = () => {
     try {
       lastPreview.current = extractDefaultExport(code);
     } catch {
-      // Half-typed (and half-edited) code keeps the last preview instead of
-      // replacing it with a parser error.
+      // Half-typed code does not parse, which is most frames of the
+      // animation. Holding the last preview beats flashing a parser error.
     }
     return lastPreview.current;
   }, []);
@@ -114,8 +103,8 @@ const HomeCodeExample: FC = () => {
           className={styles.preview}
           style={
             isTyping
-              ? // Top aligned, or the composition would drift upwards inside
-                // the reserved space as it grows.
+              ? // The shared stylesheet centres the preview, which would drift
+                // the composition upwards inside the reserved height.
                 { minBlockSize: reserved?.preview, justifyContent: "start" }
               : undefined
           }

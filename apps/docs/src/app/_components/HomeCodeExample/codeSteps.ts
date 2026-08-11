@@ -9,9 +9,8 @@ const components = [
 ];
 
 /**
- * The editor shows the composition alone — spelled out, the import of seven
- * components takes more room than the example itself. The editor scope is still
- * derived from a real import statement, just one the reader never sees.
+ * Source of the editor scope. The steps leave the import out on purpose —
+ * spelled out it takes more room in the tile than the composition itself.
  */
 export const scopeSource = `import { ${components.join(", ")} } from "@mittwald/flow-react-components";`;
 
@@ -39,14 +38,9 @@ const snippet = (header: string[], section: string[]): string =>
   ].join("\n");
 
 /**
- * The composition the "Fokus auf Developer Experience" tile builds up, one
- * nested layer per step — a profile section in the shape of the detail page
- * pattern. It starts from the bare `<Section>`, so every component the reader
- * sees was typed in front of them.
- *
- * Every step inserts a block at a single position, inside `<Header>` or
- * `<Section>`. That is what lets the animation type the difference between two
- * steps.
+ * Every step must add one block at a single position — that is what lets the
+ * animation type the difference between two steps. A step that wraps an
+ * existing element or grows in two places appears at once instead.
  */
 export const codeSteps = [
   snippet([], []),

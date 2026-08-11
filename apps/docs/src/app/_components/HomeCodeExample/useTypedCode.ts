@@ -16,11 +16,8 @@ interface Frame {
 }
 
 interface TypedCode {
-  /** The code of the current animation frame. */
   code: string;
-  /** Whether the animation is still running. */
   isTyping: boolean;
-  /** Jumps to the last step and stops the animation. */
   skip: () => void;
 }
 
@@ -30,15 +27,13 @@ const useIsomorphicLayoutEffect =
 const prefersReducedMotion = (): boolean =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** Whether an insertion adds whole lines: starts on a fresh line, ends on one. */
 const insertsWholeLines = (text: string): boolean =>
   text.startsWith("\n") && !text.endsWith("\n");
 
 /**
- * The same insertion can be described at several positions — inserting `b\na`
- * before an `a` equals inserting `a\nb` after it. Prefers the description that
- * adds whole lines, so the new block is typed on its own line instead of
- * growing out of the line that follows it.
+ * An insertion can be described at several positions — inserting `b\na` before
+ * an `a` equals inserting `a\nb` after it. Picking the whole-line description
+ * types a new block on its own line instead of growing it out of the next one.
  */
 const preferWholeLines = (from: string, insertion: Insertion): Insertion => {
   let shifted = insertion;
@@ -57,10 +52,6 @@ const preferWholeLines = (from: string, insertion: Insertion): Insertion => {
   return insertsWholeLines(shifted.text) ? shifted : insertion;
 };
 
-/**
- * Describes `to` as a single chunk of text inserted into `from` — or
- * `undefined` when `to` is not just `from` with something inserted.
- */
 const getInsertion = (from: string, to: string): Insertion | undefined => {
   if (to.length <= from.length) {
     return undefined;
@@ -128,11 +119,6 @@ const buildFrames = (steps: string[]): Frame[] => {
   return frames;
 };
 
-/**
- * Types the given code steps into the editor, one nested layer at a time.
- * Renders the last step right away when the animation is disabled, skipped or
- * when the user prefers reduced motion.
- */
 export const useTypedCode = (steps: string[], enabled: boolean): TypedCode => {
   const finalCode = steps.at(-1) ?? "";
 
@@ -159,8 +145,9 @@ export const useTypedCode = (steps: string[], enabled: boolean): TypedCode => {
       return;
     }
 
-    // Applied synchronously — a frame of the finished example would flash
-    // otherwise, because timers only run after the browser has painted.
+    // Synchronously, and from a layout effect: the state this replaces is the
+    // finished example, so anything that lands after the first paint — a plain
+    // effect, or leaving the first frame to the timer — flashes it.
     setCode(firstFrame.code);
 
     let timeout: ReturnType<typeof setTimeout>;
