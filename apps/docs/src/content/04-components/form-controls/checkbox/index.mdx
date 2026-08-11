@@ -1,72 +1,60 @@
 ---
 component: Checkbox
-description: Mit einer Checkbox wählt der User eine Option aus oder ab.
+description:
+  Eine Checkbox stellt eine Option dar, die aus- oder abgewählt werden kann.
 ---
 
-# Grundlagen
+---
 
-Eine Checkbox funktioniert in der Handhabung nahezu identisch wie ein
-[CheckboxButton](/04-components/form-controls/checkbox-button/overview). Der
-Unterschied liegt im Erscheinungsbild. Je nach Gestaltung der Benutzeroberfläche
-oder je nach Anwendungsfall sollte individuell entschieden werden, welche der
-beiden Components sinnvoller ist.
+# Code-Beispiel
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende eine Checkbox, um ...
+
+- dem User die Auswahl einer oder mehrerer Optionen zu ermöglichen.
+- einzelne Zustimmungen (z. B. AGB) vom User einzuholen.
 
 ## Best Practices
 
 Achte bei der Verwendung einer Checkbox darauf, dass ...
 
-- sie immer eine Beschriftung hat.
-- die Beschriftung kurz und eindeutig ist. Sie sollte stets mit einem
-  Großbuchstaben beginnen.
-- die Beschriftung in der Regel ohne Punkt endet – es sei denn, sie ist ein
-  vollständiger Satz.
-- der initiale Zustand (ausgewählt/nicht ausgewählt) nachvollziehbar und
-  sinnvoll gewählt ist.
-- der Zwischenzustand „Indeterminate“ nur in Verbindung mit untergeordneten
-  Checkboxen verwendet wird.
-- das An- und Abhaken einer Checkbox keine anderen Checkboxen verändert – mit
-  Ausnahme einer übergeordneten Checkbox.
+- sie immer eine kurze, eindeutige Beschriftung hat.
+- der initiale Zustand (ausgewählt, nicht ausgewählt oder uneindeutig)
+  nachvollziehbar und sinnvoll gewählt ist.
 - bei mehreren Checkboxen die Reihenfolge logisch und nachvollziehbar ist (siehe
   [CheckboxGroup](/04-components/form-controls/checkbox-group/overview)).
-
-## Verwendung
-
-Verwende eine Checkbox, um ...
-
-- dem User die Auswahl einer oder mehrerer Optionen zu ermöglichen.
-- einzelne Zustimmungen (z. B. AGBs) vom User einzuholen.
+- du die Auswahl bei Bedarf visuell stärker hervorheben kannst, indem du
+  alternativ den
+  [CheckboxButton](/04-components/form-controls/checkbox-button/overview) nutzt.
 
 ## Checkbox vs. Switch
 
 Mit den Components Checkbox und
 [Switch](/04-components/form-controls/switch/overview) können Optionen
-aktiviert/ausgewählt werden. Um die Unterschiede klarer zu machen, hier einige
-hilfreiche Anhaltspunkte.
+aktiviert/ausgewählt werden. Diese Anhaltspunkte helfen bei der Entscheidung.
 
 <DoAndDont>
-  <Plain heading="Verwende eine Checkbox, um z. B. ...">
+  <Plain heading="Verwende eine Checkbox, um z. B. ...">
     - dem User eine Auswahloption zur Bestätigung zu geben.
     - Auswahlmöglichkeiten in einem Formular anzubieten, die gespeichert werden müssen.
 
   </Plain>
 
-  <Plain heading="Verwende einen Switch, um z. B. ...">
+  <Plain heading="Verwende einen Switch, um z. B. ...">
     - eine Funktion direkt zu aktivieren oder zu deaktivieren.
     - eine Einstellung sofort zu ändern, ohne sie separat speichern zu müssen.
 
   </Plain>
 </DoAndDont>
 
-# Playground
-
-Verwende `<Checkbox />` zusammen mit einer eingebetteten Beschriftung, um eine
-darzustellen.
-
-<LiveCodeEditor stretch />
-
 ---
 
-# Indeterminated
+# Indeterminate
 
 Die Property `isIndeterminate` zeigt an, dass sich eine Checkbox in einem
 visuell uneindeutigen Zustand befindet – also weder vollständig ausgewählt noch
@@ -80,15 +68,14 @@ wurde.
 
 # Disabled
 
-In bestimmten Fällen kann eine Checkbox den State **Disabled** haben. In diesem
-Fall ist die Auswahloption für den User deaktiviert und kann nicht ausgewählt
-werden.
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User die Checkbox gerade nicht auswählen kann.
 
 <LiveCodeEditor example="disabled" editorCollapsed stretch />
 
 ---
 
-# Kombiniere mit ...
+# Kombiniere mit …
 
 ## React Hook Form
 
@@ -96,6 +83,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 
