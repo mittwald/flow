@@ -22,6 +22,20 @@ are available and can conveniently be used with `test.each`.
 
 Have a look at existing tests for reference.
 
+### Light and Dark Theme
+
+The suite runs in **Webkit and Firefox**, and the browser also decides the theme
+— instead of doubling the run time with a second theme axis:
+
+| Browser | Theme                                                            |
+| ------- | ---------------------------------------------------------------- |
+| Webkit  | light                                                            |
+| Firefox | dark (`data-theme="dark"`, see `dev/vitest/setupVisualTheme.ts`) |
+
+So the `*-firefox-*.png` baselines are **dark by design**, the `*-webkit-*.png`
+baselines are light. A single full run covers both themes; filtering to one
+browser (`--browser.name=webkit`) only verifies one of them.
+
 ### Running the Tests
 
 First, install the required test browsers:
@@ -36,8 +50,10 @@ You can then run the tests using the following command:
 pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
-The tests run **headless** and only in Webkit. Firefox is also available as a
-browser option, but it has issues with parallelized testing.
+The tests run **headless**. Omitting `--browser.name` runs both browsers — and
+therefore both themes — as the scheduled run and the `run-visual-tests` label
+do. Firefox then needs `--browser.fileParallelism=false`, because it has issues
+with parallelized testing (`test:visual:update` already passes it).
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
@@ -77,8 +93,11 @@ You can also filter the tests, to only run relevant tests.
 pnpm nx run remote-react-components:test:visual:update NewComponent
 ```
 
-Carefully review all new or updated screenshots afterward. If everything looks
-correct, you can commit them.
+Without `--browser.name` this updates the light (Webkit) **and** the dark
+(Firefox) baselines.
+
+Carefully review all new or updated screenshots afterward — both themes. If
+everything looks correct, you can commit them.
 
 Then add the `update-screenshots` label to the pull request. This ensures that
 the screenshots used in CI (Linux) are updated as well.
@@ -127,10 +146,12 @@ The current solution is to wait for an update of **Playwright**.
 ### CI
 
 For pull requests, visual tests are executed **with a single browser only**
-(currently **Webkit**), to reduce the pipeline execution time.
+(currently **Webkit**), to reduce the pipeline execution time — which means the
+regular PR run only covers the **light** theme.
 
 In addition, visual tests are run **with all supported browsers** twice a day to
-detect potential issues early.
+detect potential issues early. To verify both themes on a pull request, add the
+`run-visual-tests` label — it runs every browser.
 
 ## Cross-version smoke tests
 

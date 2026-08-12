@@ -49,6 +49,12 @@
     }
   }
 
+  &:has(.button) {
+    > .linkIcon {
+      display: none;
+    }
+  }
+
   /* Alpha Colors */
   @mixin color($color) {
     &:where(.#{$color}) {

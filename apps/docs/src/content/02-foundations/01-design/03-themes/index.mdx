@@ -83,11 +83,11 @@ Verfügbare Werte sind:
 Wird kein Theme gesetzt oder explizit `data-theme="system"` verwendet, dient die
 bevorzugte Browsereinstellung des Nutzers als Grundlage für die Darstellung.
 
-## next-themes
+## @teispace/next-themes
 
-Für die Verwaltung und das Umschalten des Themes kann next-themes verwendet
-werden. Die Bibliothek übernimmt dabei das Speichern des gewählten Themes und
-das Setzen des `data-theme` Attributs.
+Für die Verwaltung und das Umschalten des Themes kann @teispace/next-themes
+verwendet werden. Die Bibliothek übernimmt dabei das Speichern des gewählten
+Themes und das Setzen des `data-theme` Attributs.
 
 ### ThemeProvider
 
@@ -95,7 +95,7 @@ Der `ThemeProvider` wird in der Root der Anwendung eingebunden und steuert, wie
 das Theme im DOM abgebildet wird:
 
 ```tsx
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@teispace/next-themes";
 
 <ThemeProvider attribute="data-theme">{children}</ThemeProvider>;
 ```
@@ -106,7 +106,7 @@ Innerhalb von Client Components kann das Theme über den Hook `useTheme`
 gesteuert werden:
 
 ```ts
-import { useTheme } from "next-themes";
+import { useTheme } from "@teispace/next-themes";
 
 const { theme, setTheme } = useTheme();
 ```

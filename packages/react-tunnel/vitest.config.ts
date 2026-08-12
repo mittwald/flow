@@ -6,6 +6,11 @@ import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
 export default mergeConfig(
   defaultConfig,
   defineConfig({
+    // The SSR hydration test imports these directly; pre-bundle them so Vite
+    // doesn't discover them mid-run and reload the test (which flakes the suite).
+    optimizeDeps: {
+      include: ["react-dom/server", "react-dom/client"],
+    },
     test: {
       projects: [
         {

@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig } from "vite";
-import { tsgoCheckerPlugin } from "../dev/vite/tsgoCheckerPlugin.ts";
+import { typescriptCheckerPlugin } from "../dev/vite/typescriptCheckerPlugin.ts";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],
@@ -20,7 +20,7 @@ const config: StorybookConfig = {
   },
   viteFinal: async (conf) => {
     return mergeConfig(conf, {
-      plugins: [tsgoCheckerPlugin()],
+      plugins: [typescriptCheckerPlugin()],
     });
   },
 };

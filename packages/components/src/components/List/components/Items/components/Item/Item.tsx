@@ -7,7 +7,7 @@ import type { FC, PropsWithChildren, Ref } from "react";
 import { memo, Suspense } from "react";
 import type { Key } from "react-aria-components";
 import styles from "./Item.module.scss";
-import { ListItemSkeletonView } from "./components/ListItemSkeletonView/ListItemSkeletonView";
+import { ItemLoadingView } from "./components/ItemLoadingView/ItemLoadingView";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -47,11 +47,7 @@ const ItemImpl = (props: Props) => {
       isTile={isTile}
       {...gridItemPropsWithRef}
     >
-      <Suspense
-        fallback={<ListItemSkeletonView viewMode={list.viewMode.value} />}
-      >
-        {children}
-      </Suspense>
+      <Suspense fallback={<ItemLoadingView />}>{children}</Suspense>
     </ItemsGridListItemView>
   );
 };
