@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import {
   alphaColors,
   isAlphaColor,
@@ -26,11 +27,7 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="s">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Flex gap="s" key={color}>
                 <Text>
                   <Color color={color}>Text</Color>

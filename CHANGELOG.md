@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1023](https://github.com/mittwald/flow/compare/0.2.0-alpha.1022...0.2.0-alpha.1023) (2026-08-12)
+
+### Bug Fixes
+
+* **Autocomplete:** prevent the options popover from collapsing ([#2820](https://github.com/mittwald/flow/issues/2820)) ([8c2ec64](https://github.com/mittwald/flow/commit/8c2ec64045f4b954a0d0662197022bf5553eaa73))
+
 # [0.2.0-alpha.1022](https://github.com/mittwald/flow/compare/0.2.0-alpha.1021...0.2.0-alpha.1022) (2026-08-11)
 
 ### Bug Fixes

@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -19,11 +20,7 @@ test.each(testEnvironments)(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <InlineCode color={color}>
                 {firstLetterToUppercase(color)}
               </InlineCode>
@@ -39,22 +36,28 @@ test.each(testEnvironments)(
 
 test.each(testEnvironments)(
   "InlineCode edge cases (%s)",
-  async ({ testScreenshot, render, components: { Text, InlineCode } }) => {
+  async ({
+    testScreenshot,
+    render,
+    components: { Flex, Text, InlineCode },
+  }) => {
     await render(
-      <Text>
-        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-        blow against the Galactic Empire.
-        <InlineCode>
+      <Flex>
+        <Text>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           blow against the Galactic Empire.
-        </InlineCode>
-        A long time ago in a galaxy far, far away, the Rebel Alliance struck a
-        blow against the Galactic Empire.
-        <InlineCode>
+          <InlineCode>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a blow against the Galactic Empire.
+          </InlineCode>
           A long time ago in a galaxy far, far away, the Rebel Alliance struck a
           blow against the Galactic Empire.
-        </InlineCode>
-      </Text>,
+          <InlineCode>
+            A long time ago in a galaxy far, far away, the Rebel Alliance struck
+            a blow against the Galactic Empire.
+          </InlineCode>
+        </Text>
+      </Flex>,
     );
 
     await testScreenshot("InlineCode edge cases");
