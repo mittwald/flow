@@ -5,19 +5,19 @@ description:
   Hintergrund.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung einer LightBox darauf, dass ...
+Kombiniere innerhalb von `<LightBoxTrigger />` einen `<Button />` mit einer
+`<LightBox />`, um Inhalte wie ein
+[Image](/04-components/content/image/overview) vergrößert als Overlay zu öffnen.
 
-- [Icons](/04-components/content/icon/overview) für die Aktionen (z. B. Löschen
-  oder Herunterladen) klar und eindeutig gekennzeichnet sind, um
-  Missverständnisse zu vermeiden.
-- für Bilder sinnvolle Alt-Texte gepflegt werden, um Screenreader-Unterstützung
-  sicherzustellen.
+<LiveCodeEditor />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende eine LightBox, um ...
 
@@ -25,13 +25,15 @@ Verwende eine LightBox, um ...
 - Usern eine Möglichkeit zu bieten, Inhalte zu betrachten, ohne die aktuelle
   Seite zu verlassen.
 
-# Playground
+## Best Practices
 
-Verwende `<LightBox />` um eine LightBox anzuzeigen und kombiniere
-`<LightBoxTrigger />` und `<Button />` um die LightBox in der Oberfläche
-aufrufbar zu machen.
+Achte bei der Verwendung einer LightBox darauf, dass ...
 
-<LiveCodeEditor />
+- [Icons](/04-components/content/icon/overview) für die Aktionen (z. B. Löschen
+  oder Herunterladen) klar und eindeutig gekennzeichnet sind, um
+  Missverständnisse zu vermeiden.
+- für Bilder sinnvolle Alt-Texte gepflegt werden, um Screenreader-Unterstützung
+  sicherzustellen.
 
 ---
 
@@ -60,7 +62,7 @@ Standardmäßig passt sich der Inhalt der LightBox an die Bildschirmgröße an. 
 die Property `fitScreen` auf `false` gesetzt, wird der Inhalt in seiner vollen
 Höhe dargestellt. Falls der verfügbare Platz nicht ausreicht, erscheint eine
 vertikale Scrollbar. Dieses Verhalten ist besonders hilfreich bei der
-Darstellung von Inhalten mit großer vertikaler Ausdehnung, wie z. B.
+Darstellung von Inhalten mit großer vertikaler Ausdehnung, wie z. B.
 mehrseitigen PDFs.
 
 <LiveCodeEditor example="fitScreenFalse" editorCollapsed />
@@ -75,6 +77,8 @@ mit `LightBoxGalleryItems` gefüllt werden, welche die Platzierung von
 [ActionGroups](/04-components/actions/action-group/overview) unterstützen.
 
 <LiveCodeEditor example="gallery" editorCollapsed />
+
+---
 
 # Properties
 

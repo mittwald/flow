@@ -4,52 +4,39 @@ description:
   Tooltips zeigen beim Hovern kurze Zusatzinformationen zu einem Element.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Kombiniere innerhalb von `<TooltipTrigger />` die gewünschte Component mit einem
+`<Tooltip />`, um beim Hovern oder Fokussieren einen Tooltip anzuzeigen.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende einen Tooltip, um ...
+
+- [Icons](/04-components/content/icon/overview) zu erklären, deren Bedeutung
+  nicht sofort eindeutig ist.
+- kurze ergänzende Erklärungen zu einem Element bereitzustellen. Für
+  umfangreichere Informationen eignet sich ein
+  [ContextualHelp](/04-components/overlays/contextual-help/overview).
 
 ## Best Practices
 
 Achte bei der Verwendung eines Tooltips darauf, dass ...
 
-- diese verwendet werden, um knappe Informationen mit niedriger Priorität
-  bereitzustellen – z. B. eine kurze Beschreibung eines
-  [Icons](/04-components/content/icon/overview).
-- der Tooltip nur ergänzende Informationen enthält und keine wichtige
-  Information (z. B. Error-Meldung oder Feedback) der Benutzeroberfläche
-  ersetzt. Es muss immer bedacht werden, dass beispielsweise auf dem Smartphone
-  Tooltips vom User nicht wahrgenommen werden.
-- der Inhalt kurz, verständlich und präzise formuliert ist. Tooltips bestehen
-  meist nur aus 1-3 Wörtern.
-- er erst beim Hovern oder Fokussieren erscheint.
-- innerhalb nur Text verwendet wird. In einem Tooltip sollten keine
-  [Buttons](/04-components/actions/button/overview),
-  [Links](/04-components/navigation/link/overview) oder interaktiven Inhalte
-  enthalten sein.
-- er die sichtbare Beschriftung eines Elements nicht wiederholt, sondern
-  ergänzt.
-- vor dem Hinzufügen geprüft wird, ob der Tooltip überhaupt nötig ist. Ist die
-  Aktion durch ihren Kontext oder ihre Beschriftung bereits klar, lässt du ihn
-  besser weg.
-
-## Verwendung
-
-Verwende einen Tooltip, um ...
-
-- zusätzliche kurze Hinweise oder Kontext zu einem Element der
-  Benutzeroberfläche bereitzustellen, ohne die Benutzeroberfläche zu überladen.
-  Für umfangreichere Informationen – die über den direkten Kontext des Elements
-  hinausgehen – eignet sich z. B. ein
-  [ContextualHelp](/04-components/overlays/contextual-help/overview).
-- Symbole, Icons oder verkürzte Bezeichnungen zu erklären. Ein Tooltip kann
-  Usern beispielsweise helfen,
-  [das Icon eines Buttons](/04-components/actions/button/overview) korrekt zu
-  interpretieren.
-
-# Playground
-
-Verwende `<TooltipTrigger />` und `<Tooltip />` in Kombination mit der
-gewünschten Component, um beim Hovern der Component einen Tooltip anzuzeigen.
-
-<LiveCodeEditor />
+- der Inhalt kurz und präzise ist – meist nur 1-3 Wörter.
+- er nur ergänzende Informationen enthält und keine wichtigen (z. B.
+  Fehlermeldung oder Feedback) ersetzt, da er z. B. auf dem Smartphone nicht
+  wahrgenommen wird.
+- er nur Text enthält und keine interaktiven Inhalte wie
+  [Buttons](/04-components/actions/button/overview) oder
+  [Links](/04-components/navigation/link/overview).
+- er die sichtbare Beschriftung eines Elements ergänzt und nicht wiederholt.
 
 ---
 
@@ -59,14 +46,16 @@ Tooltips erscheinen verzögert, damit sie beim Hovern über die Oberfläche nich
 aufblitzen. Über die `delay` Property des Triggers wählst du zwischen zwei
 Verzögerungen.
 
-<LiveCodeEditor example="delay" editorCollapsed row />
-
 **Default (400 ms):** Verwende ihn, wenn das Element ohne den Tooltip nicht
 verständlich ist – z. B. ein Button, der nur aus einem Icon besteht.
 
 **Long (1500 ms):** Verwende ihn für ergänzende Informationen an Elementen, die
 bereits beschriftet sind. Die längere Verzögerung verhindert, dass der Tooltip
 ungewollt ablenkt.
+
+<LiveCodeEditor example="delay" editorCollapsed row />
+
+---
 
 # Properties
 
