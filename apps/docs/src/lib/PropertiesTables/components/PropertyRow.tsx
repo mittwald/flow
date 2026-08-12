@@ -1,10 +1,16 @@
 import type { FC } from "react";
 import type { Property } from "../types";
-import { TableCell, TableRow, Text } from "@mittwald/flow-react-components";
+import {
+  InlineCode,
+  TableCell,
+  TableRow,
+  Text,
+} from "@mittwald/flow-react-components";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
 import { Badge } from "@mittwald/flow-react-components";
+import { formatType } from "@/lib/PropertiesTables/lib/unionType";
 import { TypeValue } from "./TypeValue";
 import styles from "../PropertiesTables.module.scss";
 
@@ -18,25 +24,24 @@ export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
     .replaceAll(/{@link (\S+)}/g, "[$1]($1)");
 
   const customComponents = createCustomComponents();
+  const type = formatType(property.type, property.default);
 
   return (
     <TableRow>
       <TableCell>
         <div className={styles.propertyCell}>
-          <Text className={styles.propertyName}>
-            <small>
-              <strong>{property.name}</strong>
-            </small>
-          </Text>
+          <InlineCode>{property.name}</InlineCode>
           {property.required && <Badge>Required</Badge>}
         </div>
       </TableCell>
       <TableCell>
         <div className={styles.typeCell}>
-          <TypeValue type={property.type} />
-          {property.default && (
+          <Text className={styles.type}>
+            <TypeValue {...type} />
+          </Text>
+          {property.default && !type.includesDefault && (
             <Text className={styles.defaultValue}>
-              Default: {property.default}
+              default: {property.default}
             </Text>
           )}
         </div>

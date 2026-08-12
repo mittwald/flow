@@ -1,24 +1,17 @@
-import type { FC } from "react";
-import { InlineCode } from "@mittwald/flow-react-components";
-import { splitUnion, unquote } from "@/lib/PropertiesTables/lib/unionType";
+import { Fragment, type FC } from "react";
+import type { FormattedType } from "@/lib/PropertiesTables/lib/unionType";
 import styles from "../PropertiesTables.module.scss";
 
-interface TypeValueProps {
-  type: string;
-}
-
-export const TypeValue: FC<TypeValueProps> = ({ type }) => {
-  const members = splitUnion(type);
-
-  if (members.length < 2) {
-    return <InlineCode className={styles.type}>{type}</InlineCode>;
-  }
-
-  return (
-    <span className={styles.typeChips}>
-      {members.map((member) => (
-        <InlineCode key={member}>{unquote(member)}</InlineCode>
-      ))}
-    </span>
-  );
-};
+export const TypeValue: FC<FormattedType> = ({ members, includesDefault }) => (
+  <>
+    {members.map((member, index) => (
+      <Fragment key={member}>
+        {index > 0 && ", "}
+        {member}
+        {index === 0 && includesDefault && (
+          <span className={styles.defaultMarker}> (default)</span>
+        )}
+      </Fragment>
+    ))}
+  </>
+);

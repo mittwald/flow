@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import type { Properties, Property } from "@/lib/PropertiesTables/types";
+import { formatType } from "@/lib/PropertiesTables/lib/unionType";
 import { TypeValue } from "./TypeValue";
 import styles from "../PropertiesTables.module.scss";
 
@@ -7,6 +8,36 @@ const formatDescription = (description: string | null | undefined): string =>
   (description ?? "")
     .replaceAll(/{@link (\S+) (.+?)}/g, "$2")
     .replaceAll(/{@link (\S+)}/g, "$1");
+
+const StaticRow: FC<{ property: Property }> = ({ property }) => {
+  const type = formatType(property.type, property.default);
+
+  return (
+    <tr className="flow--table--row">
+      <td className="flow--table--cell">
+        <div className={styles.propertyCell}>
+          <code className="flow--inline-code">{property.name}</code>
+          {property.required ? " (required)" : ""}
+        </div>
+      </td>
+      <td className="flow--table--cell">
+        <div className={styles.typeCell}>
+          <span className={styles.type}>
+            <TypeValue {...type} />
+          </span>
+          {property.default && !type.includesDefault && (
+            <span className={styles.defaultValue}>
+              default: {property.default}
+            </span>
+          )}
+        </div>
+      </td>
+      <td className="flow--table--cell">
+        {formatDescription(property.description)}
+      </td>
+    </tr>
+  );
+};
 
 const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
   <table aria-label="Properties" className="flow--table">
@@ -19,31 +50,7 @@ const StaticTable: FC<{ properties: Property[] }> = ({ properties }) => (
     </thead>
     <tbody className="flow--table--body">
       {properties.map((property) => (
-        <tr className="flow--table--row" key={property.name}>
-          <td className="flow--table--cell">
-            <div className={styles.propertyCell}>
-              <span className={styles.propertyName}>
-                <small>
-                  <strong>{property.name}</strong>
-                </small>
-              </span>
-              {property.required ? " (required)" : ""}
-            </div>
-          </td>
-          <td className="flow--table--cell">
-            <div className={styles.typeCell}>
-              <TypeValue type={property.type} />
-              {property.default && (
-                <span className={styles.defaultValue}>
-                  Default: {property.default}
-                </span>
-              )}
-            </div>
-          </td>
-          <td className="flow--table--cell">
-            {formatDescription(property.description)}
-          </td>
-        </tr>
+        <StaticRow property={property} key={property.name} />
       ))}
     </tbody>
   </table>
