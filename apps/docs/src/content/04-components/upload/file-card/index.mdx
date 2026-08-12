@@ -3,12 +3,29 @@ component: FileCard
 description: Die FileCard visualisiert Dateien samt relevanter Informationen.
 ---
 
-# Grundlagen
+---
 
-Die FileCard ergänzt oft die
-[FileDropZone](/04-components/upload/file-drop-zone/overview) oder das
-[FileField](/04-components/form-controls/file-field/overview) als visuelle
-Rückmeldung nach dem Upload.
+# Code-Beispiel
+
+Beschreibe die Datei über die Properties `name`, `type` und `sizeInBytes`.
+Daraus zeigt die `<FileCard />` Name, Icon und Dateigröße an.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine FileCard, um ...
+
+- dem User bei erfolgreichen Uploads sofort visuelles Feedback zu geben.
+- eine hochgeladene Datei (Bild, Video oder PDF) darzustellen.
+
+Mehrere Dateien stellst du übersichtlich mit der
+[FileCardList](/04-components/upload/file-card-list/overview) dar. Häufig
+ergänzt die FileCard eine
+[FileDropZone](/04-components/upload/file-drop-zone/overview) oder ein
+[FileField](/04-components/form-controls/file-field/overview).
 
 ## Best Practices
 
@@ -18,25 +35,8 @@ Achte bei der Verwendung einer FileCard darauf, dass ...
   Rückmeldung zu geben.
 - relevante Informationen wie Dateiname, Dateigröße und Dateityp klar erkennbar
   sind.
-- mehrere Dateien übersichtlich mit der Component
-  [FileCardList](/04-components/upload/file-card-list/overview) dargestellt
-  werden.
-- wichtige Interaktionen als Aktionen angeboten werden z. B. das Entfernen der
+- wichtige Interaktionen als Aktionen angeboten werden, z. B. das Entfernen der
   Datei.
-
-## Verwendung
-
-Verwende eine FileCard, um ...
-
-- dem User bei erfolgreichen Uploads sofort visuelles Feedback zu geben.
-- hochgeladene Dateien (Bild, Video oder PDF) darzustellen.
-
-# Playground
-
-Verwende `<FileCard />`, um eine FileCard darzustellen. Diese kann auch als
-[FileCardList](/04-components/upload/file-card-list/overview) erweitert werden.
-
-<LiveCodeEditor />
 
 ---
 
@@ -52,19 +52,10 @@ unmittelbar entfernt werden kann.
 
 # Mit Link
 
-Die FileCard ermöglicht es, Dateien über einen `href`-Link zu öffnen, z. B. um
+Die FileCard ermöglicht es, Dateien über einen `href`-Link zu öffnen, z. B. um
 ein Bild in einem neuen Tab anzuzeigen.
 
 <LiveCodeEditor example="link" editorCollapsed />
-
----
-
-# Mit ContextMenu
-
-Nutze ein `<ContextMenu />` innerhalb der FileCard, um wichtige Interaktionen in
-einem [ContextMenu](/04-components/actions/context-menu/overview) zu platzieren.
-
-<LiveCodeEditor example="contextMenu" editorCollapsed />
 
 ---
 
@@ -77,24 +68,6 @@ angezeigt werden.
 
 ---
 
-# Mit ProgressBar
-
-Nutze eine `<ProgressBar />` innerhalb der FileCard, um beispielsweise einen
-Upload Fortschritt anzuzeigen.
-
-<LiveCodeEditor example="progressBar" editorCollapsed />
-
----
-
-# Mit zusätzlichen Buttons
-
-Platziere einen oder mehrere `<Button />` innerhalb der FileCard, um zusätzliche
-Optionen anzubieten.
-
-<LiveCodeEditor example="buttons" editorCollapsed />
-
----
-
 # Mit Failed State
 
 Über das Property `isFailed` kann die FileCard im Failed State angezeigt werden,
@@ -102,6 +75,33 @@ um beispielsweise einen fehlgeschlagenen Upload anzuzeigen. Weitere
 Informationen können im Subtitle der FileCard angezeigt werden.
 
 <LiveCodeEditor example="failed" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Button
+
+Platziere einen oder mehrere [Button](/04-components/actions/button/overview)
+innerhalb der FileCard, um zusätzliche Optionen anzubieten.
+
+<LiveCodeEditor example="buttons" editorCollapsed />
+
+## ContextMenu
+
+Nutze ein `<ContextMenu />` innerhalb der FileCard, um wichtige Interaktionen in
+einem [ContextMenu](/04-components/actions/context-menu/overview) zu platzieren.
+
+<LiveCodeEditor example="contextMenu" editorCollapsed />
+
+## ProgressBar
+
+Nutze eine [ProgressBar](/04-components/status/progress-bar/overview) innerhalb
+der FileCard, um beispielsweise einen Upload-Fortschritt anzuzeigen.
+
+<LiveCodeEditor example="progressBar" editorCollapsed />
+
+---
 
 # Properties
 

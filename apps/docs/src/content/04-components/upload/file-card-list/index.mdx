@@ -3,13 +3,24 @@ component: FileCardList
 description: Die FileCardList platziert mehrere FileCards in einem ColumnLayout.
 ---
 
-# Grundlagen
+---
 
-Die FileCardList wird häufig zusammen mit der
-[FileDropZone](/04-components/upload/file-drop-zone/overview) oder dem
-[FileField](/04-components/form-controls/file-field/overview) verwendet. Sie
-bietet eine visuelle Bestätigung, sobald der Upload erfolgreich abgeschlossen
-wurde.
+# Code-Beispiel
+
+Die `<FileCardList />` nimmt mehrere
+[FileCards](/04-components/upload/file-card/overview) auf und braucht ein
+`aria-label`.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine FileCardList, um ...
+
+- dem User bei erfolgreichen Uploads sofort visuelles Feedback zu geben.
+- mehrere hochgeladene Dateien (Bild, Video oder PDF) darzustellen.
 
 ## Best Practices
 
@@ -17,27 +28,26 @@ Achte bei der Verwendung einer FileCardList darauf, dass ...
 
 - hochgeladene Dateien sofort sichtbar werden, um dem User eine direkte
   Rückmeldung zu geben.
-- relevante Informationen wie Dateiname, Dateigröße und Dateityp klar erkennbar
-  sind.
-- wichtige Interaktionen als Aktionen angeboten werden z.B. das Entfernen der
-  Datei.
-- für einzelne Dateien die Component
-  [FileCard](/04-components/upload/file-card/overview) verwendet werden kann.
+- die Liste ein aussagekräftiges `aria-label` erhält.
 
-## Verwendung
+---
 
-Verwende eine FileCardList, um ...
+# Kombiniere mit ...
 
-- dem User bei erfolgreichen Uploads sofort visuelles Feedback zu geben.
-- hochgeladene Dateien (Bild, Video oder PDF) darzustellen.
+## FileDropZone
 
-# Playground
+Stelle mit der FileCardList die Dateien dar, die über eine
+[FileDropZone](/04-components/upload/file-drop-zone/overview) hochgeladen
+wurden.
 
-Verwende `<FileCardList />`, um eine Liste von FileCards darzustellen.
-Orientiere dich an der [FileCard](/04-components/upload/file-card/overview), um
-weitere Properties hinzuzufügen.
+<LiveCodeEditor example="fileDropZone" editorCollapsed />
 
-<LiveCodeEditor />
+## FileField
+
+Stelle mit der FileCardList die Dateien dar, die über ein
+[FileField](/04-components/form-controls/file-field/overview) ausgewählt wurden.
+
+---
 
 # Properties
 
