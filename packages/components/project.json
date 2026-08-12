@@ -102,6 +102,10 @@
           "target": "build"
         }
       ]
+    },
+    "test:compile": {
+      "cache": true,
+      "dependsOn": ["^build", "build:icons", "build:scss-types"]
     }
   }
 }
