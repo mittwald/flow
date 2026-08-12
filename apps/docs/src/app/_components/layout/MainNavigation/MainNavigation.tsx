@@ -2,6 +2,8 @@
 import type { FC } from "react";
 import { useMemo } from "react";
 import {
+  Header,
+  Heading,
   Label,
   LayoutCard,
   Link,
@@ -24,6 +26,12 @@ import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
 import styles from "@/app/layout.module.scss";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
+import { useComponentGrouping } from "@/app/_lib/componentGrouping";
+import { ComponentGroupingMenu } from "@/app/_components/layout/MainNavigation/components/ComponentGroupingMenu";
+
+const componentsPathSegment = "04-components";
+
+const integrationGroups = ["react-hook-form"];
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -34,6 +42,8 @@ interface NavigationSectionProps {
   tree: MdxDirectoryTree;
   group: string;
 }
+
+type TreeEntry = [string, MdxDirectoryTree | MdxFile];
 
 interface NavigationLinkProps {
   treeItem: MdxFile;
@@ -78,10 +88,24 @@ const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
   return status?.level === "deprecated" ? 1 : 0;
 };
 
-const sortEntriesByStatus = (
-  entries: [string, MdxDirectoryTree | MdxFile][],
-): [string, MdxDirectoryTree | MdxFile][] =>
+const sortEntriesByStatus = (entries: TreeEntry[]): TreeEntry[] =>
   [...entries].sort(([, a], [, b]) => deprecatedRank(a) - deprecatedRank(b));
+
+const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
+  entries.flatMap(([, treeItem]) =>
+    treeItem instanceof MdxFile
+      ? [treeItem]
+      : collectMdxFiles(Object.entries(treeItem)),
+  );
+
+const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
+  sortEntriesByStatus(props.entries).map(([group, treeItem]) =>
+    treeItem instanceof MdxFile ? (
+      <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
+    ) : (
+      <NavigationSection key={group} tree={treeItem} group={group} />
+    ),
+  );
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
   const { tree, group } = props;
@@ -91,14 +115,48 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
-      {sortEntriesByStatus(Object.entries(tree)).map(([group, treeItem]) =>
-        treeItem instanceof MdxFile ? (
-          <NavigationLink key={group} treeItem={treeItem} />
-        ) : (
-          <NavigationSection key={group} tree={treeItem} group={group} />
-        ),
-      )}
+      <NavigationEntries entries={Object.entries(tree)} />
     </NavigationGroup>
+  );
+};
+
+const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
+  const { grouping } = useComponentGrouping();
+
+  const entries = Object.entries(props.tree);
+  const componentEntries = entries.filter(
+    ([group]) => !integrationGroups.includes(group),
+  );
+  const integrationEntries = entries.filter(([group]) =>
+    integrationGroups.includes(group),
+  );
+
+  return (
+    <>
+      <Section>
+        <Header>
+          <Heading>Components</Heading>
+          <ComponentGroupingMenu />
+        </Header>
+        <Navigation aria-label="Components">
+          {grouping === "grouped" ? (
+            <NavigationEntries entries={componentEntries} />
+          ) : (
+            collectMdxFiles(componentEntries)
+              .sort((a, b) => a.getNavTitle().localeCompare(b.getNavTitle()))
+              .map((treeItem) => (
+                <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
+              ))
+          )}
+        </Navigation>
+      </Section>
+      <Section>
+        <Heading>Integrations</Heading>
+        <Navigation aria-label="Integrations">
+          <NavigationEntries entries={integrationEntries} />
+        </Navigation>
+      </Section>
+    </>
   );
 };
 
@@ -120,25 +178,18 @@ const MainNavigation: FC<Props> = (props) => {
   return (
     <Wrap if={!props.mobileNavigation}>
       <LayoutCard className={styles.mainNavigation}>
-        <Section>
-          <Navigation
-            aria-label={extractTextFromPath(mainPathSegment)}
-            key={mainPathSegment}
-          >
-            {sortEntriesByStatus(Object.entries(selectedMainBranch)).map(
-              ([group, treeItem]) =>
-                treeItem instanceof MdxFile ? (
-                  <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
-                ) : (
-                  <NavigationSection
-                    key={group}
-                    tree={treeItem}
-                    group={group}
-                  />
-                ),
-            )}
-          </Navigation>
-        </Section>
+        {mainPathSegment === componentsPathSegment ? (
+          <ComponentsNavigation tree={selectedMainBranch} />
+        ) : (
+          <Section>
+            <Navigation
+              aria-label={extractTextFromPath(mainPathSegment)}
+              key={mainPathSegment}
+            >
+              <NavigationEntries entries={Object.entries(selectedMainBranch)} />
+            </Navigation>
+          </Section>
+        )}
       </LayoutCard>
     </Wrap>
   );
