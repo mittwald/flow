@@ -1,13 +1,13 @@
 import { defineConfig, mergeConfig } from "vite";
-import banner from "vite-plugin-banner";
-import dts from "vite-plugin-dts";
+import { viteBannerPlugin } from "../core";
+import dts from "unplugin-dts/vite";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
   mergeConfig(baseConfig, {
     plugins: [
-      banner((filename) =>
+      viteBannerPlugin((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
       ),
       externalizeDeps(),

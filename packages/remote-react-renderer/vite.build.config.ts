@@ -1,7 +1,7 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
-import banner from "vite-plugin-banner";
-import dts from "vite-plugin-dts";
+import { viteBannerPlugin } from "../core";
+import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
 
@@ -10,7 +10,7 @@ export default mergeConfig(
   defineConfig({
     plugins: [
       preserveDirectives(),
-      banner((filename) =>
+      viteBannerPlugin((filename) =>
         filename.endsWith(".mjs") ? '"use client"\r\n/* */' : "",
       ),
       externalizeDeps(),
