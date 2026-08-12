@@ -5,41 +5,35 @@ description:
   Vorschau.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Verwende `<MarkdownEditor />`, um Text per Markdown-Syntax zu formatieren.
+Beschrifte das Feld über ein `<Label />` oder ein `aria-label`.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende einen MarkdownEditor, um Usern die Möglichkeit zu geben, Texte wie
+Dokumentationen, Kommentare oder Beschreibungen mithilfe von Markdown-Syntax zu
+formatieren.
 
 ## Best Practices
 
 Achte bei der Verwendung eines MarkdownEditors darauf, dass ...
 
-- die Höhe über das Property `rows` so gewählt ist, dass sie der erwarteten
-  Textmenge des Users entspricht.
-- falls notwendig eine sinnvolle Zeichenbegrenzung definiert ist.
+- die Höhe über das Property `rows` der erwarteten Textmenge des Users
+  entspricht.
 - das [Label](/04-components/content/label/overview) prägnant und leicht
   verständlich ist.
 - die FieldDescription genutzt wird, um Beispiele, Formatierungshinweise oder
   Kontext bereitzustellen.
 - [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
   klar, hilfreich und lösungsorientiert formuliert sind.
-
-## Verwendung
-
-Verwende einen MarkdownEditor, um Usern die Möglichkeit zu geben, Texte wie
-Dokumentationen, Kommentare oder Beschreibungen mithilfe von Markdown-Syntax zu
-formatieren.
-
-# Playground
-
-Verwende `<MarkdownEditor />`, um einen MarkdownEditor darzustellen.
-
-<LiveCodeEditor stretch />
-
----
-
-# Disabled
-
-Nutze das Property `isDisabled`, um den MarkdownEditor als disabled anzuzeigen.
-
-<LiveCodeEditor example="disabled" editorCollapsed stretch />
 
 ---
 
@@ -80,6 +74,15 @@ manuell geändert wird. Danach bleibt er in der eingestellten Größe bestehen.
 
 ---
 
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem MarkdownEditor interagieren kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
 # Kombiniere mit ...
 
 ## React Hook Form
@@ -91,7 +94,12 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 
 ## Chat
 
+Verwende den MarkdownEditor als Eingabefeld innerhalb eines
+[Chat](/04-components/chat/chat/overview), um Nachrichten zu verfassen.
+
 <LiveCodeEditor example="chat" editorCollapsed stretch />
+
+---
 
 # Properties
 

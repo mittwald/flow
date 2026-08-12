@@ -5,17 +5,28 @@ description:
   Wertebereichs.
 ---
 
-# Grundlagen
+---
 
-Slider ermöglichen es Usern, einen Wert innerhalb eines definierten
-Zahlenbereichs auszuwählen. Die Bedienung wirkt intuitiv, da die Kombination aus
-Interaktivität und visuellem Feedback an vertraute physische Bedienelemente
-erinnert (z. B. Regler oder Schiebeschalter).
+# Code-Beispiel
 
-Slider eignen sich besonders, wenn ungefähre Werte ausreichend sind. Soll ein
-exakter Zahlenwert gewählt werden, ist ein
-[NumberField](/04-components/form-controls/number-field/overview) die bessere
-Wahl.
+Verwende `<Slider />` für die Auswahl eines Werts innerhalb eines definierten
+Bereichs. Diverse Formate und Einheiten werden unterstützt (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende einen Slider, um ...
+
+- Werte eines definierten Bereichs schnell anzupassen.
+- Einstellungen zu justieren, die ein direktes Feedback erfordern, wie etwa
+  Lautstärke, Helligkeit oder Zoomstufen.
+- einen Bereich darzustellen, der sich durch visuelles Ausprobieren leichter
+  erfassen lässt als durch direkte Eingabe in ein
+  [NumberField](/04-components/form-controls/number-field/overview).
 
 ## Best Practices
 
@@ -28,29 +39,7 @@ Achte bei der Verwendung eines Sliders darauf, dass ...
 - bei Bedarf ein InitialMarker (durch `showInitialMarker`) gesetzt wird, damit
   User den Startwert erkennen können.
 
-## Verwendung
-
-Verwende einen Slider, um ...
-
-- Werte eines definierten Bereichs schnell anzupassen.
-- Einstellungen zu justieren, die ein direktes Feedback erfordern, wie etwa
-  Lautstärke, Helligkeit oder Zoomstufen.
-- einen Bereich darzustellen, der sich durch visuelles Ausprobieren leichter
-  erfassen lässt als durch direkte Eingabe in ein
-  [NumberField](/04-components/form-controls/number-field/overview).
-
-# Playground
-
-Verwende `<Slider />`, um einen Slider darzustellen.
-
-Dem Slider können optional ein Min-, Max- und Default-Wert sowie die Step-Größe
-mitgegeben werden. Der Default-Wert kann über das Property `showInitialMarker`
-auf dem Slider markiert werden. Außerdem werden diverse Formate und Einheiten
-unterstützt (s.
-[Intel.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)
-).
-
-<LiveCodeEditor stretch />
+---
 
 # Kombiniere mit ...
 
@@ -60,6 +49,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 

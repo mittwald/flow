@@ -1,49 +1,41 @@
 ---
 component: Rating
 description:
-  Die Rating Component stellt eine Bewertungsskala von 0 bis 5 Sternen visuell
-  dar.
+  Die Rating Component ermöglicht die Eingabe und Darstellung einer Bewertung
+  von 0 bis 5 Sternen.
 ---
 
-# Grundlagen
+---
 
-Die Rating Component dient zur visuellen Darstellung einer Bewertungsskala von 0
-bis 5 Sternen. Sie wird häufig eingesetzt, um Bewertungen auf einen Blick
-verständlich zu machen. Typische Anwendungsfälle sind Userfeedback sowie die
-Bewertung von Produkten und Leistungen.
+# Code-Beispiel
 
-## Best Practices
+Platziere im `<Rating />` ein `<Label />`. Für die einzelnen Rating-Stufen wird
+automatisch ein passendes ARIA-Label generiert.
 
-Achte bei der Verwendung eines Ratings darauf, dass ...
+<LiveCodeEditor stretch />
 
-- die visuelle Darstellung immer durch ergänzenden Kontext unterstützt wird,
-  z. B. durch eine Beschriftung oder eine Kombination mit anderen Components wie
-  der [BigNumber](/04-components/data-visualisation/big-number/overview).
-- eine konsistente Verwendung innerhalb eines Interfaces gewährleistet ist, etwa
-  durch eine einheitliche Skalierung (0 bis 5 Sterne).
-- unterstützende visuelle Elemente (z. B. der
-  [AccentBox](/04-components/structure/accent-box/overview)) eingesetzt werden
-  können, um das Rating optisch hervorzuheben.
+---
 
-## Verwendung
+# Verwendung
 
 Verwende ein Rating, um ...
 
-- Userbewertungen sichtbar zu machen, z. B. bei Rezensionen oder
+- Userbewertungen sichtbar zu machen, z. B. bei Rezensionen oder
   Produktempfehlungen.
-- den Kontext einer Zahl oder Kennzahl (z. B. der
+- den Kontext einer Zahl oder Kennzahl (z. B. der
   [BigNumber](/04-components/data-visualisation/big-number/overview)) zu
   verdeutlichen, etwa zur Einordnung auf einer Bewertungsskala.
 - Einschätzungen oder qualitative Urteile schnell erfassbar darzustellen, etwa
   bei Auswertungen.
 
-# Playground
+## Best Practices
 
-Verwende `<Rating />`, um ein Rating anzubieten. Um die Barrierefreiheit zu
-gewährleisten, wird in der Rating Component automatisch ein entsprechendes
-ARIA-Label für die einzelnen Rating-Stufen generiert.
+Achte bei der Verwendung eines Ratings darauf, dass ...
 
-<LiveCodeEditor stretch />
+- die visuelle Darstellung immer durch ergänzenden Kontext unterstützt wird, z.
+  B. durch eine Beschriftung.
+- eine konsistente Skalierung (0 bis 5 Sterne) innerhalb eines Interfaces
+  gewährleistet ist.
 
 ---
 
@@ -89,6 +81,8 @@ Zur visuellen Hervorhebung kann das Rating innerhalb einer
 [AccentBox](/04-components/structure/accent-box/overview) angezeigt werden.
 
 <LiveCodeEditor example="accent-box" editorCollapsed />
+
+---
 
 # Properties
 
