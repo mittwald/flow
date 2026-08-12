@@ -110,9 +110,10 @@ export const Link = flowComponent("Link", (props) => {
     AccentBox: { className: styles.accentBox },
     LayoutCard: { className: styles.layoutCard },
     Button: {
+      elementType: "span",
       className: styles.button,
-      size,
-      color: color === "default" ? undefined : color,
+      size: props.size,
+      color: props.color === "default" ? undefined : props.color,
       isDisabled: props.isDisabled,
       children: dynamic((buttonProps) => (
         <>
@@ -120,19 +121,6 @@ export const Link = flowComponent("Link", (props) => {
           <LinkIcon {...props} />
         </>
       )),
-      /**
-       * A `<button>` must not be nested in an `<a>`, so the button renders as a
-       * `<span>`. Everything React Aria computed for the button is passed
-       * through — only the attributes that are invalid on a `<span>` are
-       * dropped.
-       */
-      render: ({
-        children,
-        disabled: ignoredDisabledProp,
-        type: ignoredTypeProp,
-        value: ignoredValueProp,
-        ...buttonProps
-      }) => <span {...buttonProps}>{children}</span>,
     },
   };
 
