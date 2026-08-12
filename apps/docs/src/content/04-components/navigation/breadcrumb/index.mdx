@@ -5,25 +5,18 @@ description:
   Navigationsebenen an.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung einer Breadcrumb darauf, dass ...
+Erstelle die einzelnen Navigationsebenen mit `<Link />` innerhalb von
+`<Breadcrumb />`.
 
-- sie im oberen linken Bereich des Content-Bereichs positioniert ist.
-- ein sinnvoller Startpunkt gewählt wird. Im mStudio bezieht sich die Breadcrumb
-  beispielsweise auf die Navigation innerhalb eines Projekts.
-- sie eine lineare Hierarchie abbildet (z. B. „Projekt > Apps > App“).
-- die Anzahl der angezeigten Hierarchieebenen überschaubar bleibt. Als Richtwert
-  sind maximal 5 Ebenen erlaubt.
-- innerhalb der Breadcrumb generische Bezeichnungen verwendet werden (z. B.
-  „App“ statt eines konkreten App-Namens). Individuelle oder dynamisch
-  generierte Namen können stark in ihrer Länge variieren und die Breadcrumb
-  unnötig verlängern. Generische Begriffe sorgen für eine stabile, gut lesbare
-  und visuell konsistente Navigation.
+<LiveCodeEditor stretch />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende eine Breadcrumb, um ...
 
@@ -35,29 +28,35 @@ Verwende eine Breadcrumb, um ...
   bereitzustellen.
 - Usern bei Seiten mit einer komplexen Seitenhierarchie Orientierung zu geben.
 
-# Playground
+## Best Practices
 
-Verwende `<Breadcrumb />`, um eine Breadcrumb darzustellen. Die einzelnen
-Navigationselemente werden dabei mit `<Link />` innerhalb der Component
-erstellt.
+Achte bei der Verwendung einer Breadcrumb darauf, dass ...
 
-<LiveCodeEditor stretch />
+- ein sinnvoller Startpunkt gewählt wird. Im mStudio bezieht sich die Breadcrumb
+  beispielsweise auf die Navigation innerhalb eines Projekts.
+- die abgebildete Hierarchie mit der Navigationshierarchie übereinstimmt (z. B.
+  „Projekt > Apps > App“).
+- die Anzahl der Hierarchieebenen überschaubar bleibt – ein grober Richtwert:
+  bei mehr als 5 Ebenen verlieren User die Übersicht.
+- generische Bezeichnungen verwendet werden (z. B. „App“ statt eines konkreten
+  App-Namens). Dynamische Namen variieren stark in der Länge und verlängern die
+  Breadcrumb unnötig, während generische Begriffe für eine stabile, gut lesbare
+  Navigation sorgen.
 
 ---
 
 # Color
 
-Light und Dark sind Alternativen zur Standard-Color, falls diese auf farbigen
-oder dekorativen Hintergründen keinen ausreichenden Kontrast bietet.
+Zusätzlich zur Standard-Color kann die Breadcrumb in **Light** und **Dark**
+dargestellt werden, um auf farbigen oder dekorativen Hintergründen ausreichend
+Kontrast zu erreichen. Mehr zur richtigen Verwendung von Light und Dark findest
+du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed stretch />
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed stretch />
 
-**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
-Lightness-Wert von weniger als 50.
-
-**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
-HSL Lightness-Wert von größer als 50.
+---
 
 # Properties
 

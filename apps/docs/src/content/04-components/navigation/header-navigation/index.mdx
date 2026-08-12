@@ -4,7 +4,28 @@ description:
   Die HeaderNavigation ist eine horizontale Navigationsleiste am Seitenanfang.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Platziere [Links](/04-components/navigation/link/overview) und
+[Buttons](/04-components/actions/button/overview) innerhalb von
+`<HeaderNavigation />` – sie werden automatisch im passenden Style formatiert.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine HeaderNavigation, um ...
+
+- eine zentrale Navigation über die Hauptbereiche einer Anwendung
+  bereitzustellen.
+- die visuelle Struktur und Hierarchie einer Seite zu unterstützen und
+  Orientierung zu schaffen.
+- zusätzliche Aktionen wie Suche, Benachrichtigungen oder Userprofil in einem
+  kompakten, leicht erreichbaren Bereich zu integrieren.
 
 ## Best Practices
 
@@ -16,55 +37,33 @@ Achte bei der Verwendung einer HeaderNavigation darauf, dass ...
   sind und eine eindeutige Funktion haben.
 - die Navigation nicht überladen wird und nur relevante Elemente enthält.
 
-## Verwendung
-
-Verwende eine HeaderNavigation, um ...
-
-- eine zentrale Navigation über die Hauptbereiche einer Anwendung
-  bereitzustellen.
-- die visuelle Struktur und Hierarchie einer Seite zu unterstützen und
-  Orientierung zu schaffen.
-- zusätzliche Aktionen wie Suche, Benachrichtigungen oder Userprofil in einem
-  kompakten, leicht erreichbaren Bereich zu integrieren.
-
-# Playground
-
-Verwende `<HeaderNavigation />`, um eine HeaderNavigation darzustellen.
-Enthaltene [Buttons](/04-components/actions/button/overview) und
-[Links](/04-components/navigation/link/overview) werden automatisch im passenden
-Style formatiert.
-
-<LiveCodeEditor />
-
----
-
-# Mit ContextMenu
-
-[Avatare](/04-components/content/avatar/overview) und
-[Buttons](/04-components/actions/button/overview) können als Trigger für das
-[ContextMenu](/04-components/actions/context-menu/overview) verwendet werden.
-
-<LiveCodeEditor example="contextMenu" editorCollapsed />
-
 ---
 
 # Color
 
-## Light und Dark
-
-Zusätzlich zu der Standard-Color, kann die HeaderNavigation in **Light** und
-**Dark** dargestellt werden. Beide Colors eigenen sich, wenn die Standardfarbe
-auf farbigen oder dekorativen Hintergründen nicht gut funktioniert.
+Zusätzlich zur Standard-Color kann die HeaderNavigation in **Light** und
+**Dark** dargestellt werden, um auf farbigen oder dekorativen Hintergründen
+ausreichend Kontrast zu erreichen. Mehr zur richtigen Verwendung von Light und
+Dark findest du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
-**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
-Lightness-Wert von weniger als 50.
+---
 
-**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
-HSL Lightness-Wert von größer als 50.
+# Kombiniere mit …
+
+## ContextMenu
+
+[Avatare](/04-components/content/avatar/overview) und
+[Buttons](/04-components/actions/button/overview) können als Trigger für ein
+[ContextMenu](/04-components/actions/context-menu/overview) verwendet werden.
+
+<LiveCodeEditor example="contextMenu" editorCollapsed />
+
+---
 
 # Properties
 
