@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "useDefineForClassFields": true,
-    "allowArbitraryExtensions": true
+    "allowArbitraryExtensions": true,
+    "allowImportingTsExtensions": true
   },
   "extends": "@mittwald/typescript-config/react-library.json",
   "references": [

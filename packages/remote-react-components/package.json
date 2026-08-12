@@ -79,7 +79,7 @@
     "semver": "^7.6.3",
     "typescript": "^6.0.3",
     "unplugin-dts": "^1.0.3",
-    "vite": "7.3.6",
+    "vite": "^8.2.1",
     "vite-plugin-externalize-deps": "^0.10.0",
     "vitest": "^4.1.10",
     "vitest-browser-react": "^2.2.0"

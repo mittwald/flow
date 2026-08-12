@@ -1,7 +1,7 @@
 import decamelize from "decamelize";
 import path from "path";
 
-const packagesDir = path.resolve(__dirname, "../..");
+const packagesDir = path.resolve(import.meta.dirname, "../..");
 
 export const cssModuleClassNameGenerator = (
   name: string,
