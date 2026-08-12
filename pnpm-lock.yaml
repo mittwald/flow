@@ -144,7 +144,7 @@ importers:
     dependencies:
       '@internationalized/date':
         specifier: ^3.12.2
-        version: 3.12.2
+        version: 3.12.3
       '@mfalkenberg/react-live-ssr':
         specifier: ^4.1.7
         version: 4.1.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -292,7 +292,7 @@ importers:
     dependencies:
       '@internationalized/date':
         specifier: ^3.12.2
-        version: 3.12.2
+        version: 3.12.3
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../../packages/ext-bridge
@@ -582,7 +582,7 @@ importers:
         version: 10.5.0
       '@internationalized/date':
         specifier: ^3.12.2
-        version: 3.12.2
+        version: 3.12.3
       '@lezer/generator':
         specifier: ^1.8.0
         version: 1.8.0
@@ -1056,7 +1056,7 @@ importers:
     dependencies:
       '@internationalized/date':
         specifier: ^3.12.2
-        version: 3.12.2
+        version: 3.12.3
       '@lit-labs/ssr-dom-shim':
         specifier: ^1.6.0
         version: 1.6.0
@@ -1194,7 +1194,7 @@ importers:
     devDependencies:
       '@internationalized/date':
         specifier: ^3.12.2
-        version: 3.12.2
+        version: 3.12.3
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
@@ -2852,8 +2852,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@internationalized/date@3.12.2':
-    resolution: {integrity: sha512-FY1Y+H64NDs+HAF6omlnWxm3mEpfgaCSWtL5l551ZZfImA+kGjPFgrnJrGjH6lfmLL0g8Z/mBu1R3kufeCp6Jw==}
+  '@internationalized/date@3.12.3':
+    resolution: {integrity: sha512-fuLX+3ZKLsxI73y8b01EG/WjHb6gE6weCqlfawPO27kBWGMh9G1yH6Csv1uU7/cac9H2GHmOMt6CjmuQ1aia4Q==}
 
   '@internationalized/message@3.1.10':
     resolution: {integrity: sha512-nc0Or6EdWHqZRcsXb6P9hBIpLsfSl/ILh0rk5h/OVBpzmhdExXtPy2cQtWsq8XKRBpRHwDNnAHt4OpolcB7dog==}
@@ -12127,7 +12127,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.9.5
 
-  '@internationalized/date@3.12.2':
+  '@internationalized/date@3.12.3':
     dependencies:
       '@swc/helpers': 0.5.23
 
@@ -13340,7 +13340,7 @@ snapshots:
 
   '@react-aria/i18n@3.13.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
-      '@internationalized/date': 3.12.2
+      '@internationalized/date': 3.12.3
       '@internationalized/message': 3.1.10
       '@internationalized/string': 3.2.9
       '@swc/helpers': 0.5.23
@@ -19013,7 +19013,7 @@ snapshots:
 
   react-aria-components@1.19.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
-      '@internationalized/date': 3.12.2
+      '@internationalized/date': 3.12.3
       '@react-types/shared': 3.36.0(react@19.2.7)
       '@swc/helpers': 0.5.23
       client-only: 0.0.1
@@ -19024,7 +19024,7 @@ snapshots:
 
   react-aria@3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
-      '@internationalized/date': 3.12.2
+      '@internationalized/date': 3.12.3
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.9
       '@react-types/shared': 3.36.0(react@19.2.7)
@@ -19134,7 +19134,7 @@ snapshots:
 
   react-stately@3.48.0(react@19.2.7):
     dependencies:
-      '@internationalized/date': 3.12.2
+      '@internationalized/date': 3.12.3
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.9
       '@react-types/shared': 3.36.0(react@19.2.7)
