@@ -39,7 +39,7 @@ export const PropertyRow: FC<PropertyTableGroupProps> = ({ property }) => {
           <Text className={styles.type}>
             <TypeValue {...type} />
           </Text>
-          {property.default && !type.includesDefault && (
+          {property.default && !type.defaultMember && (
             <Text className={styles.defaultValue}>
               default: {property.default}
             </Text>

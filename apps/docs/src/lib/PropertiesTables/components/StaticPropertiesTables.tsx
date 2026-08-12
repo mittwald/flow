@@ -25,7 +25,7 @@ const StaticRow: FC<{ property: Property }> = ({ property }) => {
           <span className={styles.type}>
             <TypeValue {...type} />
           </span>
-          {property.default && !type.includesDefault && (
+          {property.default && !type.defaultMember && (
             <span className={styles.defaultValue}>
               default: {property.default}
             </span>

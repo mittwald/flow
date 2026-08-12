@@ -1,5 +1,3 @@
-import { partition } from "remeda";
-
 /** `Iterable<A | B> | null` yields two members, not three. */
 const splitUnion = (type: string): string[] => {
   const parts: string[] = [];
@@ -36,10 +34,9 @@ const unquote = (member: string): string =>
   member.replace(stringLiteralPattern, "$1");
 
 export interface FormattedType {
-  /** Union members in display order — the default value first. */
   members: string[];
-  /** True when the first member is the default value. */
-  includesDefault: boolean;
+  /** The member the default value refers to, if the type names one. */
+  defaultMember: string | null;
 }
 
 export const formatType = (
@@ -49,13 +46,10 @@ export const formatType = (
   const members = splitUnion(type).map(unquote);
   const trimmedDefault = defaultValue?.trim();
   const normalizedDefault = trimmedDefault ? unquote(trimmedDefault) : null;
-  const [defaultMembers, otherMembers] = partition(
-    members,
-    (member) => member === normalizedDefault,
-  );
 
   return {
-    members: [...defaultMembers, ...otherMembers],
-    includesDefault: defaultMembers.length > 0,
+    members,
+    defaultMember:
+      members.find((member) => member === normalizedDefault) ?? null,
   };
 };
