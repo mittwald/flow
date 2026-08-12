@@ -5,21 +5,18 @@ description:
   übersichtlich dar.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung der Message darauf, dass ...
+Eine `<Message />` besteht aus einem `<Header />` mit Autor-Informationen und
+einem `<Content />` mit dem Nachrichtentext.
 
-- mehrere Messages in einem
-  [MessageThread](/04-components/chat/message-thread/overview) gruppiert werden.
-- die [Markdown](/04-components/content/markdown/overview)-Component genutzt
-  wird, wenn eine Texteingabe in Markdown zu erwarten ist.
-- das [ContextMenu](/04-components/actions/context-menu/overview) nicht
-  überladen wird und nur direkt relevante Aktionen (z. B. Bearbeiten und
-  Löschen) enthält.
+<LiveCodeEditor />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende die Message, um ...
 
@@ -28,41 +25,33 @@ Verwende die Message, um ...
   [MessageThread](/04-components/chat/message-thread/overview) einen
   Gesprächsverlauf abzubilden.
 
-# Playground
+## Best Practices
 
-Verwende `<Message />`, um eine Message darzustellen.
+Achte bei der Verwendung der Message darauf, dass ...
 
-<LiveCodeEditor />
+- mehrere Messages in einem
+  [MessageThread](/04-components/chat/message-thread/overview) gruppiert werden.
+- das [ContextMenu](/04-components/actions/context-menu/overview) nicht
+  überladen wird und nur direkt relevante Aktionen (z. B. Bearbeiten und
+  Löschen) enthält.
 
 ---
 
 # Type
 
-Eine Message hat im Default den Type `responder`. Stellt man diese Property auf
-`sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
+Eine Message hat im Default den Type `responder`. Mit dem Type `sender` ändern
+sich Hintergrundfarbe und Anordnung der Message.
 
 <LiveCodeEditor example="sender" editorCollapsed />
 
 ---
 
-# Mit Action
-
-Eine Message kann um einen [Button ](/04-components/actions/button/overview)
-oder eine [ActionGroup](/04-components/actions/action-group/overview) erweitert
-werden. Die Actions sollten dabei immer in direktem Bezug zum Inhalt der Message
-stehen und passende Interaktion ermöglichen.
-
-<LiveCodeEditor example="action" editorCollapsed />
-
----
-
 # Custom Color
 
-Im Default sind `sender` blau und `responder` grau hinterlegt. Wenn eine
-Nachricht gezielt hervorgehoben werden soll, zum Beispiel als System-Nachricht
-oder als interne Notiz, kann der Message eine customColor mitgegeben werden.
-Dabei muss der Entwickler selbst auf einen ausreichenden Kontrast zur Textfarbe
-achten.
+Im Default sind `sender` blau und `responder` grau hinterlegt. Über die `color`
+Property lässt sich eine Message gezielt hervorheben, etwa als System-Nachricht
+oder interne Notiz. Achte dabei selbst auf einen ausreichenden Kontrast zur
+Textfarbe.
 
 <LiveCodeEditor example="color" editorCollapsed />
 
@@ -70,13 +59,22 @@ achten.
 
 # Kombiniere mit ...
 
+## ActionGroup
+
+Ergänze eine Message um einen [Button](/04-components/actions/button/overview)
+oder eine [ActionGroup](/04-components/actions/action-group/overview). Die
+Actions sollten immer in direktem Bezug zum Inhalt der Message stehen.
+
+<LiveCodeEditor example="action" editorCollapsed />
+
 ## Markdown
 
-Um eine Texteingabe innerhalb der Message als
-[Markdown](/04-components/content/markdown/overview) zu rendern, kann die
-`<Markdown />`-Component verwendet werden.
+Nutze die [Markdown](/04-components/content/markdown/overview)-Component, um den
+Text einer Message als Markdown zu rendern.
 
 <LiveCodeEditor example="markdown" editorCollapsed />
+
+---
 
 # Properties
 
