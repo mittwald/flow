@@ -92,7 +92,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     fieldProps,
   } = useFieldComponent(props, "Autocomplete");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(
+    styles.autocomplete,
+    fieldProps.className,
+    className,
+  );
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
