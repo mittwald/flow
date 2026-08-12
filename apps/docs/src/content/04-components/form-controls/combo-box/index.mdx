@@ -1,16 +1,29 @@
 ---
 component: ComboBox
 description:
-  Die ComboBox kombiniert ein Eingabefeld mit einem filterbaren Auswahlmenü.
+  Die ComboBox kombiniert eine Texteingabe mit einem filterbaren Auswahlmenü.
 ---
 
-# Grundlagen
+---
 
-Die ComboBox kombiniert ein Texteingabefeld mit einem Auswahlmenü. Sie
-ermöglicht es Usern, durch die Eingabe von Text Vorschläge aus einer
-vordefinierten Liste zu erhalten und daraus eine Auswahl zu treffen. Die Liste
-wird bei Texteingabe dynamisch gefiltert. Eine freie Eingabe außerhalb der
-vorgeschlagenen Optionen ist nicht vorgesehen.
+# Code-Beispiel
+
+Füge in der `<ComboBox />` ein `<Label />` und die auswählbaren
+`<Option />`-Elemente ein. Bei der Eingabe filtert die ComboBox die Liste
+dynamisch; eine freie Eingabe außerhalb der Optionen ist standardmäßig nicht
+vorgesehen.
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende eine ComboBox, um ...
+
+- Usern eine gezielte Auswahl aus einer umfangreicheren Liste zu ermöglichen.
+- Eingaben zu beschleunigen und Eingabefehler zu minimieren, indem passende
+  Optionen vorgeschlagen werden.
 
 ## Best Practices
 
@@ -22,39 +35,23 @@ Achte bei der Verwendung einer ComboBox darauf, dass ...
 - die vorgeschlagenen Optionen die erwarteten Eingaben möglichst vollständig
   abdecken.
 
-## Verwendung
-
-Verwende eine Combobox, um ...
-
-- Usern eine gezielte Auswahl aus einer umfangreicheren Liste zu ermöglichen.
-- Eingaben zu beschleunigen und Eingabefehler zu minimieren, indem passende
-  Optionen vorgeschlagen werden.
-
 ## ComboBox vs. Autocomplete
 
 ComboBoxen und
 [Autocomplete](/04-components/form-controls/autocomplete/overview) sehen oft
-ähnlich aus, erfüllen aber unterschiedliche Zwecke. 
+ähnlich aus, erfüllen aber unterschiedliche Zwecke.
 
-<DoAndDont> 
-<Plain heading="Verwende ComboBox, um z. B. ...">
+<DoAndDont>
+<Plain heading="Verwende ComboBox, um z. B. ...">
 - aus einer vordefinierten Liste von Optionen eine Auswahl zu treffen.
-- bei bekannten, überschaubaren Optionen (z. B. Sprachen, Kategorien, Geschlecht).
+- bei bekannten, überschaubaren Optionen (z. B. Sprachen, Kategorien, Geschlecht).
 </Plain>
 
-<Plain heading="Verwende Autocomplete, um z. B. ...">
-- Usern zu ermöglichen, freie Eingaben zu machen, während Vorschläge zur Auswahl angezeigt werden. 
-- bei langen oder dynamischen Datenlisten (z. B. Städte, Usernamen, Tags). 
+<Plain heading="Verwende Autocomplete, um z. B. ...">
+- Usern zu ermöglichen, freie Eingaben zu machen, während Vorschläge zur Auswahl angezeigt werden.
+- bei langen oder dynamischen Datenlisten (z. B. Städte, Usernamen, Tags).
 </Plain>
 </DoAndDont>
-
-# Playground
-
-Verwende `<ComboBox />`, um eine ComboBox darzustellen. Nutze ein `<Label />`,
-um Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen
-erleichtern.
-
-<LiveCodeEditor stretch />
 
 ---
 
@@ -66,6 +63,14 @@ noch keine Option ausgewählt wurde. Mit dem Property `allowsCustomValue` kann
 dieses Verhalten überschrieben werden, um auch freie Eingaben zu erlauben.
 
 <LiveCodeEditor example="allowsCustomValue" editorCollapsed stretch />
+
+---
+
+# CountryOptions
+
+Verwende die `CountryOptions`, um eine Länderauswahl anzubieten.
+
+<LiveCodeEditor example="countryOptions" editorCollapsed stretch />
 
 ---
 
@@ -82,7 +87,7 @@ Um wichtige Hinweise zur ComboBox bereitzustellen, kann unterhalb eine
 
 ## Align
 
-Benutze [Align](/04-components/structure/align/overview), um einem
+Benutze [Align](/04-components/structure/align/overview), um einen
 [Button](/04-components/actions/button/overview) neben deiner ComboBox zu
 platzieren.
 
@@ -103,11 +108,7 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
 
-## CountryOptions
-
-Verwende die `CountryOptions` um eine Länderauswahl anzubieten.
-
-<LiveCodeEditor example="countryOptions" editorCollapsed stretch />
+---
 
 # Properties
 
