@@ -5,7 +5,26 @@ description:
   Flächendiagramm dar.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Erzeuge mit `typedCartesianChart<T>` ein für deinen Datentyp typisiertes Chart.
+Zum Rendern braucht es eine Höhe – entweder über die `height` Property oder über
+ein Parent mit fester Höhe.
+
+<LiveCodeEditor editorCollapsed />
+
+---
+
+# Verwendung
+
+Verwende ein CartesianChart, um ...
+
+- Trends von Metriken über längere Zeiträume hinweg zu zeigen.
+- den relativen Anteil mehrerer Dimensionen an einem Gesamtwert darzustellen
+  (mit Area-Darstellung).
+- Veränderungen bei einer oder mehreren Dimensionen miteinander zu vergleichen.
 
 ## Best Practices
 
@@ -18,25 +37,6 @@ Achte bei der Verwendung eines CartesianCharts darauf, dass ...
   Area unten.
 - die Anzahl der dargestellten Dimensionen übersichtlich bleibt, um Lesbarkeit
   sicherzustellen.
-
-## Verwendung
-
-Verwende ein CartesianChart, um ...
-
-- Trends von Metriken über längere Zeiträume hinweg zu zeigen.
-- den relativen Anteil mehrerer Dimensionen an einem Gesamtwert darzustellen
-  (mit Area-Darstellung).
-- Veränderungen bei einer oder mehreren Dimensionen miteinander zu vergleichen.
-
-# Playground
-
-Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte
-dabei, dass zum Rendern entweder das übergeordnete Parent eine feste Höhe
-vorgeben muss oder das Chart selbst über die Property `height` eine eigene Höhe
-erhalten muss. Mit `typedCartesianChart<T>` lässt sich ein Chart für einen
-bestimmten Datentyp erzeugen.
-
-<LiveCodeEditor editorCollapsed />
 
 ---
 
@@ -78,7 +78,7 @@ vergleichen.
 
 ---
 
-## Mit EmptyView
+# Mit EmptyView
 
 Der EmptyView wird angezeigt, sobald die Property `data` des Charts entweder ein
 leeres Array enthält oder `undefined` ist. Er dient dazu, leere Zustände visuell
@@ -86,6 +86,8 @@ zu kennzeichnen und bietet Orientierung bei Ausnahmefällen wie Ladefehlern,
 fehlgeschlagenen Datenabfragen oder nicht vorhandenen Ergebnissen.
 
 <LiveCodeEditor example="emptyView" editorCollapsed />
+
+---
 
 # Properties
 

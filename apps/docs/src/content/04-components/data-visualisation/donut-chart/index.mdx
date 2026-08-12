@@ -3,28 +3,18 @@ component: DonutChart
 description: Das DonutChart stellt Verteilungen und Anteile als Ring dar.
 ---
 
-# Grundlagen
+---
 
-Ein DonutChart visualisiert proportionale Daten in Form eines ringförmigen
-Diagramms. Es eignet sich besonders zur Darstellung von Anteilen oder
-Verteilungen. Es dient als visuelle Alternative zur ProgressBar. Durch seine
-ansprechende und fokussierende Darstellung rückt es die Daten besonders in den
-Mittelpunkt der Nutzerwahrnehmung, was es ideal für Dashboards und andere
-datenintensive Oberflächen macht.
+# Code-Beispiel
 
-## Best Practices
+Übergib der `<DonutChart />` über das `value` Property den darzustellenden
+Anteil und beschreibe sie mit einem `aria-label`.
 
-Achte bei der Verwendung eines DonutCharts darauf, dass ...
+<LiveCodeEditor />
 
-- jede Segmentfarbe eindeutig und kategorisch unterscheidbar ist. Verwende dafür
-  die
-  [Categorical Colors](https://flow.mittwald.de/02-foundations/01-design/02-colors).
-- die Anzahl der Segmente 6 nicht überschreitet, da eine zu große Segmentanzahl
-  die Lesbarkeit stark beeinträchtigt.
-- die Segmente nach ihrer Größe sortiert sind, beginnend mit dem größten Wert
-  auf der 12-Uhr-Position, und danach im Uhrzeigersinn absteigend folgen.
+---
 
-## Verwendung
+# Verwendung
 
 Verwende ein DonutChart, um ...
 
@@ -33,27 +23,17 @@ Verwende ein DonutChart, um ...
 - Daten gezielt in den Fokus der User zu rücken, etwa in Dashboards oder anderen
   datenintensiven Oberflächen.
 
-# Playground
+## Best Practices
 
-Verwende `<DonutChart />`, um ein DonutChart darzustellen.
+Achte bei der Verwendung eines DonutCharts darauf, dass ...
 
-<LiveCodeEditor />
-
----
-
-# Mit Unit
-
-Im default wird das DonutChart immer mit Prozentangabe angezeigt. Über das
-Property `formatOptions` können aber auch andere Einheiten gewählt werden. (s.
-[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat))
-
-## Gigabyte
-
-<LiveCodeEditor example="unit" editorCollapsed />
-
-## Dezimalzahl
-
-<LiveCodeEditor example="decimal" editorCollapsed />
+- jede Segmentfarbe eindeutig und kategorisch unterscheidbar ist. Verwende dafür
+  die
+  [Categorical Colors](/02-foundations/01-design/02-colors#categorical-color).
+- die Anzahl der Segmente 6 nicht überschreitet, da eine zu große Segmentanzahl
+  die Lesbarkeit stark beeinträchtigt.
+- die Segmente nach ihrer Größe sortiert sind, beginnend mit dem größten Wert
+  auf der 12-Uhr-Position, und danach im Uhrzeigersinn absteigend folgen.
 
 ---
 
@@ -66,20 +46,37 @@ Standardgröße.
 
 ---
 
-# Mit alternativem Text
-
-Über die `children` kann der Text innerhalb des DonutCharts überschrieben werden
-
-<LiveCodeEditor example="children" editorCollapsed />
-
----
-
 # Status
 
 Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Info**,
 **Success**, **Warning** und **Danger**.
 
 <LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Mit Unit
+
+Im Default wird das DonutChart immer mit Prozentangabe angezeigt. Über das
+Property `formatOptions` können aber auch andere Einheiten gewählt werden (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+
+## Gigabyte
+
+<LiveCodeEditor example="unit" editorCollapsed />
+
+## Dezimalzahl
+
+<LiveCodeEditor example="decimal" editorCollapsed />
+
+---
+
+# Mit alternativem Text
+
+Über die `children` kann der Text innerhalb des DonutCharts überschrieben
+werden.
+
+<LiveCodeEditor example="children" editorCollapsed />
 
 ---
 
@@ -100,6 +97,8 @@ werden, dass nebeneinander liegende Farben weiterhin einen ausreichenden
 Kontrast zueinander haben.
 
 <LiveCodeEditor example="segments" editorCollapsed />
+
+---
 
 # Properties
 
