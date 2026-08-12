@@ -5,7 +5,23 @@ description:
   Button.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Kombiniere innerhalb von `<ContextMenuTrigger />` einen `<Button />` mit einem
+`<ContextMenu />`, um das ContextMenu per Button-Klick zu öffnen. Die einzelnen
+Aktionen werden über `<MenuItem />` definiert.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende ein ContextMenu, um die Benutzeroberfläche aufgeräumt zu halten, indem
+Aktionen nur bei Bedarf eingeblendet werden – zum Beispiel in
+[Listen](/04-components/structure/list/overview) oder bei Filtern.
 
 ## Best Practices
 
@@ -14,40 +30,10 @@ Achte bei der Verwendung von einem ContextMenu darauf, dass ...
 - nur kontextrelevante Inhalte angezeigt werden.
 - die Aktionen klar benannt und gut verständlich sind.
 - häufig genutzte Aktionen oben stehen und leicht erreichbar sind.
-- bei Bedarf Gruppierungen - z. B. durch eine
+- bei Bedarf Gruppierungen - z. B. durch eine
   [Section](/04-components/structure/section/overview) oder einen einzelnen
   [Separator](/04-components/structure/separator/overview) - verwendet werden,
   um die Übersichtlichkeit zu erhöhen.
-- interaktive Elemente (z. B.
-  [Checkbox](/04-components/form-controls/checkbox/overview),
-  [RadioGroup](/04-components/form-controls/radio-group/overview) oder
-  [Switch](/04-components/form-controls/switch/overview)) nur verwendet werden,
-  wenn die Aktionen sofort wirksam sind, häufig benötigt werden und der Zustand
-  direkt erkennbar ist.
-
-## Verwendung
-
-Verwende ein ContextMenu, um ...
-
-- die Benutzeroberfläche aufgeräumt zu halten, indem Aktionen nur bei Bedarf
-  eingeblendet werden.
-- sekundäre Aktionen, Profi-Tools oder 'Quick-Actions' platzsparend
-  darzustellen.
-- elementbezogene Aktionen für [Listen](/04-components/structure/list/overview)
-  anzubieten (z. B. Details anzeigen, Status ändern oder löschen).
-- Filter mit einer Mehrfach-Auswahl durch Checkboxen anzubieten.
-- Aktionen durch einen Switch zu aktivieren oder deaktivieren.
-- eine Sortierung mit einer Einfach-Auswahl durch Radios anzuzeigen.
-
-# Playground
-
-Verwende `<ContextMenu />`, um ein ContextMenu darzustellen. Innerhalb von
-`<ContextMenuTrigger />` muss ein `<Button />` und ein `<ContextMenu />`
-kombiniert werden, um ein ContextMenu per
-[Button](/04-components/actions/button/overview)-Klick zu öffnen. Die einzelnen
-Aktionen werden über `<MenuItem />` definiert.
-
-<LiveCodeEditor />
 
 ---
 
@@ -101,9 +87,9 @@ zusammengehörige Aktionen.
 
 # Mit ContextMenuSections
 
-Eine `ContextMenuSectionSection` sorgt im ContextMenu für klare Struktur, indem
-sie eine [Heading](/04-components/content/heading/overview) und definierte
-Abstände verwendet.
+Eine `ContextMenuSection` sorgt im ContextMenu für klare Struktur, indem sie
+eine [Heading](/04-components/content/heading/overview) und definierte Abstände
+verwendet.
 
 <LiveCodeEditor example="section" editorCollapsed />
 
@@ -121,6 +107,9 @@ Nachladen von Daten springt.
 
 # Mit Selection Mode
 
+Setze `selectionMode` direkt auf einer `ContextMenuSection`, um mehrere
+Auswahlgruppen mit jeweils eigenem Auswahlverhalten zu kombinieren.
+
 <LiveCodeEditor example="sectionSelectionMode" editorCollapsed />
 
 ---
@@ -129,7 +118,7 @@ Nachladen von Daten springt.
 
 Verwende das ContextMenu als Profilmenü, indem innerhalb ein
 [Avatar](/04-components/content/avatar/overview) und eine
-[Heading](/flow/04-components/content/heading/overview) platziert werden.
+[Heading](/04-components/content/heading/overview) platziert werden.
 
 <LiveCodeEditor example="avatar" editorCollapsed />
 
@@ -140,8 +129,6 @@ Verwende das ContextMenu als Profilmenü, indem innerhalb ein
 Ein MenuItem kann unterschiedliche States annehmen, die anzeigen, dass aktuell
 keine Interaktion möglich ist.
 
-<LiveCodeEditor example="states" editorCollapsed />
-
 **Disabled:** Verwende den Disabled-State, wenn das MenuItem keine Aktion oder
 kein Ereignis auslösen soll.
 
@@ -150,9 +137,11 @@ Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf ein
 MenuItem geklickt hat. Verwende das MenuItem zusammen mit der Component
 [Action](/04-components/actions/action/overview), um die States zu steuern.
 
+<LiveCodeEditor example="states" editorCollapsed />
+
 ---
 
-# Kombiniere mit
+# Kombiniere mit …
 
 ## Modal
 
@@ -161,6 +150,8 @@ als Overlay öffnen, wenn zusätzliche Informationen erfasst, bestätigt oder
 bearbeitet werden müssen.
 
 <LiveCodeEditor example="modal" editorCollapsed />
+
+---
 
 # Properties
 

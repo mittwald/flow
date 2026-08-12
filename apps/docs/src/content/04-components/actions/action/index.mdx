@@ -1,15 +1,30 @@
 ---
 component: Action
 description:
-  Die Action umschließt einen Button und gibt Feedback bei asynchronen Aktionen.
+  Die Action umschließt einen Button und gibt visuelles Feedback bei asynchronen
+  Aktionen.
 ---
 
-# Grundlagen
+---
 
-Die Action wird verwendet, um das asynchrone Verhalten von zum Beispiel
-[Buttons](/04-components/actions/button/overview) zu steuern. Sie wird genutzt,
-um den Usern visuelles Feedback bei Interaktionen zu geben, zum Beispiel durch
-Ladezustände oder Bestätigungsmodals.
+# Code-Beispiel
+
+Umschließe einen [Button](/04-components/actions/button/overview) mit
+`<Action />` und übergib die asynchrone Funktion an das `onAction` Property, um
+die States des Buttons automatisch zu steuern.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine Action, um ...
+
+- einen Button mit einem automatisierten Lade- und Erfolgs-Feedback bei
+  asynchronen Prozessen zu versehen.
+- Useraktionen mit Bestätigungsmodals zu sichern, bevor ein kritischer Vorgang
+  gestartet wird.
 
 ## Best Practices
 
@@ -21,22 +36,6 @@ Achte bei der Verwendung einer Action darauf, dass ...
   sein.
 - Feedback States nur dann eingesetzt werden, wenn sie dem Nutzer einen Mehrwert
   in der Interaktion bieten.
-
-## Verwendung
-
-Verwende eine Action, um ...
-
-- einen Button mit einem automatisierten Lade- und Erfolgs-Feedback bei
-  asynchronen Prozessen zu versehen.
-- Useraktionen mit Bestätigungsmodals zu sichern, bevor ein kritischer Vorgang
-  gestartet wird.
-
-# Playground
-
-Lege `<Action />`, um einen [Button](/04-components/actions/button/overview), um
-die States des Buttons zu steuern.
-
-<LiveCodeEditor />
 
 ---
 
@@ -84,6 +83,8 @@ Actions können auch um `MenuItems` gelegt werden, um deren State zu steuern.
 
 <LiveCodeEditor example="menuItem" editorCollapsed />
 
+---
+
 # Actions abbrechen
 
 Wenn eine Action abgebrochen werden soll, ohne einen Fehler auszulösen, kann die
@@ -101,6 +102,8 @@ Umschließende Actions bei einer Verschachtelung von Actions werden ebenfalls
 abgebrochen, wenn `abortAction` in einer inneren Action aufgerufen wird.
 
 <LiveCodeEditor example="abort" />
+
+---
 
 # Properties
 

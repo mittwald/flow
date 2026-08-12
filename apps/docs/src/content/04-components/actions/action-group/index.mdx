@@ -1,18 +1,26 @@
 ---
 component: ActionGroup
-description:
-  Die ActionGroup gruppiert zusammengehörige Actions, etwa in Sections oder
-  Modals.
+description: Die ActionGroup gruppiert zusammengehörige Actions.
 ---
 
-# Grundlagen
+---
 
-Die ActionGroup dient dazu, mehrere Actions sinnvoll zu gruppieren und in eine
-konsistente Reihenfolge zu bringen. Sie wird häufig im
-[Section](/04-components/structure/section/overview) Header, im Header einer
-[List](/04-components/structure/list/overview) oder im Footer eines
-[Modals](/04-components/overlays/modal/overview) verwendet. Sie kann aber auch
-eigenständig im Content eingesetzt werden.
+# Code-Beispiel
+
+Platziere mehrere [Buttons](/04-components/actions/button/overview) innerhalb
+von `<ActionGroup />`, um sie automatisch in eine konsistente Hierarchie aus
+Haupt- und Nebenaktion zu bringen.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine ActionGroup, um ...
+
+- mehrere zusammengehörige Actions in eine sinnvolle Reihenfolge zu bringen.
+- eine Hauptaktion der Section, des Modals oder der Liste hervorzuheben.
 
 ## Best Practices
 
@@ -21,23 +29,6 @@ Achte bei der Verwendung einer ActionGroup darauf, dass ...
 - die innerhalb der ActionGroup eingesetzten Buttons die Richtlinien aus der
   [Button Guideline](/04-components/actions/button/overview) einhalten.
 - bei mehreren Buttons nur ein Button als Hauptaktion hervorgehoben wird.
-- sie häufig in anderen Components wie
-  [Section](/04-components/structure/section/overview),
-  [List](/04-components/structure/list/overview) oder
-  [Modal](/04-components/overlays/modal/overview) zum Einsatz kommt.
-
-## Verwendung
-
-Verwende eine ActionGroup, um ...
-
-- mehrere zusammengehörige Actions in eine sinnvolle Reihenfolge zu bringen.
-- eine Hauptaktion der Section, des Modals oder der Liste hervorzuheben.
-
-# Playground
-
-Verwende `<ActionGroup />`, um eine ActionGroup darzustellen.
-
-<LiveCodeEditor />
 
 ---
 
@@ -51,9 +42,7 @@ Ende der ActionGroup positioniert ist.
 
 <LiveCodeEditor example="slots" editorCollapsed />
 
----
-
-# Reihenfolge beibehalten
+## Reihenfolge beibehalten
 
 Mit `preserveOrder` verzichtet die ActionGroup auf die automatische Sortierung
 in die Slots `primary`, `secondary` und `abort`. Die Actions bleiben in der
@@ -72,16 +61,22 @@ dimensioniert.
 
 ---
 
-# Kombiniere mit ...
+# Kombiniere mit …
 
 ## Link
 
+Kombiniere Buttons in der ActionGroup mit einem
+[Link](/04-components/navigation/link/overview), um textuelle Nebenaktionen
+anzubieten.
+
 <LiveCodeEditor example="link" editorCollapsed />
+
+---
 
 # Reihenfolge der Buttons
 
 Es kann vorkommen, dass sich durch Rerendering die Reihenfolge der Buttons
-ändert, wenn z. B. Inhalte nachgeladen werden. Um das zu verhindern, sollte um
+ändert, wenn z. B. Inhalte nachgeladen werden. Um das zu verhindern, sollte um
 diese `Inhalte` ein Suspense gelegt werden.
 
 ```

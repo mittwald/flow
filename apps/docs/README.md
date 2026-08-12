@@ -127,6 +127,8 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 ---
 # Kombiniere mit …    one ## per other Component genuinely composed with
 ---
+# <dev edge case>     rare dev-only note (e.g. Suspense ordering); just above Properties
+---
 # Properties          <PropertiesTables />
 ```
 
@@ -208,6 +210,15 @@ each with a link to that Component's page and its own example (Button:
 - **`## React Hook Form` is the fixed convention** for form-capable Components:
   always add it, linking to the
   [Form (React Hook Form)](/04-components/react-hook-form/form/overview) page.
+
+### Dev edge cases
+
+A rare, developer-only concern that is neither a user-facing feature nor a
+composition with another Component — typically a code snippet, not a live
+example. It gets its own `#` section placed **directly above `# Properties`**,
+after `# Kombiniere mit …`. Example: ActionGroup's `# Reihenfolge der Buttons`
+(wrap re-rendering children in `Suspense` to keep the button order stable). Do
+not invent one — only lift a genuine edge case out of the feature sections.
 
 ### Properties
 
