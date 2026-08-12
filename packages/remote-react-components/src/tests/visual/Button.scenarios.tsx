@@ -1,4 +1,5 @@
 import { firstLetterToUppercase } from "@/tests/lib/firstLetterToUppercase";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import type { VisualScenarios } from "@/tests/lib/visualScenario";
 import {
   alphaColors,
@@ -62,9 +63,7 @@ export const buttonScenarios: VisualScenarios = {
     <Flex direction="column" gap="m">
       {colors.map((color) => (
         <Wrap if={isAlphaColor(color)} key={color}>
-          <AccentBox
-            backgroundColor={color.startsWith("light") ? "#3A434E" : "neutral"}
-          >
+          <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
             <Flex gap="s">
               {variants.map((variant) => (
                 <Button variant={variant} color={color} key={variant}>
