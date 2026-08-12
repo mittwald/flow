@@ -74,7 +74,7 @@ export const Toolbar: FC<ToolbarProps> = (props) => {
       <ModeButton
         onChange={props.onModeChange}
         currentMode={props.currentMode}
-        isDisabled={props.isDisabled}
+        isDisabled={props.isDisabled ?? false}
       />
     </div>
   );

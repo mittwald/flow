@@ -51,7 +51,7 @@ export default () => {
               insertAtEnd("Hallo {{name}},");
             }}
           >
-            Begrüssung einfügen
+            Begrüßung einfügen
           </MenuItem>
           <MenuItem
             onAction={() => {

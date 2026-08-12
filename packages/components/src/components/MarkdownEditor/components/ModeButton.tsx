@@ -4,7 +4,6 @@ import { useLocalizedStringFormatter } from "@/components/TranslationProvider/us
 import locales from "../locales/*.locale.json";
 import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
 import styles from "../MarkdownEditor.module.scss";
-import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 export interface ModeButtonProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: MarkdownEditorMode;
@@ -21,20 +20,18 @@ export const ModeButton: FC<ModeButtonProps> = (props) => {
   const otherMode = currentMode === "editor" ? "preview" : "editor";
 
   return (
-    <ClearPropsContext>
-      <Button
-        tunnel={null}
-        className={styles.modeButton}
-        size="s"
-        variant="plain"
-        color="dark"
-        onPress={() => {
-          onChange?.(otherMode);
-        }}
-        {...rest}
-      >
-        {stringFormatter.format(`mode.${otherMode}`)}
-      </Button>
-    </ClearPropsContext>
+    <Button
+      tunnel={null}
+      className={styles.modeButton}
+      size="s"
+      variant="plain"
+      color="dark"
+      onPress={() => {
+        onChange?.(otherMode);
+      }}
+      {...rest}
+    >
+      {stringFormatter.format(`mode.${otherMode}`)}
+    </Button>
   );
 };
