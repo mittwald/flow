@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, Ref } from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -188,10 +188,13 @@ export const Button = flowComponent("Button", (props) => {
 
   if (elementType === "span") {
     const spanProps = filterDOMProps(restProps, { global: true });
+    // The public ref type stays `HTMLButtonElement`, whatever this renders as.
+    const spanRef = ref as Ref<HTMLSpanElement> | undefined;
 
     return (
       <span
         {...spanProps}
+        ref={spanRef}
         data-disabled={restProps.isDisabled || undefined}
         className={
           typeof rootClassName === "string" ? rootClassName : undefined

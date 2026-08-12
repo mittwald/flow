@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 import type { Mock } from "vitest";
+import { createRef } from "react";
 import { RouterProvider } from "react-aria-components";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
@@ -45,6 +46,19 @@ test("link with a nested button still navigates client-side", async () => {
   await userEvent.click(button);
 
   expect(navigate).toHaveBeenCalledWith(href, undefined);
+});
+
+test("a ref on a button in a link points to the rendered span", async () => {
+  const ref = createRef<HTMLButtonElement>();
+
+  render(
+    <Link href={href}>
+      <Button ref={ref}>Zur App</Button>
+    </Link>,
+  );
+
+  await expect.element(page.getByText("Zur App")).toBeInTheDocument();
+  expect(ref.current?.tagName).toBe("SPAN");
 });
 
 test("button in a disabled link exposes its disabled state", async () => {
