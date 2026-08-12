@@ -3,6 +3,8 @@ declare const classNames: {
   readonly inline: "inline";
   readonly icon: "icon";
   readonly "size-s": "size-s";
+  readonly button: "button";
+  readonly linkIcon: "linkIcon";
   readonly light: "light";
   readonly dark: "dark";
   readonly "dark-static": "dark-static";
@@ -10,6 +12,5 @@ declare const classNames: {
   readonly alertText: "alertText";
   readonly accentBox: "accentBox";
   readonly layoutCard: "layoutCard";
-  readonly linkIcon: "linkIcon";
 };
 export default classNames;
