@@ -3,35 +3,37 @@ component: TimeField
 description: Mit dem TimeField können User eine konkrete Uhrzeit angeben.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Nutze im `<TimeField />` ein `<Label />`, um die Eingabeanforderung kurz zu
+beschreiben. Die Values des TimeFields sind Objekte aus dem
+[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
+
+<LiveCodeEditor stretch />
+
+---
+
+# Verwendung
+
+Verwende ein TimeField, um dem User eine konkrete Uhrzeit angeben zu lassen – z.
+B. für einen Termin.
 
 ## Best Practices
 
 Achte bei der Verwendung eines TimeFields darauf, dass ...
 
 - ein verständliches [Label](/04-components/content/label/overview) wie
-  „Uhrzeit“ verwendet wird.
+  „Uhrzeit" verwendet wird.
 - das Zeitformat dem vertrauten Format des Users und dem Nutzungskontext
   entspricht.
 - sinnvolle Defaultwerte gewählt werden.
-- Eingaben ggf. mit `minValue` und `maxValue` eingeschränkt werden – z. B.
+- Eingaben ggf. mit `minValue` und `maxValue` eingeschränkt werden – z. B.
   sodass nur Zeiten zwischen 8 und 16 Uhr möglich sind.
-- die Genauigkeit der Zeitangabe zur Nutzung passt (s.`granularity` Property) –
-  z. B. reicht bei Erinnerungen die Angabe von Stunden und Minuten; Sekunden
+- die Genauigkeit der Zeitangabe zur Nutzung passt (s. `granularity` Property) –
+  z. B. reicht bei Erinnerungen die Angabe von Stunden und Minuten; Sekunden
   wären unnötig.
-
-## Verwendung
-
-Verwende ein TimeField, um dem User eine konkrete Uhrzeit angeben zu lassen –
-z. B. für einen Termin.
-
-# Playground
-
-Verwende `<TimeField />`, um ein TimeField darzustellen. Die Values des
-TimeFields sind Objekte aus dem
-[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
-
-<LiveCodeEditor stretch />
 
 ---
 
@@ -54,7 +56,8 @@ Sekunden auswählbar sind.
 
 # Disabled
 
-Ist das TimeField **disabled**, ist keine Interaktion möglich.
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem TimeField interagieren kann.
 
 <LiveCodeEditor example="disabled" editorCollapsed stretch />
 
@@ -76,6 +79,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 

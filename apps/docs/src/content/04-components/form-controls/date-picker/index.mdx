@@ -4,39 +4,38 @@ description:
   Der DatePicker erlaubt die Eingabe eines Datums per Tastatur oder Kalender.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung eines DatePickers darauf, dass ...
+Nutze im `<DatePicker />` ein `<Label />`, um die Eingabeanforderung kurz zu
+beschreiben. Die Values des DatePickers sind Objekte aus dem
+[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
 
-- ein verständliches [Label](/04-components/content/label/overview) wie „Datum“
-  verwendet wird.
-- das Datumsformat dem gewohnten Format des Users und dem Nutzungskontext
-  entspricht.
-- sinnvolle Defaultwerte gewählt werden.
-- Eingaben ggf. mit `minValue` und `maxValue` eingeschränkt werden – z. B., um
-  das frühestmögliche Datum eines Termins anzuzeigen.
+<LiveCodeEditor stretch />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende einen DatePicker, um ...
 
 - dem User die Auswahl eines konkreten Datums zu ermöglichen – etwa für einen
   Termin.
-- einen Datensatz auf ein bestimmtes Datum zu begrenzen, z. B. bei der
+- einen Datensatz auf ein bestimmtes Datum zu begrenzen, z. B. bei der
   Darstellung von Diagrammen.
 
-# Playground
+## Best Practices
 
-Verwende `<DatePicker />`, um einen DatePicker darzustellen. Nutze ein
-`<Label />`, um Informationen zu vermitteln, die das Verständnis der
-Eingabeanforderungen erleichtern.
+Achte bei der Verwendung eines DatePickers darauf, dass ...
 
-Die Values des DatePickers sind Objekte aus dem
-[@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
-
-<LiveCodeEditor stretch />
+- ein verständliches [Label](/04-components/content/label/overview) wie „Datum"
+  verwendet wird.
+- das Datumsformat dem gewohnten Format des Users und dem Nutzungskontext
+  entspricht.
+- sinnvolle Defaultwerte gewählt werden.
+- Eingaben ggf. mit `minValue` und `maxValue` eingeschränkt werden – z. B., um
+  das frühestmögliche Datum eines Termins anzuzeigen.
 
 ---
 
@@ -57,20 +56,21 @@ werden.
 
 ---
 
-# Disabled
-
-Ist der DatePicker **disabled**, ist keine Interaktion möglich.
-
-<LiveCodeEditor example="disabled" editorCollapsed stretch />
-
----
-
 # Mit FieldDescription
 
 Um wichtige Hinweise zum DatePicker bereitzustellen, kann unterhalb eine
 `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem DatePicker interagieren kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
 
 ---
 
@@ -90,6 +90,8 @@ Weitere Details zur Formularlogik und -validierung findest du in der Component
 [Form (React Hook Form)](/04-components/react-hook-form/form/overview).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
 
 # Properties
 
