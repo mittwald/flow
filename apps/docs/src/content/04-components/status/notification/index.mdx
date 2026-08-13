@@ -4,16 +4,25 @@ description:
   Die Notification informiert User über wichtige System- oder Statusmeldungen.
 ---
 
-# Grundlagen
+---
 
-Die Notification ist eine Component zur Darstellung von System- oder
-Statusmeldungen, die überwiegend im Hintergrund ablaufende Prozesse betreffen.
-Notifications können durch Aktionen des Users ausgelöst werden, zum Beispiel
-durch das Starten einer Installation. Sie können aber auch durch systemseitige
-Ereignisse entstehen, wie etwa eine Warnung bei geringem Speicherplatz.
-Notifications sollten in einer zentralen Ansicht oder einem
-Benachrichtigungscenter gesammelt werden, um auch zu einem späteren Zeitpunkt
-einsehbar zu sein.
+# Code-Beispiel
+
+Eine `<Notification />` enthält eine `<Heading />` und einen `<Text />`. Zum
+Auslösen und Steuern dient der
+[NotificationProvider](/04-components/status/notification-provider/overview).
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine Notification, um ...
+
+- den User über den Fortschritt oder Abschluss von Hintergrundprozessen zu
+  informieren.
+- systemseitige Hinweise, Warnungen oder Fehler bereitzustellen.
 
 ## Best Practices
 
@@ -25,30 +34,11 @@ Achte bei der Verwendung einer Notification darauf, dass ...
   als 12 Wörter).
 - Notifications gesammelt und zu einem späteren Zeitpunkt abrufbar sind.
 
-## Verwendung
-
-Verwende eine Notification, um ...
-
-- den User über den Fortschritt oder Abschluss von Hintergrundprozessen zu
-  informieren.
-- systemseitige Hinweise, Warnungen oder Fehler bereitzustellen.
-
-# Playground
-
-Verwende `<Notification />`, um eine Notification darzustellen. Um eine
-Notification auszulösen und sie zu steuern, kann der
-[NotificationProvider](/04-components/status/notification-provider/overview)
-genutzt werden.
-
-<LiveCodeEditor />
-
 ---
 
 # Status
 
 Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
-
-<LiveCodeEditor example="status" editorCollapsed row />
 
 **Info:** Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
 erfordern.
@@ -62,6 +52,10 @@ Aufmerksamkeit erfordern.
 
 **Unavailable:** Zustände aufgrund von nicht verfügbaren oder gelöschten
 Inhalten.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
 
 # Properties
 

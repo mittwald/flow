@@ -4,21 +4,20 @@ description:
   Der NotificationProvider dient zur Anzeige und Steuerung von Notifications.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung des NotificationProviders darauf, dass ...
+Greife über den `useNotificationController()` Hook auf den Controller zu und
+zeige mit dessen `add()`-Methode eine
+[Notification](/04-components/status/notification/overview) an. Voraussetzung
+ist ein eingebundener `<NotificationProvider />` (s. Initialisierung).
 
-- die User nicht von zu vielen Notifications überflutet werden.
-- die eingesetzten Notifications die Richtlinien aus der
-  [Notification Guideline](/04-components/status/notification/overview)
-  einhalten.
-- bei der Nutzung von `autoClose` darauf geachtet wird, dass User ausreichend
-  Zeit haben, die Notification zu lesen. Idealerweise sollte die Anzeigedauer
-  einstellbar sein.
+<LiveCodeEditor />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende den NotificationProvider, um ...
 
@@ -26,22 +25,24 @@ Verwende den NotificationProvider, um ...
 - Benachrichtigungen konsistent und zentralisiert zu verwalten (Anzeigeort und
   Anzeigedauer).
 
+## Best Practices
+
+Achte bei der Verwendung des NotificationProviders darauf, dass ...
+
+- die User nicht von zu vielen Notifications überflutet werden.
+- die eingesetzten Notifications die Richtlinien der
+  [Notification](/04-components/status/notification/overview) einhalten.
+- bei der Nutzung von `autoClose` die User ausreichend Zeit haben, die
+  Notification zu lesen. Idealerweise ist die Anzeigedauer einstellbar.
+
+---
+
 # Initialisierung
 
 Damit Notifications angezeigt werden können, muss der `<NotificationProvider />`
 als übergeordnete Component eingebunden werden.
 
 <LiveCodeEditor example="provider" />
-
----
-
-# Notifications anzeigen
-
-Über den `useNotificationController()` Hook kann auf den Notification-Controller
-zugegriffen werden. Dieser stellt zum Anzeigen einer Notification die
-`add()`-Methode bereit.
-
-<LiveCodeEditor />
 
 ---
 
@@ -60,6 +61,8 @@ Die `add()`-Methode gibt eine Notification-ID zurück. Diese kann in der
 `remove()`-Methode verwendet werden, um eine Notification manuell zu schließen.
 
 <LiveCodeEditor example="closeById" editorCollapsed />
+
+---
 
 # Properties
 

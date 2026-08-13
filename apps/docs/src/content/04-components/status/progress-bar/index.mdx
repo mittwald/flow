@@ -5,70 +5,40 @@ description:
   horizontalen Balken an.
 ---
 
-# Grundlagen
+---
 
-Eine ProgressBar zeigt den Fortschritt eines laufenden Prozesses visuell in Form
-eines horizontalen Balkens an. Sie eignet sich sowohl für temporäre Prozesse
-(z. B. Uploads) als auch für Zustände mit konstantem Monitoring, wie z. B. die
-Auslastung von Speicherplatz.
+# Code-Beispiel
 
-## Best Practices
-
-Achte bei der Verwendung einer ProgressBar darauf, dass ...
-
-- der Fortschritt eindeutig kommuniziert wird (z. B. 8 GB von 10 GB).
-- bei der Darstellung von Speicherplatzauslastung Schwellenwerte visuell
-  hervorgehoben werden (z. B. Statuswechsel ab 80 % Auslastung zur Warning).
-- bei indeterminate Zuständen (z. B. unklarer Ladefortschritt) eine Alternative,
-  wie zum Beispiel der
-  [LoadingSpinner](/04-components/status/loading-spinner/overview), verwendet
-  wird.
-- bei statischen Anwendungen wie Speicherplatzauslastung regelmäßige
-  Aktualisierung durch das System erfolgt, um Verlässlichkeit zu gewährleisten.
-
-## Verwendung
-
-Verwende eine ProgressBar, um ...
-
-- Prozesse mit vorhersehbarer Dauer visuell zu begleiten (z. B. Datei-Uploads
-  oder Installationen).
-- Usern ein Gefühl für verbleibende Zeit oder verfügbare Kapazitäten zu geben.
-- kontinuierlich überwachte Zustände darzustellen (z. B.
-  Speicherplatzauslastung).
-- kritische Zustände frühzeitig visuell hervorzuheben (z. B. durch Farbwechsel
-  bei hoher Auslastung).
-- in Dashboards platzsparend Informationen darzustellen.
-
-# Playground
-
-Verwende `<ProgressBar />`, um eine ProgressBar darzustellen.
+Übergib der `<ProgressBar />` über das `value` Property den Fortschritt und
+benenne sie mit einem `<Label />`.
 
 <LiveCodeEditor />
 
 ---
 
-# Mit Unit
+# Verwendung
 
-Im Standard wird die ProgressBar immer mit Prozentangabe angezeigt. Über das
-Property `formatOptions` können aber auch andere Einheiten gewählt werden
-(s. [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+Verwende eine ProgressBar, um ...
 
-## Gigabyte
+- Prozesse mit vorhersehbarer Dauer visuell zu begleiten (z. B. Datei-Uploads
+  oder Installationen).
+- kontinuierlich überwachte Zustände darzustellen (z. B.
+  Speicherplatzauslastung).
+- Usern ein Gefühl für verbleibende Zeit oder verfügbare Kapazitäten zu geben.
+- in Dashboards platzsparend Informationen darzustellen.
 
-<LiveCodeEditor example="unit" editorCollapsed />
+## Best Practices
 
-## Dezimalzahl
+Achte bei der Verwendung einer ProgressBar darauf, dass ...
 
-<LiveCodeEditor example="decimal" editorCollapsed />
-
----
-
-# Mit Max Value
-
-Der maximale Wert der ProgressBar lässt sich individuell festlegen, je nachdem,
-was dargestellt werden soll. Standardmäßig beträgt dieser Wert 100 %.
-
-<LiveCodeEditor example="maxValue" editorCollapsed />
+- der Fortschritt eindeutig kommuniziert wird (z. B. 8 GB von 10 GB).
+- bei der Darstellung von Speicherplatzauslastung Schwellenwerte visuell
+  hervorgehoben werden (z. B. Statuswechsel ab 80 % Auslastung zur Warning).
+- bei indeterminate Zuständen (z. B. unklarer Ladefortschritt) eine Alternative
+  wie der [LoadingSpinner](/04-components/status/loading-spinner/overview)
+  verwendet wird.
+- bei statischen Anwendungen wie Speicherplatzauslastung eine regelmäßige
+  Aktualisierung durch das System erfolgt, um Verlässlichkeit zu gewährleisten.
 
 ---
 
@@ -92,9 +62,34 @@ soll.
 Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Success**,
 **Info**, **Warning** und **Danger**. Diese Status helfen insbesondere bei der
 Darstellung von Speicherplatzauslastung, um Schwellenwerte visuell hervorzuheben
-(z. B. Statuswechsel ab 80 % Auslastung zur Warning).
+(z. B. Statuswechsel ab 80 % Auslastung zur Warning).
 
 <LiveCodeEditor example="status" editorCollapsed />
+
+---
+
+# Mit Unit
+
+Im Default wird die ProgressBar immer mit Prozentangabe angezeigt. Über das
+Property `formatOptions` können aber auch andere Einheiten gewählt werden (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+
+## Gigabyte
+
+<LiveCodeEditor example="unit" editorCollapsed />
+
+## Dezimalzahl
+
+<LiveCodeEditor example="decimal" editorCollapsed />
+
+---
+
+# Mit Max Value
+
+Der maximale Wert der ProgressBar lässt sich individuell festlegen, je nachdem,
+was dargestellt werden soll. Standardmäßig beträgt dieser Wert 100 %.
+
+<LiveCodeEditor example="maxValue" editorCollapsed />
 
 ---
 
@@ -112,6 +107,8 @@ werden, dass nebeneinanderliegende Farben weiterhin einen ausreichenden Kontrast
 zueinander haben.
 
 <LiveCodeEditor example="segments" editorCollapsed />
+
+---
 
 # Properties
 

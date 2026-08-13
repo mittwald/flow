@@ -5,64 +5,79 @@ description:
   Kategorien dar.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende einen Badge, um ...
+
+- Metadaten oder einen Status zu kennzeichnen (z. B. Bezahlt, Aktiviert).
+- eine Kategorie oder Zugehörigkeit darzustellen (z. B. Support, Marketing).
+- Neuerungen oder Prioritäten hervorzuheben (z. B. Neu, Beta, Priorität: Hoch).
+- gesetzte Filter in einer [List](/04-components/structure/list/overview)
+  darzustellen.
 
 ## Best Practices
 
 Achte bei der Verwendung eines Badges darauf, dass ...
 
-- die Beschreibung kurz und prägnant ist (idealerweise in 1–3 Wörtern).
+- die Beschriftung kurz und prägnant ist (idealerweise in 1–3 Wörtern).
 - die Farben konsistent für bestimmte Informationen verwendet werden.
-- mithilfe eines Scopes dem Badge eine übergeordnete Bezeichnung hinzugefügt
-  wird.
-- diese für Metadaten und Kategorien verwendet wird. Bei kritischere
-  Informationen wird eher eine
-  [AlertBadge](/04-components/status/alert-badge/overview) in Kombination eines
-  [Alert](/04-components/status/alert/overview) verwendet.
-
-## Verwendung
-
-Verwende einen Badge, um ...
-
-- Metadaten hervorzuheben (z. B. Bezahlt, Überfällig, Entwurf).
-- einen Status zu kennzeichnen (z. B. Aktiviert, Deaktiviert).
-- eine Kategorie oder Zugehörigkeit darzustellen (z. B. Support, Marketing,
-  Entwicklung).
-- wichtige Änderungen und Neuerungen hervorzuheben (z. B. Neu, Beta, Update).
-- Prioritäten zu kennzeichnen (z. B. Priorität: Hoch, Priorität: Mittel,
-  Priorität: Niedrig).
-- gesetzte Filter in der [List](/04-components/structure/list/overview)
-  darzustellen.
 
 ## Badge vs. AlertBadge
 
 <DoAndDont>
-
-  <Plain heading="Verwende ein Badge, wenn z. B. ...">
+  <Plain heading="Verwende ein Badge, wenn z. B. ...">
     - Metadaten oder ergänzende Informationen dargestellt werden sollen.
     - keine sofortige Aktion oder erhöhte Aufmerksamkeit notwendig ist.
 
   </Plain>
 
-   <Plain heading="Verwende ein AlertBadge, wenn z. B. ...">
+  <Plain heading="Verwende ein AlertBadge, wenn z. B. ...">
     - der Hinweis kritisch, sicherheitsrelevant oder besonders wichtig ist.
     - weitere Informationen durch einen [Alert](/04-components/status/alert/overview) notwendig sind.
 
   </Plain>
 </DoAndDont>
 
-# Playground
+---
 
-Verwende `<Badge />`, um ein Badge darzustellen.
+# Color
 
-<LiveCodeEditor />
+Die [Color](/02-foundations/01-design/02-colors)-Varianten können frei gewählt
+werden – achte dabei auf die beabsichtigte Wirkung. **Neutral** eignet sich zum
+Beispiel für sekundäre Informationen, da das dezente Grau weniger Aufmerksamkeit
+erzeugt.
+
+Setze **Blue**, **Green**, **Orange** und **Red** mit Bedacht ein, da sie leicht
+mit [AlertBadges](/04-components/status/alert-badge/overview) oder Status-Colors
+verwechselt werden.
+
+<LiveCodeEditor example="colors" editorCollapsed row />
+
+## Light und Dark
+
+Um auf farbigen oder dekorativen Hintergründen ausreichend Kontrast zu
+erreichen, kann das Badge auch in Light und Dark dargestellt werden. Mehr zur
+richtigen Verwendung von Light und Dark findest du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
 ---
 
 # Mit Scope
 
-Ein Scope ist wie eine Bezeichnung für das gesamte Badge. Ein Scope besitzt
-meistens mehrere Werte z. B. Priorität: hoch, Priorität: niedrig.
+Ein Scope ordnet das Badge einer Kategorie zu, die meist mehrere Werte hat (z.
+B. Priorität: hoch, Priorität: niedrig).
 
 <LiveCodeEditor example="scope" editorCollapsed />
 
@@ -70,8 +85,9 @@ meistens mehrere Werte z. B. Priorität: hoch, Priorität: niedrig.
 
 # Badge Aktion
 
-Ein Badge kann optional mit `onPress` eine Aktion auslösen, sollte jedoch nicht
-so vielseitig wie ein Button verwendet werden.
+Über `onPress` kann ein Badge eine Aktion auslösen, etwa um weiterführende
+Informationen zu öffnen. Es sollte dabei nicht als Ersatz für einen
+[Button](/04-components/actions/button/overview) missbraucht werden.
 
 <LiveCodeEditor example="onPress" editorCollapsed />
 
@@ -79,39 +95,9 @@ so vielseitig wie ein Button verwendet werden.
 
 # Badge entfernen
 
-Ein Badge kann optional vom User aus der Benutzeroberfläche entfernt werden.
+Über `onClose` lässt sich ein Badge vom User aus der Oberfläche entfernen.
 
 <LiveCodeEditor example="onClose" editorCollapsed />
-
----
-
-# Color
-
-Es stehen insgesamt 9 Badge-Colors zur Auswahl: **Neutral**, **Blue**, **Navy**,
-**Violet**, **Teal**, **Lilac**, **Green**, **Orange** und **Red**.
-
-<LiveCodeEditor example="colors" editorCollapsed row />
-
-Die verschiedenen [Color](/02-foundations/01-design/02-colors)-Varianten können
-frei verwendet werden. Dabei sollte jedoch immer die beabsichtigte visuelle
-Wirkung berücksichtigt werden. **Neutral** eignet sich beispielsweise für
-begleitende oder sekundäre Informationen, da das dezente Grau weniger
-Aufmerksamkeit erzeugt. **Violet** kann dagegen gut eingesetzt werden, um neue
-Inhalte oder Features hervorzuheben.
-
-Setze die Colors **Blue, Green, Orange** und **Red** mit Bedacht ein, da sie
-leicht mit [AlertBadges](/04-components/status/alert-badge/overview) oder
-Status-Colors verwechselt werden.
-
-## Light und Dark
-
-Zusätzlich kann das Badge in Light und Dark dargestellt werden. Beide Varianten
-eigenen sich, wenn die Standardfarben auf farbigen oder dekorativen
-Hintergründen nicht gut funktionieren.
-
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
-
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
 ---
 
@@ -122,6 +108,8 @@ temporär als nicht verfügbar darzustellen, ohne diese vollständig aus der
 Oberfläche zu entfernen.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
+
+---
 
 # Properties
 
