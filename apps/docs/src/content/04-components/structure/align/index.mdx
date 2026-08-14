@@ -4,62 +4,58 @@ description:
   Align kombiniert Components gezielt, inklusive Anordnung und Farbanpassungen.
 ---
 
-# Grundlagen
+---
 
-Wir haben die Align Component entwickelt, um häufig wiederkehrende Kombinationen
-von Components konsistent darzustellen. Sie sorgt für visuelle und funktionale
-Einheitlichkeit in unseren Oberflächen – ohne, dass für jede dieser
-Kombinationen eine eigene Component entwickelt werden muss.
-
-## Best Practices
-
-Achte bei der Verwendung von Align darauf, dass ...
-
-- nur die im Overview genannten Components kombiniert werden können.
-- es nicht als generisches Layout-Tool dient. Für eine freie Anordnung ist
-  [Flex](/04-components/structure/flex/overview) vorgesehen.
-- neben einer korrekten Anordnung auch visuelle Anpassungen (z. B. das Setzen
-  von Farben) vorgenommen werden können.
-
-## Verwendung
-
-Verwende Align, um ...
-
-- vorab definierte Components (z. B.
-  [Button](/04-components/actions/button/overview) und
-  [TextField](/04-components/form-controls/text-field/overview)) sinnvoll
-  anzuordnen.
-- wiederkehrende UI-Patterns konsistent umzusetzen.
-
-Nutze folgende Components innerhalb von `<Align />`, um sie zu kombinieren.
-
-# Avatar + Text
+# Code-Beispiel
 
 <LiveCodeEditor />
 
 ---
 
-# Input + Button
+# Verwendung
+
+Verwende Align, um ...
+
+- vorab definierte Components (z. B.
+  [Button](/04-components/actions/button/overview) und
+  [TextField](/04-components/form-controls/text-field/overview)) sinnvoll
+  anzuordnen.
+- wiederkehrende UI-Patterns konsistent umzusetzen, ohne für jede Kombination
+  eine eigene Component zu entwickeln.
+
+## Best Practices
+
+Achte bei der Verwendung von Align darauf, dass ...
+
+- nur die unterstützten Kombinationen verwendet werden.
+- es nicht als generisches Layout-Tool dient. Für eine freie Anordnung ist
+  [Flex](/04-components/structure/flex/overview) vorgesehen.
+- neben der Anordnung auch visuelle Anpassungen wie das Setzen von Farben
+  möglich sind.
+
+---
+
+# Kombinationen
+
+Neben Avatar + Text unterstützt Align die folgenden Kombinationen.
+
+## Input + Button
 
 <LiveCodeEditor example="input-button" editorCollapsed />
 
----
-
-# Text + CopyButton
+## Text + CopyButton
 
 <LiveCodeEditor example="text-copy-button" editorCollapsed />
 
----
-
-# Icon + Text
+## Icon + Text
 
 <LiveCodeEditor example="icon-text" editorCollapsed />
 
----
-
-# Text + ContextualHelp
+## Text + ContextualHelp
 
 <LiveCodeEditor example="text-contextual-help" editorCollapsed />
+
+---
 
 # Properties
 
