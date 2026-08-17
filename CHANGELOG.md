@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1028](https://github.com/mittwald/flow/compare/0.2.0-alpha.1027...0.2.0-alpha.1028) (2026-08-17)
+
+### Features
+
+* **MarkdownEditor:** support custom toolbar tools ([#2781](https://github.com/mittwald/flow/issues/2781)) ([c562ec1](https://github.com/mittwald/flow/commit/c562ec12df11cd439eee0a04d240dcb3ea2412c6))
+
 # [0.2.0-alpha.1027](https://github.com/mittwald/flow/compare/0.2.0-alpha.1026...0.2.0-alpha.1027) (2026-08-17)
 
 ### Bug Fixes
