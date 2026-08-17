@@ -2,6 +2,7 @@ import type { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import type { FlowComponentName } from "@/components/propTypes";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -33,6 +34,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
     children,
     controller: controllerFromProps,
   } = props;
+  const buttonPropsContext = useComponentPropsContext("Button");
 
   const newOverlayController = OverlayController.useNew({ isDefaultOpen });
   const overlayController = controllerFromProps ?? newOverlayController;
@@ -44,7 +46,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
     Button: {
       onPress: overlayController.open,
       isPending,
-      isDisabled: isContentSuspended,
+      isDisabled: Boolean(buttonPropsContext?.isDisabled) || isContentSuspended,
     },
   };
 

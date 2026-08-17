@@ -7,7 +7,7 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Flex, MarkdownEditor, Label, FieldError },
+    components: { Button, IconPlus, Flex, MarkdownEditor, Label, FieldError },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -31,6 +31,17 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("MarkdownEditor states");
+
+    await render(
+      <MarkdownEditor rows={1}>
+        <Label>Custom toolbar button</Label>
+        <Button>
+          <IconPlus />
+        </Button>
+      </MarkdownEditor>,
+    );
+
+    await testScreenshot("MarkdownEditor states - custom button");
   },
 );
 
