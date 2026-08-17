@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1027](https://github.com/mittwald/flow/compare/0.2.0-alpha.1026...0.2.0-alpha.1027) (2026-08-17)
+
+### Bug Fixes
+
+* **Autocomplete:** autocomplete popover is not visible in modals ([#2847](https://github.com/mittwald/flow/issues/2847)) ([e8fc3e2](https://github.com/mittwald/flow/commit/e8fc3e2adfc60baa1563969c2d0a064e7af5e24d))
+
 # [0.2.0-alpha.1026](https://github.com/mittwald/flow/compare/0.2.0-alpha.1025...0.2.0-alpha.1026) (2026-08-12)
 
 ### Features
