@@ -4,7 +4,25 @@ description:
   Die Table zeigt Daten in Zeilen und Spalten und macht Einträge vergleichbar.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Definiere die Spaltenüberschriften über `<TableHeader>` mit `<TableColumn>` und
+den Content über `<TableBody>` mit `<TableRow>` und `<TableCell>`.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine Table, um ...
+
+- große Datenmengen klar strukturiert, übersichtlich und leicht vergleichbar
+  darzustellen (z. B. Userlisten, Rechnungsübersichten).
+- spaltenweise konsistente Inhalte (z. B. Preis, Status, Datum) schnell
+  erfassbar zu machen.
 
 ## Best Practices
 
@@ -15,46 +33,29 @@ Achte bei der Verwendung einer Table darauf, dass ...
 - Spaltenüberschriften kurz, eindeutig und prägnant formuliert sind.
 - nicht mehrere Informationen in einer Zelle dargestellt werden.
 - Zahlen, insbesondere Geldbeträge oder Zeitwerte, rechtsbündig angezeigt
-  werden, um Vergleichbarkeit zu fördern.
-
-## Verwendung
-
-Verwende eine Table, um ...
-
-- große Datenmengen klar strukturiert, übersichtlich und leicht vergleichbar
-  darzustellen (z. B. Userlisten, Rechnungsübersichten).
-- Spaltenweise konsistente Inhalte (z. B. Preis, Status, Datum) schnell
-  erfassbar zu machen.
-
-# Playground
-
-Verwende `<Table />`, um tabellarische Daten strukturiert darzustellen. Nutze
-`TableHeader` und `TableColumn`, um die Spaltenüberschriften zu definieren.
-Verwende `TableBody`, um den Content über `TableRow` und `TableCell` abzubilden.
-
-<LiveCodeEditor />
+  werden, um die Vergleichbarkeit zu fördern.
 
 ---
 
 # Mit Footer
 
-Um die letzte Zeile der Table hervorzuheben (z. B. für eine Preisübersicht),
+Um die letzte Zeile der Table hervorzuheben (z. B. für eine Preisübersicht),
 kann `TableFooterRow` verwendet werden.
 
 <LiveCodeEditor example="withFooter" editorCollapsed />
 
 ---
 
-# Vertikal zentriert
+# Ausrichtung
 
-Der Inhalt wird vertikal zentriert dargestellt, sodass dieser mittig zwischen
-dem oberen und unteren Zellenrand positioniert ist.
+## Vertikal zentriert
+
+Der Inhalt wird vertikal zentriert dargestellt, sodass er mittig zwischen oberem
+und unterem Zellenrand positioniert ist.
 
 <LiveCodeEditor example="vertically-centered" editorCollapsed />
 
----
-
-# Horizontal zentriert
+## Horizontal zentriert
 
 Der Inhalt wird horizontal zentriert ausgerichtet. Unabhängig von der
 Ausrichtung unterstützt die Table optional die Statusanzeigen `success` und
@@ -72,6 +73,8 @@ Platz. Mit `minWidth` an der `Table` bleibt bei wenig Platz die Breite erhalten
 und die Tabelle scrollt horizontal, statt die Spalten zu stauchen.
 
 <LiveCodeEditor example="fixed-column-widths" editorCollapsed />
+
+---
 
 # Properties
 

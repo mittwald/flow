@@ -4,52 +4,53 @@ description:
   Das Accordion blendet Content-Bereiche ein und aus und spart so Platz.
 ---
 
-# Grundlagen
+---
 
-Accordions eignen sich besonders für Informationen, die nicht dauerhaft sichtbar
-sein müssen, aber bei Bedarf schnell zugänglich sein sollen.
+# Code-Beispiel
 
-## Best Practices
-
-Achte bei der Verwendung eines Accordions darauf, dass ...
-
-- Inhalte im Accordion standardmäßig verborgen sind und vom User nicht direkt
-  wahrgenommen werden.
-- die Titel klar und prägnant formuliert sind.
-- die relevantesten Informationen im zuerst geöffneten Element stehen.
-
-## Verwendung
-
-Verwende ein Accordion, um...
-
-- Seiten zu verkürzen und das Scrollen zu reduzieren.
-- verwandte Informationen sinnvoll zu gruppieren.
-- FAQ-Bereiche, Formulare oder Einstellungsseiten strukturierter darzustellen.
-
-# Playground
-
-Verwende `<Accordion />`, um ein Accordion darzustellen. Nutze als Titel
-entweder eine `<Heading />` oder ein `<Label />`.
+Ein `<Accordion />` erhält als Titel eine
+[Heading](/04-components/content/heading/overview) (oder ein
+[Label](/04-components/content/label/overview)) und den ein- und ausklappbaren
+`<Content />`.
 
 <LiveCodeEditor />
 
 ---
 
-# DefaultExpanded
+# Verwendung
 
-`defaultExpanded` wird verwendet, um ein oder mehrere Accordion-Elemente beim
-Laden der Seite standardmäßig geöffnet darzustellen.
+Verwende ein Accordion, um ...
 
-<LiveCodeEditor example="default-expanded" />
+- Seiten zu verkürzen und das Scrollen zu reduzieren.
+- verwandte Informationen sinnvoll zu gruppieren.
+- FAQ-Bereiche, Formulare oder Einstellungsseiten strukturierter darzustellen.
+
+## Best Practices
+
+Achte bei der Verwendung eines Accordions darauf, dass ...
+
+- keine essenziellen Inhalte darin verborgen werden, da sie standardmäßig nicht
+  direkt wahrgenommen werden.
+- die Titel klar und prägnant formuliert sind.
+- die relevantesten Informationen im zuerst geöffneten Element stehen.
 
 ---
 
 # Outline Variant
 
-Verwende eine `outline` Variante, wenn das Accordion klar vom umgebenden Inhalt
+Verwende die `outline`-Variante, wenn das Accordion klar vom umgebenden Inhalt
 abgehoben oder inhaltlich stärker strukturiert werden soll.
 
 <LiveCodeEditor example="outline" />
+
+---
+
+# Default Expanded
+
+Über `defaultExpanded` werden ein oder mehrere Accordion-Elemente beim Laden der
+Seite standardmäßig geöffnet dargestellt.
+
+<LiveCodeEditor example="default-expanded" />
 
 ---
 
@@ -62,6 +63,8 @@ Seite steht – zum Beispiel bei Filtern, Formularfeldern oder optionalen
 Einstellungen.
 
 <LiveCodeEditor example="label" />
+
+---
 
 # Properties
 

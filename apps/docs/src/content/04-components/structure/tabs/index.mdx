@@ -4,7 +4,20 @@ description:
   Tabs strukturieren verwandte Inhalte in schnell erreichbaren Ansichten.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Definiere jeden Tab mit `<Tab />` und seine Bezeichnung über `<TabTitle />`.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende Tabs, um komplexe Inhalte in kleinere, übersichtlichere Ansichten zu
+gliedern.
 
 ## Best Practices
 
@@ -12,25 +25,17 @@ Achte bei der Verwendung von Tabs darauf, dass ...
 
 - innerhalb eines Tabs thematisch verwandter Content gruppiert wird.
 - die Reihenfolge nach Wichtigkeit oder Häufigkeit der Nutzung erfolgt.
-- jeder Tab eigenständig verständlich ist und eine kurze und deutliche
-  Beschriftung hat.
+- jeder Tab eigenständig verständlich ist und eine kurze, deutliche Beschriftung
+  hat.
 - sie nicht zur Navigation eingesetzt werden – Tabs schalten ausschließlich
   Inhalte innerhalb derselben Seite um, ohne zu einer anderen Seite bzw. URL zu
-  navigieren, und ersetzen keine Navigation.
-- bei Statusanzeigen innerhalb eines Tabs – z. B. durch einen
-  Danger-[Alert](/04-components/status/alert/overview) – der Tab selbst ein
-  entsprechendes Status-Icon erhält, um die Aufmerksamkeit darauf zu lenken.
-
-## Verwendung
-
-Verwende Tabs, um komplexe Inhalte in kleinere, übersichtlichere Ansichten zu
-gliedern.
+  navigieren.
 
 ## Tabs vs. TabNavigation
 
 Flow bietet mit Tabs und der
 [TabNavigation](/04-components/navigation/tab-navigation/overview) zwei ähnlich
-aussehende Components, die sich aber in der Verwendung klar unterscheiden:
+aussehende Components, die sich in der Verwendung klar unterscheiden.
 
 <DoAndDont>
   <Info heading="Verwende Tabs, um ...">
@@ -41,22 +46,6 @@ aussehende Components, die sich aber in der Verwendung klar unterscheiden:
     zwischen gleichrangigen Unterseiten zu navigieren.
   </Info>
 </DoAndDont>
-
-# Playground
-
-Verwende `<Tabs />`, um Tabs darzustellen. Jeder einzelne Tab wird mit `<Tab />`
-definiert und erhält seine Bezeichnung über `<TabTitle />`.
-
-<Alert>
-  <Heading>Tabs vs. TabNavigation</Heading>
-  <Content>
-    Verwende Tabs um Inhalte innerhalb derselben Seite umzuschalten, ohne zu
-    navigieren. Um zu navigieren verwende die
-    [TabNavigation](/04-components/navigation/tab-navigation/overview).
-  </Content>
-</Alert>
-
-<LiveCodeEditor example="content" />
 
 ---
 
@@ -71,9 +60,10 @@ eine eingeklappte Ansicht.
 
 # Mit Status-Icon
 
-Wenn der Inhalt eines Tabs eine wichtige Information oder Warnung enthält (z. B.
-in Form eines [Alerts](/04-components/status/alert/overview)), muss der
-entsprechende Tab ein Status-Icon erhalten.
+Enthält der Inhalt eines Tabs eine wichtige Information oder Warnung (z. B. in
+Form eines [Alerts](/04-components/status/alert/overview)), muss der
+entsprechende Tab ein Status-Icon erhalten, um die Aufmerksamkeit darauf zu
+lenken.
 
 <LiveCodeEditor example="status" editorCollapsed />
 
@@ -81,30 +71,31 @@ entsprechende Tab ein Status-Icon erhalten.
 
 # Mit vorausgewähltem Tab
 
-Standardmäßig sollte der erste Tab vorausgewählt sein. Falls ein anderer Tab
-initial aktiv sein soll, kann dies über `defaultSelectedKey` festgelegt werden.
+Standardmäßig ist der erste Tab vorausgewählt. Soll ein anderer Tab initial
+aktiv sein, legst du das über `defaultSelectedKey` fest.
 
 <LiveCodeEditor example="default-selected" editorCollapsed />
 
+---
+
 # Reihenfolge der Tabs
 
-Es kann vorkommen, dass sich durch Rerendering die Reihenfolge der Tabs ändert,
-wenn innerhalb des Tabs Inhalte nachgeladen werden. Um das zu verhindern, sollte
-der Tab-Inhalt in eine eigene Component ausgelagert werden und um diese ein
-Suspense gelegt werden.
+Werden innerhalb eines Tabs Inhalte nachgeladen, kann sich durch das Rerendering
+die Reihenfolge der Tabs ändern. Um das zu verhindern, lagere den Tab-Inhalt in
+eine eigene Component aus und umschließe sie mit einem `Suspense`.
 
-```
+```tsx
 <Tabs>
   <Tab>
     <TabTitle>Tab 1</TabTitle>
     <Suspense>
-      <Tab1Content/>
+      <Tab1Content />
     </Suspense>
   </Tab>
   <Tab>
     <TabTitle>Tab 2</TabTitle>
     <Suspense>
-      <Tab2Content/>
+      <Tab2Content />
     </Suspense>
   </Tab>
 </Tabs>
