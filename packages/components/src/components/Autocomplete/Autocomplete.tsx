@@ -130,7 +130,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                 {children}
                 <Options
                   onAction={handleOptionAction}
-                  triggerRef={inputRef}
+                  triggerRef={container}
                   controller={optionsOverlayController}
                   renderEmptyState={renderEmptyState}
                   isNonModal
