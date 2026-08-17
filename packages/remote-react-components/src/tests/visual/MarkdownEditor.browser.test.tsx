@@ -1,15 +1,13 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { Button } from "@/auto-generated";
-import { IconPlus } from "@mittwald/flow-react-components";
 
 test.each(testEnvironments)(
   "MarkdownEditor states (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Flex, MarkdownEditor, Label, FieldError },
+    components: { Button, IconPlus, Flex, MarkdownEditor, Label, FieldError },
   }) => {
     await render(
       <Flex direction="column" gap="m">
