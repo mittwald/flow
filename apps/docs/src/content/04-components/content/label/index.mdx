@@ -3,75 +3,55 @@ component: Label
 description: Ein Label erläutert Eingabeanforderungen in Formularen.
 ---
 
-# Grundlagen
-
-## Best Practices
-
-- Halte Labels kurz (1-3 Wörter) und prägnant.
-- Stelle sicher, dass das Label jederzeit vollständig sichtbar ist.
-- Verwende eine einfache Sprache.
-
-## Verwendung
-
-Verwende ein Label, um ...
-
-- die Eingabeanforderungen an Components innerhalb von Formularen (z. B.
-  [TextField](/04-components/form-controls/text-field/overview),
-  [NumberField](/04-components/form-controls/number-field/overview),
-  [RadioGroup](/04-components/form-controls/radio-group/overview), ...) zu
-  erläutern.
-- eine Information in Kontext zu setzen, z. B. beim
-  [LabeledValue](/04-components/content/labeled-value/overview).
-
-<Info example="usage" heading="Beispiele">
-
-Das Label wird z. B. beim
-[TextField](/04-components/form-controls/text-field/overview),
-[LabeledValue](/04-components/content/labeled-value/overview) oder
-[Switch](/04-components/form-controls/switch/overview) verwendet.
-
-</Info>
-
 ---
 
-# Writing Guidelines
+# Code-Beispiel
 
-Das Label sollte ...
-
-- kurz (1-3 Wörter), prägnant und leicht verständlich sein.
-- jederzeit vollständig sichtbar und einzeilig sein. Bei sehr schmalen
-  Bildschirmen kann es passieren, dass es zweizeilig wird.
-- keine Verben wie „eingeben“, „hinzufügen“ oder „wählen“ enthalten.
-- keine Formatierungshinweise geben. Nutze dafür z. B. die FieldDescription im
-  [TextField](/04-components/form-controls/text-field/overview).
-- keinen Doppelpunkt am Ende haben.
-
-<DoAndDont>
-  <Do example="do" />
-  <Dont example="dont" />
-</DoAndDont>
-
-# Playground
-
-Verwende `<Label />`, um ein Label anzuzeigen. Labels werden häufig innerhalb
-von anderen Components eingesetzt.
+Ein `<Label />` wird meist innerhalb anderer Components eingesetzt, kann aber
+auch eigenständig verwendet werden.
 
 <LiveCodeEditor />
 
 ---
 
+# Verwendung
+
+Verwende ein Label, um ...
+
+- die Eingabeanforderungen an Components innerhalb von Formularen (z. B.
+  [TextField](/04-components/form-controls/text-field/overview),
+  [NumberField](/04-components/form-controls/number-field/overview),
+  [RadioGroup](/04-components/form-controls/radio-group/overview), ...) zu
+  erläutern.
+- eine Information in Kontext zu setzen, z. B. beim
+  [LabeledValue](/04-components/content/labeled-value/overview).
+
+## Best Practices
+
+Achte bei der Verwendung eines Labels darauf, dass ...
+
+- es kurz (1–3 Wörter), prägnant und in einfacher Sprache formuliert ist.
+- es jederzeit vollständig sichtbar und einzeilig ist.
+- es das Feld als Substantiv benennt (z. B. „E-Mail-Adresse“ statt „E-Mail
+  eingeben“).
+- Formatierungshinweise über die FieldDescription im
+  [TextField](/04-components/form-controls/text-field/overview) gegeben werden.
+
+---
+
 # States
 
-Das Label hat 2 verschiedene States: **Default** und **Disabled**.
+Ein Label hat zwei States: **Default** und **Disabled**.
+
+**Disabled:** Das Label beschreibt häufig komplexere Components und übernimmt
+automatisch deren State. Ist z. B. ein
+[TextField](/04-components/form-controls/text-field/overview) oder
+[NumberField](/04-components/form-controls/number-field/overview) gerade
+**disabled**, nimmt das Label denselben State an.
 
 <LiveCodeEditor example="states" editorCollapsed row />
 
-**Disabled:** Das Label wird häufig zur Beschreibung komplexerer Components
-verwendet. Daher übernimmt es automatisch den State, den die höhere Component
-hat. Ist zum Beispiel ein
-[TextField](/04-components/form-controls/text-field/overview) oder
-[NumberField](/04-components/form-controls/number-field/overview) gerade
-**disabled**, nimmt das Label den gleichen State an.
+---
 
 # Properties
 

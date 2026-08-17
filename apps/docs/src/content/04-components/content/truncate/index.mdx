@@ -3,25 +3,12 @@ component: Truncate
 description: Truncate kürzt zu lange Texte automatisch mit "…" ab.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung von Truncate darauf, dass ...
-
-- abgeschnittener Text keine kritischen Informationen enthalten darf, die zum
-  Verständnis oder zur Bedienung notwendig sind.
-- der vollständige Inhalt an anderer Stelle zugänglich ist.
-
-## Verwendung
-
-Verwende Truncate, um einzelne Textzeilen verkürzt in platzbeschränkten Layouts
-darzustellen.
-
-# Playground
-
-Verwende `<Truncate />`, um einzelne Textzeilen in platzbeschränkten Layouts
-darzustellen.
+Truncate kürzt eine Textzeile ab und macht den vollständigen Inhalt über das
+`title`-Property zugänglich.
 
 <Alert status="warning">
   <Heading>Accessibility-Warnung</Heading>
@@ -40,6 +27,21 @@ darzustellen.
 
 ---
 
+# Verwendung
+
+Verwende Truncate, um einzelne Textzeilen verkürzt in platzbeschränkten Layouts
+darzustellen.
+
+## Best Practices
+
+Achte bei der Verwendung von Truncate darauf, dass ...
+
+- abgeschnittener Text keine kritischen Informationen enthält, die zum
+  Verständnis oder zur Bedienung notwendig sind.
+- der vollständige Inhalt an anderer Stelle zugänglich ist.
+
+---
+
 # Mit Offset
 
 Um zum Beispiel bei Pfaden sowohl den Anfang als auch das Ende sichtbar zu
@@ -55,11 +57,19 @@ individueller Platzhalter definieren.
 
 ## Text
 
+Kombiniere Truncate mit [Text](/04-components/content/text/overview), um langen
+Fließtext einzeilig zu kürzen.
+
 <LiveCodeEditor example="text" editorCollapsed />
 
 ## Heading
 
+Kombiniere Truncate mit [Heading](/04-components/content/heading/overview), um
+lange Überschriften zu kürzen.
+
 <LiveCodeEditor example="heading" editorCollapsed />
+
+---
 
 # Properties
 

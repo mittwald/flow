@@ -4,29 +4,15 @@ description:
   Headings strukturieren den Inhalt einer Seite in Wichtigkeitsstufen.
 ---
 
-# Grundlagen
+---
 
-Headings strukturieren Inhalte sowohl visuell als auch inhaltlich. Sie helfen,
-sich auf einer Seite zu orientieren und die Relevanz einzelner Inhalte schnell
-zu erfassen. Jede Heading sollte klar und präzise den darunterliegenden Inhalt
-beschreiben. Headings werden häufig als erstes Element innerhalb von
-[Sections](/04-components/structure/section/overview) verwendet. Die richtige
-Reihenfolge und Hierarchie der Überschriften ist entscheidend für eine
-verständliche und barrierefreie Struktur.
+# Code-Beispiel
 
-## Best Practices
+<LiveCodeEditor />
 
-Achte bei der Verwendung von Headings darauf, dass ...
+---
 
-- sie den Inhalt des folgenden Abschnitts eindeutig beschreibt.
-- sie kurz und sachlich formuliert ist.
-- die Hierarchie und Reihenfolge eine klare Seitenstruktur erkennen lässt (z. B.
-  keine Sprünge von `<h2>` zu `<h4>`).
-- pro Seite nur eine `<h1>` verwendet wird.
-- sie häufig in [Sections](/04-components/structure/section/overview) verwendet
-  werden, um Inhalte zu strukturieren.
-
-## Verwendung
+# Verwendung
 
 Verwende eine Heading, um ...
 
@@ -35,11 +21,18 @@ Verwende eine Heading, um ...
 - wichtige Abschnitte visuell hervorzuheben.
 - die semantische Struktur für Screenreader zu verbessern.
 
-# Playground
+Headings werden häufig als erstes Element innerhalb von
+[Sections](/04-components/structure/section/overview) verwendet.
 
-Verwende `<Heading />`, um eine Heading darzustellen.
+## Best Practices
 
-<LiveCodeEditor />
+Achte bei der Verwendung einer Heading darauf, dass ...
+
+- sie den Inhalt des folgenden Abschnitts eindeutig beschreibt.
+- sie kurz und sachlich formuliert ist.
+- die Hierarchie und Reihenfolge eine klare Seitenstruktur erkennen lässt (z. B.
+  keine Sprünge von `<h2>` zu `<h4>`).
+- pro Seite nur eine `<h1>` verwendet wird.
 
 ---
 
@@ -65,19 +58,14 @@ beibehalten.
 
 # Color
 
-Zusätzlich zu der Standard-Color, kann die Heading in **Light** und **Dark**
-dargestellt werden. Beide Colors eigenen sich, wenn die Standardfarbe auf
-farbigen oder dekorativen Hintergründen nicht gut funktioniert.
+Zusätzlich zur Standard-Color kann die Heading in **Light** und **Dark**
+dargestellt werden, wenn die Standard-Color auf farbigen oder dekorativen
+Hintergründen nicht gut funktioniert. Wann welche Color passt, beschreibt
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
-
-**Light:** Verwende die Light-Color bei dunklen Hintergründen mit einem
-HSL-Lightness-Wert unter 50.
-
-**Dark:** Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
-HSL-Lightness-Wert über 50.
 
 ---
 
@@ -85,17 +73,19 @@ HSL-Lightness-Wert über 50.
 
 ## ContextualHelp
 
-Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben
-(z. B. bei Fachbegriffen).
+Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben (z.
+B. bei Fachbegriffen).
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## Badge oder AlertBadge
 
 Verwende `<Badge />`, um wichtige Metainformationen zu einem Abschnitt
-hervorzuheben, oder eine `<AlertBadge/>`, um einen Status anzuzeigen.
+hervorzuheben, oder eine `<AlertBadge />`, um einen Status anzuzeigen.
 
 <LiveCodeEditor example="badge" editorCollapsed />
+
+---
 
 # Properties
 
