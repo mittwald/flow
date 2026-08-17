@@ -5,19 +5,20 @@ description:
   Syntax-Highlighting.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung vom CodeBlock darauf, dass ...
+Gib den anzuzeigenden Inhalt über das `code`-Property an und wähle mit
+`language` die Programmiersprache (siehe
+[unterstützte language imports](https://github.com/mittwald/flow/tree/main/packages/components/src/components/CodeEditor/languages/all.ts)),
+damit der Code das korrekte Syntax-Highlighting erhält.
 
-- er nur genutzt wird, wenn der Inhalt länger als eine Zeile ist.
-- bei langen Inhalten Zeilennummern verwendet werden, um die Orientierung zu
-  verbessern.
-- der Inhalt nur dann kopierbar ist, wenn er sinnvoll an anderer Stelle
-  weiterverwendet werden kann.
+<LiveCodeEditor />
 
-## Verwendung
+---
+
+# Verwendung
 
 Verwende den CodeBlock, um ...
 
@@ -26,15 +27,15 @@ Verwende den CodeBlock, um ...
 - dem User eine einfache Möglichkeit zu bieten, Code-Snippets zu kopieren.
 - umfangreiche Error-Logs übersichtlich anzuzeigen.
 
-# Playground
+## Best Practices
 
-Verwende `<CodeBlock />`, um einen CodeBlock anzuzeigen. Gib den anzuzeigenden
-Inhalt im `code` Property an. Nutze das `language` Property, um die
-Programmiersprache (siehe
-[unterstütze language imports](https://github.com/mittwald/flow/tree/main/packages/components/src/components/CodeEditor/languages/all.ts))
-zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
+Achte bei der Verwendung des CodeBlocks darauf, dass ...
 
-<LiveCodeEditor />
+- er nur genutzt wird, wenn der Inhalt länger als eine Zeile ist.
+- bei langen Inhalten Zeilennummern verwendet werden, um die Orientierung zu
+  verbessern.
+- der Inhalt nur dann kopierbar ist, wenn er sinnvoll an anderer Stelle
+  weiterverwendet werden kann.
 
 ---
 
@@ -73,6 +74,8 @@ Um den Inhalt des CodeBlocks frei gestalten zu können, gibt es die Möglichkeit
 anstatt des `code` Properties Children zu nutzen.
 
 <LiveCodeEditor example="children" editorCollapsed />
+
+---
 
 # Properties
 

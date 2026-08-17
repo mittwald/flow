@@ -3,45 +3,46 @@ component: InlineCode
 description: InlineCode hebt Code-Beispiele innerhalb eines Fließtextes hervor.
 ---
 
-# Grundlagen
+---
 
-InlineCode hebt Code oder codeähnliche Begriffe im Fließtext hervor. Dabei
-handelt es sich meist um Funktionsnamen, Variablen, Dateinamen oder Pfade.
+# Code-Beispiel
 
-## Best Practices
-
-Achte bei der Verwendung von InlineCode darauf, dass ...
-
-- er sparsam eingesetzt wird. Zu viele InlineCodes können einen Text unleserlich
-  machen.
-- er nur für kurze Beispiele verwendet wird. Bei längeren Code-Beispielen
-  empfiehlt sich der [CodeBlock](/04-components/content/code-block/overview).
-
-## Verwendung
-
-Verwende InlineCode, um ...
-
-- einzelne Code-Fragmente im Fließtext darzustellen.
-- Usern auf den ersten Blick zu zeigen: Hier handelt es sich um Code.
-
-# Playground
-
-Schließe das Code-Beispiel im Tag `<InlineCode />` ein, um es als InlineCode
-darzustellen.
+Schließe Code-Fragmente in `<InlineCode />` ein — meist innerhalb einer
+[Text](/04-components/content/text/overview)-Component.
 
 <LiveCodeEditor />
 
 ---
 
+# Verwendung
+
+Verwende InlineCode, um einzelne Code-Fragmente wie Funktionsnamen, Variablen,
+Dateinamen oder Pfade im Fließtext darzustellen.
+
+## Best Practices
+
+Achte bei der Verwendung von InlineCode darauf, dass ...
+
+- er sparsam eingesetzt wird, da zu viele InlineCodes einen Text unleserlich
+  machen.
+- er nur für kurze Beispiele verwendet wird — bei längeren Code-Beispielen
+  empfiehlt sich der [CodeBlock](/04-components/content/code-block/overview).
+
+---
+
 # Color
 
-Zusätzlich zur Standard-Color kann InlineCode in den Colors **Light** und
-**Dark** dargestellt werden. Nutze diese Varianten, wenn die Standard-Color auf
-farbigen oder dekorativen Hintergründen keinen ausreichenden Kontrast (mind.
-4,5:1) bietet.
+Zusätzlich zur Standard-Color kann InlineCode in **Light** und **Dark**
+dargestellt werden, wenn die Standard-Color auf farbigen oder dekorativen
+Hintergründen keinen ausreichenden Kontrast (mind. 4,5:1) bietet. Wann welche
+Color passt, beschreibt
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+---
 
 # Properties
 

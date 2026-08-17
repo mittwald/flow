@@ -3,7 +3,22 @@ component: Kbd
 description: Kbd stellt Tastaturkürzel dar und passt sich dem Betriebssystem an.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Übergib die Tasten als Array von `keys` (jeweils als String). Bei den Werten
+`mod`, `alt` und `shift` wird automatisch das passende Tastensymbol angezeigt –
+abhängig davon, ob der User macOS oder Windows verwendet.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende einen Kbd, um Keyboard-Shortcuts visuell klar und konsistent
+darzustellen.
 
 ## Best Practices
 
@@ -13,34 +28,6 @@ Achte bei der Verwendung eines Kbds darauf, dass ...
   werden.
 - der Kbd in direktem Bezug zu dem Inhalt oder der Aktion platziert wird, die
   durch den Shortcut ausgeführt werden kann.
-
-## Verwendung
-
-Verwende einen Kbd, um Keyboard-Shortcuts visuell klar und konsistent
-darzustellen.
-
-# Playground
-
-Die Component unterstützt ein Array von `keys`. Die einzelnen keys werden als
-Strings übergeben. Wenn dabei die Werte "mod", "alt" oder "shift" verwendet
-werden, wird automatisch das passende Tastensymbol angezeigt – abhängig davon,
-ob der User macOS oder Windows verwendet. Dadurch werden die jeweiligen
-Tastenbezeichnungen plattformspezifisch korrekt dargestellt, ohne dass
-zusätzliche Logik implementiert werden muss.
-
-<LiveCodeEditor />
-
----
-
-# Children
-
-Um flexiblere Shortcuts darzustellen, unterstützt die Component auch `children`.
-Hierbei ist darauf zu achten, dass Kbd-Components für die einzelnen Keys gesetzt
-werden müssen, um semantisch korrekte
-[kbd-HTML-Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd)
-zu erzeugen.
-
-<LiveCodeEditor editorCollapsed example="children" />
 
 ---
 
@@ -54,6 +41,18 @@ hingegen die Variante `soft` eingesetzt werden, um hervorzuheben, dass es sich
 um einen Keyboard-Shortcut handelt.
 
 <LiveCodeEditor editorCollapsed example="variants" />
+
+---
+
+# Children
+
+Um flexiblere Shortcuts darzustellen, unterstützt die Component auch `children`.
+Hierbei ist darauf zu achten, dass Kbd-Components für die einzelnen Keys gesetzt
+werden müssen, um semantisch korrekte
+[kbd-HTML-Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd)
+zu erzeugen.
+
+<LiveCodeEditor editorCollapsed example="children" />
 
 ---
 
