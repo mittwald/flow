@@ -33,13 +33,10 @@ export const TooltipLegendItem: FC<LegendItemLabelProps> = ({
   const { value, dataKey, unit, fill, name } = item;
 
   const formattedLabel = usePromise(
-    async (value, dataKey, index, unit, formatter, name) => {
-      if (!formatter) {
-        return `${name ?? ""} (${value ?? ""}${unit ? unit : ""})`;
-      }
-
-      return formatter(value, String(name), index, unit);
-    },
+    (value, dataKey, index, unit, formatter, name) =>
+      formatter
+        ? formatter(value, String(name), index, unit)
+        : `${name ?? ""} (${value ?? ""}${unit ? unit : ""})`,
     [value, dataKey, index, unit, formatter, name] as const,
   );
 
