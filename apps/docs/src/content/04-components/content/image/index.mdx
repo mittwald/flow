@@ -5,35 +5,9 @@ description:
   einbinden.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
-
-Achte bei der Verwendung der Image-Component darauf, dass ...
-
-- die eingebundenen Bilder die Benutzeroberfläche sinnvoll ergänzen, indem sie
-  zum Kontext und der allgemeinen Gestaltung passen.
-- Inhalt oder Zweck des Bildes mittels aussagekräftigem `alt`-Text beschrieben
-  wird. Rein dekorative Bilder bekommen ein leeres `alt`-Attribut (`alt=""`).
-- die Größenverhältnisse optimiert sind, um Ladezeiten und Performance zu
-  verbessern.
-- Auflösung und Seitenverhältnis der gewählten Bilder angenehm und konsistent
-  sind.
-- bei mangelndem Kontrast zum Hintergrund die Image-Component eine sichtbare
-  Border erhält.
-- nach Möglichkeit kein Text im Bild verwendet wird, da dieser von Screenreadern
-  nicht erfasst werden kann.
-
-## Verwendung
-
-Verwende die Image-Component, um ...
-
-- dekorative Bilder anzuzeigen, die die Benutzeroberfläche visuell aufwerten und
-  positive Emotionen bei den Usern auslösen können.
-- hilfreiche Bilder anzuzeigen, die den Kontext so unterstützen, dass Inhalte
-  schneller erfasst und besser verstanden werden.
-
-# Playground
+# Code-Beispiel
 
 In `<Image />` wird über die Property `src` die Bildquelle festgelegt. Mithilfe
 weiterer Properties wie `width` und `height` lässt sich dessen Größe individuell
@@ -43,14 +17,29 @@ anpassen.
 
 ---
 
-# Responsive Images
+# Verwendung
 
-Um Bilder in unterschiedlichen Auflösungen für verschiedene Bildschirmgrößen
-bereitzustellen, eignet sich das `srcSet`-Attribut. Damit lassen sich mehrere
-Varianten einer Bilddatei hinterlegen – sowohl in niedriger als auch in hoher
-Auflösung –, die je nach Pixeldichte des Endgeräts automatisch ausgewählt
-werden. Weitere Informationen dazu finden sich im folgenden Artikel:
-[Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#resolution_switching_same_size_different_resolutions:~:text=Resolution%20switching%3A%20Same%20size%2C%20different%20resolutions).
+Verwende die Image-Component, um ...
+
+- dekorative Bilder anzuzeigen, die die Benutzeroberfläche visuell aufwerten.
+- hilfreiche Bilder anzuzeigen, die den Kontext unterstützen, damit Inhalte
+  schneller erfasst werden.
+
+## Best Practices
+
+Achte bei der Verwendung der Image-Component darauf, dass ...
+
+- die eingebundenen Bilder zum Kontext und zur Gestaltung passen.
+- Inhalt oder Zweck über einen aussagekräftigen `alt`-Text beschrieben wird;
+  rein dekorative Bilder erhalten ein leeres `alt`-Attribut (`alt=""`).
+- die Größenverhältnisse für kurze Ladezeiten optimiert sind.
+- Auflösung und Seitenverhältnis konsistent gewählt sind.
+- bei geringem Kontrast zum Hintergrund eine sichtbare Border gesetzt wird.
+- möglichst kein Text im Bild verwendet wird, da Screenreader ihn nicht
+  erfassen.
+- für verschiedene Bildschirmgrößen das `srcSet`-Attribut genutzt wird, um je
+  nach Pixeldichte automatisch die passende Auflösung auszuwählen (siehe
+  [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#resolution_switching_same_size_different_resolutions:~:text=Resolution%20switching%3A%20Same%20size%2C%20different%20resolutions)).
 
 ---
 
@@ -72,6 +61,8 @@ größere Höhe oder Breite –, wird das Bild zentriert, und überstehende Bere
 außerhalb des festgelegten Verhältnisses werden ausgeblendet.
 
 <LiveCodeEditor example="aspectRatio" editorCollapsed />
+
+---
 
 # Properties
 

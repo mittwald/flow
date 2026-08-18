@@ -4,35 +4,40 @@ description:
   Ein AvatarStack zeigt mehrere Avatare in einer horizontalen Gruppierung.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Lege den `<AvatarStack />` um mehrere
+[Avatare](/04-components/content/avatar/overview), um sie zu gruppieren.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende einen AvatarStack, um mehrere Avatare kompakt und übersichtlich zu
+gruppieren (z. B. welche User an einem Projekt beteiligt sind).
 
 ## Best Practices
 
 Achte bei der Verwendung eines AvatarStacks darauf, dass ...
 
 - nicht zu viele [Avatare](/04-components/content/avatar/overview) gleichzeitig
-  angezeigt werden. Empfohlen ist eine maximale Anzahl von 5 Avataren. Danach
-  sollte die Property `totalCount` genutzt werden, um die verbleibende Anzahl
-  der Avatare darzustellen.
-- die Avatare bei Bedarf mehr Informationen durch Anklicken erhalten. Zum
-  Beispiel kann ein [Modal](/04-components/overlays/modal/overview) geöffnet
-  werden, das weitere Informationen zum Benutzerprofil enthält.
-- die angezeigten Avatare konsistent bleiben und die gleiche Darstellung
-  verwenden wie an anderen Stellen. Beispielsweise sollte das hochgeladene
-  Profilbild eines Users angezeigt werden und nicht ein generisches
-  User-[Icon](/04-components/content/icon/overview).
+  angezeigt werden — empfohlen sind höchstens 5, danach die Property
+  `totalCount` für die verbleibende Anzahl nutzen.
+- Avatare bei Bedarf per Klick mehr Informationen zeigen, z. B. ein
+  [Modal](/04-components/overlays/modal/overview) mit dem Benutzerprofil.
+- die Avatare konsistent zur Darstellung an anderen Stellen bleiben (z. B. das
+  hochgeladene Profilbild statt eines generischen
+  User-[Icons](/04-components/content/icon/overview)).
 
-## Verwendung
+---
 
-Verwende einen AvatarStack, um mehrere Avatare kompakt und übersichtlich zu
-gruppieren (z. B. welche User an einem Projekt beteiligt sind).
+# Sizes
 
-# Playground
-
-Lege den `<AvatarStack />` um mehrere
-[Avatare](/04-components/content/avatar/overview), um diese zu gruppieren.
-
-<LiveCodeEditor />
+<LiveCodeEditor example="sizes" editorCollapsed row />
 
 ---
 
@@ -57,13 +62,6 @@ Avataren beispielsweise weitere Informationen im
 <LiveCodeEditor example="clickable" editorCollapsed />
 
 ---
-
-# Sizes
-
-AvatarStacks sind in den Sizes **Extra Small, Small, Medium** und **Large**
-verfügbar.
-
-<LiveCodeEditor example="sizes" editorCollapsed row />
 
 # Properties
 

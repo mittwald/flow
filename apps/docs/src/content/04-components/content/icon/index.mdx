@@ -4,7 +4,31 @@ description:
   Icons sind semantische Symbole, die Inhalte und Funktionen visualisieren.
 ---
 
-# Grundlagen
+---
+
+# Code-Beispiel
+
+Für Flow kommen [Tabler Icons](https://tabler.io/icons) zum Einsatz; eine
+Auswahl mit festen Bedeutungen ist unten in der Icon-Bibliothek aufgelistet.
+Füge ein Icon über die Kombination aus „Icon“ und Icon-Namen ein — das Icon
+„Home“ z. B. als `<IconHome />`.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende Icons, um ...
+
+- visuelle Anker zu schaffen, die das Erfassen von Informationen erleichtern.
+- Interaktionen verständlicher zu machen. Beispiel: Im
+  [SearchField](/04-components/form-controls/search-field/overview) hilft das
+  Lupen-Icon dabei, die Suchfunktion intuitiv zu erfassen.
+- Oberflächen zu gestalten. Die visuelle Wirkung von Icons zeigt sich z. B.
+  besonders in Components wie
+  [AccentBox](/04-components/structure/accent-box/overview) oder
+  [IllustratedMessage](/04-components/content/illustrated-message/overview).
 
 ## Best Practices
 
@@ -16,36 +40,35 @@ Achte bei der Verwendung von Icons darauf, dass ...
   beispielsweise immer im Zusammenhang mit dem Kontext stehen, da es sonst nicht
   verstanden wird.
 - sie nicht zu viel eingesetzt werden, um kognitive Überforderung zu vermeiden.
-- nach Möglichkeit ein Icon aus der Icon-Bibliothek (s. Overview) verwendet
-  wird. Nur wenn kein passendes Icon vorhanden ist, sollte ein
+- nach Möglichkeit ein Icon aus der [Icon-Bibliothek](#icon-bibliothek)
+  verwendet wird. Nur wenn kein passendes Icon vorhanden ist, sollte ein
   [Tabler Icon](https://tabler.io/icons) oder ein eigenes Icon (SVG) genutzt
   werden.
 
-## Verwendung
+---
 
-Verwende Icons, um ...
+# Colors
 
-- visuelle Anker zu schaffen, die das Erfassen von Informationen erleichtern.
-- Interaktionen verständlicher zu machen. Beispiel: Im
-  [SearchField](/04-components/form-controls/search-field/overview) hilft das
-  Lupen-Icon dabei, die Suchfunktion intuitiv zu erfassen.
-- Oberflächen zu gestalten. Die visuelle Wirkung von Icons zeigt sich z. B.
-  besonders in Components wie
-  [AccentBox](/04-components/structure/accent-box/overview) oder
-  [IllustratedMessage](/04-components/content/illustrated-message/overview).
+Ohne weitere Angabe übernimmt ein Icon die Textfarbe seiner Umgebung. Über die
+`color`-Property lässt sich ein Icon gezielt einfärben. Dabei stehen Brand- und
+Status-Colors zur Verfügung; `neutral` setzt die Standard-Icon-Farbe.
 
-# Playground
+<LiveCodeEditor example="colors" editorCollapsed row />
 
-Für das Flow Design System kommen [Tabler Icons](https://tabler.io/icons) zum
-Einsatz. Eine Auswahl passender Icons wurde getroffen und mit festen Bedeutungen
-versehen. Alle relevanten Icons werden unten in der Icon-Bibliothek aufgelistet.
+Für beliebige Colors unterstützt die `color`-Property außerdem die Angabe eines
+HEX-Werts.
 
-Um ein Icon einzufügen, wird eine Kombination aus „Icon“ und dem jeweiligen
-„Icon-Namen“ in einem Tag verwendet. Zum Beispiel sieht der Tag für das Icon
-„Home“ so aus: `<IconHome />`. Eine Übersicht aller verfügbaren Icons und ihrer
-Namen ist in der Icon-Bibliothek zu finden.
+<LiveCodeEditor example="custom-color" editorCollapsed row />
 
-<LiveCodeEditor />
+---
+
+# Sizes
+
+- **s** für kleine Hinweise oder Components mit wenig Platz.
+- **m** als Standardgröße.
+- **l** vor allem für dekorative Zwecke.
+
+<LiveCodeEditor example="sizes" editorCollapsed row />
 
 ---
 
@@ -67,40 +90,6 @@ ebenfalls in der `<Icon>`-Component eingebunden werden, damit es korrekt
 dargestellt wird.
 
 <LiveCodeEditor example="svg" />
-
----
-
-# Sizes
-
-Icons sind in den Größen **s, m** und **l** verfügbar.
-
-<LiveCodeEditor example="sizes" editorCollapsed row />
-
----
-
-# Colors
-
-Ohne weitere Angabe übernimmt ein Icon die Textfarbe seiner Umgebung. Über die
-`color`-Property lässt sich ein Icon gezielt einfärben. Dabei stehen Brand- und
-Status-Colors zur Verfügung; `neutral` setzt die Standard-Icon-Farbe.
-
-<LiveCodeEditor example="colors" editorCollapsed row />
-
-Für beliebige Colors unterstützt die `color`-Property außerdem die Angabe eines
-HEX-Werts.
-
-<LiveCodeEditor example="custom-color" editorCollapsed row />
-
----
-
-# Kombiniere mit ...
-
-## Align
-
-Benutze die [Align](/04-components/structure/align/overview)-Component, um ein
-Icon neben einem Text zu platzieren.
-
-<LiveCodeEditor example="align" editorCollapsed />
 
 ---
 
@@ -131,6 +120,19 @@ jedoch oft nicht intuitiv erfassbar.
 Bestimmte Icons dienen der Anzeige des Status eines Elements.
 
 <IconLibrary category="status" />
+
+---
+
+# Kombiniere mit ...
+
+## Align
+
+Benutze die [Align](/04-components/structure/align/overview)-Component, um ein
+Icon neben einem Text zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />
+
+---
 
 # Properties
 
