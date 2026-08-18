@@ -57,8 +57,15 @@ export interface ListProps<T, TMeta = unknown>
    * @default false
    */
   infiniteScroll?: boolean;
+  /**
+   * Hides the pagination controls below the list.
+   *
+   * @default false
+   */
   hidePagination?: boolean;
+  /** The view rendered when a search or filter returns no results. */
   emptySearchResultView?: ReactNode;
+  /** The view rendered when the list contains no items. */
   emptyView?: ReactNode;
 }
 

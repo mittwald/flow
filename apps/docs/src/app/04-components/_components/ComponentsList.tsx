@@ -14,6 +14,7 @@ export interface ComponentLink {
 
 interface Props {
   components: ComponentLink[];
+  "aria-label"?: string;
 }
 
 export const ComponentsList: FC<Props> = (props) => {
@@ -23,6 +24,7 @@ export const ComponentsList: FC<Props> = (props) => {
 
   return (
     <List.List
+      aria-label={props["aria-label"]}
       getItemId={(component) => component.id}
       defaultViewMode="tiles"
       batchSize={components.length}

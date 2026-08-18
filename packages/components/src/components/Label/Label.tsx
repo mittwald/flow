@@ -18,7 +18,7 @@ export interface LabelProps
   optional?: boolean;
   /** Whether the label should be displayed as disabled. */
   isDisabled?: boolean;
-  /* @internal */
+  /** @internal */
   unstyled?: boolean;
 }
 

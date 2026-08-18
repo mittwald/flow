@@ -19,6 +19,7 @@ export interface CheckboxProps
       Omit<Aria.CheckboxProps, "children" | "ref" | "inputRef">
     >,
     FlowComponentProps<HTMLInputElement> {
+  /** The class name of the underlying input element. */
   inputClassName?: string;
 }
 
