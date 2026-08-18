@@ -21,6 +21,7 @@ export interface FileDropZoneProps
     PropsWithChildren,
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,
     Pick<Aria.DropZoneProps, "isDisabled"> {
+  /** Called with the dropped or selected files whenever the selection changes. */
   onChange?: FileInputOnChangeHandler;
   /** Whether the component is read only. */
   isReadOnly?: boolean;

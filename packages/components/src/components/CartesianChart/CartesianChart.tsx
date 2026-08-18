@@ -38,8 +38,10 @@ export interface CartesianChartProps<TData = ChartDataValue>
       "className" | "syncId" | "syncMethod"
     >,
     PropsWithChildren {
+  /** The data points rendered by the chart. */
   data?: TData[];
 
+  /** The height of the chart. */
   height?: string;
 
   /** View that is provided when data is empty/undefined */

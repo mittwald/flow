@@ -26,13 +26,41 @@ export interface CodeEditorProps
     Omit<ReactCodeMirrorProps, "theme" | "lang" | "basicSetup" | "readOnly">,
     CodeEditorSetup,
     FlowComponentProps {
+  /** The initial code of an uncontrolled editor. */
   defaultValue?: string;
+  /**
+   * Whether the code can be read but not edited.
+   *
+   * @default false
+   */
   isReadOnly?: boolean;
+  /**
+   * Whether the editor is displayed as invalid.
+   *
+   * @default false
+   */
   isInvalid?: boolean;
+  /** The elements class name. */
   className?: string;
+  /** The language the code is highlighted as. */
   language?: CodeEditorLanguage;
+  /**
+   * Whether a button to copy the code to the clipboard is shown.
+   *
+   * @default true
+   */
   copyable?: boolean;
+  /**
+   * Whether the field must be filled in. Only marks the editor as required for
+   * assistive technology — the editor does not validate itself.
+   *
+   * @default false
+   */
   isRequired?: boolean;
+  /**
+   * @internal Set by `<Field />` on every form field. The editor has no
+   * react-aria validation to forward it to and drops it.
+   */
   validationBehavior?: unknown;
 }
 

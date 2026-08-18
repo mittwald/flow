@@ -26,6 +26,7 @@ export interface MarkdownProps
   components?: Components;
   /** @internal */
   style?: CSSProperties;
+  /** A ref to the elements root. */
   ref?: Ref<HTMLDivElement>;
 }
 

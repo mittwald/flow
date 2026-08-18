@@ -33,6 +33,12 @@ export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
 export interface FormAutoResetOptions {
+  /**
+   * Whether the form is reset to its default values after the surrounding modal
+   * has closed.
+   *
+   * @default true
+   */
   onAfterModalClose?: boolean;
 }
 
@@ -49,10 +55,30 @@ export interface FormProps<F extends FieldValues>
     Omit<ComponentProps<"form">, "onSubmit">,
     PropsWithChildren,
     WithFormSubmitControllerProps {
+  /** The react-hook-form instance returned by `useForm()`. */
   form: UseFormReturn<F>;
+  /**
+   * Called with the validated form values when the form is submitted. Returning
+   * a promise keeps the submit button pending until it settles.
+   */
   onSubmit: FormOnSubmitHandler<F>;
+  /**
+   * The component rendered as the form element. Use it to render the form with
+   * a routers form component. Defaults to a plain `<form />`.
+   */
   formComponent?: FC<Omit<FormComponentType, "ref">>;
+  /**
+   * Whether all fields of the form can be read but not edited.
+   *
+   * @default false
+   */
   isReadOnly?: boolean;
+  /**
+   * When the form is reset to its default values. `true` resets it after the
+   * surrounding modal has closed, `false` never resets it.
+   *
+   * @default true
+   */
   autoReset?: FormAutoResetOptions | boolean;
 }
 

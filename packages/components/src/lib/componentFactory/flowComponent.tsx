@@ -29,6 +29,12 @@ type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
 export interface FlowComponentProps<R = HTMLDivElement>
   extends PropsWithTunnel, RefAttributes<R> {
+  /**
+   * A React element the component is wrapped with. The element is cloned and
+   * receives the component as its only child — useful to render the component
+   * inside a link, a tooltip trigger or any other wrapper without changing the
+   * surrounding markup.
+   */
   wrapWith?: ReactElement;
 }
 

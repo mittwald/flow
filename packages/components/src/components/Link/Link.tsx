@@ -34,7 +34,9 @@ export interface LinkProps
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** The color of the link. @default "default" */
   color?: "default" | AlphaColor;
+  /** Marks the link as the currently active one, e.g. in a navigation. */
   "aria-current"?: string;
+  /** The name of the slot the link is placed in. */
   slot?: string;
   /** The whiteSpace css value of the element. */
   whiteSpace?: CSSProperties["whiteSpace"];

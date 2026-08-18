@@ -50,10 +50,19 @@ export interface PasswordCreationFieldProps
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
     FlowComponentProps<HTMLInputElement> {
+  /** The password of a controlled field. */
   value?: string;
+  /** Called with the password and its validity whenever the password changes. */
   onValidationResult?: (result: { password: string; isValid: boolean }) => void;
+  /** The initial password of an uncontrolled field. */
   defaultValue?: string;
+  /** The placeholder shown while the field is empty. */
   placeholder?: string;
+  /**
+   * The policy the password is validated against.
+   *
+   * @default defaultPasswordCreationPolicy
+   */
   validationPolicy?: PolicyGenericDeclaration;
 }
 
