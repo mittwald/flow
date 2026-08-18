@@ -9,7 +9,7 @@ import {
   useOverlayController,
 } from "@mittwald/flow-react-components";
 import { IconAdjustments } from "@tabler/icons-react";
-import { useComponentGrouping } from "@/app/_lib/componentGrouping";
+import { useComponentGrouping } from "@/app/_lib/useComponentGrouping";
 
 const groupedKey = "grouped";
 

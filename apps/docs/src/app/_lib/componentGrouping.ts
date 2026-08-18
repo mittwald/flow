@@ -1,40 +1,18 @@
-"use client";
-import { useCallback, useSyncExternalStore } from "react";
-
 export type ComponentGrouping = "grouped" | "alphabetical";
 
-const componentGroupingStorageKey = "@mittwald/flow-docs/component-grouping";
+export const componentGroupingStorageKey =
+  "@mittwald/flow-docs/component-grouping";
 
-const getDefaultGrouping = (): ComponentGrouping => "grouped";
+export const defaultComponentGrouping: ComponentGrouping = "grouped";
 
-const listeners = new Set<() => void>();
+export const parseComponentGrouping = (
+  value: string | null | undefined,
+): ComponentGrouping =>
+  value === "alphabetical" ? "alphabetical" : defaultComponentGrouping;
 
-const subscribe = (onStoreChange: () => void) => {
-  listeners.add(onStoreChange);
-  window.addEventListener("storage", onStoreChange);
-
-  return () => {
-    listeners.delete(onStoreChange);
-    window.removeEventListener("storage", onStoreChange);
-  };
-};
-
-const getSnapshot = (): ComponentGrouping =>
-  localStorage.getItem(componentGroupingStorageKey) === "alphabetical"
-    ? "alphabetical"
-    : getDefaultGrouping();
-
-export const useComponentGrouping = () => {
-  const grouping = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getDefaultGrouping,
-  );
-
-  const setGrouping = useCallback((grouping: ComponentGrouping) => {
-    localStorage.setItem(componentGroupingStorageKey, grouping);
-    listeners.forEach((listener) => listener());
-  }, []);
-
-  return { grouping, setGrouping };
-};
+/**
+ * Both views are rendered, CSS picks one by this attribute. The script has to
+ * run before the first paint, otherwise the stored view flashes the default
+ * one.
+ */
+export const componentGroupingScript = `try{document.documentElement.dataset.componentGrouping=localStorage.getItem("${componentGroupingStorageKey}")==="alphabetical"?"alphabetical":"grouped"}catch(e){}`;

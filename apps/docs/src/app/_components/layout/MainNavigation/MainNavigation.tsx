@@ -26,8 +26,8 @@ import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
 import styles from "@/app/layout.module.scss";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
-import { useComponentGrouping } from "@/app/_lib/componentGrouping";
 import { ComponentGroupingMenu } from "@/app/_components/layout/MainNavigation/components/ComponentGroupingMenu";
+import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/ComponentGroupingView";
 
 const componentsPathSegment = "04-components";
 
@@ -121,8 +121,6 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 };
 
 const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
-  const { grouping } = useComponentGrouping();
-
   const entries = Object.entries(props.tree);
   const componentEntries = entries.filter(
     ([group]) => !integrationGroups.includes(group),
@@ -138,17 +136,20 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
           <Heading>Components</Heading>
           <ComponentGroupingMenu />
         </Header>
-        <Navigation aria-label="Components">
-          {grouping === "grouped" ? (
+        <ComponentGroupingView view="grouped">
+          <Navigation aria-label="Components">
             <NavigationEntries entries={componentEntries} />
-          ) : (
-            collectMdxFiles(componentEntries)
+          </Navigation>
+        </ComponentGroupingView>
+        <ComponentGroupingView view="alphabetical">
+          <Navigation aria-label="Components">
+            {collectMdxFiles(componentEntries)
               .sort((a, b) => a.getNavTitle().localeCompare(b.getNavTitle()))
               .map((treeItem) => (
                 <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
-              ))
-          )}
-        </Navigation>
+              ))}
+          </Navigation>
+        </ComponentGroupingView>
       </Section>
       <Section>
         <Heading>Integrations</Heading>
