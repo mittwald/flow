@@ -32,12 +32,18 @@ export interface PropsWithClassName {
 export type PropsWithElementType<
   T extends keyof HTMLElementTagNameMap = never,
 > = HTMLAttributes<HTMLElement> & {
+  /** The HTML element or React component rendered as the elements root. */
   elementType?: T | ExoticComponent;
 };
 
 export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
 
 export interface PropsWithContainerBreakpointSize {
+  /**
+   * The breakpoint at which the element switches to its compact layout.
+   * Evaluated as a container query against the surrounding container, not
+   * against the viewport.
+   */
   containerBreakpointSize?: ContainerBreakpointSize;
 }
 

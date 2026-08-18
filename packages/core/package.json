@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-core",
   "private": "true",
-  "version": "0.2.0-alpha.1026",
+  "version": "0.2.0-alpha.1034",
   "type": "module",
   "main": "src/index.ts",
   "files": [
@@ -9,10 +9,12 @@
   ],
   "dependencies": {
     "@types/invariant": "^2.2.37",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "rolldown": "^1.2.4"
   },
   "devDependencies": {
     "@vitest/browser-playwright": "^4.1.10",
+    "vite": "^8.2.1",
     "vite-plugin-node-polyfills": "^0.28.0",
     "vitest": "^4.1.10"
   },

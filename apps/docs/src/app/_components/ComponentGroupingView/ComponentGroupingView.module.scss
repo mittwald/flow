@@ -1,0 +1,16 @@
+.grouped,
+.alphabetical {
+  display: contents;
+}
+
+:global(:root[data-component-grouping="alphabetical"]) {
+  .grouped {
+    display: none;
+  }
+}
+
+:global(:root:not([data-component-grouping="alphabetical"])) {
+  .alphabetical {
+    display: none;
+  }
+}

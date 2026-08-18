@@ -64,7 +64,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "*.locale.json",
@@ -104,7 +104,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "bar.locale.json",
@@ -173,7 +173,12 @@ describe("vite i18n plugin", () => {
           },
         } as unknown as ViteDevServer,
         timestamp: Date.now(),
-        file: path.join(__dirname, "test", "locales", "foo.locale.json"),
+        file: path.join(
+          import.meta.dirname,
+          "test",
+          "locales",
+          "foo.locale.json",
+        ),
         read: vi.fn(),
         modules: [],
       } as HmrContext;

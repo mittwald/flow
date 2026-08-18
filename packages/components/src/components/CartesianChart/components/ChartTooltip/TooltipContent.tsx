@@ -36,13 +36,8 @@ export const TooltipContent: FC<TooltipContentProps> = (props) => {
   } = props;
 
   const formattedHeading = usePromise(
-    async (label, formatter) => {
-      if (!formatter) {
-        return String(label);
-      }
-
-      return formatter(label as never);
-    },
+    (label, formatter) =>
+      formatter ? formatter(label as never) : String(label),
     [label, headingFormatter] as const,
   );
 

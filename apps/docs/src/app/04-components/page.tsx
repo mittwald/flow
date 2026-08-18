@@ -1,15 +1,8 @@
-import {
-  Heading,
-  LayoutCard,
-  Section,
-  Text,
-} from "@mittwald/flow-react-components";
+import { Heading, LayoutCard, Text } from "@mittwald/flow-react-components";
 import type { Metadata } from "next";
-import { groupBy } from "remeda";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import styles from "@/app/layout.module.scss";
-import { ComponentsList } from "@/app/04-components/_components/ComponentsList";
-import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
+import { ComponentsOverview } from "@/app/04-components/_components/ComponentsOverview";
 
 const contentFolder = "src/content/04-components";
 
@@ -32,20 +25,11 @@ export default async function Page() {
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const groups = Object.entries(groupBy(components, (c) => c.group)).sort(
-    ([a], [b]) => a.localeCompare(b),
-  );
-
   return (
     <LayoutCard className={styles.mainContent}>
       <Heading level={1}>Components</Heading>
       <Text>Eine Übersicht aller Components des Flow Design Systems.</Text>
-      {groups.map(([group, groupComponents]) => (
-        <Section key={group}>
-          <Heading>{extractTextFromPath(group)}</Heading>
-          <ComponentsList components={groupComponents} />
-        </Section>
-      ))}
+      <ComponentsOverview components={components} />
     </LayoutCard>
   );
 }
