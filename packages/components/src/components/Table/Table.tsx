@@ -20,6 +20,7 @@ export type TableProps = Omit<
    * horizontally instead of shrinking its columns.
    */
   minWidth?: number | string;
+  /** The elements class name. */
   className?: string;
 };
 

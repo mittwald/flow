@@ -28,6 +28,7 @@ export interface MessageProps
     PropsWithElementType<"article" | "li"> {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
+  /** A custom background color of the message as a CSS color value. */
   color?: string;
 }
 

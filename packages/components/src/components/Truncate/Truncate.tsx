@@ -12,6 +12,7 @@ export interface TruncateProps
     PropsWithChildren,
     PropsWithClassName,
     Omit<ReactTruncateProps, "text" | "width"> {
+  /** The native tooltip shown on hover, e.g. to reveal the truncated text. */
   title?: string;
 }
 
