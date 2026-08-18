@@ -122,9 +122,8 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
     (treeItem) => treeItem.pathname === currentPathname,
   );
 
-  const defaultExpanded = groupExpansion
-    ? (groupExpansion.expandAll ?? containsActivePage)
-    : undefined;
+  const defaultExpanded =
+    groupExpansion?.getDefaultExpanded(containsActivePage);
 
   return (
     // `defaultExpanded` only applies on mount, so the group is remounted
