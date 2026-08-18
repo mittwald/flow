@@ -4,13 +4,17 @@ import TunnelProvider from "./components/TunnelProvider";
 import { expect, test, describe, vitest } from "vitest";
 import { render } from "vitest-browser-react";
 import React, {
+  StrictMode,
   Suspense,
   useState,
   type ComponentType,
   type FC,
   type PropsWithChildren,
 } from "react";
+import { renderToString } from "react-dom/server";
+import { hydrateRoot } from "react-dom/client";
 import { userEvent } from "vitest/browser";
+import { TunnelState } from "./TunnelState";
 
 test("Exit is empty when no entry is set", async () => {
   const dom = await render(
@@ -469,5 +473,70 @@ describe("Nested tunnel provider", () => {
     );
 
     expect(dom.getByTestId("exit")).toBeEmptyDOMElement();
+  });
+});
+
+// Regression guards for the SSR hydration mismatch. `TunnelExit` reads
+// `getEntries` during render, and React 19 may invoke a render more than once
+// before committing (StrictMode double-invoke, concurrent re-render). If that
+// read is not idempotent, the server-rendered HTML and the client's re-render
+// diverge on the tunnelled content — a hydration mismatch.
+describe("SSR hydration", () => {
+  test("getEntries is a pure read, idempotent across repeated render invocations", () => {
+    const state = new TunnelState();
+    state.setRenderPhaseChildren("default", "entry-1", 0, "Hello!");
+
+    // Read render-phase children (as the exit does during SSR / first render).
+    const first = state.getEntries("default", true);
+    const second = state.getEntries("default", true);
+
+    expect(first?.entries.map((entry) => entry.children)).toEqual(["Hello!"]);
+    // A second read in the same render pass must see the same render-phase
+    // children — not a consumed/emptied result.
+    expect(second).toEqual(first);
+  });
+
+  test("SSR-rendered tunnel content hydrates without a mismatch", async () => {
+    const App: FC = () => (
+      <StrictMode>
+        <TunnelProvider>
+          <TunnelEntry>Hello!</TunnelEntry>
+          <div data-testid="exit">
+            <TunnelExit />
+          </div>
+        </TunnelProvider>
+      </StrictMode>
+    );
+
+    // Server render: render-phase children put "Hello!" into the exit's HTML.
+    const serverHtml = renderToString(<App />);
+    expect(serverHtml).toContain("Hello!");
+
+    // Hydrate that exact markup on the client.
+    const container = document.createElement("div");
+    container.innerHTML = serverHtml;
+    document.body.appendChild(container);
+
+    const recoverableErrors: string[] = [];
+    const root = hydrateRoot(container, <App />, {
+      onRecoverableError: (error) =>
+        recoverableErrors.push(
+          error instanceof Error ? error.message : String(error),
+        ),
+    });
+
+    // Let hydration (and any recoverable-error reporting) settle.
+    await vitest.waitFor(() =>
+      expect(container.querySelector('[data-testid="exit"]')).toHaveTextContent(
+        "Hello!",
+      ),
+    );
+
+    expect(
+      recoverableErrors.filter((message) => /hydrat/i.test(message)),
+    ).toEqual([]);
+
+    root.unmount();
+    container.remove();
   });
 });

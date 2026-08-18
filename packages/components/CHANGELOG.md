@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1030](https://github.com/mittwald/flow/compare/0.2.0-alpha.1029...0.2.0-alpha.1030) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1029](https://github.com/mittwald/flow/compare/0.2.0-alpha.1028...0.2.0-alpha.1029) (2026-08-18)
+
+### Bug Fixes
+
+* **CartesianChart:** render tooltip content without suspending on first hover ([#2848](https://github.com/mittwald/flow/issues/2848)) ([1ff1804](https://github.com/mittwald/flow/commit/1ff180417831b20eb9ca9d4f393cefbcfe7314f5))
+
+# [0.2.0-alpha.1028](https://github.com/mittwald/flow/compare/0.2.0-alpha.1027...0.2.0-alpha.1028) (2026-08-17)
+
+### Features
+
+* **MarkdownEditor:** support custom toolbar tools ([#2781](https://github.com/mittwald/flow/issues/2781)) ([c562ec1](https://github.com/mittwald/flow/commit/c562ec12df11cd439eee0a04d240dcb3ea2412c6))
+
+# [0.2.0-alpha.1027](https://github.com/mittwald/flow/compare/0.2.0-alpha.1026...0.2.0-alpha.1027) (2026-08-17)
+
+### Bug Fixes
+
+* **Autocomplete:** autocomplete popover is not visible in modals ([#2847](https://github.com/mittwald/flow/issues/2847)) ([e8fc3e2](https://github.com/mittwald/flow/commit/e8fc3e2adfc60baa1563969c2d0a064e7af5e24d))
+
+# [0.2.0-alpha.1026](https://github.com/mittwald/flow/compare/0.2.0-alpha.1025...0.2.0-alpha.1026) (2026-08-12)
+
+### Features
+
+* **Link:** support Button in Link ([#2828](https://github.com/mittwald/flow/issues/2828)) ([63505ed](https://github.com/mittwald/flow/commit/63505ed9321bcb4c5f0971e512bd20b095be942a))
+
+# [0.2.0-alpha.1025](https://github.com/mittwald/flow/compare/0.2.0-alpha.1024...0.2.0-alpha.1025) (2026-08-12)
+
+### Bug Fixes
+
+* **SearchField:** hide input outline ([#2832](https://github.com/mittwald/flow/issues/2832)) ([1433d51](https://github.com/mittwald/flow/commit/1433d51876aa48cb1052661171fa0d73836d089f))
+
+# [0.2.0-alpha.1024](https://github.com/mittwald/flow/compare/0.2.0-alpha.1023...0.2.0-alpha.1024) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1023](https://github.com/mittwald/flow/compare/0.2.0-alpha.1022...0.2.0-alpha.1023) (2026-08-12)
+
+### Bug Fixes
+
+* **Autocomplete:** prevent the options popover from collapsing ([#2820](https://github.com/mittwald/flow/issues/2820)) ([8c2ec64](https://github.com/mittwald/flow/commit/8c2ec64045f4b954a0d0662197022bf5553eaa73))
+
+# [0.2.0-alpha.1022](https://github.com/mittwald/flow/compare/0.2.0-alpha.1021...0.2.0-alpha.1022) (2026-08-11)
+
+### Bug Fixes
+
+* **List:** use the item's loadingView for suspended items ([#2812](https://github.com/mittwald/flow/issues/2812)) ([92e4b32](https://github.com/mittwald/flow/commit/92e4b327eb445525e8e76ab2e318161df6e9480d))
+
+# [0.2.0-alpha.1021](https://github.com/mittwald/flow/compare/0.2.0-alpha.1020...0.2.0-alpha.1021) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1020](https://github.com/mittwald/flow/compare/0.2.0-alpha.1019...0.2.0-alpha.1020) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.1019](https://github.com/mittwald/flow/compare/0.2.0-alpha.1018...0.2.0-alpha.1019) (2026-08-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

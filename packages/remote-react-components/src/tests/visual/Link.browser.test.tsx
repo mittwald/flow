@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -19,11 +20,7 @@ test.each(testEnvironments)(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Flex gap="s">
                 <Link color={color}>{firstLetterToUppercase(color)}</Link>
                 <Link color={color} inline>
@@ -76,5 +73,32 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Link edge cases");
+  },
+);
+
+test.each(testEnvironments)(
+  "Link with Button (%s)",
+  async ({ testScreenshot, render, components: { Link, Flex, Button } }) => {
+    await render(
+      <Flex gap="m" direction="column">
+        <Link target="_blank">
+          <Button>External Link</Button>
+        </Link>
+        <Link size="s" download>
+          <Button>Small & Download</Button>
+        </Link>
+        <Link>
+          <Button color="accent">Button Color</Button>
+        </Link>
+        <Link color="dark">
+          <Button>Link Color</Button>
+        </Link>
+        <Link isDisabled>
+          <Button>Disabled</Button>
+        </Link>
+      </Flex>,
+    );
+
+    await testScreenshot("Link with Button");
   },
 );

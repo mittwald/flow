@@ -308,10 +308,12 @@ Bereich scrollt.
 Während die Daten initial geladen werden, zeigt die List eine Loading View aus
 Skeleton-Platzhaltern an. Ohne weitere Angabe wird ein generisches Skeleton
 verwendet. Über das `loadingView`-Property eines `<List.Item />` – oder eines
-`<TableCell />` in der Tabellenansicht – lässt sich diese Ansicht anpassen.
-Gestalte sie mit [Skeleton](/04-components/content/skeleton/overview) und
-`SkeletonText` so, dass sie dem Inhalt in Aufbau und Größe nahekommt, damit der
-Übergang ohne Layout-Sprung wirkt.
+`<TableCell />` in der Tabellenansicht – lässt sich diese Ansicht anpassen. Sie
+gilt in allen Ansichten (List, Tiles, Table) und auch für einzelne Items, die
+nach dem initialen Laden noch suspenden – etwa weil ihr Inhalt eigene Daten
+nachlädt. Gestalte sie mit [Skeleton](/04-components/content/skeleton/overview)
+und `SkeletonText` so, dass sie dem Inhalt in Aufbau und Größe nahekommt, damit
+der Übergang ohne Layout-Sprung wirkt.
 
 <LiveCodeEditor example="loadingView" editorCollapsed stretch />
 

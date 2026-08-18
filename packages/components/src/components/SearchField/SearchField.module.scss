@@ -62,7 +62,8 @@
       color: var(--form-control--placeholder-color--default);
     }
 
-    &[data-focused] {
+    &[data-focused],
+    &:focus-visible {
       outline: none;
     }
   }

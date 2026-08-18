@@ -92,7 +92,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     fieldProps,
   } = useFieldComponent(props, "Autocomplete");
 
-  const rootClassName = clsx(fieldProps.className, className);
+  const rootClassName = clsx(
+    styles.autocomplete,
+    fieldProps.className,
+    className,
+  );
 
   const propsContext: PropsContext = {
     SearchField: inputProps,
@@ -126,7 +130,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
                 {children}
                 <Options
                   onAction={handleOptionAction}
-                  triggerRef={inputRef}
+                  triggerRef={container}
                   controller={optionsOverlayController}
                   renderEmptyState={renderEmptyState}
                   isNonModal

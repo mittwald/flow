@@ -18,8 +18,14 @@ import {
   modifyValueByType,
 } from "@/components/MarkdownEditor/lib/modifyValueByType";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export type MarkdownEditorMode = "editor" | "preview";
+
+const toolbarActionsTunnel = {
+  id: "toolbarActions",
+  component: "MarkdownEditor",
+} as const;
 
 export interface MarkdownEditorProps
   extends TextAreaProps, Pick<MarkdownProps, "headingOffset"> {
@@ -49,12 +55,35 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   const inputRef = useObjectRef(ref);
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
+  const toolbarActionsDisabled = isDisabled || mode === "preview";
 
   const rootClassName = clsx(
     styles.markdownEditor,
     styles[`mode-${mode}`],
     className,
   );
+
+  const toolbarActionsPropsContext: PropsContext = {
+    Button: {
+      tunnel: toolbarActionsTunnel,
+      size: "s",
+      variant: "plain",
+      color: "dark",
+      isDisabled: toolbarActionsDisabled,
+    },
+    ContextMenuTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+    ModalTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+    PopoverTrigger: {
+      tunnel: toolbarActionsTunnel,
+      Button: { tunnel: null },
+    },
+  };
 
   const handleKeyDown: KeyboardEventHandler = (event) => {
     if (event.key !== "Enter") {
@@ -112,24 +141,29 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
         onChange={onChange}
         onKeyDown={handleKeyDown}
       >
-        {mode === "preview" && (
-          <MarkdownComponent
-            headingOffset={headingOffset}
-            className={styles.markdown}
-            style={{
-              height: inputRef.current?.offsetHeight,
-            }}
-          >
-            {value}
-          </MarkdownComponent>
-        )}
-        {children}
-        <Toolbar
-          currentMode={mode}
-          isDisabled={isDisabled}
-          onModeChange={setMode}
-          onToolPressed={handleToolButtonPressed}
-        />
+        <PropsContextProvider
+          props={toolbarActionsPropsContext}
+          dependencies={[toolbarActionsDisabled]}
+        >
+          {children}
+          {mode === "preview" && (
+            <MarkdownComponent
+              headingOffset={headingOffset}
+              className={styles.markdown}
+              style={{
+                height: inputRef.current?.offsetHeight,
+              }}
+            >
+              {value}
+            </MarkdownComponent>
+          )}
+          <Toolbar
+            currentMode={mode}
+            isDisabled={isDisabled}
+            onModeChange={setMode}
+            onToolPressed={handleToolButtonPressed}
+          />
+        </PropsContextProvider>
       </TextArea>
     </div>
   );

@@ -13,7 +13,7 @@ import { parseReportedEvent, type ReportedEvent } from "@/events/remoteEvents";
 import { getWithMergedHostConfig } from "@/ext-bridge/getWithMergedHostConfig";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
-import { type HostConfig } from "@mittwald/flow-core";
+import type { HostConfig } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
 

@@ -1,14 +1,14 @@
-import { parseTsgoOutput } from "./tsgoCheckerPlugin";
+import { parseTypescriptOutput } from "./typescriptCheckerPlugin";
 import { describe, expect, it } from "vitest";
 
-describe("parseTsgoOutput", () => {
-  it("parses standard tsgo diagnostics and resolves paths against root", () => {
+describe("parseTypescriptOutput", () => {
+  it("parses standard typescript diagnostics and resolves paths against root", () => {
     const output = [
       "src/components/AccentBox/AccentBox.tsx(12,5): error TS2322: Type 'string' is not assignable to type 'number'.",
       "src/lib/foo.ts(3,10): error TS2551: Property 'toFixed' does not exist on type 'string'. Did you mean 'fixed'?",
     ].join("\n");
 
-    const result = parseTsgoOutput(output, "/repo/packages/components");
+    const result = parseTypescriptOutput(output, "/repo/packages/components");
 
     expect(result).toEqual([
       {
@@ -38,14 +38,14 @@ describe("parseTsgoOutput", () => {
       "Watching for file changes.",
     ].join("\n");
 
-    const result = parseTsgoOutput(output, "/repo");
+    const result = parseTypescriptOutput(output, "/repo");
 
     expect(result).toHaveLength(1);
     expect(result[0]?.code).toBe("TS1005");
   });
 
   it("returns an empty array when there are no errors", () => {
-    expect(parseTsgoOutput("", "/repo")).toEqual([]);
-    expect(parseTsgoOutput("\n\n", "/repo")).toEqual([]);
+    expect(parseTypescriptOutput("", "/repo")).toEqual([]);
+    expect(parseTypescriptOutput("\n\n", "/repo")).toEqual([]);
   });
 });

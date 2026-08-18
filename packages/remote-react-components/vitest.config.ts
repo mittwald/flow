@@ -31,7 +31,11 @@ export default mergeConfig(
             ...vitestBrowserTestConfig,
             name: "visual",
             include: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],
-            setupFiles: "./dev/vitest/setupBrowser.ts",
+            // setupVisualTheme renders one of the two browsers in dark theme.
+            setupFiles: [
+              "./dev/vitest/setupBrowser.ts",
+              "./dev/vitest/setupVisualTheme.ts",
+            ],
             browser: {
               ...vitestBrowserTestConfig.browser,
               // Failure screenshots land in src/tests/visual/__screenshots__ —

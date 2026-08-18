@@ -1,8 +1,8 @@
 import type {
   ExtBridgeConfigInput,
   ExtBridgeConnectionApi,
+  HostConfig,
 } from "@mittwald/ext-bridge";
-import type { HostConfig } from "@mittwald/flow-core";
 import type { ReportedEvent } from "@/events/remoteEvents";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
