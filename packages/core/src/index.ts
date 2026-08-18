@@ -1,2 +1,2 @@
-export * from "./viteBannerPlugin";
+export * from "./preserveUseClientBanner";
 export * from "./vitestBrowserTestConfig";

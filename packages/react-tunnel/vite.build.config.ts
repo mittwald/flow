@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from "vite";
-import { viteBannerPlugin } from "../core";
+import { preserveUseClientBanner } from "../core";
 import dts from "unplugin-dts/vite";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
@@ -7,9 +7,6 @@ import { externalizeDeps } from "vite-plugin-externalize-deps";
 export default defineConfig(
   mergeConfig(baseConfig, {
     plugins: [
-      viteBannerPlugin((filename) =>
-        filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
-      ),
       externalizeDeps(),
       dts({
         include: ["src"],
@@ -23,6 +20,11 @@ export default defineConfig(
           index: "./src/index.ts",
         },
         formats: ["es"],
+      },
+      rolldownOptions: {
+        output: {
+          postBanner: preserveUseClientBanner,
+        },
       },
     },
   }),

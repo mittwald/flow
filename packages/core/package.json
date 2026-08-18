@@ -9,7 +9,8 @@
   ],
   "dependencies": {
     "@types/invariant": "^2.2.37",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "rolldown": "^1.2.4"
   },
   "devDependencies": {
     "@vitest/browser-playwright": "^4.1.10",
