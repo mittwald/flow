@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1030](https://github.com/mittwald/flow/compare/0.2.0-alpha.1029...0.2.0-alpha.1030) (2026-08-18)
+
+### Features
+
+* **docs:** allow switching off component grouping ([#2843](https://github.com/mittwald/flow/issues/2843)) ([81eec80](https://github.com/mittwald/flow/commit/81eec800b19b56220c48925c9408bbf8cde96f53))
+
+# [0.2.0-alpha.1029](https://github.com/mittwald/flow/compare/0.2.0-alpha.1028...0.2.0-alpha.1029) (2026-08-18)
+
+### Bug Fixes
+
+* **CartesianChart:** render tooltip content without suspending on first hover ([#2848](https://github.com/mittwald/flow/issues/2848)) ([1ff1804](https://github.com/mittwald/flow/commit/1ff180417831b20eb9ca9d4f393cefbcfe7314f5))
+
 # [0.2.0-alpha.1028](https://github.com/mittwald/flow/compare/0.2.0-alpha.1027...0.2.0-alpha.1028) (2026-08-17)
 
 ### Features
