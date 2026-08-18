@@ -1,7 +1,7 @@
 import defaultConfig from "./vite.config";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
+import { vitestBrowserTestConfig } from "../core";
 
 export default mergeConfig(
   defaultConfig,
