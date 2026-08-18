@@ -16,6 +16,12 @@ export interface NavigationGroupProps
     PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps<HTMLElement> {
   collapsable?: boolean;
+  /**
+   * Whether a `collapsable` group is initially expanded.
+   *
+   * @default true
+   */
+  defaultExpanded?: boolean;
 }
 
 /** @flr-generate all */
@@ -24,6 +30,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
     children,
     className,
     collapsable,
+    defaultExpanded = true,
     "aria-label": ariaLabel,
     ...rest
   } = props;
@@ -50,7 +57,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   };
 
   const collapsableUi = (
-    <Accordion defaultExpanded className={rootClassName}>
+    <Accordion defaultExpanded={defaultExpanded} className={rootClassName}>
       {children}
       <Content>
         <LinkListTunnelExit id="groupLinks" component="NavigationGroup" />
