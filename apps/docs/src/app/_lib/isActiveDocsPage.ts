@@ -1,7 +1,4 @@
-/**
- * Component pages have a sub page as their last path segment (e.g.
- * `/overview`), so the current pathname is compared without it.
- */
+/** Component pages compare without their sub page segment (e.g. `/overview`). */
 export const isActiveDocsPage = (
   pathname: string,
   currentPathname: string,

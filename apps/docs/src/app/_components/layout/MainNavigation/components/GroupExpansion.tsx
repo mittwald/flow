@@ -3,10 +3,7 @@ import type { FC, PropsWithChildren } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 
 interface GroupExpansionState {
-  /**
-   * `null` until the user toggles: groups then follow the active page instead
-   * of a global expanded state.
-   */
+  /** `null` until the user toggles — groups then follow the active page. */
   expandAll: boolean | null;
   /** Changes on every toggle, so groups re-apply the default they already had. */
   nonce: number;
@@ -20,10 +17,6 @@ const groupExpansionContext = createContext<GroupExpansion | undefined>(
   undefined,
 );
 
-/**
- * Manages the expanded/collapsed default of the navigation groups it wraps.
- * Groups outside a provider keep the `NavigationGroup` default (expanded).
- */
 export const GroupExpansionProvider: FC<PropsWithChildren> = (props) => {
   const [state, setState] = useState<GroupExpansionState>({
     expandAll: null,

@@ -9,8 +9,8 @@ export const GroupExpansionButton: FC = () => {
   const groupExpansion = useGroupExpansion();
   const { grouping } = useComponentGrouping();
 
-  // A Section header tunnels its buttons out of this component's DOM position,
-  // so the alphabetical view can't hide the button with CSS.
+  // A Section header tunnels its buttons out of this DOM position, so the
+  // alphabetical view can't hide the button with CSS.
   if (!groupExpansion || grouping !== "grouped") {
     return null;
   }
