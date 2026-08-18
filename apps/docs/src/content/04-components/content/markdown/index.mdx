@@ -3,49 +3,44 @@ component: Markdown
 description: Die Markdown Component rendert Texteingaben im Markdown-Format.
 ---
 
-# Grundlagen
+---
 
-Markdown ist besonders nützlich in Situationen, in denen Texteingaben von Usern
-geliefert werden. Die Ausgabe wird als HTML gerendert, jedoch ohne explizite
-Kontrolle über semantische Elemente wie z. B. `<p>` oder `<h1>`. Für mehr
-Kontrolle über das Layout sollte [Text](/04-components/content/text/overview)
-verwendet werden.
+# Code-Beispiel
 
-## Best Practices
-
-Achte bei der Verwendung von Markdown darauf, dass sie hauptsächlich für
-dynamische oder nutzergenerierte Texteingaben (z. B. im
-[Chat](/04-components/chat/chat/overview)) genutzt wird.
-
-## Verwendung
-
-Verwende Markdown, um Texte im Markdown-Format korrekt darzustellen. Dieses
-Format wird z. B. häufig von Usern in Kommentarfunktionen oder Chats genutzt.
-
-# Playground
-
-Um eine Texteingabe als Markdown zu rendern, schließe sie mit dem
-`<Markdown />`-Tag ein.
+Schließe eine Texteingabe mit `<Markdown />` ein, um sie im Markdown-Format zu
+rendern.
 
 <LiveCodeEditor />
 
 ---
 
+# Verwendung
+
+Verwende Markdown, um dynamische oder nutzergenerierte Texteingaben im
+Markdown-Format darzustellen (z. B. in Kommentarfunktionen oder im
+[Chat](/04-components/chat/chat/overview)).
+
+## Best Practices
+
+Achte bei der Verwendung von Markdown darauf, dass ...
+
+- sie vor allem für dynamische oder nutzergenerierte Texteingaben genutzt wird.
+- für mehr Kontrolle über Layout und semantische Elemente (z. B. `<p>` oder
+  `<h1>`) stattdessen [Text](/04-components/content/text/overview) verwendet
+  wird, da Markdown als HTML ohne explizite Kontrolle gerendert wird.
+
+---
+
 # Color
 
-Zusätzlich zur Standard-Color kann Markdown auch in den Colors **Light** und
-**Dark** dargestellt werden. Beide Colors sind Alternativen zur Standard-Color,
-falls diese nicht auf farbigen oder dekorativen Hintergründen funktioniert.
+Zusätzlich zur Standard-Color kann Markdown in **Light** und **Dark**
+dargestellt werden, wenn die Standard-Color auf farbigen oder dekorativen
+Hintergründen nicht gut funktioniert. Wann welche Color passt, beschreibt
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-**Light:** Verwende die Light-Color bei dunklen Hintergründen mit einem HSL
-Lightness-Wert von weniger als 50.
-
-**Dark:** Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
-HSL Lightness-Wert von größer als 50.
 
 ---
 
@@ -95,6 +90,8 @@ Das Property `headingOffset` verschiebt alle Überschriften um den angegebenen
 Offset.
 
 <LiveCodeEditor example="headingOffset" editorCollapsed />
+
+---
 
 # Properties
 

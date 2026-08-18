@@ -5,21 +5,26 @@ description:
   einfärben.
 ---
 
-# Grundlagen
+---
 
-## Best Practices
+# Code-Beispiel
 
-Achte bei der Verwendung der Color-Component darauf, dass ...
+Umschließe ein Element mit `<Color />` und vergib die gewünschte Farbe über die
+`color`-Property.
 
-- sie sparsam und nur in Ausnahmefällen eingesetzt wird.
-- die eingefärbte Schrift stets einen ausreichenden Kontrast zum Hintergrund
-  aufweist.
-- nur kurze Abschnitte (1-3 Wörter) in
-  [Texten](/04-components/content/text/overview) oder
-  [Headings](/04-components/content/heading/overview) hervorgehoben werden. Die
-  markierten Wörter sollten den Inhalt bzw. die Aussage gezielt betonen.
+<Alert>
+  <Heading>Nutze die Color-Component mit Bedacht</Heading>
+  <Content>
+    Die Color-Component hebt den umschlossenen Bereich deutlich vom übrigen
+    Designsystem ab und sollte daher nur in Ausnahmefällen eingesetzt werden.
+  </Content>
+</Alert>
 
-## Verwendung
+<LiveCodeEditor />
+
+---
+
+# Verwendung
 
 Verwende die Color-Component, um ...
 
@@ -31,20 +36,17 @@ Verwende die Color-Component, um ...
   [Texten](/04-components/content/text/overview) auf Landing-Pages gezielt zu
   betonen.
 
-# Playground
+## Best Practices
 
-<Alert>
-  <Heading>Nutze die Color-Component mit Bedacht</Heading>
-  <Content>
-    Die Color-Component hebt den umschlossenen Bereich deutlich vom übrigen
-    Designsystem ab und sollte daher nur in Ausnahmefällen eingesetzt werden.
-  </Content>
-</Alert>
+Achte bei der Verwendung der Color-Component darauf, dass ...
 
-Um ein Element einzufärben, wird es mit `<Color />` umschlossen. Die gewünschte
-Farbe wird über die `color`-Property vergeben.
-
-<LiveCodeEditor />
+- sie sparsam und nur in Ausnahmefällen eingesetzt wird.
+- die eingefärbte Schrift stets einen ausreichenden Kontrast zum Hintergrund
+  aufweist.
+- nur kurze Abschnitte (1–3 Wörter) in
+  [Texten](/04-components/content/text/overview) oder
+  [Headings](/04-components/content/heading/overview) hervorgehoben werden, um
+  den Inhalt bzw. die Aussage gezielt zu betonen.
 
 ---
 
@@ -106,6 +108,8 @@ Dabei ist besonders wichtig, dass die eingefärbte Schrift einen ausreichenden
 Kontrast zum Hintergrund aufweist.
 
 <LiveCodeEditor example="accent-box" editorCollapsed />
+
+---
 
 # Properties
 

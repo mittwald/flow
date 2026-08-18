@@ -5,17 +5,27 @@ description:
   nicht angezeigt werden kann.
 ---
 
-# Grundlagen
+---
 
-Die IllustratedMessage dient als Platzhalter, wenn der eigentliche Inhalt nicht
-angezeigt werden kann. Sie bietet eine Kombination aus
-[Icon](/04-components/content/icon/overview), einer
-[Heading](/04-components/content/heading/overview) und einer unterstützenden
-Beschreibung. Optional kann sie durch interaktive Elemente wie
-[Buttons](/04-components/actions/button/overview) oder
-[Links](/04-components/navigation/link/overview) ergänzt werden. Ziel ist es,
-leere Seiten visuell aufzulockern und dem User kontextbezogene Hinweise zu
-geben, wie er fortfahren kann.
+# Code-Beispiel
+
+Eine `<IllustratedMessage />` besteht in der Regel aus `<Icon />`, `<Heading />`
+und `<Text />` und kann durch einen `<Button />` oder `<Link />` ergänzt werden.
+
+<LiveCodeEditor />
+
+---
+
+# Verwendung
+
+Verwende eine IllustratedMessage, um ...
+
+- dem User visuelles und inhaltliches Feedback zu geben, wenn keine Daten
+  vorhanden sind.
+- Vorschläge oder Handlungsoptionen aufzuzeigen, die dem User helfen, Inhalte zu
+  erstellen oder zu entdecken.
+- gesperrte Bereiche freundlich und verständlich zu gestalten, um zum Beispiel
+  Wartezeiten zu überbrücken.
 
 ## Best Practices
 
@@ -28,25 +38,6 @@ Achte bei der Verwendung einer IllustratedMessage darauf, dass ...
 - Handlungsaufforderungen mit interaktiven Elementen wie
   [Buttons](/04-components/actions/button/overview) oder
   [Links](/04-components/navigation/link/overview) unterstützt werden.
-
-## Verwendung
-
-Verwende eine IllustratedMessage, um ...
-
-- dem User visuelles und inhaltliches Feedback zu geben, wenn keine Daten
-  vorhanden sind.
-- Vorschläge oder Handlungsoptionen aufzuzeigen, die dem User helfen, Inhalte zu
-  erstellen oder zu entdecken.
-- gesperrte Bereiche freundlich und verständlich zu gestalten, um zum Beispiel
-  Wartezeiten zu überbrücken.
-
-# Playground
-
-Verwende `<IllustratedMessage />`, um einen IllustratedMessage darzustellen. Sie
-besteht in der Regel aus `<Icon />`, `<Heading />` und einem `<Text />`. Sie
-kann durch einen `<Button />` oder einen `<Link />` ergänzt werden.
-
-<LiveCodeEditor />
 
 ---
 
@@ -65,20 +56,14 @@ fehlende Inhalte visuell besser aus.
 
 ## Light und Dark
 
-Zusätzlich zu den Standard-Colors, kann die IllustratedMessage in **Light** und
-**Dark** dargestellt werden. Beide Colors sind Alternativen zu den herkömmlichen
-Farben, falls diese nicht auf farbigen oder dekorativen Hintergründen
-funktionieren.
+Zusätzlich zu den Standard-Colors kann die IllustratedMessage in **Light** und
+**Dark** dargestellt werden, wenn die Standard-Colors auf farbigen oder
+dekorativen Hintergründen nicht gut funktionieren. Wann welche Color passt,
+beschreibt [Color](/02-foundations/01-design/02-colors#light-und-dark-color).
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
-Lightness-Wert von weniger als 50.
-
-**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
-HSL Lightness-Wert von größer als 50.
 
 ---
 
@@ -91,6 +76,8 @@ einer [ActionGroup](/04-components/actions/action-group/overview) kombiniert
 werden.
 
 <LiveCodeEditor example="actionGroup" />
+
+---
 
 # Properties
 
