@@ -28,6 +28,11 @@ import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/C
 import type { SortableEntry } from "@/app/_lib/compareEntries";
 import { compareEntries } from "@/app/_lib/compareEntries";
 import { isIntegrationGroup } from "@/app/_lib/integrationGroups";
+import {
+  GroupExpansionProvider,
+  useGroupExpansion,
+} from "@/app/_components/layout/MainNavigation/components/GroupExpansion";
+import { GroupExpansionButton } from "@/app/_components/layout/MainNavigation/components/GroupExpansionButton";
 
 const componentsPathSegment = "04-components";
 
@@ -110,9 +115,25 @@ const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
   const { tree, group } = props;
+  const groupExpansion = useGroupExpansion();
+  const currentPathname = usePathname();
+
+  const containsActivePage = collectMdxFiles(Object.entries(tree)).some(
+    (treeItem) => treeItem.pathname === currentPathname,
+  );
+
+  const defaultExpanded = groupExpansion
+    ? (groupExpansion.expandAll ?? containsActivePage)
+    : undefined;
 
   return (
-    <NavigationGroup collapsable>
+    // `defaultExpanded` only applies on mount, so the group is remounted
+    // whenever the default it should follow changes.
+    <NavigationGroup
+      key={`${groupExpansion?.nonce}-${defaultExpanded}`}
+      collapsable
+      defaultExpanded={defaultExpanded}
+    >
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
@@ -131,10 +152,11 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
   );
 
   return (
-    <>
+    <GroupExpansionProvider>
       <Section>
         <Header>
           <Heading>Components</Heading>
+          <GroupExpansionButton />
           <ComponentGroupingMenu />
         </Header>
         <ComponentGroupingView view="grouped">
@@ -158,7 +180,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
           <NavigationEntries entries={integrationEntries} />
         </Navigation>
       </Section>
-    </>
+    </GroupExpansionProvider>
   );
 };
 
