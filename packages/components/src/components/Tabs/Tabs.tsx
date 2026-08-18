@@ -15,7 +15,10 @@ export interface TabsProps
     Omit<Aria.TabsProps, "children">,
     PropsWithChildren,
     FlowComponentProps {
-  /* custom fallback view for not found tabs */
+  /**
+   * The view rendered when the selected tab does not exist. Defaults to a
+   * built-in IllustratedMessage.
+   */
   tabNotFoundView?: ReactNode;
 }
 
