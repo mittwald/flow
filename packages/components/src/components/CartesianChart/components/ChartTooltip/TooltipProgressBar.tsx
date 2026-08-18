@@ -48,13 +48,8 @@ export const TooltipProgressBar: FC<TooltipProgressBarProps> = (props) => {
   }, 0);
 
   const formattedLabel = usePromise(
-    async (value, unit, formatter) => {
-      if (!formatter) {
-        return `${value}${unit ? unit : ""}`;
-      }
-
-      return formatter(value, unit);
-    },
+    (value, unit, formatter) =>
+      formatter ? formatter(value, unit) : `${value}${unit ? unit : ""}`,
     [total, unit, progressBarFormatter] as const,
   );
 
