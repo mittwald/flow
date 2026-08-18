@@ -15,6 +15,7 @@ import { ThemeProvider } from "@teispace/next-themes";
 import { getTheme, getThemeScript } from "@teispace/next-themes/server";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import Script from "next/script";
+import { componentGroupingScript } from "@/app/_lib/componentGrouping";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -40,6 +41,10 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <Script id="theme-init" strategy="beforeInteractive">
           {getThemeScript(themeProps)}
         </Script>
+        <script
+          id="component-grouping-init"
+          dangerouslySetInnerHTML={{ __html: componentGroupingScript }}
+        />
       </head>
       <body className={bodyClassName}>
         <div className={styles.background} />
