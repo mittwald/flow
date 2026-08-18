@@ -1,5 +1,6 @@
 import {
   AlertBadge,
+  Badge,
   Button,
   ColumnLayout,
   Content,
@@ -18,6 +19,7 @@ import {
   <Header>
     <Heading>
       Mein Projekt
+      <Badge>Produktion</Badge>
       <AlertBadge status="danger">Deaktiviert</AlertBadge>
     </Heading>
 

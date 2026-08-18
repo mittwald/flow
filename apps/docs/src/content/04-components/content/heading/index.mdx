@@ -8,6 +8,8 @@ description:
 
 # Code-Beispiel
 
+Übergib den Text der Überschrift als `children` der `<Heading />`.
+
 <LiveCodeEditor />
 
 ---
@@ -46,16 +48,6 @@ eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 
 ---
 
-# Size
-
-Über das Property `size` kann in Ausnahmefällen die Schriftgröße einer Heading
-manuell angepasst werden. Die Headings sollten dabei eine visuelle Hierarchie
-beibehalten.
-
-<LiveCodeEditor example="size" editorCollapsed />
-
----
-
 # Color
 
 Zusätzlich zur Standard-Color kann die Heading in **Light** und **Dark**
@@ -69,19 +61,32 @@ Hintergründen nicht gut funktioniert. Wann welche Color passt, beschreibt
 
 ---
 
+# Size
+
+Über das Property `size` kann in Ausnahmefällen die Schriftgröße einer Heading
+manuell angepasst werden. Die Headings sollten dabei eine visuelle Hierarchie
+beibehalten.
+
+<LiveCodeEditor example="size" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## ContextualHelp
 
-Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben (z.
-B. bei Fachbegriffen).
+Verwende eine
+[ContextualHelp](/04-components/overlays/contextual-help/overview), um Usern
+zusätzliche Hilfestellungen zu geben (z. B. bei Fachbegriffen).
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## Badge oder AlertBadge
 
-Verwende `<Badge />`, um wichtige Metainformationen zu einem Abschnitt
-hervorzuheben, oder eine `<AlertBadge />`, um einen Status anzuzeigen.
+Verwende ein [Badge](/04-components/status/badge/overview), um wichtige
+Metainformationen zu einem Abschnitt hervorzuheben, oder ein
+[AlertBadge](/04-components/status/alert-badge/overview), um einen Status
+anzuzeigen.
 
 <LiveCodeEditor example="badge" editorCollapsed />
 

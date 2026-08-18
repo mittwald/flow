@@ -9,6 +9,9 @@ description:
 
 # Code-Beispiel
 
+Gib dem Alert eine `<Heading />` als Titel und steuere über das `status`
+Property seine Farbe und Wichtigkeit.
+
 <LiveCodeEditor />
 
 ---
@@ -86,18 +89,15 @@ zu gewährleisten.
 
 Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
 
-**Info:** Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
-erfordern.
-
-**Warning:** Hinweise auf mögliche Risiken mit einer klaren Handlungsempfehlung.
-
-**Danger:** Akute Fehlerzustände oder kritische Probleme, die sofortige
-Aufmerksamkeit erfordern.
-
-**Success:** Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
-
-**Unavailable:** Zustände aufgrund von nicht verfügbaren oder gelöschten
-Inhalten.
+- **Info** – Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+  erfordern.
+- **Warning** – Hinweise auf mögliche Risiken mit einer klaren
+  Handlungsempfehlung.
+- **Danger** – Akute Fehlerzustände oder kritische Probleme, die sofortige
+  Aufmerksamkeit erfordern.
+- **Success** – Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+- **Unavailable** – Zustände aufgrund von nicht verfügbaren oder gelöschten
+  Inhalten.
 
 <LiveCodeEditor example="status" editorCollapsed />
 
@@ -108,14 +108,18 @@ Inhalten.
 Ein Alert sollte immer in unmittelbarem Zusammenhang mit dem betroffenen Inhalt
 platziert werden.
 
-**In einer Section:** Bezieht sich der Alert auf eine bestimmte
+## In einer Section
+
+Bezieht sich der Alert auf eine bestimmte
 [Section](/04-components/structure/section/overview), wird er in deren Content
 platziert.
 
 <LiveCodeEditor example="section" bgColor="light" editorCollapsed />
 
-**Seitenweit:** Gilt sein Hinweis für die gesamte Seite, wird er prominent
-oberhalb der ersten Section innerhalb der
+## Seitenweit
+
+Gilt sein Hinweis für die gesamte Seite, wird er prominent oberhalb der ersten
+Section innerhalb der
 [LayoutCard](/04-components/structure/layout-card/overview) platziert.
 
 <LiveCodeEditor example="page" bgColor="light" editorCollapsed />

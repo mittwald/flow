@@ -148,8 +148,14 @@ child structure, with code identifiers as inline code:
   `<ActionGroup />`."
 
 This is _not_ a list of use cases (that belongs in `# Verwendung`). Follow the
-sentence with a bare `<LiveCodeEditor />`, which renders the implicit
-`examples/default.tsx`.
+sentence with the `<LiveCodeEditor />` that renders the implicit
+`examples/default.tsx`. A single `<Alert>` may sit between the sentence and the
+editor when it flags an integration-critical caveat (for example Select's
+dynamic-`Options` `key` warning).
+
+For a Component with genuinely no props and no required child structure (for
+example LoadingSpinner), the opening sentence may be omitted — the section then
+starts directly with the bare `<LiveCodeEditor />`.
 
 ### Verwendung and Best Practices
 
@@ -174,7 +180,10 @@ one-line note in the Verwendung prose is enough then.
 
 The variable middle of the page. A capability earns its own `#` section **only
 when it warrants its own meaningful live example**. No example → no section (at
-most a Best-Practice bullet).
+most a Best-Practice bullet). Exception: a section may stand without a live
+example when it documents essential reference or behaviour that no example
+conveys better — for example ColumnLayout's breakpoint values or List's
+`<List.Search />` props.
 
 - **Order:** the shared visual axes first, in the fixed relative order
   **Variants → Color → Sizes → States** where the Component has them, then
@@ -207,9 +216,14 @@ each with a link to that Component's page and its own example (Button:
 - **Only Components with their own page belong here.** A helper that has no page
   and cannot be used standalone (for example `FieldDescription`) stays a feature
   section, never under Kombiniere.
+- **Two closely related sibling Components** a developer chooses between (for
+  example AlertBadge / Badge) may share a single `##`, as long as the heading
+  names both and one example shows them together.
 - **`## React Hook Form` is the fixed convention** for form-capable Components:
   always add it, linking to the
-  [Form (React Hook Form)](/04-components/react-hook-form/form/overview) page.
+  [Form (React Hook Form)](/04-components/react-hook-form/form/overview) page. A
+  simple toggle-style Component that ships no dedicated form example (for
+  example Switch) may omit it.
 
 ### Dev edge cases
 
