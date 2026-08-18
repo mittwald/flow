@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1035](https://github.com/mittwald/flow/compare/0.2.0-alpha.1034...0.2.0-alpha.1035) (2026-08-18)
+
+### Features
+
+* **docs:** add a github link to the header ([#2855](https://github.com/mittwald/flow/issues/2855)) ([b587fcd](https://github.com/mittwald/flow/commit/b587fcdeaaac3e36e21bbe968d2ef7326cc68d74))
+
 # [0.2.0-alpha.1034](https://github.com/mittwald/flow/compare/0.2.0-alpha.1033...0.2.0-alpha.1034) (2026-08-18)
 
 ### Features
