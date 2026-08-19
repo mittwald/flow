@@ -15,32 +15,22 @@ die `width`- und `height`-Attribute legst du die Fläche gezielt fest.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende Skeletons, um Ladezustände für Inhalte wie
-[Lists](/04-components/structure/list/overview),
-[Images](/04-components/content/image/overview) oder
-[Texte](/04-components/content/text/overview) darzustellen – sie bieten
-Orientierung, indem sie die spätere Struktur und Position der Inhalte andeuten.
-
-## Best Practices
-
-Achte bei der Verwendung von Skeletons darauf, dass ...
-
-- sie das finale Layout so gut wie möglich widerspiegeln, damit User erkennen,
-  welche Inhalte zu erwarten sind. Verwende dafür vereinfachte Formen wie
+- **Spiegele das finale Layout so gut wie möglich wider.** Nutze vereinfachte
   Platzhalter für Textblöcke, [Avatare](/04-components/content/avatar/overview)
-  oder [Images](/04-components/content/image/overview).
-- Detailgrad und Anzahl der Skeletons nicht zu hoch sind – sie sollten eher an
-  Wireframes erinnern und keine visuelle Unruhe erzeugen.
-- sie ausschließlich für das initiale und kurzzeitige Laden von Inhalten
-  eingesetzt werden. Für andere Lade- oder Feedbackprozesse eignet sich z. B.
-  der [LoadingSpinner](/04-components/status/loading-spinner/overview).
-- beim Laden kein Cumulative Layout Shift entsteht – das finale Layout sollte
-  den Skeleton-Content nahtlos ersetzen.
-- der Ladezustand für Screenreader über `aria-busy` am umgebenden Container
-  signalisiert wird – nicht über das Skeleton selbst, das bereits `aria-hidden`
-  nutzt – und nach dem Laden auf `false` gesetzt wird (siehe
+  oder [Images](/04-components/content/image/overview), damit User die
+  erwarteten Inhalte erkennen.
+- **Halte Detailgrad und Anzahl gering.** Skeletons sollten an Wireframes
+  erinnern und keine visuelle Unruhe erzeugen.
+- **Setze Skeletons nur für das initiale, kurzzeitige Laden ein.** Für andere
+  Lade- oder Feedbackprozesse eignet sich etwa der
+  [LoadingSpinner](/04-components/status/loading-spinner/overview).
+- **Vermeide beim Laden einen Cumulative Layout Shift.** Das finale Layout
+  sollte den Skeleton-Content nahtlos ersetzen.
+- **Signalisiere den Ladezustand über `aria-busy` am umgebenden Container.** Das
+  Skeleton selbst nutzt bereits `aria-hidden`; setze `aria-busy` nach dem Laden
+  auf `false` (siehe
   [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy)).
 
 ---

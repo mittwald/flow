@@ -15,20 +15,14 @@ die Vorauswahl über das `defaultValue` Property.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende ein SegmentedControl, um eine platzsparende Einfachauswahl anzubieten.
-
-## Best Practices
-
-Achte bei der Verwendung eines SegmentedControls darauf, dass ...
-
-- maximal 5 kurze Optionen angezeigt werden – idealerweise ein selbsterklärendes
-  Wort, höchstens 1–3 Wörter, ohne dass der Text zweizeilig wird.
-- die wichtigste Option zuerst steht; sie wird automatisch vorselektiert.
-- ein [Label](/04-components/content/label/overview) die Optionen beschreibt,
-  falls sie im Zusammenhang nicht verständlich sind – fehlt es, wird ein
-  `aria-label` gesetzt.
+- **Zeige höchstens fünf kurze Optionen an.** Ideal ist ein selbsterklärendes
+  Wort, höchstens ein bis drei Wörter, ohne dass der Text zweizeilig wird.
+- **Stelle die wichtigste Option zuerst.** Sie wird automatisch vorselektiert.
+- **Beschreibe die Optionen mit einem
+  [Label](/04-components/content/label/overview), falls sie im Zusammenhang
+  nicht verständlich sind.** Fehlt das Label, setze ein `aria-label`.
 
 ## SegmentedControl vs. RadioGroup
 

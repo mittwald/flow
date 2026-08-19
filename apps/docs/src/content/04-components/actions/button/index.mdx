@@ -16,22 +16,16 @@ zu ermöglichen.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende einen Button, um ...
-
-- eine Aktion oder einen Befehl in einem Formular oder einer Oberfläche
-  auszuführen.
-- ein [Modal](/04-components/overlays/modal/overview) zu öffnen.
-
-## Best Practices
-
-Achte bei der Verwendung eines Buttons darauf, dass ...
-
-- der Text oder das Icon die auszuführende Aktion eindeutig beschreibt.
-- die visuelle Hierarchie der Wichtigkeit der Aktion entspricht.
-- die gewählte Variante die Bedeutung der Aktion unterstützt.
-- der User nach dem Ausführen der Aktion ein visuelles Feedback erhält.
+- **Beschrifte den Button kurz und eindeutig.** Ergänze ein `aria-label`, wenn
+  der Kontext nicht klar ist, etwa bei einem reinen Icon-Button oder wenn der
+  Text allein nicht ausreicht.
+- **Richte die visuelle Hierarchie nach der Wichtigkeit der Aktion.** Nutze
+  dafür die verschiedenen Varianten und Colors.
+- **Gib dem User nach der Aktion ein visuelles Feedback.** Über die
+  [Action](/04-components/actions/action/overview) lässt sich dieses Feedback
+  steuern.
 
 ---
 
@@ -40,9 +34,12 @@ Achte bei der Verwendung eines Buttons darauf, dass ...
 Verwende die unterschiedlichen Varianten, um Buttons in einer Oberfläche eine
 visuelle Hierarchie zu geben:
 
-- **Solid**, um Hauptaktionen hevrozuheben, die eine hohe Aufmerksamkeit erfordern.
-- **Soft**, um Nebenaktionen abzuschwächen, die visuell keine hohe Aufmerksamkeit erfordern.
-- **Outline**, um eine Aktion darzustellen, die klar als solche erkennbar sein soll, aber weniger Aufmerksamkeit als ein gefüllter Button beansprucht.
+- **Solid**, um Hauptaktionen hevrozuheben, die eine hohe Aufmerksamkeit
+  erfordern.
+- **Soft**, um Nebenaktionen abzuschwächen, die visuell keine hohe
+  Aufmerksamkeit erfordern.
+- **Outline**, um eine Aktion darzustellen, die klar als solche erkennbar sein
+  soll, aber weniger Aufmerksamkeit als ein gefüllter Button beansprucht.
 - **Plain**, um weniger wichtige oder zurückhaltende Aktionen darzustellen.
 
 <LiveCodeEditor example="variants" editorCollapsed row />

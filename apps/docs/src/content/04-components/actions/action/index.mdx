@@ -17,25 +17,12 @@ die States des Buttons automatisch zu steuern.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende eine Action, um ...
-
-- einen Button mit einem automatisierten Lade- und Erfolgs-Feedback bei
-  asynchronen Prozessen zu versehen.
-- Useraktionen mit Bestätigungsmodals zu sichern, bevor ein kritischer Vorgang
-  gestartet wird.
-
-## Best Practices
-
-Achte bei der Verwendung einer Action darauf, dass ...
-
-- der Pending State nur für Vorgänge verwendet wird, die in der Regel unter 5
-  Sekunden dauern. Für längere Prozesse kann eine
-  [Notification](/04-components/status/notification/overview) die bessere Wahl
-  sein.
-- Feedback States nur dann eingesetzt werden, wenn sie dem Nutzer einen Mehrwert
-  in der Interaktion bieten.
+- **Nutze den Pending State nur für Vorgänge unter etwa fünf Sekunden.** Für
+  längere Prozesse eignet sich eher eine
+  [Notification](/04-components/status/notification/overview).
+- **Setze Feedback States nur ein, wenn sie dem Nutzer einen Mehrwert bieten.**
 
 ---
 

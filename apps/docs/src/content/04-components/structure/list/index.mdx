@@ -16,34 +16,22 @@ Children wie `<List.Item />`, `<List.Search />`, `<List.Filter />` und
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende eine List, um ...
-
-- viele Elemente (z. B. Domains, Projekte, Rechnungspositionen) in Form von
-  ListItems kompakt darzustellen.
-- ein spezifisches ListItem über Filter, Sortierung oder Suche zu finden.
-- über ein ListItem zur [Detailseite](/03-patterns/01-patterns/detail-page)
-  eines Eintrags zu navigieren.
-
-## Best Practices
-
-Achte bei der Verwendung einer List darauf, dass ...
-
-- eine passende Ansicht angeboten wird. Eine Rasteransicht ist z. B. sinnvoll,
-  wenn das Bild eines ListItems für den Userflow entscheidend ist. Gibt es
-  mehrere Anwendungsfälle, sollte der User zwischen Ansichten wechseln können.
-- eine Standardsortierung gewählt wird, die dem häufigsten Anwendungsfall
-  entspricht (z. B. „Neueste zuerst“ bei einer Änderungshistorie), und nur
-  Sortieroptionen mit echtem Mehrwert angeboten werden.
-- bei umfangreichen Lists Filter eingesetzt und die Filterkategorien sinnvoll
-  gruppiert werden (z. B. nach Typ, Größe oder Status).
-- weiterer Seiteninhalt oberhalb der List platziert wird, damit das Nachladen
-  über den „Mehr anzeigen“-Button keine Layout-Verschiebungen verursacht. Die
-  List nimmt dabei die volle Breite des Contents einer
+- **Biete eine passende Ansicht an.** Eine Rasteransicht eignet sich, wenn das
+  Bild eines ListItems den Userflow bestimmt; bei mehreren Anwendungsfällen kann
+  der User zwischen Ansichten wechseln.
+- **Wähle eine Standardsortierung nach dem häufigsten Anwendungsfall.** Ein
+  Beispiel ist „Neueste zuerst“ bei einer Änderungshistorie; biete nur
+  Sortieroptionen mit echtem Mehrwert.
+- **Setze bei umfangreichen Lists Filter ein und gruppiere die Kategorien
+  sinnvoll.** Sinnvolle Gruppen sind zum Beispiel Typ, Größe oder Status.
+- **Platziere weiteren Seiteninhalt oberhalb der List.** So verursacht das
+  Nachladen über den „Mehr anzeigen“-Button keine Layout-Verschiebungen; die
+  List nimmt die volle Breite des Contents einer
   [LayoutCard](/04-components/structure/layout-card/overview) ein.
-- sie zugänglich beschrieben ist: Ist die List der einzige Hauptinhalt einer
-  Seite, erhält sie ein `aria-label`. Hat sie eine eigene
+- **Beschreibe die List zugänglich.** Ist sie der einzige Hauptinhalt einer
+  Seite, erhält sie ein `aria-label`; hat sie eine eigene
   [Heading](/04-components/content/heading/overview), wird diese über
   `aria-labelledby` zugeordnet.
 

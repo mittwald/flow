@@ -14,28 +14,15 @@ description:
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende ein CounterBadge, um ...
-
-- auf neue und ungelesene Nachrichten hinzuweisen.
-- die Anzahl von Elementen anzuzeigen, zum Beispiel bei offenen Tickets.
-- visuell auf Hinweise oder Warnungen innerhalb eines Navigationselements (z. B.
-  Tabs oder Menüpunkte) aufmerksam zu machen.
-
-## Best Practices
-
-Achte bei der Verwendung eines CounterBadges darauf, dass ...
-
-- der Kontext klar ist. Ein CounterBadge sollte sich eindeutig auf ein Element
-  beziehen (z. B. einen [Button](/04-components/actions/button/overview) oder
-  Tab).
-- keine Überlagerungen stattfinden. Vermeide zu viele Badges auf engem Raum, um
-  eine kognitive Überforderung zu verhindern.
-- die Position konsistent bleibt.
-- das darunterliegende Element den Wert zugänglich macht, da das CounterBadge
-  selbst nicht accessible ist. Auf einem Button sollte dazu ein `aria-label` die
-  Zahl des Counters enthalten.
+- **Beziehe das CounterBadge eindeutig auf ein Element.** Das kann zum Beispiel
+  ein [Button](/04-components/actions/button/overview) oder Tab sein.
+- **Setze CounterBadges sparsam ein.** Zu viele auf engem Raum überfordern den
+  User.
+- **Mach den Wert über das darunterliegende Element zugänglich.** Das
+  CounterBadge selbst ist nicht accessible; auf einem Button enthält daher ein
+  `aria-label` die Zahl.
 
 ---
 

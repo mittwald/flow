@@ -12,34 +12,22 @@ description:
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende einen LoadingSpinner, um ...
-
-- die Benutzererwartung zu steuern und zu signalisieren, dass in Kürze neue
-  Inhalte erscheinen.
-- dem User nach einer Aktion visuelles Feedback zu geben, dass im Hintergrund
-  Systemaktivität stattfindet.
-
-## Best Practices
-
-Achte bei der Verwendung eines LoadingSpinners darauf, dass ...
-
-- er nur bei unbestimmter Dauer eingesetzt wird. Lässt sich der Fortschritt
-  konkret darstellen, eignet sich eine
-  [ProgressBar](/04-components/status/progress-bar/overview); bei kurzem,
+- **Setze den LoadingSpinner nur bei unbestimmter Dauer ein.** Bei konkret
+  darstellbarem Fortschritt eignet sich eine
+  [ProgressBar](/04-components/status/progress-bar/overview), bei kurzem
   initialem Laden mit bekannter Layout-Struktur ein
   [Skeleton](/04-components/content/skeleton/overview).
-- er nur bei relevanter Ladezeit eingesetzt wird (Faustregel: länger als 1
-  Sekunde). Bei sehr kurzen Ladezeiten lohnt sich visuelles Feedback meist
-  nicht.
-- er bei längeren Ladezeiten mit einer
-  [IllustratedMessage](/04-components/content/illustrated-message/overview)
-  kombiniert wird, um Usern zusätzliche Informationen zu geben.
-- er gezielt an der Stelle platziert wird, auf die der User nach dem Laden
-  schauen soll.
-- nicht zu viele gleichzeitig erscheinen, da mehrere LoadingSpinner schnell
-  unruhig wirken.
+- **Setze ihn nur bei relevanter Ladezeit ein, als Faustregel ab etwa einer
+  Sekunde.** Bei sehr kurzen Ladezeiten bringt visuelles Feedback meist keinen
+  Mehrwert.
+- **Kombiniere ihn bei längeren Ladezeiten mit einer
+  [IllustratedMessage](/04-components/content/illustrated-message/overview).**
+  So erhält der User zusätzliche Informationen.
+- **Platziere ihn dort, wohin der User nach dem Laden schauen soll.**
+- **Zeige nicht zu viele Spinner gleichzeitig.** Mehrere gleichzeitig wirken
+  schnell unruhig.
 
 ---
 

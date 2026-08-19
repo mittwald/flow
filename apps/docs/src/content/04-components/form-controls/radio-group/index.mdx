@@ -16,31 +16,24 @@ sichtbares Label, setze ein `aria-label`.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende eine RadioGroup, um ...
-
-- dem User eine Einfachauswahl aus mehreren Optionen anzubieten.
-- eine Einfachauswahl in Umfragen darzustellen.
-- Einstellungen vorzunehmen, bei denen immer genau eine Option ausgewählt werden
-  muss.
-
-## Best Practices
-
-Achte bei der Verwendung einer RadioGroup darauf, dass ...
-
-- ein [Label](/04-components/content/label/overview) die RadioGroup beschreibt.
-  Übernimmt ein nahes Element wie eine
-  [Heading](/04-components/content/heading/overview) diese Rolle, wird
-  stattdessen ein `aria-label` bzw. `aria-labelledby` gesetzt.
-- die wichtigste Option zuerst steht.
-- die Optionen sich eindeutig voneinander unterscheiden.
-- Optionen mit hohem Risiko weiter unten stehen und nie vorselektiert sind.
-- bei mehr als etwa 7 Optionen oder wenn diese nicht sofort sichtbar sein
-  müssen, ein [Select](/04-components/form-controls/select/overview) die bessere
-  Wahl ist.
-- zu Beginn eine sinnvolle Option vorselektiert ist, um Fehlermeldungen zu
-  vermeiden.
+- **Beschrifte die RadioGroup mit einem
+  [Label](/04-components/content/label/overview).** Übernimmt ein nahes Element
+  wie eine [Heading](/04-components/content/heading/overview) diese Rolle, setze
+  stattdessen `aria-label` bzw. `aria-labelledby`.
+- **Nutze bei vielen Optionen ein
+  [Select](/04-components/form-controls/select/overview), um die Oberfläche
+  aufgeräumt zu halten.** Als Faustregel ab etwa sieben Optionen.
+- **Wähle zu Beginn eine sinnvolle Option vor.** Das vermeidet unnötige
+  Fehlermeldungen.
+- **Ordne die Optionen nach Wichtigkeit.** Die wichtigste steht oben; eine
+  Option mit weitreichenden Folgen gehört nach unten und ist nie vorausgewählt.
+- **Formuliere die Optionen klar unterscheidbar.** So erkennt der User die
+  passende Wahl auf einen Blick.
+- **Folge in einem Formular dem
+  [Form-Pattern](/03-patterns/01-patterns/forms).** Dort sind Aufbau,
+  Validierung und Fehlerbehandlung geregelt.
 
 ## RadioGroup vs. SegmentedControl
 

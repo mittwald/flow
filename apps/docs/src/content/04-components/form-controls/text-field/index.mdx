@@ -15,26 +15,15 @@ Formatierungshinweise) können über die `<FieldDescription />` ergänzt werden.
 
 ---
 
-# Verwendung
+# Best Practices
 
-Verwende ein TextField für einzeilige Texteingaben. In Formularen bindest du es
-meist über eine
-[Form (React Hook Form)](/04-components/react-hook-form/form/overview) ein, die
-Zustand, Validierung und Fehleranzeige übernimmt.
-
-## Best Practices
-
-Achte bei der Verwendung eines TextFields darauf, dass …
-
-- das TextField nur für einzeilige Eingaben verwendet wird – für mehrzeilige
-  Angaben eignet sich das
-  [TextArea](/04-components/form-controls/text-area/overview).
-- für spezielle Eingabetypen das passende `type` Attribut verwendet wird,
-  beispielsweise `email` für E-Mail-Adressen.
-
-Weitere Richtlinien zur Verwendung von TextFields in Forms, etwa zu Labels,
-Hilfetexten, Platzhaltern und Fehlermeldungen, findest du im
-[Forms Pattern](/03-patterns/01-patterns/forms).
+- **Nutze das TextField nur für einzeilige Eingaben.** Für mehrzeilige Angaben
+  eignet sich die [TextArea](/04-components/form-controls/text-area/overview).
+- **Verwende für spezielle Eingabetypen das passende `type` Attribut.** Für
+  E-Mail-Adressen ist das zum Beispiel `email`.
+- **Folge in einem Formular dem
+  [Forms-Pattern](/03-patterns/01-patterns/forms).** Dort sind Labels,
+  Hilfetexte, Platzhalter und Fehlermeldungen geregelt.
 
 ---
 

@@ -120,8 +120,8 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 ---                          (horizontal rule right after the frontmatter)
 # Code-Beispiel     one integration-critical sentence + bare <LiveCodeEditor />
 ---
-# Verwendung        „Verwende <X>, um …" bullet list
-## Best Practices   short „… darauf, dass …" bullets
+# Best Practices    flat checklist: **bold directive** + optional reason
+## <A> vs. <B>      optional; only for a genuinely confusable Component pair
 ---
 # <feature sections>  per Component; each has its own example; common → niche
 ---
@@ -147,34 +147,65 @@ child structure, with code identifiers as inline code:
 - Modal: „… `<ModalTrigger />` … `<Heading />`, `<Content />` und optional eine
   `<ActionGroup />`."
 
-This is _not_ a list of use cases (that belongs in `# Verwendung`). Follow the
-sentence with the `<LiveCodeEditor />` that renders the implicit
-`examples/default.tsx`. A single `<Alert>` may sit between the sentence and the
-editor when it flags an integration-critical caveat (for example Select's
-dynamic-`Options` `key` warning).
+This is _not_ a list of use cases — the Component's purpose belongs in the
+`description` frontmatter. Follow the sentence with the `<LiveCodeEditor />`
+that renders the implicit `examples/default.tsx`. A single `<Alert>` may sit
+between the sentence and the editor when it flags an integration-critical caveat
+(for example Select's dynamic-`Options` `key` warning).
 
 For a Component with genuinely no props and no required child structure (for
 example LoadingSpinner), the opening sentence may be omitted — the section then
 starts directly with the bare `<LiveCodeEditor />`.
 
-### Verwendung and Best Practices
+### Best Practices
 
-`# Verwendung` states what the Component is for as a „Verwende <X>, um …" bullet
-list. In prose, link the Components it typically works with.
+The single entry point to a Component's guidance: a flat checklist a developer
+scans once to know **what to watch out for when using this Component** — across
+accessibility, interplay with other Components, higher-level patterns (for
+example Forms), and Component-specific rules.
 
-`## Best Practices` (a `##` directly under `# Verwendung`) is a short bullet
-list opening with „Achte bei der Verwendung einer/eines X darauf, dass …". Keep
-each bullet to one idea. This is where the actionable essence of the former
-Guidelines content lands — including accessibility and wording nuggets that are
-not tied to a specific feature section.
+- **Flat bullet list, most important first.** No sub-headings, no shared opening
+  sentence.
+- **Each bullet is a bold directive followed by an optional reason.** The
+  directive is a full imperative sentence in du-form ending with a period; the
+  reason, when present, is a separate plain sentence after it. Do not join the
+  two with a dash. Drop the reason when the rule is self-evident. Example:
+  „**Wähle zu Beginn eine sinnvolle Option vor.** Das vermeidet unnötige
+  Fehlermeldungen."
+- **Lead with the purpose, phrased as a recommendation** — say what to do and
+  why it helps, not the threshold, the mechanism, or what goes wrong. Good:
+  „**Nutze bei vielen Optionen ein Select, um die Oberfläche aufgeräumt zu
+  halten.** Als Faustregel ab etwa sieben Optionen." Avoid: „Wechsle ab sieben
+  Optionen zum Select, sonst wird die Oberfläche unübersichtlich."
+- **Keep bullets short, plain, and factual.** Stay professional and technical;
+  cut clauses that confuse more than they help; avoid colloquial filler
+  („ebenso") and dramatic words („riskant" → „mit weitreichenden Folgen").
+- **Comprehensive and authoritative for the rule.** Every consideration that
+  matters at a glance appears here. Feature sections below only _elaborate_ a
+  rule (example, Do/Dont, rationale); they never introduce a rule the checklist
+  omits. A bullet may link inline to a section or page that goes deeper, but the
+  link is optional — no arrow prefix, no forced cross-reference.
+- **Higher-level patterns are normal bullets with an inline link,** shown only
+  when they matter (often as the first bullet): „**Folge in einem Formular dem
+  [Form-Pattern](…).** Dort sind Aufbau, Validierung und Fehlerbehandlung
+  geregelt."
+- **Soft cap of roughly 5–8 bullets.** If a rule needs more than a bold sentence
+  plus one reason sentence, move the depth into a feature section and let the
+  bullet summarise. A longer list signals that something belongs in its own
+  section.
 
-An optional `## <A> vs. <B>` comparison may follow `## Best Practices` under
-`# Verwendung` — but **only when it clarifies a genuine choice between two
+A Component's **purpose** (the former „Verwende <X>, um …" use cases) is not a
+section — it lives in the one-sentence `description` frontmatter, which stays
+short on purpose. Use-case bullets are dropped; a genuinely useful one becomes a
+Best-Practice bullet. Do not grow the description to hold them.
+
+An optional `## <A> vs. <B>` comparison may follow the checklist as a `##` under
+`# Best Practices` — but **only when it clarifies a genuine choice between two
 similar Components** a developer could confuse (for example
 `## Checkbox vs. Switch`). Present it as a short intro sentence plus a
 `<DoAndDont>` of two `<Plain>` tiles („Verwende eine <A>, um …" / „Verwende
 einen <B>, um …"). Omit it when the distinction is thin or purely visual — a
-one-line note in the Verwendung prose is enough then.
+one-line note in the Best-Practices prose is enough then.
 
 ### Feature sections
 
@@ -250,27 +281,37 @@ shorter, sharper, and moved to the matching part of the new structure. Only
 content that does not move a developer forward is dropped.
 
 - **Three instruction voices**, in order of how often they appear:
-  1. **Recommend** (the default): „Verwende … um …", „Achte darauf, dass …".
+  1. **Recommend** (the default): imperative directives — „Halte …", „Setze …",
+     „Nutze …", „Achte darauf, dass …".
   2. **Describe automatic behaviour**: things the Component does on its own are
      stated as facts, not instructions — „Sobald `target="_blank"` gesetzt ist,
      wird automatisch das `IconExternalLink` angezeigt."
   3. **Forbid** (rare): „Vermeide es, …".
 - **Per-item prose → one bullet list.** Merge repeated bold-term paragraphs into
   a single list.
-- **Former Guidelines sections:** only `# Verwendung` and `## Best Practices`
-  survive as headings. Resolve everything else in this priority: _fold into the
-  matching feature section → fold into a single Best-Practice bullet → drop._
-  This is **exceptionless** — there is no standalone `# Accessibility`,
-  `# Writing Guidelines`, or `# Verhalten`. Accessibility attaches to the theme
-  it concerns.
+- **Former Guidelines sections:** only `# Best Practices` survives as a heading
+  (a top-level `#`). The former `# Verwendung` use-case list does not — its
+  purpose folds into the `description` frontmatter. Resolve everything else in
+  this priority: _fold into the matching feature section → fold into a single
+  Best-Practice bullet → drop._ This is **exceptionless** — there is no
+  standalone `# Accessibility`, `# Writing Guidelines`, or `# Verhalten`.
+  Accessibility attaches to the theme it concerns, or becomes a Best-Practice
+  bullet when it is not tied to a specific feature section.
 - **Do/Dont blocks are removed by default.** Convert the actionable point into a
   Best-Practice bullet. Two exceptions keep a visible block: a `## <A> vs. <B>`
-  component comparison under `# Verwendung` (see above), and — rarely — a
+  component comparison under `# Best Practices` (see above), and — rarely — a
   genuine antipattern a developer easily gets wrong.
 - **Merge duplicates** (a Sizes explanation that appeared in both Overview and
   Guidelines becomes one `# Sizes`), and **dissolve wrapper headings**
   (`# Grundlagen`, `# Anwendung`, `# Inhalt`): promote their meaningful children
   to top-level sections and drop the empty container.
+- **Condense, don't re-invent.** Keep the original bullet's meaning and wording;
+  change structure and voice for the checklist, not the substance or the reason.
+  When you rewrite a rationale from scratch, you tend to introduce a claim the
+  author never made.
+- **Verify mentioned Components are current.** When a bullet names or links
+  another Component, check it still exists and is not deprecated (for example
+  Tabs → TabNavigation). Flag anything you are unsure about instead of guessing.
 - **Orphaned examples:** dropping a section leaves its `examples/*.tsx` unused.
   Leave them in place while editing; remove the now-unreferenced files in a
   final cleanup commit. Never delete `examples/default.tsx` or any file still
@@ -287,9 +328,10 @@ The Styleguide content is written in **German**.
 - Component names and Design System terminology are never translated: write
   **Button**, **Section**, **Dialog** as well as Variants, Colors, Sizes,
   States, and Props.
-- Headings are written in German (`# Verwendung`, `# Kombiniere mit ...`).
-  Established technical terms remain English — for example `Code-Beispiel`,
-  `Best Practices`, `Properties`, and property names such as `Disabled`.
+- Headings are written in German (`# Kombiniere mit ...`,
+  `# Ungespeicherte Änderungen`). Established technical terms remain English —
+  for example `Code-Beispiel`, `Best Practices`, `Properties`, and property
+  names such as `Disabled`.
 - English headings and terms use title case: every main word is capitalized
   (`## Best Practices`, `# Show CloseButton`). German headings follow regular
   German orthography — function words stay lowercase and sentence-like headings
@@ -312,8 +354,8 @@ Avoid:
 
 > Du bekommst automatisch Abstände zwischen den Elementen.
 
-**Instructions** tell the reader how to use a Component correctly (Best
-practices, Verwendung). Write them as direct imperatives in the informal
+**Instructions** tell the reader how to use a Component correctly (Best-Practice
+bullets, vs-comparison tiles). Write them as direct imperatives in the informal
 du-form:
 
 > Verwende eine Section, um Content in kleinere Teilbereiche zu gliedern.
@@ -402,7 +444,7 @@ Markdown headings are therefore shifted down one level when rendered:
 | `####`   | `<h5>`      | no                      |
 
 - Use `#` for the top-level sections of a page — for example `# Code-Beispiel`,
-  `# Verwendung`, `# Kombiniere mit ...`. A page usually has several `#`
+  `# Best Practices`, `# Kombiniere mit ...`. A page usually has several `#`
   sections.
 - Separate `#` sections from each other with a horizontal rule (`---`). Do not
   put a rule between a `#` and its own `##`.
@@ -426,9 +468,9 @@ The most important MDX Components for writing content:
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.
 - `<Do example="...">` / `<Dont example="...">` / `<DoAndDont>` / `<Plain>` /
   `<Info>` — visual good/bad usage examples. **Use sparingly.** Two legitimate
-  uses remain: a `## <A> vs. <B>` component comparison under `# Verwendung` (a
-  `<DoAndDont>` of two `<Plain>` tiles), and — rarely — a genuine antipattern a
-  developer easily gets wrong. Otherwise express the point as a Best-Practice
+  uses remain: a `## <A> vs. <B>` component comparison under `# Best Practices`
+  (a `<DoAndDont>` of two `<Plain>` tiles), and — rarely — a genuine antipattern
+  a developer easily gets wrong. Otherwise express the point as a Best-Practice
   bullet.
 
 Frontmatter:
