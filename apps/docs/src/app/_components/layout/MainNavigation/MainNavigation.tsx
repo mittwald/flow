@@ -42,7 +42,6 @@ interface Props {
 interface NavigationSectionProps {
   tree: MdxDirectoryTree;
   group: string;
-  sortByLabel?: boolean;
 }
 
 type TreeEntry = [string, MdxDirectoryTree | MdxFile];
@@ -95,11 +94,25 @@ const entryLabel = ([group, treeItem]: TreeEntry): string =>
     ? treeItem.getNavTitle()
     : extractTextFromPath(group);
 
-const sortEntries = (entries: TreeEntry[], sortByLabel = false): TreeEntry[] =>
+/** A numeric path prefix ("01-design") is the author's intended order. */
+const pathPrefix = ([group]: TreeEntry): number | undefined => {
+  const prefix = /^(\d+)-/.exec(group)?.[1];
+  return prefix === undefined ? undefined : Number(prefix);
+};
+
+const comparePosition = (a: TreeEntry, b: TreeEntry): number => {
+  const prefixA = pathPrefix(a);
+  const prefixB = pathPrefix(b);
+
+  return prefixA !== undefined && prefixB !== undefined
+    ? prefixA - prefixB
+    : compareLabels(entryLabel(a), entryLabel(b));
+};
+
+const sortEntries = (entries: TreeEntry[]): TreeEntry[] =>
   [...entries].sort(
     (a, b) =>
-      deprecatedRank(a[1]) - deprecatedRank(b[1]) ||
-      (sortByLabel ? compareLabels(entryLabel(a), entryLabel(b)) : 0),
+      deprecatedRank(a[1]) - deprecatedRank(b[1]) || comparePosition(a, b),
   );
 
 const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
@@ -109,35 +122,24 @@ const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
       : collectMdxFiles(Object.entries(treeItem)),
   );
 
-const NavigationEntries: FC<{
-  entries: TreeEntry[];
-  sortByLabel?: boolean;
-}> = (props) =>
-  sortEntries(props.entries, props.sortByLabel).map(([group, treeItem]) =>
+const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
+  sortEntries(props.entries).map(([group, treeItem]) =>
     treeItem instanceof MdxFile ? (
       <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
     ) : (
-      <NavigationSection
-        key={group}
-        tree={treeItem}
-        group={group}
-        sortByLabel={props.sortByLabel}
-      />
+      <NavigationSection key={group} tree={treeItem} group={group} />
     ),
   );
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
-  const { tree, group, sortByLabel } = props;
+  const { tree, group } = props;
 
   return (
     <NavigationGroup collapsable>
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
-      <NavigationEntries
-        entries={Object.entries(tree)}
-        sortByLabel={sortByLabel}
-      />
+      <NavigationEntries entries={Object.entries(tree)} />
     </NavigationGroup>
   );
 };
@@ -160,7 +162,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         </Header>
         <ComponentGroupingView view="grouped">
           <Navigation aria-label="Components">
-            <NavigationEntries entries={componentEntries} sortByLabel />
+            <NavigationEntries entries={componentEntries} />
           </Navigation>
         </ComponentGroupingView>
         <ComponentGroupingView view="alphabetical">
@@ -176,7 +178,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
       <Section>
         <Heading>Integrations</Heading>
         <Navigation aria-label="Integrations">
-          <NavigationEntries entries={integrationEntries} sortByLabel />
+          <NavigationEntries entries={integrationEntries} />
         </Navigation>
       </Section>
     </>
