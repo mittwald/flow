@@ -16,6 +16,16 @@ const overlayContainerAttribute = "data-flow-overlays";
  * Browser extensions (e.g. password managers) inject/reorder `body` children,
  * which can separate those nodes. Then focus scope detection breaks and may
  * cause recursive focus restoration.
+ *
+ * Keep the overlay container as the last child of body.
+ *
+ * React Aria normally portals overlays directly into body, so they are appended
+ * last and render on top.
+ *
+ * If we create one persistent container only once, anything appended to body
+ * later (toasts, third-party widgets, remounted app root) can render above open
+ * overlays. Then overlays can appear behind page content, and the backdrop blur
+ * no longer covers the page.
  */
 const getOverlayContainer = (): HTMLElement | null => {
   if (typeof document === "undefined") {
@@ -27,6 +37,9 @@ const getOverlayContainer = (): HTMLElement | null => {
   );
 
   if (existingContainer) {
+    if (existingContainer !== document.body.lastElementChild) {
+      document.body.append(existingContainer);
+    }
     return existingContainer;
   }
 

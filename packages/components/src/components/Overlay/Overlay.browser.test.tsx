@@ -75,3 +75,40 @@ test("an open Overlay keeps its focus scope when the body's children are reorder
     ),
   ).toBe(true);
 });
+
+test("the overlay container stays the last child of body", async () => {
+  const dom = await render(
+    <Modal isDefaultOpen>
+      <Heading>Install</Heading>
+      <Content>
+        <Text>Hello World</Text>
+      </Content>
+    </Modal>,
+  );
+
+  const container = document.querySelector("body > [data-flow-overlays]");
+  expect(container).toBe(document.body.lastElementChild);
+
+  // Anything can append to body later — a toast root, a third-party widget, the
+  // next test's render container.
+  const foreign = document.createElement("div");
+  document.body.append(foreign);
+
+  try {
+    // The overlay is `position: fixed` with `z-index: auto`, so being last is
+    // what paints it above the page. Losing that puts page content over open
+    // overlays and takes the page out of the backdrop the overlay blurs.
+    await dom.rerender(
+      <Modal isDefaultOpen>
+        <Heading>Install</Heading>
+        <Content>
+          <Text>Changed</Text>
+        </Content>
+      </Modal>,
+    );
+    await sleep(50);
+    expect(container).toBe(document.body.lastElementChild);
+  } finally {
+    foreign.remove();
+  }
+});
