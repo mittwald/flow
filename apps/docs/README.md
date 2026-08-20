@@ -120,7 +120,7 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 ---                          (horizontal rule right after the frontmatter)
 # Code-Beispiel     one integration-critical sentence + bare <LiveCodeEditor />
 ---
-# Best Practices    flat checklist: **bold directive** + optional reason
+# Best Practices    flat checklist: plain directive + optional reason
 ## <A> vs. <B>      optional; only for a genuinely confusable Component pair
 ---
 # <feature sections>  per Component; each has its own example; common → niche
@@ -166,17 +166,20 @@ example Forms), and Component-specific rules.
 
 - **Flat bullet list, most important first.** No sub-headings, no shared opening
   sentence.
-- **Each bullet is a bold directive followed by an optional reason.** The
+- **Each bullet is a plain directive followed by an optional reason.** The
   directive is a full imperative sentence in du-form ending with a period; the
   reason, when present, is a separate plain sentence after it. Do not join the
-  two with a dash. Drop the reason when the rule is self-evident. Example:
-  „**Wähle zu Beginn eine sinnvolle Option vor.** Das vermeidet unnötige
+  two with a dash. Drop the reason when the rule is self-evident. Write the
+  bullet in plain text — do **not** wrap the whole directive in bold (it makes
+  the checklist hard to read). Reserve bold for a targeted highlight of the one
+  word or phrase that carries the rule, and use it sparingly, often not at all.
+  Example: „Wähle zu Beginn eine sinnvolle Option vor. Das vermeidet unnötige
   Fehlermeldungen."
 - **Lead with the purpose, phrased as a recommendation** — say what to do and
   why it helps, not the threshold, the mechanism, or what goes wrong. Good:
-  „**Nutze bei vielen Optionen ein Select, um die Oberfläche aufgeräumt zu
-  halten.** Als Faustregel ab etwa sieben Optionen." Avoid: „Wechsle ab sieben
-  Optionen zum Select, sonst wird die Oberfläche unübersichtlich."
+  „Nutze bei vielen Optionen ein Select, um die Oberfläche aufgeräumt zu halten.
+  Als Faustregel ab etwa sieben Optionen." Avoid: „Wechsle ab sieben Optionen
+  zum Select, sonst wird die Oberfläche unübersichtlich."
 - **Keep bullets short, plain, and factual.** Stay professional and technical;
   cut clauses that confuse more than they help; avoid colloquial filler
   („ebenso") and dramatic words („riskant" → „mit weitreichenden Folgen").
@@ -186,13 +189,13 @@ example Forms), and Component-specific rules.
   omits. A bullet may link inline to a section or page that goes deeper, but the
   link is optional — no arrow prefix, no forced cross-reference.
 - **Higher-level patterns are normal bullets with an inline link,** shown only
-  when they matter (often as the first bullet): „**Folge in einem Formular dem
-  [Form-Pattern](…).** Dort sind Aufbau, Validierung und Fehlerbehandlung
+  when they matter (often as the first bullet): „Folge in einem Formular dem
+  [Form-Pattern](…). Dort sind Aufbau, Validierung und Fehlerbehandlung
   geregelt."
-- **Soft cap of roughly 5–8 bullets.** If a rule needs more than a bold sentence
-  plus one reason sentence, move the depth into a feature section and let the
-  bullet summarise. A longer list signals that something belongs in its own
-  section.
+- **Soft cap of roughly 5–8 bullets.** If a rule needs more than a directive
+  sentence plus one reason sentence, move the depth into a feature section and
+  let the bullet summarise. A longer list signals that something belongs in its
+  own section.
 
 A Component's **purpose** (the former „Verwende <X>, um …" use cases) is not a
 section — it lives in the one-sentence `description` frontmatter, which stays

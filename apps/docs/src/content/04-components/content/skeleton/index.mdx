@@ -10,18 +10,18 @@ description:
 
 # Best Practices
 
-- **Spiegele das finale Layout so gut wie möglich wider.** Nutze vereinfachte
+- Spiegele das finale Layout so gut wie möglich wider. Nutze vereinfachte
   Platzhalter für Textblöcke, [Avatare](/04-components/content/avatar/overview)
   oder [Images](/04-components/content/image/overview), damit User die
   erwarteten Inhalte erkennen.
-- **Halte Detailgrad und Anzahl gering.** Skeletons sollten an Wireframes
-  erinnern und keine visuelle Unruhe erzeugen.
-- **Setze Skeletons nur für das initiale, kurzzeitige Laden ein.** Für andere
-  Lade- oder Feedbackprozesse eignet sich etwa der
+- Halte Detailgrad und Anzahl gering. Skeletons sollten an Wireframes erinnern
+  und keine visuelle Unruhe erzeugen.
+- Setze Skeletons nur für das initiale, kurzzeitige Laden ein. Für andere Lade-
+  oder Feedbackprozesse eignet sich etwa der
   [LoadingSpinner](/04-components/status/loading-spinner/overview).
-- **Vermeide beim Laden einen Cumulative Layout Shift.** Das finale Layout
-  sollte den Skeleton-Content nahtlos ersetzen.
-- **Signalisiere den Ladezustand über `aria-busy` am umgebenden Container.** Das
+- Vermeide beim Laden einen Cumulative Layout Shift. Das finale Layout sollte
+  den Skeleton-Content nahtlos ersetzen.
+- Signalisiere den Ladezustand über `aria-busy` am umgebenden Container. Das
   Skeleton selbst nutzt bereits `aria-hidden`; setze `aria-busy` nach dem Laden
   auf `false` (siehe
   [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy)).
