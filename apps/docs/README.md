@@ -117,8 +117,8 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 
 ```
 ---  component + short, objective description  ---
----                          (horizontal rule right after the frontmatter)
-# Code-Beispiel     one integration-critical sentence + bare <LiveCodeEditor />
+<Alert> (optional)  integration-critical caveat, directly under the page header
+<LiveCodeEditor />  the default example — opens the page, no heading, no intro
 ---
 # Best Practices    flat checklist: plain directive + optional reason
 ## <A> vs. <B>      optional; only for a genuinely confusable Component pair
@@ -132,30 +132,22 @@ One page, ordered so a developer gets running fast and then goes deeper. The
 # Properties          <PropertiesTables />
 ```
 
-Separators: a leading `---` right after the frontmatter, a `---` between every
-top-level `#` section, and **none** between a `#` and its own `##`.
-`# Code-Beispiel` is always first, `# Properties` always last.
+Separators: no rule between the frontmatter and the opening example; a `---`
+between every top-level `#` section (the first one right before
+`# Best Practices`), and **none** between a `#` and its own `##`. `# Properties`
+is always last.
 
-### Code-Beispiel
+### Opening example
 
-Always the first section. Open with **one sentence naming the single most
-important thing to get the integration right** — the key prop or the required
-child structure, with code identifiers as inline code:
+The page opens directly with the default live example — no heading and no
+opening sentence. The Component name, its one-sentence description, and the
+GitHub / Markdown links render above it from the frontmatter, so the body starts
+with the `<LiveCodeEditor />` that renders the implicit `examples/default.tsx`.
 
-- Button: „Benutze das `onPress` Property …"
-- TextField: „Nutze ein `<Label />` …"
-- Modal: „… `<ModalTrigger />` … `<Heading />`, `<Content />` und optional eine
-  `<ActionGroup />`."
-
-This is _not_ a list of use cases — the Component's purpose belongs in the
-`description` frontmatter. Follow the sentence with the `<LiveCodeEditor />`
-that renders the implicit `examples/default.tsx`. A single `<Alert>` may sit
-between the sentence and the editor when it flags an integration-critical caveat
-(for example Select's dynamic-`Options` `key` warning).
-
-For a Component with genuinely no props and no required child structure (for
-example LoadingSpinner), the opening sentence may be omitted — the section then
-starts directly with the bare `<LiveCodeEditor />`.
+A single `<Alert>` may sit above the editor when it flags an
+integration-critical caveat — an accessibility warning (Truncate) or a usage
+pitfall (Select's dynamic-`Options` `key` warning). Otherwise the editor is the
+first element on the page.
 
 ### Best Practices
 
@@ -333,8 +325,8 @@ The Styleguide content is written in **German**.
   States, and Props.
 - Headings are written in German (`# Kombiniere mit ...`,
   `# Ungespeicherte Änderungen`). Established technical terms remain English —
-  for example `Code-Beispiel`, `Best Practices`, `Properties`, and property
-  names such as `Disabled`.
+  for example `Best Practices`, `Properties`, and property names such as
+  `Disabled`.
 - English headings and terms use title case: every main word is capitalized
   (`## Best Practices`, `# Show CloseButton`). German headings follow regular
   German orthography — function words stay lowercase and sentence-like headings
@@ -446,8 +438,8 @@ Markdown headings are therefore shifted down one level when rendered:
 | `###`    | `<h4>`      | no                      |
 | `####`   | `<h5>`      | no                      |
 
-- Use `#` for the top-level sections of a page — for example `# Code-Beispiel`,
-  `# Best Practices`, `# Kombiniere mit ...`. A page usually has several `#`
+- Use `#` for the top-level sections of a page — for example `# Best Practices`,
+  `# Kombiniere mit ...`, `# Properties`. A page usually has several `#`
   sections.
 - Separate `#` sections from each other with a horizontal rule (`---`). Do not
   put a rule between a `#` and its own `##`.
