@@ -1,5 +1,19 @@
 @use "@/styles/mixins/focus";
 
+/**
+ * Segments render filled by default. The fill rules below empty out every
+ * segment that must not appear filled.
+ */
+@mixin empty-segment {
+  .empty {
+    opacity: 1;
+  }
+
+  .filled {
+    opacity: 0;
+  }
+}
+
 .rating {
   .ratingSegments {
     display: flex;
@@ -40,61 +54,44 @@
     color: var(--rating--star-filled-color);
   }
 
-  &:not(:has(.ratingSegments:hover)),
-  &[data-readonly] {
-    .ratingSegment {
-      &.current {
-        ~ .ratingSegment {
-          .empty {
-            opacity: 1;
-          }
+  &.fill-cumulative {
+    &:not(:has(.ratingSegments:hover)),
+    &[data-readonly] {
+      .ratingSegment.current ~ .ratingSegment {
+        @include empty-segment;
+      }
 
-          .filled {
-            opacity: 0;
-          }
-        }
+      &:not(:has(.current)) .ratingSegment {
+        @include empty-segment;
       }
     }
 
-    &:not(:has(.current)) {
-      .ratingSegment {
-        .empty {
-          opacity: 1;
-        }
+    &:not([data-readonly]) {
+      .ratingSegment:hover ~ .ratingSegment {
+        @include empty-segment;
+      }
+    }
+  }
 
-        .filled {
-          opacity: 0;
-        }
+  &.fill-single {
+    &:not(:has(.ratingSegments:hover)),
+    &[data-readonly] {
+      .ratingSegment:not(.current) {
+        @include empty-segment;
+      }
+    }
+
+    &:not([data-readonly]):has(.ratingSegments:hover) {
+      .ratingSegment:not(:hover) {
+        @include empty-segment;
       }
     }
   }
 
   &:not([data-readonly]) {
-    &.ratingSegments:hover {
-      .ratingSegment {
-        .empty {
-          opacity: 0;
-        }
-
-        .filled {
-          opacity: 1;
-        }
-      }
-    }
-
     .ratingSegment:hover {
       transform: scale(1.2);
       transform-origin: center;
-
-      ~ .ratingSegment {
-        .empty {
-          opacity: 1;
-        }
-
-        .filled {
-          opacity: 0;
-        }
-      }
     }
   }
 

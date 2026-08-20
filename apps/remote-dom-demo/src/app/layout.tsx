@@ -91,6 +91,7 @@ export default function Layout(props: PropsWithChildren) {
                         Notifications
                       </NavigationItem>
                       <NavigationItem page="popover">Popover</NavigationItem>
+                      <NavigationItem page="rating">Rating</NavigationItem>
                     </NavigationGroup>
                     <TunnelExit id="remote-demo" />
                   </Navigation>
