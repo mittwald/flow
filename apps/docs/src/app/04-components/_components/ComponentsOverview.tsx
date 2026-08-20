@@ -5,6 +5,7 @@ import type { ComponentLink } from "@/app/04-components/_components/ComponentsLi
 import { ComponentsList } from "@/app/04-components/_components/ComponentsList";
 import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/ComponentGroupingView";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
+import { compareGroupPaths } from "@/app/_lib/compareLabels";
 
 interface Props {
   components: ComponentLink[];
@@ -14,7 +15,7 @@ export const ComponentsOverview: FC<Props> = (props) => {
   const { components } = props;
 
   const groups = Object.entries(groupBy(components, (c) => c.group)).sort(
-    ([a], [b]) => a.localeCompare(b),
+    ([a], [b]) => compareGroupPaths(a, b),
   );
 
   return (
