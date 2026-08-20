@@ -2,10 +2,5 @@
   "compilerOptions": {
     "jsx": "react"
   },
-  "extends": "../typescript-config/web-library.json",
-  "references": [
-    {
-      "path": "./tsconfig.vite.json"
-    }
-  ]
+  "extends": "../typescript-config/web-library.json"
 }

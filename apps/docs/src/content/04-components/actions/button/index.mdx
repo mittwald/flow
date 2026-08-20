@@ -27,6 +27,30 @@ zu ermöglichen.
   [Action](/04-components/actions/action/overview) lässt sich dieses Feedback
   steuern.
 
+## Button vs. Link
+
+Verwende für Navigation bevorzugt Links und für Aktionen Buttons. Eine Ausnahme
+können hervorgehobene
+[Call-to-Actions](/04-components/navigation/link/overview#button) sein, bei
+denen ein Button-ähnliches Erscheinungsbild für eine Navigation sinnvoll ist.
+
+<DoAndDont>
+  <Plain heading="Verwende Buttons, um z. B. ...">
+    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
+    - Formulare zu speichern oder zurückzusetzen.
+    - in einem [Modal](/04-components/overlays/modal/overview) Aktionen auszuwählen.
+
+  </Plain>
+
+  <Plain heading="Verwende Links, um z. B. ...">
+    - zu einer anderen Seite zu navigieren.
+    - zu einem Anker auf der Seite zu scrollen.
+    - eine externe Seite zu öffnen.
+    - einen Download zu starten.
+
+  </Plain>
+</DoAndDont>
+
 ---
 
 # Variants
@@ -114,10 +138,18 @@ die Aktion gedacht ist.
 
 ## Text + Icon
 
-Verwende die Kombination aus Text und Icon nicht zu rein dekorativen Zwecken,
-sondern nur, um den Kontext zu erweitern. Zum Beispiel zeigt ein Chevron-Icon
-an, dass sich hinter dem Button ein
-[ContextMenu](/04-components/actions/context-menu/overview) verbirgt.
+Der Default ist Text ohne Icon, das hält die Oberfläche ruhig. Ein Icon kommt
+nur dazu, wenn es etwas beiträgt, das der Text allein nicht abdeckt:
+
+- **Verhalten:** Das Icon zeigt, wie sich der Button verhält. Ein Chevron-Icon
+  zeigt zum Beispiel an, dass sich dahinter ein
+  [ContextMenu](/04-components/actions/context-menu/overview) verbirgt.
+- **Erkennung:** Das Icon steht produktweit und ausschließlich für eine
+  Feature-Familie, nach der User scannen, z. B. das AI-Icon neben „AI Agent
+  verbinden".
+
+Wiederholt das Icon nur das Wort (etwa eine Diskette neben „Speichern"), bringt
+es nur Unruhe. Im Zweifel weglassen.
 
 <LiveCodeEditor example="icon-text" editorCollapsed row />
 

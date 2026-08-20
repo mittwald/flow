@@ -28,6 +28,7 @@ import styles from "@/app/layout.module.scss";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { ComponentGroupingMenu } from "@/app/_components/layout/MainNavigation/components/ComponentGroupingMenu";
 import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/ComponentGroupingView";
+import { compareLabels } from "@/app/_lib/compareLabels";
 
 const componentsPathSegment = "04-components";
 
@@ -83,8 +84,31 @@ const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
   return status?.level === "deprecated" ? 1 : 0;
 };
 
-const sortEntriesByStatus = (entries: TreeEntry[]): TreeEntry[] =>
-  [...entries].sort(([, a], [, b]) => deprecatedRank(a) - deprecatedRank(b));
+const entryLabel = ([group, treeItem]: TreeEntry): string =>
+  treeItem instanceof MdxFile
+    ? treeItem.getNavTitle()
+    : extractTextFromPath(group);
+
+/** A numeric path prefix ("01-design") is the author's intended order. */
+const pathPrefix = ([group]: TreeEntry): number | undefined => {
+  const prefix = /^(\d+)-/.exec(group)?.[1];
+  return prefix === undefined ? undefined : Number(prefix);
+};
+
+const comparePosition = (a: TreeEntry, b: TreeEntry): number => {
+  const prefixA = pathPrefix(a);
+  const prefixB = pathPrefix(b);
+
+  return prefixA !== undefined && prefixB !== undefined
+    ? prefixA - prefixB
+    : compareLabels(entryLabel(a), entryLabel(b));
+};
+
+const sortEntries = (entries: TreeEntry[]): TreeEntry[] =>
+  [...entries].sort(
+    (a, b) =>
+      deprecatedRank(a[1]) - deprecatedRank(b[1]) || comparePosition(a, b),
+  );
 
 const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
   entries.flatMap(([, treeItem]) =>
@@ -94,7 +118,7 @@ const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
   );
 
 const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
-  sortEntriesByStatus(props.entries).map(([group, treeItem]) =>
+  sortEntries(props.entries).map(([group, treeItem]) =>
     treeItem instanceof MdxFile ? (
       <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
     ) : (
@@ -139,7 +163,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         <ComponentGroupingView view="alphabetical">
           <Navigation aria-label="Components">
             {collectMdxFiles(componentEntries)
-              .sort((a, b) => a.getNavTitle().localeCompare(b.getNavTitle()))
+              .sort((a, b) => compareLabels(a.getNavTitle(), b.getNavTitle()))
               .map((treeItem) => (
                 <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
               ))}

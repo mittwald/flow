@@ -46,6 +46,11 @@ test.each(testEnvironments)(
           </Link>
           <Link>Link</Link>
         </NavigationGroup>
+        <NavigationGroup collapsable defaultExpanded={false}>
+          <Label>Collapsed</Label>
+          <Link>Link</Link>
+          <Link>Link</Link>
+        </NavigationGroup>
       </Navigation>,
     );
 

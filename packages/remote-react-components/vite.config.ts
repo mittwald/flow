@@ -22,7 +22,7 @@ export default defineConfig({
     alias: [
       {
         find: /@\//,
-        replacement: path.resolve(__dirname) + "/src/",
+        replacement: path.resolve(import.meta.dirname) + "/src/",
       },
       // https://github.com/tabler/tabler-icons/issues/1233#issuecomment-2428245119
       {

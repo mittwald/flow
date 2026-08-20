@@ -1,5 +1,5 @@
 import { mergeConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../../../core/src/vitestBrowserTestConfig";
+import { vitestBrowserTestConfig } from "../../../core";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests";
 import viteConfig from "./vite.config";
 

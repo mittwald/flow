@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1037](https://github.com/mittwald/flow/compare/0.2.0-alpha.1036...0.2.0-alpha.1037) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1036](https://github.com/mittwald/flow/compare/0.2.0-alpha.1035...0.2.0-alpha.1036) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1035](https://github.com/mittwald/flow/compare/0.2.0-alpha.1034...0.2.0-alpha.1035) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.1034](https://github.com/mittwald/flow/compare/0.2.0-alpha.1033...0.2.0-alpha.1034) (2026-08-18)
+
+### Features
+
+* **NavigationGroup:** add defaultExpanded prop ([#2852](https://github.com/mittwald/flow/issues/2852)) ([f2c2a5b](https://github.com/mittwald/flow/commit/f2c2a5b694e5f7d87a240bf69f54bda531b8b18f))
+
+# [0.2.0-alpha.1033](https://github.com/mittwald/flow/compare/0.2.0-alpha.1032...0.2.0-alpha.1033) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.1032](https://github.com/mittwald/flow/compare/0.2.0-alpha.1031...0.2.0-alpha.1032) (2026-08-18)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

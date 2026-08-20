@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
-    "rootDir": "."
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "noEmit": true,
+    "rootDir": "${configDir}/../..",
+    "types": ["node", "vite/client"]
   },
+  "exclude": ["${configDir}/dev/vite/*.test.ts"],
   "extends": "./tsconfig.json",
-  "include": ["./vite.*.ts", "./dev/vite/**/*.ts"]
+  "include": ["${configDir}/vite*.ts", "${configDir}/dev/vite"]
 }

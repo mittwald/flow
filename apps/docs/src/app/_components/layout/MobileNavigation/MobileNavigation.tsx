@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
 import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
 import Groups from "@/app/_components/layout/Groups";
 import { SearchButton } from "@/app/_components/layout/DocsSearch";
+import { GitHubButton } from "@/app/_components/layout/Header/components/GitHubButton";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -66,6 +67,7 @@ export const MobileNavigation: FC<Props> = (props) => {
             </Section>
           </Content>
           <ActionGroup>
+            <GitHubButton />
             <ThemeSwitcherButton />
           </ActionGroup>
         </Modal>
