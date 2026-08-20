@@ -110,13 +110,19 @@ anzuzeigen.
 
 <LiveCodeEditor example="icon" editorCollapsed row />
 
-## Text und Icon
+## Text + Icon
 
-Verwende `<Text />` und `<Icon />` zusammen, um sowohl Text als auch Icon im
-Button anzuzeigen. Achte darauf, dass das Icon dem User einen Mehrwert bietet
-und nicht nur einen dekorativen Zweck erfüllt. Zum Beispiel indiziert ein
-Chevron-Icon, dass der Button ein Dropdown öffnet. Ein Close-Icon zeigt an, dass
-der Button als Filterelement wieder entfernt werden kann.
+Der Default ist Text ohne Icon, das hält die Oberfläche ruhig. Ein Icon darf nur
+dazukommen, wenn es etwas beiträgt, das der Text allein nicht abdeckt:
+
+- **Verhalten:** Das Icon zeigt, wie sich der Button verhält. Ein Chevron zeigt
+  an, dass sich dahinter ein `<ContextMenu />` verbirgt.
+- **Erkennung:** Das Icon steht produktweit und ausschließlich für eine
+  Feature-Familie, nach der Nutzer scannen, z. B. das AI-Icon neben „AI Agent
+  verbinden“.
+
+Kein Icon, wenn es nur das Wort wiederholt (etwa eine Diskette neben
+„Speichern“). Das bringt nur Unruhe. Im Zweifel weglassen.
 
 <LiveCodeEditor example="icon-text" editorCollapsed row />
 

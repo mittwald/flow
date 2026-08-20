@@ -17,6 +17,7 @@ import {
 import Groups from "@/app/_components/layout/Groups";
 import { ThemeSwitcherButton } from "@/app/_components/layout/Header/components/ThemeSwitcherButton";
 import { SkipLink } from "@/app/_components/layout/Header/SkipLink";
+import { GitHubButton } from "@/app/_components/layout/Header/components/GitHubButton";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -45,6 +46,7 @@ const Header: FC<Props> = (props) => {
         </Flex>
         <Flex gap="m" className={styles.desktopActions}>
           <SearchButton controller={searchController} />
+          <GitHubButton />
           <ThemeSwitcherButton iconOnly />
         </Flex>
         <MobileNavigation
