@@ -102,8 +102,8 @@
   &[data-disabled],
   [aria-disabled] & {
     .ratingSegment {
-      .star,
-      .starFilled {
+      .empty,
+      .filled {
         color: var(--form-control--border-color--disabled);
       }
     }
