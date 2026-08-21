@@ -5,7 +5,7 @@ import {
   LabeledValue,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout rowGap="s" columnGap="l">
+<ColumnLayout l={[1, 1]} rowGap="s" columnGap="l">
   <LabeledValue>
     <Label>Vorname</Label>
     <Content>Max</Content>
@@ -15,16 +15,16 @@ import {
     <Content>Mustermann</Content>
   </LabeledValue>
   <LabeledValue>
-    <Label>Telefon</Label>
-    <Content>+49 571 000000</Content>
-  </LabeledValue>
-  <LabeledValue>
     <Label>Straße</Label>
     <Content>Musterstraße 1</Content>
   </LabeledValue>
   <LabeledValue>
     <Label>Ort</Label>
     <Content>32423 Minden</Content>
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Telefon</Label>
+    <Content>+49 571 000000</Content>
   </LabeledValue>
   <LabeledValue>
     <Label>E-Mail</Label>
