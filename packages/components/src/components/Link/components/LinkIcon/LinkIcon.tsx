@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactElement } from "react";
 import {
   IconDownload,
   IconExternalLink,
@@ -6,19 +6,18 @@ import {
 import type { LinkProps } from "@/components/Link";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
-import styles from "../../Link.module.scss";
+import styles from "./LinkIcon.module.scss";
 
-export const LinkIcon: FC<LinkProps> = (props) => {
-  const { unstyled, target, download } = props;
+export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
+  props,
+) => {
+  const { unstyled, target, download, withZeroWidthJoiner = false } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Link");
-
-  if (unstyled) {
-    return null;
-  }
+  let icon: ReactElement | null = null;
 
   if (download) {
-    return (
+    icon = (
       <IconDownload
         className={styles.linkIcon}
         aria-label={stringFormatter.format("download")}
@@ -27,7 +26,7 @@ export const LinkIcon: FC<LinkProps> = (props) => {
   }
 
   if (target === "_blank") {
-    return (
+    icon = (
       <IconExternalLink
         className={styles.linkIcon}
         aria-label={stringFormatter.format("external")}
@@ -35,7 +34,20 @@ export const LinkIcon: FC<LinkProps> = (props) => {
     );
   }
 
-  return null;
+  if (unstyled || !icon) {
+    return null;
+  }
+
+  if (withZeroWidthJoiner) {
+    return (
+      <span className={styles.linkIcon}>
+        {"\u200D"}
+        {icon}
+      </span>
+    );
+  }
+
+  return icon;
 };
 
 export default LinkIcon;
