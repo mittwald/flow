@@ -29,6 +29,12 @@ import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { ComponentGroupingMenu } from "@/app/_components/layout/MainNavigation/components/ComponentGroupingMenu";
 import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/ComponentGroupingView";
 import { compareLabels } from "@/app/_lib/compareLabels";
+import {
+  GroupExpansionProvider,
+  useGroupExpansion,
+} from "@/app/_components/layout/MainNavigation/components/GroupExpansion";
+import { GroupExpansionButton } from "@/app/_components/layout/MainNavigation/components/GroupExpansionButton";
+import { isActiveDocsPage } from "@/app/_lib/isActiveDocsPage";
 
 const componentsPathSegment = "04-components";
 
@@ -62,17 +68,15 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
 
   const pathname = treeItem.pathname;
   const isComponent = pathname.includes("04-components");
-  const lastSlashIndex = currentPathname.lastIndexOf("/");
-  const currentPage = isComponent
-    ? currentPathname.substring(0, lastSlashIndex)
-    : currentPathname;
 
   const component = treeItem.mdxSource.frontmatter.component;
 
   return (
     <Link
       href={`${pathname}${isComponent ? "/overview" : ""}`}
-      aria-current={pathname === currentPage ? "page" : undefined}
+      aria-current={
+        isActiveDocsPage(pathname, currentPathname) ? "page" : undefined
+      }
     >
       {treeItem.getNavTitle()}
       {component && <ComponentStatusBadge name={component} />}
@@ -133,9 +137,24 @@ const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
   const { tree, group } = props;
+  const groupExpansion = useGroupExpansion();
+  const currentPathname = usePathname();
+
+  const containsActivePage = collectMdxFiles(Object.entries(tree)).some(
+    (treeItem) => isActiveDocsPage(treeItem.pathname, currentPathname),
+  );
+
+  const defaultExpanded =
+    groupExpansion?.getDefaultExpanded(containsActivePage);
 
   return (
-    <NavigationGroup collapsable>
+    // `defaultExpanded` only applies on mount, so the group is remounted
+    // whenever the default it should follow changes.
+    <NavigationGroup
+      key={`${groupExpansion?.nonce}-${defaultExpanded}`}
+      collapsable
+      defaultExpanded={defaultExpanded}
+    >
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
@@ -154,10 +173,11 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
   );
 
   return (
-    <>
+    <GroupExpansionProvider>
       <Section>
         <Header>
           <Heading>Components</Heading>
+          <GroupExpansionButton />
           <ComponentGroupingMenu />
         </Header>
         <ComponentGroupingView view="grouped">
@@ -181,7 +201,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
           <NavigationEntries entries={integrationEntries} />
         </Navigation>
       </Section>
-    </>
+    </GroupExpansionProvider>
   );
 };
 
