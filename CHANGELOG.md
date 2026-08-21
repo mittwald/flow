@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1041](https://github.com/mittwald/flow/compare/0.2.0-alpha.1040...0.2.0-alpha.1041) (2026-08-21)
+
+### Bug Fixes
+
+* **Overlay:** fixes aria focus fight with browser extensions ([#2862](https://github.com/mittwald/flow/issues/2862)) ([a94b1b8](https://github.com/mittwald/flow/commit/a94b1b801c4e397440431e8489512d07e1c9bb1c))
+
 # [0.2.0-alpha.1040](https://github.com/mittwald/flow/compare/0.2.0-alpha.1039...0.2.0-alpha.1040) (2026-08-21)
 
 ### Bug Fixes
