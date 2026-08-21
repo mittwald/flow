@@ -23,6 +23,7 @@ import Content from "@/components/Content";
 import ActionGroup from "@/components/ActionGroup";
 import { Badge } from "@/components/Badge";
 import Alert from "@/components/Alert";
+import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -81,7 +82,9 @@ export const MultipleSections: Story = {
             Rebel Alliance Briefing <Badge>Subscribed</Badge>
           </Heading>
 
-          <Switch defaultSelected>Transmissions</Switch>
+          <Switch defaultSelected>
+            <Label>Transmissions</Label>
+          </Switch>
           <ContextualHelpTrigger>
             <Button />
             <ContextualHelp>

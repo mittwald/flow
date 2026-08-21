@@ -13,7 +13,9 @@ import {
 <Section>
   <Header>
     <Heading>Cronjob</Heading>
-    <Switch>Aktiviert</Switch>
+    <Switch>
+      <Label>Aktiviert</Label>
+    </Switch>
   </Header>
   <ColumnLayout l={[1, 1]}>
     <TextField>
