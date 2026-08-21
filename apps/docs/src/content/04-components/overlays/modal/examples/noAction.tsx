@@ -3,6 +3,7 @@ import {
   ActionGroup,
   Button,
   Heading,
+  Label,
   Section,
   Switch,
 } from "@mittwald/flow-react-components";
@@ -14,9 +15,11 @@ import {
   <div className="flow--modal--content">
     <Section>
       <Switch defaultSelected>
-        Container Frontend anzeigen
+        <Label>Container Frontend anzeigen</Label>
       </Switch>
-      <Switch>Extensions anzeigen</Switch>
+      <Switch>
+        <Label>Extensions anzeigen</Label>
+      </Switch>
     </Section>
   </div>
   <ActionGroup className="flow--modal--action-group">

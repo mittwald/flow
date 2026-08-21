@@ -199,7 +199,9 @@ export default () => {
         <Section>
           <Header>
             <Heading>Spamschutz</Heading>
-            <Switch defaultSelected>Aktivieren</Switch>
+            <Switch defaultSelected>
+              <Label>Aktivieren</Label>
+            </Switch>
           </Header>
           <Text>
             Der Spamfilter schützt dich vor ungewollten

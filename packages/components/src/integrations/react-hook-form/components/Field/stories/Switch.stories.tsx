@@ -15,6 +15,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
 import { FieldError } from "@/components/FieldError";
+import { Label } from "@/components/Label";
 
 const submitAction = action("submit");
 
@@ -43,7 +44,9 @@ const meta: Meta<typeof Field> = {
       <Form form={form} onSubmit={handleSubmit}>
         <Section>
           <Field name="isEnabled">
-            <Switch>Engage hyperdrive</Switch>
+            <Switch>
+              <Label>Engage hyperdrive</Label>
+            </Switch>
           </Field>
 
           <ActionGroup>
@@ -75,10 +78,12 @@ export const WithFieldError: Story = {
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Section>
           <Field name="field">
-            <Switch {...props}>Field1</Switch>
+            <Switch {...props}>
+              <Label>Field1</Label>
+            </Switch>
           </Field>
           <Switch>
-            Field2
+            <Label>Field2</Label>
             <FieldError>ErrorFromOuterFieldError!</FieldError>
           </Switch>
         </Section>
@@ -93,7 +98,9 @@ export const WithFocus: Story = {
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field name="field">
-          <Switch {...props}>Field</Switch>
+          <Switch {...props}>
+            <Label>Field</Label>
+          </Switch>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <ActionGroup>
