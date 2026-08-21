@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1043](https://github.com/mittwald/flow/compare/0.2.0-alpha.1042...0.2.0-alpha.1043) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1042](https://github.com/mittwald/flow/compare/0.2.0-alpha.1041...0.2.0-alpha.1042) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1041](https://github.com/mittwald/flow/compare/0.2.0-alpha.1040...0.2.0-alpha.1041) (2026-08-21)
+
+### Bug Fixes
+
+* **Overlay:** fixes aria focus fight with browser extensions ([#2862](https://github.com/mittwald/flow/issues/2862)) ([a94b1b8](https://github.com/mittwald/flow/commit/a94b1b801c4e397440431e8489512d07e1c9bb1c))
+
+# [0.2.0-alpha.1040](https://github.com/mittwald/flow/compare/0.2.0-alpha.1039...0.2.0-alpha.1040) (2026-08-21)
+
+### Bug Fixes
+
+* **docs:** keep heading examples full width in live previews ([#2865](https://github.com/mittwald/flow/issues/2865)) ([f0d2b29](https://github.com/mittwald/flow/commit/f0d2b29440c44ef61155c9219537963877a488c7))
+
+# [0.2.0-alpha.1039](https://github.com/mittwald/flow/compare/0.2.0-alpha.1038...0.2.0-alpha.1039) (2026-08-21)
+
+### Bug Fixes
+
+* **Section:** set size for section header links ([#2861](https://github.com/mittwald/flow/issues/2861)) ([3d6cd8b](https://github.com/mittwald/flow/commit/3d6cd8bb06c30b7c039de92eba624793b4aed1ce))
+
+# [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
+
+### Bug Fixes
+
+* **docs:** align component order in navigation and lists ([#2859](https://github.com/mittwald/flow/issues/2859)) ([f320e53](https://github.com/mittwald/flow/commit/f320e5327b2dd6b8f0993ad2d3ab5dd1f0d539d5))
+
+# [0.2.0-alpha.1037](https://github.com/mittwald/flow/compare/0.2.0-alpha.1036...0.2.0-alpha.1037) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1036](https://github.com/mittwald/flow/compare/0.2.0-alpha.1035...0.2.0-alpha.1036) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1035](https://github.com/mittwald/flow/compare/0.2.0-alpha.1034...0.2.0-alpha.1035) (2026-08-18)
+
+### Features
+
+* **docs:** add a github link to the header ([#2855](https://github.com/mittwald/flow/issues/2855)) ([b587fcd](https://github.com/mittwald/flow/commit/b587fcdeaaac3e36e21bbe968d2ef7326cc68d74))
+
 # [0.2.0-alpha.1034](https://github.com/mittwald/flow/compare/0.2.0-alpha.1033...0.2.0-alpha.1034) (2026-08-18)
 
 ### Features

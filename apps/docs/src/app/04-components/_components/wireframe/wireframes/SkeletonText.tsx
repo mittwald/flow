@@ -1,17 +1,19 @@
 "use client";
 import type { FC } from "react";
 import {
-  WBox,
   WFrame,
   WStack,
+  WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 
-export const SkeletonWireframe: FC = () => (
+export const SkeletonTextWireframe: FC = () => (
   <WFrame justifyContent="center">
     <WStack width="72%">
-      <WBox tone="300" height={64} />
+      <WText tone="300" height={28} width="46%" />
+      <WText tone="300" />
+      <WText tone="300" width="74%" />
     </WStack>
   </WFrame>
 );
 
-export default SkeletonWireframe;
+export default SkeletonTextWireframe;
