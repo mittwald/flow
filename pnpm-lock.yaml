@@ -413,7 +413,7 @@ importers:
         version: 3.3.1(@fortawesome/fontawesome-svg-core@7.3.1)(react@19.2.7)
       '@internationalized/string':
         specifier: ^3.2.9
-        version: 3.2.9
+        version: 3.2.10
       '@internationalized/string-compiler':
         specifier: ^3.4.1
         version: 3.4.1
@@ -2810,8 +2810,8 @@ packages:
   '@internationalized/string-compiler@3.4.1':
     resolution: {integrity: sha512-S1whKbypxHbl+XrESQpE/ZzJV+WreR7HE/2KCpxWwpsZn8N9iFN3BUgI3X20RVmEqJ+73hwAtP1RSNXPhJfvmg==}
 
-  '@internationalized/string@3.2.9':
-    resolution: {integrity: sha512-kzP/M/mbQxODlmOt4bIQZ2SBVUWUSqMLXooXixnX7noche8WHaQcA+nwFN1K2KCF/cp+LDUhcJsCicwkvhD1pg==}
+  '@internationalized/string@3.2.10':
+    resolution: {integrity: sha512-PDx6//vHSpRnHfxqMqto11zQvhsaU74O3mKv2F/0eicGZcl9NLjQmGlbHz/LsJh5tLKp4A4L7ZVTzN1/MmMTvA==}
 
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
@@ -11815,7 +11815,7 @@ snapshots:
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.11.4
 
-  '@internationalized/string@3.2.9':
+  '@internationalized/string@3.2.10':
     dependencies:
       '@swc/helpers': 0.5.23
 
@@ -13006,7 +13006,7 @@ snapshots:
     dependencies:
       '@internationalized/date': 3.12.2
       '@internationalized/message': 3.1.10
-      '@internationalized/string': 3.2.9
+      '@internationalized/string': 3.2.10
       '@swc/helpers': 0.5.23
       react: 19.2.7
       react-aria: 3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -18555,7 +18555,7 @@ snapshots:
     dependencies:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.7
-      '@internationalized/string': 3.2.9
+      '@internationalized/string': 3.2.10
       '@react-types/shared': 3.36.0(react@19.2.7)
       '@swc/helpers': 0.5.23
       aria-hidden: 1.2.6
@@ -18665,7 +18665,7 @@ snapshots:
     dependencies:
       '@internationalized/date': 3.12.2
       '@internationalized/number': 3.6.7
-      '@internationalized/string': 3.2.9
+      '@internationalized/string': 3.2.10
       '@react-types/shared': 3.36.0(react@19.2.7)
       '@swc/helpers': 0.5.23
       react: 19.2.7
