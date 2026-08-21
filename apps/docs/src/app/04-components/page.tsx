@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import styles from "@/app/layout.module.scss";
 import { ComponentsOverview } from "@/app/04-components/_components/ComponentsOverview";
+import { compareLabels } from "@/app/_lib/compareLabels";
 
 const contentFolder = "src/content/04-components";
 
@@ -23,7 +24,7 @@ export default async function Page() {
       description: mdxFile.mdxSource.frontmatter.description,
       href: `/04-components${mdxFile.pathname}/overview`,
     }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => compareLabels(a.name, b.name));
 
   return (
     <LayoutCard className={styles.mainContent}>

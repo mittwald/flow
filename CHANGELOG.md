@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
+
+### Bug Fixes
+
+* **docs:** align component order in navigation and lists ([#2859](https://github.com/mittwald/flow/issues/2859)) ([f320e53](https://github.com/mittwald/flow/commit/f320e5327b2dd6b8f0993ad2d3ab5dd1f0d539d5))
+
 # [0.2.0-alpha.1037](https://github.com/mittwald/flow/compare/0.2.0-alpha.1036...0.2.0-alpha.1037) (2026-08-19)
 
 **Note:** Version bump only for package @mittwald/flow-project
