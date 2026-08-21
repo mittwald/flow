@@ -83,6 +83,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
 import type { AccordionProps } from "@/components/Accordion";
@@ -169,6 +170,7 @@ export interface FlowComponentPropsTypes {
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   Rating: RatingProps;
+  RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
   Segment: SegmentProps;
@@ -264,6 +266,7 @@ const propsContextSupportingComponentsMap: Record<
   RadioButton: true,
   RadioGroup: true,
   Rating: true,
+  RatingSegment: true,
   SearchField: true,
   Section: true,
   SectionHeader: true,
