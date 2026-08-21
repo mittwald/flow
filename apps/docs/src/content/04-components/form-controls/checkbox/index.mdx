@@ -1,6 +1,75 @@
 ---
 component: Checkbox
-description: Mit einer Checkbox wählt der User eine Option aus oder ab.
+description:
+  Eine Checkbox stellt eine Option dar, die aus- oder abgewählt werden kann.
 ---
 
-<Wireframe />
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Wähle den initialen Zustand nachvollziehbar und sinnvoll. Möglich sind
+  ausgewählt, nicht ausgewählt oder uneindeutig.
+- Ordne mehrere Checkboxen logisch und nachvollziehbar an. Mehr dazu unter
+  [CheckboxGroup](/04-components/form-controls/checkbox-group).
+- Nutze für eine visuell stärkere Auswahl alternativ den
+  [CheckboxButton](/04-components/form-controls/checkbox-button).
+
+## Checkbox vs. Switch
+
+Mit den Components Checkbox und [Switch](/04-components/form-controls/switch)
+können Optionen aktiviert/ausgewählt werden.
+
+<DoAndDont>
+  <Plain heading="Verwende eine Checkbox, um z. B. ...">
+    - dem User eine Auswahloption zur Bestätigung zu geben.
+    - Auswahlmöglichkeiten in einem Formular anzubieten, die gespeichert werden müssen.
+
+  </Plain>
+
+  <Plain heading="Verwende einen Switch, um z. B. ...">
+    - eine Funktion direkt zu aktivieren oder zu deaktivieren.
+    - eine Einstellung sofort zu ändern, ohne sie separat speichern zu müssen.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Indeterminate
+
+Die Property `isIndeterminate` zeigt an, dass sich eine Checkbox in einem
+visuell uneindeutigen Zustand befindet – also weder vollständig ausgewählt noch
+vollständig abgewählt ist. Sie wird verwendet, um übergeordnete Checkboxen
+darzustellen, bei denen nur ein Teil der untergeordneten Optionen ausgewählt
+wurde.
+
+<LiveCodeEditor example="indeterminated" editorCollapsed stretch />
+
+---
+
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User die Checkbox gerade nicht auswählen kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit …
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

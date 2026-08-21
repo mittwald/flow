@@ -26,20 +26,19 @@ angeordnet sein. Für eine intuitive Bedienung:
   damit Mausnutzer nicht zwischen Klicken und Tippen wechseln müssen.
 
 Zur Strukturierung von Formularen können Form Controls mithilfe von
-[Sections](/04-components/structure/section/overview) gruppiert und mit
-[ColumnLayouts](/04-components/structure/column-layout/overview) in Spalten
-aufgeteilt werden. Forms werden im mStudio in der Regel in einem
-[Modal](/04-components/overlays/modal/overview) platziert. Weitere Informationen
-findest du im Pattern
-[Anlegen und Bearbeiten](/03-patterns/01-patterns/anlegeprozess).
+[Sections](/04-components/structure/section) gruppiert und mit
+[ColumnLayouts](/04-components/structure/column-layout) in Spalten aufgeteilt
+werden. Forms werden im mStudio in der Regel in einem
+[Modal](/04-components/overlays/modal) platziert. Weitere Informationen findest
+du im Pattern [Anlegen und Bearbeiten](/03-patterns/01-patterns/anlegeprozess).
 
 ## Progressively Disclosed Form Controls
 
 In manchen Fällen können Form Controls schrittweise eingeblendet werden. Sie
 sind dabei visuell unter einem übergeordneten Control verschachtelt. Ein
 gängiges Muster ist die Nutzung des "aktivierten" Zustands einer
-[Checkbox](/04-components/form-controls/checkbox/overview) oder
-[RadioGroup](/04-components/form-controls/radio-group/overview). Dieser Zustand
+[Checkbox](/04-components/form-controls/checkbox) oder
+[RadioGroup](/04-components/form-controls/radio-group). Dieser Zustand
 entscheidet, ob ein zugehöriges Form Control angezeigt wird.
 
 ---
@@ -52,26 +51,24 @@ oder der Heading.
 
 ## Label
 
-Ein gutes [Label](/04-components/content/label/overview) vermittelt alle
-notwendigen Informationen klar und prägnant (max. 2 Wörter). Ist ein Form
-Control optional, füge den Zusatz „(optional)“ hinzu. Können die
-Eingabeanforderungen aus dem Kontext erschlossen werden, kann auf ein sichtbares
-Label verzichtet werden. In diesem Fall muss das Form Control über
-`aria-labelledby` verknüpft oder mit `aria-label` beschrieben werden.
+Ein gutes [Label](/04-components/content/label) vermittelt alle notwendigen
+Informationen klar und prägnant (max. 2 Wörter). Ist ein Form Control optional,
+füge den Zusatz „(optional)“ hinzu. Können die Eingabeanforderungen aus dem
+Kontext erschlossen werden, kann auf ein sichtbares Label verzichtet werden. In
+diesem Fall muss das Form Control über `aria-labelledby` verknüpft oder mit
+`aria-label` beschrieben werden.
 
 ## Fields / Controls
 
 Das Design System bietet eine große Auswahl an wiederverwendbaren Form Controls.
 Dazu gehören verschiedene **Fields** wie zum Beispiel
-[TextField](/04-components/form-controls/text-field/overview),
-[NumberField](/04-components/form-controls/number-field/overview) oder
-[PasswordCreationField](/04-components/form-controls/password-creation-field/overview)
-sowie **Controls** wie
-[Checkboxen](/04-components/form-controls/checkbox/overview),
-[Selects](/04-components/form-controls/select/overview) oder
-[RadioGroups](/04-components/form-controls/radio-group/overview). Alle
-Components sind im Bereich Components unter dem Menüpunkt Form Controls zu
-finden.
+[TextField](/04-components/form-controls/text-field),
+[NumberField](/04-components/form-controls/number-field) oder
+[PasswordCreationField](/04-components/form-controls/password-creation-field)
+sowie **Controls** wie [Checkboxen](/04-components/form-controls/checkbox),
+[Selects](/04-components/form-controls/select) oder
+[RadioGroups](/04-components/form-controls/radio-group). Alle Components sind im
+Bereich Components unter dem Menüpunkt Form Controls zu finden.
 
 ## FieldDescription
 
@@ -96,13 +93,12 @@ verschwinden Placeholder bei der Eingabe von Text. Zum anderen werden sie von
 Assistenztechnologien oft nicht zuverlässig erkannt und sind schwieriger zu
 verarbeiten als eine FieldDescription. Statt eines Placeholders:
 
-- Nutze ein [Label](/04-components/content/label/overview) für essenzielle
-  Informationen zu den Eingabeanforderungen.
+- Nutze ein [Label](/04-components/content/label) für essenzielle Informationen
+  zu den Eingabeanforderungen.
 - Nutze eine FieldDescription für Beispiele oder Formatierungshinweise.
 
-Eine Ausnahme ist das
-[SearchField](/04-components/form-controls/search-field/overview). Es besitzt
-ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
+Eine Ausnahme ist das [SearchField](/04-components/form-controls/search-field).
+Es besitzt ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
 
 ---
 
@@ -111,9 +107,8 @@ ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
 Standardmäßig erfolgt die Validierung erst beim Absenden des Forms, damit der
 User es ohne Unterbrechung ausfüllen kann. Zum Absenden wird der
 `<SubmitButton/>` verwendet. Nutze die Components
-[Form (React Hook Form)](/04-components/form-controls/form-react-hook-form/overview)
-oder
-[Field (React Hook Form)](/04-components/form-controls/field-react-hook-form/overview),
+[Form (React Hook Form)](/04-components/form-controls/form-react-hook-form) oder
+[Field (React Hook Form)](/04-components/form-controls/field-react-hook-form),
 um die Form Controls von Flow nahtlos in das Formular-Management von React Hook
 Form zu integrieren.
 

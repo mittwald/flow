@@ -61,18 +61,13 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   }, [overlay]);
 
   const pathname = treeItem.pathname;
-  const isComponent = pathname.includes("04-components");
-  const lastSlashIndex = currentPathname.lastIndexOf("/");
-  const currentPage = isComponent
-    ? currentPathname.substring(0, lastSlashIndex)
-    : currentPathname;
 
   const component = treeItem.mdxSource.frontmatter.component;
 
   return (
     <Link
-      href={`${pathname}${isComponent ? "/overview" : ""}`}
-      aria-current={pathname === currentPage ? "page" : undefined}
+      href={pathname}
+      aria-current={pathname === currentPathname ? "page" : undefined}
     >
       {treeItem.getNavTitle()}
       {component && <ComponentStatusBadge name={component} />}
