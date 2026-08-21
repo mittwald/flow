@@ -143,7 +143,7 @@ export const Link = flowComponent("Link", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         {children}
-        <LinkIcon {...props} />
+        <LinkIcon withZeroWidthJoiner {...props} />
       </PropsContextProvider>
     </Link>
   );
