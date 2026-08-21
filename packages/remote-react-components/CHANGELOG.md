@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1039](https://github.com/mittwald/flow/compare/0.2.0-alpha.1038...0.2.0-alpha.1039) (2026-08-21)
+
+### Bug Fixes
+
+* **Section:** set size for section header links ([#2861](https://github.com/mittwald/flow/issues/2861)) ([3d6cd8b](https://github.com/mittwald/flow/commit/3d6cd8bb06c30b7c039de92eba624793b4aed1ce))
+
 # [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
