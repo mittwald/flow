@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1040](https://github.com/mittwald/flow/compare/0.2.0-alpha.1039...0.2.0-alpha.1040) (2026-08-21)
+
+### Bug Fixes
+
+* **docs:** keep heading examples full width in live previews ([#2865](https://github.com/mittwald/flow/issues/2865)) ([f0d2b29](https://github.com/mittwald/flow/commit/f0d2b29440c44ef61155c9219537963877a488c7))
+
 # [0.2.0-alpha.1039](https://github.com/mittwald/flow/compare/0.2.0-alpha.1038...0.2.0-alpha.1039) (2026-08-21)
 
 ### Bug Fixes
