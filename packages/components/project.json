@@ -86,6 +86,26 @@
         "{projectRoot}/src/status/componentStatus.ts"
       ]
     },
+    "test:compile": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
+      ]
+    },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
+      ]
+    },
     "test:browser": {
       "dependsOn": [
         {
