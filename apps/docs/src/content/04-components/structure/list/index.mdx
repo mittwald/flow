@@ -21,11 +21,11 @@ description:
 - Platziere weiteren Seiteninhalt oberhalb der List. So verursacht das Nachladen
   über den „Mehr anzeigen“-Button keine Layout-Verschiebungen; die List nimmt
   die volle Breite des Contents einer
-  [LayoutCard](/04-components/structure/layout-card/overview) ein.
+  [LayoutCard](/04-components/structure/layout-card) ein.
 - Beschreibe die List zugänglich. Ist sie der einzige Hauptinhalt einer Seite,
   erhält sie ein `aria-label`; hat sie eine eigene
-  [Heading](/04-components/content/heading/overview), wird diese über
-  `aria-labelledby` zugeordnet.
+  [Heading](/04-components/content/heading), wird diese über `aria-labelledby`
+  zugeordnet.
 
 ---
 
@@ -58,7 +58,7 @@ die maximale Breite der Kacheln.
 
 Ideal für Daten, die schnell erfassbar sein müssen, während die optische
 Gestaltung zweitrangig ist. Nutze `<List.Table />`, um die List als
-[Table](/04-components/structure/table/overview) darzustellen – dabei gelten die
+[Table](/04-components/structure/table) darzustellen – dabei gelten die
 Guidelines der Table.
 
 <LiveCodeEditor example="mode-table" editorCollapsed />
@@ -71,19 +71,18 @@ Ein ListItem repräsentiert ein spezifisches Element einer Kategorie (z. B. eine
 Domain, E-Mail-Adresse oder ein Projekt) und zeigt nur die Informationen, die
 zum Verständnis nötig sind. In der Listenansicht besteht es typischerweise aus:
 
-- **Avatar:** Der [Avatar](/04-components/content/avatar/overview) steht am
-  Anfang. Ein [Icon](/04-components/content/icon/overview) spiegelt die
-  Kategorie wider (z. B. ein Domain-Icon); ein hochgeladenes
-  [Image](/04-components/content/image/overview) wird angezeigt, andernfalls
-  erscheinen Initialen.
+- **Avatar:** Der [Avatar](/04-components/content/avatar) steht am Anfang. Ein
+  [Icon](/04-components/content/icon) spiegelt die Kategorie wider (z. B. ein
+  Domain-Icon); ein hochgeladenes [Image](/04-components/content/image) wird
+  angezeigt, andernfalls erscheinen Initialen.
 - **Titel und Untertitel:** Der Titel gibt den Namen wieder, der Untertitel
   ergänzt weitere Informationen nach dem Muster „Beschreibung – 1. Information
   – 2. Information“.
 - **Content Slots:** Zusätzliche Bereiche (Top und Bottom Content), die flexibel
   befüllt werden können.
 - **Aktionen:** Interaktionen erfolgen über ein
-  [ContextMenu](/04-components/actions/context-menu/overview) oder direkt als
-  [Buttons](/04-components/actions/button/overview) im ListItem.
+  [ContextMenu](/04-components/actions/context-menu) oder direkt als
+  [Buttons](/04-components/actions/button) im ListItem.
 
 In der Rasteransicht ist die Darstellung kompakter: Der Avatar wird größer und
 eckig, Top Content sowie die Accordion-Funktion entfallen.
@@ -104,11 +103,11 @@ wird in `<Content slot="bottom" />` platziert.
 
 ## Mit Checkboxen
 
-[Checkboxen](/04-components/form-controls/checkbox/overview) in einem ListItem
-werden automatisch am Anfang der Zeile angeordnet. Ihre Funktionalität wird
-nicht von der List gesteuert und muss individuell implementiert werden. Achte
-darauf, dass die gesamte Zeile zur Auswahl genutzt werden kann – nutze dafür
-`onAction` der List.
+[Checkboxen](/04-components/form-controls/checkbox) in einem ListItem werden
+automatisch am Anfang der Zeile angeordnet. Ihre Funktionalität wird nicht von
+der List gesteuert und muss individuell implementiert werden. Achte darauf, dass
+die gesamte Zeile zur Auswahl genutzt werden kann – nutze dafür `onAction` der
+List.
 
 <LiveCodeEditor example="item-checkbox" editorCollapsed />
 
@@ -122,9 +121,9 @@ platziert werden. Die Position wird über das `slot`-Property gesteuert.
 ## Mit ColumnLayout
 
 Dem ListItem können die
-[ColumnLayout](/04-components/structure/column-layout/overview)-Properties `s`,
-`m` und `l` mitgegeben werden, um Seitenverhältnis und Umbruchverhalten von
-Header und Content zu steuern.
+[ColumnLayout](/04-components/structure/column-layout)-Properties `s`, `m` und
+`l` mitgegeben werden, um Seitenverhältnis und Umbruchverhalten von Header und
+Content zu steuern.
 
 <LiveCodeEditor example="item-column-layout" editorCollapsed stretch />
 
@@ -137,7 +136,7 @@ die entsprechenden Content Slots nicht angezeigt.
 ## Mit ActionGroup
 
 Verwende eine ActionGroup innerhalb des `<Content />`, um
-[Buttons](/04-components/actions/button/overview) im ListItem zu platzieren.
+[Buttons](/04-components/actions/button) im ListItem zu platzieren.
 
 <LiveCodeEditor example="item-action-group" editorCollapsed stretch />
 
@@ -180,18 +179,17 @@ sind.
 # Filter
 
 Ein Klick auf den Filter-Button öffnet ein
-[ContextMenu](/04-components/actions/context-menu/overview), in dem Filter
-aktiviert oder deaktiviert werden können.
+[ContextMenu](/04-components/actions/context-menu), in dem Filter aktiviert oder
+deaktiviert werden können.
 
 - Standardmäßig erlaubt ein Filter die **Mehrfachauswahl**, damit User nach
   mehreren Kriterien filtern können; die Optionen erscheinen dann als
-  [Checkbox](/04-components/form-controls/checkbox/overview). Bei
-  **Einzelauswahl** werden sie als
-  [RadioGroup](/04-components/form-controls/radio-group/overview) dargestellt.
-- Jeder **aktive Filter** wird durch eine
-  [Badge](/04-components/status/badge/overview) visualisiert, die per Klick
-  entfernt werden kann. Sind mindestens zwei Filter aktiv, erscheint zusätzlich
-  ein „Filter zurücksetzen“-Button.
+  [Checkbox](/04-components/form-controls/checkbox). Bei **Einzelauswahl**
+  werden sie als [RadioGroup](/04-components/form-controls/radio-group)
+  dargestellt.
+- Jeder **aktive Filter** wird durch eine [Badge](/04-components/status/badge)
+  visualisiert, die per Klick entfernt werden kann. Sind mindestens zwei Filter
+  aktiv, erscheint zusätzlich ein „Filter zurücksetzen“-Button.
 - Mehrere Filter **derselben Kategorie** (z. B. Status, Art, Größe) werden in
   einem eigenen, passend benannten Filter-Button zusammengefasst. Filter ohne
   Kategorie gruppierst du unter einem allgemeinen „Filter“-Button.
@@ -243,10 +241,10 @@ Enddatum eingrenzen.
 # Suche
 
 Verwende `<List.Search />` innerhalb der List, um ein
-[SearchField](/04-components/form-controls/search-field/overview) anzuzeigen.
+[SearchField](/04-components/form-controls/search-field) anzuzeigen.
 Standardmäßig startet die Suche automatisch; soll sie erst auf Enter auslösen,
 setze `autoSubmit` auf `false`. Öffnet sich die List in einem
-[Modal](/04-components/overlays/modal/overview), fokussiere das Suchfeld über
+[Modal](/04-components/overlays/modal), fokussiere das Suchfeld über
 `autoFocus`, damit der User direkt tippen kann.
 
 ---
@@ -291,9 +289,9 @@ verwendet. Über das `loadingView`-Property eines `<List.Item />` – oder eines
 `<TableCell />` in der Tabellenansicht – lässt sich diese Ansicht anpassen. Sie
 gilt in allen Ansichten (List, Tiles, Table) und auch für einzelne Items, die
 nach dem initialen Laden noch suspenden – etwa weil ihr Inhalt eigene Daten
-nachlädt. Gestalte sie mit [Skeleton](/04-components/content/skeleton/overview)
-und `SkeletonText` so, dass sie dem Inhalt in Aufbau und Größe nahekommt, damit
-der Übergang ohne Layout-Sprung wirkt.
+nachlädt. Gestalte sie mit [Skeleton](/04-components/content/skeleton) und
+`SkeletonText` so, dass sie dem Inhalt in Aufbau und Größe nahekommt, damit der
+Übergang ohne Layout-Sprung wirkt.
 
 <LiveCodeEditor example="loadingView" editorCollapsed stretch />
 
@@ -301,11 +299,11 @@ der Übergang ohne Layout-Sprung wirkt.
 
 Über `emptyView` zeigst du eine eigene Ansicht an, wenn die List keine Einträge
 enthält – in der Regel eine
-[IllustratedMessage](/04-components/content/illustrated-message/overview), die
-den User über einen [Button](/04-components/actions/button/overview) einlädt,
-das erste Element zu erstellen. Liefert eine Suche oder ein Filter kein
-Ergebnis, zeigt `emptySearchResultView` einen entsprechenden Hinweis. Ist das
-jeweilige Property nicht gesetzt, verwendet die List eine vordefinierte Ansicht.
+[IllustratedMessage](/04-components/content/illustrated-message), die den User
+über einen [Button](/04-components/actions/button) einlädt, das erste Element zu
+erstellen. Liefert eine Suche oder ein Filter kein Ergebnis, zeigt
+`emptySearchResultView` einen entsprechenden Hinweis. Ist das jeweilige Property
+nicht gesetzt, verwendet die List eine vordefinierte Ansicht.
 
 <LiveCodeEditor example="customEmptyView" editorCollapsed stretch />
 
@@ -407,9 +405,9 @@ besonders kleinen Bildschirmen wandern diese Elemente zusammen mit der Suche
 eine Zeile nach unten.
 
 Der Inhalt der ListItems bricht bei kleineren Bildschirmgrößen um. Top Content
-kann über [ColumnLayouts](/04-components/structure/column-layout/overview) auf
-kleinen Bildschirmen ausgeblendet werden – dabei dürfen nur Informationen
-entfallen, die der User nicht benötigt, um das ListItem zu verstehen.
+kann über [ColumnLayouts](/04-components/structure/column-layout) auf kleinen
+Bildschirmen ausgeblendet werden – dabei dürfen nur Informationen entfallen, die
+der User nicht benötigt, um das ListItem zu verstehen.
 
 <Info heading="Mobile Variante" mobile example="mobile" />
 
@@ -420,8 +418,8 @@ entfallen, die der User nicht benötigt, um das ListItem zu verstehen.
 ## ActionGroup
 
 Verwende `<ActionGroup />` innerhalb der List, um eine
-[ActionGroup](/04-components/actions/action-group/overview) mit Aktionen
-anzuzeigen, die sich direkt auf die Liste beziehen.
+[ActionGroup](/04-components/actions/action-group) mit Aktionen anzuzeigen, die
+sich direkt auf die Liste beziehen.
 
 <LiveCodeEditor example="actionGroup" editorCollapsed stretch />
 

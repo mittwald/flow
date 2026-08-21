@@ -2,6 +2,7 @@ import {
   Action,
   ActionGroup,
   Button,
+  ColumnLayout,
   Content,
   Heading,
   Label,
@@ -28,6 +29,26 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
         <TextField>
           <Label>Organisationsname</Label>
         </TextField>
+      </Section>
+      <Section>
+        <Heading>Vertragspartnerdaten</Heading>
+        <ColumnLayout rowGap="s" columnGap="l">
+          <TextField>
+            <Label>Vorname</Label>
+          </TextField>
+          <TextField>
+            <Label>Nachname</Label>
+          </TextField>
+          <TextField>
+            <Label>Adresse</Label>
+          </TextField>
+          <TextField>
+            <Label>E-Mail</Label>
+          </TextField>
+          <TextField>
+            <Label>Telefon</Label>
+          </TextField>
+        </ColumnLayout>
       </Section>
     </Content>
     <ActionGroup>

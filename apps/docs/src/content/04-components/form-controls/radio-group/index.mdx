@@ -10,13 +10,12 @@ description:
 
 # Best Practices
 
-- Beschrifte die RadioGroup mit einem
-  [Label](/04-components/content/label/overview). Übernimmt ein nahes Element
-  wie eine [Heading](/04-components/content/heading/overview) diese Rolle, setze
-  stattdessen `aria-label` bzw. `aria-labelledby`.
-- Nutze bei vielen Optionen ein
-  [Select](/04-components/form-controls/select/overview), um die Oberfläche
-  aufgeräumt zu halten. Als Faustregel ab etwa sieben Optionen.
+- Beschrifte die RadioGroup mit einem [Label](/04-components/content/label).
+  Übernimmt ein nahes Element wie eine [Heading](/04-components/content/heading)
+  diese Rolle, setze stattdessen `aria-label` bzw. `aria-labelledby`.
+- Nutze bei vielen Optionen ein [Select](/04-components/form-controls/select),
+  um die Oberfläche aufgeräumt zu halten. Als Faustregel ab etwa sieben
+  Optionen.
 - Wähle zu Beginn eine sinnvolle Option vor. Das vermeidet unnötige
   Fehlermeldungen.
 - Ordne die Optionen nach Wichtigkeit. Die wichtigste steht oben; eine Option
@@ -25,26 +24,6 @@ description:
   Wahl auf einen Blick.
 - Folge in einem Formular dem [Form-Pattern](/03-patterns/01-patterns/forms).
   Dort sind Aufbau, Validierung und Fehlerbehandlung geregelt.
-
-## RadioGroup vs. SegmentedControl
-
-RadioGroup und
-[SegmentedControl](/04-components/form-controls/segmented-control/overview)
-ähneln sich sehr.
-
-<DoAndDont>
-  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
-    - eine Einfachauswahl von 2 bis ungefähr 7 Optionen anzuzeigen.
-    - Optionen mit unterschiedlicher Textlänge darzustellen.
-
-  </Plain>
-
-  <Plain heading="Verwende ein SegmentedControl, um z. B. ...">
-    - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen.
-    - Optionen aus 1 bis 2 Wörtern anzuzeigen, die den darunterliegenden Inhalt verändern.
-
-  </Plain>
-</DoAndDont>
 
 ---
 
@@ -82,18 +61,18 @@ statt `<Radio />` auch `<RadioButton />` nutzen.
 
 Anstelle einer einfachen Bezeichnung kann der `<RadioButton />` auch mit
 zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
-`<RadioButton />` [Text](/04-components/content/text/overview) für eine
-Überschrift und `<Content />` für Fließtext.
+`<RadioButton />` [Text](/04-components/content/text) für eine Überschrift und
+`<Content />` für Fließtext.
 
 <LiveCodeEditor example="content" editorCollapsed stretch />
 
 ## Benutzerdefinierte Spalten
 
 Die RadioGroup verwendet das
-[ColumnLayout](/04-components/structure/column-layout/overview), um eine
-Anpassung der Spalten zu ermöglichen. Bei der Verwendung von RadioButtons
-entspricht der Default dem des ColumnLayouts, während Radios im Default
-untereinander angezeigt werden.
+[ColumnLayout](/04-components/structure/column-layout), um eine Anpassung der
+Spalten zu ermöglichen. Bei der Verwendung von RadioButtons entspricht der
+Default dem des ColumnLayouts, während Radios im Default untereinander angezeigt
+werden.
 
 <LiveCodeEditor example="customColumns" editorCollapsed stretch />
 
@@ -112,16 +91,16 @@ Für eine kurze Hilfestellung zu den Optionen kann unterhalb der `<Radio />` ode
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/04-components/overlays/contextual-help/overview)
-Component, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Benutze die [ContextualHelp](/04-components/overlays/contextual-help) Component,
+wenn du weitere Informationen bereitstellen möchtest, und diese zu lang für die
+FieldDescription sind.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
 
 ## React Hook Form
 
 Weitere Details zur Formularlogik und -validierung findest du in der Component
-[Form (React Hook Form)](/04-components/react-hook-form/form/overview).
+[Form (React Hook Form)](/04-components/react-hook-form/form).
 
 <LiveCodeEditor example="form" editorCollapsed stretch />
 

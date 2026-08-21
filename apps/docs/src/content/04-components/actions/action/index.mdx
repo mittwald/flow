@@ -13,7 +13,7 @@ description:
 
 - Nutze den Pending State nur für Vorgänge unter etwa fünf Sekunden. Für längere
   Prozesse eignet sich eher eine
-  [Notification](/04-components/status/notification/overview).
+  [Notification](/04-components/status/notification).
 - Setze Feedback States nur ein, wenn sie dem Nutzer einen Mehrwert bieten.
 
 ---
@@ -40,8 +40,8 @@ kann das Property `showFeedback` genutzt werden.
 
 Um User vor unbeabsichtigten Aktionen zu schützen, kann ein Bestätigungsmodal
 angezeigt werden. Dafür muss innerhalb der Action ein
-[Modal](/04-components/overlays/modal/overview) mit dem Attribut
-`slot="actionConfirm"` platziert werden.
+[Modal](/04-components/overlays/modal) mit dem Attribut `slot="actionConfirm"`
+platziert werden.
 
 <LiveCodeEditor example="confirmation" editorCollapsed />
 

@@ -11,23 +11,23 @@ description:
 # Best Practices
 
 - Wähle die passende Variante je nach Anwendungsfall. Ein
-  [Image](/04-components/content/image/overview) eignet sich für personalisierte
-  Elemente wie Benutzerprofile, ein [Icon](/04-components/content/icon/overview)
-  für wiederkehrende Inhalte.
+  [Image](/04-components/content/image) eignet sich für personalisierte Elemente
+  wie Benutzerprofile, ein [Icon](/04-components/content/icon) für
+  wiederkehrende Inhalte.
 - Zeige Initialen, wenn kein passendes Image hinterlegt ist.
-- Überlass die Color meist dem enthaltenen Element. Setze über `color` nur dann
-  eine feste Color, wenn sie die Unterscheidung verbessert.
+- Überlass die Farbe meist dem enthaltenen Element. Setze über `color` nur dann
+  eine feste Farbe, wenn sie die Unterscheidung verbessert.
 - Sorge dafür, dass die Bedeutung des Avatars aus dem Kontext hervorgeht.
 - Nutze bei mehreren Avataren nebeneinander einen
-  [AvatarStack](/04-components/content/avatar-stack/overview).
+  [AvatarStack](/04-components/content/avatar-stack).
 
 ---
 
 # Color
 
-Die Color bei der Kombination mit [Icon](/04-components/content/icon/overview)
-oder Initials richtet sich jeweils nach dem übergebenen Child der Component. Für
-eine gezielte Wahl der Color kann das Property `color` verwendet werden.
+Initials erhalten automatisch eine der Colors, abhängig von ihrem Inhalt. Ein
+[Icon](/04-components/content/icon) erhält über den Avatar im Default die Color
+`blue`. Für eine gezielte Wahl kann das Property `color` verwendet werden.
 
 <LiveCodeEditor example="colors" editorCollapsed row />
 
@@ -42,10 +42,10 @@ eine gezielte Wahl der Color kann das Property `color` verwendet werden.
 # Status
 
 Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
-passende Icon und die passende Color. Dieses Property darf nur verwendet werden,
+passende Icon und die passende Farbe. Dieses Property darf nur verwendet werden,
 wenn der Status zusätzlich durch ein benachbartes Element (z. B.
-[Text](/04-components/content/text/overview) oder
-[Label](/04-components/content/label/overview)) eindeutig kommuniziert wird.
+[Text](/04-components/content/text) oder [Label](/04-components/content/label))
+eindeutig kommuniziert wird.
 
 <LiveCodeEditor example="status" editorCollapsed row />
 <LiveCodeEditor example="status-example" editorCollapsed />
@@ -57,28 +57,28 @@ wenn der Status zusätzlich durch ein benachbartes Element (z. B.
 ## Image
 
 Im folgenden Code-Beispiel wird ein Avatar mit einem
-[Image](/04-components/content/image/overview) kombiniert. Wenn kein Image
-vorhanden ist, sollten Initials angezeigt werden.
+[Image](/04-components/content/image) kombiniert. Wenn kein Image vorhanden ist,
+sollten Initials angezeigt werden.
 
 <LiveCodeEditor example="image" editorCollapsed />
 
 Die Initials werden automatisch aus dem Text generiert, der innerhalb von
 `<Initials />` übergeben wird. Sie dienen ausschließlich als Platzhalter für ein
-[Image](/04-components/content/image/overview).
+[Image](/04-components/content/image).
 
 <LiveCodeEditor example="initials" editorCollapsed />
 
 ## Icon
 
-Ein Avatar lässt sich mit einem beliebigen
-[Icon](/04-components/content/icon/overview) kombinieren.
+Ein Avatar lässt sich mit einem beliebigen [Icon](/04-components/content/icon)
+kombinieren.
 
 <LiveCodeEditor example="icon" editorCollapsed />
 
 ## Align
 
-Benutze die [Align](/04-components/structure/align/overview)-Component, um Text
-neben dem Avatar zu platzieren.
+Benutze die [Align](/04-components/structure/align)-Component, um Text neben dem
+Avatar zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
 

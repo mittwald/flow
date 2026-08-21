@@ -10,14 +10,16 @@ description:
 
 # Best Practices
 
-- Zeige nicht zu viele [Avatare](/04-components/content/avatar/overview)
-  gleichzeitig. Empfohlen sind höchstens fünf; für die verbleibende Anzahl nutzt
-  du die Property `totalCount`.
-- Zeige bei Bedarf per Klick mehr Informationen an. Das kann zum Beispiel ein
-  [Modal](/04-components/overlays/modal/overview) mit dem Benutzerprofil sein.
+- Zeige nicht zu viele [Avatare](/04-components/content/avatar) gleichzeitig.
+  Empfohlen sind höchstens fünf; für die verbleibende Anzahl nutzt du die
+  Property `totalCount`.
+- Zeige bei Bedarf per Klick mehr Informationen an. Nutze auf den einzelnen
+  Avataren eine [ContextualHelp](/04-components/overlays/contextual-help) mit
+  dem Namen und auf dem `totalCount`-Avatar ein
+  [Modal](/04-components/overlays/modal) mit allen Usern in einer Liste.
 - Halte die Avatare konsistent zur Darstellung an anderen Stellen. Nutze etwa
   das hochgeladene Profilbild statt eines generischen
-  User-[Icons](/04-components/content/icon/overview).
+  User-[Icons](/04-components/content/icon).
 
 ---
 
@@ -30,9 +32,9 @@ description:
 # Total Count
 
 Über die Property `totalCount` lässt sich die Gesamtzahl der
-[Avatare](/04-components/content/avatar/overview) angeben. Ist `totalCount`
-größer als die Anzahl der angezeigten Avatare, wird ein zusätzlicher Counter mit
-der verbleibenden Anzahl angezeigt.
+[Avatare](/04-components/content/avatar) angeben. Ist `totalCount` größer als
+die Anzahl der angezeigten Avatare, wird ein zusätzlicher Counter mit der
+verbleibenden Anzahl angezeigt.
 
 <LiveCodeEditor example="total-count" editorCollapsed />
 
@@ -40,9 +42,11 @@ der verbleibenden Anzahl angezeigt.
 
 # Klickbar
 
-Mit `onPress` lassen sich Avatare klickbar machen, sodass zu den jeweiligen
-Avataren beispielsweise weitere Informationen im
-[Modal](/04-components/overlays/modal/overview) angezeigt werden können.
+Mache Avatare interaktiv, um mehr Informationen anzuzeigen. Im Beispiel öffnet
+jeder einzelne Avatar eine
+[ContextualHelp](/04-components/overlays/contextual-help) mit dem Namen, während
+der `totalCount`-Avatar über `onCountPress` ein
+[Modal](/04-components/overlays/modal) mit allen Usern öffnet.
 
 <LiveCodeEditor example="clickable" editorCollapsed />
 

@@ -1,8 +1,7 @@
 ---
 component: Separator
 description:
-  Ein Separator ist eine horizontale Linie, die inhaltliche Abschnitte
-  voneinander abgrenzt.
+  Ein Separator ist eine Linie, die inhaltliche Abschnitte voneinander abgrenzt.
 ---
 
 <LiveCodeEditor />
@@ -12,12 +11,21 @@ description:
 # Best Practices
 
 - Verlasse dich auf die automatische Trennung durch die
-  [Section](/04-components/structure/section/overview). Zwischen Sections mit
-  einer H2-[Heading](/04-components/content/heading/overview) setzt sie den
-  Separator meist selbst.
+  [Section](/04-components/structure/section). Zwischen Sections mit einer
+  H2-[Heading](/04-components/content/heading) setzt sie den Separator meist
+  selbst.
 - Richte die Breite des Separators an der Breite des Content-Bereichs aus.
 - Setze den Separator sparsam ein. Bei zu häufiger Verwendung geht die
   strukturierende Wirkung verloren.
+
+---
+
+# Orientierung
+
+Über das Property `orientation` lässt sich der Separator auch vertikal
+ausrichten, um nebeneinanderliegende Inhalte voneinander abzugrenzen.
+
+<LiveCodeEditor example="vertical" editorCollapsed />
 
 ---
 

@@ -247,9 +247,9 @@ each with a link to that Component's page and its own example (Button:
   names both and one example shows them together.
 - **`## React Hook Form` is the fixed convention** for form-capable Components:
   always add it, linking to the
-  [Form (React Hook Form)](/04-components/react-hook-form/form/overview) page. A
-  simple toggle-style Component that ships no dedicated form example (for
-  example Switch) may omit it.
+  [Form (React Hook Form)](/04-components/react-hook-form/form) page. A simple
+  toggle-style Component that ships no dedicated form example (for example
+  Switch) may omit it.
 
 ### Dev edge cases
 
@@ -417,7 +417,7 @@ code identifiers.
 Use inline links generously to connect related documentation.
 
 - Component names in prose link to the Component's page:
-  `[Section](/04-components/structure/section/overview)`.
+  `[Section](/04-components/structure/section)`.
 - Links are root-relative (starting with `/01-get-started`, `/02-foundations`,
   `/03-patterns`, or `/04-components`).
 - Verify a link target exists before adding it, and avoid linking to the same

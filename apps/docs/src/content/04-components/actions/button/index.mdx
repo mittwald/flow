@@ -17,21 +17,20 @@ description:
 - Richte die visuelle Hierarchie nach der Wichtigkeit der Aktion. Nutze dafür
   die verschiedenen Varianten und Colors.
 - Gib dem User nach der Aktion ein visuelles Feedback. Über die
-  [Action](/04-components/actions/action/overview) lässt sich dieses Feedback
-  steuern.
+  [Action](/04-components/actions/action) lässt sich dieses Feedback steuern.
 
 ## Button vs. Link
 
 Verwende für Navigation bevorzugt Links und für Aktionen Buttons. Eine Ausnahme
-können hervorgehobene
-[Call-to-Actions](/04-components/navigation/link/overview#button) sein, bei
-denen ein Button-ähnliches Erscheinungsbild für eine Navigation sinnvoll ist.
+können hervorgehobene [Call-to-Actions](/04-components/navigation/link#button)
+sein, bei denen ein Button-ähnliches Erscheinungsbild für eine Navigation
+sinnvoll ist.
 
 <DoAndDont>
   <Plain heading="Verwende Buttons, um z. B. ...">
     - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
     - Formulare zu speichern oder zurückzusetzen.
-    - in einem [Modal](/04-components/overlays/modal/overview) Aktionen auszuwählen.
+    - in einem [Modal](/04-components/overlays/modal) Aktionen auszuwählen.
 
   </Plain>
 
@@ -109,7 +108,7 @@ steht.
 Die States **Pending**, **Succeeded** und **Failed** geben dem User zusätzliches
 visuelles Feedback darüber, dass im Hintergrund eine Aktion läuft, erfolgreich
 abgeschlossen wurde oder fehlgeschlagen ist. Um diese States zu steuern, kann
-die [Action](/04-components/actions/action/overview)-Komponente genutzt werden.
+die [Action](/04-components/actions/action)-Komponente genutzt werden.
 
 <LiveCodeEditor example="states" editorCollapsed row />
 
@@ -136,7 +135,7 @@ nur dazu, wenn es etwas beiträgt, das der Text allein nicht abdeckt:
 
 - **Verhalten:** Das Icon zeigt, wie sich der Button verhält. Ein Chevron-Icon
   zeigt zum Beispiel an, dass sich dahinter ein
-  [ContextMenu](/04-components/actions/context-menu/overview) verbirgt.
+  [ContextMenu](/04-components/actions/context-menu) verbirgt.
 - **Erkennung:** Das Icon steht produktweit und ausschließlich für eine
   Feature-Familie, nach der User scannen, z. B. das AI-Icon neben „AI Agent
   verbinden".
@@ -152,15 +151,14 @@ es nur Unruhe. Im Zweifel weglassen.
 
 ## Align
 
-Benutze die [Align](/04-components/structure/align/overview)-Component, um
-deinen Button neben Input-Feldern zu platzieren.
+Benutze die [Align](/04-components/structure/align)-Component, um deinen Button
+neben Input-Feldern zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
 
 ## ActionGroup
 
-Benutze die
-[ActionGroup](/04-components/actions/action-group/overview)-Component, um
+Benutze die [ActionGroup](/04-components/actions/action-group)-Component, um
 zusammengehörige Aktionen zu gruppieren und automatisch in eine konsistente
 Hierarchie (Haupt- und Nebenaktion) zu bringen.
 
@@ -168,8 +166,8 @@ Hierarchie (Haupt- und Nebenaktion) zu bringen.
 
 ## Action
 
-Benutze die [Action](/04-components/actions/action/overview)-Component, um die
-States eines Buttons zu steuern.
+Benutze die [Action](/04-components/actions/action)-Component, um die States
+eines Buttons zu steuern.
 
 <LiveCodeEditor example="action" editorCollapsed />
 

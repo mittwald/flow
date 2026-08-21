@@ -12,10 +12,10 @@ description:
 # Best Practices
 
 - Kommuniziere den Fortschritt eindeutig. Ein Beispiel ist „8 GB von 10 GB".
-- Hebe Schwellenwerte bei der Speicherplatzauslastung visuell hervor. Ab etwa 80
-  % Auslastung wechselt der Status zur Warning.
+- Kombiniere die Status-Farben gezielt, um Zustände hervorzuheben. Wechsle etwa
+  bei hoher Auslastung auf Warning oder Danger.
 - Nutze bei unbestimmtem Fortschritt eine Alternative wie den
-  [LoadingSpinner](/04-components/status/loading-spinner/overview).
+  [LoadingSpinner](/04-components/status/loading-spinner).
 - Aktualisiere dauerhaft angezeigte ProgressBars regelmäßig. Das erhält die
   Verlässlichkeit, etwa bei der Speicherplatzauslastung.
 
@@ -39,9 +39,8 @@ soll.
 # Status
 
 Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Success**,
-**Info**, **Warning** und **Danger**. Diese Status helfen insbesondere bei der
-Darstellung von Speicherplatzauslastung, um Schwellenwerte visuell hervorzuheben
-(z. B. Statuswechsel ab 80 % Auslastung zur Warning).
+**Info**, **Warning** und **Danger**. Wechsle bei einer hohen Auslastung zum
+Beispiel auf Warning oder Danger, um den Zustand hervorzuheben.
 
 <LiveCodeEditor example="status" editorCollapsed />
 

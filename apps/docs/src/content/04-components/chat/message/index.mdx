@@ -12,9 +12,9 @@ description:
 # Best Practices
 
 - Gruppiere mehrere Messages in einem
-  [MessageThread](/04-components/chat/message-thread/overview).
-- Halte das [ContextMenu](/04-components/actions/context-menu/overview) schlank.
-  Es enthält nur direkt relevante Aktionen wie Bearbeiten und Löschen.
+  [MessageThread](/04-components/chat/message-thread).
+- Halte das [ContextMenu](/04-components/actions/context-menu) schlank. Es
+  enthält nur direkt relevante Aktionen wie Bearbeiten und Löschen.
 
 ---
 
@@ -29,10 +29,9 @@ sich Hintergrundfarbe und Anordnung der Message.
 
 # Custom Color
 
-Im Default sind `sender` blau und `responder` grau hinterlegt. Über die `color`
-Property lässt sich eine Message gezielt hervorheben, etwa als System-Nachricht
-oder interne Notiz. Achte dabei selbst auf einen ausreichenden Kontrast zur
-Textfarbe.
+Über die `color` Property lässt sich eine Message gezielt hervorheben, etwa als
+System-Nachricht oder interne Notiz. Achte dabei selbst auf einen ausreichenden
+Kontrast zur Textfarbe.
 
 <LiveCodeEditor example="color" editorCollapsed />
 
@@ -42,16 +41,16 @@ Textfarbe.
 
 ## ActionGroup
 
-Ergänze eine Message um einen [Button](/04-components/actions/button/overview)
-oder eine [ActionGroup](/04-components/actions/action-group/overview). Die
-Actions sollten immer in direktem Bezug zum Inhalt der Message stehen.
+Ergänze eine Message um einen [Button](/04-components/actions/button) oder eine
+[ActionGroup](/04-components/actions/action-group). Die Actions sollten immer in
+direktem Bezug zum Inhalt der Message stehen.
 
 <LiveCodeEditor example="action" editorCollapsed />
 
 ## Markdown
 
-Nutze die [Markdown](/04-components/content/markdown/overview)-Component, um den
-Text einer Message als Markdown zu rendern.
+Nutze die [Markdown](/04-components/content/markdown)-Component, um den Text
+einer Message als Markdown zu rendern.
 
 <LiveCodeEditor example="markdown" editorCollapsed />
 
