@@ -1,3 +1,8 @@
-import { Switch } from "@mittwald/flow-react-components";
+import {
+  Label,
+  Switch,
+} from "@mittwald/flow-react-components";
 
-<Switch defaultSelected>Autoresponder</Switch>;
+<Switch defaultSelected>
+  <Label>Autoresponder</Label>
+</Switch>;

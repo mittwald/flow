@@ -10,8 +10,9 @@ description:
 
 # Best Practices
 
-- Spiegele das finale Layout so gut wie möglich wider. Nutze vereinfachte
-  Platzhalter für Textblöcke, [Avatare](/04-components/content/avatar) oder
+- Spiegele das finale Layout so gut wie möglich wider. Nutze vereinfachte Formen
+  wie [SkeletonText](/04-components/content/skeleton-text),
+  [Avatare](/04-components/content/avatar) oder
   [Images](/04-components/content/image), damit User die erwarteten Inhalte
   erkennen.
 - Halte Detailgrad und Anzahl gering. Skeletons sollten an Wireframes erinnern
@@ -25,6 +26,25 @@ description:
   Skeleton selbst nutzt bereits `aria-hidden`; setze `aria-busy` nach dem Laden
   auf `false` (siehe
   [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy)).
+
+## Skeleton vs. SkeletonText
+
+Skeleton und [SkeletonText](/04-components/content/skeleton-text) haben dasselbe
+Erscheinungsbild, unterscheiden sich aber in ihrer Größe.
+
+<DoAndDont>
+  <Plain heading="Verwende Skeleton für ...">
+    - Flächen, deren Größe du selbst festlegst.
+    - Bilder, [Avatare](/04-components/content/avatar) und andere grafische Elemente.
+
+  </Plain>
+
+  <Plain heading="Verwende SkeletonText für ...">
+    - Textzeilen, deren Höhe sich aus der umgebenden Typografie ergibt.
+    - Überschriften, Fließtext und Labels.
+
+  </Plain>
+</DoAndDont>
 
 ---
 

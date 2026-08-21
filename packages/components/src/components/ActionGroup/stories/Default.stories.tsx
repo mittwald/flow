@@ -5,6 +5,7 @@ import { Action } from "@/components/Action";
 import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
 import { Link } from "@/components/Link";
+import { Label } from "@/components/Label";
 import { useForm } from "react-hook-form";
 import { Form, SubmitButton } from "@/integrations/react-hook-form";
 
@@ -104,7 +105,9 @@ export const WithSwitch: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Button slot="secondary">Edit</Button>
-      <Switch slot="primary">Activate</Switch>
+      <Switch slot="primary">
+        <Label>Activate</Label>
+      </Switch>
     </ActionGroup>
   ),
 };

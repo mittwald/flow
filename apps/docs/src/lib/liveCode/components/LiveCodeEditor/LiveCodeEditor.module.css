@@ -6,7 +6,8 @@
   justify-content: center;
   gap: var(--size-rem--m);
 
-  > :global(.flow--truncate) {
+  > :global(.flow--truncate),
+  > :global(.flow--heading) {
     align-self: normal;
   }
 

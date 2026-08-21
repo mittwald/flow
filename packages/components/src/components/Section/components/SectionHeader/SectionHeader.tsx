@@ -46,6 +46,9 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
         Switch: {
           tunnel: null,
         },
+        Link: {
+          tunnel: null,
+        },
       },
       FileField: {
         tunnel: {
@@ -94,6 +97,7 @@ export const SectionHeader: FC<SectionHeaderProps> = flowComponent(
         level: 2,
       },
       Link: {
+        size: "s",
         tunnel: {
           id: "actions",
           component: "SectionHeader",
