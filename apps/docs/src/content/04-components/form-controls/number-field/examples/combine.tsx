@@ -1,13 +1,13 @@
 import {
-  Align,
+  Combine,
   Button,
   Label,
   NumberField,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <NumberField>
     <Label>Alter</Label>
   </NumberField>
   <Button>Hinzufügen</Button>
-</Align>;
+</Combine>;

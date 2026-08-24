@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   AvatarStack,
   Button,
@@ -50,12 +50,12 @@ export default () => {
         <Content>
           <Section>
             {users.map((name) => (
-              <Align key={name}>
+              <Combine key={name}>
                 <Avatar>
                   <Initials>{name}</Initials>
                 </Avatar>
                 <Text>{name}</Text>
-              </Align>
+              </Combine>
             ))}
           </Section>
         </Content>

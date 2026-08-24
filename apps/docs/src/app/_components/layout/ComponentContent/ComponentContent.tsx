@@ -13,6 +13,7 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
+import { ComponentStatusCallout } from "@/lib/componentStatus";
 
 interface Props {
   params: StaticParams;
@@ -39,6 +40,8 @@ export const ComponentContent: FC<Props> = async (props) => {
   const path = `/${section}/${mdxFile.slugs[0]}/${mdxFile.slugs[1]}`;
   const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
   const description = mdxFile.mdxSource.frontmatter.description;
+  const component = mdxFile.mdxSource.frontmatter.component;
+  const deprecationNotice = mdxFile.mdxSource.frontmatter.deprecationNotice;
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
@@ -58,6 +61,13 @@ export const ComponentContent: FC<Props> = async (props) => {
                 Markdown
               </Link>
             </Flex>
+
+            {component && (
+              <ComponentStatusCallout
+                name={component}
+                notice={deprecationNotice}
+              />
+            )}
           </Section>
 
           <MdxFileView mdxFile={mdxFile.serialize()} />

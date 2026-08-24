@@ -1,12 +1,12 @@
 import {
-  Align,
+  Combine,
   Button,
   ComboBox,
   Label,
   Option,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <ComboBox>
     <Label>Domain</Label>
     <Option>mydomain.de</Option>
@@ -19,4 +19,4 @@ import {
     <Option>www.onemoredomain.de</Option>
   </ComboBox>
   <Button>Hinzufügen</Button>
-</Align>;
+</Combine>;
