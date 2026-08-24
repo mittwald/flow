@@ -22,12 +22,7 @@ export interface ButtonProps
     FlowComponentProps<HTMLButtonElement> {
   /** Slot for button placement in action groups. */
   slot?: string;
-  /**
-   * The color of the button. `"accent"` is deprecated — use `"success"`
-   * instead.
-   *
-   * @default "primary"
-   */
+  /** The color of the button. @default "primary" */
   color?:
     | "primary"
     | "success"
