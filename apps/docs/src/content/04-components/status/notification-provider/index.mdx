@@ -4,4 +4,47 @@ description:
   Der NotificationProvider dient zur Anzeige und Steuerung von Notifications.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Überflute die User nicht mit zu vielen Notifications.
+- Für die angezeigten Notifications gelten die
+  [Best Practices der Notification](/04-components/status/notification).
+- Gib den Usern bei `autoClose` genug Zeit zum Lesen. Idealerweise ist die
+  Anzeigedauer einstellbar.
+
+---
+
+# Initialisierung
+
+Damit Notifications angezeigt werden können, muss der `<NotificationProvider />`
+als übergeordnete Component eingebunden werden.
+
+<LiveCodeEditor example="provider" />
+
+---
+
+# Automatisches Schließen
+
+Ist das Property `autoClose` gesetzt, verschwinden die Notifications nach 10
+Sekunden.
+
+<LiveCodeEditor example="auto-close" editorCollapsed />
+
+---
+
+# Manuelles Schließen
+
+Die `add()`-Methode gibt eine Notification-ID zurück. Diese kann in der
+`remove()`-Methode verwendet werden, um eine Notification manuell zu schließen.
+
+<LiveCodeEditor example="closeById" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

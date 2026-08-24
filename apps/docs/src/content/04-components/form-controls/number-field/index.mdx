@@ -4,4 +4,99 @@ description:
   Das NumberField erlaubt die Eingabe und schrittweise Anpassung von Zahlen.
 ---
 
-<Wireframe />
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Definiere Mindest- und Höchstwerte (`minValue`/`maxValue`) sinnvoll, wenn du
+  Eingaben einschränken willst.
+- Formuliere das [Label](/04-components/content/label) prägnant und leicht
+  verständlich.
+- Formuliere
+  [Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen)
+  klar, hilfreich und lösungsorientiert.
+
+---
+
+# Einheit
+
+Über das Property `formatOptions` lassen sich Einheiten für das NumberField
+definieren (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+
+<LiveCodeEditor example="unit" editorCollapsed stretch />
+
+---
+
+# Validierung
+
+Nutze für die Validierung
+[React Hook Form](/04-components/react-hook-form/form). Alternativ stehen aber
+auch folgende Properties zur Verfügung:
+
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+
+Bei ungültiger Eingabe wird das NumberField invalidiert. Über `<FieldError />`
+kann eine entsprechende Fehlermeldung ausgegeben werden.
+
+## Required
+
+<LiveCodeEditor example="required" editorCollapsed stretch />
+
+## Invalid
+
+<LiveCodeEditor example="invalid" editorCollapsed stretch />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zum NumberField bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem NumberField interagieren kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## Combine
+
+Benutze die [Combine](/04-components/structure/combine)-Component, um andere
+Components wie einen [Button](/04-components/actions/button) neben dem
+NumberField auszurichten.
+
+<LiveCodeEditor example="combine" editorCollapsed stretch />
+
+## ContextualHelp
+
+Verwende [ContextualHelp](/04-components/overlays/contextual-help), um
+zusätzliche Informationen bereitzustellen, die über den Umfang der
+FieldDescription hinausgehen.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

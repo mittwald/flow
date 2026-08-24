@@ -4,4 +4,86 @@ description:
   Ein Avatar repräsentiert User visuell, per Image, Initials oder Icon.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle die passende Variante je nach Anwendungsfall. Ein
+  [Image](/04-components/content/image) eignet sich für personalisierte Elemente
+  wie Benutzerprofile, ein [Icon](/04-components/content/icon) für
+  wiederkehrende Inhalte.
+- Zeige Initialen, wenn kein passendes Image hinterlegt ist.
+- Überlass die Farbe meist dem enthaltenen Element. Setze über `color` nur dann
+  eine feste Farbe, wenn sie die Unterscheidung verbessert.
+- Sorge dafür, dass die Bedeutung des Avatars aus dem Kontext hervorgeht.
+- Nutze bei mehreren Avataren nebeneinander einen
+  [AvatarStack](/04-components/content/avatar-stack).
+
+---
+
+# Color
+
+Initials erhalten automatisch eine der Colors, abhängig von ihrem Inhalt. Ein
+[Icon](/04-components/content/icon) erhält über den Avatar im Default die Color
+`blue`. Für eine gezielte Wahl kann das Property `color` verwendet werden.
+
+<LiveCodeEditor example="colors" editorCollapsed row />
+
+---
+
+# Sizes
+
+<LiveCodeEditor example="sizes" editorCollapsed row />
+
+---
+
+# Status
+
+Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
+passende Icon und die passende Farbe. Dieses Property darf nur verwendet werden,
+wenn der Status zusätzlich durch ein benachbartes Element (z. B.
+[Text](/04-components/content/text) oder [Label](/04-components/content/label))
+eindeutig kommuniziert wird.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+<LiveCodeEditor example="status-example" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Image
+
+Im folgenden Code-Beispiel wird ein Avatar mit einem
+[Image](/04-components/content/image) kombiniert. Wenn kein Image vorhanden ist,
+sollten Initials angezeigt werden.
+
+<LiveCodeEditor example="image" editorCollapsed />
+
+Die Initials werden automatisch aus dem Text generiert, der innerhalb von
+`<Initials />` übergeben wird. Sie dienen ausschließlich als Platzhalter für ein
+[Image](/04-components/content/image).
+
+<LiveCodeEditor example="initials" editorCollapsed />
+
+## Icon
+
+Ein Avatar lässt sich mit einem beliebigen [Icon](/04-components/content/icon)
+kombinieren.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+## Combine
+
+Benutze die [Combine](/04-components/structure/combine)-Component, um Text neben
+dem Avatar zu platzieren.
+
+<LiveCodeEditor example="combine" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

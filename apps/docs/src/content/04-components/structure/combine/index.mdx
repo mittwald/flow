@@ -1,8 +1,73 @@
 ---
 component: Combine
 description:
-  Combine kombiniert Components gezielt, inklusive Anordnung und
-  Farbanpassungen.
+  Combine ordnet bekannte Kombinationen von Components korrekt zueinander an.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Verwende nur die unterstützten Kombinationen. Andere Kombinationen erzeugen
+  keine Anordnung.
+- Nutze Combine nicht als generisches Layout-Tool. Für eine freie Anordnung ist
+  [Flex](/04-components/structure/flex) vorgesehen, für Spalten das
+  [ColumnLayout](/04-components/structure/column-layout).
+- Nutze neben der Anordnung auch visuelle Anpassungen wie das Setzen von Colors.
+- Combine hieß früher Align. Der alte Name funktioniert weiterhin, gibt aber
+  eine Deprecation-Warnung aus und wird in einer zukünftigen Major-Version
+  entfernt.
+
+## Combine vs. Flex
+
+Combine ist das fertige Pattern, [Flex](/04-components/structure/flex) das freie
+Werkzeug. Prüfe deshalb zuerst, ob die gewünschte Anordnung schon als
+Kombination existiert – dann bleibt sie auch bei geändertem Inhalt und über alle
+Breakpoints korrekt.
+
+<DoAndDont>
+  <Plain heading="Verwende Combine, um ...">
+    - eine der unterstützten Kombinationen darzustellen.
+    - die Anordnung dem Designsystem zu überlassen.
+
+  </Plain>
+
+  <Plain heading="Verwende Flex, um ...">
+    - individuelle Layouts zu gestalten, die keinem festen UI-Pattern folgen.
+    - bewusst vom Standard des Designsystems abzuweichen.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Kombinationen
+
+Neben Avatar + Text unterstützt Combine die folgenden Kombinationen.
+
+## Input + Button
+
+Der Button sitzt auf der Höhe des Eingabefelds – unabhängig davon, ob das Feld
+ein [Label](/04-components/content/label) oder eine FieldDescription hat.
+
+<LiveCodeEditor example="input-button" editorCollapsed />
+
+## Text + CopyButton
+
+<LiveCodeEditor example="text-copy-button" editorCollapsed />
+
+## Icon + Text
+
+<LiveCodeEditor example="icon-text" editorCollapsed />
+
+## Text + ContextualHelp
+
+<LiveCodeEditor example="text-contextual-help" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

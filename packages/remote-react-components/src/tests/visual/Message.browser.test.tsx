@@ -1,11 +1,8 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { combineSince } from "@/tests/lib/combineSince";
 import { test } from "vitest";
 
-// Uses the deprecated `Align` rather than `Combine`: the cross-version harness
-// resolves these components from old published versions, which predate
-// `Combine`. Align renders the same output, so the comparison stays intact.
-
-test.each(testEnvironments)(
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
   "Message (%s)",
   async ({
     testScreenshot,
@@ -17,7 +14,7 @@ test.each(testEnvironments)(
       Button,
       ContextMenuTrigger,
       ContextMenu,
-      Align,
+      Combine,
       Avatar,
       Initials,
       Content,
@@ -35,12 +32,12 @@ test.each(testEnvironments)(
               <Button />
               <ContextMenu />
             </ContextMenuTrigger>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>Luke Skywalker</Text>
-            </Align>
+            </Combine>
             <Text>01.09.2025, 11:00</Text>
           </Header>
 

@@ -3,4 +3,57 @@ component: ImageCropper
 description: Der ImageCropper schneidet ein Bild auf ein bestimmtes Format zu.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle das Seitenverhältnis über `aspect` passend zum späteren
+  Verwendungszweck.
+- Biete dem User eine Möglichkeit zum Zurücksetzen. So kehrt er zum
+  Ausgangszustand des Bildes zurück.
+
+---
+
+# Seitenverhältnis
+
+Über das Property `aspect` kann das Seitenverhältnis angegeben werden.
+
+<LiveCodeEditor example="aspect" editorCollapsed />
+
+---
+
+# Runder Ausschnitt
+
+Über das Property `cropShape` kann zwischen einer rechteckigen und runden
+Ansicht des Ausschnitts gewechselt werden.
+
+<LiveCodeEditor example="crop-shape" editorCollapsed />
+
+---
+
+# Sizes
+
+Über die `width` und `height` Properties kann die Größe des Croppers angepasst
+werden.
+
+<LiveCodeEditor example="size" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## FileDropZone
+
+Kombiniere den ImageCropper mit einer
+[FileDropZone](/04-components/upload/file-drop-zone), um ein hochgeladenes Bild
+direkt zuzuschneiden.
+
+<LiveCodeEditor example="file-drop-zone" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -1,8 +1,27 @@
 ---
 component: Align
 description:
-  Align wurde in Combine umbenannt. Der Name Align funktioniert weiterhin, wird
-  aber in einer zukünftigen Major-Version entfernt.
+  Align heißt jetzt Combine. Der alte Name funktioniert weiterhin, wird aber in
+  einer zukünftigen Major-Version entfernt.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Ersetze `<Align />` durch [`<Combine />`](/04-components/structure/combine).
+  Funktional ändert sich nichts, der neue Name beschreibt die Component
+  treffender.
+- Nutze für die Migration den Codemod aus der
+  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- Align gibt zur Laufzeit eine Deprecation-Warnung aus und wird in einer
+  zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad abgesichert
+  (siehe [Versionierung & Stabilität](/01-get-started/versioning)).
+
+---
+
+# Properties
+
+<PropertiesTables />

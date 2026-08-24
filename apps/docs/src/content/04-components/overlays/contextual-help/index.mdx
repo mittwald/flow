@@ -5,4 +5,38 @@ description:
   einem Popover an.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Ordne ein ContextualHelp immer einem spezifischen Element zu. Das kann zum
+  Beispiel eine [Heading](/04-components/content/heading), ein
+  [Text](/04-components/content/text) oder [Label](/04-components/content/label)
+  sein.
+- Nutze es für weiterführende Erklärungen oder Verweise, nicht für
+  Unerlässliches. Zum Verständnis der Oberfläche notwendige Inhalte gehören
+  direkt in die Oberfläche.
+- Halte den Inhalt kompakt. Eine Aufteilung in mehrere Absätze oder eine
+  Überschrift ist nicht nötig.
+- Gib dem Trigger ein aussagekräftiges `aria-label`. Bevorzugt über die
+  übersetzte `subject` Property, alternativ als vollständiges `aria-label`.
+
+---
+
+# Kombiniere mit …
+
+## Combine
+
+Benutze die [Combine](/04-components/structure/combine) Component, um das
+ContextualHelp z. B. neben einem [Text](/04-components/content/text) zu
+platzieren.
+
+<LiveCodeEditor example="combine" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

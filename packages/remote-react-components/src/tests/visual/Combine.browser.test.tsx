@@ -1,9 +1,6 @@
 import { test } from "vitest";
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-
-// `Combine` is the renamed `Align`. Published versions before this one only
-// export `Align`, so the cross-version harness has nothing to resolve there.
-const combineSince = "0.2.0-alpha.1050";
+import { combineSince } from "@/tests/lib/combineSince";
 
 test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
   "Combine Avatar and Text (%s)",

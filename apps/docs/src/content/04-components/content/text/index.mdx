@@ -5,4 +5,97 @@ description:
   von Text.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Formuliere Texte prägnant, verständlich und hilfreich. Orientiere dich am
+  [Sprach-Guide](/02-foundations/03-content-guidelines/01-sprach-guide).
+- Halte die Benutzeroberfläche auch ohne Text verständlich. Text wird häufig nur
+  unaufmerksam wahrgenommen.
+- Begrenze die Zeilenlänge auf höchstens 75 Zeichen. Längere Zeilen erschweren
+  die Lesbarkeit.
+- Kennzeichne Absätze über `elementType` korrekt als `<p>`.
+
+---
+
+# Color
+
+Zusätzlich zur Standard-Color kann Text in **Light** und **Dark** dargestellt
+werden, wenn die Standard-Color auf farbigen oder dekorativen Hintergründen
+nicht gut funktioniert. Wann welche Color passt, beschreibt
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+---
+
+# Size
+
+Neben der Default-Schriftgröße unterstützt Text auch die Size **Small**. Nutze
+das `<small>`-Tag, um sie zu verwenden.
+
+<LiveCodeEditor example="size" editorCollapsed />
+
+---
+
+# Mit elementType
+
+Verwende die `elementType`-Property, um festzulegen, welches HTML-Element die
+Text-Component rendern soll. Standardmäßig wird ein `<span>` erzeugt. Für
+Fließtexte, die als eigenständige Absätze erkennbar sein sollen, verwende
+stattdessen ein `<p>`-Element.
+
+<LiveCodeEditor example="elementType" editorCollapsed />
+
+---
+
+# HTML-Elemente und Formatierungen
+
+Die Text-Component unterstützt alle gängigen Formatierungen und Elemente wie
+`<strong>`, `<i>`, `<ul>` und `<ol>`.
+
+<Alert>
+  <Heading>Kompatibilität mit Remote Components</Heading>
+  <Content>
+    Bei der Verwendung von Text als Remote Component wird nicht jede HTML
+    Formatierung unterstützt. Aktuell sind dies nur strong, ul, ol, li, small,
+    br. Wenn dir etwas fehlt, sag uns gerne auf GitHub Bescheid.
+    <Link href="https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20Text%20component">
+      Feedback geben
+    </Link>
+  </Content>
+</Alert>
+
+<LiveCodeEditor example="html" editorCollapsed />
+
+---
+
+# No Ligatures
+
+Verwende die `noLigatures`-Property, um typografische Ligaturen in der
+Text-Component zu deaktivieren. Dadurch werden Zeichen unverändert und einzeln
+dargestellt.
+
+<LiveCodeEditor example="noLigatures" editorCollapsed row />
+
+---
+
+# Kombiniere mit ...
+
+## Combine
+
+Benutze die [Combine-Component](/04-components/structure/combine), um neben dem
+Text z. B. ein Icon, einen CopyButton oder ein ContextualHelp zu platzieren.
+
+<LiveCodeEditor example="combine" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />
