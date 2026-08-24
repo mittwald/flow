@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1045](https://github.com/mittwald/flow/compare/0.2.0-alpha.1044...0.2.0-alpha.1045) (2026-08-24)
+
+### Features
+
+* **docs:** consolidate component tabs into a single page ([#2730](https://github.com/mittwald/flow/issues/2730)) ([4a8d9e6](https://github.com/mittwald/flow/commit/4a8d9e612094123b2cf35d44845ed579756bda46)), closes [alert#anwendung](https://github.com/alert/issues/anwendung) [alert-badge#grundlagen](https://github.com/alert-badge/issues/grundlagen) [#categorical-color](https://github.com/mittwald/flow/issues/categorical-color)
+
 # [0.2.0-alpha.1044](https://github.com/mittwald/flow/compare/0.2.0-alpha.1043...0.2.0-alpha.1044) (2026-08-24)
 
 **Note:** Version bump only for package @mittwald/flow-project
