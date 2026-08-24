@@ -5,7 +5,7 @@ import {
   LabeledValue,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout l={[1, 1]} rowGap="s" columnGap="l">
+<ColumnLayout>
   <LabeledValue>
     <Label>Vorname</Label>
     <Content>Max</Content>
