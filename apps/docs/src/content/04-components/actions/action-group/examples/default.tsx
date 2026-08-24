@@ -4,7 +4,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <ActionGroup>
-  <Button color="accent">Organisation erstellen</Button>
+  <Button color="success">Organisation erstellen</Button>
   <Button color="secondary" variant="soft">
     Abbrechen
   </Button>

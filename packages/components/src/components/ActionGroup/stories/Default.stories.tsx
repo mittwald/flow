@@ -18,7 +18,7 @@ const meta: Meta<typeof ActionGroup> = {
   render: (props) => (
     <ActionGroup {...props}>
       <Action onAction={() => sleep(1500)}>
-        <Button color="accent">Recruit pilot</Button>
+        <Button color="success">Recruit pilot</Button>
       </Action>
       <Action>
         <Button slot="abort" variant="soft" color="secondary">
@@ -39,7 +39,7 @@ export const Size: Story = {
   render: (props) => (
     <ActionGroup {...props} size="s">
       <Link slot="abort">Forgot password?</Link>
-      <Button color="accent">Login</Button>
+      <Button color="success">Login</Button>
     </ActionGroup>
   ),
 };
@@ -55,7 +55,7 @@ export const PrimaryActionOnly: Story = {
 export const WithSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
-      <Button slot="primary" color="accent">
+      <Button slot="primary" color="success">
         Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
@@ -71,7 +71,7 @@ export const WithSecondaryAction: Story = {
 export const WithExtraSecondaryAction: Story = {
   render: (props) => (
     <ActionGroup {...props}>
-      <Button slot="primary" color="accent">
+      <Button slot="primary" color="success">
         Add comlink address
       </Button>
       <Button slot="secondary" variant="soft" color="secondary">
@@ -93,7 +93,7 @@ export const PreserveOrder: Story = {
       <Button color="secondary" variant="soft">
         Abort
       </Button>
-      <Button color="accent">Create customer</Button>
+      <Button color="success">Create customer</Button>
       <Button color="secondary" variant="soft">
         Save as draft
       </Button>
@@ -116,7 +116,7 @@ export const WithLink: Story = {
   render: (props) => (
     <ActionGroup {...props}>
       <Link slot="abort">Forgot password?</Link>
-      <Button color="accent">Login</Button>
+      <Button color="success">Login</Button>
     </ActionGroup>
   ),
 };

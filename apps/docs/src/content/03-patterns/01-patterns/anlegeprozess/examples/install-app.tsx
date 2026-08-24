@@ -19,7 +19,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <ModalTrigger>
-  <Button color="accent">Beispiel öffnen</Button>
+  <Button color="success">Beispiel öffnen</Button>
   <Modal offCanvas>
     <Heading>WordPress anlegen</Heading>
     <Content>
@@ -45,7 +45,7 @@ import {
         </TextField>
         <Header>
           <Heading>Hauptdomain zuweisen</Heading>
-          <Button color="accent">Subdomain anlegen</Button>
+          <Button color="success">Subdomain anlegen</Button>
         </Header>
         <Select isRequired placeholder="Domain wählen">
           <Label>Domain</Label>
@@ -68,7 +68,7 @@ import {
       </Section>
     </Content>
     <ActionGroup>
-      <Button color="accent">Anlegen</Button>
+      <Button color="success">Anlegen</Button>
       <Button
         slot="secondary"
         color="secondary"

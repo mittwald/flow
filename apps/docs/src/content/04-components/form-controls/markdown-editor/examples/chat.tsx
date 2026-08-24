@@ -67,5 +67,5 @@ import {
     </Message>
   </MessageThread>
   <MarkdownEditor aria-label="Nachricht" />
-  <Button color="accent">Senden</Button>
+  <Button color="success">Senden</Button>
 </Chat>;

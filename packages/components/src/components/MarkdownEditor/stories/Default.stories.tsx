@@ -207,7 +207,7 @@ export const WithCustomToolbarTool: Story = {
             <ActionGroup>
               <Action closeModal>
                 <Button
-                  color="accent"
+                  color="success"
                   onPress={() => {
                     insertAtEnd("## Next steps\n\n- Review content\n- Publish");
                   }}

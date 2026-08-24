@@ -8,7 +8,7 @@ import {
 
 const colors = [
   "primary",
-  "accent",
+  "success",
   "danger",
   "secondary",
   ...alphaColors,

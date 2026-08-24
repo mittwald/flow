@@ -14,6 +14,7 @@ import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
 import { filterDOMProps } from "@react-aria/utils";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface ButtonProps
   extends
@@ -22,7 +23,13 @@ export interface ButtonProps
   /** Slot for button placement in action groups. */
   slot?: string;
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger" | AlphaColor;
+  color?:
+    | "primary"
+    | "success"
+    | "secondary"
+    | "danger"
+    | AlphaColor
+    | "accent";
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */
@@ -94,8 +101,10 @@ const disablePendingProps = (props: ButtonProps) => {
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
+  const warnDeprecation = useWarnDeprecation();
+
   const {
-    color = "primary",
+    color: colorFromProps = "primary",
     variant = "solid",
     children,
     className,
@@ -112,6 +121,14 @@ export const Button = flowComponent("Button", (props) => {
     elementType,
     ...restProps
   } = props;
+
+  if (colorFromProps === "accent") {
+    warnDeprecation(
+      "The color 'accent' is deprecated and will be removed in a future release. Use 'success' instead.",
+    );
+  }
+
+  const color = colorFromProps === "accent" ? "success" : colorFromProps;
 
   const rootClassName = unstyled
     ? className

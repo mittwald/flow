@@ -28,7 +28,7 @@ export default () => {
     >
       <DomainList.StaticData data={domains} />
       <ActionGroup>
-        <Button color="accent">Anlegen</Button>
+        <Button color="success">Anlegen</Button>
       </ActionGroup>
       <DomainList.Search />
       <DomainList.Filter

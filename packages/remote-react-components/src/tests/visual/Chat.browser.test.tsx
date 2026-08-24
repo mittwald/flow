@@ -56,7 +56,7 @@ test.each(testEnvironments)(
             Attach file
           </Button>
         </FileField>
-        <Button color="accent">Submit</Button>
+        <Button color="success">Submit</Button>
         <FileCardList>
           <FileCard name="death-star-plans.pdf" />
           <FileCard name="rebel-fleet.pdf" />

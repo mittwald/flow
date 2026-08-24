@@ -50,7 +50,7 @@ import {
       Datei anhängen
     </Button>
   </FileField>
-  <Button color="accent">Senden</Button>
+  <Button color="success">Senden</Button>
   <FileCardList>
     <FileCard name="Hochgeladene Datei 1" />
     <FileCard name="Hochgeladene Datei 2" />

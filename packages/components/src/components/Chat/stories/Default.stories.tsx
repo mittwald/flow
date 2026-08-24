@@ -61,7 +61,7 @@ const meta: Meta<typeof Chat> = {
         </Message>
       </MessageThread>
       <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
     </Chat>
   ),
 };
@@ -97,7 +97,7 @@ export const WithUpload: Story = {
           Attach file
         </Button>
       </FileField>
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
       <FileCardList>
         <FileCard name="death-star-plans.pdf" />
         <FileCard name="rebel-briefing.docx" />
@@ -165,7 +165,7 @@ export const WithMarkdownEditor: Story = {
         </Message>
       </MessageThread>
       <MarkdownEditor aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
     </Chat>
   ),
 };
