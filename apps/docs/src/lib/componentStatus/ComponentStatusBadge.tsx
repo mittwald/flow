@@ -9,7 +9,7 @@ interface Props {
 }
 
 /**
- * A single status badge: the level (Beta/Veraltet) takes precedence over the
+ * A single status badge: the level (Beta/Deprecated) takes precedence over the
  * `new` flag and renders as an `AlertBadge`; `Neu` renders as a violet `Badge`
  * only for stable components. Renders nothing when there is no status.
  */
@@ -20,7 +20,7 @@ export const ComponentStatusBadge: FC<Props> = (props) => {
     return <AlertBadge status="info">Beta</AlertBadge>;
   }
   if (status?.level === "deprecated") {
-    return <AlertBadge status="warning">Veraltet</AlertBadge>;
+    return <AlertBadge status="warning">Deprecated</AlertBadge>;
   }
   if (status?.isNew) {
     return <Badge color="violet">Neu</Badge>;

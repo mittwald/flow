@@ -41,7 +41,9 @@ export const deriveComponentStatus = (
   const status: DerivedComponentStatus = { level, isNew };
 
   if (isDeprecated) {
-    const notice = tags.deprecated?.trim();
+    // Prettier wraps a long `@deprecated` line, and the wrap survives into the
+    // tag text — so collapse whitespace to keep the notice one sentence.
+    const notice = tags.deprecated?.replace(/\s+/g, " ").trim();
     if (notice) {
       status.deprecationNotice = notice;
     }

@@ -31,7 +31,7 @@ export const ComponentStatusCallout: FC<Props> = (props) => {
   if (status?.level === "deprecated") {
     return (
       <Alert status="warning">
-        <Heading>Veraltet</Heading>
+        <Heading>Deprecated</Heading>
         <Content>{status.deprecationNotice ?? DEPRECATED_FALLBACK}</Content>
       </Alert>
     );

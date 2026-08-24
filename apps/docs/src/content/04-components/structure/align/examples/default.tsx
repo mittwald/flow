@@ -1,10 +1,16 @@
 import {
   Combine,
-  IconDomain,
+  Avatar,
+  Initials,
   Text,
 } from "@mittwald/flow-react-components";
 
 <Combine>
-  <IconDomain />
-  <Text>mail.agenturserver.de</Text>
+  <Avatar>
+    <Initials>Max Mustermann</Initials>
+  </Avatar>
+  <Text>
+    <strong>Max Mustermann</strong>
+    Organisationsinhaber
+  </Text>
 </Combine>;

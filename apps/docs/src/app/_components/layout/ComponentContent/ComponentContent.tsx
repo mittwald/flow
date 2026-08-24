@@ -13,10 +13,7 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
-import {
-  ComponentStatusBadge,
-  ComponentStatusCallout,
-} from "@/lib/componentStatus";
+import { ComponentStatusCallout } from "@/lib/componentStatus";
 
 interface Props {
   params: StaticParams;
@@ -50,14 +47,11 @@ export const ComponentContent: FC<Props> = async (props) => {
       <LayoutCard className={styles.tabs}>
         <div className={styles.mainContent}>
           <Section>
-            {component && <ComponentStatusCallout name={component} />}
-
-            <Heading level={1}>
-              {mdxFile.getTitle()}
-              {component && <ComponentStatusBadge name={component} />}
-            </Heading>
+            <Heading level={1}>{mdxFile.getTitle()}</Heading>
 
             {description}
+
+            {component && <ComponentStatusCallout name={component} />}
 
             <Flex direction="row" columnGap="m">
               <Link href={mdxFile.getGitHubUrl()}>
