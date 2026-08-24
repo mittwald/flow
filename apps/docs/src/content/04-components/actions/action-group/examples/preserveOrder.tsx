@@ -7,5 +7,5 @@ import {
   <Button color="secondary" variant="soft">
     Abbrechen
   </Button>
-  <Button color="accent">Organisation erstellen</Button>
+  <Button color="success">Organisation erstellen</Button>
 </ActionGroup>;

@@ -56,7 +56,7 @@ export interface ButtonProps
     PropsWithChildren<Omit<Aria.ButtonProps, "children">>,
     FlowComponentProps<HTMLButtonElement> {
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "success" | "secondary" | "danger";
 }
 
 /** @flr-generate all */

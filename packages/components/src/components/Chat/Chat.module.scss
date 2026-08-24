@@ -34,19 +34,19 @@
       width: 100%;
     }
 
-    .accentButton,
+    .successButton,
     .button {
       order: 1;
     }
 
-    .accentButton {
+    .successButton {
       margin-inline-start: auto;
     }
   }
 }
 
 @media (max-width: 550px) {
-  .accentButton,
+  .successButton,
   .button {
     flex-grow: 1;
   }

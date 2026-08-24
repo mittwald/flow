@@ -86,7 +86,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Action onAction={sleepLong}>
-                <Button color="accent">
+                <Button color="success">
                   Backup anlegen
                 </Button>
               </Action>
@@ -271,7 +271,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Action onAction={sleepLong}>
-                <Button color="accent">
+                <Button color="success">
                   SFTP-Benutzer anlegen
                 </Button>
               </Action>

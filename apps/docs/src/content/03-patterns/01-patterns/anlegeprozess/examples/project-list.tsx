@@ -75,7 +75,7 @@ export default () => {
           <Button color="secondary" variant="soft">
             Tarif bestellen
           </Button>
-          <Button color="accent">Anlegen</Button>
+          <Button color="success">Anlegen</Button>
         </ActionGroup>
       </ProjectList.List>
     </LayoutCard>

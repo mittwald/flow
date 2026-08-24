@@ -62,7 +62,7 @@ export const WithHeaderActionGroup: Story = {
           <Button variant="soft" color="secondary">
             Cancel
           </Button>
-          <Button color="accent">Save</Button>
+          <Button color="success">Save</Button>
         </ActionGroup>
       </Header>
       <Text>{dummyText.medium}</Text>

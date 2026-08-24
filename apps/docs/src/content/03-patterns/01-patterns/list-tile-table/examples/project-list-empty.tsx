@@ -25,7 +25,7 @@ export default () => {
             Entwickeln loslegen.
           </Text>
           <ActionGroup>
-            <Button color="accent">Anlegen</Button>
+            <Button color="success">Anlegen</Button>
             <Button
               slot="secondary"
               color="secondary"

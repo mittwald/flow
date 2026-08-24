@@ -24,7 +24,7 @@ import {
     </Content>
     <ActionGroup>
       <Action closeModal>
-        <Button color="accent">Verbinden</Button>
+        <Button color="success">Verbinden</Button>
         <Button variant="soft" color="secondary">
           Abbrechen
         </Button>
