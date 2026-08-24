@@ -3,4 +3,20 @@ component: MessageThread
 description: Der MessageThread gruppiert Messages zu einem Gesprächsverlauf.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Halte die zeitliche Abfolge der Messages konsistent.
+- Zeichne Absender und Antwortender über das `type`-Property als `sender` bzw.
+  `responder` aus.
+- Hebe wichtige Ereignisse mit einem `<MessageSeparator />` hervor. Dazu zählen
+  etwa Statusänderungen oder der Eintritt neuer Teilnehmer.
+
+---
+
+# Properties
+
+<PropertiesTables />

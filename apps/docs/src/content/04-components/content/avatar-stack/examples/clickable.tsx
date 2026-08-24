@@ -1,26 +1,65 @@
 import {
+  Align,
   Avatar,
   AvatarStack,
   Button,
+  ContextualHelp,
+  ContextualHelpTrigger,
+  Content,
+  Heading,
   Initials,
+  Modal,
+  Section,
+  Text,
+  useModalController,
 } from "@mittwald/flow-react-components";
 
-<AvatarStack
-  onCountPress={() => console.log("count clicked")}
->
-  <Button onPress={() => console.log("avatar clicked")}>
-    <Avatar>
-      <Initials>Max Mustermann</Initials>
-    </Avatar>
-  </Button>
-  <Button onPress={() => console.log("avatar clicked")}>
-    <Avatar>
-      <Initials>John Doe</Initials>
-    </Avatar>
-  </Button>
-  <Button onPress={() => console.log("avatar clicked")}>
-    <Avatar>
-      <Initials>Gillian Gopher</Initials>
-    </Avatar>
-  </Button>
-</AvatarStack>;
+export default () => {
+  const controller = useModalController();
+
+  const users = [
+    "Max Mustermann",
+    "John Doe",
+    "Gillian Gopher",
+    "Erika Musterfrau",
+    "Jane Doe",
+  ];
+
+  return (
+    <>
+      <AvatarStack
+        totalCount={users.length}
+        onCountPress={controller.open}
+      >
+        {users.slice(0, 3).map((name) => (
+          <ContextualHelpTrigger key={name}>
+            <Button>
+              <Avatar>
+                <Initials>{name}</Initials>
+              </Avatar>
+            </Button>
+            <ContextualHelp>
+              <Text>{name}</Text>
+            </ContextualHelp>
+          </ContextualHelpTrigger>
+        ))}
+      </AvatarStack>
+
+      <Modal controller={controller}>
+        <Heading>Beteiligte User</Heading>
+        <Content>
+          <Section>
+            {users.map((name) => (
+              <Align key={name}>
+                <Avatar>
+                  <Initials>{name}</Initials>
+                </Avatar>
+                <Text>{name}</Text>
+              </Align>
+            ))}
+          </Section>
+        </Content>
+      </Modal>
+    </>
+  );
+};
