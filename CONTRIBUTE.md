@@ -79,10 +79,12 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
-  changes.
+- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
+  changes. Lint failures surface at push time, so the commit already exists by
+  then — run `pnpm format` and amend or add a follow-up commit.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
-  stay in sync after switching branches or pulling.
+  stay in sync after switching branches or pulling. That same `pnpm install`
+  also registers the forward-merge merge drivers ([above](#getting-started)).
 
 ### Resolving a blocked forward-merge
 
@@ -593,7 +595,7 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
+Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for
 you.
 
 ```shell

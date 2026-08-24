@@ -125,7 +125,7 @@ pnpm nx test:browser components --browser.name=webkit
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # what CI runs
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
 
-pnpm lint                                  # eslint + stylelint + format:check (pre-commit hook runs this)
+pnpm lint                                  # eslint + stylelint + format:check (pre-push hook runs this)
 pnpm format                                # prettier --write
 pnpm format:check                          # prettier --check (part of pnpm lint)
 ```
@@ -168,9 +168,10 @@ and commit the results.
   own task outputs) — `dependsOn` alone only orders execution, it does not fold
   the dependency's hash into the dependent.
 - **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
-  `pnpm install` — expect installs after switching branches. `pre-commit` runs
+  `pnpm install` — expect installs after switching branches. `pre-push` runs
   `pnpm lint` — which includes `format:check`, so a stray unformatted
-  `.md`/`.json`/`.yml` blocks the commit; `pnpm format` fixes it.
+  `.md`/`.json`/`.yml` blocks the push, after the commit already exists;
+  `pnpm format` fixes it.
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
 - **Breaking changes for consumers** ship with a `MIGRATION.md` entry and,
