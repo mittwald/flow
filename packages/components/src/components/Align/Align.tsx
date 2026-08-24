@@ -9,8 +9,7 @@ export interface AlignProps
   extends PropsWithChildren, PropsWithClassName, FlowComponentProps {}
 
 /**
- * @deprecated Align has been renamed to Combine and will be removed in a future
- *   major version. Use Combine instead.
+ * @deprecated Use Combine instead
  * @flr-generate all
  */
 export const Align = flowComponent(

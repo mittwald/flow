@@ -38,7 +38,7 @@
   "@mittwald/flow-react-components#Align": {
     "level": "deprecated",
     "isNew": false,
-    "deprecationNotice": "Align has been renamed to Combine and will be removed in a future major version. Use Combine instead."
+    "deprecationNotice": "Use Combine instead"
   },
   "@mittwald/flow-react-components#Autocomplete": {
     "level": "stable",

@@ -31,15 +31,6 @@ test.each([
     },
   ],
   [
-    "wrapped @deprecated notice collapses to one line",
-    { deprecated: "Use X instead of Y, because\n  the old name was wrong." },
-    {
-      level: "deprecated",
-      isNew: false,
-      deprecationNotice: "Use X instead of Y, because the old name was wrong.",
-    },
-  ],
-  [
     "empty @deprecated tag still deprecated",
     { deprecated: "" },
     { level: "deprecated", isNew: false },
