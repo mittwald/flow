@@ -4,13 +4,18 @@ import {
   ContextMenu,
   ContextMenuTrigger,
   HeaderNavigation,
+  Heading,
+  IconCamera,
   IconLogout,
   IconNotification,
   IconSearch,
   IconSettings,
   IconSupport,
   Image,
+  Initials,
   MenuItem,
+  Section,
+  Separator,
   Text,
 } from "@mittwald/flow-react-components";
 
@@ -34,14 +39,26 @@ import {
       </Avatar>
     </Button>
     <ContextMenu>
-      <MenuItem>
-        <IconSettings />
-        <Text>Profil</Text>
-      </MenuItem>
-      <MenuItem>
-        <IconLogout />
-        <Text>Logout</Text>
-      </MenuItem>
+      <Section>
+        <MenuItem>
+          <Avatar>
+            <Initials>Max Mustermann</Initials>
+          </Avatar>
+          <IconCamera />
+        </MenuItem>
+        <Heading>Max Mustermann</Heading>
+      </Section>
+      <Separator />
+      <Section>
+        <MenuItem>
+          <IconSettings />
+          <Text>Profil</Text>
+        </MenuItem>
+        <MenuItem>
+          <IconLogout />
+          <Text>Logout</Text>
+        </MenuItem>
+      </Section>
     </ContextMenu>
   </ContextMenuTrigger>
 </HeaderNavigation>;

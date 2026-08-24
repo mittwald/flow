@@ -88,7 +88,7 @@ test.each(testEnvironments)(
           <Button>Small & Download</Button>
         </Link>
         <Link>
-          <Button color="accent">Button Color</Button>
+          <Button color="success">Button Color</Button>
         </Link>
         <Link color="dark">
           <Button>Link Color</Button>

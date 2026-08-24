@@ -5,6 +5,6 @@ import {
 
 <Action onAction={() => console.log("close modal")}>
   <Action onAction={() => console.log("save")}>
-    <Button color="accent">Speichern</Button>
+    <Button color="success">Speichern</Button>
   </Action>
 </Action>;

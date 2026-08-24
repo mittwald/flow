@@ -80,7 +80,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Button
-                color="accent"
+                color="success"
                 onPress={() => {
                   insertAtEnd(
                     "## Wartungsfenster\n\nDas Wartungsfenster startet morgen um 22:00 Uhr.",

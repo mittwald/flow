@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Button,
   ColumnLayout,
   CopyButton,
@@ -83,28 +83,28 @@ import {
         <TableRow>
           <TableCell rowHeader>Benutzername</TableCell>
           <TableCell>
-            <Align>
+            <Combine>
               <Text>j.eimertenbrink</Text>
               <CopyButton value="m.muster" />
-            </Align>
+            </Combine>
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell rowHeader>Hostname</TableCell>
           <TableCell>
-            <Align>
+            <Combine>
               <Text>ssh.mittwald.host</Text>
               <CopyButton value="ssh.mittwald.host" />
-            </Align>
+            </Combine>
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell rowHeader>URL</TableCell>
           <TableCell>
-            <Align>
+            <Combine>
               <Text>j.eimertenbrink@ssh.mittwald.host</Text>
               <CopyButton value="m.muster@ssh.mittwald.host" />
-            </Align>
+            </Combine>
           </TableCell>
         </TableRow>
       </TableBody>

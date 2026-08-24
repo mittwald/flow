@@ -3,4 +3,71 @@ component: Kbd
 description: Kbd stellt Tastaturkürzel dar und passt sich dem Betriebssystem an.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Zeige nur tatsächlich verfügbare und funktionierende Keyboard-Shortcuts an.
+- Platziere den Kbd in direktem Bezug zu Inhalt oder Aktion des Shortcuts.
+
+---
+
+# Variants
+
+Die Component wird in zwei Varianten angeboten:
+
+- `plain` – für Shortcuts direkt an Bedienelementen; fügt sich dezent in die
+  Oberfläche ein, ohne aufdringlich zu wirken.
+- `soft` – für erklärende Texte oder Beschreibungen; hebt hervor, dass es sich
+  um einen Keyboard-Shortcut handelt.
+
+<LiveCodeEditor editorCollapsed example="variants" />
+
+---
+
+# Children
+
+Um flexiblere Shortcuts darzustellen, unterstützt die Component auch `children`.
+Hierbei ist darauf zu achten, dass Kbd-Components für die einzelnen Keys gesetzt
+werden müssen, um semantisch korrekte
+[kbd-HTML-Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd)
+zu erzeugen.
+
+<LiveCodeEditor editorCollapsed example="children" />
+
+---
+
+# Kombiniere mit …
+
+## SearchField
+
+Wenn eine Suche durch einen Keyboard-Shortcut fokussiert werden kann, kann die
+Kbd Component mit dem [SearchField](/04-components/form-controls/search-field)
+kombiniert werden, um dem User das verfügbare Tastaturkürzel sichtbar zu machen.
+
+<LiveCodeEditor editorCollapsed example="search-field" />
+
+## ContextMenu
+
+In [ContextMenus](/04-components/actions/context-menu) werden häufig Aktionen
+angezeigt, die zusätzlich per Keyboard-Shortcut ausgelöst werden können. In
+diesem Fall kann Kbd mit dem jeweiligen MenuItem kombiniert werden.
+
+<LiveCodeEditor editorCollapsed example="context-menu" />
+
+## Text
+
+Wird die Kbd Component innerhalb eines [Texts](/04-components/content/text)
+verwendet, wird sie automatisch in der `soft` Variante dargestellt. Dadurch hebt
+sie sich visuell vom Fließtext ab und macht deutlich, dass es sich um einen
+Keyboard-Shortcut handelt.
+
+<LiveCodeEditor editorCollapsed example="text" />
+
+---
+
+# Properties
+
+<PropertiesTables />

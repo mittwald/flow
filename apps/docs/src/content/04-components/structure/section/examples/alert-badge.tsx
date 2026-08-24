@@ -1,5 +1,6 @@
 import {
   AlertBadge,
+  Badge,
   Button,
   ColumnLayout,
   Content,
@@ -18,13 +19,14 @@ import {
   <Header>
     <Heading>
       Mein Projekt
+      <Badge>Produktion</Badge>
       <AlertBadge status="danger">Deaktiviert</AlertBadge>
     </Heading>
 
     <Button variant="soft" color="secondary">
       Datenbank migrieren
     </Button>
-    <Button color="accent">Aktivieren</Button>
+    <Button color="success">Aktivieren</Button>
   </Header>
 
   <ColumnLayout>

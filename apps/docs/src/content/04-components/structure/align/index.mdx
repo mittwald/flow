@@ -1,7 +1,29 @@
 ---
 component: Align
 description:
-  Align kombiniert Components gezielt, inklusive Anordnung und Farbanpassungen.
+  Align ordnet bekannte Kombinationen von Components korrekt zueinander an.
+deprecationNotice:
+  Align wurde in Combine umbenannt und wird in einer zukünftigen Major-Version
+  entfernt – nutze stattdessen Combine.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Ersetze `<Align />` durch [Combine](/04-components/structure/combine).
+  Funktional ändert sich nichts, der neue Name beschreibt die Component
+  treffender.
+- Nutze für die Migration den Codemod aus der
+  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- Align gibt zur Laufzeit eine Deprecation-Warnung aus und wird in einer
+  zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad abgesichert
+  (siehe [Versionierung & Stabilität](/01-get-started/versioning)).
+
+---
+
+# Properties
+
+<PropertiesTables />

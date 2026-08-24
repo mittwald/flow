@@ -4,4 +4,39 @@ description:
   Tooltips zeigen beim Hovern kurze Zusatzinformationen zu einem Element.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Halte den Inhalt kurz und präzise, meist ein bis drei Wörter.
+- Nutze den Tooltip nur für ergänzende Informationen. Wichtige Inhalte wie
+  Fehlermeldungen oder Feedback gehören nicht hinein, da er zum Beispiel auf dem
+  Smartphone unbemerkt bleibt.
+- Verwende im Tooltip nur Text, keine interaktiven Inhalte wie
+  [Buttons](/04-components/actions/button) oder
+  [Links](/04-components/navigation/link).
+- Lass den Tooltip die sichtbare Beschriftung ergänzen, nicht wiederholen.
+
+---
+
+# Delay
+
+Tooltips erscheinen verzögert, damit sie beim Hovern über die Oberfläche nicht
+aufblitzen. Über die `delay` Property des Triggers stehen zwei Verzögerungen zur
+Auswahl.
+
+- **Default (400 ms)** – Verwende ihn, wenn das Element ohne den Tooltip nicht
+  verständlich ist – z. B. ein Button, der nur aus einem Icon besteht.
+- **Long (1500 ms)** – Verwende ihn für ergänzende Informationen an Elementen,
+  die bereits beschriftet sind. Die längere Verzögerung verhindert, dass der
+  Tooltip ungewollt ablenkt.
+
+<LiveCodeEditor example="delay" editorCollapsed row />
+
+---
+
+# Properties
+
+<PropertiesTables />

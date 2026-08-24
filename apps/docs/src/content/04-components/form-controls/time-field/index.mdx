@@ -3,4 +3,68 @@ component: TimeField
 description: Mit dem TimeField können User eine konkrete Uhrzeit angeben.
 ---
 
-<Wireframe />
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Verwende ein verständliches [Label](/04-components/content/label) wie
+  „Uhrzeit".
+- Wähle ein Zeitformat passend zum vertrauten Format des Users und zum Kontext.
+- Wähle sinnvolle Defaultwerte.
+- Schränke Eingaben bei Bedarf mit `minValue` und `maxValue` ein. So lässt du
+  zum Beispiel nur Zeiten zwischen 8 und 16 Uhr zu.
+- Wähle die Genauigkeit über das `granularity` Property passend zur Nutzung. Für
+  Erinnerungen genügen Stunden und Minuten, Sekunden wären unnötig.
+
+---
+
+# Min- und Max-Values
+
+Die wählbare Uhrzeit lässt sich über `minValue` und `maxValue` begrenzen.
+
+<LiveCodeEditor example="minMax" editorCollapsed stretch />
+
+---
+
+# Granularity
+
+Mit der `granularity` Property wird definiert, ob Stunden, Minuten und/oder
+Sekunden auswählbar sind.
+
+<LiveCodeEditor example="granularity" editorCollapsed />
+
+---
+
+# Disabled
+
+Achte bei der Verwendung von **Disabled** darauf, dass aus dem Kontext klar
+wird, warum der User gerade nicht mit dem TimeField interagieren kann.
+
+<LiveCodeEditor example="disabled" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Benutze das [ContextualHelp](/04-components/overlays/contextual-help), wenn
+zusätzliche Informationen bereitgestellt werden sollen, die zu umfangreich für
+die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

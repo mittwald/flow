@@ -12,9 +12,9 @@ filtern und zu sortieren.
 
 # Zentrale Merkmale
 
-Die zwei Components [List](/04-components/structure/list/overview) und
-[Table](/04-components/structure/table/overview) dienen der kompakten Auflistung
-von Elementen. In der Verwendung ist die List jedoch häufiger relevanter.
+Die zwei Components [List](/04-components/structure/list) und
+[Table](/04-components/structure/table) dienen der kompakten Auflistung von
+Elementen. In der Verwendung ist die List jedoch häufiger relevanter.
 
 Die **Table** stellt eine einzelne, eigenständige Tabelle dar, die einer
 klassischen Zeilen- und Spaltenstruktur folgt.
@@ -36,7 +36,7 @@ jeweiligen Elementen ausführen.
 Die Listenansicht ist besonders geeignet, wenn viele Elemente übersichtlich,
 platzsparend und gleichzeitig ansprechend dargestellt werden sollen. Sie
 repräsentiert häufig größere Elemente, bei denen es sich lohnt, einen
-[Avatar](/04-components/content/avatar/overview) anzuzeigen.
+[Avatar](/04-components/content/avatar) anzuzeigen.
 
 Da die Listenansicht die wichtigsten Informationen kompakt vermittelt, wird sie
 oft als Standardansicht einer List im mStudio verwendet. Um Usern weitere
@@ -49,11 +49,11 @@ beispielsweise zu [Detailseiten](/03-patterns/01-patterns/detail-page).
 
 Die Rasteransicht ist sinnvoll, wenn die visuelle Darstellung im Vordergrund
 steht. Das ListItem in Form einer **Tile** enthält hier bewusst nur wenige
-Informationen, damit der [Avatar](/04-components/content/avatar/overview) bzw.
-die visuelle Repräsentation des Elements ins Auge fällt. Sie eignet sich
-besonders für Elemente, bei denen der User selbst ein Image hochgeladen hat oder
-hochladen kann. Da nur wenige inhaltliche Informationen vermittelt werden,
-eignet sich die Rasteransicht besonders gut zur Navigation.
+Informationen, damit der [Avatar](/04-components/content/avatar) bzw. die
+visuelle Repräsentation des Elements ins Auge fällt. Sie eignet sich besonders
+für Elemente, bei denen der User selbst ein Image hochgeladen hat oder hochladen
+kann. Da nur wenige inhaltliche Informationen vermittelt werden, eignet sich die
+Rasteransicht besonders gut zur Navigation.
 
 <LiveCodeEditor example="project-list" editorCollapsed bgColor="mstudio" />
 
@@ -65,8 +65,8 @@ spielt. Die Spaltenüberschriften ermöglichen eine schnelle Zuordnung der
 Informationen, wodurch die Darstellung eher technisch wirkt. Sie wird vor allem
 für Detailinformationen genutzt, nicht für größere visuell hervorgehobene
 Elemente. Die Tabellenansicht verwendet die Component
-[Table](/04-components/structure/table/overview) als Bestandteil der
-[List](/04-components/structure/list/overview).
+[Table](/04-components/structure/table) als Bestandteil der
+[List](/04-components/structure/list).
 
 <LiveCodeEditor example="ticket-list" editorCollapsed bgColor="mstudio" />
 
@@ -74,28 +74,28 @@ Elemente. Die Tabellenansicht verwendet die Component
 
 # Position und Aufbau
 
-[Lists](/04-components/structure/list/overview) und
-[Tables](/04-components/structure/table/overview) werden vor allem für die
-Aufzählung von Elementen verwendet – häufig als Einstiegsseiten zu
+[Lists](/04-components/structure/list) und
+[Tables](/04-components/structure/table) werden vor allem für die Aufzählung von
+Elementen verwendet – häufig als Einstiegsseiten zu
 [Detailansichten](/03-patterns/01-patterns/detail-page).
 
 Wenn die List oder Table auch ohne sichtbare
-[Heading](/04-components/content/heading/overview) (z. B. durch den Seitentitel)
+[Heading](/04-components/content/heading) (z. B. durch den Seitentitel)
 verständlich ist, muss eine versteckte Heading darüber platziert werden. In
 diesem Fall sollte das passendes aria-label nicht vergessen werden.
 
 Eine typische **List** ist wie folgt aufgebaut:
 
 **Header:** Der Header kann
-Steuerelemente/[Buttons](/04-components/actions/button/overview) für den Wechsel
-der Ansicht (Listen-, Raster- oder Tabellenansicht) sowie für Sortierung und
+Steuerelemente/[Buttons](/04-components/actions/button) für den Wechsel der
+Ansicht (Listen-, Raster- oder Tabellenansicht) sowie für Sortierung und
 Filterung beinhalten, wobei auch mehrere Filter gleichzeitig angewendet werden
 können. Zusätzlich bietet der Header einen Action-Bereich, über den
 beispielsweise Anlegeprozesse gestartet werden können.
 
 **Body:** Im Body werden – abhängig von der ausgewählten Ansicht – entweder
 **ListItems** (in der Listen- und Rasteransicht) oder die
-[Table](/04-components/structure/table/overview)-Component angezeigt.
+[Table](/04-components/structure/table)-Component angezeigt.
 
 **Footer:** Unterhalb der Inhalte zeigt der Footer an, wie viele Einträge
 bereits geladen sind und ermöglicht ein Nachladen weiterer Elemente. Um lange
@@ -112,24 +112,23 @@ muss die aktive Sortierung klar erkennbar sein, damit die Orientierung jederzeit
 einfach bleibt.
 
 **Filter:** Filter ermöglichen es, Listenelemente gezielt einzugrenzen. Dabei
-werden Mehrfachauswahlen als
-[Checkboxen](/04-components/form-controls/checkbox/overview) und Einzeloptionen
-als [RadioGroup](/04-components/form-controls/radio-group/overview) dargestellt.
-Alle aktiven Filter werden als [Badges](/04-components/status/badge/overview)
-angezeigt, sodass der User jederzeit sieht, welche Filter gerade aktiv sind.
-Filter derselben Kategorie sollten logisch gruppiert werden, während Filter ohne
-Kategorie unter einem gemeinsamen
-Filter-[Button](/04-components/actions/button/overview) zusammengefasst werden.
-Filter sind in der Regel UND-verknüpft.
+werden Mehrfachauswahlen als [Checkboxen](/04-components/form-controls/checkbox)
+und Einzeloptionen als [RadioGroup](/04-components/form-controls/radio-group)
+dargestellt. Alle aktiven Filter werden als
+[Badges](/04-components/status/badge) angezeigt, sodass der User jederzeit
+sieht, welche Filter gerade aktiv sind. Filter derselben Kategorie sollten
+logisch gruppiert werden, während Filter ohne Kategorie unter einem gemeinsamen
+Filter-[Button](/04-components/actions/button) zusammengefasst werden. Filter
+sind in der Regel UND-verknüpft.
 
 **Suche:** Die Suchfunktion erleichtert das schnelle Auffinden einzelner
 Elemente innerhalb der List. Sie ergänzt die Sortier- und Filterfunktionen, um
 die Navigation besonders bei umfangreichen Listen effizient zu gestalten.
 
-**Actions:** Die [List](/04-components/structure/list/overview) kann eine
-[ActionGroup](/04-components/actions/action-group/overview) mit verschiedenen
-[Buttons](/04-components/actions/button/overview) enthalten, die sich auf den
-Inhalt der List beziehen. Insbesondere Anlegeprozesse (Pattern:
+**Actions:** Die [List](/04-components/structure/list) kann eine
+[ActionGroup](/04-components/actions/action-group) mit verschiedenen
+[Buttons](/04-components/actions/button) enthalten, die sich auf den Inhalt der
+List beziehen. Insbesondere Anlegeprozesse (Pattern:
 [Anlegen und Bearbeiten](/03-patterns/01-patterns/anlegeprozess)) sollten hier
 über einen Button gestartet werden.
 
@@ -139,16 +138,15 @@ Inhalt der List beziehen. Insbesondere Anlegeprozesse (Pattern:
 
 # Erstes Anlegen
 
-Wenn eine [List](/04-components/structure/list/overview) oder
-[Table](/04-components/structure/table/overview) noch keine Elemente enthält,
-sollte dies durch eine
-[IllustratedMessage](/04-components/content/illustrated-message/overview) oder
+Wenn eine [List](/04-components/structure/list) oder
+[Table](/04-components/structure/table) noch keine Elemente enthält, sollte dies
+durch eine [IllustratedMessage](/04-components/content/illustrated-message) oder
 einen kurzen Hinweistext (wenn wenig Platz vorhanden) sichtbar gemacht werden.
 Die Nachricht sollte erklären, warum aktuell keine Einträge vorhanden sind.
 Außerdem sollte sie dem User aufzeigen, welche Inhalte angelegt werden können
 oder welche Schritte er unternehmen kann. Zusätzlich sollte, wenn möglich, ein
-[Button](/04-components/actions/button/overview) oder
-[Link](/04-components/navigation/link/overview) angeboten werden, damit der User
+[Button](/04-components/actions/button) oder
+[Link](/04-components/navigation/link) angeboten werden, damit der User
 beispielsweise den Anlege-Prozess starten kann.
 
 <LiveCodeEditor

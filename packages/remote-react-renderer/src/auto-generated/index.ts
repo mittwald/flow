@@ -31,6 +31,7 @@ import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
+import { Combine as Combine } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { ComponentPropsContextProvider as ComponentPropsContextProvider } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
@@ -203,6 +204,7 @@ export const flowComponents = {
     "ColumnLayout",
     ColumnLayout,
   ),
+  "flr-combine": createFlowRemoteComponentRenderer("Combine", Combine),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-component-props-context-provider": createFlowRemoteComponentRenderer(
     "ComponentPropsContextProvider",

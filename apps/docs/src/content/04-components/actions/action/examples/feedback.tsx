@@ -9,5 +9,5 @@ import {
   }}
   showFeedback
 >
-  <Button color="accent">Speichern</Button>
+  <Button color="success">Speichern</Button>
 </Action>;

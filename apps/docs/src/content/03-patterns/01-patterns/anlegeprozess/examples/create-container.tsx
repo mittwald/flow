@@ -1,7 +1,7 @@
 import {
   Action,
   ActionGroup,
-  Align,
+  Combine,
   Button,
   ColumnLayout,
   Content,
@@ -37,7 +37,7 @@ export default () => {
 
   return (
     <ModalTrigger>
-      <Button color="accent">Beispiel öffnen</Button>
+      <Button color="success">Beispiel öffnen</Button>
       <Modal offCanvas>
         <Heading>Container anlegen</Heading>
         <Content>
@@ -111,12 +111,12 @@ export default () => {
                     </Button>
                     {volume.ai && (
                       <Content slot="bottom">
-                        <Align>
+                        <Combine>
                           <IconAI />
                           <Text>
                             <small>{volume.ai}</small>
                           </Text>
-                        </Align>
+                        </Combine>
                       </Content>
                     )}
                   </ListItemView>
@@ -150,7 +150,7 @@ export default () => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent">Anlegen</Button>
+          <Button color="success">Anlegen</Button>
           <Button
             slot="secondary"
             color="secondary"

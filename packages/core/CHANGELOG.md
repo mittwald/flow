@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1047](https://github.com/mittwald/flow/compare/0.2.0-alpha.1046...0.2.0-alpha.1047) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1046](https://github.com/mittwald/flow/compare/0.2.0-alpha.1045...0.2.0-alpha.1046) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1045](https://github.com/mittwald/flow/compare/0.2.0-alpha.1044...0.2.0-alpha.1045) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
+# [0.2.0-alpha.1044](https://github.com/mittwald/flow/compare/0.2.0-alpha.1043...0.2.0-alpha.1044) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-core
+
 # [0.2.0-alpha.1043](https://github.com/mittwald/flow/compare/0.2.0-alpha.1042...0.2.0-alpha.1043) (2026-08-21)
 
 **Note:** Version bump only for package @mittwald/flow-core

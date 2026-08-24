@@ -9,34 +9,32 @@ import { useState } from "react";
 export default () => {
   const [input, setInput] = useState("");
 
-  const generateSuggestItems = () => {
-    return [
-      "example.com",
-      "test.org",
-      "email.net",
-      "mail.com",
-    ]
-      .map((d) => {
-        const email = `${input.split("@")[0]}@${d}`;
-        return (
-          <Option
-            key={email}
-            value={email}
-            textValue={email}
-          >
-            {email}
-          </Option>
-        );
-      })
-      .filter(() => input);
-  };
+  const components = [
+    "Button",
+    "Checkbox",
+    "ContextMenu",
+    "Modal",
+    "Select",
+    "TextField",
+  ];
+
+  const suggestItems = components
+    .filter((name) =>
+      name.toLowerCase().includes(input.toLowerCase()),
+    )
+    .map((name) => (
+      <Option key={name} value={name} textValue={name}>
+        {name}
+      </Option>
+    ))
+    .filter(() => input);
 
   return (
     <Autocomplete>
       <SearchField value={input} onChange={setInput}>
-        <Label>Email</Label>
+        <Label>Komponente</Label>
       </SearchField>
-      {generateSuggestItems()}
+      {suggestItems}
     </Autocomplete>
   );
 };

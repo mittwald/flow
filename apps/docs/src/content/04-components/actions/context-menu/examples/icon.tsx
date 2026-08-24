@@ -2,6 +2,8 @@ import {
   Button,
   ContextMenu,
   ContextMenuTrigger,
+  IconDelete,
+  IconDomain,
   IconInfo,
   MenuItem,
   Text,
@@ -14,17 +16,17 @@ import {
       alert(id);
     }}
   >
-    <MenuItem id="1">
+    <MenuItem id="details">
       <IconInfo />
-      <Text>Item 1</Text>
+      <Text>Details anzeigen</Text>
     </MenuItem>
-    <MenuItem id="2">
-      <IconInfo />
-      <Text>Item 2</Text>
+    <MenuItem id="open">
+      <IconDomain />
+      <Text>Im Browser öffnen</Text>
     </MenuItem>
-    <MenuItem id="3">
-      <IconInfo />
-      <Text>Item 3</Text>
+    <MenuItem id="delete">
+      <IconDelete />
+      <Text>Löschen</Text>
     </MenuItem>
   </ContextMenu>
 </ContextMenuTrigger>;
