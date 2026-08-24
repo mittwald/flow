@@ -24,7 +24,7 @@
 }
 
 .separator {
-  margin-block: var(--size-px--m);
+  margin-block: var(--section--section-to-section-spacing);
 }
 
 .anchorLinkHeading {
@@ -51,6 +51,10 @@
 
   .anchorButton[data-focused] {
     opacity: 1;
+  }
+
+  &h3 {
+    margin-top: var(--section--sub-heading-spacing-m);
   }
 }
 
