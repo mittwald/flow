@@ -1,6 +1,7 @@
 import {
   Header,
   Heading,
+  Label,
   Section,
   Switch,
   Text,
@@ -9,7 +10,9 @@ import {
 <Section>
   <Header>
     <Heading>Autoresponder</Heading>
-    <Switch>Aktivieren</Switch>
+    <Switch>
+      <Label>Aktivieren</Label>
+    </Switch>
   </Header>
   <Text>
     Lasse den Autoresponder für dich arbeiten. Er kann

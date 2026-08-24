@@ -32,8 +32,8 @@ button:
   corner-radius-s:
     value: "{corner-radius.s}"
 
-  # Accent Solid
-  accent-solid-background-color:
+  # Success Solid
+  success-solid-background-color:
     default:
       value: "{success-solid-background-color.default}"
     hover:
@@ -42,14 +42,14 @@ button:
       value: "{success-solid-background-color.pressed}"
     disabled:
       value: "{disabled-solid-background-color}"
-  accent-solid-content-color:
+  success-solid-content-color:
     default:
       value: "{success-solid-content-color}"
     disabled:
       value: "{disabled-solid-content-color}"
 
-  # Accent Plain
-  accent-plain-background-color:
+  # Success Plain
+  success-plain-background-color:
     default:
       value: "{success-plain-background-color.default}"
     hover:
@@ -58,14 +58,14 @@ button:
       value: "{success-plain-background-color.pressed}"
     disabled:
       value: "{disabled-plain-background-color}"
-  accent-plain-content-color:
+  success-plain-content-color:
     default:
       value: "{success-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
 
-  # Accent Soft
-  accent-soft-background-color:
+  # Success Soft
+  success-soft-background-color:
     default:
       value: "{success-soft-background-color.default}"
     hover:
@@ -74,14 +74,14 @@ button:
       value: "{success-soft-background-color.pressed}"
     disabled:
       value: "{disabled-soft-background-color}"
-  accent-soft-content-color:
+  success-soft-content-color:
     default:
       value: "{success-soft-content-color}"
     disabled:
       value: "{disabled-soft-content-color}"
 
-  # Accent Outline
-  accent-outline-background-color:
+  # Success Outline
+  success-outline-background-color:
     default:
       value: "{success-outline-background-color.default}"
     hover:
@@ -90,12 +90,12 @@ button:
       value: "{success-outline-background-color.pressed}"
     disabled:
       value: "{disabled-outline-background-color}"
-  accent-outline-content-color:
+  success-outline-content-color:
     default:
       value: "{success-outline-content-color}"
     disabled:
       value: "{disabled-outline-content-color}"
-  accent-outline-border-color:
+  success-outline-border-color:
     default:
       value: "{success-outline-border-color}"
     disabled:

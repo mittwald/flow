@@ -21,7 +21,7 @@ import {
         <InlineCode>color</InlineCode>
       </TableCell>
       <TableCell>
-        primary | accent | secondary | danger
+        primary | success | secondary | danger
       </TableCell>
       <TableCell>primary</TableCell>
       <TableCell>The color of the button</TableCell>

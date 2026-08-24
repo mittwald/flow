@@ -1,6 +1,7 @@
-import { redirect } from "next/navigation";
-import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
+import type { StaticParams } from "@/lib/mdx/MdxFile";
+import ComponentContent from "@/app/_components/layout/ComponentContent";
+import type { Metadata } from "next";
 
 const contentFolder = "src/content/04-components";
 
@@ -12,6 +13,11 @@ export const generateStaticParams = async () => {
   return await MdxFileFactory.generateStaticParams(contentFolder);
 };
 
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  return await MdxFileFactory.generateMetadata(contentFolder, params);
+};
+
 export default async function Page(props: Props) {
   const params = await props.params;
 
@@ -19,5 +25,5 @@ export default async function Page(props: Props) {
     throw new Error("wrong parameter type");
   }
 
-  redirect(`/04-components/${params.group}/${params.component}/overview`);
+  return <ComponentContent params={params} />;
 }

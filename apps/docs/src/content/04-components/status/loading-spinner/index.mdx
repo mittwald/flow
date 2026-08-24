@@ -4,4 +4,46 @@ description:
   Der LoadingSpinner signalisiert, dass Inhalte im Hintergrund geladen werden.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Setze den LoadingSpinner nur bei unbestimmter Dauer ein. Bei konkret
+  darstellbarem Fortschritt eignet sich eine
+  [ProgressBar](/04-components/status/progress-bar), bei kurzem initialem Laden
+  mit bekannter Layout-Struktur ein [Skeleton](/04-components/content/skeleton).
+- Setze ihn nur bei relevanter Ladezeit ein, als Faustregel ab etwa einer
+  Sekunde. Bei sehr kurzen Ladezeiten bringt visuelles Feedback meist keinen
+  Mehrwert.
+- Kombiniere ihn bei längeren Ladezeiten mit einer
+  [IllustratedMessage](/04-components/content/illustrated-message). So erhält
+  der User zusätzliche Informationen.
+- Platziere ihn dort, wohin der User nach dem Laden schauen soll.
+- Zeige nicht zu viele Spinner gleichzeitig. Mehrere gleichzeitig wirken schnell
+  unruhig.
+
+---
+
+# Color
+
+Im Standardfall wird der LoadingSpinner in der Color **Default** verwendet – ein
+neutraler Ton mit guter Sichtbarkeit, der nicht von der übrigen
+Benutzeroberfläche ablenkt.
+
+## Light und Dark
+
+Auf farbigen oder dekorativen Hintergründen kann der LoadingSpinner in **Light**
+oder **Dark** dargestellt werden. Welche Color wann passt, beschreibt
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

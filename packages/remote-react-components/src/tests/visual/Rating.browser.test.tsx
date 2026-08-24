@@ -70,8 +70,8 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   },
 );
 
-// RatingSegment, fill and maxValue were introduced in alpha.1039.
-const ratingSegmentSince = "0.2.0-alpha.1039";
+// RatingSegment, fill and maxValue were introduced in alpha.1047.
+const ratingSegmentSince = "0.2.0-alpha.1047";
 
 test.skipIf(crossVersion({ below: ratingSegmentSince })).each(testEnvironments)(
   "Rating segments (%s)",

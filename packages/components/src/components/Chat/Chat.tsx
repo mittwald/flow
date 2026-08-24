@@ -39,7 +39,9 @@ export const Chat: FC<ChatProps> = flowComponent(
       },
       Button: {
         className: dynamic((props) => {
-          return props.color === "accent" ? styles.accentButton : styles.button;
+          return props.color === "success" || props.color === "accent"
+            ? styles.successButton
+            : styles.button;
         }),
       },
     };

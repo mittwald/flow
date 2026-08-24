@@ -1,20 +1,33 @@
 import {
   ColumnLayout,
+  Content,
   Label,
-  TextField,
+  LabeledValue,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout rowGap="s" columnGap="l">
-  <TextField isRequired>
+<ColumnLayout>
+  <LabeledValue>
     <Label>Vorname</Label>
-  </TextField>
-  <TextField isRequired>
+    <Content>Max</Content>
+  </LabeledValue>
+  <LabeledValue>
     <Label>Nachname</Label>
-  </TextField>
-  <TextField isRequired>
+    <Content>Mustermann</Content>
+  </LabeledValue>
+  <LabeledValue>
     <Label>Straße</Label>
-  </TextField>
-  <TextField isRequired>
-    <Label>Hausnummer</Label>
-  </TextField>
+    <Content>Musterstraße 1</Content>
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Ort</Label>
+    <Content>32423 Minden</Content>
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Telefon</Label>
+    <Content>+49 571 000000</Content>
+  </LabeledValue>
+  <LabeledValue>
+    <Label>E-Mail</Label>
+    <Content>max@example.com</Content>
+  </LabeledValue>
 </ColumnLayout>;

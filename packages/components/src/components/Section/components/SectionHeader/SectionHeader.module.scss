@@ -10,6 +10,7 @@
     gap: var(--section-header--action-to-action-spacing);
     margin-inline-start: auto;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   &:not(:first-child):has(h2),

@@ -5,4 +5,85 @@ description:
   Liste auszuwählen.
 ---
 
-<Wireframe />
+<Alert>
+  <Heading>Verwendung mit dynamisch erstellten Options</Heading>
+  <Content>
+    Wenn die `Select`-Component ohne ein `key` Prop und mit dynamisch erstellten
+    `Options` betrieben wird, kann dies dazu führen, dass die Component
+    einfriert oder nicht mehr reagiert. Verwende ein `key` Prop auf der
+    `Select`-Component, welches sich mit den dynamischen `Options` ändert.
+  </Content>
+</Alert>
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Formuliere das [Label](/04-components/content/label) kurz und deutlich.
+- Nutze einen Placeholder mit klarer Handlungsaufforderung, wenn kein sinnvoller
+  Default existiert. Ein Beispiel ist „Sprache wählen".
+- Benenne die Optionen verständlich und konsistent.
+- Halte die Zahl der Optionen überschaubar. Bei sehr vielen Einträgen eignet
+  sich eher eine [ComboBox](/04-components/form-controls/combo-box).
+- Ordne die Optionen nachvollziehbar. Möglich sind alphabetische, thematische
+  oder Relevanz-Sortierung.
+
+---
+
+# Default-Wert
+
+Mit `defaultSelectedKey` kann eine Default-Option angegeben werden, die dem User
+standardmäßig zuerst angezeigt wird.
+
+<LiveCodeEditor example="defaultValue" editorCollapsed stretch />
+
+---
+
+# Multiple
+
+Über `selectionMode` kann zwischen den Modi `single` und `multiple` gewechselt
+werden.
+
+<LiveCodeEditor example="multiple" editorCollapsed stretch />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zu den Auswahloptionen des Select bereitzustellen, kann
+unterhalb eine `<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## Align
+
+Benutze die [Align](/04-components/structure/align) Component, um beispielsweise
+einen Button neben dem Select zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed stretch />
+
+## ContextualHelp
+
+Benutze das [ContextualHelp](/04-components/overlays/contextual-help), um
+weitere Informationen bereitstellen zu können.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/04-components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

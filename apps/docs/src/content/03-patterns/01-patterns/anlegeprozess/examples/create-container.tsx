@@ -37,7 +37,7 @@ export default () => {
 
   return (
     <ModalTrigger>
-      <Button color="accent">Beispiel öffnen</Button>
+      <Button color="success">Beispiel öffnen</Button>
       <Modal offCanvas>
         <Heading>Container anlegen</Heading>
         <Content>
@@ -150,7 +150,7 @@ export default () => {
           </Section>
         </Content>
         <ActionGroup>
-          <Button color="accent">Anlegen</Button>
+          <Button color="success">Anlegen</Button>
           <Button
             slot="secondary"
             color="secondary"

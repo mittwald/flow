@@ -5,4 +5,137 @@ description:
   Button.
 ---
 
-<Wireframe />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Sammle Aktionen in einem ContextMenu, um die Oberfläche aufgeräumt zu halten.
+- Zeige nur kontextrelevante Inhalte.
+- Benenne die Aktionen klar und verständlich.
+- Stelle häufig genutzte Aktionen nach oben, damit sie leicht erreichbar sind.
+- Gruppiere bei Bedarf mit einer [Section](/04-components/structure/section)
+  oder einem [Separator](/04-components/structure/separator). Das erhöht die
+  Übersichtlichkeit.
+
+---
+
+# Einfach-Auswahl
+
+Durch `selectionMode="single"` verhalten sich die Menüeinträge des ContextMenu
+wie eine [RadioGroup](/04-components/form-controls/radio-group), sodass nur ein
+Element ausgewählt werden kann.
+
+<LiveCodeEditor example="single-select" editorCollapsed />
+
+---
+
+# Mehrfach-Auswahl
+
+Durch `selectionMode="multiple"` verhalten sich die Menüeinträge des ContextMenu
+wie [Checkboxen](/04-components/form-controls/checkbox), sodass mehrere Optionen
+ausgewählt werden können.
+
+<LiveCodeEditor example="multi-select" editorCollapsed />
+
+---
+
+# Mit Switch
+
+Ein [Switch](/04-components/form-controls/switch) im ContextMenu ermöglicht es,
+Aktionen direkt zu aktivieren oder deaktivieren.
+
+<LiveCodeEditor example="switch" editorCollapsed />
+
+---
+
+# Mit Icon
+
+Verwende [Icons](/04-components/content/icon) innerhalb vom `<MenuItem />`, um
+Aktionen schneller verständlich zu machen oder bekannte Funktionen klarer zu
+vermitteln.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+---
+
+# Mit Separator
+
+Ein [Separator](/04-components/structure/separator) gruppiert logisch
+zusammengehörige Aktionen.
+
+<LiveCodeEditor example="separator" editorCollapsed />
+
+---
+
+# Mit ContextMenuSections
+
+Eine `ContextMenuSection` sorgt im ContextMenu für klare Struktur, indem sie
+eine [Heading](/04-components/content/heading) und definierte Abstände
+verwendet.
+
+<LiveCodeEditor example="section" editorCollapsed />
+
+---
+
+# Mit fester Breite
+
+Lege eine Breite für dein ContextMenu fest, um beispielsweise zu verhindern,
+dass das ContextMenu zu breit wird oder die Breite des ContextMenus beim
+Nachladen von Daten springt.
+
+<LiveCodeEditor example="width" editorCollapsed />
+
+---
+
+# Mit Selection Mode
+
+Setze `selectionMode` direkt auf einer `ContextMenuSection`, um mehrere
+Auswahlgruppen mit jeweils eigenem Auswahlverhalten zu kombinieren.
+
+<LiveCodeEditor example="sectionSelectionMode" editorCollapsed />
+
+---
+
+# Mit Avatar
+
+Verwende das ContextMenu als Profilmenü, indem innerhalb ein
+[Avatar](/04-components/content/avatar) und eine
+[Heading](/04-components/content/heading) platziert werden.
+
+<LiveCodeEditor example="avatar" editorCollapsed />
+
+---
+
+# States
+
+Ein MenuItem kann unterschiedliche States annehmen, die anzeigen, dass aktuell
+keine Interaktion möglich ist.
+
+- **Disabled** – Verwende den Disabled-State, wenn das MenuItem keine Aktion
+  oder kein Ereignis auslösen soll.
+- **Pending, Succeeded und Failed** – signalisieren dem Nutzer, dass im
+  Hintergrund etwas passiert, nachdem er auf ein MenuItem geklickt hat. Verwende
+  das MenuItem zusammen mit der Component
+  [Action](/04-components/actions/action), um die States zu steuern.
+
+<LiveCodeEditor example="states" editorCollapsed />
+
+---
+
+# Kombiniere mit …
+
+## Modal
+
+Aktionen im ContextMenu können [Modals](/04-components/overlays/modal) als
+Overlay öffnen, wenn zusätzliche Informationen erfasst, bestätigt oder
+bearbeitet werden müssen.
+
+<LiveCodeEditor example="modal" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

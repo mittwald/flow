@@ -29,14 +29,12 @@ In diesen Fällen sollte der Ladezustand beendet werden, damit User sehen, dass
 ein Fehler eingetreten ist und sie nicht weiter warten müssen.
 
 Die Fehlermeldung sollte immer dort erscheinen, wo der erwartete Inhalt wäre.
-Für größere Bereiche wie
-[LayoutCards](/04-components/structure/layout-card/overview) oder
-[Sections](/04-components/structure/section/overview) eignet sich eine
-[IllustratedMessage](/04-components/content/illustrated-message/overview) mit
-dem Status Danger. Sie signalisiert deutlich, dass der Inhalt aktuell nicht
-verfügbar ist, und bietet idealerweise eine Handlung an, zum Beispiel einen
-[Button](/04-components/actions/button/overview) mit der Beschriftung "Erneut
-laden".
+Für größere Bereiche wie [LayoutCards](/04-components/structure/layout-card)
+oder [Sections](/04-components/structure/section) eignet sich eine
+[IllustratedMessage](/04-components/content/illustrated-message) mit dem Status
+Danger. Sie signalisiert deutlich, dass der Inhalt aktuell nicht verfügbar ist,
+und bietet idealerweise eine Handlung an, zum Beispiel einen
+[Button](/04-components/actions/button) mit der Beschriftung "Erneut laden".
 
 <LiveCodeEditor
   example="illustrated-message"
@@ -45,10 +43,10 @@ laden".
 />
 
 Für kleinere, abgegrenzte UI Elemente wie Tabellen- oder Listenzeilen sollte ein
-[AlertText](/04-components/status/alertText/overview) verwendet werden. So
-bleibt der Kontext erhalten und der Fehler wirkt sich nicht auf die ganze
-[Table](/04-components/structure/table/overview) oder
-[List](/04-components/structure/list/overview) aus.
+[AlertText](/04-components/status/alert-text) verwendet werden. So bleibt der
+Kontext erhalten und der Fehler wirkt sich nicht auf die ganze
+[Table](/04-components/structure/table) oder
+[List](/04-components/structure/list) aus.
 
 <LiveCodeEditor example="alert-text" editorCollapsed bgColor="mstudio" />
 
@@ -77,19 +75,18 @@ Gründen fehlschlagen. Dazu zählen technische Fehler im System, Probleme bei de
 Kommunikation mit dem Backend oder fehlende Berechtigungen.
 
 Wenn eine Aktion fehlschlägt, sollte dies deutlich kommuniziert werden. Dafür
-eignet sich ein [Modal](/04-components/overlays/modal/overview) mit einer
-[IllustratedMessage](/04-components/content/illustrated-message/overview) im
-Status Danger. Diese informiert darüber, dass die Aktion nicht durchgeführt
-werden konnte, und erklärt kurz den Grund, sofern dieser für den User relevant
-ist. Zusätzlich sollte immer ein Ausweg angeboten werden, zum Beispiel die
-Aktion erneut auszuführen.
+eignet sich ein [Modal](/04-components/overlays/modal) mit einer
+[IllustratedMessage](/04-components/content/illustrated-message) im Status
+Danger. Diese informiert darüber, dass die Aktion nicht durchgeführt werden
+konnte, und erklärt kurz den Grund, sofern dieser für den User relevant ist.
+Zusätzlich sollte immer ein Ausweg angeboten werden, zum Beispiel die Aktion
+erneut auszuführen.
 
 <LiveCodeEditor example="modal" editorCollapsed bgColor="mstudio" />
 
 Für Aktionen, die über einen längeren Zeitraum laufen und zunächst erfolgreich
 an das Backend übermittelt werden, aber erst später fehlschlagen, eignen sich
-besser [Notifications](/04-components/status/notification/overview). Ein
-typisches Beispiel ist das Registrieren einer Domain. Weitere Details dazu sind
-im
+besser [Notifications](/04-components/status/notification). Ein typisches
+Beispiel ist das Registrieren einer Domain. Weitere Details dazu sind im
 [Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept)
 beschrieben.

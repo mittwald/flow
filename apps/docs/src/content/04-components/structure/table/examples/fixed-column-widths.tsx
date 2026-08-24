@@ -24,7 +24,7 @@ import {
         <InlineCode>color</InlineCode>
       </TableCell>
       <TableCell>
-        primary | accent | secondary | danger
+        primary | success | secondary | danger
       </TableCell>
       <TableCell>primary</TableCell>
     </TableRow>

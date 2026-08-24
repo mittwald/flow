@@ -86,7 +86,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Action onAction={sleepLong}>
-                <Button color="accent">
+                <Button color="success">
                   Backup anlegen
                 </Button>
               </Action>
@@ -112,7 +112,9 @@ export default () => {
               </Text>
               <ColumnLayout s={[1]} gap="xl">
                 <ColumnLayout s={[1]} gap="s">
-                  <Switch>Erste Schritte</Switch>
+                  <Switch>
+                    <Label>Erste Schritte</Label>
+                  </Switch>
                   <Text>
                     Im Onboarding erklären wir dir alles
                     Wichtige im mStudio.
@@ -122,7 +124,7 @@ export default () => {
 
                 <ColumnLayout s={[1]} gap="s">
                   <Switch defaultSelected>
-                    mittwald Status
+                    <Label>mittwald Status</Label>
                   </Switch>
                   <Text>
                     Wir informieren dich über Wartung und
@@ -131,7 +133,9 @@ export default () => {
                 </ColumnLayout>
 
                 <ColumnLayout s={[1]} gap="s">
-                  <Switch>mittwald Produkt-Slider</Switch>
+                  <Switch>
+                    <Label>mittwald Produkt-Slider</Label>
+                  </Switch>
                   <Text>
                     Im Produkt-Slider erhälst du
                     Informationen und einen schnellen
@@ -141,7 +145,7 @@ export default () => {
 
                 <ColumnLayout s={[1]} gap="s">
                   <Switch defaultSelected>
-                    Neue Features
+                    <Label>Neue Features</Label>
                   </Switch>
                   <Text>
                     Wir entwickeln das mStudio stetig weiter
@@ -153,7 +157,7 @@ export default () => {
 
                 <ColumnLayout s={[1]} gap="s">
                   <Switch defaultSelected>
-                    Neue Blogbeiträge
+                    <Label>Neue Blogbeiträge</Label>
                   </Switch>
                   <Text>
                     Wir zeigen dir den neuesten mittwald
@@ -163,7 +167,9 @@ export default () => {
                 </ColumnLayout>
 
                 <ColumnLayout s={[1]} gap="s">
-                  <Switch>Lastschift Hinweis</Switch>
+                  <Switch>
+                    <Label>Lastschift Hinweis</Label>
+                  </Switch>
                   <Text>
                     Wir informieren über die neue
                     Möglichkeit, deine Rechnungen per
@@ -265,7 +271,7 @@ export default () => {
           <ActionGroup>
             <Action closeModal>
               <Action onAction={sleepLong}>
-                <Button color="accent">
+                <Button color="success">
                   SFTP-Benutzer anlegen
                 </Button>
               </Action>

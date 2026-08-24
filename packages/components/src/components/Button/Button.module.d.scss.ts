@@ -14,7 +14,7 @@ declare const classNames: {
   readonly primary: "primary";
   readonly solid: "solid";
   readonly ariaDisabled: "ariaDisabled";
-  readonly accent: "accent";
+  readonly success: "success";
   readonly danger: "danger";
   readonly secondary: "secondary";
   readonly dark: "dark";
