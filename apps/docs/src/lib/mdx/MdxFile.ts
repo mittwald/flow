@@ -13,6 +13,13 @@ export interface MdxFileMeta {
   description?: string;
   component?: string;
   gitHubComponentPath?: string;
+  /**
+   * German deprecation copy for the status callout. The `@deprecated` tag in
+   * the component's source stays English — it ships in the type declarations
+   * and shows up in every consumer's IDE. Omit this and the callout falls back
+   * to a generic German sentence.
+   */
+  deprecationNotice?: string;
 }
 
 export type StaticParams =

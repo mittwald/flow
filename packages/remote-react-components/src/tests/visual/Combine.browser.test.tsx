@@ -1,6 +1,7 @@
 import { test } from "vitest";
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
-import { combineSince } from "@/tests/lib/combineSince";
+
+const combineSince = "0.2.0-alpha.1050";
 
 test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
   "Combine Avatar and Text (%s)",

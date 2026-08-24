@@ -39,7 +39,10 @@ export const CombineImplementation: FC<CombineProps> = (props) => {
   );
 };
 
-/** @flr-generate all */
+/**
+ * @flowStatus new
+ * @flr-generate all
+ */
 export const Combine = flowComponent("Combine", CombineImplementation, {
   type: "layout",
 });

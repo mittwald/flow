@@ -41,6 +41,7 @@ export const ComponentContent: FC<Props> = async (props) => {
   const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
   const description = mdxFile.mdxSource.frontmatter.description;
   const component = mdxFile.mdxSource.frontmatter.component;
+  const deprecationNotice = mdxFile.mdxSource.frontmatter.deprecationNotice;
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
@@ -51,8 +52,6 @@ export const ComponentContent: FC<Props> = async (props) => {
 
             {description}
 
-            {component && <ComponentStatusCallout name={component} />}
-
             <Flex direction="row" columnGap="m">
               <Link href={mdxFile.getGitHubUrl()}>
                 GitHub
@@ -62,6 +61,13 @@ export const ComponentContent: FC<Props> = async (props) => {
                 Markdown
               </Link>
             </Flex>
+
+            {component && (
+              <ComponentStatusCallout
+                name={component}
+                notice={deprecationNotice}
+              />
+            )}
           </Section>
 
           <MdxFileView mdxFile={mdxFile.serialize()} />
