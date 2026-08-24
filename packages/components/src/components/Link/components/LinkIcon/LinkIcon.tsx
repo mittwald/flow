@@ -23,9 +23,7 @@ export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
         aria-label={stringFormatter.format("download")}
       />
     );
-  }
-
-  if (target === "_blank") {
+  } else if (target === "_blank") {
     icon = (
       <IconExternalLink
         className={styles.linkIcon}
