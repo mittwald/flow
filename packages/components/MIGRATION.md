@@ -2,7 +2,7 @@
 
 ---
 
-## From version `0.2.0-alpha.1044` to `>=0.2.0-alpha.1045`
+## From version `0.2.0-alpha.1045` to `>=0.2.0-alpha.1046`
 
 ### Align renamed to Combine
 
