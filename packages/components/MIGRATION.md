@@ -2,6 +2,44 @@
 
 ---
 
+## From version `0.2.0-alpha.1044` to `>=0.2.0-alpha.1045`
+
+### Align renamed to Combine
+
+`Align` is now called `Combine`. The old name suggested a generic alignment tool
+and clashed with the `align` property of `Flex`; the component actually gives
+known combinations of components a fixed, correct arrangement.
+
+```diff
+- <Align>
++ <Combine>
+    <Avatar />
+    <Text>Max Mustermann</Text>
+- </Align>
++ </Combine>
+```
+
+`Align` (and the `flr-align` remote element) keeps working unchanged, logs a
+deprecation warning at runtime, and will be removed in a future major version.
+
+A codemod renames `Align` to `Combine` and `AlignProps` to `CombineProps`:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAlignToCombine.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder.
+
+The component tokens were renamed along with the component
+(`--align--avatar-text--spacing` is now `--combine--avatar-text--spacing`), and
+so were the CSS class names (`.flow--align` is now `.flow--combine`). Both are
+internal and not covered by Semantic Versioning.
+
+---
+
 ## From version `0.2.0-alpha.1007` to `>=0.2.0-alpha.1016`
 
 ### TooltipTrigger changed delay type

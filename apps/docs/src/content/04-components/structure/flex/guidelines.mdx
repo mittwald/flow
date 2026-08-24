@@ -8,17 +8,18 @@ spezifische, schwer zu standardisierende Anforderungen und Layouts abzubilden.
 
 Achte bei der Verwendung von Flex darauf, dass ...
 
-- sie nicht für Layouts verwendet wird, die mit
-  [Align](/04-components/structure/align/overview) kombiniert werden können und
-  einem festen UI-Pattern folgen.
+- sie nicht für Layouts verwendet wird, die einem festen UI-Pattern folgen und
+  sich mit [Combine](/04-components/structure/combine/overview) umsetzen lassen.
 - sie gezielt für Sonderfälle genutzt wird – in den meisten Fällen bietet unser
   Designsystem bereits eine passende Lösung.
 
-## Flex vs. Align
+## Flex vs. Combine
 
-Flex und [Align](/04-components/structure/align/overview) sind sich als
-Layout-Components sehr ähnlich. Um die beiden besser unterscheiden zu können,
-hier ein paar hilfreiche Anhaltspunkte.
+Flex ist das freie Werkzeug,
+[Combine](/04-components/structure/combine/overview) das fertige Pattern. Prüfe
+deshalb zuerst, ob die gewünschte Anordnung schon als Kombination in Combine
+existiert – dann bleibt sie auch bei geändertem Inhalt und über alle Breakpoints
+korrekt.
 
 <DoAndDont>
   <Plain heading="Verwende Flex, um ...">
@@ -27,9 +28,13 @@ hier ein paar hilfreiche Anhaltspunkte.
 
   </Plain>
 
-  <Plain heading="Verwende Align, um ...">
+  <Plain heading="Verwende Combine, um ...">
     - vorab definierte Components miteinander zu kombinieren und automatisch anzuordnen.
     - wiederkehrende UI Patterns konsistent umzusetzen.
 
   </Plain>
 </DoAndDont>
+
+Die vollständige Abgrenzung inklusive
+[ColumnLayout](/04-components/structure/column-layout/overview) steht in den
+[Combine Guidelines](/04-components/structure/combine/guidelines#grundlagen-combine-vs-flex-vs-columnlayout).

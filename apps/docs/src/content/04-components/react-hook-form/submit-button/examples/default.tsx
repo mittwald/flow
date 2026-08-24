@@ -5,7 +5,7 @@ import {
   SubmitButton,
 } from "@mittwald/flow-react-components/react-hook-form";
 import {
-  Align,
+  Combine,
   Label,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -21,7 +21,7 @@ export default () => {
 
   return (
     <Form form={form} onSubmit={handleSubmit}>
-      <Align>
+      <Combine>
         <Field
           name="name"
           rules={{
@@ -34,7 +34,7 @@ export default () => {
         </Field>
 
         <SubmitButton>Speichern</SubmitButton>
-      </Align>
+      </Combine>
     </Form>
   );
 };

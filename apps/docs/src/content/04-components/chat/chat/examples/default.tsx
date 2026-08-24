@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Button,
   Chat,
@@ -18,14 +18,14 @@ import {
     <MessageSeparator>Ticket geöffnet</MessageSeparator>
     <Message>
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
             <strong>Max Mustermann</strong>
           </Text>
-        </Align>
+        </Combine>
       </Header>
       <Content>
         <Text>
@@ -44,14 +44,14 @@ import {
     </Message>
     <Message type="sender">
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>John Doe</Initials>
           </Avatar>
           <Text>
             <strong>John Doe</strong>
           </Text>
-        </Align>
+        </Combine>
       </Header>
       <Content>
         <Text>

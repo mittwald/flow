@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Content,
   Header,
@@ -12,14 +12,14 @@ import {
 <MessageThread>
   <Message type="sender">
     <Header>
-      <Align>
+      <Combine>
         <Avatar>
           <Initials>Max Mustermann</Initials>
         </Avatar>
         <Text>
           <strong>Max Mustermann</strong>
         </Text>
-      </Align>
+      </Combine>
     </Header>
     <Content>
       <Text>
@@ -30,14 +30,14 @@ import {
 
   <Message type="responder">
     <Header>
-      <Align>
+      <Combine>
         <Avatar>
           <Initials>John Doe</Initials>
         </Avatar>
         <Text>
           <strong>John Doe</strong>
         </Text>
-      </Align>
+      </Combine>
     </Header>
     <Content>
       <Text>

@@ -36,8 +36,9 @@
     "isNew": false
   },
   "@mittwald/flow-react-components#Align": {
-    "level": "stable",
-    "isNew": false
+    "level": "deprecated",
+    "isNew": false,
+    "deprecationNotice": "Use Combine instead"
   },
   "@mittwald/flow-react-components#Autocomplete": {
     "level": "stable",
@@ -108,6 +109,10 @@
     "isNew": false
   },
   "@mittwald/flow-react-components#ColumnLayout": {
+    "level": "stable",
+    "isNew": false
+  },
+  "@mittwald/flow-react-components#Combine": {
     "level": "stable",
     "isNew": false
   },

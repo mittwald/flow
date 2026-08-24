@@ -1,6 +1,10 @@
 import { testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
+// Uses the deprecated `Align` rather than `Combine`: the cross-version harness
+// resolves these components from old published versions, which predate
+// `Combine`. Align renders the same output, so the comparison stays intact.
+
 test.each(testEnvironments)(
   "Message (%s)",
   async ({

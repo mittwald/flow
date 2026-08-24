@@ -1,7 +1,7 @@
 import {
   Action,
   ActionGroup,
-  Align,
+  Combine,
   Button,
   ColumnLayout,
   Content,
@@ -111,12 +111,12 @@ export default () => {
                     </Button>
                     {volume.ai && (
                       <Content slot="bottom">
-                        <Align>
+                        <Combine>
                           <IconAI />
                           <Text>
                             <small>{volume.ai}</small>
                           </Text>
-                        </Align>
+                        </Combine>
                       </Content>
                     )}
                   </ListItemView>

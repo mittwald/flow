@@ -1,29 +1,13 @@
-Nutze folgende Components innerhalb von `<Align />`, um sie zu kombinieren.
+Align heißt jetzt [Combine](/04-components/structure/combine/overview). Der neue
+Name beschreibt, was die Component tut: Sie gibt bekannten Kombinationen von
+Components eine feste, korrekte Anordnung. Der alte Name führte dagegen
+regelmäßig zu Verwechslungen mit der `align` Property von
+[Flex](/04-components/structure/flex/overview).
 
-# Avatar + Text
+Funktional hat sich nichts geändert – ersetze `<Align />` durch `<Combine />`:
 
-<LiveCodeEditor />
+<LiveCodeEditor editorCollapsed />
 
----
-
-# Input + Button
-
-<LiveCodeEditor example="input-button" editorCollapsed />
-
----
-
-# Text + CopyButton
-
-<LiveCodeEditor example="text-copy-button" editorCollapsed />
-
----
-
-# Icon + Text
-
-<LiveCodeEditor example="icon-text" editorCollapsed />
-
----
-
-# Text + ContextualHelp
-
-<LiveCodeEditor example="text-contextual-help" editorCollapsed />
+`<Align />` funktioniert unverändert weiter, gibt zur Laufzeit aber eine
+Deprecation-Warnung aus und wird in einer zukünftigen Major-Version entfernt
+(siehe [Versionierung & Stabilität](/01-get-started/versioning)).

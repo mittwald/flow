@@ -64,6 +64,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
+import type { CombineProps } from "@/components/Combine";
 import type { CountryOptionsProps } from "@/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
@@ -105,6 +106,7 @@ export interface FlowComponentPropsTypes {
   AlertIcon: AlertIconProps;
   AlertText: AlertTextProps;
   Align: AlignProps;
+  Combine: CombineProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
@@ -201,6 +203,7 @@ const propsContextSupportingComponentsMap: Record<
   AlertIcon: true,
   AlertText: true,
   Align: true,
+  Combine: true,
   Badge: true,
   Button: true,
   CodeEditor: true,
