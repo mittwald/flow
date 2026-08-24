@@ -45,7 +45,7 @@ export default () => {
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button color="accent">Speichern</Button>
+            <Button color="success">Speichern</Button>
             <Button color="secondary" variant="soft">
               Abbrechen
             </Button>

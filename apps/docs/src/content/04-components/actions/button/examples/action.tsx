@@ -8,5 +8,5 @@ import {
     new Promise((resolve) => setTimeout(resolve, 1500))
   }
 >
-  <Button color="accent">Speichern</Button>
+  <Button color="success">Speichern</Button>
 </Action>;

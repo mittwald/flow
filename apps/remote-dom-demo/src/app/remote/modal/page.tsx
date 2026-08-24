@@ -44,7 +44,7 @@ export default function Page() {
             </Content>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Create squadron</Button>
+                <Button color="success">Create squadron</Button>
                 <Button variant="soft" color="secondary">
                   Cancel
                 </Button>
@@ -75,7 +75,7 @@ export default function Page() {
             </Content>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Create squadron</Button>
+                <Button color="success">Create squadron</Button>
                 <Button variant="soft" color="secondary">
                   Cancel
                 </Button>
@@ -106,7 +106,7 @@ export default function Page() {
             </ColumnLayout>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Create squadron</Button>
+                <Button color="success">Create squadron</Button>
                 <Button variant="soft" color="secondary">
                   Cancel
                 </Button>
@@ -132,7 +132,7 @@ export default function Page() {
             </Content>
             <ActionGroup>
               <Action closeModal>
-                <Button color="accent">Create squadron</Button>
+                <Button color="success">Create squadron</Button>
                 <Button variant="soft" color="secondary">
                   Cancel
                 </Button>
@@ -185,7 +185,7 @@ export default function Page() {
         </Content>
         <ActionGroup>
           <Action closeModal>
-            <Button color="accent">Create squadron</Button>
+            <Button color="success">Create squadron</Button>
             <Button variant="soft" color="secondary">
               Cancel
             </Button>

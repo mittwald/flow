@@ -101,7 +101,7 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
     <ActionGroup>
       <Action closeModal>
         <Action onAction={sleepLong}>
-          <Button color="accent">
+          <Button color="success">
             SFTP-Benutzer anlegen
           </Button>
         </Action>

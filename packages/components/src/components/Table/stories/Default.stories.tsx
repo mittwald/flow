@@ -32,7 +32,7 @@ const meta: Meta<typeof Table> = {
           <TableCell>
             <InlineCode>color</InlineCode>
           </TableCell>
-          <TableCell>primary | accent | secondary | danger</TableCell>
+          <TableCell>primary | success | secondary | danger</TableCell>
           <TableCell>primary</TableCell>
           <TableCell>The color of the button</TableCell>
         </TableRow>

@@ -71,5 +71,5 @@ import {
     rows={3}
     autoResizeMaxRows={10}
   />
-  <Button color="accent">Senden</Button>
+  <Button color="success">Senden</Button>
 </Chat>;

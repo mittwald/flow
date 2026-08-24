@@ -41,7 +41,7 @@ export default () => {
         <ActionGroup>
           <Action closeModal>
             <Action onAction={sleepLong}>
-              <Button color="accent">
+              <Button color="success">
                 Organisation anlegen
               </Button>
             </Action>
