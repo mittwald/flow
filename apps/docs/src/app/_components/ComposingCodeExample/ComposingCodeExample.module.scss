@@ -1,4 +1,17 @@
 .example {
+  // The code block never wraps a line, so its min-content width is the longest
+  // line of the longest example. As a grid item that width wins over the column
+  // and pushes the tile open — `min-width: 0` lets it shrink instead, so the
+  // editor's own `overflow-x` scrolls the long lines.
+  min-width: 0;
+
+  // Same reason: the code block is a flex item of the example, and a flex item
+  // does not shrink below its content either. Without this its `overflow-x`
+  // never scrolls and the code runs out over the tile's right edge.
+  .editorContainer {
+    min-width: 0;
+  }
+
   .preview {
     // Reserve the room the tallest example needs — the empty state, whose
     // `IllustratedMessage` renders its icon at size l. Without it the tile and

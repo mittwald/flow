@@ -158,7 +158,9 @@ export const ComposingCodeExample: FC<Props> = (props) => {
       >
         <LivePreview className={clsx(codeStyles.preview, styles.preview)} />
 
-        <div className={codeStyles.editorContainer}>
+        <div
+          className={clsx(codeStyles.editorContainer, styles.editorContainer)}
+        >
           <LiveEditor
             tabMode="focus"
             theme={flowTheme}
