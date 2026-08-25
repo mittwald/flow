@@ -3,6 +3,7 @@ import type { readinessApi } from "@/readiness";
 export type {
   ExtBridgeConfig,
   ExtBridgeConfigInput,
+  ExtBridgeConfigInputWithoutHostConfig,
   HostConfig,
 } from "@/config/types";
 

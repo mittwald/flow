@@ -1,5 +1,55 @@
 # Migrations
 
+---
+
+## From version `0.2.0-alpha.1050` to `>=0.2.0-alpha.1051`
+
+### Context parameters are typed, and config values are never `null`
+
+The config type and the runtime parse disagreed about unknown keys: the type
+stripped them, the runtime kept them. An extension reading a host-supplied
+context parameter such as `containerId` had to narrow at runtime
+(`typeof x === "string"`) because the type said the key did not exist.
+
+Both sides agree again. The known context parameters are declared, an undeclared
+one still comes through, and every optional config value is typed
+`string | undefined`:
+
+```diff
+- const containerId =
+-   typeof (config as Record<string, unknown>).containerId === "string"
+-     ? (config as Record<string, unknown>).containerId
+-     : undefined;
++ const containerId = config.containerId;
+```
+
+Declared context parameters: `aiApiKeyId`, `appInstallationId`, `backupId`,
+`certificateId`, `containerId`, `contractId`, `conversationId`, `cronjobId`,
+`customerId`, `databaseId`, `deliveryBoxId`, `domainId`, `emailAddressId`,
+`ingressId`, `leadId`, `licenseId`, `mailAddressId`, `projectId`, `registryId`,
+`scheduleId`, `serverId`, `sftpUserId`, `sshUserId`, `stackId`, `templateId`,
+`zoneId`. `emailAddressId` (use `mailAddressId`) and `ingressId` (use
+`domainId`) are deprecated and stay declared.
+
+**Type-breaking:** optional config values lost `null` from their type —
+`variantKey` was `string | null | undefined` and is now `string | undefined`,
+and the same applies to every context parameter and to unknown keys. A host that
+still sends `null` is parsed as "value absent", so `null` no longer reaches a
+consumer. Narrowing with `typeof x === "string"` or a truthiness check keeps
+working unchanged; only an explicit `=== null` branch becomes dead code and can
+go:
+
+```diff
+- if (config.variantKey === null) {
+-   return fallback;
+- }
+  if (config.variantKey === undefined) {
+    return fallback;
+  }
+```
+
+---
+
 ## From version 0.2.0-alpha.1020 to version 0.2.0-alpha.1021
 
 ### `HostConfig` no longer comes from an unpublished package
@@ -22,6 +72,46 @@ Update to `>=0.2.0-alpha.1021` and remove any local workaround — an ambient
 `declare module "@mittwald/flow-core"` stub, a `paths` entry in `tsconfig.json`,
 or a hand-written `HostConfig` copy. The same import was removed from
 `@mittwald/flow-remote-core` and `@mittwald/flow-remote-react-renderer`.
+
+---
+
+## From version `0.2.0-alpha.940` to `>=0.2.0-alpha.941`
+
+### Node 24 required
+
+`engines.node` went from `>=20.19` to `>=24.0.0`. Node 24 is the only runtime
+this package is tested on. Nothing changes in your code — build and run your
+extension on Node 24. Installing on Node 20 or 22 warns, and fails outright with
+`engine-strict`.
+
+---
+
+## From version `0.2.0-alpha.789` to `>=0.2.0-alpha.790`
+
+### Undeclared context parameters lost their type
+
+The schema's `.catchall()` moved into the internal parse, so the config type
+stopped carrying context parameters it did not declare. The runtime kept sending
+them, which is why reading one needed a runtime narrowing:
+
+```ts
+const containerId =
+  typeof (config as Record<string, unknown>).containerId === "string"
+    ? (config as Record<string, unknown>).containerId
+    : undefined;
+```
+
+Fixed in `0.2.0-alpha.1051` — see the entry above and drop the narrowing.
+
+---
+
+## From version `0.2.0-alpha.646` to `>=0.2.0-alpha.647`
+
+### React peer range narrowed to `^19.2.0`
+
+The `react` and `react-dom` peer ranges went from `^19` to `^19.2.0`. On React
+19.0 or 19.1 the install warns about an unmet peer — upgrade React to 19.2 or
+later.
 
 ---
 
