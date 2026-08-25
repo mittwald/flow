@@ -14,10 +14,13 @@ import { useChartClipRect } from "@/components/CartesianChart/hooks/useChartClip
 import DivView from "@/views/DivView";
 import Wrap from "@/components/Wrap";
 import type {
+  CartesianChartLayout,
   ChartDataValue,
   DataKeyProp,
 } from "@/components/CartesianChart/types";
+import { CartesianChartContextProvider } from "@/components/CartesianChart/context";
 import { TypedArea } from "@/components/CartesianChart/components/Area";
+import { TypedBar } from "@/components/CartesianChart/components/Bar";
 import { TypedXAxis } from "@/components/CartesianChart/components/XAxis";
 import { TypedYAxis } from "@/components/CartesianChart/components/YAxis";
 import { TypedChartGrid } from "@/components/CartesianChart/components/ChartGrid";
@@ -44,6 +47,17 @@ export interface CartesianChartProps<TData = ChartDataValue>
   /** The height of the chart. */
   height?: string;
 
+  /**
+   * The orientation of the axes and graphical items. `"horizontal"` puts the
+   * category axis on the x-axis — bars grow upwards. `"vertical"` puts it on
+   * the y-axis — bars grow to the side. A vertical layout needs a numeric
+   * `XAxis` (`type="number"`) and a categorical `YAxis` (`type="category"` with
+   * the `dataKey`).
+   *
+   * @default "horizontal"
+   */
+  layout?: CartesianChartLayout;
+
   /** View that is provided when data is empty/undefined */
   emptyView?: ReactNode;
 
@@ -56,8 +70,16 @@ export interface CartesianChartProps<TData = ChartDataValue>
 
 /** @flr-generate all */
 export const CartesianChart: FC<CartesianChartProps> = (props) => {
-  const { children, data, className, height, flexGrow, emptyView, ...rest } =
-    props;
+  const {
+    children,
+    data,
+    className,
+    height,
+    flexGrow,
+    emptyView,
+    layout = "horizontal",
+    ...rest
+  } = props;
   const warnDeprecation = useWarnDeprecation();
 
   const { viewDimensions, ref: containerRef } = useChartClipRect();
@@ -88,32 +110,41 @@ export const CartesianChart: FC<CartesianChartProps> = (props) => {
     return null;
   }, [emptyView]);
 
+  const contextValue = useMemo(() => ({ layout }), [layout]);
+
   return (
-    <Wrap if={height}>
-      <div style={{ height, flex: flexGrow ? 1 : undefined }}>
-        <ResponsiveContainer
-          initialDimension={{
-            // fix warning on initial render
-            width: 1,
-            height: 1,
-          }}
-          width={height ? undefined : "100%"}
-          aspect={height ? undefined : 3}
-          ref={containerRef}
-        >
-          <ComposedChart data={data} className={rootClassName} {...rest}>
-            {children}
-            {showEmptyView && viewDimensions && (
-              <foreignObject {...viewDimensions}>
-                <DivView className={styles.emptyViewContainer}>
-                  {emptyElement}
-                </DivView>
-              </foreignObject>
-            )}
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-    </Wrap>
+    <CartesianChartContextProvider value={contextValue}>
+      <Wrap if={height}>
+        <div style={{ height, flex: flexGrow ? 1 : undefined }}>
+          <ResponsiveContainer
+            initialDimension={{
+              // fix warning on initial render
+              width: 1,
+              height: 1,
+            }}
+            width={height ? undefined : "100%"}
+            aspect={height ? undefined : 3}
+            ref={containerRef}
+          >
+            <ComposedChart
+              data={data}
+              className={rootClassName}
+              layout={layout}
+              {...rest}
+            >
+              {children}
+              {showEmptyView && viewDimensions && (
+                <foreignObject {...viewDimensions}>
+                  <DivView className={styles.emptyViewContainer}>
+                    {emptyElement}
+                  </DivView>
+                </foreignObject>
+              )}
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </Wrap>
+    </CartesianChartContextProvider>
   );
 };
 
@@ -124,6 +155,7 @@ export const typedCartesianChart = <
 >() => ({
   Chart: CartesianChart as ComponentType<CartesianChartProps<TData>>,
   Area: TypedArea<TData>(),
+  Bar: TypedBar<TData>(),
   XAxis: TypedXAxis<TData, XAxisDataKey>(),
   YAxis: TypedYAxis<TData>(),
   Grid: TypedChartGrid(),

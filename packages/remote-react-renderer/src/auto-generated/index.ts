@@ -14,6 +14,7 @@ import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
+import { Bar as Bar } from "@mittwald/flow-react-components";
 import { BigNumber as BigNumber } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
@@ -160,6 +161,7 @@ export const flowComponents = {
     AvatarStack,
   ),
   "flr-badge": createFlowRemoteComponentRenderer("Badge", Badge),
+  "flr-bar": createFlowRemoteComponentRenderer("Bar", Bar),
   "flr-big-number": createFlowRemoteComponentRenderer("BigNumber", BigNumber),
   "flr-breadcrumb": createFlowRemoteComponentRenderer("Breadcrumb", Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer("Button", Button),
