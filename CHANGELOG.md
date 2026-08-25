@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0-alpha.1053](https://github.com/mittwald/flow/compare/0.2.0-alpha.1052...0.2.0-alpha.1053) (2026-08-25)
+
+### Features
+
+* **ExtBridge:** declare context parameters and align config type with runtime ([#2889](https://github.com/mittwald/flow/issues/2889)) ([30871d6](https://github.com/mittwald/flow/commit/30871d6526be16d685fb056a6db4b0851ffea8ad)), closes [#2885](https://github.com/mittwald/flow/issues/2885) [#2885](https://github.com/mittwald/flow/issues/2885)
+
 ## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
 
 ### Bug Fixes
