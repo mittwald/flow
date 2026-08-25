@@ -24,7 +24,6 @@ export interface IndexedComponent {
   isNew?: true;
   deprecationNotice?: string;
   description?: string;
-  /** Whether the component exists in `@mittwald/flow-remote-react-components`. */
   remote: RemoteAvailability;
   props: Record<string, IndexedProp>;
 }
