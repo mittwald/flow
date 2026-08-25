@@ -23,8 +23,7 @@ export interface MdxFileMeta {
 }
 
 export type StaticParams =
-  | { slug: string[] }
-  | { group: string; component: string };
+  { slug: string[] } | { group: string; component: string };
 
 export type MdxFileExamples = Record<string, string>;
 

@@ -2,8 +2,7 @@ import { type RuleValidationResult } from "@/integrations/@mittwald/password-too
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export type StateFromLatestPolicyValidationResult =
-  | undefined
-  | Partial<RuleValidationResult>;
+  undefined | Partial<RuleValidationResult>;
 
 /** @internal */
 export const getStateFromLatestPolicyValidationResult = (
