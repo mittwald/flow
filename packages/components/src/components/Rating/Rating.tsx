@@ -11,7 +11,6 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
-import { prefixedStyleClassname } from "@/lib/scss/selectors";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { RatingSegmentContextProvider } from "@/components/Rating/context";
@@ -90,8 +89,8 @@ export const Rating = flowComponent("Rating", (props) => {
 
   const rootClassName = clsx(
     styles.rating,
-    prefixedStyleClassname(styles, "size-", size),
-    prefixedStyleClassname(styles, "fill-", fill),
+    styles[`size-${size}`],
+    styles[`fill-${fill}`],
     fieldProps.className,
     className,
   );
