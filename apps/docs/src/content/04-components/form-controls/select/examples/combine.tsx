@@ -1,12 +1,12 @@
 import {
-  Align,
+  Combine,
   Button,
   Select,
   Label,
   Option,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <Select>
     <Label>App</Label>
     <Option>WordPress</Option>
@@ -17,4 +17,4 @@ import {
     <Option>Matomo</Option>
   </Select>
   <Button>Hinzufügen</Button>
-</Align>;
+</Combine>;

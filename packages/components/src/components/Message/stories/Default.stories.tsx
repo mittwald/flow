@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
@@ -28,7 +28,7 @@ const meta: Meta<typeof Message> = {
             <MenuItem>Delete</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>Leia Organa</Initials>
           </Avatar>
@@ -36,7 +36,7 @@ const meta: Meta<typeof Message> = {
             <strong>Leia Organa</strong>
             <span>Rebel Commander</span>
           </Text>
-        </Align>
+        </Combine>
         <Text>01.09.2024, 12:45</Text>
       </Header>
 

@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Button,
   Content,
@@ -22,7 +22,7 @@ import {
         <MenuItem>Löschen</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
-    <Align>
+    <Combine>
       <Avatar>
         <Initials>Max Mustermann</Initials>
       </Avatar>
@@ -30,7 +30,7 @@ import {
         <b>Max Mustermann</b>
         Organisationsinhaber
       </Text>
-    </Align>
+    </Combine>
     <Text>01.09.2024, 12:45</Text>
   </Header>
 

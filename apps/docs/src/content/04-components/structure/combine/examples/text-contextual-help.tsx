@@ -1,12 +1,12 @@
 import {
-  Align,
+  Combine,
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
   Text,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <Text>mail.agenturserver.de</Text>
 
   <ContextualHelpTrigger>
@@ -19,4 +19,4 @@ import {
       </Text>
     </ContextualHelp>
   </ContextualHelpTrigger>
-</Align>;
+</Combine>;

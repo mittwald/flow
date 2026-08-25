@@ -1,10 +1,10 @@
 import {
-  Align,
+  Combine,
   Button,
   SearchField,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <SearchField />
   <Button>Suchen</Button>
-</Align>;
+</Combine>;

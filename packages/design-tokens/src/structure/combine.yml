@@ -1,4 +1,4 @@
-align:
+combine:
   avatar-text:
     spacing:
       value: "{size-rem.s}"

@@ -1,24 +1,26 @@
 import { test } from "vitest";
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 
-test.each(testEnvironments)(
-  "Align Avatar and Text (%s)",
+const combineSince = "0.2.0-alpha.1050";
+
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Avatar and Text (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Flex, Avatar, Initials, Text, Align },
+    components: { Flex, Avatar, Initials, Text, Combine },
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>Luke Skywalker</Initials>
           </Avatar>
           <Text>
             <strong>Text</strong>
           </Text>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <Avatar>
             <Initials>Luke Skywalker</Initials>
           </Avatar>
@@ -26,8 +28,8 @@ test.each(testEnvironments)(
             <strong>Text</strong>
             Text
           </Text>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <Avatar>
             <Initials>Luke Skywalker</Initials>
           </Avatar>
@@ -39,36 +41,40 @@ test.each(testEnvironments)(
             <br />
             Text
           </Text>
-        </Align>
+        </Combine>
       </Flex>,
     );
 
-    await testScreenshot("Align Avatar and Text");
+    await testScreenshot("Combine Avatar and Text");
   },
 );
 
-test.each(testEnvironments)(
-  "Align Icon and Text (%s)",
-  async ({ testScreenshot, render, components: { Text, Align, IconInfo } }) => {
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Icon and Text (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { Text, Combine, IconInfo },
+  }) => {
     await render(
-      <Align>
+      <Combine>
         <IconInfo />
         <Text>Text</Text>
-      </Align>,
+      </Combine>,
     );
 
-    await testScreenshot("Align Icon and Text");
+    await testScreenshot("Combine Icon and Text");
   },
 );
 
-test.each(testEnvironments)(
-  "Align Input and Button (%s)",
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Input and Button (%s)",
   async ({
     testScreenshot,
     render,
     components: {
       Flex,
-      Align,
+      Combine,
       TextField,
       Button,
       Label,
@@ -80,77 +86,83 @@ test.each(testEnvironments)(
   }) => {
     await render(
       <Flex direction="column" gap="m">
-        <Align>
+        <Combine>
           <TextField aria-label="TextField" />
           <Button>Button</Button>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <TextField>
             <Label>TextField</Label>
             <FieldDescription>FieldDescription</FieldDescription>
           </TextField>
           <Button>Button</Button>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <NumberField>
             <Label>NumberField</Label>
           </NumberField>
           <Button>Button</Button>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <TextArea>
             <Label>TextArea</Label>
           </TextArea>
           <Button>Button</Button>
-        </Align>
-        <Align>
+        </Combine>
+        <Combine>
           <Select>
             <Label>Select</Label>
           </Select>
           <Button>Button</Button>
-        </Align>
+        </Combine>
       </Flex>,
     );
 
-    await testScreenshot("Align Input and Button");
+    await testScreenshot("Combine Input and Button");
   },
 );
 
-test.each(testEnvironments)(
-  "Align Text and ContextualHelpTrigger (%s)",
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Text and ContextualHelpTrigger (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Text, Align, Button, ContextualHelpTrigger, ContextualHelp },
+    components: {
+      Text,
+      Combine,
+      Button,
+      ContextualHelpTrigger,
+      ContextualHelp,
+    },
   }) => {
     await render(
-      <Align>
+      <Combine>
         <Text>Text</Text>
         <ContextualHelpTrigger>
           <Button color="secondary" />
           <ContextualHelp />
         </ContextualHelpTrigger>
-      </Align>,
+      </Combine>,
     );
 
-    await testScreenshot("Align Text and ContextualHelpTrigger");
+    await testScreenshot("Combine Text and ContextualHelpTrigger");
   },
 );
 
-test.each(testEnvironments)(
-  "Align Text and CopyButton (%s)",
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
+  "Combine Text and CopyButton (%s)",
   async ({
     testScreenshot,
     render,
-    components: { Text, Align, CopyButton },
+    components: { Text, Combine, CopyButton },
   }) => {
     await render(
-      <Align>
+      <Combine>
         <Text>Text</Text>
         <CopyButton text="text" />
-      </Align>,
+      </Combine>,
     );
 
-    await testScreenshot("Align Text and CopyButton");
+    await testScreenshot("Combine Text and CopyButton");
   },
 );

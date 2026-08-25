@@ -52,6 +52,12 @@ export const Message = flowComponent("Message", (props) => {
 
   const formatter = useLocalizedStringFormatter(locales, "Message");
 
+  const senderContext: PropsContext["Combine"] = {
+    wrapWith: <ClearPropsContext />,
+    className: styles.user,
+    Avatar: { Initials: { "aria-hidden": true } },
+  };
+
   const propsContext: PropsContext = {
     Content: {
       className: styles.content,
@@ -84,11 +90,9 @@ export const Message = flowComponent("Message", (props) => {
         },
       },
       Text: { className: styles.date },
-      Align: {
-        wrapWith: <ClearPropsContext />,
-        className: styles.user,
-        Avatar: { Initials: { "aria-hidden": true } },
-      },
+      Combine: senderContext,
+      // Deprecated alias of Combine — keep it arranged the same way.
+      Align: senderContext,
       children: dynamic((props) => (
         <>
           <Aria.VisuallyHidden>

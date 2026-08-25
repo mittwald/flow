@@ -1,7 +1,10 @@
 ---
 component: Align
 description:
-  Align kombiniert Components gezielt, inklusive Anordnung und Farbanpassungen.
+  Align ordnet bekannte Kombinationen von Components korrekt zueinander an.
+deprecationNotice:
+  Align wurde in Combine umbenannt und wird in einer zukünftigen Major-Version
+  entfernt – nutze stattdessen Combine.
 ---
 
 <LiveCodeEditor />
@@ -10,32 +13,14 @@ description:
 
 # Best Practices
 
-- Verwende nur die unterstützten Kombinationen.
-- Nutze Align nicht als generisches Layout-Tool. Für eine freie Anordnung ist
-  [Flex](/04-components/structure/flex) vorgesehen.
-- Nutze neben der Anordnung auch visuelle Anpassungen wie das Setzen von Colors.
-
----
-
-# Kombinationen
-
-Neben Avatar + Text unterstützt Align die folgenden Kombinationen.
-
-## Input + Button
-
-<LiveCodeEditor example="input-button" editorCollapsed />
-
-## Text + CopyButton
-
-<LiveCodeEditor example="text-copy-button" editorCollapsed />
-
-## Icon + Text
-
-<LiveCodeEditor example="icon-text" editorCollapsed />
-
-## Text + ContextualHelp
-
-<LiveCodeEditor example="text-contextual-help" editorCollapsed />
+- Ersetze `<Align />` durch [Combine](/04-components/structure/combine).
+  Funktional ändert sich nichts, der neue Name beschreibt die Component
+  treffender.
+- Nutze für die Migration den Codemod aus der
+  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- Align gibt zur Laufzeit eine Deprecation-Warnung aus und wird in einer
+  zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad abgesichert
+  (siehe [Versionierung & Stabilität](/01-get-started/versioning)).
 
 ---
 

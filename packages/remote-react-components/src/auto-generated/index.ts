@@ -30,6 +30,7 @@ export * from "./CodeBlock";
 export * from "./CodeEditor";
 export * from "./Color";
 export * from "./ColumnLayout";
+export * from "./Combine";
 export * from "./ComboBox";
 export * from "./ComponentPropsContextProvider";
 export * from "./Content";
