@@ -15,15 +15,50 @@
   .preview {
     // Reserve the room the tallest example needs — the empty state, whose
     // `IllustratedMessage` renders its icon at size l. Without it the tile and
-    // the page below it jump every time that example comes around. The editor
-    // keeps its height on its own: `buildAnimation` pads every frame to the
-    // line count of the longest step.
-    min-height: 18rem;
+    // the page below it jump every time that example comes around. How tall it
+    // gets depends on how far its text wraps, so the reserve is measured per
+    // layout: 331px in the narrowest pane (a 375px viewport), 310px once the
+    // two panes sit side by side. The editor keeps its height on its own —
+    // `buildAnimation` pads every frame to the line count of the longest step.
+    min-height: 21rem;
 
     // The shared preview centers whatever it renders. Here that would fake the
     // result: the whole point is that loose components stack in source order
     // until a Flow component arranges them.
     align-items: flex-start;
     justify-content: flex-start;
+  }
+
+  // The example always sits under the copy, so it has the whole card width to
+  // work with. From the column layout's l breakpoint up that is enough for two
+  // panes side by side, which halves the height of the tile and gives the code
+  // enough room to show its longest line.
+  @container (min-width: 850px) {
+    flex-direction: row;
+    overflow: hidden;
+
+    .preview {
+      min-height: 19.5rem;
+    }
+
+    .preview,
+    .editorContainer {
+      // `flex-basis: 0` is a content-box basis, so the preview's padding would
+      // be added on top of its share and the two panes would not be equal.
+      flex: 1 1 50%;
+      min-width: 0;
+    }
+
+    // The divider and the code background belong on the pane, not on the
+    // editor — the editor is only as tall as its lines, so both would stop
+    // short of the bottom edge.
+    .editorContainer {
+      border-inline-start: 1px solid var(--border-color);
+      background-color: var(--code-block--background-color);
+    }
+
+    .codeEditor {
+      border-block-start: 0;
+    }
   }
 }

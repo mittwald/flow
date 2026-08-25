@@ -72,8 +72,8 @@ const Home: FC = () => {
         </LayoutCard>
       </ColumnLayout>
 
-      <LayoutCard className={styles.codeTile}>
-        <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
+      <LayoutCard>
+        <ColumnLayout l={[1]} m={[1]} s={[1]} gap="xl">
           <Section>
             <Heading>Fokus auf Developer Experience</Heading>
             <Text>

@@ -164,7 +164,7 @@ export const ComposingCodeExample: FC<Props> = (props) => {
           <LiveEditor
             tabMode="focus"
             theme={flowTheme}
-            className={codeStyles.editor}
+            className={clsx(codeStyles.editor, styles.codeEditor)}
             code={editorCode}
             onChange={handleEditorChange}
           />
