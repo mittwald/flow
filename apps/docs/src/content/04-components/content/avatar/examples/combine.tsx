@@ -1,11 +1,11 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Initials,
   Text,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
   <Avatar>
     <Initials>Max Mustermann</Initials>
   </Avatar>
@@ -13,4 +13,4 @@ import {
     <strong>Max Mustermann</strong>
     Organisationsinhaber
   </Text>
-</Align>;
+</Combine>;

@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Button,
   Chat,
@@ -19,14 +19,14 @@ import {
   <MessageThread>
     <Message>
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
             <strong>Max Mustermann</strong>
           </Text>
-        </Align>
+        </Combine>
       </Header>
       <Content>
         <Text>

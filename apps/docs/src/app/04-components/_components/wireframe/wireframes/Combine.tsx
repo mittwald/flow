@@ -7,7 +7,7 @@ import {
   WText,
 } from "@/app/04-components/_components/wireframe/primitives";
 
-export const AlignWireframe: FC = () => (
+export const CombineWireframe: FC = () => (
   <WFrame alignItems="center">
     <WCircle size={48} />
     <WStack width="70%">
@@ -17,4 +17,4 @@ export const AlignWireframe: FC = () => (
   </WFrame>
 );
 
-export default AlignWireframe;
+export default CombineWireframe;

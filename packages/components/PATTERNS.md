@@ -898,7 +898,7 @@ and consistency enforced by tooling, not maintained by hand.
     remote).
   - ✗ already-structured nodes → preserve them.
 - **Layout primitives over ad-hoc wrappers** `[undocumented]` — `Section`,
-  `ColumnLayout`, `Align`, `Flex`, `Content`.
+  `ColumnLayout`, `Combine`, `Flex`, `Content`.
   - ✓ spacing/align/columns/stack expressible via Flow primitives.
   - ✗ a wrapper needed for semantics/third-party/owned styling → the correct
     semantic element.

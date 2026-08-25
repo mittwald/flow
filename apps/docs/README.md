@@ -234,8 +234,8 @@ conveys better — for example ColumnLayout's breakpoint values or List's
 
 One `##` per **other, named Component** this one is genuinely composed with,
 each with a link to that Component's page and its own example (Button:
-`## Align` / `## ActionGroup` / `## Action`; TextField: `## Align` / `## Button`
-/ `## ContextualHelp` / `## React Hook Form`).
+`## Combine` / `## ActionGroup` / `## Action`; TextField: `## Combine` /
+`## Button` / `## ContextualHelp` / `## React Hook Form`).
 
 - **Omit the whole section** when there is no genuine composition — do not
   invent one.

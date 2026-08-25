@@ -1,4 +1,4 @@
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Button } from "@/components/Button";
@@ -12,66 +12,66 @@ import { useForm } from "react-hook-form";
 import { Form, SubmitButton } from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 
-const meta: Meta<typeof Align> = {
+const meta: Meta<typeof Combine> = {
   ...defaultMeta,
-  title: "Structure/Align/Input + Button",
-  component: Align,
+  title: "Structure/Combine/Input + Button",
+  component: Combine,
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <TextField>
         <Label>Comlink address</Label>
       </TextField>
       <Button>Add</Button>
-    </Align>
+    </Combine>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof Align>;
+type Story = StoryObj<typeof Combine>;
 
 export const Default: Story = {};
 
 export const WithNumberField: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <NumberField>
         <Label>Number</Label>
       </NumberField>
       <Button>Add</Button>
-    </Align>
+    </Combine>
   ),
 };
 
 export const WithTextArea: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <TextArea>
         <Label>Message</Label>
       </TextArea>
       <Button>Add</Button>
-    </Align>
+    </Combine>
   ),
 };
 
 export const WithSelect: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <Select>
         <Label>Options</Label>
         <Option>Option 1</Option>
         <Option>Option 2</Option>
       </Select>
       <Button>Add</Button>
-    </Align>
+    </Combine>
   ),
 };
 
 export const WithoutLabel: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <TextField aria-label="Label" />
       <Button>Add</Button>
-    </Align>
+    </Combine>
   ),
 };
 
@@ -80,12 +80,12 @@ export const WithForm: Story = {
     const form = useForm();
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Align {...props}>
+        <Combine {...props}>
           <TextField>
             <Label>Comlink address</Label>
           </TextField>
           <SubmitButton>Add</SubmitButton>
-        </Align>
+        </Combine>
       </Form>
     );
   },

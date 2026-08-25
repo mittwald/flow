@@ -8,7 +8,6 @@ import { ActionWireframe } from "@/app/04-components/_components/wireframe/wiref
 import { AlertBadgeWireframe } from "@/app/04-components/_components/wireframe/wireframes/AlertBadge";
 import { AlertTextWireframe } from "@/app/04-components/_components/wireframe/wireframes/AlertText";
 import { AlertWireframe } from "@/app/04-components/_components/wireframe/wireframes/Alert";
-import { AlignWireframe } from "@/app/04-components/_components/wireframe/wireframes/Align";
 import { AutocompleteWireframe } from "@/app/04-components/_components/wireframe/wireframes/Autocomplete";
 import { AvatarStackWireframe } from "@/app/04-components/_components/wireframe/wireframes/AvatarStack";
 import { AvatarWireframe } from "@/app/04-components/_components/wireframe/wireframes/Avatar";
@@ -25,6 +24,7 @@ import { CodeBlockWireframe } from "@/app/04-components/_components/wireframe/wi
 import { CodeEditorWireframe } from "@/app/04-components/_components/wireframe/wireframes/CodeEditor";
 import { ColorWireframe } from "@/app/04-components/_components/wireframe/wireframes/Color";
 import { ColumnLayoutWireframe } from "@/app/04-components/_components/wireframe/wireframes/ColumnLayout";
+import { CombineWireframe } from "@/app/04-components/_components/wireframe/wireframes/Combine";
 import { ComboBoxWireframe } from "@/app/04-components/_components/wireframe/wireframes/ComboBox";
 import { ContextMenuWireframe } from "@/app/04-components/_components/wireframe/wireframes/ContextMenu";
 import { ContextualHelpWireframe } from "@/app/04-components/_components/wireframe/wireframes/ContextualHelp";
@@ -97,7 +97,8 @@ const wireframes: Record<string, FC> = {
   "alert-badge": AlertBadgeWireframe,
   "alert-text": AlertTextWireframe,
   alert: AlertWireframe,
-  align: AlignWireframe,
+  // `align` is the deprecated name of `combine` and shares its wireframe.
+  align: CombineWireframe,
   autocomplete: AutocompleteWireframe,
   "avatar-stack": AvatarStackWireframe,
   avatar: AvatarWireframe,
@@ -114,6 +115,7 @@ const wireframes: Record<string, FC> = {
   "code-editor": CodeEditorWireframe,
   color: ColorWireframe,
   "column-layout": ColumnLayoutWireframe,
+  combine: CombineWireframe,
   "combo-box": ComboBoxWireframe,
   "context-menu": ContextMenuWireframe,
   "contextual-help": ContextualHelpWireframe,

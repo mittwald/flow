@@ -1,10 +1,10 @@
 import {
-  Align,
-  CopyButton,
+  Combine,
+  IconDomain,
   Text,
 } from "@mittwald/flow-react-components";
 
-<Align>
+<Combine>
+  <IconDomain />
   <Text>mail.agenturserver.de</Text>
-  <CopyButton text="mail.agenturserver.de" />
-</Align>;
+</Combine>;

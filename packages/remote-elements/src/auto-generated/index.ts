@@ -30,6 +30,7 @@ export * from "./RemoteCodeBlockElement";
 export * from "./RemoteCodeEditorElement";
 export * from "./RemoteColorElement";
 export * from "./RemoteColumnLayoutElement";
+export * from "./RemoteCombineElement";
 export * from "./RemoteComboBoxElement";
 export * from "./RemoteComponentPropsContextProviderElement";
 export * from "./RemoteContentElement";

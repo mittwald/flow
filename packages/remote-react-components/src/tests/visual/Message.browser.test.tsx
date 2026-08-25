@@ -1,7 +1,9 @@
-import { testEnvironments } from "@/tests/lib/environments";
+import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 
-test.each(testEnvironments)(
+const combineSince = "0.2.0-alpha.1050";
+
+test.skipIf(crossVersion({ below: combineSince })).each(testEnvironments)(
   "Message (%s)",
   async ({
     testScreenshot,
@@ -13,7 +15,7 @@ test.each(testEnvironments)(
       Button,
       ContextMenuTrigger,
       ContextMenu,
-      Align,
+      Combine,
       Avatar,
       Initials,
       Content,
@@ -31,12 +33,12 @@ test.each(testEnvironments)(
               <Button />
               <ContextMenu />
             </ContextMenuTrigger>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>Luke Skywalker</Text>
-            </Align>
+            </Combine>
             <Text>01.09.2025, 11:00</Text>
           </Header>
 

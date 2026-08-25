@@ -14,6 +14,13 @@ const DEPRECATED_FALLBACK =
 interface Props {
   /** Component display name (registry lookup key on the main "." surface). */
   name: string;
+  /**
+   * German copy from the page's `deprecationNotice` frontmatter. The registry's
+   * own `deprecationNotice` is deliberately not used here: it comes from the
+   * `@deprecated` tag, which is English for the IDE and for consumers reading
+   * the status registry.
+   */
+  notice?: string;
 }
 
 export const ComponentStatusCallout: FC<Props> = (props) => {
@@ -31,8 +38,8 @@ export const ComponentStatusCallout: FC<Props> = (props) => {
   if (status?.level === "deprecated") {
     return (
       <Alert status="warning">
-        <Heading>Veraltet</Heading>
-        <Content>{status.deprecationNotice ?? DEPRECATED_FALLBACK}</Content>
+        <Heading>Deprecated</Heading>
+        <Content>{props.notice ?? DEPRECATED_FALLBACK}</Content>
       </Alert>
     );
   }

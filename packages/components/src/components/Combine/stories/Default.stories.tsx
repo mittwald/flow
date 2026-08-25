@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
@@ -12,20 +12,20 @@ import {
 } from "@/components/ContextualHelp";
 import { CopyButton } from "@/components/CopyButton";
 
-const meta: Meta<typeof Align> = {
-  title: "Structure/Align",
-  component: Align,
+const meta: Meta<typeof Combine> = {
+  title: "Structure/Combine",
+  component: Combine,
   parameters: {
     controls: { disable: true },
   },
 };
 export default meta;
 
-type Story = StoryObj<typeof Align>;
+type Story = StoryObj<typeof Combine>;
 
 export const AvatarText: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <Avatar>
         <Initials>Han Solo</Initials>
       </Avatar>
@@ -33,22 +33,22 @@ export const AvatarText: Story = {
         <strong>Han Solo</strong>
         Rebel Alliance general
       </Text>
-    </Align>
+    </Combine>
   ),
 };
 
 export const IconText: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <IconDomain />
       <Text>comms.rebellion.org</Text>
-    </Align>
+    </Combine>
   ),
 };
 
 export const TextContextualHelp: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <Text>Price</Text>
 
       <ContextualHelpTrigger>
@@ -59,15 +59,15 @@ export const TextContextualHelp: Story = {
           <Text>This prices are not final and may change.</Text>
         </ContextualHelp>
       </ContextualHelpTrigger>
-    </Align>
+    </Combine>
   ),
 };
 
 export const TextCopyButton: Story = {
   render: (props) => (
-    <Align {...props}>
+    <Combine {...props}>
       <Text>comms.rebellion.org</Text>
       <CopyButton text="comms.rebellion.org" />
-    </Align>
+    </Combine>
   ),
 };
