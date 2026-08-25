@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.1048](https://github.com/mittwald/flow/compare/0.2.0-alpha.1047...0.2.0-alpha.1048) (2026-08-25)
+
+### Bug Fixes
+
+* **Link:** stick link icon to last text segment ([#2869](https://github.com/mittwald/flow/issues/2869)) ([2d44edd](https://github.com/mittwald/flow/commit/2d44edd63bdea25bee2fabbff83203ea86e6f672))
+
 # [0.2.0-alpha.1047](https://github.com/mittwald/flow/compare/0.2.0-alpha.1046...0.2.0-alpha.1047) (2026-08-24)
 
 ### Features
