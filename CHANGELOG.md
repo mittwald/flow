@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
+
+### Bug Fixes
+
+* **ci:** list breaking changes in the changelog ([#2891](https://github.com/mittwald/flow/issues/2891)) ([f1fe177](https://github.com/mittwald/flow/commit/f1fe177ec096d3ddeee6e8df2cb2167749c4a056)), closes [#2883](https://github.com/mittwald/flow/issues/2883)
+
 # [0.2.0-alpha.1051](https://github.com/mittwald/flow/compare/0.2.0-alpha.1050...0.2.0-alpha.1051) (2026-08-25)
 
 **Note:** Version bump only for package @mittwald/flow-project
