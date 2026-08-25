@@ -37,10 +37,13 @@
     },
     "./all.css": "./dist/css/all.css",
     "./all-layered.css": "./dist/css/all-layered.css",
+    "./component-index": "./dist/assets/component-index.json",
     "./doc-properties": "./dist/assets/doc-properties.json"
   },
   "files": [
-    "*.md",
+    "AGENTS.md",
+    "MIGRATION.md",
+    "USAGE.md",
     "dist"
   ],
   "engines": {
@@ -48,6 +51,7 @@
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
+    "build:component-index": "tsx dev/component-index/generateComponentIndex.ts",
     "build:deps": "",
     "build:docs-properties": "tsx dev/createDocPropertiesJson.ts",
     "build:icons": "tsx dev/icons/generate.ts",

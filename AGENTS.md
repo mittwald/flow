@@ -143,6 +143,7 @@ committed, and hand-editing them is futile** (headers say "auto-generated").
 | `packages/components/src/components/Icon/components/icons/*`                       | `pnpm nx build:icons components`             |
 | `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`           | `pnpm nx build:icons icons` / `icons-pro`    |
 | `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)            | `pnpm nx build:docs-properties components`   |
+| `packages/components/dist/assets/component-index.json` (consumer-facing index)     | `pnpm nx build:component-index components`   |
 
 Changed props on an `@flr-generate` component, added an icon, edited prop JSDoc,
 or changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`)

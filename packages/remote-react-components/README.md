@@ -1,8 +1,16 @@
 # @mittwald/flow-remote-react-components
 
-This package is part of
-[Flow – mittwald design system](https://flow.mittwald.de/). See the homepage for
-more details.
+The React API for building **mStudio extension** UIs. Components are generated
+from `@mittwald/flow-react-components` and render on the mStudio host through
+Flow's remote-DOM layer.
+
+Part of [Flow – mittwald design system](https://flow.mittwald.de/).
+
+**[USAGE.md](./USAGE.md)** — how to build an extension with this package: the
+remote component surface, which props cross the boundary, what survives
+serialization. Read
+[the components package's USAGE.md](https://www.npmjs.com/package/@mittwald/flow-react-components?activeTab=code)
+alongside it for the shared component and layout rules.
 
 ## Migrate from Flow to Flow-Remote
 
