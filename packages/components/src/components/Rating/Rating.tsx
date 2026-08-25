@@ -11,7 +11,6 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
-import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { RatingSegmentContextProvider } from "@/components/Rating/context";
 
@@ -19,11 +18,15 @@ export interface RatingProps
   extends
     FlowComponentProps,
     PropsWithChildren,
-    Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
+    Omit<
+      Aria.RadioGroupProps,
+      "children" | "value" | "defaultValue" | "onChange"
+    > {
   /** The value sets the amount of filled stars. @default: 0 */
   value?: number;
   /** The defaultValue sets the amount of default filled stars. @default: 0 */
   defaultValue?: number;
+  onChange?: (value: number) => void;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
   /**
@@ -54,8 +57,8 @@ const segmentsTunnelId = "segments";
  */
 export const Rating = flowComponent("Rating", (props) => {
   const {
-    value: valueFromProps,
-    defaultValue = 0,
+    value,
+    defaultValue,
     onChange: onChangeFromProps,
     size = "m",
     maxValue = 5,
@@ -67,18 +70,6 @@ export const Rating = flowComponent("Rating", (props) => {
     iconFilled,
     ...rest
   } = props;
-
-  /*
-   * The rating takes a number but React Aria reports a string, so the hook gets
-   * a string-shaped view of the field. It keeps the selected value in local
-   * state, which is what makes the control respond immediately when the value
-   * round-trips through a remote app.
-   */
-  const { value, onChange } = useControlledHostValueProps({
-    value: valueFromProps?.toString(),
-    defaultValue: defaultValue.toString(),
-    onChange: onChangeFromProps,
-  });
 
   const {
     FieldErrorView,
@@ -117,8 +108,9 @@ export const Rating = flowComponent("Rating", (props) => {
     <Aria.RadioGroup
       {...rest}
       className={rootClassName}
-      value={value}
-      onChange={onChange}
+      value={value?.toString()}
+      defaultValue={defaultValue?.toString()}
+      onChange={(value) => onChangeFromProps?.(parseInt(value))}
       ref={localRef}
     >
       <FieldErrorCaptureContext>
