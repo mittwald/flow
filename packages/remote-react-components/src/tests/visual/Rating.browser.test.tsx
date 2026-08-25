@@ -1,6 +1,35 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
 import { test } from "vitest";
 import { page } from "vitest/browser";
+import {
+  IconMoodEmpty,
+  IconMoodEmptyFilled,
+  IconMoodHappy,
+  IconMoodHappyFilled,
+  IconMoodSad,
+  IconMoodSadFilled,
+} from "@tabler/icons-react";
+
+const moods = [
+  {
+    label: "Bad",
+    color: "danger",
+    Empty: IconMoodSad,
+    Filled: IconMoodSadFilled,
+  },
+  {
+    label: "Okay",
+    color: "warning",
+    Empty: IconMoodEmpty,
+    Filled: IconMoodEmptyFilled,
+  },
+  {
+    label: "Great",
+    color: "success",
+    Empty: IconMoodHappy,
+    Filled: IconMoodHappyFilled,
+  },
+] as const;
 
 test.each(testEnvironments)(
   "Rating states (%s)",
@@ -78,14 +107,7 @@ test.skipIf(crossVersion({ below: ratingSegmentSince })).each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: {
-      Flex,
-      Rating,
-      RatingSegment,
-      Label,
-      IconStar,
-      IconStarFilled,
-    },
+    components: { Flex, Rating, RatingSegment, Label, Icon },
   }) => {
     await render(
       <Flex direction="column" gap="m">
@@ -94,31 +116,22 @@ test.skipIf(crossVersion({ below: ratingSegmentSince })).each(testEnvironments)(
         </Rating>
         <Rating fill="single" value={2}>
           <Label>Single fill with segments</Label>
-          <RatingSegment
-            aria-label="Terrible"
-            iconEmpty={<IconStar />}
-            iconFilled={<IconStarFilled color="danger" />}
-          />
-          <RatingSegment
-            aria-label="Bad"
-            iconEmpty={<IconStar />}
-            iconFilled={<IconStarFilled color="warning" />}
-          />
-          <RatingSegment
-            aria-label="Okay"
-            iconEmpty={<IconStar />}
-            iconFilled={<IconStarFilled color="neutral" />}
-          />
-          <RatingSegment
-            aria-label="Good"
-            iconEmpty={<IconStar />}
-            iconFilled={<IconStarFilled color="teal" />}
-          />
-          <RatingSegment
-            aria-label="Great"
-            iconEmpty={<IconStar />}
-            iconFilled={<IconStarFilled color="success" />}
-          />
+          {moods.map(({ label, color, Empty, Filled }) => (
+            <RatingSegment
+              key={label}
+              aria-label={label}
+              iconEmpty={
+                <Icon>
+                  <Empty />
+                </Icon>
+              }
+              iconFilled={
+                <Icon color={color}>
+                  <Filled />
+                </Icon>
+              }
+            />
+          ))}
         </Rating>
       </Flex>,
     );

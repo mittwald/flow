@@ -1171,6 +1171,9 @@ importers:
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@tabler/icons-react':
+        specifier: ^3.44.0
+        version: 3.44.0(react@19.2.7)
       '@types/node':
         specifier: ^25.9.3
         version: 25.9.5

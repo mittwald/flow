@@ -63,6 +63,7 @@
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
+    "@tabler/icons-react": "^3.44.0",
     "@types/node": "^25.9.3",
     "@types/react-dom": "^19.2",
     "@types/semver": "^7.5.8",
