@@ -1,6 +1,7 @@
 @use "@/styles/mixins/focus";
 
 .link {
+  display: inline-block;
   font-weight: var(--link--font-weight);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
@@ -86,11 +87,11 @@
     }
   }
 
-  @include status(danger);
-  @include status(success);
-  @include status(warning);
-  @include status(info);
-  @include status(unavailable);
+  @include status("danger");
+  @include status("success");
+  @include status("warning");
+  @include status("info");
+  @include status("unavailable");
 
   &:has(> .accentBox),
   &:has(> .layoutCard) {

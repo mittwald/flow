@@ -17,6 +17,14 @@
   .item {
     @include menuItem.menuItem();
 
+    > .icon {
+      order: 0;
+    }
+
+    > :not(.icon) {
+      order: 1;
+    }
+
     .badge {
       margin-inline-start: auto;
     }
