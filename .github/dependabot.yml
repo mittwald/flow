@@ -4,22 +4,79 @@ version: 2
 # breaking changes (build/runtime/API) that warrant a considered upgrade rather
 # than an auto-PR. To take a specific major, bump it manually (or temporarily
 # remove/relax the matching ignore).
+#
+# Everything proposed here is auto-merged by
+# `.github/workflows/dependabot-auto-merge.yml` once CI and the visual
+# regression suite are green — see CONTRIBUTE.md § Dependency updates. Two
+# consequences for this file:
+#
+# 1. NOTHING IS UNGROUPED. Every npm dependency falls into one of the groups
+#    below, so a week produces at most four lockfile PRs. Each merge invalidates
+#    `pnpm-lock.yaml` in every other open PR, which makes Dependabot rebase it
+#    and CI run again — with ~10 open PRs that cascade is quadratic, and it is
+#    why the old `dev-dependencies` PR grew to 29 updates without ever landing.
+# 2. A `cooldown` replaces the human as the filter against bad releases. It
+#    mirrors the `minimumReleaseAge` this repo used to set in
+#    `pnpm-workspace.yaml`, `@mittwald/*` exempt for the same reason: our own
+#    packages are published and consumed within the hour.
 updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+      exclude:
+        - "@mittwald/*"
+    # First match wins, so the risk cluster is carved out before the catch-all.
     groups:
-      dev-dependencies:
+      # The accessibility foundation moves as one unit and breaks as one unit —
+      # a partial bump across these packages mixes incompatible internals.
+      react-aria:
+        patterns:
+          - "react-aria"
+          - "react-aria-components"
+          - "@react-aria/*"
+          - "@react-stately/*"
+          - "@react-types/*"
+          - "@internationalized/*"
+      # Everything that ships to consumers. Patch and minor together: with
+      # auto-merge nobody reviews them individually anyway, and splitting them
+      # only adds another PR to the rebase cascade.
+      production:
+        dependency-type: production
+      # Split, unlike production: the dev side carries the volume (~25 updates a
+      # week), and the boring patches should land even while a minor is red.
+      dev-patch:
         dependency-type: development
+        update-types:
+          - patch
+      dev-minor:
+        dependency-type: development
+        update-types:
+          - minor
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # Deliberate holds. Without these, Dependabot re-proposes them every week
+      # and each PR has to be closed by hand — Dependabot widens a `~`/`^` range
+      # rather than respecting it as a ceiling.
+      #
+      # recharts 3.10 breaks the `CartesianChart` public type surface. Taking it
+      # is its own PR, not a routine bump.
+      - dependency-name: "recharts"
+        versions: [">=3.8.0"]
+      # playwright 1.62 ships WebKit 2336, which stretches the LightBox image.
+      # Lift the hold only once that sizing is fixed.
+      - dependency-name: "playwright"
+        versions: [">=1.62.0"]
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     groups:
       actions:
         patterns:
@@ -31,6 +88,8 @@ updates:
     directory: "/apps/docs"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -38,6 +97,8 @@ updates:
     directory: "/packages/components"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
