@@ -6,7 +6,15 @@ import {
   Label,
   Rating,
   RatingSegment,
+  Text,
 } from "@mittwald/flow-remote-react-components";
+import {
+  Field,
+  Form,
+  SubmitButton,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   IconMoodEmpty,
   IconMoodEmptyFilled,
@@ -17,6 +25,9 @@ import {
 } from "@tabler/icons-react";
 
 export default function Page() {
+  const form = useForm({ defaultValues: { cantina: 3 } });
+  const [submitted, setSubmitted] = useState<number>();
+
   return (
     <Flex direction="column" gap="l">
       <Heading>Default</Heading>
@@ -67,6 +78,20 @@ export default function Page() {
           }
         />
       </Rating>
+
+      <Heading>In a form</Heading>
+      <Form form={form} onSubmit={(data) => setSubmitted(data.cantina)}>
+        <Field
+          name="cantina"
+          rules={{ min: { value: 1, message: "Required!" } }}
+        >
+          <Rating>
+            <Label>Cantina rating</Label>
+          </Rating>
+        </Field>
+        <SubmitButton>Submit</SubmitButton>
+      </Form>
+      <Text>Submitted: {submitted ?? "nothing yet"}</Text>
     </Flex>
   );
 }

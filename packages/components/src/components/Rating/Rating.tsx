@@ -11,6 +11,8 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
+import { prefixedStyleClassname } from "@/lib/scss/selectors";
+import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import { RatingSegmentContextProvider } from "@/components/Rating/context";
 
@@ -53,8 +55,9 @@ const segmentsTunnelId = "segments";
  */
 export const Rating = flowComponent("Rating", (props) => {
   const {
-    value,
+    value: valueFromProps,
     defaultValue = 0,
+    onChange: onChangeFromProps,
     size = "m",
     maxValue = 5,
     fill = "cumulative",
@@ -66,6 +69,18 @@ export const Rating = flowComponent("Rating", (props) => {
     ...rest
   } = props;
 
+  /*
+   * The rating takes a number but React Aria reports a string, so the hook gets
+   * a string-shaped view of the field. It keeps the selected value in local
+   * state, which is what makes the control respond immediately when the value
+   * round-trips through a remote app.
+   */
+  const { value, onChange } = useControlledHostValueProps({
+    value: valueFromProps?.toString(),
+    defaultValue: defaultValue.toString(),
+    onChange: onChangeFromProps,
+  });
+
   const {
     FieldErrorView,
     FieldErrorCaptureContext,
@@ -75,8 +90,8 @@ export const Rating = flowComponent("Rating", (props) => {
 
   const rootClassName = clsx(
     styles.rating,
-    styles[`size-${size}`],
-    styles[`fill-${fill}`],
+    prefixedStyleClassname(styles, "size-", size),
+    prefixedStyleClassname(styles, "fill-", fill),
     fieldProps.className,
     className,
   );
@@ -103,8 +118,8 @@ export const Rating = flowComponent("Rating", (props) => {
     <Aria.RadioGroup
       {...rest}
       className={rootClassName}
-      defaultValue={defaultValue.toString()}
-      value={value?.toString()}
+      value={value}
+      onChange={onChange}
       ref={localRef}
     >
       <FieldErrorCaptureContext>
