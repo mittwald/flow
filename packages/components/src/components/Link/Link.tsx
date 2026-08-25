@@ -22,6 +22,7 @@ import { linkContext } from "@/components/Link/context";
 import { Text } from "@/components/Text";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 import { handleLinkClick, useRouter } from "@react-aria/utils";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface LinkProps
   extends
@@ -62,6 +63,8 @@ export const Link = flowComponent("Link", (props) => {
     whiteSpace,
     size = "m",
     onClickCapture: onClickCaptureFromProps,
+    target,
+    download,
     ...rest
   } = props;
 
@@ -103,6 +106,10 @@ export const Link = flowComponent("Link", (props) => {
 
   const propsContext: PropsContext = {
     Icon: {
+      tunnel: {
+        component: "Link",
+        id: "icon",
+      },
       className: styles.icon,
       size: "s",
     },
@@ -120,7 +127,7 @@ export const Link = flowComponent("Link", (props) => {
       children: dynamic((buttonProps) => (
         <>
           <Text>{buttonProps.children}</Text>
-          <LinkIcon {...props} />
+          <LinkIcon download={download} target={target} unstyled={unstyled} />
         </>
       )),
     },
@@ -136,6 +143,8 @@ export const Link = flowComponent("Link", (props) => {
     <Link
       {...unsupportedTypingsLinkProps}
       {...rest}
+      target={target}
+      download={download}
       onClickCapture={handleClickCapture}
       className={rootClassName}
       ref={ref}
@@ -143,7 +152,14 @@ export const Link = flowComponent("Link", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         {children}
-        <LinkIcon withZeroWidthJoiner {...props} />
+        <LinkIcon
+          withZeroWidthJoiner
+          unstyled={unstyled}
+          target={target}
+          download={download}
+        >
+          <UiComponentTunnelExit id={"icon"} component={"Link"} />
+        </LinkIcon>
       </PropsContextProvider>
     </Link>
   );

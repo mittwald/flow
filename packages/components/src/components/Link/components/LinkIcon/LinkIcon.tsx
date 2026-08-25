@@ -11,7 +11,13 @@ import styles from "./LinkIcon.module.scss";
 export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
   props,
 ) => {
-  const { unstyled, target, download, withZeroWidthJoiner = false } = props;
+  const {
+    unstyled,
+    target,
+    download,
+    withZeroWidthJoiner = false,
+    children,
+  } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Link");
   let icon: ReactElement | null = null;
@@ -32,8 +38,8 @@ export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
     );
   }
 
-  if (unstyled || !icon) {
-    return null;
+  if (unstyled) {
+    return children;
   }
 
   if (withZeroWidthJoiner) {
@@ -41,11 +47,17 @@ export const LinkIcon: FC<LinkProps & { withZeroWidthJoiner?: boolean }> = (
       <span className={styles.linkIcon}>
         {"\u200D"}
         {icon}
+        {children}
       </span>
     );
   }
 
-  return icon;
+  return (
+    <>
+      {icon}
+      {children}
+    </>
+  );
 };
 
 export default LinkIcon;
