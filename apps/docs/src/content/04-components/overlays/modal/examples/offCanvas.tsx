@@ -13,8 +13,6 @@ import {
   RadioButton,
   RadioGroup,
   Section,
-  Segment,
-  SegmentedControl,
   Text,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -49,13 +47,15 @@ import { sleepLong } from "@/content/04-components/actions/action/examples/lib";
           Wähle zwischen der Authentifikation per Passwort
           oder über einen SSH-Key.
         </Text>
-        <SegmentedControl
-          value="password"
+        <RadioGroup
+          defaultValue="password"
           aria-label="Authentifizierung"
         >
-          <Segment value="password">Passwort</Segment>
-          <Segment value="ssh">SSH-Key</Segment>
-        </SegmentedControl>
+          <RadioButton value="password">
+            Passwort
+          </RadioButton>
+          <RadioButton value="ssh">SSH-Key</RadioButton>
+        </RadioGroup>
         <ColumnLayout s={[1, 1]}>
           <TextField isRequired>
             <Label>Passwort</Label>

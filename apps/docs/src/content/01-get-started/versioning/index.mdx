@@ -130,6 +130,64 @@ oder Patch erscheint.
 
 ---
 
+# Migration bei einer Breaking Change
+
+Jede Änderung, die eine Anpassung in deinem Code erfordert, steht mit
+Vorher-Nachher-Beispiel im Migrationsleitfaden des betroffenen Packages:
+
+- [Migrationsleitfaden `@mittwald/flow-react-components`](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md)
+  – deckt auch `@mittwald/flow-remote-react-components` ab
+- [Migrationsleitfaden `@mittwald/ext-bridge`](https://github.com/mittwald/flow/blob/main/packages/ext-bridge/MIGRATION.md)
+
+Die Einträge sind nach Version absteigend sortiert und nennen jeweils die
+Version, ab der die Änderung greift. Suche die Version, von der du kommst, und
+arbeite dich nach oben durch.
+
+## Nutze den Codemod, wenn es einen gibt
+
+Umbenennungen liefern wir als
+[Codemod](https://github.com/mittwald/flow/tree/main/packages/codemods/src/transforms)
+aus – ein Skript, das die Anpassung in deinen Sourcen automatisch vornimmt.
+Welcher Codemod zu einer Änderung gehört, steht im jeweiligen Eintrag des
+Migrationsleitfadens, zusammen mit dem fertigen Aufruf:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/<name>.ts \
+  --parser tsx \
+  src
+```
+
+Ein Codemod ändert Dateien direkt. Führe ihn auf einem sauberen Git-Stand aus
+und prüfe das Diff.
+
+Wenn du mehrere Versionen auf einmal aufholst, nimm `flowAlphaAll` – der Codemod
+führt alle Migrations-Codemods der `0.2.0-alpha`-Reihe in der Reihenfolge ihrer
+Releases aus:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  --parser tsx \
+  src
+```
+
+## Deprecation-Warnungen sind der Vorlauf
+
+Wird ein Pfad deprecated, bleibt er funktionsfähig und meldet sich zur Laufzeit
+per `console.warn`. Diese Warnungen sind die Vorwarnzeit vor der nächsten
+Major-Version – behandle sie als Aufgabenliste, nicht als Rauschen. Um sie
+zentral einzusammeln, etwa im Error-Tracking, umschließe deine Anwendung mit
+einem `DeprecationWarningProvider` und gib ihm einen `onWarning`-Handler:
+
+```tsx
+<DeprecationWarningProvider onWarning={(message) => reportToTracking(message)}>
+  <App />
+</DeprecationWarningProvider>
+```
+
+---
+
 # Component Lifecycle
 
 Der Vertrag gilt nicht für jede Component gleich. Jede Component hat einen

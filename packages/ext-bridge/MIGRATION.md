@@ -50,6 +50,31 @@ go:
 
 ---
 
+## From version 0.2.0-alpha.1020 to version 0.2.0-alpha.1021
+
+### `HostConfig` no longer comes from an unpublished package
+
+Between `0.2.0-alpha.789` and `0.2.0-alpha.1020`, the published types imported
+`HostConfig` from `@mittwald/flow-core` — a private workspace package that is
+not on npm. `tsc` stayed quiet because of `skipLibCheck`, but the import
+resolved to nothing, so `useConfig()` and `getConfig()` collapsed to the error
+type. Typed lint rules (`@typescript-eslint/no-unsafe-*`) then failed on every
+usage.
+
+`HostConfig` is now declared in `@mittwald/ext-bridge` itself and exported from
+the package root:
+
+```ts
+import type { ExtBridgeConfig, HostConfig } from "@mittwald/ext-bridge";
+```
+
+Update to `>=0.2.0-alpha.1021` and remove any local workaround — an ambient
+`declare module "@mittwald/flow-core"` stub, a `paths` entry in `tsconfig.json`,
+or a hand-written `HostConfig` copy. The same import was removed from
+`@mittwald/flow-remote-core` and `@mittwald/flow-remote-react-renderer`.
+
+---
+
 ## From version `0.2.0-alpha.940` to `>=0.2.0-alpha.941`
 
 ### Node 24 required
