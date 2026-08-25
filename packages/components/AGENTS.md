@@ -193,11 +193,12 @@ if ("action" in props) {
   committed generated artifact — see the root
   [Generated code](../../AGENTS.md#generated-code--must-be-committed) table,
   `pnpm nx build:scss-types components`). A narrow-union index (`styles[color]`,
-  `styles[`size-${size}`]`) stays type-safe as-is; a `string`-typed or runtime
-  index needs a helper from `@/lib/scss/selectors` — **not** an
-  `as keyof typeof styles` cast, which hides missing classes:
-  `prefixedStyleClassname(styles, "size-", size)` for a `` `prefix-${x}` `` key (guard out a no-class default so the value matches a real suffix), or `styleClassname(styles,
-  key)`(returns`string | undefined`) for a bare key.
+  ``styles[`size-${size}`]``) stays type-safe as-is — including a helper's
+  return, as long as the helper is typed as a template-literal union (see
+  `getContainerBreakpointSizeClassName`). Only a `string`-typed or runtime index
+  needs `styleClassname(styles, key)` from `@/lib/scss/selectors` (returns
+  `string | undefined`) — **not** an `as keyof typeof styles` cast, which hides
+  missing classes.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.

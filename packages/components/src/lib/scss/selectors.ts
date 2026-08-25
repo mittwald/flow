@@ -1,18 +1,3 @@
-export type SuffixFromPrefixedKeys<
-  T extends Record<string, unknown>,
-  Prefix extends string,
-> = {
-  [K in keyof T & string]: K extends `${Prefix}${infer S}` ? S : never;
-}[keyof T & string];
-
-export function prefixedStyleClassname<
-  T extends Record<string, string>,
-  Prefix extends string,
-  S extends SuffixFromPrefixedKeys<T, Prefix>,
->(styles: T, prefix: Prefix, suffix: S): T[`${Prefix}${S}` & keyof T] {
-  return styles[`${prefix}${suffix}` as `${Prefix}${S}` & keyof T];
-}
-
 /**
  * Look up a class name by a dynamic (runtime) key — a key that cannot be
  * statically narrowed to one of `styles`' keys (e.g. built from a number, a
