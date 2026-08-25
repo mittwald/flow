@@ -161,6 +161,17 @@ npx jscodeshift \
 Ein Codemod ändert Dateien direkt. Führe ihn auf einem sauberen Git-Stand aus
 und prüfe das Diff.
 
+Wenn du mehrere Versionen auf einmal aufholst, nimm `flowAlphaAll` – der Codemod
+führt alle Migrations-Codemods der `0.2.0-alpha`-Reihe in der Reihenfolge ihrer
+Releases aus:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  --parser tsx \
+  src
+```
+
 ## Deprecation-Warnungen sind der Vorlauf
 
 Wird ein Pfad deprecated, bleibt er funktionsfähig und meldet sich zur Laufzeit
