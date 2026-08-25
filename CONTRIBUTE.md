@@ -79,8 +79,9 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
-  changes.
+- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
+  repo. It blocks the push, not the commit — unformatted files surface once the
+  commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
 
@@ -593,8 +594,7 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
-you.
+Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for you.
 
 ```shell
 pnpm lint           # check with ESLint + Stylelint + Prettier
