@@ -203,6 +203,7 @@ export default function Page() {
           <Button
             onPress={() => {
               form.setValue("email", "leia@rebel-alliance.com");
+              form.setValue("cantina", 5);
             }}
           >
             Set value
