@@ -32,6 +32,8 @@ const profileLabel = `  <Label>E-Mail-Adresse</Label>`;
 const profileValue = `  <Content>max@mustermann.de</Content>`;
 
 const profileExample = [
+  profileHeading.trim(),
+
   lines("<>", profileHeading, profileButton, "</>"),
 
   lines("<>", profileHeading, profileButton, profileLabel, profileValue, "</>"),
