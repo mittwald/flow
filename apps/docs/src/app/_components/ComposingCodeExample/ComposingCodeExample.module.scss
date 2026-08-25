@@ -1,0 +1,16 @@
+.example {
+  .preview {
+    // Reserve the room the tallest example needs — the empty state, whose
+    // `IllustratedMessage` renders its icon at size l. Without it the tile and
+    // the page below it jump every time that example comes around. The editor
+    // keeps its height on its own: `buildAnimation` pads every frame to the
+    // line count of the longest step.
+    min-height: 18rem;
+
+    // The shared preview centers whatever it renders. Here that would fake the
+    // result: the whole point is that loose components stack in source order
+    // until a Flow component arranges them.
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
