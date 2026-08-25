@@ -1,7 +1,11 @@
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
+import { useForm } from "react-hook-form";
 import { Rating } from "@/components/Rating";
+import { Button } from "@/components/Button";
+import { Label } from "@/components/Label";
+import { Form, typedField } from "@/integrations/react-hook-form";
 import { RatingSegment } from "@/components/Rating/components/RatingSegment";
 import { IconStarFilled } from "@/components/Icon/components/icons";
 import styles from "./Rating.module.scss";
@@ -86,4 +90,39 @@ test("the rating's size reaches the icons of a segment", async () => {
     ?.getBoundingClientRect().width;
 
   expect(width).toBeLessThan(24);
+});
+
+/*
+ * The rating keeps the selected value in local state, so a value set from the
+ * outside has to win over it.
+ */
+test("a value set on the form reaches the rating", async () => {
+  const Fixture = () => {
+    const form = useForm<{ rating: number }>({ defaultValues: { rating: 2 } });
+    const Field = typedField(form);
+
+    return (
+      <Form form={form} onSubmit={async () => undefined}>
+        <Field name="rating">
+          <Rating>
+            <Label>Rating</Label>
+          </Rating>
+        </Field>
+        <Button onPress={() => form.setValue("rating", 4)}>Set to 4</Button>
+      </Form>
+    );
+  };
+
+  await render(<Fixture />);
+
+  const selectedValue = () =>
+    Array.from(
+      document.querySelectorAll<HTMLInputElement>("input[type=radio]"),
+    ).find((input) => input.checked)?.value;
+
+  expect(selectedValue()).toBe("2");
+
+  await page.getByRole("button", { name: "Set to 4" }).click();
+
+  await expect.poll(selectedValue).toBe("4");
 });
