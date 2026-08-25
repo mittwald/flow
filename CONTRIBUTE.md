@@ -311,9 +311,10 @@ values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
 Importing `styles` gives per-class typed access from a generated
-`Badge.module.d.scss.ts` stub. For a dynamic class — a `string`-typed or runtime
-key — use a helper from `@/lib/scss/selectors` (`prefixedStyleClassname` /
-`styleClassname`), not an `as keyof typeof styles` cast.
+`Badge.module.d.scss.ts` stub. Indexing with a narrow union stays type-safe
+(`styles[color]`, ``styles[`size-${size}`]``). For a `string`-typed or runtime
+key use `styleClassname` from `@/lib/scss/selectors`, not an
+`as keyof typeof styles` cast.
 
 ### 3. Add the barrel `index.ts`
 
