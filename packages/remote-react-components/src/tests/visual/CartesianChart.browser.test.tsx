@@ -183,8 +183,8 @@ test.each(testEnvironments)(
         <ChartGrid vertical horizontal={false} />
         <Bar dataKey="first" />
         <Bar dataKey="second" color="palatinate-blue" />
-        <XAxis type="number" />
-        <YAxis type="category" dataKey="name" />
+        <XAxis />
+        <YAxis dataKey="name" />
         <ChartLegend />
       </CartesianChart>,
     );

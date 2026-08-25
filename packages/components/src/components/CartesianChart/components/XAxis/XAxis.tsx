@@ -31,11 +31,14 @@ export type XAxisProps<
 
 /** @flr-generate all */
 export const XAxis: FC<XAxisProps> = (props) => {
+  const { type = "auto", ...rest } = props;
+
   const tokens = useDesignTokens();
 
   return (
     <Recharts.XAxis
-      {...props}
+      {...rest}
+      type={type}
       fontSize={tokens.axis["font-size"].value}
       tick={{
         fill: tokens.axis["color"].value,

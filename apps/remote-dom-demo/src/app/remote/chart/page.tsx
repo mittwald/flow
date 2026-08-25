@@ -78,9 +78,9 @@ export default function Page() {
         <CartesianGrid vertical={vertical} horizontal={!vertical} />
         <Bar dataKey="Shields" />
         <Bar dataKey="Hull" color="palatinate-blue" />
-        {vertical ? <XAxis type="number" /> : <XAxis dataKey="time" />}
+        {vertical ? <XAxis unit="%" /> : <XAxis dataKey="time" />}
         {vertical ? (
-          <YAxis type="category" dataKey="time" />
+          <YAxis dataKey="time" />
         ) : (
           <YAxis domain={[0, 100]} unit="%" />
         )}

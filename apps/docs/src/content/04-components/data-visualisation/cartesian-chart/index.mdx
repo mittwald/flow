@@ -54,18 +54,17 @@ einzelner Objekte am Gesamtwert einer Kategorie.
 
 <LiveCodeEditor example="barStacked" editorCollapsed />
 
----
-
-# Ausrichtung
+### Ausrichtung
 
 Die Property `layout` bestimmt, wo die Kategorie-Achse liegt. Mit dem Default
 `horizontal` liegt sie auf der x-Achse, die Balken wachsen nach oben. Mit
-`vertical` liegt sie auf der y-Achse und die Balken wachsen zur Seite. Dafür
-braucht die `<XAxis />` ein `type="number"` und die `<YAxis />` ein
-`type="category"` mit dem `dataKey`.
+`vertical` liegt sie auf der y-Achse und die Balken wachsen zur Seite. Der
+`dataKey` wandert dabei auf die `<YAxis />`, die Achsentypen ergeben sich von
+selbst.
 
 Nutze die vertikale Ausrichtung für lange Kategorie-Namen oder für viele
-Kategorien.
+Kategorien. Nur Balken lassen sich sinnvoll drehen. `<Line />` und `<Area />`
+zeigen einen Verlauf und bleiben horizontal.
 
 <LiveCodeEditor example="barHorizontal" editorCollapsed />
 

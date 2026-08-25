@@ -28,11 +28,8 @@ export default () => {
           dataKey="Speicherplatz"
           unit="GB"
         />
-        <CartesianChart.XAxis type="number" unit=" GB" />
-        <CartesianChart.YAxis
-          type="category"
-          dataKey="Projekt"
-        />
+        <CartesianChart.XAxis unit=" GB" />
+        <CartesianChart.YAxis dataKey="Projekt" />
         <CartesianChart.Grid vertical horizontal={false} />
         <CartesianChart.Tooltip />
       </CartesianChart.Chart>

@@ -50,9 +50,9 @@ export interface CartesianChartProps<TData = ChartDataValue>
   /**
    * The orientation of the axes and graphical items. `"horizontal"` puts the
    * category axis on the x-axis — bars grow upwards. `"vertical"` puts it on
-   * the y-axis — bars grow to the side. A vertical layout needs a numeric
-   * `XAxis` (`type="number"`) and a categorical `YAxis` (`type="category"` with
-   * the `dataKey`).
+   * the y-axis — bars grow to the side. `XAxis` and `YAxis` follow the layout
+   * on their own; only the `dataKey` moves to whichever axis is the categorical
+   * one.
    *
    * @default "horizontal"
    */

@@ -321,8 +321,8 @@ export const WithHorizontalBars: Story = {
     <CartesianChart {...props} layout="vertical" height="300px">
       <Bar dataKey="firstKey" />
       <Bar dataKey="secondKey" color="palatinate-blue" />
-      <XAxis type="number" />
-      <YAxis type="category" dataKey="name" />
+      <XAxis />
+      <YAxis dataKey="name" />
       <ChartGrid vertical horizontal={false} />
       <ChartLegend />
       <ChartTooltip />
