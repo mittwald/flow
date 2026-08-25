@@ -1,5 +1,26 @@
 # Migrations
 
+Entries are sorted by version, newest first. Find the version you are coming
+from and work your way up.
+
+Catching up across many versions? One codemod runs every `0.2.0-alpha` migration
+transform, in the order the changes were released:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. It changes files in place — run it on a
+clean git state and review the diff afterwards.
+
+The entries below still name their individual codemod, so you can apply a single
+change on its own. Everything without a codemod has to be done by hand, and the
+`0.1.0` → `0.2.0` codemod is not part of `flowAlphaAll` — run that one
+separately, and only when coming from `0.1.0`.
+
 ---
 
 ## From version `0.2.0-alpha.1046` to `>=0.2.0-alpha.1047`
@@ -209,6 +230,24 @@ Replace `src` with your sources folder.
 
 ---
 
+## From version `0.2.0-alpha.801` to `>=0.2.0-alpha.802`
+
+### password-tools: `AsyncRule` and `SyncRule` replaced by `Rule`
+
+The `@mittwald/flow-react-components/mittwald-password-tools-js` entry no longer
+exports `AsyncRule` and `SyncRule`. The underlying `@mittwald/password-tools-js`
+merged both into a single abstract `Rule`.
+
+```diff
+- import { AsyncRule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
++ import { Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+```
+
+A custom rule extends `Rule` and may return its result synchronously or as a
+promise — the distinction the two classes used to encode is gone.
+
+---
+
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
 
 ### CartesianChart
@@ -329,6 +368,53 @@ for details on what's now supported.
 
 ---
 
+## From version `0.2.0-alpha.711` to `>=0.2.0-alpha.712`
+
+### `MutedActionError` renamed to `AbortActionError`
+
+The error that aborts an `Action` without reporting a failure is now called
+`AbortActionError`. Its static helpers were renamed along with it.
+
+```diff
+- import { MutedActionError } from "@mittwald/flow-react-components";
++ import { AbortActionError } from "@mittwald/flow-react-components";
+
+- throw new MutedActionError();
++ throw new AbortActionError();
+
+- MutedActionError.isMutedActionError(error);
++ AbortActionError.isAbortActionError(error);
+
+- MutedActionError.rethrowIfNotMuted(error);
++ AbortActionError.rethrowIfNotAborted(error);
+```
+
+There is no alias for the old name. The thrown error's `name` changed from
+`"MutedActionError"` to `"AbortActionError"` as well — update any code that
+matches on it.
+
+---
+
+## From version `0.2.0-alpha.693` to `>=0.2.0-alpha.694`
+
+### Form: resets itself after the surrounding modal closes
+
+A react-hook-form `<Form>` inside a `Modal` now resets to its default values
+once the modal has closed. Previously it kept what the user had entered, so
+reopening the modal showed the abandoned input.
+
+Opt out per form with the new `autoReset` prop:
+
+```diff
+- <Form form={form} onSubmit={onSubmit}>
++ <Form form={form} onSubmit={onSubmit} autoReset={false}>
+```
+
+`autoReset` also takes an object (`autoReset={{ onAfterModalClose: false }}`) so
+further reset triggers can be added without another prop.
+
+---
+
 ## From version `0.2.0-alpha.676` to `>=0.2.0-alpha.696`
 
 ### OverlayController.addOnClose / addOnOpen return type changed
@@ -352,6 +438,34 @@ element now.
 ---
 
 ## From version `0.2.0-alpha.637` to `>=0.2.0-alpha.646`
+
+### Action: `action` renamed to `onAction`
+
+`Action`'s `action` prop is now called `onAction`, which matches the naming of
+every other event prop in Flow.
+
+```diff
+- <Action action={createOrganization}>
++ <Action onAction={createOrganization}>
+    <Button>Organisation anlegen</Button>
+  </Action>
+```
+
+`action` was removed from `ActionProps`, so TypeScript reports it as an unknown
+prop. At runtime the old prop still works: `Action` maps it to `onAction` and
+logs a deprecation warning, and an explicit `onAction` wins. The fallback will
+be removed in a future major version.
+
+A codemod renames the prop on `Action`:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaActionPropToOnAction.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder.
 
 ### Removed ResetButton and SubmitButton Interfaces
 
