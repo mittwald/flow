@@ -61,7 +61,9 @@ export const createCustomComponents = () => {
     ),
 
     p: ({ children }: PropsWithChildren) => (
-      <Text elementType="p">{children}</Text>
+      <Text elementType="p" className={styles.text}>
+        {children}
+      </Text>
     ),
 
     ul: ({ children }: PropsWithChildren) => (
