@@ -28,6 +28,7 @@ coding agents, but great reference docs for humans too.
 - [Choosing the base branch](#choosing-the-base-branch)
 - [Opening a pull request](#opening-a-pull-request)
 - [Releases](#releases)
+- [Dependency updates](#dependency-updates)
 - [Getting help](#getting-help)
 
 ## Prerequisites
@@ -753,6 +754,55 @@ branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
 [RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
 model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
 forward-merge mechanics.
+
+## Dependency updates
+
+Dependabot proposes minor and patch updates weekly and **merges them itself** —
+nobody approves a dependency bump by hand. Majors are never proposed; take one
+deliberately by bumping it manually. The moving parts:
+
+- [`.github/dependabot.yml`](.github/dependabot.yml) puts every npm dependency
+  into one of four groups (`react-aria`, `production`, `dev-patch`, `dev-minor`)
+  and holds versions younger than 7 days back (`cooldown`, `@mittwald/*`
+  exempt). Nothing is left ungrouped on purpose: every merge invalidates
+  `pnpm-lock.yaml` in every other open PR, which makes Dependabot rebase it and
+  CI run again, so the number of open PRs is what drives that cascade.
+- The **visual regression suite runs on every Dependabot PR**, not on a label. A
+  `playwright`, `vitest` or `react-aria` bump moves snapshots, and the label
+  route is not even available to a workflow: events created with `GITHUB_TOKEN`
+  do not start new workflow runs.
+- [`dependabot-auto-merge.yml`](.github/workflows/dependabot-auto-merge.yml)
+  waits for that suite, re-checks the PR, and comments
+  `@dependabot squash and merge`. Dependabot merges once the required `main`
+  check is green.
+
+**When one goes red.** Nothing merges. Find the culprit in the group, then
+either fix the code or park the dependency with
+`@dependabot ignore <name> <version>` — which writes nothing to
+`dependabot.yml`, so add an `ignore` entry there for a hold that should outlive
+the PR (see `recharts` and `playwright`).
+
+**Why this is allowed to skip review.** The `main` ruleset requires a code owner
+approval, so Dependabot needs a bypass. That bypass is deliberately narrow, and
+it needs **two rulesets** — a bypass list covers every rule in its ruleset, not
+one rule:
+
+| Ruleset | Rules                                                                | Dependabot bypass |
+| ------- | -------------------------------------------------------------------- | ----------------- |
+| A       | `pull_request` (review requirement)                                  | yes               |
+| B       | `required_status_checks`, `deletion`, `creation`, `non_fast_forward` | **no**            |
+
+So Dependabot may skip the review, never CI. This is repository configuration,
+not a file in this repo — a maintainer sets it up once.
+
+The one hole the bypass opens is that anyone with write access can push a commit
+onto an open `dependabot/*` branch, which would then reach `main` unreviewed.
+`dependabot-auto-merge.yml` closes it: it merges only when every commit in the
+PR is authored by `dependabot[bot]` **and** carries a verified signature.
+
+Bumps that land are published — the standing prerelease line publishes on every
+push to `main` — which is why the cooldown is the safety gate that matters most
+here, not the review it replaces.
 
 ## Getting help
 
