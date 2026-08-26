@@ -12,12 +12,12 @@ import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
  * one by CodeMirror's dark theme flag, which Flow's theme never sets, and the
  * active block needs no color of its own.
  */
-const lineColor = "var(--code-editor--line-color)";
+const markerColor = "var(--code-editor--indentation-marker-color)";
 const indentationMarkerColors = {
-  light: lineColor,
-  dark: lineColor,
-  activeLight: lineColor,
-  activeDark: lineColor,
+  light: markerColor,
+  dark: markerColor,
+  activeLight: markerColor,
+  activeDark: markerColor,
 };
 
 /** @internal */

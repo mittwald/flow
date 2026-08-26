@@ -7,3 +7,5 @@ code-editor:
     value: "{size-rem.l}"
   line-color:
     value: "{separator.color}"
+  indentation-marker-color:
+    value: "{neutral.color.400}"
