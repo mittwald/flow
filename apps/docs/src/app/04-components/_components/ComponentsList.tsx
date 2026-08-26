@@ -2,15 +2,12 @@
 import type { FC } from "react";
 import { typedList } from "@mittwald/flow-react-components";
 import { ComponentCard } from "@/app/04-components/_components/ComponentCard";
-import { deprecationRank } from "@/lib/componentStatus";
 
 export interface ComponentLink {
   id: string;
   group: string;
   slug: string;
   name: string;
-  /** Registry lookup key — the component's display name, from frontmatter. */
-  component?: string;
   description?: string;
   href: string;
 }
@@ -21,11 +18,7 @@ interface Props {
 }
 
 export const ComponentsList: FC<Props> = (props) => {
-  // Deprecated components rank last, like they do in the navigation. The
-  // incoming order is the tiebreaker, so grouped and alphabetical both keep it.
-  const components = [...props.components].sort(
-    (a, b) => deprecationRank(a.component) - deprecationRank(b.component),
-  );
+  const { components } = props;
 
   const List = typedList<ComponentLink>();
 

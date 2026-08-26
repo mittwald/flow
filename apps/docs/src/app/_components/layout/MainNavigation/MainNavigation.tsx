@@ -16,7 +16,10 @@ import {
 } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
-import { ComponentStatusBadge, deprecationRank } from "@/lib/componentStatus";
+import {
+  ComponentStatusBadge,
+  getComponentStatusInfo,
+} from "@/lib/componentStatus";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
@@ -72,11 +75,14 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   );
 };
 
-/** Groups never rank as deprecated — only the component pages inside them do. */
-const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number =>
-  treeItem instanceof MdxFile
-    ? deprecationRank(treeItem.mdxSource.frontmatter.component)
-    : 0;
+const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
+  if (!(treeItem instanceof MdxFile)) {
+    return 0;
+  }
+  const component = treeItem.mdxSource.frontmatter.component;
+  const status = component ? getComponentStatusInfo(component) : undefined;
+  return status?.level === "deprecated" ? 1 : 0;
+};
 
 const entryLabel = ([group, treeItem]: TreeEntry): string =>
   treeItem instanceof MdxFile
@@ -157,11 +163,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         <ComponentGroupingView view="alphabetical">
           <Navigation aria-label="Components">
             {collectMdxFiles(componentEntries)
-              .sort(
-                (a, b) =>
-                  deprecatedRank(a) - deprecatedRank(b) ||
-                  compareLabels(a.getNavTitle(), b.getNavTitle()),
-              )
+              .sort((a, b) => compareLabels(a.getNavTitle(), b.getNavTitle()))
               .map((treeItem) => (
                 <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
               ))}
