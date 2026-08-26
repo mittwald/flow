@@ -20,6 +20,12 @@ export interface MdxFileMeta {
    * to a generic German sentence.
    */
   deprecationNotice?: string;
+  /**
+   * Display names of the components that replace this one, in the order they
+   * should be offered. Resolved to links in the status callout, so every name
+   * must have a component page.
+   */
+  replacedBy?: string[];
 }
 
 export type StaticParams =
