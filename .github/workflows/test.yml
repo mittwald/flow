@@ -43,6 +43,12 @@ jobs:
       - name: Lint & check formatting
         run: pnpm lint
 
+      # The CI guard scripts are plain node:test files outside the nx graph, so
+      # `pnpm affected:test` never sees them. Run them here so a broken
+      # classifier fails the PR rather than the next release.
+      - name: Test the CI guard scripts
+        run: node --test .github/scripts/*.test.mjs
+
       - name: Run unit tests
         run: pnpm affected:test
 

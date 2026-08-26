@@ -3,9 +3,9 @@ import {
   ColumnLayout,
   Heading,
   Label,
+  RadioButton,
+  RadioGroup,
   Section,
-  Segment,
-  SegmentedControl,
   Text,
   TextField,
 } from "@mittwald/flow-react-components";
@@ -57,10 +57,14 @@ export default () => {
         <Heading>Zahlungsinformationen</Heading>
         <Heading level={3}>Zahlungsart</Heading>
         <Field name="paymentMethod">
-          <SegmentedControl aria-label="Zahlungsart">
-            <Segment value="invoice">Rechnung</Segment>
-            <Segment value="debit">Lastschrift</Segment>
-          </SegmentedControl>
+          <RadioGroup l={[1, 1]} aria-label="Zahlungsart">
+            <RadioButton value="invoice">
+              Rechnung
+            </RadioButton>
+            <RadioButton value="debit">
+              Lastschrift
+            </RadioButton>
+          </RadioGroup>
         </Field>
 
         {watchedPaymentMethod === "invoice" && (

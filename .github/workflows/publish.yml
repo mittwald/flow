@@ -8,13 +8,9 @@ on:
         type: boolean
         default: false
       release_as:
-        description: "Force an explicit version (e.g. 1.0.0 for the one-time 1.0.0 cut). Empty = normal conventional-commits derivation."
+        description: "Force an explicit version"
         type: string
         default: ""
-      dry_run:
-        description: "Rehearse: build, compute the version, and run 'lerna publish --dry-run' without pushing, tagging, creating a release, or publishing to npm."
-        type: boolean
-        default: false
   push:
     branches:
       - main
@@ -22,6 +18,16 @@ on:
 permissions:
   id-token: write
   contents: write
+
+env:
+  # Keep the local git hooks out of this workflow. simple-git-hooks' postinstall
+  # runs on every `pnpm install` (it is allowlisted in pnpm-workspace.yaml) and
+  # writes .git/hooks from package.json — including `pre-push` = `pnpm lint`. On a
+  # runner that hook fires on every push this workflow makes: ~95s of the release
+  # step was two full lint runs, and a lint failure there aborts the push AFTER
+  # the npm publish succeeded — the version lands on npm with no release commit,
+  # no tag and no GitHub Release (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
 
 # Shared per-target-branch concurrency group (ADR 0004 §5): every writer of
 # `main` (this workflow, and the promotion back-merge once the 1.0.0 model is
@@ -31,6 +37,75 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Does this push carry anything that can reach a PUBLISHED package? Docs- and
+  # CI-only merges cannot, and must not produce a release (#2931): the publish
+  # job below is skipped whole, so there is no npm publish, no
+  # `chore(release):` version bump commit, no tag and no GitHub Release.
+  #
+  # This is a separate job rather than a step inside `publish` on purpose. The
+  # run then shows `decide` green and `publish` skipped, with a notice naming the
+  # rule that fired. `paths-ignore` on the trigger would skip the run entirely
+  # and explain nothing — and its globs cannot express "Markdown inside
+  # packages/ still ships" (flow-react-components publishes `["*.md", "dist"]`).
+  #
+  # A manual dispatch always publishes: that is the escape hatch for releasing a
+  # docs-only change deliberately.
+  decide:
+    name: Release relevance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.relevance.outputs.publish }}
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Self-test the classifier
+        run: node --test .github/scripts/release-relevance-lib.test.mjs
+
+      - name: Classify the changed paths 🔎
+        id: relevance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "::notice::Manual dispatch — publishing regardless of changed paths."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # No usable base (branch creation, force push) means we cannot tell
+          # what changed. Publish — the behaviour before #2931.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::No usable base sha — publishing (fail-safe default)."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # The compare API, not `git diff`: it needs no history, so this job
+          # stays a shallow checkout.
+          #
+          # `gh api` prints the error BODY to stdout on a non-2xx and exits
+          # non-zero, so the EXIT STATUS decides whether the list is usable —
+          # never the output. Discarding it hands the guard an empty list, which
+          # is its fail-safe "publish" input.
+          if ! files="$(gh api --paginate \
+            "repos/${REPO}/compare/${BEFORE}...${AFTER}" \
+            --jq '.files[]?.filename')"; then
+            echo "::warning::Could not read the changed-file list from the compare API — publishing (fail-safe default)."
+            files=""
+          fi
+
+          printf '%s\n' "$files" \
+            | node .github/scripts/release-relevance-guard.mjs
+
   publish:
     # Publish on manual dispatch, or on any push to main EXCEPT the release
     # commit this workflow pushes itself (guarded below to avoid an infinite
@@ -42,9 +117,19 @@ jobs:
     # npm rejects — the publish then falls back to an anonymous request and npm
     # returns a misleading 404. A push to main carries refs/heads/main and
     # authenticates correctly.
+    #
+    # `needs.decide` adds the third gate (#2931): a docs- or CI-only push
+    # produces no release at all.
+    needs: decide
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'chore(release):')
+      needs.decide.outputs.publish == 'true' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (
+          vars.AUTO_PUBLISH_ENABLED == 'true' &&
+          !startsWith(github.event.head_commit.message, 'chore(release):')
+        )
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -245,17 +330,12 @@ jobs:
       # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
         run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            # Rehearsal: show the publish plan, touch neither npm nor origin.
-            pnpm lerna publish from-package --yes --concurrency 1 --dry-run
-          else
-            pnpm lerna publish from-package --yes --concurrency 1
-          fi
+          pnpm lerna publish from-package --yes --concurrency 1
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.
       - name: Push release commit & tag, create GitHub release 🚀
-        if: ${{ !inputs.only_publish && !inputs.dry_run }}
+        if: ${{ !inputs.only_publish }}
         env:
           PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
           PR: ${{ steps.ctx.outputs.pr }}
@@ -271,11 +351,16 @@ jobs:
           # No-op for a pre-graduated promotion (the version commit arrived with
           # the merge, so HEAD is already origin/main); pushes the new commit for
           # the one-time-cut / dispatch paths where lerna versioned above.
-          git push origin HEAD:main
+          #
+          # --no-verify belongs at both pushes even with
+          # SKIP_INSTALL_SIMPLE_GIT_HOOKS set above: this is the one place where a
+          # hook aborting the push strands a release that npm has already accepted
+          # (#2932), so it does not depend on a workflow-level env var staying put.
+          git push --no-verify origin HEAD:main
           # Pre-graduated promotion: no tag exists yet — create it at the merge
           # commit. Cut/dispatch paths: lerna already tagged, so keep that tag.
           git rev-parse -q --verify "refs/tags/${tag}" >/dev/null || git tag -m "${tag}" "${tag}"
-          git push origin "refs/tags/${tag}"
+          git push --no-verify origin "refs/tags/${tag}"
 
           # Release notes. Preferred source for a promotion: the curated,
           # user-facing notes in the PR body, verbatim between the

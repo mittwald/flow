@@ -30,8 +30,7 @@ export const deepFindOfType = <T extends ElementType>(
   searchType: T,
 ): FunctionComponentElement<ComponentProps<T>> | undefined =>
   deepFind(children, (c) => isOfType(c, searchType)) as
-    | FunctionComponentElement<ComponentProps<T>>
-    | undefined;
+    FunctionComponentElement<ComponentProps<T>> | undefined;
 
 export const deepFilterByType = <T extends ElementType>(
   children: ReactNode,

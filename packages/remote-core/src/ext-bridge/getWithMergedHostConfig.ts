@@ -6,8 +6,13 @@ export const getWithMergedHostConfig =
   async (): Promise<ExtBridgeConfigInput> => {
     const baseConfig = await extBridgeConnection.getConfig();
 
-    return {
+    // Merged into a local first: the config type carries an index signature for
+    // undeclared context parameters, and a spread checked directly against a
+    // contextual type with an index signature loses the spread properties.
+    const mergedConfig = {
       ...hostConfig,
       ...baseConfig,
     };
+
+    return mergedConfig;
   };

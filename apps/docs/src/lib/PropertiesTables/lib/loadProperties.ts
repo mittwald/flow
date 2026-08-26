@@ -34,6 +34,14 @@ for (const [key, entry] of Object.entries(componentIndex)) {
   }
 }
 
+/** An `@default: x` JSDoc tag keeps its colon in the generated metadata. */
+const normalizeDefaultValue = (value: unknown): string | null => {
+  if (typeof value !== "string") {
+    return null;
+  }
+  return value.replace(/^\s*:/, "").replace(/\s+/g, " ").trim() || null;
+};
+
 export default function loadProperties(name: string): Properties | null {
   const component = byLocalName.get(name.toLowerCase().replaceAll(" ", ""));
 
@@ -41,16 +49,18 @@ export default function loadProperties(name: string): Properties | null {
     return null;
   }
 
-  const properties: Property[] = Object.entries(component.props).map(
-    ([propName, prop]) => ({
-      name: propName,
-      default: prop.default ?? null,
+  const properties: Property[] = Object.entries(component.props)
+    .filter(([name, prop]) => name && prop)
+    .filter(([, prop]) => !prop.description?.includes("@internal"))
+    .map(([name, prop]) => ({
+      name,
+      default: normalizeDefaultValue(prop.default) ?? prop.default ?? null,
       description: prop.description ?? null,
       required: prop.required ?? false,
-      deprecated: prop.deprecated ?? false,
-      type: prop.type,
-    }),
-  );
+      deprecated:
+        prop.deprecated ?? prop.description?.includes("@deprecated") ?? false,
+      type: name === "children" ? "ReactNode" : prop.type,
+    }));
 
   return {
     events: properties.filter((prop) => eventRegex.test(prop.name)),

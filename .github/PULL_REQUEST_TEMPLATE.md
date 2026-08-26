@@ -19,8 +19,8 @@ it matches the base branch. Pick the base by change type
 - `feat:` (new feature) → base **`next`**
 - Breaking change (`feat!:` / `BREAKING CHANGE:`) → base **the major line**
 
-> Before the 1.0.0 cut the `next` / major lines don't exist yet, so everything
-> targets `main` and the routing guard stays dormant.
+> A major line only exists while a breaking change is being collected — ask a
+> maintainer before opening one.
 
 ## Checklist
 

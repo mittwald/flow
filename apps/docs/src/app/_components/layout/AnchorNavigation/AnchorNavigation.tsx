@@ -51,6 +51,23 @@ export const AnchorNavigation: FC<Props> = (props) => {
     };
   }, []);
 
+  // The MDX content renders on the client, so the browser's own jump to the
+  // hash happens while the headings don't exist yet. Repeat it once the content
+  // is there.
+  useEffect(() => {
+    if (!ready || initialScrollProcessed.current) {
+      return;
+    }
+
+    const slug = decodeURIComponent(window.location.hash.slice(1));
+    if (!slug) {
+      return;
+    }
+
+    initialScrollProcessed.current = true;
+    document.getElementById(slug)?.scrollIntoView();
+  }, [ready]);
+
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
   useEffect(() => {
@@ -64,23 +81,8 @@ export const AnchorNavigation: FC<Props> = (props) => {
         if (firstVisible) {
           setActiveAnchor(firstVisible.target.id);
         } else {
-          const currentUrlSlug = window.location.hash.slice(1);
           const aboveViewport = anchors
-            .map((a) => {
-              const slugElement = document.getElementById(a.slug);
-
-              if (!initialScrollProcessed.current) {
-                initialScrollProcessed.current = true;
-                if (
-                  currentUrlSlug &&
-                  currentUrlSlug === encodeURIComponent(a.slug)
-                ) {
-                  slugElement?.scrollIntoView();
-                }
-              }
-
-              return slugElement;
-            })
+            .map((a) => document.getElementById(a.slug))
             .filter((el): el is HTMLElement => el !== null)
             .filter(
               (el) =>

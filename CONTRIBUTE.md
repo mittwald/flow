@@ -702,11 +702,9 @@ Target the wrong branch and the check fails with a message like
 `PR title is a 'feat' — features target 'next', not 'main'.`; fix it by
 retitling the PR or changing its base.
 
-> **Before the 1.0.0 cut**, the `next` and major lines don't exist yet, so
-> **everything targets `main`** and the routing check self-disables (it stays
-> dormant while there is no `next` branch). Once the lines exist, promotion and
-> sync branches — `next`, a major line (e.g. `2.x`), and `sync/*` — are exempt
-> so release PRs are never blocked.
+> Promotion and sync sources are exempt — `next`, a major line (e.g. `2.x`),
+> `release/*` and `sync/*` — because those PRs are _supposed_ to carry `feat:`
+> and breaking commits. Release PRs are never blocked by routing.
 
 ## Opening a pull request
 
@@ -754,8 +752,7 @@ This is Flow's two-line release model — see
 branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
 [RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
 model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
-forward-merge mechanics. (The `next` line and its publishing go live with the
-1.0.0 cut; until then every merge into `main` releases as it does today.)
+forward-merge mechanics.
 
 ## Getting help
 
