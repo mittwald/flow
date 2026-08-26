@@ -551,7 +551,7 @@ importers:
         version: 10.1.0(@types/react@19.2.17)(react@19.2.7)(supports-color@10.2.2)
       react-stately:
         specifier: ^3.48.0
-        version: 3.48.0(react@19.2.7)
+        version: 3.49.0(react@19.2.7)
       react-truncate-inside:
         specifier: ^1.0.3
         version: 1.0.3(react@19.2.7)
@@ -2804,6 +2804,9 @@ packages:
   '@internationalized/date@3.12.2':
     resolution: {integrity: sha512-FY1Y+H64NDs+HAF6omlnWxm3mEpfgaCSWtL5l551ZZfImA+kGjPFgrnJrGjH6lfmLL0g8Z/mBu1R3kufeCp6Jw==}
 
+  '@internationalized/date@3.12.3':
+    resolution: {integrity: sha512-fuLX+3ZKLsxI73y8b01EG/WjHb6gE6weCqlfawPO27kBWGMh9G1yH6Csv1uU7/cac9H2GHmOMt6CjmuQ1aia4Q==}
+
   '@internationalized/message@3.1.10':
     resolution: {integrity: sha512-nc0Or6EdWHqZRcsXb6P9hBIpLsfSl/ILh0rk5h/OVBpzmhdExXtPy2cQtWsq8XKRBpRHwDNnAHt4OpolcB7dog==}
 
@@ -2812,6 +2815,9 @@ packages:
 
   '@internationalized/string-compiler@3.4.1':
     resolution: {integrity: sha512-S1whKbypxHbl+XrESQpE/ZzJV+WreR7HE/2KCpxWwpsZn8N9iFN3BUgI3X20RVmEqJ+73hwAtP1RSNXPhJfvmg==}
+
+  '@internationalized/string@3.2.10':
+    resolution: {integrity: sha512-PDx6//vHSpRnHfxqMqto11zQvhsaU74O3mKv2F/0eicGZcl9NLjQmGlbHz/LsJh5tLKp4A4L7ZVTzN1/MmMTvA==}
 
   '@internationalized/string@3.2.9':
     resolution: {integrity: sha512-kzP/M/mbQxODlmOt4bIQZ2SBVUWUSqMLXooXixnX7noche8WHaQcA+nwFN1K2KCF/cp+LDUhcJsCicwkvhD1pg==}
@@ -3900,6 +3906,11 @@ packages:
 
   '@react-types/shared@3.36.0':
     resolution: {integrity: sha512-DkP/H0C2YjjS7gZWKNqOmU8a16qHPjQNdzMwmTq9SzplM6Iw0kVMTZ0OIoe6FOgGqa+FwMsE2QbPjh/n3g/jXQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@react-types/shared@3.36.1':
+    resolution: {integrity: sha512-AzsuD9OfxTOZMMvTRhlN3oHBwOmFN7tDh27LzqmHt4+uOgPhJT7ZM7/kVs/8/o0WxayMUIk3hBmCFRHv1FUoag==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -8664,6 +8675,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
+  react-stately@3.49.0:
+    resolution: {integrity: sha512-13iNq2KzBrRAzxRc+n53hgROfIistiYY/sPtIhCw1qUB7/kmo+X1xEU2uiS5zcCIrc55AUPwoHqOIIpKWSwB9A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
   react-truncate-inside@1.0.3:
     resolution: {integrity: sha512-XwQ+9ayvygHI4WjJwaTDYFiYLrLMbHiBc5VdhWuDrCAm8MWFT6YR/+BCgq5JUwyuISYleJyZ0yCAGbXMhGr9hw==}
     peerDependencies:
@@ -11823,6 +11839,10 @@ snapshots:
     dependencies:
       '@swc/helpers': 0.5.23
 
+  '@internationalized/date@3.12.3':
+    dependencies:
+      '@swc/helpers': 0.5.23
+
   '@internationalized/message@3.1.10':
     dependencies:
       '@swc/helpers': 0.5.23
@@ -11835,6 +11855,10 @@ snapshots:
   '@internationalized/string-compiler@3.4.1':
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.11.4
+
+  '@internationalized/string@3.2.10':
+    dependencies:
+      '@swc/helpers': 0.5.23
 
   '@internationalized/string@3.2.9':
     dependencies:
@@ -13046,16 +13070,20 @@ snapshots:
       react: 19.2.7
       react-aria: 3.50.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-dom: 19.2.7(react@19.2.7)
-      react-stately: 3.48.0(react@19.2.7)
+      react-stately: 3.49.0(react@19.2.7)
 
   '@react-stately/form@3.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@swc/helpers': 0.5.23
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-      react-stately: 3.48.0(react@19.2.7)
+      react-stately: 3.49.0(react@19.2.7)
 
   '@react-types/shared@3.36.0(react@19.2.7)':
+    dependencies:
+      react: 19.2.7
+
+  '@react-types/shared@3.36.1(react@19.2.7)':
     dependencies:
       react: 19.2.7
 
@@ -18705,6 +18733,16 @@ snapshots:
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.9
       '@react-types/shared': 3.36.0(react@19.2.7)
+      '@swc/helpers': 0.5.23
+      react: 19.2.7
+      use-sync-external-store: 1.6.0(react@19.2.7)
+
+  react-stately@3.49.0(react@19.2.7):
+    dependencies:
+      '@internationalized/date': 3.12.3
+      '@internationalized/number': 3.6.7
+      '@internationalized/string': 3.2.10
+      '@react-types/shared': 3.36.1(react@19.2.7)
       '@swc/helpers': 0.5.23
       react: 19.2.7
       use-sync-external-store: 1.6.0(react@19.2.7)
