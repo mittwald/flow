@@ -1,8 +1,5 @@
 .card {
   position: relative;
-
-  /* Keeps the badge's z-index from competing with the page around the tile —
-     without it the badge paints over the sticky header while scrolling. */
   isolation: isolate;
   display: flex;
   flex-direction: column;
