@@ -85,6 +85,9 @@ export default function Layout(props: PropsWithChildren) {
                       </NavigationItem>
                       <NavigationItem page="svg">Icon/SVG</NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
+                      <NavigationItem page="list-selection">
+                        List (selection)
+                      </NavigationItem>
                       <NavigationItem page="markdown">Markdown</NavigationItem>
                       <NavigationItem page="modal">Modal</NavigationItem>
                       <NavigationItem page="notification">
