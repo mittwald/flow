@@ -246,7 +246,7 @@ importers:
         version: 4.0.1(supports-color@10.2.2)
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
       sass:
         specifier: ^1.101.0
         version: 1.101.0
@@ -343,7 +343,7 @@ importers:
         version: 7.79.0(react@19.2.7)
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
       sass:
         specifier: ^1.101.0
         version: 1.101.0
@@ -563,7 +563,7 @@ importers:
         version: 4.0.1(supports-color@10.2.2)
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
       type-fest:
         specifier: ^5.7.0
         version: 5.8.0
@@ -1053,7 +1053,7 @@ importers:
         version: 2.2.4
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -1102,7 +1102,7 @@ importers:
         version: link:../remote-core
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
       type-fest:
         specifier: ^5.7.0
         version: 5.8.0
@@ -1263,7 +1263,7 @@ importers:
         version: 2.10.0(react@19.2.7)
       remeda:
         specifier: ^2.39.0
-        version: 2.39.0
+        version: 2.42.0
     devDependencies:
       '@mittwald/flow-core':
         specifier: workspace:*
@@ -8790,8 +8790,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  remeda@2.39.0:
-    resolution: {integrity: sha512-3Ki8dU1o3OVu4dwIQ2Pj+yiuP7OnEbmWAGmJ3yDRqopily5jsj8NWzPvbS89H85d6UdONKEcUnrfuHY6jN9vyw==}
+  remeda@2.42.0:
+    resolution: {integrity: sha512-wDnRk66DV3uXCvJ8yGVtgOtiaOJsyYlucaKWJKY9EAONW86I1OiYqtMbmVaUjv7M0qp4XiMBjJRamibvE8yA1Q==}
     engines: {node: '>=18.0.0'}
 
   renderkid@3.0.0:
@@ -18924,7 +18924,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  remeda@2.39.0: {}
+  remeda@2.42.0: {}
 
   renderkid@3.0.0:
     dependencies:
