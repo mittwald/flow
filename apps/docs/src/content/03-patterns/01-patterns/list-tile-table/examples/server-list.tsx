@@ -96,7 +96,7 @@ export default () => {
             )}
           </ServerList.Item>
           <ActionGroup>
-            <Button color="success">
+            <Button>
               <Text>Tarif bestellen</Text>
             </Button>
           </ActionGroup>
