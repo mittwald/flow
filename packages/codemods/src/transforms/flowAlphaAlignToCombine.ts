@@ -24,10 +24,24 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
   const isFlowImport = (source: string): boolean =>
     flowPackages.some((pkg) => source === pkg || source.startsWith(`${pkg}/`));
 
+  // ast-types models `importKind` on the declaration only, while babel also
+  // puts it on the specifier — which is where a per-specifier `type X` lives.
+  const isTypeOnly = (specifier: object): boolean =>
+    (specifier as { importKind?: string }).importKind === "type";
+  const makeValueImport = (specifier: object): void => {
+    (specifier as { importKind?: string }).importKind = "value";
+  };
+
   const root = j(fileInfo.source, { parser: "tsx" });
 
   /** Local identifiers that refer to a renamed export, mapped to the new name. */
   const localRenames = new Map<string, string>();
+  /**
+   * Whether any import specifier was rewritten. An aliased `Align as Row` adds
+   * nothing to `localRenames` — its local name stays `Row` — so counting those
+   * alone would treat an alias-only file as untouched and discard the rewrite.
+   */
+  let renamedAnImport = false;
   /** Local names of `import * as Flow` namespace imports from a Flow package. */
   const flowNamespaces = new Set<string>();
 
@@ -60,6 +74,7 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
         // Mutate in place so an `import type` / `type X` modifier survives.
         const local = String(specifier.local?.name ?? imported);
         specifier.imported.name = renamed;
+        renamedAnImport = true;
         if (local === imported) {
           localRenames.set(local, renamed);
           if (specifier.local) {
@@ -68,9 +83,44 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
         }
         // An aliased `Align as Row` keeps `Row` and needs no further change.
       }
+
+      // Renaming can collide with a name the file already imports: a file using
+      // both `Align` and `Combine` would end up with `{ Combine, Combine }`,
+      // which does not parse. Collapse such a pair onto one specifier.
+      const specifiers = path.node.specifiers ?? [];
+      const survivors = new Map<string, (typeof specifiers)[number]>();
+
+      for (const specifier of specifiers) {
+        if (
+          specifier.type !== "ImportSpecifier" ||
+          specifier.imported.type !== "Identifier"
+        ) {
+          survivors.set(`${survivors.size}:unique`, specifier);
+          continue;
+        }
+
+        const key = `${specifier.imported.name}:${String(
+          specifier.local?.name ?? specifier.imported.name,
+        )}`;
+        const survivor = survivors.get(key);
+
+        if (!survivor) {
+          survivors.set(key, specifier);
+          continue;
+        }
+
+        // A value import subsumes a type-only one, never the other way round.
+        if (!isTypeOnly(specifier)) {
+          makeValueImport(survivor);
+        }
+      }
+
+      if (survivors.size !== specifiers.length) {
+        path.node.specifiers = [...survivors.values()];
+      }
     });
 
-  if (localRenames.size === 0 && flowNamespaces.size === 0) {
+  if (!renamedAnImport && flowNamespaces.size === 0) {
     return fileInfo.source;
   }
 
