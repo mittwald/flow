@@ -18,7 +18,7 @@ import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import {
   ComponentStatusBadge,
-  getComponentStatusInfo,
+  compareDeprecatedLast,
 } from "@/lib/componentStatus";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
@@ -75,14 +75,12 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   );
 };
 
-const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
-  if (!(treeItem instanceof MdxFile)) {
-    return 0;
-  }
-  const component = treeItem.mdxSource.frontmatter.component;
-  const status = component ? getComponentStatusInfo(component) : undefined;
-  return status?.level === "deprecated" ? 1 : 0;
-};
+const componentName = (
+  treeItem: MdxDirectoryTree | MdxFile,
+): string | undefined =>
+  treeItem instanceof MdxFile
+    ? treeItem.mdxSource.frontmatter.component
+    : undefined;
 
 const entryLabel = ([group, treeItem]: TreeEntry): string =>
   treeItem instanceof MdxFile
@@ -107,8 +105,15 @@ const comparePosition = (a: TreeEntry, b: TreeEntry): number => {
 const sortEntries = (entries: TreeEntry[]): TreeEntry[] =>
   [...entries].sort(
     (a, b) =>
-      deprecatedRank(a[1]) - deprecatedRank(b[1]) || comparePosition(a, b),
+      compareDeprecatedLast(componentName(a[1]), componentName(b[1])) ||
+      comparePosition(a, b),
   );
+
+const compareFiles = (a: MdxFile, b: MdxFile): number =>
+  compareDeprecatedLast(
+    a.mdxSource.frontmatter.component,
+    b.mdxSource.frontmatter.component,
+  ) || compareLabels(a.getNavTitle(), b.getNavTitle());
 
 const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
   entries.flatMap(([, treeItem]) =>
@@ -163,7 +168,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         <ComponentGroupingView view="alphabetical">
           <Navigation aria-label="Components">
             {collectMdxFiles(componentEntries)
-              .sort((a, b) => compareLabels(a.getNavTitle(), b.getNavTitle()))
+              .sort(compareFiles)
               .map((treeItem) => (
                 <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
               ))}

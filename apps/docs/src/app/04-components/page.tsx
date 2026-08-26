@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import styles from "@/app/layout.module.scss";
 import { ComponentsOverview } from "@/app/04-components/_components/ComponentsOverview";
-import { compareLabels } from "@/app/_lib/compareLabels";
 
 const contentFolder = "src/content/04-components";
 
@@ -15,17 +14,15 @@ export const metadata: Metadata = {
 export default async function Page() {
   const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
 
-  const components = mdxFiles
-    .map((mdxFile) => ({
-      id: mdxFile.pathname,
-      group: mdxFile.slugs[0] ?? "",
-      slug: mdxFile.slugs[1] ?? "",
-      name: mdxFile.getNavTitle(),
-      component: mdxFile.mdxSource.frontmatter.component,
-      description: mdxFile.mdxSource.frontmatter.description,
-      href: `/04-components${mdxFile.pathname}/overview`,
-    }))
-    .sort((a, b) => compareLabels(a.name, b.name));
+  const components = mdxFiles.map((mdxFile) => ({
+    id: mdxFile.pathname,
+    group: mdxFile.slugs[0] ?? "",
+    slug: mdxFile.slugs[1] ?? "",
+    name: mdxFile.getNavTitle(),
+    component: mdxFile.mdxSource.frontmatter.component,
+    description: mdxFile.mdxSource.frontmatter.description,
+    href: `/04-components${mdxFile.pathname}/overview`,
+  }));
 
   return (
     <LayoutCard className={styles.mainContent}>
