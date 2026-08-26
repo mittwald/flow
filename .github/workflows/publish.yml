@@ -44,7 +44,10 @@ jobs:
     # authenticates correctly.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'chore(release):')
+      (
+        vars.AUTO_PUBLISH_ENABLED == 'true' &&
+        !startsWith(github.event.head_commit.message, 'chore(release):')
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
