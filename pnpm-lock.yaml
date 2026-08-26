@@ -159,7 +159,7 @@ importers:
         version: link:../../packages/components
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
+        version: 4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       '@tabler/icons-react':
         specifier: ^3.46.0
         version: 3.46.0(react@19.2.8)
@@ -322,7 +322,7 @@ importers:
         version: link:../../packages/react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
+        version: 4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       '@tabler/icons-react':
         specifier: ^3.46.0
         version: 3.46.0(react@19.2.8)
@@ -440,7 +440,7 @@ importers:
         version: link:../react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
+        version: 4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       '@react-aria/form':
         specifier: ^3.2.1
         version: 3.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -796,10 +796,10 @@ importers:
     dependencies:
       '@mittwald/react-use-promise':
         specifier: ~4.2.2
-        version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
+        version: 4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       axios:
         specifier: ^1.19.0
-        version: 1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
+        version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       i18next:
         specifier: ^26.0.0
         version: 26.3.1(@typescript/typescript6@6.0.2)
@@ -1248,7 +1248,7 @@ importers:
         version: link:../remote-elements
       '@mittwald/react-use-promise':
         specifier: ^4.2.2
-        version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
+        version: 4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.10
         version: 1.2.2-mittwald.10(@preact/signals-core@1.14.2)(react@19.2.8)
@@ -5247,8 +5247,8 @@ packages:
   axios@1.18.1:
     resolution: {integrity: sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==}
 
-  axios@1.19.0:
-    resolution: {integrity: sha512-ht/iuYZXEjFxLH/Hkezgd7m6JKlHHXEUSneaDz8uZe1Gj5QZtCnpyDsckvAiEnT89OEbCLmnte4R4sn7P0EKFw==}
+  axios@1.20.0:
+    resolution: {integrity: sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==}
 
   babel-plugin-const-enum@1.2.0:
     resolution: {integrity: sha512-o1m/6iyyFnp9MRsK1dHF3bneqyf3AlM2q3A/YbgQr2pCat6B6XJVDv2TXqzfY2RYUi4mak6WAksSBPlyYGx9dg==}
@@ -12342,7 +12342,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mittwald/react-use-promise@4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)':
+  '@mittwald/react-use-promise@4.2.2(axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)':
     dependencies:
       '@types/luxon': 3.7.1
       browser-or-node: 3.0.0
@@ -12352,7 +12352,7 @@ snapshots:
       object-code: 1.3.4
       react: 19.2.8
     optionalDependencies:
-      axios: 1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
+      axios: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
 
   '@mittwald/remote-dom-core@1.7.0-mittwald.10(@preact/signals-core@1.14.2)':
     dependencies:
@@ -14536,7 +14536,7 @@ snapshots:
       - debug
       - supports-color
 
-  axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2):
+  axios@1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
       follow-redirects: 1.16.0(debug@4.4.3(supports-color@10.2.2))
       form-data: 4.0.6
