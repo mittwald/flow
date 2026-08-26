@@ -151,7 +151,7 @@ const buildBundle = async (compositeFile: string): Promise<string> => {
   return format(bundle, { ...prettierConfig, parser: "typescript" });
 };
 
-/** File names of every composite, e.g. `["flowAlphaAll.ts"]`. */
+/** File names of every composite, e.g. `["flow1.ts"]`. */
 export const listComposites = async (): Promise<string[]> =>
   (await readdir(compositesDir)).filter((file) => file.endsWith(".ts")).sort();
 

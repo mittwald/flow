@@ -3,12 +3,12 @@
 Entries are sorted by version, newest first. Find the version you are coming
 from and work your way up.
 
-Catching up across many versions? One codemod runs every `0.2.0-alpha` migration
-transform, in the order the changes were released:
+Catching up across many versions? One codemod runs every migration transform on
+the way to `1.0.0`, in the order the changes were released:
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow1.ts \
   --parser tsx \
   src
 ```
@@ -16,10 +16,10 @@ npx jscodeshift \
 Replace `src` with your sources folder. It changes files in place — run it on a
 clean git state and review the diff afterwards.
 
-The entries below still name their individual codemod, so you can apply a single
-change on its own. Everything without a codemod has to be done by hand, and the
-`0.1.0` → `0.2.0` codemod is not part of `flowAlphaAll` — run that one
-separately, and only when coming from `0.1.0`.
+It is not the whole migration: most entries below have no codemod and have to be
+done by hand. They each name their individual codemod where one exists, so you
+can also apply a single change on its own. The `0.1.0` → `0.2.0` codemod is not
+part of `flow1` — run that one separately, and only when coming from `0.1.0`.
 
 ---
 

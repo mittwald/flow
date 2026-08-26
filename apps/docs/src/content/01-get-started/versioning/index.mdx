@@ -161,13 +161,14 @@ npx jscodeshift \
 Ein Codemod ändert Dateien direkt. Führe ihn auf einem sauberen Git-Stand aus
 und prüfe das Diff.
 
-Wenn du mehrere Versionen auf einmal aufholst, nimm `flowAlphaAll` – der Codemod
-führt alle Migrations-Codemods der `0.2.0-alpha`-Reihe in der Reihenfolge ihrer
-Releases aus:
+Wenn du mehrere Versionen auf einmal aufholst, nimm `flow1` – der Codemod führt
+alle Migrations-Codemods auf dem Weg zu `1.0.0` in der Reihenfolge ihrer
+Releases aus. Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge
+haben keinen Codemod und bleiben Handarbeit.
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow1.ts \
   --parser tsx \
   src
 ```

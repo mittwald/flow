@@ -160,8 +160,8 @@ describe("flowRemote", () => {
   });
 });
 
-describe("flowAlphaAll", () => {
-  test("applies every alpha migration in one pass", () => {
+describe("flow1", () => {
+  test("applies every migration on the way to 1.0.0 in one pass", () => {
     const source = `import { AccentBox, Action, Align, Button, Heading } from "@mittwald/flow-react-components";
 
 export const A = () => (
@@ -174,7 +174,7 @@ export const A = () => (
 );
 `;
 
-    expect(runTransform("flowAlphaAll", source))
+    expect(runTransform("flow1", source))
       .toBe(`import { AccentBox, Action, Combine, Button, Heading } from "@mittwald/flow-react-components";
 
 export const A = () => (

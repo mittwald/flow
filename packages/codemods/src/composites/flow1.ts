@@ -6,11 +6,14 @@ import flowAlphaButtonColorAccentToSuccess from "../transforms/flowAlphaButtonCo
 import flowAlphaColorPrimaryToDefault from "../transforms/flowAlphaColorPrimaryToDefault";
 
 /**
- * Runs every `0.2.0-alpha` migration codemod in one pass, in the order the
- * changes were released. Use it to catch up from an older alpha in one go
- * instead of running the transforms one by one.
+ * Runs every codemod on the way to `1.0.0` in one pass, in the order the
+ * changes were released. Use it to catch up from an older `0.2.0-alpha` in one
+ * go instead of running the transforms one by one.
  *
- * Two transforms in this folder are deliberately **not** part of it:
+ * It is not the whole migration. Most entries in the migration guide have no
+ * codemod and need a hand — this covers the renames a script can do.
+ *
+ * Two transforms in `src/transforms` are deliberately **not** part of it:
  *
  * - `flowRemote` converts an app to `@mittwald/flow-remote-react-components`.
  *   That is a port to a different package, not a migration, and running it on a
@@ -21,7 +24,7 @@ import flowAlphaColorPrimaryToDefault from "../transforms/flowAlphaColorPrimaryT
  *   so on a current codebase it would break those imports. Run it separately,
  *   and only when coming from `0.1.0`.
  */
-const flowAlphaAllTransform: Transform = (fileInfo, api, options) => {
+const flow1Transform: Transform = (fileInfo, api, options) => {
   /** Ordered by the release the respective change shipped in. */
   const transforms: Transform[] = [
     flowAlphaActionPropToOnAction, // alpha.646
@@ -45,4 +48,4 @@ const flowAlphaAllTransform: Transform = (fileInfo, api, options) => {
   return source;
 };
 
-export default flowAlphaAllTransform;
+export default flow1Transform;

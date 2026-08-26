@@ -5,7 +5,7 @@
       "default",
       "{projectRoot}/src/**/*",
       "{projectRoot}/dev/**/*",
-      "!{projectRoot}/src/transforms/flowAlphaAll.ts"
+      "!{projectRoot}/src/transforms/flow1.ts"
     ]
   },
   "projectType": "library",
@@ -14,7 +14,7 @@
     "build": {
       "cache": true,
       "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"],
-      "outputs": ["{projectRoot}/src/transforms/flowAlphaAll.ts"]
+      "outputs": ["{projectRoot}/src/transforms/flow1.ts"]
     },
     "test:unit": {
       "cache": true,

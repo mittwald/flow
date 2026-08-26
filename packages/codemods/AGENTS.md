@@ -28,18 +28,18 @@ way a consumer does: copied alone into a temp directory.
 
 ## Layout
 
-| Path             | What it holds                                                             |
-| ---------------- | ------------------------------------------------------------------------- |
-| `src/transforms` | What consumers fetch. Self-contained. `flowAlphaAll.ts` is **generated**. |
-| `src/composites` | Transforms that compose others. Source only — never fetched directly.     |
-| `dev`            | The bundler that turns a composite into a self-contained transform.       |
-| `src/tests`      | Fixture tests, all running through the real jscodeshift CLI.              |
+| Path             | What it holds                                                         |
+| ---------------- | --------------------------------------------------------------------- |
+| `src/transforms` | What consumers fetch. Self-contained. `flow1.ts` is **generated**.    |
+| `src/composites` | Transforms that compose others. Source only — never fetched directly. |
+| `dev`            | The bundler that turns a composite into a self-contained transform.   |
+| `src/tests`      | Fixture tests, all running through the real jscodeshift CLI.          |
 
-`flowAlphaAll` runs every `0.2.0-alpha` migration in one pass, so it does need
+`flow1` runs every migration on the way to `1.0.0` in one pass, so it does need
 the others. `pnpm nx build codemods` inlines them into
-`src/transforms/flowAlphaAll.ts`, which is committed like every other generated
-artifact in this repo. Edit `src/composites/flowAlphaAll.ts`, then regenerate —
-CI fails on a stale bundle.
+`src/transforms/flow1.ts`, which is committed like every other generated
+artifact in this repo. Edit `src/composites/flow1.ts`, then regenerate — CI
+fails on a stale bundle.
 
 The bundler is strict on purpose: it understands exactly the shape every
 transform has (one type-only `jscodeshift` import, one top-level declaration,
@@ -54,8 +54,8 @@ emitting a bundle that silently drops code.
 2. A fixture test in `src/tests`. `runTransform` runs the real CLI on a temp
    copy, so the test covers the consumer's path, not just the function.
 3. The call in the matching `MIGRATION.md` entry.
-4. Part of the `0.2.0-alpha` series? Add it to `src/composites/flowAlphaAll.ts`
-   in release order and run `pnpm nx build codemods`.
+4. On the way to `1.0.0`? Add it to `src/composites/flow1.ts` in release order
+   and run `pnpm nx build codemods`.
 
 ## Commands
 

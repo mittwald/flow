@@ -4,10 +4,10 @@ import { runTransform, transformsDir } from "./runTransform";
 
 /**
  * A codemod changes files in place, and consumers run them one after another —
- * `flowAlphaAll` even chains four of them over the same source. So a second run
- * has to be a no-op: a transform that keeps rewriting what it already rewrote
- * would corrupt a file on the second pass, and one that reformats on every run
- * would bury the real change in diff noise.
+ * `flow1` even chains five of them over the same source. So a second run has to
+ * be a no-op: a transform that keeps rewriting what it already rewrote would
+ * corrupt a file on the second pass, and one that reformats on every run would
+ * bury the real change in diff noise.
  *
  * Each fixture carries the cases that could break the property: values the
  * transform must leave alone, elements it already migrated, and an import it
@@ -75,7 +75,7 @@ export const A = () => (
 );
 `,
 
-  flowAlphaAll: `import { AccentBox, Action, Align, Button, Heading } from "@mittwald/flow-react-components";
+  flow1: `import { AccentBox, Action, Align, Button, Heading } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <Align>
