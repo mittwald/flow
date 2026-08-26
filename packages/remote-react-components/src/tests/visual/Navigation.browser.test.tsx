@@ -68,7 +68,15 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { ColumnLayout, Navigation, Link, AlertBadge, CounterBadge },
+    components: {
+      ColumnLayout,
+      Navigation,
+      Link,
+      AlertBadge,
+      Badge,
+      IconStar,
+      Text,
+    },
   }) => {
     await render(
       <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
@@ -77,8 +85,9 @@ test.each(testEnvironments)(
             Galactic Empire<AlertBadge status="warning">Deprecated</AlertBadge>
           </Link>
           <Link>
-            Rebel Alliance
-            <CounterBadge count={3} />
+            <IconStar />
+            <Text>Rebel Alliance</Text>
+            <Badge>Neu</Badge>
           </Link>
         </Navigation>
       </ColumnLayout>,
