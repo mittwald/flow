@@ -85,7 +85,12 @@ const fetchAll = async (): Promise<GhRelease[]> => {
   return all;
 };
 
-export const fetchLiveReleases = async (): Promise<Release[]> => {
+/**
+ * Single data entry point for the Releases page. Runs at build time (static
+ * export) and returns the transformed live GitHub Releases. Never throws — a
+ * failed fetch yields an empty list (empty-state placeholder).
+ */
+export const getReleases = async (): Promise<Release[]> => {
   let raw: GhRelease[];
   try {
     raw = await fetchAll();

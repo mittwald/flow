@@ -80,27 +80,8 @@ jobs:
           labels:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
             || steps.meta-storybook.outputs.labels }}
-          # ════════════════════════════════════════════════════════════════
-          # 🚨🚨🚨  TEMPORARY — MUST BE REMOVED BEFORE THE 1.0 RELEASE  🚨🚨🚨
-          # ════════════════════════════════════════════════════════════════
-          # This intentionally STAYS while the Releases page is reviewed: it
-          # renders the page with its dummy dataset in the PR preview so the
-          # layout is testable before real stable releases exist. Keep it for
-          # the whole review of this PR.
-          #
-          # It is NOT production-safe as a permanent setting — left in, it would
-          # force dummy Releases data into EVERY docs PR preview once merged.
-          #
-          # ▶▶▶ REMOVE the `RELEASES_USE_DUMMY=1` build-arg line below before
-          #     the 1.0 release (i.e. once real release data exists and this
-          #     page goes live). ◀◀◀
-          #
-          # (Production is unaffected meanwhile: deploy-main.yml passes no such
-          #  arg, and the Dockerfile defaults RELEASES_USE_DUMMY to "".)
-          # ════════════════════════════════════════════════════════════════
           build-args: |
             NEXT_BASE_PATH=
-            ${{ matrix.image_suffix == 'docs' && 'RELEASES_USE_DUMMY=1' || '' }}
 
   deploy:
     runs-on: ubuntu-latest

@@ -8,7 +8,7 @@ import {
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import type { Anchor } from "@/lib/mdx/MdxFile";
-import { getReleases } from "@/lib/releases/getReleases";
+import { getReleases } from "@/lib/releases/githubReleases";
 import ReleaseEntry from "./_components/ReleaseEntry";
 import { releaseSlug } from "./_lib/releaseSlug";
 import { formatReleaseDate } from "./_lib/formatReleaseDate";
