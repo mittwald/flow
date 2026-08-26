@@ -87,6 +87,20 @@
   width: 100%;
 }
 
+/*
+ * Wide screens give the main navigation more room. The extra 80px go to the
+ * wrapper, so the content keeps the width it has next to a 290px navigation.
+ */
+@media (min-width: 1900px) {
+  .mainWrapper {
+    width: 1880px;
+  }
+
+  .mainNavigation {
+    width: 370px;
+  }
+}
+
 @media (max-width: 1400px) {
   .mainNavigation,
   .mainNavigation,
