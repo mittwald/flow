@@ -18,6 +18,11 @@
   inset-inline-end: var(--size-px--s);
 }
 
+.text,
+.ul {
+  max-width: var(--max-text-width);
+}
+
 .ul {
   list-style-type: disc;
   padding-inline-start: var(--size-rem--m);
