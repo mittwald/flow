@@ -28,12 +28,6 @@ $release-tile-background-color: #6f459f;
   :global(.flow--column-layout) {
     height: 100%;
   }
-
-  /* Zoomed in, the popper sits behind the text on narrow tiles. */
-  @container (max-width: 550px) {
-    background-size: auto 100%;
-    background-position: right center;
-  }
 }
 
 .releaseContent {
@@ -45,7 +39,7 @@ $release-tile-background-color: #6f459f;
   background: linear-gradient(
     to left,
     rgba($release-tile-background-color, 0) 0%,
-    rgba($release-tile-background-color, 1) 20%
+    rgba($release-tile-background-color, 0.8) 20%
   );
 }
 
