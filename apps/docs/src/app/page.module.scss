@@ -41,12 +41,6 @@
   );
 }
 
-.codeTile {
-  :global(.flow--column-layout) {
-    align-items: center;
-  }
-}
-
 .imageTile {
   position: relative;
 
@@ -85,6 +79,11 @@
 
   :global(.flow--column-layout) {
     align-items: center;
+
+    // The copy starts at the top of the tile, not centered next to the image.
+    :global(.flow--section) {
+      align-self: start;
+    }
   }
 }
 
