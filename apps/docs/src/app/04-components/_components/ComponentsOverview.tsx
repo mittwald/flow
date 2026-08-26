@@ -8,6 +8,7 @@ import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/C
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { compareEntries } from "@/app/_lib/compareEntries";
 import { isIntegrationGroup } from "@/app/_lib/integrationGroups";
+import styles from "./ComponentsOverview.module.scss";
 
 interface Props {
   components: ComponentLink[];
@@ -58,7 +59,7 @@ export const ComponentsOverview: FC<Props> = (props) => {
         <ComponentsList components={components} aria-label="Components" />
       </ComponentGroupingView>
       {integrations.length > 0 && (
-        <Section>
+        <Section className={styles.integrations}>
           <Heading>Integrations</Heading>
           <GroupSections components={integrations} headingLevel={3} />
         </Section>
