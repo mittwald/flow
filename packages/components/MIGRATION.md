@@ -309,6 +309,18 @@ merged both into a single abstract `Rule`.
 A custom rule extends `Rule` and may return its result synchronously or as a
 promise — the distinction the two classes used to encode is gone.
 
+A codemod replaces both names:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaPasswordToolsRule.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. A file that imported both — or one of
+them next to `Rule` — ends up with a single import.
+
 ---
 
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
@@ -483,6 +495,20 @@ There is no alias for the old name. The thrown error's `name` changed from
 `"MutedActionError"` to `"AbortActionError"` as well — update any code that
 matches on it.
 
+A codemod renames the class and both static helpers:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaMutedActionErrorToAbortActionError.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. It also rewrites an
+`error.name === "MutedActionError"` comparison, but only in a file that imports
+the class — a check living anywhere else cannot be recognised, so grep for the
+string once when you are done.
+
 ---
 
 ## From version `0.2.0-alpha.693` to `>=0.2.0-alpha.694`
@@ -561,6 +587,23 @@ Replace `src` with your sources folder.
 
 The `RemoteButtonElementProps`, `ResetButtonProps`, and `SubmitButtonProps`
 interfaces have been removed. Use `ButtonProps` instead.
+
+```diff
+- import type { SubmitButtonProps } from "@mittwald/flow-react-components/react-hook-form";
++ import type { ButtonProps } from "@mittwald/flow-react-components";
+```
+
+Note the entry: `ButtonProps` lives in the package root, while the removed names
+came from `react-hook-form`. A codemod moves the import along with the name:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaButtonPropsInterfaces.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder.
 
 ---
 
