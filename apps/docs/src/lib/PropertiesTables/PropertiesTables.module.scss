@@ -1,0 +1,23 @@
+.propertyCell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-px--xs);
+}
+
+.type {
+  overflow-wrap: anywhere;
+}
+
+.typeCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--size-px--xs);
+}
+
+.defaultValue,
+.defaultMarker {
+  font-size: var(--label--font-size);
+  color: var(--label--color--default);
+}

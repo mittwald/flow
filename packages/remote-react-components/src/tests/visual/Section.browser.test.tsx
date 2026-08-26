@@ -3,6 +3,12 @@ import { useState, type FC } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
+/**
+ * Stands in for a boundary, permission gate or empty list — a child that is
+ * present but renders nothing.
+ */
+const RendersNothing: FC = () => null;
+
 test.each(testEnvironments)(
   "Section (%s)",
   async ({
@@ -34,6 +40,7 @@ test.each(testEnvironments)(
               <Heading>
                 Heading<Badge>Badge</Badge>
               </Heading>
+              <Link>Link</Link>
               <Switch>Switch</Switch>
               {showButton && (
                 <Button variant="soft" color="secondary">
@@ -66,6 +73,12 @@ test.each(testEnvironments)(
             </Text>
             <Heading level={3}>Sub-Heading</Heading>
             <Link>Link</Link>
+          </Section>
+          {/* Must collapse: a section that renders no content may neither draw
+              its own separator nor claim section-to-section spacing, so the
+              section below it keeps exactly one separator. */}
+          <Section>
+            <RendersNothing />
           </Section>
           <Section>
             <Header>

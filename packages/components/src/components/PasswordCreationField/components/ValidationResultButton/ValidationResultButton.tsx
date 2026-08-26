@@ -45,7 +45,9 @@ export const ValidationResultButton: FC<Props> = (props) => {
     }) ?? [];
 
   return (
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger
+      subject={translate.format("password.requirements.subject")}
+    >
       <Button
         data-component="showPasswordRules"
         isDisabled={isDisabled}

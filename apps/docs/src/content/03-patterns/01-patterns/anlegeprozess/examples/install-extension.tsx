@@ -26,7 +26,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <ModalTrigger>
-  <Button color="accent">Beispiel öffnen</Button>
+  <Button color="success">Beispiel öffnen</Button>
   <Modal offCanvas>
     <Heading>Passwortschutz installieren</Heading>
     <Content>
@@ -54,7 +54,7 @@ import {
               Installation fortzufahren, lege bitte einen
               Vertragspartner an.
             </Text>
-            <Button color="accent">
+            <Button color="success">
               Vertragspartner anlegen
             </Button>
           </Content>
@@ -78,37 +78,37 @@ import {
             <TableRow>
               <TableCell>Projekt</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>App</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
               <TableCell>
-                <IconClose status="danger" />
+                <IconClose color="danger" />
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>SSH-Benutzer</TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
               <TableCell>
-                <IconCheck status="success" />
+                <IconCheck color="success" />
               </TableCell>
             </TableRow>
           </TableBody>

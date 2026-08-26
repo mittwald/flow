@@ -13,18 +13,30 @@
     border-width: var(--image-cropper--border-width);
   }
 
-  :global(.reactEasyCrop_CropArea) {
-    color: var(--image-cropper--mask-color);
-    border-color: var(--image-cropper--mask-border-color);
-    box-sizing: content-box;
-  }
+}
 
-  :global(.reactEasyCrop_CropAreaGrid::before) {
-    border-color: var(--image-cropper--grid-color);
-    border-width: var(--image-cropper--grid-width);
-  }
+/*
+ * react-easy-crop injects its stylesheet as an unlayered `<style>` element at
+ * runtime, outside of Flow's build, with hard coded rgba values for the crop
+ * mask and the grid. Unlayered CSS beats layered CSS regardless of specificity,
+ * so these token based overrides only apply in the layered stylesheet variant
+ * if they leave the cascade layer as well.
+ */
+@layer flow.unlayered {
+  .imageCropper {
+    :global(.reactEasyCrop_CropArea) {
+      color: var(--image-cropper--mask-color);
+      border-color: var(--image-cropper--mask-border-color);
+      box-sizing: content-box;
+    }
 
-  :global(.reactEasyCrop_Container) {
-    border-radius: var(--image-cropper--corner-radius);
+    :global(.reactEasyCrop_CropAreaGrid::before) {
+      border-color: var(--image-cropper--grid-color);
+      border-width: var(--image-cropper--grid-width);
+    }
+
+    :global(.reactEasyCrop_Container) {
+      border-radius: var(--image-cropper--corner-radius);
+    }
   }
 }

@@ -77,7 +77,7 @@ export const generateLlmsTxt = async (siteUrl: string): Promise<string> => {
     `For machine-readable Markdown, fetch [${normalizedSiteUrl}/llms-full.txt]` +
       `(${normalizedSiteUrl}/llms-full.txt) for the full documentation, or get a ` +
       "single page by prefixing its path with `/raw/` and appending `.md` " +
-      `(e.g. ${normalizedSiteUrl}/raw/04-components/actions/button/develop.md). ` +
+      `(e.g. ${normalizedSiteUrl}/raw/04-components/actions/button.md). ` +
       `A JSON manifest of all pages is at ${normalizedSiteUrl}/llms.json.`,
   ].join("\n");
 

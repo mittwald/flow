@@ -1,8 +1,63 @@
 ---
 component: LabeledValue
 description:
-  Das LabeledValue zeigt eine statische Information und setzt sie durch ein
-  beschreibendes Label in den passenden Kontext.
+  Das LabeledValue zeigt eine statische Information mit beschreibendem Label.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Formuliere das [Label](/04-components/content/label) kurz, prägnant und in
+  einfacher Sprache, sodass es den Wert eindeutig beschreibt.
+- Stelle mehrere LabeledValues in einem
+  [ColumnLayout](/04-components/structure/column-layout) nebeneinander dar.
+  Setze dabei nicht zu viele Informationen in eine Zeile.
+- Sortiere sie nach Wichtigkeit und fasse sie in sinnvolle Gruppen. Ein Beispiel
+  ist die Gruppe aus Name und Adresse.
+
+---
+
+# Kombiniere mit ...
+
+Der Content-Bereich des LabeledValue kann einen
+[Text](/04-components/content/text), einen InlineCode oder einen Link beinhalten
+und jeweils durch einen CopyButton ergänzt werden.
+
+## ColumnLayout
+
+Stelle mehrere LabeledValues in einem
+[ColumnLayout](/04-components/structure/column-layout) nebeneinander dar, um
+zusammengehörige Informationen wie Name und Adresse zu gruppieren.
+
+<LiveCodeEditor example="column-layout" editorCollapsed />
+
+## InlineCode
+
+Mit `<InlineCode />` anstelle von `<Content />` kann ein
+[InlineCode](/04-components/content/inline-code) angezeigt werden.
+
+<LiveCodeEditor example="inline-code" editorCollapsed />
+
+## Link
+
+Nutze einen `<Link />` anstelle von `<Content />`, um einen
+[Link](/04-components/navigation/link) anzuzeigen.
+
+<LiveCodeEditor example="link" editorCollapsed />
+
+## CopyButton
+
+Verwende `<CopyButton />` innerhalb des `<LabeledValue />`, um einen
+[CopyButton](/04-components/actions/copy-button) am Ende des Contents
+anzuzeigen.
+
+<LiveCodeEditor example="copy-button" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

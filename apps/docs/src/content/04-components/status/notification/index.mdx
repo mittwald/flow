@@ -1,9 +1,41 @@
 ---
 component: Notification
 description:
-  Die Notification informiert die User über wichtige System- oder
-  Statusmeldungen. Sie sollte sparsam eingesetzt werden, um die Aufmerksamkeit
-  des Users zu erhalten.
+  Die Notification informiert User über wichtige System- oder Statusmeldungen.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Kommuniziere nur relevante und wichtige Informationen. Das vermeidet eine
+  Informationsüberlastung.
+- Formuliere die Meldung kurz, klar und verständlich, als Faustregel in
+  höchstens zwölf Wörtern.
+- Halte Notifications gesammelt und später abrufbar.
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
+
+- **Info** – Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+  erfordern.
+- **Warning** – Hinweise auf mögliche Risiken mit einer klaren
+  Handlungsempfehlung.
+- **Danger** – Akute Fehlerzustände oder kritische Probleme, die sofortige
+  Aufmerksamkeit erfordern.
+- **Success** – Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+- **Unavailable** – Zustände aufgrund von nicht verfügbaren oder gelöschten
+  Inhalten.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Properties
+
+<PropertiesTables />

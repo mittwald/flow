@@ -5,4 +5,60 @@ description:
   erfordern.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Halte die Beschriftung kurz und prägnant, idealerweise auf ein bis drei
+  Wörter.
+- Wähle den Status passend zur Wichtigkeit der Meldung.
+- Setze ein AlertBadge nur für kritische oder besonders aufmerksamkeitsstarke
+  Hinweise ein. Für weniger dringende Fälle genügt ein
+  [Badge](/04-components/status/badge).
+- Lass auf ein AlertBadge weiterführende Informationen in einem
+  [Alert](/04-components/status/alert) folgen.
+- Orientiere dich am
+  [Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept).
+  Es beschreibt das Zusammenspiel der Status-Komponenten.
+
+## AlertBadge vs. Badge
+
+<DoAndDont>
+  <Plain heading="Verwende ein AlertBadge, wenn z. B. ...">
+    - der Hinweis kritisch, sicherheitsrelevant oder besonders wichtig ist.
+    - weitere Informationen durch einen Alert notwendig sind.
+
+  </Plain>
+
+  <Plain heading="Verwende ein Badge, wenn z. B. ...">
+    - Metadaten oder ergänzende Informationen dargestellt werden sollen.
+    - keine sofortige Aktion oder erhöhte Aufmerksamkeit notwendig ist.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
+
+- **Info** – Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+  erfordern.
+- **Success** – Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+- **Warning** – Hinweise auf mögliche Risiken mit einer klaren
+  Handlungsempfehlung.
+- **Danger** – Akute Fehlerzustände oder kritische Probleme, die sofortige
+  Aufmerksamkeit erfordern.
+- **Unavailable** – Zustände aufgrund von nicht verfügbaren oder gelöschten
+  Inhalten.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Properties
+
+<PropertiesTables />

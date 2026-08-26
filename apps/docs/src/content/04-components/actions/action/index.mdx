@@ -1,8 +1,89 @@
 ---
 component: Action
 description:
-  Die Action wird um einen Button gelegt, um beispielsweise visuelles Feedback
-  bei asynchronen Aktionen zu ermöglichen oder ein Bestätigungsmodal auszulösen.
+  Die Action umschließt einen Button und gibt visuelles Feedback bei asynchronen
+  Aktionen.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Nutze den Pending State nur für Vorgänge unter etwa fünf Sekunden. Für längere
+  Prozesse eignet sich eher eine
+  [Notification](/04-components/status/notification).
+- Setze Feedback States nur ein, wenn sie dem Nutzer einen Mehrwert bieten.
+
+---
+
+# Pending
+
+Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert, wird der
+**Pending** State angezeigt.
+
+<LiveCodeEditor example="longAction" editorCollapsed />
+
+---
+
+# Feedback
+
+Wenn ein visuelles Feedback nach einer Userinteraktion angezeigt werden soll,
+kann das Property `showFeedback` genutzt werden.
+
+<LiveCodeEditor example="feedback" editorCollapsed />
+
+---
+
+# Bestätigungsmodal
+
+Um User vor unbeabsichtigten Aktionen zu schützen, kann ein Bestätigungsmodal
+angezeigt werden. Dafür muss innerhalb der Action ein
+[Modal](/04-components/overlays/modal) mit dem Attribut `slot="actionConfirm"`
+platziert werden.
+
+<LiveCodeEditor example="confirmation" editorCollapsed />
+
+---
+
+# Verschachtelte Actions
+
+Wenn mehrere Aktionen auf eine Userinteraktion folgen, können Actions auch
+ineinander verschachtelt werden.
+
+<LiveCodeEditor example="nested" editorCollapsed />
+
+---
+
+# In MenuItems
+
+Actions können auch um `MenuItems` gelegt werden, um deren State zu steuern.
+
+<LiveCodeEditor example="menuItem" editorCollapsed />
+
+---
+
+# Actions abbrechen
+
+Wenn eine Action abgebrochen werden soll, ohne einen Fehler auszulösen, kann die
+Funktion `abortAction` aus dem Action-Modul verwendet werden. Diese Funktion
+wirft einen speziellen Fehler, der von der Action-Component erkannt wird.
+Dadurch kann die Action sauber abgebrochen werden, ohne dass unerwünschte
+Fehlermeldungen oder Seiteneffekte auftreten.
+
+Alle nachfolgenden Funktionen in der Action-Execution-Logik, die nach dem Aufruf
+von `abortAction` definiert sind, werden nicht mehr ausgeführt. Das bedeutet,
+dass der gesamte Ablauf der Action sofort gestoppt wird, sobald `abortAction`
+aufgerufen wird.
+
+Umschließende Actions bei einer Verschachtelung von Actions werden ebenfalls
+abgebrochen, wenn `abortAction` in einer inneren Action aufgerufen wird.
+
+<LiveCodeEditor example="abort" />
+
+---
+
+# Properties
+
+<PropertiesTables />

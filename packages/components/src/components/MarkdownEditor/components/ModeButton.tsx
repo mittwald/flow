@@ -21,6 +21,7 @@ export const ModeButton: FC<ModeButtonProps> = (props) => {
 
   return (
     <Button
+      tunnel={null}
       className={styles.modeButton}
       size="s"
       variant="plain"

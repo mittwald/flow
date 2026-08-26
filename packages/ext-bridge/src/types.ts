@@ -1,6 +1,11 @@
 import type { ExtBridgeConfig, ExtBridgeConfigInput } from "@/config/types";
 import type { readinessApi } from "@/readiness";
-export type { ExtBridgeConfig, ExtBridgeConfigInput } from "@/config/types";
+export type {
+  ExtBridgeConfig,
+  ExtBridgeConfigInput,
+  ExtBridgeConfigInputWithoutHostConfig,
+  HostConfig,
+} from "@/config/types";
 
 type ReadinessApi = typeof readinessApi;
 

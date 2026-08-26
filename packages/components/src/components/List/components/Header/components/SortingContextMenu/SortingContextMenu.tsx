@@ -8,7 +8,7 @@ import {
   IconDescending,
   IconSorting,
 } from "@/components/Icon/components/icons";
-import styles from "@/components/List/components/Header/Header.module.css";
+import styles from "@/components/List/components/Header/Header.module.scss";
 import { SortingMenuItem } from "@/components/List/components/Header/components/SortingContextMenu/SortingMenuItem";
 import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 import ContextMenuView from "@/views/ContextMenuView";

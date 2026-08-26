@@ -14,6 +14,7 @@ export interface CodeBlockProps
     Partial<
       Pick<CodeEditorProps, "language" | "showLineNumbers" | "copyable">
     > {
+  /** The code displayed in the block. */
   code?: string;
   /**
    * Controls truncation of long code blocks. `false` disables it, `true`

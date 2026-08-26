@@ -1,9 +1,39 @@
 ---
 component: Label
-description:
-  Labels werden in Formularen (z. B. TextField, NumberField) oder beim
-  LabeledValue verwendet. Dort erläutern sie die Eingabeanforderungen oder
-  setzen Informationen in einen Kontext.
+description: Ein Label erläutert Eingabeanforderungen in Formularen.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Formuliere das Label kurz, prägnant und in einfacher Sprache, meist ein bis
+  drei Wörter.
+- Halte das Label jederzeit vollständig sichtbar und einzeilig.
+- Benenne das Feld als Substantiv. Nutze etwa „E-Mail-Adresse“ statt „E-Mail
+  eingeben“.
+- Gib Formatierungshinweise über die FieldDescription im
+  [TextField](/04-components/form-controls/text-field).
+
+---
+
+# States
+
+Ein Label hat zwei States:
+
+- **Default** – das Label wird in seiner Standarddarstellung angezeigt.
+- **Disabled** – das Label beschreibt häufig komplexere Components und übernimmt
+  automatisch deren State. Ist z. B. ein
+  [TextField](/04-components/form-controls/text-field) oder
+  [NumberField](/04-components/form-controls/number-field) gerade **disabled**,
+  nimmt das Label denselben State an.
+
+<LiveCodeEditor example="states" editorCollapsed row />
+
+---
+
+# Properties
+
+<PropertiesTables />

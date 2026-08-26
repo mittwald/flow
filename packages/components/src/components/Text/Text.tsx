@@ -22,19 +22,25 @@ export interface TextProps
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
-  /* Whether the elements width should match the width it would have with mold text. */
+  /**
+   * Whether the elements width should match the width it would have with bold
+   * text.
+   */
   emulateBoldWidth?: boolean;
-  /* The color of the text. @default "default" */
+  /** The color of the text. @default "default" */
   color?: "default" | AlphaColor;
-  /* The alignment of the text. @default "start" */
+  /** The alignment of the text. @default "start" */
   align?: "start" | "end" | "center";
-  /* The text-wrap property of the text. @default undefined */
+  /** The text-wrap property of the text. */
   wrap?: "wrap" | "balance" | "pretty";
-  /* The white-space property of the text. @default undefined */
+  /** The white-space property of the text. */
   whiteSpace?: React.CSSProperties["whiteSpace"];
-  /* The word-break property of the text. @default undefined */
+  /** The word-break property of the text. */
   wordBreak?: React.CSSProperties["wordBreak"];
-  /* Disables standard and contextual ligatures for predictable, literal text rendering */
+  /**
+   * Disables standard and contextual ligatures for predictable, literal text
+   * rendering.
+   */
   noLigatures?: boolean;
 }
 

@@ -1,5 +1,5 @@
 import {
-  Align,
+  Combine,
   Avatar,
   Button,
   Chat,
@@ -19,14 +19,14 @@ import {
   <MessageThread>
     <Message>
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
           <Text>
             <strong>Max Mustermann</strong>
           </Text>
-        </Align>
+        </Combine>
       </Header>
       <Content>
         <Text>
@@ -50,7 +50,7 @@ import {
       Datei anhängen
     </Button>
   </FileField>
-  <Button color="accent">Senden</Button>
+  <Button color="success">Senden</Button>
   <FileCardList>
     <FileCard name="Hochgeladene Datei 1" />
     <FileCard name="Hochgeladene Datei 2" />

@@ -1,7 +1,6 @@
-import ConfirmUnsavedChangesModal from "@/components/Modal/components/ConfirmUnsavedChangesModal";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/FormContextProvider/FormContextProvider";
-import { flags } from "@/flags";
-import { useModalController } from "@/lib/controller";
+import { useComponentDefaults } from "@/components/ComponentDefaultsProvider";
+import { type OverlayController, useModalController } from "@/lib/controller";
 import {
   type BaseSyntheticEvent,
   type ComponentProps,
@@ -34,6 +33,12 @@ export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 export type AfterFormSubmitCallback = (...unknownArgs: unknown[]) => unknown;
 
 export interface FormAutoResetOptions {
+  /**
+   * Whether the form is reset to its default values after the surrounding modal
+   * has closed.
+   *
+   * @default true
+   */
   onAfterModalClose?: boolean;
 }
 
@@ -50,14 +55,61 @@ export interface FormProps<F extends FieldValues>
     Omit<ComponentProps<"form">, "onSubmit">,
     PropsWithChildren,
     WithFormSubmitControllerProps {
+  /** The react-hook-form instance returned by `useForm()`. */
   form: UseFormReturn<F>;
+  /**
+   * Called with the validated form values when the form is submitted. Returning
+   * a promise keeps the submit button pending until it settles.
+   */
   onSubmit: FormOnSubmitHandler<F>;
+  /**
+   * The component rendered as the form element. Use it to render the form with
+   * a routers form component. Defaults to a plain `<form />`.
+   */
   formComponent?: FC<Omit<FormComponentType, "ref">>;
+  /**
+   * Whether all fields of the form can be read but not edited.
+   *
+   * @default false
+   */
   isReadOnly?: boolean;
+  /**
+   * When the form is reset to its default values. `true` resets it after the
+   * surrounding modal has closed, `false` never resets it.
+   *
+   * @default true
+   */
   autoReset?: FormAutoResetOptions | boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
+
+/**
+ * Runs `operation` while closing the surrounding Modal is allowed without a
+ * confirmation, and drops that permission again as soon as the operation has
+ * settled. Scoping it to the operation is what keeps a submit that only
+ * advances a wizard step from disarming the confirmation for good (#2775).
+ */
+const runWithGrantedModalClose = (
+  modalController: OverlayController,
+  operation: () => unknown,
+): unknown => {
+  const releaseGrant = modalController.grantCloseWithoutConfirmation();
+
+  let result: unknown;
+  try {
+    result = operation();
+  } catch (error) {
+    releaseGrant();
+    throw error;
+  }
+
+  if (result instanceof Promise) {
+    return result.finally(releaseGrant);
+  }
+  releaseGrant();
+  return result;
+};
 
 export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
@@ -90,10 +142,15 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       ? { onAfterModalClose: autoReset }
       : autoReset;
 
+  const { confirmModalCloseOnUnsavedChanges } = useComponentDefaults("Form");
+
   const modalController = useModalController();
   modalController.useUpdateOptions({
-    confirmOnClose:
-      flags.requireCloseModalConfirmationOnUnsavedChanges && isDirty,
+    // A dirty Form contributes one close confirmation source to the surrounding
+    // Modal; sources are combined, so a clean Form does not overrule a
+    // `<Modal confirmOnClose>`. The Modal renders the confirmation dialog.
+    // An application that switched the default off contributes nothing at all.
+    confirmOnClose: confirmModalCloseOnUnsavedChanges ? isDirty : undefined,
   });
   modalController.useOnClosed(() => {
     if (autoResetOptions?.onAfterModalClose) {
@@ -116,25 +173,34 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     }
   };
 
-  const handleSubmit = (e?: BaseSyntheticEvent | F) => {
+  const handleSubmit = async (e?: BaseSyntheticEvent | F): Promise<void> => {
     const formEvent =
       e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
     formEvent?.stopPropagation();
 
-    return form.handleSubmit((values, event) => {
-      modalController.confirmClose();
-
-      const submitResult = onSubmit(values, event);
-      if (submitResult instanceof Promise) {
-        return submitResult.then(handleSubmitResult);
-      }
-      handleSubmitResult(submitResult);
-    })(formEvent);
+    // react-hook-form's submit handler resolves with an unknown value; the
+    // submit controller only awaits it, so drop the result.
+    await form.handleSubmit((values, event) =>
+      runWithGrantedModalClose(modalController, () => {
+        const submitResult = onSubmit(values, event);
+        if (submitResult instanceof Promise) {
+          return submitResult.then(handleSubmitResult);
+        }
+        handleSubmitResult(submitResult);
+      }),
+    )(formEvent);
   };
   submitController.submit.set(handleSubmit);
 
   const onAfterSuccessFeedback = () => {
-    afterSubmitCallback.current?.();
+    const callback = afterSubmitCallback.current;
+    if (!callback) {
+      return;
+    }
+    // The callback runs after the submit itself has finished (and after
+    // SubmitButton's success feedback), so it needs its own permission to close
+    // the Modal.
+    runWithGrantedModalClose(modalController, callback);
   };
 
   const refWithHotkeySubmit = useHotkeySubmit({
@@ -160,7 +226,6 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
           {children}
         </FormComponent>
       </FormContextProvider>
-      <ConfirmUnsavedChangesModal />
     </RhfFormContextProvider>
   );
 }

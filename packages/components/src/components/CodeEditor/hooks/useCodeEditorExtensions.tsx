@@ -9,10 +9,35 @@ import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
 
 /** @internal */
 export interface CodeEditorSetup {
+  /**
+   * Whether the line the cursor is on is highlighted.
+   *
+   * @default true
+   */
   showActiveLineMarker?: boolean;
+  /**
+   * Whether the gutter offers controls to fold and unfold code blocks.
+   *
+   * @default true
+   */
   showCodeFolding?: boolean;
+  /**
+   * Whether indentation levels are visualized with guide lines.
+   *
+   * @default true
+   */
   showCodeIndentationMakers?: boolean;
+  /**
+   * Whether line numbers are shown in the gutter.
+   *
+   * @default true
+   */
   showLineNumbers?: boolean;
+  /**
+   * Whether linter results are shown in the gutter.
+   *
+   * @default true
+   */
   showLinterMarkers?: boolean;
 }
 

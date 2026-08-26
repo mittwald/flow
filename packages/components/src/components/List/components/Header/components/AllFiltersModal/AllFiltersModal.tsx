@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import { useList } from "@/components/List";
-import styles from "@/components/List/components/Header/Header.module.css";
+import styles from "@/components/List/components/Header/Header.module.scss";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../../../locales/*.locale.json";
 import ContentView from "@/views/ContentView";

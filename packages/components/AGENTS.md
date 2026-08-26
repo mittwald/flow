@@ -15,6 +15,7 @@ Definition of Done, workflow).
 src/components/Button/
 ├── Button.tsx               # implementation (hand-written)
 ├── Button.module.scss       # styles (hand-written)
+├── Button.module.d.scss.ts  # GENERATED — CSS-module class-name types
 ├── index.ts                 # barrel (hand-written)
 ├── view.ts                  # GENERATED — remote view declaration (@flr-generate only)
 ├── stories/
@@ -55,7 +56,7 @@ export interface ButtonProps
     PropsWithChildren<Omit<Aria.ButtonProps, "children">>,
     FlowComponentProps<HTMLButtonElement> {
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "success" | "secondary" | "danger";
 }
 
 /** @flr-generate all */
@@ -149,8 +150,16 @@ Remote generation details:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
 - Props of these components are consumed by mStudio extension developers — no
-  breaking changes; deprecate instead. Why this matters:
+  breaking changes; deprecate instead (see
+  [Deprecating an API](#deprecating-an-api)). Why this matters:
   [docs/remote-ui.md](../../docs/remote-ui.md).
+
+## Deprecating an API
+
+Never break a shipped API — keep the old path working and warn at runtime with
+`useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
+of deprecated entry point: a prop, a whole component, a hook, or an integration
+export (`nextjs`, `mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -158,6 +167,17 @@ if ("action" in props) {
   warnDeprecation("The 'action' prop is deprecated. Use 'onAction' instead.");
 }
 ```
+
+- Warn a deprecated **prop** only when it is actually passed; warn a deprecated
+  **component** unconditionally at the top of its render.
+- `useWarnDeprecation` is a hook — it must run inside a render or another hook.
+  A class constructor works only when it is itself a `Model.useNew`-style
+  render-time hook (e.g. `List`), not when it is constructed conditionally (e.g.
+  `new ItemView(…)`); warn one level up in that case.
+- Messages are deduplicated per string; follow the shape
+  `The '<name>' <prop|component|function> is deprecated and will be removed in a future release. Use '<replacement>' instead.`
+- A type-only deprecation (e.g. a deprecated type alias) has no runtime path —
+  nothing to warn.
 
 ## Styling
 
@@ -169,6 +189,16 @@ if ("action" in props) {
   match prop values (`.size-s`, `.primary`).
 - Class composition with `clsx`, consumer `className` appended last:
   `clsx(styles.button, styles[size], styles[color], className)`.
+- **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
+  committed generated artifact — see the root
+  [Generated code](../../AGENTS.md#generated-code--must-be-committed) table,
+  `pnpm nx build:scss-types components`). A narrow-union index (`styles[color]`,
+  ``styles[`size-${size}`]``) stays type-safe as-is — including a helper's
+  return, as long as the helper is typed as a template-literal union (see
+  `getContainerBreakpointSizeClassName`). Only a `string`-typed or runtime index
+  needs `styleClassname(styles, key)` from `@/lib/scss/selectors` (returns
+  `string | undefined`) — **not** an `as keyof typeof styles` cast, which hides
+  missing classes.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
@@ -177,6 +207,15 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **Overriding a dependency that injects its own stylesheet** (CodeMirror,
+  react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
+  `<style>` elements are unlayered, and unlayered CSS beats layered CSS
+  regardless of specificity, so a normal rule never applies in
+  `all-layered.css`. Only for the library's own `:global()` selectors — the
+  `flow/unlayered-third-party-only` lint rule enforces that, because the marker
+  costs consumers the layer-based overridability of the rule. New or changed
+  rendered behavior here gets a test in `src/tests/layered/`, which runs against
+  the layered variant; the default browser project cannot see this class of bug.
 
 ## Testing — the actual bar
 
@@ -236,8 +275,18 @@ props to hide.
 
 ## Misc
 
-- Feature flags: `src/flags.ts` holds a few behavior toggles; there is no formal
-  policy around them.
+- Application-wide component defaults: `ComponentDefaultsProvider`
+  (`src/components/ComponentDefaultsProvider/`) is where a behavior default that
+  an application should be able to set **once** belongs. Add the setting to the
+  `ComponentDefaults` interface plus its built-in value in
+  `builtInComponentDefaults`, and read it with `useComponentDefaults("<Name>")`
+  at the place that decides. Resolution order: local prop → provider →
+  deprecated `flags` → built-in default. This is not a replacement for
+  `PropsContext`: a UI component clears the props context for its children, so
+  PropsContext cannot carry an app-wide default past the first UI ancestor.
+- Feature flags: `src/flags.ts` is the deprecated predecessor of the
+  `ComponentDefaultsProvider`. Assigned flags still act as an application-wide
+  default (and warn via `useWarnDeprecation`); do not add new ones.
 - `SettingsProvider` (`src/components/SettingsProvider/`) is the built-in
   persistence for component settings (e.g. `List` remembering its view
   settings), with pluggable backends (localStorage by default). Internal

@@ -13,6 +13,8 @@ import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 import type { AlphaColor } from "@/lib/types/props";
+import { filterDOMProps } from "@react-aria/utils";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface ButtonProps
   extends
@@ -21,7 +23,8 @@ export interface ButtonProps
   /** Slot for button placement in action groups. */
   slot?: string;
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger" | AlphaColor;
+  color?:
+    "primary" | "success" | "secondary" | "danger" | AlphaColor | "accent";
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */
@@ -40,6 +43,8 @@ export interface ButtonProps
   unstyled?: boolean;
   /** @internal */
   ariaSlot?: string | null;
+  /** @internal */
+  elementType?: "button" | "span";
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -91,8 +96,10 @@ const disablePendingProps = (props: ButtonProps) => {
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
+  const warnDeprecation = useWarnDeprecation();
+
   const {
-    color = "primary",
+    color: colorFromProps = "primary",
     variant = "solid",
     children,
     className,
@@ -106,8 +113,17 @@ export const Button = flowComponent("Button", (props) => {
     ariaSlot: slot,
     unstyled,
     isReadOnly,
+    elementType,
     ...restProps
   } = props;
+
+  if (colorFromProps === "accent") {
+    warnDeprecation(
+      "The color 'accent' is deprecated and will be removed in a future release. Use 'success' instead.",
+    );
+  }
+
+  const color = colorFromProps === "accent" ? "success" : colorFromProps;
 
   const rootClassName = unstyled
     ? className
@@ -157,32 +173,18 @@ export const Button = flowComponent("Button", (props) => {
     },
   };
 
-  const StateIconComponent = isSucceeded
-    ? IconSucceeded
-    : isFailed
-      ? IconFailed
-      : isPending
-        ? LoadingSpinner
-        : undefined;
-
-  const stateIcon = StateIconComponent && (
-    <StateIconComponent
-      size={size}
-      className={styles.stateIcon}
-      status={isFailed ? "danger" : isSucceeded ? "success" : undefined}
-    />
-  );
+  const stateIcon = isSucceeded ? (
+    <IconSucceeded size={size} className={styles.stateIcon} color="success" />
+  ) : isFailed ? (
+    <IconFailed size={size} className={styles.stateIcon} color="danger" />
+  ) : isPending ? (
+    <LoadingSpinner size={size} className={styles.stateIcon} />
+  ) : undefined;
 
   const isStringContent = extractTextFromFirstChild(children) !== undefined;
 
-  return (
-    <Aria.Button
-      className={rootClassName}
-      ref={ref}
-      slot={slot}
-      {...(isReadOnly === true ? { "data-readonly": true } : {})}
-      {...restProps}
-    >
+  const content = (
+    <>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!unstyled}>
           <span className={styles.content}>
@@ -193,6 +195,34 @@ export const Button = flowComponent("Button", (props) => {
         </Wrap>
       </PropsContextProvider>
       {stateIcon}
+    </>
+  );
+
+  if (elementType === "span") {
+    const spanProps = filterDOMProps(restProps, { global: true });
+
+    return (
+      <span
+        {...spanProps}
+        data-disabled={restProps.isDisabled || undefined}
+        className={
+          typeof rootClassName === "string" ? rootClassName : undefined
+        }
+      >
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <Aria.Button
+      className={rootClassName}
+      ref={ref}
+      slot={slot}
+      {...(isReadOnly === true ? { "data-readonly": true } : {})}
+      {...restProps}
+    >
+      {content}
     </Aria.Button>
   );
 });

@@ -3,6 +3,7 @@ import { useRef } from "react";
 export type FormSubmitController = ReturnType<typeof useFormSubmitController>;
 
 export interface WithFormSubmitControllerProps {
+  /** A controller to submit the form from outside of it. */
   submitController?: FormSubmitController;
 }
 

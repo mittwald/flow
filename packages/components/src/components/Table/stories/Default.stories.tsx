@@ -32,7 +32,7 @@ const meta: Meta<typeof Table> = {
           <TableCell>
             <InlineCode>color</InlineCode>
           </TableCell>
-          <TableCell>primary | accent | secondary | danger</TableCell>
+          <TableCell>primary | success | secondary | danger</TableCell>
           <TableCell>primary</TableCell>
           <TableCell>The color of the button</TableCell>
         </TableRow>
@@ -129,10 +129,10 @@ export const HorizontallyCenteredColumns: Story = {
         <TableRow>
           <TableCell>Death Star plans</TableCell>
           <TableCell horizontalAlign="center">
-            <IconCheck status="success" />
+            <IconCheck color="success" />
           </TableCell>
           <TableCell horizontalAlign="center">
-            <IconClose status="danger" />
+            <IconClose color="danger" />
           </TableCell>
         </TableRow>
       </TableBody>

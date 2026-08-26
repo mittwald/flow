@@ -1,6 +1,6 @@
 # ADR 0004 – Forward-merge `main` into `next`
 
-- **Status:** Accepted
+- **Status:** Accepted (§4 and §5 amended 2026-08-06)
 - **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `.github/workflows/` (a new `forward-merge.yml` and a symmetric
@@ -12,8 +12,21 @@
 > `next → major line`) — for the 1.0.0 release model. The model itself is
 > accepted in [RFC #2711](https://github.com/mittwald/flow/issues/2711); this
 > ADR only specifies _how_ the forward-merge is built. **The design is fixed
-> here; the implementation lands with the 1.0.0 cut** (nothing can be exercised
-> until `main`/`next` exist and the repo is off the `0.2.0-alpha.*` line).
+> here; the implementation has since landed** in #2753 (`forward-merge.yml`,
+> `publish-next.yml`, the `.gitattributes` merge drivers, and `publish.yml`
+> moved to the shared `mutate-main` group). It stays inert until the `next`
+> branch exists and the repo is off the `0.2.0-alpha.*` line.
+
+> **Amendment 2026-08-06 (from the dry-run rehearsal, #2769).** Rehearsing the
+> cascade on a scratch fork showed two of the mechanisms below do not behave as
+> written. **§5** claimed that a shared `concurrency` group serializes every
+> writer of a branch; it does not — GitHub keeps at most one _pending_ run per
+> group and evicts it when a newer run arrives, so forward-merge runs are
+> dropped rather than delayed. **§4** described a sync PR that a human resolves;
+> that cannot work as intended, because GitHub does not run the `.gitattributes`
+> merge drivers, so the churn §3 removes reappears on the PR. Both sections are
+> corrected in place below; the reasoning and the measurements are recorded on
+> #2769.
 
 ## Context
 
@@ -50,12 +63,20 @@ This ADR decides each of these.
 The forward-merge is a **true merge commit** (`git merge --no-ff main` on
 `next`). No rebase, squash, cherry-pick, or history rewrite — ever.
 
-This makes `main` an **ancestor** of `next` in the git graph. The superset
-invariant is then materialized in history: Git knows what is already integrated
-and merges only the delta, so routine forward-merges do not re-collide. The cost
-— merge-commit noise in `next`'s history — is irrelevant, because the canonical
-changelog is the curated GitHub Release, not `next`'s raw history (per RFC
-#2711).
+This materializes the superset invariant in history: Git knows what is already
+integrated and merges only the delta, so routine forward-merges do not
+re-collide. The cost — merge-commit noise in `next`'s history — is irrelevant,
+because the canonical changelog is the curated GitHub Release, not `next`'s raw
+history (per RFC #2711).
+
+**The superset holds for _content_, not for ancestry** — this section previously
+claimed `main` becomes an ancestor of `next`, which §6/§7 then contradicts: a
+merge carrying no code delta is deliberately dropped, so the `chore(release):`
+bump never reaches `next`. In the steady state `main` therefore sits permanently
+one commit ahead while being content-identical. Anything that needs to answer
+"has `next` fallen behind?" must probe the **merge**, not the ancestry — an
+`is-ancestor` test reports drift forever. (Found in the #2769 rehearsal, where
+the drift check did exactly that.)
 
 ### 2. Trigger and location: a dedicated, idempotent, serialized workflow
 
@@ -86,10 +107,29 @@ its own derived version line). The version/changelog conflict is therefore
 mechanical noise, not a real conflict, and is resolved automatically via
 `.gitattributes` merge drivers:
 
-- **`**/CHANGELOG.md
-  merge=ours`** — keep `next`'s changelog; `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package `CHANGELOG.md`
-  are only the machine record (RFC #2711), so this loss is inconsequential.
-- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script) that, on conflict, keeps the `version`field from`next`while merging all other changes (e.g. genuine dependency bumps from`main`) with the normal 3-way result. A blanket `merge=ours`on`package.json`is rejected — it would silently drop legitimate dependency changes from`main`.
+- **`**/CHANGELOG.md merge=ours`** — keep `next`'s changelog;
+  `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package
+  `CHANGELOG.md` are only the machine record (RFC #2711), so this loss is
+  inconsequential.
+
+> **`merge=ours` is written for `main → next` and must not be applied to the
+> promotion.** In the other direction it keeps `next`'s changelog, which carries
+> the prerelease line interleaved with the stable entries it forward-merged —
+> and promoting it **overwrites the stable history on `main`**. The #2769
+> rehearsal produced exactly that: `main` came out of a promotion carrying
+> `## [2.2.5](compare/2.3.0-next.4...2.2.5)`, a stable release comparing against
+> a prerelease of the other line, with its own release bodies hollowed out. That
+> file is what `publish.yml` extracts GitHub Release bodies from, so the damage
+> reaches users. The promotion therefore takes **`main`'s** changelogs
+> (`/prepare-release` restores them after its merge); lerna prepends the
+> graduated entry on merge, and the prerelease entries drop out of the record,
+> which is correct — they were never published under `latest`.
+
+- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script)
+  that, on conflict, keeps the `version`field from`next`while merging all other
+  changes (e.g. genuine dependency bumps from`main`) with the normal 3-way
+  result. A blanket `merge=ours`on`package.json`is rejected — it would silently
+  drop legitimate dependency changes from`main`.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
 sync PR (§4). The exact version string produced by the merge is irrelevant — it
@@ -97,17 +137,41 @@ is re-derived by `publish-next.yml` (§6).
 
 ### 4. Conflict handling: the sync PR
 
-On a real (non-version) conflict, the workflow:
+On a real (non-version) conflict, the workflow **opens an issue and stops.** It
+creates no branch and no pull request: a PR is a change proposal, and until
+someone has resolved the conflict there is nothing to propose.
 
-- Creates/updates a dedicated branch **`sync/main-to-next`** at `main`'s tip and
-  opens a PR **`sync/main-to-next → next`** (not `head == main` directly —
-  conflict-resolution commits must not land on `main`). A maintainer resolves
-  the conflict on the sync branch (locally or via the web editor) and merges.
-- Applies the **`sync`** label (plus `automated`) and requests review from
-  **CODEOWNERS** (the Frontend Core Team) — not a single assignee (bus factor),
-  no round-robin (overkill for the team size).
-- Is **idempotent**: if a `sync` PR is already open, it only fast-forwards the
-  branch to `main`'s tip instead of opening duplicates.
+The resolution happens in a developer checkout, via `pnpm sync:resolve`:
+
+```shell
+pnpm sync:resolve             # merges main into next locally
+# resolve the conflicts, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
+
+**This must be local, and that is the load-bearing part.** GitHub does not run
+the merge drivers declared in `.gitattributes` — a merge driver only exists in
+local git config, which is not versioned. A merge computed on GitHub's side
+therefore shows every `version` and `CHANGELOG.md` divergence between the lines
+as a conflict, burying the one file that genuinely needs a human under dozens of
+mechanical ones (35 conflicting files in the #2769 rehearsal, 34 of them noise).
+Locally, with the drivers registered by `pnpm install` (§3), only the genuine
+conflict remains. `--continue` refuses to commit while conflict markers are
+left.
+
+The pull request `sync/main-to-next → next` appears **after** the resolution and
+is therefore a clean, reviewable merge. It carries the **`sync`** label (plus
+`automated`) and requests review from **CODEOWNERS** (the Frontend Core Team) —
+not a single assignee (bus factor), no round-robin (overkill for the team size).
+
+The escalation issue is closed by the cascade itself, once it observes that
+`next` contains `main` again. It cannot be closed by a `Closes #n` in the sync
+PR: GitHub only auto-closes linked issues when a PR merges into the **default
+branch**, and the sync PR targets `next`.
+
+The escalation is **idempotent**: while a sync issue or a sync PR is open, the
+cascade does not open a second one, and it never touches the branch a human may
+be working on.
 
 **The sync PR must be merged as a true merge commit** (`main` stays an ancestor
 of `next`). Squash/rebase-merging it would reintroduce trap #1. This is enforced
@@ -117,11 +181,37 @@ by branch protection on `next` (see §5), consistent with §1.
 
 **One shared `concurrency` group per target branch**, used by _every_ workflow
 that pushes to it — `mutate-main`, `mutate-next`, `mutate-major` — each with
-`cancel-in-progress: false`. This serializes all writers of a branch against
-each other and removes the non-fast-forward races by design. (`publish.yml`
-moves from its current `publish-${{ github.ref }}` group to `mutate-main`.) As a
-belt-and- suspenders, each mutating job does **fetch-before-push with one
-retry** (on non-fast-forward: `git fetch` + re-merge + re-push).
+`cancel-in-progress: false`. (`publish.yml` now uses this shared `mutate-main`
+group.) As a belt-and-suspenders, each mutating job does **fetch-before-push
+with one retry** (on non-fast-forward: `git fetch` + re-merge + re-push).
+
+This removes the non-fast-forward races, but **it does not serialize** — the
+original wording here was wrong. GitHub keeps at most **one pending run** per
+concurrency group and **cancels it as soon as a newer run arrives**;
+`cancel-in-progress: false` protects only the run that is already executing.
+Measured in the #2769 rehearsal: a forward-merge run created at 15:45:32 was
+cancelled at 15:47:28, one second after a `publish-next` run entered the group,
+without ever starting a job. Excess runs are therefore **dropped, not delayed**,
+and a cancelled run is not a `failure`, so §10 does not fire — `next` can fall
+behind `main` silently.
+
+Two mitigations, both implemented:
+
+- **Catch-up trigger.** `forward-merge.yml` also runs on `workflow_run` when
+  `publish-next.yml` completes — precisely when the group frees up. This
+  terminates: the catch-up merge is idempotent (§2), normally finds no code
+  delta, does not push, and so triggers no further `publish-next`.
+- **Drift check.** `forward-merge-drift.yml` compares `main` against `next` on a
+  schedule and escalates when the gap outlives a threshold, ignoring drift that
+  an open sync issue or sync PR already accounts for — and ageing those too, so
+  a forgotten escalation cannot block the cascade indefinitely without saying
+  so.
+
+Giving `forward-merge.yml` its own group was considered and rejected:
+forward-merge runs evicting each other is harmless (they always merge `main`'s
+tip), but it would let `forward-merge` and `publish-next` push to `next`
+concurrently, and `publish-next` pushes _after_ its npm publish — precisely the
+ratchet this design exists to prevent.
 
 **`next` is protected** (real-merge-commit-only for human PRs, direct pushes
 restricted), **with the automation identity as a bypass actor** for direct
@@ -243,13 +333,20 @@ convention — only with different branch names. It is not designed separately.
 
 ## Follow-ups (not part of this ADR)
 
-- Implement `forward-merge.yml`, the `.gitattributes` drivers + the JSON merge
-  driver script, and the shared `concurrency` groups; move `publish.yml` to
-  `mutate-main`.
-- Implement the symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+**Landed** in #2753:
+
+- `forward-merge.yml`, the `.gitattributes` merge drivers + the JSON merge
+  driver script (`.github/scripts/merge-package-json.cjs`), and the shared
+  per-target-branch `concurrency` groups; `publish.yml` moved to `mutate-main`.
+- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+
+**Still pending** — gated on the 1.0.0 cut (`next` established, repo off the
+`0.2.0-alpha.*` line):
+
 - Configure `next` (and, on demand, the major line) branch protection with the
   `PUBLISH_PAT` bot as the direct-push bypass actor.
 - The routing-guard `head == next`/major-line exemption (§8) — tracked with the
   guard in RFC #2711.
-- All of the above is **gated on the 1.0.0 cut** (`main`/`next` established,
-  repo off the `0.2.0-alpha.*` line).
+- Until `next` exists the cascade stays inert: `forward-merge.yml` triggers on
+  `main` pushes but has no `next` to merge into, and the version-contract guard
+  is dormant (see ADR 0005).

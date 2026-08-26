@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import clsx from "clsx";
 import { ActiveFilters } from "@/components/List/components/Header/components/ActiveFilters";
 import { useList } from "@/components/List/hooks/useList";

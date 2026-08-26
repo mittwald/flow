@@ -22,9 +22,8 @@ import {
   ModalTrigger,
   ProgressBar,
   Section,
-  Segment,
-  SegmentedControl,
   Switch,
+  Tab,
   Table,
   TableBody,
   TableCell,
@@ -32,14 +31,12 @@ import {
   TableHeader,
   TableRow,
   TabNavigation,
+  Tabs,
+  TabTitle,
   Text,
 } from "@mittwald/flow-react-components";
-import { useState } from "react";
 
 export default () => {
-  const [connectionType, setConnectionType] =
-    useState("IMAP");
-
   return (
     <Flex direction="column" gap="m">
       <Flex direction="column">
@@ -160,46 +157,55 @@ export default () => {
         </Section>
         <Section>
           <Heading>Verbindungsinformationen</Heading>
-          <SegmentedControl
-            defaultValue={connectionType}
-            onChange={setConnectionType}
-            aria-label="Verbindungsart"
-          >
-            <Segment value="IMAP">IMAP</Segment>
-            <Segment value="POP3">POP3</Segment>
-            <Segment value="SMTP">SMTP</Segment>
-          </SegmentedControl>
-          <Table aria-label="Verbindungsinformationen">
-            <TableHeader>
-              <TableColumn></TableColumn>
-              <TableColumn></TableColumn>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell rowHeader>
-                  Benutzername
-                </TableCell>
-                <TableCell>max@mustermann.de</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell rowHeader>
-                  {connectionType} Port
-                </TableCell>
-                <TableCell>...</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell rowHeader>
-                  {connectionType} Postausgang
-                </TableCell>
-                <TableCell>...</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <Tabs>
+            {["IMAP", "POP3", "SMTP"].map(
+              (connectionType) => (
+                <Tab
+                  key={connectionType}
+                  id={connectionType}
+                >
+                  <TabTitle>{connectionType}</TabTitle>
+                  <Table
+                    aria-label={`Verbindungsinformationen ${connectionType}`}
+                  >
+                    <TableHeader>
+                      <TableColumn></TableColumn>
+                      <TableColumn></TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell rowHeader>
+                          Benutzername
+                        </TableCell>
+                        <TableCell>
+                          max@mustermann.de
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell rowHeader>
+                          {connectionType} Port
+                        </TableCell>
+                        <TableCell>...</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell rowHeader>
+                          {connectionType} Postausgang
+                        </TableCell>
+                        <TableCell>...</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Tab>
+              ),
+            )}
+          </Tabs>
         </Section>
         <Section>
           <Header>
             <Heading>Spamschutz</Heading>
-            <Switch defaultSelected>Aktivieren</Switch>
+            <Switch defaultSelected>
+              <Label>Aktivieren</Label>
+            </Switch>
           </Header>
           <Text>
             Der Spamfilter schützt dich vor ungewollten

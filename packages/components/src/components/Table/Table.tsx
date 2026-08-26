@@ -19,6 +19,7 @@ export type TableProps = Omit<
    * horizontally instead of shrinking its columns.
    */
   minWidth?: number | string;
+  /** The elements class name. */
   className?: string;
 };
 
@@ -35,7 +36,7 @@ export const Table: FC<TableProps> = (props) => {
 
   const rootClassName = clsx(
     styles.table,
-    styles[`vertical-align-${verticalAlign}`],
+    verticalAlign !== "top" && styles[`vertical-align-${verticalAlign}`],
     styles[`layout-${layout}`],
     className,
   );

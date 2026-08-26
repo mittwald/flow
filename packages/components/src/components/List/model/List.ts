@@ -21,11 +21,11 @@ import { ListSettingsStore } from "./ListSettingsStore";
 import { ListViewMode } from "./ListViewMode";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import { DateRangeFilter } from "@/components/List/model/filter/DateRangeFilter";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export class List<T = unknown, TMeta = unknown> {
   public readonly filters: (
-    | Filter<T, never, never>
-    | DateRangeFilter<T, never>
+    Filter<T, never, never> | DateRangeFilter<T, never>
   )[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -70,6 +70,13 @@ export class List<T = unknown, TMeta = unknown> {
       emptySearchResultView,
       ...componentProps
     } = shape;
+
+    const warnDeprecation = useWarnDeprecation();
+    if (itemView?.fallback !== undefined) {
+      warnDeprecation(
+        "The 'fallback' prop is deprecated and will be removed in a future release. Use 'loadingView' instead.",
+      );
+    }
 
     this.settingsStorageDefaults = settingsStorageDefaults;
     const generalSettingsStore = useSettings();

@@ -1,9 +1,62 @@
 ---
 component: Truncate
-description:
-  Truncate wird verwendet, um zu lange Texte automatisch zu kürzen, sodass sie
-  in ein vorgegebenes Layout passen. Dabei wird der entsprechende Text durch
-  "..." abgekürzt.
+description: Truncate kürzt zu lange Texte automatisch mit "…" ab.
 ---
 
-<LiveCodeEditor editorDisabled />
+<Alert status="warning">
+  <Heading>Accessibility-Warnung</Heading>
+  <Content>
+    Die Component verwendet das
+    [title-Attribut](https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute),
+    um den vollständigen Inhalt sichtbar zu machen. Für Tastatur-User ist dieses
+    jedoch nicht zugänglich, da Browser keine Möglichkeit bieten,
+    `title`-Tooltips per Tastatur anzuzeigen. Verwende `Truncate` daher nur in
+    Ausnahmefällen und stelle wichtige Inhalte an anderer Stelle vollständig
+    dar.
+  </Content>
+</Alert>
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Kürze keine kritischen Informationen ab, die zum Verständnis oder zur
+  Bedienung nötig sind.
+- Mach den vollständigen Inhalt an anderer Stelle zugänglich.
+
+---
+
+# Mit Offset
+
+Um zum Beispiel bei Pfaden sowohl den Anfang als auch das Ende sichtbar zu
+halten, kann über die Property `offset` festgelegt werden, wie viele Zeichen vom
+Ende angezeigt werden sollen. Zusätzlich lässt sich mit `ellipsis` ein
+individueller Platzhalter definieren.
+
+<LiveCodeEditor example="offset" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Text
+
+Kombiniere Truncate mit [Text](/04-components/content/text), um langen Fließtext
+einzeilig zu kürzen.
+
+<LiveCodeEditor example="text" editorCollapsed />
+
+## Heading
+
+Kombiniere Truncate mit [Heading](/04-components/content/heading), um lange
+Überschriften zu kürzen.
+
+<LiveCodeEditor example="heading" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

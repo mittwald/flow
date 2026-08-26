@@ -62,7 +62,7 @@ const meta: Meta<typeof Modal> = {
         <ActionGroup>
           <Action closeModal>
             <Action onAction={asyncLongFunction}>
-              <Button color="accent">Create squadron</Button>
+              <Button color="success">Create squadron</Button>
             </Action>
             <Button color="secondary" variant="soft">
               Abort
@@ -137,7 +137,7 @@ export const WithForm: Story = {
 
     return (
       <>
-        <Button color="accent" onPress={controller.open}>
+        <Button color="success" onPress={controller.open}>
           Add pilot
         </Button>
 
@@ -172,12 +172,52 @@ export const WithForm: Story = {
   },
 };
 
+export const WithConfirmOnClose: Story = {
+  render: (props) => {
+    const [squadronName, setSquadronName] = useState("");
+
+    return (
+      <ModalTrigger>
+        <Button>New squadron</Button>
+
+        <Modal
+          {...props}
+          confirmOnClose={squadronName !== ""}
+          onClose={() => setSquadronName("")}
+        >
+          <Heading>New Squadron</Heading>
+          <Content>
+            <Section>
+              <Text>
+                Enter a name and close the modal with Escape or by clicking
+                outside: the unsaved changes have to be confirmed. Abort closes
+                immediately.
+              </Text>
+              <TextField value={squadronName} onChange={setSquadronName}>
+                <Label>Squadron name</Label>
+              </TextField>
+            </Section>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button color="success">Create squadron</Button>
+              <Button color="secondary" variant="soft">
+                Abort
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  },
+};
+
 export const WithColumnLayout: Story = {
   args: { size: "l", offCanvas: true },
   render: (props) => {
     return (
       <ModalTrigger>
-        <Button color="accent">Charter a ship</Button>
+        <Button color="success">Charter a ship</Button>
 
         <Modal {...props}>
           <Heading>Charter a ship</Heading>
@@ -198,7 +238,7 @@ export const WithColumnLayout: Story = {
           </ColumnLayout>
 
           <ActionGroup>
-            <Button color="accent">Submit</Button>
+            <Button color="success">Submit</Button>
             <Action closeModal>
               <Button variant="soft" color="secondary">
                 Abort
@@ -296,7 +336,7 @@ export const LongContent: Story = {
       </Content>
       <ActionGroup>
         <Action closeModal>
-          <Button color="accent">Create SFTP user</Button>
+          <Button color="success">Create SFTP user</Button>
           <Button variant="soft" color="secondary">
             Abort
           </Button>

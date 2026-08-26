@@ -1,7 +1,7 @@
 import defaultConfig from "./vite.config";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
-import { vitestBrowserTestConfig } from "../core/src/vitestBrowserTestConfig";
+import { vitestBrowserTestConfig } from "../core";
 
 export default mergeConfig(
   defaultConfig,
@@ -31,7 +31,20 @@ export default mergeConfig(
             ...vitestBrowserTestConfig,
             name: "visual",
             include: ["src/tests/visual/**/*.browser.test.{ts,tsx}"],
-            setupFiles: "./dev/vitest/setupBrowser.ts",
+            // setupVisualTheme renders one of the two browsers in dark theme.
+            setupFiles: [
+              "./dev/vitest/setupBrowser.ts",
+              "./dev/vitest/setupVisualTheme.ts",
+            ],
+            browser: {
+              ...vitestBrowserTestConfig.browser,
+              // Failure screenshots land in src/tests/visual/__screenshots__ —
+              // the tracked baseline directory — and are not gitignored, so a
+              // local failure leaves stray PNGs that `git add` picks up. They
+              // add nothing either: a mismatch already writes reference, actual
+              // and diff to the gitignored .vitest-attachments.
+              screenshotFailures: false,
+            },
           },
         },
         {

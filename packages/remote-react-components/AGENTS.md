@@ -7,6 +7,10 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
 
 - `src/auto-generated/**` is **generated** from `packages/components` — never
   edit by hand.
+- `createFlowRemoteComponent` reports **component usage** for the components the
+  `flowComponent` factory does not build (54 of 131); the factory reports the
+  rest. Renders that arrive through a Flow view are excluded — see the view seam
+  in [docs/remote-ui.md](../../docs/remote-ui.md).
 - Hand-written: `RemoteRoot` (connects to the host render root, initializes
   ext-bridge) and the `createFlowRemoteComponent` machinery.
 - Richest test surface outside `components`: unit, browser, e2e and visual
@@ -17,6 +21,10 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
   the new prop/variant/layout is captured. Because every scenario runs in both
   `Local` and `Remote`, this single test guards the component and its remote
   path at once.
+- **The browser also selects the theme:** webkit renders light, firefox renders
+  dark (`dev/vitest/setupVisualTheme.ts`), so one run covers both themes and the
+  `*-firefox-*.png` baselines are dark by design. A run filtered with
+  `--browser.name=<one>` only verifies one theme.
 - Update visual snapshots: `pnpm nx test:visual:update remote-react-components`.
   Updating everything takes long — for a single component use
   `pnpm nx test:visual:update remote-react-components MyNewComponent`.

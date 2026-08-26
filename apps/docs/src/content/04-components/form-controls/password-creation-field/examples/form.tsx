@@ -8,13 +8,13 @@ import { sleep } from "@/content/04-components/actions/action/examples/lib";
 import {
   Label,
   Section,
+  PasswordCreationField,
 } from "@mittwald/flow-react-components";
 import {
-  PasswordCreationField,
-  generatePasswordCreationFieldValidation,
+  usePasswordCreationFieldValidation,
   Policy,
   RuleType,
-} from "@mittwald/flow-react-components/password-tools";
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 
 export default () => {
   const customPolicy = Policy.fromDeclaration({
@@ -34,6 +34,8 @@ export default () => {
     },
   });
   const Field = typedField(form);
+  const validatePassword =
+    usePasswordCreationFieldValidation(customPolicy);
 
   return (
     <Section>
@@ -42,10 +44,7 @@ export default () => {
           name="password"
           rules={{
             required: true,
-            validate:
-              generatePasswordCreationFieldValidation(
-                customPolicy,
-              ),
+            validate: validatePassword,
           }}
         >
           <PasswordCreationField

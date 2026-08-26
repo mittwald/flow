@@ -23,11 +23,11 @@ import {
     <TableRow>
       <TableCell>Projekt</TableCell>
       <TableCell horizontalAlign="center">
-        <IconCheck status="success" aria-label="Zugriff" />
+        <IconCheck color="success" aria-label="Zugriff" />
       </TableCell>
       <TableCell horizontalAlign="center">
         <IconClose
-          status="danger"
+          color="danger"
           aria-label="Kein Zugriff"
         />
       </TableCell>

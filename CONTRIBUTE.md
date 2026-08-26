@@ -25,17 +25,18 @@ coding agents, but great reference docs for humans too.
 - [Testing](#testing)
 - [Code style](#code-style)
 - [Commit conventions](#commit-conventions)
+- [Choosing the base branch](#choosing-the-base-branch)
 - [Opening a pull request](#opening-a-pull-request)
 - [Releases](#releases)
 - [Getting help](#getting-help)
 
 ## Prerequisites
 
-| Tool        | Version                                                         |
-| ----------- | --------------------------------------------------------------- |
-| **Node.js** | `>=20.19` (CI runs on Node 24 — any recent 20.19+ LTS works)    |
-| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack |
-| **Git**     | any recent version                                              |
+| Tool        | Version                                                             |
+| ----------- | ------------------------------------------------------------------- |
+| **Node.js** | `>=24` (`engines.node` in the root `package.json`; CI runs Node 24) |
+| **pnpm**    | `10.28.2` — pinned via the `packageManager` field, use Corepack     |
+| **Git**     | any recent version                                                  |
 
 We use [pnpm](https://pnpm.io/) as the package manager. The easiest way to get
 the exact pinned version is [Corepack](https://nodejs.org/api/corepack.html),
@@ -65,6 +66,10 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
+`pnpm install` also registers the forward-merge merge drivers
+(`pnpm dev:init-merge-drivers`, see below) — you only run that one by hand if
+you skipped an install.
+
 Storybook opens on <http://localhost:6006>. This is where you'll spend most of
 your time when developing components.
 
@@ -74,10 +79,35 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
-  changes.
-- **post-checkout** / **post-merge** run `pnpm install && pnpm clean` so your
-  dependencies and Nx cache stay in sync after switching branches or pulling.
+- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
+  repo. It blocks the push, not the commit — unformatted files surface once the
+  commits already exist; `pnpm format` fixes them.
+- **post-checkout** / **post-merge** run `pnpm install` so your dependencies
+  stay in sync after switching branches or pulling.
+
+### Resolving a blocked forward-merge
+
+Every change on `main` is merged up into `next` automatically (ADR 0004). When
+that merge hits a conflict the machine cannot resolve, the cascade **pauses**
+and opens an issue — from then on nothing new reaches `next` until someone
+resolves it. That someone needs two commands:
+
+```shell
+pnpm sync:resolve             # merges main into next in your checkout
+# resolve the conflicts in your editor or with `git mergetool`, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
+
+You only ever see the genuinely conflicting files. The version and
+`CHANGELOG.md` divergence between the two lines is absorbed by the merge drivers
+(ADR 0004 §3), which `pnpm install` registers for you via
+`pnpm dev:init-merge-drivers` — a `merge=<driver>` line in `.gitattributes` is
+inert on its own, git only runs a driver that is also in your local git config.
+
+That is also why the resolution happens locally rather than on the pull request:
+**GitHub does not run merge drivers.** A merge computed on GitHub's side shows
+every version and changelog divergence as a conflict, burying the one file that
+actually needs you under dozens of mechanical ones.
 
 ## Repository overview
 
@@ -113,9 +143,10 @@ Five invariants that hold everywhere in this repo — internalize these and the
 rest is detail:
 
 1. **Generated code is committed — and never hand-edited.** Remote views, icon
-   components, and `doc-properties.json` are generated. After changing their
-   sources, regenerate (`pnpm build` covers everything) and commit the result.
-   CI fails on any uncommitted generated diff.
+   components, CSS-module type stubs (`*.module.d.scss.ts`), and
+   `doc-properties.json` are generated. After changing their sources, regenerate
+   (`pnpm build` covers everything) and commit the result. CI fails on any
+   uncommitted generated diff.
 2. **Don't break extension developers.** Props of `@flr-generate` components are
    a contract — mStudio extensions in the wild use them. Keep old paths working
    and log their usage with `useWarnDeprecation`. Breaking changes for consumers
@@ -168,6 +199,7 @@ Every component lives in its own **PascalCase** folder under
 packages/components/src/components/Button/
 ├── Button.tsx              # implementation
 ├── Button.module.scss      # styles (CSS Module written in SCSS)
+├── Button.module.d.scss.ts # ⚙️ AUTO-GENERATED — CSS-module class-name types
 ├── index.ts                # barrel export (3 lines, see below)
 ├── view.ts                 # ⚙️ AUTO-GENERATED — do not edit by hand
 └── stories/
@@ -279,6 +311,12 @@ The root class is the lower-camel component name; modifier classes match prop
 values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
+Importing `styles` gives per-class typed access from a generated
+`Badge.module.d.scss.ts` stub. Indexing with a narrow union stays type-safe
+(`styles[color]`, ``styles[`size-${size}`]``). For a `string`-typed or runtime
+key use `styleClassname` from `@/lib/scss/selectors`, not an
+`as keyof typeof styles` cast.
+
 ### 3. Add the barrel `index.ts`
 
 Always the same three lines (the `./view` line only exists on `@flr-generate`
@@ -354,8 +392,8 @@ pnpm nx build:remote-components components
 ```
 
 > ⚠️ **Commit the generated files.** CI runs `git diff --exit-code` and will
-> fail if generated code (remote views, icons) isn't committed. See
-> [Testing](#testing).
+> fail if generated code (remote views, icons, CSS-module type stubs) isn't
+> committed. See [Testing](#testing).
 
 For remote-capable components, also:
 
@@ -536,10 +574,11 @@ Local runs update the baselines for **your** OS. Additionally add the
 reference screenshots on Linux (matching CI) and commits them back to your
 branch.
 
-> ⚠️ When a visual test fails, it writes `*--Local--*.png` / `*--Remote--*.png`
-> diff artifacts showing the difference between the two environments. Use them
-> to inspect the failure — but **never commit them**; only the baselines belong
-> in the repo.
+> ⚠️ When a visual test fails, it writes diff images into `.vitest-attachments/`
+> (`*-diff-*.png`) — one per failing environment (`Local` / `Remote`), each
+> showing the current render against its committed baseline. That directory is
+> gitignored; use the images to inspect the failure but **never commit them** —
+> only the baselines belong in the repo.
 
 To run everything the way CI does:
 
@@ -556,8 +595,7 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
-you.
+Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for you.
 
 ```shell
 pnpm lint           # check with ESLint + Stylelint + Prettier
@@ -606,9 +644,75 @@ chore(docs): migrate site URL and redirect pages
 `feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci` for
 everything that isn't. Write messages for the changelog reader.
 
+TypeScript type-level changes aren't under the semver guarantee, so a type break
+never forces a Major on its own. But a **deliberate** (even small) TS breaking
+change still ships a **migration note in the commit body and in the release
+notes** telling consumers how to adapt — see
+[ADR 0005](docs/adr/0005-semver-contract.md) for the rationale.
+
+The commit **type** also decides **where your PR lands** — see
+[Choosing the base branch](#choosing-the-base-branch).
+
+## Choosing the base branch
+
+Flow runs a two-line release model (accepted in
+[RFC #2711](https://github.com/mittwald/flow/issues/2711); forward-merge
+mechanics in [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md), the
+semver contract in [ADR 0005](docs/adr/0005-semver-contract.md)). Which branch
+your PR targets depends on the kind of change:
+
+| Your change                                          | Conventional type                | Base branch    |
+| ---------------------------------------------------- | -------------------------------- | -------------- |
+| Bug fix                                              | `fix:`                           | `main`         |
+| Docs, chore, refactor, tests, CI, build, style, perf | `docs:` / `chore:` / `refactor:` | `main`         |
+| New feature                                          | `feat:`                          | `next`         |
+| Breaking change                                      | `feat!:` / `BREAKING CHANGE:`    | the major line |
+
+- **`main`** is the Stable line (npm dist-tag `latest`). Fixes and all
+  non-releasing changes land here and ship fast — a fix never has to wait behind
+  an unreleased feature.
+- **`next`** is the Collection branch (dist-tag `next`): `main` plus accumulated
+  features, released together with a curated changelog when a maintainer
+  promotes it. Feature work goes here.
+- **The major line** is an on-demand branch that collects breaking changes
+  toward the next major. Breaking changes are rare by policy — **deprecate,
+  don't break** (keep the old path, warn via `useWarnDeprecation`); see
+  [ADR 0005](docs/adr/0005-semver-contract.md) for exactly what counts as
+  breaking.
+
+You never forward-port a change by hand: every push to `main` is automatically
+merged up into `next` (and `next` into the major line when it exists), so the
+higher lines always contain the lower ones.
+
+### The routing is enforced
+
+`.github/workflows/commit-guard.yml` runs on every PR and turns the rules above
+into a gate. Because this repo **squash-merges** — the PR title becomes the
+release commit — it lints the **PR title**, not the individual commits:
+
+- **Conventional PR title.** The title must be a valid Conventional Commit of a
+  known type (`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`,
+  `build`, `ci`, `chore`, `revert`); a scope is optional.
+- **Routing.** A `feat:` title is rejected on `main` (features belong on
+  `next`), and a breaking change (a `!` in the title, or `BREAKING CHANGE:` in
+  the body) is rejected on **both** `main` and `next` (it belongs on the major
+  line).
+
+Target the wrong branch and the check fails with a message like
+`PR title is a 'feat' — features target 'next', not 'main'.`; fix it by
+retitling the PR or changing its base.
+
+> **Before the 1.0.0 cut**, the `next` and major lines don't exist yet, so
+> **everything targets `main`** and the routing check self-disables (it stays
+> dormant while there is no `next` branch). Once the lines exist, promotion and
+> sync branches — `next`, a major line (e.g. `2.x`), and `sync/*` — are exempt
+> so release PRs are never blocked.
+
 ## Opening a pull request
 
-1. Branch off `main`: `git checkout -b fix/button-focus-ring`.
+1. Branch off the right base for your change (see
+   [Choosing the base branch](#choosing-the-base-branch)) — for a fix that's
+   `main`: `git checkout -b fix/button-focus-ring main`.
 2. Make your change, following the conventions above.
 3. Before pushing, make sure the checklist passes:
    - [ ] `pnpm lint` is clean
@@ -619,21 +723,39 @@ everything that isn't. Write messages for the changelog reader.
    - [ ] intentional visual changes: snapshots updated (`test:visual:update`
          locally and/or the `update-screenshots` label)
    - [ ] docs updated if you changed a public API
-4. Push to your fork and open a PR against `mittwald/flow`'s `main` branch.
+4. Push to your fork and open a PR against `mittwald/flow`, targeting the base
+   branch you chose in step 1.
 
 CI (`.github/workflows/test.yml`) runs lint, unit tests, and browser tests
 (WebKit) on every PR, and verifies all generated code is committed. A preview
 deployment of docs + Storybook is built for each PR so reviewers can see your
 changes live.
 
-PRs are **squash-merged**, so the PR title becomes the commit on `main` — give
-it a Conventional-Commits-style title.
+PRs are **squash-merged**, so the **PR title becomes the release commit** — it
+must be a valid Conventional Commit. `.github/workflows/commit-guard.yml` lints
+both the title and that it matches the base branch (see
+[Choosing the base branch](#choosing-the-base-branch)).
 
 ## Releases
 
-You don't need to do anything to release. When a PR is merged into `main`,
-Lerna-Lite (via `.github/workflows/publish.yml`) versions the packages based on
-the Conventional Commits, generates the changelogs, and publishes to npm.
+You don't need to do anything to release. Flow uses **fixed versioning** — all
+`@mittwald/flow-*` packages share one version — and releases are automated from
+your Conventional Commit **PR titles** (the repo squash-merges, so the title is
+the commit Lerna-Lite reads). Where your change lands decides how it ships:
+
+- **`fix:` (and non-releasing `docs:`/`chore:`/… ) → `main`** — publishes to npm
+  under dist-tag `latest` as soon as it merges.
+- **`feat:` → `next`** — features accumulate there (published as `X.Y.0-next.N`
+  under dist-tag `next`) and a maintainer promotes them to a stable Minor, with
+  a curated changelog, via a `next → main` Release-PR.
+
+This is Flow's two-line release model — see
+[`docs/release-workflow.md`](docs/release-workflow.md) for the full picture (the
+branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
+[RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
+model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
+forward-merge mechanics. (The `next` line and its publishing go live with the
+1.0.0 cut; until then every merge into `main` releases as it does today.)
 
 ## Getting help
 

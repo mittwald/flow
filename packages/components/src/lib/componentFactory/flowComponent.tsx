@@ -20,11 +20,21 @@ import { ClearPropsContext } from "@/components/ClearPropsContext";
 import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { UiComponentTunnelProvider } from "@/components/UiComponentTunnel/UiComponentTunnelProvider";
 import { UiComponentTunnelEntry } from "@/components/UiComponentTunnel/UiComponentTunnelEntry";
+import {
+  useReportComponentUsage,
+  ViewCompositionReset,
+} from "@/components/ComponentUsageProvider";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
 export interface FlowComponentProps<R = HTMLDivElement>
   extends PropsWithTunnel, RefAttributes<R> {
+  /**
+   * A React element the component is wrapped with. The element is cloned and
+   * receives the component as its only child — useful to render the component
+   * inside a link, a tooltip trigger or any other wrapper without changing the
+   * surrounding markup.
+   */
   wrapWith?: ReactElement;
 }
 
@@ -60,6 +70,8 @@ export function flowComponent<C extends FlowComponentName>(
   const MemoizedImplementationComponentType = memo(ImplementationComponentType);
 
   function Component(props: Props) {
+    const isViewComposition = useReportComponentUsage(componentName);
+
     const { tunnel, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
@@ -134,6 +146,10 @@ export function flowComponent<C extends FlowComponentName>(
           {element}
         </UiComponentTunnelEntry>
       );
+    }
+
+    if (isViewComposition) {
+      element = <ViewCompositionReset>{element}</ViewCompositionReset>;
     }
 
     return element;

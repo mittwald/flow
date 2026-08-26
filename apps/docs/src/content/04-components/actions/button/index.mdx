@@ -1,9 +1,179 @@
 ---
 component: Button
 description:
-  Mit einem Button können User Aktionen ausführen. Je nach Bedarf kann ein
-  Button – mit Text und/oder mit einem Icon – in verschiedenen Größen und Typen
-  gewählt werden.
+  Buttons werden verwendet, um Aktionen auf einer Seite oder in einem Formular
+  auszulösen.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Beschrifte den Button kurz und eindeutig. Ergänze ein `aria-label`, wenn der
+  Kontext nicht klar ist, etwa bei einem reinen Icon-Button oder wenn der Text
+  allein nicht ausreicht.
+- Richte die visuelle Hierarchie nach der Wichtigkeit der Aktion. Nutze dafür
+  die verschiedenen Varianten und Colors.
+- Gib dem User nach der Aktion ein visuelles Feedback. Über die
+  [Action](/04-components/actions/action) lässt sich dieses Feedback steuern.
+
+## Button vs. Link
+
+Verwende für Navigation bevorzugt Links und für Aktionen Buttons. Eine Ausnahme
+können hervorgehobene
+[Call-to-Actions](/04-components/navigation/link#kombiniere-mit-button) sein,
+bei denen ein Button-ähnliches Erscheinungsbild für eine Navigation sinnvoll
+ist.
+
+<DoAndDont>
+  <Plain heading="Verwende Buttons, um z. B. ...">
+    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
+    - Formulare zu speichern oder zurückzusetzen.
+    - in einem [Modal](/04-components/overlays/modal) Aktionen auszuwählen.
+
+  </Plain>
+
+  <Plain heading="Verwende Links, um z. B. ...">
+    - zu einer anderen Seite zu navigieren.
+    - zu einem Anker auf der Seite zu scrollen.
+    - eine externe Seite zu öffnen.
+    - einen Download zu starten.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Variants
+
+Verwende die unterschiedlichen Varianten, um Buttons in einer Oberfläche eine
+visuelle Hierarchie zu geben:
+
+- **Solid**, um Hauptaktionen hevrozuheben, die eine hohe Aufmerksamkeit
+  erfordern.
+- **Soft**, um Nebenaktionen abzuschwächen, die visuell keine hohe
+  Aufmerksamkeit erfordern.
+- **Outline**, um eine Aktion darzustellen, die klar als solche erkennbar sein
+  soll, aber weniger Aufmerksamkeit als ein gefüllter Button beansprucht.
+- **Plain**, um weniger wichtige oder zurückhaltende Aktionen darzustellen.
+
+<LiveCodeEditor example="variants" editorCollapsed row />
+
+---
+
+# Color
+
+Farben unterstützen die visuelle Hierarchie zusätzlich. Verwende:
+
+- **Primary**, um Hauptaktionen standardmäßig visuell hervorzuheben.
+- **Secondary**, um Nebenaktionen abzuschwächen und neutral darzustellen.
+- **Success**, um die positive Bedeutung einer Aktion zu stärken. Diese Farbe
+  wird daher vor allem im Kontext von Erstellungs-, Speicher- oder
+  Bestellvorgängen verwendet.
+- **Danger**, um negative Konsequenzen einer Aktion zu verdeutlichen. Sie wird
+  beispielsweise für Lösch- oder Kündigungsaktionen verwendet.
+
+<LiveCodeEditor example="colors" editorCollapsed row />
+
+## Light und Dark
+
+Um auf farbigen Hintergründen ausreichend Kontrast zu erreichen, können Buttons
+auch in Light und Dark eingesetzt werden. Mehr zur richtigen Verwendung von
+Light und Dark findest du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed row />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed row />
+
+---
+
+# Sizes
+
+**Medium** ist die Standardgröße und wird für die meisten Buttons verwendet.
+**Small** kann genutzt werden, wenn weniger Platz vorhanden ist. Vermeide es,
+unterschiedliche Button-Größen direkt nebeneinander zu verwenden.
+
+<LiveCodeEditor example="sizes" editorCollapsed />
+
+---
+
+# States
+
+**Disabled** zeigt an, dass eine Aktion nicht ausgeführt werden kann. Achte
+darauf, dass aus dem Kontext klar wird, warum die Aktion nicht zur Verfügung
+steht.
+
+Die States **Pending**, **Succeeded** und **Failed** geben dem User zusätzliches
+visuelles Feedback darüber, dass im Hintergrund eine Aktion läuft, erfolgreich
+abgeschlossen wurde oder fehlgeschlagen ist. Um diese States zu steuern, kann
+die [Action](/04-components/actions/action)-Komponente genutzt werden.
+
+<LiveCodeEditor example="states" editorCollapsed row />
+
+---
+
+# Content
+
+Der Content-Bereich eines Buttons kann entweder Text, ein Icon oder Text mit
+einem Icon am Ende enthalten. Achte in allen Fällen darauf, dass Text und Icon
+die Aktion eindeutig beschreiben.
+
+## Icon
+
+Wenn ausschließlich ein Icon verwendet wird, sollte das `aria-label` den
+Verwendungszweck beschreiben. Ein Tooltip kann zusätzlich verdeutlichen, wofür
+die Aktion gedacht ist.
+
+<LiveCodeEditor example="icon" editorCollapsed row />
+
+## Text + Icon
+
+Der Default ist Text ohne Icon, das hält die Oberfläche ruhig. Ein Icon kommt
+nur dazu, wenn es etwas beiträgt, das der Text allein nicht abdeckt:
+
+- **Verhalten:** Das Icon zeigt, wie sich der Button verhält. Ein Chevron-Icon
+  zeigt zum Beispiel an, dass sich dahinter ein
+  [ContextMenu](/04-components/actions/context-menu) verbirgt.
+- **Erkennung:** Das Icon steht produktweit und ausschließlich für eine
+  Feature-Familie, nach der User scannen, z. B. das AI-Icon neben „AI Agent
+  verbinden".
+
+Wiederholt das Icon nur das Wort (etwa eine Diskette neben „Speichern"), bringt
+es nur Unruhe. Im Zweifel weglassen.
+
+<LiveCodeEditor example="icon-text" editorCollapsed row />
+
+---
+
+# Kombiniere mit …
+
+## Combine
+
+Benutze die [Combine](/04-components/structure/combine)-Component, um deinen
+Button neben Input-Feldern zu platzieren.
+
+<LiveCodeEditor example="combine" editorCollapsed />
+
+## ActionGroup
+
+Benutze die [ActionGroup](/04-components/actions/action-group)-Component, um
+zusammengehörige Aktionen zu gruppieren und automatisch in eine konsistente
+Hierarchie (Haupt- und Nebenaktion) zu bringen.
+
+<LiveCodeEditor example="action-group" editorCollapsed />
+
+## Action
+
+Benutze die [Action](/04-components/actions/action)-Component, um die States
+eines Buttons zu steuern.
+
+<LiveCodeEditor example="action" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -1,8 +1,31 @@
 ---
 component: FileCardList
-description:
-  Die FileCardList platziert mehrere FileCards in einem ColumnLayout und
-  visualisiert Dateien samt relevanter Informationen.
+description: Die FileCardList platziert mehrere FileCards in einem ColumnLayout.
 ---
 
-<LiveCodeEditor editorDisabled zoom={0.6} />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Zeige hochgeladene Dateien sofort an. Das gibt dem User eine direkte
+  Rückmeldung.
+- Gib der Liste ein aussagekräftiges `aria-label`.
+
+---
+
+# Kombiniere mit ...
+
+## FileDropZone
+
+Stelle mit der FileCardList die Dateien dar, die über eine
+[FileDropZone](/04-components/upload/file-drop-zone) hochgeladen wurden.
+
+<LiveCodeEditor example="fileDropZone" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

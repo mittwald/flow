@@ -46,6 +46,11 @@ test.each(testEnvironments)(
           </Link>
           <Link>Link</Link>
         </NavigationGroup>
+        <NavigationGroup collapsable defaultExpanded={false}>
+          <Label>Collapsed</Label>
+          <Link>Link</Link>
+          <Link>Link</Link>
+        </NavigationGroup>
       </Navigation>,
     );
 
@@ -55,5 +60,39 @@ test.each(testEnvironments)(
     await trigger.click();
 
     await testScreenshot("Navigation - collapsed");
+  },
+);
+
+test.each(testEnvironments)(
+  "Navigation in a narrow container (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      ColumnLayout,
+      Navigation,
+      Link,
+      AlertBadge,
+      Badge,
+      IconStar,
+      Text,
+    },
+  }) => {
+    await render(
+      <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
+        <Navigation>
+          <Link>
+            Galactic Empire<AlertBadge status="warning">Deprecated</AlertBadge>
+          </Link>
+          <Link>
+            <IconStar />
+            <Text>Rebel Alliance</Text>
+            <Badge>Neu</Badge>
+          </Link>
+        </Navigation>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("Navigation - narrow container");
   },
 );

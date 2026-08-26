@@ -2,7 +2,6 @@ import {
   Button,
   ContextualHelp,
   ContextualHelpTrigger,
-  Heading,
   Label,
   TextArea,
   Text,
@@ -11,10 +10,9 @@ import {
 <TextArea>
   <Label>
     Public Key
-    <ContextualHelpTrigger>
+    <ContextualHelpTrigger subject="Public Key">
       <Button />
       <ContextualHelp>
-        <Heading>Weitere Informationen</Heading>
         <Text>
           Hier gibt es weitere Informationen, die zu lang
           für die FieldDescription sind.

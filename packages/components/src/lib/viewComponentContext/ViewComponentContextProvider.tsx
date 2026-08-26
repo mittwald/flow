@@ -2,6 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
 import { useContext } from "react";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
+import { markViewComponents } from "@/components/ComponentUsageProvider";
 
 interface Props extends PropsWithChildren {
   components: Partial<FlowViewComponents>;
@@ -15,7 +16,7 @@ export const ViewComponentContextProvider: FC<Props> = (props) => {
   const mergedContext = useMemo(
     () => ({
       ...parentContext,
-      ...components,
+      ...markViewComponents(components),
     }),
     [parentContext, components],
   );

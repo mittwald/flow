@@ -18,3 +18,19 @@ icon:
     value: "{success.color.900}"
   unavailable-color:
     value: "{unavailable.color.800}"
+  blue-color:
+    value: "{primary.color.1000}"
+  violet-color:
+    value: "{color.soft-contrast-violet.800}"
+  teal-color:
+    value: "{color.super-teal.800}"
+  lilac-color:
+    value: "{color.bright-lilac.800}"
+  dark-color:
+    value: "{dark-plain-content-color}"
+  light-color:
+    value: "{light-plain-content-color}"
+  dark-static-color:
+    value: "{dark-static-plain-content-color}"
+  light-static-color:
+    value: "{light-static-plain-content-color}"

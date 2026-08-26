@@ -80,8 +80,10 @@ React is a genuine runtime peer in every package.
 
 - **All type-level (TypeScript) changes.** The type surface is best-effort, not
   semver-protected. Even removing/renaming an exported type or narrowing a
-  prop's accepted type is not, on its own, breaking. (Notable type changes are
-  still called out in the changelog.)
+  prop's accepted type is not, on its own, breaking. A type break does not force
+  a Major on its own — but a **deliberate** (even small) type-breaking change
+  ships a **migration note in the commit body and in the release notes**: not
+  merely a mention that something changed, but how consumers adapt.
 - **Visual appearance.**
 - **Internal DOM structure.**
 - **CSS class names.**
@@ -137,8 +139,10 @@ These two statements are a launch requirement for the 1.0.0 docs, not optional.
 - **A CI guard for the version contract:** fail a PR that raises `engines.node`
   or narrows a `react` peer range without a breaking-change marker (`feat!:` /
   `BREAKING CHANGE`). This would have caught the `>=24` floor bump that shipped
-  as a `fix` in #2728. Composes with the RFC #2711 routing guard. Not yet
-  implemented.
+  as a `fix` in #2728. Composes with the RFC #2711 routing guard.
+  **Implemented** in #2752 (`.github/scripts/version-contract-guard.mjs`, wired
+  into `commit-guard.yml`); currently dormant until the `next` branch exists
+  (pre-1.0.0-cut).
 - The **one-time API review** of the ~110 `public.ts` exports + `flr-universal`
   props before the cut (RFC #2711, "The 1.0.0 cut") — the last cheap chance to
   fix names/props/types before they go under this contract.

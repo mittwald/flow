@@ -28,7 +28,8 @@ export const TableCell: FC<TableCellProps> = (props) => {
 
   const rootClassName = clsx(
     styles.cell,
-    styles[`horizontal-align-${horizontalAlign}`],
+    horizontalAlign !== "start" &&
+      styles[`horizontal-align-${horizontalAlign}`],
     className,
   );
 

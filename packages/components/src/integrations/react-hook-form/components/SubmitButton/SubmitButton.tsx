@@ -12,7 +12,7 @@ export const SubmitButton: FC<SubmitButtonProps> = (props) => {
   const { showFeedback, ...buttonProps } = props;
   return (
     <FormAction submit showFeedback={showFeedback}>
-      <ButtonView color="accent" {...buttonProps} />
+      <ButtonView color="success" {...buttonProps} />
     </FormAction>
   );
 };

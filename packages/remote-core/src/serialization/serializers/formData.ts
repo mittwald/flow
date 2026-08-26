@@ -6,8 +6,7 @@ import {
 } from "@/serialization/serializers";
 
 type SerializedFormDataValue =
-  | FormDataEntryValue
-  | Awaited<ReturnType<typeof fileSerialize>>;
+  FormDataEntryValue | Awaited<ReturnType<typeof fileSerialize>>;
 type SerializedFormDataEntries = [string, SerializedFormDataValue][];
 
 export const formDataSerializer = new Serializer<

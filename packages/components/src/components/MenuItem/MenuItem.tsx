@@ -93,20 +93,16 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
           : "isIdle",
   );
 
-  const StateIconComponent = isSucceeded
-    ? IconSucceeded
-    : isFailed
-      ? IconFailed
-      : isPending
-        ? LoadingSpinner
-        : undefined;
+  const stateIconElement = isSucceeded ? (
+    <IconSucceeded color="success" />
+  ) : isFailed ? (
+    <IconFailed color="danger" />
+  ) : isPending ? (
+    <LoadingSpinner />
+  ) : undefined;
 
-  const stateIcon = StateIconComponent && (
-    <div className={styles.stateIcon}>
-      <StateIconComponent
-        status={isFailed ? "danger" : isSucceeded ? "success" : undefined}
-      />
-    </div>
+  const stateIcon = stateIconElement && (
+    <div className={styles.stateIcon}>{stateIconElement}</div>
   );
 
   return (

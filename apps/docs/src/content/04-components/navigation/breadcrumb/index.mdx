@@ -1,9 +1,41 @@
 ---
 component: Breadcrumb
 description:
-  Eine Breadcrumb ist ein Navigationselement, das Usern Orientierung bietet,
-  indem es die aktuelle Position sowie die übergeordneten Navigationsebenen
-  anzeigt.
+  Eine Breadcrumb zeigt die aktuelle Position sowie übergeordnete
+  Navigationsebenen an.
 ---
 
-<LiveCodeEditor editorDisabled stretch />
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Wähle einen sinnvollen Startpunkt. Im mStudio bezieht sich die Breadcrumb zum
+  Beispiel auf die Navigation innerhalb eines Projekts.
+- Bilde die Navigationshierarchie exakt ab. Ein Beispiel ist „Projekt > Apps >
+  App“.
+- Halte die Zahl der Ebenen überschaubar. Ab etwa fünf Ebenen verlieren User die
+  Übersicht.
+- Verwende generische Bezeichnungen wie „App“ statt konkreter Namen. Dynamische
+  Namen verlängern die Breadcrumb unnötig, generische Begriffe halten die
+  Navigation stabil und lesbar.
+
+---
+
+# Color
+
+Zusätzlich zur Standard-Color kann die Breadcrumb in **Light** und **Dark**
+dargestellt werden, um auf farbigen oder dekorativen Hintergründen ausreichend
+Kontrast zu erreichen. Mehr zur richtigen Verwendung von Light und Dark findest
+du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed stretch />
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

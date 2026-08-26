@@ -31,7 +31,8 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
   } = props;
   const rootClassName = clsx(
     styles.column,
-    styles[`horizontal-align-${horizontalAlign}`],
+    horizontalAlign !== "start" &&
+      styles[`horizontal-align-${horizontalAlign}`],
     className,
   );
 

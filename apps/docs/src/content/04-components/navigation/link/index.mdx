@@ -1,9 +1,124 @@
 ---
 component: Link
 description:
-  Ein Link dient in erster Linie dazu, den User zu einer anderen Seite zu
-  navigieren. Darüber hinaus kann er auch einen Download starten oder zu einem
-  bestimmten Ankerpunkt auf der Seite führen.
+  Ein Link navigiert zu einer anderen Seite, einem Anker oder startet Downloads.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Nutze Links zum Navigieren und [Buttons](/04-components/actions/button) für
+  Aktionen. Eine Ausnahme können hervorgehobene Call-to-Actions sein, bei denen
+  ein Button-ähnliches Erscheinungsbild für eine Navigation sinnvoll ist.
+- Halte den Linktext kurz, prägnant und in seiner Absicht klar erkennbar.
+- Ergänze ein `aria-label`, wenn der Linktext allein nicht eindeutig ist.
+- Öffne externe Links in einem neuen Tab, interne im gleichen.
+
+## Link vs. Button
+
+Verwende für Navigation bevorzugt Links und für Aktionen Buttons. Eine Ausnahme
+können hervorgehobene
+[Call-to-Actions](/04-components/navigation/link#kombiniere-mit-button) sein,
+bei denen ein Button-ähnliches Erscheinungsbild für eine Navigation sinnvoll
+ist.
+
+<DoAndDont>
+  <Plain heading="Verwende Links, um z. B. ...">
+    - zu einer anderen Seite zu navigieren.
+    - zu einem Anker auf der Seite zu scrollen.
+    - eine externe Seite zu öffnen.
+    - einen Download zu starten.
+
+  </Plain>
+
+  <Plain heading="Verwende Buttons, um z. B. ...">
+    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
+    - Formulare zu speichern oder zurückzusetzen.
+    - in einem [Modal](/04-components/overlays/modal) Aktionen auszuwählen.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Color
+
+Auf farbigen oder dekorativen Hintergründen kann der Link in **Light** und
+**Dark** dargestellt werden, um ausreichend Kontrast zu erreichen. Mehr zur
+richtigen Verwendung von Light und Dark findest du in den Foundations unter
+[Color](/02-foundations/01-design/02-colors#light-und-dark-color).
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+---
+
+# Disabled
+
+Nutze das Property `isDisabled`, um einen Link als disabled darzustellen. Achte
+dabei darauf, dass aus dem Kontext klar wird, warum der Link gerade nicht zur
+Verfügung steht.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Inline
+
+Links innerhalb des `<Text />`-Tags werden automatisch als Inline Link
+gerendert.
+
+<LiveCodeEditor example="inlineText" editorCollapsed stretch />
+
+---
+
+# Externe Links und Downloads
+
+Interne Links öffnen sich immer in dem Tab, in dem der User sich gerade
+befindet. Der User kann jedoch selbst entscheiden, ob er den Link lieber in
+einem neuen Tab öffnen möchte.
+
+## Externer Link
+
+Externe Links – also Verweise auf eine andere Domain – öffnen sich immer in
+einem neuen Tab. Sobald `target="_blank"` gesetzt ist, wird automatisch das
+`IconExternalLink` angezeigt, um dieses Verhalten zu verdeutlichen.
+
+<LiveCodeEditor example="external" editorCollapsed />
+
+## Download
+
+Das `IconDownload` zeigt an, dass es sich um einen Download-Link handelt. Das
+Icon wird automatisch neben dem Link angezeigt, wenn das `download` Property
+gesetzt ist.
+
+<LiveCodeEditor example="download" editorCollapsed />
+
+---
+
+# Kombiniere mit …
+
+## Section
+
+Platziere einen Link im Header einer [Section](/04-components/structure/section)
+neben der Heading, um ihn inhaltlich mit der Section zu verknüpfen.
+
+<LiveCodeEditor example="position1" editorCollapsed />
+
+## Button
+
+Für hervorgehobene Call-to-Actions, bei denen ein Button-ähnliches
+Erscheinungsbild für eine Navigation sinnvoll ist, kann ein
+[Button](/04-components/actions/button) im Link platziert werden.
+
+<LiveCodeEditor example="button" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

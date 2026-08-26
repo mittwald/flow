@@ -25,11 +25,22 @@ export interface OverlayProps
   isDismissable?: boolean;
   /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
+  /** Whether the overlay is open. Use it to control the overlay state. */
   isOpen?: boolean;
+  /**
+   * Whether the overlay is open initially. Use it for an uncontrolled overlay.
+   *
+   * @default false
+   */
   isDefaultOpen?: boolean;
+  /** Called when the overlay is opened. */
   onOpen?: OverlayOpenHandler;
+  /** Called when the overlay is closed. */
   onClose?: OverlayCloseHandler;
+  /** Called with the new open state whenever the overlay is opened or closed. */
   onOpenChange?: OverlayOpenStateHandler;
+  /** Whether closing the overlay must be confirmed. */
+  confirmOnClose?: boolean;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {

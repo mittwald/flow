@@ -149,6 +149,7 @@
       }
 
       &[disabled],
+      &[data-disabled],
       &.ariaDisabled,
       &.isPending,
       &.isFailed,
@@ -162,7 +163,7 @@
   }
 
   @include variant(primary, solid);
-  @include variant(accent, solid);
+  @include variant(success, solid);
   @include variant(danger, solid);
   @include variant(secondary, solid);
   @include variant(dark, solid);
@@ -170,7 +171,7 @@
   @include variant(dark-static, solid);
   @include variant(light-static, solid);
   @include variant(primary, plain);
-  @include variant(accent, plain);
+  @include variant(success, plain);
   @include variant(danger, plain);
   @include variant(secondary, plain);
   @include variant(dark, plain);
@@ -178,7 +179,7 @@
   @include variant(dark-static, plain);
   @include variant(light-static, plain);
   @include variant(primary, soft);
-  @include variant(accent, soft);
+  @include variant(success, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
   @include variant(dark, soft);
@@ -186,7 +187,7 @@
   @include variant(dark-static, soft);
   @include variant(light-static, soft);
   @include variant(primary, outline);
-  @include variant(accent, outline);
+  @include variant(success, outline);
   @include variant(danger, outline);
   @include variant(secondary, outline);
   @include variant(dark, outline);
@@ -204,6 +205,7 @@
         );
 
         &[disabled],
+        &[data-disabled],
         &.ariaDisabled,
         &.isPending,
         &.isFailed {
@@ -216,7 +218,7 @@
   }
 
   @include outline(primary, outline);
-  @include outline(accent, outline);
+  @include outline(success, outline);
   @include outline(danger, outline);
   @include outline(secondary, outline);
   @include outline(dark, outline);

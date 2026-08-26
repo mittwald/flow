@@ -1,9 +1,41 @@
 ---
 component: Switch
-description:
-  Mit einem Switch können User Optionen ein- oder ausschalten. Die Component
-  wird normalerweise verwendet, um bestimmte Einstellungen zu aktivieren oder zu
-  deaktivieren.
+description: Ein Switch schaltet eine Option unmittelbar ein oder aus.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Übernimm Änderungen sofort, ohne zusätzlichen Speichern-Button.
+- Beschreibe die Funktion mit einem klaren, prägnanten Label, meist ein bis drei
+  Wörter.
+- Halte die Beschriftung unabhängig vom Zustand des Switches gleich.
+
+---
+
+# Label-Position: Links
+
+Die Positionierung des Labels sollte sich am Seitenlayout orientieren. Steht der
+Switch rechtsbündig, sollte die Beschriftung links davor platziert werden. So
+erfasst der User zuerst den Zweck, bevor die Aktion ausgeführt wird.
+
+<LiveCodeEditor example="leading-label" editorCollapsed />
+
+---
+
+# Disabled
+
+In Ausnahmefällen kann ein deaktivierter Switch verwendet werden, um eine
+Funktion temporär als nicht verfügbar darzustellen, ohne diesen vollständig aus
+der Oberfläche zu entfernen.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

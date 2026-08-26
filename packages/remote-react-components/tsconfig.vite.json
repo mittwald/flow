@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "types": ["@vitest/browser/providers/playwright", "node"]
+    "composite": false,
+    "noEmit": true,
+    "rootDir": "${configDir}/../..",
+    "types": ["@vitest/browser-playwright", "node"]
   },
   "extends": "./tsconfig.json",
-  "include": ["./vite.*.ts"]
+  "include": ["${configDir}/vite*.ts"]
 }

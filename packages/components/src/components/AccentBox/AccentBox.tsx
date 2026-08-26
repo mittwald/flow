@@ -25,8 +25,7 @@ const accentBoxBackgroundColors = [
 
 type AccentBoxBackgroundColor = (typeof accentBoxBackgroundColors)[number];
 type AccentBoxWithCustomBackgroundColor =
-  | AccentBoxBackgroundColor
-  | (string & {});
+  AccentBoxBackgroundColor | (string & {});
 
 function isFlowColor(
   something: unknown,
@@ -74,7 +73,7 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   const defaultColor =
     (colorFromProps as unknown as string) === "gradient" ||
     backgroundColor === "gradient"
-      ? "dark-static"
+      ? "dark"
       : "default";
 
   const color = colorFromProps ?? defaultColor;

@@ -2,6 +2,11 @@
 
 import { HostRenderErrorBoundary } from "@/components/HostRenderErrorBoundary";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
+import {
+  toComponentUsageEvent,
+  type ComponentUsageHandler,
+} from "@/lib/componentUsage";
+import { getFlowComponentStatus } from "@mittwald/flow-react-components/internal";
 import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
@@ -27,7 +32,7 @@ import {
   useState,
 } from "react";
 import { useLanguage, useTheme } from "@mittwald/flow-react-components";
-import type { HostConfig } from "@mittwald/flow-core";
+import type { HostConfig } from "@mittwald/ext-bridge";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
@@ -36,6 +41,7 @@ export interface RemoteRendererBrowserProps {
   onNavigationStateChanged?: (state: NavigationState) => void;
   onConnected?: (event: RemoteReadyEvent) => void;
   onDeprecation?: (message: string) => void;
+  onComponentUsage?: ComponentUsageHandler;
   hostPathname?: string;
   extBridgeImplementation?: RemoteExtBridgeConnectionApi;
   /** Internal use only */
@@ -65,6 +71,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   // The two branches use disjoint sets of hooks, so the connection path lives
   // in a dedicated component. This keeps each component's hook order stable
   // (Rules of Hooks) while preserving the exact rendering of both paths.
+  // Note that the receiver path has no connection, so it reports no usage.
   if (remoteReceiverFromProps) {
     return (
       <RemoteRootRenderer
@@ -104,6 +111,7 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     onNavigationStateChanged,
     onConnected,
     onDeprecation,
+    onComponentUsage,
     hostPathname,
     remoteComponents,
   } = props;
@@ -157,6 +165,13 @@ const RemoteRendererConnected: FC<RemoteRendererConnectedProps> = (props) => {
     onError: setRemoteError,
     onNavigationStateChanged,
     onDeprecation,
+    onEvent: (event) => {
+      if (event.event === "ComponentRendered") {
+        onComponentUsage?.(
+          toComponentUsageEvent(event, getFlowComponentStatus),
+        );
+      }
+    },
   });
 
   const timeoutPromise = (message: string) =>

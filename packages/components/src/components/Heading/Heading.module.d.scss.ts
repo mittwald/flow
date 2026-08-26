@@ -1,0 +1,27 @@
+declare const classNames: {
+  readonly heading: "heading";
+  readonly danger: "danger";
+  readonly unavailable: "unavailable";
+  readonly dark: "dark";
+  readonly light: "light";
+  readonly "dark-static": "dark-static";
+  readonly "light-static": "light-static";
+  readonly headingText: "headingText";
+  readonly icon: "icon";
+  readonly headingContent: "headingContent";
+  readonly h1: "h1";
+  readonly h2: "h2";
+  readonly h3: "h3";
+  readonly h4: "h4";
+  readonly h5: "h5";
+  readonly h6: "h6";
+  readonly "size-xs": "size-xs";
+  readonly "size-s": "size-s";
+  readonly "size-m": "size-m";
+  readonly "size-l": "size-l";
+  readonly "size-xl": "size-xl";
+  readonly "size-xxl": "size-xxl";
+  readonly "wrap-wrap": "wrap-wrap";
+  readonly "wrap-balance": "wrap-balance";
+};
+export default classNames;

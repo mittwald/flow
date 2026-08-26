@@ -1,12 +1,13 @@
 import type { ReactCodeMirrorProps } from "@uiw/react-codemirror";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
+import { useId } from "react";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { useControlledHostValueProps } from "@/lib/remote/useControlledHostValueProps";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./CodeEditor.module.scss";
 import { type CodeEditorLanguage } from "@/components/CodeEditor/languages";
@@ -18,19 +19,48 @@ import {
   useCodeEditorExtensions,
 } from "@/components/CodeEditor/hooks/useCodeEditorExtensions";
 import { CopyButton } from "@/components/CopyButton";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface CodeEditorProps
   extends
     Omit<ReactCodeMirrorProps, "theme" | "lang" | "basicSetup" | "readOnly">,
     CodeEditorSetup,
     FlowComponentProps {
+  /** The initial code of an uncontrolled editor. */
   defaultValue?: string;
+  /**
+   * Whether the code can be read but not edited.
+   *
+   * @default false
+   */
   isReadOnly?: boolean;
+  /**
+   * Whether the editor is displayed as invalid.
+   *
+   * @default false
+   */
   isInvalid?: boolean;
+  /** The elements class name. */
   className?: string;
+  /** The language the code is highlighted as. */
   language?: CodeEditorLanguage;
+  /**
+   * Whether a button to copy the code to the clipboard is shown.
+   *
+   * @default true
+   */
   copyable?: boolean;
+  /**
+   * Whether the field must be filled in. Only marks the editor as required for
+   * assistive technology — the editor does not validate itself.
+   *
+   * @default false
+   */
   isRequired?: boolean;
+  /**
+   * @internal Set by `<Field />` on every form field. The editor has no
+   * react-aria validation to forward it to and drops it.
+   */
   validationBehavior?: unknown;
 }
 
@@ -58,6 +88,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     copyable = true,
     height,
     minHeight,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
     ...rest
   } = useControlledHostValueProps(props);
 
@@ -74,11 +106,57 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
     className,
   );
 
+  const labelId = useId();
+  const descriptionId = useId();
+
+  /**
+   * The label and the field description are declared as children of the code
+   * editor, but must be rendered outside of the editor itself. They are
+   * tunneled out of the editor – just like the field error. Their ids are the
+   * ones the editor references.
+   */
+  const propsContext: PropsContext = {
+    ...fieldPropsContext,
+    Label: {
+      ...fieldPropsContext.Label,
+      id: labelId,
+      tunnel: { id: "label", component: "CodeEditor" },
+    },
+    FieldDescription: {
+      ...fieldPropsContext.FieldDescription,
+      id: descriptionId,
+      tunnel: { id: "fieldDescription", component: "CodeEditor" },
+    },
+  };
+
   const enabledExtensions = useCodeEditorExtensions(language, extensions, {
     showLineNumbers: showLineNumbers,
     showCodeIndentationMakers: showCodeIndentationMakers,
     showCodeFolding: showCodeFolding,
     showLinterMarkers: showLinterMarkers,
+  });
+
+  /**
+   * The editable element of CodeMirror is the `.cm-content` element – not the
+   * root element the props are applied to. Its ARIA attributes are set through
+   * the content attributes facet.
+   *
+   * The label reference only resolves when a label is given. Without one, an
+   * `aria-label` names the editor instead – the name computation skips
+   * references that point at nothing.
+   */
+  const labelledBy = [ariaLabelledBy, labelId].filter(Boolean).join(" ");
+
+  const describedBy =
+    [descriptionId, fieldProps["aria-describedby"]].filter(Boolean).join(" ") ||
+    undefined;
+
+  const contentAttributes = EditorView.contentAttributes.of({
+    "aria-labelledby": labelledBy,
+    ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
+    ...(describedBy ? { "aria-describedby": describedBy } : {}),
+    ...(isRequired ? { "aria-required": "true" } : {}),
+    ...(isInvalid ? { "aria-invalid": "true" } : {}),
   });
 
   const localRef = useObjectRef(ref);
@@ -87,7 +165,8 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
 
   return (
     <div className={rootClassName}>
-      <PropsContextProvider props={fieldPropsContext}>
+      <PropsContextProvider props={propsContext}>
+        <UiComponentTunnelExit id="label" component="CodeEditor" />
         <FieldErrorCaptureContext>
           <CodeMirror
             {...rest}
@@ -101,8 +180,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
               highlightSelectionMatches: false,
             }}
             theme={defaultLightTheme}
-            aria-required={isRequired}
-            aria-invalid={isInvalid}
+            data-invalid={isInvalid || undefined}
             readOnly={isReadOnly}
             className={clsx(styles.codeMirror, isReadOnly && styles.readonly)}
             ref={(codeMirrorRef) => {
@@ -110,7 +188,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
                 localRef.current = codeMirrorRef.editor;
               }
             }}
-            extensions={enabledExtensions}
+            extensions={[...enabledExtensions, contentAttributes]}
             height={height ?? minHeight}
           >
             {copyable && (
@@ -124,6 +202,7 @@ export const CodeEditor = flowComponent("CodeEditor", (props) => {
             {children}
           </CodeMirror>
         </FieldErrorCaptureContext>
+        <UiComponentTunnelExit id="fieldDescription" component="CodeEditor" />
         <FieldErrorView />
       </PropsContextProvider>
     </div>

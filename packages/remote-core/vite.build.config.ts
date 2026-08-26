@@ -1,6 +1,6 @@
 import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
-import dts from "vite-plugin-dts";
+import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
 
@@ -10,7 +10,7 @@ export default mergeConfig(
     plugins: [
       preserveDirectives(),
       externalizeDeps({
-        except: ["@mittwald/flow-core", "@quilted/threads"],
+        except: ["@quilted/threads"],
       }),
       dts({
         include: ["src"],

@@ -7,6 +7,7 @@
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
+      "!{projectRoot}/src/**/*.module.d.scss.ts",
       "!{projectRoot}/src/status/component-status.json",
       "!{projectRoot}/src/status/componentStatus.ts",
       "!{projectRoot}/src/**/*.yaml"
@@ -20,6 +21,7 @@
       "dependsOn": [
         "build:icons",
         "build:remote-components",
+        "build:scss-types",
         "build:status-registry",
         "^build"
       ],
@@ -57,6 +59,15 @@
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
       ]
     },
+    "build:scss-types": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.scss",
+        "{projectRoot}/dev/scss-types/**/*",
+        "{projectRoot}/vite.config.ts"
+      ],
+      "outputs": ["{projectRoot}/src/**/*.module.d.scss.ts"]
+    },
     "build:status-registry": {
       "cache": true,
       "dependsOn": ["build:docs-properties"],
@@ -73,6 +84,26 @@
       "outputs": [
         "{projectRoot}/src/status/component-status.json",
         "{projectRoot}/src/status/componentStatus.ts"
+      ]
+    },
+    "test:compile": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
+      ]
+    },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:remote-components",
+        "build:scss-types",
+        "build:status-registry"
       ]
     },
     "test:browser": {

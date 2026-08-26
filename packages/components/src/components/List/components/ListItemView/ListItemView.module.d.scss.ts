@@ -1,0 +1,26 @@
+declare const classNames: {
+  readonly view: "view";
+  readonly checkboxContainer: "checkboxContainer";
+  readonly content: "content";
+  readonly topContent: "topContent";
+  readonly bottomContent: "bottomContent";
+  readonly heading: "heading";
+  readonly header: "header";
+  readonly subTitle: "subTitle";
+  readonly text: "text";
+  readonly badge: "badge";
+  readonly listView: "listView";
+  readonly columnLayout: "columnLayout";
+  readonly contentWrapper: "contentWrapper";
+  readonly title: "title";
+  readonly action: "action";
+  readonly avatar: "avatar";
+  readonly "flow--heading--heading-content": "flow--heading--heading-content";
+  readonly tileView: "tileView";
+  readonly avatarContainer: "avatarContainer";
+  readonly "flow--avatar--icon": "flow--avatar--icon";
+  readonly "flow--avatar--initials": "flow--avatar--initials";
+  readonly "flow--checkbox": "flow--checkbox";
+  readonly "flow--checkbox--icon": "flow--checkbox--icon";
+};
+export default classNames;

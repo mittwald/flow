@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -30,11 +31,7 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Flex gap="s">
                 <Badge color={color}>{firstLetterToUppercase(color)}</Badge>
                 <Badge color={color} onClose={() => console.log("onClose")}>

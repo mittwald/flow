@@ -5,4 +5,57 @@ description:
   Syntax-Highlighting.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Nutze den CodeBlock nur für Inhalte, die länger als eine Zeile sind.
+- Zeige bei langen Inhalten Zeilennummern an. Das verbessert die Orientierung.
+- Mach den Inhalt nur kopierbar, wenn er sich an anderer Stelle weiterverwenden
+  lässt.
+
+---
+
+# Mit Zeilennummern
+
+Wird das `showLineNumbers` Property gesetzt, werden Zeilennummern angezeigt.
+
+<LiveCodeEditor example="lineNumbers" editorCollapsed />
+
+---
+
+# Mit Kopierfunktion
+
+Mit dem Property `copyable` erhält der CodeBlock eine Kopierfunktion. Dadurch
+kann der User den gesamten Inhalt des CodeBlocks in die Zwischenablage kopieren.
+Eventuelle Zeilennummern werden nicht mit kopiert.
+
+<LiveCodeEditor example="copyable" editorCollapsed />
+
+---
+
+# Mehr anzeigen
+
+Über die Property `truncateLines` lässt sich die Höhe des CodeBlocks begrenzen.
+Ist sie `true`, wird der Inhalt nach dem Standardwert gekürzt. Bei einer Zahl
+erfolgt die Kürzung nach der angegebenen Zeilenanzahl. Überschreitet der Code
+diese Länge, erscheint automatisch ein „Mehr anzeigen“-Button.
+
+<LiveCodeEditor example="truncateLines" editorCollapsed />
+
+---
+
+# Mit Children
+
+Um den Inhalt des CodeBlocks frei gestalten zu können, gibt es die Möglichkeit
+anstatt des `code` Properties Children zu nutzen.
+
+<LiveCodeEditor example="children" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

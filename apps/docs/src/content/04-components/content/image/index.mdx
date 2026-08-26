@@ -5,4 +5,47 @@ description:
   einbinden.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle Bilder, die zum Kontext und zur Gestaltung passen.
+- Beschreibe Inhalt oder Zweck über einen aussagekräftigen `alt`-Text. Rein
+  dekorative Bilder erhalten ein leeres `alt`-Attribut (`alt=""`).
+- Optimiere die Größenverhältnisse für kurze Ladezeiten.
+- Wähle Auflösung und Seitenverhältnis konsistent.
+- Setze bei geringem Kontrast zum Hintergrund eine sichtbare Border.
+- Verzichte möglichst auf Text im Bild. Screenreader erfassen ihn nicht.
+- Nutze für verschiedene Bildschirmgrößen das `srcSet`-Attribut. Es wählt je
+  nach Pixeldichte automatisch die passende Auflösung (siehe
+  [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#resolution_switching_same_size_different_resolutions:~:text=Resolution%20switching%3A%20Same%20size%2C%20different%20resolutions)).
+
+---
+
+# Border
+
+Mit der Property `withBorder` erhält die Image-Component eine Border und
+zusätzlich einen Border Radius. Das ist insbesondere bei Bildern mit geringem
+Kontrast zum Hintergrund von Vorteil, da es die visuelle Abgrenzung verbessert
+und die Bildwahrnehmung unterstützt.
+
+<LiveCodeEditor example="border" editorCollapsed />
+
+---
+
+# Fixes Seitenverhältnis
+
+Die Property `aspectRatio` definiert das Seitenverhältnis der Image-Component.
+Weicht das Seitenverhältnis des eingebetteten Bildes ab – etwa durch eine
+größere Höhe oder Breite –, wird das Bild zentriert, und überstehende Bereiche
+außerhalb des festgelegten Verhältnisses werden ausgeblendet.
+
+<LiveCodeEditor example="aspectRatio" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

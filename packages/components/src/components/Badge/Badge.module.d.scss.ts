@@ -1,0 +1,23 @@
+declare const classNames: {
+  readonly badge: "badge";
+  readonly content: "content";
+  readonly button: "button";
+  readonly close: "close";
+  readonly scope: "scope";
+  readonly value: "value";
+  readonly neutral: "neutral";
+  readonly disabled: "disabled";
+  readonly blue: "blue";
+  readonly navy: "navy";
+  readonly violet: "violet";
+  readonly teal: "teal";
+  readonly lilac: "lilac";
+  readonly green: "green";
+  readonly orange: "orange";
+  readonly red: "red";
+  readonly dark: "dark";
+  readonly light: "light";
+  readonly "dark-static": "dark-static";
+  readonly "light-static": "light-static";
+};
+export default classNames;

@@ -1,4 +1,10 @@
-import { action, makeObservable, observable } from "mobx";
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  runInAction,
+} from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useStatic } from "@/lib/hooks/useStatic";
 import { useEffect, useRef, type DependencyList } from "react";
@@ -9,9 +15,7 @@ export type OverlayOpenHandler = () => unknown;
 export type OverlayCloseHandler = () => unknown;
 export type OverlayOpenStateHandler = (isOpen: boolean) => unknown;
 type AnyOverlayOpenStateHandler =
-  | OverlayOpenHandler
-  | OverlayCloseHandler
-  | OverlayOpenStateHandler;
+  OverlayOpenHandler | OverlayCloseHandler | OverlayOpenStateHandler;
 
 type DisposerFn = () => void;
 
@@ -33,6 +37,11 @@ export interface OverlayControllerOptions {
   onOpen?: OverlayOpenHandler;
   onClose?: OverlayCloseHandler;
   onOpenChange?: OverlayOpenStateHandler;
+  /**
+   * Whether closing the overlay must be confirmed. `undefined` means "no
+   * opinion": the value is not contributed at all, so other sources (e.g. a
+   * `Modal`'s `confirmOnClose` prop or a dirty `Form`) still decide.
+   */
   confirmOnClose?: boolean;
 }
 
@@ -50,32 +59,52 @@ export class OverlayController {
 
   public showConfirmationModal = false;
   public closeIsConfirmed = false;
-  public confirmOnCloseEnabled: boolean;
+  private readonly confirmOnCloseFromOptions: boolean;
+  /**
+   * Every mounted component that has an opinion on close confirmation
+   * contributes one entry here – e.g. a `Modal` with a `confirmOnClose` prop
+   * and a `Form` tracking its dirty state. Combining them instead of assigning
+   * a single flag keeps them from overwriting each other.
+   */
+  private confirmOnCloseSources = observable.map<object, boolean>();
+  /**
+   * Active grants that allow closing without a confirmation. Each entry is
+   * scoped to an ongoing operation that legitimately closes the overlay – e.g.
+   * a `Form` submit – and is dropped again when that operation has finished, so
+   * an operation that does _not_ close the overlay leaves the confirmation
+   * armed.
+   */
+  private closeWithoutConfirmationGrants = new Set<object>();
 
   public constructor(options: ConstructorOptions = {}) {
     makeObservable(this, {
       isOpen: observable,
       isContentSuspended: observable,
       showConfirmationModal: observable,
+      confirmOnCloseEnabled: computed,
       open: action.bound,
       close: action.bound,
       toggle: action.bound,
       setOpen: action.bound,
       setIsContentSuspended: action.bound,
       confirmClose: action.bound,
+      cancelConfirmation: action.bound,
     });
     const { isDefaultOpen = false, confirmOnClose = false } = options;
     this.isOpen = isDefaultOpen;
-    this.confirmOnCloseEnabled = confirmOnClose;
+    this.confirmOnCloseFromOptions = confirmOnClose;
+  }
+
+  /** Whether closing this overlay currently requires a confirmation. */
+  public get confirmOnCloseEnabled(): boolean {
+    if (this.confirmOnCloseSources.size === 0) {
+      return this.confirmOnCloseFromOptions;
+    }
+    return Array.from(this.confirmOnCloseSources.values()).some(Boolean);
   }
 
   public useUpdateOptions(options: OverlayControllerOptions = {}): void {
-    const {
-      onOpen,
-      onClose,
-      onOpenChange,
-      confirmOnClose = this.confirmOnCloseEnabled,
-    } = options;
+    const { onOpen, onClose, onOpenChange, confirmOnClose } = options;
 
     this.useOnHandler(onOpen, (h) =>
       this.addOpenStateHandler(h, this.onOpenHandlers),
@@ -87,7 +116,32 @@ export class OverlayController {
       this.addOpenStateHandler(h, this.onOpenChangeHandlers),
     );
 
-    this.confirmOnCloseEnabled = confirmOnClose;
+    this.useConfirmOnCloseSource(confirmOnClose);
+  }
+
+  /**
+   * Registers the calling component as a close confirmation source for as long
+   * as it is mounted. `undefined` contributes nothing at all.
+   */
+  private useConfirmOnCloseSource(confirmOnClose: boolean | undefined): void {
+    const source = useStatic((): object => ({}));
+
+    useEffect(() => {
+      if (confirmOnClose === undefined) {
+        this.removeConfirmOnCloseSource(source);
+        return;
+      }
+      this.setConfirmOnCloseSource(source, confirmOnClose);
+      return () => this.removeConfirmOnCloseSource(source);
+    }, [this, source, confirmOnClose]);
+  }
+
+  private setConfirmOnCloseSource(source: object, confirmOnClose: boolean) {
+    runInAction(() => this.confirmOnCloseSources.set(source, confirmOnClose));
+  }
+
+  private removeConfirmOnCloseSource(source: object) {
+    runInAction(() => this.confirmOnCloseSources.delete(source));
   }
 
   /**
@@ -203,14 +257,22 @@ export class OverlayController {
 
     const { bypassConfirmation = false } = options;
 
-    if (
-      toOpen === false &&
-      this.confirmOnCloseEnabled &&
-      !this.closeIsConfirmed &&
-      !bypassConfirmation
-    ) {
-      this.showConfirmationModal = true;
-      return;
+    if (toOpen === false) {
+      // The confirmation is a one-shot permission for exactly this close
+      // attempt – consume it here instead of only when a close succeeds, so it
+      // cannot survive an aborted close and disarm later attempts.
+      const closeIsConfirmed = this.closeIsConfirmed;
+      this.closeIsConfirmed = false;
+
+      if (
+        this.confirmOnCloseEnabled &&
+        !closeIsConfirmed &&
+        this.closeWithoutConfirmationGrants.size === 0 &&
+        !bypassConfirmation
+      ) {
+        this.showConfirmationModal = true;
+        return;
+      }
     }
 
     let aborted: boolean;
@@ -225,7 +287,6 @@ export class OverlayController {
 
     if (!aborted) {
       this.isOpen = toOpen;
-      this.closeIsConfirmed = false;
     }
   }
 
@@ -245,8 +306,28 @@ export class OverlayController {
     return useSelector(() => this.showConfirmationModal);
   }
 
+  public useConfirmOnCloseEnabled() {
+    return useSelector(() => this.confirmOnCloseEnabled);
+  }
+
   public useConfirmationController() {
     return useCloseOverlayConfirmationController(this);
+  }
+
+  /**
+   * Allows closing this overlay without a confirmation until the returned
+   * disposer is called. Use it around an operation that may legitimately close
+   * the overlay – e.g. a `Form` submit, where a "discard unsaved changes?"
+   * prompt would be nonsense – and dispose it as soon as that operation has
+   * finished. An operation that ends without closing the overlay therefore
+   * leaves the confirmation armed (#2775).
+   */
+  public grantCloseWithoutConfirmation(): DisposerFn {
+    const grant = {};
+    this.closeWithoutConfirmationGrants.add(grant);
+    return () => {
+      this.closeWithoutConfirmationGrants.delete(grant);
+    };
   }
 
   public confirmClose(): void {

@@ -1,9 +1,78 @@
 ---
 component: Section
 description:
-  Eine Section erhöht die Übersichtlichkeit, indem sie den Content in vertikale
-  Teilbereiche mit festen Abständen gliedert. Zwischen mehreren Sections wird
-  automatisch ein Separator eingefügt, um die Bereiche optisch zu trennen.
+  Eine Section gliedert Content in Teilbereiche und trennt sie durch einen
+  Separator.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Gib jeder Section eine kurze, aussagekräftige
+  [Heading](/04-components/content/heading).
+- Stelle bei mehreren Sections die wichtigste nach oben. So sieht der User den
+  wichtigsten oder am häufigsten genutzten Content zuerst.
+- Setze Sections sparsam ein. Verteile umfangreichen Content sonst auf mehrere
+  Seiten oder eine [TabNavigation](/04-components/navigation/tab-navigation).
+- Beziehe AlertBadge, Badge und Actions immer auf ihre eigene Section.
+
+---
+
+# Mehrere Sections
+
+Werden mehrere Sections untereinander platziert, trennt sie automatisch ein
+[Separator](/04-components/structure/separator).
+
+<LiveCodeEditor example="multiple" editorCollapsed />
+
+## Sub-Headings
+
+Sections beginnen in der Regel mit einer
+H2-[Heading](/04-components/content/heading). Ist eine feinere Unterteilung
+nötig, platzierst du Headings auf niedrigerem Level (H3) direkt in der Section.
+Sie erhalten automatisch einen größeren Abstand zum darüberliegenden Content,
+statt durch einen Separator getrennt zu werden.
+
+<LiveCodeEditor example="sub-heading" editorCollapsed />
+
+---
+
+# SectionAction
+
+In der rechten oberen Ecke bietet die Section einen Bereich für Actions – die
+SectionAction. Dort kannst du einen [Link](/04-components/navigation/link),
+einen [Switch](/04-components/form-controls/switch),
+[Buttons](/04-components/actions/button) oder eine Kombination dieser Components
+platzieren.
+
+<LiveCodeEditor example="link" editorCollapsed />
+
+<LiveCodeEditor example="switch" editorCollapsed />
+
+Es lassen sich mehrere Buttons nebeneinander anzeigen. Werden jedoch mehr als
+zwei bis drei Actions nötig, behält die Hauptaktion ihren eigenen Button und
+alle weiteren wandern in ein [ContextMenu](/04-components/actions/context-menu).
+
+<LiveCodeEditor example="context-menu" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## AlertBadge und Badge
+
+Ergänze die [Heading](/04-components/content/heading) mit einem
+[AlertBadge](/04-components/status/alert-badge) oder einem
+[Badge](/04-components/status/badge), um den User schnell über den Status oder
+Metadaten des Inhalts einer Section zu informieren.
+
+<LiveCodeEditor example="alert-badge" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

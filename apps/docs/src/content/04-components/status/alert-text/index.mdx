@@ -1,9 +1,43 @@
 ---
 component: AlertText
 description:
-  AlertText informiert den User über das Ergebnis einer ihrer Aktionen. Im
-  Gegensatz zu Alert kann eine AlertText sehr nah an der Stelle platziert
-  werden, an der die Aktion stattgefunden hat
+  AlertText informiert über das Ergebnis einer Aktion, nah an der auslösenden
+  Stelle.
 ---
 
-<LiveCodeEditor editorDisabled />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle den Schweregrad passend zur Bedeutung der Meldung. Welcher Status wofür
+  steht, beschreibt das
+  [Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept).
+- Formuliere den Text klar, prägnant und lösungsorientiert. Verzichte auf
+  Fachbegriffe und Schuldzuweisungen und beachte die
+  [Content Guidelines für Fehlermeldungen](/02-foundations/03-content-guidelines/03-fehlermeldungen).
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
+
+- **Info** – Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+  erfordern.
+- **Warning** – Hinweise auf mögliche Risiken mit einer klaren
+  Handlungsempfehlung.
+- **Danger** – Akute Fehlerzustände oder kritische Probleme, die sofortige
+  Aufmerksamkeit erfordern.
+- **Success** – Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+- **Unavailable** – Zustände aufgrund von nicht verfügbaren oder gelöschten
+  Inhalten.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Properties
+
+<PropertiesTables />

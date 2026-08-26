@@ -1,8 +1,62 @@
 ---
 component: Table
 description:
-  Die Table zeigt Daten in Zeilen und Spalten. Sie hilft dabei, Informationen
-  schnell zu überblicken und Einträge zu vergleichen.
+  Die Table zeigt Daten in Zeilen und Spalten und macht Einträge vergleichbar.
 ---
 
-<LiveCodeEditor editorDisabled zoom={0.6} />
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Halte die Zahl der Spalten so gering wie möglich. Das erleichtert das Scannen.
+- Formuliere die Spaltenüberschriften kurz, eindeutig und prägnant.
+- Stelle pro Zelle nur eine Information dar.
+- Zeige Zahlen wie Geldbeträge oder Zeitwerte rechtsbündig an. Das fördert die
+  Vergleichbarkeit.
+
+---
+
+# Mit Footer
+
+Um die letzte Zeile der Table hervorzuheben (z. B. für eine Preisübersicht),
+kann `TableFooterRow` verwendet werden.
+
+<LiveCodeEditor example="withFooter" editorCollapsed />
+
+---
+
+# Ausrichtung
+
+## Vertikal zentriert
+
+Der Inhalt wird vertikal zentriert dargestellt, sodass er mittig zwischen oberem
+und unterem Zellenrand positioniert ist.
+
+<LiveCodeEditor example="vertically-centered" editorCollapsed />
+
+## Horizontal zentriert
+
+Der Inhalt wird horizontal zentriert ausgerichtet. Unabhängig von der
+Ausrichtung unterstützt die Table optional die Statusanzeigen `success` und
+`danger`.
+
+<LiveCodeEditor example="horizontally-centered" editorCollapsed />
+
+---
+
+# Feste Spaltenbreiten
+
+Setze `layout="fixed"` an der `Table` und weise einzelnen `TableColumn` über
+`width` eine feste Breite zu. Spalten ohne Breite teilen sich den restlichen
+Platz. Mit `minWidth` an der `Table` bleibt bei wenig Platz die Breite erhalten
+und die Tabelle scrollt horizontal, statt die Spalten zu stauchen.
+
+<LiveCodeEditor example="fixed-column-widths" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

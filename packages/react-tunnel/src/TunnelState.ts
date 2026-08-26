@@ -136,23 +136,27 @@ export class TunnelState {
     this.deleteChildrenFromMap(this.renderPhaseChildren, tunnelId, entryId);
   }
 
-  private takeRenderPhaseChildren(tunnelId: string) {
-    if (this.renderPhaseChildren.has(tunnelId)) {
-      const children = this.renderPhaseChildren.get(tunnelId)?.values();
-      if (typeof window !== "undefined") {
-        this.renderPhaseChildren.delete(tunnelId);
-      }
-      return children;
-    }
-  }
-
-  public getEntries(tunnelId = defaultId): TunnelEntries | undefined {
-    const renderPhaseChildren = this.takeRenderPhaseChildren(tunnelId);
-    const commitedChildren = this.committedChildren.get(tunnelId)?.values();
-    const tunnelEntries = commitedChildren ?? renderPhaseChildren;
+  // Pure read — never mutate during render. `getEntries` runs inside the
+  // (observer) `TunnelExit` render, and React 19 may invoke a render more than
+  // once before committing (StrictMode double-invoke, concurrent re-render), so
+  // a consume-on-read here broke SSR hydration. Render-phase children are only a
+  // bridge for the server render and the first (pre-effect) client render; the
+  // exit opts into them via `useRenderPhaseFallback` while `useIsSSR()` is true.
+  // After hydration the committed children are authoritative — even when empty —
+  // so an entry that never committed (suspended, then removed) leaves no stale
+  // content behind.
+  public getEntries(
+    tunnelId = defaultId,
+    useRenderPhaseFallback = false,
+  ): TunnelEntries | undefined {
+    const committedChildren = this.committedChildren.get(tunnelId)?.values();
+    const renderPhaseChildren = useRenderPhaseFallback
+      ? this.renderPhaseChildren.get(tunnelId)?.values()
+      : undefined;
+    const tunnelEntries = committedChildren ?? renderPhaseChildren;
 
     if (tunnelEntries) {
-      const committed = !!commitedChildren;
+      const committed = !!committedChildren;
       const entries = Array.from(tunnelEntries).sort(
         (first, second) => first.index - second.index,
       );
