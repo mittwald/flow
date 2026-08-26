@@ -79,8 +79,9 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
-  changes.
+- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
+  repo. It blocks the push, not the commit — unformatted files surface once the
+  commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
 
@@ -311,9 +312,10 @@ values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
 Importing `styles` gives per-class typed access from a generated
-`Badge.module.d.scss.ts` stub. For a dynamic class — a `string`-typed or runtime
-key — use a helper from `@/lib/scss/selectors` (`prefixedStyleClassname` /
-`styleClassname`), not an `as keyof typeof styles` cast.
+`Badge.module.d.scss.ts` stub. Indexing with a narrow union stays type-safe
+(`styles[color]`, ``styles[`size-${size}`]``). For a `string`-typed or runtime
+key use `styleClassname` from `@/lib/scss/selectors`, not an
+`as keyof typeof styles` cast.
 
 ### 3. Add the barrel `index.ts`
 
@@ -593,8 +595,7 @@ pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/vi
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
-you.
+Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for you.
 
 ```shell
 pnpm lint           # check with ESLint + Stylelint + Prettier
@@ -701,11 +702,9 @@ Target the wrong branch and the check fails with a message like
 `PR title is a 'feat' — features target 'next', not 'main'.`; fix it by
 retitling the PR or changing its base.
 
-> **Before the 1.0.0 cut**, the `next` and major lines don't exist yet, so
-> **everything targets `main`** and the routing check self-disables (it stays
-> dormant while there is no `next` branch). Once the lines exist, promotion and
-> sync branches — `next`, a major line (e.g. `2.x`), and `sync/*` — are exempt
-> so release PRs are never blocked.
+> Promotion and sync sources are exempt — `next`, a major line (e.g. `2.x`),
+> `release/*` and `sync/*` — because those PRs are _supposed_ to carry `feat:`
+> and breaking commits. Release PRs are never blocked by routing.
 
 ## Opening a pull request
 
@@ -753,8 +752,7 @@ This is Flow's two-line release model — see
 branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
 [RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
 model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
-forward-merge mechanics. (The `next` line and its publishing go live with the
-1.0.0 cut; until then every merge into `main` releases as it does today.)
+forward-merge mechanics.
 
 ## Getting help
 

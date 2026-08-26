@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+### Features
+
+* **SegmentedControl:** deprecate in favor of Tabs and RadioGroup ([#2903](https://github.com/mittwald/flow/issues/2903)) ([3f65b46](https://github.com/mittwald/flow/commit/3f65b46c638be332bebb686cdd3e151cd0b63939))
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+### Features
+
+* **ci:** add auto publish emergency stop ([#2928](https://github.com/mittwald/flow/issues/2928)) ([c93cce6](https://github.com/mittwald/flow/commit/c93cce65ed47900879cc69cfb5633276dbfa37cf))
+
+## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [0.2.0-alpha.1055](https://github.com/mittwald/flow/compare/0.2.0-alpha.1054...0.2.0-alpha.1055) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [0.2.0-alpha.1054](https://github.com/mittwald/flow/compare/0.2.0-alpha.1053...0.2.0-alpha.1054) (2026-08-25)
+
+### Bug Fixes
+
+* **docs:** make anchor links scroll to their heading ([#2881](https://github.com/mittwald/flow/issues/2881)) ([f0585c4](https://github.com/mittwald/flow/commit/f0585c47190cc7a39b5e4b5b1d9a10f936cb4f00)), closes [#2879](https://github.com/mittwald/flow/issues/2879)
+
+## [0.2.0-alpha.1053](https://github.com/mittwald/flow/compare/0.2.0-alpha.1052...0.2.0-alpha.1053) (2026-08-25)
+
+### Features
+
+* **ExtBridge:** declare context parameters and align config type with runtime ([#2889](https://github.com/mittwald/flow/issues/2889)) ([30871d6](https://github.com/mittwald/flow/commit/30871d6526be16d685fb056a6db4b0851ffea8ad)), closes [#2885](https://github.com/mittwald/flow/issues/2885) [#2885](https://github.com/mittwald/flow/issues/2885)
+
+## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
+
+### Bug Fixes
+
+* **ci:** list breaking changes in the changelog ([#2891](https://github.com/mittwald/flow/issues/2891)) ([f1fe177](https://github.com/mittwald/flow/commit/f1fe177ec096d3ddeee6e8df2cb2167749c4a056)), closes [#2883](https://github.com/mittwald/flow/issues/2883)
+
+# [0.2.0-alpha.1051](https://github.com/mittwald/flow/compare/0.2.0-alpha.1050...0.2.0-alpha.1051) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1050](https://github.com/mittwald/flow/compare/0.2.0-alpha.1049...0.2.0-alpha.1050) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1049](https://github.com/mittwald/flow/compare/0.2.0-alpha.1048...0.2.0-alpha.1049) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.1048](https://github.com/mittwald/flow/compare/0.2.0-alpha.1047...0.2.0-alpha.1048) (2026-08-25)
+
+### Bug Fixes
+
+* **Link:** stick link icon to last text segment ([#2869](https://github.com/mittwald/flow/issues/2869)) ([2d44edd](https://github.com/mittwald/flow/commit/2d44edd63bdea25bee2fabbff83203ea86e6f672))
+
 # [0.2.0-alpha.1047](https://github.com/mittwald/flow/compare/0.2.0-alpha.1046...0.2.0-alpha.1047) (2026-08-24)
 
 ### Features

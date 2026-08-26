@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+import postcssScss from "postcss-scss";
 import stylelint from "stylelint";
 import { describe, expect, test } from "vitest";
 
@@ -14,7 +15,10 @@ const lint = (code: string, codeFilename: string = componentStylesheet) =>
     .lint({
       code,
       codeFilename,
-      customSyntax: "postcss-scss",
+      // Pass the syntax module itself: stylelint resolves a bare specifier
+      // from the config's basedir (the repository root), where postcss-scss
+      // is not installed.
+      customSyntax: postcssScss,
       config: {
         plugins: [plugin],
         rules: { "flow/unlayered-third-party-only": true },

@@ -6,6 +6,14 @@ const eventRegex = /^on[A-Z]+.*/;
 const a11yRegex = /^aria-.+/;
 const optionalRegex = / \| (undefined|null)/g;
 
+/** An `@default: x` JSDoc tag keeps its colon in the generated metadata. */
+const normalizeDefaultValue = (value: unknown): string | null => {
+  if (typeof value !== "string") {
+    return null;
+  }
+  return value.replace(/^\s*:/, "").replace(/\s+/g, " ").trim() || null;
+};
+
 export default function loadProperties(name: string): Properties | null {
   const typeDocGenFile = (docGenFile ?? []) as unknown as ComponentDoc[];
   const componentDoc = typeDocGenFile.find(
@@ -28,7 +36,7 @@ export default function loadProperties(name: string): Properties | null {
       }
       return {
         name: prop.name,
-        default: prop.defaultValue ? prop.defaultValue.value : null,
+        default: normalizeDefaultValue(prop.defaultValue?.value),
         description: prop.description,
         required: prop.required,
         deprecated: prop.description.includes("@deprecated"),

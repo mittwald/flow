@@ -55,28 +55,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # Self-gating, same as forward-merge.yml and commit-guard.yml: there is no
-      # cascade to drift until `next` exists.
-      - name: Check whether the `next` branch exists yet
-        id: guard
-        run: |
-          set -euo pipefail
-          if git ls-remote --exit-code --heads \
-               "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::'next' branch does not exist yet — drift check dormant (pre-1.0.0-cut). Skipping."
-          fi
-
       - name: Checkout ⬇️
-        if: steps.guard.outputs.exists == 'true'
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           fetch-depth: 0
 
       - name: Compare `main` against `next` 🔍
-        if: steps.guard.outputs.exists == 'true'
         run: |
           set -euo pipefail
 

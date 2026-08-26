@@ -357,8 +357,9 @@
     "isNew": false
   },
   "@mittwald/flow-react-components#SegmentedControl": {
-    "level": "stable",
-    "isNew": false
+    "level": "deprecated",
+    "isNew": false,
+    "deprecationNotice": "Use `Tabs` to switch content, or `RadioGroup` to select a value."
   },
   "@mittwald/flow-react-components#Select": {
     "level": "stable",

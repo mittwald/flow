@@ -99,8 +99,8 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
   },
 );
 
-// RatingSegment, fill and maxValue were introduced in alpha.1048.
-const ratingSegmentSince = "0.2.0-alpha.1048";
+// RatingSegment, fill and maxValue are part of the next minor.
+const ratingSegmentSince = "1.1.0";
 
 test.skipIf(crossVersion({ below: ratingSegmentSince })).each(testEnvironments)(
   "Rating segments (%s)",

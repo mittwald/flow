@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
-import { prefixedStyleClassname } from "@/lib/scss/selectors";
 import { SkeletonText } from "@/components/SkeletonText";
 import { TableColumn } from "@/components/Table/components/TableColumn/TableColumn";
 
@@ -30,7 +29,7 @@ export const TableCell: FC<TableCellProps> = (props) => {
   const rootClassName = clsx(
     styles.cell,
     horizontalAlign !== "start" &&
-      prefixedStyleClassname(styles, "horizontal-align-", horizontalAlign),
+      styles[`horizontal-align-${horizontalAlign}`],
     className,
   );
 

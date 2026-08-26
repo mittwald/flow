@@ -107,9 +107,10 @@ its own derived version line). The version/changelog conflict is therefore
 mechanical noise, not a real conflict, and is resolved automatically via
 `.gitattributes` merge drivers:
 
-- **`**/CHANGELOG.md
-  merge=ours`** — keep `next`'s changelog; `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package `CHANGELOG.md`
-  are only the machine record (RFC #2711), so this loss is inconsequential.
+- **`**/CHANGELOG.md merge=ours`** — keep `next`'s changelog;
+  `lerna`regenerates`next`'s entries from the merged commits anyway. Per-package
+  `CHANGELOG.md` are only the machine record (RFC #2711), so this loss is
+  inconsequential.
 
 > **`merge=ours` is written for `main → next` and must not be applied to the
 > promotion.** In the other direction it keeps `next`'s changelog, which carries
@@ -124,7 +125,11 @@ mechanical noise, not a real conflict, and is resolved automatically via
 > graduated entry on merge, and the prerelease entries drop out of the record,
 > which is correct — they were never published under `latest`.
 
-- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script) that, on conflict, keeps the `version`field from`next`while merging all other changes (e.g. genuine dependency bumps from`main`) with the normal 3-way result. A blanket `merge=ours`on`package.json`is rejected — it would silently drop legitimate dependency changes from`main`.
+- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script)
+  that, on conflict, keeps the `version`field from`next`while merging all other
+  changes (e.g. genuine dependency bumps from`main`) with the normal 3-way
+  result. A blanket `merge=ours`on`package.json`is rejected — it would silently
+  drop legitimate dependency changes from`main`.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
 sync PR (§4). The exact version string produced by the merge is irrelevant — it
