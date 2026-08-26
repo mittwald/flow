@@ -41,10 +41,13 @@ const flowImportPaths: Transform = (fileInfo, { j }) => {
           s.type === "ImportDefaultSpecifier" ||
           s.type === "ImportSpecifier"
         ) {
-          const name =
-            s.type === "ImportDefaultSpecifier"
-              ? (s.local?.name ?? "")
-              : (s.imported?.name ?? "");
+          // `name` is typed `string | Identifier` in ast-types; for the
+          // specifiers handled here it is always the plain name.
+          const name = String(
+            (s.type === "ImportDefaultSpecifier"
+              ? s.local?.name
+              : s.imported?.name) ?? "",
+          );
 
           specifiers[i] = {
             ...s,

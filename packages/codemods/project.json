@@ -1,0 +1,28 @@
+{
+  "name": "codemods",
+  "namedInputs": {
+    "codemods-src": [
+      "default",
+      "{projectRoot}/src/**/*",
+      "{projectRoot}/dev/**/*",
+      "!{projectRoot}/src/transforms/flowAlphaAll.ts"
+    ]
+  },
+  "projectType": "library",
+  "sourceRoot": "packages/codemods/src",
+  "targets": {
+    "build": {
+      "cache": true,
+      "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"],
+      "outputs": ["{projectRoot}/src/transforms/flowAlphaAll.ts"]
+    },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": ["^build", "build"],
+      "inputs": [
+        "codemods-src",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ]
+    }
+  }
+}
