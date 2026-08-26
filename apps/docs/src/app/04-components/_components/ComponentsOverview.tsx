@@ -29,10 +29,15 @@ const toGroups = (components: ComponentLink[]): [string, ComponentLink[]][] =>
     compareEntries(sortableGroup(a), sortableGroup(b)),
   );
 
-const GroupSections: FC<Props> = (props) =>
+interface GroupSectionsProps extends Props {
+  /** `Section` hands every heading level 2, so a nested group states its own. */
+  headingLevel: 2 | 3;
+}
+
+const GroupSections: FC<GroupSectionsProps> = (props) =>
   toGroups(props.components).map(([group, groupComponents]) => (
     <Section key={group}>
-      <Heading>{extractTextFromPath(group)}</Heading>
+      <Heading level={props.headingLevel}>{extractTextFromPath(group)}</Heading>
       <ComponentsList components={groupComponents} />
     </Section>
   ));
@@ -47,7 +52,7 @@ export const ComponentsOverview: FC<Props> = (props) => {
   return (
     <>
       <ComponentGroupingView view="grouped">
-        <GroupSections components={components} />
+        <GroupSections components={components} headingLevel={2} />
       </ComponentGroupingView>
       <ComponentGroupingView view="alphabetical">
         <ComponentsList components={components} aria-label="Components" />
@@ -55,7 +60,7 @@ export const ComponentsOverview: FC<Props> = (props) => {
       {integrations.length > 0 && (
         <Section>
           <Heading>Integrations</Heading>
-          <GroupSections components={integrations} />
+          <GroupSections components={integrations} headingLevel={3} />
         </Section>
       )}
     </>
