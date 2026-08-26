@@ -83,6 +83,15 @@ flowchart LR
     ships `["*.md", "dist"]`.
   - A **`workflow_dispatch` run always publishes.** That is the escape hatch
     when a docs-only change has to go out as a release anyway.
+- **The build runs after the version bump.** Both publish workflows version
+  first, then `pnpm build`, then publish. Some bundles bake their own version in
+  at build time (vite `define` over `package.json` — `remote-react-components`'
+  `dist/js/version.mjs`, which `RemoteRoot` reports to the host), and
+  `lerna publish from-package` ships whatever `dist` holds. Built first, every
+  release carried the PREVIOUS version's stamp: `1.0.0` went to npm announcing
+  itself as `0.2.0-alpha.1058`. A `grep` step between build and publish compares
+  stamp against manifest, because the mismatch is otherwise invisible — nothing
+  fails, the wrong string just ships.
 - **Forward-merge cascade.** Every push to `main` is automatically merged up
   into `next` (and `next` into the major line when it exists), so the higher
   lines are always a superset of the lower ones — no cherry-picking. Merge
