@@ -181,6 +181,11 @@ and commit the results.
   set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
+- **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
+  week and merges them itself once CI and the visual suite are green — see
+  [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
+  deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
+  closed PR only makes it come back next week.
 - **Breaking changes for consumers** ship with a `MIGRATION.md` entry and,
   ideally, a codemod in `packages/codemods` (tedious by hand — a great agent
   task).

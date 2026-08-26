@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+### Bug Fixes
+
+* **Remote:** serialization allows duplicate object references ([#2947](https://github.com/mittwald/flow/issues/2947)) ([ac3ef26](https://github.com/mittwald/flow/commit/ac3ef26cc8b0c0dcc5d84b6181a5fbbccc8863ba))
+
 ## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
