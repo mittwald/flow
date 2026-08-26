@@ -13,7 +13,10 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
-import { ComponentStatusCallout } from "@/lib/componentStatus";
+import {
+  ComponentStatusCallout,
+  resolveReplacedBy,
+} from "@/lib/componentStatus";
 
 interface Props {
   params: StaticParams;
@@ -27,10 +30,12 @@ export const ComponentContent: FC<Props> = async (props) => {
 
   // A component is a single index.mdx that holds the whole page (in order:
   // Guidelines, Overview, Develop); name + description live in its frontmatter.
-  const mdxFile = await MdxFileFactory.fromParams(
-    contentFolder,
-    params,
-    "index",
+  // All pages are read at once: `replacedBy` resolves against its siblings.
+  const componentPages = await MdxFileFactory.fromDir(contentFolder, "index");
+  const mdxFile = componentPages.find((page) =>
+    page.matchesSlugs(
+      "slug" in params ? params.slug : [params.group, params.component],
+    ),
   );
 
   if (!mdxFile) {
@@ -42,6 +47,7 @@ export const ComponentContent: FC<Props> = async (props) => {
   const description = mdxFile.mdxSource.frontmatter.description;
   const component = mdxFile.mdxSource.frontmatter.component;
   const deprecationNotice = mdxFile.mdxSource.frontmatter.deprecationNotice;
+  const replacedBy = resolveReplacedBy(mdxFile, componentPages);
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
@@ -66,6 +72,7 @@ export const ComponentContent: FC<Props> = async (props) => {
               <ComponentStatusCallout
                 name={component}
                 notice={deprecationNotice}
+                replacedBy={replacedBy}
               />
             )}
           </Section>
