@@ -8,13 +8,9 @@ on:
         type: boolean
         default: false
       release_as:
-        description: "Force an explicit version (e.g. 1.0.0 for the one-time 1.0.0 cut). Empty = normal conventional-commits derivation."
+        description: "Force an explicit version"
         type: string
         default: ""
-      dry_run:
-        description: "Rehearse: build, compute the version, and run 'lerna publish --dry-run' without pushing, tagging, creating a release, or publishing to npm."
-        type: boolean
-        default: false
   push:
     branches:
       - main
@@ -334,17 +330,12 @@ jobs:
       # succeeds. No retry loop — re-signing only re-collided with itself.
       - name: Publish 🚀
         run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            # Rehearsal: show the publish plan, touch neither npm nor origin.
-            pnpm lerna publish from-package --yes --concurrency 1 --dry-run
-          else
-            pnpm lerna publish from-package --yes --concurrency 1
-          fi
+          pnpm lerna publish from-package --yes --concurrency 1
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.
       - name: Push release commit & tag, create GitHub release 🚀
-        if: ${{ !inputs.only_publish && !inputs.dry_run }}
+        if: ${{ !inputs.only_publish }}
         env:
           PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
           PR: ${{ steps.ctx.outputs.pr }}
