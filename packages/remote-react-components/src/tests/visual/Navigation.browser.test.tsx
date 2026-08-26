@@ -74,13 +74,12 @@ test.each(testEnvironments)(
       <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
         <Navigation>
           <Link>
-            SegmentedControl<AlertBadge status="warning">Deprecated</AlertBadge>
+            Galactic Empire<AlertBadge status="warning">Deprecated</AlertBadge>
           </Link>
           <Link>
-            PasswordCreationField
-            <CounterBadge count={2} />
+            Rebel Alliance
+            <CounterBadge count={3} />
           </Link>
-          <Link>Link</Link>
         </Navigation>
       </ColumnLayout>,
     );
