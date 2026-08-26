@@ -21,7 +21,6 @@
 .text,
 .ul {
   max-width: var(--max-text-width);
-  text-wrap-style: pretty;
 }
 
 .ul {
