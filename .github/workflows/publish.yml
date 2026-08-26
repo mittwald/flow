@@ -23,6 +23,16 @@ permissions:
   id-token: write
   contents: write
 
+env:
+  # Keep the local git hooks out of this workflow. simple-git-hooks' postinstall
+  # runs on every `pnpm install` (it is allowlisted in pnpm-workspace.yaml) and
+  # writes .git/hooks from package.json — including `pre-push` = `pnpm lint`. On a
+  # runner that hook fires on every push this workflow makes: ~95s of the release
+  # step was two full lint runs, and a lint failure there aborts the push AFTER
+  # the npm publish succeeded — the version lands on npm with no release commit,
+  # no tag and no GitHub Release (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
+
 # Shared per-target-branch concurrency group (ADR 0004 §5): every writer of
 # `main` (this workflow, and the promotion back-merge once the 1.0.0 model is
 # live) serializes on `mutate-main`, removing non-fast-forward races by design.
@@ -350,11 +360,16 @@ jobs:
           # No-op for a pre-graduated promotion (the version commit arrived with
           # the merge, so HEAD is already origin/main); pushes the new commit for
           # the one-time-cut / dispatch paths where lerna versioned above.
-          git push origin HEAD:main
+          #
+          # --no-verify belongs at both pushes even with
+          # SKIP_INSTALL_SIMPLE_GIT_HOOKS set above: this is the one place where a
+          # hook aborting the push strands a release that npm has already accepted
+          # (#2932), so it does not depend on a workflow-level env var staying put.
+          git push --no-verify origin HEAD:main
           # Pre-graduated promotion: no tag exists yet — create it at the merge
           # commit. Cut/dispatch paths: lerna already tagged, so keep that tag.
           git rev-parse -q --verify "refs/tags/${tag}" >/dev/null || git tag -m "${tag}" "${tag}"
-          git push origin "refs/tags/${tag}"
+          git push --no-verify origin "refs/tags/${tag}"
 
           # Release notes. Preferred source for a promotion: the curated,
           # user-facing notes in the PR body, verbatim between the
