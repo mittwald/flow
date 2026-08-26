@@ -168,7 +168,7 @@ importers:
         version: 2.0.4(next@16.3.0(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@25.9.5)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.101.0))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@types/luxon':
         specifier: ^3.7.2
-        version: 3.7.2
+        version: 3.7.5
       '@types/mdx':
         specifier: ^2.0.14
         version: 2.0.14
@@ -473,7 +473,7 @@ importers:
         version: 2.2.37
       '@types/luxon':
         specifier: ^3.7.2
-        version: 3.7.2
+        version: 3.7.5
       '@types/prop-types':
         specifier: ^15.7.15
         version: 15.7.15
@@ -4569,8 +4569,8 @@ packages:
   '@types/luxon@3.7.1':
     resolution: {integrity: sha512-H3iskjFIAn5SlJU7OuxUmTEpebK6TKB8rxZShDslBMZJ5u9S//KM1sbdAisiSrqwLQncVjnpi2OK2J51h+4lsg==}
 
-  '@types/luxon@3.7.2':
-    resolution: {integrity: sha512-gW+Oib+vUtGJBtNC8V9Reww0oIpusw+4m81uncg9REGZAJfqOQHfo/nkabnc7w0QReXyPqjrbWMJk6NuAkiX3Q==}
+  '@types/luxon@3.7.5':
+    resolution: {integrity: sha512-jJ41Q4z6ZVO260MNDdHfW7+7a5iMiX8Mr6ZJHcmgrvhZha6dz5704o/lF2kKl6URjH6ivEL97w9xS/MgpJEphg==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -13663,7 +13663,7 @@ snapshots:
 
   '@types/luxon@3.7.1': {}
 
-  '@types/luxon@3.7.2': {}
+  '@types/luxon@3.7.5': {}
 
   '@types/mdast@4.0.4':
     dependencies:
