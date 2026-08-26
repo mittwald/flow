@@ -111,12 +111,11 @@ flowchart LR
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
 
-- **The cut.** The one-time move from the `0.2.0-alpha.*` line to `1.0.0` is a
-  manual `workflow_dispatch` (`release_as=1.0.0`) off `main`; `next` is branched
-  from `main` immediately afterwards. Until the cut, `next` does not exist, so
-  the forward-merge, `next`-publishing, and routing workflows are dormant
-  (self-gating on the `next` branch) and every merge into `main` releases as it
-  does today.
+- **The cut (history).** The move from the `0.2.0-alpha.*` line to `1.0.0` was a
+  one-time manual `workflow_dispatch` off `main`; `next` was branched from
+  `main` immediately afterwards. Both standing lines have been live since — the
+  cut playbook ([#2816](https://github.com/mittwald/flow/issues/2816)) records
+  what it involved.
 
 ## Repository setup (GitHub side)
 
@@ -126,16 +125,16 @@ dry-run is faithful:
 
 - **Squash-only merge**, with the squash commit defaulting to the **PR title** —
   that title is the release commit Lerna-Lite reads.
-- **Branch protection + required status checks** on `main` (Conventional PR
-  title, Routing, Version contract, the build), prepared the same way for `next`
-  and the on-demand major line once they exist.
+- **Branch protection + required status checks** on `main` and `next`
+  (Conventional PR title, Routing, Version contract, the build), prepared the
+  same way for the on-demand major line once it exists.
 - **Automation bypass:** the publishing identity (`PUBLISH_PAT`) may push past
   protection — `publish.yml` pushes the release commit/tag and
   `forward-merge.yml` pushes the cascade merge directly on the clean path.
 - **Actions may open pull requests** — the forward-merge opens a `sync/*` PR on
   a real conflict.
 
-The full pre-cut settings checklist lives in the cut playbook
+The full settings checklist lives in the cut playbook
 ([#2816](https://github.com/mittwald/flow/issues/2816)).
 
 ## The public contract
