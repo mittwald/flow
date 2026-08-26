@@ -62,3 +62,29 @@ test.each(testEnvironments)(
     await testScreenshot("Navigation - collapsed");
   },
 );
+
+test.each(testEnvironments)(
+  "Navigation in a narrow container (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ColumnLayout, Navigation, Link, AlertBadge, CounterBadge },
+  }) => {
+    await render(
+      <ColumnLayout m={[1, 1, 1, 1, 1, 1]}>
+        <Navigation>
+          <Link>
+            SegmentedControl<AlertBadge status="warning">Deprecated</AlertBadge>
+          </Link>
+          <Link>
+            PasswordCreationField
+            <CounterBadge count={2} />
+          </Link>
+          <Link>Link</Link>
+        </Navigation>
+      </ColumnLayout>,
+    );
+
+    await testScreenshot("Navigation - narrow container");
+  },
+);
