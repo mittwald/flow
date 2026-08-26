@@ -33,7 +33,7 @@ export default () => {
 
         <ActionGroup>
           <ModalTrigger>
-            <Button color="primary">Anlegen</Button>
+            <Button>Anlegen</Button>
             <Modal offCanvas>
               <Heading>App anlegen</Heading>
               <Content>

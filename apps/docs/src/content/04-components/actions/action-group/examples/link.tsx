@@ -6,5 +6,5 @@ import {
 
 <ActionGroup>
   <Link slot="abort">Passwort vergessen?</Link>
-  <Button color="primary">Anmelden</Button>
+  <Button>Anmelden</Button>
 </ActionGroup>;

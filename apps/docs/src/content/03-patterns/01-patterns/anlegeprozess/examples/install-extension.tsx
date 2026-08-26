@@ -26,7 +26,7 @@ import {
 } from "@mittwald/flow-react-components";
 
 <ModalTrigger>
-  <Button color="primary">Beispiel öffnen</Button>
+  <Button>Beispiel öffnen</Button>
   <Modal offCanvas>
     <Heading>Passwortschutz installieren</Heading>
     <Content>
@@ -54,9 +54,7 @@ import {
               Installation fortzufahren, lege bitte einen
               Vertragspartner an.
             </Text>
-            <Button color="primary">
-              Vertragspartner anlegen
-            </Button>
+            <Button>Vertragspartner anlegen</Button>
           </Content>
         </Alert>
         <Heading>Berechtigungen </Heading>

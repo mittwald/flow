@@ -37,7 +37,7 @@ export default () => {
               controller.open();
             }}
           >
-            <Button color="primary">Projekt anlegen</Button>
+            <Button>Projekt anlegen</Button>
           </Action>
         </IllustratedMessage>
         <Modal controller={controller}>

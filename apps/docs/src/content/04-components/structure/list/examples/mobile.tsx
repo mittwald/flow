@@ -35,7 +35,7 @@ export default () => {
         >
           <IconDownload />
         </Button>
-        <Button color="primary">Anlegen</Button>
+        <Button>Anlegen</Button>
       </ActionGroup>
       <DomainList.Search />
       <DomainList.Filter

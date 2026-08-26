@@ -13,6 +13,6 @@ import {
     Quam.
   </Text>
   <Flex align="end" grow>
-    <Button color="primary">Install</Button>
+    <Button>Install</Button>
   </Flex>
 </LayoutCard>;
