@@ -86,6 +86,7 @@ export const Rating = createFlowRemoteComponent(
       onTransitionRunCapture: { event: "transitionRunCapture" } as never,
       onTransitionStart: { event: "transitionStart" } as never,
       onTransitionStartCapture: { event: "transitionStartCapture" } as never,
+      onValueChange: { event: "valueChange" } as never,
       onWheel: { event: "wheel" } as never,
       onWheelCapture: { event: "wheelCapture" } as never,
     },

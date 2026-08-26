@@ -110,6 +110,7 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       transitionRunCapture: {},
       transitionStart: {},
       transitionStartCapture: {},
+      valueChange: {},
       wheel: {},
       wheelCapture: {},
     };
