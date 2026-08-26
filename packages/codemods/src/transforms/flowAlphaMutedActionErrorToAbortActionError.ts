@@ -22,20 +22,18 @@ import type { Transform } from "jscodeshift";
  * `!=` or `!==`. A check living in a file that never imports the class cannot
  * be recognised; grep for the string once when you are done.
  *
- * Only names imported from `@mittwald/flow-react-components` or
- * `@mittwald/flow-remote-react-components` (including their subpath entries)
- * are touched. A local alias (`import { MutedActionError as Muted }`) keeps its
- * alias — the static helpers on it are renamed all the same. Namespace usages
- * (`Flow.MutedActionError`) are rewritten too.
+ * Only names imported from `@mittwald/flow-react-components` (including its
+ * subpath entries) are touched. `@mittwald/flow-remote-react-components`
+ * exports no error classes, so it cannot be in scope. A local alias (`import {
+ * MutedActionError as Muted }`) keeps its alias — the static helpers on it are
+ * renamed all the same. Namespace usages (`Flow.MutedActionError`) are
+ * rewritten too.
  */
 const flowAlphaMutedActionErrorToAbortActionErrorTransform: Transform = (
   fileInfo,
   { j },
 ) => {
-  const flowPackages = [
-    "@mittwald/flow-react-components",
-    "@mittwald/flow-remote-react-components",
-  ];
+  const flowPackages = ["@mittwald/flow-react-components"];
   const oldName = "MutedActionError";
   const newName = "AbortActionError";
   const memberRenames = new Map([

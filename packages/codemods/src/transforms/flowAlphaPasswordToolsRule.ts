@@ -9,11 +9,12 @@ import type { Transform } from "jscodeshift";
  * synchronously or as a promise — the distinction the two classes encoded is
  * gone, so both names collapse onto the same one.
  *
- * Only names imported from the `mittwald-password-tools-js` entry are touched,
- * so a same-named import from another package is left alone. A name imported
- * under a local alias (`import { AsyncRule as Base }`) keeps its alias — only
- * the imported name changes. Namespace usages (`Pw.AsyncRule`) are rewritten as
- * well.
+ * Only names imported from the `mittwald-password-tools-js` entry of
+ * `@mittwald/flow-react-components` are touched, so a same-named import from
+ * another package is left alone. `@mittwald/flow-remote-react-components` has
+ * no such entry. A name imported under a local alias (`import { AsyncRule as
+ * Base }`) keeps its alias — only the imported name changes. Namespace usages
+ * (`Pw.AsyncRule`) are rewritten as well.
  *
  * Because both names collapse onto `Rule`, a file importing more than one of
  * them would end up with a duplicate specifier. Those collapse onto one.
@@ -21,7 +22,6 @@ import type { Transform } from "jscodeshift";
 const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components/mittwald-password-tools-js",
-    "@mittwald/flow-remote-react-components/mittwald-password-tools-js",
   ];
   const renames = new Map([
     ["AsyncRule", "Rule"],

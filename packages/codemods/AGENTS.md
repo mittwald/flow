@@ -46,6 +46,24 @@ transform has (one type-only `jscodeshift` import, one top-level declaration,
 one `export default <identifier>`) and throws on anything else rather than
 emitting a bundle that silently drops code.
 
+## Does it apply to the remote package?
+
+`@mittwald/flow-remote-react-components` mirrors the component API, so most
+codemods apply there too — but only most. The remote package exports the
+`@flr-generate` components and nothing else: no prop types, no error classes,
+and three entries against the main package's nine.
+
+**A transform may scope itself to the remote package exactly when something it
+targets exists there.** Claiming it anyway is at best noise that reads as
+coverage, and at worst a rewrite onto a name the package does not have — which
+is the failure a codemod is supposed to remove, not cause.
+
+Don't decide this by hand. `src/tests/remoteScope.test.ts` reads the remote
+package's own export surface and its `exports` map, and fails on a transform
+that claims the remote package without a reachable target, or that scopes itself
+to an entry no consumer can import. List the transform's targets there and the
+check follows.
+
 ## Adding a transform
 
 1. `src/transforms/<name>.ts`, self-contained, modelled on a neighbour. Scope it

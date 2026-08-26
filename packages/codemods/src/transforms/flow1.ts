@@ -170,20 +170,18 @@ const flowAlphaAccentBoxColorToBackgroundColor =
  * Renames the `action` prop to `onAction` on `Action`.
  *
  * The scope is deliberately narrow. Only JSX elements that resolve to `Action`
- * — imported (named or as a namespace) from `@mittwald/flow-react-components`
- * or `@mittwald/flow-remote-react-components`, including their subpath entries
- * — are touched. Same-named components from other packages are left untouched,
- * and so is the `action` attribute of a plain `<form>`.
+ * — imported (named or as a namespace) from `@mittwald/flow-react-components`,
+ * including its subpath entries — are touched. `Action` is not remote-capable,
+ * so `@mittwald/flow-remote-react-components` cannot be in scope. Same-named
+ * components from other packages are left untouched, and so is the `action`
+ * attribute of a plain `<form>`.
  *
  * An element that already carries `onAction` keeps it and only loses the stale
  * `action` prop, which mirrors what the runtime fallback does: an explicit
  * `onAction` wins.
  */
 const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
-  const flowPackages = [
-    "@mittwald/flow-react-components",
-    "@mittwald/flow-remote-react-components",
-  ];
+  const flowPackages = ["@mittwald/flow-react-components"];
   const affectedComponents = new Set(["Action"]);
 
   const isFlowImport = (source: string): boolean =>
@@ -525,20 +523,18 @@ const flowAlphaButtonPropsInterfaces = flowAlphaButtonPropsInterfacesTransform;
  * `!=` or `!==`. A check living in a file that never imports the class cannot
  * be recognised; grep for the string once when you are done.
  *
- * Only names imported from `@mittwald/flow-react-components` or
- * `@mittwald/flow-remote-react-components` (including their subpath entries)
- * are touched. A local alias (`import { MutedActionError as Muted }`) keeps its
- * alias — the static helpers on it are renamed all the same. Namespace usages
- * (`Flow.MutedActionError`) are rewritten too.
+ * Only names imported from `@mittwald/flow-react-components` (including its
+ * subpath entries) are touched. `@mittwald/flow-remote-react-components`
+ * exports no error classes, so it cannot be in scope. A local alias (`import {
+ * MutedActionError as Muted }`) keeps its alias — the static helpers on it are
+ * renamed all the same. Namespace usages (`Flow.MutedActionError`) are
+ * rewritten too.
  */
 const flowAlphaMutedActionErrorToAbortActionErrorTransform: Transform = (
   fileInfo,
   { j },
 ) => {
-  const flowPackages = [
-    "@mittwald/flow-react-components",
-    "@mittwald/flow-remote-react-components",
-  ];
+  const flowPackages = ["@mittwald/flow-react-components"];
   const oldName = "MutedActionError";
   const newName = "AbortActionError";
   const memberRenames = new Map([
@@ -774,11 +770,12 @@ const flowAlphaMutedActionErrorToAbortActionError =
  * synchronously or as a promise — the distinction the two classes encoded is
  * gone, so both names collapse onto the same one.
  *
- * Only names imported from the `mittwald-password-tools-js` entry are touched,
- * so a same-named import from another package is left alone. A name imported
- * under a local alias (`import { AsyncRule as Base }`) keeps its alias — only
- * the imported name changes. Namespace usages (`Pw.AsyncRule`) are rewritten as
- * well.
+ * Only names imported from the `mittwald-password-tools-js` entry of
+ * `@mittwald/flow-react-components` are touched, so a same-named import from
+ * another package is left alone. `@mittwald/flow-remote-react-components` has
+ * no such entry. A name imported under a local alias (`import { AsyncRule as
+ * Base }`) keeps its alias — only the imported name changes. Namespace usages
+ * (`Pw.AsyncRule`) are rewritten as well.
  *
  * Because both names collapse onto `Rule`, a file importing more than one of
  * them would end up with a duplicate specifier. Those collapse onto one.
@@ -786,7 +783,6 @@ const flowAlphaMutedActionErrorToAbortActionError =
 const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components/mittwald-password-tools-js",
-    "@mittwald/flow-remote-react-components/mittwald-password-tools-js",
   ];
   const renames = new Map([
     ["AsyncRule", "Rule"],
