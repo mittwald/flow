@@ -28,6 +28,13 @@ permissions:
   id-token: write
   contents: write
 
+env:
+  # Keep the local git hooks out of this workflow — same reason as publish.yml.
+  # simple-git-hooks' postinstall runs on every `pnpm install` and writes
+  # .git/hooks from package.json, so `pre-push` = `pnpm lint` would run on both
+  # pushes below, after the npm publish already succeeded (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
+
 # Shared per-target-branch concurrency group (ADR 0004 §5): the SAME group as
 # forward-merge.yml, so every writer of `next` is serialized and there are no
 # non-fast-forward races.
@@ -36,6 +43,72 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Same release-relevance gate as publish.yml (#2931): a change that cannot
+  # reach a published package produces no `next` prerelease — no npm publish, no
+  # `chore(release):` version bump commit, no tag, no GitHub Release.
+  #
+  # On this line the push is usually the `chore(sync):` forward-merge commit, so
+  # the classified file set is what the merge carried over from `main`. A
+  # docs-only fix therefore skips here exactly as it skipped on `main`, and the
+  # two lines stay symmetric.
+  decide:
+    name: Release relevance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.relevance.outputs.publish }}
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          ref: next
+
+      - name: Self-test the classifier
+        run: node --test .github/scripts/release-relevance-lib.test.mjs
+
+      - name: Classify the changed paths 🔎
+        id: relevance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "::notice::Manual dispatch — publishing regardless of changed paths."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # No usable base (branch creation, force push) means we cannot tell
+          # what changed. Publish — the behaviour before #2931.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::No usable base sha — publishing (fail-safe default)."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # The compare API, not `git diff`: it needs no history, so this job
+          # stays a shallow checkout.
+          #
+          # `gh api` prints the error BODY to stdout on a non-2xx and exits
+          # non-zero, so the EXIT STATUS decides whether the list is usable —
+          # never the output. Discarding it hands the guard an empty list, which
+          # is its fail-safe "publish" input.
+          if ! files="$(gh api --paginate \
+            "repos/${REPO}/compare/${BEFORE}...${AFTER}" \
+            --jq '.files[]?.filename')"; then
+            echo "::warning::Could not read the changed-file list from the compare API — publishing (fail-safe default)."
+            files=""
+          fi
+
+          printf '%s\n' "$files" \
+            | node .github/scripts/release-relevance-guard.mjs
+
   publish:
     # Publish on manual dispatch, or on any push to `next` EXCEPT the release
     # commit this workflow pushes itself (guarded below to avoid an infinite
@@ -45,9 +118,16 @@ jobs:
     # As in publish.yml, the trigger is `push: next`, NOT
     # `pull_request_target: closed`: npm's Trusted Publisher only accepts the
     # OIDC token when its ref is a branch ref (refs/heads/next).
+    #
+    # `needs.decide` adds the release-relevance gate (#2931): a docs- or CI-only
+    # push produces no prerelease at all.
+    needs: decide
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'chore(release):')
+      needs.decide.outputs.publish == 'true' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        !startsWith(github.event.head_commit.message, 'chore(release):')
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -87,9 +167,6 @@ jobs:
         run: |
           git fetch --no-tags origin main
           git branch --track main origin/main
-
-      - name: Build 🔨
-        run: pnpm build
 
       # Bump versions, write changelogs, commit and tag — but do NOT push and do
       # NOT create the GitHub release yet (same deferral as publish.yml: pushing
@@ -170,6 +247,27 @@ jobs:
               --tag-version-prefix ""
           fi
 
+      # AFTER the version bump, never before: some packages bake their own version
+      # into the bundle at build time (vite `define` reading package.json —
+      # remote-react-components' `dist/js/version.mjs`). Building first stamped the
+      # PREVIOUS version into every release, and `lerna publish from-package` packs
+      # whatever `dist` holds: 1.0.0 shipped `packageVersion = "0.2.0-alpha.1058"`.
+      #
+      # Versioning is cheap and touches no build output, so nothing is lost by
+      # putting the expensive step second — and a build failure here still aborts
+      # before the publish, with the release commit unpushed.
+      - name: Build 🔨
+        run: pnpm build
+
+      # Tripwire for the ordering above — the mismatch is otherwise invisible
+      # (nothing fails, the wrong string just ships).
+      - name: Verify the stamped package version 🔍
+        run: |
+          pkg=packages/remote-react-components
+          v="$(node -p "require('./${pkg}/package.json').version")"
+          grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
+            || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
+
       # Publish under the `next` dist-tag (ADR 0004 §6) — the distinguishing
       # difference from publish.yml, which publishes `latest`. Provenance/OIDC
       # and the @sigstore/sign Rekor-409 patch behave exactly as in publish.yml.
@@ -189,5 +287,8 @@ jobs:
         run: |
           tag="$(git describe --tags --abbrev=0)"
           echo "Pushing release commit and tag ${tag} to next"
-          git push origin HEAD:next
-          git push origin "refs/tags/${tag}"
+          # --no-verify at the push itself, not only via the env var above: a hook
+          # aborting here strands a prerelease that npm has already accepted
+          # (#2932).
+          git push --no-verify origin HEAD:next
+          git push --no-verify origin "refs/tags/${tag}"

@@ -10,9 +10,7 @@ name: Commit guard
 #      - a feature (`feat:`) belongs on `next`, not on `main`;
 #      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
 #        line, not on any standing line (`main` *or* `next`).
-#    This makes the dangerous directions mechanically hard. It is self-gating:
-#    dormant until the `next` branch exists (i.e. until the 1.0.0 cut), because
-#    pre-cut everything legitimately targets `main`.
+#    This makes the dangerous directions mechanically hard.
 
 on:
   pull_request:
@@ -65,21 +63,10 @@ jobs:
       PR_BODY: ${{ github.event.pull_request.body }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
       BASE_REF: ${{ github.event.pull_request.base.ref }}
-      REPO: ${{ github.repository }}
     steps:
       - name: Enforce release-line routing
         run: |
           set -euo pipefail
-
-          # --- Self-gating -----------------------------------------------------
-          # Routing only applies once the `next` collection branch exists (after
-          # the 1.0.0 cut). Until then every change legitimately targets `main`,
-          # so the guard stays dormant. (A PR based on `next` can only exist once
-          # `next` does, so this check short-circuits correctly for both bases.)
-          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
-            echo "::notice::'next' branch does not exist yet — routing guard dormant (pre-1.0.0-cut). Skipping."
-            exit 0
-          fi
 
           # --- Promotion / forward-merge exemption (ADR 0004 §8) ---------------
           # A promotion PR (`release/x.y.0 -> main`, which is what
@@ -138,19 +125,11 @@ jobs:
       PR_BODY: ${{ github.event.pull_request.body }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
       BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      REPO: ${{ github.repository }}
     steps:
-      - name: Gate (self-gating + promotion/sync exemptions)
+      - name: Gate (promotion/sync exemptions)
         id: gate
         run: |
           set -euo pipefail
-
-          # Dormant until `next` exists (pre-1.0.0-cut) — mirrors the routing job.
-          if ! git ls-remote --exit-code --heads "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
-            echo "::notice::'next' branch does not exist yet — version-contract guard dormant (pre-1.0.0-cut). Skipping."
-            echo "active=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
 
           # Promotion / forward-merge / sync sources legitimately carry breaking
           # changes (ADR 0004 §8) — exempt, same as routing.

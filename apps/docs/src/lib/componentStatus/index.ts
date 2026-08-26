@@ -4,3 +4,4 @@ export {
   getComponentStatusInfo,
   type FlowComponentStatus,
 } from "./componentStatus";
+export { resolveReplacedBy, type ReplacementLink } from "./replacedBy";

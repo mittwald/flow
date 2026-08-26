@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+### Bug Fixes
+
+* **Breadcrumb:** fix cursor pointer for spans with role link ([#2943](https://github.com/mittwald/flow/issues/2943)) ([d44d61c](https://github.com/mittwald/flow/commit/d44d61cb83f4ebcb95fee10480e2db8c3d55471a))
+
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+### Features
+
+* **SegmentedControl:** deprecate in favor of Tabs and RadioGroup ([#2903](https://github.com/mittwald/flow/issues/2903)) ([3f65b46](https://github.com/mittwald/flow/commit/3f65b46c638be332bebb686cdd3e151cd0b63939))
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 ## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

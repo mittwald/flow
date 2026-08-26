@@ -67,6 +67,31 @@ flowchart LR
   guard that Lerna-Lite 5's changelog config trips over (it recompiles the
   preset's template itself), and the guard then aborts `lerna version`. Re-check
   on the next Lerna-Lite major.
+- **Not every merge releases.** A push to a release line only publishes when it
+  carries a change that can reach a **published package**. Docs-, CI- and
+  repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`, `dev/**`, root
+  Markdown and editor config) are skipped whole: no npm publish, no
+  `chore(release):` version bump commit, no tag, no GitHub Release (#2931). The
+  decision is made by the `decide` job in `publish.yml` / `publish-next.yml`,
+  which classifies the pushed file set with
+  `.github/scripts/release-relevance-lib.mjs`. Two properties matter when you
+  touch that list:
+  - It is a **denylist** — anything not provably docs/CI/tooling counts as
+    publishable. Forgetting a docs path costs one needless version; forgetting a
+    source path would silently swallow a real release. So `packages/**` is
+    relevant wholesale, Markdown included: `@mittwald/flow-react-components`
+    ships `["*.md", "dist"]`.
+  - A **`workflow_dispatch` run always publishes.** That is the escape hatch
+    when a docs-only change has to go out as a release anyway.
+- **The build runs after the version bump.** Both publish workflows version
+  first, then `pnpm build`, then publish. Some bundles bake their own version in
+  at build time (vite `define` over `package.json` — `remote-react-components`'
+  `dist/js/version.mjs`, which `RemoteRoot` reports to the host), and
+  `lerna publish from-package` ships whatever `dist` holds. Built first, every
+  release carried the PREVIOUS version's stamp: `1.0.0` went to npm announcing
+  itself as `0.2.0-alpha.1058`. A `grep` step between build and publish compares
+  stamp against manifest, because the mismatch is otherwise invisible — nothing
+  fails, the wrong string just ships.
 - **Forward-merge cascade.** Every push to `main` is automatically merged up
   into `next` (and `next` into the major line when it exists), so the higher
   lines are always a superset of the lower ones — no cherry-picking. Merge
@@ -95,12 +120,11 @@ flowchart LR
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
 
-- **The cut.** The one-time move from the `0.2.0-alpha.*` line to `1.0.0` is a
-  manual `workflow_dispatch` (`release_as=1.0.0`) off `main`; `next` is branched
-  from `main` immediately afterwards. Until the cut, `next` does not exist, so
-  the forward-merge, `next`-publishing, and routing workflows are dormant
-  (self-gating on the `next` branch) and every merge into `main` releases as it
-  does today.
+- **The cut (history).** The move from the `0.2.0-alpha.*` line to `1.0.0` was a
+  one-time manual `workflow_dispatch` off `main`; `next` was branched from
+  `main` immediately afterwards. Both standing lines have been live since — the
+  cut playbook ([#2816](https://github.com/mittwald/flow/issues/2816)) records
+  what it involved.
 
 ## Repository setup (GitHub side)
 
@@ -110,16 +134,16 @@ dry-run is faithful:
 
 - **Squash-only merge**, with the squash commit defaulting to the **PR title** —
   that title is the release commit Lerna-Lite reads.
-- **Branch protection + required status checks** on `main` (Conventional PR
-  title, Routing, Version contract, the build), prepared the same way for `next`
-  and the on-demand major line once they exist.
+- **Branch protection + required status checks** on `main` and `next`
+  (Conventional PR title, Routing, Version contract, the build), prepared the
+  same way for the on-demand major line once it exists.
 - **Automation bypass:** the publishing identity (`PUBLISH_PAT`) may push past
   protection — `publish.yml` pushes the release commit/tag and
   `forward-merge.yml` pushes the cascade merge directly on the clean path.
 - **Actions may open pull requests** — the forward-merge opens a `sync/*` PR on
   a real conflict.
 
-The full pre-cut settings checklist lives in the cut playbook
+The full settings checklist lives in the cut playbook
 ([#2816](https://github.com/mittwald/flow/issues/2816)).
 
 ## The public contract
