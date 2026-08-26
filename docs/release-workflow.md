@@ -67,6 +67,22 @@ flowchart LR
   guard that Lerna-Lite 5's changelog config trips over (it recompiles the
   preset's template itself), and the guard then aborts `lerna version`. Re-check
   on the next Lerna-Lite major.
+- **Not every merge releases.** A push to a release line only publishes when it
+  carries a change that can reach a **published package**. Docs-, CI- and
+  repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`, `dev/**`, root
+  Markdown and editor config) are skipped whole: no npm publish, no
+  `chore(release):` version bump commit, no tag, no GitHub Release (#2931). The
+  decision is made by the `decide` job in `publish.yml` / `publish-next.yml`,
+  which classifies the pushed file set with
+  `.github/scripts/release-relevance-lib.mjs`. Two properties matter when you
+  touch that list:
+  - It is a **denylist** — anything not provably docs/CI/tooling counts as
+    publishable. Forgetting a docs path costs one needless version; forgetting a
+    source path would silently swallow a real release. So `packages/**` is
+    relevant wholesale, Markdown included: `@mittwald/flow-react-components`
+    ships `["*.md", "dist"]`.
+  - A **`workflow_dispatch` run always publishes.** That is the escape hatch
+    when a docs-only change has to go out as a release anyway.
 - **Forward-merge cascade.** Every push to `main` is automatically merged up
   into `next` (and `next` into the major line when it exists), so the higher
   lines are always a superset of the lower ones — no cherry-picking. Merge
