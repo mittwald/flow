@@ -139,6 +139,17 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- **A prop that carries rendered output has to be a slot, not a property.** A
+  remote property is transported as data, and a React element carries
+  `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
+  whole message, so one such prop drops the entire mutation batch and the
+  extension renders nothing. `isSlot` recognises `ReactNode` and `ReactElement`
+  (instantiated too — the match is anchored so the
+  `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
+  is not swept in). What it cannot convert is a **function returning** rendered
+  output, because the host has to call it: that needs an eager slot or
+  `@flr-ignore-props`. `checkSerializableProps` reports the offenders on every
+  generator run.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in

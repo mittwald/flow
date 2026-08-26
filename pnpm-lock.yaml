@@ -10,7 +10,7 @@ overrides:
   '@mittwald/flow-demo-remote-dom>typescript': npm:typescript@^7.0.2
 
 patchedDependencies:
-  '@quilted/threads@3.3.1': df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4
+  '@quilted/threads@3.3.1': fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812
   '@sigstore/sign@4.1.1': 6ae6ce79a0d5087118f5c3569ba3256c50c873f0e5f829338045aa4983088864
   acorn: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
 
@@ -1044,7 +1044,7 @@ importers:
         version: 1.7.0-mittwald.10(@preact/signals-core@1.14.2)
       '@quilted/threads':
         specifier: ^3.3.1
-        version: 3.3.1(patch_hash=df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4)(@preact/signals-core@1.14.2)
+        version: 3.3.1(patch_hash=fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812)(@preact/signals-core@1.14.2)
       '@types/invariant':
         specifier: ^2.2.37
         version: 2.2.37
@@ -1174,6 +1174,9 @@ importers:
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@quilted/threads':
+        specifier: ^3.3.1
+        version: 3.3.1(patch_hash=fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812)(@preact/signals-core@1.14.2)
       '@types/node':
         specifier: ^25.9.3
         version: 25.9.5
@@ -13008,7 +13011,7 @@ snapshots:
     dependencies:
       '@preact/signals-core': 1.14.2
 
-  '@quilted/threads@3.3.1(patch_hash=df15ead5d86def314ee16ab6a48f9e4faa765b52aa161b10d28480768ebd60a4)(@preact/signals-core@1.14.2)':
+  '@quilted/threads@3.3.1(patch_hash=fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812)(@preact/signals-core@1.14.2)':
     dependencies:
       '@quilted/events': 2.1.5
     optionalDependencies:
