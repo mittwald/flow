@@ -288,12 +288,17 @@ const flowAlphaActionPropToOnAction = flowAlphaActionPropToOnActionTransform;
  * package root of whichever Flow package it came from, joining an existing
  * import from that root or getting a new one.
  *
- * Only names imported from `@mittwald/flow-react-components` or
- * `@mittwald/flow-remote-react-components` (including their subpath entries)
- * are touched, so a same-named import from another package is left alone. A
- * name imported under a local alias (`import { SubmitButtonProps as P }`) keeps
- * its alias — it becomes `ButtonProps as P`. Namespace usages
- * (`Flow.SubmitButtonProps`) are rewritten as well.
+ * The scope is `@mittwald/flow-react-components` and its subpath entries only.
+ * `@mittwald/flow-remote-react-components` exports no component prop types at
+ * all, so there is nothing to move a remote import onto — a remote codebase has
+ * to pick its own source for the type. `RemoteButtonElementProps` is left alone
+ * for the same reason, and because `@mittwald/flow-remote-elements` still
+ * exports that name today.
+ *
+ * A same-named import from another package is left alone. A name imported under
+ * a local alias (`import { SubmitButtonProps as P }`) keeps its alias — it
+ * becomes `ButtonProps as P`. Namespace usages (`Flow.SubmitButtonProps`) are
+ * rewritten as well.
  *
  * All three collapse onto `ButtonProps`, so a file importing more than one of
  * them — or one of them next to `ButtonProps` itself — ends up with a single
@@ -303,15 +308,8 @@ const flowAlphaButtonPropsInterfacesTransform: Transform = (
   fileInfo,
   { j },
 ) => {
-  const flowPackages = [
-    "@mittwald/flow-react-components",
-    "@mittwald/flow-remote-react-components",
-  ];
-  const removed = new Set([
-    "RemoteButtonElementProps",
-    "ResetButtonProps",
-    "SubmitButtonProps",
-  ]);
+  const flowPackages = ["@mittwald/flow-react-components"];
+  const removed = new Set(["ResetButtonProps", "SubmitButtonProps"]);
   const newName = "ButtonProps";
 
   /** The Flow package a module specifier belongs to, or `undefined`. */

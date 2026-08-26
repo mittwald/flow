@@ -603,7 +603,11 @@ npx jscodeshift \
   src
 ```
 
-Replace `src` with your sources folder.
+Replace `src` with your sources folder. It covers
+`@mittwald/flow-react-components` only. `@mittwald/flow-remote-react-components`
+exports no component prop types, so there is nothing to move a remote import
+onto — pick your own source for the type there. `RemoteButtonElementProps` is
+left alone as well: `@mittwald/flow-remote-elements` still exports that name.
 
 ---
 
