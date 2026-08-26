@@ -38,8 +38,7 @@ export interface AreaPropsByDataKey<
   extends AreaBaseProps, DataKeyWithLabel<TData> {}
 
 export type AreaProps<TData extends ChartDataValue = ChartDataValue> =
-  | AreaPropsByDataKey<TData>
-  | AreaPropsByDataKeyProp<TData>;
+  AreaPropsByDataKey<TData> | AreaPropsByDataKeyProp<TData>;
 
 /** @flr-generate all */
 export const Area: FC<AreaProps> = (props) => {

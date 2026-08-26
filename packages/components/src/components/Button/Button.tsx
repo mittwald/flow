@@ -24,12 +24,7 @@ export interface ButtonProps
   slot?: string;
   /** The color of the button. @default "primary" */
   color?:
-    | "primary"
-    | "success"
-    | "secondary"
-    | "danger"
-    | AlphaColor
-    | "accent";
+    "primary" | "success" | "secondary" | "danger" | AlphaColor | "accent";
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */

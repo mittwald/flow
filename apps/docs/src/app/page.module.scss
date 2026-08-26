@@ -43,19 +43,6 @@ $release-tile-background-color: #6f459f;
   );
 }
 
-.codeTile {
-  :global(.flow--column-layout) {
-    align-items: center;
-
-    /* Grid items default to min-width: auto, so the unbreakable code line
-       stretches the column past the tile. Shrink instead and let
-       .editorContainer scroll. */
-    > * {
-      min-width: 0;
-    }
-  }
-}
-
 .imageTile {
   position: relative;
 
@@ -94,6 +81,11 @@ $release-tile-background-color: #6f459f;
 
   :global(.flow--column-layout) {
     align-items: center;
+
+    // The copy starts at the top of the tile, not centered next to the image.
+    :global(.flow--section) {
+      align-self: start;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import type {
-  ExtBridgeConfigInput,
+  ExtBridgeConfigInputWithoutHostConfig,
   ExtBridgeConnectionApi,
   HostConfig,
 } from "@mittwald/ext-bridge";
@@ -20,10 +20,7 @@ export interface RemoteReadyEvent {
 
 export type RemoteReadyEventInput = Version | RemoteReadyEvent;
 
-export type RemoteExtBridgeConfig = Omit<
-  ExtBridgeConfigInput,
-  keyof HostConfig
->;
+export type RemoteExtBridgeConfig = ExtBridgeConfigInputWithoutHostConfig;
 
 export interface RemoteExtBridgeConnectionApi extends Omit<
   ExtBridgeConnectionApi,

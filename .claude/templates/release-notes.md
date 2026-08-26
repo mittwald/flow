@@ -8,6 +8,12 @@
   - Minor/major only — patches release separately, so there is NO Fixes section.
     Fold a user-relevant fix into the related feature's text if it matters.
   - Drop noise entirely: chore/deps/release bumps, internal refactors, CI.
+  - Drop the host side. The audience runs on the remote side; the mStudio host
+    ships with mStudio itself, so its contract never needs a release note or a
+    migration. Judge per symbol, not per package: remote-core is host-only
+    (e.g. `HostExports`, `RemoteExtBridgeConfig`), and the extension-facing
+    ext-bridge carries host types too (e.g. `HostConfig`,
+    `ExtBridgeConfigInput`).
   - Group by feature/area, never by commit. One "## " section per notable
     feature; link its PR(s), e.g. (#1234).
   - Screenshots/GIFs: leave the placeholder for the maintainer — do NOT

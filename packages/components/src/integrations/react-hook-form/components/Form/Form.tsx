@@ -173,12 +173,14 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     }
   };
 
-  const handleSubmit = (e?: BaseSyntheticEvent | F) => {
+  const handleSubmit = async (e?: BaseSyntheticEvent | F): Promise<void> => {
     const formEvent =
       e && "nativeEvent" in e ? (e as BaseSyntheticEvent) : undefined;
     formEvent?.stopPropagation();
 
-    return form.handleSubmit((values, event) =>
+    // react-hook-form's submit handler resolves with an unknown value; the
+    // submit controller only awaits it, so drop the result.
+    await form.handleSubmit((values, event) =>
       runWithGrantedModalClose(modalController, () => {
         const submitResult = onSubmit(values, event);
         if (submitResult instanceof Promise) {

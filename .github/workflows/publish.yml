@@ -31,6 +31,75 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Does this push carry anything that can reach a PUBLISHED package? Docs- and
+  # CI-only merges cannot, and must not produce a release (#2931): the publish
+  # job below is skipped whole, so there is no npm publish, no
+  # `chore(release):` version bump commit, no tag and no GitHub Release.
+  #
+  # This is a separate job rather than a step inside `publish` on purpose. The
+  # run then shows `decide` green and `publish` skipped, with a notice naming the
+  # rule that fired. `paths-ignore` on the trigger would skip the run entirely
+  # and explain nothing — and its globs cannot express "Markdown inside
+  # packages/ still ships" (flow-react-components publishes `["*.md", "dist"]`).
+  #
+  # A manual dispatch always publishes: that is the escape hatch for releasing a
+  # docs-only change deliberately.
+  decide:
+    name: Release relevance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.relevance.outputs.publish }}
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Self-test the classifier
+        run: node --test .github/scripts/release-relevance-lib.test.mjs
+
+      - name: Classify the changed paths 🔎
+        id: relevance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "::notice::Manual dispatch — publishing regardless of changed paths."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # No usable base (branch creation, force push) means we cannot tell
+          # what changed. Publish — the behaviour before #2931.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::No usable base sha — publishing (fail-safe default)."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # The compare API, not `git diff`: it needs no history, so this job
+          # stays a shallow checkout.
+          #
+          # `gh api` prints the error BODY to stdout on a non-2xx and exits
+          # non-zero, so the EXIT STATUS decides whether the list is usable —
+          # never the output. Discarding it hands the guard an empty list, which
+          # is its fail-safe "publish" input.
+          if ! files="$(gh api --paginate \
+            "repos/${REPO}/compare/${BEFORE}...${AFTER}" \
+            --jq '.files[]?.filename')"; then
+            echo "::warning::Could not read the changed-file list from the compare API — publishing (fail-safe default)."
+            files=""
+          fi
+
+          printf '%s\n' "$files" \
+            | node .github/scripts/release-relevance-guard.mjs
+
   publish:
     # Publish on manual dispatch, or on any push to main EXCEPT the release
     # commit this workflow pushes itself (guarded below to avoid an infinite
@@ -42,9 +111,19 @@ jobs:
     # npm rejects — the publish then falls back to an anonymous request and npm
     # returns a misleading 404. A push to main carries refs/heads/main and
     # authenticates correctly.
+    #
+    # `needs.decide` adds the third gate (#2931): a docs- or CI-only push
+    # produces no release at all.
+    needs: decide
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'chore(release):')
+      needs.decide.outputs.publish == 'true' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (
+          vars.AUTO_PUBLISH_ENABLED == 'true' &&
+          !startsWith(github.event.head_commit.message, 'chore(release):')
+        )
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
