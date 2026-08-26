@@ -9,6 +9,7 @@ import * as PasswordToolsComponents from "@mittwald/flow-react-components/mittwa
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import { useMemo, type FC, type PropsWithChildren } from "react";
 import { RootContainer, rootContainerLocator } from "@/tests/lib/RootContainer";
+import { createSerializedReceiver } from "@/tests/lib/serializedConnection";
 import { expect } from "vitest";
 
 const localComponents: typeof Components & typeof PasswordToolsComponents = {
@@ -16,13 +17,26 @@ const localComponents: typeof Components & typeof PasswordToolsComponents = {
   ...PasswordToolsComponents,
 };
 
+/*
+ * <RemoteRenderer /> keeps the receiver itself, while <RemoteRoot /> talks to a
+ * connection that routes every mutation through the real
+ * FlowThreadSerialization (see `@/tests/lib/serializedConnection`) — which is
+ * what production does, and what this environment used to skip. Handing
+ * <RemoteRoot /> the receiver's live connection instead let props reach the host
+ * as the very objects the test created, so a serializer that dropped half of
+ * them still passed every scenario in this suite.
+ */
 const RemoteTestUi: FC<PropsWithChildren> = ({ children }) => {
   const receiver = useMemo(() => new RemoteReceiver(), []);
+  const remoteReceiver = useMemo(
+    () => createSerializedReceiver(receiver),
+    [receiver],
+  );
 
   return (
     <RootContainer>
       <RemoteRenderer __remoteReceiver={receiver} />
-      <RemoteRoot __remoteReceiver={receiver}>
+      <RemoteRoot __remoteReceiver={remoteReceiver}>
         <NotificationProvider>{children}</NotificationProvider>
       </RemoteRoot>
     </RootContainer>
