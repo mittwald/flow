@@ -21,6 +21,7 @@ export default async function Page() {
       group: mdxFile.slugs[0] ?? "",
       slug: mdxFile.slugs[1] ?? "",
       name: mdxFile.getNavTitle(),
+      component: mdxFile.mdxSource.frontmatter.component,
       description: mdxFile.mdxSource.frontmatter.description,
       href: `/04-components${mdxFile.pathname}/overview`,
     }))

@@ -1,7 +1,14 @@
 "use client";
-import type { FC } from "react";
-import { Alert, Content, Heading } from "@mittwald/flow-react-components";
+import { Fragment, type FC } from "react";
+import {
+  Alert,
+  Content,
+  Heading,
+  Link,
+  Text,
+} from "@mittwald/flow-react-components";
 import { getComponentStatusInfo } from "@/lib/componentStatus/componentStatus";
+import type { ReplacementLink } from "@/lib/componentStatus/replacedBy";
 
 const BETA_BODY =
   "Diese Komponente befindet sich in der Beta-Phase. Ihre API ist von der " +
@@ -21,10 +28,13 @@ interface Props {
    * the status registry.
    */
   notice?: string;
+  /** Successors from the page's `replacedBy` frontmatter, already resolved. */
+  replacedBy?: ReplacementLink[];
 }
 
 export const ComponentStatusCallout: FC<Props> = (props) => {
   const status = getComponentStatusInfo(props.name);
+  const replacedBy = props.replacedBy ?? [];
 
   if (status?.level === "beta") {
     return (
@@ -39,7 +49,20 @@ export const ComponentStatusCallout: FC<Props> = (props) => {
     return (
       <Alert status="warning">
         <Heading>Deprecated</Heading>
-        <Content>{props.notice ?? DEPRECATED_FALLBACK}</Content>
+        <Content>
+          <Text>{props.notice ?? DEPRECATED_FALLBACK}</Text>
+          {replacedBy.length > 0 && (
+            <Text>
+              Ersatz:{" "}
+              {replacedBy.map((replacement, index) => (
+                <Fragment key={replacement.href}>
+                  {index > 0 && ", "}
+                  <Link href={replacement.href}>{replacement.name}</Link>
+                </Fragment>
+              ))}
+            </Text>
+          )}
+        </Content>
       </Alert>
     );
   }

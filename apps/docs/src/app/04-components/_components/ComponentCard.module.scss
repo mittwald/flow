@@ -21,6 +21,13 @@
   border-start-end-radius: var(--corner-radius--l);
 }
 
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-px--xs);
+}
+
 .content {
   display: flex;
   flex-direction: column;
