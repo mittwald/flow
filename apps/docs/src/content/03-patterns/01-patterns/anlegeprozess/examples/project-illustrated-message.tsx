@@ -21,7 +21,7 @@ import {
       <Button color="secondary" variant="soft">
         Tarif bestellen
       </Button>
-      <Button color="success">Anlegen</Button>
+      <Button color="primary">Anlegen</Button>
     </ActionGroup>
   </IllustratedMessage>
 </LayoutCard>;

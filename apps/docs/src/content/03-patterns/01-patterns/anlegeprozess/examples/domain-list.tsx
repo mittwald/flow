@@ -109,7 +109,7 @@ export default () => {
         </DomainList.Item>
         <ActionGroup>
           <ContextMenuTrigger>
-            <Button color="success">
+            <Button color="primary">
               <Text>Hinzufügen</Text>
               <IconChevronDown />
             </Button>

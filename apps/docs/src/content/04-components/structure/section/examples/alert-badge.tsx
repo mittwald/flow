@@ -26,7 +26,7 @@ import {
     <Button variant="soft" color="secondary">
       Datenbank migrieren
     </Button>
-    <Button color="success">Aktivieren</Button>
+    <Button color="primary">Aktivieren</Button>
   </Header>
 
   <ColumnLayout>

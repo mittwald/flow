@@ -100,7 +100,7 @@ export default () => {
             </TicketList.TableBody>
           </TicketList.Table>
           <ActionGroup>
-            <Button color="success">
+            <Button color="primary">
               <Text>Anlegen</Text>
             </Button>
           </ActionGroup>
