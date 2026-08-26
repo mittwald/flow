@@ -5,3 +5,5 @@ code-editor:
     value: "FiraCode, monospace"
   gutter-element-min-width:
     value: "{size-rem.l}"
+  line-color:
+    value: "{separator.color}"
