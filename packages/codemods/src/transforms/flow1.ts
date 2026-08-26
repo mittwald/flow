@@ -274,6 +274,718 @@ const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
 const flowAlphaActionPropToOnAction = flowAlphaActionPropToOnActionTransform;
 
 /**
+ * Replaces the removed `Button` props interfaces with `ButtonProps`
+ * (alpha.646).
+ *
+ * `RemoteButtonElementProps`, `ResetButtonProps` and `SubmitButtonProps` were
+ * removed; all three are `ButtonProps`. There is no alias for the old names, so
+ * a codebase still using them does not compile.
+ *
+ * This is more than a rename, because the names do not share an entry.
+ * `SubmitButtonProps` and `ResetButtonProps` came from the `react-hook-form`
+ * entry, which does not export `ButtonProps` — renaming them in place would
+ * swap one import error for another. The specifier therefore moves to the
+ * package root of whichever Flow package it came from, joining an existing
+ * import from that root or getting a new one.
+ *
+ * Only names imported from `@mittwald/flow-react-components` or
+ * `@mittwald/flow-remote-react-components` (including their subpath entries)
+ * are touched, so a same-named import from another package is left alone. A
+ * name imported under a local alias (`import { SubmitButtonProps as P }`) keeps
+ * its alias — it becomes `ButtonProps as P`. Namespace usages
+ * (`Flow.SubmitButtonProps`) are rewritten as well.
+ *
+ * All three collapse onto `ButtonProps`, so a file importing more than one of
+ * them — or one of them next to `ButtonProps` itself — ends up with a single
+ * specifier instead of a duplicate declaration, which would not parse.
+ */
+const flowAlphaButtonPropsInterfacesTransform: Transform = (
+  fileInfo,
+  { j },
+) => {
+  const flowPackages = [
+    "@mittwald/flow-react-components",
+    "@mittwald/flow-remote-react-components",
+  ];
+  const removed = new Set([
+    "RemoteButtonElementProps",
+    "ResetButtonProps",
+    "SubmitButtonProps",
+  ]);
+  const newName = "ButtonProps";
+
+  /** The Flow package a module specifier belongs to, or `undefined`. */
+  const rootPackageOf = (source: string): string | undefined =>
+    flowPackages.find((pkg) => source === pkg || source.startsWith(`${pkg}/`));
+
+  // ast-types models `importKind` on the declaration only, while babel also
+  // puts it on the specifier — which is where a per-specifier `type X` lives.
+  const isTypeOnly = (node: object): boolean =>
+    (node as { importKind?: string }).importKind === "type";
+
+  const root = j(fileInfo.source, { parser: "tsx" });
+
+  /** Local identifiers that have to be renamed (no alias in play). */
+  const localRenames = new Set<string>();
+  /** Local names of `import * as Flow` namespace imports from a Flow package. */
+  const flowNamespaces = new Set<string>();
+  /** `package:local` pairs that already import `ButtonProps` from a root. */
+  const bound = new Set<string>();
+  /** `package:local` pairs that still need importing, and whether type-only. */
+  const wanted = new Map<
+    string,
+    { pkg: string; local: string; type: boolean }
+  >();
+
+  const flowImports = root
+    .find(j.ImportDeclaration)
+    .filter((path) => !!rootPackageOf(String(path.node.source.value)));
+
+  flowImports.forEach((path) => {
+    const source = String(path.node.source.value);
+    for (const specifier of path.node.specifiers ?? []) {
+      if (
+        specifier.type === "ImportNamespaceSpecifier" &&
+        specifier.local?.name
+      ) {
+        flowNamespaces.add(String(specifier.local.name));
+        continue;
+      }
+
+      if (
+        specifier.type === "ImportSpecifier" &&
+        specifier.imported.type === "Identifier" &&
+        specifier.imported.name === newName &&
+        source === rootPackageOf(source)
+      ) {
+        bound.add(`${source}:${String(specifier.local?.name ?? newName)}`);
+      }
+    }
+  });
+
+  flowImports.forEach((path) => {
+    const source = String(path.node.source.value);
+    const pkg = rootPackageOf(source) ?? source;
+    const declarationIsType = isTypeOnly(path.node);
+    const specifiers = path.node.specifiers ?? [];
+    const survivors: typeof specifiers = [];
+
+    for (const specifier of specifiers) {
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier" ||
+        !removed.has(specifier.imported.name)
+      ) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const imported = specifier.imported.name;
+      const local = String(specifier.local?.name ?? imported);
+      const isAlias = local !== imported;
+      const newLocal = isAlias ? local : newName;
+      const key = `${pkg}:${newLocal}`;
+
+      if (!isAlias) {
+        localRenames.add(local);
+      }
+
+      if (!bound.has(key)) {
+        const existing = wanted.get(key);
+        const type = declarationIsType || isTypeOnly(specifier);
+        wanted.set(key, {
+          pkg,
+          local: newLocal,
+          // A value import must not lose out to a type-only one.
+          type: existing ? existing.type && type : type,
+        });
+      }
+    }
+
+    if (survivors.length === specifiers.length) {
+      return;
+    }
+
+    // Leaving an emptied declaration behind would turn it into a side-effect
+    // import of an entry the file no longer uses.
+    if (survivors.length === 0) {
+      j(path).remove();
+      return;
+    }
+
+    path.node.specifiers = survivors;
+  });
+
+  if (
+    wanted.size === 0 &&
+    localRenames.size === 0 &&
+    flowNamespaces.size === 0
+  ) {
+    return fileInfo.source;
+  }
+
+  for (const { pkg, local, type } of wanted.values()) {
+    const specifier = j.importSpecifier(
+      j.identifier(newName),
+      j.identifier(local),
+    );
+
+    // Join an import from the package root when the file already has one and
+    // it can carry the specifier; otherwise add a declaration of its own.
+    const host = root
+      .find(j.ImportDeclaration)
+      .filter(
+        (path) =>
+          String(path.node.source.value) === pkg &&
+          isTypeOnly(path.node) === type,
+      )
+      .paths()[0];
+
+    if (host) {
+      host.node.specifiers = [...(host.node.specifiers ?? []), specifier];
+      continue;
+    }
+
+    const declaration = j.importDeclaration([specifier], j.literal(pkg));
+    if (type) {
+      declaration.importKind = "type";
+    }
+
+    const firstImport = root.find(j.ImportDeclaration).paths()[0];
+    if (firstImport) {
+      j(firstImport).insertBefore(declaration);
+    } else {
+      root.get().node.program.body.unshift(declaration);
+    }
+  }
+
+  /**
+   * `JSXIdentifier` extends `Identifier`, so this one pass covers value
+   * references and type references alike. Positions where the name is not a
+   * reference to the import — an object key, a member's property, a JSX
+   * attribute name — are skipped.
+   */
+  root.find(j.Identifier).forEach((path) => {
+    const parent = path.parent.node;
+
+    const isNamespaceMember =
+      (parent.type === "MemberExpression" ||
+        parent.type === "JSXMemberExpression") &&
+      parent.property === path.node;
+
+    if (isNamespaceMember) {
+      const object = parent.object;
+      if (
+        (object.type === "Identifier" || object.type === "JSXIdentifier") &&
+        removed.has(path.node.name) &&
+        flowNamespaces.has(String(object.name))
+      ) {
+        path.node.name = newName;
+      }
+      return;
+    }
+
+    if (
+      parent.type === "ImportSpecifier" ||
+      parent.type === "JSXAttribute" ||
+      ((parent.type === "ObjectProperty" || parent.type === "Property") &&
+        parent.key === path.node &&
+        !parent.computed)
+    ) {
+      return;
+    }
+
+    if (localRenames.has(path.node.name)) {
+      path.node.name = newName;
+    }
+  });
+
+  return root.toSource();
+};
+
+const flowAlphaButtonPropsInterfaces = flowAlphaButtonPropsInterfacesTransform;
+
+/**
+ * Renames `MutedActionError` to `AbortActionError`, along with its two static
+ * helpers (alpha.712).
+ *
+ * ```diff
+ * -throw new MutedActionError();
+ * +throw new AbortActionError();
+ * -MutedActionError.isMutedActionError(error);
+ * +AbortActionError.isAbortActionError(error);
+ * -MutedActionError.rethrowIfNotMuted(error);
+ * +AbortActionError.rethrowIfNotAborted(error);
+ * ```
+ *
+ * There is no alias for the old name, so a codebase still using it does not
+ * compile.
+ *
+ * The thrown error's `name` changed too, so a `error.name ===
+ * "MutedActionError"` comparison is rewritten as well — but only in a file that
+ * imports the class, and only where the string is compared with `==`, `===`,
+ * `!=` or `!==`. A check living in a file that never imports the class cannot
+ * be recognised; grep for the string once when you are done.
+ *
+ * Only names imported from `@mittwald/flow-react-components` or
+ * `@mittwald/flow-remote-react-components` (including their subpath entries)
+ * are touched. A local alias (`import { MutedActionError as Muted }`) keeps its
+ * alias — the static helpers on it are renamed all the same. Namespace usages
+ * (`Flow.MutedActionError`) are rewritten too.
+ */
+const flowAlphaMutedActionErrorToAbortActionErrorTransform: Transform = (
+  fileInfo,
+  { j },
+) => {
+  const flowPackages = [
+    "@mittwald/flow-react-components",
+    "@mittwald/flow-remote-react-components",
+  ];
+  const oldName = "MutedActionError";
+  const newName = "AbortActionError";
+  const memberRenames = new Map([
+    ["isMutedActionError", "isAbortActionError"],
+    ["rethrowIfNotMuted", "rethrowIfNotAborted"],
+  ]);
+
+  const isFlowImport = (source: string): boolean =>
+    flowPackages.some((pkg) => source === pkg || source.startsWith(`${pkg}/`));
+
+  // ast-types models `importKind` on the declaration only, while babel also
+  // puts it on the specifier — which is where a per-specifier `type X` lives.
+  const isTypeOnly = (specifier: object): boolean =>
+    (specifier as { importKind?: string }).importKind === "type";
+  const makeValueImport = (specifier: object): void => {
+    (specifier as { importKind?: string }).importKind = "value";
+  };
+
+  const root = j(fileInfo.source, { parser: "tsx" });
+
+  /**
+   * Local names bound to the class, alias or not — the static helpers hang off
+   * these.
+   */
+  const classLocals = new Set<string>();
+  /** Local names whose identifier itself has to be renamed (no alias in play). */
+  const localRenames = new Set<string>();
+  /** Local names of `import * as Flow` namespace imports from a Flow package. */
+  const flowNamespaces = new Set<string>();
+
+  const flowImports = root
+    .find(j.ImportDeclaration)
+    .filter((path) => isFlowImport(String(path.node.source.value)));
+
+  /**
+   * Local names the file already binds to the new name. Renaming onto one of
+   * them must not add a second specifier, which would not parse.
+   */
+  const claimed = new Set<string>();
+
+  flowImports.forEach((path) => {
+    for (const specifier of path.node.specifiers ?? []) {
+      if (
+        specifier.type === "ImportNamespaceSpecifier" &&
+        specifier.local?.name
+      ) {
+        flowNamespaces.add(String(specifier.local.name));
+        continue;
+      }
+
+      if (
+        specifier.type === "ImportSpecifier" &&
+        specifier.imported.type === "Identifier" &&
+        specifier.imported.name === newName
+      ) {
+        claimed.add(String(specifier.local?.name ?? newName));
+      }
+    }
+  });
+
+  flowImports.forEach((path) => {
+    const specifiers = path.node.specifiers ?? [];
+    const survivors: typeof specifiers = [];
+
+    for (const specifier of specifiers) {
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier" ||
+        specifier.imported.name !== oldName
+      ) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const local = String(specifier.local?.name ?? oldName);
+      const isAlias = local !== oldName;
+      const newLocal = isAlias ? local : newName;
+
+      classLocals.add(local);
+      if (!isAlias) {
+        localRenames.add(local);
+      }
+
+      if (claimed.has(newLocal)) {
+        // The name is already bound by another import — drop this specifier
+        // instead of declaring it twice.
+        if (!isTypeOnly(specifier)) {
+          for (const kept of survivors) {
+            if (
+              kept.type === "ImportSpecifier" &&
+              kept.imported.type === "Identifier" &&
+              String(kept.local?.name ?? kept.imported.name) === newLocal
+            ) {
+              makeValueImport(kept);
+            }
+          }
+        }
+        continue;
+      }
+      claimed.add(newLocal);
+
+      // Mutate in place so an `import type` / `type X` modifier survives.
+      specifier.imported.name = newName;
+      if (!isAlias && specifier.local) {
+        specifier.local.name = newName;
+      }
+      survivors.push(specifier);
+    }
+
+    if (survivors.length === specifiers.length) {
+      return;
+    }
+
+    // Leaving an emptied declaration behind would turn it into a side-effect
+    // import of an entry the file no longer uses.
+    if (survivors.length === 0) {
+      j(path).remove();
+      return;
+    }
+
+    path.node.specifiers = survivors;
+  });
+
+  if (classLocals.size === 0 && flowNamespaces.size === 0) {
+    return fileInfo.source;
+  }
+
+  /** Does this expression denote the class — `Muted` or `Flow.MutedActionError`? */
+  const isClassReference = (
+    node:
+      | {
+          type: string;
+          name?: unknown;
+          object?: { type: string; name?: unknown } | null;
+          property?: { type: string; name?: unknown } | null;
+        }
+      | null
+      | undefined,
+  ): boolean => {
+    if (!node) {
+      return false;
+    }
+    if (node.type === "Identifier") {
+      return classLocals.has(String(node.name));
+    }
+    return (
+      node.type === "MemberExpression" &&
+      node.object?.type === "Identifier" &&
+      flowNamespaces.has(String(node.object.name)) &&
+      node.property?.type === "Identifier" &&
+      String(node.property.name) === oldName
+    );
+  };
+
+  // Static helpers first: the check reads the pre-rename object name.
+  root.find(j.MemberExpression).forEach((path) => {
+    const { object, property } = path.node;
+    if (property.type !== "Identifier" || !isClassReference(object)) {
+      return;
+    }
+
+    const renamed = memberRenames.get(property.name);
+    if (renamed) {
+      property.name = renamed;
+    }
+  });
+
+  root.find(j.Identifier).forEach((path) => {
+    const parent = path.parent.node;
+
+    const isNamespaceMember =
+      (parent.type === "MemberExpression" ||
+        parent.type === "JSXMemberExpression") &&
+      parent.property === path.node;
+
+    if (isNamespaceMember) {
+      const object = parent.object;
+      if (
+        (object.type === "Identifier" || object.type === "JSXIdentifier") &&
+        path.node.name === oldName &&
+        flowNamespaces.has(String(object.name))
+      ) {
+        path.node.name = newName;
+      }
+      return;
+    }
+
+    if (
+      parent.type === "ImportSpecifier" ||
+      parent.type === "JSXAttribute" ||
+      ((parent.type === "ObjectProperty" || parent.type === "Property") &&
+        parent.key === path.node &&
+        !parent.computed)
+    ) {
+      return;
+    }
+
+    if (localRenames.has(path.node.name)) {
+      path.node.name = newName;
+    }
+  });
+
+  // `error.name === "MutedActionError"` — a comparison is the only place where
+  // the string can be recognised as the error's name rather than free text.
+  const comparisons = new Set(["===", "!==", "==", "!="]);
+  root.find(j.BinaryExpression).forEach((path) => {
+    if (!comparisons.has(path.node.operator)) {
+      return;
+    }
+
+    for (const side of [path.node.left, path.node.right]) {
+      if (
+        (side.type === "StringLiteral" || side.type === "Literal") &&
+        side.value === oldName
+      ) {
+        side.value = newName;
+      }
+    }
+  });
+
+  return root.toSource();
+};
+
+const flowAlphaMutedActionErrorToAbortActionError =
+  flowAlphaMutedActionErrorToAbortActionErrorTransform;
+
+/**
+ * Replaces `AsyncRule` and `SyncRule` with `Rule` (alpha.802).
+ *
+ * `@mittwald/password-tools-js` merged both classes into a single abstract
+ * `Rule`, and the `mittwald-password-tools-js` entry stopped re-exporting the
+ * old names. A custom rule extends `Rule` and may return its result
+ * synchronously or as a promise — the distinction the two classes encoded is
+ * gone, so both names collapse onto the same one.
+ *
+ * Only names imported from the `mittwald-password-tools-js` entry are touched,
+ * so a same-named import from another package is left alone. A name imported
+ * under a local alias (`import { AsyncRule as Base }`) keeps its alias — only
+ * the imported name changes. Namespace usages (`Pw.AsyncRule`) are rewritten as
+ * well.
+ *
+ * Because both names collapse onto `Rule`, a file importing more than one of
+ * them would end up with a duplicate specifier. Those collapse onto one.
+ */
+const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
+  const flowPackages = [
+    "@mittwald/flow-react-components/mittwald-password-tools-js",
+    "@mittwald/flow-remote-react-components/mittwald-password-tools-js",
+  ];
+  const renames = new Map([
+    ["AsyncRule", "Rule"],
+    ["SyncRule", "Rule"],
+  ]);
+
+  const isFlowImport = (source: string): boolean =>
+    flowPackages.includes(source);
+
+  // ast-types models `importKind` on the declaration only, while babel also
+  // puts it on the specifier — which is where a per-specifier `type X` lives.
+  const isTypeOnly = (specifier: object): boolean =>
+    (specifier as { importKind?: string }).importKind === "type";
+  const makeValueImport = (specifier: object): void => {
+    (specifier as { importKind?: string }).importKind = "value";
+  };
+
+  const root = j(fileInfo.source, { parser: "tsx" });
+
+  /** Local identifiers that refer to a renamed export, mapped to the new name. */
+  const localRenames = new Map<string, string>();
+  /**
+   * Whether any import specifier was rewritten. An aliased `Align as Row` adds
+   * nothing to `localRenames` — its local name stays `Row` — so counting those
+   * alone would treat an alias-only file as untouched and discard the rewrite.
+   */
+  let renamedAnImport = false;
+  /** Local names of `import * as Flow` namespace imports from a Flow package. */
+  const flowNamespaces = new Set<string>();
+
+  const flowImports = root
+    .find(j.ImportDeclaration)
+    .filter((path) => isFlowImport(String(path.node.source.value)));
+
+  /**
+   * `imported:local` pairs the file already binds without a rename. A rename
+   * that lands on one of these must not add a second specifier for it — the
+   * name is available from the import that already carries it, which is also
+   * the entry that really exports it.
+   */
+  const claimed = new Set<string>();
+
+  flowImports.forEach((path) => {
+    for (const specifier of path.node.specifiers ?? []) {
+      if (
+        specifier.type === "ImportNamespaceSpecifier" &&
+        specifier.local?.name
+      ) {
+        flowNamespaces.add(String(specifier.local.name));
+        continue;
+      }
+
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier" ||
+        renames.has(specifier.imported.name)
+      ) {
+        continue;
+      }
+
+      claimed.add(
+        `${specifier.imported.name}:${String(
+          specifier.local?.name ?? specifier.imported.name,
+        )}`,
+      );
+    }
+  });
+
+  flowImports.forEach((path) => {
+    const specifiers = path.node.specifiers ?? [];
+    const survivors: typeof specifiers = [];
+
+    for (const specifier of specifiers) {
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier"
+      ) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const imported = specifier.imported.name;
+      const renamed = renames.get(imported);
+      if (!renamed) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const local = String(specifier.local?.name ?? imported);
+      const isAlias = local !== imported;
+      const newLocal = isAlias ? local : renamed;
+      const key = `${renamed}:${newLocal}`;
+
+      renamedAnImport = true;
+      if (!isAlias) {
+        // An aliased import keeps its local name and needs no further change.
+        localRenames.set(local, renamed);
+      }
+
+      // Renaming can collide with a name the file already binds — directly, or
+      // because a second old name maps onto the same new one. Either way the
+      // binding already exists, so this specifier goes away instead of
+      // producing a duplicate declaration, which would not parse.
+      const collision = claimed.has(key);
+      claimed.add(key);
+      if (collision) {
+        // A value import must not lose out to a type-only one.
+        if (!isTypeOnly(specifier)) {
+          for (const kept of survivors) {
+            if (
+              kept.type === "ImportSpecifier" &&
+              kept.imported.type === "Identifier" &&
+              `${kept.imported.name}:${String(
+                kept.local?.name ?? kept.imported.name,
+              )}` === key
+            ) {
+              makeValueImport(kept);
+            }
+          }
+        }
+        continue;
+      }
+
+      // Mutate in place so an `import type` / `type X` modifier survives.
+      specifier.imported.name = renamed;
+      if (!isAlias && specifier.local) {
+        specifier.local.name = renamed;
+      }
+      survivors.push(specifier);
+    }
+
+    if (survivors.length === specifiers.length) {
+      return;
+    }
+
+    // Every specifier moved to an import that already binds the name. Leaving
+    // the declaration behind would turn it into a side-effect import of an
+    // entry the file no longer uses.
+    if (survivors.length === 0) {
+      j(path).remove();
+      return;
+    }
+
+    path.node.specifiers = survivors;
+  });
+
+  if (!renamedAnImport && flowNamespaces.size === 0) {
+    return fileInfo.source;
+  }
+
+  /**
+   * `JSXIdentifier` extends `Identifier`, so this one pass covers JSX tags,
+   * value references and type references alike. Positions where the name is not
+   * a reference to the import — an object key, a member's property, a JSX
+   * attribute name — are skipped.
+   */
+  root.find(j.Identifier).forEach((path) => {
+    const parent = path.parent.node;
+
+    const isNamespaceMember =
+      (parent.type === "MemberExpression" ||
+        parent.type === "JSXMemberExpression") &&
+      parent.property === path.node;
+
+    if (isNamespaceMember) {
+      const object = parent.object;
+      if (object.type === "Identifier" || object.type === "JSXIdentifier") {
+        const renamed = renames.get(path.node.name);
+        if (renamed && flowNamespaces.has(String(object.name))) {
+          path.node.name = renamed;
+        }
+      }
+      return;
+    }
+
+    if (
+      parent.type === "ImportSpecifier" ||
+      parent.type === "JSXAttribute" ||
+      ((parent.type === "ObjectProperty" || parent.type === "Property") &&
+        parent.key === path.node &&
+        !parent.computed)
+    ) {
+      return;
+    }
+
+    const renamed = localRenames.get(path.node.name);
+    if (renamed) {
+      path.node.name = renamed;
+    }
+  });
+
+  return root.toSource();
+};
+
+const flowAlphaPasswordToolsRule = flowAlphaPasswordToolsRuleTransform;
+
+/**
  * Renames the `Align` component to `Combine`, and `AlignProps` to
  * `CombineProps`.
  *
@@ -318,80 +1030,121 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
   /** Local names of `import * as Flow` namespace imports from a Flow package. */
   const flowNamespaces = new Set<string>();
 
-  root
+  const flowImports = root
     .find(j.ImportDeclaration)
-    .filter((path) => isFlowImport(String(path.node.source.value)))
-    .forEach((path) => {
-      for (const specifier of path.node.specifiers ?? []) {
-        if (
-          specifier.type === "ImportNamespaceSpecifier" &&
-          specifier.local?.name
-        ) {
-          flowNamespaces.add(String(specifier.local.name));
-          continue;
-        }
+    .filter((path) => isFlowImport(String(path.node.source.value)));
 
-        if (
-          specifier.type !== "ImportSpecifier" ||
-          specifier.imported.type !== "Identifier"
-        ) {
-          continue;
-        }
+  /**
+   * `imported:local` pairs the file already binds without a rename. A rename
+   * that lands on one of these must not add a second specifier for it — the
+   * name is available from the import that already carries it, which is also
+   * the entry that really exports it.
+   */
+  const claimed = new Set<string>();
 
-        const imported = specifier.imported.name;
-        const renamed = renames.get(imported);
-        if (!renamed) {
-          continue;
-        }
+  flowImports.forEach((path) => {
+    for (const specifier of path.node.specifiers ?? []) {
+      if (
+        specifier.type === "ImportNamespaceSpecifier" &&
+        specifier.local?.name
+      ) {
+        flowNamespaces.add(String(specifier.local.name));
+        continue;
+      }
 
-        // Mutate in place so an `import type` / `type X` modifier survives.
-        const local = String(specifier.local?.name ?? imported);
-        specifier.imported.name = renamed;
-        renamedAnImport = true;
-        if (local === imported) {
-          localRenames.set(local, renamed);
-          if (specifier.local) {
-            specifier.local.name = renamed;
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier" ||
+        renames.has(specifier.imported.name)
+      ) {
+        continue;
+      }
+
+      claimed.add(
+        `${specifier.imported.name}:${String(
+          specifier.local?.name ?? specifier.imported.name,
+        )}`,
+      );
+    }
+  });
+
+  flowImports.forEach((path) => {
+    const specifiers = path.node.specifiers ?? [];
+    const survivors: typeof specifiers = [];
+
+    for (const specifier of specifiers) {
+      if (
+        specifier.type !== "ImportSpecifier" ||
+        specifier.imported.type !== "Identifier"
+      ) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const imported = specifier.imported.name;
+      const renamed = renames.get(imported);
+      if (!renamed) {
+        survivors.push(specifier);
+        continue;
+      }
+
+      const local = String(specifier.local?.name ?? imported);
+      const isAlias = local !== imported;
+      const newLocal = isAlias ? local : renamed;
+      const key = `${renamed}:${newLocal}`;
+
+      renamedAnImport = true;
+      if (!isAlias) {
+        // An aliased import keeps its local name and needs no further change.
+        localRenames.set(local, renamed);
+      }
+
+      // Renaming can collide with a name the file already binds — directly, or
+      // because a second old name maps onto the same new one. Either way the
+      // binding already exists, so this specifier goes away instead of
+      // producing a duplicate declaration, which would not parse.
+      const collision = claimed.has(key);
+      claimed.add(key);
+      if (collision) {
+        // A value import must not lose out to a type-only one.
+        if (!isTypeOnly(specifier)) {
+          for (const kept of survivors) {
+            if (
+              kept.type === "ImportSpecifier" &&
+              kept.imported.type === "Identifier" &&
+              `${kept.imported.name}:${String(
+                kept.local?.name ?? kept.imported.name,
+              )}` === key
+            ) {
+              makeValueImport(kept);
+            }
           }
         }
-        // An aliased `Align as Row` keeps `Row` and needs no further change.
+        continue;
       }
 
-      // Renaming can collide with a name the file already imports: a file using
-      // both `Align` and `Combine` would end up with `{ Combine, Combine }`,
-      // which does not parse. Collapse such a pair onto one specifier.
-      const specifiers = path.node.specifiers ?? [];
-      const survivors = new Map<string, (typeof specifiers)[number]>();
-
-      for (const specifier of specifiers) {
-        if (
-          specifier.type !== "ImportSpecifier" ||
-          specifier.imported.type !== "Identifier"
-        ) {
-          survivors.set(`${survivors.size}:unique`, specifier);
-          continue;
-        }
-
-        const key = `${specifier.imported.name}:${String(
-          specifier.local?.name ?? specifier.imported.name,
-        )}`;
-        const survivor = survivors.get(key);
-
-        if (!survivor) {
-          survivors.set(key, specifier);
-          continue;
-        }
-
-        // A value import subsumes a type-only one, never the other way round.
-        if (!isTypeOnly(specifier)) {
-          makeValueImport(survivor);
-        }
+      // Mutate in place so an `import type` / `type X` modifier survives.
+      specifier.imported.name = renamed;
+      if (!isAlias && specifier.local) {
+        specifier.local.name = renamed;
       }
+      survivors.push(specifier);
+    }
 
-      if (survivors.size !== specifiers.length) {
-        path.node.specifiers = [...survivors.values()];
-      }
-    });
+    if (survivors.length === specifiers.length) {
+      return;
+    }
+
+    // Every specifier moved to an import that already binds the name. Leaving
+    // the declaration behind would turn it into a side-effect import of an
+    // entry the file no longer uses.
+    if (survivors.length === 0) {
+      j(path).remove();
+      return;
+    }
+
+    path.node.specifiers = survivors;
+  });
 
   if (!renamedAnImport && flowNamespaces.size === 0) {
     return fileInfo.source;
@@ -718,8 +1471,11 @@ const flowAlphaColorPrimaryToDefault = flowAlphaColorPrimaryToDefaultTransform;
 const flow1Transform: Transform = (fileInfo, api, options) => {
   /** Ordered by the release the respective change shipped in. */
   const transforms: Transform[] = [
+    flowAlphaButtonPropsInterfaces, // alpha.646
     flowAlphaActionPropToOnAction, // alpha.646
+    flowAlphaMutedActionErrorToAbortActionError, // alpha.712
     flowAlphaAccentBoxColorToBackgroundColor, // alpha.786
+    flowAlphaPasswordToolsRule, // alpha.802
     flowAlphaColorPrimaryToDefault, // alpha.846
     flowAlphaButtonColorAccentToSuccess, // alpha.1046
     flowAlphaAlignToCombine, // alpha.1047

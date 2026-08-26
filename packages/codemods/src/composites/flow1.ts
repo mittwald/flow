@@ -1,6 +1,9 @@
 import type { Transform } from "jscodeshift";
 import flowAlphaAccentBoxColorToBackgroundColor from "../transforms/flowAlphaAccentBoxColorToBackgroundColor";
 import flowAlphaActionPropToOnAction from "../transforms/flowAlphaActionPropToOnAction";
+import flowAlphaButtonPropsInterfaces from "../transforms/flowAlphaButtonPropsInterfaces";
+import flowAlphaMutedActionErrorToAbortActionError from "../transforms/flowAlphaMutedActionErrorToAbortActionError";
+import flowAlphaPasswordToolsRule from "../transforms/flowAlphaPasswordToolsRule";
 import flowAlphaAlignToCombine from "../transforms/flowAlphaAlignToCombine";
 import flowAlphaButtonColorAccentToSuccess from "../transforms/flowAlphaButtonColorAccentToSuccess";
 import flowAlphaColorPrimaryToDefault from "../transforms/flowAlphaColorPrimaryToDefault";
@@ -27,8 +30,11 @@ import flowAlphaColorPrimaryToDefault from "../transforms/flowAlphaColorPrimaryT
 const flow1Transform: Transform = (fileInfo, api, options) => {
   /** Ordered by the release the respective change shipped in. */
   const transforms: Transform[] = [
+    flowAlphaButtonPropsInterfaces, // alpha.646
     flowAlphaActionPropToOnAction, // alpha.646
+    flowAlphaMutedActionErrorToAbortActionError, // alpha.712
     flowAlphaAccentBoxColorToBackgroundColor, // alpha.786
+    flowAlphaPasswordToolsRule, // alpha.802
     flowAlphaColorPrimaryToDefault, // alpha.846
     flowAlphaButtonColorAccentToSuccess, // alpha.1046
     flowAlphaAlignToCombine, // alpha.1047

@@ -136,6 +136,130 @@ export const A = () => <Combine />;
   });
 });
 
+describe("flowAlphaMutedActionErrorToAbortActionError", () => {
+  test("renames the class, its static helpers and the name comparison", () => {
+    const source = `import { MutedActionError } from "@mittwald/flow-react-components";
+import { MutedActionError as Muted } from "@mittwald/flow-react-components/internal";
+import * as Flow from "@mittwald/flow-react-components";
+import { MutedActionError as Other } from "some-other-package";
+
+export const run = (error: Error) => {
+  MutedActionError.isMutedActionError(error);
+  Muted.rethrowIfNotMuted(error);
+  Flow.MutedActionError.isMutedActionError(error);
+  Other.isMutedActionError(error);
+  if (error.name === "MutedActionError") return;
+  const label = "MutedActionError";
+  throw new MutedActionError(label);
+};
+`;
+
+    // `Other` comes from another package and keeps everything. The bare string
+    // is not a comparison, so it stays too.
+    expect(runTransform("flowAlphaMutedActionErrorToAbortActionError", source))
+      .toBe(`import { AbortActionError } from "@mittwald/flow-react-components";
+import { AbortActionError as Muted } from "@mittwald/flow-react-components/internal";
+import * as Flow from "@mittwald/flow-react-components";
+import { MutedActionError as Other } from "some-other-package";
+
+export const run = (error: Error) => {
+  AbortActionError.isAbortActionError(error);
+  Muted.rethrowIfNotAborted(error);
+  Flow.AbortActionError.isAbortActionError(error);
+  Other.isMutedActionError(error);
+  if (error.name === "AbortActionError") return;
+  const label = "MutedActionError";
+  throw new AbortActionError(label);
+};
+`);
+  });
+});
+
+describe("flowAlphaPasswordToolsRule", () => {
+  test("collapses both rule classes onto Rule", () => {
+    const source = `import { AsyncRule, SyncRule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import { AsyncRule as Other } from "some-other-package";
+
+export class A extends AsyncRule {}
+export class B extends SyncRule {}
+export class C extends Other {}
+`;
+
+    expect(runTransform("flowAlphaPasswordToolsRule", source))
+      .toBe(`import { Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import { AsyncRule as Other } from "some-other-package";
+
+export class A extends Rule {}
+export class B extends Rule {}
+export class C extends Other {}
+`);
+  });
+});
+
+describe("flowAlphaButtonPropsInterfaces", () => {
+  test("drops the emptied import when the name is already bound elsewhere", () => {
+    const source = `import type { ButtonProps } from "@mittwald/flow-react-components";
+import type { SubmitButtonProps, ResetButtonProps } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = ButtonProps | SubmitButtonProps | ResetButtonProps;
+`;
+
+    // `ButtonProps` lives in the package root, not in the react-hook-form
+    // entry, so the surviving specifier has to be the one that was already
+    // right — and the emptied declaration goes away rather than becoming a
+    // side-effect import.
+    expect(runTransform("flowAlphaButtonPropsInterfaces", source))
+      .toBe(`import type { ButtonProps } from "@mittwald/flow-react-components";
+
+export type A = ButtonProps | ButtonProps | ButtonProps;
+`);
+  });
+
+  test("moves the import to the package root", () => {
+    const source = `import type { SubmitButtonProps } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = SubmitButtonProps;
+`;
+
+    // The react-hook-form entry does not export `ButtonProps`, so renaming in
+    // place would swap one import error for another.
+    expect(runTransform("flowAlphaButtonPropsInterfaces", source))
+      .toBe(`import type { ButtonProps } from "@mittwald/flow-react-components";
+
+export type A = ButtonProps;
+`);
+  });
+
+  test("keeps the rest of the import it moves out of", () => {
+    const source = `import { Button, type SubmitButtonProps } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = SubmitButtonProps;
+export const B = Button;
+`;
+
+    expect(runTransform("flowAlphaButtonPropsInterfaces", source))
+      .toBe(`import type { ButtonProps } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = ButtonProps;
+export const B = Button;
+`);
+  });
+
+  test("keeps an alias while moving it", () => {
+    const source = `import type { SubmitButtonProps as P } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = P;
+`;
+
+    expect(runTransform("flowAlphaButtonPropsInterfaces", source))
+      .toBe(`import type { ButtonProps as P } from "@mittwald/flow-react-components";
+
+export type A = P;
+`);
+  });
+});
+
 describe("flow020", () => {
   test("collapses subpath imports onto the package root", () => {
     const source = `import { Button } from "@mittwald/flow-react-components/components/Button";

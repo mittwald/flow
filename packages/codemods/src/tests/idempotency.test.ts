@@ -75,6 +75,30 @@ export const A = () => (
 );
 `,
 
+  flowAlphaButtonPropsInterfaces: `import type { ButtonProps } from "@mittwald/flow-react-components";
+import type { SubmitButtonProps, ResetButtonProps } from "@mittwald/flow-react-components/react-hook-form";
+
+export type A = ButtonProps | SubmitButtonProps | ResetButtonProps;
+`,
+
+  flowAlphaMutedActionErrorToAbortActionError: `import { MutedActionError } from "@mittwald/flow-react-components";
+import { AbortActionError } from "@mittwald/flow-react-components/internal";
+
+export const run = (error: Error) => {
+  throw new MutedActionError();
+  MutedActionError.isMutedActionError(error);
+  AbortActionError.rethrowIfNotAborted(error);
+  if (error.name === "MutedActionError") return;
+};
+`,
+
+  flowAlphaPasswordToolsRule: `import { AsyncRule, SyncRule, Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+
+export class A extends AsyncRule {}
+export class B extends SyncRule {}
+export class C extends Rule {}
+`,
+
   flow1: `import { AccentBox, Action, Align, Button, Heading } from "@mittwald/flow-react-components";
 
 export const A = () => (
