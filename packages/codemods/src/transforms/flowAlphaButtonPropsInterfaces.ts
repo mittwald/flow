@@ -16,11 +16,12 @@ import type { Transform } from "jscodeshift";
  * import from that root or getting a new one.
  *
  * The scope is `@mittwald/flow-react-components` and its subpath entries only.
- * `@mittwald/flow-remote-react-components` exports no component prop types at
- * all, so there is nothing to move a remote import onto — a remote codebase has
- * to pick its own source for the type. `RemoteButtonElementProps` is left alone
- * for the same reason, and because `@mittwald/flow-remote-elements` still
- * exports that name today.
+ * The remote package re-exports the `flr-universal` surface, so it does carry
+ * some prop types — `ActionProps`, `ModalProps` and the like — but
+ * `ButtonProps` is not among them. There is nothing to move a remote import
+ * onto, so a remote codebase has to pick its own source for the type.
+ * `RemoteButtonElementProps` is left alone for the same reason, and because
+ * `@mittwald/flow-remote-elements` still exports that name today.
  *
  * A same-named import from another package is left alone. A name imported under
  * a local alias (`import { SubmitButtonProps as P }`) keeps its alias — it

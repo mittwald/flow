@@ -170,18 +170,22 @@ const flowAlphaAccentBoxColorToBackgroundColor =
  * Renames the `action` prop to `onAction` on `Action`.
  *
  * The scope is deliberately narrow. Only JSX elements that resolve to `Action`
- * — imported (named or as a namespace) from `@mittwald/flow-react-components`,
- * including its subpath entries — are touched. `Action` is not remote-capable,
- * so `@mittwald/flow-remote-react-components` cannot be in scope. Same-named
- * components from other packages are left untouched, and so is the `action`
- * attribute of a plain `<form>`.
+ * — imported (named or as a namespace) from `@mittwald/flow-react-components`
+ * or `@mittwald/flow-remote-react-components`, including their subpath entries
+ * — are touched. `Action` is not one of the generated remote components, but
+ * the remote package re-exports the `flr-universal` surface, which carries it.
+ * Same-named components from other packages are left untouched, and so is the
+ * `action` attribute of a plain `<form>`.
  *
  * An element that already carries `onAction` keeps it and only loses the stale
  * `action` prop, which mirrors what the runtime fallback does: an explicit
  * `onAction` wins.
  */
 const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
-  const flowPackages = ["@mittwald/flow-react-components"];
+  const flowPackages = [
+    "@mittwald/flow-react-components",
+    "@mittwald/flow-remote-react-components",
+  ];
   const affectedComponents = new Set(["Action"]);
 
   const isFlowImport = (source: string): boolean =>
@@ -287,11 +291,12 @@ const flowAlphaActionPropToOnAction = flowAlphaActionPropToOnActionTransform;
  * import from that root or getting a new one.
  *
  * The scope is `@mittwald/flow-react-components` and its subpath entries only.
- * `@mittwald/flow-remote-react-components` exports no component prop types at
- * all, so there is nothing to move a remote import onto — a remote codebase has
- * to pick its own source for the type. `RemoteButtonElementProps` is left alone
- * for the same reason, and because `@mittwald/flow-remote-elements` still
- * exports that name today.
+ * The remote package re-exports the `flr-universal` surface, so it does carry
+ * some prop types — `ActionProps`, `ModalProps` and the like — but
+ * `ButtonProps` is not among them. There is nothing to move a remote import
+ * onto, so a remote codebase has to pick its own source for the type.
+ * `RemoteButtonElementProps` is left alone for the same reason, and because
+ * `@mittwald/flow-remote-elements` still exports that name today.
  *
  * A same-named import from another package is left alone. A name imported under
  * a local alias (`import { SubmitButtonProps as P }`) keeps its alias — it

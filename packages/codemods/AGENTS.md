@@ -49,9 +49,15 @@ emitting a bundle that silently drops code.
 ## Does it apply to the remote package?
 
 `@mittwald/flow-remote-react-components` mirrors the component API, so most
-codemods apply there too — but only most. The remote package exports the
-`@flr-generate` components and nothing else: no prop types, no error classes,
-and three entries against the main package's nine.
+codemods apply there too — but only most. Its surface is three things: one
+module per `@flr-generate` component, the react-hook-form entry, and — the easy
+one to miss — **the whole `flr-universal` entry of the main package**, which
+`FlowRemoteUniversal.ts` re-exports wholesale. That last one carries `Action`,
+`Modal`, the overlay hooks and their prop types, none of which are generated
+remote components.
+
+What is not in there: prop types outside that universal set, error classes, and
+six of the main package's nine entries.
 
 **A transform may scope itself to the remote package exactly when something it
 targets exists there.** Claiming it anyway is at best noise that reads as
