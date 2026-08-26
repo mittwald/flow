@@ -28,6 +28,13 @@ permissions:
   id-token: write
   contents: write
 
+env:
+  # Keep the local git hooks out of this workflow — same reason as publish.yml.
+  # simple-git-hooks' postinstall runs on every `pnpm install` and writes
+  # .git/hooks from package.json, so `pre-push` = `pnpm lint` would run on both
+  # pushes below, after the npm publish already succeeded (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
+
 # Shared per-target-branch concurrency group (ADR 0004 §5): the SAME group as
 # forward-merge.yml, so every writer of `next` is serialized and there are no
 # non-fast-forward races.
@@ -262,5 +269,8 @@ jobs:
         run: |
           tag="$(git describe --tags --abbrev=0)"
           echo "Pushing release commit and tag ${tag} to next"
-          git push origin HEAD:next
-          git push origin "refs/tags/${tag}"
+          # --no-verify at the push itself, not only via the env var above: a hook
+          # aborting here strands a prerelease that npm has already accepted
+          # (#2932).
+          git push --no-verify origin HEAD:next
+          git push --no-verify origin "refs/tags/${tag}"
