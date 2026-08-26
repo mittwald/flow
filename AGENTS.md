@@ -153,7 +153,11 @@ and commit the results.
 - **Conventional Commits** with component/package scope — `fix(Button): …`,
   `feat(components): …`. Releases and changelogs are generated from them.
 - Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
-  packages).
+  packages) — **unless the merge is docs-, CI- or tooling-only**, which
+  publishes nothing at all (no npm release, no version bump commit, no tag, no
+  GitHub Release). The rule lives in
+  `.github/scripts/release-relevance-lib.mjs`; see
+  [docs/release-workflow.md](docs/release-workflow.md).
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
