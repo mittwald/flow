@@ -3,9 +3,7 @@ import { useEffect, useId, useLayoutEffect, useRef } from "react";
 import { useTunnelState } from "@/context";
 
 export type TunnelEntryChildren =
-  | ReactNode
-  | undefined
-  | (() => ReactNode | undefined);
+  ReactNode | undefined | (() => ReactNode | undefined);
 
 export interface TunnelEntryProps {
   id?: string;

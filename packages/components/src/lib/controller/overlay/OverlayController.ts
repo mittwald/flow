@@ -15,9 +15,7 @@ export type OverlayOpenHandler = () => unknown;
 export type OverlayCloseHandler = () => unknown;
 export type OverlayOpenStateHandler = (isOpen: boolean) => unknown;
 type AnyOverlayOpenStateHandler =
-  | OverlayOpenHandler
-  | OverlayCloseHandler
-  | OverlayOpenStateHandler;
+  OverlayOpenHandler | OverlayCloseHandler | OverlayOpenStateHandler;
 
 type DisposerFn = () => void;
 
