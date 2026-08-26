@@ -439,6 +439,11 @@ neither can be decided from the value alone — check them by hand:
 - An element that already carries `backgroundColor`, where moving `color` there
   would overwrite the explicit value.
 
+One value changes what you see: the runtime fallback maps `"neutral"`,
+`"gradient"` and `"green"` onto the background, but not `"blue"`, so
+`<AccentBox color="blue">` currently renders the neutral background. The codemod
+turns it into `backgroundColor="blue"`, which restores the blue one.
+
 ---
 
 ## From version `0.2.0-alpha.747` to `>=0.2.0-alpha.756`
