@@ -781,7 +781,7 @@ importers:
         version: 5.1.0
       js-yaml:
         specifier: ^4.2.0
-        version: 4.3.0
+        version: 4.3.1
       nx:
         specifier: ^22.7.5
         version: 22.7.7(debug@4.4.3(supports-color@10.2.2))
@@ -7257,6 +7257,10 @@ packages:
 
   js-yaml@4.3.0:
     resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+    hasBin: true
+
+  js-yaml@4.3.1:
+    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
   jscodeshift@17.4.0:
@@ -16715,6 +16719,10 @@ snapshots:
       argparse: 2.0.1
 
   js-yaml@4.3.0:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.3.1:
     dependencies:
       argparse: 2.0.1
 
