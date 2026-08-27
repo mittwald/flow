@@ -110,6 +110,13 @@ That is also why the resolution happens locally rather than on the pull request:
 every version and changelog divergence as a conflict, burying the one file that
 actually needs you under dozens of mechanical ones.
 
+Because git config is per-repository and not per-branch, those drivers also run
+on **your** merges — most often `main` merged into a branch off it. The
+`package.json` driver resolves the `version` field to the **higher** of the two
+sides, so a release bump you merge in reaches your branch instead of being
+reverted to the version you forked at. `test.yml` checks the result: every
+package under `packages/*` must carry `lerna.json`'s version.
+
 ## Repository overview
 
 Flow is a **pnpm workspace** monorepo orchestrated with [Nx](https://nx.dev/)
