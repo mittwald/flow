@@ -1400,7 +1400,11 @@ const renderEntry = (entry: MigrationEntry): string => {
   const facts = [
     `**Since \`${entry.since}\`**`,
     entry.kind,
-    entry.action === "codemod" ? "codemod available" : `${entry.action} change`,
+    entry.action === "codemod"
+      ? "codemod available"
+      : entry.action === "manual"
+        ? "manual change"
+        : "no code change needed",
     entry.remotePackage ? remoteNote : undefined,
   ].filter((fact) => fact !== undefined);
 
@@ -1729,6 +1733,31 @@ Without it, a codemod that ports an app between packages appears in the consumer
 migration guide as though it were a migration. Regenerate afterwards and confirm
 `to-remote-package` shows up in neither `MIGRATION.md` nor any bounded `list`
 output — `kind: "tool"` also keeps it out of the gate in Task 5.
+
+- [ ] **Step 4b: Restore the invariant the `remoteScope` rewrite dropped**
+
+Task 3 repointed `src/tests/remoteScope.test.ts` at the catalogue, which grew
+coverage from 9 transforms to 20 entries but silently retired what the test was
+originally for. The old version derived `claimsRemote` from
+`declaredPackages(name)` — a parse of the transform's own `flowPackages` array —
+and checked **the transform's scoping** against what the remote package really
+exports. The new version checks **the frontmatter** instead. So a transform that
+scopes itself to the remote package without a reachable target no longer fails;
+the transform code and the frontmatter became two independently maintained facts
+with nothing tying them together. They agree today, so the regression is latent.
+
+It could not be fixed in Task 3 because it needs the renamed files. Add it now:
+for every entry with `action: "codemod"`, assert that whether
+`declaredPackages(entry.id)` claims `@mittwald/flow-remote-react-components`
+equals `entry.remotePackage`. Keep the catalogue-vs-export-surface check too —
+the two together are what make `remotePackage` derived rather than declared.
+
+Also restore an equivalent of the old `every transform is listed` test, which
+forced every transform file to be accounted for. Nothing does that now:
+`catalog.test.ts` iterates the catalogue, so it only notices an orphan transform
+whose filename happens to equal a catalogue id. Assert instead that the set of
+files in `src/transforms` equals the set of ids with `action: "codemod"`, plus
+`to-remote-package`.
 
 - [ ] **Step 5: Build and run everything**
 
