@@ -1,0 +1,8 @@
+/* Integrations follows a grouping-view wrapper rather than a sibling section, so
+   Flow's own section-to-section separator does not apply. Same tokens. */
+.integrations {
+  margin-block-start: var(--section--section-to-section-spacing);
+  padding-block-start: var(--section--section-to-section-spacing);
+  border-block-start: var(--separator--height) var(--border-style--default)
+    var(--separator--color);
+}

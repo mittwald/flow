@@ -1,11 +1,6 @@
-import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
-
 /**
- * Navigation and lists must agree on order, so both sort by the rendered label.
- * Path order is not the same: "action-group" sorts before "action".
+ * Order by the rendered label, not by path: "action-group" would sort before
+ * "action". Composed into `compareEntries`, which is what callers use.
  */
 export const compareLabels = (a: string, b: string): number =>
   a.localeCompare(b);
-
-export const compareGroupPaths = (a: string, b: string): number =>
-  compareLabels(extractTextFromPath(a), extractTextFromPath(b));

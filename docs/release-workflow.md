@@ -72,10 +72,9 @@ flowchart LR
   repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`, `dev/**`, root
   Markdown and editor config) are skipped whole: no npm publish, no
   `chore(release):` version bump commit, no tag, no GitHub Release (#2931). The
-  decision is made by the `decide` job in `publish.yml` / `publish-next.yml`,
-  which classifies the pushed file set with
-  `.github/scripts/release-relevance-lib.mjs`. Two properties matter when you
-  touch that list:
+  decision is made by the `decide` job in `publish.yml`, which classifies the
+  pushed file set with `.github/scripts/release-relevance-lib.mjs`. Two
+  properties matter when you touch that list:
   - It is a **denylist** — anything not provably docs/CI/tooling counts as
     publishable. Forgetting a docs path costs one needless version; forgetting a
     source path would silently swallow a real release. So `packages/**` is

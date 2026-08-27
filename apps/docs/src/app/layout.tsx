@@ -16,7 +16,6 @@ import { getTheme, getThemeScript } from "@teispace/next-themes/server";
 import { NotificationProvider } from "@mittwald/flow-react-components";
 import Script from "next/script";
 import { componentGroupingScript } from "@/app/_lib/componentGrouping";
-import ReleaseCelebration from "@/app/_components/ReleaseCelebration";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -52,7 +51,6 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <ThemeProvider {...themeProps} disableTransitionOnChange noScript>
           <RouterProvider>
             <Matomo />
-            <ReleaseCelebration />
             <NotificationProvider>
               <div className={styles.wrapper}>
                 <Header docs={docs.map((mdx) => mdx.serialize())} />

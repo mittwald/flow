@@ -16,7 +16,7 @@
 //
 // The driver used to always keep "our" version, which is correct for the
 // cascade it was written for (`main → next`, `next → major line`): the higher
-// line keeps its own version, and `publish-next.yml` re-derives it anyway.
+// line keeps its own version, and `publish.yml` re-derives it anyway.
 //
 // It is wrong in the far more common direction — `main` merged INTO a branch
 // off it. There "ours" is the feature branch, still on the version it forked

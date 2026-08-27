@@ -1,10 +1,23 @@
 import docGenFile from "@mittwald/flow-react-components/doc-properties";
 import type { ComponentDoc } from "react-docgen-typescript";
 import type { Properties, Property } from "../types";
+import { splitUnion } from "./unionType";
 
 const eventRegex = /^on[A-Z]+.*/;
 const a11yRegex = /^aria-.+/;
-const optionalRegex = / \| (undefined|null)/g;
+const nullishMembers = ["undefined", "null"];
+
+/*
+ * `undefined` and `null` as top-level union members only restate the "Required"
+ * badge. Nested ones are part of the type and have to survive: ColumnLayout's
+ * `(number | null)[]` documents that `null` hides a column.
+ */
+const stripTopLevelNullish = (type: string): string => {
+  const members = splitUnion(type).filter(
+    (member) => !nullishMembers.includes(member),
+  );
+  return members.length > 0 ? members.join(" | ") : type;
+};
 
 /** An `@default: x` JSDoc tag keeps its colon in the generated metadata. */
 const normalizeDefaultValue = (value: unknown): string | null => {
@@ -29,11 +42,11 @@ export default function loadProperties(name: string): Properties | null {
     .filter(([name, prop]) => name && prop)
     .filter(([, prop]) => !prop.description.includes("@internal"))
     .map(([, prop]) => {
-      let type = prop.type.name.replaceAll(optionalRegex, "");
+      const type =
+        prop.name === "children"
+          ? "ReactNode"
+          : stripTopLevelNullish(prop.type.name);
 
-      if (prop.name === "children") {
-        type = "ReactNode";
-      }
       return {
         name: prop.name,
         default: normalizeDefaultValue(prop.defaultValue?.value),
