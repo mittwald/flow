@@ -614,10 +614,14 @@ Replace `packages/codemods/package.json` with:
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run"
   },
-  "type": "module",
-  "version": "1.0.1"
+  "type": "module"
 }
 ```
+
+**Leave `version` exactly as it is** — it is not in the block above because
+Lerna owns it. Every package shares one number and it moves on release (the repo
+is on `1.0.2` at the time of writing). Do not hardcode it and do not reorder the
+existing keys beyond what Prettier does.
 
 Three changes beyond the obvious. `private: true` is gone. `jscodeshift` moves
 from `peerDependencies` to `dependencies`, because an `npx` run has to bring its
