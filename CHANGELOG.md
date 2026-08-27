@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** hide deprecated values from the properties table ([#2960](https://github.com/mittwald/flow/issues/2960)) ([eaa0349](https://github.com/mittwald/flow/commit/eaa03497fda2fd0aded933776f464eeed0c9aef3))
+
 ## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
 
 ### Bug Fixes
