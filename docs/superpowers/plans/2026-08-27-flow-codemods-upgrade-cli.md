@@ -66,18 +66,19 @@ task orchestration.
 
 Settled during brainstorming; do not re-litigate them mid-implementation.
 
-| Decision                                     | Value                                                                                                                                                |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Delivery                                     | Publish `@mittwald/flow-codemods` with a `bin`. The raw-GitHub-URL path is **retired**.                                                              |
-| Broken URLs in shipped `MIGRATION.md` copies | Accepted by the maintainer. No aliases, no shims.                                                                                                    |
-| Codemod ids                                  | Dashed, lowercase, no `flow`/`flowAlpha` prefix. The id is the transform file name **and** the `MIGRATION.md` anchor.                                |
-| Gate                                         | Exact-version, not major/minor/patch granularity. `migration`: `current < since <= target`. `deprecation`: `since <= target`.                        |
-| `revision` argument                          | `patch` \| `minor` \| `major` \| dist-tag \| exact version. Default `minor`. Keywords bound the **target**; the gate then derives the codemod set.   |
-| Prereleases                                  | Excluded from keyword resolution. Only an explicit dist-tag or exact version reaches a `-next.N`.                                                    |
-| Steps                                        | bump → install → codemods. No `--no-install` flag; the installer is a module seam for tests instead.                                                 |
-| Catalogue coverage                           | **All** entries, including the two pre-`0.2.0` ones. `MIGRATION.md` becomes 100 % generated.                                                         |
-| Helper deduplication                         | Free consequence of retiring the URL path (transforms may import), but **not** a goal. Do not refactor the eight transforms' internals in this plan. |
-| `packages/ext-bridge/MIGRATION.md`           | Out of scope. It keeps its own hand-written guide.                                                                                                   |
+| Decision                                     | Value                                                                                                                                                       |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Delivery                                     | Publish `@mittwald/flow-codemods` with a `bin`. The raw-GitHub-URL path is **retired**.                                                                     |
+| Broken URLs in shipped `MIGRATION.md` copies | Accepted by the maintainer. No aliases, no shims.                                                                                                           |
+| Codemod ids                                  | Dashed, lowercase, no `flow`/`flowAlpha` prefix. The id is the transform file name **and** the `MIGRATION.md` anchor.                                       |
+| Gate                                         | Exact-version, not major/minor/patch granularity. `migration`: `current < since <= target`. `deprecation`: `since <= target`.                               |
+| `revision` argument                          | `patch` \| `minor` \| `major` \| dist-tag \| exact version. Default `minor`. Keywords bound the **target**; the gate then derives the codemod set.          |
+| Prereleases                                  | Excluded from keyword resolution. Only an explicit dist-tag or exact version reaches a `-next.N`.                                                           |
+| Steps                                        | bump → install → codemods. No `--no-install` flag; the installer is a module seam for tests instead.                                                        |
+| Catalogue coverage                           | **All** entries, including the two pre-`0.2.0` ones. `MIGRATION.md` becomes 100 % generated.                                                                |
+| Deprecated APIs with no guide entry today    | Task 15, a follow-up. The 22 ported entries cover what `MIGRATION.md` already documents; the deprecated APIs that were never written up are their own task. |
+| Helper deduplication                         | Free consequence of retiring the URL path (transforms may import), but **not** a goal. Do not refactor the eight transforms' internals in this plan.        |
+| `packages/ext-bridge/MIGRATION.md`           | Out of scope. It keeps its own hand-written guide.                                                                                                          |
 
 **Why this is not a breaking change:** `@mittwald/flow-codemods` is
 `private: true` today, so no published package API changes. What breaks are
@@ -87,15 +88,19 @@ accepted the 404s.
 
 ## Sequencing
 
-1. **PR #2942 merges to `main` first.** It is green and blocked only on review;
-   it fixes a live bug for consumers who have the URL in their installed tarball
-   today. This plan builds on its tests, `AGENTS.md`, `remoteScope.ts`, and the
-   three transforms it added.
-2. Forward-merge `main` → `next`.
-3. **Re-base this work onto `next`.** The branch is currently on `main`.
-4. Verify `packages/*/package.json` versions after the merge — the
+**PR #2942 is not a dependency.** Its useful parts are pulled into this branch
+directly (Task 0), and it is superseded. That is a decision with a consequence
+worth stating: if #2942 later merges to `main`, the forward-merge into `next`
+will conflict hard, because this work renames every file it touches. Close it
+when Task 0 lands.
+
+1. **Task 0** brings in what #2942 built and leaves behind what this design
+   retires.
+2. **Re-base onto `next`.** The branch sits on `main`, which is wrong for a
+   `feat:` — the commit-guard rejects it.
+3. After any merge from `main`, check `packages/*/package.json` versions: the
    `merge=package-json` driver keeps _our_ `version` field and silently reverts
-   a release bump with no conflict markers.
+   a release bump, with no conflict markers.
 
 ## File structure
 
@@ -137,16 +142,151 @@ accepted the 404s.
 | `apps/docs/src/content/01-get-started/versioning/index.mdx` | § "Nutze den Codemod" → the CLI (German).                      |
 | `AGENTS.md` (root)                                          | Repo map row, generated-code table, migration-entry bullet.    |
 
-**Deleted**
+**Never brought in from #2942** (Task 0 leaves them behind)
 
-| Path                                                    | Why                                                         |
-| ------------------------------------------------------- | ----------------------------------------------------------- |
-| `packages/codemods/dev/bundleComposites.ts`             | The URL path is retired.                                    |
-| `packages/codemods/dev/bundleCompositesCli.ts`          | Same.                                                       |
-| `packages/codemods/src/composites/flow1.ts`             | The CLI runs codemods individually and reports per codemod. |
-| `packages/codemods/src/transforms/flow1.ts`             | Generated bundle of the above.                              |
-| `packages/codemods/src/tests/bundledComposites.test.ts` | Nothing left to bundle.                                     |
-| `packages/codemods/src/tests/standalone.test.ts`        | Transforms may import now.                                  |
+| Path                                                    | Why                                                                                                                                                                                     |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dev/bundleComposites.ts`, `dev/bundleCompositesCli.ts` | The composite bundler exists only to serve the URL path.                                                                                                                                |
+| `src/composites/flow1.ts`, `src/transforms/flow1.ts`    | The CLI runs codemods individually and reports per codemod.                                                                                                                             |
+| `src/tests/bundledComposites.test.ts`                   | Nothing left to bundle.                                                                                                                                                                 |
+| `src/tests/standalone.test.ts`                          | Transforms no longer have to run from a temp directory alone.                                                                                                                           |
+| `src/tests/documented.test.ts`                          | Task 3 writes the catalogue-based replacement. Bringing the URL-scanning version in would fail immediately, because the four transforms #2942 added are not linked from `main`'s guide. |
+
+**Deleted from `main`**
+
+| Path                                               | Why                                                                                                       |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `packages/codemods/src/transforms/flowAlphaAll.ts` | The hand-written composite with relative imports — the bug #2942 was opened for. Superseded by `upgrade`. |
+
+---
+
+## Task 0: Pull the foundation out of PR #2942
+
+**Files:** see the tables below. No new code — this task moves existing,
+reviewed, green code onto this branch and drops what the design retires.
+
+**Interfaces:**
+
+- Consumes: nothing.
+- Produces: a `packages/codemods` with a working test harness (`runTransform`),
+  the remote-scope authority (`remoteScope.ts`), nine transforms,
+  `vitest.config.ts` and `project.json`. Every later task builds on these.
+
+PR #2942 is reviewed and CI-green. Re-deriving its work would be waste, and two
+parts of it are load-bearing here:
+
+- It **rewrote `flowAlphaAlignToCombine.ts`** (+155/−38) to resolve names
+  through named, aliased and namespace imports. `main`'s version does not.
+- It **added real migration prose to `MIGRATION.md`** — the AccentBox entry now
+  explains that `color` was re-meant rather than renamed, gives the per-value
+  decision rules, and notes that `<AccentBox color="blue">` currently renders
+  the neutral background. Task 3 copies bodies verbatim from this file, so
+  `main`'s thinner version would lose content.
+
+- [ ] **Step 1: Make the PR branch available as a local ref**
+
+```bash
+git fetch origin claude/flowalphall-codemod-error-89c0db:refs/pr2942 --force
+git rev-parse --short refs/pr2942
+```
+
+Expected: a commit hash. Everything below reads from `refs/pr2942`.
+
+- [ ] **Step 2: Take the four transforms #2942 added**
+
+```bash
+git checkout refs/pr2942 -- \
+  packages/codemods/src/transforms/flowAlphaAccentBoxColorToBackgroundColor.ts \
+  packages/codemods/src/transforms/flowAlphaButtonPropsInterfaces.ts \
+  packages/codemods/src/transforms/flowAlphaMutedActionErrorToAbortActionError.ts \
+  packages/codemods/src/transforms/flowAlphaPasswordToolsRule.ts
+```
+
+- [ ] **Step 3: Take the improved versions of the transforms already on `main`**
+
+```bash
+git checkout refs/pr2942 -- \
+  packages/codemods/src/transforms/flow020.ts \
+  packages/codemods/src/transforms/flowAlphaActionPropToOnAction.ts \
+  packages/codemods/src/transforms/flowAlphaAlignToCombine.ts
+```
+
+`flowAlphaButtonColorAccentToSuccess.ts`, `flowAlphaColorPrimaryToDefault.ts`
+and `flowRemote.ts` are byte-identical in both branches — nothing to do for
+them.
+
+- [ ] **Step 4: Take the test harness, the remote-scope authority, and the
+      configs**
+
+```bash
+git checkout refs/pr2942 -- \
+  packages/codemods/src/tests/runTransform.ts \
+  packages/codemods/src/tests/transforms.test.ts \
+  packages/codemods/src/tests/idempotency.test.ts \
+  packages/codemods/src/tests/flowAlphaAccentBoxColorToBackgroundColor.test.ts \
+  packages/codemods/src/tests/remoteScope.ts \
+  packages/codemods/src/tests/remoteScope.test.ts \
+  packages/codemods/vitest.config.ts \
+  packages/codemods/project.json \
+  packages/codemods/AGENTS.md \
+  packages/codemods/package.json \
+  packages/codemods/tsconfig.json \
+  packages/components/MIGRATION.md
+```
+
+`MIGRATION.md` is taken as the **body source** for Task 3, even though Task 3
+regenerates the file. That also makes Task 3's diff review meaningful: it
+compares against the richer version, so a lost paragraph shows up.
+
+- [ ] **Step 5: Delete the broken composite, and do not bring its replacement**
+
+```bash
+git rm packages/codemods/src/transforms/flowAlphaAll.ts
+```
+
+Do **not** check out `dev/bundleComposites.ts`, `dev/bundleCompositesCli.ts`,
+`src/composites/flow1.ts`, `src/transforms/flow1.ts`,
+`src/tests/bundledComposites.test.ts`, `src/tests/standalone.test.ts` or
+`src/tests/documented.test.ts`. The first six exist only to serve the URL path;
+the seventh scans guides for URLs and would fail at once, because `main`'s guide
+does not link the four transforms from Step 2. Task 3 writes its catalogue-based
+replacement.
+
+- [ ] **Step 6: Reconcile what the missing files leave behind**
+
+Three loose ends from not taking the bundler:
+
+1. `packages/codemods/package.json` — its `build` script points at
+   `dev/bundleCompositesCli.ts`, which does not exist here. Set
+   `"build": "tsc --noEmit"` as a placeholder; Task 1 replaces it properly.
+2. `packages/codemods/project.json` — remove
+   `"!{projectRoot}/src/transforms/flow1.ts"` from the `codemods-src` named
+   input and drop the `outputs` entry for it. There is no generated transform
+   yet.
+3. `packages/codemods/AGENTS.md` — leave it as-is. It still documents the
+   standalone rule, which is now wrong; Task 14 rewrites it. Do not half-fix it
+   here.
+
+- [ ] **Step 7: Install and verify the foundation is green**
+
+```bash
+pnpm install
+pnpm test:browser:prepare   # only if Playwright is not yet installed in this worktree
+pnpm nx test:unit codemods
+pnpm nx test:compile codemods
+```
+
+Expected: PASS. The suite is smaller than #2942's — no `standalone`, no
+`bundledComposites`, no `documented` — so expect roughly 60 tests rather
+than 74. Every remaining one must pass; a failure here means a file was taken
+without its dependency.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add -A packages/codemods packages/components/MIGRATION.md pnpm-lock.yaml
+git commit -m "feat(codemods): adopt the transform suite and test harness from #2942"
+```
 
 ---
 
@@ -462,7 +602,7 @@ Replace `packages/codemods/package.json` with:
   "files": ["dist", "src", "*.md"],
   "name": "@mittwald/flow-codemods",
   "scripts": {
-    "build": "tsx dev/bundleCompositesCli.ts && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run"
   },
@@ -476,8 +616,8 @@ from `peerDependencies` to `dependencies`, because an `npx` run has to bring its
 own. And `files` ships all of `src`, not just `src/transforms`, so a transform
 that later grows a shared import still resolves.
 
-`build` still points at the old bundler here — Task 2 switches it to the new
-generator. Keeping it means the tree is green at this commit.
+`build` only emits `dist` here; Task 2 puts the catalogue generator in front of
+it. There is no bundler to keep — Task 0 deliberately left it behind.
 
 Add `resolveJsonModule` to `packages/codemods/tsconfig.json`:
 
@@ -860,16 +1000,13 @@ cd packages/codemods
 git mv src/transforms/flowAlphaAlignToCombine.ts src/transforms/align-to-combine.ts
 ```
 
-Update the three places that name it: the import in `src/composites/flow1.ts`,
-and the transform name string in `src/tests/transforms.test.ts` and
-`src/tests/idempotency.test.ts`. Rename the exported const inside the file from
-`flowAlphaAlignToCombineTransform` to `alignToCombineTransform`.
+Update the two places that name it: the transform name string in
+`src/tests/transforms.test.ts` and in `src/tests/idempotency.test.ts`. Rename
+the exported const inside the file from `flowAlphaAlignToCombineTransform` to
+`alignToCombineTransform`.
 
-Run: `pnpm nx build codemods` — regenerates `src/transforms/flow1.ts` with the
-new inlined name.
-
-The other seven renames follow in Task 4, which is also where the composite and
-the bundler go away.
+No composite to regenerate — Task 0 left it behind. The other eight renames
+follow in Task 4.
 
 - [ ] **Step 7: Run the test and verify it passes**
 
@@ -964,10 +1101,8 @@ export const allEntries: CatalogEntry[] = migrations;
 In `packages/codemods/package.json`, set:
 
 ```json
-"build": "tsx dev/generateCli.ts && tsx dev/bundleCompositesCli.ts && tsc -p tsconfig.build.json"
+"build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json"
 ```
-
-Both generators run until Task 4 deletes the bundler.
 
 Run: `pnpm nx build codemods` Expected: `src/migrations.generated.ts` written
 with two entries, newest first (`0.2.0-alpha.1047` before `0.1.0-alpha.292`).
@@ -1314,15 +1449,13 @@ git commit -m "feat(codemods): generate MIGRATION.md from the catalogue"
 
 ---
 
-## Task 4: Rename the transforms, retire the URL delivery path
+## Task 4: Rename the transforms to their catalogue ids
 
 **Files:**
 
-- Rename: 7 files in `packages/codemods/src/transforms/`
-- Delete: `packages/codemods/dev/bundleComposites.ts`,
-  `dev/bundleCompositesCli.ts`, `src/composites/flow1.ts`,
-  `src/transforms/flow1.ts`, `src/tests/bundledComposites.test.ts`,
-  `src/tests/standalone.test.ts`
+- Rename: 8 files in `packages/codemods/src/transforms/` (the ninth,
+  `align-to-combine.ts`, was renamed in Task 2)
+- Modify: `packages/codemods/src/tests/runTransform.ts`
 - Create: `packages/codemods/src/migrations/to-remote-package.md`
 - Modify: `packages/codemods/src/catalog/types.ts` (add `"tool"` to
   `MigrationKind`)
@@ -1337,7 +1470,7 @@ git commit -m "feat(codemods): generate MIGRATION.md from the catalogue"
 - Produces: `src/transforms/<id>.ts` for all nine codemods, named exactly as
   their catalogue id. Task 9 resolves transforms by that name.
 
-- [ ] **Step 1: Rename the seven remaining transforms**
+- [ ] **Step 1: Rename the eight remaining transforms**
 
 ```bash
 cd packages/codemods/src/transforms
@@ -1368,20 +1501,52 @@ git mv flowAlphaAccentBoxColorToBackgroundColor.test.ts accent-box-color-to-back
 `transforms.test.ts` and `idempotency.test.ts` pass transform names to
 `runTransform`. Replace all nine.
 
-- [ ] **Step 3: Delete the URL delivery path**
+- [ ] **Step 3: Point `runTransform` at the transform in place**
 
-```bash
-cd packages/codemods
-git rm dev/bundleComposites.ts dev/bundleCompositesCli.ts
-git rm src/composites/flow1.ts src/transforms/flow1.ts
-git rm src/tests/bundledComposites.test.ts src/tests/standalone.test.ts
+Task 0 never brought the URL delivery path in, so there is nothing to delete
+here. But `runTransform` still copies the transform into a temp directory of its
+own to reproduce that path, and its doc comment still explains why. Both are now
+misleading: the CLI hands jscodeshift a path inside the installed package.
+
+Change it to run the transform from `src/transforms` directly, keeping the temp
+directory for the **input file** only, and replace the comment:
+
+```ts
+/**
+ * Runs a transform the way the CLI does: the real jscodeshift CLI, over a file
+ * in a temp directory, with the transform read from `src/transforms`.
+ *
+ * Spawning the CLI rather than calling the transform in-process is deliberate —
+ * it is the invocation `runCodemod` makes, so a transform that only works when
+ * called directly fails here too.
+ */
+export const runTransform = (name: string, source: string): string => {
+  const workingDir = mkdtempSync(join(tmpdir(), "flow-codemods-"));
+  const inputFile = join(workingDir, "input.tsx");
+  writeFileSync(inputFile, source);
+
+  const output = execFileSync(
+    process.execPath,
+    [
+      jscodeshiftBin,
+      "-t",
+      join(transformsDir, `${name}.ts`),
+      "--parser",
+      "tsx",
+      inputFile,
+    ],
+    { cwd: workingDir, stdio: "pipe", encoding: "utf8" },
+  );
+
+  assertProcessed(name, output);
+
+  return readFileSync(inputFile, "utf8");
+};
 ```
 
-Then drop the bundler from `package.json`:
-
-```json
-"build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json"
-```
+Drop the now-unused `copyFileSync` import, and simplify `assertProcessed`'s
+error message — it currently blames a missing sibling file, which is no longer a
+failure mode.
 
 And drop the composite exclusion from `project.json`'s `namedInputs` — there is
 no generated transform left to exclude:
@@ -3838,8 +4003,14 @@ be executed without reading 18 KB of prose.
 ## What this removes
 
 The raw-GitHub-URL delivery path, and with it the self-contained-transform rule,
-the composite bundler, `src/composites`, and `standalone.test.ts`. Transform
-files are renamed to their dashed catalogue ids.
+the composite bundler and `src/composites`. Transform files are renamed to their
+dashed catalogue ids.
+
+**Supersedes #2942.** Its transform suite, test harness and migration prose are
+adopted here — they were reviewed and green. Its composite bundler is not,
+because the CLI runs codemods individually and reports per codemod. Close #2942
+rather than merging it: merging it to `main` after this lands would conflict with
+every rename.
 
 **URLs printed in already-published `MIGRATION.md` copies now 404.** Accepted:
 doc URLs are not covered by the semver contract (ADR 0005), and those consumers
@@ -3860,6 +4031,137 @@ BODY
 
 Add the **`run-visual-tests`** label only if something rendered changed —
 nothing here does, so skip it.
+
+---
+
+## Task 15 (follow-up): Catalogue the deprecated APIs that were never written up
+
+**Ships separately from Tasks 0–14.** Its own PR, its own `feat(codemods):`
+title, base `next`. Nothing in the CLI depends on it — the machinery is done;
+this fills it with the content that gives `upgrade` something to find on the 1.x
+line.
+
+**Files:**
+
+- Create: one `packages/codemods/src/migrations/<id>.md` per row below
+- Create: `packages/codemods/src/transforms/<id>.ts` + a fixture test, for the
+  rows marked codemod
+- Modify: `packages/components/MIGRATION.md` (regenerated)
+
+**Interfaces:**
+
+- Consumes: the catalogue schema and generators from Tasks 2–4, `selectEntries`
+  from Task 5.
+- Produces: catalogue entries only. No new code paths.
+
+**Why this is separate.** Tasks 0–14 _port_ content that already exists in
+`MIGRATION.md`, which makes them diff-verifiable: a lost paragraph shows up.
+This task _authors_ content that has never been written down, and each entry
+needs a `since` that is not in the source — for a `deprecation`, `since` is the
+version the **replacement** shipped in, which has to come out of `git log` or
+`CHANGELOG.md` per API. Mixing that judgement work into a mechanical port would
+hide both.
+
+**Why it matters.** The design settled on "breaking **plus** deprecations"
+precisely because ADR 0005 §4 lets type-level changes ship in a Patch, so
+codemods stay relevant on the 1.x line. Of the two `kind: deprecation` entries
+in Tasks 0–14, both already existed in the guide. Without this task, `upgrade`
+on the stable line still finds almost nothing — the agreed scope is only half
+delivered.
+
+The surface, from the `@deprecated` tags in `packages/components/src` (`flags`,
+`Align` and `SegmentedControl` are already covered by ported entries and are not
+repeated here):
+
+| Suggested id                              | Deprecated                                              | Replacement                          | Codemod?                                                                                                                                                                                                                                                                       |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `select-on-selection-change-to-on-change` | `Select.onSelectionChange`                              | `onChange`                           | **Yes** — identical signature `(value: Key \| Key[] \| null) => void`, a pure prop rename.                                                                                                                                                                                     |
+| `cartesian-grid-to-chart-grid`            | `CartesianGrid`, `CartesianGridProps`                   | `ChartGrid`, `ChartGridProps`        | **Yes** — `CartesianGridProps` is literally `= ChartGridProps`. Component and type rename. `CartesianGrid` carries `@flr-generate all`, so `remotePackage: true`.                                                                                                              |
+| `text-area-allow-resize`                  | `TextArea.allowHorizontalResize`, `allowVerticalResize` | `allowResize`                        | **Yes, with care** — two booleans collapse into `boolean \| "horizontal" \| "vertical"`. Map `allowHorizontalResize` → `allowResize="horizontal"`, `allowVerticalResize` → `allowResize="vertical"`, both present → `allowResize`. Skip a non-literal value rather than guess. |
+| `item-view-fallback-to-loading-view`      | `ItemView.fallback`                                     | `loadingView`                        | **Investigate** — same `ReactElement` type, but it is a property on a builder-model object, not a JSX prop, so resolving it to Flow is harder than the JSX cases. Decide from the source; `manual` is an acceptable answer.                                                    |
+| `list-loader-async-resource-to-hooks`     | `ListLoaderAsyncResource`                               | `ListLoaderHooks`                    | **Investigate** — check whether the two have the same shape or only the same purpose. A rename onto a different API is the failure a codemod should prevent, not cause.                                                                                                        |
+| `icon-status-to-color`                    | `Icon.status`                                           | `color`                              | **No** — `Status` and the colour union are different types. A rename would produce values `color` does not accept. Manual, with the value mapping spelled out in `apply`.                                                                                                      |
+| `password-creation-field-validation-hook` | `generatePasswordCreationFieldValidation`               | `usePasswordCreationFieldValidation` | **No** — a function becomes a hook, so call sites must satisfy the rules of hooks. Not decidable from the call alone.                                                                                                                                                          |
+| `nextjs-link-to-router-provider`          | `nextjs` `Link`, `LinkProvider`                         | `RouterProvider`                     | **No** — a structural change, not a rename.                                                                                                                                                                                                                                    |
+| `cartesian-chart-empty-view-props`        | `CartesianChartEmptyViewProps`                          | a plain `ReactNode`                  | **No** — check first whether this folds into the ported `cartesian-chart-empty-view` entry (`0.2.0-alpha.676`) instead of getting its own.                                                                                                                                     |
+
+- [ ] **Step 1: Establish `since` for each row**
+
+For every API, find the version its **replacement** shipped in — not the version
+the old one was deprecated in. The gate for a `deprecation` is
+`since <= target`, so a `since` that is too early offers a codemod against an
+API the consumer does not have yet.
+
+```bash
+git log --oneline --reverse -S 'allowResize' -- packages/components/src/components/TextArea
+git tag --contains <commit> | head -1
+```
+
+Record the finding in the entry body, not just the frontmatter — the next person
+should not have to redo the archaeology.
+
+- [ ] **Step 2: Author the entries, `kind: deprecation`**
+
+Full frontmatter per Task 2's schema. `detect` matters more here than for a
+`migration`: the old path still works, so nothing fails to tell a consumer they
+are affected. A `detect` that under-matches means the deprecation is silently
+missed.
+
+- [ ] **Step 3: Verify the two clean renames against the export surface**
+
+Run: `pnpm nx test:unit codemods -- src/tests/remoteScope.test.ts` Expected:
+PASS. `CartesianGrid` is `@flr-generate`, so `remotePackage: true`; `Select`
+needs checking rather than assuming.
+
+- [ ] **Step 4: Write the codemods for the rows marked Yes**
+
+One `src/transforms/<id>.ts` each, modelled on
+`select-on-selection-change-to-on-change`'s nearest neighbour —
+`action-prop-to-on-action` is the same shape (a prop rename resolved through the
+Flow import). Each gets a fixture test in `src/tests` and an idempotency case.
+
+For `text-area-allow-resize`, add fixture cases for: only horizontal, only
+vertical, both present, and a non-literal value that must be left untouched.
+
+- [ ] **Step 5: Decide the three "Investigate" rows and record the decision**
+
+Whatever the answer, the entry ships with `action` set and the reason in its
+body. "No codemod because X is not decidable from the source" is a useful thing
+for the next reader to know — the alternative is someone re-opening the question
+every year.
+
+- [ ] **Step 6: Regenerate and verify**
+
+```bash
+pnpm nx build codemods
+git diff packages/components/MIGRATION.md
+pnpm nx test:unit codemods && pnpm nx test:compile codemods
+pnpm lint
+```
+
+Expected: the new entries appear in the guide at their `since` position, all
+suites green, no format drift.
+
+- [ ] **Step 7: Check that `upgrade` now finds them**
+
+```bash
+node packages/codemods/dist/cli.js list --from 1.0.0 --to 1.0.2
+```
+
+Expected: the new deprecation entries appear — where before this task the same
+range returned nothing. That is the whole point of the task, so verify it rather
+than assuming it.
+
+- [ ] **Step 8: Commit and open the PR**
+
+```bash
+git add -A packages/codemods packages/components/MIGRATION.md
+git commit -m "feat(codemods): catalogue the deprecated APIs that had no guide entry"
+```
+
+PR title:
+`feat(codemods): catalogue the deprecated APIs that had no guide entry`, base
+`next`.
 
 ---
 
@@ -3902,6 +4204,18 @@ Checked against the agreed design:
 - **nx cross-project output verified, not assumed** — Task 13.
 - **Helper deduplication deliberately excluded** — stated in the design table
   and the PR body.
+
+Two corrections made after the first draft:
+
+- **PR #2942 is adopted, not awaited** (Task 0). Its four added transforms, its
+  rewritten `flowAlphaAlignToCombine.ts` (+155/−38 for alias and namespace
+  resolution), its test harness, `remoteScope.ts`, and the migration prose it
+  added to `MIGRATION.md` all come across. Its composite bundler does not.
+- **The agreed "plus deprecations" scope was missing** from the first draft: all
+  22 ported entries come from the existing guide, and only two are
+  `kind: deprecation` — both already documented. Task 15 adds the deprecated
+  APIs that were never written up, which is what makes `upgrade` useful on the
+  1.x line.
 
 Two things this plan decides that the brainstorm left open, both stated inline
 where they land:
