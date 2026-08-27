@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { RatingProps as RemoteRatingElementProps } from "@mittwald/flow-react-components";
-export type { RatingProps as RemoteRatingElementProps } from "@mittwald/flow-react-components";
+import type { RatingSegmentProps as RemoteRatingSegmentElementProps } from "@mittwald/flow-react-components";
+export type { RatingSegmentProps as RemoteRatingSegmentElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementProps> {
+export class RemoteRatingSegmentElement extends FlowRemoteElement<RemoteRatingSegmentElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -13,32 +13,21 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
     return {
       "aria-describedby": {},
       "aria-details": {},
-      "aria-errormessage": {},
       "aria-label": {},
       "aria-labelledby": {},
+      autoFocus: {},
       className: {},
-      defaultValue: {},
       dir: {},
-      fill: {},
-      form: {},
       hidden: {},
       id: {},
       inert: {},
+      inputRef: {},
       isDisabled: {},
-      isInvalid: {},
-      isReadOnly: {},
-      isRequired: {},
       lang: {},
-      maxValue: {},
-      name: {},
-      orientation: {},
       render: {},
       size: {},
       slot: {},
       translate: {},
-      validate: {},
-      validationBehavior: {},
-      value: {},
     };
   }
 
@@ -53,7 +42,6 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       auxClick: {},
       auxClickCapture: {},
       blur: {},
-      change: {},
       click: {},
       clickCapture: {},
       contextMenu: {},
@@ -64,6 +52,11 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       focusChange: {},
       gotPointerCapture: {},
       gotPointerCaptureCapture: {},
+      hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
+      keyDown: {},
+      keyUp: {},
       lostPointerCapture: {},
       lostPointerCaptureCapture: {},
       mouseDown: {},
@@ -92,6 +85,11 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       pointerOverCapture: {},
       pointerUp: {},
       pointerUpCapture: {},
+      press: {},
+      pressChange: {},
+      pressEnd: {},
+      pressStart: {},
+      pressUp: {},
       scroll: {},
       scrollCapture: {},
       touchCancel: {},
@@ -122,8 +120,8 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-rating": InstanceType<typeof RemoteRatingElement>;
+    "flr-rating-segment": InstanceType<typeof RemoteRatingSegmentElement>;
   }
 }
 
-customElements.define("flr-rating", RemoteRatingElement);
+customElements.define("flr-rating-segment", RemoteRatingSegmentElement);

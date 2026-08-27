@@ -1,8 +1,8 @@
 ---
 component: Rating
 description:
-  Die Rating Component ermöglicht die Eingabe und Darstellung einer Bewertung
-  von 0 bis 5 Sternen.
+  Die Rating Component ermöglicht die Eingabe und Darstellung einer Bewertung —
+  standardmäßig mit fünf Sternen.
 ---
 
 <LiveCodeEditor stretch />
@@ -13,8 +13,8 @@ description:
 
 - Unterstütze die visuelle Darstellung immer mit ergänzendem Kontext. Dazu
   eignet sich zum Beispiel ein [Label](/04-components/content/label).
-- Nutze eine konsistente Skalierung von 0 bis 5 Sternen innerhalb eines
-  Interfaces.
+- Nutze innerhalb eines Interfaces eine konsistente Skalierung. Gleichartige
+  Bewertungen erhalten dieselbe Anzahl an Segmenten und dieselben Symbole.
 
 ---
 
@@ -23,6 +23,15 @@ description:
 Es stehen die Größen **Medium** oder **Small** zur Verfügung.
 
 <LiveCodeEditor example="size" editorCollapsed />
+
+---
+
+# Anzahl der Segmente
+
+Über `maxValue` wird die Anzahl der Segmente gesetzt. Ohne Angabe besteht ein
+Rating aus fünf Segmenten.
+
+<LiveCodeEditor example="max-value" editorCollapsed />
 
 ---
 
@@ -41,6 +50,24 @@ verwenden möchtest.
 [Icons](/04-components/content/icon) gesetzt werden.
 
 <LiveCodeEditor example="icon" editorCollapsed />
+
+---
+
+# Icons pro Segment
+
+Soll jede Stufe ihr eigenes Symbol haben, werden die Segmente einzeln über
+`<RatingSegment />` in das Rating gelegt. Jedes Segment unterstützt eigene
+`iconEmpty`- und `iconFilled`-Icons und überschreibt damit die Icons des
+Ratings. Sind Segmente angegeben, bestimmen sie die Anzahl der Segmente.
+
+Über `aria-label` lassen sich die automatischen Labels („3 von 5") pro Segment
+überschreiben.
+
+Über `fill` wird zusätzlich gesteuert, welche Segmente als gefüllt dargestellt
+werden: **Cumulative** füllt alle Segmente bis zum Wert (Standard, das Verhalten
+einer Sternebewertung), **Single** nur das gewählte Segment.
+
+<LiveCodeEditor example="segments" editorCollapsed />
 
 ---
 
