@@ -44,7 +44,7 @@ export const A = () => (
 );
 `,
 
-  flowAlphaAlignToCombine: `import { Align, Combine, type AlignProps } from "@mittwald/flow-react-components";
+  "align-to-combine": `import { Align, Combine, type AlignProps } from "@mittwald/flow-react-components";
 
 export const A = (props: AlignProps) => (
   <Combine>

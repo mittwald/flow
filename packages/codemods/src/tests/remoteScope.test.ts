@@ -21,7 +21,7 @@ const targets: Record<string, string[]> = {
   flow020: [],
   flowAlphaAccentBoxColorToBackgroundColor: ["AccentBox"],
   flowAlphaActionPropToOnAction: ["Action"],
-  flowAlphaAlignToCombine: ["Align", "AlignProps"],
+  "align-to-combine": ["Align", "AlignProps"],
   flowAlphaButtonColorAccentToSuccess: ["Button", "SubmitButton"],
   flowAlphaButtonPropsInterfaces: ["ResetButtonProps", "SubmitButtonProps"],
   flowAlphaColorPrimaryToDefault: [

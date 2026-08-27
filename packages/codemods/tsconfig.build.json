@@ -12,7 +12,11 @@
     // program is unaffected because it is not this small.
     "types": ["node"]
   },
-  "exclude": ["src/tests/**/*.ts", "src/transforms/**/*.ts"],
+  "exclude": [
+    "src/tests/**/*.ts",
+    "src/transforms/**/*.ts",
+    "src/catalog/read.ts"
+  ],
   "extends": "./tsconfig.json",
   "include": ["src/**/*.ts"]
 }

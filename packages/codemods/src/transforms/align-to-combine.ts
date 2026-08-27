@@ -11,7 +11,7 @@ import type { Transform } from "jscodeshift";
  * alias — only the imported name changes. Namespace usages (`<Flow.Align />`,
  * `Flow.AlignProps`) are rewritten as well.
  */
-const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
+const alignToCombineTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components",
     "@mittwald/flow-remote-react-components",
@@ -209,4 +209,4 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowAlphaAlignToCombineTransform;
+export default alignToCombineTransform;

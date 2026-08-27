@@ -72,14 +72,14 @@ export const A = () => <Button color="success" />;
   });
 });
 
-describe("flowAlphaAlignToCombine", () => {
+describe("align-to-combine", () => {
   test("renames the component and its props type", () => {
     const source = `import { Align, type AlignProps } from "@mittwald/flow-react-components";
 
 export const A = (props: AlignProps) => <Align {...props} />;
 `;
 
-    expect(runTransform("flowAlphaAlignToCombine", source))
+    expect(runTransform("align-to-combine", source))
       .toBe(`import { Combine, type CombineProps } from "@mittwald/flow-react-components";
 
 export const A = (props: CombineProps) => <Combine {...props} />;
@@ -92,7 +92,7 @@ export const A = (props: CombineProps) => <Combine {...props} />;
 export const A = (props: RowProps) => <Row {...props} />;
 `;
 
-    expect(runTransform("flowAlphaAlignToCombine", source))
+    expect(runTransform("align-to-combine", source))
       .toBe(`import { Combine as Row, type CombineProps as RowProps } from "@mittwald/flow-react-components";
 
 export const A = (props: RowProps) => <Row {...props} />;
@@ -111,7 +111,7 @@ export const A = (props: AlignProps) => (
 
     // Without the collapse this would be `{ Combine, Combine, ... }`, which
     // does not parse.
-    expect(runTransform("flowAlphaAlignToCombine", source))
+    expect(runTransform("align-to-combine", source))
       .toBe(`import { Combine, type CombineProps } from "@mittwald/flow-react-components";
 
 export const A = (props: CombineProps) => (
@@ -128,7 +128,7 @@ export const A = (props: CombineProps) => (
 export const A = () => <Combine />;
 `;
 
-    expect(runTransform("flowAlphaAlignToCombine", source))
+    expect(runTransform("align-to-combine", source))
       .toBe(`import { Combine } from "@mittwald/flow-react-components";
 
 export const A = () => <Combine />;
