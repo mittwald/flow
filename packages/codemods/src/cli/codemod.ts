@@ -1,16 +1,22 @@
 import { existsSync } from "node:fs";
-import { join } from "node:path";
+import { isAbsolute, join } from "node:path";
 import { allEntries } from "../catalog/entries.js";
 import type { ParsedCommand } from "./args.js";
 import { runCodemod } from "../run/jscodeshift.js";
 
 /**
- * Which sources to transform.
+ * Which sources to transform, resolved against `cwd`.
  *
  * `src` is the default because that is where a Flow consumer's components live,
  * and the working directory is the fallback. The caller prints the result
  * either way — a codemod that silently ran over the wrong tree is worse than
  * one that refused.
+ *
+ * Always returns a path rooted at `cwd` (an absolute `--path` is left alone).
+ * jscodeshift resolves a relative path against `process.cwd()`, not against
+ * whatever `cwd` a caller injected — a bare `"src"` would only be correct when
+ * the two coincide, which is true in production but not in a test that injects
+ * a different `cwd`.
  */
 export const resolveSourcePath = (
   explicit: string | undefined,
@@ -18,9 +24,9 @@ export const resolveSourcePath = (
   exists: (path: string) => boolean = existsSync,
 ): string => {
   if (explicit !== undefined) {
-    return explicit;
+    return isAbsolute(explicit) ? explicit : join(cwd, explicit);
   }
-  return exists(join(cwd, "src")) ? "src" : ".";
+  return exists(join(cwd, "src")) ? join(cwd, "src") : cwd;
 };
 
 export interface CodemodCommandDeps {

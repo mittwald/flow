@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { checkbox } from "@inquirer/prompts";
-import { allEntries, type CatalogEntry } from "./catalog/entries.js";
+import { allEntries } from "./catalog/entries.js";
 import { parseArguments } from "./cli/args.js";
+import { createChoose } from "./cli/choose.js";
 import { runSingleCodemod } from "./cli/codemod.js";
 import { renderList } from "./cli/list.js";
 import { defaultUpgradeDeps, runUpgrade } from "./cli/upgrade.js";
@@ -61,24 +62,19 @@ const main = async (): Promise<number> => {
       // `-y` accepts every default, and no TTY implies it: CI and agent runs
       // have nobody to answer the prompt. That is also why the dirty-tree guard
       // exists — see git.ts.
-      const interactive = !parsed.yes && process.stdin.isTTY === true;
-
-      const choose = async (
-        entries: CatalogEntry[],
-      ): Promise<CatalogEntry[]> => {
-        if (!interactive || entries.length === 0) {
-          return entries;
-        }
-        const ids = await checkbox({
-          message: "Which codemods should run?",
-          choices: entries.map((entry) => ({
-            name: `${entry.id} — ${entry.title}`,
-            value: entry.id,
-            checked: true,
-          })),
-        });
-        return entries.filter((entry) => ids.includes(entry.id));
-      };
+      const choose = createChoose({
+        yes: parsed.yes,
+        isTTY: process.stdin.isTTY === true,
+        prompt: (entries) =>
+          checkbox({
+            message: "Which codemods should run?",
+            choices: entries.map((entry) => ({
+              name: `${entry.id} — ${entry.title}`,
+              value: entry.id,
+              checked: true,
+            })),
+          }),
+      });
 
       return runUpgrade(parsed, {
         ...defaultUpgradeDeps(process.cwd()),

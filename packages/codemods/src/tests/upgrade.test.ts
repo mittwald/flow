@@ -38,7 +38,9 @@ const deps = (
   cwd,
   fetchVersions: async () => registry,
   install: (manager) => recorded.installs.push(manager),
-  runCodemod: ({ id }) => {
+  // Async: `UpgradeDeps["runCodemod"]` is `typeof runCodemod`, and the real
+  // implementation is async — a sync double would not be assignable to it.
+  runCodemod: async ({ id }) => {
     recorded.codemods.push(id);
     return {
       changed: 1,
@@ -92,7 +94,7 @@ describe("runUpgrade", () => {
       parseArguments(["upgrade", "major", "-y"]),
       deps(cwd, recorded, {
         install: () => order.push("install"),
-        runCodemod: ({ id }) => {
+        runCodemod: async ({ id }) => {
           order.push(`codemod:${id}`);
           return {
             changed: 0,
@@ -138,6 +140,11 @@ describe("runUpgrade", () => {
     expect(refused).toBe(1);
     expect(dirty.installs).toEqual([]);
     expect(dirty.output.join("\n")).toMatch(/uncommitted|--allow-dirty/);
+    // The guard fires before the manifest is even read — a refusal must not
+    // leave a half-applied bump behind.
+    expect(manifestOf(cwd).dependencies).toEqual({
+      "@mittwald/flow-react-components": "^1.0.1",
+    });
 
     const allowed = record();
     const code = await runUpgrade(
@@ -200,5 +207,144 @@ describe("runUpgrade", () => {
 
     // 1.1.0, not 1.0.0 — nothing between them is selected.
     expect(recorded.output.join("\n")).toContain("1.1.0");
+  });
+
+  test("the manifest is bumped before the install runs, not after", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+    let duringInstall: string | undefined;
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        install: (manager) => {
+          recorded.installs.push(manager);
+          duringInstall =
+            manifestOf(cwd).dependencies["@mittwald/flow-react-components"];
+        },
+      }),
+    );
+
+    expect(duringInstall).toBe("^1.2.0");
+  });
+
+  test("--dry writes nothing, installs nothing, and still prints the by-hand list", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+    const before = readFileSync(join(cwd, "package.json"), "utf8");
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y", "--dry"]),
+      deps(cwd, recorded),
+    );
+
+    expect(code).toBe(0);
+    expect(recorded.installs).toEqual([]);
+    expect(readFileSync(join(cwd, "package.json"), "utf8")).toBe(before);
+    expect(recorded.output.join("\n")).toContain("by hand");
+  });
+
+  test("a throwing install returns 1 and names both versions plus the recovery", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        install: () => {
+          throw new Error("network unreachable");
+        },
+      }),
+    );
+
+    expect(code).toBe(1);
+    const output = recorded.output.join("\n");
+    expect(output).toContain("1.2.0");
+    expect(output).toContain("0.2.0-alpha.640");
+    expect(output).toContain("git checkout package.json");
+    expect(output).toContain("network unreachable");
+    // The manifest stays bumped — a failed install does not roll it back.
+    expect(manifestOf(cwd).dependencies).toEqual({
+      "@mittwald/flow-react-components": "^1.2.0",
+    });
+  });
+
+  test("a throwing codemod does not stop the remaining ones, and the run returns 1", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+    let calls = 0;
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          calls += 1;
+          recorded.codemods.push(id);
+          if (calls === 1) {
+            throw new Error("boom");
+          }
+          return {
+            changed: 1,
+            unmodified: 0,
+            skipped: 0,
+            errors: 0,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(code).toBe(1);
+    expect(recorded.codemods.length).toBeGreaterThan(1);
+    expect(recorded.output.join("\n")).toContain("did not complete");
+  });
+
+  test("errors reported by a codemod fail the run", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          recorded.codemods.push(id);
+          return {
+            changed: 0,
+            unmodified: 0,
+            skipped: 0,
+            errors: 2,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(code).toBe(1);
+  });
+
+  test("declining a subset in `choose` runs only that subset", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        choose: async (entries) => entries.slice(0, 1),
+      }),
+    );
+
+    expect(recorded.codemods).toHaveLength(1);
   });
 });

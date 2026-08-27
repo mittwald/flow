@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { isAbsolute, join, relative } from "node:path";
 import { gt } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries } from "../catalog/select.js";
@@ -18,11 +18,7 @@ import {
 } from "../manifest.js";
 import { fetchVersions } from "../resolve/registry.js";
 import { resolveTarget } from "../resolve/target.js";
-import {
-  runCodemod,
-  type CodemodOptions,
-  type CodemodResult,
-} from "../run/jscodeshift.js";
+import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
 import { resolveSourcePath } from "./codemod.js";
 import { renderList } from "./list.js";
@@ -31,13 +27,7 @@ export interface UpgradeDeps {
   cwd: string;
   fetchVersions: typeof fetchVersions;
   install: InstallRunner;
-  /**
-   * Allowed to answer synchronously as well as with a promise — the real runner
-   * is async, a test double has no reason to be.
-   */
-  runCodemod: (
-    options: CodemodOptions,
-  ) => CodemodResult | Promise<CodemodResult>;
+  runCodemod: typeof runCodemod;
   /** Which codemods to apply. `-y` and a non-TTY pass everything through. */
   choose: (entries: CatalogEntry[]) => Promise<CatalogEntry[]>;
   isDirty: (cwd: string) => boolean;
@@ -71,19 +61,57 @@ export const defaultUpgradeDeps = (cwd: string): UpgradeDeps => ({
 });
 
 /**
+ * Whether `path` lies outside `cwd`.
+ *
+ * `--path` can point anywhere, including outside the repository the dirty-tree
+ * guard checks. `path` is always resolved (see `resolveSourcePath`), so this is
+ * a plain prefix test via `relative` rather than a string comparison that a
+ * trailing slash or `..` segment could fool.
+ */
+const isOutside = (path: string, cwd: string): boolean => {
+  const rel = relative(cwd, path);
+  return rel !== "" && (rel.startsWith("..") || isAbsolute(rel));
+};
+
+/**
+ * The indentation the manifest already uses, read from its first indented line.
+ *
+ * Reusing it (instead of always emitting 2 spaces) keeps the rewrite to the
+ * dependency lines a consumer actually cares about — a tabs- or 4-space project
+ * otherwise gets its whole `package.json` reformatted inside the upgrade diff.
+ */
+const detectIndent = (raw: string): string => {
+  const match = /\n([ \t]+)\S/.exec(raw);
+  return match?.[1] ?? "  ";
+};
+
+/**
  * Bump every Flow dependency, install, then run the codemods the crossed range
  * calls for — and end by naming what no codemod covers.
  *
  * The order is not cosmetic: the codemods run against the installed target, so
- * `tsc` can be green when the command returns.
+ * `tsc` can be green when the command returns. `--dry` skips both the manifest
+ * write and the install, so the codemods it still runs act against whatever is
+ * currently installed rather than the target — their output is indicative, not
+ * exact.
  */
 export const runUpgrade = async (
   parsed: ParsedCommand,
   deps: UpgradeDeps,
 ): Promise<number> => {
   const { cwd, log } = deps;
+  const dry = parsed.dry === true;
 
-  if (!parsed.allowDirty && deps.isDirty(cwd)) {
+  // Resolved before the dirty-tree guard below: an explicit --path can point
+  // outside the repository the guard would otherwise check, and codemods
+  // rewrite files in place there just the same.
+  const path = resolveSourcePath(parsed.path, cwd);
+  const outsideRepo = isOutside(path, cwd);
+
+  if (
+    !parsed.allowDirty &&
+    (deps.isDirty(cwd) || (outsideRepo && deps.isDirty(path)))
+  ) {
     log(
       "The working tree has uncommitted changes. Codemods rewrite files in place, so commit or stash first — or pass --allow-dirty.",
     );
@@ -91,7 +119,20 @@ export const runUpgrade = async (
   }
 
   const manifestPath = join(cwd, "package.json");
-  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as Manifest;
+  const manifestRaw = readFileSync(manifestPath, "utf8");
+
+  let manifest: Manifest;
+  try {
+    manifest = JSON.parse(manifestRaw) as Manifest;
+  } catch (error) {
+    log(
+      `Could not parse ${manifestPath} as JSON: ${
+        error instanceof Error ? error.message : error
+      }`,
+    );
+    return 1;
+  }
+
   const dependencies = findFlowDependencies(manifest, flowPackages);
 
   // Destructuring (rather than `dependencies.length === 0` plus a `[0]!`
@@ -116,7 +157,15 @@ export const runUpgrade = async (
   // answers for all — the first one found, not a hardcoded package name, since
   // a consumer may only have one Flow dependency at all.
   const { versions, distTags } = await deps.fetchVersions(anchor.name);
-  const revision = parsed.revision ?? "minor";
+
+  const { revision } = parsed;
+  if (revision === undefined) {
+    // args.ts always defaults this for the "upgrade" command — this only
+    // guards a ParsedCommand built by hand without it, so it is not a second
+    // source of truth for the default.
+    log("No revision given.");
+    return 1;
+  }
   const target = resolveTarget({ revision, current, versions, distTags });
 
   if (target === undefined) {
@@ -135,43 +184,89 @@ export const runUpgrade = async (
     return 0;
   }
 
-  log(`Upgrading Flow from ${current} to ${target}`);
+  log(`Upgrading Flow from ${current} to ${target}${dry ? " (--dry)" : ""}`);
 
-  writeFileSync(
-    manifestPath,
-    `${JSON.stringify(applyTarget(manifest, target, flowPackages), null, 2)}\n`,
-    "utf8",
-  );
-  for (const { name } of dependencies) {
-    log(`  ${name} → ${target}`);
+  if (dry) {
+    log(`--dry: would write the following to ${manifestPath}:`);
+    for (const { name } of dependencies) {
+      log(`  ${name} → ${target}`);
+    }
+    log("--dry: skipping the install.");
+  } else {
+    const indent = detectIndent(manifestRaw);
+    writeFileSync(
+      manifestPath,
+      `${JSON.stringify(
+        applyTarget(manifest, target, flowPackages),
+        null,
+        indent,
+      )}\n`,
+      "utf8",
+    );
+    for (const { name } of dependencies) {
+      log(`  ${name} → ${target}`);
+    }
+
+    const manager = detectPackageManagerIn(cwd);
+    log(`Installing with ${manager}`);
+    try {
+      deps.install(manager, cwd);
+    } catch (error) {
+      log(
+        `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nEither re-run this command once the install works, or undo the bump with\n  git checkout package.json\n\n${
+          error instanceof Error ? error.message : error
+        }`,
+      );
+      return 1;
+    }
   }
-
-  const manager = detectPackageManagerIn(cwd);
-  log(`Installing with ${manager}`);
-  deps.install(manager, cwd);
 
   const selected = selectEntries(allEntries, current, target);
   const automatic = selected.filter((entry) => entry.action === "codemod");
   const byHand = selected.filter((entry) => entry.action !== "codemod");
 
   const chosen = await deps.choose(automatic);
-  const path = resolveSourcePath(parsed.path, cwd);
+
+  if (dry && chosen.length > 0) {
+    log(
+      `\n--dry: running the codemods against the currently installed version, not ${target} — their output is indicative, not exact.`,
+    );
+  }
+
+  let hadFailure = false;
+  const incomplete: string[] = [];
 
   for (const entry of chosen) {
-    const result = await deps.runCodemod({
-      id: entry.id,
-      path,
-      dry: parsed.dry,
-      print: parsed.print,
-    });
+    let result: CodemodResult;
+    try {
+      result = await deps.runCodemod({
+        id: entry.id,
+        path,
+        dry: parsed.dry,
+        print: parsed.print,
+      });
+    } catch (error) {
+      hadFailure = true;
+      incomplete.push(entry.id);
+      log(
+        `  ${entry.id}: failed to run — ${
+          error instanceof Error ? error.message : error
+        }`,
+      );
+      continue;
+    }
+
     // Same three-way distinction as the single-codemod command: "0 changed" on
     // its own would read as success where nothing was looked at, or where the
     // transform declined everything it saw.
     if (result.errors > 0) {
+      hadFailure = true;
       log(`  ${entry.id}: ${result.errors} file(s) failed to transform`);
     } else if (result.processedNothing) {
+      hadFailure = true;
       log(`  ${entry.id}: no files under ${path} were processed`);
     } else if (result.changed === 0 && result.skipped > 0) {
+      hadFailure = true;
       log(`  ${entry.id}: declined all ${result.skipped} file(s) it looked at`);
     } else {
       log(`  ${entry.id}: ${result.changed} file(s) changed`);
@@ -180,12 +275,18 @@ export const runUpgrade = async (
 
   if (byHand.length > 0) {
     log(
-      `\n${byHand.length} migration(s) in this range have no codemod. They are still open:\n`,
+      `\n${byHand.length} migration(s) in this range have no codemod — apply them by hand:\n`,
     );
     log(renderList({ entries: byHand, json: false }));
   } else {
-    log("\nEvery migration in this range had a codemod.");
+    log("\nNo migration in this range required a change by hand.");
   }
 
-  return 0;
+  if (incomplete.length > 0) {
+    log(
+      `\n${incomplete.length} codemod(s) did not complete: ${incomplete.join(", ")}`,
+    );
+  }
+
+  return hadFailure ? 1 : 0;
 };

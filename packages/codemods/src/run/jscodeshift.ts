@@ -83,6 +83,12 @@ export const runCodemod = async ({
       silent: true,
       dry,
       print,
+      // Without these the walk takes every file under the path. `upgrade` runs
+      // codemods after the install, so `node_modules` is freshly populated
+      // underneath — and non-JS files fail to parse, which shows up as
+      // `errors > 0` and hides the real change count.
+      extensions: "js,jsx,ts,tsx,cjs,mjs,cts,mts",
+      ignorePattern: ["**/node_modules/**", "**/dist/**", "**/.git/**"],
     })) as RunnerStats;
   } catch (error) {
     throw new Error(

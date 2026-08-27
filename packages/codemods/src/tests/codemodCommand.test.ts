@@ -8,18 +8,28 @@ import {
 import type { CodemodResult } from "../run/jscodeshift";
 
 describe("resolveSourcePath", () => {
-  test("an explicit path wins", () => {
-    expect(resolveSourcePath("app", "/project", () => true)).toBe("app");
+  test("an explicit relative path is resolved against cwd", () => {
+    expect(resolveSourcePath("app", "/project", () => true)).toBe(
+      "/project/app",
+    );
+  });
+
+  test("an explicit absolute path is left alone", () => {
+    expect(resolveSourcePath("/elsewhere/app", "/project", () => true)).toBe(
+      "/elsewhere/app",
+    );
   });
 
   test("src is the default when it exists", () => {
     expect(
       resolveSourcePath(undefined, "/project", (path) => path.endsWith("src")),
-    ).toBe("src");
+    ).toBe("/project/src");
   });
 
   test("the working directory is the fallback", () => {
-    expect(resolveSourcePath(undefined, "/project", () => false)).toBe(".");
+    expect(resolveSourcePath(undefined, "/project", () => false)).toBe(
+      "/project",
+    );
   });
 });
 

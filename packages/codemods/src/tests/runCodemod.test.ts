@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
@@ -67,6 +67,37 @@ describe("runCodemod", () => {
     });
 
     expect(result.processedNothing).toBe(true);
+  });
+
+  // The regression Group A exists to prevent: `upgrade` runs codemods after the
+  // install, so `node_modules` is freshly populated underneath. Without an
+  // extension/ignore filter, the Runner's walk takes every file under the
+  // path — including a dependency's source — and non-JS files like
+  // `package.json` fail to parse, which reads as `errors > 0`.
+  test("does not walk into node_modules", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "flow-codemods-node-modules-"));
+    mkdirSync(join(dir, "app"), { recursive: true });
+    mkdirSync(join(dir, "node_modules", "dep"), { recursive: true });
+    writeFileSync(join(dir, "app", "a.tsx"), usesAlign);
+    writeFileSync(join(dir, "node_modules", "dep", "index.tsx"), usesAlign);
+    writeFileSync(
+      join(dir, "package.json"),
+      JSON.stringify({ name: "consumer" }),
+    );
+
+    const result = await runCodemod({ id: "align-to-combine", path: dir });
+
+    expect(result.errors).toBe(0);
+    expect(result.changed).toBe(1);
+    expect(readFileSync(join(dir, "app", "a.tsx"), "utf8")).toContain(
+      "Combine",
+    );
+    const dependencySource = readFileSync(
+      join(dir, "node_modules", "dep", "index.tsx"),
+      "utf8",
+    );
+    expect(dependencySource).toContain("Align");
+    expect(dependencySource).not.toContain("Combine");
   });
 
   test("an unknown id fails with a message naming it", async () => {
