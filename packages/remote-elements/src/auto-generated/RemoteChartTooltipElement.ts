@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ChartTooltipProps } from "@mittwald/flow-react-components";
-export type RemoteChartTooltipElementProps =
-  WithSerializableClassName<ChartTooltipProps>;
+import type { ChartTooltipProps as RemoteChartTooltipElementProps } from "@mittwald/flow-react-components";
+export type { ChartTooltipProps as RemoteChartTooltipElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteChartTooltipElement extends FlowRemoteElement<RemoteChartTooltipElementProps> {
   static override get remoteAttributes() {

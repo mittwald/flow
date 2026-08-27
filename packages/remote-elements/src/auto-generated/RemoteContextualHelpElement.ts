@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ContextualHelpProps } from "@mittwald/flow-react-components";
-export type RemoteContextualHelpElementProps =
-  WithSerializableClassName<ContextualHelpProps>;
+import type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components";
+export type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContextualHelpElementProps> {
   static override get remoteAttributes() {

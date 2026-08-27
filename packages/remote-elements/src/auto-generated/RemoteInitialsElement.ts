@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { InitialsProps } from "@mittwald/flow-react-components";
-export type RemoteInitialsElementProps =
-  WithSerializableClassName<InitialsProps>;
+import type { InitialsProps as RemoteInitialsElementProps } from "@mittwald/flow-react-components";
+export type { InitialsProps as RemoteInitialsElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteInitialsElement extends FlowRemoteElement<RemoteInitialsElementProps> {
   static override get remoteAttributes() {

@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { CartesianChartProps } from "@mittwald/flow-react-components";
-export type RemoteCartesianChartElementProps =
-  WithSerializableClassName<CartesianChartProps>;
+import type { CartesianChartProps as RemoteCartesianChartElementProps } from "@mittwald/flow-react-components";
+export type { CartesianChartProps as RemoteCartesianChartElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCartesianChartElement extends FlowRemoteElement<RemoteCartesianChartElementProps> {
   static override get remoteAttributes() {

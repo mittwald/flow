@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { TabsProps } from "@mittwald/flow-react-components";
-export type RemoteTabsElementProps = WithSerializableClassName<TabsProps>;
+import type { TabsProps as RemoteTabsElementProps } from "@mittwald/flow-react-components";
+export type { TabsProps as RemoteTabsElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps> {
   static override get remoteAttributes() {

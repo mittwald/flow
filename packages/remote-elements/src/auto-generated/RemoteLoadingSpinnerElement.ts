@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { LoadingSpinnerProps } from "@mittwald/flow-react-components";
-export type RemoteLoadingSpinnerElementProps =
-  WithSerializableClassName<LoadingSpinnerProps>;
+import type { LoadingSpinnerProps as RemoteLoadingSpinnerElementProps } from "@mittwald/flow-react-components";
+export type { LoadingSpinnerProps as RemoteLoadingSpinnerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoadingSpinnerElementProps> {
   static override get remoteAttributes() {

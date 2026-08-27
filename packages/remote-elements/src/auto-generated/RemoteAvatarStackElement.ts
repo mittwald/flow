@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { AvatarStackProps } from "@mittwald/flow-react-components";
-export type RemoteAvatarStackElementProps =
-  WithSerializableClassName<AvatarStackProps>;
+import type { AvatarStackProps as RemoteAvatarStackElementProps } from "@mittwald/flow-react-components";
+export type { AvatarStackProps as RemoteAvatarStackElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAvatarStackElement extends FlowRemoteElement<RemoteAvatarStackElementProps> {
   static override get remoteAttributes() {

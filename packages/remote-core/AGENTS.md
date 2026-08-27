@@ -43,16 +43,14 @@ Connection + serialization layer between host (mStudio) and remote apps
   per component) so the cost stays one property instead of the whole update.
   That is a net, not a fix: the prop belongs in a **slot**. The generator fails
   the build on such a prop — see `checkSerializableProps` in the components
-  package. The mirror image is a prop the host _calls_: it has to send the
-  arguments over, so react-aria's `(renderProps) => string` form of `className`
-  would ship a collection's rendered elements on every row. The remote surface
-  narrows `className` to a string for that reason.
+  package.
 - Unit tests run in happy-dom: `pnpm nx test:unit remote-core`. The repeated
   reference and circular reference cases in `FlowThreadSerialization.test.tsx`
   are what fails if the sequential invariant breaks;
   `threadMessageOrder.test.ts` is what fails if the ordering queues break. The
-  boundary itself is covered end-to-end by `renderRemoteSerialized` in
-  `remote-react-components`.
+  boundary itself is covered end-to-end by the `Remote` visual environment in
+  `remote-react-components`, which routes every mutation through the real
+  serializer.
 - **`dist` bundles `@quilted/threads`.** The remote packages resolve built
   `dist`, and the patched threads code is inlined into it — so a patch change is
   invisible to the browser and visual suites until `pnpm nx build remote-core`

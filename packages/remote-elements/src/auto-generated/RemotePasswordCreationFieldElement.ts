@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { PasswordCreationFieldProps } from "@mittwald/flow-react-components";
-export type RemotePasswordCreationFieldElementProps =
-  WithSerializableClassName<PasswordCreationFieldProps>;
+import type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components";
+export type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components";
 
 export class RemotePasswordCreationFieldElement extends FlowRemoteElement<RemotePasswordCreationFieldElementProps> {
   static override get remoteAttributes() {

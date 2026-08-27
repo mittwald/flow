@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { AccentBoxProps } from "@mittwald/flow-react-components";
-export type RemoteAccentBoxElementProps =
-  WithSerializableClassName<AccentBoxProps>;
+import type { AccentBoxProps as RemoteAccentBoxElementProps } from "@mittwald/flow-react-components";
+export type { AccentBoxProps as RemoteAccentBoxElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAccentBoxElement extends FlowRemoteElement<RemoteAccentBoxElementProps> {
   static override get remoteAttributes() {

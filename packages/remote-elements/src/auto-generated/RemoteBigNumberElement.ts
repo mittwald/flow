@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { BigNumberProps } from "@mittwald/flow-react-components";
-export type RemoteBigNumberElementProps =
-  WithSerializableClassName<BigNumberProps>;
+import type { BigNumberProps as RemoteBigNumberElementProps } from "@mittwald/flow-react-components";
+export type { BigNumberProps as RemoteBigNumberElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteBigNumberElement extends FlowRemoteElement<RemoteBigNumberElementProps> {
   static override get remoteAttributes() {

@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { KbdProps } from "@mittwald/flow-react-components";
-export type RemoteKbdElementProps = WithSerializableClassName<KbdProps>;
+import type { KbdProps as RemoteKbdElementProps } from "@mittwald/flow-react-components";
+export type { KbdProps as RemoteKbdElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteKbdElement extends FlowRemoteElement<RemoteKbdElementProps> {
   static override get remoteAttributes() {

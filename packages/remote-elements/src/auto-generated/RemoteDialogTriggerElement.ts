@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { DialogTriggerProps } from "@mittwald/flow-react-components";
-export type RemoteDialogTriggerElementProps =
-  WithSerializableClassName<DialogTriggerProps>;
+import type { DialogTriggerProps as RemoteDialogTriggerElementProps } from "@mittwald/flow-react-components";
+export type { DialogTriggerProps as RemoteDialogTriggerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteDialogTriggerElement extends FlowRemoteElement<RemoteDialogTriggerElementProps> {
   static override get remoteAttributes() {

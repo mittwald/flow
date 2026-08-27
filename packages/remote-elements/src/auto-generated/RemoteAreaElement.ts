@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { AreaProps } from "@mittwald/flow-react-components";
-export type RemoteAreaElementProps = WithSerializableClassName<AreaProps>;
+import type { AreaProps as RemoteAreaElementProps } from "@mittwald/flow-react-components";
+export type { AreaProps as RemoteAreaElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAreaElement extends FlowRemoteElement<RemoteAreaElementProps> {
   static override get remoteAttributes() {

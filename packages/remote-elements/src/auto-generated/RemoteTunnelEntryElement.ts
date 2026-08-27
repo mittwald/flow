@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { TunnelEntryProps } from "@mittwald/flow-react-components";
-export type RemoteTunnelEntryElementProps =
-  WithSerializableClassName<TunnelEntryProps>;
+import type { TunnelEntryProps as RemoteTunnelEntryElementProps } from "@mittwald/flow-react-components";
+export type { TunnelEntryProps as RemoteTunnelEntryElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTunnelEntryElement extends FlowRemoteElement<RemoteTunnelEntryElementProps> {
   static override get remoteAttributes() {

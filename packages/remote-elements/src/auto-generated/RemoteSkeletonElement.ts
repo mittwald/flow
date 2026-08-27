@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { SkeletonProps } from "@mittwald/flow-react-components";
-export type RemoteSkeletonElementProps =
-  WithSerializableClassName<SkeletonProps>;
+import type { SkeletonProps as RemoteSkeletonElementProps } from "@mittwald/flow-react-components";
+export type { SkeletonProps as RemoteSkeletonElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteSkeletonElement extends FlowRemoteElement<RemoteSkeletonElementProps> {
   static override get remoteAttributes() {

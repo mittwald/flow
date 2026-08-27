@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { TooltipProps } from "@mittwald/flow-react-components";
-export type RemoteTooltipElementProps = WithSerializableClassName<TooltipProps>;
+import type { TooltipProps as RemoteTooltipElementProps } from "@mittwald/flow-react-components";
+export type { TooltipProps as RemoteTooltipElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTooltipElement extends FlowRemoteElement<RemoteTooltipElementProps> {
   static override get remoteAttributes() {

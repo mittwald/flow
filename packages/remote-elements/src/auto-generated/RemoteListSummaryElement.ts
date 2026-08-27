@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ListSummaryProps } from "@mittwald/flow-react-components";
-export type RemoteListSummaryElementProps =
-  WithSerializableClassName<ListSummaryProps>;
+import type { ListSummaryProps as RemoteListSummaryElementProps } from "@mittwald/flow-react-components";
+export type { ListSummaryProps as RemoteListSummaryElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteListSummaryElement extends FlowRemoteElement<RemoteListSummaryElementProps> {
   static override get remoteAttributes() {

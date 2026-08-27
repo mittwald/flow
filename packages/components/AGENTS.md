@@ -150,15 +150,6 @@ Remote generation details:
   output, because the host has to call it: that needs an eager slot or
   `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
   prop, so a new one cannot ship.
-- **The danger is the arguments too, not only the return value.** A prop the
-  host _calls_ has to send whatever it passes in. react-aria's `className`
-  accepts `(renderProps) => string`, and for a collection component those render
-  props carry the collection state — which holds the rendered elements of every
-  row and cell. The remote surface therefore narrows `className` to a string
-  (`WithSerializableClassName` in remote-elements, applied by the generator);
-  locally the function form still works. Composing through a view, never pass a
-  function where the remote element declares a property — `List`'s table did,
-  and every row shipped its whole collection.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in

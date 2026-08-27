@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { MarkdownEditorProps } from "@mittwald/flow-react-components";
-export type RemoteMarkdownEditorElementProps =
-  WithSerializableClassName<MarkdownEditorProps>;
+import type { MarkdownEditorProps as RemoteMarkdownEditorElementProps } from "@mittwald/flow-react-components";
+export type { MarkdownEditorProps as RemoteMarkdownEditorElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdownEditorElementProps> {
   static override get remoteAttributes() {

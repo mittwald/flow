@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { NotificationProps } from "@mittwald/flow-react-components";
-export type RemoteNotificationElementProps =
-  WithSerializableClassName<NotificationProps>;
+import type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components";
+export type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificationElementProps> {
   static override get remoteAttributes() {

@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { AutocompleteProps } from "@mittwald/flow-react-components";
-export type RemoteAutocompleteElementProps =
-  WithSerializableClassName<AutocompleteProps>;
+import type { AutocompleteProps as RemoteAutocompleteElementProps } from "@mittwald/flow-react-components";
+export type { AutocompleteProps as RemoteAutocompleteElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAutocompleteElement extends FlowRemoteElement<RemoteAutocompleteElementProps> {
   static override get remoteAttributes() {

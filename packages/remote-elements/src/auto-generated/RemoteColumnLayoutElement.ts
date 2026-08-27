@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ColumnLayoutProps } from "@mittwald/flow-react-components";
-export type RemoteColumnLayoutElementProps =
-  WithSerializableClassName<ColumnLayoutProps>;
+import type { ColumnLayoutProps as RemoteColumnLayoutElementProps } from "@mittwald/flow-react-components";
+export type { ColumnLayoutProps as RemoteColumnLayoutElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteColumnLayoutElement extends FlowRemoteElement<RemoteColumnLayoutElementProps> {
   static override get remoteAttributes() {

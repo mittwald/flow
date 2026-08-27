@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ContextMenuContentProps } from "@mittwald/flow-react-components";
-export type RemoteContextMenuContentElementProps =
-  WithSerializableClassName<ContextMenuContentProps>;
+import type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components";
+export type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteContextMenuContentElement extends FlowRemoteElement<RemoteContextMenuContentElementProps> {
   static override get remoteAttributes() {

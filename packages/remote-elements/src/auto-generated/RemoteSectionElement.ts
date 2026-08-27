@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { SectionProps } from "@mittwald/flow-react-components";
-export type RemoteSectionElementProps = WithSerializableClassName<SectionProps>;
+import type { SectionProps as RemoteSectionElementProps } from "@mittwald/flow-react-components";
+export type { SectionProps as RemoteSectionElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteSectionElement extends FlowRemoteElement<RemoteSectionElementProps> {
   static override get remoteAttributes() {

@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { HeadingProps } from "@mittwald/flow-react-components";
-export type RemoteHeadingElementProps = WithSerializableClassName<HeadingProps>;
+import type { HeadingProps as RemoteHeadingElementProps } from "@mittwald/flow-react-components";
+export type { HeadingProps as RemoteHeadingElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteHeadingElement extends FlowRemoteElement<RemoteHeadingElementProps> {
   static override get remoteAttributes() {

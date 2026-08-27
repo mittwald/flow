@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { MenuTriggerProps } from "@mittwald/flow-react-components";
-export type RemoteMenuTriggerElementProps =
-  WithSerializableClassName<MenuTriggerProps>;
+import type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components";
+export type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteMenuTriggerElement extends FlowRemoteElement<RemoteMenuTriggerElementProps> {
   static override get remoteAttributes() {

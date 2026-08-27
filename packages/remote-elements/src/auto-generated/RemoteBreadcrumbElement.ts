@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { BreadcrumbProps } from "@mittwald/flow-react-components";
-export type RemoteBreadcrumbElementProps =
-  WithSerializableClassName<BreadcrumbProps>;
+import type { BreadcrumbProps as RemoteBreadcrumbElementProps } from "@mittwald/flow-react-components";
+export type { BreadcrumbProps as RemoteBreadcrumbElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteBreadcrumbElement extends FlowRemoteElement<RemoteBreadcrumbElementProps> {
   static override get remoteAttributes() {

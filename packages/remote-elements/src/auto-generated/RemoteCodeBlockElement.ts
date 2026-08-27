@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { CodeBlockProps } from "@mittwald/flow-react-components";
-export type RemoteCodeBlockElementProps =
-  WithSerializableClassName<CodeBlockProps>;
+import type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/flow-react-components";
+export type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockElementProps> {
   static override get remoteAttributes() {

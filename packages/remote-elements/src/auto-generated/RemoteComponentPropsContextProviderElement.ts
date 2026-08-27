@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { ComponentPropsContextProviderProps } from "@mittwald/flow-react-components";
-export type RemoteComponentPropsContextProviderElementProps =
-  WithSerializableClassName<ComponentPropsContextProviderProps>;
+import type { ComponentPropsContextProviderProps as RemoteComponentPropsContextProviderElementProps } from "@mittwald/flow-react-components";
+export type { ComponentPropsContextProviderProps as RemoteComponentPropsContextProviderElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteComponentPropsContextProviderElement extends FlowRemoteElement<RemoteComponentPropsContextProviderElementProps> {
   static override get remoteAttributes() {

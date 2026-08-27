@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { RadioProps } from "@mittwald/flow-react-components";
-export type RemoteRadioElementProps = WithSerializableClassName<RadioProps>;
+import type { RadioProps as RemoteRadioElementProps } from "@mittwald/flow-react-components";
+export type { RadioProps as RemoteRadioElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProps> {
   static override get remoteAttributes() {

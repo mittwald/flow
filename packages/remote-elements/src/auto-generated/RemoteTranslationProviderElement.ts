@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { TranslationProviderProps } from "@mittwald/flow-react-components";
-export type RemoteTranslationProviderElementProps =
-  WithSerializableClassName<TranslationProviderProps>;
+import type { TranslationProviderProps as RemoteTranslationProviderElementProps } from "@mittwald/flow-react-components";
+export type { TranslationProviderProps as RemoteTranslationProviderElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTranslationProviderElement extends FlowRemoteElement<RemoteTranslationProviderElementProps> {
   static override get remoteAttributes() {

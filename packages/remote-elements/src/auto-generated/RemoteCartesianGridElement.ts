@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { CartesianGridProps } from "@mittwald/flow-react-components";
-export type RemoteCartesianGridElementProps =
-  WithSerializableClassName<CartesianGridProps>;
+import type { CartesianGridProps as RemoteCartesianGridElementProps } from "@mittwald/flow-react-components";
+export type { CartesianGridProps as RemoteCartesianGridElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCartesianGridElement extends FlowRemoteElement<RemoteCartesianGridElementProps> {
   static override get remoteAttributes() {

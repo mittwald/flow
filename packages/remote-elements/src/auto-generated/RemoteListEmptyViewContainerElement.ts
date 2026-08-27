@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { EmptyViewContainerProps } from "@mittwald/flow-react-components";
-export type RemoteListEmptyViewContainerElementProps =
-  WithSerializableClassName<EmptyViewContainerProps>;
+import type { EmptyViewContainerProps as RemoteListEmptyViewContainerElementProps } from "@mittwald/flow-react-components";
+export type { EmptyViewContainerProps as RemoteListEmptyViewContainerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteListEmptyViewContainerElement extends FlowRemoteElement<RemoteListEmptyViewContainerElementProps> {
   static override get remoteAttributes() {

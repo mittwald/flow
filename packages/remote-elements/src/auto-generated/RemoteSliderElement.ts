@@ -1,9 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { SliderProps } from "@mittwald/flow-react-components";
-export type RemoteSliderElementProps = WithSerializableClassName<SliderProps>;
+import type { SliderProps as RemoteSliderElementProps } from "@mittwald/flow-react-components";
+export type { SliderProps as RemoteSliderElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementProps> {
   static override get remoteAttributes() {

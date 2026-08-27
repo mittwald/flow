@@ -1,10 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { WithSerializableClassName } from "@/lib/RemoteProps";
-import type { AlertBadgeProps } from "@mittwald/flow-react-components";
-export type RemoteAlertBadgeElementProps =
-  WithSerializableClassName<AlertBadgeProps>;
+import type { AlertBadgeProps as RemoteAlertBadgeElementProps } from "@mittwald/flow-react-components";
+export type { AlertBadgeProps as RemoteAlertBadgeElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAlertBadgeElement extends FlowRemoteElement<RemoteAlertBadgeElementProps> {
   static override get remoteAttributes() {
