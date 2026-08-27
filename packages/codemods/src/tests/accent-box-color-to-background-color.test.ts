@@ -1,9 +1,9 @@
 import { describe, expect, test } from "vitest";
 import { runTransform } from "./runTransform";
 
-const transform = "flowAlphaAccentBoxColorToBackgroundColor";
+const transform = "accent-box-color-to-background-color";
 
-describe("flowAlphaAccentBoxColorToBackgroundColor", () => {
+describe("accent-box-color-to-background-color", () => {
   test("moves background values and keeps content colors", () => {
     const source = `import { AccentBox } from "@mittwald/flow-react-components";
 import * as Flow from "@mittwald/flow-react-components";

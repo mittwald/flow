@@ -63,15 +63,17 @@ const targets: Record<string, string[]> = {
   ],
   "imports-to-package-root": [],
   "renamed-css-export": [],
+  "to-remote-package": [],
 };
 
 /**
- * These two are about the package layout itself rather than about names in it,
- * so there is nothing to look up in `remoteExports`.
+ * These three are about the package layout itself rather than about names in
+ * it, so there is nothing to look up in `remoteExports`.
  */
 const notNameScoped = new Set([
   "imports-to-package-root",
   "renamed-css-export",
+  "to-remote-package",
 ]);
 
 const catalog = readCatalog();
@@ -95,12 +97,47 @@ describe("a catalogue entry claims the remote package only where it applies", ()
   });
 });
 
+const codemodIds = catalog
+  .filter((entry) => entry.action === "codemod")
+  .map((entry) => entry.id);
+
+/**
+ * `remotePackage` in the frontmatter and a transform's own `flowPackages` array
+ * are two independently maintained facts. The check above holds `remotePackage`
+ * against the remote package's real export surface; this one holds it against
+ * what the transform itself claims to touch. Both have to agree, or
+ * `remotePackage` is not derived from anything — it is just a second guess that
+ * happens to match today.
+ */
+describe("a transform's own scoping agrees with the catalogue's remotePackage claim", () => {
+  test.for(codemodIds)("%s", (id) => {
+    const claimsRemote = declaredPackages(id).includes(
+      "@mittwald/flow-remote-react-components",
+    );
+    expect(claimsRemote).toBe(remotePackageById.get(id));
+  });
+});
+
 const transformNames = readdirSync(transformsDir)
   .filter((file) => file.endsWith(".ts"))
   .map((file) => file.replace(/\.ts$/, ""));
 
+/**
+ * `catalog.test.ts` iterates the catalogue, so it only notices an orphan
+ * transform whose filename happens to equal a catalogue id. This iterates
+ * `src/transforms` instead, so a file with no matching id — or an id gone
+ * unnoticed because it collided with an existing filename — cannot hide.
+ */
+describe("every transform file is accounted for", () => {
+  test("the set of files in src/transforms matches the codemod ids", () => {
+    expect(new Set(transformNames)).toEqual(
+      new Set([...codemodIds, "to-remote-package"]),
+    );
+  });
+});
+
 describe("every scoped entry is one a consumer can import", () => {
-  test.for(transformNames.filter((name) => name !== "flow1"))("%s", (name) => {
+  test.for(transformNames)("%s", (name) => {
     for (const entry of declaredPackages(name)) {
       expect(packageEntries).toContain(entry);
     }

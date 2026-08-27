@@ -12,10 +12,7 @@ import type { Transform } from "jscodeshift";
  * Only the literal value `"accent"` is rewritten (`color="accent"` and
  * `color={"accent"}`); dynamic values such as `color={expr}` are skipped.
  */
-const flowAlphaButtonColorAccentToSuccessTransform: Transform = (
-  fileInfo,
-  { j },
-) => {
+const buttonColorAccentToSuccessTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components",
     "@mittwald/flow-remote-react-components",
@@ -120,4 +117,4 @@ const flowAlphaButtonColorAccentToSuccessTransform: Transform = (
   return root.toSource();
 };
 
-export default flowAlphaButtonColorAccentToSuccessTransform;
+export default buttonColorAccentToSuccessTransform;

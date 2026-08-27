@@ -29,7 +29,7 @@ import type { Transform } from "jscodeshift";
  * renamed all the same. Namespace usages (`Flow.MutedActionError`) are
  * rewritten too.
  */
-const flowAlphaMutedActionErrorToAbortActionErrorTransform: Transform = (
+const mutedActionErrorToAbortActionErrorTransform: Transform = (
   fileInfo,
   { j },
 ) => {
@@ -257,4 +257,4 @@ const flowAlphaMutedActionErrorToAbortActionErrorTransform: Transform = (
   return root.toSource();
 };
 
-export default flowAlphaMutedActionErrorToAbortActionErrorTransform;
+export default mutedActionErrorToAbortActionErrorTransform;

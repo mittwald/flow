@@ -12,7 +12,12 @@
   "targets": {
     "build": {
       "cache": true,
-      "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"]
+      "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/src/migrations.generated.ts",
+        "{workspaceRoot}/packages/components/MIGRATION.md"
+      ]
     },
     "test:unit": {
       "cache": true,

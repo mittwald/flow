@@ -32,10 +32,7 @@ import type { Transform } from "jscodeshift";
  * them — or one of them next to `ButtonProps` itself — ends up with a single
  * specifier instead of a duplicate declaration, which would not parse.
  */
-const flowAlphaButtonPropsInterfacesTransform: Transform = (
-  fileInfo,
-  { j },
-) => {
+const buttonPropsInterfacesTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = ["@mittwald/flow-react-components"];
   const removed = new Set(["ResetButtonProps", "SubmitButtonProps"]);
   const newName = "ButtonProps";
@@ -229,4 +226,4 @@ const flowAlphaButtonPropsInterfacesTransform: Transform = (
   return root.toSource();
 };
 
-export default flowAlphaButtonPropsInterfacesTransform;
+export default buttonPropsInterfacesTransform;

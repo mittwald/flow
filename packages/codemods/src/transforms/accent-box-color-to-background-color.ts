@@ -27,7 +27,7 @@ import type { Transform } from "jscodeshift";
  *
  * Both keep their `color` prop and need a look by hand.
  */
-const flowAlphaAccentBoxColorToBackgroundColorTransform: Transform = (
+const accentBoxColorToBackgroundColorTransform: Transform = (
   fileInfo,
   { j },
 ) => {
@@ -155,4 +155,4 @@ const flowAlphaAccentBoxColorToBackgroundColorTransform: Transform = (
   return root.toSource();
 };
 
-export default flowAlphaAccentBoxColorToBackgroundColorTransform;
+export default accentBoxColorToBackgroundColorTransform;

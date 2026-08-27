@@ -4,10 +4,12 @@
  * - `migration` — the old path is gone, at runtime or in the types. It only
  *   matters when the consumer actually crosses `since`.
  * - `deprecation` — the old path still works. It matters as soon as the
- *   replacement exists, so `since` is the version that introduced the
- *   replacement, not one that removed anything.
+ *   replacement exists.
+ * - `tool` — not a migration at all. Never selected by a version range; it exists
+ *   so a codemod that ports code between packages has a documented home instead
+ *   of a named exception in a test.
  */
-export type MigrationKind = "migration" | "deprecation";
+export type MigrationKind = "migration" | "deprecation" | "tool";
 
 /**
  * What has to happen.

@@ -70,6 +70,7 @@ const renderEntry = (entry: MigrationEntry): string => {
 /** The guide as source, so a test can compare without writing anything. */
 export const renderMigrationGuide = async (): Promise<string> => {
   const entries = readCatalog()
+    .filter((entry) => entry.kind !== "tool")
     // Same `id` tie-break as the generated module, and for the same reason:
     // duplicate `since` values would otherwise order by directory listing.
     .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id));

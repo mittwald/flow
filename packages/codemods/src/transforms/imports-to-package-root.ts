@@ -1,6 +1,6 @@
 import type { Transform } from "jscodeshift";
 
-const flowImportPaths: Transform = (fileInfo, { j }) => {
+const importsToPackageRootTransform: Transform = (fileInfo, { j }) => {
   const flowPackage = "@mittwald/flow-react-components";
 
   const root = j(fileInfo.source, {
@@ -64,4 +64,4 @@ const flowImportPaths: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowImportPaths;
+export default importsToPackageRootTransform;

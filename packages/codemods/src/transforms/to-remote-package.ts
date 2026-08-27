@@ -1,6 +1,6 @@
 import type { Transform } from "jscodeshift";
 
-const flowToFlowRemoteTransform: Transform = (fileInfo, { j }) => {
+const toRemotePackageTransform: Transform = (fileInfo, { j }) => {
   const flowPackage = "@mittwald/flow-react-components";
 
   const root = j(fileInfo.source, {
@@ -22,4 +22,4 @@ const flowToFlowRemoteTransform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowToFlowRemoteTransform;
+export default toRemotePackageTransform;

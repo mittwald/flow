@@ -1,10 +1,5 @@
 import { execFileSync } from "node:child_process";
-import {
-  copyFileSync,
-  mkdtempSync,
-  readFileSync,
-  writeFileSync,
-} from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -31,35 +26,34 @@ const assertProcessed = (name: string, output: string): void => {
 
   if (errors !== 0 || processed !== 1) {
     throw new Error(
-      `jscodeshift did not process the input with "${name}". ` +
-        `A transform that requires a sibling file fails like this, because ` +
-        `jscodeshift runs it from a directory of its own.\n\n${output}`,
+      `jscodeshift did not process the input with "${name}".\n\n${output}`,
     );
   }
 };
 
 /**
- * Runs a transform the way a consumer does.
+ * Runs a transform the way the CLI does: the real jscodeshift CLI, over a file
+ * in a temp directory, with the transform read from `src/transforms`.
  *
- * The documented invocation passes a raw GitHub URL, and jscodeshift downloads
- * that into a file in the OS temp dir and requires it from there. Copying the
- * transform into a temp directory of its own reproduces that exactly: a
- * transform that reaches for a sibling file fails here the same way it fails
- * for a consumer.
+ * Spawning the CLI rather than calling the transform in-process is deliberate —
+ * it is the invocation `runCodemod` makes, so a transform that only works when
+ * called directly fails here too.
  */
 export const runTransform = (name: string, source: string): string => {
   const workingDir = mkdtempSync(join(tmpdir(), "flow-codemods-"));
-
-  // The name jscodeshift itself gives the file it downloaded.
-  const transformFile = join(workingDir, "jscodeshift-transform.ts");
-  copyFileSync(join(transformsDir, `${name}.ts`), transformFile);
-
   const inputFile = join(workingDir, "input.tsx");
   writeFileSync(inputFile, source);
 
   const output = execFileSync(
     process.execPath,
-    [jscodeshiftBin, "-t", transformFile, "--parser", "tsx", inputFile],
+    [
+      jscodeshiftBin,
+      "-t",
+      join(transformsDir, `${name}.ts`),
+      "--parser",
+      "tsx",
+      inputFile,
+    ],
     { cwd: workingDir, stdio: "pipe", encoding: "utf8" },
   );
 

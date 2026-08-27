@@ -1,29 +1,45 @@
 import type { Transform } from "jscodeshift";
 
 /**
- * Renames the `action` prop to `onAction` on `Action`.
+ * Renames the `color="primary"` prop value to `color="default"` on the five
+ * components changed by the alpha.837 design update: `Breadcrumb`,
+ * `HeaderNavigation`, `Heading`, `IllustratedMessage` and `Link`.
  *
- * The scope is deliberately narrow. Only JSX elements that resolve to `Action`
- * — imported (named or as a namespace) from `@mittwald/flow-react-components`
- * or `@mittwald/flow-remote-react-components`, including their subpath entries
- * — are touched. `Action` is not one of the generated remote components, but
- * the remote package re-exports the `flr-universal` surface, which carries it.
- * Same-named components from other packages are left untouched, and so is the
- * `action` attribute of a plain `<form>`.
- *
- * An element that already carries `onAction` keeps it and only loses the stale
- * `action` prop, which mirrors what the runtime fallback does: an explicit
- * `onAction` wins.
+ * The scope is deliberately narrow. Only JSX elements that resolve to one of
+ * those components — imported (named or as a namespace) from
+ * `@mittwald/flow-react-components` or
+ * `@mittwald/flow-remote-react-components`, including their subpath entries —
+ * are touched. Components that still accept `color="primary"` (e.g. `Button`)
+ * and same-named elements from other packages (e.g. a router `Link`) are left
+ * untouched. Only the literal value `"primary"` is rewritten (`color="primary"`
+ * and `color={"primary"}`); dynamic values such as `color={expr}` are skipped.
  */
-const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
+const colorPrimaryToDefaultTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components",
     "@mittwald/flow-remote-react-components",
   ];
-  const affectedComponents = new Set(["Action"]);
+  const affectedComponents = new Set([
+    "Breadcrumb",
+    "HeaderNavigation",
+    "Heading",
+    "IllustratedMessage",
+    "Link",
+  ]);
 
   const isFlowImport = (source: string): boolean =>
     flowPackages.some((pkg) => source === pkg || source.startsWith(`${pkg}/`));
+
+  const isPrimaryLiteral = (node: unknown): boolean => {
+    if (!node || typeof node !== "object" || !("type" in node)) {
+      return false;
+    }
+    const { type } = node as { type: string };
+    return (
+      (type === "StringLiteral" || type === "Literal") &&
+      (node as { value?: unknown }).value === "primary"
+    );
+  };
 
   const root = j(fileInfo.source, { parser: "tsx" });
 
@@ -79,27 +95,29 @@ const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
       return;
     }
 
-    const attributes = path.node.attributes ?? [];
+    for (const attribute of path.node.attributes ?? []) {
+      if (
+        attribute.type !== "JSXAttribute" ||
+        attribute.name.type !== "JSXIdentifier" ||
+        attribute.name.name !== "color"
+      ) {
+        continue;
+      }
 
-    const isNamed = (attribute: (typeof attributes)[number], key: string) =>
-      attribute.type === "JSXAttribute" &&
-      attribute.name.type === "JSXIdentifier" &&
-      attribute.name.name === key;
+      const value = attribute.value;
 
-    const hasOnAction = attributes.some((attribute) =>
-      isNamed(attribute, "onAction"),
-    );
+      // color="primary"
+      if (isPrimaryLiteral(value)) {
+        attribute.value = j.stringLiteral("default");
+        continue;
+      }
 
-    if (hasOnAction) {
-      path.node.attributes = attributes.filter(
-        (attribute) => !isNamed(attribute, "action"),
-      );
-      return;
-    }
-
-    for (const attribute of attributes) {
-      if (isNamed(attribute, "action") && attribute.type === "JSXAttribute") {
-        attribute.name.name = "onAction";
+      // color={"primary"}
+      if (
+        value?.type === "JSXExpressionContainer" &&
+        isPrimaryLiteral(value.expression)
+      ) {
+        value.expression = j.stringLiteral("default");
       }
     }
   });
@@ -107,4 +125,4 @@ const flowAlphaActionPropToOnActionTransform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowAlphaActionPropToOnActionTransform;
+export default colorPrimaryToDefaultTransform;

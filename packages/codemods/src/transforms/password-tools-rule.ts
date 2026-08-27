@@ -19,7 +19,7 @@ import type { Transform } from "jscodeshift";
  * Because both names collapse onto `Rule`, a file importing more than one of
  * them would end up with a duplicate specifier. Those collapse onto one.
  */
-const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
+const passwordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
     "@mittwald/flow-react-components/mittwald-password-tools-js",
   ];
@@ -216,4 +216,4 @@ const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowAlphaPasswordToolsRuleTransform;
+export default passwordToolsRuleTransform;

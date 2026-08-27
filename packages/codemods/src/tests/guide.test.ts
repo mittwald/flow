@@ -15,7 +15,11 @@ describe("the generated migration guide", () => {
   });
 
   test("every entry has an anchor matching its id", () => {
-    for (const entry of readCatalog()) {
+    // `kind: "tool"` entries are filtered out of the guide — they are not a
+    // migration, so there is nothing here for a consumer to look up by version.
+    for (const entry of readCatalog().filter(
+      (entry) => entry.kind !== "tool",
+    )) {
       expect(committed).toContain(`<a id="${entry.id}"></a>`);
     }
   });

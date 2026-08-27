@@ -13,13 +13,13 @@ import { runTransform, transformsDir } from "./runTransform";
  * has already rewritten.
  */
 const fixtures: Record<string, string> = {
-  flow020: `import { Button } from "@mittwald/flow-react-components/components/Button";
+  "imports-to-package-root": `import { Button } from "@mittwald/flow-react-components/components/Button";
 import { Text } from "@mittwald/flow-react-components/components/Text";
 import { useForm } from "@mittwald/flow-react-components/react-hook-form/x";
 import "@mittwald/flow-react-components/global.css";
 `,
 
-  flowAlphaAccentBoxColorToBackgroundColor: `import { AccentBox } from "@mittwald/flow-react-components";
+  "accent-box-color-to-background-color": `import { AccentBox } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <>
@@ -33,7 +33,7 @@ export const A = () => (
 );
 `,
 
-  flowAlphaActionPropToOnAction: `import { Action } from "@mittwald/flow-react-components";
+  "action-prop-to-on-action": `import { Action } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <>
@@ -53,7 +53,7 @@ export const A = (props: AlignProps) => (
 );
 `,
 
-  flowAlphaButtonColorAccentToSuccess: `import { Button } from "@mittwald/flow-react-components";
+  "button-color-accent-to-success": `import { Button } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <>
@@ -63,7 +63,7 @@ export const A = () => (
 );
 `,
 
-  flowAlphaColorPrimaryToDefault: `import { Heading, Link } from "@mittwald/flow-react-components";
+  "color-primary-to-default": `import { Heading, Link } from "@mittwald/flow-react-components";
 
 export const A = () => (
   <>
@@ -74,13 +74,13 @@ export const A = () => (
 );
 `,
 
-  flowAlphaButtonPropsInterfaces: `import type { ButtonProps } from "@mittwald/flow-react-components";
+  "button-props-interfaces": `import type { ButtonProps } from "@mittwald/flow-react-components";
 import type { SubmitButtonProps, ResetButtonProps } from "@mittwald/flow-react-components/react-hook-form";
 
 export type A = ButtonProps | SubmitButtonProps | ResetButtonProps;
 `,
 
-  flowAlphaMutedActionErrorToAbortActionError: `import { MutedActionError } from "@mittwald/flow-react-components";
+  "muted-action-error-to-abort-action-error": `import { MutedActionError } from "@mittwald/flow-react-components";
 import { AbortActionError } from "@mittwald/flow-react-components/internal";
 
 export const run = (error: Error) => {
@@ -91,14 +91,14 @@ export const run = (error: Error) => {
 };
 `,
 
-  flowAlphaPasswordToolsRule: `import { AsyncRule, SyncRule, Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+  "password-tools-rule": `import { AsyncRule, SyncRule, Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
 
 export class A extends AsyncRule {}
 export class B extends SyncRule {}
 export class C extends Rule {}
 `,
 
-  flowRemote: `import { Button } from "@mittwald/flow-react-components";
+  "to-remote-package": `import { Button } from "@mittwald/flow-react-components";
 import { Text } from "@mittwald/flow-remote-react-components";
 import "@mittwald/flow-react-components/all.css";
 `,
