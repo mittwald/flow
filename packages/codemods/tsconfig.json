@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     // The package emits nothing — `test:compile` is a `tsc --noEmit` gate. Widen
     // the root so the gate also covers the generator in `dev` and the test setup.
     "rootDir": "${configDir}"
   },
   "extends": "../typescript-config/library.json",
-  "include": ["src/**/*.ts", "dev/**/*.ts", "vitest.config.ts"]
+  "include": ["src/**/*.ts", "dev/**/*.ts", "vitest.config.ts", "package.json"]
 }

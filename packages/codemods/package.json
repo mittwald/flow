@@ -1,23 +1,33 @@
 {
   "name": "@mittwald/flow-codemods",
-  "private": true,
   "version": "1.1.0-next.4",
   "type": "module",
+  "bin": {
+    "flow-codemods": "dist/cli.js"
+  },
+  "files": [
+    "*.md",
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.9.0",
+    "jscodeshift": "^17.3.0",
+    "semver": "^7.8.5"
   },
   "devDependencies": {
     "@types/jscodeshift": "^17.3.0",
     "@types/node": "^25.9.3",
-    "jscodeshift": "^17.3.0",
+    "@types/semver": "^7.7.3",
     "prettier": "^3.9.6",
     "tsx": "^4.23.12",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.11"
-  },
-  "peerDependencies": {
-    "jscodeshift": "^17.3.0"
+    "vitest": "^4.1.11",
+    "yaml": "^2.8.1"
   }
 }
