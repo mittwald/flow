@@ -16,6 +16,7 @@
       "outputs": [
         "{projectRoot}/dist",
         "{projectRoot}/src/migrations.generated.ts",
+        "{projectRoot}/src/flowPackages.generated.ts",
         "{workspaceRoot}/packages/components/MIGRATION.md"
       ]
     },
