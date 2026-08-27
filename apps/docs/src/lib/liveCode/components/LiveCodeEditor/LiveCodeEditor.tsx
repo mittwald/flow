@@ -17,7 +17,7 @@ import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/e
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
-import { Button, Icon } from "@mittwald/flow-react-components";
+import { Button, Icon, LayoutCard } from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 
@@ -46,7 +46,7 @@ const keyStep = 20;
 interface Metrics {
   /** Width the preview and the handle share, excluding the track's padding. */
   track: number;
-  /** Padding and border the preview draws around the container itself. */
+  /** Padding and border the frame draws around the container itself. */
   frame: number;
   /** Width the handle occupies next to the preview. */
   handle: number;
@@ -88,18 +88,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
 
     const measure = () => {
-      const preview = track.firstElementChild;
+      const frame = track.firstElementChild;
       const handle = track.lastElementChild;
 
-      if (
-        !(preview instanceof HTMLElement) ||
-        !(handle instanceof HTMLElement)
-      ) {
+      if (!(frame instanceof HTMLElement) || !(handle instanceof HTMLElement)) {
         return;
       }
 
       const trackStyle = getComputedStyle(track);
-      const previewStyle = getComputedStyle(preview);
+      const frameStyle = getComputedStyle(frame);
       const handleStyle = getComputedStyle(handle);
 
       const available =
@@ -116,10 +113,10 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       setMetrics({
         track: available,
         frame:
-          parseFloat(previewStyle.paddingLeft) +
-          parseFloat(previewStyle.paddingRight) +
-          parseFloat(previewStyle.borderLeftWidth) +
-          parseFloat(previewStyle.borderRightWidth),
+          parseFloat(frameStyle.paddingLeft) +
+          parseFloat(frameStyle.paddingRight) +
+          parseFloat(frameStyle.borderLeftWidth) +
+          parseFloat(frameStyle.borderRightWidth),
         handle:
           handle.offsetWidth +
           parseFloat(handleStyle.marginLeft) +
@@ -175,16 +172,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   };
 
   const onPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
-    const preview = trackRef.current?.firstElementChild;
+    const frame = trackRef.current?.firstElementChild;
 
-    if (!draggingRef.current || !preview || !metrics) {
+    if (!draggingRef.current || !frame || !metrics) {
       return;
     }
 
     // The pointer drags the frame's right edge; the container is what the frame
     // encloses.
     resizeTo(
-      event.clientX - preview.getBoundingClientRect().left - metrics.frame,
+      event.clientX - frame.getBoundingClientRect().left - metrics.frame,
     );
   };
 
@@ -210,19 +207,18 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const previewStyle: CSSProperties =
-    resizable && containerWidth
-      ? { zoom, boxSizing: "content-box", width: containerWidth }
-      : { zoom };
+  const frameStyle: CSSProperties = containerWidth
+    ? { zoom, boxSizing: "content-box", width: containerWidth }
+    : { zoom };
 
   const preview = (
     <LivePreview
       className={clsx(
         styles.preview,
         row && styles.row,
-        resizable && containerWidth === null && styles.unmeasured,
+        resizable && styles.framedPreview,
       )}
-      style={previewStyle}
+      style={resizable ? undefined : { zoom }}
     />
   );
 
@@ -245,7 +241,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       >
         {resizable ? (
           <div className={styles.resizeTrack} ref={trackRef}>
-            {preview}
+            <LayoutCard
+              className={clsx(
+                styles.resizeFrame,
+                containerWidth === null && styles.unmeasured,
+              )}
+              style={frameStyle}
+            >
+              {preview}
+            </LayoutCard>
             <Button
               className={styles.resizeHandle}
               variant="plain"

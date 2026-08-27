@@ -142,27 +142,29 @@
 
 .resizeTrack {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   overflow: hidden;
   width: 100%;
   padding: var(--size-px--l) var(--size-px--l) var(--size-px--m);
+}
 
-  > .preview {
-    flex: 0 0 auto;
-    border: 1px solid var(--neutral--color--300);
-    border-radius: var(--corner-radius--l);
-    box-shadow: var(--shadow--content);
+.resizeFrame {
+  flex: 0 0 auto;
 
-    /*
-     * Until the track is measured no width is set, and the preview would be as
-     * narrow as its content. Filling the track instead lands on exactly the
-     * measured maximum, so the first paint already has the final size.
-     */
-    &.unmeasured {
-      flex: 1 1 auto;
-    }
+  /*
+   * Until the track is measured no width is set, and the frame would be as
+   * narrow as its content. Filling the track instead lands on exactly the
+   * measured maximum, so the first paint already has the final size.
+   */
+  &.unmeasured {
+    flex: 1 1 auto;
   }
+}
+
+/* The LayoutCard around it already pads the container. */
+.framedPreview {
+  padding: 0;
 }
 
 .resizeHandle {
