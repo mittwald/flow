@@ -2196,6 +2196,8 @@ Expected: PASS — 10 tests.
 Create `packages/codemods/src/resolve/registry.ts`:
 
 ```ts
+import registryUrl from "registry-url";
+
 export interface RegistryVersions {
   versions: string[];
   distTags: Record<string, string>;
@@ -2207,7 +2209,20 @@ interface Packument {
   "dist-tags"?: Record<string, string>;
 }
 
-const registry = "https://registry.npmjs.org";
+/**
+ * The registry that actually serves `@mittwald`, from the consumer's npm config.
+ *
+ * Hardcoding `registry.npmjs.org` would be wrong for anyone behind a corporate
+ * mirror or a scoped private registry — `npm view` works for them because npm
+ * reads their `.npmrc`, and a CLI that ignores it would fail or, worse, answer
+ * from the wrong source.
+ */
+const registryFor = (packageName: string): string => {
+  const scope = packageName.startsWith("@")
+    ? packageName.slice(0, packageName.indexOf("/"))
+    : undefined;
+  return registryUrl(scope).replace(/\/$/, "");
+};
 
 /**
  * Every published version of a package, plus its dist-tags.
@@ -2224,7 +2239,7 @@ export const fetchVersions = async (
   // about what the CLI was trying to do.
   let packument: Packument;
   try {
-    const response = await fetch(`${registry}/${packageName}`, {
+    const response = await fetch(`${registryFor(packageName)}/${packageName}`, {
       headers: { accept: "application/vnd.npm.install-v1+json" },
     });
 
@@ -2986,36 +3001,61 @@ export const Row = () => <Align />;
 `;
 
 describe("runCodemod", () => {
-  test("applies a codemod by its catalogue id and reports the change", () => {
+  test("applies a codemod by its catalogue id and reports the change", async () => {
     const dir = project(usesAlign);
-    const result = runCodemod({ id: "align-to-combine", path: dir });
+    const result = await runCodemod({ id: "align-to-combine", path: dir });
 
-    expect(result.errors).toBe(0);
-    expect(result.changed).toBe(1);
+    expect(result).toMatchObject({ errors: 0, changed: 1, processedNothing: false });
     expect(readFileSync(join(dir, "input.tsx"), "utf8")).toContain("Combine");
   });
 
-  test("a file the codemod does not touch counts as unmodified, not an error", () => {
+  test("a file the codemod does not touch counts as unmodified, not an error", async () => {
     const dir = project(`export const nothing = 1;\n`);
-    const result = runCodemod({ id: "align-to-combine", path: dir });
+    const result = await runCodemod({ id: "align-to-combine", path: dir });
 
-    expect(result.errors).toBe(0);
-    expect(result.changed).toBe(0);
-    expect(result.unmodified).toBe(1);
+    expect(result).toMatchObject({ errors: 0, changed: 0, unmodified: 1 });
   });
 
-  test("--dry leaves the file alone", () => {
+  test("--dry leaves the file alone but still reports what it would change", async () => {
     const dir = project(usesAlign);
-    runCodemod({ id: "align-to-combine", path: dir, dry: true });
+    const result = await runCodemod({
+      id: "align-to-combine",
+      path: dir,
+      dry: true,
+    });
 
+    expect(result.changed).toBe(1);
     expect(readFileSync(join(dir, "input.tsx"), "utf8")).toContain("Align");
   });
 
-  test("an unknown id fails with a message naming it", () => {
+  // The regression this module exists to prevent: the CLI's text summary would
+  // have this file's `// 42 ok` beat the real count, because `--print` writes
+  // the source before the summary.
+  test("--print cannot corrupt the counts", async () => {
+    const dir = project(`// 42 ok and 7 errors, to fool a regex\n${usesAlign}`);
+    const result = await runCodemod({
+      id: "align-to-combine",
+      path: dir,
+      print: true,
+    });
+
+    expect(result).toMatchObject({ changed: 1, errors: 0 });
+  });
+
+  test("a path with nothing to process says so instead of reporting zero changes", async () => {
+    const result = await runCodemod({
+      id: "align-to-combine",
+      path: join(tmpdir(), "flow-codemods-nothing-here"),
+    });
+
+    expect(result.processedNothing).toBe(true);
+  });
+
+  test("an unknown id fails with a message naming it", async () => {
     const dir = project(usesAlign);
-    expect(() => runCodemod({ id: "no-such-codemod", path: dir })).toThrow(
-      /no-such-codemod/,
-    );
+    await expect(
+      runCodemod({ id: "no-such-codemod", path: dir }),
+    ).rejects.toThrow(/no-such-codemod/);
   });
 });
 ```
@@ -3031,12 +3071,11 @@ Expected: FAIL — `Failed to resolve import "../run/jscodeshift"`.
 Create `packages/codemods/src/run/jscodeshift.ts`:
 
 ```ts
-import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-
-const require = createRequire(import.meta.url);
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error — jscodeshift ships no types for its Runner.
+import { run as runJscodeshift } from "jscodeshift/src/Runner.js";
 
 /**
  * `<packageRoot>/src/transforms`, from either `src/run` or `dist/run`.
@@ -3050,8 +3089,6 @@ const transformsDir = fileURLToPath(
   new URL("../../src/transforms", import.meta.url),
 );
 
-const jscodeshiftBin = require.resolve("jscodeshift/bin/jscodeshift.js");
-
 export interface CodemodOptions {
   /** A catalogue id — the transform file name without its extension. */
   id: string;
@@ -3064,27 +3101,43 @@ export interface CodemodOptions {
 export interface CodemodResult {
   changed: number;
   unmodified: number;
+  /** Files the transform declined by returning nothing. */
+  skipped: number;
   errors: number;
-  /** The CLI's own summary, for reporting a failure verbatim. */
-  output: string;
+  /** True when jscodeshift accounted for no file at all — see below. */
+  processedNothing: boolean;
 }
 
-const count = (output: string, label: string): number =>
-  Number(new RegExp(`(\\d+) ${label}`).exec(output)?.[1] ?? 0);
+/** The four counters jscodeshift's Runner resolves with. */
+interface RunnerStats {
+  error: number;
+  ok: number;
+  nochange: number;
+  skip: number;
+}
 
 /**
  * Runs one codemod over a path.
  *
- * Jscodeshift exits 0 even when its worker dies before touching a file, so the
- * counts in the summary — not the exit code — are what says whether anything
- * ran.
+ * This drives jscodeshift's `Runner` directly rather than its CLI. The CLI only
+ * reports its counts as text, and scraping that text is not safe: `--print`
+ * writes the transformed source to stdout *before* the summary, so a source
+ * comment like `// 42 ok` wins a regex looking for `(\d+) ok`. The Runner
+ * resolves with the counters as numbers, and it distinguishes `skip` (the
+ * transform returned nothing) from `nochange` (it returned identical source) —
+ * a difference the CLI's summary and any regex over it both lose.
+ *
+ * `processedNothing` exists because jscodeshift reports a path with no matching
+ * files and a worker that died before touching one the same way: every counter
+ * zero, no error. The caller must not render that as "0 files changed", which
+ * reads like success.
  */
-export const runCodemod = ({
+export const runCodemod = async ({
   id,
   path,
   dry = false,
   print = false,
-}: CodemodOptions): CodemodResult => {
+}: CodemodOptions): Promise<CodemodResult> => {
   const transform = `${transformsDir}/${id}.ts`;
 
   if (!existsSync(transform)) {
@@ -3093,27 +3146,27 @@ export const runCodemod = ({
     );
   }
 
-  const args = [
-    jscodeshiftBin,
-    "-t",
-    transform,
-    "--parser",
-    "tsx",
-    ...(dry ? ["--dry"] : []),
-    ...(print ? ["--print"] : []),
-    path,
-  ];
-
-  const output = execFileSync(process.execPath, args, {
-    encoding: "utf8",
-    stdio: "pipe",
-  });
+  let stats: RunnerStats;
+  try {
+    stats = (await runJscodeshift(transform, [path], {
+      parser: "tsx",
+      silent: true,
+      dry,
+      print,
+    })) as RunnerStats;
+  } catch (error) {
+    throw new Error(
+      `Running ${id} failed: ${error instanceof Error ? error.message : error}`,
+    );
+  }
 
   return {
-    changed: count(output, "ok"),
-    unmodified: count(output, "unmodified"),
-    errors: count(output, "errors"),
-    output,
+    changed: stats.ok,
+    unmodified: stats.nochange,
+    skipped: stats.skip,
+    errors: stats.error,
+    processedNothing:
+      stats.ok + stats.nochange + stats.skip + stats.error === 0,
   };
 };
 ```
@@ -3382,7 +3435,7 @@ git commit -m "feat(codemods): add the list command"
 - Consumes: `runCodemod` (Task 9), `allEntries` (Task 2), `ParsedCommand` (Task
   1).
 - Produces: `resolveSourcePath(explicit, cwd, exists): string` and
-  `runSingleCodemod(parsed, deps): number`. Task 12 reuses `resolveSourcePath`.
+  `runSingleCodemod(parsed, deps): Promise<number>`. Task 12 reuses `resolveSourcePath`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -3451,10 +3504,10 @@ export interface CodemodCommandDeps {
   run?: typeof runCodemod;
 }
 
-export const runSingleCodemod = (
+export const runSingleCodemod = async (
   parsed: ParsedCommand,
   { cwd, log, run = runCodemod }: CodemodCommandDeps,
-): number => {
+): Promise<number> => {
   const id = parsed.id ?? "";
   const entry = allEntries.find((candidate) => candidate.id === id);
 
@@ -3474,10 +3527,16 @@ export const runSingleCodemod = (
   const path = resolveSourcePath(parsed.path, cwd);
   log(`Running ${id} over ${path}`);
 
-  const result = run({ id, path, dry: parsed.dry, print: parsed.print });
+  const result = await run({ id, path, dry: parsed.dry, print: parsed.print });
 
   if (result.errors > 0) {
-    log(`${id} reported ${result.errors} error(s):\n${result.output}`);
+    log(`${id}: ${result.errors} file(s) failed to transform.`);
+    return 1;
+  }
+  // Not the same as "0 files changed": jscodeshift reports an empty path and a
+  // dead worker identically, so say what happened rather than implying success.
+  if (result.processedNothing) {
+    log(`${id}: no files under ${path} were processed. Is the path right?`);
     return 1;
   }
 
@@ -3509,7 +3568,7 @@ import { runSingleCodemod } from "./cli/codemod";
 
 ```ts
     case "codemod":
-      return runSingleCodemod(parsed, {
+      return await runSingleCodemod(parsed, {
         cwd: process.cwd(),
         log: (message) => process.stdout.write(`${message}\n`),
       });
@@ -3907,17 +3966,19 @@ export const runUpgrade = async (
   const path = resolveSourcePath(parsed.path, cwd);
 
   for (const entry of chosen) {
-    const result = deps.runCodemod({
+    const result = await deps.runCodemod({
       id: entry.id,
       path,
       dry: parsed.dry,
       print: parsed.print,
     });
-    log(
-      result.errors > 0
-        ? `  ${entry.id}: ${result.errors} error(s)\n${result.output}`
-        : `  ${entry.id}: ${result.changed} file(s) changed`,
-    );
+    if (result.errors > 0) {
+      log(`  ${entry.id}: ${result.errors} file(s) failed to transform`);
+    } else if (result.processedNothing) {
+      log(`  ${entry.id}: no files under ${path} were processed`);
+    } else {
+      log(`  ${entry.id}: ${result.changed} file(s) changed`);
+    }
   }
 
   if (byHand.length > 0) {
