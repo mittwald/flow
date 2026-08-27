@@ -1,0 +1,97 @@
+---
+component: AlertIcon
+description:
+  Ein AlertIcon weist als reines Status-Icon auf einen Zustand hin, ohne ihn zu
+  benennen.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle den Status passend zur Bedeutung des Zustands. Welcher Status wofür
+  steht, beschreibt das
+  [Informationskonzept](/02-foundations/03-content-guidelines/02-informationskonzept).
+- Setze ein AlertIcon dort ein, wo ein Status sonst verborgen bliebe, zum
+  Beispiel in einem Tab einer TabNavigation.
+- Erläutere den Zustand an der Stelle, auf die das AlertIcon verweist, etwa mit
+  einem [Alert](/04-components/status/alert). Das Icon allein benennt weder
+  Ursache noch Handlungsmöglichkeit.
+- Zeige bei konkurrierenden Status nur den handlungsentscheidenden an. Ein
+  Danger überschreibt Warning und Info.
+- Verzichte innerhalb von [Alert](/04-components/status/alert),
+  [AlertBadge](/04-components/status/alert-badge),
+  [AlertText](/04-components/status/alert-text) und
+  [Notification](/04-components/status/notification) auf ein zusätzliches
+  AlertIcon. Diese Components zeigen das Status-Icon bereits selbst an.
+
+## AlertIcon vs. AlertBadge
+
+Beide machen den Status eines Elements sichtbar. Der Unterschied liegt darin, ob
+der Status benannt wird: Das AlertIcon deutet ihn an, das
+[AlertBadge](/04-components/status/alert-badge) beschriftet ihn.
+
+<DoAndDont>
+  <Plain heading="Verwende ein AlertIcon, wenn z. B. ...">
+    - der Status nur angedeutet werden soll, um auf einen Bereich zu verweisen.
+    - der Platz für eine Beschriftung nicht ausreicht.
+
+  </Plain>
+
+  <Plain heading="Verwende ein AlertBadge, wenn z. B. ...">
+    - der Status ohne weiteren Kontext verständlich sein soll.
+    - er in einem Heading oder einem List-Eintrag benannt wird.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen verschiedene Status-Farben zur Auswahl:
+
+- **Info** – Allgemeine Systemzustände oder laufende Prozesse, die keine Aktion
+  erfordern.
+- **Warning** – Hinweise auf mögliche Risiken mit einer klaren
+  Handlungsempfehlung.
+- **Danger** – Akute Fehlerzustände oder kritische Probleme, die sofortige
+  Aufmerksamkeit erfordern.
+- **Success** – Abgeschlossene, erfolgreiche oder positiv bewertete Zustände.
+- **Unavailable** – Zustände aufgrund von nicht verfügbaren oder gelöschten
+  Inhalten.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+Zu jedem Status wird automatisch ein lokalisiertes `aria-label` gesetzt, das den
+Status benennt. Ein eigenes `aria-label` ersetzt diesen Text.
+
+---
+
+# Sizes
+
+- **s** für kleine Hinweise oder Components mit wenig Platz.
+- **m** als Standardgröße.
+- **l** vor allem für dekorative Zwecke.
+
+<LiveCodeEditor example="sizes" editorCollapsed row />
+
+---
+
+# Kombiniere mit ...
+
+## TabNavigation
+
+Platziere ein AlertIcon in einem Link der
+[TabNavigation](/04-components/navigation/tab-navigation), um auf einen Zustand
+innerhalb eines Navigationsbereichs hinzuweisen.
+
+<LiveCodeEditor example="tab-navigation" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />
