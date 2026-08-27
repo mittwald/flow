@@ -15,7 +15,7 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
 import {
   ComponentStatusCallout,
-  resolveReplacedBy,
+  serializeDeprecationNotice,
 } from "@/lib/componentStatus";
 
 interface Props {
@@ -30,7 +30,6 @@ export const ComponentContent: FC<Props> = async (props) => {
 
   // A component is a single index.mdx that holds the whole page (in order:
   // Guidelines, Overview, Develop); name + description live in its frontmatter.
-  // All pages are read at once: `replacedBy` resolves against its siblings.
   const componentPages = await MdxFileFactory.fromDir(contentFolder, "index");
   const mdxFile = componentPages.find((page) =>
     page.matchesSlugs(
@@ -46,8 +45,9 @@ export const ComponentContent: FC<Props> = async (props) => {
   const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
   const description = mdxFile.mdxSource.frontmatter.description;
   const component = mdxFile.mdxSource.frontmatter.component;
-  const deprecationNotice = mdxFile.mdxSource.frontmatter.deprecationNotice;
-  const replacedBy = resolveReplacedBy(mdxFile, componentPages);
+  const deprecationNotice = await serializeDeprecationNotice(
+    mdxFile.mdxSource.frontmatter.deprecationNotice,
+  );
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
@@ -72,7 +72,6 @@ export const ComponentContent: FC<Props> = async (props) => {
               <ComponentStatusCallout
                 name={component}
                 notice={deprecationNotice}
-                replacedBy={replacedBy}
               />
             )}
           </Section>

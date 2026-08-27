@@ -14,18 +14,13 @@ export interface MdxFileMeta {
   component?: string;
   gitHubComponentPath?: string;
   /**
-   * German deprecation copy for the status callout. The `@deprecated` tag in
-   * the component's source stays English — it ships in the type declarations
-   * and shows up in every consumer's IDE. Omit this and the callout falls back
-   * to a generic German sentence.
+   * German deprecation copy for the status callout, rendered as Markdown — link
+   * the successor component inline. The `@deprecated` tag in the component's
+   * source stays English: it ships in the type declarations and shows up in
+   * every consumer's IDE. Omit this and the callout falls back to a generic
+   * German sentence.
    */
   deprecationNotice?: string;
-  /**
-   * Display names of the components that replace this one, in the order they
-   * should be offered. Resolved to links in the status callout, so every name
-   * must have a component page.
-   */
-  replacedBy?: string[];
 }
 
 export type StaticParams =
