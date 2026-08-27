@@ -1,5 +1,5 @@
 "use client";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { Alert, Content, Heading, Text } from "@mittwald/flow-react-components";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { getComponentStatusInfo } from "@/lib/componentStatus/componentStatus";
@@ -12,6 +12,19 @@ const BETA_BODY =
 
 const DEPRECATED_FALLBACK =
   "Diese Komponente ist veraltet und wird in einer zukünftigen Version entfernt.";
+
+/**
+ * The page's MDX mapping, so a link in the notice behaves like a link in the
+ * body — but with `p` reset to a plain `Text`: the page-body mapping caps
+ * paragraphs at `--max-text-width`, which is the article column's measure, not
+ * the callout's.
+ */
+const createNoticeComponents = () => ({
+  ...createCustomComponents(),
+  p: ({ children }: PropsWithChildren) => (
+    <Text elementType="p">{children}</Text>
+  ),
+});
 
 interface Props {
   /** Component display name (registry lookup key on the main "." surface). */
@@ -46,7 +59,7 @@ export const ComponentStatusCallout: FC<Props> = (props) => {
           {props.notice ? (
             <MDXRemote
               {...props.notice}
-              components={createCustomComponents()}
+              components={createNoticeComponents()}
             />
           ) : (
             <Text>{DEPRECATED_FALLBACK}</Text>
