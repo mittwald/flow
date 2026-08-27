@@ -168,9 +168,6 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      - name: Build 🔨
-        run: pnpm build
-
       # A promotion merge (RFC #2711) is a `release/x.y.0 -> main` PR merged as a
       # true merge commit. Its head branch names the target version — and the
       # merge carries `next`'s PRERELEASE version onto `main` with it, because
@@ -322,6 +319,27 @@ jobs:
                 ;;
             esac
           fi
+
+      # AFTER the version bump, never before: some packages bake their own version
+      # into the bundle at build time (vite `define` reading package.json —
+      # remote-react-components' `dist/js/version.mjs`). Building first stamped the
+      # PREVIOUS version into every release, and `lerna publish from-package` packs
+      # whatever `dist` holds: 1.0.0 shipped `packageVersion = "0.2.0-alpha.1058"`.
+      #
+      # Versioning is cheap and touches no build output, so nothing is lost by
+      # putting the expensive step second — and a build failure here still aborts
+      # before the publish, with the release commit unpushed.
+      - name: Build 🔨
+        run: pnpm build
+
+      # Tripwire for the ordering above — the mismatch is otherwise invisible
+      # (nothing fails, the wrong string just ships).
+      - name: Verify the stamped package version 🔍
+        run: |
+          pkg=packages/remote-react-components
+          v="$(node -p "require('./${pkg}/package.json').version")"
+          grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
+            || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is

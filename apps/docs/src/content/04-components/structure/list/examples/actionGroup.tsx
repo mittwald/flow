@@ -24,7 +24,7 @@ export default () => {
     >
       <DomainList.StaticData data={domains} />
       <ActionGroup>
-        <Button color="success">Anlegen</Button>
+        <Button>Anlegen</Button>
       </ActionGroup>
       <DomainList.Item
         textValue={(domain) => domain.domain}

@@ -10,6 +10,10 @@ import {
 } from "./generation/generateRemoteElementFile";
 import { config } from "./config";
 import { checkTagIsSet, checkTagListIncludes } from "./lib/docTags";
+import {
+  checkSerializableProps,
+  formatUnserializablePropReport,
+} from "./lib/checkSerializableProps";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
@@ -63,6 +67,18 @@ async function generate() {
 
   console.log("✅  Done");
   console.log("");
+
+  /*
+   * Reported rather than thrown: the offenders below predate the check, and
+   * failing the build here would block every unrelated change until they are
+   * designed away. Once the list is empty this should throw, so a new one cannot
+   * ship — see the comment in lib/checkSerializableProps.ts.
+   */
+  const unserializableProps = checkSerializableProps(components);
+  if (unserializableProps.length > 0) {
+    console.log(formatUnserializablePropReport(unserializableProps));
+    console.log("");
+  }
 
   {
     console.log("📝️ Generating remote-react-component files");

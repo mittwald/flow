@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+### Bug Fixes
+
+* **Remote:** serialization allows duplicate object references ([#2947](https://github.com/mittwald/flow/issues/2947)) ([ac3ef26](https://github.com/mittwald/flow/commit/ac3ef26cc8b0c0dcc5d84b6181a5fbbccc8863ba))
+
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+### Features
+
+* **docs:** add 1.0.0 release reveal easter egg ([b346fec](https://github.com/mittwald/flow/commit/b346fec6c9bc5996558620428487791730d91dc6))
+
+### Bug Fixes
+
+* **Breadcrumb:** fix cursor pointer for spans with role link ([#2943](https://github.com/mittwald/flow/issues/2943)) ([d44d61c](https://github.com/mittwald/flow/commit/d44d61cb83f4ebcb95fee10480e2db8c3d55471a))
+* **ci:** build after the version bump so bundles carry the published version ([#2944](https://github.com/mittwald/flow/issues/2944)) ([c24c5ef](https://github.com/mittwald/flow/commit/c24c5ef73d38d42341d865d5066e19a8c9c8a0f6))
+
 ## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
 
 **Note:** Version bump only for package @mittwald/flow-project
