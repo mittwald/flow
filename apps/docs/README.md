@@ -457,7 +457,8 @@ The most important MDX Components for writing content:
   `examples/default.tsx`; with `example="name"` it renders `examples/name.tsx`
   from the `examples` directory next to the MDX file. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
-  (side-by-side grid), `bgColor`, `zoom`, `stretch`.
+  (side-by-side grid), `resizable` (handle to drag the container width, for
+  examples whose behaviour depends on it), `bgColor`, `zoom`.
 - `<PropertiesTables />` — renders the generated props documentation in the
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.
