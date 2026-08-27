@@ -28,6 +28,22 @@
 > corrected in place below; the reasoning and the measurements are recorded on
 > #2769.
 
+> **Amendment 2026-08-27 (npm Trusted Publisher).** The **symmetric second
+> workflow file is gone.** `publish-next.yml` is merged into `publish.yml`,
+> which now serves both lines and derives the line from the run's ref. The
+> mechanism below is unchanged — same trigger, same version derivation, same
+> dist-tag, same shared `mutate-next` group; only its host file is. Reason:
+> npm's Trusted Publisher binds one workflow **filename** per package and allows
+> exactly one publisher per package. Every Flow package names `publish.yml`, so
+> every publish from `publish-next.yml` was an unauthorized identity — npm
+> answered the PUT with `E404 Not found`, for every package, on every attempt.
+> Registering the second file is not possible, and moving the job body into a
+> reusable workflow does not help either, because npm validates the _calling_
+> workflow's name. The `next` line consequently never published a single
+> package; nothing had to be repaired, because the release commit is pushed only
+> after npm accepts (§6). Read `publish-next.yml` below as "the `next` half of
+> `publish.yml`".
+
 ## Context
 
 The 1.0.0 model runs two standing lines: `main` (Stable, dist-tag `latest`,
@@ -48,7 +64,7 @@ or break the model:
    merge conflicts on every release, which would spawn a maintainer-facing PR
    for every single patch — killing the "unattended" promise.
 3. **Concurrent writers.** Once `next` is published continuously, two workflows
-   push to it (`forward-merge.yml` and `publish-next.yml`); `main` similarly has
+   push to it (`forward-merge.yml` and `publish.yml`); `main` similarly has
    `publish.yml` and Promotion merges. Un-serialized, they race on
    non-fast-forward pushes.
 4. **The Promotion loop.** After a Promotion (`next → main`), the changes must
@@ -133,7 +149,7 @@ mechanical noise, not a real conflict, and is resolved automatically via
 
 Only a conflict where **both sides touch the same logic line** escalates to a
 sync PR (§4). The exact version string produced by the merge is irrelevant — it
-is re-derived by `publish-next.yml` (§6).
+is re-derived by `publish.yml` (§6).
 
 ### 4. Conflict handling: the sync PR
 
@@ -220,14 +236,14 @@ clean path (its pushes _are_ merge commits, so the invariant holds). The bypass
 must **not** waive the merge-method restriction for real PRs — only the
 direct-push block.
 
-### 6. Interaction with `publish-next.yml` (the re-publish)
+### 6. Interaction with `publish.yml` (the re-publish)
 
 A forward-merged fix **produces a new `next` prerelease** so that `flow@next` ⊇
 `flow@latest` on npm, not merely in git. This falls out for free:
 
 - The forward-merge stays **version-free** — it merges and pushes, nothing more.
-- The push to `next` triggers a **symmetric `publish-next.yml`** (`push: next`,
-  analogous to `publish.yml`) that runs
+- The push to `next` triggers **`publish.yml` on its `next` line**
+  (`push: next`, symmetric to the `main` line in the same file) that runs
   `lerna version --conventional-prerelease` → `X.Y.0-next.N+1` → publishes
   dist-tag `next`. This re-derives the version, so the string the merge driver
   (§3) produced is irrelevant.
@@ -338,7 +354,8 @@ convention — only with different branch names. It is not designed separately.
 - `forward-merge.yml`, the `.gitattributes` merge drivers + the JSON merge
   driver script (`.github/scripts/merge-package-json.cjs`), and the shared
   per-target-branch `concurrency` groups; `publish.yml` moved to `mutate-main`.
-- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`) — merged
+  into `publish.yml` on 2026-08-27, see the amendment above.
 
 **Still pending** — gated on the 1.0.0 cut (`next` established, repo off the
 `0.2.0-alpha.*` line):
