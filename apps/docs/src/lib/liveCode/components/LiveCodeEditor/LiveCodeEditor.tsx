@@ -1,10 +1,4 @@
-import type {
-  CSSProperties,
-  FC,
-  JSX,
-  KeyboardEvent,
-  PointerEvent,
-} from "react";
+import type { CSSProperties, FC, JSX, KeyboardEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import {
   LiveEditor,
@@ -77,8 +71,17 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   );
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [draggedWidth, setDraggedWidth] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  const draggingRef = useRef(false);
+
+  /** The widest container the track has room for. */
+  const maxWidth = metrics
+    ? Math.max(minWidth, metrics.track - metrics.frame - metrics.handle)
+    : null;
+  const containerWidth =
+    maxWidth === null
+      ? null
+      : Math.min(maxWidth, Math.max(minWidth, draggedWidth ?? maxWidth));
 
   useEffect(() => {
     const track = trackRef.current;
@@ -132,6 +135,43 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     return () => observer.disconnect();
   }, [resizable]);
 
+  useEffect(() => {
+    if (!isDragging || !metrics || maxWidth === null) {
+      return;
+    }
+
+    // Listening on the window keeps the drag alive wherever the pointer goes,
+    // instead of depending on it staying over the handle.
+    const onMove = (event: globalThis.PointerEvent) => {
+      const frame = trackRef.current?.firstElementChild;
+
+      if (!frame) {
+        return;
+      }
+
+      // The pointer drags the frame's right edge; the container is what the
+      // frame encloses.
+      const width =
+        event.clientX - frame.getBoundingClientRect().left - metrics.frame;
+
+      setDraggedWidth(
+        Math.min(maxWidth, Math.max(minWidth, Math.round(width))),
+      );
+    };
+
+    const stop = () => setIsDragging(false);
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", stop);
+    window.addEventListener("pointercancel", stop);
+
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", stop);
+      window.removeEventListener("pointercancel", stop);
+    };
+  }, [isDragging, metrics, maxWidth]);
+
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
   }
@@ -148,45 +188,12 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   const codeToDisplay = code.replace(/;\r?\n$/, "");
 
-  /** The widest container the track has room for. */
-  const maxWidth = metrics
-    ? Math.max(minWidth, metrics.track - metrics.frame - metrics.handle)
-    : null;
-  const containerWidth =
-    maxWidth === null
-      ? null
-      : Math.min(maxWidth, Math.max(minWidth, draggedWidth ?? maxWidth));
-
   const resizeTo = (width: number) => {
     if (maxWidth !== null) {
       setDraggedWidth(
         Math.min(maxWidth, Math.max(minWidth, Math.round(width))),
       );
     }
-  };
-
-  const onPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
-    draggingRef.current = true;
-    // Keeps the moves coming while the pointer leaves the narrow handle.
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const onPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
-    const frame = trackRef.current?.firstElementChild;
-
-    if (!draggingRef.current || !frame || !metrics) {
-      return;
-    }
-
-    // The pointer drags the frame's right edge; the container is what the frame
-    // encloses.
-    resizeTo(
-      event.clientX - frame.getBoundingClientRect().left - metrics.frame,
-    );
-  };
-
-  const onPointerUp = () => {
-    draggingRef.current = false;
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -240,7 +247,10 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         )}
       >
         {resizable ? (
-          <div className={styles.resizeTrack} ref={trackRef}>
+          <div
+            className={clsx(styles.resizeTrack, isDragging && styles.dragging)}
+            ref={trackRef}
+          >
             <LayoutCard
               className={clsx(
                 styles.resizeFrame,
@@ -258,10 +268,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
               aria-label={`Breite des Containers${
                 containerWidth ? `: ${containerWidth} Pixel` : ""
               }`}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerCancel={onPointerUp}
+              onPointerDown={() => setIsDragging(true)}
               onKeyDown={onKeyDown}
             >
               <Icon>

@@ -149,6 +149,11 @@
   padding: var(--size-px--l) var(--size-px--l) var(--size-px--m);
 }
 
+/* Without pointer capture a drag would otherwise select text on the way. */
+.dragging {
+  user-select: none;
+}
+
 .resizeFrame {
   flex: 0 0 auto;
 

@@ -6,7 +6,7 @@ import {
   Text,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout s={[1, null]} m={[2, 1]} l={[4, 1]}>
+<ColumnLayout s={[1, null]} m={[2, 1]} l={[5, 1]}>
   <Section>
     <Heading>mStudio entdecken</Heading>
     <Text>
