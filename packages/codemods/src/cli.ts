@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { allEntries } from "./catalog/entries.js";
 import { parseArguments } from "./cli/args.js";
+import { runSingleCodemod } from "./cli/codemod.js";
 import { renderList } from "./cli/list.js";
 
 const usage = `flow-codemods — migrate a codebase across Flow versions
@@ -49,6 +50,11 @@ const main = async (): Promise<number> => {
         }),
       );
       return 0;
+    case "codemod":
+      return await runSingleCodemod(parsed, {
+        cwd: process.cwd(),
+        log: (message) => process.stdout.write(`${message}\n`),
+      });
     default:
       process.stderr.write(`"${parsed.command}" is not implemented yet\n`);
       return 1;
