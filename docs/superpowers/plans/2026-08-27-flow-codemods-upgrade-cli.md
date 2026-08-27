@@ -53,6 +53,20 @@ task orchestration.
 - **Never hand-edit a generated file.** After this plan lands,
   `packages/components/MIGRATION.md` and
   `packages/codemods/src/migrations.generated.ts` are generated.
+- **Relative imports in anything compiled into `dist` MUST carry a `.js`
+  extension** — `import { x } from "./catalog/entries.js"`. The shared config
+  sets `"module": "preserve"`, so TypeScript type-checks an extensionless import
+  and then emits it unchanged; under Node ESM that throws `ERR_MODULE_NOT_FOUND`
+  at run time. Every other package in this repo is consumed by a bundler that
+  resolves extensionless specifiers, so this package is the first whose emitted
+  output Node executes directly. **The code snippets below were written without
+  the extension — add it.** It does not apply to `src/tests/**` or `dev/**`,
+  which vitest and tsx run from source, but adding it there is harmless.
+- **`tsconfig.build.json` may need `"types": ["node"]`.** This repo's bare `tsc`
+  resolves to the native TypeScript compiler (see the `pnpm-workspace.yaml`
+  overrides), which does not auto-discover `@types/node` for the build config's
+  small program. `tsconfig.json`'s `include` also needs `"package.json"`, or
+  `src/cli.ts`'s JSON import fails with TS6307. Both were established in Task 1.
 - **`semver` is CommonJS.** Named imports (`import { lt, lte } from "semver"`)
   rely on Node's CJS named-export detection, which works for `semver@7`. If any
   of them resolves as `undefined` at run time, switch that module to
@@ -870,6 +884,23 @@ describe("catalogue invariants", () => {
 Run:
 `cd packages/codemods && corepack pnpm vitest run src/tests/catalog.test.ts`
 Expected: FAIL — `Failed to resolve import "../catalog/read"`.
+
+- [ ] **Step 4a: Keep the reader out of `dist`**
+
+`src/catalog/read.ts` imports `yaml`, which is a **devDependency** — it parses
+frontmatter for the generators and is never used at run time. Emitting it into
+`dist` would ship a module whose import a consumer cannot resolve. Add it to
+`tsconfig.build.json`'s `exclude`, next to the tests and the transforms:
+
+```json
+"exclude": [
+  "src/tests/**/*.ts",
+  "src/transforms/**/*.ts",
+  "src/catalog/read.ts"
+]
+```
+
+It stays covered by the `tsc --noEmit` gate in `tsconfig.json`.
 
 - [ ] **Step 4: Implement the reader**
 

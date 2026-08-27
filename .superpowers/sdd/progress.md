@@ -12,3 +12,11 @@ Pre-flight decisions:
 
 Tasks 0-14 in scope for this run.
 
+Task 0: complete (commits 63a5903..f408ce1, review clean — spec OK, quality approved)
+  - 47 tests pass (4 files). Gap vs the brief's "roughly 60" estimate is fully
+    explained by the 3 deliberately omitted suites; nothing was lost.
+  - Implementer also trimmed flow1 out of transforms.test.ts and
+    idempotency.test.ts. Reviewer confirmed both were necessary and minimal.
+  - MINOR (for final review): commit message f408ce1 and the task report say
+    "nine transforms"; there are 10 transform files (9 codemods + 1 tool).
+    Prose only, no code impact.
