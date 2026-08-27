@@ -7,7 +7,7 @@ name: Forward-merge drift check
 # serialize: GitHub keeps at most ONE pending run per concurrency group and
 # EVICTS it as soon as a newer run arrives. `cancel-in-progress: false` protects
 # only the RUNNING job. Measured in the rehearsal fork: a forward-merge queued at
-# 14:40:45 was cancelled at 14:43:03 — two seconds after a publish-next run
+# 14:40:45 was cancelled at 14:43:03 — two seconds after a `next` publish run
 # entered the group. The manual recovery dispatch (ADR 0004 §2) is evicted the
 # same way.
 #
@@ -18,8 +18,8 @@ name: Forward-merge drift check
 # to `main` follows, and that run can be evicted just the same.
 #
 # `forward-merge.yml` retries itself for the common case — a `workflow_run`
-# trigger re-runs it when publish-next completes, i.e. when the concurrency group
-# frees up. This workflow is the net underneath that: it detects drift that
+# trigger re-runs it when the `next` publish completes, i.e. when the concurrency
+# group frees up. This workflow is the net underneath that: it detects drift that
 # survived even the catch-up, and makes it loud. It deliberately neither merges
 # nor dispatches anything; recovery is the manual `forward-merge.yml` dispatch,
 # already a first-class path. Detection is what was missing.
