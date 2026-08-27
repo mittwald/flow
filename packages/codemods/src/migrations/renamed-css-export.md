@@ -13,11 +13,13 @@ verify:
   'flow-react-components/styles'` finds nothing.
 ---
 
-The CSS export `@mittwald/flow-react-components/styles` is now
-`@mittwald/flow-react-components/all.css` — the file holds the CSS of all
-components, and there are per-component CSS exports as well.
+The CSS export `@mittwald/flow-react-components/styles` has renamed to the more
+precise name `@mittwald/flow-react-components/all.css`, because the file
+contains the CSS of all components, and now there are CSS exports per component
+as well. A documentation on how to use them is planned.
 
 ```diff
+// main.js
 - import "@mittwald/flow-react-components/styles";
 + import "@mittwald/flow-react-components/all.css";
 ```

@@ -11,11 +11,23 @@ apply:
 verify: tsc --noEmit passes, and `rg '\bAlign\b'` finds no Flow import.
 ---
 
-`Align` is now `Combine`. The props type follows: `AlignProps` is
-`CombineProps`. An import under a local alias keeps its alias — only the
-imported name changes.
+`Align` is now called `Combine`. The old name suggested a generic alignment tool
+and clashed with the `align` property of `Flex`; the component actually gives
+known combinations of components a fixed, correct arrangement.
 
 ```diff
-- import { Align } from "@mittwald/flow-react-components";
-+ import { Combine } from "@mittwald/flow-react-components";
+- <Align>
++ <Combine>
+    <Avatar />
+    <Text>Max Mustermann</Text>
+- </Align>
++ </Combine>
 ```
+
+`Align` (and the `flr-align` remote element) keeps working unchanged, logs a
+deprecation warning at runtime, and will be removed in a future major version.
+
+The component tokens were renamed along with the component
+(`--align--avatar-text--spacing` is now `--combine--avatar-text--spacing`), and
+so were the CSS class names (`.flow--align` is now `.flow--combine`). Both are
+internal and not covered by Semantic Versioning.
