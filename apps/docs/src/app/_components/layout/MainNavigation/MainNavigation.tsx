@@ -16,10 +16,7 @@ import {
 } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
-import {
-  ComponentStatusBadge,
-  getComponentStatusInfo,
-} from "@/lib/componentStatus";
+import { ComponentStatusBadge } from "@/lib/componentStatus";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
@@ -28,11 +25,11 @@ import styles from "@/app/layout.module.scss";
 import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { ComponentGroupingMenu } from "@/app/_components/layout/MainNavigation/components/ComponentGroupingMenu";
 import { ComponentGroupingView } from "@/app/_components/ComponentGroupingView/ComponentGroupingView";
-import { compareLabels } from "@/app/_lib/compareLabels";
+import type { SortableEntry } from "@/app/_lib/compareEntries";
+import { compareEntries } from "@/app/_lib/compareEntries";
+import { isIntegrationGroup } from "@/app/_lib/integrationGroups";
 
 const componentsPathSegment = "04-components";
-
-const integrationGroups = ["react-hook-form"];
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -75,39 +72,24 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   );
 };
 
-const deprecatedRank = (treeItem: MdxDirectoryTree | MdxFile): number => {
-  if (!(treeItem instanceof MdxFile)) {
-    return 0;
-  }
-  const component = treeItem.mdxSource.frontmatter.component;
-  const status = component ? getComponentStatusInfo(component) : undefined;
-  return status?.level === "deprecated" ? 1 : 0;
-};
-
-const entryLabel = ([group, treeItem]: TreeEntry): string =>
+const sortableEntry = ([group, treeItem]: TreeEntry): SortableEntry =>
   treeItem instanceof MdxFile
-    ? treeItem.getNavTitle()
-    : extractTextFromPath(group);
+    ? {
+        label: treeItem.getNavTitle(),
+        pathSegment: group,
+        component: treeItem.mdxSource.frontmatter.component,
+      }
+    : { label: extractTextFromPath(group), pathSegment: group };
 
-/** A numeric path prefix ("01-design") is the author's intended order. */
-const pathPrefix = ([group]: TreeEntry): number | undefined => {
-  const prefix = /^(\d+)-/.exec(group)?.[1];
-  return prefix === undefined ? undefined : Number(prefix);
-};
-
-const comparePosition = (a: TreeEntry, b: TreeEntry): number => {
-  const prefixA = pathPrefix(a);
-  const prefixB = pathPrefix(b);
-
-  return prefixA !== undefined && prefixB !== undefined
-    ? prefixA - prefixB
-    : compareLabels(entryLabel(a), entryLabel(b));
-};
+const sortableFile = (treeItem: MdxFile): SortableEntry => ({
+  label: treeItem.getNavTitle(),
+  pathSegment: treeItem.slugs.at(-1) ?? "",
+  component: treeItem.mdxSource.frontmatter.component,
+});
 
 const sortEntries = (entries: TreeEntry[]): TreeEntry[] =>
-  [...entries].sort(
-    (a, b) =>
-      deprecatedRank(a[1]) - deprecatedRank(b[1]) || comparePosition(a, b),
+  [...entries].sort((a, b) =>
+    compareEntries(sortableEntry(a), sortableEntry(b)),
   );
 
 const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
@@ -142,10 +124,10 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
   const entries = Object.entries(props.tree);
   const componentEntries = entries.filter(
-    ([group]) => !integrationGroups.includes(group),
+    ([group]) => !isIntegrationGroup(group),
   );
   const integrationEntries = entries.filter(([group]) =>
-    integrationGroups.includes(group),
+    isIntegrationGroup(group),
   );
 
   return (
@@ -163,7 +145,7 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         <ComponentGroupingView view="alphabetical">
           <Navigation aria-label="Components">
             {collectMdxFiles(componentEntries)
-              .sort((a, b) => compareLabels(a.getNavTitle(), b.getNavTitle()))
+              .sort((a, b) => compareEntries(sortableFile(a), sortableFile(b)))
               .map((treeItem) => (
                 <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
               ))}
