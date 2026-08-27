@@ -55,13 +55,19 @@ describe("selectEntries", () => {
   });
 
   test("alpha prereleases compare numerically, not as strings", () => {
-    const catalog = [
-      entry("a", "0.2.0-alpha.712"),
-      entry("b", "0.2.0-alpha.1046"),
-    ];
+    // The bounds straddle a single-to-double-digit boundary on purpose: numeric
+    // comparison includes `.10` (9 < 10 <= 11), a string comparison excludes it
+    // (`"9" < "10"` is false). Bounds like .700-.800 around .712/.1046 pass under
+    // both a correct and a naive string implementation, so they prove nothing.
+    const catalog = [entry("included", "0.2.0-alpha.10")];
     expect(
-      ids(selectEntries(catalog, "0.2.0-alpha.700", "0.2.0-alpha.800")),
-    ).toEqual(["a"]);
+      ids(selectEntries(catalog, "0.2.0-alpha.9", "0.2.0-alpha.11")),
+    ).toEqual(["included"]);
+  });
+
+  test("a deprecation whose since equals the target is selected", () => {
+    const catalog = [entry("edge", "1.1.0", "deprecation")];
+    expect(ids(selectEntries(catalog, "1.0.0", "1.1.0"))).toEqual(["edge"]);
   });
 
   test("the next line is crossed like any other range", () => {

@@ -25,7 +25,11 @@ export const selectEntries = (
   target: string,
 ): CatalogEntry[] =>
   sortBySince(
-    entries.filter((entry) => {
+    entries.filter((entry): boolean => {
+      // The explicit `: boolean` is what makes the `switch` exhaustive. Without
+      // it TypeScript infers the return type, a missing case compiles clean, and
+      // a future `MigrationKind` would be silently excluded from every upgrade —
+      // never offered, never reported, no error anywhere.
       switch (entry.kind) {
         case "migration":
           return lt(current, entry.since) && lte(entry.since, target);
