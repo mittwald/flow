@@ -43,10 +43,18 @@ const main = async (): Promise<number> => {
   }
 };
 
+// `process.exitCode` rather than `process.exit()`: exiting explicitly can
+// terminate the process before a pending write to stdout has flushed, which on
+// POSIX is the common case when stdout is a pipe. Every command exits through
+// here, including `list --json` and the upgrade report, so the output that would
+// be truncated is the largest output this CLI produces. Nothing keeps a handle
+// open, so Node exits on its own once the event loop drains.
 main().then(
-  (code) => process.exit(code),
+  (code) => {
+    process.exitCode = code;
+  },
   (error: unknown) => {
     process.stderr.write(`${error instanceof Error ? error.message : error}\n`);
-    process.exit(1);
+    process.exitCode = 1;
   },
 );
