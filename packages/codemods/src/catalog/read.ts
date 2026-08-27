@@ -12,13 +12,16 @@ const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
 const requiredStrings = ["since", "title", "kind", "action", "apply", "verify"];
 
 const parseEntry = (file: string, source: string): MigrationEntry => {
-  const fail = (message: string): never => {
+  // A function declaration, not an arrow: only that form narrows control flow
+  // after the call, so the checks below do not need a redundant `throw`. The
+  // bundler this package used to ship had the same note for the same reason.
+  function fail(message: string): never {
     throw new Error(`${basename(file)}: ${message}`);
-  };
+  }
 
   const match = frontmatterPattern.exec(source);
   if (!match) {
-    throw fail("has no `---` frontmatter block");
+    fail("has no `---` frontmatter block");
   }
 
   const [, frontmatter = "", body = ""] = match;
@@ -26,14 +29,14 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
 
   for (const key of requiredStrings) {
     if (typeof data[key] !== "string" || data[key] === "") {
-      throw fail(`is missing the required string field \`${key}\``);
+      fail(`is missing the required string field \`${key}\``);
     }
   }
   if (typeof data.remotePackage !== "boolean") {
-    throw fail("is missing the required boolean field `remotePackage`");
+    fail("is missing the required boolean field `remotePackage`");
   }
   if (data.detect !== undefined && typeof data.detect !== "string") {
-    throw fail("has a non-string `detect`");
+    fail("has a non-string `detect`");
   }
 
   return {

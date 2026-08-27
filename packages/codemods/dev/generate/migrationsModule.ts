@@ -19,8 +19,13 @@ const target = fileURLToPath(
  * catalogue, and the CLI never prints it. `list` shows `apply` and `verify`.
  */
 export const generateMigrationsModule = async (): Promise<void> => {
+  // The `id` tie-break is not decoration: several releases carry two entries
+  // (`0.2.0-alpha.646`, `.846` and `.1005` each have two), and without it their
+  // order falls back to `readdirSync`, whose order Node does not guarantee
+  // across platforms. The generated file would then differ between machines and
+  // fail CI's `git diff --exit-code`.
   const entries = readCatalog()
-    .toSorted((a, b) => rcompare(a.since, b.since))
+    .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id))
     .map(({ body: _body, ...rest }) => rest);
 
   const source = [
