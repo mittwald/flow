@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+### Bug Fixes
+
+* **ci:** enable automatic review environments for other target branches too ([#2953](https://github.com/mittwald/flow/issues/2953)) ([6102d2e](https://github.com/mittwald/flow/commit/6102d2e71a1087cf23256da1addf131895e5f02b))
+* **CodeBlock:** balance the padding and unify the editor line colors ([#2945](https://github.com/mittwald/flow/issues/2945)) ([6bf57c7](https://github.com/mittwald/flow/commit/6bf57c7c50e4c05ba504df74f4941aa7fdd95809))
+
+### Reverts
+
+* **docs:** remove 1.0.0 release reveal easter egg ([#2955](https://github.com/mittwald/flow/issues/2955)) ([419e17f](https://github.com/mittwald/flow/commit/419e17f9de28e149bb9788ad9e1b5f1a241fb695))
+
 ## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
 
 ### Bug Fixes
