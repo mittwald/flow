@@ -66,4 +66,16 @@ describe("resolveTarget", () => {
   test("a stale dist-tag resolves downwards — the caller has to reject it", () => {
     expect(resolve("experimental")).toBe("0.2.0-experimental.776");
   });
+
+  // The shape most real consumers are on — this project published 983
+  // `0.2.0-alpha.*` releases. A prerelease `current` resolves *upward* onto the
+  // stable release of the same line, because `0.2.0 > 0.2.0-alpha.646`.
+  test("a prerelease current resolves onto the stable release of its own line", () => {
+    expect(resolve("patch", "0.2.0-alpha.646")).toBe("0.2.0");
+    expect(resolve("minor", "0.2.0-alpha.646")).toBe("0.2.0");
+  });
+
+  test("major from a prerelease current reaches the newest stable line", () => {
+    expect(resolve("major", "0.2.0-alpha.646")).toBe("2.1.0");
+  });
 });

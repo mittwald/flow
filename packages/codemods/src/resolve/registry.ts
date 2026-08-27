@@ -20,17 +20,28 @@ const registry = "https://registry.npmjs.org";
 export const fetchVersions = async (
   packageName: string,
 ): Promise<RegistryVersions> => {
-  const response = await fetch(`${registry}/${packageName}`, {
-    headers: { accept: "application/vnd.npm.install-v1+json" },
-  });
+  // One wrapper for every failure, not just the HTTP one: `fetch` itself rejects
+  // on DNS failure or no connection, and `json()` rejects on a malformed body.
+  // Without this those surface as a bare "fetch failed", which says nothing
+  // about what the CLI was trying to do.
+  let packument: Packument;
+  try {
+    const response = await fetch(`${registry}/${packageName}`, {
+      headers: { accept: "application/vnd.npm.install-v1+json" },
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      throw new Error(`the registry answered ${response.status}`);
+    }
+
+    packument = (await response.json()) as Packument;
+  } catch (error) {
     throw new Error(
-      `Could not read ${packageName} from the npm registry (${response.status}).`,
+      `Could not read ${packageName} from the npm registry: ${
+        error instanceof Error ? error.message : error
+      }`,
     );
   }
-
-  const packument = (await response.json()) as Packument;
 
   return {
     versions: Object.keys(packument.versions ?? {}),

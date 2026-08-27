@@ -40,9 +40,13 @@ const keywordRange = (
  * It does **not** judge whether the result is an upgrade; the caller compares
  * against `current` and refuses a sideways or downward move.
  *
- * Keyword resolution deliberately skips prereleases. Only an explicit dist-tag
- * or an exact version reaches a `-next.N`, so `upgrade minor` on the stable
- * line never drifts onto the collection branch.
+ * Keyword resolution skips prereleases. The `prerelease(...) === null` filter
+ * is defence in depth rather than the mechanism: none of the ranges built here
+ * embeds a prerelease tag, and node-semver only matches a prerelease when a
+ * comparator carries a matching one — so `satisfies` already excludes them. The
+ * filter keeps that true if a range shape or an option ever changes. Only an
+ * explicit dist-tag or an exact version reaches a `-next.N`, so `upgrade minor`
+ * on the stable line never drifts onto the collection branch.
  */
 export const resolveTarget = ({
   revision,
