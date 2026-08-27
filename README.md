@@ -20,12 +20,6 @@ with those same components from inside an iframe.
 - 🎛️ **Storybook:** <https://storybook.flow-components.de>
 - 🧩 **Extension developer portal:** <https://developer.mittwald.de>
 
-> ⚠️ **Early development — stability notice**
->
-> Flow is in early development and we offer no stability guarantees of any kind.
-> Try it and tell us what you think — but don't rely on any input or output
-> staying stable between releases.
-
 ## Highlights
 
 - **Various components** covering actions, forms, overlays, navigation, data
