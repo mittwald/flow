@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   LayoutCard,
+  Header,
   Section,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
@@ -15,7 +16,7 @@ import {
   ComponentStatusCallout,
   resolveReplacedBy,
 } from "@/lib/componentStatus";
-import { PageActions } from "@/app/_components/layout/ComponentContent/components/PageActions";
+import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
 
 interface Props {
   params: StaticParams;
@@ -53,14 +54,14 @@ export const ComponentContent: FC<Props> = async (props) => {
       <LayoutCard className={styles.tabs}>
         <div className={styles.mainContent}>
           <Section>
-            <Flex justify="space-between" align="start">
+            <Header>
               <Heading level={1}>{mdxFile.getTitle()}</Heading>
               <PageActions
                 title={mdxFile.getTitle()}
                 markdownUrl={markdownUrl}
                 gitHubUrl={mdxFile.getGitHubUrl()}
               />
-            </Flex>
+            </Header>
 
             {description}
 

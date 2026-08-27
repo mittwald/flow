@@ -6,7 +6,7 @@ import {
   Button,
   ContextMenu,
   ContextMenuTrigger,
-  Flex,
+  ActionGroup,
   Icon,
   IconContextMenuVertical,
   IconCopy,
@@ -17,7 +17,7 @@ import { IconBrandGithub } from "@tabler/icons-react";
 import {
   IconBrandChatGpt,
   IconBrandClaude,
-} from "@/app/_components/layout/ComponentContent/components/brandIcons";
+} from "@/app/_components/layout/PageActions/brandIcons";
 import {
   absoluteUrl,
   chatGptPromptUrl,
@@ -27,7 +27,7 @@ import {
 interface Props {
   title: string;
   markdownUrl: string;
-  gitHubUrl: string;
+  gitHubUrl?: string;
 }
 
 const copyMarkdown = async (markdownUrl: string): Promise<void> => {
@@ -55,10 +55,10 @@ const copyMarkdown = async (markdownUrl: string): Promise<void> => {
 export const PageActions: FC<Props> = (props) => {
   const { title, markdownUrl, gitHubUrl } = props;
 
-  const prompt = `Lies ${absoluteUrl(markdownUrl)} und beantworte mir anschließend Fragen zur Komponente „${title}“ des mittwald Design Systems Flow.`;
+  const prompt = `Lies ${absoluteUrl(markdownUrl)} und beantworte mir anschließend Fragen zu „${title}“ aus der Dokumentation des mittwald Design Systems Flow.`;
 
   return (
-    <Flex gap="s">
+    <ActionGroup preserveOrder>
       <Action onAction={() => copyMarkdown(markdownUrl)}>
         <Button size="s" variant="outline" color="secondary">
           Seite kopieren
@@ -91,15 +91,17 @@ export const PageActions: FC<Props> = (props) => {
             </Icon>
             In ChatGPT öffnen
           </MenuItem>
-          <MenuItem href={gitHubUrl} target="_blank">
-            <Icon>
-              <IconBrandGithub />
-            </Icon>
-            Quellcode anzeigen
-          </MenuItem>
+          {gitHubUrl && (
+            <MenuItem href={gitHubUrl} target="_blank">
+              <Icon>
+                <IconBrandGithub />
+              </Icon>
+              Quellcode anzeigen
+            </MenuItem>
+          )}
         </ContextMenu>
       </ContextMenuTrigger>
-    </Flex>
+    </ActionGroup>
   );
 };
 
