@@ -59,7 +59,7 @@
     "dev": "storybook dev --port 6006",
     "test:browser": "vitest run --project=browser* --browser.headless",
     "test:browser:dev": "vitest dev --project=browser*",
-    "test:compile": "tsc --noEmit",
+    "test:compile": "tsc --noEmit && tsc -p tsconfig.vite.json",
     "test:unit": "vitest run --project=unit*",
     "test:unit:dev": "vitest dev --project=unit*"
   },

@@ -148,15 +148,18 @@ Remote generation details:
   `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
   is not swept in). What it cannot convert is a **function returning** rendered
   output, because the host has to call it: that needs an eager slot or
-  `@flr-ignore-props`. `checkSerializableProps` reports the offenders on every
-  generator run.
+  `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
+  prop, so a new one cannot ship.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize. Use the
-  per-component tag for additional cases (see `TunnelEntry.tsx`).
+  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
+  `renderEmptyState` because the host would call it and get rendered output back
+  — which no component ever supported remotely, and which cost the whole
+  mutation batch when it was tried. Use the per-component tag for additional
+  cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).

@@ -19,7 +19,6 @@ export class RemoteTableBodyElement extends FlowRemoteElement<RemoteTableBodyEle
       items: {},
       lang: {},
       render: {},
-      renderEmptyState: {},
       translate: {},
     };
   }

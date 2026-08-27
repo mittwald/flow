@@ -36,7 +36,6 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       layout: {},
       orientation: {},
       render: {},
-      renderEmptyState: {},
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},

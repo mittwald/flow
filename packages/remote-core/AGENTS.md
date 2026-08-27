@@ -41,9 +41,9 @@ Connection + serialization layer between host (mStudio) and remote apps
   one prop drops the entire mutation batch and the extension renders nothing.
   `FlowThreadSerialization` therefore drops React values (`null`, warned once
   per component) so the cost stays one property instead of the whole update.
-  That is a net, not a fix: the prop belongs in a **slot**. The generator
-  reports offenders at build time — see `checkSerializableProps` in the
-  components package.
+  That is a net, not a fix: the prop belongs in a **slot**. The generator fails
+  the build on such a prop — see `checkSerializableProps` in the components
+  package.
 - Unit tests run in happy-dom: `pnpm nx test:unit remote-core`. The repeated
   reference and circular reference cases in `FlowThreadSerialization.test.tsx`
   are what fails if the sequential invariant breaks;
