@@ -254,7 +254,15 @@ replacement.
 
 - [ ] **Step 6: Reconcile what the missing files leave behind**
 
-Three loose ends from not taking the bundler:
+Four loose ends from not taking the bundler:
+
+0. `packages/codemods/src/tests/remoteScope.test.ts` — its
+   `test("every transform is listed")` asserts that the transform file names on
+   disk are exactly the keys of its hand-maintained `targets` map, and that map
+   has a `flow1` key. Since `flow1.ts` is not coming across, **this test fails
+   until you drop it**: remove the `flow1: []` entry from `targets` and
+   `"flow1"` from the `notNameScoped` set, and drop the sentence about `flow1`
+   from the comment above `notNameScoped`.
 
 1. `packages/codemods/package.json` — its `build` script points at
    `dev/bundleCompositesCli.ts`, which does not exist here. Set
@@ -1140,6 +1148,14 @@ git commit -m "feat(codemods): add the migration catalogue and its generated mod
 - Consumes: `readCatalog()` and `MigrationEntry` from Task 2.
 - Produces: `generateMigrationGuide(): Promise<void>`; a complete 22-entry
   catalogue that Tasks 5, 10 and 12 select from.
+
+**This task commits with a red suite, deliberately.** Two invariants are
+bidirectional — `catalog.test.ts`'s `action: codemod` ⟺ transform-file check,
+and `remoteScope.test.ts`'s "every transform is listed" — so neither authoring
+the entries first nor renaming the transforms first is green on its own. The
+maintainer decided to accept the red commit here rather than merge this task
+with Task 4. Expect exactly seven failures at Step 10, all of them
+`flowAlpha*`-transform-name mismatches, and no others. Task 4 makes it green.
 
 **The catalogue has 22 entries**, derived from the current guide: 21 `###`
 headings, minus `Use Codemod` and `Do it manually` (which are subsections of the
