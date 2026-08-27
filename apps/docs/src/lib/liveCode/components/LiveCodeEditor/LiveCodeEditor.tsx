@@ -18,7 +18,7 @@ import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components";
-import { IconGripVertical } from "@tabler/icons-react";
+import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 
 export interface LiveCodeEditorProps {
@@ -266,7 +266,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
                 onPointerCancel={onPointerUp}
                 onKeyDown={onKeyDown}
               >
-                <IconGripVertical size={20} aria-hidden />
+                <IconArrowBarBoth size={20} aria-hidden />
               </div>
             </div>
             <p className={styles.widthReadout}>
