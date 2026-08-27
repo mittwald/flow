@@ -21,8 +21,8 @@ name: Forward-merge main into next
 # only place the merge drivers run. Any other failure opens an issue too
 # (ADR 0004 §10).
 #
-# The push to `next` triggers `publish-next.yml`, which re-derives the version
-# and publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
+# The push to `next` triggers `publish.yml`, which re-derives the version and
+# publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
 # version-free — it merges and pushes, nothing more.
 
 on:
@@ -36,15 +36,20 @@ on:
   # `mutate-next` concurrency group is retried by nothing: GitHub keeps one
   # pending run per group and cancels it when a newer run arrives, and a
   # cancelled run is not a failure. Measured in the #2769 rehearsal: a run
-  # created at 15:45:32 was cancelled at 15:47:28, one second after a
-  # publish-next run entered the group — it never started a single job, so no
+  # created at 15:45:32 was cancelled at 15:47:28, one second after a `next`
+  # publish run entered the group — it never started a single job, so no
   # `timeout-minutes` would have helped.
   #
-  # publish-next completing is exactly the moment the group frees up, so re-run
+  # That publish completing is exactly the moment the group frees up, so re-run
   # then. This terminates: the catch-up merge is idempotent, normally finds no
-  # code delta, does not push, and therefore triggers no further publish-next.
+  # code delta, does not push, and therefore triggers no further publish run.
+  #
+  # `publish.yml` serves BOTH lines since the trusted-publisher fix, so this
+  # fires after `main` publishes too. The job guard below drops those: only a
+  # `next` publish holds `mutate-next`, and a `main` publish already triggers
+  # this workflow through its own push.
   workflow_run:
-    workflows: ["Publish next collection line to NPM"]
+    workflows: ["Publish packages to NPM"]
     types: [completed]
 
 permissions:
@@ -53,7 +58,7 @@ permissions:
   issues: write # open the sync issue (§4) and the failure issue (§10)
 
 # One shared concurrency group per TARGET branch, used by every workflow that
-# pushes to `next` (this one and `publish-next.yml`) — serializes all writers of
+# pushes to `next` (this one and `publish.yml`) — serializes all writers of
 # `next` and removes non-fast-forward races by design (ADR 0004 §5).
 concurrency:
   group: mutate-next
@@ -65,6 +70,11 @@ env:
 
 jobs:
   forward-merge:
+    # The catch-up `workflow_run` trigger is about the `mutate-next` group
+    # freeing up, so only a publish run that HELD it counts — i.e. one on `next`.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.head_branch == 'next'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -74,7 +84,7 @@ jobs:
           set -euo pipefail
 
           # Cheap pre-flight, one API call, no checkout. The catch-up
-          # `workflow_run` trigger fires after every publish-next, and in the
+          # `workflow_run` trigger fires after every `next` publish, and in the
           # normal case there is nothing to do — cloning this monorepo's full
           # history just to discover that would be wasteful. `ahead_by` counts
           # commits on `main` that `next` does not have; churn-only merges still

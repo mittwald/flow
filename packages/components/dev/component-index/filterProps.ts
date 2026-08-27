@@ -65,9 +65,49 @@ export const isConsumerProp = (name: string, prop: PropItem): boolean => {
 export const isInternalProp = (prop: PropItem): boolean =>
   prop.description.includes("@internal");
 
-const OPTIONAL_UNION_MEMBER = / \| (?:undefined|null)/g;
+const NULLISH_MEMBERS = ["undefined", "null"];
+
+/** `Iterable<A | B> | null` yields two members, not three. */
+const splitUnion = (type: string): string[] => {
+  const parts: string[] = [];
+  let depth = 0;
+  let current = "";
+  let previousChar = "";
+
+  for (const char of type) {
+    // The ">" of an arrow function type closes nothing.
+    const isArrow = char === ">" && previousChar === "=";
+    previousChar = char;
+
+    if ("<([{".includes(char)) {
+      depth++;
+    } else if (">)]}".includes(char) && !isArrow) {
+      depth--;
+    }
+
+    if (char === "|" && depth === 0) {
+      parts.push(current.trim());
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  parts.push(current.trim());
+
+  return parts.filter(Boolean);
+};
+
+/*
+ * `undefined` and `null` as top-level union members only restate the "Required"
+ * badge. Nested ones are part of the type and have to survive: ColumnLayout's
+ * `(number | null)[]` documents that `null` hides a column.
+ */
+const stripTopLevelNullish = (type: string): string => {
+  const members = splitUnion(type).filter(
+    (member) => !NULLISH_MEMBERS.includes(member),
+  );
+  return members.length > 0 ? members.join(" | ") : type;
+};
 
 export const propType = (name: string, prop: PropItem): string =>
-  name === "children"
-    ? "ReactNode"
-    : prop.type.name.replaceAll(OPTIONAL_UNION_MEMBER, "");
+  name === "children" ? "ReactNode" : stripTopLevelNullish(prop.type.name);
