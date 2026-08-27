@@ -1,3 +1,5 @@
+import registryUrl from "registry-url";
+
 export interface RegistryVersions {
   versions: string[];
   distTags: Record<string, string>;
@@ -9,7 +11,21 @@ interface Packument {
   "dist-tags"?: Record<string, string>;
 }
 
-const registry = "https://registry.npmjs.org";
+/**
+ * The registry that actually serves `@mittwald`, from the consumer's npm
+ * config.
+ *
+ * Hardcoding `registry.npmjs.org` would be wrong for anyone behind a corporate
+ * mirror or a scoped private registry — `npm view` works for them because npm
+ * reads their `.npmrc`, and a CLI that ignores it would fail or, worse, answer
+ * from the wrong source.
+ */
+const registryFor = (packageName: string): string => {
+  const scope = packageName.startsWith("@")
+    ? packageName.slice(0, packageName.indexOf("/"))
+    : undefined;
+  return registryUrl(scope).replace(/\/$/, "");
+};
 
 /**
  * Every published version of a package, plus its dist-tags.
@@ -26,7 +42,7 @@ export const fetchVersions = async (
   // about what the CLI was trying to do.
   let packument: Packument;
   try {
-    const response = await fetch(`${registry}/${packageName}`, {
+    const response = await fetch(`${registryFor(packageName)}/${packageName}`, {
       headers: { accept: "application/vnd.npm.install-v1+json" },
     });
 
