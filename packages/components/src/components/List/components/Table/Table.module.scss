@@ -11,14 +11,14 @@
   transition-property: background-color;
   transition-duration: var(--transition--duration--default);
 
-  &.isSelected {
+  &[data-selected] {
     background-color: var(--list-item--background-color--pressed);
   }
 
   &.hasAction {
     cursor: default;
 
-    &:where(:not(.isSelected)) {
+    &:where(:not([data-selected])) {
       &:hover {
         background-color: var(--list-item--background-color--hover);
       }
