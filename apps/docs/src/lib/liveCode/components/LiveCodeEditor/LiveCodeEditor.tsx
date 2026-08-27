@@ -17,7 +17,7 @@ import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/e
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
-import { Button } from "@mittwald/flow-react-components";
+import { Button, Icon } from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
 import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
 
@@ -260,7 +260,9 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
               onPointerCancel={onPointerUp}
               onKeyDown={onKeyDown}
             >
-              <IconArrowBarBoth size={20} aria-hidden />
+              <Icon>
+                <IconArrowBarBoth />
+              </Icon>
             </Button>
           </div>
         ) : (

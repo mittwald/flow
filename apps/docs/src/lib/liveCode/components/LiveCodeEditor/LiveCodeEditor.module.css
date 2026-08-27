@@ -142,7 +142,7 @@
 
 .resizeTrack {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-start;
   overflow: hidden;
   width: 100%;
@@ -167,23 +167,9 @@
 
 .resizeHandle {
   flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-px--xl);
   margin-inline-start: var(--size-px--xs);
-  border-radius: var(--corner-radius--m);
-  color: var(--neutral--color--600);
+
+  /* Everything else is the plain Button's own styling. */
   cursor: col-resize;
   touch-action: none;
-
-  &:hover {
-    background-color: var(--neutral--color--200);
-    color: var(--neutral--color--900);
-  }
-
-  &:focus-visible {
-    outline: var(--focus--outline-width) solid var(--focus--outline-color);
-    outline-offset: var(--focus--outline-offset);
-  }
 }

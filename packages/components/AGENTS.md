@@ -326,6 +326,13 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
 - **CSS leans on modern relational/low-specificity selectors** — `:has`,
   `:where`, logical properties, data attributes, and container boundaries reduce
   the need for runtime styling props.
+- **Foreign SVGs go through `Icon`** — a Tabler icon or a custom SVG placed
+  straight into a host that styles its icon slot (`Button` and `Combine` select
+  on `:has(.icon)`; eleven components set `Icon` defaults through
+  `PropsContext`) never gets the `flow--icon` class, so icon sizing and
+  icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
+  — as the [Icon page](https://flow.mittwald.de/04-components/content/icon)
+  documents. Nothing errors: types, lint and the console stay clean.
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.
