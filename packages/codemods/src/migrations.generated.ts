@@ -7,19 +7,6 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
-    id: "imports-to-package-root",
-    since: "0.2.0",
-    title: "From version 0.1.0 to version 0.2.0",
-    kind: "migration",
-    action: "codemod",
-    remotePackage: false,
-    detect: "rg -t ts 'flow-react-components/'",
-    apply:
-      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
-    verify:
-      "tsc --noEmit passes, the app still runs, and `rg 'flow-react-components/'` finds no remaining subdirectory import other than `react-hook-form`, `nextjs`, or a CSS export.",
-  },
-  {
     id: "segmented-control-deprecated",
     since: "0.2.0-alpha.1056",
     title: "SegmentedControl deprecated",
@@ -271,6 +258,19 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
       "Replace `ResetButtonProps`/`SubmitButtonProps` imports from `@mittwald/flow-react-components/react-hook-form` with `ButtonProps` from the package root. Leave `RemoteButtonElementProps` (from `@mittwald/flow-remote-elements`) alone.",
     verify:
       "tsc --noEmit passes, and `rg 'ResetButtonProps|SubmitButtonProps'` finds nothing.",
+  },
+  {
+    id: "imports-to-package-root",
+    since: "0.2.0-alpha.28",
+    title: "From version 0.1.0 to version 0.2.0",
+    kind: "migration",
+    action: "codemod",
+    remotePackage: false,
+    detect: "rg -t ts 'flow-react-components/'",
+    apply:
+      'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
+    verify:
+      "tsc --noEmit passes, the app still runs, and `rg 'flow-react-components/'` finds no remaining subdirectory import other than `react-hook-form`, `nextjs`, or a CSS export.",
   },
   {
     id: "renamed-css-export",

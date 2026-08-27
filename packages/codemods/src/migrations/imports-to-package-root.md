@@ -1,5 +1,5 @@
 ---
-since: 0.2.0
+since: 0.2.0-alpha.28
 title: From version 0.1.0 to version 0.2.0
 kind: migration
 action: codemod
@@ -58,3 +58,8 @@ missing module exports.
 3. **Verify your application still compiles and runs correctly.**
 4. **Run your test suite** to ensure no regressions were introduced by the
    migration.
+
+This change shipped in `0.2.0-alpha.28`: `0.2.0-alpha.27` still published one
+export entry per component, `alpha.28` published the flat set. Neither `0.1.0`
+nor `0.2.0` was ever released — the headings above name release lines, and the
+first stable release of Flow is `1.0.0`.
