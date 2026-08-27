@@ -2745,11 +2745,34 @@ describe("detectPackageManager", () => {
 });
 
 describe("installCommand", () => {
-  test("each manager gets its own install verb", () => {
-    expect(installCommand("pnpm")).toEqual(["pnpm", ["install"]]);
-    expect(installCommand("npm")).toEqual(["npm", ["install"]]);
-    expect(installCommand("yarn")).toEqual(["yarn", ["install"]]);
-    expect(installCommand("bun")).toEqual(["bun", ["install"]]);
+  test("npm and bun install plainly", () => {
+    expect(installCommand("npm")).toEqual({
+      command: "npm",
+      args: ["install"],
+      env: {},
+    });
+    expect(installCommand("bun")).toEqual({
+      command: "bun",
+      args: ["install"],
+      env: {},
+    });
+  });
+
+  // `upgrade` has just made the lockfile stale on purpose, and both of these
+  // freeze the lockfile by themselves in CI, where the install would then fail.
+  test("pnpm is told not to freeze the lockfile", () => {
+    expect(installCommand("pnpm").args).toEqual([
+      "install",
+      "--no-frozen-lockfile",
+    ]);
+  });
+
+  test("yarn gets the env var, because its flag differs between v1 and v2", () => {
+    expect(installCommand("yarn")).toEqual({
+      command: "yarn",
+      args: ["install"],
+      env: { YARN_ENABLE_IMMUTABLE_INSTALLS: "false" },
+    });
   });
 });
 ```
@@ -2774,7 +2797,12 @@ export type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 /** Lockfile to manager, in precedence order. */
 const lockfiles: [string, PackageManager][] = [
   ["pnpm-lock.yaml", "pnpm"],
+  // Both Bun lockfile names: `bun.lock` (text) is the default only from Bun
+  // 1.2; before that Bun writes the binary `bun.lockb`, which plenty of
+  // projects still have. Missing it would fall through to the npm default and
+  // run `npm install` on a Bun project, leaving a stray package-lock.json.
   ["bun.lock", "bun"],
+  ["bun.lockb", "bun"],
   ["yarn.lock", "yarn"],
   ["package-lock.json", "npm"],
 ];
@@ -2802,10 +2830,43 @@ export const detectPackageManagerIn = (cwd: string): PackageManager =>
       .filter((lockfile) => existsSync(join(cwd, lockfile))),
   );
 
-export const installCommand = (manager: PackageManager): [string, string[]] => [
-  manager,
-  ["install"],
-];
+export interface InstallCommand {
+  command: string;
+  args: string[];
+  /** Extra environment for the install. Empty when none is needed. */
+  env: Record<string, string>;
+}
+
+/**
+ * How to install with a given manager, so that the install actually updates the
+ * lockfile.
+ *
+ * `upgrade` has just rewritten `package.json`, so the lockfile is deliberately
+ * stale. pnpm and Yarn Berry both switch on frozen/immutable installs by
+ * themselves when they detect CI, where an install then *fails* instead of
+ * updating — and CI is exactly where this runs unattended. pnpm takes a flag;
+ * Yarn's flag differs between Classic and Berry, so it gets the environment
+ * variable instead, which Classic ignores harmlessly.
+ */
+export const installCommand = (manager: PackageManager): InstallCommand => {
+  switch (manager) {
+    case "pnpm":
+      return {
+        command: "pnpm",
+        args: ["install", "--no-frozen-lockfile"],
+        env: {},
+      };
+    case "yarn":
+      return {
+        command: "yarn",
+        args: ["install"],
+        env: { YARN_ENABLE_IMMUTABLE_INSTALLS: "false" },
+      };
+    case "npm":
+    case "bun":
+      return { command: manager, args: ["install"], env: {} };
+  }
+};
 
 /**
  * Runs the install.
@@ -2816,8 +2877,12 @@ export const installCommand = (manager: PackageManager): [string, string[]] => [
 export type InstallRunner = (manager: PackageManager, cwd: string) => void;
 
 export const runInstall: InstallRunner = (manager, cwd) => {
-  const [command, args] = installCommand(manager);
-  execFileSync(command, args, { cwd, stdio: "inherit" });
+  const { command, args, env } = installCommand(manager);
+  execFileSync(command, args, {
+    cwd,
+    stdio: "inherit",
+    env: { ...process.env, ...env },
+  });
 };
 ```
 
@@ -2853,8 +2918,20 @@ export const hasUncommittedChanges = (cwd: string): boolean => {
       stdio: ["ignore", "pipe", "ignore"],
     });
     return status.trim() !== "";
-  } catch {
-    return false;
+  } catch (error) {
+    // Only "not a git repository" counts as clean. git answers that with exit
+    // 128; a missing binary throws `ENOENT` with no exit status at all. Treating
+    // the two alike would make the guard fail *open* — it would report a clean
+    // tree on a machine without git, which is exactly the minimal CI container
+    // where nobody is watching the run.
+    if ((error as { status?: number }).status === 128) {
+      return false;
+    }
+    throw new Error(
+      `Could not check the working tree with git: ${
+        error instanceof Error ? error.message : error
+      }`,
+    );
   }
 };
 ```
