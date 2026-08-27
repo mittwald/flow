@@ -22,5 +22,13 @@ export const config = {
      * (`emptyView`).
      */
     "renderEmptyState",
+    /*
+     * react-aria's render prop, inherited by every component that wraps one of
+     * its primitives — never a deliberate part of a Flow API. Broken remotely in
+     * both directions: the host would call it with react-aria render props
+     * (whose collection state holds rendered elements) and expect rendered
+     * output back, and neither survives `postMessage`.
+     */
+    "render",
   ],
 } as const;

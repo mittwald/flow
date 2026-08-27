@@ -46,8 +46,9 @@ export function generateRemoteElementFile(c: ComponentDoc) {
 
   return `\
     import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-    import type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components${t.exportPath}";
-    export type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components${t.exportPath}";
+    import type { WithSerializableClassName } from "@/lib/RemoteProps";
+    import type { ${t.propsType} } from "@mittwald/flow-react-components${t.exportPath}";
+    export type ${t.propsAliasType} = WithSerializableClassName<${t.propsType}>;
     
     export class ${t.element} extends FlowRemoteElement<${t.propsAliasType}> {
       static override get remoteAttributes() {
