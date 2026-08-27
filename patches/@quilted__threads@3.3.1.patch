@@ -1,5 +1,5 @@
 diff --git a/build/esm/Thread.mjs b/build/esm/Thread.mjs
-index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70fec845c4 100644
+index 33cb3c7602c4606a8e044532984752a1ac36a548..c07122d823cb4a9506ca5ea6dc617711bd561a56 100644
 --- a/build/esm/Thread.mjs
 +++ b/build/esm/Thread.mjs
 @@ -5,42 +5,6 @@ import { MESSAGE_FUNCTION_RELEASE, MESSAGE_FUNCTION_RESULT, MESSAGE_CALL_RESULT,
@@ -45,7 +45,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
  /**
   * A thread represents a target JavaScript environment that exposes a set
   * of callable, asynchronous methods. The thread takes care of automatically
-@@ -49,46 +13,17 @@ import { ThreadSerializationStructuredClone } from './serialization/ThreadSerial
+@@ -49,46 +13,34 @@ import { ThreadSerializationStructuredClone } from './serialization/ThreadSerial
   * own code.
   */
  class Thread {
@@ -91,10 +91,27 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
    #abort;
    #idsToResolver = (() => new Map())();
 +
++  /*
++   * Serialization is async in this build, and the number of microtask turns a
++   * payload takes is proportional to its size. Upstream is synchronous, so a
++   * message was posted in the same stack frame as the call that produced it and
++   * order came for free. Here two calls made in one task race, and the one whose
++   * payload serializes in fewer turns wins — a larger batch followed by a smaller
++   * one arrives second. For a stream of remote-DOM mutations that silently
++   * applies the tree in the wrong order.
++   *
++   * So both directions get a queue. #sendQueue keeps `serialize` then post
++   * atomic per call, #receiveQueue keeps `deserialize` then invoke atomic per
++   * message. Each is a promise chain that never rejects, so one failed call
++   * cannot wedge the thread.
++   */
++  #sendQueue = (() => Promise.resolve())();
++  #receiveQueue = (() => Promise.resolve())();
++
    constructor(messages, {
      imports,
      exports,
-@@ -102,105 +37,105 @@ class Thread {
+@@ -102,105 +54,137 @@ class Thread {
      this.imports = createThreadImports(this.#handlerForCall.bind(this), imports);
      this.functions = functions;
      this.serialization = serialization;
@@ -213,30 +230,62 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
 -   * the function you provided with a serialized call ID, the serialized arguments,
 -   * and any transferable objects that need to be passed between threads.
 -   */
--  call(func, args) {
-+  async call(func, args) {
+   call(func, args) {
      if (this.closed) {
        return Promise.reject(new ThreadClosedError());
      }
-+
-     const transferable = [];
+-    const transferable = [];
 -    const serialized = this.serialization.serialize(args, this, transferable);
-+    const serialized = await this.serialization.serialize(args, this, transferable);
 +
++    // Claim the id and its resolver before yielding, so the ids reflect call
++    // order and a result cannot arrive before there is something to receive it.
      const id = nanoid();
      const done = this.#waitForResult(id);
+-    func(id, serialized, transferable);
 +
-     func(id, serialized, transferable);
++    this.#sendQueue = this.#sendQueue.then(async () => {
++      try {
++        const transferable = [];
++        const serialized = await this.serialization.serialize(args, this, transferable);
++
++        func(id, serialized, transferable);
++      } catch (error) {
++        // Serializing the arguments failed, so nothing was sent and no result
++        // will ever come back. Reject this call and leave the queue usable.
++        this.#resolveCall(id, undefined, error);
++      }
++    });
 +
      return done;
    }
 +
    async #callLocal(func, args, withResult) {
++    /*
++     * The queue is handed on as soon as the function has been *invoked*, not
++     * when it settles. Ordering only needs the calls to start in message order;
++     * waiting for completion would let one slow export stall every later
++     * message, and deadlock outright if that export awaits a call back to the
++     * paired thread.
++     */
++    let releaseQueue;
++    const invoked = new Promise((resolve) => {
++      releaseQueue = resolve;
++    });
++
++    const predecessor = this.#receiveQueue;
++    this.#receiveQueue = invoked;
++
      try {
 -      const result = this.functions.call ? await this.functions.call(func, args, this) : await func(...this.serialization.deserialize(args, this));
-+      const result = this.functions.call
-+        ? await this.functions.call(func, args, this) // keep original contract
-+        : await func(...(await this.serialization.deserialize(args, this)));
++      await predecessor;
++
++      const pendingResult = this.functions.call
++        ? this.functions.call(func, args, this) // keep original contract
++        : func(...(await this.serialization.deserialize(args, this)));
++
++      releaseQueue();
++
++      const result = await pendingResult;
 +
        const transferable = [];
 -      const serialized = this.serialization.serialize(result, this, transferable);
@@ -245,6 +294,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
        withResult(serialized, undefined, transferable);
      } catch (error) {
 -      withResult(undefined, this.serialization.serialize(error, this));
++      releaseQueue();
 +      withResult(undefined, await this.serialization.serialize(error, this));
      }
    }
@@ -259,7 +309,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
          return this.call((id, serializedArgs, transferable) => {
            this.messages.send([MESSAGE_CALL, id, property, serializedArgs], transferable);
          }, args);
-@@ -209,48 +144,64 @@ class Thread {
+@@ -209,48 +193,64 @@ class Thread {
        }
      };
    }
@@ -329,7 +379,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
          const handler = handlerForImport(property);
          cache.set(property, handler);
          return handler;
-@@ -258,6 +209,7 @@ function createThreadImports(handlerForImport, imported) {
+@@ -258,6 +258,7 @@ function createThreadImports(handlerForImport, imported) {
      });
    } else {
      call = {};
@@ -337,7 +387,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
      for (const method of imported) {
        Object.defineProperty(call, method, {
          value: handlerForImport(method),
-@@ -267,8 +219,10 @@ function createThreadImports(handlerForImport, imported) {
+@@ -267,8 +268,10 @@ function createThreadImports(handlerForImport, imported) {
        });
      }
    }
@@ -349,7 +399,7 @@ index 33cb3c7602c4606a8e044532984752a1ac36a548..c3b383b087d2529b2bb607b015791c70
    throw new Error(`You attempted to call a function that is not stored. It may have already been released.`);
  }
 diff --git a/build/esm/serialization/ThreadSerializationStructuredClone.mjs b/build/esm/serialization/ThreadSerializationStructuredClone.mjs
-index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdccd98d4df 100644
+index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..4cbaf608f5db941334ab4406833c99e69a6f6dc0 100644
 --- a/build/esm/serialization/ThreadSerializationStructuredClone.mjs
 +++ b/build/esm/serialization/ThreadSerializationStructuredClone.mjs
 @@ -17,6 +17,7 @@ const ASYNC_ITERATOR = '_@i';
@@ -360,7 +410,7 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
    constructor(options) {
      this.#customSerializer = options?.serialize;
      this.#customDeserializer = options?.deserialize;
-@@ -25,81 +26,108 @@ class ThreadSerializationStructuredClone {
+@@ -25,81 +26,130 @@ class ThreadSerializationStructuredClone {
    /**
     * Serializes a value into a structured cloning-compatible format that can be transferred between threads.
     */
@@ -374,7 +424,20 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
      if (value == null) return value;
      if (seen.has(value)) return seen.get(value);
  
-     // Prevent circular references
+-    // Prevent circular references
++    /*
++     * Prevent circular references. `undefined` parks a placeholder so a value
++     * that reaches itself terminates instead of recursing forever; the real
++     * result overwrites it once this frame is done.
++     *
++     * This only holds while serialization visits one value at a time. Upstream
++     * is synchronous, so that is free. This build is async (Flow's serializers
++     * await File reads), which makes it a rule the traversal has to keep: every
++     * container below walks its members sequentially. Serialize them
++     * concurrently and a second reference reaching the same value from a
++     * parallel branch reads the placeholder while the first branch is still in
++     * flight, and silently serializes to `undefined`.
++     */
      seen.set(value, undefined);
 +
      if (typeof value === 'object') {
@@ -417,7 +480,12 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
 +
        if (Array.isArray(value)) {
 -        const result = value.map(item => serializeValue(item));
-+        const result = await Promise.all(value.map((item) => serializeValue(item)));
++        const result = [];
++
++        for (const item of value) {
++          result.push(await serializeValue(item));
++        }
++
          seen.set(value, result);
          return result;
        }
@@ -426,11 +494,14 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
 -        const entries = [...value.entries()].map(([key, value]) => {
 -          return [serializeValue(key), serializeValue(value)];
 -        });
-+        const entries = await Promise.all(
-+          [...value.entries()].map(async ([key, value]) => {
-+            return [await serializeValue(key), await serializeValue(value)];
-+          }),
-+        );
++        const entries = [];
++
++        for (const [entryKey, entryValue] of value.entries()) {
++          entries.push([
++            await serializeValue(entryKey),
++            await serializeValue(entryValue),
++          ]);
++        }
 +
          const result = new Map(entries);
          seen.set(value, result);
@@ -439,9 +510,11 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
 +
        if (value instanceof Set) {
 -        const entries = [...value].map(entry => serializeValue(entry));
-+        const entries = await Promise.all(
-+          [...value].map((entry) => serializeValue(entry)),
-+        );
++        const entries = [];
++
++        for (const entry of value) {
++          entries.push(await serializeValue(entry));
++        }
 +
          const result = new Set(entries);
          seen.set(value, result);
@@ -487,7 +560,7 @@ index 8a2304bc1adfb36a38b4d21c6d24bff1f6cddc01..ca64129b48b19161a997e068593fbbdc
      seen.set(value, value);
      return value;
    }
-@@ -107,47 +135,75 @@ class ThreadSerializationStructuredClone {
+@@ -107,47 +157,75 @@ class ThreadSerializationStructuredClone {
    /**
     * Deserializes a structured cloning-compatible value from another thread.
     */

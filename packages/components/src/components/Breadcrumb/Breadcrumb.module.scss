@@ -11,6 +11,7 @@
     padding-inline: var(--breadcrumb--spacing);
     font-weight: var(--breadcrumb--font-weight--default);
     text-decoration: underline;
+    cursor: pointer;
 
     @include focus.focus;
 
