@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+import { allEntries } from "./catalog/entries.js";
 import { parseArguments } from "./cli/args.js";
+import { renderList } from "./cli/list.js";
 
 const usage = `flow-codemods — migrate a codebase across Flow versions
 
@@ -37,6 +39,16 @@ const main = async (): Promise<number> => {
       process.stdout.write(`${manifest.version}\n`);
       return 0;
     }
+    case "list":
+      process.stdout.write(
+        renderList({
+          entries: allEntries,
+          from: parsed.from,
+          to: parsed.to,
+          json: parsed.json,
+        }),
+      );
+      return 0;
     default:
       process.stderr.write(`"${parsed.command}" is not implemented yet\n`);
       return 1;
