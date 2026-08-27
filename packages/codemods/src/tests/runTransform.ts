@@ -16,6 +16,13 @@ const jscodeshiftBin = require.resolve("jscodeshift/bin/jscodeshift.js");
 /**
  * The jscodeshift CLI exits 0 even when its worker dies before touching a file,
  * so the run is only successful when the summary accounts for the input file.
+ *
+ * Scraping the CLI's text summary with a regex is unsafe in general — `--print`
+ * writes the transformed source to stdout _before_ the summary, so a source
+ * comment like `// 42 ok` can win the `(\d+) ok` match (see `runCodemod`'s own
+ * doc comment in `src/run/jscodeshift.ts`, which chose the Runner API instead
+ * for exactly this reason). It is safe here only because `runTransform` never
+ * passes `--print`: no source is ever echoed into the output this regex reads.
  */
 const assertProcessed = (name: string, output: string): void => {
   const count = (label: string): number =>
@@ -32,12 +39,16 @@ const assertProcessed = (name: string, output: string): void => {
 };
 
 /**
- * Runs a transform the way the CLI does: the real jscodeshift CLI, over a file
- * in a temp directory, with the transform read from `src/transforms`.
+ * Runs a transform through the real jscodeshift CLI binary, over a file in a
+ * temp directory, with the transform read from `src/transforms`.
  *
- * Spawning the CLI rather than calling the transform in-process is deliberate —
- * it is the invocation `runCodemod` makes, so a transform that only works when
- * called directly fails here too.
+ * This is not the invocation `runCodemod` makes — `runCodemod` (in
+ * `src/run/jscodeshift.ts`) drives jscodeshift's `Runner` in-process, while
+ * this helper spawns the standalone CLI. The two now take different routes, so
+ * this is not a fidelity check on `runCodemod` — it is an independent check
+ * that the transform works under jscodeshift's normal CLI invocation (the
+ * parser flag, the file walk, babel), not only when called directly as a
+ * function.
  */
 export const runTransform = (name: string, source: string): string => {
   const workingDir = mkdtempSync(join(tmpdir(), "flow-codemods-"));

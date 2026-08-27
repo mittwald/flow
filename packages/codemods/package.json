@@ -2,14 +2,19 @@
   "name": "@mittwald/flow-codemods",
   "version": "1.1.0-next.4",
   "type": "module",
+  "description": "Codemods and an upgrade CLI for consumers of Flow, mittwald's design system",
+  "homepage": "https://flow.mittwald.de",
+  "repository": "https://github.com/mittwald/flow",
   "bin": {
     "flow-codemods": "dist/cli.js"
   },
   "files": [
-    "*.md",
     "dist",
-    "src"
+    "src/transforms"
   ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json",
     "test:compile": "tsc --noEmit",

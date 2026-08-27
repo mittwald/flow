@@ -1,3 +1,4 @@
+import { valid } from "semver";
 import type { CatalogEntry } from "../catalog/entries.js";
 import { selectEntries, sortBySince } from "../catalog/select.js";
 
@@ -8,6 +9,34 @@ export interface RenderListInput {
   to?: string;
   json: boolean;
 }
+
+/**
+ * `--from`/`--to` errors, for the caller to check before rendering anything.
+ *
+ * `list` is the read-only planning entry point, and an exact published version
+ * is the only thing `selectEntries` accepts for a bound — unlike `upgrade`'s
+ * revision, it takes no keyword, dist-tag, or range. Without this check, an
+ * invalid bound reaches `semver`'s `lt`/`lte` inside `selectEntries` and throws
+ * node-semver's own "Invalid Version: …", which names neither flag nor what is
+ * accepted. Matches the tone of `upgrade`'s own unresolvable- revision
+ * message.
+ */
+export const validateListBounds = ({
+  from,
+  to,
+}: Pick<RenderListInput, "from" | "to">): string | undefined => {
+  const invalid = [from, to].filter(
+    (bound): bound is string => bound !== undefined && valid(bound) === null,
+  );
+
+  if (invalid.length === 0) {
+    return undefined;
+  }
+
+  const bounds = invalid.map((bound) => `"${bound}"`).join(" and ");
+  const verb = invalid.length > 1 ? "are" : "is";
+  return `${bounds} ${verb} not a published version. --from and --to take an exact version, e.g. 1.4.0 — not a range or a dist-tag.`;
+};
 
 const needs: Record<CatalogEntry["action"], string> = {
   codemod: "codemod",

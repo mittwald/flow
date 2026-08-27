@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { unknownCodemodMessage } from "../catalog/entries.js";
 // jscodeshift ships no types for its Runner — `allowJs` in this repo's shared
 // tsconfig (packages/typescript-config/base.json) lets a deep import of a
 // plain `.js` file resolve without a type error, so no `@ts-expect-error` is
@@ -71,9 +72,7 @@ export const runCodemod = async ({
   const transform = `${transformsDir}/${id}.ts`;
 
   if (!existsSync(transform)) {
-    throw new Error(
-      `"${id}" is not a codemod in this package. Run \`flow-codemods list\` to see the available ids.`,
-    );
+    throw new Error(unknownCodemodMessage(id));
   }
 
   let stats: RunnerStats;

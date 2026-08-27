@@ -36,7 +36,7 @@ editing the guide by hand is futile — CI fails the diff.
 **Every entry carries `detect`, `apply` and `verify`**, whether or not it has a
 codemod. That makes a migration executable by an agent even without one: run
 `detect`, apply the described change, confirm with `verify`. Of the 22 ported
-entries, 14 have no codemod and previously offered nothing but prose.
+entries, 13 have no codemod and previously offered nothing but prose.
 
 **`@mittwald/flow-codemods` is published as a CLI**, which is what lets
 `upgrade` exist:

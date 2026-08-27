@@ -12,7 +12,7 @@ the `@mittwald/flow-codemods` CLI that runs them.
 | `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                             |
 | `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                           |
 | `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, package-manager install, and the dirty-working-tree guard for `upgrade`. |
-| `src/run`                                                        | Spawns the real jscodeshift CLI.                                                                             |
+| `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                               |
 | `dev/generate`                                                   | The three generators.                                                                                        |
 | `src/tests`                                                      | Fixture tests, all running through the real jscodeshift CLI.                                                 |
 
@@ -44,15 +44,19 @@ fail. Its internal `Transform` export is named `<camelCaseId>Transform`.
 Consumers never install this package by hand — the CLI does, from
 `npx @mittwald/flow-codemods@latest`. A single-id invocation
 (`npx @mittwald/flow-codemods@latest <id> src`) reads the transform straight out
-of the installed package and hands it to jscodeshift;
-`src/tests/runTransform.ts` reproduces that exact invocation for tests, spawning
-the real jscodeshift CLI rather than calling the transform in-process.
+of the installed package and hands it to jscodeshift's `Runner`, in-process
+(`src/run/jscodeshift.ts`). `src/tests/runTransform.ts` takes a different route
+on purpose: it spawns the real jscodeshift CLI binary over the transform, an
+independent check that it works under jscodeshift's normal invocation — not a
+reproduction of `runCodemod`'s invocation, since production and this test helper
+no longer call jscodeshift the same way.
 
 A transform no longer has to be self-contained — it may import shared helpers
 from elsewhere in `src`. But `package.json` ships
-`"files": ["*.md", "dist", "src"]`: the published package is `src` wholesale and
-nothing outside it. Anything a transform imports must stay inside `src`, or it
-is missing from the published package even though it type-checks locally.
+`"files": ["README.md", "CHANGELOG.md", "dist", "src/transforms"]`: the
+published package carries `src/transforms` wholesale and nothing outside it.
+Anything a transform imports must stay inside `src/transforms`, or it is missing
+from the published package even though it type-checks locally.
 
 ## Does it apply to the remote package?
 

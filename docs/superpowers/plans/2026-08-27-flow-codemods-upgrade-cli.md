@@ -1,5 +1,10 @@
 # Flow codemods `upgrade` CLI + migration catalogue — Implementation Plan
 
+> **Status:** historical execution plan. Implementation superseded parts of it
+> as work progressed — the code and its own tests are the ground truth for
+> anything that diverges. [ADR 0006](../../adr/0006-migration-catalogue.md) is
+> the authority on the design; read that first for the current shape.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use
 > superpowers:subagent-driven-development (recommended) or
 > superpowers:executing-plans to implement this plan task-by-task. Steps use

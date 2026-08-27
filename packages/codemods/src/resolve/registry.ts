@@ -65,3 +65,39 @@ export const fetchVersions = async (
     distTags: packument["dist-tags"] ?? {},
   };
 };
+
+export interface PackageVersions extends RegistryVersions {
+  name: string;
+}
+
+/**
+ * Every declared Flow dependency's packument, fetched concurrently.
+ *
+ * `fetchVersions` is injected rather than imported directly so this stays
+ * testable without a network stub — `UpgradeDeps.fetchVersions` is what
+ * production and tests both pass in here.
+ */
+export const fetchAllVersions = async (
+  names: string[],
+  fetchOne: (name: string) => Promise<RegistryVersions>,
+): Promise<PackageVersions[]> =>
+  Promise.all(names.map(async (name) => ({ name, ...(await fetchOne(name)) })));
+
+/**
+ * The versions every one of `packages` has published.
+ *
+ * Fixed versioning keeps every Flow package's `package.json` version equal, but
+ * Lerna publishes only the packages that actually changed, so what reaches the
+ * registry diverges per package (#2887, accepted risk). A target version is
+ * only safe to write onto every declared dependency when it is one of these —
+ * the intersection, not any single package's list.
+ */
+export const intersectVersions = (packages: PackageVersions[]): string[] => {
+  const [first, ...rest] = packages;
+  if (first === undefined) {
+    return [];
+  }
+  return first.versions.filter((version) =>
+    rest.every((pkg) => pkg.versions.includes(version)),
+  );
+};

@@ -4,7 +4,7 @@ import { allEntries } from "./catalog/entries.js";
 import { parseArguments } from "./cli/args.js";
 import { createChoose } from "./cli/choose.js";
 import { runSingleCodemod } from "./cli/codemod.js";
-import { renderList } from "./cli/list.js";
+import { renderList, validateListBounds } from "./cli/list.js";
 import { defaultUpgradeDeps, runUpgrade } from "./cli/upgrade.js";
 
 const usage = `flow-codemods — migrate a codebase across Flow versions
@@ -32,6 +32,15 @@ Options:
 const main = async (): Promise<number> => {
   const parsed = parseArguments(process.argv.slice(2));
 
+  // Deliberate single ordered report stream: every command-level failure below
+  // that a real invocation can hit — `list`'s bound check, `codemod`'s and
+  // `upgrade`'s injected `log` — writes to stdout, interleaved with the rest of
+  // that command's normal output, in the order it happened. (The `default`
+  // case is dead code — `Command` is exhaustively covered above it — so its
+  // stderr write never actually runs.) Only the top-level rejection handler
+  // below (an unexpected throw, not a command refusing) writes to stderr. So
+  // `2>/dev/null` on this CLI does not suppress a refusal reason today — do not
+  // "fix" a command's own failure message onto stderr without weighing that.
   switch (parsed.command) {
     case "help":
       process.stdout.write(usage);
@@ -43,7 +52,12 @@ const main = async (): Promise<number> => {
       process.stdout.write(`${manifest.version}\n`);
       return 0;
     }
-    case "list":
+    case "list": {
+      const error = validateListBounds(parsed);
+      if (error !== undefined) {
+        process.stdout.write(`${error}\n`);
+        return 1;
+      }
       process.stdout.write(
         renderList({
           entries: allEntries,
@@ -53,6 +67,7 @@ const main = async (): Promise<number> => {
         }),
       );
       return 0;
+    }
     case "codemod":
       return await runSingleCodemod(parsed, {
         cwd: process.cwd(),

@@ -25,7 +25,8 @@
       "dependsOn": ["^build", "build"],
       "inputs": [
         "codemods-src",
-        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+        { "dependentTasksOutputFiles": "**/*", "transitive": false },
+        "{workspaceRoot}/apps/docs/src/content/01-get-started/versioning/index.mdx"
       ]
     }
   }

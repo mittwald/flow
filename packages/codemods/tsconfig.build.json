@@ -3,6 +3,9 @@
     "noEmit": false,
     "outDir": "dist",
     "rootDir": "src",
+    // Outside `dist`, which `files` ships to consumers — the buildinfo is a
+    // local incremental-build cache, not a build artefact for npm.
+    "tsBuildInfoFile": "tsconfig.build.tsbuildinfo",
     // Excluding src/tests and src/transforms shrinks the program to 2 files
     // (cli.ts, cli/args.ts). The native `tsc` (TypeScript 7, aliased as
     // `@typescript/native` — see pnpm-workspace.yaml) does not fall back to

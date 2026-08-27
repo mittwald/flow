@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
-import { allEntries } from "../catalog/entries.js";
+import { allEntries, unknownCodemodMessage } from "../catalog/entries.js";
 import type { ParsedCommand } from "./args.js";
 import { runCodemod } from "../run/jscodeshift.js";
 
@@ -43,9 +43,7 @@ export const runSingleCodemod = async (
   const entry = allEntries.find((candidate) => candidate.id === id);
 
   if (entry === undefined) {
-    log(
-      `"${id}" is not a codemod in this package. Run \`flow-codemods list\` to see the available ids.`,
-    );
+    log(unknownCodemodMessage(id));
     return 1;
   }
   if (entry.action !== "codemod") {

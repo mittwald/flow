@@ -347,4 +347,121 @@ describe("runUpgrade", () => {
 
     expect(recorded.codemods).toHaveLength(1);
   });
+
+  // Reproduces #2887-adjacent bug: fixed versioning keeps package.json
+  // versions equal, but Lerna only publishes changed packages, so two Flow
+  // dependencies' published histories genuinely diverge. Resolving the target
+  // from whichever dependency happens to be checked first can write a version
+  // the other one never published — the fix resolves from the intersection.
+  test("the target is resolved from the intersection of every declared dependency's published versions, not one anchor", async () => {
+    const cwd = project({
+      // Alphabetically first, so a naive "first dependency found" anchor
+      // would pick this package's list — which reaches further than the
+      // other's.
+      "@mittwald/flow-icons": "^1.0.0",
+      "@mittwald/flow-react-components": "^1.0.0",
+    });
+    const recorded = record();
+
+    const perPackage: Record<
+      string,
+      { versions: string[]; distTags: Record<string, string> }
+    > = {
+      "@mittwald/flow-icons": {
+        versions: ["1.0.0", "1.0.1", "1.0.5", "1.0.6"],
+        distTags: { latest: "1.0.6" },
+      },
+      "@mittwald/flow-react-components": {
+        versions: ["1.0.0", "1.0.1", "1.0.5"],
+        distTags: { latest: "1.0.5" },
+      },
+    };
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "minor", "-y"]),
+      deps(cwd, recorded, {
+        fetchVersions: async (name) => perPackage[name] ?? registry,
+        readInstalledVersion: () => "1.0.0",
+      }),
+    );
+
+    expect(code).toBe(0);
+    // 1.0.5 — the highest version BOTH packages published — never 1.0.6,
+    // which flow-react-components never published.
+    expect(manifestOf(cwd).dependencies).toEqual({
+      "@mittwald/flow-icons": "^1.0.5",
+      "@mittwald/flow-react-components": "^1.0.5",
+    });
+  });
+
+  test("an empty intersection of published versions is refused before anything is written", async () => {
+    const cwd = project({
+      "@mittwald/flow-icons": "^1.0.0",
+      "@mittwald/flow-react-components": "^1.0.0",
+    });
+    const recorded = record();
+    const before = readFileSync(join(cwd, "package.json"), "utf8");
+
+    const perPackage: Record<
+      string,
+      { versions: string[]; distTags: Record<string, string> }
+    > = {
+      "@mittwald/flow-icons": {
+        versions: ["2.0.0"],
+        distTags: { latest: "2.0.0" },
+      },
+      "@mittwald/flow-react-components": {
+        versions: ["3.0.0"],
+        distTags: { latest: "3.0.0" },
+      },
+    };
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded, {
+        fetchVersions: async (name) => perPackage[name] ?? registry,
+        readInstalledVersion: () => "1.0.0",
+      }),
+    );
+
+    expect(code).toBe(1);
+    expect(readFileSync(join(cwd, "package.json"), "utf8")).toBe(before);
+    expect(recorded.output.join("\n")).toMatch(
+      /no published version in common/i,
+    );
+  });
+
+  test("a dist-tag pointing outside the intersection is not written onto the manifest", async () => {
+    const cwd = project({
+      "@mittwald/flow-icons": "^1.0.0",
+      "@mittwald/flow-react-components": "^1.0.0",
+    });
+    const recorded = record();
+    const before = readFileSync(join(cwd, "package.json"), "utf8");
+
+    const perPackage: Record<
+      string,
+      { versions: string[]; distTags: Record<string, string> }
+    > = {
+      "@mittwald/flow-icons": {
+        versions: ["1.0.0", "1.0.6"],
+        distTags: { latest: "1.0.6" },
+      },
+      "@mittwald/flow-react-components": {
+        versions: ["1.0.0"],
+        distTags: { latest: "1.0.6" },
+      },
+    };
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "latest", "-y"]),
+      deps(cwd, recorded, {
+        fetchVersions: async (name) => perPackage[name] ?? registry,
+        readInstalledVersion: () => "1.0.0",
+      }),
+    );
+
+    expect(code).toBe(1);
+    expect(readFileSync(join(cwd, "package.json"), "utf8")).toBe(before);
+  });
 });

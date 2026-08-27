@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { CatalogEntry } from "../catalog/entries";
-import { renderList } from "../cli/list";
+import { renderList, validateListBounds } from "../cli/list";
 
 const entry = (
   id: string,
@@ -108,5 +108,37 @@ describe("tools are browsable but never required", () => {
       renderList({ entries: oldest, to: "1.0.0", json: true }),
     ) as CatalogEntry[];
     expect(parsed.map((e) => e.id)).toEqual(["ancient"]);
+  });
+});
+
+describe("validateListBounds", () => {
+  test("valid bounds, or none at all, need no message", () => {
+    expect(validateListBounds({})).toBeUndefined();
+    expect(validateListBounds({ from: "1.0.0" })).toBeUndefined();
+    expect(validateListBounds({ from: "1.0.0", to: "2.0.0" })).toBeUndefined();
+  });
+
+  // The original bug: an invalid bound reached semver's `lt`/`lte` inside
+  // `selectEntries` and threw node-semver's own "Invalid Version: 1.0" — this
+  // check exists to catch it first, before that throw, with a message that
+  // names the flag and what is accepted.
+  test("an incomplete version like 1.0 is rejected, not passed to semver", () => {
+    const message = validateListBounds({ from: "1.0" });
+    expect(message).toContain('"1.0"');
+    expect(message).not.toMatch(/invalid version/i);
+  });
+
+  test("a range is rejected — only an exact version is accepted", () => {
+    expect(validateListBounds({ from: "^1.0.0" })).toContain('"^1.0.0"');
+  });
+
+  test("a dist-tag is rejected — list has no registry to resolve it against", () => {
+    expect(validateListBounds({ to: "latest" })).toContain('"latest"');
+  });
+
+  test("both bounds invalid are both named", () => {
+    const message = validateListBounds({ from: "1.0", to: "latest" });
+    expect(message).toContain('"1.0"');
+    expect(message).toContain('"latest"');
   });
 });

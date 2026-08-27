@@ -60,7 +60,7 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
  * but the CLI never parses. The CLI imports `catalog/entries` instead.
  *
  * Callers that need an order sort by `since` with `semver` — a string sort puts
- * `alpha.712` after `alpha.1046`, which is wrong. Task 5 adds that helper.
+ * `alpha.712` after `alpha.1046`, which is wrong. See `sortBySince`.
  */
 export const readCatalog = (): MigrationEntry[] =>
   readdirSync(migrationsDir)

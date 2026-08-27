@@ -322,3 +322,4 @@ where the error points.
 | Design tokens                               | [packages/design-tokens/AGENTS.md](packages/design-tokens/AGENTS.md)                    |
 | Styleguide content authoring                | [apps/docs/AGENTS.md](apps/docs/AGENTS.md) → [apps/docs/README.md](apps/docs/README.md) |
 | Remote demo app                             | [apps/remote-dom-demo/AGENTS.md](apps/remote-dom-demo/AGENTS.md)                        |
+| Historical implementation plans             | `docs/superpowers/plans/` — superseded once merged; ADRs are the authority              |
