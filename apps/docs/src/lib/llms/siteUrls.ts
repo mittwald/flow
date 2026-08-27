@@ -10,3 +10,9 @@ export const rawMarkdownPath = (segments: string[]): string =>
 
 export const absoluteUrl = (relativePath: string): string =>
   `${SITE_URL}${relativePath}`;
+
+export const claudePromptUrl = (prompt: string): string =>
+  `https://claude.ai/new?q=${encodeURIComponent(prompt)}`;
+
+export const chatGptPromptUrl = (prompt: string): string =>
+  `https://chatgpt.com/?hints=search&q=${encodeURIComponent(prompt)}`;
