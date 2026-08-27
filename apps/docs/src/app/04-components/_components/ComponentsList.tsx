@@ -8,6 +8,8 @@ export interface ComponentLink {
   group: string;
   slug: string;
   name: string;
+  /** Component display name, for the status registry lookup. */
+  component?: string;
   description?: string;
   href: string;
 }

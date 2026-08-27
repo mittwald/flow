@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { Heading, Text } from "@mittwald/flow-react-components";
 import type { ComponentLink } from "@/app/04-components/_components/ComponentsList";
 import { getWireframe } from "@/app/04-components/_components/wireframe/registry";
+import { ComponentStatusBadge } from "@/lib/componentStatus";
 import styles from "./ComponentCard.module.scss";
 
 interface Props {
@@ -15,6 +16,12 @@ export const ComponentCard: FC<Props> = (props) => {
 
   return (
     <div className={styles.card}>
+      {component.component && (
+        <ComponentStatusBadge
+          name={component.component}
+          className={styles.badge}
+        />
+      )}
       <div className={styles.media} aria-hidden>
         <Wireframe />
       </div>
