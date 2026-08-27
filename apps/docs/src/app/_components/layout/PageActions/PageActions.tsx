@@ -8,6 +8,7 @@ import {
   ContextMenuTrigger,
   ActionGroup,
   Icon,
+  Text,
   IconContextMenuVertical,
   IconCopy,
   IconExternalLink,
@@ -58,10 +59,10 @@ export const PageActions: FC<Props> = (props) => {
   const prompt = `Lies ${absoluteUrl(markdownUrl)} und beantworte mir anschließend Fragen zu „${title}“ aus der Dokumentation des mittwald Design Systems Flow.`;
 
   return (
-    <ActionGroup preserveOrder>
+    <ActionGroup>
       <Action onAction={() => copyMarkdown(markdownUrl)}>
         <Button size="s" variant="outline" color="secondary">
-          Seite kopieren
+          <Text>Seite kopieren</Text>
           <IconCopy />
         </Button>
       </Action>
@@ -77,26 +78,26 @@ export const PageActions: FC<Props> = (props) => {
         <ContextMenu placement="bottom right">
           <MenuItem href={markdownUrl} target="_blank">
             <IconExternalLink />
-            Markdowndatei öffnen
+            <Text>Markdowndatei öffnen</Text>
           </MenuItem>
           <MenuItem href={claudePromptUrl(prompt)} target="_blank">
             <Icon>
               <IconBrandClaude />
             </Icon>
-            In Claude öffnen
+            <Text>In Claude öffnen</Text>
           </MenuItem>
           <MenuItem href={chatGptPromptUrl(prompt)} target="_blank">
             <Icon>
               <IconBrandChatGpt />
             </Icon>
-            In ChatGPT öffnen
+            <Text>In ChatGPT öffnen</Text>
           </MenuItem>
           {gitHubUrl && (
             <MenuItem href={gitHubUrl} target="_blank">
               <Icon>
                 <IconBrandGithub />
               </Icon>
-              Quellcode anzeigen
+              <Text>Quellcode anzeigen</Text>
             </MenuItem>
           )}
         </ContextMenu>
