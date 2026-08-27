@@ -65,8 +65,20 @@ export const runSingleCodemod = async (
     return 1;
   }
 
+  // The same trap as `processedNothing`, one field over: a transform that
+  // declines a file by returning nothing counts as `skipped`, not `unmodified`.
+  // If every file was skipped and none changed, "0 file(s) changed" would read
+  // as a clean no-op run when in fact the transform bailed on everything.
+  if (result.changed === 0 && result.skipped > 0) {
+    log(
+      `${id}: the transform declined all ${result.skipped} file(s) it looked at, and changed none.`,
+    );
+    return 1;
+  }
+
+  const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
   log(
-    `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged.\nverify: ${entry.verify}`,
+    `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.\nverify: ${entry.verify}`,
   );
   return 0;
 };
