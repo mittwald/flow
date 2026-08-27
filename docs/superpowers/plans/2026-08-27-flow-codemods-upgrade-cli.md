@@ -2079,6 +2079,17 @@ describe("resolveTarget", () => {
   test("a stale dist-tag resolves downwards — the caller has to reject it", () => {
     expect(resolve("experimental")).toBe("0.2.0-experimental.776");
   });
+
+  // The shape most real consumers are on: this project published 983
+  // `0.2.0-alpha.*` releases and no stable `0.2.0` at all.
+  test("patch and minor from a prerelease current find no stable target", () => {
+    expect(resolve("patch", "0.2.0-alpha.646")).toBeUndefined();
+    expect(resolve("minor", "0.2.0-alpha.646")).toBeUndefined();
+  });
+
+  test("major from a prerelease current reaches the stable line", () => {
+    expect(resolve("major", "0.2.0-alpha.646")).toBe("2.1.0");
+  });
 });
 ```
 
@@ -2138,9 +2149,13 @@ const keywordRange = (
  * It does **not** judge whether the result is an upgrade; the caller compares
  * against `current` and refuses a sideways or downward move.
  *
- * Keyword resolution deliberately skips prereleases. Only an explicit dist-tag
- * or an exact version reaches a `-next.N`, so `upgrade minor` on the stable
- * line never drifts onto the collection branch.
+ * Keyword resolution skips prereleases. The `prerelease(...) === null` filter is
+ * defence in depth rather than the mechanism: none of the ranges built here
+ * embeds a prerelease tag, and node-semver only matches a prerelease when a
+ * comparator carries a matching one — so `satisfies` already excludes them. The
+ * filter keeps that true if a range shape or an option ever changes. Only an
+ * explicit dist-tag or an exact version reaches a `-next.N`, so `upgrade minor`
+ * on the stable line never drifts onto the collection branch.
  */
 export const resolveTarget = ({
   revision,
@@ -2202,17 +2217,28 @@ const registry = "https://registry.npmjs.org";
 export const fetchVersions = async (
   packageName: string,
 ): Promise<RegistryVersions> => {
-  const response = await fetch(`${registry}/${packageName}`, {
-    headers: { accept: "application/vnd.npm.install-v1+json" },
-  });
+  // One wrapper for every failure, not just the HTTP one: `fetch` itself rejects
+  // on DNS failure or no connection, and `json()` rejects on a malformed body.
+  // Without this those surface as a bare "fetch failed", which says nothing
+  // about what the CLI was trying to do.
+  let packument: Packument;
+  try {
+    const response = await fetch(`${registry}/${packageName}`, {
+      headers: { accept: "application/vnd.npm.install-v1+json" },
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      throw new Error(`the registry answered ${response.status}`);
+    }
+
+    packument = (await response.json()) as Packument;
+  } catch (error) {
     throw new Error(
-      `Could not read ${packageName} from the npm registry (${response.status}).`,
+      `Could not read ${packageName} from the npm registry: ${
+        error instanceof Error ? error.message : error
+      }`,
     );
   }
-
-  const packument = (await response.json()) as Packument;
 
   return {
     versions: Object.keys(packument.versions ?? {}),
