@@ -27,6 +27,8 @@
     }
   },
   "files": [
+    "MIGRATION.md",
+    "USAGE.md",
     "dist"
   ],
   "engines": {
