@@ -149,9 +149,31 @@
   padding: var(--size-px--l) var(--size-px--l) var(--size-px--m);
 }
 
-/* Without pointer capture a drag would otherwise select text on the way. */
 .dragging {
+  /* Without pointer capture a drag would otherwise select text on the way. */
   user-select: none;
+
+  /*
+   * React Aria drops the pressed state as soon as the pointer leaves the
+   * handle, so the background flickered while dragging. Retints the Button
+   * through its own tokens rather than outspecifying its rules. Both families
+   * are set because Button's `@extend .primary` widens the primary rule to
+   * every plain button, whatever its color.
+   */
+  .resizeHandle {
+    --button--primary-plain-background-color--default: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--primary-plain-background-color--hover: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--secondary-plain-background-color--default: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--secondary-plain-background-color--hover: var(
+      --button--secondary-plain-background-color--pressed
+    );
+  }
 }
 
 .resizeFrame {
