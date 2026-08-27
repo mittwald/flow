@@ -1,28 +1,23 @@
 import {
   ColumnLayout,
-  Text,
+  Heading,
   Image,
   Section,
-  Heading,
+  Text,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout s={[1, null]} m={[2, 1]} l={[5, 1]}>
+<ColumnLayout s={[1, null]} m={[2, 1]} l={[4, 1]}>
   <Section>
-    <Heading>Lorem ipsum dolor sit amet</Heading>
+    <Heading>mStudio entdecken</Heading>
     <Text>
-      Lorem ipsum dolor sit amet consectetur adipisicing
-      elit. Cumque eius quam quas vel voluptas, ullam
-      aliquid fugit. Voluptate harum accusantium rerum ullam
-      modi blanditiis vitae, laborum ea tempore, dolore
-      voluptas. Earum pariatur, similique corrupti id
-      officia perferendis. Labore, similique. Earum, quas
-      in. At dolorem corrupti blanditiis nulla deserunt
-      laborum! Corrupti delectus aspernatur nihil nulla
-      obcaecati ipsam porro sequi rem? Quam.
+      Du willst das Beste aus deinen Projekten herausholen?
+      Unsere Wissensdatenbank hilft dir dabei, das mStudio
+      und seine Möglichkeiten besser kennenzulernen.
     </Text>
   </Section>
   <Image
     src="https://flow.mittwald.de/assets/mittwald_logo_rgb.jpg"
     alt="mittwald"
+    withBorder
   />
 </ColumnLayout>;
