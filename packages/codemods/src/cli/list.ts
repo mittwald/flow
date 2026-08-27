@@ -49,10 +49,21 @@ export const renderList = ({
   to,
   json,
 }: RenderListInput): string => {
+  // The two paths differ in more than their bounds, deliberately: `sortBySince`
+  // keeps `kind: "tool"` entries, `selectEntries` drops them. Unbounded, this is
+  // a catalogue browser, and browsing is how someone finds the codemod that
+  // ports an app between packages. Bounded, it answers "what does this version
+  // range require of me" — and a port is never required by a version range. Do
+  // not unify these.
+  //
+  // `0.0.0-0` rather than `0.0.0` as the lower sentinel: the gate's
+  // `current < since` is strict, so `0.0.0` would hide an entry whose `since` is
+  // exactly `0.0.0`. A prerelease of `0` sorts below every published version.
+  // (`0.0.0-0.0` is lower still; nothing publishes that.)
   const selected =
     from === undefined && to === undefined
       ? sortBySince(entries)
-      : selectEntries(entries, from ?? "0.0.0", to ?? "9999.0.0");
+      : selectEntries(entries, from ?? "0.0.0-0", to ?? "9999.0.0");
 
   if (json) {
     return JSON.stringify(selected, null, 2);

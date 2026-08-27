@@ -79,3 +79,34 @@ describe("renderList without bounds", () => {
     expect(parsed).toHaveLength(3);
   });
 });
+
+// The subtlest behaviour here, and the one a later reader is most likely to
+// "simplify" away.
+describe("tools are browsable but never required", () => {
+  const withTool = [
+    ...entries,
+    { ...entry("port-it", "1.0.0", "codemod"), kind: "tool" as const },
+  ];
+
+  test("an unbounded list includes a tool", () => {
+    const parsed = JSON.parse(
+      renderList({ entries: withTool, json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).toContain("port-it");
+  });
+
+  test("a bounded list never includes a tool", () => {
+    const parsed = JSON.parse(
+      renderList({ entries: withTool, from: "0.9.0", to: "2.0.0", json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).not.toContain("port-it");
+  });
+
+  test("a lower bound of none still reaches the oldest entry", () => {
+    const oldest = [entry("ancient", "0.0.0", "manual")];
+    const parsed = JSON.parse(
+      renderList({ entries: oldest, to: "1.0.0", json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).toEqual(["ancient"]);
+  });
+});
