@@ -43,10 +43,6 @@ const minWidth = 280;
 /** Container width a single arrow key press adds or removes. */
 const keyStep = 20;
 
-/** Mirrors the container query breakpoints of ColumnLayout. */
-const getBreakpoint = (width: number) =>
-  width <= 550 ? "s" : width <= 850 ? "m" : "l";
-
 interface Metrics {
   /** Width the preview and the handle share, excluding the track's padding. */
   track: number;
@@ -172,13 +168,13 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
     draggingRef.current = true;
     // Keeps the moves coming while the pointer leaves the narrow handle.
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
-  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
     const preview = trackRef.current?.firstElementChild;
 
     if (!draggingRef.current || !preview || !metrics) {
@@ -196,7 +192,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     draggingRef.current = false;
   };
 
-  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (containerWidth === null || maxWidth === null) {
       return;
     }
@@ -248,35 +244,25 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         )}
       >
         {resizable ? (
-          <>
-            <div className={styles.resizeTrack} ref={trackRef}>
-              {preview}
-              <div
-                className={styles.resizeHandle}
-                role="separator"
-                aria-orientation="vertical"
-                aria-label="Breite des Containers in Pixel"
-                aria-valuenow={containerWidth ?? undefined}
-                aria-valuemin={minWidth}
-                aria-valuemax={maxWidth ?? undefined}
-                tabIndex={0}
-                onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={onPointerUp}
-                onPointerCancel={onPointerUp}
-                onKeyDown={onKeyDown}
-              >
-                <IconArrowBarBoth size={20} aria-hidden />
-              </div>
-            </div>
-            <p className={styles.widthReadout}>
-              {containerWidth ? (
-                <>
-                  Breakpoint <code>{getBreakpoint(containerWidth)}</code>
-                </>
-              ) : null}
-            </p>
-          </>
+          <div className={styles.resizeTrack} ref={trackRef}>
+            {preview}
+            <Button
+              className={styles.resizeHandle}
+              variant="plain"
+              color="secondary"
+              size="s"
+              aria-label={`Breite des Containers${
+                containerWidth ? `: ${containerWidth} Pixel` : ""
+              }`}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
+              onKeyDown={onKeyDown}
+            >
+              <IconArrowBarBoth size={20} aria-hidden />
+            </Button>
+          </div>
         ) : (
           preview
         )}

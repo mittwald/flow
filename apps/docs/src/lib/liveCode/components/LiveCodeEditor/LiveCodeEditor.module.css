@@ -187,11 +187,3 @@
     outline-offset: var(--focus--outline-offset);
   }
 }
-
-.widthReadout {
-  margin: 0;
-  padding-inline: var(--size-px--l);
-  padding-block-end: var(--size-px--m);
-  color: var(--neutral--color--800);
-  font-size: var(--font-size-text--s);
-}
