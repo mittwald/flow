@@ -25,6 +25,9 @@ if (typeof lerna.version !== "string") {
   process.exit(2);
 }
 
+// A git pathspec wildcard matches across `/` (fnmatch without FNM_PATHNAME),
+// so `*package.json` finds every manifest at any depth, not just the root one.
+// The `endsWith` below then drops the root manifest, which is not a package.
 const manifests = execFileSync("git", ["ls-files", "*package.json"], {
   encoding: "utf8",
   maxBuffer: 64 * 1024 * 1024,
