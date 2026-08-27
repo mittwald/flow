@@ -450,8 +450,9 @@ and consistency enforced by tooling, not maintained by hand.
   colors/sizes/radii. `src/components/Button/Button.module.scss:8`
   - ✓ colors/spacing/type/radii/shadow/size.
   - ✗ a structural CSS keyword or genuine calculation → CSS directly.
-  - `rem` vs `px`: see [design-tokens/AGENTS.md](../design-tokens/AGENTS.md) —
-    text-proportional spacing/sizing → `size-rem`, fixed values → `size-px`.
+  - `rem` vs `px`: see
+    [design-tokens/AGENTS.md](https://github.com/mittwald/flow/blob/main/packages/design-tokens/AGENTS.md)
+    — text-proportional spacing/sizing → `size-rem`, fixed values → `size-px`.
 - **No invented base values** — compose existing tokens; add component tokens
   only with a design.
   - ✓ values composed from approved tokens.
@@ -525,7 +526,7 @@ and consistency enforced by tooling, not maintained by hand.
   - Mark the whole override block, not single declarations — a dependency can
     add a colliding declaration in any patch release.
   - Rationale and build mechanics:
-    [ADR 0001, Amendment 2026-08-05](../../docs/adr/0001-css-cascade-layers-in-the-stylesheet.md#amendment-2026-08-05--unlayered-escape-hatch-for-third-party-css).
+    [ADR 0001, Amendment 2026-08-05](https://github.com/mittwald/flow/blob/main/docs/adr/0001-css-cascade-layers-in-the-stylesheet.md#amendment-2026-08-05--unlayered-escape-hatch-for-third-party-css).
 - **Global `.flow--…` descendant selectors** `[undocumented]` — coordinate
   independently rendered descendants.
   `src/components/LayoutCard/LayoutCard.module.scss:16`

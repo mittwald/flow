@@ -141,8 +141,8 @@ These two statements are a launch requirement for the 1.0.0 docs, not optional.
   `BREAKING CHANGE`). This would have caught the `>=24` floor bump that shipped
   as a `fix` in #2728. Composes with the RFC #2711 routing guard.
   **Implemented** in #2752 (`.github/scripts/version-contract-guard.mjs`, wired
-  into `commit-guard.yml`); currently dormant until the `next` branch exists
-  (pre-1.0.0-cut).
+  into `commit-guard.yml`); live on both standing lines since the 1.0.0 cut —
+  the pre-cut dormancy guard was dropped in #2938.
 - The **one-time API review** of the ~110 `public.ts` exports + `flr-universal`
   props before the cut (RFC #2711, "The 1.0.0 cut") — the last cheap chance to
   fix names/props/types before they go under this contract.

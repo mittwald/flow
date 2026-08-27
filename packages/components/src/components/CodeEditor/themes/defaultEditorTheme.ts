@@ -10,6 +10,7 @@ export const defaultLightTheme = githubLightInit({
     background: "transparent",
     gutterBackground: "var(--form-control--background-color--default)",
     gutterForeground: "var(--form-control--content-color--default)",
+    gutterBorder: "var(--code-editor--gutter-separator-color)",
   },
   styles: [
     { tag: t.keyword, color: "var(--color--code-syntax--keyword)" },

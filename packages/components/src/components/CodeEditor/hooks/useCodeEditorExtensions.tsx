@@ -7,6 +7,19 @@ import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import { foldGutter } from "@codemirror/language";
 import { gutterSpacer } from "@/components/CodeEditor/extensions/gutterSpacer";
 
+/*
+ * Every slot gets the same color: the library picks between its light and dark
+ * one by CodeMirror's dark theme flag, which Flow's theme never sets, and the
+ * active block needs no color of its own.
+ */
+const markerColor = "var(--code-editor--indentation-marker-color)";
+const indentationMarkerColors = {
+  light: markerColor,
+  dark: markerColor,
+  activeLight: markerColor,
+  activeDark: markerColor,
+};
+
 /** @internal */
 export interface CodeEditorSetup {
   /**
@@ -84,7 +97,7 @@ export const useCodeEditorExtensions = (
   }
 
   if (options.showCodeIndentationMakers) {
-    extensions.push(indentationMarkers());
+    extensions.push(indentationMarkers({ colors: indentationMarkerColors }));
   }
 
   if (language) {
