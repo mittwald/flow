@@ -921,9 +921,12 @@ const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
 const requiredStrings = ["since", "title", "kind", "action", "apply", "verify"];
 
 const parseEntry = (file: string, source: string): MigrationEntry => {
-  const fail = (message: string): never => {
+  // A function declaration, not an arrow: only that form narrows control flow
+  // after the call, so the checks below do not need a redundant `throw`. The
+  // bundler this package used to ship had the same note for the same reason.
+  function fail(message: string): never {
     throw new Error(`${basename(file)}: ${message}`);
-  };
+  }
 
   const match = frontmatterPattern.exec(source);
   if (!match) {
@@ -988,7 +991,7 @@ title: Align renamed to Combine
 kind: migration
 action: codemod
 remotePackage: true
-detect: rg -t ts -t tsx '\bAlign(Props)?\b'
+detect: rg -t ts '\bAlign(Props)?\b'
 apply:
   Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for named,
   aliased and namespace imports from a Flow package.
@@ -1083,8 +1086,13 @@ const target = fileURLToPath(
  * catalogue, and the CLI never prints it. `list` shows `apply` and `verify`.
  */
 export const generateMigrationsModule = async (): Promise<void> => {
+  // The `id` tie-break is not decoration: several releases carry two entries
+  // (`0.2.0-alpha.646`, `.846` and `.1005` each have two), and without it their
+  // order falls back to `readdirSync`, whose order Node does not guarantee
+  // across platforms. The generated file would then differ between machines and
+  // fail CI's `git diff --exit-code`.
   const entries = readCatalog()
-    .toSorted((a, b) => rcompare(a.since, b.since))
+    .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id))
     .map(({ body: _body, ...rest }) => rest);
 
   const source = [
@@ -1189,8 +1197,9 @@ bidirectional — `catalog.test.ts`'s `action: codemod` ⟺ transform-file check
 and `remoteScope.test.ts`'s "every transform is listed" — so neither authoring
 the entries first nor renaming the transforms first is green on its own. The
 maintainer decided to accept the red commit here rather than merge this task
-with Task 4. Expect exactly seven failures at Step 10, all of them
-`flowAlpha*`-transform-name mismatches, and no others. Task 4 makes it green.
+with Task 4. Expect exactly **eight** failures at Step 10 — the seven
+`flowAlpha*` transforms plus `flow020.ts`, whose catalogue id is
+`imports-to-package-root`. No others. Task 4 makes it green.
 
 **The catalogue has 22 entries**, derived from the current guide: 21 `###`
 headings, minus `Use Codemod` and `Do it manually` (which are subsections of the
@@ -1221,7 +1230,7 @@ Full mapping — author one file per row as `src/migrations/<id>.md`:
 | `cartesian-chart-empty-view`                  | `0.2.0-alpha.676`  | CartesianChart.emptyView changed                                                                                   | migration   | manual  |
 | `action-prop-to-on-action`                    | `0.2.0-alpha.646`  | Action: `action` renamed to `onAction`                                                                             | migration   | codemod |
 | `button-props-interfaces`                     | `0.2.0-alpha.646`  | Removed ResetButton and SubmitButton Interfaces                                                                    | migration   | codemod |
-| `imports-to-package-root`                     | `0.2.0`            | From version 0.1.0 to version 0.2.0                                                                                | migration   | codemod |
+| `imports-to-package-root`                     | `0.2.0-alpha.28`   | From version 0.1.0 to version 0.2.0                                                                                | migration   | codemod |
 | `renamed-css-export`                          | `0.1.0-alpha.292`  | Renamed CSS export                                                                                                 | migration   | manual  |
 
 Notes that are easy to get wrong:
@@ -1231,6 +1240,16 @@ Notes that are easy to get wrong:
   current guide lists the CartesianChart section first. The guide's order is
   correct today because sections are ordered by their _from_ bound; the
   catalogue orders by `since`. Do not "fix" the resulting reordering.
+- **`imports-to-package-root`'s `since` is `0.2.0-alpha.28`, not `0.2.0`.** The
+  guide's heading says "From version 0.1.0 to version 0.2.0", but **neither
+  `0.1.0` nor `0.2.0` was ever published** — the only stable releases are
+  `1.0.0` and up; everything before was a prerelease. Those headings name
+  _lines_, not versions. Writing `0.2.0` is wrong twice over: semver puts
+  `0.2.0` _above_ every `0.2.0-alpha.*`, so the oldest migration would sort as
+  the newest, and the gate would stop selecting the alpha migrations for anyone
+  coming from the `0.1.0` line. `alpha.28` is where the subpath exports actually
+  collapsed onto the package root — `alpha.27` still publishes 94 subpath
+  entries, `alpha.28` publishes the 7 flat ones.
 - **`kind: deprecation` for two entries only** — `segmented-control-deprecated`
   and `flags-to-component-defaults-provider`. Both old paths still work and warn
   via `useWarnDeprecation`. Everything else removed something.
@@ -1253,6 +1272,13 @@ One `src/migrations/<id>.md` per row, in the frontmatter shape from Task 2
 Step 5. Every entry needs `detect`, `apply` and `verify` filled with something
 true — these are what an agent acts on.
 
+**Run every `detect` command you write before committing it.** A command that
+errors matches nothing, which is the worst failure this schema has: an agent
+concludes the migration does not apply. One real example, caught in review of
+Task 2: `rg -t ts -t tsx …` fails with `unrecognized file type: tsx` — ripgrep
+has no `tsx` type, because `ts` already covers `*.ts`, `*.tsx`, `*.cts` and
+`*.mts`. Use `rg -t ts` alone.
+
 For `action: manual` entries, `verify` is usually `tsc --noEmit passes` plus a
 `rg` that finds nothing, because every one of these is type-visible. For
 `action: none`, omit `detect` and say so in `apply`, for example:
@@ -1268,10 +1294,10 @@ verify: Nothing to verify — the change is in Flow's own behaviour.
 
 Run:
 `cd packages/codemods && corepack pnpm vitest run src/tests/catalog.test.ts`
-Expected: FAIL on `action codemod means a transform exists` for the seven
-transforms still carrying `flowAlpha*` names. That failure is Task 4's job — for
-now confirm the failure list is exactly those seven ids and nothing else, which
-proves every other entry is consistent.
+Expected: FAIL on `action codemod means a transform exists` for the eight
+transforms still carrying their old names (seven `flowAlpha*` plus `flow020`).
+That failure is Task 4's job — for now confirm the failure list is exactly those
+seven ids and nothing else, which proves every other entry is consistent.
 
 - [ ] **Step 3: Point `remoteScope.test.ts` at the catalogue**
 
@@ -1402,9 +1428,12 @@ const renderEntry = (entry: MigrationEntry): string => {
 
 /** The guide as source, so a test can compare without writing anything. */
 export const renderMigrationGuide = async (): Promise<string> => {
+  // No `kind` filter yet: `"tool"` does not exist until Task 4, which adds it
+  // together with the filter that excludes it from the guide.
   const entries = readCatalog()
-    .filter((entry) => entry.kind !== "tool")
-    .toSorted((a, b) => rcompare(a.since, b.since));
+    // Same `id` tie-break as the generated module, and for the same reason:
+    // duplicate `since` values would otherwise order by directory listing.
+    .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id));
 
   const markdown = [intro, ...entries.map(renderEntry)].join("\n---\n\n");
 
@@ -1486,8 +1515,8 @@ describe("the docs site and the catalogue agree", () => {
 
 Run:
 `pnpm nx build codemods && pnpm nx test:unit codemods && pnpm nx test:compile codemods`
-Expected: only the seven `flowAlpha*` transform-name failures from Step 2
-remain. Everything else passes.
+Expected: only the eight transform-name failures from Step 2 remain. Everything
+else passes.
 
 - [ ] **Step 11: Commit**
 
@@ -1686,8 +1715,20 @@ npx @mittwald/flow-codemods@latest to-remote-package src
 ```
 ````
 
-`kind: "tool"` keeps it out of `renderMigrationGuide` (already filtered in Task
-3 Step 6) and out of the gate in Task 5.
+**Now add the filter that uses it.** Task 3 could not write this, because
+`"tool"` did not exist as a `MigrationKind` yet. In
+`dev/generate/migrationGuide.ts`, restore the filter ahead of the sort:
+
+```ts
+const entries = readCatalog()
+  .filter((entry) => entry.kind !== "tool")
+  .toSorted((a, b) => rcompare(a.since, b.since) || a.id.localeCompare(b.id));
+```
+
+Without it, a codemod that ports an app between packages appears in the consumer
+migration guide as though it were a migration. Regenerate afterwards and confirm
+`to-remote-package` shows up in neither `MIGRATION.md` nor any bounded `list`
+output — `kind: "tool"` also keeps it out of the gate in Task 5.
 
 - [ ] **Step 5: Build and run everything**
 
@@ -1858,7 +1899,9 @@ import type { CatalogEntry } from "./entries";
  * them.
  */
 export const sortBySince = (entries: CatalogEntry[]): CatalogEntry[] =>
-  entries.toSorted((a, b) => compare(a.since, b.since));
+  entries.toSorted(
+    (a, b) => compare(a.since, b.since) || a.id.localeCompare(b.id),
+  );
 
 /**
  * The entries that a move from `current` to `target` calls for.
