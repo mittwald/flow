@@ -23,11 +23,6 @@ export interface RatingProps
   value?: number;
   /** The defaultValue sets the amount of default filled stars. @default: 0 */
   defaultValue?: number;
-  /**
-   * Called with the selected value as a number. `onChange` reports the same
-   * selection as the string React Aria hands out.
-   */
-  onValueChange?: (value: number) => void;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
   /**
@@ -60,8 +55,6 @@ export const Rating = flowComponent("Rating", (props) => {
   const {
     value,
     defaultValue,
-    onChange,
-    onValueChange,
     size = "m",
     maxValue = 5,
     fill = "cumulative",
@@ -112,10 +105,6 @@ export const Rating = flowComponent("Rating", (props) => {
       className={rootClassName}
       value={value?.toString()}
       defaultValue={defaultValue?.toString()}
-      onChange={(newValue) => {
-        onChange?.(newValue);
-        onValueChange?.(parseInt(newValue));
-      }}
       ref={localRef}
     >
       <FieldErrorCaptureContext>

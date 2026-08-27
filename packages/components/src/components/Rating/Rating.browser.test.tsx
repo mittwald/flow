@@ -1,4 +1,4 @@
-import { expect, test, vi } from "vitest";
+import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { useForm } from "react-hook-form";
@@ -125,22 +125,4 @@ test("a value set on the form reaches the rating", async () => {
   await page.getByRole("button", { name: "Set to 4" }).click();
 
   await expect.poll(selectedValue).toBe("4");
-});
-
-test("a click reports the value as a number and as a string", async () => {
-  const onValueChange = vi.fn();
-  const onChange = vi.fn();
-
-  await render(
-    <Rating
-      aria-label="Rating"
-      onValueChange={onValueChange}
-      onChange={onChange}
-    />,
-  );
-
-  await page.getByLocator("label:has(input[value='3'])").click();
-
-  expect(onValueChange).toHaveBeenCalledWith(3);
-  expect(onChange).toHaveBeenCalledWith("3");
 });

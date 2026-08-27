@@ -64,7 +64,7 @@ export const WithControlledValue: Story = {
     const [value, setValue] = useState(4);
 
     return (
-      <Rating {...props} value={value} onValueChange={setValue}>
+      <Rating {...props} value={value} onChange={(v) => setValue(parseInt(v))}>
         <Label>Cantina rating</Label>
       </Rating>
     );
