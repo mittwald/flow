@@ -3933,7 +3933,23 @@ git commit -m "chore(codemods): wire the generators into nx"
 - Consumes: everything.
 - Produces: nothing code depends on.
 
-- [ ] **Step 1: Rewrite `packages/codemods/AGENTS.md`**
+- [ ] **Step 1: Finish `packages/codemods/AGENTS.md`**
+
+**It is already partly rewritten.** Task 4 replaced most of it while removing the
+retired URL invocations, which was out of its scope but not wrong — the file also
+still described `src/composites`, `flow1.ts`, the bundler and
+`standalone.test.ts`, none of which exist. What is there now is accurate. Review
+confirmed exactly two gaps against the draft below, so reconcile rather than
+rewrite from scratch:
+
+1. **The `## Layout` table was deleted and never replaced** — the file has no
+   directory map at all now.
+2. **The shared-imports caveat is missing.** Transforms no longer have to be
+   self-contained, so one may import shared code; but `package.json` ships
+   `"files": ["*.md", "dist", "src"]`, so anything a transform imports must stay
+   inside `src`.
+
+Read the current file first, then add what is missing from the draft.
 
 Remove the section "The one rule: a transform must run standalone" in full — the
 constraint is gone. Replace the `Layout` and `Adding a transform` sections:
