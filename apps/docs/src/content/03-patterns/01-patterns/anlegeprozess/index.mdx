@@ -18,9 +18,8 @@ in einem Modal platziert.
   können vom User später auf der Detailseite angepasst werden.
 - Gliedere komplizierte Prozesse in
   [Sections](/04-components/structure/section), um die Übersicht zu erhalten.
-  Jede Section kann über die
-  [SectionAction](/04-components/structure/section#sectionaction) Teilprozesse
-  ansteuern.
+  Jede Section kann über ihre
+  [Actions](/04-components/structure/section#actions) Teilprozesse ansteuern.
 - Nutze die [IllustratedMessage](/04-components/content/illustrated-message),
   wenn noch keine Inhalte existieren.
 
@@ -72,10 +71,9 @@ anlegen.
 ## Komplexe Prozesse
 
 Umfangreiche Anlege- oder Bearbeitungsprozesse werden in einzelne
-[Sections](/04-components/structure/section) gegliedert. In jeder Section kann
-die [SectionAction](/04-components/structure/section#sectionaction) genutzt
-werden. Damit kann der User Teilprozesse direkt innerhalb des Gesamtprozesses
-erledigen.
+[Sections](/04-components/structure/section) gegliedert. In jeder Section können
+die [Actions](/04-components/structure/section#actions) genutzt werden. Damit
+kann der User Teilprozesse direkt innerhalb des Gesamtprozesses erledigen.
 
 **Beispiel**: Das Anlegen eines Containers ist ein umfangreicher Prozess.
 Sections im OffCanvas sorgen dafür, dass der Ablauf trotzdem strukturiert und
@@ -159,14 +157,14 @@ zur Verfügung stehenden Optionen übersichtlich darzustellen.
 Angelegte Elemente verfügen meist über eine Detailseite. Diese kann aus mehreren
 [Sections](/04-components/structure/section) (vgl.
 [Content strukturieren](/03-patterns/01-patterns/detail-page)) bestehen.
-Innerhalb einer Section kann über die
-[SectionAction](/04-components/structure/section#sectionaction) ein
+Innerhalb einer Section kann im
+[Actions](/04-components/structure/section#actions)-Bereich ein
 „Bearbeiten“-[Button](/04-components/actions/button) platziert werden, mit dem
 der User Inhalte direkt dort ändern kann, wo sie angezeigt werden.
 
 **Beispiel**: Die Detailseite einer App ist in mehrere Sections aufgeteilt. Jede
 Section stellt Informationen oder Konfigurationen zu einem bestimmten Inhalt
-dar. Über die SectionAction lassen sich die angezeigten Inhalte bearbeiten oder
-neue Prozesse starten.
+dar. Über die Actions lassen sich die angezeigten Inhalte bearbeiten oder neue
+Prozesse starten.
 
 <LiveCodeEditor example="app-details" editorCollapsed bgColor="mstudio" />
