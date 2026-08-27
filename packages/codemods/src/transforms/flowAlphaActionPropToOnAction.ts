@@ -6,8 +6,10 @@ import type { Transform } from "jscodeshift";
  * The scope is deliberately narrow. Only JSX elements that resolve to `Action`
  * — imported (named or as a namespace) from `@mittwald/flow-react-components`
  * or `@mittwald/flow-remote-react-components`, including their subpath entries
- * — are touched. Same-named components from other packages are left untouched,
- * and so is the `action` attribute of a plain `<form>`.
+ * — are touched. `Action` is not one of the generated remote components, but
+ * the remote package re-exports the `flr-universal` surface, which carries it.
+ * Same-named components from other packages are left untouched, and so is the
+ * `action` attribute of a plain `<form>`.
  *
  * An element that already carries `onAction` keeps it and only loses the stale
  * `action` prop, which mirrors what the runtime fallback does: an explicit

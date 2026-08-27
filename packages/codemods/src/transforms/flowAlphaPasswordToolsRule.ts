@@ -1,28 +1,35 @@
 import type { Transform } from "jscodeshift";
 
 /**
- * Renames the `Align` component to `Combine`, and `AlignProps` to
- * `CombineProps`.
+ * Replaces `AsyncRule` and `SyncRule` with `Rule` (alpha.802).
  *
- * Only names imported from `@mittwald/flow-react-components` or
- * `@mittwald/flow-remote-react-components` (including their subpath entries)
- * are touched, so a same-named import from another package is left alone. An
- * `Align` imported under a local alias (`import { Align as Row }`) keeps its
- * alias — only the imported name changes. Namespace usages (`<Flow.Align />`,
- * `Flow.AlignProps`) are rewritten as well.
+ * `@mittwald/password-tools-js` merged both classes into a single abstract
+ * `Rule`, and the `mittwald-password-tools-js` entry stopped re-exporting the
+ * old names. A custom rule extends `Rule` and may return its result
+ * synchronously or as a promise — the distinction the two classes encoded is
+ * gone, so both names collapse onto the same one.
+ *
+ * Only names imported from the `mittwald-password-tools-js` entry of
+ * `@mittwald/flow-react-components` are touched, so a same-named import from
+ * another package is left alone. `@mittwald/flow-remote-react-components` has
+ * no such entry. A name imported under a local alias (`import { AsyncRule as
+ * Base }`) keeps its alias — only the imported name changes. Namespace usages
+ * (`Pw.AsyncRule`) are rewritten as well.
+ *
+ * Because both names collapse onto `Rule`, a file importing more than one of
+ * them would end up with a duplicate specifier. Those collapse onto one.
  */
-const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
+const flowAlphaPasswordToolsRuleTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
-    "@mittwald/flow-react-components",
-    "@mittwald/flow-remote-react-components",
+    "@mittwald/flow-react-components/mittwald-password-tools-js",
   ];
   const renames = new Map([
-    ["Align", "Combine"],
-    ["AlignProps", "CombineProps"],
+    ["AsyncRule", "Rule"],
+    ["SyncRule", "Rule"],
   ]);
 
   const isFlowImport = (source: string): boolean =>
-    flowPackages.some((pkg) => source === pkg || source.startsWith(`${pkg}/`));
+    flowPackages.includes(source);
 
   // ast-types models `importKind` on the declaration only, while babel also
   // puts it on the specifier — which is where a per-specifier `type X` lives.
@@ -209,4 +216,4 @@ const flowAlphaAlignToCombineTransform: Transform = (fileInfo, { j }) => {
   return root.toSource();
 };
 
-export default flowAlphaAlignToCombineTransform;
+export default flowAlphaPasswordToolsRuleTransform;

@@ -3,12 +3,12 @@
 Entries are sorted by version, newest first. Find the version you are coming
 from and work your way up.
 
-Catching up across many versions? One codemod runs every `0.2.0-alpha` migration
-transform, in the order the changes were released:
+Catching up across many versions? One codemod runs every migration transform on
+the way to `1.0.0`, in the order the changes were released:
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow1.ts \
   --parser tsx \
   src
 ```
@@ -16,10 +16,10 @@ npx jscodeshift \
 Replace `src` with your sources folder. It changes files in place — run it on a
 clean git state and review the diff afterwards.
 
-The entries below still name their individual codemod, so you can apply a single
-change on its own. Everything without a codemod has to be done by hand, and the
-`0.1.0` → `0.2.0` codemod is not part of `flowAlphaAll` — run that one
-separately, and only when coming from `0.1.0`.
+It is not the whole migration: most entries below have no codemod and have to be
+done by hand. They each name their individual codemod where one exists, so you
+can also apply a single change on its own. The `0.1.0` → `0.2.0` codemod is not
+part of `flow1` — run that one separately, and only when coming from `0.1.0`.
 
 ---
 
@@ -309,6 +309,18 @@ merged both into a single abstract `Rule`.
 A custom rule extends `Rule` and may return its result synchronously or as a
 promise — the distinction the two classes used to encode is gone.
 
+A codemod replaces both names:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaPasswordToolsRule.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. A file that imported both — or one of
+them next to `Rule` — ends up with a single import.
+
 ---
 
 ## From version `0.2.0-alpha.779` to `>=0.2.0-alpha.780`
@@ -417,6 +429,33 @@ property to set the background color instead.
 + <AccentBox backgroundColor="gradient" />
 ```
 
+`color` did not go away, it changed meaning — so this is not a rename. It used
+to accept `"blue" | "green" | "gradient" | "neutral"` and now accepts
+`"default" | "dark" | "light" | "dark-static" | "light-static"`.
+
+A codemod decides per value: a value from the new foreground union stays on
+`color`, every other literal moves to `backgroundColor`.
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAccentBoxColorToBackgroundColor.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. Two cases stay untouched, because
+neither can be decided from the value alone — check them by hand:
+
+- `color={expression}`, where the same expression means the background in old
+  code and the foreground in new code.
+- An element that already carries `backgroundColor`, where moving `color` there
+  would overwrite the explicit value.
+
+One value changes what you see: the runtime fallback maps `"neutral"`,
+`"gradient"` and `"green"` onto the background, but not `"blue"`, so
+`<AccentBox color="blue">` currently renders the neutral background. The codemod
+turns it into `backgroundColor="blue"`, which restores the blue one.
+
 ---
 
 ## From version `0.2.0-alpha.747` to `>=0.2.0-alpha.756`
@@ -455,6 +494,20 @@ The error that aborts an `Action` without reporting a failure is now called
 There is no alias for the old name. The thrown error's `name` changed from
 `"MutedActionError"` to `"AbortActionError"` as well — update any code that
 matches on it.
+
+A codemod renames the class and both static helpers:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaMutedActionErrorToAbortActionError.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. It also rewrites an
+`error.name === "MutedActionError"` comparison, but only in a file that imports
+the class — a check living anywhere else cannot be recognised, so grep for the
+string once when you are done.
 
 ---
 
@@ -534,6 +587,27 @@ Replace `src` with your sources folder.
 
 The `RemoteButtonElementProps`, `ResetButtonProps`, and `SubmitButtonProps`
 interfaces have been removed. Use `ButtonProps` instead.
+
+```diff
+- import type { SubmitButtonProps } from "@mittwald/flow-react-components/react-hook-form";
++ import type { ButtonProps } from "@mittwald/flow-react-components";
+```
+
+Note the entry: `ButtonProps` lives in the package root, while the removed names
+came from `react-hook-form`. A codemod moves the import along with the name:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaButtonPropsInterfaces.ts \
+  --parser tsx \
+  src
+```
+
+Replace `src` with your sources folder. It covers
+`@mittwald/flow-react-components` only. `@mittwald/flow-remote-react-components`
+does not export `ButtonProps`, so there is nothing to move a remote import onto
+— pick your own source for the type there. `RemoteButtonElementProps` is left
+alone as well: `@mittwald/flow-remote-elements` still exports that name.
 
 ---
 
