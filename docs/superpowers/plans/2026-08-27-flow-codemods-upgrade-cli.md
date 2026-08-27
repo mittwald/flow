@@ -2333,11 +2333,16 @@ export const generateFlowPackages = async (): Promise<void> => {
       try {
         const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
           name?: string;
-          private?: boolean;
+          private?: boolean | string;
         };
-        return manifest.private === true || manifest.name === undefined
-          ? []
-          : [manifest.name];
+        // `private` is not reliably a boolean here: `packages/core` declares
+        // it as the string `"true"`. The repo already handles both — see
+        // `.github/scripts/version-contract-lib.mjs`. Checking only `=== true`
+        // would put a private package on the list and have `upgrade` try to
+        // bump something no consumer can install.
+        const isPrivate =
+          manifest.private === true || manifest.private === "true";
+        return isPrivate || manifest.name === undefined ? [] : [manifest.name];
       } catch {
         return [];
       }
