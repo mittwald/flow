@@ -49,6 +49,14 @@ jobs:
       - name: Test the CI guard scripts
         run: node --test .github/scripts/*.test.mjs
 
+      # Fixed versioning means every Lerna-managed package carries `lerna.json`'s
+      # version. A merge can break that silently — no conflict markers, and the
+      # package's `CHANGELOG.md` still lists the new release — and `lerna publish
+      # from-package` then ships whatever the manifest says. Runs on every PR
+      # regardless of base branch: the invariant is not release-line-specific.
+      - name: Check version consistency
+        run: node .github/scripts/version-consistency-guard.mjs
+
       - name: Run tests
         run: pnpm affected:test
 
