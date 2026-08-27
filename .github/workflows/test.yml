@@ -49,7 +49,7 @@ jobs:
       - name: Test the CI guard scripts
         run: node --test .github/scripts/*.test.mjs
 
-      - name: Run unit tests
+      - name: Run tests
         run: pnpm affected:test
 
       - name: Cache Playwright browsers

@@ -19,5 +19,10 @@ Next.js documentation site for the flow Styleguide, deployed to
   members/roles, prices, component props) — see the existing `table/examples`
   for the tone. Star Wars-flavoured fixtures are fine in Storybook stories, but
   never in the docs.
+- **Internal links are checked in CI.** `pnpm nx test:links docs` validates
+  every `/pathname` and `#anchor` in the content and in the app's own sources
+  against the pages that exist — it runs as part of `pnpm affected:test`, so a
+  link to a moved or renamed page fails the PR. Move a page and the failure
+  names the candidates it could mean. External URLs are out of scope.
 - Run `pnpm format` (Prettier, 80-character prose wrap) before committing. The
   local dev server is `pnpm nx dev docs`.
