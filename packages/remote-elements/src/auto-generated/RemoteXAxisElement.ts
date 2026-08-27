@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { XAxisProps as RemoteXAxisElementProps } from "@mittwald/flow-react-components";
-export type { XAxisProps as RemoteXAxisElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { XAxisProps } from "@mittwald/flow-react-components";
+export type RemoteXAxisElementProps = WithSerializableClassName<XAxisProps>;
 
 export class RemoteXAxisElement extends FlowRemoteElement<RemoteXAxisElementProps> {
   static override get remoteAttributes() {

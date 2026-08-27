@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { RatingProps as RemoteRatingElementProps } from "@mittwald/flow-react-components";
-export type { RatingProps as RemoteRatingElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { RatingProps } from "@mittwald/flow-react-components";
+export type RemoteRatingElementProps = WithSerializableClassName<RatingProps>;
 
 export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementProps> {
   static override get remoteAttributes() {
@@ -30,7 +31,6 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       lang: {},
       name: {},
       orientation: {},
-      render: {},
       size: {},
       slot: {},
       translate: {},

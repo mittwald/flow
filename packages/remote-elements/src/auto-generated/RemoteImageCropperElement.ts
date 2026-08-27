@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ImageCropperProps as RemoteImageCropperElementProps } from "@mittwald/flow-react-components";
-export type { ImageCropperProps as RemoteImageCropperElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ImageCropperProps } from "@mittwald/flow-react-components";
+export type RemoteImageCropperElementProps =
+  WithSerializableClassName<ImageCropperProps>;
 
 export class RemoteImageCropperElement extends FlowRemoteElement<RemoteImageCropperElementProps> {
   static override get remoteAttributes() {

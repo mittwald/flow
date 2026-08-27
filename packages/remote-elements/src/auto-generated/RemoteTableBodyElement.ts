@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TableBodyProps as RemoteTableBodyElementProps } from "@mittwald/flow-react-components";
-export type { TableBodyProps as RemoteTableBodyElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { TableBodyProps } from "@mittwald/flow-react-components";
+export type RemoteTableBodyElementProps =
+  WithSerializableClassName<TableBodyProps>;
 
 export class RemoteTableBodyElement extends FlowRemoteElement<RemoteTableBodyElementProps> {
   static override get remoteAttributes() {
@@ -18,7 +20,6 @@ export class RemoteTableBodyElement extends FlowRemoteElement<RemoteTableBodyEle
       inert: {},
       items: {},
       lang: {},
-      render: {},
       translate: {},
     };
   }

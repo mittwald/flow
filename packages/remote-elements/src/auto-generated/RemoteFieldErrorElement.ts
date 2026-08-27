@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components";
-export type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { FieldErrorProps } from "@mittwald/flow-react-components";
+export type RemoteFieldErrorElementProps =
+  WithSerializableClassName<FieldErrorProps>;
 
 export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorElementProps> {
   static override get remoteAttributes() {
@@ -18,7 +20,6 @@ export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorE
       id: {},
       inert: {},
       lang: {},
-      render: {},
       renderAlert: {},
       translate: {},
     };

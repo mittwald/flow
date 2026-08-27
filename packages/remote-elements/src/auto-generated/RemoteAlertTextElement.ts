@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { AlertTextProps as RemoteAlertTextElementProps } from "@mittwald/flow-react-components";
-export type { AlertTextProps as RemoteAlertTextElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { AlertTextProps } from "@mittwald/flow-react-components";
+export type RemoteAlertTextElementProps =
+  WithSerializableClassName<AlertTextProps>;
 
 export class RemoteAlertTextElement extends FlowRemoteElement<RemoteAlertTextElementProps> {
   static override get remoteAttributes() {

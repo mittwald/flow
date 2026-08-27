@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { MenuItemProps as RemoteMenuItemElementProps } from "@mittwald/flow-react-components";
-export type { MenuItemProps as RemoteMenuItemElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { MenuItemProps } from "@mittwald/flow-react-components";
+export type RemoteMenuItemElementProps =
+  WithSerializableClassName<MenuItemProps>;
 
 export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemElementProps> {
   static override get remoteAttributes() {
@@ -30,7 +32,6 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       selectionVariant: {},
       shouldCloseOnSelect: {},

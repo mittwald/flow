@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SelectProps as RemoteSelectElementProps } from "@mittwald/flow-react-components";
-export type { SelectProps as RemoteSelectElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { SelectProps } from "@mittwald/flow-react-components";
+export type RemoteSelectElementProps = WithSerializableClassName<SelectProps>;
 
 export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementProps> {
   static override get remoteAttributes() {
@@ -37,7 +38,6 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       lang: {},
       name: {},
       placeholder: {},
-      render: {},
       selectedKey: {},
       selectionMode: {},
       shouldCloseOnSelect: {},

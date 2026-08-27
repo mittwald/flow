@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components";
-export type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { IllustratedMessageProps } from "@mittwald/flow-react-components";
+export type RemoteIllustratedMessageElementProps =
+  WithSerializableClassName<IllustratedMessageProps>;
 
 export class RemoteIllustratedMessageElement extends FlowRemoteElement<RemoteIllustratedMessageElementProps> {
   static override get remoteAttributes() {

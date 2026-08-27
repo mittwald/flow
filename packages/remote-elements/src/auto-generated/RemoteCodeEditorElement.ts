@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CodeEditorProps as RemoteCodeEditorElementProps } from "@mittwald/flow-react-components";
-export type { CodeEditorProps as RemoteCodeEditorElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { CodeEditorProps } from "@mittwald/flow-react-components";
+export type RemoteCodeEditorElementProps =
+  WithSerializableClassName<CodeEditorProps>;
 
 export class RemoteCodeEditorElement extends FlowRemoteElement<RemoteCodeEditorElementProps> {
   static override get remoteAttributes() {

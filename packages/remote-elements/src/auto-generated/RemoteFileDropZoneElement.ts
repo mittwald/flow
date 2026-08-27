@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FileDropZoneProps as RemoteFileDropZoneElementProps } from "@mittwald/flow-react-components";
-export type { FileDropZoneProps as RemoteFileDropZoneElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { FileDropZoneProps } from "@mittwald/flow-react-components";
+export type RemoteFileDropZoneElementProps =
+  WithSerializableClassName<FileDropZoneProps>;
 
 export class RemoteFileDropZoneElement extends FlowRemoteElement<RemoteFileDropZoneElementProps> {
   static override get remoteAttributes() {

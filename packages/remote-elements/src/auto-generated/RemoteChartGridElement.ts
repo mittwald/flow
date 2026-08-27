@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ChartGridProps as RemoteChartGridElementProps } from "@mittwald/flow-react-components";
-export type { ChartGridProps as RemoteChartGridElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ChartGridProps } from "@mittwald/flow-react-components";
+export type RemoteChartGridElementProps =
+  WithSerializableClassName<ChartGridProps>;
 
 export class RemoteChartGridElement extends FlowRemoteElement<RemoteChartGridElementProps> {
   static override get remoteAttributes() {

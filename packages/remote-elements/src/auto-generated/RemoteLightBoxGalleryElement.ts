@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LightBoxGalleryProps as RemoteLightBoxGalleryElementProps } from "@mittwald/flow-react-components";
-export type { LightBoxGalleryProps as RemoteLightBoxGalleryElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { LightBoxGalleryProps } from "@mittwald/flow-react-components";
+export type RemoteLightBoxGalleryElementProps =
+  WithSerializableClassName<LightBoxGalleryProps>;
 
 export class RemoteLightBoxGalleryElement extends FlowRemoteElement<RemoteLightBoxGalleryElementProps> {
   static override get remoteAttributes() {

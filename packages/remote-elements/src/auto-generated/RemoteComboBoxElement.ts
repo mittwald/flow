@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ComboBoxProps as RemoteComboBoxElementProps } from "@mittwald/flow-react-components";
-export type { ComboBoxProps as RemoteComboBoxElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ComboBoxProps } from "@mittwald/flow-react-components";
+export type RemoteComboBoxElementProps =
+  WithSerializableClassName<ComboBoxProps>;
 
 export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxElementProps> {
   static override get remoteAttributes() {
@@ -41,7 +43,6 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       menuTrigger: {},
       name: {},
       placeholder: {},
-      render: {},
       selectedKey: {},
       selectionMode: {},
       shouldFocusWrap: {},

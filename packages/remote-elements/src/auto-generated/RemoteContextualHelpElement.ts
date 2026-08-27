@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components";
-export type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ContextualHelpProps } from "@mittwald/flow-react-components";
+export type RemoteContextualHelpElementProps =
+  WithSerializableClassName<ContextualHelpProps>;
 
 export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContextualHelpElementProps> {
   static override get remoteAttributes() {
@@ -37,7 +39,6 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       maxHeight: {},
       offset: {},
       placement: {},
-      render: {},
       scrollRef: {},
       shouldCloseOnInteractOutside: {},
       shouldFlip: {},

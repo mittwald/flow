@@ -43,7 +43,10 @@ Connection + serialization layer between host (mStudio) and remote apps
   per component) so the cost stays one property instead of the whole update.
   That is a net, not a fix: the prop belongs in a **slot**. The generator fails
   the build on such a prop — see `checkSerializableProps` in the components
-  package.
+  package. The mirror image is a prop the host _calls_: it has to send the
+  arguments over, so react-aria's `(renderProps) => string` form of `className`
+  would ship a collection's rendered elements on every row. The remote surface
+  narrows `className` to a string for that reason.
 - Unit tests run in happy-dom: `pnpm nx test:unit remote-core`. The repeated
   reference and circular reference cases in `FlowThreadSerialization.test.tsx`
   are what fails if the sequential invariant breaks;

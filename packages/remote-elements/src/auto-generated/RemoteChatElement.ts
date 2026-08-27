@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ChatProps as RemoteChatElementProps } from "@mittwald/flow-react-components";
-export type { ChatProps as RemoteChatElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ChatProps } from "@mittwald/flow-react-components";
+export type RemoteChatElementProps = WithSerializableClassName<ChatProps>;
 
 export class RemoteChatElement extends FlowRemoteElement<RemoteChatElementProps> {
   static override get remoteAttributes() {

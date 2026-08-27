@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LabelProps as RemoteLabelElementProps } from "@mittwald/flow-react-components";
-export type { LabelProps as RemoteLabelElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { LabelProps } from "@mittwald/flow-react-components";
+export type RemoteLabelElementProps = WithSerializableClassName<LabelProps>;
 
 export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProps> {
   static override get remoteAttributes() {
@@ -108,7 +109,6 @@ export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProp
       property: {},
       radioGroup: {},
       rel: {},
-      render: {},
       resource: {},
       results: {},
       rev: {},

@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components";
-export type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { NumberFieldProps } from "@mittwald/flow-react-components";
+export type RemoteNumberFieldElementProps =
+  WithSerializableClassName<NumberFieldProps>;
 
 export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFieldElementProps> {
   static override get remoteAttributes() {
@@ -36,7 +38,6 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFiel
       maxValue: {},
       minValue: {},
       name: {},
-      render: {},
       slot: {},
       step: {},
       translate: {},

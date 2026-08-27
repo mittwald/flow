@@ -150,16 +150,25 @@ Remote generation details:
   output, because the host has to call it: that needs an eager slot or
   `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
   prop, so a new one cannot ship.
+- **The danger is the arguments too, not only the return value.** A prop the
+  host _calls_ has to send whatever it passes in. react-aria's `className`
+  accepts `(renderProps) => string`, and for a collection component those render
+  props carry the collection state — which holds the rendered elements of every
+  row and cell. The remote surface therefore narrows `className` to a string
+  (`WithSerializableClassName` in remote-elements, applied by the generator);
+  locally the function form still works. Composing through a view, never pass a
+  function where the remote element declares a property — `List`'s table did,
+  and every row shipped its whole collection.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
   `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
-  `renderEmptyState` because the host would call it and get rendered output back
-  — which no component ever supported remotely, and which cost the whole
-  mutation batch when it was tried. Use the per-component tag for additional
-  cases (see `TunnelEntry.tsx`).
+  `renderEmptyState` plus react-aria's `render` because the host would call them
+  and get rendered output back — neither was ever a deliberate Flow API, and
+  both cost the whole mutation batch when they were tried. Use the per-component
+  tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).

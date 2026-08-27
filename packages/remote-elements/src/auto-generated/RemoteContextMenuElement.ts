@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ContextMenuProps as RemoteContextMenuElementProps } from "@mittwald/flow-react-components";
-export type { ContextMenuProps as RemoteContextMenuElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ContextMenuProps } from "@mittwald/flow-react-components";
+export type RemoteContextMenuElementProps =
+  WithSerializableClassName<ContextMenuProps>;
 
 export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMenuElementProps> {
   static override get remoteAttributes() {
@@ -39,7 +41,6 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       maxHeight: {},
       offset: {},
       placement: {},
-      render: {},
       scrollRef: {},
       selectedKeys: {},
       selectionMode: {},

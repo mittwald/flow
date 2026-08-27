@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SegmentProps as RemoteSegmentElementProps } from "@mittwald/flow-react-components";
-export type { SegmentProps as RemoteSegmentElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { SegmentProps } from "@mittwald/flow-react-components";
+export type RemoteSegmentElementProps = WithSerializableClassName<SegmentProps>;
 
 export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElementProps> {
   static override get remoteAttributes() {
@@ -24,7 +25,6 @@ export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElement
       inputRef: {},
       isDisabled: {},
       lang: {},
-      render: {},
       slot: {},
       translate: {},
       value: {},

@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { RangeCalendarProps as RemoteRangeCalendarElementProps } from "@mittwald/flow-react-components";
-export type { RangeCalendarProps as RemoteRangeCalendarElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { RangeCalendarProps } from "@mittwald/flow-react-components";
+export type RemoteRangeCalendarElementProps =
+  WithSerializableClassName<RangeCalendarProps>;
 
 export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCalendarElementProps> {
   static override get remoteAttributes() {
@@ -36,7 +38,6 @@ export class RemoteRangeCalendarElement extends FlowRemoteElement<RemoteRangeCal
       maxValue: {},
       minValue: {},
       pageBehavior: {},
-      render: {},
       selectionAlignment: {},
       slot: {},
       translate: {},

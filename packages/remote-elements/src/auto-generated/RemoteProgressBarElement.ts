@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components";
-export type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ProgressBarProps } from "@mittwald/flow-react-components";
+export type RemoteProgressBarElementProps =
+  WithSerializableClassName<ProgressBarProps>;
 
 export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBarElementProps> {
   static override get remoteAttributes() {
@@ -25,7 +27,6 @@ export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBa
       lang: {},
       maxValue: {},
       minValue: {},
-      render: {},
       segments: {},
       showLegend: {},
       showMaxValue: {},

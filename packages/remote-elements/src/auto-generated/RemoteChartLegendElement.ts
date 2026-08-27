@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ChartLegendProps as RemoteChartLegendElementProps } from "@mittwald/flow-react-components";
-export type { ChartLegendProps as RemoteChartLegendElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ChartLegendProps } from "@mittwald/flow-react-components";
+export type RemoteChartLegendElementProps =
+  WithSerializableClassName<ChartLegendProps>;
 
 export class RemoteChartLegendElement extends FlowRemoteElement<RemoteChartLegendElementProps> {
   static override get remoteAttributes() {

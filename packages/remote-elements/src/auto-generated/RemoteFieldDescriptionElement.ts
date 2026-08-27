@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FieldDescriptionProps as RemoteFieldDescriptionElementProps } from "@mittwald/flow-react-components";
-export type { FieldDescriptionProps as RemoteFieldDescriptionElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { FieldDescriptionProps } from "@mittwald/flow-react-components";
+export type RemoteFieldDescriptionElementProps =
+  WithSerializableClassName<FieldDescriptionProps>;
 
 export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteFieldDescriptionElementProps> {
   static override get remoteAttributes() {
@@ -107,7 +109,6 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
       property: {},
       radioGroup: {},
       rel: {},
-      render: {},
       resource: {},
       results: {},
       rev: {},

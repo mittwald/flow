@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components";
-export type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { OptionProps } from "@mittwald/flow-react-components";
+export type RemoteOptionElementProps = WithSerializableClassName<OptionProps>;
 
 export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementProps> {
   static override get remoteAttributes() {
@@ -24,7 +25,6 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       target: {},
       textValue: {},

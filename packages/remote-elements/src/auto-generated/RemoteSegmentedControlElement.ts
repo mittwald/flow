@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SegmentedControlProps as RemoteSegmentedControlElementProps } from "@mittwald/flow-react-components";
-export type { SegmentedControlProps as RemoteSegmentedControlElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { SegmentedControlProps } from "@mittwald/flow-react-components";
+export type RemoteSegmentedControlElementProps =
+  WithSerializableClassName<SegmentedControlProps>;
 
 export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegmentedControlElementProps> {
   static override get remoteAttributes() {
@@ -31,7 +33,6 @@ export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegme
       lang: {},
       name: {},
       orientation: {},
-      render: {},
       slot: {},
       translate: {},
       validate: {},

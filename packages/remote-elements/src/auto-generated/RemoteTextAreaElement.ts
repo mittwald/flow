@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TextAreaProps as RemoteTextAreaElementProps } from "@mittwald/flow-react-components";
-export type { TextAreaProps as RemoteTextAreaElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { TextAreaProps } from "@mittwald/flow-react-components";
+export type RemoteTextAreaElementProps =
+  WithSerializableClassName<TextAreaProps>;
 
 export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaElementProps> {
   static override get remoteAttributes() {
@@ -48,7 +50,6 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       name: {},
       pattern: {},
       placeholder: {},
-      render: {},
       rows: {},
       showCharacterCount: {},
       slot: {},

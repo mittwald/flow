@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SkeletonTextProps as RemoteSkeletonTextElementProps } from "@mittwald/flow-react-components";
-export type { SkeletonTextProps as RemoteSkeletonTextElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { SkeletonTextProps } from "@mittwald/flow-react-components";
+export type RemoteSkeletonTextElementProps =
+  WithSerializableClassName<SkeletonTextProps>;
 
 export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonTextElementProps> {
   static override get remoteAttributes() {

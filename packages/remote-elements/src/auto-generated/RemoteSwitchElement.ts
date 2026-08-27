@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components";
-export type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { SwitchProps } from "@mittwald/flow-react-components";
+export type RemoteSwitchElementProps = WithSerializableClassName<SwitchProps>;
 
 export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementProps> {
   static override get remoteAttributes() {
@@ -32,7 +33,6 @@ export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementPr
       labelPosition: {},
       lang: {},
       name: {},
-      render: {},
       slot: {},
       translate: {},
       value: {},

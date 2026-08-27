@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ImageProps as RemoteImageElementProps } from "@mittwald/flow-react-components";
-export type { ImageProps as RemoteImageElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ImageProps } from "@mittwald/flow-react-components";
+export type RemoteImageElementProps = WithSerializableClassName<ImageProps>;
 
 export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProps> {
   static override get remoteAttributes() {

@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TabNavigationProps as RemoteTabNavigationElementProps } from "@mittwald/flow-react-components";
-export type { TabNavigationProps as RemoteTabNavigationElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { TabNavigationProps } from "@mittwald/flow-react-components";
+export type RemoteTabNavigationElementProps =
+  WithSerializableClassName<TabNavigationProps>;
 
 export class RemoteTabNavigationElement extends FlowRemoteElement<RemoteTabNavigationElementProps> {
   static override get remoteAttributes() {

@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CheckboxGroupProps as RemoteCheckboxGroupElementProps } from "@mittwald/flow-react-components";
-export type { CheckboxGroupProps as RemoteCheckboxGroupElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { CheckboxGroupProps } from "@mittwald/flow-react-components";
+export type RemoteCheckboxGroupElementProps =
+  WithSerializableClassName<CheckboxGroupProps>;
 
 export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckboxGroupElementProps> {
   static override get remoteAttributes() {
@@ -31,7 +33,6 @@ export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckbox
       lang: {},
       m: {},
       name: {},
-      render: {},
       s: {},
       slot: {},
       translate: {},

@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LinkProps as RemoteLinkElementProps } from "@mittwald/flow-react-components";
-export type { LinkProps as RemoteLinkElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { LinkProps } from "@mittwald/flow-react-components";
+export type RemoteLinkElementProps = WithSerializableClassName<LinkProps>;
 
 export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps> {
   static override get remoteAttributes() {
@@ -33,7 +34,6 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       size: {},
       slot: {},

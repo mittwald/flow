@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { GridListItemProps as RemoteItemsGridListItemElementProps } from "@mittwald/flow-react-components";
-export type { GridListItemProps as RemoteItemsGridListItemElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { GridListItemProps } from "@mittwald/flow-react-components";
+export type RemoteItemsGridListItemElementProps =
+  WithSerializableClassName<GridListItemProps>;
 
 export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItemsGridListItemElementProps> {
   static override get remoteAttributes() {
@@ -28,7 +30,6 @@ export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItem
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       target: {},
       textValue: {},

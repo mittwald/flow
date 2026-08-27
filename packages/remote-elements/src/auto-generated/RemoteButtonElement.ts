@@ -1,8 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ButtonProps as RemoteButtonElementProps } from "@mittwald/flow-react-components";
-export type { ButtonProps as RemoteButtonElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { ButtonProps } from "@mittwald/flow-react-components";
+export type RemoteButtonElementProps = WithSerializableClassName<ButtonProps>;
 
 export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementProps> {
   static override get remoteAttributes() {
@@ -45,7 +46,6 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
       lang: {},
       name: {},
       preventFocusOnPress: {},
-      render: {},
       size: {},
       slot: {},
       translate: {},

@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { HeaderNavigationProps as RemoteHeaderNavigationElementProps } from "@mittwald/flow-react-components";
-export type { HeaderNavigationProps as RemoteHeaderNavigationElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { HeaderNavigationProps } from "@mittwald/flow-react-components";
+export type RemoteHeaderNavigationElementProps =
+  WithSerializableClassName<HeaderNavigationProps>;
 
 export class RemoteHeaderNavigationElement extends FlowRemoteElement<RemoteHeaderNavigationElementProps> {
   static override get remoteAttributes() {

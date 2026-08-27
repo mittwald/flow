@@ -1,8 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/flow-react-components";
-export type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/flow-react-components";
+import type { WithSerializableClassName } from "@/lib/RemoteProps";
+import type { RadioGroupProps } from "@mittwald/flow-react-components";
+export type RemoteRadioGroupElementProps =
+  WithSerializableClassName<RadioGroupProps>;
 
 export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupElementProps> {
   static override get remoteAttributes() {
@@ -32,7 +34,6 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       m: {},
       name: {},
       orientation: {},
-      render: {},
       s: {},
       slot: {},
       translate: {},
