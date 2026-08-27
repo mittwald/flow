@@ -3552,7 +3552,10 @@ describe("runSingleCodemod", () => {
   });
 
   test("a catalogued id with no codemod prints apply and verify", async () => {
-    const { code, output } = await call(["table-render-prop-removed", "src"], ok);
+    const { code, output } = await call(
+      ["table-render-prop-removed", "src"],
+      ok,
+    );
     expect(code).toBe(1);
     expect(output).toContain("apply:");
     expect(output).toContain("verify:");
@@ -3680,8 +3683,7 @@ export const runSingleCodemod = async (
     return 1;
   }
 
-  const skipped =
-    result.skipped > 0 ? `, ${result.skipped} skipped` : "";
+  const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
   log(
     `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.\nverify: ${entry.verify}`,
   );
