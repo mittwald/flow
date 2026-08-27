@@ -3,6 +3,19 @@
 jscodeshift transforms that migrate consumer code across a breaking change, plus
 the `@mittwald/flow-codemods` CLI that runs them.
 
+## Layout
+
+| Path                                                             | What it holds                                                                                                |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `src/migrations`                                                 | The catalogue. One Markdown file per migration. **The source.**                                              |
+| `src/transforms`                                                 | One jscodeshift transform per catalogue entry with `action: codemod`.                                        |
+| `src/catalog`                                                    | Reading, typing and selecting catalogue entries.                                                             |
+| `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                           |
+| `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, package-manager install, and the dirty-working-tree guard for `upgrade`. |
+| `src/run`                                                        | Spawns the real jscodeshift CLI.                                                                             |
+| `dev/generate`                                                   | The three generators.                                                                                        |
+| `src/tests`                                                      | Fixture tests, all running through the real jscodeshift CLI.                                                 |
+
 ## The catalogue is the single source of truth
 
 Every migration — codemod or not — is one Markdown file in `src/migrations`,
@@ -34,6 +47,12 @@ Consumers never install this package by hand — the CLI does, from
 of the installed package and hands it to jscodeshift;
 `src/tests/runTransform.ts` reproduces that exact invocation for tests, spawning
 the real jscodeshift CLI rather than calling the transform in-process.
+
+A transform no longer has to be self-contained — it may import shared helpers
+from elsewhere in `src`. But `package.json` ships
+`"files": ["*.md", "dist", "src"]`: the published package is `src` wholesale and
+nothing outside it. Anything a transform imports must stay inside `src`, or it
+is missing from the published package even though it type-checks locally.
 
 ## Does it apply to the remote package?
 

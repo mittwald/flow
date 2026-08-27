@@ -88,7 +88,7 @@ nearest `AGENTS.md` before working in a package.**
 | `packages/ext-bridge`                   | `@mittwald/ext-bridge`                   | mStudio extension bridge (node/browser/react/i18next entries). Remote host config contract |
 | `packages/react-tunnel`                 | `@mittwald/react-tunnel`                 | Generic "portal for components" utility (MobX-based).                                      |
 | `packages/mstudio-ext-react-components` | `@mittwald/mstudio-ext-react-components` | Helpers for extension developers (mStudio page header customization).                      |
-| `packages/codemods`                     | private                                  | jscodeshift migrations for consumers.                                                      |
+| `packages/codemods`                     | `@mittwald/flow-codemods`                | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`.               |
 | `packages/typescript-config`            | private                                  | Shared tsconfig presets (`base`, `library`, `web-library`, `react-library`, `nextjs`).     |
 | `apps/docs`                             | private                                  | User documentation site (Next.js); content in `src/content`, deployed to flow.mittwald.de. |
 | `apps/remote-dom-demo`                  | private                                  | Demo app for remote rendering. Remote-capable components should have a demo here.          |
@@ -135,15 +135,17 @@ pnpm format:check                          # prettier --check (part of pnpm lint
 CI enforces `git diff --exit-code` after building: **generated files are
 committed, and hand-editing them is futile** (headers say "auto-generated").
 
-| Generated artifact                                                                 | Generator                                    |
-| ---------------------------------------------------------------------------------- | -------------------------------------------- |
-| `packages/components/src/components/**/view.ts` + `src/views/*`                    | `pnpm nx build:remote-components components` |
-| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**` | same as above                                |
-| `packages/components/src/**/*.module.d.scss.ts` (CSS-module class-name types)      | `pnpm nx build:scss-types components`        |
-| `packages/components/src/components/Icon/components/icons/*`                       | `pnpm nx build:icons components`             |
-| `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`           | `pnpm nx build:icons icons` / `icons-pro`    |
-| `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)            | `pnpm nx build:docs-properties components`   |
-| `packages/components/dist/assets/component-index.json` (consumer-facing index)     | `pnpm nx build:component-index components`   |
+| Generated artifact                                                                   | Generator                                    |
+| ------------------------------------------------------------------------------------ | -------------------------------------------- |
+| `packages/components/src/components/**/view.ts` + `src/views/*`                      | `pnpm nx build:remote-components components` |
+| `packages/remote-{elements,react-components,react-renderer}/src/auto-generated/**`   | same as above                                |
+| `packages/components/src/**/*.module.d.scss.ts` (CSS-module class-name types)        | `pnpm nx build:scss-types components`        |
+| `packages/components/src/components/Icon/components/icons/*`                         | `pnpm nx build:icons components`             |
+| `packages/icons/src/components/*`, `packages/icons-pro/src/components/*`             | `pnpm nx build:icons icons` / `icons-pro`    |
+| `packages/components/dist/assets/doc-properties.json` (from prop JSDoc)              | `pnpm nx build:docs-properties components`   |
+| `packages/components/dist/assets/component-index.json` (consumer-facing index)       | `pnpm nx build:component-index components`   |
+| `packages/components/MIGRATION.md` + `packages/codemods/src/migrations.generated.ts` | `pnpm nx build codemods`                     |
+| `packages/codemods/src/flowPackages.generated.ts`                                    | same as above                                |
 
 Changed props on an `@flr-generate` component, added an icon, edited prop JSDoc,
 or changed a `.module.scss`'s class names? Regenerate (or simply `pnpm build`)
@@ -186,9 +188,11 @@ and commit the results.
   [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
   deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
   closed PR only makes it come back next week.
-- **Breaking changes for consumers** ship with a `MIGRATION.md` entry and,
-  ideally, a codemod in `packages/codemods` (tedious by hand — a great agent
-  task).
+- **Breaking changes for consumers** ship with a **catalogue entry** in
+  `packages/codemods/src/migrations` — which generates the `MIGRATION.md` entry
+  — and a codemod when the change is mechanically decidable. The entry's
+  `detect`/`apply`/`verify` fields are what an agent runs; fill them even when
+  there is no codemod.
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
   WebKit only is a pragmatic choice, not a support statement.
@@ -304,6 +308,7 @@ where the error points.
 | A `ReactElement`-valued prop renders fine in the visual suite's **Remote** environment but kills a real remote connection with **`DataCloneError: Symbol(react.transitional.element) could not be cloned`** (the host then shows `Remote rendering failed: Timeout reached`) | The prop was generated as a **remote property**, and properties travel through `postMessage`/structured clone, which cannot carry a React element. `remote-dom-react` turns an element-valued prop into a slotted child _only_ when the element declares it as a slot (`Element.remoteSlotDefinitions.has(prop)`), and the generator declares a slot only for props typed exactly `ReactNode` or listed in `@flr-slot-props` (`dev/remote-components-generator/lib/propClassifiers.ts`) | Add `@flr-slot-props <propA>, <propB>` to the component's JSDoc and regenerate — the prop then arrives as a slotted child and any React subtree works, including a raw `<svg>` or a Tabler icon. Verify in `apps/remote-dom-demo` over the iframe connection: the visual suite's Remote environment is **in-process** and never serializes, so it cannot see this class of bug                                   |
 | `vitest run --update <file>` rewrites **every** baseline instead of the one file's, and `git status` shows snapshots you never touched                                                                                                                                       | `--update` takes an optional value, so it swallows the positional test filter that follows it. The run then matches all files, updates all of them, and reports the full test count (354, not 2) — the only signal that anything went wrong                                                                                                                                                                                                                                             | Put the filter **before** the flag (`vitest run <file> --update`) or pin the flag's value (`--update=true <file>`). Check `git status` after any `--update` and revert baselines outside your change; a stray one is indistinguishable from an intentional update once committed                                                                                                                                 |
 | A baseline for a component you never touched changes in your PR, or a scenario starts failing right after an unrelated PR merged with `update-screenshots`                                                                                                                   | The `update-screenshots` label runs `pnpm test:visual --update` over the **whole** suite and then `git add -A` — it is not scoped to the PR's diff. Any scenario that is failing or flaky at that moment gets whatever renders then committed as its new truth                                                                                                                                                                                                                          | Only apply the label when the suite is otherwise green, and read the resulting commit's file list before merging. #2945 (a CodeBlock change) took a tooltip-less frame of a racy `Tooltip` scenario this way and committed it as the `firefox-linux` baseline, contradicting the three beside it and keeping the scheduled run red in both environments (#2985)                                                  |
+| Hand-edited `MIGRATION.md` reverts on the next build, or CI fails "Check all generated code is committed"                                                                                                                                                                    | `MIGRATION.md` is generated from `packages/codemods/src/migrations/*.md`                                                                                                                                                                                                                                                                                                                                                                                                                | Edit the catalogue entry, run `pnpm nx build codemods`, commit both                                                                                                                                                                                                                                                                                                                                              |
 
 ## Where to look next
 
