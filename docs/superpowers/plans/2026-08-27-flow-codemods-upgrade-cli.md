@@ -3298,6 +3298,37 @@ describe("renderList without bounds", () => {
     expect(parsed).toHaveLength(3);
   });
 });
+
+// The subtlest behaviour here, and the one a later reader is most likely to
+// "simplify" away.
+describe("tools are browsable but never required", () => {
+  const withTool = [
+    ...entries,
+    { ...entry("port-it", "1.0.0", "codemod"), kind: "tool" as const },
+  ];
+
+  test("an unbounded list includes a tool", () => {
+    const parsed = JSON.parse(
+      renderList({ entries: withTool, json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).toContain("port-it");
+  });
+
+  test("a bounded list never includes a tool", () => {
+    const parsed = JSON.parse(
+      renderList({ entries: withTool, from: "0.9.0", to: "2.0.0", json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).not.toContain("port-it");
+  });
+
+  test("a lower bound of none still reaches the oldest entry", () => {
+    const oldest = [entry("ancient", "0.0.0", "manual")];
+    const parsed = JSON.parse(
+      renderList({ entries: oldest, to: "1.0.0", json: true }),
+    ) as CatalogEntry[];
+    expect(parsed.map((e) => e.id)).toEqual(["ancient"]);
+  });
+});
 ```
 
 - [ ] **Step 2: Run the test and verify it fails**
@@ -3361,10 +3392,21 @@ export const renderList = ({
   to,
   json,
 }: RenderListInput): string => {
+  // The two paths differ in more than their bounds, deliberately: `sortBySince`
+  // keeps `kind: "tool"` entries, `selectEntries` drops them. Unbounded, this is
+  // a catalogue browser, and browsing is how someone finds the codemod that
+  // ports an app between packages. Bounded, it answers "what does this version
+  // range require of me" — and a port is never required by a version range. Do
+  // not unify these.
+  //
+  // `0.0.0-0` rather than `0.0.0` as the lower sentinel: the gate's
+  // `current < since` is strict, so `0.0.0` would hide an entry whose `since` is
+  // exactly `0.0.0`. A prerelease of `0` sorts below every published version.
+  // (`0.0.0-0.0` is lower still; nothing publishes that.)
   const selected =
     from === undefined && to === undefined
       ? sortBySince(entries)
-      : selectEntries(entries, from ?? "0.0.0", to ?? "9999.0.0");
+      : selectEntries(entries, from ?? "0.0.0-0", to ?? "9999.0.0");
 
   if (json) {
     return JSON.stringify(selected, null, 2);
