@@ -64,6 +64,17 @@ const main = async (): Promise<number> => {
           from: parsed.from,
           to: parsed.to,
           json: parsed.json,
+          // Colour only when a person is looking at a terminal. `NO_COLOR` is
+          // the cross-tool convention for turning it off; a pipe or a file gets
+          // plain text so the output stays greppable.
+          color:
+            process.stdout.isTTY === true &&
+            process.env.NO_COLOR === undefined &&
+            !parsed.json,
+          // Clamped at both ends: a terminal can report an unusably small
+          // width (or none at all), and beyond ~100 columns long prose gets
+          // harder to read rather than easier.
+          width: Math.min(Math.max(process.stdout.columns ?? 80, 60), 100),
         }),
       );
       return 0;

@@ -394,6 +394,9 @@ importers:
       jscodeshift:
         specifier: ^17.3.0
         version: 17.4.0(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
       registry-url:
         specifier: ^7.2.0
         version: 7.2.0

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { CatalogEntry } from "../catalog/entries";
-import { renderList, validateListBounds } from "../cli/list";
+import { renderList, stripAnsi, validateListBounds } from "../cli/list";
 
 const entry = (
   id: string,
@@ -140,5 +140,74 @@ describe("validateListBounds", () => {
     const message = validateListBounds({ from: "1.0", to: "latest" });
     expect(message).toContain('"1.0"');
     expect(message).toContain('"latest"');
+  });
+});
+
+const hasAnsi = (text: string): boolean => stripAnsi(text) !== text;
+
+describe("presentation", () => {
+  const long = {
+    ...entry("wordy", "1.0.0", "manual"),
+    title: "A title with `code` in it",
+    apply:
+      "Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for named, aliased and namespace imports from a Flow package, everywhere it appears.",
+  };
+
+  test("plain text by default — no escape sequences", () => {
+    const text = renderList({ entries: [long], json: false });
+    expect(hasAnsi(text)).toBe(false);
+  });
+
+  test("colour only when asked for", () => {
+    const text = renderList({ entries: [long], json: false, color: true });
+    expect(hasAnsi(text)).toBe(true);
+  });
+
+  // An escape sequence inside the JSON would break every parser reading it,
+  // and this is the output an agent consumes.
+  test("--json never carries colour, even when colour is on", () => {
+    const json = renderList({ entries: [long], json: true, color: true });
+    expect(hasAnsi(json)).toBe(false);
+    expect(() => JSON.parse(json) as unknown).not.toThrow();
+  });
+
+  test("prose wraps to the given width", () => {
+    const width = 60;
+    const lines = renderList({ entries: [long], json: false, width }).split(
+      "\n",
+    );
+    expect(lines.every((line) => line.length <= width)).toBe(true);
+  });
+
+  test("wrapping still holds once the text is coloured", () => {
+    const width = 60;
+    const lines = renderList({
+      entries: [long],
+      json: false,
+      width,
+      color: true,
+    })
+      .split("\n")
+      .map(stripAnsi);
+    expect(lines.every((line) => line.length <= width)).toBe(true);
+  });
+
+  test("backticks are rendered away, not printed", () => {
+    const text = renderList({ entries: [long], json: false });
+    expect(text).not.toContain("`");
+    expect(text).toContain("A title with code in it");
+  });
+
+  test("the header counts what the range holds", () => {
+    const text = renderList({
+      entries,
+      from: "1.0.0",
+      to: "2.0.0",
+      json: false,
+    });
+    expect(text).toContain("3 migrations from 1.0.0 to 2.0.0");
+    expect(text).toContain("1 codemod");
+    expect(text).toContain("1 by hand");
+    expect(text).toContain("1 no code change");
   });
 });
