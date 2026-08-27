@@ -91,6 +91,18 @@ test.each([
     '"primary" | "danger"',
   ],
   ["strips null", "color", "string | null", "string"],
+  [
+    "keeps nested nullish members",
+    "columns",
+    "(number | null)[] | undefined",
+    "(number | null)[]",
+  ],
+  [
+    "keeps an arrow return type intact",
+    "onChange",
+    "((value: string) => void) | null",
+    "((value: string) => void)",
+  ],
   ["keeps a plain type", "size", '"s" | "m"', '"s" | "m"'],
   [
     "collapses children",

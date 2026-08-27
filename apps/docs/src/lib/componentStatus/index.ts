@@ -5,4 +5,4 @@ export {
   compareDeprecatedLast,
   type FlowComponentStatus,
 } from "./componentStatus";
-export { resolveReplacedBy, type ReplacementLink } from "./replacedBy";
+export { serializeDeprecationNotice } from "./deprecationNotice";
