@@ -19,7 +19,19 @@ export const hasUncommittedChanges = (cwd: string): boolean => {
       stdio: ["ignore", "pipe", "ignore"],
     });
     return status.trim() !== "";
-  } catch {
-    return false;
+  } catch (error) {
+    // Only "not a git repository" counts as clean. git answers that with exit
+    // 128; a missing binary throws `ENOENT` with no exit status at all. Treating
+    // the two alike would make the guard fail *open* — it would report a clean
+    // tree on a machine without git, which is exactly the minimal CI container
+    // where nobody is watching the run.
+    if ((error as { status?: number }).status === 128) {
+      return false;
+    }
+    throw new Error(
+      `Could not check the working tree with git: ${
+        error instanceof Error ? error.message : error
+      }`,
+    );
   }
 };
