@@ -30,7 +30,7 @@ export const splitUnion = (type: string): string[] => {
 
 const stringLiteralPattern = /^["'](.*)["']$/;
 
-const unquote = (member: string): string =>
+export const unquote = (member: string): string =>
   member.replace(stringLiteralPattern, "$1");
 
 export interface FormattedType {
