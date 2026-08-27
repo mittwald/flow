@@ -4,7 +4,7 @@ title: "TableColumn: `maxWidth` removed, `width` and `minWidth` retyped"
 kind: migration
 action: manual
 remotePackage: true
-detect: rg -t ts 'maxWidth'
+detect: rg -t ts 'maxWidth|[wW]idth=\{null\}'
 apply:
   Remove `maxWidth` from every `TableColumn`. Where `width` or `minWidth` was
   `null`, omit the prop instead — the type no longer accepts `null`, only

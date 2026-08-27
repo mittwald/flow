@@ -26,6 +26,9 @@ npx @mittwald/flow-codemods@latest upgrade
 
 It is not the whole migration. Most entries below have no codemod and have to be
 done by hand — the command prints those for your range when it is done.
+
+It refuses to run on a dirty working tree (\`--allow-dirty\` overrides that) and
+rewrites files in place, so review the diff afterwards.
 `;
 
 const remoteNote = "also applies to `@mittwald/flow-remote-react-components`";
@@ -34,7 +37,11 @@ const renderEntry = (entry: MigrationEntry): string => {
   const facts = [
     `**Since \`${entry.since}\`**`,
     entry.kind,
-    entry.action === "codemod" ? "codemod available" : `${entry.action} change`,
+    entry.action === "codemod"
+      ? "codemod available"
+      : entry.action === "manual"
+        ? "manual change"
+        : "no code change needed",
     entry.remotePackage ? remoteNote : undefined,
   ].filter((fact) => fact !== undefined);
 

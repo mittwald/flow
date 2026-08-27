@@ -4,12 +4,11 @@ title: "TableCell: `render` prop removed"
 kind: migration
 action: manual
 remotePackage: true
-detect: rg -t ts '<TableCell\b[^>]*render=\{'
+detect: rg -t ts 'render=\{'
 apply:
   Provide the cell content as children of `TableCell` instead of a `render`
   function.
-verify:
-  tsc --noEmit passes, and `rg '<TableCell\b[^>]*render=\{'` finds nothing.
+verify: tsc --noEmit passes, and `rg 'render=\{'` finds nothing.
 ---
 
 The `render` escape hatch on `TableCell` has been removed. Provide the cell

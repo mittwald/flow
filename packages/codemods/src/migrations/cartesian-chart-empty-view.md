@@ -4,7 +4,7 @@ title: CartesianChart.emptyView changed
 kind: migration
 action: manual
 remotePackage: true
-detect: rg -t ts 'emptyView=\{[A-Z]'
+detect: rg -t ts 'emptyView=\{'
 apply:
   Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of
   `emptyView={EmptyState}`.

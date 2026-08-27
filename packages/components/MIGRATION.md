@@ -16,6 +16,9 @@ npx @mittwald/flow-codemods@latest upgrade
 It is not the whole migration. Most entries below have no codemod and have to be
 done by hand — the command prints those for your range when it is done.
 
+It refuses to run on a dirty working tree (`--allow-dirty` overrides that) and
+rewrites files in place, so review the diff afterwards.
+
 ---
 
 <a id="segmented-control-deprecated"></a>
@@ -86,8 +89,10 @@ options anyway.
 displayed content, or with `RadioGroup` when it sets a value. Pick per usage —
 this is a structural change, not a rename.
 
-**Verify:** tsc --noEmit passes. There is no codemod, so review every `rg` hit
-by hand.
+**Verify:** tsc --noEmit passes either way — this is a deprecation, so
+`SegmentedControl` and `Segment` still typecheck and it catches nothing. Verify
+by confirming `rg '\b(SegmentedControl|Segment)\b'` finds no remaining usage, or
+that the runtime deprecation warning is gone.
 
 ---
 
@@ -190,20 +195,35 @@ npx @mittwald/flow-codemods@latest button-color-accent-to-success src
 **Since `0.2.0-alpha.1016`** · migration · manual change · also applies to
 `@mittwald/flow-remote-react-components`
 
-Numeric delay values are no longer accepted; only string literals are valid.
+Numeric delay values are no longer accepted; only the string literals
+`"default"` (400ms) and `"long"` (1500ms) are valid. Pick by what the element
+needs, not by rounding the old number to the nearest preset — a former
+`delay={500}` is closer to `"long"` numerically, but if the element is an
+icon-only button that cannot be understood without the tooltip, `"default"` is
+still the right choice.
 
 ```diff
 - <TooltipTrigger delay={300} />
 + <TooltipTrigger delay="default" />
+```
 
-- <TooltipTrigger delay={500} />
+For an icon-only button that needs the tooltip to be understood.
+
+```diff
+- <TooltipTrigger delay={2000} />
 + <TooltipTrigger delay="long" />
 ```
 
-**Apply:** Replace every numeric `delay` value on `TooltipTrigger` with the
-matching string literal — for example `delay={300}` becomes `delay="default"`
-and `delay={500}` becomes `delay="long"`. The type error names the accepted
-literals.
+For supplementary information on an element that is already labeled.
+
+**Apply:** Replace every numeric `delay` value on `TooltipTrigger` with one of
+the two string literals: `"default"` (400ms) or `"long"` (1500ms). Pick by
+intent, not by which number is closer — `"default"` is for elements that cannot
+be understood without the tooltip (icon-only buttons), `"long"` is for
+supplementary information on elements that are already labeled. A previous
+numeric value is not a reliable guide: `delay={500}` maps to `"default"`
+(400ms), not `"long"` (1500ms), if the element still needs the tooltip to be
+understood.
 
 **Verify:** tsc --noEmit passes — a numeric `delay` is a type error, so no
 separate `rg` check is needed.
@@ -255,8 +275,8 @@ move.
 
 ## Closing a Modal with unsaved changes is confirmed by default
 
-**Since `0.2.0-alpha.1005`** · migration · none change · also applies to
-`@mittwald/flow-remote-react-components`
+**Since `0.2.0-alpha.1005`** · migration · no code change needed · also applies
+to `@mittwald/flow-remote-react-components`
 
 A `Modal` that contains a react-hook-form `<Form>` now asks for confirmation
 before it closes while the form is _dirty_ — previously this required the
@@ -323,8 +343,7 @@ The `render` escape hatch on `Table` has been removed. Compose the table from
 **Apply:** Replace the `render` escape hatch on `Table` with a composition of
 `TableHeader`, `TableColumn`, `TableBody`, `TableRow` and `TableCell`.
 
-**Verify:** tsc --noEmit passes, and `rg '<Table\b[^>]*render=\{'` finds
-nothing.
+**Verify:** tsc --noEmit passes, and `rg 'render=\{'` finds nothing.
 
 ---
 
@@ -379,8 +398,7 @@ content as children instead.
 **Apply:** Provide the cell content as children of `TableCell` instead of a
 `render` function.
 
-**Verify:** tsc --noEmit passes, and `rg '<TableCell\b[^>]*render=\{'` finds
-nothing.
+**Verify:** tsc --noEmit passes, and `rg 'render=\{'` finds nothing.
 
 ---
 
@@ -647,11 +665,18 @@ npx @mittwald/flow-codemods@latest muted-action-error-to-abort-action-error src
 
 The return type changed from `() => void` to `() => unknown`
 
-**Apply:** Update any callback passed to `addOnClose`/`addOnOpen` whose declared
-return type is `void` — it now needs to accept `unknown`, or simply drop an
-explicit `: void` return annotation.
+**Apply:** No type change needed: the return type widened from `() => void` to
+`() => unknown`, and a `() => void` callback stays assignable. Instead, check
+every callback passed to `addOnClose`/`addOnOpen` for one that can return
+`false` — for example an arrow function whose body is an expression evaluating
+to `false`. `executeHandlers` now treats any handler returning `false` as a veto
+and cancels the close/open. A callback that returned `false` incidentally, with
+no intent to block anything, now silently cancels closes.
 
-**Verify:** tsc --noEmit passes.
+**Verify:** No compiler check catches this — `() => unknown` accepts every prior
+handler, so `tsc --noEmit` passes before and after. Review each
+`addOnClose`/`addOnOpen` handler by hand for one that can return `false`, and
+confirm the overlay still closes/opens as expected when that handler runs.
 
 ---
 
@@ -659,7 +684,7 @@ explicit `: void` return annotation.
 
 ## Form: resets itself after the surrounding modal closes
 
-**Since `0.2.0-alpha.694`** · migration · none change
+**Since `0.2.0-alpha.694`** · migration · no code change needed
 
 A react-hook-form `<Form>` inside a `Modal` now resets to its default values
 once the modal has closed. Previously it kept what the user had entered, so
@@ -734,8 +759,7 @@ A codemod renames the prop on `Action`.
 
 **Apply:** Rename the `action` prop on `Action` to `onAction`.
 
-**Verify:** tsc --noEmit passes, and `rg '<Action\b[^>]* action=\{'` finds
-nothing.
+**Verify:** tsc --noEmit passes, and `rg 'action=\{'` finds nothing.
 
 ```shell
 npx @mittwald/flow-codemods@latest action-prop-to-on-action src
@@ -781,7 +805,7 @@ npx @mittwald/flow-codemods@latest button-props-interfaces src
 
 <a id="imports-to-package-root"></a>
 
-## From version 0.1.0 to version 0.2.0
+## Subpath imports moved to the package root
 
 **Since `0.2.0-alpha.28`** · migration · codemod available
 
@@ -829,8 +853,8 @@ missing module exports.
 
 This change shipped in `0.2.0-alpha.28`: `0.2.0-alpha.27` still published one
 export entry per component, `alpha.28` published the flat set. Neither `0.1.0`
-nor `0.2.0` was ever released — the headings above name release lines, and the
-first stable release of Flow is `1.0.0`.
+nor `0.2.0` was ever released as a stable version — both are alpha-only lines,
+and the first stable release of Flow is `1.0.0`.
 
 **Apply:** Rewrite every subdirectory import from
 `@mittwald/flow-react-components` to the package root, except `react-hook-form`

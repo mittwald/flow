@@ -17,7 +17,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     apply:
       "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage — this is a structural change, not a rename.",
     verify:
-      "tsc --noEmit passes. There is no codemod, so review every `rg` hit by hand.",
+      "tsc --noEmit passes either way — this is a deprecation, so `SegmentedControl` and `Segment` still typecheck and it catches nothing. Verify by confirming `rg '\\b(SegmentedControl|Segment)\\b'` finds no remaining usage, or that the runtime deprecation warning is gone.",
   },
   {
     id: "align-to-combine",
@@ -53,7 +53,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     remotePackage: true,
     detect: "rg -t ts 'TooltipTrigger'",
     apply:
-      'Replace every numeric `delay` value on `TooltipTrigger` with the matching string literal — for example `delay={300}` becomes `delay="default"` and `delay={500}` becomes `delay="long"`. The type error names the accepted literals.',
+      'Replace every numeric `delay` value on `TooltipTrigger` with one of the two string literals: `"default"` (400ms) or `"long"` (1500ms). Pick by intent, not by which number is closer — `"default"` is for elements that cannot be understood without the tooltip (icon-only buttons), `"long"` is for supplementary information on elements that are already labeled. A previous numeric value is not a reliable guide: `delay={500}` maps to `"default"` (400ms), not `"long"` (1500ms), if the element still needs the tooltip to be understood.',
     verify:
       "tsc --noEmit passes — a numeric `delay` is a type error, so no separate `rg` check is needed.",
   },
@@ -89,7 +89,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'maxWidth'",
+    detect: "rg -t ts 'maxWidth|[wW]idth=\\{null\\}'",
     apply:
       "Remove `maxWidth` from every `TableColumn`. Where `width` or `minWidth` was `null`, omit the prop instead — the type no longer accepts `null`, only `number | string`.",
     verify:
@@ -102,11 +102,10 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts '<Table\\b[^>]*render=\\{'",
+    detect: "rg -t ts 'render=\\{'",
     apply:
       "Replace the `render` escape hatch on `Table` with a composition of `TableHeader`, `TableColumn`, `TableBody`, `TableRow` and `TableCell`.",
-    verify:
-      "tsc --noEmit passes, and `rg '<Table\\b[^>]*render=\\{'` finds nothing.",
+    verify: "tsc --noEmit passes, and `rg 'render=\\{'` finds nothing.",
   },
   {
     id: "color-primary-to-default",
@@ -129,11 +128,10 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts '<TableCell\\b[^>]*render=\\{'",
+    detect: "rg -t ts 'render=\\{'",
     apply:
       "Provide the cell content as children of `TableCell` instead of a `render` function.",
-    verify:
-      "tsc --noEmit passes, and `rg '<TableCell\\b[^>]*render=\\{'` finds nothing.",
+    verify: "tsc --noEmit passes, and `rg 'render=\\{'` finds nothing.",
   },
   {
     id: "password-tools-rule",
@@ -206,8 +204,9 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     remotePackage: true,
     detect: "rg -t ts 'addOnClose|addOnOpen'",
     apply:
-      "Update any callback passed to `addOnClose`/`addOnOpen` whose declared return type is `void` — it now needs to accept `unknown`, or simply drop an explicit `: void` return annotation.",
-    verify: "tsc --noEmit passes.",
+      "No type change needed: the return type widened from `() => void` to `() => unknown`, and a `() => void` callback stays assignable. Instead, check every callback passed to `addOnClose`/`addOnOpen` for one that can return `false` — for example an arrow function whose body is an expression evaluating to `false`. `executeHandlers` now treats any handler returning `false` as a veto and cancels the close/open. A callback that returned `false` incidentally, with no intent to block anything, now silently cancels closes.",
+    verify:
+      "No compiler check catches this — `() => unknown` accepts every prior handler, so `tsc --noEmit` passes before and after. Review each `addOnClose`/`addOnOpen` handler by hand for one that can return `false`, and confirm the overlay still closes/opens as expected when that handler runs.",
   },
   {
     id: "form-resets-after-modal-close",
@@ -228,7 +227,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'emptyView=\\{[A-Z]'",
+    detect: "rg -t ts 'emptyView=\\{'",
     apply:
       "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}`.",
     verify:
@@ -241,10 +240,9 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts '<Action\\b[^>]* action=\\{'",
+    detect: "rg -t ts 'action=\\{'",
     apply: "Rename the `action` prop on `Action` to `onAction`.",
-    verify:
-      "tsc --noEmit passes, and `rg '<Action\\b[^>]* action=\\{'` finds nothing.",
+    verify: "tsc --noEmit passes, and `rg 'action=\\{'` finds nothing.",
   },
   {
     id: "button-props-interfaces",
@@ -262,11 +260,11 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
   {
     id: "imports-to-package-root",
     since: "0.2.0-alpha.28",
-    title: "From version 0.1.0 to version 0.2.0",
+    title: "Subpath imports moved to the package root",
     kind: "migration",
     action: "codemod",
     remotePackage: false,
-    detect: "rg -t ts 'flow-react-components/'",
+    detect: "rg 'flow-react-components/'",
     apply:
       'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
     verify:

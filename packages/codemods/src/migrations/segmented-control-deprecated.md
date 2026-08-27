@@ -10,7 +10,10 @@ apply:
   content, or with `RadioGroup` when it sets a value. Pick per usage — this is a
   structural change, not a rename.
 verify:
-  tsc --noEmit passes. There is no codemod, so review every `rg` hit by hand.
+  tsc --noEmit passes either way — this is a deprecation, so `SegmentedControl`
+  and `Segment` still typecheck and it catches nothing. Verify by confirming `rg
+  '\b(SegmentedControl|Segment)\b'` finds no remaining usage, or that the
+  runtime deprecation warning is gone.
 ---
 
 `SegmentedControl` and `Segment` are deprecated. The component covered two
