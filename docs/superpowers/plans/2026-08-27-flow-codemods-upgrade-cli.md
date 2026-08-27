@@ -4759,3 +4759,94 @@ where they land:
 - **`kind: "tool"`** is added as a third `MigrationKind` so `to-remote-package`
   has a documented home rather than a by-name exception in `documented.test.ts`
   (Task 4 Step 4).
+
+## Task 16: `detect` and `verify` as executable modules
+
+**Goal:** turn the catalogue's `detect` and `verify` prose into JavaScript the
+CLI runs, and add the two commands that run them: `detect` lists only the
+migrations that actually touch the consumer's code, `verify` runs every check.
+
+**Maintainer constraints, all binding:**
+
+- `detect` and `verify` are **their own modules**, loaded by the CLI by id — the
+  same shape `src/transforms/<id>.ts` already has.
+- **They wrap no CLI command.** Pure Node: read files, test regexes. No `rg`, no
+  `grep`, no `tsc`, no subprocess of any kind. This is a compatibility
+  requirement — Windows, a consumer without ripgrep, a minimal CI container.
+- A `verify` module **may log the `tsc --noEmit` reminder** instead of checking
+  it. Fourteen such hints in one run is fine **as long as the migration's name
+  precedes each one**, so a hint is never orphaned from what it belongs to.
+- Other verifies may run arbitrary JS.
+- **The module is the single source of its text.** Each exports a `description`;
+  `MIGRATION.md` and `list` read it from there. The `detect:` and `verify:`
+  frontmatter fields are removed. Two places asserting the same thing is the
+  drift this catalogue exists to prevent.
+
+### The honesty requirement
+
+A judgement-only entry returns `ok: true` with hints, because there is nothing
+it can decide. So **`ok` means "what I could check passed", not "this migration
+is done"**, and the summary must never collapse the two. It reports two numbers
+— checks passed, and entries still needing a person — and never prints "done".
+Getting this wrong reproduces the failure this branch already fixed three times:
+something reporting success without having checked.
+
+### Files
+
+| Path                                     | Responsibility                                                                         |
+| ---------------------------------------- | -------------------------------------------------------------------------------------- |
+| `src/checks/types.ts`                    | `Finding`, `CheckContext`, `Detector`, `Verifier`, `VerifyResult`. No logic.           |
+| `src/checks/context.ts`                  | The shared file walk, `read` and `search`. The only place that touches the filesystem. |
+| `src/checks/load.ts`                     | Loads `detect/<id>.js` / `verify/<id>.js` by id.                                       |
+| `src/detect/<id>.ts`                     | 21 detectors. Two `action: none` entries have none.                                    |
+| `src/verify/<id>.ts`                     | 23 verifiers — every entry, including the judgement-only ones.                         |
+| `src/cli/detect.ts`, `src/cli/verify.ts` | The two commands.                                                                      |
+
+### The translation rule for `detect`
+
+Every current `detect` field is a single `rg` invocation, so the translation is
+mechanical rather than a rewrite:
+
+```
+rg -t ts 'PATTERN'   ->   search(/PATTERN/, tsExtensions)
+rg 'PATTERN'         ->   search(/PATTERN/)          // all text files
+```
+
+`-t ts` is ripgrep's TypeScript type, which covers `.ts`, `.tsx`, `.cts` and
+`.mts` — that belongs in the context as a named constant, not copied into 21
+modules.
+
+### The three shapes of `verify`
+
+Established by reading all 23 fields:
+
+| Shape                                                           | Count | Module returns                                                       |
+| --------------------------------------------------------------- | ----- | -------------------------------------------------------------------- |
+| A residual pattern must find nothing, plus the typecheck        | ~14   | `ok: findings.length === 0`, findings, and the `tsc --noEmit` hint   |
+| The typecheck alone catches it (a removed prop, a retyped prop) | ~3    | `ok: true`, no findings, the `tsc --noEmit` hint and why it suffices |
+| A person must judge it                                          | ~6    | `ok: true`, no findings, a hint saying exactly what to look at       |
+
+The last shape includes `overlay-controller-add-on-close-return-type`, whose own
+prose says no compiler check catches it, and the two `action: none` entries.
+
+### Execution order
+
+Three commits, because the first establishes the shape the other two follow in
+bulk:
+
+1. **Shape** — `src/checks/*`, the two commands, the loader, and three proof
+   modules: one of each `verify` shape, with their detectors.
+2. **The remaining detectors** — mechanical, from the translation rule.
+3. **The remaining verifiers** — needs judgement per entry, so it comes last.
+
+### Invariants to enforce in `catalog.test.ts`
+
+- Every entry except the two `action: none` ones has a `detect` module, and
+  every `detect` module has an entry — both directions, as the transform check
+  already does.
+- Every entry has a `verify` module.
+- No module imports `node:child_process`, and none of their source contains
+  `rg ` or `tsc ` outside a hint string. That is the no-subprocess constraint,
+  enforced rather than trusted.
+- `MIGRATION.md` regenerates from the module descriptions with no `detect:` /
+  `verify:` frontmatter left anywhere.
