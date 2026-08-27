@@ -75,8 +75,12 @@ const visibleWidth = (text: string): number => stripAnsi(text).length;
 /**
  * Wraps to `width`, measuring visible width so already-coloured text still
  * breaks in the right place.
+ *
+ * Exported so `detect` and `verify` (see `cli/detect.ts`, `cli/verify.ts`) wrap
+ * their own findings and hints the same way, instead of a second implementation
+ * drifting from this one.
  */
-const wrap = (text: string, width: number): string[] => {
+export const wrap = (text: string, width: number): string[] => {
   const lines: string[] = [];
   let line = "";
 
@@ -104,25 +108,26 @@ const wrap = (text: string, width: number): string[] => {
  * terminal those are noise, but the emphasis they mark is exactly what a reader
  * scans for — a symbol name or a command.
  */
-const inlineCode = (text: string, paint: Painter): string =>
+export const inlineCode = (text: string, paint: Painter): string =>
   text.replace(/`([^`]+)`/g, (_, code: string) => paint.code(code));
 
-interface Painter {
+export interface Painter {
   bold: (text: string) => string;
   dim: (text: string) => string;
   code: (text: string) => string;
 }
 
-const painter = (color: boolean): Painter =>
+/** Shared with `detect` and `verify` so all three commands paint the same way. */
+export const painter = (color: boolean): Painter =>
   color
     ? { bold: colors.bold, dim: colors.dim, code: colors.cyan }
     : { bold: (text) => text, dim: (text) => text, code: (text) => text };
 
-const indent = "  ";
+export const indent = "  ";
 const labelWidth = 8;
 
 /** One `apply` / `verify` / `detect` row: dim label, wrapped body beside it. */
-const field = (
+export const field = (
   label: string,
   value: string,
   width: number,

@@ -1,6 +1,7 @@
 import { parseArgs } from "node:util";
 
-export type Command = "upgrade" | "list" | "codemod" | "help" | "version";
+export type Command =
+  "upgrade" | "list" | "codemod" | "detect" | "verify" | "help" | "version";
 
 export interface ParsedCommand {
   command: Command;
@@ -74,6 +75,12 @@ export const parseArguments = (argv: string[]): ParsedCommand => {
   }
   if (first === "list") {
     return { command: "list", from: values.from, to: values.to, ...flags };
+  }
+  if (first === "detect") {
+    return { command: "detect", path: second ?? values.path, ...flags };
+  }
+  if (first === "verify") {
+    return { command: "verify", path: second ?? values.path, ...flags };
   }
 
   return {
