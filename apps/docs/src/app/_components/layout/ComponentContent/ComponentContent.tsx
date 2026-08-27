@@ -5,9 +5,8 @@ import styles from "../../../layout.module.scss";
 import {
   Flex,
   Heading,
-  IconExternalLink,
   LayoutCard,
-  Link,
+  Header,
   Section,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
@@ -17,6 +16,7 @@ import {
   ComponentStatusCallout,
   serializeDeprecationNotice,
 } from "@/lib/componentStatus";
+import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
 
 interface Props {
   params: StaticParams;
@@ -54,19 +54,16 @@ export const ComponentContent: FC<Props> = async (props) => {
       <LayoutCard className={styles.tabs}>
         <div className={styles.mainContent}>
           <Section>
-            <Heading level={1}>{mdxFile.getTitle()}</Heading>
+            <Header>
+              <Heading level={1}>{mdxFile.getTitle()}</Heading>
+              <PageActions
+                title={mdxFile.getTitle()}
+                markdownUrl={markdownUrl}
+                gitHubUrl={mdxFile.getGitHubUrl()}
+              />
+            </Header>
 
             {description}
-
-            <Flex direction="row" columnGap="m">
-              <Link href={mdxFile.getGitHubUrl()}>
-                GitHub
-                <IconExternalLink />
-              </Link>
-              <Link href={markdownUrl} target="_blank">
-                Markdown
-              </Link>
-            </Flex>
 
             {component && (
               <ComponentStatusCallout
