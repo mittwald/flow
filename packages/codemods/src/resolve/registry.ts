@@ -56,6 +56,7 @@ export const fetchVersions = async (
       `Could not read ${packageName} from the npm registry: ${
         error instanceof Error ? error.message : error
       }`,
+      { cause: error },
     );
   }
 

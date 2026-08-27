@@ -32,6 +32,7 @@ export const hasUncommittedChanges = (cwd: string): boolean => {
       `Could not check the working tree with git: ${
         error instanceof Error ? error.message : error
       }`,
+      { cause: error },
     );
   }
 };
