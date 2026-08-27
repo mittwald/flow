@@ -10,8 +10,6 @@ import type { Verifier } from "../checks/types.js";
  * package executes (no subprocess), so it stays a person's job.
  */
 export const verifier: Verifier = {
-  description:
-    "The type change alone catches this; `tsc --noEmit` is the whole check.",
   verify: async () => ({
     ok: true,
     findings: [],

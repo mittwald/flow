@@ -4,14 +4,10 @@ title: "`flags` is replaced by the ComponentDefaultsProvider"
 kind: deprecation
 action: manual
 remotePackage: false
-detect: rg -t ts '\bflags\.'
 apply:
   Replace assignments to the global `flags` object with an equivalent
   `<ComponentDefaultsProvider defaults={{ ... }} />` wrapping the app, or the
   subtree the default should apply to.
-verify:
-  tsc --noEmit passes (the deprecated `flags` object still typechecks), and `rg
-  '\bflags\.'` finds no remaining assignment you meant to move.
 ---
 
 The global `flags` object is deprecated. Application-wide defaults are defined

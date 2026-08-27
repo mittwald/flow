@@ -13,9 +13,7 @@ const entry = (
   kind: "migration",
   action,
   remotePackage: false,
-  detect: action === "none" ? undefined : `rg ${id}`,
   apply: `apply ${id}`,
-  verify: `verify ${id}`,
 });
 
 const entries = [
@@ -38,9 +36,26 @@ describe("renderList as text", () => {
     expect(text).toContain("flow-codemods@latest with-codemod");
   });
 
-  test("shows apply and verify, which is what an agent acts on", () => {
+  test("shows apply, which is what an agent acts on", () => {
     expect(text).toContain("apply by-hand");
-    expect(text).toContain("verify by-hand");
+  });
+
+  // Correction: `list` used to print the entry's `title` as a heading line
+  // under the id — dropped because `apply` already carries whatever detail the
+  // title had, and for roughly half the catalogue the title was just the id
+  // restated as a sentence. `title` equals `id` in this file's `entry()`
+  // fixture, so this uses a title distinct from the id to prove it is gone,
+  // not just coincidentally absent.
+  test("does not print the entry's title", () => {
+    const titled = [
+      {
+        ...entry("has-title", "1.0.0", "manual"),
+        title: "A distinctive title",
+      },
+    ];
+    const rendered = renderList({ entries: titled, json: false });
+    expect(rendered).toContain("has-title");
+    expect(rendered).not.toContain("A distinctive title");
   });
 
   test("says so when the range holds nothing", () => {
@@ -148,7 +163,6 @@ const hasAnsi = (text: string): boolean => stripAnsi(text) !== text;
 describe("presentation", () => {
   const long = {
     ...entry("wordy", "1.0.0", "manual"),
-    title: "A title with `code` in it",
     apply:
       "Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for named, aliased and namespace imports from a Flow package, everywhere it appears.",
   };
@@ -195,7 +209,7 @@ describe("presentation", () => {
   test("backticks are rendered away, not printed", () => {
     const text = renderList({ entries: [long], json: false });
     expect(text).not.toContain("`");
-    expect(text).toContain("A title with code in it");
+    expect(text).toContain("Rename Align to Combine");
   });
 
   test("the header counts what the range holds", () => {

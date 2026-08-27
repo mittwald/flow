@@ -8,7 +8,5 @@ import type { Detector } from "../checks/types.js";
  * compiler check can narrow this list further.
  */
 export const detector: Detector = {
-  description:
-    "Finds `addOnClose`/`addOnOpen` calls, to review their handlers by hand.",
   detect: (context) => context.search(/addOnClose|addOnOpen/, tsExtensions),
 };

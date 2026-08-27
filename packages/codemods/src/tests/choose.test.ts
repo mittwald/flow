@@ -9,7 +9,6 @@ const entry = (id: string): CatalogEntry => ({
   kind: "migration",
   action: "codemod",
   apply: `apply ${id}`,
-  verify: `verify ${id}`,
   remotePackage: false,
 });
 

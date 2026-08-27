@@ -7,7 +7,5 @@ import type { Detector } from "../checks/types.js";
  * `search(/PATTERN/, tsExtensions)`.
  */
 export const detector: Detector = {
-  description:
-    "Finds remaining `Align` / `AlignProps` usage — the old name for `Combine`.",
   detect: (context) => context.search(/\bAlign(Props)?\b/, tsExtensions),
 };

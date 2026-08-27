@@ -10,8 +10,6 @@ import type { Verifier } from "../checks/types.js";
  * that the review happened.
  */
 export const verifier: Verifier = {
-  description:
-    "No compiler check catches this — each handler needs a by-hand review.",
   verify: async () => ({
     ok: true,
     findings: [],

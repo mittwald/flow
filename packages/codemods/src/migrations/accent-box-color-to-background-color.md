@@ -4,13 +4,11 @@ title: AccentBox.color is now a declaration for foreground
 kind: migration
 action: codemod
 remotePackage: true
-detect: rg -t ts 'AccentBox'
 apply:
   Move every `color` value that is not one of `"default" | "dark" | "light" |
   "dark-static" | "light-static"` to `backgroundColor` instead. Review
   `color={expression}` and any element that already has `backgroundColor` by
   hand — neither can be decided from the value alone.
-verify: tsc --noEmit passes, and `rg 'AccentBox'` hits are all reviewed.
 ---
 
 The `color` property now controls foreground colors. Use the `backgroundColor`

@@ -8,8 +8,6 @@ import type { Verifier } from "../checks/types.js";
  * hint.
  */
 export const verifier: Verifier = {
-  description:
-    "No `Align` left to rename, plus the `tsc --noEmit` reminder for the type change.",
   verify: async (context) => {
     // Unrestricted extensions, translated from `rg '\bAlign\b'` (no `-t ts`):
     // the codemod also rewrites the CSS class name and component tokens, so a

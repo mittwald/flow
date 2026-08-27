@@ -61,8 +61,6 @@ const renderEntry = (entry: MigrationEntry): string => {
     "",
     `**Apply:** ${entry.apply}`,
     "",
-    `**Verify:** ${entry.verify}`,
-    "",
     invocation,
   ].join("\n");
 };

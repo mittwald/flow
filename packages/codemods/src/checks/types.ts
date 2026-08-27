@@ -20,8 +20,6 @@ export interface CheckContext {
 }
 
 export interface Detector {
-  /** One line for MIGRATION.md and `list`. The single source of that text. */
-  description: string;
   detect(context: CheckContext): Promise<Finding[]>;
 }
 
@@ -38,6 +36,5 @@ export interface VerifyResult {
 }
 
 export interface Verifier {
-  description: string;
   verify(context: CheckContext): Promise<VerifyResult>;
 }

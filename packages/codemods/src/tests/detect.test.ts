@@ -24,9 +24,7 @@ const entry = (id: string): CatalogEntry => ({
   kind: "migration",
   action: "manual",
   remotePackage: true,
-  detect: `rg ${id}`,
   apply: `apply ${id}`,
-  verify: `verify ${id}`,
 });
 
 describe("the align-to-combine detector", () => {
@@ -64,14 +62,14 @@ describe("the align-to-combine detector", () => {
 });
 
 describe("the tooltip-trigger-delay-type and overlay-controller detectors", () => {
-  test("both exist and carry a description", async () => {
+  test("both exist", async () => {
     const tooltip = await loadDetector("tooltip-trigger-delay-type");
     const overlay = await loadDetector(
       "overlay-controller-add-on-close-return-type",
     );
 
-    expect(tooltip?.description).toBeTruthy();
-    expect(overlay?.description).toBeTruthy();
+    expect(tooltip).toBeDefined();
+    expect(overlay).toBeDefined();
   });
 });
 
@@ -83,7 +81,6 @@ describe("loadDetector", () => {
 
 describe("runDetect", () => {
   const fakeDetector = (findings: Finding[]): Detector => ({
-    description: "fake",
     detect: async () => findings,
   });
 

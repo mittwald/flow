@@ -24,9 +24,7 @@ const entry = (id: string): CatalogEntry => ({
   kind: "migration",
   action: "manual",
   remotePackage: true,
-  detect: `rg ${id}`,
   apply: `apply ${id}`,
-  verify: `verify ${id}`,
 });
 
 describe("the three proof verifiers", () => {
@@ -82,7 +80,6 @@ describe("loadVerifier", () => {
 });
 
 const fakeVerifier = (result: VerifyResult): Verifier => ({
-  description: "fake",
   verify: async () => result,
 });
 

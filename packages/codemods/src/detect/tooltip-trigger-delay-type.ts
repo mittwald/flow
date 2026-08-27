@@ -10,6 +10,5 @@ import type { Detector } from "../checks/types.js";
  * `tsc --noEmit` instead.
  */
 export const detector: Detector = {
-  description: "Finds `TooltipTrigger` usage, to review its `delay` prop.",
   detect: (context) => context.search(/TooltipTrigger/, tsExtensions),
 };

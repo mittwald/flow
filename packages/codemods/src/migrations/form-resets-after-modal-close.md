@@ -8,9 +8,6 @@ apply:
   "No code change required. To keep the previous behaviour (the form keeping
   what the user entered), pass `autoReset={false}` (or `autoReset={{
   onAfterModalClose: false }}`) to `Form`."
-verify:
-  Nothing to verify — the change is in Flow's own behaviour, unless you opted
-  out, in which case confirm the form resets (or not) the way you configured.
 ---
 
 A react-hook-form `<Form>` inside a `Modal` now resets to its default values

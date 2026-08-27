@@ -162,18 +162,11 @@ const renderEntry = (
 
   const lines = [
     `${mark} ${paint.bold(entry.id)}  ${paint.dim(entry.since)}`,
-    ...wrap(inlineCode(entry.title, paint), width - indent.length).map(
-      (line) => indent + line,
-    ),
     indent + paint.dim(meta.join(" \u00B7 ")),
     "",
     ...field("apply", entry.apply, width, paint),
-    ...field("verify", entry.verify, width, paint),
   ];
 
-  if (entry.detect !== undefined) {
-    lines.push(...field("detect", entry.detect, width, paint));
-  }
   if (entry.action === "codemod") {
     lines.push(
       "",
