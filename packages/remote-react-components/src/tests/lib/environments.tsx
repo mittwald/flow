@@ -192,49 +192,22 @@ const waitForSettledContent = async (): Promise<void> =>
     });
   });
 
-export interface TestScreenshotOptions extends ScreenshotMatcherOptions {
-  /**
-   * Leaves the pointer where the scenario put it, instead of parking it.
-   *
-   * For a scenario whose subject _is_ a hover state, parking the pointer
-   * dismantles what the screenshot is meant to show. The tooltip scenario only
-   * ever passed by outrunning react-aria's `closeDelay` — 500ms during which a
-   * tooltip stays painted after the pointer leaves its trigger. That is a race
-   * the capture usually wins and sometimes doesn't, and the frame it loses in
-   * is a tooltip-less one. #2945 regenerated screenshots for an unrelated
-   * CodeBlock change, caught that frame, and committed it as the
-   * `firefox-linux` baseline for `Tooltip - visible` — leaving it contradicting
-   * the three baselines beside it, and the scheduled visual run red in both
-   * environments.
-   *
-   * A scenario that keeps the pointer on its trigger has no such window. The
-   * cost is that the trigger is captured in its hover state, which is honest:
-   * that is what the user sees when a tooltip is open.
-   */
-  keepPointerPosition?: boolean;
-}
-
 /**
  * Everything `testScreenshot` does before it captures. Exported so a scenario's
  * state at capture time can be asserted on the DOM instead of on pixels — see
  * `ScreenshotPreamble.browser.test.tsx`.
  */
-export const prepareForScreenshot = async ({
-  keepPointerPosition = false,
-}: Pick<TestScreenshotOptions, "keepPointerPosition"> = {}): Promise<void> => {
+export const prepareForScreenshot = async (): Promise<void> => {
   await waitForPaintedContent();
   await waitForSettledContent();
-
-  if (!keepPointerPosition) {
-    await setNeutralPointerPosition();
-  }
+  await setNeutralPointerPosition();
 };
 
 const testScreenshot = async (
   description: string,
-  { keepPointerPosition = false, ...options }: TestScreenshotOptions = {},
+  options: ScreenshotMatcherOptions = {},
 ): Promise<void> => {
-  await prepareForScreenshot({ keepPointerPosition });
+  await prepareForScreenshot();
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
@@ -245,7 +218,7 @@ interface TestEnvironment {
   container: Locator;
   testScreenshot: (
     description: string,
-    options?: TestScreenshotOptions,
+    options?: ScreenshotMatcherOptions,
   ) => Promise<void>;
 }
 
