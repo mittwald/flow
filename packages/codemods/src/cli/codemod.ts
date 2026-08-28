@@ -48,7 +48,7 @@ export const runSingleCodemod = async (
   }
   if (entry.action !== "codemod") {
     log(
-      `"${id}" has no codemod — it is a ${entry.action === "none" ? "behaviour change" : "manual change"}.\n\napply:  ${entry.apply}\nverify: ${entry.verify}`,
+      `"${id}" has no codemod — it is a ${entry.action === "none" ? "behaviour change" : "manual change"}.\n\napply: ${entry.apply}`,
     );
     return 1;
   }
@@ -82,7 +82,7 @@ export const runSingleCodemod = async (
 
   const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
   log(
-    `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.\nverify: ${entry.verify}`,
+    `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.\nSee https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md#${id} for what's left.`,
   );
   return 0;
 };

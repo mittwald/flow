@@ -4,15 +4,11 @@ title: Removed ResetButton and SubmitButton Interfaces
 kind: migration
 action: codemod
 remotePackage: false
-detect: rg -t ts 'ResetButtonProps|SubmitButtonProps'
 apply:
   Replace `ResetButtonProps`/`SubmitButtonProps` imports from
   `@mittwald/flow-react-components/react-hook-form` with `ButtonProps` from the
   package root. Leave `RemoteButtonElementProps` (from
   `@mittwald/flow-remote-elements`) alone.
-verify:
-  tsc --noEmit passes, and `rg 'ResetButtonProps|SubmitButtonProps'` finds
-  nothing.
 ---
 
 The `RemoteButtonElementProps`, `ResetButtonProps`, and `SubmitButtonProps`

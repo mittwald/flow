@@ -55,13 +55,6 @@ describe("catalogue invariants", () => {
     expect(mismatched.map((entry) => entry.id)).toEqual([]);
   });
 
-  test("only action none may omit detect", () => {
-    const missing = catalog.filter(
-      (entry) => entry.detect === undefined && entry.action !== "none",
-    );
-    expect(missing.map((entry) => entry.id)).toEqual([]);
-  });
-
   test("kind and action only take known values", () => {
     const kinds = new Set(["migration", "deprecation", "tool"]);
     const actions = new Set(["codemod", "manual", "none"]);

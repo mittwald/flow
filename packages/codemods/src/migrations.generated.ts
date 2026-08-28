@@ -13,11 +13,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "tool",
     action: "codemod",
     remotePackage: false,
-    detect: "rg '@mittwald/flow-react-components'",
     apply:
       "Rewrite every `@mittwald/flow-react-components` import to `@mittwald/flow-remote-react-components`. Run this only when porting an app into an mStudio extension — on a normal app it rewrites every Flow import.",
-    verify:
-      "tsc --noEmit passes and the app renders inside the extension host.",
   },
   {
     id: "segmented-control-deprecated",
@@ -26,11 +23,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "deprecation",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts '\\b(SegmentedControl|Segment)\\b'",
     apply:
       "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage — this is a structural change, not a rename.",
-    verify:
-      "tsc --noEmit passes either way — this is a deprecation, so `SegmentedControl` and `Segment` still typecheck and it catches nothing. Verify by confirming `rg '\\b(SegmentedControl|Segment)\\b'` finds no remaining usage, or that the runtime deprecation warning is gone.",
   },
   {
     id: "align-to-combine",
@@ -39,10 +33,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts '\\bAlign(Props)?\\b'",
     apply:
       "Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for named, aliased and namespace imports from a Flow package.",
-    verify: "tsc --noEmit passes, and `rg '\\bAlign\\b'` finds no Flow import.",
   },
   {
     id: "button-color-accent-to-success",
@@ -51,11 +43,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts 'color=\"accent\"'",
     apply:
       'Rename `color="accent"` to `color="success"` on `Button` and `SubmitButton`. Also update the CSS class `flow--button--accent` to `flow--button--success` and every `--button--accent-{solid,plain,soft,outline}-*` design token to its `success` counterpart if you use `@mittwald/flow-stylesheet` or the token CSS variables directly — those have no fallback.',
-    verify:
-      "tsc --noEmit passes, and `rg 'color=\"accent\"'` finds no remaining `Button` or `SubmitButton` usage.",
   },
   {
     id: "tooltip-trigger-delay-type",
@@ -64,11 +53,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'TooltipTrigger'",
     apply:
       'Replace every numeric `delay` value on `TooltipTrigger` with one of the two string literals: `"default"` (400ms) or `"long"` (1500ms). Pick by intent, not by which number is closer — `"default"` is for elements that cannot be understood without the tooltip (icon-only buttons), `"long"` is for supplementary information on elements that are already labeled. A previous numeric value is not a reliable guide: `delay={500}` maps to `"default"` (400ms), not `"long"` (1500ms), if the element still needs the tooltip to be understood.',
-    verify:
-      "tsc --noEmit passes — a numeric `delay` is a type error, so no separate `rg` check is needed.",
   },
   {
     id: "flags-to-component-defaults-provider",
@@ -77,11 +63,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "deprecation",
     action: "manual",
     remotePackage: false,
-    detect: "rg -t ts '\\bflags\\.'",
     apply:
       "Replace assignments to the global `flags` object with an equivalent `<ComponentDefaultsProvider defaults={{ ... }} />` wrapping the app, or the subtree the default should apply to.",
-    verify:
-      "tsc --noEmit passes (the deprecated `flags` object still typechecks), and `rg '\\bflags\\.'` finds no remaining assignment you meant to move.",
   },
   {
     id: "modal-unsaved-changes-confirmation",
@@ -92,8 +75,6 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     remotePackage: true,
     apply:
       "No code change required — if you had `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches it. To keep the previous behaviour (closing without confirmation), set `Form: { confirmModalCloseOnUnsavedChanges: false }` via `<ComponentDefaultsProvider />`, or its deprecated equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.",
-    verify:
-      "Nothing to verify — the change is in Flow's own behaviour. If you opted out, confirm a Modal with a dirty form still closes without confirmation.",
   },
   {
     id: "table-column-width-props",
@@ -102,11 +83,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'maxWidth|[wW]idth=\\{null\\}'",
     apply:
       "Remove `maxWidth` from every `TableColumn`. Where `width` or `minWidth` was `null`, omit the prop instead — the type no longer accepts `null`, only `number | string`.",
-    verify:
-      "tsc --noEmit passes, and `rg 'maxWidth'` finds no remaining `TableColumn` usage.",
   },
   {
     id: "table-render-prop-removed",
@@ -115,10 +93,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'render=\\{'",
     apply:
       "Replace the `render` escape hatch on `Table` with a composition of `TableHeader`, `TableColumn`, `TableBody`, `TableRow` and `TableCell`.",
-    verify: "tsc --noEmit passes, and `rg 'render=\\{'` finds nothing.",
   },
   {
     id: "color-primary-to-default",
@@ -128,11 +104,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts 'color=\"primary\"'",
     apply:
       'Rewrite `color="primary"` to `color="default"` on `Breadcrumb`, `HeaderNavigation`, `Heading`, `IllustratedMessage`, and `Link` only — leave `Button` (and any other component where `"primary"` is still valid) untouched.',
-    verify:
-      "tsc --noEmit passes, and `rg 'color=\"primary\"'` finds no remaining match on the five renamed components.",
   },
   {
     id: "table-cell-render-prop-removed",
@@ -141,10 +114,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'render=\\{'",
     apply:
       "Provide the cell content as children of `TableCell` instead of a `render` function.",
-    verify: "tsc --noEmit passes, and `rg 'render=\\{'` finds nothing.",
   },
   {
     id: "password-tools-rule",
@@ -153,10 +124,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: false,
-    detect: "rg -t ts 'AsyncRule|SyncRule'",
     apply:
       "Replace `AsyncRule` and `SyncRule` imports from `@mittwald/flow-react-components/mittwald-password-tools-js` with `Rule`. Update custom rule classes to extend `Rule` instead.",
-    verify: "tsc --noEmit passes, and `rg 'AsyncRule|SyncRule'` finds nothing.",
   },
   {
     id: "accent-box-color-to-background-color",
@@ -165,10 +134,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts 'AccentBox'",
     apply:
       'Move every `color` value that is not one of `"default" | "dark" | "light" | "dark-static" | "light-static"` to `backgroundColor` instead. Review `color={expression}` and any element that already has `backgroundColor` by hand — neither can be decided from the value alone.',
-    verify: "tsc --noEmit passes, and `rg 'AccentBox'` hits are all reviewed.",
   },
   {
     id: "cartesian-chart-restructured",
@@ -177,11 +144,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'CartesianChart'",
     apply:
       "Add `dataKeyLabel` wherever a `dataKey` is a function — a string `dataKey` already sets it automatically. Where a `tickFormatter` or other callback relied on the argument being `any`, add an explicit type check (for example `instanceof Date`), or switch to `typedCartesianChart<T>()` for a chart whose callbacks are typed from your own data shape.",
-    verify:
-      "tsc --noEmit passes — the `any` → `unknown` change surfaces as compile errors — and every `CartesianChart`/`XAxis` with a function `dataKey` passes `dataKeyLabel`.",
   },
   {
     id: "code-block-syntax-highlighter-removed",
@@ -191,10 +155,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'CodeBlock'",
     apply:
       "Check every `CodeBlock` usage against the current props (see the [CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview)) and remove or replace props the new implementation does not support.",
-    verify: "tsc --noEmit passes — a removed prop surfaces as a type error.",
   },
   {
     id: "muted-action-error-to-abort-action-error",
@@ -203,10 +165,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: false,
-    detect: "rg -t ts 'MutedActionError'",
     apply:
       'Rename `MutedActionError` to `AbortActionError`, `isMutedActionError` to `isAbortActionError`, and `rethrowIfNotMuted` to `rethrowIfNotAborted`. Update any `error.name === "MutedActionError"` comparison to `"AbortActionError"`.',
-    verify: "tsc --noEmit passes, and `rg 'MutedActionError'` finds nothing.",
   },
   {
     id: "overlay-controller-add-on-close-return-type",
@@ -215,11 +175,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'addOnClose|addOnOpen'",
     apply:
       "No type change needed: the return type widened from `() => void` to `() => unknown`, and a `() => void` callback stays assignable. Instead, check every callback passed to `addOnClose`/`addOnOpen` for one that can return `false` — for example an arrow function whose body is an expression evaluating to `false`. `executeHandlers` now treats any handler returning `false` as a veto and cancels the close/open. A callback that returned `false` incidentally, with no intent to block anything, now silently cancels closes.",
-    verify:
-      "No compiler check catches this — `() => unknown` accepts every prior handler, so `tsc --noEmit` passes before and after. Review each `addOnClose`/`addOnOpen` handler by hand for one that can return `false`, and confirm the overlay still closes/opens as expected when that handler runs.",
   },
   {
     id: "form-resets-after-modal-close",
@@ -230,8 +187,6 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     remotePackage: false,
     apply:
       "No code change required. To keep the previous behaviour (the form keeping what the user entered), pass `autoReset={false}` (or `autoReset={{ onAfterModalClose: false }}`) to `Form`.",
-    verify:
-      "Nothing to verify — the change is in Flow's own behaviour, unless you opted out, in which case confirm the form resets (or not) the way you configured.",
   },
   {
     id: "cartesian-chart-empty-view",
@@ -240,11 +195,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: true,
-    detect: "rg -t ts 'emptyView=\\{'",
     apply:
       "Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}` instead of `emptyView={EmptyState}`.",
-    verify:
-      "tsc --noEmit passes, and `rg 'emptyView=\\{[A-Z]'` finds no remaining component reference.",
   },
   {
     id: "action-prop-to-on-action",
@@ -253,9 +205,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    detect: "rg -t ts 'action=\\{'",
     apply: "Rename the `action` prop on `Action` to `onAction`.",
-    verify: "tsc --noEmit passes, and `rg 'action=\\{'` finds nothing.",
   },
   {
     id: "button-props-interfaces",
@@ -264,11 +214,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: false,
-    detect: "rg -t ts 'ResetButtonProps|SubmitButtonProps'",
     apply:
       "Replace `ResetButtonProps`/`SubmitButtonProps` imports from `@mittwald/flow-react-components/react-hook-form` with `ButtonProps` from the package root. Leave `RemoteButtonElementProps` (from `@mittwald/flow-remote-elements`) alone.",
-    verify:
-      "tsc --noEmit passes, and `rg 'ResetButtonProps|SubmitButtonProps'` finds nothing.",
   },
   {
     id: "imports-to-package-root",
@@ -277,11 +224,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: false,
-    detect: "rg 'flow-react-components/'",
     apply:
       'Rewrite every subdirectory import from `@mittwald/flow-react-components` to the package root, except `react-hook-form` and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form` and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors, set `"module": "esnext"` in `tsconfig.json`.',
-    verify:
-      "tsc --noEmit passes, the app still runs, and `rg 'flow-react-components/'` finds no remaining subdirectory import other than `react-hook-form`, `nextjs`, or a CSS export.",
   },
   {
     id: "renamed-css-export",
@@ -290,10 +234,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "manual",
     remotePackage: false,
-    detect: "rg 'flow-react-components/styles'",
     apply:
       "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`.",
-    verify:
-      "The bundle builds and the stylesheet is present; `rg 'flow-react-components/styles'` finds nothing.",
   },
 ];

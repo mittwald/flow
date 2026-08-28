@@ -13,9 +13,7 @@ const entry = (
   kind: "migration",
   action,
   remotePackage: false,
-  detect: action === "none" ? undefined : `rg ${id}`,
   apply: `apply ${id}`,
-  verify: `verify ${id}`,
 });
 
 const entries = [
@@ -38,9 +36,8 @@ describe("renderList as text", () => {
     expect(text).toContain("flow-codemods@latest with-codemod");
   });
 
-  test("shows apply and verify, which is what an agent acts on", () => {
+  test("shows apply, which is what an agent acts on", () => {
     expect(text).toContain("apply by-hand");
-    expect(text).toContain("verify by-hand");
   });
 
   test("says so when the range holds nothing", () => {

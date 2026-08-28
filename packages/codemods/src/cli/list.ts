@@ -121,7 +121,7 @@ const painter = (color: boolean): Painter =>
 const indent = "  ";
 const labelWidth = 8;
 
-/** One `apply` / `verify` / `detect` row: dim label, wrapped body beside it. */
+/** One `apply` row: dim label, wrapped body beside it. */
 const field = (
   label: string,
   value: string,
@@ -160,12 +160,8 @@ const renderEntry = (
     indent + paint.dim(meta.join(" \u00B7 ")),
     "",
     ...field("apply", entry.apply, width, paint),
-    ...field("verify", entry.verify, width, paint),
   ];
 
-  if (entry.detect !== undefined) {
-    lines.push(...field("detect", entry.detect, width, paint));
-  }
   if (entry.action === "codemod") {
     lines.push(
       "",
@@ -218,9 +214,9 @@ const renderHeader = (
  * The migrations for a version range, as text or JSON.
  *
  * Read-only by design: this is what an agent can call to plan before it changes
- * anything. `--json` carries `apply`, `verify` and `detect` through unchanged,
- * because those are the fields it acts on — and it returns before any styling,
- * so no escape sequence can ever reach a parser.
+ * anything. `--json` carries `apply` through unchanged, because that is the
+ * field it acts on — and it returns before any styling, so no escape sequence
+ * can ever reach a parser.
  *
  * `color` and `width` are arguments rather than read from the environment here,
  * so the rendering is deterministic in a test. `cli.ts` supplies them.

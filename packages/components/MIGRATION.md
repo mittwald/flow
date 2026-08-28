@@ -89,11 +89,6 @@ options anyway.
 displayed content, or with `RadioGroup` when it sets a value. Pick per usage —
 this is a structural change, not a rename.
 
-**Verify:** tsc --noEmit passes either way — this is a deprecation, so
-`SegmentedControl` and `Segment` still typecheck and it catches nothing. Verify
-by confirming `rg '\b(SegmentedControl|Segment)\b'` finds no remaining usage, or
-that the runtime deprecation warning is gone.
-
 ---
 
 <a id="align-to-combine"></a>
@@ -126,8 +121,6 @@ internal and not covered by Semantic Versioning.
 
 **Apply:** Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for
 named, aliased and namespace imports from a Flow package.
-
-**Verify:** tsc --noEmit passes, and `rg '\bAlign\b'` finds no Flow import.
 
 ```shell
 npx @mittwald/flow-codemods@latest align-to-combine src
@@ -179,9 +172,6 @@ variable. `Chat`'s internal class `flow--chat--accent-button` became
 counterpart if you use `@mittwald/flow-stylesheet` or the token CSS variables
 directly — those have no fallback.
 
-**Verify:** tsc --noEmit passes, and `rg 'color="accent"'` finds no remaining
-`Button` or `SubmitButton` usage.
-
 ```shell
 npx @mittwald/flow-codemods@latest button-color-accent-to-success src
 ```
@@ -225,9 +215,6 @@ numeric value is not a reliable guide: `delay={500}` maps to `"default"`
 (400ms), not `"long"` (1500ms), if the element still needs the tooltip to be
 understood.
 
-**Verify:** tsc --noEmit passes — a numeric `delay` is a type error, so no
-separate `rg` check is needed.
-
 ---
 
 <a id="flags-to-component-defaults-provider"></a>
@@ -265,10 +252,6 @@ future release.
 `<ComponentDefaultsProvider defaults={{ ... }} />` wrapping the app, or the
 subtree the default should apply to.
 
-**Verify:** tsc --noEmit passes (the deprecated `flags` object still
-typechecks), and `rg '\bflags\.'` finds no remaining assignment you meant to
-move.
-
 ---
 
 <a id="modal-unsaved-changes-confirmation"></a>
@@ -294,9 +277,6 @@ it. To keep the previous behaviour (closing without confirmation), set
 `Form: { confirmModalCloseOnUnsavedChanges: false }` via
 `<ComponentDefaultsProvider />`, or its deprecated equivalent, the
 `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.
-
-**Verify:** Nothing to verify — the change is in Flow's own behaviour. If you
-opted out, confirm a Modal with a dirty form still closes without confirmation.
 
 ---
 
@@ -325,9 +305,6 @@ Percentage, pixel and `fr` values keep working as strings or numbers
 `minWidth` was `null`, omit the prop instead — the type no longer accepts
 `null`, only `number | string`.
 
-**Verify:** tsc --noEmit passes, and `rg 'maxWidth'` finds no remaining
-`TableColumn` usage.
-
 ---
 
 <a id="table-render-prop-removed"></a>
@@ -342,8 +319,6 @@ The `render` escape hatch on `Table` has been removed. Compose the table from
 
 **Apply:** Replace the `render` escape hatch on `Table` with a composition of
 `TableHeader`, `TableColumn`, `TableBody`, `TableRow` and `TableCell`.
-
-**Verify:** tsc --noEmit passes, and `rg 'render=\{'` finds nothing.
 
 ---
 
@@ -368,9 +343,6 @@ still valid, untouched).
 **Apply:** Rewrite `color="primary"` to `color="default"` on `Breadcrumb`,
 `HeaderNavigation`, `Heading`, `IllustratedMessage`, and `Link` only — leave
 `Button` (and any other component where `"primary"` is still valid) untouched.
-
-**Verify:** tsc --noEmit passes, and `rg 'color="primary"'` finds no remaining
-match on the five renamed components.
 
 ```shell
 npx @mittwald/flow-codemods@latest color-primary-to-default src
@@ -398,8 +370,6 @@ content as children instead.
 **Apply:** Provide the cell content as children of `TableCell` instead of a
 `render` function.
 
-**Verify:** tsc --noEmit passes, and `rg 'render=\{'` finds nothing.
-
 ---
 
 <a id="password-tools-rule"></a>
@@ -426,8 +396,6 @@ to `Rule` — ends up with a single import.
 **Apply:** Replace `AsyncRule` and `SyncRule` imports from
 `@mittwald/flow-react-components/mittwald-password-tools-js` with `Rule`. Update
 custom rule classes to extend `Rule` instead.
-
-**Verify:** tsc --noEmit passes, and `rg 'AsyncRule|SyncRule'` finds nothing.
 
 ```shell
 npx @mittwald/flow-codemods@latest password-tools-rule src
@@ -474,8 +442,6 @@ turns it into `backgroundColor="blue"`, which restores the blue one.
 `backgroundColor` instead. Review `color={expression}` and any element that
 already has `backgroundColor` by hand — neither can be decided from the value
 alone.
-
-**Verify:** tsc --noEmit passes, and `rg 'AccentBox'` hits are all reviewed.
 
 ```shell
 npx @mittwald/flow-codemods@latest accent-box-color-to-background-color src
@@ -584,10 +550,6 @@ callback relied on the argument being `any`, add an explicit type check (for
 example `instanceof Date`), or switch to `typedCartesianChart<T>()` for a chart
 whose callbacks are typed from your own data shape.
 
-**Verify:** tsc --noEmit passes — the `any` → `unknown` change surfaces as
-compile errors — and every `CartesianChart`/`XAxis` with a function `dataKey`
-passes `dataKeyLabel`.
-
 ---
 
 <a id="code-block-syntax-highlighter-removed"></a>
@@ -606,8 +568,6 @@ for details on what's now supported.
 **Apply:** Check every `CodeBlock` usage against the current props (see the
 [CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview))
 and remove or replace props the new implementation does not support.
-
-**Verify:** tsc --noEmit passes — a removed prop surfaces as a type error.
 
 ---
 
@@ -648,8 +608,6 @@ to `isAbortActionError`, and `rethrowIfNotMuted` to `rethrowIfNotAborted`.
 Update any `error.name === "MutedActionError"` comparison to
 `"AbortActionError"`.
 
-**Verify:** tsc --noEmit passes, and `rg 'MutedActionError'` finds nothing.
-
 ```shell
 npx @mittwald/flow-codemods@latest muted-action-error-to-abort-action-error src
 ```
@@ -672,11 +630,6 @@ every callback passed to `addOnClose`/`addOnOpen` for one that can return
 to `false`. `executeHandlers` now treats any handler returning `false` as a veto
 and cancels the close/open. A callback that returned `false` incidentally, with
 no intent to block anything, now silently cancels closes.
-
-**Verify:** No compiler check catches this — `() => unknown` accepts every prior
-handler, so `tsc --noEmit` passes before and after. Review each
-`addOnClose`/`addOnOpen` handler by hand for one that can return `false`, and
-confirm the overlay still closes/opens as expected when that handler runs.
 
 ---
 
@@ -704,10 +657,6 @@ further reset triggers can be added without another prop.
 keeping what the user entered), pass `autoReset={false}` (or
 `autoReset={{ onAfterModalClose: false }}`) to `Form`.
 
-**Verify:** Nothing to verify — the change is in Flow's own behaviour, unless
-you opted out, in which case confirm the form resets (or not) the way you
-configured.
-
 ---
 
 <a id="cartesian-chart-empty-view"></a>
@@ -727,9 +676,6 @@ element now.
 
 **Apply:** Wrap the `emptyView` value in JSX — `emptyView={<EmptyState />}`
 instead of `emptyView={EmptyState}`.
-
-**Verify:** tsc --noEmit passes, and `rg 'emptyView=\{[A-Z]'` finds no remaining
-component reference.
 
 ---
 
@@ -758,8 +704,6 @@ be removed in a future major version.
 A codemod renames the prop on `Action`.
 
 **Apply:** Rename the `action` prop on `Action` to `onAction`.
-
-**Verify:** tsc --noEmit passes, and `rg 'action=\{'` finds nothing.
 
 ```shell
 npx @mittwald/flow-codemods@latest action-prop-to-on-action src
@@ -793,9 +737,6 @@ there. `RemoteButtonElementProps` is left alone as well:
 `@mittwald/flow-react-components/react-hook-form` with `ButtonProps` from the
 package root. Leave `RemoteButtonElementProps` (from
 `@mittwald/flow-remote-elements`) alone.
-
-**Verify:** tsc --noEmit passes, and `rg 'ResetButtonProps|SubmitButtonProps'`
-finds nothing.
 
 ```shell
 npx @mittwald/flow-codemods@latest button-props-interfaces src
@@ -862,10 +803,6 @@ and `nextjs`, which move to `@mittwald/flow-react-components/react-hook-form`
 and `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
 set `"module": "esnext"` in `tsconfig.json`.
 
-**Verify:** tsc --noEmit passes, the app still runs, and
-`rg 'flow-react-components/'` finds no remaining subdirectory import other than
-`react-hook-form`, `nextjs`, or a CSS export.
-
 ```shell
 npx @mittwald/flow-codemods@latest imports-to-package-root src
 ```
@@ -891,6 +828,3 @@ as well. A documentation on how to use them is planned.
 
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
 `@mittwald/flow-react-components/all.css`.
-
-**Verify:** The bundle builds and the stylesheet is present;
-`rg 'flow-react-components/styles'` finds nothing.

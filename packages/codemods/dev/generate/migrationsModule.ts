@@ -16,7 +16,7 @@ const target = fileURLToPath(
  * against `MigrationEntry` on every `test:compile`.
  *
  * The body is dropped: it is prose for humans, it is the largest part of the
- * catalogue, and the CLI never prints it. `list` shows `apply` and `verify`.
+ * catalogue, and the CLI never prints it. `list` shows `apply`.
  */
 export const generateMigrationsModule = async (): Promise<void> => {
   // The `id` tie-break is not decoration: several releases carry two entries

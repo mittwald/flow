@@ -39,15 +39,8 @@ export interface MigrationEntry {
    * not guess it.
    */
   remotePackage: boolean;
-  /**
-   * A shell command that finds affected code. May over-match — the reader looks
-   * at the hits. Must not under-match. Omitted only when `action` is `none`.
-   */
-  detect?: string;
   /** What to change, imperative and specific enough to execute. */
   apply: string;
-  /** How to confirm it landed. */
-  verify: string;
   /** The guide entry as Markdown. Headings inside it start at level 4. */
   body: string;
 }

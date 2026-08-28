@@ -67,21 +67,20 @@ describe("runSingleCodemod", () => {
     expect(output).toContain("flow-codemods list");
   });
 
-  test("a catalogued id with no codemod prints apply and verify", async () => {
+  test("a catalogued id with no codemod prints apply", async () => {
     const { code, output } = await call(
       ["table-render-prop-removed", "src"],
       ok,
     );
     expect(code).toBe(1);
     expect(output).toContain("apply:");
-    expect(output).toContain("verify:");
   });
 
-  test("a successful run ends with verify", async () => {
+  test("a successful run ends with a pointer to the migration guide", async () => {
     const { code, output } = await call(["align-to-combine", "src"], ok);
     expect(code).toBe(0);
     expect(output).toContain("1 file(s) changed");
-    expect(output).toContain("verify:");
+    expect(output).toContain("MIGRATION.md#align-to-combine");
   });
 
   test("errors are reported and fail", async () => {

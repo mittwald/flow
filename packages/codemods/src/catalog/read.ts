@@ -9,7 +9,7 @@ const migrationsDir = fileURLToPath(new URL("../migrations", import.meta.url));
 /** Frontmatter delimited by `---` lines, then the Markdown body. */
 const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
 
-const requiredStrings = ["since", "title", "kind", "action", "apply", "verify"];
+const requiredStrings = ["since", "title", "kind", "action", "apply"];
 
 const parseEntry = (file: string, source: string): MigrationEntry => {
   // A function declaration, not an arrow: only that form narrows control flow
@@ -35,9 +35,6 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
   if (typeof data.remotePackage !== "boolean") {
     fail("is missing the required boolean field `remotePackage`");
   }
-  if (data.detect !== undefined && typeof data.detect !== "string") {
-    fail("has a non-string `detect`");
-  }
 
   return {
     id: basename(file, ".md"),
@@ -46,9 +43,7 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
     kind: data.kind as MigrationEntry["kind"],
     action: data.action as MigrationEntry["action"],
     remotePackage: data.remotePackage,
-    detect: data.detect as string | undefined,
     apply: data.apply as string,
-    verify: data.verify as string,
     body: body.trim(),
   };
 };

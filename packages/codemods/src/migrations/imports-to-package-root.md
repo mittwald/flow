@@ -4,17 +4,12 @@ title: Subpath imports moved to the package root
 kind: migration
 action: codemod
 remotePackage: false
-detect: rg 'flow-react-components/'
 apply:
   'Rewrite every subdirectory import from `@mittwald/flow-react-components` to
   the package root, except `react-hook-form` and `nextjs`, which move to
   `@mittwald/flow-react-components/react-hook-form` and
   `@mittwald/flow-react-components/nextjs`. If you hit missing module errors,
   set `"module": "esnext"` in `tsconfig.json`.'
-verify:
-  tsc --noEmit passes, the app still runs, and `rg 'flow-react-components/'`
-  finds no remaining subdirectory import other than `react-hook-form`, `nextjs`,
-  or a CSS export.
 ---
 
 With the latest update to `@mittwald/flow-react-components`, the way package

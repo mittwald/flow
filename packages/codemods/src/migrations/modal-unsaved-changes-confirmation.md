@@ -11,9 +11,6 @@ apply:
   `Form: { confirmModalCloseOnUnsavedChanges: false }` via
   `<ComponentDefaultsProvider />`, or its deprecated equivalent, the
   `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment."
-verify:
-  Nothing to verify — the change is in Flow's own behaviour. If you opted out,
-  confirm a Modal with a dirty form still closes without confirmation.
 ---
 
 A `Modal` that contains a react-hook-form `<Form>` now asks for confirmation
