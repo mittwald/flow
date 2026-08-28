@@ -134,12 +134,38 @@ const waitForPaintedContent = async (): Promise<void> => {
     .toBe(true);
 };
 
+export interface TestScreenshotOptions extends ScreenshotMatcherOptions {
+  /**
+   * Leaves the pointer where the scenario put it, instead of parking it.
+   *
+   * For a scenario whose subject _is_ a hover state, parking the pointer
+   * dismantles what the screenshot is meant to show. The tooltip scenario only
+   * ever passed by outrunning react-aria's `closeDelay` — 500ms during which a
+   * tooltip stays painted after the pointer leaves its trigger. That is a race
+   * the capture usually wins and sometimes doesn't, and the frame it loses in
+   * is a tooltip-less one. #2945 regenerated screenshots for an unrelated
+   * CodeBlock change, caught that frame, and committed it as the
+   * `firefox-linux` baseline for `Tooltip - visible` — leaving it contradicting
+   * the three baselines beside it, and the scheduled visual run red in both
+   * environments.
+   *
+   * A scenario that keeps the pointer on its trigger has no such window. The
+   * cost is that the trigger is captured in its hover state, which is honest:
+   * that is what the user sees when a tooltip is open.
+   */
+  keepPointerPosition?: boolean;
+}
+
 const testScreenshot = async (
   description: string,
-  options: ScreenshotMatcherOptions = {},
+  { keepPointerPosition = false, ...options }: TestScreenshotOptions = {},
 ): Promise<void> => {
   await waitForPaintedContent();
-  await setNeutralPointerPosition();
+
+  if (!keepPointerPosition) {
+    await setNeutralPointerPosition();
+  }
+
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
@@ -150,7 +176,7 @@ interface TestEnvironment {
   container: Locator;
   testScreenshot: (
     description: string,
-    options?: ScreenshotMatcherOptions,
+    options?: TestScreenshotOptions,
   ) => Promise<void>;
 }
 
