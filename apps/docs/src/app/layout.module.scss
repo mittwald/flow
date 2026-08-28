@@ -62,12 +62,12 @@
   }
 }
 
-.tabsContainer {
+.pageContainer {
   min-width: 0;
   width: 100%;
 }
 
-.tabs {
+.pageCard {
   flex-grow: 1;
   min-width: 0;
 }
@@ -81,10 +81,6 @@
   > h4 {
     margin-top: var(--size-px--m);
   }
-}
-
-.topContent {
-  width: 100%;
 }
 
 /*
