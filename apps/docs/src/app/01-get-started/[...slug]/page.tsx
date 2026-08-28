@@ -1,11 +1,10 @@
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import TopContent from "@/app/_components/layout/TopContent";
+import PageContent from "@/app/_components/layout/PageContent";
 import type { Metadata } from "next";
-import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
-import { Flex } from "@mittwald/flow-react-components";
 
-const contentFolder = "src/content/01-get-started";
+const section = "01-get-started";
+const contentFolder = `src/content/${section}`;
 
 export const generateStaticParams = async () => {
   return await MdxFileFactory.generateStaticParams(contentFolder);
@@ -23,26 +22,15 @@ interface Props {
 export default async function Page(props: Props) {
   const params = await props.params;
 
-  const indexMdxFile = await MdxFileFactory.fromParams(
+  const mdxFile = await MdxFileFactory.fromParams(
     contentFolder,
     params,
     "index",
   );
 
-  if (!indexMdxFile) {
+  if (!mdxFile) {
     throw new Error("Could not find index.mdx");
   }
 
-  const path = `/01-get-started/${indexMdxFile.slugs[0]}`;
-
-  return (
-    <Flex columnGap="m">
-      <TopContent mdxFile={indexMdxFile} section="01-get-started" />
-
-      <AnchorNavigation
-        currentPath={`${path}`}
-        anchors={indexMdxFile.anchors}
-      />
-    </Flex>
-  );
+  return <PageContent mdxFile={mdxFile} section={section} />;
 }
