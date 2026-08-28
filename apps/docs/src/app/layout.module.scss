@@ -50,9 +50,12 @@
 }
 
 .pageHeading {
-  // Keep the page heading clear of the sticky header when the table of
-  // contents jumps to it — same offset as the MDX headings.
-  scroll-margin-top: 6rem;
+  // The table of contents' topmost entry points at this heading, and it means
+  // "the top of the page". The heading always sits within the first screenful,
+  // so an offset of a full viewport makes the jump clamp to 0 instead of
+  // leaving the page padding scrolled away. A fixed length would have to be
+  // re-tuned whenever the header height or the page padding changes.
+  scroll-margin-top: 100vh;
 }
 
 .main {
