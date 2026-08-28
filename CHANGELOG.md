@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** version-contract guard no longer reads a first publish as a tightening ([#2983](https://github.com/mittwald/flow/issues/2983)) ([cc7b2ba](https://github.com/mittwald/flow/commit/cc7b2ba1ab5cc7ca61ae07519fee554a9f2264fb))
+* **Form:** stop a Modal&#x27;s form submit from reaching the surrounding Form ([#2976](https://github.com/mittwald/flow/issues/2976)) ([ee9b60a](https://github.com/mittwald/flow/commit/ee9b60a24c5bdde69034a3a4fc9964f51a29c14a))
+
 ## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.8...1.1.0-next.1) (2026-08-28)
 
 ## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
