@@ -96,6 +96,12 @@ jobs:
         with:
           name: visual-diffs
           path: packages/**/.vitest-attachments/**
+          # `.vitest-attachments` is a dot directory, and upload-artifact skips
+          # hidden paths by default — so this artifact never existed, on any run.
+          # The failure comment points reviewers at it regardless, and vitest
+          # truncates the step log before its own failure summary, which left a
+          # red check with no reference, actual or diff image anywhere (#2985).
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
 
