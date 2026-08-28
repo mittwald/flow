@@ -98,9 +98,8 @@ export class MdxFileFactory {
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
 
-    // The page heading is rendered from the frontmatter, not from the MDX, so
-    // `getAnchors` cannot see it. Without this entry the topmost section of
-    // every page — intro, status, live example — has no anchor at all (#2876).
+    // The page heading comes from the frontmatter, not the MDX, so
+    // `getAnchors` cannot see it.
     const anchors: Anchor[] = [
       {
         slug: topAnchorId,

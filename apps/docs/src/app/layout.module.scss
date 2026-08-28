@@ -50,11 +50,9 @@
 }
 
 .pageHeading {
-  // The table of contents' topmost entry points at this heading, and it means
-  // "the top of the page". The heading always sits within the first screenful,
-  // so an offset of a full viewport makes the jump clamp to 0 instead of
-  // leaving the page padding scrolled away. A fixed length would have to be
-  // re-tuned whenever the header height or the page padding changes.
+  // This anchor means "the top of the page". The heading always sits within the
+  // first screenful, so a full-viewport offset clamps the jump to 0 — a fixed
+  // length would need re-tuning whenever the header or page padding changes.
   scroll-margin-top: 100vh;
 }
 

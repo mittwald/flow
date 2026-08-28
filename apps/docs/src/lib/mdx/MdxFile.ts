@@ -8,9 +8,8 @@ export interface Anchor {
 }
 
 /**
- * `id` of the page heading, and slug of the topmost table-of-contents entry. A
- * constant rather than the slugified title: `# Color` and `# Releases` already
- * exist as MDX headings and would collide with it.
+ * A constant rather than the slugified page title: `# Color` and `# Releases`
+ * already exist as MDX headings and would collide with it.
  */
 export const topAnchorId = "top";
 

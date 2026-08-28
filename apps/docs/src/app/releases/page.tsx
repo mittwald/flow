@@ -25,8 +25,7 @@ export const metadata: Metadata = {
 export default async function ReleasesPage() {
   const releases = await getReleases();
 
-  // This page builds its anchors itself, so the page-heading entry that
-  // MdxFileFactory adds for MDX pages has to be prepended here (#2876).
+  // MDX pages get this entry from MdxFileFactory; this page builds its own.
   const anchors: Anchor[] = [
     { slug: topAnchorId, text: "Releases", level: 2 },
     ...releases.map((r) => ({

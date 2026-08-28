@@ -23,9 +23,8 @@ interface Props {
 const nativeReplaceState =
   typeof History !== "undefined" ? History.prototype.replaceState : undefined;
 
-// Where a heading comes to rest when its anchor is clicked — the same offset
-// the headings carry as `scroll-margin-top`. A heading counts as reached once
-// it crosses this line.
+// Duplicates the headings' `scroll-margin-top`: a heading counts as reached
+// once it crosses the line an anchor jump puts it on.
 const activeLineOffset = 96;
 
 const updateLocationHash = (slug: string) => {
@@ -76,10 +75,6 @@ export const AnchorNavigation: FC<Props> = (props) => {
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
   useEffect(() => {
-    // The active entry is the last heading the reader has scrolled past, where
-    // "past" is the line a heading lands on when its anchor is clicked. Before
-    // the first one is reached — at the top of the page — the page heading is
-    // active.
     const updateActiveAnchor = () => {
       const passed = anchors
         .map((a) => ({ slug: a.slug, el: document.getElementById(a.slug) }))
@@ -89,8 +84,6 @@ export const AnchorNavigation: FC<Props> = (props) => {
       setActiveAnchor(passed.at(-1)?.slug ?? anchors[0]?.slug ?? null);
     };
 
-    // Reading layout on every scroll event would thrash; once per frame is
-    // enough to keep the highlight in step with the scroll.
     let frame = 0;
     const scheduleUpdate = () => {
       if (frame !== 0) {
