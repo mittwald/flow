@@ -441,8 +441,9 @@ Markdown headings are therefore shifted down one level when rendered:
 - Use `#` for the top-level sections of a page — for example `# Best Practices`,
   `# Kombiniere mit ...`, `# Properties`. A page usually has several `#`
   sections.
-- Separate `#` sections from each other with a horizontal rule (`---`). Do not
-  put a rule between a `#` and its own `##`.
+- Put a horizontal rule (`---`) before **every** `#` section — the first one
+  included, so it is set off from the page header above it. Do not put a rule
+  between a `#` and its own `##`.
 - `#` and `##` headings appear in the anchor navigation ("Auf dieser Seite").
   Keep them concise so the navigation remains readable.
 
