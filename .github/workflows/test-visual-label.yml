@@ -100,6 +100,10 @@ jobs:
         with:
           name: visual-diffs-${{ matrix.shard }}
           path: packages/**/.vitest-attachments/**
+          # `.vitest-attachments` is a dot directory, and the action drops those
+          # unless told otherwise — which is why this upload has been finding
+          # "no files" and every failing run so far came without its diffs.
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
 
