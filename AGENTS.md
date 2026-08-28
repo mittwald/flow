@@ -122,7 +122,7 @@ pnpm nx test:compile components            # tsc --noEmit for one package
 
 pnpm test:browser:prepare                  # install Playwright browsers (once)
 pnpm nx test:browser components --browser.name=webkit
-pnpm affected:test:browser --parallel=1 --browser.name=webkit   # what CI runs
+pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 pnpm nx test:visual:update remote-react-components              # update visual snapshots
 
 pnpm lint                                  # eslint + stylelint + format:check (pre-push hook runs this)
