@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+### Bug Fixes
+
+* **FileField:** open the file dialog inside a link row ([#2965](https://github.com/mittwald/flow/issues/2965)) ([b77a14c](https://github.com/mittwald/flow/commit/b77a14cb860b7a3df49e8d9a346d3228c338bd56))
+
 ## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
 
 ### Bug Fixes
