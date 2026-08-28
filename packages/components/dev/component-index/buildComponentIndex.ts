@@ -36,6 +36,9 @@ export interface StatusEntry {
   deprecationNotice?: string;
 }
 
+/** The prop-level `@deprecated` tag — not `@deprecatedValues a, b`. */
+const deprecatedRegex = /@deprecated(?!\w)/;
+
 const byKey = <T>(entries: [string, T][]): Record<string, T> =>
   Object.fromEntries(entries.sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
 
@@ -69,7 +72,7 @@ const indexProps = (component: ComponentDoc): Record<string, IndexedProp> =>
         if (description) {
           indexed.description = description;
         }
-        if (prop.description.includes("@deprecated")) {
+        if (deprecatedRegex.test(prop.description)) {
           indexed.deprecated = true;
         }
         return [name, indexed];

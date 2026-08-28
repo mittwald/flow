@@ -156,15 +156,18 @@ Remote generation details:
   `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
   is not swept in). What it cannot convert is a **function returning** rendered
   output, because the host has to call it: that needs an eager slot or
-  `@flr-ignore-props`. `checkSerializableProps` reports the offenders on every
-  generator run.
+  `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
+  prop, so a new one cannot ship.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize. Use the
-  per-component tag for additional cases (see `TunnelEntry.tsx`).
+  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
+  `renderEmptyState` plus react-aria's `render` because the host would call them
+  and get rendered output back — neither was ever a deliberate Flow API, and
+  both cost the whole mutation batch when they were tried. Use the per-component
+  tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
@@ -291,7 +294,11 @@ to zero components.
 
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
-props to hide.
+props to hide. A deprecated **value** of a still-current prop — `Button`'s
+`color="accent"` — is listed with `@deprecatedValues accent` (comma-separated
+for several) and drops out of the properties table, so the table only offers
+values that should still be used. The value stays in the prop's type and keeps
+working; the runtime warns via `useWarnDeprecation` as usual.
 
 ## Misc
 

@@ -183,6 +183,23 @@ test("carries isNew and marks deprecated props", () => {
   });
 });
 
+test("@deprecatedValues does not deprecate the prop itself", () => {
+  const index = buildComponentIndex(
+    [
+      component("Button", "src/components/Button/Button.tsx", {
+        color: prop({
+          name: "color",
+          description: "The color.\n@deprecatedValues accent",
+        }),
+      }),
+    ],
+    { [`${PACKAGE}#Button`]: stable },
+    PACKAGE,
+  );
+
+  expect(entryOf(index, "Button").props.color).not.toHaveProperty("deprecated");
+});
+
 test("skips registry keys with no matching doc-properties entry", () => {
   const index = buildComponentIndex(
     [],

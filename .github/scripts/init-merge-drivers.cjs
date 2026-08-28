@@ -12,6 +12,13 @@
 //
 // Run via `pnpm dev:init-merge-drivers`; `prepare` also runs it after every
 // install, so a normal checkout has the drivers without thinking about it.
+//
+// Note what that means: git config is per-repository, not per-branch, so these
+// are repo-WIDE merge rules. They run on every merge anyone performs here, in
+// every direction — overwhelmingly `main` merged into a feature branch, not the
+// cascade they were written for. A driver registered here must therefore be
+// correct in both directions; `merge-package-json.cjs` documents how it earns
+// that, and it was not always true (ADR 0004, amendment 2026-08-26).
 
 const { spawnSync } = require("node:child_process");
 

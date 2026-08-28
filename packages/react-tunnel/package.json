@@ -30,7 +30,7 @@
     "clean": "rimraf dist",
     "test:browser": "vitest run --project=browser --browser.headless",
     "test:browser:dev": "vitest dev --project=browser",
-    "test:compile": "tsc --noEmit"
+    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json"
   },
   "dependencies": {
     "mobx": "^6.16.1",
