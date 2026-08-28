@@ -26,5 +26,10 @@ Next.js documentation site for the flow Styleguide, deployed to
   against the pages that exist — it runs as part of `pnpm affected:test`, so a
   link to a moved or renamed page fails the PR. Move a page and the failure
   names the candidates it could mean. External URLs are out of scope.
+- **Two test runners, two globs.** `test:unit` is Vitest over `*.test.ts`;
+  `test:links` is the `node:test` runner over `*.node.test.ts`. Neither can
+  execute the other's files, so the `.node` infix is what keeps the globs
+  disjoint — same role as `*.browser.test.tsx` in `components`. Write a new
+  `node:test` file with the infix, or both targets break at once.
 - Run `pnpm format` (Prettier, 80-character prose wrap) before committing. The
   local dev server is `pnpm nx dev docs`.
