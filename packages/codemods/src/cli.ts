@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 import { checkbox } from "@inquirer/prompts";
-import { allEntries } from "./catalog/entries.js";
 import { parseArguments } from "./cli/args.js";
 import { createChoose } from "./cli/choose.js";
 import { runSingleCodemod } from "./cli/codemod.js";
-import { renderList, validateListBounds } from "./cli/list.js";
+import { defaultListDeps, runList } from "./cli/list.js";
 import { defaultUpgradeDeps, runUpgrade } from "./cli/upgrade.js";
 
 const usage = `flow-codemods — migrate a codebase across Flow versions
@@ -12,10 +11,12 @@ const usage = `flow-codemods — migrate a codebase across Flow versions
 Usage:
   flow-codemods upgrade [revision]   Bump every Flow dependency, install, run codemods
   flow-codemods <id> [path]          Run a single codemod
-  flow-codemods list                 Show the migrations for a version range
+  flow-codemods list [revision]      Show the migrations for the whole catalogue, or
+                                      for the range a revision would touch
 
 Revision: patch | minor | major | a dist-tag (latest, next) | an exact version.
-Default is minor, which stays inside the current major.
+"upgrade" defaults to minor, which stays inside the current major. "list" has
+no default — without one it lists the whole catalogue, offline.
 
 Options:
   -y, --yes          Accept every default. Implied when stdin is not a TTY.
@@ -23,7 +24,6 @@ Options:
       --dry          Do not write files
       --print        Print the transformed output
       --path         Sources to transform
-      --from, --to   Bound the range for "list"
       --json         Machine-readable output for "list"
   -h, --help         Show this text
   -V, --version      Show the version
@@ -33,14 +33,15 @@ const main = async (): Promise<number> => {
   const parsed = parseArguments(process.argv.slice(2));
 
   // Deliberate single ordered report stream: every command-level failure below
-  // that a real invocation can hit — `list`'s bound check, `codemod`'s and
-  // `upgrade`'s injected `log` — writes to stdout, interleaved with the rest of
-  // that command's normal output, in the order it happened. (The `default`
-  // case is dead code — `Command` is exhaustively covered above it — so its
-  // stderr write never actually runs.) Only the top-level rejection handler
-  // below (an unexpected throw, not a command refusing) writes to stderr. So
-  // `2>/dev/null` on this CLI does not suppress a refusal reason today — do not
-  // "fix" a command's own failure message onto stderr without weighing that.
+  // that a real invocation can hit — `list`'s and `upgrade`'s range resolution,
+  // `codemod`'s and `upgrade`'s injected `log` — writes to stdout, interleaved
+  // with the rest of that command's normal output, in the order it happened.
+  // (The `default` case is dead code — `Command` is exhaustively covered above
+  // it — so its stderr write never actually runs.) Only the top-level
+  // rejection handler below (an unexpected throw, not a command refusing)
+  // writes to stderr. So `2>/dev/null` on this CLI does not suppress a
+  // refusal reason today — do not "fix" a command's own failure message onto
+  // stderr without weighing that.
   switch (parsed.command) {
     case "help":
       process.stdout.write(usage);
@@ -52,33 +53,21 @@ const main = async (): Promise<number> => {
       process.stdout.write(`${manifest.version}\n`);
       return 0;
     }
-    case "list": {
-      const error = validateListBounds(parsed);
-      if (error !== undefined) {
-        process.stdout.write(`${error}\n`);
-        return 1;
-      }
-      process.stdout.write(
-        renderList({
-          entries: allEntries,
-          from: parsed.from,
-          to: parsed.to,
-          json: parsed.json,
-          // Colour only when a person is looking at a terminal. `NO_COLOR` is
-          // the cross-tool convention for turning it off; a pipe or a file gets
-          // plain text so the output stays greppable.
-          color:
-            process.stdout.isTTY === true &&
-            process.env.NO_COLOR === undefined &&
-            !parsed.json,
-          // Clamped at both ends: a terminal can report an unusably small
-          // width (or none at all), and beyond ~100 columns long prose gets
-          // harder to read rather than easier.
-          width: Math.min(Math.max(process.stdout.columns ?? 80, 60), 100),
-        }),
-      );
-      return 0;
-    }
+    case "list":
+      return await runList(parsed, {
+        ...defaultListDeps(process.cwd()),
+        // Colour only when a person is looking at a terminal. `NO_COLOR` is
+        // the cross-tool convention for turning it off; a pipe or a file gets
+        // plain text so the output stays greppable.
+        color:
+          process.stdout.isTTY === true &&
+          process.env.NO_COLOR === undefined &&
+          !parsed.json,
+        // Clamped at both ends: a terminal can report an unusably small width
+        // (or none at all), and beyond ~100 columns long prose gets harder to
+        // read rather than easier.
+        width: Math.min(Math.max(process.stdout.columns ?? 80, 60), 100),
+      });
     case "codemod":
       return await runSingleCodemod(parsed, {
         cwd: process.cwd(),

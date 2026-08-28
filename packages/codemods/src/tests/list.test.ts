@@ -1,6 +1,10 @@
+import { mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, test } from "vitest";
 import type { CatalogEntry } from "../catalog/entries";
-import { renderList, stripAnsi, validateListBounds } from "../cli/list";
+import { parseArguments } from "../cli/args";
+import { renderList, runList, stripAnsi, type ListDeps } from "../cli/list";
 
 const entry = (
   id: string,
@@ -23,7 +27,11 @@ const entries = [
 ];
 
 describe("renderList as text", () => {
-  const text = renderList({ entries, from: "1.0.0", to: "2.0.0", json: false });
+  const text = renderList({
+    entries,
+    range: { from: "1.0.0", to: "2.0.0" },
+    json: false,
+  });
 
   test("names every entry with its version and what it needs", () => {
     expect(text).toContain("with-codemod");
@@ -42,7 +50,11 @@ describe("renderList as text", () => {
 
   test("says so when the range holds nothing", () => {
     expect(
-      renderList({ entries, from: "3.0.0", to: "3.1.0", json: false }),
+      renderList({
+        entries,
+        range: { from: "3.0.0", to: "3.1.0" },
+        json: false,
+      }),
     ).toContain("Nothing to migrate");
   });
 });
@@ -50,7 +62,11 @@ describe("renderList as text", () => {
 describe("renderList as JSON", () => {
   test("emits the selected entries as a parseable array", () => {
     const parsed = JSON.parse(
-      renderList({ entries, from: "1.0.0", to: "2.0.0", json: true }),
+      renderList({
+        entries,
+        range: { from: "1.0.0", to: "2.0.0" },
+        json: true,
+      }),
     ) as CatalogEntry[];
 
     expect(parsed.map((selected) => selected.id)).toEqual([
@@ -63,57 +79,21 @@ describe("renderList as JSON", () => {
 
   test("an empty range is an empty array, not a message", () => {
     expect(
-      renderList({ entries, from: "3.0.0", to: "3.1.0", json: true }),
+      renderList({
+        entries,
+        range: { from: "3.0.0", to: "3.1.0" },
+        json: true,
+      }),
     ).toBe("[]");
   });
 });
 
-describe("renderList without bounds", () => {
-  test("no bounds lists the whole catalogue", () => {
+describe("renderList without a range", () => {
+  test("no range lists the whole catalogue", () => {
     const parsed = JSON.parse(
       renderList({ entries, json: true }),
     ) as CatalogEntry[];
     expect(parsed).toHaveLength(3);
-  });
-
-  test("a lower bound of none still reaches the oldest entry", () => {
-    const oldest = [entry("ancient", "0.0.0", "manual")];
-    const parsed = JSON.parse(
-      renderList({ entries: oldest, to: "1.0.0", json: true }),
-    ) as CatalogEntry[];
-    expect(parsed.map((e) => e.id)).toEqual(["ancient"]);
-  });
-});
-
-describe("validateListBounds", () => {
-  test("valid bounds, or none at all, need no message", () => {
-    expect(validateListBounds({})).toBeUndefined();
-    expect(validateListBounds({ from: "1.0.0" })).toBeUndefined();
-    expect(validateListBounds({ from: "1.0.0", to: "2.0.0" })).toBeUndefined();
-  });
-
-  // The original bug: an invalid bound reached semver's `lt`/`lte` inside
-  // `selectEntries` and threw node-semver's own "Invalid Version: 1.0" — this
-  // check exists to catch it first, before that throw, with a message that
-  // names the flag and what is accepted.
-  test("an incomplete version like 1.0 is rejected, not passed to semver", () => {
-    const message = validateListBounds({ from: "1.0" });
-    expect(message).toContain('"1.0"');
-    expect(message).not.toMatch(/invalid version/i);
-  });
-
-  test("a range is rejected — only an exact version is accepted", () => {
-    expect(validateListBounds({ from: "^1.0.0" })).toContain('"^1.0.0"');
-  });
-
-  test("a dist-tag is rejected — list has no registry to resolve it against", () => {
-    expect(validateListBounds({ to: "latest" })).toContain('"latest"');
-  });
-
-  test("both bounds invalid are both named", () => {
-    const message = validateListBounds({ from: "1.0", to: "latest" });
-    expect(message).toContain('"1.0"');
-    expect(message).toContain('"latest"');
   });
 });
 
@@ -183,13 +163,141 @@ describe("presentation", () => {
   test("the header counts what the range holds", () => {
     const text = renderList({
       entries,
-      from: "1.0.0",
-      to: "2.0.0",
+      range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
     expect(text).toContain("3 migrations from 1.0.0 to 2.0.0");
     expect(text).toContain("1 codemod");
     expect(text).toContain("1 by hand");
     expect(text).toContain("1 no code change");
+  });
+});
+
+// `runList` is the CLI-level entry point: it decides between the two forms
+// (whole catalogue vs. a revision's range) and, for the latter, drives
+// `resolveRange` — the same module `upgrade` uses to answer "what range am I
+// looking at".
+const registry = {
+  versions: ["0.2.0-alpha.646", "1.0.0", "1.0.1", "1.0.5", "1.1.0", "1.2.0"],
+  distTags: { latest: "1.2.0" },
+};
+
+const project = (dependencies: Record<string, string>): string => {
+  const dir = mkdtempSync(join(tmpdir(), "flow-list-"));
+  writeFileSync(
+    join(dir, "package.json"),
+    JSON.stringify({ name: "consumer", dependencies }, null, 2),
+  );
+  return dir;
+};
+
+const deps = (
+  cwd: string,
+  overrides: Partial<ListDeps> = {},
+): ListDeps & {
+  written: string[];
+} => {
+  const written: string[] = [];
+  return {
+    cwd,
+    fetchVersions: async () => registry,
+    readInstalledVersion: () => undefined,
+    write: (text) => written.push(text),
+    written,
+    ...overrides,
+  };
+};
+
+describe("runList", () => {
+  test("no revision lists the whole catalogue, offline — no manifest is read", async () => {
+    // A directory with nothing in it at all, not even a package.json: if this
+    // needed one, `fetchVersions` throwing below would prove it — a bare
+    // `list` never even gets there.
+    const cwd = mkdtempSync(join(tmpdir(), "flow-list-empty-"));
+    const recorded = deps(cwd, {
+      fetchVersions: () => {
+        throw new Error("must not be called for a bare `list`");
+      },
+    });
+
+    const code = await runList(parseArguments(["list"]), recorded);
+
+    expect(code).toBe(0);
+    expect(recorded.written.join("")).toContain("migrations");
+  });
+
+  test("--json with no revision is the whole catalogue as a parseable array", async () => {
+    const cwd = mkdtempSync(join(tmpdir(), "flow-list-empty-json-"));
+    const recorded = deps(cwd, {
+      fetchVersions: () => {
+        throw new Error("must not be called for a bare `list`");
+      },
+    });
+
+    const code = await runList(parseArguments(["list", "--json"]), recorded);
+
+    expect(code).toBe(0);
+    expect(() => JSON.parse(recorded.written.join(""))).not.toThrow();
+  });
+
+  test("a revision resolves the same range `upgrade` would act on", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^1.0.1",
+    });
+    const recorded = deps(cwd);
+
+    const code = await runList(parseArguments(["list", "minor"]), recorded);
+
+    expect(code).toBe(0);
+    expect(recorded.written.join("")).toContain("from 1.0.1 to 1.2.0");
+  });
+
+  test("a directory with no package.json prints the clear message, not ENOENT", async () => {
+    const cwd = mkdtempSync(join(tmpdir(), "flow-list-nomanifest-"));
+    const recorded = deps(cwd);
+
+    const code = await runList(parseArguments(["list", "minor"]), recorded);
+
+    expect(code).toBe(1);
+    const output = recorded.written.join("");
+    expect(output).not.toContain("ENOENT");
+    expect(output).toContain("No package.json found");
+  });
+
+  test("a revision that resolves at or below current prints, it does not refuse", async () => {
+    const cwd = project({ "@mittwald/flow-react-components": "^1.2.0" });
+    const recorded = deps(cwd);
+
+    const code = await runList(parseArguments(["list", "latest"]), recorded);
+
+    // `upgrade` would refuse here ("Already on ... Nothing to do") because
+    // there is nothing to write. `list` has nothing to write in the first
+    // place, so it just shows the (here: empty-of-migrations) range — the
+    // catalogue can still carry a `deprecation` entry whose replacement
+    // already exists at that version, which is real information, not a
+    // refusal to word differently.
+    const output = recorded.written.join("");
+    expect(code).toBe(0);
+    expect(output).toContain("from 1.2.0 to 1.2.0");
+    expect(output).not.toMatch(/already on|nothing to do/i);
+  });
+
+  test("an unresolvable revision names what it could not resolve", async () => {
+    const cwd = project({ "@mittwald/flow-react-components": "^1.0.1" });
+    const recorded = deps(cwd);
+
+    const code = await runList(parseArguments(["list", "nonsense"]), recorded);
+
+    expect(code).toBe(1);
+    expect(recorded.written.join("")).toContain("nonsense");
+  });
+
+  test("--json is honoured for a revision-bounded range too", async () => {
+    const cwd = project({ "@mittwald/flow-react-components": "^1.0.1" });
+    const recorded = deps(cwd);
+
+    await runList(parseArguments(["list", "minor", "--json"]), recorded);
+
+    expect(() => JSON.parse(recorded.written.join(""))).not.toThrow();
   });
 });

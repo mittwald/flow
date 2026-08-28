@@ -45,15 +45,22 @@ Options:
   root.
 - `--print` — print each codemod's transformed output.
 
-### `list`
+### `list [revision]`
 
-Shows the migrations in a version range — codemod and by-hand alike — without
-touching the project. The read-only planning entry point: run it before
-`upgrade` to see what a bump would involve.
+Shows migrations — codemod and by-hand alike — without touching the project. The
+read-only planning entry point: run it before `upgrade` to see what a bump would
+involve.
+
+- `list` (no argument) — the whole catalogue. Offline: reads no manifest, hits
+  no network.
+- `list [revision]` — the same manifest read, registry fetch, and revision
+  resolution `upgrade [revision]` does, showing exactly the range it would act
+  on, without writing anything. `revision` takes the same values as `upgrade`'s
+  — `patch` | `minor` | `major` | a dist-tag | an exact version — and there is
+  no default: only a given revision switches `list` into this form.
 
 Options:
 
-- `--from`, `--to` — bound the range (each an exact published version)
 - `--json` — machine-readable output
 
 ### `<id> [path]`

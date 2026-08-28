@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync } from "node:fs";
-import { isAbsolute, join, relative } from "node:path";
-import { gt, rsort } from "semver";
+import { writeFileSync } from "node:fs";
+import { isAbsolute, relative } from "node:path";
+import { gt } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries } from "../catalog/select.js";
 import { flowPackages } from "../flowPackages.generated.js";
@@ -10,18 +10,9 @@ import {
   runInstall,
   type InstallRunner,
 } from "../install.js";
-import {
-  applyTarget,
-  detectCurrentVersion,
-  findFlowDependencies,
-  type Manifest,
-} from "../manifest.js";
-import {
-  fetchAllVersions,
-  fetchVersions,
-  intersectVersions,
-} from "../resolve/registry.js";
-import { resolveTarget } from "../resolve/target.js";
+import { applyTarget } from "../manifest.js";
+import { fetchVersions } from "../resolve/registry.js";
+import { readInstalledVersion, resolveRange } from "../resolve/range.js";
 import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
 import { resolveSourcePath } from "./codemod.js";
@@ -38,20 +29,6 @@ export interface UpgradeDeps {
   readInstalledVersion: (cwd: string, name: string) => string | undefined;
   log: (message: string) => void;
 }
-
-export const readInstalledVersion = (
-  cwd: string,
-  name: string,
-): string | undefined => {
-  try {
-    const manifest = JSON.parse(
-      readFileSync(join(cwd, "node_modules", name, "package.json"), "utf8"),
-    ) as { version?: string };
-    return manifest.version;
-  } catch {
-    return undefined;
-  }
-};
 
 export const defaultUpgradeDeps = (cwd: string): UpgradeDeps => ({
   cwd,
@@ -122,76 +99,6 @@ export const runUpgrade = async (
     return 1;
   }
 
-  const manifestPath = join(cwd, "package.json");
-  const manifestRaw = readFileSync(manifestPath, "utf8");
-
-  let manifest: Manifest;
-  try {
-    manifest = JSON.parse(manifestRaw) as Manifest;
-  } catch (error) {
-    log(
-      `Could not parse ${manifestPath} as JSON: ${
-        error instanceof Error ? error.message : error
-      }`,
-    );
-    return 1;
-  }
-
-  const dependencies = findFlowDependencies(manifest, flowPackages);
-
-  // Destructuring the emptiness check (rather than `dependencies.length ===
-  // 0`) sidesteps a `no-non-null-assertion` lint error at every later read of
-  // `dependencies[0]` — `no-non-null-assertion` is an error in this repo's
-  // eslint config.
-  const [firstDependency] = dependencies;
-  if (firstDependency === undefined) {
-    log(`No Flow dependency found in ${manifestPath}. Nothing to upgrade.`);
-    return 1;
-  }
-
-  const current = detectCurrentVersion(dependencies, (name) =>
-    deps.readInstalledVersion(cwd, name),
-  );
-  if (current === undefined) {
-    log("Could not determine the Flow version this project is on.");
-    return 1;
-  }
-
-  // Fixed versioning keeps every Flow package's package.json version equal,
-  // but Lerna publishes only the packages that actually changed, so what
-  // reaches the registry diverges per package (#2887, accepted risk).
-  // Resolving the target from one "anchor" dependency and writing it onto all
-  // of them can pick a version some of the others never published. Resolve
-  // instead from the intersection of what every declared dependency has
-  // actually published, so the version this command writes is always
-  // installable.
-  const fetched = await fetchAllVersions(
-    dependencies.map(({ name }) => name),
-    deps.fetchVersions,
-  );
-  const versions = intersectVersions(fetched);
-
-  if (versions.length === 0) {
-    log(
-      `${dependencies
-        .map(({ name }) => name)
-        .join(
-          ", ",
-        )} have no published version in common. Nothing to upgrade to.`,
-    );
-    return 1;
-  }
-
-  // Dist-tags come from the first declared dependency, but a tag is only kept
-  // when the version it points at is one every dependency has published — an
-  // unvalidated tag could otherwise resolve outside the intersection above.
-  const [firstFetched] = fetched;
-  const distTags = Object.fromEntries(
-    Object.entries(firstFetched?.distTags ?? {}).filter(([, version]) =>
-      versions.includes(version),
-    ),
-  );
-
   const { revision } = parsed;
   if (revision === undefined) {
     // args.ts always defaults this for the "upgrade" command — this only
@@ -200,33 +107,19 @@ export const runUpgrade = async (
     log("No revision given.");
     return 1;
   }
-  const target = resolveTarget({ revision, current, versions, distTags });
 
-  if (target === undefined) {
-    log(
-      `Could not resolve "${revision}" to a version every declared Flow dependency has published. Use patch, minor, major, a dist-tag, or an exact version.`,
-    );
+  const range = await resolveRange(revision, deps);
+  if (!range.ok) {
+    log(range.reason);
     return 1;
   }
-
-  // Defence in depth: `target` is drawn from `versions` (the intersection) or
-  // from a dist-tag already validated against it, so this should never find a
-  // gap. If it ever does, refuse rather than write a version some package
-  // never published — naming which package lacks it and the highest version
-  // every declared dependency has actually published.
-  const missingFrom = fetched.find((pkg) => !pkg.versions.includes(target));
-  if (missingFrom !== undefined) {
-    log(
-      `${missingFrom.name} has not published ${target}. The highest version every declared Flow dependency has published is ${
-        rsort(versions)[0]
-      }.`,
-    );
-    return 1;
-  }
+  const { manifestPath, manifestRaw, manifest, dependencies, current, target } =
+    range;
 
   // A stale dist-tag or an exact version below `current` resolves downward
-  // without complaint — `resolveTarget` deliberately does not judge that. This
-  // command does: nothing crosses a boundary backwards or sideways.
+  // without complaint — `resolveRange` deliberately does not judge that
+  // (`list` treats the same fact as a legitimate answer). This command does:
+  // nothing crosses a boundary backwards or sideways.
   if (!gt(target, current)) {
     log(
       `Already on ${current}; "${revision}" resolves to ${target}. Nothing to do.`,

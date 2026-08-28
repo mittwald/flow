@@ -5,17 +5,16 @@ export type Command = "upgrade" | "list" | "codemod" | "help" | "version";
 export interface ParsedCommand {
   command: Command;
   /**
-   * `upgrade` only. `patch` | `minor` | `major` | a dist-tag | an exact
-   * version.
+   * `upgrade` always has one (defaulted below when not given explicitly).
+   * `list` has one only when given — that presence/absence is what
+   * distinguishes "the whole catalogue" from "the range this revision would
+   * touch". `patch` | `minor` | `major` | a dist-tag | an exact version.
    */
   revision?: string;
   /** `codemod` only. */
   id?: string;
   /** Sources to transform. Unset means "decide at run time". */
   path?: string;
-  /** `list` only. Both bounds are optional. */
-  from?: string;
-  to?: string;
   json: boolean;
   yes: boolean;
   dry: boolean;
@@ -42,8 +41,6 @@ export const parseArguments = (argv: string[]): ParsedCommand => {
       dry: { type: "boolean" },
       print: { type: "boolean" },
       "allow-dirty": { type: "boolean" },
-      from: { type: "string" },
-      to: { type: "string" },
       path: { type: "string" },
     },
   });
@@ -73,7 +70,9 @@ export const parseArguments = (argv: string[]): ParsedCommand => {
     };
   }
   if (first === "list") {
-    return { command: "list", from: values.from, to: values.to, ...flags };
+    // No default here, unlike `upgrade`: `revision` unset is what makes a
+    // bare `list` the catalogue browser rather than `list minor`.
+    return { command: "list", revision: second, ...flags };
   }
 
   return {

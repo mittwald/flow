@@ -163,11 +163,15 @@ Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
 
 Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge haben keinen
 Codemod. Welche das für deinen Bereich sind, listet der Befehl am Ende auf –
-oder vorab, ohne etwas zu verändern:
+oder vorab, ohne etwas zu verändern, mit `list` und derselben Revision:
 
 ```shell
-npx @mittwald/flow-codemods@latest list --from 0.2.0-alpha.700 --to 1.0.2
+npx @mittwald/flow-codemods@latest list minor
 ```
+
+`list` ohne Argument zeigt den gesamten Katalog, offline. Mit einer Revision
+liest es dieselbe Version aus deinem `package.json` und zeigt genau den Bereich,
+den `upgrade` mit dieser Revision anfassen würde – ein echter Trockenlauf.
 
 Einen einzelnen Codemod führst du über seine ID aus:
 

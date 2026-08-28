@@ -1,47 +1,27 @@
 import colors from "picocolors";
-import { valid } from "semver";
-import type { CatalogEntry } from "../catalog/entries.js";
+import { allEntries, type CatalogEntry } from "../catalog/entries.js";
 import { selectEntries, sortBySince } from "../catalog/select.js";
+import {
+  defaultRangeDeps,
+  resolveRange,
+  type RangeDeps,
+} from "../resolve/range.js";
+import type { ParsedCommand } from "./args.js";
 
 export interface RenderListInput {
   entries: CatalogEntry[];
-  /** Both bounds are optional. Without them the whole catalogue is listed. */
-  from?: string;
-  to?: string;
+  /**
+   * The version range to show migrations for. Both bounds always arrive
+   * together — there is no partial range — so omitting it entirely is what
+   * lists the whole catalogue.
+   */
+  range?: { from: string; to: string };
   json: boolean;
   /** Emit ANSI colour. Off by default so a test sees plain text. */
   color?: boolean;
   /** Terminal width to wrap prose to. */
   width?: number;
 }
-
-/**
- * `--from`/`--to` errors, for the caller to check before rendering anything.
- *
- * `list` is the read-only planning entry point, and an exact published version
- * is the only thing `selectEntries` accepts for a bound — unlike `upgrade`'s
- * revision, it takes no keyword, dist-tag, or range. Without this check, an
- * invalid bound reaches `semver`'s `lt`/`lte` inside `selectEntries` and throws
- * node-semver's own "Invalid Version: …", which names neither flag nor what is
- * accepted. Matches the tone of `upgrade`'s own unresolvable- revision
- * message.
- */
-export const validateListBounds = ({
-  from,
-  to,
-}: Pick<RenderListInput, "from" | "to">): string | undefined => {
-  const invalid = [from, to].filter(
-    (bound): bound is string => bound !== undefined && valid(bound) === null,
-  );
-
-  if (invalid.length === 0) {
-    return undefined;
-  }
-
-  const bounds = invalid.map((bound) => `"${bound}"`).join(" and ");
-  const verb = invalid.length > 1 ? "are" : "is";
-  return `${bounds} ${verb} not a published version. --from and --to take an exact version, e.g. 1.4.0 — not a range or a dist-tag.`;
-};
 
 /**
  * What the reader has to do, and the colour that says it at a glance.
@@ -177,16 +157,12 @@ const renderEntry = (
 /** "4 migrations from X to Y" plus a count per action. */
 const renderHeader = (
   selected: CatalogEntry[],
-  { from, to }: Pick<RenderListInput, "from" | "to">,
+  range: RenderListInput["range"],
   color: boolean,
 ): string => {
   const paint = painter(color);
-  const range = [
-    from === undefined ? undefined : `from ${from}`,
-    to === undefined ? undefined : `to ${to}`,
-  ]
-    .filter((part) => part !== undefined)
-    .join(" ");
+  const rangeText =
+    range === undefined ? "" : `from ${range.from} to ${range.to}`;
 
   const noun = selected.length === 1 ? "migration" : "migrations";
   const counts = (Object.keys(actions) as CatalogEntry["action"][])
@@ -204,7 +180,7 @@ const renderHeader = (
   // The counts carry their own colour, so no dim around them — nesting the two
   // makes both weaker.
   return [
-    `${paint.bold(`${selected.length} ${noun}`)}${range === "" ? "" : ` ${range}`}`,
+    `${paint.bold(`${selected.length} ${noun}`)}${rangeText === "" ? "" : ` ${rangeText}`}`,
     counts.join(paint.dim(" \u00B7 ")),
     "",
   ].join("\n");
@@ -223,8 +199,7 @@ const renderHeader = (
  */
 export const renderList = ({
   entries,
-  from,
-  to,
+  range,
   json,
   color = false,
   width = 80,
@@ -233,18 +208,14 @@ export const renderList = ({
   // plain catalogue browse — every entry, sorted, regardless of whether it
   // would apply to any given range. Bounded, it answers "what does this
   // version range require of me", which `selectEntries` computes per entry
-  // from `since`. Do not unify these into one `selectEntries` call with wide
-  // sentinel bounds — it would blur that distinction even where the results
-  // happen to coincide.
-  //
-  // `0.0.0-0` rather than `0.0.0` as the lower sentinel: the gate's
-  // `current < since` is strict, so `0.0.0` would hide an entry whose `since` is
-  // exactly `0.0.0`. A prerelease of `0` sorts below every published version.
-  // (`0.0.0-0.0` is lower still; nothing publishes that.)
+  // from `since`. `range`'s two fields always arrive together (there is no
+  // partial bound any more — see `resolveRange`), so there is no sentinel to
+  // fill a missing side with; the branch below is the only thing that decides
+  // "whole catalogue" vs. "this range".
   const selected =
-    from === undefined && to === undefined
+    range === undefined
       ? sortBySince(entries)
-      : selectEntries(entries, from ?? "0.0.0-0", to ?? "9999.0.0");
+      : selectEntries(entries, range.from, range.to);
 
   if (json) {
     return JSON.stringify(selected, null, 2);
@@ -258,5 +229,70 @@ export const renderList = ({
     .map((entry) => renderEntry(entry, width, color))
     .join("\n\n");
 
-  return `${renderHeader(selected, { from, to }, color)}\n${body}\n`;
+  return `${renderHeader(selected, range, color)}\n${body}\n`;
+};
+
+export interface ListDeps extends RangeDeps {
+  /**
+   * Raw output writer — matches `process.stdout.write`'s own contract: no
+   * newline is appended automatically.
+   */
+  write: (text: string) => void;
+  color?: boolean;
+  width?: number;
+}
+
+export const defaultListDeps = (cwd: string): ListDeps => ({
+  ...defaultRangeDeps(cwd),
+  write: (text) => process.stdout.write(text),
+});
+
+/**
+ * `list [revision]` — the catalogue browser (no argument) or a dry run of
+ * `upgrade <revision>` (with one).
+ *
+ * The two forms are distinguished by whether a revision was given, not by a
+ * default: unlike `upgrade`, `list` has none, because a bare `list` is a
+ * deliberately different thing — the whole catalogue, offline, no manifest
+ * read. Given a revision, this shares `resolveRange` with `upgrade`, so the
+ * range shown is exactly what `upgrade <revision>` would act on. Unlike
+ * `upgrade`, an unresolved-but-not-an-upgrade target (e.g. an exact version at
+ * or below current) is not a refusal here — `resolveRange` reports it as `ok:
+ * true`, and `list` shows it like any other range (which is typically empty,
+ * and prints "Nothing to migrate in that range.").
+ */
+export const runList = async (
+  parsed: ParsedCommand,
+  deps: ListDeps,
+): Promise<number> => {
+  const { revision } = parsed;
+
+  if (revision === undefined) {
+    deps.write(
+      renderList({
+        entries: allEntries,
+        json: parsed.json,
+        color: deps.color,
+        width: deps.width,
+      }),
+    );
+    return 0;
+  }
+
+  const resolved = await resolveRange(revision, deps);
+  if (!resolved.ok) {
+    deps.write(`${resolved.reason}\n`);
+    return 1;
+  }
+
+  deps.write(
+    renderList({
+      entries: allEntries,
+      range: { from: resolved.current, to: resolved.target },
+      json: parsed.json,
+      color: deps.color,
+      width: deps.width,
+    }),
+  );
+  return 0;
 };

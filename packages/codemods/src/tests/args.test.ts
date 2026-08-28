@@ -41,13 +41,28 @@ describe("parseArguments", () => {
     });
   });
 
-  test("list takes a range and --json", () => {
-    expect(
-      parseArguments(["list", "--from", "1.0.0", "--to", "1.2.0", "--json"]),
-    ).toMatchObject({
+  test("a bare list has no revision — that's what makes it the catalogue browser", () => {
+    expect(parseArguments(["list"])).toMatchObject({
       command: "list",
-      from: "1.0.0",
-      to: "1.2.0",
+      revision: undefined,
+    });
+  });
+
+  test("list takes a revision, like upgrade", () => {
+    expect(parseArguments(["list", "minor"])).toMatchObject({
+      command: "list",
+      revision: "minor",
+    });
+    expect(parseArguments(["list", "1.2.0"])).toMatchObject({
+      command: "list",
+      revision: "1.2.0",
+    });
+  });
+
+  test("list and --json", () => {
+    expect(parseArguments(["list", "minor", "--json"])).toMatchObject({
+      command: "list",
+      revision: "minor",
       json: true,
     });
   });
