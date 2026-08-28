@@ -68,15 +68,15 @@ abgrenzt.
 
 ## Beispiele
 
-**hosting-blue-800**
+**color--hosting-blue--800**
 
-Der Token `hosting-blue-800` definiert eine spezifische
-[Color](/02-foundations/01-design/02-colors). Der Name der Farbe `hosting-blue`
-gibt den **Context** an. Die Zahl `800` ist die **Clarification**, die die
-Abstufung der Farbe definiert und auf den genauen Farbwert `#0054F5` im
-Designsystem verweist.
+Der Token `color--hosting-blue--800` definiert eine spezifische
+[Color](/02-foundations/01-design/02-colors). `color` gibt den **Context** an.
+Der Name der Farbe `hosting-blue` ist die **Common Unit**. Die Zahl `800` ist
+die **Clarification**, die die Abstufung der Farbe definiert und auf den genauen
+Farbwert `#0054F5` im Designsystem verweist.
 
-**primary-solid-background-color-default**
+**primary-solid-background-color--default**
 
 Dieser Token definiert die primäre Hintergrundfarbe einer „Solid“-Variante.
 `primary` gibt als Context an, dass es sich um eine primäre Farbe handelt. Die
@@ -84,15 +84,15 @@ Common Unit `solid-background-color` verdeutlicht, dass die Farbe als
 Hintergrundfarbe in der „Solid“-Variante verwendet wird. Die **Clarification**
 `default` gibt an, dass der Token für den Default-State verwendet wird.
 
-**alert-info-outline-border-color-default**
+**alert--info-border-color**
 
 Dieser Token definiert eine Designentscheidung für eine spezifische Component,
 in diesem Fall einen [Alert](/04-components/status/alert). `alert` liefert den
 **Context** und stellt klar, dass der Token nur für diese Component verwendet
-wird. `info-outline-border-color` als **Common Unit** kategorisiert den Token
-weiter ein: Er wird für die Border-Color eines Alerts in der „Info“- und
-„Outline“-Variante verwendet. `default` gibt als **Clarification** an, dass der
-Token für den Default-State genutzt wird.
+wird. `info-border-color` als **Common Unit** kategorisiert den Token weiter
+ein: Er wird für die Border-Color eines Alerts in der „Info“-Variante verwendet.
+Eine **Clarification** braucht dieser Token nicht, weil die Border-Color eines
+Alerts in allen States gleich bleibt.
 
 ---
 
@@ -112,10 +112,10 @@ dafür sind Farben, die einen rein dekorativen Zweck erfüllen. Diese müssen ni
 weiter definiert oder in eine Kategorie eingeordnet werden, da sie einen rein
 optischen Nutzen erfüllen und keiner tieferen Idee folgen.
 
-| Token-Name        | Wert    |
-| ----------------- | ------- |
-| hosting-blue--800 | #0054F5 |
-| size--s           | 8px     |
+| Token-Name               | Wert    |
+| ------------------------ | ------- |
+| color--hosting-blue--800 | #0054F5 |
+| size-px--s               | 8px     |
 
 ## Alias Token
 
@@ -130,10 +130,10 @@ Wir nutzen diese Ebene vor allem für die Definition von Tokens, die sich keiner
 bestimmten Variante (Solid, Soft, Outlined, Plain) zuordnen lassen, aber in eine
 gemeinsame Kategorie zusammengefasst werden können.
 
-| Token-Name              | Wert              |
-| ----------------------- | ----------------- |
-| primary--color--default | hosting-blue--800 |
-| border-width--400       | size--s           |
+| Token-Name          | Wert                     |
+| ------------------- | ------------------------ |
+| primary--color--800 | color--hosting-blue--800 |
+| border-width--400   | size-px--s               |
 
 ## Alias Token 2
 
@@ -147,10 +147,10 @@ zur Hintergrundfarbe passt und barrierefrei lesbar ist.
 Ein Alias Token 2 darf keine hard coded Werte besitzen, sich aber sowohl auf
 Alias als auch Global Token beziehen.
 
-| Token-Name                              | Wert                    |
-| --------------------------------------- | ----------------------- |
-| primary-solid-background-color--default | primary--color--default |
-| info-outline-border-color--default      | info-color--default     |
+| Token-Name                              | Wert                |
+| --------------------------------------- | ------------------- |
+| primary-solid-background-color--default | primary--color--800 |
+| info-outline-border-color               | info--color--800    |
 
 ## Component Specific Token
 
@@ -162,4 +162,4 @@ Token-Struktur und sind somit das Gegenteil eines Global Tokens.
 | Token-Name                                      | Wert                                    |
 | ----------------------------------------------- | --------------------------------------- |
 | button--primary-solid-background-color--default | primary-solid-background-color--default |
-| alert--info-outline-border-color--default       | info-outline-border-color--default      |
+| alert--info-border-color                        | info-outline-border-color               |

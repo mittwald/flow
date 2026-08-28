@@ -62,12 +62,6 @@ export const flowTheme: PrismTheme = {
       },
     },
     {
-      types: ["punctuation"],
-      style: {
-        color: "var(--color--code-syntax--text)",
-      },
-    },
-    {
       types: ["tag"],
       style: {
         color: "var(--color--code-syntax--keyword)",
@@ -83,18 +77,6 @@ export const flowTheme: PrismTheme = {
       types: ["attr-value"],
       style: {
         color: "var(--color--code-syntax--string)",
-      },
-    },
-    {
-      types: ["inserted"],
-      style: {
-        color: "var(--color--code-syntax--inserted)",
-      },
-    },
-    {
-      types: ["deleted"],
-      style: {
-        color: "var(--color--code-syntax--invalid)",
       },
     },
     {
