@@ -134,12 +134,80 @@ const waitForPaintedContent = async (): Promise<void> => {
     .toBe(true);
 };
 
+/*
+ * Waits until the document has stopped mutating, so the pointer park below
+ * cannot land in the middle of a render.
+ *
+ * `Remote` applies an interaction a round trip late: a key press updates the
+ * remote tree, which serializes mutations the host applies a tick later. Parking
+ * the pointer inside that window silently breaks keyboard focus rings.
+ * `hover()` emits a `pointermove`, and react-aria takes any pointer event as the
+ * current interaction modality — but only `pointerdown`/`mousedown` notify its
+ * subscribers, so nothing re-renders and elements already carrying
+ * `data-focus-visible` keep it. The pending remote render then lands, recomputes
+ * `isFocusVisible()` against the now-`pointer` modality, and drops the
+ * attribute. The focus ring vanishes from the screenshot — in `Remote` only,
+ * because `Local` renders synchronously, before the pointer ever moves.
+ *
+ * That produced a ~1% diff against a reference both environments share, on every
+ * scenario whose last act is a keyboard press (#2981). Going quiet first gives
+ * `Remote` the ordering `Local` already has: last render, then pointer.
+ *
+ * Observes the whole document, not the container: overlays render in portals
+ * outside it, and the remote tree's own mirror — whose mutations are exactly
+ * what has to settle — lives outside it too.
+ */
+const settleQuietFor = 100;
+const settleTimeout = 2000;
+
+const waitForSettledContent = async (): Promise<void> =>
+  new Promise<void>((resolve) => {
+    let quiet: ReturnType<typeof setTimeout>;
+
+    const observer = new MutationObserver(() => {
+      clearTimeout(quiet);
+      quiet = setTimeout(finish, settleQuietFor);
+    });
+
+    /*
+     * A scenario that never goes quiet (an animation the reduced-motion setting
+     * does not cover) must not fail here — the screenshot matcher is the one
+     * that gets to judge stability. So cap the wait and carry on.
+     */
+    const deadline = setTimeout(finish, settleTimeout);
+
+    function finish() {
+      clearTimeout(quiet);
+      clearTimeout(deadline);
+      observer.disconnect();
+      resolve();
+    }
+
+    quiet = setTimeout(finish, settleQuietFor);
+    observer.observe(document.documentElement, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+  });
+
+/**
+ * Everything `testScreenshot` does before it captures. Exported so a scenario's
+ * state at capture time can be asserted on the DOM instead of on pixels — see
+ * `KeyboardFocusRing.browser.test.tsx`.
+ */
+export const prepareForScreenshot = async (): Promise<void> => {
+  await waitForPaintedContent();
+  await waitForSettledContent();
+  await setNeutralPointerPosition();
+};
+
 const testScreenshot = async (
   description: string,
   options: ScreenshotMatcherOptions = {},
 ): Promise<void> => {
-  await waitForPaintedContent();
-  await setNeutralPointerPosition();
+  await prepareForScreenshot();
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
