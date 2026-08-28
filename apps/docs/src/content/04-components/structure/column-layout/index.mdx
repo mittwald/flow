@@ -16,67 +16,46 @@ description:
 - Kombiniere das ColumnLayout bei Bedarf mit einer
   [Section](/04-components/structure/section). Das schafft übersichtliche
   Layouts.
-- Verschachtele mehrere ColumnLayouts, um Inhalte optisch zu gruppieren.
+- Verschachtele mehrere ColumnLayouts, um Inhalte optisch zu gruppieren. Jedes
+  verschachtelte ColumnLayout bildet einen eigenen Container und bricht bei
+  seiner eigenen Breite um, nicht bei der des äußeren.
 
 ---
 
-# Responsive Layout
+# Breakpoints
 
-Die Breakpoints beziehen sich nicht auf die Bildschirmgröße des Endgeräts,
-sondern auf die Breite des Containers, in dem das ColumnLayout verwendet wird.
-So bricht das Layout automatisch um, sobald es eine bestimmte Breite
-unterschreitet. Standardmäßig sind die Spalten wie folgt definiert:
+Die Breakpoints beziehen sich auf die Breite des Containers, in dem das
+ColumnLayout steht, nicht auf die des Bildschirms. Ihre Default-Werte sind:
 
 - Größe `s` bis 550 Pixel Breite: `[1]`
 - Größe `m` bis 850 Pixel Breite: `[1, 1]`
 - Größe `l` ab 851 Pixel Breite: `[1, 1, 1]`
 
-In der Definition der Spaltenbreiten werden sowohl die Anzahl der Spalten als
-auch ihr Größenverhältnis festgelegt. Eine Aufteilung wie `[1, 2, 1]` erzeugt
-zum Beispiel drei Spalten, wobei die mittlere doppelt so breit ist wie die
-beiden äußeren.
+Ein Breakpoint ohne eigenen Wert übernimmt den des nächstkleineren; die
+Default-Werte greifen nur, solange kein kleinerer Breakpoint gesetzt ist.
 
 ---
 
-# Benutzerdefinierte Werte
+# Spalten
 
-Für jeden Breakpoint können eigene Werte für die Spaltenanzahl und deren
-Größenverhältnis festgelegt werden. Wenn für einen größeren Breakpoint keine
-eigenen Werte definiert sind, übernimmt er automatisch die Werte des
-nächstkleineren Breakpoints. Standardwerte werden nur verwendet, wenn bei keinem
-kleineren Breakpoint benutzerdefinierte Werte angegeben sind. Beispiel:
+Die Properties `s`, `m` und `l` legen je Breakpoint fest, wie viele Spalten es
+gibt und in welchem Verhältnis sie stehen.
 
-- Größe `s` bis 550 Pixel Breite: `[1]` (Default-Wert)
-- Größe `m` bis 850 Pixel Breite: `[2, 1]` (benutzerdefinierter Wert)
-- Größe `l` ab 851 Pixel Breite: `[2, 1]` (Wert von m geerbt)
+<LiveCodeEditor example="columns" resizable editorCollapsed />
 
-In diesem Beispiel wurde für den Breakpoint `m` eine benutzerdefinierte
-Spaltenaufteilung festgelegt. Der Breakpoint `l` übernimmt diese Aufteilung von
-`m`, anstatt auf den Standardwert von `[1, 1, 1]` zurückzufallen. Da für den
-Breakpoint `s` kein benutzerdefinierter Wert angegeben wurde, bleibt er beim
-Standardwert von `[1]`.
+## Ausgeblendete Spalten
 
-<LiveCodeEditor example="custom-values" editorCollapsed />
+Als Wert kann neben Zahlen auch `null` mitgegeben werden. Die entsprechende
+Spalte wird dann ausgeblendet.
 
----
-
-# Ausgeblendete Spalten
-
-Als Werte für die Breakpoints kann neben Zahlen auch `null` mitgegeben werden.
-Das führt dazu, dass die entsprechende Spalte ausgeblendet wird. Hier wird
-beispielsweise das Bild in der kleinsten Ansicht ausgeblendet:
-
-<LiveCodeEditor example="hidden-columns" editorCollapsed />
+<LiveCodeEditor example="hidden-columns" resizable editorCollapsed />
 
 ---
 
 # Abstände
 
-Die Abstände des ColumnLayout können in drei Stufen angepasst werden:
-
-- s = 8px
-- m = 16px
-- l = 24px
+Die Abstände des ColumnLayout können in vier Stufen angepasst werden: `s`, `m`,
+`l` und `xl`.
 
 Das Property `rowGap` steuert die Abstände zwischen den Zeilen (oben und unten),
 `columnGap` die Abstände zwischen den Spalten (rechts und links) und `gap` setzt
