@@ -137,25 +137,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          # A run that finishes without escalating means the cascade is healthy
-          # again — `next` carries `main`'s CODE, whether or not it carries
-          # `main`'s tip commit. Ancestry is deliberately NOT the signal: §6/§7
-          # drops a churn-only merge, so after every release `main` sits one
-          # `chore(release):` commit ahead of `next` forever while being
-          # content-identical. This is the moment to clear an open escalation.
-          #
-          # GitHub cannot do it from the sync PR — `Closes #n` only fires when a
-          # PR merges into the DEFAULT branch, and the sync PR targets `next`.
-          close_sync_issue() {
-            local n
-            for n in $(gh issue list --repo "$REPO" --state open --label sync \
-                         --search 'in:title "Forward-merge blocked"' \
-                         --json number --jq '.[].number'); do
-              gh issue close "$n" --repo "$REPO" \
-                --comment "\`next\` carries \`main\`'s code again — the cascade is unblocked." \
-                && echo "::notice::Closed sync issue #${n}."
-            done
-          }
+          # This step no longer clears the escalation itself — it only reports
+          # whether the cascade came out healthy, via the `carries` output. The
+          # "Close the escalation" step below acts on it. See the comment there
+          # for why that had to move out of this step.
 
           # Escalation (ADR 0004 §4). The cascade does NOT create a branch or
           # a pull request here: a PR is a change proposal, and until a human has
@@ -252,7 +237,7 @@ jobs:
           if git diff --quiet "$NEXT_BEFORE" HEAD; then
             echo "No code delta after merge — skipping push (nothing to re-publish)."
             git reset --hard "$NEXT_BEFORE"
-            close_sync_issue
+            echo "carries=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -260,7 +245,7 @@ jobs:
           # §5, belt-and-suspenders on top of the shared concurrency group).
           if git push origin HEAD:next; then
             echo "Pushed forward-merge to next."
-            close_sync_issue
+            echo "carries=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -269,7 +254,7 @@ jobs:
           if git merge --no-ff -m "$MERGE_MSG" origin/next; then
             git push origin HEAD:next
             echo "Pushed forward-merge to next after retry."
-            close_sync_issue
+            echo "carries=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -281,6 +266,45 @@ jobs:
           fi
           echo "::error::Retry re-merge/push failed."
           exit 1
+
+      # The ONE place that clears an escalation (ADR 0004 §4). It fires whenever
+      # the cascade came out healthy — `next` carries `main`'s CODE — which is
+      # true in three cases:
+      #
+      #   1. the merge was pushed;
+      #   2. the merge carried no code delta and was dropped (§6/§7);
+      #   3. there was nothing to merge at all, so the guard exited early.
+      #
+      # Case 3 is why this is a step and not a function inside the merge step,
+      # where it used to live: the merge step is gated on
+      # `guard.outputs.pending == 'true'`, so a run that finds `next` already
+      # complete skips it — and never closes. That is precisely the state a
+      # merged sync PR leaves behind (`next` absorbed `main`'s tip), i.e. the
+      # resolution the issue asked for. Measured on #2987: resolved and merged
+      # at 09:25, still open afterwards, and it would have stayed open until the
+      # next push to `main` produced a mergeable run. Meanwhile the tracker
+      # claimed "the cascade is paused" and `forward-merge-drift.yml` reads open
+      # sync issues as a live blocker.
+      #
+      # Ancestry is deliberately NOT the signal: §6/§7 leaves `main` one
+      # `chore(release):` commit ahead of `next` forever while being
+      # content-identical.
+      #
+      # GitHub cannot do this from the sync PR — `Closes #n` only fires when a PR
+      # merges into the DEFAULT branch, and the sync PR targets `next`.
+      - name: Close the escalation 🧹
+        if: >-
+          steps.guard.outputs.pending == 'false' ||
+          steps.merge.outputs.carries == 'true'
+        run: |
+          set -euo pipefail
+          for n in $(gh issue list --repo "$REPO" --state open --label sync \
+                       --search 'in:title "Forward-merge blocked"' \
+                       --json number --jq '.[].number'); do
+            gh issue close "$n" --repo "$REPO" \
+              --comment "\`next\` carries \`main\`'s code again — the cascade is unblocked." \
+              && echo "::notice::Closed sync issue #${n}."
+          done
 
       # A conflict is the expected non-error path (handled above, exits 0). Any
       # genuine failure (retry exhausted, workflow error) must not let `next`
