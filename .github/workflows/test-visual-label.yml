@@ -94,16 +94,47 @@ jobs:
           shard: ${{ matrix.shard }}
           shards: ${{ strategy.job-total }}
 
+      # vitest writes the diffs into `.vitest-attachments`, six directory levels
+      # deep. Uploaded as they lie, the zip opens on a dot directory Finder does
+      # not show, wrapped around folders a reviewer has to click through — and
+      # the action skips hidden paths entirely unless told not to, which is why
+      # every failing run so far reported "no files were found".
+      #
+      # So flatten: the images land next to each other, and opening the download
+      # is enough to see what changed. Their names already carry scenario,
+      # browser and platform. Only the per-scenario images are worth handing
+      # over — the loose blobs beside them are the report's own attachments.
+      #
+      # `packages/*/` (not `**/`) also leaves out the copies pnpm links into
+      # other packages' node_modules, which the old glob uploaded a second time.
+      - name: Collect the visual diffs
+        if: failure()
+        run: |
+          mkdir -p visual-diffs
+          for attachments in packages/*/.vitest-attachments; do
+            [ -d "$attachments" ] || continue
+            find "$attachments" -type f \
+              \( -name '*-diff-*.png' -o -name '*-actual-*.png' \
+                 -o -name '*-reference-*.png' \) -print0 |
+              while IFS= read -r -d '' image; do
+                target="visual-diffs/$(basename "$image")"
+                # A scenario description is unique within its test file, not
+                # across them — so name the file after it when one collides.
+                if [ -e "$target" ]; then
+                  scenario="$(basename "$(dirname "$image")" .browser.test.tsx)"
+                  target="visual-diffs/$scenario-$(basename "$image")"
+                fi
+                cp "$image" "$target"
+              done
+          done
+          ls -1 visual-diffs
+
       - name: Upload visual diffs
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: visual-diffs-${{ matrix.shard }}
-          path: packages/**/.vitest-attachments/**
-          # `.vitest-attachments` is a dot directory, and the action drops those
-          # unless told otherwise — which is why this upload has been finding
-          # "no files" and every failing run so far came without its diffs.
-          include-hidden-files: true
+          path: visual-diffs/**
           if-no-files-found: ignore
           retention-days: 7
 
