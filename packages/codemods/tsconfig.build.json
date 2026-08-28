@@ -6,18 +6,27 @@
     // Outside `dist`, which `files` ships to consumers — the buildinfo is a
     // local incremental-build cache, not a build artefact for npm.
     "tsBuildInfoFile": "tsconfig.build.tsbuildinfo",
-    // Excluding src/tests and src/transforms shrinks the program to 2 files
-    // (cli.ts, cli/args.ts). The native `tsc` (TypeScript 7, aliased as
-    // `@typescript/native` — see pnpm-workspace.yaml) does not fall back to
-    // its usual automatic @types/* discovery for a program this small under
-    // `composite`, so `process` and `node:util` resolve to nothing. Declaring
-    // "node" explicitly restores it; the tsconfig.json-only (test:compile)
-    // program is unaffected because it is not this small.
+    // Excluding src/tests, the transforms and their co-located tests shrinks
+    // the program to 2 files (cli.ts, cli/args.ts). The native `tsc`
+    // (TypeScript 7, aliased as `@typescript/native` — see
+    // pnpm-workspace.yaml) does not fall back to its usual automatic
+    // @types/* discovery for a program this small under `composite`, so
+    // `process` and `node:util` resolve to nothing. Declaring "node"
+    // explicitly restores it; the tsconfig.json-only (test:compile) program
+    // is unaffected because it is not this small.
     "types": ["node"]
   },
   "exclude": [
     "src/tests/**/*.ts",
-    "src/transforms/**/*.ts",
+    // `transform.ts` is never compiled — jscodeshift runs it through its own
+    // babel pipeline (see src/run/jscodeshift.ts) — and `transform.test.ts`
+    // now sits next to it under src/migrations instead of under src/tests,
+    // so both need their own exclusion. `src/tools` holds the one transform
+    // with no catalogue entry (to-remote-package) plus its test, for the same
+    // two reasons.
+    "src/migrations/**/transform.ts",
+    "src/migrations/**/*.test.ts",
+    "src/tools/**/*.ts",
     "src/catalog/read.ts"
   ],
   "extends": "./tsconfig.json",

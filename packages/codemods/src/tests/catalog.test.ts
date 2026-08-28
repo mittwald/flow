@@ -7,7 +7,9 @@ const catalog = readCatalog();
 const byId = new Map(catalog.map((entry) => [entry.id, entry]));
 
 const hasTransform = (id: string): boolean =>
-  existsSync(fileURLToPath(new URL(`../transforms/${id}.ts`, import.meta.url)));
+  existsSync(
+    fileURLToPath(new URL(`../migrations/${id}/transform.ts`, import.meta.url)),
+  );
 
 describe("the catalogue reads and validates", () => {
   test("it is not empty", () => {

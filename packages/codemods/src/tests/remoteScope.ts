@@ -124,9 +124,21 @@ export const packageEntries = new Set(
   }),
 );
 
+/**
+ * The transform source file for `name`: a migration's `transform.ts` when
+ * `name` has one, otherwise a same-named file in `src/tools` (currently only
+ * `to-remote-package`).
+ */
+const transformFile = (name: string): string => {
+  const migrationPath = `packages/codemods/src/migrations/${name}/transform.ts`;
+  return existsSync(join(repoRoot, migrationPath))
+    ? migrationPath
+    : `packages/codemods/src/tools/${name}.ts`;
+};
+
 /** The module specifiers a transform scopes itself to, read from its source. */
 export const declaredPackages = (name: string): string[] => {
-  const source = repoFile(`packages/codemods/src/transforms/${name}.ts`);
+  const source = repoFile(transformFile(name));
   const declaration =
     /const flowPackages? = (\[[^\]]*\]|"[^"]*");/.exec(source)?.[1] ?? "";
   return [...declaration.matchAll(/"([^"]+)"/g)].map(

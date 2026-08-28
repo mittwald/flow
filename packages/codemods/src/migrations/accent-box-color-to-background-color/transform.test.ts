@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { runTransform } from "./runTransform";
+import { runTransform } from "../../tests/runTransform";
 
 const transform = "accent-box-color-to-background-color";
 
@@ -56,5 +56,31 @@ export const Untouched = () => <AccentBox color="green" />;
 `;
 
     expect(runTransform(transform, source)).toBe(source);
+  });
+});
+
+/**
+ * Consumers run codemods one after another, so a second pass over already
+ * migrated code has to be a no-op — see `src/tests/transformCoverage.test.ts`
+ * for why every transform is required to prove this.
+ */
+describe("running it twice changes nothing", () => {
+  test("stays idempotent", () => {
+    const source = `import { AccentBox } from "@mittwald/flow-react-components";
+
+export const A = () => (
+  <>
+    <AccentBox color="gradient" />
+    <AccentBox color="dark" />
+    <AccentBox color={"green"} />
+    <AccentBox color={dynamic} />
+    <AccentBox backgroundColor="teal" color="neutral" />
+    <AccentBox backgroundColor="blue" />
+  </>
+);
+`;
+
+    const once = runTransform(transform, source);
+    expect(runTransform(transform, once)).toBe(once);
   });
 });

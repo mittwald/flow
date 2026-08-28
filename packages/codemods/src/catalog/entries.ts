@@ -13,9 +13,9 @@ export const allEntries: CatalogEntry[] = migrations;
 
 /**
  * Shared refusal for an id that names no codemod — `runSingleCodemod` (against
- * the catalogue) and `runCodemod` (against `src/transforms` on disk) each hit
- * this independently, so the message is defined once and reused rather than
- * kept in sync by hand in both places.
+ * the catalogue) and `runCodemod` (against `src/migrations`/`src/tools` on
+ * disk) each hit this independently, so the message is defined once and reused
+ * rather than kept in sync by hand in both places.
  */
 export const unknownCodemodMessage = (id: string): string =>
   `"${id}" is not a codemod in this package. Run \`flow-codemods list\` to see the available ids.`;

@@ -11,7 +11,7 @@ export type MigrationKind = "migration" | "deprecation";
 /**
  * What has to happen.
  *
- * - `codemod` — `src/transforms/<id>.ts` does it.
+ * - `codemod` — `src/migrations/<id>/transform.ts` does it.
  * - `manual` — a person or an agent has to change code.
  * - `none` — behaviour changed, no code change required. An agent needs this
  *   spelled out, or it keeps looking for something to edit.
@@ -20,8 +20,9 @@ export type MigrationAction = "codemod" | "manual" | "none";
 
 export interface MigrationEntry {
   /**
-   * Dashed and lowercase. Doubles as the `src/transforms/<id>.ts` file name
-   * when `action` is `codemod`, and as the `MIGRATION.md` heading anchor.
+   * Dashed and lowercase. Doubles as the `src/migrations/<id>` directory name
+   * and, when `action` is `codemod`, that directory's `transform.ts` file, and
+   * as the `MIGRATION.md` heading anchor.
    */
   id: string;
   /** The exact version the change shipped in. */

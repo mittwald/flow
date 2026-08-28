@@ -9,28 +9,42 @@ import { unknownCodemodMessage } from "../catalog/entries.js";
 import { run as runJscodeshift } from "jscodeshift/src/Runner.js";
 
 /**
- * `<packageRoot>/src/transforms`, from either `src/run` or `dist/run`.
+ * `<packageRoot>/src/migrations` and `<packageRoot>/src/tools`, from either
+ * `src/run` or `dist/run`.
  *
- * `dist` mirrors `src`'s directory depth, so one relative path serves the test
- * run and the published binary. The transforms are not compiled into `dist`:
- * jscodeshift puts a transform through its own babel pipeline, so it wants the
- * `.ts` file.
+ * `dist` mirrors `src`'s directory depth, so one pair of relative paths serves
+ * the test run and the published binary. The transforms are not compiled into
+ * `dist`: jscodeshift puts a transform through its own babel pipeline, so it
+ * wants the `.ts` file.
  */
-const transformsDir = fileURLToPath(
-  new URL("../../src/transforms", import.meta.url),
+const migrationsDir = fileURLToPath(
+  new URL("../../src/migrations", import.meta.url),
 );
+const toolsDir = fileURLToPath(new URL("../../src/tools", import.meta.url));
 
 /**
- * Whether `id` names a transform file on disk.
+ * The transform file for `id`: `src/migrations/<id>/transform.ts` when `id`
+ * names a migration, otherwise `src/tools/<id>.ts`.
  *
  * Deliberately independent of the catalogue: `to-remote-package` is a transform
  * with no catalogue entry (it is a port, not a migration — see `notAMigration`
  * in `src/tests/remoteScope.test.ts`), and it still has to be runnable by id.
+ * It lives in `src/tools` rather than `src/migrations` for exactly that reason
+ * — there is no migration directory to put it beside.
+ */
+const transformPath = (id: string): string => {
+  const migrationPath = `${migrationsDir}/${id}/transform.ts`;
+  return existsSync(migrationPath) ? migrationPath : `${toolsDir}/${id}.ts`;
+};
+
+/**
+ * Whether `id` names a transform file on disk.
+ *
  * `runSingleCodemod` calls this to decide that before it ever reaches this
  * module's own `existsSync` check below.
  */
 export const transformExists = (id: string): boolean =>
-  existsSync(`${transformsDir}/${id}.ts`);
+  existsSync(transformPath(id));
 
 export interface CodemodOptions {
   /** A catalogue id — the transform file name without its extension. */
@@ -81,7 +95,7 @@ export const runCodemod = async ({
   dry = false,
   print = false,
 }: CodemodOptions): Promise<CodemodResult> => {
-  const transform = `${transformsDir}/${id}.ts`;
+  const transform = transformPath(id);
 
   if (!existsSync(transform)) {
     throw new Error(unknownCodemodMessage(id));

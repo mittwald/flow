@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync } from "node:fs";
-import { basename, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 import type { MigrationEntry } from "./types.js";
@@ -11,12 +11,13 @@ const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
 
 const requiredStrings = ["since", "title", "kind", "action", "apply"];
 
-const parseEntry = (file: string, source: string): MigrationEntry => {
+/** `id` is the directory name — `src/migrations/<id>/entry.md`. */
+const parseEntry = (id: string, source: string): MigrationEntry => {
   // A function declaration, not an arrow: only that form narrows control flow
   // after the call, so the checks below do not need a redundant `throw`. The
   // bundler this package used to ship had the same note for the same reason.
   function fail(message: string): never {
-    throw new Error(`${basename(file)}: ${message}`);
+    throw new Error(`${id}/entry.md: ${message}`);
   }
 
   const match = frontmatterPattern.exec(source);
@@ -37,7 +38,7 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
   }
 
   return {
-    id: basename(file, ".md"),
+    id,
     since: data.since as string,
     title: data.title as string,
     kind: data.kind as MigrationEntry["kind"],
@@ -58,9 +59,9 @@ const parseEntry = (file: string, source: string): MigrationEntry => {
  * `alpha.712` after `alpha.1046`, which is wrong. See `sortBySince`.
  */
 export const readCatalog = (): MigrationEntry[] =>
-  readdirSync(migrationsDir)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => {
-      const path = join(migrationsDir, file);
-      return parseEntry(path, readFileSync(path, "utf8"));
+  readdirSync(migrationsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => {
+      const path = join(migrationsDir, entry.name, "entry.md");
+      return parseEntry(entry.name, readFileSync(path, "utf8"));
     });

@@ -24,13 +24,15 @@ export const sortBySince = (entries: CatalogEntry[]): CatalogEntry[] =>
  * version. That is a guess, not a fact: nothing records which codemods a
  * project has run, and bumping a dependency is a separate act from running this
  * tool. For a `codemod` entry the guess buys nothing anyway — re-running an
- * applied codemod is a verified no-op (`idempotency.test.ts` requires a fixture
- * for every transform and runs each twice, asserting the second run changes
- * nothing). `detectCurrentVersion` already leans on the same fact when it falls
- * back to the lowest version a range allows, on the stated grounds that too low
- * can only pull in extra (idempotent) codemods. The lower bound only earns its
- * keep for the entries with no no-op: a manual or behaviour-only migration a
- * person has to read and judge.
+ * applied codemod is a verified no-op: every `src/migrations/<id>/` directory
+ * with a `transform.ts` is required to hold a `transform.test.ts` beside it
+ * (`src/tests/transformCoverage.test.ts` enforces that), and that co-located
+ * test is what actually runs the transform twice and asserts the second run
+ * changes nothing. `detectCurrentVersion` already leans on the same fact when
+ * it falls back to the lowest version a range allows, on the stated grounds
+ * that too low can only pull in extra (idempotent) codemods. The lower bound
+ * only earns its keep for the entries with no no-op: a manual or behaviour-only
+ * migration a person has to read and judge.
  */
 export const selectEntries = (
   entries: CatalogEntry[],

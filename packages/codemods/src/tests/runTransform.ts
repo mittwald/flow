@@ -1,5 +1,11 @@
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -7,11 +13,41 @@ import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 
-export const transformsDir = fileURLToPath(
-  new URL("../transforms", import.meta.url),
-);
+const migrationsDir = fileURLToPath(new URL("../migrations", import.meta.url));
+const toolsDir = fileURLToPath(new URL("../tools", import.meta.url));
 
 const jscodeshiftBin = require.resolve("jscodeshift/bin/jscodeshift.js");
+
+/**
+ * The transform file for `name`: `src/migrations/<name>/transform.ts` when that
+ * id names a migration, otherwise `src/tools/<name>.ts` — currently only
+ * `to-remote-package`, the one transform with no catalogue entry (see
+ * `notAMigration` in `remoteScope.test.ts`).
+ */
+const transformPath = (name: string): string => {
+  const migrationPath = join(migrationsDir, name, "transform.ts");
+  return existsSync(migrationPath)
+    ? migrationPath
+    : join(toolsDir, `${name}.ts`);
+};
+
+/**
+ * Every transform id, from both locations — used by `remoteScope.test.ts` to
+ * check the full set against the catalogue, and to check what each transform
+ * declares it scopes itself to.
+ */
+export const listTransformNames = (): string[] => [
+  ...readdirSync(migrationsDir, { withFileTypes: true })
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        existsSync(join(migrationsDir, entry.name, "transform.ts")),
+    )
+    .map((entry) => entry.name),
+  ...readdirSync(toolsDir)
+    .filter((file) => file.endsWith(".ts") && !file.endsWith(".test.ts"))
+    .map((file) => file.replace(/\.ts$/, "")),
+];
 
 /**
  * The jscodeshift CLI exits 0 even when its worker dies before touching a file,
@@ -40,7 +76,8 @@ const assertProcessed = (name: string, output: string): void => {
 
 /**
  * Runs a transform through the real jscodeshift CLI binary, over a file in a
- * temp directory, with the transform read from `src/transforms`.
+ * temp directory, with the transform read from `src/migrations` (or `src/tools`
+ * for `to-remote-package`).
  *
  * This is not the invocation `runCodemod` makes — `runCodemod` (in
  * `src/run/jscodeshift.ts`) drives jscodeshift's `Runner` in-process, while
@@ -57,14 +94,7 @@ export const runTransform = (name: string, source: string): string => {
 
   const output = execFileSync(
     process.execPath,
-    [
-      jscodeshiftBin,
-      "-t",
-      join(transformsDir, `${name}.ts`),
-      "--parser",
-      "tsx",
-      inputFile,
-    ],
+    [jscodeshiftBin, "-t", transformPath(name), "--parser", "tsx", inputFile],
     { cwd: workingDir, stdio: "pipe", encoding: "utf8" },
   );
 

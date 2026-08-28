@@ -1,7 +1,6 @@
-import { readdirSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import { readCatalog } from "../catalog/read";
-import { transformsDir } from "./runTransform";
+import { listTransformNames } from "./runTransform";
 import { declaredPackages, packageEntries, remoteExports } from "./remoteScope";
 
 /**
@@ -127,18 +126,17 @@ describe("a transform's own scoping agrees with the catalogue's remotePackage cl
   });
 });
 
-const transformNames = readdirSync(transformsDir)
-  .filter((file) => file.endsWith(".ts"))
-  .map((file) => file.replace(/\.ts$/, ""));
+const transformNames = listTransformNames();
 
 /**
  * `catalog.test.ts` iterates the catalogue, so it only notices an orphan
- * transform whose filename happens to equal a catalogue id. This iterates
- * `src/transforms` instead, so a file with no matching id — or an id gone
- * unnoticed because it collided with an existing filename — cannot hide.
+ * transform whose directory happens to equal a catalogue id. This iterates
+ * `src/migrations` and `src/tools` instead, so a transform with no matching id
+ * — or an id gone unnoticed because it collided with an existing directory —
+ * cannot hide.
  */
 describe("every transform file is accounted for", () => {
-  test("the set of files in src/transforms matches the codemod ids", () => {
+  test("the set of files in src/migrations and src/tools matches the codemod ids", () => {
     expect(new Set(transformNames)).toEqual(
       new Set([...codemodIds, ...notAMigration]),
     );
