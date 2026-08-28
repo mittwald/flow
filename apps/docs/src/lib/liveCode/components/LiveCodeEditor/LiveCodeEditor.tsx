@@ -74,14 +74,22 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  /** The widest container the track has room for. */
-  const maxWidth = metrics
-    ? Math.max(minWidth, metrics.track - metrics.frame - metrics.handle)
+  const available = metrics
+    ? Math.floor(metrics.track - metrics.frame - metrics.handle)
     : null;
+  /**
+   * On a narrow screen not even the smallest draggable container fits. Lowering
+   * the floor keeps the frame inside the track instead of letting it spill
+   * out.
+   */
+  const floorWidth =
+    available === null ? minWidth : Math.max(0, Math.min(minWidth, available));
+  /** The widest container the track has room for. */
+  const maxWidth = available === null ? null : Math.max(floorWidth, available);
   const containerWidth =
     maxWidth === null
       ? null
-      : Math.min(maxWidth, Math.max(minWidth, draggedWidth ?? maxWidth));
+      : Math.min(maxWidth, Math.max(floorWidth, draggedWidth ?? maxWidth));
 
   useEffect(() => {
     const track = trackRef.current;
@@ -155,7 +163,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         event.clientX - frame.getBoundingClientRect().left - metrics.frame;
 
       setDraggedWidth(
-        Math.min(maxWidth, Math.max(minWidth, Math.round(width))),
+        Math.min(maxWidth, Math.max(floorWidth, Math.round(width))),
       );
     };
 
@@ -170,7 +178,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       window.removeEventListener("pointerup", stop);
       window.removeEventListener("pointercancel", stop);
     };
-  }, [isDragging, metrics, maxWidth]);
+  }, [isDragging, metrics, maxWidth, floorWidth]);
 
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
@@ -191,7 +199,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const resizeTo = (width: number) => {
     if (maxWidth !== null) {
       setDraggedWidth(
-        Math.min(maxWidth, Math.max(minWidth, Math.round(width))),
+        Math.min(maxWidth, Math.max(floorWidth, Math.round(width))),
       );
     }
   };
@@ -204,7 +212,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     const width = {
       ArrowLeft: containerWidth - keyStep,
       ArrowRight: containerWidth + keyStep,
-      Home: minWidth,
+      Home: floorWidth,
       End: maxWidth,
     }[event.key];
 
