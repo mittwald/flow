@@ -1,3 +1,9 @@
+.heading {
+  // Keep the release heading clear of the sticky header when the table of
+  // contents jumps to it — same offset as the MDX headings.
+  scroll-margin-top: 6rem;
+}
+
 .meta {
   font-size: var(--font-size-text--s);
 }

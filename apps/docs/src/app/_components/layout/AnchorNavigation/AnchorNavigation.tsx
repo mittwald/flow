@@ -9,7 +9,6 @@ import {
 import React, { type FC, useEffect, useRef } from "react";
 import globalStyles from "../../../layout.module.scss";
 import type { Anchor } from "@/lib/mdx/MdxFile";
-import { topAnchorId } from "@/lib/mdx/MdxFile";
 import styles from "./AnchorNavigation.module.scss";
 import { useMdxStatus } from "@/lib/mdx/components/MdxFileView/MdxFileView";
 
@@ -23,6 +22,11 @@ interface Props {
 // so we use the native replace state.
 const nativeReplaceState =
   typeof History !== "undefined" ? History.prototype.replaceState : undefined;
+
+// Where a heading comes to rest when its anchor is clicked — the same offset
+// the headings carry as `scroll-margin-top`. A heading counts as reached once
+// it crosses this line.
+const activeLineOffset = 96;
 
 const updateLocationHash = (slug: string) => {
   if (!nativeReplaceState) {
@@ -72,61 +76,43 @@ export const AnchorNavigation: FC<Props> = (props) => {
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // While the page heading is still on screen, nothing below it has been
-        // reached. Without this the observation band — which sits 20–30% down
-        // the viewport — falls onto the first section on tall windows and marks
-        // it active while the reader is at the very top of the page.
-        const pageHeadingTop = document
-          .getElementById(topAnchorId)
-          ?.getBoundingClientRect().top;
+    // The active entry is the last heading the reader has scrolled past, where
+    // "past" is the line a heading lands on when its anchor is clicked. Before
+    // the first one is reached — at the top of the page — the page heading is
+    // active.
+    const updateActiveAnchor = () => {
+      const passed = anchors
+        .map((a) => ({ slug: a.slug, el: document.getElementById(a.slug) }))
+        .filter((a): a is { slug: string; el: HTMLElement } => a.el !== null)
+        .filter(({ el }) => el.getBoundingClientRect().top <= activeLineOffset);
 
-        if (pageHeadingTop !== undefined && pageHeadingTop >= 0) {
-          setActiveAnchor(topAnchorId);
-          return;
-        }
+      setActiveAnchor(passed.at(-1)?.slug ?? anchors[0]?.slug ?? null);
+    };
 
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-        const [firstVisible] = visible;
-        if (firstVisible) {
-          setActiveAnchor(firstVisible.target.id);
-        } else {
-          const aboveViewport = anchors
-            .map((a) => document.getElementById(a.slug))
-            .filter((el): el is HTMLElement => el !== null)
-            .filter(
-              (el) =>
-                el.getBoundingClientRect().top < window.innerHeight * 0.25,
-            )
-            .pop();
-
-          if (aboveViewport) {
-            setActiveAnchor(aboveViewport.id);
-          } else if (!activeAnchor && anchors[0]) {
-            setActiveAnchor(anchors[0].slug);
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: [0, 0.25, 0.5],
-      },
-    );
-
-    anchors.forEach((a) => {
-      const el = document.getElementById(a.slug);
-      if (el) {
-        observer.unobserve(el);
-        observer.observe(el);
+    // Reading layout on every scroll event would thrash; once per frame is
+    // enough to keep the highlight in step with the scroll.
+    let frame = 0;
+    const scheduleUpdate = () => {
+      if (frame !== 0) {
+        return;
       }
-    });
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        updateActiveAnchor();
+      });
+    };
 
-    return () => observer.disconnect();
+    updateActiveAnchor();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame !== 0) {
+        cancelAnimationFrame(frame);
+      }
+    };
   }, [anchors, ready]);
 
   if (anchors.length === 0) {
