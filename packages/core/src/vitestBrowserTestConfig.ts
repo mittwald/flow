@@ -22,7 +22,14 @@ export const vitestBrowserTestConfig: ProjectConfig = {
       setReducedMotion,
     },
     provider: playwright({
-      actionTimeout: 5000,
+      /*
+       * Bounds a stuck action, not a slow one. One browser context per test
+       * file runs in parallel, and on a loaded machine a legitimate click goes
+       * past 5s — seen as `locator.click: Timeout 5000ms exceeded` on a
+       * scenario that passes on its own. Stays below the 15s browser default
+       * of `testTimeout`, so the action's own message still reaches the report.
+       */
+      actionTimeout: 10_000,
       contextOptions: {
         reducedMotion: "reduce",
         locale: "en-US",

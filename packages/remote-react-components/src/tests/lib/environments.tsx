@@ -120,13 +120,23 @@ const waitForPaintedContent = async (): Promise<void> => {
         ),
       {
         /*
-         * The wait itself costs nothing once content is there — polling stops on
-         * the first painted frame, ~25ms in. The budget only bounds the failure
-         * case, so keep it well above `expect.poll`'s 1s default: a heavy
-         * scenario on a loaded machine would otherwise fail here for being slow
-         * rather than for being blank.
+         * The wait costs nothing once content is there — polling stops on the
+         * first painted frame, under 100ms for 474 of the 504 paints in a full
+         * firefox run. The tail is all `(Remote)`: that environment lazy-imports
+         * RemoteRendererBrowser and materialises the host tree through the
+         * receiver, a per-test-file warm-up that reached 6235ms on a machine
+         * running the suite in parallel.
+         *
+         * The budget only bounds the failure case — a scenario that never paints
+         * — so it has to clear that tail rather than sit inside it: a budget
+         * inside it reports a slow warm-up as a blank frame. The project runs
+         * serially now, which removes most of that load, but CI hardware is
+         * slower than the machine those numbers come from, so keep the margin.
+         *
+         * It must also stay below the project's `testTimeout`, or the test times
+         * out first and this message never reaches the report.
          */
-        timeout: 5000,
+        timeout: 20_000,
         message:
           "The root container never painted any content, so the screenshot would have captured a blank frame.",
       },
