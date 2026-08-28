@@ -47,7 +47,7 @@ entscheidet, ob ein zugehöriges Form Control angezeigt wird.
 
 Forms können verschiedene Elemente enthalten. Standardmäßig sind alle Angaben
 Pflichtfelder. Eine Ausnahme bilden Felder mit dem Zusatz „(optional)“ am Label
-oder der Heading.
+oder der [Heading](/04-components/content/heading).
 
 ## Label
 
@@ -107,10 +107,10 @@ Es besitzt ein zusätzliches visuelles Leading Icon, das die Suche kennzeichnet.
 Standardmäßig erfolgt die Validierung erst beim Absenden des Forms, damit der
 User es ohne Unterbrechung ausfüllen kann. Zum Absenden wird der
 `<SubmitButton/>` verwendet. Nutze die Components
-[Form (React Hook Form)](/04-components/form-controls/form-react-hook-form) oder
-[Field (React Hook Form)](/04-components/form-controls/field-react-hook-form),
-um die Form Controls von Flow nahtlos in das Formular-Management von React Hook
-Form zu integrieren.
+[Form (React Hook Form)](/04-components/react-hook-form/form) oder
+[Field (React Hook Form)](/04-components/react-hook-form/field), um die Form
+Controls von Flow nahtlos in das Formular-Management von React Hook Form zu
+integrieren.
 
 <LiveCodeEditor example="validation" editorCollapsed />
 
@@ -124,4 +124,5 @@ Je nach Field stehen unterschiedliche Properties zur Verfügung, zum Beispiel:
 
 Ein Formular sollte die Funktion „Quick submit“ unterstützen. Sie ermöglicht das
 Absenden über `⌘ + Enter` oder `Strg + Enter` aus jedem Form Control,
-insbesondere aus einem TextArea oder einem MarkdownEditor.
+insbesondere aus einem [TextArea](/04-components/form-controls/text-area) oder
+einem [MarkdownEditor](/04-components/form-controls/markdown-editor).

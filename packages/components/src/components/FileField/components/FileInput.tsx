@@ -55,6 +55,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
         type="file"
         ref={inputRef}
         onChange={handleChange}
+        onClick={(event) => event.stopPropagation()}
       />
     </PropsContextProvider>
   );

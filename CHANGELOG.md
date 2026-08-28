@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+### Bug Fixes
+
+* **FileField:** open the file dialog inside a link row ([#2965](https://github.com/mittwald/flow/issues/2965)) ([b77a14c](https://github.com/mittwald/flow/commit/b77a14cb860b7a3df49e8d9a346d3228c338bd56))
+
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** merge driver no longer reverts release version bumps ([#2958](https://github.com/mittwald/flow/issues/2958)) ([5624853](https://github.com/mittwald/flow/commit/562485398af9f32a3332bb8c341b8ce029240e0c))
+* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
+
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** hide deprecated values from the properties table ([#2960](https://github.com/mittwald/flow/issues/2960)) ([eaa0349](https://github.com/mittwald/flow/commit/eaa03497fda2fd0aded933776f464eeed0c9aef3))
+
+## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** show full prop types in the properties table ([#2961](https://github.com/mittwald/flow/issues/2961)) ([2c42ad5](https://github.com/mittwald/flow/commit/2c42ad539c00b7dcbfdff044c3a128ef5bf38f8c))
+
+## [1.0.4](https://github.com/mittwald/flow/compare/1.0.3...1.0.4) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+### Bug Fixes
+
+* **ci:** enable automatic review environments for other target branches too ([#2953](https://github.com/mittwald/flow/issues/2953)) ([6102d2e](https://github.com/mittwald/flow/commit/6102d2e71a1087cf23256da1addf131895e5f02b))
+* **CodeBlock:** balance the padding and unify the editor line colors ([#2945](https://github.com/mittwald/flow/issues/2945)) ([6bf57c7](https://github.com/mittwald/flow/commit/6bf57c7c50e4c05ba504df74f4941aa7fdd95809))
+
+### Reverts
+
+* **docs:** remove 1.0.0 release reveal easter egg ([#2955](https://github.com/mittwald/flow/issues/2955)) ([419e17f](https://github.com/mittwald/flow/commit/419e17f9de28e149bb9788ad9e1b5f1a241fb695))
+
 ## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
 
 ### Bug Fixes

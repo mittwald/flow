@@ -285,7 +285,11 @@ to zero components.
 
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
-props to hide.
+props to hide. A deprecated **value** of a still-current prop — `Button`'s
+`color="accent"` — is listed with `@deprecatedValues accent` (comma-separated
+for several) and drops out of the properties table, so the table only offers
+values that should still be used. The value stays in the prop's type and keeps
+working; the runtime warns via `useWarnDeprecation` as usual.
 
 ## Misc
 
