@@ -39,8 +39,7 @@ export interface BarPropsByDataKey<
   extends BarBaseProps, DataKeyWithLabel<TData> {}
 
 export type BarProps<TData extends ChartDataValue = ChartDataValue> =
-  | BarPropsByDataKey<TData>
-  | BarPropsByDataKeyProp<TData>;
+  BarPropsByDataKey<TData> | BarPropsByDataKeyProp<TData>;
 
 /** @flr-generate all */
 export const Bar: FC<BarProps> = (props) => {
