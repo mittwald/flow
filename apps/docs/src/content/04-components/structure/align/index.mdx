@@ -16,8 +16,10 @@ deprecationNotice:
 - Ersetze `<Align />` durch [Combine](/04-components/structure/combine).
   Funktional ändert sich nichts, der neue Name beschreibt die Component
   treffender.
-- Nutze für die Migration den Codemod aus der
-  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- Für die Umbenennung gibt es einen Codemod – er passt benannte, umbenannte und
+  Namespace-Imports an:
+  `npx @mittwald/flow-codemods@latest align-to-combine src`. Siehe
+  [Versionierung & Stabilität](/01-get-started/versioning).
 - Align gibt zur Laufzeit eine Deprecation-Warnung aus und wird in einer
   zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad abgesichert
   (siehe [Versionierung & Stabilität](/01-get-started/versioning)).

@@ -190,4 +190,5 @@ Also:
 - Documentation — <https://flow.mittwald.de>
 - Storybook — <https://storybook.flow-components.de>
 - Source and issues — <https://github.com/mittwald/flow>
-- Upgrade notes — [MIGRATION.md](./MIGRATION.md)
+- Upgrade notes — [MIGRATION.md](./MIGRATION.md), applied by
+  `npx @mittwald/flow-codemods@latest upgrade`

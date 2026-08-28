@@ -28,8 +28,8 @@ Two problems with that path:
 
 ## Decision
 
-**The migration catalogue (`packages/codemods/src/migrations/*.md`) is the
-single source for consumer migrations.** One Markdown file per migration,
+**The migration catalogue (`packages/codemods/src/migrations/<id>/entry.md`) is
+the single source for consumer migrations.** One Markdown file per migration,
 frontmatter plus prose. `packages/components/MIGRATION.md` is generated from it;
 editing the guide by hand is futile — CI fails the diff.
 

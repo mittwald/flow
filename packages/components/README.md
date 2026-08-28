@@ -37,7 +37,8 @@ import { Button } from "@mittwald/flow-react-components";
 - <https://storybook.flow-components.de> — Storybook.
 - `@mittwald/flow-react-components/component-index` — a JSON index of every
   public component with its lifecycle status and props.
-- [MIGRATION.md](./MIGRATION.md) — upgrade notes.
+- [MIGRATION.md](./MIGRATION.md) — upgrade notes. The codemods among them run
+  from one command: `npx @mittwald/flow-codemods@latest upgrade`.
 
 ## Contributing
 

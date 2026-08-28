@@ -141,7 +141,7 @@ Supporting packages (touch these only when your change concerns them):
 | `packages/remote-*`                    | The remote-rendering stack (render Flow UI from sandboxed mStudio extensions) |
 | `packages/react-tunnel`                | Render React components through a "tunnel" (portal-like)                      |
 | `packages/ext-bridge`, `mstudio-ext-*` | Building blocks for mStudio embedded extensions                               |
-| `packages/codemods`                    | Codemods to help consumers migrate between versions                           |
+| `packages/codemods`                    | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`   |
 | `packages/typescript-config`           | Shared TypeScript config                                                      |
 | `apps/remote-dom-demo`                 | Demo app for the remote-rendering stack                                       |
 
@@ -158,8 +158,10 @@ rest is detail:
 2. **Don't break extension developers.** Props of `@flr-generate` components are
    a contract — mStudio extensions in the wild use them. Keep old paths working
    and log their usage with `useWarnDeprecation`. Breaking changes for consumers
-   ship with a `MIGRATION.md` entry and ideally a codemod in
-   `packages/codemods`.
+   ship with a catalogue entry in `packages/codemods/src/migrations` — which
+   generates the `MIGRATION.md` entry — plus a codemod when the change is
+   mechanically decidable. `MIGRATION.md` itself is generated; editing it does
+   nothing.
 3. **Design comes from UX.** Base design tokens are taboo. Component tokens for
    a new component are fine — model them on existing components and ask when
    unsure. Never invent visual design.

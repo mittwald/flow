@@ -127,8 +127,17 @@ and a remote-rendering demo ([`apps/remote-dom-demo`](apps/remote-dom-demo)).
 
 ## Migration
 
-See the [Migration Guide](packages/components/MIGRATION.md). Full history is in
-[CHANGELOG.md](CHANGELOG.md).
+One command bumps every Flow dependency to the target version, installs, and
+runs exactly the codemods that version range needs:
+
+```shell
+npx @mittwald/flow-codemods@latest upgrade
+```
+
+It is not the whole migration — most entries in the
+[Migration Guide](packages/components/MIGRATION.md) have no codemod, and the
+command prints those for your range when it is done. `list` shows them upfront
+without changing anything. Full history is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 

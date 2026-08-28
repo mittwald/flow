@@ -123,7 +123,12 @@ Two consequences:
 
 Read the
 [migration notes](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md)
-before upgrading — they cover the remote elements too.
+before upgrading — they cover the remote elements too. The codemods among them
+run from one command, and it treats this package like any other Flow dependency:
+
+```shell
+npx @mittwald/flow-codemods@latest upgrade
+```
 
 ## Mistakes to avoid
 
