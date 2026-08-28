@@ -206,3 +206,38 @@ test("collectFindings: unparseable peer change → fail-closed finding", () => {
   assert.equal(findings.length, 1);
   assert.equal(findings[0].kind, "unparseable");
 });
+
+test("collectFindings: a package's first publish establishes the contract, not a tightening", () => {
+  const packages = [
+    {
+      name: "@mittwald/flow-codemods",
+      // Private, so never published: no floor, no peers, no consumers.
+      base: { name: "@mittwald/flow-codemods", private: true },
+      head: {
+        name: "@mittwald/flow-codemods",
+        engines: { node: ">=24.0.0" },
+        peerDependencies: { react: "^19.2.0" },
+      },
+    },
+  ];
+
+  assert.deepEqual(collectFindings(packages), []);
+});
+
+test("collectFindings: an already-published package still cannot gain a floor unmarked", () => {
+  const packages = [
+    {
+      name: "@mittwald/flow-react-components",
+      base: { name: "@mittwald/flow-react-components" },
+      head: {
+        name: "@mittwald/flow-react-components",
+        engines: { node: ">=24.0.0" },
+      },
+    },
+  ];
+
+  assert.deepEqual(
+    collectFindings(packages).map(({ surface, kind }) => ({ surface, kind })),
+    [{ surface: "engines.node", kind: "raised" }],
+  );
+});
