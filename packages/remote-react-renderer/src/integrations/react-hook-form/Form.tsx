@@ -21,11 +21,9 @@ export const Form: FC<FormProps> = (props) => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     /*
-     * React propagates synthetic events through portals along the React tree,
-     * so a Modal rendered inside a Form carries this submit up to that Form's
-     * onSubmit — which would submit the surrounding form as well (#2975). The
-     * remote Form's own guard cannot do this: the submit it receives is a
-     * remote event without a nativeEvent.
+     * React events bubble through portals, so a submit inside a Modal would
+     * reach the Form the Modal sits in and submit it too (#2975). The remote
+     * Form cannot stop that itself — its submit has no nativeEvent.
      */
     event.stopPropagation();
     await onSubmitFromProps?.();
