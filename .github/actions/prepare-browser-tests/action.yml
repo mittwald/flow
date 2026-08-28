@@ -1,0 +1,50 @@
+name: Prepare browser tests
+description:
+  Answers whether a browser suite has anything to run in this PR, and installs
+  the browser only when it has.
+
+inputs:
+  target:
+    description: The nx target the calling job runs, e.g. `test:visual`.
+    required: true
+
+outputs:
+  run:
+    description:
+      Whether at least one affected project has the target. Gate the job's
+      remaining steps on it.
+    value: ${{ steps.affected.outputs.run }}
+
+runs:
+  using: composite
+  steps:
+    # Needs the shas nrwl/nx-set-shas exports, so call this after it.
+    - name: Check whether the suite is affected
+      id: affected
+      shell: bash
+      run: |
+        projects="$(pnpm nx show projects --affected --with-target=${{ inputs.target }} --json | tail -n 1)"
+        echo "affected projects with ${{ inputs.target }}: $projects"
+        if [ "$projects" = "[]" ]; then
+          echo "run=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "run=true" >> "$GITHUB_OUTPUT"
+        fi
+
+    # Keyed apart from the visual workflows' cache on purpose. They install
+    # Firefox as well, and under one shared key whichever workflow saved first
+    # would decide what the other one finds.
+    - name: Cache the Playwright browser
+      if: steps.affected.outputs.run == 'true'
+      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/ms-playwright
+        key:
+          playwright-webkit-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          playwright-webkit-${{ runner.os }}-
+
+    - name: Install the Playwright browser
+      if: steps.affected.outputs.run == 'true'
+      shell: bash
+      run: pnpm exec playwright install --with-deps webkit
