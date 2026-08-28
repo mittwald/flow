@@ -251,7 +251,10 @@ export const runUpgrade = async (
     log(
       `\n${byHand.length} migration(s) in this range have no codemod — apply them by hand:\n`,
     );
-    log(renderList({ entries: byHand, json: false }));
+    // `header: false` — this already printed the heading above; renderList's
+    // own header (the "N migrations …" summary, counts, and legend) would
+    // just repeat it for the same list.
+    log(renderList({ entries: byHand, json: false, header: false }));
   } else {
     log("\nNo migration in this range required a change by hand.");
   }

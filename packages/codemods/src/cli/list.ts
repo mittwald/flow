@@ -26,6 +26,13 @@ export interface RenderListInput {
   color?: boolean;
   /** Terminal width to wrap prose to. */
   width?: number;
+  /**
+   * Render the summary header ("N migrations …", the counts, the legend). On by
+   * default. `upgrade` turns it off for its by-hand section: it already printed
+   * its own heading, and this renderer's header would just repeat it — see
+   * `runUpgrade`.
+   */
+  header?: boolean;
 }
 
 /**
@@ -179,7 +186,8 @@ const renderEntry = (
 };
 
 /**
- * "4 migrations from X to Y" plus a count per action, and — for a range-bounded
+ * "4 migrations from X to Y" (or, for a zero-width range, "4 migrations —
+ * nothing newer than X") plus a count per action, and — for a range-bounded
  * list — a legend for the catch-up mark and a line naming how many manual
  * migrations the window hides.
  *
@@ -194,8 +202,6 @@ const renderHeader = (
   color: boolean,
 ): string => {
   const paint = painter(color);
-  const rangeText =
-    range === undefined ? "" : `from ${range.from} to ${range.to}`;
 
   const noun = selected.length === 1 ? "migration" : "migrations";
   const counts = (Object.keys(actions) as CatalogEntry["action"][])
@@ -214,18 +220,30 @@ const renderHeader = (
     isCatchUp(entry, range?.from),
   ).length;
 
+  // `from`/`to` is the wrong form once they're equal — that isn't a range,
+  // it's "you're already there". Say so, and — when it's why every codemod
+  // below is marked catch-up — say that too, instead of leaving the reader to
+  // notice the two versions match.
+  const rangeText =
+    range === undefined
+      ? ""
+      : range.from === range.to
+        ? catchUpCount > 0
+          ? `— nothing newer than ${range.to}; codemods below are catch-up`
+          : `— nothing newer than ${range.to}`
+        : `from ${range.from} to ${range.to}`;
+
   // Dropping the lower bound for codemods (see `selectEntries`) means a
   // range-bounded list can show every codemod in the catalogue, not just the
-  // ones the range newly crosses. The legend says why that is not a to-do
-  // list, and the count after it names what is being shown for that reason
-  // instead of leaving it a mystery.
+  // ones the range newly crosses. The legend says what the mark means and why
+  // that's safe; the counts line above it already gives the "how many".
   const legend =
     catchUpCount === 0
       ? []
       : [
           `${
             color ? actions.codemod.paint("○") : "o"
-          } catch-up — released at or before your current version already; codemods are idempotent, so re-running one is a safe no-op (${catchUpCount} of ${selected.length} shown here).`,
+          } catch-up — released at or before your current version. Codemods are idempotent, so re-running one is a safe no-op.`,
         ];
 
   const hiddenLine =
@@ -235,8 +253,14 @@ const renderHeader = (
           const hidden = hiddenEarlierManualCount(entries, range.from);
           const noun2 = hidden === 1 ? "migration" : "migrations";
           const verb = hidden === 1 ? "is" : "are";
+          // "manual migrations" here and "by hand" in the counts line above
+          // can look like the same bucket undercounted. They aren't: this
+          // counts only `migration`-kind entries, gated by version and
+          // dropped once crossed. A `deprecation` is never gated — the old
+          // path still works, so it stays listed regardless of version — and
+          // that's the "by hand" a reader may already see above.
           return [
-            `${hidden} manual ${noun2} released at or before ${range.from} ${verb} not shown — run \`list\` with no argument to see the whole catalogue.`,
+            `${hidden} manual ${noun2} at or before ${range.from} ${verb} already behind and not shown. Deprecations aren't windowed by version, so any shown above stay listed regardless. Run \`list\` with no argument for the full catalogue.`,
           ];
         })();
 
@@ -268,6 +292,7 @@ export const renderList = ({
   json,
   color = false,
   width = 80,
+  header = true,
 }: RenderListInput): string => {
   // The two paths differ in their bounds, deliberately: unbounded, this is a
   // plain catalogue browse — every entry, sorted, regardless of whether it
@@ -296,7 +321,9 @@ export const renderList = ({
     )
     .join("\n\n");
 
-  return `${renderHeader(entries, selected, range, color)}\n${body}\n`;
+  return header
+    ? `${renderHeader(entries, selected, range, color)}\n${body}\n`
+    : `${body}\n`;
 };
 
 export interface ListDeps extends RangeDeps {

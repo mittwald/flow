@@ -212,14 +212,18 @@ describe("catch-up codemods", () => {
     expect(newBlock).not.toContain("catch-up");
   });
 
-  test("the header explains the catch-up mark and counts it", () => {
+  test("the header explains what the catch-up mark means and why it's safe", () => {
     const text = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
+    // The legend names the mark and the reassurance ("safe no-op"); the exact
+    // count is already in the counts line above it, so the legend itself
+    // doesn't repeat it.
     expect(text).toMatch(/catch-up/);
-    expect(text).toContain("1 of");
+    expect(text).toMatch(/safe no-op/);
+    expect(text).toContain("2 codemods");
   });
 
   test("no legend when nothing in range is catch-up", () => {
@@ -367,7 +371,10 @@ describe("runList", () => {
     // refusal to word differently.
     const output = recorded.written.join("");
     expect(code).toBe(0);
-    expect(output).toContain("from 1.2.0 to 1.2.0");
+    // Zero-width — `from`/`to` would be the wrong form here, since there is
+    // no range at all.
+    expect(output).toContain("nothing newer than 1.2.0");
+    expect(output).not.toContain("from 1.2.0 to 1.2.0");
     expect(output).not.toMatch(/already on|nothing to do/i);
   });
 
