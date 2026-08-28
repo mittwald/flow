@@ -188,8 +188,8 @@ const renderEntry = (
 /**
  * "4 migrations from X to Y" (or, for a zero-width range, "4 migrations —
  * nothing newer than X") plus a count per action, and — for a range-bounded
- * list — a legend for the catch-up mark and a line naming how many manual
- * migrations the window hides.
+ * list — a legend for the catch-up mark (if any entries are catch-up) and a
+ * count of hidden manual migrations (if any are hidden).
  *
  * `entries` is the whole catalogue passed to `renderList`, not `selected`: the
  * hidden count is about what `selectEntries` excluded, which by definition is
@@ -233,44 +233,34 @@ const renderHeader = (
           : `— nothing newer than ${range.to}`
         : `from ${range.from} to ${range.to}`;
 
+  // Fold the hidden manual count into the counts line rather than repeating
+  // it below. Include it only if there are hidden entries.
+  const hiddenCount =
+    range === undefined ? 0 : hiddenEarlierManualCount(entries, range.from);
+  if (hiddenCount > 0) {
+    const hiddenText = `${hiddenCount} manual ${hiddenCount === 1 ? "migration" : "migrations"} already behind, not shown`;
+    counts.push(paint.dim(hiddenText));
+  }
+
   // Dropping the lower bound for codemods (see `selectEntries`) means a
   // range-bounded list can show every codemod in the catalogue, not just the
   // ones the range newly crosses. The legend says what the mark means and why
-  // that's safe; the counts line above it already gives the "how many".
+  // that's safe.
   const legend =
-    catchUpCount === 0
+    catchUpCount === 0 || range === undefined
       ? []
       : [
           `${
             color ? actions.codemod.paint("○") : "o"
-          } catch-up — released at or before your current version. Codemods are idempotent, so re-running one is a safe no-op.`,
+          }  catch-up: released at or before ${range.from} — re-running a codemod is a no-op.`,
         ];
 
-  const hiddenLine =
-    range === undefined
-      ? []
-      : (() => {
-          const hidden = hiddenEarlierManualCount(entries, range.from);
-          const noun2 = hidden === 1 ? "migration" : "migrations";
-          const verb = hidden === 1 ? "is" : "are";
-          // "manual migrations" here and "by hand" in the counts line above
-          // can look like the same bucket undercounted. They aren't: this
-          // counts only `migration`-kind entries, gated by version and
-          // dropped once crossed. A `deprecation` is never gated — the old
-          // path still works, so it stays listed regardless of version — and
-          // that's the "by hand" a reader may already see above.
-          return [
-            `${hidden} manual ${noun2} at or before ${range.from} ${verb} already behind and not shown. Deprecations aren't windowed by version, so any shown above stay listed regardless. Run \`list\` with no argument for the full catalogue.`,
-          ];
-        })();
-
   // The counts carry their own colour, so no dim around them — nesting the two
-  // makes both weaker.
+  // makes both weaker. Hidden count is already dimmed above.
   return [
     `${paint.bold(`${selected.length} ${noun}`)}${rangeText === "" ? "" : ` ${rangeText}`}`,
-    counts.join(paint.dim(" \u00B7 ")),
+    counts.join(paint.dim(" · ")),
     ...legend,
-    ...hiddenLine,
     "",
   ].join("\n");
 };

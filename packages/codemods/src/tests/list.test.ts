@@ -184,6 +184,7 @@ describe("presentation", () => {
     expect(text).toContain("1 codemod");
     expect(text).toContain("1 by hand");
     expect(text).toContain("1 no code change");
+    // No manual migrations are hidden, so no third item
   });
 });
 
@@ -218,12 +219,12 @@ describe("catch-up codemods", () => {
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    // The legend names the mark and the reassurance ("safe no-op"); the exact
-    // count is already in the counts line above it, so the legend itself
-    // doesn't repeat it.
+    // The legend names the mark and the reassurance ("no-op"); hidden count
+    // is in the counts line, and the legend explains the mark.
     expect(text).toMatch(/catch-up/);
-    expect(text).toMatch(/safe no-op/);
+    expect(text).toMatch(/no-op/);
     expect(text).toContain("2 codemods");
+    expect(text).toContain("1 manual migration already behind, not shown");
   });
 
   test("no legend when nothing in range is catch-up", () => {
@@ -232,7 +233,8 @@ describe("catch-up codemods", () => {
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    expect(text).not.toContain("catch-up");
+    // The legend block (starting with "catch-up:") should not appear
+    expect(text).not.toMatch(/catch-up:/);
   });
 
   test("names how many manual migrations the window hides, without listing them", () => {
@@ -242,9 +244,9 @@ describe("catch-up codemods", () => {
       json: false,
     });
     // "old-manual" (since 0.9.0 <= current 1.0.0) is excluded by design and
-    // must be counted, not shown.
+    // must be counted, not shown. Hidden count is now part of the counts line.
     expect(text).not.toContain("old-manual");
-    expect(text).toMatch(/1 manual migration.*not shown/);
+    expect(text).toContain("1 manual migration already behind, not shown");
   });
 
   test("the whole-catalogue browse (no range) has no catch-up marking at all", () => {
