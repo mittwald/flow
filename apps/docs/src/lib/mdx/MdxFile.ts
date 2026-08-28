@@ -69,12 +69,16 @@ export class MdxFile {
     );
   }
 
-  public getGitHubUrl(): string {
-    const component = this.mdxSource.frontmatter.component;
+  public getGitHubUrl(): string | undefined {
+    const { component, gitHubComponentPath } = this.mdxSource.frontmatter;
 
     const gitHubPath =
-      this.mdxSource.frontmatter.gitHubComponentPath ??
-      `components/${component}`;
+      gitHubComponentPath ??
+      (component ? `components/${component}` : undefined);
+
+    if (!gitHubPath) {
+      return undefined;
+    }
 
     return `https://github.com/mittwald/flow/tree/main/packages/components/src/${gitHubPath}`;
   }
