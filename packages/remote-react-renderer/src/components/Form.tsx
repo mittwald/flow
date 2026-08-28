@@ -22,8 +22,8 @@ export const Form: FC<FormProps> = (props) => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     /*
      * React events bubble through portals, so a submit inside a Modal would
-     * reach the Form the Modal sits in and submit it too (#2975). An
-     * action-only form needs that guard as well, so the handler always runs.
+     * reach the Form the Modal sits in and submit it too. An action-only form
+     * needs that guard as well, so the handler always runs.
      */
     event.stopPropagation();
 
