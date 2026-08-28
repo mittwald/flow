@@ -13,7 +13,7 @@ import {
   fetchVersions,
   intersectVersions,
 } from "./registry.js";
-import { resolveTarget } from "./target.js";
+import { resolveTarget, type UnresolvedTarget } from "./target.js";
 
 /**
  * The installed version of `name`, read from `cwd`'s `node_modules`.
@@ -71,6 +71,42 @@ const isEnoent = (error: unknown): boolean =>
   error instanceof Error &&
   "code" in error &&
   (error as NodeJS.ErrnoException).code === "ENOENT";
+
+/**
+ * Turns a structured `UnresolvedTarget` into the one- or two-sentence message
+ * `resolveRange` returns as `reason`.
+ *
+ * `resolveTarget` reports _why_ it could not resolve `revision`; this is the
+ * "let the caller say the right thing" half. `unrecognized` covers both an
+ * unknown keyword and an unknown dist-tag — nothing about the string itself
+ * says which the caller meant, so the message lists both the keywords and the
+ * real dist-tags rather than guessing.
+ */
+const describeUnresolvedTarget = (reason: UnresolvedTarget): string => {
+  switch (reason.kind) {
+    case "unrecognized": {
+      const tags =
+        reason.distTags.length > 0
+          ? `, or one of these dist-tags: ${reason.distTags.join(", ")}`
+          : "";
+      return `"${reason.revision}" is not a recognised revision. Use patch, minor, major, an exact version${tags}.`;
+    }
+    case "no-candidate": {
+      const suggestion =
+        reason.broader !== undefined
+          ? `Use "${reason.broader.keyword}" (→ ${reason.broader.target}), or name an exact version.`
+          : "No stable version has been published yet — name a dist-tag or an exact version.";
+      return `"${reason.revision}" looks for ${reason.describes}; none is published. ${suggestion}`;
+    }
+    case "unpublished": {
+      const closest =
+        reason.closest !== undefined
+          ? ` The closest published version is ${reason.closest}.`
+          : "";
+      return `"${reason.revision}" has not been published.${closest}`;
+    }
+  }
+};
 
 /**
  * What `revision` resolves to for the project at `cwd`.
@@ -177,14 +213,13 @@ export const resolveRange = async (
     ),
   );
 
-  const target = resolveTarget({ revision, current, versions, distTags });
+  const resolved = resolveTarget({ revision, current, versions, distTags });
 
-  if (target === undefined) {
-    return {
-      ok: false,
-      reason: `Could not resolve "${revision}" to a version every declared Flow dependency has published. Use patch, minor, major, a dist-tag, or an exact version.`,
-    };
+  if (!resolved.ok) {
+    return { ok: false, reason: describeUnresolvedTarget(resolved.reason) };
   }
+
+  const { target } = resolved;
 
   // Defence in depth: `target` is drawn from `versions` (the intersection) or
   // from a dist-tag already validated against it, so this should never find a
