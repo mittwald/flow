@@ -7,16 +7,6 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
-    id: "to-remote-package",
-    since: "0.2.0",
-    title: "Port an app to the remote package",
-    kind: "tool",
-    action: "codemod",
-    remotePackage: false,
-    apply:
-      "Rewrite every `@mittwald/flow-react-components` import to `@mittwald/flow-remote-react-components`. Run this only when porting an app into an mStudio extension — on a normal app it rewrites every Flow import.",
-  },
-  {
     id: "segmented-control-deprecated",
     since: "0.2.0-alpha.1056",
     title: "SegmentedControl deprecated",

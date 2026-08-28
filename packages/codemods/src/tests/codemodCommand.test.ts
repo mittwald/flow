@@ -76,6 +76,18 @@ describe("runSingleCodemod", () => {
     expect(output).toContain("apply:");
   });
 
+  // `to-remote-package` is a transform with no catalogue entry — a deliberate
+  // port, not a migration (see `notAMigration` in `remoteScope.test.ts`). It
+  // must stay runnable by id even though `allEntries.find` never finds it.
+  test("an id with a transform but no catalogue entry still runs", async () => {
+    const { code, output } = await call(["to-remote-package", "src"], ok);
+    expect(code).toBe(0);
+    expect(output).toContain("Running to-remote-package over");
+    // No catalogue entry means no anchor in MIGRATION.md to point at — pointing
+    // there anyway would be a dead link.
+    expect(output).not.toContain("MIGRATION.md");
+  });
+
   test("a successful run ends with a pointer to the migration guide", async () => {
     const { code, output } = await call(["align-to-combine", "src"], ok);
     expect(code).toBe(0);

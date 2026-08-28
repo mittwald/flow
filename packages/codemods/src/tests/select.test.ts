@@ -47,11 +47,6 @@ describe("selectEntries", () => {
     expect(ids(selectEntries(catalog, "1.0.0", "1.1.0"))).toEqual([]);
   });
 
-  test("a tool is never selected", () => {
-    const catalog = [entry("port", "0.2.0", "tool")];
-    expect(ids(selectEntries(catalog, "0.1.0", "9.9.9"))).toEqual([]);
-  });
-
   test("alpha prereleases compare numerically, not as strings", () => {
     // The bounds straddle a single-to-double-digit boundary on purpose: numeric
     // comparison includes `.10` (9 < 10 <= 11), a string comparison excludes it

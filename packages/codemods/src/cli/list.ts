@@ -229,12 +229,13 @@ export const renderList = ({
   color = false,
   width = 80,
 }: RenderListInput): string => {
-  // The two paths differ in more than their bounds, deliberately: `sortBySince`
-  // keeps `kind: "tool"` entries, `selectEntries` drops them. Unbounded, this is
-  // a catalogue browser, and browsing is how someone finds the codemod that
-  // ports an app between packages. Bounded, it answers "what does this version
-  // range require of me" — and a port is never required by a version range. Do
-  // not unify these.
+  // The two paths differ in their bounds, deliberately: unbounded, this is a
+  // plain catalogue browse — every entry, sorted, regardless of whether it
+  // would apply to any given range. Bounded, it answers "what does this
+  // version range require of me", which `selectEntries` computes per entry
+  // from `since`. Do not unify these into one `selectEntries` call with wide
+  // sentinel bounds — it would blur that distinction even where the results
+  // happen to coincide.
   //
   // `0.0.0-0` rather than `0.0.0` as the lower sentinel: the gate's
   // `current < since` is strict, so `0.0.0` would hide an entry whose `since` is

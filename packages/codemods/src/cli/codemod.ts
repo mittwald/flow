@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
 import { allEntries, unknownCodemodMessage } from "../catalog/entries.js";
 import type { ParsedCommand } from "./args.js";
-import { runCodemod } from "../run/jscodeshift.js";
+import { runCodemod, transformExists } from "../run/jscodeshift.js";
 
 /**
  * Which sources to transform, resolved against `cwd`.
@@ -42,11 +42,19 @@ export const runSingleCodemod = async (
   const id = parsed.id ?? "";
   const entry = allEntries.find((candidate) => candidate.id === id);
 
+  // No catalogue entry is not the same as unknown: `to-remote-package` is a
+  // transform deliberately kept out of the catalogue (it is a port, not a
+  // migration — see `notAMigration` in `src/tests/remoteScope.test.ts`), and it
+  // still has to be reachable by id. Only fall back to the transform file when
+  // the catalogue does not know the id at all; a catalogued id whose action is
+  // "manual" or "none" still has no transform to run, regardless of what is on
+  // disk.
   if (entry === undefined) {
-    log(unknownCodemodMessage(id));
-    return 1;
-  }
-  if (entry.action !== "codemod") {
+    if (!transformExists(id)) {
+      log(unknownCodemodMessage(id));
+      return 1;
+    }
+  } else if (entry.action !== "codemod") {
     log(
       `"${id}" has no codemod — it is a ${entry.action === "none" ? "behaviour change" : "manual change"}.\n\napply: ${entry.apply}`,
     );
@@ -81,8 +89,14 @@ export const runSingleCodemod = async (
   }
 
   const skipped = result.skipped > 0 ? `, ${result.skipped} skipped` : "";
-  log(
-    `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.\nSee https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md#${id} for what's left.`,
-  );
+  const summary = `${id}: ${result.changed} file(s) changed, ${result.unmodified} unchanged${skipped}.`;
+  // Only a catalogued id has a migration guide entry to point at — a transform
+  // like `to-remote-package` with no catalogue entry has no anchor in
+  // `MIGRATION.md` to link, so pointing there would be a dead link.
+  const pointer =
+    entry === undefined
+      ? ""
+      : `\nSee https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md#${id} for what's left.`;
+  log(`${summary}${pointer}`);
   return 0;
 };

@@ -63,18 +63,27 @@ const targets: Record<string, string[]> = {
   ],
   "imports-to-package-root": [],
   "renamed-css-export": [],
-  "to-remote-package": [],
 };
 
 /**
- * These three are about the package layout itself rather than about names in
- * it, so there is nothing to look up in `remoteExports`.
+ * These two are about the package layout itself rather than about names in it,
+ * so there is nothing to look up in `remoteExports`.
  */
 const notNameScoped = new Set([
   "imports-to-package-root",
   "renamed-css-export",
-  "to-remote-package",
 ]);
+
+/**
+ * The one transform that is not a migration: it ports an app onto
+ * `@mittwald/flow-remote-react-components`. No version range calls for it, so
+ * it has no catalogue entry — run it deliberately, not as part of an upgrade.
+ *
+ * Named here rather than folded into `codemodIds` below, so the set assertion
+ * in "every transform file is accounted for" stays exact instead of silently
+ * widening to admit any orphan transform.
+ */
+const notAMigration = ["to-remote-package"];
 
 const catalog = readCatalog();
 const remotePackageById = new Map(
@@ -131,7 +140,7 @@ const transformNames = readdirSync(transformsDir)
 describe("every transform file is accounted for", () => {
   test("the set of files in src/transforms matches the codemod ids", () => {
     expect(new Set(transformNames)).toEqual(
-      new Set([...codemodIds, "to-remote-package"]),
+      new Set([...codemodIds, ...notAMigration]),
     );
   });
 });

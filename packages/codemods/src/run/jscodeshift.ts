@@ -20,6 +20,18 @@ const transformsDir = fileURLToPath(
   new URL("../../src/transforms", import.meta.url),
 );
 
+/**
+ * Whether `id` names a transform file on disk.
+ *
+ * Deliberately independent of the catalogue: `to-remote-package` is a transform
+ * with no catalogue entry (it is a port, not a migration — see `notAMigration`
+ * in `src/tests/remoteScope.test.ts`), and it still has to be runnable by id.
+ * `runSingleCodemod` calls this to decide that before it ever reaches this
+ * module's own `existsSync` check below.
+ */
+export const transformExists = (id: string): boolean =>
+  existsSync(`${transformsDir}/${id}.ts`);
+
 export interface CodemodOptions {
   /** A catalogue id — the transform file name without its extension. */
   id: string;

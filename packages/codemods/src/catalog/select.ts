@@ -37,8 +37,6 @@ export const selectEntries = (
         // replacement has to exist in the target.
         case "deprecation":
           return lte(entry.since, target);
-        case "tool":
-          return false;
       }
     }),
   );

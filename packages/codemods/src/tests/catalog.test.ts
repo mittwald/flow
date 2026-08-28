@@ -56,7 +56,7 @@ describe("catalogue invariants", () => {
   });
 
   test("kind and action only take known values", () => {
-    const kinds = new Set(["migration", "deprecation", "tool"]);
+    const kinds = new Set(["migration", "deprecation"]);
     const actions = new Set(["codemod", "manual", "none"]);
     const bad = catalog.filter(
       (entry) => !kinds.has(entry.kind) || !actions.has(entry.action),

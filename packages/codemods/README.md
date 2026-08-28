@@ -63,6 +63,18 @@ the project root).
 
 Options: `--dry`, `--print` — same meaning as under `upgrade`.
 
+### `to-remote-package`
+
+A port, not a migration: it rewrites every `@mittwald/flow-react-components`
+import to `@mittwald/flow-remote-react-components`. It has no catalogue entry —
+no version range calls for it, and it never shows up in `list` or `upgrade`. Run
+it deliberately when moving an app into an mStudio extension; on a normal app it
+rewrites every Flow import.
+
+```shell
+npx @mittwald/flow-codemods@latest to-remote-package src
+```
+
 ## Exit codes
 
 `0` on success, `1` on a refusal (dirty tree, unresolvable revision, a failed
