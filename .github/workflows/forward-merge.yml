@@ -170,27 +170,64 @@ jobs:
           # git, and the pull request that eventually appears is a clean,
           # reviewable merge.
           open_sync_issue() {
-            local conflicted body title existing open_pr
+            local conflicted body title existing open_pr fingerprint marker refresh
             title="Forward-merge blocked: main into next needs a manual resolution"
 
-            # An open sync PR means someone has already resolved this and is
-            # waiting for review. The cascade is still blocked, but not on
-            # anyone's attention — no second alert.
+            conflicted="$(git ls-files --unmerged | cut -f2 | sort -u | sed 's/^/- `/; s/$/`/')"
+
+            # What identifies THIS blockage: the `main` tip that failed to merge,
+            # plus the conflicting paths. The escalation is idempotent on the
+            # FINGERPRINT, not on "an issue is open" (ADR 0004 §4).
+            #
+            # The difference is the whole point of #2963. A human resolved the
+            # first conflict; by the time the sync PR merged, `main` had moved on
+            # and the cascade hit a DIFFERENT conflict. Keyed on "an issue is
+            # open", every run after that went silent against an issue whose body
+            # described the problem that was already fixed. Keyed on the
+            # fingerprint, the new blockage gets a comment.
+            fingerprint="$(printf '%s\n%s\n' "$MAIN_SHA" "$conflicted" | sha1sum | cut -c1-12)"
+            marker="<!-- forward-merge-state: ${fingerprint} -->"
+
+            refresh="$(printf '%s\n' \
+              'The cascade is **still blocked** — and on a different blockage than the one reported above.' \
+              '' \
+              "\`main\` is now at \`${SHORT_SHA}\`. Conflicting files:" \
+              '' \
+              "${conflicted}" \
+              '' \
+              'The procedure is unchanged: `pnpm sync:resolve`, resolve, `pnpm sync:resolve --continue`.' \
+              '' \
+              "${marker}")"
+
+            # An open sync PR means someone has already resolved a blockage and is
+            # waiting for review. Whether it resolves THIS one is the question the
+            # fingerprint answers: if `main` has moved past what the PR merges, the
+            # PR is stale and merging it will leave the cascade blocked.
             open_pr="$(gh pr list --repo "$REPO" --head "sync/main-to-next" \
               --base next --state open --json number --jq '.[].number')"
             if [ -n "$open_pr" ]; then
-              echo "::notice::Sync PR #${open_pr} is open — a resolution is already in review. Not opening an issue."
+              if gh pr view "$open_pr" --repo "$REPO" --json body,comments \
+                   --jq '.body, (.comments[].body)' | grep -qF "$marker"; then
+                echo "::notice::Sync PR #${open_pr} already reports this exact blockage — staying quiet."
+                return 0
+              fi
+              gh pr comment "$open_pr" --repo "$REPO" --body "$refresh"
+              echo "::warning::Sync PR #${open_pr} does not cover the current blockage — commented."
               return 0
             fi
 
             existing="$(gh issue list --repo "$REPO" --state open --label sync \
               --search "in:title \"${title}\"" --json number --jq '.[].number')"
             if [ -n "$existing" ]; then
-              echo "::notice::Sync issue #${existing} is already open — not opening another."
+              if gh issue view "$existing" --repo "$REPO" --json body,comments \
+                   --jq '.body, (.comments[].body)' | grep -qF "$marker"; then
+                echo "::notice::Sync issue #${existing} already reports this exact blockage — not commenting again."
+                return 0
+              fi
+              gh issue comment "$existing" --repo "$REPO" --body "$refresh"
+              echo "::warning::Sync issue #${existing} refreshed — the blockage changed."
               return 0
             fi
-
-            conflicted="$(git ls-files --unmerged | cut -f2 | sort -u | sed 's/^/- `/; s/$/`/')"
 
             gh label create sync --repo "$REPO" --color BFD4F2 \
               --description "Forward-merge / promotion sync" 2>/dev/null || true
@@ -216,7 +253,7 @@ jobs:
               '' \
               '`--continue` refuses to commit while conflict markers are left, and keeps the merge a TRUE merge commit so the superset invariant (ADR 0004 §1) holds.' \
               '' \
-              '/cc @mfal @Lisa18289 @ins0 @maaaathis @Jan-Eimertenbrink')"
+              "${marker}")"
 
             gh issue create --repo "$REPO" --label sync --label automated \
               --title "$title" --body "$body"
