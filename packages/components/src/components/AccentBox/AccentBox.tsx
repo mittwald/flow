@@ -25,8 +25,7 @@ const accentBoxBackgroundColors = [
 
 type AccentBoxBackgroundColor = (typeof accentBoxBackgroundColors)[number];
 type AccentBoxWithCustomBackgroundColor =
-  | AccentBoxBackgroundColor
-  | (string & {});
+  AccentBoxBackgroundColor | (string & {});
 
 function isFlowColor(
   something: unknown,

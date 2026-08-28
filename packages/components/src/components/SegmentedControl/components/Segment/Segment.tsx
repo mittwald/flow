@@ -11,8 +11,13 @@ export interface SegmentProps
     PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps<HTMLLabelElement> {}
 
-/** @flr-generate all */
+/**
+ * @deprecated Use `Tab` inside `Tabs`, or `Radio` inside a `RadioGroup`.
+ * @flr-generate all
+ */
 export const Segment = flowComponent("Segment", (props) => {
+  // No deprecation warning here — a Segment only renders inside a
+  // SegmentedControl, which already warns.
   const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.segment, className);

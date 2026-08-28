@@ -1,8 +1,5 @@
 export type ContextMenuSelectionMode =
-  | "single"
-  | "multiple"
-  | "navigation"
-  | "switch";
+  "single" | "multiple" | "navigation" | "switch";
 
 export const getAriaSelectionMode = (
   selectionMode?: ContextMenuSelectionMode,

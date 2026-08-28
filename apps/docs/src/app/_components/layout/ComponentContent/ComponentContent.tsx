@@ -5,15 +5,18 @@ import styles from "../../../layout.module.scss";
 import {
   Flex,
   Heading,
-  IconExternalLink,
   LayoutCard,
-  Link,
+  Header,
   Section,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
-import { ComponentStatusCallout } from "@/lib/componentStatus";
+import {
+  ComponentStatusCallout,
+  serializeDeprecationNotice,
+} from "@/lib/componentStatus";
+import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
 
 interface Props {
   params: StaticParams;
@@ -27,10 +30,11 @@ export const ComponentContent: FC<Props> = async (props) => {
 
   // A component is a single index.mdx that holds the whole page (in order:
   // Guidelines, Overview, Develop); name + description live in its frontmatter.
-  const mdxFile = await MdxFileFactory.fromParams(
-    contentFolder,
-    params,
-    "index",
+  const componentPages = await MdxFileFactory.fromDir(contentFolder, "index");
+  const mdxFile = componentPages.find((page) =>
+    page.matchesSlugs(
+      "slug" in params ? params.slug : [params.group, params.component],
+    ),
   );
 
   if (!mdxFile) {
@@ -41,26 +45,25 @@ export const ComponentContent: FC<Props> = async (props) => {
   const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
   const description = mdxFile.mdxSource.frontmatter.description;
   const component = mdxFile.mdxSource.frontmatter.component;
-  const deprecationNotice = mdxFile.mdxSource.frontmatter.deprecationNotice;
+  const deprecationNotice = await serializeDeprecationNotice(
+    mdxFile.mdxSource.frontmatter.deprecationNotice,
+  );
 
   return (
     <Flex columnGap="m" className={styles.tabsContainer}>
       <LayoutCard className={styles.tabs}>
         <div className={styles.mainContent}>
           <Section>
-            <Heading level={1}>{mdxFile.getTitle()}</Heading>
+            <Header>
+              <Heading level={1}>{mdxFile.getTitle()}</Heading>
+              <PageActions
+                title={mdxFile.getTitle()}
+                markdownUrl={markdownUrl}
+                gitHubUrl={mdxFile.getGitHubUrl()}
+              />
+            </Header>
 
             {description}
-
-            <Flex direction="row" columnGap="m">
-              <Link href={mdxFile.getGitHubUrl()}>
-                GitHub
-                <IconExternalLink />
-              </Link>
-              <Link href={markdownUrl} target="_blank">
-                Markdown
-              </Link>
-            </Flex>
 
             {component && (
               <ComponentStatusCallout

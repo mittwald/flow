@@ -72,6 +72,7 @@ export default function Page() {
   return (
     <>
       <ExampleChart data={data} />
+      <ExampleChart data={data} />
       <ExampleChart data={[]} />
     </>
   );

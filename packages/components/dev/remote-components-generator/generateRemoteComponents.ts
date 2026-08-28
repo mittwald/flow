@@ -10,6 +10,10 @@ import {
 } from "./generation/generateRemoteElementFile";
 import { config } from "./config";
 import { checkTagIsSet, checkTagListIncludes } from "./lib/docTags";
+import {
+  checkSerializableProps,
+  formatUnserializablePropReport,
+} from "./lib/checkSerializableProps";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
@@ -63,6 +67,17 @@ async function generate() {
 
   console.log("✅  Done");
   console.log("");
+
+  /*
+   * Thrown, not reported: the list is empty, so the only way it grows is a new
+   * prop that would drop whole mutation batches at runtime. Failing generation is
+   * the cheapest place to learn that — the alternative is an extension developer
+   * whose page renders nothing.
+   */
+  const unserializableProps = checkSerializableProps(components);
+  if (unserializableProps.length > 0) {
+    throw new Error(formatUnserializablePropReport(unserializableProps));
+  }
 
   {
     console.log("📝️ Generating remote-react-component files");

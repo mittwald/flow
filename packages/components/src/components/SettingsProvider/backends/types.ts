@@ -16,5 +16,4 @@ interface CustomSettingsBackend {
 }
 
 export type SupportedSettingsBackend =
-  | LocalStorageSettingsBackend
-  | CustomSettingsBackend;
+  LocalStorageSettingsBackend | CustomSettingsBackend;

@@ -139,13 +139,27 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- **A prop that carries rendered output has to be a slot, not a property.** A
+  remote property is transported as data, and a React element carries
+  `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
+  whole message, so one such prop drops the entire mutation batch and the
+  extension renders nothing. `isSlot` recognises `ReactNode` and `ReactElement`
+  (instantiated too — the match is anchored so the
+  `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
+  is not swept in). What it cannot convert is a **function returning** rendered
+  output, because the host has to call it: that needs an eager slot or
+  `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
+  prop, so a new one cannot ship.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize. Use the
-  per-component tag for additional cases (see `TunnelEntry.tsx`).
+  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
+  `renderEmptyState` plus react-aria's `render` because the host would call them
+  and get rendered output back — neither was ever a deliberate Flow API, and
+  both cost the whole mutation batch when they were tried. Use the per-component
+  tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
@@ -271,7 +285,11 @@ to zero components.
 
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
-props to hide.
+props to hide. A deprecated **value** of a still-current prop — `Button`'s
+`color="accent"` — is listed with `@deprecatedValues accent` (comma-separated
+for several) and drops out of the properties table, so the table only offers
+values that should still be used. The value stays in the prop's type and keeps
+working; the runtime warns via `useWarnDeprecation` as usual.
 
 ## Misc
 

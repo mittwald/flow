@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import {
   ColumnLayout,
+  Flex,
+  Header,
   Heading,
-  IconExternalLink,
   LayoutCard,
-  Link,
   Section,
 } from "@mittwald/flow-react-components";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
@@ -15,6 +15,7 @@ import {
   ComponentStatusBadge,
   ComponentStatusCallout,
 } from "@/lib/componentStatus";
+import { PageActions } from "@/app/_components/layout/PageActions/PageActions";
 
 interface Props {
   mdxFile: MdxFile;
@@ -27,18 +28,14 @@ export const TopContent: FC<Props> = (props) => {
   const component = mdxFile.mdxSource.frontmatter.component;
   const markdownUrl = rawMarkdownPath([section, ...mdxFile.slugs]);
 
-  const markdownLink = (
-    <Link href={markdownUrl} target="_blank">
-      Markdown
-    </Link>
-  );
-
   if (!component) {
     return (
       <LayoutCard className={styles.mainContent}>
-        <Heading level={1}>{mdxFile.getTitle()}</Heading>
+        <Flex justify="space-between" align="start">
+          <Heading level={1}>{mdxFile.getTitle()}</Heading>
+          <PageActions title={mdxFile.getTitle()} markdownUrl={markdownUrl} />
+        </Flex>
         {mdxFile.mdxSource.frontmatter.description}
-        {markdownLink}
         <MdxFileView mdxFile={mdxFile.serialize()} />
       </LayoutCard>
     );
@@ -50,18 +47,19 @@ export const TopContent: FC<Props> = (props) => {
         <ComponentStatusCallout name={component} />
         <ColumnLayout l={[2, 1]} m={[1]} columnGap="l">
           <Section>
-            <Heading level={1}>
-              {mdxFile.getTitle()}
-              <ComponentStatusBadge name={component} />
-            </Heading>
+            <Header>
+              <Heading level={1}>
+                {mdxFile.getTitle()}
+                <ComponentStatusBadge name={component} />
+              </Heading>
+              <PageActions
+                title={mdxFile.getTitle()}
+                markdownUrl={markdownUrl}
+                gitHubUrl={mdxFile.getGitHubUrl()}
+              />
+            </Header>
 
             {mdxFile.mdxSource.frontmatter.description}
-
-            <Link href={mdxFile.getGitHubUrl()}>
-              GitHub
-              <IconExternalLink />
-            </Link>
-            {markdownLink}
           </Section>
 
           <MdxFileView mdxFile={mdxFile.serialize()} />

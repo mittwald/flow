@@ -37,7 +37,7 @@ export default () => {
 
   return (
     <ModalTrigger>
-      <Button color="success">Beispiel öffnen</Button>
+      <Button>Beispiel öffnen</Button>
       <Modal offCanvas>
         <Heading>Container anlegen</Heading>
         <Content>

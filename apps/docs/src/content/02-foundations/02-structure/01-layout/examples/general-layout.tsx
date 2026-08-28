@@ -1,74 +1,47 @@
 export default () => {
-  const styles: Record<string, React.CSSProperties> = {
-    layoutContainer: {
-      display: "grid",
-      gridTemplateAreas: `
-        'header header'
-        'nav content'
-      `,
-      gridTemplateColumns: "90px 1fr",
-      gridTemplateRows: "auto 1fr",
-      gap: "10px",
-      border: "1px solid rgba(206, 75, 255, 1)",
-      borderRadius: "4px",
-      padding: "10px",
-    },
-    header: {
-      gridArea: "header",
-      backgroundColor: "rgba(0, 84, 245, 0.02)",
-      padding: "10px",
-      textAlign: "center",
-      border: "1px dashed rgba(0, 84, 245, 1)",
-      borderRadius: "4px",
-    },
-    sideNavigation: {
-      gridArea: "nav",
-      backgroundColor: "rgba(0, 84, 245, 0.02)",
-      display: "flex",
-      justifyContent: "center",
-      padding: "55px 10px",
-      border: "1px dashed rgba(0, 84, 245, 1)",
-      borderRadius: "4px",
-      width: "90px",
-    },
-    verticalText: {
-      writingMode: "vertical-rl",
-      transform: "rotate(180deg)",
-    },
-    content: {
-      gridArea: "content",
-      backgroundColor: "rgba(0, 84, 245, 0.02)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "10px",
-      border: "1px dashed rgba(0, 84, 245, 1)",
-      borderRadius: "4px",
-    },
-    textStyle: {
-      color: "rgba(0, 63, 184, 1)",
-      fontWeight: "400",
-      fontSize: "14px",
-    },
+  const area: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "var(--size-px--xs)",
+    backgroundColor:
+      "var(--info-soft-background-color--default)",
+    border: "1px dashed var(--info-soft-content-color)",
+    borderRadius: "var(--corner-radius--s)",
+  };
+
+  const vertical: React.CSSProperties = {
+    writingMode: "vertical-rl",
+    transform: "rotate(180deg)",
+  };
+
+  const layout: React.CSSProperties = {
+    alignSelf: "stretch",
+    height: "280px",
+    display: "grid",
+    gridTemplateAreas: `
+      'header header'
+      'nav    content'
+    `,
+    gridTemplateColumns: "1fr 5fr",
+    gridTemplateRows: "1fr 6fr",
+    gap: "var(--size-px--s)",
+    color: "var(--info-soft-content-color)",
+    fontSize: "var(--font-size-text--s)",
   };
 
   return (
-    <div style={styles.layoutContainer}>
-      <header style={styles.header}>
-        <p style={styles.textStyle}>Header</p>
+    <div style={layout}>
+      <header style={{ ...area, gridArea: "header" }}>
+        Header
       </header>
-      <nav style={styles.sideNavigation}>
-        <p
-          style={{
-            ...styles.verticalText,
-            ...styles.textStyle,
-          }}
-        >
-          Side-Navigation
-        </p>
+      <nav
+        style={{ ...area, ...vertical, gridArea: "nav" }}
+      >
+        Side-Navigation
       </nav>
-      <main style={styles.content}>
-        <p style={styles.textStyle}>Content</p>
+      <main style={{ ...area, gridArea: "content" }}>
+        Content
       </main>
     </div>
   );

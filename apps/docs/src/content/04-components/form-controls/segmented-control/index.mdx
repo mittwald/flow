@@ -2,6 +2,11 @@
 component: SegmentedControl
 description:
   Ein SegmentedControl bietet eine Einfachauswahl aus 2 bis 5 kurzen Optionen.
+deprecationNotice:
+  SegmentedControl wird in einer zukünftigen Major-Version entfernt. Nutze
+  [Tabs](/04-components/structure/tabs), wenn die Auswahl Inhalte umschaltet,
+  und eine [RadioGroup](/04-components/form-controls/radio-group), wenn sie
+  einen Wert setzt.
 ---
 
 <LiveCodeEditor stretch />
@@ -10,89 +15,44 @@ description:
 
 # Best Practices
 
-- Zeige höchstens fünf kurze Optionen an. Ideal ist ein selbsterklärendes Wort,
-  höchstens ein bis drei Wörter, ohne dass der Text zweizeilig wird.
-- Stelle die wichtigste Option zuerst. Sie wird automatisch vorselektiert.
-- Beschreibe die Optionen mit einem [Label](/04-components/content/label), falls
-  sie im Zusammenhang nicht verständlich sind. Fehlt das Label, setze ein
-  `aria-label`.
+Das SegmentedControl hat zwei verschiedene Aufgaben übernommen. Welche Component
+es ersetzt, entscheidet die Aufgabe an der jeweiligen Stelle:
 
-## SegmentedControl vs. RadioGroup
-
-SegmentedControl und [RadioGroup](/04-components/form-controls/radio-group)
-haben viele Gemeinsamkeiten.
-
-<DoAndDont>
-  <Plain heading="Verwende ein SegmentedControl, um z. B. ...">
-    - eine Einfachauswahl von 2 bis 5 Optionen anzuzeigen.
-    - Optionen anzuzeigen, die aus 1 bis 2 Wörtern bestehen.
-
-  </Plain>
-
-  <Plain heading="Verwende eine RadioGroup, um z. B. ...">
-    - eine Einfachauswahl von 2 bis ungefähr 7 Optionen anzuzeigen.
-    - Optionen mit unterschiedlicher Textlänge darzustellen.
-
-  </Plain>
-</DoAndDont>
+- Schaltet die Auswahl den Inhalt darunter um, ersetzen
+  [Tabs](/04-components/structure/tabs) das SegmentedControl.
+- Setzt die Auswahl einen Wert – etwa in einem Formular oder in Einstellungen –
+  ersetzt eine [RadioGroup](/04-components/form-controls/radio-group) das
+  SegmentedControl.
+- Migriere von Hand. Es gibt keinen Codemod: welche Component passt, hängt an
+  der Aufgabe und ist pro Verwendung zu entscheiden. Die Diffs für beide Wege
+  stehen in der
+  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- SegmentedControl gibt zur Laufzeit eine Deprecation-Warnung aus und wird in
+  einer zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad
+  abgesichert (siehe [Versionierung & Stabilität](/01-get-started/versioning)).
 
 ---
 
-# Mit Inhaltsänderung
+# Inhalte umschalten: Tabs
 
-Unterhalb des SegmentedControls kann sich der Inhalt je nach Auswahl ändern.
+Ein SegmentedControl, dessen Auswahl den Inhalt darunter austauscht, ist ein
+Content Switcher – und damit die Aufgabe von
+[Tabs](/04-components/structure/tabs). Aus jedem `<Segment />` wird ein
+`<Tab />`, dessen Titel im `<TabTitle />` steht und dessen Inhalt direkt im Tab
+liegt. Das Label und der State für den angezeigten Inhalt entfallen.
 
-<LiveCodeEditor example="changeContent" editorCollapsed stretch />
-
----
-
-# FieldDescription
-
-Für eine kurze Hilfestellung zu den Optionen kann innerhalb des
-`<SegmentedControl />` eine `<FieldDescription />` eingebaut werden.
-
-<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+<LiveCodeEditor example="tabs" editorCollapsed />
 
 ---
 
-# Container Breakpoint Size
+# Werte auswählen: RadioGroup
 
-Sobald der Container schmaler als der gesetzte Breakpoint ist, stellt das
-SegmentedControl seine Optionen untereinander dar. Im Default passiert das bei
-550 px (`containerBreakpointSize="m"`); über die Property lässt sich die Größe
-mit Werten zwischen `xs` und `xl` überschreiben. Achte darauf, dass der Text
-auch dann nicht zweizeilig oder unlesbar wird.
+Ein SegmentedControl, dessen Auswahl einen Wert setzt, wird zu einer
+[RadioGroup](/04-components/form-controls/radio-group). Aus jedem `<Segment />`
+wird ein `<Radio />`; Label, FieldDescription, FieldError und die Anbindung an
+[React Hook Form](/04-components/react-hook-form/form) bleiben unverändert.
 
-<LiveCodeEditor example="compact" editorCollapsed stretch />
-
----
-
-# Disabled
-
-Einzelne Optionen oder das gesamte SegmentedControl können über `isDisabled`
-deaktiviert werden. Achte darauf, dass aus dem Kontext klar wird, warum eine
-Option gerade nicht auswählbar ist.
-
-<LiveCodeEditor example="disabled" editorCollapsed stretch />
-
----
-
-# Kombiniere mit …
-
-## ContextualHelp
-
-Benutze die [ContextualHelp](/04-components/overlays/contextual-help) Component,
-wenn du weitere Informationen bereitstellen möchtest, und diese zu lang für die
-FieldDescription sind.
-
-<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
-
-## React Hook Form
-
-Weitere Details zur Formularlogik und -validierung findest du in der Component
-[Form (React Hook Form)](/04-components/react-hook-form/form).
-
-<LiveCodeEditor example="form" editorCollapsed stretch />
+<LiveCodeEditor example="radioGroup" editorCollapsed stretch />
 
 ---
 

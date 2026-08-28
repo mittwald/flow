@@ -30,7 +30,6 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       selectionVariant: {},
       shouldCloseOnSelect: {},

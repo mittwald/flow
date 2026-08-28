@@ -11,9 +11,11 @@ export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItem
 
   static override get remoteProperties() {
     return {
+      allowsArrowNavigation: {},
       className: {},
       dir: {},
       download: {},
+      focusMode: {},
       hasAction: {},
       hidden: {},
       href: {},
@@ -26,7 +28,6 @@ export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItem
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       target: {},
       textValue: {},

@@ -10,9 +10,8 @@ installieren kannst und wie die Klassennamen strukturiert sind.
 
 # Installation des Standalone Stylesheets
 
-Zum aktuellen Entwicklungsstand des Projektes kannst du das Stylesheet nur über
-NPM installieren. Die Flow-Stylesheet-Bibliothek kann über einen Package Manager
-wie `npm` or `yarn` installiert werden.
+Die Flow-Stylesheet-Bibliothek wird über NPM veröffentlicht und kann mit einem
+Package Manager wie `npm` oder `yarn` installiert werden.
 
 ```shell
 yarn add @mittwald/flow-stylesheet
@@ -156,10 +155,11 @@ Hier ein paar Beispiele um die diese Anforderung zu verdeutlichen:
 ### In einer Komposition verwendete Components
 
 Es ist gängige Praxis, größere Components aus bereits bestehenden kleineren
-Components zusammenzusetzen. Der Alert besteht beispielsweise aus einem Icon,
-einer Heading und optionalem Inhalt. Die verwendeten Components müssen ihren
-Basis-Klassennamen für das grundsätzliche Styling erhalten (`flow--heading`),
-sowie den spezialisierten Klassennamen (`flow--alert--heading`), um spezifische
-Styles des Inline Alerts zu erhalten.
+Components zusammenzusetzen. Der [Alert](/04-components/status/alert) besteht
+beispielsweise aus einem [Icon](/04-components/content/icon), einer
+[Heading](/04-components/content/heading) und optionalem Inhalt. Die verwendeten
+Components müssen ihren Basis-Klassennamen für das grundsätzliche Styling
+erhalten (`flow--heading`), sowie den spezialisierten Klassennamen
+(`flow--alert--heading`), um spezifische Styles des Inline Alerts zu erhalten.
 
 <LiveCodeEditor example="composition" />
