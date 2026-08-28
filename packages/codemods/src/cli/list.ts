@@ -27,30 +27,39 @@ export interface RenderListInput {
   /** Terminal width to wrap prose to. */
   width?: number;
   /**
-   * Render the summary header ("N migrations …", the counts, the legend). On by
-   * default. `upgrade` turns it off for its by-hand section: it already printed
-   * its own heading, and this renderer's header would just repeat it — see
-   * `runUpgrade`.
+   * Render the frame around the entries: the context on top (the range, the
+   * catch-up legend) and the summary at the bottom (the counts, the hidden
+   * count). On by default. `upgrade` turns it off for its by-hand section: it
+   * already printed its own heading and its own aggregate ("N codemods run, N
+   * changed something"), and this renderer's frame would just repeat both — see
+   * `runUpgrade`. Named for the whole frame, not just the top half, since it
+   * now gates both.
    */
-  header?: boolean;
+  frame?: boolean;
 }
+
+/** A palette key from `painter()` — see the `tone` field on `actions` below. */
+type Tone = "green" | "yellow" | "blue";
 
 /**
  * What the reader has to do, and the colour that says it at a glance.
  *
  * `plural` only differs for `codemod`, which is a countable thing; "by hand"
- * and "no code change" describe how, not how many.
+ * and "no code change" describe how, not how many. `tone` names a key into the
+ * `Painter` a call site already built with `painter(color)` — not a bound
+ * colour function — so which palette applies is decided once, by the `color`
+ * argument, not baked into this module-level table. See `painter` for why.
  */
 const actions: Record<
   CatalogEntry["action"],
-  { label: string; plural: string; paint: (text: string) => string }
+  { label: string; plural: string; tone: Tone }
 > = {
-  codemod: { label: "codemod", plural: "codemods", paint: colors.green },
-  manual: { label: "by hand", plural: "by hand", paint: colors.yellow },
+  codemod: { label: "codemod", plural: "codemods", tone: "green" },
+  manual: { label: "by hand", plural: "by hand", tone: "yellow" },
   none: {
     label: "no code change",
     plural: "no code change",
-    paint: colors.blue,
+    tone: "blue",
   },
 };
 
@@ -99,16 +108,33 @@ const wrap = (text: string, width: number): string[] => {
 const inlineCode = (text: string, paint: Painter): string =>
   text.replace(/`([^`]+)`/g, (_, code: string) => paint.code(code));
 
-interface Painter {
+interface Painter extends Record<Tone, (text: string) => string> {
   bold: (text: string) => string;
   dim: (text: string) => string;
   code: (text: string) => string;
 }
 
-const painter = (color: boolean): Painter =>
-  color
-    ? { bold: colors.bold, dim: colors.dim, code: colors.cyan }
-    : { bold: (text) => text, dim: (text) => text, code: (text) => text };
+/**
+ * Builds a palette from `color`, and only from `color`.
+ *
+ * `colors` (the module-level `picocolors` default export) auto-detects a TTY
+ * and disables itself under one — reading `colors.green` etc. directly would
+ * make the _environment_, not this argument, the real decider, silently
+ * disagreeing with `cli.ts`'s own TTY/`NO_COLOR`/`--json` check. `createColors`
+ * returns a palette with colour forced on or off, so `color` is the only input
+ * to how this renders.
+ */
+const painter = (color: boolean): Painter => {
+  const palette = colors.createColors(color);
+  return {
+    bold: palette.bold,
+    dim: palette.dim,
+    code: palette.cyan,
+    green: palette.green,
+    yellow: palette.yellow,
+    blue: palette.blue,
+  };
+};
 
 const indent = "  ";
 const labelWidth = 8;
@@ -154,9 +180,9 @@ const renderEntry = (
   const action = actions[entry.action];
   // Hollow vs filled: catch-up already shipped before `current`, so re-running
   // it is a no-op rather than something the upgrade is newly bringing in \u2014 see
-  // the legend line in the header.
+  // the legend line in `renderContext`.
   const symbol = catchUp ? "\u25CB" : "\u25CF";
-  const mark = color ? action.paint(symbol) : catchUp ? "o" : "*";
+  const mark = color ? paint[action.tone](symbol) : catchUp ? "o" : "*";
 
   const meta = [entry.kind, action.label];
   if (entry.remotePackage) {
@@ -186,16 +212,60 @@ const renderEntry = (
 };
 
 /**
- * "4 migrations from X to Y" (or, for a zero-width range, "4 migrations —
- * nothing newer than X") plus a count per action, and — for a range-bounded
- * list — a legend for the catch-up mark (if any entries are catch-up) and a
- * count of hidden manual migrations (if any are hidden).
+ * What a reader needs _before_ the entries: what range this is, and — when it
+ * explains a mark they're about to see below — the catch-up legend.
+ *
+ * "" for a bare `list` (no range): there is nothing to decode, so nothing
+ * renders. Otherwise "from X to Y", or for a zero-width range "nothing newer
+ * than X" (`from`/`to` is the wrong form once they're equal — that isn't a
+ * range, it's "you're already there"), plus — when it's why every codemod below
+ * is marked catch-up — that fact and the legend for the mark. Dropping the
+ * lower bound for codemods (see `selectEntries`) means a range-bounded list can
+ * show every codemod in the catalogue, not just the ones the range newly
+ * crosses; the legend says what the mark means and why that's safe.
+ */
+const renderContext = (
+  selected: CatalogEntry[],
+  range: RenderListInput["range"],
+  color: boolean,
+): string => {
+  if (range === undefined) {
+    return "";
+  }
+
+  const catchUpCount = selected.filter((entry) =>
+    isCatchUp(entry, range.from),
+  ).length;
+
+  const rangeText =
+    range.from === range.to
+      ? catchUpCount > 0
+        ? `nothing newer than ${range.to}; codemods below are catch-up`
+        : `nothing newer than ${range.to}`
+      : `from ${range.from} to ${range.to}`;
+
+  if (catchUpCount === 0) {
+    return rangeText;
+  }
+
+  const paint = painter(color);
+  const legend = `${
+    color ? paint[actions.codemod.tone]("○") : "o"
+  }  catch-up: released at or before ${range.from} — re-running a codemod is a no-op.`;
+
+  return [rangeText, legend].join("\n");
+};
+
+/**
+ * What the reader has, after reading the entries: "N migrations · N codemods ·
+ * N by hand · N no code change", plus — for a range-bounded list — a count of
+ * manual migrations hidden because they're already behind (if any are hidden).
  *
  * `entries` is the whole catalogue passed to `renderList`, not `selected`: the
  * hidden count is about what `selectEntries` excluded, which by definition is
  * not in `selected`.
  */
-const renderHeader = (
+const renderSummary = (
   entries: CatalogEntry[],
   selected: CatalogEntry[],
   range: RenderListInput["range"],
@@ -211,30 +281,13 @@ const renderHeader = (
     }))
     .filter(({ count }) => count > 0)
     .map(({ action, count }) => {
-      const { label, plural, paint } = actions[action];
+      const { label, plural, tone } = actions[action];
       const text = `${count} ${count === 1 ? label : plural}`;
-      return color ? paint(text) : text;
+      return color ? paint[tone](text) : text;
     });
 
-  const catchUpCount = selected.filter((entry) =>
-    isCatchUp(entry, range?.from),
-  ).length;
-
-  // `from`/`to` is the wrong form once they're equal — that isn't a range,
-  // it's "you're already there". Say so, and — when it's why every codemod
-  // below is marked catch-up — say that too, instead of leaving the reader to
-  // notice the two versions match.
-  const rangeText =
-    range === undefined
-      ? ""
-      : range.from === range.to
-        ? catchUpCount > 0
-          ? `— nothing newer than ${range.to}; codemods below are catch-up`
-          : `— nothing newer than ${range.to}`
-        : `from ${range.from} to ${range.to}`;
-
-  // Fold the hidden manual count into the counts line rather than repeating
-  // it below. Include it only if there are hidden entries.
+  // Fold the hidden manual count into the counts line rather than a separate
+  // one. Include it only if there are hidden entries.
   const hiddenCount =
     range === undefined ? 0 : hiddenEarlierManualCount(entries, range.from);
   if (hiddenCount > 0) {
@@ -242,27 +295,11 @@ const renderHeader = (
     counts.push(paint.dim(hiddenText));
   }
 
-  // Dropping the lower bound for codemods (see `selectEntries`) means a
-  // range-bounded list can show every codemod in the catalogue, not just the
-  // ones the range newly crosses. The legend says what the mark means and why
-  // that's safe.
-  const legend =
-    catchUpCount === 0 || range === undefined
-      ? []
-      : [
-          `${
-            color ? actions.codemod.paint("○") : "o"
-          }  catch-up: released at or before ${range.from} — re-running a codemod is a no-op.`,
-        ];
-
   // The counts carry their own colour, so no dim around them — nesting the two
   // makes both weaker. Hidden count is already dimmed above.
-  return [
-    `${paint.bold(`${selected.length} ${noun}`)}${rangeText === "" ? "" : ` ${rangeText}`}`,
-    counts.join(paint.dim(" · ")),
-    ...legend,
-    "",
-  ].join("\n");
+  return [paint.bold(`${selected.length} ${noun}`), ...counts].join(
+    paint.dim(" · "),
+  );
 };
 
 /**
@@ -274,7 +311,8 @@ const renderHeader = (
  * can ever reach a parser.
  *
  * `color` and `width` are arguments rather than read from the environment here,
- * so the rendering is deterministic in a test. `cli.ts` supplies them.
+ * so the rendering is deterministic in a test — `painter` builds its palette
+ * from `color` alone, never from the terminal. `cli.ts` supplies them.
  */
 export const renderList = ({
   entries,
@@ -282,7 +320,7 @@ export const renderList = ({
   json,
   color = false,
   width = 80,
-  header = true,
+  frame = true,
 }: RenderListInput): string => {
   // The two paths differ in their bounds, deliberately: unbounded, this is a
   // plain catalogue browse — every entry, sorted, regardless of whether it
@@ -311,9 +349,19 @@ export const renderList = ({
     )
     .join("\n\n");
 
-  return header
-    ? `${renderHeader(entries, selected, range, color)}\n${body}\n`
-    : `${body}\n`;
+  if (!frame) {
+    return `${body}\n`;
+  }
+
+  // Context (range, legend) leads, because a reader needs both before the
+  // entries; the summary (counts) trails, because a 22-entry list scrolls the
+  // top out of sight well before the reader reaches the end — exactly when
+  // they want the counts. `context` is "" for a bare `list`, so no blank line
+  // gets left dangling above the first entry.
+  const context = renderContext(selected, range, color);
+  const summary = renderSummary(entries, selected, range, color);
+
+  return `${context === "" ? "" : `${context}\n\n`}${body}\n\n${summary}\n`;
 };
 
 export interface ListDeps extends RangeDeps {

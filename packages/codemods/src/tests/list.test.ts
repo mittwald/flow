@@ -174,17 +174,56 @@ describe("presentation", () => {
     expect(text).toContain("wordy");
   });
 
-  test("the header counts what the range holds", () => {
+  test("the context on top names the range", () => {
     const text = renderList({
       entries,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    expect(text).toContain("3 migrations from 1.0.0 to 2.0.0");
+    expect(text).toContain("from 1.0.0 to 2.0.0");
+  });
+
+  test("the summary at the bottom counts what the range holds", () => {
+    const text = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    expect(text).toContain("3 migrations");
     expect(text).toContain("1 codemod");
     expect(text).toContain("1 by hand");
     expect(text).toContain("1 no code change");
     // No manual migrations are hidden, so no third item
+  });
+
+  test("the summary comes after every entry, not before", () => {
+    // This is the change: the counts used to sit above the entries, where a
+    // long list scrolls them out of sight before the reader reaches the end.
+    // Assert the position, not just the presence, so a regression back to the
+    // old layout is caught.
+    const text = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    const lastEntryStart = text.lastIndexOf("behaviour-only");
+    const summaryStart = text.indexOf("3 migrations");
+
+    expect(lastEntryStart).toBeGreaterThan(-1);
+    expect(summaryStart).toBeGreaterThan(lastEntryStart);
+  });
+
+  test("the range and legend lead, before the first entry", () => {
+    const text = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    const rangeStart = text.indexOf("from 1.0.0 to 2.0.0");
+    const firstEntryStart = text.indexOf("with-codemod");
+
+    expect(rangeStart).toBeGreaterThan(-1);
+    expect(rangeStart).toBeLessThan(firstEntryStart);
   });
 });
 
@@ -213,14 +252,14 @@ describe("catch-up codemods", () => {
     expect(newBlock).not.toContain("catch-up");
   });
 
-  test("the header explains what the catch-up mark means and why it's safe", () => {
+  test("the frame explains what the catch-up mark means and why it's safe", () => {
     const text = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    // The legend names the mark and the reassurance ("no-op"); hidden count
-    // is in the counts line, and the legend explains the mark.
+    // The legend (in the top context) names the mark and the reassurance
+    // ("no-op"); the hidden count is in the bottom summary's counts line.
     expect(text).toMatch(/catch-up/);
     expect(text).toMatch(/no-op/);
     expect(text).toContain("2 codemods");
