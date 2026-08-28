@@ -67,7 +67,7 @@ const detectIndent = (raw: string): string => {
 };
 
 /**
- * Bump every Flow dependency, install, then run the codemods the crossed range
+ * Bump every Flow dependency, install, then run the codemods the resolved range
  * calls for — and end by naming what no codemod covers.
  *
  * The order is not cosmetic: the codemods run against the installed target, so
@@ -75,6 +75,12 @@ const detectIndent = (raw: string): string => {
  * write and the install, so the codemods it still runs act against whatever is
  * currently installed rather than the target — their output is indicative, not
  * exact.
+ *
+ * A codemod's selection has no lower bound (see `selectEntries`) — running one
+ * twice is a verified no-op — so a project already on `target` still gets a
+ * codemod pass: it skips only the write and the install, which genuinely have
+ * nothing to do. A manual migration keeps its lower bound, so nothing there
+ * gets re-surfaced just because this now runs more often.
  */
 export const runUpgrade = async (
   parsed: ParsedCommand,
@@ -116,26 +122,31 @@ export const runUpgrade = async (
   const { manifestPath, manifestRaw, manifest, dependencies, current, target } =
     range;
 
-  // A stale dist-tag or an exact version below `current` resolves downward
+  // A stale dist-tag or an exact version at or below `current` resolves
   // without complaint — `resolveRange` deliberately does not judge that
-  // (`list` treats the same fact as a legitimate answer). This command does:
-  // nothing crosses a boundary backwards or sideways.
-  if (!gt(target, current)) {
+  // (`list` treats the same fact as a legitimate answer). There is nothing to
+  // bump or install in that case, but — unlike before — that no longer means
+  // there is nothing to run: a `codemod` entry's lower bound is gone (see
+  // `selectEntries`), because re-running one is a verified no-op. A consumer
+  // can already be sitting on `target` having never run this tool once, which
+  // is the exact gap this command exists to close, so the codemod pass below
+  // still runs; only the bump and the install are skipped.
+  const bump = gt(target, current);
+
+  if (!bump) {
+    // Nothing to write or install — fall through to the codemod pass below.
     log(
-      `Already on ${current}; "${revision}" resolves to ${target}. Nothing to do.`,
+      `Already on ${current}; "${revision}" resolves to ${target}. No dependency bump needed — checking for codemods to catch up on, since nothing records whether this project already ran them.`,
     );
-    return 0;
-  }
-
-  log(`Upgrading Flow from ${current} to ${target}${dry ? " (--dry)" : ""}`);
-
-  if (dry) {
+  } else if (dry) {
+    log(`Upgrading Flow from ${current} to ${target} (--dry)`);
     log(`--dry: would write the following to ${manifestPath}:`);
     for (const { name } of dependencies) {
       log(`  ${name} → ${target}`);
     }
     log("--dry: skipping the install.");
   } else {
+    log(`Upgrading Flow from ${current} to ${target}`);
     const indent = detectIndent(manifestRaw);
     writeFileSync(
       manifestPath,
@@ -170,7 +181,10 @@ export const runUpgrade = async (
 
   const chosen = await deps.choose(automatic);
 
-  if (dry && chosen.length > 0) {
+  // Only meaningful once a bump actually moves the installed version away
+  // from `target` — when there is no bump, the codemods below run against
+  // exactly `target` already, so there is no "not exact" caveat to raise.
+  if (dry && bump && chosen.length > 0) {
     log(
       `\n--dry: running the codemods against the currently installed version, not ${target} — their output is indicative, not exact.`,
     );
@@ -178,8 +192,11 @@ export const runUpgrade = async (
 
   let hadFailure = false;
   const incomplete: string[] = [];
+  let ranCount = 0;
+  let changedCount = 0;
 
   for (const entry of chosen) {
+    ranCount += 1;
     let result: CodemodResult;
     try {
       result = await deps.runCodemod({
@@ -199,6 +216,10 @@ export const runUpgrade = async (
       continue;
     }
 
+    if (result.changed > 0) {
+      changedCount += 1;
+    }
+
     // Same three-way distinction as the single-codemod command: "0 changed" on
     // its own would read as success where nothing was looked at, or where the
     // transform declined everything it saw.
@@ -214,6 +235,16 @@ export const runUpgrade = async (
     } else {
       log(`  ${entry.id}: ${result.changed} file(s) changed`);
     }
+  }
+
+  // Dropping the lower bound for codemods (see `selectEntries`) means this
+  // loop can run every codemod in the catalogue on a project that never
+  // crossed a version at all — "N run, 0 changed" is the confirmation that
+  // there was nothing to catch up on, not a list of new work.
+  if (ranCount > 0) {
+    log(
+      `\n${ranCount} codemod${ranCount === 1 ? "" : "s"} run, ${changedCount} changed something.`,
+    );
   }
 
   if (byHand.length > 0) {

@@ -49,9 +49,17 @@ describe("renderList as text", () => {
   });
 
   test("says so when the range holds nothing", () => {
+    // `since: "4.0.0"` on every entry, ahead of the range's own `to` — a
+    // codemod's lower bound is gone (selectEntries), so a range merely
+    // behind `current` no longer proves emptiness; only "not yet published
+    // by `target`" still does, for every action alike.
+    const future = [
+      entry("future-codemod", "4.0.0", "codemod"),
+      entry("future-manual", "4.0.0", "manual"),
+    ];
     expect(
       renderList({
-        entries,
+        entries: future,
         range: { from: "3.0.0", to: "3.1.0" },
         json: false,
       }),
@@ -78,9 +86,15 @@ describe("renderList as JSON", () => {
   });
 
   test("an empty range is an empty array, not a message", () => {
+    // Same reasoning as the text-output test above: `since` ahead of `to` is
+    // what proves emptiness now, not merely behind `from`.
+    const future = [
+      entry("future-codemod", "4.0.0", "codemod"),
+      entry("future-manual", "4.0.0", "manual"),
+    ];
     expect(
       renderList({
-        entries,
+        entries: future,
         range: { from: "3.0.0", to: "3.1.0" },
         json: true,
       }),
@@ -170,6 +184,81 @@ describe("presentation", () => {
     expect(text).toContain("1 codemod");
     expect(text).toContain("1 by hand");
     expect(text).toContain("1 no code change");
+  });
+});
+
+describe("catch-up codemods", () => {
+  // A codemod's lower bound is gone (selectEntries), so a range-bounded list
+  // can show a codemod that shipped before `current` — re-running it is a
+  // no-op, not new work, and the rendering has to say so rather than reading
+  // like a to-do list.
+  const catalog = [
+    entry("shipped-earlier", "0.9.0", "codemod"),
+    entry("new-in-range", "1.1.0", "codemod"),
+    entry("old-manual", "0.9.0", "manual"),
+  ];
+
+  test("a codemod behind current is marked catch-up in the entry, a new one is not", () => {
+    const text = renderList({
+      entries: catalog,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    const [shippedBlock, newBlock] = text.split("new-in-range");
+    expect(shippedBlock).toContain("shipped-earlier");
+    expect(shippedBlock).toContain("catch-up");
+    // "new-in-range" itself is not behind current, so its own block must not
+    // carry the catch-up tag.
+    expect(newBlock).not.toContain("catch-up");
+  });
+
+  test("the header explains the catch-up mark and counts it", () => {
+    const text = renderList({
+      entries: catalog,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    expect(text).toMatch(/catch-up/);
+    expect(text).toContain("1 of");
+  });
+
+  test("no legend when nothing in range is catch-up", () => {
+    const text = renderList({
+      entries: [entry("new-in-range", "1.1.0", "codemod")],
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    expect(text).not.toContain("catch-up");
+  });
+
+  test("names how many manual migrations the window hides, without listing them", () => {
+    const text = renderList({
+      entries: catalog,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
+    // "old-manual" (since 0.9.0 <= current 1.0.0) is excluded by design and
+    // must be counted, not shown.
+    expect(text).not.toContain("old-manual");
+    expect(text).toMatch(/1 manual migration.*not shown/);
+  });
+
+  test("the whole-catalogue browse (no range) has no catch-up marking at all", () => {
+    const text = renderList({ entries: catalog, json: false });
+    expect(text).not.toContain("catch-up");
+  });
+
+  test("JSON stays the plain selected array — no catch-up field grafted on", () => {
+    const json = renderList({
+      entries: catalog,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: true,
+    });
+    const parsed = JSON.parse(json) as CatalogEntry[];
+    expect(parsed.map((e) => e.id).sort()).toEqual([
+      "new-in-range",
+      "shipped-earlier",
+    ]);
   });
 });
 

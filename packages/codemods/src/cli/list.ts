@@ -1,6 +1,11 @@
 import colors from "picocolors";
+import { lte } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
-import { selectEntries, sortBySince } from "../catalog/select.js";
+import {
+  hiddenEarlierManualCount,
+  selectEntries,
+  sortBySince,
+} from "../catalog/select.js";
 import {
   defaultRangeDeps,
   resolveRange,
@@ -121,18 +126,37 @@ const field = (
   );
 };
 
+/**
+ * Whether `entry` is a codemod being shown because dropping the lower bound
+ * pulled it in (`since <= current`), not because the range crosses it. Only
+ * meaningful for a range-bounded list \u2014 the whole-catalogue browse has no
+ * `current` to compare against.
+ */
+const isCatchUp = (entry: CatalogEntry, current: string | undefined): boolean =>
+  current !== undefined &&
+  entry.action === "codemod" &&
+  lte(entry.since, current);
+
 const renderEntry = (
   entry: CatalogEntry,
   width: number,
   color: boolean,
+  catchUp: boolean,
 ): string => {
   const paint = painter(color);
   const action = actions[entry.action];
-  const mark = color ? action.paint("\u25CF") : "*";
+  // Hollow vs filled: catch-up already shipped before `current`, so re-running
+  // it is a no-op rather than something the upgrade is newly bringing in \u2014 see
+  // the legend line in the header.
+  const symbol = catchUp ? "\u25CB" : "\u25CF";
+  const mark = color ? action.paint(symbol) : catchUp ? "o" : "*";
 
   const meta = [entry.kind, action.label];
   if (entry.remotePackage) {
     meta.push("also in flow-remote-react-components");
+  }
+  if (catchUp) {
+    meta.push("catch-up");
   }
 
   const lines = [
@@ -154,8 +178,17 @@ const renderEntry = (
   return lines.join("\n");
 };
 
-/** "4 migrations from X to Y" plus a count per action. */
+/**
+ * "4 migrations from X to Y" plus a count per action, and — for a range-bounded
+ * list — a legend for the catch-up mark and a line naming how many manual
+ * migrations the window hides.
+ *
+ * `entries` is the whole catalogue passed to `renderList`, not `selected`: the
+ * hidden count is about what `selectEntries` excluded, which by definition is
+ * not in `selected`.
+ */
 const renderHeader = (
+  entries: CatalogEntry[],
   selected: CatalogEntry[],
   range: RenderListInput["range"],
   color: boolean,
@@ -177,11 +210,43 @@ const renderHeader = (
       return color ? paint(text) : text;
     });
 
+  const catchUpCount = selected.filter((entry) =>
+    isCatchUp(entry, range?.from),
+  ).length;
+
+  // Dropping the lower bound for codemods (see `selectEntries`) means a
+  // range-bounded list can show every codemod in the catalogue, not just the
+  // ones the range newly crosses. The legend says why that is not a to-do
+  // list, and the count after it names what is being shown for that reason
+  // instead of leaving it a mystery.
+  const legend =
+    catchUpCount === 0
+      ? []
+      : [
+          `${
+            color ? actions.codemod.paint("○") : "o"
+          } catch-up — released at or before your current version already; codemods are idempotent, so re-running one is a safe no-op (${catchUpCount} of ${selected.length} shown here).`,
+        ];
+
+  const hiddenLine =
+    range === undefined
+      ? []
+      : (() => {
+          const hidden = hiddenEarlierManualCount(entries, range.from);
+          const noun2 = hidden === 1 ? "migration" : "migrations";
+          const verb = hidden === 1 ? "is" : "are";
+          return [
+            `${hidden} manual ${noun2} released at or before ${range.from} ${verb} not shown — run \`list\` with no argument to see the whole catalogue.`,
+          ];
+        })();
+
   // The counts carry their own colour, so no dim around them — nesting the two
   // makes both weaker.
   return [
     `${paint.bold(`${selected.length} ${noun}`)}${rangeText === "" ? "" : ` ${rangeText}`}`,
     counts.join(paint.dim(" \u00B7 ")),
+    ...legend,
+    ...hiddenLine,
     "",
   ].join("\n");
 };
@@ -226,10 +291,12 @@ export const renderList = ({
   }
 
   const body = selected
-    .map((entry) => renderEntry(entry, width, color))
+    .map((entry) =>
+      renderEntry(entry, width, color, isCatchUp(entry, range?.from)),
+    )
     .join("\n\n");
 
-  return `${renderHeader(selected, range, color)}\n${body}\n`;
+  return `${renderHeader(entries, selected, range, color)}\n${body}\n`;
 };
 
 export interface ListDeps extends RangeDeps {

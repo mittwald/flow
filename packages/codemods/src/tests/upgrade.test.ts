@@ -110,7 +110,7 @@ describe("runUpgrade", () => {
     expect(order[0]).toBe("install");
   });
 
-  test("a target at or below the current version changes nothing", async () => {
+  test("a target at or below the current version writes and installs nothing, but still catches up on codemods", async () => {
     const cwd = project({ "@mittwald/flow-react-components": "^1.2.0" });
     const recorded = record();
 
@@ -124,8 +124,59 @@ describe("runUpgrade", () => {
       "@mittwald/flow-react-components": "^1.2.0",
     });
     expect(recorded.installs).toEqual([]);
-    expect(recorded.codemods).toEqual([]);
+    // Dropping the lower bound for codemods (selectEntries) is exactly what
+    // makes this differ from before: "current == target" no longer means
+    // "nothing crosses since", because a codemod entry has no lower bound to
+    // cross in the first place — every real codemod in the catalogue ships
+    // behind this test's mocked target, so all of them are catch-up.
+    expect(recorded.codemods.length).toBeGreaterThan(0);
     expect(recorded.output.join("\n")).toMatch(/already on/i);
+    expect(recorded.output.join("\n")).toMatch(/no dependency bump needed/i);
+  });
+
+  test("the closing summary reports how many codemods ran and how many changed something", async () => {
+    const cwd = project({
+      "@mittwald/flow-react-components": "^0.2.0-alpha.640",
+    });
+    const recorded = record();
+
+    await runUpgrade(
+      parseArguments(["upgrade", "major", "-y"]),
+      deps(cwd, recorded),
+    );
+
+    // The default `runCodemod` double reports `changed: 1` for every entry,
+    // so "run" and "changed" agree here.
+    const output = recorded.output.join("\n");
+    expect(output).toMatch(/\d+ codemods? run, \d+ changed something\./);
+  });
+
+  test("0 changed reads as confirmation, not failure, when every codemod is a no-op", async () => {
+    // This is the shape the fix exists for: a project sitting on a version
+    // that never crosses a boundary, whose codemods all report nothing to do
+    // — "N run, 0 changed" is that confirmation, and the run still succeeds.
+    const cwd = project({ "@mittwald/flow-react-components": "^1.2.0" });
+    const recorded = record();
+
+    const code = await runUpgrade(
+      parseArguments(["upgrade", "latest", "-y"]),
+      deps(cwd, recorded, {
+        runCodemod: async ({ id }) => {
+          recorded.codemods.push(id);
+          return {
+            changed: 0,
+            unmodified: 1,
+            skipped: 0,
+            errors: 0,
+            processedNothing: false,
+          };
+        },
+      }),
+    );
+
+    expect(code).toBe(0);
+    const output = recorded.output.join("\n");
+    expect(output).toMatch(/\d+ codemods? run, 0 changed something\./);
   });
 
   test("a dirty tree is refused, and --allow-dirty overrides it", async () => {
