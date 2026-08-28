@@ -153,6 +153,12 @@ In addition, visual tests are run **with all supported browsers** twice a day to
 detect potential issues early. To verify both themes on a pull request, add the
 `run-visual-tests` label — it runs every browser.
 
+Every path is sharded across runners (vitest's `--shard`), because the suite is
+serial by design and a single runner is the wrong unit for it. A shard still
+runs its own files one at a time, in its own browser process, against the same
+baselines — what it renders is identical to a single-runner run. A failure names
+the shard; its diff images are in that shard's `visual-diffs-*` artifact.
+
 ## Cross-version smoke tests
 
 Extension developers ship remote apps built against a **published** version of

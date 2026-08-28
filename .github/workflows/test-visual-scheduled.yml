@@ -8,59 +8,40 @@ permissions:
   contents: read
 
 jobs:
-  main:
+  # The suite is serial by design (`fileParallelism: false` — firefox drops focus
+  # styling from any page it is not showing), and it renders every file in both
+  # browsers, so one runner spent 24-34 minutes on it. Sharding is the only split
+  # that keeps each file's conditions identical: every shard still runs its own
+  # files one at a time, in its own browser process. The retry lives inside the
+  # shard now, so a flaky firefox hang re-runs a sixth of the suite, not all of
+  # it.
+  visual:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6]
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - uses: ./.github/actions/prepare-workspace
 
-      - name: Setup Node.js
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: ./.github/actions/run-visual-shard
         with:
-          node-version: 24
-          cache: pnpm
+          shard: ${{ matrix.shard }}
+          shards: ${{ strategy.job-total }}
+          attempts: "3"
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
-
-      - name: Prepare browser tests
-        run: pnpm test:browser:prepare --only-shell
-
-      - name: Run visual tests
-        # Run without file parallelism, because firefox has issues with parallel visual tests.
-        # Retry the whole step because firefox intermittently *hangs* (not a snapshot diff) on a
-        # single visual test file in headless CI, which aborts the run with exit code 1 even though
-        # every test that runs passes. A hang can't be recovered by vitest's per-test `retry`, so we
-        # re-run the step with a fresh vitest/browser process. Successful `^build` deps are served
-        # from the nx cache, so retries only re-execute test:visual.
-        run: |
-          for attempt in 1 2 3; do
-            echo "::group::Visual tests (attempt $attempt/3)"
-            if pnpm nx run-many -t test:visual --parallel=1; then
-              echo "::endgroup::"
-              exit 0
-            fi
-            echo "::endgroup::"
-            echo "::warning::Visual tests failed on attempt $attempt/3 (likely a flaky firefox hang), retrying..."
-          done
-          echo "::error::Visual tests still failing after 3 attempts."
-          exit 1
-
+  alert:
+    needs: visual
+    if: failure()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
       - name: Send alerting message to Slack
-        if: failure()
         uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}

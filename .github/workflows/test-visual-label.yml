@@ -13,20 +13,25 @@ on:
       - reopened
       - synchronize
 
+# one at a time per branch; re-labeling supersedes an in-flight run
+concurrency:
+  group: visual-regression-run@${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  run-visual-tests:
+  # The gate for the whole run: the shards and the summary hang off this job, so
+  # a skip here skips them too.
+  prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.head_ref != github.event.repository.default_branch &&
        (github.event.label.name == 'run-visual-tests' ||
         github.event.pull_request.user.login == 'dependabot[bot]'))
-
-    # one at a time per branch; re-labeling supersedes an in-flight run
-    concurrency:
-      group: visual-regression-run@${{ github.head_ref }}
-      cancel-in-progress: true
 
     permissions:
       contents: read # checkout only; this run never pushes
@@ -59,60 +64,69 @@ jobs:
                 }
             }
 
+  # The suite is serial by design (`fileParallelism: false` — firefox drops focus
+  # styling from any page it is not showing), and it renders every file in both
+  # browsers, so one runner spent 24-34 minutes on it. Sharding is the only split
+  # that keeps each file's conditions identical: every shard still runs its own
+  # files one at a time, in its own browser process.
+  run-visual-tests:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      # A failing shard must not cancel the others — the diffs of the shards
+      # still running are what tell you whether the change is broad or local.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6]
+
+    steps:
       - name: Checkout selected branch
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - uses: ./.github/actions/prepare-workspace
 
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: ./.github/actions/run-visual-shard
         with:
-          node-version: 24
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
-
-      - run: pnpm test:browser:prepare --only-shell
-
-      - name: Run visual tests
-        # File parallelism is off in the visual project's vitest config, not here:
-        # firefox drops focus styling from any page that is not the focused one.
-        run: |
-          pnpm nx run-many -t test:visual --parallel=1
+          shard: ${{ matrix.shard }}
+          shards: ${{ strategy.job-total }}
 
       - name: Upload visual diffs
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: visual-diffs
+          name: visual-diffs-${{ matrix.shard }}
           path: packages/**/.vitest-attachments/**
           if-no-files-found: ignore
           retention-days: 7
 
+  # Reports for the run as a whole: one comment, whatever the shards did.
+  summary:
+    needs: run-visual-tests
+    if: always() && needs.run-visual-tests.result != 'skipped'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
       - name: Summary
-        if: always()
         run: |
           runUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           {
-            if [[ "${{ job.status }}" == "success" ]]; then
+            if [[ "${{ needs.run-visual-tests.result }}" == "success" ]]; then
               echo "### ✅ Visual Regression Tests Passed"
               echo ""
               echo "All visual snapshots match the committed baselines."
             else
               echo "### ❌ Visual Regression Tests Failed"
               echo ""
-              echo "The visual test step did not pass. If snapshots differ from the committed baselines, download the **visual-diffs** artifact from [this run]($runUrl) to inspect the actual/diff images (the artifact is absent if the run failed before comparison, e.g. during install or browser setup)."
+              echo "At least one shard did not pass. If snapshots differ from the committed baselines, download the **visual-diffs-*** artifacts from [this run]($runUrl) to inspect the actual/diff images (a shard that failed before comparison, e.g. during install or browser setup, leaves none)."
               echo ""
               echo "If the differences are intentional, update the baselines by adding the \`update-screenshots\` label to the PR."
             fi
@@ -120,10 +134,10 @@ jobs:
           cat "$RUNNER_TEMP/visual-summary.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Comment summary on PR
-        # Same read-only-token reason as above. On a Dependabot PR the check run
-        # and its step summary are the signal; nothing auto-merges while it is
-        # red.
-        if: always() && github.event.action == 'labeled'
+        # Same read-only-token reason as the label removal above. On a Dependabot
+        # PR the check run and its step summary are the signal; nothing
+        # auto-merges while it is red.
+        if: github.event.action == 'labeled'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
