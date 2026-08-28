@@ -4,10 +4,12 @@ title: "`MutedActionError` renamed to `AbortActionError`"
 kind: migration
 action: codemod
 remotePackage: false
+detect: rg -t ts 'MutedActionError'
 apply:
   Rename `MutedActionError` to `AbortActionError`, `isMutedActionError` to
   `isAbortActionError`, and `rethrowIfNotMuted` to `rethrowIfNotAborted`. Update
   any `error.name === "MutedActionError"` comparison to `"AbortActionError"`.
+verify: tsc --noEmit passes, and `rg 'MutedActionError'` finds nothing.
 ---
 
 The error that aborts an `Action` without reporting a failure is now called

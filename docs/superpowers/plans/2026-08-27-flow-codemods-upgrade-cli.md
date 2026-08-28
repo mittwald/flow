@@ -4760,7 +4760,29 @@ where they land:
   has a documented home rather than a by-name exception in `documented.test.ts`
   (Task 4 Step 4).
 
-## Task 16: `detect` and `verify` as executable modules
+## Task 16 (follow-up, NOT implemented): `detect` and `verify` as executable modules
+
+> **Status: deferred.** A first chunk of this was built and then taken back out
+> — the maintainer judged it too shaky to ship alongside the rest, and it can be
+> delivered on its own later. Nothing of it is on the branch; `detect` and
+> `verify` remain prose fields in the catalogue, which `list` prints.
+>
+> What was learned while building it, and is worth keeping:
+>
+> - The shape works. A shared `CheckContext` makes most detectors one line, and
+>   translating the 21 `rg` invocations is mechanical.
+> - The output is where it got difficult. A verifier that passes but still needs
+>   the typecheck should not be printed at all, and the `tsc --noEmit` reminder
+>   belongs once at the end rather than per entry — three entries already
+>   produced twenty lines, so twenty-three would produce roughly a hundred and
+>   fifty, most of them the same sentence.
+> - `verify` must exit non-zero when a check fails. The first attempt exited 0,
+>   which no CI can gate on.
+> - The summary must separate _failed_, _needs a person's judgement_, and _needs
+>   the global typecheck_. Collapsing them makes "23 entries still need a
+>   person" the normal state, which is no signal at all.
+>
+> Design below unchanged from when it was written.
 
 **Goal:** turn the catalogue's `detect` and `verify` prose into JavaScript the
 CLI runs, and add the two commands that run them: `detect` lists only the

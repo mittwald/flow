@@ -4,7 +4,9 @@ title: "Action: `action` renamed to `onAction`"
 kind: migration
 action: codemod
 remotePackage: true
+detect: rg -t ts 'action=\{'
 apply: Rename the `action` prop on `Action` to `onAction`.
+verify: tsc --noEmit passes, and `rg 'action=\{'` finds nothing.
 ---
 
 `Action`'s `action` prop is now called `onAction`, which matches the naming of

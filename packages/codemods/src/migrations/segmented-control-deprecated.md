@@ -4,10 +4,16 @@ title: SegmentedControl deprecated
 kind: deprecation
 action: manual
 remotePackage: true
+detect: rg -t ts '\b(SegmentedControl|Segment)\b'
 apply:
   Replace `SegmentedControl` with `Tabs` when the selection switches displayed
   content, or with `RadioGroup` when it sets a value. Pick per usage — this is a
   structural change, not a rename.
+verify:
+  tsc --noEmit passes either way — this is a deprecation, so `SegmentedControl`
+  and `Segment` still typecheck and it catches nothing. Verify by confirming `rg
+  '\b(SegmentedControl|Segment)\b'` finds no remaining usage, or that the
+  runtime deprecation warning is gone.
 ---
 
 `SegmentedControl` and `Segment` are deprecated. The component covered two

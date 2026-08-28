@@ -4,6 +4,7 @@ title: TooltipTrigger changed delay type
 kind: migration
 action: manual
 remotePackage: true
+detect: rg -t ts 'TooltipTrigger'
 apply:
   'Replace every numeric `delay` value on `TooltipTrigger` with one of the two
   string literals: `"default"` (400ms) or `"long"` (1500ms). Pick by intent, not
@@ -13,6 +14,9 @@ apply:
   numeric value is not a reliable guide: `delay={500}` maps to `"default"`
   (400ms), not `"long"` (1500ms), if the element still needs the tooltip to be
   understood.'
+verify:
+  tsc --noEmit passes — a numeric `delay` is a type error, so no separate `rg`
+  check is needed.
 ---
 
 Numeric delay values are no longer accepted; only the string literals

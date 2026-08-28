@@ -4,9 +4,11 @@ title: Align renamed to Combine
 kind: migration
 action: codemod
 remotePackage: true
+detect: rg -t ts '\bAlign(Props)?\b'
 apply:
   Rename `Align` to `Combine` and `AlignProps` to `CombineProps`, for named,
   aliased and namespace imports from a Flow package.
+verify: tsc --noEmit passes, and `rg '\bAlign\b'` finds no Flow import.
 ---
 
 `Align` is now called `Combine`. The old name suggested a generic alignment tool

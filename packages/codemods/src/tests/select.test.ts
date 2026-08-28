@@ -13,7 +13,9 @@ const entry = (
   kind,
   action: "codemod",
   remotePackage: false,
+  detect: "rg x",
   apply: "do it",
+  verify: "tsc --noEmit",
 });
 
 const ids = (entries: CatalogEntry[]): string[] =>

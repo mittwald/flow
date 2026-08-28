@@ -52,28 +52,6 @@ describe("parseArguments", () => {
     });
   });
 
-  test("detect takes an optional path", () => {
-    expect(parseArguments(["detect"])).toMatchObject({
-      command: "detect",
-      path: undefined,
-    });
-    expect(parseArguments(["detect", "src"])).toMatchObject({
-      command: "detect",
-      path: "src",
-    });
-  });
-
-  test("verify takes an optional path", () => {
-    expect(parseArguments(["verify"])).toMatchObject({
-      command: "verify",
-      path: undefined,
-    });
-    expect(parseArguments(["verify", "src"])).toMatchObject({
-      command: "verify",
-      path: "src",
-    });
-  });
-
   test("an unknown first positional is a codemod id with an optional path", () => {
     expect(parseArguments(["align-to-combine", "src"])).toMatchObject({
       command: "codemod",

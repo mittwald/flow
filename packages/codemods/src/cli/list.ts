@@ -75,12 +75,8 @@ const visibleWidth = (text: string): number => stripAnsi(text).length;
 /**
  * Wraps to `width`, measuring visible width so already-coloured text still
  * breaks in the right place.
- *
- * Exported so `detect` and `verify` (see `cli/detect.ts`, `cli/verify.ts`) wrap
- * their own findings and hints the same way, instead of a second implementation
- * drifting from this one.
  */
-export const wrap = (text: string, width: number): string[] => {
+const wrap = (text: string, width: number): string[] => {
   const lines: string[] = [];
   let line = "";
 
@@ -108,26 +104,25 @@ export const wrap = (text: string, width: number): string[] => {
  * terminal those are noise, but the emphasis they mark is exactly what a reader
  * scans for — a symbol name or a command.
  */
-export const inlineCode = (text: string, paint: Painter): string =>
+const inlineCode = (text: string, paint: Painter): string =>
   text.replace(/`([^`]+)`/g, (_, code: string) => paint.code(code));
 
-export interface Painter {
+interface Painter {
   bold: (text: string) => string;
   dim: (text: string) => string;
   code: (text: string) => string;
 }
 
-/** Shared with `detect` and `verify` so all three commands paint the same way. */
-export const painter = (color: boolean): Painter =>
+const painter = (color: boolean): Painter =>
   color
     ? { bold: colors.bold, dim: colors.dim, code: colors.cyan }
     : { bold: (text) => text, dim: (text) => text, code: (text) => text };
 
-export const indent = "  ";
+const indent = "  ";
 const labelWidth = 8;
 
 /** One `apply` / `verify` / `detect` row: dim label, wrapped body beside it. */
-export const field = (
+const field = (
   label: string,
   value: string,
   width: number,
@@ -165,8 +160,12 @@ const renderEntry = (
     indent + paint.dim(meta.join(" \u00B7 ")),
     "",
     ...field("apply", entry.apply, width, paint),
+    ...field("verify", entry.verify, width, paint),
   ];
 
+  if (entry.detect !== undefined) {
+    lines.push(...field("detect", entry.detect, width, paint));
+  }
   if (entry.action === "codemod") {
     lines.push(
       "",

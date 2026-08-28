@@ -4,12 +4,17 @@ title: CartesianChart
 kind: migration
 action: manual
 remotePackage: true
+detect: rg -t ts 'CartesianChart'
 apply:
   Add `dataKeyLabel` wherever a `dataKey` is a function — a string `dataKey`
   already sets it automatically. Where a `tickFormatter` or other callback
   relied on the argument being `any`, add an explicit type check (for example
   `instanceof Date`), or switch to `typedCartesianChart<T>()` for a chart whose
   callbacks are typed from your own data shape.
+verify:
+  tsc --noEmit passes — the `any` → `unknown` change surfaces as compile errors
+  — and every `CartesianChart`/`XAxis` with a function `dataKey` passes
+  `dataKeyLabel`.
 ---
 
 > If you're using a _Function_ in the `dataKey` - you need to define a

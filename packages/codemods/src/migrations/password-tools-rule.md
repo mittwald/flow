@@ -4,10 +4,12 @@ title: "password-tools: `AsyncRule` and `SyncRule` replaced by `Rule`"
 kind: migration
 action: codemod
 remotePackage: false
+detect: rg -t ts 'AsyncRule|SyncRule'
 apply:
   Replace `AsyncRule` and `SyncRule` imports from
   `@mittwald/flow-react-components/mittwald-password-tools-js` with `Rule`.
   Update custom rule classes to extend `Rule` instead.
+verify: tsc --noEmit passes, and `rg 'AsyncRule|SyncRule'` finds nothing.
 ---
 
 The `@mittwald/flow-react-components/mittwald-password-tools-js` entry no longer

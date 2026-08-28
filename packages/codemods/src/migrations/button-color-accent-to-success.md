@@ -4,12 +4,16 @@ title: "Button: color `accent` renamed to `success`"
 kind: migration
 action: codemod
 remotePackage: true
+detect: rg -t ts 'color="accent"'
 apply:
   Rename `color="accent"` to `color="success"` on `Button` and `SubmitButton`.
   Also update the CSS class `flow--button--accent` to `flow--button--success`
   and every `--button--accent-{solid,plain,soft,outline}-*` design token to its
   `success` counterpart if you use `@mittwald/flow-stylesheet` or the token CSS
   variables directly — those have no fallback.
+verify:
+  tsc --noEmit passes, and `rg 'color="accent"'` finds no remaining `Button` or
+  `SubmitButton` usage.
 ---
 
 The button color `accent` is now called `success` — the name says what the color
