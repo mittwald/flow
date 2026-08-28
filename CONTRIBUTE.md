@@ -596,10 +596,16 @@ pnpm affected:test                                              # unit + compile
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 ```
 
-> ⚠️ **Generated code must be committed.** The final CI step is
-> `git diff --exit-code`. If you changed a component with `@flr-generate` or
-> touched icons, run the relevant `build:*` target and commit the result —
-> otherwise CI fails even though your code is correct.
+Locally that is one command after the other. CI runs the same targets as
+separate jobs — `lint`, `unit`, `browser`, `e2e` and four `visual` shards — so
+its wall clock is the slowest job rather than the sum. `main` is the job that
+aggregates them and the check the branch ruleset requires; a red job turns it
+red.
+
+> ⚠️ **Generated code must be committed.** CI runs `git diff --exit-code` after
+> the unit tests. If you changed a component with `@flr-generate` or touched
+> icons, run the relevant `build:*` target and commit the result — otherwise CI
+> fails even though your code is correct.
 
 ## Code style
 
@@ -733,9 +739,9 @@ retitling the PR or changing its base.
    branch you chose in step 1.
 
 CI (`.github/workflows/test.yml`) runs lint, unit tests, and browser tests
-(WebKit) on every PR, and verifies all generated code is committed. A preview
-deployment of docs + Storybook is built for each PR so reviewers can see your
-changes live.
+(WebKit) on every PR, and verifies all generated code is committed. The jobs run
+in parallel and report through one required check, `main`. A preview deployment
+of docs + Storybook is built for each PR so reviewers can see your changes live.
 
 PRs are **squash-merged**, so the **PR title becomes the release commit** — it
 must be a valid Conventional Commit. `.github/workflows/commit-guard.yml` lints
