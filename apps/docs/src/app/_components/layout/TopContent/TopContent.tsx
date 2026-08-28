@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import {
   ColumnLayout,
-  Flex,
   Header,
   Heading,
   LayoutCard,
@@ -31,11 +30,15 @@ export const TopContent: FC<Props> = (props) => {
   if (!component) {
     return (
       <LayoutCard className={styles.mainContent}>
-        <Flex justify="space-between" align="start">
-          <Heading level={1}>{mdxFile.getTitle()}</Heading>
-          <PageActions title={mdxFile.getTitle()} markdownUrl={markdownUrl} />
-        </Flex>
-        {mdxFile.mdxSource.frontmatter.description}
+        <Section>
+          <Header>
+            <Heading level={1}>{mdxFile.getTitle()}</Heading>
+            <PageActions title={mdxFile.getTitle()} markdownUrl={markdownUrl} />
+          </Header>
+
+          {mdxFile.mdxSource.frontmatter.description}
+        </Section>
+
         <MdxFileView mdxFile={mdxFile.serialize()} />
       </LayoutCard>
     );
