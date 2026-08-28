@@ -48,7 +48,6 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       name: {},
       pattern: {},
       placeholder: {},
-      render: {},
       rows: {},
       showCharacterCount: {},
       slot: {},

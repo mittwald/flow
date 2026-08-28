@@ -107,7 +107,6 @@ export class RemoteTextElement extends FlowRemoteElement<RemoteTextElementProps>
       property: {},
       radioGroup: {},
       rel: {},
-      render: {},
       resource: {},
       results: {},
       rev: {},

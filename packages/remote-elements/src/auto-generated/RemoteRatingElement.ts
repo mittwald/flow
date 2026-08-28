@@ -30,7 +30,6 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       lang: {},
       name: {},
       orientation: {},
-      render: {},
       size: {},
       slot: {},
       translate: {},

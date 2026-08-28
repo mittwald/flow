@@ -64,18 +64,6 @@ export default function Page() {
           </List.Item>
         </List.List>
       </Section>
-
-      {/*
-       * REPRODUCES A KNOWN BUG — this section is why the page never finishes
-       * loading. The table view puts a React element into a remote property, and
-       * a React element carries `$$typeof: Symbol(react.transitional.element)`.
-       * `postMessage` refuses symbols, so the whole mutation batch is dropped
-       * with an unhandled DataCloneError and nothing on the page renders.
-       *
-       * Not caused by the serialization fixes around #2894: the same failure
-       * reproduces with the pre-#2894 patch. Remove this section to see the
-       * selection demo above render normally.
-       */}
       <Section>
         <Heading>Table view</Heading>
         <List.List

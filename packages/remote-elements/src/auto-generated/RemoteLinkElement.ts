@@ -33,7 +33,6 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       size: {},
       slot: {},

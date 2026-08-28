@@ -69,15 +69,14 @@ async function generate() {
   console.log("");
 
   /*
-   * Reported rather than thrown: the offenders below predate the check, and
-   * failing the build here would block every unrelated change until they are
-   * designed away. Once the list is empty this should throw, so a new one cannot
-   * ship — see the comment in lib/checkSerializableProps.ts.
+   * Thrown, not reported: the list is empty, so the only way it grows is a new
+   * prop that would drop whole mutation batches at runtime. Failing generation is
+   * the cheapest place to learn that — the alternative is an extension developer
+   * whose page renders nothing.
    */
   const unserializableProps = checkSerializableProps(components);
   if (unserializableProps.length > 0) {
-    console.log(formatUnserializablePropReport(unserializableProps));
-    console.log("");
+    throw new Error(formatUnserializablePropReport(unserializableProps));
   }
 
   {
