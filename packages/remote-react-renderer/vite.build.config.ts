@@ -10,7 +10,9 @@ export default mergeConfig(
   defineConfig({
     plugins: [
       preserveDirectives(),
-      externalizeDeps(),
+      externalizeDeps({
+        except: [/^@mittwald\/remote-dom-react(?:\/.+)?$/],
+      }),
       dts({
         include: ["src"],
         outDirs: "dist/types",

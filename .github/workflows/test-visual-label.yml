@@ -86,9 +86,10 @@ jobs:
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Run visual tests
-        # run without file parallelism, because firefox has issues with parallel visual tests
+        # File parallelism is off in the visual project's vitest config, not here:
+        # firefox drops focus styling from any page that is not the focused one.
         run: |
-          pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false
+          pnpm nx run-many -t test:visual --parallel=1
 
       - name: Upload visual diffs
         if: failure()

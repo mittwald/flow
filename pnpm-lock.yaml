@@ -10,6 +10,7 @@ overrides:
   '@mittwald/flow-demo-remote-dom>typescript': npm:typescript@^7.0.2
 
 patchedDependencies:
+  '@mittwald/remote-dom-react@1.2.2-mittwald.10': 165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3
   '@quilted/threads@3.3.1': fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812
   '@sigstore/sign@4.1.1': 6ae6ce79a0d5087118f5c3569ba3256c50c873f0e5f829338045aa4983088864
   acorn: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
@@ -606,7 +607,7 @@ importers:
         version: link:../icons-base
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.10
-        version: 1.2.2-mittwald.10(@preact/signals-core@1.14.2)(react@19.2.8)
+        version: 1.2.2-mittwald.10(patch_hash=165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3)(@preact/signals-core@1.14.2)(react@19.2.8)
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -1154,7 +1155,7 @@ importers:
         version: link:../remote-elements
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.10
-        version: 1.2.2-mittwald.10(@preact/signals-core@1.14.2)(react@19.2.8)
+        version: 1.2.2-mittwald.10(patch_hash=165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3)(@preact/signals-core@1.14.2)(react@19.2.8)
       '@types/react':
         specifier: ^19.2
         version: 19.2.18
@@ -1260,7 +1261,7 @@ importers:
         version: 4.2.2(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react@19.2.8)
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.10
-        version: 1.2.2-mittwald.10(@preact/signals-core@1.14.2)(react@19.2.8)
+        version: 1.2.2-mittwald.10(patch_hash=165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3)(@preact/signals-core@1.14.2)(react@19.2.8)
       '@types/react':
         specifier: ^19.2
         version: 19.2.18
@@ -12230,7 +12231,7 @@ snapshots:
     optionalDependencies:
       '@preact/signals-core': 1.14.2
 
-  '@mittwald/remote-dom-react@1.2.2-mittwald.10(@preact/signals-core@1.14.2)(react@19.2.8)':
+  '@mittwald/remote-dom-react@1.2.2-mittwald.10(patch_hash=165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3)(@preact/signals-core@1.14.2)(react@19.2.8)':
     dependencies:
       '@mittwald/remote-dom-core': 1.7.0-mittwald.10(@preact/signals-core@1.14.2)
       '@types/react': 19.2.18
