@@ -92,7 +92,18 @@ jobs:
 
       - run: pnpm test:browser:prepare --only-shell
 
+      # continue-on-error, because a snapshot-update run is allowed to be red.
+      # `--update` writes every baseline it can and *then* the suite still fails
+      # on anything a rewritten snapshot cannot fix — a scenario that never
+      # captures a stable frame, say. The job used to stop there, so one unstable
+      # scenario anywhere threw away the baselines it had already written for
+      # every other one, and the label appeared to do nothing at all (#2985).
+      #
+      # Nothing is trusted because this step is green; the verification below is
+      # the gate.
       - name: Update Visual Regression Screenshots
+        id: update
+        continue-on-error: true
         run: pnpm test:visual --update --browser.fileParallelism=false
 
       # `--update` rewrites whatever renders now, across the whole suite — it
@@ -195,6 +206,7 @@ jobs:
           CHANGED_COUNT: ${{ steps.check_changes.outputs.changed_count }}
           CHANGED_FILES: ${{ steps.check_changes.outputs.changed_files }}
           VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+          UPDATE_OUTCOME: ${{ steps.update.outcome }}
           HEAD_REF: ${{ github.head_ref }}
         run: |
           if [[ "$VERIFY_OUTCOME" == "failure" ]]; then
@@ -222,7 +234,20 @@ jobs:
           else
             echo "### ℹ️ No Screenshot Updates Required" >> "$GITHUB_STEP_SUMMARY"
             echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "The visual regression test command ran successfully but no screenshots needed updating." >> "$GITHUB_STEP_SUMMARY"
+            echo "No baseline needed updating." >> "$GITHUB_STEP_SUMMARY"
+
+            if [[ "$UPDATE_OUTCOME" == "failure" ]]; then
+              # The update run is allowed to be red, but "red and wrote nothing"
+              # is not the same as "everything was already correct" — say which.
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo "⚠️ The update run itself failed without writing any baseline, so this is not a clean bill of health: something failed for a reason a rewritten snapshot cannot fix. Check the run log." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo "All screenshots are already up to date! 🎉" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
+
+          if [[ "$UPDATE_OUTCOME" == "failure" && "$CHANGES" == "true" ]]; then
             echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "All screenshots are already up to date! 🎉" >> "$GITHUB_STEP_SUMMARY"
+            echo "_Note: the update run reported failures of its own. Baselines above were still written and verified; scenarios that fail for reasons a snapshot cannot fix are listed in the run log._" >> "$GITHUB_STEP_SUMMARY"
           fi
