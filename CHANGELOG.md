@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** merge driver no longer reverts release version bumps ([#2958](https://github.com/mittwald/flow/issues/2958)) ([5624853](https://github.com/mittwald/flow/commit/562485398af9f32a3332bb8c341b8ce029240e0c))
+* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
+
 ## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
 
 ### Bug Fixes
