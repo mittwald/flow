@@ -44,7 +44,10 @@ flowchart LR
   promoted to `main` in curated bundles.
 - **The major line** — an on-demand branch (e.g. `2.x`) spun up only when a rare
   breaking change appears. Breaking changes are rare _by policy_: **deprecate,
-  don't break** — keep the old path and warn via `useWarnDeprecation`.
+  don't break** — keep the old path and warn via `useWarnDeprecation`. Opening
+  the line is not a branch creation: the guards, both cascades, the drift check
+  and `publish.yml` are all hardcoded to the two standing lines. See the
+  [major-line runbook](major-line-runbook.md).
 
 ## How changes flow (the mechanics)
 
@@ -178,6 +181,8 @@ an existing codemod is not a justification for breaking consumers.
   contributor-facing summary of where your PR lands.
 - **[ADR 0004](adr/0004-forward-merge-main-into-next.md)** — the forward-merge
   mechanics: merge strategy, merge drivers, sync PRs, concurrency.
+- **[The major-line runbook](major-line-runbook.md)** — what has to be
+  configured, verified and later retired when a `2.x` line is opened.
 - **[ADR 0005](adr/0005-semver-contract.md)** — the semver contract: exactly
   what is guaranteed versus best-effort at 1.0.0.
 - **[RFC #2711](https://github.com/mittwald/flow/issues/2711)** — the
