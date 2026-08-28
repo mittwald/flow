@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+### Bug Fixes
+
+* **Form:** stop a Modal&#x27;s form submit from reaching the surrounding Form ([#2976](https://github.com/mittwald/flow/issues/2976)) ([ee9b60a](https://github.com/mittwald/flow/commit/ee9b60a24c5bdde69034a3a4fc9964f51a29c14a))
+
 ## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
