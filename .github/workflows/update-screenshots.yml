@@ -94,30 +94,91 @@ jobs:
 
       - name: Update Visual Regression Screenshots
         run: pnpm test:visual --update --browser.fileParallelism=false
-      # check what changed
-      - name: Check for changes
-        id: check_changes
-        run: |
-          CHANGED_FILES=$(git status --porcelain | awk '{print $2}')
-          if [ "${CHANGED_FILES:+x}" ]; then
-            echo "changes=true" >> $GITHUB_OUTPUT
-            echo "Changes detected"
 
-            # save the list for the summary
-            echo "changed_files<<EOF" >> $GITHUB_OUTPUT
-            echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-            echo "changed_count=$(echo "$CHANGED_FILES" | wc -l)" >> $GITHUB_OUTPUT
-          else
-            echo "changes=false" >> $GITHUB_OUTPUT
-            echo "No changes detected"
+      # `--update` rewrites whatever renders now, across the whole suite — it
+      # cannot tell a baseline this PR meant to move from one belonging to a
+      # scenario that merely happens to be failing or flaky. #2945 (a CodeBlock
+      # change) picked up a tooltip-less frame of the racy `Tooltip` scenario
+      # that way and committed it as a baseline, contradicting the three beside
+      # it and keeping the scheduled run red in both environments for days.
+      #
+      # So stage baselines only, and verify below that they reproduce.
+      - name: Collect updated baselines
+        id: check_changes
+        env:
+          # The only directory `test:visual` can write: remote-react-components
+          # is the sole project with that target. `git add -A` used to sweep in
+          # anything else the job left behind — a lockfile, .vitest-attachments,
+          # a regenerated artifact — none of which belongs in a screenshot
+          # commit, and none of which a reviewer expects to find in one.
+          BASELINE_DIR: packages/remote-react-components/src/tests/visual/__screenshots__
+        run: |
+          git add -- "$BASELINE_DIR"
+
+          # --name-only over `git status | awk '{print $2}'`, which mis-parses a
+          # rename ("R old -> new") and any path containing a space.
+          CHANGED_FILES="$(git diff --cached --name-only)"
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "No baseline changes detected"
+            exit 0
           fi
+
+          echo "changes=true" >> "$GITHUB_OUTPUT"
+          echo "Baseline changes detected"
+
+          # A baseline lives at <dir>/__screenshots__/<test file>/<snapshot>.png,
+          # so the owning test file is that path with the __screenshots__ segment
+          # and the file name dropped. Relative to the package, for vitest.
+          TEST_FILES="$(printf '%s\n' "$CHANGED_FILES" \
+            | sed -e 's#^packages/remote-react-components/##' \
+                  -e 's#__screenshots__/\([^/]*\)/[^/]*$#\1#' \
+            | sort -u)"
+
+          {
+            echo "changed_files<<EOF"
+            echo "$CHANGED_FILES"
+            echo "EOF"
+            echo "test_files<<EOF"
+            echo "$TEST_FILES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "changed_count=$(echo "$CHANGED_FILES" | wc -l)" >> "$GITHUB_OUTPUT"
+
+      # A baseline is only worth committing if it renders the same way twice.
+      # Re-run the affected scenarios against what was just written: a frame the
+      # suite cannot reproduce is a race, not a new truth, and committing it
+      # hands the next reader a baseline that contradicts the component.
+      #
+      # Scoped to the affected files, so this costs seconds rather than a second
+      # full suite. Runs the package script directly on purpose — the nx target
+      # above already built every dependency, and re-entering the graph here
+      # would rebuild them for nothing.
+      - name: Verify the updated baselines reproduce
+        if: steps.check_changes.outputs.changes == 'true'
+        id: verify
+        env:
+          TEST_FILES: ${{ steps.check_changes.outputs.test_files }}
+        run: |
+          # Built as an array rather than left to word splitting: an empty
+          # element would reach vitest as an empty filter, which matches every
+          # file — turning a scoped check back into a full-suite run without
+          # saying so.
+          files=()
+          while IFS= read -r file; do
+            [ -n "$file" ] && files+=("$file")
+          done <<< "$TEST_FILES"
+
+          printf 'Verifying %s scenario file(s):\n' "${#files[@]}"
+          printf '  %s\n' "${files[@]}"
+
+          pnpm --filter @mittwald/flow-remote-react-components test:visual \
+            --browser.fileParallelism=false "${files[@]}"
 
       - name: Commit changes
         if: steps.check_changes.outputs.changes == 'true'
-        run: |
-          git add -A
-          git commit -m "${{ env.COMMIT_MESSAGE }}"
+        run: git commit -m "${{ env.COMMIT_MESSAGE }}"
 
       - name: Push changes
         if: steps.check_changes.outputs.changes == 'true'
@@ -125,14 +186,29 @@ jobs:
           HEAD_REF: ${{ github.head_ref }}
         run: git push origin "$HEAD_REF"
 
+      # always(), so a failed verification explains itself instead of leaving a
+      # red step with no context.
       - name: Summary
+        if: always()
         env:
           CHANGES: ${{ steps.check_changes.outputs.changes }}
           CHANGED_COUNT: ${{ steps.check_changes.outputs.changed_count }}
           CHANGED_FILES: ${{ steps.check_changes.outputs.changed_files }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
           HEAD_REF: ${{ github.head_ref }}
         run: |
-          if [[ "$CHANGES" == "true" ]]; then
+          if [[ "$VERIFY_OUTCOME" == "failure" ]]; then
+            echo "### ⚠️ Screenshots Updated But Not Committed" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "The updated baselines did not reproduce: re-running the affected scenarios against the frames just written failed, so **nothing was committed**." >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "That means at least one of these scenarios is racy — the frame it renders depends on timing, and whichever one \`--update\` happened to catch would have become the baseline. Fix the scenario, then re-apply the label." >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "#### Baselines that would have changed:" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "$CHANGED_FILES" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          elif [[ "$CHANGES" == "true" ]]; then
             echo "### 📸 Visual Regression Screenshots Updated" >> "$GITHUB_STEP_SUMMARY"
             echo "" >> "$GITHUB_STEP_SUMMARY"
             echo "Successfully updated **$CHANGED_COUNT** screenshot(s) on \`$HEAD_REF\`" >> "$GITHUB_STEP_SUMMARY"
