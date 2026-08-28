@@ -76,11 +76,10 @@ const detectIndent = (raw: string): string => {
  * currently installed rather than the target — their output is indicative, not
  * exact.
  *
- * A codemod's selection has no lower bound (see `selectEntries`) — running one
- * twice is a verified no-op — so a project already on `target` still gets a
- * codemod pass: it skips only the write and the install, which genuinely have
- * nothing to do. A manual migration keeps its lower bound, so nothing there
- * gets re-surfaced just because this now runs more often.
+ * Selection has no lower bound at all (see `selectEntries`) — every entry with
+ * `since <= target` is in, codemod or manual — so a project already on `target`
+ * still gets a full pass: it skips only the write and the install, which
+ * genuinely have nothing to do.
  */
 export const runUpgrade = async (
   parsed: ParsedCommand,
@@ -125,11 +124,10 @@ export const runUpgrade = async (
   // A stale dist-tag or an exact version at or below `current` resolves
   // without complaint — `resolveRange` deliberately does not judge that
   // (`list` treats the same fact as a legitimate answer). There is nothing to
-  // bump or install in that case, but — unlike before — that no longer means
-  // there is nothing to run: a `codemod` entry's lower bound is gone (see
-  // `selectEntries`), because re-running one is a verified no-op. A consumer
-  // can already be sitting on `target` having never run this tool once, which
-  // is the exact gap this command exists to close, so the codemod pass below
+  // bump or install in that case, but that does not mean there is nothing to
+  // run: selection has no lower bound (see `selectEntries`). A consumer can
+  // already be sitting on `target` having never run this tool once, which is
+  // the exact gap this command exists to close, so the migration pass below
   // still runs; only the bump and the install are skipped.
   const bump = gt(target, current);
 
@@ -175,7 +173,7 @@ export const runUpgrade = async (
     }
   }
 
-  const selected = selectEntries(allEntries, current, target);
+  const selected = selectEntries(allEntries, target);
   const automatic = selected.filter((entry) => entry.action === "codemod");
   const byHand = selected.filter((entry) => entry.action !== "codemod");
 
@@ -237,10 +235,10 @@ export const runUpgrade = async (
     }
   }
 
-  // Dropping the lower bound for codemods (see `selectEntries`) means this
-  // loop can run every codemod in the catalogue on a project that never
-  // crossed a version at all — "N run, 0 changed" is the confirmation that
-  // there was nothing to catch up on, not a list of new work.
+  // Selection has no lower bound (see `selectEntries`), so this loop can run
+  // every codemod in the catalogue on a project that never crossed a version
+  // at all — "N run, 0 changed" is the confirmation that there was nothing to
+  // catch up on, not a list of new work.
   if (ranCount > 0) {
     log(
       `\n${ranCount} codemod${ranCount === 1 ? "" : "s"} run, ${changedCount} changed something.`,
@@ -254,8 +252,18 @@ export const runUpgrade = async (
     // `frame: false` — this already printed the heading above and, further
     // down, its own aggregate ("N codemods run, N changed something");
     // renderList's own frame (the range/legend on top, the counts at the
-    // bottom) would just repeat both for the same list.
-    log(renderList({ entries: byHand, json: false, frame: false }));
+    // bottom) would just repeat both for the same list. `range` is still
+    // passed so each entry gets its catch-up mark — a manual entry that
+    // shipped at or before `current` may already be done, and the mark is
+    // the only thing left that says so now that hiding it is gone.
+    log(
+      renderList({
+        entries: byHand,
+        range: { from: current, to: target },
+        json: false,
+        frame: false,
+      }),
+    );
   } else {
     log("\nNo migration in this range required a change by hand.");
   }

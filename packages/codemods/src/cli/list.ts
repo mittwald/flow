@@ -1,11 +1,7 @@
 import colors from "picocolors";
 import { lte } from "semver";
 import { allEntries, type CatalogEntry } from "../catalog/entries.js";
-import {
-  hiddenEarlierManualCount,
-  selectEntries,
-  sortBySince,
-} from "../catalog/select.js";
+import { selectEntries, sortBySince } from "../catalog/select.js";
 import {
   defaultRangeDeps,
   resolveRange,
@@ -28,12 +24,13 @@ export interface RenderListInput {
   width?: number;
   /**
    * Render the frame around the entries: the context on top (the range, the
-   * catch-up legend) and the summary at the bottom (the counts, the hidden
-   * count). On by default. `upgrade` turns it off for its by-hand section: it
-   * already printed its own heading and its own aggregate ("N codemods run, N
-   * changed something"), and this renderer's frame would just repeat both — see
-   * `runUpgrade`. Named for the whole frame, not just the top half, since it
-   * now gates both.
+   * catch-up legend) and the summary at the bottom (the counts). On by default.
+   * `upgrade` turns it off for its by-hand section: it already printed its own
+   * heading and its own aggregate ("N codemods run, N changed something"), and
+   * this renderer's frame would just repeat both — see `runUpgrade`. Named for
+   * the whole frame, not just the top half, since it now gates both. The
+   * per-entry catch-up mark itself is unaffected — it lives in the body, not
+   * the frame.
    */
   frame?: boolean;
 }
@@ -160,15 +157,18 @@ const field = (
 };
 
 /**
- * Whether `entry` is a codemod being shown because dropping the lower bound
- * pulled it in (`since <= current`), not because the range crosses it. Only
- * meaningful for a range-bounded list \u2014 the whole-catalogue browse has no
- * `current` to compare against.
+ * Whether `entry` shipped at or before `current` \u2014 selected because the
+ * gate no longer has a lower bound (`since <= target` alone, see
+ * `selectEntries`), not because the range newly crosses it. Only meaningful for
+ * a range-bounded list \u2014 the whole-catalogue browse has no `current` to
+ * compare against.
+ *
+ * This is what may already be done, not what is done: nothing records which
+ * migrations a project has actually performed, codemod or manual alike \u2014
+ * see `selectEntries`.
  */
 const isCatchUp = (entry: CatalogEntry, current: string | undefined): boolean =>
-  current !== undefined &&
-  entry.action === "codemod" &&
-  lte(entry.since, current);
+  current !== undefined && lte(entry.since, current);
 
 const renderEntry = (
   entry: CatalogEntry,
@@ -178,9 +178,9 @@ const renderEntry = (
 ): string => {
   const paint = painter(color);
   const action = actions[entry.action];
-  // Hollow vs filled: catch-up already shipped before `current`, so re-running
-  // it is a no-op rather than something the upgrade is newly bringing in \u2014 see
-  // the legend line in `renderContext`.
+  // Hollow vs filled: catch-up shipped at or before `current`, so it may
+  // already be handled, unlike something the upgrade is newly bringing in \u2014
+  // see the legend line in `renderContext`.
   const symbol = catchUp ? "\u25CB" : "\u25CF";
   const mark = color ? paint[action.tone](symbol) : catchUp ? "o" : "*";
 
@@ -218,11 +218,12 @@ const renderEntry = (
  * "" for a bare `list` (no range): there is nothing to decode, so nothing
  * renders. Otherwise "from X to Y", or for a zero-width range "nothing newer
  * than X" (`from`/`to` is the wrong form once they're equal — that isn't a
- * range, it's "you're already there"), plus — when it's why every codemod below
- * is marked catch-up — that fact and the legend for the mark. Dropping the
- * lower bound for codemods (see `selectEntries`) means a range-bounded list can
- * show every codemod in the catalogue, not just the ones the range newly
- * crosses; the legend says what the mark means and why that's safe.
+ * range, it's "you're already there"), plus — when any entry below is marked
+ * catch-up — the legend for the mark. The gate has no lower bound (see
+ * `selectEntries`), so a range-bounded list can show every entry in the
+ * catalogue, not just the ones the range newly crosses; the legend says what
+ * the mark means — and, just as much, what it does not: catch-up is "may
+ * already be done", never "already done".
  */
 const renderContext = (
   selected: CatalogEntry[],
@@ -240,7 +241,7 @@ const renderContext = (
   const rangeText =
     range.from === range.to
       ? catchUpCount > 0
-        ? `nothing newer than ${range.to}; codemods below are catch-up`
+        ? `nothing newer than ${range.to}; entries below are catch-up`
         : `nothing newer than ${range.to}`
       : `from ${range.from} to ${range.to}`;
 
@@ -251,26 +252,19 @@ const renderContext = (
   const paint = painter(color);
   const legend = `${
     color ? paint[actions.codemod.tone]("○") : "o"
-  }  catch-up: released at or before ${range.from} — re-running a codemod is a no-op.`;
+  }  catch-up: shipped at or before ${range.from} — you may already have done this. Re-running a codemod is a safe no-op; a manual step needs your own check.`;
 
   return [rangeText, legend].join("\n");
 };
 
 /**
  * What the reader has, after reading the entries: "N migrations · N codemods ·
- * N by hand · N no code change", plus — for a range-bounded list — a count of
- * manual migrations hidden because they're already behind (if any are hidden).
+ * N by hand · N no code change".
  *
- * `entries` is the whole catalogue passed to `renderList`, not `selected`: the
- * hidden count is about what `selectEntries` excluded, which by definition is
- * not in `selected`.
+ * Nothing is hidden any more (see `selectEntries`), so this is just the entry
+ * count and the per-action breakdown — no separate hidden-count line.
  */
-const renderSummary = (
-  entries: CatalogEntry[],
-  selected: CatalogEntry[],
-  range: RenderListInput["range"],
-  color: boolean,
-): string => {
+const renderSummary = (selected: CatalogEntry[], color: boolean): string => {
   const paint = painter(color);
 
   const noun = selected.length === 1 ? "migration" : "migrations";
@@ -286,17 +280,8 @@ const renderSummary = (
       return color ? paint[tone](text) : text;
     });
 
-  // Fold the hidden manual count into the counts line rather than a separate
-  // one. Include it only if there are hidden entries.
-  const hiddenCount =
-    range === undefined ? 0 : hiddenEarlierManualCount(entries, range.from);
-  if (hiddenCount > 0) {
-    const hiddenText = `${hiddenCount} manual ${hiddenCount === 1 ? "migration" : "migrations"} already behind, not shown`;
-    counts.push(paint.dim(hiddenText));
-  }
-
   // The counts carry their own colour, so no dim around them — nesting the two
-  // makes both weaker. Hidden count is already dimmed above.
+  // makes both weaker.
   return [paint.bold(`${selected.length} ${noun}`), ...counts].join(
     paint.dim(" · "),
   );
@@ -333,7 +318,7 @@ export const renderList = ({
   const selected =
     range === undefined
       ? sortBySince(entries)
-      : selectEntries(entries, range.from, range.to);
+      : selectEntries(entries, range.to);
 
   if (json) {
     return JSON.stringify(selected, null, 2);
@@ -359,7 +344,7 @@ export const renderList = ({
   // they want the counts. `context` is "" for a bare `list`, so no blank line
   // gets left dangling above the first entry.
   const context = renderContext(selected, range, color);
-  const summary = renderSummary(entries, selected, range, color);
+  const summary = renderSummary(selected, color);
 
   return `${context === "" ? "" : `${context}\n\n`}${body}\n\n${summary}\n`;
 };

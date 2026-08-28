@@ -49,10 +49,10 @@ describe("renderList as text", () => {
   });
 
   test("says so when the range holds nothing", () => {
-    // `since: "4.0.0"` on every entry, ahead of the range's own `to` — a
-    // codemod's lower bound is gone (selectEntries), so a range merely
-    // behind `current` no longer proves emptiness; only "not yet published
-    // by `target`" still does, for every action alike.
+    // `since: "4.0.0"` on every entry, ahead of the range's own `to` — the
+    // lower bound is gone entirely (selectEntries), so a range merely behind
+    // `current` no longer proves emptiness; only "not yet published by
+    // `target`" still does, for every action alike.
     const future = [
       entry("future-codemod", "4.0.0", "codemod"),
       entry("future-manual", "4.0.0", "manual"),
@@ -193,7 +193,7 @@ describe("presentation", () => {
     expect(text).toContain("1 codemod");
     expect(text).toContain("1 by hand");
     expect(text).toContain("1 no code change");
-    // No manual migrations are hidden, so no third item
+    // Nothing is hidden any more — no separate count beyond the breakdown.
   });
 
   test("the summary comes after every entry, not before", () => {
@@ -227,43 +227,74 @@ describe("presentation", () => {
   });
 });
 
-describe("catch-up codemods", () => {
-  // A codemod's lower bound is gone (selectEntries), so a range-bounded list
-  // can show a codemod that shipped before `current` — re-running it is a
-  // no-op, not new work, and the rendering has to say so rather than reading
-  // like a to-do list.
+describe("catch-up", () => {
+  // Selection has no lower bound at all (selectEntries) — every kind and
+  // action alike. A range-bounded list can therefore show any entry that
+  // shipped before `current`, not just a codemod: re-running a codemod is a
+  // no-op, but a manual entry only *may* already be done. The rendering has
+  // to carry that distinction now that nothing is hidden.
   const catalog = [
     entry("shipped-earlier", "0.9.0", "codemod"),
     entry("new-in-range", "1.1.0", "codemod"),
     entry("old-manual", "0.9.0", "manual"),
   ];
 
-  test("a codemod behind current is marked catch-up in the entry, a new one is not", () => {
+  // Sorted oldest first, tied on `since` by id: old-manual, shipped-earlier,
+  // new-in-range. Splitting on the ids in that order isolates each entry's own
+  // rendered block, so a mark bleeding from a neighbour cannot pass a check
+  // meant for a different entry.
+  const blocksOf = (text: string): Record<string, string> => {
+    const [oldManual, rest1] = text.split("shipped-earlier");
+    const [shippedEarlier, newInRange] = (rest1 ?? "").split("new-in-range");
+    return {
+      "old-manual": oldManual ?? "",
+      "shipped-earlier": shippedEarlier ?? "",
+      "new-in-range": newInRange ?? "",
+    };
+  };
+
+  test("an entry behind current is marked catch-up, a new one is not — codemod and manual alike", () => {
     const text = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    const [shippedBlock, newBlock] = text.split("new-in-range");
-    expect(shippedBlock).toContain("shipped-earlier");
-    expect(shippedBlock).toContain("catch-up");
+    const blocks = blocksOf(text);
+    expect(blocks["old-manual"]).toContain("catch-up");
+    expect(blocks["shipped-earlier"]).toContain("catch-up");
     // "new-in-range" itself is not behind current, so its own block must not
     // carry the catch-up tag.
-    expect(newBlock).not.toContain("catch-up");
+    expect(blocks["new-in-range"]).not.toContain("catch-up");
   });
 
-  test("the frame explains what the catch-up mark means and why it's safe", () => {
+  test("every entry gets a catch-up decision, not only codemods", () => {
+    // The mark is what replaced hiding: a manual entry behind current is now
+    // shown (selectEntries has no lower bound), and it must carry the same
+    // catch-up marking a codemod does, or a reader has no way to tell it from
+    // genuinely new work.
     const text = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    // The legend (in the top context) names the mark and the reassurance
-    // ("no-op"); the hidden count is in the bottom summary's counts line.
+    expect(text).toContain("old-manual");
+    expect(blocksOf(text)["old-manual"]).toContain("catch-up");
+  });
+
+  test("the legend names the mark and does not claim a catch-up entry is done", () => {
+    const text = renderList({
+      entries: catalog,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+    });
     expect(text).toMatch(/catch-up/);
-    expect(text).toMatch(/no-op/);
+    // "may already have done this" — not "already done" or "already behind".
+    expect(text).toMatch(/may already/i);
+    expect(text).not.toMatch(/already behind/i);
     expect(text).toContain("2 codemods");
-    expect(text).toContain("1 manual migration already behind, not shown");
+    expect(text).toContain("1 by hand");
+    // Nothing is hidden any more — no separate hidden-count line.
+    expect(text).not.toMatch(/not shown/i);
   });
 
   test("no legend when nothing in range is catch-up", () => {
@@ -276,16 +307,16 @@ describe("catch-up codemods", () => {
     expect(text).not.toMatch(/catch-up:/);
   });
 
-  test("names how many manual migrations the window hides, without listing them", () => {
+  test("a manual entry behind current is shown, not hidden", () => {
     const text = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: false,
     });
-    // "old-manual" (since 0.9.0 <= current 1.0.0) is excluded by design and
-    // must be counted, not shown. Hidden count is now part of the counts line.
-    expect(text).not.toContain("old-manual");
-    expect(text).toContain("1 manual migration already behind, not shown");
+    // The whole point of the change: `old-manual` (since 0.9.0 <= current
+    // 1.0.0) used to be excluded and only counted. It is now selected and
+    // rendered, marked catch-up rather than hidden.
+    expect(text).toContain("old-manual");
   });
 
   test("the whole-catalogue browse (no range) has no catch-up marking at all", () => {
@@ -293,17 +324,20 @@ describe("catch-up codemods", () => {
     expect(text).not.toContain("catch-up");
   });
 
-  test("JSON stays the plain selected array — no catch-up field grafted on", () => {
+  test("JSON stays the plain selected array — no catch-up field grafted on, and now includes catch-up entries", () => {
     const json = renderList({
       entries: catalog,
       range: { from: "1.0.0", to: "2.0.0" },
       json: true,
     });
     const parsed = JSON.parse(json) as CatalogEntry[];
+    // All three: dropping the lower bound means `old-manual` is selected too.
     expect(parsed.map((e) => e.id).sort()).toEqual([
       "new-in-range",
+      "old-manual",
       "shipped-earlier",
     ]);
+    expect(parsed[0]).not.toHaveProperty("catchUp");
   });
 });
 
