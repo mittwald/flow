@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
+import { topAnchorId } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "../../../layout.module.scss";
 import {
@@ -55,7 +56,13 @@ export const ComponentContent: FC<Props> = async (props) => {
         <div className={styles.mainContent}>
           <Section>
             <Header>
-              <Heading level={1}>{mdxFile.getTitle()}</Heading>
+              <Heading
+                level={1}
+                id={topAnchorId}
+                className={styles.pageHeading}
+              >
+                {mdxFile.getTitle()}
+              </Heading>
               <PageActions
                 title={mdxFile.getTitle()}
                 markdownUrl={markdownUrl}

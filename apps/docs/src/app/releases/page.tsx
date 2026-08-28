@@ -8,11 +8,13 @@ import {
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 import type { Anchor } from "@/lib/mdx/MdxFile";
+import { topAnchorId } from "@/lib/mdx/MdxFile";
 import { getReleases } from "@/lib/releases/githubReleases";
 import ReleaseEntry from "./_components/ReleaseEntry";
 import { releaseSlug } from "./_lib/releaseSlug";
 import { formatReleaseDate } from "./_lib/formatReleaseDate";
 import styles from "./page.module.scss";
+import globalStyles from "@/app/layout.module.scss";
 
 export const metadata: Metadata = {
   title: "Releases",
@@ -23,17 +25,28 @@ export const metadata: Metadata = {
 export default async function ReleasesPage() {
   const releases = await getReleases();
 
-  const anchors: Anchor[] = releases.map((r) => ({
-    slug: releaseSlug(r.version),
-    text: `${r.version} · ${formatReleaseDate(r.date)}`,
-    level: 2,
-  }));
+  // This page builds its anchors itself, so the page-heading entry that
+  // MdxFileFactory adds for MDX pages has to be prepended here (#2876).
+  const anchors: Anchor[] = [
+    { slug: topAnchorId, text: "Releases", level: 2 },
+    ...releases.map((r) => ({
+      slug: releaseSlug(r.version),
+      text: `${r.version} · ${formatReleaseDate(r.date)}`,
+      level: 2,
+    })),
+  ];
 
   return (
     <Flex columnGap="m">
       <LayoutCard className={styles.timeline}>
         <Section>
-          <Heading level={1}>Releases</Heading>
+          <Heading
+            level={1}
+            id={topAnchorId}
+            className={globalStyles.pageHeading}
+          >
+            Releases
+          </Heading>
           <Text>
             Alle veröffentlichten Flow-Releases mit ihren Highlights,
             Migrationshinweisen und den enthaltenen Fixes.

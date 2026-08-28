@@ -3,11 +3,12 @@ import * as path from "path";
 import { serialize } from "next-mdx-remote/serialize";
 import jetpack from "fs-jetpack";
 import type {
+  Anchor,
   MdxFileExamples,
   MdxFileMeta,
   StaticParams,
 } from "@/lib/mdx/MdxFile";
-import { MdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile, topAnchorId } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
 import slugify from "slugify";
@@ -97,7 +98,17 @@ export class MdxFileFactory {
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
 
-    const anchors = MdxFileFactory.getAnchors(filename);
+    // The page heading is rendered from the frontmatter, not from the MDX, so
+    // `getAnchors` cannot see it. Without this entry the topmost section of
+    // every page — intro, status, live example — has no anchor at all (#2876).
+    const anchors: Anchor[] = [
+      {
+        slug: topAnchorId,
+        text: MdxFile.titleFrom(mdxSource.frontmatter, slugs),
+        level: 2,
+      },
+      ...MdxFileFactory.getAnchors(filename),
+    ];
 
     const examples = MdxFileFactory.getExamples(filename);
 

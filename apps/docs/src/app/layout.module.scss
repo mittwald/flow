@@ -49,6 +49,12 @@
   height: fit-content;
 }
 
+.pageHeading {
+  // Keep the page heading clear of the sticky header when the table of
+  // contents jumps to it — same offset as the MDX headings.
+  scroll-margin-top: 6rem;
+}
+
 .main {
   display: flex;
   flex-direction: column;

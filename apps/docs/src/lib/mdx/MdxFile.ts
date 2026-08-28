@@ -7,6 +7,13 @@ export interface Anchor {
   level: number;
 }
 
+/**
+ * `id` of the page heading, and slug of the topmost table-of-contents entry. A
+ * constant rather than the slugified title: `# Color` and `# Releases` already
+ * exist as MDX headings and would collide with it.
+ */
+export const topAnchorId = "top";
+
 export interface MdxFileMeta {
   title?: string;
   navTitle?: string;
@@ -62,10 +69,14 @@ export class MdxFile {
   }
 
   public getTitle(): string {
+    return MdxFile.titleFrom(this.mdxSource.frontmatter, this.slugs);
+  }
+
+  public static titleFrom(frontmatter: MdxFileMeta, slugs: string[]): string {
     return (
-      this.mdxSource.frontmatter.title ??
-      this.mdxSource.frontmatter.component ??
-      humanizeString(this.slugs[this.slugs.length - 1] ?? "")
+      frontmatter.title ??
+      frontmatter.component ??
+      humanizeString(slugs[slugs.length - 1] ?? "")
     );
   }
 

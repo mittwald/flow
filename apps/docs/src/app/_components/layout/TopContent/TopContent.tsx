@@ -8,6 +8,7 @@ import {
   Section,
 } from "@mittwald/flow-react-components";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
+import { topAnchorId } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "@/app/layout.module.scss";
 import { rawMarkdownPath } from "@/lib/llms/siteUrls";
@@ -32,7 +33,9 @@ export const TopContent: FC<Props> = (props) => {
     return (
       <LayoutCard className={styles.mainContent}>
         <Flex justify="space-between" align="start">
-          <Heading level={1}>{mdxFile.getTitle()}</Heading>
+          <Heading level={1} id={topAnchorId} className={styles.pageHeading}>
+            {mdxFile.getTitle()}
+          </Heading>
           <PageActions title={mdxFile.getTitle()} markdownUrl={markdownUrl} />
         </Flex>
         {mdxFile.mdxSource.frontmatter.description}
@@ -48,7 +51,11 @@ export const TopContent: FC<Props> = (props) => {
         <ColumnLayout l={[2, 1]} m={[1]} columnGap="l">
           <Section>
             <Header>
-              <Heading level={1}>
+              <Heading
+                level={1}
+                id={topAnchorId}
+                className={styles.pageHeading}
+              >
                 {mdxFile.getTitle()}
                 <ComponentStatusBadge name={component} />
               </Heading>
