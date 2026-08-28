@@ -7,6 +7,8 @@ description:
   Änderungen absicherst.
 ---
 
+---
+
 # Semantic Versioning
 
 Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
@@ -185,6 +187,42 @@ einem `DeprecationWarningProvider` und gib ihm einen `onWarning`-Handler:
   <App />
 </DeprecationWarningProvider>
 ```
+
+---
+
+# Direkt nach einem Release
+
+Ein Release veröffentlicht die Packages **nacheinander**, nicht gleichzeitig.
+Für einige Minuten liegt in der npm-Registry deshalb für die schon
+veröffentlichten Packages die neue Version, für die restlichen noch die alte.
+Beim Release `1.0.6` lagen zwischen dem ersten und dem letzten Package rund 25
+Minuten.
+
+Du triffst dieses Fenster leicht, denn ein Update betrifft immer mehrere
+Packages: alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version,
+und `@mittwald/flow-react-components` fordert `@mittwald/flow-icons-pro` als
+Peer-Dependency in exakt derselben Version. Ziehst du in diesem Fenster alle
+Flow-Abhängigkeiten auf die neue Version, schlägt die Installation für das
+Package fehl, das noch nicht dran war:
+
+```
+npm error code ETARGET
+npm error notarget No matching version found for @mittwald/flow-react-components@1.0.6
+```
+
+pnpm meldet dasselbe als `ERR_PNPM_NO_MATCHING_VERSION`.
+
+Das ist keine Lücke im Release: sobald der Release-Lauf durch ist, haben alle
+Packages dieselbe Version. Direkt nach einem Release ist dieser Fehler fast
+immer das Veröffentlichungsfenster und nichts anderes.
+
+<Alert>
+  <Heading>Warte ein paar Minuten und installiere erneut</Heading>
+  <Content>
+    Das Fenster schließt sich von selbst. Du brauchst keinen Workaround – pinne
+    nichts fest und mische keine Flow-Versionen, um den Fehler zu umgehen.
+  </Content>
+</Alert>
 
 ---
 

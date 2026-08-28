@@ -9,7 +9,7 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "affected:test": "nx affected --targets=test:unit,test:compile",
+    "affected:test": "nx affected --targets=test:unit,test:compile,test:links",
     "affected:test:browser": "nx affected --targets=test:browser,test:e2e,test:visual",
     "build": "nx run-many --targets=build --exclude docs",
     "clean": "nx reset",
@@ -22,7 +22,7 @@
     "lint": "eslint . && stylelint '**/*.{css,scss}' && pnpm format:check",
     "prepare": "node .github/scripts/init-merge-drivers.cjs",
     "sync:resolve": "node .github/scripts/sync-resolve.cjs",
-    "test": "nx run-many --targets=test:unit,test:compile",
+    "test": "nx run-many --targets=test:unit,test:compile,test:links",
     "test:browser": "nx run-many --targets=test:browser,test:e2e,test:visual",
     "test:browser:prepare": "pnpm exec playwright install --with-deps firefox webkit",
     "test:visual": "nx run-many --targets=test:visual",

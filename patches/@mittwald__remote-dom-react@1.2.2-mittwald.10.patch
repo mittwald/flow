@@ -1,0 +1,63 @@
+diff --git a/build/cjs/host/hooks/props-for-element.cjs b/build/cjs/host/hooks/props-for-element.cjs
+index 8cea85e315b867b78fedd70727fd0b63e94a56ad..c6ccef79e3ee2bf1cdeb81f208cb49b6ce6c9a05 100644
+--- a/build/cjs/host/hooks/props-for-element.cjs
++++ b/build/cjs/host/hooks/props-for-element.cjs
+@@ -32,6 +32,11 @@ function usePropsForRemoteElement(element, options) {
+     // Assume all event listeners are allowed, and write each one as a conventional
+     // Preact callback prop.
+     for (const [eventName, listener] of Object.entries(eventListeners)) {
++      // A removed listener reaches the host as an update to `undefined`,
++      // because RemoteReceiver assigns rather than deletes, so the key
++      // outlives it. Wrapping that installs a callable prop that throws
++      // when the event fires.
++      if (!listener) continue;
+       resolvedProperties[`on${eventName[0].toUpperCase()}${eventName.slice(1)}`] = wrapEventListenerForCallback(listener);
+     }
+   }
+diff --git a/build/esm/host/hooks/props-for-element.mjs b/build/esm/host/hooks/props-for-element.mjs
+index 13498b4faa6ff2e0e81da97225c426510f03ab08..f82990ea7fa229a254226b637e0bcbd93ad708b6 100644
+--- a/build/esm/host/hooks/props-for-element.mjs
++++ b/build/esm/host/hooks/props-for-element.mjs
+@@ -28,6 +28,11 @@ function usePropsForRemoteElement(element, options) {
+     // Assume all event listeners are allowed, and write each one as a conventional
+     // Preact callback prop.
+     for (const [eventName, listener] of Object.entries(eventListeners)) {
++      // A removed listener reaches the host as an update to `undefined`,
++      // because RemoteReceiver assigns rather than deletes, so the key
++      // outlives it. Wrapping that installs a callable prop that throws
++      // when the event fires.
++      if (!listener) continue;
+       resolvedProperties[`on${eventName[0].toUpperCase()}${eventName.slice(1)}`] = wrapEventListenerForCallback(listener);
+     }
+   }
+diff --git a/build/esnext/host/hooks/props-for-element.esnext b/build/esnext/host/hooks/props-for-element.esnext
+index 30769ebe8e917ea7d6329cbcfc7d271b419d3e48..c8fba3eb5761c79f8c69ae715780bf94ce20bb40 100644
+--- a/build/esnext/host/hooks/props-for-element.esnext
++++ b/build/esnext/host/hooks/props-for-element.esnext
+@@ -21,6 +21,11 @@ function usePropsForRemoteElement(element, options) {
+     }
+   } else {
+     for (const [eventName, listener] of Object.entries(eventListeners)) {
++      // A removed listener reaches the host as an update to `undefined`,
++      // because RemoteReceiver assigns rather than deletes, so the key
++      // outlives it. Wrapping that installs a callable prop that throws
++      // when the event fires.
++      if (!listener) continue;
+       resolvedProperties[`on${eventName[0].toUpperCase()}${eventName.slice(1)}`] = wrapEventListenerForCallback(listener);
+     }
+   }
+diff --git a/source/host/hooks/props-for-element.tsx b/source/host/hooks/props-for-element.tsx
+index aadec75ba2f7b25b039c16d3d7fb5d0d8510cb2f..d1e5db6a49796e8b521cff6b3acbcf647c6e7b5c 100644
+--- a/source/host/hooks/props-for-element.tsx
++++ b/source/host/hooks/props-for-element.tsx
+@@ -75,6 +75,10 @@ export function usePropsForRemoteElement<
+     // Assume all event listeners are allowed, and write each one as a conventional
+     // Preact callback prop.
+     for (const [eventName, listener] of Object.entries(eventListeners)) {
++      // A removed listener reaches the host as an update to `undefined`, because
++      // RemoteReceiver assigns rather than deletes, so the key outlives it.
++      // Wrapping that installs a callable prop that throws when the event fires.
++      if (!listener) continue;
+       resolvedProperties[
+         `on${eventName[0]!.toUpperCase()}${eventName.slice(1)}`
+       ] = wrapEventListenerForCallback(listener);

@@ -17,7 +17,7 @@ const Footer: FC = () => {
         className={styles.footerContent}
       >
         <Flex direction="column" grow gap="xl">
-          <Flex gap="xl">
+          <Flex gap="xl" wrap="wrap">
             <Flex
               elementType="section"
               direction="column"
@@ -69,7 +69,7 @@ const Footer: FC = () => {
           </Flex>
           <Flex direction="column" gap="xs">
             <MittwaldLogo />
-            <Text whiteSpace="nowrap">
+            <Text>
               <small>© {year} Mittwald CM Service GmbH & Co. KG</small>
             </Text>
           </Flex>

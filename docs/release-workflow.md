@@ -79,7 +79,19 @@ flowchart LR
     publishable. Forgetting a docs path costs one needless version; forgetting a
     source path would silently swallow a real release. So `packages/**` is
     relevant wholesale, Markdown included: `@mittwald/flow-react-components`
-    ships `["*.md", "dist"]`.
+    ships `AGENTS.md`, `MIGRATION.md` and `USAGE.md` next to `dist`.
+  - **Two files are judged by content, not by path**, because for them the path
+    carries no information:
+    - Root **`package.json`** — a `scripts` or `simple-git-hooks` edit cannot
+      reach a tarball, a `devDependencies` bump can. The `decide` job fetches
+      both versions and compares the top-level keys; an unknown key is relevant
+      like an unknown path is. #2970 added `test:links` to two scripts and cut
+      1.0.9.
+    - **`pnpm-lock.yaml`** — a derived file, relevant when the manifest that
+      moved it is. It follows the manifests in the same push and drops out only
+      when at least one changed and none of them is publish-relevant. Lock churn
+      with NO manifest change (a dedupe, a resolution refresh) stays relevant.
+      #2959 bumped an `apps/docs` dependency and cut 1.0.4.
   - A **`workflow_dispatch` run always publishes.** That is the escape hatch
     when a docs-only change has to go out as a release anyway.
 - **The build runs after the version bump.** Both publish workflows version

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -47,7 +47,7 @@
     "test:unit:dev": "vitest dev --project=unit --passWithNoTests",
     "test:visual": "vitest run --project=visual --browser.headless",
     "test:visual:dev": "vitest dev --project=visual",
-    "test:visual:update": "vitest run --project=visual --browser.headless --update --browser.fileParallelism=false"
+    "test:visual:update": "vitest run --project=visual --browser.headless --update"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",
