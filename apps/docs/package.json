@@ -9,7 +9,8 @@
     "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "dev": "next dev",
     "postinstall": "fumadocs-mdx",
-    "start": "pnpx serve@latest out"
+    "start": "pnpx serve@latest out",
+    "test:links": "tsx --test 'src/lib/**/*.test.ts'"
   },
   "dependencies": {
     "@internationalized/date": "^3.12.3",

@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   isPublishRelevant,
   classifyChangedFiles,
+  classifyRootManifestChange,
 } from "./release-relevance-lib.mjs";
 
 test("isPublishRelevant: docs, CI and tooling paths are irrelevant", () => {
@@ -52,8 +53,9 @@ test("isPublishRelevant: anything reaching a tarball is relevant", () => {
 });
 
 test("isPublishRelevant: Markdown INSIDE packages is relevant", () => {
-  // @mittwald/flow-react-components ships `["*.md", "dist"]` — a package-local
-  // Markdown file really is part of the published artifact.
+  // @mittwald/flow-react-components ships AGENTS.md, MIGRATION.md and USAGE.md
+  // next to `dist` — a package-local Markdown file really can be part of the
+  // published artifact.
   assert.equal(isPublishRelevant("packages/components/README.md"), true);
   assert.equal(isPublishRelevant("packages/components/AGENTS.md"), true);
   assert.equal(isPublishRelevant("packages/components/MIGRATION.md"), true);
@@ -162,5 +164,117 @@ test("classifyChangedFiles: square brackets are legitimate path characters", () 
       "apps/docs/src/app/01-get-started/[...slug]/page.tsx",
     ]).publish,
     false,
+  );
+});
+
+test("classifyRootManifestChange: a scripts-only change is irrelevant", () => {
+  // #2970 "test(docs): check the documentation's internal links in CI" → 1.0.9
+  const before = JSON.stringify({
+    name: "root",
+    scripts: { test: "nx run-many --targets=test:unit,test:compile" },
+    devDependencies: { vite: "7.0.0" },
+  });
+  const after = JSON.stringify({
+    name: "root",
+    scripts: {
+      test: "nx run-many --targets=test:unit,test:compile,test:links",
+    },
+    devDependencies: { vite: "7.0.0" },
+  });
+  assert.equal(classifyRootManifestChange(before, after).relevant, false);
+});
+
+test("classifyRootManifestChange: dependency and wiring keys stay relevant", () => {
+  const base = { scripts: { test: "a" }, devDependencies: { vite: "7.0.0" } };
+  for (const [key, value] of [
+    ["devDependencies", { vite: "7.1.0" }],
+    ["dependencies", { react: "19.2.0" }],
+    ["resolutions", { react: "19.2.0" }],
+    ["packageManager", "pnpm@10.28.3"],
+    ["workspaces", ["packages/*"]],
+    ["type", "commonjs"],
+    ["engines", { node: ">=26" }],
+    ["version", "1.0.9"],
+    ["brandNewKey", { a: 1 }],
+  ]) {
+    const after = JSON.stringify({ ...base, [key]: value });
+    assert.equal(
+      classifyRootManifestChange(JSON.stringify(base), after).relevant,
+      true,
+      key,
+    );
+  }
+});
+
+test("classifyRootManifestChange: unparsable or unknown content is relevant", () => {
+  assert.equal(classifyRootManifestChange("{ not json", "{}").relevant, true);
+  assert.equal(classifyRootManifestChange(null, "{}").relevant, true);
+  assert.equal(classifyRootManifestChange("{}", undefined).relevant, true);
+});
+
+test("classifyChangedFiles: a scripts-only root manifest does not publish", () => {
+  // #2970: apps/docs/**, a workflow, and two npm scripts.
+  const result = classifyChangedFiles(
+    [
+      "apps/docs/src/lib/links/checkLinks.ts",
+      "apps/docs/package.json",
+      ".github/workflows/test.yml",
+      "package.json",
+    ],
+    { rootManifestRelevant: false },
+  );
+  assert.equal(result.publish, false);
+  assert.deepEqual(result.relevant, []);
+});
+
+test("classifyChangedFiles: an unclassified root manifest still publishes", () => {
+  for (const options of [undefined, {}, { rootManifestRelevant: true }]) {
+    assert.equal(
+      classifyChangedFiles(["apps/docs/a.mdx", "package.json"], options)
+        .publish,
+      true,
+    );
+  }
+});
+
+test("classifyChangedFiles: a lockfile follows the manifests that moved it", () => {
+  // #2959 "docs: upgrade fumadocs-mdx" → 1.0.4. The lock churn belongs to an
+  // importer that is never published.
+  assert.equal(
+    classifyChangedFiles(["apps/docs/package.json", "pnpm-lock.yaml"]).publish,
+    false,
+  );
+  // A published package's own dependency bump keeps the lockfile relevant.
+  assert.equal(
+    classifyChangedFiles(["packages/components/package.json", "pnpm-lock.yaml"])
+      .publish,
+    true,
+  );
+  // The root manifest counts as a manifest — and only when it is relevant.
+  assert.equal(
+    classifyChangedFiles(["package.json", "pnpm-lock.yaml"], {
+      rootManifestRelevant: false,
+    }).publish,
+    false,
+  );
+  assert.equal(
+    classifyChangedFiles(["package.json", "pnpm-lock.yaml"], {
+      rootManifestRelevant: true,
+    }).publish,
+    true,
+  );
+});
+
+test("classifyChangedFiles: unexplained lock churn publishes (fail-safe)", () => {
+  // No manifest changed at all — a dedupe or resolution refresh can move what a
+  // published package bundles, and nothing in the path list says otherwise.
+  assert.equal(classifyChangedFiles(["pnpm-lock.yaml"]).publish, true);
+  assert.equal(
+    classifyChangedFiles(["pnpm-workspace.yaml", "pnpm-lock.yaml"]).publish,
+    true,
+  );
+  assert.equal(
+    classifyChangedFiles(["patches/foo@1.0.0.patch", "pnpm-lock.yaml"]).publish,
+    true,
   );
 });

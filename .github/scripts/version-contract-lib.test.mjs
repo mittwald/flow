@@ -206,3 +206,32 @@ test("collectFindings: unparseable peer change → fail-closed finding", () => {
   assert.equal(findings.length, 1);
   assert.equal(findings[0].kind, "unparseable");
 });
+
+test("collectFindings: private at the base → first publish is not a tightening", () => {
+  const packages = [
+    {
+      name: "@mittwald/flow-codemods",
+      base: { name: "@mittwald/flow-codemods", private: true }, // never published
+      head: {
+        name: "@mittwald/flow-codemods",
+        engines: { node: ">=24.0.0" }, // establishes a floor, cannot raise one
+        peerDependencies: { jscodeshift: "^17.0.0" },
+      },
+    },
+  ];
+  assert.deepEqual(collectFindings(packages), []);
+});
+
+test("collectFindings: a published package gaining engines.node still flags", () => {
+  const packages = [
+    {
+      name: "@mittwald/flow-icons",
+      base: { name: "@mittwald/flow-icons" }, // public at the base
+      head: { name: "@mittwald/flow-icons", engines: { node: ">=24.0.0" } },
+    },
+  ];
+  const findings = collectFindings(packages);
+  assert.equal(findings.length, 1);
+  assert.equal(findings[0].surface, "engines.node");
+  assert.equal(findings[0].kind, "raised");
+});
