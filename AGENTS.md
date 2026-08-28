@@ -153,7 +153,11 @@ and commit the results.
 - **Conventional Commits** with component/package scope — `fix(Button): …`,
   `feat(components): …`. Releases and changelogs are generated from them.
 - Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
-  packages).
+  packages) — **unless the merge is docs-, CI- or tooling-only**, which
+  publishes nothing at all (no npm release, no version bump commit, no tag, no
+  GitHub Release). The rule lives in
+  `.github/scripts/release-relevance-lib.mjs`; see
+  [docs/release-workflow.md](docs/release-workflow.md).
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
   `inputs`/`outputs` (caching, affected detection) in the package's
@@ -171,8 +175,16 @@ and commit the results.
   `pnpm install` — expect installs after switching branches. `pre-push` runs
   `pnpm lint` — which includes `format:check`, so a stray unformatted
   `.md`/`.json`/`.yml` blocks the push, not the commit; `pnpm format` fixes it.
+  The hooks are written by simple-git-hooks' `postinstall` (allowlisted in
+  `allowBuilds`), so a **runner** gets them too — CI workflows that write git
+  set `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to opt out (#2932).
 - **New dependencies:** pnpm enforces a `minimumReleaseAge` of one week (exempt:
   `@mittwald/*`) — brand-new versions won't resolve.
+- **Dependency updates run themselves.** Dependabot opens four grouped npm PRs a
+  week and merges them itself once CI and the visual suite are green — see
+  [CONTRIBUTE.md § Dependency updates](CONTRIBUTE.md#dependency-updates). A
+  deliberate hold belongs in `.github/dependabot.yml` as an `ignore` entry; a
+  closed PR only makes it come back next week.
 - **Breaking changes for consumers** ship with a `MIGRATION.md` entry and,
   ideally, a codemod in `packages/codemods` (tedious by hand — a great agent
   task).
@@ -285,6 +297,9 @@ where the error points.
 | **Scheduled cross-version tests go red _after_ your PR merged** — you removed a component or changed its rendered structure                                                                                     | Cross-version smoke tests run on a schedule, **not** on PRs (they network-install old published versions). Removing a component or adding/removing/reordering host-output elements produces an old-vs-current structural divergence, and the version gates weren't adjusted before merge          | Add the **`run-cross-version-tests`** PR label (`test-cross-version-label.yml`) to run both harnesses on the branch. Fix real divergences by gating per-version — `test.skipIf(crossVersion({ below }))` or a `scenarioVersionSupport.ts` entry — never by weakening the normalizers. See [remote-react-components/CONTRIBUTE.md](packages/remote-react-components/CONTRIBUTE.md#running-them-on-a-pull-request) |
 | A PostCSS plugin you added to a package's `vite.config.ts` behaves differently in the **release build** than in dev, or a plugin you added to `vite.build.config.ts` seems to have no effect                    | `mergeConfig` **concatenates** `css.postcss.plugins`, so the build config runs the dev config's plugins _first_ and then its own. Two plugins that transform the same construct silently compose in that order, and nothing in the emitted CSS reveals it                                         | Design the pair to compose (have the earlier plugin step aside when it detects the later one via `result.processor.plugins`), or replace `css.postcss` after the merge instead of extending it. Assert the built artifact, not just the plugin in isolation — a unit test and a test project with their own config both stay green while the release build is wrong                                              |
 | A second **browser** vitest project makes the run die at startup with **"Cannot define a nested project for a &lt;browser&gt; browser. The project name '&lt;name&gt; (&lt;browser&gt;)' was already defined"** | Vitest names the per-browser child projects by writing onto the `browser.instances` objects. Spreading the shared `vitestBrowserTestConfig` into two projects shares those objects by reference, so the second project's name overwrites the first                                                | Give each browser project its own copies: `instances: vitestBrowserTestConfig.browser.instances.map((instance) => ({ ...instance }))`. Also check the package's `test:browser` script actually selects the new project — a bare `--project=browser` silently skips it, a glob like `--project=browser*` (as `test:unit` already does with `unit*`) picks both up                                                 |
+| A CI workflow that runs `pnpm install` and then pushes, merges or checks out spends minutes in `eslint`/`stylelint`/`prettier`, or reinstalls in the middle of a merge                                          | simple-git-hooks is allowlisted in `allowBuilds`, so its `postinstall` writes `.git/hooks` on **every** `pnpm install` — runners included. `pre-push` is `pnpm lint`, `post-merge`/`post-checkout` are `pnpm install`                                                                             | Add `SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"` to the workflow's `env` (see `publish.yml`). Where a failed push would strand something already published, also pass `git push --no-verify` — that guard sits at the push and does not depend on the env var staying put (#2932)                                                                                                                                        |
+| `vitest run --update <file>` rewrites **every** baseline instead of the one file's, and `git status` shows snapshots you never touched                                                                          | `--update` takes an optional value, so it swallows the positional test filter that follows it. The run then matches all files, updates all of them, and reports the full test count (354, not 2) — the only signal that anything went wrong                                                       | Put the filter **before** the flag (`vitest run <file> --update`) or pin the flag's value (`--update=true <file>`). Check `git status` after any `--update` and revert baselines outside your change; a stray one is indistinguishable from an intentional update once committed                                                                                                                                 |
+| A baseline for a component you never touched changes in your PR, or a scenario starts failing right after an unrelated PR merged with `update-screenshots`                                                      | The `update-screenshots` label runs `pnpm test:visual --update` over the **whole** suite and then `git add -A` — it is not scoped to the PR's diff. Any scenario that is failing or flaky at that moment gets whatever renders then committed as its new truth                                    | Only apply the label when the suite is otherwise green, and read the resulting commit's file list before merging. #2945 (a CodeBlock change) took a tooltip-less frame of a racy `Tooltip` scenario this way and committed it as the `firefox-linux` baseline, contradicting the three beside it and keeping the scheduled run red in both environments (#2985)                                                  |
 
 ## Where to look next
 

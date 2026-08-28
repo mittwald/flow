@@ -7,7 +7,6 @@ import { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
-import { styleClassname } from "@/lib/scss/selectors";
 import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -16,6 +15,7 @@ import { useObjectRef } from "@react-aria/utils";
 import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
+import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export interface SegmentedControlProps
   extends
@@ -23,8 +23,16 @@ export interface SegmentedControlProps
     FlowComponentProps<HTMLDivElement>,
     PropsWithContainerBreakpointSize {}
 
-/** @flr-generate all */
+/**
+ * @deprecated Use `Tabs` to switch content, or `RadioGroup` to select a value.
+ * @flr-generate all
+ */
 export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
+  const warnDeprecation = useWarnDeprecation();
+  warnDeprecation(
+    "The 'SegmentedControl' component is deprecated and will be removed in a future release. Use 'Tabs' instead when it switches content, or 'RadioGroup' instead when it sets a value.",
+  );
+
   const {
     children,
     className,
@@ -43,10 +51,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.segmentedControlContainer,
-    styleClassname(
-      styles,
-      getContainerBreakpointSizeClassName(containerBreakpointSize),
-    ),
+    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
     className,
   );
 

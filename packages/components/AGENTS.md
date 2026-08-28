@@ -139,13 +139,27 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- **A prop that carries rendered output has to be a slot, not a property.** A
+  remote property is transported as data, and a React element carries
+  `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
+  whole message, so one such prop drops the entire mutation batch and the
+  extension renders nothing. `isSlot` recognises `ReactNode` and `ReactElement`
+  (instantiated too — the match is anchored so the
+  `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
+  is not swept in). What it cannot convert is a **function returning** rendered
+  output, because the host has to call it: that needs an eager slot or
+  `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
+  prop, so a new one cannot ship.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize. Use the
-  per-component tag for additional cases (see `TunnelEntry.tsx`).
+  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
+  `renderEmptyState` plus react-aria's `render` because the host would call them
+  and get rendered output back — neither was ever a deliberate Flow API, and
+  both cost the whole mutation batch when they were tried. Use the per-component
+  tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
@@ -193,11 +207,12 @@ if ("action" in props) {
   committed generated artifact — see the root
   [Generated code](../../AGENTS.md#generated-code--must-be-committed) table,
   `pnpm nx build:scss-types components`). A narrow-union index (`styles[color]`,
-  `styles[`size-${size}`]`) stays type-safe as-is; a `string`-typed or runtime
-  index needs a helper from `@/lib/scss/selectors` — **not** an
-  `as keyof typeof styles` cast, which hides missing classes:
-  `prefixedStyleClassname(styles, "size-", size)` for a `` `prefix-${x}` `` key (guard out a no-class default so the value matches a real suffix), or `styleClassname(styles,
-  key)`(returns`string | undefined`) for a bare key.
+  ``styles[`size-${size}`]``) stays type-safe as-is — including a helper's
+  return, as long as the helper is typed as a template-literal union (see
+  `getContainerBreakpointSizeClassName`). Only a `string`-typed or runtime index
+  needs `styleClassname(styles, key)` from `@/lib/scss/selectors` (returns
+  `string | undefined`) — **not** an `as keyof typeof styles` cast, which hides
+  missing classes.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
@@ -270,7 +285,11 @@ to zero components.
 
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
-props to hide.
+props to hide. A deprecated **value** of a still-current prop — `Button`'s
+`color="accent"` — is listed with `@deprecatedValues accent` (comma-separated
+for several) and drops out of the properties table, so the table only offers
+values that should still be used. The value stays in the prop's type and keeps
+working; the runtime warns via `useWarnDeprecation` as usual.
 
 ## Misc
 
@@ -325,6 +344,13 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
 - **CSS leans on modern relational/low-specificity selectors** — `:has`,
   `:where`, logical properties, data attributes, and container boundaries reduce
   the need for runtime styling props.
+- **Foreign SVGs go through `Icon`** — a Tabler icon or a custom SVG placed
+  straight into a host that styles its icon slot (`Button` and `Combine` select
+  on `:has(.icon)`; eleven components set `Icon` defaults through
+  `PropsContext`) never gets the `flow--icon` class, so icon sizing and
+  icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
+  — as the [Icon page](https://flow.mittwald.de/04-components/content/icon)
+  documents. Nothing errors: types, lint and the console stay clean.
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.

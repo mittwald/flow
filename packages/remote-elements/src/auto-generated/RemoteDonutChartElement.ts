@@ -26,7 +26,6 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
       legendPosition: {},
       maxValue: {},
       minValue: {},
-      render: {},
       segments: {},
       showLegend: {},
       size: {},

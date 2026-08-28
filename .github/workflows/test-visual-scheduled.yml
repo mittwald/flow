@@ -49,7 +49,7 @@ jobs:
         run: |
           for attempt in 1 2 3; do
             echo "::group::Visual tests (attempt $attempt/3)"
-            if pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false; then
+            if pnpm nx run-many -t test:visual --parallel=1; then
               echo "::endgroup::"
               exit 0
             fi

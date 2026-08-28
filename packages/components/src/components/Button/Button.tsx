@@ -22,14 +22,14 @@ export interface ButtonProps
     FlowComponentProps<HTMLButtonElement> {
   /** Slot for button placement in action groups. */
   slot?: string;
-  /** The color of the button. @default "primary" */
+  /**
+   * The color of the button.
+   *
+   * @default "primary"
+   * @deprecatedValues accent
+   */
   color?:
-    | "primary"
-    | "success"
-    | "secondary"
-    | "danger"
-    | AlphaColor
-    | "accent";
+    "primary" | "success" | "secondary" | "danger" | AlphaColor | "accent";
   /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
   /** The size of the button. @default "m" */

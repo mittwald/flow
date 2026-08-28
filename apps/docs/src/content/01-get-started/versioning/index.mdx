@@ -2,9 +2,11 @@
 title: Versionierung & Stabilität
 navTitle: Versionierung
 description:
-  Ab Version 1.0.0 folgt Flow Semantic Versioning. Diese Seite beschreibt,
-  worauf du dich als Entwickler verlassen kannst, worauf nicht und wie du dich
-  gegen ungewollte Änderungen absicherst.
+  Flow folgt Semantic Versioning. Diese Seite beschreibt, worauf du dich als
+  Entwickler verlassen kannst, worauf nicht und wie du dich gegen ungewollte
+  Änderungen absicherst.
+---
+
 ---
 
 # Semantic Versioning
@@ -13,9 +15,9 @@ Alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version. Dieselbe
 Zusage gilt damit einheitlich für jedes Package. Es gibt keine
 Package-spezifischen Sonderregeln.
 
-Mit Version `1.0.0` wird aus einer guten Absicht eine verlässliche Zusage: Wir
-halten uns an [Semantic Versioning](https://semver.org) und gehen Änderungen
-planbar und nachvollziehbar an.
+Seit Version `1.0.0` ist aus einer guten Absicht eine verlässliche Zusage
+geworden: Wir halten uns an [Semantic Versioning](https://semver.org) und gehen
+Änderungen planbar und nachvollziehbar an.
 
 - **Major** – enthält Breaking Changes. Ein Update kann Anpassungen in deinem
   Code erfordern. Major-Versionen bleiben bewusst selten.
@@ -127,6 +129,100 @@ Update bewusst und kontrolliert erfolgt. Zu einem bewusst herbeigeführten
 Type-Breaking-Change gehört eine Migrationsnotiz in den Release Notes – so
 bekommst du einen konkreten Upgrade-Pfad, auch wenn die Änderung in einem Minor
 oder Patch erscheint.
+
+---
+
+# Migration bei einer Breaking Change
+
+Jede Änderung, die eine Anpassung in deinem Code erfordert, steht mit
+Vorher-Nachher-Beispiel im Migrationsleitfaden des betroffenen Packages:
+
+- [Migrationsleitfaden `@mittwald/flow-react-components`](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md)
+  – deckt auch `@mittwald/flow-remote-react-components` ab
+- [Migrationsleitfaden `@mittwald/ext-bridge`](https://github.com/mittwald/flow/blob/main/packages/ext-bridge/MIGRATION.md)
+
+Die Einträge sind nach Version absteigend sortiert und nennen jeweils die
+Version, ab der die Änderung greift. Suche die Version, von der du kommst, und
+arbeite dich nach oben durch.
+
+## Nutze den Codemod, wenn es einen gibt
+
+Umbenennungen liefern wir als
+[Codemod](https://github.com/mittwald/flow/tree/main/packages/codemods/src/transforms)
+aus – ein Skript, das die Anpassung in deinen Sourcen automatisch vornimmt.
+Welcher Codemod zu einer Änderung gehört, steht im jeweiligen Eintrag des
+Migrationsleitfadens, zusammen mit dem fertigen Aufruf:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/<name>.ts \
+  --parser tsx \
+  src
+```
+
+Ein Codemod ändert Dateien direkt. Führe ihn auf einem sauberen Git-Stand aus
+und prüfe das Diff.
+
+Wenn du mehrere Versionen auf einmal aufholst, nimm `flowAlphaAll` – der Codemod
+führt alle Migrations-Codemods der `0.2.0-alpha`-Reihe in der Reihenfolge ihrer
+Releases aus:
+
+```shell
+npx jscodeshift \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
+  --parser tsx \
+  src
+```
+
+## Deprecation-Warnungen sind der Vorlauf
+
+Wird ein Pfad deprecated, bleibt er funktionsfähig und meldet sich zur Laufzeit
+per `console.warn`. Diese Warnungen sind die Vorwarnzeit vor der nächsten
+Major-Version – behandle sie als Aufgabenliste, nicht als Rauschen. Um sie
+zentral einzusammeln, etwa im Error-Tracking, umschließe deine Anwendung mit
+einem `DeprecationWarningProvider` und gib ihm einen `onWarning`-Handler:
+
+```tsx
+<DeprecationWarningProvider onWarning={(message) => reportToTracking(message)}>
+  <App />
+</DeprecationWarningProvider>
+```
+
+---
+
+# Direkt nach einem Release
+
+Ein Release veröffentlicht die Packages **nacheinander**, nicht gleichzeitig.
+Für einige Minuten liegt in der npm-Registry deshalb für die schon
+veröffentlichten Packages die neue Version, für die restlichen noch die alte.
+Beim Release `1.0.6` lagen zwischen dem ersten und dem letzten Package rund 25
+Minuten.
+
+Du triffst dieses Fenster leicht, denn ein Update betrifft immer mehrere
+Packages: alle `@mittwald/flow-*`-Packages teilen sich eine gemeinsame Version,
+und `@mittwald/flow-react-components` fordert `@mittwald/flow-icons-pro` als
+Peer-Dependency in exakt derselben Version. Ziehst du in diesem Fenster alle
+Flow-Abhängigkeiten auf die neue Version, schlägt die Installation für das
+Package fehl, das noch nicht dran war:
+
+```
+npm error code ETARGET
+npm error notarget No matching version found for @mittwald/flow-react-components@1.0.6
+```
+
+pnpm meldet dasselbe als `ERR_PNPM_NO_MATCHING_VERSION`.
+
+Das ist keine Lücke im Release: sobald der Release-Lauf durch ist, haben alle
+Packages dieselbe Version. Direkt nach einem Release ist dieser Fehler fast
+immer das Veröffentlichungsfenster und nichts anderes.
+
+<Alert>
+  <Heading>Warte ein paar Minuten und installiere erneut</Heading>
+  <Content>
+    Das Fenster schließt sich von selbst. Du brauchst keinen Workaround – pinne
+    nichts fest und mische keine Flow-Versionen, um den Fehler zu umgehen.
+  </Content>
+</Alert>
 
 ---
 

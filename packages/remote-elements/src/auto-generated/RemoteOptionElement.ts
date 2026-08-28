@@ -24,7 +24,6 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       ping: {},
       referrerPolicy: {},
       rel: {},
-      render: {},
       routerOptions: {},
       target: {},
       textValue: {},

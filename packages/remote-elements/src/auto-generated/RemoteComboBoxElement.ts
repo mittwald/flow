@@ -41,8 +41,6 @@ export class RemoteComboBoxElement extends FlowRemoteElement<RemoteComboBoxEleme
       menuTrigger: {},
       name: {},
       placeholder: {},
-      render: {},
-      renderEmptyState: {},
       selectedKey: {},
       selectionMode: {},
       shouldFocusWrap: {},

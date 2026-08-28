@@ -3,6 +3,90 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.4](https://github.com/mittwald/flow/compare/1.0.3...1.0.4) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1055](https://github.com/mittwald/flow/compare/0.2.0-alpha.1054...0.2.0-alpha.1055) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1054](https://github.com/mittwald/flow/compare/0.2.0-alpha.1053...0.2.0-alpha.1054) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1053](https://github.com/mittwald/flow/compare/0.2.0-alpha.1052...0.2.0-alpha.1053) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+# [0.2.0-alpha.1051](https://github.com/mittwald/flow/compare/0.2.0-alpha.1050...0.2.0-alpha.1051) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
+# [0.2.0-alpha.1050](https://github.com/mittwald/flow/compare/0.2.0-alpha.1049...0.2.0-alpha.1050) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-icons
+
 # [0.2.0-alpha.1049](https://github.com/mittwald/flow/compare/0.2.0-alpha.1048...0.2.0-alpha.1049) (2026-08-25)
 
 **Note:** Version bump only for package @mittwald/flow-icons

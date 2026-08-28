@@ -178,6 +178,12 @@ export function collectFindings(packages) {
   for (const { name, base, head } of packages) {
     if (!isPublishable(head)) continue; // not a consumer-facing Flow package
     if (!base) continue; // new package: no prior contract to break
+    // Private at the base means it has never been published, so there is no
+    // consumer and no prior contract either. Its first publish *establishes*
+    // the floor and the peer ranges; it cannot tighten them. Without this,
+    // going `private: true` -> public reads as `(none) -> >=24.0.0` and the
+    // guard demands a breaking marker for a package nobody could install.
+    if (!isPublishable(base)) continue;
 
     const oldNode = base.engines?.node ?? null;
     const newNode = head.engines?.node ?? null;

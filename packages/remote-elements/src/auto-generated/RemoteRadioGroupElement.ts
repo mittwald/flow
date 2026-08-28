@@ -32,7 +32,6 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       m: {},
       name: {},
       orientation: {},
-      render: {},
       s: {},
       slot: {},
       translate: {},

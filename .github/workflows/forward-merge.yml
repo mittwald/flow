@@ -21,8 +21,8 @@ name: Forward-merge main into next
 # only place the merge drivers run. Any other failure opens an issue too
 # (ADR 0004 §10).
 #
-# The push to `next` triggers `publish-next.yml`, which re-derives the version
-# and publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
+# The push to `next` triggers `publish.yml`, which re-derives the version and
+# publishes the `next` prerelease (ADR 0004 §6). This workflow itself stays
 # version-free — it merges and pushes, nothing more.
 
 on:
@@ -36,15 +36,20 @@ on:
   # `mutate-next` concurrency group is retried by nothing: GitHub keeps one
   # pending run per group and cancels it when a newer run arrives, and a
   # cancelled run is not a failure. Measured in the #2769 rehearsal: a run
-  # created at 15:45:32 was cancelled at 15:47:28, one second after a
-  # publish-next run entered the group — it never started a single job, so no
+  # created at 15:45:32 was cancelled at 15:47:28, one second after a `next`
+  # publish run entered the group — it never started a single job, so no
   # `timeout-minutes` would have helped.
   #
-  # publish-next completing is exactly the moment the group frees up, so re-run
+  # That publish completing is exactly the moment the group frees up, so re-run
   # then. This terminates: the catch-up merge is idempotent, normally finds no
-  # code delta, does not push, and therefore triggers no further publish-next.
+  # code delta, does not push, and therefore triggers no further publish run.
+  #
+  # `publish.yml` serves BOTH lines since the trusted-publisher fix, so this
+  # fires after `main` publishes too. The job guard below drops those: only a
+  # `next` publish holds `mutate-next`, and a `main` publish already triggers
+  # this workflow through its own push.
   workflow_run:
-    workflows: ["Publish next collection line to NPM"]
+    workflows: ["Publish packages to NPM"]
     types: [completed]
 
 permissions:
@@ -53,7 +58,7 @@ permissions:
   issues: write # open the sync issue (§4) and the failure issue (§10)
 
 # One shared concurrency group per TARGET branch, used by every workflow that
-# pushes to `next` (this one and `publish-next.yml`) — serializes all writers of
+# pushes to `next` (this one and `publish.yml`) — serializes all writers of
 # `next` and removes non-fast-forward races by design (ADR 0004 §5).
 concurrency:
   group: mutate-next
@@ -65,43 +70,37 @@ env:
 
 jobs:
   forward-merge:
+    # The catch-up `workflow_run` trigger is about the `mutate-next` group
+    # freeing up, so only a publish run that HELD it counts — i.e. one on `next`.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.head_branch == 'next'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      # Self-gating (mirrors commit-guard.yml): the cascade only exists once the
-      # `next` collection branch does, i.e. after the 1.0.0 cut. Until then this
-      # workflow is dormant, so pushes to `main` on the `0.2.0-alpha.*` line do
-      # not fail.
       - name: Check whether there is anything to merge
         id: guard
         run: |
           set -euo pipefail
 
-          if ! git ls-remote --exit-code --heads \
-                 "https://github.com/${REPO}.git" next >/dev/null 2>&1; then
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::'next' branch does not exist yet — forward-merge dormant (pre-1.0.0-cut). Skipping."
-            exit 0
-          fi
-
           # Cheap pre-flight, one API call, no checkout. The catch-up
-          # `workflow_run` trigger fires after every publish-next, and in the
+          # `workflow_run` trigger fires after every `next` publish, and in the
           # normal case there is nothing to do — cloning this monorepo's full
           # history just to discover that would be wasteful. `ahead_by` counts
           # commits on `main` that `next` does not have; churn-only merges still
           # count here and are handled later by the "no code delta" check.
           ahead="$(gh api "repos/${REPO}/compare/next...main" --jq '.ahead_by')"
           if [ "$ahead" = "0" ]; then
-            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "pending=false" >> "$GITHUB_OUTPUT"
             echo "::notice::'next' already contains every commit from 'main' — nothing to merge."
             exit 0
           fi
 
-          echo "exists=true" >> "$GITHUB_OUTPUT"
+          echo "pending=true" >> "$GITHUB_OUTPUT"
           echo "'main' is ${ahead} commit(s) ahead of 'next' — proceeding."
 
       - name: Checkout `next` ⬇️
-        if: steps.guard.outputs.exists == 'true'
+        if: steps.guard.outputs.pending == 'true'
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           ref: next
@@ -111,13 +110,13 @@ jobs:
       # A pinned Node just for the JSON merge driver (`.github/scripts/merge-
       # package-json.cjs`); no dependency install — the merge is version-free.
       - name: Setup Node 🎛️
-        if: steps.guard.outputs.exists == 'true'
+        if: steps.guard.outputs.pending == 'true'
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: 24
 
       - name: Git identity 🪪
-        if: steps.guard.outputs.exists == 'true'
+        if: steps.guard.outputs.pending == 'true'
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
@@ -125,7 +124,7 @@ jobs:
       # A `merge=<driver>` attribute is inert unless the driver is registered in
       # the runner's git config too (ADR 0004 §3, Consequences).
       - name: Register merge drivers 🔧
-        if: steps.guard.outputs.exists == 'true'
+        if: steps.guard.outputs.pending == 'true'
         run: |
           set -euo pipefail
           git config merge.ours.driver true
@@ -134,7 +133,7 @@ jobs:
 
       - name: Forward-merge and push (or open a sync issue) 🔀
         id: merge
-        if: steps.guard.outputs.exists == 'true'
+        if: steps.guard.outputs.pending == 'true'
         run: |
           set -euo pipefail
 
@@ -288,7 +287,7 @@ jobs:
       # silently fall behind `main` — open an issue and ping CODEOWNERS (ADR
       # 0004 §10).
       - name: Open an issue on failure 🚨
-        if: failure() && steps.guard.outputs.exists == 'true'
+        if: failure() && steps.guard.outputs.pending == 'true'
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |

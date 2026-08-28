@@ -441,8 +441,9 @@ Markdown headings are therefore shifted down one level when rendered:
 - Use `#` for the top-level sections of a page — for example `# Best Practices`,
   `# Kombiniere mit ...`, `# Properties`. A page usually has several `#`
   sections.
-- Separate `#` sections from each other with a horizontal rule (`---`). Do not
-  put a rule between a `#` and its own `##`.
+- Put a horizontal rule (`---`) before **every** `#` section — the first one
+  included, so it is set off from the page header above it. Do not put a rule
+  between a `#` and its own `##`.
 - `#` and `##` headings appear in the anchor navigation ("Auf dieser Seite").
   Keep them concise so the navigation remains readable.
 
@@ -457,7 +458,8 @@ The most important MDX Components for writing content:
   `examples/default.tsx`; with `example="name"` it renders `examples/name.tsx`
   from the `examples` directory next to the MDX file. Common props:
   `editorCollapsed` (code initially hidden), `editorDisabled` (no editor), `row`
-  (side-by-side grid), `bgColor`, `zoom`, `stretch`.
+  (side-by-side grid), `resizable` (handle to drag the container width, for
+  examples whose behaviour depends on it), `bgColor`, `zoom`.
 - `<PropertiesTables />` — renders the generated props documentation in the
   `# Properties` section.
 - `<Alert>` with `<Heading>` and `<Content>` — highlighted notes.

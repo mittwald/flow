@@ -11,10 +11,12 @@ export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColum
 
   static override get remoteProperties() {
     return {
+      allowsArrowNavigation: {},
       allowsSorting: {},
       className: {},
       defaultWidth: {},
       dir: {},
+      focusMode: {},
       hidden: {},
       horizontalAlign: {},
       id: {},
@@ -22,7 +24,6 @@ export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColum
       isRowHeader: {},
       lang: {},
       minWidth: {},
-      render: {},
       textValue: {},
       translate: {},
       width: {},

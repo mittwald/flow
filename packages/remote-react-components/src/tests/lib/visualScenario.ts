@@ -15,8 +15,7 @@ import type { ReactNode } from "react";
  * - Cross-version (an old published version's components in the iframe).
  */
 export type ScenarioComponents =
-  | typeof LocalComponents
-  | typeof RemoteComponents;
+  typeof LocalComponents | typeof RemoteComponents;
 
 /** A single visual scenario: build the tree from an injected components bag. */
 export type VisualScenario = (components: ScenarioComponents) => ReactNode;

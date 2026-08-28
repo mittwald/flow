@@ -23,6 +23,8 @@ practices sollen bei der Orientierung und Entscheidungsfindung helfen.
   </Content>
 </Alert>
 
+---
+
 # Technische Umsetzung
 
 Bei der Platzierung der Boundaries empfiehlt es sich, vom Groben ins Detail
@@ -51,16 +53,18 @@ jeweiligen Elements, rendern am Ende aber nur ein Fragment.
 
 ## Inhalte einer LayoutCard
 
-Sind Funktionen oder Informationen einer LayoutCard essenziell für die Nutzung
+Sind Funktionen oder Informationen einer
+[LayoutCard](/04-components/structure/layout-card) essenziell für die Nutzung
 der Seite, sollte die gesamte LayoutCard mit `WithBoundaries.LayoutCard`
 umschlossen sein. Dabei wird die Anzahl der geladenen Sections als
 `sectionsCount` mitgegeben, um die Loading View passend darzustellen.
 
 ### Listenseite
 
-Eine Listenseite enthält in der Regel eine einzelne Section. Der `sectionsCount`
-beträgt hier daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte
-Liste im Fehlerfall in die ErrorView wechseln kann.
+Eine Listenseite enthält in der Regel eine einzelne
+[Section](/04-components/structure/section). Der `sectionsCount` beträgt hier
+daher 1. Der Count der Liste wird zuerst geladen, damit die gesamte Liste im
+Fehlerfall in die ErrorView wechseln kann.
 
 ```
 export const CronjobsPage: FC = () => (
@@ -111,9 +115,9 @@ export const CronjobPage: FC = () => (
 
 ### Tab
 
-Manche Seiten verteilen Inhalte auf mehrere Tabs. In solchen Fällen kann es
-sinnvoll sein, Tabs separat abzusichern. Dafür eignet sich
-`WithBoundaries.SectionsFragment`.
+Manche Seiten verteilen Inhalte auf mehrere
+[Tabs](/04-components/structure/tabs). In solchen Fällen kann es sinnvoll sein,
+Tabs separat abzusichern. Dafür eignet sich `WithBoundaries.SectionsFragment`.
 
 ```
 export const CronjobTabs: FC = () => (
@@ -144,12 +148,13 @@ export const CronjobTabs: FC = () => (
 ## Modals
 
 Für Modals sollte immer ein `WithBoundaries.Modal` verwendet werden. Dies
-verhindert auch das Nachladen von Daten innerhalb des Modals, bevor das Modal
-geöffnet wird.
+verhindert auch das Nachladen von Daten innerhalb des
+[Modals](/04-components/overlays/modal), bevor das Modal geöffnet wird.
 
 ### Inhalte von Forms in Modals
 
-Eine teilweise geladene oder fehlerhafte Form untergräbt das Vertrauen der User
+Eine teilweise geladene oder fehlerhafte
+[Form](/04-components/react-hook-form/form) untergräbt das Vertrauen der User
 und kann zu unvollständigen oder inkonsistenten Daten führen. Sobald innerhalb
 der Form ein Fehler auftritt, fällt automatisch das ganze Modal in eine
 ErrorView, auch wenn es darin noch Boundaries gibt.
@@ -245,11 +250,14 @@ fehleranfällig. Sie sollten immer von einer Boundary umschlossen werden. Für d
 
 ## Inhalte einzelner Elemente
 
-Kleine Elemente wie Texte, Links, Badges, Actions oder ContextMenus werden oft
-dynamisch geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen.
-Diese sollten daher separat geschützt werden, um nicht die gesamte Seite zu
-blockieren. Diese Elemente besitzen oft keine eigene ErrorView und erscheinen im
-Fehlerfall nicht oder verbleiben in ihrem Ladezustand.
+Kleine Elemente wie [Texte](/04-components/content/text),
+[Links](/04-components/navigation/link), [Badges](/04-components/status/badge),
+[Actions](/04-components/actions/action) oder
+[ContextMenus](/04-components/actions/context-menu) werden oft dynamisch
+geladen, da sie das Nutzungserlebnis der Seite lediglich ergänzen. Diese sollten
+daher separat geschützt werden, um nicht die gesamte Seite zu blockieren. Diese
+Elemente besitzen oft keine eigene ErrorView und erscheinen im Fehlerfall nicht
+oder verbleiben in ihrem Ladezustand.
 
 ### Texte
 
@@ -279,9 +287,10 @@ und eine eingebaute Boundary besitzen.
 
 ### Alerts / Badges
 
-Alerts und Badges ergänzen eine Seite oft nur um kleine Hinweise oder
-Statusinformationen. Sie werden in ein `WithBoundaries.Fragment` verpackt. So
-bleiben sie geschützt, ohne eine eigene Loading View auszulösen.
+[Alerts](/04-components/status/alert) und Badges ergänzen eine Seite oft nur um
+kleine Hinweise oder Statusinformationen. Sie werden in ein
+`WithBoundaries.Fragment` verpackt. So bleiben sie geschützt, ohne eine eigene
+Loading View auszulösen.
 
 ```
 export const CustomerBankruptAlert: FC<Props> = (props) => (
@@ -306,9 +315,9 @@ export const CustomerBankruptAlert: FC<Props> = (props) => (
 
 ### Field
 
-Für Fields kann die `WithBoundaries.FieldFragment` Component verwendet werden.
-Sie zeigt im Loading State ein Textfeld, dem optional ein Label mitgegeben
-werden kann.
+Für [Fields](/04-components/react-hook-form/field) kann die
+`WithBoundaries.FieldFragment` Component verwendet werden. Sie zeigt im Loading
+State ein Textfeld, dem optional ein Label mitgegeben werden kann.
 
 ```
 export const AppInstallationSelectField: FC<Props> = (props) => {

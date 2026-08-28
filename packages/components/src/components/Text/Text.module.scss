@@ -1,5 +1,6 @@
 .text {
   color: inherit;
+  text-wrap-style: pretty;
 
   /* Alpha Colors */
   @mixin color($color) {

@@ -5,15 +5,23 @@ on:
   pull_request:
     types:
       - labeled
+      # Dependabot PRs run the suite unconditionally rather than on a label.
+      # It is the gate `dependabot-auto-merge.yml` waits for, and labelling from
+      # a workflow would not work anyway: events created with `GITHUB_TOKEN` do
+      # not start new workflow runs.
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   run-visual-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: >
-      github.event_name == 'workflow_dispatch' || (github.event.label.name ==
-      'run-visual-tests' &&
-       github.head_ref != github.event.repository.default_branch)
+      github.event_name == 'workflow_dispatch' ||
+      (github.head_ref != github.event.repository.default_branch &&
+       (github.event.label.name == 'run-visual-tests' ||
+        github.event.pull_request.user.login == 'dependabot[bot]'))
 
     # one at a time per branch; re-labeling supersedes an in-flight run
     concurrency:
@@ -26,7 +34,10 @@ jobs:
 
     steps:
       - name: Remove label if exists
-        if: github.event_name == 'pull_request'
+        # Only the labelled path has a label to remove — and only that path may
+        # write: a `pull_request` event on a Dependabot PR gets a read-only
+        # `GITHUB_TOKEN`, so this call would 403 and fail the whole job.
+        if: github.event.action == 'labeled'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
@@ -75,9 +86,10 @@ jobs:
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Run visual tests
-        # run without file parallelism, because firefox has issues with parallel visual tests
+        # File parallelism is off in the visual project's vitest config, not here:
+        # firefox drops focus styling from any page that is not the focused one.
         run: |
-          pnpm nx run-many -t test:visual --parallel=1 --browser.fileParallelism=false
+          pnpm nx run-many -t test:visual --parallel=1
 
       - name: Upload visual diffs
         if: failure()
@@ -108,7 +120,10 @@ jobs:
           cat "$RUNNER_TEMP/visual-summary.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Comment summary on PR
-        if: always() && github.event_name == 'pull_request'
+        # Same read-only-token reason as above. On a Dependabot PR the check run
+        # and its step summary are the signal; nothing auto-merges while it is
+        # red.
+        if: always() && github.event.action == 'labeled'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ github.token }}
