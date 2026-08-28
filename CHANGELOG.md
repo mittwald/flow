@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** docs- and CI-only merges no longer publish through package.json or the lockfile ([#2984](https://github.com/mittwald/flow/issues/2984)) ([09bda96](https://github.com/mittwald/flow/commit/09bda96261d4a6be6bd525cc98573276355655ce))
+* **docs:** stop the footer from overflowing on narrow screens ([#2993](https://github.com/mittwald/flow/issues/2993)) ([3e3b9c1](https://github.com/mittwald/flow/commit/3e3b9c18b8bfebca61fc8cc3f495fdb85db94405))
+
 ## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
 
 ### Bug Fixes
