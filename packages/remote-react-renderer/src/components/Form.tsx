@@ -20,8 +20,19 @@ export const Form: FC<FormProps> = (props) => {
   } = props;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    /*
+     * React propagates synthetic events through portals along the React tree,
+     * so a Modal rendered inside a Form carries this submit up to that Form's
+     * onSubmit — which would submit the surrounding form as well (#2975). This
+     * runs for an action-only form too, hence the handler is always attached.
+     */
+    event.stopPropagation();
+
+    if (!onSubmitFromProps) {
+      return;
+    }
     event.preventDefault();
-    await onSubmitFromProps?.(new FormData(event.currentTarget));
+    await onSubmitFromProps(new FormData(event.currentTarget));
   };
 
   const onAction = async (formData: FormData) => {
@@ -33,7 +44,7 @@ export const Form: FC<FormProps> = (props) => {
       {...rest}
       ref={ref}
       action={onActionFromProps ? onAction : undefined}
-      onSubmit={onSubmitFromProps ? onSubmit : undefined}
+      onSubmit={onSubmit}
     />
   );
 };
