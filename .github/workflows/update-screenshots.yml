@@ -93,7 +93,7 @@ jobs:
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Update Visual Regression Screenshots
-        run: pnpm test:visual --update --browser.fileParallelism=false
+        run: pnpm test:visual --update
       # check what changed
       - name: Check for changes
         id: check_changes

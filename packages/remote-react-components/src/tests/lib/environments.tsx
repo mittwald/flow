@@ -120,13 +120,23 @@ const waitForPaintedContent = async (): Promise<void> => {
         ),
       {
         /*
-         * The wait itself costs nothing once content is there — polling stops on
-         * the first painted frame, ~25ms in. The budget only bounds the failure
-         * case, so keep it well above `expect.poll`'s 1s default: a heavy
-         * scenario on a loaded machine would otherwise fail here for being slow
-         * rather than for being blank.
+         * The wait costs nothing once content is there — polling stops on the
+         * first painted frame, under 100ms for 474 of the 504 paints in a full
+         * firefox run. The tail is all `(Remote)`: that environment lazy-imports
+         * RemoteRendererBrowser and materialises the host tree through the
+         * receiver, a per-test-file warm-up that reached 6235ms on a machine
+         * running the suite in parallel.
+         *
+         * The budget only bounds the failure case — a scenario that never paints
+         * — so it has to clear that tail rather than sit inside it: a budget
+         * inside it reports a slow warm-up as a blank frame. The project runs
+         * serially now, which removes most of that load, but CI hardware is
+         * slower than the machine those numbers come from, so keep the margin.
+         *
+         * It must also stay below the project's `testTimeout`, or the test times
+         * out first and this message never reaches the report.
          */
-        timeout: 5000,
+        timeout: 20_000,
         message:
           "The root container never painted any content, so the screenshot would have captured a blank frame.",
       },
@@ -134,12 +144,80 @@ const waitForPaintedContent = async (): Promise<void> => {
     .toBe(true);
 };
 
+/*
+ * Waits until the document has stopped mutating, so the pointer park below
+ * cannot land in the middle of a render.
+ *
+ * `Remote` applies an interaction a round trip late: a key press updates the
+ * remote tree, which serializes mutations the host applies a tick later. Parking
+ * the pointer inside that window silently breaks keyboard focus rings.
+ * `hover()` emits a `pointermove`, and react-aria takes any pointer event as the
+ * current interaction modality — but only `pointerdown`/`mousedown` notify its
+ * subscribers, so nothing re-renders and elements already carrying
+ * `data-focus-visible` keep it. The pending remote render then lands, recomputes
+ * `isFocusVisible()` against the now-`pointer` modality, and drops the
+ * attribute. The focus ring vanishes from the screenshot — in `Remote` only,
+ * because `Local` renders synchronously, before the pointer ever moves.
+ *
+ * That produced a ~1% diff against a reference both environments share, on every
+ * scenario whose last act is a keyboard press (#2981). Going quiet first gives
+ * `Remote` the ordering `Local` already has: last render, then pointer.
+ *
+ * Observes the whole document, not the container: overlays render in portals
+ * outside it, and the remote tree's own mirror — whose mutations are exactly
+ * what has to settle — lives outside it too.
+ */
+const settleQuietFor = 100;
+const settleTimeout = 2000;
+
+const waitForSettledContent = async (): Promise<void> =>
+  new Promise<void>((resolve) => {
+    let quiet: ReturnType<typeof setTimeout>;
+
+    const observer = new MutationObserver(() => {
+      clearTimeout(quiet);
+      quiet = setTimeout(finish, settleQuietFor);
+    });
+
+    /*
+     * A scenario that never goes quiet (an animation the reduced-motion setting
+     * does not cover) must not fail here — the screenshot matcher is the one
+     * that gets to judge stability. So cap the wait and carry on.
+     */
+    const deadline = setTimeout(finish, settleTimeout);
+
+    function finish() {
+      clearTimeout(quiet);
+      clearTimeout(deadline);
+      observer.disconnect();
+      resolve();
+    }
+
+    quiet = setTimeout(finish, settleQuietFor);
+    observer.observe(document.documentElement, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+  });
+
+/**
+ * Everything `testScreenshot` does before it captures. Exported so a scenario's
+ * state at capture time can be asserted on the DOM instead of on pixels — see
+ * `ScreenshotPreamble.browser.test.tsx`.
+ */
+export const prepareForScreenshot = async (): Promise<void> => {
+  await waitForPaintedContent();
+  await waitForSettledContent();
+  await setNeutralPointerPosition();
+};
+
 const testScreenshot = async (
   description: string,
   options: ScreenshotMatcherOptions = {},
 ): Promise<void> => {
-  await waitForPaintedContent();
-  await setNeutralPointerPosition();
+  await prepareForScreenshot();
   await expect(rootContainerLocator).toMatchScreenshot(description, options);
 };
 
