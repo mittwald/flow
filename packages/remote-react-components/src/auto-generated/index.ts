@@ -101,6 +101,7 @@ export * from "./RadioButton";
 export * from "./RadioGroup";
 export * from "./RangeCalendar";
 export * from "./Rating";
+export * from "./RatingSegment";
 export * from "./SearchField";
 export * from "./Section";
 export * from "./Segment";

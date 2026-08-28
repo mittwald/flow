@@ -1,13 +1,21 @@
 # @mittwald/flow-react-components — Agent Guide
 
-Component patterns for the core package. Read the
-[root AGENTS.md](../../AGENTS.md) first for repo-wide rules (generated code,
-Definition of Done, workflow).
+> **Building an application _with_ Flow?** Read [USAGE.md](./USAGE.md) instead —
+> component selection, layout and spacing, what is safe to depend on, and where
+> the documentation lives in machine-readable form. This guide is about changing
+> Flow itself, and its patterns (`flowComponent`, `PropsContext`, views, CSS
+> modules) do not belong in an application.
 
-> **Full pattern catalog:** [PATTERNS.md](./PATTERNS.md) lists every convention
-> (184 patterns) with per-pattern applicability (when to use / when not), a
-> canonical example each, and a decision cheat-sheet. This guide covers the
-> must-know core; look there when deciding between two approaches.
+Component patterns for the core package. Read the
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md) first for
+repo-wide rules (generated code, Definition of Done, workflow).
+
+> **Full pattern catalog:**
+> [PATTERNS.md](https://github.com/mittwald/flow/blob/main/packages/components/PATTERNS.md)
+> lists every convention (184 patterns) with per-pattern applicability (when to
+> use / when not), a canonical example each, and a decision cheat-sheet. This
+> guide covers the must-know core; look there when deciding between two
+> approaches.
 
 ## Component anatomy
 
@@ -119,7 +127,7 @@ return (
   clearing, e.g. `wrapWith: <ClearPropsContext />` (see `Modal.tsx`).
 
 Why this works the way it does across the remote boundary:
-[docs/remote-ui.md](../../docs/remote-ui.md).
+[docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Views — remote-transparent composition
 
@@ -134,7 +142,7 @@ import { Button } from "@/components/Button"; // ✗ host-only in remote context
 ```
 
 Why this works the way it does across the remote boundary:
-[docs/remote-ui.md](../../docs/remote-ui.md).
+[docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 Remote generation details:
 
@@ -166,7 +174,7 @@ Remote generation details:
 - Props of these components are consumed by mStudio extension developers — no
   breaking changes; deprecate instead (see
   [Deprecating an API](#deprecating-an-api)). Why this matters:
-  [docs/remote-ui.md](../../docs/remote-ui.md).
+  [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Deprecating an API
 
@@ -205,14 +213,14 @@ if ("action" in props) {
   `clsx(styles.button, styles[size], styles[color], className)`.
 - **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
   committed generated artifact — see the root
-  [Generated code](../../AGENTS.md#generated-code--must-be-committed) table,
-  `pnpm nx build:scss-types components`). A narrow-union index (`styles[color]`,
-  ``styles[`size-${size}`]``) stays type-safe as-is — including a helper's
-  return, as long as the helper is typed as a template-literal union (see
-  `getContainerBreakpointSizeClassName`). Only a `string`-typed or runtime index
-  needs `styleClassname(styles, key)` from `@/lib/scss/selectors` (returns
-  `string | undefined`) — **not** an `as keyof typeof styles` cast, which hides
-  missing classes.
+  [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
+  table, `pnpm nx build:scss-types components`). A narrow-union index
+  (`styles[color]`, ``styles[`size-${size}`]``) stays type-safe as-is —
+  including a helper's return, as long as the helper is typed as a
+  template-literal union (see `getContainerBreakpointSizeClassName`). Only a
+  `string`-typed or runtime index needs `styleClassname(styles, key)` from
+  `@/lib/scss/selectors` (returns `string | undefined`) — **not** an
+  `as keyof typeof styles` cast, which hides missing classes.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
@@ -268,14 +276,15 @@ Run: `pnpm nx test:unit components`,
 
 ## Public API surfaces
 
-| Export                                              | Contents                                                                                                                                                                                    |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.` (default)                                       | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                   |
-| `./internal`                                        | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                 |
-| `./flr-universal`                                   | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                  |
-| `./nextjs`, `./react-hook-form`, `./password-tools` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface. |
-| `./all.css`                                         | Bundled stylesheet.                                                                                                                                                                         |
-| `./doc-properties`                                  | Generated prop metadata for the docs site.                                                                                                                                                  |
+| Export                                                          | Contents                                                                                                                                                                                                           |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                          |
+| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                        |
+| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                         |
+| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                        |
+| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                    |
+| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use. |
+| `./doc-properties`                                              | Raw `react-docgen-typescript` output — a 13 MB build input for the generators above, not something to read directly.                                                                                               |
 
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
@@ -317,7 +326,7 @@ working; the runtime warns via `useWarnDeprecation` as usual.
 ## Non-obvious conventions
 
 Easy-to-miss conventions not spelled out above. Full details and examples in
-[PATTERNS.md](./PATTERNS.md).
+[PATTERNS.md](https://github.com/mittwald/flow/blob/main/packages/components/PATTERNS.md).
 
 - **`PropsContext` is structural, not just styling** — nested entries, `dynamic`
   children, semantic defaults (icon size, heading level, status), and contextual

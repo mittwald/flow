@@ -1,5 +1,10 @@
 # @mittwald/flow-remote-react-components — Agent Guide
 
+> **Building an mStudio extension _with_ this package?** Read
+> [USAGE.md](./USAGE.md) instead — the remote surface, which props cross the
+> boundary, and what survives serialization. This guide is about changing the
+> package itself.
+
 React API used _inside_ remote apps (mStudio extensions). This package's exports
 are what extension developers program against — **treat its API as a contract**
 (see the remote-DOM rules in the [root AGENTS.md](../../AGENTS.md) and the full

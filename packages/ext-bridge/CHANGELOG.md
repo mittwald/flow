@@ -3,31 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
 
-## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.1.0-next.2...1.1.0-next.3) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
 
-## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
 
-## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.8...1.1.0-next.1) (2026-08-28)
 
-**Note:** Version bump only for package @mittwald/ext-bridge
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
 
-## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+### Features
 
-### Bug Fixes
+* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
 
-* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.3...1.1.0-next.0) (2026-08-27)
 
-## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+### Features
 
-**Note:** Version bump only for package @mittwald/ext-bridge
+* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
 
 ## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
 

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-design-tokens",
-  "version": "1.0.11",
+  "version": "1.1.0-next.4",
   "type": "module",
   "description": "The design tokens used in Flow, mittwald’s design system",
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/design-tokens",

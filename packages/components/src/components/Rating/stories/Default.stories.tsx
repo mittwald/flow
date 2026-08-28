@@ -6,13 +6,34 @@ import { FieldError } from "@/components/FieldError";
 import { useForm } from "react-hook-form";
 import { Form, SubmitButton, typedField } from "@/integrations/react-hook-form";
 import { Icon } from "@/components/Icon";
-import { IconLeaf, IconLeafFilled } from "@tabler/icons-react";
+import {
+  IconLeaf,
+  IconLeafFilled,
+  IconMoodEmpty,
+  IconMoodEmptyFilled,
+  IconMoodHappy,
+  IconMoodHappyFilled,
+  IconMoodSad,
+  IconMoodSadFilled,
+} from "@tabler/icons-react";
+import { RatingSegment } from "@/components/Rating/components/RatingSegment";
 
 const meta: Meta<typeof Rating> = {
   title: "Form Controls/Rating",
   component: Rating,
-  args: { size: "m", isDisabled: false, isReadOnly: false, isRequired: false },
-  argTypes: { size: { control: "inline-radio", options: ["s", "m"] } },
+  args: {
+    size: "m",
+    maxValue: 5,
+    fill: "cumulative",
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+  },
+  argTypes: {
+    size: { control: "inline-radio", options: ["s", "m"] },
+    fill: { control: "inline-radio", options: ["cumulative", "single"] },
+    maxValue: { control: { type: "number", min: 1, max: 12 } },
+  },
   parameters: {
     controls: { exclude: ["iconEmpty", "iconFilled"] },
   },
@@ -85,4 +106,56 @@ export const WithCustomIcon: Story = {
       </Icon>
     ),
   },
+};
+
+export const WithSegments: Story = {
+  args: { fill: "single" },
+  // The segments define how many there are, so maxValue has no effect here.
+  parameters: {
+    controls: { exclude: ["iconEmpty", "iconFilled", "maxValue"] },
+  },
+  render: (props) => (
+    <Rating {...props} defaultValue={3}>
+      <Label>How was your stay on Tatooine?</Label>
+      <RatingSegment
+        aria-label="Terrible"
+        iconEmpty={
+          <Icon>
+            <IconMoodSad />
+          </Icon>
+        }
+        iconFilled={
+          <Icon color="danger">
+            <IconMoodSadFilled />
+          </Icon>
+        }
+      />
+      <RatingSegment
+        aria-label="Okay"
+        iconEmpty={
+          <Icon>
+            <IconMoodEmpty />
+          </Icon>
+        }
+        iconFilled={
+          <Icon color="warning">
+            <IconMoodEmptyFilled />
+          </Icon>
+        }
+      />
+      <RatingSegment
+        aria-label="Great"
+        iconEmpty={
+          <Icon>
+            <IconMoodHappy />
+          </Icon>
+        }
+        iconFilled={
+          <Icon color="success">
+            <IconMoodHappyFilled />
+          </Icon>
+        }
+      />
+    </Rating>
+  ),
 };

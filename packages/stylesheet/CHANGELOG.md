@@ -3,27 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
 
-## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.1.0-next.2...1.1.0-next.3) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
 
-## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
 
-## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.8...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
 
-## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
-
-**Note:** Version bump only for package @mittwald/flow-stylesheet
-
-## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.3...1.1.0-next.0) (2026-08-27)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
 
