@@ -229,6 +229,7 @@ const renderContext = (
   selected: CatalogEntry[],
   range: RenderListInput["range"],
   color: boolean,
+  width: number,
 ): string => {
   if (range === undefined) {
     return "";
@@ -250,11 +251,18 @@ const renderContext = (
   }
 
   const paint = painter(color);
-  const legend = `${
-    color ? paint[actions.codemod.tone]("○") : "o"
-  }  catch-up: shipped at or before ${range.from} — you may already have done this. Re-running a codemod is a safe no-op; a manual step needs your own check.`;
+  const mark = color ? paint[actions.codemod.tone]("○") : "o";
+  // Wrapped like every other line: unwrapped it ran to 150 characters and broke
+  // hard in any terminal narrower than that.
+  const legendGutter = "   ";
+  const legend = wrap(
+    `catch-up: shipped at or before ${range.from} — you may already have done this. Re-running a codemod is a safe no-op; a manual step needs your own check.`,
+    Math.max(width - legendGutter.length, 20),
+  ).map((line, index) =>
+    index === 0 ? `${mark}  ${line}` : `${legendGutter}${line}`,
+  );
 
-  return [rangeText, legend].join("\n");
+  return [rangeText, ...legend].join("\n");
 };
 
 /**
@@ -343,7 +351,7 @@ export const renderList = ({
   // top out of sight well before the reader reaches the end — exactly when
   // they want the counts. `context` is "" for a bare `list`, so no blank line
   // gets left dangling above the first entry.
-  const context = renderContext(selected, range, color);
+  const context = renderContext(selected, range, color, width);
   const summary = renderSummary(selected, color);
 
   return `${context === "" ? "" : `${context}\n\n`}${body}\n\n${summary}\n`;
