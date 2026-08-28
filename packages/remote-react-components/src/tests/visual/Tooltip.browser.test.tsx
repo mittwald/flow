@@ -22,6 +22,11 @@ test.each(testEnvironments)(
     await button.hover();
     await sleep(800);
 
-    await testScreenshot("Tooltip - visible");
+    /*
+     * The pointer has to stay on the trigger. Parking it starts react-aria's
+     * 500ms `closeDelay`, and whether the tooltip is still painted when the
+     * capture happens is then a race — see `keepPointerPosition`.
+     */
+    await testScreenshot("Tooltip - visible", { keepPointerPosition: true });
   },
 );
