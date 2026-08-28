@@ -9,6 +9,7 @@ import {
 import React, { type FC, useEffect, useRef } from "react";
 import globalStyles from "../../../layout.module.scss";
 import type { Anchor } from "@/lib/mdx/MdxFile";
+import { topAnchorId } from "@/lib/mdx/MdxFile";
 import styles from "./AnchorNavigation.module.scss";
 import { useMdxStatus } from "@/lib/mdx/components/MdxFileView/MdxFileView";
 
@@ -73,6 +74,19 @@ export const AnchorNavigation: FC<Props> = (props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // While the page heading is still on screen, nothing below it has been
+        // reached. Without this the observation band — which sits 20–30% down
+        // the viewport — falls onto the first section on tall windows and marks
+        // it active while the reader is at the very top of the page.
+        const pageHeadingTop = document
+          .getElementById(topAnchorId)
+          ?.getBoundingClientRect().top;
+
+        if (pageHeadingTop !== undefined && pageHeadingTop >= 0) {
+          setActiveAnchor(topAnchorId);
+          return;
+        }
+
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
