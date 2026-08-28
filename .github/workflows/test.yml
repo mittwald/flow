@@ -57,7 +57,7 @@ jobs:
       - name: Check version consistency
         run: node .github/scripts/version-consistency-guard.mjs
 
-      - name: Run unit tests
+      - name: Run tests
         run: pnpm affected:test
 
       - name: Cache Playwright browsers

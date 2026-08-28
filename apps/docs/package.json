@@ -10,6 +10,7 @@
     "dev": "next dev",
     "postinstall": "fumadocs-mdx",
     "start": "pnpx serve@latest out",
+    "test:links": "tsx --test 'src/lib/**/*.test.ts'",
     "test:unit": "vitest run"
   },
   "dependencies": {
