@@ -103,8 +103,6 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/prepare-workspace
-        with:
-          playwright: "true"
 
       - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
 
@@ -112,9 +110,14 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      # `--parallel=1` throughout: the suites are unchanged, one browser at a
-      # time on the runner, exactly as they ran in the single job. What overlaps
-      # now are jobs, not suites inside a job.
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:browser
+
+      # `nx affected` is still the authority on what runs — it just no-ops in a
+      # second when nothing is. `--parallel=1` throughout: the suites are
+      # unchanged, one browser at a time on the runner, exactly as they ran in
+      # the single job. What overlaps now are jobs, not suites inside a job.
       - name: Run browser tests in Webkit
         run:
           pnpm nx affected --targets=test:browser --parallel=1
@@ -132,14 +135,16 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/prepare-workspace
-        with:
-          playwright: "true"
 
       - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
 
       - name: Prepare NX affected commands
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:e2e
 
       - name: Run e2e tests in Webkit
         run:
@@ -161,8 +166,6 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/prepare-workspace
-        with:
-          playwright: "true"
 
       - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
 
@@ -170,25 +173,19 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      # `nx affected` answers this for the other jobs. The shards call vitest
-      # directly (see below), so they have to ask before doing any work — a PR
-      # that touches neither the components nor the remote packages must not
-      # start four browsers.
-      - name: Check whether the visual suite is affected
-        id: affected
-        run: |
-          projects="$(pnpm nx show projects --affected --with-target=test:visual --json | tail -n 1)"
-          echo "affected projects: $projects"
-          if [ "$projects" = "[]" ]; then
-            echo "run=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=true" >> "$GITHUB_OUTPUT"
-          fi
+      # The other jobs leave the decision to `nx affected` and use this only to
+      # skip the browser install. The shards call vitest directly (see below), so
+      # here the answer gates the work itself — a PR that touches neither the
+      # components nor the remote packages must not start four browsers.
+      - uses: ./.github/actions/prepare-browser-tests
+        id: suite
+        with:
+          target: test:visual
 
       # `test:visual` only declares `^build`; building the package itself is a
       # superset of that, and one `nx run` is all the shards need to be ready.
       - name: Build the packages the visual suite renders
-        if: steps.affected.outputs.run == 'true'
+        if: steps.suite.outputs.run == 'true'
         run: pnpm nx run remote-react-components:build
 
       # Deliberately not `nx run …:test:visual`: the target is cached, and nx
@@ -199,7 +196,7 @@ jobs:
       # shard still runs its files one at a time, in one browser, against the
       # committed baselines. Same suite, four runners.
       - name: Run visual tests in Webkit (shard ${{ matrix.shard }})
-        if: steps.affected.outputs.run == 'true'
+        if: steps.suite.outputs.run == 'true'
         run:
           pnpm --filter @mittwald/flow-remote-react-components test:visual
           --shard=${{ matrix.shard }}/${{ strategy.job-total }}

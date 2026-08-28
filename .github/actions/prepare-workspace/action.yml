@@ -1,6 +1,6 @@
 name: Prepare workspace
 description:
-  Node, pnpm and the workspace dependencies, plus the two caches the test jobs
+  Node, pnpm and the workspace dependencies, plus the nx cache the test jobs
   share.
 
 inputs:
@@ -9,11 +9,6 @@ inputs:
       Restore nx's local task cache. Every job that builds workspace packages
       before it can test wants this; a job that only lints does not.
     default: "true"
-  playwright:
-    description:
-      Install the browser the test suites are driven in. WebKit only - Firefox
-      belongs to the visual workflows, which render both themes.
-    default: "false"
 
 runs:
   using: composite
@@ -44,21 +39,3 @@ runs:
         key: nx-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           nx-${{ runner.os }}-
-
-    # Keyed apart from the visual workflows' cache on purpose. They install
-    # Firefox as well, and under one shared key whichever workflow saved first
-    # would decide what the other one finds.
-    - name: Cache the Playwright browser
-      if: inputs.playwright == 'true'
-      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-      with:
-        path: ~/.cache/ms-playwright
-        key:
-          playwright-webkit-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-        restore-keys: |
-          playwright-webkit-${{ runner.os }}-
-
-    - name: Install the Playwright browser
-      if: inputs.playwright == 'true'
-      shell: bash
-      run: pnpm exec playwright install --with-deps webkit
