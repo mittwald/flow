@@ -17,8 +17,8 @@ Next.js documentation site for the flow Styleguide, deployed to
   order lives in `src/lib/content/contentOrder.ts` — a flat list of pathnames
   that the navigation, the header, `llms.txt` and the sitemap all sort by.
   Unlisted entries sort alphabetically by label (the components, deliberately).
-  `contentOrder.test.ts` rejects a stale entry and a group that lists only some
-  of its children; the latter is the silent half-ordered case.
+  `contentOrder.node.test.ts` rejects a stale entry and a group that lists only
+  some of its children; the latter is the silent half-ordered case.
 - The sections lost their `NN-` prefixes, so `nginx.conf` carries a `rewrite`
   that strips such a prefix from any segment and 301s. Old links keep working —
   do not write new ones against the old paths.
