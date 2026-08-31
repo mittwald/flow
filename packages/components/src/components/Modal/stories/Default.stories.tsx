@@ -303,7 +303,11 @@ export const LongContent: Story = {
 
           <Heading>Permissions</Heading>
           <Text>Select the permissions the SFTP user should have.</Text>
-          <RadioGroup s={[1, 1]} defaultValue="read&write">
+          <RadioGroup
+            s={[1, 1]}
+            defaultValue="read&write"
+            aria-label="Permissions"
+          >
             <RadioButton value="write">
               <Text>Read Access</Text>
               <Content>The SFTP user can view and download files.</Content>
