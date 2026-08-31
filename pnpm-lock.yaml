@@ -10,6 +10,7 @@ overrides:
   '@mittwald/flow-demo-remote-dom>typescript': npm:typescript@^7.0.2
 
 patchedDependencies:
+  '@mfalkenberg/react-live-ssr@4.1.7': 991aaa57899c8fdd0b7d8304a55bec822329fcc36d5d5178e370f4ea79117eb9
   '@mittwald/remote-dom-react@1.2.2-mittwald.10': 165efefefb651960d4019e048af092f536b859b6b5e55b610e85b2e14460d8c3
   '@quilted/threads@3.3.1': fa797cdfb8346ba050fd5d6367ccd451df47806c6ea34421e45e8cc760faf812
   '@sigstore/sign@4.1.1': 6ae6ce79a0d5087118f5c3569ba3256c50c873f0e5f829338045aa4983088864
@@ -151,7 +152,7 @@ importers:
         version: 3.12.3
       '@mfalkenberg/react-live-ssr':
         specifier: ^4.1.7
-        version: 4.1.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 4.1.7(patch_hash=991aaa57899c8fdd0b7d8304a55bec822329fcc36d5d5178e370f4ea79117eb9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@mittwald/flow-design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
@@ -12142,7 +12143,7 @@ snapshots:
       '@types/react': 19.2.18
       react: 19.2.8
 
-  '@mfalkenberg/react-live-ssr@4.1.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@mfalkenberg/react-live-ssr@4.1.7(patch_hash=991aaa57899c8fdd0b7d8304a55bec822329fcc36d5d5178e370f4ea79117eb9)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       prism-react-renderer: 2.4.1(react@19.2.8)
       react: 19.2.8
