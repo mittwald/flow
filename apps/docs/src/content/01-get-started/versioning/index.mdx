@@ -148,7 +148,7 @@ arbeite dich nach oben durch.
 ## Nutze die Codemod-CLI
 
 Ein Befehl hebt alle Flow-Abhängigkeiten auf die Zielversion, installiert und
-führt genau die Codemods aus, die der übersprungene Versionsbereich verlangt:
+führt den Codemod jeder Migration bis zu dieser Version aus:
 
 ```shell
 npx @mittwald/flow-codemods@latest upgrade
@@ -160,6 +160,10 @@ Major-Grenze, und eine exakte Version oder ein Dist-Tag (`next`) gehen genau
 dorthin.
 
 Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
+
+Der Befehl kennt keine untere Grenze: er listet auch Migrationen, die vor deiner
+aktuellen Version erschienen sind. Nichts hält fest, welche davon dein Projekt
+schon durchgeführt hat – und ein zweiter Durchlauf eines Codemods ändert nichts.
 
 Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge haben keinen
 Codemod. Welche das für deinen Bereich sind, listet der Befehl am Ende auf –

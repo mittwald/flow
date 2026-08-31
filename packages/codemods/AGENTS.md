@@ -130,8 +130,13 @@ by id like any other transform.
    so the test covers the consumer's path, not just the function).
    `src/tests/transformCoverage.test.ts` fails the build if this file is
    missing.
-4. If the migration also applies to the remote package: add its `targets` to
-   `src/tests/remoteScope.test.ts` and set `remotePackage: true`.
+4. Add the entry to `targets` in `src/tests/remoteScope.test.ts` — **every**
+   catalogue id has to be listed there, not just the remote-capable ones, or the
+   "every entry is listed" test fails. List the names the migration targets and
+   set `remotePackage: true` when they exist in the remote package; use `[]` and
+   add the id to `notNameScoped` when the entry is about the package layout
+   rather than names in it (as `imports-to-package-root` and
+   `renamed-css-export` are).
 5. `pnpm nx build codemods` and commit the regenerated
    `src/migrations.generated.ts` and `packages/components/MIGRATION.md`.
 

@@ -18,14 +18,16 @@ Entries are sorted by version, newest first. Find the version you are coming
 from and work your way up.
 
 Catching up across several versions? One command bumps every Flow dependency and
-runs exactly the codemods the range needs:
+runs the codemod of every migration up to the version it lands on:
 
 \`\`\`shell
 npx @mittwald/flow-codemods@latest upgrade
 \`\`\`
 
 It is not the whole migration. Most entries below have no codemod and have to be
-done by hand — the command prints those for your range when it is done.
+done by hand — the command prints those when it is done. It lists migrations
+older than your current version too: nothing records which ones you already
+performed, and re-running a codemod is a no-op.
 
 It refuses to run on a dirty working tree (\`--allow-dirty\` overrides that) and
 rewrites files in place, so review the diff afterwards.

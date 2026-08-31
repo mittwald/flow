@@ -66,8 +66,8 @@ ones apply.
   change as one instruction instead of leaving an agent to find and read the
   right guide section.
 - `upgrade` gives consumers a single command that installs the right version and
-  runs exactly the codemods that range requires — no more picking a transform
-  URL by hand and hoping it matches their version.
+  runs the codemods for it — no more picking a transform URL by hand and hoping
+  it matches their version.
 
 **Negative / accepted cost**
 

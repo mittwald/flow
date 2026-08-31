@@ -13,7 +13,7 @@ npx @mittwald/flow-codemods@latest upgrade
 ### `upgrade [revision]`
 
 Bumps every `@mittwald/flow-*` dependency in `package.json` to a resolved
-target, installs, then runs the codemods the crossed version range calls for.
+target, installs, then runs the codemod of every migration up to that target.
 
 `revision` is one of:
 
@@ -27,8 +27,14 @@ The target is resolved from the versions every declared Flow dependency has
 actually published — not just one of them — so the command never writes a
 version some dependency lacks.
 
-After installing, `upgrade` runs every codemod the crossed range calls for and
-prints the migrations that have no codemod, for you to apply by hand.
+After installing, `upgrade` runs the codemod of every migration whose `since` is
+at or below the target and prints the ones with no codemod, for you to apply by
+hand.
+
+**There is deliberately no lower bound.** Nothing records which migrations a
+project already performed, so `upgrade` offers all of them rather than guessing
+from the version you happen to be on — a project that never ran the command can
+catch up. Re-running a codemod is safe: every transform is tested for it.
 
 Options:
 
@@ -41,8 +47,10 @@ Options:
 - `--allow-dirty` — run even though the working tree has uncommitted changes.
   Codemods rewrite files in place; without this flag, `upgrade` refuses on a
   dirty tree so a bad run is still `git checkout`-able.
-- `--path <dir>` — sources to run the codemods against. Defaults to the project
-  root.
+- `--path <dir>` — sources to run the codemods against. Defaults to `./src` when
+  that directory exists, otherwise the project root. Give it explicitly if your
+  sources live somewhere else — an unrelated `src/` next to them would otherwise
+  win.
 - `--print` — print each codemod's transformed output.
 
 ### `list [revision]`
@@ -65,8 +73,8 @@ Options:
 
 ### `<id> [path]`
 
-Runs a single codemod by its catalogue id (see `list`) against `path` (default:
-the project root).
+Runs a single codemod by its catalogue id (see `list`) against `path` — which
+defaults to `./src` when that directory exists, otherwise the project root.
 
 Options: `--dry`, `--print` — same meaning as under `upgrade`.
 
@@ -84,6 +92,7 @@ npx @mittwald/flow-codemods@latest to-remote-package src
 
 ## Exit codes
 
-`0` on success, `1` on a refusal (dirty tree, unresolvable revision, a failed
-install) or when a codemod reports an error, is declined for every file it
-looked at, or found nothing under `path` to process.
+`0` on success, `1` on a refusal — dirty tree, unresolvable revision, failed
+install, an unknown id, or an id whose migration has no codemod — and `1` when a
+codemod reports an error, is declined for every file it looked at, or found
+nothing under `path` to process.
