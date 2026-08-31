@@ -2,3 +2,9 @@ apps/docs/out/
 packages/design-tokens/dist/
 packages/stylesheet/dist/
 packages/components/dist/
+
+# Istanbul coverage reports (`packages/*/coverage/`) ship their own CSS assets
+# (base.css, prettify.css). They are gitignored, but stylelint does not read
+# .gitignore — so after a coverage run the pre-push hook (`pnpm lint`) failed on
+# generated third-party CSS.
+coverage/
