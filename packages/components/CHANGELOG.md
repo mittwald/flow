@@ -3,144 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.1.0-next.11](https://github.com/mittwald/flow/compare/1.0.15...1.1.0-next.11) (2026-08-31)
+## [1.0.16](https://github.com/mittwald/flow/compare/1.0.15...1.0.16) (2026-08-31)
 
-## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+### Performance Improvements
 
-### Bug Fixes
+* **components:** stop shipping design-token build metadata to the browser ([#3007](https://github.com/mittwald/flow/issues/3007)) ([7d3afde](https://github.com/mittwald/flow/commit/7d3afde851c5f51f4a641e36dd549500e6fd759b))
 
-* **codemods:** stop imports-to-package-root corrupting current code ([36cbd48](https://github.com/mittwald/flow/commit/36cbd48c4d2a90823a0ec96dcd7be98afa57806a))
-
-## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
-
-## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.14...1.1.0-next.8) (2026-08-31)
-
-## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
-
-## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
-
-### Bug Fixes
-
-* **codemods:** rewrite value positions, catalogue the password-tools subpath ([b062557](https://github.com/mittwald/flow/commit/b0625575b77f7465b773653a67a676aab73da8ed))
-
-## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
-
-### Features
-
-* **codemods:** adopt the transform suite and test harness from [#2942](https://github.com/mittwald/flow/issues/2942) ([b4bf976](https://github.com/mittwald/flow/commit/b4bf97620c642fb53fbdb1dcd4831385fd8bd520))
-* **codemods:** generate MIGRATION.md from the catalogue ([75fb720](https://github.com/mittwald/flow/commit/75fb720cc601060232e88933eb956ba31b87cf90))
-
-### Bug Fixes
-
-* **codemods:** correct the since version of the package-root import migration ([b648460](https://github.com/mittwald/flow/commit/b6484601718dce84dc0794a8629edfdf5f091ccd))
-* **codemods:** make the catalogue&#x27;s detect, apply and verify fields true ([b03fee1](https://github.com/mittwald/flow/commit/b03fee1e9ba6204945e885ef7e2f25b0ac37e598))
-
-### Reverts
-
-* **codemods:** take the detect and verify commands back out ([a58ac2b](https://github.com/mittwald/flow/commit/a58ac2bf27625f9934fd1c6323ae869c30f728b4))
-
-## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
-
-## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
-
-## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
-
-## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
-
-## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
-
-### Features
-
-* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
-* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
-
-## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+## [1.0.15](https://github.com/mittwald/flow/compare/1.0.14...1.0.15) (2026-08-31)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
+## [1.0.14](https://github.com/mittwald/flow/compare/1.0.13...1.0.14) (2026-08-31)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.13...1.1.0-next.8) (2026-08-31)
-
-## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
-
-## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
-
-## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
-
-## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
-
-## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
-
-## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
-
-## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
-
-## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
-
-### Features
-
-* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
-* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
-
-## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+## [1.0.13](https://github.com/mittwald/flow/compare/1.0.12...1.0.13) (2026-08-31)
 
 ### Bug Fixes
 
 * **Modal:** keep the heading text next to its icon ([#2998](https://github.com/mittwald/flow/issues/2998)) ([9ff2cae](https://github.com/mittwald/flow/commit/9ff2caef49f67f334b8e6329a32f34f573ac1a7f))
 
-## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+## [1.0.12](https://github.com/mittwald/flow/compare/1.0.11...1.0.12) (2026-08-31)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.11...1.1.0-next.5) (2026-08-31)
-
-## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
-
-## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
-
-## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
-
-## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
-
-## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
-
-### Features
-
-* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
-* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
-
-## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
-
-## [1.0.10](https://github.com/mittwald/flow/compare/1.1.0-next.2...1.0.10) (2026-08-28)
+## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.1.0-next.2...1.1.0-next.3) (2026-08-28)
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
 
-## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.8...1.1.0-next.1) (2026-08-28)
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
 
-## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+### Bug Fixes
 
-### Features
+* **FileField:** open the file dialog inside a link row ([#2965](https://github.com/mittwald/flow/issues/2965)) ([b77a14c](https://github.com/mittwald/flow/commit/b77a14cb860b7a3df49e8d9a346d3228c338bd56))
 
-* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
-* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
 
-## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.3...1.1.0-next.0) (2026-08-27)
+### Bug Fixes
 
-### Features
+* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
 
-* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
-* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** hide deprecated values from the properties table ([#2960](https://github.com/mittwald/flow/issues/2960)) ([eaa0349](https://github.com/mittwald/flow/commit/eaa03497fda2fd0aded933776f464eeed0c9aef3))
 
 ## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
 
