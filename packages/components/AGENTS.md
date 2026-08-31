@@ -125,6 +125,12 @@ return (
   components break remote rendering.
 - When parent context must not leak into a component's children, use targeted
   clearing, e.g. `wrapWith: <ClearPropsContext />` (see `Modal.tsx`).
+- **A context that tunnels `Button` must tunnel overlay triggers as a whole** —
+  spread `overlayTriggersTunneledTo(tunnel)` (`@/lib/propsContext`). An overlay
+  trigger's button is the react-aria trigger: `OverlayTrigger` pins it with
+  `tunnel: null`, because the press handling, the trigger ref and
+  `aria-haspopup`/`aria-expanded`/`aria-controls` travel through a
+  `PressResponder` that only reaches its own subtree.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).

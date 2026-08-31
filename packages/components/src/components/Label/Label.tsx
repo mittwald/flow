@@ -3,7 +3,11 @@ import React from "react";
 import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  overlayTriggersTunneledTo,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -46,28 +50,26 @@ export const Label = flowComponent("Label", (props) => {
     </span>
   );
 
+  const rightTunnel = {
+    id: "right",
+    component: "Label",
+  } as const;
+
   const propsContext: PropsContext = {
+    ...overlayTriggersTunneledTo(rightTunnel),
+    // The contextual help sits next to the label text, not with the actions.
     ContextualHelpTrigger: {
       tunnel: {
         id: "contextualHelp",
         component: "Label",
       },
-      Button: {
-        tunnel: null,
-      },
     },
     Button: {
-      tunnel: {
-        id: "right",
-        component: "Label",
-      },
+      tunnel: rightTunnel,
       size: "s",
     },
     Action: {
-      tunnel: {
-        id: "right",
-        component: "Label",
-      },
+      tunnel: rightTunnel,
       Button: {
         tunnel: null,
       },

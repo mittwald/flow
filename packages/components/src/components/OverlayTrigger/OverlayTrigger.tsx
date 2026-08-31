@@ -47,6 +47,15 @@ export const OverlayTrigger: FC<Props> = (props) => {
       onPress: overlayController.open,
       isPending,
       isDisabled: Boolean(buttonPropsContext?.isDisabled) || isContentSuspended,
+      /*
+       * The button is the react-aria trigger. react-aria hands the press
+       * handling, the trigger ref and `aria-haspopup`/`aria-expanded`/
+       * `aria-controls` down through a `PressResponder`, which only reaches its
+       * own subtree — so a surrounding props context must not tunnel the button
+       * out of the trigger. Such a context has to tunnel the trigger as a whole
+       * instead (`overlayTriggersTunneledTo`).
+       */
+      tunnel: null,
     },
   };
 
