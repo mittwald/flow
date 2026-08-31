@@ -89,6 +89,7 @@ const main = async (): Promise<number> => {
       const choose = createChoose({
         yes: parsed.yes,
         isTTY: process.stdin.isTTY === true,
+        isCI: process.env.CI !== undefined,
         onCancel: (message) => process.stdout.write(`${message}\n`),
         prompt: (entries) =>
           checkbox({

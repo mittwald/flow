@@ -19,6 +19,7 @@ const noPrompt = async (): Promise<string[]> => {
 describe("createChoose", () => {
   test("-y bypasses the prompt and passes everything through", async () => {
     const choose = createChoose({
+      isCI: false,
       yes: true,
       isTTY: true,
       prompt: noPrompt,
@@ -31,6 +32,7 @@ describe("createChoose", () => {
 
   test("a non-TTY bypasses the prompt and passes everything through", async () => {
     const choose = createChoose({
+      isCI: false,
       onCancel: () => undefined,
       yes: false,
       isTTY: false,
@@ -43,6 +45,7 @@ describe("createChoose", () => {
 
   test("an empty list short-circuits without prompting", async () => {
     const choose = createChoose({
+      isCI: false,
       onCancel: () => undefined,
       yes: false,
       isTTY: true,
@@ -53,32 +56,19 @@ describe("createChoose", () => {
   });
 
   test("an interactive TTY prompts and filters down to the chosen ids", async () => {
-    // `CI` participates in the interactive gate (a `docker run -t` allocates a
-    // TTY with nobody watching it), so this test — the one case that actually
-    // wants the prompt shown — has to force the variable unset regardless of
-    // what the outer environment (this test run itself may be CI) set it to.
-    const originalCI = process.env.CI;
-    delete process.env.CI;
-    try {
-      const entries = [entry("a"), entry("b"), entry("c")];
-      const choose = createChoose({
-        onCancel: () => undefined,
-        yes: false,
-        isTTY: true,
-        prompt: async (offered) => {
-          expect(offered).toEqual(entries);
-          return ["b"];
-        },
-      });
+    const entries = [entry("a"), entry("b"), entry("c")];
+    const choose = createChoose({
+      isCI: false,
+      onCancel: () => undefined,
+      yes: false,
+      isTTY: true,
+      prompt: async (offered) => {
+        expect(offered).toEqual(entries);
+        return ["b"];
+      },
+    });
 
-      await expect(choose(entries)).resolves.toEqual([entry("b")]);
-    } finally {
-      if (originalCI === undefined) {
-        delete process.env.CI;
-      } else {
-        process.env.CI = originalCI;
-      }
-    }
+    await expect(choose(entries)).resolves.toEqual([entry("b")]);
   });
 });
 
@@ -91,6 +81,7 @@ describe("a cancelled prompt", () => {
   test("runs no codemods and says the bump already happened", async () => {
     const messages: string[] = [];
     const choose = createChoose({
+      isCI: false,
       yes: false,
       isTTY: true,
       prompt: () => Promise.reject(new Error("SIGINT")),
@@ -100,5 +91,31 @@ describe("a cancelled prompt", () => {
     await expect(choose([entry("a"), entry("b")])).resolves.toEqual([]);
     expect(messages).toHaveLength(1);
     expect(messages[0]).toContain("already happened");
+  });
+});
+
+/**
+ * This used to come from a `process.env.CI` read inside `createChoose`, which
+ * made the module behave differently on a runner than in any test — the reason
+ * the cancel case above passed locally and failed in CI. Now it is an input,
+ * and the behaviour it produces has its own case.
+ */
+describe("an unattended runner", () => {
+  test("never prompts, even with a TTY", async () => {
+    let prompted = false;
+    const choose = createChoose({
+      yes: false,
+      isTTY: true,
+      isCI: true,
+      prompt: () => {
+        prompted = true;
+        return Promise.resolve([]);
+      },
+      onCancel: () => undefined,
+    });
+
+    const offered = [entry("a"), entry("b")];
+    await expect(choose(offered)).resolves.toEqual(offered);
+    expect(prompted).toBe(false);
   });
 });
