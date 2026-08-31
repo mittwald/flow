@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { CalendarDate } from "@internationalized/date";
@@ -60,6 +61,15 @@ test.each(testEnvironments)(
     await testScreenshot("DateRangePicker - start date selected");
 
     await userEvent.keyboard("{enter}");
+
+    /*
+     * The second Enter completes the range, which closes the calendar and lets
+     * react-aria restore the focus to the field. The capture below shows that
+     * focused field, so wait for the restore instead of racing it — see
+     * `@/tests/lib/scenarioFocus`.
+     */
+    await waitForFocusInTheScenario();
+
     await testScreenshot("DateRangePicker - range selected");
   },
 );
