@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.14](https://github.com/mittwald/flow/compare/1.0.13...1.0.14) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.0.13](https://github.com/mittwald/flow/compare/1.0.12...1.0.13) (2026-08-31)
+
+### Bug Fixes
+
+* **Modal:** keep the heading text next to its icon ([#2998](https://github.com/mittwald/flow/issues/2998)) ([9ff2cae](https://github.com/mittwald/flow/commit/9ff2caef49f67f334b8e6329a32f34f573ac1a7f))
+
+## [1.0.12](https://github.com/mittwald/flow/compare/1.0.11...1.0.12) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** docs- and CI-only merges no longer publish through package.json or the lockfile ([#2984](https://github.com/mittwald/flow/issues/2984)) ([09bda96](https://github.com/mittwald/flow/commit/09bda96261d4a6be6bd525cc98573276355655ce))
+* **docs:** stop the footer from overflowing on narrow screens ([#2993](https://github.com/mittwald/flow/issues/2993)) ([3e3b9c1](https://github.com/mittwald/flow/commit/3e3b9c18b8bfebca61fc8cc3f495fdb85db94405))
+
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** version-contract guard no longer reads a first publish as a tightening ([#2983](https://github.com/mittwald/flow/issues/2983)) ([cc7b2ba](https://github.com/mittwald/flow/commit/cc7b2ba1ab5cc7ca61ae07519fee554a9f2264fb))
+* **Form:** stop a Modal&#x27;s form submit from reaching the surrounding Form ([#2976](https://github.com/mittwald/flow/issues/2976)) ([ee9b60a](https://github.com/mittwald/flow/commit/ee9b60a24c5bdde69034a3a4fc9964f51a29c14a))
+
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+### Bug Fixes
+
+* **FileField:** open the file dialog inside a link row ([#2965](https://github.com/mittwald/flow/issues/2965)) ([b77a14c](https://github.com/mittwald/flow/commit/b77a14cb860b7a3df49e8d9a346d3228c338bd56))
+
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+### Bug Fixes
+
+* **ci:** merge driver no longer reverts release version bumps ([#2958](https://github.com/mittwald/flow/issues/2958)) ([5624853](https://github.com/mittwald/flow/commit/562485398af9f32a3332bb8c341b8ce029240e0c))
+* **Table:** will not render in remote ([#2966](https://github.com/mittwald/flow/issues/2966)) ([22929f4](https://github.com/mittwald/flow/commit/22929f4df80ac864921dd889c46af411ef582517))
+
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** hide deprecated values from the properties table ([#2960](https://github.com/mittwald/flow/issues/2960)) ([eaa0349](https://github.com/mittwald/flow/commit/eaa03497fda2fd0aded933776f464eeed0c9aef3))
+
+## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
+
+### Bug Fixes
+
+* **docs:** show full prop types in the properties table ([#2961](https://github.com/mittwald/flow/issues/2961)) ([2c42ad5](https://github.com/mittwald/flow/commit/2c42ad539c00b7dcbfdff044c3a128ef5bf38f8c))
+
+## [1.0.4](https://github.com/mittwald/flow/compare/1.0.3...1.0.4) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+### Bug Fixes
+
+* **ci:** enable automatic review environments for other target branches too ([#2953](https://github.com/mittwald/flow/issues/2953)) ([6102d2e](https://github.com/mittwald/flow/commit/6102d2e71a1087cf23256da1addf131895e5f02b))
+* **CodeBlock:** balance the padding and unify the editor line colors ([#2945](https://github.com/mittwald/flow/issues/2945)) ([6bf57c7](https://github.com/mittwald/flow/commit/6bf57c7c50e4c05ba504df74f4941aa7fdd95809))
+
+### Reverts
+
+* **docs:** remove 1.0.0 release reveal easter egg ([#2955](https://github.com/mittwald/flow/issues/2955)) ([419e17f](https://github.com/mittwald/flow/commit/419e17f9de28e149bb9788ad9e1b5f1a241fb695))
+
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+### Bug Fixes
+
+* **Remote:** serialization allows duplicate object references ([#2947](https://github.com/mittwald/flow/issues/2947)) ([ac3ef26](https://github.com/mittwald/flow/commit/ac3ef26cc8b0c0dcc5d84b6181a5fbbccc8863ba))
+
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+### Features
+
+* **docs:** add 1.0.0 release reveal easter egg ([b346fec](https://github.com/mittwald/flow/commit/b346fec6c9bc5996558620428487791730d91dc6))
+
+### Bug Fixes
+
+* **Breadcrumb:** fix cursor pointer for spans with role link ([#2943](https://github.com/mittwald/flow/issues/2943)) ([d44d61c](https://github.com/mittwald/flow/commit/d44d61cb83f4ebcb95fee10480e2db8c3d55471a))
+* **ci:** build after the version bump so bundles carry the published version ([#2944](https://github.com/mittwald/flow/issues/2944)) ([c24c5ef](https://github.com/mittwald/flow/commit/c24c5ef73d38d42341d865d5066e19a8c9c8a0f6))
+
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+### Features
+
+* **SegmentedControl:** deprecate in favor of Tabs and RadioGroup ([#2903](https://github.com/mittwald/flow/issues/2903)) ([3f65b46](https://github.com/mittwald/flow/commit/3f65b46c638be332bebb686cdd3e151cd0b63939))
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+### Features
+
+* **ci:** add auto publish emergency stop ([#2928](https://github.com/mittwald/flow/issues/2928)) ([c93cce6](https://github.com/mittwald/flow/commit/c93cce65ed47900879cc69cfb5633276dbfa37cf))
+
 ## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -2,6 +2,7 @@ patchedDependencies:
   "@quilted/threads@3.3.1": "patches/@quilted__threads@3.3.1.patch"
   "acorn": "patches/acorn.patch"
   "@sigstore/sign@4.1.1": "patches/@sigstore__sign@4.1.1.patch"
+  "@mittwald/remote-dom-react@1.2.2-mittwald.10": "patches/@mittwald__remote-dom-react@1.2.2-mittwald.10.patch"
 
 overrides:
   "typescript": "npm:@typescript/typescript6@^6.0.2"

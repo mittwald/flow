@@ -7,6 +7,12 @@ on:
       - labeled
 
 env:
+  # simple-git-hooks' postinstall runs on every `pnpm install` and writes
+  # .git/hooks from package.json, so `pre-push` = `pnpm lint` would run on the
+  # push below — a full repo lint to ship a screenshot commit, and a formatting
+  # drift anywhere on the branch would fail this job after it already committed
+  # (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
   AUTHOR_NAME: "github-actions[bot]"
   AUTHOR_EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"
   COMMIT_MESSAGE: |
@@ -87,7 +93,7 @@ jobs:
       - run: pnpm test:browser:prepare --only-shell
 
       - name: Update Visual Regression Screenshots
-        run: pnpm test:visual --update --browser.fileParallelism=false
+        run: pnpm test:visual --update
       # check what changed
       - name: Check for changes
         id: check_changes

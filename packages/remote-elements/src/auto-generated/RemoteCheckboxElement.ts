@@ -35,7 +35,6 @@ export class RemoteCheckboxElement extends FlowRemoteElement<RemoteCheckboxEleme
       isSelected: {},
       lang: {},
       name: {},
-      render: {},
       slot: {},
       translate: {},
       validate: {},

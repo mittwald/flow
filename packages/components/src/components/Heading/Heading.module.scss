@@ -2,6 +2,7 @@
   color: var(--heading--color);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
+  text-wrap-style: pretty;
 
   --heading-line-height: calc(var(--font-size) * var(--line-height));
 

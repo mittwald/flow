@@ -50,7 +50,6 @@ export class RemoteMarkdownEditorElement extends FlowRemoteElement<RemoteMarkdow
       name: {},
       pattern: {},
       placeholder: {},
-      render: {},
       rows: {},
       showCharacterCount: {},
       slot: {},

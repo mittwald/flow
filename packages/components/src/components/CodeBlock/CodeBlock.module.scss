@@ -47,7 +47,11 @@
     }
   }
 
+  /* A code block is not an input – both axes use its own padding. */
   &.codeBlock div:global(.flow--code-editor--code-mirror) {
+    --form-control--padding-y: var(--code-block--padding);
+    --form-control--padding-x: var(--code-block--padding);
+
     border-color: var(--code-block--border-color);
   }
 

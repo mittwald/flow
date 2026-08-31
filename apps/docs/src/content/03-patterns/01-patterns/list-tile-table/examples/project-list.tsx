@@ -85,7 +85,7 @@ export default () => {
             )}
           </ProjectList.Item>
           <ActionGroup>
-            <Button color="success">
+            <Button>
               <Text>Anlegen</Text>
             </Button>
           </ActionGroup>

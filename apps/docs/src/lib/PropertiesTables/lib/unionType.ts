@@ -1,5 +1,5 @@
 /** `Iterable<A | B> | null` yields two members, not three. */
-const splitUnion = (type: string): string[] => {
+export const splitUnion = (type: string): string[] => {
   const parts: string[] = [];
   let depth = 0;
   let current = "";
@@ -30,7 +30,7 @@ const splitUnion = (type: string): string[] => {
 
 const stringLiteralPattern = /^["'](.*)["']$/;
 
-const unquote = (member: string): string =>
+export const unquote = (member: string): string =>
   member.replace(stringLiteralPattern, "$1");
 
 export interface FormattedType {

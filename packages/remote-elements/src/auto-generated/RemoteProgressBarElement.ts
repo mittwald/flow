@@ -25,7 +25,6 @@ export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBa
       lang: {},
       maxValue: {},
       minValue: {},
-      render: {},
       segments: {},
       showLegend: {},
       showMaxValue: {},

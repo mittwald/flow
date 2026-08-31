@@ -14,10 +14,11 @@ export interface MdxFileMeta {
   component?: string;
   gitHubComponentPath?: string;
   /**
-   * German deprecation copy for the status callout. The `@deprecated` tag in
-   * the component's source stays English — it ships in the type declarations
-   * and shows up in every consumer's IDE. Omit this and the callout falls back
-   * to a generic German sentence.
+   * German deprecation copy for the status callout, rendered as Markdown — link
+   * the successor component inline. The `@deprecated` tag in the component's
+   * source stays English: it ships in the type declarations and shows up in
+   * every consumer's IDE. Omit this and the callout falls back to a generic
+   * German sentence.
    */
   deprecationNotice?: string;
 }
@@ -68,12 +69,16 @@ export class MdxFile {
     );
   }
 
-  public getGitHubUrl(): string {
-    const component = this.mdxSource.frontmatter.component;
+  public getGitHubUrl(): string | undefined {
+    const { component, gitHubComponentPath } = this.mdxSource.frontmatter;
 
     const gitHubPath =
-      this.mdxSource.frontmatter.gitHubComponentPath ??
-      `components/${component}`;
+      gitHubComponentPath ??
+      (component ? `components/${component}` : undefined);
+
+    if (!gitHubPath) {
+      return undefined;
+    }
 
     return `https://github.com/mittwald/flow/tree/main/packages/components/src/${gitHubPath}`;
   }

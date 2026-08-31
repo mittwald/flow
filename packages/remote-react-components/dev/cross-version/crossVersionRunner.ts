@@ -107,6 +107,54 @@ const readManifest = (logPrefix: string): Manifest => {
   }
 };
 
+/**
+ * The file shard this process runs, as vitest's `<index>/<count>`, or undefined
+ * for the whole suite. A version's corpus is the same 84 files the visual suite
+ * has, so CI splits it the same way — see `FLOW_CROSS_VERSION_TARGETS` for the
+ * other axis.
+ */
+const shard = process.env.FLOW_CROSS_VERSION_SHARD;
+
+/**
+ * The targets this process was asked for: a comma-separated list of categories
+ * (`previous`) or versions (`1.0.10`) in `FLOW_CROSS_VERSION_TARGETS`, or all
+ * of the manifest's when unset.
+ *
+ * A request naming something the manifest does not hold throws. One matrix job
+ * per target means a target that silently vanished — a publish gap, a changed
+ * category in the alpha fallback — would otherwise report a pass over nothing.
+ */
+export const selectRequestedTargets = (
+  targets: ManifestTarget[],
+  request = process.env.FLOW_CROSS_VERSION_TARGETS,
+): ManifestTarget[] => {
+  const requested = (request ?? "")
+    .split(",")
+    .map((name) => name.trim())
+    .filter((name) => name.length > 0);
+
+  if (requested.length === 0) {
+    return targets;
+  }
+
+  const selected = requested.map((name) => {
+    const target = targets.find(
+      (candidate) => candidate.category === name || candidate.version === name,
+    );
+    if (target === undefined) {
+      const available = targets
+        .map(({ category, version }) => `${category}=${version}`)
+        .join(", ");
+      throw new Error(
+        `cross-version: the manifest holds no target "${name}" (has: ${available}).`,
+      );
+    }
+    return target;
+  });
+
+  return [...new Map(selected.map((t) => [t.version, t])).values()];
+};
+
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
 
@@ -159,6 +207,12 @@ const runSuite = (
     "--reporter=default",
     "--reporter=json",
     `--outputFile=${jsonPath}`,
+    /*
+     * Before `--update`, which takes an optional value and would swallow what
+     * follows it. The reference pass shards with the comparison run on purpose:
+     * a shard may only compare the files it also generated references for.
+     */
+    ...(shard === undefined ? [] : [`--shard=${shard}`]),
     ...(update ? ["--update"] : []),
   ];
 
@@ -313,7 +367,7 @@ const withGitHubGroup = <T>(name: string, run: () => T): T => {
 export const runCrossVersion = (options: RunCrossVersionOptions): void => {
   const { labels, reference } = options;
   const { logPrefix } = labels;
-  const { targets } = readManifest(logPrefix);
+  const targets = selectRequestedTargets(readManifest(logPrefix).targets);
 
   if (targets.length === 0) {
     console.error(

@@ -1,6 +1,6 @@
 # ADR 0004 – Forward-merge `main` into `next`
 
-- **Status:** Accepted (§4 and §5 amended 2026-08-06)
+- **Status:** Accepted (§4 and §5 amended 2026-08-06, §3 amended 2026-08-26)
 - **Date:** 2026-07-27 (accepted 2026-07-29)
 - **Deciders:** Flow team (m.falkenberg@mittwald.de)
 - **Affects:** `.github/workflows/` (a new `forward-merge.yml` and a symmetric
@@ -28,6 +28,36 @@
 > corrected in place below; the reasoning and the measurements are recorded on
 > #2769.
 
+> **Amendment 2026-08-26 (the `package.json` driver runs everywhere).** §3
+> specified the JSON driver as "keep `next`'s `version`", which reads the
+> cascade as the only direction it ever sees. It is not: `pnpm install`
+> registers the driver in every developer's git config, so it also runs on the
+> far more common `main` merged INTO a branch off `main` — where "ours" is the
+> fork point, and preferring it **silently reverted the release bump** on
+> whichever manifest the branch had touched. Silently, because the driver only
+> runs when both sides changed the file, it emits no conflict markers, and the
+> package's `CHANGELOG.md` merges cleanly and keeps the new entry — so the
+> manifest and the changelog disagree with nothing to show for it. Reproduced
+> twice on #2942. §3 now picks the **higher semver** instead, which is correct
+> in both directions and unchanged for the cascade, and a version-consistency
+> guard backs it up. Corrected in place below.
+
+> **Amendment 2026-08-27 (npm Trusted Publisher).** The **symmetric second
+> workflow file is gone.** `publish-next.yml` is merged into `publish.yml`,
+> which now serves both lines and derives the line from the run's ref. The
+> mechanism below is unchanged — same trigger, same version derivation, same
+> dist-tag, same shared `mutate-next` group; only its host file is. Reason:
+> npm's Trusted Publisher binds one workflow **filename** per package and allows
+> exactly one publisher per package. Every Flow package names `publish.yml`, so
+> every publish from `publish-next.yml` was an unauthorized identity — npm
+> answered the PUT with `E404 Not found`, for every package, on every attempt.
+> Registering the second file is not possible, and moving the job body into a
+> reusable workflow does not help either, because npm validates the _calling_
+> workflow's name. The `next` line consequently never published a single
+> package; nothing had to be repaired, because the release commit is pushed only
+> after npm accepts (§6). Read `publish-next.yml` below as "the `next` half of
+> `publish.yml`".
+
 ## Context
 
 The 1.0.0 model runs two standing lines: `main` (Stable, dist-tag `latest`,
@@ -48,7 +78,7 @@ or break the model:
    merge conflicts on every release, which would spawn a maintainer-facing PR
    for every single patch — killing the "unattended" promise.
 3. **Concurrent writers.** Once `next` is published continuously, two workflows
-   push to it (`forward-merge.yml` and `publish-next.yml`); `main` similarly has
+   push to it (`forward-merge.yml` and `publish.yml`); `main` similarly has
    `publish.yml` and Promotion merges. Un-serialized, they race on
    non-fast-forward pushes.
 4. **The Promotion loop.** After a Promotion (`next → main`), the changes must
@@ -125,15 +155,41 @@ mechanical noise, not a real conflict, and is resolved automatically via
 > graduated entry on merge, and the prerelease entries drop out of the record,
 > which is correct — they were never published under `latest`.
 
-- **`**/package.json`** → a **JSON-aware merge driver** (a small Node script)
-  that, on conflict, keeps the `version`field from`next`while merging all other
-  changes (e.g. genuine dependency bumps from`main`) with the normal 3-way
-  result. A blanket `merge=ours`on`package.json`is rejected — it would silently
-  drop legitimate dependency changes from`main`.
+- **`**/package.json`** (and `lerna.json`, which carries the same field) → a
+  **JSON-aware merge driver** (a small Node script) that resolves the `version`
+  field to the **higher semver of the two sides** and merges everything else
+  (e.g. genuine dependency bumps from `main`) with the normal 3-way result. A
+  blanket `merge=ours` on `package.json` is rejected — it would silently drop
+  those legitimate dependency changes.
+
+  The driver originally kept `next`'s version, reading the cascade as its only
+  caller. It is not: `pnpm install` registers it in every developer's git config
+  (see Consequences), so it runs on every merge that touches a manifest —
+  overwhelmingly `main` merged INTO a branch off `main`, where "ours" is the
+  fork point and preferring it reverts the release bump. **A version only ever
+  moves forward on any line**, so the higher side is the right answer in every
+  direction:
+
+  | Merge               | Higher side                     | Resolves to |
+  | ------------------- | ------------------------------- | ----------- |
+  | `main` → `next`     | `X.(Y+1).0-next.N` > `X.Y.Z`    | ours        |
+  | `next` → major line | the major line's own prerelease | ours        |
+  | `main` → feature    | `main`'s release bump           | theirs      |
+  | `main` → next-based | the `next` line                 | ours        |
+
+  For the cascade this is not a behaviour change: `next` is always the higher
+  side, so it still wins and §6/§7's empty-forward-merge property holds. Note
+  that git consults a driver **only when both sides changed the file** — when
+  one side is unchanged it resolves the file without asking anyone.
 
 Only a conflict where **both sides touch the same logic line** escalates to a
-sync PR (§4). The exact version string produced by the merge is irrelevant — it
-is re-derived by `publish-next.yml` (§6).
+sync PR (§4). The exact version string produced by the merge is irrelevant on
+the release lines — it is re-derived by `publish.yml` (§6). It is _not_
+irrelevant anywhere else, which is why the driver had to become direction-
+agnostic, and why `test.yml` runs a **version-consistency guard** on every PR:
+under fixed versioning every Lerna-managed package must carry `lerna.json`'s
+version, and a manifest left behind by a merge is otherwise invisible until the
+wrong version reaches npm.
 
 ### 4. Conflict handling: the sync PR
 
@@ -220,14 +276,14 @@ clean path (its pushes _are_ merge commits, so the invariant holds). The bypass
 must **not** waive the merge-method restriction for real PRs — only the
 direct-push block.
 
-### 6. Interaction with `publish-next.yml` (the re-publish)
+### 6. Interaction with `publish.yml` (the re-publish)
 
 A forward-merged fix **produces a new `next` prerelease** so that `flow@next` ⊇
 `flow@latest` on npm, not merely in git. This falls out for free:
 
 - The forward-merge stays **version-free** — it merges and pushes, nothing more.
-- The push to `next` triggers a **symmetric `publish-next.yml`** (`push: next`,
-  analogous to `publish.yml`) that runs
+- The push to `next` triggers **`publish.yml` on its `next` line**
+  (`push: next`, symmetric to the `main` line in the same file) that runs
   `lerna version --conventional-prerelease` → `X.Y.0-next.N+1` → publishes
   dist-tag `next`. This re-derives the version, so the string the merge driver
   (§3) produced is irrelevant.
@@ -327,6 +383,12 @@ convention — only with different branch names. It is not designed separately.
 - A custom JSON-aware merge driver is a small piece of bespoke tooling to
   maintain and to install in CI checkouts (it must be registered in the runner's
   git config, not only in `.gitattributes`).
+- **Registering it locally makes it a repo-wide merge rule, not a cascade-only
+  one.** `pnpm install` runs `init-merge-drivers.cjs`, because the sync
+  resolution (§4) only works with the drivers active. The price is that the
+  driver then runs on every merge every developer performs, so it has to be
+  correct in every direction — not just in the cascade it was designed for (see
+  the 2026-08-26 amendment). Treat any future driver the same way.
 - Branch protection with an automation bypass actor is a standing configuration
   that must be kept correct (bypass for direct pushes only, never for the
   merge-method restriction).
@@ -338,7 +400,8 @@ convention — only with different branch names. It is not designed separately.
 - `forward-merge.yml`, the `.gitattributes` merge drivers + the JSON merge
   driver script (`.github/scripts/merge-package-json.cjs`), and the shared
   per-target-branch `concurrency` groups; `publish.yml` moved to `mutate-main`.
-- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`).
+- The symmetric `publish-next.yml` (`push: next` → dist-tag `next`) — merged
+  into `publish.yml` on 2026-08-27, see the amendment above.
 
 **Still pending** — gated on the 1.0.0 cut (`next` established, repo off the
 `0.2.0-alpha.*` line):

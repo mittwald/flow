@@ -16,11 +16,32 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
 - Richest test surface outside `components`: unit, browser, e2e and visual
   tests. **Visual tests must pass in both environments — `Local` and `Remote`**
   (see `CONTRIBUTE.md` and `src/tests/lib/environments.tsx`).
+- **`Remote` goes through the real serializer.** It routes every mutation
+  through `FlowThreadSerialization` over a MessageChannel
+  (`src/tests/lib/serializedConnection.ts`), matching what production does, so
+  each visual scenario guards the transport as well as the rendering. It used to
+  hand `<RemoteRoot />` the receiver's live connection — props arrived as the
+  very objects the test created, and a serializer that dropped half of them
+  still passed the whole suite, which is how #2894 shipped green. Two
+  consequences: **a value handed to a remote component must survive
+  `postMessage`'s structured clone**, so an element-valued prop has to be a slot
+  rather than a remote property (see `isSlot` in the components generator); and
+  a scenario failing only in `Remote` with a blank container is usually the
+  transport, not the tree.
 - **New or changed rendered behavior always gets a visual test here** — add a
   new `src/tests/visual/<Name>.browser.test.tsx` or extend the existing one so
   the new prop/variant/layout is captured. Because every scenario runs in both
   `Local` and `Remote`, this single test guards the component and its remote
   path at once.
+- **The screenshot preamble does not wait for the focus.** It settles on DOM
+  mutations, and `:focus` / `:focus-within` are pseudo-classes — so a scenario
+  whose step closes an overlay (react-aria restores the focus to the trigger
+  asynchronously) or whose reference encodes a focus ring has to synchronize on
+  the focus itself, with `waitForFocusInTheScenario()` /
+  `waitForFocusOutsideTheScenario()` from `src/tests/lib/scenarioFocus.ts`.
+  Skipping it costs a ~1% diff in whichever environment lost the race — a random
+  per-run failure, not a reproducible one, because both environments share one
+  reference. See `CONTRIBUTE.md` → _Waiting for the focus_.
 - **The browser also selects the theme:** webkit renders light, firefox renders
   dark (`dev/vitest/setupVisualTheme.ts`), so one run covers both themes and the
   `*-firefox-*.png` baselines are dark by design. A run filtered with

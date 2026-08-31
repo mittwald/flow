@@ -45,6 +45,12 @@ const DEFAULT_SECTIONS = [
       "Alles für den Einstieg in flow – von den wichtigsten Grundlagen bis zu ersten Schritten für einen schnellen Start.",
   },
   {
+    segment: "releases",
+    title: "Releases",
+    description:
+      "Die veröffentlichten Flow-Releases mit Highlights, Migrationshinweisen und den enthaltenen Fixes.",
+  },
+  {
     segment: "02-foundations",
     title: "Foundations",
     description:
@@ -111,8 +117,10 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
       return [];
     }
     return DEFAULT_SECTIONS.flatMap((section) => {
-      const inSection = index.filter((entry) =>
-        entry.url.startsWith(`/${section.segment}/`),
+      const inSection = index.filter(
+        (entry) =>
+          entry.url === `/${section.segment}` ||
+          entry.url.startsWith(`/${section.segment}/`),
       );
       const landing =
         inSection.find((entry) => entry.url.endsWith("/overview")) ??

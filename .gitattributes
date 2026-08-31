@@ -16,11 +16,28 @@
 
 # `next` keeps its own CHANGELOG.md; lerna regenerates its entries from the
 # merged commits, and per-package changelogs are only the machine record.
+#
+# CAUTION: `ours` is a blunt "keep our whole file", and like the driver below it
+# runs on every local merge, in every direction. It only fires when BOTH sides
+# changed the file — nobody hand-edits a generated changelog, so on an ordinary
+# branch it never does. The one place it fires in the wrong direction is the
+# promotion (`next → main`), where keeping `next`'s file would overwrite the
+# stable release history `publish.yml` builds GitHub Release bodies from;
+# `/prepare-release` restores `main`'s changelogs after its merge for exactly
+# that reason (ADR 0004 §3).
 **/CHANGELOG.md merge=ours
 
-# `package.json`: keep the higher line's `version` field but merge every other
-# change (e.g. genuine dependency bumps) with a normal 3-way merge. A blanket
-# `merge=ours` is rejected — it would silently drop those. See the driver.
+# `package.json`: resolve the `version` field to the HIGHER of the two sides and
+# merge every other change (e.g. genuine dependency bumps) with a normal 3-way
+# merge. A blanket `merge=ours` is rejected — it would silently drop those.
+#
+# "Higher wins" rather than "ours wins" because this driver, unlike the one
+# above, is registered in every developer's git config and therefore runs on
+# EVERY merge that touches a manifest — most of them `main` merged INTO a branch
+# off it, not the cascade. There "ours" is the fork point, so preferring it
+# silently reverted release bumps. The version only ever moves forward on any
+# line, so the higher side is the right answer in both directions; for the
+# cascade nothing changes, `next` is always the higher one. See the driver.
 **/package.json merge=package-json
 
 # `lerna.json` carries the SAME top-level `version` field and diverges between

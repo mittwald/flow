@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.1056",
+  "version": "1.0.14",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -34,7 +34,7 @@
     "clean": "rimraf dist",
     "test:browser": "vitest run --project=browser --browser.headless --passWithNoTests",
     "test:browser:dev": "vitest dev --project=browser",
-    "test:compile": "tsc --noEmit",
+    "test:compile": "tsc --noEmit && tsc --noEmit -p tsconfig.vite.json",
     "test:cross-version": "tsx dev/cross-version/run.ts",
     "test:cross-version:dev": "vitest dev --config=e2e/cross-version/vitest.config.ts",
     "test:cross-version:prepare": "tsx dev/cross-version/prepare.ts",
@@ -43,11 +43,11 @@
     "test:e2e": "vitest run --config=e2e/remote-test-server/vitest.config.ts --browser.headless",
     "test:e2e:dev": "vitest dev --config=e2e/remote-test-server/vitest.config.ts",
     "test:e2e:prepare": "pnpm rimraf e2e/remote-test-server/.vitest",
-    "test:unit": "vitest run --project=unit --passWithNoTests",
-    "test:unit:dev": "vitest dev --project=unit --passWithNoTests",
+    "test:unit": "vitest run --project=unit* --passWithNoTests",
+    "test:unit:dev": "vitest dev --project=unit* --passWithNoTests",
     "test:visual": "vitest run --project=visual --browser.headless",
     "test:visual:dev": "vitest dev --project=visual",
-    "test:visual:update": "vitest run --project=visual --browser.headless --update --browser.fileParallelism=false"
+    "test:visual:update": "vitest run --project=visual --browser.headless --update"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",
@@ -63,6 +63,7 @@
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
+    "@quilted/threads": "^3.3.1",
     "@types/node": "^25.9.3",
     "@types/react-dom": "^19.2",
     "@types/semver": "^7.8.0",

@@ -10,8 +10,8 @@ import type {
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
-import slugify from "slugify";
 import { absoluteUrl, pagePath, rawMarkdownPath } from "@/lib/llms/siteUrls";
+import { extractAnchors } from "@/lib/mdx/anchors";
 
 export class MdxFileFactory {
   public static async fromDir(
@@ -110,34 +110,7 @@ export class MdxFileFactory {
       throw new Error(`Could not read file: ${filename}`);
     }
 
-    let currentH1: string;
-
-    return fileContent
-      .split("\n")
-      .filter((line) => line.startsWith("# ") || line.startsWith("## "))
-      .map((line) => {
-        if (line.startsWith("# ")) {
-          const text = line.substring(2).trim().replaceAll(".", "");
-          currentH1 = text;
-
-          return {
-            slug: slugify(text, { lower: true, strict: true }),
-            text,
-            level: 2,
-          };
-        }
-
-        const h2Text = line.substring(3).trim();
-
-        return {
-          slug: slugify(currentH1 ? `${currentH1}-${h2Text}` : h2Text, {
-            lower: true,
-            strict: true,
-          }),
-          text: h2Text,
-          level: 3,
-        };
-      });
+    return extractAnchors(fileContent);
   }
 
   private static async getMdxSource(

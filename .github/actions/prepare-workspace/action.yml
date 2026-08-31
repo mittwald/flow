@@ -1,0 +1,41 @@
+name: Prepare workspace
+description:
+  Node, pnpm and the workspace dependencies, plus the nx cache the test jobs
+  share.
+
+inputs:
+  nx-cache:
+    description:
+      Restore nx's local task cache. Every job that builds workspace packages
+      before it can test wants this; a job that only lints does not.
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+    - name: Setup Node.js
+      uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      with:
+        node-version: 24
+        cache: pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
+    # Restore only. Every job below builds the same workspace packages through
+    # `^build` before it can test, and a hit turns those ~40s into unpacking.
+    # Only `main` writes the cache (see test.yml): a cache created on a PR branch
+    # is visible to that branch alone, while the default branch's is visible to
+    # every PR.
+    - name: Restore the nx cache
+      if: inputs.nx-cache == 'true'
+      uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: .nx/cache
+        key: nx-${{ runner.os }}-${{ github.sha }}
+        restore-keys: |
+          nx-${{ runner.os }}-

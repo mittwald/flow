@@ -21,8 +21,6 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       dir: {},
       form: {},
       hidden: {},
-      iconEmpty: {},
-      iconFilled: {},
       id: {},
       inert: {},
       isDisabled: {},
@@ -32,7 +30,6 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
       lang: {},
       name: {},
       orientation: {},
-      render: {},
       size: {},
       slot: {},
       translate: {},
@@ -116,7 +113,7 @@ export class RemoteRatingElement extends FlowRemoteElement<RemoteRatingElementPr
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["iconEmpty", "iconFilled"];
   }
 }
 
