@@ -89,16 +89,27 @@ const namedExports = (file: string, seen = new Set<string>()): string[] => {
  *
  * What is not in there: prop types other than the universal ones, error
  * classes, and six of the main package's nine entries.
+ *
+ * Read on demand rather than at import time, and deliberately so:
+ * `auto-generated/index.ts` is generated, `components:build` deletes the whole
+ * directory and writes `index.ts` back only after generating every component
+ * file, and nx can run this package's `test:unit` concurrently with that build.
+ * Reading at import time put that ENOENT window in front of every test file
+ * that imports this module; on demand it can only reach the tests that actually
+ * need the surface.
  */
-export const remoteExports = new Set([
-  ...[
-    ...repoFile(`${remoteSrc}/auto-generated/index.ts`).matchAll(
-      /^export \* from "\.\/(\w+)";$/gm,
-    ),
-  ].map((match) => match[1] as string),
-  ...namedExports(`${remoteSrc}/components/index.ts`),
-  ...namedExports(`${remoteSrc}/integrations/react-hook-form/index.ts`),
-]);
+let cachedRemoteExports: Set<string> | undefined;
+
+export const remoteExports = (): Set<string> =>
+  (cachedRemoteExports ??= new Set([
+    ...[
+      ...repoFile(`${remoteSrc}/auto-generated/index.ts`).matchAll(
+        /^export \* from "\.\/(\w+)";$/gm,
+      ),
+    ].map((match) => match[1] as string),
+    ...namedExports(`${remoteSrc}/components/index.ts`),
+    ...namedExports(`${remoteSrc}/integrations/react-hook-form/index.ts`),
+  ]));
 
 /** Every module specifier a consumer may import, per workspace package. */
 export const packageEntries = new Set(

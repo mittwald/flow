@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
+import { readFileSync } from "node:fs";
 import { runTransform } from "../../tests/runTransform";
-import { packageEntries } from "../../tests/remoteScope";
 
 const transform = "password-tools-subpath-renamed";
 
@@ -57,16 +57,26 @@ import { Already } from "@mittwald/flow-react-components/mittwald-password-tools
 /**
  * This migration exists because a subpath stopped existing, so the path the
  * transform writes has to be one the package really exports — and the path it
- * rewrites away from must not be. `packageEntries` is built from every
- * package's `exports` map, so this fails the moment either side drifts again.
+ * rewrites away from must not be. Read straight from the components manifest,
+ * not through `tests/remoteScope`: that module reads a _generated_ file at
+ * import time, and `components:build` — which nx may run concurrently with this
+ * package's tests — deletes and rewrites it. `package.json` is committed and no
+ * generator touches it.
  */
 describe("the rewritten path is one a consumer can import", () => {
+  const subpaths = Object.keys(
+    (
+      JSON.parse(
+        readFileSync(
+          new URL("../../../../components/package.json", import.meta.url),
+          "utf8",
+        ),
+      ) as { exports: Record<string, unknown> }
+    ).exports,
+  );
+
   test("the new path exists and the old one does not", () => {
-    expect(packageEntries).toContain(
-      "@mittwald/flow-react-components/mittwald-password-tools-js",
-    );
-    expect(packageEntries).not.toContain(
-      "@mittwald/flow-react-components/password-tools",
-    );
+    expect(subpaths).toContain("./mittwald-password-tools-js");
+    expect(subpaths).not.toContain("./password-tools");
   });
 });

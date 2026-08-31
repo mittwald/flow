@@ -100,7 +100,7 @@ describe("a catalogue entry claims the remote package only where it applies", ()
   test.for(catalogIds.filter((id) => !notNameScoped.has(id)))("%s", (id) => {
     const remotePackage = remotePackageById.get(id);
     const reachable = (targets[id] ?? []).some((target) =>
-      remoteExports.has(target),
+      remoteExports().has(target),
     );
 
     expect({ id, remotePackage }).toEqual({ id, remotePackage: reachable });
