@@ -54,9 +54,20 @@ jobs:
                   type: "mrkdwn"
                   text: "Visual tests failed. For more details, see the [output of the failed action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
 
-  cross-version:
+  # The cross-version job used to be one runner spending ~24 minutes, 19 of them
+  # in the in-process harness: it renders the whole 84-file visual corpus once
+  # for the current reference and once per installed old version, in a loop. The
+  # versions are independent, so they no longer wait for each other — and each
+  # version's corpus is split the way the visual suite is.
+  #
+  # `resolve` exists because the target versions are resolved from the registry
+  # at run time (`selectTargetVersions.ts`): a matrix hard-coding them would
+  # silently stop covering a version the alpha fallback renamed.
+  cross-version-resolve:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
+    outputs:
+      targets: ${{ steps.manifest.outputs.targets }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
@@ -64,65 +75,177 @@ jobs:
 
       - uses: ./.github/actions/prepare-workspace
 
-      - name: Cache Playwright browsers
+      # Published tarballs never change and `prepare` skips a version it already
+      # finds, so this both saves the install and keeps the jobs below off the
+      # registry. Written here, restored there.
+      - name: Cache the installed old versions
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          path: packages/remote-react-components/node_modules/.cross-version
+          key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}
           restore-keys: |
-            playwright-${{ runner.os }}-
+            cross-version-${{ runner.os }}-
 
-      - name: Prepare browser tests
-        run: pnpm test:browser:prepare --only-shell
-
-      - name: Build host packages and install old published versions
-        # `test:cross-version:prepare` declares `^build` as an nx dependency, so
-        # this single `pnpm nx run` builds the host packages the harnesses consume
-        # from dist (@mittwald/flow-react-components incl. /internal, and
-        # @mittwald/flow-remote-react-renderer — nx-cached) and then runs prepare,
-        # which resolves + npm-installs the target old versions (network) and
-        # writes cross-version.manifest.json. No separate build step needed.
-        # The two suites below stay separate direct-script steps on purpose: each
-        # exposes its own `failures` output for the Slack alert, and the in-process
-        # suite runs even if the iframe one fails. Running a suite via `nx run`
-        # would re-trigger this non-cached network prepare on every step.
+      - name: Build the host packages and install the old published versions
         run: pnpm nx run remote-react-components:test:cross-version:prepare
 
+      - name: Read the resolved targets
+        id: manifest
+        run: |
+          manifest=packages/remote-react-components/cross-version.manifest.json
+          targets="$(jq -c '[.targets[].category]' "$manifest")"
+          echo "resolved: $targets"
+          if [ "$targets" = "[]" ]; then
+            echo "::error::The manifest resolved no target versions, so nothing would be compared. See the prepare output above."
+            exit 1
+          fi
+          echo "targets=$targets" >> "$GITHUB_OUTPUT"
+
+  # Every version, one job: the whole harness is ~74s, so there is nothing to
+  # split. Its per-version retry stays in the runner.
+  cross-version-iframe:
+    needs: cross-version-resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: ./.github/actions/prepare-cross-version
+
+      # Renders each installed old remote version through the current host over
+      # the real iframe connection and compares its host HTML to an ephemeral
+      # reference rendered from the current version. WebKit-only. The
+      # @quilted/threads handshake intermittently wedges a whole version's run
+      # under CI load ("Could not establish remote connection: Timeout reached")
+      # — a transient infra flake, not a diff, which only a fresh server pair
+      # recovers, so the runner retries each version in-process
+      # (`attemptsPerVersion`). A real HTML divergence still fails on every
+      # attempt.
       - name: Run cross-version smoke tests
         id: crossversion
-        # Renders each installed old remote version through the current host over
-        # the real iframe connection and compares its host HTML to an ephemeral
-        # reference rendered from the current version. WebKit-only. The
-        # @quilted/threads handshake intermittently wedges a whole version's run
-        # under CI load ("Could not establish remote connection: Timeout reached")
-        # — a transient infra flake, not a diff, and only a fresh server pair
-        # recovers it. The runner now retries EACH version in-process with fresh
-        # servers (`attemptsPerVersion`), so a single flaky version no longer reds
-        # the run. That replaces the old "re-run the entire step 3x" loop, which
-        # never converged (a different version flaked each attempt) and tripled
-        # the runtime. A real HTML divergence still fails on every attempt. Runs
-        # the package script directly (not `nx run`) so it doesn't re-trigger the
-        # non-cached network prepare above; the `failures` output feeds the Slack
-        # alert.
         run:
-          corepack pnpm --filter @mittwald/flow-remote-react-components
+          pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version
 
+      - name: Keep the failures for the alert
+        if: failure() && steps.crossversion.outputs.failures != ''
+        env:
+          FAILURES: ${{ steps.crossversion.outputs.failures }}
+        run: |
+          mkdir -p failures
+          printf '%s\n' "$FAILURES" > failures/iframe.txt
+
+      - name: Upload the failures
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: cross-version-failures-iframe
+          path: failures/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # One job per version and file shard. Each regenerates the current reference
+  # for its own shard — the reference is per file, so a shard may only compare
+  # what it also generated.
+  cross-version-inprocess:
+    needs: cross-version-resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      # One failing version says nothing about the others, and the run is meant
+      # to report all of them at once.
+      fail-fast: false
+      matrix:
+        target: ${{ fromJSON(needs.cross-version-resolve.outputs.targets) }}
+        # Keep in step with CROSS_VERSION_SHARDS below — a two-dimensional
+        # matrix has no `strategy.job-total` that means "shards".
+        shard: [1, 2, 3]
+    env:
+      CROSS_VERSION_SHARDS: 3
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: ./.github/actions/prepare-cross-version
+
+      # Reuses the broad visual-test corpus in-process. WebKit-only. Unlike the
+      # iframe suite it has no real connection to time out; its config already
+      # sets vitest `retry: 2` to absorb the occasional per-test webkit flake, so
+      # no step-level retry is needed here.
       - name: Run in-process cross-version tests
-        id: crossversion_inprocess
-        if:
-          always() && (steps.crossversion.outcome == 'success' ||
-          steps.crossversion.outcome == 'failure')
-        # Reuses the broad visual-test corpus in-process. WebKit-only. Unlike the
-        # iframe suite it has no real connection to time out; its config already
-        # sets vitest `retry: 2` to absorb the occasional per-test webkit flake,
-        # so no step-level retry is needed here.
+        id: crossversion
+        env:
+          FLOW_CROSS_VERSION_TARGETS: ${{ matrix.target }}
+          FLOW_CROSS_VERSION_SHARD:
+            ${{ matrix.shard }}/${{ env.CROSS_VERSION_SHARDS }}
         run:
-          corepack pnpm --filter @mittwald/flow-remote-react-components
+          pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version-inprocess
 
-      - name: Send alerting message to Slack
+      - name: Keep the failures for the alert
+        if: failure() && steps.crossversion.outputs.failures != ''
+        env:
+          FAILURES: ${{ steps.crossversion.outputs.failures }}
+        run: |
+          mkdir -p failures
+          printf '%s\n' "$FAILURES" \
+            > "failures/inprocess-${{ matrix.target }}-${{ matrix.shard }}.txt"
+
+      - name: Upload the failures
         if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name:
+            cross-version-failures-inprocess-${{ matrix.target }}-${{
+            matrix.shard }}
+          path: failures/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # The shards cannot each alert, and matrix jobs have no shared output — so the
+  # failing ones leave their lists behind as artifacts and this collects them
+  # into the one message the channel used to get.
+  cross-version-alert:
+    needs:
+      - cross-version-resolve
+      - cross-version-iframe
+      - cross-version-inprocess
+    if: failure()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Collect the failures
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          pattern: cross-version-failures-*
+          path: failures
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: Compose the report
+        id: report
+        run: |
+          read_section() {
+            # shellcheck disable=SC2086
+            cat $1 2>/dev/null || true
+          }
+          {
+            echo "iframe<<CROSSVER_IFRAME_EOF"
+            read_section "failures/iframe.txt"
+            echo "CROSSVER_IFRAME_EOF"
+            echo "inprocess<<CROSSVER_INPROCESS_EOF"
+            read_section "failures/inprocess-*.txt"
+            echo "CROSSVER_INPROCESS_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send alerting message to Slack
         uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -142,14 +265,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(format('*Iframe harness*{0}{1}', '\n', steps.crossversion.outputs.failures || 'No failures reported.')) }}
+                    "text": ${{ toJSON(format('*Iframe harness*{0}{1}', '\n', steps.report.outputs.iframe || 'No failures reported.')) }}
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(format('*In-process harness*{0}{1}', '\n', steps.crossversion_inprocess.outputs.failures || 'No failures reported.')) }}
+                    "text": ${{ toJSON(format('*In-process harness*{0}{1}', '\n', steps.report.outputs.inprocess || 'No failures reported.')) }}
                   }
                 },
                 {

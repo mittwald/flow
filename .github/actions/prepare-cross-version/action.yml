@@ -1,0 +1,41 @@
+name: Prepare cross-version tests
+description:
+  The browser both cross-version harnesses render in, and the old published
+  versions they render.
+
+runs:
+  using: composite
+  steps:
+    # Both harnesses are WebKit-only, so this is the same cache the PR suites
+    # fill — not the two-browser one the visual workflows keep.
+    - name: Cache the Playwright browser
+      uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: ~/.cache/ms-playwright
+        key:
+          playwright-webkit-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          playwright-webkit-${{ runner.os }}-
+
+    - name: Install the Playwright browser
+      shell: bash
+      run: pnpm exec playwright install --with-deps webkit
+
+    # Restore only: `cross-version-resolve` writes this cache, and every job
+    # below reads what it left. A published tarball never changes and `prepare`
+    # skips a version it already finds, so a partial hit installs the rest and a
+    # stale one costs nothing.
+    - name: Restore the installed old versions
+      uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+      with:
+        path: packages/remote-react-components/node_modules/.cross-version
+        key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}
+        restore-keys: |
+          cross-version-${{ runner.os }}-
+
+    # Builds the host packages the harnesses consume from dist (nx-cached) and
+    # writes `cross-version.manifest.json`. Uncached on purpose: it resolves the
+    # target versions against the registry.
+    - name: Build the host packages and install the old published versions
+      shell: bash
+      run: pnpm nx run remote-react-components:test:cross-version:prepare
