@@ -29,7 +29,7 @@ export default () => {
           Avatar verwendet werden.
         </Text>
 
-        <NotificationList.List>
+        <NotificationList.List aria-label="Benachrichtigungen">
           <NotificationList.StaticData
             data={[
               {
@@ -64,7 +64,7 @@ export default () => {
           werden, der Status Avatar kann daher nicht
           verwendet werden.
         </Text>
-        <EmailList.List>
+        <EmailList.List aria-label="E-Mail-Adressen">
           <EmailList.StaticData
             data={[
               {
