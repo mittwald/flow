@@ -1,0 +1,5 @@
+# The context holds one thing: what `build:storybook` produced, plus the server
+# config next to it. `src` and `node_modules` have no business in the image.
+*
+!storybook-static
+!nginx.conf
