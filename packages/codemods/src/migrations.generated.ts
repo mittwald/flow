@@ -7,6 +7,17 @@ import type { MigrationEntry } from "./catalog/types.js";
 /** Every migration, newest first. Bodies live in `src/migrations`. */
 export const migrations: Omit<MigrationEntry, "body">[] = [
   {
+    id: "use-design-tokens-build-metadata-removed",
+    since: "1.0.16",
+    title:
+      "useDesignTokens(): no longer returns style-dictionary build metadata",
+    kind: "migration",
+    action: "manual",
+    remotePackage: false,
+    apply:
+      "Only affects code reading `filePath`, `isSource`, `original`, `name`, `attributes` or `key` off a token returned by `useDesignTokens()`. Those fields are gone; read them from `@mittwald/flow-design-tokens/json/all-light.json` (or `all-dark.json`) instead, and never from browser code. `value` and `path` are unchanged — code using only those needs no change.",
+  },
+  {
     id: "segmented-control-deprecated",
     since: "0.2.0-alpha.1056",
     title: "SegmentedControl deprecated",

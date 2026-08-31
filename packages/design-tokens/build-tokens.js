@@ -20,6 +20,34 @@ StyleDictionary.registerTransform({
   },
 });
 
+/*
+ * The `json` format's build metadata (`filePath`, `isSource`, `original`, …)
+ * dwarfs the values and means nothing in a browser, so runtime consumers
+ * (`useDesignTokens`) import this tree instead: same shape, only `value` and
+ * `path`.
+ */
+StyleDictionary.registerFormat({
+  name: "json/flow-runtime",
+  format: ({ dictionary }) => {
+    const tree = {};
+
+    for (const token of dictionary.allTokens) {
+      const groups = token.path.slice(0, -1);
+      const name = token.path.at(-1);
+      let node = tree;
+
+      for (const group of groups) {
+        node[group] ??= {};
+        node = node[group];
+      }
+
+      node[name] = { value: token.value, path: token.path };
+    }
+
+    return `${JSON.stringify(tree, null, 2)}\n`;
+  },
+});
+
 StyleDictionary.registerFormat({
   name: "css/variables-layered",
   format: async ({ dictionary, options = {}, file }) => {
@@ -128,6 +156,11 @@ const buildConfig = ({
         {
           format: "json",
           destination: `json/${destination}.json`,
+          filter: filter,
+        },
+        {
+          format: "json/flow-runtime",
+          destination: `json-runtime/${destination}.json`,
           filter: filter,
         },
       ],
