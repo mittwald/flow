@@ -21,6 +21,7 @@ import { Action } from "@/components/Action";
 import { ActionGroup } from "@/components/ActionGroup";
 import { IconSignature } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
+import { Color } from "@/components/Color";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -113,18 +114,7 @@ const DemoMentionMarkdownPreview = ({
       components={{
         a: ({ children, href }) => {
           if (href?.includes("mention:")) {
-            return (
-              <strong
-                style={{
-                  color: "var(--color--primary)",
-                  background: "var(--color--primary-subtle)",
-                  borderRadius: "var(--border-radius-pill)",
-                  padding: "0 var(--space-1)",
-                }}
-              >
-                @{children}
-              </strong>
-            );
+            return <Color color="teal">@{children}</Color>;
           }
 
           return <a href={href}>{children}</a>;
