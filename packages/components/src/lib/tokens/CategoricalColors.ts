@@ -1,4 +1,4 @@
-import tokens from "@mittwald/flow-design-tokens/json/all-light.json";
+import tokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
 
 export const categoricalColors = Object.keys(
   tokens.color.categorical,

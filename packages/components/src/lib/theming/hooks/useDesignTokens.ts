@@ -1,5 +1,5 @@
-import lightTokens from "@mittwald/flow-design-tokens/json/all-light.json";
-import darkTokens from "@mittwald/flow-design-tokens/json/all-dark.json";
+import lightTokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
+import darkTokens from "@mittwald/flow-design-tokens/json-runtime/all-dark.json";
 import { useResolvedTheme } from "./useResolvedTheme";
 
 export const useDesignTokens = () => {

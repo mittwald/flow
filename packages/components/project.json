@@ -4,6 +4,7 @@
   "namedInputs": {
     "components-src": [
       "default",
+      "!{projectRoot}/MIGRATION.md",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",
@@ -19,6 +20,7 @@
     "build": {
       "cache": true,
       "dependsOn": [
+        "build:component-index",
         "build:icons",
         "build:remote-components",
         "build:scss-types",
@@ -26,6 +28,23 @@
         "^build"
       ],
       "inputs": ["components-src"]
+    },
+    "build:component-index": {
+      "cache": true,
+      "dependsOn": ["build:docs-properties", "build:status-registry"],
+      "inputs": [
+        "{projectRoot}/dev/component-index/**/*",
+        "!{projectRoot}/dev/component-index/**/*.test.ts",
+        "{projectRoot}/dev/status-registry/exportEntries.ts",
+        "{projectRoot}/dev/status-registry/buildStatusRegistry.ts",
+        "{projectRoot}/dev/status-registry/parseFlrUniversalComponentNames.ts",
+        "{projectRoot}/dev/remote-components-generator/config.ts",
+        "{projectRoot}/dev/remote-components-generator/lib/docTags.ts",
+        "{projectRoot}/src/index/flr-universal.ts",
+        "{projectRoot}/package.json",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false }
+      ],
+      "outputs": ["{projectRoot}/dist/assets/component-index.json"]
     },
     "build:docs-properties": {
       "dependsOn": ["^build"],

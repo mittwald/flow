@@ -100,6 +100,7 @@ export * from "./RemoteRadioButtonElement";
 export * from "./RemoteRadioGroupElement";
 export * from "./RemoteRangeCalendarElement";
 export * from "./RemoteRatingElement";
+export * from "./RemoteRatingSegmentElement";
 export * from "./RemoteSearchFieldElement";
 export * from "./RemoteSectionElement";
 export * from "./RemoteSegmentElement";
