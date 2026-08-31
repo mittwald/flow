@@ -15,7 +15,7 @@ import { fetchVersions } from "../resolve/registry.js";
 import { readInstalledVersion, resolveRange } from "../resolve/range.js";
 import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
 import type { ParsedCommand } from "./args.js";
-import { resolveSourcePath } from "./codemod.js";
+import { displaySourcePath, resolveSourcePath } from "./codemod.js";
 import { renderList } from "./list.js";
 
 export interface UpgradeDeps {
@@ -270,6 +270,9 @@ export const runUpgrade = async (
         entries: byHand,
         range: { from: current, to: target },
         json: false,
+        // The same path this run used, so a command copied out of the by-hand
+        // block works instead of falling back to a hardcoded `src`.
+        path: displaySourcePath(parsed.path, cwd),
         frame: false,
       }),
     );

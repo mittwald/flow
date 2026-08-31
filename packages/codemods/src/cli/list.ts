@@ -23,6 +23,15 @@ export interface RenderListInput {
   /** Terminal width to wrap prose to. */
   width?: number;
   /**
+   * The path argument to print in each codemod entry's runnable command.
+   *
+   * Defaults to `src` — the same default `resolveSourcePath` applies — but a
+   * caller that knows better must say so, or the printed command sends the
+   * reader at a directory their project does not have. See
+   * `displaySourcePath`.
+   */
+  path?: string;
+  /**
    * Render the frame around the entries: the context on top (the range, the
    * catch-up legend) and the summary at the bottom (the counts). On by default.
    * `upgrade` turns it off for its by-hand section: it already printed its own
@@ -175,6 +184,7 @@ const renderEntry = (
   width: number,
   color: boolean,
   catchUp: boolean,
+  path: string,
 ): string => {
   const paint = painter(color);
   const action = actions[entry.action];
@@ -203,7 +213,7 @@ const renderEntry = (
     lines.push(
       "",
       `${indent}${paint.dim("$")} ${paint.code(
-        `npx @mittwald/flow-codemods@latest ${entry.id} src`,
+        `npx @mittwald/flow-codemods@latest ${entry.id} ${path}`,
       )}`,
     );
   }
@@ -313,6 +323,7 @@ export const renderList = ({
   json,
   color = false,
   width = 80,
+  path = "src",
   frame = true,
 }: RenderListInput): string => {
   // The two paths differ in their bounds, deliberately: unbounded, this is a
@@ -355,7 +366,7 @@ export const renderList = ({
 
   const body = selected
     .map((entry) =>
-      renderEntry(entry, width, color, isCatchUp(entry, range?.from)),
+      renderEntry(entry, width, color, isCatchUp(entry, range?.from), path),
     )
     .join("\n\n");
 
@@ -382,6 +393,8 @@ export interface ListDeps extends RangeDeps {
   write: (text: string) => void;
   color?: boolean;
   width?: number;
+  /** Printed in each codemod entry's command — see `RenderListInput.path`. */
+  path?: string;
 }
 
 export const defaultListDeps = (cwd: string): ListDeps => ({
@@ -416,6 +429,7 @@ export const runList = async (
         json: parsed.json,
         color: deps.color,
         width: deps.width,
+        path: deps.path,
       }),
     );
     return 0;
@@ -434,6 +448,7 @@ export const runList = async (
       json: parsed.json,
       color: deps.color,
       width: deps.width,
+      path: deps.path,
     }),
   );
   return 0;

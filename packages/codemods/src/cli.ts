@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { parseArguments } from "./cli/args.js";
 import { createChoose } from "./cli/choose.js";
-import { runSingleCodemod } from "./cli/codemod.js";
+import { displaySourcePath, runSingleCodemod } from "./cli/codemod.js";
 import { defaultListDeps, runList } from "./cli/list.js";
 import { defaultUpgradeDeps, runUpgrade } from "./cli/upgrade.js";
 
@@ -71,6 +71,11 @@ const main = async (): Promise<number> => {
         // (or none at all), and beyond ~100 columns long prose gets harder to
         // read rather than easier.
         width: Math.min(Math.max(process.stdout.columns ?? 80, 60), 100),
+        // The per-entry command `list` prints has to name the path this project
+        // actually uses; hardcoding `src` handed readers a command that fails on
+        // any other layout. `--path` wins, otherwise the same `src`-or-cwd
+        // choice a real run would make.
+        path: displaySourcePath(parsed.path, process.cwd()),
       });
     case "codemod":
       return await runSingleCodemod(parsed, {

@@ -29,6 +29,32 @@ export const resolveSourcePath = (
   return exists(join(cwd, "src")) ? join(cwd, "src") : cwd;
 };
 
+/**
+ * The same choice as `resolveSourcePath`, in the form a reader would type.
+ *
+ * `list` prints a runnable command per codemod entry, and it used to hardcode
+ * `src` there. On a project whose sources are anywhere else, pasting that line
+ * runs the codemod against a directory that does not exist — and the run then
+ * reports "no files under <path> were processed. Is the path right?", sending
+ * the reader after a path they were handed. So the printed command has to carry
+ * the path actually in use.
+ *
+ * Relative, not the absolute result of `resolveSourcePath`: a copy-pasteable
+ * command should stay short and keep working from the same directory the reader
+ * already is in. `"."` when the resolved path is `cwd` itself — a bare command
+ * with no argument would default back to `src` and pick the wrong tree.
+ */
+export const displaySourcePath = (
+  explicit: string | undefined,
+  cwd: string,
+  exists: (path: string) => boolean = existsSync,
+): string => {
+  if (explicit !== undefined) {
+    return explicit;
+  }
+  return exists(join(cwd, "src")) ? "src" : ".";
+};
+
 export interface CodemodCommandDeps {
   cwd: string;
   log: (message: string) => void;

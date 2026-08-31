@@ -44,6 +44,26 @@ describe("renderList as text", () => {
     expect(text).toContain("flow-codemods@latest with-codemod");
   });
 
+  test("defaults the printed path to src", () => {
+    expect(text).toContain("flow-codemods@latest with-codemod src");
+  });
+
+  test("prints the path in use instead of a hardcoded src", () => {
+    // The whole point: a project whose sources are elsewhere used to be handed
+    // a command aimed at a directory it does not have, and the failing run then
+    // blamed the path.
+    const printed = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+      path: "packages/ui/lib",
+    });
+    expect(printed).toContain(
+      "flow-codemods@latest with-codemod packages/ui/lib",
+    );
+    expect(printed).not.toContain("with-codemod src");
+  });
+
   test("shows apply, which is what an agent acts on", () => {
     expect(text).toContain("apply by-hand");
   });
