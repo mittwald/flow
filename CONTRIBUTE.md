@@ -475,14 +475,19 @@ Add a doc set under `apps/docs/src/content/04-components/<category>/<slug>/`
 (the content is **not** colocated with the component — copy the structure of a
 neighbor like `actions/button/`):
 
-- `index.mdx` — frontmatter `component: Badge` + a `description:`
-- `overview.mdx` — usage narrative with `<LiveCodeEditor example="…" />` blocks
-- `guidelines.mdx` — design guidelines (when to use / when not)
-- `develop.mdx` — usually `# Properties` + `<PropertiesTables />` (generated
-  from your prop JSDoc; regenerate with
-  `pnpm nx build:docs-properties components`)
+- `index.mdx` — **the whole page**, read top to bottom: frontmatter with
+  `component: Badge` and a `description:`, then `<LiveCodeEditor />`, then
+  `---`-separated `#` sections (Best Practices, Variants, …). Every one of the
+  88 component pages ends in `# Properties` + `<PropertiesTables />`, generated
+  from your prop JSDoc — regenerate with
+  `pnpm nx build:docs-properties components`.
 - `examples/*.tsx` — live-code snippets, importing from
-  `@mittwald/flow-react-components`
+  `@mittwald/flow-react-components`, pulled in with
+  `<LiveCodeEditor example="…" />`
+
+One page per component, not one per tab: `overview.mdx`, `guidelines.mdx` and
+`develop.mdx` were consolidated into `index.mdx` (#2730) and no longer exist.
+The full authoring guide is [apps/docs/README.md](apps/docs/README.md).
 
 The docs prose is written in **German**. Preview with `pnpm nx dev docs`.
 
