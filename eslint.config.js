@@ -102,6 +102,24 @@ export default tseslint.config(
     },
   },
   {
+    // Anything under src/ can end up in a browser bundle.
+    files: ["**/src/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@mittwald/flow-design-tokens/json/*"],
+              message:
+                "Import @mittwald/flow-design-tokens/json-runtime/* instead. The json build carries style-dictionary metadata (filePath, isSource, original, attributes) on every token — 94 % of the file, and 1.37 MB of dead weight in the bundle. json-runtime holds the same values with only `value` and `path`. Need `original` for build-time tooling? Read json outside src/.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     // Node ES-module CLI scripts (run by GitHub Actions, not bundled).
     files: [".github/scripts/**/*.mjs"],
     languageOptions: {

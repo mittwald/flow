@@ -8,7 +8,8 @@
   "exports": {
     "./css/*": "./dist/css/*",
     "./css-layered/*": "./dist/css-layered/*",
-    "./json/*": "./dist/json/*"
+    "./json/*": "./dist/json/*",
+    "./json-runtime/*": "./dist/json-runtime/*"
   },
   "files": [
     "dist"

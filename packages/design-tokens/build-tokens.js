@@ -20,6 +20,35 @@ StyleDictionary.registerTransform({
   },
 });
 
+/*
+ * The `json` format emits every token with its build metadata — `filePath`,
+ * `isSource`, `original`, `attributes` and more. That is 94 % of the file, and
+ * none of it means anything in a browser: it turns 49 KB of values into 834 KB.
+ * Runtime consumers (`useDesignTokens`) import this leaner tree instead, which
+ * keeps only the two fields they read.
+ */
+StyleDictionary.registerFormat({
+  name: "json/flow-runtime",
+  format: ({ dictionary }) => {
+    const tree = {};
+
+    for (const token of dictionary.allTokens) {
+      const groups = token.path.slice(0, -1);
+      const name = token.path.at(-1);
+      let node = tree;
+
+      for (const group of groups) {
+        node[group] ??= {};
+        node = node[group];
+      }
+
+      node[name] = { value: token.value, path: token.path };
+    }
+
+    return `${JSON.stringify(tree, null, 2)}\n`;
+  },
+});
+
 StyleDictionary.registerFormat({
   name: "css/variables-layered",
   format: async ({ dictionary, options = {}, file }) => {
@@ -128,6 +157,11 @@ const buildConfig = ({
         {
           format: "json",
           destination: `json/${destination}.json`,
+          filter: filter,
+        },
+        {
+          format: "json/flow-runtime",
+          destination: `json-runtime/${destination}.json`,
           filter: filter,
         },
       ],
