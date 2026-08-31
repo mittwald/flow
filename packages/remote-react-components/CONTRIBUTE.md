@@ -50,10 +50,14 @@ You can then run the tests using the following command:
 pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
-The tests run **headless**. Omitting `--browser.name` runs both browsers — and
-therefore both themes — as the scheduled run and the `run-visual-tests` label
-do. Firefox then needs `--browser.fileParallelism=false`, because it has issues
-with parallelized testing (`test:visual:update` already passes it).
+The tests run **headless** and one file at a time. Omitting `--browser.name`
+runs both browsers — and therefore both themes — as the scheduled run and the
+`run-visual-tests` label do.
+
+One file at a time is required: firefox renders no focus styling in a page that
+is not the focused one, and running files in parallel leaves most of them
+unfocused. It is set in the visual project's vitest config, so there is no flag
+to pass.
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
@@ -64,6 +68,16 @@ with the test:
 ```sh
 pnpm nx run remote-react-components:test:visual:dev --browser.name=webkit
 ```
+
+#### Dev mode renders differently
+
+A headed browser antialiases differently than a headless one, so most scenarios
+fail here on small diffs that mean nothing. Use dev mode to watch and debug, and
+judge screenshots from a headless run — its diff lands in the gitignored
+`.vitest-attachments/…`, with reference, actual and diff side by side.
+
+The vitest UI stays off for this project: it scales the tests into a smaller
+frame, which made every screenshot fail on its dimensions.
 
 #### Remote ≠ Local
 
