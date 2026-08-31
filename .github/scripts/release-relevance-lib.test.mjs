@@ -12,7 +12,7 @@ test("isPublishRelevant: docs, CI and tooling paths are irrelevant", () => {
     ".github/workflows/publish.yml",
     ".github/scripts/release-relevance-lib.mjs",
     ".github/ISSUE_TEMPLATE/bug_report.yml",
-    "apps/docs/src/content/04-components/button.mdx",
+    "apps/docs/src/content/components/button.mdx",
     "apps/remote-dom-demo/src/App.tsx",
     "docs/adr/0005-semver-contract.md",
     "docs/remote-ui.md",
@@ -91,7 +91,7 @@ test("classifyChangedFiles: docs-only and CI-only pushes do not publish", () => 
   // #2870 "docs: fix heading spacing" → 0.2.0-alpha.1044
   assert.equal(
     classifyChangedFiles([
-      "apps/docs/src/content/01-foundations/typography.mdx",
+      "apps/docs/src/content/foundations/typography.mdx",
       "apps/docs/src/app/globals.css",
     ]).publish,
     false,
@@ -108,7 +108,7 @@ test("classifyChangedFiles: docs-only and CI-only pushes do not publish", () => 
 
 test("classifyChangedFiles: a mixed push publishes", () => {
   const result = classifyChangedFiles([
-    "apps/docs/src/content/04-components/button.mdx",
+    "apps/docs/src/content/components/button.mdx",
     ".github/workflows/test.yml",
     "packages/components/src/components/Button/Button.tsx",
   ]);
@@ -160,8 +160,8 @@ test("classifyChangedFiles: square brackets are legitimate path characters", () 
   // Next.js dynamic routes in the docs app — docs-only, must still skip.
   assert.equal(
     classifyChangedFiles([
-      "apps/docs/src/app/04-components/[group]/[component]/develop/page.tsx",
-      "apps/docs/src/app/01-get-started/[...slug]/page.tsx",
+      "apps/docs/src/app/components/[group]/[component]/develop/page.tsx",
+      "apps/docs/src/app/get-started/[...slug]/page.tsx",
     ]).publish,
     false,
   );

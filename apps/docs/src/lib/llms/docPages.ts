@@ -3,9 +3,10 @@ import jetpack from "fs-jetpack";
 import path from "path";
 import humanizeString from "humanize-string";
 import { mdxToMarkdown } from "@/lib/llms/mdxToMarkdown";
+import { byContentOrder } from "@/lib/content/contentOrder";
 
 const CONTENT_ROOT = "./src/content";
-const COMPONENTS_SECTION = "04-components";
+const COMPONENTS_SECTION = "components";
 
 export interface DocPage {
   segments: string[];
@@ -89,5 +90,11 @@ export const getAllDocPages = (): DocPage[] => {
     .flatMap((section) =>
       section === COMPONENTS_SECTION ? componentPages() : slugPages(section),
     )
-    .sort((a, b) => a.segments.join("/").localeCompare(b.segments.join("/")));
+    .sort(
+      (a, b) =>
+        byContentOrder(
+          `/${a.segments.join("/")}`,
+          `/${b.segments.join("/")}`,
+        ) || a.segments.join("/").localeCompare(b.segments.join("/")),
+    );
 };

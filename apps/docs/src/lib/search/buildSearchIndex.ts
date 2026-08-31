@@ -5,7 +5,7 @@ import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { extractHeadings, mdxToPlainText } from "@/lib/search/plainText";
 import type { SearchHeading, SearchIndexEntry } from "@/lib/search/types";
 
-const COMPONENTS_SEGMENT = "04-components";
+const COMPONENTS_SEGMENT = "components";
 
 interface ParsedFile {
   segments: string[];

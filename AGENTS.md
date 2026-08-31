@@ -200,7 +200,7 @@ A new or substantially changed component comes with:
    [packages/components/AGENTS.md](packages/components/AGENTS.md)
 2. Stories: `stories/Default.stories.tsx` with realistic args and meaningful
    variants
-3. A docs page in `apps/docs/src/content/04-components/<category>/…`
+3. A docs page in `apps/docs/src/content/components/<category>/…`
 4. Tests along the testing bar: unit tests for lib functions, browser tests for
    behavior (see the components AGENTS.md testing section). **New or changed
    rendered behavior (a new prop, variant, or layout that affects the visual

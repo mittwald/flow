@@ -8,11 +8,20 @@ Next.js documentation site for the flow Styleguide, deployed to
   the section and page structures, heading conventions, tone of voice, and
   language rules (German content, English Design System terminology).
 - Content lives in `src/content` as MDX, one directory per section
-  (`01-get-started`, `02-foundations`, `03-patterns`, `04-components`). A
-  component page is a single `index.mdx` — the former `overview`, `develop` and
-  `guidelines` tabs are consolidated onto it. Their routes under
-  `src/app/04-components/[group]/[component]/` are `redirect()`-only, kept so
+  (`get-started`, `foundations`, `patterns`, `components`). A component page is
+  a single `index.mdx` — the former `overview`, `develop` and `guidelines` tabs
+  are consolidated onto it. Their routes under
+  `src/app/components/[group]/[component]/` are `redirect()`-only, kept so
   existing links (and their fragments) keep working.
+- **Directory names are the public URL**, and they carry no order. The authored
+  order lives in `src/lib/content/contentOrder.ts` — a flat list of pathnames
+  that the navigation, the header, `llms.txt` and the sitemap all sort by.
+  Unlisted entries sort alphabetically by label (the components, deliberately).
+  `contentOrder.test.ts` rejects a stale entry and a group that lists only some
+  of its children; the latter is the silent half-ordered case.
+- The sections lost their `NN-` prefixes, so `nginx.conf` carries a `rewrite`
+  that strips such a prefix from any segment and 301s. Old links keep working —
+  do not write new ones against the old paths.
 - Code examples are `.tsx` files in the `examples/` directory next to the MDX
   file, referenced via `example="<name>"` (see "Page Building Blocks" in the
   README).

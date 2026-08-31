@@ -16,8 +16,14 @@ The Styleguide is available at:
 https://flow.mittwald.de/
 
 All content lives in `src/content`, organized in one directory per section
-(`01-get-started`, `02-foundations`, `03-patterns`, `04-components`). Pages are
-written in MDX.
+(`get-started`, `foundations`, `patterns`, `components`). Pages are written in
+MDX. Directory names are the URL — a page's path is its directory path.
+
+The order sections and their groups appear in is authored explicitly in
+`src/lib/content/contentOrder.ts`; anything not listed there sorts
+alphabetically by its label, which is what the components do. Add a page to an
+ordered group and you add it to that list — a test fails if a group ends up half
+listed.
 
 ## Styleguide Structure
 
@@ -247,7 +253,7 @@ each with a link to that Component's page and its own example (Button:
   names both and one example shows them together.
 - **`## React Hook Form` is the fixed convention** for form-capable Components:
   always add it, linking to the
-  [Form (React Hook Form)](/04-components/react-hook-form/form) page. A simple
+  [Form (React Hook Form)](/components/react-hook-form/form) page. A simple
   toggle-style Component that ships no dedicated form example (for example
   Switch) may omit it.
 
@@ -417,9 +423,9 @@ code identifiers.
 Use inline links generously to connect related documentation.
 
 - Component names in prose link to the Component's page:
-  `[Section](/04-components/structure/section)`.
-- Links are root-relative (starting with `/01-get-started`, `/02-foundations`,
-  `/03-patterns`, or `/04-components`).
+  `[Section](/components/structure/section)`.
+- Links are root-relative (starting with `/get-started`, `/foundations`,
+  `/patterns`, or `/components`).
 - Verify a link target exists before adding it, and avoid linking to the same
   page multiple times within a short section unless it improves readability.
 

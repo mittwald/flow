@@ -426,7 +426,7 @@ property to set the background color instead.
 We've replaced the `react-syntax-highlighter` library, which means many
 properties have been removed and the remaining ones have been simplified. See
 the
-[CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview)
+[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block/overview)
 for details on what's now supported.
 
 ---

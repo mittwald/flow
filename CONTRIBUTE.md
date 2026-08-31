@@ -469,8 +469,8 @@ that automatically when no label is given).
 
 ### 9. Document it on the docs site
 
-Add a doc set under `apps/docs/src/content/04-components/<category>/<slug>/`
-(the content is **not** colocated with the component — copy the structure of a
+Add a doc set under `apps/docs/src/content/components/<category>/<slug>/` (the
+content is **not** colocated with the component — copy the structure of a
 neighbor like `actions/button/`):
 
 - `index.mdx` — frontmatter `component: Badge` + a `description:`

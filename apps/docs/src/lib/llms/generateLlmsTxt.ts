@@ -2,6 +2,7 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import path from "path";
 import fs from "fs";
+import { byContentOrder } from "@/lib/content/contentOrder";
 
 interface Section {
   contentFolder: string;
@@ -11,13 +12,15 @@ interface Section {
 }
 
 const contentFolder = "./src/content";
-const directorySections = fs.readdirSync(contentFolder);
+// `readdirSync` is alphabetical; the sections follow the authored order.
+const directorySections = fs
+  .readdirSync(contentFolder)
+  .sort((a, b) => byContentOrder(`/${a}`, `/${b}`));
 const sections: Section[] = directorySections.map((s) => {
   return {
     contentFolder: path.join(contentFolder, s),
     routeSegment: s,
     heading: s
-      .replaceAll(/(\d+)-/g, "")
       .split("-")
       .map(
         (word) =>
@@ -51,7 +54,11 @@ const renderSection = async (
   const mdxFiles = await MdxFileFactory.fromDir(section.contentFolder);
 
   const items = mdxFiles
-    .sort((a, b) => a.filename.localeCompare(b.filename))
+    .sort(
+      (a, b) =>
+        byContentOrder(section.toPathname(a), section.toPathname(b)) ||
+        a.filename.localeCompare(b.filename),
+    )
     .map((mdxFile) => toListItem(siteUrl, mdxFile, section));
 
   return [`## ${section.heading}`, "", ...items].join("\n");
@@ -77,7 +84,7 @@ export const generateLlmsTxt = async (siteUrl: string): Promise<string> => {
     `For machine-readable Markdown, fetch [${normalizedSiteUrl}/llms-full.txt]` +
       `(${normalizedSiteUrl}/llms-full.txt) for the full documentation, or get a ` +
       "single page by prefixing its path with `/raw/` and appending `.md` " +
-      `(e.g. ${normalizedSiteUrl}/raw/04-components/actions/button.md). ` +
+      `(e.g. ${normalizedSiteUrl}/raw/components/actions/button.md). ` +
       `A JSON manifest of all pages is at ${normalizedSiteUrl}/llms.json.`,
   ].join("\n");
 
