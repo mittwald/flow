@@ -1,11 +1,14 @@
 import dts from "unplugin-dts/vite";
-import baseConfig from "./vite.config";
+import baseConfig from "./vite.config.ts";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
 import { layerOrderPlugin } from "./dev/vite/layerOrderPlugin.ts";
 import { stylesheetVariantsPlugin } from "./dev/vite/stylesheetVariantsPlugin.ts";
-import { preserveUseClientBanner } from "../core";
+import {
+  libraryBuildChecks,
+  preserveUseClientBanner,
+} from "../core/src/index.ts";
 
 export default mergeConfig(
   baseConfig,
@@ -32,6 +35,7 @@ export default mergeConfig(
       },
       emptyOutDir: false,
       rolldownOptions: {
+        checks: libraryBuildChecks,
         output: {
           postBanner: preserveUseClientBanner,
           format: "es",

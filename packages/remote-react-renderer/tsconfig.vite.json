@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "composite": false,
     "noEmit": true,
     "rootDir": "${configDir}/../..",
