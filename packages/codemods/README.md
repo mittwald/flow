@@ -27,6 +27,12 @@ The target is resolved from the versions every declared Flow dependency has
 actually published — not just one of them — so the command never writes a
 version some dependency lacks.
 
+`dependencies`, `devDependencies` and `optionalDependencies` are rewritten.
+**`peerDependencies` are reported and left alone**: a peer range states which
+versions your package supports, not one it installs, and narrowing `^1.0.0` to
+`^1.0.14` would change what _your_ consumers are allowed to install. That is
+your call, not the command's.
+
 After installing, `upgrade` runs the codemod of every migration whose `since` is
 at or below the target and prints the ones with no codemod, for you to apply by
 hand.
@@ -69,7 +75,9 @@ involve.
 
 Options:
 
-- `--json` — machine-readable output
+- `--json` — machine-readable output: an object with `range`
+  (`current`/`target`, or `null` for the offline whole-catalogue form) and
+  `migrations`, each entry carrying `catchUp`
 
 ### `<id> [path]`
 

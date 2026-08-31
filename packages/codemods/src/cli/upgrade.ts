@@ -10,7 +10,7 @@ import {
   runInstall,
   type InstallRunner,
 } from "../install.js";
-import { applyTarget } from "../manifest.js";
+import { applyTarget, isWritable } from "../manifest.js";
 import { fetchVersions } from "../resolve/registry.js";
 import { readInstalledVersion, resolveRange } from "../resolve/range.js";
 import { runCodemod, type CodemodResult } from "../run/jscodeshift.js";
@@ -129,6 +129,19 @@ export const runUpgrade = async (
   // already be sitting on `target` having never run this tool once, which is
   // the exact gap this command exists to close, so the migration pass below
   // still runs; only the bump and the install are skipped.
+  // One reporter for both branches: a peer range is reported, never rewritten
+  // (see `writableFields` in manifest.ts), and `--dry` must say the same thing
+  // the real run does.
+  const reportDependencies = (): void => {
+    for (const dependency of dependencies) {
+      log(
+        isWritable(dependency)
+          ? `  ${dependency.name} → ${target}`
+          : `  ${dependency.name} ${dependency.range} — left as it is, ${dependency.field} states what your package supports, not what it installs`,
+      );
+    }
+  };
+
   const bump = gt(target, current);
 
   if (!bump) {
@@ -139,9 +152,7 @@ export const runUpgrade = async (
   } else if (dry) {
     log(`Upgrading Flow from ${current} to ${target} (--dry)`);
     log(`--dry: would write the following to ${manifestPath}:`);
-    for (const { name } of dependencies) {
-      log(`  ${name} → ${target}`);
-    }
+    reportDependencies();
     log("--dry: skipping the install.");
   } else {
     log(`Upgrading Flow from ${current} to ${target}`);
@@ -155,9 +166,7 @@ export const runUpgrade = async (
       )}\n`,
       "utf8",
     );
-    for (const { name } of dependencies) {
-      log(`  ${name} → ${target}`);
-    }
+    reportDependencies();
 
     const manager = detectPackageManagerIn(cwd);
     log(`Installing with ${manager}`);

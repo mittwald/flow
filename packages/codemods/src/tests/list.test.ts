@@ -67,47 +67,69 @@ describe("renderList as text", () => {
   });
 });
 
+/**
+ * The JSON form wraps the entries in an object carrying the range. A bare array
+ * could not say which range it described — and on the 1.x line `list` and `list
+ * minor` select the same entries, so the two forms were indistinguishable in
+ * it.
+ */
+interface JsonForm {
+  range: { current: string; target: string } | null;
+  migrations: (CatalogEntry & { catchUp: boolean })[];
+}
+
+const parseJson = (text: string): JsonForm => JSON.parse(text) as JsonForm;
+
 describe("renderList as JSON", () => {
-  test("emits the selected entries as a parseable array", () => {
-    const parsed = JSON.parse(
+  test("emits the selected entries with the range they belong to", () => {
+    const parsed = parseJson(
       renderList({
         entries,
         range: { from: "1.0.0", to: "2.0.0" },
         json: true,
       }),
-    ) as CatalogEntry[];
+    );
 
-    expect(parsed.map((selected) => selected.id)).toEqual([
+    expect(parsed.range).toEqual({ current: "1.0.0", target: "2.0.0" });
+    expect(parsed.migrations.map((selected) => selected.id)).toEqual([
       "with-codemod",
       "by-hand",
       "behaviour-only",
     ]);
-    expect(parsed[0]).toMatchObject({ apply: "apply with-codemod" });
+    expect(parsed.migrations[0]).toMatchObject({
+      apply: "apply with-codemod",
+    });
   });
 
-  test("an empty range is an empty array, not a message", () => {
+  test("an empty range is an empty list, not a message", () => {
     // Same reasoning as the text-output test above: `since` ahead of `to` is
     // what proves emptiness now, not merely behind `from`.
     const future = [
       entry("future-codemod", "4.0.0", "codemod"),
       entry("future-manual", "4.0.0", "manual"),
     ];
-    expect(
+    const parsed = parseJson(
       renderList({
         entries: future,
         range: { from: "3.0.0", to: "3.1.0" },
         json: true,
       }),
-    ).toBe("[]");
+    );
+    // The range is still reported: "nothing to do in 3.0.0 → 3.1.0" is a
+    // different answer from "no range was resolved", and only the JSON form's
+    // consumer can act on the difference.
+    expect(parsed.range).toEqual({ current: "3.0.0", target: "3.1.0" });
+    expect(parsed.migrations).toEqual([]);
   });
 });
 
 describe("renderList without a range", () => {
-  test("no range lists the whole catalogue", () => {
-    const parsed = JSON.parse(
-      renderList({ entries, json: true }),
-    ) as CatalogEntry[];
-    expect(parsed).toHaveLength(3);
+  test("no range lists the whole catalogue and reports no range", () => {
+    const parsed = parseJson(renderList({ entries, json: true }));
+    // Null rather than absent: the offline browse has no range, and an agent
+    // has to be able to tell that apart from a range it failed to read.
+    expect(parsed.range).toBeNull();
+    expect(parsed.migrations).toHaveLength(3);
   });
 });
 
@@ -324,20 +346,29 @@ describe("catch-up", () => {
     expect(text).not.toContain("catch-up");
   });
 
-  test("JSON stays the plain selected array — no catch-up field grafted on, and now includes catch-up entries", () => {
-    const json = renderList({
-      entries: catalog,
-      range: { from: "1.0.0", to: "2.0.0" },
-      json: true,
-    });
-    const parsed = JSON.parse(json) as CatalogEntry[];
+  test("JSON carries catch-up per entry, like the human form marks it", () => {
+    const parsed = parseJson(
+      renderList({
+        entries: catalog,
+        range: { from: "1.0.0", to: "2.0.0" },
+        json: true,
+      }),
+    );
     // All three: dropping the lower bound means `old-manual` is selected too.
-    expect(parsed.map((e) => e.id).sort()).toEqual([
+    expect(parsed.migrations.map((e) => e.id).toSorted()).toEqual([
       "new-in-range",
       "old-manual",
       "shipped-earlier",
     ]);
-    expect(parsed[0]).not.toHaveProperty("catchUp");
+    // The field the human form renders as a mark. Withholding it from the
+    // agent-facing form would make it the less informative of the two.
+    expect(
+      Object.fromEntries(parsed.migrations.map((e) => [e.id, e.catchUp])),
+    ).toEqual({
+      "new-in-range": false,
+      "old-manual": true,
+      "shipped-earlier": true,
+    });
   });
 });
 

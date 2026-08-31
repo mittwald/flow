@@ -18,7 +18,12 @@ const noPrompt = async (): Promise<string[]> => {
 
 describe("createChoose", () => {
   test("-y bypasses the prompt and passes everything through", async () => {
-    const choose = createChoose({ yes: true, isTTY: true, prompt: noPrompt });
+    const choose = createChoose({
+      yes: true,
+      isTTY: true,
+      prompt: noPrompt,
+      onCancel: () => undefined,
+    });
     const entries = [entry("a"), entry("b")];
 
     await expect(choose(entries)).resolves.toEqual(entries);
@@ -26,6 +31,7 @@ describe("createChoose", () => {
 
   test("a non-TTY bypasses the prompt and passes everything through", async () => {
     const choose = createChoose({
+      onCancel: () => undefined,
       yes: false,
       isTTY: false,
       prompt: noPrompt,
@@ -37,6 +43,7 @@ describe("createChoose", () => {
 
   test("an empty list short-circuits without prompting", async () => {
     const choose = createChoose({
+      onCancel: () => undefined,
       yes: false,
       isTTY: true,
       prompt: noPrompt,
@@ -55,6 +62,7 @@ describe("createChoose", () => {
     try {
       const entries = [entry("a"), entry("b"), entry("c")];
       const choose = createChoose({
+        onCancel: () => undefined,
         yes: false,
         isTTY: true,
         prompt: async (offered) => {
@@ -71,5 +79,26 @@ describe("createChoose", () => {
         process.env.CI = originalCI;
       }
     }
+  });
+});
+
+/**
+ * Ctrl+C at the prompt used to reject straight out of `runUpgrade`, after the
+ * manifest was written and the install had run — the user's last output was an
+ * inquirer stack trace instead of what had happened to their project.
+ */
+describe("a cancelled prompt", () => {
+  test("runs no codemods and says the bump already happened", async () => {
+    const messages: string[] = [];
+    const choose = createChoose({
+      yes: false,
+      isTTY: true,
+      prompt: () => Promise.reject(new Error("SIGINT")),
+      onCancel: (message) => messages.push(message),
+    });
+
+    await expect(choose([entry("a"), entry("b")])).resolves.toEqual([]);
+    expect(messages).toHaveLength(1);
+    expect(messages[0]).toContain("already happened");
   });
 });

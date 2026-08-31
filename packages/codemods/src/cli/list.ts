@@ -329,7 +329,24 @@ export const renderList = ({
       : selectEntries(entries, range.to);
 
   if (json) {
-    return JSON.stringify(selected, null, 2);
+    // An object, not the bare array: the agent-facing form has to say which
+    // range it describes, or `list minor` and `list` are indistinguishable in
+    // it — and it carries `catchUp` per entry for the same reason the human
+    // form marks it.
+    return `${JSON.stringify(
+      {
+        range:
+          range === undefined
+            ? null
+            : { current: range.from, target: range.to },
+        migrations: selected.map((entry) => ({
+          ...entry,
+          catchUp: isCatchUp(entry, range?.from),
+        })),
+      },
+      null,
+      2,
+    )}\n`;
   }
 
   if (selected.length === 0) {

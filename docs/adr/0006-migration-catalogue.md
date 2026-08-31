@@ -35,9 +35,9 @@ editing the guide by hand is futile — CI fails the diff.
 
 **Every entry carries `apply`** — one imperative instruction — whether or not it
 has a codemod, plus a codemod where the change is mechanically decidable. That
-is what makes an entry without a codemod actionable at all: of the 22 ported
-entries, 13 have none and previously offered nothing but a section of guide
-prose to read.
+is what makes an entry without a codemod actionable at all: of the 23 entries,
+13 have none and previously offered nothing but a section of guide prose to
+read.
 
 **`@mittwald/flow-codemods` is published as a CLI**, which is what lets
 `upgrade` exist:

@@ -14,7 +14,7 @@
     "src/tools/to-remote-package.ts"
   ],
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json",

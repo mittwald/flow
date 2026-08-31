@@ -4,6 +4,7 @@
   "namedInputs": {
     "components-src": [
       "default",
+      "!{projectRoot}/MIGRATION.md",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts",

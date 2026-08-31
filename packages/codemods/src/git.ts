@@ -16,16 +16,26 @@ export const hasUncommittedChanges = (cwd: string): boolean => {
     const status = execFileSync("git", ["status", "--porcelain"], {
       cwd,
       encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
+      // stderr captured, not ignored: exit 128 alone cannot tell "not a
+      // repository" from the other fatals, and the difference decides whether
+      // the guard may report a clean tree. `LC_ALL=C` pins the message this
+      // reads to English — git localises its fatals.
+      stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env, LC_ALL: "C" },
     });
     return status.trim() !== "";
   } catch (error) {
-    // Only "not a git repository" counts as clean. git answers that with exit
-    // 128; a missing binary throws `ENOENT` with no exit status at all. Treating
-    // the two alike would make the guard fail *open* — it would report a clean
-    // tree on a machine without git, which is exactly the minimal CI container
-    // where nobody is watching the run.
-    if ((error as { status?: number }).status === 128) {
+    // Exit 128 is *not* only "not a git repository". `detected dubious
+    // ownership` is 128 too, and that is the minimal CI container this guard
+    // exists for — treating every 128 as clean made it fail open in exactly
+    // the case nobody is watching. So match the message, not the code, and let
+    // every other failure throw. A missing binary throws `ENOENT` with no exit
+    // status and no stderr, and lands in the throw below.
+    const stderr = String((error as { stderr?: unknown }).stderr ?? "");
+    if (
+      (error as { status?: number }).status === 128 &&
+      /not a git repository/i.test(stderr)
+    ) {
       return false;
     }
     throw new Error(

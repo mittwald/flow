@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { checkbox } from "@inquirer/prompts";
+import { readFileSync } from "node:fs";
 import { parseArguments } from "./cli/args.js";
 import { createChoose } from "./cli/choose.js";
 import { runSingleCodemod } from "./cli/codemod.js";
@@ -47,9 +47,13 @@ const main = async (): Promise<number> => {
       process.stdout.write(usage);
       return 0;
     case "version": {
-      const { default: manifest } = await import("../package.json", {
-        with: { type: "json" },
-      });
+      // `readFileSync` rather than an import attribute: `with { type: "json" }`
+      // was the newest syntax in this package and the only thing forcing the
+      // Node floor above what the rest of the code needs. Consumers reach this
+      // CLI through `npx`, so that floor is theirs, not the repo's.
+      const manifest = JSON.parse(
+        readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+      ) as { version: string };
       process.stdout.write(`${manifest.version}\n`);
       return 0;
     }
@@ -74,12 +78,18 @@ const main = async (): Promise<number> => {
         log: (message) => process.stdout.write(`${message}\n`),
       });
     case "upgrade": {
+      // Loaded here, not at the top: `list` and a single-codemod run never
+      // prompt, and paying for the prompt library's module graph on every
+      // invocation is the kind of cost a CLI is judged by.
+      const { checkbox } = await import("@inquirer/prompts");
+
       // `-y` accepts every default, and no TTY implies it: CI and agent runs
       // have nobody to answer the prompt. That is also why the dirty-tree guard
       // exists — see git.ts.
       const choose = createChoose({
         yes: parsed.yes,
         isTTY: process.stdin.isTTY === true,
+        onCancel: (message) => process.stdout.write(`${message}\n`),
         prompt: (entries) =>
           checkbox({
             message: "Which codemods should run?",

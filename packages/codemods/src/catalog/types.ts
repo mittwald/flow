@@ -1,10 +1,15 @@
 /**
- * When an entry applies.
+ * What kind of change the entry describes.
  *
- * - `migration` — the old path is gone, at runtime or in the types. It only
- *   matters when the consumer actually crosses `since`.
- * - `deprecation` — the old path still works. It matters as soon as the
- *   replacement exists.
+ * - `migration` — the old path is gone, at runtime or in the types.
+ * - `deprecation` — the old path still works and warns.
+ *
+ * Descriptive only: it is rendered as a label and does **not** affect
+ * selection. It used to — a `deprecation` was offered as soon as its
+ * replacement existed and a `migration` only once the consumer crossed `since`
+ * — but the gate is one rule now (`since <= target`, see `selectEntries`), so
+ * both behave alike. The distinction still tells a reader whether their code
+ * compiles today, which is why the field stays.
  */
 export type MigrationKind = "migration" | "deprecation";
 
