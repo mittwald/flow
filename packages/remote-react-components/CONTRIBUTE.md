@@ -379,18 +379,24 @@ written and `test:cross-version` passes with a "nothing to run" warning.
 
 ### CI
 
-Both cross-version harnesses run in the **scheduled** visual workflow
-(`test-visual-scheduled.yml`), twice a day — **not** automatically on pull
-requests (they do network installs of published versions). Failures alert Slack.
+The **iframe harness** runs on every pull request and push, as the
+`cross-version` job in `test.yml`. It is gated on `nx affected`, so it no-ops
+when nothing it covers changed, and the published versions it installs are
+cached on `lerna.json`.
+
+The **in-process harness** does not, and neither does the full per-version
+matrix. Both harnesses run in the **scheduled** visual workflow
+(`test-visual-scheduled.yml`) twice a day, sharded per target version. Failures
+alert Slack.
 
 #### Running them on a pull request
 
-Because they don't run on every PR, a regression that a change introduces is
-only caught by the next scheduled run — after the PR has merged. **Run them
-on-demand by adding the `run-cross-version-tests` label to the PR**
-(`test-cross-version-label.yml`): it runs both harnesses against the PR branch
-and comments a per-version PASS/FAIL summary. The label removes itself, so
-re-adding it re-runs.
+The PR job covers one harness against one version set. A divergence that only
+the in-process harness or an older target sees is caught by the next scheduled
+run — after the PR has merged. **Run everything on-demand by adding the
+`run-cross-version-tests` label to the PR** (`test-cross-version-label.yml`): it
+runs both harnesses against the PR branch and comments a per-version PASS/FAIL
+summary. The label removes itself, so re-adding it re-runs.
 
 **Add the label whenever you remove a component or change its rendered
 structure** (a public component gone, or an element added/removed/reordered in

@@ -145,33 +145,42 @@ Die Einträge sind nach Version absteigend sortiert und nennen jeweils die
 Version, ab der die Änderung greift. Suche die Version, von der du kommst, und
 arbeite dich nach oben durch.
 
-## Nutze den Codemod, wenn es einen gibt
+## Nutze die Codemod-CLI
 
-Umbenennungen liefern wir als
-[Codemod](https://github.com/mittwald/flow/tree/main/packages/codemods/src/transforms)
-aus – ein Skript, das die Anpassung in deinen Sourcen automatisch vornimmt.
-Welcher Codemod zu einer Änderung gehört, steht im jeweiligen Eintrag des
-Migrationsleitfadens, zusammen mit dem fertigen Aufruf:
+Ein Befehl hebt alle Flow-Abhängigkeiten auf die Zielversion, installiert und
+führt den Codemod jeder Migration bis zu dieser Version aus:
 
 ```shell
-npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/<name>.ts \
-  --parser tsx \
-  src
+npx @mittwald/flow-codemods@latest upgrade
 ```
 
-Ein Codemod ändert Dateien direkt. Führe ihn auf einem sauberen Git-Stand aus
-und prüfe das Diff.
+Ohne Argument geht es auf die nächste Minor innerhalb deiner Major.
+`upgrade patch` bleibt auf deiner Minor, `upgrade major` überquert eine
+Major-Grenze, und eine exakte Version oder ein Dist-Tag (`next`) gehen genau
+dorthin.
 
-Wenn du mehrere Versionen auf einmal aufholst, nimm `flowAlphaAll` – der Codemod
-führt alle Migrations-Codemods der `0.2.0-alpha`-Reihe in der Reihenfolge ihrer
-Releases aus:
+Der Befehl ändert Dateien direkt und bricht auf einem unsauberen Git-Stand ab.
+
+Der Befehl kennt keine untere Grenze: er listet auch Migrationen, die vor deiner
+aktuellen Version erschienen sind. Nichts hält fest, welche davon dein Projekt
+schon durchgeführt hat – und ein zweiter Durchlauf eines Codemods ändert nichts.
+
+Er ersetzt den Migrationsleitfaden nicht: die meisten Einträge haben keinen
+Codemod. Welche das für deinen Bereich sind, listet der Befehl am Ende auf –
+oder vorab, ohne etwas zu verändern, mit `list` und derselben Revision:
 
 ```shell
-npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowAlphaAll.ts \
-  --parser tsx \
-  src
+npx @mittwald/flow-codemods@latest list minor
+```
+
+`list` ohne Argument zeigt den gesamten Katalog, offline. Mit einer Revision
+liest es dieselbe Version aus deinem `package.json` und zeigt genau den Bereich,
+den `upgrade` mit dieser Revision anfassen würde – ein echter Trockenlauf.
+
+Einen einzelnen Codemod führst du über seine ID aus:
+
+```shell
+npx @mittwald/flow-codemods@latest align-to-combine src
 ```
 
 ## Deprecation-Warnungen sind der Vorlauf
