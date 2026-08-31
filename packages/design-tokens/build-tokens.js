@@ -21,11 +21,10 @@ StyleDictionary.registerTransform({
 });
 
 /*
- * The `json` format emits every token with its build metadata — `filePath`,
- * `isSource`, `original`, `attributes` and more. That is 94 % of the file, and
- * none of it means anything in a browser: it turns 49 KB of values into 834 KB.
- * Runtime consumers (`useDesignTokens`) import this leaner tree instead, which
- * keeps only the two fields they read.
+ * The `json` format's build metadata (`filePath`, `isSource`, `original`, …)
+ * dwarfs the values and means nothing in a browser, so runtime consumers
+ * (`useDesignTokens`) import this tree instead: same shape, only `value` and
+ * `path`.
  */
 StyleDictionary.registerFormat({
   name: "json/flow-runtime",

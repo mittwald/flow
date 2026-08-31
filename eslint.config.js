@@ -112,7 +112,7 @@ export default tseslint.config(
             {
               group: ["@mittwald/flow-design-tokens/json/*"],
               message:
-                "Import @mittwald/flow-design-tokens/json-runtime/* instead. The json build carries style-dictionary metadata (filePath, isSource, original, attributes) on every token — 94 % of the file, and 1.37 MB of dead weight in the bundle. json-runtime holds the same values with only `value` and `path`. Need `original` for build-time tooling? Read json outside src/.",
+                "Import @mittwald/flow-design-tokens/json-runtime/* instead. The json build carries style-dictionary metadata (filePath, isSource, original, attributes) on every token, which dwarfs the values and lands in the bundle as dead weight. json-runtime holds the same values with only `value` and `path`. Need `original` for build-time tooling? Read json outside src/.",
             },
           ],
         },
