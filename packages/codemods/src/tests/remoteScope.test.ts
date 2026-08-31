@@ -60,6 +60,7 @@ const targets: Record<string, string[]> = {
     "ButtonProps",
     "RemoteButtonElementProps",
   ],
+  "use-design-tokens-build-metadata-removed": ["useDesignTokens"],
   "imports-to-package-root": [],
   "renamed-css-export": [],
   "password-tools-subpath-renamed": [],

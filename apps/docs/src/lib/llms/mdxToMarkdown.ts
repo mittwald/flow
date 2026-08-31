@@ -1,6 +1,6 @@
 import jetpack from "fs-jetpack";
 import path from "path";
-import lightDesignTokens from "@mittwald/flow-design-tokens/json/all-light.json";
+import lightDesignTokens from "@mittwald/flow-design-tokens/json-runtime/all-light.json";
 import loadProperties from "@/lib/PropertiesTables/lib/loadProperties";
 import { propertiesToMarkdown } from "@/lib/llms/propertiesToMarkdown";
 import {

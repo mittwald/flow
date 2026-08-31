@@ -17,6 +17,18 @@ Design tokens for mittwald Flow. See the [root AGENTS.md](../../AGENTS.md).
   to keep visual balance as the text grows? → `rem`.
 - `node build-tokens.js` (nx target `build`) compiles them with
   [style-dictionary](https://styledictionary.com/) to `dist/css/*` (CSS
-  variables; theme variants keyed by `data-theme`) and `dist/json/*`.
+  variables; theme variants keyed by `data-theme`), `dist/json/*` and
+  `dist/json-runtime/*`.
+- **`json` vs. `json-runtime`.** Both hold the same tokens with the same values,
+  in the same nested shape. `json` is style-dictionary's full output — every
+  token carries its build metadata (`filePath`, `isSource`, `original`,
+  `attributes`, …), which dwarfs the values themselves and makes the file
+  roughly an order of magnitude larger. `json-runtime` keeps only `value` and
+  `path`. **Anything that reaches a browser bundle imports `json-runtime`** —
+  `json` is for build-time and tooling, where the metadata is the point. A
+  `no-restricted-imports` rule in [eslint.config.js](../../eslint.config.js)
+  enforces this for every `src/`, so build-time code that genuinely needs
+  `original` (the unresolved reference, which most tokens have) has to live
+  outside `src/`.
 - Consumers: `components` SCSS uses the CSS variables; some runtime helpers
-  (e.g. categorical chart colors) read the JSON output.
+  (e.g. `useDesignTokens`, categorical chart colors) read `json-runtime`.
