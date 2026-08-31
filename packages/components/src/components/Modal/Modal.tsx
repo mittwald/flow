@@ -14,6 +14,7 @@ import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
 import ButtonView from "@/views/ButtonView";
+import DivView from "@/views/DivView";
 import { OffCanvasSuspenseFallback } from "@/components/Modal/components/OffCanvasSuspenseFallback";
 import { ConfirmUnsavedChangesModal } from "@/components/Modal/components/ConfirmUnsavedChangesModal/ConfirmUnsavedChangesModal";
 import Wrap from "@/components/Wrap";
@@ -92,7 +93,7 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const header = (children: ReactNode) => (
     <>
-      {children}
+      <DivView className={styles.headerTitle}>{children}</DivView>
       <Action closeModal={{ bypassConfirmation: true }}>
         <ButtonView
           variant="plain"

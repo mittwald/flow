@@ -6,6 +6,7 @@ declare const classNames: {
   readonly alwaysVisible: "alwaysVisible";
   readonly alwaysHidden: "alwaysHidden";
   readonly header: "header";
+  readonly headerTitle: "headerTitle";
   readonly content: "content";
   readonly columnLayout: "columnLayout";
   readonly accentBox: "accentBox";
