@@ -27,15 +27,38 @@ jobs:
       matrix:
         include:
           - app: docs
-            dockerfile: apps/docs/Dockerfile
+            context: apps/docs
             image_suffix: docs
           - app: storybook
-            dockerfile: packages/components/Dockerfile
+            context: packages/components
             image_suffix: storybook
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - uses: ./.github/actions/prepare-workspace
+
+      # The image used to build this itself, which meant a second toolchain
+      # install and the whole dependency chain rebuilt against a cold nx cache —
+      # 80 of the 449 seconds a docs preview took. Here the restored cache serves
+      # that chain, and the image only packages what comes out.
+      #
+      # NEXT_BASE_PATH was a build-arg for the same reason; the value is the one
+      # the Dockerfile passed.
+      - name: Build the docs
+        if: matrix.image_suffix == 'docs'
+        run: pnpm nx build docs
+        env:
+          NEXT_BASE_PATH: ""
+
+      # Two commands because `build:storybook` declares no nx dependency on the
+      # components build — the same pair the Dockerfile ran.
+      - name: Build Storybook
+        if: matrix.image_suffix == 'storybook'
+        run: |
+          pnpm nx build components
+          pnpm nx build:storybook components
 
       - name: Log in to the Container registry
         uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
@@ -71,8 +94,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
-          context: .
-          file: ${{ matrix.dockerfile }}
+          # The built output and the server config beside it, nothing else — see
+          # the context's own .dockerignore.
+          context: ${{ matrix.context }}
           push: true
           provenance: false # single-manifest image (as before v7); deploy pulls by ref
           tags:
@@ -81,8 +105,6 @@ jobs:
           labels:
             ${{ matrix.image_suffix == 'docs' && steps.meta-docs.outputs.labels
             || steps.meta-storybook.outputs.labels }}
-          build-args: |
-            NEXT_BASE_PATH=
 
   deploy:
     runs-on: ubuntu-latest
