@@ -25,7 +25,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage — this is a structural change, not a rename.",
+      "Replace `SegmentedControl` with `Tabs` when the selection switches displayed content, or with `RadioGroup` when it sets a value. Pick per usage. The two directions cost very different amounts of work. Towards `RadioGroup` it is a prop-compatible rename: `SegmentedControl` → `RadioGroup`, `Segment` → `Radio` or `RadioButton` (identical props to `Segment`; `RadioButton` is the boxed one, though neither reproduces the joined row), and `value`/`defaultValue`/`onChange` and a `Label` child all carry over. Only `containerBreakpointSize` has no counterpart. Towards `Tabs` it is structural: the state props are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is no `Label` slot (the group label moves to the surrounding `Heading` or goes away), and the switched panels move inside the tabs — where they stay mounted, so form fields in them keep their registration.",
   },
   {
     id: "align-to-combine",

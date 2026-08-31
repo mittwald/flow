@@ -12,7 +12,8 @@ export interface SegmentProps
     FlowComponentProps<HTMLLabelElement> {}
 
 /**
- * @deprecated Use `Tab` inside `Tabs`, or `Radio` inside a `RadioGroup`.
+ * @deprecated Use `Tab` inside `Tabs`, or `Radio` / `RadioButton` inside a
+ *   `RadioGroup` — both take exactly this component's props.
  * @flr-generate all
  */
 export const Segment = flowComponent("Segment", (props) => {
