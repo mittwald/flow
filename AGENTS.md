@@ -190,9 +190,9 @@ and commit the results.
   closed PR only makes it come back next week.
 - **Breaking changes for consumers** ship with a **catalogue entry** in
   `packages/codemods/src/migrations` — which generates the `MIGRATION.md` entry
-  — and a codemod when the change is mechanically decidable. The entry's
-  `detect`/`apply`/`verify` fields are what an agent runs; fill them even when
-  there is no codemod.
+  — and a codemod when the change is mechanically decidable. The entry's `apply`
+  field is the instruction an agent executes; fill it even when there is no
+  codemod, because for those entries it is the whole migration.
 - `patches/` contains intentional pnpm dependency patches — leave them alone.
 - **Browser support:** all three engines (Chromium, Firefox, WebKit). CI running
   WebKit only is a pragmatic choice, not a support statement.

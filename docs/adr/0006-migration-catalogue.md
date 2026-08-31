@@ -33,19 +33,23 @@ the single source for consumer migrations.** One Markdown file per migration,
 frontmatter plus prose. `packages/components/MIGRATION.md` is generated from it;
 editing the guide by hand is futile — CI fails the diff.
 
-**Every entry carries `detect`, `apply` and `verify`**, whether or not it has a
-codemod. That makes a migration executable by an agent even without one: run
-`detect`, apply the described change, confirm with `verify`. Of the 22 ported
-entries, 13 have no codemod and previously offered nothing but prose.
+**Every entry carries `apply`** — one imperative instruction — whether or not it
+has a codemod, plus a codemod where the change is mechanically decidable. That
+is what makes an entry without a codemod actionable at all: of the 22 ported
+entries, 13 have none and previously offered nothing but a section of guide
+prose to read.
 
 **`@mittwald/flow-codemods` is published as a CLI**, which is what lets
 `upgrade` exist:
 
 - `flow-codemods upgrade [revision]` bumps every Flow dependency to a resolved
-  target, installs, runs the codemods the crossed range calls for, and lists the
-  migrations with no codemod at the end.
-- `flow-codemods list [--from] [--to] [--json]` prints the catalogue for a range
-  without touching anything.
+  target, installs, runs every codemod up to that target, and lists the
+  migrations with no codemod at the end. Deliberately no lower bound: nothing
+  records which migrations a project has already performed, and re-running a
+  codemod is a no-op every transform is tested for.
+- `flow-codemods list [revision] [--json]` prints the whole catalogue offline,
+  or — with a revision — exactly the range `upgrade` would touch, without
+  changing anything.
 - `flow-codemods <id> [path]` runs one codemod by its catalogue id.
 
 This **retires the raw-GitHub-URL delivery path**. A codemod is no longer
@@ -58,8 +62,9 @@ ones apply.
 
 - One source instead of two (guide prose and codemod links) that could drift
   apart.
-- A migration is executable by an agent even without a codemod, because
-  `detect`/`apply`/`verify` are always present.
+- A migration without a codemod is still actionable, because `apply` states the
+  change as one instruction instead of leaving an agent to find and read the
+  right guide section.
 - `upgrade` gives consumers a single command that installs the right version and
   runs exactly the codemods that range requires — no more picking a transform
   URL by hand and hoping it matches their version.
@@ -75,5 +80,12 @@ ones apply.
 
 ## Non-goals
 
+- **Executable `detect` and `verify` fields.** An earlier draft of this change
+  gave every entry runnable detection and verification modules, with `detect`
+  and `verify` CLI commands over them, and it was built before being cut. Two
+  reasons it went: the checks were not dependable enough to gate a migration on,
+  and reducing them to prose told an agent nothing it could not already read
+  from `apply`. What remains is `apply` plus a codemod where the change is
+  mechanically decidable. Worth revisiting only with checks that actually hold.
 - `packages/ext-bridge/MIGRATION.md` keeps its own hand-written guide. It is not
   part of the catalogue and is not generated.
