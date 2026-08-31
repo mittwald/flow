@@ -57,6 +57,40 @@ export const Untouched = () => <AccentBox color="green" />;
 
     expect(runTransform(transform, source)).toBe(source);
   });
+
+  test("renames when every value position is a background colour", () => {
+    const source = `import { AccentBox } from "@mittwald/flow-react-components";
+
+export const A = ({ flag }: { flag: boolean }) => (
+  <AccentBox color={flag ? "blue" : "green"} />
+);
+`;
+
+    expect(runTransform(transform, source)).toContain(
+      `backgroundColor={flag ? "blue" : "green"}`,
+    );
+  });
+
+  /**
+   * The decision is per attribute, so one expression cannot be split: renaming
+   * would break the content-colour branch, and leaving it breaks the background
+   * one. Both mixed forms below keep `color` and need a look by hand.
+   */
+  test("leaves an expression it cannot decide as a whole", () => {
+    const source = `import { AccentBox } from "@mittwald/flow-react-components";
+
+export const A = ({ flag }: { flag: boolean }) => (
+  <>
+    <AccentBox color={flag ? "blue" : "dark"} />
+    <AccentBox color={flag ? "default" : "dark"} />
+    <AccentBox color={flag ? "blue" : fromSomewhereElse} />
+    <AccentBox color={fallback ?? "blue"} />
+  </>
+);
+`;
+
+    expect(runTransform(transform, source)).toBe(source);
+  });
 });
 
 /**

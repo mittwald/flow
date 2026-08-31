@@ -1,4 +1,12 @@
-import type { Transform } from "jscodeshift";
+import type { ConditionalExpression, Transform } from "jscodeshift";
+
+/**
+ * An expression that can be a prop's value. Deliberately not
+ * `JSXExpressionContainer["expression"]`: that also admits `JSXEmptyExpression`
+ * (`color={/* a comment *\/}`), which cannot be written back into a ternary
+ * branch. The call site filters it out instead.
+ */
+type ValueNode = ConditionalExpression["consequent"];
 
 /**
  * Renames the `color="primary"` prop value to `color="default"` on the five
@@ -11,8 +19,13 @@ import type { Transform } from "jscodeshift";
  * `@mittwald/flow-remote-react-components`, including their subpath entries —
  * are touched. Components that still accept `color="primary"` (e.g. `Button`)
  * and same-named elements from other packages (e.g. a router `Link`) are left
- * untouched. Only the literal value `"primary"` is rewritten (`color="primary"`
- * and `color={"primary"}`); dynamic values such as `color={expr}` are skipped.
+ * untouched.
+ *
+ * Only literal `"primary"` values are rewritten — either as the whole value
+ * (`color="primary"`, `color={"primary"}`) or in a value position inside a
+ * dynamic one (`color={cond ? "secondary" : "primary"}`, `color={override ??
+ * "primary"}`). A value the transform cannot see into (`color={someVariable}`)
+ * is left alone.
  */
 const colorPrimaryToDefaultTransform: Transform = (fileInfo, { j }) => {
   const flowPackages = [
@@ -39,6 +52,37 @@ const colorPrimaryToDefaultTransform: Transform = (fileInfo, { j }) => {
       (type === "StringLiteral" || type === "Literal") &&
       (node as { value?: unknown }).value === "primary"
     );
+  };
+
+  /**
+   * Rewrites every `"primary"` sitting in a position whose value can reach the
+   * prop: the expression itself, both branches of a ternary, and the operands
+   * of `??`/`||` — plus the right operand of `&&`, since `&&` yields its left
+   * operand only when that operand is falsy and a non-empty string never is. A
+   * `"primary"` anywhere else is not a value that reaches the prop (an object
+   * key, an index into a lookup table) and stays as it is.
+   *
+   * This cannot move into a shared module: the CLI loads this file straight out
+   * of the published package, which ships only
+   * `src/migrations/**\/transform.ts` — see this package's AGENTS.md.
+   */
+  const rewriteValuePositions = (node: ValueNode): ValueNode => {
+    if (isPrimaryLiteral(node)) {
+      return j.stringLiteral("default");
+    }
+    if (node?.type === "ConditionalExpression") {
+      node.consequent = rewriteValuePositions(node.consequent);
+      node.alternate = rewriteValuePositions(node.alternate);
+      return node;
+    }
+    if (node?.type === "LogicalExpression") {
+      if (node.operator !== "&&") {
+        node.left = rewriteValuePositions(node.left);
+      }
+      node.right = rewriteValuePositions(node.right);
+      return node;
+    }
+    return node;
   };
 
   const root = j(fileInfo.source, { parser: "tsx" });
@@ -112,12 +156,13 @@ const colorPrimaryToDefaultTransform: Transform = (fileInfo, { j }) => {
         continue;
       }
 
-      // color={"primary"}
+      // color={"primary"}, and every value position inside a dynamic value:
+      // color={cond ? "primary" : "x"}, color={fallback ?? "primary"}.
       if (
         value?.type === "JSXExpressionContainer" &&
-        isPrimaryLiteral(value.expression)
+        value.expression.type !== "JSXEmptyExpression"
       ) {
-        value.expression = j.stringLiteral("default");
+        value.expression = rewriteValuePositions(value.expression);
       }
     }
   });

@@ -280,6 +280,37 @@ it. To keep the previous behaviour (closing without confirmation), set
 
 ---
 
+<a id="password-tools-subpath-renamed"></a>
+
+## `password-tools` entry renamed to `mittwald-password-tools-js`
+
+**Since `0.2.0-alpha.1000`** · migration · codemod available
+
+The subpath export carrying the `@mittwald/password-tools-js` integration is
+called `@mittwald/flow-react-components/mittwald-password-tools-js`. Between
+`0.2.0-alpha.913` and `0.2.0-alpha.999` it was called
+`@mittwald/flow-react-components/password-tools`; `0.2.0-alpha.1000` reverted
+that name.
+
+```diff
+- import { Rule } from "@mittwald/flow-react-components/password-tools";
++ import { Rule } from "@mittwald/flow-react-components/mittwald-password-tools-js";
+```
+
+Only code written against a version inside that window is affected. There is no
+deprecation path and no fallback: a subpath export that no longer exists is a
+hard `TS2307` ("Cannot find module") and fails the build.
+
+**Apply:** Replace the import path
+`@mittwald/flow-react-components/password-tools` with
+`@mittwald/flow-react-components/mittwald-password-tools-js`.
+
+```shell
+npx @mittwald/flow-codemods@latest password-tools-subpath-renamed src
+```
+
+---
+
 <a id="table-column-width-props"></a>
 
 ## TableColumn: `maxWidth` removed, `width` and `minWidth` retyped

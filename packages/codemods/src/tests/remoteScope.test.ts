@@ -62,15 +62,17 @@ const targets: Record<string, string[]> = {
   ],
   "imports-to-package-root": [],
   "renamed-css-export": [],
+  "password-tools-subpath-renamed": [],
 };
 
 /**
- * These two are about the package layout itself rather than about names in it,
- * so there is nothing to look up in `remoteExports`.
+ * These are about the package layout itself rather than about names in it, so
+ * there is nothing to look up in `remoteExports`.
  */
 const notNameScoped = new Set([
   "imports-to-package-root",
   "renamed-css-export",
+  "password-tools-subpath-renamed",
 ]);
 
 /**

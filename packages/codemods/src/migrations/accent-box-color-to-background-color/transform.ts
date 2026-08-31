@@ -20,8 +20,12 @@ import type { Transform } from "jscodeshift";
  * Two cases are left alone, because both are undecidable without knowing the
  * value:
  *
- * - Dynamic values (`color={expression}`). The same expression means the
- *   background in old code and the content color in new code.
+ * - Values it cannot read (`color={expression}`), and expressions that mix both
+ *   meanings (`color={flag ? "blue" : "dark"}`). The same expression means the
+ *   background in old code and the content color in new code, and a mix has no
+ *   single correct answer. An expression whose every value position is a
+ *   literal on the same side of the split _is_ decidable and gets renamed:
+ *   `color={flag ? "blue" : "green"}`.
  * - An element that already carries `backgroundColor`. Moving `color` there would
  *   silently overwrite the explicit value.
  *
@@ -59,6 +63,54 @@ const accentBoxColorToBackgroundColorTransform: Transform = (
     }
     const { value } = node as { value?: unknown };
     return typeof value === "string" ? value : undefined;
+  };
+
+  /**
+   * Every literal that could become this attribute's value, or `undefined` when
+   * any of those positions is something we cannot read. The positions are the
+   * expression itself, both ternary branches, and the operands of `??`/`||` —
+   * plus only the right operand of `&&`, since `&&` yields its left operand
+   * only when that operand is falsy and a non-empty string never is.
+   *
+   * A list, not a single value, because this transform decides per attribute,
+   * not per literal: `color={flag ? "blue" : "dark"}` mixes a background with a
+   * content colour, and no single rename is right for both.
+   */
+  const valueLiterals = (node: unknown): string[] | undefined => {
+    const literal = literalValue(node);
+    if (literal !== undefined) {
+      return [literal];
+    }
+    if (!node || typeof node !== "object" || !("type" in node)) {
+      return undefined;
+    }
+    const typed = node as {
+      type: string;
+      operator?: string;
+      consequent?: unknown;
+      alternate?: unknown;
+      left?: unknown;
+      right?: unknown;
+    };
+    if (typed.type === "ConditionalExpression") {
+      const consequent = valueLiterals(typed.consequent);
+      const alternate = valueLiterals(typed.alternate);
+      return consequent && alternate
+        ? [...consequent, ...alternate]
+        : undefined;
+    }
+    if (typed.type === "LogicalExpression") {
+      const right = valueLiterals(typed.right);
+      if (right === undefined) {
+        return undefined;
+      }
+      if (typed.operator === "&&") {
+        return right;
+      }
+      const left = valueLiterals(typed.left);
+      return left ? [...left, ...right] : undefined;
+    }
+    return undefined;
   };
 
   const root = j(fileInfo.source, { parser: "tsx" });
@@ -137,14 +189,22 @@ const accentBoxColorToBackgroundColorTransform: Transform = (
 
       const value = attribute.value;
 
-      // color="…" and color={"…"} — the only forms we can decide.
-      const literal =
-        literalValue(value) ??
-        (value?.type === "JSXExpressionContainer"
-          ? literalValue(value.expression)
-          : undefined);
+      const literals =
+        value?.type === "JSXExpressionContainer"
+          ? valueLiterals(value.expression)
+          : valueLiterals(value);
 
-      if (literal === undefined || contentColors.has(literal)) {
+      if (literals === undefined || literals.length === 0) {
+        continue;
+      }
+
+      // All-or-nothing. Every value has to be a background colour for the
+      // rename to be right; all content colours means the element already uses
+      // the new meaning, and a mix has no single correct answer.
+      const backgrounds = literals.filter(
+        (literal) => !contentColors.has(literal),
+      );
+      if (backgrounds.length !== literals.length) {
         continue;
       }
 

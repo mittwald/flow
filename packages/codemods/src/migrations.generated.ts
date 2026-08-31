@@ -67,6 +67,16 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
       "No code change required — if you had `requireCloseModalConfirmationOnUnsavedChanges` enabled, the new default matches it. To keep the previous behaviour (closing without confirmation), set `Form: { confirmModalCloseOnUnsavedChanges: false }` via `<ComponentDefaultsProvider />`, or its deprecated equivalent, the `flags.requireCloseModalConfirmationOnUnsavedChanges = false` assignment.",
   },
   {
+    id: "password-tools-subpath-renamed",
+    since: "0.2.0-alpha.1000",
+    title: "`password-tools` entry renamed to `mittwald-password-tools-js`",
+    kind: "migration",
+    action: "codemod",
+    remotePackage: false,
+    apply:
+      "Replace the import path `@mittwald/flow-react-components/password-tools` with `@mittwald/flow-react-components/mittwald-password-tools-js`.",
+  },
+  {
     id: "table-column-width-props",
     since: "0.2.0-alpha.956",
     title: "TableColumn: `maxWidth` removed, `width` and `minWidth` retyped",
