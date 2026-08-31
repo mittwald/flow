@@ -9,7 +9,6 @@ import {
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
-import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button, Icon, LayoutCard } from "@mittwald/flow-react-components";
 import { IconArrowBarBoth } from "@tabler/icons-react";
@@ -242,7 +241,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       code={codeToDisplay}
       scope={{
         ...scope,
-        ...EditorComponents,
       }}
       transformCode={transformCode}
     >

@@ -26,8 +26,6 @@ export const CONTENT_ORDER: readonly string[] = [
   "/foundations/content-guidelines/sprach-guide",
   "/foundations/content-guidelines/informationskonzept",
   "/foundations/content-guidelines/fehlermeldungen",
-  "/foundations/internal",
-  "/foundations/internal/boundaries",
   "/patterns",
   "/patterns/patterns",
   "/patterns/codesnippets",

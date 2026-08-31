@@ -89,22 +89,6 @@
     background-color: var(--code-block--background-color) !important;
     font-size: var(--font-size-text--s);
   }
-
-  .staticModal {
-    --modal--size--s: auto;
-    --modal--size--m: auto;
-    --modal--size--l: auto;
-
-    > div {
-      pointer-events: auto;
-      height: unset;
-      padding: unset;
-      justify-content: unset;
-      align-items: unset;
-      position: unset;
-      box-shadow: var(--shadow--overlay);
-    }
-  }
 }
 
 .editorContainer {
