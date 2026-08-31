@@ -50,10 +50,14 @@ You can then run the tests using the following command:
 pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
-The tests run **headless**. Omitting `--browser.name` runs both browsers — and
-therefore both themes — as the scheduled run and the `run-visual-tests` label
-do. Firefox then needs `--browser.fileParallelism=false`, because it has issues
-with parallelized testing (`test:visual:update` already passes it).
+The tests run **headless** and one file at a time. Omitting `--browser.name`
+runs both browsers — and therefore both themes — as the scheduled run and the
+`run-visual-tests` label do.
+
+One file at a time is required: firefox renders no focus styling in a page that
+is not the focused one, and running files in parallel leaves most of them
+unfocused. It is set in the visual project's vitest config, so there is no flag
+to pass.
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
@@ -64,6 +68,16 @@ with the test:
 ```sh
 pnpm nx run remote-react-components:test:visual:dev --browser.name=webkit
 ```
+
+#### Dev mode renders differently
+
+A headed browser antialiases differently than a headless one, so most scenarios
+fail here on small diffs that mean nothing. Use dev mode to watch and debug, and
+judge screenshots from a headless run — its diff lands in the gitignored
+`.vitest-attachments/…`, with reference, actual and diff side by side.
+
+The vitest UI stays off for this project: it scales the tests into a smaller
+frame, which made every screenshot fail on its dimensions.
 
 #### Remote ≠ Local
 
@@ -123,6 +137,46 @@ the screenshots used in CI (Linux) are updated as well.
 
 The best way to learn how tests are structured is to look at existing test
 cases.
+
+### Waiting for the focus
+
+`testScreenshot`'s preamble waits for the document to stop **mutating**. A focus
+move is not a mutation — `:focus` / `:focus-within` are pseudo-classes — and a
+react-aria focus restore fired by an unmounting popover lands after the quiet
+window anyway. Nothing in the preamble can wait for it.
+
+So synchronize on the focus yourself, with the helpers in
+`src/tests/lib/scenarioFocus.ts`, whenever a step or a capture depends on where
+the focus sits:
+
+```tsx
+await userEvent.keyboard("{enter}"); // closes the calendar, restores the focus
+
+await waitForFocusInTheScenario(); // the restore has landed
+
+await userEvent.keyboard("{tab}");
+
+await waitForFocusOutsideTheScenario(); // Tab has taken the focus out again
+
+await testScreenshot("DatePicker - date selected");
+```
+
+Two situations need this:
+
+- **A step that closes an overlay** (Escape, Enter on a calendar cell, a click
+  on a menu item). react-aria restores the focus to the trigger asynchronously,
+  and a key press sent into that window is undone by the restore landing after
+  it — the scenario continues from a state it never asked for.
+- **A capture whose reference encodes a focus ring**, or the absence of one.
+
+Skipping the wait costs a ~1% diff in whichever environment lost the race. Both
+environments share one reference, so it shows up as a random per-run failure
+rather than as a race — and no amount of sleeping fixes it. `Local` renders
+synchronously and usually wins, `Remote` applies every interaction a serializer
+round trip late, so a green `Local` says nothing about `Remote`.
+
+A plain `click()` or `fill()` needs no wait: the locator action resolves after
+the browser has moved the focus.
 
 ### Notes on Chromium
 
