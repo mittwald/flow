@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    // CommonJS, deliberately, and the one thing this config exists for.
+    //
+    // jscodeshift's worker `require()`s the transform file. It installs
+    // `@babel/register` first, but babel-register's `only` defaults to the
+    // current working directory — a transform inside the consumer's
+    // `node_modules` is outside it, so babel never claims the file and Node's
+    // own `.ts` handler takes over. Node then refuses:
+    // ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING ("Stripping types is
+    // currently unsupported for files under node_modules"), which has no
+    // opt-out. Every codemod died that way in a published install.
+    //
+    // ESM output would not fix it either: `require()` of ESM only works from
+    // Node 22.12, and `engines` allows 22.0. Plain CommonJS is loadable by
+    // every supported Node with no babel involved at all — which the shipped
+    // transforms can afford, because each imports nothing but *types* from
+    // jscodeshift, so the emitted JavaScript has no runtime imports.
+    // `moduleResolution` is deliberately absent: TypeScript 7 removed `node10`,
+    // and `module: commonjs` implies the resolution this needs anyway. The base
+    // config sets `module: "preserve"`, which is what has to be overridden here.
+    "module": "commonjs",
+    // `.js` under a `"type": "module"` package is ESM, so the emitted files
+    // need a `{"type": "commonjs"}` marker beside them. `dev/buildTransforms.ts`
+    // writes it after this compile — see the comment there.
+    "verbatimModuleSyntax": false,
+    // Nothing imports a transform as a module: jscodeshift loads it by path.
+    "declaration": false,
+    "declarationMap": false,
+    "composite": false,
+    "tsBuildInfoFile": "tsconfig.transforms.tsbuildinfo",
+    "types": ["node"]
+  },
+  "exclude": ["src/**/*.test.ts"],
+  "extends": "./tsconfig.json",
+  "include": ["src/migrations/**/transform.ts", "src/tools/*.ts"]
+}

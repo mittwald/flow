@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { unknownCodemodMessage } from "../catalog/entries.js";
 // jscodeshift ships no types for its Runner — `allowJs` in this repo's shared
 // tsconfig (packages/typescript-config/base.json) lets a deep import of a
@@ -9,33 +9,50 @@ import { unknownCodemodMessage } from "../catalog/entries.js";
 import { run as runJscodeshift } from "jscodeshift/src/Runner.js";
 
 /**
- * `<packageRoot>/src/migrations` and `<packageRoot>/src/tools`, from either
- * `src/run` or `dist/run`.
- *
- * `dist` mirrors `src`'s directory depth, so one pair of relative paths serves
- * the test run and the published binary. The transforms are not compiled into
- * `dist`: jscodeshift puts a transform through its own babel pipeline, so it
- * wants the `.ts` file.
+ * The package root, from either `src/run` or `dist/run` — both are two levels
+ * down, so one expression serves the test run and the published binary.
  */
-const migrationsDir = fileURLToPath(
-  new URL("../../src/migrations", import.meta.url),
-);
-const toolsDir = fileURLToPath(new URL("../../src/tools", import.meta.url));
+const packageRoot = fileURLToPath(new URL("../../", import.meta.url));
 
 /**
- * The transform file for `id`: `src/migrations/<id>/transform.ts` when `id`
- * names a migration, otherwise `src/tools/<id>.ts`.
+ * Where a transform for `id` may live, most preferred first.
  *
- * Deliberately independent of the catalogue: `to-remote-package` is a transform
- * with no catalogue entry (it is a port, not a migration — see `notAMigration`
- * in `src/tests/remoteScope.test.ts`), and it still has to be runnable by id.
- * It lives in `src/tools` rather than `src/migrations` for exactly that reason
- * — there is no migration directory to put it beside.
+ * The compiled CommonJS in `dist` comes first, and in a published install it is
+ * the only one that works. jscodeshift's worker `require()`s this path; it
+ * installs `@babel/register` beforehand, but babel-register's `only` defaults
+ * to the current working directory, so a transform inside the consumer's
+ * `node_modules` is never claimed by babel. Node's own `.ts` handler takes over
+ * and refuses — `ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING`, no opt-out — and
+ * every codemod dies before touching a file. See `tsconfig.transforms.json`.
+ *
+ * The `.ts` sources stay as a fallback for running out of the repo (`tsx`, the
+ * unit tests, `dist` not built yet), where cwd _is_ inside the package and
+ * babel-register does claim them. They are no longer published: `files` ships
+ * `dist` only, so the path that cannot work is absent from the tarball rather
+ * than merely deprioritised.
+ *
+ * `src/tools` is searched alongside `src/migrations` because
+ * `to-remote-package` is a transform with no catalogue entry (a port, not a
+ * migration — see `notAMigration` in `src/tests/remoteScope.test.ts`) and still
+ * has to be runnable by id.
  */
-const transformPath = (id: string): string => {
-  const migrationPath = `${migrationsDir}/${id}/transform.ts`;
-  return existsSync(migrationPath) ? migrationPath : `${toolsDir}/${id}.ts`;
-};
+const candidatePaths = (id: string): string[] => [
+  `${packageRoot}dist/migrations/${id}/transform.js`,
+  `${packageRoot}dist/tools/${id}.js`,
+  `${packageRoot}src/migrations/${id}/transform.ts`,
+  `${packageRoot}src/tools/${id}.ts`,
+];
+
+/** The transform file for `id`, or `undefined` when no candidate exists. */
+const findTransform = (id: string): string | undefined =>
+  candidatePaths(id).find((candidate) => existsSync(candidate));
+
+/**
+ * The transform file for `id`, falling back to the last candidate so callers
+ * that only report a path still have one to name.
+ */
+const transformPath = (id: string): string =>
+  findTransform(id) ?? `${packageRoot}src/tools/${id}.ts`;
 
 /**
  * Whether `id` names a transform file on disk.
@@ -87,7 +104,10 @@ interface RunnerStats {
  * `processedNothing` exists because jscodeshift reports a path with no matching
  * files and a worker that died before touching one the same way: every counter
  * zero, no error. The caller must not render that as "0 files changed", which
- * reads like success.
+ * reads like success. The load check below removes the most common cause of the
+ * second case, so `processedNothing` now means the path far more often than it
+ * used to — but not always: a worker can still die for a reason a successful
+ * load does not predict, so the flag keeps its deliberately vague name.
  */
 export const runCodemod = async ({
   id,
@@ -99,6 +119,31 @@ export const runCodemod = async ({
 
   if (!existsSync(transform)) {
     throw new Error(unknownCodemodMessage(id));
+  }
+
+  // Load the transform here, in this process, before handing its path to
+  // jscodeshift.
+  //
+  // A worker that cannot load the transform dies before it touches a file, and
+  // the Runner then resolves with every counter at zero — indistinguishable
+  // from a path that matched nothing (see `processedNothing`). The stack trace
+  // goes to the worker's stderr, where the summary line the caller prints
+  // contradicts it by guessing at the path instead. Loading it up front turns
+  // that class of failure into a thrown error naming the real cause, which is
+  // the only way a caller can tell "this migration got no run at all" from
+  // "this migration had nothing to do".
+  //
+  // Safe to do: every shipped transform imports nothing but types, so loading
+  // one has no side effects and costs a file read.
+  try {
+    await import(pathToFileURL(transform).href);
+  } catch (error) {
+    throw new Error(
+      `${id} could not be loaded from ${transform}: ${
+        error instanceof Error ? error.message : error
+      }`,
+      { cause: error },
+    );
   }
 
   let stats: RunnerStats;
