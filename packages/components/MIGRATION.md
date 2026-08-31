@@ -23,6 +23,38 @@ separately, and only when coming from `0.1.0`.
 
 ---
 
+## From version `1.0.11` to `>=1.0.12`
+
+### `useDesignTokens()` no longer returns style-dictionary build metadata
+
+The hook imported the design tokens' full style-dictionary output, which carries
+`filePath`, `isSource`, `original`, `name`, `attributes` and `key` on every one
+of the 1538 tokens. That metadata is 94 % of the payload and meant nothing in a
+browser — it put 1.37 MB of JavaScript into every bundle that touched the
+package. The hook now reads a runtime build of the same tokens.
+
+Every token keeps `value` and `path`, unchanged and with identical values, so
+the common access patterns are untouched:
+
+```tsx
+const tokens = useDesignTokens();
+tokens["loading-spinner"]["transition-duration"].value; // still works
+tokens.axis.color.path; // still works
+```
+
+Only the build metadata is gone. If you read one of those fields, take it from
+`@mittwald/flow-design-tokens/json/all-light.json` (or `all-dark.json`) directly
+— that artifact is unchanged. Do not import it into browser code; it is the
+reason this change exists.
+
+```diff
+- const source = useDesignTokens().button["corner-radius"].filePath;
++ import tokens from "@mittwald/flow-design-tokens/json/all-light.json";
++ const source = tokens.button["corner-radius"].filePath;
+```
+
+---
+
 ## From version `0.2.0-alpha.1055` to `>=0.2.0-alpha.1056`
 
 ### SegmentedControl deprecated

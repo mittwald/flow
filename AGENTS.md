@@ -65,7 +65,8 @@ RemoteRoot + remote React components  ───►  RemoteRenderer + RemoteRecei
 Base tokens (colors, font, sizes, …) are taboo — never invent or modify them.
 Adding **component tokens** for a new component is fine: model them on existing
 components and ask when unsure. [style-dictionary](https://styledictionary.com/)
-compiles YAML → `dist/css` (CSS variables) and `dist/json`.
+compiles YAML → `dist/css` (CSS variables), `dist/json` (full, with build
+metadata) and `dist/json-runtime` (values only — what browser bundles import).
 
 ## Repository map
 
