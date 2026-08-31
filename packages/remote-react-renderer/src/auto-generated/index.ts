@@ -101,6 +101,7 @@ import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
 import { RangeCalendar as RangeCalendar } from "@mittwald/flow-react-components";
 import { Rating as Rating } from "@mittwald/flow-react-components";
+import { RatingSegment as RatingSegment } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
 import { Segment as Segment } from "@mittwald/flow-react-components";
@@ -412,6 +413,10 @@ export const flowComponents = {
     RangeCalendar,
   ),
   "flr-rating": createFlowRemoteComponentRenderer("Rating", Rating),
+  "flr-rating-segment": createFlowRemoteComponentRenderer(
+    "RatingSegment",
+    RatingSegment,
+  ),
   "flr-search-field": createFlowRemoteComponentRenderer(
     "SearchField",
     SearchField,

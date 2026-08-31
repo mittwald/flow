@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "1.0.16",
+  "version": "1.1.0",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
@@ -24,6 +24,7 @@
     }
   },
   "files": [
+    "USAGE.md",
     "dist"
   ],
   "engines": {
@@ -64,6 +65,7 @@
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@quilted/threads": "^3.3.1",
+    "@tabler/icons-react": "^3.44.0",
     "@types/node": "^25.9.3",
     "@types/react-dom": "^19.2",
     "@types/semver": "^7.8.0",

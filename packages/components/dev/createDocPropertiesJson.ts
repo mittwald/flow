@@ -47,8 +47,19 @@ async function parse(): Promise<ComponentDoc[]> {
   return components;
 }
 
+const relativeFilePaths = (components: ComponentDoc[]): ComponentDoc[] => {
+  const packageRoot = path.resolve(".");
+
+  return components.map((component) => ({
+    ...component,
+    filePath: path.isAbsolute(component.filePath)
+      ? path.relative(packageRoot, component.filePath)
+      : component.filePath,
+  }));
+};
+
 async function createDocPropertiesJson() {
-  const components = await parse();
+  const components = relativeFilePaths(await parse());
   const targetFile = "./dist/assets/doc-properties.json";
 
   console.log("📝 Writing output file " + path.resolve(targetFile));
@@ -58,10 +69,7 @@ async function createDocPropertiesJson() {
   if (!fsSync.existsSync("./dist/assets")) {
     await fs.mkdir("./dist/assets");
   }
-  await fs.writeFile(
-    "./dist/assets/doc-properties.json",
-    JSON.stringify(components, null, 2),
-  );
+  await fs.writeFile(targetFile, JSON.stringify(components));
 
   console.log("✅  Done");
 }

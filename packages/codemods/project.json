@@ -1,0 +1,33 @@
+{
+  "name": "codemods",
+  "namedInputs": {
+    "codemods-src": [
+      "default",
+      "{projectRoot}/src/**/*",
+      "{projectRoot}/dev/**/*"
+    ]
+  },
+  "projectType": "library",
+  "sourceRoot": "packages/codemods/src",
+  "targets": {
+    "build": {
+      "cache": true,
+      "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/src/migrations.generated.ts",
+        "{projectRoot}/src/flowPackages.generated.ts",
+        "{workspaceRoot}/packages/components/MIGRATION.md"
+      ]
+    },
+    "test:unit": {
+      "cache": true,
+      "dependsOn": ["^build", "build"],
+      "inputs": [
+        "codemods-src",
+        { "dependentTasksOutputFiles": "**/*", "transitive": false },
+        "{workspaceRoot}/apps/docs/src/content/01-get-started/versioning/index.mdx"
+      ]
+    }
+  }
+}

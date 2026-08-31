@@ -1,38 +1,58 @@
-import { type FC, type PropsWithChildren, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import clsx from "clsx";
 import styles from "@/components/Rating/Rating.module.scss";
 import * as Aria from "react-aria-components";
-import type { RatingProps } from "@/components/Rating";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "@/lib/types/props";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
 import locales from "../../locales/*.locale.json";
+import { useRatingSegmentContext } from "@/components/Rating/context";
 import { FilledSegment } from "@/components/Rating/components/RatingSegment/FilledSegment";
 import { EmptySegment } from "@/components/Rating/components/RatingSegment/EmptySegment";
 
-interface Props extends PropsWithChildren {
-  index: number;
-  selectedValue: number;
-  size: RatingProps["size"];
+export interface RatingSegmentProps
+  extends
+    Omit<Aria.RadioProps, "children" | "value" | "className">,
+    PropsWithClassName,
+    FlowComponentProps<HTMLLabelElement> {
+  /** An alternative icon for the empty state of this segment */
   iconEmpty?: ReactElement;
+  /** An alternative icon for the filled state of this segment */
   iconFilled?: ReactElement;
+  /** @internal Set by the surrounding `Rating`. */
+  size?: "s" | "m";
+  /** A segment renders icons only. `never` keeps the shared props union usable. */
+  children?: never;
 }
-export const RatingSegment: FC<Props> = (props) => {
-  const { index, selectedValue, size, iconEmpty, iconFilled } = props;
 
-  const value = index + 1;
+/**
+ * @flr-generate all
+ * @flr-slot-props iconEmpty, iconFilled
+ */
+export const RatingSegment = flowComponent("RatingSegment", (props) => {
+  const { className, iconEmpty, iconFilled, size = "m", ref, ...rest } = props;
+
+  const { value, count } = useRatingSegmentContext();
 
   const stringFormatter = useLocalizedStringFormatter(locales, "Rating");
 
   return (
     <Aria.Radio
-      aria-label={stringFormatter.format(`segment.${value}`)}
+      aria-label={stringFormatter.format("segment", { value, count })}
+      {...rest}
       value={value.toString()}
-      className={clsx(
-        styles.ratingSegment,
-        value === selectedValue && styles.current,
-      )}
+      ref={ref}
+      className={({ isSelected }) =>
+        clsx(styles.ratingSegment, isSelected && styles.current, className)
+      }
     >
       <FilledSegment size={size}>{iconFilled}</FilledSegment>
       <EmptySegment size={size}>{iconEmpty}</EmptySegment>
     </Aria.Radio>
   );
-};
+});
+
+export default RatingSegment;

@@ -34,8 +34,9 @@
 <!-- APIs newly deprecated this release (via useWarnDeprecation). Deprecations
      are non-breaking (the old API still works and only warns), so this section
      belongs in minors too, not just majors. Per item: the replacement path,
-     plus a MIGRATION.md entry / codemod under packages/codemods where one
-     exists. Delete the section if there are none. -->
+     plus its MIGRATION.md entry and, where one exists, the codemod id to run
+     with `npx @mittwald/flow-codemods@latest <id> src`. Delete the section if
+     there are none. -->
 
 - …
 
@@ -57,4 +58,6 @@
 <!-- Only when there is something to migrate — delete this whole section if
      there are no breaking changes with migration steps (typically the case for
      a minor). Per breaking change: what changed, why, and the concrete
-     migration step. Link MIGRATION.md and any codemod under packages/codemods. -->
+     migration step. Link MIGRATION.md, and name the codemod id where one
+     exists. Lead the section with the one-liner that covers the whole range:
+     `npx @mittwald/flow-codemods@latest upgrade`. -->

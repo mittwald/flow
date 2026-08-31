@@ -58,3 +58,22 @@ Diese Defaults stehen zur Verfügung:
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------ |
 | `List.disableInitialSuspenseBoundary`    | Die List rendert beim initialen Laden keine eigene Suspense-Boundary, sondern erscheint erst mit geladenen Daten. | `false`            |
 | `Form.confirmModalCloseOnUnsavedChanges` | Das Schließen eines Modals, das eine Form mit ungespeicherten Änderungen enthält, muss bestätigt werden.          | `true`             |
+
+---
+
+# Aktualisieren
+
+Ein Befehl hebt alle Flow-Abhängigkeiten auf die Zielversion, installiert und
+führt den Codemod jeder Migration bis zu dieser Version aus:
+
+```shell
+npx @mittwald/flow-codemods@latest upgrade
+```
+
+Er ersetzt den Migrationsleitfaden nicht: die meisten Änderungen haben keinen
+Codemod. Was in deinem Bereich von Hand ansteht, listet der Befehl am Ende auf –
+vorab und ohne etwas zu verändern zeigt es `list`.
+
+Welche Änderung ab welcher Version greift, was Flow dir innerhalb einer Linie
+zusichert und wie Deprecation-Warnungen den Vorlauf bilden, steht unter
+[Versionierung & Stabilität](/01-get-started/versioning).
