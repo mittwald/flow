@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.0](https://github.com/mittwald/flow/compare/1.1.0-next.12...1.2.0-next.0) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
 ## [1.1.0-next.12](https://github.com/mittwald/flow/compare/1.0.16...1.1.0-next.12) (2026-08-31)
 
 ## [1.1.0-next.11](https://github.com/mittwald/flow/compare/1.0.15...1.1.0-next.11) (2026-08-31)
