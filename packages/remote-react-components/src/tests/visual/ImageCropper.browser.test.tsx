@@ -25,6 +25,48 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   },
 );
 
+/*
+ * An image the test server answers with 404. Only the `image` prop is involved,
+ * so an old remote version renders the same host output as the current one.
+ */
+const brokenImage = "/this-image-does-not-exist.png";
+
+test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
+  "ImageCropper load error (%s)",
+  async ({ testScreenshot, render, components: { ImageCropper } }) => {
+    await render(<ImageCropper image={brokenImage} height={200} width={200} />);
+
+    await testScreenshot("ImageCropper load error");
+  },
+);
+
+// errorView is available from 1.0.16.
+test.skipIf(crossVersion({ below: "1.0.16" })).each(testEnvironments)(
+  "ImageCropper custom error view (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: { ImageCropper, IllustratedMessage, IconDanger, Heading, Text },
+  }) => {
+    await render(
+      <ImageCropper
+        image={brokenImage}
+        height={200}
+        width={200}
+        errorView={
+          <IllustratedMessage color="danger">
+            <IconDanger />
+            <Heading>Bild nicht verfügbar</Heading>
+            <Text>Bitte lade das Bild erneut hoch.</Text>
+          </IllustratedMessage>
+        }
+      />,
+    );
+
+    await testScreenshot("ImageCropper custom error view");
+  },
+);
+
 test.skipIf(crossVersion({ below: "0.2.0-alpha.791" })).each(testEnvironments)(
   "ImageCropper interaction (%s)",
   async ({ testScreenshot, render, components: { ImageCropper } }) => {
