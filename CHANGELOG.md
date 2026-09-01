@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/mittwald/flow/compare/1.1.4...1.1.5) (2026-09-01)
+
+### Bug Fixes
+
+* **docs:** drop the classic JSX transform debug props from live examples (fixes [#3017](https://github.com/mittwald/flow/issues/3017)) ([#3020](https://github.com/mittwald/flow/issues/3020)) ([64abb32](https://github.com/mittwald/flow/commit/64abb3273f22ffe23707024028603e399f82da63))
+
 ## [1.1.4](https://github.com/mittwald/flow/compare/1.1.3...1.1.4) (2026-09-01)
 
 ### Bug Fixes
