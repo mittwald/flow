@@ -165,7 +165,7 @@ export const CustomSorting = () => {
         customSortingFn={domainTypeSortingFn}
       />
 
-      <DomainList.Item>
+      <DomainList.Item textValue={(domain) => domain.hostname}>
         {(domain) => (
           <DomainList.ItemView>
             <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>

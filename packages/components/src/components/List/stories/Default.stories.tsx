@@ -213,7 +213,7 @@ export const WithSummary: Story = {
               { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
             ]}
           />
-          <InvoiceList.Item>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
                 <Heading level={3}>{invoice.id}</Heading>
@@ -263,7 +263,7 @@ export const InfiniteScroll: Story = {
           <InvoiceList.LoaderAsync manualPagination>
             {loadInvoices}
           </InvoiceList.LoaderAsync>
-          <InvoiceList.Item>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
                 <Heading level={3}>{invoice.id}</Heading>
@@ -290,7 +290,10 @@ export const WithAccordion: Story = {
         <List.StaticData
           data={[{ id: "Tatooine" }, { id: "Hoth" }, { id: "Endor" }]}
         />
-        <List.Item defaultExpanded={(invoice) => invoice.id === "Tatooine"}>
+        <List.Item
+          textValue={(invoice) => invoice.id}
+          defaultExpanded={(invoice) => invoice.id === "Tatooine"}
+        >
           {(invoice) => (
             <ListItemView>
               <Heading>{invoice.id}</Heading>
