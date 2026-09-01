@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/mittwald/flow/compare/1.1.0...1.1.1) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** compile the transforms so a consumer install can load them ([#3040](https://github.com/mittwald/flow/issues/3040)) ([50f8075](https://github.com/mittwald/flow/commit/50f8075be5e9964479099d92126ab9db582cffaa))
+
 ## [1.1.0](https://github.com/mittwald/flow/compare/1.0.16...1.1.0) (2026-08-31)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
