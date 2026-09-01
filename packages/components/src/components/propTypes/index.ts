@@ -73,7 +73,10 @@ import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
-import type { MenuTriggerProps } from "@/components/OverlayTrigger";
+import type {
+  DialogTriggerProps,
+  MenuTriggerProps,
+} from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
@@ -130,6 +133,7 @@ export interface FlowComponentPropsTypes {
   CountryOptions: CountryOptionsProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
+  DialogTrigger: DialogTriggerProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
@@ -226,6 +230,7 @@ const propsContextSupportingComponentsMap: Record<
   CountryOptions: true,
   DatePicker: true,
   DateRangePicker: true,
+  DialogTrigger: true,
   FieldDescription: true,
   FieldError: true,
   FileCard: true,

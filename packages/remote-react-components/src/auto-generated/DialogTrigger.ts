@@ -16,5 +16,6 @@ export const DialogTrigger = createFlowRemoteComponent(
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },
+    type: "provider",
   },
 );

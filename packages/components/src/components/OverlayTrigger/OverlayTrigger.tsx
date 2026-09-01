@@ -57,6 +57,16 @@ export const OverlayTrigger: FC<Props> = (props) => {
        */
       tunnel: null,
     },
+    /*
+     * The aria trigger this renders is the host-side identity of every trigger
+     * that is not `@flr-generate` (see `overlayTriggersTunneledTo`), so a
+     * tunneling props context targets it as well. Here it is already inside the
+     * trigger the author wrote — tunneling it again would send the same subtree
+     * into the exit twice.
+     */
+    DialogTrigger: {
+      tunnel: null,
+    },
   };
 
   return (

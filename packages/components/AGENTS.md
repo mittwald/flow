@@ -130,7 +130,12 @@ return (
   trigger's button is the react-aria trigger: `OverlayTrigger` pins it with
   `tunnel: null`, because the press handling, the trigger ref and
   `aria-haspopup`/`aria-expanded`/`aria-controls` travel through a
-  `PressResponder` that only reaches its own subtree.
+  `PressResponder` that only reaches its own subtree. The list includes
+  `DialogTrigger` because a host sees a different component than the author
+  wrote: `ModalTrigger`, `PopoverTrigger` and `LightBoxTrigger` are not
+  `@flr-generate`, so a remote tree reaches the host as a `DialogTrigger` with
+  no `OverlayTrigger` around it — which is why `DialogTrigger` pins the button
+  itself as well.
 
 Why this works the way it does across the remote boundary:
 [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
@@ -153,6 +158,13 @@ Why this works the way it does across the remote boundary:
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- `@flr-provider` carries a `flowComponent`'s `type: "provider"` over to the
+  generated remote component. Without it the remote element is created as a
+  `"ui"` component and wrapped in a `ClearPropsContext` — which drops every
+  props context a provider around it just set. It only matters where the
+  provider actually runs inside the remote tree, i.e. where the component that
+  renders it is not itself `@flr-generate` (`ModalTrigger` → `OverlayTrigger` →
+  `DialogTriggerView`).
 - **A prop that carries rendered output has to be a slot, not a property.** A
   remote property is transported as data, and a React element carries
   `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
