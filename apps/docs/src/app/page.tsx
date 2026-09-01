@@ -45,7 +45,7 @@ const Home: FC = () => {
                 fördern nutzerzentriertes, barrierearmes Design und sorgen für
                 eine starke Developer Experience.
               </Text>
-              <Link href="/01-get-started/installation">Zu Get Started</Link>
+              <Link href="/get-started/installation">Zu Get Started</Link>
             </Section>
           </AccentBox>
         </LayoutCard>
@@ -81,7 +81,7 @@ const Home: FC = () => {
               </Link>{" "}
               verfügbar und hier im Styleguide dokumentiert.
             </Text>
-            <Link href="/04-components/actions/action-group">
+            <Link href="/components/actions/action-group">
               Zu den Components
             </Link>
           </Section>
@@ -156,7 +156,7 @@ const Home: FC = () => {
             <Text>
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
-            <Link href="/02-foundations/01-design/01-design-tokens">
+            <Link href="/foundations/design/design-tokens">
               Zu den Foundations
             </Link>
           </Section>
@@ -168,9 +168,7 @@ const Home: FC = () => {
               Finde passende Pattern für häufige Design- und
               Interaktionsaufgaben.
             </Text>
-            <Link href="/03-patterns/01-patterns/anlegeprozess">
-              Zu den Patterns
-            </Link>
+            <Link href="/patterns/patterns/anlegeprozess">Zu den Patterns</Link>
           </Section>
         </LayoutCard>
         <LayoutCard>
@@ -179,7 +177,7 @@ const Home: FC = () => {
             <Text>
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
-            <Link href="/04-components/actions/action-group">
+            <Link href="/components/actions/action-group">
               Zu den Components
             </Link>
           </Section>

@@ -167,7 +167,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "manual",
     remotePackage: true,
     apply:
-      "Check every `CodeBlock` usage against the current props (see the [CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview)) and remove or replace props the new implementation does not support.",
+      "Check every `CodeBlock` usage against the current props (see the [CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)) and remove or replace props the new implementation does not support.",
   },
   {
     id: "muted-action-error-to-abort-action-error",

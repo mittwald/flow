@@ -9,7 +9,7 @@ const contentDir = "src/content";
 /** Directories holding the app's own code — scanned for hardcoded links. */
 const sourceDirs = ["src/app", "src/lib"];
 
-const componentsSection = "04-components";
+const componentsSection = "components";
 
 /**
  * Routes kept as `redirect()` pages so links written before the component tabs

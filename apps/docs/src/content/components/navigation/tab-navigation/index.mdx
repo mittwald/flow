@@ -1,0 +1,74 @@
+---
+component: TabNavigation
+description:
+  Die TabNavigation ermöglicht die Navigation zwischen verschiedenen Seiten
+  innerhalb eines zusammengehörigen Bereichs.
+---
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Benenne die Seiten kurz, prägnant und verständlich.
+- Ordne die Seiten nach ihrer Wichtigkeit. Bei wenig Platz bleiben die vorderen
+  Seiten am längsten sichtbar.
+- Halte die Navigation schlank und beschränke sie auf relevante Bereiche.
+
+## Tabs vs. TabNavigation
+
+Flow bietet mit der TabNavigation und den [Tabs](/components/structure/tabs)
+zwei ähnlich aussehende Components, die sich aber in der Verwendung klar
+unterscheiden:
+
+<DoAndDont>
+  <Plain heading="Verwende Tabs, um ...">
+    Inhalte innerhalb derselben Seite umzuschalten, ohne zu navigieren.
+  </Plain>
+
+  <Plain heading="Verwende eine TabNavigation, um ...">
+    zwischen gleichrangigen Unterseiten zu navigieren.
+  </Plain>
+</DoAndDont>
+
+---
+
+# Responsives Overflow-Verhalten
+
+Passen nicht alle Links in die verfügbare Breite, bleiben die vorderen Links
+sichtbar und die übrigen werden ausgeblendet. Stattdessen erscheint rechts ein
+**Weitere**-Button, der die ausgeblendeten Links in einem
+[ContextMenu](/components/actions/context-menu) öffnet. Befindet sich die
+aktuell aktive Seite im ContextMenu, wird der Button wie ein aktiver Link
+dargestellt.
+
+<LiveCodeEditor example="overflow" editorCollapsed stretch />
+
+---
+
+# Mit Status-Icons
+
+Innerhalb der Links kann ein `AlertIcon` verwendet werden, um auf Zustände
+innerhalb eines Navigationsbereichs hinzuweisen.
+
+<LiveCodeEditor example="status" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit …
+
+## LayoutCard
+
+Platziere die TabNavigation in einer
+[LayoutCard](/components/structure/layout-card), um zwischen den Unterseiten zu
+navigieren. Der Inhalt der aktiven Seite wird darunter in derselben LayoutCard
+dargestellt.
+
+<LiveCodeEditor example="layout-card" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

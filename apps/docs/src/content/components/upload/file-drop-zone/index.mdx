@@ -1,0 +1,56 @@
+---
+component: FileDropZone
+description:
+  Die FileDropZone ermöglicht das Hochladen von Dateien per Drag-and-Drop oder
+  durch manuelle Auswahl.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Biete immer eine alternative Upload-Möglichkeit über einen
+  [Button](/components/actions/button).
+- Kommuniziere zulässige Dateitypen und mögliche Größenbeschränkungen deutlich.
+- Formuliere [Fehlermeldungen](/foundations/content-guidelines/fehlermeldungen)
+  klar und hilfreich.
+
+---
+
+# Vorgegebene Dateitypen
+
+Verwende `<Text />`, um den User über erlaubte Dateitypen und maximale
+Dateigrößen beim Hochladen zu informieren.
+
+<LiveCodeEditor example="type" editorCollapsed />
+
+---
+
+# Mehrere Dateien
+
+Über die Property `multiple` wird das gleichzeitige Hochladen mehrerer Dateien
+ermöglicht. Beim erneuten Hochladen werden bestehende Dateien ersetzt. Ein
+Beispiel für das Hochladen und Verwalten mehrerer Dateien findest du im
+Codesnippet [Multi Upload](/patterns/codesnippets/multi-upload).
+
+<LiveCodeEditor example="multiple" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## FileCardList
+
+Stelle die hochgeladenen Dateien übersichtlich mit einer
+[FileCardList](/components/upload/file-card-list) dar – für eine einzelne Datei
+genügt eine [FileCard](/components/upload/file-card).
+
+<LiveCodeEditor example="fileCardList" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -1,0 +1,25 @@
+"use client";
+import type { FC } from "react";
+import {
+  WBox,
+  WFrame,
+  WStack,
+  WText,
+} from "@/app/components/_components/wireframe/primitives";
+
+export const AccentBoxWireframe: FC = () => (
+  <WFrame scale={0.84}>
+    <WStack>
+      <WBox tone="400">
+        <WText width="60%" />
+        <WText width="100%" />
+      </WBox>
+      <WBox tone="600">
+        <WText width="50%" />
+        <WText width="80%" />
+      </WBox>
+    </WStack>
+  </WFrame>
+);
+
+export default AccentBoxWireframe;

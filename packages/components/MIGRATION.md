@@ -635,11 +635,11 @@ whose callbacks are typed from your own data shape.
 We've replaced the `react-syntax-highlighter` library, which means many
 properties have been removed and the remaining ones have been simplified. See
 the
-[CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview)
+[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block)
 for details on what's now supported.
 
 **Apply:** Check every `CodeBlock` usage against the current props (see the
-[CodeBlock documentation](https://flow.mittwald.de/04-components/content/code-block/overview))
+[CodeBlock documentation](https://flow.mittwald.de/components/content/code-block))
 and remove or replace props the new implementation does not support.
 
 ---

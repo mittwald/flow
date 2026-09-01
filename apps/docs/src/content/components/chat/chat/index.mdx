@@ -1,0 +1,48 @@
+---
+component: Chat
+description: Der Chat kombiniert den MessageThread mit einer Texteingabe.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Setze immer ein `aria-label` an der Texteingabe, da sie in der Regel kein
+  sichtbares Label hat.
+- Wähle die `height` Property so, dass genug Platz zum Lesen bleibt.
+
+---
+
+# Kombiniere mit ...
+
+## FileField
+
+Erweitere einen Chat um eine Uploadfunktion: Über ein
+[FileField](/components/form-controls/file-field) wählen User Dateien aus, die
+dann in einer [FileCardList](/components/upload/file-card-list) dargestellt
+werden.
+
+<LiveCodeEditor example="upload" editorCollapsed />
+
+## Markdown Editor
+
+Statt einer [TextArea](/components/form-controls/text-area) kann auch der
+[MarkdownEditor](/components/form-controls/markdown-editor) als Texteingabe
+verwendet werden.
+
+<LiveCodeEditor example="markdown-editor" editorCollapsed />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

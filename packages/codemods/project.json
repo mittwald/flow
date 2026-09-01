@@ -26,7 +26,7 @@
       "inputs": [
         "codemods-src",
         { "dependentTasksOutputFiles": "**/*", "transitive": false },
-        "{workspaceRoot}/apps/docs/src/content/01-get-started/versioning/index.mdx"
+        "{workspaceRoot}/apps/docs/src/content/get-started/versioning/index.mdx"
       ]
     }
   }

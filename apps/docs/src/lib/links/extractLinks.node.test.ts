@@ -7,10 +7,9 @@ const hrefsOf = (source: string) =>
 
 describe("extractMdxLinks", () => {
   it("finds a markdown link", () => {
-    assert.deepEqual(
-      hrefsOf("Siehe [Button](/04-components/actions/button)."),
-      ["/04-components/actions/button"],
-    );
+    assert.deepEqual(hrefsOf("Siehe [Button](/components/actions/button)."), [
+      "/components/actions/button",
+    ]);
   });
 
   it("finds a markdown link with a title", () => {
@@ -25,8 +24,8 @@ describe("extractMdxLinks", () => {
 
   it("finds a JSX href", () => {
     assert.deepEqual(
-      hrefsOf('<Link href="/02-foundations/themes">Themes</Link>'),
-      ["/02-foundations/themes"],
+      hrefsOf('<Link href="/foundations/themes">Themes</Link>'),
+      ["/foundations/themes"],
     );
   });
 
