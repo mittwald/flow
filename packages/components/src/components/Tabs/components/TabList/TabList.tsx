@@ -13,7 +13,7 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 interface Props {
-  selection: Aria.Key | null;
+  selection: Aria.Key | undefined;
   onContextMenuSelectionChange: (key: Aria.Key) => void;
   disabledKeys?: Iterable<Aria.Key>;
   "aria-label"?: string;
