@@ -49,6 +49,13 @@
   height: fit-content;
 }
 
+.pageHeading {
+  // This anchor means "the top of the page". The heading always sits within the
+  // first screenful, so a full-viewport offset clamps the jump to 0 — a fixed
+  // length would need re-tuning whenever the header or page padding changes.
+  scroll-margin-top: 100vh;
+}
+
 .main {
   display: flex;
   flex-direction: column;
