@@ -1,8 +1,8 @@
 ---
 component: CartesianChart
 description:
-  Das CartesianChart stellt Metriken über Zeit als Liniendiagramm oder
-  Flächendiagramm dar.
+  Das CartesianChart stellt Metriken als Linien-, Flächen- oder Balkendiagramm
+  dar.
 ---
 
 <LiveCodeEditor editorCollapsed />
@@ -16,13 +16,16 @@ description:
   [Categorical Colors](/foundations/design/colors#categorical-color) dar.
 - Sortiere die Areas bei der Area-Darstellung nach Größe, die größte unten.
 - Halte die Zahl der Dimensionen übersichtlich. Das sichert die Lesbarkeit.
+- Bei der Bar-Darstellung darf die x-Achse auch kategorisch sein. Balken
+  vergleichen Kategorien, nicht nur Zeitpunkte.
+- Stapele Balken nur dort, wo die Summe eine Bedeutung hat.
 
 ---
 
 # Darstellungstypen
 
 Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`,
-`<Line />` oder eine Kombination aus beiden verwendet werden.
+`<Line />`, `<Bar />` oder eine Kombination daraus verwendet werden.
 
 ## Line
 
@@ -37,6 +40,32 @@ Zeigt die Entwicklung des Gesamtwerts über einen Zeitraum und den jeweiligen
 Anteil einzelner Objekte daran.
 
 <LiveCodeEditor example="area" editorCollapsed />
+
+## Bar
+
+Vergleicht Werte einzelner Kategorien miteinander. Ohne `stackId` stehen die
+Balken einer Kategorie nebeneinander.
+
+<LiveCodeEditor example="bar" editorCollapsed />
+
+Mehrere `<Bar />` mit derselben `stackId` werden gestapelt. Das zeigt den Anteil
+einzelner Objekte am Gesamtwert einer Kategorie.
+
+<LiveCodeEditor example="barStacked" editorCollapsed />
+
+### Ausrichtung
+
+Die Property `layout` bestimmt, wo die Kategorie-Achse liegt. Mit dem Default
+`horizontal` liegt sie auf der x-Achse, die Balken wachsen nach oben. Mit
+`vertical` liegt sie auf der y-Achse und die Balken wachsen zur Seite. Der
+`dataKey` wandert dabei auf die `<YAxis />`, die Achsentypen ergeben sich von
+selbst.
+
+Nutze die vertikale Ausrichtung für lange Kategorie-Namen oder für viele
+Kategorien. Nur Balken lassen sich sinnvoll drehen. `<Line />` und `<Area />`
+zeigen einen Verlauf und bleiben horizontal.
+
+<LiveCodeEditor example="barHorizontal" editorCollapsed />
 
 ---
 

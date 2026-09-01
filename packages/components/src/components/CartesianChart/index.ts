@@ -7,6 +7,7 @@ export {
 } from "./CartesianChart";
 export * from "./components/Area";
 export * from "./components/AreaDot";
+export * from "./components/Bar";
 export * from "./components/Line";
 export * from "./components/ChartTooltip";
 export * from "./components/ChartGrid";

@@ -30,7 +30,7 @@ export type YAxisProps<
 
 /** @flr-generate all */
 export const YAxis: FC<YAxisProps> = (props) => {
-  const { domain, ...rest } = props;
+  const { domain, type = "auto", ...rest } = props;
 
   const tokens = useDesignTokens();
 
@@ -39,6 +39,7 @@ export const YAxis: FC<YAxisProps> = (props) => {
       {...rest}
       allowDataOverflow
       domain={domain}
+      type={type}
       fontSize={tokens.axis["font-size"].value}
       tick={{
         fill: tokens.axis["color"].value,
