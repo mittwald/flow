@@ -254,9 +254,9 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     since: "0.1.0-alpha.292",
     title: "Renamed CSS export",
     kind: "migration",
-    action: "manual",
+    action: "codemod",
     remotePackage: false,
     apply:
-      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`.",
+      "Replace the import `@mittwald/flow-react-components/styles` with `@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript and TypeScript files. An `@import` of the old path inside a `.css` or `.scss` file is not covered — search for it by hand.",
   },
 ];

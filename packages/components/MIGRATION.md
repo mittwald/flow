@@ -1070,7 +1070,7 @@ npx @mittwald/flow-codemods@latest imports-to-package-root src
 
 ## Renamed CSS export
 
-**Since `0.1.0-alpha.292`** · migration · manual change
+**Since `0.1.0-alpha.292`** · migration · codemod available
 
 The CSS export `@mittwald/flow-react-components/styles` has renamed to the more
 precise name `@mittwald/flow-react-components/all.css`, because the file
@@ -1083,5 +1083,15 @@ as well. A documentation on how to use them is planned.
 + import "@mittwald/flow-react-components/all.css";
 ```
 
+A codemod rewrites the specifier in every JavaScript and TypeScript form that
+names a module. It cannot reach a `.css` or `.scss` file, so an `@import` of the
+old path there needs a manual search.
+
 **Apply:** Replace the import `@mittwald/flow-react-components/styles` with
-`@mittwald/flow-react-components/all.css`.
+`@mittwald/flow-react-components/all.css`. A codemod does this for JavaScript
+and TypeScript files. An `@import` of the old path inside a `.css` or `.scss`
+file is not covered — search for it by hand.
+
+```shell
+npx @mittwald/flow-codemods@latest renamed-css-export src
+```
