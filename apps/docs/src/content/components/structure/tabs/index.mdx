@@ -62,6 +62,29 @@ aktiv sein, legst du das über `defaultSelectedKey` fest.
 
 ---
 
+# Beschriftung
+
+Tabs haben keinen `Label`-Slot – die Tab-Leiste beschriftet sich über ihre
+Tab-Titel. Benennt die Überschrift der umgebenden `Section` die Gruppe bereits,
+reicht das. Wenn nicht, gib der Tab-Leiste über `aria-label` einen eigenen Namen
+– oder verweise mit `aria-labelledby` auf eine vorhandene Überschrift, damit der
+Name nur an einer Stelle gepflegt wird.
+
+```tsx
+<Tabs aria-label="Verbindungsart">
+  <Tab>
+    <TabTitle>Mit App verbinden</TabTitle>
+    App Content
+  </Tab>
+  <Tab>
+    <TabTitle>Mit Container verbinden</TabTitle>
+    Container Content
+  </Tab>
+</Tabs>
+```
+
+---
+
 # Reihenfolge der Tabs
 
 Werden innerhalb eines Tabs Inhalte nachgeladen, kann sich durch das Rerendering

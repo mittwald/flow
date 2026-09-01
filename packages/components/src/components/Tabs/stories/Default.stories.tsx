@@ -20,6 +20,9 @@ const meta: Meta<typeof Tabs> = {
   parameters: {
     controls: { disable: true },
   },
+  args: {
+    "aria-label": "Mailbox settings",
+  },
   render: (props) => {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>
