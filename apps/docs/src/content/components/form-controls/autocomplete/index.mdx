@@ -1,0 +1,67 @@
+---
+component: Autocomplete
+description:
+  Autocomplete ergänzt eine Texteingabe um kontextbezogene Vorschläge.
+---
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Zeige kontextbezogene Vorschläge an.
+- Filtere die Vorschlagsliste bei Bedarf sinnvoll vor. Das kann zum Beispiel
+  nach Kategorien oder Kontext erfolgen.
+- Zeige bei leerem Eingabefeld zunächst keine Vorschläge an.
+
+## Autocomplete vs. ComboBox
+
+Autocomplete und [ComboBoxen](/components/form-controls/combo-box) sehen oft
+ähnlich aus, erfüllen aber unterschiedliche Zwecke.
+
+<DoAndDont>
+<Plain heading="Verwende Autocomplete, um z. B. ...">
+- Usern zu ermöglichen, freie Eingaben zu machen, während Vorschläge zur Auswahl angezeigt werden.
+- bei langen oder dynamischen Datenlisten (z. B. Städte, Usernamen, Tags).
+</Plain>
+
+<Plain heading="Verwende ComboBox, um z. B. ...">
+- aus einer vordefinierten Liste von Optionen eine Auswahl zu treffen.
+- bei bekannten, überschaubaren Optionen (z. B. Sprachen, Kategorien, Geschlecht).
+</Plain>
+</DoAndDont>
+
+---
+
+# Benutzerdefinierte Filter
+
+Schränke die Optionen, die dem User zur Auswahl stehen, mithilfe von Filtern
+ein.
+
+<LiveCodeEditor example="filter" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## SearchField
+
+Nutze `<Autocomplete />` mit einem
+[SearchField](/components/form-controls/search-field), um die User beim Suchen
+mit Vorschlägen zu unterstützen.
+
+<LiveCodeEditor example="search" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

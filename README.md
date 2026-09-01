@@ -64,7 +64,7 @@ export default function App() {
 Prefer to override Flow's styles without specificity tricks? Import the
 [CSS Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)
 variant instead — `@mittwald/flow-react-components/all-layered.css`. See the
-[stylesheet guide](https://flow.mittwald.de/01-get-started/stylesheet#layered-variante-optional)
+[stylesheet guide](https://flow.mittwald.de/get-started/stylesheet#layered-variante-optional)
 for when to use which.
 
 Set application-wide component defaults once by wrapping your app in
@@ -127,8 +127,17 @@ and a remote-rendering demo ([`apps/remote-dom-demo`](apps/remote-dom-demo)).
 
 ## Migration
 
-See the [Migration Guide](packages/components/MIGRATION.md). Full history is in
-[CHANGELOG.md](CHANGELOG.md).
+One command bumps every Flow dependency to the target version, installs, and
+runs the codemod of every migration up to that version:
+
+```shell
+npx @mittwald/flow-codemods@latest upgrade
+```
+
+It is not the whole migration — most entries in the
+[Migration Guide](packages/components/MIGRATION.md) have no codemod, and the
+command prints those when it is done. `list` shows them upfront without changing
+anything. Full history is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 

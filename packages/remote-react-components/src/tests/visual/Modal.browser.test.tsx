@@ -231,3 +231,42 @@ test.each(testEnvironments)(
     await testScreenshot("Modal in Section Header - ContextMenu opened");
   },
 );
+
+test.each(testEnvironments)(
+  "Modal heading with icon (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      Button,
+      ModalTrigger,
+      Modal,
+      Content,
+      Heading,
+      Text,
+      IconInfo,
+      Badge,
+    },
+  }) => {
+    await render(
+      <ModalTrigger>
+        <Button data-testid="trigger">Trigger</Button>
+        <Modal>
+          <Heading>
+            <IconInfo />
+            Heading
+            <Badge>Badge</Badge>
+          </Heading>
+          <Content>
+            <Text>Text</Text>
+          </Content>
+        </Modal>
+      </ModalTrigger>,
+    );
+
+    const trigger = page.getByTestId("trigger");
+    await trigger.click();
+
+    await testScreenshot("Modal heading with icon - opened");
+  },
+);

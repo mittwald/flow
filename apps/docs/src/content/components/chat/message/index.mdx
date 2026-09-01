@@ -1,0 +1,61 @@
+---
+component: Message
+description:
+  Eine Message stellt Nachrichten mit Autor-Informationen, Datum und Aktionen
+  übersichtlich dar.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Gruppiere mehrere Messages in einem
+  [MessageThread](/components/chat/message-thread).
+- Halte das [ContextMenu](/components/actions/context-menu) schlank. Es enthält
+  nur direkt relevante Aktionen wie Bearbeiten und Löschen.
+
+---
+
+# Type
+
+Eine Message hat im Default den Type `responder`. Mit dem Type `sender` ändern
+sich Hintergrundfarbe und Anordnung der Message.
+
+<LiveCodeEditor example="sender" editorCollapsed />
+
+---
+
+# Custom Color
+
+Über die `color` Property lässt sich eine Message gezielt hervorheben, etwa als
+System-Nachricht oder interne Notiz. Setze für den Text eine statische Farbe wie
+`dark-static` oder `light-static`, damit er unabhängig vom Theme lesbar bleibt.
+
+<LiveCodeEditor example="color" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## ActionGroup
+
+Ergänze eine Message um einen [Button](/components/actions/button) oder eine
+[ActionGroup](/components/actions/action-group). Die Actions sollten immer in
+direktem Bezug zum Inhalt der Message stehen.
+
+<LiveCodeEditor example="action" editorCollapsed />
+
+## Markdown
+
+Nutze die [Markdown](/components/content/markdown)-Component, um den Text einer
+Message als Markdown zu rendern.
+
+<LiveCodeEditor example="markdown" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

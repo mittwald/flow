@@ -97,8 +97,8 @@ test("unwraps nested block-level wrappers", () => {
 });
 
 test("makes root-relative links absolute", () => {
-  expect(convert("Siehe [Modal](/04-components/overlays/modal).\n")).toBe(
-    "Siehe [Modal](https://flow.mittwald.de/04-components/overlays/modal).\n",
+  expect(convert("Siehe [Modal](/components/overlays/modal).\n")).toBe(
+    "Siehe [Modal](https://flow.mittwald.de/components/overlays/modal).\n",
   );
 });
 

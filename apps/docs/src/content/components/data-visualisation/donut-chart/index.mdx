@@ -1,0 +1,88 @@
+---
+component: DonutChart
+description: Das DonutChart stellt Verteilungen und Anteile als Ring dar.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Kombiniere die Status-Farben gezielt, um Zustände hervorzuheben. Wechsle etwa
+  bei hoher Speicherplatzauslastung auf Warning oder Danger.
+- Mach jede Segmentfarbe eindeutig unterscheidbar. Nutze dafür die
+  [Categorical Colors](/foundations/design/colors#categorical-color).
+- Begrenze die Segmente auf höchstens sechs. Mehr Segmente beeinträchtigen die
+  Lesbarkeit stark.
+- Sortiere die Segmente nach Größe. Das größte beginnt auf der 12-Uhr-Position,
+  die weiteren folgen im Uhrzeigersinn absteigend.
+
+---
+
+# Sizes
+
+Die Size des DonutCharts kann Medium oder Large sein. Medium ist dabei die
+Standardgröße.
+
+<LiveCodeEditor example="size" editorCollapsed row />
+
+---
+
+# Status
+
+Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Info**,
+**Success**, **Warning** und **Danger**.
+
+<LiveCodeEditor example="status" editorCollapsed row />
+
+---
+
+# Mit Unit
+
+Im Default wird das DonutChart immer mit Prozentangabe angezeigt. Über das
+Property `formatOptions` können aber auch andere Einheiten gewählt werden (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
+
+## Gigabyte
+
+<LiveCodeEditor example="unit" editorCollapsed />
+
+## Dezimalzahl
+
+<LiveCodeEditor example="decimal" editorCollapsed />
+
+---
+
+# Mit alternativem Text
+
+Über die `children` kann der Text innerhalb des DonutCharts überschrieben
+werden.
+
+<LiveCodeEditor example="children" editorCollapsed />
+
+---
+
+# Segmente
+
+Die Anzeige des DonutCharts kann über das `segments` Property um einzelne
+Abschnitte ergänzt werden. Der `value` ergibt sich in diesem Fall aus der Summe
+der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern wird
+automatisch die `Legend` Component angezeigt. Über das `showLegend` Property
+kann diese ein- und ausgeblendet werden. Die Position der Legende kann über das
+Property `legendPosition` bestimmt werden.
+
+Die Farben der Segmente werden automatisch festgelegt, können aber über das
+`color`-Property, mit
+[Categorical Colors](/foundations/design/colors#categorical-color) oder eigenen
+Colors überschrieben werden. Beim Überschreiben muss darauf geachtet werden,
+dass nebeneinander liegende Farben weiterhin einen ausreichenden Kontrast
+zueinander haben.
+
+<LiveCodeEditor example="segments" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

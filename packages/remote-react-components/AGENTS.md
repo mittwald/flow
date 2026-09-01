@@ -38,6 +38,15 @@ explainer in [docs/remote-ui.md](../../docs/remote-ui.md)).
   the new prop/variant/layout is captured. Because every scenario runs in both
   `Local` and `Remote`, this single test guards the component and its remote
   path at once.
+- **The screenshot preamble does not wait for the focus.** It settles on DOM
+  mutations, and `:focus` / `:focus-within` are pseudo-classes — so a scenario
+  whose step closes an overlay (react-aria restores the focus to the trigger
+  asynchronously) or whose reference encodes a focus ring has to synchronize on
+  the focus itself, with `waitForFocusInTheScenario()` /
+  `waitForFocusOutsideTheScenario()` from `src/tests/lib/scenarioFocus.ts`.
+  Skipping it costs a ~1% diff in whichever environment lost the race — a random
+  per-run failure, not a reproducible one, because both environments share one
+  reference. See `CONTRIBUTE.md` → _Waiting for the focus_.
 - **The browser also selects the theme:** webkit renders light, firefox renders
   dark (`dev/vitest/setupVisualTheme.ts`), so one run covers both themes and the
   `*-firefox-*.png` baselines are dark by design. A run filtered with

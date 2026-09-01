@@ -7,6 +7,11 @@ dist
 # someone else's in-progress work and bloats format:check with unrelated diffs.
 .claude/worktrees
 
+# Scratch state for agent-driven plan execution (superpowers). Gitignored
+# session bookkeeping — format-checking it only turns the lint gate red on
+# files that are not part of any change.
+.superpowers
+
 # Per-machine Claude Code settings (permissions etc.), can exist in any
 # directory Claude Code was scoped to — always personal/local, never meant to
 # be formatted or committed.

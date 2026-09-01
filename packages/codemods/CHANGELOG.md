@@ -3,6 +3,234 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.1](https://github.com/mittwald/flow/compare/1.2.0-next.0...1.2.0-next.1) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** compile the transforms so a consumer install can load them ([#3040](https://github.com/mittwald/flow/issues/3040)) ([50f8075](https://github.com/mittwald/flow/commit/50f8075be5e9964479099d92126ab9db582cffaa))
+
+## [1.2.0-next.0](https://github.com/mittwald/flow/compare/1.1.0-next.12...1.2.0-next.0) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.12](https://github.com/mittwald/flow/compare/1.0.16...1.1.0-next.12) (2026-08-31)
+
+## [1.1.0-next.11](https://github.com/mittwald/flow/compare/1.0.15...1.1.0-next.11) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** make the interactive gate an input, not an environment read ([9bde64f](https://github.com/mittwald/flow/commit/9bde64f30211fa314d33165b71d665f95f1450dd))
+
+## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** stop imports-to-package-root corrupting current code ([36cbd48](https://github.com/mittwald/flow/commit/36cbd48c4d2a90823a0ec96dcd7be98afa57806a))
+
+## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
+
+## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.14...1.1.0-next.8) (2026-08-31)
+
+## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+
+## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** rewrite value positions, catalogue the password-tools subpath ([b062557](https://github.com/mittwald/flow/commit/b0625575b77f7465b773653a67a676aab73da8ed))
+* **codemods:** stop a guard test racing the remote-component generator ([10da66b](https://github.com/mittwald/flow/commit/10da66b338551b1a50f354a5933f80bdf3048662))
+
+## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
+
+### Features
+
+* **codemods:** add detect/verify commands and the checks module shape ([0cf185c](https://github.com/mittwald/flow/commit/0cf185cef283a83a4acc989725f1924ca73ab90d))
+* **codemods:** add the list command ([bf454e8](https://github.com/mittwald/flow/commit/bf454e8fcec71a05d92e99d93d252787dbe79dd6))
+* **codemods:** add the migration catalogue and its generated module ([f7bbb2b](https://github.com/mittwald/flow/commit/f7bbb2bd34f22a2f8d2db28b7da2b23275c0a873))
+* **codemods:** add the single-codemod command ([050eb06](https://github.com/mittwald/flow/commit/050eb06f1fd4b1129111a2bb8d3f2af7ae33a3c1))
+* **codemods:** add the upgrade command ([fe5cbc5](https://github.com/mittwald/flow/commit/fe5cbc58f70979eb92806c9987bbe0ebafe26e28))
+* **codemods:** adopt the transform suite and test harness from [#2942](https://github.com/mittwald/flow/issues/2942) ([b4bf976](https://github.com/mittwald/flow/commit/b4bf97620c642fb53fbdb1dcd4831385fd8bd520))
+* **codemods:** detect the package manager and guard a dirty tree ([8ad2873](https://github.com/mittwald/flow/commit/8ad28733ce37dbb7417510d2bc37778bcb8ff1b3))
+* **codemods:** find and rewrite Flow dependencies in a consumer manifest ([aa06eb6](https://github.com/mittwald/flow/commit/aa06eb6d946f426ff0f64b4d9078d251fe75a905))
+* **codemods:** generate MIGRATION.md from the catalogue ([75fb720](https://github.com/mittwald/flow/commit/75fb720cc601060232e88933eb956ba31b87cf90))
+* **codemods:** make list output readable in a terminal ([91296d4](https://github.com/mittwald/flow/commit/91296d4598b3a8c240b03ccee7726167f825bd99))
+* **codemods:** publish the package with a CLI entry point ([7fa7089](https://github.com/mittwald/flow/commit/7fa7089869b31637b0bf83d5318cbf2210840d0c))
+* **codemods:** rename transforms to catalogue ids and retire the URL path ([3e22253](https://github.com/mittwald/flow/commit/3e222531194f68588ef474ad159f48890296325e))
+* **codemods:** resolve a revision to a published target version ([74c6401](https://github.com/mittwald/flow/commit/74c6401862cbda99d7a61d1a1112c571bcececdf))
+* **codemods:** run a codemod by its catalogue id ([e6b381a](https://github.com/mittwald/flow/commit/e6b381ad522ec886f046e31eeff52b3ec658810c))
+* **codemods:** select catalogue entries for a version range ([b4b5d60](https://github.com/mittwald/flow/commit/b4b5d603831aa7a47cd3183291dddc1e6b06a4e5))
+* **codemods:** wire the upgrade command into the CLI ([9b6a8ba](https://github.com/mittwald/flow/commit/9b6a8baea338ad21f566ab498efb75e3eec551a2))
+
+### Bug Fixes
+
+* **codemods:** correct the since version of the package-root import migration ([b648460](https://github.com/mittwald/flow/commit/b6484601718dce84dc0794a8629edfdf5f091ccd))
+* **codemods:** cover a prerelease current and name every registry failure ([03bc37a](https://github.com/mittwald/flow/commit/03bc37a93bc388518c8eb7980c96246b07582062))
+* **codemods:** drive jscodeshift programmatically instead of scraping its output ([2c62b45](https://github.com/mittwald/flow/commit/2c62b458ccaffd9bea27a9844e8f453bfff56aec))
+* **codemods:** drop the lower bound for codemod catch-up, keep it for manual migrations ([cb39956](https://github.com/mittwald/flow/commit/cb399566848815262c4150ab15ea5a2b4e4a9ecf))
+* **codemods:** drop the manual-entry lower bound, mark catch-up everywhere ([43704c6](https://github.com/mittwald/flow/commit/43704c6cdd009cfc36c2a81a5ff82dbe2232484c))
+* **codemods:** explain why a revision could not be resolved, not just that it couldn&#x27;t ([6be7018](https://github.com/mittwald/flow/commit/6be7018e1101761eacd9442dfc8b71afe76394ac))
+* **codemods:** make the catalogue generator deterministic and its detect runnable ([17b9964](https://github.com/mittwald/flow/commit/17b996452465e67ea0ec7d7e63e925893c5a7b50))
+* **codemods:** make the catalogue&#x27;s detect, apply and verify fields true ([b03fee1](https://github.com/mittwald/flow/commit/b03fee1e9ba6204945e885ef7e2f25b0ac37e598))
+* **codemods:** make the gate&#x27;s exhaustiveness check and its prerelease test real ([b77178a](https://github.com/mittwald/flow/commit/b77178a1ddf2bd18a8b4de2ddfbdfe44da9d611d))
+* **codemods:** move list&#x27;s summary below the entries, make colour deterministic ([b686a50](https://github.com/mittwald/flow/commit/b686a507e8e3e672d460bfe3ec7cb4de12435442))
+* **codemods:** pin the list command&#x27;s tool asymmetry and lower its sentinel ([47cba8e](https://github.com/mittwald/flow/commit/47cba8ed5eddcbe7836ac1224bf1f26bbb33f6ba))
+* **codemods:** resolve the target from what every Flow dependency published ([11e6ca7](https://github.com/mittwald/flow/commit/11e6ca72797b9f6babf374c68eb19aa853ecbf87))
+* **codemods:** satisfy the repo&#x27;s lint rules in three modules ([37278de](https://github.com/mittwald/flow/commit/37278de70e3fa69bd9e4475e3d549b7b5a0d444c))
+* **codemods:** set exitCode instead of calling process.exit ([e26c98a](https://github.com/mittwald/flow/commit/e26c98a87f78013e0caca95bc937114aeb82700f))
+* **codemods:** shorten list header to three lines ([bdc7bec](https://github.com/mittwald/flow/commit/bdc7becc218bf2db12c32be7512812b987d72fd1))
+* **codemods:** stop a transform that declines every file reading as success ([aff5728](https://github.com/mittwald/flow/commit/aff57287256f0e6b3c1a7298d23699a2bbfeeba3))
+* **codemods:** stop the install and the dirty-tree guard failing silently ([a4f975b](https://github.com/mittwald/flow/commit/a4f975bffb4c5f67b93a8541b4921a1bd91780da))
+* **codemods:** stop upgrade damaging a project and reporting success ([77e35da](https://github.com/mittwald/flow/commit/77e35dac16b310bb667091175260215f5ee75f1a))
+* **codemods:** tidy list/upgrade output — zero-width range, legend, and duplicate header ([82174e5](https://github.com/mittwald/flow/commit/82174e555f843b0b378df9f474baa7c5c59681ed))
+* **codemods:** wrap the catch-up legend like every other line ([14858eb](https://github.com/mittwald/flow/commit/14858eb980db4339000641a765ed8279e7375276))
+
+### Reverts
+
+* **codemods:** take the detect and verify commands back out ([a58ac2b](https://github.com/mittwald/flow/commit/a58ac2bf27625f9934fd1c6323ae869c30f728b4))
+
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
+
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
+
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+
+## [1.1.0-next.11](https://github.com/mittwald/flow/compare/1.0.15...1.1.0-next.11) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** make the interactive gate an input, not an environment read ([9bde64f](https://github.com/mittwald/flow/commit/9bde64f30211fa314d33165b71d665f95f1450dd))
+
+## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** stop imports-to-package-root corrupting current code ([36cbd48](https://github.com/mittwald/flow/commit/36cbd48c4d2a90823a0ec96dcd7be98afa57806a))
+
+## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
+
+## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.14...1.1.0-next.8) (2026-08-31)
+
+## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+
+## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** rewrite value positions, catalogue the password-tools subpath ([b062557](https://github.com/mittwald/flow/commit/b0625575b77f7465b773653a67a676aab73da8ed))
+* **codemods:** stop a guard test racing the remote-component generator ([10da66b](https://github.com/mittwald/flow/commit/10da66b338551b1a50f354a5933f80bdf3048662))
+
+## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
+
+### Features
+
+* **codemods:** add detect/verify commands and the checks module shape ([0cf185c](https://github.com/mittwald/flow/commit/0cf185cef283a83a4acc989725f1924ca73ab90d))
+* **codemods:** add the list command ([bf454e8](https://github.com/mittwald/flow/commit/bf454e8fcec71a05d92e99d93d252787dbe79dd6))
+* **codemods:** add the migration catalogue and its generated module ([f7bbb2b](https://github.com/mittwald/flow/commit/f7bbb2bd34f22a2f8d2db28b7da2b23275c0a873))
+* **codemods:** add the single-codemod command ([050eb06](https://github.com/mittwald/flow/commit/050eb06f1fd4b1129111a2bb8d3f2af7ae33a3c1))
+* **codemods:** add the upgrade command ([fe5cbc5](https://github.com/mittwald/flow/commit/fe5cbc58f70979eb92806c9987bbe0ebafe26e28))
+* **codemods:** adopt the transform suite and test harness from [#2942](https://github.com/mittwald/flow/issues/2942) ([b4bf976](https://github.com/mittwald/flow/commit/b4bf97620c642fb53fbdb1dcd4831385fd8bd520))
+* **codemods:** detect the package manager and guard a dirty tree ([8ad2873](https://github.com/mittwald/flow/commit/8ad28733ce37dbb7417510d2bc37778bcb8ff1b3))
+* **codemods:** find and rewrite Flow dependencies in a consumer manifest ([aa06eb6](https://github.com/mittwald/flow/commit/aa06eb6d946f426ff0f64b4d9078d251fe75a905))
+* **codemods:** generate MIGRATION.md from the catalogue ([75fb720](https://github.com/mittwald/flow/commit/75fb720cc601060232e88933eb956ba31b87cf90))
+* **codemods:** make list output readable in a terminal ([91296d4](https://github.com/mittwald/flow/commit/91296d4598b3a8c240b03ccee7726167f825bd99))
+* **codemods:** publish the package with a CLI entry point ([7fa7089](https://github.com/mittwald/flow/commit/7fa7089869b31637b0bf83d5318cbf2210840d0c))
+* **codemods:** rename transforms to catalogue ids and retire the URL path ([3e22253](https://github.com/mittwald/flow/commit/3e222531194f68588ef474ad159f48890296325e))
+* **codemods:** resolve a revision to a published target version ([74c6401](https://github.com/mittwald/flow/commit/74c6401862cbda99d7a61d1a1112c571bcececdf))
+* **codemods:** run a codemod by its catalogue id ([e6b381a](https://github.com/mittwald/flow/commit/e6b381ad522ec886f046e31eeff52b3ec658810c))
+* **codemods:** select catalogue entries for a version range ([b4b5d60](https://github.com/mittwald/flow/commit/b4b5d603831aa7a47cd3183291dddc1e6b06a4e5))
+* **codemods:** wire the upgrade command into the CLI ([9b6a8ba](https://github.com/mittwald/flow/commit/9b6a8baea338ad21f566ab498efb75e3eec551a2))
+
+### Bug Fixes
+
+* **codemods:** correct the since version of the package-root import migration ([b648460](https://github.com/mittwald/flow/commit/b6484601718dce84dc0794a8629edfdf5f091ccd))
+* **codemods:** cover a prerelease current and name every registry failure ([03bc37a](https://github.com/mittwald/flow/commit/03bc37a93bc388518c8eb7980c96246b07582062))
+* **codemods:** drive jscodeshift programmatically instead of scraping its output ([2c62b45](https://github.com/mittwald/flow/commit/2c62b458ccaffd9bea27a9844e8f453bfff56aec))
+* **codemods:** drop the lower bound for codemod catch-up, keep it for manual migrations ([cb39956](https://github.com/mittwald/flow/commit/cb399566848815262c4150ab15ea5a2b4e4a9ecf))
+* **codemods:** drop the manual-entry lower bound, mark catch-up everywhere ([43704c6](https://github.com/mittwald/flow/commit/43704c6cdd009cfc36c2a81a5ff82dbe2232484c))
+* **codemods:** explain why a revision could not be resolved, not just that it couldn&#x27;t ([6be7018](https://github.com/mittwald/flow/commit/6be7018e1101761eacd9442dfc8b71afe76394ac))
+* **codemods:** make the catalogue generator deterministic and its detect runnable ([17b9964](https://github.com/mittwald/flow/commit/17b996452465e67ea0ec7d7e63e925893c5a7b50))
+* **codemods:** make the catalogue&#x27;s detect, apply and verify fields true ([b03fee1](https://github.com/mittwald/flow/commit/b03fee1e9ba6204945e885ef7e2f25b0ac37e598))
+* **codemods:** make the gate&#x27;s exhaustiveness check and its prerelease test real ([b77178a](https://github.com/mittwald/flow/commit/b77178a1ddf2bd18a8b4de2ddfbdfe44da9d611d))
+* **codemods:** move list&#x27;s summary below the entries, make colour deterministic ([b686a50](https://github.com/mittwald/flow/commit/b686a507e8e3e672d460bfe3ec7cb4de12435442))
+* **codemods:** pin the list command&#x27;s tool asymmetry and lower its sentinel ([47cba8e](https://github.com/mittwald/flow/commit/47cba8ed5eddcbe7836ac1224bf1f26bbb33f6ba))
+* **codemods:** resolve the target from what every Flow dependency published ([11e6ca7](https://github.com/mittwald/flow/commit/11e6ca72797b9f6babf374c68eb19aa853ecbf87))
+* **codemods:** satisfy the repo&#x27;s lint rules in three modules ([37278de](https://github.com/mittwald/flow/commit/37278de70e3fa69bd9e4475e3d549b7b5a0d444c))
+* **codemods:** set exitCode instead of calling process.exit ([e26c98a](https://github.com/mittwald/flow/commit/e26c98a87f78013e0caca95bc937114aeb82700f))
+* **codemods:** shorten list header to three lines ([bdc7bec](https://github.com/mittwald/flow/commit/bdc7becc218bf2db12c32be7512812b987d72fd1))
+* **codemods:** stop a transform that declines every file reading as success ([aff5728](https://github.com/mittwald/flow/commit/aff57287256f0e6b3c1a7298d23699a2bbfeeba3))
+* **codemods:** stop the install and the dirty-tree guard failing silently ([a4f975b](https://github.com/mittwald/flow/commit/a4f975bffb4c5f67b93a8541b4921a1bd91780da))
+* **codemods:** stop upgrade damaging a project and reporting success ([77e35da](https://github.com/mittwald/flow/commit/77e35dac16b310bb667091175260215f5ee75f1a))
+* **codemods:** tidy list/upgrade output — zero-width range, legend, and duplicate header ([82174e5](https://github.com/mittwald/flow/commit/82174e555f843b0b378df9f474baa7c5c59681ed))
+* **codemods:** wrap the catch-up legend like every other line ([14858eb](https://github.com/mittwald/flow/commit/14858eb980db4339000641a765ed8279e7375276))
+
+### Reverts
+
+* **codemods:** take the detect and verify commands back out ([a58ac2b](https://github.com/mittwald/flow/commit/a58ac2bf27625f9934fd1c6323ae869c30f728b4))
+
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
+
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
+
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+
+## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.13...1.1.0-next.8) (2026-08-31)
+
+## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+
+## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+
+## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
+
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
+
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
+
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.11...1.1.0-next.5) (2026-08-31)
+
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
+
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
+
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 ## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
 
 **Note:** Version bump only for package @mittwald/flow-codemods

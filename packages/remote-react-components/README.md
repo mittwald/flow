@@ -27,11 +27,7 @@ pnpm add @mittwald/flow-remote-react-components
 #### Adjust imports in your code
 
 ```shell
-npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowRemote.ts \
-  --parser tsx \
-  src
+npx @mittwald/flow-codemods@latest to-remote-package src
 ```
 
-Replace `src` with your sources folder. If you do not use TypeScript in your
-project, use `--parser jsx`.
+Replace `src` with your sources folder.

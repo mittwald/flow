@@ -1,0 +1,93 @@
+---
+component: ComboBox
+description:
+  Die ComboBox kombiniert eine Texteingabe mit einem filterbaren Auswahlmenü.
+---
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Benenne die angezeigten Optionen klar und eindeutig.
+- Grenze die Liste der Vorschläge sinnvoll ein. Das erleichtert die Auswahl.
+- Decke mit den vorgeschlagenen Optionen die erwarteten Eingaben möglichst
+  vollständig ab.
+
+## ComboBox vs. Autocomplete
+
+ComboBoxen und [Autocomplete](/components/form-controls/autocomplete) sehen oft
+ähnlich aus, erfüllen aber unterschiedliche Zwecke.
+
+<DoAndDont>
+<Plain heading="Verwende ComboBox, um z. B. ...">
+- aus einer vordefinierten Liste von Optionen eine Auswahl zu treffen.
+- bei bekannten, überschaubaren Optionen (z. B. Sprachen, Kategorien, Geschlecht).
+</Plain>
+
+<Plain heading="Verwende Autocomplete, um z. B. ...">
+- Usern zu ermöglichen, freie Eingaben zu machen, während Vorschläge zur Auswahl angezeigt werden.
+- bei langen oder dynamischen Datenlisten (z. B. Städte, Usernamen, Tags).
+</Plain>
+</DoAndDont>
+
+---
+
+# Custom Value
+
+Standardmäßig setzt eine ComboBox beim Verlassen des Inputfelds den Eingabewert
+entweder auf den Wert der ausgewählten Option zurück oder leert das Feld, wenn
+noch keine Option ausgewählt wurde. Mit dem Property `allowsCustomValue` kann
+dieses Verhalten überschrieben werden, um auch freie Eingaben zu erlauben.
+
+<LiveCodeEditor example="allowsCustomValue" editorCollapsed stretch />
+
+---
+
+# CountryOptions
+
+Verwende die `CountryOptions`, um eine Länderauswahl anzubieten.
+
+<LiveCodeEditor example="countryOptions" editorCollapsed stretch />
+
+---
+
+# Mit FieldDescription
+
+Um wichtige Hinweise zur ComboBox bereitzustellen, kann unterhalb eine
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit ...
+
+## Combine
+
+Benutze [Combine](/components/structure/combine), um einen
+[Button](/components/actions/button) neben deiner ComboBox zu platzieren.
+
+<LiveCodeEditor example="combine" editorCollapsed stretch />
+
+## ContextualHelp
+
+Verwende ein [ContextualHelp](/components/overlays/contextual-help), wenn du
+weitere Informationen bereitstellen möchtest, und diese zu lang für die
+FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

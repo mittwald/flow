@@ -72,15 +72,25 @@
   }
 
   .header {
+    display: flex;
+    align-items: center;
+    gap: var(--heading--icon-to-text-spacing);
     padding-top: var(--modal--header-padding-top);
     padding-inline: var(--modal--padding);
 
+    /* Flatten the heading's text and content spans into the header row, so
+       badges stay behind the title instead of wrapping onto their own line. */
     > span {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-grow: 1;
-      gap: var(--section-header--heading-to-action-spacing);
+      display: contents;
+    }
+
+    .headerTitle {
+      min-width: 0;
+    }
+
+    .closeButton {
+      order: 1;
+      margin-inline-start: auto;
     }
   }
 
