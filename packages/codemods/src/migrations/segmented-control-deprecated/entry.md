@@ -14,9 +14,10 @@ apply: >-
   carrying over. Only `containerBreakpointSize` has no counterpart, and the
   joined row is not reproduced. Towards `Tabs` it is structural: the state props
   are `selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`,
-  there is no `Label` slot (the group label moves to the surrounding `Heading`
-  or goes away), and the switched panels move inside the tabs — where they stay
-  mounted, so form fields in them keep their registration.
+  there is no `Label` slot (the group label moves to the surrounding `Heading`,
+  or to `aria-label` on `Tabs` when it should not be visible, or goes away), and
+  the switched panels move inside the tabs — where they stay mounted, so form
+  fields in them keep their registration.
 ---
 
 `SegmentedControl` and `Segment` are deprecated. The component covered two
@@ -88,12 +89,18 @@ by name here, unlike the `RadioGroup` direction.
 
 **The group `Label`.** `SegmentedControl` is a form field — it wraps
 react-aria's `RadioGroup` — so a `<Label>` inside it is a field label. `Tabs`
-has no equivalent slot, and a tab list labels itself through its tab titles. So
-the `Label` cannot move into `Tabs`: put its text in the surrounding `Section`'s
-`Heading`, or drop it when that heading already names the group. A `Label` on
-its own is **not** a signal that the usage was a `RadioGroup` case — plenty of
-content switchers were authored with one, because the component required a field
-label.
+has no equivalent slot, and a tab list labels itself through its tab titles. The
+`Label` therefore cannot move into `Tabs`, but its text has somewhere to go:
+
+- into the surrounding `Section`'s `Heading`, when the group wants a visible
+  title
+- into `aria-label` on `Tabs`, when it does not — that names the tab list for
+  screen readers without showing the name
+- nowhere, when the surrounding heading already names the group
+
+A `Label` on its own is **not** a signal that the usage was a `RadioGroup` case
+— plenty of content switchers were authored with one, because the component
+required a field label.
 
 **Panels that register form fields.** Moving the switched-in content into a
 `Tab` does not change when it mounts. `Tab` renders its panel with
