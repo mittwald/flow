@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.4](https://github.com/mittwald/flow/compare/1.2.0-next.3...1.2.0-next.4) (2026-09-01)
+
+### Bug Fixes
+
+* **Heading:** space tunneled content without :has() ([#3046](https://github.com/mittwald/flow/issues/3046)) ([97022ee](https://github.com/mittwald/flow/commit/97022eee9af40664b54b8219062816372c0cf44a))
+
+## [1.1.3](https://github.com/mittwald/flow/compare/1.1.2...1.1.3) (2026-09-01)
+
 ## [1.2.0-next.3](https://github.com/mittwald/flow/compare/1.1.2...1.2.0-next.3) (2026-09-01)
 
 ### Bug Fixes
