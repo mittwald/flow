@@ -216,7 +216,8 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     kind: "migration",
     action: "codemod",
     remotePackage: true,
-    apply: "Rename the `action` prop on `Action` to `onAction`.",
+    apply:
+      "Rename the `action` prop on `Action` to `onAction`. Not only a rename: the new prop is typed `ActionFn` (`(...args: unknown[]) => unknown`), so a function *reference* that declares a parameter no longer type-checks and needs wrapping — `onAction={() => controller.close()}` rather than `onAction={controller.close}`. Check every site where you passed a reference rather than an inline arrow; the codemod renames the prop but cannot decide this one from the source.",
   },
   {
     id: "button-props-interfaces",
