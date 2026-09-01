@@ -73,9 +73,12 @@ would for any other navigation link.
 **Status icons.** An `AlertIcon` moves from inside `TabTitle` to inside the
 `Link`.
 
-**Collapsing.** Both components collapse the same way once space runs out — the
-hidden items move into a "More" button's context menu — so nothing changes
-there.
+**Collapsing.** The two do this differently. `Tabs` collapses all at once: as
+soon as any tab stops fitting, the whole tab list turns into a single button
+showing the active tab, which opens every tab in a context menu. `TabNavigation`
+collapses incrementally: links are hidden one by one as space runs out, and only
+those that no longer fit move into the "More" button's menu — the rest stay
+visible as ordinary links.
 
 There is no codemod: only the surrounding code knows whether a given `Tabs`
 usage was real navigation (an `href` on `TabTitle`, or a route push from
