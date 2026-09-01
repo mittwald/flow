@@ -16,6 +16,14 @@ export interface TabsProps
     PropsWithChildren,
     FlowComponentProps {
   /**
+   * An accessible name for the tab list. `Tabs` has no `Label` slot, so this is
+   * how the group is named when the surrounding heading does not already do
+   * it.
+   */
+  "aria-label"?: string;
+  /** The id of an element that names the tab list. */
+  "aria-labelledby"?: string;
+  /**
    * The view rendered when the selected tab does not exist. Defaults to a
    * built-in IllustratedMessage.
    */
@@ -33,6 +41,8 @@ export const Tabs = flowComponent("Tabs", (props) => {
     ref,
     onSelectionChange,
     tabNotFoundView,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
     ...rest
   } = props;
 
@@ -63,6 +73,8 @@ export const Tabs = flowComponent("Tabs", (props) => {
         ref={ref}
       >
         <TabList
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledby}
           selection={selectedKey}
           onContextMenuSelectionChange={(key) => {
             setSelectedKeyState(key);
