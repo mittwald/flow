@@ -41,3 +41,40 @@ test("link with a nested button still navigates client-side", async () => {
 
   expect(navigate).toHaveBeenCalledWith(href, undefined);
 });
+
+test("selecting the whole external link does not select any part of the icon", async () => {
+  const { container } = await render(<Link target="_blank">mittwald.de</Link>);
+  const link = container.querySelector('[role="link"]') as HTMLElement;
+
+  const range = document.createRange();
+  range.selectNodeContents(link);
+  const selection = window.getSelection();
+  selection?.removeAllRanges();
+  selection?.addRange(range);
+
+  expect(selection?.toString()).toBe("mittwald.de");
+});
+
+test("selecting the whole download link does not select any part of the icon", async () => {
+  const { container } = await render(<Link download>Download the plans</Link>);
+  const link = container.querySelector('[role="link"]') as HTMLElement;
+
+  const range = document.createRange();
+  range.selectNodeContents(link);
+  const selection = window.getSelection();
+  selection?.removeAllRanges();
+  selection?.addRange(range);
+
+  expect(selection?.toString()).toBe("Download the plans");
+});
+
+test("the link icon is excluded from text selection", async () => {
+  const { container } = await render(<Link target="_blank">mittwald.de</Link>);
+  const icon = container.querySelector("svg") as SVGElement;
+  const style = getComputedStyle(icon);
+
+  expect(
+    style.getPropertyValue("user-select") ||
+      style.getPropertyValue("-webkit-user-select"),
+  ).toBe("none");
+});

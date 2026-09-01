@@ -35,6 +35,11 @@
     height: var(--link--icon-height);
   }
 
+  .linkIcon {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   &[aria-disabled] {
     color: var(--link--color--disabled);
   }
