@@ -80,6 +80,7 @@ export default () => {
               auf die Dateien zuzugreifen.
             </Text>
             <VolumeList.List
+              aria-label="Volumes"
               hidePagination
               getItemId={(volume) => volume.id}
             >
@@ -98,7 +99,9 @@ export default () => {
                   },
                 ]}
               />
-              <VolumeList.Item>
+              <VolumeList.Item
+                textValue={(volume) => volume.name}
+              >
                 {(volume) => (
                   <ListItemView>
                     <Heading>{volume.name}</Heading>
