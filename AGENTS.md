@@ -174,7 +174,12 @@ and commit the results.
   track a **dependency task's output**, use
   `{ "dependentTasksOutputFiles": "**/*", "transitive": false }` (nx hashes its
   own task outputs) — `dependsOn` alone only orders execution, it does not fold
-  the dependency's hash into the dependent.
+  the dependency's hash into the dependent. And **every** file a task produces
+  belongs in `outputs`, including a gitignored sidecar like a `*.tsbuildinfo`:
+  nx restores a cached task's outputs wholesale, so a buildinfo left out of the
+  list can survive from one run while `dist` is restored from another — after
+  which `tsc` finds it current, emits nothing, and the build reports success
+  over an incomplete `dist`.
 - **Git hooks** (simple-git-hooks): `post-checkout` and `post-merge` run
   `pnpm install` — expect installs after switching branches. `pre-push` runs
   `pnpm lint` — which includes `format:check`, so a stray unformatted
