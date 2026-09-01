@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { parseArguments } from "./cli/args.js";
 import { createChoose } from "./cli/choose.js";
 import { displaySourcePath, runSingleCodemod } from "./cli/codemod.js";
+import { resolveInvoke } from "./install.js";
 import { defaultListDeps, runList } from "./cli/list.js";
 import { defaultUpgradeDeps, runUpgrade } from "./cli/upgrade.js";
 
@@ -76,6 +77,11 @@ const main = async (): Promise<number> => {
         // any other layout. `--path` wins, otherwise the same `src`-or-cwd
         // choice a real run would make.
         path: displaySourcePath(parsed.path, process.cwd()),
+        // `npx` is wrong for a pnpm, Yarn Berry or Bun project. Detecting the
+        // manager here costs the bare `list` its "reads no manifest" property —
+        // a deliberate trade: a command the reader can actually paste beats the
+        // purity of that claim. It still hits no network.
+        invoke: await resolveInvoke(process.cwd()),
       });
     case "codemod":
       return await runSingleCodemod(parsed, {

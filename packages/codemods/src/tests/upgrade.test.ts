@@ -25,6 +25,7 @@ const manifestOf = (dir: string): { dependencies: Record<string, string> } =>
   };
 
 interface Recorded {
+  /** The detected agent per install — `install` now returns its description. */
   installs: string[];
   codemods: string[];
   output: string[];
@@ -37,7 +38,10 @@ const deps = (
 ): UpgradeDeps => ({
   cwd,
   fetchVersions: async () => registry,
-  install: (manager) => recorded.installs.push(manager),
+  install: (manager) => {
+    recorded.installs.push(manager.agent);
+    return `${manager.agent} — stubbed`;
+  },
   // Async: `UpgradeDeps["runCodemod"]` is `typeof runCodemod`, and the real
   // implementation is async — a sync double would not be assignable to it.
   runCodemod: async ({ id }) => {
@@ -93,7 +97,10 @@ describe("runUpgrade", () => {
     await runUpgrade(
       parseArguments(["upgrade", "major", "-y"]),
       deps(cwd, recorded, {
-        install: () => order.push("install"),
+        install: () => {
+          order.push("install");
+          return "stubbed";
+        },
         runCodemod: async ({ id }) => {
           order.push(`codemod:${id}`);
           return {
@@ -271,9 +278,10 @@ describe("runUpgrade", () => {
       parseArguments(["upgrade", "major", "-y"]),
       deps(cwd, recorded, {
         install: (manager) => {
-          recorded.installs.push(manager);
+          recorded.installs.push(manager.agent);
           duringInstall =
             manifestOf(cwd).dependencies["@mittwald/flow-react-components"];
+          return `${manager.agent} — stubbed`;
         },
       }),
     );

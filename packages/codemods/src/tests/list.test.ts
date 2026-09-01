@@ -48,6 +48,21 @@ describe("renderList as text", () => {
     expect(text).toContain("flow-codemods@latest with-codemod src");
   });
 
+  test("prints the invocation the reader's package manager wants", () => {
+    // `npx` is wrong for pnpm, Yarn Berry and Bun.
+    const printed = renderList({
+      entries,
+      range: { from: "1.0.0", to: "2.0.0" },
+      json: false,
+      invoke: "pnpm dlx @mittwald/flow-codemods@latest",
+      path: "app",
+    });
+    expect(printed).toContain(
+      "pnpm dlx @mittwald/flow-codemods@latest with-codemod app",
+    );
+    expect(printed).not.toContain("npx");
+  });
+
   test("prints the path in use instead of a hardcoded src", () => {
     // The whole point: a project whose sources are elsewhere used to be handed
     // a command aimed at a directory it does not have, and the failing run then

@@ -23,6 +23,15 @@ export interface RenderListInput {
   /** Terminal width to wrap prose to. */
   width?: number;
   /**
+   * How to invoke this package in a printed command — e.g. `npx
+   * @mittwald/flow-codemods@latest` or `pnpm dlx …`.
+   *
+   * Defaults to the `npx` form, which is right for npm and for Yarn Classic
+   * (which has no `dlx`). A pnpm, Yarn Berry or Bun project gets a command it
+   * cannot paste otherwise.
+   */
+  invoke?: string;
+  /**
    * The path argument to print in each codemod entry's runnable command.
    *
    * Defaults to `src` — the same default `resolveSourcePath` applies — but a
@@ -142,6 +151,14 @@ const painter = (color: boolean): Painter => {
   };
 };
 
+/**
+ * The invocation to print when nobody says otherwise.
+ *
+ * `npx` is also correct for Yarn Classic, which has no `dlx` — the library
+ * resolves both to it.
+ */
+export const defaultInvoke = "npx @mittwald/flow-codemods@latest";
+
 const indent = "  ";
 const labelWidth = 8;
 
@@ -185,6 +202,7 @@ const renderEntry = (
   color: boolean,
   catchUp: boolean,
   path: string,
+  invoke: string,
 ): string => {
   const paint = painter(color);
   const action = actions[entry.action];
@@ -213,7 +231,7 @@ const renderEntry = (
     lines.push(
       "",
       `${indent}${paint.dim("$")} ${paint.code(
-        `npx @mittwald/flow-codemods@latest ${entry.id} ${path}`,
+        `${invoke} ${entry.id} ${path}`,
       )}`,
     );
   }
@@ -324,6 +342,7 @@ export const renderList = ({
   color = false,
   width = 80,
   path = "src",
+  invoke = defaultInvoke,
   frame = true,
 }: RenderListInput): string => {
   // The two paths differ in their bounds, deliberately: unbounded, this is a
@@ -366,7 +385,14 @@ export const renderList = ({
 
   const body = selected
     .map((entry) =>
-      renderEntry(entry, width, color, isCatchUp(entry, range?.from), path),
+      renderEntry(
+        entry,
+        width,
+        color,
+        isCatchUp(entry, range?.from),
+        path,
+        invoke,
+      ),
     )
     .join("\n\n");
 
@@ -395,6 +421,8 @@ export interface ListDeps extends RangeDeps {
   width?: number;
   /** Printed in each codemod entry's command — see `RenderListInput.path`. */
   path?: string;
+  /** Printed as the command's prefix — see `RenderListInput.invoke`. */
+  invoke?: string;
 }
 
 export const defaultListDeps = (cwd: string): ListDeps => ({
@@ -430,6 +458,7 @@ export const runList = async (
         color: deps.color,
         width: deps.width,
         path: deps.path,
+        invoke: deps.invoke,
       }),
     );
     return 0;
@@ -449,6 +478,7 @@ export const runList = async (
       color: deps.color,
       width: deps.width,
       path: deps.path,
+      invoke: deps.invoke,
     }),
   );
   return 0;

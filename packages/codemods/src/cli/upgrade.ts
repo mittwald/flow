@@ -7,6 +7,7 @@ import { flowPackages } from "../flowPackages.generated.js";
 import { hasUncommittedChanges } from "../git.js";
 import {
   detectPackageManagerIn,
+  resolveInvoke,
   runInstall,
   type InstallRunner,
 } from "../install.js";
@@ -168,13 +169,18 @@ export const runUpgrade = async (
     );
     reportDependencies();
 
-    const manager = detectPackageManagerIn(cwd);
-    log(`Installing with ${manager}`);
+    const manager = await detectPackageManagerIn(cwd);
     try {
-      deps.install(manager, cwd);
+      // Logged after the run, not before: `install` returns what it actually
+      // ran — agent, pin and command line — so a wrong detection is visible in
+      // the output instead of hidden behind a bare manager name. On a throw the
+      // recovery message below carries the reason anyway.
+      log(`Installed with ${deps.install(manager, cwd)}`);
     } catch (error) {
       log(
-        `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nEither re-run this command once the install works, or undo the bump with\n  git checkout package.json\n\n${
+        `The dependency bump was written but the install failed, so package.json is on\n${target} while node_modules still holds ${current}.\n\nDetected package manager: ${manager.agent}${
+          manager.version === undefined ? "" : ` (pinned ${manager.version})`
+        }. If that is wrong, finish the install yourself with the right one —\nthe bump in package.json is already correct.\n\nOtherwise re-run this command once the install works, or undo the bump with\n  git checkout package.json\n\n${
           error instanceof Error ? error.message : error
         }`,
       );
@@ -273,6 +279,7 @@ export const runUpgrade = async (
         // The same path this run used, so a command copied out of the by-hand
         // block works instead of falling back to a hardcoded `src`.
         path: displaySourcePath(parsed.path, cwd),
+        invoke: await resolveInvoke(cwd),
         frame: false,
       }),
     );
