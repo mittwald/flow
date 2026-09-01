@@ -39,8 +39,8 @@ export const ReleaseEntry: FC<{ release: Release }> = ({ release }) => {
         {release.version}{" "}
         <Badge color={release.kind === "major" ? "violet" : "blue"}>
           {release.kind === "major" ? "Major" : "Minor"}
-        </Badge>{" "}
-        – {release.title}
+        </Badge>
+        {release.title && <> – {release.title}</>}
       </Heading>
 
       <Text elementType="p" className={styles.meta}>
