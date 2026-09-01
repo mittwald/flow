@@ -26,8 +26,12 @@ export interface Release {
   date: string;
   /** True for the newest release overall → shows the `latest` badge. */
   isLatest: boolean;
-  /** Curated release title (English). */
-  title: string;
+  /**
+   * Curated release headline (English), taken from the body's leading H1.
+   * Undefined when the release has none — the heading then shows the version
+   * alone instead of repeating it.
+   */
+  title?: string;
   /** Highlights as a plain bullet list (no AccentBox). */
   highlights: string[];
   /** Curated body markdown incl. migration notes (English). */

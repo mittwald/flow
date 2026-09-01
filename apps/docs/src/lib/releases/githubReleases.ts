@@ -67,6 +67,36 @@ const parseFixes = (body: string | null): Fix[] => {
   return fixes;
 };
 
+/**
+ * Split the curated headline off a release body.
+ *
+ * The publish workflow titles every GitHub Release with the bare version (`gh
+ * release create --title "${tag}"`), so a release's `name` is never the curated
+ * headline — that lives as the body's leading H1. Taking `name` as the title
+ * printed the version twice ("1.1.0 Minor – 1.1.0") and then repeated the real
+ * headline as an h2 right below it.
+ *
+ * Only a _leading_ H1 counts as the headline; a `#` further down belongs to the
+ * notes.
+ */
+export const splitHeadline = (
+  body: string,
+): { headline?: string; body: string } => {
+  const lines = body.split("\n");
+  const firstContent = lines.findIndex((line) => line.trim() !== "");
+  const headline = lines[firstContent]?.match(/^#\s+(.*\S)\s*$/)?.[1];
+  if (headline === undefined) {
+    return { body };
+  }
+  return {
+    headline,
+    body: lines
+      .slice(firstContent + 1)
+      .join("\n")
+      .replace(/^(?:[ \t]*\n)+/, ""),
+  };
+};
+
 const fetchAll = async (): Promise<GhRelease[]> => {
   const all: GhRelease[] = [];
   for (let page = 1; page <= 10; page++) {
@@ -148,14 +178,21 @@ export const getReleases = async (): Promise<Release[]> => {
         b.version.localeCompare(a.version, undefined, { numeric: true }),
       );
 
+    const { headline, body } = splitHeadline(head.body ?? "");
+    // A hand-titled Release is the only case where `name` carries a headline —
+    // the publish workflow always sets it to the bare version.
+    const name = head.name?.trim();
+    const fallback =
+      name && name.replace(/^v/, "") !== version ? name : undefined;
+
     releases.push({
       version,
       kind: entry.kind,
       date: toDate(head),
       isLatest: false,
-      title: head.name?.trim() || version,
+      title: headline ?? fallback,
       highlights: [],
-      body: head.body ?? "",
+      body,
       npmUrl: npmUrl(version),
       githubUrl: head.html_url,
       patchGroups,
