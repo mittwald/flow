@@ -135,9 +135,10 @@ export default () => {
           {step === "configure" && (
             <>
               <Action closeModal>
-                <Button>Anlegen</Button>
+                <Button color="success">Anlegen</Button>
               </Action>
               <Button
+                slot="secondary"
                 variant="soft"
                 color="secondary"
                 onPress={() => setStep("selectType")}
@@ -147,7 +148,7 @@ export default () => {
             </>
           )}
           <Action closeModal>
-            <Button variant="plain" color="secondary">
+            <Button variant="soft" color="secondary">
               Abbrechen
             </Button>
           </Action>

@@ -50,8 +50,15 @@ kostet einen Klick und den Überblick. Sie lohnen sich dort, wo sich der Inhalt
 der nächsten Stufe tatsächlich ändert.
 
 **Zurück führt zur vorherigen Stufe, nicht aus dem Overlay.** Der Zurück-Button
-steht in der `ActionGroup` neben der weiterführenden Aktion. Abbrechen bleibt
-davon getrennt – es schließt das ganze Overlay.
+steht in der [ActionGroup](/components/actions/action-group) neben der
+weiterführenden Aktion. Abbrechen bleibt davon getrennt – es schließt das ganze
+Overlay und wird deshalb ganz nach links gesetzt.
+
+Die ActionGroup sortiert selbst, und sie rät die Rolle aus der Button-Farbe:
+alles Farbige wird zur primären Aktion rechts, `color="secondary"` landet im
+Abbrechen-Slot ganz links. Bei drei Buttons reicht das nicht – Zurück und
+Abbrechen sähen beide wie Abbrechen aus und würden auseinandergezogen. Der
+Zurück-Button braucht deshalb ein ausdrückliches `slot="secondary"`.
 
 **Getroffene Eingaben überleben den Schritt zurück.** Wer die Auswahl korrigiert
 und wieder vorgeht, findet seine Eingaben wieder, soweit sie zur neuen Auswahl
