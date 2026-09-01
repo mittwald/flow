@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.3](https://github.com/mittwald/flow/compare/1.1.2...1.2.0-next.3) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** the SegmentedControl -&gt; RadioGroup direction is a rename ([#3042](https://github.com/mittwald/flow/issues/3042)) ([0832a67](https://github.com/mittwald/flow/commit/0832a67f096ce6550a15dc02fdf655db4c953102))
+
+## [1.2.0-next.2](https://github.com/mittwald/flow/compare/1.2.0-next.1...1.2.0-next.2) (2026-09-01)
+
+## [1.2.0-next.1](https://github.com/mittwald/flow/compare/1.1.1...1.2.0-next.1) (2026-09-01)
+
+## [1.2.0-next.0](https://github.com/mittwald/flow/compare/1.1.0...1.2.0-next.0) (2026-08-31)
+
+## [1.1.0-next.12](https://github.com/mittwald/flow/compare/1.0.16...1.1.0-next.12) (2026-08-31)
+
+## [1.1.0-next.11](https://github.com/mittwald/flow/compare/1.0.15...1.1.0-next.11) (2026-08-31)
+
+## [1.1.0-next.10](https://github.com/mittwald/flow/compare/1.1.0-next.9...1.1.0-next.10) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** stop imports-to-package-root corrupting current code ([36cbd48](https://github.com/mittwald/flow/commit/36cbd48c4d2a90823a0ec96dcd7be98afa57806a))
+
+## [1.1.0-next.9](https://github.com/mittwald/flow/compare/1.1.0-next.8...1.1.0-next.9) (2026-08-31)
+
+## [1.1.0-next.8](https://github.com/mittwald/flow/compare/1.0.14...1.1.0-next.8) (2026-08-31)
+
+## [1.1.0-next.7](https://github.com/mittwald/flow/compare/1.1.0-next.6...1.1.0-next.7) (2026-08-31)
+
+## [1.1.0-next.6](https://github.com/mittwald/flow/compare/1.1.0-next.5...1.1.0-next.6) (2026-08-31)
+
+### Bug Fixes
+
+* **codemods:** rewrite value positions, catalogue the password-tools subpath ([b062557](https://github.com/mittwald/flow/commit/b0625575b77f7465b773653a67a676aab73da8ed))
+
+## [1.1.0-next.5](https://github.com/mittwald/flow/compare/1.0.12...1.1.0-next.5) (2026-08-31)
+
+### Features
+
+* **codemods:** adopt the transform suite and test harness from [#2942](https://github.com/mittwald/flow/issues/2942) ([b4bf976](https://github.com/mittwald/flow/commit/b4bf97620c642fb53fbdb1dcd4831385fd8bd520))
+* **codemods:** generate MIGRATION.md from the catalogue ([75fb720](https://github.com/mittwald/flow/commit/75fb720cc601060232e88933eb956ba31b87cf90))
+
+### Bug Fixes
+
+* **codemods:** correct the since version of the package-root import migration ([b648460](https://github.com/mittwald/flow/commit/b6484601718dce84dc0794a8629edfdf5f091ccd))
+* **codemods:** make the catalogue&#x27;s detect, apply and verify fields true ([b03fee1](https://github.com/mittwald/flow/commit/b03fee1e9ba6204945e885ef7e2f25b0ac37e598))
+
+### Reverts
+
+* **codemods:** take the detect and verify commands back out ([a58ac2b](https://github.com/mittwald/flow/commit/a58ac2bf27625f9934fd1c6323ae869c30f728b4))
+
+## [1.1.0-next.4](https://github.com/mittwald/flow/compare/1.1.0-next.3...1.1.0-next.4) (2026-08-28)
+
+## [1.1.0-next.3](https://github.com/mittwald/flow/compare/1.0.10...1.1.0-next.3) (2026-08-28)
+
+## [1.1.0-next.2](https://github.com/mittwald/flow/compare/1.1.0-next.1...1.1.0-next.2) (2026-08-28)
+
+## [1.1.0-next.1](https://github.com/mittwald/flow/compare/1.0.9...1.1.0-next.1) (2026-08-28)
+
+## [1.1.0-next.0](https://github.com/mittwald/flow/compare/1.0.5...1.1.0-next.0) (2026-08-27)
+
+### Features
+
+* **Rating:** individual segments, segment count and single fill ([#2863](https://github.com/mittwald/flow/issues/2863)) ([aea4e59](https://github.com/mittwald/flow/commit/aea4e5989e23d6a19443207fd2c9db9da9a3a755))
+* ship a consumer agent guide and a compact component index ([#2897](https://github.com/mittwald/flow/issues/2897)) ([797f512](https://github.com/mittwald/flow/commit/797f51219a749e21c152fcaecc524b2ac2f98eb7))
+
 ## [1.2.0-next.2](https://github.com/mittwald/flow/compare/1.2.0-next.1...1.2.0-next.2) (2026-09-01)
 
 ### Bug Fixes
