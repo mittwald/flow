@@ -15,7 +15,7 @@ the `@mittwald/flow-codemods` CLI that runs them.
 | `src/cli`, `src/cli.ts`                                          | The `upgrade`, `list` and single-codemod commands.                                                                                                                                                  |
 | `src/resolve`, `src/manifest.ts`, `src/install.ts`, `src/git.ts` | Version resolution, manifest edits, package-manager install, and the dirty-working-tree guard for `upgrade`.                                                                                        |
 | `src/run`                                                        | Drives jscodeshift's `Runner` in-process (not the CLI binary).                                                                                                                                      |
-| `dev/generate`                                                   | The three generators.                                                                                                                                                                               |
+| `dev/generate`, `dev/buildTransforms.ts`                         | The three catalogue generators, plus the transforms' CommonJS compile — see [Transforms are compiled](#transforms-are-compiled-and-that-is-not-optional).                                           |
 | `src/tests`                                                      | Cross-cutting tests: catalogue invariants, remote-scope checks, the transform-test-coverage guard, and `runTransform`, the run-through-the-real-CLI helper every fixture test uses.                 |
 
 The directory **is** the id — it appears once, instead of once per filename
@@ -58,13 +58,31 @@ independent check that it works under jscodeshift's normal invocation — not a
 reproduction of `runCodemod`'s invocation, since production and this test helper
 no longer call jscodeshift the same way.
 
-A transform no longer has to be self-contained — it may import shared helpers
-from elsewhere in `src`. But `package.json` ships
-`"files": ["dist", "src/migrations/**/transform.ts", "src/tools/to-remote-package.ts"]`:
-the published package carries the transform sources and nothing outside them
-(not `entry.md`, not the test files). Anything a transform imports must resolve
-inside what ships, or it is missing from the published package even though it
-type-checks locally.
+### Transforms are compiled, and that is not optional
+
+`package.json` ships `"files": ["dist"]`. The transforms reach a consumer as
+**compiled CommonJS** at `dist/migrations/<id>/transform.js`, produced by
+`tsconfig.transforms.json` and `dev/buildTransforms.ts` — a second compile
+beside the main one, with its own `package.json` marker (`{"type": "commonjs"}`)
+written into `dist/migrations` and `dist/tools` so Node does not read the
+emitted `.js` as ESM.
+
+The `.ts` sources are **not** published. They used to be, and every codemod died
+in every consumer install because of it: jscodeshift's worker `require()`s the
+transform path, and although it installs `@babel/register` first,
+babel-register's `only` defaults to the current working directory — a transform
+under the consumer's `node_modules` is outside it, so babel never claims the
+file, Node's own `.ts` handler takes over, and Node refuses with
+`ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING` (no opt-out). In the repo it
+worked, because there cwd _is_ inside the package. `src/run/jscodeshift.ts`
+prefers the compiled file and keeps the `.ts` as a repo-only fallback;
+`src/tests/publishedTransforms.test.ts` loads every compiled transform through
+`require` the way the worker does, so a broken or missing compile fails the
+build instead of shipping.
+
+A transform may import shared helpers from elsewhere in `src` — they are
+compiled along with it. What it must not do is reach anything that stays outside
+`dist`.
 
 ### Every transform has a test — enforced, not just conventional
 
@@ -143,7 +161,7 @@ by id like any other transform.
 ## Commands
 
 ```shell
-pnpm nx build codemods        # regenerate the catalogue's generated artifacts
-pnpm nx test:unit codemods    # catalogue + fixture + idempotency tests
+pnpm nx build codemods        # generators + tsc + the transforms' CommonJS compile
+pnpm nx test:unit codemods    # catalogue + fixture + idempotency + published-load tests
 pnpm nx test:compile codemods # tsc --noEmit
 ```

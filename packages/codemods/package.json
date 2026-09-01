@@ -9,15 +9,13 @@
     "flow-codemods": "dist/cli.js"
   },
   "files": [
-    "dist",
-    "src/migrations/**/transform.ts",
-    "src/tools/to-remote-package.ts"
+    "dist"
   ],
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json",
+    "build": "tsx dev/generateCli.ts && tsc -p tsconfig.build.json && tsx dev/buildTransforms.ts",
     "test:compile": "tsc --noEmit",
     "test:unit": "vitest run"
   },
