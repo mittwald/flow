@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.7](https://github.com/mittwald/flow/compare/1.2.0-next.6...1.2.0-next.7) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** install with the project&#x27;s real package manager ([#3041](https://github.com/mittwald/flow/issues/3041)) ([63875ae](https://github.com/mittwald/flow/commit/63875aed0970b93ab7f05d5bad255cc695af63b4))
+
+## [1.1.5](https://github.com/mittwald/flow/compare/1.2.0-next.4...1.1.5) (2026-09-01)
+
 ## [1.2.0-next.6](https://github.com/mittwald/flow/compare/1.2.0-next.5...1.2.0-next.6) (2026-09-01)
 
 ### Features
