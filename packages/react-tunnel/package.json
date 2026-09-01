@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "1.2.0-next.0",
+  "version": "1.2.0-next.1",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
