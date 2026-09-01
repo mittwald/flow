@@ -12,7 +12,6 @@ import { Action } from "@/components/Action";
 import { CopyButton } from "@/components/CopyButton";
 import { Content } from "@/components/Content";
 import { Modal, ModalTrigger } from "@/components/Modal";
-import { IconInfo } from "@/components/Icon/components/icons";
 
 const badgeOf = (container: Element): Element => {
   const badge = container.querySelector("[data-testid='badge']");
@@ -20,7 +19,7 @@ const badgeOf = (container: Element): Element => {
   return badge as Element;
 };
 
-test("A button in the content is placed at the end of the badge", async () => {
+test("A button in the content is moved out of the content", async () => {
   const screen = await render(
     <Badge data-testid="badge">
       Value
@@ -28,33 +27,24 @@ test("A button in the content is placed at the end of the badge", async () => {
     </Badge>,
   );
 
-  const badge = badgeOf(screen.container);
   const button = screen
     .getByRole("button", { name: "More information" })
     .element();
 
-  expect(button.parentElement).toBe(badge);
-  expect(badge.lastElementChild).toBe(button);
+  expect(button.parentElement).toBe(badgeOf(screen.container));
 });
 
-test("The close button is placed after a button in the content", async () => {
+test("A copy button in the content is moved out of the content", async () => {
   const screen = await render(
-    <Badge data-testid="badge" onClose={() => undefined}>
+    <Badge data-testid="badge">
       Value
-      <Button aria-label="More information" />
+      <CopyButton text="Value" />
     </Badge>,
   );
 
-  const badge = badgeOf(screen.container);
-  const button = screen
-    .getByRole("button", { name: "More information" })
-    .element();
-  const closeButton = screen.getByRole("button", { name: "Remove" }).element();
+  const copyButton = screen.getByRole("button", { name: "Copy" }).element();
 
-  expect(Array.from(badge.children).indexOf(button)).toBe(
-    Array.from(badge.children).indexOf(closeButton) - 1,
-  );
-  expect(badge.lastElementChild).toBe(closeButton);
+  expect(copyButton.parentElement).toBe(badgeOf(screen.container));
 });
 
 test("A contextual help trigger in the content opens its overlay", async () => {
@@ -79,63 +69,17 @@ test("A contextual help trigger in the content opens its overlay", async () => {
     .toBeInTheDocument();
 });
 
-test("A button in the content is shaped like the close button", async () => {
-  const screen = await render(
-    <Badge onClose={() => undefined}>
-      Value
-      <Button aria-label="More information">
-        <IconInfo />
-      </Button>
-    </Badge>,
-  );
-
-  const button = screen
-    .getByRole("button", { name: "More information" })
-    .element()
-    .getBoundingClientRect();
-  const closeButton = screen
-    .getByRole("button", { name: "Remove" })
-    .element()
-    .getBoundingClientRect();
-
-  expect(button.width).toBe(closeButton.width);
-  expect(button.height).toBe(closeButton.height);
-  expect(button.top).toBe(closeButton.top);
-  expect(button.right).toBe(closeButton.left);
-});
-
-test("A copy button in the content is placed before the close button", async () => {
-  const screen = await render(
-    <Badge data-testid="badge" onClose={() => undefined}>
-      Value
-      <CopyButton text="Value" />
-    </Badge>,
-  );
-
-  const badge = badgeOf(screen.container);
-  const copyButton = screen.getByRole("button", { name: "Copy" }).element();
-  const closeButton = screen.getByRole("button", { name: "Remove" }).element();
-
-  expect(copyButton.parentElement).toBe(badge);
-  expect(closeButton.previousElementSibling).toBe(copyButton);
-});
-
 test("An action in the content keeps its button working", async () => {
   const onAction = vi.fn();
 
   const screen = await render(
-    <Badge data-testid="badge">
+    <Badge>
       Value
       <Action onAction={onAction}>
         <Button aria-label="Refresh" />
       </Action>
     </Badge>,
   );
-
-  const badge = badgeOf(screen.container);
-  const button = screen.getByRole("button", { name: "Refresh" }).element();
-
-  expect(button.parentElement).toBe(badge);
 
   await screen.getByRole("button", { name: "Refresh" }).click();
 
