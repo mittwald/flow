@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.8](https://github.com/mittwald/flow/compare/1.2.0-next.7...1.2.0-next.8) (2026-09-01)
+
+### Bug Fixes
+
+* **docs:** stop repeating the version as the release headline ([#3054](https://github.com/mittwald/flow/issues/3054)) ([df09a68](https://github.com/mittwald/flow/commit/df09a684885983232850296c473c5949b96a6296))
+
+## [1.1.6](https://github.com/mittwald/flow/compare/1.2.0-next.6...1.1.6) (2026-09-01)
+
 ## [1.2.0-next.7](https://github.com/mittwald/flow/compare/1.2.0-next.6...1.2.0-next.7) (2026-09-01)
 
 ### Bug Fixes
