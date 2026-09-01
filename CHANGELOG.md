@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/mittwald/flow/compare/1.1.2...1.1.3) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** the SegmentedControl -&gt; RadioGroup direction is a rename ([#3042](https://github.com/mittwald/flow/issues/3042)) ([0832a67](https://github.com/mittwald/flow/commit/0832a67f096ce6550a15dc02fdf655db4c953102))
+
 ## [1.1.2](https://github.com/mittwald/flow/compare/1.1.1...1.1.2) (2026-09-01)
 
 ### Bug Fixes
