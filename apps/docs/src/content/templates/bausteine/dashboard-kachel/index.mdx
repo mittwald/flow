@@ -1,0 +1,66 @@
+---
+title: Dashboard-Kachel
+---
+
+Eine Kachel ist ein Ausschnitt mit einem Ziel: sie zeigt so viel, dass man
+erkennt, ob man hinsehen muss, und verlinkt in die Seite, auf der man damit
+arbeitet. Sie ist eine eigene [LayoutCard](/components/structure/layout-card) –
+anders als ein [Bereich](/templates/bereiche/stammdaten-bereich), der sich die
+Karte mit den anderen Bereichen teilt.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="dashboard-kachel" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Auf einem [Dashboard](/templates/seiten/dashboard).
+
+**Nicht verwenden**, wenn
+
+- die Kachel auf einer Detailseite stünde. Dort teilen sich die Blöcke eine
+  Karte; einzelne Karten dazwischen brechen die Gliederung.
+- der Ausschnitt vollständig ist. Was nichts weglässt, braucht kein Ziel – und
+  ohne Ziel ist es keine Kachel, sondern ein Bereich.
+
+---
+
+# Warum diese Struktur
+
+**Überschrift, Inhalt, Ziel – in dieser Reihenfolge.** Die Überschrift sagt,
+wovon die Rede ist; sie ist auf einem Dashboard aus verschiedenen Quellen nicht
+aus dem Kontext zu erschließen.
+
+**Das Ziel steht in der Kopfzeile, nicht am Ende.** Der
+[Header](/components/structure/section) nimmt neben der Überschrift einen
+[Link](/components/navigation/link) auf. So steht das Ziel bei allen Kacheln an
+derselben Stelle, egal wie hoch ihr Inhalt ist.
+
+**Kurz.** Drei, vier Zeilen. Eine Kachel, die scrollt, ist eine Seite im
+falschen Format.
+
+**Eine Aussage je Kachel.** Zwei Themen in einer Kachel sind zwei Kacheln –
+sonst passt die Überschrift auf eins von beiden nicht.
+
+**Eigener Lade- und Fehlerzustand.** Die Kachel lädt für sich; fällt ihre
+Datenquelle aus, bleibt das übrige Dashboard benutzbar. Der Platzhalter beim
+Laden hat die Höhe des Inhalts, damit die Kacheln darunter nicht springen.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Kennzahl oder Fortschritt.** Statt Text eine
+[ProgressBar](/components/status/progress-bar) oder eine
+[BigNumber](/components/data-visualisation/big-number).
+
+**Mit Aktion statt Link.** Führt die Kachel nicht auf eine Seite, sondern in
+einen Vorgang, steht statt des Links ein sekundärer Button im Inhalt.
+
+**Als Einstiegshilfe.** Eine Kachel kann die nächsten Schritte für einen noch
+leeren Kontext anbieten. Sie verschwindet, sobald sie erledigt ist – als einzige
+Kachel, deren Sichtbarkeit von den Daten abhängt.

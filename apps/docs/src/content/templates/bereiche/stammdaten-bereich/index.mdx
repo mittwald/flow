@@ -1,0 +1,83 @@
+---
+title: Stammdaten-Bereich
+---
+
+Der häufigste Baustein einer [Detailseite](/templates/seiten/detailseite): eine
+[Section](/components/structure/section) mit Überschrift, einer Handvoll
+Wertepaare und einer Aktion in der Kopfzeile, die ein
+[Formular-Overlay](/templates/overlays/formular-overlay) öffnet.
+
+Der Bereich zeigt an, er ändert nicht. Geändert wird im Overlay. Das ist der
+Zusammenhang zwischen den Bereichs- und den Overlay-Templates: Fast jeder
+Bereich hat ein Overlay hinter seiner Kopfzeile.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor
+  example="stammdaten-bereich"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+---
+
+# Wann verwenden
+
+Für jeden Themenblock einer Detailseite, der Werte zeigt und eine Aktion darauf
+anbietet.
+
+**Nicht verwenden**, wenn
+
+- der Bereich eine Sammlung zeigt statt einzelner Werte. Dann ist es ein
+  [Listen-Bereich](/templates/bereiche/listen-bereich).
+- die Werte ohne Kontext nicht zu lesen sind – lange Zeichenketten, Hostnamen,
+  Zugangsdaten. Dafür gibt es die Variante mit
+  [kopierbaren Werten](/templates/bausteine/kopierbarer-wert).
+
+---
+
+# Warum diese Struktur
+
+**Der [Header](/components/structure/section) trägt Überschrift und Aktion.** Er
+wird innerhalb einer Section automatisch zur Zeile mit rechtsbündigem
+Aktionsbereich – das muss nicht mit einem eigenen Flex-Layout nachgebaut werden,
+und nachgebaut sieht es an jeder Stelle etwas anders aus.
+
+**Ein [LabeledValue](/components/content/labeled-value) je Wert, kein
+Fließtext.** Label und Wert sind getrennt lesbar und bleiben über alle Bereiche
+gleich ausgerichtet. Zwei Werte in einem Absatz sind nicht scanbar.
+
+**Nebeneinander erst ab kurzen Werten.** Ein
+[ColumnLayout](/components/structure/column-layout) bringt Wertepaare in zwei
+Spalten, solange die Werte kurz sind. Lange Werte gehören untereinander, sonst
+brechen sie unterschiedlich um.
+
+**Was leer ist, verschwindet nicht.** Ein Wert, der fehlen kann, zeigt seinen
+leeren Zustand – „Nicht gesetzt“ – statt aus dem Bereich zu verschwinden. Sonst
+ändert sich die Zahl der Zeilen mit den Daten, und es ist nicht erkennbar, ob
+etwas fehlt oder nicht existiert.
+
+**Nur eine primäre Aktion.** Weitere Aktionen sind sekundär. Zwei gleichrangige
+Buttons in einer Kopfzeile beantworten die Frage nicht, was der übliche Weg ist.
+
+---
+
+# Varianten und Abwandlung
+
+**Verbindungsdaten.** Werte, die kopiert und woanders eingesetzt werden – Host,
+Benutzername, Port – bekommen einen
+[CopyButton](/templates/bausteine/kopierbarer-wert). Am Aufbau des Bereichs
+ändert das nichts.
+
+**Mit Schalter statt Button.** Ein Bereich, der genau eine Sache an- und
+ausschaltet, trägt den [Switch](/components/form-controls/switch) direkt in der
+Kopfzeile. Ein Overlay für eine einzige Umschaltung ist ein Klick zu viel.
+
+**Mit Fortschritt oder Kennzahl.** Belegter Speicher, verbrauchtes Kontingent:
+eine [ProgressBar](/components/status/progress-bar) tritt an die Stelle der
+Wertepaare, die Kopfzeile bleibt.
+
+**Bedingt sichtbar.** Bereiche, die es nur unter Bedingungen gibt, stehen an
+fester Position im Stapel und verschwinden dort – sie rutschen nicht nach oben.

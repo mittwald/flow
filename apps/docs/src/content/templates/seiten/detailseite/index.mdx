@@ -1,0 +1,79 @@
+---
+title: Detailseite
+---
+
+Die Detailseite zeigt ein einzelnes Objekt. Sie ist die Seite, auf der User die
+meiste Zeit verbringen: alle Informationen zu diesem Objekt, alle Aktionen
+darauf, an einem Ort.
+
+Ihr Inhalt ist kein durchlaufender Text, sondern ein Stapel aus
+[Sections](/components/structure/section) – ein Themenblock je Section, jeder
+mit einer Überschrift und den Aktionen, die zu genau diesem Block gehören.
+Welche Bereiche das sind, entscheidet die Fachlichkeit; wie ein Bereich gebaut
+ist, beschreiben die
+[Bereichs-Templates](/templates/bereiche/stammdaten-bereich).
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="detailseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Wenn ein einzelnes Objekt so viele Informationen trägt, dass sie sich in
+Themenblöcke gliedern lassen, und wenn Aktionen auf diesem Objekt von hier aus
+gestartet werden.
+
+**Nicht verwenden**, wenn
+
+- das Objekt nur zwei oder drei Werte hat und keine eigenen Aktionen. Dann
+  reicht ein Eintrag in der Übersichtsliste, und die Detailseite ist ein
+  überflüssiger Klick.
+- die Seite mehrere Objekte zeigt. Das ist eine
+  [Übersichtsseite](/templates/seiten/uebersichtsseite).
+
+---
+
+# Warum diese Struktur
+
+**Ein Bereich je Thema, nicht je Datenquelle.** Die Bereiche folgen der mentalen
+Gliederung der User, nicht dem Zuschnitt der API. „Speicherplatz“ ist ein
+Bereich, weil User darüber nachdenken – nicht, weil es dafür einen Endpunkt
+gibt.
+
+**Aktionen stehen an ihrem Bereich, nicht gesammelt oben.** Der
+[Header](/components/structure/section) einer Section nimmt neben der
+Überschrift eine [ActionGroup](/components/actions/action-group) auf. Damit ist
+ohne Lesen klar, worauf eine Aktion wirkt. Der Seitenkopf trägt nur die
+Aktionen, die auf das ganze Objekt wirken – umbenennen, löschen – und Kopien
+häufig gebrauchter Bereichsaktionen als Schnellzugriff.
+
+**Alle Bereiche liegen in einer gemeinsamen
+[LayoutCard](/components/structure/layout-card).** Sie ist der Container der
+Seite, nicht ein Rahmen je Bereich. Ein Kartenrahmen um jeden Bereich würde die
+Gliederung verdoppeln, die die Überschriften schon herstellen.
+
+**Die Reihenfolge ist stabil, nicht datenabhängig.** Bereiche, die nur unter
+Bedingungen sichtbar sind, stehen an fester Position und verschwinden dort – sie
+rutschen nicht nach oben, wenn ein anderer Bereich fehlt.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Tab-Navigation.** Werden es mehr als etwa sechs Bereiche, wird die Seite
+unübersichtlich. Dann werden Gruppen von Bereichen auf Unterseiten ausgelagert:
+[Seite mit Tab-Navigation](/templates/seiten/seite-mit-tab-navigation). Jeder
+Tab ist danach für sich wieder eine Detailseite aus gestapelten Bereichen.
+
+**Mit Alerts am Kopf.** Dauerhafte Zustände des Objekts – abgelaufen, gesperrt,
+nicht verifiziert – stehen als Alert-Block vor dem ersten Bereich:
+[Alerts am Seitenkopf](/templates/bereiche/alerts-bereich).
+
+**Zweispaltig.** Ein [ColumnLayout](/components/structure/column-layout)
+innerhalb eines Bereichs bringt kurze Wertepaare nebeneinander. Die Bereiche
+selbst bleiben untereinander – zwei Spalten aus Bereichen zwingen die Augen zu
+springen und brechen auf schmalen Viewports ohnehin um.

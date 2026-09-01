@@ -1,0 +1,82 @@
+---
+title: Übersichtsseite
+---
+
+Die Übersichtsseite zeigt alle Objekte eines Typs, die im aktuellen Kontext
+existieren – alle E-Mail-Adressen eines Projekts, alle Domains, alle Projekte
+einer Organisation. Sie ist der Einstieg in jeden Objekttyp: von hier aus legen
+User neue Objekte an und navigieren in die Detailseite eines einzelnen Objekts.
+
+Die Seite besteht aus genau einem Element: der
+[List](/components/structure/list). Sie bringt Suche, Filter, Sortierung,
+Pagination und Leerzustand mit, statt dass diese Teile einzeln um eine
+Datenausgabe herum gebaut werden.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="uebersichtsseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Wenn eine Seite eine Sammlung gleichartiger Objekte zeigt und der Weg zum
+einzelnen Objekt über diese Seite führt.
+
+**Nicht verwenden**, wenn
+
+- die Liste nur ein Abschnitt neben anderen Inhalten ist. Dann ist es kein
+  Seiten-, sondern ein Bereichs-Template: siehe
+  [Listen-Bereich](/templates/bereiche/listen-bereich).
+- die Daten keine Objektsammlung sind, sondern Kennzahlen, Positionen oder ein
+  Vorher-Nachher-Vergleich. Dafür ist eine [Table](/components/structure/table)
+  das richtige Mittel – die Abgrenzung beschreibt
+  [Liste, Tile oder Tabelle](/patterns/patterns/list-tile-table).
+
+---
+
+# Warum diese Struktur
+
+**Die Anlegen-Aktion steht in der ActionGroup der Liste, nicht im Seitenkopf.**
+Sie gehört zum gezeigten Objekttyp, nicht zur Seite. Damit steht sie auch dann
+an derselben Stelle, wenn die Liste später in einen Bereich wandert.
+
+**Suche, Filter und Sortierung sind Unterkomponenten der Liste.** Sie werden als
+`List.Search`, `List.Filter` und `List.Sorting` deklariert und nicht als eigene
+Leiste darüber gebaut. Die Liste verdrahtet sie selbst mit dem Datenabruf – bei
+serverseitiger Filterung ist das der einzige Weg, der ohne doppelte
+Zustandshaltung auskommt.
+
+**Der Leerzustand ist ein Prop, kein Sonderfall im Rendering.** `emptyView`
+nimmt einen [Leerzustand](/templates/bausteine/leerzustand) entgegen. Eine
+Übersichtsseite ohne `emptyView` ist unfertig: der erste Kontakt mit einem
+Objekttyp ist fast immer die leere Liste.
+
+**Jeder Eintrag verlinkt in seine Detailseite.** `List.Item` bekommt dafür ein
+`href`. Wird das `href` weggelassen, sind die Einträge nicht mehr navigierbar –
+das ist die richtige Wahl für Listen, aus denen nur ausgewählt wird, nicht für
+eine Übersichtsseite.
+
+---
+
+# Varianten und Abwandlung
+
+**Mehrere Anlegewege.** Gibt es mehr als einen Weg, ein Objekt anzulegen
+(bestellen, umziehen, selbst einrichten), wird der Button in der `ActionGroup`
+zum [ContextMenu](/components/actions/context-menu) mit einem Eintrag je Weg.
+
+**Tabs über mehreren Übersichtsseiten.** Gehören mehrere Objekttypen fachlich
+zusammen – E-Mail-Adressen, Weiterleitungen, Delivery-Boxen – bekommen sie eine
+gemeinsame [Tab-Navigation](/templates/seiten/seite-mit-tab-navigation), und
+jeder Tab ist für sich eine Übersichtsseite.
+
+**Statt der Liste eine Kachelansicht.** Wenn ein Vorschaubild zur Erkennung des
+Objekts beiträgt, wird aus dem Listeneintrag eine Kachel. Struktur und
+Ausstattung der Seite ändern sich dadurch nicht.
+
+**Ohne Suche und Filter.** Bei einer fachlich begrenzten Zahl von Einträgen –
+zwei SSH-Benutzer, drei Zertifikate – werden `List.Search` und `List.Filter`
+weggelassen. Die Sortierung bleibt, weil sie auch bei wenigen Einträgen eine
+verlässliche Reihenfolge herstellt.

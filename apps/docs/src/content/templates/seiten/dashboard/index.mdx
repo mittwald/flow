@@ -1,0 +1,74 @@
+---
+title: Dashboard
+---
+
+Das Dashboard ist die Startseite eines Kontexts – einer Organisation, eines
+Projekts, eines Servers. Es beantwortet zwei Fragen: Ist hier gerade alles in
+Ordnung, und wo geht es weiter? Es ist keine Detailseite und kein Bericht: jede
+[Kachel](/templates/bausteine/dashboard-kachel) zeigt einen Ausschnitt und
+verlinkt in die Seite, auf der man damit arbeitet.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="dashboard" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Als erste Seite eines Kontexts, den User regelmäßig betreten und in dem sie sich
+orientieren müssen, bevor sie etwas tun.
+
+**Nicht verwenden**, wenn
+
+- der Kontext nur eine sinnvolle Startseite hat. Dann führt der Einstieg direkt
+  dorthin, statt über ein Dashboard mit einer Kachel.
+- die Kacheln zusammen ein Objekt beschreiben. Das ist eine
+  [Detailseite](/templates/seiten/detailseite), und ihre Blöcke sind Bereiche,
+  keine Kacheln.
+
+---
+
+# Warum diese Struktur
+
+**Kacheln statt Bereiche.** Auf der Detailseite gehören die Blöcke zusammen und
+teilen sich eine Karte. Auf dem Dashboard stehen sie nebeneinander, stammen aus
+verschiedenen Quellen und werden einzeln gelesen – deshalb bekommt jede Kachel
+ihre eigene [LayoutCard](/components/structure/layout-card).
+
+**Mehrspaltig über [ColumnLayout](/components/structure/column-layout).** Das
+Dashboard ist die einzige Seite, auf der Spalten die Regel sind: die Kacheln
+sind kurz, unabhängig und werden überflogen. Auf schmalen Viewports fallen sie
+in eine Spalte zusammen.
+
+**Die Reihenfolge ist eine Rangfolge.** Oben links steht, was am häufigsten
+gebraucht wird oder am dringendsten ist; weiter unten das Beiläufige. Sie ist
+fest – ein Dashboard, dessen Kacheln je nach Datenlage die Plätze tauschen, ist
+jedes Mal neu zu lesen.
+
+**Jede Kachel führt weiter.** Eine Kachel ohne Ziel ist eine Sackgasse: Sie
+zeigt etwas, aber man kann nichts damit tun. Das Ziel ist die Seite, auf der der
+gezeigte Ausschnitt vollständig ist.
+
+**Jede Kachel lädt für sich.** Eine langsame Datenquelle darf das Dashboard
+nicht aufhalten. Kacheln bekommen deshalb eigene Lade- und Fehlerzustände; fällt
+eine aus, bleibt der Rest der Seite benutzbar.
+
+---
+
+# Varianten und Abwandlung
+
+**Alerts über den Kacheln.** Zustände, die den ganzen Kontext betreffen – eine
+offene Rechnung, ein auslaufender Vertrag – stehen als
+[Alerts](/templates/bereiche/alerts-bereich) über der ersten Kachel, nicht in
+einer eigenen Kachel.
+
+**Zustandsabhängige Startseite.** Ist der Kontext noch leer oder wird gerade
+eingerichtet, ersetzt ein [Leerzustand](/templates/bausteine/leerzustand) die
+Kacheln, statt sie leer anzuzeigen.
+
+**Kennzahlen-Kacheln.** Eine Kachel kann statt Text eine Kennzahl oder ein
+Diagramm tragen. Sie bleibt eine Kachel – mit Überschrift, Ziel und eigenem
+Ladezustand.

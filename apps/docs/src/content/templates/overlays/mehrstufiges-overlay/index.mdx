@@ -1,0 +1,77 @@
+---
+title: Mehrstufiges Overlay
+---
+
+Manche Anlegevorgänge lassen sich nicht in einem Formular abbilden, weil erst
+eine Auswahl feststehen muss, bevor klar ist, welche Felder überhaupt gebraucht
+werden. Welche App installiert wird, entscheidet, welche Angaben sie verlangt;
+welches Container-Template gewählt ist, entscheidet über seine Eingaben.
+
+Das Overlay bekommt dafür Stufen. Es bleibt ein Overlay – die Stufen sind
+Zustände in ihm, keine eigenen Adressen.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor
+  example="mehrstufiges-overlay"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+---
+
+# Wann verwenden
+
+Wenn eine Auswahl bestimmt, welche Eingaben danach folgen, und diese Auswahl
+nicht nebenbei in einem Feld getroffen werden kann – weil zu ihr Bild,
+Beschreibung oder Vergleich gehören.
+
+**Nicht verwenden**, wenn
+
+- die Felder von Anfang an feststehen. Ein langes Formular wird durch Aufteilen
+  nicht kürzer, nur unübersichtlicher: es bleibt ein
+  [Formular-Overlay](/templates/overlays/formular-overlay).
+- die Auswahl eine reine Wertauswahl ist. Ein
+  [Select](/components/form-controls/select) im Formular reicht, wenn die
+  Optionen mit ihrem Namen erklärt sind.
+
+---
+
+# Warum diese Struktur
+
+**Die Auswahl steht am Anfang, nicht in der Mitte.** Sie ist die Weiche: alles
+danach hängt an ihr. Eine Auswahl nach ein paar Feldern entwertet die Eingaben,
+die vor ihr gemacht wurden.
+
+**Eine Stufe je Entscheidung, nicht je Feldergruppe.** Stufen sind teuer – jede
+kostet einen Klick und den Überblick. Sie lohnen sich dort, wo sich der Inhalt
+der nächsten Stufe tatsächlich ändert.
+
+**Zurück führt zur vorherigen Stufe, nicht aus dem Overlay.** Der Zurück-Button
+steht in der `ActionGroup` neben der weiterführenden Aktion. Abbrechen bleibt
+davon getrennt – es schließt das ganze Overlay.
+
+**Getroffene Eingaben überleben den Schritt zurück.** Wer die Auswahl korrigiert
+und wieder vorgeht, findet seine Eingaben wieder, soweit sie zur neuen Auswahl
+noch passen.
+
+**Die Überschrift beschreibt das Ganze, nicht die Stufe.** „App installieren“
+bleibt über allen Stufen stehen. Was gerade zu tun ist, sagt der Inhalt.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Fortschrittsanzeige.** Bei mehr als zwei Stufen hilft eine Anzeige, wie
+weit der Vorgang ist. Bei zwei Stufen ist sie Dekoration.
+
+**Verzweigte Stufen.** Die Auswahl kann bestimmen, wie viele Stufen folgen. Dann
+ist die Zahl der Schritte vorher nicht bekannt – in diesem Fall keine
+Fortschrittsanzeige mit fester Länge zeigen.
+
+**Ein Overlay öffnet ein zweites.** Muss mitten im Vorgang etwas angelegt
+werden, das es noch nicht gibt – eine Domain, ein API-Key – ist das ein eigenes
+Overlay neben dem ersten, kein weiterer Schritt darin. Es hat einen eigenen
+Controller und schließt für sich.

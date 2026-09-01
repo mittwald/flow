@@ -1,0 +1,71 @@
+---
+title: Aktionsmenü
+---
+
+Alles, was man mit einem Objekt tun kann, sammelt sich an einer Stelle: einem
+[ContextMenu](/components/actions/context-menu) hinter einem Button. Jeder
+Eintrag öffnet ein [Overlay](/templates/overlays/formular-overlay) oder löst
+direkt eine Aktion aus.
+
+Das Menü ist der Ort für das Löschen. Es gibt keinen eigenen Gefahrenbereich
+weiter unten auf der Seite – die destruktive Aktion steht dort, wo auch die
+anderen stehen, und wird durch ein
+[Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay) abgesichert.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="aktionsmenue" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Am Kopf einer [Detailseite](/templates/seiten/detailseite) für alles, was auf
+das ganze Objekt wirkt, und an jedem
+[Listeneintrag](/templates/bausteine/listeneintrag).
+
+**Nicht verwenden**, wenn
+
+- es genau eine Aktion gibt. Ein Menü mit einem Eintrag versteckt sie hinter
+  einem zusätzlichen Klick – dann ein Button.
+- die Aktion zu einem Bereich gehört. Sie steht in dessen Kopfzeile, nicht im
+  Menü der Seite. Häufig gebrauchte Bereichsaktionen dürfen zusätzlich als
+  Schnellzugriff im Menü auftauchen.
+
+---
+
+# Warum diese Struktur
+
+**Jeder Eintrag ist ein Verb.** „Bearbeiten“, „Umbenennen“, „Löschen“ – nicht
+„Einstellungen“ oder „Optionen“. Was passiert, muss vor dem Klick klar sein.
+
+**Icon und Text zusammen.** Das Icon macht bekannte Aktionen auffindbar, ohne zu
+lesen; der Text macht sie eindeutig. Icons ohne Text sind es nicht.
+
+**Das Löschen steht unten und ist als gefährlich ausgezeichnet.** Immer an
+derselben Stelle, damit es nicht versehentlich statt der Aktion darüber
+getroffen wird.
+
+**Was nicht geht, bleibt sichtbar und deaktiviert.** Ein Eintrag, der je nach
+Zustand verschwindet, lässt das Menü seine Länge ändern und die Positionen
+wandern. Deaktiviert mit Begründung ist verlässlicher als weg.
+
+**Am Listeneintrag dieselben Einträge wie auf der Detailseite.** Was in der
+Liste geht, geht auf der Detailseite auch – sonst ist nicht klar, wo man suchen
+muss.
+
+---
+
+# Varianten und Abwandlung
+
+**Am Listeneintrag ohne eigenen Trigger.** Die
+[ListItemView](/components/structure/list) stellt den Button für das ContextMenu
+selbst; das Menü wird nur als Kind übergeben.
+
+**Als Anlege-Menü.** Gibt es mehrere Wege, ein Objekt anzulegen, sitzt dasselbe
+Menü hinter dem Anlegen-Button in der `ActionGroup` einer Liste.
+
+**Mit Trennern.** Ab etwa sechs Einträgen lassen sich Gruppen abgrenzen –
+Bearbeiten, dann Verwalten, dann Löschen.

@@ -1,0 +1,72 @@
+---
+title: Listeneintrag
+---
+
+Ein Eintrag in einer Liste beantwortet drei Fragen auf einen Blick: Was ist das,
+um welches Objekt geht es, und in welchem Zustand ist es. Dafür hat er feste
+Plätze – Avatar, Titel, Untertitel, Zusatzinformation, Aktionen. Die `ItemView`
+der [List](/components/structure/list) verteilt die Kinder selbst auf diese
+Plätze, unabhängig davon, in welcher Reihenfolge sie im Code stehen.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="listeneintrag" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+In jeder Liste – auf der [Übersichtsseite](/templates/seiten/uebersichtsseite)
+wie im [Listen-Bereich](/templates/bereiche/listen-bereich).
+
+**Nicht verwenden**, wenn
+
+- die Einträge gleichförmige Wertetupel sind. Dann ist eine
+  [Table](/components/structure/table) lesbarer.
+- ein Vorschaubild das Erkennungsmerkmal ist. Dann ist die Kachelansicht
+  richtig; die Bestandteile bleiben dieselben.
+
+---
+
+# Warum diese Struktur
+
+**Der Titel ist das, wonach gesucht wird.** Die E-Mail-Adresse, der Hostname,
+der Projektname – nicht der Typ und nicht die ID. Wer eine Liste überfliegt,
+liest die Titel.
+
+**Der Avatar codiert den Typ, nicht die Identität.** Gleiche Farbe und gleiches
+Icon für gleiche Typen, über alle Listen hinweg. Ein Avatar, der je Eintrag
+etwas anderes bedeutet, ist Dekoration.
+
+**Zustände als [AlertBadge](/components/status/alert-badge), nicht als Text.**
+„Nicht verifiziert“ als Badge am Titel ist auffindbar; derselbe Satz im
+Untertitel geht unter. Derselbe Zustand erscheint auf der Detailseite als Alert
+– aus derselben Quelle.
+
+**Die Aktionen liegen im [ContextMenu](/components/actions/context-menu) am
+Eintrag.** Buttons je Eintrag wiederholen sich mit jeder Zeile und ziehen den
+Blick von den Titeln ab.
+
+**Kein Eintrag lädt eigene Daten nach.** Was ein Eintrag zeigt, steht in den
+Daten der Liste. Ein Eintrag, der beim Rendern nachlädt, macht aus einer Liste
+mit zwanzig Zeilen zwanzig Ladezustände.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Kennzahl.** Ein Wert, der Einträge vergleichbar macht – belegter Speicher,
+Laufzeit – steht als Zusatzinformation rechts, nicht im Untertitel.
+
+**Ohne Ziel.** Ohne `href` ist der Eintrag nicht navigierbar. In Auswahllisten
+ist das richtig; dort löst `onAction` an der Liste die Auswahl aus.
+
+**Mit Auswahl.** Für Mehrfachauswahl bekommt der Eintrag eine
+[Checkbox](/components/form-controls/checkbox); die Aktion auf der Auswahl steht
+dann über der Liste, nicht am Eintrag.
+
+**Verdichtet.** In einem [Listen-Bereich](/templates/bereiche/listen-bereich)
+reichen oft Titel und eine Zeile darunter. Der Avatar bleibt trotzdem – er hält
+die Einträge über verschiedene Listen hinweg wiedererkennbar.

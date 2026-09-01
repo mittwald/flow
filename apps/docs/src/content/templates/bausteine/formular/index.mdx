@@ -1,0 +1,76 @@
+---
+title: Formular
+---
+
+Ein Formular ist mehr als eine Reihe von Feldern: es hat einen Absende-Button,
+einen Ladezustand, eine Fehlerdarstellung je Feld und eine für das Ganze. Diese
+Teile hängen zusammen und werden deshalb nicht einzeln gebaut, sondern über
+[Form](/components/react-hook-form/form) und
+[Field](/components/react-hook-form/field) verbunden.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="formular" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Überall, wo Eingaben abgeschickt werden – im
+[Formular-Overlay](/templates/overlays/formular-overlay), in einem Bereich einer
+Detailseite, auf einer Seite ohne Anmeldung.
+
+**Nicht verwenden**, wenn
+
+- eine einzelne Einstellung sofort wirkt. Ein
+  [Switch](/components/form-controls/switch), der beim Umlegen speichert,
+  braucht kein Formular und keinen Speichern-Button.
+- gar nichts abgeschickt wird. Ein Suchfeld oder ein Filter verändert eine
+  Ansicht, kein Objekt.
+
+---
+
+# Warum diese Struktur
+
+**`Field` verbindet Eingabe und Validierung.** Es registriert das Feld, hält
+seinen Wert und zeigt seinen Fehler an der richtigen Stelle. Ein Feld ohne
+`Field` ist ein Feld ohne Fehlerdarstellung.
+
+**Fehler stehen am Feld, nicht über dem Formular.** Wer eine Liste von Fehlern
+über den Feldern liest, muss sie den Feldern selbst zuordnen. Nur was sich
+keinem Feld zuordnen lässt, steht als
+[FormRootError](/components/react-hook-form/form-root-error) oben.
+
+**Der [SubmitButton](/components/react-hook-form/submit-button) kennt den
+Zustand des Formulars.** Er zeigt das Laden selbst an und verhindert doppeltes
+Absenden. Ein eigener Button mit eigenem Ladezustand daneben verdoppelt Logik,
+die es schon gibt.
+
+**Was nach dem Erfolg passiert, wird zurückgegeben, nicht ausgeführt.** Der
+Submit-Handler gibt eine Funktion zurück – Overlay schließen, weiternavigieren.
+Sie läuft, nachdem die Erfolgsrückmeldung gezeigt wurde. Direkt im Handler
+aufgerufen, überspringt sie diese Rückmeldung, auch wenn es im Normalfall
+funktioniert.
+
+**Ein Absende-Button je Formular.** Zwei gleichrangige Wege aus einem Formular
+heraus sind zwei Formulare.
+
+---
+
+# Varianten und Abwandlung
+
+**Abbrechen daneben.** Im Overlay steht neben dem SubmitButton ein
+Abbrechen-Button, der schließt, ohne zu speichern – sekundär, nie in derselben
+Farbe wie das Absenden.
+
+**Abhängige Felder.** Felder, die erst durch eine Auswahl relevant werden,
+erscheinen unter ihr. Werden es zu viele, ist es ein
+[mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
+
+**Gruppiert.** Ab etwa acht Feldern gliedern Zwischenüberschriften das Formular.
+
+**Nebeneinander.** Kurze zusammengehörige Felder – Postleitzahl und Ort, lokaler
+Teil und Domain – stehen über ein
+[ColumnLayout](/components/structure/column-layout) in einer Zeile.

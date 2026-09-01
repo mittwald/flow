@@ -1,0 +1,80 @@
+---
+title: Formular-Overlay
+---
+
+Anlegen und Bearbeiten passieren in mStudio nicht auf einer eigenen Seite,
+sondern in einem [Modal](/components/overlays/modal) über der Seite, von der aus
+sie gestartet wurden. Der Kontext bleibt sichtbar, und nach dem Speichern steht
+man wieder dort, wo man war – ohne Rücksprung, ohne Zwischenseite.
+
+Anlegen und Bearbeiten sind dasselbe Template. Sie unterscheiden sich in
+Überschrift, Button-Beschriftung und Vorbelegung der Felder, nicht im Aufbau.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="formular-overlay" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Für jede Eingabe, die zu einem Objekt gehört: anlegen, bearbeiten,
+konfigurieren.
+
+**Nicht verwenden**, wenn
+
+- nichts einzugeben ist und nur bestätigt werden soll. Dann ist es ein
+  [Bestätigungs-Overlay](/templates/overlays/bestaetigungs-overlay) – ohne
+  Formular und ohne Absenden-Button.
+- die Eingabe von einer Auswahl abhängt, die vorher getroffen werden muss. Dann
+  ist es ein [mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
+- das Formular so lang ist, dass es nur mit mehrfachem Scrollen auszufüllen ist.
+  Das ist ein Hinweis darauf, dass zu viel auf einmal verlangt wird – aufteilen
+  in mehrere Schritte oder in mehrere Bereiche der Detailseite.
+
+---
+
+# Warum diese Struktur
+
+**`offCanvas`.** Formular-Overlays fahren von der Seite ein, statt mittig zu
+erscheinen. Sie sind höher als breit, wachsen mit der Zahl der Felder und
+scrollen für sich; die Seite dahinter bleibt sichtbar.
+
+**Die Überschrift benennt Verb und Objekt.** „E-Mail-Adresse anlegen“, nicht
+„Neu“. Sie ist oft der einzige Hinweis darauf, worauf sich das Formular bezieht
+– der Auslöser ist unter dem Overlay verdeckt.
+
+**Der Absenden-Button trägt dasselbe Verb wie die Überschrift.** „Anlegen“ unter
+„E-Mail-Adresse anlegen“, „Speichern“ unter „E-Mail-Adresse bearbeiten“. Ein
+generisches „OK“ zwingt zum Zurücklesen.
+
+**Das Overlay schließt erst, wenn gespeichert ist.** Nicht beim Klick. Bis dahin
+zeigt der Button seinen Ladezustand, und ein Fehler erscheint im Overlay an dem
+Feld, das ihn ausgelöst hat – nicht auf der Seite dahinter, wo niemand ihn
+sieht.
+
+**Pflichtfelder sind markiert, nicht die optionalen.** In den meisten Formularen
+sind die meisten Felder Pflicht; markiert wird die Ausnahme, und das ist hier
+die Pflicht am einzelnen Feld.
+
+---
+
+# Varianten und Abwandlung
+
+**Bearbeiten statt Anlegen.** Felder sind vorbelegt, die Überschrift heißt „…
+bearbeiten“, der Button „Speichern“. Alles andere bleibt gleich.
+
+**Ein Bereich statt eines Overlays.** Wird ein Formular ständig gebraucht –
+mehrmals je Besuch der Seite – kostet das Öffnen mehr, als der erhaltene Kontext
+wert ist. Dann gehört es direkt in einen Bereich der Detailseite.
+
+**Größe.** `size="s"` für ein oder zwei Felder, Standard für den Regelfall. Eine
+Breite über den Standard hinaus ist fast immer ein verstecktes Layoutproblem –
+Felder nebeneinander über ein
+[ColumnLayout](/components/structure/column-layout) statt ein breiteres Overlay.
+
+**Abschnitte im Formular.** Ab etwa acht Feldern werden sie über Zwischen-
+überschriften gegliedert. Das ist der letzte Schritt vor der Aufteilung in
+mehrere Overlay-Stufen.

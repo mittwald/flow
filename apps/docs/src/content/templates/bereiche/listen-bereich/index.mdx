@@ -1,0 +1,69 @@
+---
+title: Listen-Bereich
+---
+
+Manche Objekte enthalten Sammlungen, die keine eigene Seite verdienen: die
+Weiterleitungen einer E-Mail-Adresse, die Ports eines Containers, die Mitglieder
+einer Organisation. Sie stehen als [List](/components/structure/list) in einer
+[Section](/components/structure/section), zwischen den anderen Bereichen der
+Detailseite.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="listen-bereich" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Wenn eine Sammlung zum gezeigten Objekt gehört, überschaubar bleibt und keinen
+eigenen Einstieg braucht.
+
+**Nicht verwenden**, wenn
+
+- die Sammlung der Grund ist, warum man die Seite öffnet. Dann bekommt sie eine
+  eigene [Übersichtsseite](/templates/seiten/uebersichtsseite) oder einen
+  eigenen Tab.
+- sie unbegrenzt wachsen kann. Eine Liste mit Pagination innerhalb einer Seite
+  voller anderer Bereiche wird zum Fremdkörper – ab dann ist es ein eigener Tab.
+- die Einträge nur Wertepaare sind. Vier Zeilen „Label: Wert“ sind ein
+  [Stammdaten-Bereich](/templates/bereiche/stammdaten-bereich), keine Liste.
+
+---
+
+# Warum diese Struktur
+
+**Die Liste liegt in der Section, nicht statt ihr.** Die Überschrift benennt die
+Sammlung, die Liste zeigt sie. Ohne Überschrift ist im Stapel der Bereiche nicht
+erkennbar, wovon die Einträge sind.
+
+**Die Anlegen-Aktion steht in der `ActionGroup` der Liste.** Genauso wie auf der
+[Übersichtsseite](/templates/seiten/uebersichtsseite) – nicht in der Kopfzeile
+der Section, obwohl dort Platz wäre. So steht sie an derselben Stelle,
+unabhängig davon, wo die Liste eingebaut ist.
+
+**Ohne Suche, ohne Filter, ohne Pagination.** Eine Liste, die in einen Bereich
+passt, ist kurz genug, um vollständig gelesen zu werden. Wo das nicht mehr
+stimmt, ist der Bereich das falsche Zuhause.
+
+**Mit Leerzustand.** Auch ein kurzer: „Keine Weiterleitungen eingerichtet“ mit
+der Anlegen-Aktion. Eine Section, die nur aus ihrer Überschrift besteht, sieht
+nach einem Fehler aus.
+
+---
+
+# Varianten und Abwandlung
+
+**Einträge ohne Ziel.** Gibt es keine Detailseite je Eintrag, entfällt das
+`href`. Die Einträge tragen ihre Aktionen dann im
+[Aktionsmenü](/templates/bausteine/aktionsmenue) am Eintrag.
+
+**Als Tabelle.** Sind die Einträge gleichförmige Wertetupel – Port, Protokoll,
+Ziel – ist eine [Table](/components/structure/table) lesbarer als eine Liste.
+Die Abgrenzung beschreibt
+[Liste, Tile oder Tabelle](/patterns/patterns/list-tile-table).
+
+**Mit Verweis auf die volle Ansicht.** Zeigt der Bereich nur die neuesten
+Einträge, steht in seiner Kopfzeile ein Link auf die vollständige Liste.
