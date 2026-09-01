@@ -99,14 +99,15 @@ tracked the selection both go away.
 ```
 
 **Setting a value.** The selection feeds a form or a setting. Use a
-`RadioGroup`: each `Segment` becomes a `Radio` or a `RadioButton`, everything
-else — `Label`, `FieldDescription`, `FieldError`, `value`/`defaultValue`/
-`onChange`, the React Hook Form binding — stays as it is.
+`RadioGroup`: each `Segment` becomes a `RadioButton`, everything else — `Label`,
+`FieldDescription`, `FieldError`, `value`/`defaultValue`/`onChange`, the React
+Hook Form binding — stays as it is.
 
 This direction is a rename, not a restructure. The types line up:
 `SegmentedControlProps` and `RadioGroupProps` both extend
-`Omit<Aria.RadioGroupProps, "children">`, and `SegmentProps` and `RadioProps`
-are the same type (`RadioButtonProps` is declared as `RadioProps`). Only
+`Omit<Aria.RadioGroupProps, "children">`, and `SegmentProps` and
+`RadioButtonProps` are the same type (`RadioButtonProps` is declared as
+`RadioProps`, which is identical to `SegmentProps`). Only
 `containerBreakpointSize` has no counterpart — see the note at the end.
 
 ```diff
@@ -115,20 +116,19 @@ are the same type (`RadioButtonProps` is declared as `RadioProps`). Only
     <Label>Zahlungsart</Label>
 -   <Segment value="debit">Lastschrift</Segment>
 -   <Segment value="invoice">Rechnung</Segment>
-+   <Radio value="debit">Lastschrift</Radio>
-+   <Radio value="invoice">Rechnung</Radio>
++   <RadioButton value="debit">Lastschrift</RadioButton>
++   <RadioButton value="invoice">Rechnung</RadioButton>
     <FieldDescription>Jederzeit änderbar</FieldDescription>
 - </SegmentedControl>
 + </RadioGroup>
 ```
 
-`Radio` or `RadioButton`? They take the same props, so either is a drop-in for
-`Segment`, and the choice is purely how it renders: `Radio` is the plain control
-with a label, `RadioButton` a bordered box. Neither reproduces the segmented
-control's joined row — that came from `Segment`'s own `flex: 1` and collapsed
-borders — so the appearance changes either way. Pick from the
-[RadioGroup docs](https://flow.mittwald.de/04-components/form-controls/radio-group)
-rather than assuming one preserves the old look.
+**Always `RadioButton`, not `Radio`.** A `RadioGroup` also accepts a plain
+`Radio`, and it takes the same props, so both would compile — but `RadioButton`
+is the replacement for a `Segment`. The appearance still changes: `RadioButton`
+does not reproduce the segmented control's joined row, which came from
+`Segment`'s own `flex: 1` and collapsed borders. See the
+[RadioGroup docs](https://flow.mittwald.de/components/form-controls/radio-group).
 
 #### Three things the Tabs direction changes
 
@@ -173,15 +173,15 @@ options anyway.
 **Apply:** Replace `SegmentedControl` with `Tabs` when the selection switches
 displayed content, or with `RadioGroup` when it sets a value. Pick per usage.
 The two directions cost very different amounts of work. Towards `RadioGroup` it
-is a prop-compatible rename: `SegmentedControl` → `RadioGroup`, `Segment` →
-`Radio` or `RadioButton` (identical props to `Segment`; `RadioButton` is the
-boxed one, though neither reproduces the joined row), and
-`value`/`defaultValue`/`onChange` and a `Label` child all carry over. Only
-`containerBreakpointSize` has no counterpart. Towards `Tabs` it is structural:
-the state props are `selectedKey`/`defaultSelectedKey` rather than
-`value`/`defaultValue`, there is no `Label` slot (the group label moves to the
-surrounding `Heading` or goes away), and the switched panels move inside the
-tabs — where they stay mounted, so form fields in them keep their registration.
+is a prop-compatible rename: `SegmentedControl` → `RadioGroup` and `Segment` →
+`RadioButton` (always `RadioButton`, not `Radio`; it takes exactly `Segment`'s
+props), with `value`/`defaultValue`/`onChange` and a `Label` child all carrying
+over. Only `containerBreakpointSize` has no counterpart, and the joined row is
+not reproduced. Towards `Tabs` it is structural: the state props are
+`selectedKey`/`defaultSelectedKey` rather than `value`/`defaultValue`, there is
+no `Label` slot (the group label moves to the surrounding `Heading` or goes
+away), and the switched panels move inside the tabs — where they stay mounted,
+so form fields in them keep their registration.
 
 ---
 
