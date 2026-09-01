@@ -88,28 +88,6 @@ export const WithContextualHelp: Story = {
   ),
 };
 
-export const WithContextualHelpAndClose: Story = {
-  render: (props, context) => (
-    <StoryBackground color={props.color} theme={context.globals.theme}>
-      <Badge
-        {...props}
-        onClose={() => {
-          alert("closed!");
-        }}
-      >
-        <Label>Scope</Label>
-        <Text>Value</Text>
-        <ContextualHelpTrigger subject="value">
-          <Button />
-          <ContextualHelp>
-            <Text>Every value has a story to tell.</Text>
-          </ContextualHelp>
-        </ContextualHelpTrigger>
-      </Badge>
-    </StoryBackground>
-  ),
-};
-
 export const WithContextMenu: Story = {
   render: (props, context) => {
     const controller = useOverlayController("ContextMenu");
