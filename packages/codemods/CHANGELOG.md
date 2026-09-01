@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/mittwald/flow/compare/1.1.1...1.1.2) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** say that action -&gt; onAction changes the callback type ([#3043](https://github.com/mittwald/flow/issues/3043)) ([9a52148](https://github.com/mittwald/flow/commit/9a52148091e9938ca1e476f63f47b5fc1c01663f))
+
 ## [1.1.1](https://github.com/mittwald/flow/compare/1.1.0...1.1.1) (2026-09-01)
 
 ### Bug Fixes

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/mittwald/flow/compare/1.1.1...1.1.2) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** say that action -&gt; onAction changes the callback type ([#3043](https://github.com/mittwald/flow/issues/3043)) ([9a52148](https://github.com/mittwald/flow/commit/9a52148091e9938ca1e476f63f47b5fc1c01663f))
+* **Tabs:** forward aria-label to the tab list ([#3045](https://github.com/mittwald/flow/issues/3045)) ([cad04b6](https://github.com/mittwald/flow/commit/cad04b67d2d8b0aba6e105a24b65371b417a63f8))
+
 ## [1.1.1](https://github.com/mittwald/flow/compare/1.1.0...1.1.1) (2026-09-01)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
