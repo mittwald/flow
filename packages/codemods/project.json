@@ -15,6 +15,7 @@
       "inputs": ["codemods-src", "{workspaceRoot}/.prettierrc.json"],
       "outputs": [
         "{projectRoot}/dist",
+        "{projectRoot}/tsconfig.build.tsbuildinfo",
         "{projectRoot}/src/migrations.generated.ts",
         "{projectRoot}/src/flowPackages.generated.ts",
         "{workspaceRoot}/packages/components/MIGRATION.md"
@@ -25,7 +26,10 @@
       "dependsOn": ["^build", "build"],
       "inputs": [
         "codemods-src",
-        { "dependentTasksOutputFiles": "**/*", "transitive": false },
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": false
+        },
         "{workspaceRoot}/apps/docs/src/content/get-started/versioning/index.mdx"
       ]
     }

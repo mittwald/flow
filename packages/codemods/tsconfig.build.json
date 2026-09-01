@@ -5,6 +5,14 @@
     "rootDir": "src",
     // Outside `dist`, which `files` ships to consumers — the buildinfo is a
     // local incremental-build cache, not a build artefact for npm.
+    //
+    // Because it sits outside `dist`, it has to be listed in the build target's
+    // `outputs` in `project.json`, next to `dist` itself. nx restores a cached
+    // task's outputs wholesale; if it restored `dist` from one run while this
+    // file survived from another, tsc would find the buildinfo current, emit
+    // **nothing**, and the build would report success over an incomplete `dist`.
+    // Caching the two together keeps them describing the same artefacts. Do not
+    // drop that entry.
     "tsBuildInfoFile": "tsconfig.build.tsbuildinfo",
     // Excluding src/tests, the transforms and their co-located tests shrinks
     // the program to 2 files (cli.ts, cli/args.ts). The native `tsc`

@@ -31,7 +31,19 @@
     "declaration": false,
     "declarationMap": false,
     "composite": false,
-    "tsBuildInfoFile": "tsconfig.transforms.tsbuildinfo",
+    // Not incremental, deliberately — the base config turns it on. nx treats
+    // `{projectRoot}/dist` as this project's task output and restores it
+    // wholesale from cache, while a buildinfo file lives outside `dist` and is
+    // not an output. The two desynchronise: `dist/migrations` comes back from a
+    // cached run that predates this compile, the buildinfo still says everything
+    // is up to date, and tsc emits **nothing** while reporting success. The
+    // package then ships with no transforms at all — the exact failure this
+    // second compile exists to prevent, reintroduced by its own build cache.
+    // (`src/tests/publishedTransforms.test.ts` is what caught it.)
+    //
+    // Nothing is lost: the program is a handful of files that import only types,
+    // so a full emit is instant.
+    "incremental": false,
     "types": ["node"]
   },
   "exclude": ["src/**/*.test.ts"],
