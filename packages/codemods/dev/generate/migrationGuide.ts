@@ -31,6 +31,11 @@ performed, and re-running a codemod is a no-op.
 
 It refuses to run on a dirty working tree (\`--allow-dirty\` overrides that) and
 rewrites files in place, so review the diff afterwards.
+
+Every command on this page is written with \`npx\`, because a generated file
+cannot know your package manager. Substitute the equivalent if yours differs:
+\`pnpm dlx\`, \`yarn dlx\` (Yarn Classic has no \`dlx\` — it uses \`npx\`), or
+\`bun x\`. The CLI's own output does detect it and prints the right form.
 `;
 
 const remoteNote = "also applies to `@mittwald/flow-remote-react-components`";
@@ -49,7 +54,9 @@ const renderEntry = (entry: MigrationEntry): string => {
 
   const invocation =
     entry.action === "codemod"
-      ? `\`\`\`shell\nnpx @mittwald/flow-codemods@latest ${entry.id} src\n\`\`\`\n`
+      ? // `src` and `npx` are both assumptions a generated file has to make —
+        // see the note in `intro`. The CLI prints the detected form instead.
+        `\`\`\`shell\nnpx @mittwald/flow-codemods@latest ${entry.id} src\n\`\`\`\n`
       : "";
 
   return [
