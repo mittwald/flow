@@ -7,12 +7,14 @@ import {
   type PropsWithClassName,
 } from "@/lib/types/props";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PressEvent } from "@react-types/shared";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import { useLocalizedStringFormatter } from "@/components/TranslationProvider/useLocalizedStringFormatter";
+import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 import locales from "./locales/*.locale.json";
 
 export const badgeColors = [
@@ -41,6 +43,8 @@ export interface BadgeProps
   isDisabled?: boolean;
 }
 
+const actionTunnel = { id: "action", component: "Badge" } as const;
+
 /** @flr-generate all */
 export const Badge = flowComponent("Badge", (props) => {
   const {
@@ -62,6 +66,8 @@ export const Badge = flowComponent("Badge", (props) => {
     isDisabled && styles.disabled,
     className,
   );
+
+  const buttonColor = isAlphaColor(color) ? color : "dark";
 
   const propsContext: PropsContext = {
     Label: {
@@ -86,10 +92,46 @@ export const Badge = flowComponent("Badge", (props) => {
     },
   };
 
+  const actionButtonContext: ComponentPropsContext<"Button"> = {
+    className: styles.action,
+    color: buttonColor,
+    variant: "plain",
+    size: "s",
+    isDisabled,
+  };
+
+  const actionTriggerContext: ComponentPropsContext<"Action"> = {
+    tunnel: actionTunnel,
+    Button: {
+      ...actionButtonContext,
+      tunnel: null,
+    },
+  };
+
+  const actionsPropsContext: PropsContext = {
+    Button: {
+      ...actionButtonContext,
+      tunnel: actionTunnel,
+    },
+    CopyButton: {
+      ...actionButtonContext,
+      tunnel: actionTunnel,
+    },
+    Action: actionTriggerContext,
+    ContextualHelpTrigger: actionTriggerContext,
+    ModalTrigger: actionTriggerContext,
+  };
+
+  const content = (
+    <PropsContextProvider props={actionsPropsContext}>
+      {children}
+    </PropsContextProvider>
+  );
+
   return (
     <PropsContextProvider props={propsContext}>
       <div className={rootClassName} {...rest} ref={ref}>
-        {!onPress && <div className={styles.content}>{children}</div>}
+        {!onPress && <div className={styles.content}>{content}</div>}
         {onPress && (
           <Button
             isDisabled={isDisabled}
@@ -97,15 +139,17 @@ export const Badge = flowComponent("Badge", (props) => {
             className={styles.button}
             onPress={onPress}
           >
-            {children}
+            {content}
           </Button>
         )}
+
+        <UiComponentTunnelExit id={actionTunnel.id} component="Badge" />
 
         {onClose && (
           <Button
             className={styles.close}
             size="s"
-            color={isAlphaColor(color) ? color : "dark"}
+            color={buttonColor}
             variant="plain"
             onPress={onClose}
             isDisabled={isDisabled}
