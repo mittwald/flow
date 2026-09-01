@@ -22,6 +22,7 @@
   "dependencies": {
     "@inquirer/prompts": "^7.9.0",
     "jscodeshift": "^17.3.0",
+    "package-manager-detector": "^1.8.0",
     "picocolors": "^1.1.1",
     "registry-url": "^7.2.0",
     "semver": "^7.8.5"

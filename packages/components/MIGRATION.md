@@ -21,6 +21,11 @@ performed, and re-running a codemod is a no-op.
 It refuses to run on a dirty working tree (`--allow-dirty` overrides that) and
 rewrites files in place, so review the diff afterwards.
 
+Every command on this page is written with `npx`, because a generated file
+cannot know your package manager. Substitute the equivalent if yours differs:
+`pnpm dlx`, `yarn dlx` (Yarn Classic has no `dlx` — it uses `npx`), or `bun x`.
+The CLI's own output does detect it and prints the right form.
+
 ---
 
 <a id="use-design-tokens-build-metadata-removed"></a>
