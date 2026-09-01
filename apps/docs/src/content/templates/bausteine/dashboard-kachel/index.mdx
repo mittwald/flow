@@ -61,13 +61,25 @@ Laden hat die Höhe des Inhalts, damit die Kacheln darunter nicht springen.
 
 # Varianten und Abwandlung
 
-**Mit Kennzahl oder Fortschritt.** Statt Text eine
-[ProgressBar](/components/status/progress-bar) oder eine
-[BigNumber](/components/data-visualisation/big-number).
+## Mit Kennzahl oder Diagramm
+
+Statt Text eine [BigNumber](/components/data-visualisation/big-number), eine
+[ProgressBar](/components/status/progress-bar) oder ein
+[DonutChart](/components/data-visualisation/donut-chart). Der Aufbau bleibt:
+Überschrift, Inhalt, Ziel in der Kopfzeile.
+
+<LiveCodeEditor example="dashboard-kachel-kennzahl" editorCollapsed />
+
+## Als Einstiegshilfe
+
+Eine Kachel kann die nächsten Schritte für einen noch leeren Kontext anbieten.
+Sie hat kein Ziel in der Kopfzeile, sondern eine Aktion im Inhalt – und sie
+verschwindet, sobald sie erledigt ist. Es ist die einzige Kachel, deren
+Sichtbarkeit von den Daten abhängen darf.
+
+<LiveCodeEditor example="dashboard-kachel-einstieg" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Mit Aktion statt Link.** Führt die Kachel nicht auf eine Seite, sondern in
 einen Vorgang, steht statt des Links ein sekundärer Button im Inhalt.
-
-**Als Einstiegshilfe.** Eine Kachel kann die nächsten Schritte für einen noch
-leeren Kontext anbieten. Sie verschwindet, sobald sie erledigt ist – als einzige
-Kachel, deren Sichtbarkeit von den Daten abhängt.

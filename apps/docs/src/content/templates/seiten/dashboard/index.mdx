@@ -62,15 +62,23 @@ eine aus, bleibt der Rest der Seite benutzbar.
 
 # Varianten und Abwandlung
 
+## Wenn der Kontext noch leer ist
+
+Ist der Kontext noch nicht eingerichtet, ersetzt ein
+[Leerzustand](/templates/bausteine/leerzustand) die Kacheln, statt sie leer
+anzuzeigen. Kacheln ohne Inhalt sagen nichts über den Zustand aus – sie sehen
+nur kaputt aus.
+
+<LiveCodeEditor example="dashboard-leer" editorCollapsed bgColor="mstudio" />
+
+## Weitere Abwandlungen
+
 **Alerts über den Kacheln.** Zustände, die den ganzen Kontext betreffen – eine
 offene Rechnung, ein auslaufender Vertrag – stehen als
 [Alerts](/templates/bereiche/alerts-bereich) über der ersten Kachel, nicht in
 einer eigenen Kachel.
 
-**Zustandsabhängige Startseite.** Ist der Kontext noch leer oder wird gerade
-eingerichtet, ersetzt ein [Leerzustand](/templates/bausteine/leerzustand) die
-Kacheln, statt sie leer anzuzeigen.
-
 **Kennzahlen-Kacheln.** Eine Kachel kann statt Text eine Kennzahl oder ein
-Diagramm tragen. Sie bleibt eine Kachel – mit Überschrift, Ziel und eigenem
-Ladezustand.
+Diagramm tragen – siehe
+[Dashboard-Kachel](/templates/bausteine/dashboard-kachel). Sie bleibt eine
+Kachel: mit Überschrift, Ziel und eigenem Ladezustand.

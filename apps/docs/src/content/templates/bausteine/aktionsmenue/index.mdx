@@ -60,12 +60,23 @@ muss.
 
 # Varianten und Abwandlung
 
-**Am Listeneintrag ohne eigenen Trigger.** Die
-[ListItemView](/components/structure/list) stellt den Button für das ContextMenu
-selbst; das Menü wird nur als Kind übergeben.
+## Am Listeneintrag
 
-**Als Anlege-Menü.** Gibt es mehrere Wege, ein Objekt anzulegen, sitzt dasselbe
-Menü hinter dem Anlegen-Button in der `ActionGroup` einer Liste.
+Die `ItemView` der [List](/components/structure/list) stellt den Auslöser selbst
+– das `ContextMenu` wird nur als Kind übergeben, ohne `ContextMenuTrigger` und
+ohne eigenen Button. Die Einträge sind dieselben wie im Menü der Detailseite.
+
+<LiveCodeEditor example="aktionsmenue-listeneintrag" editorCollapsed />
+
+## Als Anlege-Menü
+
+Gibt es mehrere Wege, ein Objekt anzulegen, sitzt dasselbe Menü hinter dem
+Anlegen-Button in der `ActionGroup` einer Liste. Der Button trägt dann das
+gemeinsame Verb, das Menü die Wege.
+
+<LiveCodeEditor example="aktionsmenue-anlegen" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Mit Trennern.** Ab etwa sechs Einträgen lassen sich Gruppen abgrenzen –
 Bearbeiten, dann Verwalten, dann Löschen.

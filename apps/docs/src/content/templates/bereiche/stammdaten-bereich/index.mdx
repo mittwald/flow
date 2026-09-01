@@ -62,18 +62,26 @@ Buttons in einer Kopfzeile beantworten die Frage nicht, was der übliche Weg ist
 
 # Varianten und Abwandlung
 
-**Verbindungsdaten.** Werte, die kopiert und woanders eingesetzt werden – Host,
-Benutzername, Port – bekommen einen
-[CopyButton](/templates/bausteine/kopierbarer-wert). Am Aufbau des Bereichs
-ändert das nichts.
+## Verbindungsdaten mit kopierbaren Werten
 
-**Mit Schalter statt Button.** Ein Bereich, der genau eine Sache an- und
-ausschaltet, trägt den [Switch](/components/form-controls/switch) direkt in der
-Kopfzeile. Ein Overlay für eine einzige Umschaltung ist ein Klick zu viel.
+Werte, die woanders eingesetzt werden – Host, Benutzername, Port – bekommen
+einen [CopyButton](/templates/bausteine/kopierbarer-wert). Am Aufbau des
+Bereichs ändert das nichts; es ist dieselbe Kopfzeile und dieselbe
+Wertepaar-Anordnung.
 
-**Mit Fortschritt oder Kennzahl.** Belegter Speicher, verbrauchtes Kontingent:
-eine [ProgressBar](/components/status/progress-bar) tritt an die Stelle der
-Wertepaare, die Kopfzeile bleibt.
+<LiveCodeEditor example="stammdaten-bereich-verbindungsdaten" editorCollapsed />
+
+## Mit Schalter oder Kennzahl statt Wertepaaren
+
+Ein Bereich, der genau eine Sache an- und ausschaltet, trägt den
+[Switch](/components/form-controls/switch) direkt in der Kopfzeile – ein Overlay
+für eine einzige Umschaltung wäre ein Klick zu viel. Wo eine Kennzahl den
+Zustand besser beschreibt als Wertepaare, tritt eine
+[ProgressBar](/components/status/progress-bar) an ihre Stelle.
+
+<LiveCodeEditor example="stammdaten-bereich-schalter" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Bedingt sichtbar.** Bereiche, die es nur unter Bedingungen gibt, stehen an
 fester Position im Stapel und verschwinden dort – sie rutschen nicht nach oben.

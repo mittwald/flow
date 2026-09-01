@@ -59,15 +59,26 @@ Einstieg in ein Problem.
 
 # Varianten und Abwandlung
 
+## Für Filter ohne Treffer
+
+Leer und _gefiltert leer_ sind verschiedene Zustände. Hier ist der Objekttyp
+nicht neu, sondern nur gerade ausgeblendet: die Überschrift stellt fest statt
+aufzufordern, und die Aktion räumt den Filter weg, statt etwas anzulegen.
+
+<LiveCodeEditor example="leerzustand-filter" editorCollapsed />
+
+## Für einen wartenden Zustand
+
+Wird gerade etwas bereitgestellt, sagt der Leerzustand, worauf gewartet wird und
+wie lange das ungefähr dauert. Er bietet **keine** Aktion an – es gibt nichts zu
+tun, und ein Button, der daran nichts ändert, verspricht das Gegenteil.
+
+<LiveCodeEditor example="leerzustand-warten" editorCollapsed />
+
+## Weitere Abwandlungen
+
 **Ohne Aktion.** Wenn das Anlegen woanders passiert oder von etwas anderem
 abhängt, entfällt der Button und der Text sagt, was zuerst zu tun ist.
 
 **Als ganze Seite.** Ist der Kontext selbst noch nicht eingerichtet, füllt der
 Leerzustand die Seite statt einer Liste – mit demselben Aufbau.
-
-**Für Filter ohne Treffer.** Andere Überschrift, andere Aktion, gleiche
-Struktur.
-
-**Für einen wartenden Zustand.** Wird gerade etwas bereitgestellt, sagt der
-Leerzustand, worauf gewartet wird – und bietet keine Aktion an, die daran nichts
-ändert.

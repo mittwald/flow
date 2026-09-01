@@ -60,14 +60,23 @@ Grund steht im Overlay. Ein grundlos toter Button ist eine Sackgasse.
 
 # Varianten und Abwandlung
 
-**Mit Eingabe der Bestätigung.** Bei besonders folgenreichen Aktionen – ein
-ganzes Projekt löschen – wird der Name des Objekts abgetippt. Das ist die eine
-Stelle, an der ein Bestätigungs-Overlay ein Feld enthält; alles andere bleibt
-gleich.
+## Mit Eingabe der Bestätigung
 
-**Mit Warnung statt Text.** Betrifft die Aktion mehr als das genannte Objekt,
-tritt ein [Alert](/components/status/alert) an die Stelle des erklärenden
-Textes.
+Bei besonders folgenreichen Aktionen – ein ganzes Projekt löschen – wird der
+Name des Objekts abgetippt. Das ist die eine Stelle, an der ein
+Bestätigungs-Overlay ein Feld enthält; alles andere bleibt gleich.
+
+<LiveCodeEditor example="bestaetigungs-overlay-eingabe" editorCollapsed />
+
+## Wenn die Aktion nicht möglich ist
+
+Hängt etwas am Objekt, bleibt der Button sichtbar und deaktiviert – **und** das
+Overlay nennt den Grund und was zuerst zu tun ist. Ein grundlos toter Button ist
+eine Sackgasse.
+
+<LiveCodeEditor example="bestaetigungs-overlay-blockiert" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Kündigen statt löschen.** Endet etwas erst zu einem Termin, benennt das
 Overlay diesen Termin und sagt, was bis dahin weiter funktioniert.

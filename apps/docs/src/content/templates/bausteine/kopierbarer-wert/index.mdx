@@ -53,12 +53,23 @@ Seite: sie werden in einem Zug gebraucht.
 
 # Varianten und Abwandlung
 
-**Als Codeblock.** Ganze Befehle oder mehrzeilige Konfiguration gehören in einen
-[CodeBlock](/components/content/code-block), der das Kopieren mitbringt.
+## In einer Tabelle
+
+Gibt es mehrere gleichartige Datensätze – IMAP, POP3 und SMTP nebeneinander –
+ist eine [Table](/components/structure/table) mit einem CopyButton je Zelle
+übersichtlicher als eine Reihe einzelner LabeledValues.
+
+<LiveCodeEditor example="kopierbarer-wert-tabelle" editorCollapsed />
+
+## Als Codeblock
+
+Ganze Befehle oder mehrzeilige Konfiguration gehören in einen
+[CodeBlock](/components/content/code-block). Er bringt das Kopieren mit, behält
+Zeilenumbrüche und Einrückung und hebt die Syntax hervor.
+
+<LiveCodeEditor example="kopierbarer-wert-codeblock" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Verdeckt.** Passwörter und Schlüssel werden maskiert angezeigt; kopieren geht
 trotzdem, ohne sie aufzudecken.
-
-**In einer Tabelle.** Gibt es viele gleichartige Verbindungsdaten – IMAP, POP3,
-SMTP nebeneinander – ist eine [Table](/components/structure/table) mit
-CopyButton je Zelle übersichtlicher als eine Reihe von LabeledValues.

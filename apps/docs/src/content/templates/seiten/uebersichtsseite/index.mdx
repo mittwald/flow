@@ -63,18 +63,28 @@ eine Übersichtsseite.
 
 # Varianten und Abwandlung
 
+## Als Kachelansicht
+
+Wenn ein Vorschaubild oder ein großes Typ-Icon zur Erkennung beiträgt, wird aus
+dem Listeneintrag eine Kachel. Struktur und Ausstattung der Seite ändern sich
+dadurch nicht – nur `defaultViewMode` und die Anzeigeform des Eintrags.
+
+<LiveCodeEditor
+  example="uebersichtsseite-kacheln"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Weitere Abwandlungen
+
 **Mehrere Anlegewege.** Gibt es mehr als einen Weg, ein Objekt anzulegen
 (bestellen, umziehen, selbst einrichten), wird der Button in der `ActionGroup`
-zum [ContextMenu](/components/actions/context-menu) mit einem Eintrag je Weg.
+zum [Anlege-Menü](/templates/bausteine/aktionsmenue) mit einem Eintrag je Weg.
 
 **Tabs über mehreren Übersichtsseiten.** Gehören mehrere Objekttypen fachlich
 zusammen – E-Mail-Adressen, Weiterleitungen, Delivery-Boxen – bekommen sie eine
 gemeinsame [Tab-Navigation](/templates/seiten/seite-mit-tab-navigation), und
 jeder Tab ist für sich eine Übersichtsseite.
-
-**Statt der Liste eine Kachelansicht.** Wenn ein Vorschaubild zur Erkennung des
-Objekts beiträgt, wird aus dem Listeneintrag eine Kachel. Struktur und
-Ausstattung der Seite ändern sich dadurch nicht.
 
 **Ohne Suche und Filter.** Bei einer fachlich begrenzten Zahl von Einträgen –
 zwei SSH-Benutzer, drei Zertifikate – werden `List.Search` und `List.Filter`

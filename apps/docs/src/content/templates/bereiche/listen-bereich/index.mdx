@@ -56,14 +56,27 @@ nach einem Fehler aus.
 
 # Varianten und Abwandlung
 
+## Mit Leerzustand
+
+Auch ein kurzer Bereich braucht einen: „Keine Weiterleitungen eingerichtet" plus
+die Anlegen-Aktion. Eine Section, die nur aus ihrer Überschrift besteht, sieht
+nach einem Fehler aus.
+
+<LiveCodeEditor example="listen-bereich-leer" editorCollapsed />
+
+## Als Tabelle
+
+Sind die Einträge gleichförmige Wertetupel – Limit, Zeitraum, Wert – ist eine
+[Table](/components/structure/table) lesbarer als eine Liste. Die Abgrenzung
+beschreibt [Liste, Tile oder Tabelle](/patterns/patterns/list-tile-table).
+
+<LiveCodeEditor example="listen-bereich-tabelle" editorCollapsed />
+
+## Weitere Abwandlungen
+
 **Einträge ohne Ziel.** Gibt es keine Detailseite je Eintrag, entfällt das
 `href`. Die Einträge tragen ihre Aktionen dann im
 [Aktionsmenü](/templates/bausteine/aktionsmenue) am Eintrag.
-
-**Als Tabelle.** Sind die Einträge gleichförmige Wertetupel – Port, Protokoll,
-Ziel – ist eine [Table](/components/structure/table) lesbarer als eine Liste.
-Die Abgrenzung beschreibt
-[Liste, Tile oder Tabelle](/patterns/patterns/list-tile-table).
 
 **Mit Verweis auf die volle Ansicht.** Zeigt der Bereich nur die neuesten
 Einträge, steht in seiner Kopfzeile ein Link auf die vollständige Liste.

@@ -63,18 +63,28 @@ die Pflicht am einzelnen Feld.
 
 # Varianten und Abwandlung
 
-**Bearbeiten statt Anlegen.** Felder sind vorbelegt, die Überschrift heißt „…
-bearbeiten“, der Button „Speichern“. Alles andere bleibt gleich.
+## Bearbeiten statt Anlegen
+
+Dieselbe Struktur, drei Unterschiede: die Felder sind vorbelegt, die Überschrift
+heißt „… bearbeiten", und der Button heißt „Speichern". Deshalb sind Anlegen und
+Bearbeiten ein Template und nicht zwei.
+
+<LiveCodeEditor example="formular-overlay-bearbeiten" editorCollapsed />
+
+## Klein, für ein einzelnes Feld
+
+Bei ein oder zwei Feldern lohnt das einfahrende Panel nicht: `size="s"` ohne
+`offCanvas` ist so groß wie sein Inhalt und wirkt wie eine Rückfrage, nicht wie
+ein Formular.
+
+<LiveCodeEditor example="formular-overlay-klein" editorCollapsed />
+
+## Weitere Abwandlungen
 
 **Ein Bereich statt eines Overlays.** Wird ein Formular ständig gebraucht –
 mehrmals je Besuch der Seite – kostet das Öffnen mehr, als der erhaltene Kontext
 wert ist. Dann gehört es direkt in einen Bereich der Detailseite.
 
-**Größe.** `size="s"` für ein oder zwei Felder, Standard für den Regelfall. Eine
-Breite über den Standard hinaus ist fast immer ein verstecktes Layoutproblem –
-Felder nebeneinander über ein
-[ColumnLayout](/components/structure/column-layout) statt ein breiteres Overlay.
-
-**Abschnitte im Formular.** Ab etwa acht Feldern werden sie über Zwischen-
-überschriften gegliedert. Das ist der letzte Schritt vor der Aufteilung in
-mehrere Overlay-Stufen.
+**Abschnitte im Formular.** Ab etwa acht Feldern werden sie über
+Zwischenüberschriften gegliedert. Das ist der letzte Schritt vor der Aufteilung
+in mehrere Overlay-Stufen.

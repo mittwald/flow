@@ -61,13 +61,32 @@ heraus sind zwei Formulare.
 
 # Varianten und Abwandlung
 
+## Fehler stehen am Feld
+
+Jedes `Field` zeigt den Fehler seiner eigenen Regeln direkt unter der Eingabe.
+Nur was sich keinem Feld zuordnen lässt – ein abgelehnter Aufruf, ein Konflikt
+mit einem anderen Objekt – steht als
+[FormRootError](/components/react-hook-form/form-root-error) über dem Formular.
+
+Im Beispiel verletzen beide Vorbelegungen ihre Regel; ein Klick auf Speichern
+löst zusätzlich einen Fehler ohne Feldbezug aus.
+
+<LiveCodeEditor example="formular-fehler" editorCollapsed />
+
+## Abhängige Felder
+
+Felder, die erst durch eine Auswahl relevant werden, erscheinen unter ihr. Die
+Auswahl steht dabei über den Feldern, die von ihr abhängen – nicht dazwischen,
+sonst entwertet sie Eingaben, die schon gemacht wurden. Werden es zu viele, ist
+es ein [mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
+
+<LiveCodeEditor example="formular-abhaengig" editorCollapsed />
+
+## Weitere Abwandlungen
+
 **Abbrechen daneben.** Im Overlay steht neben dem SubmitButton ein
 Abbrechen-Button, der schließt, ohne zu speichern – sekundär, nie in derselben
 Farbe wie das Absenden.
-
-**Abhängige Felder.** Felder, die erst durch eine Auswahl relevant werden,
-erscheinen unter ihr. Werden es zu viele, ist es ein
-[mehrstufiges Overlay](/templates/overlays/mehrstufiges-overlay).
 
 **Gruppiert.** Ab etwa acht Feldern gliedern Zwischenüberschriften das Formular.
 

@@ -57,15 +57,27 @@ mit zwanzig Zeilen zwanzig Ladezustände.
 
 # Varianten und Abwandlung
 
+## Als Kachel
+
+Trägt ein Vorschaubild oder ein großes Typ-Icon zur Erkennung bei, wird aus dem
+Eintrag eine Kachel. Die Bestandteile bleiben dieselben und stehen an denselben
+Plätzen – nur die Anordnung wechselt von Zeile auf Raster.
+
+<LiveCodeEditor example="listeneintrag-kachel" editorCollapsed />
+
+## Mit Mehrfachauswahl
+
+Für eine Aktion auf mehreren Einträgen bekommt der Eintrag eine
+[Checkbox](/components/form-controls/checkbox). Das `href` entfällt dabei – ein
+Eintrag kann nicht gleichzeitig navigieren und auswählen. Die Aktion auf der
+Auswahl steht über der Liste, nicht am Eintrag.
+
+<LiveCodeEditor example="listeneintrag-auswahl" editorCollapsed />
+
+## Weitere Abwandlungen
+
 **Mit Kennzahl.** Ein Wert, der Einträge vergleichbar macht – belegter Speicher,
 Laufzeit – steht als Zusatzinformation rechts, nicht im Untertitel.
-
-**Ohne Ziel.** Ohne `href` ist der Eintrag nicht navigierbar. In Auswahllisten
-ist das richtig; dort löst `onAction` an der Liste die Auswahl aus.
-
-**Mit Auswahl.** Für Mehrfachauswahl bekommt der Eintrag eine
-[Checkbox](/components/form-controls/checkbox); die Aktion auf der Auswahl steht
-dann über der Liste, nicht am Eintrag.
 
 **Verdichtet.** In einem [Listen-Bereich](/templates/bereiche/listen-bereich)
 reichen oft Titel und eine Zeile darunter. Der Avatar bleibt trotzdem – er hält
