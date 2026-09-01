@@ -1,5 +1,6 @@
 import { compareLabels } from "@/app/_lib/compareLabels";
 import { compareDeprecatedLast } from "@/lib/componentStatus";
+import { byContentOrder } from "@/lib/content/contentOrder";
 
 /**
  * What ordering needs to know about a navigation entry or an overview tile.
@@ -9,31 +10,19 @@ import { compareDeprecatedLast } from "@/lib/componentStatus";
 export interface SortableEntry {
   /** The rendered label. */
   label: string;
-  /** The path segment; a numeric prefix ("01-design") is the author's order. */
-  pathSegment: string;
+  /** The pathname, looked up in the authored order of the documentation. */
+  path: string;
   /** Component display name, for the deprecated demotion. Absent for groups. */
   component?: string;
 }
 
-/** A numeric path prefix ("01-design") is the author's intended order. */
-const pathPrefix = (entry: SortableEntry): number | undefined => {
-  const prefix = /^(\d+)-/.exec(entry.pathSegment)?.[1];
-  return prefix === undefined ? undefined : Number(prefix);
-};
-
-const comparePosition = (a: SortableEntry, b: SortableEntry): number => {
-  const prefixA = pathPrefix(a);
-  const prefixB = pathPrefix(b);
-
-  return prefixA !== undefined && prefixB !== undefined
-    ? prefixA - prefixB
-    : compareLabels(a.label, b.label);
-};
+const comparePosition = (a: SortableEntry, b: SortableEntry): number =>
+  byContentOrder(a.path, b.path) || compareLabels(a.label, b.label);
 
 /**
  * The order of the component documentation: deprecated components last, then
- * the author's numeric prefix, then the rendered label. Navigation and the
- * component overview must agree, so both go through here.
+ * the authored order from `CONTENT_ORDER`, then the rendered label. Navigation
+ * and the component overview must agree, so both go through here.
  */
 export const compareEntries = (a: SortableEntry, b: SortableEntry): number =>
   compareDeprecatedLast(a.component, b.component) || comparePosition(a, b);

@@ -11,7 +11,7 @@ import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleT
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import { usePathname } from "next/navigation";
-import { getWireframe } from "@/app/04-components/_components/wireframe/registry";
+import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
 interface Props {
   mdxFile: SerializedMdxFile;

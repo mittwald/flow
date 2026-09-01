@@ -6,7 +6,7 @@ import { allEntries } from "../catalog/entries";
 const versioningPage = readFileSync(
   fileURLToPath(
     new URL(
-      "../../../../apps/docs/src/content/01-get-started/versioning/index.mdx",
+      "../../../../apps/docs/src/content/get-started/versioning/index.mdx",
       import.meta.url,
     ),
   ),

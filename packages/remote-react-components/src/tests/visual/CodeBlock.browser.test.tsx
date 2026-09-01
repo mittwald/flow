@@ -1,4 +1,5 @@
 import { crossVersion, testEnvironments } from "@/tests/lib/environments";
+import { waitForFocusInTheScenario } from "@/tests/lib/scenarioFocus";
 import { test } from "vitest";
 import { userEvent } from "vitest/browser";
 
@@ -58,11 +59,23 @@ test.skipIf(crossVersion({ below: "0.2.0-alpha.883" })).each(testEnvironments)(
     );
 
     await userEvent.keyboard("{tab}");
+
+    /*
+     * Both captures below encode the toggle's focus ring, and toggling swaps
+     * its label, so React re-renders the button the focus sits on. Wait for the
+     * focus each time instead of racing it — see `@/tests/lib/scenarioFocus`.
+     */
+    await waitForFocusInTheScenario();
+
     await userEvent.keyboard("{enter}");
+
+    await waitForFocusInTheScenario();
 
     await testScreenshot("CodeBlock truncated - expanded");
 
     await userEvent.keyboard("{enter}");
+
+    await waitForFocusInTheScenario();
 
     await testScreenshot("CodeBlock truncated - collapsed");
   },

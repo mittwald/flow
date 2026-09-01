@@ -1,0 +1,61 @@
+---
+component: SegmentedControl
+description:
+  Ein SegmentedControl bietet eine Einfachauswahl aus 2 bis 5 kurzen Optionen.
+deprecationNotice:
+  SegmentedControl wird in einer zukünftigen Major-Version entfernt. Nutze
+  [Tabs](/components/structure/tabs), wenn die Auswahl Inhalte umschaltet, und
+  eine [RadioGroup](/components/form-controls/radio-group), wenn sie einen Wert
+  setzt.
+---
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+Das SegmentedControl hat zwei verschiedene Aufgaben übernommen. Welche Component
+es ersetzt, entscheidet die Aufgabe an der jeweiligen Stelle:
+
+- Schaltet die Auswahl den Inhalt darunter um, ersetzen
+  [Tabs](/components/structure/tabs) das SegmentedControl.
+- Setzt die Auswahl einen Wert – etwa in einem Formular oder in Einstellungen –
+  ersetzt eine [RadioGroup](/components/form-controls/radio-group) das
+  SegmentedControl.
+- Migriere von Hand. Es gibt keinen Codemod: welche Component passt, hängt an
+  der Aufgabe und ist pro Verwendung zu entscheiden. Die Diffs für beide Wege
+  stehen in der
+  [MIGRATION.md](https://github.com/mittwald/flow/blob/main/packages/components/MIGRATION.md).
+- SegmentedControl gibt zur Laufzeit eine Deprecation-Warnung aus und wird in
+  einer zukünftigen Major-Version entfernt. Bis dahin bleibt der alte Pfad
+  abgesichert (siehe [Versionierung & Stabilität](/get-started/versioning)).
+
+---
+
+# Inhalte umschalten: Tabs
+
+Ein SegmentedControl, dessen Auswahl den Inhalt darunter austauscht, ist ein
+Content Switcher – und damit die Aufgabe von [Tabs](/components/structure/tabs).
+Aus jedem `<Segment />` wird ein `<Tab />`, dessen Titel im `<TabTitle />` steht
+und dessen Inhalt direkt im Tab liegt. Das Label und der State für den
+angezeigten Inhalt entfallen.
+
+<LiveCodeEditor example="tabs" editorCollapsed />
+
+---
+
+# Werte auswählen: RadioGroup
+
+Ein SegmentedControl, dessen Auswahl einen Wert setzt, wird zu einer
+[RadioGroup](/components/form-controls/radio-group). Aus jedem `<Segment />`
+wird ein `<Radio />`; Label, FieldDescription, FieldError und die Anbindung an
+[React Hook Form](/components/react-hook-form/form) bleiben unverändert.
+
+<LiveCodeEditor example="radioGroup" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -5,9 +5,9 @@ import { checkLinks } from "@/lib/links/checkLinks";
 import type { FoundLink } from "@/lib/links/extractLinks";
 
 const inventory: PageInventory = new Map([
-  ["/04-components/form-controls/rating", new Set<string>()],
-  ["/04-components/react-hook-form/form", new Set<string>()],
-  ["/02-foundations/01-design/02-colors", new Set(["farben-light-und-dark"])],
+  ["/components/form-controls/rating", new Set<string>()],
+  ["/components/react-hook-form/form", new Set<string>()],
+  ["/foundations/design/colors", new Set(["farben-light-und-dark"])],
   ["/", new Set<string>()],
 ]);
 
@@ -23,12 +23,12 @@ const check = (href: string, page?: string) =>
 
 describe("checkLinks", () => {
   it("accepts a link to an existing page", () => {
-    assert.deepEqual(check("/04-components/form-controls/rating"), []);
+    assert.deepEqual(check("/components/form-controls/rating"), []);
   });
 
   it("accepts a trailing slash and a query string", () => {
-    assert.deepEqual(check("/04-components/form-controls/rating/"), []);
-    assert.deepEqual(check("/04-components/form-controls/rating?tab=x"), []);
+    assert.deepEqual(check("/components/form-controls/rating/"), []);
+    assert.deepEqual(check("/components/form-controls/rating?tab=x"), []);
   });
 
   it("ignores external targets", () => {
@@ -42,47 +42,40 @@ describe("checkLinks", () => {
   });
 
   it("reports an unknown page", () => {
-    const [problem] = check("/04-components/content/nirgendwo");
+    const [problem] = check("/components/content/nirgendwo");
 
     assert.equal(problem?.reason, "unknown-page");
   });
 
   it("suggests the page that kept its name when a page moved", () => {
-    const [problem] = check("/04-components/content/rating");
+    const [problem] = check("/components/content/rating");
 
     assert.deepEqual(problem?.suggestions, [
-      "/04-components/form-controls/rating",
+      "/components/form-controls/rating",
     ]);
   });
 
   it("suggests a renamed page by token overlap", () => {
-    const [problem] = check(
-      "/04-components/form-controls/form-react-hook-form",
-    );
+    const [problem] = check("/components/form-controls/form-react-hook-form");
 
-    assert.equal(
-      problem?.suggestions[0],
-      "/04-components/react-hook-form/form",
-    );
+    assert.equal(problem?.suggestions[0], "/components/react-hook-form/form");
   });
 
   it("reports a link without a leading slash", () => {
-    const [problem] = check("04-components/form-controls/rating");
+    const [problem] = check("components/form-controls/rating");
 
     assert.equal(problem?.reason, "relative-link");
   });
 
   it("accepts a known anchor on another page", () => {
     assert.deepEqual(
-      check("/02-foundations/01-design/02-colors#farben-light-und-dark"),
+      check("/foundations/design/colors#farben-light-und-dark"),
       [],
     );
   });
 
   it("reports an unknown anchor and lists what the page offers", () => {
-    const [problem] = check(
-      "/02-foundations/01-design/02-colors#gibt-es-nicht",
-    );
+    const [problem] = check("/foundations/design/colors#gibt-es-nicht");
 
     assert.equal(problem?.reason, "unknown-anchor");
     assert.deepEqual(problem?.availableAnchors, ["farben-light-und-dark"]);
@@ -90,11 +83,11 @@ describe("checkLinks", () => {
 
   it("resolves a bare fragment against the page it sits on", () => {
     assert.deepEqual(
-      check("#farben-light-und-dark", "/02-foundations/01-design/02-colors"),
+      check("#farben-light-und-dark", "/foundations/design/colors"),
       [],
     );
     assert.equal(
-      check("#gibt-es-nicht", "/02-foundations/01-design/02-colors")[0]?.reason,
+      check("#gibt-es-nicht", "/foundations/design/colors")[0]?.reason,
       "unknown-anchor",
     );
   });

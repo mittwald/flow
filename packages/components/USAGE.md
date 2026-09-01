@@ -11,12 +11,12 @@ The prose that decides most questions — which component covers a use case, how
 spacing is composed, which pattern applies — lives on the docs site and is
 published for machine consumption:
 
-| URL                                      | What it is                                                        |
-| ---------------------------------------- | ----------------------------------------------------------------- |
-| `https://flow.mittwald.de/llms.txt`      | Index of every page, grouped by section                           |
-| `https://flow.mittwald.de/llms.json`     | Manifest: title, description, page URL, Markdown URL per page     |
-| `https://flow.mittwald.de/raw/<path>.md` | One page as Markdown, e.g. `/raw/04-components/actions/button.md` |
-| `https://flow.mittwald.de/llms-full.txt` | Every page in one file (~1.7 MB)                                  |
+| URL                                      | What it is                                                     |
+| ---------------------------------------- | -------------------------------------------------------------- |
+| `https://flow.mittwald.de/llms.txt`      | Index of every page, grouped by section                        |
+| `https://flow.mittwald.de/llms.json`     | Manifest: title, description, page URL, Markdown URL per page  |
+| `https://flow.mittwald.de/raw/<path>.md` | One page as Markdown, e.g. `/raw/components/actions/button.md` |
+| `https://flow.mittwald.de/llms-full.txt` | Every page in one file (~1.7 MB)                               |
 
 **Fetch a page before answering a design question.** The pages are **written in
 German**; component names and design-system terms (Variants, Colors, Sizes,
@@ -24,12 +24,12 @@ States, Props) are not translated.
 
 Start with these:
 
-- `/raw/02-foundations/02-structure/01-layout.md` and `02-spacing.md` — how
-  layout and spacing are meant to be composed
-- `/raw/03-patterns/01-patterns/forms.md`, `detail-page.md`, `errorhandling.md`,
+- `/raw/foundations/structure/layout.md` and `spacing.md` — how layout and
+  spacing are meant to be composed
+- `/raw/patterns/patterns/forms.md`, `detail-page.md`, `errorhandling.md`,
   `list-tile-table.md` — the recurring flows
-- `/raw/02-foundations/03-content-guidelines/01-sprach-guide.md` — UI wording
-- `/raw/01-get-started/versioning.md` — what you may depend on
+- `/raw/foundations/content-guidelines/sprach-guide.md` — UI wording
+- `/raw/get-started/versioning.md` — what you may depend on
 
 ## Setup
 
@@ -148,7 +148,7 @@ not a value to hard-code.
 
 The version contract deliberately leaves several surfaces unguaranteed. They can
 change in **any** release (see
-`https://flow.mittwald.de/raw/01-get-started/versioning.md`):
+`https://flow.mittwald.de/raw/get-started/versioning.md`):
 
 - **CSS class names** (`.flow--button`, …) — never write selectors against them.
 - **Design-token names and values** (`--size-px--m`, `--color--gray--500`) —

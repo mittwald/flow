@@ -1,0 +1,23 @@
+"use client";
+import type { FC } from "react";
+import {
+  WBox,
+  WFrame,
+  WText,
+} from "@/app/components/_components/wireframe/primitives";
+
+export const BadgeWireframe: FC = () => (
+  <WFrame justifyContent="center">
+    <WBox
+      tone="400"
+      width="50%"
+      borderRadius={30}
+      height={56}
+      justifyContent="center"
+    >
+      <WText />
+    </WBox>
+  </WFrame>
+);
+
+export default BadgeWireframe;

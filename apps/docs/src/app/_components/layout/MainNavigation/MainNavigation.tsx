@@ -34,7 +34,7 @@ import {
 } from "@/app/_components/layout/MainNavigation/components/GroupExpansion";
 import { GroupExpansionButton } from "@/app/_components/layout/MainNavigation/components/GroupExpansionButton";
 
-const componentsPathSegment = "04-components";
+const componentsPathSegment = "components";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -44,6 +44,8 @@ interface Props {
 interface NavigationSectionProps {
   tree: MdxDirectoryTree;
   group: string;
+  /** The section's own pathname, so its entries can look up their order. */
+  path: string;
 }
 
 type TreeEntry = [string, MdxDirectoryTree | MdxFile];
@@ -77,24 +79,33 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   );
 };
 
-const sortableEntry = ([group, treeItem]: TreeEntry): SortableEntry =>
-  treeItem instanceof MdxFile
-    ? {
-        label: treeItem.getNavTitle(),
-        pathSegment: group,
-        component: treeItem.mdxSource.frontmatter.component,
-      }
-    : { label: extractTextFromPath(group), pathSegment: group };
+/**
+ * A directory has no pathname of its own, so it is composed from the parent's;
+ * a file brings its own.
+ */
+const sortableEntry =
+  (parentPath: string) =>
+  ([group, treeItem]: TreeEntry): SortableEntry =>
+    treeItem instanceof MdxFile
+      ? {
+          label: treeItem.getNavTitle(),
+          path: treeItem.pathname,
+          component: treeItem.mdxSource.frontmatter.component,
+        }
+      : {
+          label: extractTextFromPath(group),
+          path: `${parentPath}/${group}`,
+        };
 
 const sortableFile = (treeItem: MdxFile): SortableEntry => ({
   label: treeItem.getNavTitle(),
-  pathSegment: treeItem.slugs.at(-1) ?? "",
+  path: treeItem.pathname,
   component: treeItem.mdxSource.frontmatter.component,
 });
 
-const sortEntries = (entries: TreeEntry[]): TreeEntry[] =>
+const sortEntries = (entries: TreeEntry[], parentPath: string): TreeEntry[] =>
   [...entries].sort((a, b) =>
-    compareEntries(sortableEntry(a), sortableEntry(b)),
+    compareEntries(sortableEntry(parentPath)(a), sortableEntry(parentPath)(b)),
   );
 
 const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
@@ -104,17 +115,24 @@ const collectMdxFiles = (entries: TreeEntry[]): MdxFile[] =>
       : collectMdxFiles(Object.entries(treeItem)),
   );
 
-const NavigationEntries: FC<{ entries: TreeEntry[] }> = (props) =>
-  sortEntries(props.entries).map(([group, treeItem]) =>
+const NavigationEntries: FC<{ entries: TreeEntry[]; parentPath: string }> = (
+  props,
+) =>
+  sortEntries(props.entries, props.parentPath).map(([group, treeItem]) =>
     treeItem instanceof MdxFile ? (
       <NavigationLink key={treeItem.pathname} treeItem={treeItem} />
     ) : (
-      <NavigationSection key={group} tree={treeItem} group={group} />
+      <NavigationSection
+        key={group}
+        tree={treeItem}
+        group={group}
+        path={`${props.parentPath}/${group}`}
+      />
     ),
   );
 
 const NavigationSection: FC<NavigationSectionProps> = (props) => {
-  const { tree, group } = props;
+  const { tree, group, path } = props;
   const groupExpansion = useGroupExpansion();
   const currentPathname = usePathname();
 
@@ -136,7 +154,7 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
       <Label>
         <GroupText>{group}</GroupText>
       </Label>
-      <NavigationEntries entries={Object.entries(tree)} />
+      <NavigationEntries entries={Object.entries(tree)} parentPath={path} />
     </NavigationGroup>
   );
 };
@@ -160,7 +178,10 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
         </Header>
         <ComponentGroupingView view="grouped">
           <Navigation aria-label="Components">
-            <NavigationEntries entries={componentEntries} />
+            <NavigationEntries
+              entries={componentEntries}
+              parentPath={`/${componentsPathSegment}`}
+            />
           </Navigation>
         </ComponentGroupingView>
         <ComponentGroupingView view="alphabetical">
@@ -176,7 +197,10 @@ const ComponentsNavigation: FC<{ tree: MdxDirectoryTree }> = (props) => {
       <Section>
         <Heading>Integrations</Heading>
         <Navigation aria-label="Integrations">
-          <NavigationEntries entries={integrationEntries} />
+          <NavigationEntries
+            entries={integrationEntries}
+            parentPath={`/${componentsPathSegment}`}
+          />
         </Navigation>
       </Section>
     </GroupExpansionProvider>
@@ -209,7 +233,10 @@ const MainNavigation: FC<Props> = (props) => {
               aria-label={extractTextFromPath(mainPathSegment)}
               key={mainPathSegment}
             >
-              <NavigationEntries entries={Object.entries(selectedMainBranch)} />
+              <NavigationEntries
+                entries={Object.entries(selectedMainBranch)}
+                parentPath={`/${mainPathSegment}`}
+              />
             </Navigation>
           </Section>
         )}

@@ -358,7 +358,7 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
   on `:has(.icon)`; eleven components set `Icon` defaults through
   `PropsContext`) never gets the `flow--icon` class, so icon sizing and
   icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
-  — as the [Icon page](https://flow.mittwald.de/04-components/content/icon)
+  — as the [Icon page](https://flow.mittwald.de/components/content/icon)
   documents. Nothing errors: types, lint and the console stay clean.
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
