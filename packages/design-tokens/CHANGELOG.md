@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.6](https://github.com/mittwald/flow/compare/1.2.0-next.5...1.2.0-next.6) (2026-09-01)
+
+### Features
+
+* **CartesianChart:** add Bar and a layout prop for horizontal bars ([cf84bfe](https://github.com/mittwald/flow/commit/cf84bfe38dd69cff9653b87d422a94aed366e5ab))
+
 ## [1.2.0-next.5](https://github.com/mittwald/flow/compare/1.2.0-next.4...1.2.0-next.5) (2026-09-01)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
