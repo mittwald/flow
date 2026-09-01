@@ -37,7 +37,10 @@ export default () => {
             <Modal offCanvas>
               <Heading>App anlegen</Heading>
               <Content>
-                <AppList.List defaultViewMode="tiles">
+                <AppList.List
+                  aria-label="Apps"
+                  defaultViewMode="tiles"
+                >
                   <AppList.Search />
                   <AppList.StaticData
                     data={[
@@ -46,7 +49,11 @@ export default () => {
                       { id: "1", name: "WordPress" },
                     ]}
                   />
-                  <AppList.Item showTiles showList={false}>
+                  <AppList.Item
+                    showTiles
+                    showList={false}
+                    textValue={(app) => app.name}
+                  >
                     {(app) => (
                       <ListItemView>
                         <Avatar>
