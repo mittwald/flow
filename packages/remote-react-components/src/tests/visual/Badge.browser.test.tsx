@@ -25,8 +25,27 @@ test.each(testEnvironments)(
   async ({
     testScreenshot,
     render,
-    components: { Badge, Flex, Label, Text, Wrap, AccentBox },
+    components: {
+      AccentBox,
+      Badge,
+      Button,
+      ContextualHelp,
+      ContextualHelpTrigger,
+      Flex,
+      Label,
+      Text,
+      Wrap,
+    },
   }) => {
+    const contextualHelp = (
+      <ContextualHelpTrigger subject="value">
+        <Button />
+        <ContextualHelp>
+          <Text>Every value has a story to tell.</Text>
+        </ContextualHelp>
+      </ContextualHelpTrigger>
+    );
+
     await render(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
@@ -52,6 +71,14 @@ test.each(testEnvironments)(
                   <Label>Scope</Label>
                   <Text>Value</Text>
                 </Badge>
+                <Badge color={color}>
+                  Value
+                  {contextualHelp}
+                </Badge>
+                <Badge color={color} onClose={() => console.log("onClose")}>
+                  Value
+                  {contextualHelp}
+                </Badge>
               </Flex>
             </AccentBox>
           </Wrap>
@@ -60,88 +87,6 @@ test.each(testEnvironments)(
     );
 
     await testScreenshot("Badge colors");
-  },
-);
-
-test.each(testEnvironments)(
-  "Badge actions (%s)",
-  async ({
-    testScreenshot,
-    render,
-    components: {
-      Badge,
-      Button,
-      ContextualHelp,
-      ContextualHelpTrigger,
-      CopyButton,
-      Flex,
-      Label,
-      Text,
-    },
-  }) => {
-    await render(
-      <Flex direction="column" gap="m">
-        <Badge>
-          Value
-          <ContextualHelpTrigger subject="value">
-            <Button />
-            <ContextualHelp>
-              <Text>Every value has a story to tell.</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Badge>
-        <Badge onClose={() => console.log("onClose")}>
-          Value
-          <ContextualHelpTrigger subject="value">
-            <Button />
-            <ContextualHelp>
-              <Text>Every value has a story to tell.</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Badge>
-        <Badge onClose={() => console.log("onClose")}>
-          <Label>Scope</Label>
-          <Text>Value</Text>
-          <ContextualHelpTrigger subject="value">
-            <Button />
-            <ContextualHelp>
-              <Text>Every value has a story to tell.</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Badge>
-        <Badge
-          isDisabled
-          onClose={() => console.log("onClose")}
-          onPress={() => console.log("onPress")}
-        >
-          <Label>Scope</Label>
-          <Text>Value</Text>
-          <ContextualHelpTrigger subject="value">
-            <Button />
-            <ContextualHelp>
-              <Text>Every value has a story to tell.</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Badge>
-        <Badge color="dark-static" onPress={() => console.log("onPress")}>
-          <Label>Scope</Label>
-          <Text>Value</Text>
-          <ContextualHelpTrigger subject="value">
-            <Button />
-            <ContextualHelp>
-              <Text>Every value has a story to tell.</Text>
-            </ContextualHelp>
-          </ContextualHelpTrigger>
-        </Badge>
-        <Badge onClose={() => console.log("onClose")}>
-          <Label>Scope</Label>
-          <Text>Value</Text>
-          <CopyButton text="Value" />
-        </Badge>
-      </Flex>,
-    );
-
-    await testScreenshot("Badge actions");
   },
 );
 
