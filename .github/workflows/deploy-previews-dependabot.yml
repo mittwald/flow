@@ -1,0 +1,159 @@
+# Deploys the preview apps for Dependabot PRs.
+#
+# `build-previews.yml` builds and pushes both images on a Dependabot PR just
+# like on any other, but its deploy job cannot run there: in a
+# Dependabot-triggered run `secrets.*` resolves against the repository's
+# *Dependabot* secret store, not the Actions one, so `MITTWALD_PROJECT_ID` and
+# `MITTWALD_API_TOKEN` arrive empty and `deploy-review.ts` exits on the missing
+# credentials. (The `GITHUB_TOKEN` itself is not the problem here — this
+# repository does grant Dependabot runs the permissions a job requests.) A
+# `workflow_run` runs from the default branch in an ordinary Actions context,
+# where the secrets are what they are everywhere else — the same mechanism
+# `dependabot-auto-merge.yml` uses.
+#
+# It only ever checks out the default branch. The PR's code reaches this run
+# exclusively as the two images the build job already pushed, which is what
+# makes the write token safe to hold here. Note the consequence: like every
+# `workflow_run` workflow, this one is inert until it lands on `main`, so it
+# cannot be exercised from the PR that introduces it.
+name: Deploy Preview Apps (Dependabot)
+
+on:
+  workflow_run:
+    workflows: ["Build & Deploy Preview Apps"]
+    types:
+      - completed
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+# Shared with `cleanup-previews-dependabot.yml`, the pair that matters for a
+# Dependabot PR: queuing the cleanup cancels a deploy still running for the same
+# branch, so the deploy can no longer create preview resources after the cleanup
+# has already run. Keyed on the branch, not the PR number, because the cleanup
+# side runs on a closed PR — where `workflow_run.pull_requests` comes back empty
+# and no number is available to a concurrency expression. A Dependabot branch
+# name is unique per PR.
+concurrency:
+  group: preview-dependabot-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    # No images to deploy unless the build succeeded, and nothing to do unless
+    # the build was the one that could not deploy itself. The actor test is the
+    # exact complement of `github.actor != 'dependabot[bot]'` over there, so a
+    # push a person makes onto a `dependabot/*` branch is deployed by that job
+    # and not, a second time, by this one.
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.actor.login == 'dependabot[bot]' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      startsWith(github.event.workflow_run.head_branch, 'dependabot/')
+
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write # deploy-review.ts comments the preview URLs
+
+    steps:
+      - name: Resolve the pull request
+        id: pr
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const run = context.payload.workflow_run;
+            const { owner, repo } = context.repo;
+
+            const skip = (reason) => {
+                core.info(`not deploying: ${reason}`);
+                core.summary.addRaw(`Not deploying \`${run.head_branch}\`: ${reason}`).write();
+            };
+
+            // Populated for same-repo branches, which Dependabot branches are —
+            // the lookup is only a fallback.
+            let number = run.pull_requests?.[0]?.number;
+            if (!number) {
+                const { data } = await github.rest.pulls.list({
+                    owner,
+                    repo,
+                    state: "open",
+                    head: `${owner}:${run.head_branch}`,
+                });
+                number = data[0]?.number;
+            }
+            if (!number) {
+                return skip("no open PR found for this branch");
+            }
+
+            const { data: pr } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: number,
+            });
+
+            // The branch prefix is not proof of authorship: anyone with write
+            // access can push a `dependabot/*` branch, and this run holds a
+            // write token.
+            if (pr.user.login !== "dependabot[bot]") {
+                return skip(`PR #${number} was opened by ${pr.user.login}`);
+            }
+
+            // A merge or close may have landed while the build was running.
+            // Deploying now would orphan the preview: the cleanup already ran.
+            if (pr.state !== "open") {
+                return skip(`PR #${number} is ${pr.state}`);
+            }
+
+            core.setOutput("number", String(number));
+
+      # Deliberately no `ref:` — a `workflow_run` checkout defaults to the
+      # default branch, and running the PR's own tooling is exactly what this
+      # workflow must not do.
+      - name: Checkout the default branch
+        if: steps.pr.outputs.number != ''
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Install pnpm
+        if: steps.pr.outputs.number != ''
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - name: Setup Node.js
+        if: steps.pr.outputs.number != ''
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.pr.outputs.number != ''
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy preview environment
+        if: steps.pr.outputs.number != ''
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          MITTWALD_PROJECT_ID: ${{ secrets.MITTWALD_PROJECT_ID }}
+          MITTWALD_API_TOKEN: ${{ secrets.MITTWALD_API_TOKEN }}
+          MITTWALD_TLS_CERTIFICATE_ID_DOCS:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_DOCS }}
+          MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK:
+            ${{ vars.MITTWALD_TLS_CERTIFICATE_ID_STORYBOOK }}
+          # The refs the build job pushed (`type=ref,event=pr` => `pr-<number>`),
+          # derived the same way `build-previews.yml` derives them.
+          DOCS_IMAGE_TAG:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/docs:pr-${{
+            steps.pr.outputs.number }}
+          STORYBOOK_IMAGE_TAG:
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/storybook:pr-${{
+            steps.pr.outputs.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          pnpm tsx dev/deploy-review.ts

@@ -406,3 +406,8 @@ structural divergence, so the version gates may need adjusting — a
 `minVersion`/`skipVersions` entry in `scenarioVersionSupport.ts` (see
 [Missing components and legitimate divergences](#missing-components-and-legitimate-divergences)).
 The label lets you find and fix that on the PR instead of after merge.
+
+**Dependabot PRs run both harnesses unconditionally** — no label, and a red run
+blocks the auto-merge (`dependabot-auto-merge.yml`). A `react-aria` or
+`react-dom` bump changes rendered structure without touching a component, which
+is precisely the divergence class the PR job's single harness does not see.
