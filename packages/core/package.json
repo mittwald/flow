@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-core",
   "private": "true",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "type": "module",
   "main": "src/index.ts",
   "files": [

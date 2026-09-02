@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.9](https://github.com/mittwald/flow/compare/1.1.8...1.1.9) (2026-09-02)
+
+### Bug Fixes
+
+* **codemods:** colour the upgrade by-hand list and print summaries last ([#3063](https://github.com/mittwald/flow/issues/3063)) ([a91daf3](https://github.com/mittwald/flow/commit/a91daf30542c5fe93d68594c52bbf6e1cf41144e))
+
 ## [1.1.8](https://github.com/mittwald/flow/compare/1.1.7...1.1.8) (2026-09-01)
 
 **Note:** Version bump only for package @mittwald/flow-codemods
