@@ -106,7 +106,7 @@ test.each(testEnvironments)(
 
     await userEvent.type(inputLocator, typedText);
 
-    await expect.poll(() => inputLocator.element().value).toBe(typedText);
+    await expect.element(inputLocator).toHaveDisplayValue(typedText);
 
     /*
      * Every reported change carries the whole text, so an echo the host applied
@@ -128,13 +128,13 @@ test.each(testEnvironments)(
     await expect.element(inputLocator).toBeVisible();
 
     await userEvent.type(inputLocator, typedText);
-    await expect.poll(() => inputLocator.element().value).toBe(typedText);
+    await expect.element(inputLocator).toHaveDisplayValue(typedText);
 
     await page.getByRole("button", { name: "Overwrite" }).click();
 
     await expect
-      .poll(() => inputLocator.element().value)
-      .toBe(valueFromTheRemoteSide);
+      .element(inputLocator)
+      .toHaveDisplayValue(valueFromTheRemoteSide);
   },
 );
 
@@ -146,7 +146,7 @@ test.each(testEnvironments)(
 
     await expectNoControlledSwitch(async () => {
       await userEvent.type(inputLocator, typedText);
-      await expect.poll(() => inputLocator.element().value).toBe(typedText);
+      await expect.element(inputLocator).toHaveDisplayValue(typedText);
     });
   },
 );
