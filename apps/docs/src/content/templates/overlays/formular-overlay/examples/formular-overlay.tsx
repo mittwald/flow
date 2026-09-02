@@ -8,6 +8,7 @@ import {
   Heading,
   Label,
   Modal,
+  NumberField,
   Option,
   PasswordCreationField,
   Section,
@@ -30,14 +31,14 @@ export default () => {
     localPart: string;
     domain: string;
     password: string;
-    storageInGb: string;
+    storageInGb: number;
     spamProtection: boolean;
   }>({
     defaultValues: {
       localPart: "",
       domain: "mustermann.de",
       password: "",
-      storageInGb: "2",
+      storageInGb: 2,
       spamProtection: true,
     },
   });
@@ -79,7 +80,12 @@ export default () => {
                     </FieldDescription>
                   </TextField>
                 </Field>
-                <Field name="domain">
+                <Field
+                  name="domain"
+                  rules={{
+                    required: "Bitte wähle eine Domain",
+                  }}
+                >
                   <Select>
                     <Label>Domain</Label>
                     <Option value="mustermann.de">
@@ -104,14 +110,20 @@ export default () => {
               </Field>
 
               <Heading level={3}>Speicherplatz</Heading>
-              <Field name="storageInGb">
-                <TextField>
+              <Field
+                name="storageInGb"
+                rules={{
+                  required:
+                    "Bitte gib einen Speicherplatz an",
+                }}
+              >
+                <NumberField minValue={1}>
                   <Label>Speicherplatz in GB</Label>
                   <FieldDescription>
                     Der Speicherplatz lässt sich später
                     jederzeit ändern.
                   </FieldDescription>
-                </TextField>
+                </NumberField>
               </Field>
 
               <Field name="spamProtection">

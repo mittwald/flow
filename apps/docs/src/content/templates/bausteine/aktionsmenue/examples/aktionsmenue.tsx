@@ -1,8 +1,10 @@
 import {
+  Badge,
   Button,
   ContextMenu,
   ContextMenuTrigger,
   Flex,
+  IconChangelog,
   Heading,
   IconChevronDown,
   IconDelete,
@@ -37,7 +39,12 @@ export default () => (
           <IconExternalLink />
           <Text>Im Webmailer öffnen</Text>
         </MenuItem>
-        <MenuItem isDisabled>
+        <MenuItem>
+          <IconChangelog />
+          <Text>Aktivitäten</Text>
+          <Badge>Beta</Badge>
+        </MenuItem>
+        <MenuItem>
           <IconDelete />
           <Text>Löschen</Text>
         </MenuItem>

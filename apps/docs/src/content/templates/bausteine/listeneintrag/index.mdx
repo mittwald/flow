@@ -23,8 +23,9 @@ wie im [Listen-Bereich](/templates/bereiche/listen-bereich).
 
 **Nicht verwenden**, wenn
 
-- die Einträge gleichförmige Wertetupel sind. Dann ist eine
-  [Table](/components/structure/table) lesbarer.
+- die Einträge gleichförmige Wertetupel sind. Dann liest sich die Sammlung als
+  Tabelle besser — das ist derselbe `List` im Tabellen-Modus, und dort tritt an
+  die Stelle dieses Bausteins eine Tabellenzeile mit Icon-Buttons.
 - ein Vorschaubild das Erkennungsmerkmal ist. Dann ist die Kachelansicht
   richtig; die Bestandteile bleiben dieselben.
 
@@ -40,10 +41,19 @@ liest die Titel.
 Icon für gleiche Typen, über alle Listen hinweg. Ein Avatar, der je Eintrag
 etwas anderes bedeutet, ist Dekoration.
 
-**Zustände als [AlertBadge](/components/status/alert-badge), nicht als Text.**
-„Nicht verifiziert“ als Badge am Titel ist auffindbar; derselbe Satz im
-Untertitel geht unter. Derselbe Zustand erscheint auf der Detailseite als Alert
-– aus derselben Quelle.
+**Badges am Titel, nicht als Text.** „Nicht verifiziert" als Badge ist
+auffindbar; derselbe Satz im Untertitel geht unter. Badges erledigen dabei drei
+verschiedene Aufgaben, und die Wahl der Komponente folgt der Aufgabe:
+
+- **Alarm** – ein Zustand, der Aufmerksamkeit verlangt, als
+  [AlertBadge](/components/status/alert-badge) mit `danger` oder `warning`.
+  Derselbe Zustand erscheint auf der Detailseite als Alert, aus derselben
+  Quelle.
+- **Aktueller Zustand** – „Aktive Sitzung", „Bezahlt", „Offen": ein
+  [Badge](/components/status/badge), oft in `success`, der sagt, wo man steht.
+- **Herkunft oder Rolle** – „Standard" am systemeigenen Zeitplan, „Beta", „Neu",
+  „Beliebt": ein neutraler Badge, der den Eintrag einordnet statt ihn zu
+  bewerten.
 
 **Die Aktionen liegen im [ContextMenu](/components/actions/context-menu) am
 Eintrag.** Buttons je Eintrag wiederholen sich mit jeder Zeile und ziehen den

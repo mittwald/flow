@@ -57,7 +57,10 @@ export default () => {
               </FieldDescription>
             </TextField>
           </Field>
-          <Field name="domain">
+          <Field
+            name="domain"
+            rules={{ required: "Bitte wähle eine Domain" }}
+          >
             <Select>
               <Label>Domain</Label>
               <Option value="mustermann.de">
