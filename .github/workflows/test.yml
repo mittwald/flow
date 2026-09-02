@@ -1,3 +1,19 @@
+# The PR test suite. It used to be one sequential job — lint, unit, then every
+# browser suite behind each other — which summed to 12-14 minutes, half of it in
+# `test:visual` alone. Nothing here is skipped or weakened: the same targets run,
+# split by target so the wall clock is the slowest job instead of the sum, and
+# the 84-file visual suite is sharded across four runners because it is serial by
+# design (`fileParallelism: false`, see the visual project in
+# packages/remote-react-components/vitest.config.ts).
+#
+# Every suite is driven in WebKit. Should be changed to Chromium when flakiness
+# is resolved, because of Chromium wider usage. BTW: Using Webkit for now,
+# because Firefox has issues with parallel visual tests.
+#
+# `main` at the bottom is the aggregate. Keep that job id: it is the required
+# status check in the branch ruleset, and the check Dependabot waits for before
+# it merges its own PRs (see dependabot-auto-merge.yml). Renaming it, or adding a
+# job below without adding it to `needs`, silently drops that gate.
 name: Run tests
 on:
   push:
@@ -14,25 +30,44 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  main:
+  lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: ./.github/actions/prepare-workspace
         with:
-          node-version: 24
-          cache: pnpm
+          nx-cache: "false" # nothing here builds a package
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Lint & check formatting
+        run: pnpm lint
+
+      # The CI guard scripts are plain node:test files outside the nx graph, so
+      # `pnpm affected:test` never sees them. Run them here so a broken
+      # classifier fails the PR rather than the next release.
+      - name: Test the CI guard scripts
+        run: node --test .github/scripts/*.test.mjs
+
+      # Fixed versioning means every Lerna-managed package carries `lerna.json`'s
+      # version. A merge can break that silently — no conflict markers, and the
+      # package's `CHANGELOG.md` still lists the new release — and `lerna publish
+      # from-package` then ships whatever the manifest says. Runs on every PR
+      # regardless of base branch: the invariant is not release-line-specific.
+      - name: Check version consistency
+        run: node .github/scripts/version-consistency-guard.mjs
+
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
 
       - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
 
@@ -40,27 +75,203 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      - name: Lint & check formatting
-        run: pnpm lint
-
-      - name: Run unit tests
+      - name: Run tests
         run: pnpm affected:test
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
-
-      - name: Prepare browser tests
-        run: pnpm test:browser:prepare --only-shell
-
-      # Should be changed to Chromium when flakiness is resolved, because of Chromium wider usage
-      # BTW: Using Webkit for now, because Firefox has issues with parallel visual tests
-      - name: Run browser tests in Webkit
-        run: pnpm affected:test:browser --parallel=1 --browser.name=webkit
-
+      # Stays in this job because its affected set is the widest: every project
+      # with a browser suite also has `test:compile`, and both targets build the
+      # same `^build` chain — so whatever generator the browser jobs would run
+      # has already run here.
       - name: Check all generated code is committed
         run: git diff --exit-code
+
+      # The one writer. Every other job restores this, so a PR starts from the
+      # builds `main` already paid for and only rebuilds what it changed.
+      - name: Save the nx cache
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: .nx/cache
+          key: nx-${{ runner.os }}-${{ github.sha }}
+
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:browser
+
+      # `nx affected` is still the authority on what runs — it just no-ops in a
+      # second when nothing is. `--parallel=1` throughout: the suites are
+      # unchanged, one browser at a time on the runner, exactly as they ran in
+      # the single job. What overlaps now are jobs, not suites inside a job.
+      - name: Run browser tests in Webkit
+        run:
+          pnpm nx affected --targets=test:browser --parallel=1
+          --browser.name=webkit
+
+  # Its own job rather than a second target on `browser`: run behind it, the two
+  # of them together would take longer than the visual shards below and become
+  # the critical path.
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        with:
+          target: test:e2e
+
+      - name: Run e2e tests in Webkit
+        run:
+          pnpm nx affected --targets=test:e2e --parallel=1 --browser.name=webkit
+
+  # 74 seconds of the ~24 minutes the scheduled cross-version job spends — and
+  # the half that checks the attribute-level contract with published extensions,
+  # which is what removing a component or changing its rendered structure
+  # breaks. Running it here means the PR that breaks it says so, instead of the
+  # next scheduled run saying so after the merge. The broad in-process harness
+  # stays on the schedule: it renders the whole visual corpus per version.
+  cross-version:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - uses: ./.github/actions/prepare-browser-tests
+        id: suite
+        with:
+          target: test:cross-version
+
+      # Published tarballs never change, and `prepare` skips a version it
+      # already finds — so a hit costs nothing to be stale, and a miss installs
+      # only what is missing. Keyed on lerna.json because the version it holds is
+      # what the target set is resolved relative to.
+      - name: Restore the installed old versions
+        if: steps.suite.outputs.run == 'true'
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: packages/remote-react-components/node_modules/.cross-version
+          key: cross-version-${{ runner.os }}-${{ hashFiles('lerna.json') }}
+          restore-keys: |
+            cross-version-${{ runner.os }}-
+
+      - name: Build the host packages and install the old published versions
+        if: steps.suite.outputs.run == 'true'
+        run: pnpm nx run remote-react-components:test:cross-version:prepare
+
+      # The package script directly, not `nx run`: the target depends on the
+      # prepare above, which is uncached on purpose (it talks to the registry)
+      # and would run a second time.
+      - name: Run cross-version smoke tests in Webkit
+        if: steps.suite.outputs.run == 'true'
+        run:
+          pnpm --filter @mittwald/flow-remote-react-components
+          test:cross-version
+
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      # Each shard is a separate signal. A failing one must not cancel the others
+      # — the diffs of the shards still running are what tell you whether the
+      # change is broad or local.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/prepare-workspace
+
+      - uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
+
+      - name: Prepare NX affected commands
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      # The other jobs leave the decision to `nx affected` and use this only to
+      # skip the browser install. The shards call vitest directly (see below), so
+      # here the answer gates the work itself — a PR that touches neither the
+      # components nor the remote packages must not start four browsers.
+      - uses: ./.github/actions/prepare-browser-tests
+        id: suite
+        with:
+          target: test:visual
+
+      # `test:visual` only declares `^build`; building the package itself is a
+      # superset of that, and one `nx run` is all the shards need to be ready.
+      - name: Build the packages the visual suite renders
+        if: steps.suite.outputs.run == 'true'
+        run: pnpm nx run remote-react-components:build
+
+      # Deliberately not `nx run …:test:visual`: the target is cached, and nx
+      # hands every shard of it the same task hash — with the cache shared across
+      # jobs, three of the four shards would be served a pass they never ran.
+      #
+      # vitest shards by hashing the file paths, so the split is stable and each
+      # shard still runs its files one at a time, in one browser, against the
+      # committed baselines. Same suite, four runners.
+      - name: Run visual tests in Webkit (shard ${{ matrix.shard }})
+        if: steps.suite.outputs.run == 'true'
+        run:
+          pnpm --filter @mittwald/flow-remote-react-components test:visual
+          --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+          --browser.name=webkit
+
+  # The required check. Green only when every job above is.
+  main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: always()
+    needs:
+      - lint
+      - unit
+      - browser
+      - e2e
+      - visual
+      - cross-version
+    steps:
+      - name: Check the test jobs
+        if: >
+          contains(needs.*.result, 'failure') ||
+          contains(needs.*.result, 'cancelled')
+        run: |
+          echo "::error::At least one test job failed. See the jobs of this run."
+          exit 1

@@ -28,8 +28,6 @@ export class RemoteContextMenuContentElement extends FlowRemoteElement<RemoteCon
       inert: {},
       items: {},
       lang: {},
-      render: {},
-      renderEmptyState: {},
       selectedKeys: {},
       selectionMode: {},
       shouldCloseOnSelect: {},

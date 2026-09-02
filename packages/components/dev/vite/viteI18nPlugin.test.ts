@@ -64,7 +64,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "*.locale.json",
@@ -104,7 +104,7 @@ describe("vite i18n plugin", () => {
             return {
               meta: {
                 resolvedTranslationPath: path.join(
-                  __dirname,
+                  import.meta.dirname,
                   "test",
                   "locales",
                   "bar.locale.json",
@@ -150,7 +150,7 @@ describe("vite i18n plugin", () => {
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(0);
       expect(hmrContext.server.reloadModule).toBeCalledTimes(0);
     }
@@ -173,12 +173,17 @@ describe("vite i18n plugin", () => {
           },
         } as unknown as ViteDevServer,
         timestamp: Date.now(),
-        file: path.join(__dirname, "test", "locales", "foo.locale.json"),
+        file: path.join(
+          import.meta.dirname,
+          "test",
+          "locales",
+          "foo.locale.json",
+        ),
         read: vi.fn(),
         modules: [],
       } as HmrContext;
 
-      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      plugin.handleHotUpdate.apply({} as PluginContext, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
         generateVirtualFileId("./dev/vite/test/locales/*.locale.json"),

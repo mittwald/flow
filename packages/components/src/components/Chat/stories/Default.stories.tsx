@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Message } from "@/components/Message";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/Button";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
@@ -31,14 +31,14 @@ const meta: Meta<typeof Chat> = {
       <MessageThread>
         <Message>
           <Header>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
                 <strong>Luke Skywalker</strong>
               </Text>
-            </Align>
+            </Combine>
           </Header>
           <Content>
             <Text>{dummyText.long}</Text>
@@ -46,14 +46,14 @@ const meta: Meta<typeof Chat> = {
         </Message>
         <Message type="sender">
           <Header>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Leia Organa</Initials>
               </Avatar>
               <Text>
                 <strong>Leia Organa</strong>
               </Text>
-            </Align>
+            </Combine>
           </Header>
           <Content>
             <Text>{dummyText.long}</Text>
@@ -61,7 +61,7 @@ const meta: Meta<typeof Chat> = {
         </Message>
       </MessageThread>
       <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
     </Chat>
   ),
 };
@@ -77,14 +77,14 @@ export const WithUpload: Story = {
       <MessageThread>
         <Message>
           <Header>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
                 <strong>Luke Skywalker</strong>
               </Text>
-            </Align>
+            </Combine>
           </Header>
           <Content>
             <Text>{dummyText.long}</Text>
@@ -97,7 +97,7 @@ export const WithUpload: Story = {
           Attach file
         </Button>
       </FileField>
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
       <FileCardList>
         <FileCard name="death-star-plans.pdf" />
         <FileCard name="rebel-briefing.docx" />
@@ -114,14 +114,14 @@ export const WithForm: Story = {
         <MessageThread>
           <Message>
             <Header>
-              <Align>
+              <Combine>
                 <Avatar>
                   <Initials>Luke Skywalker</Initials>
                 </Avatar>
                 <Text>
                   <strong>Luke Skywalker</strong>
                 </Text>
-              </Align>
+              </Combine>
             </Header>
             <Content>
               <Text>{dummyText.long}</Text>
@@ -150,14 +150,14 @@ export const WithMarkdownEditor: Story = {
       <MessageThread>
         <Message>
           <Header>
-            <Align>
+            <Combine>
               <Avatar>
                 <Initials>Luke Skywalker</Initials>
               </Avatar>
               <Text>
                 <strong>Luke Skywalker</strong>
               </Text>
-            </Align>
+            </Combine>
           </Header>
           <Content>
             <Text>{dummyText.long}</Text>
@@ -165,7 +165,7 @@ export const WithMarkdownEditor: Story = {
         </Message>
       </MessageThread>
       <MarkdownEditor aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="accent">Send</Button>
+      <Button color="success">Send</Button>
     </Chat>
   ),
 };

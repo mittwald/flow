@@ -3,6 +3,374 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.9](https://github.com/mittwald/flow/compare/1.1.8...1.1.9) (2026-09-02)
+
+### Bug Fixes
+
+* **codemods:** colour the upgrade by-hand list and print summaries last ([#3063](https://github.com/mittwald/flow/issues/3063)) ([a91daf3](https://github.com/mittwald/flow/commit/a91daf30542c5fe93d68594c52bbf6e1cf41144e))
+
+## [1.1.8](https://github.com/mittwald/flow/compare/1.1.7...1.1.8) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.7](https://github.com/mittwald/flow/compare/1.1.6...1.1.7) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.6](https://github.com/mittwald/flow/compare/1.1.5...1.1.6) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** install with the project&#x27;s real package manager ([#3041](https://github.com/mittwald/flow/issues/3041)) ([63875ae](https://github.com/mittwald/flow/commit/63875aed0970b93ab7f05d5bad255cc695af63b4))
+
+## [1.1.5](https://github.com/mittwald/flow/compare/1.1.4...1.1.5) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.4](https://github.com/mittwald/flow/compare/1.1.3...1.1.4) (2026-09-01)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.1.3](https://github.com/mittwald/flow/compare/1.1.2...1.1.3) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** the SegmentedControl -&gt; RadioGroup direction is a rename ([#3042](https://github.com/mittwald/flow/issues/3042)) ([0832a67](https://github.com/mittwald/flow/commit/0832a67f096ce6550a15dc02fdf655db4c953102))
+
+## [1.1.2](https://github.com/mittwald/flow/compare/1.1.1...1.1.2) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** say that action -&gt; onAction changes the callback type ([#3043](https://github.com/mittwald/flow/issues/3043)) ([9a52148](https://github.com/mittwald/flow/commit/9a52148091e9938ca1e476f63f47b5fc1c01663f))
+
+## [1.1.1](https://github.com/mittwald/flow/compare/1.1.0...1.1.1) (2026-09-01)
+
+### Bug Fixes
+
+* **codemods:** compile the transforms so a consumer install can load them ([#3040](https://github.com/mittwald/flow/issues/3040)) ([50f8075](https://github.com/mittwald/flow/commit/50f8075be5e9964479099d92126ab9db582cffaa))
+
+## [1.1.0](https://github.com/mittwald/flow/compare/1.0.16...1.1.0) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.16](https://github.com/mittwald/flow/compare/1.0.15...1.0.16) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.15](https://github.com/mittwald/flow/compare/1.0.14...1.0.15) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.14](https://github.com/mittwald/flow/compare/1.0.13...1.0.14) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.13](https://github.com/mittwald/flow/compare/1.0.12...1.0.13) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.12](https://github.com/mittwald/flow/compare/1.0.11...1.0.12) (2026-08-31)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.11](https://github.com/mittwald/flow/compare/1.0.10...1.0.11) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.10](https://github.com/mittwald/flow/compare/1.0.9...1.0.10) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.9](https://github.com/mittwald/flow/compare/1.0.8...1.0.9) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.8](https://github.com/mittwald/flow/compare/1.0.7...1.0.8) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.7](https://github.com/mittwald/flow/compare/1.0.6...1.0.7) (2026-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.6](https://github.com/mittwald/flow/compare/1.0.5...1.0.6) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.5](https://github.com/mittwald/flow/compare/1.0.4...1.0.5) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.4](https://github.com/mittwald/flow/compare/1.0.3...1.0.4) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.3](https://github.com/mittwald/flow/compare/1.0.2...1.0.3) (2026-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.2](https://github.com/mittwald/flow/compare/1.0.1...1.0.2) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.1](https://github.com/mittwald/flow/compare/1.0.0...1.0.1) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [1.0.0](https://github.com/mittwald/flow/compare/0.2.0-alpha.1058...1.0.0) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1058](https://github.com/mittwald/flow/compare/0.2.0-alpha.1057...0.2.0-alpha.1058) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1057](https://github.com/mittwald/flow/compare/0.2.0-alpha.1056...0.2.0-alpha.1057) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1056](https://github.com/mittwald/flow/compare/0.2.0-alpha.1055...0.2.0-alpha.1056) (2026-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1055](https://github.com/mittwald/flow/compare/0.2.0-alpha.1054...0.2.0-alpha.1055) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1054](https://github.com/mittwald/flow/compare/0.2.0-alpha.1053...0.2.0-alpha.1054) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1053](https://github.com/mittwald/flow/compare/0.2.0-alpha.1052...0.2.0-alpha.1053) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+## [0.2.0-alpha.1052](https://github.com/mittwald/flow/compare/0.2.0-alpha.1051...0.2.0-alpha.1052) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1051](https://github.com/mittwald/flow/compare/0.2.0-alpha.1050...0.2.0-alpha.1051) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1050](https://github.com/mittwald/flow/compare/0.2.0-alpha.1049...0.2.0-alpha.1050) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1049](https://github.com/mittwald/flow/compare/0.2.0-alpha.1048...0.2.0-alpha.1049) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1048](https://github.com/mittwald/flow/compare/0.2.0-alpha.1047...0.2.0-alpha.1048) (2026-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1047](https://github.com/mittwald/flow/compare/0.2.0-alpha.1046...0.2.0-alpha.1047) (2026-08-24)
+
+### Features
+
+* **Combine:** rename Align to Combine ([#2871](https://github.com/mittwald/flow/issues/2871)) ([8bbf7bf](https://github.com/mittwald/flow/commit/8bbf7bf69b1753180cf91e5901a7f49e8c6b1fd5))
+
+# [0.2.0-alpha.1046](https://github.com/mittwald/flow/compare/0.2.0-alpha.1045...0.2.0-alpha.1046) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1045](https://github.com/mittwald/flow/compare/0.2.0-alpha.1044...0.2.0-alpha.1045) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1044](https://github.com/mittwald/flow/compare/0.2.0-alpha.1043...0.2.0-alpha.1044) (2026-08-24)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1043](https://github.com/mittwald/flow/compare/0.2.0-alpha.1042...0.2.0-alpha.1043) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1042](https://github.com/mittwald/flow/compare/0.2.0-alpha.1041...0.2.0-alpha.1042) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1041](https://github.com/mittwald/flow/compare/0.2.0-alpha.1040...0.2.0-alpha.1041) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1040](https://github.com/mittwald/flow/compare/0.2.0-alpha.1039...0.2.0-alpha.1040) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1039](https://github.com/mittwald/flow/compare/0.2.0-alpha.1038...0.2.0-alpha.1039) (2026-08-21)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1038](https://github.com/mittwald/flow/compare/0.2.0-alpha.1037...0.2.0-alpha.1038) (2026-08-20)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1037](https://github.com/mittwald/flow/compare/0.2.0-alpha.1036...0.2.0-alpha.1037) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1036](https://github.com/mittwald/flow/compare/0.2.0-alpha.1035...0.2.0-alpha.1036) (2026-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1035](https://github.com/mittwald/flow/compare/0.2.0-alpha.1034...0.2.0-alpha.1035) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1034](https://github.com/mittwald/flow/compare/0.2.0-alpha.1033...0.2.0-alpha.1034) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1033](https://github.com/mittwald/flow/compare/0.2.0-alpha.1032...0.2.0-alpha.1033) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1032](https://github.com/mittwald/flow/compare/0.2.0-alpha.1031...0.2.0-alpha.1032) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1031](https://github.com/mittwald/flow/compare/0.2.0-alpha.1030...0.2.0-alpha.1031) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1030](https://github.com/mittwald/flow/compare/0.2.0-alpha.1029...0.2.0-alpha.1030) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1029](https://github.com/mittwald/flow/compare/0.2.0-alpha.1028...0.2.0-alpha.1029) (2026-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1028](https://github.com/mittwald/flow/compare/0.2.0-alpha.1027...0.2.0-alpha.1028) (2026-08-17)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1027](https://github.com/mittwald/flow/compare/0.2.0-alpha.1026...0.2.0-alpha.1027) (2026-08-17)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1026](https://github.com/mittwald/flow/compare/0.2.0-alpha.1025...0.2.0-alpha.1026) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1025](https://github.com/mittwald/flow/compare/0.2.0-alpha.1024...0.2.0-alpha.1025) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1024](https://github.com/mittwald/flow/compare/0.2.0-alpha.1023...0.2.0-alpha.1024) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1023](https://github.com/mittwald/flow/compare/0.2.0-alpha.1022...0.2.0-alpha.1023) (2026-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1022](https://github.com/mittwald/flow/compare/0.2.0-alpha.1021...0.2.0-alpha.1022) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1021](https://github.com/mittwald/flow/compare/0.2.0-alpha.1020...0.2.0-alpha.1021) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1020](https://github.com/mittwald/flow/compare/0.2.0-alpha.1019...0.2.0-alpha.1020) (2026-08-11)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1019](https://github.com/mittwald/flow/compare/0.2.0-alpha.1018...0.2.0-alpha.1019) (2026-08-10)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1018](https://github.com/mittwald/flow/compare/0.2.0-alpha.1017...0.2.0-alpha.1018) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1017](https://github.com/mittwald/flow/compare/0.2.0-alpha.1016...0.2.0-alpha.1017) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1016](https://github.com/mittwald/flow/compare/0.2.0-alpha.1015...0.2.0-alpha.1016) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1015](https://github.com/mittwald/flow/compare/0.2.0-alpha.1014...0.2.0-alpha.1015) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1014](https://github.com/mittwald/flow/compare/0.2.0-alpha.1013...0.2.0-alpha.1014) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1013](https://github.com/mittwald/flow/compare/0.2.0-alpha.1012...0.2.0-alpha.1013) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1012](https://github.com/mittwald/flow/compare/0.2.0-alpha.1011...0.2.0-alpha.1012) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1011](https://github.com/mittwald/flow/compare/0.2.0-alpha.1010...0.2.0-alpha.1011) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1010](https://github.com/mittwald/flow/compare/0.2.0-alpha.1009...0.2.0-alpha.1010) (2026-08-07)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1009](https://github.com/mittwald/flow/compare/0.2.0-alpha.1008...0.2.0-alpha.1009) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1008](https://github.com/mittwald/flow/compare/0.2.0-alpha.1007...0.2.0-alpha.1008) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1007](https://github.com/mittwald/flow/compare/0.2.0-alpha.1006...0.2.0-alpha.1007) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1006](https://github.com/mittwald/flow/compare/0.2.0-alpha.1005...0.2.0-alpha.1006) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1005](https://github.com/mittwald/flow/compare/0.2.0-alpha.1004...0.2.0-alpha.1005) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1004](https://github.com/mittwald/flow/compare/0.2.0-alpha.1003...0.2.0-alpha.1004) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1003](https://github.com/mittwald/flow/compare/0.2.0-alpha.1002...0.2.0-alpha.1003) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1002](https://github.com/mittwald/flow/compare/0.2.0-alpha.1001...0.2.0-alpha.1002) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1001](https://github.com/mittwald/flow/compare/0.2.0-alpha.1000...0.2.0-alpha.1001) (2026-08-06)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.1000](https://github.com/mittwald/flow/compare/0.2.0-alpha.999...0.2.0-alpha.1000) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.999](https://github.com/mittwald/flow/compare/0.2.0-alpha.998...0.2.0-alpha.999) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.998](https://github.com/mittwald/flow/compare/0.2.0-alpha.997...0.2.0-alpha.998) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
+# [0.2.0-alpha.997](https://github.com/mittwald/flow/compare/0.2.0-alpha.996...0.2.0-alpha.997) (2026-08-05)
+
+**Note:** Version bump only for package @mittwald/flow-codemods
+
 # [0.2.0-alpha.996](https://github.com/mittwald/flow/compare/0.2.0-alpha.995...0.2.0-alpha.996) (2026-08-04)
 
 **Note:** Version bump only for package @mittwald/flow-codemods

@@ -4,7 +4,7 @@ import type { MessageProps } from "@/components/Message";
 import { Message } from "@/components/Message";
 import { MessageSeparator, MessageThread } from "@/components/MessageThread";
 import { Header } from "@/components/Header";
-import { Align } from "@/components/Align";
+import { Combine } from "@/components/Combine";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
@@ -23,7 +23,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
   return (
     <Message {...rest}>
       <Header>
-        <Align>
+        <Combine>
           <Avatar>
             <Initials>{name}</Initials>
           </Avatar>
@@ -31,7 +31,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
             <strong>{name}</strong>
             <span>Rebel Commander</span>
           </Text>
-        </Align>
+        </Combine>
         <Text>01.09.2024, 12:45</Text>
 
         <ContextMenuTrigger>

@@ -1,0 +1,72 @@
+.combine {
+  &:has(.avatar):has(.text) {
+    display: flex;
+    gap: var(--combine--avatar-text--spacing);
+    height: fit-content;
+
+    --first-two-lines-height: calc(var(--line-height-s) * 2);
+
+    min-height: var(--first-two-lines-height);
+
+    .text {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      font-size: var(--font-size-text--s);
+    }
+
+    .avatar {
+      margin-top: calc(
+        (var(--first-two-lines-height) - var(--avatar--size--m)) / 2
+      );
+    }
+  }
+
+  &:has(:global(.flow--form-field)):has(.button) {
+    display: flex;
+    align-items: flex-start;
+    column-gap: var(--combine--input-button--spacing);
+
+    :global(.flow--form-field) {
+      flex-grow: 1;
+    }
+
+    &:has(label) {
+      .button {
+        margin-top: calc(var(--line-height-s) + var(--form-control--spacing-y));
+      }
+    }
+  }
+
+  &:has(.text):has(.contextualHelpTriggerButton),
+  &:has(.text):has(.copyButton) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--combine--text-button--spacing);
+  }
+
+  &:has(> .text):has(> .icon) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--combine--icon-text--spacing);
+  }
+}
+
+@media (max-width: 550px) {
+  .combine:has(:global(.flow--form-field)):has(.button) {
+    flex-direction: column;
+    row-gap: var(--section--spacing);
+    align-items: stretch;
+
+    .button {
+      width: 100%;
+    }
+
+    &:has(label) {
+      .button {
+        margin-top: 0;
+      }
+    }
+  }
+}

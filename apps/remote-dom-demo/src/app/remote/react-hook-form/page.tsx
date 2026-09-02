@@ -8,6 +8,7 @@ import {
   FileField,
   Label,
   Option,
+  Rating,
   MarkdownEditor,
   Section,
   Select,
@@ -31,7 +32,7 @@ import {
   Policy,
   generatePasswordCreationFieldValidation,
   RuleType,
-} from "@mittwald/flow-react-components/password-tools";
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 import { useForm } from "react-hook-form";
 
 const customPolicy = Policy.fromDeclaration({
@@ -52,6 +53,7 @@ export default function Page() {
     defaultValues: {
       name: "",
       dateRange: [],
+      cantina: 3,
       account: "Rogue Squadron",
       confirm: false,
       email: "",
@@ -102,6 +104,11 @@ export default function Page() {
           <DateRangePicker withDatePickerPresets>
             <Label>Date range</Label>
           </DateRangePicker>
+        </Field>
+        <Field name="cantina">
+          <Rating>
+            <Label>Cantina rating</Label>
+          </Rating>
         </Field>
         <TranslationProvider
           translations={{
@@ -196,6 +203,7 @@ export default function Page() {
           <Button
             onPress={() => {
               form.setValue("email", "leia@rebel-alliance.com");
+              form.setValue("cantina", 5);
             }}
           >
             Set value

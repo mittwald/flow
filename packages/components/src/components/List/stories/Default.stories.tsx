@@ -39,6 +39,7 @@ import { DateTime } from "luxon";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { dummyText } from "@/lib/dev/dummyText";
 import IllustratedMessage from "@/components/IllustratedMessage";
+import { Suspense, type FC } from "react";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -87,7 +88,7 @@ const meta: Meta<typeof List> = {
               <Button color="secondary" variant="soft" slot="secondary">
                 Download
               </Button>
-              <Button color="accent">Add</Button>
+              <Button color="success">Add</Button>
             </ActionGroup>
             <DomainList.LoaderAsync manualPagination manualSorting={false}>
               {loadDomains}
@@ -212,7 +213,7 @@ export const WithSummary: Story = {
               { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
             ]}
           />
-          <InvoiceList.Item>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
                 <Heading level={3}>{invoice.id}</Heading>
@@ -262,7 +263,7 @@ export const InfiniteScroll: Story = {
           <InvoiceList.LoaderAsync manualPagination>
             {loadInvoices}
           </InvoiceList.LoaderAsync>
-          <InvoiceList.Item>
+          <InvoiceList.Item textValue={(invoice) => invoice.id}>
             {(invoice) => (
               <ListItemView>
                 <Heading level={3}>{invoice.id}</Heading>
@@ -289,7 +290,10 @@ export const WithAccordion: Story = {
         <List.StaticData
           data={[{ id: "Tatooine" }, { id: "Hoth" }, { id: "Endor" }]}
         />
-        <List.Item defaultExpanded={(invoice) => invoice.id === "Tatooine"}>
+        <List.Item
+          textValue={(invoice) => invoice.id}
+          defaultExpanded={(invoice) => invoice.id === "Tatooine"}
+        >
           {(invoice) => (
             <ListItemView>
               <Heading>{invoice.id}</Heading>
@@ -349,6 +353,55 @@ export const LoadingView: Story = {
           </TableBody>
         </Table>
       </List>
+    );
+  },
+};
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const loadPlanets: AsyncDataLoader<string> = async () => {
+  await delay(2000);
+  const data = ["Tatooine", "Hoth", "Endor"];
+  return { data, itemTotalCount: data.length };
+};
+
+const loadPlanetName = async (planet: string) => {
+  await delay(2000);
+  return planet;
+};
+
+/** A tile without `ListItemView` and without a Suspense boundary of its own. */
+const PlanetTile: FC<{ planet: string }> = ({ planet }) => {
+  const name = usePromise(loadPlanetName, [planet]);
+  return <Heading>{name}</Heading>;
+};
+
+const PlanetTileSkeleton: FC = () => (
+  <Heading>
+    <SkeletonText width="6em" />
+  </Heading>
+);
+
+export const LoadingViewOfSuspendedItems: Story = {
+  render: () => {
+    const PlanetList = typedList<string>();
+
+    return (
+      <Suspense fallback={<Text>Loading planets…</Text>}>
+        <PlanetList.List aria-label="Planets" defaultViewMode="tiles">
+          <PlanetList.LoaderAsync disableInitialSuspenseBoundary>
+            {loadPlanets}
+          </PlanetList.LoaderAsync>
+          <PlanetList.Item
+            showList={false}
+            showTiles
+            textValue={(planet) => planet}
+            loadingView={<PlanetTileSkeleton />}
+          >
+            {(planet) => <PlanetTile planet={planet} />}
+          </PlanetList.Item>
+        </PlanetList.List>
+      </Suspense>
     );
   },
 };

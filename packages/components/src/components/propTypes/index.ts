@@ -38,7 +38,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps } from "@/components/Modal";
+import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
@@ -64,6 +64,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
+import type { CombineProps } from "@/components/Combine";
 import type { CountryOptionsProps } from "@/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
@@ -83,6 +84,7 @@ import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 import type { AlertTextProps } from "@/components/AlertText";
 import type { IllustratedMessageProps } from "@/components/IllustratedMessage";
 import type { RatingProps } from "@/components/Rating";
+import type { RatingSegmentProps } from "@/components/Rating/components/RatingSegment";
 import type { CodeEditorProps } from "@/components/CodeEditor";
 import type { KbdProps } from "@/components/Kbd/Kbd";
 import type { AccordionProps } from "@/components/Accordion";
@@ -105,6 +107,7 @@ export interface FlowComponentPropsTypes {
   AlertIcon: AlertIconProps;
   AlertText: AlertTextProps;
   Align: AlignProps;
+  Combine: CombineProps;
   Avatar: AvatarProps;
   Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
@@ -155,6 +158,7 @@ export interface FlowComponentPropsTypes {
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
+  ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -168,6 +172,7 @@ export interface FlowComponentPropsTypes {
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   Rating: RatingProps;
+  RatingSegment: RatingSegmentProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
   Segment: SegmentProps;
@@ -200,6 +205,7 @@ const propsContextSupportingComponentsMap: Record<
   AlertIcon: true,
   AlertText: true,
   Align: true,
+  Combine: true,
   Badge: true,
   Button: true,
   CodeEditor: true,
@@ -249,6 +255,7 @@ const propsContextSupportingComponentsMap: Record<
   Message: true,
   MessageThread: true,
   Modal: true,
+  ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,
@@ -262,6 +269,7 @@ const propsContextSupportingComponentsMap: Record<
   RadioButton: true,
   RadioGroup: true,
   Rating: true,
+  RatingSegment: true,
   SearchField: true,
   Section: true,
   SectionHeader: true,

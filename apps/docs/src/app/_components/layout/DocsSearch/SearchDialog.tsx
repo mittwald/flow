@@ -39,25 +39,31 @@ const RESULT_LIMIT = 20;
 
 const DEFAULT_SECTIONS = [
   {
-    segment: "01-get-started",
+    segment: "get-started",
     title: "Get started",
     description:
       "Alles für den Einstieg in flow – von den wichtigsten Grundlagen bis zu ersten Schritten für einen schnellen Start.",
   },
   {
-    segment: "02-foundations",
+    segment: "releases",
+    title: "Releases",
+    description:
+      "Die veröffentlichten Flow-Releases mit Highlights, Migrationshinweisen und den enthaltenen Fixes.",
+  },
+  {
+    segment: "foundations",
     title: "Foundations",
     description:
       "Die Grundlagen des Designsystems – von Designprinzipien bis zu Farben, Typografie und weiteren Basisbausteinen.",
   },
   {
-    segment: "03-patterns",
+    segment: "patterns",
     title: "Patterns",
     description:
       "Wiederkehrende Nutzerabläufe und Best Practices, die zeigen, wie mehrere Components sinnvoll zusammenspielen.",
   },
   {
-    segment: "04-components",
+    segment: "components",
     title: "Components",
     description:
       "Die Dokumentation aller Components mit Beschreibungen, Eigenschaften, Anwendungsfällen und Implementierungshinweisen.",
@@ -111,8 +117,10 @@ export const SearchDialog: FC<Props> = ({ controller }) => {
       return [];
     }
     return DEFAULT_SECTIONS.flatMap((section) => {
-      const inSection = index.filter((entry) =>
-        entry.url.startsWith(`/${section.segment}/`),
+      const inSection = index.filter(
+        (entry) =>
+          entry.url === `/${section.segment}` ||
+          entry.url.startsWith(`/${section.segment}/`),
       );
       const landing =
         inSection.find((entry) => entry.url.endsWith("/overview")) ??

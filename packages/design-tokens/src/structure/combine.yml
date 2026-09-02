@@ -1,0 +1,13 @@
+combine:
+  avatar-text:
+    spacing:
+      value: "{size-rem.s}"
+  input-button:
+    spacing:
+      value: "{size-px.m}"
+  text-button:
+    spacing:
+      value: "{size-rem.xs}"
+  icon-text:
+    spacing:
+      value: "{size-rem.s}"

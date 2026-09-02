@@ -18,7 +18,11 @@ import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { NavigationItem } from "@/app/_components/NavigationItem";
 
 const Error: ErrorComponent = (props) => {
-  return <>REMOTE RENDER ERROR: {props.error.message}</>;
+  const message =
+    props.error instanceof globalThis.Error
+      ? props.error.message
+      : String(props.error);
+  return <>REMOTE RENDER ERROR: {message}</>;
 };
 
 export default function Layout(props: PropsWithChildren) {
@@ -81,12 +85,16 @@ export default function Layout(props: PropsWithChildren) {
                       </NavigationItem>
                       <NavigationItem page="svg">Icon/SVG</NavigationItem>
                       <NavigationItem page="list">List</NavigationItem>
+                      <NavigationItem page="list-selection">
+                        List (selection)
+                      </NavigationItem>
                       <NavigationItem page="markdown">Markdown</NavigationItem>
                       <NavigationItem page="modal">Modal</NavigationItem>
                       <NavigationItem page="notification">
                         Notifications
                       </NavigationItem>
                       <NavigationItem page="popover">Popover</NavigationItem>
+                      <NavigationItem page="rating">Rating</NavigationItem>
                     </NavigationGroup>
                     <TunnelExit id="remote-demo" />
                   </Navigation>

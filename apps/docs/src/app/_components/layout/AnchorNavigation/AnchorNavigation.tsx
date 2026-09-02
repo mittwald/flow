@@ -23,6 +23,10 @@ interface Props {
 const nativeReplaceState =
   typeof History !== "undefined" ? History.prototype.replaceState : undefined;
 
+// Duplicates the headings' `scroll-margin-top`: a heading counts as reached
+// once it crosses the line an anchor jump puts it on.
+const activeLineOffset = 96;
+
 const updateLocationHash = (slug: string) => {
   if (!nativeReplaceState) {
     return;
@@ -51,66 +55,57 @@ export const AnchorNavigation: FC<Props> = (props) => {
     };
   }, []);
 
+  // The MDX content renders on the client, so the browser's own jump to the
+  // hash happens while the headings don't exist yet. Repeat it once the content
+  // is there.
+  useEffect(() => {
+    if (!ready || initialScrollProcessed.current) {
+      return;
+    }
+
+    const slug = decodeURIComponent(window.location.hash.slice(1));
+    if (!slug) {
+      return;
+    }
+
+    initialScrollProcessed.current = true;
+    document.getElementById(slug)?.scrollIntoView();
+  }, [ready]);
+
   const [activeAnchor, setActiveAnchor] = React.useState<string | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    const updateActiveAnchor = () => {
+      const passed = anchors
+        .map((a) => ({ slug: a.slug, el: document.getElementById(a.slug) }))
+        .filter((a): a is { slug: string; el: HTMLElement } => a.el !== null)
+        .filter(({ el }) => el.getBoundingClientRect().top <= activeLineOffset);
 
-        const [firstVisible] = visible;
-        if (firstVisible) {
-          setActiveAnchor(firstVisible.target.id);
-        } else {
-          const currentUrlSlug = window.location.hash.slice(1);
-          const aboveViewport = anchors
-            .map((a) => {
-              const slugElement = document.getElementById(a.slug);
+      setActiveAnchor(passed.at(-1)?.slug ?? anchors[0]?.slug ?? null);
+    };
 
-              if (!initialScrollProcessed.current) {
-                initialScrollProcessed.current = true;
-                if (
-                  currentUrlSlug &&
-                  currentUrlSlug === encodeURIComponent(a.slug)
-                ) {
-                  slugElement?.scrollIntoView();
-                }
-              }
-
-              return slugElement;
-            })
-            .filter((el): el is HTMLElement => el !== null)
-            .filter(
-              (el) =>
-                el.getBoundingClientRect().top < window.innerHeight * 0.25,
-            )
-            .pop();
-
-          if (aboveViewport) {
-            setActiveAnchor(aboveViewport.id);
-          } else if (!activeAnchor && anchors[0]) {
-            setActiveAnchor(anchors[0].slug);
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: [0, 0.25, 0.5],
-      },
-    );
-
-    anchors.forEach((a) => {
-      const el = document.getElementById(a.slug);
-      if (el) {
-        observer.unobserve(el);
-        observer.observe(el);
+    let frame = 0;
+    const scheduleUpdate = () => {
+      if (frame !== 0) {
+        return;
       }
-    });
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        updateActiveAnchor();
+      });
+    };
 
-    return () => observer.disconnect();
+    updateActiveAnchor();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame !== 0) {
+        cancelAnimationFrame(frame);
+      }
+    };
   }, [anchors, ready]);
 
   if (anchors.length === 0) {

@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -19,11 +20,7 @@ test.each(testEnvironments)(
       <Flex direction="column" gap="m">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Flex direction="column" gap="m">
                 <Breadcrumb color={color}>
                   <Link>{firstLetterToUppercase(color)}</Link>

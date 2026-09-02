@@ -1,13 +1,21 @@
 # @mittwald/flow-react-components — Agent Guide
 
-Component patterns for the core package. Read the
-[root AGENTS.md](../../AGENTS.md) first for repo-wide rules (generated code,
-Definition of Done, workflow).
+> **Building an application _with_ Flow?** Read [USAGE.md](./USAGE.md) instead —
+> component selection, layout and spacing, what is safe to depend on, and where
+> the documentation lives in machine-readable form. This guide is about changing
+> Flow itself, and its patterns (`flowComponent`, `PropsContext`, views, CSS
+> modules) do not belong in an application.
 
-> **Full pattern catalog:** [PATTERNS.md](./PATTERNS.md) lists every convention
-> (184 patterns) with per-pattern applicability (when to use / when not), a
-> canonical example each, and a decision cheat-sheet. This guide covers the
-> must-know core; look there when deciding between two approaches.
+Component patterns for the core package. Read the
+[root AGENTS.md](https://github.com/mittwald/flow/blob/main/AGENTS.md) first for
+repo-wide rules (generated code, Definition of Done, workflow).
+
+> **Full pattern catalog:**
+> [PATTERNS.md](https://github.com/mittwald/flow/blob/main/packages/components/PATTERNS.md)
+> lists every convention (184 patterns) with per-pattern applicability (when to
+> use / when not), a canonical example each, and a decision cheat-sheet. This
+> guide covers the must-know core; look there when deciding between two
+> approaches.
 
 ## Component anatomy
 
@@ -15,6 +23,7 @@ Definition of Done, workflow).
 src/components/Button/
 ├── Button.tsx               # implementation (hand-written)
 ├── Button.module.scss       # styles (hand-written)
+├── Button.module.d.scss.ts  # GENERATED — CSS-module class-name types
 ├── index.ts                 # barrel (hand-written)
 ├── view.ts                  # GENERATED — remote view declaration (@flr-generate only)
 ├── stories/
@@ -55,7 +64,7 @@ export interface ButtonProps
     PropsWithChildren<Omit<Aria.ButtonProps, "children">>,
     FlowComponentProps<HTMLButtonElement> {
   /** The color of the button. @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "success" | "secondary" | "danger";
 }
 
 /** @flr-generate all */
@@ -118,7 +127,7 @@ return (
   clearing, e.g. `wrapWith: <ClearPropsContext />` (see `Modal.tsx`).
 
 Why this works the way it does across the remote boundary:
-[docs/remote-ui.md](../../docs/remote-ui.md).
+[docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Views — remote-transparent composition
 
@@ -133,32 +142,46 @@ import { Button } from "@/components/Button"; // ✗ host-only in remote context
 ```
 
 Why this works the way it does across the remote boundary:
-[docs/remote-ui.md](../../docs/remote-ui.md).
+[docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 Remote generation details:
 
 - `@flr-generate all` on the component const marks it for generation.
+- **A prop that carries rendered output has to be a slot, not a property.** A
+  remote property is transported as data, and a React element carries
+  `$$typeof: Symbol(react.…)` — `postMessage` refuses symbols and rejects the
+  whole message, so one such prop drops the entire mutation batch and the
+  extension renders nothing. `isSlot` recognises `ReactNode` and `ReactElement`
+  (instantiated too — the match is anchored so the
+  `AdaptChild*EventHandler<any, ReactElement<…>>` type every event prop carries
+  is not swept in). What it cannot convert is a **function returning** rendered
+  output, because the host has to call it: that needs an eager slot or
+  `@flr-ignore-props`. `checkSerializableProps` **fails generation** on any such
+  prop, so a new one cannot ship.
 - `@flr-ignore-props` excludes props that must not cross the remote boundary —
   either because they cannot be serialized, or because they could do **too much
   on the host side**. A global ignore list lives in
   `dev/remote-components-generator/config.ts`: `style` and
   `dangerouslySetInnerHTML` are always ignored for safety; `ref`, `controller`,
-  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize. Use the
-  per-component tag for additional cases (see `TunnelEntry.tsx`).
+  `tunnel`, `key`, `children`, `wrapWith` because they don't serialize; and
+  `renderEmptyState` plus react-aria's `render` because the host would call them
+  and get rendered output back — neither was ever a deliberate Flow API, and
+  both cost the whole mutation batch when they were tried. Use the per-component
+  tag for additional cases (see `TunnelEntry.tsx`).
 - After changing props of an `@flr-generate` component:
   `pnpm nx build:remote-components components` and **commit** the results
   (view.ts, `src/views/*`, `remote-*/src/auto-generated/**`).
 - Props of these components are consumed by mStudio extension developers — no
   breaking changes; deprecate instead (see
   [Deprecating an API](#deprecating-an-api)). Why this matters:
-  [docs/remote-ui.md](../../docs/remote-ui.md).
+  [docs/remote-ui.md](https://github.com/mittwald/flow/blob/main/docs/remote-ui.md).
 
 ## Deprecating an API
 
 Never break a shipped API — keep the old path working and warn at runtime with
 `useWarnDeprecation` (from `DeprecationWarningProvider`). This covers every kind
 of deprecated entry point: a prop, a whole component, a hook, or an integration
-export (`nextjs`, `password-tools`).
+export (`nextjs`, `mittwald-password-tools-js`).
 
 ```tsx
 const warnDeprecation = useWarnDeprecation();
@@ -188,6 +211,16 @@ if ("action" in props) {
   match prop values (`.size-s`, `.primary`).
 - Class composition with `clsx`, consumer `className` appended last:
   `clsx(styles.button, styles[size], styles[color], className)`.
+- **`styles` is precisely typed** by generated `*.module.d.scss.ts` stubs (a
+  committed generated artifact — see the root
+  [Generated code](https://github.com/mittwald/flow/blob/main/AGENTS.md#generated-code--must-be-committed)
+  table, `pnpm nx build:scss-types components`). A narrow-union index
+  (`styles[color]`, ``styles[`size-${size}`]``) stays type-safe as-is —
+  including a helper's return, as long as the helper is typed as a
+  template-literal union (see `getContainerBreakpointSizeClassName`). Only a
+  `string`-typed or runtime index needs `styleClassname(styles, key)` from
+  `@/lib/scss/selectors` (returns `string | undefined`) — **not** an
+  `as keyof typeof styles` cast, which hides missing classes.
 - **Use design-token CSS variables** — global (`--font-size-text--m`) or
   component-namespaced (`--button--corner-radius`). No hard-coded colors, sizes,
   radii.
@@ -196,6 +229,15 @@ if ("action" in props) {
   Group repeated variants in local mixins.
 - Structure sections with comments: `/* Elements */`, `/* States */`,
   `/* Size */`, `/* Variants */`.
+- **Overriding a dependency that injects its own stylesheet** (CodeMirror,
+  react-easy-crop, FontAwesome) needs `@layer flow.unlayered { … }`: their
+  `<style>` elements are unlayered, and unlayered CSS beats layered CSS
+  regardless of specificity, so a normal rule never applies in
+  `all-layered.css`. Only for the library's own `:global()` selectors — the
+  `flow/unlayered-third-party-only` lint rule enforces that, because the marker
+  costs consumers the layer-based overridability of the rule. New or changed
+  rendered behavior here gets a test in `src/tests/layered/`, which runs against
+  the layered variant; the default browser project cannot see this class of bug.
 
 ## Testing — the actual bar
 
@@ -234,14 +276,15 @@ Run: `pnpm nx test:unit components`,
 
 ## Public API surfaces
 
-| Export                                              | Contents                                                                                                                                                                                    |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.` (default)                                       | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                   |
-| `./internal`                                        | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                 |
-| `./flr-universal`                                   | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                  |
-| `./nextjs`, `./react-hook-form`, `./password-tools` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface. |
-| `./all.css`                                         | Bundled stylesheet.                                                                                                                                                                         |
-| `./doc-properties`                                  | Generated prop metadata for the docs site.                                                                                                                                                  |
+| Export                                                          | Contents                                                                                                                                                                                                           |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `.` (default)                                                   | Everything listed **manually** in `src/components/public.ts` — new public components must be added there.                                                                                                          |
+| `./internal`                                                    | Advanced internals (`flowComponent`, prop helper types, …).                                                                                                                                                        |
+| `./flr-universal`                                               | Curated subset that works local _and_ remote. Adding to `public.ts` does **not** add here.                                                                                                                         |
+| `./nextjs`, `./react-hook-form`, `./mittwald-password-tools-js` | Integrations (`src/integrations/`): wrappers around third-party dependencies that not every consumer should pay for — they get their own export entry instead of entering the core surface.                        |
+| `./all.css`, `./all-layered.css`                                | Bundled stylesheet, plain and `@layer`-wrapped.                                                                                                                                                                    |
+| `./component-index`                                             | Generated consumer-facing index: every public component with its status and its own props (`dev/component-index/`). What the docs site's prop tables read, and the one prop dataset a consumer's agent should use. |
+| `./doc-properties`                                              | Raw `react-docgen-typescript` output — a 13 MB build input for the generators above, not something to read directly.                                                                                               |
 
 **Adding a new integration export entry?** Also register it in the component
 status registry so it is covered: add the entry to `STATUS_EXPORT_ENTRIES`
@@ -251,12 +294,26 @@ to zero components.
 
 Prop JSDoc feeds the generated `doc-properties.json` and the docs site: write
 doc comments on public props, use `@default` for defaults and `@internal` for
-props to hide.
+props to hide. A deprecated **value** of a still-current prop — `Button`'s
+`color="accent"` — is listed with `@deprecatedValues accent` (comma-separated
+for several) and drops out of the properties table, so the table only offers
+values that should still be used. The value stays in the prop's type and keeps
+working; the runtime warns via `useWarnDeprecation` as usual.
 
 ## Misc
 
-- Feature flags: `src/flags.ts` holds a few behavior toggles; there is no formal
-  policy around them.
+- Application-wide component defaults: `ComponentDefaultsProvider`
+  (`src/components/ComponentDefaultsProvider/`) is where a behavior default that
+  an application should be able to set **once** belongs. Add the setting to the
+  `ComponentDefaults` interface plus its built-in value in
+  `builtInComponentDefaults`, and read it with `useComponentDefaults("<Name>")`
+  at the place that decides. Resolution order: local prop → provider →
+  deprecated `flags` → built-in default. This is not a replacement for
+  `PropsContext`: a UI component clears the props context for its children, so
+  PropsContext cannot carry an app-wide default past the first UI ancestor.
+- Feature flags: `src/flags.ts` is the deprecated predecessor of the
+  `ComponentDefaultsProvider`. Assigned flags still act as an application-wide
+  default (and warn via `useWarnDeprecation`); do not add new ones.
 - `SettingsProvider` (`src/components/SettingsProvider/`) is the built-in
   persistence for component settings (e.g. `List` remembering its view
   settings), with pluggable backends (localStorage by default). Internal
@@ -269,7 +326,7 @@ props to hide.
 ## Non-obvious conventions
 
 Easy-to-miss conventions not spelled out above. Full details and examples in
-[PATTERNS.md](./PATTERNS.md).
+[PATTERNS.md](https://github.com/mittwald/flow/blob/main/packages/components/PATTERNS.md).
 
 - **`PropsContext` is structural, not just styling** — nested entries, `dynamic`
   children, semantic defaults (icon size, heading level, status), and contextual
@@ -296,6 +353,13 @@ Easy-to-miss conventions not spelled out above. Full details and examples in
 - **CSS leans on modern relational/low-specificity selectors** — `:has`,
   `:where`, logical properties, data attributes, and container boundaries reduce
   the need for runtime styling props.
+- **Foreign SVGs go through `Icon`** — a Tabler icon or a custom SVG placed
+  straight into a host that styles its icon slot (`Button` and `Combine` select
+  on `:has(.icon)`; eleven components set `Icon` defaults through
+  `PropsContext`) never gets the `flow--icon` class, so icon sizing and
+  icon-only padding silently do not apply. Wrap it — `<Icon><IconFoo /></Icon>`
+  — as the [Icon page](https://flow.mittwald.de/components/content/icon)
+  documents. Nothing errors: types, lint and the console stay clean.
 - **Universal exports are deliberately explicit** — remote-safe values and their
   types are curated in `flr-universal.ts` independently of the main public
   surface; adding to `public.ts` does not add them there.

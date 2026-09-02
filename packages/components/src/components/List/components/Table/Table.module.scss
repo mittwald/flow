@@ -1,0 +1,31 @@
+.table {
+  border-collapse: initial;
+
+  &.isLoading {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.row {
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
+
+  &[data-selected] {
+    background-color: var(--list-item--background-color--pressed);
+  }
+
+  &.hasAction {
+    cursor: default;
+
+    &:where(:not([data-selected])) {
+      &:hover {
+        background-color: var(--list-item--background-color--hover);
+      }
+    }
+
+    &[data-pressed] {
+      background-color: var(--list-item--background-color--pressed);
+    }
+  }
+}

@@ -20,6 +20,12 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends
     PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children" | "ref">>,
     FlowComponentProps<HTMLSpanElement> {
+  /**
+   * Whether the calendar offers presets to pick a range with one click. Pass an
+   * array to replace the built-in presets with your own.
+   *
+   * @default false
+   */
   withDatePickerPresets?: boolean | DateRangePresets;
 }
 

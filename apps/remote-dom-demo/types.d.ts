@@ -20,5 +20,4 @@ declare global {
   declare const Row: ComponentType<PropsWithChildren>;
   declare const PropertiesTables: ComponentType;
   declare const Column: ComponentType<PropsWithChildren>;
-  declare const StaticModal: ComponentType<PropsWithChildren>;
 }

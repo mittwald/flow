@@ -1,5 +1,24 @@
 name: Publish packages to NPM
 
+# ONE workflow file for BOTH standing release lines: `main` → dist-tag `latest`
+# (`X.Y.Z`), `next` → dist-tag `next` (`X.Y.0-next.N`, ADR 0004 §6). Which line
+# a run publishes is derived from its ref, into `LINE` on the publish job below.
+#
+# The lines were a symmetric PAIR of files (`publish.yml` / `publish-next.yml`)
+# until 2026-08-27, when the first real `next` publish failed — and every retry
+# with it: `E404 Not found` on `PUT https://registry.npmjs.org/@mittwald%2f…`.
+# npm's Trusted Publisher binds ONE workflow FILENAME per package, and every
+# Flow package names `publish.yml` (which is why `main` kept publishing fine
+# from the same runner, the same OIDC endpoint and the same package minutes
+# earlier). A publish from `publish-next.yml` is therefore an unauthorized
+# identity, which npm reports as 404 rather than 403.
+#
+# npm allows exactly ONE trusted publisher per package, so the symmetry cannot
+# be bought back by registering the second file — and splitting the job body out
+# into a reusable workflow does not help either, because npm validates the
+# CALLING workflow's name. Sharing this file is the only shape that authenticates
+# for both lines.
+
 on:
   workflow_dispatch:
     inputs:
@@ -7,41 +26,178 @@ on:
         description: "Publish missing packages only, without a version bump"
         type: boolean
         default: false
+      release_as:
+        description: "Force an explicit version (stable line only)"
+        type: string
+        default: ""
   push:
     branches:
       - main
+      - next
 
 permissions:
   id-token: write
   contents: write
 
-# Shared per-target-branch concurrency group (ADR 0004 §5): every writer of
-# `main` (this workflow, and the promotion back-merge once the 1.0.0 model is
-# live) serializes on `mutate-main`, removing non-fast-forward races by design.
+env:
+  # Keep the local git hooks out of this workflow. simple-git-hooks' postinstall
+  # runs on every `pnpm install` (it is allowlisted in pnpm-workspace.yaml) and
+  # writes .git/hooks from package.json — including `pre-push` = `pnpm lint`. On a
+  # runner that hook fires on every push this workflow makes: ~95s of the release
+  # step was two full lint runs, and a lint failure there aborts the push AFTER
+  # the npm publish succeeded — the version lands on npm with no release commit,
+  # no tag and no GitHub Release (#2932).
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: "1"
+
+# Shared per-target-branch concurrency group (ADR 0004 §5): every writer of a
+# standing line serializes on that line's group, removing non-fast-forward races
+# by design. `mutate-next` is the SAME group `forward-merge.yml` uses.
+#
+# The group follows the ref, not the line-picking rule in `LINE`, with one
+# deliberate exception that they agree on: a dispatch from a branch that is
+# neither `main` nor `next` (the one-time cut, #2769) publishes the stable line
+# AND belongs in `mutate-main`, because it pushes to `main`.
 concurrency:
-  group: mutate-main
+  group: mutate-${{ github.ref == 'refs/heads/next' && 'next' || 'main' }}
   cancel-in-progress: false
 
 jobs:
+  # Does this push carry anything that can reach a PUBLISHED package? Docs- and
+  # CI-only merges cannot, and must not produce a release (#2931): the publish
+  # job below is skipped whole, so there is no npm publish, no
+  # `chore(release):` version bump commit, no tag and no GitHub Release.
+  #
+  # This is a separate job rather than a step inside `publish` on purpose. The
+  # run then shows `decide` green and `publish` skipped, with a notice naming the
+  # rule that fired. `paths-ignore` on the trigger would skip the run entirely
+  # and explain nothing — and its globs cannot express "Markdown inside
+  # packages/ still ships" (flow-react-components publishes `["*.md", "dist"]`).
+  #
+  # A manual dispatch always publishes: that is the escape hatch for releasing a
+  # docs-only change deliberately.
+  #
+  # On `next` the push is usually the `chore(sync):` forward-merge commit, so the
+  # classified file set is what the merge carried over from `main`. A docs-only
+  # fix therefore skips here exactly as it skipped on `main`, and the two lines
+  # stay symmetric.
+  decide:
+    name: Release relevance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.relevance.outputs.publish }}
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Self-test the classifier
+        run: node --test .github/scripts/release-relevance-lib.test.mjs
+
+      - name: Classify the changed paths 🔎
+        id: relevance
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "::notice::Manual dispatch — publishing regardless of changed paths."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # No usable base (branch creation, force push) means we cannot tell
+          # what changed. Publish — the behaviour before #2931.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::No usable base sha — publishing (fail-safe default)."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # The compare API, not `git diff`: it needs no history, so this job
+          # stays a shallow checkout.
+          #
+          # `gh api` prints the error BODY to stdout on a non-2xx and exits
+          # non-zero, so the EXIT STATUS decides whether the list is usable —
+          # never the output. Discarding it hands the guard an empty list, which
+          # is its fail-safe "publish" input.
+          if ! files="$(gh api --paginate \
+            "repos/${REPO}/compare/${BEFORE}...${AFTER}" \
+            --jq '.files[]?.filename')"; then
+            echo "::warning::Could not read the changed-file list from the compare API — publishing (fail-safe default)."
+            files=""
+          fi
+
+          # The root `package.json` is judged by its KEY DIFF, not its path: a
+          # `scripts` edit cannot reach a tarball, a `devDependencies` bump can,
+          # and the path cannot tell them apart (#2970). Fetch both versions so
+          # the classifier can compare them. A failed fetch leaves the file
+          # missing, which the guard reads as "relevant" — the behaviour before.
+          if printf '%s\n' "$files" | grep -qx 'package.json'; then
+            for side in BEFORE AFTER; do
+              if [ "$side" = AFTER ]; then ref="${AFTER}"; else ref="${BEFORE}"; fi
+              target="${RUNNER_TEMP}/root-package.${side}.json"
+              if gh api "repos/${REPO}/contents/package.json?ref=${ref}" \
+                --header 'Accept: application/vnd.github.raw+json' \
+                > "$target"; then
+                export "ROOT_MANIFEST_${side}_FILE=${target}"
+              else
+                echo "::warning::Could not fetch the root package.json at ${ref}."
+                rm -f "$target"
+              fi
+            done
+          fi
+
+          printf '%s\n' "$files" \
+            | node .github/scripts/release-relevance-guard.mjs
+
   publish:
-    # Publish on manual dispatch, or on any push to main EXCEPT the release
-    # commit this workflow pushes itself (guarded below to avoid an infinite
-    # publish loop).
+    # Publish on manual dispatch, or on any push to a standing line EXCEPT the
+    # release commit this workflow pushes itself (guarded below to avoid an
+    # infinite publish loop). The `chore(sync):` forward-merge commits are NOT
+    # skipped — re-publishing `next` on a forward-merged fix is the whole point
+    # (ADR 0004 §6).
     #
-    # The trigger is `push: main`, NOT `pull_request_target: closed`: npm's
-    # Trusted Publisher only accepts the OIDC token when its ref is
-    # refs/heads/main. pull_request_target runs carry refs/pull/<n>/merge, which
-    # npm rejects — the publish then falls back to an anonymous request and npm
-    # returns a misleading 404. A push to main carries refs/heads/main and
-    # authenticates correctly.
+    # The trigger is `push`, NOT `pull_request_target: closed`: npm's Trusted
+    # Publisher only accepts the OIDC token when its ref is a branch ref
+    # (refs/heads/main, refs/heads/next). pull_request_target runs carry
+    # refs/pull/<n>/merge, which npm rejects — the publish then falls back to an
+    # anonymous request and npm returns the same misleading 404 the file header
+    # describes.
+    #
+    # `needs.decide` adds the third gate (#2931): a docs- or CI-only push
+    # produces no release at all.
+    #
+    # `AUTO_PUBLISH_ENABLED` is the kill switch for the STABLE line only — the
+    # scope it had while it was `publish.yml`'s alone. Flipping it must not
+    # silently stop `next` from tracking `main`.
+    needs: decide
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'chore(release):')
+      needs.decide.outputs.publish == 'true' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (
+          !startsWith(github.event.head_commit.message, 'chore(release):') &&
+          (
+            github.ref == 'refs/heads/next' ||
+            vars.AUTO_PUBLISH_ENABLED == 'true'
+          )
+        )
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+      # The release line this run publishes. `next` only when the run's ref IS
+      # `next`; every other ref is the stable line — a push to `main`, and the
+      # one-time cut dispatched on its own branch (#2769 finding 15).
+      LINE: ${{ github.ref == 'refs/heads/next' && 'next' || 'main' }}
 
     steps:
       - name: Checkout ⬇️
@@ -71,50 +227,366 @@ jobs:
       - name: Setup NX 1/2 🎛️
         uses: nrwl/nx-set-shas@afb73a62d26e41464e9254689e1fd6122ee683c1 # v5.0.1
 
+      # A local `main` branch, for nx and — on the `next` line — for the version
+      # derivation below, which reads `origin/main:lerna.json`. Skipped when the
+      # checkout already put us on `main`.
       - name: Setup NX 2/2 🎛
         if: github.ref != 'refs/heads/main'
-        run: git branch --track main origin/main
+        run: |
+          git fetch --no-tags origin main
+          git branch --track main origin/main
 
-      - name: Build 🔨
-        run: pnpm build
+      # A promotion merge (RFC #2711) is a `release/x.y.0 -> main` PR merged as a
+      # true merge commit. Its head branch names the target version — and the
+      # merge carries `next`'s PRERELEASE version onto `main` with it, because
+      # the release branch already contains `main` (that is what makes the PR
+      # mergeable at all: GitHub does not run the merge drivers).
+      #
+      # So the version has to be set explicitly here. Left to derive it, lerna
+      # sees a prerelease as the current version and simply continues that line —
+      # measured in the #2769 rehearsal, where a promotion put `2.3.0-next.6`
+      # under dist-tag `latest`. Eight workflow runs, all green.
+      #
+      # This is the graduation half of #2724; the curated-notes half (building
+      # the GitHub Release body from the PR's marker block instead of the
+      # changelog) is still open there.
+      #
+      # Stable line only: `next` is never the target of a promotion.
+      - name: Identify merge context 🔎
+        id: ctx
+        if: ${{ !inputs.only_publish && env.LINE == 'main' }}
+        run: |
+          set -euo pipefail
+          version=""
+          pr=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # One REST call yields both facts about the merged PR: its head ref
+            # (→ the target version) and its number (→ the curated release-notes
+            # marker block, read in the release step below).
+            #
+            # REST, so the field is `head.ref` — NOT `headRefName`, which is the
+            # GraphQL name `gh pr view --json` uses. Reading the GraphQL name off
+            # a REST response yields an empty string and the graduation silently
+            # never fires; verified against the rehearsal's own promotion merge.
+            pulls="$(gh api \
+              "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls")"
+            head_ref="$(printf '%s' "$pulls" | jq -r '.[0].head.ref // ""')"
+            pr="$(printf '%s' "$pulls" | jq -r '.[0].number // ""')"
+            case "$head_ref" in
+              release/*)
+                version="${head_ref#release/}"
+                echo "::notice::Promotion merge from '${head_ref}' (PR #${pr}) — graduating to ${version}."
+                ;;
+            esac
+          elif [ -n "${{ inputs.release_as }}" ] && [ "${{ github.ref_name }}" != "main" ]; then
+            # The one-time cut is dispatched ON ITS OWN BRANCH, never merged
+            # first: merging it would itself publish, and with
+            # --conventional-prerelease dropped that publish would be a stable
+            # release (#2769 finding 15). The branch's PR is therefore still open
+            # at cut time, which makes it the natural carrier of the curated
+            # notes — the same marker block a promotion uses, read by the same
+            # step below. Without it the 1.0.0 Release body would read "Version
+            # bump only for package @mittwald/flow-project": the cut is a forced
+            # bump over an empty commit range, so conventional-changelog has
+            # nothing to describe.
+            pr="$(gh api \
+              "repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository_owner }}:${{ github.ref_name }}" \
+              --jq '.[0].number // ""')"
+            if [ -n "$pr" ]; then
+              echo "::notice::Cut dispatched on '${{ github.ref_name }}' — curated notes from PR #${pr}."
+            else
+              echo "::warning::No open PR for '${{ github.ref_name }}' — the release body will fall back to CHANGELOG.md."
+            fi
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "pr=${pr}" >> "$GITHUB_OUTPUT"
 
       # Bump versions, write changelogs, commit and tag — but do NOT push and do
       # NOT create the GitHub release yet. Pushing the release commit before the
-      # npm publish succeeded is what let a failed publish "ratchet" main ahead of
-      # npm (versions bumped in git, nothing on npm). The push + release are
-      # deferred to after a successful publish below.
+      # npm publish succeeded is what let a failed publish "ratchet" a line ahead
+      # of npm (versions bumped in git, nothing on npm). The push + release are
+      # deferred to after a successful publish below. That deferral is what kept
+      # the failed `next` publishes of 2026-08-27 harmless.
       - name: Version 🏷️
-        if: ${{ !inputs.only_publish }}
+        if: ${{ !inputs.only_publish && env.LINE == 'main' }}
+        env:
+          RELEASE_AS: ${{ inputs.release_as }}
+          PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
         run: |
-          pnpm lerna version \
-            --force-publish \
-            --conventional-commits --conventional-prerelease="*" \
-            --message "chore(release): bump version to %v" \
-            --yes \
-            --no-push \
-            --tag-version-prefix ""
+          current="$(node -p "require('./lerna.json').version")"
+
+          # A promotion PR is graduated in the PR itself (RFC #2711): the
+          # release/x.y.0 branch already carries the stable x.y.0 version,
+          # changelog and `chore(release):` commit, merged onto main. There is
+          # nothing left to version here — and re-running `lerna version x.y.0`
+          # is NOT idempotent: it re-commits and then dies on
+          # `fatal: tag 'x.y.0' already exists`, or (when the tag isn't present
+          # yet) writes a second, empty "Version bump only" x.y.0 changelog
+          # entry comparing x.y.0...x.y.0. Both verified locally in the 2.4.0
+          # rehearsal. So detect the pre-graduated promotion and skip.
+          if [ -n "$PROMOTION_VERSION" ] && [ "$current" = "$PROMOTION_VERSION" ]; then
+            echo "Promotion branch already graduated to ${current} in the PR — skipping lerna version."
+            exit 0
+          fi
+
+          # Two remaining ways to reach an explicit version: the one-time cut
+          # dispatch (release_as), and a promotion branch that was NOT
+          # pre-graduated (fallback — current != target). Both take the path below.
+          target="${RELEASE_AS:-$PROMOTION_VERSION}"
+
+          if [ -n "$target" ]; then
+            # Explicit version — the 1.0.0 cut (or any forced version via
+            # workflow_dispatch), and a not-pre-graduated promotion fallback. The
+            # explicit target overrides conventional-commit *derivation*, but
+            # --conventional-commits is still required: it is also what writes
+            # CHANGELOG.md. Without it lerna bumps the versions and writes no
+            # changelog entry at all, and the release-notes extraction below then
+            # silently picks up the PREVIOUS version's section. Verified both
+            # ways on a scratch fork (#2769).
+            echo "Versioning explicitly to ${target}."
+            pnpm lerna version "$target" \
+              --force-publish \
+              --conventional-commits \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          else
+            # Standing path (push: main). Whether this is still a prerelease
+            # line is a property of the CURRENT VERSION, not of a flag someone
+            # has to remember to flip: while `main` sits on `0.2.0-alpha.N`,
+            # --conventional-prerelease keeps it there; the moment the cut sets a
+            # stable `1.0.0`, the same condition graduates every later push to
+            # `X.Y.Z` under `latest`.
+            #
+            # Deriving it leaves no window. Dropping the flag by hand needs the
+            # removal to be atomic with the 1.0.0 bump — too early and the next
+            # `fix:` publishes a premature stable `0.2.0`, too late and it
+            # publishes `1.0.1-alpha.0` under `latest` — and #2769 finding 15
+            # showed the "merge is a no-op" assumption that was supposed to make
+            # that atomic does not hold.
+            #
+            # The `next` line decides its own line the same way, one step below.
+            case "$current" in
+              *-*)
+                echo "Prerelease line (${current}) — keeping --conventional-prerelease."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits --conventional-prerelease="*" \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+              *)
+                echo "Stable line (${current}) — publishing X.Y.Z under latest."
+                pnpm lerna version \
+                  --force-publish \
+                  --conventional-commits \
+                  --message "chore(release): bump version to %v" \
+                  --yes \
+                  --no-push \
+                  --tag-version-prefix ""
+                ;;
+            esac
+          fi
+
+      # Same deferral as the stable line above: version, commit and tag here,
+      # push only after npm accepted the packages.
+      #
+      # The shape ADR 0004 §6 asks for is `X.Y.0-next.N` — a MINOR prerelease
+      # line, because `next` is where features collect. `--conventional-prerelease`
+      # alone does not produce it: once the version is a prerelease, semver's
+      # `inc('prerelease')` only moves the counter, whatever the commit type. The
+      # base is therefore frozen by the FIRST prerelease publish on the line — and
+      # that one is a patch by construction, since `next` is branched off a stable
+      # `main` and the first thing to arrive is a forward-merged `fix:`.
+      #
+      # Measured in the #2769 rehearsal: the line produced `1.0.3-next.0` (two
+      # `fix:` commits) and then `1.0.3-next.1` — the latter containing a FEATURE,
+      # with the minor never moving. `flow@next` would advertise a patch while
+      # shipping features, against ADR 0005.
+      #
+      # Hence the seed. It is needed in TWO situations, not one:
+      #
+      #   a) The line is created — `next` is branched off a stable `main`.
+      #   b) The line was promoted — `next` was merged into `main`, `main`
+      #      graduated to that version, and `next` kept its own. Per ADR 0004 §7
+      #      the back-merge is churn-only and the driver keeps `next`'s version,
+      #      so the base SURVIVES the promotion. `next` at `2.1.0-next.5` with
+      #      `main` graduated to `2.1.0` would keep producing `2.1.0-next.6` — a
+      #      prerelease of an already-released version, which semver sorts BELOW
+      #      `2.1.0`. `flow@next` would then advertise a lower version than
+      #      `flow@latest`, the exact opposite of §6.
+      #
+      # Both collapse into one rule: if the base version of `next` is at or below
+      # what `main` has already released, open a fresh minor prerelease line
+      # derived from MAIN's version — otherwise count up. Deriving from `main`
+      # rather than from `next` matters in case (b): several releases may have
+      # landed on `main` since, and `preminor` off `next`'s own stale base could
+      # still land below them.
+      - name: Version (next line) 🏷️
+        if: ${{ !inputs.only_publish && env.LINE == 'next' }}
+        run: |
+          current="$(node -p "require('./lerna.json').version")"
+          main_version="$(git show origin/main:lerna.json \
+            | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")"
+          echo "next: ${current} · main: ${main_version}"
+
+          target="$(node -e '
+            const [cur, main] = process.argv.slice(1);
+            const parts = (v) => v.split("-")[0].split(".").map(Number);
+            const cmp = (a, b) => {
+              const [x, y, z] = parts(a);
+              const [u, v, w] = parts(b);
+              return x - u || y - v || z - w;
+            };
+            if (!cur.includes("-") || cmp(cur, main) <= 0) {
+              const [M, m] = parts(main);
+              console.log(`${M}.${m + 1}.0-next.0`);
+            }
+          ' "$current" "$main_version")"
+
+          if [ -n "$target" ]; then
+            echo "Opening a fresh next line at ${target}."
+            pnpm lerna version "$target" \
+              --force-publish \
+              --conventional-commits \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          else
+            # The line is running and still ahead of `main` → count up `-next.N`.
+            pnpm lerna version \
+              --force-publish \
+              --conventional-commits --conventional-prerelease="*" \
+              --preid next \
+              --message "chore(release): bump version to %v" \
+              --yes \
+              --no-push \
+              --tag-version-prefix ""
+          fi
+
+      # AFTER the version bump, never before: some packages bake their own version
+      # into the bundle at build time (vite `define` reading package.json —
+      # remote-react-components' `dist/js/version.mjs`). Building first stamped the
+      # PREVIOUS version into every release, and `lerna publish from-package` packs
+      # whatever `dist` holds: 1.0.0 shipped `packageVersion = "0.2.0-alpha.1058"`.
+      #
+      # Versioning is cheap and touches no build output, so nothing is lost by
+      # putting the expensive step second — and a build failure here still aborts
+      # before the publish, with the release commit unpushed.
+      - name: Build 🔨
+        run: pnpm build
+
+      # Tripwire for the ordering above — the mismatch is otherwise invisible
+      # (nothing fails, the wrong string just ships).
+      - name: Verify the stamped package version 🔍
+        run: |
+          pkg=packages/remote-react-components
+          v="$(node -p "require('./${pkg}/package.json').version")"
+          grep -qE "packageVersion *= *\"${v}\"" "${pkg}/dist/js/version.mjs" \
+            || { echo "::error::${pkg}/dist/js/version.mjs does not stamp ${v} — the build ran against a stale manifest."; exit 1; }
 
       # Provenance stays enabled (npm Trusted Publisher OIDC). A Rekor 409
       # ("equivalent entry already exists") is no longer fatal: @sigstore/sign is
       # patched (patches/@sigstore__sign@4.1.1.patch) to default fetchOnConflict
       # to true, so it fetches the existing transparency-log entry and the publish
       # succeeds. No retry loop — re-signing only re-collided with itself.
+      #
+      # The dist-tag is the one difference between the lines at publish time:
+      # `latest` (lerna's default) for `main`, `next` for `next` (ADR 0004 §6).
       - name: Publish 🚀
-        run: pnpm lerna publish from-package --yes --no-private --concurrency 1
+        run: |
+          if [ "$LINE" = "next" ]; then
+            pnpm lerna publish from-package --yes --concurrency 1 --dist-tag next
+          else
+            pnpm lerna publish from-package --yes --concurrency 1
+          fi
 
       # Only reached when the publish above succeeded. Now it is safe to advance
       # main and cut the GitHub release.
       - name: Push release commit & tag, create GitHub release 🚀
-        if: ${{ !inputs.only_publish }}
+        if: ${{ !inputs.only_publish && env.LINE == 'main' }}
+        env:
+          PROMOTION_VERSION: ${{ steps.ctx.outputs.version }}
+          PR: ${{ steps.ctx.outputs.pr }}
         run: |
-          tag="$(git describe --tags --abbrev=0)"
-          echo "Pushing release commit and tag ${tag} to main"
-          git push origin HEAD:main
-          git push origin "refs/tags/${tag}"
+          # The tag is the version we actually published — read it from source,
+          # NOT from `git describe`. A pre-graduated promotion (RFC #2711) creates
+          # no new tag in the Version step above, so `git describe --tags` would
+          # resolve to the previous tag (e.g. the 2.4.0-next.3 prerelease the
+          # release branch inherited) and release the wrong ref.
+          tag="$(node -p "require('./lerna.json').version")"
 
-          # Release notes = this version's section of the root changelog
-          # (everything between this version's header and the previous one).
-          awk '/^# \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+          echo "Advancing main and tagging ${tag}"
+          # No-op for a pre-graduated promotion (the version commit arrived with
+          # the merge, so HEAD is already origin/main); pushes the new commit for
+          # the one-time-cut / dispatch paths where lerna versioned above.
+          #
+          # --no-verify belongs at both pushes even with
+          # SKIP_INSTALL_SIMPLE_GIT_HOOKS set above: this is the one place where a
+          # hook aborting the push strands a release that npm has already accepted
+          # (#2932), so it does not depend on a workflow-level env var staying put.
+          git push --no-verify origin HEAD:main
+          # Pre-graduated promotion: no tag exists yet — create it at the merge
+          # commit. Cut/dispatch paths: lerna already tagged, so keep that tag.
+          git rev-parse -q --verify "refs/tags/${tag}" >/dev/null || git tag -m "${tag}" "${tag}"
+          git push --no-verify origin "refs/tags/${tag}"
+
+          # Release notes. Preferred source for a promotion: the curated,
+          # user-facing notes in the PR body, verbatim between the
+          # `<!-- release-notes:start -->` / `<!-- release-notes:end -->` markers
+          # (RFC #2711 / #2724). conventional-changelog cannot produce these — a
+          # prerelease→stable graduation yields only a "Version bump only"
+          # CHANGELOG entry (verified in the 2.4.0 rehearsal). Fall back to the
+          # changelog section when there is no PR or no marker block (the one-time
+          # 1.0.0 cut, or a plain dispatch).
+          notes=""
+          if [ -n "${PR}" ]; then
+            body="$(gh pr view "${PR}" --json body --jq .body || true)"
+            # Extract strictly between the markers, then trim leading/trailing
+            # blank lines — prettier may pad the block adjacent to the markers and
+            # that whitespace is not content.
+            notes="$(printf '%s\n' "$body" \
+              | awk '/<!-- release-notes:start -->/{f=1;next} /<!-- release-notes:end -->/{f=0} f' \
+              | awk '{ l[NR]=$0 }
+                     END { s=1; while (s<=NR && l[s] ~ /^[[:space:]]*$/) s++;
+                           e=NR; while (e>=s && l[e] ~/^[[:space:]]*$/) e--;
+                           for (i=s; i<=e; i++) print l[i] }')"
+          fi
+
+          if [ -n "${notes}" ]; then
+            echo "Release body: curated marker block from PR #${PR}."
+            printf '%s\n' "${notes}" > release-notes.md
+          else
+            # Changelog fallback: this version's section of the root changelog
+            # (everything between this version's header and the previous one).
+            #
+            # `#+` matches ANY header level, not just H1: conventional-changelog
+            # varies the level with the bump type, so a patch release renders as
+            # `## [1.0.1]`. Matching `^# \[` only would skip it and start at the
+            # previous H1 instead — emitting the wrong version's notes. Observed on
+            # a scratch fork (#2769): a 1.0.1 release carried the notes of the
+            # release before it.
+            echo "Release body: no marker block — falling back to CHANGELOG.md section."
+            awk '/^#+ \[/ { c++; if (c == 2) exit } c >= 1' CHANGELOG.md > release-notes.md
+          fi
+
+          # GitHub rejects a release body over 125000 characters with a 422. By
+          # this point the publish has succeeded and the tag is pushed, so failing
+          # here leaves a released-but-Release-less state that has to be cleaned up
+          # by hand. Truncating is strictly better. The check counts bytes, which
+          # for UTF-8 is >= the character count GitHub measures, so it errs safe;
+          # `iconv -c` drops the partial multi-byte sequence `head -c` may leave.
+          limit=125000
+          if [ "$(wc -c < release-notes.md)" -gt "$limit" ]; then
+            echo "::warning::Changelog section exceeds GitHub's release-body limit — truncating."
+            head -c "$((limit - 200))" release-notes.md | iconv -c -f utf-8 -t utf-8 > release-notes.trunc
+            printf '\n\n_Truncated — see `CHANGELOG.md` at tag `%s` for the full list._\n' "${tag}" >> release-notes.trunc
+            mv release-notes.trunc release-notes.md
+          fi
 
           # Mark as pre-release when the version carries a semver pre-release id
           # (e.g. 0.2.0-alpha.N), matching lerna's own --create-release behaviour.
@@ -126,3 +598,21 @@ jobs:
             --notes-file release-notes.md \
             ${prerelease}
           rm -f release-notes.md
+
+      # Same deferral, same reason — but deliberately NO GitHub Release. Per RFC
+      # #2711 the curated GitHub Release is canonical only at PROMOTION
+      # (`next → main`); cutting a prerelease Release per `X.Y.0-next.N` would
+      # just be noise. The npm publish under dist-tag `next` and the git tag here
+      # are the record of each `next` prerelease.
+      - name: Push release commit & tag (next line) 🚀
+        if: ${{ !inputs.only_publish && env.LINE == 'next' }}
+        run: |
+          # Read the tag from source, not from `git describe` — same reason as on
+          # the stable line: what we publish is what lerna.json says.
+          tag="$(node -p "require('./lerna.json').version")"
+          echo "Pushing release commit and tag ${tag} to next"
+          # --no-verify at the push itself, not only via the env var above: a hook
+          # aborting here strands a prerelease that npm has already accepted
+          # (#2932).
+          git push --no-verify origin HEAD:next
+          git push --no-verify origin "refs/tags/${tag}"

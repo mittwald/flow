@@ -49,6 +49,13 @@
   height: fit-content;
 }
 
+.pageHeading {
+  // This anchor means "the top of the page". The heading always sits within the
+  // first screenful, so a full-viewport offset clamps the jump to 0 — a fixed
+  // length would need re-tuning whenever the header or page padding changes.
+  scroll-margin-top: 100vh;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -62,12 +69,12 @@
   }
 }
 
-.tabsContainer {
+.pageContainer {
   min-width: 0;
   width: 100%;
 }
 
-.tabs {
+.pageCard {
   flex-grow: 1;
   min-width: 0;
 }
@@ -83,8 +90,18 @@
   }
 }
 
-.topContent {
-  width: 100%;
+/*
+ * Wide screens give the main navigation more room. The extra 80px go to the
+ * wrapper, so the content keeps the width it has next to a 290px navigation.
+ */
+@media (min-width: 1900px) {
+  .mainWrapper {
+    width: 1880px;
+  }
+
+  .mainNavigation {
+    width: 370px;
+  }
 }
 
 @media (max-width: 1400px) {

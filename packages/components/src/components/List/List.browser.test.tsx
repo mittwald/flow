@@ -9,7 +9,7 @@ import {
   ListStaticData,
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { type ReactNode } from "react";
+import { use, useState, type ReactNode } from "react";
 import { test } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import {
@@ -518,8 +518,9 @@ describe("Infinite scroll", () => {
     await (await page.getByText("Item: 2").element()).scrollIntoView();
     await expect.element(page.getByText("Item: 5")).toBeInTheDocument();
 
-    // Appending items must not re-run the render of the existing ones — their
-    // memoized item components bail out on the unchanged (id, data).
+    // Appending items must not re-run the render of the existing ones — the
+    // list model is rebuilt, but the render functions it carries come from the
+    // unchanged JSX above, so the memoized item components bail out.
     expect(renderCounts[0]).toBe(before0);
     expect(renderCounts[1]).toBe(before1);
   });
@@ -553,5 +554,101 @@ describe("Sorting", () => {
     expect(page.getByRole("grid")).toHaveTextContent(
       listItem42TextContent + listItem43TextContent,
     );
+  });
+});
+
+describe("Loading view", () => {
+  const neverResolvingPromise = new Promise(() => {
+    // never resolves
+  });
+
+  const SuspendingContent = () => {
+    use(neverResolvingPromise);
+    return null;
+  };
+
+  const getTestElementWithSuspendingItem = (viewMode: "list" | "tiles") => (
+    <List aria-label="Test" defaultViewMode={viewMode} loadingItemsCount={1}>
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
+      <ListItem<Data>
+        showTiles
+        textValue={({ num }) => String(num)}
+        loadingView={
+          <ListItemView>
+            <Content>Loading item</Content>
+          </ListItemView>
+        }
+      >
+        {({ num }) =>
+          num === 42 ? (
+            <ListItemView>
+              <Content>
+                <SuspendingContent />
+              </Content>
+            </ListItemView>
+          ) : (
+            <span>{listItem43TextContent}</span>
+          )
+        }
+      </ListItem>
+    </List>
+  );
+
+  test.each(["list", "tiles"] as const)(
+    "Suspended items use the item's loading view (%s view)",
+    async (viewMode) => {
+      await render(getTestElementWithSuspendingItem(viewMode));
+
+      // The loaded item proves the initial loading views are gone; only the
+      // suspended item still renders a loading view.
+      await expect.element(listItem43).toBeInTheDocument();
+      await expect.element(page.getByText("Loading item")).toBeInTheDocument();
+    },
+  );
+});
+
+describe("Item rendering", () => {
+  // Stable identity: the memoized item is only skipped while its data is
+  // unchanged, which is what a real loader returns between renders.
+  const selectableData: Data[] = [{ num: 42 }];
+
+  const SelectableList = () => {
+    const [selected, setSelected] = useState<number[]>([]);
+
+    return (
+      <List
+        aria-label="Test"
+        onAction={({ num }: Data) =>
+          setSelected((current) =>
+            current.includes(num)
+              ? current.filter((n) => n !== num)
+              : [...current, num],
+          )
+        }
+      >
+        <ListStaticData<Data> data={selectableData} />
+        <ListItem<Data> textValue={({ num }) => String(num)}>
+          {({ num }) => (
+            <span>
+              Item: {num} {selected.includes(num) ? "selected" : "unselected"}
+            </span>
+          )}
+        </ListItem>
+      </List>
+    );
+  };
+
+  test("items follow state the consumer renders them from", async () => {
+    await render(<SelectableList />);
+
+    await userEvent.click(page.getByText("Item: 42 unselected"));
+    await expect
+      .element(page.getByText("Item: 42 selected"))
+      .toBeInTheDocument();
+
+    await userEvent.click(page.getByText("Item: 42 selected"));
+    await expect
+      .element(page.getByText("Item: 42 unselected"))
+      .toBeInTheDocument();
   });
 });

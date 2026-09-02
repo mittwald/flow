@@ -28,6 +28,7 @@ export interface MessageProps
     PropsWithElementType<"article" | "li"> {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
+  /** A custom background color of the message as a CSS color value. */
   color?: string;
 }
 
@@ -50,6 +51,12 @@ export const Message = flowComponent("Message", (props) => {
     : undefined;
 
   const formatter = useLocalizedStringFormatter(locales, "Message");
+
+  const senderContext: PropsContext["Combine"] = {
+    wrapWith: <ClearPropsContext />,
+    className: styles.user,
+    Avatar: { Initials: { "aria-hidden": true } },
+  };
 
   const propsContext: PropsContext = {
     Content: {
@@ -83,11 +90,9 @@ export const Message = flowComponent("Message", (props) => {
         },
       },
       Text: { className: styles.date },
-      Align: {
-        wrapWith: <ClearPropsContext />,
-        className: styles.user,
-        Avatar: { Initials: { "aria-hidden": true } },
-      },
+      Combine: senderContext,
+      // Deprecated alias of Combine — keep it arranged the same way.
+      Align: senderContext,
       children: dynamic((props) => (
         <>
           <Aria.VisuallyHidden>

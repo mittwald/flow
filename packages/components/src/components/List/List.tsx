@@ -1,6 +1,6 @@
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { Header } from "@/components/List/components/Header/Header";
-import headerStyles from "@/components/List/components/Header/Header.module.css";
+import headerStyles from "@/components/List/components/Header/Header.module.scss";
 import { Items } from "@/components/List/components/Items/Items";
 import { Table } from "@/components/List/components/Table";
 import ListModel from "@/components/List/model/List";
@@ -28,7 +28,7 @@ import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import DivView from "@/views/DivView";
 import type { PropsWithChildren, ReactNode } from "react";
 import Footer from "./components/Footer";
-import styles from "./List.module.css";
+import styles from "./List.module.scss";
 import { listContext } from "./listContext";
 import { ListLoaderHooks } from "@/components/List/setupComponents/ListLoaderHooks";
 import { UiComponentTunnelExit } from "../UiComponentTunnel/UiComponentTunnelExit";
@@ -57,8 +57,15 @@ export interface ListProps<T, TMeta = unknown>
    * @default false
    */
   infiniteScroll?: boolean;
+  /**
+   * Hides the pagination controls below the list.
+   *
+   * @default false
+   */
   hidePagination?: boolean;
+  /** The view rendered when a search or filter returns no results. */
   emptySearchResultView?: ReactNode;
+  /** The view rendered when the list contains no items. */
   emptyView?: ReactNode;
 }
 

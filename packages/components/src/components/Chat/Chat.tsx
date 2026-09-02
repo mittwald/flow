@@ -11,7 +11,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {
-  // Height of the chat component
+  /** The height of the chat. */
   height?: CSSProperties["height"];
 }
 
@@ -39,7 +39,9 @@ export const Chat: FC<ChatProps> = flowComponent(
       },
       Button: {
         className: dynamic((props) => {
-          return props.color === "accent" ? styles.accentButton : styles.button;
+          return props.color === "success" || props.color === "accent"
+            ? styles.successButton
+            : styles.button;
         }),
       },
     };

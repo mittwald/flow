@@ -20,7 +20,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { RadioButton, RadioGroup } from "@/components/RadioGroup";
 import { DatePicker } from "@/components/DatePicker";
 import { FieldDescription } from "@/components/FieldDescription";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTimeout } from "usehooks-ts";
 import { useModalController } from "@/lib/controller";
 
@@ -62,7 +62,7 @@ const meta: Meta<typeof Modal> = {
         <ActionGroup>
           <Action closeModal>
             <Action onAction={asyncLongFunction}>
-              <Button color="accent">Create squadron</Button>
+              <Button color="success">Create squadron</Button>
             </Action>
             <Button color="secondary" variant="soft">
               Abort
@@ -137,7 +137,7 @@ export const WithForm: Story = {
 
     return (
       <>
-        <Button color="accent" onPress={controller.open}>
+        <Button color="success" onPress={controller.open}>
           Add pilot
         </Button>
 
@@ -200,7 +200,7 @@ export const WithConfirmOnClose: Story = {
           </Content>
           <ActionGroup>
             <Action closeModal>
-              <Button color="accent">Create squadron</Button>
+              <Button color="success">Create squadron</Button>
               <Button color="secondary" variant="soft">
                 Abort
               </Button>
@@ -217,7 +217,7 @@ export const WithColumnLayout: Story = {
   render: (props) => {
     return (
       <ModalTrigger>
-        <Button color="accent">Charter a ship</Button>
+        <Button color="success">Charter a ship</Button>
 
         <Modal {...props}>
           <Heading>Charter a ship</Heading>
@@ -238,7 +238,7 @@ export const WithColumnLayout: Story = {
           </ColumnLayout>
 
           <ActionGroup>
-            <Button color="accent">Submit</Button>
+            <Button color="success">Submit</Button>
             <Action closeModal>
               <Button variant="soft" color="secondary">
                 Abort
@@ -279,69 +279,77 @@ export const WithSuspense: Story = {
 };
 
 export const LongContent: Story = {
-  render: (props) => (
-    <Modal {...props} isOpen>
-      <Heading>{dummyText.short}</Heading>
-      <Content>
-        <Section>
-          <Heading>Description</Heading>
-          <Text>
-            An SFTP user allows you to connect to your project, for example to
-            upload files.
-          </Text>
-          <ColumnLayout m={[1, 1]}>
+  render: (props) => {
+    const permissionsHeadingId = useId();
+
+    return (
+      <Modal {...props} isOpen>
+        <Heading>{dummyText.short}</Heading>
+        <Content>
+          <Section>
+            <Heading>Description</Heading>
+            <Text>
+              An SFTP user allows you to connect to your project, for example to
+              upload files.
+            </Text>
+            <ColumnLayout m={[1, 1]}>
+              <TextField isRequired>
+                <Label>Name</Label>
+              </TextField>
+              <DatePicker>
+                <Label>Expiration Date</Label>
+                <FieldDescription>
+                  After this date, the SFTP user will be deleted.
+                </FieldDescription>
+              </DatePicker>
+            </ColumnLayout>
+
+            <Heading id={permissionsHeadingId}>Permissions</Heading>
+            <Text>Select the permissions the SFTP user should have.</Text>
+            <RadioGroup
+              s={[1, 1]}
+              defaultValue="read&write"
+              aria-labelledby={permissionsHeadingId}
+            >
+              <RadioButton value="write">
+                <Text>Read Access</Text>
+                <Content>The SFTP user can view and download files.</Content>
+              </RadioButton>
+              <RadioButton value="read&write">
+                <Text>Read and Write Access</Text>
+                <Content>
+                  The SFTP user can view, edit, upload, and download files.
+                </Content>
+              </RadioButton>
+            </RadioGroup>
+
+            <Heading>Directory Selection</Heading>
+            <Text>
+              Specify the directory the SFTP user should have access to.
+            </Text>
             <TextField isRequired>
-              <Label>Name</Label>
+              <Label>Path</Label>
             </TextField>
-            <DatePicker>
-              <Label>Expiration Date</Label>
-              <FieldDescription>
-                After this date, the SFTP user will be deleted.
-              </FieldDescription>
-            </DatePicker>
-          </ColumnLayout>
 
-          <Heading>Permissions</Heading>
-          <Text>Select the permissions the SFTP user should have.</Text>
-          <RadioGroup s={[1, 1]} defaultValue="read&write">
-            <RadioButton value="write">
-              <Text>Read Access</Text>
-              <Content>The SFTP user can view and download files.</Content>
-            </RadioButton>
-            <RadioButton value="read&write">
-              <Text>Read and Write Access</Text>
-              <Content>
-                The SFTP user can view, edit, upload, and download files.
-              </Content>
-            </RadioButton>
-          </RadioGroup>
-
-          <Heading>Directory Selection</Heading>
-          <Text>
-            Specify the directory the SFTP user should have access to.
-          </Text>
-          <TextField isRequired>
-            <Label>Path</Label>
-          </TextField>
-
-          <Heading>{dummyText.short}</Heading>
-          <Text>{dummyText.long}</Text>
-          <Heading>{dummyText.short}</Heading>
-          <Text>{dummyText.long}</Text>
-          <Heading>{dummyText.short}</Heading>
-          <Text>{dummyText.long}</Text>
-          <Heading>{dummyText.short}</Heading>
-          <Text>{dummyText.long}</Text>
-        </Section>
-      </Content>
-      <ActionGroup>
-        <Action closeModal>
-          <Button color="accent">Create SFTP user</Button>
-          <Button variant="soft" color="secondary">
-            Abort
-          </Button>
-        </Action>
-      </ActionGroup>
-    </Modal>
-  ),
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+            <Heading>{dummyText.short}</Heading>
+            <Text>{dummyText.long}</Text>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeModal>
+            <Button color="success">Create SFTP user</Button>
+            <Button variant="soft" color="secondary">
+              Abort
+            </Button>
+          </Action>
+        </ActionGroup>
+      </Modal>
+    );
+  },
 };

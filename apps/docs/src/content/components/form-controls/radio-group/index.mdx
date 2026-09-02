@@ -1,0 +1,110 @@
+---
+component: RadioGroup
+description:
+  Eine RadioGroup ermöglicht die Auswahl genau einer Option aus einer Gruppe.
+---
+
+<LiveCodeEditor stretch />
+
+---
+
+# Best Practices
+
+- Beschrifte die RadioGroup mit einem [Label](/components/content/label).
+  Übernimmt ein nahes Element wie eine [Heading](/components/content/heading)
+  diese Rolle, setze stattdessen `aria-label` bzw. `aria-labelledby`.
+- Nutze bei vielen Optionen ein [Select](/components/form-controls/select), um
+  die Oberfläche aufgeräumt zu halten. Als Faustregel ab etwa sieben Optionen.
+- Wähle zu Beginn eine sinnvolle Option vor. Das vermeidet unnötige
+  Fehlermeldungen.
+- Ordne die Optionen nach Wichtigkeit. Die wichtigste steht oben; eine Option
+  mit weitreichenden Folgen gehört nach unten und ist nie vorausgewählt.
+- Formuliere die Optionen klar unterscheidbar. So erkennt der User die passende
+  Wahl auf einen Blick.
+- Folge in einem Formular dem [Form-Pattern](/patterns/patterns/forms). Dort
+  sind Aufbau, Validierung und Fehlerbehandlung geregelt.
+
+---
+
+# States
+
+In einer RadioGroup sollte immer eine sinnvolle Option vorausgewählt
+(**Selected**) sein.
+
+## Disabled
+
+Um Optionen in der RadioGroup zu deaktivieren, lässt sich der Disabled-State für
+die gesamte RadioGroup oder gezielt für einzelne Radios bzw. RadioButtons
+setzen.
+
+<LiveCodeEditor example="states" editorCollapsed stretch />
+
+## Error
+
+Ein Error-State wird angezeigt, wenn etwas schiefgelaufen ist (siehe
+[Fehlermeldungen](/foundations/content-guidelines/fehlermeldungen)). Da meist
+eine Option vorselektiert ist, wird er nur selten benötigt.
+
+<LiveCodeEditor example="error" editorCollapsed stretch />
+
+---
+
+# RadioButtons
+
+Um Inhalte stärker hervorzuheben und die Klickfläche zu vergrößern, lassen sich
+statt `<Radio />` auch `<RadioButton />` nutzen.
+
+<LiveCodeEditor example="buttons" editorCollapsed stretch />
+
+## Weiterer Inhalt
+
+Anstelle einer einfachen Bezeichnung kann der `<RadioButton />` auch mit
+zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
+`<RadioButton />` [Text](/components/content/text) für eine Überschrift und
+`<Content />` für Fließtext.
+
+<LiveCodeEditor example="content" editorCollapsed stretch />
+
+## Benutzerdefinierte Spalten
+
+Die RadioGroup verwendet das
+[ColumnLayout](/components/structure/column-layout), um eine Anpassung der
+Spalten zu ermöglichen. Bei der Verwendung von RadioButtons entspricht der
+Default dem des ColumnLayouts, während Radios im Default untereinander angezeigt
+werden.
+
+<LiveCodeEditor example="customColumns" editorCollapsed stretch />
+
+---
+
+# FieldDescription
+
+Für eine kurze Hilfestellung zu den Optionen kann unterhalb der `<Radio />` oder
+`<RadioButton />` eine `<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed stretch />
+
+---
+
+# Kombiniere mit …
+
+## ContextualHelp
+
+Benutze die [ContextualHelp](/components/overlays/contextual-help) Component,
+wenn du weitere Informationen bereitstellen möchtest, und diese zu lang für die
+FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed stretch />
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed stretch />
+
+---
+
+# Properties
+
+<PropertiesTables />

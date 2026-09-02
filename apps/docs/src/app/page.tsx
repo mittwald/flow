@@ -1,7 +1,6 @@
 "use client";
 import {
   AccentBox,
-  Badge,
   Color,
   ColumnLayout,
   Flex,
@@ -16,39 +15,13 @@ import {
 } from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import { FlowLogo } from "@/app/_components/layout/Header/FlowLogo";
-import darkmodeBg from "../../public/assets/darkmode-bg.png";
+import flow10Tile from "../../public/assets/flow-1-0-tile.png";
 import developerTile from "../../public/assets/developer-tile.png";
 import extensionsTile from "../../public/assets/extensions-tile.webp";
-import clsx from "clsx";
-import codeStyles from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor.module.css";
-import {
-  LiveEditor,
-  LivePreview,
-  LiveProvider,
-} from "@mfalkenberg/react-live-ssr";
-import { flowTheme } from "@/lib/liveCode/components/LiveCodeEditor/lib/flowTheme";
-import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
-import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
+import { ComposingCodeExample } from "@/app/_components/ComposingCodeExample";
 import styles from "./page.module.scss";
 
 const Home: FC = () => {
-  const transformCode = (code: string) => {
-    try {
-      return extractDefaultExport(code);
-    } catch (error) {
-      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-    }
-  };
-
-  const code =
-    'import { Button } from "@mittwald/flow-react-components";\n' +
-    "\n" +
-    '<Button color="primary"> \n' +
-    "  Button\n" +
-    "</Button>";
-
-  const scope = extractEditorScope(code);
-
   return (
     <Flex direction="column" className={styles.wrapper} align="center">
       <Flex
@@ -72,34 +45,30 @@ const Home: FC = () => {
                 fördern nutzerzentriertes, barrierearmes Design und sorgen für
                 eine starke Developer Experience.
               </Text>
-              <Link href="/01-get-started/installation">Zu Get Started</Link>
+              <Link href="/get-started/installation">Zu Get Started</Link>
             </Section>
           </AccentBox>
         </LayoutCard>
         <LayoutCard>
           <AccentBox
-            backgroundImage={darkmodeBg.src}
+            backgroundImage={flow10Tile.src}
             color="light-static"
-            className={styles.darkModeTile}
+            className={styles.releaseTile}
           >
-            <Section className={styles.darkModeContent}>
-              <Heading>
-                Dark-Mode entdecken<Badge color="violet">Neu</Badge>
-              </Heading>
+            <Section className={styles.releaseContent}>
+              <Heading>Flow 1.0 ist da</Heading>
               <Text>
-                Carpe Noctem - Nutze die Dunkelheit! Ab jetzt unterstützt unser
-                Design System ein Light- und ein Dark-Theme.
+                Eine kleine Zahl, ein großer Schritt. Flow 1.0 macht unser
+                Design System versioniert, stabil und verlässlich.
               </Text>
-              <Link href="/02-foundations/01-design/03-themes">
-                Mehr zu Themes
-              </Link>
+              <Link href="/releases">Zu Releases</Link>
             </Section>
           </AccentBox>
         </LayoutCard>
       </ColumnLayout>
 
-      <LayoutCard className={styles.codeTile}>
-        <ColumnLayout l={[1, 1]} s={[1]} m={[1]} gap="xl">
+      <LayoutCard>
+        <ColumnLayout l={[1]} m={[1]} s={[1]} gap="xl">
           <Section>
             <Heading>Fokus auf Developer Experience</Heading>
             <Text>
@@ -112,23 +81,11 @@ const Home: FC = () => {
               </Link>{" "}
               verfügbar und hier im Styleguide dokumentiert.
             </Text>
-            <Link href="/04-components/actions/action-group/overview">
+            <Link href="/components/actions/action-group">
               Zu den Components
             </Link>
           </Section>
-          <LiveProvider transformCode={transformCode} code={code} scope={scope}>
-            <div className={clsx(codeStyles.liveCodeEditor)}>
-              <LivePreview className={clsx(codeStyles.preview)} />
-
-              <div className={codeStyles.editorContainer}>
-                <LiveEditor
-                  tabMode="focus"
-                  theme={flowTheme}
-                  className={codeStyles.editor}
-                />
-              </div>
-            </div>
-          </LiveProvider>
+          <ComposingCodeExample />
         </ColumnLayout>
       </LayoutCard>
 
@@ -199,7 +156,7 @@ const Home: FC = () => {
             <Text>
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
-            <Link href="/02-foundations/01-design/01-design-tokens">
+            <Link href="/foundations/design/design-tokens">
               Zu den Foundations
             </Link>
           </Section>
@@ -211,9 +168,7 @@ const Home: FC = () => {
               Finde passende Pattern für häufige Design- und
               Interaktionsaufgaben.
             </Text>
-            <Link href="/03-patterns/01-patterns/anlegeprozess">
-              Zu den Patterns
-            </Link>
+            <Link href="/patterns/patterns/anlegeprozess">Zu den Patterns</Link>
           </Section>
         </LayoutCard>
         <LayoutCard>
@@ -222,7 +177,7 @@ const Home: FC = () => {
             <Text>
               Nutze unseren modularen Components-Baukasten für dein Projekt.
             </Text>
-            <Link href="/04-components/actions/action-group">
+            <Link href="/components/actions/action-group">
               Zu den Components
             </Link>
           </Section>

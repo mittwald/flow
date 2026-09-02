@@ -2,7 +2,7 @@ import "../src/styles";
 import type { Preview } from "@storybook/react";
 import type React from "react";
 import { useEffect } from "react";
-import { ThemeProvider, useTheme } from "next-themes";
+import { ThemeProvider, useTheme } from "@teispace/next-themes/client";
 import { addons } from "storybook/manager-api";
 
 const ThemeDecorator: React.FC<{

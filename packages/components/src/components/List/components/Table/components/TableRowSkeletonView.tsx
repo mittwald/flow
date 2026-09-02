@@ -2,7 +2,7 @@ import { useList } from "@/components/List/hooks/useList";
 import TableRowView from "@/views/TableRowView";
 import clsx from "clsx";
 import type { FC } from "react";
-import styles from "../Table.module.css";
+import styles from "../Table.module.scss";
 import invariant from "invariant";
 import TableCellView from "@/views/TableCellView";
 import SkeletonTextView from "@/views/SkeletonTextView";

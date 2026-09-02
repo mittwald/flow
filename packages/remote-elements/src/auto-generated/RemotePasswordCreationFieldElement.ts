@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components/password-tools";
-export type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components/password-tools";
+import type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components";
+export type { PasswordCreationFieldProps as RemotePasswordCreationFieldElementProps } from "@mittwald/flow-react-components";
 
 export class RemotePasswordCreationFieldElement extends FlowRemoteElement<RemotePasswordCreationFieldElementProps> {
   static override get remoteAttributes() {
@@ -43,7 +43,6 @@ export class RemotePasswordCreationFieldElement extends FlowRemoteElement<Remote
       name: {},
       pattern: {},
       placeholder: {},
-      render: {},
       slot: {},
       spellCheck: {},
       translate: {},

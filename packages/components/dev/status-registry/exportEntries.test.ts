@@ -7,7 +7,7 @@ test.each([
   [".", `${PKG}`],
   ["./nextjs", `${PKG}/nextjs`],
   ["./flr-universal", `${PKG}/flr-universal`],
-  ["./password-tools", `${PKG}/password-tools`],
+  ["./mittwald-password-tools-js", `${PKG}/mittwald-password-tools-js`],
 ] as const)("specifierOf(%s) === %s", (key, expected) => {
   expect(specifierOf(key, PKG)).toBe(expected);
 });
@@ -18,6 +18,6 @@ test("STATUS_EXPORT_ENTRIES covers the five component-bearing entries only", () 
     "./flr-universal",
     "./nextjs",
     "./react-hook-form",
-    "./password-tools",
+    "./mittwald-password-tools-js",
   ]);
 });

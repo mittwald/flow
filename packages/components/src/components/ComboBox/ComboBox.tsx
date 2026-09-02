@@ -24,6 +24,7 @@ export interface ComboBoxProps
     Pick<OptionsProps, "renderEmptyState">,
     PropsWithChildren,
     FlowComponentProps<HTMLInputElement> {
+  /** Called with the key of the selected option whenever the selection changes. */
   onChange?: (value: string) => void;
 }
 

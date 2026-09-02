@@ -40,6 +40,7 @@ test.each(testEnvironments)(
               <Heading>
                 Heading<Badge>Badge</Badge>
               </Heading>
+              <Link>Link</Link>
               <Switch>Switch</Switch>
               {showButton && (
                 <Button variant="soft" color="secondary">

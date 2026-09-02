@@ -16,10 +16,18 @@ interface Props {
   selection: Aria.Key | undefined;
   onContextMenuSelectionChange: (key: Aria.Key) => void;
   disabledKeys?: Iterable<Aria.Key>;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 }
 
 export const TabList: FC<Props> = (props) => {
-  const { selection, disabledKeys, onContextMenuSelectionChange } = props;
+  const {
+    selection,
+    disabledKeys,
+    onContextMenuSelectionChange,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
+  } = props;
 
   const titleCollapsedElementId = useId();
   const overflowObserver = useObserveOverflow();
@@ -37,7 +45,12 @@ export const TabList: FC<Props> = (props) => {
   };
 
   const regularTabTitles = (
-    <Aria.TabList className={styles.titles} ref={setTitlesRef}>
+    <Aria.TabList
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledby}
+      className={styles.titles}
+      ref={setTitlesRef}
+    >
       <UiComponentTunnelExit id="Titles" component="Tabs" />
     </Aria.TabList>
   );

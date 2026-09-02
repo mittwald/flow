@@ -1,4 +1,5 @@
 import { testEnvironments } from "@/tests/lib/environments";
+import { alphaColorAccentBoxBackground } from "@/tests/lib/alphaColorAccentBoxBackground";
 import { test } from "vitest";
 import {
   alphaColors,
@@ -18,11 +19,7 @@ test.each(testEnvironments)(
       <Flex gap="m" direction="column">
         {colors.map((color) => (
           <Wrap if={isAlphaColor(color)} key={color}>
-            <AccentBox
-              backgroundColor={
-                color.startsWith("light") ? "#3A434E" : "neutral"
-              }
-            >
+            <AccentBox backgroundColor={alphaColorAccentBoxBackground(color)}>
               <Markdown color={color}>
                 {"## Heading 2\n" +
                   "A long time ago in a galaxy **far, far away** the Rebel Alliance struck `a decisive blow` against the [Galactic Empire](#)."}

@@ -78,6 +78,7 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
       contextMenu: {},
       datatype: {},
       defaultChecked: {},
+      defaultExpanded: {},
       defaultValue: {},
       dir: {},
       draggable: {},

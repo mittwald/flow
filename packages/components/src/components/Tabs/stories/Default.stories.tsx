@@ -20,6 +20,9 @@ const meta: Meta<typeof Tabs> = {
   parameters: {
     controls: { disable: true },
   },
+  args: {
+    "aria-label": "Mailbox settings",
+  },
   render: (props) => {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>
@@ -53,7 +56,9 @@ const meta: Meta<typeof Tabs> = {
           <Section>
             <Header>
               <Heading>Spam protection</Heading>
-              <Switch>Spam protection</Switch>
+              <Switch>
+                <Label>Spam protection</Label>
+              </Switch>
             </Header>
             <Text>
               The spam filter protects you from unwanted transmissions. Nobody

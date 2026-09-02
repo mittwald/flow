@@ -2,6 +2,7 @@
   color: var(--heading--color);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
+  text-wrap-style: pretty;
 
   --heading-line-height: calc(var(--font-size) * var(--line-height));
 
@@ -26,15 +27,12 @@
       display: inline-block;
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
-
-    &:not(:last-child):has(+ .headingContent:not(:empty)) {
-      margin-inline-end: var(--heading--icon-to-text-spacing);
-    }
   }
 
   .headingContent {
     vertical-align: bottom;
     display: inline-flex;
+    margin-inline-start: var(--heading--icon-to-text-spacing);
     min-height: var(--heading-line-height);
     align-items: center;
     gap: var(--heading--icon-to-text-spacing);

@@ -1,12 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
+import { IconContextMenu, IconEdit } from "@/components/Icon/components/icons";
 import type { MarkdownProps } from "@/components/Markdown";
 import ReactMarkdown from "react-markdown";
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  MenuItem,
+} from "@/components/ContextMenu";
+import { Modal, ModalTrigger } from "@/components/Modal";
+import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
+import { Text } from "@/components/Text";
+import { Action } from "@/components/Action";
+import { ActionGroup } from "@/components/ActionGroup";
+import { IconSignature } from "@tabler/icons-react";
+import { Icon } from "@/components/Icon";
+import { Color } from "@/components/Color";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -99,18 +114,7 @@ const DemoMentionMarkdownPreview = ({
       components={{
         a: ({ children, href }) => {
           if (href?.includes("mention:")) {
-            return (
-              <strong
-                style={{
-                  color: "var(--color--primary)",
-                  background: "var(--color--primary-subtle)",
-                  borderRadius: "var(--border-radius-pill)",
-                  padding: "0 var(--space-1)",
-                }}
-              >
-                @{children}
-              </strong>
-            );
+            return <Color color="teal">@{children}</Color>;
           }
 
           return <a href={href}>{children}</a>;
@@ -126,7 +130,7 @@ const DemoMentionMarkdownPreview = ({
   </div>
 );
 
-export const WithCustomMentionPreview: Story = {
+export const WithCustomMarkdownComponent: Story = {
   args: {
     defaultValue: "Say hello to [Luke Skywalker](mention:user-luke)",
   },
@@ -135,4 +139,79 @@ export const WithCustomMentionPreview: Story = {
       <Label>Message</Label>
     </MarkdownEditor>
   ),
+};
+
+export const WithCustomToolbarTool: Story = {
+  render: (props) => {
+    const [value, setValue] = useState("# Message\n\nHello there");
+
+    const insertAtEnd = (content: string) => {
+      setValue((currentValue) => `${currentValue}${content}`);
+    };
+
+    return (
+      <MarkdownEditor {...props} value={value} onChange={setValue}>
+        <Label>Message</Label>
+        <Button
+          aria-label="Insert signature"
+          onPress={() => {
+            const signature = "\n\n-- Flow Team";
+            if (value.endsWith(signature)) {
+              return;
+            }
+
+            insertAtEnd(signature);
+          }}
+        >
+          <Icon>
+            <IconSignature />
+          </Icon>
+        </Button>
+        <ContextMenuTrigger>
+          <Button aria-label="Open snippets">
+            <IconContextMenu />
+          </Button>
+          <ContextMenu
+            onAction={(key) => {
+              if (key === "intro") {
+                insertAtEnd("## Quick intro\n\nThanks for your message.");
+              }
+              if (key === "closing") {
+                insertAtEnd("\n\nBest regards,\nFlow Team");
+              }
+            }}
+          >
+            <MenuItem id="intro">Insert intro</MenuItem>
+            <MenuItem id="closing">Insert closing</MenuItem>
+          </ContextMenu>
+        </ContextMenuTrigger>
+        <ModalTrigger>
+          <Button aria-label="Open templates">
+            <IconEdit />
+          </Button>
+          <Modal>
+            <Heading>Insert template</Heading>
+            <Content>
+              <Text>Insert a predefined answer template into the editor.</Text>
+            </Content>
+            <ActionGroup>
+              <Action closeModal>
+                <Button
+                  color="success"
+                  onPress={() => {
+                    insertAtEnd("## Next steps\n\n- Review content\n- Publish");
+                  }}
+                >
+                  Insert template
+                </Button>
+                <Button color="secondary" variant="soft">
+                  Cancel
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Modal>
+        </ModalTrigger>
+      </MarkdownEditor>
+    );
+  },
 };

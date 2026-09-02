@@ -1,0 +1,52 @@
+---
+component: CheckboxButton
+description: Der CheckboxButton ist eine auffälligere Variante der Checkbox.
+---
+
+<LiveCodeEditor />
+
+---
+
+# Best Practices
+
+- Wähle den initialen Zustand nachvollziehbar und sinnvoll.
+- Ordne mehrere CheckboxButtons logisch und nachvollziehbar an. Mehr dazu unter
+  [CheckboxGroup](/components/form-controls/checkbox-group).
+- Nutze für eine kompaktere, unauffälligere Auswahl alternativ die
+  [Checkbox](/components/form-controls/checkbox).
+
+## CheckboxButton vs. Switch
+
+Mit den Components CheckboxButton und [Switch](/components/form-controls/switch)
+können Optionen aktiviert/ausgewählt werden.
+
+<DoAndDont>
+  <Plain heading="Verwende einen CheckboxButton, um z. B. ...">
+    - dem User eine Auswahloption zur Bestätigung zu geben.
+    - Auswahlmöglichkeiten in einem Formular anzubieten, die gespeichert werden müssen.
+
+  </Plain>
+
+  <Plain heading="Verwende einen Switch, um z. B. ...">
+    - eine Funktion direkt zu aktivieren oder zu deaktivieren.
+    - eine Einstellung sofort zu ändern, ohne sie separat speichern zu müssen.
+
+  </Plain>
+</DoAndDont>
+
+---
+
+# Kombiniere mit …
+
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung findest du in der Component
+[Form (React Hook Form)](/components/react-hook-form/form).
+
+<LiveCodeEditor example="form" editorCollapsed />
+
+---
+
+# Properties
+
+<PropertiesTables />

@@ -5,13 +5,7 @@ import { extractTextFromPath } from "@/app/_lib/extractTextFromPath";
 import { extractHeadings, mdxToPlainText } from "@/lib/search/plainText";
 import type { SearchHeading, SearchIndexEntry } from "@/lib/search/types";
 
-const COMPONENTS_SEGMENT = "04-components";
-
-const TAB_LABELS: Record<string, string> = {
-  overview: "Overview",
-  guidelines: "Guidelines",
-  develop: "Develop",
-};
+const COMPONENTS_SEGMENT = "components";
 
 interface ParsedFile {
   segments: string[];
@@ -85,43 +79,14 @@ export const buildSearchIndex = (
       if (file.segments.length !== 3 || !group || !component) {
         continue;
       }
+      // A component is a single index.mdx holding the whole page.
+      if (file.name !== "index") {
+        continue;
+      }
       const meta = componentMeta.get(`${group}/${component}`);
       const title = meta?.title ?? extractTextFromPath(component);
       const breadcrumb = [section, extractTextFromPath(group)];
-      const basePath = `/${COMPONENTS_SEGMENT}/${group}/${component}`;
-
-      if (file.name === "index") {
-        const hasOverview = parsed.some(
-          (other) =>
-            other.segments[0] === COMPONENTS_SEGMENT &&
-            other.segments[1] === group &&
-            other.segments[2] === component &&
-            other.name === "overview",
-        );
-        if (hasOverview) {
-          continue;
-        }
-        const url = `${basePath}/overview`;
-        entries.push({
-          id: url,
-          url,
-          title,
-          section,
-          breadcrumb,
-          description: meta?.description,
-          headings: [],
-          content: meta?.description ?? "",
-        });
-        continue;
-      }
-
-      const tab = TAB_LABELS[file.name];
-      if (!tab) {
-        continue;
-      }
-      const url = `${basePath}/${file.name}`;
-      const isOverview = file.name === "overview";
-      const description = isOverview ? meta?.description : undefined;
+      const url = `/${COMPONENTS_SEGMENT}/${group}/${component}`;
       const body = mdxToPlainText(file.content);
 
       entries.push({
@@ -130,10 +95,11 @@ export const buildSearchIndex = (
         title,
         section,
         breadcrumb,
-        tab,
-        description,
+        description: meta?.description,
         headings: toHeadings(file.content),
-        content: description ? `${description} ${body}`.trim() : body,
+        content: meta?.description
+          ? `${meta.description} ${body}`.trim()
+          : body,
       });
       continue;
     }

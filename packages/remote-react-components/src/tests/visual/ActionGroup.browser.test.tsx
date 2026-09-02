@@ -66,14 +66,14 @@ test.each(testEnvironments)(
           <Button variant="soft" color="secondary">
             Abort
           </Button>
-          <Button color="accent">Create customer</Button>
+          <Button color="success">Create customer</Button>
           <Button variant="soft" color="secondary">
             Save as draft
           </Button>
         </ActionGroup>
         <Separator />
         <ActionGroup preserveOrder>
-          <Button color="accent">Primary</Button>
+          <Button color="success">Primary</Button>
           <Button variant="soft" color="secondary">
             Abort
           </Button>

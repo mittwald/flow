@@ -11,6 +11,7 @@ import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleT
 import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 import { createCustomComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import { usePathname } from "next/navigation";
+import { getWireframe } from "@/app/components/_components/wireframe/registry";
 
 interface Props {
   mdxFile: SerializedMdxFile;
@@ -163,8 +164,30 @@ export const MdxFileView: FC<Props> = (props) => {
     />
   );
 
+  const WireframePreview: FC = () => {
+    const Wireframe = getWireframe(mdxFile.slugs[1] ?? "");
+    return (
+      <div
+        aria-hidden
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "var(--size-px--l)",
+          background: "var(--neutral--color--200)",
+          border: "1px solid var(--neutral--color--300)",
+          borderRadius: "var(--corner-radius--l)",
+          minHeight: "stretch",
+        }}
+      >
+        <Wireframe />
+      </div>
+    );
+  };
+
   const mdxComponents = {
     LiveCodeEditor: ExampleLiveCodeEditor,
+    Wireframe: WireframePreview,
     PropertiesTables: ExamplePropertiesTables,
     Do: ExampleDo,
     Dont: ExampleDont,

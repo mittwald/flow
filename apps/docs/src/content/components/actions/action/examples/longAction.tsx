@@ -1,0 +1,9 @@
+import {
+  Action,
+  Button,
+} from "@mittwald/flow-react-components";
+import { sleepLong } from "@/content/components/actions/action/examples/lib";
+
+<Action onAction={sleepLong}>
+  <Button color="success">Speichern</Button>
+</Action>;

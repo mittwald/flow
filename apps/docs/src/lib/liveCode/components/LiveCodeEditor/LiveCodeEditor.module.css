@@ -6,7 +6,8 @@
   justify-content: center;
   gap: var(--size-rem--m);
 
-  > :global(.flow--truncate) {
+  > :global(.flow--truncate),
+  > :global(.flow--heading) {
     align-self: normal;
   }
 
@@ -41,8 +42,8 @@
   background-color: var(--neutral--color--100);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   justify-content: center;
+  position: relative;
 
   &.darkBackground,
   &.darkBackground.mobile .preview {
@@ -88,22 +89,6 @@
     background-color: var(--code-block--background-color) !important;
     font-size: var(--font-size-text--s);
   }
-
-  .staticModal {
-    --modal--size--s: auto;
-    --modal--size--m: auto;
-    --modal--size--l: auto;
-
-    > div {
-      pointer-events: auto;
-      height: unset;
-      padding: unset;
-      justify-content: unset;
-      align-items: unset;
-      position: unset;
-      box-shadow: var(--shadow--overlay);
-    }
-  }
 }
 
 .editorContainer {
@@ -129,10 +114,75 @@
   margin-block-start: auto;
   background-color: var(--neutral--color--100);
   border-top: 1px solid var(--border-color);
+  border-end-start-radius: var(--corner-radius--m);
+  border-end-end-radius: var(--corner-radius--m);
   display: flex;
   justify-content: center;
 
   button {
     padding-block: var(--size-px--s);
   }
+}
+
+.resizeTrack {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: hidden;
+  width: 100%;
+  padding: var(--size-px--l) var(--size-px--l) var(--size-px--m);
+}
+
+.dragging {
+  /* Without pointer capture a drag would otherwise select text on the way. */
+  user-select: none;
+
+  /*
+   * React Aria drops the pressed state as soon as the pointer leaves the
+   * handle, so the background flickered while dragging. Retints the Button
+   * through its own tokens rather than outspecifying its rules. Both families
+   * are set because Button's `@extend .primary` widens the primary rule to
+   * every plain button, whatever its color.
+   */
+  .resizeHandle {
+    --button--primary-plain-background-color--default: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--primary-plain-background-color--hover: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--secondary-plain-background-color--default: var(
+      --button--secondary-plain-background-color--pressed
+    );
+    --button--secondary-plain-background-color--hover: var(
+      --button--secondary-plain-background-color--pressed
+    );
+  }
+}
+
+.resizeFrame {
+  flex: 0 0 auto;
+
+  /*
+   * Until the track is measured no width is set, and the frame would be as
+   * narrow as its content. Filling the track instead lands on exactly the
+   * measured maximum, so the first paint already has the final size.
+   */
+  &.unmeasured {
+    flex: 1 1 auto;
+  }
+}
+
+/* The LayoutCard around it already pads the container. */
+.framedPreview {
+  padding: 0;
+}
+
+.resizeHandle {
+  flex: 0 0 auto;
+  margin-inline-start: var(--size-px--xs);
+
+  /* Everything else is the plain Button's own styling. */
+  cursor: col-resize;
+  touch-action: none;
 }

@@ -12,6 +12,11 @@ export interface TruncateProps
     PropsWithChildren,
     PropsWithClassName,
     Omit<ReactTruncateProps, "text" | "width"> {
+  /**
+   * The `title` attribute of the elements root, which browsers show as a native
+   * tooltip on hover. It is not derived from the children — pass the full text
+   * to make it readable while truncated.
+   */
   title?: string;
 }
 

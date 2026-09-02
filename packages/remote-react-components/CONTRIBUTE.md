@@ -22,6 +22,20 @@ are available and can conveniently be used with `test.each`.
 
 Have a look at existing tests for reference.
 
+### Light and Dark Theme
+
+The suite runs in **Webkit and Firefox**, and the browser also decides the theme
+— instead of doubling the run time with a second theme axis:
+
+| Browser | Theme                                                            |
+| ------- | ---------------------------------------------------------------- |
+| Webkit  | light                                                            |
+| Firefox | dark (`data-theme="dark"`, see `dev/vitest/setupVisualTheme.ts`) |
+
+So the `*-firefox-*.png` baselines are **dark by design**, the `*-webkit-*.png`
+baselines are light. A single full run covers both themes; filtering to one
+browser (`--browser.name=webkit`) only verifies one of them.
+
 ### Running the Tests
 
 First, install the required test browsers:
@@ -36,8 +50,14 @@ You can then run the tests using the following command:
 pnpm nx run remote-react-components:test:visual --browser.name=webkit
 ```
 
-The tests run **headless** and only in Webkit. Firefox is also available as a
-browser option, but it has issues with parallelized testing.
+The tests run **headless** and one file at a time. Omitting `--browser.name`
+runs both browsers — and therefore both themes — as the scheduled run and the
+`run-visual-tests` label do.
+
+One file at a time is required: firefox renders no focus styling in a page that
+is not the focused one, and running files in parallel leaves most of them
+unfocused. It is set in the visual project's vitest config, so there is no flag
+to pass.
 
 If differences are detected, corresponding screenshots are created and listed in
 the test results.
@@ -48,6 +68,16 @@ with the test:
 ```sh
 pnpm nx run remote-react-components:test:visual:dev --browser.name=webkit
 ```
+
+#### Dev mode renders differently
+
+A headed browser antialiases differently than a headless one, so most scenarios
+fail here on small diffs that mean nothing. Use dev mode to watch and debug, and
+judge screenshots from a headless run — its diff lands in the gitignored
+`.vitest-attachments/…`, with reference, actual and diff side by side.
+
+The vitest UI stays off for this project: it scales the tests into a smaller
+frame, which made every screenshot fail on its dimensions.
 
 #### Remote ≠ Local
 
@@ -77,8 +107,11 @@ You can also filter the tests, to only run relevant tests.
 pnpm nx run remote-react-components:test:visual:update NewComponent
 ```
 
-Carefully review all new or updated screenshots afterward. If everything looks
-correct, you can commit them.
+Without `--browser.name` this updates the light (Webkit) **and** the dark
+(Firefox) baselines.
+
+Carefully review all new or updated screenshots afterward — both themes. If
+everything looks correct, you can commit them.
 
 Then add the `update-screenshots` label to the pull request. This ensures that
 the screenshots used in CI (Linux) are updated as well.
@@ -105,6 +138,46 @@ the screenshots used in CI (Linux) are updated as well.
 The best way to learn how tests are structured is to look at existing test
 cases.
 
+### Waiting for the focus
+
+`testScreenshot`'s preamble waits for the document to stop **mutating**. A focus
+move is not a mutation — `:focus` / `:focus-within` are pseudo-classes — and a
+react-aria focus restore fired by an unmounting popover lands after the quiet
+window anyway. Nothing in the preamble can wait for it.
+
+So synchronize on the focus yourself, with the helpers in
+`src/tests/lib/scenarioFocus.ts`, whenever a step or a capture depends on where
+the focus sits:
+
+```tsx
+await userEvent.keyboard("{enter}"); // closes the calendar, restores the focus
+
+await waitForFocusInTheScenario(); // the restore has landed
+
+await userEvent.keyboard("{tab}");
+
+await waitForFocusOutsideTheScenario(); // Tab has taken the focus out again
+
+await testScreenshot("DatePicker - date selected");
+```
+
+Two situations need this:
+
+- **A step that closes an overlay** (Escape, Enter on a calendar cell, a click
+  on a menu item). react-aria restores the focus to the trigger asynchronously,
+  and a key press sent into that window is undone by the restore landing after
+  it — the scenario continues from a state it never asked for.
+- **A capture whose reference encodes a focus ring**, or the absence of one.
+
+Skipping the wait costs a ~1% diff in whichever environment lost the race. Both
+environments share one reference, so it shows up as a random per-run failure
+rather than as a race — and no amount of sleeping fixes it. `Local` renders
+synchronously and usually wins, `Remote` applies every interaction a serializer
+round trip late, so a green `Local` says nothing about `Remote`.
+
+A plain `click()` or `fill()` needs no wait: the locator action resolves after
+the browser has moved the focus.
+
 ### Notes on Chromium
 
 Due to its wide adoption, Chromium would normally be a good choice as a test
@@ -127,10 +200,18 @@ The current solution is to wait for an update of **Playwright**.
 ### CI
 
 For pull requests, visual tests are executed **with a single browser only**
-(currently **Webkit**), to reduce the pipeline execution time.
+(currently **Webkit**), to reduce the pipeline execution time — which means the
+regular PR run only covers the **light** theme.
 
 In addition, visual tests are run **with all supported browsers** twice a day to
-detect potential issues early.
+detect potential issues early. To verify both themes on a pull request, add the
+`run-visual-tests` label — it runs every browser.
+
+Every path is sharded across runners (vitest's `--shard`), because the suite is
+serial by design and a single runner is the wrong unit for it. A shard still
+runs its own files one at a time, in its own browser process, against the same
+baselines — what it renders is identical to a single-runner run. A failure names
+the shard; its diff images are in that shard's `visual-diffs-*` artifact.
 
 ## Cross-version smoke tests
 
@@ -298,18 +379,24 @@ written and `test:cross-version` passes with a "nothing to run" warning.
 
 ### CI
 
-Both cross-version harnesses run in the **scheduled** visual workflow
-(`test-visual-scheduled.yml`), twice a day — **not** automatically on pull
-requests (they do network installs of published versions). Failures alert Slack.
+The **iframe harness** runs on every pull request and push, as the
+`cross-version` job in `test.yml`. It is gated on `nx affected`, so it no-ops
+when nothing it covers changed, and the published versions it installs are
+cached on `lerna.json`.
+
+The **in-process harness** does not, and neither does the full per-version
+matrix. Both harnesses run in the **scheduled** visual workflow
+(`test-visual-scheduled.yml`) twice a day, sharded per target version. Failures
+alert Slack.
 
 #### Running them on a pull request
 
-Because they don't run on every PR, a regression that a change introduces is
-only caught by the next scheduled run — after the PR has merged. **Run them
-on-demand by adding the `run-cross-version-tests` label to the PR**
-(`test-cross-version-label.yml`): it runs both harnesses against the PR branch
-and comments a per-version PASS/FAIL summary. The label removes itself, so
-re-adding it re-runs.
+The PR job covers one harness against one version set. A divergence that only
+the in-process harness or an older target sees is caught by the next scheduled
+run — after the PR has merged. **Run everything on-demand by adding the
+`run-cross-version-tests` label to the PR** (`test-cross-version-label.yml`): it
+runs both harnesses against the PR branch and comments a per-version PASS/FAIL
+summary. The label removes itself, so re-adding it re-runs.
 
 **Add the label whenever you remove a component or change its rendered
 structure** (a public component gone, or an element added/removed/reordered in

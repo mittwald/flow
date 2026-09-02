@@ -28,6 +28,7 @@ coding agents, but great reference docs for humans too.
 - [Choosing the base branch](#choosing-the-base-branch)
 - [Opening a pull request](#opening-a-pull-request)
 - [Releases](#releases)
+- [Dependency updates](#dependency-updates)
 - [Getting help](#getting-help)
 
 ## Prerequisites
@@ -66,6 +67,10 @@ pnpm dev:init-githooks
 pnpm nx dev components
 ```
 
+`pnpm install` also registers the forward-merge merge drivers
+(`pnpm dev:init-merge-drivers`, see below) — you only run that one by hand if
+you skipped an install.
+
 Storybook opens on <http://localhost:6006>. This is where you'll spend most of
 your time when developing components.
 
@@ -75,10 +80,42 @@ your time when developing components.
 [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks). Once
 installed:
 
-- **pre-commit** runs `pnpm lint` (ESLint + Stylelint + Prettier check) on your
-  changes.
+- **pre-push** runs `pnpm lint` (ESLint + Stylelint + Prettier check) across the
+  repo. It blocks the push, not the commit — unformatted files surface once the
+  commits already exist; `pnpm format` fixes them.
 - **post-checkout** / **post-merge** run `pnpm install` so your dependencies
   stay in sync after switching branches or pulling.
+
+### Resolving a blocked forward-merge
+
+Every change on `main` is merged up into `next` automatically (ADR 0004). When
+that merge hits a conflict the machine cannot resolve, the cascade **pauses**
+and opens an issue — from then on nothing new reaches `next` until someone
+resolves it. That someone needs two commands:
+
+```shell
+pnpm sync:resolve             # merges main into next in your checkout
+# resolve the conflicts in your editor or with `git mergetool`, then:
+pnpm sync:resolve --continue  # commits, pushes, opens the PR
+```
+
+You only ever see the genuinely conflicting files. The version and
+`CHANGELOG.md` divergence between the two lines is absorbed by the merge drivers
+(ADR 0004 §3), which `pnpm install` registers for you via
+`pnpm dev:init-merge-drivers` — a `merge=<driver>` line in `.gitattributes` is
+inert on its own, git only runs a driver that is also in your local git config.
+
+That is also why the resolution happens locally rather than on the pull request:
+**GitHub does not run merge drivers.** A merge computed on GitHub's side shows
+every version and changelog divergence as a conflict, burying the one file that
+actually needs you under dozens of mechanical ones.
+
+Because git config is per-repository and not per-branch, those drivers also run
+on **your** merges — most often `main` merged into a branch off it. The
+`package.json` driver resolves the `version` field to the **higher** of the two
+sides, so a release bump you merge in reaches your branch instead of being
+reverted to the version you forked at. `test.yml` checks the result: every
+package under `packages/*` must carry `lerna.json`'s version.
 
 ## Repository overview
 
@@ -104,7 +141,7 @@ Supporting packages (touch these only when your change concerns them):
 | `packages/remote-*`                    | The remote-rendering stack (render Flow UI from sandboxed mStudio extensions) |
 | `packages/react-tunnel`                | Render React components through a "tunnel" (portal-like)                      |
 | `packages/ext-bridge`, `mstudio-ext-*` | Building blocks for mStudio embedded extensions                               |
-| `packages/codemods`                    | Codemods to help consumers migrate between versions                           |
+| `packages/codemods`                    | The `upgrade` CLI and the migration catalogue that generates `MIGRATION.md`   |
 | `packages/typescript-config`           | Shared TypeScript config                                                      |
 | `apps/remote-dom-demo`                 | Demo app for the remote-rendering stack                                       |
 
@@ -114,14 +151,17 @@ Five invariants that hold everywhere in this repo — internalize these and the
 rest is detail:
 
 1. **Generated code is committed — and never hand-edited.** Remote views, icon
-   components, and `doc-properties.json` are generated. After changing their
-   sources, regenerate (`pnpm build` covers everything) and commit the result.
-   CI fails on any uncommitted generated diff.
+   components, CSS-module type stubs (`*.module.d.scss.ts`), and
+   `doc-properties.json` are generated. After changing their sources, regenerate
+   (`pnpm build` covers everything) and commit the result. CI fails on any
+   uncommitted generated diff.
 2. **Don't break extension developers.** Props of `@flr-generate` components are
    a contract — mStudio extensions in the wild use them. Keep old paths working
    and log their usage with `useWarnDeprecation`. Breaking changes for consumers
-   ship with a `MIGRATION.md` entry and ideally a codemod in
-   `packages/codemods`.
+   ship with a catalogue entry in `packages/codemods/src/migrations` — which
+   generates the `MIGRATION.md` entry — plus a codemod when the change is
+   mechanically decidable. `MIGRATION.md` itself is generated; editing it does
+   nothing.
 3. **Design comes from UX.** Base design tokens are taboo. Component tokens for
    a new component are fine — model them on existing components and ask when
    unsure. Never invent visual design.
@@ -169,6 +209,7 @@ Every component lives in its own **PascalCase** folder under
 packages/components/src/components/Button/
 ├── Button.tsx              # implementation
 ├── Button.module.scss      # styles (CSS Module written in SCSS)
+├── Button.module.d.scss.ts # ⚙️ AUTO-GENERATED — CSS-module class-name types
 ├── index.ts                # barrel export (3 lines, see below)
 ├── view.ts                 # ⚙️ AUTO-GENERATED — do not edit by hand
 └── stories/
@@ -280,6 +321,12 @@ The root class is the lower-camel component name; modifier classes match prop
 values (`.primary`, `.size-s`). Need new `--badge--*` tokens? See
 [Design tokens & icons](#design-tokens--icons).
 
+Importing `styles` gives per-class typed access from a generated
+`Badge.module.d.scss.ts` stub. Indexing with a narrow union stays type-safe
+(`styles[color]`, ``styles[`size-${size}`]``). For a `string`-typed or runtime
+key use `styleClassname` from `@/lib/scss/selectors`, not an
+`as keyof typeof styles` cast.
+
 ### 3. Add the barrel `index.ts`
 
 Always the same three lines (the `./view` line only exists on `@flr-generate`
@@ -355,8 +402,8 @@ pnpm nx build:remote-components components
 ```
 
 > ⚠️ **Commit the generated files.** CI runs `git diff --exit-code` and will
-> fail if generated code (remote views, icons) isn't committed. See
-> [Testing](#testing).
+> fail if generated code (remote views, icons, CSS-module type stubs) isn't
+> committed. See [Testing](#testing).
 
 For remote-capable components, also:
 
@@ -424,18 +471,23 @@ that automatically when no label is given).
 
 ### 9. Document it on the docs site
 
-Add a doc set under `apps/docs/src/content/04-components/<category>/<slug>/`
-(the content is **not** colocated with the component — copy the structure of a
+Add a doc set under `apps/docs/src/content/components/<category>/<slug>/` (the
+content is **not** colocated with the component — copy the structure of a
 neighbor like `actions/button/`):
 
-- `index.mdx` — frontmatter `component: Badge` + a `description:`
-- `overview.mdx` — usage narrative with `<LiveCodeEditor example="…" />` blocks
-- `guidelines.mdx` — design guidelines (when to use / when not)
-- `develop.mdx` — usually `# Properties` + `<PropertiesTables />` (generated
-  from your prop JSDoc; regenerate with
-  `pnpm nx build:docs-properties components`)
+- `index.mdx` — **the whole page**, read top to bottom: frontmatter with
+  `component: Badge` and a `description:`, then `<LiveCodeEditor />`, then
+  `---`-separated `#` sections (Best Practices, Variants, …). Every one of the
+  88 component pages ends in `# Properties` + `<PropertiesTables />`, generated
+  from your prop JSDoc — regenerate with
+  `pnpm nx build:docs-properties components`.
 - `examples/*.tsx` — live-code snippets, importing from
-  `@mittwald/flow-react-components`
+  `@mittwald/flow-react-components`, pulled in with
+  `<LiveCodeEditor example="…" />`
+
+One page per component, not one per tab: `overview.mdx`, `guidelines.mdx` and
+`develop.mdx` were consolidated into `index.mdx` (#2730) and no longer exist.
+The full authoring guide is [apps/docs/README.md](apps/docs/README.md).
 
 The docs prose is written in **German**. Preview with `pnpm nx dev docs`.
 
@@ -551,15 +603,20 @@ pnpm affected:test                                              # unit + compile
 pnpm affected:test:browser --parallel=1 --browser.name=webkit   # browser/e2e/visual
 ```
 
-> ⚠️ **Generated code must be committed.** The final CI step is
-> `git diff --exit-code`. If you changed a component with `@flr-generate` or
-> touched icons, run the relevant `build:*` target and commit the result —
-> otherwise CI fails even though your code is correct.
+Locally that is one command after the other. CI runs the same targets as
+separate jobs — `lint`, `unit`, `browser`, `e2e` and four `visual` shards — so
+its wall clock is the slowest job rather than the sum. `main` is the job that
+aggregates them and the check the branch ruleset requires; a red job turns it
+red.
+
+> ⚠️ **Generated code must be committed.** CI runs `git diff --exit-code` after
+> the unit tests. If you changed a component with `@flr-generate` or touched
+> icons, run the relevant `build:*` target and commit the result — otherwise CI
+> fails even though your code is correct.
 
 ## Code style
 
-Formatting and linting are enforced; the pre-commit hook runs `pnpm lint` for
-you.
+Formatting and linting are enforced; the pre-push hook runs `pnpm lint` for you.
 
 ```shell
 pnpm lint           # check with ESLint + Stylelint + Prettier
@@ -607,6 +664,12 @@ chore(docs): migrate site URL and redirect pages
 
 `feat` and `fix` are user-facing and drive releases; use `chore`/`docs`/`ci` for
 everything that isn't. Write messages for the changelog reader.
+
+TypeScript type-level changes aren't under the semver guarantee, so a type break
+never forces a Major on its own. But a **deliberate** (even small) TS breaking
+change still ships a **migration note in the commit body and in the release
+notes** telling consumers how to adapt — see
+[ADR 0005](docs/adr/0005-semver-contract.md) for the rationale.
 
 The commit **type** also decides **where your PR lands** — see
 [Choosing the base branch](#choosing-the-base-branch).
@@ -660,11 +723,9 @@ Target the wrong branch and the check fails with a message like
 `PR title is a 'feat' — features target 'next', not 'main'.`; fix it by
 retitling the PR or changing its base.
 
-> **Before the 1.0.0 cut**, the `next` and major lines don't exist yet, so
-> **everything targets `main`** and the routing check self-disables (it stays
-> dormant while there is no `next` branch). Once the lines exist, promotion and
-> sync branches — `next`, a major line (e.g. `2.x`), and `sync/*` — are exempt
-> so release PRs are never blocked.
+> Promotion and sync sources are exempt — `next`, a major line (e.g. `2.x`),
+> `release/*` and `sync/*` — because those PRs are _supposed_ to carry `feat:`
+> and breaking commits. Release PRs are never blocked by routing.
 
 ## Opening a pull request
 
@@ -685,9 +746,9 @@ retitling the PR or changing its base.
    branch you chose in step 1.
 
 CI (`.github/workflows/test.yml`) runs lint, unit tests, and browser tests
-(WebKit) on every PR, and verifies all generated code is committed. A preview
-deployment of docs + Storybook is built for each PR so reviewers can see your
-changes live.
+(WebKit) on every PR, and verifies all generated code is committed. The jobs run
+in parallel and report through one required check, `main`. A preview deployment
+of docs + Storybook is built for each PR so reviewers can see your changes live.
 
 PRs are **squash-merged**, so the **PR title becomes the release commit** — it
 must be a valid Conventional Commit. `.github/workflows/commit-guard.yml` lints
@@ -697,20 +758,71 @@ both the title and that it matches the base branch (see
 ## Releases
 
 You don't need to do anything to release. Flow uses **fixed versioning** — all
-`@mittwald/flow-*` packages share one version — and Lerna-Lite derives the bump
-and changelog from your Conventional Commits.
+`@mittwald/flow-*` packages share one version — and releases are automated from
+your Conventional Commit **PR titles** (the repo squash-merges, so the title is
+the commit Lerna-Lite reads). Where your change lands decides how it ships:
 
-- A `fix:` merged into `main` publishes to npm under dist-tag `latest` (via
-  `.github/workflows/publish.yml`) and is forward-merged into `next`.
-- Features accumulate on `next`, published continuously as `X.Y.0-next.N` under
-  dist-tag `next`. A maintainer promotes them to a stable Minor — with a curated
-  changelog — via a `next → main` Release-PR, when there's enough to be worth
-  releasing.
+- **`fix:` (and non-releasing `docs:`/`chore:`/… ) → `main`** — publishes to npm
+  under dist-tag `latest` as soon as it merges.
+- **`feat:` → `next`** — features accumulate there (published as `X.Y.0-next.N`
+  under dist-tag `next`) and a maintainer promotes them to a stable Minor, with
+  a curated changelog, via a `next → main` Release-PR.
 
-See [RFC #2711](https://github.com/mittwald/flow/issues/2711) for the full model
-and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
-forward-merge mechanics. (The `next` line and its publishing go live with the
-1.0.0 cut; until then every merge into `main` releases as it does today.)
+This is Flow's two-line release model — see
+[`docs/release-workflow.md`](docs/release-workflow.md) for the full picture (the
+branches, the forward-merge cascade, promotion, and the 1.0.0 cut), with
+[RFC #2711](https://github.com/mittwald/flow/issues/2711) as the authoritative
+model and [ADR 0004](docs/adr/0004-forward-merge-main-into-next.md) for the
+forward-merge mechanics.
+
+## Dependency updates
+
+Dependabot proposes minor and patch updates weekly and **merges them itself** —
+nobody approves a dependency bump by hand. Majors are never proposed; take one
+deliberately by bumping it manually. The moving parts:
+
+- [`.github/dependabot.yml`](.github/dependabot.yml) puts every npm dependency
+  into one of four groups (`react-aria`, `production`, `dev-patch`, `dev-minor`)
+  and holds versions younger than 7 days back (`cooldown`, `@mittwald/*`
+  exempt). Nothing is left ungrouped on purpose: every merge invalidates
+  `pnpm-lock.yaml` in every other open PR, which makes Dependabot rebase it and
+  CI run again, so the number of open PRs is what drives that cascade.
+- The **visual regression suite runs on every Dependabot PR**, not on a label. A
+  `playwright`, `vitest` or `react-aria` bump moves snapshots, and the label
+  route is not even available to a workflow: events created with `GITHUB_TOKEN`
+  do not start new workflow runs.
+- [`dependabot-auto-merge.yml`](.github/workflows/dependabot-auto-merge.yml)
+  waits for that suite, re-checks the PR, and comments
+  `@dependabot squash and merge`. Dependabot merges once the required `main`
+  check is green.
+
+**When one goes red.** Nothing merges. Find the culprit in the group, then
+either fix the code or park the dependency with
+`@dependabot ignore <name> <version>` — which writes nothing to
+`dependabot.yml`, so add an `ignore` entry there for a hold that should outlive
+the PR (see `recharts` and `playwright`).
+
+**Why this is allowed to skip review.** The `main` ruleset requires a code owner
+approval, so Dependabot needs a bypass. That bypass is deliberately narrow, and
+it needs **two rulesets** — a bypass list covers every rule in its ruleset, not
+one rule:
+
+| Ruleset | Rules                                                                | Dependabot bypass |
+| ------- | -------------------------------------------------------------------- | ----------------- |
+| A       | `pull_request` (review requirement)                                  | yes               |
+| B       | `required_status_checks`, `deletion`, `creation`, `non_fast_forward` | **no**            |
+
+So Dependabot may skip the review, never CI. This is repository configuration,
+not a file in this repo — a maintainer sets it up once.
+
+The one hole the bypass opens is that anyone with write access can push a commit
+onto an open `dependabot/*` branch, which would then reach `main` unreviewed.
+`dependabot-auto-merge.yml` closes it: it merges only when every commit in the
+PR is authored by `dependabot[bot]` **and** carries a verified signature.
+
+Bumps that land are published — the standing prerelease line publishes on every
+push to `main` — which is why the cooldown is the safety gate that matters most
+here, not the review it replaces.
 
 ## Getting help
 

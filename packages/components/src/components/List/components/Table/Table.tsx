@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useList } from "@/components/List";
-import styles from "./Table.module.css";
+import styles from "./Table.module.scss";
 import clsx from "clsx";
 import TableView from "@/views/TableView";
 import TableHeaderView from "@/views/TableHeaderView";
@@ -32,14 +32,11 @@ export const Table: FC = () => {
 
   const rows = list.items.entries.map((item) => (
     <TableRowView
-      className={(props) =>
-        clsx(
-          styles.row,
-          rowAction && styles.hasAction,
-          table.body.row.componentProps.className,
-          props.isSelected && styles.isSelected,
-        )
-      }
+      className={clsx(
+        styles.row,
+        rowAction && styles.hasAction,
+        table.body.row.componentProps.className,
+      )}
       key={item.id}
       id={item.id}
       onAction={rowAction ? () => rowAction(item.data) : undefined}

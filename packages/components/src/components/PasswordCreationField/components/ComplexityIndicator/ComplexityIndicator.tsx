@@ -61,7 +61,9 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
 
   const percentageClassName = clsx(
     styles.bar,
-    !isEmptyValue && styles[`bar-background-status-${status}`],
+    !isEmptyValue &&
+      status !== "unavailable" &&
+      styles[`bar-background-status-${status}`],
     {
       [styles.loading as string]: isLoading,
       [styles.running as string]: !complexityFulfilled,

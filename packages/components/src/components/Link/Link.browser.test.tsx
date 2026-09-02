@@ -37,9 +37,26 @@ test("link with a nested button still navigates client-side", async () => {
     </RouterProvider>,
   );
 
-  await userEvent.click(page.getByTestId("button"));
+  const button = page.getByTestId("button");
+
+  await expect.element(button).toHaveAttribute("data-testid", "button");
+  expect((await button.element()).tagName).toBe("SPAN");
+
+  await userEvent.click(button);
 
   expect(navigate).toHaveBeenCalledWith(href, undefined);
+});
+
+test("button in a disabled link exposes its disabled state", async () => {
+  render(
+    <Link href={href} isDisabled>
+      <Button data-testid="button">Zur App</Button>
+    </Link>,
+  );
+
+  await expect
+    .element(page.getByTestId("button"))
+    .toHaveAttribute("data-disabled", "true");
 });
 
 test("selecting the whole external link does not select any part of the icon", async () => {

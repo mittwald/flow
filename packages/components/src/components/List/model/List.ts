@@ -25,8 +25,7 @@ import { useWarnDeprecation } from "@/components/DeprecationWarningProvider";
 
 export class List<T = unknown, TMeta = unknown> {
   public readonly filters: (
-    | Filter<T, never, never>
-    | DateRangeFilter<T, never>
+    Filter<T, never, never> | DateRangeFilter<T, never>
   )[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;

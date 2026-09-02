@@ -31,6 +31,7 @@ import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { CodeEditor as CodeEditor } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
+import { Combine as Combine } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { ComponentPropsContextProvider as ComponentPropsContextProvider } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
@@ -92,7 +93,7 @@ import { Notification as Notification } from "@mittwald/flow-react-components";
 import { NumberField as NumberField } from "@mittwald/flow-react-components";
 import { Option as Option } from "@mittwald/flow-react-components";
 import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components";
-import { PasswordCreationField as PasswordCreationField } from "@mittwald/flow-react-components/password-tools";
+import { PasswordCreationField as PasswordCreationField } from "@mittwald/flow-react-components";
 import { PopoverContent as PopoverContent } from "@mittwald/flow-react-components";
 import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
@@ -100,6 +101,7 @@ import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
 import { RangeCalendar as RangeCalendar } from "@mittwald/flow-react-components";
 import { Rating as Rating } from "@mittwald/flow-react-components";
+import { RatingSegment as RatingSegment } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
 import { Segment as Segment } from "@mittwald/flow-react-components";
@@ -203,6 +205,7 @@ export const flowComponents = {
     "ColumnLayout",
     ColumnLayout,
   ),
+  "flr-combine": createFlowRemoteComponentRenderer("Combine", Combine),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-component-props-context-provider": createFlowRemoteComponentRenderer(
     "ComponentPropsContextProvider",
@@ -410,6 +413,10 @@ export const flowComponents = {
     RangeCalendar,
   ),
   "flr-rating": createFlowRemoteComponentRenderer("Rating", Rating),
+  "flr-rating-segment": createFlowRemoteComponentRenderer(
+    "RatingSegment",
+    RatingSegment,
+  ),
   "flr-search-field": createFlowRemoteComponentRenderer(
     "SearchField",
     SearchField,
