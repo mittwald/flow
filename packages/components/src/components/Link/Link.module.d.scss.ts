@@ -2,9 +2,9 @@ declare const classNames: {
   readonly link: "link";
   readonly inline: "inline";
   readonly icon: "icon";
+  readonly linkIcon: "linkIcon";
   readonly "size-s": "size-s";
   readonly button: "button";
-  readonly linkIcon: "linkIcon";
   readonly light: "light";
   readonly dark: "dark";
   readonly "dark-static": "dark-static";
