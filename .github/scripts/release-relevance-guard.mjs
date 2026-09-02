@@ -6,10 +6,11 @@
  * Reads the changed-file list on stdin (one repository-relative path per line)
  * and writes `publish=true|false` to $GITHUB_OUTPUT.
  *
- * `ROOT_MANIFEST_BEFORE_FILE` / `ROOT_MANIFEST_AFTER_FILE` optionally point at
- * the two versions of the root `package.json`. They let the classifier judge
- * that manifest by its key diff instead of its path (#2970); without them the
- * root manifest stays relevant, as before.
+ * `MANIFEST_DIR` optionally points at a directory holding the two versions of
+ * every changed `package.json`, as `<path with / replaced by __>.before.json`
+ * and `.after.json`. They let the classifier judge each manifest by its key
+ * diff instead of its path (#2970, #3023); a manifest whose pair is missing
+ * stays relevant, as before.
  *
  * It never fails the run. The decision is a routing choice, not a policy
  * violation: an empty or unreadable input yields `publish=true`, which is the
@@ -18,6 +19,7 @@
 import { appendFileSync, readFileSync } from "node:fs";
 import {
   classifyChangedFiles,
+  classifyPackageManifestChange,
   classifyRootManifestChange,
 } from "./release-relevance-lib.mjs";
 
@@ -36,34 +38,43 @@ const files = readStdin()
   .filter((line) => line !== "");
 
 /**
- * The root manifest's two versions, if the workflow fetched them.
+ * One side of a manifest the workflow fetched, if it is there.
  *
- * A missing or unreadable file is `undefined`, which
- * `classifyRootManifestChange` reports as relevant — the behaviour before this
- * refinement.
+ * A missing or unreadable file is `undefined`, which the classifiers report as
+ * relevant — the behaviour before this refinement.
  *
- * @param {string} variable
+ * @param {string} path
  */
-function readManifest(variable) {
-  const path = process.env[variable];
-  if (!path) return undefined;
+function readManifest(path) {
   try {
     return readFileSync(path, "utf8");
   } catch {
-    console.log(`::warning::Could not read ${variable} (${path}).`);
     return undefined;
   }
 }
 
-/** @type {{ rootManifestRelevant?: boolean }} */
-const options = {};
-if (files.includes("package.json")) {
-  const manifest = classifyRootManifestChange(
-    readManifest("ROOT_MANIFEST_BEFORE_FILE"),
-    readManifest("ROOT_MANIFEST_AFTER_FILE"),
-  );
-  options.rootManifestRelevant = manifest.relevant;
-  console.log(`Root manifest: ${manifest.reason}.`);
+/** @type {{ manifestRelevance: Record<string, boolean> }} */
+const options = { manifestRelevance: {} };
+const manifestDir = process.env.MANIFEST_DIR;
+
+for (const path of files.filter(
+  (file) => file === "package.json" || file.endsWith("/package.json"),
+)) {
+  const slug = path.replaceAll("/", "__");
+  const before = manifestDir
+    ? readManifest(`${manifestDir}/${slug}.before.json`)
+    : undefined;
+  const after = manifestDir
+    ? readManifest(`${manifestDir}/${slug}.after.json`)
+    : undefined;
+
+  const { relevant, reason } =
+    path === "package.json"
+      ? classifyRootManifestChange(before, after)
+      : classifyPackageManifestChange(before, after, path);
+
+  options.manifestRelevance[path] = relevant;
+  console.log(`Manifest: ${reason}.`);
 }
 
 const { publish, reason, relevant, total } = classifyChangedFiles(

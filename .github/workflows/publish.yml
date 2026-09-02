@@ -133,25 +133,33 @@ jobs:
             files=""
           fi
 
-          # The root `package.json` is judged by its KEY DIFF, not its path: a
-          # `scripts` edit cannot reach a tarball, a `devDependencies` bump can,
-          # and the path cannot tell them apart (#2970). Fetch both versions so
-          # the classifier can compare them. A failed fetch leaves the file
+          # EVERY changed `package.json` is judged by its KEY DIFF, not its
+          # path: a `scripts` edit cannot reach a consumer, a dependency bump
+          # can, and the path cannot tell them apart (#2970 for the root
+          # manifest, #3023 for the package ones). Fetch both versions of each
+          # so the classifier can compare them. A failed fetch leaves the file
           # missing, which the guard reads as "relevant" — the behaviour before.
-          if printf '%s\n' "$files" | grep -qx 'package.json'; then
-            for side in BEFORE AFTER; do
-              if [ "$side" = AFTER ]; then ref="${AFTER}"; else ref="${BEFORE}"; fi
-              target="${RUNNER_TEMP}/root-package.${side}.json"
-              if gh api "repos/${REPO}/contents/package.json?ref=${ref}" \
+          #
+          # The pair is named after the path with `/` replaced by `__`, the
+          # layout `release-relevance-guard.mjs` expects under MANIFEST_DIR.
+          manifest_dir="${RUNNER_TEMP}/manifests"
+          mkdir -p "$manifest_dir"
+
+          for manifest in $(printf '%s\n' "$files" \
+            | grep -E '(^|/)package\.json$' || true); do
+            slug="${manifest//\//__}"
+            for side in before after; do
+              if [ "$side" = after ]; then ref="${AFTER}"; else ref="${BEFORE}"; fi
+              target="${manifest_dir}/${slug}.${side}.json"
+              if ! gh api "repos/${REPO}/contents/${manifest}?ref=${ref}" \
                 --header 'Accept: application/vnd.github.raw+json' \
                 > "$target"; then
-                export "ROOT_MANIFEST_${side}_FILE=${target}"
-              else
-                echo "::warning::Could not fetch the root package.json at ${ref}."
+                echo "::warning::Could not fetch ${manifest} at ${ref}."
                 rm -f "$target"
               fi
             done
-          fi
+          done
+          export MANIFEST_DIR="$manifest_dir"
 
           printf '%s\n' "$files" \
             | node .github/scripts/release-relevance-guard.mjs

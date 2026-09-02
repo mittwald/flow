@@ -68,32 +68,67 @@ flowchart LR
   preset's template itself), and the guard then aborts `lerna version`. Re-check
   on the next Lerna-Lite major.
 - **Not every merge releases.** A push to a release line only publishes when it
-  carries a change that can reach a **published package**. Docs-, CI- and
-  repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`, `dev/**`, root
-  Markdown and editor config) are skipped whole: no npm publish, no
-  `chore(release):` version bump commit, no tag, no GitHub Release (#2931). The
-  decision is made by the `decide` job in `publish.yml`, which classifies the
-  pushed file set with `.github/scripts/release-relevance-lib.mjs`. Two
-  properties matter when you touch that list:
-  - It is a **denylist** — anything not provably docs/CI/tooling counts as
-    publishable. Forgetting a docs path costs one needless version; forgetting a
-    source path would silently swallow a real release. So `packages/**` is
-    relevant wholesale, Markdown included: `@mittwald/flow-react-components`
-    ships `AGENTS.md`, `MIGRATION.md` and `USAGE.md` next to `dist`.
-  - **Two files are judged by content, not by path**, because for them the path
-    carries no information:
+  carries a change that can reach a **consumer** of a published package. Docs-,
+  CI- and repo-tooling-only merges (`apps/**`, `docs/**`, `.github/**`,
+  `dev/**`, root Markdown and editor config) are skipped whole: no npm publish,
+  no `chore(release):` version bump commit, no tag, no GitHub Release (#2931).
+  The decision is made by the `decide` job in `publish.yml`, which classifies
+  the pushed file set with `.github/scripts/release-relevance-lib.mjs`. What
+  matters when you touch that list:
+  - It is a **denylist** — anything not provably without consumer effect counts
+    as publishable. Forgetting a docs path costs one needless version;
+    forgetting a source path would silently swallow a real release. So
+    `packages/**` is relevant wholesale, Markdown included:
+    `@mittwald/flow-react-components` ships `AGENTS.md`, `MIGRATION.md` and
+    `USAGE.md` next to `dist`.
+  - The criterion is **consumer effect, not tarball membership** (#3023). The
+    two diverge in both directions, and only the first one decides: a tarball
+    carries the package's `scripts`, yet nothing but the install lifecycle runs
+    on a consumer's machine.
+  - **Every `package.json` is judged by content, not by path**, and so is the
+    lockfile — for them the path carries no information:
     - Root **`package.json`** — a `scripts` or `simple-git-hooks` edit cannot
-      reach a tarball, a `devDependencies` bump can. The `decide` job fetches
+      reach a consumer, a `devDependencies` bump can. The `decide` job fetches
       both versions and compares the top-level keys; an unknown key is relevant
       like an unknown path is. #2970 added `test:links` to two scripts and cut
       1.0.9.
+    - A **package's `package.json`** — same rule one level down, with `scripts`
+      as the only irrelevant key, and only while the diff leaves
+      `preinstall`/`install`/`postinstall`/`prepare` alone. #3006 edited
+      `remote-react-components`' `--project=unit` glob and cut 1.0.12.
     - **`pnpm-lock.yaml`** — a derived file, relevant when the manifest that
       moved it is. It follows the manifests in the same push and drops out only
       when at least one changed and none of them is publish-relevant. Lock churn
       with NO manifest change (a dedupe, a resolution refresh) stays relevant.
       #2959 bumped an `apps/docs` dependency and cut 1.0.4.
+  - **Package-local paths without consumer effect are carved out** of the
+    wholesale `packages/**` rule: `.storybook/**`, the Storybook image's
+    `Dockerfile` / `.dockerignore`, `e2e/**`, `src/tests/**`, and any
+    `*.stories.*` or `*.test.*`. #3010 cut 1.0.14 through the Storybook config,
+    #3008 pushed the image.
+  - A package's own **`dev/` directory is NOT carved out**, although #3023
+    proposed it. It is a build input: `components/dev/vite/*` is imported by
+    `vite.build.config.ts` and shapes the emitted CSS layers,
+    `dev/component-index` and `dev/status-registry` generate shipped `dist`
+    assets, and `codemods/dev/generate` writes the published `MIGRATION.md`.
+    Skipping it would swallow real releases.
+  - **One gap is knowingly left open:** a `patches/**` entry (with its
+    `pnpm-workspace.yaml` line) for a dependency that only a private workspace
+    project imports still publishes. #3020 patched
+    `@mfalkenberg/react-live-ssr`, an `apps/docs` dependency, and cut 1.1.5.
+    Ruling that out needs the lockfile's importer graph including transitive
+    edges, where a wrong answer swallows a real release — so the path-level
+    fail-safe stands and the occasional needless version is the cheaper error.
   - A **`workflow_dispatch` run always publishes.** That is the escape hatch
     when a docs-only change has to go out as a release anyway.
+- **Tests and stories stay out of `dist/types`.** `unplugin-dts` emits
+  declarations for everything its `include` matches, so `include: ["src"]` used
+  to drag `*.stories.d.ts` and whole test suites into the tarball — 196 of
+  `@mittwald/flow-remote-react-components@1.1.10`'s 799 entries. Every release
+  build now shares `publishedDtsOptions` from `packages/core`, whose `exclude`
+  drops them. The globs cannot live in the shared tsconfig preset instead: its
+  `exclude` also governs `tsc --noEmit`, and that would stop type-checking the
+  tests.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'
