@@ -9,8 +9,7 @@ import viteConfig from "./vite.config";
 // harness runs exactly like the screenshot tests — same 1280x720 viewport (the
 // visual tests render responsively and expect desktop width; a narrow viewport
 // hides buttons the tests click), en-US locale (they assert English labels), and
-// reduced motion. We only narrow it to webkit + headless + no failure
-// screenshots (this harness compares HTML, not pixels).
+// reduced motion. We only narrow it to webkit + headless.
 export default mergeConfig(viteConfig, {
   cacheDir: "e2e/cross-version-inprocess/.vitest/cache/test-browser",
   test: {
@@ -38,9 +37,6 @@ export default mergeConfig(viteConfig, {
       },
       headless: true,
       fileParallelism: false,
-      // HTML comparison, not pixels — failure screenshots would only pollute the
-      // reused tests' src/**/__screenshots__ dir.
-      screenshotFailures: false,
       instances: vitestBrowserTestConfig.browser?.instances?.filter(
         (instance) => instance.browser === "webkit",
       ),

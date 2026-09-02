@@ -21,6 +21,12 @@ export const vitestBrowserTestConfig: ProjectConfig = {
     commands: {
       setReducedMotion,
     },
+    /*
+     * No `__screenshots__` directory is gitignored — they hold the committed
+     * visual baselines — so a failure PNG lands in the next commit. Pass
+     * `--browser.screenshotFailures` to get one back for debugging.
+     */
+    screenshotFailures: false,
     provider: playwright({
       /*
        * Bounds a stuck action, not a slow one. One browser context per test
