@@ -118,6 +118,8 @@ flowchart LR
     `lerna.json` to the stable `x.y.0` and prepends the changelog entry — so the
     diff reads `x.(y-1).z → x.y.0` instead of promoting a `-next.N` prerelease,
     and the published version does not hinge on CI re-deriving it;
+  - **resolves the `UNRELEASED` migration placeholders** to that version (see
+    below);
   - drafts a **curated, user-facing changelog** (grouped by feature —
     highlights, deprecations, migrations — not raw commit subjects) into a
     marker block in the PR body, and opens it as a **Draft** for the maintainer
@@ -131,6 +133,18 @@ flowchart LR
   and
   [`.claude/templates/release-notes.md`](../.claude/templates/release-notes.md).
 
+- **Migration entries name their version at promotion, not at PR time** (#2890).
+  A migration authored in a `feat:` PR cannot know it: the PR lands on `next`
+  and is promoted later, in a bundle whose `x.y.0` depends on what else goes
+  with it. The author writes the literal `UNRELEASED` — in the `since:` field of
+  `packages/codemods/src/migrations/<id>/entry.md`, or in the
+  `## From version …` heading of a hand-written guide like `ext-bridge`'s — and
+  `/prepare-release` rewrites it to `<current> → >=x.y.0` in the graduation
+  commit, collapsing all placeholder sections of one release under a single
+  heading. A surviving placeholder hard-stops the promotion. The placeholder is
+  **`next`-only**: a `fix:` on `main` is released by `publish.yml`, which
+  resolves nothing, and knows its version anyway. Author-facing detail:
+  [`packages/codemods/AGENTS.md`](../packages/codemods/AGENTS.md).
 - **The cut (history).** The move from the `0.2.0-alpha.*` line to `1.0.0` was a
   one-time manual `workflow_dispatch` off `main`; `next` was branched from
   `main` immediately afterwards. Both standing lines have been live since — the

@@ -1,7 +1,9 @@
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { valid } from "semver";
 import { describe, expect, test } from "vitest";
 import { readCatalog } from "../catalog/read";
+import { isUnreleased } from "../catalog/unreleased";
 
 const catalog = readCatalog();
 const byId = new Map(catalog.map((entry) => [entry.id, entry]));
@@ -55,6 +57,16 @@ describe("catalogue invariants", () => {
       (entry) => hasTransform(entry.id) !== (entry.action === "codemod"),
     );
     expect(mismatched.map((entry) => entry.id)).toEqual([]);
+  });
+
+  test("every since is a version or the UNRELEASED placeholder", () => {
+    // A typo (`unreleased`, `UNRELEASED?`) would reach `semver` and throw only
+    // where it is compared — the generator, or the consumer's CLI. Catch the
+    // shape here instead. See `catalog/unreleased.ts` for the convention.
+    const bad = catalog.filter(
+      (entry) => !isUnreleased(entry.since) && valid(entry.since) === null,
+    );
+    expect(bad.map((entry) => `${entry.id}: ${entry.since}`)).toEqual([]);
   });
 
   test("kind and action only take known values", () => {

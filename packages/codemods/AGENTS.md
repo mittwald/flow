@@ -164,10 +164,52 @@ migration directory to put it beside. `runCodemod` and `runTransform` both fall
 back to `src/tools` for an id that names no migration, so it is still runnable
 by id like any other transform.
 
+## `since` on a feature branch: write `UNRELEASED`
+
+`since` names the version the change shipped in. On `next` you cannot know it.
+
+A `feat:` PR is promoted later, in a bundle whose stable `x.y.0` depends on what
+else is promoted with it — so guessing `1.3.0` is wrong the moment the bundle
+changes, and writing `>=1.3.0-next.7` names a channel no `latest` consumer can
+find themselves in. Write the literal placeholder instead:
+
+```yaml
+since: UNRELEASED
+```
+
+`/prepare-release` rewrites it to the graduated version while it builds the
+release branch (`pnpm release:resolve-unreleased`, then a regeneration), and a
+guard there hard-stops the promotion if one survives (#2890). Nothing else has
+to happen in your PR — the catalogue builds, the guide renders "Since
+`UNRELEASED` — ships in the next stable release", and the CLI treats the entry
+as newer than every real version (`src/catalog/unreleased.ts`; `semver` throws
+on the literal, so every comparison routes through `compareSince` /
+`isUnreleased`).
+
+**The placeholder is `next`-only.** A `fix:` PR on `main` names its version the
+way it always did — the last published one, `>=` the next patch — because that
+path is released by `publish.yml`, which does not run `/prepare-release` and
+resolves nothing. A placeholder on `main` forward-merges into `next` and gets
+resolved by the next promotion, under a version much later than the one it
+shipped in.
+
+The same convention covers `packages/ext-bridge/MIGRATION.md`, which is
+hand-written and keyed by a level-2 heading naming both versions. Write the
+placeholder in both slots:
+
+```md
+## From version `UNRELEASED` to `UNRELEASED`
+```
+
+Multiple such sections in one release collapse into a single heading, their
+bodies concatenated in document order.
+
 ## Adding a migration
 
 1. `src/migrations/<id>/entry.md` — frontmatter plus a prose body. Model it on a
-   neighbour; `src/catalog/read.ts` validates the required fields.
+   neighbour; `src/catalog/read.ts` validates the required fields. On a `feat:`
+   PR into `next`, `since` is `UNRELEASED` — see
+   [`since` on a feature branch](#since-on-a-feature-branch-write-unreleased).
 2. If `action: "codemod"`: `src/migrations/<id>/transform.ts`, modelled on a
    neighbour. Scope it narrowly — resolve the component through its Flow import
    (named, aliased and namespace), and skip what you cannot decide from the
@@ -193,4 +235,8 @@ by id like any other transform.
 pnpm nx build codemods        # generators + tsc + the transforms' CommonJS compile
 pnpm nx test:unit codemods    # catalogue + fixture + idempotency + published-load tests
 pnpm nx test:compile codemods # tsc --noEmit
+
+# Release-time only, run by /prepare-release — not part of a normal PR:
+pnpm release:check-unreleased                                  # the guard
+pnpm release:resolve-unreleased --current 1.1.10 --target 1.2.0 # the rewrite
 ```
