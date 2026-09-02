@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.14](https://github.com/mittwald/flow/compare/1.2.0-next.13...1.2.0-next.14) (2026-09-02)
+
+### Features
+
+* **Badge:** support a button after the text ([f340da9](https://github.com/mittwald/flow/commit/f340da98aeaaf2d7c343d34fe5d5d8f16c9cfe3f))
+* **Badge:** support a contextual help instead of any button ([5e9186e](https://github.com/mittwald/flow/commit/5e9186e9f73d336993e0e7599ad9f75904bede62))
+
 ## [1.2.0-next.13](https://github.com/mittwald/flow/compare/1.2.0-next.12...1.2.0-next.13) (2026-09-02)
 
 ## [1.1.10](https://github.com/mittwald/flow/compare/1.2.0-next.11...1.1.10) (2026-09-02)
