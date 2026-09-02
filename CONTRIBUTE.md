@@ -22,6 +22,7 @@ coding agents, but great reference docs for humans too.
 - [Anatomy of a component](#anatomy-of-a-component)
 - [Adding or changing a component](#adding-or-changing-a-component)
 - [Design tokens & icons](#design-tokens--icons)
+- [Documentation](#documentation)
 - [Testing](#testing)
 - [Code style](#code-style)
 - [Commit conventions](#commit-conventions)
@@ -506,6 +507,34 @@ Some source files are **generated** and must not be hand-edited:
   The icon sets and the component-internal icons are generated from it:
   `pnpm nx build:icons icons`, `… icons-pro`, `… components` — or simply
   `pnpm build`.
+
+## Documentation
+
+Flow's public documentation — the [Styleguide](https://flow.mittwald.de/) — is
+part of this repo (`apps/docs`), not an afterthought. Code and docs ship
+together: a change a user can see isn't done until the Styleguide reflects it.
+
+When to touch the docs:
+
+- **New component.** Add its page under
+  `apps/docs/src/content/components/<category>/<slug>/` — this is step 9 of
+  [Adding or changing a component](#adding-or-changing-a-component).
+- **Changed component.** A new prop, variant, or behaviour usually needs a
+  matching edit on the component's page — a Best-Practice bullet, a feature
+  section, or a new example. The `# Properties` table is generated from the prop
+  JSDoc; regenerate it with `pnpm nx build:docs-properties components` and
+  commit the result.
+- **Cross-cutting guidance.** Design principles, wording rules, and flows that
+  span multiple components live under `foundations` and `patterns`, not on a
+  single component page.
+
+**Follow the content guidelines** in [apps/docs/README.md](apps/docs/README.md)
+— they specify page structure, section order, tone of voice, and the MDX
+building blocks (`<LiveCodeEditor />`, `<PropertiesTables />`, …). Read them
+before writing or editing a page. The docs prose is written in **German**.
+
+Preview the site locally with `pnpm nx dev docs`. Docs-only changes target
+`main` (`docs:`) and publish nothing to npm.
 
 ## Testing
 
