@@ -62,26 +62,33 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Does this push carry anything that can reach a PUBLISHED package? Docs- and
-  # CI-only merges cannot, and must not produce a release (#2931): the publish
-  # job below is skipped whole, so there is no npm publish, no
-  # `chore(release):` version bump commit, no tag and no GitHub Release.
+  # Does this push release? The TITLE answers it, the changed paths verify the
+  # answer (#3023). A merge that reaches no consumer must not produce a release
+  # (#2931): the publish job below is skipped whole, so there is no npm publish,
+  # no `chore(release):` version bump commit, no tag and no GitHub Release.
+  #
+  # The title is the decision because a maintainer can read it off the PR;
+  # `commit-guard.yml` already blocks a PR whose title and paths disagree. This
+  # job re-checks because that check can be outrun: GitHub lets the merger edit
+  # the squash subject after every check has passed. On a disagreement the guard
+  # exits non-zero, so the run goes RED and nothing publishes — the release
+  # waits for a human instead of silently going the wrong way.
   #
   # This is a separate job rather than a step inside `publish` on purpose. The
-  # run then shows `decide` green and `publish` skipped, with a notice naming the
-  # rule that fired. `paths-ignore` on the trigger would skip the run entirely
-  # and explain nothing — and its globs cannot express "Markdown inside
-  # packages/ still ships" (flow-react-components publishes `["*.md", "dist"]`).
+  # run then shows `decide` green and `publish` skipped, with a notice naming
+  # what decided. `paths-ignore` on the trigger would skip the run entirely and
+  # explain nothing — and its globs cannot express "Markdown inside packages/
+  # still ships" (flow-react-components publishes `["*.md", "dist"]`).
   #
   # A manual dispatch always publishes: that is the escape hatch for releasing a
-  # docs-only change deliberately.
+  # docs-only change deliberately, and the remedy after a rejected mismatch.
   #
-  # On `next` the push is usually the `chore(sync):` forward-merge commit, so the
-  # classified file set is what the merge carried over from `main`. A docs-only
-  # fix therefore skips here exactly as it skipped on `main`, and the two lines
-  # stay symmetric.
+  # On `next` the push is usually the `chore(sync):` forward-merge commit, whose
+  # subject cannot know what it carried over — so for those the paths decide
+  # alone (`release-title-lib.mjs`). A docs-only fix therefore skips here exactly
+  # as it skipped on `main`, and the two lines stay symmetric.
   decide:
-    name: Release relevance
+    name: Release intent
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -92,16 +99,21 @@ jobs:
       - name: Checkout ⬇️
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
-      - name: Self-test the classifier
-        run: node --test .github/scripts/release-relevance-lib.test.mjs
+      - name: Self-test the classifiers
+        run: |
+          node --test .github/scripts/release-relevance-lib.test.mjs
+          node --test .github/scripts/release-title-lib.test.mjs
 
-      - name: Classify the changed paths 🔎
+      - name: Decide from the title, verify against the paths 🔎
         id: relevance
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
+          # Read through the environment, never interpolated into the script: a
+          # commit subject is untrusted input.
+          HEAD_SUBJECT: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
 
@@ -161,8 +173,13 @@ jobs:
           done <<< "$(printf '%s\n' "$files" \
             | grep -E '^(package\.json|packages/[^/]+/package\.json)$' || true)"
 
+          # The TITLE decides, the paths verify it (#3023). A disagreement
+          # exits non-zero here, which skips the publish job and leaves a red
+          # release run — the one hole the PR check cannot close, because GitHub
+          # lets the merger edit the squash subject after every check passed.
           printf '%s\n' "$files" \
-            | node .github/scripts/release-relevance-guard.mjs
+            | MODE=decide SUBJECT="${HEAD_SUBJECT}" \
+              node .github/scripts/release-intent-guard.mjs
 
   publish:
     # Publish on manual dispatch, or on any push to a standing line EXCEPT the

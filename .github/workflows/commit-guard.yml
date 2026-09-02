@@ -11,6 +11,11 @@ name: Commit guard
 #      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
 #        line, not on any standing line (`main` *or* `next`).
 #    This makes the dangerous directions mechanically hard.
+# 3. Release intent — the title decides whether the merge releases, so it has to
+#    be TRUE. The type gives the default and a `[release]` / `[no-release]` tag
+#    overrides it; this job fails when the title and the changed paths disagree
+#    (#3023). Catching it here is the point: after the merge the same
+#    disagreement only turns the release run red.
 
 on:
   pull_request:
@@ -156,3 +161,55 @@ jobs:
       - name: Enforce the version contract
         if: steps.gate.outputs.active == 'true'
         run: node .github/scripts/version-contract-guard.mjs
+
+  release-intent:
+    name: Release intent (title vs. changed paths)
+    # Only PRs targeting a standing release line release anything.
+    if: >-
+      github.event.pull_request.base.ref == 'main' ||
+      github.event.pull_request.base.ref == 'next'
+    runs-on: ubuntu-latest
+    steps:
+      # Full history, because the changed-file list comes from the merge base.
+      - name: Checkout (full history so the merge base is reachable)
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          fetch-depth: 0
+
+      - name: Self-test the classifiers
+        run: |
+          node --test .github/scripts/release-relevance-lib.test.mjs
+          node --test .github/scripts/release-title-lib.test.mjs
+
+      # The same comparison `publish.yml` makes on the push, one step earlier.
+      # `git diff` is fine here (the checkout has history); the manifest key
+      # diff reads both sides straight out of git rather than the compare API.
+      - name: Compare the title with the changed paths
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          # Through the environment, never interpolated: a PR title is
+          # untrusted input.
+          SUBJECT: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          base="$(git merge-base "$BASE" "$HEAD")"
+          files="$(git diff --name-only "$base" "$HEAD")"
+
+          export MANIFEST_SNAPSHOT_DIR="${RUNNER_TEMP}/manifests"
+          mkdir -p "${MANIFEST_SNAPSHOT_DIR}/before" "${MANIFEST_SNAPSHOT_DIR}/after"
+          while IFS= read -r manifest; do
+            [ -n "$manifest" ] || continue
+            slug="$(printf '%s' "$manifest" | sed 's|/|__|g')"
+            git show "${base}:${manifest}" \
+              > "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json" 2>/dev/null || \
+              rm -f "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json"
+            git show "${HEAD}:${manifest}" \
+              > "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json" 2>/dev/null || \
+              rm -f "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json"
+          done <<< "$(printf '%s\n' "$files" \
+            | grep -E '^(package\.json|packages/[^/]+/package\.json)$' || true)"
+
+          printf '%s\n' "$files" \
+            | MODE=check node .github/scripts/release-intent-guard.mjs

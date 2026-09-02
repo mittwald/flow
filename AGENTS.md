@@ -156,14 +156,23 @@ and commit the results.
 
 - **Conventional Commits** with component/package scope — `fix(Button): …`,
   `feat(components): …`. Releases and changelogs are generated from them.
+- **The PR title decides whether the merge releases.** `feat`, `fix`, `perf` and
+  `revert` release; `docs`, `ci`, `chore`, `test`, `build`, `style` and
+  `refactor` do not. When your change contradicts its type, say so in the title:
+  `docs(codemods): add a migration entry [release]` releases,
+  `fix(docs): correct a live example [no-release]` does not. A CI check compares
+  the title with the changed paths and **fails the PR** when they disagree,
+  naming the files — so you find out before the merge, not from a missing
+  release afterwards (#3023).
 - Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
   packages) — **unless nothing in the merge can reach a consumer**, which
   publishes nothing at all (no npm release, no version bump commit, no tag, no
   GitHub Release). That covers docs, CI and repo tooling, and inside `packages/`
   also `.storybook/**`, `e2e/**`, `src/tests/**`,
   `dev/{cross-version,vitest}/**`, `CONTRIBUTE.md`, `*.stories.tsx`, `*.test.*`
-  and a `scripts`-only manifest diff. The rule lives in
-  `.github/scripts/release-relevance-lib.mjs`; see
+  and a `scripts`-only manifest diff. The rules live in
+  `.github/scripts/release-title-lib.mjs` (the title) and
+  `release-relevance-lib.mjs` (the paths); see
   [docs/release-workflow.md](docs/release-workflow.md).
 - **Maintain the nx wiring for scripts.** Every package script that nx
   orchestrates needs correct target metadata: `dependsOn` (ordering),
