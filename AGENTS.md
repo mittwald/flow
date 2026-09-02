@@ -173,9 +173,12 @@ and commit the results.
   PR, or retitle it to what its commits actually carry.
 
 - Merged PRs trigger the publish workflow (lerna-lite, fixed versioning across
-  packages) — **unless the merge is docs-, CI- or tooling-only**, which
+  packages) — **unless nothing in the merge can reach a consumer**, which
   publishes nothing at all (no npm release, no version bump commit, no tag, no
-  GitHub Release). The rule lives in
+  GitHub Release). That covers docs, CI and repo tooling, and inside `packages/`
+  also `.storybook/**`, `e2e/**`, `src/tests/**`,
+  `dev/{cross-version,vitest}/**`, `CONTRIBUTE.md`, `*.stories.tsx`, `*.test.*`
+  and a `scripts`-only manifest diff. The rule lives in
   `.github/scripts/release-relevance-lib.mjs`; see
   [docs/release-workflow.md](docs/release-workflow.md).
 - **Maintain the nx wiring for scripts.** Every package script that nx
