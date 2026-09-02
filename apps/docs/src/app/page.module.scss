@@ -53,7 +53,7 @@ $release-tile-background-color: #6f459f;
 
   :global(.flow--column-layout--column-layout-container),
   :global(.flow--column-layout),
-  img {
+  :global(.flow--image) {
     height: 100%;
     width: 100%;
   }
@@ -71,7 +71,7 @@ $release-tile-background-color: #6f459f;
     }
   }
 
-  img {
+  :global(.flow--image) {
     border-radius: var(--corner-radius--m);
     object-fit: cover;
     min-height: 400px;

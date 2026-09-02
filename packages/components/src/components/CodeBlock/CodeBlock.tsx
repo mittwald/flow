@@ -49,8 +49,8 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   if (!code) {
     return (
       <div className={clsx(rootClassName, styles.withChildren)}>
-        <pre>
-          <code>{children}</code>
+        <pre className={styles.pre}>
+          <code className={styles.code}>{children}</code>
         </pre>
       </div>
     );

@@ -15,19 +15,14 @@
    =========================================================================== */
 .modal,
 .offCanvas {
-  /* Fixed full-viewport layer + centering wrapper. Sized to the visual
-     viewport so it tracks the on-screen keyboard (Overlay sets the var). */
-  > div {
-    position: fixed;
-    height: var(--visual-viewport-height);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  /* Overlay.module.scss lays the viewport out; the dialog inside it is the only
+     pointer target. */
+  > :global(.flow--overlay--viewport) {
     pointer-events: none;
 
-    > div {
+    /* react-aria's own modal wrapper — it gets no className from Flow, so
+       its default `react-aria-Modal` class is the handle. */
+    > :global(.react-aria-Modal) {
       display: flex;
       justify-content: center;
       width: inherit;
@@ -59,12 +54,18 @@
     border: var(--modal--border-width) var(--modal--border-style)
       var(--modal--border-color);
 
+    // A consumer `Form` (or raw `<form>`) wrapping the modal content. `Form`
+    // is a plain FC, so the props context cannot give it a class.
+    // stylelint-disable-next-line selector-max-type -- consumer form, no class
     > form {
       display: contents;
     }
   }
 
   /* Header */
+  // A `Header`/`SectionHeader` — or a raw `<header>` — the consumer places in
+  // the modal; both must match.
+  // stylelint-disable-next-line selector-max-type -- consumer-placed header
   header {
     display: flex;
     justify-content: space-between;
@@ -79,7 +80,11 @@
     padding-inline: var(--modal--padding);
 
     /* Flatten the heading's text and content spans into the header row, so
-       badges stay behind the title instead of wrapping onto their own line. */
+       badges stay behind the title instead of wrapping onto their own line.
+       Heading's spans do carry classes, but `.flow--heading--heading-content`
+       already sets `display: none` on `:empty` at the same specificity a class
+       selector here would reach — source order would then decide. */
+    // stylelint-disable-next-line selector-max-type -- see above
     > span {
       display: contents;
     }
@@ -141,7 +146,7 @@
       border-radius: var(--modal--corner-radius);
     }
 
-    > div > div {
+    > :global(.flow--overlay--viewport) > :global(.react-aria-Modal) {
       &[data-entering] {
         animation: modal-zoom var(--transition--duration--slow)
           cubic-bezier(0.1, 0.8, 0.3, 1.2);
@@ -168,10 +173,10 @@
     border-radius: 0;
   }
 
-  > div {
+  > :global(.flow--overlay--viewport) {
     padding-inline-start: var(--size-px--m);
 
-    > div {
+    > :global(.react-aria-Modal) {
       justify-content: flex-end;
       width: inherit;
       height: inherit;
@@ -189,10 +194,10 @@
   }
 
   &.left {
-    > div {
+    > :global(.flow--overlay--viewport) {
       padding-inline: 0 var(--size-px--m);
 
-      > div {
+      > :global(.react-aria-Modal) {
         justify-content: flex-start;
         padding: unset;
 
@@ -220,7 +225,7 @@
 @media (max-width: 768px) {
   .modal {
     /* Bottom-anchored sheet: rounded top corners + slide-up animation. */
-    > div > div {
+    > :global(.flow--overlay--viewport) > :global(.react-aria-Modal) {
       margin-top: auto;
       width: 100%;
       padding: unset;
@@ -250,6 +255,7 @@
       overflow: hidden auto;
     }
 
+    // stylelint-disable-next-line selector-max-type -- consumer form, see above
     [role="dialog"] > form {
       width: inherit;
     }
@@ -322,6 +328,9 @@
     .actionGroup {
       flex-direction: column;
 
+      // The footer's buttons are consumer `Button`/`Action` children; a raw
+      // `<button>` matches today too.
+      // stylelint-disable-next-line selector-max-type -- consumer children
       button {
         width: 100%;
       }

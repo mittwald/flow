@@ -14,13 +14,13 @@
       var(--code-block--border-color);
     border-radius: var(--code-block--corner-radius);
 
-    > pre {
+    > .pre {
       @include scrollbar.scrollbar;
 
       overflow-x: auto;
       padding: var(--code-block--padding);
 
-      > code {
+      > .code {
         text-shadow: none;
       }
     }
@@ -47,8 +47,10 @@
     }
   }
 
-  /* A code block is not an input – both axes use its own padding. */
-  &.codeBlock div:global(.flow--code-editor--code-mirror) {
+  /* A code block is not an input – both axes use its own padding. The repeated
+     root class only buys specificity over CodeEditor's own `.codeMirror` rules
+     (incl. `.readonly`); it identifies nothing. */
+  &.codeBlock.codeBlock :global(.flow--code-editor--code-mirror) {
     --form-control--padding-y: var(--code-block--padding);
     --form-control--padding-x: var(--code-block--padding);
 

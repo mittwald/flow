@@ -41,7 +41,10 @@ export const Heading = flowComponent("Heading", (props) => {
     size && styles[`size-${size}`],
     color !== "default" && styles[color],
     wrap && styles[`wrap-${wrap}`],
-    elementType && styleClassname(styles, `h${level}`),
+    // The level class carries the font size. Emitted for every heading — not
+    // just the `elementType` ones — so the stylesheet can select on the class
+    // instead of the h1–h6 element react-aria renders without one.
+    styleClassname(styles, `h${level}`),
     className,
   );
 

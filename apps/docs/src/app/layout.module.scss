@@ -84,10 +84,14 @@
   flex-direction: column;
   row-gap: var(--section--spacing);
 
+  /* MDX-rendered headings. The child combinator is load-bearing: the MDX view
+     wraps its output, so only headings rendered directly here match. */
+  // stylelint-disable selector-max-type -- MDX output, see above
   > h3,
   > h4 {
     margin-top: var(--size-px--m);
   }
+  // stylelint-enable selector-max-type
 }
 
 /*
