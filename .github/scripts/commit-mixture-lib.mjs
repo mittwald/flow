@@ -1,0 +1,175 @@
+// @ts-check
+/**
+ * Commit-mixture classification — pure functions, no git / no IO.
+ *
+ * The repo squash-merges, so only the PR TITLE survives the merge: it becomes
+ * the release commit Lerna-Lite reads, and `commit-guard.yml`'s routing job
+ * checks that title against the target branch. A PR whose commits carry a
+ * higher release class than its title therefore smuggles that class past
+ * routing — a `feat:` commit under a `fix:` title lands a feature on `main`,
+ * and a breaking commit under either lands it on a standing line.
+ *
+ * Two rules, both about the classes a PR mixes:
+ *
+ * 1. At most ONE releasing class per PR. `feat` + `fix` cannot both be told in one
+ *    squash subject, and they route to different branches.
+ * 2. The title's class equals the commits' class. Anything else is either
+ *    smuggling (title lower) or mislabelling (title higher).
+ *
+ * Non-releasing commits mix freely: a feature with its docs, a fix with its
+ * test. And a commit whose subject is not a Conventional Commit is IGNORED —
+ * `wip`, `review feedback` and `fixup!` are normal on a branch, and failing on
+ * them would make the guard a nuisance rather than a gate.
+ */
+
+/** Release classes, ordered. `none` never conflicts with anything. */
+const CLASS_ORDER = ["none", "patch", "feature", "breaking"];
+
+/** Types that produce a patch release. */
+const PATCH_TYPES = new Set(["fix", "perf", "revert"]);
+
+/** Types that produce a feature release. */
+const FEATURE_TYPES = new Set(["feat", "feature"]);
+
+/** Types that release nothing. Keep in step with `commit-guard.yml`. */
+const NONE_TYPES = new Set([
+  "docs",
+  "style",
+  "chore",
+  "refactor",
+  "test",
+  "build",
+  "ci",
+]);
+
+/**
+ * Parse a Conventional Commit header.
+ *
+ * @param {string} subject
+ * @returns {{ type: string; scope?: string; breaking: boolean } | undefined}
+ */
+export function parseConventionalHeader(subject) {
+  const match = /^([a-z]+)(?:\(([^)]*)\))?(!)?:\s*(.+)$/.exec(
+    (subject ?? "").trim(),
+  );
+  if (!match) return undefined;
+  return { type: match[1], scope: match[2], breaking: match[3] === "!" };
+}
+
+/**
+ * The release class a commit belongs to.
+ *
+ * `undefined` means "cannot tell" — an unparsable subject or a type this
+ * repository does not know. Those are ignored rather than rejected.
+ *
+ * @param {{ subject: string; body?: string }} commit
+ * @returns {"none" | "patch" | "feature" | "breaking" | undefined}
+ */
+export function classifyCommit(commit) {
+  const header = parseConventionalHeader(commit.subject);
+  if (!header) return undefined;
+
+  // A footer marks a breaking change as loudly as the `!` does.
+  const declaresBreaking = /^BREAKING[ -]CHANGE:/m.test(commit.body ?? "");
+  if (header.breaking || declaresBreaking) return "breaking";
+
+  if (FEATURE_TYPES.has(header.type)) return "feature";
+  if (PATCH_TYPES.has(header.type)) return "patch";
+  if (NONE_TYPES.has(header.type)) return "none";
+  return undefined;
+}
+
+/**
+ * Does this PR mix classes it cannot express in one squash subject?
+ *
+ * @param {{ subject: string; body?: string }[]} commits
+ * @param {string} title The PR title — the future squash subject.
+ * @returns {{
+ *   ok: boolean;
+ *   reason: string;
+ *   titleClass: string | undefined;
+ *   commitClasses: string[];
+ *   offenders: { subject: string; class: string }[];
+ * }}
+ */
+export function classifyMixture(commits, title) {
+  const classified = commits
+    .map((commit) => ({ ...commit, class: classifyCommit(commit) }))
+    .filter((commit) => commit.class !== undefined);
+
+  const releasing = classified.filter((commit) => commit.class !== "none");
+  const commitClasses = [...new Set(releasing.map((commit) => commit.class))]
+    .filter((value) => typeof value === "string")
+    .sort((a, b) => CLASS_ORDER.indexOf(a) - CLASS_ORDER.indexOf(b));
+
+  const titleClass = classifyCommit({ subject: title });
+
+  if (commitClasses.length > 1) {
+    return {
+      ok: false,
+      reason:
+        `the commits mix ${commitClasses.join(" and ")} changes, and one squash ` +
+        "subject can only tell one of them",
+      titleClass,
+      commitClasses,
+      offenders: releasing.map((commit) => ({
+        subject: commit.subject,
+        class: /** @type {string} */ (commit.class),
+      })),
+    };
+  }
+
+  // Nothing releasing, or nothing parsable: the title stands on its own.
+  if (commitClasses.length === 0) {
+    return {
+      ok: true,
+      reason:
+        classified.length === 0
+          ? "no commit carries a Conventional Commit subject — nothing to compare"
+          : "no commit carries a releasing type",
+      titleClass,
+      commitClasses,
+      offenders: [],
+    };
+  }
+
+  const commitClass = commitClasses[0];
+
+  if (titleClass === undefined) {
+    return {
+      ok: true,
+      reason: `the title is not a Conventional Commit — \`conventional-title\` reports that`,
+      titleClass,
+      commitClasses,
+      offenders: [],
+    };
+  }
+
+  if (titleClass === commitClass) {
+    return {
+      ok: true,
+      reason: `title and commits agree on \`${commitClass}\``,
+      titleClass,
+      commitClasses,
+      offenders: [],
+    };
+  }
+
+  const smuggling =
+    CLASS_ORDER.indexOf(commitClass) > CLASS_ORDER.indexOf(titleClass);
+
+  return {
+    ok: false,
+    reason: smuggling
+      ? `the commits carry a ${commitClass} change but the title claims ` +
+        `${titleClass} — routing reads the title, so it would land on the wrong line`
+      : `the title claims ${titleClass} but no commit carries more than a ` +
+        `${commitClass} change`,
+    titleClass,
+    commitClasses,
+    offenders: releasing.map((commit) => ({
+      subject: commit.subject,
+      class: /** @type {string} */ (commit.class),
+    })),
+  };
+}
