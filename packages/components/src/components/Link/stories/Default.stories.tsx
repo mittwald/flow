@@ -91,16 +91,3 @@ export const WithButton: Story = {
     </StoryBackground>
   ),
 };
-
-export const WithButtonAndIcon: Story = {
-  render: (props, context) => (
-    <StoryBackground color={props.color} theme={context.globals.theme}>
-      <Link target="_blank" href="#" {...props}>
-        <Button>
-          <IconDownload />
-          mittwald.de
-        </Button>
-      </Link>
-    </StoryBackground>
-  ),
-};

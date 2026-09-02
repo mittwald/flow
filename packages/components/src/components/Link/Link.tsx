@@ -127,9 +127,8 @@ export const Link = flowComponent("Link", (props) => {
       color: props.color === "default" ? undefined : props.color,
       isDisabled: props.isDisabled,
       /**
-       * Wrapping icon-and-text children in a single `Text` would collapse them
-       * into one flex item and drop the button's gap between icon and label —
-       * so only plain text gets the wrapper, just like in `Button` itself.
+       * Wrapping icon and text in one `Text` would collapse them into a single
+       * flex item and drop the button's gap between them.
        */
       children: dynamic((buttonProps) => (
         <>
