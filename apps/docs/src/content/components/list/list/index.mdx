@@ -1,7 +1,8 @@
 ---
 component: List
 description:
-  Die List stellt mehrere ListItems dar und bietet Sortierung, Filter und Suche.
+  Die List stellt mehrere List-Items dar und bietet Sortierung, Filter und
+  Suche.
 ---
 
 <LiveCodeEditor />
@@ -11,7 +12,7 @@ description:
 # Best Practices
 
 - Biete eine passende Ansicht an. Eine Rasteransicht eignet sich, wenn das Bild
-  eines ListItems den Userflow bestimmt; bei mehreren Anwendungsfällen kann der
+  eines List-Items den Userflow bestimmt; bei mehreren Anwendungsfällen kann der
   User zwischen Ansichten wechseln.
 - Wähle eine Standardsortierung nach dem häufigsten Anwendungsfall. Ein Beispiel
   ist „Neueste zuerst“ bei einer Änderungshistorie; biete nur Sortieroptionen
@@ -48,7 +49,7 @@ Listenansicht darzustellen.
 ## Rasteransicht
 
 Sinnvoll, wenn die Anzahl der Elemente überschaubar ist oder die visuelle
-Darstellung im Vordergrund steht – das ListItem sollte hier nur wenige
+Darstellung im Vordergrund steht – das List-Item sollte hier nur wenige
 Informationen enthalten. Für die Rasteransicht wird ebenfalls das
 `<List.Item />` verwendet: Aktiviere sie über `showTiles` und deaktiviere die
 Listenansicht bei Bedarf mit `showList={false}`. Über `maxTileWidth` steuerst du
@@ -67,11 +68,12 @@ der Table.
 
 ---
 
-# ListItem
+# List.Item
 
-Ein [ListItem](/components/list/list-item) repräsentiert ein einzelnes Element
-der List (z. B. eine Domain, E-Mail-Adresse oder ein Projekt) und stellt dessen
-wichtigste Informationen übersichtlich dar.
+Jedes Element der List renderst du über `List.Item`. Den Inhalt gestaltest du
+frei mit einer eigenen View – oder du nutzt die vorgefertigte Layout-Lösung
+[`List.ItemView`](/components/list/list-item-view), die Avatar, Titel, Content
+und Aktionen einheitlich anordnet.
 
 ---
 
@@ -183,7 +185,7 @@ damit der User direkt tippen kann.
 
 # Pagination
 
-Standardmäßig zeigt die List maximal 10 ListItems; weitere lädt der User über
+Standardmäßig zeigt die List maximal 10 List-Items; weitere lädt der User über
 den „Mehr anzeigen“-Button nach. Über `batchSize` änderst du die Anzahl, über
 `hidePagination` schaltest du die Pagination ab. Halte die Zahl niedrig: Über
 Suche, Filter und Sortierung findet der User gezielt, und viele gleichzeitig

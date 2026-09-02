@@ -11,7 +11,7 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/list/list-item/examples/domainApi";
+} from "@/content/components/list/list-item-view/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
