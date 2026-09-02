@@ -115,14 +115,6 @@ flowchart LR
     moved it and stays relevant when none of them changed. #2970 cut 1.0.9 from
     two root scripts, #3006 cut 1.0.12 from one package's `test:unit`, #2959 cut
     1.0.4 from an `apps/docs` dependency.
-- **Tests and stories stay out of `dist/types`.** Every release build shares
-  `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
-  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
-  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
-  799 tarball entries were `dist/types/tests/**`. No `exports` path reached
-  them. A story's helper still ships (`Button/stories/lib.tsx`), because
-  `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
-  only `*.stories.tsx` — keep that `exclude` and the path classifier in step.
 - **The changelog renders every commit type** (`changelogPreset` in
   `lerna.json`, asserted by `.github/scripts/changelog-preset.test.mjs`), so a
   `chore`, `build` or `test` change that touches a package is no longer

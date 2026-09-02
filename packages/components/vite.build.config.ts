@@ -5,7 +5,7 @@ import { defineConfig, mergeConfig } from "vite";
 import { flowComponentsLayerPlugin } from "./dev/vite/flowComponentsLayerPlugin.ts";
 import { layerOrderPlugin } from "./dev/vite/layerOrderPlugin.ts";
 import { stylesheetVariantsPlugin } from "./dev/vite/stylesheetVariantsPlugin.ts";
-import { preserveUseClientBanner, publishedDtsOptions } from "../core";
+import { preserveUseClientBanner } from "../core";
 
 export default mergeConfig(
   baseConfig,
@@ -65,7 +65,10 @@ export default mergeConfig(
       externalizeDeps({
         except: ["@mittwald/flow-design-tokens/**/*", "@mittwald/flow-core"],
       }),
-      dts(publishedDtsOptions),
+      dts({
+        include: ["src"],
+        outDirs: "dist/types",
+      }),
     ],
   }),
 );

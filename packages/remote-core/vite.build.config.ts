@@ -3,7 +3,6 @@ import { defineConfig, mergeConfig } from "vite";
 import dts from "unplugin-dts/vite";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import baseConfig from "./vite.config";
-import { publishedDtsOptions } from "../core";
 
 export default mergeConfig(
   baseConfig,
@@ -13,7 +12,10 @@ export default mergeConfig(
       externalizeDeps({
         except: ["@quilted/threads"],
       }),
-      dts(publishedDtsOptions),
+      dts({
+        include: ["src"],
+        outDirs: "dist/types",
+      }),
     ],
 
     build: {
