@@ -204,15 +204,19 @@ jobs:
           test:cross-version
 
   # Runs the shards through `run-visual-shard`, the same action the scheduled and
-  # label runs use — so the retry lives in one place and this path gets it too.
-  # It is the path every PR crosses, so it is the one that must not report a
-  # starved runner as a diff: run 33626981366 failed 85 of 86 tests with "Could
-  # not capture a stable screenshot within 5000ms", every file, trivial ones
-  # included, on a shard whose baselines nothing in the PR touched.
+  # label runs use, so the shard invocation and its retry live in one place
+  # instead of two.
+  #
+  # What the retry buys is a hung browser process. It does not buy the failure
+  # this path keeps hitting — every test in one shard reporting "Could not
+  # capture a stable screenshot within 5000ms", from the first one on, in both
+  # browsers, while the other shards pass. The attempts share the runner, so all
+  # three fail identically (measured on #3104; it hits roughly 4 of every 10 runs
+  # on main, a different shard each time). That one needs a fix at the root.
   #
   # `attempts` matches the other two; the timeout follows from it, because three
   # attempts of a shard have to fit inside the job. A shard is 3-6 minutes green
-  # and ~8 starved, plus ~3 for setup and the build.
+  # and ~8 when every screenshot times out, plus ~3 for setup and the build.
   visual:
     runs-on: ubuntu-latest
     timeout-minutes: 35

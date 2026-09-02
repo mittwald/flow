@@ -214,11 +214,17 @@ baselines — what it renders is identical to a single-runner run. A failure nam
 the shard; its diff images are in that shard's `visual-diffs-*` artifact.
 
 Every path runs a failing shard up to **three times**, in a fresh browser
-process each time, and only then calls it failed. Two things fail a shard
-without a diff behind them: Firefox intermittently hangs on a single file, and a
-contended runner starves the browser until every screenshot misses its stability
-budget. A real diff fails all three attempts. A retry logs a warning, so a shard
-that went green on the second try still says so in the job log.
+process each time, and only then calls it failed. It covers the one failure a
+fresh process fixes: Firefox intermittently hangs on a single file, which no
+per-test retry recovers. A real diff fails all three attempts. A retry logs a
+warning, so a shard that went green on the second try still says so in the job
+log.
+
+The attempts share the runner, so they do **not** help against the other red
+without a diff behind it: a shard where every test reports
+`Could not capture a stable screenshot within 5000ms`, from the first test on
+and in both browsers, fails all three the same way. That one is a property of
+the machine the job landed on, and it is still open.
 
 ## Cross-version smoke tests
 

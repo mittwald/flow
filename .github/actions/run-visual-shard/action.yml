@@ -11,13 +11,13 @@ inputs:
     description: How many shards the suite is split into.
     required: true
   attempts:
-    description:
-      How often to run the shard before calling it failed. Firefox
+    description: How often to run the shard before calling it failed. Firefox
       intermittently hangs on a single file in headless CI — a hang vitest's
-      per-test `retry` cannot recover, only a fresh browser process can. WebKit
-      does not hang, but a contended runner starves it until every screenshot
-      misses its 5s stability budget, which fails a shard just as wrongly. A
-      real diff fails every attempt.
+      per-test `retry` cannot recover, only a fresh browser process can. A real
+      diff fails every attempt. It does not cover every red shard without a diff
+      behind it, though — the attempts share the runner, so a machine where
+      `toMatchScreenshot` never stabilizes fails all of them identically
+      (measured on #3104, 85 of 86 tests into the 5s budget three times over).
     default: "1"
   browser:
     description:
