@@ -19,12 +19,9 @@ import {
   type PropsWithClassName,
 } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
-import { Text } from "@/components/Text";
 import { LinkIcon } from "@/components/Link/components/LinkIcon";
 import { handleLinkClick, useRouter } from "@react-aria/utils";
 import { UiComponentTunnelExit } from "@/components/UiComponentTunnel/UiComponentTunnelExit";
-import { Wrap } from "@/components/Wrap";
-import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface LinkProps
   extends
@@ -126,17 +123,9 @@ export const Link = flowComponent("Link", (props) => {
       size: props.size,
       color: props.color === "default" ? undefined : props.color,
       isDisabled: props.isDisabled,
-      /**
-       * Wrapping icon and text in one `Text` would collapse them into a single
-       * flex item and drop the button's gap between them.
-       */
       children: dynamic((buttonProps) => (
         <>
-          <Wrap
-            if={extractTextFromFirstChild(buttonProps.children) !== undefined}
-          >
-            <Text>{buttonProps.children}</Text>
-          </Wrap>
+          {buttonProps.children}
           <LinkIcon download={download} target={target} unstyled={unstyled} />
         </>
       )),

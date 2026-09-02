@@ -5,6 +5,7 @@ declare const classNames: {
   readonly stateIcon: "stateIcon";
   readonly icon: "icon";
   readonly text: "text";
+  readonly hasText: "hasText";
   readonly counterBadge: "counterBadge";
   readonly isPending: "isPending";
   readonly isFailed: "isFailed";

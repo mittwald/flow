@@ -40,6 +40,8 @@
     column-gap: var(--button--spacing);
     align-items: center;
     justify-content: center;
+    text-align: start;
+    text-wrap-style: pretty;
   }
 
   .content,
@@ -51,7 +53,7 @@
     justify-self: center;
   }
 
-  &:where(:has(.icon):not(:has(.text))) {
+  &:where(:has(.icon):not(:has(.text), .hasText)) {
     padding: var(--button--padding-icon-only);
 
     &:where(.outline) {
@@ -59,10 +61,6 @@
         var(--button--padding-icon-only) - var(--button--border-width)
       );
     }
-  }
-
-  &:where(:has(.text) .icon) {
-    margin-inline-start: var(--button--spacing);
   }
 
   .counterBadge {
@@ -80,8 +78,8 @@
       opacity: 0;
     }
 
-    &.plain {
-      .content:has(.text) {
+    &.plain:where(:has(.text), .hasText) {
+      .content {
         opacity: 1;
       }
     }
@@ -112,7 +110,7 @@
       );
     }
 
-    &:where(:has(.icon):not(:has(.text))) {
+    &:where(:has(.icon):not(:has(.text), .hasText)) {
       padding: var(--button--padding-s-icon-only);
 
       &:where(.outline) {
