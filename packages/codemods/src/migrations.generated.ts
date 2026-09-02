@@ -227,7 +227,7 @@ export const migrations: Omit<MigrationEntry, "body">[] = [
     action: "codemod",
     remotePackage: true,
     apply:
-      "Rename the `action` prop on `Action` to `onAction`. Not only a rename: the new prop is typed `ActionFn` (`(...args: unknown[]) => unknown`), so a function *reference* that declares a parameter no longer type-checks and needs wrapping — `onAction={() => controller.close()}` rather than `onAction={controller.close}`. Check every site where you passed a reference rather than an inline arrow; the codemod renames the prop but cannot decide this one from the source.",
+      "Rename the `action` prop on `Action` to `onAction`. Not only a rename: the new prop is typed `ActionFn` (`(...args: unknown[]) => unknown`), so a function *reference* that declares a parameter no longer type-checks and needs wrapping — `onAction={() => controller.close()}` rather than `onAction={controller.close}`. A codemod does both. It wraps every bare reference (`close`, `controller.close`), because the wrap is a no-op for a reference that did not need it. It leaves a value that already is the handler or produces one — an arrow function, a function expression, a call like `makeHandler()` or `close.bind(controller)` — and anything that is not one reference, such as `isOpen ? close : open` or `controller?.close`. Two wraps to look at afterwards: a handler that read the event `Action` forwards stops receiving it, and a possibly-undefined reference (`onAction={props.onAction}`) becomes a call TypeScript rejects — add the guard it asks for.",
   },
   {
     id: "button-props-interfaces",
