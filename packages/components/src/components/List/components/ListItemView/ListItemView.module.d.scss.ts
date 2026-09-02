@@ -5,6 +5,7 @@ declare const classNames: {
   readonly topContent: "topContent";
   readonly bottomContent: "bottomContent";
   readonly heading: "heading";
+  readonly title: "title";
   readonly header: "header";
   readonly subTitle: "subTitle";
   readonly text: "text";
@@ -12,7 +13,6 @@ declare const classNames: {
   readonly listView: "listView";
   readonly columnLayout: "columnLayout";
   readonly contentWrapper: "contentWrapper";
-  readonly title: "title";
   readonly action: "action";
   readonly avatar: "avatar";
   readonly "flow--heading--heading-content": "flow--heading--heading-content";

@@ -52,6 +52,14 @@
     }
   }
 
+  /*
+   * React Aria sets `user-select: none` on the row while pressing; a child with
+   * its own value does not inherit it.
+   */
+  .cell {
+    user-select: text;
+  }
+
   .header {
     .column {
       border-block-end-width: var(--table--header-border-width);
