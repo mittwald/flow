@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-elements",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "type": "module",
   "description": "Flow compatible remote elements that can be used in a remote environment",
   "homepage": "https://flow.mittwald.de",
