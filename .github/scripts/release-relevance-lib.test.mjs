@@ -1,10 +1,12 @@
 // @ts-check
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import {
   isPublishRelevant,
   classifyChangedFiles,
-  classifyRootManifestChange,
+  classifyManifestChange,
 } from "./release-relevance-lib.mjs";
 
 test("isPublishRelevant: docs, CI and tooling paths are irrelevant", () => {
@@ -136,13 +138,35 @@ test("classifyChangedFiles: a promotion merge publishes", () => {
 test("classifyChangedFiles: the reason names the counts", () => {
   assert.match(
     classifyChangedFiles(["apps/docs/a.mdx", "docs/b.md"]).reason,
-    /all 2 changed file\(s\) are docs\/CI\/tooling only/,
+    /all 2 changed file\(s\) are non-shipping/,
   );
   assert.match(
     classifyChangedFiles(["apps/docs/a.mdx", "packages/components/src/a.ts"])
       .reason,
     /1 of 2 changed file\(s\) affect published packages/,
   );
+});
+
+test("classifyChangedFiles: a skip names the rules that fired", () => {
+  // The AC asks for a `::notice::` that says WHICH rule skipped the release,
+  // so the rule labels are part of the classifier's output, not log prose.
+  const result = classifyChangedFiles(
+    [
+      "apps/docs/a.mdx",
+      "packages/components/.storybook/preview.tsx",
+      "packages/components/src/components/Button/stories/Default.stories.tsx",
+      "packages/components/package.json",
+    ],
+    { manifestRelevance: { "packages/components/package.json": false } },
+  );
+  assert.equal(result.publish, false);
+  assert.deepEqual(result.rules, [
+    'filename "*.stories.tsx"',
+    'manifest key diff "packages/components/package.json"',
+    'package-local "packages/*/.storybook/"',
+    'top-level "apps/"',
+  ]);
+  for (const rule of result.rules) assert.ok(result.reason.includes(rule));
 });
 
 test("classifyChangedFiles: a non-path input publishes instead of being classified", () => {
@@ -167,7 +191,7 @@ test("classifyChangedFiles: square brackets are legitimate path characters", () 
   );
 });
 
-test("classifyRootManifestChange: a scripts-only change is irrelevant", () => {
+test("classifyManifestChange: a scripts-only change is irrelevant", () => {
   // #2970 "test(docs): check the documentation's internal links in CI" → 1.0.9
   const before = JSON.stringify({
     name: "root",
@@ -181,10 +205,10 @@ test("classifyRootManifestChange: a scripts-only change is irrelevant", () => {
     },
     devDependencies: { vite: "7.0.0" },
   });
-  assert.equal(classifyRootManifestChange(before, after).relevant, false);
+  assert.equal(classifyManifestChange(before, after).relevant, false);
 });
 
-test("classifyRootManifestChange: dependency and wiring keys stay relevant", () => {
+test("classifyManifestChange: dependency and wiring keys stay relevant", () => {
   const base = { scripts: { test: "a" }, devDependencies: { vite: "7.0.0" } };
   for (const [key, value] of [
     ["devDependencies", { vite: "7.1.0" }],
@@ -199,17 +223,17 @@ test("classifyRootManifestChange: dependency and wiring keys stay relevant", () 
   ]) {
     const after = JSON.stringify({ ...base, [key]: value });
     assert.equal(
-      classifyRootManifestChange(JSON.stringify(base), after).relevant,
+      classifyManifestChange(JSON.stringify(base), after).relevant,
       true,
       key,
     );
   }
 });
 
-test("classifyRootManifestChange: unparsable or unknown content is relevant", () => {
-  assert.equal(classifyRootManifestChange("{ not json", "{}").relevant, true);
-  assert.equal(classifyRootManifestChange(null, "{}").relevant, true);
-  assert.equal(classifyRootManifestChange("{}", undefined).relevant, true);
+test("classifyManifestChange: unparsable or unknown content is relevant", () => {
+  assert.equal(classifyManifestChange("{ not json", "{}").relevant, true);
+  assert.equal(classifyManifestChange(null, "{}").relevant, true);
+  assert.equal(classifyManifestChange("{}", undefined).relevant, true);
 });
 
 test("classifyChangedFiles: a scripts-only root manifest does not publish", () => {
@@ -221,14 +245,19 @@ test("classifyChangedFiles: a scripts-only root manifest does not publish", () =
       ".github/workflows/test.yml",
       "package.json",
     ],
-    { rootManifestRelevant: false },
+    { manifestRelevance: { "package.json": false } },
   );
   assert.equal(result.publish, false);
   assert.deepEqual(result.relevant, []);
 });
 
 test("classifyChangedFiles: an unclassified root manifest still publishes", () => {
-  for (const options of [undefined, {}, { rootManifestRelevant: true }]) {
+  for (const options of [
+    undefined,
+    {},
+    { manifestRelevance: {} },
+    { manifestRelevance: { "package.json": true } },
+  ]) {
     assert.equal(
       classifyChangedFiles(["apps/docs/a.mdx", "package.json"], options)
         .publish,
@@ -253,15 +282,24 @@ test("classifyChangedFiles: a lockfile follows the manifests that moved it", () 
   // The root manifest counts as a manifest — and only when it is relevant.
   assert.equal(
     classifyChangedFiles(["package.json", "pnpm-lock.yaml"], {
-      rootManifestRelevant: false,
+      manifestRelevance: { "package.json": false },
     }).publish,
     false,
   );
   assert.equal(
     classifyChangedFiles(["package.json", "pnpm-lock.yaml"], {
-      rootManifestRelevant: true,
+      manifestRelevance: { "package.json": true },
     }).publish,
     true,
+  );
+  // Same for a PACKAGE manifest: a scripts-only diff cannot have moved the
+  // lockfile, so the lock churn has nothing relevant left to follow.
+  assert.equal(
+    classifyChangedFiles(
+      ["packages/components/package.json", "pnpm-lock.yaml"],
+      { manifestRelevance: { "packages/components/package.json": false } },
+    ).publish,
+    false,
   );
 });
 
@@ -277,4 +315,218 @@ test("classifyChangedFiles: unexplained lock churn publishes (fail-safe)", () =>
     classifyChangedFiles(["patches/foo@1.0.0.patch", "pnpm-lock.yaml"]).publish,
     true,
   );
+});
+
+test("isPublishRelevant: package-local non-shipping directories are irrelevant", () => {
+  for (const path of [
+    // #3010 → 1.0.14. The Storybook config is never built into `dist`.
+    "packages/components/.storybook/preview.tsx",
+    "packages/components/.storybook/main.ts",
+    "packages/remote-react-components/e2e/remote-test-server/vitest.config.ts",
+    "packages/remote-react-components/src/tests/visual/lib/scenarios.ts",
+    "packages/remote-react-components/src/tests/visual/__screenshots__/a.png",
+    "packages/components/src/tests/layered/thirdParty.ts",
+    // #3006 → 1.0.12. The cross-version harness and the vitest setup files run
+    // only under vitest.
+    "packages/remote-react-components/dev/cross-version/run.ts",
+    "packages/components/dev/vitest/setupBrowser.ts",
+  ]) {
+    assert.equal(isPublishRelevant(path), false, path);
+  }
+});
+
+test("isPublishRelevant: stories and tests are irrelevant wherever they sit", () => {
+  for (const path of [
+    "packages/components/src/components/Button/stories/Default.stories.tsx",
+    "packages/components/src/lib/react/dynamic.test.ts",
+    "packages/components/src/components/Button/Button.browser.test.tsx",
+    "packages/components/dev/vite/layerOrderPlugin.test.ts",
+    // `.test.` is not always the last extension.
+    "packages/remote-react-components/e2e/tests/Button.browser.test.remote.tsx",
+  ]) {
+    assert.equal(isPublishRelevant(path), false, path);
+  }
+});
+
+test("isPublishRelevant: package-local build tooling in dev/ stays relevant", () => {
+  // `packages/*/dev/**` is NOT irrelevant wholesale: in `components` and
+  // `codemods` that directory IS the build. Only the test-harness subtrees are
+  // denylisted, so these four keep publishing.
+  for (const path of [
+    // Imported by vite.build.config.ts — changes the emitted CSS.
+    "packages/components/dev/vite/layerOrderPlugin.ts",
+    // Generates the shipped dist/assets/doc-properties.json.
+    "packages/components/dev/createDocPropertiesJson.ts",
+    // Generates view.ts / src/auto-generated/**.
+    "packages/components/dev/remote-components-generator/lib/propClassifiers.ts",
+    // `codemods`' build script is `tsx dev/generateCli.ts && …`.
+    "packages/codemods/dev/generateCli.ts",
+  ]) {
+    assert.equal(isPublishRelevant(path), true, path);
+  }
+});
+
+test("isPublishRelevant: a package's CONTRIBUTE.md never ships", () => {
+  // No package lists it in `files`, and npm force-includes only README and
+  // LICENSE — guarded by "every published package ships …" below.
+  assert.equal(
+    isPublishRelevant("packages/remote-react-components/CONTRIBUTE.md"),
+    false,
+  );
+});
+
+test("isPublishRelevant: the package-local rules need a full path segment", () => {
+  for (const path of [
+    // A prefix, not a segment.
+    "packages/components/src/testsWithoutSlash.ts",
+    "packages/components/e2e-helpers/serve.ts",
+    "packages/components/development/thing.ts",
+    // `dev/` other than the two harness subtrees.
+    "packages/components/dev/icons/generate.ts",
+    "packages/components/dev/scss-types/generateScssTypes.ts",
+    // The rules are package-local: the same names OUTSIDE packages/ are
+    // unknown paths, and unknown means relevant.
+    "src/tests/a.ts",
+    "e2e/a.ts",
+    ".storybook/main.ts",
+  ]) {
+    assert.equal(isPublishRelevant(path), true, path);
+  }
+});
+
+test("classifyChangedFiles: 1.0.14 — a Storybook-only push does not publish", () => {
+  // #3010 "build(components): silence the Storybook a11y addon".
+  const result = classifyChangedFiles([
+    "packages/components/.storybook/preview.tsx",
+  ]);
+  assert.equal(result.publish, false);
+  assert.deepEqual(result.relevant, []);
+});
+
+test("classifyChangedFiles: 1.0.12 — a package-local tooling push does not publish", () => {
+  // #3006 "ci(remote-react-components): select both unit projects": a
+  // scripts-only package manifest, a package-local CONTRIBUTE.md, the
+  // cross-version harness and the visual-test sources.
+  const result = classifyChangedFiles(
+    [
+      "packages/remote-react-components/package.json",
+      "packages/remote-react-components/CONTRIBUTE.md",
+      "packages/remote-react-components/dev/cross-version/crossVersionRunner.ts",
+      "packages/remote-react-components/src/tests/visual/lib/scenarios.ts",
+    ],
+    {
+      manifestRelevance: {
+        "packages/remote-react-components/package.json": false,
+      },
+    },
+  );
+  assert.equal(result.publish, false);
+  assert.deepEqual(result.relevant, []);
+});
+
+test("classifyChangedFiles: a mixed package-local push publishes", () => {
+  // One source file among the non-shipping ones is enough — the mixed case must
+  // never be swallowed.
+  const result = classifyChangedFiles(
+    [
+      "packages/components/.storybook/preview.tsx",
+      "packages/components/src/components/Button/stories/Default.stories.tsx",
+      "packages/components/src/tests/layered/thirdParty.ts",
+      "packages/remote-react-components/package.json",
+      "packages/components/src/components/Button/Button.tsx",
+    ],
+    {
+      manifestRelevance: {
+        "packages/remote-react-components/package.json": false,
+      },
+    },
+  );
+  assert.equal(result.publish, true);
+  assert.deepEqual(result.relevant, [
+    "packages/components/src/components/Button/Button.tsx",
+  ]);
+});
+
+test("classifyChangedFiles: a package manifest dependency bump publishes", () => {
+  for (const options of [
+    undefined,
+    { manifestRelevance: { "packages/components/package.json": true } },
+  ]) {
+    assert.equal(
+      classifyChangedFiles(["packages/components/package.json"], options)
+        .publish,
+      true,
+    );
+  }
+});
+
+test("classifyManifestChange: a package manifest is judged the same way", () => {
+  // #3006 changed only `test:unit` in remote-react-components' manifest.
+  const path = "packages/remote-react-components/package.json";
+  const before = JSON.stringify({
+    name: "@mittwald/flow-remote-react-components",
+    scripts: { "test:unit": "vitest run --project=unit" },
+    dependencies: { "@quilted/threads": "3.0.0" },
+  });
+  const scriptsOnly = JSON.stringify({
+    name: "@mittwald/flow-remote-react-components",
+    scripts: { "test:unit": "vitest run --project=unit*" },
+    dependencies: { "@quilted/threads": "3.0.0" },
+  });
+  const dependencyBump = JSON.stringify({
+    name: "@mittwald/flow-remote-react-components",
+    scripts: { "test:unit": "vitest run --project=unit" },
+    dependencies: { "@quilted/threads": "3.1.0" },
+  });
+
+  assert.equal(
+    classifyManifestChange(before, scriptsOnly, path).relevant,
+    false,
+  );
+  assert.equal(
+    classifyManifestChange(before, dependencyBump, path).relevant,
+    true,
+  );
+  // The reason names the manifest, so a run with several of them stays readable.
+  assert.match(
+    classifyManifestChange(before, scriptsOnly, path).reason,
+    /packages\/remote-react-components\/package\.json/,
+  );
+  assert.match(
+    classifyManifestChange(before, before).reason,
+    /root package\.json/,
+  );
+});
+
+test("every published package ships only dist and shipped Markdown", () => {
+  // The invariant the package-local denylist rests on. If a package ever starts
+  // shipping `src`, `.storybook`, `e2e` or CONTRIBUTE.md, this fails and the
+  // denylist has to be revisited — the classifier itself cannot notice.
+  const packagesDir = join(import.meta.dirname, "..", "..", "packages");
+  const neverShipped = new Set(["CONTRIBUTE.md"]);
+  let checked = 0;
+
+  for (const name of readdirSync(packagesDir)) {
+    let manifest;
+    try {
+      manifest = JSON.parse(
+        readFileSync(join(packagesDir, name, "package.json"), "utf8"),
+      );
+    } catch {
+      continue;
+    }
+    // Private packages are never published, so their `files` says nothing about
+    // tarballs (`core` and `icons-base` legitimately ship `src`).
+    if (manifest.private) continue;
+    checked += 1;
+
+    for (const entry of manifest.files ?? []) {
+      assert.ok(
+        entry === "dist" || (entry.endsWith(".md") && !neverShipped.has(entry)),
+        `${name} ships ${entry}`,
+      );
+    }
+  }
+
+  assert.ok(checked > 5, `only ${checked} published packages found`);
 });
