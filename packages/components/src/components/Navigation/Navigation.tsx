@@ -1,7 +1,8 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
+import { Children, isValidElement } from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 import {
   flowComponent,
@@ -9,12 +10,28 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { LinkListTunnelExit } from "@/components/Navigation/components/LinkListTunnelExit/LinkListTunnelExit";
+import { isRemoteTextRenderProps } from "@/lib/react/remote";
 
 export interface NavigationProps
   extends
     PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName,
     FlowComponentProps<HTMLElement> {}
+
+/** Text a link receives as a raw string, or as a remote text node. */
+const isText = (child: ReactNode): boolean =>
+  typeof child === "string" ||
+  typeof child === "number" ||
+  (isValidElement(child) && isRemoteTextRenderProps(child.props));
+
+/**
+ * A bare text node is an anonymous flex item that no rule can reach, so give
+ * the label an element the item can truncate.
+ */
+const wrapTextInLabel = (children: ReactNode): ReactNode =>
+  Children.map(children, (child) =>
+    isText(child) ? <span>{child}</span> : child,
+  );
 
 /** @flr-generate all */
 export const Navigation = flowComponent("Navigation", (props) => {
@@ -26,6 +43,7 @@ export const Navigation = flowComponent("Navigation", (props) => {
     wrapWith: <li />,
     className: styles.item,
     unstyled: true,
+    children: dynamic((linkProps) => wrapTextInLabel(linkProps.children)),
     Icon: {
       className: styles.icon,
       size: "m",

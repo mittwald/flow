@@ -1,8 +1,10 @@
 @use "@/styles/mixins/menuItem";
+@use "@/styles/mixins/ellipsis";
 
 .navigation {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 
   ul {
     display: flex;
@@ -17,18 +19,24 @@
   .item {
     @include menuItem.menuItem();
 
-    flex-wrap: wrap;
-
     > .icon {
       order: 0;
+      flex-shrink: 0;
     }
 
     > :not(.icon) {
       order: 1;
     }
 
+    > :not(.icon, .badge) {
+      @include ellipsis.ellipsis;
+
+      min-width: 0;
+    }
+
     .badge {
       margin-inline-start: auto;
+      flex-shrink: 0;
     }
   }
 
