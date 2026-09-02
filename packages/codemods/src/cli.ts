@@ -116,6 +116,11 @@ const main = async (): Promise<number> => {
       return runUpgrade(parsed, {
         ...defaultUpgradeDeps(process.cwd()),
         choose,
+        // Same rule as `list`: colour only for a person at a real terminal,
+        // off under `NO_COLOR` or a pipe so the output stays greppable.
+        color:
+          process.stdout.isTTY === true && process.env.NO_COLOR === undefined,
+        width: Math.min(Math.max(process.stdout.columns ?? 80, 60), 100),
       });
     }
     default:
