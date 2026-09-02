@@ -1,8 +1,4 @@
 import {
-  type Domain,
-  domains,
-} from "@/content/components/structure/list/examples/domainApi";
-import {
   AlertBadge,
   Avatar,
   ContextMenu,
@@ -13,30 +9,39 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import {
+  type Domain,
+  domains,
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={2}
+      batchSize={5}
       aria-label="Domains"
       getItemId={(domain) => domain.id}
-      hidePagination
     >
       <DomainList.StaticData data={domains} />
-      <DomainList.Sorting
-        property="hostname"
-        name="Alphabetisch"
-        direction="asc"
-        directionName="aufsteigend"
-        defaultEnabled
+      <DomainList.Filter
+        property="type"
+        mode="some"
+        name="Typ"
+        values={["Domain", "Subdomain"]}
+        defaultSelected={["Domain"]}
       />
-      <DomainList.Sorting
-        property="hostname"
-        name="Alphabetisch"
-        direction="desc"
-        directionName="absteigend"
+      <DomainList.Filter
+        property="verified"
+        mode="some"
+        name="Verifizierung"
+        matcher={(filterValue, propertyValue) =>
+          filterValue === "Verifiziert"
+            ? propertyValue
+            : !propertyValue
+        }
+        defaultSelected={["Unverifiziert"]}
+        values={["Verifiziert", "Unverifiziert"]}
       />
       <DomainList.Item
         textValue={(domain) => domain.domain}

@@ -1,41 +1,44 @@
 import {
+  ActionGroup,
   Avatar,
-  Content,
+  Button,
   Heading,
   IconDomain,
-  ListItemView,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
-  const List = typedList<Domain>();
+  const DomainList = typedList<Domain>();
 
   return (
-    <List.List
+    <DomainList.List
       batchSize={2}
       hidePagination
-      accordion
       aria-label="Domains"
       getItemId={(domain) => domain.id}
     >
-      <List.StaticData data={domains} />
-      <List.Item textValue={(domain) => domain.domain}>
+      <DomainList.StaticData data={domains} />
+      <ActionGroup>
+        <Button>Anlegen</Button>
+      </ActionGroup>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
-          <ListItemView>
+          <DomainList.ItemView>
             <Avatar>
               <IconDomain />
             </Avatar>
             <Heading>{domain.hostname}</Heading>
             <Text>{domain.type}</Text>
-            <Content slot="bottom">Mehr Inhalt</Content>
-          </ListItemView>
+          </DomainList.ItemView>
         )}
-      </List.Item>
-    </List.List>
+      </DomainList.Item>
+    </DomainList.List>
   );
 };

@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Content,
   ContextMenu,
   Heading,
   IconDomain,
@@ -10,7 +9,7 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list-item/examples/domainApi";
 
 export default () => {
   const List = typedList<Domain>();
@@ -24,7 +23,7 @@ export default () => {
     >
       <List.StaticData data={domains} />
       <List.Item
-        showTiles
+        href={() => "#"}
         textValue={(domain) => domain.domain}
       >
         {(domain) => (
@@ -33,9 +32,6 @@ export default () => {
               <IconDomain />
             </Avatar>
             <Heading>{domain.hostname}</Heading>
-
-            <Content slot="top">Top Content</Content>
-            <Content slot="bottom">Bottom Content</Content>
 
             <ContextMenu>
               <MenuItem>Details anzeigen</MenuItem>

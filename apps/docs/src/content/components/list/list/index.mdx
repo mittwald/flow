@@ -67,80 +67,11 @@ der Table.
 
 ---
 
-# ListItems
+# ListItem
 
-Ein ListItem repräsentiert ein spezifisches Element einer Kategorie (z. B. eine
-Domain, E-Mail-Adresse oder ein Projekt) und zeigt nur die Informationen, die
-zum Verständnis nötig sind. In der Listenansicht besteht es typischerweise aus:
-
-- **Avatar:** Der [Avatar](/components/content/avatar) steht am Anfang. Ein
-  [Icon](/components/content/icon) spiegelt die Kategorie wider (z. B. ein
-  Domain-Icon); ein hochgeladenes [Image](/components/content/image) wird
-  angezeigt, andernfalls erscheinen Initialen.
-- **Titel und Untertitel:** Der Titel gibt den Namen wieder, der Untertitel
-  ergänzt weitere Informationen nach dem Muster „Beschreibung – 1. Information
-  – 2. Information“.
-- **Content Slots:** Zusätzliche Bereiche (Top und Bottom Content), die flexibel
-  befüllt werden können.
-- **Aktionen:** Interaktionen erfolgen über ein
-  [ContextMenu](/components/actions/context-menu) oder direkt als
-  [Buttons](/components/actions/button) im ListItem.
-
-In der Rasteransicht ist die Darstellung kompakter: Der Avatar wird größer und
-eckig, Top Content sowie die Accordion-Funktion entfallen.
-
-## Mit Link
-
-Ein ListItem bietet das Property `href`, um das Element zu verlinken.
-
-<LiveCodeEditor example="item-link" editorCollapsed />
-
-## Mit Accordion
-
-Das Accordion-Verhalten wird über die `accordion`-Property aktiviert. Dadurch
-lässt sich ein ListItem per Klick ein- oder ausklappen. Der erweiterte Inhalt
-wird in `<Content slot="bottom" />` platziert.
-
-<LiveCodeEditor example="item-accordion" editorCollapsed />
-
-## Mit Checkboxen
-
-[Checkboxen](/components/form-controls/checkbox) in einem ListItem werden
-automatisch am Anfang der Zeile angeordnet. Ihre Funktionalität wird nicht von
-der List gesteuert und muss individuell implementiert werden. Achte darauf, dass
-die gesamte Zeile zur Auswahl genutzt werden kann – nutze dafür `onAction` der
-List.
-
-<LiveCodeEditor example="item-checkbox" editorCollapsed />
-
-## Mit Content Slots
-
-In einem ListItem kann zusätzlicher `<Content />` (Top und Bottom Content)
-platziert werden. Die Position wird über das `slot`-Property gesteuert.
-
-<LiveCodeEditor example="item-content" editorCollapsed />
-
-## Mit ColumnLayout
-
-Dem ListItem können die
-[ColumnLayout](/components/structure/column-layout)-Properties `s`, `m` und `l`
-mitgegeben werden, um Seitenverhältnis und Umbruchverhalten von Header und
-Content zu steuern.
-
-<LiveCodeEditor example="item-column-layout" editorCollapsed stretch />
-
-Da für die Spalten auch `null` gesetzt werden kann, lässt sich nicht zwingend
-benötigter Content in kleineren Ansichten ausblenden. In diesem Fall werden auch
-die entsprechenden Content Slots nicht angezeigt.
-
-<LiveCodeEditor example="item-column-layout-hidden" editorCollapsed stretch />
-
-## Mit ActionGroup
-
-Verwende eine ActionGroup innerhalb des `<Content />`, um
-[Buttons](/components/actions/button) im ListItem zu platzieren.
-
-<LiveCodeEditor example="item-action-group" editorCollapsed stretch />
+Ein [ListItem](/components/list/list-item) repräsentiert ein einzelnes Element
+der List (z. B. eine Domain, E-Mail-Adresse oder ein Projekt) und stellt dessen
+wichtigste Informationen übersichtlich dar.
 
 ---
 
@@ -395,22 +326,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 Beim asynchronen Laden lassen sich Pagination (`manualPagination`), Sortierung
 (`manualSorting`), Filterung (`manualFiltering`) und Suche serverseitig
 verarbeiten.
-
----
-
-# Responsive Layout
-
-Auf kleinen Bildschirmen passt sich der Header der List an: Ansicht und
-Sortierung werden in einem Icon-Button zusammengefasst, ebenso die Filter. Auf
-besonders kleinen Bildschirmen wandern diese Elemente zusammen mit der Suche
-eine Zeile nach unten.
-
-Der Inhalt der ListItems bricht bei kleineren Bildschirmgrößen um. Top Content
-kann über [ColumnLayouts](/components/structure/column-layout) auf kleinen
-Bildschirmen ausgeblendet werden – dabei dürfen nur Informationen entfallen, die
-der User nicht benötigt, um das ListItem zu verstehen.
-
-<Info heading="Mobile Variante" mobile example="mobile" />
 
 ---
 

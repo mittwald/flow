@@ -1,10 +1,9 @@
 import {
-  AlertBadge,
   Avatar,
-  ContextMenu,
   Heading,
   IconDomain,
   IconSubdomain,
+  ContextMenu,
   MenuItem,
   Text,
   typedList,
@@ -12,20 +11,19 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list-item/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={4}
-      aria-label="Domains"
+      batchSize={3}
       hidePagination
+      aria-label="Domains"
       getItemId={(domain) => domain.id}
     >
       <DomainList.StaticData data={domains} />
-
       <DomainList.Item
         textValue={(domain) => domain.domain}
       >
@@ -42,14 +40,7 @@ export default () => {
                 <IconSubdomain />
               )}
             </Avatar>
-            <Heading>
-              {domain.hostname}
-              {!domain.verified && (
-                <AlertBadge status="warning">
-                  Unverifiziert
-                </AlertBadge>
-              )}
-            </Heading>
+            <Heading>{domain.hostname}</Heading>
             <Text>{domain.type}</Text>
 
             <ContextMenu>

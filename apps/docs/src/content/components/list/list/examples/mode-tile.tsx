@@ -12,47 +12,24 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={5}
+      batchSize={4}
       aria-label="Domains"
+      hidePagination
+      defaultViewMode="tiles"
       getItemId={(domain) => domain.id}
     >
       <DomainList.StaticData data={domains} />
-      <DomainList.Filter
-        property="type"
-        mode="some"
-        name="Typ"
-        matcher={(filterValue, propertyValue) =>
-          filterValue === "Type Domain"
-            ? propertyValue === "Domain"
-            : propertyValue === "Subdomain"
-        }
-        values={["Type Domain", "Type Subdomain"]}
-        defaultSelected={["Type Domain"]}
-      />
-      <DomainList.Filter
-        property="verified"
-        mode="some"
-        name="Verifizierung"
-        matcher={(filterValue, propertyValue) =>
-          filterValue === "Verifizierung Verifiziert"
-            ? propertyValue
-            : !propertyValue
-        }
-        defaultSelected={["Verifizierung Unverifiziert"]}
-        values={[
-          "Verifizierung Verifiziert",
-          "Verifizierung Unverifiziert",
-        ]}
-      />
       <DomainList.Item
         textValue={(domain) => domain.domain}
+        showTiles
+        showList={false}
       >
         {(domain) => (
           <DomainList.ItemView>
