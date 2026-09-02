@@ -181,9 +181,9 @@ jobs:
           node --test .github/scripts/release-relevance-lib.test.mjs
           node --test .github/scripts/release-title-lib.test.mjs
 
-      # The same comparison `publish.yml` makes on the push, one step earlier.
-      # `git diff` is fine here (the checkout has history); the manifest key
-      # diff reads both sides straight out of git rather than the compare API.
+      # This is the only place the two answers are compared. `publish.yml`
+      # decides from the title alone and reads the paths only for the subjects
+      # that cannot answer, so a title that lies has to be caught here.
       - name: Compare the title with the changed paths
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
@@ -198,18 +198,9 @@ jobs:
           files="$(git diff --name-only "$base" "$HEAD")"
 
           export MANIFEST_SNAPSHOT_DIR="${RUNNER_TEMP}/manifests"
-          mkdir -p "${MANIFEST_SNAPSHOT_DIR}/before" "${MANIFEST_SNAPSHOT_DIR}/after"
-          while IFS= read -r manifest; do
-            [ -n "$manifest" ] || continue
-            slug="$(printf '%s' "$manifest" | sed 's|/|__|g')"
-            git show "${base}:${manifest}" \
-              > "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json" 2>/dev/null || \
-              rm -f "${MANIFEST_SNAPSHOT_DIR}/before/${slug}.json"
-            git show "${HEAD}:${manifest}" \
-              > "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json" 2>/dev/null || \
-              rm -f "${MANIFEST_SNAPSHOT_DIR}/after/${slug}.json"
-          done <<< "$(printf '%s\n' "$files" \
-            | grep -E '^(package\.json|packages/[^/]+/package\.json)$' || true)"
+          export BEFORE="$base" AFTER="$HEAD"
+          printf '%s\n' "$files" \
+            | .github/scripts/fetch-manifest-snapshots.sh git
 
           printf '%s\n' "$files" \
             | MODE=check node .github/scripts/release-intent-guard.mjs

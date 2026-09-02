@@ -81,116 +81,64 @@ flowchart LR
   type still renders. Unhiding changes nothing about the bump: without
   `bumpStrict` the preset's `whatBump` returns patch for any non-empty commit
   range regardless.
-- **Not every merge releases, and the TITLE says which do.** The type gives the
-  default — `feat`, `fix`, `perf` and `revert` release, `docs`, `ci`, `chore`,
-  `test`, `build`, `style` and `refactor` do not — and a `[release]` or
-  `[no-release]` tag at the end of the title overrides it (#3023). A merge that
-  releases nothing is skipped whole: no npm publish, no `chore(release):`
-  version bump commit, no tag, no GitHub Release (#2931).
+- **Not every merge releases; the title says which do.** The type gives the
+  default — `feat`, `fix`, `perf`, `revert` release, `docs`, `ci`, `chore`,
+  `test`, `build`, `style`, `refactor` do not — and a `[release]` or
+  `[no-release]` tag at the end of the title overrides it (#3023):
 
-  The title decides because it is the one part of a PR everyone reads. The type
-  alone cannot: it describes the author's intent, not the effect on the artifact
-  — `docs(codemods):` changes the shipped migration catalogue, `fix(docs):`
-  reaches nobody. Historically the two disagreed on 21 of 80 merges, and a
-  type-only gate would have swallowed 8 real releases, the 1.1.0 promotion among
-  them. Hence the tag: only the titles that contradict their type carry one.
-  - **Three classes cannot answer from the title, and fall back to the paths**
-    (`.github/scripts/release-title-lib.mjs`): a `chore(sync):` forward-merge
-    (its subject cannot know what it carried over — ADR 0004 §6), a Dependabot
-    subject (`build(deps-dev):` covers a group that is not homogeneous in
-    effect, and `commit-message.prefix` is per ecosystem, not per group), and an
-    unparsable subject or unknown type. `chore(release):` never releases (that
-    is this workflow's own bump) and `chore(promotion):` always does (it _is_
-    the release).
+  ```
+  docs(codemods): add migration entry for Tabs [release]
+  fix(docs): drop the classic JSX transform debug props [no-release]
+  ```
 
-- **The paths verify the title, twice.**
-  `.github/scripts/release-relevance-lib.mjs` classifies the changed files and
-  the two answers are compared:
-  - **On the PR**, by the `release-intent` job in `commit-guard.yml` — a
-    disagreement is a red check, with the offending files named. That is where a
-    wrong title is supposed to be caught.
-  - **On the push**, by the `decide` job in `publish.yml` — because the PR check
-    can be outrun: GitHub lets the merger edit the squash subject after every
-    check has passed. A disagreement there **fails the release run** instead of
-    guessing, so nothing publishes and nothing is skipped in silence. The remedy
-    is a follow-up commit with a correct title, or a manual `workflow_dispatch`.
-    Four properties matter when you touch the path classifier:
-  - It is a **denylist** — anything not provably non-shipping counts as
-    publishable. Forgetting a docs path costs one needless version; forgetting a
-    source path would silently swallow a real release. Package-local Markdown
-    stays relevant: `@mittwald/flow-react-components` ships `AGENTS.md`,
-    `MIGRATION.md` and `USAGE.md` next to `dist`.
-  - **Some paths inside `packages/**` are excluded too** (#3023), segment-exact
-    under `packages/<name>/`: `.storybook/**` (Storybook's own config, #3010 cut
-    1.0.14 with nothing but `preview.tsx`), `e2e/**`, `src/tests/**`,
-    `dev/cross-version/**` and `dev/vitest/**` (the harnesses), the package's
-    `CONTRIBUTE.md`, plus `*.stories.tsx` and `*.test.*` anywhere. None of these
-    is reachable from a build entry.
-    - `packages/*/dev/**` is **not** excluded wholesale, although #3023 proposed
-      it. In `components` and `codemods` that directory _is_ the build:
-      `dev/vite/*` holds the plugins `vite.build.config.ts` imports,
-      `dev/createDocPropertiesJson.ts` writes the shipped
-      `dist/assets/doc-properties.json`, `dev/remote-components-generator/**`
-      generates `view.ts` and `src/auto-generated/**`, and `codemods`' build
-      script is `tsx dev/generateCli.ts && …`.
-    - The argument for each entry is **"no consumer effect"**, not "not in the
-      tarball". `unplugin-dts` used to emit a `.d.ts` for every story and test
-      file under `src`, so those really did ship, unreachable through any
-      `exports` path; the shared `publishedDtsOptions` keeps them out now (see
-      below). The criterion stays consumer effect either way — nothing stops the
-      next generator from emitting something similar.
-  - **Some files are judged by content, not by path**, because for them the path
-    carries no information:
-    - **Every `package.json`** — the root one and each
-      `packages/*/package.json`. A `scripts` or `simple-git-hooks` edit cannot
-      reach a consumer, a dependency bump can. The `decide` job fetches both
-      versions of each and compares the top-level keys; an unknown key is
-      relevant like an unknown path is. #2970 added `test:links` to two root
-      scripts and cut 1.0.9; #3006 changed one package's `test:unit` and cut
-      1.0.12. Published tarballs _do_ contain `scripts` — nothing a consumer
-      installs, imports or runs reads them.
-    - **`pnpm-lock.yaml`** — a derived file, relevant when the manifest that
-      moved it is. It follows the manifests in the same push and drops out only
-      when at least one changed and none of them is publish-relevant. Lock churn
-      with NO manifest change (a dedupe, a resolution refresh) stays relevant.
-      #2959 bumped an `apps/docs` dependency and cut 1.0.4.
-  - A **`workflow_dispatch` run always publishes.** That is the escape hatch
-    when a docs-only change has to go out as a release anyway, and the remedy
-    after a rejected mismatch.
-- **Tests and stories stay out of `dist/types`.** `unplugin-dts` emits
-  declarations for everything its `include` matches, so `include: ["src"]` used
-  to drag `*.stories.d.ts` and whole test suites into the tarball — 196 of
-  `@mittwald/flow-remote-react-components@1.1.10`'s 799 entries. Every release
-  build now shares `publishedDtsOptions` from `packages/core`, whose `exclude`
-  drops them; no consumer loses a type, because no package's `exports` has a
-  wildcard subpath. The globs cannot move into the shared tsconfig preset
-  instead — its `exclude` governs `tsc --noEmit` too, and that would stop
-  type-checking the tests. A story's HELPER stays (`Button/stories/lib.tsx`):
+  A merge that releases nothing produces no npm publish, no `chore(release):`
+  version bump commit, no tag and no GitHub Release.
+  `.github/scripts/release-title-lib.mjs` holds the mapping.
+  - Four subjects are decided structurally: `chore(release):` never releases,
+    `chore(promotion):` always does, and a `chore(sync):` forward-merge or a
+    Dependabot subject (`*(deps)`, `*(deps-dev)`) falls back to the changed
+    paths — as does an unparsable subject or an unknown type.
+  - A **`workflow_dispatch` run always publishes**, whatever the title says.
+    That is the escape hatch for a docs-only release, and the remedy if a title
+    was wrong.
+
+- **The paths verify the title on the pull request.** The `release-intent` job
+  in `commit-guard.yml` classifies the changed files with
+  `.github/scripts/release-relevance-lib.mjs` and fails the PR when the two
+  answers disagree, naming the files. `publish.yml` then decides from the
+  verified title and reads the paths only for the subjects that cannot answer.
+  Four properties of the path classifier:
+  - It is a **denylist**: anything not provably non-shipping counts as
+    publishable. Package-local Markdown stays relevant —
+    `@mittwald/flow-react-components` ships `AGENTS.md`, `MIGRATION.md` and
+    `USAGE.md` next to `dist`.
+  - Inside `packages/**` these are excluded, segment-exact under
+    `packages/<name>/`: `.storybook/**`, `e2e/**`, `src/tests/**`,
+    `dev/cross-version/**`, `dev/vitest/**`, the package's `CONTRIBUTE.md`, and
+    `*.stories.tsx` / `*.test.*` anywhere.
+  - `packages/*/dev/**` is **not** excluded wholesale. In `components` and
+    `codemods` that directory is the build: `dev/vite/*` holds the plugins
+    `vite.build.config.ts` imports, `dev/createDocPropertiesJson.ts` writes the
+    shipped `dist/assets/doc-properties.json`,
+    `dev/remote-components-generator/**` generates `view.ts` and
+    `src/auto-generated/**`, and `codemods`' build script is
+    `tsx dev/generateCli.ts && …`.
+  - **Every `package.json` and `pnpm-lock.yaml` are judged by content**, because
+    their paths carry no information. A `scripts` or `simple-git-hooks` edit
+    cannot reach a consumer, a dependency bump can; the lockfile follows the
+    manifests that moved it and stays relevant when none changed.
+- **Tests and stories stay out of `dist/types`.** Every release build shares
+  `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
+  `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
+  emit. A story's helper still ships (`Button/stories/lib.tsx`):
   `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
-  only `*.stories.tsx`, so it contributes five entries to the published
-  `doc-properties.json`. Keep that list and the path classifier's in step.
-
-  A skip prints a `::notice::` naming the rule that fired, and the log lists
-  every changed file with the rule that cleared it. Both release lines run
-  through the same `decide` job, so `next` behaves identically — on `next` the
-  classified set is what the `chore(sync):` forward-merge carried over.
-
-- **A release can be real and still have nothing to write.** `changelogPreset`
-  gives every commit type a section, so a `chore`/`build`/`test`/`ci` change
-  that touches a package is rendered (#3023). What stays unrenderable is a
-  release whose cause lies OUTSIDE every package — `pnpm-lock.yaml`, the root
-  manifest, `lerna.json`. Lerna attributes commits per package, no package
-  changed, so every changelog honestly says "Version bump only"; 1.1.11 came
-  from a lock-only Rollup bump and reads that way even in the root
-  `CHANGELOG.md`. That is accepted, not a defect: a consumer reading a package's
-  changelog asks what changed in that package. The dependency-graph move is in
-  the diff, and in the release's own commit.
-
-  A related surprise that is only cosmetic: an entry's **scope** is the
-  commit's, never the package whose changelog it appears in. #3041 regenerated
-  `packages/components/MIGRATION.md`, so its `fix(codemods):` entry appears in
-  the components changelog too — correctly, because components did change.
-
+  only `*.stories.tsx`. Keep that `exclude` and the path classifier in step.
+- **The changelog renders every commit type** (`changelogPreset` in
+  `lerna.json`, asserted by `.github/scripts/changelog-preset.test.mjs`). A
+  release whose cause lies outside every package — `pnpm-lock.yaml`, the root
+  manifest, `lerna.json` — still reads "Version bump only" in every changelog,
+  because no package changed. An entry's scope is the commit's, not the
+  changelog's package.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'
