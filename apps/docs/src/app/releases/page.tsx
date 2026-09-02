@@ -3,6 +3,7 @@ import {
   Flex,
   Heading,
   LayoutCard,
+  Link,
   Section,
   Text,
 } from "@mittwald/flow-react-components";
@@ -48,7 +49,12 @@ export default async function ReleasesPage() {
           </Heading>
           <Text>
             Alle veröffentlichten Flow-Releases mit ihren Highlights,
-            Migrationshinweisen und den enthaltenen Fixes.
+            Migrationshinweisen und den enthaltenen Fixes. Wie du ein Update
+            einspielst, beschreibt{" "}
+            <Link inline href="/get-started/upgrades">
+              Upgrades
+            </Link>
+            .
           </Text>
         </Section>
 
