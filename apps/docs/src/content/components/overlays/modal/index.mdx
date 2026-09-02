@@ -58,6 +58,22 @@ du selbst entscheiden willst, wann es etwas zu verlieren gibt – setzt du
 
 ---
 
+# Trigger im ContextMenu
+
+Der `<ModalTrigger />` akzeptiert neben einem
+[Button](/components/actions/button) auch ein
+[MenuItem](/components/actions/context-menu) als Trigger, funktioniert also
+direkt im [ContextMenu](/components/actions/context-menu). Das Modal wird dabei
+außerhalb des ContextMenus gerendert und bleibt offen, wenn das Menü sich beim
+Klick schließt.
+
+Ein Detail dazu: Das Modal wird in dem Zustand weitergerendert, den es beim
+Schließen des Menüs hatte. Props, die von außerhalb des Menüs hereingegeben
+werden, aktualisieren sich also nicht mehr, solange das Modal offen ist – lade
+Daten im Modal selbst, statt sie durch das Menü zu reichen.
+
+---
+
 # Controller
 
 Neben dem `<ModalTrigger />` kann das Modal auch über einen Controller gesteuert
