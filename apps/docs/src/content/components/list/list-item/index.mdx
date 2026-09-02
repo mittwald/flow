@@ -26,25 +26,13 @@ gitHubComponentPath: components/List/components/ListItemView
 
 ---
 
-# Aufbau
+# Mit Avatar
 
-Ein ListItem wird immer innerhalb einer [List](/components/list/list) gerendert
-und repräsentiert ein spezifisches Element einer Kategorie (z. B. eine Domain,
-E-Mail-Adresse oder ein Projekt). In der Listenansicht besteht es typischerweise
-aus:
-
-- **Avatar:** Der [Avatar](/components/content/avatar) steht am Anfang. Ein
-  [Icon](/components/content/icon) spiegelt die Kategorie wider (z. B. ein
-  Domain-Icon); ein hochgeladenes [Image](/components/content/image) wird
-  angezeigt, andernfalls erscheinen Initialen.
-- **Titel und Untertitel:** Der Titel gibt den Namen wieder, der Untertitel
-  ergänzt weitere Informationen nach dem Muster „Beschreibung – 1. Information
-  – 2. Information“.
-- **Content Slots:** Zusätzliche Bereiche (Top und Bottom Content), die flexibel
-  befüllt werden können.
-- **Aktionen:** Interaktionen erfolgen über ein
-  [ContextMenu](/components/actions/context-menu) oder direkt als
-  [Buttons](/components/actions/button) im ListItem.
+Der [Avatar](/components/content/avatar) steht am Anfang eines ListItems und
+spiegelt das Element wider: Ein [Icon](/components/content/icon) steht für die
+Kategorie (z. B. ein Domain-Icon), ein hochgeladenes
+[Image](/components/content/image) wird angezeigt, andernfalls erscheinen
+Initialen.
 
 ---
 
@@ -111,6 +99,17 @@ benötigter Content in kleineren Ansichten ausblenden. In diesem Fall werden auc
 die entsprechenden Content Slots nicht angezeigt.
 
 <LiveCodeEditor example="item-column-layout-hidden" editorCollapsed stretch />
+
+---
+
+# Mit ContextMenu
+
+Aktionen eines ListItems platzierst du in einem
+[ContextMenu](/components/actions/context-menu). Für dauerhaft sichtbare
+Aktionen nutzt du stattdessen [Buttons](/components/actions/button) in einer
+ActionGroup.
+
+<LiveCodeEditor example="item-context-menu" editorCollapsed />
 
 ---
 
