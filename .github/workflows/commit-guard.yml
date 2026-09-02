@@ -11,11 +11,6 @@ name: Commit guard
 #      - a breaking change (`feat!:` / `BREAKING CHANGE`) belongs on the major
 #        line, not on any standing line (`main` *or* `next`).
 #    This makes the dangerous directions mechanically hard.
-# 3. Release intent — the title decides whether the merge releases, so it has to
-#    be TRUE. The type gives the default and a `[release]` / `[no-release]` tag
-#    overrides it; this job fails when the title and the changed paths disagree
-#    (#3023). Catching it here is the point: after the merge the same
-#    disagreement only turns the release run red.
 
 on:
   pull_request:
@@ -161,46 +156,3 @@ jobs:
       - name: Enforce the version contract
         if: steps.gate.outputs.active == 'true'
         run: node .github/scripts/version-contract-guard.mjs
-
-  release-intent:
-    name: Release intent (title vs. changed paths)
-    # Only PRs targeting a standing release line release anything.
-    if: >-
-      github.event.pull_request.base.ref == 'main' ||
-      github.event.pull_request.base.ref == 'next'
-    runs-on: ubuntu-latest
-    steps:
-      # Full history, because the changed-file list comes from the merge base.
-      - name: Checkout (full history so the merge base is reachable)
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-        with:
-          fetch-depth: 0
-
-      - name: Self-test the classifiers
-        run: |
-          node --test .github/scripts/release-relevance-lib.test.mjs
-          node --test .github/scripts/release-title-lib.test.mjs
-
-      # This is the only place the two answers are compared. `publish.yml`
-      # decides from the title alone and reads the paths only for the subjects
-      # that cannot answer, so a title that lies has to be caught here.
-      - name: Compare the title with the changed paths
-        env:
-          BASE: ${{ github.event.pull_request.base.sha }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
-          # Through the environment, never interpolated: a PR title is
-          # untrusted input.
-          SUBJECT: ${{ github.event.pull_request.title }}
-        run: |
-          set -euo pipefail
-
-          base="$(git merge-base "$BASE" "$HEAD")"
-          files="$(git diff --name-only "$base" "$HEAD")"
-
-          export MANIFEST_SNAPSHOT_DIR="${RUNNER_TEMP}/manifests"
-          export BEFORE="$base" AFTER="$HEAD"
-          printf '%s\n' "$files" \
-            | .github/scripts/fetch-manifest-snapshots.sh git
-
-          printf '%s\n' "$files" \
-            | MODE=check node .github/scripts/release-intent-guard.mjs

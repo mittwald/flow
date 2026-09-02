@@ -81,64 +81,55 @@ flowchart LR
   type still renders. Unhiding changes nothing about the bump: without
   `bumpStrict` the preset's `whatBump` returns patch for any non-empty commit
   range regardless.
-- **Not every merge releases; the title says which do.** The type gives the
-  default — `feat`, `fix`, `perf`, `revert` release, `docs`, `ci`, `chore`,
-  `test`, `build`, `style`, `refactor` do not — and a `[release]` or
-  `[no-release]` tag at the end of the title overrides it (#3023):
-
-  ```
-  docs(codemods): add migration entry for Tabs [release]
-  fix(docs): drop the classic JSX transform debug props [no-release]
-  ```
-
-  A merge that releases nothing produces no npm publish, no `chore(release):`
-  version bump commit, no tag and no GitHub Release.
-  `.github/scripts/release-title-lib.mjs` holds the mapping.
-  - Four subjects are decided structurally: `chore(release):` never releases,
-    `chore(promotion):` always does, and a `chore(sync):` forward-merge or a
-    Dependabot subject (`*(deps)`, `*(deps-dev)`) falls back to the changed
-    paths — as does an unparsable subject or an unknown type.
-  - A **`workflow_dispatch` run always publishes**, whatever the title says.
-    That is the escape hatch for a docs-only release, and the remedy if a title
-    was wrong.
-
-- **The paths verify the title on the pull request.** The `release-intent` job
-  in `commit-guard.yml` classifies the changed files with
-  `.github/scripts/release-relevance-lib.mjs` and fails the PR when the two
-  answers disagree, naming the files. `publish.yml` then decides from the
-  verified title and reads the paths only for the subjects that cannot answer.
-  Four properties of the path classifier:
+- **Not every merge releases.** A push to a release line publishes only when it
+  carries a change that can reach a **consumer**. Everything else is skipped
+  whole: no npm publish, no `chore(release):` version bump commit, no tag, no
+  GitHub Release (#2931). The `decide` job in `publish.yml` classifies the
+  pushed file set with `.github/scripts/release-relevance-lib.mjs`, and a
+  **`workflow_dispatch` run always publishes** — the escape hatch when a
+  docs-only change has to go out anyway. Four properties of that classifier:
   - It is a **denylist**: anything not provably non-shipping counts as
-    publishable. Package-local Markdown stays relevant —
-    `@mittwald/flow-react-components` ships `AGENTS.md`, `MIGRATION.md` and
-    `USAGE.md` next to `dist`.
-  - Inside `packages/**` these are excluded, segment-exact under
+    publishable. Forgetting a docs path costs one needless version; forgetting a
+    source path would swallow a real release. Package-local Markdown therefore
+    stays relevant — `@mittwald/flow-react-components` ships `AGENTS.md`,
+    `MIGRATION.md` and `USAGE.md` next to `dist`.
+  - Outside `packages/**`: `apps/**`, `docs/**`, `.github/**`, `dev/**`, root
+    Markdown and editor config are irrelevant.
+  - Inside `packages/**` these are irrelevant too, segment-exact under
     `packages/<name>/`: `.storybook/**`, `e2e/**`, `src/tests/**`,
     `dev/cross-version/**`, `dev/vitest/**`, the package's `CONTRIBUTE.md`, and
-    `*.stories.tsx` / `*.test.*` anywhere.
-  - `packages/*/dev/**` is **not** excluded wholesale. In `components` and
-    `codemods` that directory is the build: `dev/vite/*` holds the plugins
-    `vite.build.config.ts` imports, `dev/createDocPropertiesJson.ts` writes the
-    shipped `dist/assets/doc-properties.json`,
-    `dev/remote-components-generator/**` generates `view.ts` and
-    `src/auto-generated/**`, and `codemods`' build script is
-    `tsx dev/generateCli.ts && …`.
+    `*.stories.tsx` / `*.test.*` anywhere. The criterion is **no consumer
+    effect**, not "not in the tarball".
+    - `packages/*/dev/**` is **not** irrelevant wholesale. In `components` and
+      `codemods` that directory is the build: `dev/vite/*` holds the plugins
+      `vite.build.config.ts` imports, `dev/createDocPropertiesJson.ts` writes
+      the shipped `dist/assets/doc-properties.json`,
+      `dev/remote-components-generator/**` generates `view.ts` and
+      `src/auto-generated/**`, and `codemods`' build script is
+      `tsx dev/generateCli.ts && …`.
   - **Every `package.json` and `pnpm-lock.yaml` are judged by content**, because
     their paths carry no information. A `scripts` or `simple-git-hooks` edit
-    cannot reach a consumer, a dependency bump can; the lockfile follows the
-    manifests that moved it and stays relevant when none changed.
+    cannot reach a consumer, a dependency bump can — the job fetches both sides
+    of each manifest and compares the top-level keys, and an unknown key is
+    relevant like an unknown path is. The lockfile follows the manifests that
+    moved it and stays relevant when none of them changed. #2970 cut 1.0.9 from
+    two root scripts, #3006 cut 1.0.12 from one package's `test:unit`, #2959 cut
+    1.0.4 from an `apps/docs` dependency.
 - **Tests and stories stay out of `dist/types`.** Every release build shares
   `publishedDtsOptions` from `packages/core`, whose `exclude` keeps
   `*.stories.*`, `*.test.*`, `src/tests/**` and `e2e/**` out of the declaration
-  emit. A story's helper still ships (`Button/stories/lib.tsx`):
+  emit; before that, 196 of `@mittwald/flow-remote-react-components@1.1.10`'s
+  799 tarball entries were `dist/types/tests/**`. No `exports` path reached
+  them. A story's helper still ships (`Button/stories/lib.tsx`), because
   `dev/createDocPropertiesJson.ts` parses every `.tsx` under `src/` and ignores
-  only `*.stories.tsx`. Keep that `exclude` and the path classifier in step.
+  only `*.stories.tsx` — keep that `exclude` and the path classifier in step.
 - **The changelog renders every commit type** (`changelogPreset` in
-  `lerna.json`, asserted by `.github/scripts/changelog-preset.test.mjs`). A
-  release whose cause lies outside every package — `pnpm-lock.yaml`, the root
-  manifest, `lerna.json` — still reads "Version bump only" in every changelog,
-  because no package changed. An entry's scope is the commit's, not the
-  changelog's package.
+  `lerna.json`, asserted by `.github/scripts/changelog-preset.test.mjs`), so a
+  `chore`, `build` or `test` change that touches a package is no longer
+  invisible. A release whose cause lies outside every package —
+  `pnpm-lock.yaml`, the root manifest, `lerna.json` — still reads "Version bump
+  only" in every changelog, because no package changed. An entry's scope is the
+  commit's, not the changelog's package.
 - **The build runs after the version bump.** Both publish workflows version
   first, then `pnpm build`, then publish. Some bundles bake their own version in
   at build time (vite `define` over `package.json` — `remote-react-components`'

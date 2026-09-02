@@ -62,74 +62,41 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Does this push release? The TITLE answers it, the changed paths verify the
-  # answer (#3023). A merge that reaches no consumer must not produce a release
-  # (#2931): the publish job below is skipped whole, so there is no npm publish,
-  # no `chore(release):` version bump commit, no tag and no GitHub Release.
-  #
-  # `commit-guard.yml` blocks a PR whose title and paths disagree, so by the time
-  # a subject reaches this job it has been verified — which is why this job
-  # trusts it and skips the path work entirely. The residual hole is deliberate:
-  # GitHub lets the merger edit the squash subject after the checks passed, and
-  # an edit that drops a `[release]` tag swallows that release. The remedy is a
-  # manual `workflow_dispatch`, and closing the hole would mean re-fetching and
-  # re-classifying every push to catch a rare manual edit.
+  # Does this push carry anything that can reach a PUBLISHED package? Docs- and
+  # CI-only merges cannot, and must not produce a release (#2931): the publish
+  # job below is skipped whole, so there is no npm publish, no
+  # `chore(release):` version bump commit, no tag and no GitHub Release.
   #
   # This is a separate job rather than a step inside `publish` on purpose. The
-  # run then shows `decide` green and `publish` skipped, with a notice naming
-  # what decided. `paths-ignore` on the trigger would skip the run entirely and
-  # explain nothing — and its globs cannot express "Markdown inside packages/
-  # still ships" (flow-react-components publishes `["*.md", "dist"]`).
+  # run then shows `decide` green and `publish` skipped, with a notice naming the
+  # rule that fired. `paths-ignore` on the trigger would skip the run entirely
+  # and explain nothing — and its globs cannot express "Markdown inside
+  # packages/ still ships" (flow-react-components publishes `["*.md", "dist"]`).
   #
   # A manual dispatch always publishes: that is the escape hatch for releasing a
-  # docs-only change deliberately, and the remedy after a rejected mismatch.
+  # docs-only change deliberately.
   #
-  # On `next` the push is usually the `chore(sync):` forward-merge commit, whose
-  # subject cannot know what it carried over — so for those the paths decide
-  # alone (`release-title-lib.mjs`). A docs-only fix therefore skips here exactly
-  # as it skipped on `main`, and the two lines stay symmetric.
+  # On `next` the push is usually the `chore(sync):` forward-merge commit, so the
+  # classified file set is what the merge carried over from `main`. A docs-only
+  # fix therefore skips here exactly as it skipped on `main`, and the two lines
+  # stay symmetric.
   decide:
-    name: Release intent
+    name: Release relevance
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
     outputs:
-      # The fallback step's answer when it ran, the title's otherwise — a
-      # skipped step's output is the empty string, which is falsy.
-      publish: >-
-        ${{ steps.paths.outputs.publish || steps.title.outputs.publish }}
+      publish: ${{ steps.relevance.outputs.publish }}
     steps:
       - name: Checkout ⬇️
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
-      - name: Self-test the classifiers
-        run: |
-          node --test .github/scripts/release-relevance-lib.test.mjs
-          node --test .github/scripts/release-title-lib.test.mjs
+      - name: Self-test the classifier
+        run: node --test .github/scripts/release-relevance-lib.test.mjs
 
-      - name: Decide from the title 🏷️
-        id: title
-        env:
-          EVENT: ${{ github.event_name }}
-          # Through the environment, never interpolated: a commit subject is
-          # untrusted input.
-          SUBJECT: ${{ github.event.head_commit.message }}
-        run: |
-          set -euo pipefail
-          if [ "$EVENT" != "push" ]; then
-            echo "::notice::Manual dispatch — publishing regardless of the title."
-            echo "publish=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          MODE=title node .github/scripts/release-intent-guard.mjs
-
-      # Only for the subjects that cannot answer — a `chore(sync):`
-      # forward-merge, a Dependabot bump, an unparsable one. Every other release
-      # skips this step, and with it the compare API and the manifest snapshots.
-      - name: Fall back to the changed paths 🔎
-        id: paths
-        if: steps.title.outputs.needs_paths == 'true'
+      - name: Classify the changed paths 🔎
+        id: relevance
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -137,6 +104,12 @@ jobs:
           AFTER: ${{ github.sha }}
         run: |
           set -euo pipefail
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "::notice::Manual dispatch — publishing regardless of changed paths."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           # No usable base (branch creation, force push) means we cannot tell
           # what changed. Publish — the behaviour before #2931.
@@ -160,12 +133,36 @@ jobs:
             files=""
           fi
 
+          # Every `package.json` is judged by its KEY DIFF, not its path: a
+          # `scripts` edit cannot reach a consumer, a dependency bump can, and
+          # the path cannot tell them apart (#2970 for the root manifest, #3023
+          # for the package ones). Fetch both versions of each so the classifier
+          # can compare them; only the root and `packages/*` manifests, because
+          # an `apps/*` manifest is already irrelevant by path.
+          #
+          # A failed fetch leaves the snapshot missing, which the guard reads as
+          # "relevant" — the behaviour before. That also covers an ADDED or
+          # DELETED manifest, which has only one side.
           export MANIFEST_SNAPSHOT_DIR="${RUNNER_TEMP}/manifests"
-          printf '%s\n' "$files" \
-            | .github/scripts/fetch-manifest-snapshots.sh api
+          mkdir -p "${MANIFEST_SNAPSHOT_DIR}/before" "${MANIFEST_SNAPSHOT_DIR}/after"
+          while IFS= read -r manifest; do
+            [ -n "$manifest" ] || continue
+            slug="$(printf '%s' "$manifest" | sed 's|/|__|g')"
+            for side in before after; do
+              if [ "$side" = after ]; then ref="${AFTER}"; else ref="${BEFORE}"; fi
+              target="${MANIFEST_SNAPSHOT_DIR}/${side}/${slug}.json"
+              if ! gh api "repos/${REPO}/contents/${manifest}?ref=${ref}" \
+                --header 'Accept: application/vnd.github.raw+json' \
+                > "$target"; then
+                echo "::warning::Could not fetch ${manifest} at ${ref}."
+                rm -f "$target"
+              fi
+            done
+          done <<< "$(printf '%s\n' "$files" \
+            | grep -E '^(package\.json|packages/[^/]+/package\.json)$' || true)"
 
           printf '%s\n' "$files" \
-            | MODE=paths node .github/scripts/release-intent-guard.mjs
+            | node .github/scripts/release-relevance-guard.mjs
 
   publish:
     # Publish on manual dispatch, or on any push to a standing line EXCEPT the
