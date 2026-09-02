@@ -15,7 +15,10 @@
  * match the class its commits carry.
  */
 import { readFileSync } from "node:fs";
-import { classifyMixture } from "./commit-mixture-lib.mjs";
+import {
+  classifyMixture,
+  classifyTitleRelease,
+} from "./commit-mixture-lib.mjs";
 
 /** Read all of stdin; an unreadable stdin is an empty list. */
 function readStdin() {
@@ -42,6 +45,19 @@ const commits = readStdin()
 const title = process.env.PR_TITLE ?? "";
 const result = classifyMixture(commits, title);
 
+// `PATHS_PUBLISH` comes from `release-relevance-guard.mjs`, run by the same job.
+// Missing means the step could not answer, and then this half is skipped.
+const pathsPublish =
+  process.env.PATHS_PUBLISH === "true"
+    ? true
+    : process.env.PATHS_PUBLISH === "false"
+      ? false
+      : undefined;
+const release =
+  pathsPublish === undefined
+    ? { ok: true, reason: "the changed paths were not classified" }
+    : classifyTitleRelease(title, pathsPublish);
+
 console.log(
   `Title: ${title || "(empty)"} -> ${result.titleClass ?? "not conventional"}`,
 );
@@ -49,17 +65,26 @@ console.log(`Commits (${commits.length}):`);
 for (const commit of commits.slice(0, 30)) console.log(`  ${commit.subject}`);
 if (commits.length > 30) console.log(`  ... and ${commits.length - 30} more`);
 
-if (result.ok) {
-  console.log(`::notice::Commit mixture is fine - ${result.reason}.`);
+if (!result.ok) {
+  for (const offender of result.offenders) {
+    console.log(`::error::${offender.class}: ${offender.subject}`);
+  }
+  console.log(
+    `::error::Invalid commit mixture - ${result.reason}. ` +
+      "Split the pull request, or retitle it to the class its commits carry. " +
+      "The squash merge keeps only the title.",
+  );
+}
+
+if (!release.ok) {
+  console.log(`::error::The title hides a release - ${release.reason}`);
+}
+
+if (result.ok && release.ok) {
+  console.log(
+    `::notice::Commit mixture is fine - ${result.reason}; ${release.reason}.`,
+  );
   process.exit(0);
 }
 
-for (const offender of result.offenders) {
-  console.log(`::error::${offender.class}: ${offender.subject}`);
-}
-console.log(
-  `::error::Invalid commit mixture - ${result.reason}. ` +
-    "Split the pull request, or retitle it to the class its commits carry. " +
-    "The squash merge keeps only the title.",
-);
 process.exit(1);

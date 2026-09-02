@@ -220,3 +220,65 @@ export function classifyMixture(commits, title) {
     })),
   };
 }
+
+/**
+ * Scopes whose titles are machine-generated, so no human chose the type.
+ *
+ * Dependabot writes `build(deps-dev): bump the dev-minor group …`, and a group
+ * is not homogeneous in effect: Rollup moves every `dist`, Prettier moves
+ * nothing. `commit-message.prefix` is configured per ecosystem, not per group,
+ * so no title Dependabot can produce would be true for all of them.
+ */
+const GENERATED_SCOPES = new Set(["deps", "deps-dev"]);
+
+/**
+ * Does the title admit that this pull request reaches a consumer?
+ *
+ * Checked in ONE direction only. A non-releasing type over shipping paths is
+ * the expensive mistake: the change ships — relevance is decided by the paths —
+ * while the changelog announces it as `docs`/`chore` and the commit's own
+ * description is discarded. The other direction (a `fix:` title over paths that
+ * reach nobody) costs nothing: the paths decide, so no release happens, and
+ * `fix(docs): …` for a docs-app fix is an honest title.
+ *
+ * The fix is a releasing type, not a tag: `fix(docs): add a migration entry`
+ * says both things at once — it ships, and it is documentation.
+ *
+ * @param {string} title
+ * @param {boolean} pathsPublish
+ * @returns {{ ok: boolean; reason: string }}
+ */
+export function classifyTitleRelease(title, pathsPublish) {
+  const header = parseConventionalHeader(title);
+
+  if (!header) {
+    return {
+      ok: true,
+      reason:
+        "the title is not a Conventional Commit — the title linter reports that",
+    };
+  }
+  if (header.scope !== undefined && GENERATED_SCOPES.has(header.scope)) {
+    return {
+      ok: true,
+      reason: `${header.type}(${header.scope}): is generated`,
+    };
+  }
+  if (!pathsPublish) {
+    return { ok: true, reason: "the changed paths reach no consumer" };
+  }
+
+  const titleClass = classifyCommit({ subject: title });
+  if (titleClass !== "none") {
+    return { ok: true, reason: `\`${header.type}\` admits that this releases` };
+  }
+
+  return {
+    ok: false,
+    reason:
+      `the changed paths reach a consumer but the title says \`${header.type}\`, ` +
+      "which does not — the change would ship while the changelog announces it " +
+      `as \`${header.type}\`. Use a releasing type and keep the scope: ` +
+      `\`fix(${header.scope ?? "scope"}): …\``,
+  };
+}

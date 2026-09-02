@@ -1,7 +1,11 @@
 // @ts-check
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifyCommit, classifyMixture } from "./commit-mixture-lib.mjs";
+import {
+  classifyCommit,
+  classifyMixture,
+  classifyTitleRelease,
+} from "./commit-mixture-lib.mjs";
 
 const c = (subject, body) => ({ subject, body });
 
@@ -162,4 +166,52 @@ test("classifyMixture: an unconventional title is left to the title linter", () 
   const result = classifyMixture([c("feat(List): add a prop")], "add a prop");
   assert.equal(result.ok, true);
   assert.equal(result.titleClass, undefined);
+});
+
+test("classifyTitleRelease: a non-releasing title over shipping paths fails", () => {
+  // #2902 changed two `.module.scss` files under a `docs:` title.
+  const result = classifyTitleRelease("docs: set max text width", true);
+  assert.equal(result.ok, false);
+  assert.match(result.reason, /Use a releasing type and keep the scope/);
+
+  // #3062 — the fix is `fix(codemods):`, which says both things at once.
+  const scoped = classifyTitleRelease(
+    "docs(codemods): add a migration entry",
+    true,
+  );
+  assert.equal(scoped.ok, false);
+  assert.match(scoped.reason, /fix\(codemods\)/);
+});
+
+test("classifyTitleRelease: a releasing title admits it", () => {
+  for (const title of [
+    "fix(List): stop the crash",
+    "fix(docs): add a migration entry",
+    "feat(List): add a prop",
+    "perf(components): drop metadata",
+  ]) {
+    assert.equal(classifyTitleRelease(title, true).ok, true, title);
+  }
+});
+
+test("classifyTitleRelease: the other direction never fails", () => {
+  // A `fix(docs):` over the docs app reaches nobody, and the paths decide that
+  // — nothing to report. #3020 and #2993 are exactly this shape.
+  assert.equal(
+    classifyTitleRelease("fix(docs): stop the footer overflowing", false).ok,
+    true,
+  );
+  assert.equal(classifyTitleRelease("docs: a page", false).ok, true);
+});
+
+test("classifyTitleRelease: generated and unparsable titles are exempt", () => {
+  assert.equal(
+    classifyTitleRelease("build(deps-dev): bump the dev-minor group", true).ok,
+    true,
+  );
+  assert.equal(
+    classifyTitleRelease("build(deps): bump the production group", true).ok,
+    true,
+  );
+  assert.equal(classifyTitleRelease("add a prop", true).ok, true);
 });
