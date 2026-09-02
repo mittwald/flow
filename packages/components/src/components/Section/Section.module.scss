@@ -1,9 +1,33 @@
+/* A section is deliberately NOT a container query container. It declared
+   `container-type: inline-size` from the start, for a `@container` query on its
+   own header that moved out with the `Header` component. Nothing queries it any
+   more: every `@container` in the repo resolves against a container the querying
+   component declares itself (`ColumnLayout` on `.columnLayoutContainer`, `List`'s
+   `Header`, `SegmentedControl`), so the containment was pure cost.
+
+   That cost is a Blink layout-invalidation bug (#2655): under a `container-type`
+   element, an async descendant size change can fail to invalidate the container's
+   block-size layout, so it keeps the stale (short) height and the ancestor clips
+   the content until some later style recalc — a hover anywhere on the page —
+   forces the flush. Sections nest, so the reporter's `Section > Section` stacked
+   two of them around the toggled content.
+
+   `min-width: 0` keeps the one side effect that was load-bearing: inline-size
+   containment zeroed the intrinsic inline contribution, which is what stops a
+   section with unbreakable content from blowing out a `ColumnLayout` grid track
+   (`Nfr` = `minmax(auto, Nfr)`, and `auto` is content-based). Measured in
+   Chromium 149 / WebKit 26.5 / Firefox 151, a 400px two-track grid gives
+   200/200 with either containment or `min-width: 0`, and 693/8 with neither.
+   The other side effects are already gone in all three engines: `container-type`
+   no longer creates a containing block for absolutely positioned descendants,
+   nor a stacking context (Chrome 129 aligned to spec), so nothing could depend
+   on them. */
 .section {
   display: flex;
   flex-direction: column;
   row-gap: var(--section--spacing);
-  container-type: inline-size;
   width: 100%;
+  min-width: 0;
 
   > form {
     display: flex;

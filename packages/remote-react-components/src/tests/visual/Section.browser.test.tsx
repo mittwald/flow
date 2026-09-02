@@ -103,3 +103,80 @@ test.each(testEnvironments)(
     await testScreenshot("Section with secondary button");
   },
 );
+
+/*
+ * The reporter's structure from #2655: LayoutCard > Section > Section > Switch,
+ * where the switch reveals content that is taller than what it replaces. Under
+ * `container-type: inline-size` on `Section` — two of them nested here — an
+ * affected Chrome kept the stale short height and the card clipped the revealed
+ * content until a hover forced a reflow.
+ *
+ * This scenario cannot reproduce that bug: it is Blink-specific and version-
+ * specific, and this suite runs WebKit and Firefox. It guards the height path
+ * instead — the card and both sections have to end up as tall as the revealed
+ * content, in both environments, so a future change that reintroduces a stale
+ * height here shows up as a diff.
+ */
+test.each(testEnvironments)(
+  "Section growing inside a LayoutCard (%s)",
+  async ({
+    testScreenshot,
+    render,
+    components: {
+      LayoutCard,
+      Section,
+      Heading,
+      Text,
+      Switch,
+      Label,
+      Alert,
+      TextField,
+      ColumnLayout,
+    },
+  }) => {
+    const TestComponent: FC = () => {
+      const [showDetails, setShowDetails] = useState(false);
+
+      return (
+        <LayoutCard>
+          <Section>
+            <Heading>Image compression</Heading>
+            <Section>
+              <Switch
+                data-testid="details-switch"
+                onChange={(isSelected) => setShowDetails(isSelected)}
+              >
+                <Label>Compress uploaded images</Label>
+              </Switch>
+              {showDetails && (
+                <>
+                  <Alert>
+                    <Heading>Recompression is not reversible</Heading>
+                    <Text>
+                      Images already stored keep their current quality. Only
+                      uploads from now on are compressed.
+                    </Text>
+                  </Alert>
+                  <ColumnLayout>
+                    <TextField>
+                      <Label>Quality</Label>
+                    </TextField>
+                    <TextField>
+                      <Label>Max. width</Label>
+                    </TextField>
+                  </ColumnLayout>
+                </>
+              )}
+            </Section>
+          </Section>
+        </LayoutCard>
+      );
+    };
+
+    await render(<TestComponent />);
+    await testScreenshot("Section growing inside a LayoutCard - collapsed");
+
+    await page.getByTestId("details-switch").click();
+    await testScreenshot("Section growing inside a LayoutCard - expanded");
+  },
+);
