@@ -89,19 +89,44 @@ test("classifyMixture: a feat commit under a fix title is smuggling", () => {
   assert.deepEqual(result.commitClasses, ["feature"]);
 });
 
-test("classifyMixture: a docs title hides a fix from the release entirely", () => {
-  // The common shape: the docs work is the headline, the fix rides along, and
-  // the squash merge keeps only the title — so the fix ships nowhere.
+test("classifyMixture: a docs title announces a fix as documentation", () => {
+  // The common shape: the docs work is the headline and the fix rides along.
+  // Relevance is decided by the changed paths, so the fix DOES ship — but the
+  // squash keeps only the title, so the changelog files it under docs and the
+  // fix's own description is gone.
   const result = classifyMixture(
     [c("docs(List): document the states"), c("fix(List): stop the crash")],
     "docs(List): document the states",
   );
   assert.equal(result.ok, false);
   assert.equal(result.titleClass, "none");
-  assert.match(result.reason, /ship in no release and appear in no changelog/);
+  assert.match(result.reason, /the changelog announces it as `docs`/);
   assert.deepEqual(result.offenders, [
     { subject: "fix(List): stop the crash", class: "patch" },
   ]);
+});
+
+test("classifyMixture: releasing commits across scopes lose their descriptions", () => {
+  const result = classifyMixture(
+    [c("fix(List): stop the crash"), c("fix(Button): keep the label")],
+    "fix(List): stop the crash",
+  );
+  assert.equal(result.ok, false);
+  assert.match(result.reason, /2 different scopes \(List, Button\)/);
+
+  // Repeats within one scope are one logical change.
+  const sameScope = classifyMixture(
+    [c("fix(List): stop the crash"), c("fix(List): keep the selection")],
+    "fix(List): stop the crash",
+  );
+  assert.equal(sameScope.ok, true);
+
+  // And a scopeless pair is one scope, not two.
+  const scopeless = classifyMixture(
+    [c("fix: one thing"), c("fix: another thing")],
+    "fix: one thing",
+  );
+  assert.equal(scopeless.ok, true);
 });
 
 test("classifyMixture: a title claiming more than the commits is mislabelling", () => {

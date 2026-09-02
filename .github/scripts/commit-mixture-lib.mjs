@@ -103,6 +103,7 @@ export function classifyMixture(commits, title) {
     .sort((a, b) => CLASS_ORDER.indexOf(a) - CLASS_ORDER.indexOf(b));
 
   const titleClass = classifyCommit({ subject: title });
+  const titleClassType = parseConventionalHeader(title)?.type ?? "that type";
 
   if (commitClasses.length > 1) {
     return {
@@ -117,6 +118,36 @@ export function classifyMixture(commits, title) {
         class: /** @type {string} */ (commit.class),
       })),
     };
+  }
+
+  // One class, but several scopes: the squash keeps one subject, so every
+  // releasing commit outside the title's scope loses its description. Same
+  // information loss as a class mixture, one level down. Repeats WITHIN a scope
+  // are fine — `fix(List): a` plus `fix(List): b` is one logical change.
+  if (commitClasses.length === 1) {
+    const scopes = [
+      ...new Set(
+        releasing.map(
+          (commit) => parseConventionalHeader(commit.subject)?.scope ?? "",
+        ),
+      ),
+    ];
+    if (scopes.length > 1) {
+      return {
+        ok: false,
+        reason:
+          `the commits carry ${commitClasses[0]} changes in ${scopes.length} ` +
+          `different scopes (${scopes.map((scope) => scope || "none").join(", ")}) ` +
+          "and the squash merge keeps only one subject, so the others reach no " +
+          "changelog",
+        titleClass,
+        commitClasses,
+        offenders: releasing.map((commit) => ({
+          subject: commit.subject,
+          class: /** @type {string} */ (commit.class),
+        })),
+      };
+    }
   }
 
   // Nothing releasing, or nothing parsable: the title stands on its own.
@@ -168,9 +199,10 @@ export function classifyMixture(commits, title) {
       `${commitClass} change`;
   } else if (titleClass === "none") {
     reason =
-      `the commits carry a ${commitClass} change but the title releases ` +
-      "nothing — the squash merge keeps only the title, so that change would " +
-      "ship in no release and appear in no changelog";
+      `the commits carry a ${commitClass} change but the title does not — the ` +
+      "squash merge keeps only the title, so the change ships (relevance is " +
+      `decided by the changed paths) while the changelog announces it as ` +
+      `\`${titleClassType}\` and its own description is discarded`;
   } else {
     reason =
       `the commits carry a ${commitClass} change but the title claims ` +
