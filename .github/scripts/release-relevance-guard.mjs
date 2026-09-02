@@ -22,6 +22,8 @@ import { join } from "node:path";
 import {
   classifyChangedFiles,
   classifyManifestChange,
+  packageRootMarkdown,
+  shipsRootMarkdown,
   classifyPath,
   isPublishRelevant,
 } from "./release-relevance-lib.mjs";
@@ -89,6 +91,31 @@ for (const path of manifests) {
   console.log(`Manifest: ${manifest.reason}.`);
 }
 
+/**
+ * The `files` of every package whose ROOT Markdown changed.
+ *
+ * Read from the checkout, not fetched: only the CURRENT `files` matters, and
+ * the job already has the tree. An unreadable manifest leaves the entry
+ * undefined, which the classifier reads as "shipped" — fail safe.
+ */
+for (const path of files) {
+  const markdown = packageRootMarkdown(path);
+  if (!markdown || markdown.dir in (options.packageFiles ?? {})) continue;
+  options.packageFiles ??= {};
+  try {
+    const manifest = JSON.parse(
+      readFileSync(join(markdown.dir, "package.json"), "utf8"),
+    );
+    options.packageFiles[markdown.dir] = manifest.files;
+    console.log(
+      `Package files: ${markdown.dir} publishes ${JSON.stringify(manifest.files)}.`,
+    );
+  } catch {
+    console.log(`::warning::Could not read ${markdown.dir}/package.json.`);
+    options.packageFiles[markdown.dir] = undefined;
+  }
+}
+
 const { publish, reason, relevant, total } = classifyChangedFiles(
   files,
   options,
@@ -118,10 +145,17 @@ if (publish) {
   );
   console.log(`Changed files (${total}), with the rule that cleared each:`);
   for (const path of files.slice(0, SAMPLE)) {
+    const markdown = packageRootMarkdown(path);
     const rule =
       options.manifestRelevance[path] === false
         ? `manifest key diff "${path}"`
-        : classifyPath(path).rule;
+        : markdown &&
+            !shipsRootMarkdown(
+              markdown.file,
+              options.packageFiles?.[markdown.dir],
+            )
+          ? `package Markdown outside "files"`
+          : classifyPath(path).rule;
     console.log(`  ${path} — ${rule}`);
   }
   if (files.length > SAMPLE) {

@@ -97,9 +97,17 @@ flowchart LR
     Markdown and editor config are irrelevant.
   - Inside `packages/**` these are irrelevant too, segment-exact under
     `packages/<name>/`: `.storybook/**`, `e2e/**`, `src/tests/**`,
-    `dev/cross-version/**`, `dev/vitest/**`, the package's `CONTRIBUTE.md`, and
-    `*.stories.tsx` / `*.test.*` anywhere. The criterion is **no consumer
-    effect**, not "not in the tarball".
+    `dev/cross-version/**`, `dev/vitest/**`, the package's `CONTRIBUTE.md`,
+    `Dockerfile` and `.dockerignore`, and `*.stories.tsx` / `*.test.*` anywhere.
+    The criterion is **no consumer effect**, not "not in the tarball".
+  - A package's **root-level Markdown is judged against that package's `files`**
+    — nothing builds one, so it reaches a consumer exactly if it is published.
+    `flow-react-components` lists `AGENTS.md`, `MIGRATION.md` and `USAGE.md`;
+    `remote-react-components` lists only `USAGE.md`, so ITS `AGENTS.md` reaches
+    nobody. The `files` are read from the checkout, not fetched — only the
+    current state matters. A Markdown file DEEPER in a package keeps its
+    path-level relevance: `codemods/src/migrations/*/entry.md` is a generator
+    input, not documentation.
     - `packages/*/dev/**` is **not** irrelevant wholesale. In `components` and
       `codemods` that directory is the build: `dev/vite/*` holds the plugins
       `vite.build.config.ts` imports, `dev/createDocPropertiesJson.ts` writes

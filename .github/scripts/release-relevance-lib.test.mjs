@@ -5,6 +5,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import {
   isPublishRelevant,
+  shipsRootMarkdown,
+  packageRootMarkdown,
   classifyChangedFiles,
   classifyManifestChange,
 } from "./release-relevance-lib.mjs";
@@ -82,6 +84,81 @@ test("isPublishRelevant: unknown paths are relevant (fail-safe denylist)", () =>
   assert.equal(isPublishRelevant("packages/brand-new/src/index.ts"), true);
   assert.equal(isPublishRelevant("new-top-level-dir/thing.ts"), true);
   assert.equal(isPublishRelevant("some-new-root-file.ts"), true);
+});
+
+test("packageRootMarkdown: only the root level of a package", () => {
+  assert.deepEqual(packageRootMarkdown("packages/components/AGENTS.md"), {
+    dir: "packages/components",
+    file: "AGENTS.md",
+  });
+  // A generator input, not documentation.
+  assert.equal(
+    packageRootMarkdown("packages/codemods/src/migrations/x/entry.md"),
+    undefined,
+  );
+  assert.equal(packageRootMarkdown("AGENTS.md"), undefined);
+  assert.equal(packageRootMarkdown("apps/docs/README.md"), undefined);
+});
+
+test("shipsRootMarkdown: `files` is the whole truth for a root Markdown", () => {
+  const components = ["AGENTS.md", "MIGRATION.md", "USAGE.md", "dist"];
+  assert.equal(shipsRootMarkdown("AGENTS.md", components), true);
+  assert.equal(shipsRootMarkdown("CONTRIBUTE.md", components), false);
+  // remote-react-components publishes only USAGE.md, so its AGENTS.md does not.
+  assert.equal(shipsRootMarkdown("AGENTS.md", ["USAGE.md", "dist"]), false);
+  assert.equal(shipsRootMarkdown("README.md", ["*.md", "dist"]), true);
+  // Fail safe: an unknown `files` counts as shipped.
+  assert.equal(shipsRootMarkdown("AGENTS.md", undefined), true);
+});
+
+test("classifyChangedFiles: package Markdown follows that package's `files`", () => {
+  // #3009 changed remote-react-components' AGENTS.md and CONTRIBUTE.md, which
+  // it does not publish, and nothing else that reaches a consumer.
+  const result = classifyChangedFiles(
+    [
+      "packages/remote-react-components/AGENTS.md",
+      "packages/remote-react-components/CONTRIBUTE.md",
+    ],
+    {
+      packageFiles: {
+        "packages/remote-react-components": ["USAGE.md", "dist"],
+      },
+    },
+  );
+  assert.equal(result.publish, false);
+
+  // components DOES publish AGENTS.md — #2954 released through it.
+  assert.equal(
+    classifyChangedFiles(["packages/components/AGENTS.md"], {
+      packageFiles: {
+        "packages/components": [
+          "AGENTS.md",
+          "MIGRATION.md",
+          "USAGE.md",
+          "dist",
+        ],
+      },
+    }).publish,
+    true,
+  );
+
+  // Without the `files` of that package, it stays relevant.
+  assert.equal(
+    classifyChangedFiles(["packages/remote-react-components/AGENTS.md"])
+      .publish,
+    true,
+  );
+});
+
+test("classifyChangedFiles: the Storybook image does not publish", () => {
+  // #3008 pushed exactly these under packages/, and cut 1.0.15 with them.
+  assert.equal(
+    classifyChangedFiles([
+      "packages/components/Dockerfile",
+      "packages/components/.dockerignore",
+    ]).publish,
+    false,
+  );
 });
 
 test("classifyChangedFiles: an undeterminable file list publishes", () => {

@@ -113,7 +113,13 @@ const IRRELEVANT_PACKAGE_LOCAL_DIRS = [
  * shipped Markdown (`AGENTS.md`, `MIGRATION.md`, `USAGE.md`, `README.md`) stays
  * relevant — it really is part of the tarball.
  */
-const IRRELEVANT_PACKAGE_LOCAL_FILES = new Set(["CONTRIBUTE.md"]);
+const IRRELEVANT_PACKAGE_LOCAL_FILES = new Set([
+  "CONTRIBUTE.md",
+  // The Storybook preview image, built by CI from `dev/` and `.github/`. #3008
+  // pushed both of these and nothing else under `packages/`.
+  "Dockerfile",
+  ".dockerignore",
+]);
 
 /**
  * Filenames that cannot affect a consumer, wherever they sit.
@@ -312,6 +318,47 @@ export function classifyManifestChange(
   };
 }
 
+/**
+ * The package directory and filename of a package-root Markdown file.
+ *
+ * Only the root level: `packages/codemods/src/migrations/x/entry.md` is a
+ * generator INPUT, not documentation, so it must keep its path-level
+ * relevance.
+ *
+ * @param {string} path
+ * @returns {{ dir: string; file: string } | undefined}
+ */
+export function packageRootMarkdown(path) {
+  const match = /^(packages\/[^/]+)\/([^/]+\.md)$/.exec(path);
+  return match ? { dir: match[1], file: match[2] } : undefined;
+}
+
+/**
+ * Does a package's `files` list ship this root Markdown file?
+ *
+ * `files` is the whole truth for a root-level `.md`: nothing builds one, so it
+ * reaches a consumer exactly if it is published. `flow-react-components` lists
+ * `AGENTS.md`, `MIGRATION.md` and `USAGE.md`; `remote-react-components` lists
+ * only `USAGE.md`, so ITS `AGENTS.md` reaches nobody.
+ *
+ * Fails SAFE: an unknown `files` (the caller could not read the manifest)
+ * counts as shipped.
+ *
+ * @param {string} file
+ * @param {string[] | undefined} files
+ * @returns {boolean}
+ */
+export function shipsRootMarkdown(file, files) {
+  if (!Array.isArray(files)) return true;
+  return files.some((entry) => {
+    const normalized = entry.replace(/^\.\//, "");
+    if (normalized === file) return true;
+    // npm honours a `*.md`-style glob at the root of `files`.
+    if (normalized.startsWith("*.")) return file.endsWith(normalized.slice(1));
+    return false;
+  });
+}
+
 /** Does `path` name a package manifest? */
 function isManifest(path) {
   return path === "package.json" || path.endsWith("/package.json");
@@ -341,7 +388,10 @@ function isManifest(path) {
  * file. The guard prints it, so a skipped release names the rule that fired.
  *
  * @param {string[]} paths Changed files, repository-relative.
- * @param {{ manifestRelevance?: Record<string, boolean | undefined> }} [options]
+ * @param {{
+ *   manifestRelevance?: Record<string, boolean | undefined>;
+ *   packageFiles?: Record<string, string[] | undefined>;
+ * }} [options]
  * @returns {{
  *   publish: boolean;
  *   reason: string;
@@ -383,7 +433,20 @@ export function classifyChangedFiles(paths, options = {}) {
     return isRelevant;
   });
 
-  // The manifests first: the lockfile rule below reads their REFINED relevance,
+  // A package-root Markdown file reaches a consumer exactly if that package
+  // publishes it, which only its `files` can say (#3023).
+  const packageFiles = options.packageFiles ?? {};
+  relevant = relevant.filter((path) => {
+    const markdown = packageRootMarkdown(path);
+    if (!markdown) return true;
+    if (shipsRootMarkdown(markdown.file, packageFiles[markdown.dir])) {
+      return true;
+    }
+    rules.add(`package Markdown outside "files"`);
+    return false;
+  });
+
+  // The manifests next: the lockfile rule below reads their REFINED relevance,
   // not the path-level one.
   relevant = relevant.filter((path) => {
     if (!isManifest(path) || manifestRelevance[path] !== false) return true;
