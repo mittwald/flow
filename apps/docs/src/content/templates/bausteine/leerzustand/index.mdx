@@ -75,6 +75,34 @@ tun, und ein Button, der daran nichts ändert, verspricht das Gegenteil.
 
 <LiveCodeEditor example="leerzustand-warten" editorCollapsed />
 
+## Wenn eine Voraussetzung fehlt
+
+Manchmal ist die Sammlung nicht leer, weil noch niemand etwas angelegt hat,
+sondern weil es **noch nicht geht**: E-Mail-Adressen brauchen zuerst eine
+Domain. Dann benennt die Überschrift nicht das eigene Objekt, sondern die
+Voraussetzung, und die Aktion führt dorthin — nicht ins eigene Anlegen, das
+gerade fehlschlagen würde.
+
+<LiveCodeEditor example="leerzustand-voraussetzung" editorCollapsed />
+
+## Wenn die Funktion nicht zur Verfügung steht
+
+Fehlt der Anspruch — ein Tarif, ein Servertyp, eine Freigabe — gibt es hier
+keinen Weg vorwärts. Der Zustand sagt, woran es liegt und was ihn auflösen
+würde, und die einzige Aktion führt **hinaus**. Das ist der einzige Leerzustand
+ohne Angebot.
+
+<LiveCodeEditor example="leerzustand-nicht-verfuegbar" editorCollapsed />
+
+## Wenn die Daten von selbst kommen
+
+Messwerte, Auswertungen, Statistiken: es ist nichts zu tun, es dauert nur. Der
+Zustand sagt, **dass** gemessen wird und **wie lange** es dauert, und hebt
+beides im Satz hervor. Keine Aktion — auch kein „Aktualisieren", das nichts
+beschleunigt.
+
+<LiveCodeEditor example="leerzustand-messung" editorCollapsed />
+
 ## Weitere Abwandlungen
 
 **Ohne Aktion.** Wenn das Anlegen woanders passiert oder von etwas anderem

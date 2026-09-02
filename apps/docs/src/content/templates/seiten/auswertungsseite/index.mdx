@@ -1,0 +1,76 @@
+---
+title: Auswertungsseite
+---
+
+Auslastung, Speicherverbrauch, Antwortzeiten, Sichtbarkeitskennzahlen: Seiten,
+die nicht ein Objekt zeigen und nicht eine Sammlung, sondern **einen Verlauf**.
+Ihr Inhalt sind Diagramme, und ihr eigentliches Bedienelement ist der Zeitraum.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="auswertungsseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Wenn die Frage lautet „wie hat sich das entwickelt" und die Antwort nur als
+Kurve zu lesen ist.
+
+**Nicht verwenden**, wenn
+
+- ein einzelner Wert die Frage beantwortet. Dann gehört er als Kennzahl in einen
+  [Bereich](/templates/bereiche/stammdaten-bereich) oder auf eine
+  [Dashboard-Kachel](/templates/bausteine/dashboard-kachel).
+- die Daten Einzelereignisse sind und nicht ein Verlauf. Ein Protokoll ist eine
+  Liste, keine Auswertung – siehe
+  [Protokollzeile](/templates/bausteine/protokollzeile).
+
+---
+
+# Warum diese Struktur
+
+**Die Zeitraumsteuerung steht über den Diagrammen, nicht in ihnen.** Sie gilt
+für alle Diagramme des Bereichs gleichzeitig — nur so sind zwei Kurven überhaupt
+vergleichbar. Ein Zeitraum je Diagramm macht die Seite unlesbar.
+
+**Der Zeitraum ist ein Steuerelement, kein Filter.** Ein
+[Select](/components/form-controls/select) für das Intervall und ein
+[DatePicker](/components/form-controls/date-picker) für den Bezugspunkt, beide
+im Bereich. Ein `List.Filter` wäre falsch: es wird nichts aus einer Menge
+ausgewählt, sondern ein Ausschnitt bestimmt.
+
+**Darstellungsoptionen gehören in die Kopfzeile.** Ein
+[Switch](/components/form-controls/switch) im
+[Header](/components/structure/section) — logarithmische Skala, absolute statt
+relative Werte — verändert nur die Ansicht. Er sieht aus wie eine
+Objekt-Einstellung und ist keine; deshalb steht er oben und nicht bei den Daten.
+
+**Ein Diagramm je Größe, untereinander, mit einer Legende.** Zwei Größen in
+einer Kurve teilen sich eine Achse und lügen, sobald ihre Größenordnungen
+auseinanderliegen. Untereinander teilen sie sich die x-Achse, was den Vergleich
+erst möglich macht.
+
+**Ein Diagramm ohne Daten bleibt ein Diagramm.** Achsen, Skala und Legende
+stehen weiter, und die Höhe bleibt — es fällt nicht auf einen
+[Leerzustand](/templates/bausteine/leerzustand) zurück. Nur wenn noch **nie**
+gemessen wurde, tritt einer an seine Stelle.
+
+---
+
+# Varianten und Abwandlung
+
+**Mit Tabs je Größengruppe.** Passen nicht alle Diagramme auf eine Seite, wird
+gruppiert: „vCPU & RAM" und „Speicherplatz" als zwei
+[Tabs](/templates/seiten/seite-mit-tab-navigation). Die Zeitraumsteuerung gehört
+dann in jeden Tab, weil jeder für sich gelesen wird.
+
+**Mit einem Kennzahlen-Kopf.** Über den Kurven kann eine Reihe aus
+[BigNumber](/components/data-visualisation/big-number) den aktuellen Stand
+nennen — die Kurve zeigt die Entwicklung, die Zahl den Jetzt-Wert.
+
+**Als Donut statt Kurve.** Für eine Aufteilung zum Zeitpunkt, nicht über die
+Zeit, ist ein [DonutChart](/components/data-visualisation/donut-chart) richtig.
+Dann entfällt die Zeitraumsteuerung — und damit der Grund für dieses Template.

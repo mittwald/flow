@@ -1,0 +1,95 @@
+---
+title: Zentrierte Karte
+---
+
+Für jeden, der mStudio benutzt, ist das die erste Seite: eine mittige Karte auf
+dem App-Hintergrund, ohne Navigation, ohne Kopfzeile, ohne Kontext. Login,
+Registrierung, Passwort zurücksetzen, eine angenommene Einladung, eine
+OAuth-Freigabe — und die Fehlerseite, wenn eine Adresse nicht aufgeht.
+
+Es ist die einzige Seitenform ohne Shell. Genau darin liegt ihr Zweck: es gibt
+noch keinen Kontext, in dem man sich befinden könnte, oder er ist gerade
+verloren gegangen.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="zentrierte-karte" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Für jede Seite, die ohne Anmeldung erreichbar sein muss oder außerhalb jedes
+Kontexts steht: Anmeldung und Registrierung, Passwort-Zurücksetzen in allen
+Schritten, das Annehmen einer Einladung, eine Freigabe an eine fremde Anwendung,
+das Löschen des eigenen Profils — und der globale Fehlerfall.
+
+**Nicht verwenden**, wenn
+
+- die Seite innerhalb der Anwendung liegt. Dann gehört sie in die Shell, auch
+  wenn sie nur eine Karte enthält.
+- ein Leerzustand gezeigt werden soll. Der steht **in** der Seite, nicht
+  anstelle der Anwendung – siehe
+  [Leerzustand](/templates/bausteine/leerzustand).
+
+---
+
+# Warum diese Struktur
+
+**Kein Menü, keine Kopfzeile — und das ist die Aussage.** Wer hier ist, hat
+keinen Ort, an den eine Navigation führen könnte. Eine ausgegraute Shell würde
+Wege zeigen, die es nicht gibt.
+
+**Die Marke steht über der Karte, nicht darin.** Sie sagt, wo man ist, weil
+sonst nichts es sagt. In der Anwendung übernimmt das die Kopfzeile.
+
+**Eine Karte, eine Aufgabe.** Die Karte trägt genau einen Vorgang: anmelden,
+oder zurücksetzen, oder bestätigen. Mehrere Angebote in einer Karte machen aus
+der Startseite eine Auswahl.
+
+**Der Ausweg steht in der Karte, nicht daneben.** „Passwort vergessen" und
+„Registrieren" sind Teil des Vorgangs — beides sind Wege, die von hier
+weiterführen, wenn der Hauptweg nicht klappt. Sie stehen sekundär, nie neben dem
+Absenden in gleicher Gewichtung.
+
+**Die Breite ist die eine Stelle, die eigenes CSS braucht.** Flow hat keinen
+breitenbegrenzten zentrierten Container: eine
+[LayoutCard](/components/structure/layout-card) in einem zentrierenden
+[Flex](/components/structure/flex) schrumpft auf ihren Inhalt. mStudio setzt
+deshalb `width: calc(100dvw - …)` mit `max-width: 520px` auf die Karte. Das ist
+in diesem Abschnitt die einzige Stelle, an der ein Template ohne eigene Regel
+nicht auskommt — überall sonst genügen die Komponenten.
+
+**Die Fußzeile trägt nur Pflichtlinks.** Impressum, Datenschutz und der Weg zu
+den anderen mittwald-Oberflächen. Sie ist bewusst arm: alles andere wäre eine
+Ablenkung von der einen Aufgabe.
+
+---
+
+# Varianten und Abwandlung
+
+## Als Fehler- oder Abschlussseite
+
+Dieselbe Hülle, statt des Formulars ein
+[Leerzustand](/templates/bausteine/leerzustand): Icon, Überschrift, ein
+erklärender Satz und **ein** Ausweg. So sieht die 404-Seite aus, so die
+Bestätigung nach dem Löschen des eigenen Profils.
+
+<LiveCodeEditor
+  example="zentrierte-karte-fehler"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Weitere Abwandlungen
+
+**Mit einem Schritt-Hinweis.** Das Passwort-Zurücksetzen läuft über drei Seiten
+(anfordern, bestätigen, neu setzen). Jede ist für sich eine zentrierte Karte;
+der Fortschritt steht im Text, nicht in einer Anzeige — es sind Adressen, keine
+Stufen eines Overlays.
+
+**Mit vorbelegter Kennung.** Kommt der Aufruf aus einer Einladung oder einem
+Magic Link, ist die E-Mail-Adresse gesetzt und nicht mehr zu ändern. Das Feld
+bleibt sichtbar, damit erkennbar ist, für wen der Vorgang gilt.

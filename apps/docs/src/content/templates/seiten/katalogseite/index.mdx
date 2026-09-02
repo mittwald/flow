@@ -1,0 +1,93 @@
+---
+title: Katalogseite
+---
+
+Manche Seiten zeigen nicht, was jemand hat, sondern was er hinzufügen könnte:
+den Marktplatz, die Container-Vorlagen, die Auswahl beim Installieren einer App.
+Die Einträge gehören nicht dem Nutzer — sie werden ihm angeboten.
+
+Das unterscheidet die Katalogseite von der
+[Übersichtsseite](/templates/seiten/uebersichtsseite), obwohl beide eine
+[List](/components/structure/list) zeigen: hier gibt es nichts zu verwalten,
+sondern etwas zu finden und zu bewerten.
+
+---
+
+# Beispiel
+
+<LiveCodeEditor example="katalogseite" editorCollapsed bgColor="mstudio" />
+
+---
+
+# Wann verwenden
+
+Wenn eine Seite ein Angebot zeigt, aus dem gewählt wird: Erweiterungen,
+Vorlagen, App-Typen, Tarife.
+
+**Nicht verwenden**, wenn
+
+- die Einträge dem Nutzer gehören und verwaltet werden. Das ist eine
+  [Übersichtsseite](/templates/seiten/uebersichtsseite), auch wenn sie als
+  Kacheln erscheint.
+- es nur zwei oder drei Optionen gibt und sie sich mit ihrem Namen erklären.
+  Dann genügt ein [Select](/components/form-controls/select) im Formular.
+
+---
+
+# Warum diese Struktur
+
+**Die Kachel wirbt, sie meldet keinen Zustand.** Titelbild oder Logo, Name, ein
+Satz, der den Nutzen benennt — und die kaufmännische Angabe, wenn es eine gibt.
+Kein Speicherverbrauch, kein Alert-Badge: das Angebot hat noch keinen Zustand.
+
+**Ein einleitender Absatz ordnet den Katalog ein.** Wer zum ersten Mal hier ist,
+weiß nicht, von wem die Einträge stammen und was sie kosten. Der Satz über der
+Werkzeugzeile beantwortet das, bevor die erste Kachel gelesen wird.
+
+**Kuratierung geht vor Vollständigkeit.** Ein Katalog mit hundert Einträgen ist
+ohne Rangfolge unbrauchbar. Deshalb steht Ausgewähltes zuerst, dann eine
+gerankte Gruppe („Meiste Installationen"), und die vollständige Liste ist ein
+zweiter Schritt — über einen
+[SegmentedControl](/components/form-controls/segmented-control) oder einen „Alle
+anzeigen"-Link.
+
+**Ein Badge ordnet ein, es warnt nicht.** „Beliebt", „Neu", „Verifiziert" sind
+Einordnungen des Angebots. Die Alert-Farben bleiben den Zuständen eigener
+Objekte vorbehalten.
+
+**Suche vor Filter.** In einem Katalog weiß man oft den Namen und selten die
+Kategorie. Die Suche ist deshalb die wichtigere Hilfe; Filter nach Kategorie
+oder Preis kommen dazu, wenn der Katalog groß genug ist, dass Stöbern lohnt.
+
+---
+
+# Varianten und Abwandlung
+
+## Die Detailseite eines Katalogeintrags
+
+Ein Angebot, über das entschieden wird, braucht mehr Platz als eine Kachel. Die
+Detailseite dazu ist **keine** [Detailseite](/templates/seiten/detailseite) im
+Sinne dieses Abschnitts: es gibt keine Bereiche mit Bearbeiten-Aktionen, denn
+das Objekt gehört noch niemandem. Stattdessen eine Kopfkarte mit der einen
+Aktion, langer Prosa im Hauptteil und den harten Angaben als Tabelle daneben.
+
+Sie kommt zweimal vor — Marktplatz-Erweiterung und Container-Vorlage — und steht
+deshalb hier als Variante statt als eigenes Template.
+
+<LiveCodeEditor
+  example="katalogseite-eintrag"
+  editorCollapsed
+  bgColor="mstudio"
+/>
+
+## Weitere Abwandlungen
+
+**Als Auswahlstufe in einem Overlay.** Dieselbe durchsuchbare Kachelliste
+erscheint als erste Stufe eines
+[mehrstufigen Overlays](/templates/overlays/mehrstufiges-overlay), wenn direkt
+im Anschluss konfiguriert wird. Sie trägt dort keine Einleitung und keine
+Kuratierung — nur Suche und Kacheln.
+
+**Mit eigener Installations-Aktion je Kachel.** Bei kurzen Katalogen kann die
+Kachel den Button direkt tragen, statt über die Detailseite zu führen. Das lohnt
+nur, wenn es nichts zu vergleichen gibt.
