@@ -2,7 +2,10 @@ import {
   Avatar,
   ContextMenu,
   Heading,
+  IconDelete,
   IconDomain,
+  IconEdit,
+  IconInfo,
   IconSubdomain,
   MenuItem,
   Text,
@@ -44,9 +47,18 @@ export default () => {
             <Text>{domain.type}</Text>
 
             <ContextMenu>
-              <MenuItem>Details anzeigen</MenuItem>
-              <MenuItem>Bearbeiten</MenuItem>
-              <MenuItem>Löschen</MenuItem>
+              <MenuItem>
+                <IconInfo />
+                <Text>Details anzeigen</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconEdit />
+                <Text>Bearbeiten</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconDelete />
+                <Text>Löschen</Text>
+              </MenuItem>
             </ContextMenu>
           </DomainList.ItemView>
         )}
