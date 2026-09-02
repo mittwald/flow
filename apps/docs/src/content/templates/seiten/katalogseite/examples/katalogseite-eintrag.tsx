@@ -3,7 +3,6 @@ import {
   Avatar,
   Button,
   ColumnLayout,
-  Content,
   Flex,
   Header,
   Heading,
