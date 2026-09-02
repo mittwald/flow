@@ -33,8 +33,22 @@ export const useControlledHostValueProps = <T, P>(
   const regularValue =
     valueFromProps === controlledRemoteValueMarker ? undefined : valueFromProps;
 
+  /*
+   * `undefined` is the only value that falls back, because it is the only one
+   * react-aria reads as uncontrolled. `null` must not: it is how a caller
+   * controls a `DateRangePicker` that has no range selected, so `??` would let
+   * it fall through to `defaultValue`.
+   *
+   * The marker cannot appear on the first render — it is only sent once a
+   * remote event has been handled — so `regularValue` is the caller's own value
+   * here.
+   */
   const [value, setValue] = useState(
-    regularValue ?? defaultValue ?? emptyValue,
+    regularValue !== undefined
+      ? regularValue
+      : defaultValue !== undefined
+        ? defaultValue
+        : emptyValue,
   );
 
   useLayoutEffect(() => {
