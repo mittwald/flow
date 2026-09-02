@@ -158,13 +158,28 @@ export function classifyMixture(commits, title) {
   const smuggling =
     CLASS_ORDER.indexOf(commitClass) > CLASS_ORDER.indexOf(titleClass);
 
+  // Three different consequences, so three different messages. The one that
+  // bites most often is the first: a `fix:` commit under a `docs:` title is not
+  // routed wrongly, it is not released AT ALL.
+  let reason;
+  if (!smuggling) {
+    reason =
+      `the title claims ${titleClass} but no commit carries more than a ` +
+      `${commitClass} change`;
+  } else if (titleClass === "none") {
+    reason =
+      `the commits carry a ${commitClass} change but the title releases ` +
+      "nothing — the squash merge keeps only the title, so that change would " +
+      "ship in no release and appear in no changelog";
+  } else {
+    reason =
+      `the commits carry a ${commitClass} change but the title claims ` +
+      `${titleClass} — routing reads the title, so it would land on the wrong line`;
+  }
+
   return {
     ok: false,
-    reason: smuggling
-      ? `the commits carry a ${commitClass} change but the title claims ` +
-        `${titleClass} — routing reads the title, so it would land on the wrong line`
-      : `the title claims ${titleClass} but no commit carries more than a ` +
-        `${commitClass} change`,
+    reason,
     titleClass,
     commitClasses,
     offenders: releasing.map((commit) => ({

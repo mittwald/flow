@@ -89,6 +89,21 @@ test("classifyMixture: a feat commit under a fix title is smuggling", () => {
   assert.deepEqual(result.commitClasses, ["feature"]);
 });
 
+test("classifyMixture: a docs title hides a fix from the release entirely", () => {
+  // The common shape: the docs work is the headline, the fix rides along, and
+  // the squash merge keeps only the title — so the fix ships nowhere.
+  const result = classifyMixture(
+    [c("docs(List): document the states"), c("fix(List): stop the crash")],
+    "docs(List): document the states",
+  );
+  assert.equal(result.ok, false);
+  assert.equal(result.titleClass, "none");
+  assert.match(result.reason, /ship in no release and appear in no changelog/);
+  assert.deepEqual(result.offenders, [
+    { subject: "fix(List): stop the crash", class: "patch" },
+  ]);
+});
+
 test("classifyMixture: a title claiming more than the commits is mislabelling", () => {
   const result = classifyMixture(
     [c("fix(List): stop the crash")],
