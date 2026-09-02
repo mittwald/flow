@@ -14,16 +14,23 @@
       var(--code-block--border-color);
     border-radius: var(--code-block--corner-radius);
 
-    > .pre {
+    /* These stay element selectors on purpose. Classing them would give them a
+       `flow--` class, and the global reset's
+       `*:where([class*="flow--"] [class*="flow--"]) { font: inherit }` would
+       then replace the UA monospace metrics — the code text visibly reflows.
+       Fixing that is a design decision for UX, not a lint cleanup. */
+    // stylelint-disable selector-max-type -- see above
+    > pre {
       @include scrollbar.scrollbar;
 
       overflow-x: auto;
       padding: var(--code-block--padding);
 
-      > .code {
+      > code {
         text-shadow: none;
       }
     }
+    // stylelint-enable selector-max-type
   }
 
   &.folded {

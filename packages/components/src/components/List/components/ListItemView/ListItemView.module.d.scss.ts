@@ -11,7 +11,7 @@ declare const classNames: {
   readonly badge: "badge";
   readonly listView: "listView";
   readonly columnLayout: "columnLayout";
-  readonly "flow--column-layout--column-layout": "flow--column-layout--column-layout";
+  readonly "flow--column-layout": "flow--column-layout";
   readonly contentWrapper: "contentWrapper";
   readonly title: "title";
   readonly action: "action";

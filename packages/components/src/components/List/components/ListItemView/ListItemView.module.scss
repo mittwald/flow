@@ -67,7 +67,7 @@
     .columnLayout {
       flex-grow: 1;
 
-      > :global(.flow--column-layout--column-layout) {
+      > :global(.flow--column-layout) {
         flex-grow: 1;
         align-items: center;
       }

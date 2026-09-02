@@ -49,8 +49,11 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
   if (!code) {
     return (
       <div className={clsx(rootClassName, styles.withChildren)}>
-        <pre className={styles.pre}>
-          <code className={styles.code}>{children}</code>
+        {/* Deliberately class-less: a `flow--` class would make the global
+            reset's `font: inherit` apply and replace the UA monospace
+            metrics. See CodeBlock.module.scss. */}
+        <pre>
+          <code>{children}</code>
         </pre>
       </div>
     );
