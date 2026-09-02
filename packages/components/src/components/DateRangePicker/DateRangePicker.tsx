@@ -38,7 +38,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     ref,
     withDatePickerPresets = false,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, null);
 
   const popoverController = useOverlayController("Popover");
   const {

@@ -29,7 +29,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     isWheelDisabled = true,
     ref,
     ...rest
-  } = useControlledHostValueProps(props);
+  } = useControlledHostValueProps(props, NaN);
 
   const {
     FieldErrorView,
