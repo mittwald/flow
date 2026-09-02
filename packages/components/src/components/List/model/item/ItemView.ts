@@ -57,6 +57,21 @@ export class ItemView<T> {
   private static fallbackRenderItemFn: RenderItemFn<never> = (item) =>
     createElement("pre", undefined, JSON.stringify(item));
 
+  /**
+   * Whether `other` would render this item identically — i.e. all render
+   * functions taken from the consumer's `ListItem` element are still the same.
+   */
+  public rendersSameAs(other?: ItemView<T>): boolean {
+    return (
+      !!other &&
+      this.renderFn === other.renderFn &&
+      this.textValue === other.textValue &&
+      this.href === other.href &&
+      this.target === other.target &&
+      this.defaultExpanded === other.defaultExpanded
+    );
+  }
+
   public render(data: T): ReactNode {
     const renderFn = (this.renderFn ??
       ItemView.fallbackRenderItemFn) as RenderItemFn<T>;
