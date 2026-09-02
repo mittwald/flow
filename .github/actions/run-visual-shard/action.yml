@@ -14,27 +14,45 @@ inputs:
     description:
       How often to run the shard before calling it failed. Firefox
       intermittently hangs on a single file in headless CI — a hang vitest's
-      per-test `retry` cannot recover, only a fresh browser process can. A real
-      diff fails every attempt.
+      per-test `retry` cannot recover, only a fresh browser process can. WebKit
+      does not hang, but a contended runner starves it until every screenshot
+      misses its 5s stability budget, which fails a shard just as wrongly. A
+      real diff fails every attempt.
     default: "1"
+  browser:
+    description:
+      Which browser to render in. Empty means both, which is the full signal,
+      because the suite renders one theme in each (WebKit light, Firefox dark).
+      `test.yml` passes `webkit` and trades the dark theme for half the wall
+      clock on the PR path, where the scheduled run covers the rest.
+    default: ""
 
 runs:
   using: composite
   steps:
-    # Both browsers, because the suite renders one theme in each (WebKit light,
-    # Firefox dark) and a full run needs both. Keyed apart from test.yml's
-    # WebKit-only cache, which would otherwise decide what this one finds.
+    # Keyed on the browser set: under one shared key, whichever caller saved
+    # first would decide what the others find — a WebKit-only save would leave
+    # a both-browsers run without Firefox.
     - name: Cache the Playwright browsers
       uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
         path: ~/.cache/ms-playwright
-        key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        key:
+          playwright-${{ inputs.browser || 'all' }}-${{ runner.os }}-${{
+          hashFiles('pnpm-lock.yaml') }}
         restore-keys: |
-          playwright-${{ runner.os }}-
+          playwright-${{ inputs.browser || 'all' }}-${{ runner.os }}-
 
+    # `test:browser:prepare` for the full set, so the browser list stays in the
+    # root package.json where the contributor docs point.
     - name: Install the Playwright browsers
       shell: bash
-      run: pnpm test:browser:prepare --only-shell
+      run: |
+        if [ -n "${{ inputs.browser }}" ]; then
+          pnpm exec playwright install --with-deps --only-shell "${{ inputs.browser }}"
+        else
+          pnpm test:browser:prepare --only-shell
+        fi
 
     # `test:visual` only declares `^build`; building the package itself is a
     # superset of that. Outside the retry loop below: a hung browser leaves the
@@ -48,22 +66,27 @@ runs:
     # most of them a pass they never ran.
     #
     # vitest shards by hashing the file paths, so the split is stable and each
-    # shard still runs its files one at a time, in both browsers, against the
+    # shard still runs its files one at a time, in its own browser, against the
     # committed baselines. Same suite, spread over runners.
     - name: Run visual tests (shard ${{ inputs.shard }}/${{ inputs.shards }})
       shell: bash
       run: |
         shard="${{ inputs.shard }}/${{ inputs.shards }}"
         attempts="${{ inputs.attempts }}"
+        browser="${{ inputs.browser }}"
+        args=(--shard="$shard")
+        if [ -n "$browser" ]; then
+          args+=(--browser.name="$browser")
+        fi
         for attempt in $(seq 1 "$attempts"); do
           echo "::group::Visual tests, shard $shard (attempt $attempt/$attempts)"
-          if pnpm --filter @mittwald/flow-remote-react-components test:visual --shard="$shard"; then
+          if pnpm --filter @mittwald/flow-remote-react-components test:visual "${args[@]}"; then
             echo "::endgroup::"
             exit 0
           fi
           echo "::endgroup::"
           if [ "$attempt" -lt "$attempts" ]; then
-            echo "::warning::Shard $shard failed on attempt $attempt/$attempts (likely a flaky firefox hang), retrying..."
+            echo "::warning::Shard $shard failed on attempt $attempt/$attempts (likely a flaky browser hang or a starved runner), retrying..."
           fi
         done
         echo "::error::Shard $shard failed."

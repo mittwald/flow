@@ -213,6 +213,13 @@ runs its own files one at a time, in its own browser process, against the same
 baselines — what it renders is identical to a single-runner run. A failure names
 the shard; its diff images are in that shard's `visual-diffs-*` artifact.
 
+Every path runs a failing shard up to **three times**, in a fresh browser
+process each time, and only then calls it failed. Two things fail a shard
+without a diff behind them: Firefox intermittently hangs on a single file, and a
+contended runner starves the browser until every screenshot misses its stability
+budget. A real diff fails all three attempts. A retry logs a warning, so a shard
+that went green on the second try still says so in the job log.
+
 ## Cross-version smoke tests
 
 Extension developers ship remote apps built against a **published** version of

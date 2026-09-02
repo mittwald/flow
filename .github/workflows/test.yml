@@ -203,9 +203,19 @@ jobs:
           pnpm --filter @mittwald/flow-remote-react-components
           test:cross-version
 
+  # Runs the shards through `run-visual-shard`, the same action the scheduled and
+  # label runs use — so the retry lives in one place and this path gets it too.
+  # It is the path every PR crosses, so it is the one that must not report a
+  # starved runner as a diff: run 33626981366 failed 85 of 86 tests with "Could
+  # not capture a stable screenshot within 5000ms", every file, trivial ones
+  # included, on a shard whose baselines nothing in the PR touched.
+  #
+  # `attempts` matches the other two; the timeout follows from it, because three
+  # attempts of a shard have to fit inside the job. A shard is 3-6 minutes green
+  # and ~8 starved, plus ~3 for setup and the build.
   visual:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     strategy:
       # Each shard is a separate signal. A failing one must not cancel the others
       # — the diffs of the shards still running are what tell you whether the
@@ -226,34 +236,28 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
 
-      # The other jobs leave the decision to `nx affected` and use this only to
-      # skip the browser install. The shards call vitest directly (see below), so
-      # here the answer gates the work itself — a PR that touches neither the
-      # components nor the remote packages must not start four browsers.
+      # Gate only — `run-visual-shard` installs the browser it renders in. The
+      # other jobs leave the decision to `nx affected` and use this to skip the
+      # install; here the answer gates the work itself, because a PR that touches
+      # neither the components nor the remote packages must not start four
+      # browsers.
       - uses: ./.github/actions/prepare-browser-tests
         id: suite
         with:
           target: test:visual
+          install: "false"
 
-      # `test:visual` only declares `^build`; building the package itself is a
-      # superset of that, and one `nx run` is all the shards need to be ready.
-      - name: Build the packages the visual suite renders
+      # WebKit only, unlike the scheduled and label runs: the dark theme renders
+      # in Firefox, and trading it for half the wall clock is the deal this path
+      # makes (see the header). Skipping the action outright when the suite is
+      # unaffected also skips its install and build.
+      - uses: ./.github/actions/run-visual-shard
         if: steps.suite.outputs.run == 'true'
-        run: pnpm nx run remote-react-components:build
-
-      # Deliberately not `nx run …:test:visual`: the target is cached, and nx
-      # hands every shard of it the same task hash — with the cache shared across
-      # jobs, three of the four shards would be served a pass they never ran.
-      #
-      # vitest shards by hashing the file paths, so the split is stable and each
-      # shard still runs its files one at a time, in one browser, against the
-      # committed baselines. Same suite, four runners.
-      - name: Run visual tests in Webkit (shard ${{ matrix.shard }})
-        if: steps.suite.outputs.run == 'true'
-        run:
-          pnpm --filter @mittwald/flow-remote-react-components test:visual
-          --shard=${{ matrix.shard }}/${{ strategy.job-total }}
-          --browser.name=webkit
+        with:
+          shard: ${{ matrix.shard }}
+          shards: ${{ strategy.job-total }}
+          attempts: "3"
+          browser: webkit
 
   # The required check. Green only when every job above is.
   main:

@@ -1,12 +1,17 @@
 name: Prepare browser tests
 description:
   Answers whether a browser suite has anything to run in this PR, and installs
-  the browser only when it has.
+  the browser only when it has — unless the caller installs it itself.
 
 inputs:
   target:
     description: The nx target the calling job runs, e.g. `test:visual`.
     required: true
+  install:
+    description:
+      Whether to install the browser. Set to `false` to use this as a gate only,
+      when the job installs through another action — `run-visual-shard` does.
+    default: "true"
 
 outputs:
   run:
@@ -31,11 +36,12 @@ runs:
           echo "run=true" >> "$GITHUB_OUTPUT"
         fi
 
-    # Keyed apart from the visual workflows' cache on purpose. They install
-    # Firefox as well, and under one shared key whichever workflow saved first
-    # would decide what the other one finds.
+    # Keyed on the browser set, so this shares with every other WebKit-only
+    # install and stays apart from the full-set one the scheduled and label
+    # visual runs need. Under one shared key whichever saved first would decide
+    # what the others find, and a WebKit-only save leaves them without Firefox.
     - name: Cache the Playwright browser
-      if: steps.affected.outputs.run == 'true'
+      if: steps.affected.outputs.run == 'true' && inputs.install == 'true'
       uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
       with:
         path: ~/.cache/ms-playwright
@@ -45,6 +51,6 @@ runs:
           playwright-webkit-${{ runner.os }}-
 
     - name: Install the Playwright browser
-      if: steps.affected.outputs.run == 'true'
+      if: steps.affected.outputs.run == 'true' && inputs.install == 'true'
       shell: bash
       run: pnpm exec playwright install --with-deps webkit
