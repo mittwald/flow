@@ -10,6 +10,10 @@
  */
 export const CONTENT_ORDER: readonly string[] = [
   "/get-started",
+  "/get-started/installation",
+  "/get-started/stylesheet",
+  "/get-started/versioning",
+  "/get-started/upgrades",
   "/releases",
   "/foundations",
   "/foundations/design",
