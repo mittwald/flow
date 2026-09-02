@@ -7,10 +7,23 @@ import type { FieldProps } from "@/lib/remote/types";
  * by omitting values resulting from a remotely executed event handler. These
  * values are marked by the `controlledRemoteValueMarker`.
  *
- * This hook is noly necessary for text inputs. If not use the controlled input
+ * This hook is only necessary for text inputs. If not used the controlled input
  * value may be corrupted by interleaved host inputs and remote events.
+ *
+ * `emptyValue` is what the field reports while nothing has been entered – `""`
+ * for a text input, `NaN` for a number, `null` for a date range. It keeps the
+ * field on the controlled side of React's controlled/uncontrolled line for its
+ * whole lifetime: the state below owns the value from the first change on, so
+ * without it a field that starts with neither `value` nor `defaultValue` hands
+ * react-aria `undefined` first and a real value afterwards.
+ * `useControlledState` reads only `undefined` as uncontrolled and warns about
+ * that transition – and the value changes owner mid-flight, from the DOM input
+ * to this hook.
  */
-export const useControlledHostValueProps = <T, P>(props: FieldProps<T, P>) => {
+export const useControlledHostValueProps = <T, P>(
+  props: FieldProps<T, P>,
+  emptyValue: T,
+) => {
   const {
     value: valueFromProps,
     onChange: onChangeFromProps,
@@ -20,7 +33,9 @@ export const useControlledHostValueProps = <T, P>(props: FieldProps<T, P>) => {
   const regularValue =
     valueFromProps === controlledRemoteValueMarker ? undefined : valueFromProps;
 
-  const [value, setValue] = useState(regularValue ?? defaultValue);
+  const [value, setValue] = useState(
+    regularValue ?? defaultValue ?? emptyValue,
+  );
 
   useLayoutEffect(() => {
     if (regularValue !== undefined) {

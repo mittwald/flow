@@ -72,6 +72,60 @@ test("Modal can be controlled with modal controller", async () => {
   expect(modalText).toBeInTheDocument();
 });
 
+/*
+ * Nothing inside a mounted modal may cross React's controlled/uncontrolled
+ * line. #3026 read the nine warnings this file used to emit as a flip of the
+ * modal's own open state; they came from the `TextField` in the tests below,
+ * whose value only became controlled once the first keystroke landed.
+ */
+test("Modal and its fields stay on one side of the controlled line", async () => {
+  const warn = vitest.spyOn(console, "warn");
+
+  const Test = () => {
+    const form = useForm();
+
+    return (
+      <ModalTrigger>
+        <Button>Open Modal</Button>
+        <Modal>
+          <Content>
+            <Text data-testid="modal-text">Hello World</Text>
+            <Form form={form} onSubmit={vitest.fn()}>
+              <Field name="testField">
+                <TextField aria-label="Test field" />
+              </Field>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Action closeModal>
+              <Button>Close modal</Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  };
+
+  try {
+    const dom = await render(<Test />);
+
+    await userEvent.click(
+      dom.getByRole("button", { name: "Open Modal", exact: true }),
+    );
+    await userEvent.type(dom.getByRole("textbox"), "Some changes");
+    await userEvent.click(
+      dom.getByRole("button", { name: "Close modal", exact: true }),
+    );
+    expect(dom.getByTestId("modal-text")).not.toBeInTheDocument();
+
+    expect(warn.mock.calls.flat().join("\n")).not.toContain(
+      "uncontrolled to controlled",
+    );
+  } finally {
+    warn.mockRestore();
+  }
+});
+
 test("Modal with dirty form requires confirmation", async () => {
   const Test = () => {
     const form = useForm();
