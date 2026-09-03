@@ -660,7 +660,7 @@ describe("Item hover", () => {
   // across two files that no other test would notice going stale.
   const HoverableList = () => (
     <List aria-label="Test" onAction={() => undefined}>
-      <ListStaticData<Data> data={[{ num: 42 }]} />
+      <ListStaticData<Data> data={[{ num: 42 }, { num: 43 }]} />
       <ListItem<Data> textValue={({ num }) => String(num)}>
         {({ num }) => (
           <ListItemView>
@@ -674,22 +674,24 @@ describe("Item hover", () => {
 
   const topContent = page.getByText("Top 42");
   const bottomContent = page.getByText("Bottom 42");
-  const itemRow = page.getByRole("row");
+  const hoveredRow = page.getByRole("row").nth(0);
+  // Never hovered, so it shows the default background whatever the pointer did
+  // before this test — reading the hovered item's own "before" state would not,
+  // since the pointer may already rest on it at render time.
+  const restingRow = page.getByRole("row").nth(1);
 
   test("bottom content does not trigger the item hover background", async () => {
     await render(<HoverableList />);
 
-    const item = itemRow.element();
-    const defaultBackground = getComputedStyle(item).backgroundColor;
+    const backgrounds = () => [
+      getComputedStyle(hoveredRow.element()).backgroundColor,
+      getComputedStyle(restingRow.element()).backgroundColor,
+    ];
 
     await userEvent.hover(topContent);
-    await expect
-      .poll(() => getComputedStyle(item).backgroundColor)
-      .not.toBe(defaultBackground);
+    await expect.poll(() => backgrounds()[0]).not.toBe(backgrounds()[1]);
 
     await userEvent.hover(bottomContent);
-    await expect
-      .poll(() => getComputedStyle(item).backgroundColor)
-      .toBe(defaultBackground);
+    await expect.poll(() => backgrounds()[0]).toBe(backgrounds()[1]);
   });
 });
