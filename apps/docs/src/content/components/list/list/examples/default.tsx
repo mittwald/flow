@@ -14,7 +14,7 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
@@ -36,18 +36,12 @@ export default () => {
         mode="some"
         name="Typ"
       />
-      <DomainList.Filter
-        property="tld"
-        mode="some"
-        name="TLD"
-        priority="secondary"
-      />
       <DomainList.Sorting
         property="hostname"
         name="Alphabetisch"
         direction="asc"
-        defaultEnabled
         directionName="aufsteigend"
+        defaultEnabled
       />
       <DomainList.Sorting
         property="hostname"
