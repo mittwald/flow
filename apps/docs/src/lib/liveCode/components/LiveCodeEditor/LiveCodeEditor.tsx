@@ -312,7 +312,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           </div>
         )}
 
-        <LiveError className={styles.error} />
+        <LiveError />
       </div>
     </LiveProvider>
   );
