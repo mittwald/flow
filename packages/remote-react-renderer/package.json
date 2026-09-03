@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-renderer",
-  "version": "1.2.0-next.17",
+  "version": "1.2.0-next.18",
   "type": "module",
   "description": "React rendering for Flow Remote Elements",
   "homepage": "https://flow.mittwald.de",
