@@ -1,5 +1,4 @@
 import {
-  AlertBadge,
   Avatar,
   ContextMenu,
   Heading,
@@ -12,39 +11,24 @@ import {
 import {
   type Domain,
   domains,
-} from "@/content/components/structure/list/examples/domainApi";
+} from "@/content/components/list/list-item-view/examples/domainApi";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
     <DomainList.List
-      batchSize={5}
+      batchSize={3}
       aria-label="Domains"
+      hidePagination
+      defaultViewMode="tiles"
       getItemId={(domain) => domain.id}
     >
       <DomainList.StaticData data={domains} />
-      <DomainList.Filter
-        property="type"
-        mode="some"
-        name="Typ"
-        values={["Domain", "Subdomain"]}
-        defaultSelected={["Domain"]}
-      />
-      <DomainList.Filter
-        property="verified"
-        mode="some"
-        name="Verifizierung"
-        matcher={(filterValue, propertyValue) =>
-          filterValue === "Verifiziert"
-            ? propertyValue
-            : !propertyValue
-        }
-        defaultSelected={["Unverifiziert"]}
-        values={["Verifiziert", "Unverifiziert"]}
-      />
       <DomainList.Item
         textValue={(domain) => domain.domain}
+        showTiles
+        showList={false}
       >
         {(domain) => (
           <DomainList.ItemView>
@@ -59,14 +43,7 @@ export default () => {
                 <IconSubdomain />
               )}
             </Avatar>
-            <Heading>
-              {domain.hostname}
-              {!domain.verified && (
-                <AlertBadge status="warning">
-                  Unverifiziert
-                </AlertBadge>
-              )}
-            </Heading>
+            <Heading>{domain.hostname}</Heading>
             <Text>{domain.type}</Text>
 
             <ContextMenu>

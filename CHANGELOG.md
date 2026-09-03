@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0-next.15](https://github.com/mittwald/flow/compare/1.2.0-next.14...1.2.0-next.15) (2026-09-03)
+
+### Reverts
+
+* retry a hung visual shard on the label and scheduled visual runs ([#3107](https://github.com/mittwald/flow/issues/3107)) ([8913802](https://github.com/mittwald/flow/commit/8913802eb1ee14e6a70a4147809e466eb0d23830))
+
+## [1.1.11](https://github.com/mittwald/flow/compare/1.2.0-next.12...1.1.11) (2026-09-02)
+
 ## [1.2.0-next.14](https://github.com/mittwald/flow/compare/1.2.0-next.13...1.2.0-next.14) (2026-09-02)
 
 ### Features

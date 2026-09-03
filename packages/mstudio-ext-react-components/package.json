@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/mstudio-ext-react-components",
-  "version": "1.2.0-next.14",
+  "version": "1.2.0-next.15",
   "type": "module",
   "description": "React components that can be used by mStudio extension developers",
   "homepage": "https://flow.mittwald.de",

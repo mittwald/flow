@@ -55,12 +55,6 @@
     display: flex;
     padding-block: var(--size-px--m);
   }
-
-  .mobileNavigationOffCanvas {
-    h3 {
-      display: none;
-    }
-  }
 }
 
 @media (prefers-contrast: more), (prefers-reduced-transparency) {
