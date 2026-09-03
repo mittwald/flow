@@ -92,8 +92,19 @@ jobs:
 
       - run: pnpm test:browser:prepare --only-shell
 
+      # `test:visual` only declares `^build`; building the package itself is a
+      # superset of that (same as .github/actions/run-visual-shard).
+      - name: Build the packages the visual suite renders
+        run: pnpm nx run remote-react-components:build
+
+      # Deliberately not `pnpm test:visual --update` (= `nx run-many`): nx
+      # buffers a task's output and prints it when the task ends, and the
+      # process exits before the pipe is drained. The first ~64 KB of vitest's
+      # output made it into the job log, the failure summary never did — three
+      # runs in a row went red with nothing but a line cut off mid-word to show
+      # for it. Calling vitest directly streams the whole run.
       - name: Update Visual Regression Screenshots
-        run: pnpm test:visual --update
+        run: pnpm --filter @mittwald/flow-remote-react-components test:visual:update
       # check what changed
       - name: Check for changes
         id: check_changes
