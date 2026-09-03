@@ -652,3 +652,44 @@ describe("Item rendering", () => {
       .toBeInTheDocument();
   });
 });
+
+describe("Item hover", () => {
+  // The item's hover background is carved out for the bottom content, which
+  // carries its own interactive elements. The carve-out is a `:has()` rule in
+  // Item.module.scss matching a class ListItemViewContent applies — a coupling
+  // across two files that no other test would notice going stale.
+  const HoverableList = () => (
+    <List aria-label="Test" onAction={() => undefined}>
+      <ListStaticData<Data> data={[{ num: 42 }]} />
+      <ListItem<Data> textValue={({ num }) => String(num)}>
+        {({ num }) => (
+          <ListItemView>
+            <Content>Top {num}</Content>
+            <Content slot="bottom">Bottom {num}</Content>
+          </ListItemView>
+        )}
+      </ListItem>
+    </List>
+  );
+
+  const topContent = page.getByText("Top 42");
+  const bottomContent = page.getByText("Bottom 42");
+  const itemRow = page.getByRole("row");
+
+  test("bottom content does not trigger the item hover background", async () => {
+    await render(<HoverableList />);
+
+    const item = itemRow.element();
+    const defaultBackground = getComputedStyle(item).backgroundColor;
+
+    await userEvent.hover(topContent);
+    await expect
+      .poll(() => getComputedStyle(item).backgroundColor)
+      .not.toBe(defaultBackground);
+
+    await userEvent.hover(bottomContent);
+    await expect
+      .poll(() => getComputedStyle(item).backgroundColor)
+      .toBe(defaultBackground);
+  });
+});
