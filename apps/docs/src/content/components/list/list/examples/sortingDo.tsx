@@ -1,0 +1,76 @@
+import {
+  type Domain,
+  domains,
+} from "@/content/components/list/list/examples/domainApi";
+import {
+  AlertBadge,
+  Avatar,
+  ContextMenu,
+  Heading,
+  IconDomain,
+  IconSubdomain,
+  MenuItem,
+  Text,
+  typedList,
+} from "@mittwald/flow-react-components";
+
+export default () => {
+  const DomainList = typedList<Domain>();
+
+  return (
+    <DomainList.List
+      batchSize={2}
+      aria-label="Domains"
+      getItemId={(domain) => domain.id}
+      hidePagination
+    >
+      <DomainList.StaticData data={domains} />
+      <DomainList.Sorting
+        property="hostname"
+        name="Alphabetisch"
+        direction="asc"
+        directionName="aufsteigend"
+        defaultEnabled
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Alphabetisch"
+        direction="desc"
+        directionName="absteigend"
+      />
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
+        {(domain) => (
+          <DomainList.ItemView>
+            <Avatar
+              color={
+                domain.type === "Domain" ? "blue" : "teal"
+              }
+            >
+              {domain.type === "Domain" ? (
+                <IconDomain />
+              ) : (
+                <IconSubdomain />
+              )}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <AlertBadge status="warning">
+                  Unverifiziert
+                </AlertBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+
+            <ContextMenu>
+              <MenuItem>Details anzeigen</MenuItem>
+              <MenuItem>Löschen</MenuItem>
+            </ContextMenu>
+          </DomainList.ItemView>
+        )}
+      </DomainList.Item>
+    </DomainList.List>
+  );
+};

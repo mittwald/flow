@@ -55,15 +55,6 @@
     display: flex;
     padding-block: var(--size-px--m);
   }
-
-  .mobileNavigationOffCanvas {
-    // Flow `Heading`s from `MainNavigation`, rendered as `h3` because `Modal`
-    // forces the level; the app passes them no class.
-    // stylelint-disable-next-line selector-max-type -- see above
-    h3 {
-      display: none;
-    }
-  }
 }
 
 @media (prefers-contrast: more), (prefers-reduced-transparency) {
