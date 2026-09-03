@@ -77,12 +77,6 @@
     .content {
       opacity: 0;
     }
-
-    &.plain:where(:has(.text), .hasText) {
-      .content {
-        opacity: 1;
-      }
-    }
   }
 
   &.isPending {

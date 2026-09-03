@@ -10,7 +10,6 @@ declare const classNames: {
   readonly isPending: "isPending";
   readonly isFailed: "isFailed";
   readonly isSucceeded: "isSucceeded";
-  readonly plain: "plain";
   readonly "size-s": "size-s";
   readonly primary: "primary";
   readonly solid: "solid";
@@ -22,6 +21,7 @@ declare const classNames: {
   readonly light: "light";
   readonly "dark-static": "dark-static";
   readonly "light-static": "light-static";
+  readonly plain: "plain";
   readonly soft: "soft";
   readonly avatar: "avatar";
   readonly image: "image";
