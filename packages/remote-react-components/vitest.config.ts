@@ -2,6 +2,7 @@ import defaultConfig from "./vite.config.ts";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
 import { vitestBrowserTestConfig } from "../core/src/index.ts";
+import { serveFontsLocally } from "./dev/vitest/serveFontsLocally.ts";
 
 /*
  * Vitest names a browser project's nested per-browser projects by writing onto
@@ -20,6 +21,10 @@ const browserTestConfig = () => ({
   ...vitestBrowserTestConfig,
   browser: {
     ...vitestBrowserTestConfig.browser,
+    commands: {
+      ...vitestBrowserTestConfig.browser?.commands,
+      serveFontsLocally,
+    },
     instances: (vitestBrowserTestConfig.browser?.instances ?? []).map(
       (instance) => ({ ...instance }),
     ),

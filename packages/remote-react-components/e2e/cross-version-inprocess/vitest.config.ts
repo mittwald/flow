@@ -1,6 +1,7 @@
 import { mergeConfig } from "vitest/config";
 import { vitestBrowserTestConfig } from "../../../core/src/index.ts";
 import { REUSED_VISUAL_TESTS } from "./reusedVisualTests.ts";
+import { serveFontsLocally } from "../../dev/vitest/serveFontsLocally.ts";
 import viteConfig from "./vite.config.ts";
 
 // Reuses unmodified visual tests by replacing their environments import. The
@@ -29,6 +30,12 @@ export default mergeConfig(viteConfig, {
     include: REUSED_VISUAL_TESTS,
     browser: {
       ...vitestBrowserTestConfig.browser,
+      // dev/vitest/setupBrowser.ts calls it, so it has to be registered here
+      // too — this config inherits the shared browser config, not the package's.
+      commands: {
+        ...vitestBrowserTestConfig.browser?.commands,
+        serveFontsLocally,
+      },
       headless: true,
       fileParallelism: false,
       // HTML comparison, not pixels — failure screenshots would only pollute the

@@ -1,0 +1,126 @@
+---
+title: ListItemView
+component: ListItemView
+description:
+  List.ItemView ist die vorgefertigte Layout-Lösung für ein List-Item.
+gitHubComponentPath: components/List/components/ListItemView
+---
+
+<LiveCodeEditor />
+
+`List.ItemView` ist die vorgefertigte Layout-Lösung für ein List-Item und ordnet
+Avatar, Titel, Content und Aktionen einheitlich an.
+
+---
+
+# Best Practices
+
+- Halte den Titel kurz und eindeutig. Lange Headings brechen um und erschweren
+  das schnelle Scannen der List.
+- Zeige nur die Informationen, die zum Verständnis des Elements nötig sind. Zu
+  viele Details machen die List unübersichtlich.
+- Ergänze im Untertitel weitere Informationen nach dem Muster „Beschreibung – 1.
+  Information – 2. Information“.
+- Verlagere selten benötigte Details in Top oder Bottom Content oder blende sie
+  über [ColumnLayout](/components/structure/column-layout) auf kleinen
+  Bildschirmen aus.
+- Gib jedem List-Item über `textValue` seinen Text mit. Erst damit findet der
+  User es über die Tastatur, indem er dessen Anfang tippt.
+
+---
+
+# Als Raster
+
+In der Rasteransicht wird das List-Item kompakter dargestellt: Der Avatar wird
+größer und eckig, Top Content sowie die Accordion-Funktion entfallen. Aktiviere
+die Darstellung über `showTiles` an `List.Item`.
+
+<LiveCodeEditor example="tile" editorCollapsed />
+
+---
+
+# Mit Avatar
+
+Der [Avatar](/components/content/avatar) steht am Anfang eines List-Items und
+spiegelt das Element wider: Ein [Icon](/components/content/icon) steht für die
+Kategorie (z. B. ein Domain-Icon), ein hochgeladenes
+[Image](/components/content/image) wird angezeigt, andernfalls erscheinen
+Initialen. Elemente derselben Kategorie erhalten dasselbe Icon.
+
+<LiveCodeEditor example="item-avatar" editorCollapsed />
+
+---
+
+# Mit Link
+
+Setze `href` an `List.Item`, um das gesamte List-Item zu verlinken.
+
+<LiveCodeEditor example="item-link" editorCollapsed />
+
+---
+
+# Mit Accordion
+
+Aktiviere `accordion` an der `List`, damit sich ein List-Item per Klick ein-
+oder ausklappen lässt. Den erweiterten Inhalt platzierst du in der ItemView über
+`<Content slot="bottom" />`.
+
+<LiveCodeEditor example="item-accordion" editorCollapsed />
+
+---
+
+# Mit Checkboxen
+
+[Checkboxen](/components/form-controls/checkbox) in einem List-Item werden
+automatisch am Anfang der Zeile angeordnet. Ihre Funktionalität wird nicht von
+der List gesteuert und muss individuell implementiert werden. Achte darauf, dass
+die gesamte Zeile zur Auswahl genutzt werden kann – nutze dafür `onAction` der
+List.
+
+<LiveCodeEditor example="item-checkbox" editorCollapsed />
+
+---
+
+# Mit Content Slots
+
+In einem List-Item kann zusätzlicher `<Content />` (Top und Bottom Content)
+platziert werden. Die Position wird über das `slot`-Property gesteuert.
+
+<LiveCodeEditor example="item-content" editorCollapsed />
+
+---
+
+# Mit ColumnLayout
+
+Der `List.ItemView` können die
+[ColumnLayout](/components/structure/column-layout)-Properties `s`, `m` und `l`
+mitgegeben werden, um Seitenverhältnis und Umbruchverhalten von Header und
+Content zu steuern.
+
+<LiveCodeEditor example="item-column-layout" editorCollapsed stretch />
+
+Da für die Spalten auch `null` gesetzt werden kann, lässt sich nicht zwingend
+benötigter Content in kleineren Ansichten ausblenden. In diesem Fall werden auch
+die entsprechenden Content Slots nicht angezeigt.
+
+<LiveCodeEditor example="item-column-layout-hidden" editorCollapsed stretch />
+
+---
+
+# Mit ContextMenu
+
+Aktionen eines List-Items platzierst du in einem
+[ContextMenu](/components/actions/context-menu). Für dauerhaft sichtbare
+Aktionen nutzt du stattdessen [Buttons](/components/actions/button) in einer
+ActionGroup.
+
+<LiveCodeEditor example="item-context-menu" editorCollapsed />
+
+---
+
+# Mit ActionGroup
+
+Verwende eine ActionGroup innerhalb des `<Content />`, um
+[Buttons](/components/actions/button) im List-Item zu platzieren.
+
+<LiveCodeEditor example="item-action-group" editorCollapsed stretch />
