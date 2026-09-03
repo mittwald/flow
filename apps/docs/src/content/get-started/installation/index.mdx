@@ -47,10 +47,9 @@ Dafür umschließt du deine Anwendung mit dem `<ComponentDefaultsProvider />`:
 ```
 
 Jede einzelne Verwendung bleibt stärker als der Standard: Setzt eine
-[List](/components/structure/list) das `disableInitialSuspenseBoundary`-Property
-an ihrer Datenquelle, gilt dort dieser Wert. Verschachtelte Provider gelten
-jeweils für ihren Teilbaum und übernehmen die Werte, die sie nicht selbst
-nennen.
+[List](/components/list/list) das `disableInitialSuspenseBoundary`-Property an
+ihrer Datenquelle, gilt dort dieser Wert. Verschachtelte Provider gelten jeweils
+für ihren Teilbaum und übernehmen die Werte, die sie nicht selbst nennen.
 
 Diese Defaults stehen zur Verfügung:
 
@@ -74,6 +73,7 @@ Er ersetzt den Migrationsleitfaden nicht: die meisten Änderungen haben keinen
 Codemod. Was in deinem Bereich von Hand ansteht, listet der Befehl am Ende auf –
 vorab und ohne etwas zu verändern zeigt es `list`.
 
-Welche Änderung ab welcher Version greift, was Flow dir innerhalb einer Linie
-zusichert und wie Deprecation-Warnungen den Vorlauf bilden, steht unter
+Welche Änderung ab welcher Version greift und wie Deprecation-Warnungen den
+Vorlauf bilden, steht unter [Upgrades](/get-started/upgrades). Was Flow dir
+innerhalb einer Linie zusichert, steht unter
 [Versionierung & Stabilität](/get-started/versioning).

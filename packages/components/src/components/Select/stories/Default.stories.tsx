@@ -108,6 +108,7 @@ export const WithNumbers: Story = {
 export const WithCountryOptions: Story = {
   render: (props) => (
     <Select {...props}>
+      <Label>Country</Label>
       <CountryOptions />
     </Select>
   ),
@@ -116,6 +117,7 @@ export const WithCountryOptions: Story = {
 export const WithCountryOptionsAndCustomSort: Story = {
   render: (props) => (
     <Select {...props}>
+      <Label>Country</Label>
       <CountryOptions sortBy={sortByDachFirst} />
     </Select>
   ),

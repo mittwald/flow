@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { parseArguments } from "../cli/args";
 import {
+  displaySourcePath,
   resolveSourcePath,
   runSingleCodemod,
   type CodemodCommandDeps,
@@ -30,6 +31,36 @@ describe("resolveSourcePath", () => {
     expect(resolveSourcePath(undefined, "/project", () => false)).toBe(
       "/project",
     );
+  });
+});
+
+describe("displaySourcePath", () => {
+  test("an explicit path is printed as the reader typed it", () => {
+    // Not resolved against cwd: this goes into a copy-pasteable command, and an
+    // absolute path there is both longer and no more correct.
+    expect(displaySourcePath("packages/ui/lib", "/project", () => true)).toBe(
+      "packages/ui/lib",
+    );
+  });
+
+  test("src when src exists", () => {
+    expect(
+      displaySourcePath(undefined, "/project", (path) => path.endsWith("src")),
+    ).toBe("src");
+  });
+
+  test("a dot when it does not — never an omitted argument", () => {
+    // A printed command with no path argument would default back to `src`,
+    // which is the tree this project does not have.
+    expect(displaySourcePath(undefined, "/project", () => false)).toBe(".");
+  });
+
+  test("agrees with resolveSourcePath about which tree it means", () => {
+    const exists = (path: string) => path.endsWith("src");
+    expect(resolveSourcePath(undefined, "/project", exists)).toBe(
+      "/project/src",
+    );
+    expect(displaySourcePath(undefined, "/project", exists)).toBe("src");
   });
 });
 

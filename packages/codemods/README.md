@@ -1,19 +1,28 @@
 # @mittwald/flow-codemods
 
 Codemods and an upgrade CLI for consumers of [Flow](https://flow.mittwald.de),
-mittwald's design system. Run it with `npx` — there is no reason to install it
-as a dependency.
+mittwald's design system. Run it one-off — there is no reason to install it as a
+dependency.
 
 ```shell
 npx @mittwald/flow-codemods@latest upgrade
 ```
 
+Use whatever your project's package manager calls that: `npx …` (npm, and Yarn
+Classic, which has no `dlx`), `pnpm dlx …`, `yarn dlx …`, `bun x …`. Every
+command the CLI prints for you to copy uses the form it detected for your
+project, so the examples below stay on `npx` only because a README cannot know.
+
 ## Commands
 
 ### `upgrade [revision]`
 
-Bumps every `@mittwald/flow-*` dependency in `package.json` to a resolved
-target, installs, then runs the codemod of every migration up to that target.
+Bumps every Flow-line dependency in `package.json` to a resolved target,
+installs, then runs the codemod of every migration up to that target.
+
+"Flow line" is wider than `@mittwald/flow-*`: every package published from the
+Flow monorepo shares one version, so `@mittwald/ext-bridge`,
+`@mittwald/mstudio-ext-react-components` and `@mittwald/react-tunnel` move too.
 
 `revision` is one of:
 
@@ -32,6 +41,24 @@ version some dependency lacks.
 versions your package supports, not one it installs, and narrowing `^1.0.0` to
 `^1.0.14` would change what _your_ consumers are allowed to install. That is
 your call, not the command's.
+
+#### Which package manager installs
+
+Detected by walking **up** from the directory you run in: lockfiles first, then
+`packageManager`, then `devEngines.packageManager`, then the metadata a manager
+leaves in `node_modules`. Walking up is what makes a workspace package work — it
+has no lockfile of its own, and detecting in that directory alone used to fall
+back to `npm install`, which on a `workspace:*` manifest fails outright. npm
+stays the fallback when nothing says anything: it is always there next to Node.
+
+A `packageManager` pin is honoured. If the binary on `PATH` already satisfies
+it, that one runs; otherwise the install goes through corepack (with the
+download prompt disabled, since this runs unattended). If neither works, the
+command refuses **before** installing and names the pin, the version it found,
+and where to get the right one — rather than installing with the wrong manager.
+
+The log line names the agent, the pin and the command it actually ran, so a
+wrong detection is visible instead of silent.
 
 After installing, `upgrade` runs the codemod of every migration whose `since` is
 at or below the target and prints the ones with no codemod, for you to apply by
@@ -65,8 +92,10 @@ Shows migrations — codemod and by-hand alike — without touching the project.
 read-only planning entry point: run it before `upgrade` to see what a bump would
 involve.
 
-- `list` (no argument) — the whole catalogue. Offline: reads no manifest, hits
-  no network.
+- `list` (no argument) — the whole catalogue. Hits no network. It does read
+  lockfiles and `package.json` up the tree, but only to work out whether the
+  commands it prints should say `npx`, `pnpm dlx`, `yarn dlx` or `bun x` — a
+  command you can paste is worth more than never touching a manifest.
 - `list [revision]` — the same manifest read, registry fetch, and revision
   resolution `upgrade [revision]` does, showing exactly the range it would act
   on, without writing anything. `revision` takes the same values as `upgrade`'s

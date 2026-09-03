@@ -22,7 +22,7 @@ const meta: Meta<typeof DonutChart> = {
   parameters: {
     controls: { exclude: ["segments"] },
   },
-  render: (props) => <DonutChart value={30} {...props} />,
+  render: (props) => <DonutChart aria-label="Storage" value={30} {...props} />,
 };
 
 export default meta;
@@ -73,7 +73,6 @@ export const WithSegments: Story = {
       exclude: ["segments", "status"],
     },
   },
-  render: (props) => <DonutChart aria-label="storage" {...props} />,
 };
 
 export const WithTextValue: Story = {
@@ -84,7 +83,7 @@ export const WithTextValue: Story = {
     const value = 300;
 
     return (
-      <DonutChart {...props} value={value} maxValue={600}>
+      <DonutChart aria-label="Storage" {...props} value={value} maxValue={600}>
         <strong>{value}</strong>
         <small>GB</small>
       </DonutChart>

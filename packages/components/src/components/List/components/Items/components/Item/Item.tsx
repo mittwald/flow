@@ -52,13 +52,21 @@ const ItemImpl = (props: Props) => {
   );
 };
 
+// The list model is rebuilt on every render, so it cannot be compared by
+// identity — but everything an item renders from it can. Those closures come
+// from the consumer's own JSX and only change when the consumer re-renders,
+// so loading more still skips the re-render while parent state no longer
+// leaves an item frozen on the values it first saw.
 export const Item = memo(
   ItemImpl,
   (prev, next) =>
     prev.id === next.id &&
     prev.data === next.data &&
     prev.triggerRef === next.triggerRef &&
-    prev.isTile === next.isTile,
+    prev.isTile === next.isTile &&
+    prev.list.onAction === next.list.onAction &&
+    prev.list.accordion === next.list.accordion &&
+    !!prev.list.itemView?.rendersSameAs(next.list.itemView),
 );
 Item.displayName = "Item";
 
