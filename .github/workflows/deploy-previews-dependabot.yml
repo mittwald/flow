@@ -118,11 +118,11 @@ jobs:
       # workflow must not do.
       - name: Checkout the default branch
         if: steps.pr.outputs.number != ''
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v6
 
       - name: Install pnpm
         if: steps.pr.outputs.number != ''
-        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
 
       - name: Setup Node.js
         if: steps.pr.outputs.number != ''
