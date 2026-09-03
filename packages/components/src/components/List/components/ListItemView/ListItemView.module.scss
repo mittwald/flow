@@ -39,13 +39,6 @@
     overflow-wrap: anywhere;
   }
 
-  /*
-   * React Aria sets `user-select: none` on the item while pressing; a child with
-   * its own value does not inherit it. The header opts back in as well as the
-   * title, so a drag can start beside the text and not only on it — the title
-   * box hugs the text exactly. Its padding is cancelled out by the same negative
-   * margin, so the text does not move.
-   */
   .title {
     user-select: text;
     padding-inline: var(--size-px--xs);
